@@ -75,6 +75,7 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $requestConfiguration->getRequest()->willReturn($request);
 
         $request->query = $queryParameters;
+        $requestConfiguration->getCriteria()->willReturn([]);
         $queryParameters->all()->willReturn(['foo' => 'bar']);
 
         $gridProvider->get('sylius_admin_tax_category')->willReturn($gridDefinition);
@@ -102,6 +103,36 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $requestConfiguration->getRequest()->willReturn($request);
 
         $request->query = $queryParameters;
+        $requestConfiguration->getCriteria()->willReturn([]);
+        $queryParameters->all()->willReturn(['foo' => 'bar']);
+
+        $gridProvider->get('sylius_admin_tax_category')->willReturn($gridDefinition);
+        $gridViewFactory->create($gridDefinition, Argument::type(Parameters::class), $metadata, $requestConfiguration)->willReturn($gridView);
+        $gridView->getData()->willReturn($paginator);
+
+        $this->getResources($requestConfiguration, $repository)->shouldReturn($paginator);
+    }
+
+    function it_can_accept_criteria_from_request_configuration(
+        RequestConfiguration $requestConfiguration,
+        RepositoryInterface $repository,
+        Grid $gridDefinition,
+        GridProviderInterface $gridProvider,
+        ResourceGridViewFactoryInterface $gridViewFactory,
+        ResourceGridView $gridView,
+        Pagerfanta $paginator,
+        MetadataInterface $metadata,
+        Request $request,
+        ParameterBag $queryParameters
+    ): void {
+        $requestConfiguration->hasGrid()->willReturn(true);
+        $requestConfiguration->getGrid()->willReturn('sylius_admin_tax_category');
+        $requestConfiguration->getMetadata()->willReturn($metadata);
+        $requestConfiguration->isHtmlRequest()->willReturn(false);
+        $requestConfiguration->getRequest()->willReturn($request);
+
+        $request->query = $queryParameters;
+        $requestConfiguration->getCriteria()->willReturn(['bazz' => true]);
         $queryParameters->all()->willReturn(['foo' => 'bar']);
 
         $gridProvider->get('sylius_admin_tax_category')->willReturn($gridDefinition);
