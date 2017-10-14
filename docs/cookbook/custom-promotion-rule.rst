@@ -30,14 +30,6 @@ The new Rule needs a RuleChecker class:
         {
             return $subject->getCustomer()->isPremium();
         }
-
-        /**
-         * {@inheritdoc}
-         */
-        public function getConfigurationFormType()
-        {
-            return self::class;
-        }
     }
 
 Prepare a configuration form type for your new rule
