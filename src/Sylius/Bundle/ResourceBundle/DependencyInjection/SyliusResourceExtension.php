@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DriverProvider;
@@ -29,10 +31,10 @@ final class SyliusResourceExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('services.xml');
 
@@ -54,7 +56,7 @@ final class SyliusResourceExtension extends Extension
         $this->loadResources($config['resources'], $container);
     }
 
-    private function loadPersistence(array $drivers, array $resources, LoaderInterface $loader)
+    private function loadPersistence(array $drivers, array $resources, LoaderInterface $loader): void
     {
         foreach ($resources as $alias => $resource) {
             if (!in_array($resource['driver'], $drivers, true)) {
@@ -71,7 +73,7 @@ final class SyliusResourceExtension extends Extension
         }
     }
 
-    private function loadResources(array $resources, ContainerBuilder $container)
+    private function loadResources(array $resources, ContainerBuilder $container): void
     {
         foreach ($resources as $alias => $resourceConfig) {
             $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
@@ -83,7 +85,7 @@ final class SyliusResourceExtension extends Extension
             DriverProvider::get($metadata)->load($container, $metadata);
 
             if ($metadata->hasParameter('translation')) {
-                $alias = $alias.'_translation';
+                $alias .= '_translation';
                 $resourceConfig = array_merge(['driver' => $resourceConfig['driver']], $resourceConfig['translation']);
 
                 $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];

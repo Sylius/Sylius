@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Setup;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -56,7 +58,7 @@ final class ChannelSetup implements ChannelSetupInterface
     /**
      * {@inheritdoc}
      */
-    public function setup(LocaleInterface $locale, CurrencyInterface $currency)
+    public function setup(LocaleInterface $locale, CurrencyInterface $currency): void
     {
         /** @var ChannelInterface $channel */
         $channel = $this->channelRepository->findOneBy([]);

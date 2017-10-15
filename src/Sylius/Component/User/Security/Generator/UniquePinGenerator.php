@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Security\Generator;
 
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
@@ -47,17 +49,9 @@ final class UniquePinGenerator implements GeneratorInterface
     public function __construct(
         RandomnessGeneratorInterface $generator,
         UniquenessCheckerInterface $uniquenessChecker,
-        $pinLength
+        int $pinLength
     ) {
-        Assert::integer(
-            $pinLength,
-            'The value of pin length has to be an integer.'
-        );
-        Assert::range(
-            $pinLength,
-            1, 9,
-            'The value of pin length has to be in range between 1 to 9.'
-        );
+        Assert::greaterThanEq($pinLength, 1, 'The value of token length has to be at least 1.');
 
         $this->generator = $generator;
         $this->pinLength = $pinLength;
@@ -67,7 +61,7 @@ final class UniquePinGenerator implements GeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generate()
+    public function generate(): string
     {
         do {
             $pin = $this->generator->generateNumeric($this->pinLength);

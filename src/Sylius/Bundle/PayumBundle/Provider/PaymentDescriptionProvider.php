@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Provider;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -36,7 +38,7 @@ final class PaymentDescriptionProvider implements PaymentDescriptionProviderInte
     /**
      * {@inheritdoc}
      */
-    public function getPaymentDescription(PaymentInterface $payment)
+    public function getPaymentDescription(PaymentInterface $payment): string
     {
         /** @var OrderInterface $order */
         $order = $payment->getOrder();

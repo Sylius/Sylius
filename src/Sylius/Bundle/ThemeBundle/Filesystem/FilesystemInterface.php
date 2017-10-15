@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Filesystem;
 
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
@@ -172,5 +174,5 @@ interface FilesystemInterface
      *
      * @return string
      */
-    public function getFileContents($file);
+    public function getFileContents(string $file): string;
 }

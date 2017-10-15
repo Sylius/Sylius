@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Security\Generator;
 
 /**
@@ -18,7 +20,7 @@ namespace Sylius\Component\User\Security\Generator;
 interface GeneratorInterface
 {
     /**
-     * @return mixed
+     * @return string
      */
-    public function generate();
+    public function generate(): string;
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
@@ -23,30 +25,30 @@ interface ProductOptionValueInterface extends ResourceInterface, CodeAwareInterf
     /**
      * @return ProductOptionInterface
      */
-    public function getOption();
+    public function getOption(): ?ProductOptionInterface;
 
     /**
      * @param ProductOptionInterface $option
      */
-    public function setOption(ProductOptionInterface $option = null);
+    public function setOption(?ProductOptionInterface $option): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getValue();
+    public function getValue(): ?string;
 
     /**
-     * @param string $value
+     * @param string|null $value
      */
-    public function setValue($value);
+    public function setValue(?string $value): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getOptionCode();
+    public function getOptionCode(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 }

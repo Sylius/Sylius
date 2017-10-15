@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -29,17 +31,17 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     /**
      * @var FactoryInterface
      */
-    protected $productAssociationFactory;
+    private $productAssociationFactory;
 
     /**
      * @var ProductRepositoryInterface
      */
-    protected $productRepository;
+    private $productRepository;
 
     /**
      * @var RepositoryInterface
      */
-    protected $productAssociationTypeRepository;
+    private $productAssociationTypeRepository;
 
     /**
      * @var Collection
@@ -87,7 +89,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($values)
+    public function reverseTransform($values): ?Collection
     {
         if (null === $values || '' === $values || !is_array($values)) {
             return null;
@@ -113,9 +115,9 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     /**
      * @param Collection $products
      *
-     * @return string
+     * @return string|null
      */
-    private function getCodesAsStringFromProducts(Collection $products)
+    private function getCodesAsStringFromProducts(Collection $products): ?string
     {
         if ($products->isEmpty()) {
             return null;
@@ -136,7 +138,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
      *
      * @return ProductAssociationInterface
      */
-    private function getProductAssociationByTypeCode($productAssociationTypeCode)
+    private function getProductAssociationByTypeCode(string $productAssociationTypeCode): ProductAssociationInterface
     {
         foreach ($this->productAssociations as $productAssociation) {
             if ($productAssociationTypeCode === $productAssociation->getType()->getCode()) {
@@ -160,8 +162,10 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
      * @param ProductAssociationInterface $productAssociation
      * @param string $productCodes
      */
-    private function setAssociatedProductsByProductCodes(ProductAssociationInterface $productAssociation, $productCodes)
-    {
+    private function setAssociatedProductsByProductCodes(
+        ProductAssociationInterface $productAssociation,
+        string $productCodes
+    ): void {
         $products = $this->productRepository->findBy(['code' => explode(',', $productCodes)]);
 
         $productAssociation->clearAssociatedProducts();
@@ -173,7 +177,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     /**
      * @param Collection|null $productAssociations
      */
-    private function setProductAssociations($productAssociations)
+    private function setProductAssociations(?Collection $productAssociations): void
     {
         $this->productAssociations = $productAssociations;
     }

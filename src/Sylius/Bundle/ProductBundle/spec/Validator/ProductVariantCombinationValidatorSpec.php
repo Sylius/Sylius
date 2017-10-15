@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ProductBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantCombination;
-use Sylius\Bundle\ProductBundle\Validator\ProductVariantCombinationValidator;
 use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
-use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -24,18 +24,13 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $context, ProductVariantsParityCheckerInterface $variantsParityChecker)
+    function let(ExecutionContextInterface $context, ProductVariantsParityCheckerInterface $variantsParityChecker): void
     {
         $this->beConstructedWith($variantsParityChecker);
         $this->initialize($context);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProductVariantCombinationValidator::class);
-    }
-
-    function it_is_a_constraint_validator()
+    function it_is_a_constraint_validator(): void
     {
         $this->shouldImplement(ConstraintValidator::class);
     }
@@ -45,7 +40,7 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         ProductInterface $product,
         ProductVariantInterface $variant,
         ProductVariantsParityCheckerInterface $variantsParityChecker
-    ) {
+    ): void {
         $constraint = new ProductVariantCombination([
             'message' => 'Variant with given options already exists',
         ]);
@@ -67,7 +62,7 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         ProductInterface $product,
         ProductVariantInterface $variant,
         ProductVariantsParityCheckerInterface $variantsParityChecker
-    ) {
+    ): void {
         $constraint = new ProductVariantCombination([
             'message' => 'Variant with given options already exists',
         ]);
@@ -89,7 +84,7 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         ProductInterface $product,
         ProductVariantInterface $variant,
         ProductVariantsParityCheckerInterface $variantsParityChecker
-    ) {
+    ): void {
         $constraint = new ProductVariantCombination([
             'message' => 'Variant with given options already exists',
         ]);

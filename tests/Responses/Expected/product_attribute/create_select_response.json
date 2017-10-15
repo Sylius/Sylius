@@ -3,11 +3,7 @@
     "code": "mug_color",
     "type": "select",
     "configuration": {
-        "choices": {
-            "yellow": "yellow",
-            "green": "green",
-            "black": "black"
-        },
+        "choices": @array@,
         "multiple": true,
         "min": 1,
         "max": 2

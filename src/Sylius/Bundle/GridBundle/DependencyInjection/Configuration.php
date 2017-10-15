@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\GridBundle\DependencyInjection;
 
 use Sylius\Bundle\GridBundle\Doctrine\ORM\Driver as DoctrineORMDriver;
@@ -25,7 +27,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_grid');
@@ -40,7 +42,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addDriversSection(ArrayNodeDefinition $node)
+    private function addDriversSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()
@@ -55,7 +57,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addTemplatesSection(ArrayNodeDefinition $node)
+    private function addTemplatesSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()
@@ -79,7 +81,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addGridsSection(ArrayNodeDefinition $node)
+    private function addGridsSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()
@@ -93,6 +95,7 @@ final class Configuration implements ConfigurationInterface
                                 ->children()
                                     ->scalarNode('name')->cannotBeEmpty()->defaultValue(DoctrineORMDriver::NAME)->end()
                                     ->arrayNode('options')
+                                        ->performNoDeepMerging()
                                         ->prototype('variable')->end()
                                         ->defaultValue([])
                                     ->end()
@@ -119,6 +122,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('enabled')->defaultTrue()->end()
                                         ->scalarNode('position')->defaultValue(100)->end()
                                         ->arrayNode('options')
+                                            ->performNoDeepMerging()
                                             ->prototype('variable')->end()
                                         ->end()
                                     ->end()
@@ -134,9 +138,11 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('template')->end()
                                         ->scalarNode('position')->defaultValue(100)->end()
                                         ->arrayNode('options')
+                                            ->performNoDeepMerging()
                                             ->prototype('variable')->end()
                                         ->end()
                                         ->arrayNode('form_options')
+                                            ->performNoDeepMerging()
                                             ->prototype('variable')->end()
                                         ->end()
                                         ->variableNode('default_value')->end()
@@ -155,6 +161,7 @@ final class Configuration implements ConfigurationInterface
                                             ->scalarNode('icon')->end()
                                             ->scalarNode('position')->defaultValue(100)->end()
                                             ->arrayNode('options')
+                                                ->performNoDeepMerging()
                                                 ->prototype('variable')->end()
                                             ->end()
                                         ->end()

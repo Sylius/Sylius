@@ -10,3 +10,5 @@ sylius:
             exchange_rate: 汇率
         exchange_rate:
             source_currency: 源货币
+            target_currency: 目标货币
+            ratio: 比率

@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Grid\View;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
-use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactory;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactoryInterface;
 use Sylius\Component\Grid\Data\DataProviderInterface;
 use Sylius\Component\Grid\Definition\Grid;
@@ -28,17 +29,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class ResourceGridViewFactorySpec extends ObjectBehavior
 {
-    function let(DataProviderInterface $dataProvider, ParametersParserInterface $parametersParser)
+    function let(DataProviderInterface $dataProvider, ParametersParserInterface $parametersParser): void
     {
         $this->beConstructedWith($dataProvider, $parametersParser);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResourceGridViewFactory::class);
-    }
-
-    function it_implements_resource_grid_view_factory_interface()
+    function it_implements_resource_grid_view_factory_interface(): void
     {
         $this->shouldImplement(ResourceGridViewFactoryInterface::class);
     }
@@ -50,7 +46,7 @@ final class ResourceGridViewFactorySpec extends ObjectBehavior
         MetadataInterface $resourceMetadata,
         Request $request,
         RequestConfiguration $requestConfiguration
-    ) {
+    ): void {
         $parameters = new Parameters();
 
         $expectedResourceGridView = new ResourceGridView(
@@ -75,4 +71,3 @@ final class ResourceGridViewFactorySpec extends ObjectBehavior
         $this->create($grid, $parameters, $resourceMetadata, $requestConfiguration)->shouldBeLike($expectedResourceGridView);
     }
 }
-

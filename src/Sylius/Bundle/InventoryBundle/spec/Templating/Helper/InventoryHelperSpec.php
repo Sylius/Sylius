@@ -9,27 +9,23 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\InventoryBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 final class InventoryHelperSpec extends ObjectBehavior
 {
-    function let(AvailabilityCheckerInterface $checker)
+    function let(AvailabilityCheckerInterface $checker): void
     {
         $this->beConstructedWith($checker);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(InventoryHelper::class);
-    }
-
-    function it_is_a_twig_extension()
+    function it_is_a_twig_extension(): void
     {
         $this->shouldHaveType(Helper::class);
     }
@@ -37,7 +33,7 @@ final class InventoryHelperSpec extends ObjectBehavior
     function it_delegates_the_stock_availability_checking_to_the_checker(
         AvailabilityCheckerInterface $checker,
         StockableInterface $stockable
-    ) {
+    ): void {
         $checker->isStockAvailable($stockable)->shouldBeCalled()->willReturn(true);
 
         $this->isStockAvailable($stockable)->shouldReturn(true);
@@ -46,7 +42,7 @@ final class InventoryHelperSpec extends ObjectBehavior
     function it_delegates_the_stock_sufficiency_checking_to_the_checker(
         AvailabilityCheckerInterface $checker,
         StockableInterface $stockable
-    ) {
+    ): void {
         $checker->isStockSufficient($stockable, 3)->shouldBeCalled()->willReturn(false);
 
         $this->isStockSufficient($stockable, 3)->shouldReturn(false);

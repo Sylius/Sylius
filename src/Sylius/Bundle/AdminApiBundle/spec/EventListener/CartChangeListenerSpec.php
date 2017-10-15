@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\AdminApiBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AdminApiBundle\EventListener\CartChangeListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -21,17 +22,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class CartChangeListenerSpec extends ObjectBehavior
 {
-    function let(OrderProcessorInterface $orderProcessor, ObjectManager $manager)
+    function let(OrderProcessorInterface $orderProcessor, ObjectManager $manager): void
     {
         $this->beConstructedWith($orderProcessor, $manager);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CartChangeListener::class);
-    }
-
-    function it_recalculates_cart_on_add(OrderProcessorInterface $orderProcessor, ObjectManager $manager, GenericEvent $event, OrderItemInterface $orderItem, OrderInterface $order)
+    function it_recalculates_cart_on_add(OrderProcessorInterface $orderProcessor, ObjectManager $manager, GenericEvent $event, OrderItemInterface $orderItem, OrderInterface $order): void
     {
         $event->getSubject()->willReturn($orderItem);
         $orderItem->getOrder()->willReturn($order);
@@ -42,7 +38,7 @@ final class CartChangeListenerSpec extends ObjectBehavior
         $this->recalculateOrderOnAdd($event);
     }
 
-    function it_recalculates_cart_and_remove_item_on_delete(OrderProcessorInterface $orderProcessor, ObjectManager $manager, GenericEvent $event, OrderItemInterface $orderItem, OrderInterface $order)
+    function it_recalculates_cart_and_remove_item_on_delete(OrderProcessorInterface $orderProcessor, ObjectManager $manager, GenericEvent $event, OrderItemInterface $orderItem, OrderInterface $order): void
     {
         $event->getSubject()->willReturn($orderItem);
         $orderItem->getOrder()->willReturn($order);

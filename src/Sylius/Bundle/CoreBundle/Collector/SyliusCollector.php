@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Collector;
 
 use Sylius\Bundle\CoreBundle\Application\Kernel;
@@ -39,7 +41,7 @@ final class SyliusCollector extends DataCollector
     public function __construct(
         ShopperContextInterface $shopperContext,
         array $bundles,
-        $defaultLocaleCode
+        string $defaultLocaleCode
     ) {
         $this->shopperContext = $shopperContext;
 
@@ -66,7 +68,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getVersion()
+    public function getVersion(): string
     {
         return $this->data['version'];
     }
@@ -74,7 +76,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return array
      */
-    public function getExtensions()
+    public function getExtensions(): array
     {
         return $this->data['extensions'];
     }
@@ -82,7 +84,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getCurrencyCode()
+    public function getCurrencyCode(): ?string
     {
         return $this->data['currency_code'];
     }
@@ -90,7 +92,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): ?string
     {
         return $this->data['locale_code'];
     }
@@ -98,7 +100,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getDefaultCurrencyCode()
+    public function getDefaultCurrencyCode(): ?string
     {
         return $this->data['base_currency_code'];
     }
@@ -106,7 +108,7 @@ final class SyliusCollector extends DataCollector
     /**
      * @return string
      */
-    public function getDefaultLocaleCode()
+    public function getDefaultLocaleCode(): ?string
     {
         return $this->data['default_locale_code'];
     }
@@ -114,7 +116,7 @@ final class SyliusCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
+    public function collect(Request $request, Response $response, \Exception $exception = null): void
     {
         try {
             /** @var ChannelInterface $channel */
@@ -122,8 +124,7 @@ final class SyliusCollector extends DataCollector
 
             $this->data['base_currency_code'] = $channel->getBaseCurrency()->getCode();
             $this->data['currency_code'] = $this->shopperContext->getCurrencyCode();
-        } catch (ChannelNotFoundException $exception) {
-        } catch (CurrencyNotFoundException $exception) {
+        } catch (ChannelNotFoundException | CurrencyNotFoundException $exception) {
         }
 
         try {
@@ -135,7 +136,7 @@ final class SyliusCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_core';
     }

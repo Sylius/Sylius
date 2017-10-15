@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Product\Model\ProductTranslationInterface as BaseProductTranslationInterface;
@@ -21,10 +23,10 @@ interface ProductTranslationInterface extends BaseProductTranslationInterface
     /**
      * @return string
      */
-    public function getShortDescription();
+    public function getShortDescription(): ?string;
 
     /**
-     * @param string $shortDescription
+     * @param string|null $shortDescription
      */
-    public function setShortDescription($shortDescription);
+    public function setShortDescription(?string $shortDescription): void;
 }

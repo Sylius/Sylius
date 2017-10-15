@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Provider;
 
 use Sylius\Component\Grid\Definition\Grid;
+use Sylius\Component\Grid\Exception\UndefinedGridException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@svaluelius.org>
@@ -25,5 +28,5 @@ interface GridProviderInterface
      *
      * @throws UndefinedGridException
      */
-    public function get($code);
+    public function get(string $code): Grid;
 }

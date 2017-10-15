@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
@@ -141,7 +143,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             $imageForm->fillField('Type', $type);
         }
 
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
     /**
@@ -154,7 +156,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
 
         $dropdown = $this->getElement('association_dropdown', [
-            '%association%' => $productAssociationType->getName()
+            '%association%' => $productAssociationType->getName(),
         ]);
         $dropdown->click();
 

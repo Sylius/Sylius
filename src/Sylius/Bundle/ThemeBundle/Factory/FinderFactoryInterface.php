@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Factory;
 
 use Symfony\Component\Finder\Finder;
@@ -21,5 +23,5 @@ interface FinderFactoryInterface
     /**
      * @return Finder
      */
-    public function create();
+    public function create(): Finder;
 }

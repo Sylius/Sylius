@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -27,7 +29,7 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getZone()
+    public function getZone(): ?ZoneInterface
     {
         return $this->zone;
     }
@@ -35,7 +37,7 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setZone(ZoneInterface $zone = null)
+    public function setZone(?ZoneInterface $zone): void
     {
         $this->zone = $zone;
     }

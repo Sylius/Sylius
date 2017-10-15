@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Security\Checker;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -32,7 +34,7 @@ final class TokenUniquenessChecker implements UniquenessCheckerInterface
      * @param RepositoryInterface $repository
      * @param string $tokenFieldName
      */
-    public function __construct($repository, $tokenFieldName)
+    public function __construct(RepositoryInterface $repository, string $tokenFieldName)
     {
         $this->repository = $repository;
         $this->tokenFieldName = $tokenFieldName;
@@ -41,7 +43,7 @@ final class TokenUniquenessChecker implements UniquenessCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function isUnique($token)
+    public function isUnique(string $token): bool
     {
         return null === $this->repository->findOneBy([$this->tokenFieldName => $token]);
     }

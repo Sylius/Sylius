@@ -8,3 +8,16 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Kata sandi
+                signature: Signature
+                username: Username
+                sandbox: Sandbox
+            stripe:
+                publishable_key: Publishable key
+                secret_key: Secret key
+    payum_gateway_factory:
+        offline: Tidak aktif
+        paypal_express_checkout: Paypal express checkout
+        stripe_checkout: Stripe checkout
+    payum_action:
+        payment:
+            description: Pembayaran berisi item %items% untuk total %total% | Pembayaran berisi item %items% untuk total %total%

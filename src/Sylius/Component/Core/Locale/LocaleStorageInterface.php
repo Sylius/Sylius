@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Locale;
 
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
@@ -23,14 +25,14 @@ interface LocaleStorageInterface
      * @param ChannelInterface $channel
      * @param string $localeCode
      */
-    public function set(ChannelInterface $channel, $localeCode);
+    public function set(ChannelInterface $channel, string $localeCode): void;
 
     /**
      * @param ChannelInterface $channel
      *
-     * @return string Locale code
+     * @return string
      *
      * @throws ChannelNotFoundException
      */
-    public function get(ChannelInterface $channel);
+    public function get(ChannelInterface $channel): string;
 }

@@ -149,6 +149,7 @@
             <argument type="service" id="sylius.behat.page.admin.product_attribute.index" />
             <argument type="service" id="sylius.behat.page.admin.product_attribute.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.shared_security" />
             <tag name="fob.context_service" />
         </service>
 
@@ -284,6 +285,7 @@
             <argument type="service" id="sylius.behat.page.shop.checkout.select_payment" />
             <argument type="service" id="sylius.behat.page.shop.checkout.select_shipping" />
             <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
+            <argument type="service" id="sylius.behat.page.shop.account.register" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.context.ui.shop.checkout.addressing" />
             <argument type="service" id="sylius.behat.context.ui.shop.checkout.shipping" />
@@ -366,6 +368,7 @@
             <argument type="service" id="sylius.behat.page.shop.account.change_password" />
             <argument type="service" id="sylius.behat.page.shop.account.order.index" />
             <argument type="service" id="sylius.behat.page.shop.account.order.show" />
+            <argument type="service" id="sylius.behat.page.shop.account.login" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="fob.context_service" />
         </service>
@@ -396,12 +399,6 @@
         </service>
 
         <service id="sylius.behat.context.ui.shop.currency" class="Sylius\Behat\Context\Ui\Shop\CurrencyContext">
-            <argument type="service" id="sylius.behat.page.shop.home" />
-            <tag name="fob.context_service" />
-        </service>
-
-        <service id="sylius.behat.context.ui.shop.current_channel" class="Sylius\Behat\Context\Ui\Shop\CurrentChannelContext">
-            <argument type="service" id="sylius.behat.channel_context_setter" />
             <argument type="service" id="sylius.behat.page.shop.home" />
             <tag name="fob.context_service" />
         </service>

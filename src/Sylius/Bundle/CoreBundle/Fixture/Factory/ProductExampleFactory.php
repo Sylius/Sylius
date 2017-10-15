@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -174,7 +175,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): ProductInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -198,27 +199,27 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return $this->faker->words(3, true);
             })
 
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })
 
-            ->setDefault('enabled', function (Options $options) {
+            ->setDefault('enabled', function (Options $options): bool {
                 return $this->faker->boolean(90);
             })
             ->setAllowedTypes('enabled', 'bool')
 
-            ->setDefault('short_description', function (Options $options) {
+            ->setDefault('short_description', function (Options $options): string {
                 return $this->faker->paragraph;
             })
 
-            ->setDefault('description', function (Options $options) {
+            ->setDefault('description', function (Options $options): string {
                 return $this->faker->paragraphs(3, true);
             })
 
@@ -239,7 +240,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('product_attributes', [])
             ->setAllowedTypes('product_attributes', 'array')
-            ->setNormalizer('product_attributes', function (Options $options, array $productAttributes) {
+            ->setNormalizer('product_attributes', function (Options $options, array $productAttributes): array {
                 $productAttributesValues = [];
                 foreach ($productAttributes as $code => $value) {
                     foreach ($this->getLocales() as $localeCode) {
@@ -276,7 +277,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param ProductInterface $product
      * @param array $options
      */
-    private function createTranslations(ProductInterface $product, array $options)
+    private function createTranslations(ProductInterface $product, array $options): void
     {
         foreach ($this->getLocales() as $localeCode) {
             $product->setCurrentLocale($localeCode);
@@ -293,7 +294,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param ProductInterface $product
      * @param array $options
      */
-    private function createRelations(ProductInterface $product, array $options)
+    private function createRelations(ProductInterface $product, array $options): void
     {
         foreach ($options['channels'] as $channel) {
             $product->addChannel($channel);
@@ -312,7 +313,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param ProductInterface $product
      * @param array $options
      */
-    private function createVariants(ProductInterface $product, array $options)
+    private function createVariants(ProductInterface $product, array $options): void
     {
         try {
             $this->variantGenerator->generate($product);
@@ -343,7 +344,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param ProductVariantInterface $productVariant
      * @param string $channelCode
      */
-    private function createChannelPricings(ProductVariantInterface $productVariant, $channelCode)
+    private function createChannelPricings(ProductVariantInterface $productVariant, string $channelCode): void
     {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();
@@ -357,7 +358,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param ProductInterface $product
      * @param array $options
      */
-    private function createImages(ProductInterface $product, array $options)
+    private function createImages(ProductInterface $product, array $options): void
     {
         foreach ($options['images'] as $image) {
             $imagePath = array_shift($image);
@@ -378,7 +379,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param ProductInterface $product
      * @param array $options
      */
-    private function createProductTaxons(ProductInterface $product, array $options)
+    private function createProductTaxons(ProductInterface $product, array $options): void
     {
         foreach ($options['taxons'] as $taxon) {
             $productTaxon = $this->productTaxonFactory->createNew();
@@ -390,9 +391,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     }
 
     /**
-     * @return \Generator
+     * @return iterable
      */
-    private function getLocales()
+    private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */
         $locales = $this->localeRepository->findAll();
@@ -405,6 +406,8 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param ProductAttributeInterface $productAttribute
      *
      * @return mixed
+     *
+     * @throws \BadMethodCallException
      */
     private function getRandomValueForProductAttribute(ProductAttributeInterface $productAttribute)
     {
@@ -431,6 +434,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
                     return [$this->faker->randomKey($productAttribute->getConfiguration()['choices'])];
                 }
+                // no break
             default:
                 throw new \BadMethodCallException();
         }

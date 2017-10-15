@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Payment\Provider;
 
 use PhpSpec\ObjectBehavior;
@@ -18,8 +20,8 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
-use Sylius\Component\Core\Payment\Provider\OrderPaymentProvider;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
+use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
@@ -34,7 +36,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         PaymentFactoryInterface $paymentFactory,
         StateMachineFactoryInterface $stateMachineFactory
-    ) {
+    ): void {
         $this->beConstructedWith(
             $defaultPaymentMethodResolver,
             $paymentFactory,
@@ -42,17 +44,13 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderPaymentProvider::class);
-    }
-
-    function it_implements_order_payment_provider_interface()
+    function it_implements_order_payment_provider_interface(): void
     {
         $this->shouldImplement(OrderPaymentProviderInterface::class);
     }
 
     function it_provides_payment_in_configured_state_with_payment_method_from_last_cancelled_payment(
+        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         OrderInterface $order,
         PaymentFactoryInterface $paymentFactory,
         PaymentInterface $lastCancelledPayment,
@@ -60,7 +58,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine
-    ) {
+    ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn($lastCancelledPayment);
@@ -68,6 +66,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $lastCancelledPayment->getMethod()->willReturn($paymentMethod);
 
         $paymentFactory->createWithAmountAndCurrencyCode(1000, 'USD')->willReturn($newPayment);
+        $defaultPaymentMethodResolver->getDefaultPaymentMethod($newPayment)->willReturn($paymentMethod);
 
         $newPayment->setMethod($paymentMethod)->shouldBeCalled();
         $newPayment->getState()->willReturn(PaymentInterface::STATE_CART);
@@ -81,6 +80,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
     }
 
     function it_provides_payment_in_configured_state_with_payment_method_from_last_failed_payment(
+        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         OrderInterface $order,
         PaymentFactoryInterface $paymentFactory,
         PaymentInterface $lastFailedPayment,
@@ -88,7 +88,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine
-    ) {
+    ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
@@ -97,6 +97,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $lastFailedPayment->getMethod()->willReturn($paymentMethod);
 
         $paymentFactory->createWithAmountAndCurrencyCode(1000, 'USD')->willReturn($newPayment);
+        $defaultPaymentMethodResolver->getDefaultPaymentMethod($newPayment)->willReturn($paymentMethod);
 
         $newPayment->setMethod($paymentMethod)->shouldBeCalled();
         $newPayment->getState()->willReturn(PaymentInterface::STATE_CART);
@@ -117,7 +118,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine
-    ) {
+    ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
@@ -145,7 +146,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentInterface $newPayment,
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory
-    ) {
+    ): void {
         $this->beConstructedWith(
             $defaultPaymentMethodResolver,
             $paymentFactory,
@@ -170,17 +171,20 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
 
         $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
     }
-    
+
     function it_throws_exception_if_payment_method_cannot_be_resolved_for_provided_payment(
+        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         OrderInterface $order,
         PaymentFactoryInterface $paymentFactory,
         PaymentInterface $lastFailedPayment,
         PaymentInterface $newPayment
-    ) {
+    ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
         $order->getLastPayment(PaymentInterface::STATE_FAILED)->willReturn($lastFailedPayment);
+
+        $defaultPaymentMethodResolver->getDefaultPaymentMethod($newPayment)->willThrow(UnresolvedDefaultPaymentMethodException::class);
 
         $lastFailedPayment->getMethod()->willReturn(null);
 

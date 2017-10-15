@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Tests\Translation;
 
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProvider;
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProvider;
 use Sylius\Bundle\ThemeBundle\Translation\Translator;
-use Symfony\Component\Translation\Exception\InvalidArgumentException;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\Translation\MessageCatalogue;
 use Symfony\Component\Translation\MessageSelector;
@@ -31,7 +32,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
      * @dataProvider getInvalidOptionsTests
      * @expectedException \InvalidArgumentException
      */
-    public function it_throws_exception_on_instantiating_with_invalid_options(array $options)
+    public function it_throws_exception_on_instantiating_with_invalid_options(array $options): void
     {
         $this->createTranslator('en', $options);
     }
@@ -40,7 +41,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider getValidOptionsTests
      */
-    public function it_instantiates_with_valid_options(array $options)
+    public function it_instantiates_with_valid_options(array $options): void
     {
         $this->createTranslator('en', $options);
     }
@@ -50,7 +51,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
      * @dataProvider getInvalidLocalesTests
      * @expectedException \InvalidArgumentException
      */
-    public function it_throws_exception_on_instantiating_with_invalid_locale($locale)
+    public function it_throws_exception_on_instantiating_with_invalid_locale($locale): void
     {
         $this->createTranslator($locale);
     }
@@ -59,7 +60,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider getAllValidLocalesTests
      */
-    public function it_instantiates_with_valid_locale($locale)
+    public function it_instantiates_with_valid_locale($locale): void
     {
         $translator = $this->createTranslator($locale);
 
@@ -69,9 +70,9 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider getInvalidLocalesTests
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
-    public function its_throws_exception_on_setting_invalid_fallback_locales($locale)
+    public function its_throws_exception_on_setting_invalid_fallback_locales($locale): void
     {
         $translator = $this->createTranslator('fr');
         $translator->setFallbackLocales(['fr', $locale]);
@@ -81,7 +82,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider getAllValidLocalesTests
      */
-    public function its_fallback_locales_can_be_set_only_if_valid($locale)
+    public function its_fallback_locales_can_be_set_only_if_valid($locale): void
     {
         $translator = $this->createTranslator('fr');
         $translator->setFallbackLocales(['fr', $locale]);
@@ -91,7 +92,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider getAllValidLocalesTests
      */
-    public function it_adds_resources_with_valid_locales($locale)
+    public function it_adds_resources_with_valid_locales($locale): void
     {
         $translator = $this->createTranslator('fr');
         $translator->addResource('array', ['foo' => 'foofoo'], $locale);
@@ -101,7 +102,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider getAllValidLocalesTests
      */
-    public function it_translates_valid_locales($locale)
+    public function it_translates_valid_locales($locale): void
     {
         $translator = $this->createTranslator($locale);
         $translator->addLoader('array', new ArrayLoader());
@@ -114,7 +115,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_translates_to_a_fallback_locale()
+    public function it_translates_to_a_fallback_locale(): void
     {
         $translator = $this->createTranslator('en');
         $translator->setFallbackLocales(['fr']);
@@ -129,7 +130,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_can_have_multiple_fallback_locales()
+    public function it_can_have_multiple_fallback_locales(): void
     {
         $translator = $this->createTranslator('en');
         $translator->setFallbackLocales(['de', 'fr']);
@@ -147,7 +148,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider getThemelessLocalesTests
      */
-    public function it_gets_catalogue_with_fallback_catalogues_of_a_simple_locale($locale)
+    public function it_gets_catalogue_with_fallback_catalogues_of_a_simple_locale($locale): void
     {
         $translator = $this->createTranslator($locale);
         $catalogue = new MessageCatalogue($locale);
@@ -159,7 +160,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider getThemedLocalesTests
      */
-    public function it_gets_catalogue_with_fallback_catalogues_of_a_themed_locale($locale)
+    public function it_gets_catalogue_with_fallback_catalogues_of_a_themed_locale($locale): void
     {
         $translator = $this->createTranslator($locale);
 
@@ -174,7 +175,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_creates_a_nested_catalogue_with_fallback_translations_of_a_territorial_locale()
+    public function it_creates_a_nested_catalogue_with_fallback_translations_of_a_territorial_locale(): void
     {
         $translator = $this->createTranslator('fr_FR');
 
@@ -189,7 +190,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_creates_a_nested_catalogue_with_fallback_translations_of_a_themed_locale()
+    public function it_creates_a_nested_catalogue_with_fallback_translations_of_a_themed_locale(): void
     {
         $translator = $this->createTranslator('fr_FR@heron');
 
@@ -210,7 +211,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_creates_a_nested_catalogue_with_fallback_translations_with_duplicated_additional_fallbacks()
+    public function it_creates_a_nested_catalogue_with_fallback_translations_with_duplicated_additional_fallbacks(): void
     {
         $translator = $this->createTranslator('fr_FR@heron');
         $translator->setFallbackLocales(['fr_FR', 'fr']);
@@ -232,7 +233,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_creates_a_nested_catalogue_with_fallback_translations()
+    public function it_creates_a_nested_catalogue_with_fallback_translations(): void
     {
         $translator = $this->createTranslator('fr_FR@heron');
         $translator->setFallbackLocales(['en_US', 'en']);
@@ -317,7 +318,6 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [''],
-            [null],
             ['fr'],
             ['francais'],
             ['FR'],

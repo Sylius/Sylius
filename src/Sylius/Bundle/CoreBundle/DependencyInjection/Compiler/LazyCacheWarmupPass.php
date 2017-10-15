@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -23,7 +25,7 @@ final class LazyCacheWarmupPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $this->markServiceAsLazy($container, 'cmf_core.templating.helper');
         $this->markServiceAsLazy($container, 'cmf_create.rdf_type_factory');
@@ -37,7 +39,7 @@ final class LazyCacheWarmupPass implements CompilerPassInterface
      * @param ContainerBuilder $container
      * @param string $id
      */
-    private function markServiceAsLazy(ContainerBuilder $container, $id)
+    private function markServiceAsLazy(ContainerBuilder $container, string $id): void
     {
         try {
             $definition = $container->findDefinition($id);

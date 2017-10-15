@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ChannelBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 /**
@@ -22,7 +25,7 @@ class ChannelRepository extends EntityRepository implements ChannelRepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function findOneByHostname($hostname)
+    public function findOneByHostname(string $hostname): ?ChannelInterface
     {
         return $this->findOneBy(['hostname' => $hostname]);
     }
@@ -30,7 +33,7 @@ class ChannelRepository extends EntityRepository implements ChannelRepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function findOneByCode($code)
+    public function findOneByCode(string $code): ?ChannelInterface
     {
         return $this->findOneBy(['code' => $code]);
     }
@@ -38,7 +41,7 @@ class ChannelRepository extends EntityRepository implements ChannelRepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function findByName($name)
+    public function findByName(string $name): iterable
     {
         return $this->findBy(['name' => $name]);
     }

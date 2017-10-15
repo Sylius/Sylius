@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
@@ -177,11 +179,11 @@ final class ODMTranslatableListener implements EventSubscriber
         $metadata = $this->mappings[$name];
 
         if (isset($metadata['fallback_locale'])) {
-            $setter = 'set'.ucfirst($metadata['fallback_locale']);
+            $setter = 'set' . ucfirst($metadata['fallback_locale']);
             $document->$setter($this->fallbackLocale);
         }
         if (isset($metadata['current_locale'])) {
-            $setter = 'set'.ucfirst($metadata['current_locale']);
+            $setter = 'set' . ucfirst($metadata['current_locale']);
             $document->$setter($this->currentLocale);
         }
     }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Validator\Constraints;
 
 use Sylius\Bundle\ResourceBundle\Validator\DisabledValidator;
@@ -24,7 +26,7 @@ final class Disabled extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): array
     {
         return [self::PROPERTY_CONSTRAINT, self::CLASS_CONSTRAINT];
     }
@@ -32,7 +34,7 @@ final class Disabled extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return DisabledValidator::class;
     }

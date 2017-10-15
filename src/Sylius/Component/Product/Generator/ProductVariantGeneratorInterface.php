@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Generator;
 
 use Sylius\Component\Product\Model\ProductInterface;
@@ -23,5 +25,5 @@ interface ProductVariantGeneratorInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function generate(ProductInterface $product);
+    public function generate(ProductInterface $product): void;
 }

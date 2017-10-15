@@ -7,14 +7,36 @@ sylius:
             city: Bandar
             company: Syarikat
             country: Negara
+            first_name: Nama Pertama
+            last_name: Nama Akhir
+            phone_number: Nombor Telefon
             postcode: Poskod
+            street: Alamat
+            province: Daerah
+            zone: Zon
         country:
+            add_province: Tambah Daerah
             name: Nama
+            provinces: Daerah-Daerah
+            select: Pilih
+            enabled: Dibenarkan
         province:
             name: Nama
+            abbreviation: Singkatan
+            select: Pilih
         zone:
+            add_member: Tambah ahli
+            members: Ahli
             name: Nama
             type: Jenis
             types:
                 country: Negara
                 province: Wilayah
+                zone: Zon
+            scope: Skop
+            scopes:
+                all: Semua
+            select: Pilih
+            select_scope: Pilih skop
+        zone_member:
+            select: Pilih

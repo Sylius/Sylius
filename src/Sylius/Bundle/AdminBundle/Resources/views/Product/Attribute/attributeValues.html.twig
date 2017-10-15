@@ -1,12 +1,14 @@
+{% import _self as self %}
+
 {% set subject = metadata.name|replace({'_attribute': ''}) %}
 {% for code, localeCodes in forms %}
     {% for localeCode, form in localeCodes %}
         <div class="attribute" data-id="{{ code }}">
-            {% set id = form.vars.label|replace(' ', '_')|lower %}
+            {% set id = form.vars.label|replace({' ': '_'})|lower %}
             {% if 'type_checkbox' in form.vars.cache_key %}
-                {{ _self.checkboxField(form, count, id, subject, metadata.applicationName) }}
+                {{ self.checkboxField(form, count, id, subject, metadata.applicationName) }}
             {% else %}
-                {{ _self.textField(form, count, id, subject, metadata.applicationName) }}
+                {{ self.textField(form, count, id, subject, metadata.applicationName) }}
             {% endif %}
             <input type="hidden"
                    name="{{ metadata.applicationName }}_{{ subject }}[attributes][{{ count }}][attribute]"
@@ -22,10 +24,11 @@
 {% endfor %}
 
 {% macro formField(item, count, id, prefix, subject, applicationName) %}
+    {% from _self import formField %}
     {% if item.children|length > 0 %}
         {% set prefix = prefix~'_'~item.vars.name %}
         {% for child in item.children %}
-            {{ _self.formField(child, count, id, prefix, subject, applicationName) }}
+            {{ formField(child, count, id, prefix, subject, applicationName) }}
         {% endfor %}
     {% elseif item.vars.name != '_token' %}
         {% set namePrefix = prefix|replace({'_': ']['}) %}
@@ -39,9 +42,10 @@
 {% endmacro %}
 
 {% macro textField(form, count, id, subject, applicationName) %}
+    {% from _self import formField %}
     <div class="ui right fluid labeled input" style="margin-top: 15px; margin-bottom: 15px;">
         <div class="ui label">{{ form.vars.label }}</div>
-        {{ _self.formField(form, count, id, '', subject, applicationName) }}
+        {{ formField(form, count, id, '', subject, applicationName) }}
         <button class="ui red right labeled icon button">
             <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
         </button>
@@ -49,8 +53,9 @@
 {% endmacro %}
 
 {% macro checkboxField(form, count, id, subject, applicationName) %}
+    {% from _self import formField %}
     <div class="ui toggle checkbox" style="margin-top: 15px; margin-bottom: 15px;">
-        {{ _self.formField(form, count, id, '', subject, applicationName) }}
+        {{ formField(form, count, id, '', subject, applicationName) }}
         <label>{{ form.vars.label }}</label>
     </div>
     <button class="ui red right labeled icon button" style="float: right;">

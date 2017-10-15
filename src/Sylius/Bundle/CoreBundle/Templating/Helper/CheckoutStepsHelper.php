@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
@@ -48,7 +50,7 @@ class CheckoutStepsHelper extends Helper
      *
      * @return bool
      */
-    public function isShippingRequired(OrderInterface $order)
+    public function isShippingRequired(OrderInterface $order): bool
     {
         return $this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order);
     }
@@ -58,7 +60,7 @@ class CheckoutStepsHelper extends Helper
      *
      * @return bool
      */
-    public function isPaymentRequired(OrderInterface $order)
+    public function isPaymentRequired(OrderInterface $order): bool
     {
         return $this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order);
     }
@@ -66,7 +68,7 @@ class CheckoutStepsHelper extends Helper
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_checkout_steps';
     }

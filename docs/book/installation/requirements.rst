@@ -29,7 +29,7 @@ PHP required modules and configuration
 **PHP version**:
 
 +---------------+-----------------------+
-| PHP           | ^5.6|^7.0             |
+| PHP           | ^7.1                  |
 +---------------+-----------------------+
 
 **PHP extensions**:
@@ -72,7 +72,7 @@ By default, the database connection is pre-configured to work with a following M
 Access rights
 -------------
 
-Most of the application folders and files require only read access, but a few folders need also the write access for the Apache user:
+Most of the application folders and files require only read access, but a few folders need also the write access for the Apache/Nginx user:
 
 * var/cache
 * var/logs

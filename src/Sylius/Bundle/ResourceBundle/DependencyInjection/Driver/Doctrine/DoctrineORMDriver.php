@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -28,7 +30,7 @@ final class DoctrineORMDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return SyliusResourceBundle::DRIVER_DOCTRINE_ORM;
     }
@@ -36,7 +38,7 @@ final class DoctrineORMDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
-    protected function addRepository(ContainerBuilder $container, MetadataInterface $metadata)
+    protected function addRepository(ContainerBuilder $container, MetadataInterface $metadata): void
     {
         $repositoryClassParameterName = sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName());
         $repositoryClass = EntityRepository::class;
@@ -61,7 +63,7 @@ final class DoctrineORMDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
-    protected function getManagerServiceId(MetadataInterface $metadata)
+    protected function getManagerServiceId(MetadataInterface $metadata): string
     {
         if ($objectManagerName = $this->getObjectManagerName($metadata)) {
             return sprintf('doctrine.orm.%s_entity_manager', $objectManagerName);
@@ -73,7 +75,7 @@ final class DoctrineORMDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
-    protected function getClassMetadataClassname()
+    protected function getClassMetadataClassname(): string
     {
         return 'Doctrine\\ORM\\Mapping\\ClassMetadata';
     }

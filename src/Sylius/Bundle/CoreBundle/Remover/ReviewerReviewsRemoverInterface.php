@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Remover;
 
 use Sylius\Component\Review\Model\ReviewerInterface;
@@ -21,5 +23,5 @@ interface ReviewerReviewsRemoverInterface
     /**
      * @param ReviewerInterface $author
      */
-    public function removeReviewerReviews(ReviewerInterface $author);
+    public function removeReviewerReviews(ReviewerInterface $author): void;
 }

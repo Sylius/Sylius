@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Data;
 
 use Sylius\Component\Grid\Definition\Grid;
@@ -25,5 +27,5 @@ interface DataSourceProviderInterface
      *
      * @return DataSourceInterface
      */
-    public function getDataSource(Grid $grid, Parameters $parameters);
+    public function getDataSource(Grid $grid, Parameters $parameters): DataSourceInterface;
 }

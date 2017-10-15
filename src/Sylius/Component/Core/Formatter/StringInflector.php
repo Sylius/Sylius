@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Formatter;
 
 /**
@@ -21,7 +23,7 @@ final class StringInflector
      *
      * @return string
      */
-    public static function nameToCode($value)
+    public static function nameToCode(string $value): string
     {
         return str_replace([' ', '-'], '_', $value);
     }
@@ -31,7 +33,7 @@ final class StringInflector
      *
      * @return string
      */
-    public static function nameToLowercaseCode($value)
+    public static function nameToLowercaseCode(string $value): string
     {
         return strtolower(self::nameToCode($value));
     }
@@ -41,7 +43,7 @@ final class StringInflector
      *
      * @return string
      */
-    public static function nameToUppercaseCode($value)
+    public static function nameToUppercaseCode(string $value): string
     {
         return strtoupper(self::nameToCode($value));
     }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\DBAL\LockMode;
@@ -38,7 +40,7 @@ final class LockingListener
     /**
      * @param GenericEvent $event
      */
-    public function lock(GenericEvent $event)
+    public function lock(GenericEvent $event): void
     {
         $subject = $event->getSubject();
 

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\Validator;
 
 use Sylius\Component\Product\Model\ProductInterface;
@@ -38,7 +40,7 @@ final class UniqueSimpleProductCodeValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$value instanceof ProductInterface) {
             throw new UnexpectedTypeException($value, ProductInterface::class);

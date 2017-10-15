@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
-use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -80,7 +81,7 @@ class MugProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'mug_product';
     }
@@ -88,7 +89,7 @@ class MugProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -99,11 +100,16 @@ class MugProductFixture extends AbstractFixture
                 [
                     'code' => 'mugs',
                     'name' => 'Mugs',
-                ]
-            ]
+                ],
+            ],
         ]]]);
 
-        $mugMaterials = ['invisible_porcelain' => 'Invisible porcelain', 'banana_skin' => 'Banana skin', 'porcelain' => 'Porcelain', 'centipede' => 'Centipede'];
+        $mugMaterials = [
+            $this->faker->uuid => 'Invisible porcelain',
+            $this->faker->uuid => 'Banana skin',
+            $this->faker->uuid => 'Porcelain',
+            $this->faker->uuid => 'Centipede',
+        ];
         $this->productAttributeFixture->load(['custom' => [
             [
                 'name' => 'Mug material',
@@ -112,7 +118,7 @@ class MugProductFixture extends AbstractFixture
                 'configuration' => [
                     'multiple' => false,
                     'choices' => $mugMaterials,
-                ]
+                ],
             ],
         ]]);
 
@@ -153,7 +159,7 @@ class MugProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()
@@ -164,9 +170,9 @@ class MugProductFixture extends AbstractFixture
     /**
      * @param int $amount
      *
-     * @return string
+     * @return array
      */
-    private function getUniqueNames($amount)
+    private function getUniqueNames(int $amount): array
     {
         $productsNames = [];
 

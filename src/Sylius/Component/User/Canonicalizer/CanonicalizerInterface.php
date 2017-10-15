@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Canonicalizer;
 
 /**
@@ -16,5 +18,5 @@ namespace Sylius\Component\User\Canonicalizer;
  */
 interface CanonicalizerInterface
 {
-    public function canonicalize($string);
+    public function canonicalize(?string $string): ?string;
 }

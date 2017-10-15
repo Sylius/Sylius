@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Checker;
 
 use Sylius\Bundle\CoreBundle\Installer\Renderer\TableRenderer;
@@ -44,7 +46,7 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function check(InputInterface $input, OutputInterface $output)
+    public function check(InputInterface $input, OutputInterface $output): bool
     {
         $notFulfilledTable = new TableRenderer($output);
         $notFulfilledTable->setHeaders(['Requirement', 'Status']);
@@ -74,7 +76,7 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
         TableRenderer $notFulfilledTable,
         TableRenderer $helpTable,
         $verbose
-    ) {
+    ): void {
         /** @var Requirement $requirement */
         foreach ($collection as $requirement) {
             $label = $requirement->getLabel();
@@ -100,7 +102,7 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
      *
      * @return string
      */
-    private function getRequirementRequiredMessage(Requirement $requirement)
+    private function getRequirementRequiredMessage(Requirement $requirement): string
     {
         if ($requirement->isRequired()) {
             $this->fulfilled = false;

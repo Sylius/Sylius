@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Repository;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -24,7 +26,7 @@ interface PromotionRepositoryInterface extends BasePromotionRepositoryInterface
     /**
      * @param ChannelInterface $channel
      *
-     * @return PromotionInterface[]
+     * @return array|PromotionInterface[]
      */
-    public function findActiveByChannel(ChannelInterface $channel);
+    public function findActiveByChannel(ChannelInterface $channel): array;
 }

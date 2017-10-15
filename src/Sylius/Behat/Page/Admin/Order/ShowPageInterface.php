@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Order;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
@@ -225,7 +227,12 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @return int
      */
     public function getPaymentsCount();
-    
+
+    /**
+     * @return int
+     */
+    public function getShipmentsCount();
+
     /**
      * @return bool
      */
@@ -240,6 +247,11 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getPaymentState();
+
+    /**
+     * @return string
+     */
+    public function getShippingState();
 
     public function cancelOrder();
 

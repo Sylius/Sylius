@@ -14,12 +14,19 @@ sylius:
             rules: Regler
             starts_at: Starter ved
         promotion_action:
+            fixed_discount_configuration:
+                amount: Beløb
             type: Type
+        promotion_coupon_generator_instruction:
+            amount: Beløb
         promotion_rule:
+            customer_group: Kundegruppe
             cart_quantity_configuration:
                 count: Antal
             contains_product_configuration:
                 variants: Produkter
+            item_total_configuration:
+                amount: Beløb
             shipping_country_configuration:
                 country: Land
             taxonomy_configuration:

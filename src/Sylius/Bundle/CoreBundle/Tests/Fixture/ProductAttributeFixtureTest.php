@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -26,7 +28,7 @@ final class ProductAttributeFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_attributes_are_optional()
+    public function product_attributes_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'custom');
     }
@@ -34,7 +36,7 @@ final class ProductAttributeFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_attributes_can_be_generated_randomly()
+    public function product_attributes_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
         $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
@@ -43,7 +45,7 @@ final class ProductAttributeFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_attribute_code_is_optional()
+    public function product_attribute_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['code' => 'CUSTOM']]]], 'custom.*.code');
     }
@@ -51,7 +53,7 @@ final class ProductAttributeFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_attribute_type_is_optional()
+    public function product_attribute_type_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['type' => 'text']]]], 'custom.*.type');
         $this->assertConfigurationIsValid([['custom' => [['type' => 'bool']]]], 'custom.*.type');
@@ -60,7 +62,7 @@ final class ProductAttributeFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_attribute_type_must_exist()
+    public function product_attribute_type_must_exist(): void
     {
         $this->assertPartialConfigurationIsInvalid([['custom' => [['type' => 'not_defined']]]], 'custom.*.type');
     }
@@ -68,7 +70,7 @@ final class ProductAttributeFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): ProductAttributeFixture
     {
         return new ProductAttributeFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),

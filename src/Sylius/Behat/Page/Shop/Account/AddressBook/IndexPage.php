@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
 use Behat\Mink\Element\NodeElement;
@@ -34,7 +36,13 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function getAddressesCount()
     {
-        return count($this->getElement('addresses')->findAll('css', 'address'));
+        $addressesCount = count($this->getElement('addresses')->findAll('css', 'address'));
+
+        if (!$this->hasNoDefaultAddress()) {
+            ++$addressesCount;
+        }
+
+        return $addressesCount;
     }
 
     /**

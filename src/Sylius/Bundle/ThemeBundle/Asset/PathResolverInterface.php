@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Asset;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -27,5 +29,5 @@ interface PathResolverInterface
      *
      * @return string
      */
-    public function resolve($path, ThemeInterface $theme);
+    public function resolve(string $path, ThemeInterface $theme): string;
 }

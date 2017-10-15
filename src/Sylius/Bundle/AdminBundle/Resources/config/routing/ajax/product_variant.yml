@@ -21,7 +21,7 @@ sylius_admin_ajax_product_variants_by_phrase:
                     locale: expr:service('sylius.context.locale').getLocaleCode()
                     productCode: $productCode
 
-sylius_admin_ajax_product_variants_by_code:
+sylius_admin_ajax_product_variants_by_codes:
     path: /
     methods: [GET]
     defaults:
@@ -30,7 +30,5 @@ sylius_admin_ajax_product_variants_by_code:
             serialization_groups: [Autocomplete]
             permission: true
             repository:
-                method: findByCodeAndProductCode
-                arguments:
-                    code: $code
-                    productCode: $productCode
+                method: findByCodesAndProductCode
+                arguments: [$code, $productCode]

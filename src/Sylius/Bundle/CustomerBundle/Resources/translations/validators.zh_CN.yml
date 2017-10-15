@@ -16,8 +16,15 @@ sylius:
         email:
             already_used: 该电子邮件已被使用，请登录或选择忘记密码
             max: 电子邮件不允许超过{{limit}}个字符
-            min: 电子邮件至少{{limit}}个字符
             not_blank: 请输入您的电子邮件。
             invalid: 电子邮件无效。
             unique: 该电子邮件已被使用
             registered: 此电子邮件已被注册，请登录或找回密码。
+    customer_group:
+        code:
+            regex: 客户组代码仅可以由字母、 数字、 破折号和下划线。
+            unique: 客户组代码必须是唯一的。
+        name:
+            max: 客户组名称不能超过 {{ limit }} 个字符。
+            min: 客户组名称必须至少 {{ limit }} 个字符长。
+            not_blank: 请输入客户组名称。

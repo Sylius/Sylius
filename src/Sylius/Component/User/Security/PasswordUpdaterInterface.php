@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Security;
 
 use Sylius\Component\User\Model\CredentialsHolderInterface;
@@ -18,5 +20,5 @@ use Sylius\Component\User\Model\CredentialsHolderInterface;
  */
 interface PasswordUpdaterInterface
 {
-    public function updatePassword(CredentialsHolderInterface $user);
+    public function updatePassword(CredentialsHolderInterface $user): void;
 }

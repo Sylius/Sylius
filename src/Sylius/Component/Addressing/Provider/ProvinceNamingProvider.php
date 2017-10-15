@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Provider;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -37,7 +39,7 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getName(AddressInterface $address)
+    public function getName(AddressInterface $address): string
     {
         if (null !== $address->getProvinceName()) {
             return $address->getProvinceName();
@@ -56,7 +58,7 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAbbreviation(AddressInterface $address)
+    public function getAbbreviation(AddressInterface $address): string
     {
         if (null !== $address->getProvinceName()) {
             return $address->getProvinceName();

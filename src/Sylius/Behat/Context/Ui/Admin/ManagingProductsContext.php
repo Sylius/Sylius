@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -395,6 +397,7 @@ final class ManagingProductsContext implements Context
 
         if ($product->isSimple()) {
             $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
             return;
         }
 
@@ -921,7 +924,6 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then I should be notified that I have to define the :attribute attribute in :language
-     *
      */
     public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn($attribute, $language)
     {

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use FOS\RestBundle\View\View;
@@ -27,7 +29,7 @@ class PaymentMethodController extends ResourceController
      *
      * @return Response
      */
-    public function getPaymentGatewaysAction(Request $request, $template)
+    public function getPaymentGatewaysAction(Request $request, string $template): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 

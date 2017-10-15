@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Channel\Model;
 
 /**
@@ -17,12 +19,12 @@ namespace Sylius\Component\Channel\Model;
 interface ChannelAwareInterface
 {
     /**
-     * @return ChannelInterface
+     * @return ChannelInterface|null
      */
-    public function getChannel();
+    public function getChannel(): ?ChannelInterface;
 
     /**
-     * @param null|ChannelInterface $channel
+     * @param ChannelInterface|null $channel
      */
-    public function setChannel(ChannelInterface $channel = null);
+    public function setChannel(?ChannelInterface $channel): void;
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Templating\Cache\Clearer;
 
 use Doctrine\Common\Cache\Cache;
@@ -36,7 +38,7 @@ final class TemplatePathsCacheClearer implements CacheClearerInterface
     /**
      * {@inheritdoc}
      */
-    public function clear($cacheDir)
+    public function clear($cacheDir): void
     {
         if (!$this->cache instanceof ClearableCache) {
             return;

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -56,7 +58,7 @@ class Shipment implements ShipmentInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->getId();
     }
@@ -72,7 +74,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getState()
+    public function getState(): ?string
     {
         return $this->state;
     }
@@ -80,7 +82,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function setState($state)
+    public function setState(?string $state): void
     {
         $this->state = $state;
     }
@@ -88,7 +90,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getMethod()
+    public function getMethod(): ?ShippingMethodInterface
     {
         return $this->method;
     }
@@ -96,7 +98,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function setMethod(ShippingMethodInterface $method = null)
+    public function setMethod(?ShippingMethodInterface $method): void
     {
         $this->method = $method;
     }
@@ -104,7 +106,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getUnits()
+    public function getUnits(): Collection
     {
         return $this->units;
     }
@@ -112,7 +114,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function hasUnit(ShipmentUnitInterface $unit)
+    public function hasUnit(ShipmentUnitInterface $unit): bool
     {
         return $this->units->contains($unit);
     }
@@ -120,7 +122,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function addUnit(ShipmentUnitInterface $unit)
+    public function addUnit(ShipmentUnitInterface $unit): void
     {
         if (!$this->hasUnit($unit)) {
             $unit->setShipment($this);
@@ -131,7 +133,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function removeUnit(ShipmentUnitInterface $unit)
+    public function removeUnit(ShipmentUnitInterface $unit): void
     {
         if ($this->hasUnit($unit)) {
             $unit->setShipment(null);
@@ -142,7 +144,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getTracking()
+    public function getTracking(): ?string
     {
         return $this->tracking;
     }
@@ -150,7 +152,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function setTracking($tracking)
+    public function setTracking(?string $tracking): void
     {
         $this->tracking = $tracking;
     }
@@ -158,7 +160,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function isTracked()
+    public function isTracked(): bool
     {
         return null !== $this->tracking;
     }
@@ -166,7 +168,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippables()
+    public function getShippables(): Collection
     {
         $shippables = new ArrayCollection();
 
@@ -183,7 +185,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingWeight()
+    public function getShippingWeight(): float
     {
         $weight = 0;
 
@@ -197,7 +199,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingVolume()
+    public function getShippingVolume(): float
     {
         $volume = 0;
 
@@ -211,7 +213,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingUnitCount()
+    public function getShippingUnitCount(): int
     {
         return $this->units->count();
     }
@@ -219,7 +221,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingUnitTotal()
+    public function getShippingUnitTotal(): int
     {
         return 0;
     }

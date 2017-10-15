@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
@@ -95,9 +97,10 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I (?:remove|removed) product "([^"]+)" from the cart$/
+     * @Given I removed product :productName from the cart
+     * @When I remove product :productName from the cart
      */
-    public function iRemoveProductFromTheCart($productName)
+    public function iRemoveProductFromTheCart(string $productName): void
     {
         $this->summaryPage->open();
         $this->summaryPage->removeProduct($productName);

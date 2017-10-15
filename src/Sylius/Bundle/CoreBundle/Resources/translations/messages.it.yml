@@ -4,11 +4,11 @@
 sylius:
     form:
         block:
-            body: Testo
+            body: Body
             id: ID
             title: Titolo
         cart:
-            coupon: Promozione
+            coupon: Codice sconto
         checkout:
             addressing:
                 different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
@@ -18,7 +18,7 @@ sylius:
             channels: Canali
         promotion_action:
             add_product_configuration:
-                product: Prodotto
+                product: Prdotto
         promotion_coupon:
             per_customer_usage_limit: Limite di utilizzo per cliente
         group:
@@ -26,14 +26,17 @@ sylius:
             roles: Regole
         channel:
             contact_email: Email di contatto
-            currencies: Monete
+            currencies: Valute
             currency_base: Valuta base
-            hostname: Hostname
-            locale_default: Locale predefinita
+            account_verification_required: È richiesta la verifica dell'account?
+            hostname: Hostname (Nome server)
+            locale_default: Localizzazione predefinita
             locales: Localizzazioni
             payment_methods: Metodi di pagamento
             shipping_methods: Metodi di spedizione
-            tax_calculation_strategy: Strategia di calcolo fiscale
+            skipping_shipping_step_allowed: Saltare lo step spedizione nel caso sia disponibile un solo metodo di spedizione?
+            skipping_payment_step_allowed: Saltare lo step pagamento nel caso sia disponibile un solo metodo di pagamento?
+            tax_calculation_strategy: Metodo di calcolo delle tasse
             tax_zone_default: Aliquota predefinita
             taxonomies: Tassonomie
             theme: Tema
@@ -52,7 +55,7 @@ sylius:
             payment_state: Stato pagamento
             channel: Tutti i canali
         page:
-            body: Testo
+            body: Body
             id: ID
             title: Titolo
         product:
@@ -60,7 +63,7 @@ sylius:
             restricted_zone: Zona soggetta a restrizioni
             short_description: Descrizione breve
             variant_selection_method: Metodo di selezione delle varianti
-            main_taxon: Taxon principale
+            main_taxon: Gruppo prodotto principale
             channels: Canali
             enabled: Abilitato
         product_filter:
@@ -107,6 +110,7 @@ sylius:
             on_hand: Disponibilità attuale
             price: Prezzo
             sku: SKU
+            shipping_required: La spedizione è richiesta?
             weight: Peso
             width: Larghezza
         attribute:
@@ -122,7 +126,12 @@ sylius:
             name: Nome
         promotion_filter:
             products: Filtro prodotti
+            taxons: Filtro Taxons
         promotion_rule:
+            customer_group:
+                group: Gruppo clienti
+            has_taxon:
+                taxons: Taxons
             product:
                 products: Prodotti
             total_of_items_from_taxon:
@@ -196,8 +205,8 @@ sylius:
             version: Versione PHP
             version_recommended: Versione PHP raccomandata
     payum_gateway:
-        cash_on_delivery: Contanti alla cosegna
-        offline: Disconnesso
+        cash_on_delivery: Contanti alla consegna
+        offline: Offline
         paypal_express_checkout: PayPal Express Checkout
     shipping_method_resolver:
         by_zones_and_channel: A seconda della zona e modalità

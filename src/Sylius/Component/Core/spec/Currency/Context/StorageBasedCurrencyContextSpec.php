@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Currency\Context;
 
 use PhpSpec\ObjectBehavior;
@@ -23,12 +25,12 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
  */
 final class StorageBasedCurrencyContextSpec extends ObjectBehavior
 {
-    function let(ChannelContextInterface $channelContext, CurrencyStorageInterface $currencyStorage)
+    function let(ChannelContextInterface $channelContext, CurrencyStorageInterface $currencyStorage): void
     {
         $this->beConstructedWith($channelContext, $currencyStorage);
     }
 
-    function it_is_a_currency_context()
+    function it_is_a_currency_context(): void
     {
         $this->shouldImplement(CurrencyContextInterface::class);
     }
@@ -37,7 +39,7 @@ final class StorageBasedCurrencyContextSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         CurrencyStorageInterface $currencyStorage,
         ChannelInterface $channel
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
 
         $currencyStorage->get($channel)->willReturn('BTC');
@@ -49,7 +51,7 @@ final class StorageBasedCurrencyContextSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         CurrencyStorageInterface $currencyStorage,
         ChannelInterface $channel
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
 
         $currencyStorage->get($channel)->willReturn(null);

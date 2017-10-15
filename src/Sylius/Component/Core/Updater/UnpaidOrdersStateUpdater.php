@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Updater;
 
 use SM\Factory\Factory;
@@ -51,9 +53,9 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
         $this->expirationPeriod = $expirationPeriod;
     }
 
-    public function cancel()
+    public function cancel(): void
     {
-        $expiredUnpaidOrders = $this->orderRepository->findOrdersUnpaidSince(new \DateTime('-'.$this->expirationPeriod));
+        $expiredUnpaidOrders = $this->orderRepository->findOrdersUnpaidSince(new \DateTime('-' . $this->expirationPeriod));
         foreach ($expiredUnpaidOrders as $expiredUnpaidOrder) {
             $this->cancelOrder($expiredUnpaidOrder);
         }
@@ -62,7 +64,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
     /**
      * @param OrderInterface $expiredUnpaidOrder
      */
-    private function cancelOrder(OrderInterface $expiredUnpaidOrder)
+    private function cancelOrder(OrderInterface $expiredUnpaidOrder): void
     {
         $stateMachine = $this->stateMachineFactory->get($expiredUnpaidOrder, OrderTransitions::GRAPH);
         $stateMachine->apply(OrderTransitions::TRANSITION_CANCEL);

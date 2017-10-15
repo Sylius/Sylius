@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UserBundle\Security;
 
 use Sylius\Component\User\Model\CredentialsHolderInterface;
@@ -36,7 +38,7 @@ class UserPasswordEncoder implements UserPasswordEncoderInterface
     /**
      * {@inheritdoc}
      */
-    public function encode(CredentialsHolderInterface $user)
+    public function encode(CredentialsHolderInterface $user): string
     {
         $encoder = $this->encoderFactory->getEncoder(get_class($user));
 

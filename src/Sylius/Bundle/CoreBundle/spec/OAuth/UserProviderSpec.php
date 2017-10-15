@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\OAuth;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -17,10 +19,10 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\OAuth\UserProvider;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
@@ -36,22 +38,28 @@ final class UserProviderSpec extends ObjectBehavior
         FactoryInterface $oauthFactory,
         RepositoryInterface $oauthRepository,
         ObjectManager $userManager,
-        CanonicalizerInterface $canonicalizer
-    ) {
-        $this->beConstructedWith(ShopUser::class, $customerFactory, $userFactory, $userRepository, $oauthFactory, $oauthRepository, $userManager, $canonicalizer);
+        CanonicalizerInterface $canonicalizer,
+        CustomerRepositoryInterface $customerRepository
+    ): void {
+        $this->beConstructedWith(
+            ShopUser::class,
+            $customerFactory,
+            $userFactory,
+            $userRepository,
+            $oauthFactory,
+            $oauthRepository,
+            $userManager,
+            $canonicalizer,
+            $customerRepository
+        );
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UserProvider::class);
-    }
-
-    function it_implements_Hwi_oauth_aware_user_provider_interface()
+    function it_implements_Hwi_oauth_aware_user_provider_interface(): void
     {
         $this->shouldImplement(OAuthAwareUserProviderInterface::class);
     }
 
-    function it_implements_account_connector_interface()
+    function it_implements_account_connector_interface(): void
     {
         $this->shouldImplement(AccountConnectorInterface::class);
     }
@@ -63,7 +71,7 @@ final class UserProviderSpec extends ObjectBehavior
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
         UserOAuthInterface $oauth
-    ) {
+    ): void {
         $resourceOwner->getName()->willReturn('google');
 
         $response->getEmail()->willReturn(null);
@@ -93,7 +101,7 @@ final class UserProviderSpec extends ObjectBehavior
         UserOAuthInterface $oauth,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner
-    ) {
+    ): void {
         $resourceOwner->getName()->willReturn('google');
 
         $response->getUsername()->willReturn('username');
@@ -114,7 +122,7 @@ final class UserProviderSpec extends ObjectBehavior
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
         UserOAuthInterface $oauth
-    ) {
+    ): void {
         $resourceOwner->getName()->willReturn('google');
 
         $response->getEmail()->willReturn('username@email');
@@ -152,7 +160,7 @@ final class UserProviderSpec extends ObjectBehavior
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
         UserOAuthInterface $oauth
-    ) {
+    ): void {
         $resourceOwner->getName()->willReturn('google');
 
         $response->getEmail()->willReturn(null);
@@ -162,6 +170,8 @@ final class UserProviderSpec extends ObjectBehavior
         $response->getResourceOwner()->willReturn($resourceOwner);
         $response->getAccessToken()->willReturn('access_token');
         $response->getRefreshToken()->willReturn('refresh_token');
+        $response->getFirstName()->willReturn(null);
+        $response->getLastName()->willReturn(null);
 
         $oauthRepository->findOneBy(['provider' => 'google', 'identifier' => 'username'])->willReturn(null);
         $oauthFactory->createNew()->willReturn($oauth);

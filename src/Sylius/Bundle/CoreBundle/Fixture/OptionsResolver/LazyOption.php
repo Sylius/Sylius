@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
 use Doctrine\Common\Collections\Collection;
@@ -41,7 +43,7 @@ final class LazyOption
      *
      * @return \Closure
      */
-    public static function randomOne(RepositoryInterface $repository)
+    public static function randomOne(RepositoryInterface $repository): \Closure
     {
         return function (Options $options) use ($repository) {
             $objects = $repository->findAll();
@@ -62,7 +64,7 @@ final class LazyOption
      *
      * @return \Closure
      */
-    public static function randomOneOrNull(RepositoryInterface $repository, $chanceOfRandomOne)
+    public static function randomOneOrNull(RepositoryInterface $repository, int $chanceOfRandomOne): \Closure
     {
         return function (Options $options) use ($repository, $chanceOfRandomOne) {
             if (mt_rand(1, 100) > $chanceOfRandomOne) {
@@ -85,7 +87,7 @@ final class LazyOption
      *
      * @return \Closure
      */
-    public static function randomOnes(RepositoryInterface $repository, $amount)
+    public static function randomOnes(RepositoryInterface $repository, int $amount): \Closure
     {
         return function (Options $options) use ($repository, $amount) {
             $objects = $repository->findAll();
@@ -112,7 +114,7 @@ final class LazyOption
      *
      * @return \Closure
      */
-    public static function all(RepositoryInterface $repository)
+    public static function all(RepositoryInterface $repository): \Closure
     {
         return function (Options $options) use ($repository) {
             return $repository->findAll();
@@ -125,7 +127,7 @@ final class LazyOption
      *
      * @return \Closure
      */
-    public static function findBy(RepositoryInterface $repository, $field)
+    public static function findBy(RepositoryInterface $repository, string $field): \Closure
     {
         return function (Options $options, $previousValues) use ($repository, $field) {
             if (null === $previousValues || [] === $previousValues) {
@@ -153,7 +155,7 @@ final class LazyOption
      *
      * @return \Closure
      */
-    public static function findOneBy(RepositoryInterface $repository, $field)
+    public static function findOneBy(RepositoryInterface $repository, string $field): \Closure
     {
         return function (Options $options, $previousValue) use ($repository, $field) {
             if (null === $previousValue || [] === $previousValue) {
@@ -162,9 +164,9 @@ final class LazyOption
 
             if (is_object($previousValue)) {
                 return $previousValue;
-            } else {
-                return $repository->findOneBy([$field => $previousValue]);
             }
+
+            return $repository->findOneBy([$field => $previousValue]);
         };
     }
 }

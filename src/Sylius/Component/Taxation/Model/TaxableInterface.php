@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Taxation\Model;
 
 /**
@@ -17,7 +19,7 @@ namespace Sylius\Component\Taxation\Model;
 interface TaxableInterface
 {
     /**
-     * @return TaxCategoryInterface
+     * @return TaxCategoryInterface|null
      */
-    public function getTaxCategory();
+    public function getTaxCategory(): ?TaxCategoryInterface;
 }

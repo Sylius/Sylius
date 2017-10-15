@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -26,7 +28,7 @@ final class CurrencyFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function currencies_are_optional()
+    public function currencies_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'currencies');
     }
@@ -34,7 +36,7 @@ final class CurrencyFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function currencies_can_be_set()
+    public function currencies_can_be_set(): void
     {
         $this->assertConfigurationIsValid([['currencies' => ['EUR', 'USD', 'PLN']]], 'currencies');
     }
@@ -42,12 +44,11 @@ final class CurrencyFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): CurrencyFixture
     {
         return new CurrencyFixture(
             $this->getMockBuilder(FactoryInterface::class)->getMock(),
-            $this->getMockBuilder(ObjectManager::class)->getMock(),
-            'DEFAULT_CURRENCY_CODE'
+            $this->getMockBuilder(ObjectManager::class)->getMock()
         );
     }
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Resource\Model\AbstractTranslation;
@@ -59,7 +61,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -67,7 +69,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -75,7 +77,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -83,7 +85,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug = null)
+    public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
     }
@@ -91,7 +93,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -99,7 +101,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
@@ -107,7 +109,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function getMetaKeywords()
+    public function getMetaKeywords(): ?string
     {
         return $this->metaKeywords;
     }
@@ -115,7 +117,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function setMetaKeywords($metaKeywords)
+    public function setMetaKeywords(?string $metaKeywords): void
     {
         $this->metaKeywords = $metaKeywords;
     }
@@ -123,7 +125,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function getMetaDescription()
+    public function getMetaDescription(): ?string
     {
         return $this->metaDescription;
     }
@@ -131,7 +133,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function setMetaDescription($metaDescription)
+    public function setMetaDescription(?string $metaDescription): void
     {
         $this->metaDescription = $metaDescription;
     }

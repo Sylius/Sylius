@@ -11,3 +11,16 @@ sylius:
         request_error: '发送联系请求时发生问题。请稍后再试。'
     customer:
         add_address: '已成功添加地址。'
+        impersonate: '成功地模拟客户 %name%。'
+        set_address_as_default: '地址已被设为默认。'
+    order:
+        apply_state_machine_transition_error: '在更新订单时发生了未知的错误，请尝试再次更新订单。'
+        promotion_integrity: '您不再有资格参加此%promotionName%促销活动'
+        total_integrity: '订单总额已被更改，请检查订单信息并再次确认。'
+        update_error: '在更新产品时发生了未知的错误，请尝试再次更新产品。'
+    payment:
+        apply_state_machine_transition_error: '在更新支付方式时发生了未知的错误，请尝试再次更新支付方式。'
+    product:
+        out_of_stock: '该产品在库存中仅有 %quantity% 个。'
+    product_variant:
+        update_error: '在更新产品规格时发生了未知的错误，请尝试再次更新产品规格。'

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
@@ -24,7 +26,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     /**
      * {@inheritdoc}
      */
-    public function createListQueryBuilder($locale)
+    public function createListQueryBuilder(string $locale): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
@@ -35,7 +37,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     /**
      * {@inheritdoc}
      */
-    public function findEnabledForChannel(ChannelInterface $channel)
+    public function findEnabledForChannel(ChannelInterface $channel): array
     {
         return $this->createEnabledForChannelQueryBuilder($channel)
             ->getQuery()
@@ -46,7 +48,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     /**
      * {@inheritdoc}
      */
-    public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel)
+    public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel): array
     {
         return $this->createEnabledForChannelQueryBuilder($channel)
             ->andWhere('o.zone IN (:zones)')
@@ -62,7 +64,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
      *
      * @return QueryBuilder
      */
-    protected function createEnabledForChannelQueryBuilder(ChannelInterface $channel)
+    protected function createEnabledForChannelQueryBuilder(ChannelInterface $channel): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.enabled = true')

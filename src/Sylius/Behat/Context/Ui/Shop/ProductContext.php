@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
@@ -143,6 +145,25 @@ final class ProductContext implements Context
     public function iShouldSeeTheProductAttributeWithValue($attributeName, $expectedAttribute)
     {
         Assert::same($this->showPage->getAttributeByName($attributeName), $expectedAttribute);
+    }
+
+    /**
+     * @Then I should not see the product attribute :attributeName
+     */
+    public function iShouldNotSeeTheProductAttribute(string $attributeName): void
+    {
+        $this->showPage->getAttributeByName($attributeName);
+    }
+
+    /**
+     * @Then I should (also) see the product attribute :attributeName with date :expectedAttribute
+     */
+    public function iShouldSeeTheProductAttributeWithDate($attributeName, $expectedAttribute)
+    {
+        Assert::eq(
+            new \DateTime($this->showPage->getAttributeByName($attributeName)),
+            new \DateTime($expectedAttribute)
+        );
     }
 
     /**

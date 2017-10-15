@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -21,7 +23,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
-use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -38,7 +39,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter
-    ) {
+    ): void {
         $this->beConstructedWith(
             $adjustmentFactory,
             $priceRangeFilter,
@@ -47,12 +48,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UnitFixedDiscountPromotionActionCommand::class);
-    }
-
-    function it_is_a_discount_action()
+    function it_is_a_discount_action(): void
     {
         $this->shouldHaveType(UnitDiscountPromotionActionCommand::class);
     }
@@ -70,7 +66,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -117,7 +113,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -138,7 +134,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -163,7 +159,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -207,7 +203,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         FactoryInterface $adjustmentFactory,
         OrderInterface $order,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -219,7 +215,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_throws_an_exception_if_passed_subject_to_execute_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $this
             ->shouldThrow(UnexpectedTypeException::class)
             ->during('execute', [$subject, ['amount' => 1000], $promotion])
@@ -234,7 +230,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -263,7 +259,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_throws_an_exception_if_passed_subject_to_revert_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $this
             ->shouldThrow(UnexpectedTypeException::class)
             ->during('revert', [$subject, ['amount' => 1000], $promotion])

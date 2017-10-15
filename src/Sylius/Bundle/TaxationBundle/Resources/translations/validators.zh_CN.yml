@@ -22,4 +22,5 @@ sylius:
             not_blank: 请选择税区。
         code:
             not_blank: 请输入税率代码。
+            regex: 税收率代码仅可以由字母、 数字、 破折号和下划线。
             unique: 给定代码的税率已存在。

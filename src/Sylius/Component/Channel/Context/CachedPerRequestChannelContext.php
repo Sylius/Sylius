@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Channel\Context;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -55,7 +57,7 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getChannel()
+    public function getChannel(): ChannelInterface
     {
         $objectIdentifier = $this->requestStack->getMasterRequest();
 

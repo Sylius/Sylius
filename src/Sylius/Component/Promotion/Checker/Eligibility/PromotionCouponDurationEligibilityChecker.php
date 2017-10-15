@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Checker\Eligibility;
 
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
@@ -22,7 +24,7 @@ final class PromotionCouponDurationEligibilityChecker implements PromotionCoupon
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool
     {
         $endsAt = $promotionCoupon->getExpiresAt();
 

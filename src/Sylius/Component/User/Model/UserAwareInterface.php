@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Model;
 
 /**
@@ -17,12 +19,12 @@ namespace Sylius\Component\User\Model;
 interface UserAwareInterface
 {
     /**
-     * @return UserInterface
+     * @return UserInterface|null
      */
-    public function getUser();
+    public function getUser(): ?UserInterface;
 
     /**
-     * @param UserInterface $user
+     * @param UserInterface|null $user
      */
-    public function setUser(UserInterface $user = null);
+    public function setUser(?UserInterface $user);
 }

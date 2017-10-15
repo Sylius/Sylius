@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -35,7 +37,7 @@ final class SecurityWidgetController
     /**
      * @return Response
      */
-    public function renderAction()
+    public function renderAction(): Response
     {
         return $this->templatingEngine->renderResponse('@SyliusShop/Menu/_security.html.twig');
     }

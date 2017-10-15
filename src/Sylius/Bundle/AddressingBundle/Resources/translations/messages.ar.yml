@@ -17,7 +17,7 @@ sylius:
             name: الاسم
             provinces: المقاطعات
             select: اختر
-            enabled: مفتوح
+            enabled: تفعيل
         province:
             name: الاسم
             abbreviation: مختصرات

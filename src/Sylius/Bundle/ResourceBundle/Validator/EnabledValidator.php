@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Validator;
 
 use Sylius\Component\Resource\Model\ToggleableInterface;
@@ -42,7 +44,7 @@ final class EnabledValidator extends ConstraintValidator
     /**
      * @param mixed $value
      */
-    private function ensureValueImplementsToggleableInterface($value)
+    private function ensureValueImplementsToggleableInterface($value): void
     {
         if (!($value instanceof ToggleableInterface)) {
             throw new \InvalidArgumentException(sprintf(

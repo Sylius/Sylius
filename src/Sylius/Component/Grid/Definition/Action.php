@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Definition;
 
 /**
@@ -32,7 +34,7 @@ class Action
     private $label;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $enabled = true;
 
@@ -58,7 +60,7 @@ class Action
      * @param string $name
      * @param string $type
      */
-    private function __construct($name, $type)
+    private function __construct(string $name, string $type)
     {
         $this->name = $name;
         $this->type = $type;
@@ -70,7 +72,7 @@ class Action
      *
      * @return self
      */
-    public static function fromNameAndType($name, $type)
+    public static function fromNameAndType(string $name, string $type): self
     {
         return new self($name, $type);
     }
@@ -78,7 +80,7 @@ class Action
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -86,15 +88,15 @@ class Action
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->label;
     }
@@ -102,31 +104,31 @@ class Action
     /**
      * @param string $label
      */
-    public function setLabel($label)
+    public function setLabel(string $label): void
     {
         $this->label = $label;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         return $this->enabled;
     }
 
     /**
-     * @param boolean $enabled
+     * @param bool $enabled
      */
-    public function setEnabled($enabled)
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIcon()
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
@@ -134,7 +136,7 @@ class Action
     /**
      * @param string $icon
      */
-    public function setIcon($icon)
+    public function setIcon(string $icon): void
     {
         $this->icon = $icon;
     }
@@ -142,7 +144,7 @@ class Action
     /**
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }
@@ -150,7 +152,7 @@ class Action
     /**
      * @param array $options
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): void
     {
         $this->options = $options;
     }
@@ -158,7 +160,7 @@ class Action
     /**
      * @return int
      */
-    public function getPosition()
+    public function getPosition(): int
     {
         return $this->position;
     }
@@ -166,7 +168,7 @@ class Action
     /**
      * @param int $position
      */
-    public function setPosition($position)
+    public function setPosition(int $position): void
     {
         $this->position = $position;
     }

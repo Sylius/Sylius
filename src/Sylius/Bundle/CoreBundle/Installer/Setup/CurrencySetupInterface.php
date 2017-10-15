@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Setup;
 
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -28,5 +30,5 @@ interface CurrencySetupInterface
      *
      * @return CurrencyInterface
      */
-    public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper);
+    public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): CurrencyInterface;
 }

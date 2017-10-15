@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PaymentBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -22,7 +24,7 @@ class PaymentMethodRepository extends EntityRepository implements PaymentMethodR
     /**
      * {@inheritdoc}
      */
-    public function findByName($name, $locale)
+    public function findByName(string $name, string $locale): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation')
@@ -38,7 +40,7 @@ class PaymentMethodRepository extends EntityRepository implements PaymentMethodR
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = [], array $sorting = [])
+    public function createPaginator(array $criteria = [], array $sorting = []): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->leftJoin('o.translations', 'translation')

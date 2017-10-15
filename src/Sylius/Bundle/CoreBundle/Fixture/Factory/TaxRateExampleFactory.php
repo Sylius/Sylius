@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
@@ -74,7 +76,7 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): TaxRateInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -95,20 +97,20 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return $this->faker->words(3, true);
             })
-            ->setDefault('amount', function (Options $options) {
+            ->setDefault('amount', function (Options $options): float {
                 return $this->faker->randomFloat(2, 0, 0.4);
             })
             ->setAllowedTypes('amount', 'float')
-            ->setDefault('included_in_price', function (Options $options) {
+            ->setDefault('included_in_price', function (Options $options): bool {
                 return $this->faker->boolean();
             })
             ->setAllowedTypes('included_in_price', 'bool')

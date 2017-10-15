@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Mailer\Provider;
 
 use Sylius\Component\Mailer\Factory\EmailFactoryInterface;
@@ -24,12 +26,12 @@ final class EmailProvider implements EmailProviderInterface
     /**
      * @var EmailFactoryInterface
      */
-    protected $emailFactory;
+    private $emailFactory;
 
     /**
      * @var array
      */
-    protected $configuration;
+    private $configuration;
 
     /**
      * @param EmailFactoryInterface $emailFactory
@@ -46,7 +48,7 @@ final class EmailProvider implements EmailProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getEmail($code)
+    public function getEmail(string $code): EmailInterface
     {
         return $this->getEmailFromConfiguration($code);
     }
@@ -56,7 +58,7 @@ final class EmailProvider implements EmailProviderInterface
      *
      * @return EmailInterface
      */
-    private function getEmailFromConfiguration($code)
+    private function getEmailFromConfiguration(string $code): EmailInterface
     {
         Assert::keyExists($this->configuration, $code, sprintf('Email with code "%s" does not exist!', $code));
 

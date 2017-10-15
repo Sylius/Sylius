@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -35,7 +37,7 @@ final class ApplicationResourceLocator implements ResourceLocatorInterface
     /**
      * {@inheritdoc}
      */
-    public function locateResource($resourceName, ThemeInterface $theme)
+    public function locateResource(string $resourceName, ThemeInterface $theme): string
     {
         $path = sprintf('%s/%s', $theme->getPath(), $resourceName);
         if (!$this->filesystem->exists($path)) {

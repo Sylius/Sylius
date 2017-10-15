@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -21,10 +23,10 @@ interface OrderItemUnitInterface extends ResourceInterface, AdjustableInterface
     /**
      * @return int
      */
-    public function getTotal();
+    public function getTotal(): int;
 
     /**
      * @return OrderItemInterface
      */
-    public function getOrderItem();
+    public function getOrderItem(): OrderItemInterface;
 }

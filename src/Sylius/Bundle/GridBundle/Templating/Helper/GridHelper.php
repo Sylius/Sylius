@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\GridBundle\Templating\Helper;
 
 use Sylius\Component\Grid\Definition\Action;
@@ -38,11 +40,11 @@ class GridHelper extends Helper
 
     /**
      * @param GridView $gridView
-     * @param string $template
+     * @param string|null $template
      *
      * @return mixed
      */
-    public function renderGrid(GridView $gridView, $template = null)
+    public function renderGrid(GridView $gridView, ?string $template = null)
     {
         return $this->gridRenderer->render($gridView, $template);
     }
@@ -62,6 +64,7 @@ class GridHelper extends Helper
     /**
      * @param GridView $gridView
      * @param Action $action
+     * @param mixed|null $data
      *
      * @return mixed
      */
@@ -84,7 +87,7 @@ class GridHelper extends Helper
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_grid';
     }

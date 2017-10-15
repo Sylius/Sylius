@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Checker;
 
 use Sylius\Component\Product\Model\ProductInterface;
@@ -25,5 +27,5 @@ interface ProductVariantsParityCheckerInterface
      *
      * @return bool
      */
-    public function checkParity(ProductVariantInterface $variant, ProductInterface $product);
+    public function checkParity(ProductVariantInterface $variant, ProductInterface $product): bool;
 }

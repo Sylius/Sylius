@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Resource\Generator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Generator\RandomnessGenerator;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 
 /**
@@ -20,17 +21,12 @@ use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
  */
 final class RandomnessGeneratorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(RandomnessGenerator::class);
-    }
-
-    function it_implements_randomness_generator_interface()
+    function it_implements_randomness_generator_interface(): void
     {
         $this->shouldImplement(RandomnessGeneratorInterface::class);
     }
 
-    function it_generates_random_uri_safe_string_of_length()
+    function it_generates_random_uri_safe_string_of_length(): void
     {
         $length = 9;
 
@@ -38,7 +34,7 @@ final class RandomnessGeneratorSpec extends ObjectBehavior
         $this->generateUriSafeString($length)->shouldHaveLength($length);
     }
 
-    function it_generates_random_numeric_string_of_length()
+    function it_generates_random_numeric_string_of_length(): void
     {
         $length = 12;
 
@@ -47,7 +43,7 @@ final class RandomnessGeneratorSpec extends ObjectBehavior
         $this->generateNumeric($length)->shouldHaveLength($length);
     }
 
-    function it_generates_random_int_in_range()
+    function it_generates_random_int_in_range(): void
     {
         $min = 12;
         $max = 2000000;
@@ -59,15 +55,15 @@ final class RandomnessGeneratorSpec extends ObjectBehavior
     /**
      * {@inheritdoc}
      */
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
-            'haveLength' => function($subject, $length) {
+            'haveLength' => function ($subject, $length) {
                 return $length === strlen($subject);
             },
-            'beInRange' => function($subject, $min, $max) {
+            'beInRange' => function ($subject, $min, $max) {
                 return $subject >= $min && $subject <= $max;
-            }
+            },
         ];
     }
 }

@@ -7,7 +7,25 @@ sylius:
             max_length: 'Navnet på kategorien må ikke være længere end {{ limit }} tegn.'
             min_length: 'Navnet på kategorien skal være mindst {{ limit }} tegn langt. '
             not_blank: 'Angiv forsendelses kategori navn.'
+        code:
+            not_blank: 'Indtast venligst en kode for forsendelseskategorien.'
+            regex: 'Koden for forsendelseskategorien må kun bestå af bogstaver, tal, bindestreger og understregninger.'
+            unique: 'Forsendelseskategorien med den angivne kode eksisterer i forvejen.'
     shipping_method:
+        calculator:
+            max_length: Max længde
+            min_length: Minimum længde
+            not_blank: Kan ikke være tom
         name:
             max_length: 'Forsendelsesmetode navn må ikke være længere end {{ limit }} tegn.'
+            min_length: 'Navnet på forsendelsesmetoden skal være mindst {{ limit }} tegn langt.'
             not_blank: 'Angiv forsendelses metode navn.'
+        code:
+            not_blank: 'Angiv venligst en kode for forsendelsesmetoden.'
+            regex: 'Koden for forsendelsesmetoden må kun bestå af bogstaver, tal, bindestreger og understregninger.'
+            unique: 'Forsendelsesmetoden med den angivne kode eksisterer i forvejen.'
+        zone:
+            not_blank: 'Vælg venligst zonen for forsendelsesmetoden.'
+    shipment:
+        shipping_method:
+            not_blank: 'Vælg venligst forsendelsesmetode.'

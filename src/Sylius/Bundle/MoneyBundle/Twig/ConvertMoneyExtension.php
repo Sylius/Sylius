@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\MoneyBundle\Twig;
 
 use Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface;
@@ -34,10 +36,10 @@ final class ConvertMoneyExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-            new \Twig_SimpleFilter('sylius_convert_money', [$this->helper, 'convertAmount']),
+            new \Twig_Filter('sylius_convert_money', [$this->helper, 'convertAmount']),
         ];
     }
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
@@ -381,7 +383,7 @@ final class AddressBookContext implements Context
      */
     private function getAddressOf($fullName)
     {
-        list($firstName, $lastName) = explode(' ', $fullName);
+        [$firstName, $lastName] = explode(' ', $fullName);
 
         /** @var AddressInterface $address */
         $address = $this->addressRepository->findOneBy(['firstName' => $firstName, 'lastName' => $lastName]);
@@ -399,7 +401,7 @@ final class AddressBookContext implements Context
             ->currentPageResolver
             ->getCurrentPageWithForm([
                 $this->addressBookCreatePage,
-                $this->addressBookUpdatePage
+                $this->addressBookUpdatePage,
         ]);
     }
 }

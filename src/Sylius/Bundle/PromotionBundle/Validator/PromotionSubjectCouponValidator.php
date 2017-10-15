@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PromotionBundle\Validator;
 
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionSubjectCoupon;
@@ -39,7 +41,7 @@ final class PromotionSubjectCouponValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         /** @var PromotionSubjectCoupon $constraint */
         Assert::isInstanceOf($constraint, PromotionSubjectCoupon::class);

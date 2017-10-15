@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -65,11 +67,11 @@ interface ShowPageInterface extends PageInterface
     public function visit($url);
 
     /**
-     * @param string $attributeName
+     * @param string $name
      *
-     * @return string
+     * @return string|null
      */
-    public function getAttributeByName($attributeName);
+    public function getAttributeByName(string $name): ?string;
 
     /**
      * @return array

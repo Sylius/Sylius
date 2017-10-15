@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Generator;
 
 /**
@@ -21,5 +23,5 @@ interface SlugGeneratorInterface
      *
      * @return string
      */
-    public function generate($name);
+    public function generate(string $name): string;
 }

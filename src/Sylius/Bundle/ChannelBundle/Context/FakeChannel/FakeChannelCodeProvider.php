@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +23,7 @@ final class FakeChannelCodeProvider implements FakeChannelCodeProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode(Request $request)
+    public function getCode(Request $request): ?string
     {
         return $request->query->get('_channel_code') ?: $request->cookies->get('_channel_code');
     }

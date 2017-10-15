@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Factory\PromotionActionFactory;
 use Sylius\Component\Core\Factory\PromotionActionFactoryInterface;
 use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
@@ -27,17 +28,12 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class PromotionActionFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $decoratedFactory)
+    function let(FactoryInterface $decoratedFactory): void
     {
         $this->beConstructedWith($decoratedFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionActionFactory::class);
-    }
-
-    function it_implements_an_action_factory_interface()
+    function it_implements_an_action_factory_interface(): void
     {
         $this->shouldImplement(PromotionActionFactoryInterface::class);
     }
@@ -45,7 +41,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
     function it_creates_a_new_action_with_a_default_action_factory(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
-    ) {
+    ): void {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
         $this->createNew()->shouldReturn($promotionAction);
@@ -54,7 +50,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
     function it_creates_a_new_fixed_discount_action_with_a_given_base_amount(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
-    ) {
+    ): void {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
         $promotionAction->setType(FixedDiscountPromotionActionCommand::TYPE)->shouldBeCalled();
@@ -66,7 +62,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
     function it_creates_an_unit_fixed_discount_action_with_a_given_base_amount(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
-    ) {
+    ): void {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
         $promotionAction->setType(UnitFixedDiscountPromotionActionCommand::TYPE)->shouldBeCalled();
@@ -78,7 +74,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
     function it_creates_a_percentage_discount_action_with_a_given_discount_rate(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
-    ) {
+    ): void {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
         $promotionAction->setType(PercentageDiscountPromotionActionCommand::TYPE)->shouldBeCalled();
@@ -90,7 +86,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
     function it_creates_an_unit_percentage_discount_action_with_given_a_discount_rate(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
-    ) {
+    ): void {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
         $promotionAction->setType(UnitPercentageDiscountPromotionActionCommand::TYPE)->shouldBeCalled();
@@ -102,7 +98,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
     function it_creates_a_shipping_percentage_discount_action_with_a_given_discount_rate(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
-    ) {
+    ): void {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
         $promotionAction->setType(ShippingPercentageDiscountPromotionActionCommand::TYPE)->shouldBeCalled();

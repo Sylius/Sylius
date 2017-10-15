@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Model;
 
 /**
@@ -17,12 +19,12 @@ namespace Sylius\Component\Order\Model;
 interface OrderAwareInterface
 {
     /**
-     * @return OrderInterface
+     * @return OrderInterface|null
      */
-    public function getOrder();
+    public function getOrder(): ?OrderInterface;
 
     /**
-     * @param OrderInterface $order
+     * @param OrderInterface|null $order
      */
-    public function setOrder(OrderInterface $order = null);
+    public function setOrder(?OrderInterface $order): void;
 }

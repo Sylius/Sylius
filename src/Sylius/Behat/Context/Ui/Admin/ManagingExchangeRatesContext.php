@@ -9,12 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\ExchangeRate\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ExchangeRate\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ExchangeRate\UpdatePageInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Webmozart\Assert\Assert;
 
@@ -117,7 +120,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChangeRatioTo($ratio)
     {
-        $this->updatePage->changeRatio((float)$ratio);
+        $this->updatePage->changeRatio((float) $ratio);
     }
 
     /**
@@ -178,11 +181,11 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then the exchange rate with ratio :ratio between :sourceCurrency and :targetCurrency should appear in the store
      */
-    public function theExchangeRateBetweenAndShouldAppearInTheStore($ratio, $sourceCurrency, $targetCurrency)
+    public function theExchangeRateBetweenAndShouldAppearInTheStore($ratio, CurrencyInterface $sourceCurrency, CurrencyInterface $targetCurrency)
     {
         $this->indexPage->open();
 
-        $this->assertExchangeRateWithRatioIsOnTheList($ratio, $sourceCurrency, $targetCurrency);
+        $this->assertExchangeRateWithRatioIsOnTheList((float) $ratio, $sourceCurrency->getName(), $targetCurrency->getName());
     }
 
     /**
@@ -298,7 +301,7 @@ final class ManagingExchangeRatesContext implements Context
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([
-                'ratio' => $ratio,
+                'ratio' => (string) $ratio,
                 'sourceCurrency' => $sourceCurrencyName,
                 'targetCurrency' => $targetCurrencyName,
             ]),

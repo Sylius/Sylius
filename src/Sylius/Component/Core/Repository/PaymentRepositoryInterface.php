@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Repository;
 
 use Doctrine\ORM\QueryBuilder;
@@ -23,7 +25,7 @@ interface PaymentRepositoryInterface extends RepositoryInterface
     /**
      * @return QueryBuilder
      */
-    public function createListQueryBuilder();
+    public function createListQueryBuilder(): QueryBuilder;
 
     /**
      * @param mixed $paymentId
@@ -31,5 +33,5 @@ interface PaymentRepositoryInterface extends RepositoryInterface
      *
      * @return PaymentInterface|null
      */
-    public function findOneByOrderId($paymentId, $orderId);
+    public function findOneByOrderId($paymentId, $orderId): ?PaymentInterface;
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Currency\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
@@ -24,7 +26,7 @@ interface CurrencyInterface extends
     ResourceInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 }

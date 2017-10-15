@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
@@ -241,7 +243,6 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'exchange_rate/update_response', Response::HTTP_OK);
     }
-
 
     /**
      * @test

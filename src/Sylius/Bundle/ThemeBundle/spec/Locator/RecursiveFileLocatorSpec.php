@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Locator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
-use Sylius\Bundle\ThemeBundle\Locator\RecursiveFileLocator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -23,22 +24,17 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 final class RecursiveFileLocatorSpec extends ObjectBehavior
 {
-    function let(FinderFactoryInterface $finderFactory)
+    function let(FinderFactoryInterface $finderFactory): void
     {
         $this->beConstructedWith($finderFactory, ['/search/path/']);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(RecursiveFileLocator::class);
-    }
-
-    function it_implements_sylius_file_locator_interface()
+    function it_implements_sylius_file_locator_interface(): void
     {
         $this->shouldImplement(FileLocatorInterface::class);
     }
 
-    function it_searches_for_file(FinderFactoryInterface $finderFactory, Finder $finder, SplFileInfo $splFileInfo)
+    function it_searches_for_file(FinderFactoryInterface $finderFactory, Finder $finder, SplFileInfo $splFileInfo): void
     {
         $finderFactory->create()->willReturn($finder);
 
@@ -61,7 +57,7 @@ final class RecursiveFileLocatorSpec extends ObjectBehavior
         Finder $finder,
         SplFileInfo $firstSplFileInfo,
         SplFileInfo $secondSplFileInfo
-    ) {
+    ): void {
         $finderFactory->create()->willReturn($finder);
 
         $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
@@ -83,22 +79,20 @@ final class RecursiveFileLocatorSpec extends ObjectBehavior
         ]);
     }
 
-    function it_throws_an_exception_if_searching_for_file_with_empty_name()
+    function it_throws_an_exception_if_searching_for_file_with_empty_name(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('locateFileNamed', ['']);
-        $this->shouldThrow(\InvalidArgumentException::class)->during('locateFileNamed', [null]);
     }
 
-    function it_throws_an_exception_if_searching_for_files_with_empty_name()
+    function it_throws_an_exception_if_searching_for_files_with_empty_name(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('locateFilesNamed', ['']);
-        $this->shouldThrow(\InvalidArgumentException::class)->during('locateFilesNamed', [null]);
     }
 
     function it_throws_an_exception_if_there_is_no_file_that_matches_the_given_name(
         FinderFactoryInterface $finderFactory,
         Finder $finder
-    ) {
+    ): void {
         $finderFactory->create()->willReturn($finder);
 
         $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
@@ -114,7 +108,7 @@ final class RecursiveFileLocatorSpec extends ObjectBehavior
     function it_throws_an_exception_if_there_is_there_are_not_any_files_that_matches_the_given_name(
         FinderFactoryInterface $finderFactory,
         Finder $finder
-    ) {
+    ): void {
         $finderFactory->create()->willReturn($finder);
 
         $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
@@ -132,7 +126,7 @@ final class RecursiveFileLocatorSpec extends ObjectBehavior
         Finder $firstFinder,
         Finder $secondFinder,
         SplFileInfo $splFileInfo
-    ) {
+    ): void {
         $this->beConstructedWith($finderFactory, ['/search/path/first/', '/search/path/second/']);
 
         $finderFactory->create()->willReturn($firstFinder, $secondFinder);
@@ -162,7 +156,7 @@ final class RecursiveFileLocatorSpec extends ObjectBehavior
         Finder $firstFinder,
         Finder $secondFinder,
         SplFileInfo $splFileInfo
-    ) {
+    ): void {
         $this->beConstructedWith($finderFactory, ['/search/path/first/', '/search/path/second/']);
 
         $finderFactory->create()->willReturn($firstFinder, $secondFinder);

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration;
 
 /**
@@ -19,5 +21,5 @@ interface ConfigurationProviderInterface
     /**
      * @return array
      */
-    public function getConfigurations();
+    public function getConfigurations(): array;
 }

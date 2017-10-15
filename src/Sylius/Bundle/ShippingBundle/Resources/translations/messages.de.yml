@@ -36,7 +36,10 @@ sylius:
             configuration: Einstellung
             description: Beschreibung
             enabled: Aktiviert
+            match_all_category_requirement: Alle Einheiten müssen mit der Versandkategorie übereinstimmen
+            match_any_category_requirement: Mindestens eine Einheit muss mit der Versandkategorie übereinstimmen
+            match_none_category_requirement: Keine der Einheiten müssen mit der Versandkategorie übereinstimmen
             name: Name
+            position: Position
             tax_category: Steuerkategorie
             translations: Übersetzungen
-            position: Position

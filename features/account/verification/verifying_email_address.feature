@@ -51,3 +51,11 @@ Feature: Verifying account's email address
         Then I should be notified that my account has been created and the verification email has been sent
         And 2 emails should be sent to "ghastly@bespoke.com"
         But I should not be able to log in as "ghastly@bespoke.com" with "suitsarelife" password
+
+    @ui @email
+    Scenario: Do not send verification email when account verification on the channel is not required
+        Given "United States" channel has account verification disabled
+        When I register with email "ghastly@bespoke.com" and password "suitsarelife"
+        Then I should be notified that new account has been successfully created
+        And 1 emails should be sent to "ghastly@bespoke.com"
+        And I should be logged in

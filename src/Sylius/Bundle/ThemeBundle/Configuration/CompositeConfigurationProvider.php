@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration;
 
 /**
@@ -32,7 +34,7 @@ final class CompositeConfigurationProvider implements ConfigurationProviderInter
     /**
      * {@inheritdoc}
      */
-    public function getConfigurations()
+    public function getConfigurations(): array
     {
         $configurations = [];
         foreach ($this->configurationProviders as $configurationProvider) {

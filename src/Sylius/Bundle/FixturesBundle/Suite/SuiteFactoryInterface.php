@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Suite;
 
 /**
@@ -22,5 +24,5 @@ interface SuiteFactoryInterface
      *
      * @return SuiteInterface
      */
-    public function createSuite($name, array $configuration);
+    public function createSuite(string $name, array $configuration): SuiteInterface;
 }

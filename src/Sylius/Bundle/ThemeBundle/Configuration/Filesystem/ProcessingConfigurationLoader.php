@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProcessorInterface;
@@ -41,7 +43,7 @@ final class ProcessingConfigurationLoader implements ConfigurationLoaderInterfac
     /**
      * {@inheritdoc}
      */
-    public function load($identifier)
+    public function load(string $identifier): array
     {
         $rawConfiguration = $this->decoratedLoader->load($identifier);
 

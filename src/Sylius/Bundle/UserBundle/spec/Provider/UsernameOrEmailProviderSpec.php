@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\UserBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Provider\AbstractUserProvider;
-use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
@@ -27,32 +28,27 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  */
 final class UsernameOrEmailProviderSpec extends ObjectBehavior
 {
-    function let(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
+    function let(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer): void
     {
         $this->beConstructedWith(User::class, $userRepository, $canonicalizer);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UsernameOrEmailProvider::class);
-    }
-
-    function it_implements_symfony_user_provider_interface()
+    function it_implements_symfony_user_provider_interface(): void
     {
         $this->shouldImplement(UserProviderInterface::class);
     }
 
-    function it_should_extend_user_provider()
+    function it_should_extend_user_provider(): void
     {
         $this->shouldHaveType(AbstractUserProvider::class);
     }
 
-    function it_supports_sylius_user_model()
+    function it_supports_sylius_user_model(): void
     {
         $this->supportsClass(User::class)->shouldReturn(true);
     }
 
-    function it_does_not_support_other_classes()
+    function it_does_not_support_other_classes(): void
     {
         $this->supportsClass('Sylius\Component\User\Model\CustomerGroupInterface')->shouldReturn(false);
         $this->supportsClass('Acme\Fake\Class')->shouldReturn(false);
@@ -62,7 +58,7 @@ final class UsernameOrEmailProviderSpec extends ObjectBehavior
         UserRepositoryInterface $userRepository,
         CanonicalizerInterface $canonicalizer,
         UserInterface $user
-    ) {
+    ): void {
         $canonicalizer->canonicalize('testUser')->willReturn('testuser');
 
         $userRepository->findOneBy(['usernameCanonical' => 'testuser'])->willReturn($user);
@@ -73,7 +69,7 @@ final class UsernameOrEmailProviderSpec extends ObjectBehavior
     function it_throws_exception_when_there_is_no_user_with_given_username_or_email(
         UserRepositoryInterface $userRepository,
         CanonicalizerInterface $canonicalizer
-    ) {
+    ): void {
         $canonicalizer->canonicalize('testUser')->willReturn('testuser');
 
         $userRepository->findOneBy(['usernameCanonical' => 'testuser'])->willReturn(null);
@@ -86,7 +82,7 @@ final class UsernameOrEmailProviderSpec extends ObjectBehavior
         UserRepositoryInterface $userRepository,
         CanonicalizerInterface $canonicalizer,
         UserInterface $user
-    ) {
+    ): void {
         $canonicalizer->canonicalize('test@user.com')->willReturn('test@user.com');
 
         $userRepository->findOneByEmail('test@user.com')->willReturn($user);
@@ -94,7 +90,7 @@ final class UsernameOrEmailProviderSpec extends ObjectBehavior
         $this->loadUserByUsername('test@user.com')->shouldReturn($user);
     }
 
-    function it_refreshes_user(UserRepositoryInterface $userRepository, User $user, UserInterface $refreshedUser)
+    function it_refreshes_user(UserRepositoryInterface $userRepository, User $user, UserInterface $refreshedUser): void
     {
         $userRepository->find(1)->willReturn($refreshedUser);
 

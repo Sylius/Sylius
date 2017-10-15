@@ -34,6 +34,6 @@ sylius:
             description: Beskrivelse
             enabled: Aktivert
             name: Navn
+            position: Plassering
             tax_category: Skattekategori
             translations: Oversettelser
-            position: Plassering

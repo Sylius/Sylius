@@ -28,11 +28,14 @@ sylius:
             contact_email: ติดต่ออีเมล์
             currencies: สกุลเงิน
             currency_base: ฐานสกุลเงิน
+            account_verification_required: จำเป็นต้องยืนยันบัญชีหรือไม่?
             hostname: Hostname
             locale_default: ตำแหน่งที่ตั้งเริ่มต้น
             locales: ภาษาที่ใช้
             payment_methods: วิธีการชำระเงิน
             shipping_methods: วิธีการจัดส่ง
+            skipping_shipping_step_allowed: ข้ามขั้นตอนจัดส่งถ้ามีวิธีจัดส่งเพียงวิธีเดียว
+            skipping_payment_step_allowed: ข้ามขั้นตอนการชำระเงินถ้ามีวิธีการชำระเงินเพียงวิธีเดียว
             tax_calculation_strategy: กลยุทธ์การคำนวณภาษี
             tax_zone_default: เขตภาษีเริ่มต้น
             taxonomies: การจัดประเภท
@@ -107,6 +110,7 @@ sylius:
             on_hand: จำนวนสินค้าปัจจุบัน
             price: ราคา
             sku: SKU
+            shipping_required: จำเป็นต้องระบุการจัดส่งหรือไม่?
             weight: น้ำหนัก
             width: ความกว้าง
         attribute:

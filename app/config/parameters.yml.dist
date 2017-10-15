@@ -1,17 +1,31 @@
 parameters:
-    database_driver: pdo_mysql
-    database_host: 127.0.0.1
-    database_port: ~
-    database_name: sylius
-    database_user: root
-    database_password: ~
+    database_driver: "%env(SYLIUS_DATABASE_DRIVER)%"
+    database_host: "%env(SYLIUS_DATABASE_HOST)%"
+    database_port: "%env(SYLIUS_DATABASE_PORT)%"
+    database_name: "%env(SYLIUS_DATABASE_NAME)%"
+    database_user: "%env(SYLIUS_DATABASE_USER)%"
+    database_password: "%env(SYLIUS_DATABASE_PASSWORD)%"
     # You should uncomment this if you want use pdo_sqlite.
     # database_path: "%kernel.root_dir%/data.db3"
 
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: ~
-    mailer_password: ~
+    mailer_transport: "%env(SYLIUS_MAILER_TRANSPORT)%"
+    mailer_host: "%env(SYLIUS_MAILER_HOST)%"
+    mailer_user: "%env(SYLIUS_MAILER_USER)%"
+    mailer_password: "%env(SYLIUS_MAILER_PASSWORD)%"
 
-    secret: EDITME
-    locale: en_US
+    secret: "%env(SYLIUS_SECRET)"
+
+    # Fallback values (used if environmental variables are not set)
+    env(SYLIUS_DATABASE_DRIVER): pdo_mysql
+    env(SYLIUS_DATABASE_HOST): 127.0.0.1
+    env(SYLIUS_DATABASE_PORT): ~
+    env(SYLIUS_DATABASE_NAME): sylius
+    env(SYLIUS_DATABASE_USER): root
+    env(SYLIUS_DATABASE_PASSWORD): ~
+
+    env(SYLIUS_MAILER_TRANSPORT): smtp
+    env(SYLIUS_MAILER_HOST): 127.0.0.1
+    env(SYLIUS_MAILER_USER): ~
+    env(SYLIUS_MAILER_PASSWORD): ~
+
+    env(SYLIUS_SECRET): EDITME

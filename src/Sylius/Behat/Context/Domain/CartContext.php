@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
@@ -49,7 +51,7 @@ final class CartContext implements Context
      */
     public function theyAbandonedTheirCart(OrderInterface $cart, $amount, $time)
     {
-        $cart->setUpdatedAt(new \DateTime('-'.$amount.' '.$time));
+        $cart->setUpdatedAt(new \DateTime('-' . $amount . ' ' . $time));
         $this->orderManager->flush();
     }
 

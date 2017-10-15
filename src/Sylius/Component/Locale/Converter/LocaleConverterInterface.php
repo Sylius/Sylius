@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Locale\Converter;
 
 /**
@@ -18,21 +20,21 @@ interface LocaleConverterInterface
 {
     /**
      * @param string $name
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function convertNameToCode($name, $locale = 'en');
+    public function convertNameToCode(string $name, ?string $locale = null): string;
 
     /**
      * @param string $code
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function convertCodeToName($code, $locale = 'en');
+    public function convertCodeToName(string $code, ?string $locale = null): string;
 }

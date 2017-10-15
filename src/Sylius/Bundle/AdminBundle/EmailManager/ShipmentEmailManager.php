@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\EmailManager;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
@@ -37,7 +39,7 @@ final class ShipmentEmailManager implements ShipmentEmailManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function sendConfirmationEmail(ShipmentInterface $shipment)
+    public function sendConfirmationEmail(ShipmentInterface $shipment): void
     {
         /** @var OrderInterface $order */
         $order = $shipment->getOrder();

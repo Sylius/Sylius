@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Extension;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DriverProvider;
@@ -27,13 +29,17 @@ abstract class AbstractResourceExtension extends Extension
      * @param array $resources
      * @param ContainerBuilder $container
      */
-    protected function registerResources($applicationName, $driver, array $resources, ContainerBuilder $container)
-    {
+    protected function registerResources(
+        string $applicationName,
+        string $driver,
+        array $resources,
+        ContainerBuilder $container
+    ): void {
         $container->setParameter(sprintf('%s.driver.%s', $this->getAlias(), $driver), true);
         $container->setParameter(sprintf('%s.driver', $this->getAlias()), $driver);
 
         foreach ($resources as $resourceName => $resourceConfig) {
-            $alias = $applicationName.'.'.$resourceName;
+            $alias = $applicationName . '.' . $resourceName;
             $resourceConfig = array_merge(['driver' => $driver], $resourceConfig);
 
             $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];
@@ -45,7 +51,7 @@ abstract class AbstractResourceExtension extends Extension
             DriverProvider::get($metadata)->load($container, $metadata);
 
             if ($metadata->hasParameter('translation')) {
-                $alias = $alias.'_translation';
+                $alias .= '_translation';
                 $resourceConfig = array_merge(['driver' => $driver], $resourceConfig['translation']);
 
                 $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];

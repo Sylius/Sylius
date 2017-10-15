@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        email:
+            not_blank: Palun sisesta oma e-post.
+            invalid: E-posti aadress on vigane.
+            not_registered: Sellise E-posti aadressiga kasutajat ei eksisteeri. Palun registreeru esmalt.
+        plainPassword:
+            not_blank: Palun sisesta oma parool.
+            mismatch: Sisestatud paroolid ei kattu
+            wrong_current: Sisestatud parool erineb praegusest.
+        password:
+            min: Parool peab olema vähemalt {{ limit }} tähemärki pikk.
+            max: Parool ei tohi olla pikem kui {{ limit }} tähemärki pikk.

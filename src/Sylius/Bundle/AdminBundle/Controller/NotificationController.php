@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Controller;
 
 use GuzzleHttp\ClientInterface;
@@ -51,8 +53,12 @@ final class NotificationController
      * @param string $hubUri
      * @param string $environment
      */
-    public function __construct(ClientInterface $client, MessageFactory $messageFactory, $hubUri, $environment)
-    {
+    public function __construct(
+        ClientInterface $client,
+        MessageFactory $messageFactory,
+        string $hubUri,
+        string $environment
+    ) {
         $this->client = $client;
         $this->messageFactory = $messageFactory;
         $this->hubUri = new Uri($hubUri);
@@ -64,7 +70,7 @@ final class NotificationController
      *
      * @return JsonResponse
      */
-    public function getVersionAction(Request $request)
+    public function getVersionAction(Request $request): JsonResponse
     {
         $content = [
             'version' => Kernel::VERSION,

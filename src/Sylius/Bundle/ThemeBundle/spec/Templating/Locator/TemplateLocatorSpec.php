@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Templating\Locator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator;
 use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
@@ -24,17 +25,12 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
  */
 final class TemplateLocatorSpec extends ObjectBehavior
 {
-    function let(ResourceLocatorInterface $resourceLocator)
+    function let(ResourceLocatorInterface $resourceLocator): void
     {
         $this->beConstructedWith($resourceLocator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TemplateLocator::class);
-    }
-
-    function it_implements_template_locator_interface()
+    function it_implements_template_locator_interface(): void
     {
         $this->shouldImplement(TemplateLocatorInterface::class);
     }
@@ -43,7 +39,7 @@ final class TemplateLocatorSpec extends ObjectBehavior
         ResourceLocatorInterface $resourceLocator,
         TemplateReferenceInterface $template,
         ThemeInterface $theme
-    ) {
+    ): void {
         $template->getPath()->willReturn('@AcmeBundle/Resources/views/index.html.twig');
 
         $resourceLocator->locateResource('@AcmeBundle/Resources/views/index.html.twig', $theme)->willReturn('/acme/index.html.twig');
@@ -55,7 +51,7 @@ final class TemplateLocatorSpec extends ObjectBehavior
         ResourceLocatorInterface $resourceLocator,
         TemplateReferenceInterface $template,
         ThemeInterface $theme
-    ) {
+    ): void {
         $template->getPath()->willReturn('@AcmeBundle/Resources/views/index.html.twig');
 
         $resourceLocator->locateResource('@AcmeBundle/Resources/views/index.html.twig', $theme)->willThrow(ResourceNotFoundException::class);

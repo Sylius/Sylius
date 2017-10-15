@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\FixturesBundle\Loader;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Loader\FixtureLoaderInterface;
-use Sylius\Bundle\FixturesBundle\Loader\SuiteLoader;
 use Sylius\Bundle\FixturesBundle\Loader\SuiteLoaderInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
@@ -24,17 +24,12 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
  */
 final class SuiteLoaderSpec extends ObjectBehavior
 {
-    function let(FixtureLoaderInterface $fixtureLoader)
+    function let(FixtureLoaderInterface $fixtureLoader): void
     {
         $this->beConstructedWith($fixtureLoader);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType('Sylius\Bundle\FixturesBundle\Loader\SuiteLoader');
-    }
-
-    function it_implements_suite_loader_interface()
+    function it_implements_suite_loader_interface(): void
     {
         $this->shouldImplement(SuiteLoaderInterface::class);
     }
@@ -44,7 +39,7 @@ final class SuiteLoaderSpec extends ObjectBehavior
         SuiteInterface $suite,
         FixtureInterface $firstFixture,
         FixtureInterface $secondFixture
-    ) {
+    ): void {
         $suite->getFixtures()->will(function () use ($firstFixture, $secondFixture) {
             yield $firstFixture->getWrappedObject() => ['options 1'];
             yield $secondFixture->getWrappedObject() => ['options 2'];

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\StateMachine;
 
 use SM\StateMachine\StateMachine as BaseStateMachine;
@@ -21,7 +23,7 @@ final class StateMachine extends BaseStateMachine implements StateMachineInterfa
     /**
      * {@inheritdoc}
      */
-    public function getTransitionFromState($fromState)
+    public function getTransitionFromState(string $fromState): ?string
     {
         foreach ($this->getPossibleTransitions() as $transition) {
             $config = $this->config['transitions'][$transition];
@@ -36,7 +38,7 @@ final class StateMachine extends BaseStateMachine implements StateMachineInterfa
     /**
      * {@inheritdoc}
      */
-    public function getTransitionToState($toState)
+    public function getTransitionToState(string $toState): ?string
     {
         foreach ($this->getPossibleTransitions() as $transition) {
             $config = $this->config['transitions'][$transition];

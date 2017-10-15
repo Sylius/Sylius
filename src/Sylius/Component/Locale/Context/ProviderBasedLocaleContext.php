@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Locale\Context;
 
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
@@ -34,7 +36,7 @@ final class ProviderBasedLocaleContext implements LocaleContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): string
     {
         $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
         $localeCode = $this->localeProvider->getDefaultLocaleCode();

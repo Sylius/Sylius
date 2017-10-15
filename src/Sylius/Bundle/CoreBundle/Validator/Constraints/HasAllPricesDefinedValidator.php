@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -24,7 +26,7 @@ final class HasAllPricesDefinedValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($productVariant, Constraint $constraint)
+    public function validate($productVariant, Constraint $constraint): void
     {
         Assert::isInstanceOf($constraint, HasAllPricesDefined::class);
 

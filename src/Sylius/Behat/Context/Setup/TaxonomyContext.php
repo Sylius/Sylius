@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -136,7 +138,7 @@ final class TaxonomyContext implements Context
 
         /** @var ImageInterface $taxonImage */
         $taxonImage = $this->taxonImageFactory->createNew();
-        $taxonImage->setFile(new UploadedFile($filesPath.$imagePath, basename($imagePath)));
+        $taxonImage->setFile(new UploadedFile($filesPath . $imagePath, basename($imagePath)));
         $taxonImage->setType($imageType);
         $this->imageUploader->upload($taxonImage);
 

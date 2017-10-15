@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Application;
 
 use Symfony\Component\DependencyInjection\Container;
@@ -16,6 +18,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 /**
  * @mixin \Symfony\Component\HttpKernel\Bundle\Bundle
+ *
  * @see \Symfony\Component\HttpKernel\Bundle\Bundle
  *
  * Provides a common logic for Sylius Plugins.
@@ -37,7 +40,7 @@ trait SyliusPluginTrait
      *
      * @throws \LogicException
      */
-    public function getContainerExtension()
+    public function getContainerExtension(): ?ExtensionInterface
     {
         if (null === $this->containerExtension) {
             $extension = $this->createContainerExtension();
@@ -95,10 +98,10 @@ trait SyliusPluginTrait
      *
      * @return string
      */
-    protected function getContainerExtensionClass()
+    protected function getContainerExtensionClass(): string
     {
         $basename = preg_replace('/Plugin$/', '', $this->getName());
 
-        return $this->getNamespace().'\\DependencyInjection\\'.$basename.'Extension';
+        return $this->getNamespace() . '\\DependencyInjection\\' . $basename . 'Extension';
     }
 }

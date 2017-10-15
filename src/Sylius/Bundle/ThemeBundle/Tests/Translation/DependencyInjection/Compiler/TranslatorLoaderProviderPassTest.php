@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Tests\Translation\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
@@ -25,7 +27,7 @@ final class TranslatorLoaderProviderPassTest extends AbstractCompilerPassTestCas
     /**
      * @test
      */
-    public function it_adds_translation_loaders_to_sylius_loader_provider()
+    public function it_adds_translation_loaders_to_sylius_loader_provider(): void
     {
         $this->setDefinition('sylius.theme.translation.loader_provider', new Definition(null, [[]]));
 
@@ -45,7 +47,7 @@ final class TranslatorLoaderProviderPassTest extends AbstractCompilerPassTestCas
     /**
      * @test
      */
-    public function it_adds_translation_loaders_with_its_legacy_alias_to_sylius_loader_provider()
+    public function it_adds_translation_loaders_with_its_legacy_alias_to_sylius_loader_provider(): void
     {
         $this->setDefinition('sylius.theme.translation.loader_provider', new Definition(null, [[]]));
 
@@ -65,7 +67,7 @@ final class TranslatorLoaderProviderPassTest extends AbstractCompilerPassTestCas
     /**
      * @test
      */
-    public function it_adds_translation_loaders_using_only_the_first_tag_alias()
+    public function it_adds_translation_loaders_using_only_the_first_tag_alias(): void
     {
         $this->setDefinition('sylius.theme.translation.loader_provider', new Definition(null, [[]]));
 
@@ -86,7 +88,7 @@ final class TranslatorLoaderProviderPassTest extends AbstractCompilerPassTestCas
     /**
      * @test
      */
-    public function it_does_not_force_the_existence_of_translation_loaders()
+    public function it_does_not_force_the_existence_of_translation_loaders(): void
     {
         $this->setDefinition('sylius.theme.translation.loader_provider', new Definition(null, [[]]));
 

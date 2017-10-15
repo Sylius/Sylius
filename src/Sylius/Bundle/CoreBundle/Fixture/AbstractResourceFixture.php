@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -69,7 +71,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
     /**
      * @param array $options
      */
-    final public function load(array $options)
+    final public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -94,7 +96,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
     /**
      * {@inheritdoc}
      */
-    final public function getConfigTreeBuilder()
+    final public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
         $optionsNode = $treeBuilder->root($this->getName());
@@ -114,7 +116,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
     /**
      * @param ArrayNodeDefinition $resourceNode
      */
-    protected function configureResourceNode(ArrayNodeDefinition $resourceNode)
+    protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         // empty
     }

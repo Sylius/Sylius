@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Suite;
 
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
@@ -38,7 +40,7 @@ final class Suite implements SuiteInterface
     /**
      * @param string $name
      */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->name = $name;
         $this->fixtures = new SplPriorityQueue();
@@ -50,7 +52,7 @@ final class Suite implements SuiteInterface
      * @param array $options
      * @param int $priority
      */
-    public function addFixture(FixtureInterface $fixture, array $options, $priority = 0)
+    public function addFixture(FixtureInterface $fixture, array $options, int $priority = 0): void
     {
         $this->fixtures->insert(['fixture' => $fixture, 'options' => $options], $priority);
     }
@@ -60,7 +62,7 @@ final class Suite implements SuiteInterface
      * @param array $options
      * @param int $priority
      */
-    public function addListener(ListenerInterface $listener, array $options, $priority = 0)
+    public function addListener(ListenerInterface $listener, array $options, int $priority = 0): void
     {
         $this->listeners->insert(['listener' => $listener, 'options' => $options], $priority);
     }
@@ -68,7 +70,7 @@ final class Suite implements SuiteInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -76,7 +78,7 @@ final class Suite implements SuiteInterface
     /**
      * {@inheritdoc}
      */
-    public function getFixtures()
+    public function getFixtures(): iterable
     {
         $fixtures = clone $this->fixtures;
         foreach ($fixtures as $fixture) {
@@ -87,7 +89,7 @@ final class Suite implements SuiteInterface
     /**
      * {@inheritdoc}
      */
-    public function getListeners()
+    public function getListeners(): iterable
     {
         $listeners = clone $this->listeners;
         foreach ($listeners as $listener) {

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -23,7 +25,7 @@ final class CompositePromotionCouponEligibilityCheckerPass implements CompilerPa
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has('sylius.promotion_coupon_eligibility_checker')) {
             return;
@@ -35,7 +37,7 @@ final class CompositePromotionCouponEligibilityCheckerPass implements CompilerPa
                     return new Reference($id);
                 },
                 array_keys($container->findTaggedServiceIds('sylius.promotion_coupon_eligibility_checker'))
-            )
+            ),
         ]);
     }
 }

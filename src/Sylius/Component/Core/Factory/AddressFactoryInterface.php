@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Model\AddressInterface;
@@ -25,5 +27,5 @@ interface AddressFactoryInterface extends FactoryInterface
      *
      * @return AddressInterface
      */
-    public function createForCustomer(CustomerInterface $customer);
+    public function createForCustomer(CustomerInterface $customer): AddressInterface;
 }

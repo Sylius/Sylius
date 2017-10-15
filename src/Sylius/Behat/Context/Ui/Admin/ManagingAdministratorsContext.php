@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -72,8 +74,8 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Given /^I want to edit (this administrator)$/
      * @Given /^I am editing (my) details$/
+     * @When /^I want to edit (this administrator)$/
      */
     public function iWantToEditThisAdministrator(AdminUserInterface $adminUser)
     {
@@ -98,9 +100,9 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I change its name as :username
+     * @When I change its name to :username
      */
-    public function iChangeItsNameAs($username)
+    public function iChangeItsNameTo($username)
     {
         $this->updatePage->changeUsername($username);
     }
@@ -115,17 +117,17 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I change its email as :email
+     * @When I change its email to :email
      */
-    public function iChangeItsEmailAs($email)
+    public function iChangeItsEmailTo($email)
     {
         $this->updatePage->changeEmail($email);
     }
 
     /**
-     * @When I specify its locale to :localeCode
+     * @When I specify its locale as :localeCode
      */
-    public function iSpecifyItsLocaleTo($localeCode)
+    public function iSpecifyItsLocaleAs($localeCode)
     {
         $this->createPage->specifyLocale($localeCode);
     }
@@ -149,9 +151,9 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I change its password as :password
+     * @When I change its password to :password
      */
-    public function iChangeItsPasswordAs($password)
+    public function iChangeItsPasswordTo($password)
     {
         $this->updatePage->changePassword($password);
     }

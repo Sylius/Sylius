@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
@@ -23,7 +25,7 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
     /**
      * {@inheritdoc}
      */
-    public function findActive()
+    public function findActive(): array
     {
         return $this->filterByActive($this->createQueryBuilder('o'))
             ->addOrderBy('o.priority', 'desc')
@@ -35,18 +37,18 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
     /**
      * {@inheritdoc}
      */
-    public function findByName($name)
+    public function findByName(string $name): array
     {
         return $this->findBy(['name' => $name]);
     }
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param \DateTime|null $date
+     * @param \DateTimeInterface|null $date
      *
      * @return QueryBuilder
      */
-    protected function filterByActive(QueryBuilder $queryBuilder, \DateTime $date = null)
+    protected function filterByActive(QueryBuilder $queryBuilder, ?\DateTimeInterface $date = null): QueryBuilder
     {
         return $queryBuilder
             ->andWhere('o.startsAt IS NULL OR o.startsAt < :date')

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Listener;
 
 /**
@@ -20,7 +22,7 @@ final class ListenerNotFoundException extends \InvalidArgumentException
      * @param string $name
      * @param \Exception|null $previous
      */
-    public function __construct($name, \Exception $previous = null)
+    public function __construct(string $name, ?\Exception $previous = null)
     {
         parent::__construct(sprintf('Listener with name "%s" could not be found!', $name), 0, $previous);
     }

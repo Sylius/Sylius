@@ -16,4 +16,4 @@ Feature: Adding a new exchange rate
         And I choose "British Pound" as the target currency
         And I add it
         Then I should be notified that it has been successfully created
-        And the exchange rate with ratio 1.20 between "US Dollar" and "British Pound" should appear in the store
+        And the exchange rate with ratio 1.20000 between "US Dollar" and "British Pound" should appear in the store

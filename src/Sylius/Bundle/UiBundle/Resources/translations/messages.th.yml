@@ -808,7 +808,6 @@ sylius:
         there_are_no_variants_to_display: 'ไม่มีรายการสำหรับแสดง'
         there_are_no_zones_configured: 'ไม่มีรายการโซน'
         there_is_no_main_taxon_for_this_product: 'ไม่มีการจัดประเภทสำหรับผลิตภัณฑ์นี้'
-        this_customer_has_not_placed_any_orders_yet: 'ลูกค้ารายนี้ไม่มีคำสั่งซื้อ'
         this_months_statistics: 'สถิติเดือนนี้'
         this_product_has_no_attributes_defined: 'ผลิตภัณฑ์นี้ไม่ได้กำหนดคุณสมบัติไว้'
         title: 'หัวข้อ'

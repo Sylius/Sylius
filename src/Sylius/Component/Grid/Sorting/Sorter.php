@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Sorting;
 
 use Sylius\Component\Grid\Data\DataSourceInterface;
@@ -23,7 +25,7 @@ final class Sorter implements SorterInterface
     /**
      * {@inheritdoc}
      */
-    public function sort(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters)
+    public function sort(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters): void
     {
         $expressionBuilder = $dataSource->getExpressionBuilder();
 

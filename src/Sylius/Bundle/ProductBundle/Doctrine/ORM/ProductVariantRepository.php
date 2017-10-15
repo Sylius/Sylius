@@ -9,10 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 
 /**
@@ -23,7 +27,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     /**
      * {@inheritdoc}
      */
-    public function createQueryBuilderByProductId($locale, $productId)
+    public function createQueryBuilderByProductId(string $locale, $productId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation')
@@ -37,7 +41,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     /**
      * {@inheritdoc}
      */
-    public function createQueryBuilderByProductCode($locale, $productCode)
+    public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation')
@@ -52,7 +56,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     /**
      * {@inheritdoc}
      */
-    public function findByName($name, $locale)
+    public function findByName(string $name, string $locale): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation')
@@ -68,7 +72,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     /**
      * {@inheritdoc}
      */
-    public function findByNameAndProduct($name, $locale, ProductInterface $product)
+    public function findByNameAndProduct(string $name, string $locale, ProductInterface $product): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation')
@@ -86,7 +90,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     /**
      * {@inheritdoc}
      */
-    public function findOneByCodeAndProductCode($code, $productCode)
+    public function findOneByCodeAndProductCode(string $code, string $productCode): ?ProductVariantInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.product', 'product')
@@ -102,14 +106,14 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     /**
      * {@inheritdoc}
      */
-    public function findByCodeAndProductCode($code, $productCode)
+    public function findByCodesAndProductCode(array $codes, string $productCode): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.product', 'product')
             ->andWhere('product.code = :productCode')
-            ->andWhere('o.code = :code')
+            ->andWhere('o.code IN (:codes)')
             ->setParameter('productCode', $productCode)
-            ->setParameter('code', $code)
+            ->setParameter('codes', $codes)
             ->getQuery()
             ->getResult()
         ;
@@ -118,7 +122,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     /**
      * {@inheritdoc}
      */
-    public function findOneByIdAndProductId($id, $productId)
+    public function findOneByIdAndProductId($id, $productId): ?ProductVariantInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.product = :productId')
@@ -133,7 +137,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     /**
      * {@inheritdoc}
      */
-    public function findByPhraseAndProductCode($phrase, $locale, $productCode)
+    public function findByPhraseAndProductCode(string $phrase, string $locale, string $productCode): array
     {
         $expr = $this->getEntityManager()->getExpressionBuilder();
 
@@ -145,7 +149,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
                 'translation.name LIKE :phrase',
                 'o.code LIKE :phrase'
             ))
-            ->setParameter('phrase', '%'.$phrase.'%')
+            ->setParameter('phrase', '%' . $phrase . '%')
             ->setParameter('locale', $locale)
             ->setParameter('productCode', $productCode)
             ->getQuery()

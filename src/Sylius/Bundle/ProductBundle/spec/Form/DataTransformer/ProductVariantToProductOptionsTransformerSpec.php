@@ -9,46 +9,43 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ProductBundle\Form\DataTransformer;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ProductBundle\Form\DataTransformer\ProductVariantToProductOptionsTransformer;
-use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
 {
-    function let(ProductInterface $variable)
+    function let(ProductInterface $variable): void
     {
         $this->beConstructedWith($variable);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProductVariantToProductOptionsTransformer::class);
-    }
-
-    function it_is_a_data_transformer()
+    function it_is_a_data_transformer(): void
     {
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
-    function it_transforms_null_to_array()
+    function it_transforms_null_to_array(): void
     {
         $this->transform(null)->shouldReturn([]);
     }
 
-    function it_does_not_transform_not_supported_data_and_throw_exception()
+    function it_does_not_transform_not_supported_data_and_throw_exception(): void
     {
         $this->shouldThrow(UnexpectedTypeException::class)->duringTransform([]);
     }
 
-    function it_transforms_variant_into_variant_options(ProductVariantInterface $variant, Collection $optionValues)
+    function it_transforms_variant_into_variant_options(ProductVariantInterface $variant, Collection $optionValues): void
     {
         $variant->getOptionValues()->willReturn($optionValues);
         $optionValues->toArray()->willReturn([]);
@@ -56,17 +53,17 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
         $this->transform($variant)->shouldReturn([]);
     }
 
-    function it_reverse_transforms_null_into_null()
+    function it_reverse_transforms_null_into_null(): void
     {
         $this->reverseTransform(null)->shouldReturn(null);
     }
 
-    function it_reverse_transforms_empty_string_into_null()
+    function it_reverse_transforms_empty_string_into_null(): void
     {
         $this->reverseTransform('')->shouldReturn(null);
     }
 
-    function it_does_not_reverse_transform_not_supported_data_and_throw_exception()
+    function it_does_not_reverse_transform_not_supported_data_and_throw_exception(): void
     {
         $this
             ->shouldThrow(UnexpectedTypeException::class)
@@ -77,8 +74,8 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
     function it_throws_exception_when_trying_to_reverse_transform_variable_without_variants(
         ProductInterface $variable,
         ProductOptionValueInterface $optionValue
-    ) {
-        $variable->getVariants()->willReturn([]);
+    ): void {
+        $variable->getVariants()->willReturn(new ArrayCollection([]));
         $variable->getCode()->willReturn('example');
 
         $this
@@ -90,8 +87,8 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
         ProductInterface $variable,
         ProductVariantInterface $variant,
         ProductOptionValueInterface $optionValue
-    ) {
-        $variable->getVariants()->willReturn([$variant]);
+    ): void {
+        $variable->getVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
 
         $variant->hasOptionValue($optionValue)->willReturn(true);
 
@@ -102,8 +99,8 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
         ProductInterface $variable,
         ProductVariantInterface $variant,
         ProductOptionValueInterface $optionValue
-    ) {
-        $variable->getVariants()->willReturn([$variant]);
+    ): void {
+        $variable->getVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
         $variable->getCode()->willReturn('example');
 
         $variant->hasOptionValue($optionValue)->willReturn(false);
@@ -116,8 +113,8 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
     function it_throws_exception_when_trying_to_reverse_transform_variable_with_variants_if_options_are_missing(
         ProductInterface $variable,
         ProductVariantInterface $variant
-    ) {
-        $variable->getVariants()->willReturn([$variant]);
+    ): void {
+        $variable->getVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
         $variable->getCode()->willReturn('example');
 
         $this

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
@@ -41,7 +43,7 @@ final class ZoneCodeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(new ReversedTransformer(new ResourceToIdentifierTransformer($this->zoneRepository, 'code')));
     }
@@ -49,16 +51,17 @@ final class ZoneCodeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
                 'choice_filter' => null,
-                'choices' => function (Options $options) {
-                    $zones =  $this->zoneRepository->findAll();
+                'choices' => function (Options $options): iterable {
+                    $zones = $this->zoneRepository->findAll();
                     if ($options['choice_filter']) {
                         $zones = array_filter($zones, $options['choice_filter']);
                     }
+
                     return $zones;
                 },
                 'choice_value' => 'code',
@@ -73,7 +76,7 @@ final class ZoneCodeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return ChoiceType::class;
     }
@@ -81,7 +84,7 @@ final class ZoneCodeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_zone_code_choice';
     }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Repository;
 
 use Doctrine\ORM\QueryBuilder;
@@ -24,5 +26,5 @@ interface ProductVariantRepositoryInterface extends BaseProductVariantRepository
      *
      * @return QueryBuilder
      */
-    public function createInventoryListQueryBuilder($locale);
+    public function createInventoryListQueryBuilder(string $locale): QueryBuilder;
 }

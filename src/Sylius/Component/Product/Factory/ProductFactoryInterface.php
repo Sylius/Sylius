@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Factory;
 
 use Sylius\Component\Product\Model\ProductInterface;
@@ -22,5 +24,5 @@ interface ProductFactoryInterface extends TranslatableFactoryInterface
     /**
      * @return ProductInterface
      */
-    public function createWithVariant();
+    public function createWithVariant(): ProductInterface;
 }

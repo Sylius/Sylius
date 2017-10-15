@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Dashboard;
 
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -23,5 +25,5 @@ interface DashboardStatisticsProviderInterface
      *
      * @return DashboardStatistics
      */
-    public function getStatisticsForChannel(ChannelInterface $channel);
+    public function getStatisticsForChannel(ChannelInterface $channel): DashboardStatistics;
 }

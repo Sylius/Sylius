@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\Controller;
 
 use Sylius\Bundle\ShopBundle\Locale\LocaleSwitcherInterface;
@@ -66,7 +68,7 @@ final class LocaleSwitchController
     /**
      * @return Response
      */
-    public function renderAction()
+    public function renderAction(): Response
     {
         return $this->templatingEngine->renderResponse('@SyliusShop/Menu/_localeSwitch.html.twig', [
             'active' => $this->localeContext->getLocaleCode(),
@@ -76,11 +78,11 @@ final class LocaleSwitchController
 
     /**
      * @param Request $request
-     * @param string $code
+     * @param string|null $code
      *
      * @return Response
      */
-    public function switchAction(Request $request, $code = null)
+    public function switchAction(Request $request, ?string $code = null): Response
     {
         if (null === $code) {
             $code = $this->localeProvider->getDefaultLocaleCode();

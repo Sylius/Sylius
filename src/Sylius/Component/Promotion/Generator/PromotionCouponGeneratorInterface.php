@@ -9,8 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Generator;
 
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
@@ -22,7 +25,7 @@ interface PromotionCouponGeneratorInterface
      * @param PromotionInterface $promotion
      * @param PromotionCouponGeneratorInstructionInterface $instruction
      *
-     * @return array of generated coupons with coupon code as a key
+     * @return array|PromotionCouponInterface[]
      */
-    public function generate(PromotionInterface $promotion, PromotionCouponGeneratorInstructionInterface $instruction);
+    public function generate(PromotionInterface $promotion, PromotionCouponGeneratorInstructionInterface $instruction): array;
 }

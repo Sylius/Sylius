@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -25,11 +27,11 @@ final class TemplatingTest extends WebTestCase
      * @param string $templateName
      * @param string $contents
      */
-    public function it_renders_bundle_templates($templateName, $contents)
+    public function it_renders_bundle_templates($templateName, $contents): void
     {
         $client = self::createClient();
 
-        $crawler = $client->request('GET', '/template/'.$templateName);
+        $crawler = $client->request('GET', '/template/' . $templateName);
         $this->assertEquals($contents, trim($crawler->text()));
     }
 
@@ -54,11 +56,11 @@ final class TemplatingTest extends WebTestCase
      * @param string $templateName
      * @param string $contents
      */
-    public function it_renders_bundle_templates_using_namespaced_paths($templateName, $contents)
+    public function it_renders_bundle_templates_using_namespaced_paths($templateName, $contents): void
     {
         $client = self::createClient();
 
-        $crawler = $client->request('GET', '/template/'.$templateName);
+        $crawler = $client->request('GET', '/template/' . $templateName);
         $this->assertEquals($contents, trim($crawler->text()));
     }
 
@@ -83,11 +85,11 @@ final class TemplatingTest extends WebTestCase
      * @param string $templateName
      * @param string $contents
      */
-    public function it_renders_application_templates($templateName, $contents)
+    public function it_renders_application_templates($templateName, $contents): void
     {
         $client = self::createClient();
 
-        $crawler = $client->request('GET', '/template/'.$templateName);
+        $crawler = $client->request('GET', '/template/' . $templateName);
         $this->assertEquals($contents, trim($crawler->text()));
     }
 
@@ -110,11 +112,11 @@ final class TemplatingTest extends WebTestCase
      * @param string $templateName
      * @param string $contents
      */
-    public function it_renders_application_templates_using_namespaced_paths($templateName, $contents)
+    public function it_renders_application_templates_using_namespaced_paths($templateName, $contents): void
     {
         $client = self::createClient();
 
-        $crawler = $client->request('GET', '/template/'.$templateName);
+        $crawler = $client->request('GET', '/template/' . $templateName);
         $this->assertEquals($contents, trim($crawler->text()));
     }
 

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Action;
 
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -23,11 +25,11 @@ interface PromotionApplicatorInterface
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface $promotion
      */
-    public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion);
+    public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion): void;
 
     /**
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface $promotion
      */
-    public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion);
+    public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion): void;
 }

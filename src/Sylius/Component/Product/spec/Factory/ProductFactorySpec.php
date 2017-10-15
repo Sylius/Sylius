@@ -9,14 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Product\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Product\Factory\ProductFactory;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -27,21 +28,16 @@ final class ProductFactorySpec extends ObjectBehavior
     function let(
         FactoryInterface $factory,
         FactoryInterface $variantFactory
-    ) {
+    ): void {
         $this->beConstructedWith($factory, $variantFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProductFactory::class);
-    }
-
-    function it_implements_product_factory_interface()
+    function it_implements_product_factory_interface(): void
     {
         $this->shouldImplement(ProductFactoryInterface::class);
     }
 
-    function it_creates_new_product(FactoryInterface $factory, ProductInterface $product)
+    function it_creates_new_product(FactoryInterface $factory, ProductInterface $product): void
     {
         $factory->createNew()->willReturn($product);
 
@@ -53,7 +49,7 @@ final class ProductFactorySpec extends ObjectBehavior
         FactoryInterface $variantFactory,
         ProductInterface $product,
         ProductVariantInterface $variant
-    ) {
+    ): void {
         $variantFactory->createNew()->willReturn($variant);
 
         $factory->createNew()->willReturn($product);

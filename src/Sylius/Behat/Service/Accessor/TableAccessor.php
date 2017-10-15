@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Sylius\Behat\Service\Accessor;
 
 use Behat\Mink\Element\NodeElement;
@@ -138,16 +149,19 @@ final class TableAccessor implements TableAccessorInterface
                 return false;
             }
 
+            $searchedValue = (string) $searchedValue;
             $searchedValue = trim($searchedValue);
 
             if (0 === strpos($searchedValue, '%') && (strlen($searchedValue) - 1) === strrpos($searchedValue, '%')) {
                 $searchedValue = substr($searchedValue, 1, -2);
             }
 
-            return $this->containsSearchedValue($columns[$index]->getText(), $searchedValue);
+            if (!$this->containsSearchedValue($columns[$index]->getText(), $searchedValue)) {
+                return false;
+            }
         }
 
-        return false;
+        return true;
     }
 
     /**

@@ -35,3 +35,5 @@ the ``sylius.taxon.update`` key:
     sylius:
         taxon:
             update: This category has been successfully edited.
+
+.. include:: /customization/plugins.rst.inc

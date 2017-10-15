@@ -9,7 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Model;
+
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -17,41 +21,41 @@ namespace Sylius\Component\Resource\Model;
 interface TranslatableInterface
 {
     /**
-     * @return TranslationInterface[]
+     * @return Collection|TranslationInterface[]
      */
-    public function getTranslations();
+    public function getTranslations(): Collection;
 
     /**
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return TranslationInterface
      */
-    public function getTranslation($locale = null);
+    public function getTranslation(?string $locale = null): TranslationInterface;
 
     /**
      * @param TranslationInterface $translation
      *
      * @return bool
      */
-    public function hasTranslation(TranslationInterface $translation);
+    public function hasTranslation(TranslationInterface $translation): bool;
 
     /**
      * @param TranslationInterface $translation
      */
-    public function addTranslation(TranslationInterface $translation);
+    public function addTranslation(TranslationInterface $translation): void;
 
     /**
      * @param TranslationInterface $translation
      */
-    public function removeTranslation(TranslationInterface $translation);
+    public function removeTranslation(TranslationInterface $translation): void;
 
     /**
      * @param string $locale
      */
-    public function setCurrentLocale($locale);
+    public function setCurrentLocale(string $locale): void;
 
     /**
      * @param string $locale
      */
-    public function setFallbackLocale($locale);
+    public function setFallbackLocale(string $locale): void;
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Loader;
 
 use Sylius\Bundle\FixturesBundle\Listener\AfterSuiteListenerInterface;
@@ -37,7 +39,7 @@ final class HookableSuiteLoader implements SuiteLoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load(SuiteInterface $suite)
+    public function load(SuiteInterface $suite): void
     {
         $suiteEvent = new SuiteEvent($suite);
 
@@ -52,7 +54,7 @@ final class HookableSuiteLoader implements SuiteLoaderInterface
      * @param SuiteInterface $suite
      * @param SuiteEvent $suiteEvent
      */
-    private function executeBeforeSuiteListeners(SuiteInterface $suite, SuiteEvent $suiteEvent)
+    private function executeBeforeSuiteListeners(SuiteInterface $suite, SuiteEvent $suiteEvent): void
     {
         foreach ($suite->getListeners() as $listener => $listenerOptions) {
             if (!$listener instanceof BeforeSuiteListenerInterface) {
@@ -67,7 +69,7 @@ final class HookableSuiteLoader implements SuiteLoaderInterface
      * @param SuiteInterface $suite
      * @param SuiteEvent $suiteEvent
      */
-    private function executeAfterSuiteListeners(SuiteInterface $suite, SuiteEvent $suiteEvent)
+    private function executeAfterSuiteListeners(SuiteInterface $suite, SuiteEvent $suiteEvent): void
     {
         foreach ($suite->getListeners() as $listener => $listenerOptions) {
             if (!$listener instanceof AfterSuiteListenerInterface) {

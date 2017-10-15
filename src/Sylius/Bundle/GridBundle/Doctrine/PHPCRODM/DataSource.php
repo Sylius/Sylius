@@ -9,12 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
 use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineODMPhpcrAdapter;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Grid\Data\DataSourceInterface;
+use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Parameters;
 
 final class DataSource implements DataSourceInterface
@@ -25,15 +28,15 @@ final class DataSource implements DataSourceInterface
     private $queryBuilder;
 
     /**
-     * @var ExpressionBuilder
+     * @var ExpressionBuilderInterface
      */
     private $expressionBuilder;
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param ExpressionBuilder $expressionBuilder
+     * @param ExpressionBuilderInterface|null $expressionBuilder
      */
-    public function __construct(QueryBuilder $queryBuilder, ExpressionBuilder $expressionBuilder = null)
+    public function __construct(QueryBuilder $queryBuilder, ?ExpressionBuilderInterface $expressionBuilder = null)
     {
         $this->queryBuilder = $queryBuilder;
         $this->expressionBuilder = $expressionBuilder ?: new ExpressionBuilder();
@@ -42,14 +45,16 @@ final class DataSource implements DataSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function restrict($expression, $condition = DataSourceInterface::CONDITION_AND)
+    public function restrict($expression, string $condition = DataSourceInterface::CONDITION_AND): void
     {
         switch ($condition) {
             case DataSourceInterface::CONDITION_AND:
                 $parentNode = $this->queryBuilder->andWhere();
+
                 break;
             case DataSourceInterface::CONDITION_OR:
                 $parentNode = $this->queryBuilder->orWhere();
+
                 break;
             default:
                 throw new \RuntimeException(sprintf(
@@ -65,7 +70,7 @@ final class DataSource implements DataSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function getExpressionBuilder()
+    public function getExpressionBuilder(): ExpressionBuilderInterface
     {
         return $this->expressionBuilder;
     }

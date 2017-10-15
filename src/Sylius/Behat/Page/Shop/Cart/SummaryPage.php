@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Cart;
 
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -198,7 +200,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     }
 
     /**
-     * {@inheritdoc]
+     * {@inheritdoc}
      */
     public function hasProductOutOfStockValidationMessage(ProductInterface $product)
     {

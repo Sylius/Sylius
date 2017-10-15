@@ -37,6 +37,6 @@ sylius:
             description: Beskrivning
             enabled: Aktiverad
             name: Namn
+            position: Position
             tax_category: Momskategori
             translations: Översättningar
-            position: Position

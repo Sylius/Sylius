@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -299,7 +301,7 @@ final class ManagingPaymentMethodsContext implements Context
     public function iShouldBeNotifiedThatIHaveToSpecifyPaypal($element)
     {
         Assert::same(
-            $this->createPage->getValidationMessage('paypal_'.$element),
+            $this->createPage->getValidationMessage('paypal_' . $element),
             sprintf('Please enter paypal %s.', $element)
         );
     }

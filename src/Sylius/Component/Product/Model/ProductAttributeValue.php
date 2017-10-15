@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Attribute\Model\AttributeValue as BaseAttributeValue;
@@ -21,7 +23,7 @@ class ProductAttributeValue extends BaseAttributeValue implements ProductAttribu
     /**
      * {@inheritdoc}
      */
-    public function getProduct()
+    public function getProduct(): ?ProductInterface
     {
         return parent::getSubject();
     }
@@ -29,7 +31,7 @@ class ProductAttributeValue extends BaseAttributeValue implements ProductAttribu
     /**
      * {@inheritdoc}
      */
-    public function setProduct(ProductInterface $product = null)
+    public function setProduct(?ProductInterface $product): void
     {
         parent::setSubject($product);
     }

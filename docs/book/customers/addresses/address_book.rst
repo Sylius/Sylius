@@ -65,5 +65,5 @@ Learn more
 ----------
 
 * :doc:`Customer & ShopUser Concept Documentation </book/customers/customer_and_shopuser>`
-* :doc:`Addressing - Component Documentation </components/Addressing/index>`
-* :doc:`Addressing - Bundle Documentation </bundles/SyliusAddressingBundle/index>`
+* :doc:`Addressing - Component Documentation </components_and_bundles/components/Addressing/index>`
+* :doc:`Addressing - Bundle Documentation </components_and_bundles/bundles/SyliusAddressingBundle/index>`

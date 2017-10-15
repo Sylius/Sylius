@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use Sylius\Component\Product\Model\ProductInterface;
@@ -39,7 +41,7 @@ class VariantResolverHelper extends Helper
      *
      * @return ProductVariantInterface
      */
-    public function resolveVariant(ProductInterface $product)
+    public function resolveVariant(ProductInterface $product): ProductVariantInterface
     {
         return $this->productVariantResolver->getVariant($product);
     }
@@ -47,7 +49,7 @@ class VariantResolverHelper extends Helper
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_resolve_variant';
     }

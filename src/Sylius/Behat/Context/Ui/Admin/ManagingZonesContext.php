@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -362,9 +364,11 @@ final class ManagingZonesContext implements Context
     public function iCanNotAddAZoneMember($name)
     {
         $member = null;
+
         try {
             $member = $this->createPage->chooseMember($name);
-        } catch (ElementNotFoundException $exception) {}
+        } catch (ElementNotFoundException $exception) {
+        }
         Assert::isEmpty($member);
     }
 }

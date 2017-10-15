@@ -11,6 +11,7 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.taxon
 
+                - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.taxonomy

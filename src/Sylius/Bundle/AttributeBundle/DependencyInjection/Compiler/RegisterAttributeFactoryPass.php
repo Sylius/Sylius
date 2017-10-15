@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler;
 
 use Sylius\Component\Attribute\Factory\AttributeFactory;
@@ -24,7 +26,7 @@ final class RegisterAttributeFactoryPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('sylius.registry.attribute_type')) {
             return;

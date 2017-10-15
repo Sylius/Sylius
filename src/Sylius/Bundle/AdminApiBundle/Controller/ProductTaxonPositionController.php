@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -50,9 +52,9 @@ final class ProductTaxonPositionController
     /**
      * @param Request $request
      *
-     * @return Response
+     * @return JsonResponse
      */
-    public function updatePositionsAction(Request $request)
+    public function updatePositionsAction(Request $request): JsonResponse
     {
         $productsPositions = $request->request->get('productsPositions');
 

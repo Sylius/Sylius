@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Account\Order;
 
 use Behat\Mink\Session;
@@ -197,7 +199,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return
             (stripos($elementText, $customerName) !== false) &&
             (stripos($elementText, $street) !== false) &&
-            (stripos($elementText, $city.', '.$postcode) !== false) &&
+            (stripos($elementText, $city . ', ' . $postcode) !== false) &&
             (stripos($elementText, $countryName) !== false)
         ;
     }

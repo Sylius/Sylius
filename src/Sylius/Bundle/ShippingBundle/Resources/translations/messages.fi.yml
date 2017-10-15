@@ -3,6 +3,14 @@
 
 sylius:
     form:
+        shipment:
+            states:
+                checkout: Kassa
+                pending: Odottaa
+                cancelled: Peruutettu
+        shipping_category:
+            description: Kuvaus
         shipping_method:
             channels: Kanavat
+            description: Kuvaus
             translations: Käännökset

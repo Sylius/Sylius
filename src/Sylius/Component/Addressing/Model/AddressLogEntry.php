@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Model;
 
 use Sylius\Component\Resource\Model\ResourceLogEntry;
@@ -16,6 +18,6 @@ use Sylius\Component\Resource\Model\ResourceLogEntry;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class AddressLogEntry extends ResourceLogEntry
+class AddressLogEntry extends ResourceLogEntry
 {
 }

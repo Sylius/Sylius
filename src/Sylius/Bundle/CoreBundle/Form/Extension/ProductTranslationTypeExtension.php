@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType;
@@ -24,7 +26,7 @@ final class ProductTranslationTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('shortDescription', TextareaType::class, [
@@ -37,7 +39,7 @@ final class ProductTranslationTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return ProductTranslationType::class;
     }

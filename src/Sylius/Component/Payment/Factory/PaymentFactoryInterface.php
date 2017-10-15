@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Payment\Factory;
 
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -25,5 +27,5 @@ interface PaymentFactoryInterface extends FactoryInterface
      *
      * @return PaymentInterface
      */
-    public function createWithAmountAndCurrencyCode($amount, $currency);
+    public function createWithAmountAndCurrencyCode(int $amount, string $currency): PaymentInterface;
 }

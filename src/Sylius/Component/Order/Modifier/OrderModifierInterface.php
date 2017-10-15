@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Modifier;
 
 use Sylius\Component\Order\Model\OrderInterface;
@@ -23,11 +25,11 @@ interface OrderModifierInterface
      * @param OrderInterface $cart
      * @param OrderItemInterface $cartItem
      */
-    public function addToOrder(OrderInterface $cart, OrderItemInterface $cartItem);
+    public function addToOrder(OrderInterface $cart, OrderItemInterface $cartItem): void;
 
     /**
      * @param OrderInterface $cart
      * @param OrderItemInterface $item
      */
-    public function removeFromOrder(OrderInterface $cart, OrderItemInterface $item);
+    public function removeFromOrder(OrderInterface $cart, OrderItemInterface $item): void;
 }

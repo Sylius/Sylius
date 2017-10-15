@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Command;
 
 use Sylius\Bundle\ThemeBundle\Asset\Installer\AssetsInstallerInterface;
@@ -30,7 +32,7 @@ final class AssetsInstallCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:theme:assets:install')
@@ -49,7 +51,7 @@ final class AssetsInstallCommand extends ContainerAwareCommand
      *
      * @throws \InvalidArgumentException When the target directory does not exist or symlink cannot be used
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $assetsInstaller = $this->getContainer()->get('sylius.theme.asset.assets_installer');
         if ($assetsInstaller instanceof OutputAwareInterface) {
@@ -72,7 +74,7 @@ final class AssetsInstallCommand extends ContainerAwareCommand
     /**
      * @return string
      */
-    private function getHelpMessage()
+    private function getHelpMessage(): string
     {
         return <<<EOT
 The <info>%command.name%</info> command installs theme assets into a given

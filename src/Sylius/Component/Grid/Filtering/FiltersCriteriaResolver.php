@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Filtering;
 
 use Sylius\Component\Grid\Definition\Filter;
@@ -23,7 +25,7 @@ final class FiltersCriteriaResolver implements FiltersCriteriaResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCriteria(Grid $grid, Parameters $parameters)
+    public function hasCriteria(Grid $grid, Parameters $parameters): bool
     {
         return $parameters->has('criteria') || !empty($this->getFiltersDefaultCriteria($grid->getFilters()));
     }
@@ -31,7 +33,7 @@ final class FiltersCriteriaResolver implements FiltersCriteriaResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function getCriteria(Grid $grid, Parameters $parameters)
+    public function getCriteria(Grid $grid, Parameters $parameters): array
     {
         $defaultCriteria = array_map(function (Filter $filter) {
             return $filter->getCriteria();
@@ -45,7 +47,7 @@ final class FiltersCriteriaResolver implements FiltersCriteriaResolverInterface
      *
      * @return Filter[]
      */
-    private function getFiltersDefaultCriteria(array $filters)
+    private function getFiltersDefaultCriteria(array $filters): array
     {
         return array_filter($filters, function (Filter $filter) {
             return null !== $filter->getCriteria();

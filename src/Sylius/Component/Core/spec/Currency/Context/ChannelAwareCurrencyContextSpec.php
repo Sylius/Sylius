@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Currency\Context;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,12 +26,12 @@ use Sylius\Component\Currency\Model\Currency;
  */
 final class ChannelAwareCurrencyContextSpec extends ObjectBehavior
 {
-    function let(CurrencyContextInterface $currencyContext, ChannelContextInterface $channelContext)
+    function let(CurrencyContextInterface $currencyContext, ChannelContextInterface $channelContext): void
     {
         $this->beConstructedWith($currencyContext, $channelContext);
     }
 
-    function it_is_a_currency_context()
+    function it_is_a_currency_context(): void
     {
         $this->shouldImplement(CurrencyContextInterface::class);
     }
@@ -38,7 +40,7 @@ final class ChannelAwareCurrencyContextSpec extends ObjectBehavior
         CurrencyContextInterface $currencyContext,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
-    ) {
+    ): void {
         $eur = new Currency();
         $eur->setCode('EUR');
 
@@ -57,7 +59,7 @@ final class ChannelAwareCurrencyContextSpec extends ObjectBehavior
         CurrencyContextInterface $currencyContext,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
-    ) {
+    ): void {
         $eur = new Currency();
         $eur->setCode('EUR');
 
@@ -74,7 +76,7 @@ final class ChannelAwareCurrencyContextSpec extends ObjectBehavior
         CurrencyContextInterface $currencyContext,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
-    ) {
+    ): void {
         $eur = new Currency();
         $eur->setCode('EUR');
 

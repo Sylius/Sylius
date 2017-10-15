@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Attribute\AttributeType;
 
 use PhpSpec\ObjectBehavior;
@@ -29,22 +31,22 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
  */
 final class PercentAttributeTypeSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(PercentAttributeType::class);
     }
 
-    function it_implements_attribute_type_interface()
+    function it_implements_attribute_type_interface(): void
     {
         $this->shouldImplement(AttributeTypeInterface::class);
     }
 
-    function its_storage_type_is_text()
+    function its_storage_type_is_text(): void
     {
         $this->getStorageType()->shouldReturn('float');
     }
 
-    function its_type_is_text()
+    function its_type_is_text(): void
     {
         $this->getType()->shouldReturn('percent');
     }
@@ -57,7 +59,7 @@ final class PercentAttributeTypeSpec extends ObjectBehavior
         ConstraintViolationListInterface $constraintViolationList,
         ExecutionContextInterface $context,
         ValidatorInterface $validator
-    ) {
+    ): void {
         $attributeValue->getAttribute()->willReturn($attribute);
 
         $attributeValue->getValue()->willReturn(null);

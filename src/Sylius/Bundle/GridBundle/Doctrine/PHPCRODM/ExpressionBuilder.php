@@ -9,17 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Collections\ExpressionBuilder as CollectionsExpressionBuilder;
-use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 
 /**
  * Creates an object graph (using Doctrine\Commons\Collections\Expr\*) which we
  * can then walk in order to build up the PHPCR-ODM query builder.
  */
-class ExpressionBuilder implements ExpressionBuilderInterface
+final class ExpressionBuilder implements ExpressionBuilderInterface
 {
     /**
      * @var CollectionsExpressionBuilder
@@ -58,7 +59,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function comparison($field, $operator, $value)
+    public function comparison(string $field, string $operator, $value)
     {
         return new Comparison($field, $operator, $value);
     }
@@ -66,7 +67,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function equals($field, $value)
+    public function equals(string $field, $value)
     {
         return $this->expressionBuilder->eq($field, $value);
     }
@@ -74,7 +75,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function notEquals($field, $value)
+    public function notEquals(string $field, $value)
     {
         return $this->expressionBuilder->neq($field, $value);
     }
@@ -82,7 +83,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function lessThan($field, $value)
+    public function lessThan(string $field, $value)
     {
         return $this->expressionBuilder->lt($field, $value);
     }
@@ -90,7 +91,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function lessThanOrEqual($field, $value)
+    public function lessThanOrEqual(string $field, $value)
     {
         return $this->expressionBuilder->lte($field, $value);
     }
@@ -98,7 +99,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function greaterThan($field, $value)
+    public function greaterThan(string $field, $value)
     {
         return $this->expressionBuilder->gt($field, $value);
     }
@@ -106,7 +107,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function greaterThanOrEqual($field, $value)
+    public function greaterThanOrEqual(string $field, $value)
     {
         return $this->expressionBuilder->gte($field, $value);
     }
@@ -114,7 +115,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function in($field, array $values)
+    public function in(string $field, array $values)
     {
         return $this->expressionBuilder->in($field, $values);
     }
@@ -122,7 +123,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function notIn($field, array $values)
+    public function notIn(string $field, array $values)
     {
         return $this->expressionBuilder->notIn($field, $values);
     }
@@ -130,7 +131,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function isNull($field)
+    public function isNull(string $field)
     {
         return new Comparison($field, ExtraComparison::IS_NULL, null);
     }
@@ -138,7 +139,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function isNotNull($field)
+    public function isNotNull(string $field)
     {
         return new Comparison($field, ExtraComparison::IS_NOT_NULL, null);
     }
@@ -146,7 +147,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function like($field, $pattern)
+    public function like(string $field, string $pattern)
     {
         return $this->expressionBuilder->contains($field, $pattern);
     }
@@ -154,7 +155,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function notLike($field, $pattern)
+    public function notLike(string $field, string $pattern)
     {
         return new Comparison($field, ExtraComparison::NOT_CONTAINS, $pattern);
     }
@@ -162,15 +163,15 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function orderBy($field, $direction)
+    public function orderBy(string $field, string $direction)
     {
-        $this->orderBys = [ $field => $direction ];
+        $this->orderBys = [$field => $direction];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addOrderBy($field, $direction)
+    public function addOrderBy(string $field, string $direction)
     {
         $this->orderBys[$field] = $direction;
     }
@@ -178,7 +179,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * @return array
      */
-    public function getOrderBys()
+    public function getOrderBys(): array
     {
         return $this->orderBys;
     }

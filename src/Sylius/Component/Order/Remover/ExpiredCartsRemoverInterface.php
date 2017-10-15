@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Remover;
 
 /**
@@ -16,5 +18,5 @@ namespace Sylius\Component\Order\Remover;
  */
 interface ExpiredCartsRemoverInterface
 {
-    public function remove();
+    public function remove(): void;
 }

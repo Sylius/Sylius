@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
@@ -27,7 +29,7 @@ final class SimpleProductSubscriber implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -38,7 +40,7 @@ final class SimpleProductSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function preSetData(FormEvent $event)
+    public function preSetData(FormEvent $event): void
     {
         /** @var ProductInterface $product */
         $product = $event->getData();
@@ -61,7 +63,7 @@ final class SimpleProductSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function preSubmit(FormEvent $event)
+    public function preSubmit(FormEvent $event): void
     {
         $data = $event->getData();
 

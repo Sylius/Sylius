@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock;
-use Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
@@ -22,17 +23,12 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 final class InStockValidatorSpec extends ObjectBehavior
 {
-    function let(AvailabilityCheckerInterface $availabilityChecker)
+    function let(AvailabilityCheckerInterface $availabilityChecker): void
     {
         $this->beConstructedWith($availabilityChecker);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(InStockValidator::class);
-    }
-
-    function it_is_a_constraint_validator()
+    function it_is_a_constraint_validator(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
@@ -40,7 +36,7 @@ final class InStockValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_if_there_is_no_stockable(
         InventoryUnitInterface $inventoryUnit,
         PropertyAccessor $propertyAccessor
-    ) {
+    ): void {
         $propertyAccessor->getValue($inventoryUnit, 'stockable')->willReturn(null);
 
         $constraint = new InStock();
@@ -52,7 +48,7 @@ final class InStockValidatorSpec extends ObjectBehavior
         InventoryUnitInterface $inventoryUnit,
         PropertyAccessor $propertyAccessor,
         StockableInterface $stockable
-    ) {
+    ): void {
         $propertyAccessor->getValue($inventoryUnit, 'stockable')->willReturn($stockable);
         $propertyAccessor->getValue($inventoryUnit, 'quantity')->willReturn(null);
 
@@ -66,7 +62,7 @@ final class InStockValidatorSpec extends ObjectBehavior
         InventoryUnitInterface $inventoryUnit,
         PropertyAccessor $propertyAccessor,
         StockableInterface $stockable
-    ) {
+    ): void {
         $propertyAccessor->getValue($inventoryUnit, 'stockable')->willReturn($stockable);
         $propertyAccessor->getValue($inventoryUnit, 'quantity')->willReturn(1);
 

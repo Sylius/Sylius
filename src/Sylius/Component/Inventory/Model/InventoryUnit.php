@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Inventory\Model;
 
 /**
@@ -38,7 +40,7 @@ class InventoryUnit implements InventoryUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getStockable()
+    public function getStockable(): ?StockableInterface
     {
         return $this->stockable;
     }
@@ -46,7 +48,7 @@ class InventoryUnit implements InventoryUnitInterface
     /**
      * @param StockableInterface $stockable
      */
-    public function setStockable(StockableInterface $stockable)
+    public function setStockable(StockableInterface $stockable): void
     {
         $this->stockable = $stockable;
     }

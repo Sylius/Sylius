@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -156,7 +158,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSetItsPriceTo($price = null, $channelName = null)
     {
-        $this->createPage->specifyPrice($price, (null === $channelName) ? $this->sharedStorage->get('channel') :$channelName);
+        $this->createPage->specifyPrice($price, $channelName ?? $this->sharedStorage->get('channel'));
     }
 
     /**
@@ -204,7 +206,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSetThePositionOfTo($name, $position)
     {
-        $this->indexPage->setPosition($name, (int) $position);
+        $this->indexPage->setPosition($name, $position);
     }
 
     /**
@@ -519,7 +521,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function theVariantWithCodeShouldNotHaveShippingRequired(ProductVariantInterface $productVariant)
     {
-        $this->updatePage->open(['productId' => $productVariant->getProduct()->getId(),'id' => $productVariant->getId()]);
+        $this->updatePage->open(['productId' => $productVariant->getProduct()->getId(), 'id' => $productVariant->getId()]);
 
         Assert::false($this->updatePage->isShippingRequired());
     }

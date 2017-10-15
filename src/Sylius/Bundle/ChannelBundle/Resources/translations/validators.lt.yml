@@ -4,7 +4,8 @@
 sylius:
     channel:
         code:
-            not_blank: Prašome įvesti kanalo kodą.
+            not_blank: Įveskite kanalo kodą.
+            regex: Kanalo kodą gali sudaryti tik raidės, skaičiai, brūkšniai ir pabraukimai.
             unique: Kanalo kodas turi būti unikalus.
         name:
             not_blank: Įveskite kanalo pavadinimą.

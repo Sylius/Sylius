@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Symfony\Component\Templating\Helper\Helper;
@@ -34,10 +36,10 @@ final class PriceExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-            new \Twig_SimpleFilter('sylius_calculate_price', [$this->helper, 'getPrice']),
+            new \Twig_Filter('sylius_calculate_price', [$this->helper, 'getPrice']),
         ];
     }
 }

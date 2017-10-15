@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddUserFormSubscriber;
 use Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType;
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddUserFormSubscriber;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -25,7 +27,7 @@ final class CustomerTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventSubscriber(new AddUserFormSubscriber(ShopUserType::class));
     }
@@ -33,7 +35,7 @@ final class CustomerTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return CustomerType::class;
     }

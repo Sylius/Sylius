@@ -9,17 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
+use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Intl\Intl;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Kamil Kokot <kamil@kokot.me>
@@ -83,7 +86,7 @@ class GeographicalFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options): void
     {
         $this->loadCountriesWithProvinces($options['countries'], $options['provinces']);
         $this->loadZones($options['zones'], $this->provideZoneValidator($options));
@@ -96,7 +99,7 @@ class GeographicalFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'geographical';
     }
@@ -104,7 +107,7 @@ class GeographicalFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNodeBuilder = $optionsNode->children();
 
@@ -166,7 +169,7 @@ class GeographicalFixture extends AbstractFixture
      * @param array $countriesCodes
      * @param array $countriesProvinces
      */
-    private function loadCountriesWithProvinces(array $countriesCodes, array $countriesProvinces)
+    private function loadCountriesWithProvinces(array $countriesCodes, array $countriesProvinces): void
     {
         $countries = [];
         foreach ($countriesCodes as $countryCode) {
@@ -181,12 +184,7 @@ class GeographicalFixture extends AbstractFixture
         }
 
         foreach ($countriesProvinces as $countryCode => $provinces) {
-            if (!isset($countries[$countryCode])) {
-                throw new \InvalidArgumentException(sprintf(
-                    'Cannot create provinces for unexisting country "%s"!',
-                    $countryCode
-                ));
-            }
+            Assert::keyExists($countries, $countryCode, sprintf('Cannot create provinces for unexisting country "%s"!', $countryCode));
 
             $this->loadProvincesForCountry($provinces, $countries[$countryCode]);
         }
@@ -332,7 +330,7 @@ class GeographicalFixture extends AbstractFixture
                     $zoneCode,
                     implode(', ', array_keys($options['zones']))
                 ));
-            }
+            },
         ];
 
         return function (array $zoneOptions) use ($memberValidators) {

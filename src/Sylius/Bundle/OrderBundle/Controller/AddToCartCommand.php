@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\OrderBundle\Controller;
 
 use Sylius\Component\Order\Model\OrderInterface;
@@ -42,7 +44,7 @@ final class AddToCartCommand implements AddToCartCommandInterface
     /**
      * @return OrderInterface
      */
-    public function getCart()
+    public function getCart(): OrderInterface
     {
         return $this->cart;
     }
@@ -50,7 +52,7 @@ final class AddToCartCommand implements AddToCartCommandInterface
     /**
      * @return OrderItemInterface
      */
-    public function getCartItem()
+    public function getCartItem(): OrderItemInterface
     {
         return $this->cartItem;
     }

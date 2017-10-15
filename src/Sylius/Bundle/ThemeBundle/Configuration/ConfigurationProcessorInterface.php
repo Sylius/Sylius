@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration;
 
 /**
@@ -21,5 +23,5 @@ interface ConfigurationProcessorInterface
      *
      * @return array The processed configuration array
      */
-    public function process(array $configs);
+    public function process(array $configs): array;
 }

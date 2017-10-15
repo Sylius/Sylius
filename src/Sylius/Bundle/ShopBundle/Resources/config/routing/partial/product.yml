@@ -13,7 +13,7 @@ sylius_shop_partial_product_index_latest:
                 arguments:
                     - "expr:service('sylius.context.channel').getChannel()"
                     - "expr:service('sylius.context.locale').getLocaleCode()"
-                    - $count
+                    - !!int $count
 
 sylius_shop_partial_product_show_by_slug:
     path: /{slug}

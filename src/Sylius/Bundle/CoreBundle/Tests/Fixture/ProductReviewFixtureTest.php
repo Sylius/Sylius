@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -26,7 +28,7 @@ final class ProductReviewFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_reviews_are_optional()
+    public function product_reviews_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'custom');
     }
@@ -34,7 +36,7 @@ final class ProductReviewFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_reviews_can_be_generated_randomly()
+    public function product_reviews_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
         $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
@@ -43,7 +45,7 @@ final class ProductReviewFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_review_title_is_optional()
+    public function product_review_title_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['title' => 'CUSTOM']]]], 'custom.*.title');
     }
@@ -51,7 +53,7 @@ final class ProductReviewFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_review_rating_is_optional()
+    public function product_review_rating_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['rating' => 10]]]], 'custom.*.rating');
     }
@@ -59,7 +61,7 @@ final class ProductReviewFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_review_comment_is_optional()
+    public function product_review_comment_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['comment' => 'CUSTOM']]]], 'custom.*.comment');
     }
@@ -67,7 +69,7 @@ final class ProductReviewFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_review_author_is_optional()
+    public function product_review_author_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['author' => 'test@example.com']]]], 'custom.*.author');
     }
@@ -75,7 +77,7 @@ final class ProductReviewFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_review_product_is_optional()
+    public function product_review_product_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['product' => 'MARVEL_T_SHIRT']]]], 'custom.*.product');
     }
@@ -83,7 +85,7 @@ final class ProductReviewFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_review_status_is_optional()
+    public function product_review_status_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['status' => 'new']]]], 'custom.*.status');
     }
@@ -91,7 +93,7 @@ final class ProductReviewFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): ProductReviewFixture
     {
         return new ProductReviewFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),

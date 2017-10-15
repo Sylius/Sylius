@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Model;
 
 /**
@@ -17,85 +19,61 @@ namespace Sylius\Bundle\ThemeBundle\Model;
 final class ThemeAuthor
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $email;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $homepage;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $role;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setEmail($email)
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getHomepage()
+    public function getHomepage(): ?string
     {
         return $this->homepage;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setHomepage($homepage)
+    public function setHomepage(?string $homepage): void
     {
         $this->homepage = $homepage;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getRole()
+    public function getRole(): ?string
     {
         return $this->role;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setRole($role)
+    public function setRole(?string $role): void
     {
         $this->role = $role;
     }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Loader;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -21,7 +23,7 @@ final class CircularDependencyChecker implements CircularDependencyCheckerInterf
     /**
      * {@inheritdoc}
      */
-    public function check(ThemeInterface $theme, array $previousThemes = [])
+    public function check(ThemeInterface $theme, array $previousThemes = []): void
     {
         if (0 === count($theme->getParents())) {
             return;

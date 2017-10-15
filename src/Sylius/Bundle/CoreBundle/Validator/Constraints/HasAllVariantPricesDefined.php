@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
@@ -26,7 +28,7 @@ final class HasAllVariantPricesDefined extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'sylius_has_all_variant_prices_defined';
     }
@@ -34,7 +36,7 @@ final class HasAllVariantPricesDefined extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): string
     {
         return Constraint::CLASS_CONSTRAINT;
     }

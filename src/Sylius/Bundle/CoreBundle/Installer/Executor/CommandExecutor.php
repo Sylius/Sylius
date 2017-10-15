@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Executor;
 
 use Symfony\Component\Console\Application;
@@ -27,17 +29,17 @@ final class CommandExecutor
     /**
      * @var InputInterface
      */
-    protected $input;
+    private $input;
 
     /**
      * @var OutputInterface
      */
-    protected $output;
+    private $output;
 
     /**
      * @var Application
      */
-    protected $application;
+    private $application;
 
     /**
      * @param InputInterface $input
@@ -54,13 +56,13 @@ final class CommandExecutor
     /**
      * @param string $command
      * @param array $parameters
-     * @param OutputInterface $output
+     * @param OutputInterface|null $output
      *
-     * @return $this
+     * @return self
      *
      * @throws \Exception
      */
-    public function runCommand($command, $parameters = [], OutputInterface $output = null)
+    public function runCommand(string $command, array $parameters = [], ?OutputInterface $output = null): self
     {
         $parameters = array_merge(
             ['command' => $command],
@@ -90,7 +92,7 @@ final class CommandExecutor
     /**
      * @return array
      */
-    protected function getDefaultParameters()
+    private function getDefaultParameters(): array
     {
         $defaultParameters = ['--no-debug' => true];
 

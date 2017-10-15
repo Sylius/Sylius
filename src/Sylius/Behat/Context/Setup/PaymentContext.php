@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -88,7 +90,7 @@ final class PaymentContext implements Context
      */
     public function storeAllowsPaying($paymentMethodName, $position = null)
     {
-        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Offline', 'Payment method', true, $position);
+        $this->createPaymentMethod($paymentMethodName, 'PM_' . $paymentMethodName, 'Offline', 'Payment method', true, $position);
     }
 
     /**
@@ -171,7 +173,7 @@ final class PaymentContext implements Context
      */
     public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName)
     {
-        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', 'Offline', false);
+        $this->createPaymentMethod($paymentMethodName, 'PM_' . $paymentMethodName, 'Offline', 'Payment method', false);
     }
 
     /**
@@ -206,7 +208,7 @@ final class PaymentContext implements Context
         ]);
 
         if (null !== $position) {
-            $paymentMethod->setPosition($position);
+            $paymentMethod->setPosition((int) $position);
         }
 
         $this->sharedStorage->set('payment_method', $paymentMethod);

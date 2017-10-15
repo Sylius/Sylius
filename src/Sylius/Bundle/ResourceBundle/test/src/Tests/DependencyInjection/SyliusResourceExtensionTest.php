@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Tests\DependencyInjection;
 
 use AppBundle\Entity\Book;
@@ -72,12 +74,12 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
     public function it_registers_default_translation_parameters()
     {
         // TODO: Move ResourceGrid integration to a dedicated compiler pass
-         $this->setParameter('kernel.bundles', []);
+        $this->setParameter('kernel.bundles', []);
 
         $this->load([
              'translation' => [
-                 'locale_provider' => 'test.custom_locale_provider'
-             ]
+                 'locale_provider' => 'test.custom_locale_provider',
+             ],
          ]);
 
         $this->assertContainerBuilderHasAlias('sylius.translation_locale_provider', 'test.custom_locale_provider');

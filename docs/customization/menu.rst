@@ -388,4 +388,6 @@ listener to the ``sylius.menu.admin.product_variant.form`` event in the ``AppBun
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.admin.product_variant.form, method: addItems }
 
+.. include:: /customization/plugins.rst.inc
+
 .. _KnpMenu: https://github.com/KnpLabs/KnpMenu

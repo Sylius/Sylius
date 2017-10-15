@@ -10,4 +10,5 @@ sylius:
         verify_email: '已成功验证您的电子邮件。'
         verify_email_by_invalid_token: '验证令牌无效'
         verify_email_request: '验证链接已发送到您的邮箱'
+        verify_no_user: '没有已经登陆的用户。'
         verify_verified_email: '邮箱已验证'

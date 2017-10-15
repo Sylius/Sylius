@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Generator;
 
 /**
@@ -32,16 +34,16 @@ final class RandomnessGenerator implements RandomnessGeneratorInterface
 
         $this->uriSafeAlphabet =
             implode(range(0, 9))
-            .implode(range('a', 'z'))
-            .implode(range('A', 'Z'))
-            .implode(['-', '_', '~'])
+            . implode(range('a', 'z'))
+            . implode(range('A', 'Z'))
+            . implode(['-', '_', '~'])
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function generateUriSafeString($length)
+    public function generateUriSafeString(int $length): string
     {
         return $this->generateStringOfLength($length, $this->uriSafeAlphabet);
     }
@@ -49,7 +51,7 @@ final class RandomnessGenerator implements RandomnessGeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generateNumeric($length)
+    public function generateNumeric(int $length): string
     {
         return $this->generateStringOfLength($length, $this->digits);
     }
@@ -57,7 +59,7 @@ final class RandomnessGenerator implements RandomnessGeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generateInt($min, $max)
+    public function generateInt(int $min, int $max): int
     {
         return random_int($min, $max);
     }
@@ -68,7 +70,7 @@ final class RandomnessGenerator implements RandomnessGeneratorInterface
      *
      * @return string
      */
-    private function generateStringOfLength($length, $alphabet)
+    private function generateStringOfLength(int $length, string $alphabet): string
     {
         $alphabetMaxIndex = strlen($alphabet) - 1;
         $randomString = '';

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Canonicalizer;
 
 /**
@@ -16,7 +18,7 @@ namespace Sylius\Component\User\Canonicalizer;
  */
 final class Canonicalizer implements CanonicalizerInterface
 {
-    public function canonicalize($string)
+    public function canonicalize(?string $string): ?string
     {
         return null === $string ? null : mb_convert_case($string, MB_CASE_LOWER, mb_detect_encoding($string));
     }

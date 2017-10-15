@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
@@ -43,8 +45,12 @@ abstract class AttributeType extends AbstractResourceType
      * @param string $attributeTranslationType
      * @param FormTypeRegistryInterface $formTypeRegistry
      */
-    public function __construct($dataClass, array $validationGroups, $attributeTranslationType, FormTypeRegistryInterface $formTypeRegistry)
-    {
+    public function __construct(
+        string $dataClass,
+        array $validationGroups,
+        string $attributeTranslationType,
+        FormTypeRegistryInterface $formTypeRegistry
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->attributeTranslationType = $attributeTranslationType;
@@ -54,7 +60,7 @@ abstract class AttributeType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())

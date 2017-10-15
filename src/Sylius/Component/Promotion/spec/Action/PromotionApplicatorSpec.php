@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Promotion\Action;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
-use Sylius\Component\Promotion\Action\PromotionApplicator;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -25,17 +27,12 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  */
 final class PromotionApplicatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $registry)
+    function let(ServiceRegistryInterface $registry): void
     {
         $this->beConstructedWith($registry);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionApplicator::class);
-    }
-
-    function it_should_be_a_promotion_applicator()
+    function it_should_be_a_promotion_applicator(): void
     {
         $this->shouldImplement(PromotionApplicatorInterface::class);
     }
@@ -46,11 +43,11 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         PromotionActionInterface $action
-    ) {
+    ): void {
         $configuration = [];
 
         $registry->get('test_action')->willReturn($actionCommand);
-        $promotion->getActions()->willReturn([$action]);
+        $promotion->getActions()->willReturn(new ArrayCollection([$action->getWrappedObject()]));
         $action->getType()->willReturn('test_action');
         $action->getConfiguration()->willReturn($configuration);
 
@@ -69,8 +66,10 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionInterface $promotion,
         PromotionActionInterface $firstAction,
         PromotionActionInterface $secondAction
-    ) {
-        $promotion->getActions()->willReturn([$firstAction, $secondAction]);
+    ): void {
+        $promotion->getActions()->willReturn(
+            new ArrayCollection([$firstAction->getWrappedObject(), $secondAction->getWrappedObject()])
+        );
 
         $firstAction->getType()->willReturn('first_action');
         $firstAction->getConfiguration()->willReturn([]);
@@ -97,8 +96,10 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionInterface $promotion,
         PromotionActionInterface $firstAction,
         PromotionActionInterface $secondAction
-    ) {
-        $promotion->getActions()->willReturn([$firstAction, $secondAction]);
+    ): void {
+        $promotion->getActions()->willReturn(
+            new ArrayCollection([$firstAction->getWrappedObject(), $secondAction->getWrappedObject()])
+        );
 
         $firstAction->getType()->willReturn('first_action');
         $firstAction->getConfiguration()->willReturn([]);
@@ -125,8 +126,10 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionInterface $promotion,
         PromotionActionInterface $firstAction,
         PromotionActionInterface $secondAction
-    ) {
-        $promotion->getActions()->willReturn([$firstAction, $secondAction]);
+    ): void {
+        $promotion->getActions()->willReturn(
+            new ArrayCollection([$firstAction->getWrappedObject(), $secondAction->getWrappedObject()])
+        );
 
         $firstAction->getType()->willReturn('first_action');
         $firstAction->getConfiguration()->willReturn([]);
@@ -151,11 +154,11 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         PromotionActionInterface $action
-    ) {
+    ): void {
         $configuration = [];
 
         $registry->get('test_action')->willReturn($actionCommand);
-        $promotion->getActions()->willReturn([$action]);
+        $promotion->getActions()->willReturn(new ArrayCollection([$action->getWrappedObject()]));
         $action->getType()->willReturn('test_action');
         $action->getConfiguration()->willReturn($configuration);
 

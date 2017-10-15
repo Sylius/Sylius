@@ -4,13 +4,14 @@
 sylius:
     form:
         address:
-            city: Stad
+            city: Plaats
             company: Bedrijf
             country: Land
             first_name: Voornaam
             last_name: Achternaam
             phone_number: Telefoonnummer
             postcode: Postcode
+            street: Straat
             province: Provincie
             zone: Zone
         country:

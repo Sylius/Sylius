@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -26,7 +28,7 @@ final class InstallSampleDataCommand extends AbstractInstallCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:install:sample-data')
@@ -41,7 +43,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
@@ -60,7 +62,6 @@ EOT
             return 0;
         }
 
-
         try {
             $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/../';
             $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_MEDIA_DIRECTORY, $output);
@@ -77,5 +78,7 @@ EOT
 
         $this->runCommands($commands, $output);
         $outputStyle->newLine(2);
+
+        return null;
     }
 }

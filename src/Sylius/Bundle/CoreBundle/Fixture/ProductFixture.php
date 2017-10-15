@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -21,7 +23,7 @@ class ProductFixture extends AbstractResourceFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'product';
     }
@@ -29,7 +31,7 @@ class ProductFixture extends AbstractResourceFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureResourceNode(ArrayNodeDefinition $resourceNode)
+    protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         $resourceNode
             ->children()
@@ -42,7 +44,6 @@ class ProductFixture extends AbstractResourceFixture
                 ->arrayNode('taxons')->prototype('scalar')->end()->end()
                 ->arrayNode('channels')->prototype('scalar')->end()->end()
                 ->arrayNode('product_attributes')->prototype('scalar')->end()->end()
-                ->arrayNode('product_reviews')->prototype('scalar')->end()->end()
                 ->arrayNode('product_options')->prototype('scalar')->end()->end()
                 ->arrayNode('images')->prototype('scalar')->end()->end()
                 ->booleanNode('shipping_required')->end()

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 use Sylius\Bundle\CoreBundle\Application\Kernel;
 
 /**
@@ -20,7 +22,7 @@ class AppKernel extends Kernel
     /**
      * {@inheritdoc}
      */
-    public function registerBundles()
+    public function registerBundles(): array
     {
         $bundles = [
             new \Sylius\Bundle\AdminBundle\SyliusAdminBundle(),

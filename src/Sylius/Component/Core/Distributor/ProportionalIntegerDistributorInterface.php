@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Distributor;
 
 /**
@@ -22,5 +24,5 @@ interface ProportionalIntegerDistributorInterface
      *
      * @return array
      */
-    public function distribute(array $integers, $amount);
+    public function distribute(array $integers, int $amount): array;
 }

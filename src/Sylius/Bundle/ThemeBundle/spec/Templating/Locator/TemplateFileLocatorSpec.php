@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Templating\Locator;
 
 use PhpSpec\ObjectBehavior;
@@ -17,7 +19,6 @@ use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateFileLocator;
 use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocatorInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
@@ -32,21 +33,16 @@ final class TemplateFileLocatorSpec extends ObjectBehavior
         ThemeContextInterface $themeContext,
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
         TemplateLocatorInterface $templateLocator
-    ) {
+    ): void {
         $this->beConstructedWith($decoratedFileLocator, $themeContext, $themeHierarchyProvider, $templateLocator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TemplateFileLocator::class);
-    }
-
-    function it_implements_file_locator_interface()
+    function it_implements_file_locator_interface(): void
     {
         $this->shouldImplement(FileLocatorInterface::class);
     }
 
-    function it_throws_an_exception_if_located_thing_is_not_an_instance_of_template_reference_interface()
+    function it_throws_an_exception_if_located_thing_is_not_an_instance_of_template_reference_interface(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('locate', ['not an instance']);
     }
@@ -58,7 +54,7 @@ final class TemplateFileLocatorSpec extends ObjectBehavior
         TemplateReferenceInterface $template,
         ThemeInterface $firstTheme,
         ThemeInterface $secondTheme
-    ) {
+    ): void {
         $themeContext->getTheme()->willReturn($firstTheme);
         $themeHierarchyProvider->getThemeHierarchy($firstTheme)->willReturn([$firstTheme, $secondTheme]);
 
@@ -75,7 +71,7 @@ final class TemplateFileLocatorSpec extends ObjectBehavior
         TemplateLocatorInterface $templateLocator,
         TemplateReferenceInterface $template,
         ThemeInterface $theme
-    ) {
+    ): void {
         $themeContext->getTheme()->willReturn($theme);
         $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
 
@@ -91,7 +87,7 @@ final class TemplateFileLocatorSpec extends ObjectBehavior
         ThemeContextInterface $themeContext,
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
         TemplateReferenceInterface $template
-    ) {
+    ): void {
         $themeContext->getTheme()->willReturn(null);
         $themeHierarchyProvider->getThemeHierarchy(null)->willReturn([]);
 

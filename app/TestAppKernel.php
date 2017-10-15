@@ -9,8 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 require_once __DIR__.'/AppKernel.php';
 
+use ProxyManager\Proxy\VirtualProxyInterface;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -22,7 +25,7 @@ class TestAppKernel extends AppKernel
     /**
      * {@inheritdoc}
      */
-    public function shutdown()
+    public function shutdown(): void
     {
         if (false === $this->booted) {
             return;
@@ -44,7 +47,7 @@ class TestAppKernel extends AppKernel
      *
      * @param ContainerInterface $container
      */
-    protected function cleanupContainer(ContainerInterface $container)
+    protected function cleanupContainer(ContainerInterface $container): void
     {
         $containerReflection = new \ReflectionObject($container);
         $containerServicesPropertyReflection = $containerReflection->getProperty('services');
@@ -52,11 +55,15 @@ class TestAppKernel extends AppKernel
 
         $services = $containerServicesPropertyReflection->getValue($container) ?: [];
         foreach ($services as $serviceId => $service) {
-            if ('kernel' === $serviceId || 'http_kernel' === $serviceId) {
+            if (in_array($serviceId, $this->getServicesToIgnoreDuringContainerCleanup())) {
                 continue;
             }
 
             $serviceReflection = new \ReflectionObject($service);
+
+            if ($serviceReflection->implementsInterface(VirtualProxyInterface::class)) {
+                continue;
+            }
 
             $servicePropertiesReflections = $serviceReflection->getProperties();
             $servicePropertiesDefaultValues = $serviceReflection->getDefaultProperties();
@@ -74,16 +81,18 @@ class TestAppKernel extends AppKernel
         $containerServicesPropertyReflection->setValue($container, null);
     }
 
-    protected function getContainerBaseClass()
+    protected function getContainerBaseClass(): string
     {
         return MockerContainer::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function registerBundles()
+    protected function getServicesToIgnoreDuringContainerCleanup(): array
     {
-        return array_merge(parent::registerBundles(), [new DAMA\DoctrineTestBundle\DAMADoctrineTestBundle()]);
+        return [
+            'kernel',
+            'http_kernel',
+            'liip_imagine.mime_type_guesser',
+            'liip_imagine.extension_guesser',
+        ];
     }
 }

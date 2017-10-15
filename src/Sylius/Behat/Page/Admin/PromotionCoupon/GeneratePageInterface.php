@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
@@ -52,9 +54,9 @@ interface GeneratePageInterface extends SymfonyPageInterface
     public function specifyCodeLength($codeLength);
 
     /**
-     * @param \DateTime $date
+     * @param \DateTimeInterface $date
      */
-    public function setExpiresAt(\DateTime $date);
+    public function setExpiresAt(\DateTimeInterface $date);
 
     /**
      * @param int $limit

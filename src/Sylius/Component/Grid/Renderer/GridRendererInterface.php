@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Renderer;
 
 use Sylius\Component\Grid\Definition\Action;
@@ -27,7 +29,7 @@ interface GridRendererInterface
      *
      * @return mixed
      */
-    public function render(GridViewInterface $gridView, $template = null);
+    public function render(GridViewInterface $gridView, ?string $template = null);
 
     /**
      * @param GridViewInterface $gridView

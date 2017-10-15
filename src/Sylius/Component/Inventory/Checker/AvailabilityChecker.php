@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Inventory\Checker;
 
 use Sylius\Component\Inventory\Model\StockableInterface;
@@ -21,7 +23,7 @@ final class AvailabilityChecker implements AvailabilityCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function isStockAvailable(StockableInterface $stockable)
+    public function isStockAvailable(StockableInterface $stockable): bool
     {
         return $this->isStockSufficient($stockable, 1);
     }
@@ -29,7 +31,7 @@ final class AvailabilityChecker implements AvailabilityCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function isStockSufficient(StockableInterface $stockable, $quantity)
+    public function isStockSufficient(StockableInterface $stockable, int $quantity): bool
     {
         return !$stockable->isTracked() || $quantity <= ($stockable->getOnHand() - $stockable->getOnHold());
     }

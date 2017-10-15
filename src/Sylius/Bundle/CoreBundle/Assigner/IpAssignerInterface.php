@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Assigner;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -23,5 +25,5 @@ interface IpAssignerInterface
      * @param OrderInterface $order
      * @param Request $request
      */
-    public function assign(OrderInterface $order, Request $request);
+    public function assign(OrderInterface $order, Request $request): void;
 }

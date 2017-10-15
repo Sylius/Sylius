@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Item telah ditambahkan ke keranjang belanja'
+        cannot_modify: 'Pesanan telah dimasukan ke dalam keranjang yang sedang Anda ubah.'
+        remove_item: 'Item dihapus dari keranjang belanja'
+        save: 'Keranjang Belanja telah berhasil diperbarui'

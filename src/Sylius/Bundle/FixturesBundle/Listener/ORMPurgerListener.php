@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Listener;
 
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
@@ -45,7 +47,7 @@ final class ORMPurgerListener extends AbstractListener implements BeforeSuiteLis
     /**
      * {@inheritdoc}
      */
-    public function beforeSuite(SuiteEvent $suiteEvent, array $options)
+    public function beforeSuite(SuiteEvent $suiteEvent, array $options): void
     {
         foreach ($options['managers'] as $managerName) {
             /** @var EntityManagerInterface $manager */
@@ -60,7 +62,7 @@ final class ORMPurgerListener extends AbstractListener implements BeforeSuiteLis
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'orm_purger';
     }
@@ -68,7 +70,7 @@ final class ORMPurgerListener extends AbstractListener implements BeforeSuiteLis
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNodeBuilder = $optionsNode->children();
 

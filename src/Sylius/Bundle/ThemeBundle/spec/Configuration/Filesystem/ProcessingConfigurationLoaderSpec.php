@@ -9,29 +9,25 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProcessorInterface;
 use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ConfigurationLoaderInterface;
-use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ProcessingConfigurationLoader;
 
 /**
  * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ProcessingConfigurationLoaderSpec extends ObjectBehavior
 {
-    function let(ConfigurationLoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor)
+    function let(ConfigurationLoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor): void
     {
         $this->beConstructedWith($decoratedLoader, $configurationProcessor);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProcessingConfigurationLoader::class);
-    }
-
-    function it_implements_loader_interface()
+    function it_implements_loader_interface(): void
     {
         $this->shouldImplement(ConfigurationLoaderInterface::class);
     }
@@ -39,7 +35,7 @@ final class ProcessingConfigurationLoaderSpec extends ObjectBehavior
     function it_processes_the_configuration(
         ConfigurationLoaderInterface $decoratedLoader,
         ConfigurationProcessorInterface $configurationProcessor
-    ) {
+    ): void {
         $basicConfiguration = ['name' => 'example/sylius-theme'];
 
         $decoratedLoader->load('theme-configuration-resource')->willReturn($basicConfiguration);
@@ -56,7 +52,7 @@ final class ProcessingConfigurationLoaderSpec extends ObjectBehavior
     function it_processes_the_configuration_and_extracts_extra_sylius_theme_key_as_another_configuration(
         ConfigurationLoaderInterface $decoratedLoader,
         ConfigurationProcessorInterface $configurationProcessor
-    ) {
+    ): void {
         $basicConfiguration = [
             'name' => 'example/sylius-theme',
             'extra' => [

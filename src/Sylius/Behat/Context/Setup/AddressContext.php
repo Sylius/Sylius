@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -58,7 +60,7 @@ final class AddressContext implements Context
      */
     public function myDefaultAddressIsOf(ShopUserInterface $user, $fullName)
     {
-        list($firstName, $lastName) = explode(' ', $fullName);
+        [$firstName, $lastName] = explode(' ', $fullName);
 
         /** @var AddressInterface $address */
         $address = $this->addressRepository->findOneBy(['firstName' => $firstName, 'lastName' => $lastName]);

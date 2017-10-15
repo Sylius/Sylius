@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle;
 
 use Sylius\Bundle\FixturesBundle\DependencyInjection\Compiler\FixtureRegistryPass;
@@ -24,7 +26,7 @@ final class SyliusFixturesBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 

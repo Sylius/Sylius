@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Routing;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Routing\RouteFactory;
 use Sylius\Bundle\ResourceBundle\Routing\RouteFactoryInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
@@ -22,22 +23,17 @@ use Symfony\Component\Routing\RouteCollection;
  */
 final class RouteFactorySpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(RouteFactory::class);
-    }
-
-    function it_implements_route_factory_interface()
+    function it_implements_route_factory_interface(): void
     {
         $this->shouldImplement(RouteFactoryInterface::class);
     }
 
-    function it_creates_empty_route_collection()
+    function it_creates_empty_route_collection(): void
     {
         $this->createRouteCollection()->shouldHaveType(RouteCollection::class);
     }
 
-    function it_creates_a_new_route()
+    function it_creates_a_new_route(): void
     {
         $defaults = [
             '_controller' => 'sylius.controller.product:showAction',

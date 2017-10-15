@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
@@ -179,7 +181,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $products = $this->loadFixturesFromFile('resources/products.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
-        $product = $products["product3"];
+        $product = $products['product3'];
 
         $data =
 <<<EOT
@@ -206,7 +208,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $products = $this->loadFixturesFromFile('resources/products.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
-        $product = $products["product1"];
+        $product = $products['product1'];
 
         $data =
 <<<EOT
@@ -481,8 +483,8 @@ EOT;
             '/api/v1/products/',
             [],
             ['images' => [
-                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/ford.jpg', __DIR__), "ford")],
-                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/mugs.jpg', __DIR__), "mugs")],
+                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/ford.jpg', __DIR__), 'ford')],
+                ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/mugs.jpg', __DIR__), 'mugs')],
             ]],
             static::$authorizedHeaderWithContentType,
             $data

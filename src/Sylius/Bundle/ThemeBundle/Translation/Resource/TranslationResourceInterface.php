@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\Resource;
 
 /**
@@ -19,20 +21,20 @@ interface TranslationResourceInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * @return string
      */
-    public function getLocale();
+    public function getLocale(): string;
 
     /**
      * @return string
      */
-    public function getFormat();
+    public function getFormat(): string;
 
     /**
      * @return string
      */
-    public function getDomain();
+    public function getDomain(): string;
 }

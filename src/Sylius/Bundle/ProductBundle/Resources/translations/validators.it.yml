@@ -8,6 +8,7 @@ sylius:
             unique: Il codice SKU del prodotto deve essere univoco.
         slug:
             not_blank: Inserisci lo slug del prodotto.
+            unique: Lo slug del prodotto deve essere unico.
         code:
             not_blank: Inserisci il codice prodotto.
             regex: Il codice prodotto può contenere solo lettere, numeri, trattini e underscore.
@@ -23,6 +24,9 @@ sylius:
             regex: La variante del prodotto può contenere solo lettere, numeri, trattini e underscore.
             unique: Il codice della variante del prodotto deve essere univoco.
             within_product_unique: Questo codice deve essere univoco all'interno di questo prodotto.
+    simple_product:
+        code:
+            unique: Codice prodotto semplice deve essere univoco tra tutti i prodotti e varianti di prodotto.
     option:
         code:
             not_blank: Inserisci il codice dell'opzione.

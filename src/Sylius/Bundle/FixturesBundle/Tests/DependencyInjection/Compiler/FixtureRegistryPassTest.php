@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
@@ -25,7 +27,7 @@ final class FixtureRegistryPassTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function it_registers_fixtures()
+    public function it_registers_fixtures(): void
     {
         $this->setDefinition('sylius_fixtures.fixture_registry', new Definition());
         $this->setDefinition('acme.fixture', (new Definition())->addTag('sylius_fixtures.fixture'));
@@ -42,7 +44,7 @@ final class FixtureRegistryPassTest extends AbstractCompilerPassTestCase
     /**
      * {@inheritdoc}
      */
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new FixtureRegistryPass());
     }

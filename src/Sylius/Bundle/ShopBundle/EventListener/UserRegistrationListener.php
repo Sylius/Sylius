@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -85,7 +87,7 @@ final class UserRegistrationListener
     /**
      * @param GenericEvent $event
      */
-    public function handleUserVerification(GenericEvent $event)
+    public function handleUserVerification(GenericEvent $event): void
     {
         $customer = $event->getSubject();
         Assert::isInstanceOf($customer, CustomerInterface::class);
@@ -97,6 +99,8 @@ final class UserRegistrationListener
         $channel = $this->channelContext->getChannel();
         if (!$channel->isAccountVerificationRequired()) {
             $this->enableAndLogin($user);
+
+            return;
         }
 
         $this->sendVerificationEmail($user);
@@ -105,7 +109,7 @@ final class UserRegistrationListener
     /**
      * @param ShopUserInterface $user
      */
-    private function sendVerificationEmail(ShopUserInterface $user)
+    private function sendVerificationEmail(ShopUserInterface $user): void
     {
         $token = $this->tokenGenerator->generate();
         $user->setEmailVerificationToken($token);
@@ -119,9 +123,12 @@ final class UserRegistrationListener
     /**
      * @param ShopUserInterface $user
      */
-    private function enableAndLogin(ShopUserInterface $user)
+    private function enableAndLogin(ShopUserInterface $user): void
     {
         $user->setEnabled(true);
+
+        $this->userManager->persist($user);
+        $this->userManager->flush();
 
         $this->userLogin->login($user, $this->firewallContextName);
     }

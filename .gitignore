@@ -35,3 +35,4 @@
 /behat.yml
 /phpunit.xml
 /phpspec.yml
+/.web-server-pid

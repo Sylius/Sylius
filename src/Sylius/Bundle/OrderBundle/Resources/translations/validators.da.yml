@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    order_item:
+        quantity:
+            min: Antal for en ordrelinie kan ikke være lavere end 1.

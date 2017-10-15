@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
@@ -59,9 +61,9 @@ abstract class AttributeValueType extends AbstractResourceType
      * @param FormTypeRegistryInterface $formTypeTypeRegistry
      */
     public function __construct(
-        $dataClass,
+        string $dataClass,
         array $validationGroups,
-        $attributeChoiceType,
+        string $attributeChoiceType,
         RepositoryInterface $attributeRepository,
         RepositoryInterface $localeRepository,
         FormTypeRegistryInterface $formTypeTypeRegistry
@@ -77,7 +79,7 @@ abstract class AttributeValueType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('localeCode', LocaleChoiceType::class)
@@ -121,7 +123,7 @@ abstract class AttributeValueType extends AbstractResourceType
      * @param FormInterface $form
      * @param AttributeInterface $attribute
      */
-    protected function addValueField(FormInterface $form, AttributeInterface $attribute)
+    protected function addValueField(FormInterface $form, AttributeInterface $attribute): void
     {
         $form->add('value', $this->formTypeRegistry->get($attribute->getType(), 'default'), [
             'auto_initialize' => false,

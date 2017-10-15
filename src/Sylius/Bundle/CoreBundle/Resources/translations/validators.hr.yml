@@ -3,20 +3,89 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Molimo unesite osnovnu valutu za ovaj kanal.
+        default_locale:
+            not_blank: Molimo unesite osnovni jezik za ovaj kanal.
         contact_email:
             invalid: Ovaj e-mail nije valjan.
+            max: Email adresa se ne može sastojati s više od {{ limit }} znakova.
+            min: Email adresa mora imati barem {{ limit }} znakova.
+    channel_pricing:
+        price:
+            min: Cijena mora biti barem {{ limit }}.
+            not_blank: Molimo unesite cijenu.
+    checkout:
+        shipping_method:
+            not_blank: Molimo odaberite metodu dostave.
     contact:
         email:
             invalid: Ovaj e-mail nije valjan.
             not_blank: Molimo unesite vašu email adresu.
+        message:
+            not_blank: Molimo unesite svoju poruku.
+    currency:
+        enabled:
+            cannot_disable_base: Osnovna valuta ne može biti onemogućena.
+    customer:
+        currency_code:
+            not_valid: Kod valute koji ste unjeli nije ispravan.
+    cart_item:
+        not_available: 'Trenutno nemamo %itemName% na raspolaganju.'
+    order:
+        currency_code:
+            not_valid: Kod valute koji ste unjeli nije ispravan.
+        payment_method_eligibility: 'Metoda plaćanja %paymentMethodName% je onemogućena. Molimo ponovo odaberite svoju metodu plaćanja.'
+        product_eligibility: 'Proizvod %productName% je onemogućen.'
+        shipping_method_eligibility: 'Proizvod ne spada u tražene zahtjeve za %shippingMethodName% metodu dostave. Molimo ponovo odaberite svoju metodu dostave.'
     locale:
         code:
             not_blank: Unesite lokalni kod.
             unique: Ovaj lokalni kod već postoji.
+        enabled:
+            cannot_disable_base: Osnovni jezik nije moguće onemogućiti.
+    product_attribute:
+        invalid: Pozicija mora biti cijeli broj.
+    product_image:
+        file:
+            max_size: Slika je previše velika -{{ size }}{{ suffix }}. Maksimalna dozvoljena veličina je {{ limit }}{{ suffix }}.
+            upload_ini_size: Slika je previše velika. Maksimalna dozvoljena veličina je {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
             min: Stanje na skladištu mora biti veće od {{ limit }}.
             not_blank: Molim označite ako je moguća isporuka osobno.
+            reserved: Broj proizvoda pri ruci mora biti veći od broja proizvoda na čekanju
+        original_price:
+            min: Originalna cijena ne može biti negativan broj.
+        weight:
+            min: Težina ne može biti negativan broj.
+            invalid: Težina mora biti broj.
+        width:
+            min: Širina ne može biti negativan broj.
+            invalid: Širina mora biti broj.
+        height:
+            min: Visina ne može biti negativan broj.
+            invalid: Visina mora biti broj.
+        depth:
+            min: Dubina ne može biti negativan broj.
+            invalid: Dubina mora biti broj.
+        channel_pricing:
+            all_defined: 'Morate odrediti cijenu za svaki kanal.'
+    product_translation:
+        short_description:
+            max: Kratki opis ne smije biti duži od {{ limit }} znakova.
+    taxon_image:
+        file:
+            max_size: Slika je previše velika -{{ size }}{{ suffix }}. Maksimalna dozvoljena veličina je {{ limit }}{{ suffix }}.
+            upload_ini_size: Slika je previše velika. Maksimalna dozvoljena veličina je {{ limit }}{{ suffix }}.
     user:
         email:
+            unique: Ova email adresa je trenutno zauzeta.
+            min: Email adresa mora imati barem {{ min }} znakova.
+            max: Email adresa ne smije imati više od {{ max }} znakova.
             invalid: Ovaj e-mail nije valjan.
+        username:
+            unique: Ovo korisničko ime je zauzeto.
+            not_blank: Molimo unesite vaše korisničko ime.
+        locale_code:
+            not_blank: Molimo odaberite svoj željeni jezik.

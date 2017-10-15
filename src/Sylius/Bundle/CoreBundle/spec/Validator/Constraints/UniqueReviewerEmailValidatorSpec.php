@@ -9,14 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmail;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmailValidator;
-use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
-use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -31,27 +33,22 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
 {
     function let(
-        UserRepository $userRepository,
+        UserRepositoryInterface $userRepository,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker,
         ExecutionContextInterface $executionContextInterface
-    ) {
+    ): void {
         $this->beConstructedWith($userRepository, $tokenStorage, $authorizationChecker);
         $this->initialize($executionContextInterface);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UniqueReviewerEmailValidator::class);
-    }
-
-    function it_extends_constraint_validator_class()
+    function it_extends_constraint_validator_class(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
 
     function it_validates_if_user_with_given_email_is_already_registered(
-        UserRepository $userRepository,
+        UserRepositoryInterface $userRepository,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker,
         ExecutionContextInterface $executionContextInterface,
@@ -59,8 +56,8 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
         TokenInterface $token,
         ReviewInterface $review,
         CustomerInterface $customer,
-        CustomerInterface $existingUser
-    ) {
+        UserInterface $existingUser
+    ): void {
         $constraint = new UniqueReviewerEmail();
 
         $tokenStorage->getToken()->willReturn($token);

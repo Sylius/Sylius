@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -26,7 +28,7 @@ final class LocaleFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function locales_are_not_required()
+    public function locales_are_not_required(): void
     {
         $this->assertConfigurationIsValid([[]], 'locales');
     }
@@ -34,7 +36,7 @@ final class LocaleFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function locales_can_be_set()
+    public function locales_can_be_set(): void
     {
         $this->assertConfigurationIsValid([['locales' => ['en_US' => true, 'pl_PL' => false, 'es_ES' => true]]], 'locales');
     }
@@ -42,7 +44,7 @@ final class LocaleFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): LocaleFixture
     {
         return new LocaleFixture(
             $this->getMockBuilder(FactoryInterface::class)->getMock(),

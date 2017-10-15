@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\User\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\User\Model\UserOAuth;
 use Sylius\Component\User\Model\UserOAuthInterface;
 
 /**
@@ -20,12 +21,7 @@ use Sylius\Component\User\Model\UserOAuthInterface;
  */
 final class UserOAuthSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UserOAuth::class);
-    }
-
-    function it_implements_user_oauth_interface()
+    function it_implements_user_oauth_interface(): void
     {
         $this->shouldImplement(UserOAuthInterface::class);
     }

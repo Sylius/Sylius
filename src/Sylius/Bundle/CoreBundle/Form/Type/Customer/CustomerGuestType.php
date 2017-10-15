@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Form\Type\Customer;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,30 +35,38 @@ final class CustomerGuestType extends AbstractResourceType
     private $customerRepository;
 
     /**
+     * @var FactoryInterface
+     */
+    private $customerFactory;
+
+    /**
      * @param string $dataClass
      * @param array $validationGroups
      * @param RepositoryInterface $customerRepository
+     * @param FactoryInterface $customerFactory
      */
     public function __construct(
-        $dataClass,
+        string $dataClass,
         array $validationGroups,
-        RepositoryInterface $customerRepository
+        RepositoryInterface $customerRepository,
+        FactoryInterface $customerFactory
     ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->customerRepository = $customerRepository;
+        $this->customerFactory = $customerFactory;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = [])
+    public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'sylius.form.customer.email',
             ])
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
                 $data = $event->getData();
 
                 if (!isset($data['email'])) {
@@ -64,11 +75,18 @@ final class CustomerGuestType extends AbstractResourceType
 
                 $customer = $this->customerRepository->findOneBy(['email' => $data['email']]);
 
-                // assign customer only if there is no corresponding user account
+                // assign existing customer or create a new one
+                $form = $event->getForm();
                 if (null !== $customer && null === $customer->getUser()) {
-                    $form = $event->getForm();
                     $form->setData($customer);
+
+                    return;
                 }
+
+                $customer = $this->customerFactory->createNew();
+                $customer->setEmail($data['email']);
+
+                $form->setData($customer);
             })
             ->setDataLocked(false)
         ;
@@ -77,7 +95,7 @@ final class CustomerGuestType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_customer_guest';
     }

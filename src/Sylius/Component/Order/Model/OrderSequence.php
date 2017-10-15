@@ -1,13 +1,15 @@
 <?php
 
 /*
- * This file is a part of the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+declare(strict_types=1);
 
 namespace Sylius\Component\Order\Model;
 
@@ -37,12 +39,12 @@ class OrderSequence implements OrderSequenceInterface
     /**
      * {@inheritdoc}
      */
-    public function getIndex()
+    public function getIndex(): int
     {
         return $this->index;
     }
 
-    public function incrementIndex()
+    public function incrementIndex(): void
     {
         ++$this->index;
     }

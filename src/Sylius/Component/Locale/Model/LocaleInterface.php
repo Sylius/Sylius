@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Locale\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
@@ -23,7 +25,7 @@ interface LocaleInterface extends ResourceInterface, CodeAwareInterface, Timesta
     /**
      * @param string|null $locale
      *
-     * @return string
+     * @return string|null
      */
-    public function getName($locale = null);
+    public function getName(?string $locale = null): ?string;
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Action;
 
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -36,7 +38,7 @@ final class PromotionApplicator implements PromotionApplicatorInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion)
+    public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion): void
     {
         $applyPromotion = false;
         foreach ($promotion->getActions() as $action) {
@@ -52,7 +54,7 @@ final class PromotionApplicator implements PromotionApplicatorInterface
     /**
      * {@inheritdoc}
      */
-    public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion)
+    public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion): void
     {
         foreach ($promotion->getActions() as $action) {
             $this->getActionCommandByType($action->getType())->revert($subject, $action->getConfiguration(), $promotion);
@@ -66,7 +68,7 @@ final class PromotionApplicator implements PromotionApplicatorInterface
      *
      * @return PromotionActionCommandInterface
      */
-    private function getActionCommandByType($type)
+    private function getActionCommandByType(string $type): PromotionActionCommandInterface
     {
         return $this->registry->get($type);
     }

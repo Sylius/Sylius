@@ -138,6 +138,27 @@ Service Naming Conventions
 * Each service has a corresponding parameter containing the class name,
   following the ``service_name.class`` convention.
 
+Automated Coding Standard Enforcement
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can check your code for Sylius coding standard by running the following command:
+
+.. code-block:: bash
+
+    $ bin/ecs check src tests
+
+Some of the violations can be automatically fixed by running the same command with ``--fix`` suffix like:
+
+.. code-block:: bash
+
+    $ bin/ecs check src tests --fix
+
+.. note::
+
+    Most of Sylius coding standard checks are extracted to `SyliusLabs/CodingStandard`_ package so that
+    reusing them in your own projects or Sylius plugins is effortless. Too learn about details, take a look
+    at its readme.
+
 Documentation
 -------------
 
@@ -156,3 +177,4 @@ License
 .. _`PSR-0`: http://www.php-fig.org/psr/psr-0/
 .. _`PSR-1`: http://www.php-fig.org/psr/psr-1/
 .. _`PSR-2`: http://www.php-fig.org/psr/psr-2/
+.. _`SyliusLabs/CodingStandard`: https://github.com/SyliusLabs/CodingStandard

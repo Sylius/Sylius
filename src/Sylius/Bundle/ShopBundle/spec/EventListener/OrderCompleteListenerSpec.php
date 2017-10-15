@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface;
-use Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -22,21 +23,16 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 final class OrderCompleteListenerSpec extends ObjectBehavior
 {
-    function let(OrderEmailManagerInterface $orderEmailManager)
+    function let(OrderEmailManagerInterface $orderEmailManager): void
     {
         $this->beConstructedWith($orderEmailManager);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderCompleteListener::class);
     }
 
     function it_sends_a_confirmation_email(
         OrderEmailManagerInterface $orderEmailManager,
         GenericEvent $event,
         OrderInterface $order
-    ) {
+    ): void {
         $event->getSubject()->willReturn($order);
 
         $orderEmailManager->sendConfirmationEmail($order)->shouldBeCalled();
@@ -47,7 +43,7 @@ final class OrderCompleteListenerSpec extends ObjectBehavior
     function it_throws_an_invalid_argument_exception_if_an_event_subject_is_not_an_order_instance(
         GenericEvent $event,
         \stdClass $order
-    ) {
+    ): void {
         $event->getSubject()->willReturn($order);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('sendConfirmationEmail', [$event]);

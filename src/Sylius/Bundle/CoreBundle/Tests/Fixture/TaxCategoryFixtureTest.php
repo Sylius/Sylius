@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -26,7 +28,7 @@ final class TaxCategoryFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function tax_categories_are_optional()
+    public function tax_categories_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'custom');
     }
@@ -34,7 +36,7 @@ final class TaxCategoryFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function tax_categories_can_be_generated_randomly()
+    public function tax_categories_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
         $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
@@ -43,7 +45,7 @@ final class TaxCategoryFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function tax_category_code_is_optional()
+    public function tax_category_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['code' => 'CUSTOM']]]], 'custom.*.code');
     }
@@ -51,7 +53,7 @@ final class TaxCategoryFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function tax_category_description_is_optional()
+    public function tax_category_description_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['description' => 'Lorem ipsum']]]], 'custom.*.description');
     }
@@ -59,7 +61,7 @@ final class TaxCategoryFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): TaxCategoryFixture
     {
         return new TaxCategoryFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),

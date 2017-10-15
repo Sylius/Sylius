@@ -16,7 +16,6 @@ sylius:
         email:
             already_used: Denne e-postadressen er allerede registrert, vennligst logg inn eller bruk glemt passord.
             max: E-post må ikke være lengre enn {{ limit }} tegn.
-            min: E-post må være minst {{ limit }} tegn.
             not_blank: Skriv inn din e-post.
             invalid: Ugyldig epostadresse.
             unique: Denne e-postadressen er allerede i bruk.

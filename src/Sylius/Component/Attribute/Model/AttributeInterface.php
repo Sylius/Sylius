@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Attribute\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
@@ -21,48 +24,58 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 interface AttributeInterface extends
+    ResourceInterface,
     CodeAwareInterface,
     TimestampableInterface,
-    AttributeTranslationInterface,
     TranslatableInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType();
+    public function getName(): ?string;
 
     /**
-     * @param string $type
+     * @param string|null $name
      */
-    public function setType($type);
+    public function setName(?string $name): void;
+
+    /**
+     * @return string|null
+     */
+    public function getType(): ?string;
+
+    /**
+     * @param string|null $type
+     */
+    public function setType(?string $type): void;
 
     /**
      * @return array
      */
-    public function getConfiguration();
+    public function getConfiguration(): array;
 
     /**
      * @param array $configuration
      */
-    public function setConfiguration(array $configuration);
+    public function setConfiguration(array $configuration): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStorageType();
+    public function getStorageType(): ?string;
 
     /**
      * @param string $storageType
      */
-    public function setStorageType($storageType);
+    public function setStorageType(string $storageType): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPosition();
+    public function getPosition(): ?int;
 
     /**
-     * @param int $position
+     * @param int|null $position
      */
-    public function setPosition($position);
+    public function setPosition(?int $position): void;
 }

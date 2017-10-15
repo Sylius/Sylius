@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Provider;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -38,7 +40,7 @@ final class ActivePromotionsByChannelProvider implements PreQualifiedPromotionsP
     /**
      * {@inheritdoc}
      */
-    public function getPromotions(PromotionSubjectInterface $subject)
+    public function getPromotions(PromotionSubjectInterface $subject): array
     {
         if (!$subject instanceof OrderInterface) {
             throw new UnexpectedTypeException($subject, OrderInterface::class);
@@ -49,8 +51,6 @@ final class ActivePromotionsByChannelProvider implements PreQualifiedPromotionsP
             throw new \InvalidArgumentException('Order has no channel, but it should.');
         }
 
-        $promotions = $this->promotionRepository->findActiveByChannel($channel);
-
-        return $promotions;
+        return $this->promotionRepository->findActiveByChannel($channel);
     }
 }

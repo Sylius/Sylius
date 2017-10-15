@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Model;
 
 /**
@@ -23,12 +25,12 @@ class ZoneMember implements ZoneMemberInterface
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
 
     /**
-     * @var ZoneInterface
+     * @var ZoneInterface|null
      */
     protected $belongsTo;
 
@@ -43,7 +45,7 @@ class ZoneMember implements ZoneMemberInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -51,7 +53,7 @@ class ZoneMember implements ZoneMemberInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
@@ -59,7 +61,7 @@ class ZoneMember implements ZoneMemberInterface
     /**
      * {@inheritdoc}
      */
-    public function getBelongsTo()
+    public function getBelongsTo(): ?ZoneInterface
     {
         return $this->belongsTo;
     }
@@ -67,7 +69,7 @@ class ZoneMember implements ZoneMemberInterface
     /**
      * {@inheritdoc}
      */
-    public function setBelongsTo(ZoneInterface $belongsTo = null)
+    public function setBelongsTo(?ZoneInterface $belongsTo): void
     {
         $this->belongsTo = $belongsTo;
     }

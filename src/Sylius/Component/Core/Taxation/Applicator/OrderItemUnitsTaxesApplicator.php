@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Taxation\Applicator;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -57,7 +59,7 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(OrderInterface $order, ZoneInterface $zone)
+    public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
         foreach ($order->getItems() as $item) {
             $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
@@ -67,11 +69,11 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
 
             foreach ($item->getUnits() as $unit) {
                 $taxAmount = $this->calculator->calculate($unit->getTotal(), $taxRate);
-                if (0 === $taxAmount) {
+                if (0.00 === $taxAmount) {
                     continue;
                 }
 
-                $this->addTaxAdjustment($unit, $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
+                $this->addTaxAdjustment($unit, (int) $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
             }
         }
     }
@@ -82,7 +84,7 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
      * @param string $label
      * @param bool $included
      */
-    private function addTaxAdjustment(OrderItemUnitInterface $unit, $taxAmount, $label, $included)
+    private function addTaxAdjustment(OrderItemUnitInterface $unit, int $taxAmount, string $label, bool $included)
     {
         $unitTaxAdjustment = $this->adjustmentFactory
             ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included)

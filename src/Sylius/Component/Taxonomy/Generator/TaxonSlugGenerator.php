@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Taxonomy\Generator;
 
 use Behat\Transliterator\Transliterator;
@@ -20,7 +22,7 @@ final class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generate(TaxonInterface $taxon, $locale = null)
+    public function generate(TaxonInterface $taxon, ?string $locale = null): string
     {
         $name = $taxon->getTranslation($locale)->getName();
 
@@ -43,7 +45,7 @@ final class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
      *
      * @return string
      */
-    private function transliterate($string)
+    private function transliterate(string $string): string
     {
         // Manually replacing apostrophes since Transliterator started removing them at v1.2.
         return Transliterator::transliterate(str_replace('\'', '-', $string));

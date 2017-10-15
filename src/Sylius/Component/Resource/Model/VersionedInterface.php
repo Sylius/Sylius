@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Model;
 
 /**
@@ -17,12 +19,12 @@ namespace Sylius\Component\Resource\Model;
 interface VersionedInterface
 {
     /**
-     * @return int
+     * @return int|null
      */
-    public function getVersion();
+    public function getVersion(): ?int;
 
     /**
-     * @param int $version
+     * @param int|null $version
      */
-    public function setVersion($version);
+    public function setVersion(?int $version): void;
 }

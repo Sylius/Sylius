@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Checker;
 
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,5 +27,5 @@ interface RequirementsCheckerInterface
      *
      * @return bool
      */
-    public function check(InputInterface $input, OutputInterface $output);
+    public function check(InputInterface $input, OutputInterface $output): bool;
 }

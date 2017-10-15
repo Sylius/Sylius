@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\TaxationBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
@@ -17,8 +19,6 @@ use Sylius\Bundle\TaxationBundle\DependencyInjection\Compiler\RegisterCalculator
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Taxation system for ecommerce Symfony2 applications.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SyliusTaxationBundle extends AbstractResourceBundle
@@ -26,7 +26,7 @@ final class SyliusTaxationBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public function getSupportedDrivers()
+    public function getSupportedDrivers(): array
     {
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
@@ -36,7 +36,7 @@ final class SyliusTaxationBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 
@@ -46,7 +46,7 @@ final class SyliusTaxationBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getModelNamespace()
+    protected function getModelNamespace(): string
     {
         return 'Sylius\Component\Taxation\Model';
     }

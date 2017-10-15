@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Repository;
 
 use Doctrine\ORM\QueryBuilder;
@@ -27,24 +29,32 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
      *
      * @return QueryBuilder
      */
-    public function createQueryBuilderByProductId($locale, $productId);
+    public function createQueryBuilderByProductId(string $locale, $productId): QueryBuilder;
+
+    /**
+     * @param string $locale
+     * @param string $productCode
+     *
+     * @return QueryBuilder
+     */
+    public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder;
 
     /**
      * @param string $name
      * @param string $locale
      *
-     * @return ProductVariantInterface[]
+     * @return array|ProductVariantInterface[]
      */
-    public function findByName($name, $locale);
+    public function findByName(string $name, string $locale): array;
 
     /**
      * @param string $name
      * @param string $locale
      * @param ProductInterface $product
      *
-     * @return ProductVariantInterface[]
+     * @return array|ProductVariantInterface[]
      */
-    public function findByNameAndProduct($name, $locale, ProductInterface $product);
+    public function findByNameAndProduct(string $name, string $locale, ProductInterface $product): array;
 
     /**
      * @param string $code
@@ -52,15 +62,15 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
      *
      * @return ProductVariantInterface|null
      */
-    public function findOneByCodeAndProductCode($code, $productCode);
+    public function findOneByCodeAndProductCode(string $code, string $productCode): ?ProductVariantInterface;
 
     /**
-     * @param string|array $code
+     * @param array|string[] $codes
      * @param string $productCode
      *
-     * @return ProductVariantInterface[]
+     * @return array|ProductVariantInterface[]
      */
-    public function findByCodeAndProductCode($code, $productCode);
+    public function findByCodesAndProductCode(array $codes, string $productCode): array;
 
     /**
      * @param mixed $id
@@ -68,14 +78,14 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
      *
      * @return ProductVariantInterface|null
      */
-    public function findOneByIdAndProductId($id, $productId);
+    public function findOneByIdAndProductId($id, $productId): ?ProductVariantInterface;
 
     /**
      * @param string $phrase
      * @param string $locale
      * @param string $productCode
      *
-     * @return ProductVariantInterface[]
+     * @return array|ProductVariantInterface[]
      */
-    public function findByPhraseAndProductCode($phrase, $locale, $productCode);
+    public function findByPhraseAndProductCode(string $phrase, string $locale, string $productCode): array;
 }

@@ -16,8 +16,15 @@ sylius:
         email:
             already_used: Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.
             max: El. paštas turi būti ilgesnis nei {{ limit }} simbolių.
-            min: El. paštas turi būti ilgesnis nei {{ limit }} simboliai.
             not_blank: Įveskite savo elektroninio pašto adresą.
             invalid: Šis adresas yra neteisingas.
             unique: Šis el. paštas jau naudojamas.
             registered: Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.
+    customer_group:
+        code:
+            regex: Šalies kodas gali būti sudarytas tik iš raidžių, skaičių, brūkšnelių ir pabraukimų.
+            unique: Klientų grupės kodas turi būti unikalus.
+        name:
+            max: Klientų grupės pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.
+            min: Klientų grupės pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.
+            not_blank: Prašome įvesti savo klientų grupės pavadinimą.

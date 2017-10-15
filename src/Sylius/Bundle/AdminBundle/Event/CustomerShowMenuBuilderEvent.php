@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Event;
 
 use Knp\Menu\FactoryInterface;
@@ -41,7 +43,7 @@ class CustomerShowMenuBuilderEvent extends MenuBuilderEvent
     /**
      * @return CustomerInterface
      */
-    public function getCustomer()
+    public function getCustomer(): CustomerInterface
     {
         return $this->customer;
     }

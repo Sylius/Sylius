@@ -4,12 +4,23 @@
 sylius:
     channel:
         delete_error: 'Il canale non può essere eliminato. È richiesto almeno un canale abilitato.'
+    checkout:
+        complete_error: 'C''è stato un problema imprevisto con il completamento di un ordine. Per favore, provare a completare l''ordine nuovamente.'
     contact:
-        request_success: 'La tua richiesta di contatto è stata inoltrata correttamente.'
+        request_success: 'La tua richiesta di contatto è stata inoltrata correttamente. Ti risponderemo al più presto!'
         request_error: 'Si è verificato un problema durante l''invio della richiesta di contatto. Si prega di riprovare più tardi.'
     customer:
         add_address: 'L''indirizzo è stato aggiunto con successo.'
         impersonate: 'Hai impersonato con successo il cliente %name%.'
         set_address_as_default: 'Indirizzo è stato impostato come predefinito.'
+    order:
+        apply_state_machine_transition_error: 'C''è stato un problema imprevisto con l''aggiornamento di un ordine. Per favore, provare ad aggiornare l''ordine nuovamente.'
+        promotion_integrity: 'Non sei più autorizzato a partecipare a questa promozione %promotionName%.'
+        total_integrity: 'L''importo totale dell''ordine è stato modificato, verifica le informazioni sull''ordine e conferma nuovamente.'
+        update_error: 'C''è stato un problema imprevisto con l''aggiornamento di un prodotto. Per favore, prova ad aggiornare il prodotto nuovamente.'
+    payment:
+        apply_state_machine_transition_error: 'C''è stato un problema imprevisto con l''aggiornamento di un pagamento. Per favore, prova ad aggiornare il pagamento nuovamente.'
     product:
         out_of_stock: 'In magazzino la rimanenza di questo prodotto è solo %quantity%.'
+    product_variant:
+        update_error: 'C''è stato un problema imprevisto con l''aggiornamento di una variante di prodotto. Per favore, prova ad aggiornare la variante prodotto nuovamente.'

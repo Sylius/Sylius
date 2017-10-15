@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Inventory\Model;
 
 /**
@@ -17,42 +19,42 @@ namespace Sylius\Component\Inventory\Model;
 interface StockableInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInventoryName();
+    public function getInventoryName(): ?string;
 
     /**
      * @return bool
      */
-    public function isInStock();
+    public function isInStock(): bool;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getOnHold();
+    public function getOnHold(): ?int;
 
     /**
-     * @param int $onHold
+     * @param int|null $onHold
      */
-    public function setOnHold($onHold);
+    public function setOnHold(?int $onHold): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getOnHand();
+    public function getOnHand(): ?int;
 
     /**
-     * @param int $onHand
+     * @param int|null $onHand
      */
-    public function setOnHand($onHand);
+    public function setOnHand(?int $onHand): void;
 
     /**
      * @return bool
      */
-    public function isTracked();
+    public function isTracked(): bool;
 
     /**
      * @param bool $tracked
      */
-    public function setTracked($tracked);
+    public function setTracked(bool $tracked): void;
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Country;
 
 use Behat\Mink\Element\Element;
@@ -41,7 +43,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $provinces = $this->getElement('provinces');
 
-        return $provinces->has('css', '[value = "'.$provinceName.'"]');
+        return $provinces->has('css', '[value = "' . $provinceName . '"]');
     }
 
     /**
@@ -51,7 +53,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $provinces = $this->getElement('provinces');
 
-        return $provinces->has('css', '[value = "'.$provinceCode.'"]');
+        return $provinces->has('css', '[value = "' . $provinceCode . '"]');
     }
 
     /**
@@ -118,7 +120,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         if ($this->isThereProvince($provinceName)) {
             $provinces = $this->getElement('provinces');
 
-            $item = $provinces->find('css', 'div[data-form-collection="item"] input[value="'.$provinceName.'"]')->getParent();
+            $item = $provinces->find('css', 'div[data-form-collection="item"] input[value="' . $provinceName . '"]')->getParent();
             $item->fillField('Name', '');
         }
     }

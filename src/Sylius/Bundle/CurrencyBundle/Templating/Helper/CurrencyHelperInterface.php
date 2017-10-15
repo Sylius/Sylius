@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
 /**
@@ -21,5 +23,5 @@ interface CurrencyHelperInterface
      *
      * @return string
      */
-    public function convertCurrencyCodeToSymbol($code);
+    public function convertCurrencyCodeToSymbol(string $code): string;
 }

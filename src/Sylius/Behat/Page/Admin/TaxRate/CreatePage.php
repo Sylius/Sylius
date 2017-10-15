@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\TaxRate;
 
 use Sylius\Behat\Behaviour\NamesIt;
@@ -44,7 +46,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function chooseCalculator($name)
     {
-        $this->getDocument()->selectFieldOption(\Calculator::class, $name);
+        $this->getDocument()->selectFieldOption('Calculator', $name);
     }
 
     /**

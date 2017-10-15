@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Customer;
 
 use Sylius\Component\Core\Model\AddressInterface;
@@ -23,5 +25,5 @@ interface CustomerAddressAdderInterface
      * @param CustomerInterface $customer
      * @param AddressInterface $address
      */
-    public function add(CustomerInterface $customer, AddressInterface $address);
+    public function add(CustomerInterface $customer, AddressInterface $address): void;
 }

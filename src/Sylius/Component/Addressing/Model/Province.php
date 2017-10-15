@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Model;
 
 /**
@@ -22,31 +24,31 @@ class Province implements ProvinceInterface
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $abbreviation;
 
     /**
-     * @var CountryInterface
+     * @var CountryInterface|null
      */
     protected $country;
 
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**
@@ -60,7 +62,7 @@ class Province implements ProvinceInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -68,7 +70,7 @@ class Province implements ProvinceInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
@@ -76,7 +78,7 @@ class Province implements ProvinceInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -84,7 +86,7 @@ class Province implements ProvinceInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -92,7 +94,7 @@ class Province implements ProvinceInterface
     /**
      * {@inheritdoc}
      */
-    public function getAbbreviation()
+    public function getAbbreviation(): ?string
     {
         return $this->abbreviation;
     }
@@ -100,7 +102,7 @@ class Province implements ProvinceInterface
     /**
      * {@inheritdoc}
      */
-    public function setAbbreviation($abbreviation)
+    public function setAbbreviation(?string $abbreviation): void
     {
         $this->abbreviation = $abbreviation;
     }
@@ -108,7 +110,7 @@ class Province implements ProvinceInterface
     /**
      * {@inheritdoc}
      */
-    public function getCountry()
+    public function getCountry(): ?CountryInterface
     {
         return $this->country;
     }
@@ -116,7 +118,7 @@ class Province implements ProvinceInterface
     /**
      * {@inheritdoc}
      */
-    public function setCountry(CountryInterface $country = null)
+    public function setCountry(?CountryInterface $country): void
     {
         $this->country = $country;
     }

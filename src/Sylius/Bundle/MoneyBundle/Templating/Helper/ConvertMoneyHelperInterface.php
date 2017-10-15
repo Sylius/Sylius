@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 
 /**
@@ -25,5 +27,5 @@ interface ConvertMoneyHelperInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function convertAmount($amount, $sourceCurrencyCode, $targetCurrencyCode);
+    public function convertAmount(int $amount, ?string $sourceCurrencyCode, ?string $targetCurrencyCode): string;
 }

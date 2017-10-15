@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Remover;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover;
 use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemoverInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
@@ -30,16 +31,11 @@ final class ReviewerReviewsRemoverSpec extends ObjectBehavior
         EntityRepository $reviewRepository,
         ObjectManager $reviewManager,
         ReviewableRatingUpdaterInterface $averageRatingUpdater
-    ) {
+    ): void {
         $this->beConstructedWith($reviewRepository, $reviewManager, $averageRatingUpdater);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ReviewerReviewsRemover::class);
-    }
-
-    function it_implements_reviewer_reviews_remover_interface()
+    function it_implements_reviewer_reviews_remover_interface(): void
     {
         $this->shouldImplement(ReviewerReviewsRemoverInterface::class);
     }
@@ -51,7 +47,7 @@ final class ReviewerReviewsRemoverSpec extends ObjectBehavior
         ReviewerInterface $author,
         ReviewableInterface $reviewSubject,
         ReviewInterface $review
-    ) {
+    ): void {
         $reviewRepository->findBy(['author' => $author])->willReturn([$review]);
         $review->getReviewSubject()->willReturn($reviewSubject);
 

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -24,18 +26,20 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class ContainsProductRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'contains_product';
+    public const TYPE = 'contains_product';
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnsupportedTypeException
      */
-    public function isEligible(PromotionSubjectInterface $subject, array $configuration)
+    public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
     {
         if (!$subject instanceof OrderInterface) {
             throw new UnsupportedTypeException($subject, OrderInterface::class);
         }
 
-        /* @var $item OrderItemInterface */
+        /** @var $item OrderItemInterface */
         foreach ($subject->getItems() as $item) {
             if ($configuration['product_code'] === $item->getProduct()->getCode()) {
                 return true;

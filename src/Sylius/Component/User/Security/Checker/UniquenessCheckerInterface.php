@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Security\Checker;
 
 /**
@@ -21,5 +23,5 @@ interface UniquenessCheckerInterface
      *
      * @return bool
      */
-    public function isUnique($token);
+    public function isUnique(string $token): bool;
 }

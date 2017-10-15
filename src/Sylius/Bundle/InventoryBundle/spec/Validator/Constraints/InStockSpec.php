@@ -9,30 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock;
 use Symfony\Component\Validator\Constraint;
 
 final class InStockSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(InStock::class);
-    }
-
-    function it_is_a_constraint()
+    function it_is_a_constraint(): void
     {
         $this->shouldHaveType(Constraint::class);
     }
 
-    function it_has_validator()
+    function it_has_validator(): void
     {
         $this->validatedBy()->shouldReturn('sylius_in_stock');
     }
 
-    function it_has_a_target()
+    function it_has_a_target(): void
     {
         $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
     }

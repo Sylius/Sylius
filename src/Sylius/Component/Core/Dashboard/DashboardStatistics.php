@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Dashboard;
+declare(strict_types=1);
 
-use Webmozart\Assert\Assert;
+namespace Sylius\Component\Core\Dashboard;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -40,10 +40,8 @@ class DashboardStatistics
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($totalSales, $numberOfNewOrders, $numberOfNewCustomers)
+    public function __construct(int $totalSales, int $numberOfNewOrders, int $numberOfNewCustomers)
     {
-        Assert::allInteger([$totalSales, $numberOfNewCustomers, $numberOfNewOrders]);
-
         $this->totalSales = $totalSales;
         $this->numberOfNewOrders = $numberOfNewOrders;
         $this->numberOfNewCustomers = $numberOfNewCustomers;
@@ -52,7 +50,7 @@ class DashboardStatistics
     /**
      * @return int
      */
-    public function getTotalSales()
+    public function getTotalSales(): int
     {
         return $this->totalSales;
     }
@@ -60,7 +58,7 @@ class DashboardStatistics
     /**
      * @return int
      */
-    public function getNumberOfNewOrders()
+    public function getNumberOfNewOrders(): int
     {
         return $this->numberOfNewOrders;
     }
@@ -68,7 +66,7 @@ class DashboardStatistics
     /**
      * @return int
      */
-    public function getNumberOfNewCustomers()
+    public function getNumberOfNewCustomers(): int
     {
         return $this->numberOfNewCustomers;
     }
@@ -76,7 +74,7 @@ class DashboardStatistics
     /**
      * @return int
      */
-    public function getAverageOrderValue()
+    public function getAverageOrderValue(): int
     {
         if (0 === $this->numberOfNewOrders) {
             return 0;

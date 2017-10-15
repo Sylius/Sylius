@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -26,26 +27,21 @@ use Symfony\Component\Form\FormInterface;
  */
 class AddBaseCurrencySubscriberSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(AddBaseCurrencySubscriber::class);
-    }
-
-    function it_implements_event_subscriber_interface()
+    function it_implements_event_subscriber_interface(): void
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_subscribes_to_event()
+    function it_subscribes_to_event(): void
     {
         $this::getSubscribedEvents()->shouldReturn([FormEvents::PRE_SET_DATA => 'preSetData']);
     }
-    
+
     function it_sets_base_currency_as_disabled_when_channel_is_not_new(
-        FormEvent $event, 
-        ChannelInterface $channel, 
+        FormEvent $event,
+        ChannelInterface $channel,
         FormInterface $form
-    ) {
+    ): void {
         $event->getData()->willReturn($channel);
         $event->getForm()->willReturn($form);
 
@@ -63,7 +59,7 @@ class AddBaseCurrencySubscriberSpec extends ObjectBehavior
         FormEvent $event,
         ChannelInterface $channel,
         FormInterface $form
-    ) {
+    ): void {
         $event->getData()->willReturn($channel);
         $event->getForm()->willReturn($form);
 
@@ -76,11 +72,11 @@ class AddBaseCurrencySubscriberSpec extends ObjectBehavior
 
         $this->preSetData($event);
     }
-    
+
     function it_throws_unexpected_type_exception_when_resource_does_not_implements_channel_interface(
         FormEvent $event,
         $resource
-    ) {
+    ): void {
         $event->getData()->willReturn($resource);
         $this->shouldThrow(UnexpectedTypeException::class)->during('preSetData', [$event]);
     }

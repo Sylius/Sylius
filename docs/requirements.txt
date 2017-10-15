@@ -1,2 +1,3 @@
-sphinx>=1.4,<2.0
+sphinx>=1.6,<2.0,!=1.6.4
+pyOpenSSL==16.2.0
 requests[security]

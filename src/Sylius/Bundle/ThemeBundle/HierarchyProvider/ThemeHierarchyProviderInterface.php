@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\HierarchyProvider;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -19,11 +21,11 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 interface ThemeHierarchyProviderInterface
 {
     /**
-     * @param ThemeInterface|null $theme
+     * @param ThemeInterface $theme
      *
-     * @return ThemeInterface[]
+     * @return array|ThemeInterface[]
      *
      * @throws \InvalidArgumentException If dependencies could not be resolved.
      */
-    public function getThemeHierarchy(ThemeInterface $theme = null);
+    public function getThemeHierarchy(ThemeInterface $theme): array;
 }

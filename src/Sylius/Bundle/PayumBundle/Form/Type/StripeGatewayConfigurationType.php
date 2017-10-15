@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -24,25 +26,25 @@ final class StripeGatewayConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('secret_key', TextType::class, [
-                'label' => 'sylius.form.gateway_configuration.stripe.secret_key',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'sylius.gateway_config.stripe.secret_key.not_blank',
-                        'groups' => 'sylius',
-                    ])
-                ],
-            ])
             ->add('publishable_key', TextType::class, [
                 'label' => 'sylius.form.gateway_configuration.stripe.publishable_key',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'sylius.gateway_config.stripe.publishable_key.not_blank',
                         'groups' => 'sylius',
-                    ])
+                    ]),
+                ],
+            ])
+            ->add('secret_key', TextType::class, [
+                'label' => 'sylius.form.gateway_configuration.stripe.secret_key',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'sylius.gateway_config.stripe.secret_key.not_blank',
+                        'groups' => 'sylius',
+                    ]),
                 ],
             ])
         ;

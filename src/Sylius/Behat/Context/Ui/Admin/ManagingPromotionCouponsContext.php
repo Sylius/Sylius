@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -135,7 +137,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When I make generated coupons valid until :date
      */
-    public function iMakeGeneratedCouponsValidUntil(\DateTime $date)
+    public function iMakeGeneratedCouponsValidUntil(\DateTimeInterface $date)
     {
         $this->generatePage->setExpiresAt($date);
     }
@@ -193,7 +195,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When I make it valid until :date
      */
-    public function iMakeItValidUntil(\DateTime $date)
+    public function iMakeItValidUntil(\DateTimeInterface $date)
     {
         $this->createPage->setExpiresAt($date);
     }
@@ -201,7 +203,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When I change expires date to :date
      */
-    public function iChangeExpiresDateTo(\DateTime $date)
+    public function iChangeExpiresDateTo(\DateTimeInterface $date)
     {
         $this->updatePage->setExpiresAt($date);
     }
@@ -263,7 +265,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then this coupon should be valid until :date
      */
-    public function thisCouponShouldBeValidUntil(\DateTime $date)
+    public function thisCouponShouldBeValidUntil(\DateTimeInterface $date)
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['expiresAt' => date('d-m-Y', $date->getTimestamp())]));
     }

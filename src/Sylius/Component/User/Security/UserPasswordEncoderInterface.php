@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Security;
 
 use Sylius\Component\User\Model\CredentialsHolderInterface;
@@ -23,5 +25,5 @@ interface UserPasswordEncoderInterface
      *
      * @return string
      */
-    public function encode(CredentialsHolderInterface $user);
+    public function encode(CredentialsHolderInterface $user): string;
 }

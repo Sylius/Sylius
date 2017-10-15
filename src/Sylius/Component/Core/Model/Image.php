@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 /**
@@ -17,7 +19,7 @@ namespace Sylius\Component\Core\Model;
 abstract class Image implements ImageInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 
@@ -41,11 +43,6 @@ abstract class Image implements ImageInterface
      */
     protected $owner;
 
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime();
-    }
-
     /**
      * @return int
      */
@@ -57,7 +54,7 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -65,7 +62,7 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function setType($type)
+    public function setType(?string $type): void
     {
         $this->type = $type;
     }
@@ -73,7 +70,7 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function getFile()
+    public function getFile(): ?\SplFileInfo
     {
         return $this->file;
     }
@@ -81,7 +78,7 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function setFile(\SplFileInfo $file)
+    public function setFile(?\SplFileInfo $file): void
     {
         $this->file = $file;
     }
@@ -89,7 +86,7 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasFile()
+    public function hasFile(): bool
     {
         return null !== $this->file;
     }
@@ -97,7 +94,7 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPath()
+    public function getPath(): ?string
     {
         return $this->path;
     }
@@ -105,7 +102,7 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPath($path)
+    public function setPath(?string $path): void
     {
         $this->path = $path;
     }
@@ -113,7 +110,7 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPath()
+    public function hasPath(): bool
     {
         return null !== $this->path;
     }
@@ -129,7 +126,7 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function setOwner($owner)
+    public function setOwner($owner): void
     {
         $this->owner = $owner;
     }

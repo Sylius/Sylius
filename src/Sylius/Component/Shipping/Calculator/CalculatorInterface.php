@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShipmentInterface;
@@ -24,10 +26,10 @@ interface CalculatorInterface
      *
      * @return int
      */
-    public function calculate(ShipmentInterface $subject, array $configuration);
+    public function calculate(ShipmentInterface $subject, array $configuration): int;
 
     /**
      * @return string
      */
-    public function getType();
+    public function getType(): string;
 }

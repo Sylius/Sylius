@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\OrderBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -32,7 +34,7 @@ class CartItemType extends AbstractResourceType
      * @param DataMapperInterface $dataMapper
      */
     public function __construct(
-        $dataClass,
+        string $dataClass,
         array $validationGroups = [],
         DataMapperInterface $dataMapper
     ) {
@@ -44,7 +46,7 @@ class CartItemType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('quantity', IntegerType::class, [
@@ -58,7 +60,7 @@ class CartItemType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_cart_item';
     }

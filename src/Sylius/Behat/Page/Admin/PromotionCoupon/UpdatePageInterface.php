@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
@@ -29,9 +31,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function setCustomerUsageLimit($limit);
 
     /**
-     * @param \DateTime $date
+     * @param \DateTimeInterface $date
      */
-    public function setExpiresAt(\DateTime $date);
+    public function setExpiresAt(\DateTimeInterface $date);
 
     /**
      * @param int $limit

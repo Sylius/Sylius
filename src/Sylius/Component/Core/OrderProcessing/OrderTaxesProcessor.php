@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
@@ -64,7 +66,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(BaseOrderInterface $order)
+    public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
@@ -84,6 +86,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         foreach ($this->strategyRegistry->all() as $strategy) {
             if ($strategy->supports($order, $zone)) {
                 $strategy->applyTaxes($order, $zone);
+
                 return;
             }
         }

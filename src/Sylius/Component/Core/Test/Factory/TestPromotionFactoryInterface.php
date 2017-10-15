@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Test\Factory;
 
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -24,7 +26,7 @@ interface TestPromotionFactoryInterface
      *
      * @return PromotionInterface
      */
-    public function create($name);
+    public function create(string $name): PromotionInterface;
 
     /**
      * @param string $name
@@ -32,5 +34,5 @@ interface TestPromotionFactoryInterface
      *
      * @return PromotionInterface
      */
-    public function createForChannel($name, ChannelInterface $channel);
+    public function createForChannel(string $name, ChannelInterface $channel): PromotionInterface;
 }

@@ -30,6 +30,7 @@ sylius:
                 format: Formátum
             select:
                 values: Értékek
+                choose: Válassz egy lehetőséget
             text:
                 min: Minimális hossz
                 max: Maximális hossz

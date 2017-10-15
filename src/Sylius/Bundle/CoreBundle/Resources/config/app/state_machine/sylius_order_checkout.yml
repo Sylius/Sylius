@@ -55,3 +55,11 @@ winzou_state_machine:
                     do: ["@sylius.state_resolver.order_checkout", "resolve"]
                     args: ["object"]
                     priority: 1
+                sylius_control_payment_state:
+                    on: ["complete"]
+                    do: ["@sylius.state_resolver.order_payment", "resolve"]
+                    args: ["object"]
+                sylius_control_shipping_state:
+                    on: ["complete"]
+                    do: ["@sylius.state_resolver.order_shipping", "resolve"]
+                    args: ["object"]

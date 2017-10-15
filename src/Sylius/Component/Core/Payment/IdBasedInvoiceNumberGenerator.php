@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Payment;
 
 use Sylius\Component\Order\Model\OrderInterface;
@@ -22,8 +24,8 @@ final class IdBasedInvoiceNumberGenerator implements InvoiceNumberGeneratorInter
     /**
      * {@inheritdoc}
      */
-    public function generate(OrderInterface $order, PaymentInterface $payment)
+    public function generate(OrderInterface $order, PaymentInterface $payment): string
     {
-        return $order->getId().'-'.$payment->getId();
+        return $order->getId() . '-' . $payment->getId();
     }
 }

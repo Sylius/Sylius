@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Loader;
 
 use PhpSpec\ObjectBehavior;
@@ -19,7 +21,6 @@ use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Loader\CircularDependencyCheckerInterface;
 use Sylius\Bundle\ThemeBundle\Loader\CircularDependencyFoundException;
-use Sylius\Bundle\ThemeBundle\Loader\ThemeLoader;
 use Sylius\Bundle\ThemeBundle\Loader\ThemeLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Loader\ThemeLoadingFailedException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
@@ -39,7 +40,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
         ThemeScreenshotFactoryInterface $themeScreenshotFactory,
         HydrationInterface $themeHydrator,
         CircularDependencyCheckerInterface $circularDependencyChecker
-    ) {
+    ): void {
         $this->beConstructedWith(
             $configurationProvider,
             $themeFactory,
@@ -50,12 +51,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ThemeLoader::class);
-    }
-
-    function it_implements_theme_loader_interface()
+    function it_implements_theme_loader_interface(): void
     {
         $this->shouldImplement(ThemeLoaderInterface::class);
     }
@@ -66,7 +62,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
         HydrationInterface $themeHydrator,
         CircularDependencyCheckerInterface $circularDependencyChecker,
         ThemeInterface $theme
-    ) {
+    ): void {
         $configurationProvider->getConfigurations()->willReturn([
             [
                 'name' => 'first/theme',
@@ -99,7 +95,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
         HydrationInterface $themeHydrator,
         CircularDependencyCheckerInterface $circularDependencyChecker,
         ThemeInterface $theme
-    ) {
+    ): void {
         $themeAuthor = new ThemeAuthor();
 
         $configurationProvider->getConfigurations()->willReturn([
@@ -109,7 +105,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
                 'parents' => [],
                 'authors' => [['name' => 'Richard Rynkowsky']],
                 'screenshots' => [],
-            ]
+            ],
         ]);
 
         $themeFactory->create('first/theme', '/theme/path')->willReturn($theme);
@@ -135,7 +131,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
         HydrationInterface $themeHydrator,
         CircularDependencyCheckerInterface $circularDependencyChecker,
         ThemeInterface $theme
-    ) {
+    ): void {
         $themeScreenshot = new ThemeScreenshot('screenshot/omg.jpg');
 
         $configurationProvider->getConfigurations()->willReturn([
@@ -173,7 +169,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
         CircularDependencyCheckerInterface $circularDependencyChecker,
         ThemeInterface $firstTheme,
         ThemeInterface $secondTheme
-    ) {
+    ): void {
         $configurationProvider->getConfigurations()->willReturn([
             [
                 'name' => 'first/theme',
@@ -219,7 +215,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
         ConfigurationProviderInterface $configurationProvider,
         ThemeFactoryInterface $themeFactory,
         ThemeInterface $firstTheme
-    ) {
+    ): void {
         $configurationProvider->getConfigurations()->willReturn([
             [
                 'name' => 'first/theme',
@@ -245,7 +241,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
         CircularDependencyCheckerInterface $circularDependencyChecker,
         ThemeInterface $firstTheme,
         ThemeInterface $secondTheme
-    ) {
+    ): void {
         $configurationProvider->getConfigurations()->willReturn([
             [
                 'name' => 'first/theme',

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\ExpressionLanguage;
 
 use Symfony\Component\DependencyInjection\ExpressionLanguage as BaseExpressionLanguage;
@@ -22,7 +24,7 @@ final class ExpressionLanguage extends BaseExpressionLanguage
     /**
      * {@inheritdoc}
      */
-    public function __construct(ParserCacheInterface $parser = null, array $providers = array())
+    public function __construct(?ParserCacheInterface $parser = null, array $providers = [])
     {
         array_unshift($providers, new NotNullExpressionFunctionProvider());
 

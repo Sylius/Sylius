@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Repository;
 
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -22,12 +24,12 @@ interface CustomerRepositoryInterface extends RepositoryInterface
     /**
      * @return int
      */
-    public function count();
+    public function countCustomers(): int;
 
     /**
      * @param int $count
      *
-     * @return CustomerInterface[]
+     * @return array|CustomerInterface[]
      */
-    public function findLatest($count);
+    public function findLatest(int $count): array;
 }

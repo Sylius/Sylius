@@ -36,7 +36,10 @@ sylius:
             configuration: Configuration
             description: Description
             enabled: Activé
+            match_all_category_requirement: Tous les produits doivent correspondre à la catégorie d'expédition
+            match_any_category_requirement: Au moins un des produits doivent correspondre à la catégorie d'expédition
+            match_none_category_requirement: Aucune contrainte de correspondance à la catégorie d'expédition
             name: Nom
+            position: Emplacement
             tax_category: Catégorie de taxe
             translations: Traductions
-            position: Emplacement

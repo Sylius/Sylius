@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\Locale;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -36,7 +38,7 @@ final class UrlBasedLocaleSwitcher implements LocaleSwitcherInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(Request $request, $localeCode)
+    public function handle(Request $request, string $localeCode): RedirectResponse
     {
         return new RedirectResponse($this->urlGenerator->generate('sylius_shop_homepage', ['_locale' => $localeCode]));
     }

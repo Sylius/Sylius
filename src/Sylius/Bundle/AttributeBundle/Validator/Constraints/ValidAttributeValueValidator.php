@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
@@ -39,7 +41,7 @@ final class ValidAttributeValueValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$value instanceof AttributeValueInterface) {
             throw new UnexpectedTypeException(get_class($value), AttributeValueInterface::class);

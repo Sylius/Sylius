@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Modifier;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -21,7 +23,7 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
     /**
      * {@inheritdoc}
      */
-    public function increment(OrderInterface $order)
+    public function increment(OrderInterface $order): void
     {
         foreach ($order->getPromotions() as $promotion) {
             $promotion->incrementUsed();
@@ -36,7 +38,7 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
     /**
      * {@inheritdoc}
      */
-    public function decrement(OrderInterface $order)
+    public function decrement(OrderInterface $order): void
     {
         foreach ($order->getPromotions() as $promotion) {
             $promotion->decrementUsed();

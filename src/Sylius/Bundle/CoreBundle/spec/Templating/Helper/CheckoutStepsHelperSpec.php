@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -26,19 +27,14 @@ final class CheckoutStepsHelperSpec extends ObjectBehavior
     function let(
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
-    ) {
+    ): void {
         $this->beConstructedWith(
             $orderPaymentMethodSelectionRequirementChecker,
             $orderShippingMethodSelectionRequirementChecker
         );
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CheckoutStepsHelper::class);
-    }
-
-    function it_is_helper()
+    function it_is_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }
@@ -46,7 +42,7 @@ final class CheckoutStepsHelperSpec extends ObjectBehavior
     function it_checks_if_order_requires_shipping(
         OrderInterface $order,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
-    ) {
+    ): void {
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
         $this->isShippingRequired($order)->shouldReturn(true);
@@ -55,14 +51,13 @@ final class CheckoutStepsHelperSpec extends ObjectBehavior
     function it_checks_if_order_required_payment(
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
-    ) {
+    ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
         $this->isPaymentRequired($order)->shouldReturn(true);
     }
 
-    function it_has_name()
+    function it_has_name(): void
     {
         $this->getName()->shouldReturn('sylius_checkout_steps');
     }
-
 }

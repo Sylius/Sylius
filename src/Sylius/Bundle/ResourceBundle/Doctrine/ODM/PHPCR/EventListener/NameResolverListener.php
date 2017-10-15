@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
@@ -81,11 +83,12 @@ class NameResolverListener
 
             if (null === $existing) {
                 $metadata->setFieldValue($document, $nameField, $candidateName);
+
                 return;
             }
 
             $candidateName = sprintf('%s-%d', $baseCandidateName, $index);
-            $index++;
+            ++$index;
         }
     }
 }

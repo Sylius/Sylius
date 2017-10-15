@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Resource\Translation\Provider;
+declare(strict_types=1);
 
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+namespace Sylius\Component\Resource\Translation\Provider;
 
 /**
  * @author Kamil Kokot <kamil@kokot.me>
@@ -32,7 +32,7 @@ final class ImmutableTranslationLocaleProvider implements TranslationLocaleProvi
      * @param array $definedLocalesCodes
      * @param string $defaultLocaleCode
      */
-    public function __construct(array $definedLocalesCodes, $defaultLocaleCode)
+    public function __construct(array $definedLocalesCodes, string $defaultLocaleCode)
     {
         $this->definedLocalesCodes = $definedLocalesCodes;
         $this->defaultLocaleCode = $defaultLocaleCode;
@@ -41,7 +41,7 @@ final class ImmutableTranslationLocaleProvider implements TranslationLocaleProvi
     /**
      * {@inheritdoc}
      */
-    public function getDefinedLocalesCodes()
+    public function getDefinedLocalesCodes(): array
     {
         return $this->definedLocalesCodes;
     }
@@ -49,7 +49,7 @@ final class ImmutableTranslationLocaleProvider implements TranslationLocaleProvi
     /**
      * {@inheritdoc}
      */
-    public function getDefaultLocaleCode()
+    public function getDefaultLocaleCode(): string
     {
         return $this->defaultLocaleCode;
     }

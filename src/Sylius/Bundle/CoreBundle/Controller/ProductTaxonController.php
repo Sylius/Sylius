@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -28,8 +30,10 @@ class ProductTaxonController extends ResourceController
      * @param Request $request
      *
      * @return Response
+     *
+     * @throws HttpException
      */
-    public function updatePositionsAction(Request $request)
+    public function updatePositionsAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
@@ -50,7 +54,7 @@ class ProductTaxonController extends ResourceController
                 }
 
                 $productTaxonFromBase = $this->repository->findOneBy(['id' => $productTaxon['id']]);
-                $productTaxonFromBase->setPosition($productTaxon['position']);
+                $productTaxonFromBase->setPosition((int) $productTaxon['position']);
 
                 $this->manager->flush();
             }

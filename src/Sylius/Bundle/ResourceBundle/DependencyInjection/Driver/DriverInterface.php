@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -23,12 +25,12 @@ interface DriverInterface
      * @param ContainerBuilder $container
      * @param MetadataInterface $metadata
      */
-    public function load(ContainerBuilder $container, MetadataInterface $metadata);
+    public function load(ContainerBuilder $container, MetadataInterface $metadata): void;
 
     /**
      * Returns unique name of the driver.
      *
      * @return string
      */
-    public function getType();
+    public function getType(): string;
 }

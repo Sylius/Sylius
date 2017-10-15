@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\ExpressionLanguage;
 
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
@@ -23,7 +25,7 @@ final class NotNullExpressionFunctionProvider implements ExpressionFunctionProvi
     /**
      * {@inheritdoc}
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new ExpressionFunction('notFoundOnNull', function ($result) {

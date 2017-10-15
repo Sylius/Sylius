@@ -9,6 +9,8 @@ default:
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.user
 
@@ -16,10 +18,16 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.geographical
+                - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.user
 
                 - sylius.behat.context.ui.shop.address_book
+                - sylius.behat.context.ui.shop.cart
+                - sylius.behat.context.ui.shop.checkout
+                - sylius.behat.context.ui.shop.checkout.addressing
+                - sylius.behat.context.ui.shop.checkout.complete
             filters:
                 tags: "@address_book && @ui"

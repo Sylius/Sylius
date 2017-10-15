@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Taxation\Resolver;
 
 use Sylius\Component\Taxation\Model\TaxableInterface;
@@ -23,7 +25,7 @@ interface TaxRateResolverInterface
      * @param TaxableInterface $taxable
      * @param array $criteria
      *
-     * @return null|TaxRateInterface
+     * @return TaxRateInterface|null
      */
-    public function resolve(TaxableInterface $taxable, array $criteria = []);
+    public function resolve(TaxableInterface $taxable, array $criteria = []): ?TaxRateInterface;
 }

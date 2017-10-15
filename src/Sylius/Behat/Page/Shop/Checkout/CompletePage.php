@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Driver\Selenium2Driver;
@@ -327,7 +329,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'billing_address' => '#sylius-billing-address',
             'confirm_button' => 'form button',
             'currency' => '#sylius-order-currency-code',
-            'extra_notes' =>'#sylius_checkout_complete_notes',
+            'extra_notes' => '#sylius_checkout_complete_notes',
             'items_table' => '#sylius-order',
             'locale' => '#sylius-order-locale-name',
             'order_total' => 'td:contains("Total")',

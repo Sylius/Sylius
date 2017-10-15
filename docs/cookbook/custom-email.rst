@@ -4,7 +4,7 @@ How to send a custom e-mail?
 .. note::
 
     This cookbook is suitable for a clean :doc:`sylius-standard installation </book/installation/installation>`.
-    For more general tips, while using :doc:`SyliusMailerBundle </bundles/SyliusMailerBundle/index>`
+    For more general tips, while using :doc:`SyliusMailerBundle </components_and_bundles/bundles/SyliusMailerBundle/index>`
     go to `Sending configurable e-mails in Symfony Blogpost <http://sylius.org/blog/sending-configurable-e-mails-in-symfony>`_.
 
 Currently **Sylius** is sending e-mails only in a few "must-have" cases - see :doc:`E-mails documentation </book/architecture/emails>`.
@@ -127,7 +127,7 @@ To achieve that you will need to:
                     continue;
                 }
                 foreach($admins as $admin) {
-                    $this->emailSender->send('out_of_stock', $admin->getEmail(), ['variant' => $variant]);
+                    $this->emailSender->send('out_of_stock', [$admin->getEmail()], ['variant' => $variant]);
                 }
             }
         }

@@ -9,6 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace AppBundle\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
@@ -63,7 +73,7 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PUT', '/books/'. $objects["book1"]->getId(), [], [], ['CONTENT_TYPE' => 'application/json'], $data);
+        $this->client->request('PUT', '/books/' . $objects['book1']->getId(), [], [], ['CONTENT_TYPE' => 'application/json'], $data);
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -82,7 +92,7 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PATCH', '/books/'. $objects["book1"]->getId(), [], [], ['CONTENT_TYPE' => 'application/json'], $data);
+        $this->client->request('PATCH', '/books/' . $objects['book1']->getId(), [], [], ['CONTENT_TYPE' => 'application/json'], $data);
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -94,7 +104,7 @@ EOT;
     {
         $objects = $this->loadFixturesFromFile('books.yml');
 
-        $this->client->request('DELETE', '/books/'. $objects["book1"]->getId());
+        $this->client->request('DELETE', '/books/' . $objects['book1']->getId());
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -106,7 +116,7 @@ EOT;
     {
         $objects = $this->loadFixturesFromFile('books.yml');
 
-        $this->client->request('GET', '/books/'. $objects["book1"]->getId());
+        $this->client->request('GET', '/books/' . $objects['book1']->getId());
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'books/show_response');
     }

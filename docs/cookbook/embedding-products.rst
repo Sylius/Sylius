@@ -32,21 +32,21 @@ Your extending repository class should look like that:
          * {@inheritdoc}
          */
         public function findLatestByChannelAndTaxonCode(ChannelInterface $channel, $code, $count)
-        {
-            return $this->createQueryBuilder('o')
-                ->innerJoin('o.channels', 'channel')
-                ->addOrderBy('o.createdAt', 'desc')
-                ->andWhere('o.enabled = true')
-                ->andWhere('channel = :channel')
-                ->innerJoin('o.taxons', 'taxon')
-                ->andWhere('taxon.code = :code')
-                ->setParameter('channel', $channel)
-                ->setParameter('code', $code)
-                ->setMaxResults($count)
-                ->getQuery()
-                ->getResult()
-            ;
-        }
+            {
+                return $this->createQueryBuilder('o')
+                    ->innerJoin('o.channels', 'channel')
+                    ->andWhere('o.enabled = true')
+                    ->andWhere('channel = :channel')
+                    ->innerJoin('o.productTaxons', 'productTaxons')
+                    ->addOrderBy('productTaxons.position', 'asc')
+                    ->innerJoin('productTaxons.taxon', 'taxon')
+                    ->andWhere('taxon.code = :code')
+                    ->setParameter('code', $code)
+                    ->setParameter('channel', $channel)
+                    ->setMaxResults($count)
+                    ->getQuery()
+                    ->getResult();
+            }
     }
 
 And should be registered in the ``app/config/config.yml`` just like that:
@@ -84,14 +84,14 @@ To be able to render a partial with the retrieved products configure routing for
 Render the result of your new path in a template
 ------------------------------------------------
 
-Having a new path, you can call it in a twig template. Remember that you need to have your **taxon as a variable available there**.
-Render the list using a simple template first.
+Having a new path, you can call it in a twig template that has acces to a taxon. Remember that you need to have your **taxon as a variable available there**.
+Render the list using a simple built-in template to try it out.
 
 .. code-block:: twig
 
-    {{ render(url('app_shop_partial_product_index_latest_by_taxon_code', {'code': taxon.code, 'count': 5, 'template': '@SyliusShop/Product/_simpleList.html.twig'})) }}
+    {{ render(url('app_shop_partial_product_index_latest_by_taxon_code', {'code': taxon.code, 'count': 5, 'template': '@SyliusShop/Product/_horizontalList.html.twig'})) }}
 
-Done. In the taxon view where you have rendered the new url you will see a simple list of 5 newest products from this taxon.
+Done. In the taxon view where you have rendered the new url you will see a simple list of 5 products from this taxon, ordered by position.
 
 Learn more
 ----------

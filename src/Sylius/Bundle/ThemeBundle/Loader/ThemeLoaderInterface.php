@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Loader;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -19,9 +21,9 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 interface ThemeLoaderInterface
 {
     /**
-     * @return ThemeInterface[]
+     * @return array|ThemeInterface[]
      *
      * @throws ThemeLoadingFailedException
      */
-    public function load();
+    public function load(): array;
 }

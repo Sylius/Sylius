@@ -19,10 +19,16 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Artikal
+        promotion_coupon:
+            per_customer_usage_limit: Ograničenje korištenja po kupcu
         group:
             name: Naziv grupe
             roles: Role (korisnička prava)
         channel:
+            contact_email: Kontaktna email adresa
+            currencies: Valute
+            currency_base: Osnovna valuta
+            account_verification_required: Je li potrebna potvrda računa?
             locales: Lokaliteti
             payment_methods: Načini plaćanja
             shipping_methods: Načini slanja
@@ -103,6 +109,8 @@ sylius:
         product_association_type:
             name: Naziv grupe
         promotion_rule:
+            product:
+                products: Proizvodi
             total_of_items_from_taxon:
                 amount: Iznos
         payment_method:

@@ -28,5 +28,8 @@ The Cookbook
     cron-jobs
     installation-commands
     platform-sh
+    platform-sh-advanced
+    mailer
+    admin-js-and-css
 
 .. include:: /cookbook/map.rst.inc

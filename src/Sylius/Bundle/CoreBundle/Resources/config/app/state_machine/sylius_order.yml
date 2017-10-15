@@ -27,7 +27,7 @@ winzou_state_machine:
                     args: ["object"]
                 sylius_assign_token:
                     on: ["create"]
-                    do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
+                    do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValueIfNotSet"]
                     args: ["object"]
             after:
                 sylius_request_shipping:

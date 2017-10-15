@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderItem as BaseOrderItem;
@@ -27,7 +29,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getProduct()
+    public function getProduct(): ?ProductInterface
     {
         return $this->variant->getProduct();
     }
@@ -35,7 +37,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getVariant()
+    public function getVariant(): ?ProductVariantInterface
     {
         return $this->variant;
     }
@@ -43,7 +45,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function setVariant(ProductVariantInterface $variant)
+    public function setVariant(?ProductVariantInterface $variant): void
     {
         $this->variant = $variant;
     }
@@ -51,7 +53,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function equals(BaseOrderItemInterface $item)
+    public function equals(BaseOrderItemInterface $item): bool
     {
         return parent::equals($item) || ($item instanceof static && $item->getVariant() === $this->variant);
     }
@@ -61,7 +63,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
      *
      * {@inheritdoc}
      */
-    public function getTaxTotal()
+    public function getTaxTotal(): int
     {
         $taxTotal = 0;
 
@@ -81,7 +83,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
      *
      * {@inheritdoc}
      */
-    public function getDiscountedUnitPrice()
+    public function getDiscountedUnitPrice(): int
     {
         if ($this->units->isEmpty()) {
             return $this->unitPrice;
@@ -96,7 +98,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getSubtotal()
+    public function getSubtotal(): int
     {
         return $this->getDiscountedUnitPrice() * $this->quantity;
     }

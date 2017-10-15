@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -23,11 +25,11 @@ use Webmozart\Assert\Assert;
 final class OrderProductEligibilityValidator extends ConstraintValidator
 {
     /**
-     * @param OrderInterface $value
-     *
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function validate($order, Constraint $constraint)
+    public function validate($order, Constraint $constraint): void
     {
         Assert::isInstanceOf($order, OrderInterface::class);
 

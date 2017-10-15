@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Product\Model\ProductAssociationType;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 /**
@@ -21,18 +22,13 @@ use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
  */
 final class ProductAssociationTypeSpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
         $this->setCurrentLocale('en_US');
         $this->setFallbackLocale('en_US');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProductAssociationType::class);
-    }
-
-    function it_implements_association_type_interface()
+    function it_implements_association_type_interface(): void
     {
         $this->shouldImplement(ProductAssociationTypeInterface::class);
     }

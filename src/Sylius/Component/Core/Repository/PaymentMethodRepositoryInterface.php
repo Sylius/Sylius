@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Repository;
 
 use Doctrine\ORM\QueryBuilder;
@@ -25,12 +27,12 @@ interface PaymentMethodRepositoryInterface extends BasePaymentMethodRepositoryIn
      *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder($locale);
+    public function createListQueryBuilder(string $locale): QueryBuilder;
 
     /**
      * @param ChannelInterface $channel
      *
      * @return array
      */
-    public function findEnabledForChannel(ChannelInterface $channel);
+    public function findEnabledForChannel(ChannelInterface $channel): array;
 }

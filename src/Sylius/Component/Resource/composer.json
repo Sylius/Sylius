@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.1",
 
         "doctrine/common": "^2.6",
         "gedmo/doctrine-extensions": "^2.4",
@@ -31,7 +31,7 @@
         "pagerfanta/pagerfanta": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.2",
+        "phpspec/phpspec": "^4.0",
         "sylius/locale": "^1.0"
     },
     "suggest": {
@@ -56,7 +56,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     }
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
 /**
@@ -17,9 +19,9 @@ namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
  */
 final class ExtraComparison
 {
-    const NOT_CONTAINS = 'NOT_CONTAINS';
-    const IS_NULL = 'IS_NULL';
-    const IS_NOT_NULL = 'IS_NOT_NULL';
+    public const NOT_CONTAINS = 'NOT_CONTAINS';
+    public const IS_NULL = 'IS_NULL';
+    public const IS_NOT_NULL = 'IS_NOT_NULL';
 
     private function __construct()
     {

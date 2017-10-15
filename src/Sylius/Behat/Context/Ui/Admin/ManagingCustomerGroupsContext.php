@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -118,7 +120,6 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @Then this customer group with name :name should appear in the store
      * @Then I should see the customer group :name in the list
-     *
      */
     public function thisCustomerGroupWithNameShouldAppearInTheStore($name)
     {

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Templating;
 
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
@@ -35,7 +37,7 @@ final class TemplateNameParser implements TemplateNameParserInterface
     private $kernel;
 
     /**
-     * @var TemplateReferenceInterface[]
+     * @var array|TemplateReferenceInterface[]
      */
     private $cache = [];
 
@@ -52,11 +54,13 @@ final class TemplateNameParser implements TemplateNameParserInterface
     /**
      * {@inheritdoc}
      */
-    public function parse($name)
+    public function parse($name): TemplateReferenceInterface
     {
         if ($name instanceof TemplateReferenceInterface) {
             return $name;
-        } elseif (isset($this->cache[$name])) {
+        }
+
+        if (isset($this->cache[$name])) {
             return $this->cache[$name];
         }
 

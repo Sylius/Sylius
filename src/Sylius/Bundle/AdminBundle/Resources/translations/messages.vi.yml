@@ -9,6 +9,7 @@ sylius:
                     attributes: Thuộc tính
                     inventory: Hàng tồn kho
                     options: Tùy chọn
+                    taxons: Phân loại
                 configuration:
                     channels: Kênh
                     countries: Quốc gia

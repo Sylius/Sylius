@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Taxon;
 
 use Behat\Mink\Driver\Selenium2Driver;
@@ -44,7 +46,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $leaves = $this->getLeaves();
         foreach ($leaves as $leaf) {
             if (strpos($leaf->getText(), $name) !== false) {
-                $matchedLeavesCounter++;
+                ++$matchedLeavesCounter;
             }
         }
 
@@ -119,7 +121,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
         $imageForm = $this->getLastImageElement();
         $imageForm->fillField('Type', $type);
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
     /**

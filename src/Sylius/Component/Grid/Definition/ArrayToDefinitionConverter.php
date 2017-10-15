@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Definition;
 
 use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
@@ -19,7 +21,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
 {
-    const EVENT_NAME = 'sylius.grid.%s';
+    public const EVENT_NAME = 'sylius.grid.%s';
 
     /**
      * @var EventDispatcherInterface
@@ -37,7 +39,7 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
     /**
      * {@inheritdoc}
      */
-    public function convert($code, array $configuration)
+    public function convert(string $code, array $configuration): Grid
     {
         $grid = Grid::fromCodeAndDriverConfiguration(
             $code,
@@ -76,7 +78,7 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
      *
      * @return Field
      */
-    private function convertField($name, array $configuration)
+    private function convertField(string $name, array $configuration): Field
     {
         $field = Field::fromNameAndType($name, $configuration['type']);
 
@@ -90,7 +92,17 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
             $field->setEnabled($configuration['enabled']);
         }
         if (array_key_exists('sortable', $configuration)) {
-            $field->setSortable($configuration['sortable']);
+            $sortable = $configuration['sortable'];
+
+            if ($sortable === true || $sortable === null) {
+                $sortable = $name;
+            }
+
+            if ($sortable === false) {
+                $sortable = null;
+            }
+
+            $field->setSortable($sortable);
         }
         if (array_key_exists('position', $configuration)) {
             $field->setPosition($configuration['position']);
@@ -108,7 +120,7 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
      *
      * @return Filter
      */
-    private function convertFilter($name, array $configuration)
+    private function convertFilter(string $name, array $configuration): Filter
     {
         $filter = Filter::fromNameAndType($name, $configuration['type']);
 
@@ -143,7 +155,7 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
      *
      * @return ActionGroup
      */
-    private function convertActionGroup($name, array $configuration)
+    private function convertActionGroup(string $name, array $configuration): ActionGroup
     {
         $actionGroup = ActionGroup::named($name);
 
@@ -160,7 +172,7 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
      *
      * @return Action
      */
-    private function convertAction($name, array $configuration)
+    private function convertAction(string $name, array $configuration): Action
     {
         $action = Action::fromNameAndType($name, $configuration['type']);
 
@@ -188,7 +200,7 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
      *
      * @return string
      */
-    private function getEventName($code)
+    private function getEventName(string $code): string
     {
         return sprintf(self::EVENT_NAME, str_replace('sylius_', '', $code));
     }

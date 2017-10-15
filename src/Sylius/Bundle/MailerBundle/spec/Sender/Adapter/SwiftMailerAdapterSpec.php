@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\MailerBundle\Sender\Adapter;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter;
 use Sylius\Component\Mailer\Event\EmailSendEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
@@ -23,17 +24,12 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class SwiftMailerAdapterSpec extends ObjectBehavior
 {
-    function let(\Swift_Mailer $mailer)
+    function let(\Swift_Mailer $mailer): void
     {
         $this->beConstructedWith($mailer);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SwiftMailerAdapter::class);
-    }
-
-    function it_is_an_adapter()
+    function it_is_an_adapter(): void
     {
         $this->shouldHaveType(AbstractAdapter::class);
     }
@@ -43,7 +39,7 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
         EmailInterface $email,
         EventDispatcherInterface $dispatcher,
         RenderedEmail $renderedEmail
-    ) {
+    ): void {
         $this->setEventDispatcher($dispatcher);
 
         $renderedEmail->getSubject()->shouldBeCalled()->willReturn('subject');

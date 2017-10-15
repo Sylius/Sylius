@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Setup;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -26,5 +28,5 @@ interface LocaleSetupInterface
      *
      * @return LocaleInterface
      */
-    public function setup(InputInterface $input, OutputInterface $output);
+    public function setup(InputInterface $input, OutputInterface $output): LocaleInterface;
 }

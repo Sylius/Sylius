@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Taxonomy\Generator;
 
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -21,5 +23,5 @@ interface TaxonSlugGeneratorInterface
      *
      * @return string
      */
-    public function generate(TaxonInterface $taxon, $locale = null);
+    public function generate(TaxonInterface $taxon, ?string $locale = null): string;
 }

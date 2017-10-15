@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -57,7 +59,7 @@ final class OrderTotalIntegrityChecker
     /**
      * @param ResourceControllerEvent $event
      */
-    public function check(ResourceControllerEvent $event)
+    public function check(ResourceControllerEvent $event): void
     {
         /** @var OrderInterface $order */
         $order = $event->getSubject();

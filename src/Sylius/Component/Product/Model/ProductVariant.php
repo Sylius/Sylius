@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -70,7 +72,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -78,7 +80,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
@@ -86,7 +88,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->getTranslation()->getName();
     }
@@ -94,7 +96,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
     }
@@ -102,7 +104,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getDescriptor()
+    public function getDescriptor(): string
     {
         $name = empty($this->getName()) ? $this->getProduct()->getName() : $this->getName();
 
@@ -112,7 +114,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getOptionValues()
+    public function getOptionValues(): Collection
     {
         return $this->optionValues;
     }
@@ -120,7 +122,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function addOptionValue(ProductOptionValueInterface $optionValue)
+    public function addOptionValue(ProductOptionValueInterface $optionValue): void
     {
         if (!$this->hasOptionValue($optionValue)) {
             $this->optionValues->add($optionValue);
@@ -130,7 +132,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function removeOptionValue(ProductOptionValueInterface $optionValue)
+    public function removeOptionValue(ProductOptionValueInterface $optionValue): void
     {
         if ($this->hasOptionValue($optionValue)) {
             $this->optionValues->removeElement($optionValue);
@@ -140,7 +142,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function hasOptionValue(ProductOptionValueInterface $optionValue)
+    public function hasOptionValue(ProductOptionValueInterface $optionValue): bool
     {
         return $this->optionValues->contains($optionValue);
     }
@@ -148,7 +150,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getProduct()
+    public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
@@ -156,7 +158,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setProduct(ProductInterface $product = null)
+    public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
     }
@@ -164,7 +166,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getPosition()
+    public function getPosition(): ?int
     {
         return $this->position;
     }
@@ -172,7 +174,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setPosition($position)
+    public function setPosition(?int $position): void
     {
         $this->position = $position;
     }
@@ -180,7 +182,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    protected function createTranslation()
+    protected function createTranslation(): ProductVariantTranslationInterface
     {
         return new ProductVariantTranslation();
     }

@@ -10,3 +10,14 @@ sylius:
             unique: 币种代码必须是唯一的。
         exchange_rate:
             not_blank: 请输入汇率。
+    exchange_rate:
+        ratio:
+            greater_than: 比率必须大于0
+            invalid: 比率必须是一个数字。
+            not_blank: 请输入汇率。
+        source_currency:
+            not_blank: 请输入来自哪一种货币的汇率。
+        target_currency:
+            not_blank: 请输入需要设置汇率的货币。
+        unique_currency_pair: 货币组合必须是唯一的。
+        different_source_target_currency: 源和目标货币必须不同。

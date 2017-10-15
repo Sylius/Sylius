@@ -6,7 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: Tipi di associazione
+                    association_types: "Tipi di relazione\n"
                     attributes: Attributi
                     header: Catalogo
                     inventory: Magazzino
@@ -17,7 +17,7 @@ sylius:
                     admin_users: Amministratori
                     channels: Canali
                     countries: Paesi
-                    currencies: Monete
+                    currencies: Valute
                     exchange_rates: Tassi di cambio
                     header: Configurazione
                     locales: Localizzazioni

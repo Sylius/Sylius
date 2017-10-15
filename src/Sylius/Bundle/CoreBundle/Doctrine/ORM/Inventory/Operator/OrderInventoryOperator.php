@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator;
 
 use Doctrine\DBAL\LockMode;
@@ -50,7 +52,7 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
      *
      * @throws OptimisticLockException
      */
-    public function cancel(OrderInterface $order)
+    public function cancel(OrderInterface $order): void
     {
         $this->lockProductVariants($order);
 
@@ -62,7 +64,7 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
      *
      * @throws OptimisticLockException
      */
-    public function hold(OrderInterface $order)
+    public function hold(OrderInterface $order): void
     {
         $this->lockProductVariants($order);
 
@@ -74,7 +76,7 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
      *
      * @throws OptimisticLockException
      */
-    public function sell(OrderInterface $order)
+    public function sell(OrderInterface $order): void
     {
         $this->lockProductVariants($order);
 
@@ -86,7 +88,7 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
      *
      * @throws OptimisticLockException
      */
-    private function lockProductVariants(OrderInterface $order)
+    private function lockProductVariants(OrderInterface $order): void
     {
         /** @var OrderItemInterface $orderItem */
         foreach ($order->getItems() as $orderItem) {

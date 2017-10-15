@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -37,7 +39,6 @@ class ManagingShippingCategoriesContext implements Context
      * @var UpdatePageInterface
      */
     private $updatePage;
-
 
     /**
      * @param IndexPageInterface $indexPage

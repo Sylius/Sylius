@@ -9,18 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallAssetsCommand extends AbstractInstallCommand
 {
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:install:assets')
@@ -35,7 +36,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $output->writeln(sprintf(
             'Installing Sylius assets for environment <info>%s</info>.',
@@ -57,5 +58,7 @@ EOT
         ];
 
         $this->runCommands($commands, $output);
+
+        return null;
     }
 }

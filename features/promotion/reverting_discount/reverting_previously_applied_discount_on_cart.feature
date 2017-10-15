@@ -26,11 +26,3 @@ Feature: Reverting previously applied discount on cart
         When I change "PHP Mug" quantity to 4
         Then product "PHP Mug" price should not be decreased
         And my cart total should be "$80.00"
-
-    @ui
-    Scenario: Reverting discount applied from total item cost based promotion
-        Given this promotion gives "10%" off on every product when the item total is at least "$100.00"
-        And I have 8 products "PHP Mug" in the cart
-        When I change "PHP Mug" quantity to 4
-        Then product "PHP Mug" price should not be decreased
-        And my cart total should be "$80.00"

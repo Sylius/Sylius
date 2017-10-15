@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
@@ -38,7 +40,7 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(BaseOrderInterface $order)
+    public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -23,5 +25,5 @@ interface OrderPaymentMethodSelectionRequirementCheckerInterface
      *
      * @return bool
      */
-    public function isPaymentMethodSelectionRequired(OrderInterface $order);
+    public function isPaymentMethodSelectionRequired(OrderInterface $order): bool;
 }

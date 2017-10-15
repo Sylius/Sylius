@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -28,12 +30,12 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
     /**
      * @var FactoryInterface
      */
-    protected $adjustmentFactory;
+    private $adjustmentFactory;
 
     /**
      * @var DelegatingCalculatorInterface
      */
-    protected $shippingChargesCalculator;
+    private $shippingChargesCalculator;
 
     /**
      * @param FactoryInterface $adjustmentFactory
@@ -50,7 +52,7 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(BaseOrderInterface $order)
+    public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Provider;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -36,7 +38,7 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
      * @param ChannelContextInterface $channelContext
      * @param string $defaultLocaleCode
      */
-    public function __construct(ChannelContextInterface $channelContext, $defaultLocaleCode)
+    public function __construct(ChannelContextInterface $channelContext, string $defaultLocaleCode)
     {
         $this->channelContext = $channelContext;
         $this->defaultLocaleCode = $defaultLocaleCode;
@@ -45,7 +47,7 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAvailableLocalesCodes()
+    public function getAvailableLocalesCodes(): array
     {
         try {
             /** @var ChannelInterface $channel */
@@ -66,7 +68,7 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultLocaleCode()
+    public function getDefaultLocaleCode(): string
     {
         try {
             /** @var ChannelInterface $channel */

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Payment\Resolver;
 
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -24,12 +26,12 @@ interface PaymentMethodsResolverInterface
      *
      * @return PaymentMethodInterface[]
      */
-    public function getSupportedMethods(PaymentInterface $subject);
+    public function getSupportedMethods(PaymentInterface $subject): array;
 
     /**
      * @param PaymentInterface $subject
      *
      * @return bool
      */
-    public function supports(PaymentInterface $subject);
+    public function supports(PaymentInterface $subject): bool;
 }

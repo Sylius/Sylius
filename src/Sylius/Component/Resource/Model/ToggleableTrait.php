@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Model;
 
 /**
@@ -24,7 +26,7 @@ trait ToggleableTrait
     /**
      * @return bool
      */
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         return $this->enabled;
     }
@@ -32,17 +34,17 @@ trait ToggleableTrait
     /**
      * @param bool $enabled
      */
-    public function setEnabled($enabled)
+    public function setEnabled(?bool $enabled): void
     {
         $this->enabled = (bool) $enabled;
     }
 
-    public function enable()
+    public function enable(): void
     {
         $this->enabled = true;
     }
 
-    public function disable()
+    public function disable(): void
     {
         $this->enabled = false;
     }

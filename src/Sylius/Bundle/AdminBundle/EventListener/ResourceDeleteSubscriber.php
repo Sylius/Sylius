@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\EventListener;
 
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
@@ -49,7 +51,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::EXCEPTION => 'onResourceDelete',
@@ -59,7 +61,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
     /**
      * @param GetResponseForExceptionEvent $event
      */
-    public function onResourceDelete(GetResponseForExceptionEvent $event)
+    public function onResourceDelete(GetResponseForExceptionEvent $event): void
     {
         $exception = $event->getException();
         if (!$exception instanceof ForeignKeyConstraintViolationException) {
@@ -107,7 +109,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
      *
      * @return string
      */
-    private function getResourceNameFromRoute($route)
+    private function getResourceNameFromRoute(string $route): string
     {
         $routeArray = explode('_', $route);
         $routeArrayWithoutAction = array_slice($routeArray, 0, count($routeArray) - 1);
@@ -122,7 +124,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
      *
      * @return RedirectResponse
      */
-    private function createRedirectResponse($originalRoute, $targetAction)
+    private function createRedirectResponse(string $originalRoute, string $targetAction): RedirectResponse
     {
         $redirectRoute = str_replace(ResourceActions::DELETE, $targetAction, $originalRoute);
 
@@ -134,7 +136,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
      *
      * @return bool
      */
-    private function isMethodDelete(Request $request)
+    private function isMethodDelete(Request $request): bool
     {
         return Request::METHOD_DELETE === $request->getMethod();
     }
@@ -144,7 +146,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
      *
      * @return bool
      */
-    private function isSyliusRoute($route)
+    private function isSyliusRoute(string $route): bool
     {
         return 0 === strpos($route, 'sylius');
     }
@@ -154,7 +156,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
      *
      * @return bool
      */
-    private function isAdminSection(array $syliusParameters)
+    private function isAdminSection(array $syliusParameters): bool
     {
         return array_key_exists('section', $syliusParameters) && 'admin' === $syliusParameters['section'];
     }

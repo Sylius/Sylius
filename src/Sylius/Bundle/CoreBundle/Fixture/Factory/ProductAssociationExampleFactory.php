@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
@@ -67,7 +69,7 @@ class ProductAssociationExampleFactory extends AbstractExampleFactory implements
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): ProductAssociationInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -86,7 +88,7 @@ class ProductAssociationExampleFactory extends AbstractExampleFactory implements
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefault('type', LazyOption::randomOne($this->productAssociationTypeRepository))

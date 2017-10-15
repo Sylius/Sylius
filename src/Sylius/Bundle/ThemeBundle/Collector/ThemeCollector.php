@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Collector;
 
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
@@ -52,20 +54,26 @@ final class ThemeCollector extends DataCollector
         $this->themeRepository = $themeRepository;
         $this->themeContext = $themeContext;
         $this->themeHierarchyProvider = $themeHierarchyProvider;
+
+        $this->data = [
+            'used_theme' => null,
+            'used_themes' => [],
+            'themes' => [],
+        ];
     }
 
     /**
-     * @return ThemeInterface
+     * @return ThemeInterface|null
      */
-    public function getUsedTheme()
+    public function getUsedTheme(): ?ThemeInterface
     {
         return $this->data['used_theme'];
     }
 
     /**
-     * @return ThemeInterface[]
+     * @return array|ThemeInterface[]
      */
-    public function getUsedThemes()
+    public function getUsedThemes(): array
     {
         return $this->data['used_themes'];
     }
@@ -73,7 +81,7 @@ final class ThemeCollector extends DataCollector
     /**
      * @return ThemeInterface[]
      */
-    public function getThemes()
+    public function getThemes(): array
     {
         return $this->data['themes'];
     }
@@ -81,17 +89,19 @@ final class ThemeCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
+    public function collect(Request $request, Response $response, ?\Exception $exception = null): void
     {
-        $this->data['used_theme'] = $this->themeContext->getTheme();
-        $this->data['used_themes'] = $this->themeHierarchyProvider->getThemeHierarchy($this->themeContext->getTheme());
+        $usedTheme = $this->themeContext->getTheme();
+
+        $this->data['used_theme'] = $usedTheme;
+        $this->data['used_themes'] = null !== $usedTheme ? $this->themeHierarchyProvider->getThemeHierarchy($usedTheme) : [];
         $this->data['themes'] = $this->themeRepository->findAll();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_theme';
     }

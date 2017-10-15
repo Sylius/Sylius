@@ -10,5 +10,14 @@ sylius:
                 password: 密码
                 signature: 签名
                 username: 用户名
+                sandbox: 沙盒模式
+            stripe:
+                publishable_key: 公钥
+                secret_key: 密钥
     payum_gateway_factory:
         offline: 现金支付
+        paypal_express_checkout: Paypal快捷支付
+        stripe_checkout: Stripe支付
+    payum_action:
+        payment:
+            description: 支付总计 %total% 数量为 %items% 的项|支付总计 %total% 数量为 %items% 的项

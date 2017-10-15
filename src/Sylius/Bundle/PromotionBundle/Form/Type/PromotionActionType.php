@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,7 +24,7 @@ final class PromotionActionType extends AbstractConfigurablePromotionElementType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = [])
+    public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
         parent::buildForm($builder, $options);
 
@@ -39,7 +41,7 @@ final class PromotionActionType extends AbstractConfigurablePromotionElementType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_action';
     }

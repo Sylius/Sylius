@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Grid\Sorting;
 
 use PhpSpec\ObjectBehavior;
@@ -17,7 +19,6 @@ use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
-use Sylius\Component\Grid\Sorting\Sorter;
 use Sylius\Component\Grid\Sorting\SorterInterface;
 
 /**
@@ -25,12 +26,7 @@ use Sylius\Component\Grid\Sorting\SorterInterface;
  */
 final class SorterSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Sorter::class);
-    }
-
-    function it_implements_grid_data_source_sorter_interface()
+    function it_implements_grid_data_source_sorter_interface(): void
     {
         $this->shouldImplement(SorterInterface::class);
     }
@@ -41,7 +37,7 @@ final class SorterSpec extends ObjectBehavior
         Field $nonSortableField,
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $parameters = new Parameters();
 
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
@@ -70,7 +66,7 @@ final class SorterSpec extends ObjectBehavior
         Field $nonSortableField,
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $parameters = new Parameters(['sorting' => ['name' => 'asc', 'non_sortable_field' => 'asc']]);
 
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);

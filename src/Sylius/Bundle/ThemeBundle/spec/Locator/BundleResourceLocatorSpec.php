@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Locator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Locator\BundleResourceLocator;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -25,17 +26,12 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 final class BundleResourceLocatorSpec extends ObjectBehavior
 {
-    function let(Filesystem $filesystem, KernelInterface $kernel)
+    function let(Filesystem $filesystem, KernelInterface $kernel): void
     {
         $this->beConstructedWith($filesystem, $kernel);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(BundleResourceLocator::class);
-    }
-
-    function it_implements_resource_locator_interface()
+    function it_implements_resource_locator_interface(): void
     {
         $this->shouldImplement(ResourceLocatorInterface::class);
     }
@@ -46,7 +42,7 @@ final class BundleResourceLocatorSpec extends ObjectBehavior
         ThemeInterface $theme,
         BundleInterface $childBundle,
         BundleInterface $parentBundle
-    ) {
+    ): void {
         $kernel->getBundle('ParentBundle', false)->willReturn([$childBundle, $parentBundle]);
 
         $childBundle->getName()->willReturn('ChildBundle');
@@ -66,7 +62,7 @@ final class BundleResourceLocatorSpec extends ObjectBehavior
         ThemeInterface $theme,
         BundleInterface $childBundle,
         BundleInterface $parentBundle
-    ) {
+    ): void {
         $kernel->getBundle('ParentBundle', false)->willReturn([$childBundle, $parentBundle]);
 
         $childBundle->getName()->willReturn('ChildBundle');
@@ -81,17 +77,17 @@ final class BundleResourceLocatorSpec extends ObjectBehavior
         $this->shouldThrow(ResourceNotFoundException::class)->during('locateResource', ['@ParentBundle/Resources/views/index.html.twig', $theme]);
     }
 
-    function it_throws_an_exception_if_resource_path_does_not_start_with_an_asperand(ThemeInterface $theme)
+    function it_throws_an_exception_if_resource_path_does_not_start_with_an_asperand(ThemeInterface $theme): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('locateResource', ['ParentBundle/Resources/views/index.html.twig', $theme]);
     }
 
-    function it_throws_an_exception_if_resource_path_contains_two_dots_in_a_row(ThemeInterface $theme)
+    function it_throws_an_exception_if_resource_path_contains_two_dots_in_a_row(ThemeInterface $theme): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('locateResource', ['@ParentBundle/Resources/views/../views/index.html.twig', $theme]);
     }
 
-    function it_throws_an_exception_if_resource_path_does_not_contain_resources_dir(ThemeInterface $theme)
+    function it_throws_an_exception_if_resource_path_does_not_contain_resources_dir(ThemeInterface $theme): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('locateResource', ['@ParentBundle/views/Resources.index.html.twig', $theme]);
     }

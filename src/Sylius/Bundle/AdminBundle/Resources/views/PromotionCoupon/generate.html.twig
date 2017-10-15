@@ -25,7 +25,6 @@
     <div class="ui basic segment">
         <div class="ui buttons">
             <button class="ui labeled icon primary button" type="submit"><i class="random icon"></i>{{- 'sylius.ui.generate'|trans -}}</button>
-            <div class="or" data-text="{{ 'sylius.ui.or'|trans }}"></div>
             {% include '@SyliusUi/Form/Buttons/_cancel.html.twig' with {'path': path(configuration.getRouteName('index'), {'promotionId': promotion.id})} %}
         </div>
     </div>

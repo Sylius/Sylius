@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -16,7 +18,6 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -35,7 +36,6 @@ use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -214,7 +214,7 @@ final class ProductContext implements Context
      * @Given the store( also) has a product :productName with code :code
      * @Given the store( also) has a product :productName with code :code, created at :date
      */
-    public function storeHasProductWithCode($productName, $code, $date = null)
+    public function storeHasProductWithCode($productName, $code, $date = 'now')
     {
         $product = $this->createProduct($productName);
         $product->setCreatedAt(new \DateTime($date));
@@ -578,7 +578,7 @@ final class ProductContext implements Context
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productVariant->setOnHand($quantity);
+        $productVariant->setOnHand((int) $quantity);
 
         $this->objectManager->flush();
     }
@@ -707,7 +707,7 @@ final class ProductContext implements Context
     public function thereAreItemsOfProductInVariantAvailableInTheInventory($quantity, ProductVariantInterface $productVariant)
     {
         $productVariant->setTracked(true);
-        $productVariant->setOnHand($quantity);
+        $productVariant->setOnHand((int) $quantity);
 
         $this->objectManager->flush();
     }
@@ -748,7 +748,7 @@ final class ProductContext implements Context
 
         /** @var ImageInterface $productImage */
         $productImage = $this->productImageFactory->createNew();
-        $productImage->setFile(new UploadedFile($filesPath.$imagePath, basename($imagePath)));
+        $productImage->setFile(new UploadedFile($filesPath . $imagePath, basename($imagePath)));
         $productImage->setType($imageType);
         $this->imageUploader->upload($productImage);
 
@@ -900,7 +900,7 @@ final class ProductContext implements Context
         $variant->setCode($code);
         $variant->setProduct($product);
         $variant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
-        $variant->setPosition($position);
+        $variant->setPosition((null === $position) ? null : (int) $position);
         $variant->setShippingRequired($shippingRequired);
 
         $product->addVariant($variant);

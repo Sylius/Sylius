@@ -17,6 +17,11 @@ sylius:
             starts_at: Start op
             usage_limit: Gebruikslimiet
         promotion_action:
+            item_fixed_discount: Vaste korting per item
+            item_percentage_discount: Percentage per item
+            order_fixed_discount: Vaste kortingsbedrag per bestelling
+            order_percentage_discount: Vaste percentage per bestelling
+            shipping_percentage_discount: Percentage op verzending
             fixed_discount_configuration:
                 amount: Hoeveelheid
             percentage_discount_configuration:
@@ -33,6 +38,15 @@ sylius:
         promotion_filter:
             price_range: Prijs bereik filter
         promotion_rule:
+            cart_quantity: Aantal items in winkelmand
+            contains_product: Bevat product
+            customer_group: Klantengroep
+            has_at_least_one_from_taxons: Heeft minstens een van volgende taxons
+            item_total: Item totaal
+            nth_order: N-de bestelling
+            shipping_country: Land van bestemming
+            taxonomy: Taxonomie
+            total_price_of_items_from_taxon: Totaalprijs voor alle items van dezelfde taxon
             cart_quantity_configuration:
                 count: Aantal
                 equal: Gelijk
@@ -42,7 +56,7 @@ sylius:
             item_total_configuration:
                 amount: Hoeveelheid
             nth_order_configuration:
-                nth: Nde
+                nth: N-de
             shipping_country_configuration:
                 country: Land
             taxonomy_configuration:

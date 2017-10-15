@@ -6,20 +6,35 @@ sylius:
         admin:
             main:
                 catalog:
-                    inventory: Інвентар
+                    association_types: Тыпы ўзаемасувязей
+                    attributes: Атрыбуты
+                    header: Каталог
+                    inventory: Склад
                     options: Опцыі
+                    products: Прадукты
+                    taxons: Катэгорыі
                 configuration:
+                    admin_users: Адміністратары
+                    channels: Каналы
                     countries: Краіны
+                    currencies: Валюты
+                    exchange_rates: Курсы валют
                     header: Канфігурацыя
-                    locales: Месцы размяшчэння
+                    locales: Мовы
                     payment_methods: Метады аплаты
+                    shipping_categories: Катэгорыі дастаўкі
                     shipping_methods: Метады дастаўкі
-                    tax_rates: Стаўка падатку
+                    tax_categories: Катэгорыі падаткаабкладання
+                    tax_rates: Стаўкі падатку
                     zones: Зоны
                 marketing:
-                    promotions: Прамоцыі
+                    header: Маркетынг
+                    product_reviews: Агляды прадуктаў
+                    promotions: Прасоўванні
                 customers:
+                    customers: Кліенты
                     groups: Групы
+                    header: Кліент
                 sales:
-                    header: Продаж
+                    header: Продажы
                     orders: Замовы

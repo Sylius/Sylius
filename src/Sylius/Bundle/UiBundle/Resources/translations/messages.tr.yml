@@ -25,7 +25,7 @@ sylius:
         add_new_email: 'Yeni e-posta Ekle'
         add_new_permission: 'Yeni izin ekle'
         add_new_role: 'Yeni rol ekle'
-        add_province: 'Bölge ekleme'
+        add_province: 'Bölge ekle'
         add_rule: 'Kural ekle'
         add_to_cart: 'Sepete ekle'
         add_value: 'Değer ekle'

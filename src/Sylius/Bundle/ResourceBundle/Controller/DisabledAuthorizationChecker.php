@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 /**
@@ -21,7 +23,7 @@ final class DisabledAuthorizationChecker implements AuthorizationCheckerInterfac
     /**
      * {@inheritdoc}
      */
-    public function isGranted(RequestConfiguration $requestConfiguration, $permission)
+    public function isGranted(RequestConfiguration $requestConfiguration, string $permission): bool
     {
         return true;
     }

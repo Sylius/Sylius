@@ -35,12 +35,18 @@ sylius:
     order:
         currency_code:
             not_valid: Il codice valuta inserito non è valido.
+        payment_method_eligibility: 'Questo metodo di pagamento %paymentMethodName% è stato disattivato. Riseleziona il tuo metodo di pagamento.'
+        product_eligibility: 'Questo prodotto %productName% è stato disattivato.'
+        shipping_method_eligibility: 'Il prodotto non risponde alle richieste di %shippingMethodName% metodo di spedizione. Riseleziona il tuo metodo di spedizione.'
     locale:
         code:
             not_blank: Per favore inserisci il CAP.
             unique: Questo locale esiste già.
         enabled:
             cannot_disable_base: Le impostazioni locali di base non possono essere disattivate.
+    product:
+        variants:
+            all_prices_defined: È necessario prima definire i prezzi di varianti di prodotto per i canali appena assegnati.
     product_attribute:
         invalid: La posizione deve essere un valore intero.
     product_image:
@@ -51,6 +57,7 @@ sylius:
         onHand:
             min: La scorta di magazzino deve essere maggiore di {{ limit }}.
             not_blank: Per favore inserisci la scorta di magazzino.
+            reserved: La scorta di magazzino deve essere maggiore del numero di unità in attesa
         original_price:
             min: Il prezzo originale non deve essere negativo.
         weight:
@@ -65,6 +72,8 @@ sylius:
         depth:
             min: La profondità non può essere negativa.
             invalid: La profondità deve essere un numero.
+        channel_pricing:
+            all_defined: 'È necessario definire il prezzo per ogni canale.'
     product_translation:
         short_description:
             max: La descrizione breve non deve superare i {{ limit }} caratteri.
@@ -75,6 +84,8 @@ sylius:
     user:
         email:
             unique: Questa e-mail è già in uso.
+            min: L'indirizzo email deve essere di almeno {{ min }} caratteri.
+            max: L'indirizzo email deve essere al massimo {{ max }} caratteri.
             invalid: Questa e-mail non è valida.
         username:
             unique: Questo nome utente è già utilizzato.

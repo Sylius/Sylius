@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
@@ -28,9 +30,9 @@ final class ProductVariantGenerationTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
             $productVariant = $event->getData();
 
             $event->getForm()->add('channelPricings', ChannelCollectionType::class, [
@@ -49,7 +51,7 @@ final class ProductVariantGenerationTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return ProductVariantGenerationType::class;
     }

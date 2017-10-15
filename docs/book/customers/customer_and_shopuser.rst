@@ -114,4 +114,4 @@ Customer related events
 Learn more
 ----------
 
-* :doc:`User - Component Documentation </components/User/index>`
+* :doc:`User - Component Documentation </components_and_bundles/components/User/index>`

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -23,7 +25,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class OrderShowMenuBuilder
 {
-    const EVENT_NAME = 'sylius.menu.admin.order.show';
+    public const EVENT_NAME = 'sylius.menu.admin.order.show';
 
     /**
      * @var FactoryInterface
@@ -60,7 +62,7 @@ final class OrderShowMenuBuilder
      *
      * @return ItemInterface
      */
-    public function createMenu(array $options)
+    public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 
@@ -73,7 +75,7 @@ final class OrderShowMenuBuilder
         $menu
             ->addChild('order_history', [
                 'route' => 'sylius_admin_order_history',
-                'routeParameters' => ['id' => $order->getId()]
+                'routeParameters' => ['id' => $order->getId()],
             ])
             ->setAttribute('type', 'link')
             ->setLabel('sylius.ui.history')
@@ -85,7 +87,7 @@ final class OrderShowMenuBuilder
             $menu
                 ->addChild('cancel', [
                     'route' => 'sylius_admin_order_cancel',
-                    'routeParameters' => ['id' => $order->getId()]
+                    'routeParameters' => ['id' => $order->getId()],
                 ])
                 ->setAttribute('type', 'transition')
                 ->setLabel('sylius.ui.cancel')

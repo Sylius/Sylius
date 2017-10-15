@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Applicator;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -22,7 +24,7 @@ interface UnitsPromotionAdjustmentsApplicatorInterface
     /**
      * @param OrderInterface $order
      * @param PromotionInterface $promotion
-     * @param array $adjustmentsAmounts
+     * @param array|int[] $adjustmentsAmounts
      */
-    public function apply(OrderInterface $order, PromotionInterface $promotion, array $adjustmentsAmounts);
+    public function apply(OrderInterface $order, PromotionInterface $promotion, array $adjustmentsAmounts): void;
 }

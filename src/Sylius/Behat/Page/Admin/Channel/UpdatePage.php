@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Channel;
 
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
@@ -53,7 +55,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function isLocaleChosen($language)
     {
-        return $this->getElement('locales')->find('named', array('option', $language))->hasAttribute('selected');
+        return $this->getElement('locales')->find('named', ['option', $language])->hasAttribute('selected');
     }
 
     /**
@@ -69,7 +71,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function isCurrencyChosen($currencyCode)
     {
-        return $this->getElement('currencies')->find('named', array('option', $currencyCode))->hasAttribute('selected');
+        return $this->getElement('currencies')->find('named', ['option', $currencyCode])->hasAttribute('selected');
     }
 
     /**
@@ -93,7 +95,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function isDefaultTaxZoneChosen($taxZone)
     {
-        return $this->getElement('default_tax_zone')->find('named', array('option', $taxZone))->hasAttribute('selected');
+        return $this->getElement('default_tax_zone')->find('named', ['option', $taxZone])->hasAttribute('selected');
     }
 
     /**
@@ -111,7 +113,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return $this
             ->getElement('tax_calculation_strategy')
-            ->find('named', array('option', $taxCalculationStrategy))
+            ->find('named', ['option', $taxCalculationStrategy])
             ->hasAttribute('selected')
         ;
     }

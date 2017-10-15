@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\MailerBundle\Renderer\Adapter;
 
 use Sylius\Component\Mailer\Event\EmailRenderEvent;
@@ -40,7 +42,7 @@ class EmailTwigAdapter extends AbstractAdapter
     /**
      * {@inheritdoc}
      */
-    public function render(EmailInterface $email, array $data = [])
+    public function render(EmailInterface $email, array $data = []): RenderedEmail
     {
         $renderedEmail = $this->getRenderedEmail($email, $data);
 
@@ -59,7 +61,7 @@ class EmailTwigAdapter extends AbstractAdapter
      *
      * @return RenderedEmail
      */
-    private function getRenderedEmail(EmailInterface $email, array $data)
+    private function getRenderedEmail(EmailInterface $email, array $data): RenderedEmail
     {
         if (null !== $email->getTemplate()) {
             return $this->provideEmailWithTemplate($email, $data);
@@ -74,7 +76,7 @@ class EmailTwigAdapter extends AbstractAdapter
      *
      * @return RenderedEmail
      */
-    private function provideEmailWithTemplate(EmailInterface $email, array $data)
+    private function provideEmailWithTemplate(EmailInterface $email, array $data): RenderedEmail
     {
         $data = $this->twig->mergeGlobals($data);
 
@@ -93,7 +95,7 @@ class EmailTwigAdapter extends AbstractAdapter
      *
      * @return RenderedEmail
      */
-    private function provideEmailWithoutTemplate(EmailInterface $email, array $data)
+    private function provideEmailWithoutTemplate(EmailInterface $email, array $data): RenderedEmail
     {
         $twig = new \Twig_Environment(new \Twig_Loader_Array([]));
 

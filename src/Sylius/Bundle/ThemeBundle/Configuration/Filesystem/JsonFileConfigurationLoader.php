@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
 use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
@@ -34,14 +36,14 @@ final class JsonFileConfigurationLoader implements ConfigurationLoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load($path)
+    public function load(string $identifier): array
     {
-        $this->assertFileExists($path);
+        $this->assertFileExists($identifier);
 
-        $contents = $this->filesystem->getFileContents($path);
+        $contents = $this->filesystem->getFileContents($identifier);
 
         return array_merge(
-            ['path' => dirname($path)],
+            ['path' => dirname($identifier)],
             json_decode($contents, true)
         );
     }
@@ -49,7 +51,7 @@ final class JsonFileConfigurationLoader implements ConfigurationLoaderInterface
     /**
      * @param string $path
      */
-    private function assertFileExists($path)
+    private function assertFileExists(string $path): void
     {
         if (!$this->filesystem->exists($path)) {
             throw new \InvalidArgumentException(sprintf(

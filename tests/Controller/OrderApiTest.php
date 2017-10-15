@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
-use Lakion\ApiTestCase\JsonApiTestCase;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Order\Model\OrderItemInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -107,7 +106,7 @@ final class OrderApiTest extends CheckoutApiTestCase
 
         $this->addItemToCart($cartId);
 
-        $this->client->request('PATCH',  '/api/v1/carts/' . $cartId, [], [], static::$authorizedHeaderWithAccept, '{"promotionCoupon": "BANANAS"}');
+        $this->client->request('PATCH', '/api/v1/carts/' . $cartId, [], [], static::$authorizedHeaderWithAccept, '{"promotionCoupon": "BANANAS"}');
 
         $this->addressOrder($cartId);
         $this->selectOrderShippingMethod($cartId);
@@ -245,7 +244,6 @@ final class OrderApiTest extends CheckoutApiTestCase
 
         $response = $this->client->getResponse();
         $rawResponse = json_decode($response->getContent(), true);
-
 
         $data =
 <<<EOT

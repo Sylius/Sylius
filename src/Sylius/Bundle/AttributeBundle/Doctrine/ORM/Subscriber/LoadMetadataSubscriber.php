@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
@@ -25,7 +27,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
     /**
      * @var array
      */
-    protected $subjects;
+    private $subjects;
 
     /**
      * @param array $subjects
@@ -38,7 +40,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
     /**
      * @return array
      */
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             'loadClassMetadata',
@@ -48,7 +50,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
     /**
      * @param LoadClassMetadataEventArgs $eventArgs
      */
-    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
         $metadata = $eventArgs->getClassMetadata();
         $metadataFactory = $eventArgs->getEntityManager()->getMetadataFactory();
@@ -68,18 +70,18 @@ final class LoadMetadataSubscriber implements EventSubscriber
      * @param ClassMetadataFactory $metadataFactory
      */
     private function mapSubjectOnAttributeValue(
-        $subject,
-        $subjectClass,
+        string $subject,
+        string $subjectClass,
         ClassMetadataInfo $metadata,
         ClassMetadataFactory $metadataFactory
-    ) {
+    ): void {
         $targetEntityMetadata = $metadataFactory->getMetadataFor($subjectClass);
         $subjectMapping = [
             'fieldName' => 'subject',
             'targetEntity' => $subjectClass,
             'inversedBy' => 'attributes',
             'joinColumns' => [[
-                'name' => $subject.'_id',
+                'name' => $subject . '_id',
                 'referencedColumnName' => $targetEntityMetadata->fieldMappings['id']['columnName'],
                 'nullable' => false,
                 'onDelete' => 'CASCADE',
@@ -95,10 +97,10 @@ final class LoadMetadataSubscriber implements EventSubscriber
      * @param ClassMetadataFactory $metadataFactory
      */
     private function mapAttributeOnAttributeValue(
-        $attributeClass,
+        string $attributeClass,
         ClassMetadataInfo $metadata,
         ClassMetadataFactory $metadataFactory
-    ) {
+    ): void {
         $attributeMetadata = $metadataFactory->getMetadataFor($attributeClass);
         $attributeMapping = [
             'fieldName' => 'attribute',
@@ -118,7 +120,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
      * @param ClassMetadataInfo|ClassMetadata $metadata
      * @param array $subjectMapping
      */
-    private function mapManyToOne(ClassMetadataInfo $metadata, array $subjectMapping)
+    private function mapManyToOne(ClassMetadataInfo $metadata, array $subjectMapping): void
     {
         $metadata->mapManyToOne($subjectMapping);
     }

@@ -16,7 +16,6 @@ sylius:
         email:
             already_used: Tento e-mail je již použit, prosím přihlašte se nebo obnovte své heslo.
             max: E-mail nesmí být delší než {{ limit }} znaků.
-            min: E-mail musí být alespoň {{ limit }} znaků.
             not_blank: Prosím vložte Váš email.
             invalid: Tento email je neplatný.
             unique: Tento e-mail je již používán.

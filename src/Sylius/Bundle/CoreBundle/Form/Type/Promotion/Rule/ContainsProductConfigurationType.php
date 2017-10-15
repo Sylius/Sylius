@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAutocompleteChoiceType;
@@ -42,7 +44,7 @@ final class ContainsProductConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('product_code', ProductAutocompleteChoiceType::class, [
@@ -54,13 +56,15 @@ final class ContainsProductConfigurationType extends AbstractType
             ])
         ;
 
-        $builder->get('product_code')->addModelTransformer(new ReversedTransformer(new ResourceToIdentifierTransformer($this->productRepository, 'code')));
+        $builder->get('product_code')->addModelTransformer(
+            new ReversedTransformer(new ResourceToIdentifierTransformer($this->productRepository, 'code'))
+        );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_rule_contains_product_configuration';
     }

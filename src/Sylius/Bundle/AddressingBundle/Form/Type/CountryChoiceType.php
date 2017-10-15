@@ -9,8 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -38,23 +41,24 @@ final class CountryChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
-                'choices' => function (Options $options) {
+                'choice_filter' => null,
+                'choices' => function (Options $options): iterable {
                     if (null === $options['enabled']) {
                         $countries = $this->countryRepository->findAll();
                     } else {
                         $countries = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
                     }
 
-                    /*
-                     * PHP 5.* bug, fixed in PHP 7: https://bugs.php.net/bug.php?id=50688
-                     * "usort(): Array was modified by the user comparison function"
-                     */
-                    @usort($countries, function ($a, $b) {
-                        return $a->getName() < $b->getName() ? -1 : 1;
+                    if ($options['choice_filter']) {
+                        $countries = array_filter($countries, $options['choice_filter']);
+                    }
+
+                    usort($countries, function (CountryInterface $a, CountryInterface $b): int {
+                        return $a->getName() <=> $b->getName();
                     });
 
                     return $countries;
@@ -66,13 +70,14 @@ final class CountryChoiceType extends AbstractType
                 'label' => 'sylius.form.address.country',
                 'placeholder' => 'sylius.form.country.select',
             ])
+            ->setAllowedTypes('choice_filter', ['null', 'callable'])
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return ChoiceType::class;
     }
@@ -80,7 +85,7 @@ final class CountryChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_country_choice';
     }

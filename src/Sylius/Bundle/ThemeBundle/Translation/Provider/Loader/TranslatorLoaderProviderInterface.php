@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Loader;
 
 /**
@@ -19,5 +21,5 @@ interface TranslatorLoaderProviderInterface
     /**
      * @return array Format => Loader
      */
-    public function getLoaders();
+    public function getLoaders(): array;
 }

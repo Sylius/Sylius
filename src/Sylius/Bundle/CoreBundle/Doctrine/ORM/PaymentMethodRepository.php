@@ -9,8 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\PaymentBundle\Doctrine\ORM\PaymentMethodRepository as BasePaymentMethodRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -20,7 +23,7 @@ class PaymentMethodRepository extends BasePaymentMethodRepository implements Pay
     /**
      * {@inheritdoc}
      */
-    public function createListQueryBuilder($locale)
+    public function createListQueryBuilder(string $locale): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.gatewayConfig', 'gatewayConfig')
@@ -32,7 +35,7 @@ class PaymentMethodRepository extends BasePaymentMethodRepository implements Pay
     /**
      * {@inheritdoc}
      */
-    public function findEnabledForChannel(ChannelInterface $channel)
+    public function findEnabledForChannel(ChannelInterface $channel): array
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.enabled = true')

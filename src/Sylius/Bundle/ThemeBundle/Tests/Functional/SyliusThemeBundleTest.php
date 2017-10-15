@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Tests\Functional;
 
 use PHPUnit\Framework\Assert;
@@ -23,7 +25,7 @@ final class SyliusThemeBundleTest extends KernelTestCase
     /**
      * @test
      */
-    public function its_services_are_initializable()
+    public function its_services_are_initializable(): void
     {
         static::bootKernel();
 

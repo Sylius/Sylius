@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration\Test;
 
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationSourceFactoryInterface;
@@ -26,7 +28,7 @@ final class TestConfigurationSourceFactory implements ConfigurationSourceFactory
     /**
      * {@inheritdoc}
      */
-    public function buildConfiguration(ArrayNodeDefinition $node)
+    public function buildConfiguration(ArrayNodeDefinition $node): void
     {
         // no configuration
     }
@@ -34,7 +36,7 @@ final class TestConfigurationSourceFactory implements ConfigurationSourceFactory
     /**
      * {@inheritdoc}
      */
-    public function initializeSource(ContainerBuilder $container, array $config)
+    public function initializeSource(ContainerBuilder $container, array $config): Definition
     {
         $container->setDefinition(
             'sylius.theme.test_theme_configuration_manager',
@@ -52,7 +54,7 @@ final class TestConfigurationSourceFactory implements ConfigurationSourceFactory
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'test';
     }

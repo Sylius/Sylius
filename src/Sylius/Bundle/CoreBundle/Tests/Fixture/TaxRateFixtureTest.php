@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -26,7 +28,7 @@ final class TaxRateFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function tax_rates_are_optional()
+    public function tax_rates_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'custom');
     }
@@ -34,7 +36,7 @@ final class TaxRateFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function tax_rates_can_be_generated_randomly()
+    public function tax_rates_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
         $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
@@ -43,7 +45,7 @@ final class TaxRateFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function tax_rate_code_is_optional()
+    public function tax_rate_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['code' => 'CUSTOM']]]], 'custom.*.code');
     }
@@ -51,7 +53,7 @@ final class TaxRateFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function tax_rate_amount_is_optional()
+    public function tax_rate_amount_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['amount' => 4.76]]]], 'custom.*.amount');
         $this->assertPartialConfigurationIsInvalid([['custom' => [['amount' => 'string']]]], 'custom.*.amount');
@@ -60,7 +62,7 @@ final class TaxRateFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function tax_rate_may_be_included_in_price_or_not()
+    public function tax_rate_may_be_included_in_price_or_not(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['included_in_price' => false]]]], 'custom.*.included_in_price');
     }
@@ -68,7 +70,7 @@ final class TaxRateFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function tax_rate_zone_code_is_optional()
+    public function tax_rate_zone_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['zone' => 'EUROPE']]]], 'custom.*.zone');
     }
@@ -76,7 +78,7 @@ final class TaxRateFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function tax_rate_category_code_is_optional()
+    public function tax_rate_category_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['category' => 'BOOKS']]]], 'custom.*.category');
     }
@@ -84,7 +86,7 @@ final class TaxRateFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function tax_rate_calculator_is_optional()
+    public function tax_rate_calculator_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['calculator' => 'custom']]]], 'custom.*.calculator');
     }
@@ -92,7 +94,7 @@ final class TaxRateFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): TaxRateFixture
     {
         return new TaxRateFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),

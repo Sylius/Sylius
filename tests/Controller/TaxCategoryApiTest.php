@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
@@ -182,7 +184,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
-        $taxCategory  = $taxCategories['tax_category_1'];
+        $taxCategory = $taxCategories['tax_category_1'];
 
         $this->client->request('GET', $this->getTaxCategoryUrl($taxCategory), [], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
@@ -356,5 +358,4 @@ EOT;
     {
         return 'api/v1/tax-categories/' . $taxCategory->getCode();
     }
-
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Provider;
 
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -27,5 +29,5 @@ interface DatabaseSetupCommandsProviderInterface
      *
      * @return array
      */
-    public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper);
+    public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array;
 }

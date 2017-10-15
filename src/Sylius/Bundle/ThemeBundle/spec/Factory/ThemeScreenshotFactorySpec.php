@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactory;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 
@@ -21,17 +22,12 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
  */
 final class ThemeScreenshotFactorySpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ThemeScreenshotFactory::class);
-    }
-
-    function it_implements_theme_screenshot_factory_interface()
+    function it_implements_theme_screenshot_factory_interface(): void
     {
         $this->shouldImplement(ThemeScreenshotFactoryInterface::class);
     }
 
-    function it_creates_a_screenshot_from_an_array()
+    function it_creates_a_screenshot_from_an_array(): void
     {
         $this
             ->createFromArray(['path' => '/screenshot/path.jpg', 'title' => 'Steamboat', 'description' => 'With steamboat into a wonderful cruise'])
@@ -42,7 +38,7 @@ final class ThemeScreenshotFactorySpec extends ObjectBehavior
     /**
      * {@inheritdoc}
      */
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'beScreenshotWithTheFollowingProperties' => function (ThemeScreenshot $subject, array $properties) {

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -35,7 +37,7 @@ final class DelegatingCalculator implements DelegatingCalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function calculate(ShipmentInterface $subject)
+    public function calculate(ShipmentInterface $subject): int
     {
         if (null === $method = $subject->getMethod()) {
             throw new UndefinedShippingMethodException('Cannot calculate charge for shipment without a defined shipping method.');

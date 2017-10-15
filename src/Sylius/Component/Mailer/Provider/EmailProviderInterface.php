@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Mailer\Provider;
 
 use Sylius\Component\Mailer\Model\EmailInterface;
@@ -23,5 +25,5 @@ interface EmailProviderInterface
      *
      * @return EmailInterface
      */
-    public function getEmail($code);
+    public function getEmail(string $code): EmailInterface;
 }

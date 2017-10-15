@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Checker\Eligibility;
 
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
@@ -39,7 +41,7 @@ final class CompositePromotionCouponEligibilityChecker implements PromotionCoupo
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool
     {
         foreach ($this->promotionCouponEligibilityCheckers as $promotionCouponEligibilityChecker) {
             if (!$promotionCouponEligibilityChecker->isEligible($promotionSubject, $promotionCoupon)) {

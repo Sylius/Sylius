@@ -1,9 +1,9 @@
 Sylius\Component\Core\Model\Order:
     order_001:
         channel: "@channel_web"
-        currencyCode: USD
-        localeCode: en_US
-        state: cart
+        currencyCode: "USD"
+        localeCode: "en_US"
+        state: "cart"
         customer: "@customer_oliver"
 
 Sylius\Component\Core\Model\Channel:
@@ -20,52 +20,52 @@ Sylius\Component\Core\Model\Channel:
 
 Sylius\Component\Currency\Model\Currency:
     currency:
-        code: USD
+        code: "USD"
 
 Sylius\Component\Locale\Model\Locale:
     locale:
-        code: en_US
+        code: "en_US"
 
 Sylius\Component\Core\Model\Customer:
     customer_oliver:
-        firstName: Oliver
-        lastName: Queen
-        email: oliver.queen@star-city.com
-        emailCanonical: oliver.queen@star-city.com
-        birthday: <date()>
+        firstName: "Oliver"
+        lastName: "Queen"
+        email: "oliver.queen@star-city.com"
+        emailCanonical: "oliver.queen@star-city.com"
+        birthday: "<(new \\DateTime())>"
 
 Sylius\Component\Core\Model\Product:
     mug:
-        code: MUG
+        code: "MUG"
         channels: ["@channel_web"]
-        currentLocale: en_US
+        currentLocale: "en_US"
         currentTranslation: "@mug_translation"
         options: ["@mug-size"]
 
 Sylius\Component\Core\Model\ProductTranslation:
     mug_translation:
-        slug: mug
-        locale: en_US
-        name: 'Mug'
-        description: <paragraph(2)>
+        slug: "mug"
+        locale: "en_US"
+        name: "Mug"
+        description: "<paragraph(2)>"
         translatable: "@mug"
 
 Sylius\Component\Core\Model\ProductVariant:
     mug_sw:
-        code: MUG_SW
+        code: "MUG_SW"
         product: "@mug"
-        currentLocale: en_US
+        currentLocale: "en_US"
         currentTranslation: "@sw_mug_translation"
-        updatedAt: 2015-10-10
+        updatedAt: "<(new \\DateTime('2015-10-10'))>"
         optionValues: ["@mug-size-s"]
         channelPricings:
             WEB: "@sw_mug_web_channel_pricing"
     hard_available_mug:
-        code: HARD_AVAILABLE_MUG
+        code: "HARD_AVAILABLE_MUG"
         product: "@mug"
-        currentLocale: en_US
+        currentLocale: "en_US"
         currentTranslation: "@hard_available_mug_translation"
-        updatedAt: 2015-10-05
+        updatedAt: "<(new \\DateTime('2015-10-05'))>"
         optionValues: ["@mug-size-l"]
         channelPricings:
             WEB: "@hard_available_mug_web_channel_pricing"
@@ -74,12 +74,12 @@ Sylius\Component\Core\Model\ProductVariant:
 
 Sylius\Component\Product\Model\ProductVariantTranslation:
     sw_mug_translation:
-        locale: en_US
-        name: 'Star wars mug'
+        locale: "en_US"
+        name: "Star wars mug"
         translatable: "@mug_sw"
     hard_available_mug_translation:
-        locale: en_US
-        name: 'Breaking bad mug'
+        locale: "en_US"
+        name: "Breaking bad mug"
         translatable: "@hard_available_mug"
 
 Sylius\Component\Core\Model\ChannelPricing:
@@ -98,15 +98,15 @@ Sylius\Component\Product\Model\ProductOption:
 
 Sylius\Component\Product\Model\ProductOptionValue:
     mug-size-s:
-        currentLocale: 'en_US'
-        fallbackLocale: 'en_US'
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
         code: "MUG_SIZE_S"
         option: "@mug-size"
         translations:
             - "@mug-size-s-translations"
     mug-size-l:
-        currentLocale: 'en_US'
-        fallbackLocale: 'en_US'
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
         code: "MUG_SIZE_L"
         option: "@mug-size"
         translations:
@@ -114,11 +114,11 @@ Sylius\Component\Product\Model\ProductOptionValue:
 
 Sylius\Component\Product\Model\ProductOptionValueTranslation:
     mug-size-s-translations:
-        locale: 'en_US'
-        value: 'Size S'
+        locale: "en_US"
+        value: "Size S"
         translatable: "@mug-size-s"
     mug-size-l-translations:
-        locale: 'en_US'
-        value: 'Size L'
+        locale: "en_US"
+        value: "Size L"
         translatable: "@mug-size-l"
 

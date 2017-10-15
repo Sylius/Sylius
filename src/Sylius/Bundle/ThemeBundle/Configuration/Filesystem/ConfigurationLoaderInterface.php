@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
 /**
@@ -23,5 +25,5 @@ interface ConfigurationLoaderInterface
      *
      * @return array
      */
-    public function load($identifier);
+    public function load(string $identifier): array;
 }

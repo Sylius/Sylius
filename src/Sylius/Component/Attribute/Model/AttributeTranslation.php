@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Attribute\Model;
 
 use Sylius\Component\Resource\Model\AbstractTranslation;
@@ -39,7 +41,7 @@ class AttributeTranslation extends AbstractTranslation implements AttributeTrans
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -47,7 +49,7 @@ class AttributeTranslation extends AbstractTranslation implements AttributeTrans
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }

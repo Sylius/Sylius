@@ -9,14 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface;
-use Sylius\Component\Promotion\Checker\Eligibility\PromotionSubjectCouponEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
-use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponAwarePromotionSubjectInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -25,17 +26,12 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker)
+    function let(PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker): void
     {
         $this->beConstructedWith($promotionCouponEligibilityChecker);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionSubjectCouponEligibilityChecker::class);
-    }
-
-    function it_implements_a_promotion_eligibility_checker_interface()
+    function it_implements_a_promotion_eligibility_checker_interface(): void
     {
         $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }
@@ -45,7 +41,7 @@ final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionCouponAwarePromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion,
         PromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $promotion->isCouponBased()->willReturn(true);
 
         $promotionSubject->getPromotionCoupon()->willReturn($promotionCoupon);
@@ -59,7 +55,7 @@ final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
     function it_returns_false_if_subject_is_not_coupon_aware(
         PromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $promotion->isCouponBased()->willReturn(true);
 
         $this->isEligible($promotionSubject, $promotion)->shouldReturn(false);
@@ -68,7 +64,7 @@ final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
     function it_returns_false_if_subject_has_no_coupon(
         PromotionCouponAwarePromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $promotion->isCouponBased()->willReturn(true);
 
         $promotionSubject->getPromotionCoupon()->willReturn(null);
@@ -81,7 +77,7 @@ final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $promotion,
         PromotionInterface $otherPromotion,
         PromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $promotion->isCouponBased()->willReturn(true);
 
         $promotionSubject->getPromotionCoupon()->willReturn($promotionCoupon);
@@ -95,7 +91,7 @@ final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionCouponAwarePromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion,
         PromotionCouponInterface $promotionCoupon
-    ) {
+    ): void {
         $promotion->isCouponBased()->willReturn(true);
 
         $promotionSubject->getPromotionCoupon()->willReturn($promotionCoupon);

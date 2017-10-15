@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Listener;
 
 /**
@@ -23,10 +25,10 @@ interface ListenerRegistryInterface
      *
      * @throws ListenerNotFoundException
      */
-    public function getListener($name);
+    public function getListener(string $name): ListenerInterface;
 
     /**
-     * @return ListenerInterface[] Name indexed
+     * @return array|ListenerInterface[] Name indexed
      */
-    public function getListeners();
+    public function getListeners(): array;
 }

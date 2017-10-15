@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Customer;
 
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -35,7 +37,7 @@ final class CustomerOrderAddressesSaver implements OrderAddressesSaverInterface
     /**
      * @param OrderInterface $order
      */
-    public function saveAddresses(OrderInterface $order)
+    public function saveAddresses(OrderInterface $order): void
     {
         /** @var CustomerInterface $customer */
         $customer = $order->getCustomer();

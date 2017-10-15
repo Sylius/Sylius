@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Locale;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -36,7 +38,7 @@ final class LocaleStorage implements LocaleStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function set(ChannelInterface $channel, $localeCode)
+    public function set(ChannelInterface $channel, string $localeCode): void
     {
         $this->storage->set($this->provideKey($channel), $localeCode);
     }
@@ -44,7 +46,7 @@ final class LocaleStorage implements LocaleStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function get(ChannelInterface $channel)
+    public function get(ChannelInterface $channel): string
     {
         $localeCode = $this->storage->get($this->provideKey($channel));
         if (null === $localeCode) {
@@ -57,7 +59,7 @@ final class LocaleStorage implements LocaleStorageInterface
     /**
      * {@inheritdoc}
      */
-    private function provideKey(ChannelInterface $channel)
+    private function provideKey(ChannelInterface $channel): string
     {
         return '_locale_' . $channel->getCode();
     }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\Collection;
@@ -22,27 +24,27 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     /**
      * @return int
      */
-    public function getQuantity();
+    public function getQuantity(): int;
 
     /**
      * @return int
      */
-    public function getUnitPrice();
+    public function getUnitPrice(): int;
 
     /**
      * @param int $unitPrice
      */
-    public function setUnitPrice($unitPrice);
+    public function setUnitPrice(int $unitPrice): void;
 
     /**
      * @return int
      */
-    public function getTotal();
+    public function getTotal(): int;
 
     /**
      * Recalculate totals. Should be used after every unit change.
      */
-    public function recalculateUnitsTotal();
+    public function recalculateUnitsTotal(): void;
 
     /**
      * Checks whether the item given as argument corresponds to
@@ -52,56 +54,56 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
      *
      * @return bool
      */
-    public function equals(OrderItemInterface $orderItem);
+    public function equals(OrderItemInterface $orderItem): bool;
 
     /**
      * @return bool
      */
-    public function isImmutable();
+    public function isImmutable(): bool;
 
     /**
      * @param bool $immutable
      */
-    public function setImmutable($immutable);
+    public function setImmutable(bool $immutable): void;
 
     /**
      * @return Collection|OrderItemUnitInterface[]
      */
-    public function getUnits();
+    public function getUnits(): Collection;
 
     /**
      * @param OrderItemUnitInterface $itemUnit
      *
      * @return bool
      */
-    public function hasUnit(OrderItemUnitInterface $itemUnit);
+    public function hasUnit(OrderItemUnitInterface $itemUnit): bool;
 
     /**
      * @param OrderItemUnitInterface $itemUnit
      */
-    public function addUnit(OrderItemUnitInterface $itemUnit);
+    public function addUnit(OrderItemUnitInterface $itemUnit): void;
 
     /**
      * @param OrderItemUnitInterface $itemUnit
      */
-    public function removeUnit(OrderItemUnitInterface $itemUnit);
+    public function removeUnit(OrderItemUnitInterface $itemUnit): void;
 
     /**
      * @param string|null $type
      *
-     * @return array
+     * @return Collection|AdjustmentInterface[]
      */
-    public function getAdjustmentsRecursively($type = null);
+    public function getAdjustmentsRecursively(?string $type = null): Collection;
 
     /**
      * @param string|null $type
      */
-    public function removeAdjustmentsRecursively($type = null);
+    public function removeAdjustmentsRecursively(?string $type = null): void;
 
     /**
      * @param string|null $type
      *
-     * @return array
+     * @return int
      */
-    public function getAdjustmentsTotalRecursively($type = null);
+    public function getAdjustmentsTotalRecursively(?string $type = null): int;
 }

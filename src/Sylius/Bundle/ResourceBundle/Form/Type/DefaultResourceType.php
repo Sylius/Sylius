@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -44,7 +46,7 @@ final class DefaultResourceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $metadata = $this->metadataRegistry->getByClass($options['data_class']);
         $formBuilder = $this->formBuilderRegistry->get($metadata->getDriver());
@@ -55,7 +57,7 @@ final class DefaultResourceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_resource';
     }

@@ -10,8 +10,9 @@ sylius_admin_api_promotion_coupon_index:
             serialization_version: $version
             serialization_groups: [Default]
             section: admin_api
-            criteria:
-                promotion: $promotionCode
+            repository:
+                method: createPaginatorForPromotion
+                arguments: [$promotionCode]
 
 sylius_admin_api_promotion_coupon_create:
     path: /

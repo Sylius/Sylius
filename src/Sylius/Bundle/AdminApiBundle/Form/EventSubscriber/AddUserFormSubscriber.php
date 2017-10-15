@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Form\EventSubscriber;
 
 use Sylius\Component\User\Model\UserAwareInterface;
@@ -31,7 +33,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @param string $entryType
      */
-    public function __construct($entryType)
+    public function __construct(string $entryType)
     {
         $this->entryType = $entryType;
     }
@@ -39,7 +41,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @return array
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -50,7 +52,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function preSetData(FormEvent $event)
+    public function preSetData(FormEvent $event): void
     {
         $form = $event->getForm();
         $form->add('user', $this->entryType, ['constraints' => [new Valid()]]);
@@ -59,14 +61,16 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function preSubmit(FormEvent $event)
+    public function preSubmit(FormEvent $event): void
     {
         $data = $event->getData();
         $normData = $event->getForm()->getNormData();
         if (!isset($data['user'])) {
             $this->removeUserField($event);
+
             return;
         }
+
         Assert::isInstanceOf($normData, UserAwareInterface::class);
         if ($this->isUserDataEmpty($data) && null === $normData->getUser()) {
             unset($data['user']);
@@ -80,20 +84,21 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
      *
      * @return bool
      */
-    private function isUserDataEmpty(array $data)
+    private function isUserDataEmpty(array $data): bool
     {
         foreach ($data['user'] as $field) {
             if (!empty($field)) {
                 return false;
             }
         }
+
         return true;
     }
 
     /**
      * @param FormEvent $event
      */
-    private function removeUserField(FormEvent $event)
+    private function removeUserField(FormEvent $event): void
     {
         $form = $event->getForm();
         $form->remove('user');

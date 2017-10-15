@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Generator;
 
 use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
@@ -54,7 +56,7 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generate(ProductInterface $product)
+    public function generate(ProductInterface $product): void
     {
         Assert::true($product->hasOptions(), 'Cannot generate variants for an object without options.');
 
@@ -86,7 +88,7 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
      *
      * @return ProductVariantInterface
      */
-    protected function createVariant(ProductInterface $product, array $optionMap, $permutation)
+    private function createVariant(ProductInterface $product, array $optionMap, $permutation): ProductVariantInterface
     {
         /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createForProduct($product);
@@ -100,7 +102,7 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
      * @param array $optionMap
      * @param mixed $permutation
      */
-    private function addOptionValue(ProductVariantInterface $variant, array $optionMap, $permutation)
+    private function addOptionValue(ProductVariantInterface $variant, array $optionMap, $permutation): void
     {
         if (!is_array($permutation)) {
             $variant->addOptionValue($optionMap[$permutation]);

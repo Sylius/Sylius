@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\FieldTypes;
 
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
@@ -46,7 +48,7 @@ final class StringFieldType implements FieldTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
     }
 }

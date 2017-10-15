@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Distributor;
 
 /**
@@ -24,5 +26,5 @@ interface IntegerDistributorInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function distribute($amount, $numberOfTargets);
+    public function distribute(float $amount, int $numberOfTargets): array;
 }

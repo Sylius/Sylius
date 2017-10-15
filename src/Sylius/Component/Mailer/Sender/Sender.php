@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Mailer\Sender;
 
 use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
@@ -26,22 +28,22 @@ final class Sender implements SenderInterface
     /**
      * @var RendererAdapterInterface
      */
-    protected $rendererAdapter;
+    private $rendererAdapter;
 
     /**
      * @var SenderAdapterInterface
      */
-    protected $senderAdapter;
+    private $senderAdapter;
 
     /**
      * @var EmailProviderInterface
      */
-    protected $provider;
+    private $provider;
 
     /**
      * @var DefaultSettingsProviderInterface
      */
-    protected $defaultSettingsProvider;
+    private $defaultSettingsProvider;
 
     /**
      * @param RendererAdapterInterface $rendererAdapter
@@ -64,7 +66,7 @@ final class Sender implements SenderInterface
     /**
      * {@inheritdoc}
      */
-    public function send($code, array $recipients, array $data = [], array $attachments = [])
+    public function send(string $code, array $recipients, array $data = [], array $attachments = [], array $replyTo = []): void
     {
         $email = $this->provider->getEmail($code);
 
@@ -84,7 +86,8 @@ final class Sender implements SenderInterface
             $renderedEmail,
             $email,
             $data,
-            $attachments
+            $attachments,
+            $replyTo
         );
     }
 }

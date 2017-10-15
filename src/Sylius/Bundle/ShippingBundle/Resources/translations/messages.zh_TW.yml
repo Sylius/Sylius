@@ -37,6 +37,6 @@ sylius:
             description: 説明
             enabled: 啓用
             name: 名稱
+            position: 位置
             tax_category: 税别
             translations: 翻譯
-            position: 位置

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Generator;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -64,7 +66,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
     /**
      * {@inheritdoc}
      */
-    public function generate(PromotionInterface $promotion, PromotionCouponGeneratorInstructionInterface $instruction)
+    public function generate(PromotionInterface $promotion, PromotionCouponGeneratorInstructionInterface $instruction): array
     {
         $generatedCoupons = [];
 
@@ -95,12 +97,12 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
      *
      * @throws \InvalidArgumentException
      */
-    private function generateUniqueCode($codeLength, array $generatedCoupons)
+    private function generateUniqueCode(int $codeLength, array $generatedCoupons): string
     {
         Assert::nullOrRange($codeLength, 1, 40, 'Invalid %d code length should be between %d and %d');
 
         do {
-            $hash = sha1(microtime(true));
+            $hash = sha1((string) microtime(true));
             $code = strtoupper(substr($hash, 0, $codeLength));
         } while ($this->isUsedCode($code, $generatedCoupons));
 
@@ -113,7 +115,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
      *
      * @return bool
      */
-    private function isUsedCode($code, array $generatedCoupons)
+    private function isUsedCode(string $code, array $generatedCoupons): bool
     {
         if (isset($generatedCoupons[$code])) {
             return true;

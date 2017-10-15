@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Model;
 
 /**
@@ -23,27 +25,27 @@ class UserOAuth implements UserOAuthInterface
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $provider;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $identifier;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $accessToken;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $refreshToken;
 
     /**
-     * @var UserInterface
+     * @var UserInterface|null
      */
     protected $user;
 
@@ -58,7 +60,7 @@ class UserOAuth implements UserOAuthInterface
     /**
      * {@inheritdoc}
      */
-    public function getProvider()
+    public function getProvider(): ?string
     {
         return $this->provider;
     }
@@ -66,7 +68,7 @@ class UserOAuth implements UserOAuthInterface
     /**
      * {@inheritdoc}
      */
-    public function setProvider($provider)
+    public function setProvider(?string $provider): void
     {
         $this->provider = $provider;
     }
@@ -74,7 +76,7 @@ class UserOAuth implements UserOAuthInterface
     /**
      * {@inheritdoc}
      */
-    public function getIdentifier()
+    public function getIdentifier(): ?string
     {
         return $this->identifier;
     }
@@ -82,7 +84,7 @@ class UserOAuth implements UserOAuthInterface
     /**
      * {@inheritdoc}
      */
-    public function setIdentifier($identifier)
+    public function setIdentifier(?string $identifier): void
     {
         $this->identifier = $identifier;
     }
@@ -90,7 +92,7 @@ class UserOAuth implements UserOAuthInterface
     /**
      * {@inheritdoc}
      */
-    public function getAccessToken()
+    public function getAccessToken(): ?string
     {
         return $this->accessToken;
     }
@@ -98,7 +100,7 @@ class UserOAuth implements UserOAuthInterface
     /**
      * {@inheritdoc}
      */
-    public function setAccessToken($accessToken)
+    public function setAccessToken(?string $accessToken): void
     {
         $this->accessToken = $accessToken;
     }
@@ -106,7 +108,7 @@ class UserOAuth implements UserOAuthInterface
     /**
      * {@inheritdoc}
      */
-    public function getUser()
+    public function getUser(): ?UserInterface
     {
         return $this->user;
     }
@@ -114,7 +116,7 @@ class UserOAuth implements UserOAuthInterface
     /**
      * {@inheritdoc}
      */
-    public function setUser(UserInterface $user = null)
+    public function setUser(?UserInterface $user): void
     {
         $this->user = $user;
     }
@@ -122,7 +124,7 @@ class UserOAuth implements UserOAuthInterface
     /**
      * {@inheritdoc}
      */
-    public function getRefreshToken()
+    public function getRefreshToken(): ?string
     {
         return $this->refreshToken;
     }
@@ -130,7 +132,7 @@ class UserOAuth implements UserOAuthInterface
     /**
      * {@inheritdoc}
      */
-    public function setRefreshToken($refreshToken)
+    public function setRefreshToken(?string $refreshToken): void
     {
         $this->refreshToken = $refreshToken;
     }

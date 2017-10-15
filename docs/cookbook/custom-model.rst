@@ -215,6 +215,6 @@ should be also included in the ``app/config/routing.yml``.
 Learn more
 ----------
 
-* :doc:`GridBundle documentation </bundles/SyliusGridBundle/index>`
-* :doc:`ResourceBundle documentation </bundles/SyliusResourceBundle/index>`
+* :doc:`GridBundle documentation </components_and_bundles/bundles/SyliusGridBundle/index>`
+* :doc:`ResourceBundle documentation </components_and_bundles/bundles/SyliusResourceBundle/index>`
 * :doc:`Customization Guide </customization/index>`

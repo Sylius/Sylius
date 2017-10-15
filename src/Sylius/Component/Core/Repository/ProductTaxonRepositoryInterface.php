@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Repository;
 
 use Sylius\Component\Core\Model\ProductTaxonInterface;
@@ -23,7 +25,7 @@ interface ProductTaxonRepositoryInterface extends RepositoryInterface
      * @param string $productCode
      * @param string $taxonCode
      *
-     * @return ProductTaxonInterface
+     * @return ProductTaxonInterface|null
      */
-    public function findOneByProductCodeAndTaxonCode($productCode, $taxonCode);
+    public function findOneByProductCodeAndTaxonCode(string $productCode, string $taxonCode): ?ProductTaxonInterface;
 }

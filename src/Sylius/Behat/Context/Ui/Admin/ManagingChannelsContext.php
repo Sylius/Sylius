@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -483,7 +485,7 @@ final class ManagingChannelsContext implements Context
 
         Assert::true($this->indexPage->isSingleResourceOnPage([
             'nameAndDescription' => $channel->getName(),
-            'enabled' => $state,
+            'enabled' => $state ? 'Enabled' : 'Disabled',
         ]));
     }
 }

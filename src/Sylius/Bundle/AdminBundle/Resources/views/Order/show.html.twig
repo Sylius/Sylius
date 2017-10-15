@@ -1,7 +1,5 @@
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
 
-{% import '@SyliusUi/Macro/labels.html.twig' as label %}
-
 {% block title %}{{ 'sylius.ui.order'|trans ~' #'~ order.number }} {{ parent() }}{% endblock %}
 
 {% set customer = order.customer %}
@@ -48,9 +46,7 @@
         {{ sonata_block_render_event('sylius.admin.order.show.before_payments', {'resource': resource}) }}
 
         {% include '@SyliusAdmin/Order/Show/_payments.html.twig' %}
-        {% if order.hasShipments %}
-            {% include '@SyliusAdmin/Order/Show/_shipments.html.twig' %}
-        {% endif %}
+        {% include '@SyliusAdmin/Order/Show/_shipments.html.twig' %}
 
         {{ sonata_block_render_event('sylius.admin.order.show.after_shipments', {'resource': resource}) }}
     </div>

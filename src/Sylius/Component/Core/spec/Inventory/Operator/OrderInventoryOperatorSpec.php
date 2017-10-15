@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Inventory\Operator;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Inventory\Operator\OrderInventoryOperator;
 use Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -25,12 +27,7 @@ use Sylius\Component\Core\OrderPaymentStates;
  */
 final class OrderInventoryOperatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderInventoryOperator::class);
-    }
-
-    function it_implements_an_order_inventory_operator_interface()
+    function it_implements_an_order_inventory_operator_interface(): void
     {
         $this->shouldImplement(OrderInventoryOperatorInterface::class);
     }
@@ -39,8 +36,8 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
-        $order->getItems()->willReturn([$orderItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(true);
 
@@ -56,8 +53,8 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
-        $order->getItems()->willReturn([$orderItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(true);
 
@@ -77,9 +74,9 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
+    ): void {
         $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_AWAITING_PAYMENT);
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(true);
 
@@ -97,9 +94,9 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
+    ): void {
         $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_PAID);
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(true);
 
@@ -115,9 +112,9 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
+    ): void {
         $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_REFUNDED);
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(true);
 
@@ -133,10 +130,10 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
+    ): void {
         $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_AWAITING_PAYMENT);
 
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(true);
 
@@ -152,8 +149,8 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
-        $order->getItems()->willReturn([$orderItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(true);
 
@@ -169,8 +166,8 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
-        $order->getItems()->willReturn([$orderItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(true);
 
@@ -187,9 +184,9 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
+    ): void {
         $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_AWAITING_PAYMENT);
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(false);
 
@@ -202,9 +199,9 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
+    ): void {
         $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_PAID);
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(false);
 
@@ -217,8 +214,8 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
-        $order->getItems()->willReturn([$orderItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(false);
 
@@ -231,8 +228,8 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
-        $order->getItems()->willReturn([$orderItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(false);
 

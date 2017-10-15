@@ -79,17 +79,18 @@ The Customization Guide
 
 .. include:: /customization/map.rst.inc
 
-The REST API Reference
-----------------------
+Sylius Plugins
+--------------
 
-:doc:`The API guide </api/index>` covers the REST API of Sylius platform.
+The collection of Sylius Plugins together with the guide on Plugins development.
+Remember that you can use all the :doc:`customization techniques </customization/index>` in Plugins.
 
 .. toctree::
    :hidden:
 
-   api/index
+   plugins/index
 
-.. include:: /api/map.rst.inc
+.. include:: /plugins/map.rst.inc
 
 The Cookbook
 ------------
@@ -103,53 +104,29 @@ The Cookbook
 
 .. include:: /cookbook/map.rst.inc
 
-The Behat Guide
----------------
+The REST API Reference
+----------------------
 
-In :doc:`the Behat Guide </behat/index>` you will learn how to write clean and reusable features, contexts and pages.
-
-.. toctree::
-   :hidden:
-
-   behat/index
-
-.. include:: /behat/map.rst.inc
-
-Bundles
--------
-
-:doc:`Documentation of all Sylius bundles </bundles/index>`.
+:doc:`The API guide </api/index>` covers the REST API of Sylius platform.
 
 .. toctree::
    :hidden:
 
-   bundles/index
+   api/index
 
-.. include:: /bundles/map.rst.inc
+.. include:: /api/map.rst.inc
 
-Components
-----------
+The BDD Guide
+-------------
 
-:doc:`Documentation of the Sylius E-Commerce components for PHP </components/index>`.
-
-.. toctree::
-   :hidden:
-
-   components/index
-
-.. include:: /components/map.rst.inc
-
-Sylius Plugins
---------------
-
-The collection of Sylius Plugins together with the guide on Plugins development.
+In :doc:`the BDD Guide </bdd/index>` you will learn how to write clean and reusable features, contexts and pages using Behat.
 
 .. toctree::
    :hidden:
 
-   plugins/index
+   bdd/index
 
-.. include:: /plugins/map.rst.inc
+.. include:: /bdd/map.rst.inc
 
 The Contribution Guide
 ----------------------
@@ -174,6 +151,18 @@ Support
    support/index
 
 .. include:: /support/map.rst.inc
+
+Components & Bundles
+--------------------
+
+:doc:`Documentation of all Sylius components and bundles </components_and_bundles/index>` useful when using them standalone.
+
+.. toctree::
+   :hidden:
+
+   components_and_bundles/index
+
+.. include:: /components_and_bundles/map.rst.inc
 
 .. _Sylius: http://sylius.org
 .. _`Symfony Framework`: http://symfony.com

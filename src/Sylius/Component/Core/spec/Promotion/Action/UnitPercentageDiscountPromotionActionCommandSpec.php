@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -21,7 +23,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
-use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -37,16 +38,11 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter
-    ) {
+    ): void {
         $this->beConstructedWith($adjustmentFactory, $priceRangeFilter, $taxonFilter, $productFilter);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UnitPercentageDiscountPromotionActionCommand::class);
-    }
-
-    function it_is_an_item_discount_action()
+    function it_is_an_item_discount_action(): void
     {
         $this->shouldHaveType(UnitDiscountPromotionActionCommand::class);
     }
@@ -66,7 +62,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -114,7 +110,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         OrderInterface $order,
         OrderItemInterface $orderItem,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -132,7 +128,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_PL');
 
@@ -145,7 +141,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_PL');
 
@@ -157,7 +153,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
     function it_throws_an_exception_if_passed_subject_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $this
             ->shouldThrow(UnexpectedTypeException::class)
             ->during('execute', [$subject, ['percentage' => 0.2], $promotion])
@@ -174,7 +170,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $order->getItems()->willReturn($items);
         $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
 
@@ -201,7 +197,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
     function it_throws_an_exception_if_passed_subject_to_revert_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $this
             ->shouldThrow(UnexpectedTypeException::class)
             ->during('revert', [$subject, ['percentage' => 0.2], $promotion])

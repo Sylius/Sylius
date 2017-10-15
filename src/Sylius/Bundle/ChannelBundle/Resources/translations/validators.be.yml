@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        code:
+            not_blank: Калі ласка, увядзіце код канала.
+            regex: Код канала можа складацца толькі з літар, лічбаў, працяжнікаў і падкрэсленняў.
+            unique: Код канала павінен быць унікальным.
+        name:
+            not_blank: Калі ласка, увядзіце код канала.

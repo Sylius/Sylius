@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
@@ -106,7 +117,7 @@ final class CheckoutCompleteContext implements Context
      */
     public function iShouldSeeThisShippingAddressAsShippingAddress($fullName)
     {
-        $address = $this->sharedStorage->get('shipping_address_'.StringInflector::nameToLowercaseCode($fullName));
+        $address = $this->sharedStorage->get('shipping_address_' . StringInflector::nameToLowercaseCode($fullName));
 
         Assert::true($this->completePage->hasShippingAddress($address));
     }
@@ -116,7 +127,7 @@ final class CheckoutCompleteContext implements Context
      */
     public function iShouldSeeThisBillingAddressAsBillingAddress($fullName)
     {
-        $address = $this->sharedStorage->get('billing_address_'.StringInflector::nameToLowercaseCode($fullName));
+        $address = $this->sharedStorage->get('billing_address_' . StringInflector::nameToLowercaseCode($fullName));
 
         Assert::true($this->completePage->hasBillingAddress($address));
     }

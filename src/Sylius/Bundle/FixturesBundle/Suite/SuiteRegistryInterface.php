@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Suite;
 
 /**
@@ -23,10 +25,10 @@ interface SuiteRegistryInterface
      *
      * @throws SuiteNotFoundException
      */
-    public function getSuite($name);
+    public function getSuite(string $name): SuiteInterface;
 
     /**
-     * @return SuiteInterface[]
+     * @return array|SuiteInterface[]
      */
-    public function getSuites();
+    public function getSuites(): array;
 }

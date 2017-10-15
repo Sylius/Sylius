@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR;
 
 use Doctrine\ODM\PHPCR\DocumentRepository as BaseDocumentRepository;
@@ -29,7 +31,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = [], array $sorting = [])
+    public function createPaginator(array $criteria = [], array $sorting = []): iterable
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
@@ -42,7 +44,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function add(ResourceInterface $resource)
+    public function add(ResourceInterface $resource): void
     {
         $this->dm->persist($resource);
         $this->dm->flush();
@@ -51,7 +53,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function remove(ResourceInterface $resource)
+    public function remove(ResourceInterface $resource): void
     {
         if (null !== $this->find($resource->getId())) {
             $this->dm->remove($resource);
@@ -111,7 +113,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     {
         foreach ($sorting as $property => $order) {
             if (!empty($order)) {
-                $queryBuilder->orderBy()->{$order}()->field('o.'.$property);
+                $queryBuilder->orderBy()->{$order}()->field('o.' . $property);
             }
         }
 
@@ -126,7 +128,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     protected function getPropertyName($name)
     {
         if (false === strpos($name, '.')) {
-            return $this->getAlias().'.'.$name;
+            return $this->getAlias() . '.' . $name;
         }
 
         return $name;

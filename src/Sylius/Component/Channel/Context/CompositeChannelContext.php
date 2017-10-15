@@ -9,8 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Channel\Context;
 
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Zend\Stdlib\PriorityQueue;
 
 /**
@@ -32,7 +35,7 @@ final class CompositeChannelContext implements ChannelContextInterface
      * @param ChannelContextInterface $channelContext
      * @param int $priority
      */
-    public function addContext(ChannelContextInterface $channelContext, $priority = 0)
+    public function addContext(ChannelContextInterface $channelContext, int $priority = 0): void
     {
         $this->channelContexts->insert($channelContext, $priority);
     }
@@ -40,7 +43,7 @@ final class CompositeChannelContext implements ChannelContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getChannel()
+    public function getChannel(): ChannelInterface
     {
         foreach ($this->channelContexts as $channelContext) {
             try {

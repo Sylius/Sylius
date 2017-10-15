@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderSequence as BaseOrderSequence;
@@ -26,7 +28,7 @@ class OrderSequence extends BaseOrderSequence implements OrderSequenceInterface
     /**
      * {@inheritdoc}
      */
-    public function getVersion()
+    public function getVersion(): ?int
     {
         return $this->version;
     }
@@ -34,7 +36,7 @@ class OrderSequence extends BaseOrderSequence implements OrderSequenceInterface
     /**
      * {@inheritdoc}
      */
-    public function setVersion($version)
+    public function setVersion(?int $version): void
     {
         $this->version = $version;
     }

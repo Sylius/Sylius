@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Aggregator;
 
 use Sylius\Component\Order\Model\AdjustmentInterface;
@@ -19,11 +21,11 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 interface AdjustmentsAggregatorInterface
 {
     /**
-     * @param AdjustmentInterface[] $adjustments
+     * @param iterable|AdjustmentInterface[] $adjustments
      *
      * @return array
      *
      * @throws \InvalidArgumentException
      */
-    public function aggregate(array $adjustments);
+    public function aggregate(iterable $adjustments): array;
 }

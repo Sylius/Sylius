@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: Molimo unesite svoju PayPal zaporku.
+            signature:
+                not_blank: Molimo unesite svoj PayPal potpis.
+            username:
+                not_blank: Molimo unesite svoje PayPal korisničko ime.
+        stripe:
+            secret_key:
+                not_blank: Molimo unesite svoj Stripe tajni ključ.

@@ -5,13 +5,19 @@ sylius:
     form:
         customer:
             first_name: Ime
+            group: Grupa
             last_name: Prezime
             email: E-mail
             phone_number: Kontakt telefon
+            gender: Spol
+            birthday: Rođendan
             billing_address: Adresa za dostavu
             different_billing_address: Želim koristiti drugu adresu za račun.
+            subscribed_to_newsletter: Pretplatite se na naš newsletter
         customer_group:
             name: Naziv grupe
             roles: Role (korisnička prava)
     gender:
         unknown: Nepoznato
+        male: Muško
+        female: Žensko

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Model;
 
 /**
@@ -17,7 +19,7 @@ namespace Sylius\Component\Promotion\Model;
 interface PromotionCouponAwarePromotionSubjectInterface extends PromotionSubjectInterface
 {
     /**
-     * @return null|PromotionCouponInterface
+     * @return PromotionCouponInterface|null
      */
-    public function getPromotionCoupon();
+    public function getPromotionCoupon(): ?PromotionCouponInterface;
 }

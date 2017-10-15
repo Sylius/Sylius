@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PromotionBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
@@ -25,7 +27,7 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
     /**
      * @test
      */
-    public function it_registers_collected_promotion_actions_in_the_registry()
+    public function it_registers_collected_promotion_actions_in_the_registry(): void
     {
         $this->setDefinition('sylius.registry_promotion_action', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_action', new Definition());
@@ -46,7 +48,7 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
     /**
      * @test
      */
-    public function it_creates_parameter_which_maps_promotion_action_type_to_label()
+    public function it_creates_parameter_which_maps_promotion_action_type_to_label(): void
     {
         $this->setDefinition('sylius.registry_promotion_action', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_action', new Definition());
@@ -66,7 +68,7 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
     /**
      * @test
      */
-    public function it_registers_collected_promotion_actions_form_types_in_the_registry()
+    public function it_registers_collected_promotion_actions_form_types_in_the_registry(): void
     {
         $this->setDefinition('sylius.registry_promotion_action', new Definition());
         $this->setDefinition('sylius.form_registry.promotion_action', new Definition());
@@ -87,7 +89,7 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
     /**
      * {@inheritdoc}
      */
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new RegisterPromotionActionsPass());
     }

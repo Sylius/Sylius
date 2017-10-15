@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationCollectionType;
@@ -19,7 +21,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class PromotionRuleCollectionType extends AbstractConfigurationCollectionType
 {
-    public function configureOptions(OptionsResolver $resolver)
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 
@@ -29,7 +34,7 @@ final class PromotionRuleCollectionType extends AbstractConfigurationCollectionT
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_promotion_rule_collection';
     }

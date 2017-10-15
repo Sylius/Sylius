@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Command;
 
 use Sylius\Bundle\FixturesBundle\Loader\SuiteLoaderInterface;
@@ -16,9 +18,7 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteRegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 
@@ -30,7 +30,7 @@ final class FixturesLoadCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sylius:fixtures:load')
@@ -42,7 +42,7 @@ final class FixturesLoadCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         if ($input->isInteractive()) {
             /** @var QuestionHelper $questionHelper */
@@ -64,7 +64,7 @@ final class FixturesLoadCommand extends ContainerAwareCommand
     /**
      * @param InputInterface $input
      */
-    private function loadSuites(InputInterface $input)
+    private function loadSuites(InputInterface $input): void
     {
         $suiteName = $input->getArgument('suite');
         $suite = $this->getSuiteRegistry()->getSuite($suiteName);
@@ -75,7 +75,7 @@ final class FixturesLoadCommand extends ContainerAwareCommand
     /**
      * @return SuiteRegistryInterface
      */
-    private function getSuiteRegistry()
+    private function getSuiteRegistry(): SuiteRegistryInterface
     {
         return $this->getContainer()->get('sylius_fixtures.suite_registry');
     }
@@ -83,7 +83,7 @@ final class FixturesLoadCommand extends ContainerAwareCommand
     /**
      * @return SuiteLoaderInterface
      */
-    private function getSuiteLoader()
+    private function getSuiteLoader(): SuiteLoaderInterface
     {
         return $this->getContainer()->get('sylius_fixtures.suite_loader');
     }

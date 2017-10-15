@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use Hateoas\Configuration\Route;
@@ -18,7 +20,6 @@ use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesResolverInterface;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
@@ -33,17 +34,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class ResourcesCollectionProviderSpec extends ObjectBehavior
 {
-    function let(ResourcesResolverInterface $resourcesResolver, PagerfantaFactory $pagerfantaRepresentationFactory)
+    function let(ResourcesResolverInterface $resourcesResolver, PagerfantaFactory $pagerfantaRepresentationFactory): void
     {
         $this->beConstructedWith($resourcesResolver, $pagerfantaRepresentationFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResourcesCollectionProvider::class);
-    }
-
-    function it_implements_resources_collection_provider_interface()
+    function it_implements_resources_collection_provider_interface(): void
     {
         $this->shouldImplement(ResourcesCollectionProviderInterface::class);
     }
@@ -54,7 +50,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         RepositoryInterface $repository,
         ResourceInterface $firstResource,
         ResourceInterface $secondResource
-    ) {
+    ): void {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
 
         $resourcesResolver->getResources($requestConfiguration, $repository)->willReturn([$firstResource, $secondResource]);
@@ -69,7 +65,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         Pagerfanta $paginator,
         Request $request,
         ParameterBag $queryParameters
-    ) {
+    ): void {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getPaginationMaxPerPage()->willReturn(5);
 
@@ -77,7 +73,8 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
-        $queryParameters->get('limit')->willReturn(5);
+        $queryParameters->has('limit')->willReturn(true);
+        $queryParameters->getInt('limit')->willReturn(5);
         $queryParameters->get('page', 1)->willReturn(6);
 
         $paginator->setMaxPerPage(5)->shouldBeCalled();
@@ -96,7 +93,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         Pagerfanta $paginator,
         Request $request,
         ParameterBag $queryParameters
-    ) {
+    ): void {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getPaginationMaxPerPage()->willReturn(1000);
 
@@ -109,7 +106,8 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
-        $queryParameters->get('limit')->willReturn(1000);
+        $queryParameters->has('limit')->willReturn(true);
+        $queryParameters->getInt('limit')->willReturn(1000);
         $queryParameters->get('page', 1)->willReturn(1);
 
         $paginator->setMaxPerPage(99)->shouldBeCalled();
@@ -129,7 +127,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         ParameterBag $requestAttributes,
         PagerfantaFactory $pagerfantaRepresentationFactory,
         PaginatedRepresentation $paginatedRepresentation
-    ) {
+    ): void {
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $requestConfiguration->getPaginationMaxPerPage()->willReturn(8);
 
@@ -137,7 +135,8 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
-        $queryParameters->get('limit')->willReturn(8);
+        $queryParameters->has('limit')->willReturn(true);
+        $queryParameters->getInt('limit')->willReturn(8);
         $queryParameters->get('page', 1)->willReturn(6);
         $queryParameters->all()->willReturn(['foo' => 2, 'bar' => 15]);
 
@@ -163,7 +162,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         Pagerfanta $paginator,
         Request $request,
         ParameterBag $queryParameters
-    ) {
+    ): void {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getPaginationMaxPerPage()->willReturn(5);
 
@@ -175,7 +174,8 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
-        $queryParameters->get('limit')->willReturn(5);
+        $queryParameters->has('limit')->willReturn(true);
+        $queryParameters->getInt('limit')->willReturn(5);
         $queryParameters->get('page', 1)->willReturn(6);
 
         $paginator->setMaxPerPage(5)->shouldBeCalled();

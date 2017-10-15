@@ -46,5 +46,5 @@ In order to create a new address, use a factory. Then complete your address with
 Learn more
 ----------
 
-* :doc:`Addressing - Component Documentation </components/Addressing/index>`
-* :doc:`Addressing - Bundle Documentation </bundles/SyliusAddressingBundle/index>`
+* :doc:`Addressing - Component Documentation </components_and_bundles/components/Addressing/index>`
+* :doc:`Addressing - Bundle Documentation </components_and_bundles/bundles/SyliusAddressingBundle/index>`

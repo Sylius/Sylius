@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Factory;
 
 use Sylius\Component\Order\Model\OrderItemInterface;
-use Sylius\Component\Order\Model\OrderItemUnit;
+use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
@@ -28,7 +30,7 @@ class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
     /**
      * @param string $className
      */
-    public function __construct($className)
+    public function __construct(string $className)
     {
         $this->className = $className;
     }
@@ -38,7 +40,7 @@ class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
      *
      * @throws UnsupportedMethodException
      */
-    public function createNew()
+    public function createNew(): OrderItemUnitInterface
     {
         throw new UnsupportedMethodException('createNew');
     }
@@ -46,9 +48,9 @@ class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
     /**
      * @param OrderItemInterface $orderItem
      *
-     * @return OrderItemUnit
+     * @return OrderItemUnitInterface
      */
-    public function createForItem(OrderItemInterface $orderItem)
+    public function createForItem(OrderItemInterface $orderItem): OrderItemUnitInterface
     {
         return new $this->className($orderItem);
     }

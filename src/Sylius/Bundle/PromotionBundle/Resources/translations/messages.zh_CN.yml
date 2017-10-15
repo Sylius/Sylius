@@ -17,6 +17,11 @@ sylius:
             starts_at: 开始于
             usage_limit: 使用次数
         promotion_action:
+            item_fixed_discount: 订单项固定折扣
+            item_percentage_discount: 订单项百分比折扣
+            order_fixed_discount: 订单固定折扣
+            order_percentage_discount: 订单百分比折扣
+            shipping_percentage_discount: 货运百分比折扣
             fixed_discount_configuration:
                 amount: 折扣金额
             percentage_discount_configuration:
@@ -33,6 +38,15 @@ sylius:
         promotion_filter:
             price_range: 价格区间过滤
         promotion_rule:
+            cart_quantity: 购物车数量
+            contains_product: 包含的商品
+            customer_group: 客户组
+            has_at_least_one_from_taxons: 至少要有一个分类
+            item_total: 订单项总计
+            nth_order: 二次订单
+            shipping_country: 运送国家
+            taxonomy: 分类
+            total_price_of_items_from_taxon: 根据商品分类的总价格
             cart_quantity_configuration:
                 count: 计数
                 equal: 等于

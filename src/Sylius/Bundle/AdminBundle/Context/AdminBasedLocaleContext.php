@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Context;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -37,7 +39,7 @@ final class AdminBasedLocaleContext implements LocaleContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): string
     {
         $token = $this->tokenStorage->getToken();
         if (null === $token) {

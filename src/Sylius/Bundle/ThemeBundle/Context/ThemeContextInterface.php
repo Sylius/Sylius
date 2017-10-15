@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Context;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -23,5 +25,5 @@ interface ThemeContextInterface
      *
      * @return ThemeInterface|null
      */
-    public function getTheme();
+    public function getTheme(): ?ThemeInterface;
 }

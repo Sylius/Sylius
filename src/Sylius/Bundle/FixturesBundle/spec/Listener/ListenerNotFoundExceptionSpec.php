@@ -9,33 +9,28 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\FixturesBundle\Listener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\FixturesBundle\Listener\ListenerNotFoundException;
 
 /**
  * @author Kamil Kokot <kamil@kokot.me>
  */
 final class ListenerNotFoundExceptionSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith('listener_name');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType('Sylius\Bundle\FixturesBundle\Listener\ListenerNotFoundException');
-    }
-
-    function it_is_an_invalid_argument_exception()
+    function it_is_an_invalid_argument_exception(): void
     {
         $this->shouldHaveType(\InvalidArgumentException::class);
     }
 
-    function it_has_preformatted_message()
+    function it_has_preformatted_message(): void
     {
         $this->getMessage()->shouldReturn('Listener with name "listener_name" could not be found!');
     }

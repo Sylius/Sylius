@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AddressingBundle\Twig;
 
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
 
 /**
@@ -35,11 +36,11 @@ class ProvinceNamingExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-            new \Twig_SimpleFilter('sylius_province_name', [$this->provinceNamingProvider, 'getName']),
-            new \Twig_SimpleFilter('sylius_province_abbreviation', [$this->provinceNamingProvider, 'getAbbreviation']),
+            new \Twig_Filter('sylius_province_name', [$this->provinceNamingProvider, 'getName']),
+            new \Twig_Filter('sylius_province_abbreviation', [$this->provinceNamingProvider, 'getAbbreviation']),
         ];
     }
 }

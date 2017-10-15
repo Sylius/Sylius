@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PromotionBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
@@ -25,7 +27,7 @@ final class CompositePromotionCouponEligibilityCheckerPassTest extends AbstractC
     /**
      * @test
      */
-    public function it_collects_tagged_promotion_coupon_eligibility_checkers()
+    public function it_collects_tagged_promotion_coupon_eligibility_checkers(): void
     {
         $this->setDefinition('sylius.promotion_coupon_eligibility_checker', new Definition());
         $this->setDefinition(
@@ -45,7 +47,7 @@ final class CompositePromotionCouponEligibilityCheckerPassTest extends AbstractC
     /**
      * {@inheritdoc}
      */
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new CompositePromotionCouponEligibilityCheckerPass());
     }

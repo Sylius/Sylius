@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\OrderBundle\Templating\Helper;
 
 use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
@@ -33,11 +36,11 @@ class AdjustmentsHelper extends Helper
     }
 
     /**
-     * @param array $adjustments
+     * @param iterable|AdjustmentInterface[] $adjustments
      *
      * @return array
      */
-    public function getAggregatedAdjustments(array $adjustments)
+    public function getAggregatedAdjustments(iterable $adjustments): array
     {
         return $this->adjustmentsAggregator->aggregate($adjustments);
     }
@@ -45,7 +48,7 @@ class AdjustmentsHelper extends Helper
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_adjustments';
     }

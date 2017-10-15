@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\ShippingMethod\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\CreatePageInterface;
+use Sylius\Behat\Page\Admin\ShippingMethod\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -519,7 +521,7 @@ final class ManagingShippingMethodsContext implements Context
 
         Assert::true($this->indexPage->isSingleResourceOnPage([
             'name' => $shippingMethod->getName(),
-            'enabled' => $state,
+            'enabled' => $state ? 'Enabled' : 'Disabled',
         ]));
     }
 }

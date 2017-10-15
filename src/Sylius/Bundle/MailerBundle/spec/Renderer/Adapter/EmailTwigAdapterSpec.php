@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\MailerBundle\Renderer\Adapter;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailTwigAdapter;
 use Sylius\Component\Mailer\Event\EmailRenderEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
@@ -23,17 +24,12 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class EmailTwigAdapterSpec extends ObjectBehavior
 {
-    function let(\Twig_Environment $twig)
+    function let(\Twig_Environment $twig): void
     {
         $this->beConstructedWith($twig);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(EmailTwigAdapter::class);
-    }
-
-    function it_is_an_adapter()
+    function it_is_an_adapter(): void
     {
         $this->shouldHaveType(AbstractAdapter::class);
     }
@@ -45,7 +41,7 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
         EmailRenderEvent $event,
         EventDispatcherInterface $dispatcher,
         RenderedEmail $renderedEmail
-    ) {
+    ): void {
         $this->setEventDispatcher($dispatcher);
 
         $twig->mergeGlobals([])->shouldBeCalled()->willReturn([]);
@@ -53,8 +49,8 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
         $email->getTemplate()->shouldBeCalled()->willReturn('MyTemplate');
         $twig->loadTemplate('MyTemplate')->shouldBeCalled()->willReturn($template);
 
-        $template->renderBlock('subject', [])->shouldBeCalled();
-        $template->renderBlock('body', [])->shouldBeCalled();
+        $template->renderBlock('subject', [])->willReturn('template');
+        $template->renderBlock('body', [])->willReturn('body');
 
         $dispatcher->dispatch(
             SyliusMailerEvents::EMAIL_PRE_RENDER,
@@ -71,7 +67,7 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
         EmailRenderEvent $event,
         EventDispatcherInterface $dispatcher,
         RenderedEmail $renderedEmail
-    ) {
+    ): void {
         $this->setEventDispatcher($dispatcher);
 
         $email->getTemplate()->shouldBeCalled()->willReturn(null);

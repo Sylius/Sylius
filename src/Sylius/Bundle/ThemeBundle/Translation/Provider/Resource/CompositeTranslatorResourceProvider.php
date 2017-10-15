@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Resource;
 
 /**
@@ -32,7 +34,7 @@ final class CompositeTranslatorResourceProvider implements TranslatorResourcePro
     /**
      * {@inheritdoc}
      */
-    public function getResources()
+    public function getResources(): array
     {
         $resources = [];
 
@@ -46,7 +48,7 @@ final class CompositeTranslatorResourceProvider implements TranslatorResourcePro
     /**
      * {@inheritdoc}
      */
-    public function getResourcesLocales()
+    public function getResourcesLocales(): array
     {
         $resourcesLocales = [];
 

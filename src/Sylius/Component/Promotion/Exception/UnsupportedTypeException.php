@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Exception;
 
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
-class UnsupportedTypeException extends UnexpectedTypeException
+final class UnsupportedTypeException extends UnexpectedTypeException
 {
 }

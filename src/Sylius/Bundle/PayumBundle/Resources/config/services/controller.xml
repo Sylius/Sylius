@@ -7,11 +7,12 @@
         <service id="sylius.controller.payum" class="Sylius\Bundle\PayumBundle\Controller\PayumController">
             <argument type="service" id="payum" />
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.form_registry.payum_gateway_config" />
             <argument type="expression">service('sylius.resource_registry').get('sylius.order')</argument>
             <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
             <argument type="service" id="sylius.resource_controller.view_handler" />
             <argument type="service" id="router" />
+            <argument type="service" id="sylius.factory.payum_get_status_action" />
+            <argument type="service" id="sylius.factory.payum_resolve_next_route" />
         </service>
     </services>
 </container>

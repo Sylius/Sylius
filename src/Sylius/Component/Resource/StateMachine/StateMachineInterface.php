@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\StateMachine;
 
 use SM\StateMachine\StateMachineInterface as BaseStateMachineInterface;
@@ -26,7 +28,7 @@ interface StateMachineInterface extends BaseStateMachineInterface
      *
      * @return string|null
      */
-    public function getTransitionFromState($fromState);
+    public function getTransitionFromState(string $fromState): ?string;
 
     /**
      * Returns the possible transition to the given state
@@ -36,5 +38,5 @@ interface StateMachineInterface extends BaseStateMachineInterface
      *
      * @return string|null
      */
-    public function getTransitionToState($toState);
+    public function getTransitionToState(string $toState): ?string;
 }
