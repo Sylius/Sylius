@@ -4,7 +4,16 @@ Basic Usage
 LocaleContext
 -------------
 
-...
+In the Locale component there are three LocaleContexts defined:
+* ``CompositeLocaleContext``
+* ``ImmutableLocaleContext``
+* ``ProviderBasedLocaleContext``
+
+CompositeLocaleContext
+~~~~~~~~~~~~~~~~~~~~~~
+
+It is a composite of different contexts available in your application, which are prioritized while being injected here (the one with highest priority is used).
+It has the ``getLocaleCode()`` method available, that helps you to get the currently used locale.
 
 LocaleProvider
 --------------
@@ -25,6 +34,7 @@ The **LocaleProvider** allows you to get all available locales.
     $localeProvider->isLocaleAvailable('en') //It will check if that locale is enabled
 
 .. note::
+
     For more detailed information go to `Sylius API LocaleProvider`_.
 
 .. _Sylius API LocaleProvider: http://api.sylius.org/Sylius/Component/Locale/Provider/LocaleProvider.html
