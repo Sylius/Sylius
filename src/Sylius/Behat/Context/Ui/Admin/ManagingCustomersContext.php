@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Customer\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Customer\IndexPageInterface as CustomerIndexPageInterface;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -28,7 +29,7 @@ use Webmozart\Assert\Assert;
 final class ManagingCustomersContext implements Context
 {
     /**
-     * @var IndexPageInterface
+     * @var CustomerIndexPageInterface
      */
     private $indexPage;
 
@@ -59,7 +60,7 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
+     * @param CustomerIndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
      * @param ShowPageInterface $showPage
      * @param IndexPageInterface $ordersIndexPage

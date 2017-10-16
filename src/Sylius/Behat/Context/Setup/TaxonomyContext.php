@@ -144,7 +144,8 @@ final class TaxonomyContext implements Context
 
         $taxon->addImage($taxonImage);
 
-        $this->objectManager->flush($taxon);
+        $this->objectManager->persist($taxon);
+        $this->objectManager->flush();
     }
 
     /**
@@ -155,7 +156,8 @@ final class TaxonomyContext implements Context
         $taxon->addChild($this->createTaxon($firstTaxonName));
         $taxon->addChild($this->createTaxon($secondTaxonName));
 
-        $this->objectManager->flush($taxon);
+        $this->objectManager->persist($taxon);
+        $this->objectManager->flush();
     }
 
     /**

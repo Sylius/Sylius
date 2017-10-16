@@ -542,7 +542,9 @@ final class ProductContext implements Context
         TaxCategoryInterface $taxCategory
     ) {
         $productVariant->setTaxCategory($taxCategory);
-        $this->objectManager->flush($productVariant);
+
+        $this->objectManager->persist($productVariant);
+        $this->objectManager->flush();
     }
 
     /**
@@ -754,7 +756,8 @@ final class ProductContext implements Context
 
         $product->addImage($productImage);
 
-        $this->objectManager->flush($product);
+        $this->objectManager->persist($product);
+        $this->objectManager->flush();
     }
 
     /**
