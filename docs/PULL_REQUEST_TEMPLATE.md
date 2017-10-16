@@ -11,4 +11,5 @@
 <!--
  - Bug fixes must be submitted against the 1.0 branch
  - Features and deprecations must be submitted against the master branch
+ - Make sure that the correct base branch is set
 -->
