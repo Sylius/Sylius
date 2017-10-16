@@ -248,8 +248,8 @@ class Product implements ProductInterface
      */
     public function hasAttribute(AttributeValueInterface $attribute): bool
     {
-        foreach ($this->attributes as $value){
-            if ($value->getCode() === $attribute->getCode()){
+        foreach ($this->getAttributes() as $value) {
+            if ($value->getCode() === $attribute->getCode() && $value->getLocaleCode() == $attribute->getLocaleCode()) {
                 return true;
             }
         }
