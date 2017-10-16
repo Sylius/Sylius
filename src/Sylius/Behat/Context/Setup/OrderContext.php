@@ -26,6 +26,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -39,7 +40,6 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
-use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -160,8 +160,8 @@ final class OrderContext implements Context
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
         $customer->setEmail($email);
-        $customer->setFirstname('John');
-        $customer->setLastname('Doe');
+        $customer->setFirstName('John');
+        $customer->setLastName('Doe');
 
         $this->customerRepository->add($customer);
 
@@ -184,7 +184,7 @@ final class OrderContext implements Context
     /**
      * @Given /^(I) placed (an order "[^"]+")$/
      */
-    public function iPlacedAnOrder(UserInterface $user, $orderNumber)
+    public function iPlacedAnOrder(ShopUserInterface $user, $orderNumber)
     {
         $customer = $user->getCustomer();
         $order = $this->createOrder($customer, $orderNumber);
@@ -401,7 +401,7 @@ final class OrderContext implements Context
      * @Given /^(I) have already placed (\d+) orders choosing ("[^"]+" product), ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/
      */
     public function iHaveAlreadyPlacedOrderNthTimes(
-        UserInterface $user,
+        ShopUserInterface $user,
         $numberOfOrders,
         ProductInterface $product,
         ShippingMethodInterface $shippingMethod,
@@ -764,8 +764,8 @@ final class OrderContext implements Context
         $order = $this->orderFactory->createNew();
 
         $order->setCustomer($customer);
-        $order->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
-        $order->setLocaleCode((null !== $localeCode) ? $localeCode : $this->sharedStorage->get('locale')->getCode());
+        $order->setChannel($channel ?? $this->sharedStorage->get('channel'));
+        $order->setLocaleCode($localeCode ?? $this->sharedStorage->get('locale')->getCode());
         $order->setCurrencyCode($order->getChannel()->getBaseCurrency()->getCode());
 
         return $order;
@@ -990,7 +990,7 @@ final class OrderContext implements Context
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $variant->getChannelPricingForChannel($this->sharedStorage->get('channel'));
 
-        /** @var \Sylius\Component\Order\Model\OrderItemInterface $item */
+        /** @var OrderItemInterface $item */
         $item = $this->orderItemFactory->createNew();
         $item->setVariant($variant);
         $item->setUnitPrice($channelPricing->getPrice());

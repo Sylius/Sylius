@@ -61,7 +61,7 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
         /**
          * {@inheritdoc}
          */
-        public function buildForm(FormBuilderInterface $builder, array $options)
+        public function buildForm(FormBuilderInterface $builder, array $options): void
         {
             // Adding new fields works just like in the parent form type.
             $builder->add('contactHours', TextType::class, [
@@ -81,7 +81,7 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
         /**
          * {@inheritdoc}
          */
-        public function getExtendedType()
+        public function getExtendedType(): string
         {
             return CustomerProfileType::class;
         }
@@ -150,7 +150,7 @@ as is done in the ``ProductVariantTypeExtension`` by the ``CoreBundle``:
         /**
          * {@inheritdoc}
          */
-        public function buildForm(FormBuilderInterface $builder, array $options)
+        public function buildForm(FormBuilderInterface $builder, array $options): void
         {
             ...
 
@@ -183,11 +183,11 @@ you will also have to set up an event listener and then remove the field:
 
     ...
 
-    final class ProductVariantTypeMyExtension extneds AbstractTypeExtension
+    final class ProductVariantTypeMyExtension extends AbstractTypeExtension
     {
         ...
 
-        public function buildForm(FormBuilderInterface $builder, array $options)
+        public function buildForm(FormBuilderInterface $builder, array $options): void
         {
             ...
 

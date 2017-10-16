@@ -61,7 +61,7 @@ Assuming that you would want to add another field on the model - for instance a 
         /**
          * @return bool
          */
-        public function getFlag()
+        public function getFlag(): bool
         {
             return $this->flag;
         }
@@ -69,7 +69,7 @@ Assuming that you would want to add another field on the model - for instance a 
         /**
          * @param bool $flag
          */
-        public function setFlag($flag)
+        public function setFlag(bool $flag): void
         {
             $this->flag = $flag;
         }
@@ -169,7 +169,7 @@ Just like for regular models you can also check the class of translatable models
         /**
          * @return string
          */
-        public function getEstimatedDeliveryTime()
+        public function getEstimatedDeliveryTime(): string
         {
             return $this->estimatedDeliveryTime;
         }
@@ -177,7 +177,7 @@ Just like for regular models you can also check the class of translatable models
         /**
          * @param string $estimatedDeliveryTime
          */
-        public function setEstimatedDeliveryTime($estimatedDeliveryTime)
+        public function setEstimatedDeliveryTime(string $estimatedDeliveryTime): void
         {
             $this->estimatedDeliveryTime = $estimatedDeliveryTime;
         }
@@ -185,7 +185,7 @@ Just like for regular models you can also check the class of translatable models
         /**
          * {@inheritdoc}
          */
-        protected function createTranslation()
+        protected function createTranslation(): ShippingMethodTranslation
         {
             return new ShippingMethodTranslation();
         }
@@ -284,7 +284,7 @@ Just like for regular models you can also check the class of translatable models
         /**
          * @return string
          */
-        public function getDeliveryConditions()
+        public function getDeliveryConditions(): string
         {
             return $this->deliveryConditions;
         }
@@ -292,7 +292,7 @@ Just like for regular models you can also check the class of translatable models
         /**
          * @param string $deliveryConditions
          */
-        public function setDeliveryConditions($deliveryConditions)
+        public function setDeliveryConditions(string $deliveryConditions): void
         {
             $this->deliveryConditions = $deliveryConditions;
         }
@@ -325,23 +325,19 @@ The translation's entity file should be placed in ``AppBundle/Resources/config/d
     class ShippingMethod extends BaseShippingMethod
     {
        /**
-         * Set delivery conditions
-         *
-         * @param string $deliveryConditions
+         * @return string
          */
-        public function setDeliveryConditions($deliveryConditions = null)
+        public function getDeliveryConditions(): string
         {
-            $this->getTranslation()->setDeliveryConditions($deliveryConditions);
+            return $this->getTranslation()->getDeliveryConditions();
         }
 
        /**
-         * Get delivery conditions
-         *
-         * @return string
+         * @param string $deliveryConditions
          */
-        public function getDeliveryConditions()
+        public function setDeliveryConditions(string $deliveryConditions): void
         {
-            return $this->getTranslation()->getDeliveryConditions();
+            $this->getTranslation()->setDeliveryConditions($deliveryConditions);
         }
     }
 

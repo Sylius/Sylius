@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
@@ -84,6 +85,7 @@ final class UserContext implements Context
      */
     public function accountWasDeleted($email)
     {
+        /** @var ShopUserInterface $user */
         $user = $this->userRepository->findOneByEmail($email);
 
         $this->sharedStorage->set('customer', $user->getCustomer());
