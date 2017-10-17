@@ -268,6 +268,10 @@ class ResourceController extends Controller
             if ($event->isStopped()) {
                 $this->flashHelper->addFlashFromEvent($configuration, $event);
 
+                if ($event->hasResponse()) {
+                    return $event->getResponse();
+                }
+
                 return $this->redirectHandler->redirectToIndex($configuration, $newResource);
             }
 
@@ -476,6 +480,10 @@ class ResourceController extends Controller
         }
         if ($event->isStopped()) {
             $this->flashHelper->addFlashFromEvent($configuration, $event);
+
+            if ($event->hasResponse()) {
+                return $event->getResponse();
+            }
 
             return $this->redirectHandler->redirectToResource($configuration, $resource);
         }
