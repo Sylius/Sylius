@@ -11,6 +11,11 @@ sylius:
             not_blank: Entrez le code de l'attribut.
             regex: Le code de l'attribut peut uniquement être constitué de lettres, chiffres, tirets et de tirets bas.
             unique: Ce code est déjà utilisé.
+        configuration:
+            max_entries: La valeur des entrées max de configuration doit être supérieure ou égale à la valeur minimale des entrées.
+            max_length: La longueur maximale de la configuration doit être supérieure ou égale à la longueur minimale.
+            min_entries: La valeur minimale des entrées de configuration doit être inférieure ou égale au nombre de choix ajoutés.
+            multiple: Le multiple de configuration doit être vrai si les valeurs d'entrées min ou max sont spécifiées.
         presentation:
             not_blank: Veuillez entrer une description de l'attribut.
             min_length: La description de l'attribut doit contenir au moins 1 caractère.|La description de l'attribut doit contenir au moins {{ limit }} caractères.
