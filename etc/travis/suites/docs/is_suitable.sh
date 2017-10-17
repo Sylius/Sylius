@@ -6,6 +6,8 @@ if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
     exit 0 # Always execute full suite on branch builds
 fi
 
+git fetch origin ${TRAVIS_BRANCH}
+
 if [ $(git diff --name-only HEAD origin/${TRAVIS_BRANCH} | grep -c -e ^docs) -eq 0 ]; then
     print_header "Skipped suite" "Docs"
     print_warning "No changes detected in docs/*"

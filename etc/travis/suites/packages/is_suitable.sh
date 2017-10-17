@@ -6,6 +6,8 @@ if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
     exit 0 # Always execute full suite on branch builds
 fi
 
+git fetch origin ${TRAVIS_BRANCH}
+
 if [ $(git diff --name-only HEAD origin/${TRAVIS_BRANCH} | grep -c -e ^src/Sylius/Bundle -e ^src/Sylius/Component) -eq 0 ]; then
     print_header "Skipped suite" "Packages"
     print_warning "No changes detected in src/Sylius/Bundle/* or src/Sylius/Component/*"

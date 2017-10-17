@@ -6,9 +6,14 @@ if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
     exit 0 # Always execute full suite on branch builds
 fi
 
-if [ $(git diff --name-only HEAD origin/${TRAVIS_BRANCH} | grep -c -v -e ^docs -e ^LICENSE -e ^README.md -E "^CHANGELOG-[\d\.]+.md" -E "^UPGRADE-[\d\.]+.md") -eq 0 ]; then
+git fetch origin ${TRAVIS_BRANCH}
+git branch
+git branch -r
+git remote -v
+
+if [ $(git diff --name-only HEAD origin/${TRAVIS_BRANCH} | egrep -c -v -e ^docs -e ^LICENSE -e ^README.md -e "^CHANGELOG-[\d\.]+.md" -e "^UPGRADE-[\d\.]+.md") -eq 0 ]; then
     print_header "Skipped suite" "Application"
-    print_warning "No other changes than those in docs/* were found"
+    print_warning "No other changes than those in docs & metafiles were found"
     exit 1
 fi
 
