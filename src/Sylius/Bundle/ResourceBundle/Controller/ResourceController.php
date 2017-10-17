@@ -286,7 +286,11 @@ class ResourceController extends Controller
                 return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
             }
 
-            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
+            if ($postEvent->isStopped()) {
+                $this->flashHelper->addFlashFromEvent($configuration, $postEvent);
+            } else {
+                $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
+            }
 
             if ($postEvent->hasResponse()) {
                 return $postEvent->getResponse();
@@ -371,7 +375,11 @@ class ResourceController extends Controller
                 return $this->viewHandler->handle($configuration, $view);
             }
 
-            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+            if ($postEvent->isStopped()) {
+                $this->flashHelper->addFlashFromEvent($configuration, $postEvent);
+            } else {
+                $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+            }
 
             if ($postEvent->hasResponse()) {
                 return $postEvent->getResponse();
@@ -452,7 +460,11 @@ class ResourceController extends Controller
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
-        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
+        if ($postEvent->isStopped()) {
+            $this->flashHelper->addFlashFromEvent($configuration, $postEvent);
+        } else {
+            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
+        }
 
         if ($postEvent->hasResponse()) {
             return $postEvent->getResponse();
@@ -515,7 +527,11 @@ class ResourceController extends Controller
             return $this->viewHandler->handle($configuration, $view);
         }
 
-        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+        if ($postEvent->isStopped()) {
+            $this->flashHelper->addFlashFromEvent($configuration, $postEvent);
+        } else {
+            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+        }
 
         if ($postEvent->hasResponse()) {
             return $postEvent->getResponse();
