@@ -90,6 +90,8 @@ final class ProductSpec extends ObjectBehavior
 
     function it_adds_attribute(ProductAttributeValueInterface $attribute): void
     {
+        $attribute->getCode()->shouldBeCalled();
+        $attribute->getLocaleCode()->shouldBeCalled();
         $attribute->setProduct($this)->shouldBeCalled();
 
         $this->addAttribute($attribute);
@@ -98,6 +100,8 @@ final class ProductSpec extends ObjectBehavior
 
     function it_removes_attribute(ProductAttributeValueInterface $attribute): void
     {
+        $attribute->getCode()->shouldBeCalled();
+        $attribute->getLocaleCode()->shouldBeCalled();
         $attribute->setProduct($this)->shouldBeCalled();
 
         $this->addAttribute($attribute);
