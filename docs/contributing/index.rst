@@ -63,10 +63,22 @@ And now you can use gulp for installing views, by just running a simple command:
 
     $ yarn run gulp
 
-For the contributing process questions, please refer to the `Contributing Guide <http://docs.sylius.org/en/latest/contributing/index.html>`_ that comes up in the following chapters.
+For the contributing process questions, please refer to the `Contributing Guide <http://docs.sylius.org/en/latest/contributing/index.html>`_ that comes up in the following chapters:
+
+.. toctree::
+    :maxdepth: 1
+
+    code/index
+    documentation/index
+    translations/index
 
 .. _Gulp: http://gulpjs.com/
 .. _Node.js: https://nodejs.org/en/download/
+
+How to contribute using Sylius Vagrant
+--------------------------------------
+
+If you would like to contribute to the repo without worrying about environment, you can follow `the "Configure Vagrant to contribute on Sylius Core" section here <https://github.com/Sylius/Vagrant/blob/master/README.md>`_ to setup your vagrant machine.
 
 Contributing Code
 -----------------
