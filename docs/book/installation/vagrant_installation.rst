@@ -8,7 +8,7 @@ Sylius installation via Vagrant
 
     This article assumes you're familiar with `Composer`_, a dependency manager
     for PHP. It also assumes you have `Composer installed globally`_.
-    Basic knowledgle about `Vagrant <https://www.vagrantup.com/about.html>`_ is also required,
+    Basic knowledge about `Vagrant <https://www.vagrantup.com/about.html>`_ is also required,
     and of course `installed Vagrant <https://www.vagrantup.com/docs/installation/>`_.
 
 What's Vagrant?

@@ -46,7 +46,7 @@ As a result you will get the ``Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepo
          *
          * @return array
          */
-        public function findByOnHand($limit = 8)
+        public function findByOnHand(int $limit = 8): array
         {
             return $this->createQueryBuilder('o')
                 ->addSelect('variant')
