@@ -5,9 +5,8 @@ In some usecases you may be wondering if it is possible to completely turn off t
 
 This is a complicated situation, because we need to be precise what is our expected result:
 
-* to disable that email in the system completely,
-* to send a different email on the complete action of an order instead of the order confirmation email,
-* to send the order confirmation email in a different moment.
+* `to disable that email in the system completely <#disabling-the-email-in-the-configuration>`_,
+* `to send a different email on the complete action of an order instead of the order confirmation email <#disabling-the-listener-responsible-for-that-action>`_,
 
 Below a few ways to disable that email are presented:
 
