@@ -64,7 +64,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
                     $newKey = $this->getUniqueKey();
                     $fixedData[$newKey] = $this->resolveValues($values);
 
-                    if (!is_null($newKey) && $form->offsetExists($key)) {
+                    if ($form->offsetExists($key)) {
                         $form->offsetUnset($key);
                         $form->offsetSet(null, $newKey);
                     }
@@ -108,7 +108,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     {
         $fixedValues = [];
         foreach ($values as $locale => $value) {
-            if (!empty($value)) {
+            if ('' !== $value && null !== $value) {
                 $fixedValues[$locale] = $value;
             }
         }

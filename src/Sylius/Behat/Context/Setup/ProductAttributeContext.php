@@ -397,7 +397,7 @@ final class ProductAttributeContext implements Context
         foreach ($values as $value) {
             foreach ($choices as $choiceKey => $choiceValues) {
                 $key = array_search($value, $choiceValues);
-                if (!empty($key) && $localeCode === $key) {
+                if ($localeCode === $key) {
                     $choiceKeys[] = $choiceKey;
                 }
             }

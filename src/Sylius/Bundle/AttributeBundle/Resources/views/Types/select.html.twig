@@ -11,7 +11,7 @@
     {% else %}
         {% if values[attribute.value][locale] is not empty %}
             {{ values[attribute.value][locale] }}
-        {% else %}
+        {% elseif values[attribute.value][fallbackLocale] is not empty %}
             {{ values[attribute.value][fallbackLocale] }}
         {% endif %}
     {% endif %}

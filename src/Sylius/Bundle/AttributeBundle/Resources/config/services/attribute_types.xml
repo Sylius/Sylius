@@ -58,7 +58,7 @@
         </service>
 
         <service id="sylius.form.type.attribute_type.select" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType">
-            <argument>%locale%</argument>
+            <argument id="sylius.translation_locale_provider" type="service"/>
             <tag name="form.type" />
         </service>
 

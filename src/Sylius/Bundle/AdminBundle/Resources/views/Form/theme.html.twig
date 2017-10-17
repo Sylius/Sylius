@@ -5,7 +5,7 @@
 
     <div class="ui styled fluid accordion">
         {% for translation in form %}
-            <div data-locale="en_US">
+            <div data-locale="{{ translation.vars.name }}">
                 <div class="title{% if 0 == loop.index0 %} active{% endif %}">
                     <i class="dropdown icon"></i>
                     {{ flags.fromLocaleCode(translation.vars.name) }} {{ translation.vars.name|sylius_locale_name }}

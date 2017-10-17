@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -26,16 +27,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class SelectAttributeType extends AbstractType
 {
     /**
-     * @var string $defaultLocale
+     * @var string
      */
-    protected $defaultLocale;
+    private $defaultLocaleCode;
 
     /**
-     * @param string $defaultLocale
+     * @param TranslationLocaleProviderInterface $localeProvider
      */
-    public function __construct($defaultLocale)
+    public function __construct(TranslationLocaleProviderInterface $localeProvider)
     {
-        $this->defaultLocale = $defaultLocale;
+        $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
     }
 
     /**
@@ -80,25 +81,23 @@ final class SelectAttributeType extends AbstractType
     {
         $resolver
             ->setRequired('configuration')
-            ->setDefaults([
-                'locale_code' => $this->defaultLocale,
-                'placeholder' => 'sylius.form.attribute_type_configuration.select.choose',
-            ])
+            ->setDefault('placeholder', 'sylius.form.attribute_type_configuration.select.choose')
+            ->setDefault('locale_code', $this->defaultLocaleCode)
             ->setNormalizer('choices', function (Options $options) {
                 if (is_array($options['configuration'])
                     && isset($options['configuration']['choices'])
                     && is_array($options['configuration']['choices'])) {
                     $choices = [];
-                    $localeCode = $options['locale_code'];
+                    $localeCode = $options['locale_code'] ?? $this->defaultLocaleCode;
 
                     foreach ($options['configuration']['choices'] as $key => $choice) {
-                        if (!empty($choice[$localeCode])) {
+                        if (isset($options[$localeCode]) && '' !== $choice[$localeCode] && null !== $choice[$localeCode]) {
                             $choices[$key] = $choice[$localeCode];
 
                             continue;
                         }
 
-                        $choices[$key] = $choice[$this->defaultLocale];
+                        $choices[$key] = $choice[$this->defaultLocaleCode];
                     }
 
                     $choices = array_flip($choices);
