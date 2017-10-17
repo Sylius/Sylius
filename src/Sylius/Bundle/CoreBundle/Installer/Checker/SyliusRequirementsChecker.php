@@ -48,13 +48,12 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
      */
     public function check(InputInterface $input, OutputInterface $output): bool
     {
-        $notFulfilledTable = new TableRenderer($output);
-        $notFulfilledTable->setHeaders(['Requirement', 'Status']);
-
         $helpTable = new TableRenderer($output);
         $helpTable->setHeaders(['Issue', 'Recommendation']);
 
         foreach ($this->syliusRequirements as $collection) {
+            $notFulfilledTable = new TableRenderer($output);
+            $notFulfilledTable->setHeaders(['Requirement', 'Status']);
             $this->checkRequirementsInCollection($collection, $notFulfilledTable, $helpTable, $input->getOption('verbose'));
         }
 
