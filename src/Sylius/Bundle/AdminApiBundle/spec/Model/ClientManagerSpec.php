@@ -44,4 +44,11 @@ final class ClientManagerSpec extends ObjectBehavior
 
         $this->findClientByPublicId('random_string')->shouldReturn($client);
     }
+
+    function it_returns_null_if_client_does_not_exist($repository): void
+    {
+        $repository->findOneBy(['randomId' => 'random_string'])->willReturn(null);
+
+        $this->findClientByPublicId('random_string')->shouldReturn(null);
+    }
 }
