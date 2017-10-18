@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Product\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -126,8 +125,7 @@ final class ProductSpec extends ObjectBehavior
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueEN,
         ProductAttributeValueInterface $attributeValuePL
-    ): void
-    {
+    ): void {
         $attribute->getCode()->willReturn('colour');
 
         $attributeValueEN->setProduct($this)->shouldBeCalled();
@@ -156,8 +154,7 @@ final class ProductSpec extends ObjectBehavior
         ProductAttributeValueInterface $attributeValueEN,
         ProductAttributeValueInterface $attributeValuePL,
         ProductAttributeValueInterface $attributeValueFR
-    ): void
-    {
+    ): void {
         $attribute->getCode()->willReturn('colour');
 
         $attributeValueEN->setProduct($this)->shouldBeCalled();
@@ -191,8 +188,7 @@ final class ProductSpec extends ObjectBehavior
     function it_returns_attributes_by_a_fallback_locale_when_there_is_no_value_for_a_given_locale(
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueEN
-    ): void
-    {
+    ): void {
         $attribute->getCode()->willReturn('colour');
 
         $attributeValueEN->setProduct($this)->shouldBeCalled();
@@ -213,8 +209,7 @@ final class ProductSpec extends ObjectBehavior
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueEN,
         ProductAttributeValueInterface $attributeValuePL
-    ): void
-    {
+    ): void {
         $attribute->getCode()->willReturn('colour');
 
         $attributeValueEN->setProduct($this)->shouldBeCalled();
