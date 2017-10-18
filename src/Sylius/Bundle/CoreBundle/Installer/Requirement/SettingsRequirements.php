@@ -18,6 +18,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 final class SettingsRequirements extends RequirementCollection
 {
     public const RECOMMENDED_PHP_VERSION = '7.0';
+    public const MINIMUM_MEMORY_REQUIREMENT = '256';
 
     /**
      * @param TranslatorInterface $translator
@@ -47,7 +48,12 @@ final class SettingsRequirements extends RequirementCollection
                 !$this->isOn('session.auto_start'),
                 false
             ))
-        ;
+            ->add(new Requirement(
+                $translator->trans('sylius.installer.settings.memory_limit.header', []),
+                $this->hasSufficientMemory(),
+                false,
+                $translator->trans('sylius.installer.settings.memory_limit.help', [])
+            ));
     }
 
     /**
@@ -60,5 +66,48 @@ final class SettingsRequirements extends RequirementCollection
         $value = ini_get($key);
 
         return !empty($value) && $value !== 'off';
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasSufficientMemory(): bool
+    {
+        $currentLimit = ini_get('memory_limit');
+        if ($currentLimit == -1) {
+            return true;
+        }
+
+        $recommendedBytes = 1024 * 1024 * self::MINIMUM_MEMORY_REQUIREMENT;
+        if ($this->getMemoryInBytes($currentLimit) >= $recommendedBytes) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Converts a memory_limit value to amount of bytes
+     *
+     * @see https://github.com/composer/composer/blob/master/bin/composer#L26
+     *
+     * @param $value
+     * @return int
+     */
+    private function getMemoryInBytes($value)
+    {
+        $unit = strtolower(substr($value, -1, 1));
+        $value = (int)$value;
+        switch ($unit) {
+            case 'g':
+                $value *= 1024;
+            // no break (cumulative multiplier)
+            case 'm':
+                $value *= 1024;
+            // no break (cumulative multiplier)
+            case 'k':
+                $value *= 1024;
+        }
+        return $value;
     }
 }
