@@ -29,11 +29,20 @@ class PriceHelper extends Helper
     private $productVariantPriceCalculator;
 
     /**
-     * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+     * @var ProductVariantPriceCalculatorInterface
      */
-    public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
-    {
+    private $productVariantOriginalPriceCalculator;
+
+    /**
+     * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+     * @param ProductVariantPriceCalculatorInterface $productVariantOriginalPriceCalculator
+     */
+    public function __construct(
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
+        ProductVariantPriceCalculatorInterface $productVariantOriginalPriceCalculator
+    ) {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
+        $this->productVariantOriginalPriceCalculator = $productVariantOriginalPriceCalculator;
     }
 
     /**
@@ -49,6 +58,18 @@ class PriceHelper extends Helper
             ->productVariantPriceCalculator
             ->calculate($productVariant, $context)
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOriginalPrice(ProductVariantInterface $productVariant, array $context): ?int
+    {
+        Assert::keyExists($context, 'channel');
+
+        return $this
+            ->productVariantOriginalPriceCalculator
+            ->calculate($productVariant, $context);
     }
 
     /**

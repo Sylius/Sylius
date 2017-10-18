@@ -18,9 +18,9 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Ahmed Kooli <kooliahmd@gmail.com>
  */
-final class ProductVariantPriceCalculator implements ProductVariantPriceCalculatorInterface
+final class ProductVariantOriginalPriceCalculator implements ProductVariantPriceCalculatorInterface
 {
     /**
      * {@inheritdoc}
@@ -39,6 +39,6 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
             ));
         }
 
-        return $channelPricing->getPrice();
+        return $channelPricing->getOriginalPrice();
     }
 }

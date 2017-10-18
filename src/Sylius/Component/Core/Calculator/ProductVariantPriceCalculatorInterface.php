@@ -25,9 +25,9 @@ interface ProductVariantPriceCalculatorInterface
      * @param ProductVariantInterface $productVariant
      * @param array $context
      *
-     * @return int
+     * @return int|null
      *
      * @throws MissingChannelConfigurationException when price for given channel does not exist
      */
-    public function calculate(ProductVariantInterface $productVariant, array $context): int;
+    public function calculate(ProductVariantInterface $productVariant, array $context): ?int;
 }

@@ -13,3 +13,12 @@
 
     {{- convertAndFormat(variant|sylius_calculate_price({'channel': sylius.channel})) }}
 {%- endmacro -%}
+
+{%- macro calculateOriginalPrice(variant) -%}
+    {% from _self import convertAndFormat %}
+    {% set originalPrice = variant|sylius_calculate_original_price({'channel': sylius.channel})  %}
+    {% set price = variant|sylius_calculate_price({'channel': sylius.channel})  %}
+    {% if( originalPrice > price) %}
+        {{- convertAndFormat(variant|sylius_calculate_original_price({'channel': sylius.channel})) }}
+    {% endif %}
+{%- endmacro -%}
