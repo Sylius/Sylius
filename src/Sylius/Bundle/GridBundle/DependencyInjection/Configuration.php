@@ -69,7 +69,7 @@ final class Configuration implements ConfigurationInterface
                             ->useAttributeAsKey('name')
                             ->prototype('scalar')->end()
                         ->end()
-                        ->arrayNode('mass_action')
+                        ->arrayNode('bulk_action')
                             ->useAttributeAsKey('name')
                             ->prototype('scalar')->end()
                         ->end()

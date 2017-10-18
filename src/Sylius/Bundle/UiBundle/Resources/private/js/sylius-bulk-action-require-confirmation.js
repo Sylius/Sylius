@@ -11,7 +11,7 @@
     'use strict';
 
     $.fn.extend({
-        requireConfirmation: function() {
+        bulkActionRequireConfirmation: function() {
             return this.each(function() {
                 return $(this).on('click', function(event) {
                     event.preventDefault();
@@ -26,12 +26,12 @@
                         $('#confirmation-button').on('click', function(event) {
                             event.preventDefault();
 
-                            var ids = $('input.bulk-select-checkbox:checked').map(function() {
-                                return this.value;
-                            }).get();
-                            $(actionButton.siblings('input[name="ids"]')[0]).val(ids)
+                            var form = actionButton.closest('form');
+                            $('input.bulk-select-checkbox:checked').each(function() {
+                                $('<input type="hidden" name="ids[]" value="' + this.value + '">').appendTo(form);
+                            });
 
-                            return actionButton.closest('form').submit();
+                            return form.submit();
                         });
                     }
 

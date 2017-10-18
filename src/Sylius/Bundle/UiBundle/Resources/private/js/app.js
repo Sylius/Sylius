@@ -37,8 +37,6 @@
       return $(this).closest('.message').transition('fade');
     });
 
-    $('a.mass-action').massActionUrl();
-
     $('[data-requires-confirmation]').requireConfirmation();
     $('[data-toggles]').toggleElement();
 

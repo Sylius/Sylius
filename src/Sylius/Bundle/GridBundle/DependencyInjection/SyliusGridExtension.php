@@ -31,7 +31,7 @@ final class SyliusGridExtension extends Extension
         $loader->load('services.xml');
 
         $container->setParameter('sylius.grid.templates.action', $config['templates']['action']);
-        $container->setParameter('sylius.grid.templates.mass_action', $config['templates']['mass_action']);
+        $container->setParameter('sylius.grid.templates.bulk_action', $config['templates']['bulk_action']);
         $container->setParameter('sylius.grid.templates.filter', $config['templates']['filter']);
         $container->setParameter('sylius.grids_definitions', $config['grids']);
 

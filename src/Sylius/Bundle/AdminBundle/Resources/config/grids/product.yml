@@ -45,9 +45,6 @@ sylius_grid:
                     type: boolean
                     label: sylius.ui.enabled
             actions:
-                mass:
-                    delete:
-                        type: delete
                 main:
                     create:
                         type: links
@@ -98,3 +95,6 @@ sylius_grid:
                                     visible: resource.hasOptions
                                     parameters:
                                         productId: resource.id
+                bulk:
+                    delete:
+                        type: delete

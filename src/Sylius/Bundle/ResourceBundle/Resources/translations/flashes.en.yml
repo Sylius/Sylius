@@ -6,7 +6,7 @@ sylius:
         create: '%resource% has been successfully created.'
         update: '%resource% has been successfully updated.'
         delete: '%resource% has been successfully deleted.'
-        mass_delete: 'Resources have been succesfully deleted.'
+        bulk_delete: 'Resources have been succesfully deleted.'
         move: '%resource% has been successfully moved.'
         generate: '%resource%s have been successfully generated.'
         revert: '%resource% has been successfully reverted.'

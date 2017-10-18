@@ -1,7 +1,7 @@
 {% macro headers(grid, definition, requestAttributes) %}
     {% import '@SyliusUi/Macro/sorting.html.twig' as sorting %}
 
-    {% if definition.actionGroups.mass is defined %}
+    {% if definition.actionGroups.bulk is defined %}
         <th></th>
     {% endif %}
 
@@ -21,8 +21,8 @@
 
 {% macro row(grid, definition, row) %}
     <tr class="item">
-    {% if definition.actionGroups.mass is defined %}
-        <td><input class="mass-select-checkbox" type="checkbox" value="{{ row.id }}" /></td>
+    {% if definition.actionGroups.bulk is defined %}
+        <td><input class="bulk-select-checkbox" type="checkbox" value="{{ row.id }}" /></td>
     {% endif %}
     {% for field in definition.enabledFields|sort_by('position') %}
         <td>{{ sylius_grid_render_field(grid, field, row) }}</td>

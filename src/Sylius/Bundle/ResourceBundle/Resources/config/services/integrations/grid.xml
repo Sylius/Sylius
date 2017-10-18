@@ -29,7 +29,7 @@
             <argument type="service" id="twig" />
             <argument type="service" id="sylius.grid_options_parser" />
             <argument>%sylius.grid.templates.action%</argument>
-            <argument>%sylius.grid.templates.mass_action%</argument>
+            <argument>%sylius.grid.templates.bulk_action%</argument>
         </service>
 
         <service id="sylius.grid_options_parser" class="Sylius\Bundle\ResourceBundle\Grid\Parser\OptionsParser" public="false">

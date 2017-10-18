@@ -1,5 +1,0 @@
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
-{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('mass_delete')), options.link.parameters|default({}))) %}
-
-{{ buttons.default(path, action.label|default('sylius.ui.delete'|trans), null, action.icon|default('trash'), 'red mass-action') }}

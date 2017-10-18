@@ -53,7 +53,7 @@ interface GridRendererInterface
      *
      * @return mixed
      */
-    public function renderMassAction(GridViewInterface $gridView, Action $action, $data = null);
+    public function renderBulkAction(GridViewInterface $gridView, Action $action, $data = null);
 
     /**
      * @param GridViewInterface $gridView

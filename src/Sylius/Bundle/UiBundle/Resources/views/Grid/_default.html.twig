@@ -34,16 +34,16 @@
     </div>
 {% endif %}
 
-{% if definition.actionGroups.mass is defined %}
+{% if definition.actionGroups.bulk is defined %}
     <div class="ui hidden divider"></div>
     <div class="ui styled fluid accordion">
         <div class="title active">
             <i class="dropdown icon"></i>
-            {{ 'sylius.ui.mass_actions'|trans }}
+            {{ 'sylius.ui.bulk_actions'|trans }}
         </div>
         <div class="content active">
-            {% for action in definition.getEnabledActions('mass') %}
-                {{ sylius_grid_render_mass_action(grid, action, null) }}
+            {% for action in definition.getEnabledActions('bulk') %}
+                {{ sylius_grid_render_bulk_action(grid, action, null) }}
             {% endfor %}
         </div>
     </div>

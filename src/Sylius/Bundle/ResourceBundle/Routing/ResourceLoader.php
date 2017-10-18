@@ -60,7 +60,7 @@ final class ResourceLoader implements LoaderInterface
             throw new \InvalidArgumentException('You can configure only one of "except" & "only" options.');
         }
 
-        $routesToGenerate = ['show', 'index', 'create', 'update', 'delete', 'massDelete'];
+        $routesToGenerate = ['show', 'index', 'create', 'update', 'delete', 'bulkDelete'];
 
         if (!empty($configuration['only'])) {
             $routesToGenerate = $configuration['only'];
@@ -88,11 +88,6 @@ final class ResourceLoader implements LoaderInterface
             $routes->add($this->getRouteName($metadata, $configuration, 'create'), $createRoute);
         }
 
-        if (!$isApi && in_array('massDelete', $routesToGenerate, true)) {
-            $massDeleteRoute = $this->createRoute($metadata, $configuration, $rootPath . 'mass-delete', 'massDelete', ['GET'], $isApi);
-            $routes->add($this->getRouteName($metadata, $configuration, 'mass_delete'), $massDeleteRoute);
-        }
-
         if (in_array('update', $routesToGenerate, true)) {
             $updateRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath . $identifier : $rootPath . $identifier . '/edit', 'update', $isApi ? ['PUT', 'PATCH'] : ['GET', 'PUT', 'PATCH'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'update'), $updateRoute);
@@ -101,6 +96,11 @@ final class ResourceLoader implements LoaderInterface
         if (in_array('show', $routesToGenerate, true)) {
             $showRoute = $this->createRoute($metadata, $configuration, $rootPath . $identifier, 'show', ['GET'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'show'), $showRoute);
+        }
+
+        if (!$isApi && in_array('bulkDelete', $routesToGenerate, true)) {
+            $bulkDeleteRoute = $this->createRoute($metadata, $configuration, $rootPath . 'bulk-delete', 'bulkDelete', ['DELETE'], $isApi);
+            $routes->add($this->getRouteName($metadata, $configuration, 'bulk_delete'), $bulkDeleteRoute);
         }
 
         if (in_array('delete', $routesToGenerate, true)) {
@@ -202,12 +202,11 @@ final class ResourceLoader implements LoaderInterface
             $defaults['_sylius']['vars'] = array_merge($vars, $configuration['vars'][$actionName]);
         }
 
-        if ($actionName === 'massDelete') {
+        if ($actionName === 'bulkDelete') {
             $defaults['_sylius']['paginate'] = false;
-
             $defaults['_sylius']['repository'] = [
                 'method' => 'findById',
-                'arguments' => ['ids' => '$ids']
+                'arguments' => ['$ids'],
             ];
         }
 
