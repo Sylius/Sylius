@@ -24,7 +24,7 @@ class ClientManager extends BaseClientManager
     /**
      * {@inheritdoc}
      */
-    public function findClientByPublicId($publicId): ClientInterface
+    public function findClientByPublicId($publicId): ?ClientInterface
     {
         return $this->findClientBy(['randomId' => $publicId]);
     }
