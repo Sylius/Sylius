@@ -462,8 +462,8 @@ class Product implements ProductInterface
         if (!$this->hasNotEmptyAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode)) {
             if (
                 null !== $fallbackLocaleCode &&
-                $this->hasNotEmptyAttributeByCodeAndLocale($attributeValue->getCode(), $fallbackLocaleCode))
-            {
+                $this->hasNotEmptyAttributeByCodeAndLocale($attributeValue->getCode(), $fallbackLocaleCode)
+            ) {
                 return $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $fallbackLocaleCode);
             }
 
