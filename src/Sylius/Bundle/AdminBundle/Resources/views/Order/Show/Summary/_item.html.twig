@@ -6,7 +6,7 @@
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
 
 {% set variant = item.variant %}
-{% set product = variant.product %}
+{% set product = item.variant.product %}
 
 <tr>
     <td class="single line">
