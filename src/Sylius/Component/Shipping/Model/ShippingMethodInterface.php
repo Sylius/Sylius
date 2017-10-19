@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -112,4 +113,11 @@ interface ShippingMethodInterface extends
      * @param array $configuration
      */
     public function setConfiguration(array $configuration): void;
+
+    /**
+     * @param string|null $locale
+     *
+     * @return ShippingMethodTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface;
 }

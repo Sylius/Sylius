@@ -16,6 +16,7 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -51,4 +52,11 @@ interface ProductOptionValueInterface extends ResourceInterface, CodeAwareInterf
      * @return string|null
      */
     public function getName(): ?string;
+
+    /**
+     * @param string|null $locale
+     *
+     * @return ProductOptionValueTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface;
 }
