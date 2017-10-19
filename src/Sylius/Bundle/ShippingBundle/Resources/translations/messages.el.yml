@@ -14,6 +14,7 @@ sylius:
                 ready: Έτοιμα
                 shipped: Αποστάλθηκαν
                 returned: Επεστράφησαν
+                cancelled: Ακυρωμένο
             tracking_code: Κωδικός παρακολούθησης
         shipping_category:
             description: Περιγραφή
