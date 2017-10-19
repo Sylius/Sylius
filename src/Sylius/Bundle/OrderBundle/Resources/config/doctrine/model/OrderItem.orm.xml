@@ -27,10 +27,6 @@
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
         <field name="total" column="total" type="integer" />
         <field name="immutable" column="is_immutable" type="boolean" />
-        <field name="immutableProductName" column="immutable_product_name" type="string" nullable="true"/>
-        <field name="immutableProductCode" column="immutable_product_code" type="string" nullable="true"/>
-        <field name="immutableVariantName" column="immutable_variant_name" type="string" nullable="true"/>
-        <field name="immutableVariantCode" column="immutable_variant_code" type="string" nullable="true"/>
 
         <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface" inversed-by="items">
             <join-column name="order_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />

@@ -33,6 +33,46 @@ interface OrderItemInterface extends BaseOrderItemInterface
     public function setVariant(?ProductVariantInterface $variant): void;
 
     /**
+     * @return string|null
+     */
+    public function getImmutableProductName(): ?string;
+
+    /**
+     * @param string|null $immutableProductName
+     */
+    public function setImmutableProductName(?string $immutableProductName): void;
+
+    /**
+     * @return string|null
+     */
+    public function getImmutableProductCode(): ?string;
+
+    /**
+     * @param string|null $immutableProductCode
+     */
+    public function setImmutableProductCode(?string $immutableProductCode): void;
+
+    /**
+     * @return string|null
+     */
+    public function getImmutableVariantName(): ?string;
+
+    /**
+     * @param string|null $immutableVariantName
+     */
+    public function setImmutableVariantName(?string $immutableVariantName): void;
+
+    /**
+     * @return string|null
+     */
+    public function getImmutableVariantCode(): ?string;
+
+    /**
+     * @param string|null $immutableVariantCode
+     */
+    public function setImmutableVariantCode(?string $immutableVariantCode): void;
+
+    /**
      * @return int
      */
     public function getTaxTotal(): int;

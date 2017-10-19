@@ -15,7 +15,12 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTranslationInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 
 final class OrderItemSpec extends ObjectBehavior
 {
@@ -109,5 +114,39 @@ final class OrderItemSpec extends ObjectBehavior
         $this->addUnit($secondUnit);
 
         $this->getSubtotal()->shouldReturn(19000);
+    }
+
+    function it_has_no_variant_by_default(): void
+    {
+        $this->getVariant()->shouldReturn(null);
+    }
+
+    function it_sets_immutable_names_and_codes_during_setting_a_variant(
+        OrderInterface $order,
+        ProductVariantInterface $variant,
+        ProductVariantTranslationInterface $variantTranslation,
+        ProductInterface $product,
+        ProductTranslationInterface $productTranslation
+    ): void {
+        $order->hasItem($this)->willReturn(true);
+        $order->getLocaleCode()->willReturn('en_US');
+
+        $variant->getCode()->willReturn('variant_code');
+        $variant->getProduct()->willReturn($product);
+        $variant->getTranslation('en_US')->willReturn($variantTranslation);
+        $variantTranslation->getName()->willReturn('Variant name');
+
+        $product->getCode()->willReturn('product_code');
+        $product->getTranslation('en_US')->willReturn($productTranslation);
+        $productTranslation->getName()->willReturn('Product name');
+
+        $this->setOrder($order);
+        $this->setVariant($variant);
+
+        $this->getVariant()->shouldReturn($variant);
+        $this->getImmutableVariantName()->shouldReturn('Variant name');
+        $this->getImmutableVariantCode()->shouldReturn('variant_code');
+        $this->getImmutableProductName()->shouldReturn('Product name');
+        $this->getImmutableProductCode()->shouldReturn('product_code');
     }
 }

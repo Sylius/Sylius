@@ -24,67 +24,31 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     protected $variant;
 
     /**
-     * @return string
+     * @var string
      */
-    public function getImmutableVariantName(): ?string
-    {
-        return $this->immutableVariantName ?: $this->variant->getName();
-    }
+    protected $immutableProductName;
 
     /**
-     * @param string $immutableVariantName
+     * @var string
      */
-    public function setImmutableVariantName(?string $immutableVariantName)
-    {
-        $this->immutableVariantName = $immutableVariantName;
-    }
+    protected $immutableProductCode;
 
     /**
-     * @return string
+     * @var string
      */
-    public function getImmutableVariantCode(): ?string
-    {
-        return $this->immutableVariantCode ?: $this->variant->getCode();
-    }
+    protected $immutableVariantName;
 
     /**
-     * @param string $immutableVariantCode
+     * @var string
      */
-    public function setImmutableVariantCode(?string $immutableVariantCode)
-    {
-        $this->immutableVariantCode = $immutableVariantCode;
-    }
+    protected $immutableVariantCode;
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getImmutableProductName(): ?string
+    public function getVariant(): ?ProductVariantInterface
     {
-        return $this->immutableProductName ?: $this->variant->getProduct()->getName();
-    }
-
-    /**
-     * @param string $immutableProductName
-     */
-    public function setImmutableProductName(?string $immutableProductName)
-    {
-        $this->immutableProductName = $immutableProductName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImmutableProductCode(): ?string
-    {
-        return $this->immutableProductCode ?: $this->variant->getProduct()->getCode();
-    }
-
-    /**
-     * @param string $immutableProductCode
-     */
-    public function setImmutableProductCode(?string $immutableProductCode)
-    {
-        $this->immutableProductCode = $immutableProductCode;
+        return $this->variant;
     }
 
     /**
@@ -92,47 +56,94 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
      */
     public function setVariant(?ProductVariantInterface $variant): void
     {
-        if(isset($variant)) {
+        /** @var OrderInterface $order */
+        $order = $this->getOrder();
+        $localeCode = $order ? $order->getLocaleCode() : null;
 
-            $this->setImmutableProductName($variant->getProduct()->getName());
-            $this->setImmutableVariantName($variant->getName());
-
-            $this->setImmutableProductCode($variant->getProduct()->getCode());
+        if (null !== $variant) {
+            $this->setImmutableVariantName($variant->getTranslation($localeCode)->getName());
             $this->setImmutableVariantCode($variant->getCode());
+        }
 
+        if (null !== $variant && null !== $variant->getProduct()) {
+            $this->setImmutableProductName($variant->getProduct()->getTranslation($localeCode)->getName());
+            $this->setImmutableProductCode($variant->getProduct()->getCode());
         }
 
         $this->variant = $variant;
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getVariant(): ?ProductVariantInterface
-    {
-        $variant = $this->variant;
-
-        if(isset($variant)) {
-
-            $variant->setName($this->getImmutableVariantName());
-            $variant->setCode($this->getImmutableVariantCode());
-
-            $product = $variant->getProduct();
-            $product->setName($this->getImmutableProductName());
-            $product->setCode($this->getImmutableProductCode());
-        }
-
-        return $variant;
-    }
-
-    /**
-     * {@inheritdoc}
+     * @return ProductInterface|null
      */
     public function getProduct(): ?ProductInterface
     {
         return $this->variant->getProduct();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getImmutableProductName(): ?string
+    {
+        return $this->immutableProductName ?: $this->variant->getProduct()->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setImmutableProductName(?string $immutableProductName): void
+    {
+        $this->immutableProductName = $immutableProductName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImmutableProductCode(): ?string
+    {
+        return $this->immutableProductCode ?: $this->variant->getProduct()->getCode();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setImmutableProductCode(?string $immutableProductCode): void
+    {
+        $this->immutableProductCode = $immutableProductCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImmutableVariantName(): ?string
+    {
+        return $this->immutableVariantName ?: $this->variant->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setImmutableVariantName(?string $immutableVariantName): void
+    {
+        $this->immutableVariantName = $immutableVariantName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImmutableVariantCode(): ?string
+    {
+        return $this->immutableVariantCode ?: $this->variant->getCode();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setImmutableVariantCode(?string $immutableVariantCode): void
+    {
+        $this->immutableVariantCode = $immutableVariantCode;
+    }
 
     /**
      * {@inheritdoc}
