@@ -94,7 +94,7 @@ In order to have your new payment method available in the checkout remember to *
 
 .. code-block:: php
 
-    $channel->addPaymentMethod($paymentMethod);
+    $paymentMethod->addChannel($channel)
 
 Payment Gateway configuration
 -----------------------------
