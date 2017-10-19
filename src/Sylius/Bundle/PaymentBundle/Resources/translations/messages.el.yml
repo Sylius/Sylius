@@ -5,7 +5,10 @@ sylius:
     form:
         credit_card:
             cardholder_name: Όνομα κατόχου της κάρτας
+            expiry_month: Μήνας λήξης
+            expiry_year: Έτος λήξης
             number: Αριθμός κάρτας
+            security_code: Κωδικός ασφαλείας (CVV)
             type: Τύπος κάρτας
         payment:
             amount: Ποσό πληρωμής
@@ -13,9 +16,19 @@ sylius:
             state:
                 header: Κατάσταση πληρωμής
                 checkout: Ολοκλήρωση αγορών
+                completed: Ολοκληρωμένο
+                authorized: Εξουσιοδοτημένο
+                failed: Απέτυχε
+                new: Νέα
                 pending: Σε εκκρεμότητα
                 processing: Σε εξέλιξη
                 unknown: Άγνωστο
+                void: Κενό
+                cancelled: Ακυρωμένο
+                refunded: Επιστροφή χρημάτων
         payment_method:
             description: Περιγραφή
+            enabled: Ενεργή;
+            instructions: Οδηγίες
             name: Ονομασία
+            position: Θέση

@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        author:
+            already_exists: Този имейл вече е регистриран, влезте или използвайте забравена парола.
+        comment:
+            not_blank: Коментара към отзива не може да бъде празен.
+        rating:
+            not_blank: Трябва да проверите рейтинга за отзива.
+        title:
+            not_blank: Заглавието към отзива не може да бъде празно.
+            min_length: Заглавието на отзива трябва да има поне 2 знака.
+            max_length: Заглавието на отзива трябва да съдържа най-много 255 знака.
