@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\TaxCategory;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**

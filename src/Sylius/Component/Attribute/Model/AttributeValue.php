@@ -15,10 +15,6 @@ namespace Sylius\Component\Attribute\Model;
 
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class AttributeValue implements AttributeValueInterface
 {
     /**

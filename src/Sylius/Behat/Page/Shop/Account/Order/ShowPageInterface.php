@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Shop\Account\Order;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ShowPageInterface extends SymfonyPageInterface
 {
     /**

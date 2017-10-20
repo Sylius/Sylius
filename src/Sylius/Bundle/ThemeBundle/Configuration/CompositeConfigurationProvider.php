@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ThemeBundle\Configuration;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CompositeConfigurationProvider implements ConfigurationProviderInterface
 {
     /**

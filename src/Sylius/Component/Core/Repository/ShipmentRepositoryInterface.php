@@ -17,9 +17,6 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface ShipmentRepositoryInterface extends RepositoryInterface
 {
     /**

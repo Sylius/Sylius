@@ -18,9 +18,6 @@ use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class CartContextSpec extends ObjectBehavior
 {
     function let(FactoryInterface $cartFactory): void

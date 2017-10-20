@@ -17,9 +17,6 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class PaymentMethod implements PaymentMethodInterface
 {
     use TimestampableTrait, ToggleableTrait;

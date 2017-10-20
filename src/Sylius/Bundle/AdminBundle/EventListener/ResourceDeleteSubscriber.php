@@ -23,9 +23,6 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ResourceDeleteSubscriber implements EventSubscriberInterface
 {
     /**

@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Validator\DisabledValidator;
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class DisabledSpec extends ObjectBehavior
 {
     function it_is_constraint(): void

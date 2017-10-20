@@ -20,9 +20,6 @@ use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
 {
     /**

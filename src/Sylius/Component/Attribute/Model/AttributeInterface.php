@@ -18,11 +18,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface AttributeInterface extends
     ResourceInterface,
     CodeAwareInterface,

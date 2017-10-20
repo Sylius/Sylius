@@ -15,9 +15,6 @@ namespace Sylius\Component\Shipping\Model;
 
 use Sylius\Component\Resource\Model\AbstractTranslation;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class ShippingMethodTranslation extends AbstractTranslation implements ShippingMethodTranslationInterface
 {
     /**

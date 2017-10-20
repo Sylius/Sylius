@@ -17,9 +17,6 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class EnabledValidator extends ConstraintValidator
 {
     /**

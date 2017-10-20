@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\ProductReview;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface IndexPageInterface extends BaseIndexPageInterface
 {
     /**

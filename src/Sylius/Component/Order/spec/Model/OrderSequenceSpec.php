@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Order\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\OrderSequenceInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderSequenceSpec extends ObjectBehavior
 {
     function it_implements_order_sequence_interface(): void

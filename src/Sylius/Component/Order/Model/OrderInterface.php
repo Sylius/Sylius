@@ -17,9 +17,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface OrderInterface extends AdjustableInterface, ResourceInterface, TimestampableInterface
 {
     public const STATE_CART = 'cart';

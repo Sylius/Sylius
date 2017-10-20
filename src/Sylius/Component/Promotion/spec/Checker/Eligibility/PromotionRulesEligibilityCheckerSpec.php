@@ -22,9 +22,6 @@ use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $rulesRegistry): void

@@ -17,9 +17,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FixedCollectionTypeTest extends TypeTestCase
 {
     /**

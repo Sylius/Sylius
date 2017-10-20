@@ -20,10 +20,6 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class AdjustmentSpec extends ObjectBehavior
 {
     function it_implements_an_adjustment_interface(): void

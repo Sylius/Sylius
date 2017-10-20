@@ -17,9 +17,6 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterface
 {
     /**

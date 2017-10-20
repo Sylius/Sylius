@@ -15,9 +15,6 @@ namespace spec\Sylius\Component\Grid\Definition;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class FilterSpec extends ObjectBehavior
 {
     function let(): void

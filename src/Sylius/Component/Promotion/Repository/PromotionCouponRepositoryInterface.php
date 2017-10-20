@@ -17,9 +17,6 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface PromotionCouponRepositoryInterface extends RepositoryInterface
 {
     /**

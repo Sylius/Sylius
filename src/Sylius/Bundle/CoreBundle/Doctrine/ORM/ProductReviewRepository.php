@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class ProductReviewRepository extends EntityRepository implements ProductReviewRepositoryInterface
 {
     /**

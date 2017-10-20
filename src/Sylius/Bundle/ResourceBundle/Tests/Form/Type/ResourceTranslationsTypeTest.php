@@ -20,9 +20,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ResourceTranslationsTypeTest extends TypeTestCase
 {
     /**

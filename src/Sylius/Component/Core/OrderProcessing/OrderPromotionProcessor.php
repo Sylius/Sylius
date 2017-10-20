@@ -19,9 +19,6 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class OrderPromotionProcessor implements OrderProcessorInterface
 {
     /**

@@ -20,9 +20,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Component\Asset\PackageInterface;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class PathPackageSpec extends ObjectBehavior
 {
     function let(

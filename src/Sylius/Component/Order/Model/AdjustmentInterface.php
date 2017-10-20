@@ -16,9 +16,6 @@ namespace Sylius\Component\Order\Model;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface AdjustmentInterface extends ResourceInterface, TimestampableInterface
 {
     /**

@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProcessorInterface;
 use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ConfigurationLoaderInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ProcessingConfigurationLoaderSpec extends ObjectBehavior
 {
     function let(ConfigurationLoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor): void

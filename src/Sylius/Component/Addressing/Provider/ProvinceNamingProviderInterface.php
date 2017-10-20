@@ -15,10 +15,6 @@ namespace Sylius\Component\Addressing\Provider;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface ProvinceNamingProviderInterface
 {
     /**

@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ShopBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SecurityWidgetController
 {
     /**

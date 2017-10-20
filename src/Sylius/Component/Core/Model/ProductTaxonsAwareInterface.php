@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface ProductTaxonsAwareInterface
 {
     /**

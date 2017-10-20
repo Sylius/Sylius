@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Customer\Statistics\PerChannelCustomerStatistics;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class CustomerStatisticsSpec extends ObjectBehavior
 {
     function let(): void

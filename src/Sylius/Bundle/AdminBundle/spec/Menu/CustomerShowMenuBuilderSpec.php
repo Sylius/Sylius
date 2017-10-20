@@ -22,9 +22,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class CustomerShowMenuBuilderSpec extends ObjectBehavior
 {
     function let(

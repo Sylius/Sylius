@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Promotion\Filter;
 
 use Sylius\Component\Core\Model\OrderItemInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface FilterInterface
 {
     /**

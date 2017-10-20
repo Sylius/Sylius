@@ -15,9 +15,6 @@ namespace Sylius\Component\Customer\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class Customer implements CustomerInterface
 {
     use TimestampableTrait;

@@ -17,9 +17,6 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 class PromotionRepository extends EntityRepository implements PromotionRepositoryInterface
 {
     /**

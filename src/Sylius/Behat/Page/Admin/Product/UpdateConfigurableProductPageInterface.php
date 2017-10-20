@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Admin\Product;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
 {
     /**

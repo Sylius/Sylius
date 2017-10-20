@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductFilterSpec extends ObjectBehavior
 {
     function it_implements_a_filter_interface(): void

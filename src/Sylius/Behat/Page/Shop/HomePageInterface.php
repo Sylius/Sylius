@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Shop;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface HomePageInterface extends SymfonyPageInterface
 {
     /**

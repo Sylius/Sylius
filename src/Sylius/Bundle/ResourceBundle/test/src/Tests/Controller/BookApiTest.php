@@ -24,9 +24,6 @@ namespace AppBundle\Tests\Controller;
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class BookApiTest extends JsonApiTestCase
 {
     /**

@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class AdminUserSpec extends ObjectBehavior
 {
     function it_extends_a_base_user_model(): void

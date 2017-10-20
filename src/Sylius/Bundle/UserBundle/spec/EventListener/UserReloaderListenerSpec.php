@@ -19,9 +19,6 @@ use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class UserReloaderListenerSpec extends ObjectBehavior
 {
     function let(UserReloaderInterface $userReloader): void

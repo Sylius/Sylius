@@ -17,11 +17,6 @@ use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class UniqueTokenGenerator implements GeneratorInterface
 {
     /**

@@ -19,9 +19,6 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
-/**
- * @author Daniel Leech <daniel@dantleech.com>
- */
 final class DebugResourceCommandTest extends \PHPUnit_Framework_TestCase
 {
     /**

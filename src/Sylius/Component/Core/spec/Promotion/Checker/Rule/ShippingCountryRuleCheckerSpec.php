@@ -20,9 +20,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $countryRepository): void

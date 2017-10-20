@@ -18,9 +18,6 @@ use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Product\Model\ProductInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class ProductMenuBuilderEvent extends MenuBuilderEvent
 {
     /**

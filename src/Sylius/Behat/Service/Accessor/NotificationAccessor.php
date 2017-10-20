@@ -18,9 +18,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\NotificationType;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class NotificationAccessor implements NotificationAccessorInterface
 {
     /**

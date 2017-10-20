@@ -18,9 +18,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class PromotionCouponFactory implements PromotionCouponFactoryInterface
 {
     /**

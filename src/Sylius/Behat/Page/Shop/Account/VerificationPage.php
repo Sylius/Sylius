@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Shop\Account;
 
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class VerificationPage extends SymfonyPage implements VerificationPageInterface
 {
     /**

@@ -16,9 +16,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeAuthorSpec extends ObjectBehavior
 {
     function it_implements_theme_author_interface(): void

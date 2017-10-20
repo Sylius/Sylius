@@ -19,9 +19,6 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Laurent Paganin-Gioanni <l.paganin@algo-factory.com>
- */
 class SelectAttributeConfigurationType extends AbstractType
 {
     /**

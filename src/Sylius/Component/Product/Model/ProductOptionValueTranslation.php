@@ -15,9 +15,6 @@ namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Resource\Model\AbstractTranslation;
 
-/**
- * @author Vincenzo Provenza <vincenzo.provenza89@gmail.com>
- */
 class ProductOptionValueTranslation extends AbstractTranslation implements ProductOptionValueTranslationInterface
 {
     /**

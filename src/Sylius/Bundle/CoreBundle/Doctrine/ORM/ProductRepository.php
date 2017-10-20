@@ -23,10 +23,6 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
     /**

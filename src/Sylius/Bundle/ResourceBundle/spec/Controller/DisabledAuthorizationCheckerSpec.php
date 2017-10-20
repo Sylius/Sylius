@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DisabledAuthorizationCheckerSpec extends ObjectBehavior
 {
     function it_implements_resource_controller_authorization_checker_interface(): void

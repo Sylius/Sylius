@@ -16,9 +16,6 @@ namespace Sylius\Bundle\FixturesBundle\Listener;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FixtureEvent
 {
     /**

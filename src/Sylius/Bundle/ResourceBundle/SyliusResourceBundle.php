@@ -20,9 +20,6 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterResourcesP
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusResourceBundle extends Bundle
 {
     public const DRIVER_DOCTRINE_ORM = 'doctrine/orm';

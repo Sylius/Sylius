@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Resource;
 use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResource;
 use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TranslatorResourceProvider implements TranslatorResourceProviderInterface
 {
     /**

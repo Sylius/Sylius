@@ -16,9 +16,6 @@ namespace Sylius\Component\Currency\Model;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Symfony\Component\Intl\Intl;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Currency implements CurrencyInterface
 {
     use TimestampableTrait;

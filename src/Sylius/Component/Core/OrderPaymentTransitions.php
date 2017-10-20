@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderPaymentTransitions
 {
     public const GRAPH = 'sylius_order_payment';

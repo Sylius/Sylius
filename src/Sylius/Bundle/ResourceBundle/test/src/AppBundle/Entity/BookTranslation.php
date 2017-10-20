@@ -24,9 +24,6 @@ namespace AppBundle\Entity;
 use Sylius\Component\Resource\Model\AbstractTranslation;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class BookTranslation extends AbstractTranslation implements ResourceInterface
 {
     /**

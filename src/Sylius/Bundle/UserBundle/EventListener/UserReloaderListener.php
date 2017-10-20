@@ -18,9 +18,6 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz CHruściel <lukasz.chrusciel@lakion.com>
- */
 final class UserReloaderListener
 {
     /**

@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Product\Generator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class SlugGeneratorSpec extends ObjectBehavior
 {
     function it_implements_slug_generator_interface(): void

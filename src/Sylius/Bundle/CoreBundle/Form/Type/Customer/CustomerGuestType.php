@@ -21,12 +21,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- * @author Dmitrijs Balabka <dmitry.balabka@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class CustomerGuestType extends AbstractResourceType
 {
     /**

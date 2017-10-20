@@ -22,9 +22,6 @@ use Sylius\Bundle\ResourceBundle\Form\Builder\DefaultFormBuilderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DefaultFormBuilderSpec extends ObjectBehavior
 {
     function let(EntityManagerInterface $entityManager): void

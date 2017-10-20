@@ -22,10 +22,6 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     /**

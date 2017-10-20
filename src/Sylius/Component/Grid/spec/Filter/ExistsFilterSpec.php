@@ -20,9 +20,6 @@ use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Filter\ExistsFilter;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ExistsFilterSpec extends ObjectBehavior
 {
     function it_implements_filter_interface(): void

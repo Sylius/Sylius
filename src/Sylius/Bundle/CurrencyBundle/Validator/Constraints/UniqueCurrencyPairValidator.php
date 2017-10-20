@@ -20,9 +20,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class UniqueCurrencyPairValidator extends ConstraintValidator
 {
     /**

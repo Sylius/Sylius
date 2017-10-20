@@ -17,10 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 final class ShippingMethodSpec extends ObjectBehavior
 {
     public function let()

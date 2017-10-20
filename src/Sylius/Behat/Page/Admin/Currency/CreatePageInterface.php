@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\Currency;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**

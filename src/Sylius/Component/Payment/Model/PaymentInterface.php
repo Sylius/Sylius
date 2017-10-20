@@ -16,9 +16,6 @@ namespace Sylius\Component\Payment\Model;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface PaymentInterface extends TimestampableInterface, ResourceInterface
 {
     public const STATE_AUTHORIZED = 'authorized';

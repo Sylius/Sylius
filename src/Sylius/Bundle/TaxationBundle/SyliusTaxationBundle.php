@@ -18,9 +18,6 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TaxationBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusTaxationBundle extends AbstractResourceBundle
 {
     /**

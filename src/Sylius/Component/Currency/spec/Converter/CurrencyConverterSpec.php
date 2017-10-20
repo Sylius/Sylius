@@ -19,9 +19,6 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
-/**
- * @author Łukasz Chruściel <lchrusciel@gmail.com>
- */
 final class CurrencyConverterSpec extends ObjectBehavior
 {
     function let(ExchangeRateRepositoryInterface $exchangeRateRepository): void

@@ -17,9 +17,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 final class HasEnabledEntityValidatorSpec extends ObjectBehavior
 {
     public function let(ManagerRegistry $registry)

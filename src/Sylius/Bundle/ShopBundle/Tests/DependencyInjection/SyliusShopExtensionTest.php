@@ -18,9 +18,6 @@ use Sylius\Bundle\ShopBundle\DependencyInjection\SyliusShopExtension;
 use Sylius\Bundle\ShopBundle\Locale\StorageBasedLocaleSwitcher;
 use Sylius\Bundle\ShopBundle\Locale\UrlBasedLocaleSwitcher;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class SyliusShopExtensionTest extends AbstractExtensionTestCase
 {
     /**

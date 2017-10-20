@@ -15,9 +15,6 @@ namespace Sylius\Behat\Behaviour;
 
 use Behat\Mink\Element\DocumentElement;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 trait DocumentAccessor
 {
     /**

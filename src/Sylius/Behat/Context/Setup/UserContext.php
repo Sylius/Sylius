@@ -21,10 +21,6 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 final class UserContext implements Context
 {
     /**

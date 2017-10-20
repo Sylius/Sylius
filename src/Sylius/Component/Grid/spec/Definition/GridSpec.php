@@ -19,9 +19,6 @@ use Sylius\Component\Grid\Definition\ActionGroup;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Filter;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class GridSpec extends ObjectBehavior
 {
     function let(): void

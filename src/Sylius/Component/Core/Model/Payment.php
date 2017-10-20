@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Model;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Payment\Model\Payment as BasePayment;
 
-/**
- * @author Ka Yue Yeung <kayuey@gmail.com>
- */
 class Payment extends BasePayment implements PaymentInterface
 {
     /**

@@ -21,9 +21,6 @@ use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class SyliusPromotionBundle extends AbstractResourceBundle
 {
     /**

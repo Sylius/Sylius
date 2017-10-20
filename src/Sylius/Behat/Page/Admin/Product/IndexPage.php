@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPage as CrudIndexPage;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class IndexPage extends CrudIndexPage implements IndexPageInterface
 {
     /**

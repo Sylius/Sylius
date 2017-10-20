@@ -18,9 +18,6 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\FixturesBundle\Listener\ORMPurgerListener;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ORMPurgerListenerTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;

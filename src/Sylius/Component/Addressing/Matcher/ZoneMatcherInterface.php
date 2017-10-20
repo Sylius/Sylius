@@ -16,10 +16,6 @@ namespace Sylius\Component\Addressing\Matcher;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface ZoneMatcherInterface
 {
     /**

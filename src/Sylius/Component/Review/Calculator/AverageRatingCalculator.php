@@ -16,9 +16,6 @@ namespace Sylius\Component\Review\Calculator;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class AverageRatingCalculator implements ReviewableRatingCalculatorInterface
 {
     /**

@@ -24,9 +24,6 @@ use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
 use Sylius\Bundle\FixturesBundle\Listener\SuiteEvent;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class LoggerListenerSpec extends ObjectBehavior
 {
     function let(LoggerInterface $logger): void

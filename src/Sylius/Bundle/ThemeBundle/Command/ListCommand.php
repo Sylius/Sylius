@@ -19,9 +19,6 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ListCommand extends ContainerAwareCommand
 {
     /**

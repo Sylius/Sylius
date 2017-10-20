@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ShippingBundle\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
- */
 final class SyliusShippingBundleTest extends WebTestCase
 {
     /**

@@ -16,9 +16,6 @@ namespace Sylius\Component\Product\Repository;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface ProductRepositoryInterface extends RepositoryInterface
 {
     /**

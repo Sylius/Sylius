@@ -24,9 +24,6 @@ use Sylius\Component\Grid\Filtering\FiltersCriteriaResolverInterface;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class FiltersApplicatorSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $filtersRegistry, FiltersCriteriaResolverInterface $criteriaResolver): void

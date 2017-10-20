@@ -18,9 +18,6 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Myke Hines <myke@webhines.com>
- */
 final class PromotionCouponTypeExtension extends AbstractTypeExtension
 {
     /**

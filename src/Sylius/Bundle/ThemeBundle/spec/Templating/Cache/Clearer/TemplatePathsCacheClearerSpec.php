@@ -18,9 +18,6 @@ use Doctrine\Common\Cache\ClearableCache;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TemplatePathsCacheClearerSpec extends ObjectBehavior
 {
     function let(Cache $cache): void

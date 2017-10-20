@@ -17,9 +17,6 @@ use Payum\Core\Action\ActionInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ResolveNextRouteActionSpec extends ObjectBehavior
 {
     function it_is_a_payum_action(): void

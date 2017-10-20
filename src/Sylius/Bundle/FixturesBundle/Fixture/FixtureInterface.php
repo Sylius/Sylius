@@ -15,9 +15,6 @@ namespace Sylius\Bundle\FixturesBundle\Fixture;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 interface FixtureInterface extends ConfigurationInterface
 {
     /**

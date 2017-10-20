@@ -16,10 +16,6 @@ namespace Sylius\Behat\Page\Admin\Order;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ShowPageInterface extends SymfonyPageInterface
 {
     /**

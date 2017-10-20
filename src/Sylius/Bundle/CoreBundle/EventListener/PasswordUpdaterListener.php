@@ -18,10 +18,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class PasswordUpdaterListener extends BasePasswordUpdaterListener
 {
     /**

@@ -16,10 +16,6 @@ namespace Sylius\Component\Core\Model;
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Sylius\Component\User\Model\User as BaseUser;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class ShopUser extends BaseUser implements ShopUserInterface
 {
     /**

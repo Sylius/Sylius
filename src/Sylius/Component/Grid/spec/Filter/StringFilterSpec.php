@@ -19,9 +19,6 @@ use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Filter\StringFilter;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class StringFilterSpec extends ObjectBehavior
 {
     function it_implements_filter_interface(): void

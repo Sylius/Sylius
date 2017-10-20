@@ -16,9 +16,6 @@ namespace Sylius\Component\Channel\Context;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CachedPerRequestChannelContext implements ChannelContextInterface
 {
     /**

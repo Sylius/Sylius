@@ -18,9 +18,6 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerIn
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PromotionUsageLimitEligibilityCheckerSpec extends ObjectBehavior
 {
     function it_implements_a_promotion_eligibility_checker_interface(): void

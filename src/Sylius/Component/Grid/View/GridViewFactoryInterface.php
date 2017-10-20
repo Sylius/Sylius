@@ -16,9 +16,6 @@ namespace Sylius\Component\Grid\View;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface GridViewFactoryInterface
 {
     /**

@@ -15,9 +15,6 @@ namespace Sylius\Component\Mailer\Provider;
 
 use Sylius\Component\Mailer\Model\EmailInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface EmailProviderInterface
 {
     /**

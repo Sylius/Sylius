@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\Address;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class AddressSpec extends ObjectBehavior
 {
     function it_is_initializable(): void

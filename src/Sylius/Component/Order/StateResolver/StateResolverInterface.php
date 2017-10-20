@@ -15,9 +15,6 @@ namespace Sylius\Component\Order\StateResolver;
 
 use Sylius\Component\Order\Model\OrderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface StateResolverInterface
 {
     /**

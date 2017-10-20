@@ -17,9 +17,6 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class LazyCacheWarmupPass implements CompilerPassInterface
 {
     /**

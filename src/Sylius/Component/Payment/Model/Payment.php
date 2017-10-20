@@ -16,9 +16,6 @@ namespace Sylius\Component\Payment\Model;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Payment implements PaymentInterface
 {
     use TimestampableTrait;

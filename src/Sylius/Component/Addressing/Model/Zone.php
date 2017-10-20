@@ -16,10 +16,6 @@ namespace Sylius\Component\Addressing\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class Zone implements ZoneInterface
 {
     /**

@@ -18,9 +18,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ProviderBasedLocaleContextSpec extends ObjectBehavior
 {
     function let(LocaleProviderInterface $localeProvider): void

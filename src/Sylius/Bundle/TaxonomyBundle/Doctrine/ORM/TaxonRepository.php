@@ -18,9 +18,6 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
-/**
- * @author Aram Alipoor <aram.alipoor@gmail.com>
- */
 class TaxonRepository extends EntityRepository implements TaxonRepositoryInterface
 {
     /**

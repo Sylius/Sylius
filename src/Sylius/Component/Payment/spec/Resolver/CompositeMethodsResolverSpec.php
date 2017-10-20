@@ -19,9 +19,6 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class CompositeMethodsResolverSpec extends ObjectBehavior
 {
     function let(PrioritizedServiceRegistryInterface $resolversRegistry): void

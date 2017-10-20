@@ -18,9 +18,6 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\CoreBundle\Fixture\LocaleFixture;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class LocaleFixtureTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;

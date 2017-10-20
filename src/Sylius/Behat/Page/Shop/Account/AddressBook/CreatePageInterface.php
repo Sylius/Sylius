@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface CreatePageInterface extends SymfonyPageInterface
 {
     /**

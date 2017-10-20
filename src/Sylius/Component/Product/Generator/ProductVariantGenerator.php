@@ -19,10 +19,6 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductVariantGenerator implements ProductVariantGeneratorInterface
 {
     /**

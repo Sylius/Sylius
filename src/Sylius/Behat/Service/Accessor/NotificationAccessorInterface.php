@@ -15,9 +15,6 @@ namespace Sylius\Behat\Service\Accessor;
 
 use Sylius\Behat\NotificationType;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface NotificationAccessorInterface
 {
     /**

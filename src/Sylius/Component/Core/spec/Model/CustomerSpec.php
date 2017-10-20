@@ -18,9 +18,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 
-/**
- * @author Alexandre Bacco <alexandre.bacco@gmail.com>
- */
 final class CustomerSpec extends ObjectBehavior
 {
     function it_implements_a_user_component_interface(): void

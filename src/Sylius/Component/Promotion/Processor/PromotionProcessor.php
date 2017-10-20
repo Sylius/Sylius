@@ -18,9 +18,6 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerIn
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class PromotionProcessor implements PromotionProcessorInterface
 {
     /**

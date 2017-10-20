@@ -20,9 +20,6 @@ use Sylius\Behat\Page\Admin\Currency\UpdatePageInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ManagingCurrenciesContext implements Context
 {
     /**

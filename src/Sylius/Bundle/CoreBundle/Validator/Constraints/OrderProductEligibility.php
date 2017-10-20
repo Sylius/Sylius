@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiake@lakion.com>
- */
 final class OrderProductEligibility extends Constraint
 {
     /**

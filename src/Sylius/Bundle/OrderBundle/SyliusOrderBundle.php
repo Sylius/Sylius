@@ -19,10 +19,6 @@ use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 final class SyliusOrderBundle extends AbstractResourceBundle
 {
     /**

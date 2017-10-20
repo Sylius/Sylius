@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class UpdatePage extends SymfonyPage implements UpdatePageInterface
 {
     /**

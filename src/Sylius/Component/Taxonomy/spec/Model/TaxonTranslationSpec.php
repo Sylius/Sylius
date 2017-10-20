@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Taxonomy\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 final class TaxonTranslationSpec extends ObjectBehavior
 {
     function it_implements_taxon_translation_interface(): void

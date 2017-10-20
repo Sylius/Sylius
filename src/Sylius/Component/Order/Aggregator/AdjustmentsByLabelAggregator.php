@@ -16,9 +16,6 @@ namespace Sylius\Component\Order\Aggregator;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterface
 {
     /**

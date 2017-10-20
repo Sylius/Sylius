@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Grid;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class Parameters
 {
     /**

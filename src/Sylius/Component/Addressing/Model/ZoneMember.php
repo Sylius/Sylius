@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Model;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class ZoneMember implements ZoneMemberInterface
 {
     /**

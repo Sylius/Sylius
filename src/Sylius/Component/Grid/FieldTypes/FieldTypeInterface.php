@@ -16,9 +16,6 @@ namespace Sylius\Component\Grid\FieldTypes;
 use Sylius\Component\Grid\Definition\Field;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface FieldTypeInterface
 {
     /**

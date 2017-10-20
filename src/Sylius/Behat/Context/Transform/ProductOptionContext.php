@@ -17,9 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductOptionContext implements Context
 {
     /**

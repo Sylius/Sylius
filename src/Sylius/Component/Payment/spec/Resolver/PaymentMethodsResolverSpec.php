@@ -19,9 +19,6 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class PaymentMethodsResolverSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $methodRepository): void

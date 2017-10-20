@@ -22,10 +22,6 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderPaymentStateResolverSpec extends ObjectBehavior
 {
     function let(FactoryInterface $stateMachineFactory): void

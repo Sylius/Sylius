@@ -19,9 +19,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class PaymentType extends AbstractResourceType
 {
     /**

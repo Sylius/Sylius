@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class RequestConfigurationFactory implements RequestConfigurationFactoryInterface
 {
     private const API_VERSION_HEADER = 'Accept';

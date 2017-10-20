@@ -18,9 +18,6 @@ use Doctrine\ORM\Mapping;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class AttributeRepository extends EntityRepository
 {
     /**

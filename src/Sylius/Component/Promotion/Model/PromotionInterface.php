@@ -18,9 +18,6 @@ use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface PromotionInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
     /**

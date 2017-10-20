@@ -17,9 +17,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class BundleResourceLocator implements ResourceLocatorInterface
 {
     /**

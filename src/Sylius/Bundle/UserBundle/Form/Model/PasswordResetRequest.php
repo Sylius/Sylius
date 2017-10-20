@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UserBundle\Form\Model;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class PasswordResetRequest
 {
     /**

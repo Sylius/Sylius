@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Shop\Account;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterface
 {
     /**

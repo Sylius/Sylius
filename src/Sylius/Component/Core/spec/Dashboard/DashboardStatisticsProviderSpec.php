@@ -20,9 +20,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DashboardStatisticsProviderSpec extends ObjectBehavior
 {
     function let(OrderRepositoryInterface $orderRepository, CustomerRepositoryInterface $customerRepository): void

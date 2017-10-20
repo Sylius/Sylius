@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Model;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class TaxRate extends BaseTaxRate implements TaxRateInterface
 {
     /**

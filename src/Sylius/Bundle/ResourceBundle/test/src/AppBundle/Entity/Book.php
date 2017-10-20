@@ -25,9 +25,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class Book implements ResourceInterface, TranslatableInterface
 {
     use TranslatableTrait {

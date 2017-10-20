@@ -24,9 +24,6 @@ use Sylius\Bundle\AdminBundle\Controller\NotificationController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class NotificationControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**

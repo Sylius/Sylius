@@ -15,10 +15,6 @@ namespace Sylius\Behat\Page\Admin\Country;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**

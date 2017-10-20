@@ -17,9 +17,6 @@ use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class FiltersCriteriaResolver implements FiltersCriteriaResolverInterface
 {
     /**

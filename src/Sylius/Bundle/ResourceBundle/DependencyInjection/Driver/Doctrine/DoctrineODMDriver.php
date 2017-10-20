@@ -22,10 +22,6 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Arnaud Langlade <aRn0D.dev@gmail.com>
- */
 final class DoctrineODMDriver extends AbstractDoctrineDriver
 {
     /**

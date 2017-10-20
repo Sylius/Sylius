@@ -20,9 +20,6 @@ use Sylius\Behat\Page\Shop\Contact\ContactPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ContactContext implements Context
 {
     /**

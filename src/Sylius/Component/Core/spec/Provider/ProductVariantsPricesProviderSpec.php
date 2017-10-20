@@ -22,9 +22,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ProductVariantsPricesProviderSpec extends ObjectBehavior
 {
     function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void

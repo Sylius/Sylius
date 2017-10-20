@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Ahmed Kooli <kooliahmd@gmail.com>
- */
 interface ProductImagesAwareInterface
 {
     /**

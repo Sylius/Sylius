@@ -15,9 +15,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Loader;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeLoadingFailedExceptionSpec extends ObjectBehavior
 {
     function it_is_a_domain_exception(): void

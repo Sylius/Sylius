@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Locale\Context;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class LocaleNotFoundException extends \RuntimeException
 {
     /**

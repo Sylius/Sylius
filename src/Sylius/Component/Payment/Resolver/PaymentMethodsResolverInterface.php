@@ -16,9 +16,6 @@ namespace Sylius\Component\Payment\Resolver;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface PaymentMethodsResolverInterface
 {
     /**

@@ -15,9 +15,6 @@ namespace Sylius\Component\Attribute\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface AttributeSubjectInterface
 {
     /**

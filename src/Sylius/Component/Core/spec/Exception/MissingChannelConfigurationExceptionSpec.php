@@ -15,9 +15,6 @@ namespace spec\Sylius\Component\Core\Exception;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class MissingChannelConfigurationExceptionSpec extends ObjectBehavior
 {
     function let(): void

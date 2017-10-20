@@ -22,9 +22,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Intl\Intl;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class LocaleTypeExtension extends AbstractTypeExtension
 {
     /**

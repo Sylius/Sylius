@@ -15,9 +15,6 @@ namespace Sylius\Bundle\PayumBundle\Provider;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 
-/**
- * @author Stefan Doorn <stefan@efectos.nl>
- */
 interface PaymentDescriptionProviderInterface
 {
     /**

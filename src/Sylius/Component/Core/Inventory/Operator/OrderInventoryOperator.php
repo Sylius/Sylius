@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class OrderInventoryOperator implements OrderInventoryOperatorInterface
 {
     /**

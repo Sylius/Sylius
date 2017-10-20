@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Admin\ShippingMethod;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**

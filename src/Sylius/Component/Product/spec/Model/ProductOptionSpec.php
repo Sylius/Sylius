@@ -18,9 +18,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValue;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductOptionSpec extends ObjectBehavior
 {
     function let()

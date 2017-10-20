@@ -16,9 +16,6 @@ namespace Sylius\Component\Promotion\Generator;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface PromotionCouponGeneratorInterface
 {
     /**

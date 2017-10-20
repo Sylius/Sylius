@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\Customer;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     /**

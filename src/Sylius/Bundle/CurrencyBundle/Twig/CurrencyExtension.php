@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CurrencyBundle\Twig;
 
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class CurrencyExtension extends \Twig_Extension
 {
     /**

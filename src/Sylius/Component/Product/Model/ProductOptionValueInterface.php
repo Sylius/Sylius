@@ -17,9 +17,6 @@ use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ProductOptionValueInterface extends ResourceInterface, CodeAwareInterface, TranslatableInterface
 {
     /**

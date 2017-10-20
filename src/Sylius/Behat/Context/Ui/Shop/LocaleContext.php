@@ -18,9 +18,6 @@ use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class LocaleContext implements Context
 {
     /**

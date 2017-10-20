@@ -22,9 +22,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class CheckoutStateResolverSpec extends ObjectBehavior
 {
     function let(

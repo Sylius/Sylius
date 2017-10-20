@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\User\Model\User;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class AdminUser extends User implements AdminUserInterface
 {
     /**

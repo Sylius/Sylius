@@ -15,9 +15,6 @@ namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
 
-/**
- * @author Łukasz Chruściel<lukasz.chrusciel@lakion.com>
- */
 final class SecurityContext implements Context
 {
     /**

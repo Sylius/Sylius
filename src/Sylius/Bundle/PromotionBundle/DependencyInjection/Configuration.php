@@ -33,9 +33,6 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class Configuration implements ConfigurationInterface
 {
     /**

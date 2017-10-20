@@ -18,9 +18,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Promotion\Model\Promotion as BasePromotion;
 
-/**
- * @author Kristian Loevstroem <kristian@loevstroem.dk>
- */
 class Promotion extends BasePromotion implements PromotionInterface
 {
     /**

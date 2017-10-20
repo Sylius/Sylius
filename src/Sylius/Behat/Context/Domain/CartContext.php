@@ -19,9 +19,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CartContext implements Context
 {
     /**

@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Canonicalizer;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class Canonicalizer implements CanonicalizerInterface
 {
     public function canonicalize(?string $string): ?string

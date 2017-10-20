@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Resource\Model;
 
-/**
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 interface SlugAwareInterface
 {
     /**

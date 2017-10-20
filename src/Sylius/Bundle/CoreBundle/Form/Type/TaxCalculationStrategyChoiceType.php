@@ -17,9 +17,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class TaxCalculationStrategyChoiceType extends AbstractType
 {
     /**

@@ -15,10 +15,6 @@ namespace Sylius\Component\Inventory\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface InventoryUnitInterface extends ResourceInterface
 {
     /**

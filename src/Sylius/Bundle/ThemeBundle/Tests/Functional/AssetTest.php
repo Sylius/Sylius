@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ThemeBundle\Tests\Functional;
 use Sylius\Bundle\ThemeBundle\Asset\Installer\AssetsInstallerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class AssetTest extends WebTestCase
 {
     protected function tearDown()

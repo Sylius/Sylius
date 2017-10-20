@@ -16,9 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Installer\Checker;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface RequirementsCheckerInterface
 {
     /**

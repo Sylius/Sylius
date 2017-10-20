@@ -15,9 +15,6 @@ namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Resource\Model\TranslatableTrait;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class ProductOptionValue implements ProductOptionValueInterface
 {
     use TranslatableTrait {

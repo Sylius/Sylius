@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ThemeBundle\Tests\Functional\TestBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TestBundle extends Bundle
 {
 }

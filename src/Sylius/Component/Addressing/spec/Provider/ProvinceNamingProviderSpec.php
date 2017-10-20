@@ -20,10 +20,6 @@ use Sylius\Component\Addressing\Provider\ProvinceNamingProvider;
 use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProvinceNamingProviderSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $provinceRepository): void

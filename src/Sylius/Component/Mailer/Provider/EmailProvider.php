@@ -17,10 +17,6 @@ use Sylius\Component\Mailer\Factory\EmailFactoryInterface;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Jérémy Leherpeur <jeremy@leherpeur.net>
- */
 final class EmailProvider implements EmailProviderInterface
 {
     /**

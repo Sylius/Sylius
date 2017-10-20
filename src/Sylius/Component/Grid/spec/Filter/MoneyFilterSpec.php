@@ -20,9 +20,6 @@ use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Filter\MoneyFilter;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class MoneyFilterSpec extends ObjectBehavior
 {
     function it_is_initializable(): void

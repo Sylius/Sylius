@@ -16,9 +16,6 @@ namespace Sylius\Bundle\AddressingBundle\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
- */
 class SyliusAddressingBundleTest extends WebTestCase
 {
     /**

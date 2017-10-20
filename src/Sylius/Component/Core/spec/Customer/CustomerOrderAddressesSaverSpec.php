@@ -22,9 +22,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
 {
     function let(CustomerAddressAdderInterface $addressAdder): void

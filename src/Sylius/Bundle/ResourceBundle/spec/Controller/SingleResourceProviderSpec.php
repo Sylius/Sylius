@@ -21,9 +21,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SingleResourceProviderSpec extends ObjectBehavior
 {
     function it_implements_single_resource_provider_interface(): void

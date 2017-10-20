@@ -19,9 +19,6 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteNotFoundException;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteRegistryInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class LazySuiteRegistrySpec extends ObjectBehavior
 {
     function let(SuiteFactoryInterface $suiteFactory): void

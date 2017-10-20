@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Locale\Converter;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface LocaleConverterInterface
 {
     /**

@@ -18,9 +18,6 @@ use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class PropertyAccessDataExtractorSpec extends ObjectBehavior
 {
     function let(PropertyAccessorInterface $propertyAccessor): void

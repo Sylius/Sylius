@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TestPromotionFactory implements TestPromotionFactoryInterface
 {
     /**

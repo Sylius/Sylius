@@ -20,9 +20,6 @@ use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\View\GridView;
 use Sylius\Component\Grid\View\GridViewFactoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class GridViewFactorySpec extends ObjectBehavior
 {
     function let(DataProviderInterface $dataProvider): void

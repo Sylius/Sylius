@@ -16,9 +16,6 @@ namespace Sylius\Component\Currency\Converter;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class CurrencyConverter implements CurrencyConverterInterface
 {
     /**

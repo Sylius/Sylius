@@ -23,11 +23,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ZoneType extends AbstractResourceType
 {
     /**

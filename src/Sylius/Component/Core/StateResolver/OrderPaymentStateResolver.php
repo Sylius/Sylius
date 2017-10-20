@@ -21,11 +21,6 @@ use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderPaymentStateResolver implements StateResolverInterface
 {
     /**

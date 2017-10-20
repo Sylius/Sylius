@@ -18,9 +18,6 @@ use Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ShipmentShipListenerSpec extends ObjectBehavior
 {
     function let(ShipmentEmailManagerInterface $shipmentEmailManager): void

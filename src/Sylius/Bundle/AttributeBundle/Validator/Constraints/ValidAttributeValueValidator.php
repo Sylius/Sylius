@@ -20,9 +20,6 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ValidAttributeValueValidator extends ConstraintValidator
 {
     /**

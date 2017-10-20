@@ -29,9 +29,6 @@ use Sylius\Component\Order\Model\Order as BaseOrder;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class OrderSpec extends ObjectBehavior
 {
     function it_implements_an_order_interface(): void

@@ -17,9 +17,6 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
-/**
- * @author Łukasz Chrusciel <lukasz.chrusciel@lakion.com>
- */
 final class OrderModifier implements OrderModifierInterface
 {
     /**

@@ -22,9 +22,6 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 final class InstallerContext implements Context
 {
     /**

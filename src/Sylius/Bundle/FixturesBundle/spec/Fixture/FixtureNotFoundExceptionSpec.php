@@ -15,9 +15,6 @@ namespace spec\Sylius\Bundle\FixturesBundle\Fixture;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FixtureNotFoundExceptionSpec extends ObjectBehavior
 {
     function let(): void

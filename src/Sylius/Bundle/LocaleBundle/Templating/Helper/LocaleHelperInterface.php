@@ -15,9 +15,6 @@ namespace Sylius\Bundle\LocaleBundle\Templating\Helper;
 
 use Symfony\Component\Templating\Helper\HelperInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface LocaleHelperInterface extends HelperInterface
 {
     /**

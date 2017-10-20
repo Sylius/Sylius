@@ -25,9 +25,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class ProvinceController extends ResourceController
 {
     /**

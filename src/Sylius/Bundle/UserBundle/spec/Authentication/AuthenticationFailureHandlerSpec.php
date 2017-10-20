@@ -22,9 +22,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerI
 use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler;
 use Symfony\Component\Security\Http\HttpUtils;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class AuthenticationFailureHandlerSpec extends ObjectBehavior
 {
     function let(HttpKernelInterface $httpKernel, HttpUtils $httpUtils): void

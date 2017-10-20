@@ -17,11 +17,6 @@ use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class Attribute implements AttributeInterface
 {
     use TimestampableTrait;

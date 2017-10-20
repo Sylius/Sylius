@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Model;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Province implements ProvinceInterface
 {
     /**

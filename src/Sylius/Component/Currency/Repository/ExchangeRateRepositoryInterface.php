@@ -16,9 +16,6 @@ namespace Sylius\Component\Currency\Repository;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface ExchangeRateRepositoryInterface extends RepositoryInterface
 {
     /**

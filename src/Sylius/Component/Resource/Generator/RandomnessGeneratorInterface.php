@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Resource\Generator;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface RandomnessGeneratorInterface
 {
     /**

@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as CrudIndexPageInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface IndexPerTaxonPageInterface extends CrudIndexPageInterface
 {
     /**

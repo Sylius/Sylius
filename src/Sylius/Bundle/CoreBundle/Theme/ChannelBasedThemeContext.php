@@ -20,9 +20,6 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ChannelBasedThemeContext implements ThemeContextInterface
 {
     /**

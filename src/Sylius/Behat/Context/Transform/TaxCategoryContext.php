@@ -17,9 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class TaxCategoryContext implements Context
 {
     /**

@@ -22,9 +22,6 @@ use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
 {
     function let(OrderRepositoryInterface $orderRepository, Factory $stateMachineFactory): void

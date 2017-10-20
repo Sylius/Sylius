@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Validator\UniqueWithinCollectionConstraintValidator;
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class UniqueWithinCollectionConstraintSpec extends ObjectBehavior
 {
     function it_extends_symfony_constraint_class(): void

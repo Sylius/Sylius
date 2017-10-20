@@ -15,9 +15,6 @@ namespace Sylius\Component\Resource\StateMachine;
 
 use SM\StateMachine\StateMachine as BaseStateMachine;
 
-/**
- * @author Alexandre Bacco <alexandre.bacco@gmail.com>
- */
 final class StateMachine extends BaseStateMachine implements StateMachineInterface
 {
     /**

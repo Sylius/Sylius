@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Grid\Definition;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Action;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ActionGroupSpec extends ObjectBehavior
 {
     function let(): void

@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ThemeBundle\Asset\Installer;
 
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 interface AssetsInstallerInterface
 {
     /**

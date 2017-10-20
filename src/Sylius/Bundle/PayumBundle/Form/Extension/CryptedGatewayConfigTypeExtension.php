@@ -21,9 +21,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
 {
     /**
