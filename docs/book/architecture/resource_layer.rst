@@ -12,7 +12,7 @@ There are two types of resources in **Sylius**:
 * registered by default - their names begin with ``sylius.*`` for example: ``sylius.product``
 * custom resources, from your application which have a separate convention. We place them under ``sylius_resource:`` ``resource_name:`` in the ``config.yml``. For these we recommend using the naming convention of ``app.*`` for instance ``app.my_entity``.
 
-Sylius resource management system lives in the **SyliusResourceBundle** and can be used in any Symfony2 project.
+Sylius resource management system lives in the **SyliusResourceBundle** and can be used in any Symfony project.
 
 Services
 ~~~~~~~~
