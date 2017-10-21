@@ -29,6 +29,11 @@ class AttributeSelectOption implements AttributeSelectOptionInterface
      */
     protected $id;
 
+    /**
+     * @var AttributeInterface
+     */
+    protected $attribute;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
@@ -61,6 +66,22 @@ class AttributeSelectOption implements AttributeSelectOptionInterface
     public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttribute(): ?AttributeInterface
+    {
+        return $this->attribute;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAttribute(?AttributeInterface $attribute): void
+    {
+        $this->attribute = $attribute;
     }
 
     /**

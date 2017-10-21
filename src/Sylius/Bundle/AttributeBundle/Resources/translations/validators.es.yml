@@ -20,6 +20,11 @@ sylius:
             not_blank: Por favor, introduzca el atributo presentación.
             min_length: El atributo presentación debe ser como mínimo 1 carácter de largo.|El atributo presentación debe ser como mínimo {{ limit }} caracteres de largo.
             max_length: El atributo presentación no debe ser más que 1 carácter de largo.|El atributo presentación no debe ser más que {{ limit }} caracteres de largo.
+    attribute_select_option:
+        name:
+            not_blank: Por favor, introduzca el nombre de la opción.
+            min_length: El nombre de la opción debe ser como mínimo 1 carácter de largo.|El nombre de la opción debe ser como mínimo {{ limit }} caracteres de largo.
+            max_length: El nombre de la opción no debe ser más que un 1 carácter de largo.|El nombre de la opción no debe ser más que {{ limit }} caracteres de largo.
     attribute_value:
         attribute:
             not_blank: Por favor, seleccione el atributo.

@@ -39,6 +39,11 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
                         'model' => 'Some\App\Product\Entity\AttributeValue',
                     ],
                 ],
+                'attribute_select_option' => [
+                    'classes' => [
+                        'model' => 'Some\App\Product\Entity\AttributeSelectOption',
+                    ],
+                ],
             ],
         ]);
     }
@@ -120,6 +125,42 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         ];
 
         $metadata->mapManyToOne($subjectMapping)->shouldBeCalled();
+        $metadata->mapManyToOne($attributeMapping)->shouldBeCalled();
+
+        $this->loadClassMetadata($eventArgs);
+    }
+
+    function it_maps_many_to_one_associations_from_the_attribute_select_option_model_and_the_attribute_model(
+        LoadClassMetadataEventArgs $eventArgs,
+        ClassMetadataInfo $metadata,
+        EntityManager $entityManager,
+        ClassMetadataFactory $classMetadataFactory,
+        ClassMetadataInfo $classMetadataInfo
+    ): void {
+        $eventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
+        $classMetadataInfo->fieldMappings = [
+            'id' => [
+                'columnName' => 'id',
+            ],
+        ];
+        $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Attribute')->willReturn($classMetadataInfo);
+
+        $eventArgs->getClassMetadata()->willReturn($metadata);
+        $metadata->getName()->willReturn('Some\App\Product\Entity\AttributeSelectOption');
+
+        $attributeMapping = [
+            'fieldName' => 'attribute',
+            'targetEntity' => 'Some\App\Product\Entity\Attribute',
+            'inversedBy' => 'selectOptions',
+            'joinColumns' => [[
+                'name' => 'attribute_id',
+                'referencedColumnName' => 'id',
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
+
         $metadata->mapManyToOne($attributeMapping)->shouldBeCalled();
 
         $this->loadClassMetadata($eventArgs);

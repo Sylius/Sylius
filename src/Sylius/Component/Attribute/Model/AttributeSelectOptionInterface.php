@@ -32,4 +32,14 @@ interface AttributeSelectOptionInterface
      */
     public function setName(?string $name): void;
 
+    /**
+     * @return AttributeInterface|null
+     */
+    public function getAttribute(): ?AttributeInterface;
+
+    /**
+     * @param AttributeInterface|null $attribute
+     */
+    public function setAttribute(?AttributeInterface $attribute): void;
+
 }

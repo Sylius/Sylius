@@ -2,6 +2,7 @@
 
 namespace spec\Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeSelectOption;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -46,5 +47,16 @@ class AttributeSelectOptionSpec extends ObjectBehavior
     {
         $this->setName('Size L');
         $this->__toString()->shouldReturn('Size L');
+    }
+
+    function it_has_no_attribute_defined_by_default(): void
+    {
+        $this->getAttribute()->shouldReturn(null);
+    }
+
+    function its_attribute_is_definable(AttributeInterface $attribute): void
+    {
+        $this->setAttribute($attribute);
+        $this->getAttribute()->shouldReturn($attribute);
     }
 }

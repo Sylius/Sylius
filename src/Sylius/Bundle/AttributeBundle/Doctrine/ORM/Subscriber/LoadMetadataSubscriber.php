@@ -52,10 +52,15 @@ final class LoadMetadataSubscriber implements EventSubscriber
         $metadata = $eventArgs->getClassMetadata();
         $metadataFactory = $eventArgs->getEntityManager()->getMetadataFactory();
 
+
+
         foreach ($this->subjects as $subject => $class) {
             if ($class['attribute_value']['classes']['model'] === $metadata->getName()) {
                 $this->mapSubjectOnAttributeValue($subject, $class['subject'], $metadata, $metadataFactory);
                 $this->mapAttributeOnAttributeValue($class['attribute']['classes']['model'], $metadata, $metadataFactory);
+            }
+            if($class['attribute_select_option']['classes']['model'] === $metadata->getName()) {
+                $this->mapAttributeOnAttributeSelectOption($class['attribute']['classes']['model'], $metadata, $metadataFactory);
             }
         }
     }
@@ -86,6 +91,32 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ];
 
         $this->mapManyToOne($metadata, $subjectMapping);
+    }
+
+    /**
+     * @param string $attributeClass
+     * @param ClassMetadataInfo $metadata
+     * @param ClassMetadataFactory $metadataFactory
+     */
+    private function mapAttributeOnAttributeSelectOption(
+        string $attributeClass,
+        ClassMetadataInfo $metadata,
+        ClassMetadataFactory $metadataFactory
+    ): void {
+        $attributeMetadata = $metadataFactory->getMetadataFor($attributeClass);
+        $attributeMapping = [
+            'fieldName' => 'attribute',
+            'targetEntity' => $attributeClass,
+            'inversedBy' => 'selectOptions',
+            'joinColumns' => [[
+                'name' => 'attribute_id',
+                'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'],
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
+
+        $this->mapManyToOne($metadata, $attributeMapping);
     }
 
     /**
