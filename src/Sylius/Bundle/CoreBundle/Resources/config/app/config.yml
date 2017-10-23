@@ -93,6 +93,9 @@ twig:
     exception_controller: "FOS\\RestBundle\\Controller\\ExceptionController::showAction"
     globals:
         sylius: "@sylius.context.shopper"
+        sylius_base_locale: "%locale%"
+        sylius_meta:
+            version: !php/const:Sylius\Bundle\CoreBundle\Application\Kernel::VERSION
 
 sonata_block:
     blocks:

@@ -30,7 +30,6 @@ Sylius\Component\Customer\Model\Customer:
             expose: true
             type: DateTime
             groups: [Detailed]
-        groups:
+        group:
             expose: true
-            type: array
             groups: [Detailed]

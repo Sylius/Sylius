@@ -62,7 +62,7 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
         /**
          * {@inheritdoc}
          */
-        public function createNew()
+        public function createNew(): ProductInterface
         {
             return $this->decoratedFactory->createNew();
         }
@@ -70,7 +70,7 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
         /**
          * {@inheritdoc}
          */
-        public function createWithVariant()
+        public function createWithVariant(): ProductInterface
         {
             return $this->decoratedFactory->createWithVariant();
         }
@@ -78,7 +78,7 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
         /**
          * @return ProductInterface
          */
-        public function createDisabled()
+        public function createDisabled(): ProductInterface
         {
             /** @var ProductInterface $product */
             $product = $this->decoratedFactory->createNew();

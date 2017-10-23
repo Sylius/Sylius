@@ -29,6 +29,7 @@ The Cookbook
     installation-commands
     platform-sh
     platform-sh-advanced
+    cloudways
     mailer
     admin-js-and-css
 

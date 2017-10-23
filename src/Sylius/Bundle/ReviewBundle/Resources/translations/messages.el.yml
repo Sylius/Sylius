@@ -4,4 +4,6 @@
 sylius:
     form:
         review:
+            status:
+                new: Νέα
             title: Τίτλος

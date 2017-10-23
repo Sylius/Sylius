@@ -98,6 +98,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iNameItIn($name = null, $language)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->nameIt($name, $language);
@@ -159,6 +160,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iChooseGateway($gatewayName)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->chooseGateway($gatewayName);
