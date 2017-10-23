@@ -42,6 +42,7 @@ final class PaymentMethodFactorySpec extends ObjectBehavior
     ): void {
         $gatewayConfigFactory->createNew()->willReturn($gatewayConfig);
         $gatewayConfig->setFactoryName('offline')->shouldBeCalled();
+        $gatewayConfig->setGatewayName('Offline')->shouldBeCalled();
 
         $decoratedFactory->createNew()->willReturn($paymentMethod);
         $paymentMethod->setGatewayConfig($gatewayConfig)->shouldBeCalled();
