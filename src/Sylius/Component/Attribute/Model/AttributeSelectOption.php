@@ -87,7 +87,7 @@ class AttributeSelectOption implements AttributeSelectOptionInterface
     /**
      * @return AttributeSelectOptionTranslation
      */
-    protected function createTranslation(): AttributeSelectOptionTranslation
+    protected function createTranslation(): AttributeSelectOptionTranslationInterface
     {
         return new AttributeSelectOptionTranslation();
     }

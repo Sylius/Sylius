@@ -16,7 +16,9 @@ namespace Sylius\Bundle\ProductBundle\Controller;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -114,4 +116,5 @@ class ProductAttributeController extends ResourceController
 
         return $forms;
     }
+
 }

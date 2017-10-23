@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection;
 
+use Sylius\Bundle\AttributeBundle\Form\Type\AttributeSelectOptionType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Attribute\Model\Attribute;
@@ -109,7 +110,7 @@ final class Configuration implements ConfigurationInterface
                                             ->scalarNode('controller')->cannotBeEmpty()->end()
                                             ->scalarNode('repository')->cannotBeEmpty()->end()
                                             ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
-                                            ->scalarNode('form')->cannotBeEmpty()->end()
+                                            ->scalarNode('form')->defaultValue(AttributeSelectOptionType::class)->cannotBeEmpty()->end()
                                         ->end()
                                     ->end()
                                     ->arrayNode('translation')

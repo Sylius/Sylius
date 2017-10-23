@@ -11,6 +11,7 @@ sylius:
             name: Nombre
             translations: Traducciones
             type: Tipo
+            select_option_values: Valores de selección
         attribute_type:
             checkbox: Casilla de verificación
             configuration: Configuración

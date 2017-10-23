@@ -51,9 +51,16 @@
             <tag name="sylius.product_variant_resolver.default" type="default" />
         </service>
 
-        <service id="sylius.listener.select_product_attribute_choice_remove" class="Sylius\Bundle\ProductBundle\EventListener\SelectProductAttributeChoiceRemoveListener">
-            <argument>%sylius.model.product_attribute_value.class%</argument>
-            <tag name="doctrine.event_listener" event="postUpdate" />
+        <service id="sylius.form.type.product_attribute_select_option"
+                 class="Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeSelectOptionType">
+            <argument>Sylius\Component\Product\Model\ProductAttributeSelectOption</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.product_attribute_select_option_translation"
+                 class="Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeSelectOptionTranslationType">
+            <argument>Sylius\Component\Product\Model\ProductAttributeSelectOptionTranslation</argument>
+            <tag name="form.type" />
         </service>
     </services>
 </container>

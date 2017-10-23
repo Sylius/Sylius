@@ -17,4 +17,10 @@
     {% endfor %}
 </div>
 {% endif %}
+{% if form.selectOptions is defined %}
+<div class="ui segment">
+    <h4 class="ui dividing header">{{ 'sylius.ui.options'|trans }}</h4>
+    {{ form_row(form.selectOptions) }}
+</div>
+{% endif %}
 {{ translationForm(form.translations) }}

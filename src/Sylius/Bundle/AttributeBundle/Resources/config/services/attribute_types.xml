@@ -19,6 +19,12 @@
                  configuration-form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\TextAttributeConfigurationType" />
         </service>
 
+        <service id="sylius.attribute_type.text" class="Sylius\Component\Attribute\AttributeType\TextAttributeType">
+            <tag name="sylius.attribute.type" attribute-type="text" label="Text"
+                 form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeType"
+                 configuration-form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\TextAttributeConfigurationType" />
+        </service>
+
         <service id="sylius.attribute_type.textarea" class="Sylius\Component\Attribute\AttributeType\TextareaAttributeType">
             <tag name="sylius.attribute.type" attribute-type="textarea" label="Textarea"
                  form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextareaAttributeType" />
