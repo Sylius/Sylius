@@ -22,9 +22,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**§
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class NonChannelLocaleListenerSpec extends ObjectBehavior
 {
     function let(LocaleProviderInterface $localeProvider, FirewallMap $firewallMap): void

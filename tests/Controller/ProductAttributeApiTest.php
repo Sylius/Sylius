@@ -18,9 +18,6 @@ use PHPUnit\Framework\Assert;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProductAttributeApiTest extends JsonApiTestCase
 {
     /**

@@ -20,8 +20,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Payments component for Symfony2 applications.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SyliusPaymentBundle extends AbstractResourceBundle
 {

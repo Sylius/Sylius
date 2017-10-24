@@ -30,10 +30,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Loading and ad-hoc creation of a user by an OAuth sign-in provider account.
- *
- * @author Fabian Kiss <fabian.kiss@ymc.ch>
- * @author Joseph Bielawski <stloyd@gmail.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {

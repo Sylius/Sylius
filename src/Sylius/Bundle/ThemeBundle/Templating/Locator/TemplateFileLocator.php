@@ -23,8 +23,6 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
  * {@inheritdoc}
- *
- * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TemplateFileLocator implements FileLocatorInterface, \Serializable
 {

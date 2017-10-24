@@ -22,8 +22,6 @@ use Symfony\Component\Translation\MessageSelector;
 
 /**
  * @see \Symfony\Component\Translation\Tests\TranslatorTest
- *
- * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class TranslatorTest extends \PHPUnit_Framework_TestCase
 {

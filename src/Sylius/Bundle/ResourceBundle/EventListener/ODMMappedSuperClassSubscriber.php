@@ -20,8 +20,6 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
 
 /**
  * Doctrine listener used to manipulate mappings.
- *
- * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
  */
 final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
 {

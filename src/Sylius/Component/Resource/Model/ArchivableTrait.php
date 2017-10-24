@@ -15,8 +15,6 @@ namespace Sylius\Component\Resource\Model;
 
 /**
  * @see ArchivableInterface
- *
- * @author Jan Góralski <jan.goralski@lakion.com>
  */
 trait ArchivableTrait
 {

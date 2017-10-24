@@ -33,8 +33,6 @@ use Webmozart\Assert\Assert;
  *     - null if user explicitly set it (['option' => null])
  *     - random one if user skipped that option ([])
  *     - specific one if user defined that option (['option' => 'CODE'])
- *
- * @author Kamil Kokot <kamil@kokot.me>
  */
 final class LazyOption
 {

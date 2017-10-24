@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class PromotionCouponApiTest extends JsonApiTestCase
 {
     /**

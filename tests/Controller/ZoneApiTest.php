@@ -16,9 +16,6 @@ namespace Sylius\Tests\Controller;
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ZoneApiTest extends JsonApiTestCase
 {
     /**

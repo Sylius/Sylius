@@ -23,8 +23,6 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
  * @require Doctrine\ODM\PHPCR\DocumentManagerInterface
- *
- * @author Daniel Leech <daniel@dantleech.com>
  */
 final class DefaultParentListenerSpec extends ObjectBehavior
 {
