@@ -21,8 +21,6 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
  * @see BasePathPackage
- *
- * @author Kamil Kokot <kamil@kokot.me>
  */
 class PathPackage extends BasePathPackage
 {

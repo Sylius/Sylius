@@ -16,8 +16,6 @@ namespace Sylius\Component\Registry;
 /**
  * This exception should be thrown by service registry
  * when given service type does not exist.
- *
- * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class NonExistingServiceException extends \InvalidArgumentException
 {

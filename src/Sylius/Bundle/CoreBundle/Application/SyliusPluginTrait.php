@@ -23,8 +23,6 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
  *
  * Provides a common logic for Sylius Plugins.
  * Each of a plugins should be created with Plugin instead of Bundle suffix for the root class.
- *
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 trait SyliusPluginTrait
 {

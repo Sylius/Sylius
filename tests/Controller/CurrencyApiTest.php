@@ -17,9 +17,6 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Axel Vankrunkelsven <axel@digilabs.be>
- */
 final class CurrencyApiTest extends JsonApiTestCase
 {
     /**

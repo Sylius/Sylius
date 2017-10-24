@@ -17,9 +17,6 @@ use ProxyManager\Proxy\VirtualProxyInterface;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class TestAppKernel extends AppKernel
 {
     /**

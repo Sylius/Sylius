@@ -16,8 +16,6 @@ namespace Sylius\Component\Registry;
 /**
  * This exception should be thrown by service registry
  * when given type already exists.
- *
- * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ExistingServiceException extends \InvalidArgumentException
 {

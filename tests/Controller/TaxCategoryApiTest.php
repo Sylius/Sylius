@@ -17,10 +17,6 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class TaxCategoryApiTest extends JsonApiTestCase
 {
     /**

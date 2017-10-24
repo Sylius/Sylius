@@ -22,8 +22,6 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  *
  * @see http://www.day.com/specs/jcr/2.0/3_Repository_Model.html#3.2.2%20Local%20Names
  * @see https://github.com/phpcr/phpcr-utils/blob/master/src/PHPCR/Util/PathHelper.php#L95
- *
- * @author Daniel Leech <daniel@dantleech.com>
  */
 class NameFilterListener
 {

@@ -15,8 +15,6 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 /**
  * This authorization checker always returns true. Useful if you don't want to have authorization checks at all.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DisabledAuthorizationChecker implements AuthorizationCheckerInterface
 {
