@@ -93,8 +93,8 @@ final class TwigGridRenderer implements GridRendererInterface
         $this->formTypeRegistry = $formTypeRegistry;
         $this->defaultTemplate = $defaultTemplate;
         $this->actionTemplates = $actionTemplates;
-        $this->bulkActionTemplates = $bulkActionTemplates;
         $this->filterTemplates = $filterTemplates;
+        $this->bulkActionTemplates = $bulkActionTemplates;
     }
 
     /**
@@ -139,16 +139,16 @@ final class TwigGridRenderer implements GridRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function renderBulkAction(GridViewInterface $gridView, Action $action, $data = null)
+    public function renderBulkAction(GridViewInterface $gridView, Action $bulkAction, $data = null)
     {
-        $type = $action->getType();
+        $type = $bulkAction->getType();
         if (!isset($this->bulkActionTemplates[$type])) {
-            throw new \InvalidArgumentException(sprintf('Missing template for action type "%s".', $type));
+            throw new \InvalidArgumentException(sprintf('Missing template for bulk action type "%s".', $type));
         }
 
         return $this->twig->render($this->bulkActionTemplates[$type], [
             'grid' => $gridView,
-            'action' => $action,
+            'action' => $bulkAction,
             'data' => $data,
         ]);
     }

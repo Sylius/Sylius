@@ -1317,6 +1317,98 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($redirectResponse);
     }
 
+    function it_throws_a_403_exception_if_user_is_unauthorized_to_delete_multiple_resources(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        Request $request,
+        AuthorizationCheckerInterface $authorizationChecker
+    ): void {
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::BULK_DELETE)->willReturn('sylius.product.bulk_delete');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.bulk_delete')->willReturn(false);
+
+        $this
+            ->shouldThrow(new AccessDeniedException())
+            ->during('bulkDeleteAction', [$request])
+        ;
+    }
+
+    function it_deletes_multiple_resources_and_redirects_to_index_for_html_request(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        RepositoryInterface $repository,
+        ResourcesCollectionProviderInterface $resourcesCollectionProvider,
+        ResourceInterface $firstResource,
+        ResourceInterface $secondResource,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $firstPreEvent,
+        ResourceControllerEvent $secondPreEvent,
+        ResourceControllerEvent $firstPostEvent,
+        ResourceControllerEvent $secondPostEvent,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
+        Request $request,
+        Response $redirectResponse
+    ): void {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::BULK_DELETE)->willReturn('sylius.product.bulk_delete');
+        $request->request = new ParameterBag(['_csrf_token' => 'xyz']);
+
+        $eventDispatcher
+            ->dispatchMultiple(ResourceActions::BULK_DELETE, $configuration, [$firstResource, $secondResource])
+            ->shouldBeCalled()
+        ;
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.bulk_delete')->willReturn(true);
+        $resourcesCollectionProvider->get($configuration, $repository)->willReturn([$firstResource, $secondResource]);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+
+        $eventDispatcher
+            ->dispatchPreEvent(ResourceActions::DELETE, $configuration, $firstResource)
+            ->willReturn($firstPreEvent)
+        ;
+        $firstPreEvent->isStopped()->willReturn(false);
+
+        $resourceDeleteHandler->handle($firstResource, $repository)->shouldBeCalled();
+
+        $eventDispatcher
+            ->dispatchPostEvent(ResourceActions::DELETE, $configuration, $firstResource)
+            ->willReturn($firstPostEvent)
+        ;
+        $firstPostEvent->hasResponse()->willReturn(false);
+
+        $eventDispatcher
+            ->dispatchPreEvent(ResourceActions::DELETE, $configuration, $secondResource)
+            ->willReturn($secondPreEvent)
+        ;
+        $secondPreEvent->isStopped()->willReturn(false);
+
+        $resourceDeleteHandler->handle($secondResource, $repository)->shouldBeCalled();
+
+        $eventDispatcher
+            ->dispatchPostEvent(ResourceActions::DELETE, $configuration, $secondResource)
+            ->willReturn($secondPostEvent)
+        ;
+        $secondPostEvent->hasResponse()->willReturn(false);
+
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::BULK_DELETE)->shouldBeCalled();
+
+        $redirectHandler->redirectToIndex($configuration)->willReturn($redirectResponse);
+
+        $this->bulkDeleteAction($request)->shouldReturn($redirectResponse);
+    }
+
     function it_throws_a_403_exception_if_user_is_unauthorized_to_delete_a_single_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,

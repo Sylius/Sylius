@@ -72,14 +72,14 @@ class GridHelper extends Helper
 
     /**
      * @param GridView $gridView
-     * @param Action $action
+     * @param Action $bulkAction
      * @param mixed|null $data
      *
      * @return mixed
      */
-    public function renderBulkAction(GridView $gridView, Action $action, $data = null)
+    public function renderBulkAction(GridView $gridView, Action $bulkAction, $data = null)
     {
-        return $this->gridRenderer->renderBulkAction($gridView, $action, $data);
+        return $this->gridRenderer->renderBulkAction($gridView, $bulkAction, $data);
     }
 
     /**
