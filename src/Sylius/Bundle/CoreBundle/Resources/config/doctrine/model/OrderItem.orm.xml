@@ -18,9 +18,7 @@
 
     <mapped-superclass name="Sylius\Component\Core\Model\OrderItem" table="sylius_order_item">
         <field name="immutableProductName" column="immutable_product_name" type="string" nullable="true"/>
-        <field name="immutableProductCode" column="immutable_product_code" type="string" nullable="true"/>
         <field name="immutableVariantName" column="immutable_variant_name" type="string" nullable="true"/>
-        <field name="immutableVariantCode" column="immutable_variant_code" type="string" nullable="true"/>
 
         <many-to-one field="variant" target-entity="Sylius\Component\Product\Model\ProductVariantInterface">
             <join-column name="variant_id" referenced-column-name="id" nullable="false" />

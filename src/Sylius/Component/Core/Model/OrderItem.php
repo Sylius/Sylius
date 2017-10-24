@@ -31,17 +31,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     /**
      * @var string
      */
-    protected $immutableProductCode;
-
-    /**
-     * @var string
-     */
     protected $immutableVariantName;
-
-    /**
-     * @var string
-     */
-    protected $immutableVariantCode;
 
     /**
      * {@inheritdoc}
@@ -62,12 +52,10 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
 
         if (null !== $variant) {
             $this->setImmutableVariantName($variant->getTranslation($localeCode)->getName());
-            $this->setImmutableVariantCode($variant->getCode());
         }
 
         if (null !== $variant && null !== $variant->getProduct()) {
             $this->setImmutableProductName($variant->getProduct()->getTranslation($localeCode)->getName());
-            $this->setImmutableProductCode($variant->getProduct()->getCode());
         }
 
         $this->variant = $variant;
@@ -100,22 +88,6 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getImmutableProductCode(): ?string
-    {
-        return $this->immutableProductCode ?: $this->variant->getProduct()->getCode();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setImmutableProductCode(?string $immutableProductCode): void
-    {
-        $this->immutableProductCode = $immutableProductCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getImmutableVariantName(): ?string
     {
         return $this->immutableVariantName ?: $this->variant->getName();
@@ -127,22 +99,6 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     public function setImmutableVariantName(?string $immutableVariantName): void
     {
         $this->immutableVariantName = $immutableVariantName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImmutableVariantCode(): ?string
-    {
-        return $this->immutableVariantCode ?: $this->variant->getCode();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setImmutableVariantCode(?string $immutableVariantCode): void
-    {
-        $this->immutableVariantCode = $immutableVariantCode;
     }
 
     /**

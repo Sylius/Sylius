@@ -131,12 +131,10 @@ final class OrderItemSpec extends ObjectBehavior
         $order->hasItem($this)->willReturn(true);
         $order->getLocaleCode()->willReturn('en_US');
 
-        $variant->getCode()->willReturn('variant_code');
         $variant->getProduct()->willReturn($product);
         $variant->getTranslation('en_US')->willReturn($variantTranslation);
         $variantTranslation->getName()->willReturn('Variant name');
 
-        $product->getCode()->willReturn('product_code');
         $product->getTranslation('en_US')->willReturn($productTranslation);
         $productTranslation->getName()->willReturn('Product name');
 
@@ -145,8 +143,6 @@ final class OrderItemSpec extends ObjectBehavior
 
         $this->getVariant()->shouldReturn($variant);
         $this->getImmutableVariantName()->shouldReturn('Variant name');
-        $this->getImmutableVariantCode()->shouldReturn('variant_code');
         $this->getImmutableProductName()->shouldReturn('Product name');
-        $this->getImmutableProductCode()->shouldReturn('product_code');
     }
 }
