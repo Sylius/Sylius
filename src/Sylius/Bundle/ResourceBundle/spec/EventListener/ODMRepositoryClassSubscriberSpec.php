@@ -24,8 +24,6 @@ use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
  * @require Doctrine\ODM\MongoDB\Events
- *
- * @author Ben Davies <ben.davies@gmail.com>
  */
 final class ODMRepositoryClassSubscriberSpec extends ObjectBehavior
 {

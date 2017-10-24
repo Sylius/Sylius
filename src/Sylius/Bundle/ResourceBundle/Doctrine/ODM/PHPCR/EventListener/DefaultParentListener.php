@@ -20,8 +20,6 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
  * Automatically set the parent brefore the creation.
- *
- * @author Daniel Leech <daniel@dantleech.com>
  */
 class DefaultParentListener
 {

@@ -20,8 +20,6 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * Resolves given target entities with container parameters.
  * Usable only with *doctrine/orm* driver.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DoctrineTargetEntitiesResolverPass implements CompilerPassInterface
 {

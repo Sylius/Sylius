@@ -21,8 +21,6 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 /**
  * TemplateNameParser converts template names from the short notation
  * "@Bundle/Section/template.format.engine" to TemplateReferenceInterface instances.
- *
- * @author Kamil Kokot <kamil@kokot.me>
  */
 final class TemplateNameParser implements TemplateNameParserInterface
 {

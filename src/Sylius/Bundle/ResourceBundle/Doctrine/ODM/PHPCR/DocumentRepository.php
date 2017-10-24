@@ -22,9 +22,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Doctrine PHPCR-ODM driver document repository.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author David Buchmann <mail@davidbu.ch>
  */
 class DocumentRepository extends BaseDocumentRepository implements RepositoryInterface
 {

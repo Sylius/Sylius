@@ -15,8 +15,6 @@ namespace Sylius\Component\Resource\Metadata;
 
 /**
  * Interface for the registry of all resources.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface RegistryInterface
 {

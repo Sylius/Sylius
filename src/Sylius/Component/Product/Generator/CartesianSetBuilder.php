@@ -17,8 +17,6 @@ use Webmozart\Assert\Assert;
 
 /**
  * Builds the Cartesian product set from one or more given sets.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class CartesianSetBuilder
 {

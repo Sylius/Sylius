@@ -16,10 +16,6 @@ namespace Sylius\Tests\Controller;
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Joeri Timmermans <joeri.timmermans@intracto.com>
- * @group joeri
- */
 final class LocaleApiTest extends JsonApiTestCase
 {
     /**

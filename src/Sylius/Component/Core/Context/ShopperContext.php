@@ -22,8 +22,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
  * Should not be extended, final removed to make this class lazy.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 /* final */ class ShopperContext implements ShopperContextInterface
 {

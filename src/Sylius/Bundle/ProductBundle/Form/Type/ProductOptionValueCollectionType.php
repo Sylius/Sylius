@@ -25,8 +25,6 @@ use Webmozart\Assert\Assert;
  * implementation, designed to handle option values assigned to object variant.
  * Array of OptionInterface objects should be passed as 'options' option to build proper
  * set of choice types with option values list.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ProductOptionValueCollectionType extends AbstractType
 {

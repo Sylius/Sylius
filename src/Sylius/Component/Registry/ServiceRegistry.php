@@ -15,8 +15,6 @@ namespace Sylius\Component\Registry;
 
 /**
  * Cannot be final, because it is proxied
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ServiceRegistry implements ServiceRegistryInterface
 {

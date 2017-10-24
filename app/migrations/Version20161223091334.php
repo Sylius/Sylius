@@ -5,9 +5,6 @@ namespace Sylius\Migrations;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class Version20161223091334 extends AbstractMigration
 {
     /**
