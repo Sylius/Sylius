@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
@@ -54,7 +56,7 @@ final class SelectAttributeValueTranslationsType extends AbstractType
                 return [
                     'required' => $localeCode === $this->defaultLocaleCode,
                 ];
-            }
+            },
         ]);
     }
 

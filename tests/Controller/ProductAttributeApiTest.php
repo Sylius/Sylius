@@ -322,7 +322,7 @@ EOT;
         $expectedChoiceValues = [
             ['en_US' => 'yellow', 'fr_FR' => 'jaune'],
             ['en_US' => 'green'],
-            ['en_US' => 'black']
+            ['en_US' => 'black'],
         ];
         $this->assertSelectChoicesInResponse($response, $expectedChoiceValues);
     }
