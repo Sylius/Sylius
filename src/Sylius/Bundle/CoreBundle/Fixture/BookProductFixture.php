@@ -41,6 +41,11 @@ class BookProductFixture extends AbstractFixture
     private $productFixture;
 
     /**
+     * @var string
+     */
+    private $baseLocaleCode;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -54,15 +59,18 @@ class BookProductFixture extends AbstractFixture
      * @param AbstractResourceFixture $taxonFixture
      * @param AbstractResourceFixture $productAttributeFixture
      * @param AbstractResourceFixture $productFixture
+     * @param string $baseLocaleCode
      */
     public function __construct(
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $productAttributeFixture,
-        AbstractResourceFixture $productFixture
+        AbstractResourceFixture $productFixture,
+        string $baseLocaleCode
     ) {
         $this->taxonFixture = $taxonFixture;
         $this->productAttributeFixture = $productAttributeFixture;
         $this->productFixture = $productFixture;
+        $this->baseLocaleCode = $baseLocaleCode;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver =
@@ -99,10 +107,10 @@ class BookProductFixture extends AbstractFixture
         ]]]);
 
         $bookGenres = [
-            $this->faker->uuid => 'Science Fiction',
-            $this->faker->uuid => 'Romance',
-            $this->faker->uuid => 'Thriller',
-            $this->faker->uuid => 'Sports',
+            $this->faker->uuid => [$this->baseLocaleCode => 'Science Fiction'],
+            $this->faker->uuid => [$this->baseLocaleCode => 'Romance'],
+            $this->faker->uuid => [$this->baseLocaleCode => 'Thriller'],
+            $this->faker->uuid => [$this->baseLocaleCode => 'Sports'],
         ];
         $this->productAttributeFixture->load(['custom' => [
             ['name' => 'Book author', 'code' => 'book_author', 'type' => TextAttributeType::TYPE],

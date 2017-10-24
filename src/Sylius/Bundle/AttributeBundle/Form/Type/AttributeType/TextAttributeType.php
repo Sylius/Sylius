@@ -40,6 +40,7 @@ final class TextAttributeType extends AbstractType
                 'label' => false,
             ])
             ->setRequired('configuration')
+            ->setDefined('locale_code')
         ;
     }
 

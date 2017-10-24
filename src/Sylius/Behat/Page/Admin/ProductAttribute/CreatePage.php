@@ -48,10 +48,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addAttributeValue($value)
+    public function addAttributeValue(string $value, string $localeCode): void
     {
         $this->getDocument()->clickLink('Add');
-        $this->getElement('attribute_choice_list_element', ['%index%' => $this->choiceListIndex])->setValue($value);
+        $this
+            ->getElement('attribute_choice_list_element', [
+                '%index%' => $this->choiceListIndex,
+                '%localeCode%' => $localeCode
+            ])
+            ->setValue($value)
+        ;
         ++$this->choiceListIndex;
     }
 
@@ -96,7 +102,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'attribute_choice_list' => 'div[data-form-collection="list"]',
-            'attribute_choice_list_element' => '#sylius_product_attribute_configuration_choices_%index%',
+            'attribute_choice_list_element' => '#sylius_product_attribute_configuration_choices_%index%_%localeCode%',
             'code' => '#sylius_product_attribute_code',
             'max' => '#sylius_product_attribute_configuration_max',
             'min' => '#sylius_product_attribute_configuration_min',

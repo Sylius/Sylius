@@ -40,6 +40,7 @@ final class DatetimeAttributeType extends AbstractType
                 'label' => false,
             ])
             ->setRequired('configuration')
+            ->setDefined('locale_code')
         ;
     }
 
