@@ -16,11 +16,6 @@ namespace Sylius\Component\Locale\Provider;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class LocaleProvider implements LocaleProviderInterface
 {
     /**

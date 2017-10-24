@@ -23,9 +23,6 @@ use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class AppKernel extends Kernel
 {
     /**

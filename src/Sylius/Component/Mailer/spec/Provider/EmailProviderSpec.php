@@ -18,9 +18,6 @@ use Sylius\Component\Mailer\Factory\EmailFactoryInterface;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class EmailProviderSpec extends ObjectBehavior
 {
     function let(EmailFactoryInterface $emailFactory): void

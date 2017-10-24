@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Test\Factory;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface TestPromotionFactoryInterface
 {
     /**

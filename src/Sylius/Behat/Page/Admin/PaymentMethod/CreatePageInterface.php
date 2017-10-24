@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\PaymentMethod;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     public function enable();

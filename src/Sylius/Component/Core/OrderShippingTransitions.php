@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class OrderShippingTransitions
 {
     public const GRAPH = 'sylius_order_shipping';

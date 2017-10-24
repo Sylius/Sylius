@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Provider;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface ZoneProviderInterface
 {
     /**

@@ -20,9 +20,6 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class EnabledValidatorSpec extends ObjectBehavior
 {
     function let(ExecutionContextInterface $context): void

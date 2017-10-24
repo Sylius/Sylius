@@ -15,9 +15,6 @@ namespace Sylius\Behat\Service\Setter;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 interface ChannelContextSetterInterface
 {
     /**

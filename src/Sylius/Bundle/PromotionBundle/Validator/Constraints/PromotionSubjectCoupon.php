@@ -15,9 +15,6 @@ namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class PromotionSubjectCoupon extends Constraint
 {
     /**

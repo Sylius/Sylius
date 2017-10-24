@@ -16,9 +16,6 @@ namespace Sylius\Bundle\AdminApiBundle\Model;
 use FOS\OAuthServerBundle\Model\RefreshTokenInterface as BaseRefreshTokenInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface RefreshTokenInterface extends BaseRefreshTokenInterface, ResourceInterface
 {
 }

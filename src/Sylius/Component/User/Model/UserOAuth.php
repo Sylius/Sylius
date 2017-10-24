@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Model;
 
-/**
- * @author Sergio Marchesini
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 class UserOAuth implements UserOAuthInterface
 {
     /**

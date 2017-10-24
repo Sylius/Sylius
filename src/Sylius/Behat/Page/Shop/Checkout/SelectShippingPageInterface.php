@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface SelectShippingPageInterface extends SymfonyPageInterface
 {
     /**

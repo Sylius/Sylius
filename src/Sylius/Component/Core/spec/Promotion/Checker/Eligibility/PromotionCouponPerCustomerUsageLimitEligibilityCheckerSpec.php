@@ -22,9 +22,6 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityChe
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends ObjectBehavior
 {
     function let(OrderRepositoryInterface $orderRepository): void

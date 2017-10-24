@@ -19,9 +19,6 @@ use Sylius\Bundle\GridBundle\DependencyInjection\Compiler\RegisterFiltersPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusGridBundle extends Bundle
 {
     public const DRIVER_DOCTRINE_ORM = 'doctrine/orm';

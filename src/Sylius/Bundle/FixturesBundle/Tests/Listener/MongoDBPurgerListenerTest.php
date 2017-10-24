@@ -18,9 +18,6 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\FixturesBundle\Listener\MongoDBPurgerListener;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class MongoDBPurgerListenerTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;

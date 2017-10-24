@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Customer;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface OrderAddressesSaverInterface
 {
     /**

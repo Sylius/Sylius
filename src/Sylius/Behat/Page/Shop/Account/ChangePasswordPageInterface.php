@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Shop\Account;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ChangePasswordPageInterface extends PageInterface
 {
     /**

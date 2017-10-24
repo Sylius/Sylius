@@ -19,9 +19,6 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class SimilarProductAssociationFixture extends AbstractFixture
 {
     /**

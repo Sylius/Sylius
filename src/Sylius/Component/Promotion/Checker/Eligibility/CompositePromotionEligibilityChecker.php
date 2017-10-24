@@ -17,9 +17,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CompositePromotionEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**

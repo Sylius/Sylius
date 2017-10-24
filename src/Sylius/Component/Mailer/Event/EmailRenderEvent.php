@@ -16,9 +16,6 @@ namespace Sylius\Component\Mailer\Event;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Symfony\Component\EventDispatcher\Event;
 
-/**
- * @author Jérémy Leherpeur <jeremy@leherpeur.net>
- */
 class EmailRenderEvent extends Event
 {
     /**

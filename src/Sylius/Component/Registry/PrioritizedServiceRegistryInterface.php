@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Registry;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 interface PrioritizedServiceRegistryInterface
 {
     /**

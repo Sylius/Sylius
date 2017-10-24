@@ -19,10 +19,6 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
-/**
- * @author Ivan Molchanov <ivan.molchanov@opensoftdev.ru>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
 {
     /**

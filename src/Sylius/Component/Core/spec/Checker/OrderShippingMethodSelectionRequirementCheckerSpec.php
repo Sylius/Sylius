@@ -22,9 +22,6 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBehavior
 {
     function let(ShippingMethodsResolverInterface $shippingMethodsResolver): void

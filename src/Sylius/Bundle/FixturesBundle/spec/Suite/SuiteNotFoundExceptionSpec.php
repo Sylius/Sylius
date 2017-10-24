@@ -15,9 +15,6 @@ namespace spec\Sylius\Bundle\FixturesBundle\Suite;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SuiteNotFoundExceptionSpec extends ObjectBehavior
 {
     function let(): void

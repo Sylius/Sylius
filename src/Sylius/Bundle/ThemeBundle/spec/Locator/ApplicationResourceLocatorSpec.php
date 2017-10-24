@@ -19,9 +19,6 @@ use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ApplicationResourceLocatorSpec extends ObjectBehavior
 {
     function let(Filesystem $filesystem): void

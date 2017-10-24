@@ -15,9 +15,6 @@ namespace Sylius\Component\Grid\Definition;
 
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Grid
 {
     /**

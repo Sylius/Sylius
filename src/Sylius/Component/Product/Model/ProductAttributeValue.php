@@ -15,9 +15,6 @@ namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Attribute\Model\AttributeValue as BaseAttributeValue;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class ProductAttributeValue extends BaseAttributeValue implements ProductAttributeValueInterface
 {
     /**

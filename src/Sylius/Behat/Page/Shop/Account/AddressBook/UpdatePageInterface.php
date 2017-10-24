@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface UpdatePageInterface extends SymfonyPageInterface
 {
     /**

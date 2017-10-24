@@ -26,9 +26,6 @@ use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
 {
     function let(ExecutionContextInterface $executionContext, AvailabilityCheckerInterface $availabilityChecker): void

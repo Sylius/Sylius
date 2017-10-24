@@ -15,9 +15,6 @@ namespace Sylius\Component\Currency\Context;
 
 use Zend\Stdlib\PriorityQueue;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CompositeCurrencyContext implements CurrencyContextInterface
 {
     /**

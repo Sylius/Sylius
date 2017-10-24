@@ -19,10 +19,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class RegisterResourcesPassTest extends AbstractCompilerPassTestCase
 {
     /**

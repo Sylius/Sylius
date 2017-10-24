@@ -15,9 +15,6 @@ namespace Sylius\Behat\Behaviour;
 
 use Behat\Mink\Element\NodeElement;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 trait ChecksCodeImmutability
 {
     /**

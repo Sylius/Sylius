@@ -16,9 +16,6 @@ namespace Sylius\Bundle\GridBundle\Tests\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\GridBundle\DependencyInjection\SyliusGridExtension;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusGridExtensionTest extends AbstractExtensionTestCase
 {
     /**

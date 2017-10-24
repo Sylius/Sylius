@@ -15,9 +15,6 @@ namespace Sylius\Bundle\OrderBundle\DependencyInjection\Compiler;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\PrioritizedCompositeServicePass;
 
-/**
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 final class RegisterProcessorsPass extends PrioritizedCompositeServicePass
 {
     public function __construct()

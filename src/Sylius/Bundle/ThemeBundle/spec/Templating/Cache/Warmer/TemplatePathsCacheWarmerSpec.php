@@ -23,9 +23,6 @@ use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
 use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TemplatePathsCacheWarmerSpec extends ObjectBehavior
 {
     function let(

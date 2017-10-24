@@ -16,9 +16,6 @@ namespace Sylius\Behat\Service;
 use Sylius\Behat\Exception\NotificationExpectationMismatchException;
 use Sylius\Behat\NotificationType;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface NotificationCheckerInterface
 {
     /**

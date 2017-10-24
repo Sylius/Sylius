@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Admin\Currency;
 use Sylius\Behat\Behaviour\ChoosesName;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use ChoosesName;

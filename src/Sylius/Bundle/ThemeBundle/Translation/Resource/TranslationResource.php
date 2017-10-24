@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ThemeBundle\Translation\Resource;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TranslationResource implements TranslationResourceInterface
 {
     /**

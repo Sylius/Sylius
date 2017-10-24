@@ -15,9 +15,6 @@ namespace spec\Sylius\Bundle\FixturesBundle\Listener;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ListenerNotFoundExceptionSpec extends ObjectBehavior
 {
     function let(): void

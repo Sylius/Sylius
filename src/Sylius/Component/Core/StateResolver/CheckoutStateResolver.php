@@ -20,10 +20,6 @@ use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CheckoutStateResolver implements StateResolverInterface
 {
     /**

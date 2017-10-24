@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ShipmentTransitions
 {
     public const GRAPH = 'sylius_shipment';

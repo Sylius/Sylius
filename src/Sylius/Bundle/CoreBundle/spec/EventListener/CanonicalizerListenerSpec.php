@@ -20,9 +20,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CanonicalizerListenerSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer): void

@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class LimitingOrderItemQuantityModifierSpec extends ObjectBehavior
 {
     function let(OrderItemQuantityModifierInterface $itemQuantityModifier): void

@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValue;
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ValidAttributeValueSpec extends ObjectBehavior
 {
     function it_is_initializable(): void

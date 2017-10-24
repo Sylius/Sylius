@@ -15,9 +15,6 @@ namespace spec\Sylius\Component\Resource\Exception;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class UpdateHandlingExceptionSpec extends ObjectBehavior
 {
     function it_extends_an_exception(): void

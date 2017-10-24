@@ -15,9 +15,6 @@ namespace Sylius\Component\Order\Context;
 
 use Sylius\Component\Order\Model\OrderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface CartContextInterface
 {
     /**

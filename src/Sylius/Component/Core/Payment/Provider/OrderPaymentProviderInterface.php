@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Payment\Provider;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface OrderPaymentProviderInterface
 {
     /**

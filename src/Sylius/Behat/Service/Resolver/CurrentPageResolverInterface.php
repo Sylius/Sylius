@@ -15,9 +15,6 @@ namespace Sylius\Behat\Service\Resolver;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface CurrentPageResolverInterface
 {
     /**

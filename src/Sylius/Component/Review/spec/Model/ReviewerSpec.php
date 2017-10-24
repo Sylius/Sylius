@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Review\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Review\Model\ReviewerInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ReviewerSpec extends ObjectBehavior
 {
     function it_implements_reviewer_interface(): void

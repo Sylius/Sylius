@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MoneyBundle\Formatter;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface MoneyFormatterInterface
 {
     /**

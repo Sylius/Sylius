@@ -19,9 +19,6 @@ use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class OrderShowMenuBuilderEvent extends MenuBuilderEvent
 {
     /**

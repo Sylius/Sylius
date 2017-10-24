@@ -15,9 +15,6 @@ namespace Sylius\Bundle\FixturesBundle\Fixture;
 
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FixtureRegistry implements FixtureRegistryInterface
 {
     /**

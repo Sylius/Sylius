@@ -23,9 +23,6 @@ namespace AppBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class AppBundle extends Bundle
 {
 }

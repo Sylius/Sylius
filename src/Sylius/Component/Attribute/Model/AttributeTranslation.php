@@ -15,9 +15,6 @@ namespace Sylius\Component\Attribute\Model;
 
 use Sylius\Component\Resource\Model\AbstractTranslation;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class AttributeTranslation extends AbstractTranslation implements AttributeTranslationInterface
 {
     /**

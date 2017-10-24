@@ -18,9 +18,6 @@ use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\Translato
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TranslatorResourceProviderPassTest extends AbstractCompilerPassTestCase
 {
     /**

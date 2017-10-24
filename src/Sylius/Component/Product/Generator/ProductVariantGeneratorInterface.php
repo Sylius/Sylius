@@ -15,9 +15,6 @@ namespace Sylius\Component\Product\Generator;
 
 use Sylius\Component\Product\Model\ProductInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ProductVariantGeneratorInterface
 {
     /**

@@ -24,9 +24,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class EventDispatcherSpec extends ObjectBehavior
 {
     function let(EventDispatcherInterface $eventDispatcher): void

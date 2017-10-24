@@ -20,9 +20,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class InStockValidator extends ConstraintValidator
 {
     /**

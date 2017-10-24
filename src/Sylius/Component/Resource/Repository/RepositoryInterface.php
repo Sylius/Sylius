@@ -16,10 +16,6 @@ namespace Sylius\Component\Resource\Repository;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface RepositoryInterface extends ObjectRepository
 {
     public const ORDER_ASCENDING = 'ASC';

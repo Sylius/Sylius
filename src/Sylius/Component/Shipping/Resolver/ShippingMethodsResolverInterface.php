@@ -16,9 +16,6 @@ namespace Sylius\Component\Shipping\Resolver;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ShippingMethodsResolverInterface
 {
     /**

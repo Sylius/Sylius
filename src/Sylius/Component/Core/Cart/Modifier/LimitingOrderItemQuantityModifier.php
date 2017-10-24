@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Cart\Modifier;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class LimitingOrderItemQuantityModifier implements OrderItemQuantityModifierInterface
 {
     /**

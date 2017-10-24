@@ -18,9 +18,6 @@ use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AdjustmentsHelperSpec extends ObjectBehavior
 {
     function let(AdjustmentsAggregatorInterface $adjustmentsAggregator): void

@@ -16,10 +16,6 @@ namespace Sylius\Component\Customer\Model;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface CustomerGroupInterface extends ResourceInterface, CodeAwareInterface
 {
     /**

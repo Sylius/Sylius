@@ -15,9 +15,6 @@ namespace spec\Sylius\Component\Core\Dashboard;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DashboardStatisticsSpec extends ObjectBehavior
 {
     function let(): void

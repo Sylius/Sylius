@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Model;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 interface CredentialsHolderInterface
 {
     /**

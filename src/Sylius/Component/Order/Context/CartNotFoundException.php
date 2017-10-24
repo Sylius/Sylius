@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Order\Context;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class CartNotFoundException extends \RuntimeException
 {
     /**

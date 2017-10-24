@@ -16,9 +16,6 @@ namespace Sylius\Component\Attribute\Model;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface AttributeTranslationInterface extends ResourceInterface, TranslationInterface
 {
     /**

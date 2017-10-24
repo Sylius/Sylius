@@ -19,9 +19,6 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FixturesListCommand extends ContainerAwareCommand
 {
     /**

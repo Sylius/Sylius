@@ -23,9 +23,6 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryInterface
 {
     public const DEFAULT_CHANNEL_CODE = 'WEB-US';

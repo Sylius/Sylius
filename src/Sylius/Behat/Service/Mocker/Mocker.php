@@ -15,9 +15,6 @@ namespace Sylius\Behat\Service\Mocker;
 
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class Mocker implements MockerInterface
 {
     /**

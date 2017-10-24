@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Customer\Model;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 interface CustomerAwareInterface
 {
     /**

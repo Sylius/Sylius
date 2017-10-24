@@ -16,9 +16,6 @@ namespace Sylius\Component\Channel\Repository;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ChannelRepositoryInterface extends RepositoryInterface
 {
     /**

@@ -16,9 +16,6 @@ namespace Sylius\Bundle\GridBundle\Doctrine\DBAL;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ExpressionBuilder implements ExpressionBuilderInterface
 {
     /**

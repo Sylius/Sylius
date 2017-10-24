@@ -21,10 +21,6 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Arnaud Langade <arn0d.dev@gmail.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class RequestConfigurationFactorySpec extends ObjectBehavior
 {
     function let(ParametersParserInterface $parametersParser): void

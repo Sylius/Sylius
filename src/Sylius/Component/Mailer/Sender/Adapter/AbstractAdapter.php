@@ -15,10 +15,6 @@ namespace Sylius\Component\Mailer\Sender\Adapter;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Jérémy Leherpeur <jeremy@leherpeur.net>
- */
 abstract class AbstractAdapter implements AdapterInterface
 {
     /**

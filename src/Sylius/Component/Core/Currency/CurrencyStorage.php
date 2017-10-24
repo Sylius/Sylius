@@ -17,9 +17,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Storage\StorageInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CurrencyStorage implements CurrencyStorageInterface
 {
     /**

@@ -17,9 +17,6 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as CrudIndexPage;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterface
 {
     /**

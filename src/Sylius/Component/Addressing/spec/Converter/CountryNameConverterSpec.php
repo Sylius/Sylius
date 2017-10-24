@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Converter\CountryNameConverter;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CountryNameConverterSpec extends ObjectBehavior
 {
     function it_is_initializable(): void

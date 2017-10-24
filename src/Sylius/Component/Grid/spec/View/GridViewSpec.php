@@ -19,9 +19,6 @@ use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\View\GridViewInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class GridViewSpec extends ObjectBehavior
 {
     function let(Grid $gridDefinition): void

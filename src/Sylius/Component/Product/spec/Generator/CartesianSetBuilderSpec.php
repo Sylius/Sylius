@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Product\Generator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-/**
- * @author Adam Elsodaney <adam.elso@gmail.com>
- */
 final class CartesianSetBuilderSpec extends ObjectBehavior
 {
     function it_requires_an_array_of_set_tuples_to_build_from(): void

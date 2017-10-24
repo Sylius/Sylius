@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ResourceBundle\Grid\Parser;
 
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface OptionsParserInterface
 {
     /**

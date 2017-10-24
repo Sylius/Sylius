@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Promotion\Model\PromotionCouponInterface as BasePromotionCouponInterface;
 
-/**
- * @author Myke Hines <myke@webhines.com>
- */
 interface PromotionCouponInterface extends BasePromotionCouponInterface
 {
     /**

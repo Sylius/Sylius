@@ -15,9 +15,6 @@ namespace Sylius\Behat\Behaviour;
 
 use Behat\Mink\Element\NodeElement;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 trait Toggles
 {
     /**

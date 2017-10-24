@@ -27,10 +27,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterfac
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class Order extends BaseOrder implements OrderInterface
 {
     /**

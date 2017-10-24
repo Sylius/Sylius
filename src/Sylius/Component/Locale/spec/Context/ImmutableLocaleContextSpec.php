@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Locale\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ImmutableLocaleContextSpec extends ObjectBehavior
 {
     function let(): void

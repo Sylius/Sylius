@@ -16,9 +16,6 @@ namespace Sylius\Component\Promotion\Checker\Rule;
 use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class CartQuantityRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'cart_quantity';

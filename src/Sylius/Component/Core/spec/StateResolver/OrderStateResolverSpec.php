@@ -23,9 +23,6 @@ use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class OrderStateResolverSpec extends ObjectBehavior
 {
     function let(FactoryInterface $stateMachineFactory): void

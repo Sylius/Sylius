@@ -21,10 +21,6 @@ use Symfony\Component\Asset\PackageInterface;
 use Symfony\Component\Asset\UrlPackage;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- * @author Stefan Doorn <stefan@efectos.nl>
- */
 final class UrlPackageSpec extends ObjectBehavior
 {
     function let(

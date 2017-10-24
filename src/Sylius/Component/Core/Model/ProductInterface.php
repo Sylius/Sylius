@@ -19,10 +19,6 @@ use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface ProductInterface extends
     BaseProductInterface,
     ProductTaxonsAwareInterface,

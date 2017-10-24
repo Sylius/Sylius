@@ -20,9 +20,6 @@ use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Sylius\Behat\Service\Mocker\Mocker;
 use Sylius\Behat\Service\Mocker\MockerInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class MockerSpec extends ObjectBehavior
 {
     function let(MockerContainer $container)

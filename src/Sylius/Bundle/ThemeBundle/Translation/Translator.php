@@ -19,9 +19,6 @@ use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Translator as BaseTranslator;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class Translator extends BaseTranslator implements WarmableInterface
 {
     /**

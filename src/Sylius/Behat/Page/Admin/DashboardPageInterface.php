@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface DashboardPageInterface extends SymfonyPageInterface
 {
     /**

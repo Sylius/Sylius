@@ -15,9 +15,6 @@ namespace Sylius\Bundle\UserBundle\Provider;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class UsernameOrEmailProvider extends AbstractUserProvider
 {
     /**

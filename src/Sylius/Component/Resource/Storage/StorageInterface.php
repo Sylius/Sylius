@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Resource\Storage;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 interface StorageInterface
 {
     /**

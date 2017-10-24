@@ -18,9 +18,6 @@ use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class PercentageGenerationPolicySpec extends ObjectBehavior
 {
     function let(PromotionCouponRepositoryInterface $couponRepository): void

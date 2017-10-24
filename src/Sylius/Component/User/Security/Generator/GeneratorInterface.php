@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Security\Generator;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface GeneratorInterface
 {
     /**

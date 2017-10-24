@@ -18,10 +18,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CurrencyType as SymfonyCurrencyType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class CurrencyType extends AbstractResourceType
 {
     /**

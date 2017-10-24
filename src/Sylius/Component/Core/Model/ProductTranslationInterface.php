@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Product\Model\ProductTranslationInterface as BaseProductTranslationInterface;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface ProductTranslationInterface extends BaseProductTranslationInterface
 {
     /**

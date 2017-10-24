@@ -18,10 +18,6 @@ use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemoverInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class CustomerReviewsDeleteListenerSpec extends ObjectBehavior
 {
     function let(ReviewerReviewsRemoverInterface $reviewerReviewsRemover): void

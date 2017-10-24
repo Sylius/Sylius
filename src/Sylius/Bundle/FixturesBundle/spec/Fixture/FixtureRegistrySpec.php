@@ -18,9 +18,6 @@ use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureNotFoundException;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureRegistryInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FixtureRegistrySpec extends ObjectBehavior
 {
     function it_implements_fixture_registry_interface(): void

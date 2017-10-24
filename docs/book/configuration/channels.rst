@@ -43,6 +43,11 @@ You can get the current channel from the channel context.
 
    $channel = $this->container->get('sylius.context.channel')->getChannel();
 
+.. warning::
+
+   Beware! When using multiple channels, remember to configure ``hostname`` for **each** of them.
+   If missing, default context would not be able to provide appropriate channel and it will result in an error.
+
 .. note::
 
    The channel is by default determined basing on the hostname, but you can customize that behaviour.

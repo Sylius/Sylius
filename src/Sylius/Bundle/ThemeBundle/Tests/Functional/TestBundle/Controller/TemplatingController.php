@@ -17,9 +17,6 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TemplatingController implements ContainerAwareInterface
 {
     use ContainerAwareTrait;

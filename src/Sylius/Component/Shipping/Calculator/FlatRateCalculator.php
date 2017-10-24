@@ -15,9 +15,6 @@ namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class FlatRateCalculator implements CalculatorInterface
 {
     /**

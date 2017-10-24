@@ -16,9 +16,6 @@ namespace Sylius\Component\Mailer\Renderer\Adapter;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 
-/**
- * @author Jérémy Leherpeur <jeremy@leherpeur.net>
- */
 interface AdapterInterface
 {
     /**

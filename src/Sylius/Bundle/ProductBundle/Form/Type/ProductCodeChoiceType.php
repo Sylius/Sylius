@@ -19,9 +19,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\ReversedTransformer;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ProductCodeChoiceType extends AbstractType
 {
     /**

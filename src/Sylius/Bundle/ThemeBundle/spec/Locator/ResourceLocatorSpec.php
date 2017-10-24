@@ -18,9 +18,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ResourceLocatorSpec extends ObjectBehavior
 {
     function let(

@@ -19,9 +19,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TemplateNameParserSpec extends ObjectBehavior
 {
     function let(TemplateNameParserInterface $decoratedParser, KernelInterface $kernel): void

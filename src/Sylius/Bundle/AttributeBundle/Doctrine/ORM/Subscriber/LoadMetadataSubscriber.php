@@ -19,9 +19,6 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class LoadMetadataSubscriber implements EventSubscriber
 {
     /**

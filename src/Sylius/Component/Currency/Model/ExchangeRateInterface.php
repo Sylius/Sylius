@@ -15,9 +15,6 @@ namespace Sylius\Component\Currency\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface ExchangeRateInterface extends ResourceInterface
 {
     /**

@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Shop\Order;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     /**

@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\Order;
 
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class HistoryPage extends SymfonyPage implements HistoryPageInterface
 {
     /**

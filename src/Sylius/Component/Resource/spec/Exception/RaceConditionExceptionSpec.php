@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Resource\Exception;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Exception\UpdateHandlingException;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class RaceConditionExceptionSpec extends ObjectBehavior
 {
     function it_extends_an_update_handling_exception(): void

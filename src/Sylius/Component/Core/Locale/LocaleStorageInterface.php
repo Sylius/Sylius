@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Locale;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 interface LocaleStorageInterface
 {
     /**

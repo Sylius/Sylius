@@ -16,10 +16,6 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 
-/**
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class ProductAssociationType implements ProductAssociationTypeInterface
 {
     use TimestampableTrait;

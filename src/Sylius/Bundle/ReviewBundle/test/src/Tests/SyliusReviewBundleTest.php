@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ReviewBundle\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
- */
 final class SyliusReviewBundleTest extends WebTestCase
 {
     /**

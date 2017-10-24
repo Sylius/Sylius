@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class CompositeLocaleContextSpec extends ObjectBehavior
 {
     function it_implements_locale_context_interface(): void

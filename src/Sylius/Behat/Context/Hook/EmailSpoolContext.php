@@ -17,9 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class EmailSpoolContext implements Context
 {
     /**

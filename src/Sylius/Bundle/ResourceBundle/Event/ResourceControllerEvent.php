@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ResourceBundle\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Jérémy Leherpeur <jeremy@leherpeur.net>
- */
 class ResourceControllerEvent extends GenericEvent
 {
     public const TYPE_ERROR = 'error';

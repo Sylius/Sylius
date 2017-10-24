@@ -15,10 +15,6 @@ namespace Sylius\Behat\Page\Shop\Order;
 
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
 {
     /**

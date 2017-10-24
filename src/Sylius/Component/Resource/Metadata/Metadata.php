@@ -15,9 +15,6 @@ namespace Sylius\Component\Resource\Metadata;
 
 use Doctrine\Common\Inflector\Inflector;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class Metadata implements MetadataInterface
 {
     /**

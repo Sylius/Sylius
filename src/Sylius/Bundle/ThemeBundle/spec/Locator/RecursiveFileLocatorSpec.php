@@ -19,9 +19,6 @@ use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class RecursiveFileLocatorSpec extends ObjectBehavior
 {
     function let(FinderFactoryInterface $finderFactory): void

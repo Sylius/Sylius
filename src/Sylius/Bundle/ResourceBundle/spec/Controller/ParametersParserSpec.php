@@ -19,11 +19,6 @@ use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Arnaud Langade <arn0d.dev@gmail.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Dosena Ishmael <nukboon@gmail.com>
- */
 final class ParametersParserSpec extends ObjectBehavior
 {
     function let(): void

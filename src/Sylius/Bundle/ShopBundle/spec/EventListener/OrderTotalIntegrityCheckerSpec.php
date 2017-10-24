@@ -22,9 +22,6 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class OrderTotalIntegrityCheckerSpec extends ObjectBehavior
 {
     function let(OrderProcessorInterface $orderProcessor, RouterInterface $router, ObjectManager $manager): void

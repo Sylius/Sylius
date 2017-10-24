@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface IndexPageInterface
 {
     /**

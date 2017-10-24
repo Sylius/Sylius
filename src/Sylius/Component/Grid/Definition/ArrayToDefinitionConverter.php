@@ -16,9 +16,6 @@ namespace Sylius\Component\Grid\Definition;
 use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
 {
     public const EVENT_NAME = 'sylius.grid.%s';

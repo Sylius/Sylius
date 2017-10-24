@@ -15,10 +15,6 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- */
 final class PromotionRuleType extends AbstractConfigurablePromotionElementType
 {
     /**

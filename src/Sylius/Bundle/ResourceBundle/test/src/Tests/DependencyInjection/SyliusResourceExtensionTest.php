@@ -18,9 +18,6 @@ use AppBundle\Entity\BookTranslation;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class SyliusResourceExtensionTest extends AbstractExtensionTestCase
 {
     /**

@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
 use Symfony\Component\Finder\Finder;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FinderFactorySpec extends ObjectBehavior
 {
     function it_implements_finder_factory_interface(): void

@@ -19,9 +19,6 @@ use Payum\Core\Model\PaymentInterface;
 use Payum\Core\Request\Convert;
 use Payum\Offline\Constants;
 
-/**
- * @author Antonio Peric <antonio@locastic.com>
- */
 final class ConvertPaymentAction implements ActionInterface
 {
     /**

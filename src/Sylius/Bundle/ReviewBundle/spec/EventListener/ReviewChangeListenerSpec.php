@@ -20,9 +20,6 @@ use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ReviewChangeListenerSpec extends ObjectBehavior
 {
     function let(ReviewableRatingUpdaterInterface $averageRatingUpdater): void

@@ -16,9 +16,6 @@ namespace Sylius\Component\Channel\Factory;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ChannelFactory implements ChannelFactoryInterface
 {
     /**

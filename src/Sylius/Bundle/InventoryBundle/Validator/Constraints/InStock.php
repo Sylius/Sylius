@@ -15,9 +15,6 @@ namespace Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class InStock extends Constraint
 {
     /**

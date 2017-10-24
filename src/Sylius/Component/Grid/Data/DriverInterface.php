@@ -15,9 +15,6 @@ namespace Sylius\Component\Grid\Data;
 
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface DriverInterface
 {
     /**

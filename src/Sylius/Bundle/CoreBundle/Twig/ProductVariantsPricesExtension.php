@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ProductVariantsPricesExtension extends \Twig_Extension
 {
     /**

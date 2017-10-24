@@ -21,9 +21,6 @@ use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\Sorting\SorterInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SorterSpec extends ObjectBehavior
 {
     function it_implements_grid_data_source_sorter_interface(): void

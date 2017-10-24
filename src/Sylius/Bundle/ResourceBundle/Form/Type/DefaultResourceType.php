@@ -18,9 +18,6 @@ use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DefaultResourceType extends AbstractType
 {
     /**

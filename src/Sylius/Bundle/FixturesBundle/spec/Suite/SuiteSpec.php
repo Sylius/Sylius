@@ -18,9 +18,6 @@ use PhpSpec\Wrapper\Collaborator;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SuiteSpec extends ObjectBehavior
 {
     function let(): void

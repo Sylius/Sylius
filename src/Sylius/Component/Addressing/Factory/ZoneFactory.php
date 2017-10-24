@@ -16,9 +16,6 @@ namespace Sylius\Component\Addressing\Factory;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ZoneFactory implements ZoneFactoryInterface
 {
     /**

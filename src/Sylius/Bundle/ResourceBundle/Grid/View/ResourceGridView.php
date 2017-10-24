@@ -19,9 +19,6 @@ use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\View\GridView;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class ResourceGridView extends GridView
 {
     /**

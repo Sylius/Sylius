@@ -17,9 +17,6 @@ use Doctrine\ODM\MongoDB\Event\LoadClassMetadataEventArgs;
 use Doctrine\ODM\MongoDB\Events;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 
-/**
- * @author Ben Davies <ben.davies@gmail.com>
- */
 final class ODMRepositoryClassSubscriber extends AbstractDoctrineSubscriber
 {
     /**

@@ -16,9 +16,6 @@ namespace Sylius\Bundle\AddressingBundle\Twig;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\Intl\Intl;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class CountryNameExtension extends \Twig_Extension
 {
     /**

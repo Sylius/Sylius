@@ -24,9 +24,6 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class CompletePage extends SymfonyPage implements CompletePageInterface
 {
     /**

@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\TokenAssigner;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class UniqueIdBasedOrderTokenAssigner implements OrderTokenAssignerInterface
 {
     /**

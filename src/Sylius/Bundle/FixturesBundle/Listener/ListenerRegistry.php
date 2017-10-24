@@ -15,9 +15,6 @@ namespace Sylius\Bundle\FixturesBundle\Listener;
 
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ListenerRegistry implements ListenerRegistryInterface
 {
     /**

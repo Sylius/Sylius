@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductAssociationTypeTranslationInterface;
 use Sylius\Component\Resource\Model\AbstractTranslation;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductAssociationTypeTranslationSpec extends ObjectBehavior
 {
     function it_implements_a_product_association_type_translation_interface(): void

@@ -22,9 +22,6 @@ use Sylius\Bundle\GridBundle\Doctrine\ORM\DataSource;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DriverSpec extends ObjectBehavior
 {
     function let(ManagerRegistry $managerRegistry): void

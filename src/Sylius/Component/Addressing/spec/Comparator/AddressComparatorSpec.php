@@ -18,9 +18,6 @@ use Sylius\Component\Addressing\Comparator\AddressComparator;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class AddressComparatorSpec extends ObjectBehavior
 {
     function it_is_initializable(): void

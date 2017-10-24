@@ -16,9 +16,6 @@ namespace Sylius\Component\Shipping\Repository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface ShippingMethodRepositoryInterface extends RepositoryInterface
 {
     /**

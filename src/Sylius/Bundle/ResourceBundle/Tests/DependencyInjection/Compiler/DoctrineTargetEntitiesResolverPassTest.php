@@ -18,9 +18,6 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\DoctrineTargetEnti
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class DoctrineTargetEntitiesResolverPassTest extends AbstractCompilerPassTestCase
 {
     /**

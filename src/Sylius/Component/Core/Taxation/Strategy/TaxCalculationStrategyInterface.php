@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Taxation\Strategy;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 interface TaxCalculationStrategyInterface
 {
     /**

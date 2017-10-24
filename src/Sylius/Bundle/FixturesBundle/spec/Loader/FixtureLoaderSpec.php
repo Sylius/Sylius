@@ -18,9 +18,6 @@ use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Loader\FixtureLoaderInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FixtureLoaderSpec extends ObjectBehavior
 {
     function it_implements_fixture_loader_interface(): void

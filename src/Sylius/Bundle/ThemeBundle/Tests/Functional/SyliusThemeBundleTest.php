@@ -17,9 +17,6 @@ use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Container;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
- */
 final class SyliusThemeBundleTest extends KernelTestCase
 {
     /**

@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ThemeBundle\Factory;
 
 use Symfony\Component\Finder\Finder;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FinderFactory implements FinderFactoryInterface
 {
     /**

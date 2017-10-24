@@ -18,9 +18,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * @author Julien Janvier <j.janvier@gmail.com>
- */
 class ProvinceAddressConstraintValidator extends ConstraintValidator
 {
     /**

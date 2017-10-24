@@ -16,9 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Checkout;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface CheckoutStateUrlGeneratorInterface extends UrlGeneratorInterface
 {
     /**

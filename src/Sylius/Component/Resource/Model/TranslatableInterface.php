@@ -15,9 +15,6 @@ namespace Sylius\Component\Resource\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface TranslatableInterface
 {
     /**

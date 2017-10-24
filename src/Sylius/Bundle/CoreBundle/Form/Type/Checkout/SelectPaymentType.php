@@ -16,9 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class SelectPaymentType extends AbstractResourceType
 {
     /**
