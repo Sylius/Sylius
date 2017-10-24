@@ -10,4 +10,5 @@ sylius:
         verify_email: 'Ihre E-Mail-Adresse wurde erfolgreich bestätigt.'
         verify_email_by_invalid_token: 'Der Überprüfungs-Token ist ungültig.'
         verify_email_request: 'Ein Bestätigungslink wurde an Ihre E-Mail-Adresse geschickt.'
+        verify_no_user: 'Es gibt keinen angemeldeten Benutzer.'
         verify_verified_email: 'Ihre E-Mail-Adresse ist bereits bestätigt.'

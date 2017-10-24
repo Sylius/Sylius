@@ -6,5 +6,7 @@ sylius:
         taxon:
             description: Περιγραφή
             name: Ονομασία
+            parent: Γονέας
+            slug: Slug
         taxonomy:
             name: Ονομασία

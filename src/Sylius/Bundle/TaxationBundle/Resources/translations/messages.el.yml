@@ -9,3 +9,6 @@ sylius:
         tax_rate:
             category: Κατηγορία
             name: Ονομασία
+            amount: Ποσό
+            included_in_price: Συμπεριλαμβάνεται στην τιμή;
+            calculator: Τρόπος υπολογισμού
