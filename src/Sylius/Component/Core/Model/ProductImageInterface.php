@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Saidul Islam <saidul.04@gmail.com>
- */
 interface ProductImageInterface extends ImageInterface
 {
     /**

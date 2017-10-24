@@ -20,9 +20,6 @@ use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Sylius\Component\Grid\View\GridView;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class GridHelper extends Helper
 {
     /**

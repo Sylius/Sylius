@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Customer\Model;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class CustomerGroup implements CustomerGroupInterface
 {
     /**

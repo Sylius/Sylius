@@ -27,9 +27,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\ReversedTransformer;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class OrderType extends AbstractResourceType
 {
     /**

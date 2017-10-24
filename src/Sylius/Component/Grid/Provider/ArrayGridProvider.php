@@ -17,9 +17,6 @@ use Sylius\Component\Grid\Definition\ArrayToDefinitionConverterInterface;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Exception\UndefinedGridException;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ArrayGridProvider implements GridProviderInterface
 {
     /**

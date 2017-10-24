@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Shop\ProductReview;
 
 use Sylius\Behat\Page\PageInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface CreatePageInterface extends PageInterface
 {
     /**

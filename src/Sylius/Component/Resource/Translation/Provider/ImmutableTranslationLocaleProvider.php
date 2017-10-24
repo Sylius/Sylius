@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Resource\Translation\Provider;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ImmutableTranslationLocaleProvider implements TranslationLocaleProviderInterface
 {
     /**

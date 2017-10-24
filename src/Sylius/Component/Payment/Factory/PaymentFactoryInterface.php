@@ -16,9 +16,6 @@ namespace Sylius\Component\Payment\Factory;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface PaymentFactoryInterface extends FactoryInterface
 {
     /**

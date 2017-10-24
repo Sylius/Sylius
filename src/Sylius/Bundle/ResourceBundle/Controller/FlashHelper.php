@@ -19,10 +19,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class FlashHelper implements FlashHelperInterface
 {
     /**

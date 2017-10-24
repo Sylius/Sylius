@@ -16,9 +16,6 @@ namespace Sylius\Component\Customer\Model;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 interface CustomerInterface extends TimestampableInterface, ResourceInterface
 {
     public const UNKNOWN_GENDER = 'u';

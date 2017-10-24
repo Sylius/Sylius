@@ -17,9 +17,6 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface as BasePaymentMethodRepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface PaymentMethodRepositoryInterface extends BasePaymentMethodRepositoryInterface
 {
     /**

@@ -21,9 +21,6 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Component\Resource\Exception\RaceConditionException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ResourceUpdateHandlerSpec extends ObjectBehavior
 {
     function let(ResourceUpdateHandlerInterface $decoratedUpdater): void

@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ResourceBundle\ExpressionLanguage;
 use Symfony\Component\DependencyInjection\ExpressionLanguage as BaseExpressionLanguage;
 use Symfony\Component\ExpressionLanguage\ParserCache\ParserCacheInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ExpressionLanguage extends BaseExpressionLanguage
 {
     /**

@@ -23,9 +23,6 @@ namespace AppBundle\Entity;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class ComicBook implements ResourceInterface
 {
     /**

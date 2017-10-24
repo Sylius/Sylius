@@ -24,11 +24,6 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class CartContext implements Context
 {
     /**

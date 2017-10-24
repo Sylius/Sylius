@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Admin\Country;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface IndexPageInterface extends BaseIndexPageInterface
 {
     /**

@@ -23,9 +23,6 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class AddressPage extends SymfonyPage implements AddressPageInterface
 {
     public const TYPE_BILLING = 'billing';

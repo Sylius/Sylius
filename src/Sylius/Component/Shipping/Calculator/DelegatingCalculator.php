@@ -16,9 +16,6 @@ namespace Sylius\Component\Shipping\Calculator;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DelegatingCalculator implements DelegatingCalculatorInterface
 {
     /**

@@ -16,10 +16,6 @@ namespace spec\Sylius\Component\Customer\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class CustomerGroupSpec extends ObjectBehavior
 {
     function it_implements_customer_group_interface(): void

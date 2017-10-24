@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ShippingBundle\Doctrine\ORM;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class ShippingMethodRepository extends EntityRepository implements ShippingMethodRepositoryInterface
 {
     /**

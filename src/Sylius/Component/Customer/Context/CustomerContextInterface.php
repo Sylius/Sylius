@@ -15,9 +15,6 @@ namespace Sylius\Component\Customer\Context;
 
 use Sylius\Component\Customer\Model\CustomerInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 interface CustomerContextInterface
 {
     /**

@@ -16,9 +16,6 @@ namespace Sylius\Component\Grid\Filter;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class MoneyFilter implements FilterInterface
 {
     public const DEFAULT_SCALE = 2;

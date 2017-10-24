@@ -15,9 +15,6 @@ namespace Sylius\Component\Taxation\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class TaxRate implements TaxRateInterface
 {
     use TimestampableTrait;

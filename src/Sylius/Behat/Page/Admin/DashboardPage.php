@@ -18,9 +18,6 @@ use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class DashboardPage extends SymfonyPage implements DashboardPageInterface
 {
     /**

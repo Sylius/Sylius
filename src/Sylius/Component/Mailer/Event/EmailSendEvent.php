@@ -16,9 +16,6 @@ namespace Sylius\Component\Mailer\Event;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 final class EmailSendEvent extends Event
 {
     /**

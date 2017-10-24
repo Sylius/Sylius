@@ -16,9 +16,6 @@ namespace Sylius\Component\Order\Modifier;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 
-/**
- * @author Łukasz Chrusciel <lukasz.chrusciel@lakion.com>
- */
 interface OrderModifierInterface
 {
     /**

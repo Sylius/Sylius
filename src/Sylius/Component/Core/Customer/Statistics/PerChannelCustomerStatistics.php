@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Customer\Statistics;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class PerChannelCustomerStatistics
 {
     /**

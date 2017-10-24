@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class ResponseLoader implements ResponseLoaderInterface
 {
     /**

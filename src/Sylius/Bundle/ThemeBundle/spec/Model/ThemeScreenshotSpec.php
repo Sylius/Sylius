@@ -15,9 +15,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeScreenshotSpec extends ObjectBehavior
 {
     function let(): void

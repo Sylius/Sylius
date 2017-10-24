@@ -15,9 +15,6 @@ namespace Sylius\Component\Locale\Context;
 
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ProviderBasedLocaleContext implements LocaleContextInterface
 {
     /**

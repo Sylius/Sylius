@@ -23,9 +23,6 @@ use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocatorInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TemplateFileLocatorSpec extends ObjectBehavior
 {
     function let(

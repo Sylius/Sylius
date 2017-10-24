@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Inventory\Operator;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface OrderInventoryOperatorInterface
 {
     /**

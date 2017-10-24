@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Security;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface UserImpersonatorInterface
 {
     /**

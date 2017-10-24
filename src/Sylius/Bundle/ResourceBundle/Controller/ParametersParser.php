@@ -18,10 +18,6 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Dosena Ishmael <nukboon@gmail.com>
- */
 final class ParametersParser implements ParametersParserInterface
 {
     /**

@@ -21,9 +21,6 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class FlatRateCalculatorSpec extends ObjectBehavior
 {
     function it_implements_shipping_calculator_interface(): void

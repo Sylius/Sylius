@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Grid\Event;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Grid;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class GridDefinitionConverterEventSpec extends ObjectBehavior
 {
     function let(Grid $grid): void

@@ -16,9 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Installer\Renderer;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TableRenderer
 {
     /**

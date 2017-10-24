@@ -20,9 +20,6 @@ use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeScreenshotControllerSpec extends ObjectBehavior
 {
     /**

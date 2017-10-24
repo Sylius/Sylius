@@ -18,9 +18,6 @@ use Sylius\Bundle\ShippingBundle\Doctrine\ORM\ShippingMethodRepository as BaseSh
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class ShippingMethodRepository extends BaseShippingMethodRepository implements ShippingMethodRepositoryInterface
 {
     /**

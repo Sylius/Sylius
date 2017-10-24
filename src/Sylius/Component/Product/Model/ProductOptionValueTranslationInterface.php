@@ -16,9 +16,6 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Vincenzo Provenza <vincenzo.provenza89@gmail.com>
- */
 interface ProductOptionValueTranslationInterface extends ResourceInterface, TranslationInterface
 {
     /**

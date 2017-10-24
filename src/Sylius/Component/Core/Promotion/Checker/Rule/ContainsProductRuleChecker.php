@@ -19,11 +19,6 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Alexandre Bacco <alexandre.bacco@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ContainsProductRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'contains_product';

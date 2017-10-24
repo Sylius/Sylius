@@ -15,9 +15,6 @@ namespace Sylius\Component\Shipping\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class ShipmentUnit implements ShipmentUnitInterface
 {
     use TimestampableTrait;

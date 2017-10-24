@@ -16,9 +16,6 @@ namespace Sylius\Component\Promotion\Action;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface PromotionActionCommandInterface
 {
     /**

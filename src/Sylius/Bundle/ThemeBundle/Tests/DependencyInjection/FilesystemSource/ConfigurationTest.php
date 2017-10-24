@@ -18,9 +18,6 @@ use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationSo
 use Sylius\Bundle\ThemeBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;

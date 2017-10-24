@@ -17,10 +17,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface ZoneInterface extends ResourceInterface, CodeAwareInterface
 {
     public const TYPE_COUNTRY = 'country';

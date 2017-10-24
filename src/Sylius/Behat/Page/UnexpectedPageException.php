@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class UnexpectedPageException extends \Exception
 {
 }

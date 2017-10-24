@@ -15,9 +15,6 @@ namespace spec\Sylius\Component\Registry;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class ExistingServiceExceptionSpec extends ObjectBehavior
 {
     function let(): void

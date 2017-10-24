@@ -20,10 +20,6 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Arnaud Langade <arn0d.dev@gmail.com>
- */
 final class RequestConfigurationSpec extends ObjectBehavior
 {
     function let(MetadataInterface $metadata, Request $request, Parameters $parameters): void

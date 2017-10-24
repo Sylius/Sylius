@@ -24,9 +24,6 @@ use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ArrayToDefinitionConverterSpec extends ObjectBehavior
 {
     function let(EventDispatcherInterface $eventDispatcher): void

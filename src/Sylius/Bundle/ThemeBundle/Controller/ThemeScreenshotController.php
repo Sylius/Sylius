@@ -20,9 +20,6 @@ use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeScreenshotController
 {
     /**

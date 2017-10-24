@@ -15,11 +15,6 @@ namespace Sylius\Component\Review\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-/**
- * @author Daniel Richter <nexyz9@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class Review implements ReviewInterface
 {
     use TimestampableTrait;

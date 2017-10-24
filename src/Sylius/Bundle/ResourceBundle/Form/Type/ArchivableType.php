@@ -20,9 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ArchivableType extends AbstractType
 {
     /**

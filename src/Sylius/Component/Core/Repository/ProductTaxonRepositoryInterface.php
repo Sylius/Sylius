@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Repository;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface ProductTaxonRepositoryInterface extends RepositoryInterface
 {
     /**

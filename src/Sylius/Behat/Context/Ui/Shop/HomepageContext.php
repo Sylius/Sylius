@@ -17,9 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class HomepageContext implements Context
 {
     /**

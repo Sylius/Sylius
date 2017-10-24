@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TranslatorFallbackLocalesPass implements CompilerPassInterface
 {
     /**

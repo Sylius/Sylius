@@ -21,9 +21,6 @@ use Sylius\Component\Order\Model\OrderSequenceInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterface
 {
     /**

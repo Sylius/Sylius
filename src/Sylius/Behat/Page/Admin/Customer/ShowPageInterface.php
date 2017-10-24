@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Admin\Customer;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface ShowPageInterface extends PageInterface
 {
     /**

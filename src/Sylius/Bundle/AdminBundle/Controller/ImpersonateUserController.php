@@ -23,9 +23,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ImpersonateUserController
 {
     /**

@@ -17,9 +17,6 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-/**
- * @author Patrik Karisch <patrik.karisch@abimus.com>
- */
 class MenuBuilderEvent extends Event
 {
     /**

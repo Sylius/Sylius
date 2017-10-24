@@ -18,9 +18,6 @@ use PhpSpec\ObjectBehavior;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class CollectionToStringTransformerSpec extends ObjectBehavior
 {
     function let(): void

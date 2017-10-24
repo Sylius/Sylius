@@ -16,10 +16,6 @@ namespace Sylius\Component\Review\Model;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Daniel Richter <nexyz9@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface ReviewInterface extends TimestampableInterface, ResourceInterface
 {
     public const STATUS_NEW = 'new';

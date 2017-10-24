@@ -20,9 +20,6 @@ use Sylius\Behat\Page\Admin\ShippingCategory\CreatePageInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class ManagingShippingCategoriesContext implements Context
 {
     /**

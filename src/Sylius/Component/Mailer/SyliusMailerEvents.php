@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Mailer;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class SyliusMailerEvents
 {
     public const EMAIL_PRE_RENDER = 'sylius.email_rendered';

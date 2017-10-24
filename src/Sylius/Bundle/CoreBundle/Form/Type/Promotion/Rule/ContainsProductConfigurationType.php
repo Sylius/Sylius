@@ -22,10 +22,6 @@ use Symfony\Component\Form\ReversedTransformer;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
-/**
- * @author Alexandre Bacco <alexandre.bacco@gmail.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ContainsProductConfigurationType extends AbstractType
 {
     /**

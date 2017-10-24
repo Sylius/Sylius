@@ -16,9 +16,6 @@ namespace Sylius\Bundle\PaymentBundle\Doctrine\ORM;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- */
 class PaymentMethodRepository extends EntityRepository implements PaymentMethodRepositoryInterface
 {
     /**

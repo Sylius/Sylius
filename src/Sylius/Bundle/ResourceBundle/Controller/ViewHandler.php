@@ -17,9 +17,6 @@ use FOS\RestBundle\View\View;
 use FOS\RestBundle\View\ViewHandler as RestViewHandler;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ViewHandler implements ViewHandlerInterface
 {
     /**

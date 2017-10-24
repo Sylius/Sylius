@@ -20,9 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class SelectAttributeChoicesCollectionType extends AbstractType
 {
     /**

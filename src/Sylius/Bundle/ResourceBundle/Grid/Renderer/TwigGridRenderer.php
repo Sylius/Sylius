@@ -20,9 +20,6 @@ use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Sylius\Component\Grid\View\GridViewInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class TwigGridRenderer implements GridRendererInterface
 {
     /**

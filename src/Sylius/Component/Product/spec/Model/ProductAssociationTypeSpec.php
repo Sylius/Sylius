@@ -16,10 +16,6 @@ namespace spec\Sylius\Component\Product\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
-/**
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductAssociationTypeSpec extends ObjectBehavior
 {
     function let()

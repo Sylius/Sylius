@@ -24,9 +24,6 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class ApiAccessTokenExampleFactory extends AbstractExampleFactory
 {
     /**

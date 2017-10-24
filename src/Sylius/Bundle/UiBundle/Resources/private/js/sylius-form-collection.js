@@ -7,9 +7,6 @@
  * file that was distributed with this source code.
  */
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- */
 !function($){
 
     "use strict";

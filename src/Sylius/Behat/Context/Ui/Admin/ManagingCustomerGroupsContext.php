@@ -20,9 +20,6 @@ use Sylius\Behat\Page\Admin\CustomerGroup\UpdatePageInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ManagingCustomerGroupsContext implements Context
 {
     /**

@@ -18,9 +18,6 @@ use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SuiteFactory implements SuiteFactoryInterface
 {
     /**

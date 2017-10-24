@@ -16,9 +16,6 @@ namespace Sylius\Component\Attribute\Factory;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface AttributeFactoryInterface extends FactoryInterface
 {
     /**

@@ -19,9 +19,6 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class TaxCategoryExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**

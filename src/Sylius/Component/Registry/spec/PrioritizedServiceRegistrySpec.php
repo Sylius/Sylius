@@ -21,9 +21,6 @@ use Sylius\Component\Registry\NonExistingServiceException;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Zend\Stdlib\PriorityQueue;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class PrioritizedServiceRegistrySpec extends ObjectBehavior
 {
     function let(): void

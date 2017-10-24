@@ -20,10 +20,6 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Exception\RuntimeException;
 
-/**
- * @author Romain Monceau <romain@akeneo.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class CommandExecutor
 {
     /**

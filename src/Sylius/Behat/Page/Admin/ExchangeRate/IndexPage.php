@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\ExchangeRate;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     /**

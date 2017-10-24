@@ -18,9 +18,6 @@ use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class StorageBasedLocaleSwitcher implements LocaleSwitcherInterface
 {
     /**

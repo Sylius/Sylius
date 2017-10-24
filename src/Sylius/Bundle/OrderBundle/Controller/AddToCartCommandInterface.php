@@ -16,9 +16,6 @@ namespace Sylius\Bundle\OrderBundle\Controller;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface AddToCartCommandInterface
 {
     /**

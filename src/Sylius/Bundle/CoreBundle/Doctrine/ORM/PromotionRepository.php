@@ -17,9 +17,6 @@ use Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionRepository as BasePromot
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 
-/**
- * @author Kristian Loevstroem <kristian@loevstroem.dk>
- */
 class PromotionRepository extends BasePromotionRepository implements PromotionRepositoryInterface
 {
     /**

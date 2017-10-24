@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Taxon;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class TaxonImageType extends ImageType
 {
     /**

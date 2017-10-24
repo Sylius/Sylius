@@ -20,9 +20,6 @@ use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-/**
- * @author Stefan Doorn <stefan@efectos.nl>
- */
 final class PaymentDescriptionProviderSpec extends ObjectBehavior
 {
     function let(TranslatorInterface $translator): void

@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface AdminUserInterface extends BaseUserInterface
 {
     public const DEFAULT_ADMIN_ROLE = 'ROLE_ADMINISTRATION_ACCESS';

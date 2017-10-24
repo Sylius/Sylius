@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Shop\Account;
 
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class LoginPage extends SymfonyPage implements LoginPageInterface
 {
     /**

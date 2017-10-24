@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class ProductVariantsPricesHelper extends Helper
 {
     /**

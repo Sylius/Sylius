@@ -21,9 +21,6 @@ use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class TwigGridRendererSpec extends ObjectBehavior
 {
     function let(

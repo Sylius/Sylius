@@ -15,9 +15,6 @@ namespace Sylius\Bundle\AdminBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusAdminBundle extends Bundle
 {
 }

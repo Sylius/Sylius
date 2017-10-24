@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface AddressPageInterface extends SymfonyPageInterface
 {
     /**

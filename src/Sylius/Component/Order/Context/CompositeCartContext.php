@@ -16,9 +16,6 @@ namespace Sylius\Component\Order\Context;
 use Sylius\Component\Order\Model\OrderInterface;
 use Zend\Stdlib\PriorityQueue;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class CompositeCartContext implements CartContextInterface
 {
     /**

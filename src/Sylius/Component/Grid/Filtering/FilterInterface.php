@@ -15,9 +15,6 @@ namespace Sylius\Component\Grid\Filtering;
 
 use Sylius\Component\Grid\Data\DataSourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface FilterInterface
 {
     /**

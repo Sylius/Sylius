@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 use Sylius\Component\Resource\Model\AbstractTranslation;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ProductVariantTranslationSpec extends ObjectBehavior
 {
     function it_implements_product_variant_translation_interface(): void

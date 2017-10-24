@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ThemeBundle\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TemplatingTest extends WebTestCase
 {
     /**

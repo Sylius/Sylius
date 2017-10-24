@@ -18,10 +18,6 @@ use Sylius\Component\Review\Model\ReviewerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class CustomerReviewsDeleteListener
 {
     /**

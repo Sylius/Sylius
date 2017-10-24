@@ -17,10 +17,6 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class ProvinceNamingProvider implements ProvinceNamingProviderInterface
 {
     /**

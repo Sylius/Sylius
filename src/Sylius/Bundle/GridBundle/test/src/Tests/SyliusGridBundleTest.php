@@ -16,9 +16,6 @@ namespace Sylius\Bundle\GridBundle\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
- */
 final class SyliusGridBundleTest extends WebTestCase
 {
     /**

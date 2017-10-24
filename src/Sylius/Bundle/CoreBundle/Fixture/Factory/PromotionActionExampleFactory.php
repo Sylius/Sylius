@@ -19,9 +19,6 @@ use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class PromotionActionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**

@@ -18,9 +18,6 @@ use Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class TaxRateTypeExtension extends AbstractTypeExtension
 {
     /**

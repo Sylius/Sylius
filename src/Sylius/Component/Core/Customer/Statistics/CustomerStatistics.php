@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Customer\Statistics;
 
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class CustomerStatistics
 {
     /**

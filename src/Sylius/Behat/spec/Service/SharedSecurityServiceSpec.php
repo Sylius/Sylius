@@ -23,9 +23,6 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class SharedSecurityServiceSpec extends ObjectBehavior
 {
     function let(SecurityServiceInterface $adminSecurityService)

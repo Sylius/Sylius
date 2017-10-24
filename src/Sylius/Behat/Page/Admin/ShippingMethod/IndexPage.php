@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     /**

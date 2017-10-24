@@ -16,9 +16,6 @@ namespace Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeContext implements Context
 {
     /**

@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProviderInterface;
 use Symfony\Component\Translation\Loader\LoaderInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TranslatorLoaderProviderSpec extends ObjectBehavior
 {
     function it_implements_translation_loader_provider_interface(): void

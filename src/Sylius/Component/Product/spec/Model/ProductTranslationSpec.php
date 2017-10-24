@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Product\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 final class ProductTranslationSpec extends ObjectBehavior
 {
     function it_implements_Sylius_product_translation_interface(): void

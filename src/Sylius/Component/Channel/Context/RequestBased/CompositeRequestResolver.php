@@ -17,9 +17,6 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Zend\Stdlib\PriorityQueue;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CompositeRequestResolver implements RequestResolverInterface
 {
     /**

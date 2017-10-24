@@ -17,9 +17,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class ProductAttributeFixture extends AbstractResourceFixture
 {
     /**

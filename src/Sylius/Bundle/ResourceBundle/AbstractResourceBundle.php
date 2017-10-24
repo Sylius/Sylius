@@ -22,10 +22,6 @@ use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 abstract class AbstractResourceBundle extends Bundle implements ResourceBundleInterface
 {
     /**

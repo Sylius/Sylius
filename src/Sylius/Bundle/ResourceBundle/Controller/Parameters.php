@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 
-/**
- * @author Arnaud Langade <arn0d.dev@gmail.com>
- */
 class Parameters extends ParameterBag
 {
     /**

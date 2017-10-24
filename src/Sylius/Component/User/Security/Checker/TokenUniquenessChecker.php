@@ -15,9 +15,6 @@ namespace Sylius\Component\User\Security\Checker;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class TokenUniquenessChecker implements UniquenessCheckerInterface
 {
     /**

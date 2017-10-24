@@ -18,9 +18,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class TaxRateSpec extends ObjectBehavior
 {
     function it_implements_a_tax_rate_interface(): void

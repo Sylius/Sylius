@@ -17,10 +17,6 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class EmailChecker implements EmailCheckerInterface
 {
     /**

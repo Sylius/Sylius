@@ -20,9 +20,6 @@ use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Model\OrderInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class SessionAndChannelBasedCartContext implements CartContextInterface
 {
     /**

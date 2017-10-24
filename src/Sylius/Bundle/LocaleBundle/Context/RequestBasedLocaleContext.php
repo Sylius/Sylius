@@ -18,9 +18,6 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class RequestBasedLocaleContext implements LocaleContextInterface
 {
     /**

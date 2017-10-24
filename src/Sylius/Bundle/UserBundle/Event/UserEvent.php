@@ -16,9 +16,6 @@ namespace Sylius\Bundle\UserBundle\Event;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class UserEvent extends Event
 {
     /**

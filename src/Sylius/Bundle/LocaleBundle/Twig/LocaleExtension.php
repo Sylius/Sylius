@@ -15,10 +15,6 @@ namespace Sylius\Bundle\LocaleBundle\Twig;
 
 use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class LocaleExtension extends \Twig_Extension
 {
     /**

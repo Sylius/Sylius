@@ -21,9 +21,6 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class AdminBasedLocaleContextSpec extends ObjectBehavior
 {
     function let(TokenStorageInterface $tokenStorage): void

@@ -16,9 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Assigner;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface IpAssignerInterface
 {
     /**

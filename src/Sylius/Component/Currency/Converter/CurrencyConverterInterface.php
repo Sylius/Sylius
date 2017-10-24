@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Currency\Converter;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface CurrencyConverterInterface
 {
     /**

@@ -26,9 +26,6 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ValidAttributeValueValidatorSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $attributeTypesRegistry, ExecutionContextInterface $context): void

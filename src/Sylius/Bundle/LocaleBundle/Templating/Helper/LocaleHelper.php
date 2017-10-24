@@ -16,9 +16,6 @@ namespace Sylius\Bundle\LocaleBundle\Templating\Helper;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class LocaleHelper extends Helper implements LocaleHelperInterface
 {
     /**

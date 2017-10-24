@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Admin\ProductAttribute;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**

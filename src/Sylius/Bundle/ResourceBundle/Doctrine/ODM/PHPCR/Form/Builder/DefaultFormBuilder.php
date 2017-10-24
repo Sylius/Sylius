@@ -18,9 +18,6 @@ use Sylius\Bundle\ResourceBundle\Form\Builder\DefaultFormBuilderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Daniel Leech <daniel@dantleech.com>
- */
 class DefaultFormBuilder implements DefaultFormBuilderInterface
 {
     /**

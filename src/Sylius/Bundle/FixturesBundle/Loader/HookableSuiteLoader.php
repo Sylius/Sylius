@@ -18,9 +18,6 @@ use Sylius\Bundle\FixturesBundle\Listener\BeforeSuiteListenerInterface;
 use Sylius\Bundle\FixturesBundle\Listener\SuiteEvent;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class HookableSuiteLoader implements SuiteLoaderInterface
 {
     /**

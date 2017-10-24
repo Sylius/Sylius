@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Model;
 use Sylius\Component\Addressing\Model\Address as BaseAddress;
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Address extends BaseAddress implements AddressInterface
 {
     /**

@@ -22,9 +22,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class AddBaseCurrencySubscriberSpec extends ObjectBehavior
 {
     function it_implements_event_subscriber_interface(): void

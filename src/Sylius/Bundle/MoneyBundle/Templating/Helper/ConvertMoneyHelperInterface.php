@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 
-/**
- * @author Axel Vankrunkelsven <axel@digilabs.be>
- */
 interface ConvertMoneyHelperInterface
 {
     /**

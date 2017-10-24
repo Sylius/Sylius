@@ -19,10 +19,6 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 final class NthOrderRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'nth_order';

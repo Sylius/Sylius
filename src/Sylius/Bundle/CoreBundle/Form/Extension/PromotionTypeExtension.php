@@ -18,9 +18,6 @@ use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Kristian Loevstroem <kristian@loevstroem.dk>
- */
 final class PromotionTypeExtension extends AbstractTypeExtension
 {
     /**

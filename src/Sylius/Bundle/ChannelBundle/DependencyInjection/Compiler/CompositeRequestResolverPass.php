@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\PrioritizedCompositeServicePass;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CompositeRequestResolverPass extends PrioritizedCompositeServicePass
 {
     public function __construct()

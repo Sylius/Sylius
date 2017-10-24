@@ -20,9 +20,6 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
 {
     function it_implements_an_order_promotions_usage_modifier_interface(): void

@@ -22,9 +22,6 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterface
 {
     /**

@@ -16,9 +16,6 @@ namespace Sylius\Component\Payment\Repository;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- */
 interface PaymentMethodRepositoryInterface extends RepositoryInterface
 {
     /**

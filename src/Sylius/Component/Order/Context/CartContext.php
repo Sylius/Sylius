@@ -16,9 +16,6 @@ namespace Sylius\Component\Order\Context;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class CartContext implements CartContextInterface
 {
     /**

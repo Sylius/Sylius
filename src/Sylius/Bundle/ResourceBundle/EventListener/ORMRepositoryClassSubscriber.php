@@ -17,9 +17,6 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
-/**
- * @author Ben Davies <ben.davies@gmail.com>
- */
 final class ORMRepositoryClassSubscriber extends AbstractDoctrineSubscriber
 {
     /**

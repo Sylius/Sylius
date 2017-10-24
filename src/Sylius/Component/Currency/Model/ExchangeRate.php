@@ -15,9 +15,6 @@ namespace Sylius\Component\Currency\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class ExchangeRate implements ExchangeRateInterface
 {
     use TimestampableTrait;

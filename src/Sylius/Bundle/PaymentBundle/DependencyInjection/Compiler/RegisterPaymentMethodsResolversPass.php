@@ -17,9 +17,6 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class RegisterPaymentMethodsResolversPass implements CompilerPassInterface
 {
     /**

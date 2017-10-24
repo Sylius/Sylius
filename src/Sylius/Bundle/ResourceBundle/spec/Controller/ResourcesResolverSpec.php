@@ -20,9 +20,6 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourcesResolverInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ResourcesResolverSpec extends ObjectBehavior
 {
     function it_implements_resources_resolver_interface(): void

@@ -15,9 +15,6 @@ namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 class PromotionCoupon implements PromotionCouponInterface
 {
     use TimestampableTrait;

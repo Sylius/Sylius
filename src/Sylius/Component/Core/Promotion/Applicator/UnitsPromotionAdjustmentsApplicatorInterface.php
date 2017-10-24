@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Promotion\Applicator;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface UnitsPromotionAdjustmentsApplicatorInterface
 {
     /**

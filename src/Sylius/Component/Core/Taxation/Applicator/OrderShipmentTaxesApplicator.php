@@ -22,10 +22,6 @@ use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
 {
     /**

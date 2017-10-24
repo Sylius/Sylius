@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface StateMachineInterface
 {
     /**

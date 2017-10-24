@@ -19,9 +19,6 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class DefaultProductVariantResolverSpec extends ObjectBehavior
 {
     function it_implements_variant_resolver_interface(): void

@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Model;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class Scope
 {
     public const ALL = 'all';

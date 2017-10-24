@@ -18,9 +18,6 @@ use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerNotFoundException;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ListenerRegistrySpec extends ObjectBehavior
 {
     function it_implements_listener_registry_interface(): void

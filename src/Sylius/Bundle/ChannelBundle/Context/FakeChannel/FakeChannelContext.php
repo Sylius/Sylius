@@ -20,9 +20,6 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FakeChannelContext implements ChannelContextInterface
 {
     /**

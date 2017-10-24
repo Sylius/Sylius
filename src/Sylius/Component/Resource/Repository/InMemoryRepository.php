@@ -23,9 +23,6 @@ use Sylius\Component\Resource\Repository\Exception\ExistingResourceException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class InMemoryRepository implements RepositoryInterface
 {
     /**

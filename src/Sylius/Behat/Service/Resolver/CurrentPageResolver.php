@@ -18,9 +18,6 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CurrentPageResolver implements CurrentPageResolverInterface
 {
     /**

@@ -16,9 +16,6 @@ namespace Sylius\Component\Registry;
 use Webmozart\Assert\Assert;
 use Zend\Stdlib\PriorityQueue;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class PrioritizedServiceRegistry implements PrioritizedServiceRegistryInterface
 {
     /**

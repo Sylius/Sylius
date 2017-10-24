@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ConfigurationLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class JsonFileConfigurationLoaderSpec extends ObjectBehavior
 {
     function let(FilesystemInterface $filesystem): void

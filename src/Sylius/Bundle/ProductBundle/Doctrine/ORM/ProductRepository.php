@@ -16,10 +16,6 @@ namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class ProductRepository extends EntityRepository implements ProductRepositoryInterface
 {
     /**

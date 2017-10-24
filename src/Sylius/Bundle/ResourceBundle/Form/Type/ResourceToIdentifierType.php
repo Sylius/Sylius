@@ -21,10 +21,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Alexandre Bacco <alexandre.bacco@gmail.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ResourceToIdentifierType extends AbstractType
 {
     /**

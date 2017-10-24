@@ -17,9 +17,6 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FakeChannelPersister
 {
     /**

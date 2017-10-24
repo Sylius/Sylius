@@ -17,9 +17,6 @@ use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository as BaseUserRepository;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class UserRepository extends BaseUserRepository implements UserRepositoryInterface
 {
     /**

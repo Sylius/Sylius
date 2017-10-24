@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\ProductVariant;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface GeneratePageInterface extends SymfonyPageInterface
 {
     public function generate();

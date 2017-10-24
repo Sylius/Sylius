@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ResourceBundle;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- */
 interface ResourceBundleInterface
 {
     public const MAPPING_XML = 'xml';

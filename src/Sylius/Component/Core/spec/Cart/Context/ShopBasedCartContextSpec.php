@@ -25,9 +25,6 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ShopBasedCartContextSpec extends ObjectBehavior
 {
     function let(CartContextInterface $cartContext, ShopperContextInterface $shopperContext): void

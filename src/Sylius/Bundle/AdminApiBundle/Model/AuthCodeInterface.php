@@ -16,9 +16,6 @@ namespace Sylius\Bundle\AdminApiBundle\Model;
 use FOS\OAuthServerBundle\Model\AuthCodeInterface as BaseAuthCodeInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface AuthCodeInterface extends BaseAuthCodeInterface, ResourceInterface
 {
 }

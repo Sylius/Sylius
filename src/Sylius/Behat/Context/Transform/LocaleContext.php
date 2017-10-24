@@ -16,9 +16,6 @@ namespace Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class LocaleContext implements Context
 {
     /**

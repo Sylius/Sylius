@@ -15,9 +15,6 @@ namespace Sylius\Component\Currency\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface CurrenciesAwareInterface
 {
     /**

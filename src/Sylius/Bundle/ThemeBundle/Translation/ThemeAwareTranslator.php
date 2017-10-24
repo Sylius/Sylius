@@ -19,9 +19,6 @@ use Symfony\Component\Translation\MessageCatalogueInterface;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeAwareTranslator implements TranslatorInterface, TranslatorBagInterface, WarmableInterface
 {
     /**

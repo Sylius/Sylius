@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderRecalculationListenerSpec extends ObjectBehavior
 {
     function let(OrderProcessorInterface $orderProcessor): void

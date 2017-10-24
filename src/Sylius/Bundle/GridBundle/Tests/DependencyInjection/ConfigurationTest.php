@@ -17,9 +17,6 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\GridBundle\DependencyInjection\Configuration;
 use Sylius\Bundle\GridBundle\Doctrine\ORM\Driver;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;

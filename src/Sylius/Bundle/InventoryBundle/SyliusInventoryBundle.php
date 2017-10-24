@@ -16,9 +16,6 @@ namespace Sylius\Bundle\InventoryBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusInventoryBundle extends AbstractResourceBundle
 {
     /**

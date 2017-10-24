@@ -18,9 +18,6 @@ use Sylius\Component\Resource\Metadata\Metadata;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 abstract class AbstractResourceExtension extends Extension
 {
     /**

@@ -18,9 +18,6 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\CoreBundle\Fixture\CurrencyFixture;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CurrencyFixtureTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;

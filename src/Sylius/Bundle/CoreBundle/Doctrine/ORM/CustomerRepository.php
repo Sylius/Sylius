@@ -16,9 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class CustomerRepository extends EntityRepository implements CustomerRepositoryInterface
 {
     /**

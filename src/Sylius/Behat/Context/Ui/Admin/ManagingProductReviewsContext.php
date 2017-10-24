@@ -21,9 +21,6 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ManagingProductReviewsContext implements Context
 {
     /**

@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Taxon;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class CreateForParentPage extends CreatePage implements CreateForParentPageInterface
 {
     /**

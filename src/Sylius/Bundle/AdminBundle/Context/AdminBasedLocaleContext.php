@@ -18,9 +18,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class AdminBasedLocaleContext implements LocaleContextInterface
 {
     /**

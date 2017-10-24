@@ -16,9 +16,6 @@ namespace Sylius\Bundle\UserBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusUserBundle extends AbstractResourceBundle
 {
     /**

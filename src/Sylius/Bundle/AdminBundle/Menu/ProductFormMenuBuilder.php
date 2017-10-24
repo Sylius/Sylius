@@ -19,9 +19,6 @@ use Sylius\Bundle\AdminBundle\Event\ProductMenuBuilderEvent;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ProductFormMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.product.form';

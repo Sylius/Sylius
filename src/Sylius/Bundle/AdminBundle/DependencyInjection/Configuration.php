@@ -16,9 +16,6 @@ namespace Sylius\Bundle\AdminBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class Configuration implements ConfigurationInterface
 {
     /**

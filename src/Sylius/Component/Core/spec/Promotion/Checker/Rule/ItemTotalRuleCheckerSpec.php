@@ -19,9 +19,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ItemTotalRuleCheckerSpec extends ObjectBehavior
 {
     function let(RuleCheckerInterface $itemTotalRuleChecker): void

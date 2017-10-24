@@ -16,9 +16,6 @@ namespace Sylius\Bundle\AdminApiBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusAdminApiBundle extends AbstractResourceBundle
 {
     /**

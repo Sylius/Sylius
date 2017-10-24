@@ -21,9 +21,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- */
 abstract class AbstractConfigurationCollectionType extends AbstractType
 {
     /**

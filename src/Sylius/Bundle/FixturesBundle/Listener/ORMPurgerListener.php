@@ -18,9 +18,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ORMPurgerListener extends AbstractListener implements BeforeSuiteListenerInterface
 {
     /**

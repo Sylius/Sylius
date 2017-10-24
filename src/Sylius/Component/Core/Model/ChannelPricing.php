@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 class ChannelPricing implements ChannelPricingInterface
 {
     /**

@@ -20,9 +20,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class AddCodeFormSubscriber implements EventSubscriberInterface
 {
     /**

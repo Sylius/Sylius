@@ -21,9 +21,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ResourceFormFactorySpec extends ObjectBehavior
 {
     function let(FormFactoryInterface $formFactory): void

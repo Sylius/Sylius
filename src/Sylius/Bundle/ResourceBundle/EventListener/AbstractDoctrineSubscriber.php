@@ -20,9 +20,6 @@ use Doctrine\Common\Persistence\Mapping\RuntimeReflectionService;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Ben Davies <ben.davies@gmail.com>
- */
 abstract class AbstractDoctrineSubscriber implements EventSubscriber
 {
     /**

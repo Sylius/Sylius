@@ -17,9 +17,6 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class UniqueWithinCollectionConstraintValidator extends ConstraintValidator
 {
     /**

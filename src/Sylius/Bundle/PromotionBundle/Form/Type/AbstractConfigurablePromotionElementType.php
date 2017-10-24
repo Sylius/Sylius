@@ -22,9 +22,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 abstract class AbstractConfigurablePromotionElementType extends AbstractResourceType
 {
     /**

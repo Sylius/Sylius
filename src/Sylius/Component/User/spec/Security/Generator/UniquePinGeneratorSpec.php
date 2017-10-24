@@ -18,9 +18,6 @@ use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class UniquePinGeneratorSpec extends ObjectBehavior
 {
     function let(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker): void

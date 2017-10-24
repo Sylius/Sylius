@@ -20,9 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Laurent Paganin-Gioanni <l.paganin@algo-factory.com>
- */
 final class SelectAttributeType extends AbstractType
 {
     /**

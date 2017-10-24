@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PriceExtension extends \Twig_Extension
 {
     /**

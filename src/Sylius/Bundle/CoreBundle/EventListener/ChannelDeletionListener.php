@@ -18,9 +18,6 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
-/**
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 final class ChannelDeletionListener
 {
     /**

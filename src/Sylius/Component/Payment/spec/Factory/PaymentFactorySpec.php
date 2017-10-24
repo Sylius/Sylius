@@ -18,9 +18,6 @@ use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class PaymentFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $paymentFactory): void

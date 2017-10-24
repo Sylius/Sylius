@@ -16,9 +16,6 @@ namespace Sylius\Component\Promotion\Repository;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface PromotionRepositoryInterface extends RepositoryInterface
 {
     /**

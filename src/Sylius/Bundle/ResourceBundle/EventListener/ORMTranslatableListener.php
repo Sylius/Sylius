@@ -26,11 +26,6 @@ use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Prezent Internet B.V. <info@prezent.nl>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ORMTranslatableListener implements EventSubscriber
 {
     /**

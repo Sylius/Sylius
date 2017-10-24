@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Model;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ShopUserInterface extends BaseUserInterface, CustomerAwareInterface
 {
 }

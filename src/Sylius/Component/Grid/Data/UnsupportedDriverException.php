@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Grid\Data;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class UnsupportedDriverException extends \InvalidArgumentException
 {
     /**

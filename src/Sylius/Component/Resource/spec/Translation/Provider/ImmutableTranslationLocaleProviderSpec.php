@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Resource\Translation\Provider;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ImmutableTranslationLocaleProviderSpec extends ObjectBehavior
 {
     function let(): void

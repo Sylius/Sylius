@@ -16,9 +16,6 @@ namespace Sylius\Bundle\AdminApiBundle\Model;
 use FOS\OAuthServerBundle\Model\ClientInterface as BaseClientInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ClientInterface extends BaseClientInterface, ResourceInterface
 {
 }

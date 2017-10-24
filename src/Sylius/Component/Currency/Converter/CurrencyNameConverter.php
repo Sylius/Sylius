@@ -15,9 +15,6 @@ namespace Sylius\Component\Currency\Converter;
 
 use Symfony\Component\Intl\Intl;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class CurrencyNameConverter implements CurrencyNameConverterInterface
 {
     /**

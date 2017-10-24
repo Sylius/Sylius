@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class AddressFixture extends AbstractResourceFixture
 {
     /**
