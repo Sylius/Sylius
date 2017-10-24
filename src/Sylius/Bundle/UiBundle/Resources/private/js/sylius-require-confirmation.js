@@ -26,11 +26,6 @@
                         $('#confirmation-button').on('click', function(event) {
                             event.preventDefault();
 
-                            var ids = $('input.bulk-select-checkbox:checked').map(function() {
-                                return this.value;
-                            }).get();
-                            $(actionButton.siblings('input[name="ids"]')[0]).val(ids)
-
                             return actionButton.closest('form').submit();
                         });
                     }
