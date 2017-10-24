@@ -26,12 +26,12 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     /**
      * @var string
      */
-    protected $immutableProductName;
+    protected $productName;
 
     /**
      * @var string
      */
-    protected $immutableVariantName;
+    protected $variantName;
 
     /**
      * {@inheritdoc}
@@ -51,11 +51,11 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         $localeCode = $order ? $order->getLocaleCode() : null;
 
         if (null !== $variant) {
-            $this->setImmutableVariantName($variant->getTranslation($localeCode)->getName());
+            $this->setVariantName($variant->getTranslation($localeCode)->getName());
         }
 
         if (null !== $variant && null !== $variant->getProduct()) {
-            $this->setImmutableProductName($variant->getProduct()->getTranslation($localeCode)->getName());
+            $this->setProductName($variant->getProduct()->getTranslation($localeCode)->getName());
         }
 
         $this->variant = $variant;
@@ -72,33 +72,33 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getImmutableProductName(): ?string
+    public function getProductName(): ?string
     {
-        return $this->immutableProductName ?: $this->variant->getProduct()->getName();
+        return $this->productName ?: $this->variant->getProduct()->getName();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setImmutableProductName(?string $immutableProductName): void
+    public function setProductName(?string $productName): void
     {
-        $this->immutableProductName = $immutableProductName;
+        $this->productName = $productName;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getImmutableVariantName(): ?string
+    public function getVariantName(): ?string
     {
-        return $this->immutableVariantName ?: $this->variant->getName();
+        return $this->variantName ?: $this->variant->getName();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setImmutableVariantName(?string $immutableVariantName): void
+    public function setVariantName(?string $variantName): void
     {
-        $this->immutableVariantName = $immutableVariantName;
+        $this->variantName = $variantName;
     }
 
     /**

@@ -35,22 +35,22 @@ interface OrderItemInterface extends BaseOrderItemInterface
     /**
      * @return string|null
      */
-    public function getImmutableProductName(): ?string;
+    public function getProductName(): ?string;
 
     /**
-     * @param string|null $immutableProductName
+     * @param string|null $productName
      */
-    public function setImmutableProductName(?string $immutableProductName): void;
+    public function setProductName(?string $productName): void;
 
     /**
      * @return string|null
      */
-    public function getImmutableVariantName(): ?string;
+    public function getVariantName(): ?string;
 
     /**
-     * @param string|null $immutableVariantName
+     * @param string|null $variantName
      */
-    public function setImmutableVariantName(?string $immutableVariantName): void;
+    public function setVariantName(?string $variantName): void;
 
     /**
      * @return int

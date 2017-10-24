@@ -142,7 +142,7 @@ final class OrderItemSpec extends ObjectBehavior
         $this->setVariant($variant);
 
         $this->getVariant()->shouldReturn($variant);
-        $this->getImmutableVariantName()->shouldReturn('Variant name');
-        $this->getImmutableProductName()->shouldReturn('Product name');
+        $this->getVariantName()->shouldReturn('Variant name');
+        $this->getProductName()->shouldReturn('Product name');
     }
 }
