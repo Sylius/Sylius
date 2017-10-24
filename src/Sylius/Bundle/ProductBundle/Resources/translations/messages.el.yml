@@ -6,17 +6,26 @@ sylius:
         product:
             name: Ονομασία
             description: Περιγραφή
+            attributes: Χαρακτηριστικά
             options: Επιλογές
             meta_keywords: Μετα-λέξεις-κλειδιά
             meta_description: Μετα-περιγραφή
+            slug: Slug
+            taxons: Ταξινομικές μονάδες
         product_variant:
             name: Ονομασία
         association_type:
             name: Ονομασία
             translations: Μεταφράσεις
+        association:
+            type: Τύπος συσχέτισης
+            product: Συσχετισμένο προϊόν
         variant:
             name: Ονομασία
         option:
             name: Ονομασία
+            position: Θέση
+            values: Πιθανές τιμές
         option_value:
+            add_value: Προσθήκη τιμής
             value: Αξία
