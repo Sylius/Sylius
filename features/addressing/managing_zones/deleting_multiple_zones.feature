@@ -1,15 +1,15 @@
 @managing_zones
 Feature: Deleting multiple zones
-    In order to remove test, obsolete or incorrect zones
+    In order to remove test, obsolete or incorrect zones in an efficient way
     As an Administrator
-    I want to be able to delete multiple zones
+    I want to be able to delete multiple zones at once
 
     Background:
         Given the store has zones "North America", "South America" and "Europe"
         And I am logged in as an administrator
 
     @ui @javascript
-    Scenario: Deleting multiple zones
+    Scenario: Deleting multiple zones at once
         When I browse zones
         And I check the "North America" zone
         And I check also the "South America" zone

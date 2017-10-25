@@ -1,8 +1,8 @@
 @managing_product_reviews
 Feature: Deleting multiple product reviews
-    In order to remove test, obsolete or incorrect product reviews
+    In order to remove test, obsolete or incorrect product reviews in an efficient way
     As an Administrator
-    I want to be able to delete multiple product reviews
+    I want to be able to delete multiple product reviews at once
 
     Background:
         Given the store has a product "Audi RS7 model"
@@ -12,7 +12,7 @@ Feature: Deleting multiple product reviews
         And I am logged in as an administrator
 
     @ui @javascript
-    Scenario: Deleting multiple product reviews
+    Scenario: Deleting multiple product reviews at once
         When I browse product reviews
         And I check the "Awesome" product review
         And I check also the "Bad" product review

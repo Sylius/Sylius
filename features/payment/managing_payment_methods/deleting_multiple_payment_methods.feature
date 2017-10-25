@@ -1,8 +1,8 @@
 @managing_payment_methods
 Feature: Deleting multiple payment methods
-    In order to remove test, obsolete or incorrect payment methods
+    In order to remove test, obsolete or incorrect payment methods in an efficient way
     As an Administrator
-    I want to be able to delete multiple payment methods
+    I want to be able to delete multiple payment methods at once
 
     Background:
         Given the store has a payment method "Offline" with a code "offline"
@@ -11,7 +11,7 @@ Feature: Deleting multiple payment methods
         And I am logged in as an administrator
 
     @ui @javascript
-    Scenario: Deleting multiple payment methods
+    Scenario: Deleting multiple payment methods at once
         When I browse payment methods
         And I check the "Offline" payment method
         And I check also the "Bank transfer" payment method

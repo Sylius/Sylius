@@ -1,8 +1,8 @@
 @managing_shipping_methods
 Feature: Deleting multiple shipping methods
-    In order to remove test, obsolete or incorrect shipping methods
+    In order to remove test, obsolete or incorrect shipping methods in an efficient way
     As an Administrator
-    I want to be able to delete multiple shipping methods
+    I want to be able to delete multiple shipping methods at once
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -10,8 +10,8 @@ Feature: Deleting multiple shipping methods
         And I am logged in as an administrator
 
     @ui @javascript
-    Scenario: Deleting multiple shipping methods
-        When I browse channels
+    Scenario: Deleting multiple shipping methods at once
+        When I browse shipping methods
         And I check the "UPS" shipping method
         And I check also the "FedEx" shipping method
         And I delete them

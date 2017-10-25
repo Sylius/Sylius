@@ -146,9 +146,31 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $tableAccessor->getFieldFromRow($table, $resourceRow, 'actions');
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function checkResourceOnPage(array $parameters): void
+    {
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
+
+        $resourceRow = $tableAccessor->getRowWithFields($table, $parameters);
+        $bulkCheckbox = $resourceRow->find('css', '.bulk-select-checkbox');
+
+        Assert::notNull($bulkCheckbox);
+
+        $bulkCheckbox->check();
+    }
+
     public function filter()
     {
         $this->getElement('filter')->press();
+    }
+
+    public function bulkDelete(): void
+    {
+        $this->getElement('bulk_actions', ['%text%' => 'Bulk actions'])->pressButton('Delete');
+        $this->getElement('confirmation_button')->click();
     }
 
     /**
@@ -173,6 +195,8 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'bulk_actions' => '.accordion:contains("%text%")',
+            'confirmation_button' => '#confirmation-button',
             'filter' => 'button:contains("Filter")',
             'table' => '.table',
         ]);

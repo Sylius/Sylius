@@ -1,8 +1,8 @@
 @managing_product_association_types
 Feature: Deleting multiple product association types
-    In order to remove test, obsolete or incorrect product association types
+    In order to remove test, obsolete or incorrect product association types in an efficient way
     As an Administrator
-    I want to be able to delete multiple product association types
+    I want to be able to delete multiple product association types at once
 
     Background:
         Given the store has a product association type "Cross sell"
@@ -11,7 +11,7 @@ Feature: Deleting multiple product association types
         And I am logged in as an administrator
 
     @ui @javascript
-    Scenario: Deleting multiple product association types
+    Scenario: Deleting multiple product association types at once
         When I browse product association types
         And I check the "Cross sell" product association type
         And I check also the "Up sell" product association type

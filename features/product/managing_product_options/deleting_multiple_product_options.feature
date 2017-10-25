@@ -1,8 +1,8 @@
-@managing_product_attributes
+@managing_product_options
 Feature: Deleting multiple product options
-    In order to remove test, obsolete or incorrect product options
+    In order to remove test, obsolete or incorrect product options in an efficient way
     As an Administrator
-    I want to be able to delete multiple product options
+    I want to be able to delete multiple product options at once
 
     Background:
         Given the store has a product option "T-Shirt size"
@@ -11,7 +11,7 @@ Feature: Deleting multiple product options
         And I am logged in as an administrator
 
     @ui @javascript
-    Scenario: Deleting multiple product options
+    Scenario: Deleting multiple product options at once
         When I browse product options
         And I check the "T-Shirt size" product option
         And I check also the "T-Shirt color" product option

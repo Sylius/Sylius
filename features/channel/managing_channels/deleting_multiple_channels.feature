@@ -1,8 +1,8 @@
 @managing_channels
 Feature: Deleting multiple channels
-    In order to remove test, obsolete or incorrect channels
+    In order to remove test, obsolete or incorrect channels in an efficient way
     As an Administrator
-    I want to be able to delete multiple channels
+    I want to be able to delete multiple channels at once
 
     Background:
         Given the store operates on a channel named "US Store"
@@ -11,7 +11,7 @@ Feature: Deleting multiple channels
         And I am logged in as an administrator
 
     @ui @javascript
-    Scenario: Deleting multiple channels
+    Scenario: Deleting multiple channels at once
         When I browse channels
         And I check the "PL Store" channel
         And I check also the "DE Store" channel

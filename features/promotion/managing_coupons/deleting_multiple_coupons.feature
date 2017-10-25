@@ -1,16 +1,17 @@
 @managing_promotion_coupons
 Feature: Deleting multiple coupons
-    In order to remove test, obsolete or incorrect coupons
+    In order to remove test, obsolete or incorrect coupons in an efficient way
     As an Administrator
-    I want to be able to delete multiple coupons from the registry
+    I want to be able to delete multiple coupons at once from the registry
 
     Background:
-        Given there is a promotion "Christmas sale"
+        Given the store operates on a single channel in "United States"
+        And there is a promotion "Christmas sale"
         And this promotion has "SANTA1", "SANTA2" and "SANTA3" coupons
         And I am logged in as an administrator
 
     @ui @javascript
-    Scenario: Deleting multiple coupons
+    Scenario: Deleting multiple coupons at once
         When I browse coupons of this promotion
         And I check the "SANTA1" coupon
         And I check also the "SANTA2" coupon

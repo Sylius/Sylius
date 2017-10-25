@@ -69,11 +69,12 @@ class ManagingShippingCategoriesContext implements Context
     }
 
     /**
+     * @Then I should see a single shipping category in the list
      * @Then I should see :numberOfShippingCategories shipping categories in the list
      */
-    public function iShouldSeeShippingCategoriesInTheList($numberOfShippingCategories)
+    public function iShouldSeeShippingCategoriesInTheList(int $numberOfShippingCategories = 1): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $numberOfShippingCategories);
+        Assert::same($this->indexPage->countItems(), $numberOfShippingCategories);
     }
 
     /**
@@ -120,6 +121,14 @@ class ManagingShippingCategoriesContext implements Context
     public function iNameIt($shippingCategoryName = null)
     {
         $this->createPage->nameIt($shippingCategoryName);
+    }
+
+    /**
+     * @Then I should see the shipping category :shippingCategoryName in the list
+     */
+    public function iShouldSeeTheShippingCategoryInTheList(string $shippingCategoryName): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $shippingCategoryName]));
     }
 
     /**
@@ -181,6 +190,22 @@ class ManagingShippingCategoriesContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When I check (also) the :shippingCategoryName shipping category
+     */
+    public function iCheckTheShippingCategory(string $shippingCategoryName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $shippingCategoryName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
     }
 
     /**

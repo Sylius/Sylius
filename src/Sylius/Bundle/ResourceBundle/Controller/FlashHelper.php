@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Inflector\Inflector;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorBagInterface;

@@ -1,8 +1,8 @@
 @managing_exchange_rates
 Feature: Deleting multiple exchange rates
-    In order to remove obsolete exchange rates
+    In order to remove obsolete exchange rates in an efficient way
     As an Administrator
-    I want to be able to delete multiple exchange rates
+    I want to be able to delete multiple exchange rates at once
 
     Background:
         Given the store has currency "Euro", "British Pound" and "Polish Zloty"
@@ -12,7 +12,7 @@ Feature: Deleting multiple exchange rates
         And I am logged in as an administrator
 
     @ui @javascript
-    Scenario: Deleting multiple exchange rates
+    Scenario: Deleting multiple exchange rates at once
         When I browse exchange rates
         And I check the exchange rate between "Euro" and "British Pound"
         And I check the exchange rate between "British Pound" and "Polish Zloty"
