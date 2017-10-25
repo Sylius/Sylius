@@ -51,7 +51,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this
             ->getElement('attribute_choice_list_element', [
                 '%index%' => $this->choiceListIndex,
-                '%localeCode%' => $localeCode
+                '%localeCode%' => $localeCode,
             ])
             ->setValue($value)
         ;
