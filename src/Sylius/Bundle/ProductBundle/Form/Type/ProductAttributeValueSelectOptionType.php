@@ -13,21 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
-use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType;
+use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueSelectOptionType;
 
-final class ProductAttributeValueType extends AttributeValueType
+/**
+ * @author Asier Marqués <asier@simettric.com>
+ */
+final class ProductAttributeValueSelectOptionType extends AttributeValueSelectOptionType
 {
+
     /**
      * {@inheritdoc}
      */
     public function getBlockPrefix(): string
     {
-        return 'sylius_product_attribute_value';
+        return 'sylius_product_attribute_value_select_option';
     }
 
-
-    protected function getAttributeValueSelectOptionTypeName(): string
-    {
-        return ProductAttributeValueSelectOptionType::class;
-    }
 }

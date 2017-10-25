@@ -17,6 +17,7 @@ use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -127,11 +128,31 @@ abstract class AttributeValueType extends AbstractResourceType
         AttributeInterface $attribute,
         ?string $localeCode = null
     ): void {
-        $form->add('value', $this->formTypeRegistry->get($attribute->getType(), 'default'), [
-            'auto_initialize' => false,
-            'configuration' => $attribute->getConfiguration(),
-            'label' => $attribute->getName(),
-            'locale_code' => $localeCode,
-        ]);
+
+        if($attribute->getType() == SelectAttributeType::TYPE)
+        {
+
+            $form->add('selectOptions', $this->getAttributeValueSelectOptionTypeName(), [
+                "attribute" => $attribute
+            ]);
+
+        }else{
+
+            $form->add('value', $this->formTypeRegistry->get($attribute->getType(), 'default'), [
+                'auto_initialize' => false,
+                'configuration' => $attribute->getConfiguration(),
+                'label' => $attribute->getName(),
+                'locale_code' => $localeCode,
+            ]);
+
+        }
+
     }
+
+
+
+    /**
+     * @return string
+     */
+    abstract protected function getAttributeValueSelectOptionTypeName(): string;
 }

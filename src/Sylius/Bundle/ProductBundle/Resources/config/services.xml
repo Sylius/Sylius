@@ -50,17 +50,5 @@
         <service id="sylius.product_variant_resolver.default" class="Sylius\Component\Product\Resolver\DefaultProductVariantResolver">
             <tag name="sylius.product_variant_resolver.default" type="default" />
         </service>
-
-        <service id="sylius.form.type.product_attribute_select_option"
-                 class="Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeSelectOptionType">
-            <argument>Sylius\Component\Product\Model\ProductAttributeSelectOption</argument>
-            <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.type.product_attribute_select_option_translation"
-                 class="Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeSelectOptionTranslationType">
-            <argument>Sylius\Component\Product\Model\ProductAttributeSelectOptionTranslation</argument>
-            <tag name="form.type" />
-        </service>
     </services>
 </container>

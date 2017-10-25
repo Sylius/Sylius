@@ -56,9 +56,11 @@ final class LoadMetadataSubscriber implements EventSubscriber
 
 
         foreach ($this->subjects as $subject => $class) {
+
             if ($class['attribute_value']['classes']['model'] === $metadata->getName()) {
                 $this->mapSubjectOnAttributeValue($subject, $class['subject'], $metadata, $metadataFactory);
                 $this->mapAttributeOnAttributeValue($class['attribute']['classes']['model'], $metadata, $metadataFactory);
+                $this->mapSelectOptionsOnAttributeValue($subject, $class['attribute_select_option']['classes']['model'], $metadata);
             }
 
             $this->mapSelectOptionRelations($class, $metadata, $metadataFactory);
@@ -77,6 +79,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
                 'fieldName'    => 'selectOptions',
                 'targetEntity' => $class['attribute_select_option']['classes']['model'],
                 'mappedBy'     => 'attribute',
+                'fetch'        => 'EAGER',
                 'cascade'      => ['persist', 'remove'],
                 'orphanRemoval'=> true
             ]);
@@ -100,6 +103,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
         }
 
     }
+
 
     /**
      * @param string $subject
@@ -131,8 +135,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
 
 
 
-
-
     /**
      * @param string $attributeClass
      * @param ClassMetadataInfo $metadata
@@ -157,6 +159,30 @@ final class LoadMetadataSubscriber implements EventSubscriber
 
         $this->mapManyToOne($metadata, $attributeMapping);
     }
+
+    /**
+     * @param string $subjectClass
+     * @param ClassMetadataInfo $metadata
+     */
+    private function mapSelectOptionsOnAttributeValue(
+        string $subject,
+        string $targetClass,
+        ClassMetadataInfo $metadata
+    ): void {
+
+        $subjectMapping = [
+            'fieldName'    => 'selectOptions',
+            'targetEntity' => $targetClass,
+            'fetch'        => 'EAGER',
+            'cascade'      => ['persist', 'remove'],
+            'joinTable'    => [
+                "name" => 'sylius_' . $subject ."_attribute_value_attribute_select_option"
+            ]
+        ];
+
+        $metadata->mapManyToMany($subjectMapping);
+    }
+
 
     /**
      * @param ClassMetadataInfo|ClassMetadata $metadata
