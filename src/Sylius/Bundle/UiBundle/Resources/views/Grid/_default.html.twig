@@ -34,7 +34,7 @@
     </div>
 {% endif %}
 
-{% if definition.actionGroups.bulk is defined %}
+{% if data|length > 0 and definition.actionGroups.bulk is defined %}
     <div class="ui hidden divider"></div>
     <div class="ui styled fluid accordion">
         <div class="title active">
@@ -64,6 +64,7 @@
     {% else %}
         {{ pagination.simple(data) }}
     {% endif %}
+
     {% if data|length > 0 %}
         <table class="ui sortable stackable celled table">
             <thead>
