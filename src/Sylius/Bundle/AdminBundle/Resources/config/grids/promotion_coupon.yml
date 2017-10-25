@@ -71,3 +71,7 @@ sylius_grid:
                 bulk:
                     delete:
                         type: delete
+                        options:
+                            link:
+                                parameters:
+                                    promotionId: $promotionId
