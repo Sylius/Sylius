@@ -79,6 +79,9 @@ sylius_admin_product_variant_bulk_delete:
             section: admin
             redirect: referer
             permission: true
+            repository:
+                method: findById
+                arguments: [$ids]
 
 sylius_admin_product_variant_delete:
     path: /{id}
