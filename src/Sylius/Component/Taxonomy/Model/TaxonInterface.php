@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, ResourceInterface, SlugAwareInterface
 {
@@ -132,4 +133,11 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
      * @param int|null $position
      */
     public function setPosition(?int $position): void;
+
+    /**
+     * @param string|null $locale
+     *
+     * @return TaxonTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface;
 }

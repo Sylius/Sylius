@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 interface PaymentMethodInterface extends
     CodeAwareInterface,
@@ -75,4 +76,11 @@ interface PaymentMethodInterface extends
      * @param int|null $position
      */
     public function setPosition(?int $position): void;
+
+    /**
+     * @param string|null $locale
+     *
+     * @return PaymentMethodTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface;
 }
