@@ -76,6 +76,7 @@ sylius:
         date: 'Ημερομηνία'
         datetime: 'Ημερομηνία και ώρα'
         default_locale: 'Προεπιλεγμένες τοπικές ρυθμίσεις'
+        delete: 'Διαγραφή'
         description: 'Περιγραφή'
         editing_country: 'Επεξεργασία χώρας'
         editing_zone: 'Επεξεργασία ζώνης'
