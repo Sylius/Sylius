@@ -25,7 +25,7 @@ Feature: Deleting a product
         Then I should be notified that this product cannot be deleted
         And the product "Lamborghini Gallardo model" should still be in the shop
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Deleting used product should not remove the image
         Given this product has an image "lamborghini.jpg" with "thumbnail" type
         And there is a customer "batman@dc.com" that placed an order

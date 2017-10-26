@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterConfiguration;
@@ -21,6 +22,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\ImagesRemoveListener;
 use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\ImagesAwareInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 
 final class ImagesRemoveListenerSpec extends ObjectBehavior
@@ -40,10 +42,12 @@ final class ImagesRemoveListenerSpec extends ObjectBehavior
         CacheManager $cacheManager,
         FilterManager $filterManager,
         LifecycleEventArgs $event,
+        ImagesAwareInterface $imagesAwareEntity,
         ImageInterface $image,
         FilterConfiguration $filterConfiguration
     ): void {
-        $event->getEntity()->willReturn($image);
+        $event->getEntity()->willReturn($imagesAwareEntity);
+        $imagesAwareEntity->getImages()->willReturn(new ArrayCollection([$image->getWrappedObject()]));
         $image->getPath()->willReturn('image/path');
 
         $filterManager->getFilterConfiguration()->willReturn($filterConfiguration);
@@ -54,7 +58,7 @@ final class ImagesRemoveListenerSpec extends ObjectBehavior
         $this->postRemove($event);
     }
 
-    function it_does_nothing_if_entity_is_not_image(
+    function it_does_nothing_if_entity_is_not_image_aware(
         ImageUploaderInterface $imageUploader,
         CacheManager $cacheManager,
         FilterManager $filterManager,

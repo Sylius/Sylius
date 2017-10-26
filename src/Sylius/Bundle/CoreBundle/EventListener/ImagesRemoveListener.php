@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
-use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\ImagesAwareInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 
 final class ImagesRemoveListener
@@ -39,11 +39,16 @@ final class ImagesRemoveListener
 
     public function postRemove(LifecycleEventArgs $event): void
     {
-        $image = $event->getEntity();
+        $entity = $event->getEntity();
 
-        if ($image instanceof ImageInterface) {
-            $this->imageUploader->remove($image->getPath());
-            $this->cacheManager->remove($image->getPath(), array_keys($this->filterManager->getFilterConfiguration()->all()));
+        if ($entity instanceof ImagesAwareInterface) {
+            foreach ($entity->getImages() as $image) {
+                $this->imageUploader->remove($image->getPath());
+                $this->cacheManager->remove(
+                    $image->getPath(),
+                    array_keys($this->filterManager->getFilterConfiguration()->all())
+                );
+            }
         }
     }
 }
