@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
@@ -130,6 +131,14 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $deletedRow = $tableAccessor->getRowWithFields($table, $parameters);
         $actionButtons = $tableAccessor->getFieldFromRow($table, $deletedRow, 'actions');
 
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            $button = $actionButtons->find('css', 'button:contains("Delete")');
+            $button->press();
+            $this->getElement('confirmation_button')->click();
+
+            return;
+        }
+
         $actionButtons->pressButton('Delete');
     }
 
@@ -173,6 +182,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'confirmation_button' => '#confirmation-button',
             'filter' => 'button:contains("Filter")',
             'table' => '.table',
         ]);

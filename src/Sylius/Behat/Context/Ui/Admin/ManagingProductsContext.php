@@ -251,10 +251,10 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then the product :productName should appear in the store
-     * @Then the product :productName should be in the shop
+     * @Then the product :productName should (still) be in the shop
      * @Then this product should still be named :productName
      */
-    public function theProductShouldAppearInTheShop($productName)
+    public function theProductShouldAppearInTheShop(string $productName): void
     {
         $this->iWantToBrowseProducts();
 
@@ -660,11 +660,21 @@ final class ManagingProductsContext implements Context
     /**
      * @Then /^(?:this product|the product "[^"]+"|it) should(?:| also) have an image with "([^"]*)" type$/
      */
-    public function thisProductShouldHaveAnImageWithType($type)
+    public function thisProductShouldHaveAnImageWithType(string $type): void
     {
         $currentPage = $this->resolveCurrentPage();
 
         Assert::true($currentPage->isImageWithTypeDisplayed($type));
+    }
+
+    /**
+     * @Then /^(this product) should still have an image with "([^"]*)" type$/
+     */
+    public function thisProductShouldStillHaveAnImageWithType(ProductInterface $product, string $type): void
+    {
+        $this->iWantToModifyAProduct($product);
+
+        $this->thisProductShouldHaveAnImageWithType($type);
     }
 
     /**
@@ -935,6 +945,17 @@ final class ManagingProductsContext implements Context
         Assert::same(
             $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $language),
             sprintf('This value is too short. It should have %s characters or more.', $number)
+        );
+    }
+
+    /**
+     * @Then I should be notified that this product cannot be deleted
+     */
+    public function iShouldBeNotifiedThatThisProductCannotBeDeleted(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'Error Cannot delete, the product is in use.',
+            NotificationType::failure()
         );
     }
 
