@@ -46,18 +46,6 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
      */
     public function setVariant(?ProductVariantInterface $variant): void
     {
-        /** @var OrderInterface $order */
-        $order = $this->getOrder();
-        $localeCode = $order ? $order->getLocaleCode() : null;
-
-        if (null !== $variant) {
-            $this->setVariantName($variant->getTranslation($localeCode)->getName());
-        }
-
-        if (null !== $variant && null !== $variant->getProduct()) {
-            $this->setProductName($variant->getProduct()->getTranslation($localeCode)->getName());
-        }
-
         $this->variant = $variant;
     }
 

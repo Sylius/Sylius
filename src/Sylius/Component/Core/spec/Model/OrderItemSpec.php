@@ -120,29 +120,4 @@ final class OrderItemSpec extends ObjectBehavior
     {
         $this->getVariant()->shouldReturn(null);
     }
-
-    function it_sets_immutable_names_and_codes_during_setting_a_variant(
-        OrderInterface $order,
-        ProductVariantInterface $variant,
-        ProductVariantTranslationInterface $variantTranslation,
-        ProductInterface $product,
-        ProductTranslationInterface $productTranslation
-    ): void {
-        $order->hasItem($this)->willReturn(true);
-        $order->getLocaleCode()->willReturn('en_US');
-
-        $variant->getProduct()->willReturn($product);
-        $variant->getTranslation('en_US')->willReturn($variantTranslation);
-        $variantTranslation->getName()->willReturn('Variant name');
-
-        $product->getTranslation('en_US')->willReturn($productTranslation);
-        $productTranslation->getName()->willReturn('Product name');
-
-        $this->setOrder($order);
-        $this->setVariant($variant);
-
-        $this->getVariant()->shouldReturn($variant);
-        $this->getVariantName()->shouldReturn('Variant name');
-        $this->getProductName()->shouldReturn('Product name');
-    }
 }
