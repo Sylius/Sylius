@@ -16,6 +16,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Sylius\Component\User\Model\UserAwareInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface, ProductReviewerInterface
 {
@@ -60,4 +61,14 @@ interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface, P
      * @return bool
      */
     public function hasUser(): bool;
+
+    /**
+     * @return ShopUserInterface|UserInterface|null
+     */
+    public function getUser(): ?UserInterface;
+
+    /**
+     * @param ShopUserInterface|UserInterface|null $user
+     */
+    public function setUser(?UserInterface $user);
 }

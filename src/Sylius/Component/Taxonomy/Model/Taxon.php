@@ -16,11 +16,13 @@ namespace Sylius\Component\Taxonomy\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 class Taxon implements TaxonInterface
 {
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
+        getTranslation as private doGetTranslation;
     }
 
     /**
@@ -316,6 +318,19 @@ class Taxon implements TaxonInterface
     public function setPosition(?int $position): void
     {
         $this->position = $position;
+    }
+
+    /**
+     * @param string|null $locale
+     *
+     * @return TaxonTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var TaxonTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
     }
 
     /**

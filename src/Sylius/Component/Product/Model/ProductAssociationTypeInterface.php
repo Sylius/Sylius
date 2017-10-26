@@ -17,6 +17,7 @@ use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 interface ProductAssociationTypeInterface extends
     CodeAwareInterface,
@@ -33,4 +34,11 @@ interface ProductAssociationTypeInterface extends
      * @param string|null $name
      */
     public function setName(?string $name): void;
+
+    /**
+     * @param null|string $locale
+     *
+     * @return ProductAssociationTypeTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface;
 }

@@ -17,12 +17,14 @@ use Sylius\Component\Resource\Model\ArchivableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 class ShippingMethod implements ShippingMethodInterface
 {
     use ArchivableTrait, TimestampableTrait, ToggleableTrait;
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
+        getTranslation as private doGetTranslation;
     }
 
     /**
@@ -209,6 +211,19 @@ class ShippingMethod implements ShippingMethodInterface
     public function setConfiguration(array $configuration): void
     {
         $this->configuration = $configuration;
+    }
+
+    /**
+     * @param string|null $locale
+     *
+     * @return ShippingMethodTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var ShippingMethodTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
     }
 
     /**

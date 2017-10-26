@@ -19,6 +19,7 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 use Webmozart\Assert\Assert;
 
 class Product implements ProductInterface
@@ -26,6 +27,7 @@ class Product implements ProductInterface
     use TimestampableTrait, ToggleableTrait;
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
+        getTranslation as private doGetTranslation;
     }
 
     /**
@@ -433,6 +435,19 @@ class Product implements ProductInterface
     public function isConfigurable(): bool
     {
         return !$this->isSimple();
+    }
+
+    /**
+     * @param string|null $locale
+     *
+     * @return ProductTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var ProductTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
     }
 
     /**

@@ -21,6 +21,7 @@ use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 interface ProductInterface extends
     AttributeSubjectInterface,
@@ -149,4 +150,11 @@ interface ProductInterface extends
      * @return bool
      */
     public function isConfigurable(): bool;
+
+    /**
+     * @param string|null $locale
+     *
+     * @return ProductTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface;
 }

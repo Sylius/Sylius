@@ -15,12 +15,14 @@ namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 class ProductAssociationType implements ProductAssociationTypeInterface
 {
     use TimestampableTrait;
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
+        getTranslation as private doGetTranslation;
     }
 
     /**
@@ -92,6 +94,19 @@ class ProductAssociationType implements ProductAssociationTypeInterface
     public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
+    }
+
+    /**
+     * @param string|null $locale
+     *
+     * @return ProductAssociationTypeTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var ProductAssociationTypeTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
     }
 
     /**
