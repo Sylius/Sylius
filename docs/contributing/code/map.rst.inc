@@ -1,3 +1,4 @@
+* :doc:`/contributing/code/bc`
 * :doc:`/contributing/code/bugs`
 * :doc:`/contributing/code/patches`
 * :doc:`/contributing/code/security`
