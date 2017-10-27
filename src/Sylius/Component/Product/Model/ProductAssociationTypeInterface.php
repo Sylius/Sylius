@@ -36,7 +36,7 @@ interface ProductAssociationTypeInterface extends
     public function setName(?string $name): void;
 
     /**
-     * @param null|string $locale
+     * @param string|null $locale
      *
      * @return ProductAssociationTypeTranslationInterface
      */
