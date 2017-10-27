@@ -1,0 +1,14 @@
+{
+    "id": @integer@,
+    "code": "mob",
+    "name": "Channel for mobile",
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "enabled": true,
+    "taxCalculationStrategy": "order_items_based",
+    "_links": {
+        "self": {
+            "href": @string@
+        }
+    }
+}
