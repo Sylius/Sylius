@@ -15,10 +15,9 @@ framework:
     default_locale: "%locale%"
     session:
         handler_id: ~
+        storage_id: session.storage.mock_file
     http_method_override: true
     test: ~
-    session:
-        storage_id: session.storage.mock_file
 
 twig:
     debug: "%kernel.debug%"
