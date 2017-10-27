@@ -53,7 +53,8 @@ final class SettingsRequirements extends RequirementCollection
                 $this->hasSufficientMemory(),
                 false,
                 $translator->trans('sylius.installer.settings.memory_limit.help', [])
-            ));
+            ))
+        ;
     }
 
     /**
@@ -92,12 +93,13 @@ final class SettingsRequirements extends RequirementCollection
      * @see https://github.com/composer/composer/blob/master/bin/composer#L26
      *
      * @param $value
+     *
      * @return int
      */
-    private function getMemoryInBytes($value)
+    private function getMemoryInBytes($value): int
     {
         $unit = strtolower(substr($value, -1, 1));
-        $value = (int)$value;
+        $value = (int) $value;
         switch ($unit) {
             case 'g':
                 $value *= 1024;
@@ -108,6 +110,7 @@ final class SettingsRequirements extends RequirementCollection
             case 'k':
                 $value *= 1024;
         }
+
         return $value;
     }
 }
