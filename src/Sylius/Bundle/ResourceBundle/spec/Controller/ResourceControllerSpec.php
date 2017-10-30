@@ -1348,6 +1348,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
         EventDispatcherInterface $eventDispatcher,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        ContainerInterface $container,
         ResourceControllerEvent $firstPreEvent,
         ResourceControllerEvent $secondPreEvent,
         ResourceControllerEvent $firstPostEvent,
@@ -1364,6 +1366,10 @@ final class ResourceControllerSpec extends ObjectBehavior
         $configuration->getPermission(ResourceActions::BULK_DELETE)->willReturn('sylius.product.bulk_delete');
         $request->request = new ParameterBag(['_csrf_token' => 'xyz']);
 
+        $container->has('security.csrf.token_manager')->willReturn(true);
+        $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
+        $csrfTokenManager->isTokenValid(new CsrfToken('bulk_delete', 'xyz'))->willReturn(true);
+
         $eventDispatcher
             ->dispatchMultiple(ResourceActions::BULK_DELETE, $configuration, [$firstResource, $secondResource])
             ->shouldBeCalled()
@@ -1373,6 +1379,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resourcesCollectionProvider->get($configuration, $repository)->willReturn([$firstResource, $secondResource]);
 
         $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
 
         $eventDispatcher
             ->dispatchPreEvent(ResourceActions::DELETE, $configuration, $firstResource)

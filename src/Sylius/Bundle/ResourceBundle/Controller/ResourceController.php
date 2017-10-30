@@ -469,6 +469,13 @@ class ResourceController extends Controller
         $this->isGrantedOr403($configuration, ResourceActions::BULK_DELETE);
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
+        if (
+            $configuration->isCsrfProtectionEnabled() &&
+            !$this->isCsrfTokenValid(ResourceActions::BULK_DELETE, $request->request->get('_csrf_token')))
+        {
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
+        }
+
         $this->eventDispatcher->dispatchMultiple(ResourceActions::BULK_DELETE, $configuration, $resources);
 
         foreach ($resources as $resource) {
