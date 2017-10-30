@@ -15,7 +15,12 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTranslationInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 
 final class OrderItemSpec extends ObjectBehavior
 {
@@ -109,5 +114,10 @@ final class OrderItemSpec extends ObjectBehavior
         $this->addUnit($secondUnit);
 
         $this->getSubtotal()->shouldReturn(19000);
+    }
+
+    function it_has_no_variant_by_default(): void
+    {
+        $this->getVariant()->shouldReturn(null);
     }
 }
