@@ -48,6 +48,15 @@ interface GridRendererInterface
 
     /**
      * @param GridViewInterface $gridView
+     * @param Action $bulkAction
+     * @param mixed|null $data
+     *
+     * @return mixed
+     */
+    public function renderBulkAction(GridViewInterface $gridView, Action $bulkAction, $data = null);
+
+    /**
+     * @param GridViewInterface $gridView
      * @param Filter $filter
      *
      * @return mixed

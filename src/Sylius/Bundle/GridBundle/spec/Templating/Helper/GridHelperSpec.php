@@ -56,6 +56,15 @@ final class GridHelperSpec extends ObjectBehavior
         $this->renderAction($gridView, $action)->shouldReturn('<a href="#">Go go Gadget arms!</a>');
     }
 
+    function it_uses_a_grid_renderer_to_render_a_bulk_action(
+        GridRendererInterface $gridRenderer,
+        GridView $gridView,
+        Action $bulkAction
+    ): void {
+        $gridRenderer->renderBulkAction($gridView, $bulkAction, null)->willReturn('<a href="#">Delete</a>');
+        $this->renderBulkAction($gridView, $bulkAction)->shouldReturn('<a href="#">Delete</a>');
+    }
+
     function it_has_name(): void
     {
         $this->getName()->shouldReturn('sylius_grid');

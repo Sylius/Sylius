@@ -222,6 +222,22 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I check (also) the :productVariantName product variant
+     */
+    public function iCheckTheProductVariantName(string $productVariantName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $productVariantName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
      * @Then /^the (variant with code "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
      */
     public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, $price, $channelName)
