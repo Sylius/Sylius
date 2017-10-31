@@ -181,11 +181,6 @@ final class ProductAttributeContext implements Context
      */
     public function theStoreHasASelectProductAttributeWithValue(string $name, string ...$values): void
     {
-        $choices = [];
-        foreach ($values as $value) {
-            $choices[$this->faker->uuid] = ['en_US' => $value];
-        }
-
         $productAttribute = $this->createProductAttribute(SelectAttributeType::TYPE, $name);
         $productAttribute->setConfiguration([
             'multiple' => true,
@@ -386,6 +381,33 @@ final class ProductAttributeContext implements Context
     }
 
     /**
+     * @param array $options
+     * @param ProductAttributeInterface $attribute
+     * @param string $localeCode
+     *
+     * @return ProductAttributeValueInterface
+     */
+    private function createProductAttributeSelectValue(
+        array $options,
+        ProductAttributeInterface $attribute,
+        string $localeCode = 'en_US'
+    ): ProductAttributeValueInterface {
+        /** @var ProductAttributeValueInterface $attributeValue */
+        $attributeValue = $this->productAttributeValueFactory->createNew();
+        $attributeValue->setAttribute($attribute);
+        $attributeValue->setLocaleCode($localeCode);
+
+        foreach ($options as $option)
+        {
+            $attributeValue->addSelectOption($option);
+        }
+
+        $this->objectManager->persist($attributeValue);
+
+        return $attributeValue;
+    }
+
+    /**
      * @param ProductAttributeInterface $productAttribute
      */
     private function saveProductAttribute(ProductAttributeInterface $productAttribute)
@@ -406,20 +428,19 @@ final class ProductAttributeContext implements Context
         array $values,
         string $localeCode = 'en_US'
     ): void {
+
         $attribute = $this->provideProductAttribute(SelectAttributeType::TYPE, $productAttributeName);
 
-        $choices = $attribute->getConfiguration()['choices'];
-        $choiceKeys = [];
+        $options = [];
         foreach ($values as $value) {
-            foreach ($choices as $choiceKey => $choiceValues) {
-                $key = array_search($value, $choiceValues);
-                if ($localeCode === $key) {
-                    $choiceKeys[] = $choiceKey;
-                }
+            foreach ($attribute->getSelectOptions() as $option)
+            {
+                if($value == $option->getName())
+                    $options[] = $option;
             }
         }
 
-        $attributeValue = $this->createProductAttributeValue($choiceKeys, $attribute, $localeCode);
+        $attributeValue = $this->createProductAttributeSelectValue($options, $attribute, $localeCode);
         $product->addAttribute($attributeValue);
 
         $this->objectManager->flush();
