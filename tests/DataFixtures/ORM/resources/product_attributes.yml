@@ -47,16 +47,17 @@ Sylius\Component\Product\Model\ProductAttribute:
         storage_type: json
         configuration:
             multiple: true
+        selectOptions: ["@productAttributeSelectOption1", "@productAttributeSelectOption2"]
         translations:
             - "@attributeTranslation5"
 
 Sylius\Component\Product\Model\ProductAttributeSelectOptionTranslation:
     productAttributeSelectOptionTranslation1:
-        locale: de
+        locale: en_US
         name: green
         translatable: "@productAttributeSelectOption1"
     productAttributeSelectOptionTranslation2:
-        locale: de
+        locale: en_US
         name: yellow
         translatable: "@productAttributeSelectOption2"
 

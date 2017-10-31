@@ -20,6 +20,7 @@
                 "id": @integer@,
                 "code": "mug_collection",
                 "type": "text",
+                "selectOptions": [],
                 "position": 0,
                 "translations": {
                     "de": {
@@ -43,6 +44,28 @@
                 "id": @integer@,
                 "code": "mug_color",
                 "type": "select",
+                "selectOptions": [
+                    {
+                        "id": @integer@,
+                        "translations": {
+                            "en_US": {
+                                "id": @integer@,
+                                "locale": "en_US",
+                                "name": "green"
+                            }
+                        }
+                    },
+                    {
+                        "id": @integer@,
+                        "translations": {
+                            "en_US": {
+                                "id": @integer@,
+                                "locale": "en_US",
+                                "name": "yellow"
+                            }
+                        }
+                    }
+                ],
                 "position": 1,
                 "translations": {
                       "en_US": {
