@@ -31,8 +31,7 @@ use Sylius\Component\Product\Model\ProductAttributeTranslation;
 use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Sylius\Component\Product\Model\ProductAttributeValueSelectOption;
-use Sylius\Component\Product\Model\ProductAttributeValueSelectOptionInterface;
+use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -98,6 +97,7 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
                         'classes' => [
                             'model'      => ProductAttributeSelectOption::class,
                             'interface'  => ProductAttributeSelectOptionInterface::class,
+                            'factory'    => TranslatableFactory::class,
                             'form'       => ProductAttributeSelectOptionType::class
                         ],
                         'translation' => [

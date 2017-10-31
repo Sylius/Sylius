@@ -43,8 +43,6 @@
             <tag name="form.type" />
         </service>
 
-
-
         <service id="sylius.form_registry.attribute_type" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
 
         <service id="sylius.form.type.attribute_type_choice" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType">

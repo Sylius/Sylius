@@ -80,9 +80,13 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function deleteAttributeValue(string $value): void
     {
-        $attributeChoiceElement = $this
-            ->getElement('attribute_choice_list_element', ['%value%' => $value])
-            ->getParent()->getParent()->getParent()->getParent()
+        $attributeChoiceElement = $this->getElement('attribute_choice_list_element', ['%value%' => $value])
+            ->getParent()
+            ->getParent()
+            ->getParent()
+            ->getParent()
+            ->getParent()
+            ->getParent()
         ;
         $attributeChoiceElement->clickLink('Delete');
     }
@@ -94,7 +98,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'attribute_choice_list_element' => 'input[value="%value%"]',
-            'attribute_choices' => '#sylius_product_attribute_configuration_choices',
+            'attribute_choices' => '#sylius_product_attribute_selectOptions',
             'code' => '#sylius_product_attribute_code',
             'type' => '#sylius_product_attribute_type',
             'name' => '#sylius_product_attribute_translations_en_US_name',

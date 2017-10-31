@@ -99,7 +99,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'attribute_choice_list' => 'div[data-form-collection="list"]',
-            'attribute_choice_list_element' => '#sylius_product_attribute_configuration_choices_%index%_%localeCode%',
+            'attribute_choice_list_element' => '#sylius_product_attribute_selectOptions_%index%_translations_en_US_name',
             'code' => '#sylius_product_attribute_code',
             'max' => '#sylius_product_attribute_configuration_max',
             'min' => '#sylius_product_attribute_configuration_min',

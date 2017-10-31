@@ -25,7 +25,6 @@ use Sylius\Component\Attribute\Model\AttributeSelectOptionTranslation;
 use Sylius\Component\Attribute\Model\AttributeSelectOptionTranslationInterface;
 use Sylius\Component\Attribute\Model\AttributeTranslation;
 use Sylius\Component\Attribute\Model\AttributeTranslationInterface;
-use Sylius\Component\Attribute\Model\AttributeValueSelectOption;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -111,7 +110,7 @@ final class Configuration implements ConfigurationInterface
                                             ->scalarNode('interface')->defaultValue(AttributeSelectOptionInterface::class)->cannotBeEmpty()->end()
                                             ->scalarNode('controller')->cannotBeEmpty()->end()
                                             ->scalarNode('repository')->defaultValue(AttributeSelectOptionRepository::class)->cannotBeEmpty()->end()
-                                            ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
+                                            ->scalarNode('factory')->cannotBeEmpty()->end()
                                             ->scalarNode('form')->defaultValue(AttributeSelectOptionType::class)->cannotBeEmpty()->end()
                                         ->end()
                                     ->end()

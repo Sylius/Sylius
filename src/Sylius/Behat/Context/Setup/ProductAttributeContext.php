@@ -18,6 +18,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
+use Sylius\Component\Attribute\Factory\AttributeSelectOptionFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
@@ -43,6 +44,11 @@ final class ProductAttributeContext implements Context
     private $productAttributeFactory;
 
     /**
+     * @var AttributeSelectOptionFactoryInterface
+     */
+    private $productAttributeSelectOptionFactory;
+
+    /**
      * @var FactoryInterface
      */
     private $productAttributeValueFactory;
@@ -57,10 +63,13 @@ final class ProductAttributeContext implements Context
      */
     private $faker;
 
+
     /**
+     * ProductAttributeContext constructor.
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $productAttributeRepository
      * @param AttributeFactoryInterface $productAttributeFactory
+     * @param AttributeSelectOptionFactoryInterface $productAttributeSelectOptionFactory
      * @param FactoryInterface $productAttributeValueFactory
      * @param ObjectManager $objectManager
      */
@@ -68,12 +77,14 @@ final class ProductAttributeContext implements Context
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productAttributeRepository,
         AttributeFactoryInterface $productAttributeFactory,
+        AttributeSelectOptionFactoryInterface $productAttributeSelectOptionFactory,
         FactoryInterface $productAttributeValueFactory,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productAttributeRepository = $productAttributeRepository;
         $this->productAttributeFactory = $productAttributeFactory;
+        $this->productAttributeSelectOptionFactory = $productAttributeSelectOptionFactory;
         $this->productAttributeValueFactory = $productAttributeValueFactory;
         $this->objectManager = $objectManager;
 
@@ -178,10 +189,18 @@ final class ProductAttributeContext implements Context
         $productAttribute = $this->createProductAttribute(SelectAttributeType::TYPE, $name);
         $productAttribute->setConfiguration([
             'multiple' => true,
-            'choices' => $choices,
             'min' => null,
             'max' => null,
         ]);
+
+        foreach ($values as $value) {
+            $selectOption = $this->productAttributeSelectOptionFactory->createForAttribute($productAttribute);
+            $selectOption->setName($value);
+            $selectOption->setCurrentLocale("en_US");
+            $selectOption->setFallbackLocale("en_US");
+            $productAttribute->addSelectOption($selectOption);
+        }
+
 
         $this->saveProductAttribute($productAttribute);
     }
