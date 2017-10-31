@@ -4,4 +4,21 @@
 sylius:
     form:
         customer:
+            first_name: שם פרטי
+            group: קבוצה
+            last_name: שם משפחה
+            email: דואר אלקטרוני
             phone_number: מספר טלפון
+            gender: מין
+            birthday: תאריך לידה
+            billing_address: כתובת לחשבונית
+            different_billing_address: השתמש בכתובת שונה על חשבונית?
+            only_customer_registration: צור חשבון?
+            subscribed_to_newsletter: הצטרף לרשימת הדיוור
+        customer_group:
+            name: שם
+            roles: תפקידים
+    gender:
+        unknown: לא ידוע
+        male: זכר
+        female: נקבה

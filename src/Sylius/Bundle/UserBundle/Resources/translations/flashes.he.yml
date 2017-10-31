@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        expire_password_reset_token: 'פג תוקף לאסימון איפוס סיסמה.'
+        change_password: 'סיסמה הוחלפה בהצלחה!'
+        reset_password: 'תהליך שחזור סיסמה הסתיים בהצלחה!'
+        reset_password_request: 'אם הדוא"ל שציינתם קיים במערכת, שלחנו לכם הוראות כיצד לאפס את הסיסמה.'
+        verify_email: 'כתובת הדוא"ל שלך אומתה בהצלחה.'
+        verify_email_by_invalid_token: 'אסימון אימות אינו חוקי.'
+        verify_email_request: 'הודעת עם קישור אימות נשלחה לכתובת הדוא"ל לשלך.'
+        verify_no_user: 'אין משתמשים המחוברים באותה עת.'
+        verify_verified_email: 'הדוא"ל שלך כבר מאומת.'

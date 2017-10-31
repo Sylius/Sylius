@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        accept: 'סקירה התקבלה בהצלחה.'
+        reject: 'סקירה נדחתה בהצלחה.'
+        wait_for_the_acceptation: 'סקירה שלך מחכה לביקורת.'

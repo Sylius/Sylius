@@ -3,6 +3,10 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Var god ange en basvaluta för kanalen.
+        default_locale:
+            not_blank: Var god ange ett standardspråk för kanalen.
         contact_email:
             invalid: E-postadressen är ogiltig.
             max: E-posten får inte vara längre än {{ limit }} tecken.
@@ -20,9 +24,17 @@ sylius:
             not_blank: Skriv din e-postadress.
         message:
             not_blank: Vänligen ange ditt meddelande.
+    currency:
+        enabled:
+            cannot_disable_base: Basvalutan kan inte avaktiveras.
+    customer:
+        currency_code:
+            not_valid: Valutakoden du angav är ogiltig.
     cart_item:
         not_available: '%itemName% har inte tillräckligt lager.'
     order:
+        currency_code:
+            not_valid: Valutakoden du angav är ogiltig.
         payment_method_eligibility: 'Den här betalningsmetoden %paymentMethodName% har inaktiverats. Vänligen välj en ny betalningsmetod.'
         product_eligibility: 'Denna produkt %productName% har inaktiverats.'
         shipping_method_eligibility: 'Produkten passar inte kraven för %shippingMethodName% leveransmetoden. Vänligen välj en ny leveransmetod.'
@@ -30,6 +42,11 @@ sylius:
         code:
             not_blank: Var god ange språkkod.
             unique: Detta språk finns redan.
+        enabled:
+            cannot_disable_base: Basspråket kan inte avaktiveras.
+    product:
+        variants:
+            all_prices_defined: Du måste definiera produktvarianternas priser för den nyligen tilldelade kanalen först.
     product_attribute:
         invalid: Positionen måste vara ett heltal.
     product_image:
@@ -39,6 +56,20 @@ sylius:
     product_variant:
         original_price:
             min: Ursprungliga priset får inte vara negativt.
+        weight:
+            min: Vikt kan inte vara negativ.
+            invalid: Vikt måste vara ett tal.
+        width:
+            min: Bredd kan inte vara negativ.
+            invalid: Bredd måste vara ett tal.
+        height:
+            min: Höjd kan inte vara negativ.
+            invalid: Höjd måste vara ett tal.
+        depth:
+            min: Djup kan inte vara negativt.
+            invalid: Djup måste vara ett tal.
+        channel_pricing:
+            all_defined: 'Du måste ange ett pris för varje kanal.'
     product_translation:
         short_description:
             max: En kort beskrivning kan inte vara längre än {{ limit }} tecken.
@@ -49,6 +80,8 @@ sylius:
     user:
         email:
             unique: Den här e-posten används redan.
+            min: E-posten måste ha minst {{ min }} tecken.
+            max: E-posten måste ha som mest {{ max }} tecken.
             invalid: E-postadressen är ogiltig.
         username:
             unique: Detta användarnamn används redan.

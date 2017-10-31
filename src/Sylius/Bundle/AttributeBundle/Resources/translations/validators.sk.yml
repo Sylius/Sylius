@@ -11,6 +11,11 @@ sylius:
             not_blank: Prosím, zadajte kód vlastnosti.
             regex: Kód vlastnosti môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
             unique: Tento kód sa už používa.
+        configuration:
+            max_entries: Nastavenie maximálneho počtu hodnôt musí byť väčšie alebo rovné minimálnemu počtu hodnôt.
+            max_length: Nastavenie maximálnej dĺžky musí byť väčšie alebo rovné minimálnej dĺžke.
+            min_entries: Nastavenie minimálneho počtu hodnôt musí nižšie alebo rovné počtu pridaných možností.
+            multiple: Nastavenia viacerých musí byť povolené ak min. alebo max. počet hodnôt je nastavený.
         presentation:
             not_blank: Zadajte verejný názov vlastnosti.
             min_length: Verejný názov vlastnosti musí mať dĺžku aspoň 1 znak.|Verejný názov vlastnosti musí mať dĺžku aspoň {{ limit }} znakov.

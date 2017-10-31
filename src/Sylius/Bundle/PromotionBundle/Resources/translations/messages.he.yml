@@ -8,4 +8,6 @@ sylius:
         promotion_rule:
             shipping_country_configuration:
                 country: מדינה
+            taxonomy_configuration:
+                taxons: קבוצות טקסונומיות
             type: סוג

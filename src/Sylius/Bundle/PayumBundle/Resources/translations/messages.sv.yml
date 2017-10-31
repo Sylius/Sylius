@@ -10,7 +10,11 @@ sylius:
                 password: Lösenord
                 signature: Signatur
                 username: Användarnanm
+                sandbox: Sandlåda
     payum_gateway_factory:
         offline: Offline
         paypal_express_checkout: PayPal express checkout
         stripe_checkout: Stripe checkout
+    payum_action:
+        payment:
+            description: Betalning innehåller %items% artikel med ett totalt värde av %total%|Betalning innehåller %items% artiklar med ett totalt värde av %total%

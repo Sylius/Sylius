@@ -8,3 +8,4 @@ sylius:
                 catalog:
                     attributes: מאפיינים
                     options: אפשרויות
+                    taxons: קבוצות טקסונומיות

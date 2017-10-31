@@ -9,3 +9,23 @@ sylius:
             attributes: מאפיינים
             options: אפשרויות
             meta_keywords: מילות מפתח
+            meta_description: תיאור Meta
+            slug: שם מקוצר לשימוש בקישורים
+            taxons: קבוצות טקסונומיות
+        product_variant:
+            name: שם גרסה
+        association_type:
+            name: שם מקשור
+            translations: תרגומים
+        association:
+            type: סוג משקור
+            product: מוצר מקושר
+        variant:
+            name: שם גירסה
+        option:
+            name: שם הגדרה
+            position: מיקום
+            values: ערכים אפשריים
+        option_value:
+            add_value: הוסיפו ערך
+            value: ערך
