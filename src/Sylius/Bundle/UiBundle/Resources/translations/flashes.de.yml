@@ -3,7 +3,7 @@
 
 sylius:
     channel:
-        delete_error: 'Der Kanal kann nicht gelöscht werden. Mindestens ein aktivierter Kanal ist erforderlich.'
+        delete_error: 'Der Kanal kann nicht gelöscht werden. Mindestens ein aktivierter Kanal wird benötigt.'
     checkout:
         complete_error: 'Es trat ein unerwartetes Problem beim verarbeiten der Bestellung auf. Bitte versuchen Sie es noch einmal.'
     contact:

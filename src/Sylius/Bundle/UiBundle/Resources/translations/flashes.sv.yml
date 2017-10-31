@@ -2,6 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        delete_error: 'Kanalen kan inte raderas. Det krävs minst en aktiverad kanal.'
     checkout:
         complete_error: 'Ett oväntat problem uppstod vid slutförandet av din order. Var god försök lägga din order igen.'
     contact:
@@ -9,6 +11,7 @@ sylius:
         request_error: 'Ett problem uppstod när kontaktförfrågan skickades. Försök igen senare.'
     customer:
         add_address: 'Adressen har lagts till.'
+        impersonate: 'Lyckades personifiera kund %name%.'
         set_address_as_default: 'Adressen har ställts in som standard.'
     order:
         apply_state_machine_transition_error: 'Ett oväntat problem uppstod vid uppdaterandet av din order. Var god försök uppdatera din order igen.'

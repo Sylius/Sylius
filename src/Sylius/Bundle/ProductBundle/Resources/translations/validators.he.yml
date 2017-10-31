@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    product:
+        sku:
+            not_blank: אנא הזינו מספר קטלוגי (מק"ט, SKU) של המוצר.
+            unique: מק"ט מוצר SKU חייב להיות ייחודי.
+        name:
+            min_length: אורך שם המוצר חייב להיות לפחות 1 תו. | אורך שם המוצר עד {{ limit }} תווים.
