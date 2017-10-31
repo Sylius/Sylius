@@ -68,9 +68,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function addAttributeValue(string $value, string $localeCode): void
     {
         $this->getDocument()->clickLink('Add');
-        $this
-            ->getLastAttributeChoiceElement()
-            ->find('css', 'div[data-locale="' . $localeCode . '"] input')
+        $element = $this->getLastAttributeChoiceElement();
+        $index   = $element->getAttribute('data-form-collection-index');
+        $element->find('css', '#sylius_product_attribute_selectOptions_'.$index.'_translations_'.$localeCode.'_name')
             ->setValue($value)
         ;
     }
@@ -112,7 +112,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $attributeChoices = $this->getElement('attribute_choices');
 
-        return $attributeChoices->findAll('css', 'div[data-form-collection="item"]');
+        return $attributeChoices->findAll('css', '#sylius_product_attribute_selectOptions div[data-form-collection="item"]');
     }
 
     /**
