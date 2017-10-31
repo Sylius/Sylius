@@ -63,7 +63,7 @@ final class ValidSelectAttributeConfigurationValidator extends ConstraintValidat
             return;
         }
 
-        $numberOfChoices = count($attribute->getConfiguration()['choices']);
+        $numberOfChoices = count($attribute->getSelectOptions());
         if (null !== $min && $min > $numberOfChoices) {
             $this->context->addViolation($constraint->messageMinEntries);
         }
