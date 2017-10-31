@@ -124,8 +124,19 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
             ]],
         ];
 
+        $subjectAttributeSelectOptionMapping = [
+            'fieldName'    => 'selectOptions',
+            'targetEntity' => 'Some\App\Product\Entity\AttributeSelectOption',
+            'fetch'        => 'EAGER',
+            'cascade'      => ['persist', 'remove'],
+            'joinTable'    => [
+                "name" => "sylius_product_attribute_value_attribute_select_option"
+            ]
+        ];;
+
         $metadata->mapManyToOne($subjectMapping)->shouldBeCalled();
         $metadata->mapManyToOne($attributeMapping)->shouldBeCalled();
+        $metadata->mapManyToMany($subjectAttributeSelectOptionMapping)->shouldBeCalled();
 
         $this->loadClassMetadata($eventArgs);
     }

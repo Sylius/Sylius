@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidSelectAttributeConfiguration;
@@ -20,6 +21,7 @@ use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidTextAttributeConfig
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Attribute\Model\AttributeSelectOption;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -59,12 +61,14 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
         $attribute->getConfiguration()->willReturn([
             'multiple' => true,
             'min' => 4,
-            'max' => 6,
-            'choices' => [
-                'ec134e10-6a80-4eaf-8346-e9bb0f7406a4' => 'Banana',
-                '63148775-be39-47eb-8afd-a4818981e3c0' => 'Watermelon',
-            ],
+            'max' => 6
         ]);
+
+        $options = new ArrayCollection();
+        $options->add(new AttributeSelectOption());
+        $options->add(new AttributeSelectOption());
+
+        $attribute->getSelectOptions()->willReturn($options);
 
         $context->addViolation(Argument::any())->shouldBeCalled();
 

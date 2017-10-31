@@ -176,7 +176,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
             'fetch'        => 'EAGER',
             'cascade'      => ['persist', 'remove'],
             'joinTable'    => [
-                "name" => 'sylius_' . $subject ."_attribute_value_attribute_select_option"
+                "name" => 'sylius_' . $subject .'_attribute_value_attribute_select_option'
             ]
         ];
 
