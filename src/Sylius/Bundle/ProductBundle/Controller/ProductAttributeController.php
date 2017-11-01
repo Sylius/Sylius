@@ -17,6 +17,7 @@ use FOS\RestBundle\View\View;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\Form\FormView;
@@ -107,11 +108,24 @@ class ProductAttributeController extends ResourceController
 
         $forms = [];
         foreach ($localeCodes as $localeCode) {
-            $forms[$localeCode] = $this
-                ->get('form.factory')
-                ->createNamed('value', $attributeForm, null, ['label' => $attribute->getName(), 'configuration' => $attribute->getConfiguration()])
-                ->createView()
-            ;
+
+            if($attribute->getType()==SelectAttributeType::TYPE)
+            {
+                $forms[$localeCode] = $this
+                    ->get('form.factory')
+                    ->createNamed('selectOptions', $attributeForm, null, ['attribute' => $attribute, 'label' => $attribute->getName(), 'configuration' => $attribute->getConfiguration()])
+                    ->createView()
+                ;
+
+            }else{
+
+                $forms[$localeCode] = $this
+                    ->get('form.factory')
+                    ->createNamed('value', $attributeForm, null, ['label' => $attribute->getName(), 'configuration' => $attribute->getConfiguration()])
+                    ->createView()
+                ;
+
+            }
         }
 
         return $forms;

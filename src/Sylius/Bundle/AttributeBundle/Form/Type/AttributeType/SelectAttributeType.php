@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
+use Sylius\Component\Attribute\Repository\AttributeSelectOptionRepositoryInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,12 +28,17 @@ final class SelectAttributeType extends AbstractType
      */
     private $defaultLocaleCode;
 
+    private $optionRepository;
+    private $model_class;
+
     /**
      * @param TranslationLocaleProviderInterface $localeProvider
      */
-    public function __construct(TranslationLocaleProviderInterface $localeProvider)
+    public function __construct(AttributeSelectOptionRepositoryInterface $attributeSelectOptionRepository, TranslationLocaleProviderInterface $localeProvider)
     {
         $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
+        $this->optionRepository = $attributeSelectOptionRepository;
+        $this->model_class      = $attributeSelectOptionRepository->getClassName();
     }
 
     /**
@@ -40,7 +46,7 @@ final class SelectAttributeType extends AbstractType
      */
     public function getParent(): string
     {
-        return ChoiceType::class;
+        return EntityType::class;
     }
 
     /**
@@ -75,11 +81,18 @@ final class SelectAttributeType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
+        $repository = $this->optionRepository;
+
         $resolver
             ->setRequired('configuration')
             ->setDefault('placeholder', 'sylius.form.attribute_type_configuration.select.choose')
-            ->setDefault('choices', [])
-            ->setNormalizer('multiple', function (Options $options) {
+            ->setDefault('class', $this->model_class)
+            ->setRequired('attribute')
+            ->setNormalizer('query_builder', function (OptionsResolver $options) use ($repository)
+            {
+                return $repository->getAttributeSelectOptionsQB($options["attribute"]);
+            })
+            ->setNormalizer('multiple', function (OptionsResolver $options) {
                 if (is_array($options['configuration']) && isset($options['configuration']['multiple'])) {
                     return $options['configuration']['multiple'];
                 }

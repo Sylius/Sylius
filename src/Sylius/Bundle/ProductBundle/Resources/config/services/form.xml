@@ -134,9 +134,15 @@
             <tag name="form.type" />
         </service>
 
+        <service id="sylius.form.type.attribute_select_type" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType">
+            <argument type="service" id="sylius.repository.product_attribute_select_option"/>
+            <argument type="service" id="sylius.translation_locale_provider" />
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.form.type.product_attribute_value_select_option" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueSelectOptionType">
-            <argument type="service" id="sylius.repository.product_attribute_select_option"></argument>
-            <argument type="service" id="doctrine.orm.entity_manager"></argument>
+            <argument type="service" id="sylius.repository.product_attribute_select_option"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
             <tag name="form.type" />
         </service>
 

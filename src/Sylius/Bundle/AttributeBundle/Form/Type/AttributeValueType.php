@@ -21,6 +21,7 @@ use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -95,6 +96,8 @@ abstract class AttributeValueType extends AbstractResourceType
 
                 $localeCode = $attributeValue->getLocaleCode();
 
+
+
                 $this->addValueField($event->getForm(), $attribute, $localeCode);
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
@@ -107,6 +110,20 @@ abstract class AttributeValueType extends AbstractResourceType
                 $attribute = $this->attributeRepository->findOneBy(['code' => $attributeValue['attribute']]);
                 if (!$attribute instanceof AttributeInterface) {
                     return;
+                }
+
+                if($attribute->getType() == SelectAttributeType::TYPE
+                    && isset($attributeValue["selectOptions"] )
+                    && (!isset($attributeValue["value"]) || !$attributeValue["value"]))
+                {
+                    $options_values = [];
+                    foreach ($attributeValue["selectOptions"] as $option_id)
+                    {
+                        $options_values[] = (string)$option_id;
+                    }
+
+                    $attributeValue["value"] = $options_values;
+                    $event->setData($attributeValue);
                 }
 
                 $this->addValueField($event->getForm(), $attribute);
@@ -135,6 +152,7 @@ abstract class AttributeValueType extends AbstractResourceType
             $form->add('selectOptions', $this->getAttributeValueSelectOptionTypeName(), [
                 "attribute" => $attribute
             ]);
+            $form->add("value", HiddenType::class);
 
         }else{
 
@@ -148,8 +166,6 @@ abstract class AttributeValueType extends AbstractResourceType
         }
 
     }
-
-
 
     /**
      * @return string
