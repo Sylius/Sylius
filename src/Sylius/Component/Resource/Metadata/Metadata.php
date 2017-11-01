@@ -199,7 +199,7 @@ final class Metadata implements MetadataInterface
     private static function parseAlias(string $alias): array
     {
         if (false === strpos($alias, '.')) {
-            throw new \InvalidArgumentException('Invalid alias supplied, it should conform to the following format "<applicationName>.<name>".');
+            throw new \InvalidArgumentException('Invalid alias ' . $alias . ' supplied, it should conform to the following format "<applicationName>.<name>".');
         }
 
         return explode('.', $alias);
