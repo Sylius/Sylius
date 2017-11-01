@@ -19,9 +19,11 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Attribute\Factory\AttributeSelectOptionFactoryInterface;
+use Sylius\Component\Attribute\Model\AttributeSelectOptionTranslation;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeSelectOptionTranslation;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -130,15 +132,16 @@ final class ProductAttributeContext implements Context
         string $value,
         string $localeCode
     ): void {
-        $choices = [
-            $this->faker->uuid => [
-                $localeCode => $value,
-            ],
-        ];
 
-        $configuration = $productAttribute->getConfiguration();
-        $configuration['choices'] = array_merge($configuration['choices'], $choices);
-        $productAttribute->setConfiguration($configuration);
+        $selectOption = $this->productAttributeSelectOptionFactory->createForAttribute($productAttribute);
+        $selectOption->setName($value);
+        $trans = new ProductAttributeSelectOptionTranslation();
+        $trans->setLocale($localeCode);
+        $trans->setName($value);
+
+
+        $selectOption->addTranslation( $trans );
+        $productAttribute->addSelectOption($selectOption);
 
         $this->saveProductAttribute($productAttribute);
     }
@@ -153,16 +156,23 @@ final class ProductAttributeContext implements Context
         string $secondValue,
         string $secondLocaleCode
     ): void {
-        $choices = [
-            $this->faker->uuid => [
-                $firstLocaleCode => $firstValue,
-                $secondLocaleCode => $secondValue,
-            ],
-        ];
 
-        $configuration = $productAttribute->getConfiguration();
-        $configuration['choices'] = array_merge($configuration['choices'], $choices);
-        $productAttribute->setConfiguration($configuration);
+
+        $selectOption = $this->productAttributeSelectOptionFactory->createForAttribute($productAttribute);
+        $selectOption->setName($firstValue);
+
+        $trans1 = new ProductAttributeSelectOptionTranslation();
+        $trans1->setLocale($firstLocaleCode);
+        $trans1->setName($firstValue);
+
+        $trans2 = new ProductAttributeSelectOptionTranslation();
+        $trans2->setLocale($secondLocaleCode);
+        $trans2->setName($secondValue);
+
+        $selectOption->addTranslation( $trans1 );
+        $selectOption->addTranslation( $trans2 );
+
+        $productAttribute->addSelectOption($selectOption);
 
         $this->saveProductAttribute($productAttribute);
     }
