@@ -1,3 +1,8 @@
+# UPGRADE FROM 1.0.1 to 1.0.2
+
+* `Sylius\Bundle\AdminApiBundle\Model\ClientManager`'s `findClientByPublicId($publicId): ClientInterface` signature
+  was changed to `findClientByPublicId($publicId): ?ClientInterface` in order to reflect the real behaviour.
+
 # UPGRADE FROM 1.0.0-beta.3 to 1.0.0
 
 ## Application:
