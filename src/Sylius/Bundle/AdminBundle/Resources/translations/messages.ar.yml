@@ -7,3 +7,4 @@ sylius:
             main:
                 configuration:
                     countries: البلدان
+                    currencies: العملات

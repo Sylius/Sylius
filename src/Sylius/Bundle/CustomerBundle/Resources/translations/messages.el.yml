@@ -16,3 +16,4 @@ sylius:
     gender:
         unknown: Άγνωστο
         male: Άνδρας
+        female: Γυναίκα

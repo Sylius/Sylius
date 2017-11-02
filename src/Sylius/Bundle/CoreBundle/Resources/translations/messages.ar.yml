@@ -3,14 +3,43 @@
 
 sylius:
     form:
+        block:
+            body: المحتوى
+            title: العنوان
+        cart:
+            coupon: قسيمة شرائية
+        checkout:
+            addressing:
+                different_billing_address: استخدام عنوان مختلف للفوترة؟
+            shipping_method: طريقة الشحن
+        promotion:
+            channels: القنوات
+        promotion_action:
+            add_product_configuration:
+                product: المنتج
+        promotion_coupon:
+            per_customer_usage_limit: حد استخدام لكل عميل
         group:
             name: الاسم
+            roles: الأدوار
+        channel:
+            contact_email: البريد الإلكتروني لجهة الإتصال
+            currencies: العملات
+            currency_base: العملة الأساسية
+            hostname: اسم المضيف
+            payment_methods: طرق الدفع
+            shipping_methods: طرق الشحن
         image:
             type: نوع
+        page:
+            body: المحتوى
+            title: العنوان
         product_filter:
             name: الاسم
         user:
+            different_billing_address: استخدام عنوان مختلف للفوترة؟
             first_name: الاسم الأول
+            roles: الأدوار
             last_name: اسم العائلة
             password: كلمة السر
         attribute:
