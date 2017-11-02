@@ -11,7 +11,9 @@ sylius:
             last_name: إسم العائلة
             phone_number: رقم الهاتف
             postcode: الرقم البريدي
+            street: عنوان الشارع
             province: مقاطعة
+            zone: المنطقة
         country:
             add_province: اضافة جهة/مقاطعة
             name: الاسم
@@ -23,6 +25,7 @@ sylius:
             abbreviation: مختصرات
             select: اختر
         zone:
+            add_member: إضافة عضو
             members: الأعضاء
             name: الاسم
             type: نوع
@@ -31,6 +34,8 @@ sylius:
                 province: مقاطعة
                 zone: المنطقة
             scope: نطاق
+            scopes:
+                all: الكل
             select: اختر
             select_scope: اختر النطاق
         zone_member:
