@@ -120,7 +120,7 @@ Firstly let's learn how to prepare an exemplary Option and its values.
 
 .. code-block:: php
 
-     /* @var $option ProductOptionInterface */
+     /** @var ProductOptionInterface $option */
      $option = $this->get('sylius.factory.product_option')->createNew();
      $option->setCode('t_shirt_color');
      $option->setName('T-Shirt Color');
@@ -133,7 +133,7 @@ Firstly let's learn how to prepare an exemplary Option and its values.
      ];
 
      foreach ($valuesData as $code => $values) {
-         /* @var ProductOptionValueInterface $optionValue */
+         /** @var ProductOptionValueInterface $optionValue */
          $optionValue = $this->get('sylius.factory.product_option_value')->createNew();
 
          $optionValue->setCode($code);
