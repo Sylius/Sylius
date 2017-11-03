@@ -115,9 +115,9 @@ final class ContactContext implements Context
     }
 
     /**
-     * @Then I should be notified that a problem occured while sending the contact request
+     * @Then I should be notified that a problem occurred while sending the contact request
      */
-    public function iShouldBeNotifiedThatAProblemOccuredWhileSendingTheContactRequest()
+    public function iShouldBeNotifiedThatAProblemOccurredWhileSendingTheContactRequest()
     {
         $this->notificationChecker->checkNotification(
             'A problem occurred while sending the contact request. Please try again later.',
