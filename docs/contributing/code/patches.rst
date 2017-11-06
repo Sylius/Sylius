@@ -215,7 +215,7 @@ Push your branch remotely:
 
 .. code-block:: bash
 
-    $ git push --force origin BRANCH_NAME
+    $ git push --force-with-lease origin BRANCH_NAME
 
 Make a Pull Request
 ~~~~~~~~~~~~~~~~~~~
@@ -321,19 +321,19 @@ patch. Before re-submitting the patch, rebase with your base branch (``master`` 
 .. code-block:: bash
 
     $ git rebase -f upstream/master
-    $ git push --force origin BRANCH_NAME
+    $ git push --force-with-lease origin BRANCH_NAME
 
 or
 
 .. code-block:: bash
 
     $ git rebase -f upstream/1.0
-    $ git push --force origin BRANCH_NAME
+    $ git push --force-with-lease origin BRANCH_NAME
 
 .. note::
 
-    When doing a ``push --force``, always specify the branch name explicitly
-    to avoid messing other branches in the repo (``--force`` tells Git that
+    When doing a ``push --force-wth-lease``, always specify the branch name explicitly
+    to avoid messing other branches in the repo (``--force-with-lease`` tells Git that
     you really want to mess with things so do it carefully).
 
 Often, Sylius team members will ask you to "squash" your commits. This means you will
@@ -342,14 +342,14 @@ convert many commits to one commit. To do this, use the rebase command:
 .. code-block:: bash
 
     $ git rebase -i upstream/master
-    $ git push --force origin BRANCH_NAME
+    $ git push --force-with-lease origin BRANCH_NAME
 
 or
 
 .. code-block:: bash
 
     $ git rebase -i upstream/1.0
-    $ git push --force origin BRANCH_NAME
+    $ git push --force-with-lease origin BRANCH_NAME
 
 After you type this command, an editor will popup showing a list of commits:
 
