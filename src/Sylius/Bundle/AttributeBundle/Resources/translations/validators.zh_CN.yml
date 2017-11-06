@@ -14,6 +14,8 @@ sylius:
         configuration:
             max_entries: 配置最大条目值必须大于或等于最小的项值。
             max_length: 配置最大条目值必须大于或等于最小的项值。
+            min_entries: 配置最大条目值必须大于或等于最小的项值。
+            multiple: 配置多必须如果指定 min 或 max 条目的值为 true。
         presentation:
             not_blank: 请输入属性介绍。
             min_length: 属性介绍必须是至少 1 个字符长。 |属性介绍必须至少 {{limit}} 个字符长。

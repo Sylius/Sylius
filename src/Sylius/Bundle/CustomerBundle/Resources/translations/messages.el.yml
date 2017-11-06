@@ -15,3 +15,5 @@ sylius:
             roles: Ρόλοι
     gender:
         unknown: Άγνωστο
+        male: Άνδρας
+        female: Γυναίκα

@@ -35,6 +35,7 @@ sylius:
             payment_methods: Spôsoby platby
             shipping_methods: Spôsoby doručenia
             skipping_shipping_step_allowed: Preskočiť výber dopravy, ak je dostupný iba jeden spôsob dopravy?
+            skipping_payment_step_allowed: Preskočiť krok platby ak je dostupná len jedna platobná metóda?
             tax_calculation_strategy: Spôsob výpočtu dane
             tax_zone_default: Predvolené daňové pásmo
             taxonomies: Triedenia

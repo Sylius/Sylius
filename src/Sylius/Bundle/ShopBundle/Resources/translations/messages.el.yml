@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    menu:
+        shop:
+            account:
+                change_password: 'Αλλαγή κωδικού πρόσβασης'

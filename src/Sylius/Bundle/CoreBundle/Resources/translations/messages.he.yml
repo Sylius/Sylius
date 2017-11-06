@@ -5,6 +5,9 @@ sylius:
     form:
         image:
             type: סוג
+        promotion_rule:
+            has_taxon:
+                taxons: קבוצות טקסונומיות
     installer:
         extensions:
             "off": false

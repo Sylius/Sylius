@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'אין אפשרות למחוק את הערוץ. חובה להגדיר לפחות ערוץ אחד זמין.'
+    checkout:
+        complete_error: 'הזמנתכם לא נשלחה עקב בעיה לא צפויה. אנא נסו לבצע שוב את ההזמנה.'
+    contact:
+        request_success: 'בקשתכם להתקשרות נשלחה בהצלחה.'
+    customer:
+        add_address: 'הכתובת נוספה בהצלחה.'
+        set_address_as_default: 'כתובת הוגדרה כברירת מחדל.'
+    order:
+        promotion_integrity: 'תוקפו של מבצע %promotionName% פג.'
+    product:
+        out_of_stock: 'נשארו רק %quantity% יחידות של מוצר זה במלאי.'
