@@ -23,6 +23,7 @@ var paths = {
         js: [
             nodeModulesPath + 'jquery/dist/jquery.min.js',
             nodeModulesPath + 'semantic-ui-css/semantic.min.js',
+            nodeModulesPath + 'checkboxes.js/dist/**',
             vendorUiPath + 'Resources/private/js/**',
             vendorAdminPath + 'Resources/private/js/**'
         ],
