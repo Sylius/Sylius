@@ -32,12 +32,12 @@ sylius:
     country:
         code:
             not_blank: Vă rugăm să completați codul ISO a ţării.
-            regex: Codul țării poate conține doar litere, numere, cratime și linii de subliniere.
+            regex: Codul țării poate conține doar litere, numere, - și _.
             unique: Codul ISO al țării trebuie să fie unic.
     province:
         code:
-            min_length: Codul județului trebuie să conţină cel puţin 5 caractere|Codul județului trebuie să conţină cel puţin 5 caractere.
-            not_blank: Vă rugăm să introduceţi codul județului.
+            min_length: Codul provinciei trebuie să conţină cel puţin 5 caractere|Codul provinciei trebuie să conţină cel puţin 5 caractere.
+            not_blank: Vă rugăm să introduceţi codul provinciei.
             regex: Codul provinciei ar trebui să aibă următorul format XX-XX (ex. RO-BV).
             unique: Codul provinciei trebuie să fie unic.
         name:
@@ -46,18 +46,20 @@ sylius:
             not_blank: Vă rugăm să completați numele județului.
             unique: Numele provinciei trebuie să fie unic.
     zone:
+        scope:
+            not_blank: Alege scopul.
         code:
             not_blank: Vă rugăm să introduceţi codul de zonă.
-            regex: Codul zonei poate conține doar litere, numere, cratime și linii de subliniere.
+            regex: Codul zonei poate conține doar litere, numere, - și _.
             unique: Codul de zonă trebuie să fie unic.
         members:
             min_count: Vă rugăm să adăugaţi cel puţin {{ limit }} membri de zonă.
         name:
             max_length: Numele zonei nu poate depăși 255 de caractere|Numele zonei nu poate depăși 255 de caractere.
-            min_length: Numele trebuie să conțină cel puţin 2 caractere|Numele trebuie să conțină cel puţin 2 caractere.
+            min_length: Numele zonei trebuie să conțină cel puţin 2 caractere|Numele zonei trebuie să conțină cel puţin 2 caractere.
             not_blank: Vă rugăm să completați numele zonei.
     zone_member:
         code:
-            not_blank: Vă rugăm să alegeţi membru zonă.
-            regex: Codul zonei de membru poate conține doar litere, numere, cratime și linii de subliniere.
-        unique: Membru de zonă ales se află deja în această zonă.
+            not_blank: Vă rugăm să alegeţi membru al zonei.
+            regex: Codul membrului din zonă poate conține doar litere, numere, - și _.
+        unique: Membrul ales din zonă există deja în această zonă.

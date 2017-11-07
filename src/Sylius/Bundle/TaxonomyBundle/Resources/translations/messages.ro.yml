@@ -7,5 +7,6 @@ sylius:
             description: Descriere
             name: Nume
             parent: Părinte
+            slug: Slug
         taxonomy:
             name: Nume

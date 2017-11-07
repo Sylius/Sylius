@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    resource:
+        not_enabled: "Resursa este dezactivată"
+        not_disabled: "Resursa este activată"

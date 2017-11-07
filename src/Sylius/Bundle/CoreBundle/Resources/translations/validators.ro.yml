@@ -7,32 +7,88 @@ sylius:
             not_blank: Vă rugăm să introduceţi moneda de bază a canalului.
         default_locale:
             not_blank: Vă rugăm să introduceţi setări regionale implicite de canal.
+        contact_email:
+            invalid: Adresa de email nu este validă.
+            max: Adresa de email nu trebuie să aibă mai mult de {{ limit }} caractere.
+            min: Adresa de email trebuie să aibă minim {{ limit }} caractere.
+    channel_pricing:
+        price:
+            min: Prețul trebuie să fie cel puțin {{ limit }}.
+            not_blank: Introdu un preț.
     checkout:
         shipping_method:
             not_blank: Vă rugăm să alegeți metoda de livrare.
     contact:
         email:
-            not_blank: Vă rugăm să completați adresa de e-mail.
+            invalid: Adresa de email nu este validă.
+            not_blank: Introdu adresa ta de email.
+        message:
+            not_blank: Scrie-ne un mesaj.
     currency:
         enabled:
             cannot_disable_base: Valuta de bază nu poate fi dezactivată.
     customer:
         currency_code:
-            not_valid: Codul de valută pe care le-aţi introdus nu este valid.
+            not_valid: Codul de valută pe care l-aţi introdus nu este valid.
     cart_item:
         not_available: 'Nu există stoc suficient pentru %itemName%.'
     order:
         currency_code:
             not_valid: Codul de valută pe care l-aţi introdus nu este valid.
+        payment_method_eligibility: 'Metoda de plată %paymentMethodName% a fost dezactivată. Te rugăm să selectezi o altă metodă.'
+        product_eligibility: 'Produsul %productName% a fost dezactivat.'
+        shipping_method_eligibility: 'Metoda %shippingMethodName% nu poate fi folosită pentru acest produs. Te rugăm să selectezi o altă metodă de livrare.'
     locale:
         code:
             not_blank: Vă rugăm să completați codul localizării.
             unique: Acest cod de localizare există deja.
         enabled:
             cannot_disable_base: Setările regionale de bază nu pot fi dezactivate.
+    product:
+        variants:
+            all_prices_defined: E nevoie să definești mai întâi prețurile variantelor pentru produsele recent alocate pe canale.
     product_attribute:
         invalid: Poziţia trebuie să fie un număr întreg.
+    product_image:
+        file:
+            max_size: Imaginea e prea mare - {{ size }} {{ suffix }}. Mărimea maximă admisă este {{ limit }} {{ suffix }}.
+            upload_ini_size: Imaginea e prea mare. Mărimea maximă admisă este {{ limit }} {{ suffix }}.
     product_variant:
         onHand:
             min: Stocul curent trebuie să fie mai mare decât {{ limit }}.
             not_blank: Vă rugăm să introduceţi stocul curent.
+            reserved: Stocul "onHand" trebuie să fie mai mare decât numărul de unități "onHold"
+        original_price:
+            min: Prețul original nu poate fi negativ.
+        weight:
+            min: Greutatea nu poate fi negativă.
+            invalid: Greutatea trebuie exprimată printr-un număr.
+        width:
+            min: Lățimea nu poate fi negativă.
+            invalid: Lățimea trebuie exprimată printr-un număr.
+        height:
+            min: Înălțimea nu poate fi negativă.
+            invalid: Înălțimea trebuie exprimată printr-un număr.
+        depth:
+            min: Adâncimea nu poate fi negativă.
+            invalid: Adâncimea trebuie exprimată printr-un număr.
+        channel_pricing:
+            all_defined: 'E nevoie să definești un preț pentru fiecare canal.'
+    product_translation:
+        short_description:
+            max: Descrierea scurtă nu poate fi mai lungă de {{ limit }} caractere.
+    taxon_image:
+        file:
+            max_size: Imaginea e prea mare - {{ size }} {{ suffix }}. Mărimea maximă admisă este {{ limit }} {{ suffix }}.
+            upload_ini_size: Imaginea e prea mare. Mărimea maximă admisă este {{ limit }} {{ suffix }}.
+    user:
+        email:
+            unique: Acest e-mail este deja folosit.
+            min: Adresa de email trebuie să aibă minim {{ min }} caractere.
+            max: Adresa de email poate să aibă maxim {{ max }} caractere.
+            invalid: Această adresă de e-mail este invalidă.
+        username:
+            unique: Acest nume de utilizator este deja folosit.
+            not_blank: Introdu un nume de utilizator.
+        locale_code:
+            not_blank: Alege o limbă.

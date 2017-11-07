@@ -8,6 +8,8 @@ sylius:
             enabled: Activat
             password:
                 label: Parolă
+                confirmation: Verificare
+            remember_me: Ţine-mă minte
             shipping_address: Adresa de livrare
             username: Nume de utilizator
         user_filter:

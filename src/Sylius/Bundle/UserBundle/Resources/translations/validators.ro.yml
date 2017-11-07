@@ -4,4 +4,13 @@
 sylius:
     user:
         email:
-            not_blank: Vă rugăm să completați adresa de e-mail.
+            not_blank: Introdu adresa ta de email.
+            invalid: Această adresă de e-mail este invalidă.
+            not_registered: Nu exista un utilizator cu această adresă de email. Întregistrează-te mai întâi.
+        plainPassword:
+            not_blank: Te rugăm să introduci parola.
+            mismatch: Parolele introduse nu se potrivesc
+            wrong_current: Parola folosită este diferită de cea curentă.
+        password:
+            min: Parola trebuie să conţină cel puţin {{ limit }} caractere.
+            max: Parola nu trebuie să aibă mai mult de {{ limit }} caractere.

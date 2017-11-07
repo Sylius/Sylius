@@ -10,7 +10,7 @@ sylius:
             not_blank: אנא לבחור מדינה.
             disabled: המדינה הנבחרה אינה זמינה. נא בחר אחרת.
         first_name:
-            not_blank: אנא הזינו שם הפרטי.
+            not_blank: אנא הזינו שם פרטי.
         last_name:
             not_blank: אנא הזינו שם משפחה.
         postcode:
