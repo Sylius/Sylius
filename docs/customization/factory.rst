@@ -41,7 +41,7 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
 
     namespace AppBundle\Factory;
 
-    use Sylius\Component\Core\Model\ProductInterface;
+    use Sylius\Component\Product\Model\ProductInterface;
     use Sylius\Component\Product\Factory\ProductFactoryInterface;
 
     class ProductFactory implements ProductFactoryInterface
