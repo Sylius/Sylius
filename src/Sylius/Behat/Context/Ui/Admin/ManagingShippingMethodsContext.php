@@ -157,27 +157,10 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I check (also) the :shippingMethodName shipping method
+     * @Then the shipping method :shipmentMethod should appear in the registry
+     * @Then the shipping method :shipmentMethod should be in the registry
      */
-    public function iCheckTheShippingMethod(string $shippingMethodName): void
-    {
-        $this->indexPage->checkResourceOnPage(['name' => $shippingMethodName]);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        $this->indexPage->bulkDelete();
-    }
-
-    /**
-     * @Then I should see the shipping method :shipmentMethodName in the list
-     * @Then the shipping method :shipmentMethodName should appear in the registry
-     * @Then the shipping method :shipmentMethodName should be in the registry
-     */
-    public function theShipmentMethodShouldAppearInTheRegistry(string $shipmentMethodName): void
+    public function theShipmentMethodShouldAppearInTheRegistry($shipmentMethodName)
     {
         $this->iWantToBrowseShippingMethods();
 
@@ -308,13 +291,11 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then I should see a single shipping method in the list
-     * @Then I should see :numberOfShippingMethods shipping methods in the list
-     * @Then I should see :numberOfShippingMethods shipping methods on the list
+     * @Then I should see :count shipping methods on the list
      */
-    public function thereShouldBeNoShippingMethodsOnTheList(int $numberOfShippingMethods = 1): void
+    public function thereShouldBeNoShippingMethodsOnTheList($count)
     {
-        Assert::same($this->indexPage->countItems(), $numberOfShippingMethods);
+        Assert::same($this->indexPage->countItems(), (int) $count);
     }
 
     /**
@@ -378,7 +359,6 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @Given I am browsing shipping methods
-     * @When I browse shipping methods
      * @When I want to browse shipping methods
      */
     public function iWantToBrowseShippingMethods()
@@ -433,6 +413,14 @@ final class ManagingShippingMethodsContext implements Context
     public function iSortShippingMethodsBy($field)
     {
         $this->indexPage->sortBy($field);
+    }
+
+    /**
+     * @Then I should see :numberOfShippingMethods shipping methods in the list
+     */
+    public function iShouldSeeShippingMethodsInTheList($numberOfShippingMethods)
+    {
+        Assert::same($this->indexPage->countItems(), (int) $numberOfShippingMethods);
     }
 
     /**

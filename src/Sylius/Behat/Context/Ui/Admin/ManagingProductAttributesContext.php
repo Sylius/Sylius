@@ -251,7 +251,6 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When I browse product attributes
      * @When I want to see all product attributes in store
      */
     public function iWantToSeeAllProductAttributesInStore()
@@ -331,28 +330,11 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When I check (also) the :productAttributeName product attribute
+     * @Then /^I should see (\d+) product attributes in the list$/
      */
-    public function iCheckTheProductAttribute(string $productAttributeName): void
+    public function iShouldSeeCustomersInTheList($amountOfProductAttributes)
     {
-        $this->indexPage->checkResourceOnPage(['name' => $productAttributeName]);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        $this->indexPage->bulkDelete();
-    }
-
-    /**
-     * @Then I should see a single product attribute in the list
-     * @Then I should see :amountOfProductAttributes product attributes in the list
-     */
-    public function iShouldSeeCustomersInTheList(int $amountOfProductAttributes = 1): void
-    {
-        Assert::same($this->indexPage->countItems(), $amountOfProductAttributes);
+        Assert::same($this->indexPage->countItems(), (int) $amountOfProductAttributes);
     }
 
     /**

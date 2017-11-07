@@ -60,6 +60,3 @@ sylius_grid:
                         type: delete
                     archive:
                         type: archive
-                bulk:
-                    delete:
-                        type: delete

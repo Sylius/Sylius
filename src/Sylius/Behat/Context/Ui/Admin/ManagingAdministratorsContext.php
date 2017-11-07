@@ -80,7 +80,6 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I browse administrators
      * @When I want to browse administrators
      */
     public function iWantToBrowseAdministrators()
@@ -190,22 +189,6 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I check (also) the :email administrator
-     */
-    public function iCheckTheAdministrator(string $email): void
-    {
-        $this->indexPage->checkResourceOnPage(['email' => $email]);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        $this->indexPage->bulkDelete();
-    }
-
-    /**
      * @Then the administrator :email should appear in the store
      * @Then I should see the administrator :email in the list
      * @Then there should still be only one administrator with an email :email
@@ -229,10 +212,9 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Then I should see a single administrator in the list
      * @Then /^there should be (\d+) administrators in the list$/
      */
-    public function iShouldSeeAdministratorsInTheList(int $number = 1): void
+    public function iShouldSeeAdministratorsInTheList($number)
     {
         Assert::same($this->indexPage->countItems(), (int) $number);
     }

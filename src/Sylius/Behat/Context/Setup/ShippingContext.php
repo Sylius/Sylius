@@ -198,9 +198,8 @@ final class ShippingContext implements Context
 
     /**
      * @Given the store allows shipping with :firstName and :secondName
-     * @Given the store allows shipping with :firstName, :secondName and :thirdName
      */
-    public function theStoreAllowsShippingWithAnd(string ...$names): void
+    public function theStoreAllowsShippingWithAnd(...$names)
     {
         foreach ($names as $name) {
             $this->theStoreAllowsShippingMethodWithName($name);

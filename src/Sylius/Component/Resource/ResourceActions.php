@@ -20,7 +20,6 @@ final class ResourceActions
     public const CREATE = 'create';
     public const UPDATE = 'update';
     public const DELETE = 'delete';
-    public const BULK_DELETE = 'bulk_delete';
 
     private function __construct()
     {

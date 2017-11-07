@@ -148,27 +148,10 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I check (also) the :productOptionName product option
-     */
-    public function iCheckTheProductOption(string $productOptionName): void
-    {
-        $this->indexPage->checkResourceOnPage(['name' => $productOptionName]);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        $this->indexPage->bulkDelete();
-    }
-
-    /**
-     * @Then I should see the product option :productOptionName in the list
      * @Then the product option :productOptionName should appear in the registry
      * @Then the product option :productOptionName should be in the registry
      */
-    public function theProductOptionShouldAppearInTheRegistry(string $productOptionName): void
+    public function theProductOptionShouldAppearInTheRegistry($productOptionName)
     {
         $this->iBrowseProductOptions();
 
@@ -250,12 +233,11 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Then I should see a single product option in the list
-     * @Then I should see :amount product options in the list
+     * @Then /^I should see (\d+) product options in the list$/
      */
-    public function iShouldSeeProductOptionsInTheList(int $amount = 1): void
+    public function iShouldSeeProductOptionsInTheList($amount)
     {
-        Assert::same($this->indexPage->countItems(), $amount);
+        Assert::same($this->indexPage->countItems(), (int) $amount);
     }
 
     /**

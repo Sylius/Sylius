@@ -82,7 +82,6 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I browse zones
      * @When I want to see all zones in store
      */
     public function iWantToSeeAllZonesInStore()
@@ -195,22 +194,6 @@ final class ManagingZonesContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @When I check (also) the :zoneName zone
-     */
-    public function iCheckTheZone(string $zoneName): void
-    {
-        $this->indexPage->checkResourceOnPage(['name' => $zoneName]);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        $this->indexPage->bulkDelete();
     }
 
     /**
@@ -330,12 +313,11 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then I should see a single zone in the list
-     * @Then I should see :amount zones in the list
+     * @Then /^I should see (\d+) zones in the list$/
      */
-    public function iShouldSeeZonesInTheList(int $amount = 1): void
+    public function iShouldSeeZonesInTheList($number)
     {
-        Assert::same($this->indexPage->countItems(), $amount);
+        Assert::same($this->indexPage->countItems(), (int) $number);
     }
 
     /**
@@ -344,14 +326,6 @@ final class ManagingZonesContext implements Context
     public function iShouldSeeTheZoneNamedInTheList(ZoneInterface $zone)
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $zone->getCode(), 'name' => $zone->getName()]));
-    }
-
-    /**
-     * @Then I should see the zone :zoneName in the list
-     */
-    public function iShouldSeeTheZoneInTheList(string $zoneName): void
-    {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $zoneName]));
     }
 
     /**

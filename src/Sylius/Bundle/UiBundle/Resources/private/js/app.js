@@ -38,7 +38,6 @@
     });
 
     $('[data-requires-confirmation]').requireConfirmation();
-    $('[data-bulk-action-requires-confirmation]').bulkActionRequireConfirmation();
     $('[data-toggles]').toggleElement();
 
     $('.special.cards .image').dimmer({

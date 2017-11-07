@@ -62,7 +62,6 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I browse product association types
      * @When I want to browse product association types
      */
     public function iWantToBrowseProductAssociationTypes()
@@ -152,22 +151,6 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I check (also) the :productAssociationTypeName product association type
-     */
-    public function iCheckTheProductAssociationType(string $productAssociationTypeName): void
-    {
-        $this->indexPage->checkResourceOnPage(['name' => $productAssociationTypeName]);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        $this->indexPage->bulkDelete();
-    }
-
-    /**
      * @When /^I filter product association types with (code|name) containing "([^"]+)"/
      */
     public function iFilterProductAssociationTypesWithFieldContaining($field, $value)
@@ -179,9 +162,8 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @Then I should see a single product association type in the list
-     * @Then I should see only one product association type in the list
      * @Then I should see :amount product association types in the list
+     * @Then I should see only one product association type in the list
      */
     public function iShouldSeeProductAssociationTypesInTheList($amount = 1)
     {
