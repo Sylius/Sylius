@@ -14,19 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\GridBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\GridBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Component\Grid\Definition\Action;
-use Sylius\Component\Grid\Definition\Field;
-use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
-use Sylius\Component\Grid\Filter\StringFilter;
 use Sylius\Component\Grid\Renderer\BulkActionGridRendererInterface;
-use Sylius\Component\Grid\Renderer\GridRendererInterface;
-use Sylius\Component\Grid\View\GridView;
 use Sylius\Component\Grid\View\GridViewInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TwigBulkActionGridRendererSpec extends ObjectBehavior
 {

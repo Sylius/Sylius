@@ -471,8 +471,8 @@ class ResourceController extends Controller
 
         if (
             $configuration->isCsrfProtectionEnabled() &&
-            !$this->isCsrfTokenValid(ResourceActions::BULK_DELETE, $request->request->get('_csrf_token')))
-        {
+            !$this->isCsrfTokenValid(ResourceActions::BULK_DELETE, $request->request->get('_csrf_token'))
+        ) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
