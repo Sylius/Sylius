@@ -71,10 +71,3 @@ sylius_grid:
                                 parameters:
                                     id: resource.id
                                     productId: $productId
-                bulk:
-                    delete:
-                        type: delete
-                        options:
-                            link:
-                                parameters:
-                                    productId: $productId

@@ -135,10 +135,9 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @Then I should see the tax rate :taxRateName in the list
      * @Then the tax rate :taxRateName should appear in the registry
      */
-    public function theTaxRateShouldAppearInTheRegistry(string $taxRateName): void
+    public function theTaxRateShouldAppearInTheRegistry($taxRateName)
     {
         $this->indexPage->open();
 
@@ -288,38 +287,6 @@ final class ManagingTaxRateContext implements Context
     public function iDoNotSpecifyRelatedTaxCategory()
     {
         // Intentionally left blank to fulfill context expectation
-    }
-
-    /**
-     * @When I check (also) the :taxRateName tax rate
-     */
-    public function iCheckTheTaxRate(string $taxRateName): void
-    {
-        $this->indexPage->checkResourceOnPage(['name' => $taxRateName]);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        $this->indexPage->bulkDelete();
-    }
-
-    /**
-     * @When I browse tax rates
-     */
-    public function iWantToBrowseTaxRates(): void
-    {
-        $this->indexPage->open();
-    }
-
-    /**
-     * @Then I should see a single tax rate in the list
-     */
-    public function iShouldSeeASingleTaxRateInTheList(): void
-    {
-        Assert::same($this->indexPage->countItems(), 1);
     }
 
     /**

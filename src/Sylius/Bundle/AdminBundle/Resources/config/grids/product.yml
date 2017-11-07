@@ -95,6 +95,3 @@ sylius_grid:
                                     visible: resource.hasOptions
                                     parameters:
                                         productId: resource.id
-                bulk:
-                    delete:
-                        type: delete

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Doctrine\Common\Inflector\Inflector;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -85,7 +84,7 @@ final class FlashHelper implements FlashHelperInterface
     {
         $metadata = $requestConfiguration->getMetadata();
         $metadataName = ucfirst($metadata->getHumanizedName());
-        $parameters = $this->getParametersWithName($metadataName, $actionName);
+        $parameters = ['%resource%' => $metadataName];
 
         $message = (string) $requestConfiguration->getFlashMessage($actionName);
         if (empty($message)) {
@@ -165,20 +164,5 @@ final class FlashHelper implements FlashHelperInterface
         }
 
         return $message !== $this->translator->trans($message, $parameters, 'flashes');
-    }
-
-    /**
-     * @param string $metadataName
-     * @param string $actionName
-     *
-     * @return array
-     */
-    private function getParametersWithName(string $metadataName, string $actionName): array
-    {
-        if (stripos($actionName, 'bulk') !== false) {
-            return ['%resources%' => ucfirst(Inflector::pluralize($metadataName))];
-        }
-
-        return ['%resource%' => ucfirst($metadataName)];
     }
 }

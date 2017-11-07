@@ -116,10 +116,9 @@ final class ManagingTaxCategoriesContext implements Context
     }
 
     /**
-     * @Then I should see the tax category :taxCategoryName in the list
      * @Then the tax category :taxCategoryName should appear in the registry
      */
-    public function theTaxCategoryShouldAppearInTheRegistry(string $taxCategoryName): void
+    public function theTaxCategoryShouldAppearInTheRegistry($taxCategoryName)
     {
         $this->indexPage->open();
         Assert::true($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $taxCategoryName]));
@@ -149,30 +148,6 @@ final class ManagingTaxCategoriesContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @When I browse tax categories
-     */
-    public function iWantToBrowseTaxCategories(): void
-    {
-        $this->indexPage->open();
-    }
-
-    /**
-     * @When I check (also) the :taxCategoryName tax category
-     */
-    public function iCheckTheTaxCategory(string $taxCategoryName): void
-    {
-        $this->indexPage->checkResourceOnPage(['nameAndDescription' => $taxCategoryName]);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        $this->indexPage->bulkDelete();
     }
 
     /**
@@ -228,13 +203,5 @@ final class ManagingTaxCategoriesContext implements Context
     {
         $this->indexPage->open();
         Assert::false($this->indexPage->isSingleResourceOnPage([$element => $name]));
-    }
-
-    /**
-     * @Then I should see a single tax category in the list
-     */
-    public function iShouldSeeTaxCategoriesInTheList(): void
-    {
-        Assert::same($this->indexPage->countItems(), 1);
     }
 }
