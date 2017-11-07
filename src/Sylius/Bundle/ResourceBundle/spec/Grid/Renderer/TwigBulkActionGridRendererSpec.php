@@ -18,44 +18,36 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Grid\Parser\OptionsParserInterface;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Component\Grid\Definition\Action;
+use Sylius\Component\Grid\Renderer\BulkActionGridRendererInterface;
 use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class TwigGridRendererSpec extends ObjectBehavior
+final class TwigBulkActionGridRendererSpec extends ObjectBehavior
 {
-    function let(
-        GridRendererInterface $gridRenderer,
-        \Twig_Environment $twig,
-        OptionsParserInterface $optionsParser
-    ): void {
-        $actionTemplates = [
-            'link' => 'SyliusGridBundle:Action:_link.html.twig',
-            'form' => 'SyliusGridBundle:Action:_form.html.twig',
-        ];
-
+    function let(\Twig_Environment $twig, OptionsParserInterface $optionsParser): void
+    {
         $this->beConstructedWith(
-            $gridRenderer,
             $twig,
             $optionsParser,
-            $actionTemplates
+            ['delete' => 'SyliusGridBundle:BulkAction:_delete.html.twig']
         );
     }
 
-    function it_is_a_grid_renderer(): void
+    function it_is_a_bulk_action_grid_renderer(): void
     {
-        $this->shouldImplement(GridRendererInterface::class);
+        $this->shouldImplement(BulkActionGridRendererInterface::class);
     }
 
-    function it_uses_twig_to_render_the_action(
+    function it_uses_twig_to_render_the_bulk_action(
         \Twig_Environment $twig,
         OptionsParserInterface $optionsParser,
         ResourceGridView $gridView,
-        Action $action,
+        Action $bulkAction,
         RequestConfiguration $requestConfiguration,
         Request $request
     ): void {
-        $action->getType()->willReturn('link');
-        $action->getOptions()->willReturn([]);
+        $bulkAction->getType()->willReturn('delete');
+        $bulkAction->getOptions()->willReturn([]);
 
         $gridView->getRequestConfiguration()->willReturn($requestConfiguration);
         $requestConfiguration->getRequest()->willReturn($request);
@@ -63,27 +55,27 @@ final class TwigGridRendererSpec extends ObjectBehavior
         $optionsParser->parseOptions([], $request, null)->shouldBeCalled();
 
         $twig
-            ->render('SyliusGridBundle:Action:_link.html.twig', [
+            ->render('SyliusGridBundle:BulkAction:_delete.html.twig', [
                 'grid' => $gridView,
-                'action' => $action,
+                'action' => $bulkAction,
                 'data' => null,
                 'options' => [],
             ])
-            ->willReturn('<a href="#">Action!</a>')
+            ->willReturn('<a href="#">Delete</a>')
         ;
 
-        $this->renderAction($gridView, $action)->shouldReturn('<a href="#">Action!</a>');
+        $this->renderBulkAction($gridView, $bulkAction)->shouldReturn('<a href="#">Delete</a>');
     }
 
-    function it_throws_an_exception_if_template_is_not_configured_for_given_action_type(
+    function it_throws_an_exception_if_template_is_not_configured_for_given_bulk_action_type(
         ResourceGridView $gridView,
-        Action $action
+        Action $bulkAction
     ): void {
-        $action->getType()->willReturn('foo');
+        $bulkAction->getType()->willReturn('foo');
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Missing template for action type "foo".'))
-            ->during('renderAction', [$gridView, $action])
+            ->shouldThrow(new \InvalidArgumentException('Missing template for bulk action type "foo".'))
+            ->during('renderBulkAction', [$gridView, $bulkAction])
         ;
     }
 }

@@ -16,6 +16,7 @@ namespace Sylius\Bundle\GridBundle\Templating\Helper;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Filter;
+use Sylius\Component\Grid\Renderer\BulkActionGridRendererInterface;
 use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Sylius\Component\Grid\View\GridView;
 use Symfony\Component\Templating\Helper\Helper;
@@ -68,18 +69,6 @@ class GridHelper extends Helper
     public function renderAction(GridView $gridView, Action $action, $data = null)
     {
         return $this->gridRenderer->renderAction($gridView, $action, $data);
-    }
-
-    /**
-     * @param GridView $gridView
-     * @param Action $bulkAction
-     * @param mixed|null $data
-     *
-     * @return mixed
-     */
-    public function renderBulkAction(GridView $gridView, Action $bulkAction, $data = null)
-    {
-        return $this->gridRenderer->renderBulkAction($gridView, $bulkAction, $data);
     }
 
     /**

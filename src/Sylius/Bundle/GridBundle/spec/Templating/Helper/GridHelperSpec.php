@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\GridBundle\Templating\Helper;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\Field;
+use Sylius\Component\Grid\Renderer\BulkActionGridRendererInterface;
 use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Sylius\Component\Grid\View\GridView;
 use Symfony\Component\Templating\Helper\Helper;
@@ -54,15 +55,6 @@ final class GridHelperSpec extends ObjectBehavior
     {
         $gridRenderer->renderAction($gridView, $action, null)->willReturn('<a href="#">Go go Gadget arms!</a>');
         $this->renderAction($gridView, $action)->shouldReturn('<a href="#">Go go Gadget arms!</a>');
-    }
-
-    function it_uses_a_grid_renderer_to_render_a_bulk_action(
-        GridRendererInterface $gridRenderer,
-        GridView $gridView,
-        Action $bulkAction
-    ): void {
-        $gridRenderer->renderBulkAction($gridView, $bulkAction, null)->willReturn('<a href="#">Delete</a>');
-        $this->renderBulkAction($gridView, $bulkAction)->shouldReturn('<a href="#">Delete</a>');
     }
 
     function it_has_name(): void
