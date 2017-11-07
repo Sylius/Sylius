@@ -29,6 +29,14 @@
             <argument type="service" id="twig" />
             <argument type="service" id="sylius.grid_options_parser" />
             <argument>%sylius.grid.templates.action%</argument>
+        </service>
+
+        <service id="sylius.custom_bulk_action_grid_renderer.twig"
+                 class="Sylius\Bundle\ResourceBundle\Grid\Renderer\TwigBulkActionGridRenderer"
+                 decorates="sylius.grid.bulk_action_renderer.twig" decoration-priority="256"
+        >
+            <argument type="service" id="twig" />
+            <argument type="service" id="sylius.grid_options_parser" />
             <argument>%sylius.grid.templates.bulk_action%</argument>
         </service>
 

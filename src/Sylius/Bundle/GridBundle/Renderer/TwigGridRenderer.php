@@ -63,11 +63,6 @@ final class TwigGridRenderer implements GridRendererInterface
     private $filterTemplates;
 
     /**
-     * @var array
-     */
-    private $bulkActionTemplates;
-
-    /**
      * @param \Twig_Environment $twig
      * @param ServiceRegistryInterface $fieldsRegistry
      * @param FormFactoryInterface $formFactory
@@ -75,7 +70,6 @@ final class TwigGridRenderer implements GridRendererInterface
      * @param string $defaultTemplate
      * @param array $actionTemplates
      * @param array $filterTemplates
-     * @param array $bulkActionTemplates
      */
     public function __construct(
         \Twig_Environment $twig,
@@ -84,8 +78,7 @@ final class TwigGridRenderer implements GridRendererInterface
         FormTypeRegistryInterface $formTypeRegistry,
         string $defaultTemplate,
         array $actionTemplates = [],
-        array $filterTemplates = [],
-        array $bulkActionTemplates = []
+        array $filterTemplates = []
     ) {
         $this->twig = $twig;
         $this->fieldsRegistry = $fieldsRegistry;
@@ -94,7 +87,6 @@ final class TwigGridRenderer implements GridRendererInterface
         $this->defaultTemplate = $defaultTemplate;
         $this->actionTemplates = $actionTemplates;
         $this->filterTemplates = $filterTemplates;
-        $this->bulkActionTemplates = $bulkActionTemplates;
     }
 
     /**
@@ -132,23 +124,6 @@ final class TwigGridRenderer implements GridRendererInterface
         return $this->twig->render($this->actionTemplates[$type], [
             'grid' => $gridView,
             'action' => $action,
-            'data' => $data,
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function renderBulkAction(GridViewInterface $gridView, Action $bulkAction, $data = null)
-    {
-        $type = $bulkAction->getType();
-        if (!isset($this->bulkActionTemplates[$type])) {
-            throw new \InvalidArgumentException(sprintf('Missing template for bulk action type "%s".', $type));
-        }
-
-        return $this->twig->render($this->bulkActionTemplates[$type], [
-            'grid' => $gridView,
-            'action' => $bulkAction,
             'data' => $data,
         ]);
     }
