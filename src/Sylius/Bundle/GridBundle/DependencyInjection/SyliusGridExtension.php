@@ -36,6 +36,7 @@ final class SyliusGridExtension extends Extension
         $container->setParameter('sylius.grids_definitions', $config['grids']);
 
         $container->setAlias('sylius.grid.renderer', 'sylius.grid.renderer.twig');
+        $container->setAlias('sylius.grid.bulk_action_renderer', 'sylius.grid.bulk_action_renderer.twig');
         $container->setAlias('sylius.grid.data_extractor', 'sylius.grid.data_extractor.property_access');
 
         foreach ($config['drivers'] as $enabledDriver) {

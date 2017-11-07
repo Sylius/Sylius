@@ -39,9 +39,6 @@ final class TwigGridRendererSpec extends ObjectBehavior
             'link' => 'SyliusGridBundle:Action:_link.html.twig',
             'form' => 'SyliusGridBundle:Action:_form.html.twig',
         ];
-        $bulkActionTemplates = [
-            'delete' => 'SyliusGridBundle:BulkAction:_delete.html.twig',
-        ];
         $filterTemplates = [
             StringFilter::NAME => 'SyliusGridBundle:Filter:_string.html.twig',
         ];
@@ -53,8 +50,7 @@ final class TwigGridRendererSpec extends ObjectBehavior
             $formTypeRegistry,
             'SyliusGridBundle:default.html.twig',
             $actionTemplates,
-            $filterTemplates,
-            $bulkActionTemplates
+            $filterTemplates
         );
     }
 
@@ -123,38 +119,6 @@ final class TwigGridRendererSpec extends ObjectBehavior
         $this
             ->shouldThrow(new \InvalidArgumentException('Missing template for action type "foo".'))
             ->during('renderAction', [$gridView, $action])
-        ;
-    }
-
-    function it_uses_twig_to_render_the_bulk_action(
-        \Twig_Environment $twig,
-        GridViewInterface $gridView,
-        Action $bulkAction
-    ): void {
-        $bulkAction->getType()->willReturn('delete');
-        $bulkAction->getOptions()->willReturn([]);
-
-        $twig
-            ->render('SyliusGridBundle:BulkAction:_delete.html.twig', [
-                'grid' => $gridView,
-                'action' => $bulkAction,
-                'data' => null,
-            ])
-            ->willReturn('<a href="#">Delete</a>')
-        ;
-
-        $this->renderBulkAction($gridView, $bulkAction)->shouldReturn('<a href="#">Delete</a>');
-    }
-
-    function it_throws_an_exception_if_template_is_not_configured_for_given_bulk_action_type(
-        GridViewInterface $gridView,
-        Action $bulkAction
-    ): void {
-        $bulkAction->getType()->willReturn('foo');
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Missing template for bulk action type "foo".'))
-            ->during('renderBulkAction', [$gridView, $bulkAction])
         ;
     }
 }
