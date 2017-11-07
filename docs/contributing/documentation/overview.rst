@@ -33,7 +33,18 @@ Add also the main repository as the ``upstream`` remote.
     $ git remote add upstream git@github.com:Sylius/Sylius.git
 
 
-The ``master`` branch holds the documentation for the development branch of the code.
+
+Choose the right Base Branch
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Before starting to work on a patch, you must determine on which branch you need to work. It will be:
+
+* ``1.0``, if you are fixing or adding docs for an existing feature
+* ``master``, if you are documenting a new feature, that was not in ``1.0``
+
+.. note::
+
+    All bug fixes merged into the ``1.0`` maintenance branch are also merged into ``master`` on a regular basis.
 
 Create a dedicated branch for your changes (for organization):
 
@@ -47,7 +58,6 @@ Remember to name your commits descriptively, keep them possibly small, with just
 When you're done, push this branch to *your* GitHub fork and initiate a pull request.
 
 Your pull request will be reviewed, you will be asked to apply fixes if necessary and then it will be merged into the main repository.
-
 
 Testing Documentation
 ~~~~~~~~~~~~~~~~~~~~~
