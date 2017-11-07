@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        register: 'Vă mulțumim pentru înregistrare, verificați-vă adresa de email pentru linkul de validare cont.'

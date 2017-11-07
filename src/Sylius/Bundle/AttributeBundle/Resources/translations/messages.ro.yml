@@ -20,7 +20,7 @@ sylius:
             percent: Procentaj
             select: Selectaţi
             text: Text
-            textarea: Zonă de text
+            textarea: Text lung
             title: Tipuri de atribut
             validation: Validare
         attribute_type_configuration:
@@ -28,6 +28,12 @@ sylius:
                 format: Format
             date:
                 format: Format
+            select:
+                multiple: Multiple
+                values: Valori
+                choose: Alege o opțiune
+                min: Intrări minime
+                max: Intrări maxime
             text:
                 min: Lungime minimă
                 max: Lungime maximă

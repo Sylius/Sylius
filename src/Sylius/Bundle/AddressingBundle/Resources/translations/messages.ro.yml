@@ -11,6 +11,7 @@ sylius:
             last_name: Nume
             phone_number: Număr de telefon
             postcode: Cod poștal
+            street: Stradă
             province: Județ
             zone: Zonă
         country:
@@ -33,6 +34,8 @@ sylius:
                 province: Județ
                 zone: Zonă
             scope: Domeniul de aplicare
+            scopes:
+                all: Tot
             select: Selectaţi
             select_scope: Selectaţi domeniul de aplicare
         zone_member:

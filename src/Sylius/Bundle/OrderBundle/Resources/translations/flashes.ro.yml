@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Produsul a fost adăugat în coș'
+        cannot_modify: 'Comanda a fost plasată.'
+        remove_item: 'Produsul a fost scos din coș'
+        save: 'Coșul a fost actualizat cu succes'

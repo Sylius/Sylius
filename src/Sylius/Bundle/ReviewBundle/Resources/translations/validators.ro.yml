@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        author:
+            already_exists: Acest e-mail este deja înregistrat, vă rugăm să vă autentificați sau să vă resetați parola.
+        comment:
+            not_blank: Comentariul din recenzie n-ar trebui să fie gol.
+        rating:
+            not_blank: Verifică rating-ul din recenzie.
+        title:
+            not_blank: Titlul recenziei nu poate fi gol.
+            min_length: Titlul recenziei trebuie să aibă minim 2 caractere.
+            max_length: Titlul recenziei nu poate avea mai mult de 255 de caractere.

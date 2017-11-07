@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: 'Plata a fost anulată.'
+        completed: 'Plata a fost finalizată.'
+        failed: 'Plata a eșuat.'
+        processing: 'Plata este în curs de procesare.'
+        refunded: 'Plata a fost returnată cu succes.'
+        unknown: 'A apărut o problemă cu plata.'

@@ -8,4 +8,6 @@ sylius:
         last_name:
             not_blank: Vă rugăm să completați numele.
         email:
-            not_blank: Vă rugăm să completați adresa de e-mail.
+            not_blank: Introdu adresa ta de email.
+            invalid: Această adresă de e-mail este invalidă.
+            registered: Acest e-mail este deja înregistrat, vă rugăm să vă autentificați sau să vă resetați parola.

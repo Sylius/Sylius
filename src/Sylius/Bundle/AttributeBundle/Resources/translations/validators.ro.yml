@@ -9,7 +9,7 @@ sylius:
             max_length: Numele atributului nu poate depăși 1 caracter.|Numele atributului nu poate depăși {{ limit }} de caractere.
         code:
             not_blank: Vă rugăm să introduceţi codul de atribut.
-            regex: Codul atributului poate fi compus doar din litere, numere, cratime şi linii de subliniere.
+            regex: Codul atributului poate fi compus doar din litere, numere, - și _.
             unique: Acest cod a fost deja folosit.
         presentation:
             not_blank: Vă rugăm să introduceţi prezentarea atributului.

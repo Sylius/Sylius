@@ -14,6 +14,8 @@ sylius:
         configuration:
             max_entries: Der Maximalwert muss größer oder gleich dem Mindestwert sein.
             max_length: Die maximale Länge muss größer oder gleich der minimalen Länge sein.
+            min_entries: Der Mindestwert muss kleiner oder gleich dem Maximalwert sein.
+            multiple: Die Option Mehrere muss ausgewählt werden, wenn Mindest- oder Maximalwerte definiert sind.
         presentation:
             not_blank: Bitte Attributsanzeige auswählen.
             min_length: Attributsanzeige muss mindestens 1 Zeichen lang sein.|Attributsanzeige muss mindestens {{ limit }} Zeichen lang sein.

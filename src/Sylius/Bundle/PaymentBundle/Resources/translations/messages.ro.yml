@@ -17,6 +17,7 @@ sylius:
                 header: Status plată
                 checkout: Trimite comanda
                 completed: Finalizată
+                authorized: Autorizată
                 failed: Eșuată
                 new: Nouă
                 pending: În așteptare
@@ -28,4 +29,6 @@ sylius:
         payment_method:
             description: Descriere
             enabled: Activată?
+            instructions: Instrucțiuni
             name: Nume
+            position: Poziție

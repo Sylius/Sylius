@@ -5,13 +5,20 @@ sylius:
     form:
         customer:
             first_name: Prenume
+            group: Grup
             last_name: Nume
             email: Adresă e-mail
             phone_number: Număr de telefon
+            gender: Gen
+            birthday: Data naşterii
             billing_address: Adresa de facturare
             different_billing_address: Folosiți o adresă de facturare diferită?
+            only_customer_registration: Creez cont?
+            subscribed_to_newsletter: Abonează-te la newsletter
         customer_group:
             name: Nume
             roles: Roluri
     gender:
         unknown: Necunoscută
+        male: Masculin
+        female: Feminin
