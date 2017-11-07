@@ -24,6 +24,10 @@ sylius_shop_user:
 sylius_shop_product:
     resource: "@SyliusShopBundle/Resources/config/routing/product.yml"
 
+sylius_shop_product_compare:
+    resource: "@SyliusShopBundle/Resources/config/routing/product_compare.yml"
+    prefix: /compare
+
 sylius_shop_product_review:
     resource: "@SyliusShopBundle/Resources/config/routing/product_review.yml"
     prefix: /products/{slug}/reviews

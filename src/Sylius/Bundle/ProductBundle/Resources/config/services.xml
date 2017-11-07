@@ -23,6 +23,10 @@
             </call>
         </service>
 
+        <service id="sylius.controller.product_compare" class="Sylius\Bundle\ProductBundle\Controller\ProductCompareController">
+            <argument type="service" id="templating" />
+        </service>
+
         <service id="sylius.custom_factory.product_variant" class="Sylius\Component\Product\Factory\ProductVariantFactory" decorates="sylius.factory.product_variant" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.product_variant.inner" />
         </service>
