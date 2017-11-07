@@ -1,7 +1,7 @@
 How to add a custom translatable model?
 =======================================
 
-In this guide we will create a new translatable model in our system, which is quite similar to :doc:`adding a simple model </cookbook/custom-model>`,
+In this guide we will create a new translatable model in our system, which is quite similar to :doc:`adding a simple model </cookbook/entities/custom-model>`,
 although it requires some additional steps.
 
 As an example we will take a **translatable Supplier entity**, which may be really useful for shop maintenance.
@@ -30,7 +30,7 @@ You need to use such a command in your project directory.
 
 The generator will ask you for the entity name and fields. See how it should look like to match our assumptions.
 
-.. image:: ../_images/generating_translation_entity.png
+.. image:: ../../_images/generating_translation_entity.png
     :align: center
 
 As you can see we have provided only the desired translatable fields.
@@ -110,7 +110,7 @@ Below the final ``SupplierTranslation`` class is presented, it implements the ``
 While generating the entity, similarly to the way the translation was generated, we are providing only non-translatable fields.
 In our case only the ``enabled`` field.
 
-.. image:: ../_images/generating_basic_entity.png
+.. image:: ../../_images/generating_basic_entity.png
     :align: center
 
 Having the stubs generated, we need to extend our class with a connection to SupplierTranslation.
@@ -270,7 +270,7 @@ To check if the process was run correctly run such a command:
 
 The output should be:
 
-.. image:: ../_images/container_debug_supplier_translation.png
+.. image:: ../../_images/container_debug_supplier_translation.png
     :align: center
 
 6. Prepare new forms for your entity, that will be aware of its translation

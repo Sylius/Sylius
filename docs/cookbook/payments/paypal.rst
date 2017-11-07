@@ -14,7 +14,7 @@ Add a payment method with the Paypal Expresss gateway in the Admin Panel
 
 Go to the ``http://localhost:8000/admin/payment-methods/new/paypal_express_checkout`` url.
 
-.. image:: ../_images/paypal_express_create.png
+.. image:: ../../_images/paypal_express_create.png
     :align: center
 
 * Fill in the Paypal configuration form with your developer account data (``username``, ``password`` and ``signature``).
@@ -25,7 +25,7 @@ Choosing Paypal Express method in Checkout
 
 From now on Paypal Express will be available in Checkout in the channel you have created it for.
 
-.. image:: ../_images/paypal_express_checkout.png
+.. image:: ../../_images/paypal_express_checkout.png
     :align: center
 
 **Done!**

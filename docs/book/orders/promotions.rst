@@ -221,5 +221,5 @@ Learn more
 
 * :doc:`Promotion - Component Documentation </components_and_bundles/components/Promotion/index>`
 * :doc:`Promotion - Bundle Documentation </components_and_bundles/bundles/SyliusPromotionBundle/index>`
-* :doc:`How to create a custom promotion rule? </cookbook/custom-promotion-rule>`
-* :doc:`How to create a custom promotion action? </cookbook/custom-promotion-action>`
+* :doc:`How to create a custom promotion rule? </cookbook/promotions/custom-promotion-rule>`
+* :doc:`How to create a custom promotion action? </cookbook/promotions/custom-promotion-action>`

@@ -120,4 +120,3 @@ Frontend
     frontend/admin-js-and-css
 
 .. include:: /cookbook/frontend/map.rst.inc
-

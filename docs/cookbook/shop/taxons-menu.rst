@@ -8,7 +8,7 @@ How does it look like?
 
 That's a menu that you will find on the default Sylius homepage:
 
-.. image:: ../_images/taxons_menu.png
+.. image:: ../../_images/taxons_menu.png
     :align: center
 
 How to do it?

@@ -29,7 +29,7 @@ You need to use such a command in your project directory.
 
 The generator will ask you for the entity name and fields. See how it should look like to match our assumptions.
 
-.. image:: ../_images/generating_entity.png
+.. image:: ../../_images/generating_entity.png
     :align: center
 
 3. Update the database using migrations
@@ -97,13 +97,13 @@ To check if the process was run correctly run such a command:
 
 The output should be:
 
-.. image:: ../_images/container_debug_supplier.png
+.. image:: ../../_images/container_debug_supplier.png
     :align: center
 
 6. Optionally try to use Sylius API to create new resource
 ----------------------------------------------------------
 
-See how to work with API in :doc:`the separate cookbook here </cookbook/api>`.
+See how to work with API in :doc:`the separate cookbook here </cookbook/api/api>`.
 
 .. note::
 

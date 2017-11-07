@@ -12,4 +12,4 @@ This part of the documentation is about RESTful JSON/XML API for the Sylius plat
 
 .. tip::
 
-   We strongly recommend starting with our basic guide to Sylius API in the Cookbook: ":doc:`How to use Sylius API? </cookbook/api>`".
+   We strongly recommend starting with our basic guide to Sylius API in the Cookbook: ":doc:`How to use Sylius API? </cookbook/api/api>`".
