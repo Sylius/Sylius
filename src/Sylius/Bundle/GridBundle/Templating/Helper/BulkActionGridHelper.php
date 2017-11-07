@@ -14,10 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\GridBundle\Templating\Helper;
 
 use Sylius\Component\Grid\Definition\Action;
-use Sylius\Component\Grid\Definition\Field;
-use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Renderer\BulkActionGridRendererInterface;
-use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Sylius\Component\Grid\View\GridView;
 use Symfony\Component\Templating\Helper\Helper;
 
