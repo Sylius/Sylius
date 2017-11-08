@@ -92,7 +92,6 @@
         "pamil/prophecy-common": "^0.1",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
-        "se/selenium-server-standalone": "^2.52",
         "stripe/stripe-php": "^4.1",
         "symplify/easy-coding-standard": "^2.4",
         "sylius-labs/coding-standard": "^1.0"

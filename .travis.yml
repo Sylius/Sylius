@@ -1,6 +1,6 @@
 language: php
 
-dist: precise
+dist: trusty
 
 env:
     global:
