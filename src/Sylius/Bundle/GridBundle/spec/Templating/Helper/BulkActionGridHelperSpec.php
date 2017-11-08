@@ -15,9 +15,7 @@ namespace spec\Sylius\Bundle\GridBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Action;
-use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Renderer\BulkActionGridRendererInterface;
-use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Sylius\Component\Grid\View\GridView;
 use Symfony\Component\Templating\Helper\Helper;
 use Symfony\Component\Templating\Helper\HelperInterface;

@@ -19,7 +19,6 @@ use Sylius\Bundle\ResourceBundle\Grid\Parser\OptionsParserInterface;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Renderer\BulkActionGridRendererInterface;
-use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class TwigBulkActionGridRendererSpec extends ObjectBehavior
