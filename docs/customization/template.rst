@@ -199,7 +199,7 @@ That's it. Your new block should appear in the view.
 
 .. tip::
 
-    Learn more about adding custom Admin JS & CSS in the cookbook :doc:`here </cookbook/admin-js-and-css>`.
+    Learn more about adding custom Admin JS & CSS in the cookbook :doc:`here </cookbook/frontend/admin-js-and-css>`.
 
 How to use themes for customizations?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

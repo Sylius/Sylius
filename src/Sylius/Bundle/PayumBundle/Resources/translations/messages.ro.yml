@@ -8,6 +8,16 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Parolă
+                signature: Semnătură
                 username: Nume de utilizator
+                sandbox: Zona de test
+            stripe:
+                publishable_key: Cheie publică
+                secret_key: Cheie secretă
     payum_gateway_factory:
         offline: Offline
+        paypal_express_checkout: PayPal Express Checkout
+        stripe_checkout: Stripe Checkout
+    payum_action:
+        payment:
+            description: Plata conține %items% element pentru un total de %total%|Plata conține %items% elemente pentru un total de %total%

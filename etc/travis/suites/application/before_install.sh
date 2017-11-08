@@ -15,4 +15,4 @@ run_command "rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/
 run_command "sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg"
 run_command "echo \"deb http://dl.yarnpkg.com/debian/ stable main\" | sudo tee /etc/apt/sources.list.d/yarn.list"
 run_command "sudo apt-get update -qq"
-run_command "sudo apt-get install -y -qq yarn=0.21.3-1"
+run_command "sudo apt-get install -y -qq yarn=1.2.1-1"

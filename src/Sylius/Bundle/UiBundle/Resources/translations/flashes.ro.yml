@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'Canalul nu poate fi șters. Este necesar cel puțin un canal activ.'
+    checkout:
+        complete_error: 'A apărut o problemă la plasarea comenzii. Te rugăm, mai încearcă o dată.'
+    contact:
+        request_success: 'Mesajul tău a fost trimis cu succes.'
+        request_error: 'A apărut o problemă la trimiterea mesajului tău. Mai încearcă o dată.'
+    customer:
+        add_address: 'Adresa a fost salvată cu succes.'
+        impersonate: 'Te-ai autentificat cu succes în numele clientului %name%.'
+        set_address_as_default: 'Adresa a fost setată ca implicită.'
+    order:
+        apply_state_machine_transition_error: 'A apărut o problemă la actualizarea comenzii. Te rugăm, mai încearcă o dată.'
+        promotion_integrity: 'Coșul tău nu mai este eligibil pentru promoția %promotionName%.'
+        total_integrity: 'Valoarea comenzii s-a schimbat, verifică informațiile și confirmă încă o dată.'
+        update_error: 'A apărut o problemă la actualizarea produsului. Te rugăm, mai încearcă o dată.'
+    payment:
+        apply_state_machine_transition_error: 'A apărut o problemă la actualizarea plății. Te rugăm, mai încearcă o dată.'
+    product:
+        out_of_stock: 'Sunt numai %quantity% ale acestui produs în stoc.'
+    product_variant:
+        update_error: 'A apărut o problemă la actualizarea variantei produsului. Te rugăm, mai încearcă o dată.'

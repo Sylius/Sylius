@@ -102,8 +102,6 @@ The Cookbook
 
    cookbook/index
 
-.. include:: /cookbook/map.rst.inc
-
 The REST API Reference
 ----------------------
 
@@ -149,8 +147,6 @@ Support
    :hidden:
 
    support/index
-
-.. include:: /support/map.rst.inc
 
 Components & Bundles
 --------------------

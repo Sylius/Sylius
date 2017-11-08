@@ -116,3 +116,14 @@ Create an event listener and register it as listening for ``kernel.request`` eve
             );
         }
     }
+
+Theme assets
+------------
+
+When creating a new theme, any templates not in your own theme are taken from the default SyliusShopBundle views - otherwise you'd need to copy all the files.
+But watch out! Assets like javascript resources are not loaded this way. If you install some assets you will need to link them to
+your theme files by using this command:
+
+.. code-block:: bash
+
+    $ php bin/console sylius:theme:assets:install

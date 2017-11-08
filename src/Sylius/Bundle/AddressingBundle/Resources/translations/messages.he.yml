@@ -22,7 +22,7 @@ sylius:
             enabled: מופעל
         province:
             name: שם
-            abbreviation: קיצור למחוז
+            abbreviation: ראשי תיבות או שם מקוצר של מחוז
             select: בחירה
         zone:
             add_member: הוסיפו חבר/ה

@@ -10,26 +10,56 @@ sylius:
             coupon_based: Bazat pe cod promoțional
             description: Descriere
             ends_at: Se termină la
+            exclusive: Exclusiv
             name: Nume
+            priority: Prioritate
             rules: Reguli
             starts_at: Începe la
             usage_limit: Limita de utilizare
         promotion_action:
+            item_fixed_discount: Discount fix per item
+            item_percentage_discount: Discount procentual per item
+            order_fixed_discount: Discount fix pe comandă
+            order_percentage_discount: Discount procentual pe comandă
+            shipping_percentage_discount: Discount procentual pe costul de livrare
             fixed_discount_configuration:
                 amount: Sumă
+            percentage_discount_configuration:
+                percentage: Procent
             type: Tip
         promotion_coupon:
+            expires_at: Expiră la
             usage_limit: Limita de utilizare
         promotion_coupon_generator_instruction:
             amount: Sumă
+            code_length: Lungimea codului
+            expires_at: Expiră la
             usage_limit: Limita de utilizare
+        promotion_filter:
+            price_range: Filtru de preț
         promotion_rule:
+            cart_quantity: Cantitate din coș
+            contains_product: Conține produsul
+            customer_group: Grup de clienți
+            has_at_least_one_from_taxons: Are cel puțin un produs din taxoanele
+            item_total: Total valoare articole
+            nth_order: A câta comandă
+            shipping_country: Țara de livrare
+            taxonomy: Taxonomie
+            total_price_of_items_from_taxon: Total valoare produse din taxon
             cart_quantity_configuration:
                 count: Număr
+                equal: Egal
             contains_product_configuration:
+                exclude: Exclude
                 variants: Produse
             item_total_configuration:
                 amount: Sumă
+            nth_order_configuration:
+                nth: Al n-lea
             shipping_country_configuration:
                 country: Țară
+            taxonomy_configuration:
+                exclude: Exclude
+                taxons: Taxoni
             type: Tip

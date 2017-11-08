@@ -14,7 +14,7 @@ Now to install Sylius you need to go through series of few steps:
 You should `signup at Cloudways <https://platform.cloudways.com/signup>`_ to buy the PHP servers from the above mentioned providers. Simply go to the pricing page and choose your required plan.
 You then need to go through the verification process. Once it done login to platform and launch your first Custom PHP application. You can follow the Gif too.
 
-.. image:: ../_images/cloudways-php-server.gif
+.. image:: ../../_images/cloudways-php-server.gif
     :align: center
 
 Now let’s start the process of installing Sylius on Cloudways.
@@ -25,7 +25,7 @@ Now let’s start the process of installing Sylius on Cloudways.
 Open the SSH terminal from the **Server Management tab**. You can also use PuTTY for this purpose. Find the SSH credentials under 
 the **Master Credentials** heading and login to the SSH terminal:
 
-.. image:: ../_images/cloudways-ssh.png
+.. image:: ../../_images/cloudways-ssh.png
     :align: center
 
 After the login, move to the application folder using the ``cd`` command and run the following command to start installing Sylius:
@@ -37,12 +37,12 @@ After the login, move to the application folder using the ``cd`` command and run
 The command will start installing the long list of dependencies for Sylius. Once the installation finishes, Sylius will ask for the database credentials.
 You can find the database username and password in the Application Access Details.
 
-.. image:: ../_images/cloudways-database.png
+.. image:: ../../_images/cloudways-database.png
     :align: center
 
 Enter the database details in the SSH terminal:
 
-.. image:: ../_images/cloudways-sylius-database.png
+.. image:: ../../_images/cloudways-sylius-database.png
     :align: center
 
 Keep the rest of the values to default so that the config file will have the defaults Sylius settings.
@@ -70,7 +70,7 @@ Now run the following command:
 
 Finally, the last step is to update the webroot of the application in the Platform. Move to the **Application Settings** tab and update it.
 
-.. image:: ../_images/cloudways-sylius-webroot.png
+.. image:: ../../_images/cloudways-sylius-webroot.png
     :align: center
 
 Now open the application URL as shown in the Access Details tab.
