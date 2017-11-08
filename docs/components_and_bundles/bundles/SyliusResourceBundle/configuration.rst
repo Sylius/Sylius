@@ -11,7 +11,7 @@ Now you need to configure your first resource. Let's assume you have a *Book* en
 .. tip::
 
     You can see a full exemplary configuration of a typical resource
-    :doc:`here, in the "How to add a custom model?" cookbook </cookbook/custom-model>`.
+    :doc:`here, in the "How to add a custom model?" cookbook </cookbook/entities/custom-model>`.
 
 Implement the ResourceInterface in your model class.
 ----------------------------------------------------
@@ -78,7 +78,7 @@ Generate API routing.
 .. tip::
 
     Learn more about using Sylius REST API in these articles:
-    :doc:`REST API Reference </api/index>`, :doc:`How to use Sylius API? - Cookbook </cookbook/api>`.
+    :doc:`REST API Reference </api/index>`, :doc:`How to use Sylius API? - Cookbook </cookbook/api/api>`.
 
 Add the following lines to ``app/config/routing.yml``:
 

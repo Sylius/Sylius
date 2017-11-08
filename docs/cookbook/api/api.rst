@@ -49,7 +49,7 @@ This will give you such a response:
 Creating a new resource instance via API
 ----------------------------------------
 
-Use the ``access_token`` in the request that will create a new Supplier (:doc:`that we were creating in another cookbook</cookbook/custom-model>`).
+Use the ``access_token`` in the request that will create a new Supplier (:doc:`that we were creating in another cookbook</cookbook/entities/custom-model>`).
 
 .. code-block:: bash
 

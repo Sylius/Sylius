@@ -6,7 +6,7 @@ E-Mails
 
 Sylius is sending various e-mails and this chapter is a reference about all of them. Continue reading to learn what e-mails are sent, when and how to customize the templates.
 To understand how e-mail sending works internally, please refer to :doc:`SyliusMailerBundle documentation </components_and_bundles/bundles/SyliusMailerBundle/index>`.
-And to learn more about mailer services configuration, read :doc:`the dedicated cookbook </cookbook/mailer>`.
+And to learn more about mailer services configuration, read :doc:`the dedicated cookbook </cookbook/emails/mailer>`.
 
 User Confirmation
 -----------------

@@ -28,7 +28,7 @@ Go to the ``http://localhost:8000/admin/payment-methods/new/stripe_checkout`` ur
 
 .. tip::
 
-    If your are not sure how to do it check how we do it :doc:`for Paypal in this cookbook </cookbook/paypal>`.
+    If your are not sure how to do it check how we do it :doc:`for Paypal in this cookbook </cookbook/payments/paypal>`.
 
 Choosing Stripe Credit Card method in Checkout
 ----------------------------------------------
