@@ -2,6 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        base_currency:
+            not_blank: الرجاء إدخال العملة الرئيسية.
+        default_locale:
+            not_blank: الرجاء إدخال اللغة الافتراضية للقناة.
+        contact_email:
+            invalid: البريد الإلكتروني غير صالح.
     contact:
         email:
             not_blank: الرجاء إدخال البريدك الإلكتروني.

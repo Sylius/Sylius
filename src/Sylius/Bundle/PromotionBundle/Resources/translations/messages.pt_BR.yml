@@ -41,9 +41,12 @@ sylius:
             cart_quantity: Quantidade no carrinho
             contains_product: Contém o produto
             customer_group: Grupo de Cliente
+            has_at_least_one_from_taxons: Possui pelo menos um dos táxons
             item_total: Total do item
+            nth_order: Enésima ordem
             shipping_country: País de Envio
             taxonomy: Categorias
+            total_price_of_items_from_taxon: Preço total dos itens do táxon
             cart_quantity_configuration:
                 count: Contagem
                 equal: Igual
