@@ -22,6 +22,7 @@ sylius:
         email: 'البريد الإلكتروني'
         exchange_rate: 'سعر الصرف'
         first_name: 'الاسم الأول'
+        home: 'الرئيسية'
         hostname: 'اسم المضيف'
         last_name: 'اسم العائلة'
         lastname: 'اسم العائلة'
