@@ -18,6 +18,9 @@ sylius:
             usage_limit: Предел использования
         promotion_action:
             item_fixed_discount: Фиксированная скидка
+            order_fixed_discount: Фиксированная скидка
+            order_percentage_discount: Процент скидки на заказ
+            shipping_percentage_discount: Процент скидки на доставку
             fixed_discount_configuration:
                 amount: Сумма
             percentage_discount_configuration:
@@ -34,8 +37,12 @@ sylius:
         promotion_filter:
             price_range: Фильтр диапазона цен
         promotion_rule:
+            contains_product: Содержит продукт
             customer_group: Группа клиента
+            item_total: Товаров всего
+            shipping_country: Страна получателя
             taxonomy: Тип товара
+            total_price_of_items_from_taxon: Общая стоимость предметов из категории
             cart_quantity_configuration:
                 count: Кол-во
                 equal: Равно
