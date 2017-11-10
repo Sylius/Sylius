@@ -1,8 +1,8 @@
 @comparing_products
 Feature: Adding product to the comparison
-    In order to add product to the comparison
-    As a Viewer
-    I want to see compared products
+    In order to make more reasonable choice of product
+    As a Visitor
+    I want to see comparison of products
 
     Background:
         Given the store operates on a single channel in "United States"
