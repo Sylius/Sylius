@@ -17,14 +17,12 @@
     </imports>
 
     <services>
+        <service id="sylius.product_attribute_comparator" class="Sylius\Bundle\CoreBundle\Product\Comparator\AttributeComparator"/>
+
         <service id="sylius.controller.product_slug" class="Sylius\Bundle\ProductBundle\Controller\ProductSlugController">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
-        </service>
-
-        <service id="sylius.controller.product_compare" class="Sylius\Bundle\ProductBundle\Controller\ProductCompareController">
-            <argument type="service" id="templating" />
         </service>
 
         <service id="sylius.custom_factory.product_variant" class="Sylius\Component\Product\Factory\ProductVariantFactory" decorates="sylius.factory.product_variant" decoration-priority="256" public="false">

@@ -18,13 +18,18 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function getComparedAttributes()
     {
-        return 2; // TODO
+        $this->getElement('attributes')->find('table', 'table');
+    }
+
+    public function getErrorMessage()
+    {
+        $this->getDocument()->find('css', 'alert');
     }
 
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'attributes' => '#sylius-product-attributes'
+            'attributes' => '#sylius-product-compared-attributes'
         ]);
     }
 }

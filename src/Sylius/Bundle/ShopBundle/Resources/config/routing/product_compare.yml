@@ -5,5 +5,5 @@ sylius_shop_product_compare_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_compare:indexAction
+        _controller: sylius.product_compare_controller:indexAction
 

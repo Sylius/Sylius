@@ -24,7 +24,7 @@ final class ProductCompareContext implements Context
     /**
      * @Given there is a product :product with :attribute attribute set to :value
      */
-    public function iAddProductToCompare(ProductInterface $product, string $attribute, string $value)
+    public function productWithAttributeSetToValue(ProductInterface $product, string $attribute, string $value)
     {
 
     }
@@ -34,7 +34,7 @@ final class ProductCompareContext implements Context
      */
     public function iCompareProducts()
     {
-        Assert::true($this->indexPage->tryToOpen());
+        $this->indexPage->open();
     }
 
     /**
