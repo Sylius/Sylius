@@ -53,18 +53,16 @@ class ProductCompareController
     public function indexAction(Request $request): Response
     {
         $productsToCompare = $request->query->get('product');
+
         $products = $this->manager
             ->getRepository(Product::class)
             ->findBy([
                 'id' => $productsToCompare,
             ])
         ;
+
         $comparedAttributes = $this->comparator->compare($products);
 
-        foreach ($comparedAttributes as $attribute) {
-            dump($attribute);
-        }
-        die;
         return $this->templatingEngine->renderResponse('@SyliusShop/ProductCompare/index.html.twig', [
             'products' => $this->comparator->compare($products),
         ]);
