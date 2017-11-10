@@ -12,12 +12,17 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductAttribute;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Sylius\Component\Shipping\Model\ShippingMethod;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
 class Version20171108155517 extends AbstractMigration implements ContainerAwareInterface
 {
+    const TABLE_PRODUCT_ATTRIBUTE = 'sylius_product_attribute';
+
+    const TABLE_SHIPPING_METHOD = 'sylius_shipping_method';
+
     /**
      * @var ContainerInterface $container
      */
@@ -39,11 +44,21 @@ class Version20171108155517 extends AbstractMigration implements ContainerAwareI
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        // migrate existing data
-        $this->migrateData();
+        /** @var EntityRepository $productAttributeRepo */
+        $productAttributeRepo = $this->container->get('sylius.repository.product_attribute');
+
+        /** @var EntityRepository $shippingMethodRepo */
+        $shippingMethodRepo = $this->container->get('sylius.repository.shipping_method');
+
+        // migrate data in `sylius_product_attribute` table
+        $this->migrateData($productAttributeRepo, self::TABLE_PRODUCT_ATTRIBUTE);
+
+        // migrate data in `sylius_shipping_method` table
+        $this->migrateData($shippingMethodRepo, self::TABLE_SHIPPING_METHOD);
 
         // update column type to json_array
-        $schema->getTable('sylius_product_attribute')->changeColumn('configuration', ['type' => JsonArrayType::getType(Type::JSON_ARRAY)]);
+        $schema->getTable(self::TABLE_PRODUCT_ATTRIBUTE)->changeColumn('configuration', ['type' => JsonArrayType::getType(Type::JSON_ARRAY)]);
+        $schema->getTable(self::TABLE_SHIPPING_METHOD)->changeColumn('configuration', ['type' => JsonArrayType::getType(Type::JSON_ARRAY)]);
     }
 
     /**
@@ -55,38 +70,34 @@ class Version20171108155517 extends AbstractMigration implements ContainerAwareI
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         // this migration can not be reverted
-        $this->abortIf(true, 'The type of `configuration` field of `sylius_product_attribute` table can not be reverted.');
+        $this->abortIf(true, 'The type of `configuration` field of `sylius_product_attribute` and `sylius_shipping_method` tables can not be reverted.');
     }
 
     /**
      * Migrates the existing serialized data
      */
-    protected function migrateData()
+    protected function migrateData(EntityRepository $entityRepository, string $table)
     {
-        /** @var EntityRepository $productAttributeRepo */
-        $productAttributeRepo = $this->container->get('sylius.repository.product_attribute');
-
         /** @var EntityManager $em */
         $em   = $this->container->get('doctrine.orm.default_entity_manager');
-        $rows = $em->getConnection()->query('SELECT * FROM sylius_product_attribute')->fetchAll();
+        $rows = $em->getConnection()->query(sprintf("SELECT `id`, `configuration` FROM `%s`", $table))->fetchAll();
 
         foreach ($rows as $row) {
             $unserialized  = $this->performUnserialize($row['configuration']);
 
-            /** @var ProductAttribute $productAttribute */
-            $productAttribute = $productAttributeRepo->find($row['id']);
+            /** @var ProductAttribute|ShippingMethod|null $entity */
+            $entity = $entityRepository->find($row['id']);
 
-            $this->abortIf(!$productAttribute, sprintf('Product with id "%s" was not found', $row['id']));
+            $this->abortIf(!$entity, sprintf('Entity with id "%s" was not found in the `%s` table.', $row['id'], $table));
 
-            $productAttribute->setConfiguration($unserialized);
+            $entity->setConfiguration($unserialized);
         }
 
         $em->flush();
     }
 
     /**
-     * Tries to unserialize values of `configuration` filed of `sylius_product_attribute`, aborts the migration
-     * in case of unserialization failure.
+     * Tries to unserialize values of `configuration` field, aborts the migration in case of unserialization failure.
      *
      * @param string $configuration
      *
@@ -99,7 +110,7 @@ class Version20171108155517 extends AbstractMigration implements ContainerAwareI
         try {
             $data = unserialize($configuration);
         } catch (Exception $e) {
-            $this->abortIf(!is_array($data), 'Unable to unserialize() the configuration data from `sylius_product_attribute` table. The data might be in the wrong format.');
+            $this->abortIf(!is_array($data), 'Unable to unserialize() the configuration data from the table. The data might be in the wrong format.');
         }
 
         return $data;

@@ -18,7 +18,7 @@
         </id>
 
         <field name="code" column="code" type="string" unique="true" />
-        <field name="configuration" column="configuration" type="array" />
+        <field name="configuration" column="configuration" type="json_array" />
 
         <many-to-one field="category" target-entity="Sylius\Component\Shipping\Model\ShippingCategoryInterface">
             <join-column name="category_id" referenced-column-name="id" nullable="true" />
