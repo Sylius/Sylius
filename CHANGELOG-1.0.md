@@ -1,5 +1,33 @@
 ## CHANGELOG
 
+### v1.0.3 2017-11-10
+
+- [#8954](https://github.com/Sylius/Sylius/pull/8954) Add more accurate select jQuery selector (@PapsOu)
+- [#8952](https://github.com/Sylius/Sylius/pull/8952) Suspend PHP 7.2 support (@pamil)
+- [#8858](https://github.com/Sylius/Sylius/pull/8858) [Bug] [Admin] fixed filter reset after changing grid page limits - third branch (@doctorx32)
+- [#8878](https://github.com/Sylius/Sylius/pull/8878) Add more accurate select jQuery selector (@PapsOu)
+- [#8924](https://github.com/Sylius/Sylius/pull/8924) Improved parse alias exception message (@william-nedbase)
+- [#8903](https://github.com/Sylius/Sylius/pull/8903) Plugin naming convention RFC implementation (closes #8848) (@stefandoorn)
+- [#8949](https://github.com/Sylius/Sylius/pull/8949) [AUTO] Updated translations from Crowdin (@SyliusBot)
+- [#8945](https://github.com/Sylius/Sylius/pull/8945) [Travis] Use Ubuntu Trusty (@castler, @pamil)
+- [#8941](https://github.com/Sylius/Sylius/pull/8941) [Documentation] Rework Cookbook organization (@CoderMaggie)
+- [#8943](https://github.com/Sylius/Sylius/pull/8943) Apply coding standard fixes (@pamil)
+- [#8933](https://github.com/Sylius/Sylius/pull/8933) [Documentation] Theme assets installing tip (@CoderMaggie)
+- [#8934](https://github.com/Sylius/Sylius/pull/8934) [Documentation] Branching strategy (@CoderMaggie)
+- [#8940](https://github.com/Sylius/Sylius/pull/8940) Change bulk action implementation and remove the need for a BC break (@pamil)
+- [#8937](https://github.com/Sylius/Sylius/pull/8937) Fix wrong use statement for ProductInterface (@stefandoorn)
+- [#8938](https://github.com/Sylius/Sylius/pull/8938) [AUTO] Updated translations from Crowdin (@SyliusBot)
+- [#8915](https://github.com/Sylius/Sylius/pull/8915) [Travis] Update Yarn to stable 1.2.1, use Node v6 (@venyii)
+- [#8931](https://github.com/Sylius/Sylius/pull/8931) [Behat] fix typo in contact context (@loic425)
+- [#8926](https://github.com/Sylius/Sylius/pull/8926) Fix: Old interface names used in product documentation (@nbjohan)
+- [#8927](https://github.com/Sylius/Sylius/pull/8927) [AUTO] Updated translations from Crowdin (@SyliusBot)
+- [#8912](https://github.com/Sylius/Sylius/pull/8912) Update UPGRADE file mentioning risky changes made between v1.0.1 and v1.0.2 releases (@pamil)
+- [#8919](https://github.com/Sylius/Sylius/pull/8919) [AUTO] Updated translations from Crowdin (@SyliusBot)
+- [#8491](https://github.com/Sylius/Sylius/pull/8491) [Admin] Mass deletion on admin grid (fixes #93) (@GSadee, @stefandoorn)
+- [#8874](https://github.com/Sylius/Sylius/pull/8874) [Order][OrderItem] Immutable product/variant names (@GSadee, @johnrisby)
+- [#8901](https://github.com/Sylius/Sylius/pull/8901) Backwards compatibility promise (@pamil)
+- [#8911](https://github.com/Sylius/Sylius/pull/8911) Change 1.0 version to 1.0.3-DEV (@pamil)
+
 ### v1.0.2 2017-10-27
 
 - [#8908](https://github.com/Sylius/Sylius/pull/8908) Support for PHP 7.2 (@pamil)
