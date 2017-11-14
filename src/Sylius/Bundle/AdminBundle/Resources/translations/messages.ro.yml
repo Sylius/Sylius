@@ -17,8 +17,8 @@ sylius:
                     admin_users: Administratori
                     channels: Canale
                     countries: Țări
-                    currencies: Valute
-                    exchange_rates: Rate de schimb
+                    currencies: Monede
+                    exchange_rates: Cursuri de schimb
                     header: Configurare
                     locales: Setări regionale
                     payment_methods: Metode de plată

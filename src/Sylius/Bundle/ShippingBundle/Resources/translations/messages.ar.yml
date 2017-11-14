@@ -6,4 +6,5 @@ sylius:
         shipping_category:
             name: الاسم
         shipping_method:
+            channels: قنوات
             name: الاسم

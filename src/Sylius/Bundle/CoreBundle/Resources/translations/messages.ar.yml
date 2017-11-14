@@ -34,6 +34,8 @@ sylius:
         page:
             body: المحتوى
             title: العنوان
+        product:
+            channels: قنوات
         product_filter:
             name: الاسم
         user:
@@ -49,6 +51,11 @@ sylius:
             email: البريد الإلكتروني
         product_association_type:
             name: الاسم
+        promotion_rule:
+            product:
+                products: المنتجات
+        payment_method:
+            channels: قنوات
     installer:
         extensions:
             "off": false
