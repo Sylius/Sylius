@@ -8,6 +8,8 @@ sylius:
         promotion_action:
             type: نوع
         promotion_rule:
+            contains_product_configuration:
+                variants: المنتجات
             shipping_country_configuration:
                 country: البلد
             type: نوع

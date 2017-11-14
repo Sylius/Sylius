@@ -8,7 +8,7 @@ sylius:
             group: Gruppe
             last_name: Nachname
             email: E-Mail
-            phone_number: Telefonnummber
+            phone_number: Telefonnummer
             gender: Geschlecht
             birthday: Geburtstag
             billing_address: Rechnungsadresse

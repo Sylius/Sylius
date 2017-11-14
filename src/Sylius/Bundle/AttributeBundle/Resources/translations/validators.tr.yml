@@ -11,6 +11,11 @@ sylius:
             not_blank: Öznitelik kodunu giriniz.
             regex: Öznitelik kodu yalnızca harf, sayı, tire ve alt çizgi oluşur.
             unique: Bu kod zaten kullanılıyor.
+        configuration:
+            max_entries: Yapılandırma maksimum girdileri değeri, min girişleri değerinden daha büyük veya ona eşit olmalıdır.
+            max_length: Yapılandırma maksimum uzunluğu, minimum uzunluğa eşit veya daha büyük olmalıdır.
+            min_entries: Yapılandırma min girişleri değeri, eklenen seçeneklerin sayısından daha düşük veya ona eşit olmalıdır.
+            multiple: Minimum veya maksimum giriş değerleri belirtilirse yapılandırma birden çok olmalıdır.
         presentation:
             not_blank: Lütfen özellik tanıtımını giriniz.
             min_length: Özellik tanıtımı en az 1 karakter uzunluğunda olmalıdır.|Özellik tanıtım en az {{ limit }} karakter uzunluğunda olmalıdır.
