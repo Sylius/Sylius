@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1b5b9a8d469e01921462ccfa54ff1d0c",
+    "content-hash": "f210ff5745ea44858914d7221ad6e5f5",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -8704,23 +8704,24 @@
         },
         {
             "name": "php-cs-fixer/diff",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/diff.git",
-                "reference": "d068edadcb8f7bc2ea3d3769cdbaf609026ec4f4"
+                "reference": "f0ef6133d674137e902fdf8a6f2e8e97e14a087b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/diff/zipball/d068edadcb8f7bc2ea3d3769cdbaf609026ec4f4",
-                "reference": "d068edadcb8f7bc2ea3d3769cdbaf609026ec4f4",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/diff/zipball/f0ef6133d674137e902fdf8a6f2e8e97e14a087b",
+                "reference": "f0ef6133d674137e902fdf8a6f2e8e97e14a087b",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.4.3"
+                "phpunit/phpunit": "^4.8.35 || ^5.4.3",
+                "symfony/process": "^3.3"
             },
             "type": "library",
             "autoload": {
@@ -8729,9 +8730,6 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
             "authors": [
                 {
                     "name": "Kore Nordmann",
@@ -8740,6 +8738,9 @@
                 {
                     "name": "Sebastian Bergmann",
                     "email": "sebastian@phpunit.de"
+                },
+                {
+                    "name": "SpacePossum"
                 }
             ],
             "description": "sebastian/diff v2 backport support for PHP5.6",
@@ -8747,7 +8748,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2017-09-23T16:02:08+00:00"
+            "time": "2017-10-19T09:58:18+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -8935,16 +8936,16 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "4.0.4",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "a7ab6f89fe00dc45636b650a7434fb28bdf3f6de"
+                "reference": "e5cd03ab0b2de7a8ce411c9ff18cd17c3a2a7ed2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/a7ab6f89fe00dc45636b650a7434fb28bdf3f6de",
-                "reference": "a7ab6f89fe00dc45636b650a7434fb28bdf3f6de",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/e5cd03ab0b2de7a8ce411c9ff18cd17c3a2a7ed2",
+                "reference": "e5cd03ab0b2de7a8ce411c9ff18cd17c3a2a7ed2",
                 "shasum": ""
             },
             "require": {
@@ -9012,7 +9013,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2017-10-13T08:36:45+00:00"
+            "time": "2017-10-18T06:48:25+00:00"
         },
         {
             "name": "phpspec/prophecy",

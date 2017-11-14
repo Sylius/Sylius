@@ -45,7 +45,7 @@ Installation
 You need [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) to install PHP packages and [yarn](https://yarnpkg.com/lang/en/docs/install/) to install JS packages.
 
 ```bash
-$ composer create-project sylius/sylius-standard my-sylius-shop && cd my-sylius-shop
+$ composer create-project sylius/sylius my-sylius-shop && cd my-sylius-shop
 $ php bin/console sylius:install
 $ yarn install && yarn run gulp
 $ php bin/console server:start
