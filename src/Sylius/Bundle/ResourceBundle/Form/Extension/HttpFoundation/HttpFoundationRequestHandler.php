@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Sylius\Bundle\ResourceBundle\Form\Extension\HttpFoundation;
 
@@ -18,6 +18,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\RequestHandlerInterface;
 use Symfony\Component\Form\Util\ServerParams;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -106,5 +107,10 @@ final class HttpFoundationRequestHandler implements RequestHandlerInterface
         }
 
         $form->submit($data, 'PATCH' !== $method);
+    }
+
+    public function isFileUpload($data)
+    {
+        return $data instanceof File;
     }
 }
