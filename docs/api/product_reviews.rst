@@ -18,12 +18,12 @@ When you get a collection of resources, you will receive objects with the follow
 | comment          | Comment of product review                                                                      |
 +------------------+------------------------------------------------------------------------------------------------+
 | author           | Customer author for product review (This is customer that added the                            |
-|                  | product review; this will contain customer resource information)                               |      
+|                  | product review; this will contain customer resource information)                               |
 +------------------+------------------------------------------------------------------------------------------------+
 | status           | Status of product review (New, Accepted, Rejected)                                             |
 +------------------+------------------------------------------------------------------------------------------------+
 | reviewSubject    | This is the review subject for the product review. For this case of the product review, this   |
-|                  | will contains a product resource                                                               |
+|                  | will contain a product resource                                                                |
 +------------------+------------------------------------------------------------------------------------------------+
 
 .. note::
@@ -61,7 +61,7 @@ Definition
 Example
 ^^^^^^^
 
-To create new product review for the product with ``code = MUG-TH`` use the below method.
+To create a new product review for the product with ``code = MUG-TH`` use the below method.
 
 .. code-block:: bash
 
@@ -107,8 +107,8 @@ Exemplary Response
         },
         "status": "new",
         "reviewSubject": {
-            "name": "MUG-TH",
             "id": 1,
+            "name": "MUG-TH",
             "code": "MUG-TH",
             "attributes": [],
             "options": [],
@@ -116,7 +116,7 @@ Exemplary Response
             "translations": []
         }
     }
-        
+
 .. warning::
 
     If you try to create a resource without title, rating, comment or author, you will receive a ``400 Bad Request`` error.
@@ -240,8 +240,8 @@ Exemplary Response
         },
         "status": "new",
         "reviewSubject": {
-            "name": "MUG-TH",
             "id": 1,
+            "name": "MUG-TH",
             "code": "MUG-TH",
             "attributes": [],
             "options": [],
@@ -330,8 +330,8 @@ Exemplary Response
                     },
                     "status": "new",
                     "reviewSubject": {
-                        "name": "MUG-TH",
                         "id": 1,
+                        "name": "MUG-TH",
                         "code": "MUG-TH",
                         "options": [],
                         "averageRating": 0,
@@ -361,8 +361,8 @@ Exemplary Response
                     },
                     "status": "new",
                     "reviewSubject": {
-                        "name": "MUG-TH",
                         "id": 1,
+                        "name": "MUG-TH",
                         "code": "MUG-TH",
                         "options": [],
                         "averageRating": 0,
@@ -392,8 +392,8 @@ Exemplary Response
                     },
                     "status": "accepted",
                     "reviewSubject": {
-                        "name": "MUG-TH",
                         "id": 1,
+                        "name": "MUG-TH",
                         "code": "MUG-TH",
                         "options": [],
                         "averageRating": 0,
