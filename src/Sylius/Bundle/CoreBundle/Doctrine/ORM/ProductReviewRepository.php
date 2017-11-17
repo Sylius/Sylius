@@ -21,7 +21,6 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Paul Stoica <paul.stoica18@gmail.com>
  */
 class ProductReviewRepository extends EntityRepository implements ProductReviewRepositoryInterface
 {

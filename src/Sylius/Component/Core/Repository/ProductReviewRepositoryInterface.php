@@ -20,7 +20,6 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Paul Stoica <paul.stoica18@gmail.com>
  */
 interface ProductReviewRepositoryInterface extends RepositoryInterface
 {
@@ -51,7 +50,7 @@ interface ProductReviewRepositoryInterface extends RepositoryInterface
 
     /**
      * @param mixed $id
-     * @param string  $productCode
+     * @param string $productCode
      *
      * @return ReviewInterface|null
      */
