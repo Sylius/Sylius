@@ -123,11 +123,11 @@ final class ProductReviewApiTest extends JsonApiTestCase
         $data =
 <<<EOT
         {
-          "title": "J_REVIEW",
+          "title": "A good product",
           "rating": "3",
-          "comment": "J_REVIEW_COMMENT",
+          "comment": "This is a good product.",
           "author": {
-            "email": "j@example.com"
+            "email": "my_review@example.com"
           }
         }
 EOT;

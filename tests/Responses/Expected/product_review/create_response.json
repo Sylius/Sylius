@@ -1,12 +1,12 @@
 {
     "id": @integer@,
-    "title": "J_REVIEW",
+    "title": "A good product",
     "rating": 3,
-    "comment": "J_REVIEW_COMMENT",
+    "comment": "This is a good product.",
     "author": {
         "id": @integer@,
-        "email": "j@example.com",
-        "emailCanonical": "j@example.com",
+        "email": "my_review@example.com",
+        "emailCanonical": "my_review@example.com",
         "gender": "u",
         "_links": {
             "self": {
