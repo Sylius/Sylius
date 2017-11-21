@@ -8,3 +8,16 @@ sylius:
         gateway_configuration:
             paypal:
                 password: كلمة السر
+                signature: التوقيع
+                username: اسم المستخدم
+                sandbox: ساند بوكس
+            stripe:
+                publishable_key: مفتاح النشر
+                secret_key: المفتاح السري
+    payum_gateway_factory:
+        offline: غير مُتصل
+        paypal_express_checkout: إنهاء الطلب عبر إكسبريس باي بال
+        stripe_checkout: إنهاء الطلب
+    payum_action:
+        payment:
+            description: الدفع تحتوي على بند %items% لمجموعة من %total% | الدفع تحتوي على عناصر %items% لمجموعة من %total%

@@ -4,6 +4,8 @@
 sylius:
     form:
         taxon:
+            description: الوصف
             name: الاسم
+            slug: سبيكة
         taxonomy:
             name: الاسم
