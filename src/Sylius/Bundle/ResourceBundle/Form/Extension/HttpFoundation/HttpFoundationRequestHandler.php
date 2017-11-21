@@ -19,6 +19,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\RequestHandlerInterface;
 use Symfony\Component\Form\Util\ServerParams;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Does not compare the form's method with the request's method.
@@ -106,5 +107,10 @@ final class HttpFoundationRequestHandler implements RequestHandlerInterface
         }
 
         $form->submit($data, 'PATCH' !== $method);
+    }
+
+    public function isFileUpload($data)
+    {
+        return $data instanceof File;
     }
 }
