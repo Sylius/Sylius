@@ -6,4 +6,4 @@ sylius:
         review:
             status:
                 new: جديد
-            title: العنوان
+            title: عنوان

@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: 'قد تم الغاء الدفع الخاص بك.'
+        completed: 'قد تم الغاء الدفع الخاص بك.'
+        failed: 'فشلت عملية الدفع.'
+        processing: 'تمت معالجة طلب الدفعة.'
+        refunded: 'تم استلام الدفع الخاص بك بنجاح.'
+        unknown: 'هناك مشكلة غير معروفة مع الدفع.'
