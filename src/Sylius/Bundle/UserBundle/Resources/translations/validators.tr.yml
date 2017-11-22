@@ -10,3 +10,7 @@ sylius:
         plainPassword:
             not_blank: Lütfen parolanızı girin.
             mismatch: Girilen parolalar uyuşmuyor
+            wrong_current: Sağlanan şifre geçerli şifreden farklı.
+        password:
+            min: Şifre, en az {{ limit }} karakter uzunluğunda olmalıdır.
+            max: Şifre, en fazla {{ limit }} karakter uzunluğunda olmalıdır.

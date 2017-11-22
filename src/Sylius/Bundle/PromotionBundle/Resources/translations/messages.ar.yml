@@ -4,10 +4,15 @@
 sylius:
     form:
         promotion:
+            description: الوصف
             name: الاسم
         promotion_action:
             type: نوع
         promotion_rule:
+            contains_product_configuration:
+                variants: المنتجات
             shipping_country_configuration:
                 country: البلد
+            taxonomy_configuration:
+                taxons: تاكسونس
             type: نوع

@@ -5,5 +5,9 @@ sylius:
     form:
         user:
             email: البريد الإلكتروني
+            enabled: تفعيل
             password:
                 label: كلمة السر
+            shipping_address: عنوان الشحن
+        user_filter:
+            query: بحث

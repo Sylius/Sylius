@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v1.0.4 2017-11-17
+
+- [#8968](https://github.com/Sylius/Sylius/pull/8968) Security release 1.0.4 - allowing to update to Symfony 3.3.13 (@pamil)
+
 ### v1.0.3 2017-11-10
 
 - [#8954](https://github.com/Sylius/Sylius/pull/8954) Add more accurate select jQuery selector (@PapsOu)

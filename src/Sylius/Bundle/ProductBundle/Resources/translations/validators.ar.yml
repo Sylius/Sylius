@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    product:
+        sku:
+            not_blank: الرجاء إدخال sku المنتج.
+            unique: رمز المنتج يجب أن يكون مميز.
+        slug:
+            not_blank: الرجاء إدخال منتج

@@ -6,3 +6,21 @@ sylius:
         delete_error: 'Kanal silinemez, en az bir etkin kanal gereklidir.'
     checkout:
         complete_error: 'Siparişinizi tamamlarken beklenmeyen bir sorun oluştu, lütfen siparişinizi yeniden oluşturmayı deneyin.'
+    contact:
+        request_success: 'İletişim mesajınız başarı ile gönderildi.'
+        request_error: 'İletişim mesajınız gönderilirken bir hata oluştu. Lütfen tekrar deneyin.'
+    customer:
+        add_address: 'Adres başarı ile eklendi.'
+        impersonate: '%name% adlı müşterinin kimliğine bürünüldü.'
+        set_address_as_default: 'Adres varsayılan olarak ayarlandı.'
+    order:
+        apply_state_machine_transition_error: 'Siparişin güncellenmesinde beklenmedik bir sorun oluştu. Lütfen, siparişi tekrar güncellemeyi deneyin.'
+        promotion_integrity: 'Bu promosyon kodu  "%promotionName%" için artık uygun değilsiniz.'
+        total_integrity: 'Siparişinizin toplamı değiştirildi, sipariş bilgilerinizi kontrol edin ve tekrar onaylayın.'
+        update_error: 'Ürünün güncellenmesinde beklenmedik bir sorun oluştu. Lütfen ürünü tekrar güncellemeyi deneyin.'
+    payment:
+        apply_state_machine_transition_error: 'Ödemenin güncellenmesinde beklenmedik bir sorun oluştu. Lütfen ödemeyi tekrar güncellemeyi deneyin.'
+    product:
+        out_of_stock: 'Stokta bu üründen %quantity% adet var.'
+    product_variant:
+        update_error: 'Ürün varyantını güncelleme konusunda beklenmedik bir sorun oluştu. Lütfen, ürün varyantını tekrar güncellemeyi deneyin.'

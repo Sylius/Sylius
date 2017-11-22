@@ -3,7 +3,18 @@
 
 sylius:
     form:
+        shipment:
+            states:
+                checkout: إتمام الشراء
+                pending: مُعلقّة
+                cancelled: ملغي
         shipping_category:
+            description: الوصف
             name: الاسم
         shipping_method:
+            channels: قنوات
+            description: الوصف
+            enabled: تفعيل
             name: الاسم
+            tax_category: أقسام الضريبة
+            translations: التّرجمة

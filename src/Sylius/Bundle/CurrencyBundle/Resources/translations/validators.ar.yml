@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    currency:
+        code:
+            exact_length: يجب أن يكون رمز العملة بالضبط من 3 أحرف.
+            not_blank: الرجاء اختيار رمز العملة.
+            regex: يجب أن يتكون رمز المنطقة من الأحرف اللاتينية والأرقام والشرطات '-' والشرطات السفلية '_' فقط.
+            unique: رمز المنطقة المدخل مستخدم مسبقًا، الرجاء إدخال رمز منطقة مميز.
+        exchange_rate:
+            not_blank: الرجاء إدخال اسم القناة.
+    exchange_rate:
+        ratio:
+            greater_than: يجب أن تكون القيمة أكبر من {0}.
+            invalid: ': السمة يجب ان تكون رقماً.'
+            not_blank: الرجاء إدخال اسم القناة.
+        source_currency:
+            not_blank: الرجاء إدخال من العملة التي ينبغي أن تستمد من سعر الصرف.
+        target_currency:
+            not_blank: الرجاء إدخال من العملة التي ينبغي أن تستمد من سعر الصرف.
+        unique_currency_pair: رمز المنطقة المدخل مستخدم مسبقًا، الرجاء إدخال رمز منطقة مميز.
+        different_source_target_currency: ويجب أن تختلف العملات المصدر والهدف.

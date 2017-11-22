@@ -602,7 +602,7 @@ sylius:
         percent: 'Prozent'
         permissions: 'Berechtigungen'
         personal_information: 'Persönliche Informationen'
-        phone_number: 'Telefonnummber'
+        phone_number: 'Telefonnummer'
         place_order: 'Bestellung aufgeben'
         placed_an_order: 'Du hast erfolgreich eine Bestellung aufgegeben'
         placed_at: 'Bestellt am'

@@ -26,20 +26,20 @@ sylius:
             roles: Roluri
         channel:
             contact_email: E-mail de contact
-            currencies: Valute
+            currencies: Monede
             currency_base: Monedă de bază
             account_verification_required: Este necesară verificarea conturilor?
-            hostname: Hostname
+            hostname: Nume domeniu
             locale_default: Setări regionale implicite
             locales: Setări regionale
             payment_methods: Metode de plată
             shipping_methods: Metode de livrare
             skipping_shipping_step_allowed: Treci peste pasul de livrare dacă există o singură metodă disponibilă?
             skipping_payment_step_allowed: Treci peste pasul de plată dacă există o singură metodă disponibilă?
-            tax_calculation_strategy: Strategia de calculul impozitului
+            tax_calculation_strategy: Strategia de calcul a taxelor
             tax_zone_default: Zona de taxă implicită
             taxonomies: Categorizări
-            theme: Tematica
+            theme: Temă
         image:
             type: Tip
             file: Imagine
@@ -82,7 +82,7 @@ sylius:
             created_at_from: De la
             created_at_to: Până la
             number: Număr comandă
-            billing_address: Nume
+            billing_address: Facturat către
             channel: Toate canalele
         shipping_method:
             zone: Zonă
@@ -135,7 +135,7 @@ sylius:
             product:
                 products: Produse
             total_of_items_from_taxon:
-                taxon: Taxonul
+                taxon: Taxon
                 amount: Sumă
         payment_method:
             channels: Canale

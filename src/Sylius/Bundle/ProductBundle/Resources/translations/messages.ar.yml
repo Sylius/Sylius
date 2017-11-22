@@ -5,13 +5,27 @@ sylius:
     form:
         product:
             name: الاسم
+            description: الوصف
+            attributes: سمات
+            options: الخيارات
+            meta_keywords: الكلمات المفتاحية
+            meta_description: وصف ميتا
+            slug: سبيكة
+            taxons: تاكسونس
         product_variant:
             name: الاسم
         association_type:
             name: الاسم
+            translations: التّرجمة
+        association:
+            type: أنواع الرابطة
+            product: المنتجات المرتبط بها
         variant:
             name: الاسم
         option:
             name: الاسم
+            position: المهنة
+            values: القيم الممكنة
         option_value:
+            add_value: إضافة قيمة
             value: القيمة
