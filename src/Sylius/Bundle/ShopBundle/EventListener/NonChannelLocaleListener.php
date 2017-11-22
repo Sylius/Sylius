@@ -73,7 +73,10 @@ final class NonChannelLocaleListener
         }
 
         $requestLocale = $request->getLocale();
-        if (!in_array($requestLocale, $this->channelBasedLocaleProvider->getAvailableLocalesCodes(), true)) {
+        $availableLocalesCodes = $this->channelBasedLocaleProvider->getAvailableLocalesCodes();
+
+        //vd_fix: Ignore if is default installation locale code
+        if (!in_array($requestLocale,$availableLocalesCodes, true) && $requestLocale != "en_US" ) {
             throw new NotFoundHttpException(
                 sprintf('The "%s" locale is unavailable in this channel.', $requestLocale)
             );
