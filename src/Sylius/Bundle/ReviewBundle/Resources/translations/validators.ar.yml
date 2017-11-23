@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        author:
+            already_exists: يستخدم بالفعل هذا البريد الإلكتروني، الرجاء تسجيل الدخول أو استخدام كلمة المرور المنسيّة.
+        comment:
+            not_blank: لا ينبغي تعليق استعراض فارغ.
+        rating:
+            not_blank: يجب التحقق من استعراض تقييم الموقع.
+        title:
+            not_blank: لا ينبغي تعليق استعراض فارغ.
+            min_length: اسم المستخدم يجب أن يكون على الأقل من 6 أحرف.
+            max_length: اسم المستخدم يجب أن يكون على الأقل من 6 أحرف.

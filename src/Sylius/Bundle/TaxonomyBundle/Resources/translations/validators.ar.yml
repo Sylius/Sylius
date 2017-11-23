@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    taxon:
+        code:
+            not_blank: الرجاء إدخال رمز الخيار.
+            regex: يجب أن يتكون رمز البلد من الأحرف اللاتينية والأرقام والشرطات '-' والشرطات السفلية '_' فقط.
+            unique: الخيار مع نظراً للتعليمات البرمجية موجود بالفعل.
+        name:
+            max_length: البريد الإلكتروني يجب أن لا تكون أطول من أحرف {{ limit}}.
+            not_blank: الرجاء إدخال رمز الخيار.
+        slug:
+            not_blank: الرجاء إدخال رمز الخيار.
+            unique: رقم المنتج يجب أن يكون مميز.
+    taxonomy:
+        name:
+            max_length: البريد الإلكتروني يجب أن لا تكون أطول من أحرف {{ limit}}.
+            not_blank: الرجاء إدخال رمز الخيار.

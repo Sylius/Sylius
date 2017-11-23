@@ -112,25 +112,86 @@ sylius:
             sku: عدد الوحدات بالمخزون (SKU)
             shipping_required: الشحن المطلوبة؟
             weight: الوزن
+            width: العرض
         attribute:
             product_attribute_value:
+                attribute: السمة
                 value: القيمة
         guest:
             email: البريد الإلكتروني
+        product_association:
+            product: المنتجات المرتبط بها
+            type: أنواع الرابطة
         product_association_type:
             name: الاسم
+        promotion_filter:
+            products: فلتر المنتج
+            taxons: فلتر تاكسون
         promotion_rule:
+            customer_group:
+                group: مجموعة العميل
             has_taxon:
                 taxons: تاكسونس
             product:
                 products: المنتجات
+            total_of_items_from_taxon:
+                taxon: تاكسون
+                amount: القيمة
         payment_method:
             channels: قنوات
+        product_attribute:
+            position: المهنة
+        zone:
+            scopes:
+                shipping: الشحن
+                tax: الضريبة
     installer:
         extensions:
+            header: إضافات
+            accelerator:
+                header: مسرع
+                help: تمكين zend OpCache (موصى به بشدة).
+            apc: آسيا والمحيط الهادئ
+            ctype: Ctype
+            gd: GD
+            help: تثبيت وتمكين إضافة %extension%.
+            iconv: Iconv
+            exif: اكسيف
+            fileinfo: معلومات الملف
+            icu: ICO
+            intl: انتل
+            json_encode: JSON
+            mbstring: أوتار متعددة
             "off": false
             "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: ملفات النظام
+            cache:
+                header: الكاتش
+                help: 'لتعيين أذونات تشغيل: سودو سيتفاكل-R-م u:www-يو-م بيانات: rwX: ''whoami'': rwX %path% آند آند سودو سيتفاكل-د-م u:www-البيانات: rwx-م ش: ''whoami'': rwx %path%'
+            exists: مخرج
+            logs:
+                header: السجلات
+                help: 'لتعيين أذونات تشغيل: سودو سيتفاكل-R-م u:www-يو-م بيانات: rwX: ''whoami'': rwX %path% آند آند سودو سيتفاكل-د-م u:www-البيانات: rwx-م ش: ''whoami'': rwx %path%'
+            not_exists: غير موجود
+            not_writable: غير قابل للكتابة
+            parameters:
+                header: parameters.yml
+                help: 'لتعيين أذونات تشغيل: سودو chmod + w %path%'
+            vendors: المزود
+            writable: قابل للكتابة
         settings:
+            header: إصدار البي إتش بي والإعدادات
+            any: أي
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: عدم إهمالها
             "off": false
             "on": true
             register_globals: تسجيل
