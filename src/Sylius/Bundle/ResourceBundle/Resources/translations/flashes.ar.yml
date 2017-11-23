@@ -3,10 +3,15 @@
 
 sylius:
     resource:
-        create: 'تم بنجاح إنشاء %resource%.'
+        create: 'تم بنجاح تحديث %resource%.'
         update: 'تم بنجاح تحديث %resource%.'
         delete: 'تم بنجاح حذف %resource%.'
         move: 'وقد تم بنجاح نقل %resource%.'
+        generate: 'تم بنجاح إنشاء %resource%.'
+        revert: 'تم بنجاح حذف %resource%.'
         restore_deleted: 'تم إسترجاع %resource% بنجاح.'
         enable: 'تم تمكين %resource% بنجاح.'
         disable: 'تم تعطيل %resource% بنجاح.'
+        delete_error: 'لا يمكن حذف، %resource% قيد الاستخدام.'
+        race_condition_error: 'لا يمكن تحديث، %resource% تعديل سابقا.'
+        something_went_wrong_error: 'حدث خطأ ما، يرجى المحاولة مرة أخرى.'
