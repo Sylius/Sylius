@@ -6,6 +6,7 @@ sylius:
         taxon:
             description: الوصف
             name: الاسم
+            parent: الجذر
             slug: سبيكة
         taxonomy:
             name: الاسم
