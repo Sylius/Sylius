@@ -65,9 +65,7 @@ trait SyliusPluginTrait
             }
         }
 
-        if ($this->containerExtension) {
-            return $this->containerExtension;
-        }
+        return $this->containerExtension ?: null;
     }
 
     /**
