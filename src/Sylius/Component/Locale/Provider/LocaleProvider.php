@@ -28,10 +28,6 @@ final class LocaleProvider implements LocaleProviderInterface
      */
     private $defaultLocaleCode;
 
-    /**
-     * @param RepositoryInterface $localeRepository
-     * @param string $defaultLocaleCode
-     */
     public function __construct(RepositoryInterface $localeRepository, string $defaultLocaleCode)
     {
         $this->localeRepository = $localeRepository;

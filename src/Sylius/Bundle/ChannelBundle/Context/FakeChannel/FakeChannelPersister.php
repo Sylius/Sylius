@@ -24,17 +24,11 @@ final class FakeChannelPersister
      */
     private $fakeChannelCodeProvider;
 
-    /**
-     * @param FakeChannelCodeProviderInterface $fakeChannelCodeProvider
-     */
     public function __construct(FakeChannelCodeProviderInterface $fakeChannelCodeProvider)
     {
         $this->fakeChannelCodeProvider = $fakeChannelCodeProvider;
     }
 
-    /**
-     * @param FilterResponseEvent $filterResponseEvent
-     */
     public function onKernelResponse(FilterResponseEvent $filterResponseEvent): void
     {
         if (HttpKernelInterface::SUB_REQUEST === $filterResponseEvent->getRequestType()) {

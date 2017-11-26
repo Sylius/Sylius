@@ -22,9 +22,6 @@ final class TestConfigurationProvider implements ConfigurationProviderInterface
      */
     private $testThemeConfigurationManager;
 
-    /**
-     * @param TestThemeConfigurationManagerInterface $testThemeConfigurationManager
-     */
     public function __construct(TestThemeConfigurationManagerInterface $testThemeConfigurationManager)
     {
         $this->testThemeConfigurationManager = $testThemeConfigurationManager;

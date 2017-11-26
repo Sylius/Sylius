@@ -26,9 +26,6 @@ final class ResourceDeleteHandler implements ResourceDeleteHandlerInterface
      */
     private $decoratedHandler;
 
-    /**
-     * @param ResourceDeleteHandlerInterface $decoratedHandler
-     */
     public function __construct(ResourceDeleteHandlerInterface $decoratedHandler)
     {
         $this->decoratedHandler = $decoratedHandler;

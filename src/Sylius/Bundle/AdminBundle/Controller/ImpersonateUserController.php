@@ -50,13 +50,6 @@ final class ImpersonateUserController
      */
     private $authorizationRole;
 
-    /**
-     * @param UserImpersonatorInterface $impersonator
-     * @param AuthorizationCheckerInterface $authorizationChecker
-     * @param UserProviderInterface $userProvider
-     * @param RouterInterface $router
-     * @param string $authorizationRole
-     */
     public function __construct(
         UserImpersonatorInterface $impersonator,
         AuthorizationCheckerInterface $authorizationChecker,
@@ -72,9 +65,6 @@ final class ImpersonateUserController
     }
 
     /**
-     * @param Request $request
-     * @param string $username
-     *
      * @return Response
      */
     public function impersonateAction(Request $request, string $username): Response
@@ -95,10 +85,6 @@ final class ImpersonateUserController
         return new RedirectResponse($request->headers->get('referer'));
     }
 
-    /**
-     * @param Request $request
-     * @param string $username
-     */
     private function addFlash(Request $request, string $username): void
     {
         /** @var Session $session */

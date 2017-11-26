@@ -40,41 +40,26 @@ final class ThemeConfiguration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addRequiredNameField(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $rootNodeDefinition->children()->scalarNode('name')->isRequired()->cannotBeEmpty();
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addOptionalTitleField(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $rootNodeDefinition->children()->scalarNode('title')->cannotBeEmpty();
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addOptionalDescriptionField(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $rootNodeDefinition->children()->scalarNode('description')->cannotBeEmpty();
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addOptionalPathField(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $rootNodeDefinition->children()->scalarNode('path')->cannotBeEmpty();
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addOptionalParentsList(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $parentsNodeDefinition = $rootNodeDefinition->children()->arrayNode('parents');
@@ -86,9 +71,6 @@ final class ThemeConfiguration implements ConfigurationInterface
         ;
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addOptionalScreenshotsList(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $screenshotsNodeDefinition = $rootNodeDefinition->children()->arrayNode('screenshots');
@@ -121,9 +103,6 @@ final class ThemeConfiguration implements ConfigurationInterface
         $screenshotNodeBuilder->scalarNode('description')->cannotBeEmpty();
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addOptionalAuthorsList(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $authorsNodeDefinition = $rootNodeDefinition->children()->arrayNode('authors');

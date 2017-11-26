@@ -36,9 +36,6 @@ final class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $node
-     */
     private function addDriversSection(ArrayNodeDefinition $node): void
     {
         $node
@@ -51,9 +48,6 @@ final class Configuration implements ConfigurationInterface
         ;
     }
 
-    /**
-     * @param ArrayNodeDefinition $node
-     */
     private function addTemplatesSection(ArrayNodeDefinition $node): void
     {
         $node
@@ -79,9 +73,6 @@ final class Configuration implements ConfigurationInterface
         ;
     }
 
-    /**
-     * @param ArrayNodeDefinition $node
-     */
     private function addGridsSection(ArrayNodeDefinition $node): void
     {
         $node

@@ -40,10 +40,6 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
      */
     private $localeCode;
 
-    /**
-     * @param FactoryInterface $userFactory
-     * @param string $localeCode
-     */
     public function __construct(FactoryInterface $userFactory, string $localeCode)
     {
         $this->userFactory = $userFactory;

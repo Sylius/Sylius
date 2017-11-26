@@ -62,7 +62,6 @@ final class PercentAttributeType implements AttributeTypeInterface
     }
 
     /**
-     * @param ExecutionContextInterface $context
      * @param float|null $value
      *
      * @return ConstraintViolationListInterface

@@ -27,9 +27,6 @@ final class ValidAttributeValueValidator extends ConstraintValidator
      */
     private $attributeTypeRegistry;
 
-    /**
-     * @param ServiceRegistryInterface $attributeTypeRegistry
-     */
     public function __construct(ServiceRegistryInterface $attributeTypeRegistry)
     {
         $this->attributeTypeRegistry = $attributeTypeRegistry;

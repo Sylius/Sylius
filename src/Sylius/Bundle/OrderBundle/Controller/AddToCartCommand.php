@@ -28,10 +28,6 @@ final class AddToCartCommand implements AddToCartCommandInterface
      */
     private $cartItem;
 
-    /**
-     * @param OrderInterface $cart
-     * @param OrderItemInterface $cartItem
-     */
     public function __construct(OrderInterface $cart, OrderItemInterface $cartItem)
     {
         $this->cart = $cart;

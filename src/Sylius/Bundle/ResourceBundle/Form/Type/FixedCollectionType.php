@@ -67,9 +67,6 @@ final class FixedCollectionType extends AbstractType
         return 'sylius_fixed_collection';
     }
 
-    /**
-     * @return callable
-     */
     private function optionalCallableNormalizer(): callable
     {
         return function (Options $options, $value) {

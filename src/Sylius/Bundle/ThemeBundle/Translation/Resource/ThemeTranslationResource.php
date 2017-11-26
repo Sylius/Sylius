@@ -37,10 +37,6 @@ final class ThemeTranslationResource implements TranslationResourceInterface
      */
     private $domain;
 
-    /**
-     * @param ThemeInterface $theme
-     * @param string $filepath
-     */
     public function __construct(ThemeInterface $theme, string $filepath)
     {
         $this->name = $filepath;

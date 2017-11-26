@@ -25,17 +25,12 @@ class VariantResolverHelper extends Helper
      */
     private $productVariantResolver;
 
-    /**
-     * @param ProductVariantResolverInterface $productVariantResolver
-     */
     public function __construct(ProductVariantResolverInterface $productVariantResolver)
     {
         $this->productVariantResolver = $productVariantResolver;
     }
 
     /**
-     * @param ProductInterface $product
-     *
      * @return ProductVariantInterface
      */
     public function resolveVariant(ProductInterface $product): ProductVariantInterface

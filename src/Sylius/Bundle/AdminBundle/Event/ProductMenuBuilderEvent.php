@@ -25,11 +25,6 @@ class ProductMenuBuilderEvent extends MenuBuilderEvent
      */
     private $product;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param ItemInterface $menu
-     * @param ProductInterface $product
-     */
     public function __construct(FactoryInterface $factory, ItemInterface $menu, ProductInterface $product)
     {
         parent::__construct($factory, $menu);

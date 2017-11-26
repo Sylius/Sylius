@@ -23,9 +23,6 @@ final class GridDefinitionConverterEvent extends Event
      */
     private $grid;
 
-    /**
-     * @param Grid $grid
-     */
     public function __construct(Grid $grid)
     {
         $this->grid = $grid;

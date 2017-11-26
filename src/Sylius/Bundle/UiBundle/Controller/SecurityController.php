@@ -50,13 +50,6 @@ final class SecurityController
      */
     private $router;
 
-    /**
-     * @param AuthenticationUtils $authenticationUtils
-     * @param FormFactoryInterface $formFactory
-     * @param EngineInterface $templatingEngine
-     * @param AuthorizationCheckerInterface $authorizationChecker
-     * @param RouterInterface $router
-     */
     public function __construct(
         AuthenticationUtils $authenticationUtils,
         FormFactoryInterface $formFactory,
@@ -72,8 +65,6 @@ final class SecurityController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function loginAction(Request $request): Response
@@ -100,17 +91,11 @@ final class SecurityController
         ]);
     }
 
-    /**
-     * @param Request $request
-     */
     public function checkAction(Request $request): void
     {
         throw new \RuntimeException('You must configure the check path to be handled by the firewall.');
     }
 
-    /**
-     * @param Request $request
-     */
     public function logoutAction(Request $request): void
     {
         throw new \RuntimeException('You must configure the logout path to be handled by the firewall.');

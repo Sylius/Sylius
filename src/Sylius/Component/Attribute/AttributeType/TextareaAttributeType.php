@@ -62,7 +62,6 @@ final class TextareaAttributeType implements AttributeTypeInterface
     }
 
     /**
-     * @param ExecutionContextInterface $context
      * @param string|null $value
      *
      * @return ConstraintViolationListInterface

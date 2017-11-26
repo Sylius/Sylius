@@ -23,9 +23,6 @@ final class PropertyAccessDataExtractor implements DataExtractorInterface
      */
     private $propertyAccessor;
 
-    /**
-     * @param PropertyAccessorInterface $propertyAccessor
-     */
     public function __construct(PropertyAccessorInterface $propertyAccessor)
     {
         $this->propertyAccessor = $propertyAccessor;

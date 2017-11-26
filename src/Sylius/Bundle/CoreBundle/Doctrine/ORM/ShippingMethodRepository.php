@@ -57,8 +57,6 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     }
 
     /**
-     * @param ChannelInterface $channel
-     *
      * @return QueryBuilder
      */
     protected function createEnabledForChannelQueryBuilder(ChannelInterface $channel): QueryBuilder

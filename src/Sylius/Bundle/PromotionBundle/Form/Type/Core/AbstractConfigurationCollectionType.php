@@ -28,9 +28,6 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
      */
     protected $registry;
 
-    /**
-     * @param ServiceRegistryInterface $registry
-     */
     public function __construct(ServiceRegistryInterface $registry)
     {
         $this->registry = $registry;

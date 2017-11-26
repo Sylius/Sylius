@@ -23,9 +23,6 @@ final class UniqueIdBasedOrderTokenAssigner implements OrderTokenAssignerInterfa
      */
     private $generator;
 
-    /**
-     * @param RandomnessGeneratorInterface $generator
-     */
     public function __construct(RandomnessGeneratorInterface $generator)
     {
         $this->generator = $generator;

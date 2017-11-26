@@ -17,12 +17,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 final class FilesystemRequirements extends RequirementCollection
 {
-    /**
-     * @param TranslatorInterface $translator
-     * @param string $root
-     * @param string $cacheDir
-     * @param string $logDir
-     */
     public function __construct(TranslatorInterface $translator, string $root, string $cacheDir, string $logDir)
     {
         parent::__construct($translator->trans('sylius.installer.filesystem.header', []));

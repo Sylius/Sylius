@@ -38,9 +38,6 @@ final class RegisterResourcesPass implements CompilerPassInterface
         }
     }
 
-    /**
-     * @param string $class
-     */
     private function validateSyliusResource(string $class): void
     {
         if (!in_array(ResourceInterface::class, class_implements($class), true)) {

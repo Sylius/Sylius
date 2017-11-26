@@ -38,11 +38,6 @@ final class CustomerStatisticsController
      */
     private $templatingEngine;
 
-    /**
-     * @param CustomerStatisticsProviderInterface $statisticsProvider
-     * @param RepositoryInterface $customerRepository
-     * @param EngineInterface $templatingEngine
-     */
     public function __construct(
         CustomerStatisticsProviderInterface $statisticsProvider,
         RepositoryInterface $customerRepository,
@@ -54,8 +49,6 @@ final class CustomerStatisticsController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      *
      * @throws HttpException

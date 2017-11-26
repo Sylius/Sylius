@@ -30,9 +30,6 @@ class CustomerGroup implements CustomerGroupInterface
      */
     protected $name;
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();

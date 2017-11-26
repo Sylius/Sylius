@@ -25,9 +25,6 @@ final class MongoDBPurgerListener extends AbstractListener implements BeforeSuit
      */
     private $managerRegistry;
 
-    /**
-     * @param ManagerRegistry $managerRegistry
-     */
     public function __construct(ManagerRegistry $managerRegistry)
     {
         $this->managerRegistry = $managerRegistry;

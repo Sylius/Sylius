@@ -26,9 +26,6 @@ final class ActivePromotionsByChannelProvider implements PreQualifiedPromotionsP
      */
     private $promotionRepository;
 
-    /**
-     * @param PromotionRepositoryInterface $promotionRepository
-     */
     public function __construct(PromotionRepositoryInterface $promotionRepository)
     {
         $this->promotionRepository = $promotionRepository;

@@ -23,9 +23,6 @@ final class SecurityWidgetController
      */
     private $templatingEngine;
 
-    /**
-     * @param EngineInterface $templatingEngine
-     */
     public function __construct(EngineInterface $templatingEngine)
     {
         $this->templatingEngine = $templatingEngine;

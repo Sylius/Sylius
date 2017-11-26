@@ -27,9 +27,6 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityChecker implements Pr
      */
     private $orderRepository;
 
-    /**
-     * @param OrderRepositoryInterface $orderRepository
-     */
     public function __construct(OrderRepositoryInterface $orderRepository)
     {
         $this->orderRepository = $orderRepository;

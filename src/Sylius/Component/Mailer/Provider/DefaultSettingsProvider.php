@@ -25,10 +25,6 @@ final class DefaultSettingsProvider implements DefaultSettingsProviderInterface
      */
     private $senderAddress;
 
-    /**
-     * @param string $senderName
-     * @param string $senderAddress
-     */
     public function __construct(string $senderName, string $senderAddress)
     {
         $this->senderName = $senderName;

@@ -20,9 +20,6 @@ class PasswordReset
      */
     private $password;
 
-    /**
-     * @return string|null
-     */
     public function getPassword(): ?string
     {
         return $this->password;

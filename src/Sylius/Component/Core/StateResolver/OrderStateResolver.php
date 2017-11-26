@@ -27,9 +27,6 @@ final class OrderStateResolver implements StateResolverInterface
      */
     private $stateMachineFactory;
 
-    /**
-     * @param FactoryInterface $stateMachineFactory
-     */
     public function __construct(FactoryInterface $stateMachineFactory)
     {
         $this->stateMachineFactory = $stateMachineFactory;
@@ -47,11 +44,6 @@ final class OrderStateResolver implements StateResolverInterface
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
     private function canOrderBeFulfilled(OrderInterface $order): bool
     {
         return

@@ -41,9 +41,6 @@ final class FixturesListCommand extends ContainerAwareCommand
         $this->listFixtures($output);
     }
 
-    /**
-     * @param OutputInterface $output
-     */
     private function listSuites(OutputInterface $output): void
     {
         $suites = $this->getSuiteRegistry()->getSuites();
@@ -55,9 +52,6 @@ final class FixturesListCommand extends ContainerAwareCommand
         }
     }
 
-    /**
-     * @param OutputInterface $output
-     */
     private function listFixtures(OutputInterface $output): void
     {
         $fixtures = $this->getFixtureRegistry()->getFixtures();

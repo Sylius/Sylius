@@ -33,10 +33,6 @@ final class SimpleProductLockingListener
      */
     private $variantResolver;
 
-    /**
-     * @param EntityManagerInterface $manager
-     * @param ProductVariantResolverInterface $variantResolver
-     */
     public function __construct(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver)
     {
         $this->manager = $manager;
@@ -44,8 +40,6 @@ final class SimpleProductLockingListener
     }
 
     /**
-     * @param GenericEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function lock(GenericEvent $event): void

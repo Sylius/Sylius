@@ -45,11 +45,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
      */
     private $productAssociations;
 
-    /**
-     * @param FactoryInterface $productAssociationFactory
-     * @param ProductRepositoryInterface $productRepository
-     * @param RepositoryInterface $productAssociationTypeRepository
-     */
     public function __construct(
         FactoryInterface $productAssociationFactory,
         ProductRepositoryInterface $productRepository,
@@ -109,11 +104,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         return $productAssociations;
     }
 
-    /**
-     * @param Collection $products
-     *
-     * @return string|null
-     */
     private function getCodesAsStringFromProducts(Collection $products): ?string
     {
         if ($products->isEmpty()) {
@@ -131,8 +121,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     }
 
     /**
-     * @param string $productAssociationTypeCode
-     *
      * @return ProductAssociationInterface
      */
     private function getProductAssociationByTypeCode(string $productAssociationTypeCode): ProductAssociationInterface
@@ -155,10 +143,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         return $productAssociation;
     }
 
-    /**
-     * @param ProductAssociationInterface $productAssociation
-     * @param string $productCodes
-     */
     private function setAssociatedProductsByProductCodes(
         ProductAssociationInterface $productAssociation,
         string $productCodes

@@ -32,10 +32,6 @@ final class UserDeleteListener
      */
     private $session;
 
-    /**
-     * @param TokenStorageInterface $tokenStorage
-     * @param SessionInterface $session
-     */
     public function __construct(TokenStorageInterface $tokenStorage, SessionInterface $session)
     {
         $this->tokenStorage = $tokenStorage;
@@ -43,8 +39,6 @@ final class UserDeleteListener
     }
 
     /**
-     * @param ResourceControllerEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function deleteUser(ResourceControllerEvent $event): void

@@ -25,9 +25,6 @@ final class AdminBasedLocaleContext implements LocaleContextInterface
      */
     private $tokenStorage;
 
-    /**
-     * @param TokenStorageInterface $tokenStorage
-     */
     public function __construct(TokenStorageInterface $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;

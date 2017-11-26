@@ -23,9 +23,6 @@ final class TaxonFactory implements TaxonFactoryInterface
      */
     private $factory;
 
-    /**
-     * @param FactoryInterface $factory
-     */
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;

@@ -40,7 +40,6 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
      * @param \DateTimeInterface|null $date
      *
      * @return QueryBuilder

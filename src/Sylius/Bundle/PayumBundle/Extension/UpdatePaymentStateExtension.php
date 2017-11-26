@@ -30,9 +30,6 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
      */
     private $factory;
 
-    /**
-     * @param FactoryInterface $factory
-     */
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
@@ -94,10 +91,6 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
         }
     }
 
-    /**
-     * @param PaymentInterface $payment
-     * @param string $nextState
-     */
     private function updatePaymentState(PaymentInterface $payment, string $nextState): void
     {
         $stateMachine = $this->factory->get($payment, PaymentTransitions::GRAPH);

@@ -25,11 +25,6 @@ class CustomerShowMenuBuilderEvent extends MenuBuilderEvent
      */
     private $customer;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param ItemInterface $menu
-     * @param CustomerInterface $customer
-     */
     public function __construct(FactoryInterface $factory, ItemInterface $menu, CustomerInterface $customer)
     {
         parent::__construct($factory, $menu);

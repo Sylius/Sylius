@@ -36,11 +36,6 @@ final class SessionBasedCartContext implements CartContextInterface
      */
     private $orderRepository;
 
-    /**
-     * @param SessionInterface $session
-     * @param string $sessionKeyName
-     * @param OrderRepositoryInterface $orderRepository
-     */
     public function __construct(SessionInterface $session, string $sessionKeyName, OrderRepositoryInterface $orderRepository)
     {
         $this->session = $session;

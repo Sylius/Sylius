@@ -42,12 +42,6 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
      */
     private $expirationPeriod;
 
-    /**
-     * @param OrderRepositoryInterface $orderRepository
-     * @param ObjectManager $orderManager
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param string $expirationPeriod
-     */
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ObjectManager $orderManager,

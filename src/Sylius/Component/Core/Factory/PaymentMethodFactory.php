@@ -28,10 +28,6 @@ final class PaymentMethodFactory implements PaymentMethodFactoryInterface
      */
     private $gatewayConfigFactory;
 
-    /**
-     * @param FactoryInterface $decoratedFactory
-     * @param FactoryInterface $gatewayConfigFactory
-     */
     public function __construct(FactoryInterface $decoratedFactory, FactoryInterface $gatewayConfigFactory)
     {
         $this->decoratedFactory = $decoratedFactory;

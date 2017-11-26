@@ -45,12 +45,6 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
      */
     private $taxRateResolver;
 
-    /**
-     * @param CalculatorInterface $calculator
-     * @param AdjustmentFactoryInterface $adjustmentFactory
-     * @param IntegerDistributorInterface $distributor
-     * @param TaxRateResolverInterface $taxRateResolver
-     */
     public function __construct(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentFactory,
@@ -95,12 +89,6 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         }
     }
 
-    /**
-     * @param OrderItemUnitInterface $unit
-     * @param int $taxAmount
-     * @param string $label
-     * @param bool $included
-     */
     private function addAdjustment(OrderItemUnitInterface $unit, int $taxAmount, string $label, bool $included): void
     {
         $unitTaxAdjustment = $this->adjustmentFactory

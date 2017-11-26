@@ -30,10 +30,6 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
      */
     private $urlMatcher;
 
-    /**
-     * @param Session $session
-     * @param UrlMatcherInterface $urlMatcher
-     */
     public function __construct(Session $session, UrlMatcherInterface $urlMatcher)
     {
         $this->session = $session;

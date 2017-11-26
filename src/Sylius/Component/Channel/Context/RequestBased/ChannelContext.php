@@ -31,10 +31,6 @@ final class ChannelContext implements ChannelContextInterface
      */
     private $requestStack;
 
-    /**
-     * @param RequestResolverInterface $requestResolver
-     * @param RequestStack $requestStack
-     */
     public function __construct(RequestResolverInterface $requestResolver, RequestStack $requestStack)
     {
         $this->requestResolver = $requestResolver;
@@ -54,8 +50,6 @@ final class ChannelContext implements ChannelContextInterface
     }
 
     /**
-     * @param Request $request
-     *
      * @return ChannelInterface
      */
     private function getChannelForRequest(Request $request): ChannelInterface

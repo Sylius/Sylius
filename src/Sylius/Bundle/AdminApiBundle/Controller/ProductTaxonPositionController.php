@@ -34,10 +34,6 @@ final class ProductTaxonPositionController
      */
     private $manager;
 
-    /**
-     * @param RepositoryInterface $productTaxonRepository
-     * @param EntityManagerInterface $manager
-     */
     public function __construct(
         RepositoryInterface $productTaxonRepository,
         EntityManagerInterface $manager
@@ -47,8 +43,6 @@ final class ProductTaxonPositionController
     }
 
     /**
-     * @param Request $request
-     *
      * @return JsonResponse
      */
     public function updatePositionsAction(Request $request): JsonResponse

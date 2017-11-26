@@ -58,9 +58,6 @@ final class FixturesLoadCommand extends ContainerAwareCommand
         $this->loadSuites($input);
     }
 
-    /**
-     * @param InputInterface $input
-     */
     private function loadSuites(InputInterface $input): void
     {
         $suiteName = $input->getArgument('suite');

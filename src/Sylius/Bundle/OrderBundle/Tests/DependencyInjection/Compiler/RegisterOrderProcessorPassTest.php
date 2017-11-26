@@ -86,10 +86,6 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    /**
-     * @param string $serviceId
-     * @param string $method
-     */
     private function assertContainerBuilderDoesNotHaveServiceDefinitionWithMethodCall(string $serviceId, string $method): void
     {
         $definition = $this->container->findDefinition($serviceId);

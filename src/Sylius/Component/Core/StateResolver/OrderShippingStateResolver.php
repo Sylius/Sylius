@@ -28,9 +28,6 @@ final class OrderShippingStateResolver implements StateResolverInterface
      */
     private $stateMachineFactory;
 
-    /**
-     * @param FactoryInterface $stateMachineFactory
-     */
     public function __construct(FactoryInterface $stateMachineFactory)
     {
         $this->stateMachineFactory = $stateMachineFactory;
@@ -56,12 +53,6 @@ final class OrderShippingStateResolver implements StateResolverInterface
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param string $shipmentState
-     *
-     * @return int
-     */
     private function countOrderShipmentsInState(OrderInterface $order, string $shipmentState): int
     {
         $shipments = $order->getShipments();
@@ -74,13 +65,6 @@ final class OrderShippingStateResolver implements StateResolverInterface
         ;
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param string $shipmentState
-     * @param string $orderShippingState
-     *
-     * @return bool
-     */
     private function allShipmentsInStateButOrderStateNotUpdated(
         OrderInterface $order,
         string $shipmentState,
@@ -92,11 +76,6 @@ final class OrderShippingStateResolver implements StateResolverInterface
         return $shipmentAmount === $shipmentInStateAmount && $orderShippingState !== $order->getShippingState();
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
     private function isPartiallyShippedButOrderStateNotUpdated(OrderInterface $order): bool
     {
         $shipmentInShippedStateAmount = $this->countOrderShipmentsInState($order, ShipmentInterface::STATE_SHIPPED);

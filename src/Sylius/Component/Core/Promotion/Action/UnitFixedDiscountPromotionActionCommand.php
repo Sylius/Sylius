@@ -40,12 +40,6 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
      */
     private $productFilter;
 
-    /**
-     * @param FactoryInterface $adjustmentFactory
-     * @param FilterInterface $priceRangeFilter
-     * @param FilterInterface $taxonFilter
-     * @param FilterInterface $productFilter
-     */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
@@ -96,11 +90,6 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
         return true;
     }
 
-    /**
-     * @param OrderItemInterface $item
-     * @param int $amount
-     * @param PromotionInterface $promotion
-     */
     private function setUnitsAdjustments(OrderItemInterface $item, int $amount, PromotionInterface $promotion): void
     {
         foreach ($item->getUnits() as $unit) {

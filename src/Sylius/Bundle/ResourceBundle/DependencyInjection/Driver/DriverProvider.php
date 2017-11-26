@@ -28,8 +28,6 @@ final class DriverProvider
     private static $drivers = [];
 
     /**
-     * @param MetadataInterface $metadata
-     *
      * @return DriverInterface
      *
      * @throws UnknownDriverException

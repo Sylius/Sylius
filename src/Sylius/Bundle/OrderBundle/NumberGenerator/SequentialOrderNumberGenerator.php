@@ -40,12 +40,6 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
      */
     private $numberLength;
 
-    /**
-     * @param RepositoryInterface $sequenceRepository
-     * @param FactoryInterface $sequenceFactory
-     * @param int $startNumber
-     * @param int $numberLength
-     */
     public function __construct(
         RepositoryInterface $sequenceRepository,
         FactoryInterface $sequenceFactory,
@@ -71,11 +65,6 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
         return $number;
     }
 
-    /**
-     * @param int $index
-     *
-     * @return string
-     */
     private function generateNumber(int $index): string
     {
         $number = $this->startNumber + $index;
