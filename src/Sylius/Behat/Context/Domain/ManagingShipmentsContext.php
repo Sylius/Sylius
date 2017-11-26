@@ -25,9 +25,6 @@ final class ManagingShipmentsContext implements Context
      */
     private $shipmentRepository;
 
-    /**
-     * @param ShipmentRepositoryInterface $shipmentRepository
-     */
     public function __construct(ShipmentRepositoryInterface $shipmentRepository)
     {
         $this->shipmentRepository = $shipmentRepository;

@@ -298,11 +298,6 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     }
 
     /**
-     * @param $attributeName
-     * @param $selector
-     *
-     * @return bool
-     *
      * @throws ElementNotFoundException
      */
     private function hasItemWith($attributeName, $selector): bool
@@ -318,11 +313,6 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return false;
     }
 
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
     private function getPriceFromString(string $price): int
     {
         return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);

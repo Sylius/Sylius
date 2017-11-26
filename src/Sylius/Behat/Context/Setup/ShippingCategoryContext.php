@@ -37,11 +37,6 @@ final class ShippingCategoryContext implements Context
      */
     private $shippingCategoryRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $shippingCategoryFactory
-     * @param RepositoryInterface $shippingCategoryRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $shippingCategoryFactory,
@@ -70,10 +65,6 @@ final class ShippingCategoryContext implements Context
         $this->createShippingCategory($shippingCategoryName, $shippingCategoryCode);
     }
 
-    /**
-     * @param string $shippingCategoryName
-     * @param string $shippingCategoryCode
-     */
     private function createShippingCategory(string $shippingCategoryName, string $shippingCategoryCode = null): void
     {
         /** @var ShippingCategoryInterface $shippingCategory */

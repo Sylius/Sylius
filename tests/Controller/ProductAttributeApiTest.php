@@ -324,10 +324,6 @@ EOT;
         $this->assertSelectChoicesInResponse($response, $expectedChoiceValues);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getProductAttributeUrl(ProductAttributeInterface $productAttribute): string
     {
         return '/api/v1/product-attributes/' . $productAttribute->getCode();

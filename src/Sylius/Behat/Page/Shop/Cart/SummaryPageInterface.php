@@ -123,7 +123,6 @@ interface SummaryPageInterface extends PageInterface
     public function hasItemWithOptionValue(string $productName, string $optionName, string $optionValue): string;
 
     /**
-     *
      * @return bool
      */
     public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;

@@ -62,14 +62,6 @@ final class ShippingContext implements Context
      */
     private $shippingMethodManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-     * @param RepositoryInterface $zoneRepository
-     * @param ShippingMethodExampleFactory $shippingMethodExampleFactory
-     * @param FactoryInterface $shippingMethodTranslationFactory
-     * @param ObjectManager $shippingMethodManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
@@ -473,12 +465,6 @@ final class ShippingContext implements Context
         $this->shippingMethodManager->flush();
     }
 
-    /**
-     * @param array $channels
-     * @param int $amount
-     *
-     * @return array
-     */
     private function getConfigurationByChannels(array $channels, int $amount = 0): array
     {
         $configuration = [];
@@ -491,9 +477,6 @@ final class ShippingContext implements Context
         return $configuration;
     }
 
-    /**
-     * @param ShippingMethodInterface $shippingMethod
-     */
     private function saveShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->shippingMethodRepository->add($shippingMethod);

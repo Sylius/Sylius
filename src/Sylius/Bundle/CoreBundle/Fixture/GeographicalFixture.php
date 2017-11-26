@@ -56,14 +56,6 @@ class GeographicalFixture extends AbstractFixture
      */
     private $zoneManager;
 
-    /**
-     * @param FactoryInterface $countryFactory
-     * @param ObjectManager $countryManager
-     * @param FactoryInterface $provinceFactory
-     * @param ObjectManager $provinceManager
-     * @param ZoneFactoryInterface $zoneFactory
-     * @param ObjectManager $zoneManager
-     */
     public function __construct(
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
@@ -162,10 +154,6 @@ class GeographicalFixture extends AbstractFixture
         ;
     }
 
-    /**
-     * @param array $countriesCodes
-     * @param array $countriesProvinces
-     */
     private function loadCountriesWithProvinces(array $countriesCodes, array $countriesProvinces): void
     {
         $countries = [];
@@ -187,9 +175,6 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param array $zones
-     */
     private function loadZones(array $zones, \Closure $zoneValidator): void
     {
         foreach ($zones as $zoneCode => $zoneOptions) {
@@ -218,9 +203,6 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param array $provinces
-     */
     private function loadProvincesForCountry(array $provinces, CountryInterface $country): void
     {
         foreach ($provinces as $provinceCode => $provinceName) {
@@ -239,9 +221,7 @@ class GeographicalFixture extends AbstractFixture
     /**
      * @see ZoneInterface
      *
-     * @param array $zoneOptions
      *
-     * @return string
      *
      * @throws \InvalidArgumentException
      */
@@ -259,11 +239,6 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param array $zoneOptions
-     *
-     * @return array
-     */
     private function getZoneMembers(array $zoneOptions): array
     {
         $zoneType = $this->getZoneType($zoneOptions);
@@ -280,11 +255,6 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param array $options
-     *
-     * @return \Closure
-     */
     private function provideZoneValidator(array $options): \Closure
     {
         $memberValidators = [

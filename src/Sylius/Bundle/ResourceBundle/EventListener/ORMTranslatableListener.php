@@ -38,10 +38,6 @@ final class ORMTranslatableListener implements EventSubscriber
      */
     private $translatableEntityLocaleAssigner;
 
-    /**
-     * @param RegistryInterface $resourceMetadataRegistry
-     * @param ContainerInterface $container
-     */
     public function __construct(
         RegistryInterface $resourceMetadataRegistry,
         ContainerInterface $container
@@ -63,7 +59,6 @@ final class ORMTranslatableListener implements EventSubscriber
 
     /**
      * Add mapping to translatable entities
-     *
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
@@ -83,9 +78,6 @@ final class ORMTranslatableListener implements EventSubscriber
         }
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     */
     public function postLoad(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
@@ -99,7 +91,6 @@ final class ORMTranslatableListener implements EventSubscriber
 
     /**
      * Add mapping data to a translatable entity.
-     *
      */
     private function mapTranslatable(ClassMetadata $metadata): void
     {
@@ -133,7 +124,6 @@ final class ORMTranslatableListener implements EventSubscriber
 
     /**
      * Add mapping data to a translation entity.
-     *
      */
     private function mapTranslation(ClassMetadata $metadata): void
     {
@@ -191,9 +181,6 @@ final class ORMTranslatableListener implements EventSubscriber
 
     /**
      * Check if a unique constraint has been defined.
-     *
-     * @param array         $columns
-     *
      */
     private function hasUniqueConstraint(ClassMetadata $metadata, array $columns): bool
     {

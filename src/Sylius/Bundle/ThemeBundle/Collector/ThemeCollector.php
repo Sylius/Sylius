@@ -38,11 +38,6 @@ final class ThemeCollector extends DataCollector
      */
     private $themeHierarchyProvider;
 
-    /**
-     * @param ThemeRepositoryInterface $themeRepository
-     * @param ThemeContextInterface $themeContext
-     * @param ThemeHierarchyProviderInterface $themeHierarchyProvider
-     */
     public function __construct(
         ThemeRepositoryInterface $themeRepository,
         ThemeContextInterface $themeContext,
@@ -59,9 +54,6 @@ final class ThemeCollector extends DataCollector
         ];
     }
 
-    /**
-     * @return ThemeInterface|null
-     */
     public function getUsedTheme(): ?ThemeInterface
     {
         return $this->data['used_theme'];

@@ -46,12 +46,6 @@ final class CartContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param SummaryPageInterface $summaryPage
-     * @param ShowPageInterface $productShowPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SummaryPageInterface $summaryPage,
@@ -423,11 +417,6 @@ final class CartContext implements Context
         Assert::same($this->summaryPage->getCartTotal(), $total);
     }
 
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
     private function getPriceFromString(string $price): int
     {
         return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);

@@ -57,14 +57,6 @@ final class TaxationContext implements Context
      */
     private $objectManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $taxRateFactory
-     * @param FactoryInterface $taxCategoryFactory
-     * @param RepositoryInterface $taxRateRepository
-     * @param TaxCategoryRepositoryInterface $taxCategoryRepository
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $taxRateFactory,
@@ -168,8 +160,6 @@ final class TaxationContext implements Context
     }
 
     /**
-     * @param string $taxCategoryName
-     *
      * @return TaxCategoryInterface
      */
     private function getOrCreateTaxCategory(string $taxCategoryName): TaxCategoryInterface
@@ -189,7 +179,6 @@ final class TaxationContext implements Context
     }
 
     /**
-     * @param string $taxCategoryName
      * @param string|null $taxCategoryCode
      *
      * @return TaxCategoryInterface
@@ -210,32 +199,16 @@ final class TaxationContext implements Context
         return $taxCategory;
     }
 
-    /**
-     * @param string $taxRateAmount
-     *
-     * @return string
-     */
     private function getAmountFromString(string $taxRateAmount): string
     {
         return ((int) $taxRateAmount) / 100;
     }
 
-    /**
-     * @param string $taxRateName
-     *
-     * @return string
-     */
     private function getCodeFromName(string $taxRateName): string
     {
         return StringInflector::nameToLowercaseCode($taxRateName);
     }
 
-    /**
-     * @param string $taxRateName
-     * @param string $zoneCode
-     *
-     * @return string
-     */
     private function getCodeFromNameAndZoneCode(string $taxRateName, string $zoneCode): string
     {
         return $this->getCodeFromName($taxRateName) . '_' . strtolower($zoneCode);

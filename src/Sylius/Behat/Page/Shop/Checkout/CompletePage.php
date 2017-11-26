@@ -31,11 +31,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      */
     private $tableAccessor;
 
-    /**
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -345,7 +340,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     }
 
     /**
-     *
      * @return NodeElement
      */
     private function getProductRowElement(ProductInterface $product): NodeElement
@@ -353,11 +347,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return $this->getElement('product_row', ['%name%' => $product->getName()]);
     }
 
-    /**
-     * @param string $displayedAddress
-     *
-     * @return bool
-     */
     private function isAddressValid(string $displayedAddress, AddressInterface $address): bool
     {
         return
@@ -373,12 +362,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         ;
     }
 
-    /**
-     * @param string $address
-     * @param string $addressPart
-     *
-     * @return bool
-     */
     private function hasAddressPart(string $address, string $addressPart, $optional = false): bool
     {
         if ($optional && null === $addressPart) {
@@ -388,31 +371,16 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return false !== strpos($address, $addressPart);
     }
 
-    /**
-     * @param string $countryCode
-     *
-     * @return string
-     */
     private function getCountryName(string $countryCode): string
     {
         return strtoupper(Intl::getRegionBundle()->getCountryName($countryCode, 'en'));
     }
 
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
     private function getPriceFromString(string $price): int
     {
         return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
-    /**
-     * @param string $total
-     *
-     * @return int
-     */
     private function getTotalFromString(string $total): int
     {
         $total = str_replace('Total:', '', $total);
@@ -420,11 +388,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return $this->getPriceFromString($total);
     }
 
-    /**
-     * @param string $total
-     *
-     * @return int
-     */
     private function getBaseTotalFromString(string $total): int
     {
         $total = str_replace('Total in base currency:', '', $total);

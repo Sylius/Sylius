@@ -361,18 +361,12 @@ EOT;
 
     /**
      * @param PromotionCouponInterface|null $coupon
-     *
-     * @return string
      */
     private function getPromotionCouponUrl(PromotionInterface $promotion, ?PromotionCouponInterface $coupon = null): string
     {
         return sprintf('/api/v1/promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode());
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getPromotionCouponsUrl(PromotionInterface $promotion): string
     {
         return sprintf('/api/v1/promotions/%s/coupons/', $promotion->getCode());

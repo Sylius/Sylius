@@ -32,10 +32,6 @@ final class BrowsingProductVariantsContext implements Context
      */
     private $defaultProductVariantResolver;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param ProductVariantResolverInterface $defaultProductVariantResolver
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         ProductVariantResolverInterface $defaultProductVariantResolver
@@ -272,9 +268,6 @@ final class BrowsingProductVariantsContext implements Context
     }
 
     /**
-     * @param int $expectedAmount
-     * @param ProductVariantInterface $variant
-     *
      * @throws \InvalidArgumentException
      */
     private function assertOnHoldQuantityOfVariant(int $expectedAmount, ProductVariantInterface $variant): void
@@ -293,9 +286,6 @@ final class BrowsingProductVariantsContext implements Context
         );
     }
 
-    /**
-     * @param int $amount
-     */
     private function assertNumberOfVariantsOnProductPage(int $amount): void
     {
         Assert::same((int) $this->indexPage->countItems(), $amount, 'Product has %d variants, but should have %d');

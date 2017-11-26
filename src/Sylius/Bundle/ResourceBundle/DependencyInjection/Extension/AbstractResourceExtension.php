@@ -20,11 +20,6 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 
 abstract class AbstractResourceExtension extends Extension
 {
-    /**
-     * @param string $driver
-     * @param array $resources
-     * @param ContainerBuilder $container
-     */
     protected function registerResources(
         string $applicationName,
         string $driver,

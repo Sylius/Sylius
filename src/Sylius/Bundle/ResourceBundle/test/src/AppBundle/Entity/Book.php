@@ -42,41 +42,26 @@ class Book implements ResourceInterface, TranslatableInterface
      */
     private $author;
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getTitle(): string
     {
         return $this->getTranslation()->getTitle();
     }
 
-    /**
-     * @param string $title
-     */
     public function setTitle(string $title): void
     {
         $this->getTranslation()->setTitle($title);
     }
 
-    /**
-     * @return string
-     */
     public function getAuthor(): string
     {
         return $this->author;
     }
 
-    /**
-     * @param string $author
-     */
     public function setAuthor(string $author): void
     {
         $this->author = $author;

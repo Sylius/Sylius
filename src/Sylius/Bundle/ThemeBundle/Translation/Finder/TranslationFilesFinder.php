@@ -23,9 +23,6 @@ final class TranslationFilesFinder implements TranslationFilesFinderInterface
      */
     private $finderFactory;
 
-    /**
-     * @param FinderFactoryInterface $finderFactory
-     */
     public function __construct(FinderFactoryInterface $finderFactory)
     {
         $this->finderFactory = $finderFactory;
@@ -53,7 +50,6 @@ final class TranslationFilesFinder implements TranslationFilesFinderInterface
     }
 
     /**
-     *
      * @return iterable|SplFileInfo[]
      */
     private function getFiles(string $path): iterable
@@ -68,11 +64,6 @@ final class TranslationFilesFinder implements TranslationFilesFinderInterface
         return $finder;
     }
 
-    /**
-     * @param string $file
-     *
-     * @return bool
-     */
     private function isTranslationFile(string $file): bool
     {
         return false !== strpos($file, 'translations/')

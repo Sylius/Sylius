@@ -33,10 +33,6 @@ final class FilesystemConfigurationProvider implements ConfigurationProviderInte
      */
     private $configurationFilename;
 
-    /**
-     * @param ConfigurationLoaderInterface $loader
-     * @param string $configurationFilename
-     */
     public function __construct(FileLocatorInterface $fileLocator, ConfigurationLoaderInterface $loader, string $configurationFilename)
     {
         $this->fileLocator = $fileLocator;

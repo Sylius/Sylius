@@ -35,9 +35,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
         ZoneInterface::TYPE_ZONE,
     ];
 
-    /**
-     * @param RepositoryInterface $zoneRepository
-     */
     public function __construct(RepositoryInterface $zoneRepository)
     {
         $this->zoneRepository = $zoneRepository;
@@ -82,10 +79,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
         return $zones;
     }
 
-    /**
-     * @param ZoneInterface    $zone
-     *
-     */
     private function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone): bool
     {
         foreach ($zone->getMembers() as $member) {
@@ -98,9 +91,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * @param AddressInterface    $address
-     *
-     *
      * @throws \InvalidArgumentException
      */
     private function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member): bool
@@ -119,10 +109,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
         }
     }
 
-    /**
-     *
-     * @return array
-     */
     private function getZones(?string $scope = null): array
     {
         if (null === $scope) {
@@ -132,11 +118,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
         return $this->zoneRepository->findBy(['scope' => [$scope, Scope::ALL]]);
     }
 
-    /**
-     * @param string $code
-     *
-     * @return ZoneInterface|null
-     */
     private function getZoneByCode(string $code): ?ZoneInterface
     {
         return $this->zoneRepository->findOneBy(['code' => $code]);

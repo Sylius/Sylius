@@ -34,11 +34,6 @@ class RequestConfiguration
      */
     private $parameters;
 
-    /**
-     * @param MetadataInterface $metadata
-     * @param Request $request
-     * @param Parameters $parameters
-     */
     public function __construct(MetadataInterface $metadata, Request $request, Parameters $parameters)
     {
         $this->metadata = $metadata;
@@ -70,27 +65,16 @@ class RequestConfiguration
         return $this->parameters;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSection(): ?string
     {
         return $this->parameters->get('section');
     }
 
-    /**
-     * @return bool
-     */
     public function isHtmlRequest(): bool
     {
         return 'html' === $this->request->getRequestFormat();
     }
 
-    /**
-     * @param $name
-     *
-     * @return string|null
-     */
     public function getDefaultTemplate($name): ?string
     {
         $templatesNamespace = (string) $this->metadata->getTemplatesNamespace();
@@ -103,8 +87,6 @@ class RequestConfiguration
     }
 
     /**
-     * @param $name
-     *
      * @return mixed|null
      */
     public function getTemplate($name)
@@ -118,9 +100,6 @@ class RequestConfiguration
         return $template;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFormType(): ?string
     {
         $form = $this->parameters->get('form');
@@ -140,9 +119,6 @@ class RequestConfiguration
         return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
     }
 
-    /**
-     * @return array
-     */
     public function getFormOptions(): array
     {
         $form = $this->parameters->get('form');
@@ -153,11 +129,6 @@ class RequestConfiguration
         return [];
     }
 
-    /**
-     * @param $name
-     *
-     * @return string
-     */
     public function getRouteName($name): string
     {
         $sectionPrefix = $this->getSection() ? $this->getSection() . '_' : '';
@@ -166,8 +137,6 @@ class RequestConfiguration
     }
 
     /**
-     * @param $name
-     *
      * @return mixed|string|null
      */
     public function getRedirectRoute($name)
@@ -191,8 +160,6 @@ class RequestConfiguration
 
     /**
      * Get url hash fragment (#text) which is you configured.
-     *
-     * @return string
      */
     public function getRedirectHash(): string
     {
@@ -208,8 +175,6 @@ class RequestConfiguration
     /**
      * Get redirect referer, This will detected by configuration
      * If not exists, The `referrer` from headers will be used.
-     *
-     * @return string
      */
     public function getRedirectReferer(): string
     {
@@ -229,8 +194,6 @@ class RequestConfiguration
 
     /**
      * @param object|null $resource
-     *
-     * @return array
      */
     public function getRedirectParameters($resource = null): array
     {
@@ -254,11 +217,6 @@ class RequestConfiguration
         return $parameters;
     }
 
-    /**
-     * @param array $parameters
-     *
-     * @return array
-     */
     private function addExtraRedirectParameters(array $parameters): array
     {
         $vars = $this->getVars();
@@ -275,17 +233,11 @@ class RequestConfiguration
         return $parameters;
     }
 
-    /**
-     * @return bool
-     */
     public function isLimited(): bool
     {
         return (bool) $this->parameters->get('limit', false);
     }
 
-    /**
-     * @return int|null
-     */
     public function getLimit(): ?int
     {
         $limit = null;
@@ -297,9 +249,6 @@ class RequestConfiguration
         return $limit;
     }
 
-    /**
-     * @return bool
-     */
     public function isPaginated(): bool
     {
         $pagination = $this->parameters->get('paginate', true);
@@ -307,27 +256,16 @@ class RequestConfiguration
         return $pagination !== false && $pagination !== null;
     }
 
-    /**
-     * @return int
-     */
     public function getPaginationMaxPerPage(): int
     {
         return (int) $this->parameters->get('paginate', 10);
     }
 
-    /**
-     * @return bool
-     */
     public function isFilterable(): bool
     {
         return (bool) $this->parameters->get('filterable', false);
     }
 
-    /**
-     * @param array $criteria
-     *
-     * @return array
-     */
     public function getCriteria(array $criteria = []): array
     {
         $defaultCriteria = array_merge($this->parameters->get('criteria', []), $criteria);
@@ -339,19 +277,11 @@ class RequestConfiguration
         return $defaultCriteria;
     }
 
-    /**
-     * @return bool
-     */
     public function isSortable(): bool
     {
         return (bool) $this->parameters->get('sortable', false);
     }
 
-    /**
-     * @param array $sorting
-     *
-     * @return array
-     */
     public function getSorting(array $sorting = []): array
     {
         $defaultSorting = array_merge($this->parameters->get('sorting', []), $sorting);
@@ -370,12 +300,6 @@ class RequestConfiguration
         return $defaultSorting;
     }
 
-    /**
-     * @param $parameter
-     * @param array $defaults
-     *
-     * @return array
-     */
     public function getRequestParameter($parameter, array $defaults = []): array
     {
         return array_replace_recursive(
@@ -384,9 +308,6 @@ class RequestConfiguration
         );
     }
 
-    /**
-     * @return string|null
-     */
     public function getRepositoryMethod(): ?string
     {
         if (!$this->parameters->has('repository')) {
@@ -398,9 +319,6 @@ class RequestConfiguration
         return is_array($repository) ? $repository['method'] : $repository;
     }
 
-    /**
-     * @return array
-     */
     public function getRepositoryArguments(): array
     {
         if (!$this->parameters->has('repository')) {
@@ -416,9 +334,6 @@ class RequestConfiguration
         return is_array($repository['arguments']) ? $repository['arguments'] : [$repository['arguments']];
     }
 
-    /**
-     * @return string|null
-     */
     public function getFactoryMethod(): ?string
     {
         if (!$this->parameters->has('factory')) {
@@ -430,9 +345,6 @@ class RequestConfiguration
         return is_array($factory) ? $factory['method'] : $factory;
     }
 
-    /**
-     * @return array
-     */
     public function getFactoryArguments(): array
     {
         if (!$this->parameters->has('factory')) {
@@ -482,27 +394,17 @@ class RequestConfiguration
         return $this->parameters->get('serialization_version');
     }
 
-    /**
-     * @return string|null
-     */
     public function getEvent(): ?string
     {
         return $this->parameters->get('event');
     }
 
-    /**
-     * @return bool
-     */
     public function hasPermission(): bool
     {
         return false !== $this->parameters->get('permission', false);
     }
 
     /**
-     * @param string $name
-     *
-     * @return string
-     *
      * @throws \LogicException
      */
     public function getPermission(string $name): string
@@ -520,9 +422,6 @@ class RequestConfiguration
         return $permission;
     }
 
-    /**
-     * @return bool
-     */
     public function isHeaderRedirection(): bool
     {
         $redirect = $this->parameters->get('redirect');
@@ -544,10 +443,7 @@ class RequestConfiguration
     }
 
     /**
-     * @param array  $parameters
      * @param object $resource
-     *
-     * @return array
      */
     private function parseResourceValues(array $parameters, $resource): array
     {
@@ -570,17 +466,12 @@ class RequestConfiguration
         return $parameters;
     }
 
-    /**
-     * @return bool
-     */
     public function hasGrid(): bool
     {
         return $this->parameters->has('grid');
     }
 
     /**
-     * @return string
-     *
      * @throws \LogicException
      */
     public function getGrid(): string
@@ -592,17 +483,11 @@ class RequestConfiguration
         return $this->parameters->get('grid');
     }
 
-    /**
-     * @return bool
-     */
     public function hasStateMachine(): bool
     {
         return $this->parameters->has('state_machine');
     }
 
-    /**
-     * @return string
-     */
     public function getStateMachineGraph(): string
     {
         $options = $this->parameters->get('state_machine');
@@ -610,9 +495,6 @@ class RequestConfiguration
         return $options['graph'] ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getStateMachineTransition(): string
     {
         $options = $this->parameters->get('state_machine');
@@ -620,9 +502,6 @@ class RequestConfiguration
         return $options['transition'] ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function isCsrfProtectionEnabled(): bool
     {
         return $this->parameters->get('csrf_protection', true);
@@ -630,8 +509,6 @@ class RequestConfiguration
 
     /**
      * @param mixed $redirect
-     *
-     * @return bool
      */
     private function areParametersIntentionallyEmptyArray($redirect): bool
     {

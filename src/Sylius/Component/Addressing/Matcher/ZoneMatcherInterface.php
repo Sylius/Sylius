@@ -22,7 +22,6 @@ interface ZoneMatcherInterface
      * Returns the best matching zone for given address.
      *
      * @param string|null      $scope
-     *
      */
     public function match(AddressInterface $address, ?string $scope = null): ?ZoneInterface;
 

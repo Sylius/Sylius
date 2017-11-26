@@ -473,9 +473,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getElement('taxonomy')->click();
     }
 
-    /**
-     * @param string $tabName
-     */
     private function clickTabIfItsNotActive(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
@@ -484,18 +481,12 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         }
     }
 
-    /**
-     * @param string $tabName
-     */
     private function clickTab(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
         $attributesTab->click();
     }
 
-    /**
-     * @param string $localeCode
-     */
     private function clickLocaleTabIfItsNotActive(string $localeCode): void
     {
         $localeTab = $this->getElement('locale_tab', ['%localeCode%' => $localeCode]);
@@ -505,8 +496,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     }
 
     /**
-     * @param string $type
-     *
      * @return NodeElement
      */
     private function getImageElementByType(string $type): NodeElement
@@ -555,9 +544,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return reset($imageElements);
     }
 
-    /**
-     * @param string $type
-     */
     private function setImageType(NodeElement $imageElement, string $type): void
     {
         $typeField = $imageElement->findField('Type');

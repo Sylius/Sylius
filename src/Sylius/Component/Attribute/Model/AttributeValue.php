@@ -186,9 +186,6 @@ class AttributeValue implements AttributeValueInterface
         return $this->attribute->getType();
     }
 
-    /**
-     * @return bool|null
-     */
     protected function getBoolean(): ?bool
     {
         return $this->boolean;
@@ -202,9 +199,6 @@ class AttributeValue implements AttributeValueInterface
         $this->boolean = $boolean;
     }
 
-    /**
-     * @return string|null
-     */
     protected function getText(): ?string
     {
         return $this->text;
@@ -218,9 +212,6 @@ class AttributeValue implements AttributeValueInterface
         $this->text = $text;
     }
 
-    /**
-     * @return int|null
-     */
     protected function getInteger(): ?int
     {
         return $this->integer;
@@ -234,9 +225,6 @@ class AttributeValue implements AttributeValueInterface
         $this->integer = $integer;
     }
 
-    /**
-     * @return float|null
-     */
     protected function getFloat(): ?float
     {
         return $this->float;
@@ -258,9 +246,6 @@ class AttributeValue implements AttributeValueInterface
         return $this->datetime;
     }
 
-    /**
-     * @param \DateTimeInterface $datetime
-     */
     protected function setDatetime(?\DateTimeInterface $datetime): void
     {
         $this->datetime = $datetime;
@@ -282,9 +267,6 @@ class AttributeValue implements AttributeValueInterface
         $this->date = $date;
     }
 
-    /**
-     * @return array|null
-     */
     protected function getJson(): ?array
     {
         return $this->json;

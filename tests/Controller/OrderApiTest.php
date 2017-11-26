@@ -359,8 +359,6 @@ EOT;
 
     /**
      * @param mixed $orderId
-     *
-     * @return string
      */
     private function getOrderUrl($orderId): string
     {
@@ -370,8 +368,6 @@ EOT;
     /**
      * @param mixed $orderId
      * @param mixed $shipmentId
-     *
-     * @return string
      */
     private function getShipOrderShipmentUrl($orderId, $shipmentId): string
     {
@@ -381,8 +377,6 @@ EOT;
     /**
      * @param mixed $orderId
      * @param mixed $paymentId
-     *
-     * @return string
      */
     private function getCompleteOrderPaymentUrl($orderId, $paymentId): string
     {
@@ -391,8 +385,6 @@ EOT;
 
     /**
      * @param mixed $orderId
-     *
-     * @return string
      */
     private function getCancelUrl($orderId): string
     {

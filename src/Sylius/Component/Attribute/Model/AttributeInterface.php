@@ -76,7 +76,6 @@ interface AttributeInterface extends
     public function setPosition(?int $position): void;
 
     /**
-     *
      * @return AttributeTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

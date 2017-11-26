@@ -35,33 +35,21 @@ class ResponseLoader implements ResponseLoaderInterface
         return (array) json_decode($this->getFileContents($source));
     }
 
-    /**
-     * @return string
-     */
     private function getResponsesFolder(): string
     {
         return $this->getCalledClassFolder() . '/Responses';
     }
 
-    /**
-     * @return string
-     */
     private function getMockedResponsesFolder(): string
     {
         return $this->getResponsesFolder() . '/Mocked';
     }
 
-    /**
-     * @return string
-     */
     private function getExpectedResponsesFolder(): string
     {
         return $this->getResponsesFolder() . '/Expected';
     }
 
-    /**
-     * @return string
-     */
     private function getCalledClassFolder(): string
     {
         $calledClass = get_called_class();
@@ -71,8 +59,6 @@ class ResponseLoader implements ResponseLoaderInterface
     }
 
     /**
-     * @param string $source
-     *
      * @throws \RuntimeException
      */
     private function assertSourceExists(string $source): void
@@ -83,7 +69,6 @@ class ResponseLoader implements ResponseLoaderInterface
     }
 
     /**
-     * @param string $source
      * @param mixed $content
      *
      * @throws \RuntimeException
@@ -96,7 +81,6 @@ class ResponseLoader implements ResponseLoaderInterface
     }
 
     /**
-     * @param string $source
      * @param mixed $content
      *
      * @throws \RuntimeException
@@ -109,8 +93,6 @@ class ResponseLoader implements ResponseLoaderInterface
     }
 
     /**
-     * @param string $source
-     *
      * @throws \RuntimeException
      */
     private function assertSourceIsNotFolder(string $source): void
@@ -121,10 +103,6 @@ class ResponseLoader implements ResponseLoaderInterface
     }
 
     /**
-     * @param string $source
-     *
-     * @return string
-     *
      * @throws \RuntimeException
      */
     private function getFileContents(string $source): string

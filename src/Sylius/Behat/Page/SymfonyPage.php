@@ -29,10 +29,6 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
      */
     protected static $additionalParameters = ['_locale' => 'en_US'];
 
-    /**
-     * @param array $parameters
-     * @param RouterInterface $router
-     */
     public function __construct(Session $session, array $parameters, RouterInterface $router)
     {
         parent::__construct($session, $parameters);
@@ -83,8 +79,6 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
     }
 
     /**
-     * @param array $requiredUrlParameters
-     *
      * @throws UnexpectedPageException
      */
     public function verifyRoute(array $requiredUrlParameters = []): void
@@ -100,8 +94,6 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
     }
 
     /**
-     * @param array $matchedRoute
-     *
      * @throws UnexpectedPageException
      */
     private function verifyRouteName(array $matchedRoute, string $url): void
@@ -119,9 +111,6 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
     }
 
     /**
-     * @param array $requiredUrlParameters
-     * @param array $matchedRoute
-     *
      * @throws UnexpectedPageException
      */
     private function verifyRouteParameters(array $requiredUrlParameters, array $matchedRoute): void
@@ -141,8 +130,6 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
     }
 
     /**
-     * @param string $appearClass
-     *
      * @todo it really shouldn't be here :)
      */
     protected function waitForModalToAppear(NodeElement $modalContainer, string $appearClass = 'in'): void
@@ -152,11 +139,6 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
         });
     }
 
-    /**
-     * @param string $path
-     *
-     * @return string
-     */
     final protected function makePathAbsolute(string $path): string
     {
         $baseUrl = rtrim($this->getParameter('base_url'), '/') . '/';

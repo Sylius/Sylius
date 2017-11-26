@@ -48,12 +48,6 @@ final class ShowAvailablePaymentMethodsController
      */
     private $restViewHandler;
 
-    /**
-     * @param FactoryInterface $stateMachineFactory
-     * @param OrderRepositoryInterface $orderRepository
-     * @param PaymentMethodsResolverInterface $paymentMethodResolver
-     * @param ViewHandlerInterface $restViewHandler
-     */
     public function __construct(
         FactoryInterface $stateMachineFactory,
         OrderRepositoryInterface $orderRepository,
@@ -67,8 +61,6 @@ final class ShowAvailablePaymentMethodsController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function showAction(Request $request): Response
@@ -108,22 +100,11 @@ final class ShowAvailablePaymentMethodsController
         return $cart;
     }
 
-    /**
-     * @param OrderInterface $cart
-     * @param string $transition
-     *
-     * @return bool
-     */
     private function isCheckoutTransitionPossible(OrderInterface $cart, string $transition): bool
     {
         return $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->can($transition);
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return array
-     */
     private function getPaymentMethods(PaymentInterface $payment, string $locale): array
     {
         $paymentMethods = $this->paymentMethodResolver->getSupportedMethods($payment);

@@ -45,7 +45,6 @@ interface TableAccessorInterface
     public function getIndexedColumn(NodeElement $table, string $fieldName): array;
 
     /**
-     *
      * @return NodeElement[]
      */
     public function getSortableHeaders(NodeElement $table);
@@ -59,7 +58,6 @@ interface TableAccessorInterface
     public function getFieldFromRow(NodeElement $table, NodeElement $row, string $field): NodeElement;
 
     /**
-     *
      * @return int
      */
     public function countTableBodyRows(NodeElement $table): int;

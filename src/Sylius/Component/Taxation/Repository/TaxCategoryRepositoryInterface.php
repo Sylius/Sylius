@@ -19,7 +19,6 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 interface TaxCategoryRepositoryInterface extends RepositoryInterface
 {
     /**
-     *
      * @return array|TaxCategoryInterface[]
      */
     public function findByName(string $name): array;

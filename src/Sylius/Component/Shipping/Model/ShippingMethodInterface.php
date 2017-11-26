@@ -80,7 +80,6 @@ interface ShippingMethodInterface extends
      * 1) None of shippables matches the category.
      * 2) At least one of shippables matches the category.
      * 3) All shippables have to match the method category.
-     *
      */
     public function getCategoryRequirement(): ?int;
 
@@ -110,7 +109,6 @@ interface ShippingMethodInterface extends
     public function setConfiguration(array $configuration): void;
 
     /**
-     *
      * @return ShippingMethodTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

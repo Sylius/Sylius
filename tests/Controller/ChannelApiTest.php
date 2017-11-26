@@ -102,10 +102,6 @@ final class ChannelApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'channel/show_response', Response::HTTP_OK);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getChannelUrl(ChannelInterface $channel): string
     {
         return '/api/v1/channels/' . $channel->getCode();

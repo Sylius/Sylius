@@ -38,11 +38,6 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
      */
     private $cache = [];
 
-    /**
-     * @param \Twig_LoaderInterface $decoratedLoader
-     * @param FileLocatorInterface $templateLocator
-     * @param TemplateNameParserInterface $templateNameParser
-     */
     public function __construct(
         \Twig_LoaderInterface $decoratedLoader,
         FileLocatorInterface $templateLocator,
@@ -103,11 +98,6 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
         }
     }
 
-    /**
-     * @param string $logicalName
-     *
-     * @return string
-     */
     private function findTemplate(string $logicalName): string
     {
         if (isset($this->cache[$logicalName])) {

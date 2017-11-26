@@ -86,18 +86,6 @@ final class ManagingProductsContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param CreateSimpleProductPageInterface $createSimpleProductPage
-     * @param CreateConfigurableProductPageInterface $createConfigurableProductPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdateSimpleProductPageInterface $updateSimpleProductPage
-     * @param UpdateConfigurableProductPageInterface $updateConfigurableProductPage
-     * @param ProductReviewIndexPageInterface $productReviewIndexPage
-     * @param IndexPerTaxonPageInterface $indexPerTaxonPage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreateSimpleProductPageInterface $createSimpleProductPage,
@@ -957,10 +945,6 @@ final class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @param string $element
-     * @param string $value
-     */
     private function assertElementValue(string $element, string $value): void
     {
         /** @var UpdatePageInterface $currentPage */
@@ -974,10 +958,6 @@ final class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @param string $element
-     * @param string $message
-     */
     private function assertValidationMessage(string $element, string $message): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */

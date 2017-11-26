@@ -19,7 +19,6 @@ interface ThemeScreenshotFactoryInterface
 {
     /**
      * @param array $data
-     *
      */
     public function createFromArray(array $data): ThemeScreenshot;
 }

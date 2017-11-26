@@ -26,9 +26,6 @@ class EmailTwigAdapter extends AbstractAdapter
      */
     protected $twig;
 
-    /**
-     * @param \Twig_Environment $twig
-     */
     public function __construct(\Twig_Environment $twig)
     {
         $this->twig = $twig;
@@ -50,10 +47,6 @@ class EmailTwigAdapter extends AbstractAdapter
         return $event->getRenderedEmail();
     }
 
-    /**
-     * @param array $data
-     *
-     */
     private function getRenderedEmail(EmailInterface $email, array $data): RenderedEmail
     {
         if (null !== $email->getTemplate()) {
@@ -63,10 +56,6 @@ class EmailTwigAdapter extends AbstractAdapter
         return $this->provideEmailWithoutTemplate($email, $data);
     }
 
-    /**
-     * @param array $data
-     *
-     */
     private function provideEmailWithTemplate(EmailInterface $email, array $data): RenderedEmail
     {
         $data = $this->twig->mergeGlobals($data);
@@ -80,10 +69,6 @@ class EmailTwigAdapter extends AbstractAdapter
         return new RenderedEmail($subject, $body);
     }
 
-    /**
-     * @param array $data
-     *
-     */
     private function provideEmailWithoutTemplate(EmailInterface $email, array $data): RenderedEmail
     {
         $twig = new \Twig_Environment(new \Twig_Loader_Array([]));

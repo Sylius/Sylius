@@ -48,13 +48,6 @@ abstract class AttributeValueType extends AbstractResourceType
      */
     protected $formTypeRegistry;
 
-    /**
-     * @param array $validationGroups
-     * @param string $attributeChoiceType
-     * @param RepositoryInterface $attributeRepository
-     * @param RepositoryInterface $localeRepository
-     * @param FormTypeRegistryInterface $formTypeTypeRegistry
-     */
     public function __construct(
         string $dataClass,
         array $validationGroups,
@@ -117,8 +110,6 @@ abstract class AttributeValueType extends AbstractResourceType
     }
 
     /**
-     * @param FormInterface $form
-     * @param AttributeInterface $attribute
      * @param string|null $localeCode
      */
     protected function addValueField(

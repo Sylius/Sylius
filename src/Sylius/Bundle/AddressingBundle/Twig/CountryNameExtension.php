@@ -30,7 +30,6 @@ class CountryNameExtension extends \Twig_Extension
 
     /**
      * @param mixed  $country
-     *
      */
     public function translateCountryIsoCode($country, ?string $locale = null): string
     {

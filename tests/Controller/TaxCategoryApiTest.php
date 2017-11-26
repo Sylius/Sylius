@@ -345,10 +345,6 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getTaxCategoryUrl(TaxCategoryInterface $taxCategory): string
     {
         return 'api/v1/tax-categories/' . $taxCategory->getCode();

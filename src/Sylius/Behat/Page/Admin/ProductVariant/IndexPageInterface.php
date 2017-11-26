@@ -19,13 +19,11 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 interface IndexPageInterface extends BaseIndexPageInterface
 {
     /**
-     *
      * @return int
      */
     public function getOnHandQuantityFor(ProductVariantInterface $productVariant): int;
 
     /**
-     *
      * @return int
      */
     public function getOnHoldQuantityFor(ProductVariantInterface $productVariant): int;

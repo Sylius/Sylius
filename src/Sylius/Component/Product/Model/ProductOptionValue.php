@@ -140,7 +140,6 @@ class ProductOptionValue implements ProductOptionValueInterface
     }
 
     /**
-     *
      * @return ProductOptionValueTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

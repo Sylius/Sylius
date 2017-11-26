@@ -35,10 +35,6 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
      */
     private $expirationPeriod;
 
-    /**
-     * @param Factory $stateMachineFactory
-     * @param string $expirationPeriod
-     */
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         Factory $stateMachineFactory,
@@ -57,9 +53,6 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
         }
     }
 
-    /**
-     * @param OrderInterface $expiredUnpaidOrder
-     */
     private function cancelOrder(OrderInterface $expiredUnpaidOrder): void
     {
         $stateMachine = $this->stateMachineFactory->get($expiredUnpaidOrder, OrderTransitions::GRAPH);

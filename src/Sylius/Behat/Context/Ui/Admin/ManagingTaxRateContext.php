@@ -43,12 +43,6 @@ final class ManagingTaxRateContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -322,10 +316,6 @@ final class ManagingTaxRateContext implements Context
         Assert::same($this->indexPage->countItems(), 1);
     }
 
-    /**
-     * @param string $element
-     * @param string $taxRateElement
-     */
     private function assertFieldValue(TaxRateInterface $taxRate, string $element, string $taxRateElement): void
     {
         $this->indexPage->open();
@@ -339,10 +329,6 @@ final class ManagingTaxRateContext implements Context
         );
     }
 
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */

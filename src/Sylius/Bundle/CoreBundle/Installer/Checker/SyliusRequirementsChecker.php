@@ -32,9 +32,6 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
      */
     private $fulfilled = true;
 
-    /**
-     * @param SyliusRequirements $syliusRequirements
-     */
     public function __construct(SyliusRequirements $syliusRequirements)
     {
         $this->syliusRequirements = $syliusRequirements;
@@ -62,8 +59,6 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
     }
 
     /**
-     * @param TableRenderer $notFulfilledTable
-     * @param TableRenderer $helpTable
      * @param mixed $verbose
      */
     private function checkRequirementsInCollection(
@@ -92,11 +87,6 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
         }
     }
 
-    /**
-     * @param Requirement $requirement
-     *
-     * @return string
-     */
     private function getRequirementRequiredMessage(Requirement $requirement): string
     {
         if ($requirement->isRequired()) {

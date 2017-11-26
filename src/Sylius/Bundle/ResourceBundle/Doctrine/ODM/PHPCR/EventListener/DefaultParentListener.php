@@ -43,11 +43,6 @@ class DefaultParentListener
      */
     private $force;
 
-    /**
-     * @param string $parentPath
-     * @param bool $autocreate
-     * @param bool $force
-     */
     public function __construct(
         DocumentManagerInterface $documentManager,
         string $parentPath,
@@ -60,9 +55,6 @@ class DefaultParentListener
         $this->force = $force;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function onPreCreate(ResourceControllerEvent $event): void
     {
         $document = $event->getSubject();

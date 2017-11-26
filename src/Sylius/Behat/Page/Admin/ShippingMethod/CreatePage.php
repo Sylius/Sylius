@@ -126,9 +126,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @param string $element
-     * @param array $parameters
-     *
      * @return \Behat\Mink\Element\NodeElement|null
      *
      * @throws ElementNotFoundException

@@ -40,9 +40,6 @@ abstract class Image implements ImageInterface
      */
     protected $owner;
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;

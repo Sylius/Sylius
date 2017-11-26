@@ -190,8 +190,6 @@ EOT;
 
     /**
      * @param mixed $cartId
-     *
-     * @return string
      */
     private function getCheckoutCompleteUrl($cartId): string
     {

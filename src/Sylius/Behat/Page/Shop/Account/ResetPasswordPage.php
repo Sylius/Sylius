@@ -47,9 +47,6 @@ class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterfac
         $this->getDocument()->pressButton('Reset');
     }
 
-    /**
-     * @param string $email
-     */
     public function specifyEmail(string $email): void
     {
         $this->getDocument()->fillField('Email', $email);

@@ -342,10 +342,6 @@ EOT;
         $this->assertResponse($response, 'admin_user/deletion_fail_response', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getAdminUserUrl(AdminUserInterface $user): string
     {
         return '/api/v1/users/' . $user->getId();

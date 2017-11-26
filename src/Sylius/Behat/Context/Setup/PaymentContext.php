@@ -55,13 +55,6 @@ final class PaymentContext implements Context
      */
     private $gatewayFactories;
 
-    /**
-     * @param PaymentMethodRepositoryInterface $paymentMethodRepository
-     * @param ExampleFactoryInterface $paymentMethodExampleFactory
-     * @param FactoryInterface $paymentMethodTranslationFactory
-     * @param ObjectManager $paymentMethodManager
-     * @param array $gatewayFactories
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
@@ -171,11 +164,6 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @param string $name
-     * @param string $code
-     * @param string $gatewayFactory
-     * @param string $description
-     * @param bool $addForCurrentChannel
      * @param int|null $position
      *
      * @return PaymentMethodInterface

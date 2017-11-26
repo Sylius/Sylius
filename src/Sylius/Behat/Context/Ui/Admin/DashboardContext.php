@@ -25,9 +25,6 @@ final class DashboardContext implements Context
      */
     private $dashboardPage;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     */
     public function __construct(DashboardPageInterface $dashboardPage)
     {
         $this->dashboardPage = $dashboardPage;

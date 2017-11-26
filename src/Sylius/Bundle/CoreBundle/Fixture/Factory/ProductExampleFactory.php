@@ -116,22 +116,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $productFactory
-     * @param FactoryInterface $productVariantFactory
-     * @param FactoryInterface $channelPricing
-     * @param ProductVariantGeneratorInterface $variantGenerator
-     * @param FactoryInterface $productAttributeValueFactory
-     * @param FactoryInterface $productImageFactory
-     * @param FactoryInterface $productTaxonFactory
-     * @param ImageUploaderInterface $imageUploader
-     * @param SlugGeneratorInterface $slugGenerator
-     * @param RepositoryInterface $taxonRepository
-     * @param RepositoryInterface $productAttributeRepository
-     * @param RepositoryInterface $productOptionRepository
-     * @param RepositoryInterface $channelRepository
-     * @param RepositoryInterface $localeRepository
-     */
     public function __construct(
         FactoryInterface $productFactory,
         FactoryInterface $productVariantFactory,
@@ -270,9 +254,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         ;
     }
 
-    /**
-     * @param array $options
-     */
     private function createTranslations(ProductInterface $product, array $options): void
     {
         foreach ($this->getLocales() as $localeCode) {
@@ -286,9 +267,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         }
     }
 
-    /**
-     * @param array $options
-     */
     private function createRelations(ProductInterface $product, array $options): void
     {
         foreach ($options['channels'] as $channel) {
@@ -304,9 +282,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         }
     }
 
-    /**
-     * @param array $options
-     */
     private function createVariants(ProductInterface $product, array $options): void
     {
         try {
@@ -334,10 +309,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         }
     }
 
-    /**
-     * @param ProductVariantInterface $productVariant
-     * @param string $channelCode
-     */
     private function createChannelPricings(ProductVariantInterface $productVariant, string $channelCode): void
     {
         /** @var ChannelPricingInterface $channelPricing */
@@ -348,9 +319,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $productVariant->addChannelPricing($channelPricing);
     }
 
-    /**
-     * @param array $options
-     */
     private function createImages(ProductInterface $product, array $options): void
     {
         foreach ($options['images'] as $image) {
@@ -368,9 +336,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         }
     }
 
-    /**
-     * @param array $options
-     */
     private function createProductTaxons(ProductInterface $product, array $options): void
     {
         foreach ($options['taxons'] as $taxon) {
@@ -382,9 +347,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         }
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */
@@ -395,7 +357,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     }
 
     /**
-     *
      * @return mixed
      *
      * @throws \BadMethodCallException

@@ -32,10 +32,6 @@ final class ManagingTaxonsContext implements Context
      */
     private $session;
 
-    /**
-     * @param Client $client
-     * @param SessionInterface $session
-     */
     public function __construct(Client $client, SessionInterface $session)
     {
         $this->client = $client;

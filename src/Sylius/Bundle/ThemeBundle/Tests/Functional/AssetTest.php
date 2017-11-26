@@ -28,8 +28,6 @@ final class AssetTest extends WebTestCase
     /**
      * @test
      * @dataProvider getSymlinkMasks
-     *
-     * @param int $symlinkMask
      */
     public function it_dumps_assets(int $symlinkMask): void
     {
@@ -48,8 +46,6 @@ final class AssetTest extends WebTestCase
     /**
      * @test
      * @dataProvider getSymlinkMasks
-     *
-     * @param int $symlinkMask
      */
     public function it_updates_dumped_assets_if_they_are_modified(int $symlinkMask): void
     {
@@ -74,8 +70,6 @@ final class AssetTest extends WebTestCase
     /**
      * @test
      * @dataProvider getSymlinkMasks
-     *
-     * @param int $symlinkMask
      */
     public function it_dumps_assets_correctly_even_if_nothing_has_changed(int $symlinkMask): void
     {
@@ -119,9 +113,6 @@ final class AssetTest extends WebTestCase
         }
     }
 
-    /**
-     * @return array
-     */
     public function getSymlinkMasks(): array
     {
         return [

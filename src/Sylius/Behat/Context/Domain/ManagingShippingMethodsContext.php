@@ -31,10 +31,6 @@ final class ManagingShippingMethodsContext implements Context
      */
     private $shippingMethodManager;
 
-    /**
-     * @param RepositoryInterface $shippingMethodRepository
-     * @param ObjectManager $shippingMethodManager
-     */
     public function __construct(RepositoryInterface $shippingMethodRepository, ObjectManager $shippingMethodManager)
     {
         $this->shippingMethodRepository = $shippingMethodRepository;

@@ -33,11 +33,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     private $addressFactory;
 
-    /**
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param AddressFactoryInterface $addressFactory
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -359,8 +354,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     }
 
     /**
-     * @param string $type
-     *
      * @return AddressInterface
      */
     private function getPreFilledAddress(string $type): AddressInterface
@@ -387,9 +380,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $address;
     }
 
-    /**
-     * @param string $type
-     */
     private function specifyAddress(AddressInterface $address, string $type): void
     {
         $this->assertAddressType($type);
@@ -412,10 +402,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     }
 
     /**
-     * @param string $element
-     *
-     * @return NodeElement|null
-     *
      * @throws ElementNotFoundException
      */
     private function getFieldElement(string $element): ?NodeElement
@@ -428,9 +414,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $element;
     }
 
-    /**
-     * @return bool
-     */
     private function waitForLoginAction(): bool
     {
         return $this->getDocument()->waitFor(5, function () {
@@ -438,9 +421,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         });
     }
 
-    /**
-     * @return bool
-     */
     private function waitForElement($timeout, $elementName): bool
     {
         return $this->getDocument()->waitFor($timeout, function () use ($elementName) {
@@ -448,9 +428,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         });
     }
 
-    /**
-     * @param string $type
-     */
     private function assertAddressType(string $type): void
     {
         $availableTypes = [self::TYPE_BILLING, self::TYPE_SHIPPING];

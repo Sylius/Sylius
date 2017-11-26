@@ -30,8 +30,6 @@ final class GatewayConfigType extends AbstractResourceType
 
     /**
      * {@inheritdoc}
-     *
-     * @param FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
      */
     public function __construct(
         string $dataClass,

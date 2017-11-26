@@ -56,14 +56,6 @@ final class ManagingPromotionsContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
@@ -636,10 +628,6 @@ final class ManagingPromotionsContext implements Context
         Assert::same($this->updatePage->getPriority(), $priority);
     }
 
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
@@ -648,9 +636,6 @@ final class ManagingPromotionsContext implements Context
         Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
     }
 
-    /**
-     * @param string $field
-     */
     private function assertIfFieldIsTrue(PromotionInterface $promotion, string $field): void
     {
         $this->iWantToModifyAPromotion($promotion);

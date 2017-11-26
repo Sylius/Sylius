@@ -109,10 +109,6 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         ]);
     }
 
-    /**
-     * @param int $timeout
-     * @param string $elementName
-     */
     private function waitForElement(int $timeout, string $elementName): void
     {
         $this->getDocument()->waitFor($timeout, function () use ($elementName) {

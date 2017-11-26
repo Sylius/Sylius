@@ -23,7 +23,6 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
     /**
      * @param mixed|null $taxonId
-     *
      */
     public function createListQueryBuilder(string $locale, $taxonId = null): QueryBuilder;
 
@@ -31,7 +30,6 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      * @param TaxonInterface $taxon
      * @param string $locale
      * @param array $sorting
-     *
      */
     public function createShopListQueryBuilder(ChannelInterface $channel, TaxonInterface $taxon, string $locale, array $sorting = []): QueryBuilder;
 

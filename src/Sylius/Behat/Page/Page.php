@@ -38,9 +38,6 @@ abstract class Page implements PageInterface
      */
     private $document;
 
-    /**
-     * @param array $parameters
-     */
     public function __construct(Session $session, array $parameters = [])
     {
         $this->session = $session;
@@ -87,11 +84,6 @@ abstract class Page implements PageInterface
         return true;
     }
 
-    /**
-     * @param array $urlParameters
-     *
-     * @return string
-     */
     abstract protected function getUrl(array $urlParameters = []): string;
 
     /**
@@ -118,7 +110,6 @@ abstract class Page implements PageInterface
     /**
      * Overload to verify if the current url matches the expected one. Throw an exception otherwise.
      *
-     * @param array $urlParameters
      *
      * @throws UnexpectedPageException
      */
@@ -130,8 +121,6 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param string $name
-     *
      * @return NodeElement
      */
     protected function getParameter(string $name): NodeElement
@@ -143,8 +132,6 @@ abstract class Page implements PageInterface
      * Defines elements by returning an array with items being:
      *  - :elementName => :cssLocator
      *  - :elementName => [:selectorType => :locator]
-     *
-     * @return array
      */
     protected function getDefinedElements(): array
     {
@@ -152,9 +139,6 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param string $name
-     * @param array $parameters
-     *
      * @return NodeElement
      *
      * @throws ElementNotFoundException
@@ -175,12 +159,6 @@ abstract class Page implements PageInterface
         return $element;
     }
 
-    /**
-     * @param string $name
-     * @param array $parameters
-     *
-     * @return bool
-     */
     protected function hasElement(string $name, array $parameters = []): bool
     {
         return $this->getDocument()->has('xpath', $this->createElement($name, $parameters)->getXpath());
@@ -215,9 +193,6 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param string $name
-     * @param array $parameters
-     *
      * @return NodeElement
      */
     private function createElement(string $name, array $parameters = []): NodeElement
@@ -242,8 +217,6 @@ abstract class Page implements PageInterface
 
     /**
      * @param string|array $selector
-     *
-     * @return string
      */
     private function getSelectorAsXpath($selector, SelectorsHandler $selectorsHandler): string
     {
@@ -253,13 +226,6 @@ abstract class Page implements PageInterface
         return $selectorsHandler->selectorToXpath($selectorType, $locator);
     }
 
-    /**
-     * @param string $name
-     * @param array $parameters
-     * @param array$definedElements
-     *
-     * @return string
-     */
     private function resolveParameters(string $name, array $parameters, array $definedElements): string
     {
         if (!is_array($definedElements[$name])) {

@@ -29,13 +29,11 @@ interface CompletePageInterface extends SymfonyPageInterface
     public function hasItemWithProductAndQuantity(string $productName, string $quantity): bool;
 
     /**
-     *
      * @return bool
      */
     public function hasShippingAddress(AddressInterface $address): bool;
 
     /**
-     *
      * @return bool
      */
     public function hasBillingAddress(AddressInterface $address): bool;
@@ -51,7 +49,6 @@ interface CompletePageInterface extends SymfonyPageInterface
     public function hasPaymentMethod(): bool;
 
     /**
-     *
      * @return bool
      */
     public function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool;
@@ -132,7 +129,6 @@ interface CompletePageInterface extends SymfonyPageInterface
     public function hasCurrency(string $currencyCode): bool;
 
     /**
-     *
      * @return bool
      */
     public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;

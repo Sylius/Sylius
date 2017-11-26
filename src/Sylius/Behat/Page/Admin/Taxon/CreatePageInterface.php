@@ -74,7 +74,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function attachImage(string $path, string $type = null): void;
 
     /**
-     *
      * @return NodeElement[]
      *
      * @throws ElementNotFoundException

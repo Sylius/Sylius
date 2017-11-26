@@ -26,8 +26,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class DocumentRepository extends BaseDocumentRepository implements RepositoryInterface
 {
     /**
-     * @param int $id
-     *
      * @return object
      */
     public function find(int $id)
@@ -40,9 +38,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         ;
     }
 
-    /**
-     * @return array
-     */
     public function findAll(): array
     {
         return $this
@@ -53,8 +48,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     }
 
     /**
-     * @param array $criteria
-     *
      * @return object
      */
     public function findOneBy(array $criteria)
@@ -70,12 +63,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     }
 
     /**
-     * @param array $criteria
      * @param array|null $sorting
-     * @param int $limit
-     * @param int $offset
-     *
-     * @return array
      */
     public function findBy(array $criteria, ?array $sorting = null, int $limit = null, int $offset = null): array
     {
@@ -132,7 +120,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     }
 
     /**
-     *
      * @return Pagerfanta
      */
     public function getPaginator(QueryBuilder $queryBuilder): Pagerfanta
@@ -156,9 +143,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return $this->createQueryBuilder();
     }
 
-    /**
-     * @param array        $criteria
-     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
         foreach ($criteria as $property => $value) {
@@ -166,9 +150,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         }
     }
 
-    /**
-     * @param array        $sorting
-     */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = []): void
     {
         foreach ($sorting as $property => $order) {

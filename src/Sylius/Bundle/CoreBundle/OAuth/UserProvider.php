@@ -63,17 +63,6 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     private $customerRepository;
 
-    /**
-     * @param string $supportedUserClass
-     * @param FactoryInterface $customerFactory
-     * @param FactoryInterface $userFactory
-     * @param UserRepositoryInterface $userRepository
-     * @param FactoryInterface $oauthFactory
-     * @param RepositoryInterface $oauthRepository
-     * @param ObjectManager $userManager
-     * @param CanonicalizerInterface $canonicalizer
-     * @param CustomerRepositoryInterface $customerRepository
-     */
     public function __construct(
         string $supportedUserClass,
         FactoryInterface $customerFactory,
@@ -129,8 +118,6 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
 
     /**
      * Ad-hoc creation of user.
-     *
-     *
      */
     private function createUserByOAuthUserResponse(UserResponseInterface $response): SyliusUserInterface
     {
@@ -177,9 +164,6 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
 
     /**
      * Attach OAuth sign-in provider account to existing user.
-     *
-     * @param UserResponseInterface $response
-     *
      */
     private function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response): UserInterface
     {

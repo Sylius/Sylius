@@ -56,10 +56,6 @@ final class ShippingMethodApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'shipping_method/show_response', Response::HTTP_OK);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getShippingMethodUrl(ShippingMethodInterface $shippingMethod): string
     {
         return '/api/v1/shipping-methods/' . $shippingMethod->getCode();

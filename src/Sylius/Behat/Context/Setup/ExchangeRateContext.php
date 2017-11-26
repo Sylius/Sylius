@@ -37,11 +37,6 @@ final class ExchangeRateContext implements Context
      */
     private $exchangeRateRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $exchangeRateFactory
-     * @param ExchangeRateRepositoryInterface $exchangeRateRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $exchangeRateFactory,
@@ -66,9 +61,6 @@ final class ExchangeRateContext implements Context
     }
 
     /**
-     * @param CurrencyInterface $targetCurrency
-     * @param float $ratio
-     *
      * @return ExchangeRateInterface
      */
     private function createExchangeRate(CurrencyInterface $sourceCurrency, CurrencyInterface $targetCurrency, float $ratio = 1.00): ExchangeRateInterface
@@ -82,9 +74,6 @@ final class ExchangeRateContext implements Context
         return $exchangeRate;
     }
 
-    /**
-     * @param ExchangeRateInterface $exchangeRate
-     */
     private function saveExchangeRate(ExchangeRateInterface $exchangeRate): void
     {
         $this->exchangeRateRepository->add($exchangeRate);

@@ -19,7 +19,6 @@ interface CalculatorInterface
 {
     /**
      * @param array $configuration
-     *
      */
     public function calculate(ShipmentInterface $subject, array $configuration): int;
 

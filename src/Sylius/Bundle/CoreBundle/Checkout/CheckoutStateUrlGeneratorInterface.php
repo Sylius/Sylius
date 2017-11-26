@@ -21,7 +21,6 @@ interface CheckoutStateUrlGeneratorInterface extends UrlGeneratorInterface
     /**
      * @param array $parameters
      * @param int $referenceType
-     *
      */
     public function generateForOrderCheckoutState(
         OrderInterface $order,
@@ -31,7 +30,6 @@ interface CheckoutStateUrlGeneratorInterface extends UrlGeneratorInterface
 
     /**
      * @param array $parameters
-     *
      */
     public function generateForCart(array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string;
 }

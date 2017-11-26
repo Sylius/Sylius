@@ -79,9 +79,6 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         ]);
     }
 
-    /**
-     * @param string $tabName
-     */
     private function clickTabIfItsNotActive(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);

@@ -28,11 +28,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     private $tableAccessor;
 
-    /**
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -507,16 +502,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->tableAccessor;
     }
 
-    /**
-     * @param string $elementText
-     * @param string $customerName
-     * @param string $street
-     * @param string $postcode
-     * @param string $city
-     * @param string $countryName
-     *
-     * @return bool
-     */
     private function hasAddress(string $elementText, string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         return
@@ -527,12 +512,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ;
     }
 
-    /**
-     * @param string $itemName
-     * @param string $property
-     *
-     * @return string
-     */
     private function getItemProperty(string $itemName, string $property): string
     {
         $rows = $this->tableAccessor->getRowsWithFields(
@@ -543,10 +522,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $rows[0]->find('css', '.' . $property)->getText();
     }
 
-    /**
-     *
-     * @return NodeElement|null
-     */
     private function getLastOrderPaymentElement(OrderInterface $order): ?NodeElement
     {
         $payment = $order->getPayments()->last();
@@ -557,10 +532,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $paymentStateElement->getParent()->getParent();
     }
 
-    /**
-     *
-     * @return NodeElement|null
-     */
     private function getLastOrderShipmentElement(OrderInterface $order): ?NodeElement
     {
         $shipment = $order->getShipments()->last();

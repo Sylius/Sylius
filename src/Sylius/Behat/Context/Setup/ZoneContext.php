@@ -56,13 +56,6 @@ final class ZoneContext implements Context
      */
     private $zoneMemberFactory;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $zoneRepository
-     * @param ObjectManager $objectManager
-     * @param ZoneFactoryInterface $zoneFactory
-     * @param FactoryInterface $zoneMemberFactory
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $zoneRepository,
@@ -188,7 +181,6 @@ final class ZoneContext implements Context
     }
 
     /**
-     *
      * @return ZoneMemberInterface
      */
     private function createZoneMember(CodeAwareInterface $zoneMember): ZoneMemberInterface
@@ -202,9 +194,7 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @param string $name
      * @param string|null $code
-     * @param string $scope
      *
      * @return ZoneInterface
      */
@@ -218,10 +208,6 @@ final class ZoneContext implements Context
         return $zone;
     }
 
-    /**
-     * @param ZoneInterface $zone
-     * @param string $key
-     */
     private function saveZone(ZoneInterface $zone, string $key): void
     {
         $this->sharedStorage->set($key, $zone);

@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ThemeBundle\Translation\Finder;
 interface TranslationFilesFinderInterface
 {
     /**
-     *
      * @return array Paths to translation files
      */
     public function findTranslationFiles(string $path): array;

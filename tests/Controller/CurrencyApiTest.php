@@ -184,10 +184,6 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getCurrencyUrl(CurrencyInterface $currency): string
     {
         return '/api/v1/currencies/' . $currency->getCode();

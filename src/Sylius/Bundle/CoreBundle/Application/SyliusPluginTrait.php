@@ -93,7 +93,6 @@ trait SyliusPluginTrait
 
     /**
      * Returns the plugin's container extension class.
-     *
      */
     protected function getContainerExtensionClass(): string
     {

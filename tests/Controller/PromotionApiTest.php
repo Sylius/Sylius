@@ -489,10 +489,6 @@ EOT;
         $this->assertResponse($response, 'promotion/show_response_after_partial_update', Response::HTTP_OK);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getPromotionUrl(PromotionInterface $promotion): string
     {
         return '/api/v1/promotions/' . $promotion->getCode();

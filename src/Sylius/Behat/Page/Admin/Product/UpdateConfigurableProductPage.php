@@ -45,9 +45,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return $this->getElement('options')->find('named', ['option', $option])->hasAttribute('selected');
     }
 
-    /**
-     * @return bool
-     */
     public function isProductOptionsDisabled(): bool
     {
         return 'disabled' === $this->getElement('options')->getAttribute('disabled');
@@ -226,9 +223,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $this->getElement('taxonomy')->click();
     }
 
-    /**
-     * @param string $tabName
-     */
     private function clickTabIfItsNotActive(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
@@ -238,8 +232,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     }
 
     /**
-     * @param string $type
-     *
      * @return NodeElement
      */
     private function getImageElementByType(string $type): NodeElement
@@ -288,9 +280,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return reset($imageElements);
     }
 
-    /**
-     * @param string $type
-     */
     private function setImageType(NodeElement $imageElement, string $type): void
     {
         $typeField = $imageElement->findField('Type');

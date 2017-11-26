@@ -53,9 +53,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $provinces->has('css', '[value = "' . $provinceCode . '"]');
     }
 
-    /**
-     * @param string $provinceName
-     */
     public function removeProvince(string $provinceName): void
     {
         if ($this->isThereProvince($provinceName)) {
@@ -109,9 +106,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $provinceForm->fillField('Name', $name);
     }
 
-    /**
-     * @param string $provinceName
-     */
     public function removeProvinceName(string $provinceName): void
     {
         if ($this->isThereProvince($provinceName)) {

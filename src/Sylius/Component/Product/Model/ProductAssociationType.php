@@ -48,9 +48,6 @@ class ProductAssociationType implements ProductAssociationTypeInterface
         $this->updatedAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();
@@ -97,7 +94,6 @@ class ProductAssociationType implements ProductAssociationTypeInterface
     }
 
     /**
-     *
      * @return ProductAssociationTypeTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

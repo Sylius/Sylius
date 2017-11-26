@@ -28,11 +28,6 @@ final class ChannelCollector extends DataCollector
      */
     private $channelContext;
 
-    /**
-     * @param ChannelRepositoryInterface $channelRepository
-     * @param ChannelContextInterface $channelContext
-     * @param bool $channelChangeSupport
-     */
     public function __construct(
         ChannelRepositoryInterface $channelRepository,
         ChannelContextInterface $channelContext,
@@ -47,9 +42,6 @@ final class ChannelCollector extends DataCollector
         ];
     }
 
-    /**
-     * @return ChannelInterface|null
-     */
     public function getChannel(): ?ChannelInterface
     {
         return $this->data['channel'];
@@ -63,9 +55,6 @@ final class ChannelCollector extends DataCollector
         return $this->data['channels'];
     }
 
-    /**
-     * @return bool
-     */
     public function isChannelChangeSupported(): bool
     {
         return $this->data['channel_change_support'];

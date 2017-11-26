@@ -123,23 +123,6 @@ final class ProductContext implements Context
      */
     private $minkParameters;
 
-    /**
-     * @param ProductRepositoryInterface $productRepository
-     * @param ProductFactoryInterface $productFactory
-     * @param FactoryInterface $productTranslationFactory
-     * @param FactoryInterface $productVariantFactory
-     * @param FactoryInterface $productVariantTranslationFactory
-     * @param FactoryInterface $channelPricingFactory
-     * @param FactoryInterface $productOptionFactory
-     * @param FactoryInterface $productOptionValueFactory
-     * @param FactoryInterface $productImageFactory
-     * @param ObjectManager $objectManager
-     * @param ProductVariantGeneratorInterface $productVariantGenerator
-     * @param ProductVariantResolverInterface $defaultVariantResolver
-     * @param ImageUploaderInterface $imageUploader
-     * @param SlugGeneratorInterface $slugGenerator
-     * @param array $minkParameters
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductRepositoryInterface $productRepository,
@@ -791,20 +774,12 @@ final class ProductContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
     private function getPriceFromString(string $price): int
     {
         return (int) round($price * 100, 2);
     }
 
     /**
-     * @param string $productName
-     * @param int $price
-     *
      * @return ProductInterface
      */
     private function createProduct(string $productName, int $price = 100, ?ChannelInterface $channel = null): ProductInterface
@@ -846,9 +821,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param string $value
-     * @param string $code
-     *
      * @return ProductOptionValueInterface
      */
     private function addProductOption(ProductOptionInterface $option, string $value, string $code): ProductOptionValueInterface
@@ -865,9 +837,6 @@ final class ProductContext implements Context
         return $optionValue;
     }
 
-    /**
-     * @param ProductInterface $product
-     */
     private function saveProduct(ProductInterface $product): void
     {
         $this->productRepository->add($product);
@@ -875,8 +844,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param string $name
-     *
      * @return NodeElement
      */
     private function getParameter(string $name): NodeElement
@@ -885,13 +852,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param $productVariantName
-     * @param int $price
-     * @param string $code
-     * @param ChannelInterface $channel
-     * @param int $position
-     * @param bool $shippingRequired
-     *
      * @return ProductVariantInterface
      */
     private function createProductVariant(
@@ -923,10 +883,6 @@ final class ProductContext implements Context
         return $variant;
     }
 
-    /**
-     * @param string $name
-     * @param string $locale
-     */
     private function addProductTranslation(ProductInterface $product, string $name, string $locale): void
     {
         /** @var ProductTranslationInterface|TranslationInterface $translation */
@@ -942,10 +898,6 @@ final class ProductContext implements Context
         $product->addTranslation($translation);
     }
 
-    /**
-     * @param string $name
-     * @param string $locale
-     */
     private function addProductVariantTranslation(ProductVariantInterface $productVariant, string $name, string $locale): void
     {
         /** @var ProductVariantTranslationInterface|TranslationInterface $translation */
@@ -957,8 +909,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param int $price
-     *
      * @return ChannelPricingInterface
      */
     private function createChannelPricingForChannel(int $price, ?ChannelInterface $channel = null): ChannelPricingInterface

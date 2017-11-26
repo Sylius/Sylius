@@ -63,15 +63,6 @@ final class AddressBookContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $addressRepository
-     * @param IndexPageInterface $addressBookIndexPage
-     * @param CreatePageInterface $addressBookCreatePage
-     * @param UpdatePageInterface $addressBookUpdatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $addressRepository,
@@ -373,8 +364,6 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @param string $fullName
-     *
      * @return AddressInterface
      */
     private function getAddressOf(string $fullName): AddressInterface

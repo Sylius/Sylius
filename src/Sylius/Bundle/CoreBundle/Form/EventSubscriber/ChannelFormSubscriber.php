@@ -29,9 +29,6 @@ final class ChannelFormSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSubmit(FormEvent $event): void
     {
         $data = $event->getData();

@@ -62,15 +62,6 @@ final class ProductAssociationContext implements Context
      */
     private $objectManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $productAssociationTypeFactory
-     * @param FactoryInterface $productAssociationTypeTranslationFactory
-     * @param FactoryInterface $productAssociationFactory
-     * @param ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository
-     * @param RepositoryInterface $productAssociationRepository
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $productAssociationTypeFactory,
@@ -146,7 +137,6 @@ final class ProductAssociationContext implements Context
     }
 
     /**
-     * @param string $name
      * @param string|null $code
      *
      * @return ProductAssociationTypeInterface
@@ -168,10 +158,6 @@ final class ProductAssociationContext implements Context
         return $productAssociationType;
     }
 
-    /**
-     * @param ProductAssociationTypeInterface $productAssociationType
-     * @param array $associatedProducts
-     */
     private function createProductAssociation(
         ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
@@ -190,10 +176,6 @@ final class ProductAssociationContext implements Context
         $this->productAssociationRepository->add($productAssociation);
     }
 
-    /**
-     * @param string $name
-     * @param string $locale
-     */
     private function addProductAssociationTypeTranslation(
         ProductAssociationTypeInterface $productAssociationType,
         string $name,
@@ -207,11 +189,6 @@ final class ProductAssociationContext implements Context
         $productAssociationType->addTranslation($translation);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
     private function generateCodeFromName(string $name): string
     {
         return str_replace([' ', '-'], '_', strtolower($name));

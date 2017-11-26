@@ -105,11 +105,6 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     }
 
     /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
-     *
      * @throws ElementNotFoundException
      */
     private function checkValidationMessageFor(string $element, string $message): bool
@@ -124,7 +119,6 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     }
 
     /**
-     *
      * @return NodeElement
      *
      * @throws ElementNotFoundException

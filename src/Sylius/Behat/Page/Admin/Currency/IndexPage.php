@@ -35,10 +35,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     }
 
     /**
-     * @param string $status
-     *
-     * @return bool
-     *
      * @throws \InvalidArgumentException
      */
     private function checkCurrencyStatus(CurrencyInterface $currency, string $status): bool

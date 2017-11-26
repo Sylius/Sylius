@@ -41,12 +41,6 @@ final class PaypalContext implements Context
      */
     private $paypalApiMocker;
 
-    /**
-     * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
-     * @param ShowPageInterface $orderDetails
-     * @param CompletePageInterface $summaryPage
-     * @param PaypalApiMocker $paypalApiMocker
-     */
     public function __construct(
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
         ShowPageInterface $orderDetails,
@@ -115,9 +109,6 @@ final class PaypalContext implements Context
         $this->assertNotification('Payment has been completed.');
     }
 
-    /**
-     * @param string $expectedNotification
-     */
     private function assertNotification(string $expectedNotification): void
     {
         $notifications = $this->orderDetails->getNotifications();

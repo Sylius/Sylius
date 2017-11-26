@@ -24,9 +24,6 @@ final class AttributeTypeChoiceType extends AbstractType
      */
     private $attributeTypes;
 
-    /**
-     * @param array $attributeTypes
-     */
     public function __construct(array $attributeTypes)
     {
         $this->attributeTypes = $attributeTypes;

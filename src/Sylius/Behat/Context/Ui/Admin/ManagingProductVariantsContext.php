@@ -63,15 +63,6 @@ final class ManagingProductVariantsContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param GeneratePageInterface $generatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreatePageInterface $createPage,
@@ -549,10 +540,6 @@ final class ManagingProductVariantsContext implements Context
         );
     }
 
-    /**
-     * @param string $element
-     * @param $message
-     */
     private function assertValidationMessage(string $element, $message): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */

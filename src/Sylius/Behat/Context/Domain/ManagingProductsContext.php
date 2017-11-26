@@ -43,12 +43,6 @@ final class ManagingProductsContext implements Context
      */
     private $productReviewRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $productRepository
-     * @param RepositoryInterface $productVariantRepository
-     * @param RepositoryInterface $productReviewRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productRepository,

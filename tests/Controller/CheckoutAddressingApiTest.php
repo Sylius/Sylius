@@ -335,8 +335,6 @@ EOT;
 
     /**
      * @param mixed $cartId
-     *
-     * @return string
      */
     private function getAddressingUrl($cartId): string
     {

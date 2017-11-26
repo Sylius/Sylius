@@ -19,7 +19,6 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 interface ShippingMethodsResolverInterface
 {
     /**
-     *
      * @return ShippingMethodInterface[]
      */
     public function getSupportedMethods(ShippingSubjectInterface $subject): array;

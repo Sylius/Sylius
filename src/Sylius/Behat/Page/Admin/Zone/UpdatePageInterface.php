@@ -34,7 +34,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function getScope(): string;
 
     /**
-     *
      * @return bool
      */
     public function hasMember(ZoneMemberInterface $zoneMember): bool;

@@ -23,9 +23,6 @@ final class ManagingTranslatableEntitiesContext implements Context
      */
     private $taxonCreatePage;
 
-    /**
-     * @param CreatePage $taxonCreatePage
-     */
     public function __construct(CreatePage $taxonCreatePage)
     {
         $this->taxonCreatePage = $taxonCreatePage;

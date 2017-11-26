@@ -68,10 +68,6 @@ final class PaymentMethodApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'payment_method/show_response', Response::HTTP_OK);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getPaymentMethodUrl(PaymentMethodInterface $paymentMethod): string
     {
         return '/api/v1/payment-methods/' . $paymentMethod->getCode();

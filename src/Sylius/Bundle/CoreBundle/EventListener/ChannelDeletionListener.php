@@ -25,9 +25,6 @@ final class ChannelDeletionListener
      */
     private $channelRepository;
 
-    /**
-     * @param ChannelRepository $repository
-     */
     public function __construct(ChannelRepository $repository)
     {
         $this->channelRepository = $repository;
@@ -35,7 +32,6 @@ final class ChannelDeletionListener
 
     /**
      * Prevent channel deletion if no more channels enabled.
-     *
      */
     public function onChannelPreDelete(ResourceControllerEvent $event): void
     {

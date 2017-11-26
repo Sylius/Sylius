@@ -88,10 +88,6 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
         ;
     }
 
-    /**
-     * @param FormInterface $form
-     * @param string $configurationType
-     */
     protected function addConfigurationFields(FormInterface $form, string $configurationType): void
     {
         $form->add('configuration', $configurationType, [
@@ -101,7 +97,6 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
 
     /**
      * @param mixed $data
-     *
      */
     protected function getRegistryIdentifier(FormInterface $form, $data = null): ?string
     {

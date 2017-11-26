@@ -21,17 +21,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
 
-    /**
-     * @param int $limit
-     */
     public function setCustomerUsageLimit(int $limit): void
     {
         $this->getDocument()->fillField('Per-Customer Usage Limit', $limit);
     }
 
-    /**
-     * @param \DateTimeInterface $date
-     */
     public function setExpiresAt(\DateTimeInterface $date): void
     {
         $timestamp = $date->getTimestamp();
@@ -39,9 +33,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->fillField('Expires at', date('Y-m-d', $timestamp));
     }
 
-    /**
-     * @param int $limit
-     */
     public function setUsageLimit(int $limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);

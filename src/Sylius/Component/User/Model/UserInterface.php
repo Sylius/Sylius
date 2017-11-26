@@ -41,7 +41,6 @@ interface UserInterface extends
 
     /**
      * Gets normalized email (should be used in search and sort queries).
-     *
      */
     public function getEmailCanonical(): ?string;
 
@@ -57,7 +56,6 @@ interface UserInterface extends
 
     /**
      * Gets normalized username (should be used in search and sort queries).
-     *
      */
     public function getUsernameCanonical(): ?string;
 
@@ -160,8 +158,6 @@ interface UserInterface extends
      * instead, e.g.
      *
      *         $securityContext->isGranted('ROLE_USER');
-     *
-     *
      */
     public function hasRole(string $role): bool;
 

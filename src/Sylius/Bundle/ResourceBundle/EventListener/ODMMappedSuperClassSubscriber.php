@@ -23,9 +23,6 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
  */
 final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
 {
-    /**
-     * @return array
-     */
     public function getSubscribedEvents(): array
     {
         return [
@@ -33,9 +30,6 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
         ];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArgs
-     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
         $metadata = $eventArgs->getClassMetadata();
@@ -49,9 +43,6 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
         }
     }
 
-    /**
-     * @param ClassMetadataInfo $metadata
-     */
     private function convertToDocumentIfNeeded(ClassMetadataInfo $metadata): void
     {
         if (false === $metadata->isMappedSuperclass) {
@@ -69,10 +60,6 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
         }
     }
 
-    /**
-     * @param ClassMetadataInfo $metadata
-     * @param $configuration
-     */
     private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration): void
     {
         foreach (class_parents($metadata->getName()) as $parent) {
@@ -105,9 +92,6 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
         }
     }
 
-    /**
-     * @param ClassMetadataInfo $metadata
-     */
     private function unsetAssociationMappings(ClassMetadataInfo $metadata): void
     {
         if (false === $this->isResource($metadata)) {
@@ -121,11 +105,6 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
         }
     }
 
-    /**
-     * @param string $type
-     *
-     * @return bool
-     */
     private function isRelation(string $type): bool
     {
         return in_array(

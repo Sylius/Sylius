@@ -39,10 +39,6 @@ final class TemplateNameParser implements TemplateNameParserInterface
      */
     private $cache = [];
 
-    /**
-     * @param TemplateNameParserInterface $decoratedParser
-     * @param KernelInterface $kernel
-     */
     public function __construct(TemplateNameParserInterface $decoratedParser, KernelInterface $kernel)
     {
         $this->decoratedParser = $decoratedParser;

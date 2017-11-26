@@ -41,8 +41,6 @@ final class SharedSecurityService implements SharedSecurityServiceInterface
     }
 
     /**
-     * @param SecurityServiceInterface $securityService
-     * @param UserInterface $user
      * @param callable $action
      */
     private function performActionAs(SecurityServiceInterface $securityService, UserInterface $user, callable $action): void

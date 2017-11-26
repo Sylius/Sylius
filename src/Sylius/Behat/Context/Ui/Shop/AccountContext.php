@@ -64,15 +64,6 @@ final class AccountContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     * @param ProfileUpdatePageInterface $profileUpdatePage
-     * @param ChangePasswordPageInterface $changePasswordPage
-     * @param IndexPageInterface $orderIndexPage
-     * @param ShowPageInterface $orderShowPage
-     * @param LoginPageInterface $loginPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         DashboardPageInterface $dashboardPage,
         ProfileUpdatePageInterface $profileUpdatePage,
@@ -453,10 +444,6 @@ final class AccountContext implements Context
         $this->loginPage->tryToOpen();
     }
 
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
     private function assertFieldValidationMessage(PageInterface $page, string $element, string $expectedMessage): void
     {
         Assert::true($page->checkValidationMessageFor($element, $expectedMessage));

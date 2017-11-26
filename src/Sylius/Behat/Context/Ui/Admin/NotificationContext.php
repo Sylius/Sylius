@@ -24,9 +24,6 @@ final class NotificationContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(NotificationCheckerInterface $notificationChecker)
     {
         $this->notificationChecker = $notificationChecker;

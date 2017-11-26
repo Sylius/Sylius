@@ -54,14 +54,6 @@ final class GeographicalContext implements Context
      */
     private $countryManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $countryFactory
-     * @param FactoryInterface $provinceFactory
-     * @param RepositoryInterface $countryRepository
-     * @param CountryNameConverterInterface $countryNameConverter
-     * @param ObjectManager $countryManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $countryFactory,
@@ -135,8 +127,6 @@ final class GeographicalContext implements Context
     }
 
     /**
-     * @param string $name
-     *
      * @return CountryInterface
      */
     private function createCountryNamed(string $name): CountryInterface

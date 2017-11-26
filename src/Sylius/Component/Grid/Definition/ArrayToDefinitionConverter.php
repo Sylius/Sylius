@@ -25,9 +25,6 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
      */
     private $eventDispatcher;
 
-    /**
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(EventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
@@ -70,9 +67,6 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
     }
 
     /**
-     * @param string $name
-     * @param array $configuration
-     *
      * @return Field
      */
     private function convertField(string $name, array $configuration): Field
@@ -112,9 +106,6 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
     }
 
     /**
-     * @param string $name
-     * @param array $configuration
-     *
      * @return Filter
      */
     private function convertFilter(string $name, array $configuration): Filter
@@ -147,9 +138,6 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
     }
 
     /**
-     * @param string $name
-     * @param array $configuration
-     *
      * @return ActionGroup
      */
     private function convertActionGroup(string $name, array $configuration): ActionGroup
@@ -164,9 +152,6 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
     }
 
     /**
-     * @param string $name
-     * @param array $configuration
-     *
      * @return Action
      */
     private function convertAction(string $name, array $configuration): Action
@@ -192,11 +177,6 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
         return $action;
     }
 
-    /**
-     * @param string $code
-     *
-     * @return string
-     */
     private function getEventName(string $code): string
     {
         return sprintf(self::EVENT_NAME, str_replace('sylius_', '', $code));

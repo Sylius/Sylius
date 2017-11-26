@@ -43,12 +43,6 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -283,10 +277,6 @@ final class ManagingProductAssociationTypesContext implements Context
         Assert::false($this->indexPage->isSingleResourceOnPage([$element => $value]));
     }
 
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */

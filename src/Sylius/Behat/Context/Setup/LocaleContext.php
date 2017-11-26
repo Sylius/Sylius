@@ -54,14 +54,6 @@ final class LocaleContext implements Context
      */
     private $localeConverter;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param LocaleConverterInterface $localeConverter
-     * @param FactoryInterface $localeFactory
-     * @param RepositoryInterface $localeRepository
-     * @param ObjectManager $localeManager
-     * @param ObjectManager $channelManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         LocaleConverterInterface $localeConverter,
@@ -136,8 +128,6 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @param string $localeCode
-     *
      * @return LocaleInterface
      */
     private function createLocale(string $localeCode): LocaleInterface
@@ -150,8 +140,6 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @param string $localeCode
-     *
      * @return LocaleInterface
      */
     private function provideLocale(string $localeCode): LocaleInterface
@@ -167,9 +155,6 @@ final class LocaleContext implements Context
         return $locale;
     }
 
-    /**
-     * @param LocaleInterface $locale
-     */
     private function saveLocale(LocaleInterface $locale): void
     {
         $this->sharedStorage->set('locale', $locale);

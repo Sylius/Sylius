@@ -31,9 +31,6 @@ final class TranslationTest extends WebTestCase
         }
     }
 
-    /**
-     * @return array
-     */
     protected function getTranslationsLines(): array
     {
         return [

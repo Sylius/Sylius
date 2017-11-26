@@ -24,9 +24,6 @@ final class CouponContext implements Context
      */
     private $couponRepository;
 
-    /**
-     * @param RepositoryInterface $couponRepository
-     */
     public function __construct(
         RepositoryInterface $couponRepository
     ) {

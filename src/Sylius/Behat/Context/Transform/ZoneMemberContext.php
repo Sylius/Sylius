@@ -43,12 +43,6 @@ final class ZoneMemberContext implements Context
      */
     private $zoneMemberRepository;
 
-    /**
-     * @param CountryNameConverterInterface $countryNameConverter
-     * @param RepositoryInterface $provinceRepository
-     * @param RepositoryInterface $zoneRepository
-     * @param RepositoryInterface $zoneMemberRepository
-     */
     public function __construct(
         CountryNameConverterInterface $countryNameConverter,
         RepositoryInterface $provinceRepository,
@@ -92,8 +86,6 @@ final class ZoneMemberContext implements Context
     }
 
     /**
-     * @param string $code
-     *
      * @return ZoneMemberInterface
      *
      * @throws \InvalidArgumentException
@@ -110,8 +102,6 @@ final class ZoneMemberContext implements Context
     }
 
     /**
-     * @param string $name
-     *
      * @return ProvinceInterface
      *
      * @throws \InvalidArgumentException
@@ -128,8 +118,6 @@ final class ZoneMemberContext implements Context
     }
 
     /**
-     * @param string $name
-     *
      * @return ZoneInterface
      *
      * @throws \InvalidArgumentException

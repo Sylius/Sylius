@@ -24,9 +24,6 @@ final class ManagingInventoryContext implements Context
      */
     private $indexPage;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     */
     public function __construct(IndexPageInterface $indexPage)
     {
         $this->indexPage = $indexPage;

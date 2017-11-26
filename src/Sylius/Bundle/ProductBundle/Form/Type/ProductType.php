@@ -45,9 +45,6 @@ final class ProductType extends AbstractResourceType
 
     /**
      * @param array|string[] $validationGroups
-     * @param ProductVariantResolverInterface $variantResolver
-     * @param FactoryInterface $attributeValueFactory
-     * @param TranslationLocaleProviderInterface $localeProvider
      */
     public function __construct(
         string $dataClass,

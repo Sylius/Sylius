@@ -114,11 +114,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $fullNameElement->getText();
     }
 
-    /**
-     * @param string $fullName
-     *
-     * @return NodeElement|null
-     */
     private function getAddressOf(string $fullName): ?NodeElement
     {
         return $this->getElement('addresses')->find('css', sprintf('div.address:contains("%s")', $fullName));

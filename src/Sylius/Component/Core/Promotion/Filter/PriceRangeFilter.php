@@ -24,9 +24,6 @@ final class PriceRangeFilter implements FilterInterface
      */
     private $productVariantPriceCalculator;
 
-    /**
-     * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
-     */
     public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
     {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
@@ -53,10 +50,6 @@ final class PriceRangeFilter implements FilterInterface
         return $filteredItems;
     }
 
-    /**
-     * @param array $configuration
-     *
-     */
     private function isItemVariantInPriceRange(ProductVariantInterface $variant, array $configuration): bool
     {
         $price = $this->productVariantPriceCalculator->calculate($variant, ['channel' => $configuration['channel']]);
@@ -69,10 +62,6 @@ final class PriceRangeFilter implements FilterInterface
         return $priceRange['min'] <= $price;
     }
 
-    /**
-     * @param array $configuration
-     *
-     */
     private function isConfigured(array $configuration): bool
     {
         return isset($configuration['filters']['price_range_filter']['min']);

@@ -32,10 +32,6 @@ final class EmailContext implements Context
      */
     private $emailChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param EmailCheckerInterface $emailChecker
-     */
     public function __construct(SharedStorageInterface $sharedStorage, EmailCheckerInterface $emailChecker)
     {
         $this->sharedStorage = $sharedStorage;
@@ -94,19 +90,11 @@ final class EmailContext implements Context
         $this->assertEmailContainsMessageTo($tracking, $recipient);
     }
 
-    /**
-     * @param string $message
-     * @param string $recipient
-     */
     private function assertEmailContainsMessageTo(string $message, string $recipient): void
     {
         Assert::true($this->emailChecker->hasMessageTo($message, $recipient));
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getShippingMethodName(OrderInterface $order): string
     {
         /** @var ShipmentInterface $shipment */

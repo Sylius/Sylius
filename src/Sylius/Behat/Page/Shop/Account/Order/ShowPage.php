@@ -25,11 +25,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     private $tableAccessor;
 
-    /**
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -189,16 +184,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ]);
     }
 
-    /**
-     * @param string $elementText
-     * @param string $customerName
-     * @param string $street
-     * @param string $postcode
-     * @param string $city
-     * @param string $countryName
-     *
-     * @return bool
-     */
     private function hasAddress(string $elementText, string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         return

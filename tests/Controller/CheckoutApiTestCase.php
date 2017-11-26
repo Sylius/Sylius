@@ -192,8 +192,6 @@ EOT;
 
     /**
      * @param mixed $cartId
-     *
-     * @return string
      */
     protected function getCheckoutSummaryUrl($cartId): string
     {

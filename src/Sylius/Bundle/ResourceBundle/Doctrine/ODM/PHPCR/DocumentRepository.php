@@ -59,7 +59,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     }
 
     /**
-     *
      * @return Pagerfanta
      */
     public function getPaginator(QueryBuilder $queryBuilder): Pagerfanta
@@ -75,9 +74,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return $this->createQueryBuilder('o');
     }
 
-    /**
-     * @param array        $criteria
-     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
         $metadata = $this->getClassMetadata();
@@ -100,9 +96,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         }
     }
 
-    /**
-     * @param array        $sorting
-     */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = []): void
     {
         foreach ($sorting as $property => $order) {
@@ -114,11 +107,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         $queryBuilder->end();
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
     protected function getPropertyName(string $name): string
     {
         if (false === strpos($name, '.')) {
@@ -128,9 +116,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return $name;
     }
 
-    /**
-     * @return string
-     */
     protected function getAlias(): string
     {
         return 'o';

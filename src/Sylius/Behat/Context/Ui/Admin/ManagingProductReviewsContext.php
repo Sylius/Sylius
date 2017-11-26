@@ -38,11 +38,6 @@ final class ManagingProductReviewsContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
@@ -253,19 +248,11 @@ final class ManagingProductReviewsContext implements Context
         $this->assertElementValue('comment', $comment);
     }
 
-    /**
-     * @param string $element
-     * @param string $value
-     */
     private function assertElementValue(string $element, string $value): void
     {
         Assert::true($this->updatePage->hasResourceValues([$element => $value]));
     }
 
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         Assert::same($this->updatePage->getValidationMessage($element), $expectedMessage);

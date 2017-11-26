@@ -24,9 +24,6 @@ final class CurrencyContext implements Context
      */
     private $homePage;
 
-    /**
-     * @param HomePageInterface $homePage
-     */
     public function __construct(HomePageInterface $homePage)
     {
         $this->homePage = $homePage;

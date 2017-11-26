@@ -33,9 +33,6 @@ class ResourceGridView extends GridView
 
     /**
      * @param mixed $data
-     * @param Parameters $parameters
-     * @param MetadataInterface $resourceMetadata
-     * @param RequestConfiguration $requestConfiguration
      */
     public function __construct(
         $data,

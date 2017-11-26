@@ -88,10 +88,6 @@ final class TaxRateApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'tax_rate/show_response', Response::HTTP_OK);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getTaxRateUrl(TaxRateInterface $taxRate): string
     {
         return '/api/v1/tax-rates/' . $taxRate->getCode();

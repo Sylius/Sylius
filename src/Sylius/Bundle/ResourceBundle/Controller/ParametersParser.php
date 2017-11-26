@@ -30,10 +30,6 @@ final class ParametersParser implements ParametersParserInterface
      */
     private $expression;
 
-    /**
-     * @param ContainerInterface $container
-     * @param ExpressionLanguage $expression
-     */
     public function __construct(ContainerInterface $container, ExpressionLanguage $expression)
     {
         $this->container = $container;
@@ -81,8 +77,6 @@ final class ParametersParser implements ParametersParserInterface
     }
 
     /**
-     * @param Request $request
-     *
      * @return mixed
      */
     private function parseRequestValueExpression(string $expression, Request $request)

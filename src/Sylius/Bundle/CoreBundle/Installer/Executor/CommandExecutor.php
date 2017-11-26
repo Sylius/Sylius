@@ -37,11 +37,6 @@ final class CommandExecutor
      */
     private $application;
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @param Application $application
-     */
     public function __construct(InputInterface $input, OutputInterface $output, Application $application)
     {
         $this->input = $input;
@@ -50,7 +45,6 @@ final class CommandExecutor
     }
 
     /**
-     * @param array $parameters
      * @param OutputInterface|null $output
      *
      *
@@ -83,9 +77,6 @@ final class CommandExecutor
         return $this;
     }
 
-    /**
-     * @return array
-     */
     private function getDefaultParameters(): array
     {
         $defaultParameters = ['--no-debug' => true];

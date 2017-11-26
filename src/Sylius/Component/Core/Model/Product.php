@@ -349,7 +349,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     }
 
     /**
-     *
      * @return ProductTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

@@ -25,9 +25,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class ProductAttributeController extends ResourceController
 {
     /**
-     * @param Request $request
-     * @param string $template
-     *
      * @return Response
      */
     public function getAttributeTypesAction(Request $request, string $template): Response
@@ -61,8 +58,6 @@ class ProductAttributeController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function renderAttributeValueFormsAction(Request $request): Response

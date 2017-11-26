@@ -28,7 +28,6 @@ interface ShippingMethodRepositoryInterface extends BaseShippingMethodRepository
     public function createListQueryBuilder(string $locale): QueryBuilder;
 
     /**
-     *
      * @return array|ShippingMethodInterface[]
      */
     public function findEnabledForChannel(ChannelInterface $channel): array;

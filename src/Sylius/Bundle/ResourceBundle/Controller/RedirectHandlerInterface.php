@@ -37,7 +37,6 @@ interface RedirectHandlerInterface
     /**
      * @param string               $route
      * @param array                $parameters
-     *
      */
     public function redirectToRoute(RequestConfiguration $configuration, string $route, array $parameters = []): Response;
 

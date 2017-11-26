@@ -27,7 +27,6 @@ interface ShipmentRepositoryInterface extends RepositoryInterface
     /**
      * @param mixed $shipmentId
      * @param mixed $orderId
-     *
      */
     public function findOneByOrderId($shipmentId, $orderId): ?ShipmentInterface;
 

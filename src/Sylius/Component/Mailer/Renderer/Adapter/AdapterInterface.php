@@ -20,7 +20,6 @@ interface AdapterInterface
 {
     /**
      * @param array $data
-     *
      */
     public function render(EmailInterface $email, array $data = []): RenderedEmail;
 }

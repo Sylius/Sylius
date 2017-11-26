@@ -35,9 +35,6 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      */
     private $accessor;
 
-    /**
-     * @param ManagerRegistry $registry
-     */
     public function __construct(ManagerRegistry $registry)
     {
         $this->registry = $registry;
@@ -92,7 +89,6 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      *
      * @param array|\Iterator $result
      * @param object $entity
-     *
      */
     private function isLastEnabledEntity($result, $entity): bool
     {
@@ -102,7 +98,6 @@ final class HasEnabledEntityValidator extends ConstraintValidator
 
     /**
      * @param object $entity
-     *
      */
     private function getProperObjectManager(?string $manager, $entity): ?ObjectManager
     {
@@ -127,7 +122,6 @@ final class HasEnabledEntityValidator extends ConstraintValidator
 
     /**
      * @param ObjectManager|null $objectManager
-     * @param string $exceptionMessage
      *
      * @throws ConstraintDefinitionException
      */
@@ -140,7 +134,6 @@ final class HasEnabledEntityValidator extends ConstraintValidator
 
     /**
      * @param object $entity
-     * @param string $enabledPropertyPath
      *
      * @throws ConstraintDefinitionException
      */

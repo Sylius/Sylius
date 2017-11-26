@@ -25,9 +25,6 @@ final class DatetimeFieldType implements FieldTypeInterface
      */
     private $dataExtractor;
 
-    /**
-     * @param DataExtractorInterface $dataExtractor
-     */
     public function __construct(DataExtractorInterface $dataExtractor)
     {
         $this->dataExtractor = $dataExtractor;

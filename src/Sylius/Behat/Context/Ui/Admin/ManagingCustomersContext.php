@@ -57,10 +57,6 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @param CustomerIndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param ShowPageInterface $showPage
-     * @param IndexPageInterface $ordersIndexPage
-     * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         CreatePageInterface $createPage,

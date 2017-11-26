@@ -18,7 +18,6 @@ use Doctrine\Common\Collections\Collection;
 interface AdjustableInterface
 {
     /**
-     *
      * @return Collection|AdjustmentInterface[]
      */
     public function getAdjustments(?string $type = null): Collection;

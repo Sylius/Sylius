@@ -32,10 +32,6 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
      */
     private $themeRepository;
 
-    /**
-     * @param ChannelContextInterface $channelContext
-     * @param ThemeRepositoryInterface $themeRepository
-     */
     public function __construct(ChannelContextInterface $channelContext, ThemeRepositoryInterface $themeRepository)
     {
         $this->channelContext = $channelContext;

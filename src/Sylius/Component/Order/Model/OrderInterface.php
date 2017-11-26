@@ -123,7 +123,6 @@ interface OrderInterface extends AdjustableInterface, ResourceInterface, Timesta
     public function isEmpty(): bool;
 
     /**
-     *
      * @return Collection|AdjustmentInterface[]
      */
     public function getAdjustmentsRecursively(?string $type = null): Collection;

@@ -57,13 +57,6 @@ final class ProductAttributeContext implements Context
      */
     private $faker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $productAttributeRepository
-     * @param AttributeFactoryInterface $productAttributeFactory
-     * @param FactoryInterface $productAttributeValueFactory
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productAttributeRepository,
@@ -302,8 +295,6 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @param string $type
-     * @param string $name
      * @param string|null $code
      *
      * @return ProductAttributeInterface
@@ -321,8 +312,6 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @param string $type
-     * @param string $name
      * @param string|null $code
      *
      * @return ProductAttributeInterface
@@ -345,8 +334,6 @@ final class ProductAttributeContext implements Context
 
     /**
      * @param mixed $value
-     * @param string $localeCode
-     *
      */
     private function createProductAttributeValue(
         $value,
@@ -364,20 +351,12 @@ final class ProductAttributeContext implements Context
         return $attributeValue;
     }
 
-    /**
-     * @param ProductAttributeInterface $productAttribute
-     */
     private function saveProductAttribute(ProductAttributeInterface $productAttribute): void
     {
         $this->productAttributeRepository->add($productAttribute);
         $this->sharedStorage->set('product_attribute', $productAttribute);
     }
 
-    /**
-     * @param string $productAttributeName
-     * @param array $values
-     * @param string $localeCode
-     */
     private function createSelectProductAttributeValue(
         ProductInterface $product,
         string $productAttributeName,

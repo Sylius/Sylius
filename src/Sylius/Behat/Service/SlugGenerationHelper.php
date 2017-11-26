@@ -20,10 +20,6 @@ use Webmozart\Assert\Assert;
 
 abstract class SlugGenerationHelper
 {
-    /**
-     * @param Session $session
-     * @param NodeElement $element
-     */
     public static function waitForSlugGeneration(Session $session, NodeElement $element): void
     {
         Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
@@ -33,10 +29,6 @@ abstract class SlugGenerationHelper
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
     }
 
-    /**
-     * @param Session $session
-     * @param NodeElement $element
-     */
     public static function enableSlugModification(Session $session, NodeElement $element): void
     {
         Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
@@ -49,11 +41,6 @@ abstract class SlugGenerationHelper
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
     }
 
-    /**
-     * @param NodeElement $element
-     *
-     * @return bool
-     */
     public static function isSlugReadonly(Session $session, NodeElement $element): bool
     {
         if (!$session->getDriver() instanceof Selenium2Driver) {
@@ -65,10 +52,6 @@ abstract class SlugGenerationHelper
         return static::isElementReadonly($session, $element);
     }
 
-    /**
-     * @param Session $session
-     * @param NodeElement $element
-     */
     private static function waitForElementToBeClickable(Session $session, NodeElement $element): void
     {
         $session->wait(5000, sprintf(
@@ -77,11 +60,6 @@ abstract class SlugGenerationHelper
         ));
     }
 
-    /**
-     * @param NodeElement $element
-     *
-     * @return bool
-     */
     private static function isElementReadonly(Session $session, NodeElement $element): bool
     {
         return $session->wait(5000, sprintf(

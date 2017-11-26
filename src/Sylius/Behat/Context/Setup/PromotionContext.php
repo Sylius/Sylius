@@ -68,15 +68,6 @@ final class PromotionContext implements Context
      */
     private $objectManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param PromotionActionFactoryInterface $actionFactory
-     * @param PromotionCouponFactoryInterface $couponFactory
-     * @param PromotionRuleFactoryInterface $ruleFactory
-     * @param TestPromotionFactoryInterface $testPromotionFactory
-     * @param PromotionRepositoryInterface $promotionRepository
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PromotionActionFactoryInterface $actionFactory,
@@ -707,32 +698,16 @@ final class PromotionContext implements Context
         $this->itGivesDiscountOnShippingToEveryOrderOver($promotion, 1, $itemTotal);
     }
 
-    /**
-     * @param array $taxonCodes
-     *
-     * @return array
-     */
     private function getTaxonFilterConfiguration(array $taxonCodes): array
     {
         return ['filters' => ['taxons_filter' => ['taxons' => $taxonCodes]]];
     }
 
-    /**
-     * @param array $productCodes
-     *
-     * @return array
-     */
     private function getProductsFilterConfiguration(array $productCodes): array
     {
         return ['filters' => ['products_filter' => ['products' => $productCodes]]];
     }
 
-    /**
-     * @param int $minAmount
-     * @param int $maxAmount
-     *
-     * @return array
-     */
     private function getPriceRangeFilterConfiguration(int $minAmount, int $maxAmount = null): array
     {
         $configuration = ['filters' => ['price_range_filter' => ['min' => $minAmount]]];
@@ -744,8 +719,6 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param int $discount
-     * @param array $configuration
      * @param PromotionRuleInterface|null $rule
      */
     private function createUnitFixedPromotion(PromotionInterface $promotion, int $discount, array $configuration = [], ?PromotionRuleInterface $rule = null): void
@@ -761,8 +734,6 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param int $discount
-     * @param array $configuration
      * @param PromotionRuleInterface|null $rule
      */
     private function createUnitPercentagePromotion(PromotionInterface $promotion, int $discount, array $configuration = [], ?PromotionRuleInterface $rule = null): void
@@ -778,8 +749,6 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param int $discount
-     * @param array $configuration
      * @param PromotionRuleInterface|null $rule
      * @param ChannelInterface|null $channel
      */
@@ -795,11 +764,6 @@ final class PromotionContext implements Context
         $this->persistPromotion($promotion, $this->actionFactory->createFixedDiscount($discount, $channelCode), $configuration, $rule);
     }
 
-    /**
-     * @param float $discount
-     * @param array $configuration
-     * @param PromotionRuleInterface $rule
-     */
     private function createPercentagePromotion(
         PromotionInterface $promotion,
         float $discount,
@@ -810,8 +774,6 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param PromotionActionInterface $action
-     * @param array $configuration
      * @param PromotionRuleInterface|null $rule
      */
     private function persistPromotion(PromotionInterface $promotion, PromotionActionInterface $action, array $configuration, ?PromotionRuleInterface $rule = null): void
@@ -828,7 +790,6 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param string $couponCode
      * @param int|null $usageLimit
      *
      * @return PromotionCouponInterface

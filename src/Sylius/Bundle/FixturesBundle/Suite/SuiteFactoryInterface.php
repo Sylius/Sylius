@@ -17,7 +17,6 @@ interface SuiteFactoryInterface
 {
     /**
      * @param array $configuration
-     *
      */
     public function createSuite(string $name, array $configuration): SuiteInterface;
 }

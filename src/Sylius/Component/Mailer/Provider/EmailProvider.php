@@ -29,9 +29,6 @@ final class EmailProvider implements EmailProviderInterface
      */
     private $configuration;
 
-    /**
-     * @param array $configuration
-     */
     public function __construct(
         EmailFactoryInterface $emailFactory,
         array $configuration
@@ -49,8 +46,6 @@ final class EmailProvider implements EmailProviderInterface
     }
 
     /**
-     * @param string $code
-     *
      * @return EmailInterface
      */
     private function getEmailFromConfiguration(string $code): EmailInterface

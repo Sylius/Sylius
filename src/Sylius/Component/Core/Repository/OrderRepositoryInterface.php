@@ -29,14 +29,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /**
      * @param mixed $customerId
-     *
      */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
 
     /**
      * @param mixed $customerId
      * @param mixed $channelId
-     *
      */
     public function createByCustomerAndChannelIdQueryBuilder($customerId, $channelId): QueryBuilder;
 
@@ -56,20 +54,17 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function countByCustomer(CustomerInterface $customer): int;
 
     /**
-     *
      * @return array|OrderInterface[]
      */
     public function findByCustomer(CustomerInterface $customer): array;
 
     /**
-     *
      * @return array|OrderInterface[]
      */
     public function findForCustomerStatistics(CustomerInterface $customer): array;
 
     /**
      * @param mixed $id
-     *
      */
     public function findOneForPayment($id): ?OrderInterface;
 
@@ -83,7 +78,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /**
      * @param mixed $id
-     *
      */
     public function findCartByChannel($id, ChannelInterface $channel): ?OrderInterface;
 
@@ -117,32 +111,27 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function findLatestInChannel(int $count, ChannelInterface $channel): array;
 
     /**
-     *
      * @return array|OrderInterface[]
      */
     public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate): array;
 
     /**
      * @param mixed $id
-     *
      */
     public function findCartForSummary($id): ?OrderInterface;
 
     /**
      * @param mixed $id
-     *
      */
     public function findCartForAddressing($id): ?OrderInterface;
 
     /**
      * @param mixed $id
-     *
      */
     public function findCartForSelectingShipping($id): ?OrderInterface;
 
     /**
      * @param mixed $id
-     *
      */
     public function findCartForSelectingPayment($id): ?OrderInterface;
 }

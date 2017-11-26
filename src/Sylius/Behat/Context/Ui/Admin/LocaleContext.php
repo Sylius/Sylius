@@ -30,10 +30,6 @@ final class LocaleContext implements Context
      */
     private $translator;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     * @param TranslatorInterface $translator
-     */
     public function __construct(DashboardPageInterface $dashboardPage, TranslatorInterface $translator)
     {
         $this->dashboardPage = $dashboardPage;
@@ -52,12 +48,6 @@ final class LocaleContext implements Context
         Assert::same($this->dashboardPage->getSubHeader(), $this->translate('sylius.ui.overview_of_your_store', $localeCode));
     }
 
-    /**
-     * @param string $text
-     * @param string $localeCode
-     *
-     * @return string
-     */
     private function translate(string $text, string $localeCode): string
     {
         $this->translator->setLocale($localeCode);

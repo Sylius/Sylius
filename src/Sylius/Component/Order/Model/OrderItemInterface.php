@@ -46,8 +46,6 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     /**
      * Checks whether the item given as argument corresponds to
      * the same cart item. Can be overwritten to enable merge quantities.
-     *
-     *
      */
     public function equals(OrderItemInterface $orderItem): bool;
 
@@ -84,7 +82,6 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function removeUnit(OrderItemUnitInterface $itemUnit): void;
 
     /**
-     *
      * @return Collection|AdjustmentInterface[]
      */
     public function getAdjustmentsRecursively(?string $type = null): Collection;

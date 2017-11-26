@@ -42,11 +42,6 @@ final class CheckoutCompleteContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param CompletePageInterface $completePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CompletePageInterface $completePage,

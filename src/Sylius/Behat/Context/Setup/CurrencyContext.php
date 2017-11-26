@@ -43,12 +43,6 @@ final class CurrencyContext implements Context
      */
     private $channelManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $currencyRepository
-     * @param FactoryInterface $currencyFactory
-     * @param ObjectManager $channelManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $currencyRepository,
@@ -110,9 +104,6 @@ final class CurrencyContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @param CurrencyInterface $currency
-     */
     private function saveCurrency(CurrencyInterface $currency): void
     {
         $this->sharedStorage->set('currency', $currency);
@@ -120,8 +111,6 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @param $currencyCode
-     *
      * @return CurrencyInterface
      */
     private function createCurrency($currencyCode): CurrencyInterface
@@ -134,8 +123,6 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @param string $currencyCode
-     *
      * @return CurrencyInterface
      */
     private function provideCurrency(string $currencyCode): CurrencyInterface

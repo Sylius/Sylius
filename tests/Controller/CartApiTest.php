@@ -559,29 +559,16 @@ EOT;
         $this->assertResponse($response, 'cart/recalculated_items_total_response', Response::HTTP_OK);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getCartUrl(OrderInterface $cart): string
     {
         return '/api/v1/carts/' . $cart->getId();
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getCartItemListUrl(OrderInterface $cart): string
     {
         return sprintf('/api/v1/carts/%s/items/', $cart->getId());
     }
 
-    /**
-     * @param OrderItemInterface $cartItem
-     *
-     * @return string
-     */
     private function getCartItemUrl(OrderInterface $cart, OrderItemInterface $cartItem): string
     {
         return sprintf('/api/v1/carts/%s/items/%s', $cart->getId(), $cartItem->getId());

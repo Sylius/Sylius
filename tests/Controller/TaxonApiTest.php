@@ -495,19 +495,11 @@ EOT;
         $this->assertResponse($response, 'taxon/update_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getTaxonUrl(TaxonInterface $taxon): string
     {
         return '/api/v1/taxons/' . $taxon->getCode();
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getTaxonProductsPositionsChangeUrl(TaxonInterface $taxon): string
     {
         return sprintf('/api/v1/taxons/%s/products', $taxon->getCode());

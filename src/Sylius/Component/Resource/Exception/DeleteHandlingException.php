@@ -26,10 +26,6 @@ class DeleteHandlingException extends \Exception
     protected $apiResponseCode;
 
     /**
-     * @param string $message
-     * @param string $flash
-     * @param int $apiResponseCode
-     * @param int $code
      * @param \Exception|null $previous
      */
     public function __construct(
@@ -45,17 +41,11 @@ class DeleteHandlingException extends \Exception
         $this->apiResponseCode = $apiResponseCode;
     }
 
-    /**
-     * @return string
-     */
     public function getFlash(): string
     {
         return $this->flash;
     }
 
-    /**
-     * @return int
-     */
     public function getApiResponseCode(): int
     {
         return $this->apiResponseCode;

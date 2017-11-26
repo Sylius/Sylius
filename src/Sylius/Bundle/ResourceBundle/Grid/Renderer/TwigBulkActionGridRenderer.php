@@ -35,10 +35,6 @@ final class TwigBulkActionGridRenderer implements BulkActionGridRendererInterfac
      */
     private $bulkActionTemplates;
 
-    /**
-     * @param OptionsParserInterface $optionsParser
-     * @param array $bulkActionTemplates
-     */
     public function __construct(
         \Twig_Environment $twig,
         OptionsParserInterface $optionsParser,

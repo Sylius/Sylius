@@ -25,11 +25,6 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     private $routeName;
 
-    /**
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param string $routeName
-     */
     public function __construct(Session $session, array $parameters, RouterInterface $router, string $routeName)
     {
         parent::__construct($session, $parameters, $router);
@@ -72,8 +67,6 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     }
 
     /**
-     * @param string $element
-     *
      * @return \Behat\Mink\Element\NodeElement|null
      *
      * @throws ElementNotFoundException

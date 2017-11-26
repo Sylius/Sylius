@@ -28,9 +28,6 @@ class EmailRenderEvent extends Event
      */
     protected $recipients;
 
-    /**
-     * @param array $recipients
-     */
     public function __construct(RenderedEmail $renderedEmail, array $recipients = [])
     {
         $this->renderedEmail = $renderedEmail;
@@ -45,25 +42,16 @@ class EmailRenderEvent extends Event
         return $this->renderedEmail;
     }
 
-    /**
-     * @param RenderedEmail $renderedEmail
-     */
     public function setRenderedEmail(RenderedEmail $renderedEmail): void
     {
         $this->renderedEmail = $renderedEmail;
     }
 
-    /**
-     * @return array
-     */
     public function getRecipients(): array
     {
         return $this->recipients;
     }
 
-    /**
-     * @param array $recipients
-     */
     public function setRecipients(array $recipients): void
     {
         $this->recipients = $recipients;

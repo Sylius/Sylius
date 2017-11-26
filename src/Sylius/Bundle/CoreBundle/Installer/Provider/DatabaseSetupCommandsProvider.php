@@ -28,9 +28,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
      */
     private $doctrineRegistry;
 
-    /**
-     * @param Registry $doctrineRegistry
-     */
     public function __construct(Registry $doctrineRegistry)
     {
         $this->doctrineRegistry = $doctrineRegistry;
@@ -60,8 +57,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     }
 
     /**
-     * @return bool
-     *
      * @throws \Exception
      */
     private function isDatabasePresent(): bool
@@ -86,12 +81,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         }
     }
 
-    /**
-     * @param OutputInterface $output
-     * @param QuestionHelper $questionHelper
-     *
-     * @return array
-     */
     private function getRequiredCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         if ($input->getOption('no-interaction')) {
@@ -101,12 +90,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         return $this->setupDatabase($input, $output, $questionHelper);
     }
 
-    /**
-     * @param OutputInterface $output
-     * @param QuestionHelper $questionHelper
-     *
-     * @return array
-     */
     private function setupDatabase(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         $outputStyle = new SymfonyStyle($input, $output);
@@ -139,17 +122,11 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         return [];
     }
 
-    /**
-     * @return bool
-     */
     private function isSchemaPresent(): bool
     {
         return 0 !== count($this->getSchemaManager()->listTableNames());
     }
 
-    /**
-     * @return string
-     */
     private function getDatabaseName(): string
     {
         return $this->doctrineRegistry->getManager()->getConnection()->getDatabase();

@@ -43,12 +43,6 @@ final class ThemeContext implements Context
      */
     private $testThemeConfigurationManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ThemeRepositoryInterface $themeRepository
-     * @param ObjectManager $channelManager
-     * @param TestThemeConfigurationManagerInterface $testThemeConfigurationManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ThemeRepositoryInterface $themeRepository,

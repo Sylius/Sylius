@@ -24,9 +24,6 @@ final class HomepageContext implements Context
      */
     private $homePage;
 
-    /**
-     * @param HomePageInterface $homepage
-     */
     public function __construct(HomePageInterface $homepage)
     {
         $this->homePage = $homepage;

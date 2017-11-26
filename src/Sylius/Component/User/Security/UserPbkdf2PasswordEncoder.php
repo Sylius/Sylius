@@ -77,11 +77,6 @@ final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
     }
 
     /**
-     * @param string $plainPassword
-     * @param string $salt
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      * @throws \LogicException when the algorithm is not supported
      */

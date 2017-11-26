@@ -27,7 +27,6 @@ interface PaymentRepositoryInterface extends RepositoryInterface
     /**
      * @param mixed $paymentId
      * @param mixed $orderId
-     *
      */
     public function findOneByOrderId($paymentId, $orderId): ?PaymentInterface;
 }

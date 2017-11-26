@@ -38,11 +38,6 @@ final class ManagingExchangeRatesContext implements Context
      */
     private $updatePage;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -312,10 +307,6 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @param float $ratio
-     * @param string $sourceCurrencyName
-     * @param string $targetCurrencyName
-     *
      * @throws \InvalidArgumentException
      */
     private function assertExchangeRateWithRatioIsOnTheList(float $ratio, string $sourceCurrencyName, string $targetCurrencyName): void
@@ -336,9 +327,6 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @param string $sourceCurrencyName
-     * @param string $targetCurrencyName
-     *
      * @throws \InvalidArgumentException
      */
     private function assertExchangeRateIsNotOnTheList(string $sourceCurrencyName, string $targetCurrencyName): void
@@ -357,8 +345,6 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @param int $count
-     *
      * @throws \InvalidArgumentException
      */
     private function assertCountOfExchangeRatesOnTheList(int $count): void
@@ -371,8 +357,6 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @param string $expectedMessage
-     *
      * @throws \InvalidArgumentException
      */
     private function assertFormHasValidationMessage(string $expectedMessage): void

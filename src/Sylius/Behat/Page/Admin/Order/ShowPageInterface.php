@@ -58,7 +58,6 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function specifyTrackingCode(string $code): void;
 
     /**
-     *
      * @return bool
      */
     public function canShipOrder(OrderInterface $order): bool;
@@ -76,7 +75,6 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function hasPayment(string $paymentMethodName): bool;
 
     /**
-     *
      * @return bool
      */
     public function canCompleteOrderLastPayment(OrderInterface $order): bool;

@@ -26,10 +26,6 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
      */
     private $securityTokenRepository;
 
-    /**
-     * @param array $parameters
-     * @param RepositoryInterface $securityTokenRepository
-     */
     public function __construct(Session $session, array $parameters, RepositoryInterface $securityTokenRepository)
     {
         parent::__construct($session, $parameters);

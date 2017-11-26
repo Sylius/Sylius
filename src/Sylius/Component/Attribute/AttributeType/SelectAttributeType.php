@@ -66,8 +66,6 @@ final class SelectAttributeType implements AttributeTypeInterface
 
     /**
      * @param array|null $value
-     * @param array $validationConfiguration
-     *
      */
     private function getValidationErrors(
         ExecutionContextInterface $context,

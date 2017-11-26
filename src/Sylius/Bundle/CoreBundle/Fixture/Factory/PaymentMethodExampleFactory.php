@@ -52,11 +52,6 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
      */
     private $optionsResolver;
 
-    /**
-     * @param PaymentMethodFactoryInterface $paymentMethodFactory
-     * @param RepositoryInterface $localeRepository
-     * @param ChannelRepositoryInterface $channelRepository
-     */
     public function __construct(
         PaymentMethodFactoryInterface $paymentMethodFactory,
         RepositoryInterface $localeRepository,
@@ -130,9 +125,6 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

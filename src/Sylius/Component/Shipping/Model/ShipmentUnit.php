@@ -39,9 +39,6 @@ class ShipmentUnit implements ShipmentUnitInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getId();

@@ -33,10 +33,6 @@ final class FixtureEvent
      */
     private $fixtureOptions;
 
-    /**
-     * @param FixtureInterface $fixture
-     * @param array $fixtureOptions
-     */
     public function __construct(SuiteInterface $suite, FixtureInterface $fixture, array $fixtureOptions)
     {
         $this->suite = $suite;
@@ -60,9 +56,6 @@ final class FixtureEvent
         return $this->fixture;
     }
 
-    /**
-     * @return array
-     */
     public function fixtureOptions(): array
     {
         return $this->fixtureOptions;

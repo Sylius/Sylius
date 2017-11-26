@@ -331,10 +331,6 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getExchangeRateUrl(ExchangeRateInterface $exchangeRate): string
     {
         return sprintf('/api/v1/exchange-rates/%s-%s', $exchangeRate->getSourceCurrency()->getCode(), $exchangeRate->getTargetCurrency()->getCode());

@@ -32,10 +32,6 @@ final class ManagingPromotionsContext implements Context
      */
     private $promotionRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param PromotionRepositoryInterface $promotionRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PromotionRepositoryInterface $promotionRepository

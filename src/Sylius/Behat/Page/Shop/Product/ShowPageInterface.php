@@ -74,7 +74,6 @@ interface ShowPageInterface extends PageInterface
     public function getAttributes(): array;
 
     /**
-     *
      * @return bool
      */
     public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;

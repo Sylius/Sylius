@@ -109,7 +109,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     *
      * @return NodeElement
      *
      * @throws ElementNotFoundException

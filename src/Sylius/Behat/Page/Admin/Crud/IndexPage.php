@@ -32,12 +32,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     private $routeName;
 
-    /**
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     * @param string $routeName
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -106,9 +100,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         }
     }
 
-    /**
-     * @return int
-     */
     public function countItems(): int
     {
         try {

@@ -36,11 +36,6 @@ final class AdminUserContext implements Context
      */
     private $userRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ExampleFactoryInterface $userFactory
-     * @param UserRepositoryInterface $userRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $userFactory,

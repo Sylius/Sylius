@@ -16,7 +16,6 @@ namespace Sylius\Bundle\FixturesBundle\Listener;
 final class ListenerNotFoundException extends \InvalidArgumentException
 {
     /**
-     * @param string $name
      * @param \Exception|null $previous
      */
     public function __construct(string $name, ?\Throwable $previous = null)

@@ -37,7 +37,6 @@ interface PrioritizedServiceRegistryInterface
 
     /**
      * @param object $service
-     *
      */
     public function has($service): bool;
 }

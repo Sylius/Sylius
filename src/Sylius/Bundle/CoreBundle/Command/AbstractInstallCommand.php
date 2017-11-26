@@ -44,7 +44,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
-     *
      * @return object
      */
     protected function get(string $id)
@@ -52,26 +51,16 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         return $this->getContainer()->get($id);
     }
 
-    /**
-     * @return string
-     */
     protected function getEnvironment(): string
     {
         return $this->get('kernel')->getEnvironment();
     }
 
-    /**
-     * @return bool
-     */
     protected function isDebug(): bool
     {
         return $this->get('kernel')->isDebug();
     }
 
-    /**
-     * @param array $headers
-     * @param array $rows
-     */
     protected function renderTable(array $headers, array $rows, OutputInterface $output): void
     {
         $table = new Table($output);
@@ -84,9 +73,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param OutputInterface $output
-     * @param int $length
-     *
      * @return ProgressBar
      */
     protected function createProgressBar(OutputInterface $output, int $length = 10): ProgressBar
@@ -101,10 +87,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         return $progress;
     }
 
-    /**
-     * @param array $commands
-     * @param bool $displayProgress
-     */
     protected function runCommands(array $commands, OutputInterface $output, bool $displayProgress = true): void
     {
         if ($displayProgress) {
@@ -136,10 +118,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         }
     }
 
-    /**
-     * @param string $directory
-     * @param OutputInterface $output
-     */
     protected function ensureDirectoryExistsAndIsWritable(string $directory, OutputInterface $output): void
     {
         $checker = $this->get('sylius.installer.checker.command_directory');

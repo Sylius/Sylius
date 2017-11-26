@@ -57,10 +57,6 @@ abstract class ReviewType extends AbstractResourceType
         ]);
     }
 
-    /**
-     *
-     * @return array
-     */
     private function createRatingList(int $maxRate): array
     {
         $ratings = [];

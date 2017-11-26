@@ -49,13 +49,6 @@ final class ProductOptionContext implements Context
      */
     private $objectManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ProductOptionRepositoryInterface $productOptionRepository
-     * @param FactoryInterface $productOptionFactory
-     * @param FactoryInterface $productOptionValueFactory
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductOptionRepositoryInterface $productOptionRepository,
@@ -102,7 +95,6 @@ final class ProductOptionContext implements Context
     }
 
     /**
-     * @param string $name
      * @param string|null $code
      * @param string|null $position
      *
@@ -123,9 +115,6 @@ final class ProductOptionContext implements Context
     }
 
     /**
-     * @param string $value
-     * @param string $code
-     *
      * @return ProductOptionValueInterface
      */
     private function createProductOptionValue(string $value, string $code): ProductOptionValueInterface

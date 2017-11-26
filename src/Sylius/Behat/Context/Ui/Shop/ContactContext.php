@@ -32,10 +32,6 @@ final class ContactContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param ContactPageInterface $contactPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         ContactPageInterface $contactPage,
         NotificationCheckerInterface $notificationChecker
@@ -125,10 +121,6 @@ final class ContactContext implements Context
         );
     }
 
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
     private function assertFieldValidationMessage(PageInterface $page, string $element, string $expectedMessage): void
     {
         Assert::same($page->getValidationMessageFor($element), $expectedMessage);

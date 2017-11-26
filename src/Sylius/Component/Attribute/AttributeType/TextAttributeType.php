@@ -64,8 +64,6 @@ final class TextAttributeType implements AttributeTypeInterface
 
     /**
      * @param string|null $value
-     * @param array $validationConfiguration
-     *
      */
     private function getValidationErrors(
         ExecutionContextInterface $context,

@@ -57,14 +57,6 @@ final class ManagingPromotionCouponsContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param GeneratePageInterface $generatePage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         CreatePageInterface $createPage,
         GeneratePageInterface $generatePage,

@@ -333,10 +333,6 @@ EOT;
         $this->assertResponse($response, 'product_option/show_response_after_partial_update', Response::HTTP_OK);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getProductOptionUrl(ProductOptionInterface $productOption): string
     {
         return '/api/v1/product-options/' . $productOption->getCode();

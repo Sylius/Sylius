@@ -56,14 +56,6 @@ final class ContactController
      */
     private $contactEmailManager;
 
-    /**
-     * @param RouterInterface $router
-     * @param FormFactoryInterface $formFactory
-     * @param EngineInterface $templatingEngine
-     * @param ChannelContextInterface $channelContext
-     * @param CustomerContextInterface $customerContext
-     * @param ContactEmailManagerInterface $contactEmailManager
-     */
     public function __construct(
         RouterInterface $router,
         FormFactoryInterface $formFactory,
@@ -81,8 +73,6 @@ final class ContactController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function requestAction(Request $request): Response
@@ -126,11 +116,7 @@ final class ContactController
     }
 
     /**
-     * @param Request $request
-     * @param string $attributeName
      * @param string|null $default
-     *
-     * @return string|null
      */
     private function getSyliusAttribute(Request $request, string $attributeName, ?string $default): ?string
     {
@@ -139,9 +125,6 @@ final class ContactController
         return $attributes[$attributeName] ?? $default;
     }
 
-    /**
-     * @return array
-     */
     private function getFormOptions(): array
     {
         $customer = $this->customerContext->getCustomer();

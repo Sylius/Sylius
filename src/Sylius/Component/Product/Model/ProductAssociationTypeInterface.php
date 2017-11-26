@@ -36,7 +36,6 @@ interface ProductAssociationTypeInterface extends
     public function setName(?string $name): void;
 
     /**
-     *
      * @return ProductAssociationTypeTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

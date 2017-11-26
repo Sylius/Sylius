@@ -327,8 +327,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @param string $type
-     *
      * @return NodeElement
      */
     private function getImageElementByType(string $type): NodeElement

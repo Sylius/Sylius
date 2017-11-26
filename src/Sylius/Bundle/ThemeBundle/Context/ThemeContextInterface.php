@@ -19,7 +19,6 @@ interface ThemeContextInterface
 {
     /**
      * Should not throw any exception if failed to get theme.
-     *
      */
     public function getTheme(): ?ThemeInterface;
 }

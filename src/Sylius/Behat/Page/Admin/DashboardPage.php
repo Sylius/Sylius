@@ -25,9 +25,6 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
      */
     private $tableAccessor;
 
-    /**
-     * @param TableAccessorInterface $tableAccessor
-     */
     public function __construct(
         Session $session,
         array $parameters,

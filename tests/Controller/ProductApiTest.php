@@ -524,10 +524,6 @@ EOT;
         $this->assertResponse($response, 'product/create_with_associations_response', Response::HTTP_CREATED);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getProductUrl(ProductInterface $product): string
     {
         return '/api/v1/products/' . $product->getCode();

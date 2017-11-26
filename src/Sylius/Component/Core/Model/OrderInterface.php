@@ -82,7 +82,6 @@ interface OrderInterface extends
     public function getItemUnits(): Collection;
 
     /**
-     *
      * @return Collection|OrderItemUnitInterface[]
      */
     public function getItemUnitsByVariant(ProductVariantInterface $variant): Collection;

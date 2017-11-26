@@ -51,13 +51,6 @@ final class ManagingShippingMethodsContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -507,10 +500,6 @@ final class ManagingShippingMethodsContext implements Context
         );
     }
 
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
@@ -519,9 +508,6 @@ final class ManagingShippingMethodsContext implements Context
         Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
     }
 
-    /**
-     * @param bool $state
-     */
     private function assertShippingMethodState(ShippingMethodInterface $shippingMethod, bool $state): void
     {
         $this->iWantToBrowseShippingMethods();

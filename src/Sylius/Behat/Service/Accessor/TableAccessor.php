@@ -105,8 +105,6 @@ final class TableAccessor implements TableAccessorInterface
     }
 
     /**
-     * @param array $fields
-     *
      * @return NodeElement[]
      *
      * @throws \InvalidArgumentException If rows were not found
@@ -132,12 +130,6 @@ final class TableAccessor implements TableAccessorInterface
         return $matchedRows;
     }
 
-    /**
-     * @param array $columns
-     * @param array $fields
-     *
-     * @return bool
-     */
     private function hasRowFields(array $columns, array $fields): bool
     {
         foreach ($fields as $index => $searchedValue) {
@@ -180,10 +172,6 @@ final class TableAccessor implements TableAccessorInterface
     }
 
     /**
-     * @param string $fieldName
-     *
-     * @return int
-     *
      * @throws \InvalidArgumentException
      */
     private function getColumnIndex(NodeElement $table, string $fieldName): int
@@ -206,21 +194,11 @@ final class TableAccessor implements TableAccessorInterface
         throw new \InvalidArgumentException(sprintf('Column with name "%s" not found!', $fieldName));
     }
 
-    /**
-     * @param string $sourceText
-     * @param string $searchedValue
-     *
-     * @return bool
-     */
     private function containsSearchedValue(string $sourceText, string $searchedValue): bool
     {
         return false !== stripos(trim($sourceText), $searchedValue);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getColumnFieldName(NodeElement $column): string
     {
         return preg_replace('/.*sylius-table-column-([^ ]+).*$/', '\1', $column->getAttribute('class'));

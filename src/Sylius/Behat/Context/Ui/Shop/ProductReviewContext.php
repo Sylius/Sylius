@@ -32,10 +32,6 @@ final class ProductReviewContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         CreatePageInterface $createPage,
         NotificationCheckerInterface $notificationChecker
@@ -170,9 +166,6 @@ final class ProductReviewContext implements Context
         );
     }
 
-    /**
-     * @return string
-     */
     private function getVeryLongTitle(): string
     {
         return 'Exegi monumentum aere perennius regalique situ pyramidum altius, quod non imber edax, non Aquilo inpotens possit diruere aut innumerabilis annorum series et fuga temporum. Non omnis moriar multaque pars mei vitabit Libitinam; usque ego postera crescam laude recens, dum Capitoliumscandet cum tacita virgine pontifex.Dicar, qua violens obstrepit Aufiduset qua pauper aquae Daunus agrestiumregnavit populorum, ex humili potensprinceps Aeolium carmen ad Italosdeduxisse modos. Sume superbiamquaesitam meritis et mihi Delphicalauro cinge volens, Melpomene, comam.';

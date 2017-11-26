@@ -39,9 +39,6 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
      */
     private $formFactory;
 
-    /**
-     * @param ObjectRepository     $countryRepository
-     */
     public function __construct(ObjectRepository $countryRepository, FormFactoryInterface $factory)
     {
         $this->countryRepository = $countryRepository;
@@ -59,9 +56,6 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
         /** @var AddressInterface $address */
@@ -92,9 +86,6 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
         $form->add($this->createProvinceNameTextForm($address->getProvinceName()));
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSubmit(FormEvent $event): void
     {
         $data = $event->getData();
@@ -124,7 +115,6 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param CountryInterface $country
      * @param string|null $provinceCode
      *
      * @return FormInterface

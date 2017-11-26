@@ -31,10 +31,6 @@ final class LoginContext implements Context
      */
     private $loginPage;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     * @param LoginPageInterface $loginPage
-     */
     public function __construct(DashboardPageInterface $dashboardPage, LoginPageInterface $loginPage)
     {
         $this->dashboardPage = $dashboardPage;
@@ -127,10 +123,6 @@ final class LoginContext implements Context
         Assert::false($this->dashboardPage->isOpen());
     }
 
-    /**
-     * @param string $username
-     * @param string $password
-     */
     private function logInAgain(string $username, string $password): void
     {
         $this->dashboardPage->open();

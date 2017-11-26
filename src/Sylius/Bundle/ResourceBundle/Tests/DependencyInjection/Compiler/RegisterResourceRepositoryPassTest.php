@@ -105,10 +105,6 @@ final class RegisterResourceRepositoryPassTest extends AbstractCompilerPassTestC
         $container->addCompilerPass(new RegisterResourceRepositoryPass());
     }
 
-    /**
-     * @param string $method
-     * @param array $arguments
-     */
     private function assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
         string $serviceId,
         string $method,

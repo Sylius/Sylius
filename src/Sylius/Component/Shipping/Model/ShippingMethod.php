@@ -69,9 +69,6 @@ class ShippingMethod implements ShippingMethodInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->getTranslation()->__toString();
@@ -214,7 +211,6 @@ class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     *
      * @return ShippingMethodTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

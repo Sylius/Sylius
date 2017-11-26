@@ -262,9 +262,6 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($catalogue, $translator->getCatalogue());
     }
 
-    /**
-     * @return array
-     */
     public function getInvalidLocalesTests(): array
     {
         return [
@@ -282,9 +279,6 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getAllValidLocalesTests(): array
     {
         return array_merge(
@@ -293,9 +287,6 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @return array
-     */
     public function getThemedLocalesTests(): array
     {
         return [
@@ -309,9 +300,6 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getThemelessLocalesTests(): array
     {
         return [
@@ -326,9 +314,6 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getValidOptionsTests(): array
     {
         return [
@@ -340,9 +325,6 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getInvalidOptionsTests(): array
     {
         return [
@@ -353,7 +335,6 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param string $locale
      * @param string[] $options
      *
      * @return Translator

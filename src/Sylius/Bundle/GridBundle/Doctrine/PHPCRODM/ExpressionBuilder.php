@@ -176,9 +176,6 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $this->orderBys[$field] = $direction;
     }
 
-    /**
-     * @return array
-     */
     public function getOrderBys(): array
     {
         return $this->orderBys;

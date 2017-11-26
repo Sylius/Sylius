@@ -79,13 +79,11 @@ interface AdjustmentInterface extends ResourceInterface, TimestampableInterface
 
     /**
      * Adjustments with amount < 0 are called "charges".
-     *
      */
     public function isCharge(): bool;
 
     /**
      * Adjustments with amount > 0 are called "credits".
-     *
      */
     public function isCredit(): bool;
 

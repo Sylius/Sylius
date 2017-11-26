@@ -24,10 +24,6 @@ class ProductAttributeFixture extends AbstractResourceFixture
      */
     private $attributeTypes;
 
-    /**
-     * @param ExampleFactoryInterface $exampleFactory
-     * @param array $attributeTypes
-     */
     public function __construct(ObjectManager $objectManager, ExampleFactoryInterface $exampleFactory, array $attributeTypes)
     {
         parent::__construct($objectManager, $exampleFactory);

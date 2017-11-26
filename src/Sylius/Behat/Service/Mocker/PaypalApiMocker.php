@@ -31,10 +31,6 @@ class PaypalApiMocker
      */
     private $responseLoader;
 
-    /**
-     * @param MockerInterface $mocker
-     * @param ResponseLoaderInterface $responseLoader
-     */
     public function __construct(MockerInterface $mocker, ResponseLoaderInterface $responseLoader)
     {
         $this->mocker = $mocker;
@@ -100,8 +96,6 @@ class PaypalApiMocker
     }
 
     /**
-     * @param string $content
-     *
      * @return Mock
      */
     private function mockStream(string $content): Mock
@@ -114,7 +108,6 @@ class PaypalApiMocker
     }
 
     /**
-     * @param int $statusCode
      * @param mixed $streamMock
      *
      * @return Mock

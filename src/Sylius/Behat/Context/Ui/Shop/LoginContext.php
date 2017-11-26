@@ -49,13 +49,6 @@ final class LoginContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param HomePageInterface $homePage
-     * @param LoginPageInterface $loginPage
-     * @param RegisterPageInterface $registerPage
-     * @param ResetPasswordPageInterface $resetPasswordPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         HomePageInterface $homePage,
         LoginPageInterface $loginPage,

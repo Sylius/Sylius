@@ -95,9 +95,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @param string $elementName
-     * @param string $value
-     *
      * @throws ElementNotFoundException
      */
     private function specifyElementValue(string $elementName, string $value): void
@@ -106,9 +103,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @param string $country
-     * @param string $addressType
-     *
      * @throws ElementNotFoundException
      */
     private function chooseCountry(string $country, string $addressType): void
@@ -117,10 +111,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @param string $element
-     *
-     * @return NodeElement|null
-     *
      * @throws ElementNotFoundException
      */
     private function getFieldElement(string $element): ?NodeElement

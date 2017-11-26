@@ -299,9 +299,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         ]);
     }
 
-    /**
-     * @param int $id
-     */
     private function selectElementFromAttributesDropdown(int $id): void
     {
         /** @var Selenium2Driver $driver */
@@ -312,9 +309,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $driver->executeScript(sprintf('$(\'#sylius_product_attribute_choice\').dropdown(\'set selected\', \'%s\');', $id));
     }
 
-    /**
-     * @param int $timeout
-     */
     private function waitForFormElement(int $timeout = 5): void
     {
         $form = $this->getElement('form');
@@ -323,9 +317,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         });
     }
 
-    /**
-     * @param string $tabName
-     */
     private function clickTabIfItsNotActive(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
@@ -334,18 +325,12 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         }
     }
 
-    /**
-     * @param string $tabName
-     */
     private function clickTab(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
         $attributesTab->click();
     }
 
-    /**
-     * @param string $localeCode
-     */
     private function clickLocaleTabIfItsNotActive(string $localeCode): void
     {
         $localeTab = $this->getElement('locale_tab', ['%localeCode%' => $localeCode]);

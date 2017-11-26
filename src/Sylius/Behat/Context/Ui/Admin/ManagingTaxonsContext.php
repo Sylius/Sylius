@@ -50,13 +50,6 @@ final class ManagingTaxonsContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param CreatePageInterface $createPage
-     * @param CreateForParentPageInterface $createForParentPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreatePageInterface $createPage,

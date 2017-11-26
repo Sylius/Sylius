@@ -34,7 +34,6 @@ interface EventDispatcherInterface
     /**
      * @param RequestConfiguration $requestConfiguration
      * @param mixed $resources
-     *
      */
     public function dispatchMultiple(
         string $eventName,

@@ -74,17 +74,6 @@ final class CheckoutContext implements Context
      */
     private $paymentContext;
 
-    /**
-     * @param AddressPageInterface $addressPage
-     * @param SelectPaymentPageInterface $selectPaymentPage
-     * @param SelectShippingPageInterface $selectShippingPage
-     * @param CompletePageInterface $completePage
-     * @param RegisterPageInterface $registerPage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param CheckoutAddressingContext $addressingContext
-     * @param CheckoutShippingContext $shippingContext
-     * @param CheckoutPaymentContext $paymentContext
-     */
     public function __construct(
         AddressPageInterface $addressPage,
         SelectPaymentPageInterface $selectPaymentPage,

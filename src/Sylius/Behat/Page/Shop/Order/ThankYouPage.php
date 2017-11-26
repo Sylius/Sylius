@@ -59,9 +59,6 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
         return null !== $this->getDocument()->find('css', '#sylius-show-order');
     }
 
-    /**
-     * @return string
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_thank_you';

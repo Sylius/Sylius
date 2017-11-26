@@ -44,12 +44,6 @@ final class Translator extends BaseTranslator implements WarmableInterface
      */
     private $resourcesLoaded = false;
 
-    /**
-     * @param TranslatorResourceProviderInterface $resourceProvider
-     * @param MessageSelector $messageSelector
-     * @param string $locale
-     * @param array $options
-     */
     public function __construct(
         TranslatorLoaderProviderInterface $loaderProvider,
         TranslatorResourceProviderInterface $resourceProvider,
@@ -129,11 +123,6 @@ final class Translator extends BaseTranslator implements WarmableInterface
         return array_unique($fallbackLocales);
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return string
-     */
     private function getLocaleModifier(string $locale): string
     {
         $modifier = strrchr($locale, '@');
@@ -141,12 +130,6 @@ final class Translator extends BaseTranslator implements WarmableInterface
         return $modifier ?: '';
     }
 
-    /**
-     * @param string $locale
-     * @param string $modifier
-     *
-     * @return string
-     */
     private function getLocaleWithoutModifier(string $locale, string $modifier): string
     {
         return str_replace($modifier, '', $locale);
@@ -185,9 +168,6 @@ final class Translator extends BaseTranslator implements WarmableInterface
         }
     }
 
-    /**
-     * @param array $options
-     */
     private function assertOptionsAreKnown(array $options): void
     {
         if ($diff = array_diff(array_keys($options), array_keys($this->options))) {

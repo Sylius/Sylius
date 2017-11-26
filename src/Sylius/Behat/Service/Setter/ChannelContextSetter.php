@@ -22,9 +22,6 @@ final class ChannelContextSetter implements ChannelContextSetterInterface
      */
     private $cookieSetter;
 
-    /**
-     * @param CookieSetterInterface $cookieSetter
-     */
     public function __construct(CookieSetterInterface $cookieSetter)
     {
         $this->cookieSetter = $cookieSetter;

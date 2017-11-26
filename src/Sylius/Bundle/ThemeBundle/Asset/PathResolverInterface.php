@@ -22,7 +22,6 @@ interface PathResolverInterface
      * another same named assets files with another theme or without it.
      *
      * @param ThemeInterface $theme
-     *
      */
     public function resolve(string $path, ThemeInterface $theme): string;
 }

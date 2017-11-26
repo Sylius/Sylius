@@ -32,10 +32,6 @@ final class ManagingProductVariantsContext implements Context
      */
     private $session;
 
-    /**
-     * @param Client $client
-     * @param SessionInterface $session
-     */
     public function __construct(Client $client, SessionInterface $session)
     {
         $this->client = $client;

@@ -23,7 +23,6 @@ interface ProductImagesAwareInterface
     public function getImages(): Collection;
 
     /**
-     *
      * @return Collection|ImageInterface[]
      */
     public function getImagesByType(string $type): Collection;

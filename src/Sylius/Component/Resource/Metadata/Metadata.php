@@ -42,10 +42,6 @@ final class Metadata implements MetadataInterface
      */
     private $parameters;
 
-    /**
-     * @param string $applicationName
-     * @param array $parameters
-     */
     private function __construct(string $name, string $applicationName, array $parameters)
     {
         $this->name = $name;
@@ -57,10 +53,6 @@ final class Metadata implements MetadataInterface
         $this->parameters = $parameters;
     }
 
-    /**
-     * @param array $parameters
-     *
-     */
     public static function fromAliasAndConfiguration(string $alias, array $parameters): self
     {
         [$applicationName, $name] = self::parseAlias($alias);
@@ -188,10 +180,6 @@ final class Metadata implements MetadataInterface
         return sprintf('%s.%s.%s', $this->applicationName, $this->name, $permissionName);
     }
 
-    /**
-     *
-     * @return array
-     */
     private static function parseAlias(string $alias): array
     {
         if (false === strpos($alias, '.')) {

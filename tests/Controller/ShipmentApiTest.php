@@ -91,8 +91,6 @@ final class ShipmentApiTest extends CheckoutApiTestCase
 
     /**
      * @param mixed $orderId
-     *
-     * @return string
      */
     private function getOrderUrl($orderId): string
     {
@@ -101,8 +99,6 @@ final class ShipmentApiTest extends CheckoutApiTestCase
 
     /**
      * @param mixed $shipmentId
-     *
-     * @return string
      */
     private function getShipmentUrl($shipmentId): string
     {

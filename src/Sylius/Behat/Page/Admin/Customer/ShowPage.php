@@ -243,8 +243,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param string $channelName
-     *
      * @return NodeElement
      *
      * @throws \InvalidArgumentException

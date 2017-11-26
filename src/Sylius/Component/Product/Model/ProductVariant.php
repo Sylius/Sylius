@@ -179,7 +179,6 @@ class ProductVariant implements ProductVariantInterface
     }
 
     /**
-     *
      * @return ProductVariantTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

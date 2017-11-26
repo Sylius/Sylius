@@ -230,8 +230,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @param string $channelName
-     *
      * @return NodeElement
      */
     private function getChannelConfigurationOfLastAction(string $channelName): NodeElement
@@ -243,8 +241,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @param string $channelName
-     *
      * @return NodeElement
      */
     private function getChannelConfigurationOfLastRule(string $channelName): NodeElement
@@ -256,8 +252,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @param string $collection
-     *
      * @return NodeElement
      */
     private function getLastCollectionItem(string $collection): NodeElement
@@ -270,8 +264,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @param string $collection
-     *
      * @return NodeElement[]
      */
     private function getCollectionItems(string $collection)

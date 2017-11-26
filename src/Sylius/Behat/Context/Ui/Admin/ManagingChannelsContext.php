@@ -51,13 +51,6 @@ final class ManagingChannelsContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -496,9 +489,6 @@ final class ManagingChannelsContext implements Context
         Assert::true($this->updatePage->isBaseCurrencyDisabled());
     }
 
-    /**
-     * @param bool $state
-     */
     private function assertChannelState(ChannelInterface $channel, bool $state): void
     {
         $this->iWantToBrowseChannels();

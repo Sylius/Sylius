@@ -24,7 +24,6 @@ interface CustomerRepositoryInterface extends RepositoryInterface
     public function countCustomers(): int;
 
     /**
-     *
      * @return array|CustomerInterface[]
      */
     public function findLatest(int $count): array;

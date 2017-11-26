@@ -25,17 +25,11 @@ final class NotificationType
      */
     private static $types = [];
 
-    /**
-     * @param string $value
-     */
     private function __construct(string $value)
     {
         $this->value = $value;
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->value;
@@ -58,8 +52,6 @@ final class NotificationType
     }
 
     /**
-     * @param string $type
-     *
      * @return NotificationType
      */
     private static function getTyped(string $type): NotificationType

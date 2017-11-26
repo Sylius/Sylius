@@ -26,7 +26,6 @@ interface DriverInterface
 
     /**
      * Returns unique name of the driver.
-     *
      */
     public function getType(): string;
 }

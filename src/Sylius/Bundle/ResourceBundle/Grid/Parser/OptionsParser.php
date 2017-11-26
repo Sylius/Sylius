@@ -35,11 +35,6 @@ final class OptionsParser implements OptionsParserInterface
      */
     private $propertyAccessor;
 
-    /**
-     * @param ContainerInterface $container
-     * @param ExpressionLanguage $expression
-     * @param PropertyAccessorInterface $propertyAccessor
-     */
     public function __construct(
         ContainerInterface $container,
         ExpressionLanguage $expression,
@@ -92,8 +87,6 @@ final class OptionsParser implements OptionsParserInterface
     }
 
     /**
-     * @param Request $request
-     *
      * @return mixed
      */
     private function parseOptionExpression(string $expression, Request $request)

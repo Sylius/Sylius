@@ -25,9 +25,6 @@ final class ImmutableTranslationLocaleProvider implements TranslationLocaleProvi
      */
     private $defaultLocaleCode;
 
-    /**
-     * @param array $definedLocalesCodes
-     */
     public function __construct(array $definedLocalesCodes, string $defaultLocaleCode)
     {
         $this->definedLocalesCodes = $definedLocalesCodes;

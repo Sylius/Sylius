@@ -28,9 +28,6 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
      */
     private $decoratedFactory;
 
-    /**
-     * @param FactoryInterface $decoratedFactory
-     */
     public function __construct(FactoryInterface $decoratedFactory)
     {
         $this->decoratedFactory = $decoratedFactory;
@@ -99,10 +96,6 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
         );
     }
 
-    /**
-     * @param array $configuration
-     *
-     */
     private function createAction(string $type, array $configuration): PromotionActionInterface
     {
         /** @var PromotionActionInterface $action */

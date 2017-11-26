@@ -25,7 +25,6 @@ interface FileLocatorInterface
     public function locateFileNamed(string $name): string;
 
     /**
-     *
      * @return array
      *
      * @throws \InvalidArgumentException If name is not valid or files were not found

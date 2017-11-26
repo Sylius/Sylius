@@ -176,7 +176,6 @@ class Attribute implements AttributeInterface
     }
 
     /**
-     *
      * @return AttributeTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

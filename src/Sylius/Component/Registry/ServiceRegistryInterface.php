@@ -43,7 +43,6 @@ interface ServiceRegistryInterface
     public function has(string $identifier): bool;
 
     /**
-     *
      * @return object
      *
      * @throws NonExistingServiceException

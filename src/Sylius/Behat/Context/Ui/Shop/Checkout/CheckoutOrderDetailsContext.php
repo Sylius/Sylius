@@ -25,9 +25,6 @@ final class CheckoutOrderDetailsContext implements Context
      */
     private $orderDetails;
 
-    /**
-     * @param ShowPageInterface $orderDetails
-     */
     public function __construct(ShowPageInterface $orderDetails)
     {
         $this->orderDetails = $orderDetails;

@@ -43,11 +43,6 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
      */
     private $strategyRegistry;
 
-    /**
-     * @param ZoneProviderInterface $defaultTaxZoneProvider
-     * @param ZoneMatcherInterface $zoneMatcher
-     * @param PrioritizedServiceRegistryInterface $strategyRegistry
-     */
     public function __construct(
         ZoneProviderInterface $defaultTaxZoneProvider,
         ZoneMatcherInterface $zoneMatcher,
@@ -89,10 +84,6 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         throw new UnsupportedTaxCalculationStrategyException();
     }
 
-    /**
-     *
-     * @return ZoneInterface|null
-     */
     private function getTaxZone(OrderInterface $order): ?ZoneInterface
     {
         $shippingAddress = $order->getShippingAddress();
@@ -105,9 +96,6 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         return $zone ?: $this->defaultTaxZoneProvider->getZone($order);
     }
 
-    /**
-     * @param BaseOrderInterface $order
-     */
     private function clearTaxes(BaseOrderInterface $order): void
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);

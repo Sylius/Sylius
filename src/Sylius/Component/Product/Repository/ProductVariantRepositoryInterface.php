@@ -22,7 +22,6 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param mixed $productId
-     *
      */
     public function createQueryBuilderByProductId(string $locale, $productId): QueryBuilder;
 
@@ -67,7 +66,6 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
     /**
      * @param mixed $id
      * @param mixed $productId
-     *
      */
     public function findOneByIdAndProductId($id, $productId): ?ProductVariantInterface;
 

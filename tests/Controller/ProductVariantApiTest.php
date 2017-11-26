@@ -491,20 +491,11 @@ EOT;
         $this->assertResponse($response, 'product_variant/not_changed_on_hand_response', Response::HTTP_OK);
     }
 
-    /**
-     *
-     * @return string
-     */
     private function getVariantListUrl(ProductInterface $product): string
     {
         return sprintf('/api/v1/products/%s/variants/', $product->getCode());
     }
 
-    /**
-     * @param ProductVariantInterface $productVariant
-     *
-     * @return string
-     */
     private function getVariantUrl(ProductInterface $product, ProductVariantInterface $productVariant): string
     {
         return sprintf('%s%s', $this->getVariantListUrl($product), $productVariant->getCode());

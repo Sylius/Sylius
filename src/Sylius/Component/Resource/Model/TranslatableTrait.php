@@ -161,7 +161,6 @@ trait TranslatableTrait
 
     /**
      * Create resource translation model.
-     *
      */
     abstract protected function createTranslation(): TranslationInterface;
 }

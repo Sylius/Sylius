@@ -26,11 +26,6 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
      */
     private $routeName;
 
-    /**
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param string $routeName
-     */
     public function __construct(Session $session, array $parameters, RouterInterface $router, string $routeName)
     {
         parent::__construct($session, $parameters, $router);
@@ -87,8 +82,6 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     }
 
     /**
-     * @param string $element
-     *
      * @return \Behat\Mink\Element\NodeElement|null
      *
      * @throws ElementNotFoundException

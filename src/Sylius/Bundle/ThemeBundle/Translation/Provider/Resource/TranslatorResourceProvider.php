@@ -33,9 +33,6 @@ final class TranslatorResourceProvider implements TranslatorResourceProviderInte
      */
     private $filepaths;
 
-    /**
-     * @param array $filepaths
-     */
     public function __construct(array $filepaths = [])
     {
         $this->filepaths = $filepaths;

@@ -2308,9 +2308,6 @@ final class ResourceControllerSpec extends ObjectBehavior
         };
     }
 
-    /**
-     * @param View $view
-     */
     private function unwrapViewData(View $view): void
     {
         $view->setData($this->unwrapIfCollaborator($view->getData()));
@@ -2340,9 +2337,6 @@ final class ResourceControllerSpec extends ObjectBehavior
         return $value;
     }
 
-    /**
-     * @param View $view
-     */
     private function nullifyDates(View $view): void
     {
         $headers = $view->getHeaders();

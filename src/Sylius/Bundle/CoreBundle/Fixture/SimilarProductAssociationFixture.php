@@ -46,11 +46,6 @@ class SimilarProductAssociationFixture extends AbstractFixture
      */
     private $optionsResolver;
 
-    /**
-     * @param AbstractResourceFixture $productAssociationTypeFixture
-     * @param AbstractResourceFixture $productAssociationFixture
-     * @param ProductRepositoryInterface $productRepository
-     */
     public function __construct(
         AbstractResourceFixture $productAssociationTypeFixture,
         AbstractResourceFixture $productAssociationFixture,
@@ -116,7 +111,6 @@ class SimilarProductAssociationFixture extends AbstractFixture
     }
 
     /**
-     *
      * @return array|string[]
      */
     private function getAssociatedProductsAsArray(ProductInterface $owner): array

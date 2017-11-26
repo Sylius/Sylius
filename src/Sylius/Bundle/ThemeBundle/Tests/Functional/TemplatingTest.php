@@ -20,9 +20,6 @@ final class TemplatingTest extends WebTestCase
     /**
      * @test
      * @dataProvider getBundleTemplates
-     *
-     * @param string $templateName
-     * @param string $contents
      */
     public function it_renders_bundle_templates(string $templateName, string $contents): void
     {
@@ -32,9 +29,6 @@ final class TemplatingTest extends WebTestCase
         $this->assertEquals($contents, trim($crawler->text()));
     }
 
-    /**
-     * @return array
-     */
     public function getBundleTemplates(): array
     {
         return [
@@ -49,9 +43,6 @@ final class TemplatingTest extends WebTestCase
     /**
      * @test
      * @dataProvider getBundleTemplatesUsingNamespacedPaths
-     *
-     * @param string $templateName
-     * @param string $contents
      */
     public function it_renders_bundle_templates_using_namespaced_paths(string $templateName, string $contents): void
     {
@@ -61,9 +52,6 @@ final class TemplatingTest extends WebTestCase
         $this->assertEquals($contents, trim($crawler->text()));
     }
 
-    /**
-     * @return array
-     */
     public function getBundleTemplatesUsingNamespacedPaths(): array
     {
         return [
@@ -78,9 +66,6 @@ final class TemplatingTest extends WebTestCase
     /**
      * @test
      * @dataProvider getAppTemplates
-     *
-     * @param string $templateName
-     * @param string $contents
      */
     public function it_renders_application_templates(string $templateName, string $contents): void
     {
@@ -90,9 +75,6 @@ final class TemplatingTest extends WebTestCase
         $this->assertEquals($contents, trim($crawler->text()));
     }
 
-    /**
-     * @return array
-     */
     public function getAppTemplates(): array
     {
         return [
@@ -105,9 +87,6 @@ final class TemplatingTest extends WebTestCase
     /**
      * @test
      * @dataProvider getAppTemplatesUsingNamespacedPaths
-     *
-     * @param string $templateName
-     * @param string $contents
      */
     public function it_renders_application_templates_using_namespaced_paths(string $templateName, string $contents): void
     {
@@ -117,9 +96,6 @@ final class TemplatingTest extends WebTestCase
         $this->assertEquals($contents, trim($crawler->text()));
     }
 
-    /**
-     * @return array
-     */
     public function getAppTemplatesUsingNamespacedPaths(): array
     {
         return [

@@ -37,10 +37,6 @@ final class SecurityService implements SecurityServiceInterface
      */
     private $sessionTokenVariable;
 
-    /**
-     * @param CookieSetterInterface $cookieSetter
-     * @param string $firewallContextName
-     */
     public function __construct(SessionInterface $session, CookieSetterInterface $cookieSetter, string $firewallContextName)
     {
         $this->session = $session;
@@ -87,9 +83,6 @@ final class SecurityService implements SecurityServiceInterface
         $this->setToken($token);
     }
 
-    /**
-     * @param TokenInterface $token
-     */
     private function setToken(TokenInterface $token): void
     {
         $serializedToken = serialize($token);

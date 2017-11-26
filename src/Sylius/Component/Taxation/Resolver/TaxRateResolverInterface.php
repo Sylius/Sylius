@@ -20,7 +20,6 @@ interface TaxRateResolverInterface
 {
     /**
      * @param array $criteria
-     *
      */
     public function resolve(TaxableInterface $taxable, array $criteria = []): ?TaxRateInterface;
 }

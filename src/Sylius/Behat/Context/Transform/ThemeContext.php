@@ -23,9 +23,6 @@ final class ThemeContext implements Context
      */
     private $themeRepository;
 
-    /**
-     * @param ThemeRepositoryInterface $themeRepository
-     */
     public function __construct(ThemeRepositoryInterface $themeRepository)
     {
         $this->themeRepository = $themeRepository;

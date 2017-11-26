@@ -69,16 +69,6 @@ class RegistrationContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param DashboardPageInterface $dashboardPage
-     * @param HomePageInterface $homePage
-     * @param LoginPageInterface $loginPage
-     * @param RegisterPageInterface $registerPage
-     * @param VerificationPageInterface $verificationPage
-     * @param ProfileUpdatePageInterface $profileUpdatePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         DashboardPageInterface $dashboardPage,
@@ -403,10 +393,6 @@ class RegistrationContext implements Context
         Assert::true($this->profileUpdatePage->isSubscribedToTheNewsletter());
     }
 
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         Assert::true($this->registerPage->checkValidationMessageFor($element, $expectedMessage));

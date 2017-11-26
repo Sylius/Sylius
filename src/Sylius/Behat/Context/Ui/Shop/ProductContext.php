@@ -39,11 +39,6 @@ final class ProductContext implements Context
      */
     private $productReviewsIndexPage;
 
-    /**
-     * @param ShowPageInterface $showPage
-     * @param IndexPageInterface $indexPage
-     * @param ProductReviewIndexPageInterface $productReviewsIndexPage
-     */
     public function __construct(
         ShowPageInterface $showPage,
         IndexPageInterface $indexPage,
@@ -512,9 +507,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param string $productName
-     * @param string $productAssociationName
-     *
      * @throws \InvalidArgumentException
      */
     private function assertProductIsInAssociation(string $productName, string $productAssociationName): void
