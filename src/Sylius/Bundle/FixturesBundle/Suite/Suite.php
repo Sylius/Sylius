@@ -45,7 +45,6 @@ final class Suite implements SuiteInterface
     }
 
     /**
-     * @param FixtureInterface $fixture
      * @param array $options
      * @param int $priority
      */
@@ -55,7 +54,6 @@ final class Suite implements SuiteInterface
     }
 
     /**
-     * @param ListenerInterface $listener
      * @param array $options
      * @param int $priority
      */

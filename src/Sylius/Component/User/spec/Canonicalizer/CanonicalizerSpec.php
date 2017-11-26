@@ -18,12 +18,12 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
 final class CanonicalizerSpec extends ObjectBehavior
 {
-    function it_implements_canonicalizer_interface(): void
+    public function it_implements_canonicalizer_interface(): void
     {
         $this->shouldImplement(CanonicalizerInterface::class);
     }
 
-    function it_converts_strings_to_lower_case(): void
+    public function it_converts_strings_to_lower_case(): void
     {
         $testString = 'tEsTsTrInG';
         $this->canonicalize($testString)->shouldReturn('teststring');

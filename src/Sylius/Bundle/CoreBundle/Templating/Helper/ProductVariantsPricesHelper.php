@@ -34,7 +34,6 @@ class ProductVariantsPricesHelper extends Helper
     }
 
     /**
-     * @param ProductInterface $product
      * @param ChannelInterface $channel
      *
      * @return array

@@ -21,17 +21,17 @@ use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 final class UserPasswordEncoderSpec extends ObjectBehavior
 {
-    function let(EncoderFactoryInterface $encoderFactory): void
+    public function let(EncoderFactoryInterface $encoderFactory): void
     {
         $this->beConstructedWith($encoderFactory);
     }
 
-    function it_implements_password_updater_interface(): void
+    public function it_implements_password_updater_interface(): void
     {
         $this->shouldImplement(UserPasswordEncoderInterface::class);
     }
 
-    function it_encodes_password(
+    public function it_encodes_password(
         EncoderFactoryInterface $encoderFactory,
         PasswordEncoderInterface $passwordEncoder,
         CredentialsHolderInterface $user

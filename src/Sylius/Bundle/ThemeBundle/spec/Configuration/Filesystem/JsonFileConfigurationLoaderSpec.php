@@ -19,17 +19,17 @@ use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
 
 final class JsonFileConfigurationLoaderSpec extends ObjectBehavior
 {
-    function let(FilesystemInterface $filesystem): void
+    public function let(FilesystemInterface $filesystem): void
     {
         $this->beConstructedWith($filesystem);
     }
 
-    function it_implements_configuration_loader_interface(): void
+    public function it_implements_configuration_loader_interface(): void
     {
         $this->shouldImplement(ConfigurationLoaderInterface::class);
     }
 
-    function it_loads_json_file(FilesystemInterface $filesystem): void
+    public function it_loads_json_file(FilesystemInterface $filesystem): void
     {
         $filesystem->exists('/directory/composer.json')->willReturn(true);
 
@@ -41,7 +41,7 @@ final class JsonFileConfigurationLoaderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_throws_an_exception_if_file_does_not_exist(FilesystemInterface $filesystem): void
+    public function it_throws_an_exception_if_file_does_not_exist(FilesystemInterface $filesystem): void
     {
         $filesystem->exists('composer.json')->willReturn(false);
 

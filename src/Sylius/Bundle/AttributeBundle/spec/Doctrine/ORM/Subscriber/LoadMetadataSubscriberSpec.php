@@ -24,7 +24,7 @@ use Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber
 
 final class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith([
             'product' => [
@@ -43,22 +43,22 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         ]);
     }
 
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(LoadMetadataSubscriber::class);
     }
 
-    function it_is_a_doctrine_event_subscriber(): void
+    public function it_is_a_doctrine_event_subscriber(): void
     {
         $this->shouldImplement(EventSubscriber::class);
     }
 
-    function it_subscribes_load_class_metadata_event(): void
+    public function it_subscribes_load_class_metadata_event(): void
     {
         $this->getSubscribedEvents()->shouldReturn(['loadClassMetadata']);
     }
 
-    function it_does_not_add_a_many_to_one_mapping_if_the_class_is_not_a_configured_attribute_value_model(
+    public function it_does_not_add_a_many_to_one_mapping_if_the_class_is_not_a_configured_attribute_value_model(
         LoadClassMetadataEventArgs $eventArgs,
         ClassMetadataInfo $metadata,
         EntityManager $entityManager,
@@ -75,7 +75,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($eventArgs);
     }
 
-    function it_maps_many_to_one_associations_from_the_attribute_value_model_to_the_subject_model_and_the_attribute_model(
+    public function it_maps_many_to_one_associations_from_the_attribute_value_model_to_the_subject_model_and_the_attribute_model(
         LoadClassMetadataEventArgs $eventArgs,
         ClassMetadataInfo $metadata,
         EntityManager $entityManager,
@@ -125,7 +125,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($eventArgs);
     }
 
-    function it_does_not_add_values_one_to_many_mapping_if_the_class_is_not_a_configured_attribute_model(
+    public function it_does_not_add_values_one_to_many_mapping_if_the_class_is_not_a_configured_attribute_model(
         LoadClassMetadataEventArgs $eventArgs,
         ClassMetadataInfo $metadata,
         EntityManager $entityManager,

@@ -27,7 +27,7 @@ final class CalculatorChoiceType extends AbstractType
     /**
      * @param array $calculators
      */
-    public function __construct($calculators)
+    public function __construct(array $calculators)
     {
         $this->calculators = $calculators;
     }

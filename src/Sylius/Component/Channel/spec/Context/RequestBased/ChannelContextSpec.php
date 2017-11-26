@@ -23,17 +23,17 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ChannelContextSpec extends ObjectBehavior
 {
-    function let(RequestResolverInterface $requestResolver, RequestStack $requestStack): void
+    public function let(RequestResolverInterface $requestResolver, RequestStack $requestStack): void
     {
         $this->beConstructedWith($requestResolver, $requestStack);
     }
 
-    function it_implements_channel_context_interface(): void
+    public function it_implements_channel_context_interface(): void
     {
         $this->shouldImplement(ChannelContextInterface::class);
     }
 
-    function it_proxies_master_request_to_request_resolver(
+    public function it_proxies_master_request_to_request_resolver(
         RequestResolverInterface $requestResolver,
         RequestStack $requestStack,
         Request $masterRequest,
@@ -46,7 +46,7 @@ final class ChannelContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($channel);
     }
 
-    function it_throws_a_channel_not_found_exception_if_request_resolver_returns_null(
+    public function it_throws_a_channel_not_found_exception_if_request_resolver_returns_null(
         RequestResolverInterface $requestResolver,
         RequestStack $requestStack,
         Request $masterRequest
@@ -58,7 +58,7 @@ final class ChannelContextSpec extends ObjectBehavior
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 
-    function it_throws_a_channel_not_found_exception_if_there_is_no_master_request(
+    public function it_throws_a_channel_not_found_exception_if_there_is_no_master_request(
         RequestStack $requestStack
     ): void {
         $requestStack->getMasterRequest()->willReturn(null);

@@ -301,7 +301,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @throws \BadMethodCallException
      */
-    protected function assertAttributeIsSet()
+    protected function assertAttributeIsSet(): void
     {
         if (null === $this->attribute) {
             throw new \BadMethodCallException('The attribute is undefined, so you cannot access proxy methods.');

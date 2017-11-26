@@ -23,17 +23,17 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 final class ChannelBasedThemeContextSpec extends ObjectBehavior
 {
-    function let(ChannelContextInterface $channelContext, ThemeRepositoryInterface $themeRepository): void
+    public function let(ChannelContextInterface $channelContext, ThemeRepositoryInterface $themeRepository): void
     {
         $this->beConstructedWith($channelContext, $themeRepository);
     }
 
-    function it_implements_theme_context_interface(): void
+    public function it_implements_theme_context_interface(): void
     {
         $this->shouldImplement(ThemeContextInterface::class);
     }
 
-    function it_returns_a_theme(
+    public function it_returns_a_theme(
         ChannelContextInterface $channelContext,
         ThemeRepositoryInterface $themeRepository,
         ChannelInterface $channel,
@@ -46,7 +46,7 @@ final class ChannelBasedThemeContextSpec extends ObjectBehavior
         $this->getTheme()->shouldReturn($theme);
     }
 
-    function it_returns_null_if_channel_has_no_theme(
+    public function it_returns_null_if_channel_has_no_theme(
         ChannelContextInterface $channelContext,
         ThemeRepositoryInterface $themeRepository,
         ChannelInterface $channel
@@ -58,7 +58,7 @@ final class ChannelBasedThemeContextSpec extends ObjectBehavior
         $this->getTheme()->shouldReturn(null);
     }
 
-    function it_returns_null_if_there_is_no_channel(
+    public function it_returns_null_if_there_is_no_channel(
         ChannelContextInterface $channelContext
     ): void {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
@@ -66,10 +66,10 @@ final class ChannelBasedThemeContextSpec extends ObjectBehavior
         $this->getTheme()->shouldReturn(null);
     }
 
-    function it_returns_null_if_any_exception_is_thrown_during_getting_the_channel(
+    public function it_returns_null_if_any_exception_is_thrown_during_getting_the_channel(
         ChannelContextInterface $channelContext
     ): void {
-        $channelContext->getChannel()->willThrow(\Exception::class);
+        $channelContext->getChannel()->willThrow(\Throwable::class);
 
         $this->getTheme()->shouldReturn(null);
     }

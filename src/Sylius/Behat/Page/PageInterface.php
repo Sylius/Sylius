@@ -20,24 +20,24 @@ interface PageInterface
      *
      * @throws UnexpectedPageException If page is not opened successfully
      */
-    public function open(array $urlParameters = []);
+    public function open(array $urlParameters = []): void;
 
     /**
      * @param array $urlParameters
      */
-    public function tryToOpen(array $urlParameters = []);
+    public function tryToOpen(array $urlParameters = []): void;
 
     /**
      * @param array $urlParameters
      *
      * @throws UnexpectedPageException
      */
-    public function verify(array $urlParameters = []);
+    public function verify(array $urlParameters = []): void;
 
     /**
      * @param array $urlParameters
      *
      * @return bool
      */
-    public function isOpen(array $urlParameters = []);
+    public function isOpen(array $urlParameters = []): bool;
 }

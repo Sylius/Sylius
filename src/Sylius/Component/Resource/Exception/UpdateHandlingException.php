@@ -37,7 +37,7 @@ class UpdateHandlingException extends \Exception
         string $flash = 'something_went_wrong_error',
         int $apiResponseCode = 400,
         int $code = 0,
-        ?\Exception $previous = null
+        ?\Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);
 

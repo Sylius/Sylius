@@ -29,7 +29,6 @@ interface AttributeTypeInterface
     public function getType(): string;
 
     /**
-     * @param AttributeValueInterface $attributeValue
      * @param ExecutionContextInterface $context
      * @param array $configuration
      */

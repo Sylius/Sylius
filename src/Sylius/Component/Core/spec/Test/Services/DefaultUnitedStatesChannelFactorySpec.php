@@ -27,7 +27,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         RepositoryInterface $channelRepository,
         RepositoryInterface $countryRepository,
         RepositoryInterface $currencyRepository,
@@ -54,12 +54,12 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         );
     }
 
-    function it_implements_a_default_channel_factory_interface(): void
+    public function it_implements_a_default_channel_factory_interface(): void
     {
         $this->shouldImplement(DefaultChannelFactoryInterface::class);
     }
 
-    function it_creates_a_default_united_states_channel_with_country_zone_and_usd_as_base_currency(
+    public function it_creates_a_default_united_states_channel_with_country_zone_and_usd_as_base_currency(
         RepositoryInterface $channelRepository,
         RepositoryInterface $countryRepository,
         RepositoryInterface $currencyRepository,

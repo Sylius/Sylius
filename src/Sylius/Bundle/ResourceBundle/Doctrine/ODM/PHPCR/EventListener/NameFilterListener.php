@@ -49,7 +49,7 @@ class NameFilterListener
     /**
      * @param ResourceControllerEvent $event
      */
-    public function onEvent(ResourceControllerEvent $event)
+    public function onEvent(ResourceControllerEvent $event): void
     {
         $document = $event->getSubject();
 

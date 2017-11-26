@@ -30,7 +30,6 @@ class SortByExtension extends \Twig_Extension
 
     /**
      * @param iterable $iterable
-     * @param string $field
      * @param string $order
      *
      * @return array

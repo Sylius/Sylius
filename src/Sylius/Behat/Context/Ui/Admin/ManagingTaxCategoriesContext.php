@@ -64,7 +64,7 @@ final class ManagingTaxCategoriesContext implements Context
     /**
      * @When I delete tax category :taxCategory
      */
-    public function iDeletedTaxCategory(TaxCategoryInterface $taxCategory)
+    public function iDeletedTaxCategory(TaxCategoryInterface $taxCategory): void
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['code' => $taxCategory->getCode()]);
@@ -73,7 +73,7 @@ final class ManagingTaxCategoriesContext implements Context
     /**
      * @Then /^(this tax category) should no longer exist in the registry$/
      */
-    public function thisTaxCategoryShouldNoLongerExistInTheRegistry(TaxCategoryInterface $taxCategory)
+    public function thisTaxCategoryShouldNoLongerExistInTheRegistry(TaxCategoryInterface $taxCategory): void
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode()]));
     }
@@ -81,7 +81,7 @@ final class ManagingTaxCategoriesContext implements Context
     /**
      * @Given I want to create a new tax category
      */
-    public function iWantToCreateNewTaxCategory()
+    public function iWantToCreateNewTaxCategory(): void
     {
         $this->createPage->open();
     }
@@ -90,7 +90,7 @@ final class ManagingTaxCategoriesContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs($code = null): void
     {
         $this->createPage->specifyCode($code);
     }
@@ -101,7 +101,7 @@ final class ManagingTaxCategoriesContext implements Context
      * @When I do not name it
      * @When I remove its name
      */
-    public function iNameIt($name = null)
+    public function iNameIt($name = null): void
     {
         $this->createPage->nameIt($name);
     }
@@ -110,7 +110,7 @@ final class ManagingTaxCategoriesContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -128,7 +128,7 @@ final class ManagingTaxCategoriesContext implements Context
     /**
      * @When I describe it as :description
      */
-    public function iDescribeItAs($description)
+    public function iDescribeItAs($description): void
     {
         $this->createPage->describeItAs($description);
     }
@@ -137,7 +137,7 @@ final class ManagingTaxCategoriesContext implements Context
      * @Given I want to modify a tax category :taxCategory
      * @Given /^I want to modify (this tax category)$/
      */
-    public function iWantToModifyTaxCategory(TaxCategoryInterface $taxCategory)
+    public function iWantToModifyTaxCategory(TaxCategoryInterface $taxCategory): void
     {
         $this->updatePage->open(['id' => $taxCategory->getId()]);
     }
@@ -146,7 +146,7 @@ final class ManagingTaxCategoriesContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -178,7 +178,7 @@ final class ManagingTaxCategoriesContext implements Context
     /**
      * @Then the code field should be disabled
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function theCodeFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -187,7 +187,7 @@ final class ManagingTaxCategoriesContext implements Context
      * @Then /^(this tax category) name should be "([^"]+)"$/
      * @Then /^(this tax category) should still be named "([^"]+)"$/
      */
-    public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, $taxCategoryName)
+    public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, $taxCategoryName): void
     {
         $this->indexPage->open();
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode(), 'nameAndDescription' => $taxCategoryName]));
@@ -196,7 +196,7 @@ final class ManagingTaxCategoriesContext implements Context
     /**
      * @Then I should be notified that tax category with this code already exists
      */
-    public function iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists(): void
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'The tax category with given code already exists.');
     }
@@ -204,7 +204,7 @@ final class ManagingTaxCategoriesContext implements Context
     /**
      * @Then there should still be only one tax category with :element :code
      */
-    public function thereShouldStillBeOnlyOneTaxCategoryWith($element, $code)
+    public function thereShouldStillBeOnlyOneTaxCategoryWith($element, $code): void
     {
         $this->indexPage->open();
         Assert::true($this->indexPage->isSingleResourceOnPage([$element => $code]));
@@ -213,7 +213,7 @@ final class ManagingTaxCategoriesContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired($element): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -224,7 +224,7 @@ final class ManagingTaxCategoriesContext implements Context
     /**
      * @Then tax category with :element :name should not be added
      */
-    public function taxCategoryWithElementValueShouldNotBeAdded($element, $name)
+    public function taxCategoryWithElementValueShouldNotBeAdded($element, $name): void
     {
         $this->indexPage->open();
         Assert::false($this->indexPage->isSingleResourceOnPage([$element => $name]));

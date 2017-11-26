@@ -25,7 +25,6 @@ interface FileLocatorInterface
     public function locateFileNamed(string $name): string;
 
     /**
-     * @param string $name
      *
      * @return array
      *

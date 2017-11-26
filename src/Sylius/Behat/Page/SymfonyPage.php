@@ -30,7 +30,6 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
     protected static $additionalParameters = ['_locale' => 'en_US'];
 
     /**
-     * @param Session $session
      * @param array $parameters
      * @param RouterInterface $router
      */
@@ -68,7 +67,7 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function verifyUrl(array $urlParameters = [])
+    protected function verifyUrl(array $urlParameters = []): void
     {
         $url = $this->getDriver()->getCurrentUrl();
         $path = parse_url($url)['path'];
@@ -88,7 +87,7 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
      *
      * @throws UnexpectedPageException
      */
-    public function verifyRoute(array $requiredUrlParameters = [])
+    public function verifyRoute(array $requiredUrlParameters = []): void
     {
         $url = $this->getDriver()->getCurrentUrl();
         $path = parse_url($url)['path'];
@@ -102,11 +101,10 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
 
     /**
      * @param array $matchedRoute
-     * @param string $url
      *
      * @throws UnexpectedPageException
      */
-    private function verifyRouteName(array $matchedRoute, string $url)
+    private function verifyRouteName(array $matchedRoute, string $url): void
     {
         if ($matchedRoute['_route'] !== $this->getRouteName()) {
             throw new UnexpectedPageException(
@@ -126,7 +124,7 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
      *
      * @throws UnexpectedPageException
      */
-    private function verifyRouteParameters(array $requiredUrlParameters, array $matchedRoute)
+    private function verifyRouteParameters(array $requiredUrlParameters, array $matchedRoute): void
     {
         foreach ($requiredUrlParameters as $key => $value) {
             if (!isset($matchedRoute[$key]) || $matchedRoute[$key] !== $value) {
@@ -143,12 +141,11 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
     }
 
     /**
-     * @param NodeElement $modalContainer
      * @param string $appearClass
      *
      * @todo it really shouldn't be here :)
      */
-    protected function waitForModalToAppear(NodeElement $modalContainer, $appearClass = 'in')
+    protected function waitForModalToAppear(NodeElement $modalContainer, string $appearClass = 'in'): void
     {
         $this->getDocument()->waitFor(1, function () use ($modalContainer, $appearClass) {
             return false !== strpos($modalContainer->getAttribute('class'), $appearClass);
@@ -160,7 +157,7 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
      *
      * @return string
      */
-    final protected function makePathAbsolute($path)
+    final protected function makePathAbsolute(string $path): string
     {
         $baseUrl = rtrim($this->getParameter('base_url'), '/') . '/';
 

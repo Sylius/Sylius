@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class TwigGridRendererSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         GridRendererInterface $gridRenderer,
         \Twig_Environment $twig,
         OptionsParserInterface $optionsParser
@@ -41,12 +41,12 @@ final class TwigGridRendererSpec extends ObjectBehavior
         );
     }
 
-    function it_is_a_grid_renderer(): void
+    public function it_is_a_grid_renderer(): void
     {
         $this->shouldImplement(GridRendererInterface::class);
     }
 
-    function it_uses_twig_to_render_the_action(
+    public function it_uses_twig_to_render_the_action(
         \Twig_Environment $twig,
         OptionsParserInterface $optionsParser,
         ResourceGridView $gridView,
@@ -75,7 +75,7 @@ final class TwigGridRendererSpec extends ObjectBehavior
         $this->renderAction($gridView, $action)->shouldReturn('<a href="#">Action!</a>');
     }
 
-    function it_throws_an_exception_if_template_is_not_configured_for_given_action_type(
+    public function it_throws_an_exception_if_template_is_not_configured_for_given_action_type(
         ResourceGridView $gridView,
         Action $action
     ): void {

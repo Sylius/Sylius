@@ -33,7 +33,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseParent(TaxonInterface $taxon)
+    public function chooseParent(TaxonInterface $taxon): void
     {
         AutocompleteHelper::chooseValue($this->getSession(), $this->getElement('parent')->getParent(), $taxon->getName());
     }
@@ -41,7 +41,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function describeItAs($description, $languageCode)
+    public function describeItAs($description, $languageCode): void
     {
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_description', $languageCode), $description);
     }
@@ -49,7 +49,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameIt($name, $languageCode)
+    public function nameIt($name, $languageCode): void
     {
         $this->activateLanguageTab($languageCode);
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_name', $languageCode), $name);
@@ -65,7 +65,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifySlug($slug, $languageCode)
+    public function specifySlug($slug, $languageCode): void
     {
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_slug', $languageCode), $slug);
     }
@@ -73,7 +73,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function attachImage($path, $type = null)
+    public function attachImage($path, $type = null): void
     {
         $filesPath = $this->getParameter('files_path');
 
@@ -120,7 +120,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function removeImageWithType($type)
+    public function removeImageWithType($type): void
     {
         $imageElement = $this->getImageElementByType($type);
         $imageSourceElement = $imageElement->find('css', 'img');
@@ -131,7 +131,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $imageElement->clickLink('Delete');
     }
 
-    public function removeFirstImage()
+    public function removeFirstImage(): void
     {
         $imageElement = $this->getFirstImageElement();
         $imageTypeElement = $imageElement->find('css', 'input[type=text]');
@@ -150,7 +150,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function enableSlugModification($languageCode = 'en_US')
+    public function enableSlugModification($languageCode = 'en_US'): void
     {
         SlugGenerationHelper::enableSlugModification(
             $this->getSession(),
@@ -171,7 +171,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeImageWithType($type, $path)
+    public function changeImageWithType($type, $path): void
     {
         $filesPath = $this->getParameter('files_path');
 
@@ -182,7 +182,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function modifyFirstImageType($type)
+    public function modifyFirstImageType($type): void
     {
         $firstImage = $this->getFirstImageElement();
 
@@ -239,7 +239,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function activateLanguageTab($locale)
+    public function activateLanguageTab($locale): void
     {
         if (!$this->getDriver() instanceof Selenium2Driver) {
             return;
@@ -270,7 +270,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @return NodeElement
      */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
@@ -295,7 +295,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @return NodeElement
      */
-    private function getLastImageElement()
+    private function getLastImageElement(): NodeElement
     {
         $imageElements = $this->getImageElements();
 
@@ -307,7 +307,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @return NodeElement
      */
-    private function getFirstImageElement()
+    private function getFirstImageElement(): NodeElement
     {
         $imageElements = $this->getImageElements();
 
@@ -331,7 +331,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      *
      * @return NodeElement
      */
-    private function getImageElementByType($type)
+    private function getImageElementByType(string $type): NodeElement
     {
         $images = $this->getElement('images');
         $typeInput = $images->find('css', 'input[value="' . $type . '"]');

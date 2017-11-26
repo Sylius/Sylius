@@ -79,7 +79,6 @@ final class ThemeTranslatorResourceProvider implements TranslatorResourceProvide
     }
 
     /**
-     * @param ThemeInterface $mainTheme
      *
      * @return array
      */

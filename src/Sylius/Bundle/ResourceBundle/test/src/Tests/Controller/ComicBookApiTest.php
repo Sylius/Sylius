@@ -10,6 +10,7 @@
  */
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Sylius package.
  *
@@ -29,7 +30,7 @@ final class ComicBookApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_creating_a_comic_book()
+    public function it_allows_creating_a_comic_book(): void
     {
         $data =
 <<<EOT
@@ -48,7 +49,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_versioned_creating_a_comic_book()
+    public function it_allows_versioned_creating_a_comic_book(): void
     {
         $data =
 <<<EOT
@@ -67,7 +68,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_a_comic_book()
+    public function it_allows_updating_a_comic_book(): void
     {
         $objects = $this->loadFixturesFromFile('comic_books.yml');
 
@@ -88,7 +89,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_partial_information_about_a_comic_book()
+    public function it_allows_updating_partial_information_about_a_comic_book(): void
     {
         $objects = $this->loadFixturesFromFile('comic_books.yml');
 
@@ -108,7 +109,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_removing_a_comic_book()
+    public function it_allows_removing_a_comic_book(): void
     {
         $objects = $this->loadFixturesFromFile('comic_books.yml');
 
@@ -120,7 +121,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_showing_a_comic_book()
+    public function it_allows_showing_a_comic_book(): void
     {
         $objects = $this->loadFixturesFromFile('comic_books.yml');
 
@@ -132,7 +133,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_versioning_of_a_showing_comic_book_serialization()
+    public function it_allows_versioning_of_a_showing_comic_book_serialization(): void
     {
         $objects = $this->loadFixturesFromFile('comic_books.yml');
 
@@ -144,7 +145,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_indexing_of_comic_books()
+    public function it_allows_indexing_of_comic_books(): void
     {
         $this->loadFixturesFromFile('comic_books.yml');
 
@@ -156,7 +157,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_versioned_indexing_of_comic_books()
+    public function it_allows_versioned_indexing_of_comic_books(): void
     {
         $this->loadFixturesFromFile('comic_books.yml');
 
@@ -168,7 +169,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_showing_resource_if_it_does_not_exist()
+    public function it_does_not_allow_showing_resource_if_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('comic_books.yml');
 

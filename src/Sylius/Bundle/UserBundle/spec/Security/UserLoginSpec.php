@@ -29,17 +29,17 @@ use Symfony\Component\Security\Core\User\UserCheckerInterface;
 
 final class UserLoginSpec extends ObjectBehavior
 {
-    function let(TokenStorageInterface $tokenStorage, UserCheckerInterface $userChecker, EventDispatcherInterface $eventDispatcher): void
+    public function let(TokenStorageInterface $tokenStorage, UserCheckerInterface $userChecker, EventDispatcherInterface $eventDispatcher): void
     {
         $this->beConstructedWith($tokenStorage, $userChecker, $eventDispatcher);
     }
 
-    function it_implements_user_login_interface(): void
+    public function it_implements_user_login_interface(): void
     {
         $this->shouldImplement(UserLoginInterface::class);
     }
 
-    function it_throws_exception_and_does_not_log_user_in_when_user_is_disabled(
+    public function it_throws_exception_and_does_not_log_user_in_when_user_is_disabled(
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
@@ -54,7 +54,7 @@ final class UserLoginSpec extends ObjectBehavior
         $this->shouldThrow(DisabledException::class)->during('login', [$user]);
     }
 
-    function it_throws_exception_and_does_not_log_user_in_when_user_account_status_is_invalid(
+    public function it_throws_exception_and_does_not_log_user_in_when_user_account_status_is_invalid(
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
@@ -70,7 +70,7 @@ final class UserLoginSpec extends ObjectBehavior
         $this->shouldThrow(CredentialsExpiredException::class)->during('login', [$user]);
     }
 
-    function it_throws_exception_and_does_not_log_user_in_when_user_has_no_roles(
+    public function it_throws_exception_and_does_not_log_user_in_when_user_has_no_roles(
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
@@ -86,7 +86,7 @@ final class UserLoginSpec extends ObjectBehavior
         $this->shouldThrow(AuthenticationException::class)->during('login', [$user]);
     }
 
-    function it_logs_user_in(
+    public function it_logs_user_in(
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,

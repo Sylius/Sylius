@@ -64,7 +64,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Given I want to create a new product option
      */
-    public function iWantToCreateANewProductOption()
+    public function iWantToCreateANewProductOption(): void
     {
         $this->createPage->open();
     }
@@ -72,7 +72,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Given I want to modify the :productOption product option
      */
-    public function iWantToModifyAProductOption(ProductOptionInterface $productOption)
+    public function iWantToModifyAProductOption(ProductOptionInterface $productOption): void
     {
         $this->updatePage->open(['id' => $productOption->getId()]);
     }
@@ -80,7 +80,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @When I browse product options
      */
-    public function iBrowseProductOptions()
+    public function iBrowseProductOptions(): void
     {
         $this->indexPage->open();
     }
@@ -89,7 +89,7 @@ final class ManagingProductOptionsContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -98,7 +98,7 @@ final class ManagingProductOptionsContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -106,7 +106,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @When I name it :name in :language
      */
-    public function iNameItInLanguage($name, $language)
+    public function iNameItInLanguage($name, $language): void
     {
         $this->createPage->nameItIn($name, $language);
     }
@@ -115,7 +115,7 @@ final class ManagingProductOptionsContext implements Context
      * @When I rename it to :name in :language
      * @When I remove its name from :language translation
      */
-    public function iRenameItToInLanguage($name = null, $language)
+    public function iRenameItToInLanguage($name = null, $language): void
     {
         $this->updatePage->nameItIn($name, $language);
     }
@@ -123,7 +123,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @When I do not name it
      */
-    public function iDoNotNameIt()
+    public function iDoNotNameIt(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -132,7 +132,7 @@ final class ManagingProductOptionsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs($code = null): void
     {
         $this->createPage->specifyCode($code);
     }
@@ -140,7 +140,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @When I add the :value option value identified by :code
      */
-    public function iAddTheOptionValueWithCodeAndValue($value, $code)
+    public function iAddTheOptionValueWithCodeAndValue($value, $code): void
     {
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
@@ -178,7 +178,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then I should be notified that product option with this code already exists
      */
-    public function iShouldBeNotifiedThatProductOptionWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatProductOptionWithThisCodeAlreadyExists(): void
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'The option with given code already exists.');
     }
@@ -186,7 +186,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then there should still be only one product option with :element :value
      */
-    public function thereShouldStillBeOnlyOneProductOptionWith($element, $value)
+    public function thereShouldStillBeOnlyOneProductOptionWith($element, $value): void
     {
         $this->iBrowseProductOptions();
 
@@ -196,7 +196,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatElementIsRequired($element)
+    public function iShouldBeNotifiedThatElementIsRequired($element): void
     {
         Assert::same($this->createPage->getValidationMessage($element), sprintf('Please enter option %s.', $element));
     }
@@ -204,7 +204,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then the product option with :element :value should not be added
      */
-    public function theProductOptionWithElementValueShouldNotBeAdded($element, $value)
+    public function theProductOptionWithElementValueShouldNotBeAdded($element, $value): void
     {
         $this->iBrowseProductOptions();
 
@@ -215,7 +215,7 @@ final class ManagingProductOptionsContext implements Context
      * @Then /^(this product option) should still be named "([^"]+)"$/
      * @Then /^(this product option) name should be "([^"]+)"$/
      */
-    public function thisProductOptionNameShouldStillBe(ProductOptionInterface $productOption, $productOptionName)
+    public function thisProductOptionNameShouldStillBe(ProductOptionInterface $productOption, $productOptionName): void
     {
         $this->iBrowseProductOptions();
 
@@ -228,7 +228,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then the code field should be disabled
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function theCodeFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -236,7 +236,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @When I do not add an option value
      */
-    public function iDoNotAddAnOptionValue()
+    public function iDoNotAddAnOptionValue(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -244,7 +244,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then I should be notified that at least two option values are required
      */
-    public function iShouldBeNotifiedThatAtLeastTwoOptionValuesAreRequired()
+    public function iShouldBeNotifiedThatAtLeastTwoOptionValuesAreRequired(): void
     {
         Assert::true($this->createPage->checkValidationMessageForOptionValues('Please add at least 2 option values.'));
     }
@@ -261,7 +261,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then /^(this product option) should have the "([^"]*)" option value$/
      */
-    public function thisProductOptionShouldHaveTheOptionValue(ProductOptionInterface $productOption, $optionValue)
+    public function thisProductOptionShouldHaveTheOptionValue(ProductOptionInterface $productOption, $optionValue): void
     {
         $this->iWantToModifyAProductOption($productOption);
 
@@ -271,7 +271,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then the first product option in the list should have :field :value
      */
-    public function theFirstProductOptionInTheListShouldHave($field, $value)
+    public function theFirstProductOptionInTheListShouldHave($field, $value): void
     {
         Assert::same($this->indexPage->getColumnFields($field)[0], $value);
     }
@@ -279,7 +279,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then the last product option in the list should have :field :value
      */
-    public function theLastProductOptionInTheListShouldHave($field, $value)
+    public function theLastProductOptionInTheListShouldHave($field, $value): void
     {
         $values = $this->indexPage->getColumnFields($field);
 

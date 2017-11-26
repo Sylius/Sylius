@@ -179,7 +179,6 @@ class ProductVariant implements ProductVariantInterface
     }
 
     /**
-     * @param string|null $locale
      *
      * @return ProductVariantTranslationInterface
      */

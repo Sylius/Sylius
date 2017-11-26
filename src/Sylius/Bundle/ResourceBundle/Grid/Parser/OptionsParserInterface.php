@@ -19,7 +19,6 @@ interface OptionsParserInterface
 {
     /**
      * @param array $parameters
-     * @param Request $request
      * @param mixed $data
      *
      * @return array

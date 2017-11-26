@@ -22,17 +22,17 @@ use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 final class DefaultShippingMethodResolverSpec extends ObjectBehavior
 {
-    function let(ShippingMethodRepositoryInterface $shippingMethodRepository): void
+    public function let(ShippingMethodRepositoryInterface $shippingMethodRepository): void
     {
         $this->beConstructedWith($shippingMethodRepository);
     }
 
-    function it_implements_default_shipping_method_resolver_interface(): void
+    public function it_implements_default_shipping_method_resolver_interface(): void
     {
         $this->shouldImplement(DefaultShippingMethodResolverInterface::class);
     }
 
-    function it_returns_first_enabled_shipping_method_as_default(
+    public function it_returns_first_enabled_shipping_method_as_default(
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
@@ -43,7 +43,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         $this->getDefaultShippingMethod($shipment)->shouldReturn($firstShippingMethod);
     }
 
-    function it_throws_exception_if_there_is_no_enabled_shipping_methods(
+    public function it_throws_exception_if_there_is_no_enabled_shipping_methods(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShipmentInterface $shipment
     ): void {

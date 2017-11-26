@@ -17,13 +17,13 @@ use PhpSpec\ObjectBehavior;
 
 final class ChangePasswordSpec extends ObjectBehavior
 {
-    function it_has_current_password(): void
+    public function it_has_current_password(): void
     {
         $this->setCurrentPassword('testPassword');
         $this->getCurrentPassword()->shouldReturn('testPassword');
     }
 
-    function it_has_new_password(): void
+    public function it_has_new_password(): void
     {
         $this->setNewPassword('testPassword');
         $this->getNewPassword()->shouldReturn('testPassword');

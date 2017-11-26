@@ -32,7 +32,7 @@ interface FilesystemInterface
      * @throws FileNotFoundException When originFile doesn't exist
      * @throws IOException           When copy fails
      */
-    public function copy($originFile, $targetFile, $override = false);
+    public function copy(string $originFile, string $targetFile, bool $override = false): void;
 
     /**
      * Creates a directory recursively.
@@ -42,7 +42,7 @@ interface FilesystemInterface
      *
      * @throws IOException On any directory creation failure
      */
-    public function mkdir($dirs, $mode = 0777);
+    public function mkdir($dirs, $mode = 0777): void;
 
     /**
      * Checks the existence of files or directories.
@@ -51,7 +51,7 @@ interface FilesystemInterface
      *
      * @return bool true if the file exists, false otherwise
      */
-    public function exists($files);
+    public function exists($files): bool;
 
     /**
      * Sets access and modification time of file.
@@ -62,7 +62,7 @@ interface FilesystemInterface
      *
      * @throws IOException When touch fails
      */
-    public function touch($files, $time = null, $atime = null);
+    public function touch($files, $time = null, $atime = null): void;
 
     /**
      * Removes files or directories.
@@ -71,7 +71,7 @@ interface FilesystemInterface
      *
      * @throws IOException When removal fails
      */
-    public function remove($files);
+    public function remove($files): void;
 
     /**
      * Change mode for an array of files or directories.
@@ -83,7 +83,7 @@ interface FilesystemInterface
      *
      * @throws IOException When the change fail
      */
-    public function chmod($files, $mode, $umask = 0000, $recursive = false);
+    public function chmod($files, $mode, $umask = 0000, $recursive = false): void;
 
     /**
      * Change the owner of an array of files or directories.
@@ -94,7 +94,7 @@ interface FilesystemInterface
      *
      * @throws IOException When the change fail
      */
-    public function chown($files, $user, $recursive = false);
+    public function chown($files, $user, $recursive = false): void;
 
     /**
      * Change the group of an array of files or directories.
@@ -105,7 +105,7 @@ interface FilesystemInterface
      *
      * @throws IOException When the change fail
      */
-    public function chgrp($files, $group, $recursive = false);
+    public function chgrp($files, $group, $recursive = false): void;
 
     /**
      * Renames a file or a directory.
@@ -117,7 +117,7 @@ interface FilesystemInterface
      * @throws IOException When target file or directory already exists
      * @throws IOException When origin cannot be renamed
      */
-    public function rename($origin, $target, $overwrite = false);
+    public function rename(string $origin, string $target, bool $overwrite = false): void;
 
     /**
      * Creates a symbolic link or copy a directory.
@@ -128,7 +128,7 @@ interface FilesystemInterface
      *
      * @throws IOException When symlink fails
      */
-    public function symlink($originDir, $targetDir, $copyOnWindows = false);
+    public function symlink(string $originDir, string $targetDir, bool $copyOnWindows = false): void;
 
     /**
      * Mirrors a directory to another.
@@ -144,7 +144,7 @@ interface FilesystemInterface
      *
      * @throws IOException When file type is unknown
      */
-    public function mirror($originDir, $targetDir, \Traversable $iterator = null, $options = []);
+    public function mirror(string $originDir, string $targetDir, ?\Traversable $iterator = null, array $options = []): void;
 
     /**
      * Given an existing path, convert it to a path relative to a given starting path.
@@ -154,7 +154,7 @@ interface FilesystemInterface
      *
      * @return string Path of target relative to starting path
      */
-    public function makePathRelative($endPath, $startPath);
+    public function makePathRelative(string $endPath, string $startPath): string;
 
     /**
      * Returns whether the file path is an absolute path.
@@ -163,7 +163,7 @@ interface FilesystemInterface
      *
      * @return bool
      */
-    public function isAbsolutePath($file);
+    public function isAbsolutePath(string $file): bool;
 
     /**
      * @param string $file

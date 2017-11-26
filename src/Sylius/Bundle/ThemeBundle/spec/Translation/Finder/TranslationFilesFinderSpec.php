@@ -20,17 +20,17 @@ use Symfony\Component\Finder\Finder;
 
 final class TranslationFilesFinderSpec extends ObjectBehavior
 {
-    function let(FinderFactoryInterface $finderFactory): void
+    public function let(FinderFactoryInterface $finderFactory): void
     {
         $this->beConstructedWith($finderFactory);
     }
 
-    function it_implements_translation_resource_finder_interface(): void
+    public function it_implements_translation_resource_finder_interface(): void
     {
         $this->shouldImplement(TranslationFilesFinderInterface::class);
     }
 
-    function it_returns_an_array_of_translation_resources_paths(
+    public function it_returns_an_array_of_translation_resources_paths(
         FinderFactoryInterface $finderFactory,
         Finder $finder
     ): void {

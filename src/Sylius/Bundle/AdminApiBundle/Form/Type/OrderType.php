@@ -67,7 +67,7 @@ final class OrderType extends AbstractResourceType
                     new NotBlank(['groups' => ['sylius']]),
                 ],
             ])
-            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {
                 /** @var OrderInterface $order */
                 $order = $event->getData();
 

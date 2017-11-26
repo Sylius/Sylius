@@ -19,12 +19,12 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 final class NoopThemeHierarchyProviderSpec extends ObjectBehavior
 {
-    function it_implements_theme_hierarchy_provider_interface(): void
+    public function it_implements_theme_hierarchy_provider_interface(): void
     {
         $this->shouldImplement(ThemeHierarchyProviderInterface::class);
     }
 
-    function it_returns_array_with_given_theme_as_only_element(ThemeInterface $theme): void
+    public function it_returns_array_with_given_theme_as_only_element(ThemeInterface $theme): void
     {
         $this->getThemeHierarchy($theme)->shouldReturn([$theme]);
     }

@@ -19,17 +19,17 @@ use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ConfigurationLoaderInterf
 
 final class ProcessingConfigurationLoaderSpec extends ObjectBehavior
 {
-    function let(ConfigurationLoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor): void
+    public function let(ConfigurationLoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor): void
     {
         $this->beConstructedWith($decoratedLoader, $configurationProcessor);
     }
 
-    function it_implements_loader_interface(): void
+    public function it_implements_loader_interface(): void
     {
         $this->shouldImplement(ConfigurationLoaderInterface::class);
     }
 
-    function it_processes_the_configuration(
+    public function it_processes_the_configuration(
         ConfigurationLoaderInterface $decoratedLoader,
         ConfigurationProcessorInterface $configurationProcessor
     ): void {
@@ -46,7 +46,7 @@ final class ProcessingConfigurationLoaderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_processes_the_configuration_and_extracts_extra_sylius_theme_key_as_another_configuration(
+    public function it_processes_the_configuration_and_extracts_extra_sylius_theme_key_as_another_configuration(
         ConfigurationLoaderInterface $decoratedLoader,
         ConfigurationProcessorInterface $configurationProcessor
     ): void {

@@ -72,7 +72,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
             $schemaManager = $this->getSchemaManager();
 
             return in_array($databaseName, $schemaManager->listDatabases());
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             $message = $exception->getMessage();
 
             $mysqlDatabaseError = false !== strpos($message, sprintf("Unknown database '%s'", $databaseName));
@@ -87,7 +87,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     }
 
     /**
-     * @param InputInterface $input
      * @param OutputInterface $output
      * @param QuestionHelper $questionHelper
      *
@@ -103,7 +102,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     }
 
     /**
-     * @param InputInterface $input
      * @param OutputInterface $output
      * @param QuestionHelper $questionHelper
      *

@@ -42,7 +42,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeExchangeRate($exchangeRate)
+    public function changeExchangeRate($exchangeRate): void
     {
         $this->getDocument()->fillField('Exchange rate', $exchangeRate);
     }

@@ -21,12 +21,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class ReviewCreateListenerSpec extends ObjectBehavior
 {
-    function let(CustomerContextInterface $customerContext): void
+    public function let(CustomerContextInterface $customerContext): void
     {
         $this->beConstructedWith($customerContext);
     }
 
-    function it_adds_currently_logged_customer_as_author_to_newly_created_review_if_it_has_no_author_yet(
+    public function it_adds_currently_logged_customer_as_author_to_newly_created_review_if_it_has_no_author_yet(
         CustomerContextInterface $customerContext,
         CustomerInterface $customer,
         GenericEvent $event,
@@ -41,7 +41,7 @@ final class ReviewCreateListenerSpec extends ObjectBehavior
         $this->ensureReviewHasAuthor($event);
     }
 
-    function it_throws_exception_if_event_object_is_not_review_while_controlling_author(GenericEvent $event): void
+    public function it_throws_exception_if_event_object_is_not_review_while_controlling_author(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
 
@@ -51,7 +51,7 @@ final class ReviewCreateListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_review_already_has_author(
+    public function it_does_nothing_if_review_already_has_author(
         CustomerContextInterface $customerContext,
         CustomerInterface $existingAuthor,
         GenericEvent $event,

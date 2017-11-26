@@ -20,7 +20,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     /**
      * {@inheritdoc}
      */
-    public function goToOrderDetails()
+    public function goToOrderDetails(): void
     {
         $this->getElement('order_details')->click();
     }
@@ -62,7 +62,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     /**
      * @return string
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_thank_you';
     }

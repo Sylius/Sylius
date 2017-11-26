@@ -24,29 +24,29 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CartItemFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $decoratedFactory, ProductVariantResolverInterface $variantResolver): void
+    public function let(FactoryInterface $decoratedFactory, ProductVariantResolverInterface $variantResolver): void
     {
         $this->beConstructedWith($decoratedFactory, $variantResolver);
     }
 
-    function it_implements_a_cart_item_factory_interface(): void
+    public function it_implements_a_cart_item_factory_interface(): void
     {
         $this->shouldImplement(CartItemFactoryInterface::class);
     }
 
-    function it_is_a_resource_factory(): void
+    public function it_is_a_resource_factory(): void
     {
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_creates_a_new_cart_item(FactoryInterface $decoratedFactory, OrderItemInterface $cartItem): void
+    public function it_creates_a_new_cart_item(FactoryInterface $decoratedFactory, OrderItemInterface $cartItem): void
     {
         $decoratedFactory->createNew()->willReturn($cartItem);
 
         $this->createNew()->shouldReturn($cartItem);
     }
 
-    function it_creates_a_cart_item_and_assigns_a_product_variant(
+    public function it_creates_a_cart_item_and_assigns_a_product_variant(
         FactoryInterface $decoratedFactory,
         ProductVariantResolverInterface $variantResolver,
         OrderItemInterface $cartItem,
@@ -61,7 +61,7 @@ final class CartItemFactorySpec extends ObjectBehavior
         $this->createForProduct($product)->shouldReturn($cartItem);
     }
 
-    function it_creates_a_cart_item_for_given_cart(
+    public function it_creates_a_cart_item_for_given_cart(
         FactoryInterface $decoratedFactory,
         OrderItemInterface $cartItem,
         OrderInterface $order

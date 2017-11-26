@@ -21,19 +21,19 @@ use Symfony\Component\Form\FormInterface;
 
 final class OrderItemQuantityDataMapperSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         DataMapperInterface $propertyPathDataMapper
     ): void {
         $this->beConstructedWith($orderItemQuantityModifier, $propertyPathDataMapper);
     }
 
-    function it_implements_a_data_mapper_interface(): void
+    public function it_implements_a_data_mapper_interface(): void
     {
         $this->shouldImplement(DataMapperInterface::class);
     }
 
-    function it_uses_a_property_path_data_mapper_while_mapping_data_to_forms(
+    public function it_uses_a_property_path_data_mapper_while_mapping_data_to_forms(
         DataMapperInterface $propertyPathDataMapper,
         FormInterface $form,
         OrderItemInterface $orderItem

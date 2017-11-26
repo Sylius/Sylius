@@ -116,7 +116,6 @@ class SimilarProductAssociationFixture extends AbstractFixture
     }
 
     /**
-     * @param ProductInterface $owner
      *
      * @return array|string[]
      */

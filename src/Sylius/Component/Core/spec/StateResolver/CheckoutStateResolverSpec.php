@@ -24,7 +24,7 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 final class CheckoutStateResolverSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FactoryInterface $stateMachineFactory,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
@@ -36,12 +36,12 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         );
     }
 
-    function it_implements_an_order_state_resolver_interface(): void
+    public function it_implements_an_order_state_resolver_interface(): void
     {
         $this->shouldImplement(StateResolverInterface::class);
     }
 
-    function it_applies_transition_skip_shipping_and_skip_payment_if_shipping_method_selection_is_not_required_and_payment_method_selection_is_not_required_and_this_transitions_are_possible(
+    public function it_applies_transition_skip_shipping_and_skip_payment_if_shipping_method_selection_is_not_required_and_payment_method_selection_is_not_required_and_this_transitions_are_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
@@ -63,7 +63,7 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_applies_transition_skip_shipping_if_shipping_method_selection_is_not_required_and_this_transition_is_possible(
+    public function it_applies_transition_skip_shipping_if_shipping_method_selection_is_not_required_and_this_transition_is_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
@@ -85,7 +85,7 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_does_not_apply_skip_shipping_transition_if_shipping_method_selection_is_required(
+    public function it_does_not_apply_skip_shipping_transition_if_shipping_method_selection_is_required(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
@@ -107,7 +107,7 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_does_not_apply_skip_shipping_transition_if_it_is_not_possible(
+    public function it_does_not_apply_skip_shipping_transition_if_it_is_not_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
@@ -129,7 +129,7 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_applies_transition_skip_payment_if_payment_method_selection_is_not_required_and_this_transition_is_possible(
+    public function it_applies_transition_skip_payment_if_payment_method_selection_is_not_required_and_this_transition_is_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
@@ -151,7 +151,7 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_does_not_apply_skip_payment_transition_if_payment_method_selection_is_required(
+    public function it_does_not_apply_skip_payment_transition_if_payment_method_selection_is_required(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
@@ -173,7 +173,7 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_does_not_apply_skip_payment_transition_if_transition_skip_payment_is_not_possible(
+    public function it_does_not_apply_skip_payment_transition_if_transition_skip_payment_is_not_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,

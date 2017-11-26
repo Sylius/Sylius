@@ -90,11 +90,10 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param OrderInterface $order
      *
      * @return ZoneInterface|null
      */
-    private function getTaxZone(OrderInterface $order)
+    private function getTaxZone(OrderInterface $order): ?ZoneInterface
     {
         $shippingAddress = $order->getShippingAddress();
         $zone = null;
@@ -109,7 +108,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     /**
      * @param BaseOrderInterface $order
      */
-    private function clearTaxes(BaseOrderInterface $order)
+    private function clearTaxes(BaseOrderInterface $order): void
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
         foreach ($order->getItems() as $item) {

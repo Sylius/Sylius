@@ -22,27 +22,27 @@ use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
 final class CurrentPageResolverSpec extends ObjectBehavior
 {
-    function let(Session $session, UrlMatcherInterface $urlMatcher)
+    public function let(Session $session, UrlMatcherInterface $urlMatcher): void
     {
         $this->beConstructedWith($session, $urlMatcher);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(CurrentPageResolver::class);
     }
 
-    function it_implements_current_page_resolver_interface()
+    public function it_implements_current_page_resolver_interface(): void
     {
         $this->shouldImplement(CurrentPageResolverInterface::class);
     }
 
-    function it_returns_current_page_based_on_matched_route(
+    public function it_returns_current_page_based_on_matched_route(
         Session $session,
         SymfonyPageInterface $createPage,
         SymfonyPageInterface $updatePage,
         UrlMatcherInterface $urlMatcher
-    ) {
+    ): void {
         $session->getCurrentUrl()->willReturn('https://sylius.com/resource/new');
         $urlMatcher->match('/resource/new')->willReturn(['_route' => 'sylius_resource_create']);
 
@@ -52,12 +52,12 @@ final class CurrentPageResolverSpec extends ObjectBehavior
         $this->getCurrentPageWithForm([$createPage, $updatePage])->shouldReturn($createPage);
     }
 
-    function it_throws_an_exception_if_neither_create_nor_update_key_word_has_been_found(
+    public function it_throws_an_exception_if_neither_create_nor_update_key_word_has_been_found(
         Session $session,
         SymfonyPageInterface $createPage,
         SymfonyPageInterface $updatePage,
         UrlMatcherInterface $urlMatcher
-    ) {
+    ): void {
         $session->getCurrentUrl()->willReturn('https://sylius.com/resource/show');
         $urlMatcher->match('/resource/show')->willReturn(['_route' => 'sylius_resource_show']);
 

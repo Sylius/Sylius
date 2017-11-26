@@ -63,7 +63,6 @@ final class TwigGridRenderer implements GridRendererInterface
     private $filterTemplates;
 
     /**
-     * @param \Twig_Environment $twig
      * @param ServiceRegistryInterface $fieldsRegistry
      * @param FormFactoryInterface $formFactory
      * @param FormTypeRegistryInterface $formTypeRegistry

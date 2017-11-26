@@ -26,17 +26,17 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 final class ShippingChargesProcessorSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $adjustmentFactory, DelegatingCalculatorInterface $calculator): void
+    public function let(FactoryInterface $adjustmentFactory, DelegatingCalculatorInterface $calculator): void
     {
         $this->beConstructedWith($adjustmentFactory, $calculator);
     }
 
-    function it_is_an_order_processor(): void
+    public function it_is_an_order_processor(): void
     {
         $this->shouldImplement(OrderProcessorInterface::class);
     }
 
-    function it_removes_existing_shipping_adjustments(OrderInterface $order): void
+    public function it_removes_existing_shipping_adjustments(OrderInterface $order): void
     {
         $order->getShipments()->willReturn(new ArrayCollection([]));
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
@@ -44,7 +44,7 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_does_not_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order): void
+    public function it_does_not_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order): void
     {
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->getShipments()->willReturn(new ArrayCollection([]));
@@ -53,7 +53,7 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_applies_calculated_shipping_charge_for_each_shipment_associated_with_the_order(
+    public function it_applies_calculated_shipping_charge_for_each_shipment_associated_with_the_order(
         FactoryInterface $adjustmentFactory,
         DelegatingCalculatorInterface $calculator,
         AdjustmentInterface $adjustment,

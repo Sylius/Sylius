@@ -18,17 +18,17 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 final class ImmutableLocaleContextSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith('pl_PL');
     }
 
-    function it_is_a_locale_context(): void
+    public function it_is_a_locale_context(): void
     {
         $this->shouldImplement(LocaleContextInterface::class);
     }
 
-    function it_gets_a_locale_code(): void
+    public function it_gets_a_locale_code(): void
     {
         $this->getLocaleCode()->shouldReturn('pl_PL');
     }

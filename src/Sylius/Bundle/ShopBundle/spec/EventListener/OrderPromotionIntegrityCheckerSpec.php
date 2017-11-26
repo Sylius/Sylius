@@ -26,7 +26,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class OrderPromotionIntegrityCheckerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
         EventDispatcherInterface $dispatcher,
         RouterInterface $router
@@ -34,7 +34,7 @@ final class OrderPromotionIntegrityCheckerSpec extends ObjectBehavior
         $this->beConstructedWith($promotionEligibilityChecker, $dispatcher, $router);
     }
 
-    function it_does_nothing_if_given_order_has_valid_promotion_applied(
+    public function it_does_nothing_if_given_order_has_valid_promotion_applied(
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
         EventDispatcherInterface $dispatcher,
         OrderInterface $order,
@@ -51,7 +51,7 @@ final class OrderPromotionIntegrityCheckerSpec extends ObjectBehavior
         $this->check($event);
     }
 
-    function it_stops_future_action_if_given_order_has_invalid_promotion_applied(
+    public function it_stops_future_action_if_given_order_has_invalid_promotion_applied(
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
         RouterInterface $router,
         OrderInterface $order,
@@ -76,7 +76,7 @@ final class OrderPromotionIntegrityCheckerSpec extends ObjectBehavior
         $this->check($event);
     }
 
-    function it_throws_invalid_argument_exception_if_event_subject_is_not_order(ResourceControllerEvent $event): void
+    public function it_throws_invalid_argument_exception_if_event_subject_is_not_order(ResourceControllerEvent $event): void
     {
         $event->getSubject()->willReturn(new \stdClass());
 

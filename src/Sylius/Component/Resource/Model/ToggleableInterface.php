@@ -20,7 +20,7 @@ interface ToggleableInterface
      *
      * @return bool
      */
-    public function isEnabled();
+    public function isEnabled(): bool;
 
     /**
      * @param bool $enabled

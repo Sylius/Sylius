@@ -24,12 +24,12 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  */
 final class NameResolverListenerSpec extends ObjectBehavior
 {
-    function let(DocumentManagerInterface $documentManager): void
+    public function let(DocumentManagerInterface $documentManager): void
     {
         $this->beConstructedWith($documentManager);
     }
 
-    function it_throws_an_exception_when_the_generator_type_is_not_parent(
+    public function it_throws_an_exception_when_the_generator_type_is_not_parent(
         DocumentManagerInterface $documentManager,
         ResourceControllerEvent $event,
         ClassMetadata $metadata
@@ -44,7 +44,7 @@ final class NameResolverListenerSpec extends ObjectBehavior
         );
     }
 
-    function it_should_retain_the_original_name_when_no_conflict_exists(
+    public function it_should_retain_the_original_name_when_no_conflict_exists(
         DocumentManagerInterface $documentManager,
         ResourceControllerEvent $event,
         ClassMetadata $metadata,
@@ -69,7 +69,7 @@ final class NameResolverListenerSpec extends ObjectBehavior
         $this->onEvent($event);
     }
 
-    function it_should_auto_increment_the_name_if_a_conflict_exists(
+    public function it_should_auto_increment_the_name_if_a_conflict_exists(
         DocumentManagerInterface $documentManager,
         ResourceControllerEvent $event,
         ClassMetadata $metadata,

@@ -45,7 +45,7 @@ final class CurrencyApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_creating_currency_for_non_authenticated_user()
+    public function it_denies_creating_currency_for_non_authenticated_user(): void
     {
         $this->client->request('POST', '/api/v1/currencies/');
 
@@ -56,7 +56,7 @@ final class CurrencyApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_currency_without_specifying_required_data()
+    public function it_does_not_allow_to_create_currency_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -69,7 +69,7 @@ final class CurrencyApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_currency_with_given_code()
+    public function it_allows_to_create_currency_with_given_code(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -90,7 +90,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_currencies_for_non_authenticated_user()
+    public function it_denies_getting_currencies_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/currencies/');
 
@@ -101,7 +101,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_currencies_list()
+    public function it_allows_to_get_currencies_list(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/currencies.yml');
@@ -115,7 +115,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_currency_for_non_authenticated_user()
+    public function it_denies_getting_currency_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/currencies/1');
 
@@ -126,7 +126,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_a_currency_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_a_currency_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -139,7 +139,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_currency()
+    public function it_allows_to_get_currency(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
@@ -154,7 +154,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_delete_currency_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_delete_currency_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -167,7 +167,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_currency()
+    public function it_allows_to_delete_currency(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
@@ -185,11 +185,10 @@ EOT;
     }
 
     /**
-     * @param CurrencyInterface $currency
      *
      * @return string
      */
-    private function getCurrencyUrl(CurrencyInterface $currency)
+    private function getCurrencyUrl(CurrencyInterface $currency): string
     {
         return '/api/v1/currencies/' . $currency->getCode();
     }

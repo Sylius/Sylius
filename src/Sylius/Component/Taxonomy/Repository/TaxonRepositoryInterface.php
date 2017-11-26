@@ -20,7 +20,6 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 interface TaxonRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param string $parentCode
      * @param string|null $locale
      *
      * @return array|TaxonInterface[]
@@ -41,7 +40,6 @@ interface TaxonRepositoryInterface extends RepositoryInterface
     public function findOneBySlug(string $slug, string $locale): ?TaxonInterface;
 
     /**
-     * @param string $name
      * @param string $locale
      *
      * @return array|TaxonInterface[]
@@ -49,7 +47,6 @@ interface TaxonRepositoryInterface extends RepositoryInterface
     public function findByName(string $name, string $locale): array;
 
     /**
-     * @param string $phrase
      * @param string|null $locale
      *
      * @return array|TaxonInterface[]

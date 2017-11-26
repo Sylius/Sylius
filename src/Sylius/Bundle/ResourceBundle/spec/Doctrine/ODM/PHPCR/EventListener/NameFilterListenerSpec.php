@@ -23,12 +23,12 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  */
 final class NameFilterListenerSpec extends ObjectBehavior
 {
-    function let(DocumentManagerInterface $documentManager): void
+    public function let(DocumentManagerInterface $documentManager): void
     {
         $this->beConstructedWith($documentManager);
     }
 
-    function it_throws_an_exception_if_nodename_is_not_mapped(
+    public function it_throws_an_exception_if_nodename_is_not_mapped(
         ResourceControllerEvent $event,
         DocumentManagerInterface $documentManager,
         ClassMetadata $metadata
@@ -41,7 +41,7 @@ final class NameFilterListenerSpec extends ObjectBehavior
         $this->shouldThrow(new \RuntimeException('In order to use the node name filter on "stdClass" it is necessary to map a field as the "nodename"'))->during('onEvent', [$event]);
     }
 
-    function it_should_clean_the_name(
+    public function it_should_clean_the_name(
         ResourceControllerEvent $event,
         DocumentManagerInterface $documentManager,
         ClassMetadata $metadata
@@ -56,7 +56,7 @@ final class NameFilterListenerSpec extends ObjectBehavior
         $this->onEvent($event);
     }
 
-    function it_should_use_the_given_replacement_char(
+    public function it_should_use_the_given_replacement_char(
         ResourceControllerEvent $event,
         DocumentManagerInterface $documentManager,
         ClassMetadata $metadata

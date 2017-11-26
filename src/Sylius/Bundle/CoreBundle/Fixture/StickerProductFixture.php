@@ -155,7 +155,6 @@ class StickerProductFixture extends AbstractFixture
     }
 
     /**
-     * @param int $amount
      *
      * @return array
      */

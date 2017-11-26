@@ -105,7 +105,6 @@ final class TableAccessor implements TableAccessorInterface
     }
 
     /**
-     * @param NodeElement $table
      * @param array $fields
      *
      * @return NodeElement[]
@@ -139,7 +138,7 @@ final class TableAccessor implements TableAccessorInterface
      *
      * @return bool
      */
-    private function hasRowFields(array $columns, array $fields)
+    private function hasRowFields(array $columns, array $fields): bool
     {
         foreach ($fields as $index => $searchedValue) {
             if (!isset($columns[$index])) {
@@ -162,7 +161,6 @@ final class TableAccessor implements TableAccessorInterface
     }
 
     /**
-     * @param NodeElement $table
      * @param string[] $fields
      *
      * @return string[]
@@ -182,14 +180,13 @@ final class TableAccessor implements TableAccessorInterface
     }
 
     /**
-     * @param NodeElement $table
      * @param string $fieldName
      *
      * @return int
      *
      * @throws \InvalidArgumentException
      */
-    private function getColumnIndex(NodeElement $table, $fieldName)
+    private function getColumnIndex(NodeElement $table, string $fieldName): int
     {
         $rows = $table->findAll('css', 'tr');
         Assert::notEmpty($rows, 'There are no rows!');
@@ -215,17 +212,16 @@ final class TableAccessor implements TableAccessorInterface
      *
      * @return bool
      */
-    private function containsSearchedValue($sourceText, $searchedValue)
+    private function containsSearchedValue(string $sourceText, string $searchedValue): bool
     {
         return false !== stripos(trim($sourceText), $searchedValue);
     }
 
     /**
-     * @param NodeElement $column
      *
      * @return string
      */
-    private function getColumnFieldName(NodeElement $column)
+    private function getColumnFieldName(NodeElement $column): string
     {
         return preg_replace('/.*sylius-table-column-([^ ]+).*$/', '\1', $column->getAttribute('class'));
     }

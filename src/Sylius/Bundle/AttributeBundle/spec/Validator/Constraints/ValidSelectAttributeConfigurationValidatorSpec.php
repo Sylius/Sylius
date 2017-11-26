@@ -25,17 +25,17 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $context): void
+    public function let(ExecutionContextInterface $context): void
     {
         $this->initialize($context);
     }
 
-    function it_is_a_constraint_validator(): void
+    public function it_is_a_constraint_validator(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
 
-    function it_adds_a_violation_if_max_entries_value_is_lower_than_min_entries_value(
+    public function it_adds_a_violation_if_max_entries_value_is_lower_than_min_entries_value(
         ExecutionContextInterface $context,
         AttributeInterface $attribute
     ): void {
@@ -49,7 +49,7 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
         $this->validate($attribute, $constraint);
     }
 
-    function it_adds_a_violation_if_min_entries_value_is_greater_than_the_number_of_added_choices(
+    public function it_adds_a_violation_if_min_entries_value_is_greater_than_the_number_of_added_choices(
         ExecutionContextInterface $context,
         AttributeInterface $attribute
     ): void {
@@ -71,7 +71,7 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
         $this->validate($attribute, $constraint);
     }
 
-    function it_adds_a_violation_if_multiple_is_not_true_when_min_or_max_entries_values_are_specified(
+    public function it_adds_a_violation_if_multiple_is_not_true_when_min_or_max_entries_values_are_specified(
         ExecutionContextInterface $context,
         AttributeInterface $attribute
     ): void {
@@ -85,7 +85,7 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
         $this->validate($attribute, $constraint);
     }
 
-    function it_does_nothing_if_an_attribute_is_not_a_select_type(
+    public function it_does_nothing_if_an_attribute_is_not_a_select_type(
         ExecutionContextInterface $context,
         AttributeInterface $attribute
     ): void {
@@ -98,7 +98,7 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
         $this->validate($attribute, $constraint);
     }
 
-    function it_throws_an_exception_if_validated_value_is_not_an_attribute(): void
+    public function it_throws_an_exception_if_validated_value_is_not_an_attribute(): void
     {
         $constraint = new ValidSelectAttributeConfiguration();
 
@@ -108,7 +108,7 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
         ;
     }
 
-    function it_throws_an_exception_if_constraint_is_not_a_valid_select_attribute_configuration_constraint(
+    public function it_throws_an_exception_if_constraint_is_not_a_valid_select_attribute_configuration_constraint(
         AttributeInterface $attribute
     ): void {
         $constraint = new ValidTextAttributeConfiguration();

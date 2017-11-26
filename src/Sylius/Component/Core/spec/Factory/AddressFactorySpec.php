@@ -21,29 +21,29 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class AddressFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $decoratedFactory): void
+    public function let(FactoryInterface $decoratedFactory): void
     {
         $this->beConstructedWith($decoratedFactory);
     }
 
-    function it_implements_address_factory_interface(): void
+    public function it_implements_address_factory_interface(): void
     {
         $this->shouldImplement(AddressFactoryInterface::class);
     }
 
-    function it_is_a_resource_factory(): void
+    public function it_is_a_resource_factory(): void
     {
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_creates_a_new_address(FactoryInterface $decoratedFactory, AddressInterface $address): void
+    public function it_creates_a_new_address(FactoryInterface $decoratedFactory, AddressInterface $address): void
     {
         $decoratedFactory->createNew()->willReturn($address);
 
         $this->createNew()->shouldReturn($address);
     }
 
-    function it_creates_a_new_address_with_customer(
+    public function it_creates_a_new_address_with_customer(
         FactoryInterface $decoratedFactory,
         AddressInterface $address,
         CustomerInterface $customer

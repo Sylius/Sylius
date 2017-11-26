@@ -49,7 +49,6 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
     private $attributeTypes;
 
     /**
-     * @param AttributeFactoryInterface $productAttributeFactory
      * @param RepositoryInterface $localeRepository
      * @param array $attributeTypes
      */

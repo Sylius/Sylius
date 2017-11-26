@@ -22,22 +22,22 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 
 final class NotificationCheckerSpec extends ObjectBehavior
 {
-    function let(NotificationAccessorInterface $notificationAccessor)
+    public function let(NotificationAccessorInterface $notificationAccessor): void
     {
         $this->beConstructedWith($notificationAccessor);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(NotificationChecker::class);
     }
 
-    function it_implements_notification_checker_interface()
+    public function it_implements_notification_checker_interface(): void
     {
         $this->shouldImplement(NotificationCheckerInterface::class);
     }
 
-    function it_checks_if_successful_notification_has_appeared(NotificationAccessorInterface $notificationAccessor)
+    public function it_checks_if_successful_notification_has_appeared(NotificationAccessorInterface $notificationAccessor): void
     {
         $notificationAccessor->getType()->willReturn(NotificationType::success());
         $notificationAccessor->getMessage()->willReturn('Some resource has been successfully deleted.');
@@ -45,7 +45,7 @@ final class NotificationCheckerSpec extends ObjectBehavior
         $this->checkNotification('Some resource has been successfully deleted.', NotificationType::success());
     }
 
-    function it_checks_if_failure_notification_has_appeared(NotificationAccessorInterface $notificationAccessor)
+    public function it_checks_if_failure_notification_has_appeared(NotificationAccessorInterface $notificationAccessor): void
     {
         $notificationAccessor->getType()->willReturn(NotificationType::failure());
         $notificationAccessor->getMessage()->willReturn('Something went wrong.');
@@ -53,9 +53,9 @@ final class NotificationCheckerSpec extends ObjectBehavior
         $this->checkNotification('Something went wrong.', NotificationType::failure());
     }
 
-    function it_throws_notification_mismatch_exception_if_different_or_no_success_notification_has_been_found(
+    public function it_throws_notification_mismatch_exception_if_different_or_no_success_notification_has_been_found(
         NotificationAccessorInterface $notificationAccessor
-    ) {
+    ): void {
         $notificationAccessor->getType()->willReturn(NotificationType::success());
         $notificationAccessor->getMessage()->willReturn('Some resource has been successfully updated.');
 
@@ -69,9 +69,9 @@ final class NotificationCheckerSpec extends ObjectBehavior
         )->during('checkNotification', ['Some resource has been successfully created.', NotificationType::success()]);
     }
 
-    function it_throws_notification_mismatch_exception_if_failure_message_type_has_been_found_but_expect_success(
+    public function it_throws_notification_mismatch_exception_if_failure_message_type_has_been_found_but_expect_success(
         NotificationAccessorInterface $notificationAccessor
-    ) {
+    ): void {
         $notificationAccessor->getType()->willReturn(NotificationType::failure());
         $notificationAccessor->getMessage()->willReturn('Some resource has been successfully created.');
 
@@ -85,9 +85,9 @@ final class NotificationCheckerSpec extends ObjectBehavior
         )->during('checkNotification', ['Some resource has been successfully created.', NotificationType::success()]);
     }
 
-    function it_throws_notification_mismatch_exception_if_different_or_no_failure_notification_has_been_found(
+    public function it_throws_notification_mismatch_exception_if_different_or_no_failure_notification_has_been_found(
         NotificationAccessorInterface $notificationAccessor
-    ) {
+    ): void {
         $notificationAccessor->getType()->willReturn(NotificationType::failure());
         $notificationAccessor->getMessage()->willReturn('Something different went wrong.');
 
@@ -101,9 +101,9 @@ final class NotificationCheckerSpec extends ObjectBehavior
         )->during('checkNotification', ['Something went wrong.', NotificationType::failure()]);
     }
 
-    function it_throws_notification_mismatch_exception_if_success_message_type_has_been_found_but_expect_failure(
+    public function it_throws_notification_mismatch_exception_if_success_message_type_has_been_found_but_expect_failure(
         NotificationAccessorInterface $notificationAccessor
-    ) {
+    ): void {
         $notificationAccessor->getType()->willReturn(NotificationType::success());
         $notificationAccessor->getMessage()->willReturn('Something went wrong.');
 

@@ -20,12 +20,12 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 
 final class IdBasedInvoiceNumberGeneratorSpec extends ObjectBehavior
 {
-    function it_is_an_invoice_number_generator(): void
+    public function it_is_an_invoice_number_generator(): void
     {
         $this->shouldImplement(InvoiceNumberGeneratorInterface::class);
     }
 
-    function it_generates_an_invoice_number_based_on(OrderInterface $order, PaymentInterface $payment): void
+    public function it_generates_an_invoice_number_based_on(OrderInterface $order, PaymentInterface $payment): void
     {
         $order->getId()->willReturn('001');
         $payment->getId()->willReturn('1');

@@ -19,7 +19,6 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 interface TaxCategoryRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param string $name
      *
      * @return array|TaxCategoryInterface[]
      */

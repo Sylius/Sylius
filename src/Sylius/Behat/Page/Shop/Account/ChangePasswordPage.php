@@ -43,7 +43,7 @@ class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterf
     /**
      * @param string $password
      */
-    public function specifyCurrentPassword($password)
+    public function specifyCurrentPassword(string $password): void
     {
         $this->getElement('current_password')->setValue($password);
     }
@@ -51,7 +51,7 @@ class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterf
     /**
      * @param string $password
      */
-    public function specifyNewPassword($password)
+    public function specifyNewPassword(string $password): void
     {
         $this->getElement('new_password')->setValue($password);
     }
@@ -59,7 +59,7 @@ class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterf
     /**
      * @param string $password
      */
-    public function specifyConfirmationPassword($password)
+    public function specifyConfirmationPassword(string $password): void
     {
         $this->getElement('confirmation')->setValue($password);
     }

@@ -20,17 +20,17 @@ use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
 
 final class TwigFieldTypeSpec extends ObjectBehavior
 {
-    function let(DataExtractorInterface $dataExtractor, \Twig_Environment $twig): void
+    public function let(DataExtractorInterface $dataExtractor, \Twig_Environment $twig): void
     {
         $this->beConstructedWith($dataExtractor, $twig);
     }
 
-    function it_is_a_grid_field_type(): void
+    public function it_is_a_grid_field_type(): void
     {
         $this->shouldImplement(FieldTypeInterface::class);
     }
 
-    function it_uses_data_extractor_to_obtain_data_and_renders_it_via_twig(
+    public function it_uses_data_extractor_to_obtain_data_and_renders_it_via_twig(
         DataExtractorInterface $dataExtractor,
         \Twig_Environment $twig,
         Field $field
@@ -45,7 +45,7 @@ final class TwigFieldTypeSpec extends ObjectBehavior
         ])->shouldReturn('<html>Value</html>');
     }
 
-    function it_uses_data_directly_if_dot_is_configured_as_path(
+    public function it_uses_data_directly_if_dot_is_configured_as_path(
         \Twig_Environment $twig,
         Field $field
     ): void {

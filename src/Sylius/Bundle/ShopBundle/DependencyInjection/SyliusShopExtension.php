@@ -43,7 +43,6 @@ final class SyliusShopExtension extends Extension
 
     /**
      * @param array $config
-     * @param ContainerBuilder $container
      */
     private function configureCheckoutResolverIfNeeded(array $config, ContainerBuilder $container): void
     {
@@ -77,7 +76,6 @@ final class SyliusShopExtension extends Extension
     /**
      * @param array $config
      *
-     * @return Definition
      */
     private function registerCheckoutRedirectListener(array $config): Definition
     {

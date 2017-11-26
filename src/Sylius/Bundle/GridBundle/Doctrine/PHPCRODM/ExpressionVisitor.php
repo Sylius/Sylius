@@ -36,7 +36,6 @@ final class ExpressionVisitor
     }
 
     /**
-     * @param Comparison $comparison
      * @param AbstractNode $parentNode
      *
      * @return mixed
@@ -82,7 +81,6 @@ final class ExpressionVisitor
     }
 
     /**
-     * @param CompositeExpression $expr
      * @param AbstractNode $parentNode
      *
      * @return mixed
@@ -137,7 +135,6 @@ final class ExpressionVisitor
     /**
      * Walk the given expression to build up the PHPCR-ODM query builder.
      *
-     * @param Expression $expr
      * @param AbstractNode|null $parentNode
      *
      * @return mixed
@@ -171,7 +168,6 @@ final class ExpressionVisitor
     }
 
     /**
-     * @param AbstractNode $parentNode
      * @param string $field
      * @param array $values
      */

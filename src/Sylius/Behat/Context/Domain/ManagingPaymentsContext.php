@@ -36,7 +36,7 @@ final class ManagingPaymentsContext implements Context
     /**
      * @Then /^there should be no ("[^"]+" payments) in the registry$/
      */
-    public function paymentShouldNotExistInTheRegistry(PaymentMethodInterface $paymentMethod)
+    public function paymentShouldNotExistInTheRegistry(PaymentMethodInterface $paymentMethod): void
     {
         $payments = $this->paymentRepository->findBy(['method' => $paymentMethod]);
 

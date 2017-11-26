@@ -22,19 +22,19 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 final class ShippingMethodsResolverSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ObjectRepository $methodRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker
     ): void {
         $this->beConstructedWith($methodRepository, $eligibilityChecker);
     }
 
-    function it_implements_Sylius_shipping_methods_resolver_interface(): void
+    public function it_implements_Sylius_shipping_methods_resolver_interface(): void
     {
         $this->shouldImplement(ShippingMethodsResolverInterface::class);
     }
 
-    function it_returns_all_methods_eligible_for_given_subject(
+    public function it_returns_all_methods_eligible_for_given_subject(
         ObjectRepository $methodRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         ShippingSubjectInterface $subject,

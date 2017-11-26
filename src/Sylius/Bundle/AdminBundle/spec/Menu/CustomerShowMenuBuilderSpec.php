@@ -24,14 +24,14 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class CustomerShowMenuBuilderSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher
     ): void {
         $this->beConstructedWith($factory, $eventDispatcher);
     }
 
-    function it_creates_a_customer_show_menu_for_customer_with_user(
+    public function it_creates_a_customer_show_menu_for_customer_with_user(
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher,
         ItemInterface $menu,
@@ -88,7 +88,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
         $this->createMenu(['customer' => $customer])->shouldReturn($menu);
     }
 
-    function it_creates_a_customer_show_menu_for_customer_without_user(
+    public function it_creates_a_customer_show_menu_for_customer_without_user(
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher,
         ItemInterface $menu,
@@ -120,7 +120,7 @@ final class CustomerShowMenuBuilderSpec extends ObjectBehavior
         $this->createMenu(['customer' => $customer])->shouldReturn($menu);
     }
 
-    function it_returns_an_empty_customer_show_menu_when_there_is_no_customer_in_options(
+    public function it_returns_an_empty_customer_show_menu_when_there_is_no_customer_in_options(
         FactoryInterface $factory,
         ItemInterface $menu
     ): void {

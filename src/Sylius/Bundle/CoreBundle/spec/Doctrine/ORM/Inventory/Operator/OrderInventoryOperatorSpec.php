@@ -24,17 +24,17 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class OrderInventoryOperatorSpec extends ObjectBehavior
 {
-    function let(OrderInventoryOperatorInterface $decoratedOperator, EntityManagerInterface $productVariantManager): void
+    public function let(OrderInventoryOperatorInterface $decoratedOperator, EntityManagerInterface $productVariantManager): void
     {
         $this->beConstructedWith($decoratedOperator, $productVariantManager);
     }
 
-    function it_implements_an_order_inventory_operator_interface(): void
+    public function it_implements_an_order_inventory_operator_interface(): void
     {
         $this->shouldImplement(OrderInventoryOperatorInterface::class);
     }
 
-    function it_locks_tracked_variants_during_cancelling(
+    public function it_locks_tracked_variants_during_cancelling(
         OrderInventoryOperatorInterface $decoratedOperator,
         EntityManagerInterface $productVariantManager,
         OrderInterface $order,
@@ -53,7 +53,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->cancel($order);
     }
 
-    function it_locks_tracked_variants_during_holding(
+    public function it_locks_tracked_variants_during_holding(
         OrderInventoryOperatorInterface $decoratedOperator,
         EntityManagerInterface $productVariantManager,
         OrderInterface $order,
@@ -72,7 +72,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->hold($order);
     }
 
-    function it_locks_tracked_variants_during_selling(
+    public function it_locks_tracked_variants_during_selling(
         OrderInventoryOperatorInterface $decoratedOperator,
         EntityManagerInterface $productVariantManager,
         OrderInterface $order,

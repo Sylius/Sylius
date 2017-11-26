@@ -55,7 +55,6 @@ final class ChannelFormSubscriber implements EventSubscriberInterface
 
     /**
      * @param array|string[] $locales
-     * @param string $defaultLocale
      *
      * @return array|string[]
      */
@@ -74,7 +73,6 @@ final class ChannelFormSubscriber implements EventSubscriberInterface
 
     /**
      * @param array|string[] $currencies
-     * @param string $baseCurrency
      *
      * @return array|string[]
      */

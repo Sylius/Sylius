@@ -23,17 +23,17 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 
 final class CachedTemplateLocatorSpec extends ObjectBehavior
 {
-    function let(TemplateLocatorInterface $decoratedTemplateLocator, Cache $cache): void
+    public function let(TemplateLocatorInterface $decoratedTemplateLocator, Cache $cache): void
     {
         $this->beConstructedWith($decoratedTemplateLocator, $cache);
     }
 
-    function it_implements_template_locator_interface(): void
+    public function it_implements_template_locator_interface(): void
     {
         $this->shouldImplement(TemplateLocatorInterface::class);
     }
 
-    function it_returns_the_location_found_in_cache(
+    public function it_returns_the_location_found_in_cache(
         TemplateLocatorInterface $decoratedTemplateLocator,
         Cache $cache,
         TemplateReferenceInterface $template,
@@ -50,7 +50,7 @@ final class CachedTemplateLocatorSpec extends ObjectBehavior
         $this->locateTemplate($template, $theme)->shouldReturn('/template.html.twig');
     }
 
-    function it_uses_decorated_template_locator_if_location_can_not_be_found_in_cache(
+    public function it_uses_decorated_template_locator_if_location_can_not_be_found_in_cache(
         TemplateLocatorInterface $decoratedTemplateLocator,
         Cache $cache,
         TemplateReferenceInterface $template,
@@ -67,7 +67,7 @@ final class CachedTemplateLocatorSpec extends ObjectBehavior
         $this->locateTemplate($template, $theme)->shouldReturn('/template.html.twig');
     }
 
-    function it_throws_resource_not_found_exception_if_the_location_found_in_cache_is_null(
+    public function it_throws_resource_not_found_exception_if_the_location_found_in_cache_is_null(
         TemplateLocatorInterface $decoratedTemplateLocator,
         Cache $cache,
         TemplateReferenceInterface $template,

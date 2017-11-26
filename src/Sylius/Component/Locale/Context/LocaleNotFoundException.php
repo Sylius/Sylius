@@ -18,7 +18,7 @@ final class LocaleNotFoundException extends \RuntimeException
     /**
      * {@inheritdoc}
      */
-    public function __construct(?string $message = null, \Exception $previousException = null)
+    public function __construct(?string $message = null, ?\Throwable $previousException = null)
     {
         parent::__construct($message ?: 'Locale could not be found!', 0, $previousException);
     }
@@ -34,10 +34,8 @@ final class LocaleNotFoundException extends \RuntimeException
     }
 
     /**
-     * @param string $localeCode
      * @param array $availableLocalesCodes
      *
-     * @return self
      */
     public static function notAvailable(string $localeCode, array $availableLocalesCodes): self
     {

@@ -72,7 +72,6 @@ final class SuiteFactory implements SuiteFactoryInterface
     }
 
     /**
-     * @param Suite $suite
      * @param string $fixtureAlias
      * @param array $fixtureAttributes
      */
@@ -89,7 +88,6 @@ final class SuiteFactory implements SuiteFactoryInterface
     }
 
     /**
-     * @param Suite $suite
      * @param string $listenerName
      * @param array $listenerAttributes
      */

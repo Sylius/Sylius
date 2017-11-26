@@ -56,7 +56,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @param string $provinceName
      */
-    public function removeProvince($provinceName)
+    public function removeProvince(string $provinceName): void
     {
         if ($this->isThereProvince($provinceName)) {
             $provinces = $this->getElement('provinces');
@@ -77,7 +77,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addProvince($name, $code, $abbreviation = null)
+    public function addProvince($name, $code, $abbreviation = null): void
     {
         $this->clickAddProvinceButton();
 
@@ -94,7 +94,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function clickAddProvinceButton()
+    public function clickAddProvinceButton(): void
     {
         $this->getDocument()->clickLink('Add province');
     }
@@ -102,7 +102,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameProvince($name)
+    public function nameProvince($name): void
     {
         $provinceForm = $this->getLastProvinceElement();
 
@@ -112,7 +112,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @param string $provinceName
      */
-    public function removeProvinceName($provinceName)
+    public function removeProvinceName(string $provinceName): void
     {
         if ($this->isThereProvince($provinceName)) {
             $provinces = $this->getElement('provinces');
@@ -125,7 +125,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyProvinceCode($code)
+    public function specifyProvinceCode($code): void
     {
         $provinceForm = $this->getLastProvinceElement();
 

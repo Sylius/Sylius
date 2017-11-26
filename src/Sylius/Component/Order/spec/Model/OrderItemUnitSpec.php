@@ -21,24 +21,24 @@ use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
 final class OrderItemUnitSpec extends ObjectBehavior
 {
-    function let(OrderItemInterface $orderItem): void
+    public function let(OrderItemInterface $orderItem): void
     {
         $orderItem->getUnitPrice()->willReturn(1000);
         $orderItem->addUnit(Argument::type(OrderItemUnitInterface::class))->shouldBeCalled();
         $this->beConstructedWith($orderItem);
     }
 
-    function it_implements_an_order_item_unit_interface(): void
+    public function it_implements_an_order_item_unit_interface(): void
     {
         $this->shouldImplement(OrderItemUnitInterface::class);
     }
 
-    function it_has_a_correct_total_when_there_are_no_adjustments(): void
+    public function it_has_a_correct_total_when_there_are_no_adjustments(): void
     {
         $this->getTotal()->shouldReturn(1000);
     }
 
-    function it_includes_non_neutral_adjustments_in_total(
+    public function it_includes_non_neutral_adjustments_in_total(
         AdjustmentInterface $adjustment,
         OrderItemInterface $orderItem
     ): void {
@@ -53,7 +53,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(1400);
     }
 
-    function it_returns_0_as_total_even_when_adjustments_decreases_it_below_0(
+    public function it_returns_0_as_total_even_when_adjustments_decreases_it_below_0(
         AdjustmentInterface $adjustment,
         OrderItemInterface $orderItem
     ): void {
@@ -68,7 +68,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(0);
     }
 
-    function it_adds_and_removes_adjustments(AdjustmentInterface $adjustment, OrderItemInterface $orderItem): void
+    public function it_adds_and_removes_adjustments(AdjustmentInterface $adjustment, OrderItemInterface $orderItem): void
     {
         $orderItem->recalculateUnitsTotal()->shouldBeCalled();
 
@@ -85,7 +85,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(false);
     }
 
-    function it_does_not_remove_adjustment_when_it_is_locked(
+    public function it_does_not_remove_adjustment_when_it_is_locked(
         AdjustmentInterface $adjustment,
         OrderItemInterface $orderItem
     ): void {
@@ -103,7 +103,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(true);
     }
 
-    function it_has_correct_total_after_adjustment_add_and_remove(
+    public function it_has_correct_total_after_adjustment_add_and_remove(
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         AdjustmentInterface $adjustment3,
@@ -136,7 +136,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(1300);
     }
 
-    function it_has_correct_total_after_neutral_adjustment_add_and_remove(
+    public function it_has_correct_total_after_neutral_adjustment_add_and_remove(
         AdjustmentInterface $adjustment,
         OrderItemInterface $orderItem
     ): void {
@@ -156,7 +156,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(1000);
     }
 
-    function it_has_proper_total_after_order_item_unit_price_change(
+    public function it_has_proper_total_after_order_item_unit_price_change(
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         OrderItemInterface $orderItem
@@ -179,7 +179,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(650);
     }
 
-    function it_recalculates_its_total_properly_after_adjustment_amount_change(
+    public function it_recalculates_its_total_properly_after_adjustment_amount_change(
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         OrderItemInterface $orderItem

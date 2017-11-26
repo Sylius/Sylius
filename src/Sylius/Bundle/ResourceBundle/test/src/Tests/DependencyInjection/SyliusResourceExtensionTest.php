@@ -23,7 +23,7 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_registers_services_and_parameters_for_resources()
+    public function it_registers_services_and_parameters_for_resources(): void
     {
         // TODO: Move Resource-Grid integration to a dedicated compiler pass
         $this->setParameter('kernel.bundles', []);
@@ -55,7 +55,7 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_aliases_authorization_checker_with_the_one_given_in_configuration()
+    public function it_aliases_authorization_checker_with_the_one_given_in_configuration(): void
     {
         // TODO: Move Resource-Grid integration to a dedicated compiler pass
         $this->setParameter('kernel.bundles', []);
@@ -68,7 +68,7 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_registers_default_translation_parameters()
+    public function it_registers_default_translation_parameters(): void
     {
         // TODO: Move ResourceGrid integration to a dedicated compiler pass
         $this->setParameter('kernel.bundles', []);

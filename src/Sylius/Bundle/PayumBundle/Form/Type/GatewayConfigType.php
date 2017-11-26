@@ -56,7 +56,7 @@ final class GatewayConfigType extends AbstractResourceType
                 'disabled' => true,
                 'data' => $factoryName,
             ])
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($factoryName) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($factoryName): void {
                 $gatewayConfig = $event->getData();
 
                 if (!$gatewayConfig instanceof GatewayConfigInterface) {

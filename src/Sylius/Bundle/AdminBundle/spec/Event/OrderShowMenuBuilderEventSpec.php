@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class OrderShowMenuBuilderEventSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FactoryInterface $factory,
         ItemInterface $menu,
         OrderInterface $order,
@@ -31,17 +31,17 @@ final class OrderShowMenuBuilderEventSpec extends ObjectBehavior
         $this->beConstructedWith($factory, $menu, $order, $stateMachine);
     }
 
-    function it_is_a_menu_builder_event(): void
+    public function it_is_a_menu_builder_event(): void
     {
         $this->shouldHaveType(MenuBuilderEvent::class);
     }
 
-    function it_has_an_order(OrderInterface $order): void
+    public function it_has_an_order(OrderInterface $order): void
     {
         $this->getOrder()->shouldReturn($order);
     }
 
-    function it_has_a_state_machine(StateMachineInterface $stateMachine): void
+    public function it_has_a_state_machine(StateMachineInterface $stateMachine): void
     {
         $this->getStateMachine()->shouldReturn($stateMachine);
     }

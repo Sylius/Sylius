@@ -21,17 +21,17 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class PriceHelperSpec extends ObjectBehavior
 {
-    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
+    public function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
     {
         $this->beConstructedWith($productVariantPriceCalculator);
     }
 
-    function it_is_helper(): void
+    public function it_is_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_returns_variant_price_for_channel_given_in_context(
+    public function it_returns_variant_price_for_channel_given_in_context(
         ChannelInterface $channel,
         ProductVariantInterface $productVariant,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
@@ -43,7 +43,7 @@ final class PriceHelperSpec extends ObjectBehavior
         $this->getPrice($productVariant, $context)->shouldReturn(1000);
     }
 
-    function it_throws_invalid_argument_exception_when_channel_key_is_not_present_in_context(
+    public function it_throws_invalid_argument_exception_when_channel_key_is_not_present_in_context(
         ProductVariantInterface $productVariant,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
     ): void {
@@ -54,7 +54,7 @@ final class PriceHelperSpec extends ObjectBehavior
         $productVariantPriceCalculator->calculate($productVariant, $context)->shouldNotBeCalled();
     }
 
-    function it_has_name(): void
+    public function it_has_name(): void
     {
         $this->getName()->shouldReturn('sylius_calculate_price');
     }

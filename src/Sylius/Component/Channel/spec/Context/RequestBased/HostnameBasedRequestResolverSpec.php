@@ -21,17 +21,17 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class HostnameBasedRequestResolverSpec extends ObjectBehavior
 {
-    function let(ChannelRepositoryInterface $channelRepository): void
+    public function let(ChannelRepositoryInterface $channelRepository): void
     {
         $this->beConstructedWith($channelRepository);
     }
 
-    function it_implements_request_resolver_interface(): void
+    public function it_implements_request_resolver_interface(): void
     {
         $this->shouldImplement(RequestResolverInterface::class);
     }
 
-    function it_finds_the_channel_by_request_hostname(
+    public function it_finds_the_channel_by_request_hostname(
         ChannelRepositoryInterface $channelRepository,
         Request $request,
         ChannelInterface $channel
@@ -43,7 +43,7 @@ final class HostnameBasedRequestResolverSpec extends ObjectBehavior
         $this->findChannel($request)->shouldReturn($channel);
     }
 
-    function it_returns_null_if_channel_was_not_found(
+    public function it_returns_null_if_channel_was_not_found(
         ChannelRepositoryInterface $channelRepository,
         Request $request
     ): void {

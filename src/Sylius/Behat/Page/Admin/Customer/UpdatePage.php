@@ -34,7 +34,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeFirstName($firstName)
+    public function changeFirstName($firstName): void
     {
         $this->getDocument()->fillField('First name', $firstName);
     }
@@ -50,7 +50,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeLastName($lastName)
+    public function changeLastName($lastName): void
     {
         $this->getDocument()->fillField('Last name', $lastName);
     }
@@ -66,7 +66,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeEmail($email)
+    public function changeEmail($email): void
     {
         $this->getDocument()->fillField('Email', $email);
     }
@@ -74,7 +74,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changePassword($password)
+    public function changePassword($password): void
     {
         $this->getDocument()->fillField('Password', $password);
     }
@@ -87,7 +87,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('password');
     }
 
-    public function subscribeToTheNewsletter()
+    public function subscribeToTheNewsletter(): void
     {
         $this->getDocument()->checkField('Subscribe to the newsletter');
     }

@@ -56,7 +56,6 @@ final class ParametersParser implements ParametersParserInterface
 
     /**
      * @param mixed $parameter
-     * @param Request $request
      *
      * @return mixed
      */
@@ -82,7 +81,6 @@ final class ParametersParser implements ParametersParserInterface
     }
 
     /**
-     * @param string $expression
      * @param Request $request
      *
      * @return mixed
@@ -108,7 +106,6 @@ final class ParametersParser implements ParametersParserInterface
 
     /**
      * @param mixed $parameter
-     * @param Request $request
      *
      * @return mixed
      */

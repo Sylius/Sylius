@@ -94,7 +94,6 @@ class ProductAttributeController extends ResourceController
     }
 
     /**
-     * @param AttributeInterface $attribute
      * @param array|string[] $localeCodes
      *
      * @return array|FormView[]

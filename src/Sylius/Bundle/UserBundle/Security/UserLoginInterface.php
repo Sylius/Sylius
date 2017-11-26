@@ -21,5 +21,5 @@ interface UserLoginInterface
      * @param UserInterface $user
      * @param string|null $firewallName
      */
-    public function login(UserInterface $user, ?string $firewallName = null);
+    public function login(UserInterface $user, ?string $firewallName = null): void;
 }

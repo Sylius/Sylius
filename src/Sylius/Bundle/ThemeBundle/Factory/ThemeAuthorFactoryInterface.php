@@ -20,7 +20,6 @@ interface ThemeAuthorFactoryInterface
     /**
      * @param array $data
      *
-     * @return ThemeAuthor
      */
     public function createFromArray(array $data): ThemeAuthor;
 }

@@ -20,7 +20,7 @@ final class SecurityContext implements Context
     /**
      * @Given I am logged in as an administrator
      */
-    public function iAmLoggedInAsAnAdministrator()
+    public function iAmLoggedInAsAnAdministrator(): void
     {
         // Not applicable in the domain scope
     }

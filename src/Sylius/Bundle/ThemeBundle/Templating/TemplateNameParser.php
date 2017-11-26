@@ -77,7 +77,7 @@ final class TemplateNameParser implements TemplateNameParserInterface
         if ($template->get('bundle')) {
             try {
                 $this->kernel->getBundle($template->get('bundle'));
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 return $this->decoratedParser->parse($name);
             }
         }

@@ -70,7 +70,7 @@ final class ZoneContext implements Context
      *
      * @return ZoneInterface
      */
-    private function getZoneBy(array $parameters)
+    private function getZoneBy(array $parameters): ZoneInterface
     {
         $existingZone = $this->zoneRepository->findOneBy($parameters);
         Assert::notNull(

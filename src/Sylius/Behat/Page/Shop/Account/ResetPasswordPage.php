@@ -42,7 +42,7 @@ class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterfac
         return 'sylius_shop_request_password_reset_token';
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->getDocument()->pressButton('Reset');
     }
@@ -50,7 +50,7 @@ class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterfac
     /**
      * @param string $email
      */
-    public function specifyEmail($email)
+    public function specifyEmail(string $email): void
     {
         $this->getDocument()->fillField('Email', $email);
     }

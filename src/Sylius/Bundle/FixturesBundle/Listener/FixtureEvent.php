@@ -34,7 +34,6 @@ final class FixtureEvent
     private $fixtureOptions;
 
     /**
-     * @param SuiteInterface $suite
      * @param FixtureInterface $fixture
      * @param array $fixtureOptions
      */

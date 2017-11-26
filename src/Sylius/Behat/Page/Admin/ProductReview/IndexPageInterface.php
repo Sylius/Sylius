@@ -20,10 +20,10 @@ interface IndexPageInterface extends BaseIndexPageInterface
     /**
      * @param array $parameters
      */
-    public function accept(array $parameters);
+    public function accept(array $parameters): void;
 
     /**
      * @param array $parameters
      */
-    public function reject(array $parameters);
+    public function reject(array $parameters): void;
 }

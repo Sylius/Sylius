@@ -94,7 +94,6 @@ final class ShowAvailablePaymentMethodsController
     /**
      * @param mixed $cartId
      *
-     * @return OrderInterface
      *
      * @throws NotFoundHttpException
      */
@@ -121,7 +120,6 @@ final class ShowAvailablePaymentMethodsController
     }
 
     /**
-     * @param PaymentInterface $payment
      * @param string $locale
      *
      * @return array

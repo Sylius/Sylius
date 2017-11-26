@@ -27,7 +27,6 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     private $securityTokenRepository;
 
     /**
-     * @param Session $session
      * @param array $parameters
      * @param RepositoryInterface $securityTokenRepository
      */
@@ -41,7 +40,7 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     /**
      * {@inheritdoc}
      */
-    public function pay()
+    public function pay(): void
     {
         $this->getDriver()->visit($this->findCaptureToken()->getTargetUrl() . '?token=EC-2d9EV13959UR209410U&PayerID=UX8WBNYWGBVMG');
     }
@@ -49,7 +48,7 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     /**
      * {@inheritdoc}
      */
-    public function cancel()
+    public function cancel(): void
     {
         $this->getDriver()->visit($this->findCaptureToken()->getTargetUrl() . '?token=EC-2d9EV13959UR209410U&cancelled=1');
     }
@@ -65,7 +64,7 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     /**
      * {@inheritdoc}
      */
-    protected function verifyUrl(array $urlParameters = [])
+    protected function verifyUrl(array $urlParameters = []): void
     {
         $position = strpos($this->getSession()->getCurrentUrl(), $this->getUrl($urlParameters));
         if (0 !== $position) {
@@ -78,7 +77,7 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
      *
      * @throws \RuntimeException
      */
-    private function findCaptureToken()
+    private function findCaptureToken(): TokenInterface
     {
         $tokens = $this->securityTokenRepository->findAll();
 

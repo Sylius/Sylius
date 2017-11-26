@@ -24,12 +24,12 @@ use Sylius\Component\Core\OrderPaymentStates;
 
 final class OrderInventoryOperatorSpec extends ObjectBehavior
 {
-    function it_implements_an_order_inventory_operator_interface(): void
+    public function it_implements_an_order_inventory_operator_interface(): void
     {
         $this->shouldImplement(OrderInventoryOperatorInterface::class);
     }
 
-    function it_increases_on_hold_quantity_during_holding(
+    public function it_increases_on_hold_quantity_during_holding(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -46,7 +46,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->hold($order);
     }
 
-    function it_decreases_on_hold_and_on_hand_during_selling(
+    public function it_decreases_on_hold_and_on_hand_during_selling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -67,7 +67,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->sell($order);
     }
 
-    function it_decreases_on_hold_quantity_during_cancelling(
+    public function it_decreases_on_hold_quantity_during_cancelling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -87,7 +87,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->cancel($order);
     }
 
-    function it_increases_on_hand_during_cancelling_of_a_paid_order(
+    public function it_increases_on_hand_during_cancelling_of_a_paid_order(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -105,7 +105,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->cancel($order);
     }
 
-    function it_increases_on_hand_during_cancelling_of_a_refunded_order(
+    public function it_increases_on_hand_during_cancelling_of_a_refunded_order(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -123,7 +123,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->cancel($order);
     }
 
-    function it_throws_an_invalid_argument_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_cancelling(
+    public function it_throws_an_invalid_argument_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_cancelling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -142,7 +142,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('cancel', [$order]);
     }
 
-    function it_throws_an_invalid_argument_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_selling(
+    public function it_throws_an_invalid_argument_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_selling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -159,7 +159,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('sell', [$order]);
     }
 
-    function it_throws_an_invalid_argument_exception_if_difference_between_on_hand_and_item_quantity_is_smaller_than_zero_during_selling(
+    public function it_throws_an_invalid_argument_exception_if_difference_between_on_hand_and_item_quantity_is_smaller_than_zero_during_selling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -177,7 +177,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('sell', [$order]);
     }
 
-    function it_does_nothing_if_variant_is_not_tracked_during_cancelling(
+    public function it_does_nothing_if_variant_is_not_tracked_during_cancelling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -192,7 +192,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->cancel($order);
     }
 
-    function it_does_nothing_if_variant_is_not_tracked_and_order_is_paid_during_cancelling(
+    public function it_does_nothing_if_variant_is_not_tracked_and_order_is_paid_during_cancelling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -207,7 +207,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->cancel($order);
     }
 
-    function it_does_nothing_if_variant_is_not_tracked_during_holding(
+    public function it_does_nothing_if_variant_is_not_tracked_during_holding(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -221,7 +221,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->hold($order);
     }
 
-    function it_does_nothing_if_variant_is_not_tracked_during_selling(
+    public function it_does_nothing_if_variant_is_not_tracked_during_selling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant

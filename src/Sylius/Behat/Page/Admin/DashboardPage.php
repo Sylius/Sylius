@@ -98,7 +98,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function logOut()
+    public function logOut(): void
     {
         $this->getElement('logout')->click();
     }
@@ -106,7 +106,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseChannel($channelName)
+    public function chooseChannel($channelName): void
     {
         $this->getElement('channel_choosing_link', ['%channelName%' => $channelName])->click();
     }

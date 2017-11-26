@@ -21,7 +21,7 @@ class SyliusCustomerBundleTest extends WebTestCase
     /**
      * @test
      */
-    public function its_services_are_initializable()
+    public function its_services_are_initializable(): void
     {
         /** @var ContainerInterface $container */
         $container = self::createClient()->getContainer();

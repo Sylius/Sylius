@@ -62,7 +62,6 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
     }
 
     /**
-     * @param RequirementCollection $collection
      * @param TableRenderer $notFulfilledTable
      * @param TableRenderer $helpTable
      * @param mixed $verbose

@@ -20,17 +20,17 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ChannelFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $defaultFactory): void
+    public function let(FactoryInterface $defaultFactory): void
     {
         $this->beConstructedWith($defaultFactory);
     }
 
-    function it_implements_channel_factory_interface(): void
+    public function it_implements_channel_factory_interface(): void
     {
         $this->shouldImplement(ChannelFactoryInterface::class);
     }
 
-    function it_creates_channel_with_name($defaultFactory, ChannelInterface $channel): void
+    public function it_creates_channel_with_name($defaultFactory, ChannelInterface $channel): void
     {
         $defaultFactory->createNew()->willReturn($channel);
 
@@ -39,7 +39,7 @@ final class ChannelFactorySpec extends ObjectBehavior
         $this->createNamed('United States Webstore')->shouldReturn($channel);
     }
 
-    function it_creates_empty_channel($defaultFactory, ChannelInterface $channel): void
+    public function it_creates_empty_channel($defaultFactory, ChannelInterface $channel): void
     {
         $defaultFactory->createNew()->willReturn($channel);
 

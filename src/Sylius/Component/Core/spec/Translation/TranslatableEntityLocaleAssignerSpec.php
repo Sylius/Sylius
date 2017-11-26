@@ -22,17 +22,17 @@ use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterf
 
 final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
 {
-    function let(LocaleContextInterface $localeContext, TranslationLocaleProviderInterface $translationLocaleProvider): void
+    public function let(LocaleContextInterface $localeContext, TranslationLocaleProviderInterface $translationLocaleProvider): void
     {
         $this->beConstructedWith($localeContext, $translationLocaleProvider);
     }
 
-    function it_implements_traslatable_entity_locale_assigner_interface(): void
+    public function it_implements_traslatable_entity_locale_assigner_interface(): void
     {
         $this->shouldImplement(TranslatableEntityLocaleAssignerInterface::class);
     }
 
-    function it_should_assign_current_and_default_locale_to_given_translatable_entity(
+    public function it_should_assign_current_and_default_locale_to_given_translatable_entity(
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
         TranslatableInterface $translatableEntity
@@ -46,7 +46,7 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
         $this->assignLocale($translatableEntity);
     }
 
-    function it_should_use_default_locale_as_current_if_could_not_resolve_the_current_locale(
+    public function it_should_use_default_locale_as_current_if_could_not_resolve_the_current_locale(
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
         TranslatableInterface $translatableEntity

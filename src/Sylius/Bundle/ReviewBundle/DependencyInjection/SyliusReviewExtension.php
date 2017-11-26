@@ -41,7 +41,6 @@ final class SyliusReviewExtension extends AbstractResourceExtension
 
     /**
      * @param array $resources
-     * @param ContainerBuilder $container
      *
      * @return array
      */
@@ -65,7 +64,6 @@ final class SyliusReviewExtension extends AbstractResourceExtension
 
     /**
      * @param array $reviewSubjects
-     * @param ContainerBuilder $container
      */
     private function createReviewListeners(array $reviewSubjects, ContainerBuilder $container): void
     {

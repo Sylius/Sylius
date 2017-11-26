@@ -22,12 +22,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class CommandExecutorSpec extends ObjectBehavior
 {
-    function let(InputInterface $input, OutputInterface $output, Application $application): void
+    public function let(InputInterface $input, OutputInterface $output, Application $application): void
     {
         $this->beConstructedWith($input, $output, $application);
     }
 
-    function it_should_preserve_the_current_value_of_interactive_option(InputInterface $input, Application $application): void
+    public function it_should_preserve_the_current_value_of_interactive_option(InputInterface $input, Application $application): void
     {
         $input
             ->hasOption('no-interaction')
@@ -69,7 +69,7 @@ final class CommandExecutorSpec extends ObjectBehavior
         $this->runCommand('command', []);
     }
 
-    function it_should_use_passed_options_rather_than_default_params(InputInterface $input, Application $application): void
+    public function it_should_use_passed_options_rather_than_default_params(InputInterface $input, Application $application): void
     {
         $input
             ->hasOption('no-interaction')

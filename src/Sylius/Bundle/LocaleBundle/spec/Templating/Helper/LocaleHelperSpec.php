@@ -20,29 +20,29 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class LocaleHelperSpec extends ObjectBehavior
 {
-    function let(LocaleConverterInterface $localeConverter): void
+    public function let(LocaleConverterInterface $localeConverter): void
     {
         $this->beConstructedWith($localeConverter);
     }
 
-    function it_is_a_helper(): void
+    public function it_is_a_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_is_a_locale_helper(): void
+    public function it_is_a_locale_helper(): void
     {
         $this->shouldImplement(LocaleHelperInterface::class);
     }
 
-    function it_converts_locales_code_to_name(LocaleConverterInterface $localeConverter): void
+    public function it_converts_locales_code_to_name(LocaleConverterInterface $localeConverter): void
     {
         $localeConverter->convertCodeToName('fr_FR')->willReturn('French (France)');
 
         $this->convertCodeToName('fr_FR')->shouldReturn('French (France)');
     }
 
-    function it_has_a_name(): void
+    public function it_has_a_name(): void
     {
         $this->getName()->shouldReturn('sylius_locale');
     }

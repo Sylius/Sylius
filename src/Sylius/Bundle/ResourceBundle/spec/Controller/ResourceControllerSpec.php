@@ -56,7 +56,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class ResourceControllerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ViewHandlerInterface $viewHandler,
@@ -99,12 +99,12 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->setContainer($container);
     }
 
-    function it_extends_base_Symfony_controller(): void
+    public function it_extends_base_Symfony_controller(): void
     {
         $this->shouldHaveType(Controller::class);
     }
 
-    function it_throws_a_403_exception_if_user_is_unauthorized_to_view_a_single_resource(
+    public function it_throws_a_403_exception_if_user_is_unauthorized_to_view_a_single_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -123,7 +123,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_a_404_exception_if_resource_is_not_found_based_on_configuration(
+    public function it_throws_a_404_exception_if_resource_is_not_found_based_on_configuration(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -146,7 +146,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_a_response_for_html_view_of_a_single_resource(
+    public function it_returns_a_response_for_html_view_of_a_single_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -190,7 +190,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->showAction($request)->shouldReturn($response);
     }
 
-    function it_returns_a_response_for_non_html_view_of_single_resource(
+    public function it_returns_a_response_for_non_html_view_of_single_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -224,7 +224,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->showAction($request)->shouldReturn($response);
     }
 
-    function it_throws_a_403_exception_if_user_is_unauthorized_to_view_an_index_of_resources(
+    public function it_throws_a_403_exception_if_user_is_unauthorized_to_view_an_index_of_resources(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -243,7 +243,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_a_response_for_html_view_of_paginated_resources(
+    public function it_returns_a_response_for_html_view_of_paginated_resources(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -289,7 +289,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->indexAction($request)->shouldReturn($response);
     }
 
-    function it_throws_a_403_exception_if_user_is_unauthorized_to_create_a_new_resource(
+    public function it_throws_a_403_exception_if_user_is_unauthorized_to_create_a_new_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -308,7 +308,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_a_html_response_for_creating_new_resource_form(
+    public function it_returns_a_html_response_for_creating_new_resource_form(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -361,7 +361,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->createAction($request)->shouldReturn($response);
     }
 
-    function it_returns_a_html_response_for_invalid_form_during_resource_creation(
+    public function it_returns_a_html_response_for_invalid_form_during_resource_creation(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -416,7 +416,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->createAction($request)->shouldReturn($response);
     }
 
-    function it_returns_a_non_html_response_for_invalid_form_during_resource_creation(
+    public function it_returns_a_non_html_response_for_invalid_form_during_resource_creation(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -456,7 +456,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->createAction($request)->shouldReturn($response);
     }
 
-    function it_does_not_create_the_resource_and_redirects_to_index_for_html_requests_stopped_via_events(
+    public function it_does_not_create_the_resource_and_redirects_to_index_for_html_requests_stopped_via_events(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -511,7 +511,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->createAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_does_not_create_the_resource_and_return_response_for_html_requests_stopped_via_events(
+    public function it_does_not_create_the_resource_and_return_response_for_html_requests_stopped_via_events(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -563,7 +563,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->createAction($request)->shouldReturn($response);
     }
 
-    function it_redirects_to_newly_created_resource(
+    public function it_redirects_to_newly_created_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -621,7 +621,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->createAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_uses_response_from_post_create_event_if_defined(
+    public function it_uses_response_from_post_create_event_if_defined(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -676,7 +676,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->createAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_returns_a_non_html_response_for_correctly_created_resources(
+    public function it_returns_a_non_html_response_for_correctly_created_resources(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -733,7 +733,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->createAction($request)->shouldReturn($response);
     }
 
-    function it_does_not_create_the_resource_and_throws_http_exception_for_non_html_requests_stopped_via_event(
+    public function it_does_not_create_the_resource_and_throws_http_exception_for_non_html_requests_stopped_via_event(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -784,7 +784,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_a_403_exception_if_user_is_unauthorized_to_edit_a_single_resource(
+    public function it_throws_a_403_exception_if_user_is_unauthorized_to_edit_a_single_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -803,7 +803,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_a_404_exception_if_resource_to_update_is_not_found_based_on_configuration(
+    public function it_throws_a_404_exception_if_resource_to_update_is_not_found_based_on_configuration(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -826,7 +826,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_a_html_response_for_updating_resource_form(
+    public function it_returns_a_html_response_for_updating_resource_form(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -883,7 +883,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($response);
     }
 
-    function it_returns_a_html_response_for_invalid_form_during_resource_update(
+    public function it_returns_a_html_response_for_invalid_form_during_resource_update(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -941,7 +941,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($response);
     }
 
-    function it_returns_a_non_html_response_for_invalid_form_during_resource_update(
+    public function it_returns_a_non_html_response_for_invalid_form_during_resource_update(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -980,7 +980,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($response);
     }
 
-    function it_does_not_update_the_resource_and_redirects_to_resource_for_html_request_if_stopped_via_event(
+    public function it_does_not_update_the_resource_and_redirects_to_resource_for_html_request_if_stopped_via_event(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1035,7 +1035,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_redirects_to_updated_resource(
+    public function it_redirects_to_updated_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RepositoryInterface $repository,
@@ -1094,7 +1094,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_uses_response_from_post_update_event_if_defined(
+    public function it_uses_response_from_post_update_event_if_defined(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RepositoryInterface $repository,
@@ -1154,7 +1154,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_returns_a_non_html_response_for_correctly_updated_resource(
+    public function it_returns_a_non_html_response_for_correctly_updated_resource(
         MetadataInterface $metadata,
         ParameterBagInterface $parameterBag,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
@@ -1209,7 +1209,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($response);
     }
 
-    function it_does_not_update_the_resource_throws_a_http_exception_for_non_html_requests_stopped_via_event(
+    public function it_does_not_update_the_resource_throws_a_http_exception_for_non_html_requests_stopped_via_event(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1258,7 +1258,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_applies_state_machine_transition_to_updated_resource_if_configured(
+    public function it_applies_state_machine_transition_to_updated_resource_if_configured(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RepositoryInterface $repository,
@@ -1317,7 +1317,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_throws_a_403_exception_if_user_is_unauthorized_to_delete_multiple_resources(
+    public function it_throws_a_403_exception_if_user_is_unauthorized_to_delete_multiple_resources(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1336,7 +1336,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_deletes_multiple_resources_and_redirects_to_index_for_html_request(
+    public function it_deletes_multiple_resources_and_redirects_to_index_for_html_request(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1416,7 +1416,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->bulkDeleteAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_throws_a_403_exception_if_user_is_unauthorized_to_delete_a_single_resource(
+    public function it_throws_a_403_exception_if_user_is_unauthorized_to_delete_a_single_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1435,7 +1435,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_a_404_exception_if_resource_for_deletion_is_not_found_based_on_configuration(
+    public function it_throws_a_404_exception_if_resource_for_deletion_is_not_found_based_on_configuration(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1458,7 +1458,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_deletes_a_resource_and_redirects_to_index_by_for_html_request(
+    public function it_deletes_a_resource_and_redirects_to_index_by_for_html_request(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1510,7 +1510,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->deleteAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_uses_response_from_post_delete_event_if_defined(
+    public function it_uses_response_from_post_delete_event_if_defined(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1561,7 +1561,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->deleteAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_does_not_delete_a_resource_and_redirects_to_index_for_html_requests_stopped_via_event(
+    public function it_does_not_delete_a_resource_and_redirects_to_index_for_html_requests_stopped_via_event(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1612,7 +1612,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->deleteAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_does_not_delete_a_resource_and_uses_response_from_event_if_defined(
+    public function it_does_not_delete_a_resource_and_uses_response_from_event_if_defined(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1666,7 +1666,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->deleteAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_does_not_correctly_delete_a_resource_and_returns_500_for_not_html_response(
+    public function it_does_not_correctly_delete_a_resource_and_returns_500_for_not_html_response(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1716,7 +1716,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->deleteAction($request)->shouldReturn($response);
     }
 
-    function it_deletes_a_resource_and_returns_204_for_non_html_requests(
+    public function it_deletes_a_resource_and_returns_204_for_non_html_requests(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1765,7 +1765,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->deleteAction($request)->shouldReturn($response);
     }
 
-    function it_does_not_delete_a_resource_and_throws_http_exception_for_non_html_requests_stopped_via_event(
+    public function it_does_not_delete_a_resource_and_throws_http_exception_for_non_html_requests_stopped_via_event(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1817,7 +1817,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_a_403_exception_if_csrf_token_is_invalid_during_delete_action(
+    public function it_throws_a_403_exception_if_csrf_token_is_invalid_during_delete_action(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1867,7 +1867,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_a_403_exception_if_user_is_unauthorized_to_apply_state_machine_transition_on_resource(
+    public function it_throws_a_403_exception_if_user_is_unauthorized_to_apply_state_machine_transition_on_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1886,7 +1886,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_a_404_exception_if_resource_is_not_found_when_trying_to_apply_state_machine_transition(
+    public function it_throws_a_404_exception_if_resource_is_not_found_when_trying_to_apply_state_machine_transition(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1909,7 +1909,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_apply_state_machine_transition_on_resource_if_not_applicable_and_returns_400_bad_request(
+    public function it_does_not_apply_state_machine_transition_on_resource_if_not_applicable_and_returns_400_bad_request(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1954,7 +1954,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_applies_state_machine_transition_to_resource_and_redirects_for_html_request(
+    public function it_applies_state_machine_transition_to_resource_and_redirects_for_html_request(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RepositoryInterface $repository,
@@ -2002,7 +2002,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->applyStateMachineTransitionAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_uses_response_from_post_apply_state_machine_transition_event_if_defined(
+    public function it_uses_response_from_post_apply_state_machine_transition_event_if_defined(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RepositoryInterface $repository,
@@ -2049,7 +2049,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->applyStateMachineTransitionAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_does_not_apply_state_machine_transition_on_resource_and_redirects_for_html_requests_stopped_via_event(
+    public function it_does_not_apply_state_machine_transition_on_resource_and_redirects_for_html_requests_stopped_via_event(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -2095,7 +2095,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->applyStateMachineTransitionAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_does_not_apply_state_machine_transition_on_resource_and_return_event_response_for_html_requests_stopped_via_event(
+    public function it_does_not_apply_state_machine_transition_on_resource_and_return_event_response_for_html_requests_stopped_via_event(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -2140,7 +2140,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->applyStateMachineTransitionAction($request)->shouldReturn($response);
     }
 
-    function it_applies_state_machine_transition_on_resource_and_returns_200_for_non_html_requests(
+    public function it_applies_state_machine_transition_on_resource_and_returns_200_for_non_html_requests(
         MetadataInterface $metadata,
         ParameterBagInterface $parameterBag,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
@@ -2188,7 +2188,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->applyStateMachineTransitionAction($request)->shouldReturn($response);
     }
 
-    function it_applies_state_machine_transition_on_resource_and_returns_204_for_non_html_requests_if_additional_option_added(
+    public function it_applies_state_machine_transition_on_resource_and_returns_204_for_non_html_requests_if_additional_option_added(
         MetadataInterface $metadata,
         ParameterBagInterface $parameterBag,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
@@ -2236,7 +2236,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->applyStateMachineTransitionAction($request)->shouldReturn($response);
     }
 
-    function it_does_not_apply_state_machine_transition_resource_and_throws_http_exception_for_non_html_requests_stopped_via_event(
+    public function it_does_not_apply_state_machine_transition_resource_and_throws_http_exception_for_non_html_requests_stopped_via_event(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -2311,7 +2311,7 @@ final class ResourceControllerSpec extends ObjectBehavior
     /**
      * @param View $view
      */
-    private function unwrapViewData(View $view)
+    private function unwrapViewData(View $view): void
     {
         $view->setData($this->unwrapIfCollaborator($view->getData()));
     }
@@ -2343,7 +2343,7 @@ final class ResourceControllerSpec extends ObjectBehavior
     /**
      * @param View $view
      */
-    private function nullifyDates(View $view)
+    private function nullifyDates(View $view): void
     {
         $headers = $view->getHeaders();
         unset($headers['date']);

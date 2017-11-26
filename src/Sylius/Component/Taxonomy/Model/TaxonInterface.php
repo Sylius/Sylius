@@ -135,7 +135,6 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
     public function setPosition(?int $position): void;
 
     /**
-     * @param string|null $locale
      *
      * @return TaxonTranslationInterface
      */

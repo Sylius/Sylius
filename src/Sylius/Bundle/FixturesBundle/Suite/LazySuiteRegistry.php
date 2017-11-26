@@ -39,7 +39,6 @@ final class LazySuiteRegistry implements SuiteRegistryInterface
     }
 
     /**
-     * @param string $name
      * @param array $configuration
      */
     public function addSuite(string $name, array $configuration): void

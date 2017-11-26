@@ -21,7 +21,7 @@ use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerIn
 
 final class TestThemeConfigurationManagerSpec extends ObjectBehavior
 {
-    function let(ConfigurationProcessorInterface $configurationProcessor): void
+    public function let(ConfigurationProcessorInterface $configurationProcessor): void
     {
         VfsStreamWrapper::register();
         VfsStreamWrapper::setRoot(new VfsStreamDirectory(''));
@@ -29,22 +29,22 @@ final class TestThemeConfigurationManagerSpec extends ObjectBehavior
         $this->beConstructedWith($configurationProcessor, 'vfs://cache/');
     }
 
-    function letGo(): void
+    public function letGo(): void
     {
         VfsStreamWrapper::unregister();
     }
 
-    function it_implements_test_configuration_manager_interface(): void
+    public function it_implements_test_configuration_manager_interface(): void
     {
         $this->shouldImplement(TestThemeConfigurationManagerInterface::class);
     }
 
-    function it_finds_all_saved_configurations(): void
+    public function it_finds_all_saved_configurations(): void
     {
         $this->findAll()->shouldReturn([]);
     }
 
-    function it_stores_theme_configuration(ConfigurationProcessorInterface $configurationProcessor): void
+    public function it_stores_theme_configuration(ConfigurationProcessorInterface $configurationProcessor): void
     {
         $configurationProcessor->process([['name' => 'theme/name']])->willReturn(['name' => 'theme/name']);
 
@@ -53,7 +53,7 @@ final class TestThemeConfigurationManagerSpec extends ObjectBehavior
         $this->findAll()->shouldHaveCount(1);
     }
 
-    function its_theme_configurations_can_be_removed(ConfigurationProcessorInterface $configurationProcessor): void
+    public function its_theme_configurations_can_be_removed(ConfigurationProcessorInterface $configurationProcessor): void
     {
         $configurationProcessor->process([['name' => 'theme/name']])->willReturn(['name' => 'theme/name']);
 
@@ -63,7 +63,7 @@ final class TestThemeConfigurationManagerSpec extends ObjectBehavior
         $this->findAll()->shouldReturn([]);
     }
 
-    function it_clears_all_theme_configurations(ConfigurationProcessorInterface $configurationProcessor): void
+    public function it_clears_all_theme_configurations(ConfigurationProcessorInterface $configurationProcessor): void
     {
         $configurationProcessor->process([['name' => 'theme/name1']])->willReturn(['name' => 'theme/name1']);
         $configurationProcessor->process([['name' => 'theme/name2']])->willReturn(['name' => 'theme/name2']);
@@ -76,7 +76,7 @@ final class TestThemeConfigurationManagerSpec extends ObjectBehavior
         $this->findAll()->shouldReturn([]);
     }
 
-    function it_does_not_throw_any_exception_if_clearing_unexisting_storage(): void
+    public function it_does_not_throw_any_exception_if_clearing_unexisting_storage(): void
     {
         $this->clear();
     }

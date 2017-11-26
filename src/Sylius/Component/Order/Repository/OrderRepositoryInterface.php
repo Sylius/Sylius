@@ -25,7 +25,6 @@ interface OrderRepositoryInterface extends RepositoryInterface
     public function countPlacedOrders(): int;
 
     /**
-     * @param int $count
      *
      * @return array|OrderInterface[]
      */
@@ -48,12 +47,10 @@ interface OrderRepositoryInterface extends RepositoryInterface
     /**
      * @param mixed $id
      *
-     * @return OrderInterface|null
      */
     public function findCartById($id): ?OrderInterface;
 
     /**
-     * @param \DateTimeInterface $terminalDate
      *
      * @return array|OrderInterface[]
      */

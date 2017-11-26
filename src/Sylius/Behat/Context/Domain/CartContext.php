@@ -46,7 +46,7 @@ final class CartContext implements Context
     /**
      * @Given /^(?:|he|she) abandoned (the cart) (\d+) (day|days|hour|hours) ago$/
      */
-    public function theyAbandonedTheirCart(OrderInterface $cart, $amount, $time)
+    public function theyAbandonedTheirCart(OrderInterface $cart, $amount, $time): void
     {
         $cart->setUpdatedAt(new \DateTime('-' . $amount . ' ' . $time));
         $this->orderManager->flush();
@@ -55,7 +55,7 @@ final class CartContext implements Context
     /**
      * @Then /^(this cart) should be automatically deleted$/
      */
-    public function thisCartShouldBeAutomaticallyDeleted(OrderInterface $cart)
+    public function thisCartShouldBeAutomaticallyDeleted(OrderInterface $cart): void
     {
         $this->expiredCartsRemover->remove();
 
@@ -65,7 +65,7 @@ final class CartContext implements Context
     /**
      * @Then /^(this cart) should not be deleted$/
      */
-    public function thisCartShouldNotBeDeleted(OrderInterface $cart)
+    public function thisCartShouldNotBeDeleted(OrderInterface $cart): void
     {
         $this->expiredCartsRemover->remove();
 

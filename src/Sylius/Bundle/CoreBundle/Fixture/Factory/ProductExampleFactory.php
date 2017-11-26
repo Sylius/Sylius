@@ -271,7 +271,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     }
 
     /**
-     * @param ProductInterface $product
      * @param array $options
      */
     private function createTranslations(ProductInterface $product, array $options): void
@@ -288,7 +287,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     }
 
     /**
-     * @param ProductInterface $product
      * @param array $options
      */
     private function createRelations(ProductInterface $product, array $options): void
@@ -307,7 +305,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     }
 
     /**
-     * @param ProductInterface $product
      * @param array $options
      */
     private function createVariants(ProductInterface $product, array $options): void
@@ -352,7 +349,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     }
 
     /**
-     * @param ProductInterface $product
      * @param array $options
      */
     private function createImages(ProductInterface $product, array $options): void
@@ -373,7 +369,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     }
 
     /**
-     * @param ProductInterface $product
      * @param array $options
      */
     private function createProductTaxons(ProductInterface $product, array $options): void
@@ -400,7 +395,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     }
 
     /**
-     * @param ProductAttributeInterface $productAttribute
      *
      * @return mixed
      *

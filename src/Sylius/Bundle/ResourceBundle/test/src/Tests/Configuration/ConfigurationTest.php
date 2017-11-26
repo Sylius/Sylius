@@ -23,7 +23,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_does_not_break_if_not_customized()
+    public function it_does_not_break_if_not_customized(): void
     {
         $this->assertConfigurationIsValid(
             [
@@ -35,7 +35,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_has_default_authorization_checker()
+    public function it_has_default_authorization_checker(): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -49,7 +49,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_authorization_checker_can_be_customized()
+    public function its_authorization_checker_can_be_customized(): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -63,7 +63,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_authorization_checker_cannot_be_empty()
+    public function its_authorization_checker_cannot_be_empty(): void
     {
         $this->assertPartialConfigurationIsInvalid(
             [

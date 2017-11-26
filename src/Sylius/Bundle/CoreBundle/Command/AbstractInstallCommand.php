@@ -35,7 +35,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $application = $this->getApplication();
         $application->setCatchExceptions(false);
@@ -44,7 +44,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param string $id
      *
      * @return object
      */
@@ -72,7 +71,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     /**
      * @param array $headers
      * @param array $rows
-     * @param OutputInterface $output
      */
     protected function renderTable(array $headers, array $rows, OutputInterface $output): void
     {
@@ -105,7 +103,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
 
     /**
      * @param array $commands
-     * @param OutputInterface $output
      * @param bool $displayProgress
      */
     protected function runCommands(array $commands, OutputInterface $output, bool $displayProgress = true): void

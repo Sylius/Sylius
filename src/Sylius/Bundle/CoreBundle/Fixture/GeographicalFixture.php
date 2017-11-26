@@ -189,9 +189,8 @@ class GeographicalFixture extends AbstractFixture
 
     /**
      * @param array $zones
-     * @param \Closure $zoneValidator
      */
-    private function loadZones(array $zones, \Closure $zoneValidator)
+    private function loadZones(array $zones, \Closure $zoneValidator): void
     {
         foreach ($zones as $zoneCode => $zoneOptions) {
             $zoneName = $zoneOptions['name'];
@@ -221,9 +220,8 @@ class GeographicalFixture extends AbstractFixture
 
     /**
      * @param array $provinces
-     * @param CountryInterface $country
      */
-    private function loadProvincesForCountry(array $provinces, CountryInterface $country)
+    private function loadProvincesForCountry(array $provinces, CountryInterface $country): void
     {
         foreach ($provinces as $provinceCode => $provinceName) {
             /** @var ProvinceInterface $province */
@@ -247,7 +245,7 @@ class GeographicalFixture extends AbstractFixture
      *
      * @throws \InvalidArgumentException
      */
-    private function getZoneType(array $zoneOptions)
+    private function getZoneType(array $zoneOptions): string
     {
         switch (true) {
             case count($zoneOptions['countries']) > 0:
@@ -266,7 +264,7 @@ class GeographicalFixture extends AbstractFixture
      *
      * @return array
      */
-    private function getZoneMembers(array $zoneOptions)
+    private function getZoneMembers(array $zoneOptions): array
     {
         $zoneType = $this->getZoneType($zoneOptions);
 
@@ -287,10 +285,10 @@ class GeographicalFixture extends AbstractFixture
      *
      * @return \Closure
      */
-    private function provideZoneValidator(array $options)
+    private function provideZoneValidator(array $options): \Closure
     {
         $memberValidators = [
-            ZoneInterface::TYPE_COUNTRY => function ($countryCode) use ($options) {
+            ZoneInterface::TYPE_COUNTRY => function ($countryCode) use ($options): void {
                 if (in_array($countryCode, $options['countries'], true)) {
                     return;
                 }
@@ -301,7 +299,7 @@ class GeographicalFixture extends AbstractFixture
                     implode(', ', $options['countries'])
                 ));
             },
-            ZoneInterface::TYPE_PROVINCE => function ($provinceCode) use ($options) {
+            ZoneInterface::TYPE_PROVINCE => function ($provinceCode) use ($options): void {
                 $foundProvinces = [];
                 foreach ($options['provinces'] as $provinces) {
                     if (isset($provinces[$provinceCode])) {
@@ -317,7 +315,7 @@ class GeographicalFixture extends AbstractFixture
                     implode(', ', $options['countries'])
                 ));
             },
-            ZoneInterface::TYPE_ZONE => function ($zoneCode) use ($options) {
+            ZoneInterface::TYPE_ZONE => function ($zoneCode) use ($options): void {
                 if (isset($options['zones'][$zoneCode])) {
                     return;
                 }
@@ -330,7 +328,7 @@ class GeographicalFixture extends AbstractFixture
             },
         ];
 
-        return function (array $zoneOptions) use ($memberValidators) {
+        return function (array $zoneOptions) use ($memberValidators): void {
             $zoneType = $this->getZoneType($zoneOptions);
             $zoneMembers = $this->getZoneMembers($zoneOptions);
 

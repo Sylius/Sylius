@@ -118,7 +118,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function removeProduct($productName)
+    public function removeProduct($productName): void
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
         $itemElement->find('css', 'button.sylius-cart-remove-button')->press();
@@ -127,7 +127,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function applyCoupon($couponCode)
+    public function applyCoupon($couponCode): void
     {
         $this->getElement('coupon_field')->setValue($couponCode);
         $this->getElement('apply_coupon_button')->press();
@@ -136,7 +136,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeQuantity($productName, $quantity)
+    public function changeQuantity($productName, $quantity): void
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
         $itemElement->find('css', 'input[type=number]')->setValue($quantity);
@@ -241,12 +241,12 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return trim($cartTotalText);
     }
 
-    public function clearCart()
+    public function clearCart(): void
     {
         $this->getElement('clear_button')->click();
     }
 
-    public function updateCart()
+    public function updateCart(): void
     {
         $this->getElement('update_button')->click();
     }
@@ -254,7 +254,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function waitForRedirect($timeout)
+    public function waitForRedirect($timeout): void
     {
         $this->getDocument()->waitFor($timeout, function () {
             return $this->isOpen();
@@ -305,7 +305,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      *
      * @throws ElementNotFoundException
      */
-    private function hasItemWith($attributeName, $selector)
+    private function hasItemWith($attributeName, $selector): bool
     {
         $itemsAttributes = $this->getElement('cart_items')->findAll('css', $selector);
 
@@ -323,7 +323,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      *
      * @return int
      */
-    private function getPriceFromString($price)
+    private function getPriceFromString(string $price): int
     {
         return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }

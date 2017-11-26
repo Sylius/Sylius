@@ -25,7 +25,7 @@ use Sylius\Component\Core\Storage\CartStorageInterface;
 
 final class UserImpersonatedListenerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
         OrderRepositoryInterface $orderRepository
@@ -33,7 +33,7 @@ final class UserImpersonatedListenerSpec extends ObjectBehavior
         $this->beConstructedWith($cartStorage, $channelContext, $orderRepository);
     }
 
-    function it_sets_cart_id_of_an_impersonated_customer_in_session(
+    public function it_sets_cart_id_of_an_impersonated_customer_in_session(
         CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
         OrderRepositoryInterface $orderRepository,
@@ -55,7 +55,7 @@ final class UserImpersonatedListenerSpec extends ObjectBehavior
         $this->onUserImpersonated($event);
     }
 
-    function it_removes_the_current_cart_id_if_an_impersonated_customer_has_no_cart(
+    public function it_removes_the_current_cart_id_if_an_impersonated_customer_has_no_cart(
         CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
         OrderRepositoryInterface $orderRepository,

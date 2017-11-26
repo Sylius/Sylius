@@ -66,7 +66,6 @@ final class OptionsParser implements OptionsParserInterface
 
     /**
      * @param mixed $parameter
-     * @param Request $request
      * @param mixed $data
      *
      * @return mixed
@@ -93,7 +92,6 @@ final class OptionsParser implements OptionsParserInterface
     }
 
     /**
-     * @param string $expression
      * @param Request $request
      *
      * @return mixed
@@ -110,7 +108,6 @@ final class OptionsParser implements OptionsParserInterface
     }
 
     /**
-     * @param string $value
      * @param mixed $data
      *
      * @return mixed

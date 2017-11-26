@@ -22,12 +22,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class LockingListenerSpec extends ObjectBehavior
 {
-    function let(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver): void
+    public function let(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver): void
     {
         $this->beConstructedWith($manager, $variantResolver);
     }
 
-    function it_locks_versioned_entity(
+    public function it_locks_versioned_entity(
         EntityManagerInterface $manager,
         GenericEvent $event,
         VersionedInterface $subject
@@ -40,7 +40,7 @@ final class LockingListenerSpec extends ObjectBehavior
         $this->lock($event);
     }
 
-    function it_throws_an_invalid_argument_exception_if_event_subject_is_not_versioned(GenericEvent $event): void
+    public function it_throws_an_invalid_argument_exception_if_event_subject_is_not_versioned(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject');
 

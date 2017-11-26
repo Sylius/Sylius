@@ -23,7 +23,7 @@ interface TimestampableInterface
     /**
      * @param \DateTimeInterface|null $createdAt
      */
-    public function setCreatedAt(?\DateTimeInterface $createdAt);
+    public function setCreatedAt(?\DateTimeInterface $createdAt): void;
 
     /**
      * @return \DateTimeInterface|null
@@ -33,5 +33,5 @@ interface TimestampableInterface
     /**
      * @param \DateTimeInterface|null $updatedAt
      */
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt);
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void;
 }

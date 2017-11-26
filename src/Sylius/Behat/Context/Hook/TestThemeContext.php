@@ -34,7 +34,7 @@ final class TestThemeContext implements Context
     /**
      * @BeforeScenario
      */
-    public function purgeTestThemes()
+    public function purgeTestThemes(): void
     {
         $this->testThemeConfigurationManager->clear();
     }

@@ -19,17 +19,17 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 
 final class LimitingOrderItemQuantityModifierSpec extends ObjectBehavior
 {
-    function let(OrderItemQuantityModifierInterface $itemQuantityModifier): void
+    public function let(OrderItemQuantityModifierInterface $itemQuantityModifier): void
     {
         $this->beConstructedWith($itemQuantityModifier, 1000);
     }
 
-    function it_implements_order_item_modifier_interface(): void
+    public function it_implements_order_item_modifier_interface(): void
     {
         $this->shouldImplement(OrderItemQuantityModifierInterface::class);
     }
 
-    function it_restricts_max_item_quantity_to_the_stated_limit(
+    public function it_restricts_max_item_quantity_to_the_stated_limit(
         OrderItemQuantityModifierInterface $itemQuantityModifier,
         OrderItemInterface $orderItem
     ): void {

@@ -188,7 +188,6 @@ EOT
     }
 
     /**
-     * @param InputInterface $input
      * @param OutputInterface $output
      *
      * @return mixed

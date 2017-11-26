@@ -136,14 +136,12 @@ final class ResourceLoader implements LoaderInterface
     }
 
     /**
-     * @param MetadataInterface $metadata
      * @param array $configuration
      * @param string $path
      * @param string $actionName
      * @param array $methods
      * @param bool $isApi
      *
-     * @return Route
      */
     private function createRoute(
         MetadataInterface $metadata,
@@ -214,11 +212,9 @@ final class ResourceLoader implements LoaderInterface
     }
 
     /**
-     * @param MetadataInterface $metadata
      * @param array $configuration
      * @param string $actionName
      *
-     * @return string
      */
     private function getRouteName(MetadataInterface $metadata, array $configuration, string $actionName): string
     {

@@ -25,7 +25,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FactoryInterface $productAssociationFactory,
         ProductRepositoryInterface $productRepository,
         RepositoryInterface $productAssociationTypeRepository
@@ -37,17 +37,17 @@ final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
         );
     }
 
-    function it_is_a_data_transformer(): void
+    public function it_is_a_data_transformer(): void
     {
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
-    function it_transforms_null_to_empty_string(): void
+    public function it_transforms_null_to_empty_string(): void
     {
         $this->transform(null)->shouldReturn('');
     }
 
-    function it_transforms_product_associations_to_array(
+    public function it_transforms_product_associations_to_array(
         ProductAssociationInterface $productAssociation,
         ProductAssociationTypeInterface $productAssociationType,
         ProductInterface $firstAssociatedProduct,
@@ -71,12 +71,12 @@ final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
         ]);
     }
 
-    function it_reverse_transforms_null_into_null(): void
+    public function it_reverse_transforms_null_into_null(): void
     {
         $this->reverseTransform(null)->shouldReturn(null);
     }
 
-    function it_reverse_transforms_empty_string_into_null(): void
+    public function it_reverse_transforms_empty_string_into_null(): void
     {
         $this->reverseTransform('')->shouldReturn(null);
     }

@@ -35,7 +35,7 @@ final class NotificationContext implements Context
     /**
      * @Then I should be notified that it has been successfully created
      */
-    public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
+    public function iShouldBeNotifiedItHasBeenSuccessfullyCreated(): void
     {
         $this->notificationChecker->checkNotification('has been successfully created.', NotificationType::success());
     }
@@ -43,7 +43,7 @@ final class NotificationContext implements Context
     /**
      * @Then I should be notified that it has been successfully edited
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
         $this->notificationChecker->checkNotification('has been successfully updated.', NotificationType::success());
     }
@@ -51,7 +51,7 @@ final class NotificationContext implements Context
     /**
      * @Then I should be notified that it has been successfully deleted
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         $this->notificationChecker->checkNotification('has been successfully deleted.', NotificationType::success());
     }
@@ -59,7 +59,7 @@ final class NotificationContext implements Context
     /**
      * @Then I should be notified that they have been successfully deleted
      */
-    public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted()
+    public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted(): void
     {
         $this->notificationChecker->checkNotification('have been successfully deleted.', NotificationType::success());
     }

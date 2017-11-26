@@ -26,7 +26,6 @@ class CartItemType extends AbstractResourceType
     private $dataMapper;
 
     /**
-     * @param string $dataClass
      * @param array $validationGroups
      * @param DataMapperInterface $dataMapper
      */

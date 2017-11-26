@@ -22,29 +22,29 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ReviewFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory): void
+    public function let(FactoryInterface $factory): void
     {
         $this->beConstructedWith($factory);
     }
 
-    function it_is_a_resource_factory(): void
+    public function it_is_a_resource_factory(): void
     {
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_implements_review_factory_interface(): void
+    public function it_implements_review_factory_interface(): void
     {
         $this->shouldImplement(ReviewFactoryInterface::class);
     }
 
-    function it_creates_a_new_review(FactoryInterface $factory, ReviewInterface $review): void
+    public function it_creates_a_new_review(FactoryInterface $factory, ReviewInterface $review): void
     {
         $factory->createNew()->willReturn($review);
 
         $this->createNew()->shouldReturn($review);
     }
 
-    function it_creates_a_review_with_subject(
+    public function it_creates_a_review_with_subject(
         FactoryInterface $factory,
         ReviewableInterface $subject,
         ReviewInterface $review
@@ -55,7 +55,7 @@ final class ReviewFactorySpec extends ObjectBehavior
         $this->createForSubject($subject)->shouldReturn($review);
     }
 
-    function it_creates_a_review_with_subject_and_reviewer(
+    public function it_creates_a_review_with_subject_and_reviewer(
         FactoryInterface $factory,
         ReviewableInterface $subject,
         ReviewInterface $review,

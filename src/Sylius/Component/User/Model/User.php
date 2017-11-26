@@ -511,7 +511,6 @@ class User implements UserInterface
     /**
      * The serialized data have to contain the fields used by the equals method and the username.
      *
-     * @return string
      */
     public function serialize(): string
     {
@@ -529,7 +528,7 @@ class User implements UserInterface
     /**
      * @param string $serialized
      */
-    public function unserialize($serialized): void
+    public function unserialize(string $serialized): void
     {
         $data = unserialize($serialized);
         // add a few extra elements in the array to ensure that we have enough keys when unserializing

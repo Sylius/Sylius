@@ -38,7 +38,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function logOut()
+    public function logOut(): void
     {
         $this->getElement('logout_button')->click();
     }
@@ -83,7 +83,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function switchCurrency($currencyCode)
+    public function switchCurrency($currencyCode): void
     {
         try {
             $this->getElement('currency_selector')->click(); // Needed for javascript scenarios
@@ -117,7 +117,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function switchLocale($localeCode)
+    public function switchLocale($localeCode): void
     {
         $this->getElement('locale_selector')->clickLink($localeCode);
     }

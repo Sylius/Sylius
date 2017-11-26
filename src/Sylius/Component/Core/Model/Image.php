@@ -43,7 +43,7 @@ abstract class Image implements ImageInterface
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }

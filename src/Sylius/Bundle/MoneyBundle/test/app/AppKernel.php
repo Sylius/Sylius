@@ -10,6 +10,7 @@
  */
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Sylius package.
  *
@@ -47,7 +48,7 @@ class AppKernel extends Kernel
     /**
      * {@inheritdoc}
      */
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(__DIR__ . '/config/config.yml');
     }

@@ -100,10 +100,8 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
     }
 
     /**
-     * @param string $type
      * @param array $configuration
      *
-     * @return PromotionActionInterface
      */
     private function createAction(string $type, array $configuration): PromotionActionInterface
     {

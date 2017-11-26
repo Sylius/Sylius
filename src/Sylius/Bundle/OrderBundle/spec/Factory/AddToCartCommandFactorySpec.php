@@ -21,12 +21,12 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 
 final class AddToCartCommandFactorySpec extends ObjectBehavior
 {
-    function it_is_add_to_cart_command_factory(): void
+    public function it_is_add_to_cart_command_factory(): void
     {
         $this->shouldImplement(AddToCartCommandFactoryInterface::class);
     }
 
-    function it_creates_add_to_cart_command_with_cart_and_cart_item(
+    public function it_creates_add_to_cart_command_with_cart_and_cart_item(
         OrderInterface $cart,
         OrderItemInterface $cartItem
     ): void {

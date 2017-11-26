@@ -35,7 +35,7 @@ final class SharedSecurityService implements SharedSecurityServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function performActionAsAdminUser(AdminUserInterface $adminUser, callable $action)
+    public function performActionAsAdminUser(AdminUserInterface $adminUser, callable $action): void
     {
         $this->performActionAs($this->adminSecurityService, $adminUser, $action);
     }
@@ -45,7 +45,7 @@ final class SharedSecurityService implements SharedSecurityServiceInterface
      * @param UserInterface $user
      * @param callable $action
      */
-    private function performActionAs(SecurityServiceInterface $securityService, UserInterface $user, callable $action)
+    private function performActionAs(SecurityServiceInterface $securityService, UserInterface $user, callable $action): void
     {
         try {
             $token = $securityService->getCurrentToken();

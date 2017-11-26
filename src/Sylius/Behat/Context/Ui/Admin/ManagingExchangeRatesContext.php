@@ -56,7 +56,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Given I want to add a new exchange rate
      */
-    public function iWantToAddNewExchangeRate()
+    public function iWantToAddNewExchangeRate(): void
     {
         $this->createPage->open();
     }
@@ -65,7 +65,7 @@ final class ManagingExchangeRatesContext implements Context
      * @Given /^I want to edit (this exchange rate)$/
      * @When /^I am editing (this exchange rate)$/
      */
-    public function iWantToEditThisExchangeRate(ExchangeRateInterface $exchangeRate)
+    public function iWantToEditThisExchangeRate(ExchangeRateInterface $exchangeRate): void
     {
         $this->updatePage->open(['id' => $exchangeRate->getId()]);
     }
@@ -75,7 +75,7 @@ final class ManagingExchangeRatesContext implements Context
      * @When I browse exchange rates
      * @When I browse exchange rates of the store
      */
-    public function iWantToBrowseExchangeRatesOfTheStore()
+    public function iWantToBrowseExchangeRatesOfTheStore(): void
     {
         $this->indexPage->open();
     }
@@ -84,7 +84,7 @@ final class ManagingExchangeRatesContext implements Context
      * @When /^I specify its ratio as (-?[0-9\.]+)$/
      * @When I don't specify its ratio
      */
-    public function iSpecifyItsRatioAs($ratio = null)
+    public function iSpecifyItsRatioAs($ratio = null): void
     {
         $this->createPage->specifyRatio($ratio);
     }
@@ -92,7 +92,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @When I choose :currencyCode as the source currency
      */
-    public function iChooseAsSourceCurrency($currencyCode)
+    public function iChooseAsSourceCurrency($currencyCode): void
     {
         $this->createPage->chooseSourceCurrency($currencyCode);
     }
@@ -100,7 +100,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @When I choose :currencyCode as the target currency
      */
-    public function iChooseAsTargetCurrency($currencyCode)
+    public function iChooseAsTargetCurrency($currencyCode): void
     {
         $this->createPage->chooseTargetCurrency($currencyCode);
     }
@@ -108,7 +108,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @When I( try to) add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -116,7 +116,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @When I change ratio to :ratio
      */
-    public function iChangeRatioTo($ratio)
+    public function iChangeRatioTo($ratio): void
     {
         $this->updatePage->changeRatio((float) $ratio);
     }
@@ -124,7 +124,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @When I save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -132,7 +132,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @When I delete the exchange rate between :sourceCurrencyName and :targetCurrencyName
      */
-    public function iDeleteTheExchangeRateBetweenAnd($sourceCurrencyName, $targetCurrencyName)
+    public function iDeleteTheExchangeRateBetweenAnd($sourceCurrencyName, $targetCurrencyName): void
     {
         $this->indexPage->open();
 
@@ -145,7 +145,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @When I choose :currencyName as a currency filter
      */
-    public function iChooseCurrencyAsACurrencyFilter($currencyName)
+    public function iChooseCurrencyAsACurrencyFilter($currencyName): void
     {
         $this->indexPage->chooseCurrencyFilter($currencyName);
     }
@@ -153,7 +153,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @When I filter
      */
-    public function iFilter()
+    public function iFilter(): void
     {
         $this->indexPage->filter();
     }
@@ -180,7 +180,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then I should see :count exchange rates on the list
      */
-    public function iShouldSeeExchangeRatesOnTheList($count = 0)
+    public function iShouldSeeExchangeRatesOnTheList($count = 0): void
     {
         $this->assertCountOfExchangeRatesOnTheList($count);
     }
@@ -189,7 +189,7 @@ final class ManagingExchangeRatesContext implements Context
      * @Then I should see a single exchange rate in the list
      * @Then I should( still) see one exchange rate on the list
      */
-    public function iShouldSeeOneExchangeRateOnTheList()
+    public function iShouldSeeOneExchangeRateOnTheList(): void
     {
         $this->indexPage->open();
 
@@ -199,7 +199,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then the exchange rate with ratio :ratio between :sourceCurrency and :targetCurrency should appear in the store
      */
-    public function theExchangeRateBetweenAndShouldAppearInTheStore($ratio, CurrencyInterface $sourceCurrency, CurrencyInterface $targetCurrency)
+    public function theExchangeRateBetweenAndShouldAppearInTheStore($ratio, CurrencyInterface $sourceCurrency, CurrencyInterface $targetCurrency): void
     {
         $this->indexPage->open();
 
@@ -223,7 +223,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then it should have a ratio of :ratio
      */
-    public function thisExchangeRateShouldHaveRatioOf($ratio)
+    public function thisExchangeRateShouldHaveRatioOf($ratio): void
     {
         Assert::eq($this->updatePage->getRatio(), $ratio);
     }
@@ -231,7 +231,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then /^(this exchange rate) should no longer be on the list$/
      */
-    public function thisExchangeRateShouldNoLongerBeOnTheList(ExchangeRateInterface $exchangeRate)
+    public function thisExchangeRateShouldNoLongerBeOnTheList(ExchangeRateInterface $exchangeRate): void
     {
         $this->assertExchangeRateIsNotOnTheList(
             $exchangeRate->getSourceCurrency()->getName(),
@@ -242,7 +242,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then the exchange rate between :sourceCurrencyName and :targetCurrencyName should not be added
      */
-    public function theExchangeRateBetweenAndShouldNotBeAdded($sourceCurrencyName, $targetCurrencyName)
+    public function theExchangeRateBetweenAndShouldNotBeAdded($sourceCurrencyName, $targetCurrencyName): void
     {
         $this->indexPage->open();
 
@@ -252,7 +252,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then /^(this exchange rate) should have a ratio of ([0-9\.]+)$/
      */
-    public function thisExchangeRateShouldHaveARatioOf(ExchangeRateInterface $exchangeRate, $ratio)
+    public function thisExchangeRateShouldHaveARatioOf(ExchangeRateInterface $exchangeRate, $ratio): void
     {
         $sourceCurrencyName = $exchangeRate->getSourceCurrency()->getName();
         $targetCurrencyName = $exchangeRate->getTargetCurrency()->getName();
@@ -263,7 +263,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then I should see that the source currency is disabled
      */
-    public function iShouldSeeThatTheSourceCurrencyIsDisabled()
+    public function iShouldSeeThatTheSourceCurrencyIsDisabled(): void
     {
         Assert::true($this->updatePage->isSourceCurrencyDisabled());
     }
@@ -271,7 +271,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then I should see that the target currency is disabled
      */
-    public function iShouldSeeThatTheTargetCurrencyIsDisabled()
+    public function iShouldSeeThatTheTargetCurrencyIsDisabled(): void
     {
         Assert::true($this->updatePage->isTargetCurrencyDisabled());
     }
@@ -279,7 +279,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then /^I should be notified that ([^"]+) is required$/
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired($element): void
     {
         Assert::same(
             $this->createPage->getValidationMessage($element),
@@ -290,7 +290,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then I should be notified that the ratio must be greater than zero
      */
-    public function iShouldBeNotifiedThatRatioMustBeGreaterThanZero()
+    public function iShouldBeNotifiedThatRatioMustBeGreaterThanZero(): void
     {
         Assert::same($this->createPage->getValidationMessage('ratio'), 'The ratio must be greater than 0.');
     }
@@ -298,7 +298,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then I should be notified that source and target currencies must differ
      */
-    public function iShouldBeNotifiedThatSourceAndTargetCurrenciesMustDiffer()
+    public function iShouldBeNotifiedThatSourceAndTargetCurrenciesMustDiffer(): void
     {
         $this->assertFormHasValidationMessage('The source and target currencies must differ.');
     }
@@ -306,7 +306,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then I should be notified that the currency pair must be unique
      */
-    public function iShouldBeNotifiedThatTheCurrencyPairMustBeUnique()
+    public function iShouldBeNotifiedThatTheCurrencyPairMustBeUnique(): void
     {
         $this->assertFormHasValidationMessage('The currency pair must be unique.');
     }
@@ -318,7 +318,7 @@ final class ManagingExchangeRatesContext implements Context
      *
      * @throws \InvalidArgumentException
      */
-    private function assertExchangeRateWithRatioIsOnTheList($ratio, $sourceCurrencyName, $targetCurrencyName)
+    private function assertExchangeRateWithRatioIsOnTheList(float $ratio, string $sourceCurrencyName, string $targetCurrencyName): void
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([
@@ -341,7 +341,7 @@ final class ManagingExchangeRatesContext implements Context
      *
      * @throws \InvalidArgumentException
      */
-    private function assertExchangeRateIsNotOnTheList($sourceCurrencyName, $targetCurrencyName)
+    private function assertExchangeRateIsNotOnTheList(string $sourceCurrencyName, string $targetCurrencyName): void
     {
         Assert::false(
             $this->indexPage->isSingleResourceOnPage([
@@ -361,7 +361,7 @@ final class ManagingExchangeRatesContext implements Context
      *
      * @throws \InvalidArgumentException
      */
-    private function assertCountOfExchangeRatesOnTheList($count)
+    private function assertCountOfExchangeRatesOnTheList(int $count): void
     {
         Assert::same(
             $this->indexPage->countItems(),
@@ -375,7 +375,7 @@ final class ManagingExchangeRatesContext implements Context
      *
      * @throws \InvalidArgumentException
      */
-    private function assertFormHasValidationMessage($expectedMessage)
+    private function assertFormHasValidationMessage(string $expectedMessage): void
     {
         Assert::true(
             $this->createPage->hasFormValidationError($expectedMessage),

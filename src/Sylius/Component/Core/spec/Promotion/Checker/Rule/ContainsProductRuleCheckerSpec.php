@@ -24,12 +24,12 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 final class ContainsProductRuleCheckerSpec extends ObjectBehavior
 {
-    function it_implements_a_rule_checker_interface(): void
+    public function it_implements_a_rule_checker_interface(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_throws_an_exception_if_the_promotion_subject_is_not_an_order(PromotionSubjectInterface $subject): void
+    public function it_throws_an_exception_if_the_promotion_subject_is_not_an_order(PromotionSubjectInterface $subject): void
     {
         $this
             ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))
@@ -37,7 +37,7 @@ final class ContainsProductRuleCheckerSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_true_if_product_is_right(
+    public function it_returns_true_if_product_is_right(
         OrderInterface $subject,
         OrderItemInterface $firstOrderItem,
         OrderItemInterface $secondOrderItem,
@@ -53,7 +53,7 @@ final class ContainsProductRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['product_code' => 'LACROSSE_SHAFT'])->shouldReturn(true);
     }
 
-    function it_returns_false_if_product_is_wrong(
+    public function it_returns_false_if_product_is_wrong(
         OrderInterface $subject,
         OrderItemInterface $firstOrderItem,
         OrderItemInterface $secondOrderItem,

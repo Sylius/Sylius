@@ -35,7 +35,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function addToCart()
+    public function addToCart(): void
     {
         $this->getDocument()->pressButton('Add to cart');
 
@@ -47,7 +47,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function addToCartWithQuantity($quantity)
+    public function addToCartWithQuantity($quantity): void
     {
         $this->getDocument()->fillField('Quantity', $quantity);
         $this->getDocument()->pressButton('Add to cart');
@@ -60,7 +60,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function addToCartWithVariant($variant)
+    public function addToCartWithVariant($variant): void
     {
         $this->selectVariant($variant);
 
@@ -74,7 +74,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function addToCartWithOption(ProductOptionInterface $option, $optionValue)
+    public function addToCartWithOption(ProductOptionInterface $option, $optionValue): void
     {
         $select = $this->getDocument()->find('css', sprintf('select#sylius_add_to_cart_cartItem_variant_%s', $option->getCode()));
 
@@ -85,7 +85,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function visit($url)
+    public function visit($url): void
     {
         $absoluteUrl = $this->makePathAbsolute($url);
         $this->getDriver()->visit($absoluteUrl);
@@ -167,7 +167,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function waitForValidationErrors($timeout)
+    public function waitForValidationErrors($timeout): void
     {
         $errorsContainer = $this->getElement('selecting_variants');
 
@@ -211,7 +211,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectOption($optionName, $optionValue)
+    public function selectOption($optionName, $optionValue): void
     {
         $optionElement = $this->getElement('option_select', ['%option-name%' => strtoupper($optionName)]);
         $optionElement->selectOption($optionValue);
@@ -220,7 +220,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectVariant($variantName)
+    public function selectVariant($variantName): void
     {
         $variantRadio = $this->getElement('variant_radio', ['%variant-name%' => $variantName]);
 
@@ -293,7 +293,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function open(array $urlParameters = [])
+    public function open(array $urlParameters = []): void
     {
         $start = microtime(true);
         $end = $start + 5;

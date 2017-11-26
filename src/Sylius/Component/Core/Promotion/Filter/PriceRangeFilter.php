@@ -54,10 +54,8 @@ final class PriceRangeFilter implements FilterInterface
     }
 
     /**
-     * @param ProductVariantInterface $variant
      * @param array $configuration
      *
-     * @return bool
      */
     private function isItemVariantInPriceRange(ProductVariantInterface $variant, array $configuration): bool
     {
@@ -74,7 +72,6 @@ final class PriceRangeFilter implements FilterInterface
     /**
      * @param array $configuration
      *
-     * @return bool
      */
     private function isConfigured(array $configuration): bool
     {

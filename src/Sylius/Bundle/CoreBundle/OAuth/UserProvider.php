@@ -130,9 +130,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     /**
      * Ad-hoc creation of user.
      *
-     * @param UserResponseInterface $response
      *
-     * @return SyliusUserInterface
      */
     private function createUserByOAuthUserResponse(UserResponseInterface $response): SyliusUserInterface
     {
@@ -180,10 +178,8 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     /**
      * Attach OAuth sign-in provider account to existing user.
      *
-     * @param UserInterface $user
      * @param UserResponseInterface $response
      *
-     * @return UserInterface
      */
     private function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response): UserInterface
     {

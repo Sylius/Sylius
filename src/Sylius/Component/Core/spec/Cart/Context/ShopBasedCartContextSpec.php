@@ -27,17 +27,17 @@ use Sylius\Component\Order\Context\CartNotFoundException;
 
 final class ShopBasedCartContextSpec extends ObjectBehavior
 {
-    function let(CartContextInterface $cartContext, ShopperContextInterface $shopperContext): void
+    public function let(CartContextInterface $cartContext, ShopperContextInterface $shopperContext): void
     {
         $this->beConstructedWith($cartContext, $shopperContext);
     }
 
-    function it_implements_a_cart_context_interface(): void
+    public function it_implements_a_cart_context_interface(): void
     {
         $this->shouldImplement(CartContextInterface::class);
     }
 
-    function it_creates_a_cart_if_does_not_exist_with_shop_basic_configuration(
+    public function it_creates_a_cart_if_does_not_exist_with_shop_basic_configuration(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         OrderInterface $cart,
@@ -63,7 +63,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function it_creates_a_cart_if_does_not_exist_with_shop_basic_configuration_and_customer_default_address_if_is_not_null(
+    public function it_creates_a_cart_if_does_not_exist_with_shop_basic_configuration_and_customer_default_address_if_is_not_null(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         AddressInterface $defaultAddress,
@@ -91,7 +91,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function it_throws_a_cart_not_found_exception_if_channel_is_undefined(
+    public function it_throws_a_cart_not_found_exception_if_channel_is_undefined(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         OrderInterface $cart
@@ -105,7 +105,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_a_cart_not_found_exception_if_locale_code_is_undefined(
+    public function it_throws_a_cart_not_found_exception_if_locale_code_is_undefined(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         ChannelInterface $channel,

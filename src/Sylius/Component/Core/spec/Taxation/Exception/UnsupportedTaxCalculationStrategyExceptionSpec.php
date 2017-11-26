@@ -17,12 +17,12 @@ use PhpSpec\ObjectBehavior;
 
 final class UnsupportedTaxCalculationStrategyExceptionSpec extends ObjectBehavior
 {
-    function it_extends_an_exception(): void
+    public function it_extends_an_exception(): void
     {
         $this->shouldBeAnInstanceOf(\RuntimeException::class);
     }
 
-    function it_has_a_message(): void
+    public function it_has_a_message(): void
     {
         $this->getMessage()->shouldReturn('Unsupported tax calculation strategy!');
     }

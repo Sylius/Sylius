@@ -17,19 +17,19 @@ use PhpSpec\ObjectBehavior;
 
 final class ThemeScreenshotSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith('/screenshot/path.jpg');
     }
 
-    function it_has_path(): void
+    public function it_has_path(): void
     {
         $this->beConstructedWith('/my/screenshot.jpg');
 
         $this->getPath()->shouldReturn('/my/screenshot.jpg');
     }
 
-    function it_has_title(): void
+    public function it_has_title(): void
     {
         $this->getTitle()->shouldReturn(null);
 
@@ -37,7 +37,7 @@ final class ThemeScreenshotSpec extends ObjectBehavior
         $this->getTitle()->shouldReturn('Candy shop');
     }
 
-    function it_has_description(): void
+    public function it_has_description(): void
     {
         $this->getDescription()->shouldReturn(null);
 

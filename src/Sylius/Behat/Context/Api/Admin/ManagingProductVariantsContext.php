@@ -45,7 +45,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I look for a variant with :phrase in descriptor within the :product product
      */
-    public function iLookForVariantWithDescriptorWithinProduct($phrase, ProductInterface $product)
+    public function iLookForVariantWithDescriptorWithinProduct($phrase, ProductInterface $product): void
     {
         $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
         $this->client->request(
@@ -60,7 +60,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^I should see (\d+) product variants? on the list$/
      */
-    public function iShouldSeeProductVariantsInTheList($number)
+    public function iShouldSeeProductVariantsInTheList($number): void
     {
         Assert::eq(count($this->getJSONResponse()), $number);
     }
@@ -71,7 +71,7 @@ final class ManagingProductVariantsContext implements Context
      * @Then I should see the product variants named :firstName, :secondName and :thirdName on the list
      * @Then I should see the product variants named :firstName, :secondName, :thirdName and :fourthName on the list
      */
-    public function iShouldSeeTheProductVariantNamedAnd(...$names)
+    public function iShouldSeeTheProductVariantNamedAnd(...$names): void
     {
         $itemsNames = array_map(function ($item) {
             return strstr($item['descriptor'], ' ', true);
@@ -83,7 +83,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should see the product variant labeled :label on the list
      */
-    public function iShouldSeeTheProductVariantLabeledAs($label)
+    public function iShouldSeeTheProductVariantLabeledAs($label): void
     {
         $itemsLabels = array_map(function ($item) {
             return $item['descriptor'];

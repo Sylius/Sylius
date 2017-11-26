@@ -104,7 +104,6 @@ final class OrderPaymentStateResolver implements StateResolverInterface
     }
 
     /**
-     * @param OrderInterface $order
      * @param string $state
      *
      * @return Collection|PaymentInterface[]

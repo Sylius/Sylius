@@ -39,7 +39,7 @@ final class ProductAttributeApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_product_attributes_list_when_access_is_denied()
+    public function it_does_not_allow_to_show_product_attributes_list_when_access_is_denied(): void
     {
         $this->loadFixturesFromFile('resources/product_attributes.yml');
 
@@ -52,7 +52,7 @@ final class ProductAttributeApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_indexing_product_attributes()
+    public function it_allows_indexing_product_attributes(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/product_attributes.yml');
@@ -66,7 +66,7 @@ final class ProductAttributeApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_product_attribute_when_it_does_not_exist()
+    public function it_does_not_allow_to_show_product_attribute_when_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -79,7 +79,7 @@ final class ProductAttributeApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_product_attribute()
+    public function it_allows_showing_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productAttributes = $this->loadFixturesFromFile('resources/product_attributes.yml');
@@ -94,7 +94,7 @@ final class ProductAttributeApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_delete_product_attribute_if_it_does_not_exist()
+    public function it_does_not_allow_to_delete_product_attribute_if_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -107,7 +107,7 @@ final class ProductAttributeApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_delete_product_attribute()
+    public function it_allows_to_delete_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productAttributes = $this->loadFixturesFromFile('resources/product_attributes.yml');
@@ -127,7 +127,7 @@ final class ProductAttributeApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_product_attribute()
+    public function it_allows_to_create_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -156,7 +156,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_product_attribute_without_required_fields()
+    public function it_does_not_allow_to_create_product_attribute_without_required_fields(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -169,7 +169,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_product_attribute_without_type()
+    public function it_does_not_allow_to_create_product_attribute_without_type(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -182,7 +182,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_product_attribute()
+    public function it_allows_to_update_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -218,7 +218,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_partially_update_product_attribute()
+    public function it_allows_to_partially_update_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -253,7 +253,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_change_product_attribute_type()
+    public function it_does_not_allow_to_change_product_attribute_type(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -281,7 +281,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_select_product_attribute()
+    public function it_allows_to_create_select_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -325,17 +325,15 @@ EOT;
     }
 
     /**
-     * @param ProductAttributeInterface $productAttribute
      *
      * @return string
      */
-    private function getProductAttributeUrl(ProductAttributeInterface $productAttribute)
+    private function getProductAttributeUrl(ProductAttributeInterface $productAttribute): string
     {
         return '/api/v1/product-attributes/' . $productAttribute->getCode();
     }
 
     /**
-     * @param Response $response
      * @param array|string[] $expectedChoiceValues
      */
     private function assertSelectChoicesInResponse(Response $response, array $expectedChoiceValues): void

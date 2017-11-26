@@ -35,7 +35,7 @@ final class ReviewChangeListener
     /**
      * @param LifecycleEventArgs $args
      */
-    public function postPersist(LifecycleEventArgs $args)
+    public function postPersist(LifecycleEventArgs $args): void
     {
         $this->recalculateSubjectRating($args);
     }
@@ -43,7 +43,7 @@ final class ReviewChangeListener
     /**
      * @param LifecycleEventArgs $args
      */
-    public function postUpdate(LifecycleEventArgs $args)
+    public function postUpdate(LifecycleEventArgs $args): void
     {
         $this->recalculateSubjectRating($args);
     }
@@ -51,7 +51,7 @@ final class ReviewChangeListener
     /**
      * @param LifecycleEventArgs $args
      */
-    public function postRemove(LifecycleEventArgs $args)
+    public function postRemove(LifecycleEventArgs $args): void
     {
         $this->recalculateSubjectRating($args);
     }

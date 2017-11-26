@@ -29,7 +29,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         TaxRateResolverInterface $taxRateResolver
@@ -37,12 +37,12 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $this->beConstructedWith($calculator, $adjustmentsFactory, $taxRateResolver);
     }
 
-    function it_implements_an_order_shipment_taxes_applicator_interface(): void
+    public function it_implements_an_order_shipment_taxes_applicator_interface(): void
     {
         $this->shouldImplement(OrderTaxesApplicatorInterface::class);
     }
 
-    function it_applies_shipment_taxes_on_order_based_on_shipment_adjustments_promotions_and_rate(
+    public function it_applies_shipment_taxes_on_order_based_on_shipment_adjustments_promotions_and_rate(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         TaxRateResolverInterface $taxRateResolver,
@@ -73,7 +73,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
-    function it_does_nothing_if_the_tax_amount_is_0(
+    public function it_does_nothing_if_the_tax_amount_is_0(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         TaxRateResolverInterface $taxRateResolver,
@@ -97,7 +97,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
-    function it_throws_exception_if_order_has_no_shipment_but_shipment_total_is_greater_than_0(
+    public function it_throws_exception_if_order_has_no_shipment_but_shipment_total_is_greater_than_0(
         OrderInterface $order,
         ZoneInterface $zone
     ): void {
@@ -107,7 +107,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $this->shouldThrow(\LogicException::class)->during('apply', [$order, $zone]);
     }
 
-    function it_does_nothing_if_tax_rate_cannot_be_resolved(
+    public function it_does_nothing_if_tax_rate_cannot_be_resolved(
         CalculatorInterface $calculator,
         TaxRateResolverInterface $taxRateResolver,
         OrderInterface $order,
@@ -127,7 +127,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
-    function it_does_nothing_if_order_has_0_shipping_total(
+    public function it_does_nothing_if_order_has_0_shipping_total(
         TaxRateResolverInterface $taxRateResolver,
         OrderInterface $order,
         ZoneInterface $zone

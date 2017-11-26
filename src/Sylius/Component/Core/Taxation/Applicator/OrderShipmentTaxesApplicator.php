@@ -83,7 +83,7 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
      * @param string $label
      * @param bool $included
      */
-    private function addAdjustment(OrderInterface $order, int $taxAmount, string $label, bool $included)
+    private function addAdjustment(OrderInterface $order, int $taxAmount, string $label, bool $included): void
     {
         /** @var AdjustmentInterface $shippingTaxAdjustment */
         $shippingTaxAdjustment = $this->adjustmentFactory

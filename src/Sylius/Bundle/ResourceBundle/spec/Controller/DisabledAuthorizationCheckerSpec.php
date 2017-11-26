@@ -19,12 +19,12 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 
 final class DisabledAuthorizationCheckerSpec extends ObjectBehavior
 {
-    function it_implements_resource_controller_authorization_checker_interface(): void
+    public function it_implements_resource_controller_authorization_checker_interface(): void
     {
         $this->shouldImplement(AuthorizationCheckerInterface::class);
     }
 
-    function it_always_returns_true(RequestConfiguration $requestConfiguration): void
+    public function it_always_returns_true(RequestConfiguration $requestConfiguration): void
     {
         $this->isGranted($requestConfiguration, 'create')->shouldReturn(true);
         $this->isGranted($requestConfiguration, 'update')->shouldReturn(true);

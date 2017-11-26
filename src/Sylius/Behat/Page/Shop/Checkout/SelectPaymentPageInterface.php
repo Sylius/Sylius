@@ -20,39 +20,39 @@ interface SelectPaymentPageInterface extends SymfonyPageInterface
     /**
      * @param string $paymentMethod
      */
-    public function selectPaymentMethod($paymentMethod);
+    public function selectPaymentMethod(string $paymentMethod): void;
 
     /**
      * @param string $paymentMethodName
      *
      * @return bool
      */
-    public function hasPaymentMethod($paymentMethodName);
+    public function hasPaymentMethod(string $paymentMethodName): bool;
 
     /**
      * @param string $itemName
      *
      * @return string
      */
-    public function getItemSubtotal($itemName);
+    public function getItemSubtotal(string $itemName): string;
 
-    public function nextStep();
+    public function nextStep(): void;
 
-    public function changeShippingMethod();
+    public function changeShippingMethod(): void;
 
-    public function changeShippingMethodByStepLabel();
+    public function changeShippingMethodByStepLabel(): void;
 
-    public function changeAddressByStepLabel();
-
-    /**
-     * @return bool
-     */
-    public function hasNoAvailablePaymentMethodsWarning();
+    public function changeAddressByStepLabel(): void;
 
     /**
      * @return bool
      */
-    public function isNextStepButtonUnavailable();
+    public function hasNoAvailablePaymentMethodsWarning(): bool;
+
+    /**
+     * @return bool
+     */
+    public function isNextStepButtonUnavailable(): bool;
 
     /**
      * @return string[]

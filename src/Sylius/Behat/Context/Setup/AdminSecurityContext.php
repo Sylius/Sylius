@@ -63,7 +63,7 @@ final class AdminSecurityContext implements Context
     /**
      * @Given I am logged in as an administrator
      */
-    public function iAmLoggedInAsAnAdministrator()
+    public function iAmLoggedInAsAnAdministrator(): void
     {
         $user = $this->userFactory->create(['email' => 'sylius@example.com', 'password' => 'sylius']);
         $this->userRepository->add($user);
@@ -76,7 +76,7 @@ final class AdminSecurityContext implements Context
     /**
      * @Given /^I am logged in as "([^"]+)" administrator$/
      */
-    public function iAmLoggedInAsAdministrator($email)
+    public function iAmLoggedInAsAdministrator($email): void
     {
         $user = $this->userRepository->findOneByEmail($email);
         Assert::notNull($user);

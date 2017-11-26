@@ -42,7 +42,7 @@ class NameResolverListener
     /**
      * @param ResourceControllerEvent $event
      */
-    public function onEvent(ResourceControllerEvent $event)
+    public function onEvent(ResourceControllerEvent $event): void
     {
         $document = $event->getSubject();
 

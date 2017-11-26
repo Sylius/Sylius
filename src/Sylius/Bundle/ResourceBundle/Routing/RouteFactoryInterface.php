@@ -21,7 +21,7 @@ interface RouteFactoryInterface
     /**
      * @return RouteCollection
      */
-    public function createRouteCollection();
+    public function createRouteCollection(): RouteCollection;
 
     /**
      * @param string $path The path pattern to match
@@ -33,7 +33,6 @@ interface RouteFactoryInterface
      * @param array $methods An array of restricted HTTP methods
      * @param string $condition A condition that should evaluate to true for the route to match
      *
-     * @return Route
      */
     public function createRoute(
         string $path,

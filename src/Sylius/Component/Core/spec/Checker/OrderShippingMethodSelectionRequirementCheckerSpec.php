@@ -24,17 +24,17 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBehavior
 {
-    function let(ShippingMethodsResolverInterface $shippingMethodsResolver): void
+    public function let(ShippingMethodsResolverInterface $shippingMethodsResolver): void
     {
         $this->beConstructedWith($shippingMethodsResolver);
     }
 
-    function it_implements_order_shipping_necessity_checker_interface(): void
+    public function it_implements_order_shipping_necessity_checker_interface(): void
     {
         $this->shouldImplement(OrderShippingMethodSelectionRequirementCheckerInterface::class);
     }
 
-    function it_says_that_shipping_method_do_not_have_to_be_selected_if_none_of_variants_from_order_requires_shipping(
+    public function it_says_that_shipping_method_do_not_have_to_be_selected_if_none_of_variants_from_order_requires_shipping(
         OrderInterface $order
     ): void {
         $order->isShippingRequired()->willReturn(false);
@@ -42,7 +42,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
         $this->isShippingMethodSelectionRequired($order)->shouldReturn(false);
     }
 
-    function it_says_that_shipping_method_do_not_have_to_be_selected_if_order_variants_require_shipping_but_there_is_only_one_shipping_method_available(
+    public function it_says_that_shipping_method_do_not_have_to_be_selected_if_order_variants_require_shipping_but_there_is_only_one_shipping_method_available(
         ChannelInterface $channel,
         OrderInterface $order,
         ShipmentInterface $shipment,
@@ -63,7 +63,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
         $this->isShippingMethodSelectionRequired($order)->shouldReturn(false);
     }
 
-    function it_says_that_shipping_method_have_to_be_selected_if_order_variants_require_shipping_and_order_has_not_shipments_yet(
+    public function it_says_that_shipping_method_have_to_be_selected_if_order_variants_require_shipping_and_order_has_not_shipments_yet(
         OrderInterface $order
     ): void {
         $order->isShippingRequired()->willReturn(true);
@@ -73,7 +73,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
         $this->isShippingMethodSelectionRequired($order)->shouldReturn(true);
     }
 
-    function it_says_that_shipping_method_have_to_be_selected_if_order_variants_require_shipping_and_channel_does_not_allow_to_skip_shipping_step(
+    public function it_says_that_shipping_method_have_to_be_selected_if_order_variants_require_shipping_and_channel_does_not_allow_to_skip_shipping_step(
         ChannelInterface $channel,
         OrderInterface $order
     ): void {
@@ -87,7 +87,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
         $this->isShippingMethodSelectionRequired($order)->shouldReturn(true);
     }
 
-    function it_says_that_shipping_method_have_to_be_selected_if_order_variants_require_shipping_and_there_is_more_than_one_shipping_method_available(
+    public function it_says_that_shipping_method_have_to_be_selected_if_order_variants_require_shipping_and_there_is_more_than_one_shipping_method_available(
         ChannelInterface $channel,
         OrderInterface $order,
         ShipmentInterface $shipment,

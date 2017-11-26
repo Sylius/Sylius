@@ -26,7 +26,7 @@ final class TemplatingController implements ContainerAwareInterface
      *
      * @return Response
      */
-    public function renderTemplateAction($templateName)
+    public function renderTemplateAction(string $templateName): Response
     {
         return $this->container->get('templating')->renderResponse($templateName);
     }

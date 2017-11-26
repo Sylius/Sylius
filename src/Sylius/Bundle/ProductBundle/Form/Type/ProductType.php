@@ -44,7 +44,6 @@ final class ProductType extends AbstractResourceType
     private $localeProvider;
 
     /**
-     * @param string $dataClass
      * @param array|string[] $validationGroups
      * @param ProductVariantResolverInterface $variantResolver
      * @param FactoryInterface $attributeValueFactory

@@ -28,7 +28,6 @@ interface ZoneFactoryInterface extends FactoryInterface
     /**
      * @param array $membersCodes
      *
-     * @return ZoneInterface
      */
     public function createWithMembers(array $membersCodes): ZoneInterface;
 }

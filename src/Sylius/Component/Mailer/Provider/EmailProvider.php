@@ -30,7 +30,6 @@ final class EmailProvider implements EmailProviderInterface
     private $configuration;
 
     /**
-     * @param EmailFactoryInterface $emailFactory
      * @param array $configuration
      */
     public function __construct(

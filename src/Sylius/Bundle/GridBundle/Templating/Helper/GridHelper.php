@@ -36,7 +36,6 @@ class GridHelper extends Helper
     }
 
     /**
-     * @param GridView $gridView
      * @param string|null $template
      *
      * @return mixed
@@ -47,7 +46,6 @@ class GridHelper extends Helper
     }
 
     /**
-     * @param GridView $gridView
      * @param Field $field
      * @param mixed $data
      *
@@ -59,7 +57,6 @@ class GridHelper extends Helper
     }
 
     /**
-     * @param GridView $gridView
      * @param Action $action
      * @param mixed|null $data
      *
@@ -71,7 +68,6 @@ class GridHelper extends Helper
     }
 
     /**
-     * @param GridView $gridView
      * @param Filter $filter
      *
      * @return mixed

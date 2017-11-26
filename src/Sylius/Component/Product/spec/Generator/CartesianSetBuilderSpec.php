@@ -18,26 +18,26 @@ use Prophecy\Argument;
 
 final class CartesianSetBuilderSpec extends ObjectBehavior
 {
-    function it_requires_an_array_of_set_tuples_to_build_from(): void
+    public function it_requires_an_array_of_set_tuples_to_build_from(): void
     {
         $tupleSetNotInArray = ['a', 'b', 'c'];
 
         $this->shouldThrow(\InvalidArgumentException::class)->duringBuild($tupleSetNotInArray, Argument::any());
     }
 
-    function it_requires_at_least_one_set_tuple(): void
+    public function it_requires_at_least_one_set_tuple(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->duringBuild([], Argument::any());
     }
 
-    function it_returns_the_same_set_as_the_cartesian_product_when_only_one_was_given(): void
+    public function it_returns_the_same_set_as_the_cartesian_product_when_only_one_was_given(): void
     {
         $set = ['a', 'b', 'c'];
 
         $this->build([$set], false)->shouldReturn($set);
     }
 
-    function it_builds_the_cartesian_product_set_from_two_sets(): void
+    public function it_builds_the_cartesian_product_set_from_two_sets(): void
     {
         $setA = ['a', 'b', 'c'];
         $setB = ['1', '2', '3'];
@@ -57,7 +57,7 @@ final class CartesianSetBuilderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_builds_the_cartesian_product_set_from_more_than_two_sets(): void
+    public function it_builds_the_cartesian_product_set_from_more_than_two_sets(): void
     {
         $setA = ['a', 'b', 'c'];
         $setB = ['1', '2', '3'];

@@ -39,7 +39,6 @@ abstract class Page implements PageInterface
     private $document;
 
     /**
-     * @param Session $session
      * @param array $parameters
      */
     public function __construct(Session $session, array $parameters = [])
@@ -51,7 +50,7 @@ abstract class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function open(array $urlParameters = [])
+    public function open(array $urlParameters = []): void
     {
         $this->tryToOpen($urlParameters);
         $this->verify($urlParameters);
@@ -60,7 +59,7 @@ abstract class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function tryToOpen(array $urlParameters = [])
+    public function tryToOpen(array $urlParameters = []): void
     {
         $this->getSession()->visit($this->getUrl($urlParameters));
     }
@@ -68,7 +67,7 @@ abstract class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function verify(array $urlParameters = [])
+    public function verify(array $urlParameters = []): void
     {
         $this->verifyStatusCode();
         $this->verifyUrl($urlParameters);
@@ -81,7 +80,7 @@ abstract class Page implements PageInterface
     {
         try {
             $this->verify($urlParameters);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return false;
         }
 
@@ -93,12 +92,12 @@ abstract class Page implements PageInterface
      *
      * @return string
      */
-    abstract protected function getUrl(array $urlParameters = []);
+    abstract protected function getUrl(array $urlParameters = []): string;
 
     /**
      * @throws UnexpectedPageException
      */
-    protected function verifyStatusCode()
+    protected function verifyStatusCode(): void
     {
         try {
             $statusCode = $this->getSession()->getStatusCode();
@@ -123,7 +122,7 @@ abstract class Page implements PageInterface
      *
      * @throws UnexpectedPageException
      */
-    protected function verifyUrl(array $urlParameters = [])
+    protected function verifyUrl(array $urlParameters = []): void
     {
         if ($this->getSession()->getCurrentUrl() !== $this->getUrl($urlParameters)) {
             throw new UnexpectedPageException(sprintf('Expected to be on "%s" but found "%s" instead', $this->getUrl($urlParameters), $this->getSession()->getCurrentUrl()));
@@ -135,7 +134,7 @@ abstract class Page implements PageInterface
      *
      * @return NodeElement
      */
-    protected function getParameter($name)
+    protected function getParameter(string $name): NodeElement
     {
         return isset($this->parameters[$name]) ? $this->parameters[$name] : null;
     }
@@ -147,7 +146,7 @@ abstract class Page implements PageInterface
      *
      * @return array
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return [];
     }
@@ -160,7 +159,7 @@ abstract class Page implements PageInterface
      *
      * @throws ElementNotFoundException
      */
-    protected function getElement($name, array $parameters = [])
+    protected function getElement(string $name, array $parameters = []): NodeElement
     {
         $element = $this->createElement($name, $parameters);
 
@@ -182,7 +181,7 @@ abstract class Page implements PageInterface
      *
      * @return bool
      */
-    protected function hasElement($name, array $parameters = [])
+    protected function hasElement(string $name, array $parameters = []): bool
     {
         return $this->getDocument()->has('xpath', $this->createElement($name, $parameters)->getXpath());
     }
@@ -190,7 +189,7 @@ abstract class Page implements PageInterface
     /**
      * @return Session
      */
-    protected function getSession()
+    protected function getSession(): Session
     {
         return $this->session;
     }
@@ -198,7 +197,7 @@ abstract class Page implements PageInterface
     /**
      * @return DriverInterface
      */
-    protected function getDriver()
+    protected function getDriver(): DriverInterface
     {
         return $this->session->getDriver();
     }
@@ -206,7 +205,7 @@ abstract class Page implements PageInterface
     /**
      * @return DocumentElement
      */
-    protected function getDocument()
+    protected function getDocument(): DocumentElement
     {
         if (null === $this->document) {
             $this->document = new DocumentElement($this->session);
@@ -221,7 +220,7 @@ abstract class Page implements PageInterface
      *
      * @return NodeElement
      */
-    private function createElement($name, array $parameters = [])
+    private function createElement(string $name, array $parameters = []): NodeElement
     {
         $definedElements = $this->getDefinedElements();
 
@@ -243,11 +242,10 @@ abstract class Page implements PageInterface
 
     /**
      * @param string|array $selector
-     * @param SelectorsHandler $selectorsHandler
      *
      * @return string
      */
-    private function getSelectorAsXpath($selector, SelectorsHandler $selectorsHandler)
+    private function getSelectorAsXpath($selector, SelectorsHandler $selectorsHandler): string
     {
         $selectorType = is_array($selector) ? key($selector) : 'css';
         $locator = is_array($selector) ? $selector[$selectorType] : $selector;
@@ -262,7 +260,7 @@ abstract class Page implements PageInterface
      *
      * @return string
      */
-    private function resolveParameters($name, array $parameters, array $definedElements)
+    private function resolveParameters(string $name, array $parameters, array $definedElements): string
     {
         if (!is_array($definedElements[$name])) {
             return strtr($definedElements[$name], $parameters);

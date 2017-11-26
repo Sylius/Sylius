@@ -36,7 +36,6 @@ interface PromotionRuleFactoryInterface extends FactoryInterface
     /**
      * @param array $taxons
      *
-     * @return PromotionRuleInterface
      */
     public function createHasTaxon(array $taxons): PromotionRuleInterface;
 

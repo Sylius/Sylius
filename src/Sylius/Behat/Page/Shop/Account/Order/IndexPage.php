@@ -27,7 +27,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     private $tableAccessor;
 
     /**
-     * @param Session $session
      * @param array $parameters
      * @param RouterInterface $router
      * @param TableAccessorInterface $tableAccessor
@@ -59,7 +58,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $this->tableAccessor->countTableBodyRows($this->getElement('customer_orders'));
     }
 
-    public function openLastOrderPage()
+    public function openLastOrderPage(): void
     {
         $this->getElement('last_order')->click();
     }

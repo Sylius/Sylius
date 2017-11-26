@@ -22,17 +22,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class StateMachineSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $stateMachineFactory): void
+    public function let(FactoryInterface $stateMachineFactory): void
     {
         $this->beConstructedWith($stateMachineFactory);
     }
 
-    function it_implements_state_machine_interface(): void
+    public function it_implements_state_machine_interface(): void
     {
         $this->shouldImplement(ResourceStateMachineInterface::class);
     }
 
-    function it_throws_an_exception_if_transition_is_not_defined_during_can(RequestConfiguration $requestConfiguration, ResourceInterface $resource): void
+    public function it_throws_an_exception_if_transition_is_not_defined_during_can(RequestConfiguration $requestConfiguration, ResourceInterface $resource): void
     {
         $requestConfiguration->hasStateMachine()->willReturn(false);
 
@@ -42,7 +42,7 @@ final class StateMachineSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_transition_is_not_defined_during_apply(RequestConfiguration $requestConfiguration, ResourceInterface $resource): void
+    public function it_throws_an_exception_if_transition_is_not_defined_during_apply(RequestConfiguration $requestConfiguration, ResourceInterface $resource): void
     {
         $requestConfiguration->hasStateMachine()->willReturn(false);
 
@@ -52,7 +52,7 @@ final class StateMachineSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_if_configured_state_machine_can_transition(
+    public function it_returns_if_configured_state_machine_can_transition(
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource,
         FactoryInterface $stateMachineFactory,
@@ -68,7 +68,7 @@ final class StateMachineSpec extends ObjectBehavior
         $this->can($requestConfiguration, $resource)->shouldReturn(true);
     }
 
-    function it_applies_configured_state_machine_transition(
+    public function it_applies_configured_state_machine_transition(
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource,
         FactoryInterface $stateMachineFactory,

@@ -50,7 +50,6 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
     }
 
     /**
-     * @param ProductVariantInterface $variant
      * @param ChannelInterface $channel
      *
      * @return array

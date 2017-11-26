@@ -438,7 +438,6 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param string|null $locale
      *
      * @return ProductTranslationInterface
      */

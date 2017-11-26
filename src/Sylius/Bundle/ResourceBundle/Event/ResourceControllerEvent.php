@@ -49,12 +49,11 @@ class ResourceControllerEvent extends GenericEvent
     private $response;
 
     /**
-     * @param string $message
      * @param string $type
      * @param array $parameters
      * @param int $errorCode
      */
-    public function stop(string $message, string $type = self::TYPE_ERROR, array $parameters = [], int $errorCode = 500)
+    public function stop(string $message, string $type = self::TYPE_ERROR, array $parameters = [], int $errorCode = 500): void
     {
         $this->messageType = $type;
         $this->message = $message;
@@ -83,7 +82,7 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @param string $messageType Should be one of ResourceEvent's TYPE constants
      */
-    public function setMessageType($messageType): void
+    public function setMessageType(string $messageType): void
     {
         $this->messageType = $messageType;
     }

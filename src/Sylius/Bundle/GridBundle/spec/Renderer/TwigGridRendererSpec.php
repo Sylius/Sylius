@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TwigGridRendererSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         \Twig_Environment $twig,
         ServiceRegistryInterface $fieldsRegistry,
         FormFactoryInterface $formFactory,
@@ -54,24 +54,24 @@ final class TwigGridRendererSpec extends ObjectBehavior
         );
     }
 
-    function it_is_a_grid_renderer(): void
+    public function it_is_a_grid_renderer(): void
     {
         $this->shouldImplement(GridRendererInterface::class);
     }
 
-    function it_uses_twig_to_render_the_grid_view(\Twig_Environment $twig, GridViewInterface $gridView): void
+    public function it_uses_twig_to_render_the_grid_view(\Twig_Environment $twig, GridViewInterface $gridView): void
     {
         $twig->render('SyliusGridBundle:default.html.twig', ['grid' => $gridView])->willReturn('<html>Grid!</html>');
         $this->render($gridView)->shouldReturn('<html>Grid!</html>');
     }
 
-    function it_uses_custom_template_if_specified(\Twig_Environment $twig, GridView $gridView): void
+    public function it_uses_custom_template_if_specified(\Twig_Environment $twig, GridView $gridView): void
     {
         $twig->render('SyliusGridBundle:custom.html.twig', ['grid' => $gridView])->willReturn('<html>Grid!</html>');
         $this->render($gridView, 'SyliusGridBundle:custom.html.twig')->shouldReturn('<html>Grid!</html>');
     }
 
-    function it_uses_twig_to_render_the_action(\Twig_Environment $twig, GridViewInterface $gridView, Action $action): void
+    public function it_uses_twig_to_render_the_action(\Twig_Environment $twig, GridViewInterface $gridView, Action $action): void
     {
         $action->getType()->willReturn('link');
         $action->getOptions()->willReturn([]);
@@ -88,7 +88,7 @@ final class TwigGridRendererSpec extends ObjectBehavior
         $this->renderAction($gridView, $action)->shouldReturn('<a href="#">Action!</a>');
     }
 
-    function it_renders_a_field_with_data_via_appropriate_field_type(
+    public function it_renders_a_field_with_data_via_appropriate_field_type(
         GridViewInterface $gridView,
         Field $field,
         ServiceRegistryInterface $fieldsRegistry,
@@ -97,7 +97,7 @@ final class TwigGridRendererSpec extends ObjectBehavior
         $field->getType()->willReturn('string');
         $fieldsRegistry->get('string')->willReturn($fieldType);
         $fieldType->configureOptions(Argument::type(OptionsResolver::class))
-            ->will(function ($args) {
+            ->will(function ($args): void {
                 $args[0]->setRequired('foo');
             })
         ;
@@ -110,7 +110,7 @@ final class TwigGridRendererSpec extends ObjectBehavior
         $this->renderField($gridView, $field, 'Value')->shouldReturn('<strong>Value</strong>');
     }
 
-    function it_throws_an_exception_if_template_is_not_configured_for_given_action_type(
+    public function it_throws_an_exception_if_template_is_not_configured_for_given_action_type(
         GridViewInterface $gridView,
         Action $action
     ): void {

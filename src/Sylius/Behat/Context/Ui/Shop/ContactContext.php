@@ -47,7 +47,7 @@ final class ContactContext implements Context
     /**
      * @When I want to request contact
      */
-    public function iWantToRequestContact()
+    public function iWantToRequestContact(): void
     {
         $this->contactPage->open();
     }
@@ -56,7 +56,7 @@ final class ContactContext implements Context
      * @When I specify the email as :email
      * @When I do not specify the email
      */
-    public function iSpecifyTheEmail($email = null)
+    public function iSpecifyTheEmail($email = null): void
     {
         $this->contactPage->specifyEmail($email);
     }
@@ -65,7 +65,7 @@ final class ContactContext implements Context
      * @When I specify the message as :message
      * @When I do not specify the message
      */
-    public function iSpecifyTheMessage($message = null)
+    public function iSpecifyTheMessage($message = null): void
     {
         $this->contactPage->specifyMessage($message);
     }
@@ -74,7 +74,7 @@ final class ContactContext implements Context
      * @When I send it
      * @When I try to send it
      */
-    public function iSendIt()
+    public function iSendIt(): void
     {
         $this->contactPage->send();
     }
@@ -82,7 +82,7 @@ final class ContactContext implements Context
     /**
      * @Then I should be notified that the contact request has been submitted successfully
      */
-    public function iShouldBeNotifiedThatTheContactRequestHasBeenSubmittedSuccessfully()
+    public function iShouldBeNotifiedThatTheContactRequestHasBeenSubmittedSuccessfully(): void
     {
         $this->notificationChecker->checkNotification(
             'Your contact request has been submitted successfully.',
@@ -93,7 +93,7 @@ final class ContactContext implements Context
     /**
      * @Then /^I should be notified that the (email|message) is required$/
      */
-    public function iShouldBeNotifiedThatElementIsRequired($element)
+    public function iShouldBeNotifiedThatElementIsRequired($element): void
     {
         $this->assertFieldValidationMessage(
             $this->contactPage,
@@ -105,7 +105,7 @@ final class ContactContext implements Context
     /**
      * @Then I should be notified that the email is invalid
      */
-    public function iShouldBeNotifiedThatEmailIsInvalid()
+    public function iShouldBeNotifiedThatEmailIsInvalid(): void
     {
         $this->assertFieldValidationMessage(
             $this->contactPage,
@@ -117,7 +117,7 @@ final class ContactContext implements Context
     /**
      * @Then I should be notified that a problem occurred while sending the contact request
      */
-    public function iShouldBeNotifiedThatAProblemOccurredWhileSendingTheContactRequest()
+    public function iShouldBeNotifiedThatAProblemOccurredWhileSendingTheContactRequest(): void
     {
         $this->notificationChecker->checkNotification(
             'A problem occurred while sending the contact request. Please try again later.',
@@ -126,11 +126,10 @@ final class ContactContext implements Context
     }
 
     /**
-     * @param PageInterface $page
      * @param string $element
      * @param string $expectedMessage
      */
-    private function assertFieldValidationMessage(PageInterface $page, $element, $expectedMessage)
+    private function assertFieldValidationMessage(PageInterface $page, string $element, string $expectedMessage): void
     {
         Assert::same($page->getValidationMessageFor($element), $expectedMessage);
     }

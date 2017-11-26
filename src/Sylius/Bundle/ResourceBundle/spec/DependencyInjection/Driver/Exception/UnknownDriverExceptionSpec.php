@@ -17,17 +17,17 @@ use PhpSpec\ObjectBehavior;
 
 final class UnknownDriverExceptionSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith('driver');
     }
 
-    function it_extends_exception(): void
+    public function it_extends_exception(): void
     {
-        $this->shouldHaveType(\Exception::class);
+        $this->shouldHaveType(\Throwable::class);
     }
 
-    function it_has_a_message(): void
+    public function it_has_a_message(): void
     {
         $this->getMessage()->shouldReturn('Unknown driver "driver".');
     }

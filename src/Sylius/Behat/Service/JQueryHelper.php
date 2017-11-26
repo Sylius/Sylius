@@ -20,7 +20,7 @@ abstract class JQueryHelper
     /**
      * @param Session $session
      */
-    public static function waitForAsynchronousActionsToFinish(Session $session)
+    public static function waitForAsynchronousActionsToFinish(Session $session): void
     {
         $session->wait(5000, '0 === jQuery.active');
     }

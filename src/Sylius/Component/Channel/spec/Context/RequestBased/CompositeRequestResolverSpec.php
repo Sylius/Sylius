@@ -20,17 +20,17 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class CompositeRequestResolverSpec extends ObjectBehavior
 {
-    function it_implements_request_resolver_interface(): void
+    public function it_implements_request_resolver_interface(): void
     {
         $this->shouldImplement(RequestResolverInterface::class);
     }
 
-    function it_returns_null_if_there_are_no_nested_request_resolvers_added(Request $request): void
+    public function it_returns_null_if_there_are_no_nested_request_resolvers_added(Request $request): void
     {
         $this->findChannel($request)->shouldReturn(null);
     }
 
-    function it_returns_null_if_none_of_nested_request_resolvers_returned_channel(
+    public function it_returns_null_if_none_of_nested_request_resolvers_returned_channel(
         Request $request,
         RequestResolverInterface $requestResolver
     ): void {
@@ -41,7 +41,7 @@ final class CompositeRequestResolverSpec extends ObjectBehavior
         $this->findChannel($request)->shouldReturn(null);
     }
 
-    function it_returns_first_result_returned_by_nested_request_resolvers(
+    public function it_returns_first_result_returned_by_nested_request_resolvers(
         Request $request,
         RequestResolverInterface $firstRequestResolver,
         RequestResolverInterface $secondRequestResolver,
@@ -59,7 +59,7 @@ final class CompositeRequestResolverSpec extends ObjectBehavior
         $this->findChannel($request)->shouldReturn($channel);
     }
 
-    function its_nested_request_resolvers_can_have_priority(
+    public function its_nested_request_resolvers_can_have_priority(
         Request $request,
         RequestResolverInterface $firstRequestResolver,
         RequestResolverInterface $secondRequestResolver,

@@ -22,7 +22,7 @@ interface MockerInterface
      *
      * @return MockInterface
      */
-    public function mockCollaborator($className);
+    public function mockCollaborator(string $className): MockInterface;
 
     /**
      * @param string $serviceId
@@ -30,12 +30,12 @@ interface MockerInterface
      *
      * @return MockInterface
      */
-    public function mockService($serviceId, $className);
+    public function mockService(string $serviceId, string $className): MockInterface;
 
     /**
      * @param string $serviceId
      */
-    public function unmockService($serviceId);
+    public function unmockService(string $serviceId): void;
 
-    public function unmockAll();
+    public function unmockAll(): void;
 }

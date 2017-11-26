@@ -19,12 +19,12 @@ use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 
 final class UserPbkdf2PasswordEncoderSpec extends ObjectBehavior
 {
-    function it_implements_password_updater_interface(): void
+    public function it_implements_password_updater_interface(): void
     {
         $this->shouldImplement(UserPasswordEncoderInterface::class);
     }
 
-    function it_encodes_password(CredentialsHolderInterface $user): void
+    public function it_encodes_password(CredentialsHolderInterface $user): void
     {
         $user->getPlainPassword()->willReturn('myPassword');
         $user->getSalt()->willReturn('typicalSalt');

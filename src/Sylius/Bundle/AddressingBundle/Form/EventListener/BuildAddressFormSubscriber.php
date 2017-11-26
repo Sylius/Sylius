@@ -41,7 +41,6 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
 
     /**
      * @param ObjectRepository     $countryRepository
-     * @param FormFactoryInterface $factory
      */
     public function __construct(ObjectRepository $countryRepository, FormFactoryInterface $factory)
     {

@@ -21,17 +21,17 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 final class SingleChannelContextSpec extends ObjectBehavior
 {
-    function let(ChannelRepositoryInterface $channelRepository): void
+    public function let(ChannelRepositoryInterface $channelRepository): void
     {
         $this->beConstructedWith($channelRepository);
     }
 
-    function it_implements_channel_context_interface(): void
+    public function it_implements_channel_context_interface(): void
     {
         $this->shouldImplement(ChannelContextInterface::class);
     }
 
-    function it_returns_a_channel_if_it_is_the_only_one_defined(
+    public function it_returns_a_channel_if_it_is_the_only_one_defined(
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel
     ): void {
@@ -40,7 +40,7 @@ final class SingleChannelContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($channel);
     }
 
-    function it_throws_a_channel_not_found_exception_if_there_are_no_channels_defined(
+    public function it_throws_a_channel_not_found_exception_if_there_are_no_channels_defined(
         ChannelRepositoryInterface $channelRepository
     ): void {
         $channelRepository->findAll()->willReturn([]);
@@ -48,7 +48,7 @@ final class SingleChannelContextSpec extends ObjectBehavior
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 
-    function it_throws_a_channel_not_found_exception_if_there_are_many_channels_defined(
+    public function it_throws_a_channel_not_found_exception_if_there_are_many_channels_defined(
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $firstChannel,
         ChannelInterface $secondChannel

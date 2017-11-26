@@ -20,17 +20,17 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class AdjustmentFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $adjustmentFactory): void
+    public function let(FactoryInterface $adjustmentFactory): void
     {
         $this->beConstructedWith($adjustmentFactory);
     }
 
-    function it_implements_an_adjustment_factory_interface(): void
+    public function it_implements_an_adjustment_factory_interface(): void
     {
         $this->shouldImplement(AdjustmentFactoryInterface::class);
     }
 
-    function it_creates_new_adjustment(
+    public function it_creates_new_adjustment(
         FactoryInterface $adjustmentFactory,
         AdjustmentInterface $adjustment
     ): void {
@@ -39,7 +39,7 @@ final class AdjustmentFactorySpec extends ObjectBehavior
         $this->createNew()->shouldReturn($adjustment);
     }
 
-    function it_creates_new_adjustment_with_provided_data(
+    public function it_creates_new_adjustment_with_provided_data(
         FactoryInterface $adjustmentFactory,
         AdjustmentInterface $adjustment
     ): void {

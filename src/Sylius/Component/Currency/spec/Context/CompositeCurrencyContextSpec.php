@@ -19,17 +19,17 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 
 final class CompositeCurrencyContextSpec extends ObjectBehavior
 {
-    function it_implements_currency_context_interface(): void
+    public function it_implements_currency_context_interface(): void
     {
         $this->shouldImplement(CurrencyContextInterface::class);
     }
 
-    function it_throws_a_currency_not_found_exception_if_there_are_no_nested_currency_contexts_defined(): void
+    public function it_throws_a_currency_not_found_exception_if_there_are_no_nested_currency_contexts_defined(): void
     {
         $this->shouldThrow(CurrencyNotFoundException::class)->during('getCurrencyCode');
     }
 
-    function it_throws_a_currency_not_found_exception_if_none_of_nested_currency_contexts_returned_a_currency(
+    public function it_throws_a_currency_not_found_exception_if_none_of_nested_currency_contexts_returned_a_currency(
         CurrencyContextInterface $currencyContext
     ): void {
         $currencyContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
@@ -39,7 +39,7 @@ final class CompositeCurrencyContextSpec extends ObjectBehavior
         $this->shouldThrow(CurrencyNotFoundException::class)->during('getCurrencyCode');
     }
 
-    function it_returns_first_result_returned_by_nested_request_resolvers(
+    public function it_returns_first_result_returned_by_nested_request_resolvers(
         CurrencyContextInterface $firstCurrencyContext,
         CurrencyContextInterface $secondCurrencyContext,
         CurrencyContextInterface $thirdCurrencyContext
@@ -55,7 +55,7 @@ final class CompositeCurrencyContextSpec extends ObjectBehavior
         $this->getCurrencyCode()->shouldReturn('BTC');
     }
 
-    function its_nested_request_resolvers_can_have_priority(
+    public function its_nested_request_resolvers_can_have_priority(
         CurrencyContextInterface $firstCurrencyContext,
         CurrencyContextInterface $secondCurrencyContext,
         CurrencyContextInterface $thirdCurrencyContext

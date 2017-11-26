@@ -26,17 +26,17 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class EventDispatcherSpec extends ObjectBehavior
 {
-    function let(EventDispatcherInterface $eventDispatcher): void
+    public function let(EventDispatcherInterface $eventDispatcher): void
     {
         $this->beConstructedWith($eventDispatcher);
     }
 
-    function it_implements_event_dispatcher_interface(): void
+    public function it_implements_event_dispatcher_interface(): void
     {
         $this->shouldImplement(ControllerEventDispatcherInterface::class);
     }
 
-    function it_dispatches_appropriate_event_for_a_resource(
+    public function it_dispatches_appropriate_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
@@ -52,7 +52,7 @@ final class EventDispatcherSpec extends ObjectBehavior
         $this->dispatch(ResourceActions::SHOW, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
     }
 
-    function it_dispatches_appropriate_custom_event_for_a_resource(
+    public function it_dispatches_appropriate_custom_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
@@ -68,7 +68,7 @@ final class EventDispatcherSpec extends ObjectBehavior
         $this->dispatch(ResourceActions::CREATE, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
     }
 
-    function it_dispatches_event_for_a_collection_of_resources(
+    public function it_dispatches_event_for_a_collection_of_resources(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
@@ -84,7 +84,7 @@ final class EventDispatcherSpec extends ObjectBehavior
         $this->dispatchMultiple(ResourceActions::CREATE, $requestConfiguration, $resources)->shouldHaveType(ResourceControllerEvent::class);
     }
 
-    function it_dispatches_appropriate_pre_event_for_a_resource(
+    public function it_dispatches_appropriate_pre_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
@@ -100,7 +100,7 @@ final class EventDispatcherSpec extends ObjectBehavior
         $this->dispatchPreEvent(ResourceActions::CREATE, $requestConfiguration, $resource);
     }
 
-    function it_dispatches_appropriate_custom_pre_event_for_a_resource(
+    public function it_dispatches_appropriate_custom_pre_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
@@ -116,7 +116,7 @@ final class EventDispatcherSpec extends ObjectBehavior
         $this->dispatchPreEvent(ResourceActions::CREATE, $requestConfiguration, $resource);
     }
 
-    function it_dispatches_appropriate_post_event_for_a_resource(
+    public function it_dispatches_appropriate_post_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
@@ -132,7 +132,7 @@ final class EventDispatcherSpec extends ObjectBehavior
         $this->dispatchPostEvent(ResourceActions::CREATE, $requestConfiguration, $resource);
     }
 
-    function it_dispatches_appropriate_custom_post_event_for_a_resource(
+    public function it_dispatches_appropriate_custom_post_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,

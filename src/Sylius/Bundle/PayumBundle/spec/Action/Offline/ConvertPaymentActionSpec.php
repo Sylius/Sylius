@@ -23,12 +23,12 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 final class ConvertPaymentActionSpec extends ObjectBehavior
 {
-    function it_is_payum_action(): void
+    public function it_is_payum_action(): void
     {
         $this->shouldImplement(ActionInterface::class);
     }
 
-    function it_converts_payment_to_offline_action(Convert $request, PaymentInterface $payment): void
+    public function it_converts_payment_to_offline_action(Convert $request, PaymentInterface $payment): void
     {
         $request->getTo()->willReturn('array');
         $request->getSource()->willReturn($payment);
@@ -40,7 +40,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         $this->execute($request);
     }
 
-    function it_supports_only_convert_request(
+    public function it_supports_only_convert_request(
         Convert $convertRequest,
         Capture $captureRequest,
         PaymentInterface $payment
@@ -52,7 +52,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         $this->supports($captureRequest)->shouldReturn(false);
     }
 
-    function it_supports_only_converting_to_array_from_payment(
+    public function it_supports_only_converting_to_array_from_payment(
         Convert $fromSomethingElseToSomethingElseRequest,
         Convert $fromPaymentToArrayRequest,
         PaymentInterface $payment,

@@ -30,7 +30,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
-    public function selectPaymentMethod($paymentMethod)
+    public function selectPaymentMethod($paymentMethod): void
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
             $this->getElement('payment_method_select', ['%payment_method%' => $paymentMethod])->click();
@@ -68,22 +68,22 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
         return $subtotalTable->find('css', sprintf('#sylius-item-%s-subtotal', $itemSlug))->getText();
     }
 
-    public function nextStep()
+    public function nextStep(): void
     {
         $this->getElement('next_step')->press();
     }
 
-    public function changeShippingMethod()
+    public function changeShippingMethod(): void
     {
         $this->getDocument()->clickLink('Change shipping method');
     }
 
-    public function changeShippingMethodByStepLabel()
+    public function changeShippingMethodByStepLabel(): void
     {
         $this->getElement('shipping_step_label')->click();
     }
 
-    public function changeAddressByStepLabel()
+    public function changeAddressByStepLabel(): void
     {
         $this->getElement('address_step_label')->click();
     }

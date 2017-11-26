@@ -20,7 +20,7 @@ class VerificationPage extends SymfonyPage implements VerificationPageInterface
     /**
      * {@inheritdoc}
      */
-    public function verifyAccount($token)
+    public function verifyAccount($token): void
     {
         $this->tryToOpen(['token' => $token]);
     }

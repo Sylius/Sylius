@@ -56,7 +56,7 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
     /**
      * @param InteractiveLoginEvent $event
      */
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
         $this->updateUserLastLogin($event->getAuthenticationToken()->getUser());
     }
@@ -64,7 +64,7 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
     /**
      * @param UserEvent $event
      */
-    public function onImplicitLogin(UserEvent $event)
+    public function onImplicitLogin(UserEvent $event): void
     {
         $this->updateUserLastLogin($event->getUser());
     }

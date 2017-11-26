@@ -19,12 +19,12 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 
 final class OrderItemSpec extends ObjectBehavior
 {
-    function it_returns_0_tax_total_when_there_are_no_units(): void
+    public function it_returns_0_tax_total_when_there_are_no_units(): void
     {
         $this->getTaxTotal()->shouldReturn(0);
     }
 
-    function it_returns_tax_of_all_unit(OrderItemUnitInterface $orderItemUnit1, OrderItemUnitInterface $orderItemUnit2): void
+    public function it_returns_tax_of_all_unit(OrderItemUnitInterface $orderItemUnit1, OrderItemUnitInterface $orderItemUnit2): void
     {
         $orderItemUnit1->getTotal()->willReturn(1200);
         $orderItemUnit1->getTaxTotal()->willReturn(200);
@@ -39,7 +39,7 @@ final class OrderItemSpec extends ObjectBehavior
         $this->getTaxTotal()->shouldReturn(320);
     }
 
-    function it_returns_tax_of_all_units_and_both_neutral_and_non_neutral_tax_adjustments(
+    public function it_returns_tax_of_all_units_and_both_neutral_and_non_neutral_tax_adjustments(
         OrderItemUnitInterface $orderItemUnit1,
         OrderItemUnitInterface $orderItemUnit2,
         AdjustmentInterface $nonNeutralTaxAdjustment,
@@ -70,7 +70,7 @@ final class OrderItemSpec extends ObjectBehavior
         $this->getTaxTotal()->shouldReturn(820);
     }
 
-    function it_returns_discounted_unit_price_which_is_first_unit_price_lowered_by_unit_promotions(
+    public function it_returns_discounted_unit_price_which_is_first_unit_price_lowered_by_unit_promotions(
         OrderItemUnitInterface $unit
     ): void {
         $this->setUnitPrice(10000);
@@ -84,14 +84,14 @@ final class OrderItemSpec extends ObjectBehavior
         $this->getDiscountedUnitPrice()->shouldReturn(9500);
     }
 
-    function it_returns_unit_price_as_discounted_unit_price_if_there_are_no_units(): void
+    public function it_returns_unit_price_as_discounted_unit_price_if_there_are_no_units(): void
     {
         $this->setUnitPrice(10000);
 
         $this->getDiscountedUnitPrice()->shouldReturn(10000);
     }
 
-    function it_returns_subtotal_which_consist_of_discounted_unit_price_multiplied_by_quantity(
+    public function it_returns_subtotal_which_consist_of_discounted_unit_price_multiplied_by_quantity(
         OrderItemUnitInterface $firstUnit,
         OrderItemUnitInterface $secondUnit
     ): void {
@@ -111,7 +111,7 @@ final class OrderItemSpec extends ObjectBehavior
         $this->getSubtotal()->shouldReturn(19000);
     }
 
-    function it_has_no_variant_by_default(): void
+    public function it_has_no_variant_by_default(): void
     {
         $this->getVariant()->shouldReturn(null);
     }

@@ -120,7 +120,6 @@ final class ZoneType extends AbstractResourceType
     }
 
     /**
-     * @param string $zoneMemberType
      *
      * @return array
      */

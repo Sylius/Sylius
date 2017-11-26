@@ -297,11 +297,9 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param RequestConfiguration $configuration
      * @param string $type
      * @param object $object
      *
-     * @return FormInterface
      */
     protected function createResourceForm(
         RequestConfiguration $configuration,
@@ -452,7 +450,6 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param Request $request
      * @param string $attribute
      * @param mixed $default
      *

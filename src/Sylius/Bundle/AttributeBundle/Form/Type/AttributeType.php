@@ -69,7 +69,7 @@ abstract class AttributeType extends AbstractResourceType
             ])
         ;
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
             $attribute = $event->getData();
 
             if (!$attribute instanceof AttributeInterface) {

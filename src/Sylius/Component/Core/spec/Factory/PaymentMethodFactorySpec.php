@@ -21,17 +21,17 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PaymentMethodFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $decoratedFactory, FactoryInterface $gatewayConfigFactory): void
+    public function let(FactoryInterface $decoratedFactory, FactoryInterface $gatewayConfigFactory): void
     {
         $this->beConstructedWith($decoratedFactory, $gatewayConfigFactory);
     }
 
-    function it_implements_payment_method_factory_interface(): void
+    public function it_implements_payment_method_factory_interface(): void
     {
         $this->shouldImplement(PaymentMethodFactoryInterface::class);
     }
 
-    function it_creates_payment_method_with_specific_gateway(
+    public function it_creates_payment_method_with_specific_gateway(
         FactoryInterface $decoratedFactory,
         FactoryInterface $gatewayConfigFactory,
         GatewayConfigInterface $gatewayConfig,

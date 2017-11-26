@@ -20,17 +20,17 @@ use Sylius\Component\Grid\View\GridViewInterface;
 
 final class TwigBulkActionGridRendererSpec extends ObjectBehavior
 {
-    function let(\Twig_Environment $twig): void
+    public function let(\Twig_Environment $twig): void
     {
         $this->beConstructedWith($twig, ['delete' => 'SyliusGridBundle:BulkAction:_delete.html.twig']);
     }
 
-    function it_is_a_bulk_action_grid_renderer(): void
+    public function it_is_a_bulk_action_grid_renderer(): void
     {
         $this->shouldImplement(BulkActionGridRendererInterface::class);
     }
 
-    function it_uses_twig_to_render_the_bulk_action(
+    public function it_uses_twig_to_render_the_bulk_action(
         \Twig_Environment $twig,
         GridViewInterface $gridView,
         Action $bulkAction
@@ -50,7 +50,7 @@ final class TwigBulkActionGridRendererSpec extends ObjectBehavior
         $this->renderBulkAction($gridView, $bulkAction)->shouldReturn('<a href="#">Delete</a>');
     }
 
-    function it_throws_an_exception_if_template_is_not_configured_for_given_bulk_action_type(
+    public function it_throws_an_exception_if_template_is_not_configured_for_given_bulk_action_type(
         GridViewInterface $gridView,
         Action $bulkAction
     ): void {

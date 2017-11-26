@@ -38,7 +38,7 @@ final class LocaleContext implements Context
      * @When I switch to the :locale locale
      * @When I change my locale to :locale
      */
-    public function iSwitchTheLocaleToTheLocale($locale)
+    public function iSwitchTheLocaleToTheLocale($locale): void
     {
         $this->homePage->open();
         $this->homePage->switchLocale($locale);
@@ -48,7 +48,7 @@ final class LocaleContext implements Context
      * @Then I should shop using the :locale locale
      * @Then I should still shop using the :locale locale
      */
-    public function iShouldShopUsingTheLocale($locale)
+    public function iShouldShopUsingTheLocale($locale): void
     {
         Assert::same($this->homePage->getActiveLocale(), $locale);
     }
@@ -57,7 +57,7 @@ final class LocaleContext implements Context
      * @Then I should be able to shop using the :locale locale
      * @Then the store should be available in the :locale locale
      */
-    public function iShouldBeAbleToShopUsingTheLocale($locale)
+    public function iShouldBeAbleToShopUsingTheLocale($locale): void
     {
         Assert::oneOf($locale, $this->homePage->getAvailableLocales());
     }
@@ -66,7 +66,7 @@ final class LocaleContext implements Context
      * @Then I should not be able to shop using the :locale locale
      * @Then the store should not be available in the :locale locale
      */
-    public function iShouldNotBeAbleToShopUsingTheLocale($locale)
+    public function iShouldNotBeAbleToShopUsingTheLocale($locale): void
     {
         if (in_array($locale, $this->homePage->getAvailableLocales(), true)) {
             throw new \InvalidArgumentException(sprintf(
@@ -80,7 +80,7 @@ final class LocaleContext implements Context
     /**
      * @Then I should not be able to shop without default locale
      */
-    public function iShouldNotBeAbleToShop()
+    public function iShouldNotBeAbleToShop(): void
     {
         try {
             $this->homePage->tryToOpen();

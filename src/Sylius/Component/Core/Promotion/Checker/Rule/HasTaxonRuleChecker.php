@@ -50,10 +50,8 @@ final class HasTaxonRuleChecker implements RuleCheckerInterface
     }
 
     /**
-     * @param ProductInterface $product
      * @param array $configuration
      *
-     * @return bool
      */
     private function hasProductValidTaxon(ProductInterface $product, array $configuration): bool
     {

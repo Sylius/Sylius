@@ -28,7 +28,6 @@ interface ShippingMethodRepositoryInterface extends BaseShippingMethodRepository
     public function createListQueryBuilder(string $locale): QueryBuilder;
 
     /**
-     * @param ChannelInterface $channel
      *
      * @return array|ShippingMethodInterface[]
      */
@@ -36,7 +35,6 @@ interface ShippingMethodRepositoryInterface extends BaseShippingMethodRepository
 
     /**
      * @param array $zones
-     * @param ChannelInterface $channel
      *
      * @return array|ShippingMethodInterface[]
      */

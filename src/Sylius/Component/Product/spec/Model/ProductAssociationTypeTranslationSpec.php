@@ -19,22 +19,22 @@ use Sylius\Component\Resource\Model\AbstractTranslation;
 
 final class ProductAssociationTypeTranslationSpec extends ObjectBehavior
 {
-    function it_implements_a_product_association_type_translation_interface(): void
+    public function it_implements_a_product_association_type_translation_interface(): void
     {
         $this->shouldImplement(ProductAssociationTypeTranslationInterface::class);
     }
 
-    function it_is_a_translation(): void
+    public function it_is_a_translation(): void
     {
         $this->shouldHaveType(AbstractTranslation::class);
     }
 
-    function it_has_no_name_by_default(): void
+    public function it_has_no_name_by_default(): void
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable(): void
+    public function its_name_is_mutable(): void
     {
         $this->setName('Association type name');
         $this->getName()->shouldBe('Association type name');

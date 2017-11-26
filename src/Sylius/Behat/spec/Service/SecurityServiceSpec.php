@@ -24,28 +24,28 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SecurityServiceSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         SessionInterface $session,
         CookieSetterInterface $cookieSetter
-    ) {
+    ): void {
         $this->beConstructedWith($session, $cookieSetter, 'shop');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(SecurityService::class);
     }
 
-    function it_implements_security_service_interface()
+    public function it_implements_security_service_interface(): void
     {
         $this->shouldImplement(SecurityServiceInterface::class);
     }
 
-    function it_logs_user_in(
+    public function it_logs_user_in(
         SessionInterface $session,
         CookieSetterInterface $cookieSetter,
         ShopUserInterface $shopUser
-    ) {
+    ): void {
         $shopUser->getRoles()->willReturn(['ROLE_USER']);
         $shopUser->getPassword()->willReturn('xyz');
         $shopUser->serialize()->willReturn('serialized_user');
@@ -60,10 +60,10 @@ final class SecurityServiceSpec extends ObjectBehavior
         $this->logIn($shopUser);
     }
 
-    function it_logs_user_out(
+    public function it_logs_user_out(
         SessionInterface $session,
         CookieSetterInterface $cookieSetter
-    ) {
+    ): void {
         $session->set('_security_shop', null)->shouldBeCalled();
         $session->save()->shouldBeCalled();
         $session->getName()->willReturn('MOCKEDSID');
@@ -73,9 +73,9 @@ final class SecurityServiceSpec extends ObjectBehavior
         $this->logOut();
     }
 
-    function it_throws_token_not_found_exception(
+    public function it_throws_token_not_found_exception(
         SessionInterface $session
-    ) {
+    ): void {
         $session->get('_security_shop')->willReturn(null);
 
         $this->shouldThrow(TokenNotFoundException::class)->during('getCurrentToken');

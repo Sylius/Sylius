@@ -145,7 +145,6 @@ final class ThemeLoader implements ThemeLoaderInterface
     }
 
     /**
-     * @param string $themeName
      * @param array $parentsNames
      * @param array $existingThemes
      *

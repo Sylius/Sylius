@@ -41,7 +41,7 @@ final class AddressType extends AbstractType
                 'required' => false,
                 'label' => 'sylius.form.checkout.addressing.different_billing_address',
             ])
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
                 $orderData = $event->getData();
 
                 if (isset($orderData['shippingAddress']) && (!isset($orderData['differentBillingAddress']) || false === $orderData['differentBillingAddress'])) {

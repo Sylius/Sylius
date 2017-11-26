@@ -97,10 +97,8 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
     }
 
     /**
-     * @param string $type
      * @param array $configuration
      *
-     * @return PromotionRuleInterface
      */
     private function createPromotionRule(string $type, array $configuration): PromotionRuleInterface
     {

@@ -10,6 +10,7 @@
  */
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Sylius package.
  *
@@ -55,7 +56,7 @@ class BookTranslation extends AbstractTranslation implements ResourceInterface
     /**
      * {@inheritdoc}
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }

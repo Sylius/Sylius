@@ -162,7 +162,6 @@ class BookProductFixture extends AbstractFixture
     }
 
     /**
-     * @param int $amount
      *
      * @return array
      */

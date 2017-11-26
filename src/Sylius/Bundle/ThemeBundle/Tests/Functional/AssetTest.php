@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class AssetTest extends WebTestCase
 {
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 
@@ -31,7 +31,7 @@ final class AssetTest extends WebTestCase
      *
      * @param int $symlinkMask
      */
-    public function it_dumps_assets($symlinkMask): void
+    public function it_dumps_assets(int $symlinkMask): void
     {
         $client = self::createClient();
 
@@ -51,7 +51,7 @@ final class AssetTest extends WebTestCase
      *
      * @param int $symlinkMask
      */
-    public function it_updates_dumped_assets_if_they_are_modified($symlinkMask): void
+    public function it_updates_dumped_assets_if_they_are_modified(int $symlinkMask): void
     {
         $client = self::createClient();
 
@@ -77,7 +77,7 @@ final class AssetTest extends WebTestCase
      *
      * @param int $symlinkMask
      */
-    public function it_dumps_assets_correctly_even_if_nothing_has_changed($symlinkMask): void
+    public function it_dumps_assets_correctly_even_if_nothing_has_changed(int $symlinkMask): void
     {
         $client = self::createClient();
 
@@ -104,7 +104,7 @@ final class AssetTest extends WebTestCase
         return $webDirectory;
     }
 
-    private function assertFileContent($lines, $webDirectory)
+    private function assertFileContent($lines, $webDirectory): void
     {
         foreach ($lines as $line) {
             if (empty($line)) {
@@ -122,7 +122,7 @@ final class AssetTest extends WebTestCase
     /**
      * @return array
      */
-    public function getSymlinkMasks()
+    public function getSymlinkMasks(): array
     {
         return [
             [AssetsInstallerInterface::RELATIVE_SYMLINK],

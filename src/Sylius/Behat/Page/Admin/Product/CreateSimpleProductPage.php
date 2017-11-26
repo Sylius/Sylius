@@ -38,7 +38,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function nameItIn($name, $localeCode)
+    public function nameItIn($name, $localeCode): void
     {
         $this->activateLanguageTab($localeCode);
         $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
@@ -54,7 +54,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function specifySlugIn($slug, $locale)
+    public function specifySlugIn($slug, $locale): void
     {
         $this->activateLanguageTab($locale);
 
@@ -64,7 +64,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($channelName, $price)
+    public function specifyPrice($channelName, $price): void
     {
         $this->getElement('price', ['%channelName%' => $channelName])->setValue($price);
     }
@@ -72,7 +72,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function specifyOriginalPrice($channelName, $originalPrice)
+    public function specifyOriginalPrice($channelName, $originalPrice): void
     {
         $this->getElement('original_price', ['%channelName%' => $channelName])->setValue($originalPrice);
     }
@@ -80,7 +80,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function addAttribute($attributeName, $value, $localeCode)
+    public function addAttribute($attributeName, $value, $localeCode): void
     {
         $this->clickTabIfItsNotActive('attributes');
         $this->clickLocaleTabIfItsNotActive($localeCode);
@@ -110,14 +110,14 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function removeAttribute($attributeName, $localeCode)
+    public function removeAttribute($attributeName, $localeCode): void
     {
         $this->clickTabIfItsNotActive('attributes');
 
         $this->getElement('attribute_delete_button', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->press();
     }
 
-    public function checkAttributeErrors($attributeName, $localeCode)
+    public function checkAttributeErrors($attributeName, $localeCode): void
     {
         $this->clickTabIfItsNotActive('attributes');
         $this->clickLocaleTabIfItsNotActive($localeCode);
@@ -126,7 +126,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function attachImage($path, $type = null)
+    public function attachImage($path, $type = null): void
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -145,7 +145,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames)
+    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void
     {
         $this->clickTab('associations');
 
@@ -175,7 +175,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType)
+    public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType): void
     {
         $this->clickTabIfItsNotActive('associations');
 
@@ -189,7 +189,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function choosePricingCalculator($name)
+    public function choosePricingCalculator($name): void
     {
         $this->getElement('price_calculator')->selectOption($name);
     }
@@ -197,7 +197,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function checkChannel($channelName)
+    public function checkChannel($channelName): void
     {
         $this->getElement('channel_checkbox', ['%channelName%' => $channelName])->check();
     }
@@ -205,7 +205,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function specifyPriceForChannelAndCurrency($price, ChannelInterface $channel, CurrencyInterface $currency)
+    public function specifyPriceForChannelAndCurrency($price, ChannelInterface $channel, CurrencyInterface $currency): void
     {
         $calculatorElement = $this->getElement('calculator');
         $calculatorElement
@@ -220,7 +220,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function activateLanguageTab($locale)
+    public function activateLanguageTab($locale): void
     {
         if (!$this->getDriver() instanceof Selenium2Driver) {
             return;
@@ -235,7 +235,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function selectShippingCategory($shippingCategoryName)
+    public function selectShippingCategory($shippingCategoryName): void
     {
         $this->getElement('shipping_category')->selectOption($shippingCategoryName);
     }
@@ -243,7 +243,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function setShippingRequired($isShippingRequired)
+    public function setShippingRequired($isShippingRequired): void
     {
         if ($isShippingRequired) {
             $this->getElement('shipping_required')->check();
@@ -302,7 +302,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * @param int $id
      */
-    private function selectElementFromAttributesDropdown($id)
+    private function selectElementFromAttributesDropdown(int $id): void
     {
         /** @var Selenium2Driver $driver */
         $driver = $this->getDriver();
@@ -315,7 +315,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * @param int $timeout
      */
-    private function waitForFormElement($timeout = 5)
+    private function waitForFormElement(int $timeout = 5): void
     {
         $form = $this->getElement('form');
         $this->getDocument()->waitFor($timeout, function () use ($form) {
@@ -326,7 +326,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * @param string $tabName
      */
-    private function clickTabIfItsNotActive($tabName)
+    private function clickTabIfItsNotActive(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
         if (!$attributesTab->hasClass('active')) {
@@ -337,7 +337,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * @param string $tabName
      */
-    private function clickTab($tabName)
+    private function clickTab(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
         $attributesTab->click();
@@ -346,7 +346,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * @param string $localeCode
      */
-    private function clickLocaleTabIfItsNotActive($localeCode)
+    private function clickLocaleTabIfItsNotActive(string $localeCode): void
     {
         $localeTab = $this->getElement('locale_tab', ['%localeCode%' => $localeCode]);
         if (!$localeTab->hasClass('active')) {
@@ -357,7 +357,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * @return NodeElement
      */
-    private function getLastImageElement()
+    private function getLastImageElement(): NodeElement
     {
         $images = $this->getElement('images');
         $items = $images->findAll('css', 'div[data-form-collection="item"]');

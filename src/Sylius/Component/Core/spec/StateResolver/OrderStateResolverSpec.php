@@ -25,17 +25,17 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 final class OrderStateResolverSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $stateMachineFactory): void
+    public function let(FactoryInterface $stateMachineFactory): void
     {
         $this->beConstructedWith($stateMachineFactory);
     }
 
-    function it_implements_a_state_resolver_interface(): void
+    public function it_implements_a_state_resolver_interface(): void
     {
         $this->shouldImplement(StateResolverInterface::class);
     }
 
-    function it_marks_an_order_as_fulfilled_when_its_paid_for_and_has_been_shipped(
+    public function it_marks_an_order_as_fulfilled_when_its_paid_for_and_has_been_shipped(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         StateMachineInterface $stateMachine
@@ -51,7 +51,7 @@ final class OrderStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_does_not_mark_an_order_as_fulfilled_when_it_has_been_paid_but_not_shipped(
+    public function it_does_not_mark_an_order_as_fulfilled_when_it_has_been_paid_but_not_shipped(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         StateMachineInterface $stateMachine
@@ -67,7 +67,7 @@ final class OrderStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_does_not_mark_an_order_as_fulfilled_when_it_has_been_shipped_but_not_paid(
+    public function it_does_not_mark_an_order_as_fulfilled_when_it_has_been_shipped_but_not_paid(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         StateMachineInterface $stateMachine

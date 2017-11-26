@@ -27,7 +27,6 @@ interface ProductAssociationTypeRepositoryInterface extends RepositoryInterface
     public function createListQueryBuilder(string $locale): QueryBuilder;
 
     /**
-     * @param string $name
      * @param string $locale
      *
      * @return array|ProductAssociationTypeInterface[]

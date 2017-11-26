@@ -103,7 +103,6 @@ final class ShowAvailableShippingMethodsController
     /**
      * @param mixed $cartId
      *
-     * @return OrderInterface
      *
      * @throws NotFoundHttpException
      */
@@ -130,7 +129,6 @@ final class ShowAvailableShippingMethodsController
     }
 
     /**
-     * @param ShipmentInterface $shipment
      * @param string $locale
      *
      * @return array

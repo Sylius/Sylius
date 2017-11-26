@@ -17,7 +17,7 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    public function enable()
+    public function enable(): void
     {
         $this->getElement('enabled')->check();
     }
@@ -25,7 +25,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyUsername($username)
+    public function specifyUsername($username): void
     {
         $this->getElement('name')->setValue($username);
     }
@@ -33,7 +33,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyEmail($email)
+    public function specifyEmail($email): void
     {
         $this->getElement('email')->setValue($email);
     }
@@ -41,7 +41,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPassword($password)
+    public function specifyPassword($password): void
     {
         $this->getElement('password')->setValue($password);
     }
@@ -49,7 +49,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyLocale($localeCode)
+    public function specifyLocale($localeCode): void
     {
         $this->getElement('locale_code')->selectOption($localeCode);
     }

@@ -79,7 +79,6 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @param array $data
      *
-     * @return bool
      */
     private function isUserDataEmpty(array $data): bool
     {

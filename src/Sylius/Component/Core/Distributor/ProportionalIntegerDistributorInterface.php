@@ -17,7 +17,6 @@ interface ProportionalIntegerDistributorInterface
 {
     /**
      * @param array $integers
-     * @param int $amount
      *
      * @return array
      */

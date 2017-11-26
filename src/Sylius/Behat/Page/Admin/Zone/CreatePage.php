@@ -23,7 +23,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use NamesIt;
     use SpecifiesItsCode;
 
-    public function addMember()
+    public function addMember(): void
     {
         $this->getDocument()->clickLink('Add member');
     }
@@ -44,7 +44,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseMember($name)
+    public function chooseMember($name): void
     {
         $selectItems = $this->getDocument()->waitFor(2, function () {
             return $this->getDocument()->findAll('css', 'div[data-form-type="collection"] select');
@@ -61,7 +61,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectScope($scope)
+    public function selectScope($scope): void
     {
         $this->getDocument()->selectFieldOption('Scope', $scope);
     }

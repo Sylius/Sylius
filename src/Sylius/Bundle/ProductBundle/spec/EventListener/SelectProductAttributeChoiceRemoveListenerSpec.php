@@ -25,12 +25,12 @@ use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface
 
 final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith(ProductAttributeValue::class);
     }
 
-    function it_removes_select_product_attribute_choices(
+    public function it_removes_select_product_attribute_choices(
         LifecycleEventArgs $event,
         EntityManagerInterface $entityManager,
         UnitOfWork $unitOfWork,
@@ -76,7 +76,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
         $this->postUpdate($event);
     }
 
-    function it_does_not_remove_select_product_attribute_choices_if_there_is_only_added_new_choice(
+    public function it_does_not_remove_select_product_attribute_choices_if_there_is_only_added_new_choice(
         LifecycleEventArgs $event,
         EntityManagerInterface $entityManager,
         UnitOfWork $unitOfWork,
@@ -109,7 +109,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
         $this->postUpdate($event);
     }
 
-    function it_does_not_remove_select_product_attribute_choices_if_there_is_only_changed_value(
+    public function it_does_not_remove_select_product_attribute_choices_if_there_is_only_changed_value(
         LifecycleEventArgs $event,
         EntityManagerInterface $entityManager,
         UnitOfWork $unitOfWork,
@@ -143,7 +143,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
         $this->postUpdate($event);
     }
 
-    function it_does_nothing_if_an_entity_is_not_a_product_attribute(
+    public function it_does_nothing_if_an_entity_is_not_a_product_attribute(
         EntityManagerInterface $entityManager,
         LifecycleEventArgs $event
     ): void {
@@ -156,7 +156,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
         $entityManager->flush()->shouldNotBeCalled();
     }
 
-    function it_does_nothing_if_a_product_attribute_has_not_a_select_type(
+    public function it_does_nothing_if_a_product_attribute_has_not_a_select_type(
         LifecycleEventArgs $event,
         EntityManagerInterface $entityManager,
         ProductAttributeInterface $productAttribute

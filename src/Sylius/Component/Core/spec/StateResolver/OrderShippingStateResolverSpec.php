@@ -25,17 +25,17 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 final class OrderShippingStateResolverSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $stateMachineFactory): void
+    public function let(FactoryInterface $stateMachineFactory): void
     {
         $this->beConstructedWith($stateMachineFactory);
     }
 
-    function it_implements_an_order_state_resolver_interface(): void
+    public function it_implements_an_order_state_resolver_interface(): void
     {
         $this->shouldImplement(StateResolverInterface::class);
     }
 
-    function it_marks_an_order_as_shipped_if_all_shipments_delivered(
+    public function it_marks_an_order_as_shipped_if_all_shipments_delivered(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         ShipmentInterface $shipment1,
@@ -58,7 +58,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_shipped_if_there_are_no_shipments_to_deliver(
+    public function it_marks_an_order_as_shipped_if_there_are_no_shipments_to_deliver(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         StateMachineInterface $orderStateMachine
@@ -72,7 +72,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_partially_shipped_if_some_shipments_are_delivered(
+    public function it_marks_an_order_as_partially_shipped_if_some_shipments_are_delivered(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         ShipmentInterface $shipment1,
@@ -95,7 +95,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_does_not_mark_an_order_if_it_is_already_in_this_shipping_state(
+    public function it_does_not_mark_an_order_if_it_is_already_in_this_shipping_state(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         ShipmentInterface $shipment1,

@@ -24,7 +24,7 @@ final class TemplatingTest extends WebTestCase
      * @param string $templateName
      * @param string $contents
      */
-    public function it_renders_bundle_templates($templateName, $contents): void
+    public function it_renders_bundle_templates(string $templateName, string $contents): void
     {
         $client = self::createClient();
 
@@ -35,7 +35,7 @@ final class TemplatingTest extends WebTestCase
     /**
      * @return array
      */
-    public function getBundleTemplates()
+    public function getBundleTemplates(): array
     {
         return [
             ['TestBundle:Templating:vanillaTemplate.txt.twig', 'TestBundle:Templating:vanillaTemplate.txt.twig'],
@@ -53,7 +53,7 @@ final class TemplatingTest extends WebTestCase
      * @param string $templateName
      * @param string $contents
      */
-    public function it_renders_bundle_templates_using_namespaced_paths($templateName, $contents): void
+    public function it_renders_bundle_templates_using_namespaced_paths(string $templateName, string $contents): void
     {
         $client = self::createClient();
 
@@ -64,7 +64,7 @@ final class TemplatingTest extends WebTestCase
     /**
      * @return array
      */
-    public function getBundleTemplatesUsingNamespacedPaths()
+    public function getBundleTemplatesUsingNamespacedPaths(): array
     {
         return [
             ['@Test/Templating/vanillaTemplate.txt.twig', 'TestBundle:Templating:vanillaTemplate.txt.twig'],
@@ -82,7 +82,7 @@ final class TemplatingTest extends WebTestCase
      * @param string $templateName
      * @param string $contents
      */
-    public function it_renders_application_templates($templateName, $contents): void
+    public function it_renders_application_templates(string $templateName, string $contents): void
     {
         $client = self::createClient();
 
@@ -93,7 +93,7 @@ final class TemplatingTest extends WebTestCase
     /**
      * @return array
      */
-    public function getAppTemplates()
+    public function getAppTemplates(): array
     {
         return [
             [':Templating:vanillaTemplate.txt.twig', ':Templating:vanillaTemplate.txt.twig'],
@@ -109,7 +109,7 @@ final class TemplatingTest extends WebTestCase
      * @param string $templateName
      * @param string $contents
      */
-    public function it_renders_application_templates_using_namespaced_paths($templateName, $contents): void
+    public function it_renders_application_templates_using_namespaced_paths(string $templateName, string $contents): void
     {
         $client = self::createClient();
 
@@ -120,7 +120,7 @@ final class TemplatingTest extends WebTestCase
     /**
      * @return array
      */
-    public function getAppTemplatesUsingNamespacedPaths()
+    public function getAppTemplatesUsingNamespacedPaths(): array
     {
         return [
             ['/Templating/vanillaTemplate.txt.twig', ':Templating:vanillaTemplate.txt.twig'],

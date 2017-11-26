@@ -22,7 +22,7 @@ final class TaxCategoryApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_creating_tax_category_for_non_authenticated_user()
+    public function it_denies_creating_tax_category_for_non_authenticated_user(): void
     {
         $this->client->request('POST', '/api/v1/tax-categories/');
 
@@ -33,7 +33,7 @@ final class TaxCategoryApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_tax_category_without_specifying_required_data()
+    public function it_does_not_allow_to_create_tax_category_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -49,7 +49,7 @@ final class TaxCategoryApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_tax_category()
+    public function it_allows_to_create_tax_category(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -74,7 +74,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_tax_categories_for_non_authenticated_user()
+    public function it_denies_getting_tax_categories_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/tax-categories/');
 
@@ -85,7 +85,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_tax_categories()
+    public function it_allows_to_get_tax_categories(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -101,7 +101,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_sorted_tax_categories()
+    public function it_allows_to_get_sorted_tax_categories(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -117,7 +117,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_tax_categories_list_filtered_by_name()
+    public function it_allows_to_get_tax_categories_list_filtered_by_name(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories_for_filtering.yml');
@@ -133,7 +133,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_tax_categories_list_filtered_by_code()
+    public function it_allows_to_get_tax_categories_list_filtered_by_code(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories_for_filtering.yml');
@@ -149,7 +149,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_tax_category_for_non_authenticated_user()
+    public function it_denies_getting_tax_category_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/tax-categories/1');
 
@@ -160,7 +160,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_a_tax_category_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_a_tax_category_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -176,7 +176,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_tax_category()
+    public function it_allows_to_get_tax_category(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -194,7 +194,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_updating_tax_category_for_non_authenticated_user()
+    public function it_denies_updating_tax_category_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', '/api/v1/tax-categories/1');
 
@@ -205,7 +205,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_update_tax_category_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_update_tax_category_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -221,7 +221,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_update_tax_category_without_specifying_required_data()
+    public function it_does_not_allow_to_update_tax_category_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -239,7 +239,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_tax_category()
+    public function it_allows_to_update_tax_category(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -265,7 +265,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_partially_update_tax_category_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_partially_update_tax_category_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -281,7 +281,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_partially_update_tax_category()
+    public function it_allows_to_partially_update_tax_category(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -306,7 +306,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_delete_tax_category_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_delete_tax_category_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -322,7 +322,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_tax_category()
+    public function it_allows_to_delete_tax_category(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
@@ -346,11 +346,10 @@ EOT;
     }
 
     /**
-     * @param TaxCategoryInterface $taxCategory
      *
      * @return string
      */
-    private function getTaxCategoryUrl(TaxCategoryInterface $taxCategory)
+    private function getTaxCategoryUrl(TaxCategoryInterface $taxCategory): string
     {
         return 'api/v1/tax-categories/' . $taxCategory->getCode();
     }

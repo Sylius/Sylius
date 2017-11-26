@@ -24,7 +24,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @param int $limit
      */
-    public function setCustomerUsageLimit($limit)
+    public function setCustomerUsageLimit(int $limit): void
     {
         $this->getDocument()->fillField('Per-Customer Usage Limit', $limit);
     }
@@ -32,7 +32,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @param \DateTimeInterface $date
      */
-    public function setExpiresAt(\DateTimeInterface $date)
+    public function setExpiresAt(\DateTimeInterface $date): void
     {
         $timestamp = $date->getTimestamp();
 
@@ -42,7 +42,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @param int $limit
      */
-    public function setUsageLimit($limit)
+    public function setUsageLimit(int $limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);
     }
@@ -50,7 +50,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * @return NodeElement
      */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }

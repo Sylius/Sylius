@@ -20,12 +20,12 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 final class CircularDependencyCheckerSpec extends ObjectBehavior
 {
-    function it_implements_circular_dependency_checker_interface(): void
+    public function it_implements_circular_dependency_checker_interface(): void
     {
         $this->shouldImplement(CircularDependencyCheckerInterface::class);
     }
 
-    function it_does_not_find_circular_dependency_if_checking_a_theme_without_any_parents(
+    public function it_does_not_find_circular_dependency_if_checking_a_theme_without_any_parents(
         ThemeInterface $theme
     ): void {
         $theme->getParents()->willReturn([]);
@@ -33,7 +33,7 @@ final class CircularDependencyCheckerSpec extends ObjectBehavior
         $this->check($theme);
     }
 
-    function it_does_not_find_circular_dependency_if_theme_parents_are_not_cycled(
+    public function it_does_not_find_circular_dependency_if_theme_parents_are_not_cycled(
         ThemeInterface $firstTheme,
         ThemeInterface $secondTheme,
         ThemeInterface $thirdTheme,
@@ -47,7 +47,7 @@ final class CircularDependencyCheckerSpec extends ObjectBehavior
         $this->check($firstTheme);
     }
 
-    function it_finds_circular_dependency_if_theme_parents_are_cycled(
+    public function it_finds_circular_dependency_if_theme_parents_are_cycled(
         ThemeInterface $firstTheme,
         ThemeInterface $secondTheme,
         ThemeInterface $thirdTheme,

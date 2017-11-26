@@ -50,11 +50,9 @@ final class CommandExecutor
     }
 
     /**
-     * @param string $command
      * @param array $parameters
      * @param OutputInterface|null $output
      *
-     * @return self
      *
      * @throws \Exception
      */

@@ -106,7 +106,6 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
     }
 
     /**
-     * @param ContainerBuilder $container
      * @param array $config
      */
     private function resolveConfigurationSources(ContainerBuilder $container, array $config): void

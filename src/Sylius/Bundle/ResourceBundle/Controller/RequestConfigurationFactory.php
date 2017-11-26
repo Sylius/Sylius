@@ -40,7 +40,6 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     private $defaultParameters;
 
     /**
-     * @param ParametersParserInterface $parametersParser
      * @param string $configurationClass
      * @param array $defaultParameters
      */
@@ -63,7 +62,6 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     }
 
     /**
-     * @param Request $request
      *
      * @return array
      *

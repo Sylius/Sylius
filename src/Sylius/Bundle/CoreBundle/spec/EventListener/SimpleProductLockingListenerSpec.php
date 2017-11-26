@@ -23,12 +23,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class SimpleProductLockingListenerSpec extends ObjectBehavior
 {
-    function let(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver): void
+    public function let(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver): void
     {
         $this->beConstructedWith($manager, $variantResolver);
     }
 
-    function it_locks_variant_of_a_simple_product_entity(
+    public function it_locks_variant_of_a_simple_product_entity(
         EntityManagerInterface $manager,
         ProductVariantResolverInterface $variantResolver,
         GenericEvent $event,
@@ -45,7 +45,7 @@ final class SimpleProductLockingListenerSpec extends ObjectBehavior
         $this->lock($event);
     }
 
-    function it_does_not_lock_variant_of_a_configurable_product_entity(
+    public function it_does_not_lock_variant_of_a_configurable_product_entity(
         GenericEvent $event,
         ProductInterface $product
     ): void {
@@ -55,7 +55,7 @@ final class SimpleProductLockingListenerSpec extends ObjectBehavior
         $this->lock($event);
     }
 
-    function it_throws_an_invalid_argument_exception_if_event_subject_is_not_a_product(GenericEvent $event): void
+    public function it_throws_an_invalid_argument_exception_if_event_subject_is_not_a_product(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject');
 

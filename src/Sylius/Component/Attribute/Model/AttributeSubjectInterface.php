@@ -23,7 +23,6 @@ interface AttributeSubjectInterface
     public function getAttributes(): Collection;
 
     /**
-     * @param string $localeCode
      * @param string $fallbackLocaleCode
      * @param string|null $baseLocaleCode
      *

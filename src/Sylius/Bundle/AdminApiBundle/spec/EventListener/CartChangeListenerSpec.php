@@ -22,12 +22,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class CartChangeListenerSpec extends ObjectBehavior
 {
-    function let(OrderProcessorInterface $orderProcessor, ObjectManager $manager): void
+    public function let(OrderProcessorInterface $orderProcessor, ObjectManager $manager): void
     {
         $this->beConstructedWith($orderProcessor, $manager);
     }
 
-    function it_recalculates_cart_on_add(OrderProcessorInterface $orderProcessor, ObjectManager $manager, GenericEvent $event, OrderItemInterface $orderItem, OrderInterface $order): void
+    public function it_recalculates_cart_on_add(OrderProcessorInterface $orderProcessor, ObjectManager $manager, GenericEvent $event, OrderItemInterface $orderItem, OrderInterface $order): void
     {
         $event->getSubject()->willReturn($orderItem);
         $orderItem->getOrder()->willReturn($order);
@@ -38,7 +38,7 @@ final class CartChangeListenerSpec extends ObjectBehavior
         $this->recalculateOrderOnAdd($event);
     }
 
-    function it_recalculates_cart_and_remove_item_on_delete(OrderProcessorInterface $orderProcessor, ObjectManager $manager, GenericEvent $event, OrderItemInterface $orderItem, OrderInterface $order): void
+    public function it_recalculates_cart_and_remove_item_on_delete(OrderProcessorInterface $orderProcessor, ObjectManager $manager, GenericEvent $event, OrderItemInterface $orderItem, OrderInterface $order): void
     {
         $event->getSubject()->willReturn($orderItem);
         $orderItem->getOrder()->willReturn($order);

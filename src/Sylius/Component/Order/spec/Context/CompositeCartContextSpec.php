@@ -20,17 +20,17 @@ use Sylius\Component\Order\Model\OrderInterface;
 
 final class CompositeCartContextSpec extends ObjectBehavior
 {
-    function it_implements_cart_context_interface(): void
+    public function it_implements_cart_context_interface(): void
     {
         $this->shouldImplement(CartContextInterface::class);
     }
 
-    function it_throws_cart_not_found_exception_if_there_are_no_nested_cart_contexts_defined(): void
+    public function it_throws_cart_not_found_exception_if_there_are_no_nested_cart_contexts_defined(): void
     {
         $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }
 
-    function it_throws_cart_not_found_exception_if_none_of_nested_cart_context_returned_a_cart(
+    public function it_throws_cart_not_found_exception_if_none_of_nested_cart_context_returned_a_cart(
         CartContextInterface $cartContext
     ): void {
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
@@ -39,7 +39,7 @@ final class CompositeCartContextSpec extends ObjectBehavior
         $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }
 
-    function it_returns_cart_from_first_available_context(
+    public function it_returns_cart_from_first_available_context(
         CartContextInterface $firstCartContext,
         CartContextInterface $secondCartContext,
         OrderInterface $cart
@@ -53,7 +53,7 @@ final class CompositeCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function its_cart_contexts_can_have_priority(
+    public function its_cart_contexts_can_have_priority(
         CartContextInterface $firstCartContext,
         CartContextInterface $secondCartContext,
         OrderInterface $cart

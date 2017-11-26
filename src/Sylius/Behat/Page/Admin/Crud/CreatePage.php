@@ -26,12 +26,11 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     private $routeName;
 
     /**
-     * @param Session $session
      * @param array $parameters
      * @param RouterInterface $router
      * @param string $routeName
      */
-    public function __construct(Session $session, array $parameters, RouterInterface $router, $routeName)
+    public function __construct(Session $session, array $parameters, RouterInterface $router, string $routeName)
     {
         parent::__construct($session, $parameters, $router);
 
@@ -41,7 +40,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function create()
+    public function create(): void
     {
         $this->getDocument()->pressButton('Create');
     }
@@ -79,7 +78,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement($element)
+    private function getFieldElement(string $element): ?\Behat\Mink\Element\NodeElement
     {
         $element = $this->getElement($element);
         while (null !== $element && !$element->hasClass('field')) {

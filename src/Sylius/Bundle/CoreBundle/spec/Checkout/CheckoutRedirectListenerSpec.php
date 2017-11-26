@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class CheckoutRedirectListenerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         RequestStack $requestStack,
         CheckoutStateUrlGeneratorInterface $checkoutStateUrlGenerator,
         RequestMatcherInterface $requestMatcher
@@ -34,7 +34,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
         $this->beConstructedWith($requestStack, $checkoutStateUrlGenerator, $requestMatcher);
     }
 
-    function it_redirects_to_proper_route_based_on_order_checkout_state(
+    public function it_redirects_to_proper_route_based_on_order_checkout_state(
         CheckoutStateUrlGeneratorInterface $checkoutStateUrlGenerator,
         OrderInterface $order,
         Request $request,
@@ -54,7 +54,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
         $this->handleCheckoutRedirect($resourceControllerEvent);
     }
 
-    function it_does_nothing_if_current_request_is_not_checkout_request(
+    public function it_does_nothing_if_current_request_is_not_checkout_request(
         Request $request,
         RequestMatcherInterface $requestMatcher,
         RequestStack $requestStack,
@@ -68,7 +68,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
         $this->handleCheckoutRedirect($resourceControllerEvent);
     }
 
-    function it_does_nothing_if_current_request_has_redirect_configured(
+    public function it_does_nothing_if_current_request_has_redirect_configured(
         Request $request,
         RequestMatcherInterface $requestMatcher,
         RequestStack $requestStack,
@@ -83,7 +83,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
         $this->handleCheckoutRedirect($resourceControllerEvent);
     }
 
-    function it_throws_exception_if_event_subject_is_not_an_order(
+    public function it_throws_exception_if_event_subject_is_not_an_order(
         Request $request,
         RequestMatcherInterface $requestMatcher,
         RequestStack $requestStack,

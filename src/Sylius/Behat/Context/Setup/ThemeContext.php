@@ -64,7 +64,7 @@ final class ThemeContext implements Context
     /**
      * @Given the store has :themeName theme
      */
-    public function storeHasTheme($themeName)
+    public function storeHasTheme($themeName): void
     {
         $this->testThemeConfigurationManager->add([
             'name' => $themeName,
@@ -76,7 +76,7 @@ final class ThemeContext implements Context
     /**
      * @Given channel :channel uses :theme theme
      */
-    public function channelUsesTheme(ChannelInterface $channel, ThemeInterface $theme)
+    public function channelUsesTheme(ChannelInterface $channel, ThemeInterface $theme): void
     {
         $channel->setThemeName($theme->getName());
 
@@ -90,7 +90,7 @@ final class ThemeContext implements Context
     /**
      * @Given channel :channel does not use any theme
      */
-    public function channelDoesNotUseAnyTheme(ChannelInterface $channel)
+    public function channelDoesNotUseAnyTheme(ChannelInterface $channel): void
     {
         $channel->setThemeName(null);
 
@@ -102,7 +102,7 @@ final class ThemeContext implements Context
     /**
      * @Given /^(this theme) changes homepage template contents to "([^"]+)"$/
      */
-    public function themeChangesHomepageTemplateContents(ThemeInterface $theme, $contents)
+    public function themeChangesHomepageTemplateContents(ThemeInterface $theme, $contents): void
     {
         $file = rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig';
         $dir = dirname($file);

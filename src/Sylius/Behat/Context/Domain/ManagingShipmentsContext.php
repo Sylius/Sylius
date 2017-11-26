@@ -36,7 +36,7 @@ final class ManagingShipmentsContext implements Context
     /**
      * @Then /^there should be no shipments with ("[^"]+" shipping method) in the registry$/
      */
-    public function shipmentShouldNotExistInTheRegistry(ShippingMethodInterface $shippingMethod)
+    public function shipmentShouldNotExistInTheRegistry(ShippingMethodInterface $shippingMethod): void
     {
         $shipments = $this->shipmentRepository->findBy(['method' => $shippingMethod]);
 

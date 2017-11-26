@@ -45,19 +45,17 @@ interface AssetsInstallerInterface
     public const RELATIVE_SYMLINK = 2;
 
     /**
-     * @param string $targetDir
      * @param int $symlinkMask
      *
      * @return int Effective symlink mask (lowest value received from installBundleAssets() method)
      */
-    public function installAssets(string $targetDir, int $symlinkMask);
+    public function installAssets(string $targetDir, int $symlinkMask): int;
 
     /**
-     * @param BundleInterface $bundle
      * @param string $targetDir
      * @param int $symlinkMask
      *
      * @return int Effective symlink mask (lowest value received from installDirAssets() method)
      */
-    public function installBundleAssets(BundleInterface $bundle, string $targetDir, int $symlinkMask);
+    public function installBundleAssets(BundleInterface $bundle, string $targetDir, int $symlinkMask): int;
 }

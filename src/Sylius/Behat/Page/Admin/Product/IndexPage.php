@@ -20,7 +20,7 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function filterByTaxon($taxonName)
+    public function filterByTaxon($taxonName): void
     {
         $this->getElement('taxon_filter', ['%taxon%' => $taxonName])->click();
     }

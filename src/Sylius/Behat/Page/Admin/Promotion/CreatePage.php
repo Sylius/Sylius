@@ -29,7 +29,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addRule($ruleName)
+    public function addRule($ruleName): void
     {
         $count = count($this->getCollectionItems('rules'));
 
@@ -45,7 +45,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectRuleOption($option, $value, $multiple = false)
+    public function selectRuleOption($option, $value, $multiple = false): void
     {
         $this->getLastCollectionItem('rules')->find('named', ['select', $option])->selectOption($value, $multiple);
     }
@@ -53,7 +53,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectAutocompleteRuleOption($option, $value, $multiple = false)
+    public function selectAutocompleteRuleOption($option, $value, $multiple = false): void
     {
         $option = strtolower(str_replace(' ', '_', $option));
 
@@ -75,7 +75,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillRuleOption($option, $value)
+    public function fillRuleOption($option, $value): void
     {
         $this->getLastCollectionItem('rules')->fillField($option, $value);
     }
@@ -83,7 +83,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillRuleOptionForChannel($channelName, $option, $value)
+    public function fillRuleOptionForChannel($channelName, $option, $value): void
     {
         $lastAction = $this->getChannelConfigurationOfLastRule($channelName);
         $lastAction->fillField($option, $value);
@@ -92,7 +92,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addAction($actionName)
+    public function addAction($actionName): void
     {
         $count = count($this->getCollectionItems('actions'));
 
@@ -108,7 +108,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectActionOption($option, $value, $multiple = false)
+    public function selectActionOption($option, $value, $multiple = false): void
     {
         $this->getLastCollectionItem('actions')->find('named', ['select', $option])->selectOption($value, $multiple);
     }
@@ -116,7 +116,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillActionOption($option, $value)
+    public function fillActionOption($option, $value): void
     {
         $this->getLastCollectionItem('actions')->fillField($option, $value);
     }
@@ -124,7 +124,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillActionOptionForChannel($channelName, $option, $value)
+    public function fillActionOptionForChannel($channelName, $option, $value): void
     {
         $lastAction = $this->getChannelConfigurationOfLastAction($channelName);
         $lastAction->fillField($option, $value);
@@ -133,22 +133,22 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillUsageLimit($limit)
+    public function fillUsageLimit($limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);
     }
 
-    public function makeExclusive()
+    public function makeExclusive(): void
     {
         $this->getDocument()->checkField('Exclusive');
     }
 
-    public function checkCouponBased()
+    public function checkCouponBased(): void
     {
         $this->getDocument()->checkField('Coupon based');
     }
 
-    public function checkChannel($name)
+    public function checkChannel($name): void
     {
         $this->getDocument()->checkField($name);
     }
@@ -156,7 +156,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setStartsAt(\DateTimeInterface $dateTime)
+    public function setStartsAt(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -167,7 +167,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setEndsAt(\DateTimeInterface $dateTime)
+    public function setEndsAt(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -193,7 +193,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectAutoCompleteFilterOption($option, $value, $multiple = false)
+    public function selectAutoCompleteFilterOption($option, $value, $multiple = false): void
     {
         $option = strtolower(str_replace(' ', '_', $option));
 
@@ -234,7 +234,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      *
      * @return NodeElement
      */
-    private function getChannelConfigurationOfLastAction($channelName)
+    private function getChannelConfigurationOfLastAction(string $channelName): NodeElement
     {
         return $this
             ->getLastCollectionItem('actions')
@@ -247,7 +247,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      *
      * @return NodeElement
      */
-    private function getChannelConfigurationOfLastRule($channelName)
+    private function getChannelConfigurationOfLastRule(string $channelName): NodeElement
     {
         return $this
             ->getLastCollectionItem('rules')
@@ -260,7 +260,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      *
      * @return NodeElement
      */
-    private function getLastCollectionItem($collection)
+    private function getLastCollectionItem(string $collection): NodeElement
     {
         $items = $this->getCollectionItems($collection);
 
@@ -274,7 +274,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      *
      * @return NodeElement[]
      */
-    private function getCollectionItems($collection)
+    private function getCollectionItems(string $collection)
     {
         $items = $this->getElement($collection)->findAll('css', 'div[data-form-collection="item"]');
 

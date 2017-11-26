@@ -265,7 +265,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function getInvalidLocalesTests()
+    public function getInvalidLocalesTests(): array
     {
         return [
             ['fr FR'],
@@ -285,7 +285,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function getAllValidLocalesTests()
+    public function getAllValidLocalesTests(): array
     {
         return array_merge(
             $this->getThemedLocalesTests(),
@@ -296,7 +296,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function getThemedLocalesTests()
+    public function getThemedLocalesTests(): array
     {
         return [
             ['fr@heron'],
@@ -312,7 +312,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function getThemelessLocalesTests()
+    public function getThemelessLocalesTests(): array
     {
         return [
             [''],
@@ -329,7 +329,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function getValidOptionsTests()
+    public function getValidOptionsTests(): array
     {
         return [
             [['cache_dir' => null, 'debug' => false]],
@@ -343,7 +343,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function getInvalidOptionsTests()
+    public function getInvalidOptionsTests(): array
     {
         return [
             [['heron' => '']],
@@ -358,7 +358,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
      *
      * @return Translator
      */
-    private function createTranslator($locale = 'en', $options = [])
+    private function createTranslator(string $locale = 'en', $options = []): Translator
     {
         $loaderProvider = new TranslatorLoaderProvider();
         $resourceProvider = new TranslatorResourceProvider();

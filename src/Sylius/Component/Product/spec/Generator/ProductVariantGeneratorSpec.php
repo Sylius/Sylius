@@ -26,26 +26,26 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 
 final class ProductVariantGeneratorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ProductVariantFactoryInterface $productVariantFactory,
         ProductVariantsParityCheckerInterface $variantsParityChecker
     ): void {
         $this->beConstructedWith($productVariantFactory, $variantsParityChecker);
     }
 
-    function it_implements_product_variant_generator_interfave(): void
+    public function it_implements_product_variant_generator_interfave(): void
     {
         $this->shouldImplement(ProductVariantGeneratorInterface::class);
     }
 
-    function it_cannot_generate_variants_for_an_object_without_options(ProductInterface $variable): void
+    public function it_cannot_generate_variants_for_an_object_without_options(ProductInterface $variable): void
     {
         $variable->hasOptions()->willReturn(false);
 
         $this->shouldThrow(\InvalidArgumentException::class)->duringGenerate($variable);
     }
 
-    function it_generates_variants_for_every_value_of_an_objects_single_option(
+    public function it_generates_variants_for_every_value_of_an_objects_single_option(
         ProductInterface $productVariable,
         ProductOptionInterface $colorOption,
         ProductOptionValueInterface $blackColor,
@@ -77,7 +77,7 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         $this->generate($productVariable);
     }
 
-    function it_does_not_generate_variant_if_given_variant_exists(
+    public function it_does_not_generate_variant_if_given_variant_exists(
         ProductInterface $productVariable,
         ProductOptionInterface $colorOption,
         ProductOptionValueInterface $blackColor,
@@ -109,7 +109,7 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         $this->generate($productVariable);
     }
 
-    function it_generates_variants_for_every_possible_permutation_of_an_objects_options_and_option_values(
+    public function it_generates_variants_for_every_possible_permutation_of_an_objects_options_and_option_values(
         ProductInterface $productVariable,
         ProductOptionInterface $colorOption,
         ProductOptionInterface $sizeOption,

@@ -26,7 +26,6 @@ final class AddressComparator implements AddressComparatorInterface
     }
 
     /**
-     * @param AddressInterface $address
      *
      * @return array
      */

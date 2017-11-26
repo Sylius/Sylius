@@ -30,7 +30,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     /**
      * @param mixed $customerId
      *
-     * @return QueryBuilder
      */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
 
@@ -38,7 +37,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @param mixed $customerId
      * @param mixed $channelId
      *
-     * @return QueryBuilder
      */
     public function createByCustomerAndChannelIdQueryBuilder($customerId, $channelId): QueryBuilder;
 
@@ -58,14 +56,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function countByCustomer(CustomerInterface $customer): int;
 
     /**
-     * @param CustomerInterface $customer
      *
      * @return array|OrderInterface[]
      */
     public function findByCustomer(CustomerInterface $customer): array;
 
     /**
-     * @param CustomerInterface $customer
      *
      * @return array|OrderInterface[]
      */
@@ -74,7 +70,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     /**
      * @param mixed $id
      *
-     * @return OrderInterface|null
      */
     public function findOneForPayment($id): ?OrderInterface;
 
@@ -88,9 +83,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /**
      * @param mixed $id
-     * @param ChannelInterface $channel
      *
-     * @return OrderInterface|null
      */
     public function findCartByChannel($id, ChannelInterface $channel): ?OrderInterface;
 
@@ -117,7 +110,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function countFulfilledByChannel(ChannelInterface $channel): int;
 
     /**
-     * @param int $count
      * @param ChannelInterface $channel
      *
      * @return array|OrderInterface[]
@@ -125,7 +117,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function findLatestInChannel(int $count, ChannelInterface $channel): array;
 
     /**
-     * @param \DateTimeInterface $terminalDate
      *
      * @return array|OrderInterface[]
      */
@@ -134,28 +125,24 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     /**
      * @param mixed $id
      *
-     * @return OrderInterface|null
      */
     public function findCartForSummary($id): ?OrderInterface;
 
     /**
      * @param mixed $id
      *
-     * @return OrderInterface|null
      */
     public function findCartForAddressing($id): ?OrderInterface;
 
     /**
      * @param mixed $id
      *
-     * @return OrderInterface|null
      */
     public function findCartForSelectingShipping($id): ?OrderInterface;
 
     /**
      * @param mixed $id
      *
-     * @return OrderInterface|null
      */
     public function findCartForSelectingPayment($id): ?OrderInterface;
 }

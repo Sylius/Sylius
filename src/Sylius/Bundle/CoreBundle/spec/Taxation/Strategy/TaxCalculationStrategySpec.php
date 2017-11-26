@@ -22,24 +22,24 @@ use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 
 final class TaxCalculationStrategySpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         OrderTaxesApplicatorInterface $applicatorOne,
         OrderTaxesApplicatorInterface $applicatorTwo
     ): void {
         $this->beConstructedWith('order_items_based', [$applicatorOne, $applicatorTwo]);
     }
 
-    function it_implements_a_tax_calculation_strategy_interface(): void
+    public function it_implements_a_tax_calculation_strategy_interface(): void
     {
         $this->shouldImplement(TaxCalculationStrategyInterface::class);
     }
 
-    function it_has_a_type(): void
+    public function it_has_a_type(): void
     {
         $this->getType()->shouldReturn('order_items_based');
     }
 
-    function it_throws_an_exception_if_any_of_the_applicators_are_not_of_the_correct_type(
+    public function it_throws_an_exception_if_any_of_the_applicators_are_not_of_the_correct_type(
         OrderTaxesApplicatorInterface $applicatorOne,
         OrderTaxesApplicatorInterface $applicatorTwo,
         \stdClass $applicatorThree
@@ -49,7 +49,7 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
-    function it_can_be_supported_when_the_tax_calculation_strategy_from_order_channel_matches_the_strategy_type(
+    public function it_can_be_supported_when_the_tax_calculation_strategy_from_order_channel_matches_the_strategy_type(
         ChannelInterface $channel,
         OrderInterface $order,
         ZoneInterface $zone
@@ -60,7 +60,7 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
         $this->supports($order, $zone)->shouldReturn(true);
     }
 
-    function it_cannot_be_supported_when_the_tax_calculation_strategy_from_order_channel_does_not_match_the_strategy_type(
+    public function it_cannot_be_supported_when_the_tax_calculation_strategy_from_order_channel_does_not_match_the_strategy_type(
         ChannelInterface $channel,
         OrderInterface $order,
         ZoneInterface $zone
@@ -71,7 +71,7 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
         $this->supports($order, $zone)->shouldReturn(false);
     }
 
-    function it_applies_all_of_the_applicators(
+    public function it_applies_all_of_the_applicators(
         OrderTaxesApplicatorInterface $applicatorOne,
         OrderTaxesApplicatorInterface $applicatorTwo,
         OrderInterface $order,

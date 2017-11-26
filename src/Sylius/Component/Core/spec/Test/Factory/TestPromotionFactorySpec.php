@@ -22,17 +22,17 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class TestPromotionFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $promotionFactory): void
+    public function let(FactoryInterface $promotionFactory): void
     {
         $this->beConstructedWith($promotionFactory);
     }
 
-    function it_implements_a_test_promotion_factory_interface(): void
+    public function it_implements_a_test_promotion_factory_interface(): void
     {
         $this->shouldImplement(TestPromotionFactoryInterface::class);
     }
 
-    function it_creates_a_promotion_with_a_given_name($promotionFactory, PromotionInterface $promotion): void
+    public function it_creates_a_promotion_with_a_given_name($promotionFactory, PromotionInterface $promotion): void
     {
         $promotionFactory->createNew()->willReturn($promotion);
         $promotion->setName('Super promotion')->shouldBeCalled();
@@ -43,7 +43,7 @@ final class TestPromotionFactorySpec extends ObjectBehavior
         $this->create('Super promotion')->shouldReturn($promotion);
     }
 
-    function it_creates_a_promotion_with_a_given_name_and_channel(
+    public function it_creates_a_promotion_with_a_given_name_and_channel(
         FactoryInterface $promotionFactory,
         ChannelInterface $channel,
         PromotionInterface $promotion

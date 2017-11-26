@@ -66,7 +66,7 @@ final class ProductReviewContext implements Context
     /**
      * @Given /^(this product) has one review from (customer "[^"]+")$/
      */
-    public function productHasAReview(ProductInterface $product, CustomerInterface $customer)
+    public function productHasAReview(ProductInterface $product, CustomerInterface $customer): void
     {
         $review = $this->createProductReview($product, 'Title', 5, 'Comment', $customer);
 
@@ -82,7 +82,7 @@ final class ProductReviewContext implements Context
         $rating,
         CustomerInterface $customer,
         $daysSinceCreation = null
-    ) {
+    ): void {
         $review = $this->createProductReview($product, $title, $rating, $title, $customer);
         if (null !== $daysSinceCreation) {
             $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
@@ -100,7 +100,7 @@ final class ProductReviewContext implements Context
         $rating,
         $comment,
         CustomerInterface $customer
-    ) {
+    ): void {
         $review = $this->createProductReview($product, $title, $rating, $comment, $customer);
 
         $this->productReviewRepository->add($review);
@@ -114,7 +114,7 @@ final class ProductReviewContext implements Context
         $title,
         $rating,
         CustomerInterface $customer
-    ) {
+    ): void {
         $review = $this->createProductReview($product, $title, $rating, $title, $customer, null);
 
         $this->productReviewRepository->add($review);
@@ -124,7 +124,7 @@ final class ProductReviewContext implements Context
      * @Given /^(this product)(?:| also) has accepted reviews rated (\d+), (\d+), (\d+), (\d+) and (\d+)$/
      * @Given /^(this product)(?:| also) has accepted reviews rated (\d+), (\d+) and (\d+)$/
      */
-    public function thisProductHasAcceptedReviewsRated(ProductInterface $product, ...$rates)
+    public function thisProductHasAcceptedReviewsRated(ProductInterface $product, ...$rates): void
     {
         $customer = $this->sharedStorage->get('customer');
         foreach ($rates as $key => $rate) {
@@ -136,7 +136,7 @@ final class ProductReviewContext implements Context
     /**
      * @Given /^(this product)(?:| also) has review rated (\d+) which is not accepted yet$/
      */
-    public function itAlsoHasReviewRatedWhichIsNotAcceptedYet(ProductInterface $product, $rate)
+    public function itAlsoHasReviewRatedWhichIsNotAcceptedYet(ProductInterface $product, $rate): void
     {
         $customer = $this->sharedStorage->get('customer');
         $review = $this->createProductReview($product, 'Title', $rate, 'Comment', $customer, null);
@@ -146,7 +146,7 @@ final class ProductReviewContext implements Context
     /**
      * @Given /^(this product) also has review rated (\d+) which is rejected$/
      */
-    public function itAlsoHasReviewRatedWhichIsRejected(ProductInterface $product, $rate)
+    public function itAlsoHasReviewRatedWhichIsRejected(ProductInterface $product, $rate): void
     {
         $customer = $this->sharedStorage->get('customer');
         $review = $this->createProductReview($product, 'Title', $rate, 'Comment', $customer, ProductReviewTransitions::TRANSITION_REJECT);
@@ -154,7 +154,6 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @param ProductInterface $product
      * @param string $title
      * @param int $rating
      * @param string $comment
@@ -165,12 +164,12 @@ final class ProductReviewContext implements Context
      */
     private function createProductReview(
         ProductInterface $product,
-        $title,
-        $rating,
-        $comment,
-        CustomerInterface $customer = null,
-        $transition = ProductReviewTransitions::TRANSITION_ACCEPT
-    ) {
+        string $title,
+        int $rating,
+        string $comment,
+        ?CustomerInterface $customer = null,
+        string $transition = ProductReviewTransitions::TRANSITION_ACCEPT
+    ): ReviewInterface {
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->createNew();
         $review->setTitle($title);

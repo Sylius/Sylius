@@ -20,7 +20,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyFirstName($name)
+    public function specifyFirstName($name): void
     {
         $this->getDocument()->fillField('First name', $name);
     }
@@ -28,7 +28,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyLastName($name)
+    public function specifyLastName($name): void
     {
         $this->getDocument()->fillField('Last name', $name);
     }
@@ -36,7 +36,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyEmail($email)
+    public function specifyEmail($email): void
     {
         $this->getDocument()->fillField('Email', $email);
     }
@@ -44,7 +44,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyBirthday($birthday)
+    public function specifyBirthday($birthday): void
     {
         $this->getDocument()->fillField('Birthday', $birthday);
     }
@@ -52,7 +52,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPassword($password)
+    public function specifyPassword($password): void
     {
         $this->getDocument()->fillField('Password', $password);
     }
@@ -60,7 +60,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseGender($gender)
+    public function chooseGender($gender): void
     {
         $this->getDocument()->selectFieldOption('Gender', $gender);
     }
@@ -68,7 +68,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseGroup($group)
+    public function chooseGroup($group): void
     {
         $this->getDocument()->selectFieldOption('Group', $group);
     }
@@ -76,7 +76,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectCreateAccount()
+    public function selectCreateAccount(): void
     {
         $this->getDocument()->find('css', 'label[for=sylius_customer_createUser]')->click();
     }

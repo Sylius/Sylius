@@ -44,7 +44,7 @@ final class LoginContext implements Context
     /**
      * @Given I want to log in
      */
-    public function iWantToLogIn()
+    public function iWantToLogIn(): void
     {
         $this->loginPage->open();
     }
@@ -52,7 +52,7 @@ final class LoginContext implements Context
     /**
      * @When I specify the username as :username
      */
-    public function iSpecifyTheUsername($username = null)
+    public function iSpecifyTheUsername($username = null): void
     {
         $this->loginPage->specifyUsername($username);
     }
@@ -61,7 +61,7 @@ final class LoginContext implements Context
      * @When I specify the password as :password
      * @When I do not specify the password
      */
-    public function iSpecifyThePasswordAs($password = null)
+    public function iSpecifyThePasswordAs($password = null): void
     {
         $this->loginPage->specifyPassword($password);
     }
@@ -69,7 +69,7 @@ final class LoginContext implements Context
     /**
      * @When I log in
      */
-    public function iLogIn()
+    public function iLogIn(): void
     {
         $this->loginPage->logIn();
     }
@@ -77,7 +77,7 @@ final class LoginContext implements Context
     /**
      * @Then I should be logged in
      */
-    public function iShouldBeLoggedIn()
+    public function iShouldBeLoggedIn(): void
     {
         $this->dashboardPage->verify();
     }
@@ -85,7 +85,7 @@ final class LoginContext implements Context
     /**
      * @Then I should not be logged in
      */
-    public function iShouldNotBeLoggedIn()
+    public function iShouldNotBeLoggedIn(): void
     {
         Assert::false($this->dashboardPage->isOpen());
     }
@@ -93,7 +93,7 @@ final class LoginContext implements Context
     /**
      * @Then I should be notified about bad credentials
      */
-    public function iShouldBeNotifiedAboutBadCredentials()
+    public function iShouldBeNotifiedAboutBadCredentials(): void
     {
         Assert::true($this->loginPage->hasValidationErrorWith('Error Bad credentials.'));
     }
@@ -101,7 +101,7 @@ final class LoginContext implements Context
     /**
      * @Then I should be able to log in as :username authenticated by :password password
      */
-    public function iShouldBeAbleToLogInAsAuthenticatedByPassword($username, $password)
+    public function iShouldBeAbleToLogInAsAuthenticatedByPassword($username, $password): void
     {
         $this->logInAgain($username, $password);
 
@@ -111,7 +111,7 @@ final class LoginContext implements Context
     /**
      * @When /^(this administrator) logs in using "([^"]+)" password$/
      */
-    public function theyLogIn(AdminUserInterface $adminUser, $password)
+    public function theyLogIn(AdminUserInterface $adminUser, $password): void
     {
         $this->logInAgain($adminUser->getUsername(), $password);
     }
@@ -119,7 +119,7 @@ final class LoginContext implements Context
     /**
      * @Then I should not be able to log in as :username authenticated by :password password
      */
-    public function iShouldNotBeAbleToLogInAsAuthenticatedByPassword($username, $password)
+    public function iShouldNotBeAbleToLogInAsAuthenticatedByPassword($username, $password): void
     {
         $this->logInAgain($username, $password);
 
@@ -131,7 +131,7 @@ final class LoginContext implements Context
      * @param string $username
      * @param string $password
      */
-    private function logInAgain($username, $password)
+    private function logInAgain(string $username, string $password): void
     {
         $this->dashboardPage->open();
         $this->dashboardPage->logOut();

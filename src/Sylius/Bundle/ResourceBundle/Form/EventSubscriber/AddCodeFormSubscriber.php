@@ -33,7 +33,6 @@ final class AddCodeFormSubscriber implements EventSubscriberInterface
     private $options;
 
     /**
-     * @param string $type
      * @param array $options
      */
     public function __construct(?string $type = null, array $options = [])

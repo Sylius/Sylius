@@ -85,10 +85,10 @@ class AddressExampleFactory extends AbstractExampleFactory
                 return $this->faker->lastName;
             })
             ->setDefault('phone_number', function (Options $options): ?string {
-                return mt_rand(1, 100) > 50 ? $this->faker->phoneNumber : null;
+                return random_int(1, 100) > 50 ? $this->faker->phoneNumber : null;
             })
             ->setDefault('company', function (Options $options): ?string {
-                return mt_rand(1, 100) > 50 ? $this->faker->company : null;
+                return random_int(1, 100) > 50 ? $this->faker->company : null;
             })
             ->setDefault('street', function (Options $options): string {
                 return $this->faker->streetAddress;
@@ -178,7 +178,6 @@ class AddressExampleFactory extends AbstractExampleFactory
 
     /**
      * @param array $options
-     * @param AddressInterface $address
      */
     private function provideProvince(array $options, AddressInterface $address): void
     {
@@ -216,7 +215,6 @@ class AddressExampleFactory extends AbstractExampleFactory
 
     /**
      * @param array $options
-     * @param AddressInterface $address
      */
     private function resolveCountryProvince(array $options, AddressInterface $address): void
     {

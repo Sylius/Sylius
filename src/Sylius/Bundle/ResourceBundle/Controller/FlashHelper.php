@@ -112,7 +112,6 @@ final class FlashHelper implements FlashHelperInterface
     }
 
     /**
-     * @param string $type
      * @param string $message
      * @param array $parameters
      */
@@ -126,7 +125,6 @@ final class FlashHelper implements FlashHelperInterface
     }
 
     /**
-     * @param string $message
      * @param array $parameters
      *
      * @return array
@@ -150,11 +148,9 @@ final class FlashHelper implements FlashHelperInterface
     }
 
     /**
-     * @param string $message
      * @param string $locale
      * @param array $parameters
      *
-     * @return bool
      */
     private function isTranslationDefined(string $message, string $locale, array $parameters): bool
     {
@@ -168,7 +164,6 @@ final class FlashHelper implements FlashHelperInterface
     }
 
     /**
-     * @param string $metadataName
      * @param string $actionName
      *
      * @return array

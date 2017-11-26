@@ -38,7 +38,6 @@ final class NonChannelLocaleListener
     private $firewallNames;
 
     /**
-     * @param LocaleProviderInterface $channelBasedLocaleProvider
      * @param FirewallMap $firewallMap
      * @param string[] $firewallNames
      */

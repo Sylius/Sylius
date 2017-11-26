@@ -50,7 +50,6 @@ final class ThemeAwareTranslator implements TranslatorInterface, TranslatorBagIn
     /**
      * Passes through all unknown calls onto the translator object.
      *
-     * @param string $method
      * @param array $arguments
      *
      * @return mixed

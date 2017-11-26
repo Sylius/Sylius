@@ -17,17 +17,17 @@ use PhpSpec\ObjectBehavior;
 
 final class ExistingServiceExceptionSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith('Service', 'foo');
     }
 
-    function it_is_an_exception(): void
+    public function it_is_an_exception(): void
     {
-        $this->shouldHaveType(\Exception::class);
+        $this->shouldHaveType(\Throwable::class);
     }
 
-    function it_is_an_invalid_argument_exception(): void
+    public function it_is_an_invalid_argument_exception(): void
     {
         $this->shouldHaveType(\InvalidArgumentException::class);
     }

@@ -25,7 +25,7 @@ final class EnabledValidator extends ConstraintValidator
      * @param ToggleableInterface $value
      * @param Constraints\Enabled $constraint
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (null === $value) {
             return;

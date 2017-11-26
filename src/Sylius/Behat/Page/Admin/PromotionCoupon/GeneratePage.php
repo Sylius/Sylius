@@ -43,7 +43,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
         return false !== strpos($this->getElement('form')->find('css', '.ui.red.label')->getText(), $message);
     }
 
-    public function generate()
+    public function generate(): void
     {
         $this->getDocument()->pressButton('Generate');
     }
@@ -51,7 +51,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyAmount($amount)
+    public function specifyAmount($amount): void
     {
         $this->getDocument()->fillField('Amount', $amount);
     }
@@ -59,7 +59,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyCodeLength($codeLength)
+    public function specifyCodeLength($codeLength): void
     {
         $this->getDocument()->fillField('Code length', $codeLength);
     }
@@ -67,7 +67,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTimeInterface $date)
+    public function setExpiresAt(\DateTimeInterface $date): void
     {
         $timestamp = $date->getTimestamp();
 
@@ -77,7 +77,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setUsageLimit($limit)
+    public function setUsageLimit($limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);
     }
@@ -112,7 +112,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
      *
      * @throws ElementNotFoundException
      */
-    private function checkValidationMessageFor($element, $message)
+    private function checkValidationMessageFor(string $element, string $message): bool
     {
         $foundElement = $this->getElement($element);
         $validatedField = $this->getValidatedField($foundElement);
@@ -124,13 +124,12 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     }
 
     /**
-     * @param NodeElement $element
      *
      * @return NodeElement
      *
      * @throws ElementNotFoundException
      */
-    private function getValidatedField(NodeElement $element)
+    private function getValidatedField(NodeElement $element): NodeElement
     {
         while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();

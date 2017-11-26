@@ -23,43 +23,43 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 final class ThemeAwareTranslatorSpec extends ObjectBehavior
 {
-    function let(TranslatorInterface $translator, ThemeContextInterface $themeContext): void
+    public function let(TranslatorInterface $translator, ThemeContextInterface $themeContext): void
     {
         $translator->implement(TranslatorBagInterface::class);
 
         $this->beConstructedWith($translator, $themeContext);
     }
 
-    function it_implements_translator_interface(): void
+    public function it_implements_translator_interface(): void
     {
         $this->shouldImplement(TranslatorInterface::class);
     }
 
-    function it_implements_translator_bag_interface(): void
+    public function it_implements_translator_bag_interface(): void
     {
         $this->shouldImplement(TranslatorBagInterface::class);
     }
 
-    function it_implements_warmable_interface(): void
+    public function it_implements_warmable_interface(): void
     {
         $this->shouldImplement(WarmableInterface::class);
     }
 
-    function it_proxies_getting_the_locale_to_the_decorated_translator(TranslatorInterface $translator): void
+    public function it_proxies_getting_the_locale_to_the_decorated_translator(TranslatorInterface $translator): void
     {
         $translator->getLocale()->willReturn('pl_PL');
 
         $this->getLocale()->shouldReturn('pl_PL');
     }
 
-    function it_proxies_setting_the_locale_to_the_decorated_translator(TranslatorInterface $translator): void
+    public function it_proxies_setting_the_locale_to_the_decorated_translator(TranslatorInterface $translator): void
     {
         $translator->setLocale('pl_PL')->shouldBeCalled();
 
         $this->setLocale('pl_PL');
     }
 
-    function it_proxies_getting_catalogue_for_given_locale_to_the_decorated_translator(
+    public function it_proxies_getting_catalogue_for_given_locale_to_the_decorated_translator(
         TranslatorBagInterface $translator,
         MessageCatalogueInterface $messageCatalogue
     ): void {
@@ -68,7 +68,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $this->getCatalogue('pl_PL')->shouldReturn($messageCatalogue);
     }
 
-    function it_just_proxies_translating(TranslatorInterface $translator, ThemeContextInterface $themeContext): void
+    public function it_just_proxies_translating(TranslatorInterface $translator, ThemeContextInterface $themeContext): void
     {
         $themeContext->getTheme()->willReturn(null);
 
@@ -77,7 +77,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $this->trans('id', ['param'], 'domain')->shouldReturn('translated string');
     }
 
-    function it_just_proxies_translating_with_custom_locale(TranslatorInterface $translator, ThemeContextInterface $themeContext): void
+    public function it_just_proxies_translating_with_custom_locale(TranslatorInterface $translator, ThemeContextInterface $themeContext): void
     {
         $themeContext->getTheme()->willReturn(null);
 
@@ -86,7 +86,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $this->trans('id', ['param'], 'domain', 'customlocale')->shouldReturn('translated string');
     }
 
-    function it_proxies_translating_with_modified_default_locale(
+    public function it_proxies_translating_with_modified_default_locale(
         TranslatorInterface $translator,
         ThemeContextInterface $themeContext,
         ThemeInterface $theme
@@ -100,7 +100,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $this->trans('id', ['param'], 'domain')->shouldReturn('translated string');
     }
 
-    function it_proxies_translating_with_modified_custom_locale(
+    public function it_proxies_translating_with_modified_custom_locale(
         TranslatorInterface $translator,
         ThemeContextInterface $themeContext,
         ThemeInterface $theme
@@ -113,7 +113,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $this->trans('id', ['param'], 'domain', 'customlocale')->shouldReturn('translated string');
     }
 
-    function it_just_proxies_choice_translating(TranslatorInterface $translator, ThemeContextInterface $themeContext): void
+    public function it_just_proxies_choice_translating(TranslatorInterface $translator, ThemeContextInterface $themeContext): void
     {
         $themeContext->getTheme()->willReturn(null);
 
@@ -122,7 +122,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $this->transChoice('id', 2, ['param'], 'domain')->shouldReturn('translated string');
     }
 
-    function it_just_proxies_choice_translating_with_custom_locale(TranslatorInterface $translator, ThemeContextInterface $themeContext): void
+    public function it_just_proxies_choice_translating_with_custom_locale(TranslatorInterface $translator, ThemeContextInterface $themeContext): void
     {
         $themeContext->getTheme()->willReturn(null);
 
@@ -131,7 +131,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $this->transChoice('id', 2, ['param'], 'domain', 'customlocale')->shouldReturn('translated string');
     }
 
-    function it_proxies_choice_translating_with_modified_default_locale(
+    public function it_proxies_choice_translating_with_modified_default_locale(
         TranslatorInterface $translator,
         ThemeContextInterface $themeContext,
         ThemeInterface $theme
@@ -145,7 +145,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $this->transChoice('id', 2, ['param'], 'domain')->shouldReturn('translated string');
     }
 
-    function it_proxies_choice_translating_with_modified_custom_locale(
+    public function it_proxies_choice_translating_with_modified_custom_locale(
         TranslatorInterface $translator,
         ThemeContextInterface $themeContext,
         ThemeInterface $theme
@@ -158,12 +158,12 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $this->transChoice('id', 2, ['param'], 'domain', 'customlocale')->shouldReturn('translated string');
     }
 
-    function it_does_not_warm_up_if_decorated_translator_is_not_warmable(): void
+    public function it_does_not_warm_up_if_decorated_translator_is_not_warmable(): void
     {
         $this->warmUp('cache');
     }
 
-    function it_warms_up_if_decorated_translator_is_warmable(WarmableInterface $translator): void
+    public function it_warms_up_if_decorated_translator_is_warmable(WarmableInterface $translator): void
     {
         $translator->warmUp('cache')->shouldBeCalled();
 

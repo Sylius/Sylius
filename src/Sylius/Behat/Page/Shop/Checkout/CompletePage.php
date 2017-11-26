@@ -32,7 +32,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     private $tableAccessor;
 
     /**
-     * @param Session $session
      * @param array $parameters
      * @param RouterInterface $router
      * @param TableAccessorInterface $tableAccessor
@@ -156,7 +155,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addNotes($notes)
+    public function addNotes($notes): void
     {
         $this->getElement('extra_notes')->setValue($notes);
     }
@@ -248,22 +247,22 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function confirmOrder()
+    public function confirmOrder(): void
     {
         $this->getElement('confirm_button')->press();
     }
 
-    public function changeAddress()
+    public function changeAddress(): void
     {
         $this->getElement('addressing_step_label')->click();
     }
 
-    public function changeShippingMethod()
+    public function changeShippingMethod(): void
     {
         $this->getElement('shipping_step_label')->click();
     }
 
-    public function changePaymentMethod()
+    public function changePaymentMethod(): void
     {
         $this->getElement('payment_step_label')->click();
     }
@@ -299,7 +298,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function tryToOpen(array $urlParameters = [])
+    public function tryToOpen(array $urlParameters = []): void
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
             $start = microtime(true);
@@ -346,22 +345,20 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     }
 
     /**
-     * @param ProductInterface $product
      *
      * @return NodeElement
      */
-    private function getProductRowElement(ProductInterface $product)
+    private function getProductRowElement(ProductInterface $product): NodeElement
     {
         return $this->getElement('product_row', ['%name%' => $product->getName()]);
     }
 
     /**
      * @param string $displayedAddress
-     * @param AddressInterface $address
      *
      * @return bool
      */
-    private function isAddressValid($displayedAddress, AddressInterface $address)
+    private function isAddressValid(string $displayedAddress, AddressInterface $address): bool
     {
         return
             $this->hasAddressPart($displayedAddress, $address->getCompany(), true) &&
@@ -382,7 +379,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      *
      * @return bool
      */
-    private function hasAddressPart($address, $addressPart, $optional = false)
+    private function hasAddressPart(string $address, string $addressPart, $optional = false): bool
     {
         if ($optional && null === $addressPart) {
             return true;
@@ -396,7 +393,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      *
      * @return string
      */
-    private function getCountryName($countryCode)
+    private function getCountryName(string $countryCode): string
     {
         return strtoupper(Intl::getRegionBundle()->getCountryName($countryCode, 'en'));
     }
@@ -406,7 +403,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      *
      * @return int
      */
-    private function getPriceFromString($price)
+    private function getPriceFromString(string $price): int
     {
         return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
@@ -416,7 +413,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      *
      * @return int
      */
-    private function getTotalFromString($total)
+    private function getTotalFromString(string $total): int
     {
         $total = str_replace('Total:', '', $total);
 
@@ -428,7 +425,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      *
      * @return int
      */
-    private function getBaseTotalFromString($total)
+    private function getBaseTotalFromString(string $total): int
     {
         $total = str_replace('Total in base currency:', '', $total);
 

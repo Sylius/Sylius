@@ -28,7 +28,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function titleReview($title)
+    public function titleReview($title): void
     {
         $this->getElement('title')->setValue($title);
     }
@@ -36,7 +36,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setComment($comment)
+    public function setComment($comment): void
     {
         $this->getElement('comment')->setValue($comment);
     }
@@ -44,7 +44,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setAuthor($author)
+    public function setAuthor($author): void
     {
         $this->getElement('author')->setValue($author);
     }
@@ -52,12 +52,12 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function rateReview($rate)
+    public function rateReview($rate): void
     {
         $this->getElement('rate', ['%rate%' => $rate])->click();
     }
 
-    public function submitReview()
+    public function submitReview(): void
     {
         $this->getDocument()->pressButton('Add');
     }

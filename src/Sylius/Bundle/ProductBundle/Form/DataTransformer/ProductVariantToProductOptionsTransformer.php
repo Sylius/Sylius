@@ -77,7 +77,6 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
     /**
      * @param ProductOptionValueInterface[] $optionValues
      *
-     * @return ProductVariantInterface|null
      *
      * @throws TransformationFailedException
      */

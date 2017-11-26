@@ -30,7 +30,6 @@ final class CookieSetter implements CookieSetterInterface
     private $minkParameters;
 
     /**
-     * @param Session $minkSession
      * @param array $minkParameters
      */
     public function __construct(Session $minkSession, array $minkParameters)
@@ -42,7 +41,7 @@ final class CookieSetter implements CookieSetterInterface
     /**
      * {@inheritdoc}
      */
-    public function setCookie($name, $value)
+    public function setCookie($name, $value): void
     {
         $this->prepareMinkSessionIfNeeded();
 
@@ -59,7 +58,7 @@ final class CookieSetter implements CookieSetterInterface
         $this->minkSession->setCookie($name, $value);
     }
 
-    private function prepareMinkSessionIfNeeded()
+    private function prepareMinkSessionIfNeeded(): void
     {
         if ($this->minkSession->getDriver() instanceof SymfonyDriver) {
             return;

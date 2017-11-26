@@ -35,7 +35,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * @param CollectionsExpressionBuilder|null $expressionBuilder
      */
-    public function __construct(CollectionsExpressionBuilder $expressionBuilder = null)
+    public function __construct(?CollectionsExpressionBuilder $expressionBuilder = null)
     {
         $this->expressionBuilder = $expressionBuilder ?: new CollectionsExpressionBuilder();
     }
@@ -163,7 +163,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function orderBy(string $field, string $direction)
+    public function orderBy(string $field, string $direction): void
     {
         $this->orderBys = [$field => $direction];
     }
@@ -171,7 +171,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function addOrderBy(string $field, string $direction)
+    public function addOrderBy(string $field, string $direction): void
     {
         $this->orderBys[$field] = $direction;
     }

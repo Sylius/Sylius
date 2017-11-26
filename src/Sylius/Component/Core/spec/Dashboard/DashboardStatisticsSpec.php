@@ -17,32 +17,32 @@ use PhpSpec\ObjectBehavior;
 
 final class DashboardStatisticsSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith(2564, 24, 10);
     }
 
-    function it_has_total_sales_stat(): void
+    public function it_has_total_sales_stat(): void
     {
         $this->getTotalSales()->shouldReturn(2564);
     }
 
-    function it_has_new_orders_stat(): void
+    public function it_has_new_orders_stat(): void
     {
         $this->getNumberOfNewOrders()->shouldReturn(24);
     }
 
-    function ith_has_new_customers_stat(): void
+    public function ith_has_new_customers_stat(): void
     {
         $this->getNumberOfNewCustomers()->shouldReturn(10);
     }
 
-    function it_calculates_an_average_order_value(): void
+    public function it_calculates_an_average_order_value(): void
     {
         $this->getAverageOrderValue()->shouldReturn(107);
     }
 
-    function it_returns_0_as_average_order_value_when_there_are_no_orders(): void
+    public function it_returns_0_as_average_order_value_when_there_are_no_orders(): void
     {
         $this->beConstructedWith(0, 0, 2);
 

@@ -23,7 +23,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameIt($name)
+    public function nameIt($name): void
     {
         $this->getElement('name')->setValue($name);
     }

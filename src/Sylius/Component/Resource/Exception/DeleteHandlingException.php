@@ -37,7 +37,7 @@ class DeleteHandlingException extends \Exception
         string $flash = 'something_went_wrong_error',
         int $apiResponseCode = 500,
         int $code = 0,
-        ?\Exception $previous = null
+        ?\Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);
 

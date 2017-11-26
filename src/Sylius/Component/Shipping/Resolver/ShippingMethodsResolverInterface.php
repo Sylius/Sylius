@@ -19,7 +19,6 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 interface ShippingMethodsResolverInterface
 {
     /**
-     * @param ShippingSubjectInterface $subject
      *
      * @return ShippingMethodInterface[]
      */

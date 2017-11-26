@@ -33,7 +33,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     private $routeName;
 
     /**
-     * @param Session $session
      * @param array $parameters
      * @param RouterInterface $router
      * @param TableAccessorInterface $tableAccessor
@@ -44,7 +43,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         array $parameters,
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
-        $routeName
+        string $routeName
     ) {
         parent::__construct($session, $parameters, $router);
 
@@ -79,7 +78,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function sortBy($fieldName)
+    public function sortBy($fieldName): void
     {
         $sortableHeaders = $this->tableAccessor->getSortableHeaders($this->getElement('table'));
         Assert::keyExists($sortableHeaders, $fieldName, sprintf('Column "%s" is not sortable.', $fieldName));
@@ -110,7 +109,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * @return int
      */
-    public function countItems()
+    public function countItems(): int
     {
         try {
             return $this->getTableAccessor()->countTableBodyRows($this->getElement('table'));
@@ -122,7 +121,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteResourceOnPage(array $parameters)
+    public function deleteResourceOnPage(array $parameters): void
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
@@ -162,7 +161,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $bulkCheckbox->check();
     }
 
-    public function filter()
+    public function filter(): void
     {
         $this->getElement('filter')->press();
     }
@@ -184,7 +183,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * @return TableAccessorInterface
      */
-    protected function getTableAccessor()
+    protected function getTableAccessor(): TableAccessorInterface
     {
         return $this->tableAccessor;
     }

@@ -21,12 +21,12 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 final class ResolveNextRouteActionSpec extends ObjectBehavior
 {
-    function it_is_a_payum_action(): void
+    public function it_is_a_payum_action(): void
     {
         $this->shouldImplement(ActionInterface::class);
     }
 
-    function it_resolves_next_route_for_completed_payment(
+    public function it_resolves_next_route_for_completed_payment(
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment
     ): void {
@@ -38,7 +38,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
         $this->execute($resolveNextRouteRequest);
     }
 
-    function it_resolves_next_route_for_cancelled_payment(
+    public function it_resolves_next_route_for_cancelled_payment(
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment,
         OrderInterface $order
@@ -54,7 +54,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
         $this->execute($resolveNextRouteRequest);
     }
 
-    function it_resolves_next_route_for_payment_in_cart_state(
+    public function it_resolves_next_route_for_payment_in_cart_state(
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment,
         OrderInterface $order
@@ -70,7 +70,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
         $this->execute($resolveNextRouteRequest);
     }
 
-    function it_resolves_next_route_for_faild_payment(
+    public function it_resolves_next_route_for_faild_payment(
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment,
         OrderInterface $order
@@ -86,7 +86,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
         $this->execute($resolveNextRouteRequest);
     }
 
-    function it_resolves_next_route_for_processing_payment(
+    public function it_resolves_next_route_for_processing_payment(
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment,
         OrderInterface $order

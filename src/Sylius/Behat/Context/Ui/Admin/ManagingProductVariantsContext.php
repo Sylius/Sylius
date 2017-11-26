@@ -93,7 +93,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Given /^I want to create a new variant of (this product)$/
      */
-    public function iWantToCreateANewProduct(ProductInterface $product)
+    public function iWantToCreateANewProduct(ProductInterface $product): void
     {
         $this->createPage->open(['productId' => $product->getId()]);
     }
@@ -102,7 +102,7 @@ final class ManagingProductVariantsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs($code = null): void
     {
         $this->createPage->specifyCode($code);
     }
@@ -110,7 +110,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I name it :name in :language
      */
-    public function iNameItIn($name, $language)
+    public function iNameItIn($name, $language): void
     {
         $this->createPage->nameItIn($name, $language);
     }
@@ -118,7 +118,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I rename it to :name
      */
-    public function iRenameItTo($name)
+    public function iRenameItTo($name): void
     {
         $this->updatePage->nameIt($name);
     }
@@ -127,7 +127,7 @@ final class ManagingProductVariantsContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -135,7 +135,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I disable its inventory tracking
      */
-    public function iDisableItsTracking()
+    public function iDisableItsTracking(): void
     {
         $this->updatePage->disableTracking();
     }
@@ -143,7 +143,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I enable its inventory tracking
      */
-    public function iEnableItsTracking()
+    public function iEnableItsTracking(): void
     {
         $this->updatePage->enableTracking();
     }
@@ -152,7 +152,7 @@ final class ManagingProductVariantsContext implements Context
      * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      * @When I do not set its price
      */
-    public function iSetItsPriceTo($price = null, $channelName = null)
+    public function iSetItsPriceTo($price = null, $channelName = null): void
     {
         $this->createPage->specifyPrice($price, $channelName ?? $this->sharedStorage->get('channel'));
     }
@@ -160,7 +160,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
-    public function iSetItsOriginalPriceTo($originalPrice, $channelName)
+    public function iSetItsOriginalPriceTo($originalPrice, $channelName): void
     {
         $this->createPage->specifyOriginalPrice($originalPrice, $channelName);
     }
@@ -168,7 +168,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I set its height, width, depth and weight to :number
      */
-    public function iSetItsDimensionsTo($value)
+    public function iSetItsDimensionsTo($value): void
     {
         $this->createPage->specifyHeightWidthDepthAndWeight($value, $value, $value, $value);
     }
@@ -176,7 +176,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I do not specify its current stock
      */
-    public function iDoNetSetItsCurrentStockTo()
+    public function iDoNetSetItsCurrentStockTo(): void
     {
         $this->createPage->specifyCurrentStock('');
     }
@@ -184,7 +184,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I choose :calculatorName calculator
      */
-    public function iChooseCalculator($calculatorName)
+    public function iChooseCalculator($calculatorName): void
     {
         $this->createPage->choosePricingCalculator($calculatorName);
     }
@@ -192,7 +192,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I set its :optionName option to :optionValue
      */
-    public function iSetItsOptionAs($optionName, $optionValue)
+    public function iSetItsOptionAs($optionName, $optionValue): void
     {
         $this->createPage->selectOption($optionName, $optionValue);
     }
@@ -200,7 +200,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I set the position of :name to :position
      */
-    public function iSetThePositionOfTo($name, $position)
+    public function iSetThePositionOfTo($name, $position): void
     {
         $this->indexPage->setPosition($name, $position);
     }
@@ -208,7 +208,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I save my new configuration
      */
-    public function iSaveMyNewConfiguration()
+    public function iSaveMyNewConfiguration(): void
     {
         $this->indexPage->savePositions();
     }
@@ -216,7 +216,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I do not want to have shipping required for this product
      */
-    public function iDoNotWantToHaveShippingRequiredForThisProduct()
+    public function iDoNotWantToHaveShippingRequiredForThisProduct(): void
     {
         $this->createPage->setShippingRequired(false);
     }
@@ -240,7 +240,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^the (variant with code "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
      */
-    public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, $price, $channelName)
+    public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, $price, $channelName): void
     {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
@@ -250,7 +250,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^the (variant with code "[^"]+") should be named "([^"]+)" in ("([^"]+)" locale)$/
      */
-    public function theVariantWithCodeShouldBeNamedIn(ProductVariantInterface $productVariant, $name, $language)
+    public function theVariantWithCodeShouldBeNamedIn(ProductVariantInterface $productVariant, $name, $language): void
     {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
@@ -260,7 +260,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^the (variant with code "[^"]+") should have an original price of (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
      */
-    public function theVariantWithCodeShouldHaveAnOriginalPriceOfForChannel(ProductVariantInterface $productVariant, $originalPrice, $channelName)
+    public function theVariantWithCodeShouldHaveAnOriginalPriceOfForChannel(ProductVariantInterface $productVariant, $originalPrice, $channelName): void
     {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
@@ -274,7 +274,7 @@ final class ManagingProductVariantsContext implements Context
      * @When /^I delete the ("[^"]+" variant of product "[^"]+")$/
      * @When /^I try to delete the ("[^"]+" variant of product "[^"]+")$/
      */
-    public function iDeleteTheVariantOfProduct(ProductVariantInterface $productVariant)
+    public function iDeleteTheVariantOfProduct(ProductVariantInterface $productVariant): void
     {
         $this->indexPage->open(['productId' => $productVariant->getProduct()->getId()]);
 
@@ -284,7 +284,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should be notified that this variant is in use and cannot be deleted
      */
-    public function iShouldBeNotifiedOfFailure()
+    public function iShouldBeNotifiedOfFailure(): void
     {
         $this->notificationChecker->checkNotification(
             'Cannot delete, the product variant is in use.',
@@ -295,7 +295,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I want to modify the ("[^"]+" product variant)$/
      */
-    public function iWantToModifyAProduct(ProductVariantInterface $productVariant)
+    public function iWantToModifyAProduct(ProductVariantInterface $productVariant): void
     {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
     }
@@ -303,7 +303,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then the code field should be disabled
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function theCodeFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -311,7 +311,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired($element): void
     {
         $this->assertValidationMessage($element, sprintf('Please enter the %s.', $element));
     }
@@ -319,7 +319,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should be notified that code has to be unique
      */
-    public function iShouldBeNotifiedThatCodeHasToBeUnique()
+    public function iShouldBeNotifiedThatCodeHasToBeUnique(): void
     {
         $this->assertValidationMessage('code', 'Product variant code must be unique.');
     }
@@ -327,7 +327,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should be notified that current stock is required
      */
-    public function iShouldBeNotifiedThatOnHandIsRequired()
+    public function iShouldBeNotifiedThatOnHandIsRequired(): void
     {
         $this->assertValidationMessage('on_hand', 'Please enter on hand.');
     }
@@ -335,7 +335,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should be notified that height, width, depth and weight cannot be lower than 0
      */
-    public function iShouldBeNotifiedThatIsHeightWidthDepthWeightCannotBeLowerThan()
+    public function iShouldBeNotifiedThatIsHeightWidthDepthWeightCannotBeLowerThan(): void
     {
         $this->assertValidationMessage('height', 'Height cannot be negative.');
         $this->assertValidationMessage('width', 'Width cannot be negative.');
@@ -346,7 +346,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should be notified that price cannot be lower than 0.01
      */
-    public function iShouldBeNotifiedThatPriceCannotBeLowerThen()
+    public function iShouldBeNotifiedThatPriceCannotBeLowerThen(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -357,7 +357,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should be notified that this variant already exists
      */
-    public function iShouldBeNotifiedThatThisVariantAlreadyExists()
+    public function iShouldBeNotifiedThatThisVariantAlreadyExists(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -368,7 +368,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^I should be notified that code is required for the (\d)(?:st|nd|rd|th) variant$/
      */
-    public function iShouldBeNotifiedThatCodeIsRequiredForVariant($position)
+    public function iShouldBeNotifiedThatCodeIsRequiredForVariant($position): void
     {
         Assert::same(
             $this->generatePage->getValidationMessage('code', $position - 1),
@@ -379,7 +379,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^I should be notified that prices in all channels must be defined for the (\d)(?:st|nd|rd|th) variant$/
      */
-    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefinedForTheVariant($position)
+    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefinedForTheVariant($position): void
     {
         Assert::same(
             $this->generatePage->getPricesValidationMessage($position - 1),
@@ -390,7 +390,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^I should be notified that variant code must be unique within this product for the (\d)(?:st|nd|rd|th) variant$/
      */
-    public function iShouldBeNotifiedThatVariantCodeMustBeUniqueWithinThisProductForYheVariant($position)
+    public function iShouldBeNotifiedThatVariantCodeMustBeUniqueWithinThisProductForYheVariant($position): void
     {
         Assert::same(
             $this->generatePage->getValidationMessage('code', $position - 1),
@@ -401,7 +401,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should be notified that prices in all channels must be defined
      */
-    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined()
+    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined(): void
     {
         Assert::contains(
             $this->createPage->getPricesValidationMessage(),
@@ -413,7 +413,7 @@ final class ManagingProductVariantsContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -421,7 +421,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I remove its name
      */
-    public function iRemoveItsNameFromTranslation()
+    public function iRemoveItsNameFromTranslation(): void
     {
         $this->updatePage->nameIt('');
     }
@@ -429,7 +429,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^inventory of (this variant) should not be tracked$/
      */
-    public function thisProductVariantShouldNotBeTracked(ProductVariantInterface $productVariant)
+    public function thisProductVariantShouldNotBeTracked(ProductVariantInterface $productVariant): void
     {
         $this->iWantToModifyAProduct($productVariant);
 
@@ -439,7 +439,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^inventory of (this variant) should be tracked$/
      */
-    public function thisProductVariantShouldBeTracked(ProductVariantInterface $productVariant)
+    public function thisProductVariantShouldBeTracked(ProductVariantInterface $productVariant): void
     {
         $this->iWantToModifyAProduct($productVariant);
 
@@ -449,7 +449,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I want to generate new variants for (this product)$/
      */
-    public function iWantToGenerateNewVariantsForThisProduct(ProductInterface $product)
+    public function iWantToGenerateNewVariantsForThisProduct(ProductInterface $product): void
     {
         $this->generatePage->open(['productId' => $product->getId()]);
     }
@@ -458,7 +458,7 @@ final class ManagingProductVariantsContext implements Context
      * @When I generate it
      * @When I try to generate it
      */
-    public function iClickGenerate()
+    public function iClickGenerate(): void
     {
         $this->generatePage->generate();
     }
@@ -466,7 +466,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by "([^"]+)" code and costs "(?:€|£|\$)([^"]+)" in ("[^"]+") channel$/
      */
-    public function iSpecifyThereAreVariantsIdentifiedByCodeWithCost($nthVariant, $code, $price, $channelName)
+    public function iSpecifyThereAreVariantsIdentifiedByCodeWithCost($nthVariant, $code, $price, $channelName): void
     {
         $this->generatePage->specifyCode($nthVariant - 1, $code);
         $this->generatePage->specifyPrice($nthVariant - 1, $price, $channelName);
@@ -475,7 +475,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by "([^"]+)" code$/
      */
-    public function iSpecifyThereAreVariantsIdentifiedByCode($nthVariant, $code)
+    public function iSpecifyThereAreVariantsIdentifiedByCode($nthVariant, $code): void
     {
         $this->generatePage->specifyCode($nthVariant - 1, $code);
     }
@@ -483,7 +483,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I specify that the (\d)(?:st|nd|rd|th) variant costs "(?:€|£|\$)([^"]+)" in ("[^"]+") channel$/
      */
-    public function iSpecifyThereAreVariantsWithCost($nthVariant, $price, $channelName)
+    public function iSpecifyThereAreVariantsWithCost($nthVariant, $price, $channelName): void
     {
         $this->generatePage->specifyPrice($nthVariant - 1, $price, $channelName);
     }
@@ -491,7 +491,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I remove (\d)(?:st|nd|rd|th) variant from the list$/
      */
-    public function iRemoveVariantFromTheList($nthVariant)
+    public function iRemoveVariantFromTheList($nthVariant): void
     {
         $this->generatePage->removeVariant($nthVariant - 1);
     }
@@ -499,7 +499,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should be notified that it has been successfully generated
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyGenerated()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyGenerated(): void
     {
         $this->notificationChecker->checkNotification('Success Product variants have been successfully generated.', NotificationType::success());
     }
@@ -507,7 +507,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I set its shipping category as :shippingCategoryName
      */
-    public function iSetItsShippingCategoryAs($shippingCategoryName)
+    public function iSetItsShippingCategoryAs($shippingCategoryName): void
     {
         $this->createPage->selectShippingCategory($shippingCategoryName);
     }
@@ -515,7 +515,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I do not specify any information about variants
      */
-    public function iDoNotSpecifyAnyInformationAboutVariants()
+    public function iDoNotSpecifyAnyInformationAboutVariants(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -523,7 +523,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I change its quantity of inventory to :amount
      */
-    public function iChangeItsQuantityOfInventoryTo($amount)
+    public function iChangeItsQuantityOfInventoryTo($amount): void
     {
         $this->updatePage->specifyCurrentStock($amount);
     }
@@ -531,7 +531,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^the (variant with code "[^"]+") should not have shipping required$/
      */
-    public function theVariantWithCodeShouldNotHaveShippingRequired(ProductVariantInterface $productVariant)
+    public function theVariantWithCodeShouldNotHaveShippingRequired(ProductVariantInterface $productVariant): void
     {
         $this->updatePage->open(['productId' => $productVariant->getProduct()->getId(), 'id' => $productVariant->getId()]);
 
@@ -541,7 +541,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should be notified that on hand quantity must be greater than the number of on hold units
      */
-    public function iShouldBeNotifiedThatOnHandQuantityMustBeGreaterThanTheNumberOfOnHoldUnits()
+    public function iShouldBeNotifiedThatOnHandQuantityMustBeGreaterThanTheNumberOfOnHoldUnits(): void
     {
         Assert::same(
             $this->updatePage->getValidationMessage('on_hand'),
@@ -553,7 +553,7 @@ final class ManagingProductVariantsContext implements Context
      * @param string $element
      * @param $message
      */
-    private function assertValidationMessage($element, $message)
+    private function assertValidationMessage(string $element, $message): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);

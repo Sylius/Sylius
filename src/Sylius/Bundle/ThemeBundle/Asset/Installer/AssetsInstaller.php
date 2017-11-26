@@ -223,7 +223,6 @@ final class AssetsInstaller implements AssetsInstallerInterface
     }
 
     /**
-     * @param BundleInterface $bundle
      * @param array|ThemeInterface[] $themes
      *
      * @return array

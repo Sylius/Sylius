@@ -21,17 +21,17 @@ use Sylius\Component\Core\Model\CustomerInterface;
 
 final class CustomerShowMenuBuilderEventSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory, ItemInterface $menu, CustomerInterface $customer): void
+    public function let(FactoryInterface $factory, ItemInterface $menu, CustomerInterface $customer): void
     {
         $this->beConstructedWith($factory, $menu, $customer);
     }
 
-    function it_is_a_menu_builder_event(): void
+    public function it_is_a_menu_builder_event(): void
     {
         $this->shouldHaveType(MenuBuilderEvent::class);
     }
 
-    function it_has_a_customer(CustomerInterface $customer): void
+    public function it_has_a_customer(CustomerInterface $customer): void
     {
         $this->getCustomer()->shouldReturn($customer);
     }

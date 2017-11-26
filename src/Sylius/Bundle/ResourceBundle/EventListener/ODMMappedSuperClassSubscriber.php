@@ -26,7 +26,7 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     /**
      * @return array
      */
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             Events::loadClassMetadata,
@@ -36,7 +36,7 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     /**
      * @param LoadClassMetadataEventArgs $eventArgs
      */
-    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
         $metadata = $eventArgs->getClassMetadata();
 
@@ -52,7 +52,7 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     /**
      * @param ClassMetadataInfo $metadata
      */
-    private function convertToDocumentIfNeeded(ClassMetadataInfo $metadata)
+    private function convertToDocumentIfNeeded(ClassMetadataInfo $metadata): void
     {
         if (false === $metadata->isMappedSuperclass) {
             return;
@@ -73,7 +73,7 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
      * @param ClassMetadataInfo $metadata
      * @param $configuration
      */
-    private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration)
+    private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration): void
     {
         foreach (class_parents($metadata->getName()) as $parent) {
             if (false === in_array($parent, $configuration->getMetadataDriverImpl()->getAllClassNames())) {
@@ -108,7 +108,7 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     /**
      * @param ClassMetadataInfo $metadata
      */
-    private function unsetAssociationMappings(ClassMetadataInfo $metadata)
+    private function unsetAssociationMappings(ClassMetadataInfo $metadata): void
     {
         if (false === $this->isResource($metadata)) {
             return;
@@ -126,7 +126,7 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
      *
      * @return bool
      */
-    private function isRelation($type)
+    private function isRelation(string $type): bool
     {
         return in_array(
             $type,

@@ -25,17 +25,17 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 
 final class ImagesRemoveListenerSpec extends ObjectBehavior
 {
-    function let(ImageUploaderInterface $imageUploader, CacheManager $cacheManager, FilterManager $filterManager): void
+    public function let(ImageUploaderInterface $imageUploader, CacheManager $cacheManager, FilterManager $filterManager): void
     {
         $this->beConstructedWith($imageUploader, $cacheManager, $filterManager);
     }
 
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ImagesRemoveListener::class);
     }
 
-    function it_removes_file_on_post_remove_event(
+    public function it_removes_file_on_post_remove_event(
         ImageUploaderInterface $imageUploader,
         CacheManager $cacheManager,
         FilterManager $filterManager,
@@ -54,7 +54,7 @@ final class ImagesRemoveListenerSpec extends ObjectBehavior
         $this->postRemove($event);
     }
 
-    function it_does_nothing_if_entity_is_not_image(
+    public function it_does_nothing_if_entity_is_not_image(
         ImageUploaderInterface $imageUploader,
         CacheManager $cacheManager,
         FilterManager $filterManager,

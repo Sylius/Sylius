@@ -62,7 +62,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function removeMember(ZoneMemberInterface $zoneMember)
+    public function removeMember(ZoneMemberInterface $zoneMember): void
     {
         $zoneMembers = $this->getElement('zone_members');
         $items = $zoneMembers->findAll('css', 'div[data-form-collection="item"]');
@@ -88,7 +88,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      *
      * @throws ElementNotFoundException
      */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
@@ -109,13 +109,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @param NodeElement $item
      *
      * @return NodeElement
      *
      * @throws ElementNotFoundException
      */
-    private function getDeleteButtonForCollectionItem(NodeElement $item)
+    private function getDeleteButtonForCollectionItem(NodeElement $item): NodeElement
     {
         $deleteButton = $item->find('css', 'a[data-form-collection="delete"]');
         if (null === $deleteButton) {

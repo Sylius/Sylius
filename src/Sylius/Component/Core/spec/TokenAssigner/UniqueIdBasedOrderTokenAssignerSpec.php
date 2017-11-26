@@ -21,17 +21,17 @@ use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 
 final class UniqueIdBasedOrderTokenAssignerSpec extends ObjectBehavior
 {
-    public function let(RandomnessGeneratorInterface $generator)
+    public function let(RandomnessGeneratorInterface $generator): void
     {
         $this->beConstructedWith($generator);
     }
 
-    function it_is_an_order_token_assigner(): void
+    public function it_is_an_order_token_assigner(): void
     {
         $this->shouldImplement(OrderTokenAssignerInterface::class);
     }
 
-    function it_assigns_a_token_value_for_order(RandomnessGeneratorInterface $generator, OrderInterface $order): void
+    public function it_assigns_a_token_value_for_order(RandomnessGeneratorInterface $generator, OrderInterface $order): void
     {
         $order->getTokenValue()->willReturn(null);
         $generator->generateUriSafeString(10)->willReturn('yahboiiiii');
@@ -41,7 +41,7 @@ final class UniqueIdBasedOrderTokenAssignerSpec extends ObjectBehavior
         $this->assignTokenValueIfNotSet($order);
     }
 
-    function it_does_nothing_if_token_is_already_assigned(RandomnessGeneratorInterface $generator, OrderInterface $order)
+    public function it_does_nothing_if_token_is_already_assigned(RandomnessGeneratorInterface $generator, OrderInterface $order): void
     {
         $order->getTokenValue()->willReturn('yahboiiiii');
         $order->setTokenValue(Argument::any())->shouldNotBeCalled();

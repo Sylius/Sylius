@@ -22,17 +22,17 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 
 final class StorageBasedCurrencyContextSpec extends ObjectBehavior
 {
-    function let(ChannelContextInterface $channelContext, CurrencyStorageInterface $currencyStorage): void
+    public function let(ChannelContextInterface $channelContext, CurrencyStorageInterface $currencyStorage): void
     {
         $this->beConstructedWith($channelContext, $currencyStorage);
     }
 
-    function it_is_a_currency_context(): void
+    public function it_is_a_currency_context(): void
     {
         $this->shouldImplement(CurrencyContextInterface::class);
     }
 
-    function it_returns_an_available_active_currency(
+    public function it_returns_an_available_active_currency(
         ChannelContextInterface $channelContext,
         CurrencyStorageInterface $currencyStorage,
         ChannelInterface $channel
@@ -44,7 +44,7 @@ final class StorageBasedCurrencyContextSpec extends ObjectBehavior
         $this->getCurrencyCode()->shouldReturn('BTC');
     }
 
-    function it_throws_an_exception_if_storage_does_not_have_currency_code(
+    public function it_throws_an_exception_if_storage_does_not_have_currency_code(
         ChannelContextInterface $channelContext,
         CurrencyStorageInterface $currencyStorage,
         ChannelInterface $channel

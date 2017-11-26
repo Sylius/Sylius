@@ -20,7 +20,7 @@ trait ChoosesName
     /**
      * @param string $name
      */
-    public function chooseName($name)
+    public function chooseName(string $name): void
     {
         $this->getDocument()->selectFieldOption('Name', $name);
     }

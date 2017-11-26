@@ -51,7 +51,6 @@ interface ProductOptionValueInterface extends ResourceInterface, CodeAwareInterf
     public function getName(): ?string;
 
     /**
-     * @param string|null $locale
      *
      * @return ProductOptionValueTranslationInterface
      */

@@ -20,17 +20,17 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
 
 final class UniquePinGeneratorSpec extends ObjectBehavior
 {
-    function let(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker): void
+    public function let(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker): void
     {
         $this->beConstructedWith($generator, $checker, 6);
     }
 
-    function it_implements_generator_interface(): void
+    public function it_implements_generator_interface(): void
     {
         $this->shouldImplement(GeneratorInterface::class);
     }
 
-    function it_throws_invalid_argument_exception_on_instantiation_with_an_out_of_range_length(
+    public function it_throws_invalid_argument_exception_on_instantiation_with_an_out_of_range_length(
         RandomnessGeneratorInterface $generator,
         UniquenessCheckerInterface $checker
     ): void {
@@ -40,7 +40,7 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
-    function it_generates_pins_with_length_stated_on_instantiation(
+    public function it_generates_pins_with_length_stated_on_instantiation(
         RandomnessGeneratorInterface $generator,
         UniquenessCheckerInterface $checker
     ): void {
@@ -52,7 +52,7 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
         $this->generate()->shouldHaveLength(6);
     }
 
-    function it_generates_string_pins(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker): void
+    public function it_generates_string_pins(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker): void
     {
         $pin = '636363';
 
@@ -62,7 +62,7 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
         $this->generate()->shouldBeString();
     }
 
-    function it_generates_numeric_pins(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker): void
+    public function it_generates_numeric_pins(RandomnessGeneratorInterface $generator, UniquenessCheckerInterface $checker): void
     {
         $pin = '424242';
 

@@ -70,15 +70,13 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     /**
      * @param array $objects
      *
-     * @return Pagerfanta
      */
-    protected function getArrayPaginator($objects): Pagerfanta
+    protected function getArrayPaginator(array $objects): Pagerfanta
     {
         return new Pagerfanta(new ArrayAdapter($objects));
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
      * @param array $criteria
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
@@ -105,7 +103,6 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
      * @param array $sorting
      */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = []): void

@@ -20,7 +20,6 @@ interface AdapterInterface
 {
     /**
      * @param array  $recipients
-     * @param string $senderAddress
      * @param string $senderName
      * @param RenderedEmail $renderedEmail
      * @param EmailInterface $email

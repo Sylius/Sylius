@@ -21,12 +21,12 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class AverageRatingCalculatorSpec extends ObjectBehavior
 {
-    function it_implements_average_price_calculator_interface(): void
+    public function it_implements_average_price_calculator_interface(): void
     {
         $this->shouldImplement(ReviewableRatingCalculatorInterface::class);
     }
 
-    function it_calculates_average_price(
+    public function it_calculates_average_price(
         ReviewableInterface $reviewable,
         ReviewInterface $review1,
         ReviewInterface $review2
@@ -42,14 +42,14 @@ final class AverageRatingCalculatorSpec extends ObjectBehavior
         $this->calculate($reviewable)->shouldReturn(4.5);
     }
 
-    function it_returns_zero_if_given_reviewable_object_has_no_reviews(ReviewableInterface $reviewable): void
+    public function it_returns_zero_if_given_reviewable_object_has_no_reviews(ReviewableInterface $reviewable): void
     {
         $reviewable->getReviews()->willReturn(new ArrayCollection([]))->shouldBeCalled();
 
         $this->calculate($reviewable)->shouldReturn(0.0);
     }
 
-    function it_returns_zero_if_given_reviewable_object_has_reviews_but_none_of_them_is_accepted(
+    public function it_returns_zero_if_given_reviewable_object_has_reviews_but_none_of_them_is_accepted(
         ReviewableInterface $reviewable,
         ReviewInterface $review
     ): void {

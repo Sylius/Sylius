@@ -22,27 +22,27 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ZoneFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory, FactoryInterface $zoneMemberFactory): void
+    public function let(FactoryInterface $factory, FactoryInterface $zoneMemberFactory): void
     {
         $this->beConstructedWith($factory, $zoneMemberFactory);
     }
 
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ZoneFactory::class);
     }
 
-    function it_implements_factory_interface(): void
+    public function it_implements_factory_interface(): void
     {
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_implements_zone_factory_interface(): void
+    public function it_implements_zone_factory_interface(): void
     {
         $this->shouldImplement(ZoneFactoryInterface::class);
     }
 
-    function it_creates_zone_with_type(FactoryInterface $factory, ZoneInterface $zone): void
+    public function it_creates_zone_with_type(FactoryInterface $factory, ZoneInterface $zone): void
     {
         $factory->createNew()->willReturn($zone);
         $zone->setType('country')->shouldBeCalled();
@@ -50,7 +50,7 @@ final class ZoneFactorySpec extends ObjectBehavior
         $this->createTyped('country')->shouldReturn($zone);
     }
 
-    function it_creates_zone_with_members(
+    public function it_creates_zone_with_members(
         FactoryInterface $factory,
         FactoryInterface $zoneMemberFactory,
         ZoneInterface $zone,

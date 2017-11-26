@@ -22,12 +22,12 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ReviewChangeListenerSpec extends ObjectBehavior
 {
-    function let(ReviewableRatingUpdaterInterface $averageRatingUpdater): void
+    public function let(ReviewableRatingUpdaterInterface $averageRatingUpdater): void
     {
         $this->beConstructedWith($averageRatingUpdater);
     }
 
-    function it_recalculates_subject_rating_on_accepted_review_deletion(
+    public function it_recalculates_subject_rating_on_accepted_review_deletion(
         $averageRatingUpdater,
         LifecycleEventArgs $event,
         ReviewInterface $review,
@@ -41,7 +41,7 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
         $this->recalculateSubjectRating($event);
     }
 
-    function it_does_nothing_if_event_subject_is_not_review_object($averageRatingUpdater, LifecycleEventArgs $event): void
+    public function it_does_nothing_if_event_subject_is_not_review_object($averageRatingUpdater, LifecycleEventArgs $event): void
     {
         $event->getObject()->willReturn('badObject');
 

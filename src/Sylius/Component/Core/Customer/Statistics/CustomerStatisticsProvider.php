@@ -73,7 +73,6 @@ final class CustomerStatisticsProvider implements CustomerStatisticsProviderInte
     /**
      * @param array|OrderInterface[] $orders
      *
-     * @return int
      */
     private function getOrdersSummedTotal(array $orders): int
     {
@@ -86,7 +85,6 @@ final class CustomerStatisticsProvider implements CustomerStatisticsProviderInte
 
     /**
      * @param array|OrderInterface[] $orders
-     * @param ChannelInterface $channel
      *
      * @return array|OrderInterface[]
      */

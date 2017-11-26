@@ -23,12 +23,12 @@ use Symfony\Component\EventDispatcher\Event;
 
 final class UserCartRecalculationListenerSpec extends ObjectBehavior
 {
-    function let(CartContextInterface $cartContext, OrderProcessorInterface $orderProcessor): void
+    public function let(CartContextInterface $cartContext, OrderProcessorInterface $orderProcessor): void
     {
         $this->beConstructedWith($cartContext, $orderProcessor);
     }
 
-    function it_recalculates_cart_for_logged_in_user(
+    public function it_recalculates_cart_for_logged_in_user(
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,
         Event $event,
@@ -40,7 +40,7 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
         $this->recalculateCartWhileLogin($event);
     }
 
-    function it_does_nothing_if_cannot_find_cart(
+    public function it_does_nothing_if_cannot_find_cart(
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,
         Event $event

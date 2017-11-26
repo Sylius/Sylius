@@ -24,17 +24,17 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 final class ExpiredCartsRemoverSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, ObjectManager $orderManager, EventDispatcher $eventDispatcher): void
+    public function let(OrderRepositoryInterface $orderRepository, ObjectManager $orderManager, EventDispatcher $eventDispatcher): void
     {
         $this->beConstructedWith($orderRepository, $orderManager, $eventDispatcher, '2 months');
     }
 
-    function it_implements_an_expired_carts_remover_interface(): void
+    public function it_implements_an_expired_carts_remover_interface(): void
     {
         $this->shouldImplement(ExpiredCartsRemoverInterface::class);
     }
 
-    function it_removes_a_cart_which_has_been_updated_before_configured_date(
+    public function it_removes_a_cart_which_has_been_updated_before_configured_date(
         OrderRepositoryInterface $orderRepository,
         ObjectManager $orderManager,
         EventDispatcher $eventDispatcher,

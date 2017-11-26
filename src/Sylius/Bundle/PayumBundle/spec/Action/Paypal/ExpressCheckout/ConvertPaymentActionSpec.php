@@ -28,17 +28,17 @@ use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 
 final class ConvertPaymentActionSpec extends ObjectBehavior
 {
-    function let(InvoiceNumberGeneratorInterface $invoiceNumberGenerator): void
+    public function let(InvoiceNumberGeneratorInterface $invoiceNumberGenerator): void
     {
         $this->beConstructedWith($invoiceNumberGenerator);
     }
 
-    function it_implements_action_interface(): void
+    public function it_implements_action_interface(): void
     {
         $this->shouldImplement(ActionInterface::class);
     }
 
-    function it_executes_request(
+    public function it_executes_request(
         InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
         Convert $request,
         PaymentInterface $payment,
@@ -90,7 +90,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         $this->execute($request);
     }
 
-    function it_throws_exception_when_source_is_not_a_payment_interface(Convert $request): void
+    public function it_throws_exception_when_source_is_not_a_payment_interface(Convert $request): void
     {
         $request->getSource()->willReturn(null);
 

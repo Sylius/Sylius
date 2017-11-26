@@ -19,9 +19,8 @@ final class CircularDependencyFoundException extends \DomainException
 {
     /**
      * @param ThemeInterface[] $themes
-     * @param \Exception $previous
      */
-    public function __construct(array $themes, ?\Exception $previous = null)
+    public function __construct(array $themes, ?\Throwable $previous = null)
     {
         $cycle = $this->getCycleFromArray($themes);
 
@@ -55,7 +54,6 @@ final class CircularDependencyFoundException extends \DomainException
     /**
      * @param array $themes
      *
-     * @return string
      */
     private function formatCycleToString(array $themes): string
     {

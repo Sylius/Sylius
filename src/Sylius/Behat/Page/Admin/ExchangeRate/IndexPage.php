@@ -20,7 +20,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseCurrencyFilter($currencyName)
+    public function chooseCurrencyFilter($currencyName): void
     {
         $this->getElement('filter_currency')->selectOption($currencyName);
     }

@@ -19,12 +19,12 @@ use Sylius\Component\Mailer\Model\Email;
 
 final class EmailFactorySpec extends ObjectBehavior
 {
-    function it_implements_email_factory_interface(): void
+    public function it_implements_email_factory_interface(): void
     {
         $this->shouldImplement(EmailFactoryInterface::class);
     }
 
-    function it_creates_new_email(): void
+    public function it_creates_new_email(): void
     {
         $this->createNew()->shouldHaveType(Email::class);
     }

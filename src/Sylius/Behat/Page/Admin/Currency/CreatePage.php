@@ -23,7 +23,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyExchangeRate($exchangeRate)
+    public function specifyExchangeRate($exchangeRate): void
     {
         $this->getDocument()->fillField('Exchange rate', $exchangeRate);
     }

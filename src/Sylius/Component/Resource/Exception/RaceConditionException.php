@@ -18,7 +18,7 @@ class RaceConditionException extends UpdateHandlingException
     /**
      * @param \Exception|null $previous
      */
-    public function __construct(?\Exception $previous = null)
+    public function __construct(?\Throwable $previous = null)
     {
         parent::__construct(
             'Operated entity was previously modified.',

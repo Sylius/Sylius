@@ -60,7 +60,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function search($name)
+    public function search($name): void
     {
         $this->getDocument()->fillField('criteria_search_value', $name);
         $this->getDocument()->pressButton('Search');
@@ -69,12 +69,12 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function sort($order)
+    public function sort($order): void
     {
         $this->getDocument()->clickLink($order);
     }
 
-    public function clearFilter()
+    public function clearFilter(): void
     {
         $this->getDocument()->clickLink('Clear');
     }

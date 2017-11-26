@@ -21,11 +21,10 @@ use Webmozart\Assert\Assert;
 abstract class AutocompleteHelper
 {
     /**
-     * @param Session $session
      * @param NodeElement $element
      * @param string $value
      */
-    public static function chooseValue(Session $session, NodeElement $element, $value)
+    public static function chooseValue(Session $session, NodeElement $element, string $value): void
     {
         Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
 
@@ -37,11 +36,10 @@ abstract class AutocompleteHelper
     }
 
     /**
-     * @param Session $session
      * @param NodeElement $element
      * @param string[] $values
      */
-    public static function chooseValues(Session $session, NodeElement $element, array $values)
+    public static function chooseValues(Session $session, NodeElement $element, array $values): void
     {
         Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
 
@@ -60,7 +58,7 @@ abstract class AutocompleteHelper
      * @param Session $session
      * @param NodeElement $element
      */
-    private static function activateAutocompleteDropdown(Session $session, NodeElement $element)
+    private static function activateAutocompleteDropdown(Session $session, NodeElement $element): void
     {
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
 
@@ -74,7 +72,7 @@ abstract class AutocompleteHelper
      * @param Session $session
      * @param NodeElement $element
      */
-    private static function waitForElementToBeVisible(Session $session, NodeElement $element)
+    private static function waitForElementToBeVisible(Session $session, NodeElement $element): void
     {
         $session->wait(5000, sprintf(
             '$(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).dropdown("is visible")',

@@ -27,17 +27,17 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository): void
+    public function let(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository): void
     {
         $this->beConstructedWith($countryRepository, $provinceRepository);
     }
 
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ProvinceAddressConstraintValidator::class);
     }
 
-    function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint): void
+    public function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('validate', [
             '',
@@ -45,7 +45,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         ]);
     }
 
-    function it_does_not_add_violation_because_a_violation_exists(
+    public function it_does_not_add_violation_because_a_violation_exists(
         AddressInterface $address,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context
@@ -62,7 +62,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->validate($address, $constraint);
     }
 
-    function it_adds_violation_because_address_has_no_province(
+    public function it_adds_violation_because_address_has_no_province(
         AddressInterface $address,
         Country $country,
         ProvinceAddressConstraint $constraint,
@@ -87,7 +87,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->validate($address, $constraint);
     }
 
-    function it_adds_violation_because_address_province_does_not_belong_to_country(
+    public function it_adds_violation_because_address_province_does_not_belong_to_country(
         AddressInterface $address,
         Country $country,
         Province $province,
@@ -119,7 +119,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->validate($address, $constraint);
     }
 
-    function it_does_not_add_a_violation_if_province_is_valid(
+    public function it_does_not_add_a_violation_if_province_is_valid(
         AddressInterface $address,
         Country $country,
         Province $province,

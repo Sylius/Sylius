@@ -30,7 +30,7 @@ final class PaymentMethodApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_getting_payment_method_for_non_authenticated_user()
+    public function it_denies_getting_payment_method_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/payment-methods/none');
 
@@ -41,7 +41,7 @@ final class PaymentMethodApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_payment_method_when_it_does_not_exist()
+    public function it_does_not_allow_to_show_payment_method_when_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -54,7 +54,7 @@ final class PaymentMethodApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_payment_method()
+    public function it_allows_showing_payment_method(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/channels.yml');
@@ -69,11 +69,10 @@ final class PaymentMethodApiTest extends JsonApiTestCase
     }
 
     /**
-     * @param PaymentMethodInterface $paymentMethod
      *
      * @return string
      */
-    private function getPaymentMethodUrl(PaymentMethodInterface $paymentMethod)
+    private function getPaymentMethodUrl(PaymentMethodInterface $paymentMethod): string
     {
         return '/api/v1/payment-methods/' . $paymentMethod->getCode();
     }

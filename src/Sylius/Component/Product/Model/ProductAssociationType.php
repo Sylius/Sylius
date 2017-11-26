@@ -97,7 +97,6 @@ class ProductAssociationType implements ProductAssociationTypeInterface
     }
 
     /**
-     * @param string|null $locale
      *
      * @return ProductAssociationTypeTranslationInterface
      */

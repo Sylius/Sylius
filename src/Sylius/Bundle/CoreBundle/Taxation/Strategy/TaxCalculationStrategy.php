@@ -33,7 +33,6 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     private $applicators;
 
     /**
-     * @param string $type
      * @param array|OrderTaxesApplicatorInterface[] $applicators
      */
     public function __construct(string $type, array $applicators)

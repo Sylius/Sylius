@@ -22,22 +22,22 @@ use Symfony\Component\Security\Http\HttpUtils;
 
 final class AuthenticationSuccessHandlerSpec extends ObjectBehavior
 {
-    function let(HttpUtils $httpUtils): void
+    public function let(HttpUtils $httpUtils): void
     {
         $this->beConstructedWith($httpUtils);
     }
 
-    function it_extends_default_authentication_success_handler(): void
+    public function it_extends_default_authentication_success_handler(): void
     {
         $this->shouldHaveType(DefaultAuthenticationSuccessHandler::class);
     }
 
-    function it_is_a_authentication_success_handler(): void
+    public function it_is_a_authentication_success_handler(): void
     {
         $this->shouldImplement(AuthenticationSuccessHandlerInterface::class);
     }
 
-    function it_returns_json_response_if_request_is_xml_based(Request $request, TokenInterface $token): void
+    public function it_returns_json_response_if_request_is_xml_based(Request $request, TokenInterface $token): void
     {
         $request->isXmlHttpRequest()->willReturn(true);
 

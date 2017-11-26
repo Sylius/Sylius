@@ -48,7 +48,6 @@ class UrlPackage extends BaseUrlPackage
     /**
      * @param string|array $baseUrls Base asset URLs
      * @param VersionStrategyInterface $versionStrategy The version strategy
-     * @param ThemeContextInterface $themeContext
      * @param PathResolverInterface $pathResolver
      * @param ContextInterface|null $context Context
      */

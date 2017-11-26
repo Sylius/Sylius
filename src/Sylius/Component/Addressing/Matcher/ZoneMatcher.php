@@ -83,10 +83,8 @@ final class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * @param AddressInterface $address
      * @param ZoneInterface    $zone
      *
-     * @return bool
      */
     private function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone): bool
     {
@@ -101,9 +99,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
 
     /**
      * @param AddressInterface    $address
-     * @param ZoneMemberInterface $member
      *
-     * @return bool
      *
      * @throws \InvalidArgumentException
      */
@@ -124,7 +120,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * @param string|null $scope
      *
      * @return array
      */

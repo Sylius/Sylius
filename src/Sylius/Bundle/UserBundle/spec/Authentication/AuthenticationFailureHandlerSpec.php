@@ -24,22 +24,22 @@ use Symfony\Component\Security\Http\HttpUtils;
 
 final class AuthenticationFailureHandlerSpec extends ObjectBehavior
 {
-    function let(HttpKernelInterface $httpKernel, HttpUtils $httpUtils): void
+    public function let(HttpKernelInterface $httpKernel, HttpUtils $httpUtils): void
     {
         $this->beConstructedWith($httpKernel, $httpUtils);
     }
 
-    function it_extends_default_authentication_failure_handler(): void
+    public function it_extends_default_authentication_failure_handler(): void
     {
         $this->shouldHaveType(DefaultAuthenticationFailureHandler::class);
     }
 
-    function it_is_a_authentication_failure_handler(): void
+    public function it_is_a_authentication_failure_handler(): void
     {
         $this->shouldImplement(AuthenticationFailureHandlerInterface::class);
     }
 
-    function it_returns_json_response_if_request_is_xml_based(
+    public function it_returns_json_response_if_request_is_xml_based(
         Request $request,
         AuthenticationException $authenticationException
     ): void {

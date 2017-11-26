@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 interface ProductVariantsPricesProviderInterface
 {
     /**
-     * @param ProductInterface $product
      * @param ChannelInterface $channel
      *
      * @return array

@@ -27,19 +27,19 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 
 final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         AdjustmentFactoryInterface $adjustmentFactory,
         IntegerDistributorInterface $distributor
     ): void {
         $this->beConstructedWith($adjustmentFactory, $distributor);
     }
 
-    function it_implements_an_units_promotion_adjustments_applicator_interface(): void
+    public function it_implements_an_units_promotion_adjustments_applicator_interface(): void
     {
         $this->shouldImplement(UnitsPromotionAdjustmentsApplicatorInterface::class);
     }
 
-    function it_applies_promotion_adjustments_on_all_units_of_given_order(
+    public function it_applies_promotion_adjustments_on_all_units_of_given_order(
         AdjustmentFactoryInterface $adjustmentFactory,
         AdjustmentInterface $firstAdjustment,
         AdjustmentInterface $secondAdjustment,
@@ -98,7 +98,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $this->apply($order, $promotion, [1000, 999]);
     }
 
-    function it_does_not_distribute_0_amount_to_item(
+    public function it_does_not_distribute_0_amount_to_item(
         AdjustmentFactoryInterface $adjustmentFactory,
         AdjustmentInterface $adjustment,
         IntegerDistributorInterface $distributor,
@@ -146,7 +146,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $this->apply($order, $promotion, [1, 0]);
     }
 
-    function it_does_not_distribute_0_amount_to_item_even_if_its_middle_element(
+    public function it_does_not_distribute_0_amount_to_item_even_if_its_middle_element(
         AdjustmentFactoryInterface $adjustmentFactory,
         AdjustmentInterface $firstAdjustment,
         AdjustmentInterface $secondAdjustment,
@@ -208,7 +208,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $this->apply($order, $promotion, [1, 0, 1]);
     }
 
-    function it_does_not_distribute_0_amount_to_unit(
+    public function it_does_not_distribute_0_amount_to_unit(
         AdjustmentFactoryInterface $adjustmentFactory,
         AdjustmentInterface $firstAdjustment,
         AdjustmentInterface $secondAdjustment,
@@ -258,7 +258,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $this->apply($order, $promotion, [1]);
     }
 
-    function it_does_not_distribute_0_amount_to_unit_even_if_its_middle_element(
+    public function it_does_not_distribute_0_amount_to_unit_even_if_its_middle_element(
         AdjustmentFactoryInterface $adjustmentFactory,
         AdjustmentInterface $adjustment,
         IntegerDistributorInterface $distributor,
@@ -300,7 +300,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $this->apply($order, $promotion, [1]);
     }
 
-    function it_throws_exception_if_items_count_is_different_than_adjustment_amounts(
+    public function it_throws_exception_if_items_count_is_different_than_adjustment_amounts(
         PromotionInterface $promotion,
         OrderInterface $order
     ): void {

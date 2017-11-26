@@ -29,7 +29,6 @@ class EmailRenderEvent extends Event
     protected $recipients;
 
     /**
-     * @param RenderedEmail $renderedEmail
      * @param array $recipients
      */
     public function __construct(RenderedEmail $renderedEmail, array $recipients = [])

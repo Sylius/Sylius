@@ -214,7 +214,6 @@ class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * @param string|null $locale
      *
      * @return ShippingMethodTranslationInterface
      */

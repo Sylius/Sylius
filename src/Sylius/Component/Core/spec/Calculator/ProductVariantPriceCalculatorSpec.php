@@ -22,12 +22,12 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
 {
-    function it_implements_product_variant_price_calculator_interface(): void
+    public function it_implements_product_variant_price_calculator_interface(): void
     {
         $this->shouldImplement(ProductVariantPriceCalculatorInterface::class);
     }
 
-    function it_gets_price_for_product_variant_in_given_channel(
+    public function it_gets_price_for_product_variant_in_given_channel(
         ChannelInterface $channel,
         ChannelPricingInterface $channelPricing,
         ProductVariantInterface $productVariant
@@ -38,7 +38,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
         $this->calculate($productVariant, ['channel' => $channel])->shouldReturn(1000);
     }
 
-    function it_throws_a_channel_not_defined_exception_if_there_is_no_variant_price_for_given_channel(
+    public function it_throws_a_channel_not_defined_exception_if_there_is_no_variant_price_for_given_channel(
         ChannelInterface $channel,
         ProductVariantInterface $productVariant
     ): void {
@@ -53,7 +53,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_no_channel_is_defined_in_configuration(ProductVariantInterface $productVariant): void
+    public function it_throws_exception_if_no_channel_is_defined_in_configuration(ProductVariantInterface $productVariant): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

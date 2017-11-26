@@ -21,17 +21,17 @@ use Sylius\Component\Core\Payment\RandomInvoiceNumberGenerator;
 
 final class RandomInvoiceNumberGeneratorSpec extends ObjectBehavior
 {
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(RandomInvoiceNumberGenerator::class);
     }
 
-    function it_is_an_invoice_number_generator(): void
+    public function it_is_an_invoice_number_generator(): void
     {
         $this->shouldImplement(InvoiceNumberGeneratorInterface::class);
     }
 
-    function it_generates_a_random_invoice_number(OrderInterface $order, PaymentInterface $payment): void
+    public function it_generates_a_random_invoice_number(OrderInterface $order, PaymentInterface $payment): void
     {
         $this->generate($order, $payment)->shouldBeString();
     }

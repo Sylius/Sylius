@@ -70,7 +70,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function editAddress($fullName)
+    public function editAddress($fullName): void
     {
         $addressToEdit = $this->getAddressOf($fullName);
         $addressToEdit->findLink('Edit')->press();
@@ -79,7 +79,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteAddress($fullName)
+    public function deleteAddress($fullName): void
     {
         $addressToDelete = $this->getAddressOf($fullName);
         $addressToDelete->pressButton('Delete');
@@ -88,7 +88,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function setAsDefault($fullName)
+    public function setAsDefault($fullName): void
     {
         $addressToSetAsDefault = $this->getAddressOf($fullName);
         $addressToSetAsDefault->pressButton('Set as default');
@@ -119,7 +119,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      *
      * @return NodeElement|null
      */
-    private function getAddressOf($fullName)
+    private function getAddressOf(string $fullName): ?NodeElement
     {
         return $this->getElement('addresses')->find('css', sprintf('div.address:contains("%s")', $fullName));
     }

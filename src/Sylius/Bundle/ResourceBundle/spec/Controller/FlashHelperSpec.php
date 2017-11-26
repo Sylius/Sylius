@@ -28,17 +28,17 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 final class FlashHelperSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session, TranslatorInterface $translator): void
+    public function let(SessionInterface $session, TranslatorInterface $translator): void
     {
         $this->beConstructedWith($session, $translator, 'en');
     }
 
-    function it_implements_flash_helper_interface(): void
+    public function it_implements_flash_helper_interface(): void
     {
         $this->shouldImplement(FlashHelperInterface::class);
     }
 
-    function it_adds_resource_message_by_default(
+    public function it_adds_resource_message_by_default(
         SessionInterface $session,
         TranslatorBagInterface $translator,
         MessageCatalogueInterface $messageCatalogue,
@@ -68,7 +68,7 @@ final class FlashHelperSpec extends ObjectBehavior
         $this->addSuccessFlash($requestConfiguration, ResourceActions::CREATE, $resource);
     }
 
-    function it_adds_resource_message_when_catalogue_is_unavailable_and_given_message_cannot_be_translated(
+    public function it_adds_resource_message_when_catalogue_is_unavailable_and_given_message_cannot_be_translated(
         SessionInterface $session,
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
@@ -98,7 +98,7 @@ final class FlashHelperSpec extends ObjectBehavior
         $this->addSuccessFlash($requestConfiguration, ResourceActions::CREATE, $resource);
     }
 
-    function it_adds_resource_message_when_catalogue_is_unavailable_and_given_message_can_be_translated(
+    public function it_adds_resource_message_when_catalogue_is_unavailable_and_given_message_can_be_translated(
         SessionInterface $session,
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
@@ -132,7 +132,7 @@ final class FlashHelperSpec extends ObjectBehavior
         $this->addSuccessFlash($requestConfiguration, ResourceActions::CREATE, $resource);
     }
 
-    function it_adds_resource_message_if_message_was_not_found_in_the_catalogue(
+    public function it_adds_resource_message_if_message_was_not_found_in_the_catalogue(
         SessionInterface $session,
         TranslatorBagInterface $translator,
         MessageCatalogueInterface $messageCatalogue,
@@ -163,7 +163,7 @@ final class FlashHelperSpec extends ObjectBehavior
         $this->addSuccessFlash($requestConfiguration, ResourceActions::CREATE, $resource);
     }
 
-    function it_adds_overwritten_message(
+    public function it_adds_overwritten_message(
         SessionInterface $session,
         TranslatorBagInterface $translator,
         MessageCatalogueInterface $messageCatalogue,
@@ -188,7 +188,7 @@ final class FlashHelperSpec extends ObjectBehavior
         $this->addSuccessFlash($requestConfiguration, ResourceActions::CREATE, $resource);
     }
 
-    function it_adds_custom_message(
+    public function it_adds_custom_message(
         SessionInterface $session,
         TranslatorBagInterface $translator,
         MessageCatalogueInterface $messageCatalogue,
@@ -213,7 +213,7 @@ final class FlashHelperSpec extends ObjectBehavior
         $this->addSuccessFlash($requestConfiguration, 'send', $resource);
     }
 
-    function it_adds_message_from_event(
+    public function it_adds_message_from_event(
         SessionInterface $session,
         FlashBagInterface $flashBag,
         RequestConfiguration $requestConfiguration,

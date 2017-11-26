@@ -62,7 +62,7 @@ final class NotificationAccessor implements NotificationAccessorInterface
      *
      * @throws ElementNotFoundException
      */
-    private function getMessageElement()
+    private function getMessageElement(): NodeElement
     {
         $messageElement = $this->session->getPage()->find('css', '.sylius-flash-message');
 

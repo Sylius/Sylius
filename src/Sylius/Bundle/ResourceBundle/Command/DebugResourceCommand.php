@@ -41,7 +41,7 @@ final class DebugResourceCommand extends Command
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function configure(): void
     {
         $this->setName('sylius:debug:resource');
         $this->setDescription('Debug resource metadata.');
@@ -63,7 +63,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): void
     {
         $resource = $input->getArgument('resource');
 
@@ -81,7 +81,7 @@ EOT
     /**
      * @param OutputInterface $output
      */
-    private function listResources(OutputInterface $output)
+    private function listResources(OutputInterface $output): void
     {
         $resources = $this->registry->getAll();
         ksort($resources);
@@ -100,7 +100,7 @@ EOT
      * @param MetadataInterface $metadata
      * @param OutputInterface $output
      */
-    private function debugResource(MetadataInterface $metadata, OutputInterface $output)
+    private function debugResource(MetadataInterface $metadata, OutputInterface $output): void
     {
         $table = new Table($output);
         $information = [
@@ -129,7 +129,7 @@ EOT
      *
      * @return array
      */
-    private function flattenParameters(array $parameters, array $flattened = [], $prefix = '')
+    private function flattenParameters(array $parameters, array $flattened = [], string $prefix = ''): array
     {
         foreach ($parameters as $key => $value) {
             if (is_array($value)) {

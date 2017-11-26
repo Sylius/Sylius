@@ -20,7 +20,7 @@ use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 
 final class EmailProviderSpec extends ObjectBehavior
 {
-    function let(EmailFactoryInterface $emailFactory): void
+    public function let(EmailFactoryInterface $emailFactory): void
     {
         $emails = [
             'user_confirmation' => [
@@ -46,12 +46,12 @@ final class EmailProviderSpec extends ObjectBehavior
         $this->beConstructedWith($emailFactory, $emails);
     }
 
-    function it_implements_email_provider_interface(): void
+    public function it_implements_email_provider_interface(): void
     {
         $this->shouldImplement(EmailProviderInterface::class);
     }
 
-    function it_looks_for_an_email_in_configuration_when_it_cannot_be_found_via_repository(
+    public function it_looks_for_an_email_in_configuration_when_it_cannot_be_found_via_repository(
         EmailInterface $email,
         EmailFactoryInterface $emailFactory
     ): void {

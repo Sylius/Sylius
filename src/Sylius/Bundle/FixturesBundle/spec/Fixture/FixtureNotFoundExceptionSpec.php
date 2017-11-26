@@ -17,17 +17,17 @@ use PhpSpec\ObjectBehavior;
 
 final class FixtureNotFoundExceptionSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith('fixture_name');
     }
 
-    function it_is_an_invalid_argument_exception(): void
+    public function it_is_an_invalid_argument_exception(): void
     {
         $this->shouldHaveType(\InvalidArgumentException::class);
     }
 
-    function it_has_preformatted_message(): void
+    public function it_has_preformatted_message(): void
     {
         $this->getMessage()->shouldReturn('Fixture with name "fixture_name" could not be found!');
     }

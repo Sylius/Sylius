@@ -321,7 +321,6 @@ class Taxon implements TaxonInterface
     }
 
     /**
-     * @param string|null $locale
      *
      * @return TaxonTranslationInterface
      */

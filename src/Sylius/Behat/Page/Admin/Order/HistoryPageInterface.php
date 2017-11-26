@@ -20,5 +20,5 @@ interface HistoryPageInterface extends SymfonyPageInterface
     /**
      * @return int
      */
-    public function countShippingAddressChanges();
+    public function countShippingAddressChanges(): int;
 }

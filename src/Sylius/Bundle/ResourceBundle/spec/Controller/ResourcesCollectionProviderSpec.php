@@ -31,17 +31,17 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class ResourcesCollectionProviderSpec extends ObjectBehavior
 {
-    function let(ResourcesResolverInterface $resourcesResolver, PagerfantaFactory $pagerfantaRepresentationFactory): void
+    public function let(ResourcesResolverInterface $resourcesResolver, PagerfantaFactory $pagerfantaRepresentationFactory): void
     {
         $this->beConstructedWith($resourcesResolver, $pagerfantaRepresentationFactory);
     }
 
-    function it_implements_resources_collection_provider_interface(): void
+    public function it_implements_resources_collection_provider_interface(): void
     {
         $this->shouldImplement(ResourcesCollectionProviderInterface::class);
     }
 
-    function it_returns_resources_resolved_from_repository(
+    public function it_returns_resources_resolved_from_repository(
         ResourcesResolverInterface $resourcesResolver,
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
@@ -55,7 +55,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         $this->get($requestConfiguration, $repository)->shouldReturn([$firstResource, $secondResource]);
     }
 
-    function it_handles_Pagerfanta(
+    public function it_handles_Pagerfanta(
         ResourcesResolverInterface $resourcesResolver,
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
@@ -81,7 +81,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         $this->get($requestConfiguration, $repository)->shouldReturn($paginator);
     }
 
-    function it_restricts_max_pagination_limit_based_on_grid_configuration(
+    public function it_restricts_max_pagination_limit_based_on_grid_configuration(
         ResourcesResolverInterface $resourcesResolver,
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
@@ -114,7 +114,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         $this->get($requestConfiguration, $repository)->shouldReturn($gridView);
     }
 
-    function it_creates_a_paginated_representation_for_pagerfanta_for_non_html_requests(
+    public function it_creates_a_paginated_representation_for_pagerfanta_for_non_html_requests(
         ResourcesResolverInterface $resourcesResolver,
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
@@ -150,7 +150,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
         $this->get($requestConfiguration, $repository)->shouldReturn($paginatedRepresentation);
     }
 
-    function it_handles_resource_grid_view(
+    public function it_handles_resource_grid_view(
         ResourcesResolverInterface $resourcesResolver,
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,

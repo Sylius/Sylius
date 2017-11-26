@@ -31,7 +31,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('channel', ['%channel%' => $channelName])->hasAttribute('checked');
     }
 
-    public function removeZone()
+    public function removeZone(): void
     {
         $this->getDocument()->selectFieldOption('Zone', 'Select');
     }

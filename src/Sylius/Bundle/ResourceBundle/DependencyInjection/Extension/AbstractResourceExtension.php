@@ -21,7 +21,6 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 abstract class AbstractResourceExtension extends Extension
 {
     /**
-     * @param string $applicationName
      * @param string $driver
      * @param array $resources
      * @param ContainerBuilder $container

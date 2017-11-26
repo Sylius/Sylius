@@ -23,17 +23,17 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class RequestConfigurationFactorySpec extends ObjectBehavior
 {
-    function let(ParametersParserInterface $parametersParser): void
+    public function let(ParametersParserInterface $parametersParser): void
     {
         $this->beConstructedWith($parametersParser, RequestConfiguration::class);
     }
 
-    function it_implements_request_configuration_factory_interface(): void
+    public function it_implements_request_configuration_factory_interface(): void
     {
         $this->shouldImplement(RequestConfigurationFactoryInterface::class);
     }
 
-    function it_creates_configuration_from_resource_metadata_and_request(
+    public function it_creates_configuration_from_resource_metadata_and_request(
         ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,
@@ -54,7 +54,7 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         $this->create($metadata, $request)->shouldHaveType(RequestConfiguration::class);
     }
 
-    function it_creates_configuration_without_default_settings(
+    public function it_creates_configuration_without_default_settings(
         ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,
@@ -75,7 +75,7 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         $this->create($metadata, $request)->isSortable()->shouldReturn(false);
     }
 
-    function it_creates_configuration_for_serialization_group_from_single_header(
+    public function it_creates_configuration_for_serialization_group_from_single_header(
         ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,
@@ -96,7 +96,7 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         $this->create($metadata, $request)->isSortable()->shouldReturn(false);
     }
 
-    function it_creates_configuration_for_serialization_group_from_multiple_headers(
+    public function it_creates_configuration_for_serialization_group_from_multiple_headers(
         ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,
@@ -117,7 +117,7 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         $this->create($metadata, $request)->isSortable()->shouldReturn(false);
     }
 
-    function it_creates_configuration_for_serialization_version_from_single_header(
+    public function it_creates_configuration_for_serialization_version_from_single_header(
         ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,
@@ -139,7 +139,7 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         $this->create($metadata, $request)->isSortable()->shouldReturn(false);
     }
 
-    function it_creates_configuration_for_serialization_version_from_multiple_headers(
+    public function it_creates_configuration_for_serialization_version_from_multiple_headers(
         ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,
@@ -161,7 +161,7 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         $this->create($metadata, $request)->isSortable()->shouldReturn(false);
     }
 
-    function it_creates_configuration_with_default_settings(
+    public function it_creates_configuration_with_default_settings(
         ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,

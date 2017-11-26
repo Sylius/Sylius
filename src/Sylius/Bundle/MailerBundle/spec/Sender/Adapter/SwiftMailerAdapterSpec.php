@@ -24,17 +24,17 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class SwiftMailerAdapterSpec extends ObjectBehavior
 {
-    function let(\Swift_Mailer $mailer): void
+    public function let(\Swift_Mailer $mailer): void
     {
         $this->beConstructedWith($mailer);
     }
 
-    function it_is_an_adapter(): void
+    public function it_is_an_adapter(): void
     {
         $this->shouldHaveType(AbstractAdapter::class);
     }
 
-    function it_sends_an_email(
+    public function it_sends_an_email(
         \Swift_Mailer $mailer,
         EmailInterface $email,
         EventDispatcherInterface $dispatcher,

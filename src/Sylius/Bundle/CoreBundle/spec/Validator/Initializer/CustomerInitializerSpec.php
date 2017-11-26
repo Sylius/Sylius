@@ -20,17 +20,17 @@ use Symfony\Component\Validator\ObjectInitializerInterface;
 
 final class CustomerInitializerSpec extends ObjectBehavior
 {
-    function let(CanonicalizerInterface $canonicalizer): void
+    public function let(CanonicalizerInterface $canonicalizer): void
     {
         $this->beConstructedWith($canonicalizer);
     }
 
-    function it_implements_symfony_validator_initializer_interface(): void
+    public function it_implements_symfony_validator_initializer_interface(): void
     {
         $this->shouldImplement(ObjectInitializerInterface::class);
     }
 
-    function it_sets_canonical_email_when_initializing_customer($canonicalizer, CustomerInterface $customer): void
+    public function it_sets_canonical_email_when_initializing_customer($canonicalizer, CustomerInterface $customer): void
     {
         $customer->getEmail()->willReturn('sTeFfEn@gMaiL.CoM');
         $canonicalizer->canonicalize('sTeFfEn@gMaiL.CoM')->willReturn('steffen@gmail.com');
@@ -39,7 +39,7 @@ final class CustomerInitializerSpec extends ObjectBehavior
         $this->initialize($customer);
     }
 
-    function it_does_not_set_canonical_email_when_initializing_non_customer_object(\stdClass $object): void
+    public function it_does_not_set_canonical_email_when_initializing_non_customer_object(\stdClass $object): void
     {
         $this->initialize($object);
     }

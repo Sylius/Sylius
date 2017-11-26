@@ -115,7 +115,6 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
     }
 
     /**
-     * @param string $serviceId
      * @param string $method
      * @param array $arguments
      */

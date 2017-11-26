@@ -20,7 +20,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyRatio($ratio)
+    public function specifyRatio($ratio): void
     {
         $this->getDocument()->fillField('Ratio', $ratio);
     }
@@ -28,7 +28,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseSourceCurrency($currency)
+    public function chooseSourceCurrency($currency): void
     {
         $this->getDocument()->selectFieldOption('Source currency', $currency);
     }
@@ -36,7 +36,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseTargetCurrency($currency)
+    public function chooseTargetCurrency($currency): void
     {
         $this->getDocument()->selectFieldOption('Target currency', $currency);
     }

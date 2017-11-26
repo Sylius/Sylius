@@ -21,17 +21,17 @@ use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 
 final class PasswordUpdaterSpec extends ObjectBehavior
 {
-    function let(UserPasswordEncoderInterface $userPasswordEncoder): void
+    public function let(UserPasswordEncoderInterface $userPasswordEncoder): void
     {
         $this->beConstructedWith($userPasswordEncoder);
     }
 
-    function it_implements_password_updater_interface(): void
+    public function it_implements_password_updater_interface(): void
     {
         $this->shouldImplement(PasswordUpdaterInterface::class);
     }
 
-    function it_updates_user_profile_with_encoded_password(UserPasswordEncoderInterface $userPasswordEncoder, UserInterface $user): void
+    public function it_updates_user_profile_with_encoded_password(UserPasswordEncoderInterface $userPasswordEncoder, UserInterface $user): void
     {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
 
@@ -43,7 +43,7 @@ final class PasswordUpdaterSpec extends ObjectBehavior
         $this->updatePassword($user);
     }
 
-    function it_does_nothing_if_plain_password_is_empty(UserPasswordEncoderInterface $userPasswordEncoder, UserInterface $user): void
+    public function it_does_nothing_if_plain_password_is_empty(UserPasswordEncoderInterface $userPasswordEncoder, UserInterface $user): void
     {
         $user->getPlainPassword()->willReturn('');
 

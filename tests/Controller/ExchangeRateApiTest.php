@@ -38,7 +38,7 @@ final class ExchangeRateApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_creating_exchange_rate_for_non_authenticated_user()
+    public function it_denies_creating_exchange_rate_for_non_authenticated_user(): void
     {
         $this->client->request('POST', '/api/v1/exchange-rates/');
 
@@ -49,7 +49,7 @@ final class ExchangeRateApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_exchange_rate_without_specifying_required_data()
+    public function it_does_not_allow_to_create_exchange_rate_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -62,7 +62,7 @@ final class ExchangeRateApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_exchange_rate()
+    public function it_allows_to_create_exchange_rate(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/currencies.yml');
@@ -85,7 +85,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_exchange_rate_with_duplicated_currency_pair()
+    public function it_does_not_allow_to_create_exchange_rate_with_duplicated_currency_pair(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/exchange_rates.yml');
@@ -108,7 +108,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_exchange_rates_for_non_authenticated_user()
+    public function it_denies_getting_exchange_rates_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/exchange-rates/');
 
@@ -119,7 +119,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_exchange_rates_list()
+    public function it_allows_to_get_exchange_rates_list(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/exchange_rates.yml');
@@ -133,7 +133,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_exchange_rate_for_non_authenticated_user()
+    public function it_denies_getting_exchange_rate_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/exchange-rates/EUR-USD');
 
@@ -144,7 +144,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_a_exchange_rate_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_a_exchange_rate_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -157,7 +157,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_exchange_rate()
+    public function it_allows_to_get_exchange_rate(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $exchangeRates = $this->loadFixturesFromFile('resources/exchange_rates.yml');
@@ -174,7 +174,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_updating_exchange_rate_for_non_authenticated_user()
+    public function it_denies_updating_exchange_rate_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', '/api/v1/exchange-rates/EUR-USD');
 
@@ -185,7 +185,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_updating_exchange_rate_which_does_not_exist()
+    public function it_returns_not_found_response_when_updating_exchange_rate_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -198,7 +198,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_update_exchange_rate_without_specifying_required_data()
+    public function it_does_not_allow_to_update_exchange_rate_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $exchangeRates = $this->loadFixturesFromFile('resources/exchange_rates.yml');
@@ -215,7 +215,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_exchange_rate()
+    public function it_allows_to_update_exchange_rate(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $exchangeRates = $this->loadFixturesFromFile('resources/exchange_rates.yml');
@@ -244,7 +244,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_update_exchange_rates_currencies()
+    public function it_does_not_allow_to_update_exchange_rates_currencies(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $exchangeRates = $this->loadFixturesFromFile('resources/exchange_rates.yml');
@@ -275,7 +275,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_update_exchange_rate_if_ratio_is_not_a_number()
+    public function it_does_not_allow_to_update_exchange_rate_if_ratio_is_not_a_number(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $exchangeRates = $this->loadFixturesFromFile('resources/exchange_rates.yml');
@@ -299,7 +299,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_delete_exchange_rate_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_delete_exchange_rate_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -312,7 +312,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_exchange_rate()
+    public function it_allows_to_delete_exchange_rate(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $exchangeRates = $this->loadFixturesFromFile('resources/exchange_rates.yml');
@@ -332,11 +332,10 @@ EOT;
     }
 
     /**
-     * @param ExchangeRateInterface $exchangeRate
      *
      * @return string
      */
-    private function getExchangeRateUrl(ExchangeRateInterface $exchangeRate)
+    private function getExchangeRateUrl(ExchangeRateInterface $exchangeRate): string
     {
         return sprintf('/api/v1/exchange-rates/%s-%s', $exchangeRate->getSourceCurrency()->getCode(), $exchangeRate->getTargetCurrency()->getCode());
     }

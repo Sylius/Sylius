@@ -24,17 +24,17 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
 final class ProductVariantsPricesProviderSpec extends ObjectBehavior
 {
-    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
+    public function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
     {
         $this->beConstructedWith($productVariantPriceCalculator);
     }
 
-    function it_implements_a_variants_prices_provider_interface(): void
+    public function it_implements_a_variants_prices_provider_interface(): void
     {
         $this->shouldImplement(ProductVariantsPricesProviderInterface::class);
     }
 
-    function it_provides_array_containing_product_variant_options_map_with_corresponding_price(
+    public function it_provides_array_containing_product_variant_options_map_with_corresponding_price(
         ChannelInterface $channel,
         ProductInterface $tShirt,
         ProductOptionValueInterface $black,

@@ -51,10 +51,8 @@ class EmailTwigAdapter extends AbstractAdapter
     }
 
     /**
-     * @param EmailInterface $email
      * @param array $data
      *
-     * @return RenderedEmail
      */
     private function getRenderedEmail(EmailInterface $email, array $data): RenderedEmail
     {
@@ -66,10 +64,8 @@ class EmailTwigAdapter extends AbstractAdapter
     }
 
     /**
-     * @param EmailInterface $email
      * @param array $data
      *
-     * @return RenderedEmail
      */
     private function provideEmailWithTemplate(EmailInterface $email, array $data): RenderedEmail
     {
@@ -85,10 +81,8 @@ class EmailTwigAdapter extends AbstractAdapter
     }
 
     /**
-     * @param EmailInterface $email
      * @param array $data
      *
-     * @return RenderedEmail
      */
     private function provideEmailWithoutTemplate(EmailInterface $email, array $data): RenderedEmail
     {

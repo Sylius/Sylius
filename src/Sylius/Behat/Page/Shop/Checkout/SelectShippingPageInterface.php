@@ -20,7 +20,7 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
     /**
      * @param string $shippingMethod
      */
-    public function selectShippingMethod($shippingMethod);
+    public function selectShippingMethod(string $shippingMethod): void;
 
     /**
      * @return string[]
@@ -30,7 +30,7 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
     /**
      * @return bool
      */
-    public function hasNoShippingMethodsMessage();
+    public function hasNoShippingMethodsMessage(): bool;
 
     /**
      * @param string $shippingMethodName
@@ -38,20 +38,20 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
      *
      * @return bool
      */
-    public function hasShippingMethodFee($shippingMethodName, $fee);
+    public function hasShippingMethodFee(string $shippingMethodName, string $fee): bool;
 
     /**
      * @param string $itemName
      *
      * @return string
      */
-    public function getItemSubtotal($itemName);
+    public function getItemSubtotal(string $itemName): string;
 
-    public function nextStep();
+    public function nextStep(): void;
 
-    public function changeAddress();
+    public function changeAddress(): void;
 
-    public function changeAddressByStepLabel();
+    public function changeAddressByStepLabel(): void;
 
     /**
      * @return mixed string
@@ -61,22 +61,22 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
     /**
      * @return string
      */
-    public function getValidationMessageForShipment();
+    public function getValidationMessageForShipment(): string;
 
     /**
      * @return bool
      */
-    public function hasNoAvailableShippingMethodsWarning();
+    public function hasNoAvailableShippingMethodsWarning(): bool;
 
     /**
      * @return bool
      */
-    public function isNextStepButtonUnavailable();
+    public function isNextStepButtonUnavailable(): bool;
 
     /**
      * @param string $shippingMethodName
      *
      * @return bool
      */
-    public function hasShippingMethod($shippingMethodName);
+    public function hasShippingMethod(string $shippingMethodName): bool;
 }

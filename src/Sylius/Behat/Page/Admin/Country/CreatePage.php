@@ -25,7 +25,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addProvince($name, $code, $abbreviation = null)
+    public function addProvince($name, $code, $abbreviation = null): void
     {
         $this->getDocument()->clickLink('Add province');
 

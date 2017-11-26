@@ -25,17 +25,17 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CustomerStatisticsProviderSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, RepositoryInterface $channelRepository): void
+    public function let(OrderRepositoryInterface $orderRepository, RepositoryInterface $channelRepository): void
     {
         $this->beConstructedWith($orderRepository, $channelRepository);
     }
 
-    function it_implements_customer_statistics_provider_interface(): void
+    public function it_implements_customer_statistics_provider_interface(): void
     {
         $this->shouldImplement(CustomerStatisticsProviderInterface::class);
     }
 
-    function it_returns_an_empty_statistic_if_given_customer_does_not_have_any_orders(
+    public function it_returns_an_empty_statistic_if_given_customer_does_not_have_any_orders(
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $channelRepository,
         ChannelInterface $channel,
@@ -49,7 +49,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         $this->getCustomerStatistics($customer)->shouldBeLike($expectedStatistics);
     }
 
-    function it_obtains_customer_statistics_from_a_single_channel(
+    public function it_obtains_customer_statistics_from_a_single_channel(
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $channelRepository,
         ChannelInterface $channel,
@@ -74,7 +74,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         $this->getCustomerStatistics($customer)->shouldBeLike($expectedStatistics);
     }
 
-    function it_obtains_customer_statistics_from_multiple_channels(
+    public function it_obtains_customer_statistics_from_multiple_channels(
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $channelRepository,
         ChannelInterface $firstChannel,

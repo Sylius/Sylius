@@ -53,7 +53,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
 
     /**
      * @param array $resources
-     * @param ContainerBuilder $container
      *
      * @return array
      */
@@ -75,7 +74,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
 
     /**
      * @param array $resources
-     * @param ContainerBuilder $container
      */
     private function createServices(array $resources, ContainerBuilder $container): void
     {
@@ -91,7 +89,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
     }
 
     /**
-     * @param string $userType
      * @param array $config
      * @param ContainerBuilder $container
      */
@@ -137,10 +134,8 @@ final class SyliusUserExtension extends AbstractResourceExtension
     }
 
     /**
-     * @param string $generatorClass
      * @param array $arguments
      *
-     * @return Definition
      */
     private function createTokenGeneratorDefinition(string $generatorClass, array $arguments): Definition
     {
@@ -151,7 +146,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
     }
 
     /**
-     * @param string $userType
      * @param array $config
      * @param ContainerBuilder $container
      */

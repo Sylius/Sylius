@@ -16,7 +16,6 @@ namespace Sylius\Component\Mailer\Sender;
 interface SenderInterface
 {
     /**
-     * @param string $code
      * @param array $recipients
      * @param array $data
      * @param array $attachments

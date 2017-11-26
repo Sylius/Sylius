@@ -19,22 +19,22 @@ use Sylius\Component\Resource\Model\AbstractTranslation;
 
 final class ProductVariantTranslationSpec extends ObjectBehavior
 {
-    function it_implements_product_variant_translation_interface(): void
+    public function it_implements_product_variant_translation_interface(): void
     {
         $this->shouldImplement(ProductVariantTranslationInterface::class);
     }
 
-    function it_is_translation(): void
+    public function it_is_translation(): void
     {
         $this->shouldHaveType(AbstractTranslation::class);
     }
 
-    function it_has_no_name_by_default(): void
+    public function it_has_no_name_by_default(): void
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable(): void
+    public function its_name_is_mutable(): void
     {
         $this->setName('Super variant');
         $this->getName()->shouldReturn('Super variant');

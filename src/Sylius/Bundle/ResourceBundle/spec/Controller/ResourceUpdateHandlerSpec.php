@@ -22,17 +22,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class ResourceUpdateHandlerSpec extends ObjectBehavior
 {
-    function let(StateMachineInterface $stateMachine): void
+    public function let(StateMachineInterface $stateMachine): void
     {
         $this->beConstructedWith($stateMachine);
     }
 
-    function it_implements_a_resource_update_handler_interface(): void
+    public function it_implements_a_resource_update_handler_interface(): void
     {
         $this->shouldImplement(ResourceUpdateHandlerInterface::class);
     }
 
-    function it_applies_a_state_machine_transition(
+    public function it_applies_a_state_machine_transition(
         StateMachineInterface $stateMachine,
         ResourceInterface $resource,
         RequestConfiguration $configuration,
@@ -46,7 +46,7 @@ final class ResourceUpdateHandlerSpec extends ObjectBehavior
         $this->handle($resource, $configuration, $manager);
     }
 
-    function it_does_not_apply_a_state_machine_transition(
+    public function it_does_not_apply_a_state_machine_transition(
         StateMachineInterface $stateMachine,
         ResourceInterface $resource,
         RequestConfiguration $configuration,

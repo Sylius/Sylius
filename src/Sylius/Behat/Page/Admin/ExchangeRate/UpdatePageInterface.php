@@ -20,20 +20,20 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     /**
      * @return string
      */
-    public function getRatio();
+    public function getRatio(): string;
 
     /**
      * @param string $ratio
      */
-    public function changeRatio($ratio);
+    public function changeRatio(string $ratio): void;
 
     /**
      * @return bool
      */
-    public function isSourceCurrencyDisabled();
+    public function isSourceCurrencyDisabled(): bool;
 
     /**
      * @return bool
      */
-    public function isTargetCurrencyDisabled();
+    public function isTargetCurrencyDisabled(): bool;
 }

@@ -24,7 +24,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class GeographicalFixtureSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
         FactoryInterface $provinceFactory,
@@ -42,12 +42,12 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         );
     }
 
-    function it_is_a_fixture(): void
+    public function it_is_a_fixture(): void
     {
         $this->shouldImplement(FixtureInterface::class);
     }
 
-    function it_creates_and_persist_a_country(
+    public function it_creates_and_persist_a_country(
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
         CountryInterface $country
@@ -62,7 +62,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         $this->load(['countries' => ['PL'], 'provinces' => [], 'zones' => []]);
     }
 
-    function it_creates_and_persist_a_country_province(
+    public function it_creates_and_persist_a_country_province(
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
         FactoryInterface $provinceFactory,
@@ -89,12 +89,12 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         $this->load(['countries' => ['PL'], 'provinces' => ['PL' => ['PL-SL' => 'Silesia']], 'zones' => []]);
     }
 
-    function it_throws_an_exception_if_trying_to_create_a_province_for_unexisting_country(): void
+    public function it_throws_an_exception_if_trying_to_create_a_province_for_unexisting_country(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('load', [['countries' => [], 'provinces' => ['PL' => ['PL-SL' => 'Silesia']], 'zones' => []]]);
     }
 
-    function it_creates_and_persist_a_country_and_a_zone_containing_it(
+    public function it_creates_and_persist_a_country_and_a_zone_containing_it(
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
         ZoneFactoryInterface $zoneFactory,
@@ -127,7 +127,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ]]);
     }
 
-    function it_creates_and_persist_a_country_and_a_zone_with_scope_containing_it(
+    public function it_creates_and_persist_a_country_and_a_zone_with_scope_containing_it(
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
         ZoneFactoryInterface $zoneFactory,
@@ -161,7 +161,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ]]);
     }
 
-    function it_creates_and_persist_a_country_province_and_a_zone_containing_it(
+    public function it_creates_and_persist_a_country_province_and_a_zone_containing_it(
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
         FactoryInterface $provinceFactory,
@@ -205,7 +205,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ]]);
     }
 
-    function it_creates_and_persist_a_country_type_zone_and_a_zone_containing_it(
+    public function it_creates_and_persist_a_country_type_zone_and_a_zone_containing_it(
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
         ZoneFactoryInterface $zoneFactory,
@@ -251,7 +251,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ]]);
     }
 
-    function it_throws_an_exception_if_trying_to_create_a_zone_with_unexisting_country(): void
+    public function it_throws_an_exception_if_trying_to_create_a_zone_with_unexisting_country(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('load', [['countries' => [], 'provinces' => [], 'zones' => [
             'ZONE' => [
@@ -263,7 +263,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ]]]);
     }
 
-    function it_throws_an_exception_if_trying_to_create_a_zone_with_unexisting_province(): void
+    public function it_throws_an_exception_if_trying_to_create_a_zone_with_unexisting_province(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('load', [['countries' => [], 'provinces' => [], 'zones' => [
             'ZONE' => [
@@ -275,7 +275,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ]]]);
     }
 
-    function it_throws_an_exception_if_trying_to_create_a_zone_with_unexisting_zone(): void
+    public function it_throws_an_exception_if_trying_to_create_a_zone_with_unexisting_zone(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('load', [['countries' => [], 'provinces' => [], 'zones' => [
             'ZONE' => [

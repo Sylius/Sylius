@@ -19,7 +19,7 @@ final class ListenerNotFoundException extends \InvalidArgumentException
      * @param string $name
      * @param \Exception|null $previous
      */
-    public function __construct(string $name, ?\Exception $previous = null)
+    public function __construct(string $name, ?\Throwable $previous = null)
     {
         parent::__construct(sprintf('Listener with name "%s" could not be found!', $name), 0, $previous);
     }

@@ -20,22 +20,22 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class FormatMoneyHelperSpec extends ObjectBehavior
 {
-    function let(MoneyFormatterInterface $moneyFormatter): void
+    public function let(MoneyFormatterInterface $moneyFormatter): void
     {
         $this->beConstructedWith($moneyFormatter);
     }
 
-    function it_is_a_templating_helper(): void
+    public function it_is_a_templating_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_implements_format_money_helper_interface(): void
+    public function it_implements_format_money_helper_interface(): void
     {
         $this->shouldImplement(FormatMoneyHelperInterface::class);
     }
 
-    function it_formats_money_using_given_currency_and_locale(MoneyFormatterInterface $moneyFormatter): void
+    public function it_formats_money_using_given_currency_and_locale(MoneyFormatterInterface $moneyFormatter): void
     {
         $moneyFormatter->format(2500, 'EUR', 'fr_FR')->willReturn('€25.00');
 

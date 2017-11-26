@@ -37,11 +37,9 @@ class BulkActionGridHelper extends Helper
     }
 
     /**
-     * @param GridView $gridView
      * @param Action $bulkAction
      * @param mixed|null $data
      *
-     * @return string
      */
     public function renderBulkAction(GridView $gridView, Action $bulkAction, $data = null): string
     {

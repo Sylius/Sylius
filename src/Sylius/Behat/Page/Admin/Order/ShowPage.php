@@ -29,7 +29,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     private $tableAccessor;
 
     /**
-     * @param Session $session
      * @param array $parameters
      * @param RouterInterface $router
      * @param TableAccessorInterface $tableAccessor
@@ -85,7 +84,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return stripos($shipmentsText, $shippingDetails) !== false;
     }
 
-    public function specifyTrackingCode($code)
+    public function specifyTrackingCode($code): void
     {
         $this->getDocument()->fillField('sylius_shipment_ship_tracking', $code);
     }
@@ -95,7 +94,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getLastOrderShipmentElement($order)->hasButton('Ship');
     }
 
-    public function shipOrder(OrderInterface $order)
+    public function shipOrder(OrderInterface $order): void
     {
         $this->getLastOrderShipmentElement($order)->pressButton('Ship');
     }
@@ -121,7 +120,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function completeOrderLastPayment(OrderInterface $order)
+    public function completeOrderLastPayment(OrderInterface $order): void
     {
         $this->getLastOrderPaymentElement($order)->pressButton('Complete');
     }
@@ -129,7 +128,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function refundOrderLastPayment(OrderInterface $order)
+    public function refundOrderLastPayment(OrderInterface $order): void
     {
         $this->getLastOrderPaymentElement($order)->pressButton('Refund');
     }
@@ -390,12 +389,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('order_shipping_state')->getText();
     }
 
-    public function cancelOrder()
+    public function cancelOrder(): void
     {
         $this->getDocument()->pressButton('Cancel');
     }
 
-    public function deleteOrder()
+    public function deleteOrder(): void
     {
         $this->getDocument()->pressButton('Delete');
     }
@@ -503,7 +502,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * @return TableAccessorInterface
      */
-    protected function getTableAccessor()
+    protected function getTableAccessor(): TableAccessorInterface
     {
         return $this->tableAccessor;
     }
@@ -518,7 +517,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      *
      * @return bool
      */
-    private function hasAddress($elementText, $customerName, $street, $postcode, $city, $countryName)
+    private function hasAddress(string $elementText, string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         return
             (stripos($elementText, $customerName) !== false) &&
@@ -534,7 +533,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      *
      * @return string
      */
-    private function getItemProperty($itemName, $property)
+    private function getItemProperty(string $itemName, string $property): string
     {
         $rows = $this->tableAccessor->getRowsWithFields(
             $this->getElement('table'),
@@ -545,11 +544,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param OrderInterface $order
      *
      * @return NodeElement|null
      */
-    private function getLastOrderPaymentElement(OrderInterface $order)
+    private function getLastOrderPaymentElement(OrderInterface $order): ?NodeElement
     {
         $payment = $order->getPayments()->last();
 
@@ -560,11 +558,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param OrderInterface $order
      *
      * @return NodeElement|null
      */
-    private function getLastOrderShipmentElement(OrderInterface $order)
+    private function getLastOrderShipmentElement(OrderInterface $order): ?NodeElement
     {
         $shipment = $order->getShipments()->last();
 

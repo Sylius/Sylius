@@ -20,9 +20,8 @@ interface NotificationCheckerInterface
 {
     /**
      * @param string $message
-     * @param NotificationType $type
      *
      * @throws NotificationExpectationMismatchException
      */
-    public function checkNotification($message, NotificationType $type);
+    public function checkNotification(string $message, NotificationType $type): void;
 }

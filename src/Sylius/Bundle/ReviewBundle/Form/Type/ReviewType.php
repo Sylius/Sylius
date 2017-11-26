@@ -58,7 +58,6 @@ abstract class ReviewType extends AbstractResourceType
     }
 
     /**
-     * @param int $maxRate
      *
      * @return array
      */

@@ -45,7 +45,6 @@ final class Translator extends BaseTranslator implements WarmableInterface
     private $resourcesLoaded = false;
 
     /**
-     * @param TranslatorLoaderProviderInterface $loaderProvider
      * @param TranslatorResourceProviderInterface $resourceProvider
      * @param MessageSelector $messageSelector
      * @param string $locale

@@ -116,7 +116,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^there is a promotion "([^"]+)" with priority ([^"]+)$/
      */
-    public function thereIsAPromotionWithPriority($promotionName, $priority)
+    public function thereIsAPromotionWithPriority($promotionName, $priority): void
     {
         $promotion = $this->testPromotionFactory
             ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
@@ -131,7 +131,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^there is an exclusive promotion "([^"]+)"(?:| with priority ([^"]+))$/
      */
-    public function thereIsAnExclusivePromotionWithPriority($promotionName, $priority = 0)
+    public function thereIsAnExclusivePromotionWithPriority($promotionName, $priority = 0): void
     {
         $promotion = $this->testPromotionFactory
             ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
@@ -147,7 +147,7 @@ final class PromotionContext implements Context
     /**
      * @Given there is a promotion :promotionName limited to :usageLimit usages
      */
-    public function thereIsPromotionLimitedToUsages($promotionName, $usageLimit)
+    public function thereIsPromotionLimitedToUsages($promotionName, $usageLimit): void
     {
         $promotion = $this->testPromotionFactory->createForChannel($promotionName, $this->sharedStorage->get('channel'));
 
@@ -195,7 +195,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(this promotion) has already expired$/
      */
-    public function thisPromotionHasExpired(PromotionInterface $promotion)
+    public function thisPromotionHasExpired(PromotionInterface $promotion): void
     {
         $promotion->setEndsAt(new \DateTime('1 day ago'));
 
@@ -205,7 +205,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(this promotion) expires tomorrow$/
      */
-    public function thisPromotionExpiresTomorrow(PromotionInterface $promotion)
+    public function thisPromotionExpiresTomorrow(PromotionInterface $promotion): void
     {
         $promotion->setEndsAt(new \DateTime('tomorrow'));
 
@@ -215,7 +215,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(this promotion) has started yesterday$/
      */
-    public function thisPromotionHasStartedYesterday(PromotionInterface $promotion)
+    public function thisPromotionHasStartedYesterday(PromotionInterface $promotion): void
     {
         $promotion->setStartsAt(new \DateTime('1 day ago'));
 
@@ -225,7 +225,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(this promotion) starts tomorrow$/
      */
-    public function thisPromotionStartsTomorrow(PromotionInterface $promotion)
+    public function thisPromotionStartsTomorrow(PromotionInterface $promotion): void
     {
         $promotion->setStartsAt(new \DateTime('tomorrow'));
 
@@ -235,7 +235,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(this coupon) has already expired$/
      */
-    public function thisCouponHasExpired(PromotionCouponInterface $coupon)
+    public function thisCouponHasExpired(PromotionCouponInterface $coupon): void
     {
         $coupon->setExpiresAt(new \DateTime('1 day ago'));
 
@@ -245,7 +245,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(this coupon) expires tomorrow$/
      */
-    public function thisCouponExpiresTomorrow(PromotionCouponInterface $coupon)
+    public function thisCouponExpiresTomorrow(PromotionCouponInterface $coupon): void
     {
         $coupon->setExpiresAt(new \DateTime('tomorrow'));
 
@@ -255,7 +255,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(this coupon) has already reached its usage limit$/
      */
-    public function thisCouponHasReachedItsUsageLimit(PromotionCouponInterface $coupon)
+    public function thisCouponHasReachedItsUsageLimit(PromotionCouponInterface $coupon): void
     {
         $coupon->setUsed(42);
         $coupon->setUsageLimit(42);
@@ -266,7 +266,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(this coupon) can be used (\d+) times?$/
      */
-    public function thisCouponCanBeUsedNTimes(PromotionCouponInterface $coupon, $usageLimit)
+    public function thisCouponCanBeUsedNTimes(PromotionCouponInterface $coupon, $usageLimit): void
     {
         $coupon->setUsageLimit((int) $usageLimit);
 
@@ -276,7 +276,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(this coupon) can be used twice per customer$/
      */
-    public function thisCouponCanBeUsedTwicePerCustomer(PromotionCouponInterface $coupon)
+    public function thisCouponCanBeUsedTwicePerCustomer(PromotionCouponInterface $coupon): void
     {
         $coupon->setPerCustomerUsageLimit(2);
 
@@ -286,7 +286,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") discount to every order$/
      */
-    public function itGivesFixedDiscountToEveryOrder(PromotionInterface $promotion, $discount)
+    public function itGivesFixedDiscountToEveryOrder(PromotionInterface $promotion, $discount): void
     {
         $this->createFixedPromotion($promotion, $discount);
     }
@@ -300,7 +300,7 @@ final class PromotionContext implements Context
         ChannelInterface $firstChannel,
         $secondChannelDiscount,
         ChannelInterface $secondChannel
-    ) {
+    ): void {
         /** @var PromotionActionInterface $action */
         $action = $this->actionFactory->createFixedDiscount($firstChannelDiscount, $firstChannel->getCode());
         $action->setConfiguration(array_merge($action->getConfiguration(), [$secondChannel->getCode() => ['amount' => $secondChannelDiscount]]));
@@ -315,7 +315,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("[^"]+%") discount to every order$/
      */
-    public function itGivesPercentageDiscountToEveryOrder(PromotionInterface $promotion, $discount)
+    public function itGivesPercentageDiscountToEveryOrder(PromotionInterface $promotion, $discount): void
     {
         $this->createPercentagePromotion($promotion, $discount);
     }
@@ -327,7 +327,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         $discount,
         $quantity
-    ) {
+    ): void {
         $rule = $this->ruleFactory->createCartQuantity((int) $quantity);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
@@ -340,7 +340,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         $discount,
         $targetAmount
-    ) {
+    ): void {
         $channelCode = $this->sharedStorage->get('channel')->getCode();
         $rule = $this->ruleFactory->createItemTotal($channelCode, $targetAmount);
 
@@ -354,7 +354,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         $discount,
         $targetAmount
-    ) {
+    ): void {
         $channelCode = $this->sharedStorage->get('channel')->getCode();
         $rule = $this->ruleFactory->createItemTotal($channelCode, $targetAmount);
 
@@ -364,7 +364,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("[^"]+%") discount on shipping to every order$/
      */
-    public function itGivesPercentageDiscountOnShippingToEveryOrder(PromotionInterface $promotion, $discount)
+    public function itGivesPercentageDiscountOnShippingToEveryOrder(PromotionInterface $promotion, $discount): void
     {
         $action = $this->actionFactory->createShippingPercentageDiscount($discount);
         $promotion->addAction($action);
@@ -375,7 +375,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives free shipping to every order$/
      */
-    public function thePromotionGivesFreeShippingToEveryOrder(PromotionInterface $promotion)
+    public function thePromotionGivesFreeShippingToEveryOrder(PromotionInterface $promotion): void
     {
         $this->itGivesPercentageDiscountOnShippingToEveryOrder($promotion, 1);
     }
@@ -387,7 +387,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         $discount,
         TaxonInterface $taxon
-    ) {
+    ): void {
         $this->createUnitPercentagePromotion($promotion, $discount, $this->getTaxonFilterConfiguration([$taxon->getCode()]));
     }
 
@@ -398,7 +398,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         $discount,
         TaxonInterface $taxon
-    ) {
+    ): void {
         $this->createUnitFixedPromotion($promotion, $discount, $this->getTaxonFilterConfiguration([$taxon->getCode()]));
     }
 
@@ -409,7 +409,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         $discount,
         $amount
-    ) {
+    ): void {
         $this->createUnitFixedPromotion($promotion, $discount, $this->getPriceRangeFilterConfiguration($amount));
     }
 
@@ -421,7 +421,7 @@ final class PromotionContext implements Context
         $discount,
         $minAmount,
         $maxAmount
-    ) {
+    ): void {
         $this->createUnitFixedPromotion(
             $promotion,
             $discount,
@@ -436,7 +436,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         $discount,
         $amount
-    ) {
+    ): void {
         $this->createUnitPercentagePromotion($promotion, $discount, $this->getPriceRangeFilterConfiguration($amount));
     }
 
@@ -448,7 +448,7 @@ final class PromotionContext implements Context
         $discount,
         $minAmount,
         $maxAmount
-    ) {
+    ): void {
         $this->createUnitPercentagePromotion(
             $promotion,
             $discount,
@@ -463,7 +463,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         $discount,
         TaxonInterface $taxon
-    ) {
+    ): void {
         $rule = $this->ruleFactory->createHasTaxon([$taxon->getCode()]);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
@@ -476,7 +476,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         $discount,
         array $taxons
-    ) {
+    ): void {
         $rule = $this->ruleFactory->createHasTaxon([$taxons[0]->getCode(), $taxons[1]->getCode()]);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
@@ -490,7 +490,7 @@ final class PromotionContext implements Context
         $discount,
         TaxonInterface $taxon,
         $amount
-    ) {
+    ): void {
         $channelCode = $this->sharedStorage->get('channel')->getCode();
         $rule = $this->ruleFactory->createItemsFromTaxonTotal($channelCode, $taxon->getCode(), $amount);
 
@@ -500,7 +500,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off customer's (\d)(?:st|nd|rd|th) order$/
      */
-    public function itGivesFixedOffCustomersNthOrder(PromotionInterface $promotion, $discount, $nth)
+    public function itGivesFixedOffCustomersNthOrder(PromotionInterface $promotion, $discount, $nth): void
     {
         $rule = $this->ruleFactory->createNthOrder((int) $nth);
 
@@ -510,7 +510,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("[^"]+%") off on the customer's (\d)(?:st|nd|rd|th) order$/
      */
-    public function itGivesPercentageOffCustomersNthOrder(PromotionInterface $promotion, $discount, $nth)
+    public function itGivesPercentageOffCustomersNthOrder(PromotionInterface $promotion, $discount, $nth): void
     {
         $rule = $this->ruleFactory->createNthOrder((int) $nth);
 
@@ -525,7 +525,7 @@ final class PromotionContext implements Context
         $productDiscount,
         TaxonInterface $discountTaxon,
         $orderDiscount
-    ) {
+    ): void {
         $this->createUnitPercentagePromotion($promotion, $productDiscount, $this->getTaxonFilterConfiguration([$discountTaxon->getCode()]));
         $this->createFixedPromotion($promotion, $orderDiscount);
     }
@@ -538,7 +538,7 @@ final class PromotionContext implements Context
         $discount,
         TaxonInterface $taxon,
         $targetAmount
-    ) {
+    ): void {
         $freeShippingAction = $this->actionFactory->createShippingPercentageDiscount(1);
         $promotion->addAction($freeShippingAction);
 
@@ -557,7 +557,7 @@ final class PromotionContext implements Context
         TaxonInterface $taxon,
         $orderDiscount,
         $targetAmount
-    ) {
+    ): void {
         $orderDiscountAction = $this->actionFactory->createFixedDiscount($orderDiscount, $this->sharedStorage->get('channel')->getCode());
         $promotion->addAction($orderDiscountAction);
 
@@ -580,7 +580,7 @@ final class PromotionContext implements Context
         $discount,
         array $discountTaxons,
         array $targetTaxons
-    ) {
+    ): void {
         $discountTaxonsCodes = [$discountTaxons[0]->getCode(), $discountTaxons[1]->getCode()];
         $targetTaxonsCodes = [$targetTaxons[0]->getCode(), $targetTaxons[1]->getCode()];
 
@@ -602,7 +602,7 @@ final class PromotionContext implements Context
         $discount,
         $discountTaxon,
         $targetTaxon
-    ) {
+    ): void {
         $rule = $this->ruleFactory->createHasTaxon([$targetTaxon->getCode()]);
 
         $this->createUnitPercentagePromotion(
@@ -616,7 +616,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(it) is coupon based promotion$/
      */
-    public function itIsCouponBasedPromotion(PromotionInterface $promotion)
+    public function itIsCouponBasedPromotion(PromotionInterface $promotion): void
     {
         $promotion->setCouponBased(true);
 
@@ -626,7 +626,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(the promotion) was disabled for the (channel "[^"]+")$/
      */
-    public function thePromotionWasDisabledForTheChannel(PromotionInterface $promotion, ChannelInterface $channel)
+    public function thePromotionWasDisabledForTheChannel(PromotionInterface $promotion, ChannelInterface $channel): void
     {
         $promotion->removeChannel($channel);
 
@@ -636,7 +636,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^the (coupon "[^"]+") was used up to its usage limit$/
      */
-    public function theCouponWasUsed(PromotionCouponInterface $coupon)
+    public function theCouponWasUsed(PromotionCouponInterface $coupon): void
     {
         $coupon->setUsed($coupon->getUsageLimit());
 
@@ -646,7 +646,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off if order contains (?:a|an) ("[^"]+" product)$/
      */
-    public function thePromotionGivesOffIfOrderContainsProducts(PromotionInterface $promotion, $discount, ProductInterface $product)
+    public function thePromotionGivesOffIfOrderContainsProducts(PromotionInterface $promotion, $discount, ProductInterface $product): void
     {
         $rule = $this->ruleFactory->createContainsProduct($product->getCode());
 
@@ -656,7 +656,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on a ("[^"]*" product)$/
      */
-    public function itGivesFixedDiscountOffOnAProduct(PromotionInterface $promotion, $discount, ProductInterface $product)
+    public function itGivesFixedDiscountOffOnAProduct(PromotionInterface $promotion, $discount, ProductInterface $product): void
     {
         $this->createUnitFixedPromotion($promotion, $discount, $this->getProductsFilterConfiguration([$product->getCode()]));
     }
@@ -664,7 +664,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("[^"]+%") off on a ("[^"]*" product)$/
      */
-    public function itGivesPercentageDiscountOffOnAProduct(PromotionInterface $promotion, $discount, ProductInterface $product)
+    public function itGivesPercentageDiscountOffOnAProduct(PromotionInterface $promotion, $discount, ProductInterface $product): void
     {
         $this->createUnitPercentagePromotion($promotion, $discount, $this->getProductsFilterConfiguration([$product->getCode()]));
     }
@@ -676,7 +676,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         $discount,
         CustomerGroupInterface $customerGroup
-    ) {
+    ): void {
         $rule = $this->ruleFactory->createNew();
         $rule->setType(CustomerGroupRuleChecker::TYPE);
         $rule->setConfiguration(['group_code' => $customerGroup->getCode()]);
@@ -691,7 +691,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         $discount,
         $itemTotal
-    ) {
+    ): void {
         $channelCode = $this->sharedStorage->get('channel')->getCode();
         $rule = $this->ruleFactory->createItemTotal($channelCode, $itemTotal);
         $action = $this->actionFactory->createShippingPercentageDiscount($discount);
@@ -702,7 +702,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives free shipping to every order over ("(?:€|£|\$)[^"]+")$/
      */
-    public function itGivesFreeShippingToEveryOrderOver(PromotionInterface $promotion, $itemTotal)
+    public function itGivesFreeShippingToEveryOrderOver(PromotionInterface $promotion, $itemTotal): void
     {
         $this->itGivesDiscountOnShippingToEveryOrderOver($promotion, 1, $itemTotal);
     }
@@ -712,7 +712,7 @@ final class PromotionContext implements Context
      *
      * @return array
      */
-    private function getTaxonFilterConfiguration(array $taxonCodes)
+    private function getTaxonFilterConfiguration(array $taxonCodes): array
     {
         return ['filters' => ['taxons_filter' => ['taxons' => $taxonCodes]]];
     }
@@ -722,7 +722,7 @@ final class PromotionContext implements Context
      *
      * @return array
      */
-    private function getProductsFilterConfiguration(array $productCodes)
+    private function getProductsFilterConfiguration(array $productCodes): array
     {
         return ['filters' => ['products_filter' => ['products' => $productCodes]]];
     }
@@ -733,7 +733,7 @@ final class PromotionContext implements Context
      *
      * @return array
      */
-    private function getPriceRangeFilterConfiguration($minAmount, $maxAmount = null)
+    private function getPriceRangeFilterConfiguration(int $minAmount, int $maxAmount = null): array
     {
         $configuration = ['filters' => ['price_range_filter' => ['min' => $minAmount]]];
         if (null !== $maxAmount) {
@@ -744,12 +744,11 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param int $discount
      * @param array $configuration
      * @param PromotionRuleInterface|null $rule
      */
-    private function createUnitFixedPromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
+    private function createUnitFixedPromotion(PromotionInterface $promotion, int $discount, array $configuration = [], ?PromotionRuleInterface $rule = null): void
     {
         $channelCode = $this->sharedStorage->get('channel')->getCode();
 
@@ -762,12 +761,11 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param int $discount
      * @param array $configuration
      * @param PromotionRuleInterface|null $rule
      */
-    private function createUnitPercentagePromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
+    private function createUnitPercentagePromotion(PromotionInterface $promotion, int $discount, array $configuration = [], ?PromotionRuleInterface $rule = null): void
     {
         $channelCode = $this->sharedStorage->get('channel')->getCode();
 
@@ -780,7 +778,6 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param int $discount
      * @param array $configuration
      * @param PromotionRuleInterface|null $rule
@@ -788,38 +785,36 @@ final class PromotionContext implements Context
      */
     private function createFixedPromotion(
         PromotionInterface $promotion,
-        $discount,
+        int $discount,
         array $configuration = [],
-        PromotionRuleInterface $rule = null,
-        ChannelInterface $channel = null
-    ) {
+        ?PromotionRuleInterface $rule = null,
+        ?ChannelInterface $channel = null
+    ): void {
         $channelCode = (null !== $channel) ? $channel->getCode() : $this->sharedStorage->get('channel')->getCode();
 
         $this->persistPromotion($promotion, $this->actionFactory->createFixedDiscount($discount, $channelCode), $configuration, $rule);
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param float $discount
      * @param array $configuration
      * @param PromotionRuleInterface $rule
      */
     private function createPercentagePromotion(
         PromotionInterface $promotion,
-        $discount,
+        float $discount,
         array $configuration = [],
-        PromotionRuleInterface $rule = null
-    ) {
+        ?PromotionRuleInterface $rule = null
+    ): void {
         $this->persistPromotion($promotion, $this->actionFactory->createPercentageDiscount($discount), $configuration, $rule);
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param PromotionActionInterface $action
      * @param array $configuration
      * @param PromotionRuleInterface|null $rule
      */
-    private function persistPromotion(PromotionInterface $promotion, PromotionActionInterface $action, array $configuration, PromotionRuleInterface $rule = null)
+    private function persistPromotion(PromotionInterface $promotion, PromotionActionInterface $action, array $configuration, ?PromotionRuleInterface $rule = null): void
     {
         $configuration = array_merge_recursive($action->getConfiguration(), $configuration);
         $action->setConfiguration($configuration);

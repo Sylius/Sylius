@@ -22,30 +22,30 @@ use PhpSpec\ObjectBehavior;
 
 final class ClientManagerSpec extends ObjectBehavior
 {
-    function let(EntityManager $em, EntityRepository $repository, $clientClass = 'Client/Class/String'): void
+    public function let(EntityManager $em, EntityRepository $repository, $clientClass = 'Client/Class/String'): void
     {
         $em->getRepository($clientClass)->shouldBeCalled()->willReturn($repository);
         $this->beConstructedWith($em, $clientClass);
     }
 
-    function it_extends_fos_oauth_server_client_manager(): void
+    public function it_extends_fos_oauth_server_client_manager(): void
     {
         $this->shouldHaveType(FOSClientManager::class);
     }
 
-    function it_implements_fos_oauth_server_client_manager_interface(): void
+    public function it_implements_fos_oauth_server_client_manager_interface(): void
     {
         $this->shouldImplement(ClientManagerInterface::class);
     }
 
-    function it_finds_client_by_public_id(ClientInterface $client, $repository): void
+    public function it_finds_client_by_public_id(ClientInterface $client, $repository): void
     {
         $repository->findOneBy(['randomId' => 'random_string'])->willReturn($client);
 
         $this->findClientByPublicId('random_string')->shouldReturn($client);
     }
 
-    function it_returns_null_if_client_does_not_exist($repository): void
+    public function it_returns_null_if_client_does_not_exist($repository): void
     {
         $repository->findOneBy(['randomId' => 'random_string'])->willReturn(null);
 

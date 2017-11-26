@@ -81,7 +81,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function lessThan(string $field, $value)
+    public function lessThan(string $field, $value): void
     {
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
@@ -92,7 +92,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function lessThanOrEqual(string $field, $value)
+    public function lessThanOrEqual(string $field, $value): void
     {
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
@@ -103,7 +103,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function greaterThan(string $field, $value)
+    public function greaterThan(string $field, $value): void
     {
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
@@ -114,7 +114,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function greaterThanOrEqual(string $field, $value)
+    public function greaterThanOrEqual(string $field, $value): void
     {
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);

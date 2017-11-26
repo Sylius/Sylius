@@ -19,31 +19,31 @@ use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 
 final class CountryNameConverterSpec extends ObjectBehavior
 {
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(CountryNameConverter::class);
     }
 
-    function it_implements_country_name_to_code_converter_interface(): void
+    public function it_implements_country_name_to_code_converter_interface(): void
     {
         $this->shouldImplement(CountryNameConverterInterface::class);
     }
 
-    function it_converts_english_country_name_to_codes_by_default(): void
+    public function it_converts_english_country_name_to_codes_by_default(): void
     {
         $this->convertToCode('Australia')->shouldReturn('AU');
         $this->convertToCode('China')->shouldReturn('CN');
         $this->convertToCode('France')->shouldReturn('FR');
     }
 
-    function it_converts_country_name_to_codes_for_given_locale(): void
+    public function it_converts_country_name_to_codes_for_given_locale(): void
     {
         $this->convertToCode('Niemcy', 'pl')->shouldReturn('DE');
         $this->convertToCode('Chine', 'fr')->shouldReturn('CN');
         $this->convertToCode('Francia', 'es')->shouldReturn('FR');
     }
 
-    function it_throws_an_exception_if_country_name_cannot_be_converted_to_code(): void
+    public function it_throws_an_exception_if_country_name_cannot_be_converted_to_code(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('convertToCode', ['Atlantis']);
     }

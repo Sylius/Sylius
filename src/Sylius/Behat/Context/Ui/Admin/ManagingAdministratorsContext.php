@@ -65,7 +65,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @Given I want to create a new administrator
      */
-    public function iWantToCreateANewAdministrator()
+    public function iWantToCreateANewAdministrator(): void
     {
         $this->createPage->open();
     }
@@ -74,7 +74,7 @@ final class ManagingAdministratorsContext implements Context
      * @Given /^I am editing (my) details$/
      * @When /^I want to edit (this administrator)$/
      */
-    public function iWantToEditThisAdministrator(AdminUserInterface $adminUser)
+    public function iWantToEditThisAdministrator(AdminUserInterface $adminUser): void
     {
         $this->updatePage->open(['id' => $adminUser->getId()]);
     }
@@ -83,7 +83,7 @@ final class ManagingAdministratorsContext implements Context
      * @When I browse administrators
      * @When I want to browse administrators
      */
-    public function iWantToBrowseAdministrators()
+    public function iWantToBrowseAdministrators(): void
     {
         $this->indexPage->open();
     }
@@ -92,7 +92,7 @@ final class ManagingAdministratorsContext implements Context
      * @When I specify its name as :username
      * @When I do not specify its name
      */
-    public function iSpecifyItsNameAs($username = null)
+    public function iSpecifyItsNameAs($username = null): void
     {
         $this->createPage->specifyUsername($username);
     }
@@ -100,7 +100,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I change its name to :username
      */
-    public function iChangeItsNameTo($username)
+    public function iChangeItsNameTo($username): void
     {
         $this->updatePage->changeUsername($username);
     }
@@ -109,7 +109,7 @@ final class ManagingAdministratorsContext implements Context
      * @When I specify its email as :email
      * @When I do not specify its email
      */
-    public function iSpecifyItsEmailAs($email = null)
+    public function iSpecifyItsEmailAs($email = null): void
     {
         $this->createPage->specifyEmail($email);
     }
@@ -117,7 +117,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I change its email to :email
      */
-    public function iChangeItsEmailTo($email)
+    public function iChangeItsEmailTo($email): void
     {
         $this->updatePage->changeEmail($email);
     }
@@ -125,7 +125,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I specify its locale as :localeCode
      */
-    public function iSpecifyItsLocaleAs($localeCode)
+    public function iSpecifyItsLocaleAs($localeCode): void
     {
         $this->createPage->specifyLocale($localeCode);
     }
@@ -133,7 +133,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I set my locale to :localeCode
      */
-    public function iSetMyLocaleTo($localeCode)
+    public function iSetMyLocaleTo($localeCode): void
     {
         $this->updatePage->changeLocale($localeCode);
         $this->updatePage->saveChanges();
@@ -143,7 +143,7 @@ final class ManagingAdministratorsContext implements Context
      * @When I specify its password as :password
      * @When I do not specify its password
      */
-    public function iSpecifyItsPasswordAs($password = null)
+    public function iSpecifyItsPasswordAs($password = null): void
     {
         $this->createPage->specifyPassword($password);
     }
@@ -151,7 +151,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I change its password to :password
      */
-    public function iChangeItsPasswordTo($password)
+    public function iChangeItsPasswordTo($password): void
     {
         $this->updatePage->changePassword($password);
     }
@@ -159,7 +159,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I enable it
      */
-    public function iEnableIt()
+    public function iEnableIt(): void
     {
         $this->createPage->enable();
     }
@@ -168,7 +168,7 @@ final class ManagingAdministratorsContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -176,7 +176,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -184,7 +184,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I delete administrator with email :email
      */
-    public function iDeleteAdministratorWithEmail($email)
+    public function iDeleteAdministratorWithEmail($email): void
     {
         $this->indexPage->deleteResourceOnPage(['email' => $email]);
     }
@@ -210,7 +210,7 @@ final class ManagingAdministratorsContext implements Context
      * @Then I should see the administrator :email in the list
      * @Then there should still be only one administrator with an email :email
      */
-    public function theAdministratorShouldAppearInTheStore($email)
+    public function theAdministratorShouldAppearInTheStore($email): void
     {
         $this->indexPage->open();
 
@@ -221,7 +221,7 @@ final class ManagingAdministratorsContext implements Context
      * @Then this administrator with name :username should appear in the store
      * @Then there should still be only one administrator with name :username
      */
-    public function thisAdministratorWithNameShouldAppearInTheStore($username)
+    public function thisAdministratorWithNameShouldAppearInTheStore($username): void
     {
         $this->indexPage->open();
 
@@ -240,7 +240,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @Then I should be notified that email must be unique
      */
-    public function iShouldBeNotifiedThatEmailMustBeUnique()
+    public function iShouldBeNotifiedThatEmailMustBeUnique(): void
     {
         Assert::same($this->createPage->getValidationMessage('email'), 'This email is already used.');
     }
@@ -248,7 +248,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @Then I should be notified that name must be unique
      */
-    public function iShouldBeNotifiedThatNameMustBeUnique()
+    public function iShouldBeNotifiedThatNameMustBeUnique(): void
     {
         Assert::same($this->createPage->getValidationMessage('name'), 'This username is already used.');
     }
@@ -256,7 +256,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @Then I should be notified that the :elementName is required
      */
-    public function iShouldBeNotifiedThatFirstNameIsRequired($elementName)
+    public function iShouldBeNotifiedThatFirstNameIsRequired($elementName): void
     {
         Assert::same($this->createPage->getValidationMessage($elementName), sprintf('Please enter your %s.', $elementName));
     }
@@ -264,7 +264,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @Then I should be notified that this email is not valid
      */
-    public function iShouldBeNotifiedThatEmailIsNotValid()
+    public function iShouldBeNotifiedThatEmailIsNotValid(): void
     {
         Assert::same($this->createPage->getValidationMessage('email'), 'This email is invalid.');
     }
@@ -272,7 +272,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @Then this administrator should not be added
      */
-    public function thisAdministratorShouldNotBeAdded()
+    public function thisAdministratorShouldNotBeAdded(): void
     {
         $this->indexPage->open();
 
@@ -282,7 +282,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @Then there should not be :email administrator anymore
      */
-    public function thereShouldBeNoAnymore($email)
+    public function thereShouldBeNoAnymore($email): void
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['email' => $email]));
     }
@@ -290,7 +290,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @Then I should be notified that it cannot be deleted
      */
-    public function iShouldBeNotifiedThatItCannotBeDeleted()
+    public function iShouldBeNotifiedThatItCannotBeDeleted(): void
     {
         $this->notificationChecker->checkNotification(
             'Cannot remove currently logged in user.',

@@ -60,7 +60,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function pressResendVerificationEmail()
+    public function pressResendVerificationEmail(): void
     {
         $this->getDocument()->pressButton('Verify');
     }
@@ -81,7 +81,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
      *
      * @return bool
      */
-    private function hasValueInCustomerSection($value)
+    private function hasValueInCustomerSection($value): bool
     {
         $customerText = $this->getElement('customer')->getText();
 

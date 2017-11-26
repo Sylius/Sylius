@@ -23,7 +23,7 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 final class StorageBasedLocaleContextSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ChannelContextInterface $channelContext,
         LocaleStorageInterface $localeStorage,
         LocaleProviderInterface $localeProvider
@@ -31,12 +31,12 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
         $this->beConstructedWith($channelContext, $localeStorage, $localeProvider);
     }
 
-    function it_is_a_locale_context(): void
+    public function it_is_a_locale_context(): void
     {
         $this->shouldImplement(LocaleContextInterface::class);
     }
 
-    function it_returns_an_available_active_locale(
+    public function it_returns_an_available_active_locale(
         ChannelContextInterface $channelContext,
         LocaleStorageInterface $localeStorage,
         LocaleProviderInterface $localeProvider,
@@ -51,7 +51,7 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
         $this->getLocaleCode()->shouldReturn('pl_PL');
     }
 
-    function it_throws_an_exception_if_locale_taken_from_storage_is_not_available(
+    public function it_throws_an_exception_if_locale_taken_from_storage_is_not_available(
         ChannelContextInterface $channelContext,
         LocaleStorageInterface $localeStorage,
         LocaleProviderInterface $localeProvider,

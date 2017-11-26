@@ -18,10 +18,8 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 interface CalculatorInterface
 {
     /**
-     * @param ShipmentInterface $subject
      * @param array $configuration
      *
-     * @return int
      */
     public function calculate(ShipmentInterface $subject, array $configuration): int;
 

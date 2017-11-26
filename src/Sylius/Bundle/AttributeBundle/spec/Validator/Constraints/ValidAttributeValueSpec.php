@@ -19,22 +19,22 @@ use Symfony\Component\Validator\Constraint;
 
 final class ValidAttributeValueSpec extends ObjectBehavior
 {
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ValidAttributeValue::class);
     }
 
-    function it_is_constraint(): void
+    public function it_is_constraint(): void
     {
         $this->shouldHaveType(Constraint::class);
     }
 
-    function it_has_targets(): void
+    public function it_has_targets(): void
     {
         $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
     }
 
-    function it_is_validated_by_specific_validator(): void
+    public function it_is_validated_by_specific_validator(): void
     {
         $this->validatedBy()->shouldReturn('sylius_valid_attribute_value_validator');
     }

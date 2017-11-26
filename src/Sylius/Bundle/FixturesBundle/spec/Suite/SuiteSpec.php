@@ -20,41 +20,41 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 final class SuiteSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith('suite_name');
     }
 
-    function it_implements_suite_interface(): void
+    public function it_implements_suite_interface(): void
     {
         $this->shouldImplement(SuiteInterface::class);
     }
 
-    function it_has_name(): void
+    public function it_has_name(): void
     {
         $this->getName()->shouldReturn('suite_name');
     }
 
-    function it_has_no_fixtures_by_default(): void
+    public function it_has_no_fixtures_by_default(): void
     {
         $this->getFixtures()->shouldIterateAs([]);
     }
 
-    function it_allows_for_adding_a_fixture(FixtureInterface $fixture): void
+    public function it_allows_for_adding_a_fixture(FixtureInterface $fixture): void
     {
         $this->addFixture($fixture, []);
 
         $this->getFixtures()->shouldHaveKey($fixture);
     }
 
-    function it_stores_a_fixture_with_its_options(FixtureInterface $fixture): void
+    public function it_stores_a_fixture_with_its_options(FixtureInterface $fixture): void
     {
         $this->addFixture($fixture, ['fixture_option' => 'fixture_name']);
 
         $this->getFixtures()->shouldHaveKeyWithValue($fixture, ['fixture_option' => 'fixture_name']);
     }
 
-    function it_stores_multiple_fixtures_as_queue(FixtureInterface $firstFixture, FixtureInterface $secondFixture): void
+    public function it_stores_multiple_fixtures_as_queue(FixtureInterface $firstFixture, FixtureInterface $secondFixture): void
     {
         $this->addFixture($firstFixture, []);
         $this->addFixture($secondFixture, []);
@@ -62,7 +62,7 @@ final class SuiteSpec extends ObjectBehavior
         $this->getFixtures()->shouldIterateAs($this->createGenerator($firstFixture, $secondFixture));
     }
 
-    function it_keeps_the_priority_of_fixtures(
+    public function it_keeps_the_priority_of_fixtures(
         FixtureInterface $regularFixture,
         FixtureInterface $higherPriorityFixture,
         FixtureInterface $lowerPriorityFixture
@@ -79,7 +79,7 @@ final class SuiteSpec extends ObjectBehavior
      *
      * @return \Generator
      */
-    private function createGenerator(Collaborator ...$collaborators)
+    private function createGenerator(Collaborator ...$collaborators): \Generator
     {
         foreach ($collaborators as $collaborator) {
             yield $collaborator->getWrappedObject() => [];

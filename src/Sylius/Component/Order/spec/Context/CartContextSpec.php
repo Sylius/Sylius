@@ -20,17 +20,17 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CartContextSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $cartFactory): void
+    public function let(FactoryInterface $cartFactory): void
     {
         $this->beConstructedWith($cartFactory);
     }
 
-    function it_implements_cart_context_interface(): void
+    public function it_implements_cart_context_interface(): void
     {
         $this->shouldImplement(CartContextInterface::class);
     }
 
-    function it_always_returns_a_new_cart(FactoryInterface $cartFactory, OrderInterface $cart): void
+    public function it_always_returns_a_new_cart(FactoryInterface $cartFactory, OrderInterface $cart): void
     {
         $cartFactory->createNew()->willReturn($cart);
 

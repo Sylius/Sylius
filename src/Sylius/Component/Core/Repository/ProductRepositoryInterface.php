@@ -22,25 +22,20 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProduc
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
     /**
-     * @param string $locale
      * @param mixed|null $taxonId
      *
-     * @return QueryBuilder
      */
     public function createListQueryBuilder(string $locale, $taxonId = null): QueryBuilder;
 
     /**
-     * @param ChannelInterface $channel
      * @param TaxonInterface $taxon
      * @param string $locale
      * @param array $sorting
      *
-     * @return QueryBuilder
      */
     public function createShopListQueryBuilder(ChannelInterface $channel, TaxonInterface $taxon, string $locale, array $sorting = []): QueryBuilder;
 
     /**
-     * @param ChannelInterface $channel
      * @param string $locale
      * @param int $count
      *

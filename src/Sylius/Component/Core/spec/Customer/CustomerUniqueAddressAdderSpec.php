@@ -23,17 +23,17 @@ use Sylius\Component\Core\Model\CustomerInterface;
 
 final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
 {
-    function let(AddressComparatorInterface $addressComparator): void
+    public function let(AddressComparatorInterface $addressComparator): void
     {
         $this->beConstructedWith($addressComparator);
     }
 
-    function it_implements_address_adder_interface(): void
+    public function it_implements_address_adder_interface(): void
     {
         $this->shouldImplement(CustomerAddressAdderInterface::class);
     }
 
-    function it_does_nothing_when_an_address_is_already_present_on_the_customer(
+    public function it_does_nothing_when_an_address_is_already_present_on_the_customer(
         AddressComparatorInterface $addressComparator,
         CustomerInterface $customer,
         AddressInterface $address,
@@ -54,7 +54,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
         $this->add($customer, $address);
     }
 
-    function it_adds_an_address_when_no_other_is_present_on_the_customer(
+    public function it_adds_an_address_when_no_other_is_present_on_the_customer(
         AddressComparatorInterface $addressComparator,
         CustomerInterface $customer,
         AddressInterface $address,
@@ -77,7 +77,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
         $this->add($customer, $address);
     }
 
-    function it_adds_an_address_when_different_than_the_ones_present_on_the_customer(
+    public function it_adds_an_address_when_different_than_the_ones_present_on_the_customer(
         AddressComparatorInterface $addressComparator,
         CustomerInterface $customer,
         AddressInterface $customerAddress,

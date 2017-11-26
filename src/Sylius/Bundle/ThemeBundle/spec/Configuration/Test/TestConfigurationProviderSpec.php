@@ -19,17 +19,17 @@ use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerIn
 
 final class TestConfigurationProviderSpec extends ObjectBehavior
 {
-    function let(TestThemeConfigurationManagerInterface $testThemeConfigurationManager): void
+    public function let(TestThemeConfigurationManagerInterface $testThemeConfigurationManager): void
     {
         $this->beConstructedWith($testThemeConfigurationManager);
     }
 
-    function it_implements_configuration_provider_interface(): void
+    public function it_implements_configuration_provider_interface(): void
     {
         $this->shouldImplement(ConfigurationProviderInterface::class);
     }
 
-    function it_provides_configuration_based_on_test_configuration_manager(TestThemeConfigurationManagerInterface $testThemeConfigurationManager): void
+    public function it_provides_configuration_based_on_test_configuration_manager(TestThemeConfigurationManagerInterface $testThemeConfigurationManager): void
     {
         $testThemeConfigurationManager->findAll()->willReturn([
             ['name' => 'theme/name'],

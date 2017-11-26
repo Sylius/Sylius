@@ -26,12 +26,12 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 final class HasTaxonRuleCheckerSpec extends ObjectBehavior
 {
-    function it_is_a_rule_checker(): void
+    public function it_is_a_rule_checker(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_recognizes_a_subject_as_eligible_if_product_taxon_is_matched(
+    public function it_recognizes_a_subject_as_eligible_if_product_taxon_is_matched(
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $bastardSword,
@@ -47,7 +47,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $configuration)->shouldReturn(true);
     }
 
-    function it_recognizes_a_subject_as_eligible_if_a_product_taxon_is_matched_to_one_of_required_taxons(
+    public function it_recognizes_a_subject_as_eligible_if_a_product_taxon_is_matched_to_one_of_required_taxons(
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $bastardSword,
@@ -63,7 +63,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $configuration)->shouldReturn(true);
     }
 
-    function it_recognizes_a_subject_as_not_eligible_if_a_product_taxon_is_not_matched(
+    public function it_recognizes_a_subject_as_not_eligible_if_a_product_taxon_is_not_matched(
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $reflexBow,
@@ -79,14 +79,14 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $configuration)->shouldReturn(false);
     }
 
-    function it_does_nothing_if_a_configuration_is_invalid(OrderInterface $subject): void
+    public function it_does_nothing_if_a_configuration_is_invalid(OrderInterface $subject): void
     {
         $subject->getItems()->shouldNotBeCalled();
 
         $this->isEligible($subject, []);
     }
 
-    function it_throws_an_exception_if_promotion_subject_is_not_order(
+    public function it_throws_an_exception_if_promotion_subject_is_not_order(
         Collection $taxonsCollection,
         PromotionSubjectInterface $subject
     ): void {

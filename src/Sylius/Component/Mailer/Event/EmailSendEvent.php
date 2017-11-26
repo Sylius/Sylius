@@ -46,7 +46,6 @@ final class EmailSendEvent extends Event
     /**
      * @param mixed $message
      * @param array $recipients
-     * @param EmailInterface $email
      * @param array $data
      */
     public function __construct($message, EmailInterface $email, array $data, array $recipients = [], array $replyTo = [])

@@ -19,7 +19,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 interface DefaultFormBuilderInterface
 {
     /**
-     * @param MetadataInterface $metadata
      * @param FormBuilderInterface $formBuilder
      * @param array $options
      */

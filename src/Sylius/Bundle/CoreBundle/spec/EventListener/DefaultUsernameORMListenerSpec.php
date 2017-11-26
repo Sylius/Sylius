@@ -24,7 +24,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 
 final class DefaultUsernameORMListenerSpec extends ObjectBehavior
 {
-    function it_sets_usernames_on_customer_create(
+    public function it_sets_usernames_on_customer_create(
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
@@ -53,7 +53,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $this->onFlush($onFlushEventArgs);
     }
 
-    function it_updates_usernames_on_customer_email_change(
+    public function it_updates_usernames_on_customer_email_change(
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
@@ -82,7 +82,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $this->onFlush($onFlushEventArgs);
     }
 
-    function it_updates_usernames_on_customer_email_canonical_change(
+    public function it_updates_usernames_on_customer_email_canonical_change(
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
@@ -111,7 +111,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $this->onFlush($onFlushEventArgs);
     }
 
-    function it_does_not_update_usernames_when_customer_emails_are_the_same(
+    public function it_does_not_update_usernames_when_customer_emails_are_the_same(
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
@@ -139,7 +139,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $this->onFlush($onFlushEventArgs);
     }
 
-    function it_does_nothing_on_customer_create_when_no_user_associated(
+    public function it_does_nothing_on_customer_create_when_no_user_associated(
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
@@ -158,7 +158,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $this->onFlush($onFlushEventArgs);
     }
 
-    function it_does_nothing_on_customer_update_when_no_user_associated(
+    public function it_does_nothing_on_customer_update_when_no_user_associated(
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
@@ -178,7 +178,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $this->onFlush($onFlushEventArgs);
     }
 
-    function it_does_nothing_when_there_are_no_objects_scheduled_in_the_unit_of_work(
+    public function it_does_nothing_when_there_are_no_objects_scheduled_in_the_unit_of_work(
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,
         UnitOfWork $unitOfWork
@@ -194,7 +194,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $this->onFlush($onFlushEventArgs);
     }
 
-    function it_does_nothing_when_there_are_other_objects_than_customer(
+    public function it_does_nothing_when_there_are_other_objects_than_customer(
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,

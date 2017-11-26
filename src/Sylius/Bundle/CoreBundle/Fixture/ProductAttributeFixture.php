@@ -25,7 +25,6 @@ class ProductAttributeFixture extends AbstractResourceFixture
     private $attributeTypes;
 
     /**
-     * @param ObjectManager $objectManager
      * @param ExampleFactoryInterface $exampleFactory
      * @param array $attributeTypes
      */

@@ -25,27 +25,27 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SharedSecurityServiceSpec extends ObjectBehavior
 {
-    function let(SecurityServiceInterface $adminSecurityService)
+    public function let(SecurityServiceInterface $adminSecurityService): void
     {
         $this->beConstructedWith($adminSecurityService);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(SharedSecurityService::class);
     }
 
-    function it_implements_shared_security_service()
+    public function it_implements_shared_security_service(): void
     {
         $this->shouldImplement(SharedSecurityServiceInterface::class);
     }
 
-    function it_performs_action_as_given_admin_user_and_restore_previous_token(
+    public function it_performs_action_as_given_admin_user_and_restore_previous_token(
         SecurityServiceInterface $adminSecurityService,
         TokenInterface $token,
         OrderInterface $order,
         AdminUserInterface $adminUser
-    ) {
+    ): void {
         $adminSecurityService->getCurrentToken()->willReturn($token);
         $adminSecurityService->logIn($adminUser)->shouldBeCalled();
         $order->completeCheckout()->shouldBeCalled();
@@ -55,17 +55,17 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
         $wrappedOrder = $order->getWrappedObject();
         $this->performActionAsAdminUser(
             $adminUser,
-            function () use ($wrappedOrder) {
+            function () use ($wrappedOrder): void {
                 $wrappedOrder->completeCheckout();
             }
         );
     }
 
-    function it_performs_action_as_given_admin_user_and_logout(
+    public function it_performs_action_as_given_admin_user_and_logout(
         SecurityServiceInterface $adminSecurityService,
         OrderInterface $order,
         AdminUserInterface $adminUser
-    ) {
+    ): void {
         $adminSecurityService->getCurrentToken()->willThrow(TokenNotFoundException::class);
         $adminSecurityService->logIn($adminUser)->shouldBeCalled();
         $order->completeCheckout()->shouldBeCalled();
@@ -75,7 +75,7 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
         $wrappedOrder = $order->getWrappedObject();
         $this->performActionAsAdminUser(
             $adminUser,
-            function () use ($wrappedOrder) {
+            function () use ($wrappedOrder): void {
                 $wrappedOrder->completeCheckout();
             }
         );

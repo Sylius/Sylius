@@ -123,7 +123,6 @@ final class EmailChecker implements EmailCheckerInterface
     }
 
     /**
-     * @param string $directory
      *
      * @return array|\Swift_Message[]
      */

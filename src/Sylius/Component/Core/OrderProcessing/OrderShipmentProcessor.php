@@ -78,11 +78,10 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param OrderInterface $order
      *
      * @return ShipmentInterface
      */
-    private function getOrderShipment(OrderInterface $order)
+    private function getOrderShipment(OrderInterface $order): ShipmentInterface
     {
         if ($order->hasShipments()) {
             return $order->getShipments()->first();

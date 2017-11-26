@@ -10,6 +10,7 @@
  */
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Sylius package.
  *
@@ -56,7 +57,7 @@ class ComicBook implements ResourceInterface
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -64,7 +65,7 @@ class ComicBook implements ResourceInterface
     /**
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -72,7 +73,7 @@ class ComicBook implements ResourceInterface
     /**
      * @return string
      */
-    public function getAuthorFirstName()
+    public function getAuthorFirstName(): string
     {
         return $this->authorFirstName;
     }
@@ -80,7 +81,7 @@ class ComicBook implements ResourceInterface
     /**
      * @param string $authorFirstName
      */
-    public function setAuthorFirstName($authorFirstName)
+    public function setAuthorFirstName(string $authorFirstName): void
     {
         $this->authorFirstName = $authorFirstName;
     }
@@ -88,7 +89,7 @@ class ComicBook implements ResourceInterface
     /**
      * @return string
      */
-    public function getAuthorLastName()
+    public function getAuthorLastName(): string
     {
         return $this->authorLastName;
     }
@@ -96,7 +97,7 @@ class ComicBook implements ResourceInterface
     /**
      * @param string $authorLastName
      */
-    public function setAuthorLastName($authorLastName)
+    public function setAuthorLastName(string $authorLastName): void
     {
         $this->authorLastName = $authorLastName;
     }
@@ -104,7 +105,7 @@ class ComicBook implements ResourceInterface
     /**
      * @return string
      */
-    public function getAuthor()
+    public function getAuthor(): string
     {
         return sprintf('%s %s', $this->authorFirstName, $this->authorLastName);
     }

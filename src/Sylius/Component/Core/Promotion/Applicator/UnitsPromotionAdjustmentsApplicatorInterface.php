@@ -19,7 +19,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 interface UnitsPromotionAdjustmentsApplicatorInterface
 {
     /**
-     * @param OrderInterface $order
      * @param PromotionInterface $promotion
      * @param array|int[] $adjustmentsAmounts
      */

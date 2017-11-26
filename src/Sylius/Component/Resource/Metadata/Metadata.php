@@ -43,7 +43,6 @@ final class Metadata implements MetadataInterface
     private $parameters;
 
     /**
-     * @param string $name
      * @param string $applicationName
      * @param array $parameters
      */
@@ -59,10 +58,8 @@ final class Metadata implements MetadataInterface
     }
 
     /**
-     * @param string $alias
      * @param array $parameters
      *
-     * @return self
      */
     public static function fromAliasAndConfiguration(string $alias, array $parameters): self
     {
@@ -192,7 +189,6 @@ final class Metadata implements MetadataInterface
     }
 
     /**
-     * @param string $alias
      *
      * @return array
      */

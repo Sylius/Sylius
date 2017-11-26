@@ -40,7 +40,6 @@ final class OrderShowMenuBuilder
     private $stateMachineFactory;
 
     /**
-     * @param FactoryInterface $factory
      * @param EventDispatcherInterface $eventDispatcher
      * @param StateMachineFactoryInterface $stateMachineFactory,
      */
@@ -57,7 +56,6 @@ final class OrderShowMenuBuilder
     /**
      * @param array $options
      *
-     * @return ItemInterface
      */
     public function createMenu(array $options): ItemInterface
     {

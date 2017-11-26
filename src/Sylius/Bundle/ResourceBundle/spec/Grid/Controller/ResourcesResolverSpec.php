@@ -31,7 +31,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class ResourcesResolverSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ResourcesResolverInterface $decoratedResolver,
         GridProviderInterface $gridProvider,
         ResourceGridViewFactoryInterface $gridViewFactory
@@ -39,12 +39,12 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $this->beConstructedWith($decoratedResolver, $gridProvider, $gridViewFactory);
     }
 
-    function it_implements_resources_resolver_interface(): void
+    public function it_implements_resources_resolver_interface(): void
     {
         $this->shouldImplement(ResourcesResolverInterface::class);
     }
 
-    function it_uses_decorated_resolver_when_not_using_a_grid(
+    public function it_uses_decorated_resolver_when_not_using_a_grid(
         ResourcesResolverInterface $decoratedResolver,
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
@@ -57,7 +57,7 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $this->getResources($requestConfiguration, $repository)->shouldReturn([$resource]);
     }
 
-    function it_returns_grid_view(
+    public function it_returns_grid_view(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         Grid $gridDefinition,
@@ -83,7 +83,7 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $this->getResources($requestConfiguration, $repository)->shouldReturn($gridView);
     }
 
-    function it_returns_grid_data_for_non_html_requests(
+    public function it_returns_grid_data_for_non_html_requests(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         Grid $gridDefinition,

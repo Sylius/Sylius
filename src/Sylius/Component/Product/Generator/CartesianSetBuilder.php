@@ -28,14 +28,13 @@ final class CartesianSetBuilder
      * @throws \InvalidArgumentException If the array is empty.
      * @throws \InvalidArgumentException If the array does not contain arrays of set tuples.
      */
-    public function build(array $setTuples)
+    public function build(array $setTuples): array
     {
         return $this->doBuild($setTuples, false);
     }
 
     /**
      * @param array $setTuples
-     * @param bool $isRecursiveStep
      *
      * @return array
      */
@@ -72,7 +71,6 @@ final class CartesianSetBuilder
 
     /**
      * @param array $setTuples
-     * @param int $countTuples
      *
      * @return array
      *
@@ -90,7 +88,6 @@ final class CartesianSetBuilder
     }
 
     /**
-     * @param bool $isRecursiveStep
      * @param mixed $k
      * @param array $keys
      * @param mixed $valueA

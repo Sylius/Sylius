@@ -28,19 +28,19 @@ use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 final class OrderShipmentProcessorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         FactoryInterface $shipmentFactory
     ): void {
         $this->beConstructedWith($defaultShippingMethodResolver, $shipmentFactory);
     }
 
-    function it_is_an_order_processor(): void
+    public function it_is_an_order_processor(): void
     {
         $this->shouldImplement(OrderProcessorInterface::class);
     }
 
-    function it_creates_a_single_shipment_with_default_shipping_method_and_assigns_all_units_to_it_when_shipping_is_required(
+    public function it_creates_a_single_shipment_with_default_shipping_method_and_assigns_all_units_to_it_when_shipping_is_required(
         DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         FactoryInterface $shipmentFactory,
         OrderInterface $order,
@@ -73,7 +73,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_removes_shipments_and_returns_null_when_shipping_is_not_required(
+    public function it_removes_shipments_and_returns_null_when_shipping_is_not_required(
         DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         FactoryInterface $shipmentFactory,
         OrderInterface $order,
@@ -99,7 +99,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_adds_new_item_units_to_existing_shipment(
+    public function it_adds_new_item_units_to_existing_shipment(
         OrderInterface $order,
         ShipmentInterface $shipment,
         Collection $shipments,
@@ -130,7 +130,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_removes_units_before_adding_new_ones(
+    public function it_removes_units_before_adding_new_ones(
         OrderInterface $order,
         ShipmentInterface $shipment,
         Collection $shipments,

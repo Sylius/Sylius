@@ -21,12 +21,12 @@ interface AddressPageInterface extends SymfonyPageInterface
     /**
      * @throws \RuntimeException
      */
-    public function chooseDifferentBillingAddress();
+    public function chooseDifferentBillingAddress(): void;
 
     /**
      * @return bool
      */
-    public function checkInvalidCredentialsValidation();
+    public function checkInvalidCredentialsValidation(): bool;
 
     /**
      * @param string $element
@@ -34,103 +34,103 @@ interface AddressPageInterface extends SymfonyPageInterface
      *
      * @return bool
      */
-    public function checkValidationMessageFor($element, $message);
+    public function checkValidationMessageFor(string $element, string $message): bool;
 
     /**
      * @param AddressInterface $billingAddress
      */
-    public function specifyBillingAddress(AddressInterface $billingAddress);
+    public function specifyBillingAddress(AddressInterface $billingAddress): void;
 
     /**
      * @param string $province
      */
-    public function selectBillingAddressProvince($province);
+    public function selectBillingAddressProvince(string $province): void;
 
     /**
      * @param AddressInterface $shippingAddress
      */
-    public function specifyShippingAddress(AddressInterface $shippingAddress);
+    public function specifyShippingAddress(AddressInterface $shippingAddress): void;
 
     /**
      * @param string $province
      */
-    public function selectShippingAddressProvince($province);
+    public function selectShippingAddressProvince(string $province): void;
 
     /**
      * @return bool
      */
-    public function canSignIn();
+    public function canSignIn(): bool;
 
-    public function signIn();
+    public function signIn(): void;
 
     /**
      * @param string $email
      */
-    public function specifyEmail($email);
+    public function specifyEmail(string $email): void;
 
     /**
      * @param string $fullName
      */
-    public function specifyShippingAddressFullName(string $fullName);
+    public function specifyShippingAddressFullName(string $fullName): void;
 
     /**
      * @param string $password
      */
-    public function specifyPassword($password);
+    public function specifyPassword(string $password): void;
 
     /**
      * @param string $itemName
      *
      * @return string
      */
-    public function getItemSubtotal($itemName);
+    public function getItemSubtotal(string $itemName): string;
 
     /**
      * @return string
      */
-    public function getShippingAddressCountry();
+    public function getShippingAddressCountry(): string;
 
-    public function nextStep();
+    public function nextStep(): void;
 
-    public function backToStore();
-
-    /**
-     * @param string $provinceName
-     */
-    public function specifyBillingAddressProvince($provinceName);
+    public function backToStore(): void;
 
     /**
      * @param string $provinceName
      */
-    public function specifyShippingAddressProvince($provinceName);
+    public function specifyBillingAddressProvince(string $provinceName): void;
+
+    /**
+     * @param string $provinceName
+     */
+    public function specifyShippingAddressProvince(string $provinceName): void;
 
     /**
      * @return bool
      */
-    public function hasShippingAddressInput();
+    public function hasShippingAddressInput(): bool;
 
     /**
      * @return bool
      */
-    public function hasBillingAddressInput();
+    public function hasBillingAddressInput(): bool;
 
     /**
      * @param AddressInterface $address
      */
-    public function selectShippingAddressFromAddressBook(AddressInterface $address);
+    public function selectShippingAddressFromAddressBook(AddressInterface $address): void;
 
     /**
      * @param AddressInterface $address
      */
-    public function selectBillingAddressFromAddressBook(AddressInterface $address);
+    public function selectBillingAddressFromAddressBook(AddressInterface $address): void;
 
     /**
      * @return AddressInterface
      */
-    public function getPreFilledShippingAddress();
+    public function getPreFilledShippingAddress(): AddressInterface;
 
     /**
      * @return AddressInterface
      */
-    public function getPreFilledBillingAddress();
+    public function getPreFilledBillingAddress(): AddressInterface;
 }

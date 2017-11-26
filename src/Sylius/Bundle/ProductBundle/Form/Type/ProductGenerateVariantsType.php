@@ -26,7 +26,6 @@ final class ProductGenerateVariantsType extends AbstractResourceType
     private $generateProductVariantsSubscriber;
 
     /**
-     * @param string $dataClass
      * @param array|string[] $validationGroups
      * @param EventSubscriberInterface $generateProductVariants
      */

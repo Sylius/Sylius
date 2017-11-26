@@ -18,12 +18,12 @@ interface SymfonyPageInterface extends PageInterface
     /**
      * @return string
      */
-    public function getRouteName();
+    public function getRouteName(): string;
 
     /**
      * @param array $requiredUrlParameters
      *
      * @throws UnexpectedPageException
      */
-    public function verifyRoute(array $requiredUrlParameters = []);
+    public function verifyRoute(array $requiredUrlParameters = []): void;
 }

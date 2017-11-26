@@ -22,7 +22,7 @@ final class SyliusUserBundleTest extends KernelTestCase
     /**
      * @test
      */
-    public function its_services_are_initializable()
+    public function its_services_are_initializable(): void
     {
         static::bootKernel();
 

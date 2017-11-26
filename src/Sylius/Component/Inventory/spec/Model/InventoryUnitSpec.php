@@ -19,22 +19,22 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 
 final class InventoryUnitSpec extends ObjectBehavior
 {
-    function it_implements_inventory_unit_interface(): void
+    public function it_implements_inventory_unit_interface(): void
     {
         $this->shouldImplement(InventoryUnitInterface::class);
     }
 
-    function it_has_no_id_by_default(): void
+    public function it_has_no_id_by_default(): void
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_defined_stockable_subject_by_default(): void
+    public function it_has_no_defined_stockable_subject_by_default(): void
     {
         $this->getStockable()->shouldReturn(null);
     }
 
-    function it_allows_defining_stockable_subject(StockableInterface $stockable): void
+    public function it_allows_defining_stockable_subject(StockableInterface $stockable): void
     {
         $this->setStockable($stockable);
         $this->getStockable()->shouldReturn($stockable);

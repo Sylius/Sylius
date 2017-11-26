@@ -20,14 +20,14 @@ interface ShowPageInterface extends SymfonyPageInterface
     /**
      * @return bool
      */
-    public function hasPayAction();
+    public function hasPayAction(): bool;
 
-    public function pay();
+    public function pay(): void;
 
     /**
      * @param string $paymentMethodName
      */
-    public function choosePaymentMethod($paymentMethodName);
+    public function choosePaymentMethod(string $paymentMethodName): void;
 
     /**
      * @return string[]

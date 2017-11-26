@@ -42,7 +42,7 @@ final class EmailSpoolContext implements Context
     /**
      * @BeforeScenario @email
      */
-    public function purgeSpooledMessages()
+    public function purgeSpooledMessages(): void
     {
         $this->filesystem->remove($this->spoolDirectory);
     }

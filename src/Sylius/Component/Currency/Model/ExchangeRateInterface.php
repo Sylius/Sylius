@@ -25,7 +25,7 @@ interface ExchangeRateInterface extends ResourceInterface
     /**
      * @param float|null $ratio
      */
-    public function setRatio(?float $ratio);
+    public function setRatio(?float $ratio): void;
 
     /**
      * @return CurrencyInterface|null

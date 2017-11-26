@@ -26,17 +26,17 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
 {
-    function let(TaxonRepositoryInterface $taxonRepository): void
+    public function let(TaxonRepositoryInterface $taxonRepository): void
     {
         $this->beConstructedWith($taxonRepository);
     }
 
-    function it_implements_a_rule_checker_interface(): void
+    public function it_implements_a_rule_checker_interface(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_recognizes_a_subject_as_eligible_if_it_has_items_from_configured_taxon_which_has_required_total(
+    public function it_recognizes_a_subject_as_eligible_if_it_has_items_from_configured_taxon_which_has_required_total(
         ChannelInterface $channel,
         TaxonRepositoryInterface $taxonRepository,
         OrderInterface $order,
@@ -74,7 +74,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 10000]])->shouldReturn(true);
     }
 
-    function it_recognizes_a_subject_as_eligible_if_it_has_items_from_configured_taxon_which_has_total_equal_with_required(
+    public function it_recognizes_a_subject_as_eligible_if_it_has_items_from_configured_taxon_which_has_total_equal_with_required(
         ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $compositeBowItem,
@@ -102,7 +102,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 10000]])->shouldReturn(true);
     }
 
-    function it_does_not_recognize_a_subject_as_eligible_if_items_from_required_taxon_has_too_low_total(
+    public function it_does_not_recognize_a_subject_as_eligible_if_items_from_required_taxon_has_too_low_total(
         ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $compositeBowItem,
@@ -130,7 +130,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 10000]])->shouldReturn(false);
     }
 
-    function it_returns_false_if_configuration_is_invalid(
+    public function it_returns_false_if_configuration_is_invalid(
         ChannelInterface $channel,
         OrderInterface $order
     ): void {
@@ -141,7 +141,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, ['WEB_US' => ['taxon' => 'siege_engines']])->shouldReturn(false);
     }
 
-    function it_returns_false_if_there_is_no_configuration_for_order_channel(
+    public function it_returns_false_if_there_is_no_configuration_for_order_channel(
         ChannelInterface $channel,
         OrderInterface $order
     ): void {
@@ -151,7 +151,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, [])->shouldReturn(false);
     }
 
-    function it_returns_false_if_taxon_with_configured_code_cannot_be_found(
+    public function it_returns_false_if_taxon_with_configured_code_cannot_be_found(
         ChannelInterface $channel,
         OrderInterface $order,
         TaxonRepositoryInterface $taxonRepository
@@ -164,7 +164,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, ['WEB_US' => ['taxon' => 'sniper_rifles', 'amount' => 1000]])->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_passed_subject_is_not_order(PromotionSubjectInterface $subject): void
+    public function it_throws_an_exception_if_passed_subject_is_not_order(PromotionSubjectInterface $subject): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

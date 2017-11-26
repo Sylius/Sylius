@@ -20,12 +20,12 @@ use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 
 final class ProductFilterSpec extends ObjectBehavior
 {
-    function it_implements_a_filter_interface(): void
+    public function it_implements_a_filter_interface(): void
     {
         $this->shouldImplement(FilterInterface::class);
     }
 
-    function it_filters_passed_order_items_with_given_configuration(
+    public function it_filters_passed_order_items_with_given_configuration(
         OrderItemInterface $item1,
         OrderItemInterface $item2,
         ProductInterface $product1,
@@ -40,12 +40,12 @@ final class ProductFilterSpec extends ObjectBehavior
         $this->filter([$item1, $item2], ['filters' => ['products_filter' => ['products' => ['product1']]]])->shouldReturn([$item1]);
     }
 
-    function it_returns_all_items_if_configuration_is_invalid(OrderItemInterface $item): void
+    public function it_returns_all_items_if_configuration_is_invalid(OrderItemInterface $item): void
     {
         $this->filter([$item], [])->shouldReturn([$item]);
     }
 
-    function it_returns_all_items_if_configuration_is_empty(OrderItemInterface $item): void
+    public function it_returns_all_items_if_configuration_is_empty(OrderItemInterface $item): void
     {
         $this->filter([$item], ['filters' => ['products_filter' => ['products' => []]]])->shouldReturn([$item]);
     }

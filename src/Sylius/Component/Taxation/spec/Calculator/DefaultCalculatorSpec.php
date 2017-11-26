@@ -19,12 +19,12 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 final class DefaultCalculatorSpec extends ObjectBehavior
 {
-    function it_implements_Sylius_tax_calculator_interface(): void
+    public function it_implements_Sylius_tax_calculator_interface(): void
     {
         $this->shouldImplement(CalculatorInterface::class);
     }
 
-    function it_calculates_tax_as_percentage_of_given_base_if_rate_is_not_included_in_price(
+    public function it_calculates_tax_as_percentage_of_given_base_if_rate_is_not_included_in_price(
         TaxRateInterface $rate
     ): void {
         $rate->isIncludedInPrice()->willReturn(false);
@@ -35,7 +35,7 @@ final class DefaultCalculatorSpec extends ObjectBehavior
         $this->calculate(249599, $rate)->shouldReturn(57408.00);
     }
 
-    function it_calculates_correct_tax_for_given_base_if_rate_is_included_in_price(
+    public function it_calculates_correct_tax_for_given_base_if_rate_is_included_in_price(
         TaxRateInterface $rate
     ): void {
         $rate->isIncludedInPrice()->willReturn(true);

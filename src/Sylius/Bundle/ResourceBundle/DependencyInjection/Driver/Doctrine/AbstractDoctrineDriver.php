@@ -54,9 +54,7 @@ abstract class AbstractDoctrineDriver extends AbstractDriver
      * Return the configured object managre name, or NULL if the default
      * manager should be used.
      *
-     * @param MetadataInterface $metadata
      *
-     * @return string|null
      */
     protected function getObjectManagerName(MetadataInterface $metadata): ?string
     {

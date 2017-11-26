@@ -21,45 +21,45 @@ interface CreatePageInterface extends BaseCreatePageInterface
     /**
      * @param string $code
      */
-    public function specifyCode($code);
+    public function specifyCode(string $code): void;
 
     /**
      * @param int|null $position
      */
-    public function specifyPosition($position);
+    public function specifyPosition(?int $position): void;
 
     /**
      * @param string $name
      * @param string $language
      */
-    public function nameIt($name, $language);
+    public function nameIt(string $name, string $language): void;
 
     /**
      * @param string $description
      * @param string $languageCode
      */
-    public function describeIt($description, $languageCode);
+    public function describeIt(string $description, string $languageCode): void;
 
     /**
      * @param string $channelCode
      * @param string $amount
      */
-    public function specifyAmountForChannel($channelCode, $amount);
+    public function specifyAmountForChannel(string $channelCode, string $amount): void;
 
     /**
      * @param string $name
      */
-    public function chooseZone($name);
+    public function chooseZone(string $name): void;
 
     /**
      * @param string $name
      */
-    public function chooseCalculator($name);
+    public function chooseCalculator(string $name): void;
 
     /**
      * @return string $channelName
      */
-    public function checkChannel($channelName);
+    public function checkChannel($channelName): string;
 
     /**
      * @param string $channelCode
@@ -68,5 +68,5 @@ interface CreatePageInterface extends BaseCreatePageInterface
      *
      * @throws ElementNotFoundException
      */
-    public function getValidationMessageForAmount($channelCode);
+    public function getValidationMessageForAmount(string $channelCode): string;
 }

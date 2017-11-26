@@ -70,7 +70,6 @@ final class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
     }
 
     /**
-     * @param ReviewInterface $review
      * @param array|ReviewableInterface[] $reviewSubjectsToRecalculate
      *
      * @return array|ReviewableInterface[]

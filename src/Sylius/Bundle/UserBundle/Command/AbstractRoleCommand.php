@@ -174,7 +174,6 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param InputInterface $input
      * @param OutputInterface $output
      * @param UserInterface $user
      * @param array $securityRoles

@@ -10,6 +10,7 @@
  */
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Sylius package.
  *
@@ -44,7 +45,7 @@ class Book implements ResourceInterface, TranslatableInterface
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -52,7 +53,7 @@ class Book implements ResourceInterface, TranslatableInterface
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getTranslation()->getTitle();
     }
@@ -60,7 +61,7 @@ class Book implements ResourceInterface, TranslatableInterface
     /**
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->getTranslation()->setTitle($title);
     }
@@ -68,7 +69,7 @@ class Book implements ResourceInterface, TranslatableInterface
     /**
      * @return string
      */
-    public function getAuthor()
+    public function getAuthor(): string
     {
         return $this->author;
     }
@@ -76,7 +77,7 @@ class Book implements ResourceInterface, TranslatableInterface
     /**
      * @param string $author
      */
-    public function setAuthor($author)
+    public function setAuthor(string $author): void
     {
         $this->author = $author;
     }

@@ -56,7 +56,6 @@ final class PaymentContext implements Context
     private $gatewayFactories;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
      * @param PaymentMethodRepositoryInterface $paymentMethodRepository
      * @param ExampleFactoryInterface $paymentMethodExampleFactory
      * @param FactoryInterface $paymentMethodTranslationFactory
@@ -83,7 +82,7 @@ final class PaymentContext implements Context
      * @Given the store (also )allows paying (with ):paymentMethodName
      * @Given the store (also )allows paying with :paymentMethodName at position :position
      */
-    public function storeAllowsPaying($paymentMethodName, $position = null)
+    public function storeAllowsPaying($paymentMethodName, $position = null): void
     {
         $this->createPaymentMethod($paymentMethodName, 'PM_' . $paymentMethodName, 'Offline', 'Payment method', true, $position);
     }
@@ -91,7 +90,7 @@ final class PaymentContext implements Context
     /**
      * @Given /^the store allows paying (\w+) for (all channels)$/
      */
-    public function storeAllowsPayingForAllChannels($paymentMethodName, array $channels)
+    public function storeAllowsPayingForAllChannels($paymentMethodName, array $channels): void
     {
         $paymentMethod = $this->createPaymentMethod($paymentMethodName, StringInflector::nameToUppercaseCode($paymentMethodName), 'Offline', 'Payment method', false);
 
@@ -103,7 +102,7 @@ final class PaymentContext implements Context
     /**
      * @Given the store has (also) a payment method :paymentMethodName with a code :paymentMethodCode
      */
-    public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
+    public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode): void
     {
         $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, 'Offline');
     }
@@ -114,7 +113,7 @@ final class PaymentContext implements Context
     public function theStoreHasPaymentMethodWithCodeAndPaypalExpressCheckoutGateway(
         $paymentMethodName,
         $paymentMethodCode
-    ) {
+    ): void {
         $paymentMethod = $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, 'Paypal Express Checkout');
         $paymentMethod->getGatewayConfig()->setConfig([
             'username' => 'TEST',
@@ -130,7 +129,7 @@ final class PaymentContext implements Context
     /**
      * @Given /^(this payment method) is named "([^"]+)" in the "([^"]+)" locale$/
      */
-    public function thisPaymentMethodIsNamedIn(PaymentMethodInterface $paymentMethod, $name, $locale)
+    public function thisPaymentMethodIsNamedIn(PaymentMethodInterface $paymentMethod, $name, $locale): void
     {
         /** @var PaymentMethodTranslationInterface $translation */
         $translation = $this->paymentMethodTranslationFactory->createNew();
@@ -146,7 +145,7 @@ final class PaymentContext implements Context
      * @Given the payment method :paymentMethod is disabled
      * @Given /^(this payment method) has been disabled$/
      */
-    public function theStoreHasAPaymentMethodDisabled(PaymentMethodInterface $paymentMethod)
+    public function theStoreHasAPaymentMethodDisabled(PaymentMethodInterface $paymentMethod): void
     {
         $paymentMethod->disable();
 
@@ -156,7 +155,7 @@ final class PaymentContext implements Context
     /**
      * @Given /^(it) has instructions "([^"]+)"$/
      */
-    public function itHasInstructions(PaymentMethodInterface $paymentMethod, $instructions)
+    public function itHasInstructions(PaymentMethodInterface $paymentMethod, $instructions): void
     {
         $paymentMethod->setInstructions($instructions);
 
@@ -166,7 +165,7 @@ final class PaymentContext implements Context
     /**
      * @Given the store has :paymentMethodName payment method not assigned to any channel
      */
-    public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName)
+    public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName): void
     {
         $this->createPaymentMethod($paymentMethodName, 'PM_' . $paymentMethodName, 'Offline', 'Payment method', false);
     }
@@ -182,13 +181,13 @@ final class PaymentContext implements Context
      * @return PaymentMethodInterface
      */
     private function createPaymentMethod(
-        $name,
-        $code,
-        $gatewayFactory = 'Offline',
-        $description = '',
-        $addForCurrentChannel = true,
-        $position = null
-    ) {
+        string $name,
+        string $code,
+        string $gatewayFactory = 'Offline',
+        string $description = '',
+        bool $addForCurrentChannel = true,
+        ?int $position = null
+    ): PaymentMethodInterface {
         $gatewayFactory = array_search($gatewayFactory, $this->gatewayFactories);
 
         /** @var PaymentMethodInterface $paymentMethod */

@@ -26,7 +26,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     private $tableAccessor;
 
     /**
-     * @param Session $session
      * @param array $parameters
      * @param RouterInterface $router
      * @param TableAccessorInterface $tableAccessor
@@ -200,7 +199,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      *
      * @return bool
      */
-    private function hasAddress($elementText, $customerName, $street, $postcode, $city, $countryName)
+    private function hasAddress(string $elementText, string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         return
             (stripos($elementText, $customerName) !== false) &&

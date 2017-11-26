@@ -65,7 +65,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @When I want to add a new country
      */
-    public function iWantToAddNewCountry()
+    public function iWantToAddNewCountry(): void
     {
         $this->createPage->open();
     }
@@ -73,7 +73,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @When /^I want to edit (this country)$/
      */
-    public function iWantToEditThisCountry(CountryInterface $country)
+    public function iWantToEditThisCountry(CountryInterface $country): void
     {
         $this->updatePage->open(['id' => $country->getId()]);
     }
@@ -81,7 +81,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @When I choose :countryName
      */
-    public function iChoose($countryName)
+    public function iChoose($countryName): void
     {
         $this->createPage->chooseName($countryName);
     }
@@ -90,7 +90,7 @@ final class ManagingCountriesContext implements Context
      * @When I add the :provinceName province with :provinceCode code
      * @When I add the :provinceName province with :provinceCode code and :provinceAbbreviation abbreviation
      */
-    public function iAddProvinceWithCode($provinceName, $provinceCode, $provinceAbbreviation = null)
+    public function iAddProvinceWithCode($provinceName, $provinceCode, $provinceAbbreviation = null): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -101,7 +101,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @When I add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -109,7 +109,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @When I enable it
      */
-    public function iEnableIt()
+    public function iEnableIt(): void
     {
         $this->updatePage->enable();
     }
@@ -117,7 +117,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @When I disable it
      */
-    public function iDisableIt()
+    public function iDisableIt(): void
     {
         $this->updatePage->disable();
     }
@@ -126,7 +126,7 @@ final class ManagingCountriesContext implements Context
      * @When I save my changes
      * @When I try to save changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -134,7 +134,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then /^the (country "([^"]+)") should appear in the store$/
      */
-    public function countryShouldAppearInTheStore(CountryInterface $country)
+    public function countryShouldAppearInTheStore(CountryInterface $country): void
     {
         $this->indexPage->open();
 
@@ -144,7 +144,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then /^(this country) should be enabled$/
      */
-    public function thisCountryShouldBeEnabled(CountryInterface $country)
+    public function thisCountryShouldBeEnabled(CountryInterface $country): void
     {
         $this->indexPage->open();
 
@@ -154,7 +154,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then /^(this country) should be disabled$/
      */
-    public function thisCountryShouldBeDisabled(CountryInterface $country)
+    public function thisCountryShouldBeDisabled(CountryInterface $country): void
     {
         $this->indexPage->open();
 
@@ -164,7 +164,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then I should not be able to choose :name
      */
-    public function iShouldNotBeAbleToChoose($name)
+    public function iShouldNotBeAbleToChoose($name): void
     {
         try {
             $this->createPage->chooseName($name);
@@ -178,7 +178,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then the code field should be disabled
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function theCodeFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isCodeFieldDisabled());
     }
@@ -187,7 +187,7 @@ final class ManagingCountriesContext implements Context
      * @Then /^(this country) should have the "([^"]*)" province$/
      * @Then /^the (country "[^"]*") should have the "([^"]*)" province$/
      */
-    public function countryShouldHaveProvince(CountryInterface $country, $provinceName)
+    public function countryShouldHaveProvince(CountryInterface $country, $provinceName): void
     {
         $this->iWantToEditThisCountry($country);
 
@@ -197,7 +197,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then /^(this country) should not have the "([^"]*)" province$/
      */
-    public function thisCountryShouldNotHaveTheProvince(CountryInterface $country, $provinceName)
+    public function thisCountryShouldNotHaveTheProvince(CountryInterface $country, $provinceName): void
     {
         $this->iWantToEditThisCountry($country);
 
@@ -207,7 +207,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then /^the province should still be named "([^"]*)" in (this country)$/
      */
-    public function thisProvinceShouldStillBeNamed($provinceName, CountryInterface $country)
+    public function thisProvinceShouldStillBeNamed($provinceName, CountryInterface $country): void
     {
         $this->updatePage->open(['id' => $country->getId()]);
 
@@ -217,7 +217,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then /^province with name "([^"]*)" should not be added in (this country)$/
      */
-    public function provinceWithNameShouldNotBeAdded($provinceName, CountryInterface $country)
+    public function provinceWithNameShouldNotBeAdded($provinceName, CountryInterface $country): void
     {
         $this->updatePage->open(['id' => $country->getId()]);
 
@@ -227,7 +227,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then /^province with code "([^"]*)" should not be added in (this country)$/
      */
-    public function provinceWithCodeShouldNotBeAdded($provinceCode, CountryInterface $country)
+    public function provinceWithCodeShouldNotBeAdded($provinceCode, CountryInterface $country): void
     {
         $this->updatePage->open(['id' => $country->getId()]);
 
@@ -237,7 +237,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @When /^I delete the "([^"]*)" province of this country$/
      */
-    public function iDeleteTheProvinceOfCountry($provinceName)
+    public function iDeleteTheProvinceOfCountry($provinceName): void
     {
         $this->updatePage->removeProvince($provinceName);
     }
@@ -245,7 +245,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @When /^I want to create a new province in (country "([^"]*)")$/
      */
-    public function iWantToCreateANewProvinceInCountry(CountryInterface $country)
+    public function iWantToCreateANewProvinceInCountry(CountryInterface $country): void
     {
         $this->updatePage->open(['id' => $country->getId()]);
 
@@ -256,7 +256,7 @@ final class ManagingCountriesContext implements Context
      * @When I name the province :provinceName
      * @When I do not name the province
      */
-    public function iNameTheProvince($provinceName = null)
+    public function iNameTheProvince($provinceName = null): void
     {
         $this->updatePage->nameProvince($provinceName);
     }
@@ -265,7 +265,7 @@ final class ManagingCountriesContext implements Context
      * @When I do not specify the province code
      * @When I specify the province code as :provinceCode
      */
-    public function iSpecifyTheProvinceCode($provinceCode = null)
+    public function iSpecifyTheProvinceCode($provinceCode = null): void
     {
         $this->updatePage->specifyProvinceCode($provinceCode);
     }
@@ -273,7 +273,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatElementIsRequired($element)
+    public function iShouldBeNotifiedThatElementIsRequired($element): void
     {
         Assert::same($this->updatePage->getValidationMessage($element), sprintf('Please enter province %s.', $element));
     }
@@ -281,7 +281,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @When I remove :provinceName province name
      */
-    public function iRemoveProvinceName($provinceName)
+    public function iRemoveProvinceName($provinceName): void
     {
         $this->updatePage->removeProvinceName($provinceName);
     }
@@ -289,7 +289,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then /^I should be notified that province code must be unique$/
      */
-    public function iShouldBeNotifiedThatProvinceCodeMustBeUnique()
+    public function iShouldBeNotifiedThatProvinceCodeMustBeUnique(): void
     {
         Assert::same($this->updatePage->getValidationMessage('code'), 'Province code must be unique.');
     }

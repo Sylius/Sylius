@@ -24,7 +24,7 @@ abstract class SlugGenerationHelper
      * @param Session $session
      * @param NodeElement $element
      */
-    public static function waitForSlugGeneration(Session $session, NodeElement $element)
+    public static function waitForSlugGeneration(Session $session, NodeElement $element): void
     {
         Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
 
@@ -37,7 +37,7 @@ abstract class SlugGenerationHelper
      * @param Session $session
      * @param NodeElement $element
      */
-    public static function enableSlugModification(Session $session, NodeElement $element)
+    public static function enableSlugModification(Session $session, NodeElement $element): void
     {
         Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
 
@@ -50,12 +50,11 @@ abstract class SlugGenerationHelper
     }
 
     /**
-     * @param Session $session
      * @param NodeElement $element
      *
      * @return bool
      */
-    public static function isSlugReadonly(Session $session, NodeElement $element)
+    public static function isSlugReadonly(Session $session, NodeElement $element): bool
     {
         if (!$session->getDriver() instanceof Selenium2Driver) {
             return $element->hasAttribute('readonly');
@@ -70,7 +69,7 @@ abstract class SlugGenerationHelper
      * @param Session $session
      * @param NodeElement $element
      */
-    private static function waitForElementToBeClickable(Session $session, NodeElement $element)
+    private static function waitForElementToBeClickable(Session $session, NodeElement $element): void
     {
         $session->wait(5000, sprintf(
             'false === $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).hasClass("loading")',
@@ -79,12 +78,11 @@ abstract class SlugGenerationHelper
     }
 
     /**
-     * @param Session $session
      * @param NodeElement $element
      *
      * @return bool
      */
-    private static function isElementReadonly(Session $session, NodeElement $element)
+    private static function isElementReadonly(Session $session, NodeElement $element): bool
     {
         return $session->wait(5000, sprintf(
             'undefined != $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).attr("readonly")',

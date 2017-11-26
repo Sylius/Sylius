@@ -19,12 +19,12 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 final class ThemeHierarchyProviderSpec extends ObjectBehavior
 {
-    function it_implements_theme_hierarchy_provider_interface(): void
+    public function it_implements_theme_hierarchy_provider_interface(): void
     {
         $this->shouldImplement(ThemeHierarchyProviderInterface::class);
     }
 
-    function it_returns_theme_list_in_hierarchized_order(ThemeInterface $firstTheme, ThemeInterface $secondTheme): void
+    public function it_returns_theme_list_in_hierarchized_order(ThemeInterface $firstTheme, ThemeInterface $secondTheme): void
     {
         $firstTheme->getParents()->willReturn([$secondTheme]);
         $secondTheme->getParents()->willReturn([]);

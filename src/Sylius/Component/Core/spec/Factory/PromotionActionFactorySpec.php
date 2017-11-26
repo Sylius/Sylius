@@ -25,17 +25,17 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PromotionActionFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $decoratedFactory): void
+    public function let(FactoryInterface $decoratedFactory): void
     {
         $this->beConstructedWith($decoratedFactory);
     }
 
-    function it_implements_an_action_factory_interface(): void
+    public function it_implements_an_action_factory_interface(): void
     {
         $this->shouldImplement(PromotionActionFactoryInterface::class);
     }
 
-    function it_creates_a_new_action_with_a_default_action_factory(
+    public function it_creates_a_new_action_with_a_default_action_factory(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ): void {
@@ -44,7 +44,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $this->createNew()->shouldReturn($promotionAction);
     }
 
-    function it_creates_a_new_fixed_discount_action_with_a_given_base_amount(
+    public function it_creates_a_new_fixed_discount_action_with_a_given_base_amount(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ): void {
@@ -56,7 +56,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $this->createFixedDiscount(1000, 'WEB_US')->shouldReturn($promotionAction);
     }
 
-    function it_creates_an_unit_fixed_discount_action_with_a_given_base_amount(
+    public function it_creates_an_unit_fixed_discount_action_with_a_given_base_amount(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ): void {
@@ -68,7 +68,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $this->createUnitFixedDiscount(1000, 'WEB_US')->shouldReturn($promotionAction);
     }
 
-    function it_creates_a_percentage_discount_action_with_a_given_discount_rate(
+    public function it_creates_a_percentage_discount_action_with_a_given_discount_rate(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ): void {
@@ -80,7 +80,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $this->createPercentageDiscount(0.1)->shouldReturn($promotionAction);
     }
 
-    function it_creates_an_unit_percentage_discount_action_with_given_a_discount_rate(
+    public function it_creates_an_unit_percentage_discount_action_with_given_a_discount_rate(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ): void {
@@ -92,7 +92,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $this->createUnitPercentageDiscount(0.1, 'WEB_US')->shouldReturn($promotionAction);
     }
 
-    function it_creates_a_shipping_percentage_discount_action_with_a_given_discount_rate(
+    public function it_creates_a_shipping_percentage_discount_action_with_a_given_discount_rate(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ): void {

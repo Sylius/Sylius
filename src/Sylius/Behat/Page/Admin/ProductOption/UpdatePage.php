@@ -25,7 +25,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameItIn($name, $language)
+    public function nameItIn($name, $language): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_option_translations_%s_name', $language), $name
@@ -45,7 +45,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addOptionValue($code, $value)
+    public function addOptionValue($code, $value): void
     {
         $this->getDocument()->clickLink('Add value');
 
@@ -58,7 +58,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function removeOptionValue($optionValue)
+    public function removeOptionValue($optionValue): void
     {
         if ($this->isThereOptionValue($optionValue)) {
             $optionValues = $this->getElement('values');

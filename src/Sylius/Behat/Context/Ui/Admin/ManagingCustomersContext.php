@@ -56,7 +56,6 @@ final class ManagingCustomersContext implements Context
     private $currentPageResolver;
 
     /**
-     * @param CreatePageInterface $createPage
      * @param CustomerIndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
      * @param ShowPageInterface $showPage
@@ -83,7 +82,7 @@ final class ManagingCustomersContext implements Context
      * @Given I want to create a new customer
      * @Given I want to create a new customer account
      */
-    public function iWantToCreateANewCustomer()
+    public function iWantToCreateANewCustomer(): void
     {
         $this->createPage->open();
     }
@@ -91,7 +90,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When /^I specify (?:their|his) first name as "([^"]*)"$/
      */
-    public function iSpecifyItsFirstNameAs($name)
+    public function iSpecifyItsFirstNameAs($name): void
     {
         $this->createPage->specifyFirstName($name);
     }
@@ -99,7 +98,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When /^I specify (?:their|his) last name as "([^"]*)"$/
      */
-    public function iSpecifyItsLastNameAs($name)
+    public function iSpecifyItsLastNameAs($name): void
     {
         $this->createPage->specifyLastName($name);
     }
@@ -108,7 +107,7 @@ final class ManagingCustomersContext implements Context
      * @When I specify their email as :name
      * @When I do not specify their email
      */
-    public function iSpecifyItsEmailAs($email = null)
+    public function iSpecifyItsEmailAs($email = null): void
     {
         $this->createPage->specifyEmail($email);
     }
@@ -126,7 +125,7 @@ final class ManagingCustomersContext implements Context
      * @When I add them
      * @When I try to add them
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -135,7 +134,7 @@ final class ManagingCustomersContext implements Context
      * @Then the customer :customer should appear in the store
      * @Then the customer :customer should still have this email
      */
-    public function theCustomerShould(CustomerInterface $customer)
+    public function theCustomerShould(CustomerInterface $customer): void
     {
         $this->indexPage->open();
 
@@ -145,7 +144,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I select :gender as its gender
      */
-    public function iSelectGender($gender)
+    public function iSelectGender($gender): void
     {
         $this->createPage->chooseGender($gender);
     }
@@ -153,7 +152,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I select :group as their group
      */
-    public function iSelectGroup($group)
+    public function iSelectGroup($group): void
     {
         $this->createPage->chooseGroup($group);
     }
@@ -161,7 +160,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I specify its birthday as :birthday
      */
-    public function iSpecifyItsBirthdayAs($birthday)
+    public function iSpecifyItsBirthdayAs($birthday): void
     {
         $this->createPage->specifyBirthday($birthday);
     }
@@ -169,7 +168,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When /^I want to edit (this customer)$/
      */
-    public function iWantToEditThisCustomer(CustomerInterface $customer)
+    public function iWantToEditThisCustomer(CustomerInterface $customer): void
     {
         $this->updatePage->open(['id' => $customer->getId()]);
     }
@@ -178,7 +177,7 @@ final class ManagingCustomersContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -186,7 +185,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then /^(this customer) with name "([^"]*)" should appear in the store$/
      */
-    public function theCustomerWithNameShouldAppearInTheRegistry(CustomerInterface $customer, $name)
+    public function theCustomerWithNameShouldAppearInTheRegistry(CustomerInterface $customer, $name): void
     {
         $this->updatePage->open(['id' => $customer->getId()]);
 
@@ -196,7 +195,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I want to see all customers in store
      */
-    public function iWantToSeeAllCustomersInStore()
+    public function iWantToSeeAllCustomersInStore(): void
     {
         $this->indexPage->open();
     }
@@ -204,7 +203,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then /^I should see (\d+) customers in the list$/
      */
-    public function iShouldSeeCustomersInTheList($amountOfCustomers)
+    public function iShouldSeeCustomersInTheList($amountOfCustomers): void
     {
         Assert::same($this->indexPage->countItems(), (int) $amountOfCustomers);
     }
@@ -212,7 +211,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should see the customer :email in the list
      */
-    public function iShouldSeeTheCustomerInTheList($email)
+    public function iShouldSeeTheCustomerInTheList($email): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['email' => $email]));
     }
@@ -220,7 +219,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then /^I should be notified that ([^"]+) is required$/
      */
-    public function iShouldBeNotifiedThatFirstNameIsRequired($elementName)
+    public function iShouldBeNotifiedThatFirstNameIsRequired($elementName): void
     {
         Assert::same(
             $this->createPage->getValidationMessage($elementName),
@@ -231,7 +230,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then /^I should be notified that ([^"]+) should be ([^"]+)$/
      */
-    public function iShouldBeNotifiedThatTheElementShouldBe($elementName, $validationMessage)
+    public function iShouldBeNotifiedThatTheElementShouldBe($elementName, $validationMessage): void
     {
         Assert::same(
             $this->updatePage->getValidationMessage($elementName),
@@ -242,7 +241,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then the customer with email :email should not appear in the store
      */
-    public function theCustomerShouldNotAppearInTheStore($email)
+    public function theCustomerShouldNotAppearInTheStore($email): void
     {
         $this->indexPage->open();
 
@@ -252,7 +251,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I remove its first name
      */
-    public function iRemoveItsFirstName()
+    public function iRemoveItsFirstName(): void
     {
         $this->updatePage->changeFirstName('');
     }
@@ -261,7 +260,7 @@ final class ManagingCustomersContext implements Context
      * @Then /^(this customer) should have an empty first name$/
      * @Then the customer :customer should still have an empty first name
      */
-    public function theCustomerShouldStillHaveAnEmptyFirstName(CustomerInterface $customer)
+    public function theCustomerShouldStillHaveAnEmptyFirstName(CustomerInterface $customer): void
     {
         $this->updatePage->open(['id' => $customer->getId()]);
 
@@ -271,7 +270,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I remove its last name
      */
-    public function iRemoveItsLastName()
+    public function iRemoveItsLastName(): void
     {
         $this->updatePage->changeLastName('');
     }
@@ -280,7 +279,7 @@ final class ManagingCustomersContext implements Context
      * @Then /^(this customer) should have an empty last name$/
      * @Then the customer :customer should still have an empty last name
      */
-    public function theCustomerShouldStillHaveAnEmptyLastName(CustomerInterface $customer)
+    public function theCustomerShouldStillHaveAnEmptyLastName(CustomerInterface $customer): void
     {
         $this->updatePage->open(['id' => $customer->getId()]);
 
@@ -290,7 +289,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should be notified that email is not valid
      */
-    public function iShouldBeNotifiedThatEmailIsNotValid()
+    public function iShouldBeNotifiedThatEmailIsNotValid(): void
     {
         Assert::same($this->createPage->getValidationMessage('email'), 'This email is invalid.');
     }
@@ -298,7 +297,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should be notified that email must be unique
      */
-    public function iShouldBeNotifiedThatEmailMustBeUnique()
+    public function iShouldBeNotifiedThatEmailMustBeUnique(): void
     {
         Assert::same($this->createPage->getValidationMessage('email'), 'This email is already used.');
     }
@@ -306,7 +305,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then there should still be only one customer with email :email
      */
-    public function thereShouldStillBeOnlyOneCustomerWithEmail($email)
+    public function thereShouldStillBeOnlyOneCustomerWithEmail($email): void
     {
         $this->indexPage->open();
 
@@ -317,7 +316,7 @@ final class ManagingCustomersContext implements Context
      * @Given I want to enable :customer
      * @Given I want to disable :customer
      */
-    public function iWantToChangeStatusOf(CustomerInterface $customer)
+    public function iWantToChangeStatusOf(CustomerInterface $customer): void
     {
         $this->updatePage->open(['id' => $customer->getId()]);
     }
@@ -325,7 +324,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I enable their account
      */
-    public function iEnableIt()
+    public function iEnableIt(): void
     {
         $this->updatePage->enable();
     }
@@ -333,7 +332,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I disable their account
      */
-    public function iDisableIt()
+    public function iDisableIt(): void
     {
         $this->updatePage->disable();
     }
@@ -341,7 +340,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then /^(this customer) should be enabled$/
      */
-    public function thisCustomerShouldBeEnabled(CustomerInterface $customer)
+    public function thisCustomerShouldBeEnabled(CustomerInterface $customer): void
     {
         $this->indexPage->open();
 
@@ -351,7 +350,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then /^(this customer) should be disabled$/
      */
-    public function thisCustomerShouldBeDisabled(CustomerInterface $customer)
+    public function thisCustomerShouldBeDisabled(CustomerInterface $customer): void
     {
         $this->indexPage->open();
 
@@ -361,7 +360,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I specify their password as :password
      */
-    public function iSpecifyItsPasswordAs($password)
+    public function iSpecifyItsPasswordAs($password): void
     {
         $this->createPage->specifyPassword($password);
     }
@@ -369,7 +368,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I choose create account option
      */
-    public function iChooseCreateAccountOption()
+    public function iChooseCreateAccountOption(): void
     {
         $this->createPage->selectCreateAccount();
     }
@@ -377,7 +376,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I browse orders of a customer :customer
      */
-    public function iBrowseOrdersOfACustomer(CustomerInterface $customer)
+    public function iBrowseOrdersOfACustomer(CustomerInterface $customer): void
     {
         $this->ordersIndexPage->open(['id' => $customer->getId()]);
     }
@@ -386,7 +385,7 @@ final class ManagingCustomersContext implements Context
      * @Then the customer :customer should have an account created
      * @Then /^(this customer) should have an account created$/
      */
-    public function theyShouldHaveAnAccountCreated(CustomerInterface $customer)
+    public function theyShouldHaveAnAccountCreated(CustomerInterface $customer): void
     {
         Assert::notNull(
             $customer->getUser()->getPassword(),
@@ -398,7 +397,7 @@ final class ManagingCustomersContext implements Context
      * @When I view details of the customer :customer
      * @When /^I view (their) details$/
      */
-    public function iViewDetailsOfTheCustomer(CustomerInterface $customer)
+    public function iViewDetailsOfTheCustomer(CustomerInterface $customer): void
     {
         $this->showPage->open(['id' => $customer->getId()]);
     }
@@ -406,7 +405,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then his name should be :name
      */
-    public function hisNameShouldBe($name)
+    public function hisNameShouldBe($name): void
     {
         Assert::same($this->showPage->getCustomerName(), $name);
     }
@@ -414,7 +413,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then he should be registered since :registrationDate
      */
-    public function hisRegistrationDateShouldBe($registrationDate)
+    public function hisRegistrationDateShouldBe($registrationDate): void
     {
         Assert::eq($this->showPage->getRegistrationDate(), new \DateTime($registrationDate));
     }
@@ -422,7 +421,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then his email should be :email
      */
-    public function hisEmailShouldBe($email)
+    public function hisEmailShouldBe($email): void
     {
         Assert::same($this->showPage->getCustomerEmail(), $email);
     }
@@ -430,7 +429,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then his phone number should be :phoneNumber
      */
-    public function hisPhoneNumberShouldBe($phoneNumber)
+    public function hisPhoneNumberShouldBe($phoneNumber): void
     {
         Assert::same($this->showPage->getCustomerPhoneNumber(), $phoneNumber);
     }
@@ -438,7 +437,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then his default address should be :defaultAddress
      */
-    public function hisShippingAddressShouldBe($defaultAddress)
+    public function hisShippingAddressShouldBe($defaultAddress): void
     {
         Assert::same($this->showPage->getDefaultAddress(), str_replace(',', '', $defaultAddress));
     }
@@ -446,7 +445,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should see information about no existing account for this customer
      */
-    public function iShouldSeeInformationAboutNoExistingAccountForThisCustomer()
+    public function iShouldSeeInformationAboutNoExistingAccountForThisCustomer(): void
     {
         Assert::true($this->showPage->hasAccount());
     }
@@ -454,7 +453,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should see that this customer is subscribed to the newsletter
      */
-    public function iShouldSeeThatThisCustomerIsSubscribedToTheNewsletter()
+    public function iShouldSeeThatThisCustomerIsSubscribedToTheNewsletter(): void
     {
         Assert::true($this->showPage->isSubscribedToNewsletter());
     }
@@ -462,7 +461,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should not see information about email verification
      */
-    public function iShouldSeeInformationAboutEmailVerification()
+    public function iShouldSeeInformationAboutEmailVerification(): void
     {
         Assert::true($this->showPage->hasEmailVerificationInformation());
     }
@@ -470,7 +469,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I make them subscribed to the newsletter
      */
-    public function iMakeThemSubscribedToTheNewsletter()
+    public function iMakeThemSubscribedToTheNewsletter(): void
     {
         $this->updatePage->subscribeToTheNewsletter();
     }
@@ -478,7 +477,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I change the password of user :customer to :newPassword
      */
-    public function iChangeThePasswordOfUserTo(CustomerInterface $customer, $newPassword)
+    public function iChangeThePasswordOfUserTo(CustomerInterface $customer, $newPassword): void
     {
         $this->updatePage->open(['id' => $customer->getId()]);
         $this->updatePage->changePassword($newPassword);
@@ -488,7 +487,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then this customer should be subscribed to the newsletter
      */
-    public function thisCustomerShouldBeSubscribedToTheNewsletter()
+    public function thisCustomerShouldBeSubscribedToTheNewsletter(): void
     {
         Assert::true($this->updatePage->isSubscribedToTheNewsletter());
     }
@@ -496,7 +495,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then the province in the default address should be :provinceName
      */
-    public function theProvinceInTheDefaultAddressShouldBe($provinceName)
+    public function theProvinceInTheDefaultAddressShouldBe($provinceName): void
     {
         Assert::true($this->showPage->hasDefaultAddressProvinceName($provinceName));
     }
@@ -504,7 +503,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then this customer should have :groupName as their group
      */
-    public function thisCustomerShouldHaveAsTheirGroup($groupName)
+    public function thisCustomerShouldHaveAsTheirGroup($groupName): void
     {
         /** @var UpdatePageInterface|ShowPageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->updatePage, $this->showPage]);
@@ -515,7 +514,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should see that this customer has verified the email
      */
-    public function iShouldSeeThatThisCustomerHasVerifiedTheEmail()
+    public function iShouldSeeThatThisCustomerHasVerifiedTheEmail(): void
     {
         Assert::true($this->showPage->hasVerifiedEmail());
     }
@@ -523,7 +522,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should see a single order in the list
      */
-    public function iShouldSeeASingleOrderInTheList()
+    public function iShouldSeeASingleOrderInTheList(): void
     {
         Assert::same($this->ordersIndexPage->countItems(), 1);
     }
@@ -531,7 +530,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should see the order with number :orderNumber in the list
      */
-    public function iShouldSeeASingleOrderFromCustomer($orderNumber)
+    public function iShouldSeeASingleOrderFromCustomer($orderNumber): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
     }
@@ -539,7 +538,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should not see the order with number :orderNumber in the list
      */
-    public function iShouldNotSeeASingleOrderFromCustomer($orderNumber)
+    public function iShouldNotSeeASingleOrderFromCustomer($orderNumber): void
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
     }
@@ -547,7 +546,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I do not specify any information
      */
-    public function iDoNotSpecifyAnyInformation()
+    public function iDoNotSpecifyAnyInformation(): void
     {
         // Intentionally left blank.
     }
@@ -555,7 +554,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should not be able to specify their password
      */
-    public function iShouldNotBeAbleToSpecifyItPassword()
+    public function iShouldNotBeAbleToSpecifyItPassword(): void
     {
         Assert::true($this->createPage->isUserFormHidden());
     }
@@ -563,7 +562,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should still be on the customer creation page
      */
-    public function iShouldBeOnTheCustomerCreationPage()
+    public function iShouldBeOnTheCustomerCreationPage(): void
     {
         $this->createPage->verify();
     }
@@ -571,7 +570,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should be able to select create account option
      */
-    public function iShouldBeAbleToSelectCreateAccountOption()
+    public function iShouldBeAbleToSelectCreateAccountOption(): void
     {
         Assert::false($this->createPage->hasCheckedCreateOption());
     }
@@ -579,7 +578,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should be able to specify their password
      */
-    public function iShouldBeAbleToSpecifyItPassword()
+    public function iShouldBeAbleToSpecifyItPassword(): void
     {
         Assert::true($this->createPage->hasPasswordField());
     }
@@ -587,7 +586,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should not be able to select create account option
      */
-    public function iShouldNotBeAbleToSelectCreateAccountOption()
+    public function iShouldNotBeAbleToSelectCreateAccountOption(): void
     {
         Assert::true($this->createPage->hasCheckedCreateOption());
     }
@@ -595,7 +594,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I do not choose create account option
      */
-    public function iDoNotChooseCreateAccountOption()
+    public function iDoNotChooseCreateAccountOption(): void
     {
         // Intentionally left blank.
     }
@@ -603,7 +602,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should not see create account option
      */
-    public function iShouldNotSeeCreateAccountOption()
+    public function iShouldNotSeeCreateAccountOption(): void
     {
         Assert::false($this->createPage->hasCreateOption());
     }
@@ -611,7 +610,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then /^I should be notified that the password must be at least (\d+) characters long$/
      */
-    public function iShouldBeNotifiedThatThePasswordMustBeAtLeastCharactersLong($amountOfCharacters)
+    public function iShouldBeNotifiedThatThePasswordMustBeAtLeastCharactersLong($amountOfCharacters): void
     {
         Assert::same(
             $this->createPage->getValidationMessage('password'),
@@ -622,7 +621,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should see the customer has not placed any orders yet
      */
-    public function iShouldSeeTheCustomerHasNotYetPlacedAnyOrders()
+    public function iShouldSeeTheCustomerHasNotYetPlacedAnyOrders(): void
     {
         Assert::false($this->showPage->hasCustomerPlacedAnyOrders());
     }
@@ -630,7 +629,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then /^I should see that they have placed (\d+) orders? in the "([^"]+)" channel$/
      */
-    public function iShouldSeeThatTheyHavePlacedOrdersInTheChannel($ordersCount, $channelName)
+    public function iShouldSeeThatTheyHavePlacedOrdersInTheChannel($ordersCount, $channelName): void
     {
         Assert::same($this->showPage->getOrdersCountInChannel($channelName), (int) $ordersCount);
     }
@@ -638,7 +637,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then /^I should see that the overall total value of all their orders in the "([^"]+)" channel is "([^"]+)"$/
      */
-    public function iShouldSeeThatTheOverallTotalValueOfAllTheirOrdersInTheChannelIs($channelName, $ordersValue)
+    public function iShouldSeeThatTheOverallTotalValueOfAllTheirOrdersInTheChannelIs($channelName, $ordersValue): void
     {
         Assert::same($this->showPage->getOrdersTotalInChannel($channelName), $ordersValue);
     }
@@ -646,7 +645,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then /^I should see that the average total value of their order in the "([^"]+)" channel is "([^"]+)"$/
      */
-    public function iShouldSeeThatTheAverageTotalValueOfTheirOrderInTheChannelIs($channelName, $ordersValue)
+    public function iShouldSeeThatTheAverageTotalValueOfTheirOrderInTheChannelIs($channelName, $ordersValue): void
     {
         Assert::same($this->showPage->getOrdersTotalInChannel($channelName), $ordersValue);
     }

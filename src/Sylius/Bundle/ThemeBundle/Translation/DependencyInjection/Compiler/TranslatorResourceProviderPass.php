@@ -41,7 +41,6 @@ final class TranslatorResourceProviderPass implements CompilerPassInterface
     }
 
     /**
-     * @param Definition $symfonyTranslator
      *
      * @return array
      */

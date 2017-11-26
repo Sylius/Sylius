@@ -53,7 +53,6 @@ final class TranslationFilesFinder implements TranslationFilesFinderInterface
     }
 
     /**
-     * @param string $path
      *
      * @return iterable|SplFileInfo[]
      */

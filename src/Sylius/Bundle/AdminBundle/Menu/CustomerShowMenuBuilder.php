@@ -48,7 +48,6 @@ final class CustomerShowMenuBuilder
     /**
      * @param array $options
      *
-     * @return ItemInterface
      */
     public function createMenu(array $options): ItemInterface
     {

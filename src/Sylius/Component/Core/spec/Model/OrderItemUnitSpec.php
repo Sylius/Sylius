@@ -26,71 +26,71 @@ use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 
 final class OrderItemUnitSpec extends ObjectBehavior
 {
-    function let(OrderItemInterface $orderItem): void
+    public function let(OrderItemInterface $orderItem): void
     {
         $orderItem->getUnitPrice()->willReturn(1000);
         $orderItem->addUnit(Argument::type(OrderItemUnitInterface::class))->shouldBeCalled();
         $this->beConstructedWith($orderItem);
     }
 
-    function it_implements_an_order_item_unit_interface(): void
+    public function it_implements_an_order_item_unit_interface(): void
     {
         $this->shouldImplement(OrderItemUnitInterface::class);
     }
 
-    function it_implements_an_inventory_unit_interface(): void
+    public function it_implements_an_inventory_unit_interface(): void
     {
         $this->shouldImplement(InventoryUnitInterface::class);
     }
 
-    function it_implements_a_shipment_unit_interface(): void
+    public function it_implements_a_shipment_unit_interface(): void
     {
         $this->shouldImplement(ShipmentUnitInterface::class);
     }
 
-    function it_is_an_order_item_unit(): void
+    public function it_is_an_order_item_unit(): void
     {
         $this->shouldHaveType(BaseOrderItemUnit::class);
     }
 
-    function its_shipment_is_mutable(ShipmentInterface $shipment): void
+    public function its_shipment_is_mutable(ShipmentInterface $shipment): void
     {
         $this->setShipment($shipment);
         $this->getShipment()->shouldReturn($shipment);
     }
 
-    function its_created_at_is_mutable(\DateTime $createdAt): void
+    public function its_created_at_is_mutable(\DateTime $createdAt): void
     {
         $this->setCreatedAt($createdAt);
         $this->getCreatedAt()->shouldReturn($createdAt);
     }
 
-    function its_updated_at_is_mutable(\DateTime $updatedAt): void
+    public function its_updated_at_is_mutable(\DateTime $updatedAt): void
     {
         $this->setUpdatedAt($updatedAt);
         $this->getUpdatedAt()->shouldReturn($updatedAt);
     }
 
-    function its_stockable_is_an_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant): void
+    public function its_stockable_is_an_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant): void
     {
         $orderItem->getVariant()->willReturn($variant);
 
         $this->getStockable()->shouldReturn($variant);
     }
 
-    function its_shippable_is_an_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant): void
+    public function its_shippable_is_an_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant): void
     {
         $orderItem->getVariant()->willReturn($variant);
 
         $this->getShippable()->shouldReturn($variant);
     }
 
-    function it_returns_0_tax_total_when_there_are_no_tax_adjustments(): void
+    public function it_returns_0_tax_total_when_there_are_no_tax_adjustments(): void
     {
         $this->getTaxTotal()->shouldReturn(0);
     }
 
-    function it_returns_a_sum_of_neutral_and_non_neutral_tax_adjustments_as_tax_total(
+    public function it_returns_a_sum_of_neutral_and_non_neutral_tax_adjustments_as_tax_total(
         OrderItemInterface $orderItem,
         AdjustmentInterface $nonNeutralTaxAdjustment,
         AdjustmentInterface $neutralTaxAdjustment
@@ -111,7 +111,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->getTaxTotal()->shouldReturn(500);
     }
 
-    function it_returns_only_sum_of_neutral_and_non_neutral_tax_adjustments_as_tax_total(
+    public function it_returns_only_sum_of_neutral_and_non_neutral_tax_adjustments_as_tax_total(
         OrderItemInterface $orderItem,
         AdjustmentInterface $nonNeutralTaxAdjustment,
         AdjustmentInterface $neutralTaxAdjustment,

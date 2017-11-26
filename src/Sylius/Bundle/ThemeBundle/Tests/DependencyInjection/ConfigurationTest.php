@@ -65,7 +65,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function assets_support_is_enabled_by_default()
+    public function assets_support_is_enabled_by_default(): void
     {
         $this->assertProcessedConfigurationEquals([[]], ['assets' => ['enabled' => true]], 'assets');
     }
@@ -73,7 +73,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function assets_support_may_be_toggled()
+    public function assets_support_may_be_toggled(): void
     {
         $this->assertProcessedConfigurationEquals([['assets' => ['enabled' => true]]], ['assets' => ['enabled' => true]], 'assets');
         $this->assertProcessedConfigurationEquals([['assets' => []]], ['assets' => ['enabled' => true]], 'assets');
@@ -86,7 +86,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function templating_support_is_enabled_by_default()
+    public function templating_support_is_enabled_by_default(): void
     {
         $this->assertProcessedConfigurationEquals([[]], ['templating' => ['enabled' => true]], 'templating');
     }
@@ -94,7 +94,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function templating_support_may_be_toggled()
+    public function templating_support_may_be_toggled(): void
     {
         $this->assertProcessedConfigurationEquals([['templating' => ['enabled' => true]]], ['templating' => ['enabled' => true]], 'templating');
         $this->assertProcessedConfigurationEquals([['templating' => []]], ['templating' => ['enabled' => true]], 'templating');
@@ -107,7 +107,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function translations_support_is_enabled_by_default()
+    public function translations_support_is_enabled_by_default(): void
     {
         $this->assertProcessedConfigurationEquals([[]], ['translations' => ['enabled' => true]], 'translations');
     }
@@ -115,7 +115,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function translations_support_may_be_toggled()
+    public function translations_support_may_be_toggled(): void
     {
         $this->assertProcessedConfigurationEquals([['translations' => ['enabled' => true]]], ['translations' => ['enabled' => true]], 'translations');
         $this->assertProcessedConfigurationEquals([['translations' => []]], ['translations' => ['enabled' => true]], 'translations');

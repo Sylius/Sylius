@@ -21,12 +21,12 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 final class DefaultProductVariantResolverSpec extends ObjectBehavior
 {
-    function it_implements_variant_resolver_interface(): void
+    public function it_implements_variant_resolver_interface(): void
     {
         $this->shouldImplement(ProductVariantResolverInterface::class);
     }
 
-    function it_returns_first_variant(
+    public function it_returns_first_variant(
         ProductInterface $product,
         ProductVariantInterface $variant,
         Collection $variants
@@ -38,7 +38,7 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         $this->getVariant($product)->shouldReturn($variant);
     }
 
-    function it_returns_null_if_first_variant_is_not_defined(Collection $variants, ProductInterface $product): void
+    public function it_returns_null_if_first_variant_is_not_defined(Collection $variants, ProductInterface $product): void
     {
         $product->getVariants()->willReturn($variants);
         $variants->isEmpty()->willReturn(true);

@@ -173,7 +173,6 @@ class MugProductFixture extends AbstractFixture
     }
 
     /**
-     * @param int $amount
      *
      * @return array
      */

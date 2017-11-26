@@ -20,24 +20,24 @@ use Sylius\Component\Core\Model\TaxonInterface;
 
 final class ProductTaxonSpec extends ObjectBehavior
 {
-    function it_implements_product_taxon_interface(): void
+    public function it_implements_product_taxon_interface(): void
     {
         $this->shouldImplement(ProductTaxonInterface::class);
     }
 
-    function it_has_mutable_product_field(ProductInterface $product): void
+    public function it_has_mutable_product_field(ProductInterface $product): void
     {
         $this->setProduct($product);
         $this->getProduct()->shouldReturn($product);
     }
 
-    function it_has_mutable_taxon_field(TaxonInterface $taxon): void
+    public function it_has_mutable_taxon_field(TaxonInterface $taxon): void
     {
         $this->setTaxon($taxon);
         $this->getTaxon()->shouldReturn($taxon);
     }
 
-    function it_has_mutable_position_field(): void
+    public function it_has_mutable_position_field(): void
     {
         $this->setPosition(1);
         $this->getPosition()->shouldReturn(1);

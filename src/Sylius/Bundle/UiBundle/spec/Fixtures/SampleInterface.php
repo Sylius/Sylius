@@ -18,12 +18,12 @@ interface SampleInterface
     /**
      * @return int
      */
-    public function getInt();
+    public function getInt(): int;
 
     /**
      * @return string
      */
-    public function getString();
+    public function getString(): string;
 
     /**
      * @return mixed
@@ -33,5 +33,5 @@ interface SampleInterface
     /**
      * @return SampleInterface
      */
-    public function getInnerSample();
+    public function getInnerSample(): SampleInterface;
 }

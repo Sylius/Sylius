@@ -21,17 +21,17 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 final class CompositeMethodsResolverSpec extends ObjectBehavior
 {
-    function let(PrioritizedServiceRegistryInterface $resolversRegistry): void
+    public function let(PrioritizedServiceRegistryInterface $resolversRegistry): void
     {
         $this->beConstructedWith($resolversRegistry);
     }
 
-    function it_implements_methods_resolver_interface(): void
+    public function it_implements_methods_resolver_interface(): void
     {
         $this->shouldImplement(ShippingMethodsResolverInterface::class);
     }
 
-    function it_uses_registry_to_provide_shipping_methods_for_shipping_subject(
+    public function it_uses_registry_to_provide_shipping_methods_for_shipping_subject(
         ShippingMethodsResolverInterface $firstMethodsResolver,
         ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
@@ -48,7 +48,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         $this->getSupportedMethods($shippingSubject)->shouldReturn([$shippingMethod]);
     }
 
-    function it_returns_empty_array_if_none_of_registered_resolvers_support_passed_shipping_subject(
+    public function it_returns_empty_array_if_none_of_registered_resolvers_support_passed_shipping_subject(
         ShippingMethodsResolverInterface $firstMethodsResolver,
         ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
@@ -62,7 +62,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         $this->getSupportedMethods($shippingSubject)->shouldReturn([]);
     }
 
-    function it_supports_subject_if_any_resolver_from_registry_supports_it(
+    public function it_supports_subject_if_any_resolver_from_registry_supports_it(
         ShippingMethodsResolverInterface $firstMethodsResolver,
         ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
@@ -76,7 +76,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         $this->supports($shippingSubject)->shouldReturn(true);
     }
 
-    function it_does_not_support_subject_if_none_of_resolvers_from_registry_supports_it(
+    public function it_does_not_support_subject_if_none_of_resolvers_from_registry_supports_it(
         ShippingMethodsResolverInterface $firstMethodsResolver,
         ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,

@@ -93,7 +93,6 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
     }
 
     /**
-     * @param Definition $channelContextDefinition
      * @param string $id
      * @param array $tags
      */
@@ -105,7 +104,6 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
     }
 
     /**
-     * @param Definition $channelContextDefinition
      * @param string $id
      * @param array $attributes
      */

@@ -56,7 +56,7 @@ final class CustomerGroupContext implements Context
      * @Given the store has a customer group :name
      * @Given the store has a customer group :name with :code code
      */
-    public function theStoreHasACustomerGroup($name, $code = null)
+    public function theStoreHasACustomerGroup($name, $code = null): void
     {
         $this->createCustomerGroup($name, $code);
     }
@@ -76,7 +76,7 @@ final class CustomerGroupContext implements Context
      * @param string $name
      * @param string $code
      */
-    private function createCustomerGroup($name, $code)
+    private function createCustomerGroup(string $name, string $code): void
     {
         /** @var CustomerGroupInterface $customerGroup */
         $customerGroup = $this->customerGroupFactory->createNew();
@@ -93,7 +93,7 @@ final class CustomerGroupContext implements Context
      *
      * @return string
      */
-    private function generateCodeFromName($name)
+    private function generateCodeFromName(string $name): string
     {
         return StringInflector::nameToCode($name);
     }

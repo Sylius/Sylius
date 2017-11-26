@@ -23,17 +23,17 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 final class DelegatingCalculatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $registry): void
+    public function let(ServiceRegistryInterface $registry): void
     {
         $this->beConstructedWith($registry);
     }
 
-    function it_implements_delegating_shipping_calculator_interface(): void
+    public function it_implements_delegating_shipping_calculator_interface(): void
     {
         $this->shouldImplement(DelegatingCalculatorInterface::class);
     }
 
-    function it_should_complain_if_shipment_has_no_method_defined(ShipmentInterface $shipment): void
+    public function it_should_complain_if_shipment_has_no_method_defined(ShipmentInterface $shipment): void
     {
         $shipment->getMethod()->willReturn(null);
 
@@ -43,7 +43,7 @@ final class DelegatingCalculatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_should_delegate_calculation_to_a_calculator_defined_on_shipping_method(
+    public function it_should_delegate_calculation_to_a_calculator_defined_on_shipping_method(
         ServiceRegistryInterface $registry,
         ShipmentInterface $shipment,
         ShippingMethodInterface $method,

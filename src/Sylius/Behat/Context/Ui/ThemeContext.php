@@ -65,7 +65,7 @@ final class ThemeContext implements Context
     /**
      * @When I set :channel channel theme to :theme
      */
-    public function iSetChannelThemeTo(ChannelInterface $channel, ThemeInterface $theme)
+    public function iSetChannelThemeTo(ChannelInterface $channel, ThemeInterface $theme): void
     {
         $this->channelUpdatePage->open(['id' => $channel->getId()]);
         $this->channelUpdatePage->setTheme($theme);
@@ -78,7 +78,7 @@ final class ThemeContext implements Context
     /**
      * @When /^I unset theme on (that channel)$/
      */
-    public function iUnsetThemeOnChannel(ChannelInterface $channel)
+    public function iUnsetThemeOnChannel(ChannelInterface $channel): void
     {
         $this->channelUpdatePage->open(['id' => $channel->getId()]);
         $this->channelUpdatePage->unsetTheme();
@@ -88,7 +88,7 @@ final class ThemeContext implements Context
     /**
      * @Then /^(that channel) should not use any theme$/
      */
-    public function channelShouldNotUseAnyTheme(ChannelInterface $channel)
+    public function channelShouldNotUseAnyTheme(ChannelInterface $channel): void
     {
         $this->channelIndexPage->open();
 
@@ -98,7 +98,7 @@ final class ThemeContext implements Context
     /**
      * @Then /^(that channel) should use (that theme)$/
      */
-    public function channelShouldUseTheme(ChannelInterface $channel, ThemeInterface $theme)
+    public function channelShouldUseTheme(ChannelInterface $channel, ThemeInterface $theme): void
     {
         $this->channelIndexPage->open();
 
@@ -108,7 +108,7 @@ final class ThemeContext implements Context
     /**
      * @Then /^I should see a homepage from ((?:this|that) theme)$/
      */
-    public function iShouldSeeThemedHomepage(ThemeInterface $theme)
+    public function iShouldSeeThemedHomepage(ThemeInterface $theme): void
     {
         $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig');
 
@@ -118,7 +118,7 @@ final class ThemeContext implements Context
     /**
      * @Then I should not see a homepage from :theme theme
      */
-    public function iShouldNotSeeThemedHomepage(ThemeInterface $theme)
+    public function iShouldNotSeeThemedHomepage(ThemeInterface $theme): void
     {
         $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig');
 

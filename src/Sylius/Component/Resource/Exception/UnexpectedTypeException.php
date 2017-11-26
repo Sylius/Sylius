@@ -17,7 +17,6 @@ class UnexpectedTypeException extends \InvalidArgumentException
 {
     /**
      * @param mixed $value
-     * @param string $expectedType
      */
     public function __construct($value, string $expectedType)
     {

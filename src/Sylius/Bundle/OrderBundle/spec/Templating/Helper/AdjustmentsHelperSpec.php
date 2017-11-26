@@ -20,17 +20,17 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class AdjustmentsHelperSpec extends ObjectBehavior
 {
-    function let(AdjustmentsAggregatorInterface $adjustmentsAggregator): void
+    public function let(AdjustmentsAggregatorInterface $adjustmentsAggregator): void
     {
         $this->beConstructedWith($adjustmentsAggregator);
     }
 
-    function it_is_a_helper(): void
+    public function it_is_a_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_returns_aggregated_adjustments(
+    public function it_returns_aggregated_adjustments(
         AdjustmentsAggregatorInterface $adjustmentsAggregator,
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
@@ -47,7 +47,7 @@ final class AdjustmentsHelperSpec extends ObjectBehavior
         ;
     }
 
-    function it_has_a_name(): void
+    public function it_has_a_name(): void
     {
         $this->getName()->shouldReturn('sylius_adjustments');
     }

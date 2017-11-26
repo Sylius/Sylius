@@ -20,11 +20,10 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     /**
-     * @param PromotionInterface $promotion
      *
      * @return int
      */
-    public function getUsageNumber(PromotionInterface $promotion)
+    public function getUsageNumber(PromotionInterface $promotion): int
     {
         $usage = $this->getPromotionFieldsWithHeader($promotion, 'usage');
 
@@ -52,12 +51,11 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param string $header
      *
      * @return NodeElement
      */
-    private function getPromotionFieldsWithHeader(PromotionInterface $promotion, $header)
+    private function getPromotionFieldsWithHeader(PromotionInterface $promotion, string $header): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');

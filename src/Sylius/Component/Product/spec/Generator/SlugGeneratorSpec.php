@@ -18,25 +18,25 @@ use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 
 final class SlugGeneratorSpec extends ObjectBehavior
 {
-    function it_implements_slug_generator_interface(): void
+    public function it_implements_slug_generator_interface(): void
     {
         $this->shouldImplement(SlugGeneratorInterface::class);
     }
 
-    function it_generates_slug_based_on_given_name(): void
+    public function it_generates_slug_based_on_given_name(): void
     {
         $this->generate('Cyclades')->shouldReturn('cyclades');
         $this->generate('Small World')->shouldReturn('small-world');
     }
 
-    function it_generates_slug_without_punctuation_marks(): void
+    public function it_generates_slug_without_punctuation_marks(): void
     {
         $this->generate('"Ticket to Ride: Europe"')->shouldReturn('ticket-to-ride-europe');
         $this->generate('Tzolk\'in: The Mayan Calendar')->shouldReturn('tzolk-in-the-mayan-calendar');
         $this->generate('Game of Thrones: The Board Game')->shouldReturn('game-of-thrones-the-board-game');
     }
 
-    function it_generates_slug_without_special_signs(): void
+    public function it_generates_slug_without_special_signs(): void
     {
         $this->generate('Wsiąść do Pociągu: Europa')->shouldReturn('wsiasc-do-pociagu-europa');
     }

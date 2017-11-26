@@ -51,7 +51,6 @@ final class AddBaseCurrencySubscriber implements EventSubscriberInterface
     /**
      * @param mixed $resource
      *
-     * @return bool
      *
      * @throws UnexpectedTypeException
      */

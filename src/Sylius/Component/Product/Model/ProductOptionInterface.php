@@ -69,7 +69,6 @@ interface ProductOptionInterface extends
     public function hasValue(ProductOptionValueInterface $optionValue): bool;
 
     /**
-     * @param string|null $locale
      *
      * @return ProductOptionTranslationInterface
      */

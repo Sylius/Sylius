@@ -92,7 +92,6 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
 
     /**
      * @param mixed $value
-     * @param string $expectedType
      *
      * @throws TransformationFailedException
      */

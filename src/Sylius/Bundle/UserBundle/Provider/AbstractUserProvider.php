@@ -38,7 +38,6 @@ abstract class AbstractUserProvider implements UserProviderInterface
 
     /**
      * @param string $supportedUserClass FQCN
-     * @param UserRepositoryInterface $userRepository
      * @param CanonicalizerInterface $canonicalizer
      */
     public function __construct(

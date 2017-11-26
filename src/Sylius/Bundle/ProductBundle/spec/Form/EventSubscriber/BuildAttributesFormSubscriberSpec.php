@@ -25,12 +25,12 @@ use Symfony\Component\Form\FormEvents;
 
 final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $attributeValueFactory, TranslationLocaleProviderInterface $localeProvider): void
+    public function let(FactoryInterface $attributeValueFactory, TranslationLocaleProviderInterface $localeProvider): void
     {
         $this->beConstructedWith($attributeValueFactory, $localeProvider);
     }
 
-    function it_subscribes_to_event(): void
+    public function it_subscribes_to_event(): void
     {
         static::getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -38,7 +38,7 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
         ]);
     }
 
-    function it_adds_attribute_values_in_different_locales_to_a_product(
+    public function it_adds_attribute_values_in_different_locales_to_a_product(
         FactoryInterface $attributeValueFactory,
         TranslationLocaleProviderInterface $localeProvider,
         FormEvent $event,
@@ -69,7 +69,7 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_removes_empty_attribute_values_in_different_locales(
+    public function it_removes_empty_attribute_values_in_different_locales(
         FormEvent $event,
         ProductInterface $product,
         ProductAttributeInterface $attribute,
@@ -91,7 +91,7 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
         $this->postSubmit($event);
     }
 
-    function it_throws_an_invalid_argument_exception_if_data_is_not_a_product(FormEvent $event, \stdClass $stdObject): void
+    public function it_throws_an_invalid_argument_exception_if_data_is_not_a_product(FormEvent $event, \stdClass $stdObject): void
     {
         $event->getData()->willReturn($stdObject);
 
@@ -101,7 +101,7 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_invalid_argument_exception_if_data_is_not_a_product_during_submit(FormEvent $event, \stdClass $stdObject): void
+    public function it_throws_an_invalid_argument_exception_if_data_is_not_a_product_during_submit(FormEvent $event, \stdClass $stdObject): void
     {
         $event->getData()->willReturn($stdObject);
 

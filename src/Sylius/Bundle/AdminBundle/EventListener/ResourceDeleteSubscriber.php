@@ -152,7 +152,6 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
     /**
      * @param array $syliusParameters
      *
-     * @return bool
      */
     private function isAdminSection(array $syliusParameters): bool
     {

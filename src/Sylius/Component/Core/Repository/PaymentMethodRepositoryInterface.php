@@ -27,7 +27,6 @@ interface PaymentMethodRepositoryInterface extends BasePaymentMethodRepositoryIn
     public function createListQueryBuilder(string $locale): QueryBuilder;
 
     /**
-     * @param ChannelInterface $channel
      *
      * @return array
      */

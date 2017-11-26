@@ -20,17 +20,17 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 final class TaxonFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory): void
+    public function let(FactoryInterface $factory): void
     {
         $this->beConstructedWith($factory);
     }
 
-    function it_implements_taxon_factory_interface(): void
+    public function it_implements_taxon_factory_interface(): void
     {
         $this->shouldImplement(TaxonFactoryInterface::class);
     }
 
-    function it_uses_decorated_factory_to_create_new_taxon(
+    public function it_uses_decorated_factory_to_create_new_taxon(
         FactoryInterface $factory,
         TaxonInterface $taxon
     ): void {
@@ -39,7 +39,7 @@ final class TaxonFactorySpec extends ObjectBehavior
         $this->createNew()->shouldReturn($taxon);
     }
 
-    function it_creates_taxon_for_given_parent_taxon(
+    public function it_creates_taxon_for_given_parent_taxon(
         FactoryInterface $factory,
         TaxonInterface $parent,
         TaxonInterface $taxon

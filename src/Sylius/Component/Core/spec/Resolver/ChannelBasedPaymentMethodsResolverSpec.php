@@ -24,17 +24,17 @@ use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
 final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
 {
-    function let(PaymentMethodRepositoryInterface $paymentMethodRepository): void
+    public function let(PaymentMethodRepositoryInterface $paymentMethodRepository): void
     {
         $this->beConstructedWith($paymentMethodRepository);
     }
 
-    function it_implements_a_payment_methods_resolver_interface(): void
+    public function it_implements_a_payment_methods_resolver_interface(): void
     {
         $this->shouldImplement(PaymentMethodsResolverInterface::class);
     }
 
-    function it_returns_payment_methods_matched_for_order_channel(
+    public function it_returns_payment_methods_matched_for_order_channel(
         PaymentInterface $payment,
         OrderInterface $order,
         ChannelInterface $channel,
@@ -53,7 +53,7 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         $this->getSupportedMethods($payment)->shouldReturn([$firstPaymentMethod, $secondPaymentMethod]);
     }
 
-    function it_returns_an_empty_collection_if_there_is_no_enabled_payment_methods_for_order_channel(
+    public function it_returns_an_empty_collection_if_there_is_no_enabled_payment_methods_for_order_channel(
         PaymentInterface $payment,
         OrderInterface $order,
         ChannelInterface $channel,
@@ -70,7 +70,7 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         $this->getSupportedMethods($payment)->shouldReturn([]);
     }
 
-    function it_supports_shipments_with_order_and_its_shipping_address_defined(
+    public function it_supports_shipments_with_order_and_its_shipping_address_defined(
         PaymentInterface $payment,
         OrderInterface $order,
         ChannelInterface $channel
@@ -81,7 +81,7 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         $this->supports($payment)->shouldReturn(true);
     }
 
-    function it_does_not_support_payments_for_order_with_not_assigned_channel(
+    public function it_does_not_support_payments_for_order_with_not_assigned_channel(
         PaymentInterface $payment,
         OrderInterface $order
     ): void {
@@ -91,12 +91,12 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         $this->supports($payment)->shouldReturn(false);
     }
 
-    function it_does_not_support_payment_if_payment_is_not_instance_of_core_payment_interface(BasePaymentInterface $payment): void
+    public function it_does_not_support_payment_if_payment_is_not_instance_of_core_payment_interface(BasePaymentInterface $payment): void
     {
         $this->supports($payment)->shouldReturn(false);
     }
 
-    function it_does_not_support_payments_which_has_no_order_defined(PaymentInterface $payment): void
+    public function it_does_not_support_payments_which_has_no_order_defined(PaymentInterface $payment): void
     {
         $payment->getOrder()->willReturn(null);
 

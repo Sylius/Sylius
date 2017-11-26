@@ -83,7 +83,7 @@ final class GeographicalContext implements Context
      * @Given /^the store ships to "([^"]+)" and "([^"]+)"$/
      * @Given /^the store ships to "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
-    public function storeShipsTo(...$countriesNames)
+    public function storeShipsTo(...$countriesNames): void
     {
         foreach ($countriesNames as $countryName) {
             $this->countryRepository->add($this->createCountryNamed(trim($countryName)));
@@ -95,7 +95,7 @@ final class GeographicalContext implements Context
      * @Given /^the store operates in "([^"]*)" and "([^"]*)"$/
      * @Given /^the store(?:| also) has country "([^"]*)"$/
      */
-    public function theStoreOperatesIn(...$countriesNames)
+    public function theStoreOperatesIn(...$countriesNames): void
     {
         foreach ($countriesNames as $countryName) {
             $country = $this->createCountryNamed(trim($countryName));
@@ -108,7 +108,7 @@ final class GeographicalContext implements Context
     /**
      * @Given /^the store has disabled country "([^"]*)"$/
      */
-    public function theStoreHasDisabledCountry($countryName)
+    public function theStoreHasDisabledCountry($countryName): void
     {
         $country = $this->createCountryNamed(trim($countryName));
         $country->disable();
@@ -121,7 +121,7 @@ final class GeographicalContext implements Context
      * @Given /^(this country)(?:| also) has the "([^"]+)" province with "([^"]+)" code$/
      * @Given /^(?:|the )(country "[^"]+") has the "([^"]+)" province with "([^"]+)" code$/
      */
-    public function theCountryHasProvinceWithCode(CountryInterface $country, $name, $code)
+    public function theCountryHasProvinceWithCode(CountryInterface $country, $name, $code): void
     {
         /** @var ProvinceInterface $province */
         $province = $this->provinceFactory->createNew();
@@ -139,7 +139,7 @@ final class GeographicalContext implements Context
      *
      * @return CountryInterface
      */
-    private function createCountryNamed($name)
+    private function createCountryNamed(string $name): CountryInterface
     {
         /** @var CountryInterface $country */
         $country = $this->countryFactory->createNew();

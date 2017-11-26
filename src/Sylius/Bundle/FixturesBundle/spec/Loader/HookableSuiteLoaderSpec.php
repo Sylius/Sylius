@@ -22,17 +22,17 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 final class HookableSuiteLoaderSpec extends ObjectBehavior
 {
-    function let(SuiteLoaderInterface $decoratedSuiteLoader): void
+    public function let(SuiteLoaderInterface $decoratedSuiteLoader): void
     {
         $this->beConstructedWith($decoratedSuiteLoader);
     }
 
-    function it_implements_suite_loader_interface(): void
+    public function it_implements_suite_loader_interface(): void
     {
         $this->shouldImplement(SuiteLoaderInterface::class);
     }
 
-    function it_delegates_suite_loading_to_the_base_loader(SuiteLoaderInterface $decoratedSuiteLoader, SuiteInterface $suite): void
+    public function it_delegates_suite_loading_to_the_base_loader(SuiteLoaderInterface $decoratedSuiteLoader, SuiteInterface $suite): void
     {
         $suite->getListeners()->willReturn([]);
 
@@ -41,7 +41,7 @@ final class HookableSuiteLoaderSpec extends ObjectBehavior
         $this->load($suite);
     }
 
-    function it_executes_before_suite_listeners(
+    public function it_executes_before_suite_listeners(
         SuiteLoaderInterface $decoratedSuiteLoader,
         SuiteInterface $suite,
         BeforeSuiteListenerInterface $beforeSuiteListener
@@ -57,7 +57,7 @@ final class HookableSuiteLoaderSpec extends ObjectBehavior
         $this->load($suite);
     }
 
-    function it_executes_after_suite_listeners(
+    public function it_executes_after_suite_listeners(
         SuiteLoaderInterface $decoratedSuiteLoader,
         SuiteInterface $suite,
         AfterSuiteListenerInterface $afterSuiteListener
@@ -73,7 +73,7 @@ final class HookableSuiteLoaderSpec extends ObjectBehavior
         $this->load($suite);
     }
 
-    function it_executes_customized_suite_listeners(
+    public function it_executes_customized_suite_listeners(
         SuiteLoaderInterface $decoratedSuiteLoader,
         SuiteInterface $suite,
         BeforeSuiteListenerInterface $beforeSuiteListener,

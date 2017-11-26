@@ -20,12 +20,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class OrderRecalculationListenerSpec extends ObjectBehavior
 {
-    function let(OrderProcessorInterface $orderProcessor): void
+    public function let(OrderProcessorInterface $orderProcessor): void
     {
         $this->beConstructedWith($orderProcessor);
     }
 
-    function it_uses_order_processor_to_recalculate_order(
+    public function it_uses_order_processor_to_recalculate_order(
         OrderProcessorInterface $orderProcessor,
         GenericEvent $event,
         OrderInterface $order
@@ -36,7 +36,7 @@ final class OrderRecalculationListenerSpec extends ObjectBehavior
         $this->recalculateOrder($event);
     }
 
-    function it_throws_exception_if_event_subject_is_not_order(GenericEvent $event): void
+    public function it_throws_exception_if_event_subject_is_not_order(GenericEvent $event): void
     {
         $event->getSubject()->willReturn(new \stdClass());
 

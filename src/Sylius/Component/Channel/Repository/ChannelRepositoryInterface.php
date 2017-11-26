@@ -33,7 +33,6 @@ interface ChannelRepositoryInterface extends RepositoryInterface
     public function findOneByCode(string $code): ?ChannelInterface;
 
     /**
-     * @param string $name
      *
      * @return iterable|ChannelInterface[]
      */

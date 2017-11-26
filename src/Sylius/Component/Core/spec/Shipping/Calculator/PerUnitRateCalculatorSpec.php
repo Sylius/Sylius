@@ -23,19 +23,19 @@ use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 
 final class PerUnitRateCalculatorSpec extends ObjectBehavior
 {
-    function it_implements_shipping_calculator_interface(): void
+    public function it_implements_shipping_calculator_interface(): void
     {
         $this->shouldImplement(CalculatorInterface::class);
     }
 
-    function it_returns_per_unit_rate_type(CalculatorInterface $calculator): void
+    public function it_returns_per_unit_rate_type(CalculatorInterface $calculator): void
     {
         $calculator->getType()->willReturn('per_unit_rate');
 
         $this->getType()->shouldReturn('per_unit_rate');
     }
 
-    function it_calculates_the_total_with_the_per_unit_amount_configured_on_the_method(
+    public function it_calculates_the_total_with_the_per_unit_amount_configured_on_the_method(
         ShipmentInterface $shipment,
         OrderInterface $order,
         ChannelInterface $channel
@@ -48,7 +48,7 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
         $this->calculate($shipment, ['WEB' => ['amount' => 200]])->shouldReturn(2000);
     }
 
-    function it_throws_a_channel_not_defined_exception_if_channel_code_key_does_not_exist(
+    public function it_throws_a_channel_not_defined_exception_if_channel_code_key_does_not_exist(
         ShipmentInterface $shipment,
         OrderInterface $order,
         ChannelInterface $channel,

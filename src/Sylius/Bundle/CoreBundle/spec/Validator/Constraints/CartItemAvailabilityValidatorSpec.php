@@ -28,33 +28,33 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $executionContext, AvailabilityCheckerInterface $availabilityChecker): void
+    public function let(ExecutionContextInterface $executionContext, AvailabilityCheckerInterface $availabilityChecker): void
     {
         $this->beConstructedWith($availabilityChecker);
 
         $this->initialize($executionContext);
     }
 
-    function it_is_constraint_validator(): void
+    public function it_is_constraint_validator(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
 
-    function it_validates_only_add_cart_item_commands(OrderInterface $order): void
+    public function it_validates_only_add_cart_item_commands(OrderInterface $order): void
     {
         $cartItemAvailabilityConstraint = new CartItemAvailability();
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('validate', [$order, $cartItemAvailabilityConstraint]);
     }
 
-    function it_is_cart_item_availability_validator(AddToCartCommandInterface $addCartItemCommand): void
+    public function it_is_cart_item_availability_validator(AddToCartCommandInterface $addCartItemCommand): void
     {
         $inStockConstraint = new InStock();
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('validate', [$addCartItemCommand, $inStockConstraint]);
     }
 
-    function it_does_not_add_violation_if_requested_cart_item_is_available(
+    public function it_does_not_add_violation_if_requested_cart_item_is_available(
         ExecutionContextInterface $executionContext,
         AvailabilityCheckerInterface $availabilityChecker,
         AddToCartCommandInterface $addCartItemCommand,
@@ -77,7 +77,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         $this->validate($addCartItemCommand, $cartItemAvailabilityConstraint);
     }
 
-    function it_adds_violation_if_requested_cart_item_is_not_available(
+    public function it_adds_violation_if_requested_cart_item_is_not_available(
         ExecutionContextInterface $executionContext,
         AvailabilityCheckerInterface $availabilityChecker,
         AddToCartCommandInterface $addCartItemCommand,
@@ -102,7 +102,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         $this->validate($addCartItemCommand, $cartItemAvailabilityConstraint);
     }
 
-    function it_adds_violation_if_total_quantity_of_cart_items_exceed_available_quantity(
+    public function it_adds_violation_if_total_quantity_of_cart_items_exceed_available_quantity(
         ExecutionContextInterface $executionContext,
         AvailabilityCheckerInterface $availabilityChecker,
         AddToCartCommandInterface $addCartItemCommand,
@@ -131,7 +131,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         $this->validate($addCartItemCommand, $cartItemAvailabilityConstraint);
     }
 
-    function it_does_not_add_violation_if_total_quantity_of_cart_items_do_not_exceed_available_quantity(
+    public function it_does_not_add_violation_if_total_quantity_of_cart_items_do_not_exceed_available_quantity(
         ExecutionContextInterface $executionContext,
         AvailabilityCheckerInterface $availabilityChecker,
         AddToCartCommandInterface $addCartItemCommand,

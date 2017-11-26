@@ -74,7 +74,7 @@ final class ProductOptionContext implements Context
      * @Given the store has (also) a product option :name
      * @Given the store has a product option :name with a code :code
      */
-    public function theStoreHasAProductOptionWithACode($name, $code = null)
+    public function theStoreHasAProductOptionWithACode($name, $code = null): void
     {
         $this->createProductOption($name, $code);
     }
@@ -82,7 +82,7 @@ final class ProductOptionContext implements Context
     /**
      * @Given /^the store has(?:| also) a product option "([^"]+)" at position ([^"]+)$/
      */
-    public function theStoreHasAProductOptionAtPosition($name, $position)
+    public function theStoreHasAProductOptionAtPosition($name, $position): void
     {
         $this->createProductOption($name, null, $position);
     }
@@ -94,7 +94,7 @@ final class ProductOptionContext implements Context
         ProductOptionInterface $productOption,
         $productOptionValueName,
         $productOptionValueCode
-    ) {
+    ): void {
         $productOptionValue = $this->createProductOptionValue($productOptionValueName, $productOptionValueCode);
         $productOption->addValue($productOptionValue);
 
@@ -108,7 +108,7 @@ final class ProductOptionContext implements Context
      *
      * @return ProductOptionInterface
      */
-    private function createProductOption($name, $code = null, $position = null)
+    private function createProductOption(string $name, ?string $code = null, ?string $position = null): ProductOptionInterface
     {
         /** @var ProductOptionInterface $productOption */
         $productOption = $this->productOptionFactory->createNew();
@@ -128,7 +128,7 @@ final class ProductOptionContext implements Context
      *
      * @return ProductOptionValueInterface
      */
-    private function createProductOptionValue($value, $code)
+    private function createProductOptionValue(string $value, string $code): ProductOptionValueInterface
     {
         /** @var ProductOptionValueInterface $productOptionValue */
         $productOptionValue = $this->productOptionValueFactory->createNew();

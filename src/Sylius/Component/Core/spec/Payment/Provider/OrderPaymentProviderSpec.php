@@ -29,7 +29,7 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
 final class OrderPaymentProviderSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         PaymentFactoryInterface $paymentFactory,
         StateMachineFactoryInterface $stateMachineFactory
@@ -41,12 +41,12 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         );
     }
 
-    function it_implements_order_payment_provider_interface(): void
+    public function it_implements_order_payment_provider_interface(): void
     {
         $this->shouldImplement(OrderPaymentProviderInterface::class);
     }
 
-    function it_provides_payment_in_configured_state_with_payment_method_from_last_cancelled_payment(
+    public function it_provides_payment_in_configured_state_with_payment_method_from_last_cancelled_payment(
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         OrderInterface $order,
         PaymentFactoryInterface $paymentFactory,
@@ -76,7 +76,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
     }
 
-    function it_provides_payment_in_configured_state_with_payment_method_from_last_failed_payment(
+    public function it_provides_payment_in_configured_state_with_payment_method_from_last_failed_payment(
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         OrderInterface $order,
         PaymentFactoryInterface $paymentFactory,
@@ -107,7 +107,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
     }
 
-    function it_provides_payment_in_configured_state_with_default_payment_method(
+    public function it_provides_payment_in_configured_state_with_default_payment_method(
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         OrderInterface $order,
         PaymentFactoryInterface $paymentFactory,
@@ -136,7 +136,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
     }
 
-    function it_does_not_apply_any_transition_if_target_state_is_the_same_as_new_payment(
+    public function it_does_not_apply_any_transition_if_target_state_is_the_same_as_new_payment(
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         OrderInterface $order,
         PaymentFactoryInterface $paymentFactory,
@@ -169,7 +169,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
     }
 
-    function it_throws_exception_if_payment_method_cannot_be_resolved_for_provided_payment(
+    public function it_throws_exception_if_payment_method_cannot_be_resolved_for_provided_payment(
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         OrderInterface $order,
         PaymentFactoryInterface $paymentFactory,

@@ -17,12 +17,12 @@ use PhpSpec\ObjectBehavior;
 
 final class UndefinedShippingMethodExceptionSpec extends ObjectBehavior
 {
-    function it_is_an_exception(): void
+    public function it_is_an_exception(): void
     {
-        $this->shouldHaveType(\Exception::class);
+        $this->shouldHaveType(\Throwable::class);
     }
 
-    function it_is_a_invalid_argument_exception(): void
+    public function it_is_a_invalid_argument_exception(): void
     {
         $this->shouldHaveType('InvalidArgumentException');
     }

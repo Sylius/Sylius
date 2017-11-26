@@ -81,7 +81,7 @@ final class CustomerContext implements Context
     /**
      * @Given the store has customer :name with email :email
      */
-    public function theStoreHasCustomerWithNameAndEmail($name, $email)
+    public function theStoreHasCustomerWithNameAndEmail($name, $email): void
     {
         $partsOfName = explode(' ', $name);
         $customer = $this->createCustomer($email, $partsOfName[0], $partsOfName[1]);
@@ -91,7 +91,7 @@ final class CustomerContext implements Context
     /**
      * @Given the store (also )has customer :email
      */
-    public function theStoreHasCustomer($email)
+    public function theStoreHasCustomer($email): void
     {
         $customer = $this->createCustomer($email);
 
@@ -101,7 +101,7 @@ final class CustomerContext implements Context
     /**
      * @Given the store has customer :email with first name :firstName
      */
-    public function theStoreHasCustomerWithFirstName($email, $firstName)
+    public function theStoreHasCustomerWithFirstName($email, $firstName): void
     {
         $customer = $this->createCustomer($email, $firstName);
 
@@ -112,7 +112,7 @@ final class CustomerContext implements Context
      * @Given the store has customer :email with name :fullName since :since
      * @Given the store has customer :email with name :fullName and phone number :phoneNumber since :since
      */
-    public function theStoreHasCustomerWithNameAndRegistrationDate($email, $fullName, $phoneNumber = null, $since)
+    public function theStoreHasCustomerWithNameAndRegistrationDate($email, $fullName, $phoneNumber = null, $since): void
     {
         $names = explode(' ', $fullName);
         $customer = $this->createCustomer($email, $names[0], $names[1], new \DateTime($since), $phoneNumber);
@@ -123,7 +123,7 @@ final class CustomerContext implements Context
     /**
      * @Given there is disabled customer account :email with password :password
      */
-    public function thereIsDisabledCustomerAccountWithPassword($email, $password)
+    public function thereIsDisabledCustomerAccountWithPassword($email, $password): void
     {
         $customer = $this->createCustomerWithUserAccount($email, $password, false);
         $this->customerRepository->add($customer);
@@ -134,7 +134,7 @@ final class CustomerContext implements Context
      * @Given there is a customer account :email identified by :password
      * @Given there is enabled customer account :email with password :password
      */
-    public function theStoreHasEnabledCustomerAccountWithPassword($email, $password = 'sylius')
+    public function theStoreHasEnabledCustomerAccountWithPassword($email, $password = 'sylius'): void
     {
         $customer = $this->createCustomerWithUserAccount($email, $password, true);
         $this->customerRepository->add($customer);
@@ -144,7 +144,7 @@ final class CustomerContext implements Context
      * @Given there is a customer :name identified by an email :email and a password :password
      * @Given there is a customer :name with an email :email and a password :password
      */
-    public function theStoreHasCustomerAccountWithEmailAndPassword($name, $email, $password)
+    public function theStoreHasCustomerAccountWithEmailAndPassword($name, $email, $password): void
     {
         $names = explode(' ', $name);
         $firstName = $names[0];
@@ -157,7 +157,7 @@ final class CustomerContext implements Context
     /**
      * @Given /^(the customer) subscribed to the newsletter$/
      */
-    public function theCustomerSubscribedToTheNewsletter(CustomerInterface $customer)
+    public function theCustomerSubscribedToTheNewsletter(CustomerInterface $customer): void
     {
         $customer->setSubscribedToNewsletter(true);
 
@@ -167,7 +167,7 @@ final class CustomerContext implements Context
     /**
      * @Given /^(this customer) verified their email$/
      */
-    public function theCustomerVerifiedTheirEmail(CustomerInterface $customer)
+    public function theCustomerVerifiedTheirEmail(CustomerInterface $customer): void
     {
         $customer->getUser()->setVerifiedAt(new \DateTime());
 
@@ -177,7 +177,7 @@ final class CustomerContext implements Context
     /**
      * @Given /^(the customer) belongs to (group "([^"]+)")$/
      */
-    public function theCustomerBelongsToGroup(CustomerInterface $customer, CustomerGroupInterface $customerGroup)
+    public function theCustomerBelongsToGroup(CustomerInterface $customer, CustomerGroupInterface $customerGroup): void
     {
         $customer->setGroup($customerGroup);
 
@@ -187,7 +187,7 @@ final class CustomerContext implements Context
     /**
      * @Given there is user :email with :country as shipping country
      */
-    public function thereIsUserIdentifiedByWithAsShippingCountry($email, CountryInterface $country)
+    public function thereIsUserIdentifiedByWithAsShippingCountry($email, CountryInterface $country): void
     {
         $customer = $this->createCustomerWithUserAccount($email, 'password123', true, 'John', 'Doe');
         $address = $this->addressFactory->createNew();
@@ -206,18 +206,17 @@ final class CustomerContext implements Context
      * @param string $email
      * @param string|null $firstName
      * @param string|null $lastName
-     * @param \DateTimeInterface|null $createdAt
      * @param string|null $phoneNumber
      *
      * @return CustomerInterface
      */
     private function createCustomer(
-        $email,
-        $firstName = null,
-        $lastName = null,
-        \DateTimeInterface $createdAt = null,
-        $phoneNumber = null
-    ) {
+        string $email,
+        ?string $firstName = null,
+        ?string $lastName = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $phoneNumber = null
+    ): CustomerInterface {
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
 
@@ -245,13 +244,13 @@ final class CustomerContext implements Context
      * @return CustomerInterface
      */
     private function createCustomerWithUserAccount(
-        $email,
-        $password,
-        $enabled = true,
-        $firstName = null,
-        $lastName = null,
-        $role = null
-    ) {
+        string $email,
+        string $password,
+        bool $enabled = true,
+        ?string $firstName = null,
+        ?string $lastName = null,
+        ?string $role = null
+    ): CustomerInterface {
         $user = $this->userFactory->createNew();
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();

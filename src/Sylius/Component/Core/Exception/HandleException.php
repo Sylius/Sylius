@@ -20,7 +20,7 @@ final class HandleException extends \RuntimeException
      * @param string $message
      * @param \Exception|null $previousException
      */
-    public function __construct(string $handlerName, string $message, ?\Exception $previousException = null)
+    public function __construct(string $handlerName, string $message, ?\Throwable $previousException = null)
     {
         parent::__construct(
             sprintf(

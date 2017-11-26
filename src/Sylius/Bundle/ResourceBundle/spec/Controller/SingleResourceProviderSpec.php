@@ -23,12 +23,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class SingleResourceProviderSpec extends ObjectBehavior
 {
-    function it_implements_single_resource_provider_interface(): void
+    public function it_implements_single_resource_provider_interface(): void
     {
         $this->shouldImplement(SingleResourceProviderInterface::class);
     }
 
-    function it_looks_for_specific_resource_with_id_by_default(
+    public function it_looks_for_specific_resource_with_id_by_default(
         RequestConfiguration $requestConfiguration,
         Request $request,
         ParameterBag $requestAttributes,
@@ -47,7 +47,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         $this->get($requestConfiguration, $repository)->shouldReturn(null);
     }
 
-    function it_can_find_specific_resource_with_id_by_default(
+    public function it_can_find_specific_resource_with_id_by_default(
         RequestConfiguration $requestConfiguration,
         Request $request,
         ParameterBag $requestAttributes,
@@ -67,7 +67,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
 
-    function it_can_find_specific_resource_with_slug_by_default(
+    public function it_can_find_specific_resource_with_slug_by_default(
         RequestConfiguration $requestConfiguration,
         Request $request,
         ParameterBag $requestAttributes,
@@ -87,7 +87,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
 
-    function it_can_find_specific_resource_with_custom_criteria(
+    public function it_can_find_specific_resource_with_custom_criteria(
         RequestConfiguration $requestConfiguration,
         Request $request,
         ParameterBag $requestAttributes,
@@ -106,7 +106,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
 
-    function it_can_find_specific_resource_with_merged_custom_criteria(
+    public function it_can_find_specific_resource_with_merged_custom_criteria(
         RequestConfiguration $requestConfiguration,
         Request $request,
         ParameterBag $requestAttributes,
@@ -126,7 +126,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
 
-    function it_can_find_specific_resource_with_merged_custom_criteria_overwriting_the_attributes(
+    public function it_can_find_specific_resource_with_merged_custom_criteria_overwriting_the_attributes(
         RequestConfiguration $requestConfiguration,
         Request $request,
         ParameterBag $requestAttributes,
@@ -145,7 +145,7 @@ final class SingleResourceProviderSpec extends ObjectBehavior
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
 
-    function it_uses_a_custom_method_if_configured(
+    public function it_uses_a_custom_method_if_configured(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         ResourceInterface $resource

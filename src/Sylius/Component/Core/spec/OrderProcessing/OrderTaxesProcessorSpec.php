@@ -30,7 +30,7 @@ use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
 final class OrderTaxesProcessorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ZoneProviderInterface $defaultTaxZoneProvider,
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry
@@ -38,12 +38,12 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $this->beConstructedWith($defaultTaxZoneProvider, $zoneMatcher, $strategyRegistry);
     }
 
-    function it_is_an_order_processor(): void
+    public function it_is_an_order_processor(): void
     {
         $this->shouldImplement(OrderProcessorInterface::class);
     }
 
-    function it_processes_taxes_using_a_supported_tax_calculation_strategy(
+    public function it_processes_taxes_using_a_supported_tax_calculation_strategy(
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,
         OrderInterface $order,
@@ -72,7 +72,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_throws_an_exception_if_there_are_no_supported_tax_calculation_strategies(
+    public function it_throws_an_exception_if_there_are_no_supported_tax_calculation_strategies(
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,
         OrderInterface $order,
@@ -98,7 +98,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $this->shouldThrow(UnsupportedTaxCalculationStrategyException::class)->during('process', [$order]);
     }
 
-    function it_does_not_process_taxes_if_there_is_no_order_item(OrderInterface $order): void
+    public function it_does_not_process_taxes_if_there_is_no_order_item(OrderInterface $order): void
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $order->getItems()->willReturn(new ArrayCollection([]));
@@ -109,7 +109,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_does_not_process_taxes_if_there_is_no_tax_zone(
+    public function it_does_not_process_taxes_if_there_is_no_tax_zone(
         ZoneProviderInterface $defaultTaxZoneProvider,
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,

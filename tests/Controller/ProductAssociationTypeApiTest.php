@@ -22,7 +22,7 @@ final class ProductAssociationTypeApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_creating_product_association_type_for_non_authenticated_user()
+    public function it_denies_creating_product_association_type_for_non_authenticated_user(): void
     {
         $this->client->request('POST', '/api/v1/product-association-types/');
 
@@ -33,7 +33,7 @@ final class ProductAssociationTypeApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_product_association_type_without_specifying_required_data()
+    public function it_does_not_allow_to_create_product_association_type_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -49,7 +49,7 @@ final class ProductAssociationTypeApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_product_association_type()
+    public function it_allows_to_create_product_association_type(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -78,7 +78,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_product_association_types_for_non_authenticated_user()
+    public function it_denies_getting_product_association_types_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/product-association-types/');
 
@@ -89,7 +89,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_product_association_types()
+    public function it_allows_to_get_product_association_types(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/product_association_types.yml');
@@ -105,7 +105,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_product_association_type_for_non_authenticated_user()
+    public function it_denies_getting_product_association_type_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/product-association-types/1');
 
@@ -116,7 +116,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_a_product_association_type_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_a_product_association_type_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -132,7 +132,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_product_association_type()
+    public function it_allows_to_get_product_association_type(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productAssociationTypes = $this->loadFixturesFromFile('resources/product_association_types.yml');
@@ -150,7 +150,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_updating_product_association_type_for_non_authenticated_user()
+    public function it_denies_updating_product_association_type_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', '/api/v1/product-association-types/1');
 
@@ -161,7 +161,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_update_product_association_type_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_update_product_association_type_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -177,7 +177,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_update_product_association_type_without_specifying_required_data()
+    public function it_does_not_allow_to_update_product_association_type_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -196,7 +196,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_product_association_type()
+    public function it_allows_to_update_product_association_type(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -229,7 +229,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_partially_update_product_association_type_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_partially_update_product_association_type_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -245,7 +245,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_partially_update_product_association_type()
+    public function it_allows_to_partially_update_product_association_type(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -275,7 +275,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_delete_product_association_type_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_delete_product_association_type_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -291,7 +291,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_product_association_type()
+    public function it_allows_to_delete_product_association_type(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productAssociationTypes = $this->loadFixturesFromFile('resources/product_association_types.yml');
@@ -315,11 +315,10 @@ EOT;
     }
 
     /**
-     * @param ProductAssociationTypeInterface $productAssociationType
      *
      * @return string
      */
-    private function getAssociationTypeUrl(ProductAssociationTypeInterface $productAssociationType)
+    private function getAssociationTypeUrl(ProductAssociationTypeInterface $productAssociationType): string
     {
         return 'api/v1/product-association-types/' . $productAssociationType->getCode();
     }

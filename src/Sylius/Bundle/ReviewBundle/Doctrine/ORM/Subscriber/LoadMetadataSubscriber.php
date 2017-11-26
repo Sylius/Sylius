@@ -70,7 +70,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
     }
 
     /**
-     * @param string $reviewableEntity
      * @param string $subject
      * @param ClassMetadata $reviewableEntityMetadata
      *
@@ -95,7 +94,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
     }
 
     /**
-     * @param string $reviewerEntity
      * @param ClassMetadata $reviewerEntityMetadata
      *
      * @return array
@@ -116,7 +114,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
     }
 
     /**
-     * @param string $reviewEntity
      *
      * @return array
      */

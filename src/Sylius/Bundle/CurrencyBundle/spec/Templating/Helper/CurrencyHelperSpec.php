@@ -19,17 +19,17 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class CurrencyHelperSpec extends ObjectBehavior
 {
-    function it_is_a_templating_helper(): void
+    public function it_is_a_templating_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_implements_a_currency_helper_interface(): void
+    public function it_implements_a_currency_helper_interface(): void
     {
         $this->shouldImplement(CurrencyHelperInterface::class);
     }
 
-    function it_transforms_a_currency_code_into_symbol(): void
+    public function it_transforms_a_currency_code_into_symbol(): void
     {
         $this->convertCurrencyCodeToSymbol('USD')->shouldReturn('$');
     }
