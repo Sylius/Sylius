@@ -6,6 +6,6 @@ sylius:
         admin:
             main:
                 catalog:
-                    attributes: מאפיינים
-                    options: אפשרויות
-                    taxons: קבוצות טקסונומיות
+                    attributes: 'מאפיינים'
+                    options: 'אפשרויות'
+                    taxons: 'קבוצות טקסונומיות'

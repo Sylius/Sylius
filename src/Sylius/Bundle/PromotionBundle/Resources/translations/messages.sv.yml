@@ -4,7 +4,7 @@
 sylius:
     form:
         promotion:
-            actions: Åtgärder
+            actions: 'Åtgärder'
             add_action: Lägg till åtgärd
             add_rule: Lägg till regel
             coupon_based: Kupongbaserad

@@ -201,7 +201,7 @@ sylius:
             timezone: tijdzone
             timezone_deprecated:
                 header: Verouderde tijdzone
-                help: 'Tijdzone %timezone% is verouderd. Fix je php.ini bestand (lijst met verouderde tijdzones http://php.net/manual/en/timezones.others.php).'
+                help: Tijdzone %timezone% is verouderd. Fix je php.ini bestand (lijst met verouderde tijdzones http://php.net/manual/en/timezones.others.php).
             version: PHP versie
             version_recommended: Aanbevolen PHP versie
     payum_gateway:

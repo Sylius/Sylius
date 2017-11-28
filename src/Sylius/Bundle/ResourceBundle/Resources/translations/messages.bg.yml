@@ -4,5 +4,5 @@
 sylius:
     form:
         collection:
-            add: Добави
-            delete: Изтрий
+            add: 'Добави'
+            delete: 'Изтрий'

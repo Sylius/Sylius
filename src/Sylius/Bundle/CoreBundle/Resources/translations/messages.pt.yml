@@ -26,7 +26,7 @@ sylius:
             contact_email: E-mail de Contacto
             currencies: Moedas
             currency_base: Moeda base
-            account_verification_required: É necessária a verificação da conta?
+            account_verification_required: 'É necessária a verificação da conta?'
             hostname: Nome do servidor
             locale_default: Localidade padrão
             locales: Linguagens
