@@ -4,7 +4,7 @@
 sylius:
     form:
         block:
-            body: İçerik
+            body: 'İçerik'
             id: ID
             title: Başlık
         cart:
@@ -12,13 +12,13 @@ sylius:
         checkout:
             addressing:
                 different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
-            payment_method: Ödeme Şekli
+            payment_method: 'Ödeme Şekli'
             shipping_method: Gönderim şekli
         promotion:
             channels: Kanallar
         promotion_action:
             add_product_configuration:
-                product: Ürün
+                product: 'Ürün'
         group:
             name: Ad
             roles: Roller
@@ -26,7 +26,7 @@ sylius:
             currencies: Para birimi
             currency_base: Ana Para Birimi
             locales: Diller
-            payment_methods: Ödeme Yöntemleri
+            payment_methods: 'Ödeme Yöntemleri'
             shipping_methods: Kargolama Yöntemleri
             tax_zone_default: Varsayılan vergi bölgesi
             taxonomies: Kategoriler
@@ -42,10 +42,10 @@ sylius:
             number: Sayı
             total_from: Kaynak
             total_to: Hedef
-            payment_state: Ödeme durumu
+            payment_state: 'Ödeme durumu'
             channel: Tüm kanallar
         page:
-            body: İçerik
+            body: 'İçerik'
             id: ID
             title: Başlık
         product:
@@ -89,7 +89,7 @@ sylius:
             groups: Gruplar
             roles: Roller
             last_name: Soyad
-            password: Şifre
+            password: 'Şifre'
             shipping_address: Teslimat adresi
         user_filter:
             query: Arama
@@ -103,7 +103,7 @@ sylius:
             width: Genişliği
         attribute:
             product_attribute_value:
-                attribute: Özellik
+                attribute: 'Özellik'
                 value: Değer
         guest:
             email: E-posta
@@ -111,7 +111,7 @@ sylius:
             name: Ad
         promotion_rule:
             product:
-                products: Ürünler
+                products: 'Ürünler'
             total_of_items_from_taxon:
                 amount: Miktar
         payment_method:
@@ -142,7 +142,7 @@ sylius:
         filesystem:
             header: dosya sistemi
             cache:
-                header: önbellek
+                header: 'önbellek'
             exists: mevcut
             logs:
                 header: loglar

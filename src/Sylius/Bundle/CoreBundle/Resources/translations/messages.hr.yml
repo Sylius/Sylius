@@ -11,7 +11,7 @@ sylius:
             coupon: Kupon
         checkout:
             addressing:
-                different_billing_address: Želim koristiti drugu adresu za račun.
+                different_billing_address: 'Želim koristiti drugu adresu za račun.'
             payment_method: Način plaćanja
             shipping_method: Vrsta dostave
         promotion:
@@ -100,7 +100,7 @@ sylius:
             price: Cijena
             sku: KOD (SKU)
             weight: Težina
-            width: Širina
+            width: 'Širina'
         attribute:
             product_attribute_value:
                 value: Vrijednost
@@ -165,5 +165,5 @@ sylius:
             timezone: Vremenska zona
             timezone_deprecated:
                 header: Zastarjela vremenska zona
-                help: 'Vremenska zona %timezone% je zastarjela. Ispravite vaš php.ini dokument (popis zastarjelih zona http://php.net/manual/en/timezones.others.php).'
+                help: Vremenska zona %timezone% je zastarjela. Ispravite vaš php.ini dokument (popis zastarjelih zona http://php.net/manual/en/timezones.others.php).
             version: Verzija PHP-a

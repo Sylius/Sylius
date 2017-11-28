@@ -28,7 +28,7 @@ sylius:
             contact_email: Email di contatto
             currencies: Valute
             currency_base: Valuta base
-            account_verification_required: È richiesta la verifica dell'account?
+            account_verification_required: 'È richiesta la verifica dell''account?'
             hostname: Hostname (Nome server)
             locale_default: Localizzazione predefinita
             locales: Localizzazioni
@@ -201,7 +201,7 @@ sylius:
             timezone: timezone
             timezone_deprecated:
                 header: Timezone deprecato
-                help: 'Il timezone %timezone% è deprecato. Correggi il tuo file php.ini (lista di timezone deprecati http://php.net/manual/en/timezones.others.php).'
+                help: Il timezone %timezone% è deprecato. Correggi il tuo file php.ini (lista di timezone deprecati http://php.net/manual/en/timezones.others.php).
             version: Versione PHP
             version_recommended: Versione PHP raccomandata
     payum_gateway:

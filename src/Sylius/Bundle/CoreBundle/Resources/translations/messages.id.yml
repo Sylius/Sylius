@@ -201,7 +201,7 @@ sylius:
             timezone: zona waktu
             timezone_deprecated:
                 header: Zona waktu kadaluarsa
-                help: 'Zona waktu %timezone% kadaluwarsa. Perbaiki php.ini anda (daftar zona waktu yang kadaluwarsa http://php.net/manual/en/timezones.others.php).'
+                help: Zona waktu %timezone% kadaluwarsa. Perbaiki php.ini anda (daftar zona waktu yang kadaluwarsa http://php.net/manual/en/timezones.others.php).
             version: Versi PHP
             version_recommended: Versi PHP yang direkomendasikan
     payum_gateway:

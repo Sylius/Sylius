@@ -201,7 +201,7 @@ sylius:
             timezone: tidszon
             timezone_deprecated:
                 header: Utgången tidzon
-                help: 'Tidszonen %timezone% är utgången. Åtgärda din php.ini fil (lista med utgångna tidzoner http://php.net/manual/en/timezones.others.php).'
+                help: Tidszonen %timezone% är utgången. Åtgärda din php.ini fil (lista med utgångna tidzoner http://php.net/manual/en/timezones.others.php).
             version: PHP-version
             version_recommended: Rekommenderad PHP-version
     payum_gateway:

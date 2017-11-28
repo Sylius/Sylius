@@ -5,4 +5,4 @@ sylius:
     form:
         collection:
             add: Pridėti
-            delete: Šalinti
+            delete: 'Šalinti'
