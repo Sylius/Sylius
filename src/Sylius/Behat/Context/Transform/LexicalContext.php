@@ -40,11 +40,9 @@ final class LexicalContext implements Context
     }
 
     /**
-     * @param string $price
-     *
      * @throws \InvalidArgumentException
      */
-    private function validatePriceString($price)
+    private function validatePriceString(string $price): void
     {
         if (!(bool) preg_match('/^\d+(?:\.\d{1,2})?$/', $price)) {
             throw new \InvalidArgumentException('Price string should not have more than 2 decimal digits.');

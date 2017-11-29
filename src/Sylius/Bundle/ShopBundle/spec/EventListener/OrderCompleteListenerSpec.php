@@ -20,12 +20,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class OrderCompleteListenerSpec extends ObjectBehavior
 {
-    function let(OrderEmailManagerInterface $orderEmailManager): void
+    public function let(OrderEmailManagerInterface $orderEmailManager): void
     {
         $this->beConstructedWith($orderEmailManager);
     }
 
-    function it_sends_a_confirmation_email(
+    public function it_sends_a_confirmation_email(
         OrderEmailManagerInterface $orderEmailManager,
         GenericEvent $event,
         OrderInterface $order
@@ -37,7 +37,7 @@ final class OrderCompleteListenerSpec extends ObjectBehavior
         $this->sendConfirmationEmail($event);
     }
 
-    function it_throws_an_invalid_argument_exception_if_an_event_subject_is_not_an_order_instance(
+    public function it_throws_an_invalid_argument_exception_if_an_event_subject_is_not_an_order_instance(
         GenericEvent $event,
         \stdClass $order
     ): void {

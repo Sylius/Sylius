@@ -20,7 +20,7 @@ final class ShipmentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_denies_getting_a_shipment_for_non_authenticated_user()
+    public function it_denies_getting_a_shipment_for_non_authenticated_user(): void
     {
         $this->client->request('GET', $this->getShipmentUrl(-1));
 
@@ -31,7 +31,7 @@ final class ShipmentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_a_shipment_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_a_shipment_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -44,7 +44,7 @@ final class ShipmentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_shipment()
+    public function it_allows_to_get_shipment(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -65,7 +65,7 @@ final class ShipmentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_denies_getting_a_collection_of_shipments_for_non_authenticated_user()
+    public function it_denies_getting_a_collection_of_shipments_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/shipments/');
 
@@ -76,7 +76,7 @@ final class ShipmentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_a_collection_of_shipments()
+    public function it_allows_to_get_a_collection_of_shipments(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -91,20 +91,16 @@ final class ShipmentApiTest extends CheckoutApiTestCase
 
     /**
      * @param mixed $orderId
-     *
-     * @return string
      */
-    private function getOrderUrl($orderId)
+    private function getOrderUrl($orderId): string
     {
         return '/api/v1/orders/' . $orderId;
     }
 
     /**
      * @param mixed $shipmentId
-     *
-     * @return string
      */
-    private function getShipmentUrl($shipmentId)
+    private function getShipmentUrl($shipmentId): string
     {
         return '/api/v1/shipments/' . $shipmentId;
     }

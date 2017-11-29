@@ -44,7 +44,7 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPosition($name, $position)
+    public function setPosition($name, $position): void
     {
         /** @var NodeElement $productVariantsRow */
         $productVariantsRow = $this->getElement('table')->find('css', sprintf('tbody > tr:contains("%s")', $name));
@@ -55,7 +55,7 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
         $productVariantPosition->setValue($position);
     }
 
-    public function savePositions()
+    public function savePositions(): void
     {
         $this->getElement('save_configuration_button')->press();
 

@@ -29,7 +29,6 @@ final class RecursiveFileLocator implements FileLocatorInterface
     private $paths;
 
     /**
-     * @param FinderFactoryInterface $finderFactory
      * @param array|string[] $paths An array of paths where to look for resources
      */
     public function __construct(FinderFactoryInterface $finderFactory, array $paths)
@@ -54,11 +53,6 @@ final class RecursiveFileLocator implements FileLocatorInterface
         return iterator_to_array($this->doLocateFilesNamed($name));
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Generator
-     */
     private function doLocateFilesNamed(string $name): \Generator
     {
         $this->assertNameIsNotEmpty($name);
@@ -92,9 +86,6 @@ final class RecursiveFileLocator implements FileLocatorInterface
         }
     }
 
-    /**
-     * @param string $name
-     */
     private function assertNameIsNotEmpty(string $name): void
     {
         if (null === $name || '' === $name) {

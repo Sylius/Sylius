@@ -38,7 +38,7 @@ final class ChannelApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_channels_list_when_access_is_denied()
+    public function it_does_not_allow_to_show_channels_list_when_access_is_denied(): void
     {
         $this->loadFixturesFromFile('resources/channels.yml');
 
@@ -51,7 +51,7 @@ final class ChannelApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_indexing_channels()
+    public function it_allows_indexing_channels(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/channels.yml');
@@ -65,7 +65,7 @@ final class ChannelApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_getting_channel_for_non_authenticated_user()
+    public function it_denies_getting_channel_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/channels/none');
 
@@ -76,7 +76,7 @@ final class ChannelApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_channel_when_it_does_not_exist()
+    public function it_does_not_allow_to_show_channel_when_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -89,7 +89,7 @@ final class ChannelApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_channel()
+    public function it_allows_showing_channel(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $channels = $this->loadFixturesFromFile('resources/channels.yml');
@@ -102,12 +102,7 @@ final class ChannelApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'channel/show_response', Response::HTTP_OK);
     }
 
-    /**
-     * @param ChannelInterface $channel
-     *
-     * @return string
-     */
-    private function getChannelUrl(ChannelInterface $channel)
+    private function getChannelUrl(ChannelInterface $channel): string
     {
         return '/api/v1/channels/' . $channel->getCode();
     }

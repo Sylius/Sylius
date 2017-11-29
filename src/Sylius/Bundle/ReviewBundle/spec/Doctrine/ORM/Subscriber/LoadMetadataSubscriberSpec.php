@@ -23,7 +23,7 @@ use Prophecy\Argument;
 
 final class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith([
             'reviewable' => [
@@ -42,17 +42,17 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         ]);
     }
 
-    function it_implements_event_subscriber(): void
+    public function it_implements_event_subscriber(): void
     {
         $this->shouldImplement(EventSubscriber::class);
     }
 
-    function it_has_subscribed_events(): void
+    public function it_has_subscribed_events(): void
     {
         $this->getSubscribedEvents()->shouldReturn(['loadClassMetadata']);
     }
 
-    function it_maps_proper_relations_for_review_model(
+    public function it_maps_proper_relations_for_review_model(
         ClassMetadataFactory $metadataFactory,
         ClassMetadataInfo $classMetadataInfo,
         ClassMetadataInfo $metadata,
@@ -95,7 +95,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($eventArguments);
     }
 
-    function it_maps_proper_relations_for_reviewable_model(
+    public function it_maps_proper_relations_for_reviewable_model(
         ClassMetadataFactory $metadataFactory,
         ClassMetadataInfo $metadata,
         EntityManager $entityManager,
@@ -116,7 +116,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($eventArguments);
     }
 
-    function it_skips_mapping_configuration_if_metadata_name_is_not_different(
+    public function it_skips_mapping_configuration_if_metadata_name_is_not_different(
         ClassMetadataFactory $metadataFactory,
         ClassMetadataInfo $metadata,
         EntityManager $entityManager,

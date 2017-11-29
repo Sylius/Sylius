@@ -51,8 +51,6 @@ interface MetadataInterface
     public function getTemplatesNamespace(): ?string;
 
     /**
-     * @param string $name
-     *
      * @return string|array
      *
      * @throws \InvalidArgumentException

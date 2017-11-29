@@ -33,10 +33,6 @@ final class ResourceToIdentifierType extends AbstractType
      */
     private $metadata;
 
-    /**
-     * @param RepositoryInterface $repository
-     * @param MetadataInterface $metadata
-     */
     public function __construct(RepositoryInterface $repository, MetadataInterface $metadata)
     {
         $this->repository = $repository;

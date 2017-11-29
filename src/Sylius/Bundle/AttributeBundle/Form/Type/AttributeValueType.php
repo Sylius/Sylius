@@ -48,14 +48,6 @@ abstract class AttributeValueType extends AbstractResourceType
      */
     protected $formTypeRegistry;
 
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param string $attributeChoiceType
-     * @param RepositoryInterface $attributeRepository
-     * @param RepositoryInterface $localeRepository
-     * @param FormTypeRegistryInterface $formTypeTypeRegistry
-     */
     public function __construct(
         string $dataClass,
         array $validationGroups,
@@ -80,7 +72,7 @@ abstract class AttributeValueType extends AbstractResourceType
         $builder
             ->add('localeCode', LocaleChoiceType::class)
             ->add('attribute', $this->attributeChoiceType)
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
                 $attributeValue = $event->getData();
 
                 if (!$attributeValue instanceof AttributeValueInterface) {
@@ -96,7 +88,7 @@ abstract class AttributeValueType extends AbstractResourceType
 
                 $this->addValueField($event->getForm(), $attribute, $localeCode);
             })
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
                 $attributeValue = $event->getData();
 
                 if (!isset($attributeValue['attribute'])) {
@@ -118,8 +110,6 @@ abstract class AttributeValueType extends AbstractResourceType
     }
 
     /**
-     * @param FormInterface $form
-     * @param AttributeInterface $attribute
      * @param string|null $localeCode
      */
     protected function addValueField(

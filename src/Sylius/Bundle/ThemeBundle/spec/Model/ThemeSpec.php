@@ -21,48 +21,48 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 
 final class ThemeSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith('theme/name', '/theme/path');
     }
 
-    function it_implements_theme_interface(): void
+    public function it_implements_theme_interface(): void
     {
         $this->shouldImplement(ThemeInterface::class);
     }
 
-    function its_name_cannot_have_underscores(): void
+    public function its_name_cannot_have_underscores(): void
     {
         $this->beConstructedWith('first_theme/name', '/theme/path');
 
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
-    function it_has_immutable_name(): void
+    public function it_has_immutable_name(): void
     {
         $this->getName()->shouldReturn('theme/name');
     }
 
-    function its_name_might_contain_numbers(): void
+    public function its_name_might_contain_numbers(): void
     {
         $this->beConstructedWith('1e/e7', '/theme/path');
 
         $this->getName()->shouldReturn('1e/e7');
     }
 
-    function its_name_might_contain_uppercase_characters(): void
+    public function its_name_might_contain_uppercase_characters(): void
     {
         $this->beConstructedWith('AbC/DeF', '/theme/path');
 
         $this->getName()->shouldReturn('AbC/DeF');
     }
 
-    function it_has_immutable_path(): void
+    public function it_has_immutable_path(): void
     {
         $this->getPath()->shouldReturn('/theme/path');
     }
 
-    function it_has_title(): void
+    public function it_has_title(): void
     {
         $this->getTitle()->shouldReturn(null);
 
@@ -70,7 +70,7 @@ final class ThemeSpec extends ObjectBehavior
         $this->getTitle()->shouldReturn('Foo Bar');
     }
 
-    function it_has_description(): void
+    public function it_has_description(): void
     {
         $this->getDescription()->shouldReturn(null);
 
@@ -78,7 +78,7 @@ final class ThemeSpec extends ObjectBehavior
         $this->getDescription()->shouldReturn('Lorem ipsum.');
     }
 
-    function it_has_authors(): void
+    public function it_has_authors(): void
     {
         $themeAuthor = new ThemeAuthor();
 
@@ -91,7 +91,7 @@ final class ThemeSpec extends ObjectBehavior
         $this->getAuthors()->shouldHaveCount(0);
     }
 
-    function it_has_parents(ThemeInterface $theme): void
+    public function it_has_parents(ThemeInterface $theme): void
     {
         $this->getParents()->shouldHaveCount(0);
 
@@ -102,7 +102,7 @@ final class ThemeSpec extends ObjectBehavior
         $this->getParents()->shouldHaveCount(0);
     }
 
-    function it_has_screenshots(): void
+    public function it_has_screenshots(): void
     {
         $themeScreenshot = new ThemeScreenshot('some path');
 

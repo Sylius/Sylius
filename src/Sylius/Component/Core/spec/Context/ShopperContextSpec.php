@@ -24,7 +24,7 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 final class ShopperContextSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ChannelContextInterface $channelContext,
         CurrencyContextInterface $currencyContext,
         LocaleContextInterface $localeContext,
@@ -33,12 +33,12 @@ final class ShopperContextSpec extends ObjectBehavior
         $this->beConstructedWith($channelContext, $currencyContext, $localeContext, $customerContext);
     }
 
-    function it_implements_a_shopper_context_interface(): void
+    public function it_implements_a_shopper_context_interface(): void
     {
         $this->shouldImplement(ShopperContextInterface::class);
     }
 
-    function it_gets_a_current_channel_from_a_context(
+    public function it_gets_a_current_channel_from_a_context(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
     ): void {
@@ -47,21 +47,21 @@ final class ShopperContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($channel);
     }
 
-    function it_gets_a_current_currency_code_from_a_context(CurrencyContextInterface $currencyContext): void
+    public function it_gets_a_current_currency_code_from_a_context(CurrencyContextInterface $currencyContext): void
     {
         $currencyContext->getCurrencyCode()->willReturn('USD');
 
         $this->getCurrencyCode()->shouldReturn('USD');
     }
 
-    function it_gets_a_current_locale_code_from_a_context(LocaleContextInterface $localeContext): void
+    public function it_gets_a_current_locale_code_from_a_context(LocaleContextInterface $localeContext): void
     {
         $localeContext->getLocaleCode()->willReturn('en_US');
 
         $this->getLocaleCode()->shouldReturn('en_US');
     }
 
-    function it_gets_a_current_customer_from_a_context(
+    public function it_gets_a_current_customer_from_a_context(
         CustomerContextInterface $customerContext,
         CustomerInterface $customer
     ): void {

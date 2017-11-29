@@ -35,10 +35,6 @@ final class PaymentMethodChoiceType extends AbstractType
      */
     private $paymentMethodRepository;
 
-    /**
-     * @param PaymentMethodsResolverInterface $paymentMethodsResolver
-     * @param RepositoryInterface $paymentMethodRepository
-     */
     public function __construct(
         PaymentMethodsResolverInterface $paymentMethodsResolver,
         RepositoryInterface $paymentMethodRepository

@@ -23,12 +23,12 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 {
-    function it_implements_Sylius_shipping_method_eligibility_checker_interface(): void
+    public function it_implements_Sylius_shipping_method_eligibility_checker_interface(): void
     {
         $this->shouldImplement(ShippingMethodEligibilityCheckerInterface::class);
     }
 
-    function it_approves_category_requirement_if_categories_match(
+    public function it_approves_category_requirement_if_categories_match(
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory,
@@ -43,7 +43,7 @@ final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $shippingMethod)->shouldReturn(true);
     }
 
-    function it_approves_category_requirement_if_no_category_is_required(
+    public function it_approves_category_requirement_if_no_category_is_required(
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $shippingMethod
     ): void {
@@ -52,7 +52,7 @@ final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $shippingMethod)->shouldReturn(true);
     }
 
-    function it_denies_category_requirement_if_categories_do_not_match(
+    public function it_denies_category_requirement_if_categories_do_not_match(
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory,

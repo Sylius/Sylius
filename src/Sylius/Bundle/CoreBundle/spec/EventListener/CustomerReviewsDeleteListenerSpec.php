@@ -20,12 +20,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class CustomerReviewsDeleteListenerSpec extends ObjectBehavior
 {
-    function let(ReviewerReviewsRemoverInterface $reviewerReviewsRemover): void
+    public function let(ReviewerReviewsRemoverInterface $reviewerReviewsRemover): void
     {
         $this->beConstructedWith($reviewerReviewsRemover);
     }
 
-    function it_removes_soft_deleted_customer_reviews_and_recalculates_their_product_ratings(
+    public function it_removes_soft_deleted_customer_reviews_and_recalculates_their_product_ratings(
         ReviewerReviewsRemoverInterface $reviewerReviewsRemover,
         GenericEvent $event,
         ReviewerInterface $author
@@ -36,7 +36,7 @@ final class CustomerReviewsDeleteListenerSpec extends ObjectBehavior
         $this->removeCustomerReviews($event);
     }
 
-    function it_throws_exception_if_event_subject_is_not_customer_object(GenericEvent $event): void
+    public function it_throws_exception_if_event_subject_is_not_customer_object(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
 

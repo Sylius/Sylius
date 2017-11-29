@@ -28,7 +28,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeRatio($ratio)
+    public function changeRatio($ratio): void
     {
         $this->getElement('ratio')->setValue($ratio);
     }

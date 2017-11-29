@@ -29,7 +29,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyEmail($email)
+    public function specifyEmail($email): void
     {
         $this->getDocument()->fillField('Email', $email);
     }
@@ -37,12 +37,12 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyMessage($message)
+    public function specifyMessage($message): void
     {
         $this->getDocument()->fillField('Message', $message);
     }
 
-    public function send()
+    public function send(): void
     {
         $this->getDocument()->pressButton('Send');
     }

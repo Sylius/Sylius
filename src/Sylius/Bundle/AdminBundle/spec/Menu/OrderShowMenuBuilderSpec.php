@@ -26,7 +26,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class OrderShowMenuBuilderSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher,
         StateMachineFactoryInterface $stateMachineFactory
@@ -34,7 +34,7 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
         $this->beConstructedWith($factory, $eventDispatcher, $stateMachineFactory);
     }
 
-    function it_creates_an_order_show_menu(
+    public function it_creates_an_order_show_menu(
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher,
         StateMachineFactoryInterface $stateMachineFactory,
@@ -82,7 +82,7 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
         $this->createMenu(['order' => $order])->shouldReturn($menu);
     }
 
-    function it_creates_an_order_show_menu_when_cancel_transition_is_impossible(
+    public function it_creates_an_order_show_menu_when_cancel_transition_is_impossible(
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher,
         StateMachineFactoryInterface $stateMachineFactory,
@@ -117,7 +117,7 @@ final class OrderShowMenuBuilderSpec extends ObjectBehavior
         $this->createMenu(['order' => $order])->shouldReturn($menu);
     }
 
-    function it_returns_an_empty_order_show_menu_when_there_is_no_order_in_options(
+    public function it_returns_an_empty_order_show_menu_when_there_is_no_order_in_options(
         FactoryInterface $factory,
         ItemInterface $menu
     ): void {

@@ -49,9 +49,6 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         $this->variant = $variant;
     }
 
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface
     {
         return $this->variant->getProduct();

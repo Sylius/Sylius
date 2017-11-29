@@ -20,28 +20,28 @@ use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
 
 final class ShipmentSpec extends ObjectBehavior
 {
-    function it_implements_a_shipment_interface(): void
+    public function it_implements_a_shipment_interface(): void
     {
         $this->shouldImplement(ShipmentInterface::class);
     }
 
-    function it_extends_a_base_shipment(): void
+    public function it_extends_a_base_shipment(): void
     {
         $this->shouldHaveType(BaseShipment::class);
     }
 
-    function it_does_not_belong_to_an_order_by_default(): void
+    public function it_does_not_belong_to_an_order_by_default(): void
     {
         $this->getOrder()->shouldReturn(null);
     }
 
-    function it_allows_attaching_itself_to_an_order(OrderInterface $order): void
+    public function it_allows_attaching_itself_to_an_order(OrderInterface $order): void
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);
     }
 
-    function it_allows_detaching_itself_from_an_order(OrderInterface $order): void
+    public function it_allows_detaching_itself_from_an_order(OrderInterface $order): void
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);

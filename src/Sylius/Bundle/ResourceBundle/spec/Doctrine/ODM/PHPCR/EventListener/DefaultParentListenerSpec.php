@@ -26,12 +26,12 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  */
 final class DefaultParentListenerSpec extends ObjectBehavior
 {
-    function let(DocumentManagerInterface $documentManager): void
+    public function let(DocumentManagerInterface $documentManager): void
     {
         $this->beConstructedWith($documentManager, '/path/to');
     }
 
-    function it_should_throw_an_exception_if_no_parent_mapping_exists(
+    public function it_should_throw_an_exception_if_no_parent_mapping_exists(
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
@@ -50,7 +50,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         );
     }
 
-    function it_should_throw_an_exception_if_the_parent_does_not_exist_and_autocreate_is_false(
+    public function it_should_throw_an_exception_if_the_parent_does_not_exist_and_autocreate_is_false(
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
@@ -75,7 +75,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         );
     }
 
-    function it_should_set_the_parent_document(
+    public function it_should_set_the_parent_document(
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
@@ -95,7 +95,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         $this->onPreCreate($event);
     }
 
-    function it_should_autocreate_and_set_the_parent_document(
+    public function it_should_autocreate_and_set_the_parent_document(
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager,
@@ -131,7 +131,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         $this->onPreCreate($event);
     }
 
-    function it_should_set_the_parent_document_if_force_is_true_and_the_parent_is_already_set(
+    public function it_should_set_the_parent_document_if_force_is_true_and_the_parent_is_already_set(
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
@@ -160,7 +160,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         $this->onPreCreate($event);
     }
 
-    function it_should_return_early_if_force_is_false_and_subject_already_has_a_parent(
+    public function it_should_return_early_if_force_is_false_and_subject_already_has_a_parent(
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager

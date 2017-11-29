@@ -31,7 +31,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         IntegerDistributorInterface $distributor,
@@ -40,12 +40,12 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $this->beConstructedWith($calculator, $adjustmentsFactory, $distributor, $taxRateResolver);
     }
 
-    function it_implements_an_order_shipment_taxes_applicator_interface(): void
+    public function it_implements_an_order_shipment_taxes_applicator_interface(): void
     {
         $this->shouldImplement(OrderTaxesApplicatorInterface::class);
     }
 
-    function it_applies_taxes_on_units_based_on_item_total_and_rate(
+    public function it_applies_taxes_on_units_based_on_item_total_and_rate(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         IntegerDistributorInterface $distributor,
@@ -94,7 +94,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
-    function it_throws_an_invalid_argument_exception_if_order_item_has_0_quantity(
+    public function it_throws_an_invalid_argument_exception_if_order_item_has_0_quantity(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ZoneInterface $zone
@@ -107,7 +107,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('apply', [$order, $zone]);
     }
 
-    function it_does_nothing_if_tax_rate_cannot_be_resolved(
+    public function it_does_nothing_if_tax_rate_cannot_be_resolved(
         TaxRateResolverInterface $taxRateResolver,
         Collection $items,
         \Iterator $iterator,
@@ -135,7 +135,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
-    function it_does_not_apply_taxes_with_amount_0(
+    public function it_does_not_apply_taxes_with_amount_0(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         IntegerDistributorInterface $distributor,

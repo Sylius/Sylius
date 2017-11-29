@@ -34,10 +34,6 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
      */
     private $targetState;
 
-    /**
-     * @param OrderPaymentProviderInterface $orderPaymentProvider
-     * @param string $targetState
-     */
     public function __construct(
         OrderPaymentProviderInterface $orderPaymentProvider,
         string $targetState = PaymentInterface::STATE_CART

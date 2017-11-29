@@ -44,12 +44,6 @@ final class NotificationController
      */
     private $environment;
 
-    /**
-     * @param ClientInterface $client
-     * @param MessageFactory $messageFactory
-     * @param string $hubUri
-     * @param string $environment
-     */
     public function __construct(
         ClientInterface $client,
         MessageFactory $messageFactory,
@@ -63,8 +57,6 @@ final class NotificationController
     }
 
     /**
-     * @param Request $request
-     *
      * @return JsonResponse
      */
     public function getVersionAction(Request $request): JsonResponse

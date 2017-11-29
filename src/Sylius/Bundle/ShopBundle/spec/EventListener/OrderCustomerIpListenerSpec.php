@@ -22,12 +22,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class OrderCustomerIpListenerSpec extends ObjectBehavior
 {
-    function let(IpAssignerInterface $ipAssigner, RequestStack $requestStack): void
+    public function let(IpAssignerInterface $ipAssigner, RequestStack $requestStack): void
     {
         $this->beConstructedWith($ipAssigner, $requestStack);
     }
 
-    function it_uses_assigner_to_assign_customer_ip_to_order(
+    public function it_uses_assigner_to_assign_customer_ip_to_order(
         GenericEvent $event,
         IpAssignerInterface $ipAssigner,
         OrderInterface $order,
@@ -42,7 +42,7 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
         $this->assignCustomerIpToOrder($event);
     }
 
-    function it_throws_exception_if_event_subject_is_not_order(GenericEvent $event): void
+    public function it_throws_exception_if_event_subject_is_not_order(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject');
 

@@ -26,7 +26,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPosition($position)
+    public function specifyPosition($position): void
     {
         $this->getDocument()->fillField('Position', $position);
     }
@@ -34,7 +34,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameIt($name, $language)
+    public function nameIt($name, $language): void
     {
         $this->getDocument()->fillField(sprintf('sylius_shipping_method_translations_%s_name', $language), $name);
     }
@@ -42,7 +42,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function describeIt($description, $languageCode)
+    public function describeIt($description, $languageCode): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_shipping_method_translations_%s_description', $languageCode), $description
@@ -52,7 +52,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyAmountForChannel($channelCode, $amount)
+    public function specifyAmountForChannel($channelCode, $amount): void
     {
         $this->getElement('amount', ['%channelCode%' => $channelCode])->setValue($amount);
     }
@@ -60,7 +60,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseZone($name)
+    public function chooseZone($name): void
     {
         $this->getDocument()->selectFieldOption('Zone', $name);
     }
@@ -68,7 +68,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseCalculator($name)
+    public function chooseCalculator($name): void
     {
         $this->getDocument()->selectFieldOption('Calculator', $name);
     }
@@ -76,7 +76,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function checkChannel($channelName)
+    public function checkChannel($channelName): void
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
             $this->getElement('channel', ['%channel%' => $channelName])->click();
@@ -126,14 +126,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @param string $element
-     * @param array $parameters
-     *
      * @return \Behat\Mink\Element\NodeElement|null
      *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement($element, array $parameters = [])
+    private function getFieldElement(string $element, array $parameters = []): ?\Behat\Mink\Element\NodeElement
     {
         $element = $this->getElement(StringInflector::nameToCode($element), $parameters);
         while (null !== $element && !$element->hasClass('field')) {

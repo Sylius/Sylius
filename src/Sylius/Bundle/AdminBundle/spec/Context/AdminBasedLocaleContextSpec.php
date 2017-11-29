@@ -23,24 +23,24 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 final class AdminBasedLocaleContextSpec extends ObjectBehavior
 {
-    function let(TokenStorageInterface $tokenStorage): void
+    public function let(TokenStorageInterface $tokenStorage): void
     {
         $this->beConstructedWith($tokenStorage);
     }
 
-    function it_implements_locale_context_interface(): void
+    public function it_implements_locale_context_interface(): void
     {
         $this->shouldImplement(LocaleContextInterface::class);
     }
 
-    function it_throws_locale_not_found_exception_when_there_is_no_token(TokenStorageInterface $tokenStorage): void
+    public function it_throws_locale_not_found_exception_when_there_is_no_token(TokenStorageInterface $tokenStorage): void
     {
         $tokenStorage->getToken()->willReturn(null);
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
-    function it_throws_locale_not_found_exception_when_there_is_no_user_in_the_token(
+    public function it_throws_locale_not_found_exception_when_there_is_no_user_in_the_token(
         TokenStorageInterface $tokenStorage,
         TokenInterface $token
     ): void {
@@ -50,7 +50,7 @@ final class AdminBasedLocaleContextSpec extends ObjectBehavior
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
-    function it_throws_locale_not_found_exception_when_the_user_taken_from_token_is_not_an_admin(
+    public function it_throws_locale_not_found_exception_when_the_user_taken_from_token_is_not_an_admin(
         TokenStorageInterface $tokenStorage,
         TokenInterface $token,
         UserInterface $user
@@ -61,7 +61,7 @@ final class AdminBasedLocaleContextSpec extends ObjectBehavior
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
-    function it_returns_locale_of_currently_logged_admin_user(
+    public function it_returns_locale_of_currently_logged_admin_user(
         TokenStorageInterface $tokenStorage,
         TokenInterface $token,
         AdminUserInterface $admin

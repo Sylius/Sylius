@@ -24,17 +24,17 @@ use Symfony\Component\Routing\RouteCollection;
 
 final class ResourceLoaderSpec extends ObjectBehavior
 {
-    function let(RegistryInterface $resourceRegistry, RouteFactoryInterface $routeFactory): void
+    public function let(RegistryInterface $resourceRegistry, RouteFactoryInterface $routeFactory): void
     {
         $this->beConstructedWith($resourceRegistry, $routeFactory);
     }
 
-    function it_is_a_Symfony_routing_loader(): void
+    public function it_is_a_Symfony_routing_loader(): void
     {
         $this->shouldImplement(LoaderInterface::class);
     }
 
-    function it_processes_configuration_and_throws_exception_if_invalid(): void
+    public function it_processes_configuration_and_throws_exception_if_invalid(): void
     {
         $configuration =
 <<<EOT
@@ -47,7 +47,7 @@ EOT;
             ->during('load', [$configuration, 'sylius.resource']);
     }
 
-    function it_throws_an_exception_if_invalid_resource_configured(RegistryInterface $resourceRegistry): void
+    public function it_throws_an_exception_if_invalid_resource_configured(RegistryInterface $resourceRegistry): void
     {
         $resourceRegistry->get('sylius.foo')->willThrow(new \InvalidArgumentException());
 
@@ -61,7 +61,7 @@ EOT;
             ->during('load', [$configuration, 'sylius.resource']);
     }
 
-    function it_generates_routing_based_on_resource_configuration(
+    public function it_generates_routing_based_on_resource_configuration(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -166,7 +166,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_generates_urlized_paths_for_resources_with_multiple_words_in_name(
+    public function it_generates_urlized_paths_for_resources_with_multiple_words_in_name(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -271,7 +271,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_generates_urlized_paths_for_resources_with_custom_identifier(
+    public function it_generates_urlized_paths_for_resources_with_custom_identifier(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -404,7 +404,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_generates_routing_with_custom_path_if_specified(
+    public function it_generates_routing_with_custom_path_if_specified(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -510,7 +510,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_generates_routing_with_custom_form_if_specified(
+    public function it_generates_routing_with_custom_form_if_specified(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -618,7 +618,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_generates_routing_for_a_section(
+    public function it_generates_routing_for_a_section(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -730,7 +730,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_generates_routing_with_custom_templates_namespace(
+    public function it_generates_routing_with_custom_templates_namespace(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -840,7 +840,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_excludes_specific_routes_if_configured(
+    public function it_excludes_specific_routes_if_configured(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -902,7 +902,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_includes_only_specific_routes_if_configured(
+    public function it_includes_only_specific_routes_if_configured(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -951,7 +951,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_throws_an_exception_if_both_excluded_and_includes_routes_configured(): void
+    public function it_throws_an_exception_if_both_excluded_and_includes_routes_configured(): void
     {
         $configuration =
 <<<EOT
@@ -965,7 +965,7 @@ EOT;
             ->during('load', [$configuration, 'sylius.resource']);
     }
 
-    function it_generates_routing_with_custom_redirect_if_specified(
+    public function it_generates_routing_with_custom_redirect_if_specified(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -1073,7 +1073,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_generates_api_routing_based_on_resource_configuration(
+    public function it_generates_api_routing_based_on_resource_configuration(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -1165,7 +1165,7 @@ EOT;
         $this->load($configuration, 'sylius.resource_api')->shouldReturn($routeCollection);
     }
 
-    function it_configures_grid_for_index_action_if_specified(
+    public function it_configures_grid_for_index_action_if_specified(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -1216,7 +1216,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_generates_routing_with_custom_variables(
+    public function it_generates_routing_with_custom_variables(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -1348,7 +1348,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_generates_routing_with_custom_permission(
+    public function it_generates_routing_with_custom_permission(
         RegistryInterface $resourceRegistry,
         MetadataInterface $metadata,
         RouteFactoryInterface $routeFactory,
@@ -1452,7 +1452,7 @@ EOT;
         $this->load($configuration, 'sylius.resource')->shouldReturn($routeCollection);
     }
 
-    function it_supports_sylius_resource_type(): void
+    public function it_supports_sylius_resource_type(): void
     {
         $this->supports('sylius.product', 'sylius.resource')->shouldReturn(true);
         $this->supports('sylius.product', 'sylius.resource_api')->shouldReturn(true);

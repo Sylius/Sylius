@@ -27,7 +27,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     /**
      * {@inheritdoc}
      */
-    public function nameItIn($name, $localeCode)
+    public function nameItIn($name, $localeCode): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_translations_%s_name', $localeCode), $name
@@ -41,7 +41,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     /**
      * {@inheritdoc}
      */
-    public function selectOption($optionName)
+    public function selectOption($optionName): void
     {
         $this->getDocument()->selectFieldOption('Options', $optionName);
     }
@@ -49,7 +49,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     /**
      * {@inheritdoc}
      */
-    public function attachImage($path, $type = null)
+    public function attachImage($path, $type = null): void
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -79,10 +79,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         ]);
     }
 
-    /**
-     * @param string $tabName
-     */
-    private function clickTabIfItsNotActive($tabName)
+    private function clickTabIfItsNotActive(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
         if (!$attributesTab->hasClass('active')) {
@@ -93,7 +90,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     /**
      * @return NodeElement
      */
-    private function getLastImageElement()
+    private function getLastImageElement(): NodeElement
     {
         $images = $this->getElement('images');
         $items = $images->findAll('css', 'div[data-form-collection="item"]');

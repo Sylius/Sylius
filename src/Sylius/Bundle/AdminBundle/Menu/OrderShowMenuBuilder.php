@@ -40,8 +40,6 @@ final class OrderShowMenuBuilder
     private $stateMachineFactory;
 
     /**
-     * @param FactoryInterface $factory
-     * @param EventDispatcherInterface $eventDispatcher
      * @param StateMachineFactoryInterface $stateMachineFactory,
      */
     public function __construct(
@@ -54,11 +52,6 @@ final class OrderShowMenuBuilder
         $this->stateMachineFactory = $stateMachineFactory;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return ItemInterface
-     */
     public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');

@@ -24,8 +24,6 @@ use Webmozart\Assert\Assert;
 abstract class DiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
     /**
-     * @param array $configuration
-     *
      * @throws \InvalidArgumentException
      */
     abstract protected function isConfigurationValid(array $configuration): void;
@@ -47,10 +45,6 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
     }
 
     /**
-     * @param PromotionSubjectInterface $subject
-     *
-     * @return bool
-     *
      * @throws \InvalidArgumentException
      */
     protected function isSubjectValid(PromotionSubjectInterface $subject): bool
@@ -60,10 +54,6 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
         return 0 !== $subject->countItems();
     }
 
-    /**
-     * @param OrderItemUnitInterface $unit
-     * @param PromotionInterface $promotion
-     */
     private function removeUnitOrderPromotionAdjustmentsByOrigin(
         OrderItemUnitInterface $unit,
         PromotionInterface $promotion

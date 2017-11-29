@@ -24,10 +24,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
  */
 final class DefaultUsernameORMListener
 {
-    /**
-     * @param OnFlushEventArgs $onFlushEventArgs
-     */
-    public function onFlush(OnFlushEventArgs $onFlushEventArgs)
+    public function onFlush(OnFlushEventArgs $onFlushEventArgs): void
     {
         $entityManager = $onFlushEventArgs->getEntityManager();
         $unitOfWork = $entityManager->getUnitOfWork();
@@ -36,11 +33,6 @@ final class DefaultUsernameORMListener
         $this->processEntities($unitOfWork->getScheduledEntityUpdates(), $entityManager, $unitOfWork);
     }
 
-    /**
-     * @param array $entities
-     * @param EntityManagerInterface $entityManager
-     * @param UnitOfWork $unitOfWork
-     */
     private function processEntities(array $entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork): void
     {
         foreach ($entities as $customer) {

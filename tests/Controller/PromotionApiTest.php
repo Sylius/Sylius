@@ -38,7 +38,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_promotions_list_when_access_is_denied()
+    public function it_does_not_allow_to_show_promotions_list_when_access_is_denied(): void
     {
         $this->loadFixturesFromFile('resources/promotions.yml');
 
@@ -51,7 +51,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_indexing_promotions()
+    public function it_allows_indexing_promotions(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/promotions.yml');
@@ -65,7 +65,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_sorting_the_index_of_promotions_by_code()
+    public function it_allows_sorting_the_index_of_promotions_by_code(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/promotions.yml');
@@ -80,7 +80,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_sorting_the_index_of_promotions_by_name()
+    public function it_allows_sorting_the_index_of_promotions_by_name(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/promotions.yml');
@@ -95,7 +95,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_sorting_the_index_of_promotions_by_priority()
+    public function it_allows_sorting_the_index_of_promotions_by_priority(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/promotions.yml');
@@ -110,7 +110,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_promotions_list_filtered_by_name_and_code()
+    public function it_allows_to_get_promotions_list_filtered_by_name_and_code(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/promotions.yml');
@@ -127,7 +127,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_list_of_coupon_based_promotions()
+    public function it_allows_to_get_list_of_coupon_based_promotions(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/promotions.yml');
@@ -144,7 +144,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_promotion_when_it_does_not_exist()
+    public function it_does_not_allow_to_show_promotion_when_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -157,7 +157,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_promotion()
+    public function it_allows_showing_promotion(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -172,7 +172,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_delete_promotion_if_it_does_not_exist()
+    public function it_does_not_allow_to_delete_promotion_if_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -186,7 +186,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_delete_promotion()
+    public function it_allows_to_delete_promotion(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -206,7 +206,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_promotion_without_required_fields()
+    public function it_does_not_allow_to_create_promotion_without_required_fields(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -219,7 +219,7 @@ final class PromotionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_promotion()
+    public function it_allows_to_create_promotion(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -239,7 +239,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_promotion_with_channels()
+    public function it_allows_to_create_promotion_with_channels(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/channels.yml');
@@ -264,7 +264,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_promotion_with_time_of_duration()
+    public function it_allows_to_create_promotion_with_time_of_duration(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -292,7 +292,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_promotion_with_rules()
+    public function it_allows_to_create_promotion_with_rules(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/channels.yml');
@@ -332,7 +332,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_promotion_with_actions()
+    public function it_allows_to_create_promotion_with_actions(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/channels.yml');
@@ -397,7 +397,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_coupon_based_promotion()
+    public function it_allows_to_create_coupon_based_promotion(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -418,7 +418,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_exclusive_promotion()
+    public function it_allows_to_create_exclusive_promotion(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -440,7 +440,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_promotion()
+    public function it_allows_updating_promotion(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -467,7 +467,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_partial_information_about_promotion()
+    public function it_allows_updating_partial_information_about_promotion(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -489,12 +489,7 @@ EOT;
         $this->assertResponse($response, 'promotion/show_response_after_partial_update', Response::HTTP_OK);
     }
 
-    /**
-     * @param PromotionInterface $promotion
-     *
-     * @return string
-     */
-    private function getPromotionUrl(PromotionInterface $promotion)
+    private function getPromotionUrl(PromotionInterface $promotion): string
     {
         return '/api/v1/promotions/' . $promotion->getCode();
     }

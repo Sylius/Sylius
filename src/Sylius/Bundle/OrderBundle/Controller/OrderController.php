@@ -30,8 +30,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class OrderController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function summaryAction(Request $request): Response
@@ -61,8 +59,6 @@ class OrderController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function widgetAction(Request $request): Response
@@ -84,8 +80,6 @@ class OrderController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function saveAction(Request $request): Response
@@ -147,8 +141,6 @@ class OrderController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function clearAction(Request $request): Response
@@ -186,8 +178,6 @@ class OrderController extends ResourceController
     }
 
     /**
-     * @param RequestConfiguration $configuration
-     *
      * @return Response
      */
     protected function redirectToCartSummary(RequestConfiguration $configuration): Response
@@ -199,9 +189,6 @@ class OrderController extends ResourceController
         return $this->redirectHandler->redirectToRoute($configuration, $configuration->getParameters()->get('redirect'));
     }
 
-    /**
-     * @return string
-     */
     protected function getCartSummaryRoute(): string
     {
         return 'sylius_cart_summary';

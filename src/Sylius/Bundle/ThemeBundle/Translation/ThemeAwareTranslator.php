@@ -50,8 +50,6 @@ final class ThemeAwareTranslator implements TranslatorInterface, TranslatorBagIn
     /**
      * Passes through all unknown calls onto the translator object.
      *
-     * @param string $method
-     * @param array $arguments
      *
      * @return mixed
      */
@@ -115,8 +113,6 @@ final class ThemeAwareTranslator implements TranslatorInterface, TranslatorBagIn
 
     /**
      * @param string|null $locale
-     *
-     * @return string|null
      */
     private function transformLocale(?string $locale): ?string
     {

@@ -25,9 +25,6 @@ final class ItemTotalRuleChecker implements RuleCheckerInterface
      */
     private $itemTotalRuleChecker;
 
-    /**
-     * @param RuleCheckerInterface $itemTotalRuleChecker
-     */
     public function __construct(RuleCheckerInterface $itemTotalRuleChecker)
     {
         $this->itemTotalRuleChecker = $itemTotalRuleChecker;

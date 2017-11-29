@@ -17,13 +17,13 @@ use PhpSpec\ObjectBehavior;
 
 final class NotificationTypeSpec extends ObjectBehavior
 {
-    function it_initialize_with_success_value()
+    public function it_initialize_with_success_value(): void
     {
         $this->beConstructedThrough('success');
         $this->__toString()->shouldReturn('success');
     }
 
-    function it_initialize_with_failure_value()
+    public function it_initialize_with_failure_value(): void
     {
         $this->beConstructedThrough('failure');
         $this->__toString()->shouldReturn('failure');

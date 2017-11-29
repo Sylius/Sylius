@@ -22,9 +22,6 @@ final class AggregateAdjustmentsExtension extends \Twig_Extension
      */
     private $adjustmentsHelper;
 
-    /**
-     * @param AdjustmentsHelper $adjustmentsHelper
-     */
     public function __construct(AdjustmentsHelper $adjustmentsHelper)
     {
         $this->adjustmentsHelper = $adjustmentsHelper;

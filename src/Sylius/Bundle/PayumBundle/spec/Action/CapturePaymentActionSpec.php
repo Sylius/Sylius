@@ -25,22 +25,22 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 final class CapturePaymentActionSpec extends ObjectBehavior
 {
-    function let(PaymentDescriptionProviderInterface $paymentDescriptionProvider): void
+    public function let(PaymentDescriptionProviderInterface $paymentDescriptionProvider): void
     {
         $this->beConstructedWith($paymentDescriptionProvider);
     }
 
-    function it_extends_gateway_aware_action(): void
+    public function it_extends_gateway_aware_action(): void
     {
         $this->shouldHaveType(GatewayAwareAction::class);
     }
 
-    function it_should_throw_exception_when_unsupported_request(Capture $capture): void
+    public function it_should_throw_exception_when_unsupported_request(Capture $capture): void
     {
         $this->shouldThrow(RequestNotSupportedException::class)->duringExecute($capture);
     }
 
-    function it_should_perform_basic_capture(
+    public function it_should_perform_basic_capture(
         GatewayInterface $gateway,
         Capture $capture,
         PaymentInterface $payment,

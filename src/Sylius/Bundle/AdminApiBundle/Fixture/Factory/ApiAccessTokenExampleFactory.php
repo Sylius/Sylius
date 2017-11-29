@@ -51,11 +51,6 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $accessTokenFactory
-     * @param UserRepositoryInterface $userRepository
-     * @param RepositoryInterface $clientRepository
-     */
     public function __construct(
         FactoryInterface $accessTokenFactory,
         UserRepositoryInterface $userRepository,

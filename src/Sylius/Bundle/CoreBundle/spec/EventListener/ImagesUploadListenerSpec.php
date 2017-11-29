@@ -22,12 +22,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class ImagesUploadListenerSpec extends ObjectBehavior
 {
-    function let(ImageUploaderInterface $uploader): void
+    public function let(ImageUploaderInterface $uploader): void
     {
         $this->beConstructedWith($uploader);
     }
 
-    function it_uses_image_uploader_to_upload_images(
+    public function it_uses_image_uploader_to_upload_images(
         GenericEvent $event,
         ImagesAwareInterface $subject,
         ImageInterface $image,
@@ -42,7 +42,7 @@ final class ImagesUploadListenerSpec extends ObjectBehavior
         $this->uploadImages($event);
     }
 
-    function it_throws_exception_if_event_subject_is_not_an_image_aware(
+    public function it_throws_exception_if_event_subject_is_not_an_image_aware(
         GenericEvent $event,
         \stdClass $object
     ): void {

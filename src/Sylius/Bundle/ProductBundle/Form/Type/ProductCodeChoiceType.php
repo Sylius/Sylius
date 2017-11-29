@@ -26,9 +26,6 @@ final class ProductCodeChoiceType extends AbstractType
      */
     private $productRepository;
 
-    /**
-     * @param RepositoryInterface $productRepository
-     */
     public function __construct(RepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;

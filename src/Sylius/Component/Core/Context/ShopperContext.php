@@ -45,12 +45,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
      */
     private $customerContext;
 
-    /**
-     * @param ChannelContextInterface $channelContext
-     * @param CurrencyContextInterface $currencyContext
-     * @param LocaleContextInterface $localeContext
-     * @param CustomerContextInterface $customerContext
-     */
     public function __construct(
         ChannelContextInterface $channelContext,
         CurrencyContextInterface $currencyContext,

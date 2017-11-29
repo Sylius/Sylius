@@ -25,9 +25,6 @@ final class TestPromotionFactory implements TestPromotionFactoryInterface
      */
     private $promotionFactory;
 
-    /**
-     * @param FactoryInterface $promotionFactory
-     */
     public function __construct(FactoryInterface $promotionFactory)
     {
         $this->promotionFactory = $promotionFactory;

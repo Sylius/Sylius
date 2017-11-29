@@ -23,7 +23,7 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 final class UrlPackageSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         VersionStrategyInterface $versionStrategy,
         ThemeContextInterface $themeContext,
         PathResolverInterface $urlResolver
@@ -31,17 +31,17 @@ final class UrlPackageSpec extends ObjectBehavior
         $this->beConstructedWith(['https://cdn-url.com/'], $versionStrategy, $themeContext, $urlResolver);
     }
 
-    function it_implements_package_interface(): void
+    public function it_implements_package_interface(): void
     {
         $this->shouldImplement(PackageInterface::class);
     }
 
-    function it_extends_symfony_url_package(): void
+    public function it_extends_symfony_url_package(): void
     {
         $this->shouldImplement(UrlPackage::class);
     }
 
-    function it_returns_vanilla_url_if_there_are_no_active_themes_and_with_base_url(
+    public function it_returns_vanilla_url_if_there_are_no_active_themes_and_with_base_url(
         VersionStrategyInterface $versionStrategy,
         ThemeContextInterface $themeContext,
         PathResolverInterface $urlResolver
@@ -57,7 +57,7 @@ final class UrlPackageSpec extends ObjectBehavior
         $this->getUrl($url)->shouldReturn('https://cdn-url.com/' . $versionedPath);
     }
 
-    function it_returns_modified_url_if_there_is_active_theme_and_with_base_url(
+    public function it_returns_modified_url_if_there_is_active_theme_and_with_base_url(
         ThemeContextInterface $themeContext,
         VersionStrategyInterface $versionStrategy,
         PathResolverInterface $urlResolver,
@@ -74,13 +74,13 @@ final class UrlPackageSpec extends ObjectBehavior
         $this->getUrl($url)->shouldReturn('https://cdn-url.com/' . $versionedThemedPath);
     }
 
-    function it_returns_url_without_changes_if_it_is_absolute(): void
+    public function it_returns_url_without_changes_if_it_is_absolute(): void
     {
         $this->getUrl('//localhost/asset.js')->shouldReturn('//localhost/asset.js');
         $this->getUrl('https://localhost/asset.js')->shouldReturn('https://localhost/asset.js');
     }
 
-    function it_does_prepend_it_with_base_url_if_modified_url_is_an_absolute_one(
+    public function it_does_prepend_it_with_base_url_if_modified_url_is_an_absolute_one(
         ThemeContextInterface $themeContext,
         VersionStrategyInterface $versionStrategy,
         PathResolverInterface $urlResolver,
@@ -97,7 +97,7 @@ final class UrlPackageSpec extends ObjectBehavior
         $this->getUrl($url)->shouldReturn($versionedThemedPath);
     }
 
-    function it_does_not_prepend_it_with_base_url_if_modified_url_is_an_absolute_url(
+    public function it_does_not_prepend_it_with_base_url_if_modified_url_is_an_absolute_url(
         ThemeContextInterface $themeContext,
         VersionStrategyInterface $versionStrategy,
         PathResolverInterface $urlResolver,

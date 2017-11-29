@@ -24,10 +24,6 @@ final class ArrayGridProvider implements GridProviderInterface
      */
     private $grids = [];
 
-    /**
-     * @param ArrayToDefinitionConverterInterface $converter
-     * @param array $gridConfigurations
-     */
     public function __construct(ArrayToDefinitionConverterInterface $converter, array $gridConfigurations)
     {
         foreach ($gridConfigurations as $code => $gridConfiguration) {
@@ -52,12 +48,6 @@ final class ArrayGridProvider implements GridProviderInterface
         return clone $this->grids[$code];
     }
 
-    /**
-     * @param array $gridConfiguration
-     * @param array $parentGridConfiguration
-     *
-     * @return array
-     */
     private function extend(array $gridConfiguration, array $parentGridConfiguration): array
     {
         unset($parentGridConfiguration['sorting']); // Do not inherit sorting.

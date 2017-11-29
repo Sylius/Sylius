@@ -23,9 +23,6 @@ class FormatMoneyHelper extends Helper implements FormatMoneyHelperInterface
      */
     private $moneyFormatter;
 
-    /**
-     * @param MoneyFormatterInterface $moneyFormatter
-     */
     public function __construct(MoneyFormatterInterface $moneyFormatter)
     {
         $this->moneyFormatter = $moneyFormatter;

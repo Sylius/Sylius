@@ -24,9 +24,6 @@ final class ManagingInventoryContext implements Context
      */
     private $indexPage;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     */
     public function __construct(IndexPageInterface $indexPage)
     {
         $this->indexPage = $indexPage;
@@ -35,7 +32,7 @@ final class ManagingInventoryContext implements Context
     /**
      * @When I want to browse inventory
      */
-    public function iWantToBrowseInventory()
+    public function iWantToBrowseInventory(): void
     {
         $this->indexPage->open();
     }
@@ -43,7 +40,7 @@ final class ManagingInventoryContext implements Context
     /**
      * @When /^I filter tracked variants with (code|name) containing "([^"]+)"/
      */
-    public function iFilterTrackedVariantsWithCodeContaining($field, $value)
+    public function iFilterTrackedVariantsWithCodeContaining($field, $value): void
     {
         $this->indexPage->specifyFilterType($field, 'Contains');
         $this->indexPage->specifyFilterValue($field, $value);
@@ -54,7 +51,7 @@ final class ManagingInventoryContext implements Context
     /**
      * @Then I should see only one tracked variant in the list
      */
-    public function iShouldSeeOnlyOneTrackedVariantInTheList()
+    public function iShouldSeeOnlyOneTrackedVariantInTheList(): void
     {
         Assert::same($this->indexPage->countItems(), 1);
     }
@@ -62,7 +59,7 @@ final class ManagingInventoryContext implements Context
     /**
      * @Then I should see that the :productVariantName variant has :quantity quantity on hand
      */
-    public function iShouldSeeThatTheProductVariantHasQuantityOnHand($productVariantName, $quantity)
+    public function iShouldSeeThatTheProductVariantHasQuantityOnHand($productVariantName, $quantity): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage([
             'name' => $productVariantName,

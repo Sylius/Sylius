@@ -19,12 +19,12 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 
 final class AvailabilityCheckerSpec extends ObjectBehavior
 {
-    function it_is_an_inventory_availability_checker(): void
+    public function it_is_an_inventory_availability_checker(): void
     {
         $this->shouldImplement(AvailabilityCheckerInterface::class);
     }
 
-    function it_recognizes_stockable_as_available_if_on_hand_quantity_is_greater_than_0(StockableInterface $stockable): void
+    public function it_recognizes_stockable_as_available_if_on_hand_quantity_is_greater_than_0(StockableInterface $stockable): void
     {
         $stockable->isTracked()->willReturn(true);
         $stockable->getOnHand()->willReturn(5);
@@ -33,7 +33,7 @@ final class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
 
-    function it_recognizes_stockable_as_not_available_if_on_hand_quantity_is_equal_to_0(StockableInterface $stockable): void
+    public function it_recognizes_stockable_as_not_available_if_on_hand_quantity_is_equal_to_0(StockableInterface $stockable): void
     {
         $stockable->isTracked()->willReturn(true);
         $stockable->getOnHand()->willReturn(0);
@@ -42,7 +42,7 @@ final class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(false);
     }
 
-    function it_recognizes_stockable_as_available_if_on_hold_quantity_is_less_than_on_hand(
+    public function it_recognizes_stockable_as_available_if_on_hold_quantity_is_less_than_on_hand(
         StockableInterface $stockable
     ): void {
         $stockable->isTracked()->willReturn(true);
@@ -52,7 +52,7 @@ final class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
 
-    function it_recognizes_stockable_as_not_available_if_on_hold_quantity_is_same_as_on_hand(
+    public function it_recognizes_stockable_as_not_available_if_on_hold_quantity_is_same_as_on_hand(
         StockableInterface $stockable
     ): void {
         $stockable->isTracked()->willReturn(true);
@@ -62,7 +62,7 @@ final class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(false);
     }
 
-    function it_recognizes_stockable_as_sufficient_if_on_hand_minus_on_hold_quantity_is_greater_than_the_required_quantity(
+    public function it_recognizes_stockable_as_sufficient_if_on_hand_minus_on_hold_quantity_is_greater_than_the_required_quantity(
         StockableInterface $stockable
     ): void {
         $stockable->isTracked()->willReturn(true);
@@ -72,7 +72,7 @@ final class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockSufficient($stockable, 5)->shouldReturn(true);
     }
 
-    function it_recognizes_stockable_as_sufficient_if_on_hand_minus_on_hold_quantity_is_equal_to_the_required_quantity(
+    public function it_recognizes_stockable_as_sufficient_if_on_hand_minus_on_hold_quantity_is_equal_to_the_required_quantity(
         StockableInterface $stockable
     ): void {
         $stockable->isTracked()->willReturn(true);
@@ -82,7 +82,7 @@ final class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockSufficient($stockable, 5)->shouldReturn(true);
     }
 
-    function it_recognizes_stockable_as_available_or_sufficent_if_it_is_not_tracked(StockableInterface $stockable): void
+    public function it_recognizes_stockable_as_available_or_sufficent_if_it_is_not_tracked(StockableInterface $stockable): void
     {
         $stockable->isTracked()->willReturn(false);
 

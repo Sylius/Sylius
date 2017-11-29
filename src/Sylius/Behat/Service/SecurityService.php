@@ -37,12 +37,7 @@ final class SecurityService implements SecurityServiceInterface
      */
     private $sessionTokenVariable;
 
-    /**
-     * @param SessionInterface $session
-     * @param CookieSetterInterface $cookieSetter
-     * @param string $firewallContextName
-     */
-    public function __construct(SessionInterface $session, CookieSetterInterface $cookieSetter, $firewallContextName)
+    public function __construct(SessionInterface $session, CookieSetterInterface $cookieSetter, string $firewallContextName)
     {
         $this->session = $session;
         $this->cookieSetter = $cookieSetter;
@@ -52,13 +47,13 @@ final class SecurityService implements SecurityServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function logIn(UserInterface $user)
+    public function logIn(UserInterface $user): void
     {
         $token = new UsernamePasswordToken($user, $user->getPassword(), 'randomstringbutnotnull', $user->getRoles());
         $this->setToken($token);
     }
 
-    public function logOut()
+    public function logOut(): void
     {
         $this->session->set($this->sessionTokenVariable, null);
         $this->session->save();
@@ -83,15 +78,12 @@ final class SecurityService implements SecurityServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function restoreToken(TokenInterface $token)
+    public function restoreToken(TokenInterface $token): void
     {
         $this->setToken($token);
     }
 
-    /**
-     * @param TokenInterface $token
-     */
-    private function setToken(TokenInterface $token)
+    private function setToken(TokenInterface $token): void
     {
         $serializedToken = serialize($token);
         $this->session->set($this->sessionTokenVariable, $serializedToken);

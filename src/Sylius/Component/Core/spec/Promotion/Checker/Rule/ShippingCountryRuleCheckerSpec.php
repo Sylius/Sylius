@@ -22,24 +22,24 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $countryRepository): void
+    public function let(RepositoryInterface $countryRepository): void
     {
         $this->beConstructedWith($countryRepository);
     }
 
-    function it_is_a_rule_checker(): void
+    public function it_is_a_rule_checker(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_recognizes_no_shipping_address_as_not_eligible(OrderInterface $subject): void
+    public function it_recognizes_no_shipping_address_as_not_eligible(OrderInterface $subject): void
     {
         $subject->getShippingAddress()->willReturn(null);
 
         $this->isEligible($subject, [])->shouldReturn(false);
     }
 
-    function it_recognizes_a_subject_as_not_eligible_if_country_does_not_match(
+    public function it_recognizes_a_subject_as_not_eligible_if_country_does_not_match(
         OrderInterface $subject,
         AddressInterface $address,
         CountryInterface $country,
@@ -54,7 +54,7 @@ final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['country' => 'NL'])->shouldReturn(false);
     }
 
-    function it_recognizes_a_subject_as_eligible_if_country_match(
+    public function it_recognizes_a_subject_as_eligible_if_country_match(
         OrderInterface $subject,
         AddressInterface $address,
         CountryInterface $country,

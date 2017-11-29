@@ -27,19 +27,19 @@ use Symfony\Component\Form\FormInterface;
 
 final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $factory): void
+    public function let(FormFactoryInterface $factory): void
     {
         $this->beConstructedWith($factory);
     }
 
-    function it_subscribes_to_event(): void
+    public function it_subscribes_to_event(): void
     {
         static::getSubscribedEvents()->shouldReturn(
             [FormEvents::PRE_SET_DATA => 'preSetData']
         );
     }
 
-    function it_adds_options_on_pre_set_data_event_with_configurable_options(
+    public function it_adds_options_on_pre_set_data_event_with_configurable_options(
         FormEvent $event,
         FormFactoryInterface $factory,
         FormInterface $form,
@@ -73,7 +73,7 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_adds_options_on_pre_set_data_event_without_configurable_options(
+    public function it_adds_options_on_pre_set_data_event_without_configurable_options(
         FormEvent $event,
         FormFactoryInterface $factory,
         FormInterface $form,

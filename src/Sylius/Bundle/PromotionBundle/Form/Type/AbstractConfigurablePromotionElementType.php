@@ -55,7 +55,7 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
 
                 $this->addConfigurationFields($event->getForm(), $this->formTypeRegistry->get($type, 'default'));
             })
-            ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+            ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
                 $type = $this->getRegistryIdentifier($event->getForm(), $event->getData());
                 if (null === $type) {
                     return;
@@ -88,10 +88,6 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
         ;
     }
 
-    /**
-     * @param FormInterface $form
-     * @param string $configurationType
-     */
     protected function addConfigurationFields(FormInterface $form, string $configurationType): void
     {
         $form->add('configuration', $configurationType, [
@@ -100,10 +96,7 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
     }
 
     /**
-     * @param FormInterface $form
      * @param mixed $data
-     *
-     * @return string|null
      */
     protected function getRegistryIdentifier(FormInterface $form, $data = null): ?string
     {

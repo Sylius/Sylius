@@ -49,11 +49,6 @@ final class DoctrineTargetEntitiesResolverPass implements CompilerPassInterface
         }
     }
 
-    /**
-     * @param array $resources
-     *
-     * @return array
-     */
     private function getInterfacesMapping(array $resources): array
     {
         $interfaces = [];
@@ -73,11 +68,6 @@ final class DoctrineTargetEntitiesResolverPass implements CompilerPassInterface
     }
 
     /**
-     * @param ContainerBuilder $container
-     * @param string $key
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     private function getInterface(ContainerBuilder $container, string $key): string
@@ -96,14 +86,9 @@ final class DoctrineTargetEntitiesResolverPass implements CompilerPassInterface
     }
 
     /**
-     * @param ContainerBuilder $container
-     * @param string $key
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
-    private function getClass(ContainerBuilder $container, $key): string
+    private function getClass(ContainerBuilder $container, string $key): string
     {
         if ($container->hasParameter($key)) {
             return $container->getParameter($key);

@@ -28,9 +28,6 @@ class SelectAttributeChoicesCollectionType extends AbstractType
      */
     private $defaultLocaleCode;
 
-    /**
-     * @param TranslationLocaleProviderInterface $localeProvider
-     */
     public function __construct(TranslationLocaleProviderInterface $localeProvider)
     {
         $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
@@ -41,7 +38,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
             $data = $event->getData();
             $form = $event->getForm();
 
@@ -88,19 +85,11 @@ class SelectAttributeChoicesCollectionType extends AbstractType
         return 'sylius_select_attribute_choices_collection';
     }
 
-    /**
-     * @return string
-     */
     private function getUniqueKey(): string
     {
         return Uuid::uuid1()->toString();
     }
 
-    /**
-     * @param array $values
-     *
-     * @return array
-     */
     private function resolveValues(array $values): array
     {
         $fixedValues = [];

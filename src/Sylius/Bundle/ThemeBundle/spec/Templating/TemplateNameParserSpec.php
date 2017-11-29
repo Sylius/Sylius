@@ -21,22 +21,22 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 
 final class TemplateNameParserSpec extends ObjectBehavior
 {
-    function let(TemplateNameParserInterface $decoratedParser, KernelInterface $kernel): void
+    public function let(TemplateNameParserInterface $decoratedParser, KernelInterface $kernel): void
     {
         $this->beConstructedWith($decoratedParser, $kernel);
     }
 
-    function it_is_a_template_name_parser(): void
+    public function it_is_a_template_name_parser(): void
     {
         $this->shouldImplement(TemplateNameParserInterface::class);
     }
 
-    function it_returns_template_reference_if_passed_as_name(TemplateReferenceInterface $templateReference): void
+    public function it_returns_template_reference_if_passed_as_name(TemplateReferenceInterface $templateReference): void
     {
         $this->parse($templateReference)->shouldReturn($templateReference);
     }
 
-    function it_delegates_logical_paths_to_decorated_parser(
+    public function it_delegates_logical_paths_to_decorated_parser(
         TemplateNameParserInterface $decoratedParser,
         TemplateReferenceInterface $templateReference
     ): void {
@@ -45,7 +45,7 @@ final class TemplateNameParserSpec extends ObjectBehavior
         $this->parse('Bundle:Not:namespaced.html.twig')->shouldReturn($templateReference);
     }
 
-    function it_delegates_unknown_paths_to_decorated_parser(
+    public function it_delegates_unknown_paths_to_decorated_parser(
         TemplateNameParserInterface $decoratedParser,
         TemplateReferenceInterface $templateReference
     ): void {
@@ -54,7 +54,7 @@ final class TemplateNameParserSpec extends ObjectBehavior
         $this->parse('Bundle/Not/namespaced.html.twig')->shouldReturn($templateReference);
     }
 
-    function it_generates_template_references_from_namespaced_paths(KernelInterface $kernel): void
+    public function it_generates_template_references_from_namespaced_paths(KernelInterface $kernel): void
     {
         $kernel->getBundle('AcmeBundle')->willReturn(null); // just do not throw an exception
 
@@ -65,19 +65,19 @@ final class TemplateNameParserSpec extends ObjectBehavior
         $this->parse('@Acme/Nested/Directory/app.html.twig')->shouldBeLike(new TemplateReference('AcmeBundle', 'Nested/Directory', 'app', 'html', 'twig'));
     }
 
-    function it_delegates_custom_namespace_to_decorated_parser(
+    public function it_delegates_custom_namespace_to_decorated_parser(
         KernelInterface $kernel,
         TemplateNameParserInterface $decoratedParser,
         TemplateReferenceInterface $templateReference
     ): void {
-        $kernel->getBundle('myBundle')->willThrow(\Exception::class);
+        $kernel->getBundle('myBundle')->willThrow(\Throwable::class);
 
         $decoratedParser->parse('@my/custom/namespace.html.twig')->willReturn($templateReference);
 
         $this->parse('@my/custom/namespace.html.twig')->shouldReturn($templateReference);
     }
 
-    function it_generates_template_references_from_root_namespaced_paths(): void
+    public function it_generates_template_references_from_root_namespaced_paths(): void
     {
         $this->parse('/app.html.twig')->shouldBeLike(new TemplateReference('', '', 'app', 'html', 'twig'));
         $this->parse('/Directory/app.html.twig')->shouldBeLike(new TemplateReference('', 'Directory', 'app', 'html', 'twig'));

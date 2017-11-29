@@ -30,7 +30,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     /**
      * {@inheritdoc}
      */
-    public function selectShippingMethod($shippingMethod)
+    public function selectShippingMethod($shippingMethod): void
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
             $this->getElement('shipping_method_select', ['%shipping_method%' => $shippingMethod])->click();
@@ -93,17 +93,17 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return $subtotalTable->find('css', sprintf('#sylius-item-%s-subtotal', $itemSlug))->getText();
     }
 
-    public function nextStep()
+    public function nextStep(): void
     {
         $this->getElement('next_step')->press();
     }
 
-    public function changeAddress()
+    public function changeAddress(): void
     {
         $this->getDocument()->clickLink('Change address');
     }
 
-    public function changeAddressByStepLabel()
+    public function changeAddressByStepLabel(): void
     {
         $this->getElement('address')->click();
     }

@@ -26,17 +26,17 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class ResourceGridViewFactorySpec extends ObjectBehavior
 {
-    function let(DataProviderInterface $dataProvider, ParametersParserInterface $parametersParser): void
+    public function let(DataProviderInterface $dataProvider, ParametersParserInterface $parametersParser): void
     {
         $this->beConstructedWith($dataProvider, $parametersParser);
     }
 
-    function it_implements_resource_grid_view_factory_interface(): void
+    public function it_implements_resource_grid_view_factory_interface(): void
     {
         $this->shouldImplement(ResourceGridViewFactoryInterface::class);
     }
 
-    function it_uses_data_provider_to_create_a_view_with_data_and_definition(
+    public function it_uses_data_provider_to_create_a_view_with_data_and_definition(
         DataProviderInterface $dataProvider,
         ParametersParserInterface $parametersParser,
         Grid $grid,

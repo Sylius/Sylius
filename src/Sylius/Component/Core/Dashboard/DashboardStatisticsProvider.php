@@ -29,10 +29,6 @@ class DashboardStatisticsProvider implements DashboardStatisticsProviderInterfac
      */
     private $customerRepository;
 
-    /**
-     * @param OrderRepositoryInterface $orderRepository
-     * @param CustomerRepositoryInterface $customerRepository
-     */
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         CustomerRepositoryInterface $customerRepository

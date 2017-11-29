@@ -40,26 +40,17 @@ class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterf
         return $message === $errorLabel->getText();
     }
 
-    /**
-     * @param string $password
-     */
-    public function specifyCurrentPassword($password)
+    public function specifyCurrentPassword(string $password): void
     {
         $this->getElement('current_password')->setValue($password);
     }
 
-    /**
-     * @param string $password
-     */
-    public function specifyNewPassword($password)
+    public function specifyNewPassword(string $password): void
     {
         $this->getElement('new_password')->setValue($password);
     }
 
-    /**
-     * @param string $password
-     */
-    public function specifyConfirmationPassword($password)
+    public function specifyConfirmationPassword(string $password): void
     {
         $this->getElement('confirmation')->setValue($password);
     }

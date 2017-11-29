@@ -21,10 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface ProductVariantRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param string $locale
      * @param mixed $productId
-     *
-     * @return QueryBuilder
      */
     public function createQueryBuilderByProductId(string $locale, $productId): QueryBuilder;
 
@@ -37,7 +34,6 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
     public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder;
 
     /**
-     * @param string $name
      * @param string $locale
      *
      * @return array|ProductVariantInterface[]
@@ -45,7 +41,6 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
     public function findByName(string $name, string $locale): array;
 
     /**
-     * @param string $name
      * @param string $locale
      * @param ProductInterface $product
      *
@@ -63,7 +58,6 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
 
     /**
      * @param array|string[] $codes
-     * @param string $productCode
      *
      * @return array|ProductVariantInterface[]
      */
@@ -72,13 +66,10 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
     /**
      * @param mixed $id
      * @param mixed $productId
-     *
-     * @return ProductVariantInterface|null
      */
     public function findOneByIdAndProductId($id, $productId): ?ProductVariantInterface;
 
     /**
-     * @param string $phrase
      * @param string $locale
      * @param string $productCode
      *

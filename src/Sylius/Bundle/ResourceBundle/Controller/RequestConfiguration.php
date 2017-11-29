@@ -34,11 +34,6 @@ class RequestConfiguration
      */
     private $parameters;
 
-    /**
-     * @param MetadataInterface $metadata
-     * @param Request $request
-     * @param Parameters $parameters
-     */
     public function __construct(MetadataInterface $metadata, Request $request, Parameters $parameters)
     {
         $this->metadata = $metadata;
@@ -49,7 +44,7 @@ class RequestConfiguration
     /**
      * @return Request
      */
-    public function getRequest()
+    public function getRequest(): Request
     {
         return $this->request;
     }
@@ -57,7 +52,7 @@ class RequestConfiguration
     /**
      * @return MetadataInterface
      */
-    public function getMetadata()
+    public function getMetadata(): MetadataInterface
     {
         return $this->metadata;
     }
@@ -65,33 +60,22 @@ class RequestConfiguration
     /**
      * @return Parameters
      */
-    public function getParameters()
+    public function getParameters(): Parameters
     {
         return $this->parameters;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSection()
+    public function getSection(): ?string
     {
         return $this->parameters->get('section');
     }
 
-    /**
-     * @return bool
-     */
-    public function isHtmlRequest()
+    public function isHtmlRequest(): bool
     {
         return 'html' === $this->request->getRequestFormat();
     }
 
-    /**
-     * @param $name
-     *
-     * @return string|null
-     */
-    public function getDefaultTemplate($name)
+    public function getDefaultTemplate($name): ?string
     {
         $templatesNamespace = (string) $this->metadata->getTemplatesNamespace();
 
@@ -103,8 +87,6 @@ class RequestConfiguration
     }
 
     /**
-     * @param $name
-     *
      * @return mixed|null
      */
     public function getTemplate($name)
@@ -118,10 +100,7 @@ class RequestConfiguration
         return $template;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFormType()
+    public function getFormType(): ?string
     {
         $form = $this->parameters->get('form');
         if (isset($form['type'])) {
@@ -140,10 +119,7 @@ class RequestConfiguration
         return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
     }
 
-    /**
-     * @return array
-     */
-    public function getFormOptions()
+    public function getFormOptions(): array
     {
         $form = $this->parameters->get('form');
         if (isset($form['options'])) {
@@ -153,12 +129,7 @@ class RequestConfiguration
         return [];
     }
 
-    /**
-     * @param $name
-     *
-     * @return string
-     */
-    public function getRouteName($name)
+    public function getRouteName($name): string
     {
         $sectionPrefix = $this->getSection() ? $this->getSection() . '_' : '';
 
@@ -166,8 +137,6 @@ class RequestConfiguration
     }
 
     /**
-     * @param $name
-     *
      * @return mixed|string|null
      */
     public function getRedirectRoute($name)
@@ -191,10 +160,8 @@ class RequestConfiguration
 
     /**
      * Get url hash fragment (#text) which is you configured.
-     *
-     * @return string
      */
-    public function getRedirectHash()
+    public function getRedirectHash(): string
     {
         $redirect = $this->parameters->get('redirect');
 
@@ -208,10 +175,8 @@ class RequestConfiguration
     /**
      * Get redirect referer, This will detected by configuration
      * If not exists, The `referrer` from headers will be used.
-     *
-     * @return string
      */
-    public function getRedirectReferer()
+    public function getRedirectReferer(): string
     {
         $redirect = $this->parameters->get('redirect');
         $referer = $this->request->headers->get('referer');
@@ -229,10 +194,8 @@ class RequestConfiguration
 
     /**
      * @param object|null $resource
-     *
-     * @return array
      */
-    public function getRedirectParameters($resource = null)
+    public function getRedirectParameters($resource = null): array
     {
         $redirect = $this->parameters->get('redirect');
 
@@ -254,12 +217,7 @@ class RequestConfiguration
         return $parameters;
     }
 
-    /**
-     * @param array $parameters
-     *
-     * @return array
-     */
-    private function addExtraRedirectParameters($parameters)
+    private function addExtraRedirectParameters(array $parameters): array
     {
         $vars = $this->getVars();
         $accessor = PropertyAccess::createPropertyAccessor();
@@ -275,18 +233,12 @@ class RequestConfiguration
         return $parameters;
     }
 
-    /**
-     * @return bool
-     */
-    public function isLimited()
+    public function isLimited(): bool
     {
         return (bool) $this->parameters->get('limit', false);
     }
 
-    /**
-     * @return int|null
-     */
-    public function getLimit()
+    public function getLimit(): ?int
     {
         $limit = null;
 
@@ -297,38 +249,24 @@ class RequestConfiguration
         return $limit;
     }
 
-    /**
-     * @return bool
-     */
-    public function isPaginated()
+    public function isPaginated(): bool
     {
         $pagination = $this->parameters->get('paginate', true);
 
         return $pagination !== false && $pagination !== null;
     }
 
-    /**
-     * @return int
-     */
-    public function getPaginationMaxPerPage()
+    public function getPaginationMaxPerPage(): int
     {
         return (int) $this->parameters->get('paginate', 10);
     }
 
-    /**
-     * @return bool
-     */
-    public function isFilterable()
+    public function isFilterable(): bool
     {
         return (bool) $this->parameters->get('filterable', false);
     }
 
-    /**
-     * @param array $criteria
-     *
-     * @return array
-     */
-    public function getCriteria(array $criteria = [])
+    public function getCriteria(array $criteria = []): array
     {
         $defaultCriteria = array_merge($this->parameters->get('criteria', []), $criteria);
 
@@ -339,20 +277,12 @@ class RequestConfiguration
         return $defaultCriteria;
     }
 
-    /**
-     * @return bool
-     */
-    public function isSortable()
+    public function isSortable(): bool
     {
         return (bool) $this->parameters->get('sortable', false);
     }
 
-    /**
-     * @param array $sorting
-     *
-     * @return array
-     */
-    public function getSorting(array $sorting = [])
+    public function getSorting(array $sorting = []): array
     {
         $defaultSorting = array_merge($this->parameters->get('sorting', []), $sorting);
 
@@ -370,13 +300,7 @@ class RequestConfiguration
         return $defaultSorting;
     }
 
-    /**
-     * @param $parameter
-     * @param array $defaults
-     *
-     * @return array
-     */
-    public function getRequestParameter($parameter, $defaults = [])
+    public function getRequestParameter($parameter, array $defaults = []): array
     {
         return array_replace_recursive(
             $defaults,
@@ -384,10 +308,7 @@ class RequestConfiguration
         );
     }
 
-    /**
-     * @return string|null
-     */
-    public function getRepositoryMethod()
+    public function getRepositoryMethod(): ?string
     {
         if (!$this->parameters->has('repository')) {
             return null;
@@ -398,10 +319,7 @@ class RequestConfiguration
         return is_array($repository) ? $repository['method'] : $repository;
     }
 
-    /**
-     * @return array
-     */
-    public function getRepositoryArguments()
+    public function getRepositoryArguments(): array
     {
         if (!$this->parameters->has('repository')) {
             return [];
@@ -416,10 +334,7 @@ class RequestConfiguration
         return is_array($repository['arguments']) ? $repository['arguments'] : [$repository['arguments']];
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFactoryMethod()
+    public function getFactoryMethod(): ?string
     {
         if (!$this->parameters->has('factory')) {
             return null;
@@ -430,10 +345,7 @@ class RequestConfiguration
         return is_array($factory) ? $factory['method'] : $factory;
     }
 
-    /**
-     * @return array
-     */
-    public function getFactoryArguments()
+    public function getFactoryArguments(): array
     {
         if (!$this->parameters->has('factory')) {
             return [];
@@ -482,30 +394,20 @@ class RequestConfiguration
         return $this->parameters->get('serialization_version');
     }
 
-    /**
-     * @return string|null
-     */
-    public function getEvent()
+    public function getEvent(): ?string
     {
         return $this->parameters->get('event');
     }
 
-    /**
-     * @return bool
-     */
-    public function hasPermission()
+    public function hasPermission(): bool
     {
         return false !== $this->parameters->get('permission', false);
     }
 
     /**
-     * @param string $name
-     *
-     * @return string
-     *
      * @throws \LogicException
      */
-    public function getPermission($name)
+    public function getPermission(string $name): string
     {
         $permission = $this->parameters->get('permission');
 
@@ -520,10 +422,7 @@ class RequestConfiguration
         return $permission;
     }
 
-    /**
-     * @return bool
-     */
-    public function isHeaderRedirection()
+    public function isHeaderRedirection(): bool
     {
         $redirect = $this->parameters->get('redirect');
 
@@ -544,12 +443,9 @@ class RequestConfiguration
     }
 
     /**
-     * @param array  $parameters
      * @param object $resource
-     *
-     * @return array
      */
-    private function parseResourceValues(array $parameters, $resource)
+    private function parseResourceValues(array $parameters, $resource): array
     {
         $accessor = PropertyAccess::createPropertyAccessor();
 
@@ -570,20 +466,15 @@ class RequestConfiguration
         return $parameters;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasGrid()
+    public function hasGrid(): bool
     {
         return $this->parameters->has('grid');
     }
 
     /**
-     * @return string
-     *
      * @throws \LogicException
      */
-    public function getGrid()
+    public function getGrid(): string
     {
         if (!$this->hasGrid()) {
             throw new \LogicException('Current action does not use grid.');
@@ -592,48 +483,34 @@ class RequestConfiguration
         return $this->parameters->get('grid');
     }
 
-    /**
-     * @return bool
-     */
-    public function hasStateMachine()
+    public function hasStateMachine(): bool
     {
         return $this->parameters->has('state_machine');
     }
 
-    /**
-     * @return string
-     */
-    public function getStateMachineGraph()
+    public function getStateMachineGraph(): string
     {
         $options = $this->parameters->get('state_machine');
 
         return $options['graph'] ?? null;
     }
 
-    /**
-     * @return string
-     */
-    public function getStateMachineTransition()
+    public function getStateMachineTransition(): string
     {
         $options = $this->parameters->get('state_machine');
 
         return $options['transition'] ?? null;
     }
 
-    /**
-     * @return bool
-     */
-    public function isCsrfProtectionEnabled()
+    public function isCsrfProtectionEnabled(): bool
     {
         return $this->parameters->get('csrf_protection', true);
     }
 
     /**
      * @param mixed $redirect
-     *
-     * @return bool
      */
-    private function areParametersIntentionallyEmptyArray($redirect)
+    private function areParametersIntentionallyEmptyArray($redirect): bool
     {
         return isset($redirect['parameters']) && is_array($redirect['parameters']) && empty($redirect['parameters']);
     }

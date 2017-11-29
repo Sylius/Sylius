@@ -30,7 +30,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
@@ -39,12 +39,12 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->beConstructedWith($adjustmentFactory, $priceRangeFilter, $taxonFilter, $productFilter);
     }
 
-    function it_is_an_item_discount_action(): void
+    public function it_is_an_item_discount_action(): void
     {
         $this->shouldHaveType(UnitDiscountPromotionActionCommand::class);
     }
 
-    function it_applies_percentage_discount_on_every_unit_in_order(
+    public function it_applies_percentage_discount_on_every_unit_in_order(
         ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
@@ -99,7 +99,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(true);
     }
 
-    function it_does_not_apply_a_discount_if_all_items_have_been_filtered_out(
+    public function it_does_not_apply_a_discount_if_all_items_have_been_filtered_out(
         ChannelInterface $channel,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
@@ -121,7 +121,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(false);
     }
 
-    function it_does_not_apply_discount_if_configuration_for_order_channel_is_not_defined(
+    public function it_does_not_apply_discount_if_configuration_for_order_channel_is_not_defined(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
@@ -134,7 +134,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(false);
     }
 
-    function it_does_not_apply_discount_if_percentage_configuration_not_defined(
+    public function it_does_not_apply_discount_if_percentage_configuration_not_defined(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
@@ -147,7 +147,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->execute($order, ['WEB_PL' => []], $promotion)->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_passed_subject_is_not_order(
+    public function it_throws_an_exception_if_passed_subject_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ): void {
@@ -157,7 +157,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         ;
     }
 
-    function it_reverts_a_proper_promotion_adjustment_from_all_units(
+    public function it_reverts_a_proper_promotion_adjustment_from_all_units(
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $items,
@@ -191,7 +191,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->revert($order, ['percentage' => 0.2], $promotion);
     }
 
-    function it_throws_an_exception_if_passed_subject_to_revert_is_not_order(
+    public function it_throws_an_exception_if_passed_subject_to_revert_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ): void {

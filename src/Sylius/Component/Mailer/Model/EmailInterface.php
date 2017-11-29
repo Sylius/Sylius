@@ -57,7 +57,7 @@ interface EmailInterface
     /**
      * @param string $content
      */
-    public function setContent(string $content);
+    public function setContent(string $content): void;
 
     /**
      * @return string|null

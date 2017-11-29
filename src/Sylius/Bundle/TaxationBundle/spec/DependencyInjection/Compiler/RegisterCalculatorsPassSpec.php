@@ -21,12 +21,12 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class RegisterCalculatorsPassSpec extends ObjectBehavior
 {
-    function it_is_a_compiler_pass(): void
+    public function it_is_a_compiler_pass(): void
     {
         $this->shouldImplement(CompilerPassInterface::class);
     }
 
-    function it_processes_the_calculators_services(ContainerBuilder $container, Definition $calculator): void
+    public function it_processes_the_calculators_services(ContainerBuilder $container, Definition $calculator): void
     {
         $container->hasDefinition('sylius.registry.tax_calculator')->shouldBeCalled()->willReturn(true);
         $container->getDefinition('sylius.registry.tax_calculator')->shouldBeCalled()->willReturn($calculator);

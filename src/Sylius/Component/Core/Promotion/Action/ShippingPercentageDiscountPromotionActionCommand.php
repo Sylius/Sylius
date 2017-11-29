@@ -32,9 +32,6 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
      */
     private $adjustmentFactory;
 
-    /**
-     * @param FactoryInterface $adjustmentFactory
-     */
     public function __construct(FactoryInterface $adjustmentFactory)
     {
         $this->adjustmentFactory = $adjustmentFactory;
@@ -88,9 +85,6 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
     }
 
     /**
-     * @param PromotionInterface $promotion
-     * @param string $type
-     *
      * @return OrderAdjustmentInterface
      */
     private function createAdjustment(

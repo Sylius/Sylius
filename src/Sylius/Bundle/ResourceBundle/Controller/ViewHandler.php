@@ -24,9 +24,6 @@ final class ViewHandler implements ViewHandlerInterface
      */
     private $restViewHandler;
 
-    /**
-     * @param RestViewHandler $restViewHandler
-     */
     public function __construct(RestViewHandler $restViewHandler)
     {
         $this->restViewHandler = $restViewHandler;

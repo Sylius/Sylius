@@ -54,14 +54,6 @@ final class LocaleContext implements Context
      */
     private $localeConverter;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param LocaleConverterInterface $localeConverter
-     * @param FactoryInterface $localeFactory
-     * @param RepositoryInterface $localeRepository
-     * @param ObjectManager $localeManager
-     * @param ObjectManager $channelManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         LocaleConverterInterface $localeConverter,
@@ -83,7 +75,7 @@ final class LocaleContext implements Context
      * @Given the store is( also) available in :localeCode
      * @Given the locale :localeCode is enabled
      */
-    public function theStoreHasLocale($localeCode)
+    public function theStoreHasLocale($localeCode): void
     {
         $locale = $this->provideLocale($localeCode);
 
@@ -93,7 +85,7 @@ final class LocaleContext implements Context
     /**
      * @Given the locale :localeCode does not exist in the store
      */
-    public function theStoreDoesNotHaveLocale($localeCode)
+    public function theStoreDoesNotHaveLocale($localeCode): void
     {
         /** @var LocaleInterface $locale */
         $locale = $this->localeRepository->findOneBy(['code' => $localeCode]);
@@ -107,7 +99,7 @@ final class LocaleContext implements Context
      * @Given /^(that channel) allows to shop using "([^"]+)" and "([^"]+)" locales$/
      * @Given /^(that channel) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" locales$/
      */
-    public function thatChannelAllowsToShopUsingAndLocales(ChannelInterface $channel, ...$localesNames)
+    public function thatChannelAllowsToShopUsingAndLocales(ChannelInterface $channel, ...$localesNames): void
     {
         foreach ($channel->getLocales() as $locale) {
             $channel->removeLocale($locale);
@@ -123,7 +115,7 @@ final class LocaleContext implements Context
     /**
      * @Given /^(it) uses the "([^"]+)" locale by default$/
      */
-    public function itUsesTheLocaleByDefault(ChannelInterface $channel, $localeName)
+    public function itUsesTheLocaleByDefault(ChannelInterface $channel, $localeName): void
     {
         $locale = $this->provideLocale($this->localeConverter->convertNameToCode($localeName));
 
@@ -136,11 +128,9 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @param string $localeCode
-     *
      * @return LocaleInterface
      */
-    private function createLocale($localeCode)
+    private function createLocale(string $localeCode): LocaleInterface
     {
         /** @var LocaleInterface $locale */
         $locale = $this->localeFactory->createNew();
@@ -150,11 +140,9 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @param string $localeCode
-     *
      * @return LocaleInterface
      */
-    private function provideLocale($localeCode)
+    private function provideLocale(string $localeCode): LocaleInterface
     {
         $locale = $this->localeRepository->findOneBy(['code' => $localeCode]);
         if (null === $locale) {
@@ -167,10 +155,7 @@ final class LocaleContext implements Context
         return $locale;
     }
 
-    /**
-     * @param LocaleInterface $locale
-     */
-    private function saveLocale(LocaleInterface $locale)
+    private function saveLocale(LocaleInterface $locale): void
     {
         $this->sharedStorage->set('locale', $locale);
         $this->localeRepository->add($locale);

@@ -23,9 +23,6 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
      */
     private $queryBuilder;
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     */
     public function __construct(QueryBuilder $queryBuilder)
     {
         $this->queryBuilder = $queryBuilder;
@@ -78,7 +75,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function lessThan(string $field, $value)
+    public function lessThan(string $field, $value): void
     {
         $this->queryBuilder->andWhere($field . ' < :' . $field)->setParameter($field, $value);
     }
@@ -86,7 +83,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function lessThanOrEqual(string $field, $value)
+    public function lessThanOrEqual(string $field, $value): void
     {
         $this->queryBuilder->andWhere($field . ' =< :' . $field)->setParameter($field, $value);
     }
@@ -94,7 +91,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function greaterThan(string $field, $value)
+    public function greaterThan(string $field, $value): void
     {
         $this->queryBuilder->andWhere($field . ' > :' . $field)->setParameter($field, $value);
     }
@@ -102,7 +99,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function greaterThanOrEqual(string $field, $value)
+    public function greaterThanOrEqual(string $field, $value): void
     {
         $this->queryBuilder->andWhere($field . ' => :%s' . $field)->setParameter($field, $value);
     }

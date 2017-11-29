@@ -29,12 +29,12 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 final class CartBlamerListenerSpec extends ObjectBehavior
 {
-    function let(ObjectManager $cartManager, CartContextInterface $cartContext): void
+    public function let(ObjectManager $cartManager, CartContextInterface $cartContext): void
     {
         $this->beConstructedWith($cartManager, $cartContext);
     }
 
-    function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_implicit_login(
+    public function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_implicit_login(
         BaseOrderInterface $order,
         CartContextInterface $cartContext,
         ShopUserInterface $user,
@@ -45,7 +45,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         $this->shouldThrow(UnexpectedTypeException::class)->during('onImplicitLogin', [$userEvent]);
     }
 
-    function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_interactive_login(
+    public function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_interactive_login(
         BaseOrderInterface $order,
         CartContextInterface $cartContext,
         InteractiveLoginEvent $interactiveLoginEvent,
@@ -58,7 +58,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         $this->shouldThrow(UnexpectedTypeException::class)->during('onInteractiveLogin', [$interactiveLoginEvent]);
     }
 
-    function it_blames_cart_on_user_on_implicit_login(
+    public function it_blames_cart_on_user_on_implicit_login(
         ObjectManager $cartManager,
         CartContextInterface $cartContext,
         OrderInterface $cart,
@@ -75,7 +75,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         $this->onImplicitLogin($userEvent);
     }
 
-    function it_blames_cart_on_user_on_interactive_login(
+    public function it_blames_cart_on_user_on_interactive_login(
         ObjectManager $cartManager,
         CartContextInterface $cartContext,
         OrderInterface $cart,
@@ -94,7 +94,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         $this->onInteractiveLogin($interactiveLoginEvent);
     }
 
-    function it_does_nothing_if_given_user_is_invalid_on_interactive_login(
+    public function it_does_nothing_if_given_user_is_invalid_on_interactive_login(
         CartContextInterface $cartContext,
         OrderInterface $cart,
         InteractiveLoginEvent $interactiveLoginEvent,
@@ -107,7 +107,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         $this->onInteractiveLogin($interactiveLoginEvent);
     }
 
-    function it_does_nothing_if_there_is_no_existing_cart_on_implicit_login(
+    public function it_does_nothing_if_there_is_no_existing_cart_on_implicit_login(
         CartContextInterface $cartContext,
         UserEvent $userEvent,
         ShopUserInterface $user
@@ -117,7 +117,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         $this->onImplicitLogin($userEvent);
     }
 
-    function it_does_nothing_if_there_is_no_existing_cart_on_interactive_login(
+    public function it_does_nothing_if_there_is_no_existing_cart_on_interactive_login(
         CartContextInterface $cartContext,
         InteractiveLoginEvent $interactiveLoginEvent,
         TokenInterface $token,

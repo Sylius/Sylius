@@ -53,7 +53,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteTaxonOnPageByName($name)
+    public function deleteTaxonOnPageByName($name): void
     {
         $leaves = $this->getLeaves();
         foreach ($leaves as $leaf) {
@@ -70,7 +70,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function describeItAs($description, $languageCode)
+    public function describeItAs($description, $languageCode): void
     {
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_description', $languageCode), $description);
     }
@@ -86,7 +86,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameIt($name, $languageCode)
+    public function nameIt($name, $languageCode): void
     {
         $this->activateLanguageTab($languageCode);
         $this->getElement('name', ['%language%' => $languageCode])->setValue($name);
@@ -102,7 +102,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifySlug($slug, $languageCode)
+    public function specifySlug($slug, $languageCode): void
     {
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_slug', $languageCode), $slug);
     }
@@ -110,7 +110,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function attachImage($path, $type = null)
+    public function attachImage($path, $type = null): void
     {
         $filesPath = $this->getParameter('files_path');
 
@@ -124,7 +124,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getLeaves(TaxonInterface $parentTaxon = null)
+    public function getLeaves(?TaxonInterface $parentTaxon = null)
     {
         $tree = $this->getElement('tree');
         Assert::notNull($tree);
@@ -147,7 +147,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function activateLanguageTab($locale)
+    public function activateLanguageTab($locale): void
     {
         if (!$this->getDriver() instanceof Selenium2Driver) {
             return;
@@ -190,7 +190,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * @return NodeElement
      */
-    private function getLastImageElement()
+    private function getLastImageElement(): NodeElement
     {
         $images = $this->getElement('images');
         $items = $images->findAll('css', 'div[data-form-collection="item"]');

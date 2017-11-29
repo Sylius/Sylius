@@ -23,5 +23,5 @@ interface IndexPageInterface extends BaseIndexPageInterface
      *
      * @return string
      */
-    public function getCustomerAccountStatus($customer);
+    public function getCustomerAccountStatus(CustomerInterface $customer): string;
 }

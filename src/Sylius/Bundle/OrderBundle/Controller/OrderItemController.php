@@ -35,8 +35,6 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 class OrderItemController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function addAction(Request $request): Response
@@ -115,8 +113,6 @@ class OrderItemController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function removeAction(Request $request): Response
@@ -181,8 +177,6 @@ class OrderItemController extends ResourceController
     }
 
     /**
-     * @param RequestConfiguration $configuration
-     *
      * @return Response
      */
     protected function redirectToCartSummary(RequestConfiguration $configuration): Response
@@ -194,9 +188,6 @@ class OrderItemController extends ResourceController
         return $this->redirectHandler->redirectToRoute($configuration, $configuration->getParameters()->get('redirect'));
     }
 
-    /**
-     * @return string
-     */
     protected function getCartSummaryRoute(): string
     {
         return 'sylius_cart_summary';
@@ -219,9 +210,6 @@ class OrderItemController extends ResourceController
     }
 
     /**
-     * @param OrderInterface $cart
-     * @param OrderItemInterface $cartItem
-     *
      * @return AddToCartCommandInterface
      */
     protected function createAddToCartCommand(OrderInterface $cart, OrderItemInterface $cartItem): AddToCartCommandInterface
@@ -262,8 +250,6 @@ class OrderItemController extends ResourceController
     }
 
     /**
-     * @param OrderItemInterface $orderItem
-     *
      * @return ConstraintViolationListInterface
      */
     private function getCartItemErrors(OrderItemInterface $orderItem): ConstraintViolationListInterface
@@ -275,9 +261,6 @@ class OrderItemController extends ResourceController
     }
 
     /**
-     * @param ConstraintViolationListInterface $errors
-     * @param FormInterface $form
-     *
      * @return FormInterface
      */
     private function getAddToCartFormWithErrors(ConstraintViolationListInterface $errors, FormInterface $form): FormInterface
@@ -290,9 +273,6 @@ class OrderItemController extends ResourceController
     }
 
     /**
-     * @param RequestConfiguration $configuration
-     * @param FormInterface $form
-     *
      * @return Response
      */
     private function handleBadAjaxRequestView(RequestConfiguration $configuration, FormInterface $form): Response

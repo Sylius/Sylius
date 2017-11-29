@@ -20,7 +20,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyFilterDateFrom(\DateTimeInterface $dateTime)
+    public function specifyFilterDateFrom(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -31,7 +31,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyFilterDateTo(\DateTimeInterface $dateTime)
+    public function specifyFilterDateTo(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -42,7 +42,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseChannelFilter($channelName)
+    public function chooseChannelFilter($channelName): void
     {
         $this->getElement('filter_channel')->selectOption($channelName);
     }
@@ -50,7 +50,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseCurrencyFilter($currencyName)
+    public function chooseCurrencyFilter($currencyName): void
     {
         $this->getElement('filter_currency')->selectOption($currencyName);
     }
@@ -58,7 +58,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyFilterTotalGreaterThan($total)
+    public function specifyFilterTotalGreaterThan($total): void
     {
         $this->getDocument()->fillField('criteria_total_greaterThan', $total);
     }
@@ -66,7 +66,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyFilterTotalLessThan($total)
+    public function specifyFilterTotalLessThan($total): void
     {
         $this->getDocument()->fillField('criteria_total_lessThan', $total);
     }

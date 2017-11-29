@@ -17,12 +17,12 @@ use PhpSpec\ObjectBehavior;
 
 final class MissingChannelConfigurationExceptionSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith('Message');
     }
 
-    function it_is_a_runtime_exception(): void
+    public function it_is_a_runtime_exception(): void
     {
         $this->shouldHaveType(\RuntimeException::class);
     }

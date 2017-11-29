@@ -25,18 +25,12 @@ final class NotificationType
      */
     private static $types = [];
 
-    /**
-     * @param string $value
-     */
-    private function __construct($value)
+    private function __construct(string $value)
     {
         $this->value = $value;
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->value;
     }
@@ -44,7 +38,7 @@ final class NotificationType
     /**
      * @return NotificationType
      */
-    public static function failure()
+    public static function failure(): NotificationType
     {
         return static::getTyped('failure');
     }
@@ -52,17 +46,15 @@ final class NotificationType
     /**
      * @return NotificationType
      */
-    public static function success()
+    public static function success(): NotificationType
     {
         return static::getTyped('success');
     }
 
     /**
-     * @param string $type
-     *
      * @return NotificationType
      */
-    private static function getTyped($type)
+    private static function getTyped(string $type): NotificationType
     {
         if (!isset(static::$types[$type])) {
             static::$types[$type] = new self($type);

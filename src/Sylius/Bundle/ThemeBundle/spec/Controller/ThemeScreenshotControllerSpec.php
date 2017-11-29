@@ -27,14 +27,14 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
      */
     private $fixturesPath;
 
-    function let(ThemeRepositoryInterface $themeRepository): void
+    public function let(ThemeRepositoryInterface $themeRepository): void
     {
         $this->beConstructedWith($themeRepository);
 
         $this->fixturesPath = realpath(__DIR__ . '/../Fixtures');
     }
 
-    function it_streams_screenshot_as_a_response(ThemeRepositoryInterface $themeRepository, ThemeInterface $theme): void
+    public function it_streams_screenshot_as_a_response(ThemeRepositoryInterface $themeRepository, ThemeInterface $theme): void
     {
         $themeRepository->findOneByName('theme/name')->willReturn($theme);
 
@@ -50,7 +50,7 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_not_found_http_exception_if_screenshot_cannot_be_found(
+    public function it_throws_not_found_http_exception_if_screenshot_cannot_be_found(
         ThemeRepositoryInterface $themeRepository,
         ThemeInterface $theme
     ): void {
@@ -71,7 +71,7 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_not_found_http_exception_if_screenshot_number_exceeds_the_number_of_theme_screenshots(
+    public function it_throws_not_found_http_exception_if_screenshot_number_exceeds_the_number_of_theme_screenshots(
         ThemeRepositoryInterface $themeRepository,
         ThemeInterface $theme
     ): void {
@@ -89,7 +89,7 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_not_found_http_exception_if_theme_with_given_id_cannot_be_found(ThemeRepositoryInterface $themeRepository): void
+    public function it_throws_not_found_http_exception_if_theme_with_given_id_cannot_be_found(ThemeRepositoryInterface $themeRepository): void
     {
         $themeRepository->findOneByName('theme/name')->willReturn(null);
 

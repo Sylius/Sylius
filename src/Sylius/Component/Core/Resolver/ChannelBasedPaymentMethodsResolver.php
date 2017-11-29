@@ -26,9 +26,6 @@ final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolver
      */
     private $paymentMethodRepository;
 
-    /**
-     * @param PaymentMethodRepositoryInterface $paymentMethodRepository
-     */
     public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
     {
         $this->paymentMethodRepository = $paymentMethodRepository;

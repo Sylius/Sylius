@@ -33,17 +33,17 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($price)
+    public function specifyPrice($price): void
     {
         $this->getDocument()->fillField('Price', $price);
     }
 
-    public function disableTracking()
+    public function disableTracking(): void
     {
         $this->getElement('tracked')->uncheck();
     }
 
-    public function enableTracking()
+    public function enableTracking(): void
     {
         $this->getElement('tracked')->check();
     }
@@ -93,7 +93,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyCurrentStock($amount)
+    public function specifyCurrentStock($amount): void
     {
         $this->getElement('on_hand')->setValue($amount);
     }

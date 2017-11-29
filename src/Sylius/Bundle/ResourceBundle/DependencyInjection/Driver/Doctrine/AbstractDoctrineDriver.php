@@ -23,8 +23,6 @@ use Symfony\Component\DependencyInjection\Reference;
 abstract class AbstractDoctrineDriver extends AbstractDriver
 {
     /**
-     * @param MetadataInterface $metadata
-     *
      * @return Definition
      */
     protected function getClassMetadataDefinition(MetadataInterface $metadata): Definition
@@ -53,10 +51,6 @@ abstract class AbstractDoctrineDriver extends AbstractDriver
     /**
      * Return the configured object managre name, or NULL if the default
      * manager should be used.
-     *
-     * @param MetadataInterface $metadata
-     *
-     * @return string|null
      */
     protected function getObjectManagerName(MetadataInterface $metadata): ?string
     {
@@ -69,15 +63,7 @@ abstract class AbstractDoctrineDriver extends AbstractDriver
         return $objectManagerName;
     }
 
-    /**
-     * @param MetadataInterface $metadata
-     *
-     * @return string
-     */
     abstract protected function getManagerServiceId(MetadataInterface $metadata): string;
 
-    /**
-     * @return string
-     */
     abstract protected function getClassMetadataClassname(): string;
 }

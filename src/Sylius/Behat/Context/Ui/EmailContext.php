@@ -32,10 +32,6 @@ final class EmailContext implements Context
      */
     private $emailChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param EmailCheckerInterface $emailChecker
-     */
     public function __construct(SharedStorageInterface $sharedStorage, EmailCheckerInterface $emailChecker)
     {
         $this->sharedStorage = $sharedStorage;
@@ -47,7 +43,7 @@ final class EmailContext implements Context
      * @Then the email with reset token should be sent to :recipient
      * @Then the email with contact request should be sent to :recipient
      */
-    public function anEmailShouldBeSentTo($recipient)
+    public function anEmailShouldBeSentTo($recipient): void
     {
         Assert::true($this->emailChecker->hasRecipient($recipient));
     }
@@ -55,7 +51,7 @@ final class EmailContext implements Context
     /**
      * @Then :count email(s) should be sent to :recipient
      */
-    public function numberOfEmailsShouldBeSentTo($count, $recipient)
+    public function numberOfEmailsShouldBeSentTo($count, $recipient): void
     {
         Assert::same($this->emailChecker->countMessagesTo($recipient), (int) $count);
     }
@@ -63,7 +59,7 @@ final class EmailContext implements Context
     /**
      * @Then a welcoming email should have been sent to :recipient
      */
-    public function aWelcomingEmailShouldHaveBeenSentTo($recipient)
+    public function aWelcomingEmailShouldHaveBeenSentTo($recipient): void
     {
         $this->assertEmailContainsMessageTo('Welcome to our store', $recipient);
     }
@@ -71,7 +67,7 @@ final class EmailContext implements Context
     /**
      * @Then /^an email with the summary of (order placed by "([^"]+)") should be sent to him$/
      */
-    public function anEmailWithOrderConfirmationShouldBeSentTo(OrderInterface $order)
+    public function anEmailWithOrderConfirmationShouldBeSentTo(OrderInterface $order): void
     {
         $this->assertEmailContainsMessageTo(
             sprintf(
@@ -85,7 +81,7 @@ final class EmailContext implements Context
     /**
      * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)"$/
      */
-    public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(OrderInterface $order, $recipient)
+    public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(OrderInterface $order, $recipient): void
     {
         $this->assertEmailContainsMessageTo($order->getNumber(), $recipient);
         $this->assertEmailContainsMessageTo($this->getShippingMethodName($order), $recipient);
@@ -94,21 +90,12 @@ final class EmailContext implements Context
         $this->assertEmailContainsMessageTo($tracking, $recipient);
     }
 
-    /**
-     * @param string $message
-     * @param string $recipient
-     */
-    private function assertEmailContainsMessageTo($message, $recipient)
+    private function assertEmailContainsMessageTo(string $message, string $recipient): void
     {
         Assert::true($this->emailChecker->hasMessageTo($message, $recipient));
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return string
-     */
-    private function getShippingMethodName(OrderInterface $order)
+    private function getShippingMethodName(OrderInterface $order): string
     {
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();

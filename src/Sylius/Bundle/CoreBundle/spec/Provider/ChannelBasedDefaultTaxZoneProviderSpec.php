@@ -21,12 +21,12 @@ use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
 final class ChannelBasedDefaultTaxZoneProviderSpec extends ObjectBehavior
 {
-    function it_implements_default_tax_zone_provider_interface(): void
+    public function it_implements_default_tax_zone_provider_interface(): void
     {
         $this->shouldImplement(ZoneProviderInterface::class);
     }
 
-    function it_provides_default_tax_zone_from_order_channel(
+    public function it_provides_default_tax_zone_from_order_channel(
         ChannelInterface $channel,
         OrderInterface $order,
         ZoneInterface $defaultTaxZone

@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 final class ImageUploaderSpec extends ObjectBehavior
 {
-    function let(Filesystem $filesystem, ImageInterface $image): void
+    public function let(Filesystem $filesystem, ImageInterface $image): void
     {
         $filesystem->has(Argument::any())->willReturn(false);
 
@@ -32,12 +32,12 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->beConstructedWith($filesystem);
     }
 
-    function it_is_an_image_uploader(): void
+    public function it_is_an_image_uploader(): void
     {
         $this->shouldImplement(ImageUploaderInterface::class);
     }
 
-    function it_uploads_an_image(Filesystem $filesystem, ImageInterface $image): void
+    public function it_uploads_an_image(Filesystem $filesystem, ImageInterface $image): void
     {
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');
@@ -46,7 +46,7 @@ final class ImageUploaderSpec extends ObjectBehavior
 
         $filesystem->delete(Argument::any())->shouldNotBeCalled();
 
-        $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem) {
+        $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem): void {
             $image->getPath()->willReturn($args[0]);
 
             $filesystem->write($args[0], Argument::any())->shouldBeCalled();
@@ -55,7 +55,7 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->upload($image);
     }
 
-    function it_replaces_an_image(Filesystem $filesystem, ImageInterface $image): void
+    public function it_replaces_an_image(Filesystem $filesystem, ImageInterface $image): void
     {
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');
@@ -64,7 +64,7 @@ final class ImageUploaderSpec extends ObjectBehavior
 
         $filesystem->delete('foo.jpg')->willReturn(true);
 
-        $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem) {
+        $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem): void {
             $image->getPath()->willReturn($args[0]);
 
             $filesystem->write($args[0], Argument::any())->shouldBeCalled();
@@ -73,7 +73,7 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->upload($image);
     }
 
-    function it_removes_an_image_if_exists(Filesystem $filesystem): void
+    public function it_removes_an_image_if_exists(Filesystem $filesystem): void
     {
         $filesystem->has('path/to/img')->willReturn(true);
         $filesystem->delete('path/to/img')->willReturn(true);
@@ -81,7 +81,7 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->remove('path/to/img');
     }
 
-    function it_does_not_remove_an_image_if_does_not_exist(FileSystem $filesystem): void
+    public function it_does_not_remove_an_image_if_does_not_exist(FileSystem $filesystem): void
     {
         $filesystem->has('path/to/img')->willReturn(false);
         $filesystem->delete('path/to/img')->shouldNotBeCalled();

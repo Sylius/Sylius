@@ -47,7 +47,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
         return $message === $errorLabel->getText();
     }
 
-    public function register()
+    public function register(): void
     {
         $this->getDocument()->pressButton('Create an account');
     }
@@ -55,7 +55,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyEmail($email)
+    public function specifyEmail($email): void
     {
         $this->getDocument()->fillField('Email', $email);
     }
@@ -63,7 +63,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyFirstName($firstName)
+    public function specifyFirstName($firstName): void
     {
         $this->getDocument()->fillField('First name', $firstName);
     }
@@ -71,7 +71,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyLastName($lastName)
+    public function specifyLastName($lastName): void
     {
         $this->getDocument()->fillField('Last name', $lastName);
     }
@@ -79,7 +79,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPassword($password)
+    public function specifyPassword($password): void
     {
         $this->getDocument()->fillField('Password', $password);
     }
@@ -87,7 +87,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPhoneNumber($phoneNumber)
+    public function specifyPhoneNumber($phoneNumber): void
     {
         $this->getDocument()->fillField('Phone number', $phoneNumber);
     }
@@ -95,12 +95,12 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     /**
      * {@inheritdoc}
      */
-    public function verifyPassword($password)
+    public function verifyPassword($password): void
     {
         $this->getDocument()->fillField('Verification', $password);
     }
 
-    public function subscribeToTheNewsletter()
+    public function subscribeToTheNewsletter(): void
     {
         $this->getDocument()->checkField('Subscribe to the newsletter');
     }

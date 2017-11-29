@@ -39,7 +39,7 @@ final class CartApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_getting_an_cart_for_non_authenticated_user()
+    public function it_denies_getting_an_cart_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/carts/-1');
 
@@ -50,7 +50,7 @@ final class CartApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_an_cart_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_an_cart_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -63,7 +63,7 @@ final class CartApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_cart()
+    public function it_allows_to_get_cart(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $cartData = $this->loadFixturesFromFile('resources/cart.yml');
@@ -79,7 +79,7 @@ final class CartApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_show_orders_in_state_other_than_cart()
+    public function it_does_not_show_orders_in_state_other_than_cart(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orderData = $this->loadFixturesFromFile('resources/order.yml');
@@ -95,7 +95,7 @@ final class CartApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_creating_cart_for_non_authenticated_user()
+    public function it_denies_creating_cart_for_non_authenticated_user(): void
     {
         $this->client->request('POST', '/api/v1/carts/');
 
@@ -106,7 +106,7 @@ final class CartApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_cart_without_specifying_required_data()
+    public function it_does_not_allow_to_create_cart_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -119,7 +119,7 @@ final class CartApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_cart()
+    public function it_allows_to_create_cart(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/cart.yml');
@@ -143,7 +143,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_carts_for_non_authenticated_user()
+    public function it_denies_getting_carts_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/carts/');
 
@@ -154,7 +154,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_carts_list()
+    public function it_allows_to_get_carts_list(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/cart.yml');
@@ -168,7 +168,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_list_carts_in_state_different_than_cart()
+    public function it_does_not_allow_to_list_carts_in_state_different_than_cart(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/order.yml');
@@ -182,7 +182,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_carts_deletion_for_non_authenticated_user()
+    public function it_denies_carts_deletion_for_non_authenticated_user(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/cart.yml');
@@ -198,7 +198,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_delete_cart_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_delete_cart_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -211,7 +211,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_cart()
+    public function it_allows_to_delete_cart(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/cart.yml');
@@ -233,7 +233,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_delete_orders_in_state_different_than_cart()
+    public function it_does_not_allow_to_delete_orders_in_state_different_than_cart(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orders = $this->loadFixturesFromFile('resources/order.yml');
@@ -250,7 +250,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_adding_a_product_to_cart_for_non_authenticated_user()
+    public function it_denies_adding_a_product_to_cart_for_non_authenticated_user(): void
     {
         $this->client->request('POST', '/api/v1/carts/1/items/');
 
@@ -261,7 +261,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_add_item_to_cart_without_providing_required_fields()
+    public function it_does_not_allow_to_add_item_to_cart_without_providing_required_fields(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/cart.yml');
@@ -278,7 +278,7 @@ EOT;
     /**
      * @test
      */
-    public function it_adds_an_item_to_the_cart()
+    public function it_adds_an_item_to_the_cart(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/cart.yml');
@@ -302,7 +302,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_add_item_with_negative_quantity()
+    public function it_does_not_allow_to_add_item_with_negative_quantity(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/cart.yml');
@@ -326,7 +326,7 @@ EOT;
     /**
      * @test
      */
-    public function it_adds_an_item_to_the_cart_with_quantity_bigger_than_one()
+    public function it_adds_an_item_to_the_cart_with_quantity_bigger_than_one(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/cart.yml');
@@ -350,7 +350,7 @@ EOT;
     /**
      * @test
      */
-    public function it_adds_an_item_with_tracked_variant_to_the_cart()
+    public function it_adds_an_item_with_tracked_variant_to_the_cart(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/cart.yml');
@@ -374,7 +374,7 @@ EOT;
     /**
      * @test
      */
-    public function it_checks_if_requested_variant_is_available()
+    public function it_checks_if_requested_variant_is_available(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $carts = $this->loadFixturesFromFile('resources/cart.yml');
@@ -398,7 +398,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_updating_a_cart_item_quantity_for_non_authenticated_user()
+    public function it_denies_updating_a_cart_item_quantity_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', '/api/v1/carts/1/items/1');
 
@@ -409,7 +409,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_update_items_variant()
+    public function it_does_not_allow_to_update_items_variant(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $cartWithItems = $this->loadFixturesFromFile('resources/cart_with_items.yml');
@@ -435,7 +435,7 @@ EOT;
     /**
      * @test
      */
-    public function it_updates_item_quantity()
+    public function it_updates_item_quantity(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $cartWithItems = $this->loadFixturesFromFile('resources/cart_with_items.yml');
@@ -465,7 +465,7 @@ EOT;
     /**
      * @test
      */
-    public function it_checks_if_requested_variant_is_available_during_quantity_update()
+    public function it_checks_if_requested_variant_is_available_during_quantity_update(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $cartWithItems = $this->loadFixturesFromFile('resources/cart_with_items.yml');
@@ -490,7 +490,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_carts_item_deletion_for_non_authenticated_user()
+    public function it_denies_carts_item_deletion_for_non_authenticated_user(): void
     {
         $this->client->request('DELETE', '/api/v1/carts/-1/items/-1');
 
@@ -501,7 +501,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_delete_cart_item_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_delete_cart_item_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $cartWithItems = $this->loadFixturesFromFile('resources/cart_with_items.yml');
@@ -519,7 +519,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_cart_item()
+    public function it_allows_to_delete_cart_item(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $cartWithItems = $this->loadFixturesFromFile('resources/cart_with_items.yml');
@@ -538,7 +538,7 @@ EOT;
     /**
      * @test
      */
-    public function it_resets_totals_if_cart_item_was_removed()
+    public function it_resets_totals_if_cart_item_was_removed(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $cartWithItems = $this->loadFixturesFromFile('resources/cart_with_items.yml');
@@ -559,33 +559,17 @@ EOT;
         $this->assertResponse($response, 'cart/recalculated_items_total_response', Response::HTTP_OK);
     }
 
-    /**
-     * @param OrderInterface $cart
-     *
-     * @return string
-     */
-    private function getCartUrl(OrderInterface $cart)
+    private function getCartUrl(OrderInterface $cart): string
     {
         return '/api/v1/carts/' . $cart->getId();
     }
 
-    /**
-     * @param OrderInterface $cart
-     *
-     * @return string
-     */
-    private function getCartItemListUrl(OrderInterface $cart)
+    private function getCartItemListUrl(OrderInterface $cart): string
     {
         return sprintf('/api/v1/carts/%s/items/', $cart->getId());
     }
 
-    /**
-     * @param OrderInterface $cart
-     * @param OrderItemInterface $cartItem
-     *
-     * @return string
-     */
-    private function getCartItemUrl(OrderInterface $cart, OrderItemInterface $cartItem)
+    private function getCartItemUrl(OrderInterface $cart, OrderItemInterface $cartItem): string
     {
         return sprintf('/api/v1/carts/%s/items/%s', $cart->getId(), $cartItem->getId());
     }

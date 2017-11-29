@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 
 final class PasswordResetRequestSpec extends ObjectBehavior
 {
-    function it_has_email(): void
+    public function it_has_email(): void
     {
         $this->setEmail('test@example.com');
         $this->getEmail()->shouldReturn('test@example.com');

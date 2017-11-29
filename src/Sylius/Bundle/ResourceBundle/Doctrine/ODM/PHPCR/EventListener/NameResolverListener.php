@@ -30,19 +30,13 @@ class NameResolverListener
      */
     private $documentManager;
 
-    /**
-     * @param DocumentManagerInterface $documentManager
-     */
     public function __construct(
         DocumentManagerInterface $documentManager
     ) {
         $this->documentManager = $documentManager;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
-    public function onEvent(ResourceControllerEvent $event)
+    public function onEvent(ResourceControllerEvent $event): void
     {
         $document = $event->getSubject();
 

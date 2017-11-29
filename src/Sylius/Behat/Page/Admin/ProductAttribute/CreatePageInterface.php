@@ -21,18 +21,18 @@ interface CreatePageInterface extends BaseCreatePageInterface
     /**
      * @param string $code
      */
-    public function specifyCode($code);
+    public function specifyCode(string $code): void;
 
     /**
      * @param string $name
      * @param string $language
      */
-    public function nameIt($name, $language);
+    public function nameIt(string $name, string $language): void;
 
     /**
      * @return bool
      */
-    public function isTypeDisabled();
+    public function isTypeDisabled(): bool;
 
     /**
      * @param string $value

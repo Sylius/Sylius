@@ -23,17 +23,17 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 
 final class OrderItemQuantityModifierSpec extends ObjectBehavior
 {
-    function let(OrderItemUnitFactoryInterface $orderItemUnitFactory): void
+    public function let(OrderItemUnitFactoryInterface $orderItemUnitFactory): void
     {
         $this->beConstructedWith($orderItemUnitFactory);
     }
 
-    function it_implements_an_order_item_quantity_modifier_interface(): void
+    public function it_implements_an_order_item_quantity_modifier_interface(): void
     {
         $this->shouldImplement(OrderItemQuantityModifierInterface::class);
     }
 
-    function it_adds_proper_number_of_order_item_units_to_an_order_item(
+    public function it_adds_proper_number_of_order_item_units_to_an_order_item(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem
     ): void {
@@ -44,7 +44,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         $this->modify($orderItem, 3);
     }
 
-    function it_removes_units_if_target_quantity_is_lower_than_current(
+    public function it_removes_units_if_target_quantity_is_lower_than_current(
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
@@ -63,7 +63,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         $this->modify($orderItem, 3);
     }
 
-    function it_does_nothing_if_target_quantity_is_equal_to_current(
+    public function it_does_nothing_if_target_quantity_is_equal_to_current(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem
     ): void {
@@ -76,7 +76,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         $this->modify($orderItem, 3);
     }
 
-    function it_does_nothing_if_target_quantity_is_0(
+    public function it_does_nothing_if_target_quantity_is_0(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem
     ): void {
@@ -89,7 +89,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         $this->modify($orderItem, 0);
     }
 
-    function it_does_nothing_if_target_quantity_is_below_0(
+    public function it_does_nothing_if_target_quantity_is_below_0(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem
     ): void {

@@ -22,17 +22,17 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class AverageRatingUpdaterSpec extends ObjectBehavior
 {
-    function let(ReviewableRatingCalculatorInterface $averageRatingCalculator, ObjectManager $reviewSubjectManager): void
+    public function let(ReviewableRatingCalculatorInterface $averageRatingCalculator, ObjectManager $reviewSubjectManager): void
     {
         $this->beConstructedWith($averageRatingCalculator, $reviewSubjectManager);
     }
 
-    function it_implements_product_average_rating_updater_interface(): void
+    public function it_implements_product_average_rating_updater_interface(): void
     {
         $this->shouldImplement(ReviewableRatingUpdaterInterface::class);
     }
 
-    function it_updates_review_subject_average_rating(
+    public function it_updates_review_subject_average_rating(
         $averageRatingCalculator,
         $reviewSubjectManager,
         ReviewableInterface $reviewSubject
@@ -45,7 +45,7 @@ final class AverageRatingUpdaterSpec extends ObjectBehavior
         $this->update($reviewSubject);
     }
 
-    function it_updates_review_subject_average_rating_from_review(
+    public function it_updates_review_subject_average_rating_from_review(
         $averageRatingCalculator,
         $reviewSubjectManager,
         ReviewableInterface $reviewSubject,

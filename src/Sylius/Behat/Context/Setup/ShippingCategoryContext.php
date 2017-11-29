@@ -37,11 +37,6 @@ final class ShippingCategoryContext implements Context
      */
     private $shippingCategoryRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $shippingCategoryFactory
-     * @param RepositoryInterface $shippingCategoryRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $shippingCategoryFactory,
@@ -56,7 +51,7 @@ final class ShippingCategoryContext implements Context
      * @Given the store has :firstShippingCategoryName shipping category
      * @Given the store has :firstShippingCategoryName and :secondShippingCategoryName shipping category
      */
-    public function theStoreHasAndShippingCategory($firstShippingCategoryName, $secondShippingCategoryName = null)
+    public function theStoreHasAndShippingCategory($firstShippingCategoryName, $secondShippingCategoryName = null): void
     {
         $this->createShippingCategory($firstShippingCategoryName);
         (null === $secondShippingCategoryName) ?: $this->createShippingCategory($secondShippingCategoryName);
@@ -65,16 +60,12 @@ final class ShippingCategoryContext implements Context
     /**
      * @Given the store has :shippingCategoryName shipping category identified by :shippingCategoryCode
      */
-    public function theStoreHasShippingCategoryIdentifiedBy($shippingCategoryName, $shippingCategoryCode)
+    public function theStoreHasShippingCategoryIdentifiedBy($shippingCategoryName, $shippingCategoryCode): void
     {
         $this->createShippingCategory($shippingCategoryName, $shippingCategoryCode);
     }
 
-    /**
-     * @param string $shippingCategoryName
-     * @param string $shippingCategoryCode
-     */
-    private function createShippingCategory($shippingCategoryName, $shippingCategoryCode = null)
+    private function createShippingCategory(string $shippingCategoryName, string $shippingCategoryCode = null): void
     {
         /** @var ShippingCategoryInterface $shippingCategory */
         $shippingCategory = $this->shippingCategoryFactory->createNew();

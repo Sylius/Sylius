@@ -71,7 +71,7 @@ interface ShippingMethodInterface extends
     /**
      * @param ShippingCategoryInterface|null $category
      */
-    public function setCategory(?ShippingCategoryInterface $category);
+    public function setCategory(?ShippingCategoryInterface $category): void;
 
     /**
      * Get the one of matching requirements.
@@ -80,8 +80,6 @@ interface ShippingMethodInterface extends
      * 1) None of shippables matches the category.
      * 2) At least one of shippables matches the category.
      * 3) All shippables have to match the method category.
-     *
-     * @return int|null
      */
     public function getCategoryRequirement(): ?int;
 
@@ -111,8 +109,6 @@ interface ShippingMethodInterface extends
     public function setConfiguration(array $configuration): void;
 
     /**
-     * @param string|null $locale
-     *
      * @return ShippingMethodTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

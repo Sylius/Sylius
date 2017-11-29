@@ -20,10 +20,10 @@ interface CreatePageInterface extends BaseCreatePageInterface
     /**
      * @param string $name
      */
-    public function chooseName($name);
+    public function chooseName(string $name): void;
 
     /**
      * @param float $exchangeRate
      */
-    public function specifyExchangeRate($exchangeRate);
+    public function specifyExchangeRate(float $exchangeRate): void;
 }

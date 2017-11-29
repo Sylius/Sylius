@@ -21,17 +21,17 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class ProductVariantsPricesHelperSpec extends ObjectBehavior
 {
-    function let(ProductVariantsPricesProviderInterface $productVariantsPricesProvider): void
+    public function let(ProductVariantsPricesProviderInterface $productVariantsPricesProvider): void
     {
         $this->beConstructedWith($productVariantsPricesProvider);
     }
 
-    function it_is_helper(): void
+    public function it_is_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_uses_provider_to_get_variants_prices(
+    public function it_uses_provider_to_get_variants_prices(
         ChannelInterface $channel,
         ProductInterface $product,
         ProductVariantsPricesProviderInterface $productVariantsPricesProvider
@@ -43,7 +43,7 @@ final class ProductVariantsPricesHelperSpec extends ObjectBehavior
         $this->getPrices($product, $channel)->shouldReturn([['color' => 'black', 'value' => 1000]]);
     }
 
-    function it_has_name(): void
+    public function it_has_name(): void
     {
         $this->getName()->shouldReturn('sylius_product_variants_prices');
     }

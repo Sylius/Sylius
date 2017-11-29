@@ -20,12 +20,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ResourceDeleteHandlerSpec extends ObjectBehavior
 {
-    function it_implements_a_resource_delete_handler_interface(): void
+    public function it_implements_a_resource_delete_handler_interface(): void
     {
         $this->shouldImplement(ResourceDeleteHandlerInterface::class);
     }
 
-    function it_removes_resource_via_repository(RepositoryInterface $repository, ResourceInterface $resource): void
+    public function it_removes_resource_via_repository(RepositoryInterface $repository, ResourceInterface $resource): void
     {
         $repository->remove($resource)->shouldBeCalled();
 

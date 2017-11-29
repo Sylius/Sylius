@@ -27,18 +27,12 @@ final class ThemeScreenshotController
      */
     private $themeRepository;
 
-    /**
-     * @param ThemeRepositoryInterface $themeRepository
-     */
     public function __construct(ThemeRepositoryInterface $themeRepository)
     {
         $this->themeRepository = $themeRepository;
     }
 
     /**
-     * @param string $themeName
-     * @param int $screenshotNumber
-     *
      * @return Response
      */
     public function streamScreenshotAction(string $themeName, int $screenshotNumber): Response
@@ -52,12 +46,6 @@ final class ThemeScreenshotController
         }
     }
 
-    /**
-     * @param ThemeInterface $theme
-     * @param int $screenshotNumber
-     *
-     * @return string
-     */
     private function getScreenshotPath(ThemeInterface $theme, int $screenshotNumber): string
     {
         $screenshots = $theme->getScreenshots();
@@ -72,8 +60,6 @@ final class ThemeScreenshotController
     }
 
     /**
-     * @param string $themeName
-     *
      * @return ThemeInterface
      */
     private function getTheme(string $themeName): ThemeInterface

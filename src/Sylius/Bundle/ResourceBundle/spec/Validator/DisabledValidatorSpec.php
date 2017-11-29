@@ -22,31 +22,31 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class DisabledValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $context): void
+    public function let(ExecutionContextInterface $context): void
     {
         $this->initialize($context);
     }
 
-    function it_is_constraint_validator(): void
+    public function it_is_constraint_validator(): void
     {
         $this->shouldHaveType(ConstraintValidatorInterface::class);
     }
 
-    function it_does_not_apply_to_null_values(ExecutionContextInterface $context): void
+    public function it_does_not_apply_to_null_values(ExecutionContextInterface $context): void
     {
         $context->addViolation(Argument::cetera())->shouldNotBeCalled();
 
         $this->validate(null, new Disabled());
     }
 
-    function it_throws_an_exception_if_subject_does_not_implement_toggleable_interface(ExecutionContextInterface $context): void
+    public function it_throws_an_exception_if_subject_does_not_implement_toggleable_interface(ExecutionContextInterface $context): void
     {
         $context->addViolation(Argument::cetera())->shouldNotBeCalled();
 
         $this->shouldThrow(\InvalidArgumentException::class)->duringValidate(new \stdClass(), new Disabled());
     }
 
-    function it_adds_violation_if_subject_is_enabled(
+    public function it_adds_violation_if_subject_is_enabled(
         ExecutionContextInterface $context,
         ToggleableInterface $subject
     ): void {
@@ -57,7 +57,7 @@ final class DisabledValidatorSpec extends ObjectBehavior
         $this->validate($subject, new Disabled());
     }
 
-    function it_does_not_add_violation_if_subject_is_disabled(
+    public function it_does_not_add_violation_if_subject_is_disabled(
         ExecutionContextInterface $context,
         ToggleableInterface $subject
     ): void {

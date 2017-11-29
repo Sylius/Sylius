@@ -21,14 +21,12 @@ interface ProductReviewRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param mixed $productId
-     * @param int $count
      *
      * @return array|ReviewInterface[]
      */
     public function findLatestByProductId($productId, int $count): array;
 
     /**
-     * @param string $slug
      * @param string $locale
      * @param ChannelInterface $channel
      *

@@ -24,8 +24,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PromotionCouponController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      *
      * @throws NotFoundHttpException

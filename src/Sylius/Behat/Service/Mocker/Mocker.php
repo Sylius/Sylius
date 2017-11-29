@@ -49,12 +49,12 @@ class Mocker implements MockerInterface
     /**
      * {@inheritdoc}
      */
-    public function unmockService($serviceId)
+    public function unmockService($serviceId): void
     {
         $this->container->unmock($serviceId);
     }
 
-    public function unmockAll()
+    public function unmockAll(): void
     {
         $mockedServices = $this->container->getMockedServices();
 

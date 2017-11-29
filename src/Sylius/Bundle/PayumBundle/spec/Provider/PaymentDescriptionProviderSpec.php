@@ -22,7 +22,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 final class PaymentDescriptionProviderSpec extends ObjectBehavior
 {
-    function let(TranslatorInterface $translator): void
+    public function let(TranslatorInterface $translator): void
     {
         $translator->transChoice('sylius.payum_action.payment.description', 2, [
             '%items%' => 2,
@@ -32,7 +32,7 @@ final class PaymentDescriptionProviderSpec extends ObjectBehavior
         $this->beConstructedWith($translator);
     }
 
-    function it_should_generate_a_description_string(PaymentInterface $payment, OrderInterface $order): void
+    public function it_should_generate_a_description_string(PaymentInterface $payment, OrderInterface $order): void
     {
         $order->getItems()->willReturn(new ArrayCollection([new OrderItem(), new OrderItem()]));
         $order->getTotal()->willReturn(10000);

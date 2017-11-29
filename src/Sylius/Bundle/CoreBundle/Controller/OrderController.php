@@ -22,8 +22,6 @@ use Webmozart\Assert\Assert;
 class OrderController extends BaseOrderController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function thankYouAction(Request $request): Response

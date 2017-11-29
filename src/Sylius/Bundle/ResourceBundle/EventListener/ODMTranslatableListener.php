@@ -38,11 +38,7 @@ final class ODMTranslatableListener implements EventSubscriber
      */
     private $mappings;
 
-    /**
-     * @param array $mappings
-     * @param string $fallbackLocale
-     */
-    public function __construct(array $mappings, $fallbackLocale)
+    public function __construct(array $mappings, string $fallbackLocale)
     {
         $this->mappings = $mappings;
         $this->fallbackLocale = $fallbackLocale;
@@ -71,10 +67,8 @@ final class ODMTranslatableListener implements EventSubscriber
 
     /**
      * Add mapping to translatable entities
-     *
-     * @param LoadClassMetadataEventArgs $eventArgs
      */
-    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
         $classMetadata = $eventArgs->getClassMetadata();
         $reflection = $classMetadata->reflClass;
@@ -94,10 +88,8 @@ final class ODMTranslatableListener implements EventSubscriber
 
     /**
      * Add mapping data to a translatable entity
-     *
-     * @param ClassMetadata $metadata
      */
-    private function mapTranslatable(ClassMetadata $metadata)
+    private function mapTranslatable(ClassMetadata $metadata): void
     {
         // In the case A -> B -> TranslatableInterface, B might not have mapping defined as it
         // is probably defined in A, so in that case, we just return.
@@ -117,10 +109,8 @@ final class ODMTranslatableListener implements EventSubscriber
 
     /**
      * Add mapping data to a translation entity
-     *
-     * @param ClassMetadata $metadata
      */
-    private function mapTranslation(ClassMetadata $metadata)
+    private function mapTranslation(ClassMetadata $metadata): void
     {
         // In the case A -> B -> TranslationInterface, B might not have mapping defined as it
         // is probably defined in A, so in that case, we just return;
@@ -158,10 +148,8 @@ final class ODMTranslatableListener implements EventSubscriber
 
     /**
      * Load translations
-     *
-     * @param LifecycleEventArgs $args
      */
-    public function postLoad(LifecycleEventArgs $args)
+    public function postLoad(LifecycleEventArgs $args): void
     {
         $document = $args->getDocument();
 

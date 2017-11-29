@@ -24,17 +24,12 @@ final class HomepageController
      */
     private $templatingEngine;
 
-    /**
-     * @param EngineInterface $templatingEngine
-     */
     public function __construct(EngineInterface $templatingEngine)
     {
         $this->templatingEngine = $templatingEngine;
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function indexAction(Request $request): Response

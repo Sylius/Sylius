@@ -28,8 +28,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ProvinceController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      *
      * @throws AccessDeniedException
@@ -80,8 +78,6 @@ class ProvinceController extends ResourceController
     }
 
     /**
-     * @param CountryInterface $country
-     *
      * @return FormInterface
      */
     protected function createProvinceChoiceForm(CountryInterface $country): FormInterface

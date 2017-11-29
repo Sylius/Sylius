@@ -21,26 +21,26 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ProductFactorySpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FactoryInterface $factory,
         FactoryInterface $variantFactory
     ): void {
         $this->beConstructedWith($factory, $variantFactory);
     }
 
-    function it_implements_product_factory_interface(): void
+    public function it_implements_product_factory_interface(): void
     {
         $this->shouldImplement(ProductFactoryInterface::class);
     }
 
-    function it_creates_new_product(FactoryInterface $factory, ProductInterface $product): void
+    public function it_creates_new_product(FactoryInterface $factory, ProductInterface $product): void
     {
         $factory->createNew()->willReturn($product);
 
         $this->createNew()->shouldReturn($product);
     }
 
-    function it_creates_new_product_with_variant(
+    public function it_creates_new_product_with_variant(
         FactoryInterface $factory,
         FactoryInterface $variantFactory,
         ProductInterface $product,

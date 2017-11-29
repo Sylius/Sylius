@@ -19,12 +19,12 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 final class SettableThemeContextSpec extends ObjectBehavior
 {
-    function it_implements_theme_context_interface(): void
+    public function it_implements_theme_context_interface(): void
     {
         $this->shouldImplement(ThemeContextInterface::class);
     }
 
-    function it_has_theme(ThemeInterface $theme): void
+    public function it_has_theme(ThemeInterface $theme): void
     {
         $this->getTheme()->shouldReturn(null);
 

@@ -53,9 +53,6 @@ class PaymentMethod implements PaymentMethodInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();

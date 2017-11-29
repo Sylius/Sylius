@@ -38,11 +38,6 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
      */
     private $taxRateResolver;
 
-    /**
-     * @param CalculatorInterface $calculator
-     * @param AdjustmentFactoryInterface $adjustmentFactory
-     * @param TaxRateResolverInterface $taxRateResolver
-     */
     public function __construct(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentFactory,
@@ -75,13 +70,7 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
         }
     }
 
-    /**
-     * @param OrderItemUnitInterface $unit
-     * @param int $taxAmount
-     * @param string $label
-     * @param bool $included
-     */
-    private function addTaxAdjustment(OrderItemUnitInterface $unit, int $taxAmount, string $label, bool $included)
+    private function addTaxAdjustment(OrderItemUnitInterface $unit, int $taxAmount, string $label, bool $included): void
     {
         $unitTaxAdjustment = $this->adjustmentFactory
             ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included)

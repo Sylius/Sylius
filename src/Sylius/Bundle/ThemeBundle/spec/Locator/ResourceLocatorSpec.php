@@ -20,19 +20,19 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 final class ResourceLocatorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ResourceLocatorInterface $applicationResourceLocator,
         ResourceLocatorInterface $bundleResourceLocator
     ): void {
         $this->beConstructedWith($applicationResourceLocator, $bundleResourceLocator);
     }
 
-    function it_implements_resource_locator_interface(): void
+    public function it_implements_resource_locator_interface(): void
     {
         $this->shouldImplement(ResourceLocatorInterface::class);
     }
 
-    function it_proxies_locating_resource_to_bundle_resource_locator_if_resource_path_starts_with_an_asperand(
+    public function it_proxies_locating_resource_to_bundle_resource_locator_if_resource_path_starts_with_an_asperand(
         ResourceLocatorInterface $applicationResourceLocator,
         ResourceLocatorInterface $bundleResourceLocator,
         ThemeInterface $theme
@@ -44,7 +44,7 @@ final class ResourceLocatorSpec extends ObjectBehavior
         $this->locateResource('@AcmeBundle/Resources/resource', $theme);
     }
 
-    function it_proxies_locating_resource_to_application_resource_locator_if_resource_path_does_not_start_with_an_asperand(
+    public function it_proxies_locating_resource_to_application_resource_locator_if_resource_path_does_not_start_with_an_asperand(
         ResourceLocatorInterface $applicationResourceLocator,
         ResourceLocatorInterface $bundleResourceLocator,
         ThemeInterface $theme

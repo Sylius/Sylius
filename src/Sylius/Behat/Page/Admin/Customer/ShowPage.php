@@ -32,7 +32,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteAccount()
+    public function deleteAccount(): void
     {
         $deleteButton = $this->getElement('delete_account_button');
         $deleteButton->pressButton('Delete');
@@ -155,7 +155,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function impersonate()
+    public function impersonate(): void
     {
         $this->getElement('impersonate_button')->click();
     }
@@ -243,13 +243,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param string $channelName
-     *
      * @return NodeElement
      *
      * @throws \InvalidArgumentException
      */
-    private function getStatisticsForChannel($channelName)
+    private function getStatisticsForChannel(string $channelName): NodeElement
     {
         $statisticsRibs = $this
             ->getElement('statistics')

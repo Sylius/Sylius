@@ -26,24 +26,24 @@ use Sylius\Component\Grid\Parameters;
  */
 final class DriverSpec extends ObjectBehavior
 {
-    function let(DocumentManagerInterface $documentManager): void
+    public function let(DocumentManagerInterface $documentManager): void
     {
         $this->beConstructedWith($documentManager);
     }
 
-    function it_implements_grid_driver(): void
+    public function it_implements_grid_driver(): void
     {
         $this->shouldImplement(DriverInterface::class);
     }
 
-    function it_throws_exception_if_class_is_undefined(): void
+    public function it_throws_exception_if_class_is_undefined(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('getDataSource', [[], new Parameters()]);
     }
 
-    function it_creates_data_source_via_doctrine_phpcrodm_query_builder(
+    public function it_creates_data_source_via_doctrine_phpcrodm_query_builder(
         DocumentManagerInterface $documentManager,
         DocumentRepository $documentRepository,
         QueryBuilder $queryBuilder

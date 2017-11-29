@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Response;
 interface ViewHandlerInterface
 {
     /**
-     * @param RequestConfiguration $requestConfiguration
      * @param View $view
      *
      * @return mixed

@@ -17,12 +17,12 @@ use PhpSpec\ObjectBehavior;
 
 final class UnresolvedDefaultShippingMethodExceptionSpec extends ObjectBehavior
 {
-    function it_is_an_exception(): void
+    public function it_is_an_exception(): void
     {
-        $this->shouldHaveType(\Exception::class);
+        $this->shouldHaveType(\Throwable::class);
     }
 
-    function it_has_a_custom_message(): void
+    public function it_has_a_custom_message(): void
     {
         $this->getMessage()->shouldReturn('Default shipping method could not be resolved!');
     }

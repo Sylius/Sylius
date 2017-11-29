@@ -22,22 +22,22 @@ use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 final class OrderItemUnitFactorySpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith(OrderItemUnit::class);
     }
 
-    function it_implements_a_factory_interface(): void
+    public function it_implements_a_factory_interface(): void
     {
         $this->shouldImplement(OrderItemUnitFactoryInterface::class);
     }
 
-    function it_throws_an_exception_while_trying_create_order_item_unit_without_order_item(): void
+    public function it_throws_an_exception_while_trying_create_order_item_unit_without_order_item(): void
     {
         $this->shouldThrow(UnsupportedMethodException::class)->during('createNew');
     }
 
-    function it_creates_a_new_order_item_unit_with_given_order_item(
+    public function it_creates_a_new_order_item_unit_with_given_order_item(
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $orderItemUnit
     ): void {

@@ -74,8 +74,6 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
 
     /**
      * Return the prefix of the bundle.
-     *
-     * @return string
      */
     protected function getBundlePrefix(): string
     {
@@ -84,8 +82,6 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
 
     /**
      * Return the directory where are stored the doctrine mapping.
-     *
-     * @return string
      */
     protected function getDoctrineMappingDirectory(): string
     {
@@ -94,8 +90,6 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
 
     /**
      * Return the entity namespace.
-     *
-     * @return string
      */
     protected function getModelNamespace(): ?string
     {
@@ -105,9 +99,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     /**
      * Return mapping compiler pass class depending on driver.
      *
-     * @param string $driverType
      *
-     * @return array
      *
      * @throws UnknownDriverException
      */
@@ -137,8 +129,6 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
 
     /**
      * Return the absolute path where are stored the doctrine mapping.
-     *
-     * @return string
      */
     protected function getConfigFilesPath(): string
     {
@@ -149,9 +139,6 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
         );
     }
 
-    /**
-     * @return string
-     */
     protected function getObjectManagerParameter(): string
     {
         return sprintf('%s.object_manager', $this->getBundlePrefix());

@@ -87,19 +87,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
      */
     private $defaultLocaleCode;
 
-    /**
-     * @param RepositoryInterface $channelRepository
-     * @param RepositoryInterface $countryRepository
-     * @param RepositoryInterface $currencyRepository
-     * @param RepositoryInterface $localeRepository
-     * @param RepositoryInterface $zoneRepository
-     * @param ChannelFactoryInterface $channelFactory
-     * @param FactoryInterface $countryFactory
-     * @param FactoryInterface $currencyFactory
-     * @param FactoryInterface $localeFactory
-     * @param ZoneFactoryInterface $zoneFactory
-     * @param string $defaultLocaleCode
-     */
     public function __construct(
         RepositoryInterface $channelRepository,
         RepositoryInterface $countryRepository,

@@ -152,8 +152,6 @@ interface ProductInterface extends
     public function isConfigurable(): bool;
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

@@ -31,81 +31,81 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 final class ProductVariantSpec extends ObjectBehavior
 {
-    function it_implements_a_product_variant_interface(): void
+    public function it_implements_a_product_variant_interface(): void
     {
         $this->shouldImplement(ProductVariantInterface::class);
     }
 
-    function it_implements_a_taxable_interface(): void
+    public function it_implements_a_taxable_interface(): void
     {
         $this->shouldImplement(TaxableInterface::class);
     }
 
-    function it_extends_a_product_variant_model(): void
+    public function it_extends_a_product_variant_model(): void
     {
         $this->shouldHaveType(BaseProductVariant::class);
     }
 
-    function it_implements_a_shippable_interface(): void
+    public function it_implements_a_shippable_interface(): void
     {
         $this->shouldImplement(ShippableInterface::class);
     }
 
-    function it_implements_versioned_interface(): void
+    public function it_implements_versioned_interface(): void
     {
         $this->shouldImplement(VersionedInterface::class);
     }
 
-    function it_implements_a_product_image_aware_interface(): void
+    public function it_implements_a_product_image_aware_interface(): void
     {
         $this->shouldImplement(ProductImagesAwareInterface::class);
     }
 
-    function it_has_version_1_by_default(): void
+    public function it_has_version_1_by_default(): void
     {
         $this->getVersion()->shouldReturn(1);
     }
 
-    function it_has_no_weight_by_default(): void
+    public function it_has_no_weight_by_default(): void
     {
         $this->getWeight()->shouldReturn(null);
     }
 
-    function its_weight_is_mutable(): void
+    public function its_weight_is_mutable(): void
     {
         $this->setWeight(120.00);
         $this->getWeight()->shouldReturn(120.00);
     }
 
-    function it_has_no_width_by_default(): void
+    public function it_has_no_width_by_default(): void
     {
         $this->getWidth()->shouldReturn(null);
     }
 
-    function its_width_is_mutable(): void
+    public function its_width_is_mutable(): void
     {
         $this->setWidth(15.00);
         $this->getWidth()->shouldReturn(15.00);
     }
 
-    function it_has_no_height_by_default(): void
+    public function it_has_no_height_by_default(): void
     {
         $this->getHeight()->shouldReturn(null);
     }
 
-    function its_height_is_mutable(): void
+    public function its_height_is_mutable(): void
     {
         $this->setHeight(40.00);
         $this->getHeight()->shouldReturn(40.00);
     }
 
-    function it_returns_correct_shipping_weight(): void
+    public function it_returns_correct_shipping_weight(): void
     {
         $this->setWeight(140.00);
         $this->getShippingWeight()->shouldReturn(140.00);
     }
 
-    function it_returns_correct_shipping_volume(): void
+    public function it_returns_correct_shipping_volume(): void
     {
         $this->setWidth(10.00);
         $this->setHeight(20.00);
@@ -113,41 +113,41 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->getShippingVolume()->shouldReturn(2000.00);
     }
 
-    function it_returns_correct_shipping_width(): void
+    public function it_returns_correct_shipping_width(): void
     {
         $this->setWidth(100.00);
         $this->getShippingWidth()->shouldReturn(100.00);
     }
 
-    function it_returns_correct_shipping_height(): void
+    public function it_returns_correct_shipping_height(): void
     {
         $this->setHeight(110.00);
         $this->getShippingHeight()->shouldReturn(110.00);
     }
 
-    function it_has_no_code_by_default(): void
+    public function it_has_no_code_by_default(): void
     {
         $this->getCode()->shouldReturn(null);
     }
 
-    function its_code_is_mutable(): void
+    public function its_code_is_mutable(): void
     {
         $this->setCode('dummy-sku123');
         $this->getCode()->shouldReturn('dummy-sku123');
     }
 
-    function it_does_not_have_tax_category_by_default(): void
+    public function it_does_not_have_tax_category_by_default(): void
     {
         $this->getTaxCategory()->shouldReturn(null);
     }
 
-    function it_allows_setting_the_tax_category(TaxCategoryInterface $taxCategory): void
+    public function it_allows_setting_the_tax_category(TaxCategoryInterface $taxCategory): void
     {
         $this->setTaxCategory($taxCategory);
         $this->getTaxCategory()->shouldReturn($taxCategory);
     }
 
-    function it_allows_resetting_the_tax_category(TaxCategoryInterface $taxCategory): void
+    public function it_allows_resetting_the_tax_category(TaxCategoryInterface $taxCategory): void
     {
         $this->setTaxCategory($taxCategory);
         $this->getTaxCategory()->shouldReturn($taxCategory);
@@ -156,18 +156,18 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->getTaxCategory()->shouldReturn(null);
     }
 
-    function it_has_no_shipping_category_by_default(): void
+    public function it_has_no_shipping_category_by_default(): void
     {
         $this->getShippingCategory()->shouldReturn(null);
     }
 
-    function its_shipping_category_is_mutable(ShippingCategoryInterface $shippingCategory): void
+    public function its_shipping_category_is_mutable(ShippingCategoryInterface $shippingCategory): void
     {
         $this->setShippingCategory($shippingCategory);
         $this->getShippingCategory()->shouldReturn($shippingCategory);
     }
 
-    function it_adds_and_removes_channel_pricings(ChannelPricingInterface $channelPricing): void
+    public function it_adds_and_removes_channel_pricings(ChannelPricingInterface $channelPricing): void
     {
         $channelPricing->getChannelCode()->willReturn('WEB');
 
@@ -180,7 +180,7 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->hasChannelPricing($channelPricing)->shouldReturn(false);
     }
 
-    function it_has_channel_pricings_collection(
+    public function it_has_channel_pricings_collection(
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing
     ): void {
@@ -199,7 +199,7 @@ final class ProductVariantSpec extends ObjectBehavior
         ]));
     }
 
-    function it_checks_if_contains_channel_pricing_for_given_channel(
+    public function it_checks_if_contains_channel_pricing_for_given_channel(
         ChannelInterface $firstChannel,
         ChannelInterface $secondChannel,
         ChannelPricingInterface $firstChannelPricing
@@ -217,7 +217,7 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->hasChannelPricingForChannel($secondChannel)->shouldReturn(false);
     }
 
-    function it_returns_channel_pricing_for_given_channel(
+    public function it_returns_channel_pricing_for_given_channel(
         ChannelInterface $channel,
         ChannelPricingInterface $channelPricing
     ): void {
@@ -232,37 +232,37 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->getChannelPricingForChannel($channel)->shouldReturn($channelPricing);
     }
 
-    function it_requires_shipping_by_default(): void
+    public function it_requires_shipping_by_default(): void
     {
         $this->isShippingRequired()->shouldReturn(true);
     }
 
-    function its_shipping_can_be_not_required(): void
+    public function its_shipping_can_be_not_required(): void
     {
         $this->setShippingRequired(false);
         $this->isShippingRequired()->shouldReturn(false);
     }
 
-    function it_initializes_image_collection_by_default(): void
+    public function it_initializes_image_collection_by_default(): void
     {
         $this->getImages()->shouldHaveType(Collection::class);
     }
 
-    function it_adds_an_image(ProductImageInterface $image): void
+    public function it_adds_an_image(ProductImageInterface $image): void
     {
         $this->addImage($image);
         $this->hasImages()->shouldReturn(true);
         $this->hasImage($image)->shouldReturn(true);
     }
 
-    function it_removes_an_image(ProductImageInterface $image): void
+    public function it_removes_an_image(ProductImageInterface $image): void
     {
         $this->addImage($image);
         $this->removeImage($image);
         $this->hasImage($image)->shouldReturn(false);
     }
 
-    function it_returns_images_by_type(ProductImageInterface $image, Product $product): void
+    public function it_returns_images_by_type(ProductImageInterface $image, Product $product): void
     {
         $image->getType()->willReturn('thumbnail');
 

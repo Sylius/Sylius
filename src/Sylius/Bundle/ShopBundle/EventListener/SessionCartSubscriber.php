@@ -32,10 +32,6 @@ final class SessionCartSubscriber implements EventSubscriberInterface
      */
     private $cartStorage;
 
-    /**
-     * @param CartContextInterface $cartContext
-     * @param CartStorageInterface $cartStorage
-     */
     public function __construct(CartContextInterface $cartContext, CartStorageInterface $cartStorage)
     {
         $this->cartContext = $cartContext;
@@ -52,9 +48,6 @@ final class SessionCartSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FilterResponseEvent $event
-     */
     public function onKernelResponse(FilterResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {

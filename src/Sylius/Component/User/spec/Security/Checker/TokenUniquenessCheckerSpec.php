@@ -20,24 +20,24 @@ use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 
 final class TokenUniquenessCheckerSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository): void
+    public function let(RepositoryInterface $repository): void
     {
         $this->beConstructedWith($repository, 'aRandomToken');
     }
 
-    function it_implements_token_uniqueness_checker_interface(): void
+    public function it_implements_token_uniqueness_checker_interface(): void
     {
         $this->shouldImplement(UniquenessCheckerInterface::class);
     }
 
-    function it_returns_true_when_token_is_not_used(RepositoryInterface $repository): void
+    public function it_returns_true_when_token_is_not_used(RepositoryInterface $repository): void
     {
         $repository->findOneBy(['aRandomToken' => 'freeToken'])->willReturn(null);
 
         $this->isUnique('freeToken')->shouldReturn(true);
     }
 
-    function it_returns_false_when_token_is_in_use(RepositoryInterface $repository): void
+    public function it_returns_false_when_token_is_in_use(RepositoryInterface $repository): void
     {
         $repository->findOneBy(['aRandomToken' => 'takenToken'])->willReturn(Argument::any());
 

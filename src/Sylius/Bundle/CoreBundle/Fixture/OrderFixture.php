@@ -106,22 +106,6 @@ class OrderFixture extends AbstractFixture
      */
     private $faker;
 
-    /**
-     * @param FactoryInterface $orderFactory
-     * @param FactoryInterface $orderItemFactory
-     * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
-     * @param ObjectManager $orderManager
-     * @param RepositoryInterface $channelRepository
-     * @param RepositoryInterface $customerRepository
-     * @param RepositoryInterface $productRepository
-     * @param RepositoryInterface $countryRepository
-     * @param PaymentMethodRepositoryInterface $paymentMethodRepository
-     * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-     * @param FactoryInterface $addressFactory
-     * @param StateMachineFactoryInterface $stateMachineFactory
-     * @param OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
-     * @param OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
-     */
     public function __construct(
         FactoryInterface $orderFactory,
         FactoryInterface $orderItemFactory,
@@ -215,12 +199,9 @@ class OrderFixture extends AbstractFixture
         ;
     }
 
-    /**
-     * @param OrderInterface $order
-     */
     private function generateItems(OrderInterface $order): void
     {
-        $numberOfItems = rand(1, 5);
+        $numberOfItems = random_int(1, 5);
         $products = $this->productRepository->findAll();
 
         for ($i = 0; $i < $numberOfItems; ++$i) {
@@ -230,16 +211,12 @@ class OrderFixture extends AbstractFixture
             $variant = $this->faker->randomElement($product->getVariants()->toArray());
 
             $item->setVariant($variant);
-            $this->orderItemQuantityModifier->modify($item, rand(1, 5));
+            $this->orderItemQuantityModifier->modify($item, random_int(1, 5));
 
             $order->addItem($item);
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param string $countryCode
-     */
     private function address(OrderInterface $order, string $countryCode): void
     {
         /** @var AddressInterface $address */
@@ -257,9 +234,6 @@ class OrderFixture extends AbstractFixture
         $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
     }
 
-    /**
-     * @param OrderInterface $order
-     */
     private function selectShipping(OrderInterface $order): void
     {
         $shippingMethod = $this
@@ -277,9 +251,6 @@ class OrderFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     */
     private function selectPayment(OrderInterface $order): void
     {
         $paymentMethod = $this
@@ -297,9 +268,6 @@ class OrderFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     */
     private function completeCheckout(OrderInterface $order): void
     {
         if ($this->faker->boolean(25)) {
@@ -309,10 +277,6 @@ class OrderFixture extends AbstractFixture
         $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param string $transition
-     */
     private function applyCheckoutStateTransition(OrderInterface $order, string $transition): void
     {
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);

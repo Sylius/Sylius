@@ -18,12 +18,12 @@ use Symfony\Component\Validator\Constraint;
 
 final class ProductVariantCombinationSpec extends ObjectBehavior
 {
-    function it_is_a_validation_constraint(): void
+    public function it_is_a_validation_constraint(): void
     {
         $this->shouldHaveType(Constraint::class);
     }
 
-    function it_is_class_constraint(): void
+    public function it_is_class_constraint(): void
     {
         $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
     }

@@ -26,9 +26,6 @@ final class ChannelCollectionType extends AbstractType
      */
     private $channelRepository;
 
-    /**
-     * @param ChannelRepositoryInterface $channelRepository
-     */
     public function __construct(ChannelRepositoryInterface $channelRepository)
     {
         $this->channelRepository = $channelRepository;

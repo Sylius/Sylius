@@ -20,20 +20,20 @@ interface SharedStorageInterface
      *
      * @return mixed
      */
-    public function get($key);
+    public function get(string $key);
 
     /**
      * @param string $key
      *
      * @return bool
      */
-    public function has($key);
+    public function has(string $key): bool;
 
     /**
      * @param string $key
      * @param mixed $resource
      */
-    public function set($key, $resource);
+    public function set(string $key, $resource): void;
 
     /**
      * @return mixed
@@ -45,5 +45,5 @@ interface SharedStorageInterface
      *
      * @throws \RuntimeException
      */
-    public function setClipboard(array $clipboard);
+    public function setClipboard(array $clipboard): void;
 }

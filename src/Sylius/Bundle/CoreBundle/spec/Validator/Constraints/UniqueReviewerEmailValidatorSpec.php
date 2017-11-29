@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         UserRepositoryInterface $userRepository,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker,
@@ -38,12 +38,12 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
         $this->initialize($executionContextInterface);
     }
 
-    function it_extends_constraint_validator_class(): void
+    public function it_extends_constraint_validator_class(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
 
-    function it_validates_if_user_with_given_email_is_already_registered(
+    public function it_validates_if_user_with_given_email_is_already_registered(
         UserRepositoryInterface $userRepository,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker,

@@ -27,17 +27,11 @@ final class SelectProductAttributeChoiceRemoveListener
      */
     private $productAttributeValueClass;
 
-    /**
-     * @param string $productAttributeValueClass
-     */
     public function __construct(string $productAttributeValueClass)
     {
         $this->productAttributeValueClass = $productAttributeValueClass;
     }
 
-    /**
-     * @param LifecycleEventArgs $event
-     */
     public function postUpdate(LifecycleEventArgs $event): void
     {
         /** @var ProductAttributeInterface $productAttribute */
@@ -66,7 +60,6 @@ final class SelectProductAttributeChoiceRemoveListener
     }
 
     /**
-     * @param ObjectManager $entityManager
      * @param array|string[] $choiceKeys
      */
     public function removeValues(ObjectManager $entityManager, array $choiceKeys): void

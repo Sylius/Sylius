@@ -59,11 +59,9 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     *
      * @return Pagerfanta
      */
-    public function getPaginator(QueryBuilder $queryBuilder)
+    public function getPaginator(QueryBuilder $queryBuilder): Pagerfanta
     {
         return new Pagerfanta(new DoctrineODMPhpcrAdapter($queryBuilder));
     }
@@ -71,16 +69,12 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     /**
      * @return QueryBuilder
      */
-    protected function getCollectionQueryBuilder()
+    protected function getCollectionQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('o');
     }
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param array        $criteria
-     */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
         $metadata = $this->getClassMetadata();
         foreach ($criteria as $property => $value) {
@@ -102,11 +96,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         }
     }
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param array        $sorting
-     */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = []): void
     {
         foreach ($sorting as $property => $order) {
             if (!empty($order)) {
@@ -117,12 +107,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         $queryBuilder->end();
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
-    protected function getPropertyName($name)
+    protected function getPropertyName(string $name): string
     {
         if (false === strpos($name, '.')) {
             return $this->getAlias() . '.' . $name;
@@ -131,10 +116,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return $name;
     }
 
-    /**
-     * @return string
-     */
-    protected function getAlias()
+    protected function getAlias(): string
     {
         return 'o';
     }

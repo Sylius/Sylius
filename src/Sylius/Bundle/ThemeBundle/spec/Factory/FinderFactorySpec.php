@@ -19,12 +19,12 @@ use Symfony\Component\Finder\Finder;
 
 final class FinderFactorySpec extends ObjectBehavior
 {
-    function it_implements_finder_factory_interface(): void
+    public function it_implements_finder_factory_interface(): void
     {
         $this->shouldImplement(FinderFactoryInterface::class);
     }
 
-    function it_creates_a_brand_new_finder(): void
+    public function it_creates_a_brand_new_finder(): void
     {
         $this->create()->shouldHaveType(Finder::class);
     }

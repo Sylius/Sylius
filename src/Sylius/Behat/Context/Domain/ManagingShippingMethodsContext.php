@@ -31,10 +31,6 @@ final class ManagingShippingMethodsContext implements Context
      */
     private $shippingMethodManager;
 
-    /**
-     * @param RepositoryInterface $shippingMethodRepository
-     * @param ObjectManager $shippingMethodManager
-     */
     public function __construct(RepositoryInterface $shippingMethodRepository, ObjectManager $shippingMethodManager)
     {
         $this->shippingMethodRepository = $shippingMethodRepository;
@@ -44,7 +40,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When /^I archive the ("[^"]+" shipping method)$/
      */
-    public function iArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod)
+    public function iArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $shippingMethod->setArchivedAt(new \DateTime());
 
@@ -54,7 +50,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then the shipping method :shippingMethod should still exist in the registry
      */
-    public function theShippingMethodShouldStillExistInTheRegistry(ShippingMethodInterface $shippingMethod)
+    public function theShippingMethodShouldStillExistInTheRegistry(ShippingMethodInterface $shippingMethod): void
     {
         Assert::notNull($this->shippingMethodRepository->find($shippingMethod));
     }

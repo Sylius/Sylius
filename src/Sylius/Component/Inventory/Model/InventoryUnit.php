@@ -41,9 +41,6 @@ class InventoryUnit implements InventoryUnitInterface
         return $this->stockable;
     }
 
-    /**
-     * @param StockableInterface $stockable
-     */
     public function setStockable(StockableInterface $stockable): void
     {
         $this->stockable = $stockable;

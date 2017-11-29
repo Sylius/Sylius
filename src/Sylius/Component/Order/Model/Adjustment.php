@@ -262,8 +262,6 @@ class Adjustment implements AdjustmentInterface
     }
 
     /**
-     * @param AdjustableInterface $adjustable
-     *
      * @throws \InvalidArgumentException
      */
     private function assignAdjustable(AdjustableInterface $adjustable): void

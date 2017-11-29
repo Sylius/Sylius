@@ -18,19 +18,19 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 final class ResourceNotFoundExceptionSpec extends ObjectBehavior
 {
-    function let(ThemeInterface $theme): void
+    public function let(ThemeInterface $theme): void
     {
         $theme->getName()->willReturn('theme/name');
 
         $this->beConstructedWith('resource name', $theme);
     }
 
-    function it_is_a_runtime_exception(): void
+    public function it_is_a_runtime_exception(): void
     {
         $this->shouldHaveType(\RuntimeException::class);
     }
 
-    function it_has_custom_message(): void
+    public function it_has_custom_message(): void
     {
         $this->getMessage()->shouldReturn('Could not find resource "resource name" using theme "theme/name".');
     }

@@ -52,11 +52,6 @@ class AddressExampleFactory extends AbstractExampleFactory
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $addressFactory
-     * @param RepositoryInterface $countryRepository
-     * @param RepositoryInterface $customerRepository
-     */
     public function __construct(
         FactoryInterface $addressFactory,
         RepositoryInterface $countryRepository,
@@ -85,10 +80,10 @@ class AddressExampleFactory extends AbstractExampleFactory
                 return $this->faker->lastName;
             })
             ->setDefault('phone_number', function (Options $options): ?string {
-                return mt_rand(1, 100) > 50 ? $this->faker->phoneNumber : null;
+                return random_int(1, 100) > 50 ? $this->faker->phoneNumber : null;
             })
             ->setDefault('company', function (Options $options): ?string {
-                return mt_rand(1, 100) > 50 ? $this->faker->company : null;
+                return random_int(1, 100) > 50 ? $this->faker->company : null;
             })
             ->setDefault('street', function (Options $options): string {
                 return $this->faker->streetAddress;
@@ -146,8 +141,6 @@ class AddressExampleFactory extends AbstractExampleFactory
     }
 
     /**
-     * @param string $code
-     *
      * @throws \InvalidArgumentException
      */
     private function assertCountryCodeIsValid(string $code): void
@@ -157,9 +150,6 @@ class AddressExampleFactory extends AbstractExampleFactory
     }
 
     /**
-     * @param string $provinceCode
-     * @param string $countryCode
-     *
      * @throws \InvalidArgumentException
      */
     private function assertProvinceCodeIsValid(string $provinceCode, string $countryCode): void
@@ -176,10 +166,6 @@ class AddressExampleFactory extends AbstractExampleFactory
         throw new \InvalidArgumentException(sprintf('Provided province code is not valid for "%s"', $country->getName()));
     }
 
-    /**
-     * @param array $options
-     * @param AddressInterface $address
-     */
     private function provideProvince(array $options, AddressInterface $address): void
     {
         /** @var Country $country */
@@ -195,11 +181,6 @@ class AddressExampleFactory extends AbstractExampleFactory
     }
 
     /**
-     * @param Collection $provinces
-     * @param string $provinceName
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     private function getProvinceCode(Collection $provinces, string $provinceName): string
@@ -214,10 +195,6 @@ class AddressExampleFactory extends AbstractExampleFactory
         throw new \InvalidArgumentException(sprintf('Country has defined provinces, but %s is not one of them', $provinceName));
     }
 
-    /**
-     * @param array $options
-     * @param AddressInterface $address
-     */
     private function resolveCountryProvince(array $options, AddressInterface $address): void
     {
         if (null !== $options['province_code']) {

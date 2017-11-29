@@ -23,17 +23,17 @@ use Symfony\Component\Form\FormInterface;
 
 final class ResourceFormFactorySpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $formFactory): void
+    public function let(FormFactoryInterface $formFactory): void
     {
         $this->beConstructedWith($formFactory);
     }
 
-    function it_implements_resource_form_factory_interface(): void
+    public function it_implements_resource_form_factory_interface(): void
     {
         $this->shouldImplement(ResourceFormFactoryInterface::class);
     }
 
-    function it_creates_appropriate_form_based_on_configuration(
+    public function it_creates_appropriate_form_based_on_configuration(
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource,
         FormFactoryInterface $formFactory,
@@ -47,7 +47,7 @@ final class ResourceFormFactorySpec extends ObjectBehavior
         $this->create($requestConfiguration, $resource)->shouldReturn($form);
     }
 
-    function it_creates_form_without_root_name_and_disables_csrf_protection_for_non_html_requests(
+    public function it_creates_form_without_root_name_and_disables_csrf_protection_for_non_html_requests(
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource,
         FormFactoryInterface $formFactory,

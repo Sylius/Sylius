@@ -31,12 +31,6 @@ class OrderShowMenuBuilderEvent extends MenuBuilderEvent
      */
     private $stateMachine;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param ItemInterface $menu
-     * @param OrderInterface $order
-     * @param StateMachineInterface $stateMachine
-     */
     public function __construct(
         FactoryInterface $factory,
         ItemInterface $menu,

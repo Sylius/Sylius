@@ -36,12 +36,7 @@ class LocaleFixture extends AbstractFixture
      */
     private $baseLocaleCode;
 
-    /**
-     * @param FactoryInterface $localeFactory
-     * @param ObjectManager $localeManager
-     * @param string $baseLocaleCode
-     */
-    public function __construct(FactoryInterface $localeFactory, ObjectManager $localeManager, $baseLocaleCode)
+    public function __construct(FactoryInterface $localeFactory, ObjectManager $localeManager, string $baseLocaleCode)
     {
         $this->localeFactory = $localeFactory;
         $this->localeManager = $localeManager;

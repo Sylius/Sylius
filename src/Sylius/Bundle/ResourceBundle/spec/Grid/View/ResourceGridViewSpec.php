@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 
 final class ResourceGridViewSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         Grid $gridDefinition,
         MetadataInterface $resourceMetadata,
         RequestConfiguration $requestConfiguration
@@ -30,17 +30,17 @@ final class ResourceGridViewSpec extends ObjectBehavior
         $this->beConstructedWith(['foo', 'bar'], $gridDefinition, new Parameters(), $resourceMetadata, $requestConfiguration);
     }
 
-    function it_extends_default_GridView(): void
+    public function it_extends_default_GridView(): void
     {
         $this->shouldHaveType(GridView::class);
     }
 
-    function it_has_resource_metadata(MetadataInterface $resourceMetadata): void
+    public function it_has_resource_metadata(MetadataInterface $resourceMetadata): void
     {
         $this->getMetadata()->shouldReturn($resourceMetadata);
     }
 
-    function it_has_request_configuration(RequestConfiguration $requestConfiguration): void
+    public function it_has_request_configuration(RequestConfiguration $requestConfiguration): void
     {
         $this->getRequestConfiguration()->shouldReturn($requestConfiguration);
     }

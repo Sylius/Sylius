@@ -24,7 +24,7 @@ class RegisterResourcesPassTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function it_adds_method_call_to_resource_registry_if_resources_exist()
+    public function it_adds_method_call_to_resource_registry_if_resources_exist(): void
     {
         $this->setDefinition('sylius.resource_registry', new Definition());
 
@@ -54,7 +54,7 @@ class RegisterResourcesPassTest extends AbstractCompilerPassTestCase
     /**
      * {@inheritdoc}
      */
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new RegisterResourcesPass());
     }
@@ -62,7 +62,7 @@ class RegisterResourcesPassTest extends AbstractCompilerPassTestCase
 
 class AbstractResource implements ResourceInterface
 {
-    public function getId()
+    public function getId(): void
     {
         return;
     }

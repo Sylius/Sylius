@@ -21,7 +21,7 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class CheckoutStepsHelperSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
     ): void {
@@ -31,12 +31,12 @@ final class CheckoutStepsHelperSpec extends ObjectBehavior
         );
     }
 
-    function it_is_helper(): void
+    public function it_is_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_checks_if_order_requires_shipping(
+    public function it_checks_if_order_requires_shipping(
         OrderInterface $order,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
     ): void {
@@ -45,7 +45,7 @@ final class CheckoutStepsHelperSpec extends ObjectBehavior
         $this->isShippingRequired($order)->shouldReturn(true);
     }
 
-    function it_checks_if_order_required_payment(
+    public function it_checks_if_order_required_payment(
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
     ): void {
@@ -53,7 +53,7 @@ final class CheckoutStepsHelperSpec extends ObjectBehavior
         $this->isPaymentRequired($order)->shouldReturn(true);
     }
 
-    function it_has_name(): void
+    public function it_has_name(): void
     {
         $this->getName()->shouldReturn('sylius_checkout_steps');
     }

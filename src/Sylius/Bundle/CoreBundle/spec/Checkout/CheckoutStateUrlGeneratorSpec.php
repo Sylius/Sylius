@@ -23,7 +23,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
 {
-    function let(RouterInterface $router): void
+    public function let(RouterInterface $router): void
     {
         $routeCollection = [
             'addressed' => [
@@ -37,17 +37,17 @@ final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
         $this->beConstructedWith($router, $routeCollection);
     }
 
-    function it_is_a_url_generator(): void
+    public function it_is_a_url_generator(): void
     {
         $this->shouldImplement(UrlGeneratorInterface::class);
     }
 
-    function it_is_a_checkout_state_url_generator(): void
+    public function it_is_a_checkout_state_url_generator(): void
     {
         $this->shouldImplement(CheckoutStateUrlGeneratorInterface::class);
     }
 
-    function it_generates_state_url(RouterInterface $router, OrderInterface $order): void
+    public function it_generates_state_url(RouterInterface $router, OrderInterface $order): void
     {
         $order->getCheckoutState()->willReturn('addressed');
 
@@ -58,14 +58,14 @@ final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
         $this->generateForOrderCheckoutState($order)->shouldReturn('/checkout/address');
     }
 
-    function it_is_a_regular_url_generator(RouterInterface $router): void
+    public function it_is_a_regular_url_generator(RouterInterface $router): void
     {
         $router->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)->willReturn('/some-route');
 
         $this->generate('route_name')->shouldReturn('/some-route');
     }
 
-    function it_throws_route_not_found_exception_if_there_is_no_route_for_given_state(
+    public function it_throws_route_not_found_exception_if_there_is_no_route_for_given_state(
         RouterInterface $router,
         OrderInterface $order
     ): void {
@@ -75,7 +75,7 @@ final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
         $this->shouldThrow(RouteNotFoundException::class)->during('generateForOrderCheckoutState', [$order]);
     }
 
-    function it_generates_cart_url(RouterInterface $router): void
+    public function it_generates_cart_url(RouterInterface $router): void
     {
         $router->generate('sylius_shop_cart_summary', [], UrlGeneratorInterface::ABSOLUTE_PATH)->willReturn('/cart');
 

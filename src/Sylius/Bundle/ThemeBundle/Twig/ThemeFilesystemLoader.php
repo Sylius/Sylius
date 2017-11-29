@@ -38,11 +38,6 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
      */
     private $cache = [];
 
-    /**
-     * @param \Twig_LoaderInterface $decoratedLoader
-     * @param FileLocatorInterface $templateLocator
-     * @param TemplateNameParserInterface $templateNameParser
-     */
     public function __construct(
         \Twig_LoaderInterface $decoratedLoader,
         FileLocatorInterface $templateLocator,
@@ -62,7 +57,7 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
             $path = $this->findTemplate((string) $name);
 
             return new \Twig_Source(file_get_contents($path), $name, $path);
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             return $this->decoratedLoader->getSourceContext((string) $name);
         }
     }
@@ -74,7 +69,7 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
     {
         try {
             return $this->findTemplate((string) $name);
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             return $this->decoratedLoader->getCacheKey((string) $name);
         }
     }
@@ -86,7 +81,7 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
     {
         try {
             return filemtime($this->findTemplate((string) $name)) <= $time;
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             return $this->decoratedLoader->isFresh((string) $name, $time);
         }
     }
@@ -98,16 +93,11 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
     {
         try {
             return stat($this->findTemplate((string) $name)) !== false;
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             return $this->decoratedLoader->exists((string) $name);
         }
     }
 
-    /**
-     * @param string $logicalName
-     *
-     * @return string
-     */
     private function findTemplate(string $logicalName): string
     {
         if (isset($this->cache[$logicalName])) {

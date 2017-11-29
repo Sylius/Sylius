@@ -46,7 +46,7 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
         }
 
         $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
                 $gatewayConfig = $event->getData();
 
                 if (!$gatewayConfig instanceof CryptedInterface) {
@@ -57,7 +57,7 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
 
                 $event->setData($gatewayConfig);
             })
-            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {
                 $gatewayConfig = $event->getData();
 
                 if (!$gatewayConfig instanceof CryptedInterface) {

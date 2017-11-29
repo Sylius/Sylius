@@ -20,17 +20,17 @@ use Symfony\Component\Routing\RouteCollection;
 
 final class RouteFactorySpec extends ObjectBehavior
 {
-    function it_implements_route_factory_interface(): void
+    public function it_implements_route_factory_interface(): void
     {
         $this->shouldImplement(RouteFactoryInterface::class);
     }
 
-    function it_creates_empty_route_collection(): void
+    public function it_creates_empty_route_collection(): void
     {
         $this->createRouteCollection()->shouldHaveType(RouteCollection::class);
     }
 
-    function it_creates_a_new_route(): void
+    public function it_creates_a_new_route(): void
     {
         $defaults = [
             '_controller' => 'sylius.controller.product:showAction',

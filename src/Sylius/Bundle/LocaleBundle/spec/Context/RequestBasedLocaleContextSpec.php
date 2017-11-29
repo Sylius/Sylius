@@ -23,24 +23,24 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class RequestBasedLocaleContextSpec extends ObjectBehavior
 {
-    function let(RequestStack $requestStack, LocaleProviderInterface $localeProvider): void
+    public function let(RequestStack $requestStack, LocaleProviderInterface $localeProvider): void
     {
         $this->beConstructedWith($requestStack, $localeProvider);
     }
 
-    function it_is_a_locale_context(): void
+    public function it_is_a_locale_context(): void
     {
         $this->shouldImplement(LocaleContextInterface::class);
     }
 
-    function it_throws_locale_not_found_exception_if_master_request_is_not_found(RequestStack $requestStack): void
+    public function it_throws_locale_not_found_exception_if_master_request_is_not_found(RequestStack $requestStack): void
     {
         $requestStack->getMasterRequest()->willReturn(null);
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
-    function it_throws_locale_not_found_exception_if_master_request_does_not_have_locale_attribute(
+    public function it_throws_locale_not_found_exception_if_master_request_does_not_have_locale_attribute(
         RequestStack $requestStack,
         Request $request
     ): void {
@@ -51,7 +51,7 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
-    function it_throws_locale_not_found_exception_if_master_request_locale_code_is_not_among_available_ones(
+    public function it_throws_locale_not_found_exception_if_master_request_locale_code_is_not_among_available_ones(
         RequestStack $requestStack,
         LocaleProviderInterface $localeProvider,
         Request $request
@@ -65,7 +65,7 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
-    function it_returns_master_request_locale_code(
+    public function it_returns_master_request_locale_code(
         RequestStack $requestStack,
         LocaleProviderInterface $localeProvider,
         Request $request

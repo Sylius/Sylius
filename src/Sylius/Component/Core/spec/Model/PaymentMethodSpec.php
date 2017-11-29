@@ -21,17 +21,17 @@ use Sylius\Component\Payment\Model\PaymentMethod as BasePaymentMethod;
 
 final class PaymentMethodSpec extends ObjectBehavior
 {
-    function it_is_payment_method(): void
+    public function it_is_payment_method(): void
     {
         $this->shouldHaveType(BasePaymentMethod::class);
     }
 
-    function it_implements_payment_method_interface(): void
+    public function it_implements_payment_method_interface(): void
     {
         $this->shouldImplement(PaymentMethodInterface::class);
     }
 
-    function it_has_channels_collection(ChannelInterface $firstChannel, ChannelInterface $secondChannel): void
+    public function it_has_channels_collection(ChannelInterface $firstChannel, ChannelInterface $secondChannel): void
     {
         $this->addChannel($firstChannel);
         $this->addChannel($secondChannel);
@@ -39,7 +39,7 @@ final class PaymentMethodSpec extends ObjectBehavior
         $this->getChannels()->shouldIterateAs([$firstChannel, $secondChannel]);
     }
 
-    function it_can_add_and_remove_channels(ChannelInterface $channel): void
+    public function it_can_add_and_remove_channels(ChannelInterface $channel): void
     {
         $this->addChannel($channel);
         $this->hasChannel($channel)->shouldReturn(true);
@@ -48,7 +48,7 @@ final class PaymentMethodSpec extends ObjectBehavior
         $this->hasChannel($channel)->shouldReturn(false);
     }
 
-    function its_gateway_config_is_mutable(GatewayConfigInterface $gatewayConfig): void
+    public function its_gateway_config_is_mutable(GatewayConfigInterface $gatewayConfig): void
     {
         $this->setGatewayConfig($gatewayConfig);
         $this->getGatewayConfig()->shouldReturn($gatewayConfig);

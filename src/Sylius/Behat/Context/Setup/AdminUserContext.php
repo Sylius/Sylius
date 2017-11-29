@@ -36,11 +36,6 @@ final class AdminUserContext implements Context
      */
     private $userRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ExampleFactoryInterface $userFactory
-     * @param UserRepositoryInterface $userRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $userFactory,
@@ -55,7 +50,7 @@ final class AdminUserContext implements Context
      * @Given there is an administrator :email identified by :password
      * @Given /^there is(?:| also) an administrator "([^"]+)"$/
      */
-    public function thereIsAnAdministratorIdentifiedBy($email, $password = 'sylius')
+    public function thereIsAnAdministratorIdentifiedBy($email, $password = 'sylius'): void
     {
         $adminUser = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
         $this->userRepository->add($adminUser);
@@ -65,7 +60,7 @@ final class AdminUserContext implements Context
     /**
      * @Given there is an administrator with name :username
      */
-    public function thereIsAnAdministratorWithName($username)
+    public function thereIsAnAdministratorWithName($username): void
     {
         $adminUser = $this->userFactory->create(['username' => $username]);
         $adminUser->setUsername($username);
@@ -78,7 +73,7 @@ final class AdminUserContext implements Context
      * @Given /^(this administrator) is using ("[^"]+" locale)$/
      * @Given /^(I) am using ("[^"]+" locale) for my panel$/
      */
-    public function thisAdministratorIsUsingLocale(AdminUserInterface $adminUser, $localeCode)
+    public function thisAdministratorIsUsingLocale(AdminUserInterface $adminUser, $localeCode): void
     {
         $adminUser->setLocaleCode($localeCode);
 

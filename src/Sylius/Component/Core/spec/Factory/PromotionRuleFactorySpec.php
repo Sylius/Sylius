@@ -26,17 +26,17 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PromotionRuleFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $decoratedFactory): void
+    public function let(FactoryInterface $decoratedFactory): void
     {
         $this->beConstructedWith($decoratedFactory);
     }
 
-    function it_implements_a_rule_factory_interface(): void
+    public function it_implements_a_rule_factory_interface(): void
     {
         $this->shouldImplement(PromotionRuleFactoryInterface::class);
     }
 
-    function it_uses_a_decorated_factory_to_create_new_rule_object(
+    public function it_uses_a_decorated_factory_to_create_new_rule_object(
         FactoryInterface $decoratedFactory,
         PromotionRuleInterface $rule
     ): void {
@@ -45,7 +45,7 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $this->createNew()->shouldReturn($rule);
     }
 
-    function it_creates_a_cart_quantity_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule): void
+    public function it_creates_a_cart_quantity_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule): void
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(CartQuantityRuleChecker::TYPE)->shouldBeCalled();
@@ -54,7 +54,7 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $this->createCartQuantity(5)->shouldReturn($rule);
     }
 
-    function it_creates_an_item_total_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule): void
+    public function it_creates_an_item_total_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule): void
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(ItemTotalRuleChecker::TYPE)->shouldBeCalled();
@@ -63,7 +63,7 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $this->createItemTotal('WEB_US', 1000)->shouldReturn($rule);
     }
 
-    function it_creates_a_has_taxon_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule): void
+    public function it_creates_a_has_taxon_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule): void
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(HasTaxonRuleChecker::TYPE)->shouldBeCalled();
@@ -72,7 +72,7 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $this->createHasTaxon([1, 6])->shouldReturn($rule);
     }
 
-    function it_creates_a_total_of_items_from_taxon_rule(
+    public function it_creates_a_total_of_items_from_taxon_rule(
         FactoryInterface $decoratedFactory,
         PromotionRuleInterface $rule
     ): void {
@@ -83,7 +83,7 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $this->createItemsFromTaxonTotal('WEB_US', 'spears', 1000)->shouldReturn($rule);
     }
 
-    function it_creates_a_nth_order_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule): void
+    public function it_creates_a_nth_order_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule): void
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(NthOrderRuleChecker::TYPE)->shouldBeCalled();
@@ -92,7 +92,7 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $this->createNthOrder(10)->shouldReturn($rule);
     }
 
-    function it_creates_a_contains_product_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule): void
+    public function it_creates_a_contains_product_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule): void
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(ContainsProductRuleChecker::TYPE)->shouldBeCalled();

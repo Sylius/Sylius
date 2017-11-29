@@ -33,17 +33,17 @@ use Sylius\Component\Grid\Parameters;
  */
 final class DataSourceSpec extends ObjectBehavior
 {
-    function let(QueryBuilder $queryBuilder, ExpressionBuilderInterface $expressionBuilder): void
+    public function let(QueryBuilder $queryBuilder, ExpressionBuilderInterface $expressionBuilder): void
     {
         $this->beConstructedWith($queryBuilder, $expressionBuilder);
     }
 
-    function it_implements_data_source(): void
+    public function it_implements_data_source(): void
     {
         $this->shouldImplement(DataSourceInterface::class);
     }
 
-    function it_should_restrict_with_or_condition(
+    public function it_should_restrict_with_or_condition(
         Comparison $comparison,
         Value $value,
         QueryBuilder $queryBuilder,
@@ -64,7 +64,7 @@ final class DataSourceSpec extends ObjectBehavior
         $this->restrict($comparison, DataSourceInterface::CONDITION_OR);
     }
 
-    function it_should_throw_an_exception_if_an_unknown_condition_is_passed(
+    public function it_should_throw_an_exception_if_an_unknown_condition_is_passed(
         Comparison $comparison
     ): void {
         $this->shouldThrow(
@@ -72,13 +72,13 @@ final class DataSourceSpec extends ObjectBehavior
         )->during('restrict', [$comparison, 'foo']);
     }
 
-    function it_should_return_the_expression_builder(
+    public function it_should_return_the_expression_builder(
         ExpressionBuilderInterface $expressionBuilder
     ): void {
         $this->getExpressionBuilder()->shouldReturn($expressionBuilder);
     }
 
-    function it_should_get_the_data(
+    public function it_should_get_the_data(
         QueryBuilder $queryBuilder,
         ExpressionBuilderInterface $expressionBuilder,
         Query $query
@@ -94,7 +94,7 @@ final class DataSourceSpec extends ObjectBehavior
         $this->getData(new Parameters(['page' => 1]))->shouldHaveType(Pagerfanta::class);
     }
 
-    function it_should_set_the_order_on_the_query_builder(
+    public function it_should_set_the_order_on_the_query_builder(
         QueryBuilder $queryBuilder,
         ExpressionBuilderInterface $expressionBuilder,
         Query $query,
@@ -119,7 +119,7 @@ final class DataSourceSpec extends ObjectBehavior
         $this->getData(new Parameters(['page' => 1]))->shouldHaveType(Pagerfanta::class);
     }
 
-    function it_should_set_the_order_on_the_query_builder_as_fields_only(
+    public function it_should_set_the_order_on_the_query_builder_as_fields_only(
         QueryBuilder $queryBuilder,
         ExpressionBuilderInterface $expressionBuilder,
         Query $query,

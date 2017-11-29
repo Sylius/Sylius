@@ -35,34 +35,22 @@ class ResponseLoader implements ResponseLoaderInterface
         return (array) json_decode($this->getFileContents($source));
     }
 
-    /**
-     * @return string
-     */
-    private function getResponsesFolder()
+    private function getResponsesFolder(): string
     {
         return $this->getCalledClassFolder() . '/Responses';
     }
 
-    /**
-     * @return string
-     */
-    private function getMockedResponsesFolder()
+    private function getMockedResponsesFolder(): string
     {
         return $this->getResponsesFolder() . '/Mocked';
     }
 
-    /**
-     * @return string
-     */
-    private function getExpectedResponsesFolder()
+    private function getExpectedResponsesFolder(): string
     {
         return $this->getResponsesFolder() . '/Expected';
     }
 
-    /**
-     * @return string
-     */
-    private function getCalledClassFolder()
+    private function getCalledClassFolder(): string
     {
         $calledClass = get_called_class();
         $calledClassFolder = dirname((new \ReflectionClass($calledClass))->getFileName());
@@ -71,11 +59,9 @@ class ResponseLoader implements ResponseLoaderInterface
     }
 
     /**
-     * @param string $source
-     *
      * @throws \RuntimeException
      */
-    private function assertSourceExists($source)
+    private function assertSourceExists(string $source): void
     {
         if (!file_exists($source)) {
             throw new \RuntimeException(sprintf('File %s does not exist', $source));
@@ -83,12 +69,11 @@ class ResponseLoader implements ResponseLoaderInterface
     }
 
     /**
-     * @param string $source
      * @param mixed $content
      *
      * @throws \RuntimeException
      */
-    private function assertContentIsNotEmpty($source, $content)
+    private function assertContentIsNotEmpty(string $source, $content): void
     {
         if ('' === $content) {
             throw new \RuntimeException(sprintf('Something went wrong, file %s is empty', $source));
@@ -96,12 +81,11 @@ class ResponseLoader implements ResponseLoaderInterface
     }
 
     /**
-     * @param string $source
      * @param mixed $content
      *
      * @throws \RuntimeException
      */
-    private function assertContentIsProperLoaded($source, $content)
+    private function assertContentIsProperLoaded(string $source, $content): void
     {
         if (false === $content) {
             throw new \RuntimeException(sprintf('Something went wrong, cannot open %s', $source));
@@ -109,11 +93,9 @@ class ResponseLoader implements ResponseLoaderInterface
     }
 
     /**
-     * @param string $source
-     *
      * @throws \RuntimeException
      */
-    private function assertSourceIsNotFolder($source)
+    private function assertSourceIsNotFolder(string $source): void
     {
         if (true === is_dir($source)) {
             throw new \RuntimeException(sprintf('Given source %s is a folder!', $source));
@@ -121,13 +103,9 @@ class ResponseLoader implements ResponseLoaderInterface
     }
 
     /**
-     * @param string $source
-     *
-     * @return string
-     *
      * @throws \RuntimeException
      */
-    private function getFileContents($source)
+    private function getFileContents(string $source): string
     {
         $this->assertSourceExists($source);
         $this->assertSourceIsNotFolder($source);

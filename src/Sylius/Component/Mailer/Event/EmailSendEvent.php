@@ -45,9 +45,6 @@ final class EmailSendEvent extends Event
 
     /**
      * @param mixed $message
-     * @param array $recipients
-     * @param EmailInterface $email
-     * @param array $data
      */
     public function __construct($message, EmailInterface $email, array $data, array $recipients = [], array $replyTo = [])
     {
@@ -58,9 +55,6 @@ final class EmailSendEvent extends Event
         $this->replyTo = $replyTo;
     }
 
-    /**
-     * @return array
-     */
     public function getRecipients(): array
     {
         return $this->recipients;
@@ -82,9 +76,6 @@ final class EmailSendEvent extends Event
         return $this->message;
     }
 
-    /**
-     * @return array
-     */
     public function getData(): array
     {
         return $this->data;

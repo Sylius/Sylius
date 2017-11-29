@@ -18,17 +18,17 @@ use Symfony\Component\Validator\Constraint;
 
 final class InStockSpec extends ObjectBehavior
 {
-    function it_is_a_constraint(): void
+    public function it_is_a_constraint(): void
     {
         $this->shouldHaveType(Constraint::class);
     }
 
-    function it_has_validator(): void
+    public function it_has_validator(): void
     {
         $this->validatedBy()->shouldReturn('sylius_in_stock');
     }
 
-    function it_has_a_target(): void
+    public function it_has_a_target(): void
     {
         $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
     }

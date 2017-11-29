@@ -19,12 +19,12 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 
 final class ThemeAuthorFactorySpec extends ObjectBehavior
 {
-    function it_implements_theme_author_factory_interface(): void
+    public function it_implements_theme_author_factory_interface(): void
     {
         $this->shouldImplement(ThemeAuthorFactoryInterface::class);
     }
 
-    function it_creates_an_author_from_an_array(): void
+    public function it_creates_an_author_from_an_array(): void
     {
         $expectedAuthor = new ThemeAuthor();
         $expectedAuthor->setName('Rynkowsky');

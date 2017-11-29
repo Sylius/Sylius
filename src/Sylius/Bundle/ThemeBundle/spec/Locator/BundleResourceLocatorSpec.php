@@ -23,17 +23,17 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 final class BundleResourceLocatorSpec extends ObjectBehavior
 {
-    function let(Filesystem $filesystem, KernelInterface $kernel): void
+    public function let(Filesystem $filesystem, KernelInterface $kernel): void
     {
         $this->beConstructedWith($filesystem, $kernel);
     }
 
-    function it_implements_resource_locator_interface(): void
+    public function it_implements_resource_locator_interface(): void
     {
         $this->shouldImplement(ResourceLocatorInterface::class);
     }
 
-    function it_locates_bundle_resource(
+    public function it_locates_bundle_resource(
         Filesystem $filesystem,
         KernelInterface $kernel,
         ThemeInterface $theme,
@@ -53,7 +53,7 @@ final class BundleResourceLocatorSpec extends ObjectBehavior
         $this->locateResource('@ParentBundle/Resources/views/index.html.twig', $theme)->shouldReturn('/theme/path/ParentBundle/views/index.html.twig');
     }
 
-    function it_throws_an_exception_if_resource_can_not_be_located(
+    public function it_throws_an_exception_if_resource_can_not_be_located(
         Filesystem $filesystem,
         KernelInterface $kernel,
         ThemeInterface $theme,
@@ -74,17 +74,17 @@ final class BundleResourceLocatorSpec extends ObjectBehavior
         $this->shouldThrow(ResourceNotFoundException::class)->during('locateResource', ['@ParentBundle/Resources/views/index.html.twig', $theme]);
     }
 
-    function it_throws_an_exception_if_resource_path_does_not_start_with_an_asperand(ThemeInterface $theme): void
+    public function it_throws_an_exception_if_resource_path_does_not_start_with_an_asperand(ThemeInterface $theme): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('locateResource', ['ParentBundle/Resources/views/index.html.twig', $theme]);
     }
 
-    function it_throws_an_exception_if_resource_path_contains_two_dots_in_a_row(ThemeInterface $theme): void
+    public function it_throws_an_exception_if_resource_path_contains_two_dots_in_a_row(ThemeInterface $theme): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('locateResource', ['@ParentBundle/Resources/views/../views/index.html.twig', $theme]);
     }
 
-    function it_throws_an_exception_if_resource_path_does_not_contain_resources_dir(ThemeInterface $theme): void
+    public function it_throws_an_exception_if_resource_path_does_not_contain_resources_dir(ThemeInterface $theme): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('locateResource', ['@ParentBundle/views/Resources.index.html.twig', $theme]);
     }

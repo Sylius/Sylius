@@ -24,12 +24,12 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class OrderTotalIntegrityCheckerSpec extends ObjectBehavior
 {
-    function let(OrderProcessorInterface $orderProcessor, RouterInterface $router, ObjectManager $manager): void
+    public function let(OrderProcessorInterface $orderProcessor, RouterInterface $router, ObjectManager $manager): void
     {
         $this->beConstructedWith($orderProcessor, $router, $manager);
     }
 
-    function it_does_nothing_if_prices_do_not_change(
+    public function it_does_nothing_if_prices_do_not_change(
         OrderProcessorInterface $orderProcessor,
         OrderInterface $order,
         ResourceControllerEvent $event
@@ -47,7 +47,7 @@ final class OrderTotalIntegrityCheckerSpec extends ObjectBehavior
         $this->check($event);
     }
 
-    function it_stops_process_when_it_detects_any_difference_in_order_total(
+    public function it_stops_process_when_it_detects_any_difference_in_order_total(
         OrderProcessorInterface $orderProcessor,
         RouterInterface $router,
         ObjectManager $manager,
@@ -69,7 +69,7 @@ final class OrderTotalIntegrityCheckerSpec extends ObjectBehavior
         $this->check($event);
     }
 
-    function it_throws_invalid_argument_exception_if_subject_it_not_order(ResourceControllerEvent $event): void
+    public function it_throws_invalid_argument_exception_if_subject_it_not_order(ResourceControllerEvent $event): void
     {
         $event->getSubject()->willReturn(new \stdClass());
 

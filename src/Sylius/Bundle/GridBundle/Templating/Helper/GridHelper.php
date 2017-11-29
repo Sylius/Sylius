@@ -27,16 +27,12 @@ class GridHelper extends Helper
      */
     private $gridRenderer;
 
-    /**
-     * @param GridRendererInterface $gridRenderer
-     */
     public function __construct(GridRendererInterface $gridRenderer)
     {
         $this->gridRenderer = $gridRenderer;
     }
 
     /**
-     * @param GridView $gridView
      * @param string|null $template
      *
      * @return mixed
@@ -47,8 +43,6 @@ class GridHelper extends Helper
     }
 
     /**
-     * @param GridView $gridView
-     * @param Field $field
      * @param mixed $data
      *
      * @return mixed
@@ -59,8 +53,6 @@ class GridHelper extends Helper
     }
 
     /**
-     * @param GridView $gridView
-     * @param Action $action
      * @param mixed|null $data
      *
      * @return mixed
@@ -71,9 +63,6 @@ class GridHelper extends Helper
     }
 
     /**
-     * @param GridView $gridView
-     * @param Filter $filter
-     *
      * @return mixed
      */
     public function renderFilter(GridView $gridView, Filter $filter)
@@ -81,9 +70,6 @@ class GridHelper extends Helper
         return $this->gridRenderer->renderFilter($gridView, $filter);
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return 'sylius_grid';

@@ -22,5 +22,5 @@ interface IndexPageInterface extends BaseIndexPageInterface
      *
      * @return string|null
      */
-    public function getUsedThemeName($channelCode);
+    public function getUsedThemeName(string $channelCode): ?string;
 }

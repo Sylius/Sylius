@@ -31,9 +31,6 @@ final class OrderItemType extends AbstractType
      */
     private $variantRepository;
 
-    /**
-     * @param ProductVariantRepositoryInterface $variantRepository
-     */
     public function __construct(ProductVariantRepositoryInterface $variantRepository)
     {
         $this->variantRepository = $variantRepository;
@@ -52,7 +49,7 @@ final class OrderItemType extends AbstractType
 
         $builder->get('variant')->addModelTransformer(new ResourceToIdentifierTransformer($this->variantRepository, 'code'));
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
             $orderItem = $event->getData();
 
             Assert::notNull($orderItem);

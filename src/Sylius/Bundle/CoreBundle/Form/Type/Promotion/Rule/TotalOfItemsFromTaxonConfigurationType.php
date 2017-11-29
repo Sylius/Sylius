@@ -29,9 +29,6 @@ final class TotalOfItemsFromTaxonConfigurationType extends AbstractType
      */
     private $taxonRepository;
 
-    /**
-     * @param RepositoryInterface $taxonRepository
-     */
     public function __construct(RepositoryInterface $taxonRepository)
     {
         $this->taxonRepository = $taxonRepository;

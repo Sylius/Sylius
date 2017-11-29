@@ -20,5 +20,5 @@ interface CreatePageInterface extends BaseCreatePageInteface
     /**
      * @param string $description
      */
-    public function specifyDescription($description);
+    public function specifyDescription(string $description): void;
 }

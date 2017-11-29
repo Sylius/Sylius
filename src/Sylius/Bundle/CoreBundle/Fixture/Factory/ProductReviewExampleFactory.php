@@ -55,12 +55,6 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
      */
     private $optionsResolver;
 
-    /**
-     * @param ReviewFactoryInterface $productReviewFactory
-     * @param ProductRepositoryInterface $productRepository
-     * @param CustomerRepositoryInterface $customerRepository
-     * @param FactoryInterface $stateMachineFactory
-     */
     public function __construct(
         ReviewFactoryInterface $productReviewFactory,
         ProductRepositoryInterface $productRepository,
@@ -123,20 +117,13 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
         ;
     }
 
-    /**
-     * @return string
-     */
     private function getRandomStatus(): string
     {
         $statuses = [ReviewInterface::STATUS_NEW, ReviewInterface::STATUS_ACCEPTED, ReviewInterface::STATUS_REJECTED];
 
-        return $statuses[(rand(0, 2))];
+        return $statuses[(random_int(0, 2))];
     }
 
-    /**
-     * @param ReviewInterface $productReview
-     * @param string $targetState
-     */
     private function applyReviewTransition(ReviewInterface $productReview, string $targetState): void
     {
         /** @var StateMachineInterface $stateMachine */

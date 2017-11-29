@@ -21,17 +21,17 @@ use Sylius\Component\Order\Model\OrderInterface;
 
 final class OrderNumberAssignerSpec extends ObjectBehavior
 {
-    function let(OrderNumberGeneratorInterface $numberGenerator): void
+    public function let(OrderNumberGeneratorInterface $numberGenerator): void
     {
         $this->beConstructedWith($numberGenerator);
     }
 
-    function it_implements_an_order_number_assigner_interface(): void
+    public function it_implements_an_order_number_assigner_interface(): void
     {
         $this->shouldImplement(OrderNumberAssignerInterface::class);
     }
 
-    function it_assigns_a_number_to_an_order(
+    public function it_assigns_a_number_to_an_order(
         OrderInterface $order,
         OrderNumberGeneratorInterface $numberGenerator
     ): void {
@@ -43,7 +43,7 @@ final class OrderNumberAssignerSpec extends ObjectBehavior
         $this->assignNumber($order);
     }
 
-    function it_does_not_assign_a_number_to_an_order_with_number(
+    public function it_does_not_assign_a_number_to_an_order_with_number(
         OrderInterface $order,
         OrderNumberGeneratorInterface $numberGenerator
     ): void {

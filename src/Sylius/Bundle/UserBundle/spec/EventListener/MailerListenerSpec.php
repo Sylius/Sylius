@@ -21,12 +21,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class MailerListenerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $sender): void
+    public function let(SenderInterface $sender): void
     {
         $this->beConstructedWith($sender);
     }
 
-    function it_send_password_reset_token_mail(SenderInterface $sender, GenericEvent $event, UserInterface $user): void
+    public function it_send_password_reset_token_mail(SenderInterface $sender, GenericEvent $event, UserInterface $user): void
     {
         $event->getSubject()->willReturn($user);
 
@@ -37,7 +37,7 @@ final class MailerListenerSpec extends ObjectBehavior
         $this->sendResetPasswordTokenEmail($event);
     }
 
-    function it_send_password_reset_pin_mail(SenderInterface $sender, GenericEvent $event, UserInterface $user): void
+    public function it_send_password_reset_pin_mail(SenderInterface $sender, GenericEvent $event, UserInterface $user): void
     {
         $event->getSubject()->willReturn($user);
 

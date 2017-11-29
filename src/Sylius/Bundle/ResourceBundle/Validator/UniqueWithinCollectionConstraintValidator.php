@@ -22,7 +22,7 @@ final class UniqueWithinCollectionConstraintValidator extends ConstraintValidato
     /**
      * {@inheritdoc}
      */
-    public function validate($collectionOfEntities, Constraint $constraint)
+    public function validate($collectionOfEntities, Constraint $constraint): void
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
         $collectionOfEntitiesCodes = [];

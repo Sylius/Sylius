@@ -37,8 +37,6 @@ use Webmozart\Assert\Assert;
 class UserController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function changePasswordAction(Request $request): Response
@@ -70,8 +68,6 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function requestPasswordResetTokenAction(Request $request): Response
@@ -83,8 +79,6 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function requestPasswordResetPinAction(Request $request): Response
@@ -96,9 +90,6 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string $token
-     *
      * @return Response
      */
     public function resetPasswordAction(Request $request, string $token): Response
@@ -138,9 +129,6 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string $token
-     *
      * @return Response
      */
     public function verifyAction(Request $request, string $token): Response
@@ -184,8 +172,6 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function requestVerificationTokenAction(Request $request): Response
@@ -232,10 +218,6 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param GeneratorInterface $generator
-     * @param string $senderEvent
-     *
      * @return Response
      */
     protected function prepareResetPasswordRequest(Request $request, GeneratorInterface $generator, string $senderEvent): Response
@@ -297,11 +279,7 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param RequestConfiguration $configuration
-     * @param string $type
      * @param object $object
-     *
-     * @return FormInterface
      */
     protected function createResourceForm(
         RequestConfiguration $configuration,
@@ -316,10 +294,6 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param RequestConfiguration $configuration
-     * @param UserInterface $user
-     *
      * @return Response
      */
     protected function handleExpiredToken(Request $request, RequestConfiguration $configuration, UserInterface $user): Response
@@ -341,11 +315,6 @@ class UserController extends ResourceController
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
     }
 
-    /**
-     * @param GeneratorInterface $generator
-     * @param UserInterface $user
-     * @param string $senderEvent
-     */
     protected function handleResetPasswordRequest(
         GeneratorInterface $generator,
         UserInterface $user,
@@ -364,11 +333,6 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param RequestConfiguration $configuration
-     * @param UserInterface $user
-     * @param string $newPassword
-     *
      * @return Response
      */
     protected function handleResetPassword(
@@ -400,11 +364,6 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param RequestConfiguration $configuration
-     * @param UserInterface $user
-     * @param string $newPassword
-     *
      * @return Response
      */
     protected function handleChangePassword(
@@ -433,9 +392,6 @@ class UserController extends ResourceController
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
     }
 
-    /**
-     * @return UserInterface|null
-     */
     protected function getUser(): ?UserInterface
     {
         $user = parent::getUser();
@@ -452,8 +408,6 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string $attribute
      * @param mixed $default
      *
      * @return mixed

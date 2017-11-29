@@ -23,67 +23,65 @@ interface CreatePageInterface extends BaseCreatePageInterface
     /**
      * @return int
      */
-    public function countTaxons();
+    public function countTaxons(): int;
 
     /**
      * @param string $name
      *
      * @return int
      */
-    public function countTaxonsByName($name);
+    public function countTaxonsByName(string $name): int;
 
     /**
      * @param string $name
      */
-    public function deleteTaxonOnPageByName($name);
+    public function deleteTaxonOnPageByName(string $name): void;
 
     /**
      * @param string $description
      * @param string $languageCode
      */
-    public function describeItAs($description, $languageCode);
+    public function describeItAs(string $description, string $languageCode): void;
 
     /**
      * @param string $name
      *
      * @return bool
      */
-    public function hasTaxonWithName($name);
+    public function hasTaxonWithName(string $name): bool;
 
     /**
      * @param string $name
      * @param string $languageCode
      */
-    public function nameIt($name, $languageCode);
+    public function nameIt(string $name, string $languageCode): void;
 
     /**
      * @param string $code
      */
-    public function specifyCode($code);
+    public function specifyCode(string $code): void;
 
     /**
      * @param string $slug
      * @param string $languageCode
      */
-    public function specifySlug($slug, $languageCode);
+    public function specifySlug(string $slug, string $languageCode): void;
 
     /**
      * @param string $path
      * @param string $type
      */
-    public function attachImage($path, $type = null);
+    public function attachImage(string $path, string $type = null): void;
 
     /**
-     * @param TaxonInterface|null $parentTaxon
-     *
      * @return NodeElement[]
      *
      * @throws ElementNotFoundException
      */
-    public function getLeaves(TaxonInterface $parentTaxon = null);
+    public function getLeaves(?TaxonInterface $parentTaxon = null);
 
     /**
      * @param string $locale
      */
-    public function activateLanguageTab($locale);
+    public function activateLanguageTab(string $locale): void;
 }

@@ -24,12 +24,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class NonChannelLocaleListenerSpec extends ObjectBehavior
 {
-    function let(LocaleProviderInterface $localeProvider, FirewallMap $firewallMap): void
+    public function let(LocaleProviderInterface $localeProvider, FirewallMap $firewallMap): void
     {
         $this->beConstructedWith($localeProvider, $firewallMap, ['shop']);
     }
 
-    function it_throws_exception_on_instantiation_with_no_firewall_names(
+    public function it_throws_exception_on_instantiation_with_no_firewall_names(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap
     ): void {
@@ -41,7 +41,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_on_instantiation_with_non_string_firewall_names(
+    public function it_throws_exception_on_instantiation_with_non_string_firewall_names(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap
     ): void {
@@ -53,7 +53,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_its_not_a_master_request(
+    public function it_does_nothing_if_its_not_a_master_request(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         GetResponseEvent $event
@@ -70,7 +70,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_request_is_behind_no_firewall(
+    public function it_does_nothing_if_request_is_behind_no_firewall(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,
@@ -88,7 +88,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_request_is_behind_a_firewall_not_stated_upon_creating(
+    public function it_does_nothing_if_request_is_behind_a_firewall_not_stated_upon_creating(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,
@@ -108,7 +108,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_request_locale_is_present_in_the_provider(
+    public function it_does_nothing_if_request_locale_is_present_in_the_provider(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,
@@ -130,7 +130,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_not_found_exception_if_request_locale_is_not_present_in_provider(
+    public function it_throws_not_found_exception_if_request_locale_is_not_present_in_provider(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,

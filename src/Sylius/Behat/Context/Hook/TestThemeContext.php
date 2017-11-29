@@ -23,9 +23,6 @@ final class TestThemeContext implements Context
      */
     private $testThemeConfigurationManager;
 
-    /**
-     * @param TestThemeConfigurationManagerInterface $testThemeConfigurationManager
-     */
     public function __construct(TestThemeConfigurationManagerInterface $testThemeConfigurationManager)
     {
         $this->testThemeConfigurationManager = $testThemeConfigurationManager;
@@ -34,7 +31,7 @@ final class TestThemeContext implements Context
     /**
      * @BeforeScenario
      */
-    public function purgeTestThemes()
+    public function purgeTestThemes(): void
     {
         $this->testThemeConfigurationManager->clear();
     }

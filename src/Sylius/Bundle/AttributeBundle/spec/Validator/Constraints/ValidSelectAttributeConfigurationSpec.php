@@ -18,17 +18,17 @@ use Symfony\Component\Validator\Constraint;
 
 final class ValidSelectAttributeConfigurationSpec extends ObjectBehavior
 {
-    function it_is_a_constraint(): void
+    public function it_is_a_constraint(): void
     {
         $this->shouldHaveType(Constraint::class);
     }
 
-    function it_has_targets(): void
+    public function it_has_targets(): void
     {
         $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
     }
 
-    function it_is_validated_by_specific_validator(): void
+    public function it_is_validated_by_specific_validator(): void
     {
         $this->validatedBy()->shouldReturn('sylius_valid_select_attribute_validator');
     }

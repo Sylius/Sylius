@@ -19,17 +19,17 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 
 class CompositeLocaleContextSpec extends ObjectBehavior
 {
-    function it_implements_locale_context_interface(): void
+    public function it_implements_locale_context_interface(): void
     {
         $this->shouldImplement(LocaleContextInterface::class);
     }
 
-    function it_throws_a_locale_not_found_exception_if_there_are_no_nested_locale_contexts_defined(): void
+    public function it_throws_a_locale_not_found_exception_if_there_are_no_nested_locale_contexts_defined(): void
     {
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
-    function it_throws_a_locale_not_found_exception_if_none_of_nested_locale_contexts_returned_a_locale(
+    public function it_throws_a_locale_not_found_exception_if_none_of_nested_locale_contexts_returned_a_locale(
         LocaleContextInterface $localeContext
     ): void {
         $localeContext->getLocaleCode()->willThrow(LocaleNotFoundException::class);
@@ -39,7 +39,7 @@ class CompositeLocaleContextSpec extends ObjectBehavior
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
-    function it_returns_first_result_returned_by_nested_request_resolvers(
+    public function it_returns_first_result_returned_by_nested_request_resolvers(
         LocaleContextInterface $firstLocaleContext,
         LocaleContextInterface $secondLocaleContext,
         LocaleContextInterface $thirdLocaleContext
@@ -55,7 +55,7 @@ class CompositeLocaleContextSpec extends ObjectBehavior
         $this->getLocaleCode()->shouldReturn('en_US');
     }
 
-    function its_nested_request_resolvers_can_have_priority(
+    public function its_nested_request_resolvers_can_have_priority(
         LocaleContextInterface $firstLocaleContext,
         LocaleContextInterface $secondLocaleContext,
         LocaleContextInterface $thirdLocaleContext

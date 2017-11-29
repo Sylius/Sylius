@@ -25,7 +25,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
         return $this->getElement('validation_error')->getText() === $message;
     }
 
-    public function logIn()
+    public function logIn(): void
     {
         $this->getDocument()->pressButton('Login');
     }
@@ -33,7 +33,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPassword($password)
+    public function specifyPassword($password): void
     {
         $this->getDocument()->fillField('Password', $password);
     }
@@ -41,7 +41,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyUsername($username)
+    public function specifyUsername($username): void
     {
         $this->getDocument()->fillField('Username', $username);
     }

@@ -20,7 +20,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyTitle($title)
+    public function specifyTitle($title): void
     {
         $this->getElement('title')->setValue($title);
     }
@@ -28,7 +28,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyComment($comment)
+    public function specifyComment($comment): void
     {
         $this->getElement('comment')->setValue($comment);
     }
@@ -36,7 +36,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseRating($rating)
+    public function chooseRating($rating): void
     {
         $position = (int) $rating - 1;
 

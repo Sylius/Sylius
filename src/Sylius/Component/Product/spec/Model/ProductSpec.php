@@ -26,66 +26,66 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 
 final class ProductSpec extends ObjectBehavior
 {
-    function let()
+    public function let(): void
     {
         $this->setCurrentLocale('en_US');
         $this->setFallbackLocale('en_US');
     }
 
-    function it_implements_product_interface(): void
+    public function it_implements_product_interface(): void
     {
         $this->shouldImplement(ProductInterface::class);
     }
 
-    function it_implements_toggleable_interface(): void
+    public function it_implements_toggleable_interface(): void
     {
         $this->shouldImplement(ToggleableInterface::class);
     }
 
-    function it_has_no_id_by_default(): void
+    public function it_has_no_id_by_default(): void
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_name_by_default(): void
+    public function it_has_no_name_by_default(): void
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable(): void
+    public function its_name_is_mutable(): void
     {
         $this->setName('Super product');
         $this->getName()->shouldReturn('Super product');
     }
 
-    function it_has_no_slug_by_default(): void
+    public function it_has_no_slug_by_default(): void
     {
         $this->getSlug()->shouldReturn(null);
     }
 
-    function its_slug_is_mutable(): void
+    public function its_slug_is_mutable(): void
     {
         $this->setSlug('super-product');
         $this->getSlug()->shouldReturn('super-product');
     }
 
-    function it_has_no_description_by_default(): void
+    public function it_has_no_description_by_default(): void
     {
         $this->getDescription()->shouldReturn(null);
     }
 
-    function its_description_is_mutable(): void
+    public function its_description_is_mutable(): void
     {
         $this->setDescription('This product is super cool because...');
         $this->getDescription()->shouldReturn('This product is super cool because...');
     }
 
-    function it_initializes_attribute_collection_by_default(): void
+    public function it_initializes_attribute_collection_by_default(): void
     {
         $this->getAttributes()->shouldHaveType(Collection::class);
     }
 
-    function it_adds_attribute(ProductAttributeValueInterface $attribute): void
+    public function it_adds_attribute(ProductAttributeValueInterface $attribute): void
     {
         $attribute->setProduct($this)->shouldBeCalled();
 
@@ -93,7 +93,7 @@ final class ProductSpec extends ObjectBehavior
         $this->hasAttribute($attribute)->shouldReturn(true);
     }
 
-    function it_removes_attribute(ProductAttributeValueInterface $attribute): void
+    public function it_removes_attribute(ProductAttributeValueInterface $attribute): void
     {
         $attribute->setProduct($this)->shouldBeCalled();
 
@@ -106,18 +106,18 @@ final class ProductSpec extends ObjectBehavior
         $this->hasAttribute($attribute)->shouldReturn(false);
     }
 
-    function it_refuses_to_add_non_product_attribute(AttributeValueInterface $attribute): void
+    public function it_refuses_to_add_non_product_attribute(AttributeValueInterface $attribute): void
     {
         $this->shouldThrow('\InvalidArgumentException')->duringAddAttribute($attribute);
         $this->hasAttribute($attribute)->shouldReturn(false);
     }
 
-    function it_refuses_to_remove_non_product_attribute(AttributeValueInterface $attribute): void
+    public function it_refuses_to_remove_non_product_attribute(AttributeValueInterface $attribute): void
     {
         $this->shouldThrow('\InvalidArgumentException')->duringRemoveAttribute($attribute);
     }
 
-    function it_returns_attributes_by_a_locale_without_a_base_locale(
+    public function it_returns_attributes_by_a_locale_without_a_base_locale(
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueEN,
         ProductAttributeValueInterface $attributeValuePL
@@ -145,7 +145,7 @@ final class ProductSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_attributes_by_a_locale_with_a_base_locale(
+    public function it_returns_attributes_by_a_locale_with_a_base_locale(
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueEN,
         ProductAttributeValueInterface $attributeValuePL,
@@ -181,7 +181,7 @@ final class ProductSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_attributes_by_a_fallback_locale_when_there_is_no_value_for_a_given_locale(
+    public function it_returns_attributes_by_a_fallback_locale_when_there_is_no_value_for_a_given_locale(
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueEN
     ): void {
@@ -201,7 +201,7 @@ final class ProductSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_attributes_by_a_fallback_locale_when_there_is_an_empty_value_for_a_given_locale(
+    public function it_returns_attributes_by_a_fallback_locale_when_there_is_an_empty_value_for_a_given_locale(
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueEN,
         ProductAttributeValueInterface $attributeValuePL
@@ -229,7 +229,7 @@ final class ProductSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_attributes_by_a_base_locale_when_there_is_no_value_for_a_given_locale_or_a_fallback_locale(
+    public function it_returns_attributes_by_a_base_locale_when_there_is_no_value_for_a_given_locale_or_a_fallback_locale(
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueFR
     ): void {
@@ -249,7 +249,7 @@ final class ProductSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_attributes_by_a_base_locale_when_there_is_an_empty_value_for_a_given_locale_or_a_fallback_locale(
+    public function it_returns_attributes_by_a_base_locale_when_there_is_an_empty_value_for_a_given_locale_or_a_fallback_locale(
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueEN,
         ProductAttributeValueInterface $attributeValuePL,
@@ -285,12 +285,12 @@ final class ProductSpec extends ObjectBehavior
         ;
     }
 
-    function it_has_no_variants_by_default(): void
+    public function it_has_no_variants_by_default(): void
     {
         $this->hasVariants()->shouldReturn(false);
     }
 
-    function its_says_it_has_variants_only_if_multiple_variants_are_defined(
+    public function its_says_it_has_variants_only_if_multiple_variants_are_defined(
         ProductVariantInterface $firstVariant,
         ProductVariantInterface $secondVariant
     ): void {
@@ -302,19 +302,19 @@ final class ProductSpec extends ObjectBehavior
         $this->hasVariants()->shouldReturn(true);
     }
 
-    function it_initializes_variants_collection_by_default(): void
+    public function it_initializes_variants_collection_by_default(): void
     {
         $this->getVariants()->shouldHaveType(Collection::class);
     }
 
-    function it_does_not_include_unavailable_variants_in_available_variants(ProductVariantInterface $variant): void
+    public function it_does_not_include_unavailable_variants_in_available_variants(ProductVariantInterface $variant): void
     {
         $variant->setProduct($this)->shouldBeCalled();
 
         $this->addVariant($variant);
     }
 
-    function it_returns_available_variants(
+    public function it_returns_available_variants(
         ProductVariantInterface $unavailableVariant,
         ProductVariantInterface $variant
     ): void {
@@ -325,29 +325,29 @@ final class ProductSpec extends ObjectBehavior
         $this->addVariant($variant);
     }
 
-    function it_initializes_options_collection_by_default(): void
+    public function it_initializes_options_collection_by_default(): void
     {
         $this->getOptions()->shouldHaveType(Collection::class);
     }
 
-    function it_has_no_options_by_default(): void
+    public function it_has_no_options_by_default(): void
     {
         $this->hasOptions()->shouldReturn(false);
     }
 
-    function its_says_it_has_options_only_if_any_option_defined(ProductOptionInterface $option): void
+    public function its_says_it_has_options_only_if_any_option_defined(ProductOptionInterface $option): void
     {
         $this->addOption($option);
         $this->hasOptions()->shouldReturn(true);
     }
 
-    function it_adds_option_properly(ProductOptionInterface $option): void
+    public function it_adds_option_properly(ProductOptionInterface $option): void
     {
         $this->addOption($option);
         $this->hasOption($option)->shouldReturn(true);
     }
 
-    function it_removes_option_properly(ProductOptionInterface $option): void
+    public function it_removes_option_properly(ProductOptionInterface $option): void
     {
         $this->addOption($option);
         $this->hasOption($option)->shouldReturn(true);
@@ -356,34 +356,34 @@ final class ProductSpec extends ObjectBehavior
         $this->hasOption($option)->shouldReturn(false);
     }
 
-    function it_initializes_creation_date_by_default(): void
+    public function it_initializes_creation_date_by_default(): void
     {
         $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
     }
 
-    function its_creation_date_is_mutable(\DateTime $creationDate): void
+    public function its_creation_date_is_mutable(\DateTime $creationDate): void
     {
         $this->setCreatedAt($creationDate);
         $this->getCreatedAt()->shouldReturn($creationDate);
     }
 
-    function it_has_no_last_update_date_by_default(): void
+    public function it_has_no_last_update_date_by_default(): void
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable(\DateTime $updateDate): void
+    public function its_last_update_date_is_mutable(\DateTime $updateDate): void
     {
         $this->setUpdatedAt($updateDate);
         $this->getUpdatedAt()->shouldReturn($updateDate);
     }
 
-    function it_is_enabled_by_default(): void
+    public function it_is_enabled_by_default(): void
     {
         $this->shouldBeEnabled();
     }
 
-    function it_is_toggleable(): void
+    public function it_is_toggleable(): void
     {
         $this->disable();
         $this->shouldNotBeEnabled();
@@ -392,7 +392,7 @@ final class ProductSpec extends ObjectBehavior
         $this->shouldBeEnabled();
     }
 
-    function it_adds_association(ProductAssociationInterface $association): void
+    public function it_adds_association(ProductAssociationInterface $association): void
     {
         $association->setOwner($this)->shouldBeCalled();
         $this->addAssociation($association);
@@ -400,7 +400,7 @@ final class ProductSpec extends ObjectBehavior
         $this->hasAssociation($association)->shouldReturn(true);
     }
 
-    function it_allows_to_remove_association(ProductAssociationInterface $association): void
+    public function it_allows_to_remove_association(ProductAssociationInterface $association): void
     {
         $association->setOwner($this)->shouldBeCalled();
         $association->setOwner(null)->shouldBeCalled();
@@ -411,7 +411,7 @@ final class ProductSpec extends ObjectBehavior
         $this->hasAssociation($association)->shouldReturn(false);
     }
 
-    function it_is_simple_if_it_has_one_variant_and_no_options(ProductVariantInterface $variant): void
+    public function it_is_simple_if_it_has_one_variant_and_no_options(ProductVariantInterface $variant): void
     {
         $variant->setProduct($this)->shouldBeCalled();
         $this->addVariant($variant);
@@ -420,7 +420,7 @@ final class ProductSpec extends ObjectBehavior
         $this->isConfigurable()->shouldReturn(false);
     }
 
-    function it_is_configurable_if_it_has_at_least_two_variants(
+    public function it_is_configurable_if_it_has_at_least_two_variants(
         ProductVariantInterface $firstVariant,
         ProductVariantInterface $secondVariant
     ): void {
@@ -433,7 +433,7 @@ final class ProductSpec extends ObjectBehavior
         $this->isSimple()->shouldReturn(false);
     }
 
-    function it_is_configurable_if_it_has_one_variant_and_at_least_one_option(
+    public function it_is_configurable_if_it_has_one_variant_and_at_least_one_option(
         ProductOptionInterface $option,
         ProductVariantInterface $variant
     ): void {

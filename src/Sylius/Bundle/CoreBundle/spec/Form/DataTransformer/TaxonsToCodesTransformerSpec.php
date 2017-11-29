@@ -21,17 +21,17 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 final class TaxonsToCodesTransformerSpec extends ObjectBehavior
 {
-    function let(TaxonRepositoryInterface $taxonRepository): void
+    public function let(TaxonRepositoryInterface $taxonRepository): void
     {
         $this->beConstructedWith($taxonRepository);
     }
 
-    function it_implements_data_transformer_interface(): void
+    public function it_implements_data_transformer_interface(): void
     {
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
-    function it_transforms_array_of_taxons_codes_to_taxons_collection(
+    public function it_transforms_array_of_taxons_codes_to_taxons_collection(
         TaxonRepositoryInterface $taxonRepository,
         TaxonInterface $bows,
         TaxonInterface $swords
@@ -41,7 +41,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         $this->transform(['bows', 'swords'])->shouldIterateAs([$bows, $swords]);
     }
 
-    function it_transforms_only_existing_taxons(
+    public function it_transforms_only_existing_taxons(
         TaxonRepositoryInterface $taxonRepository,
         TaxonInterface $bows
     ): void {
@@ -50,12 +50,12 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         $this->transform(['bows', 'swords'])->shouldIterateAs([$bows]);
     }
 
-    function it_transforms_empty_array_into_empty_collection(): void
+    public function it_transforms_empty_array_into_empty_collection(): void
     {
         $this->transform([])->shouldIterateAs([]);
     }
 
-    function it_throws_exception_if_value_to_transform_is_not_array(): void
+    public function it_throws_exception_if_value_to_transform_is_not_array(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -63,7 +63,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_reverse_transforms_into_array_of_taxons_codes(
+    public function it_reverse_transforms_into_array_of_taxons_codes(
         TaxonInterface $axes,
         TaxonInterface $shields
     ): void {
@@ -76,7 +76,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_reverse_transformed_object_is_not_collection(): void
+    public function it_throws_exception_if_reverse_transformed_object_is_not_collection(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -84,7 +84,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_empty_array_if_passed_collection_is_empty(): void
+    public function it_returns_empty_array_if_passed_collection_is_empty(): void
     {
         $this->reverseTransform(new ArrayCollection())->shouldReturn([]);
     }

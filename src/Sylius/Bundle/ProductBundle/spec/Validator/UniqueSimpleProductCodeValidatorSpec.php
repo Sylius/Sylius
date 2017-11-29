@@ -25,18 +25,18 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class UniqueSimpleProductCodeValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $context, ProductVariantRepositoryInterface $productVariantRepository): void
+    public function let(ExecutionContextInterface $context, ProductVariantRepositoryInterface $productVariantRepository): void
     {
         $this->beConstructedWith($productVariantRepository);
         $this->initialize($context);
     }
 
-    function it_is_a_constraint_validator(): void
+    public function it_is_a_constraint_validator(): void
     {
         $this->shouldImplement(ConstraintValidator::class);
     }
 
-    function it_does_not_add_violation_if_product_is_configurable(
+    public function it_does_not_add_violation_if_product_is_configurable(
         ExecutionContextInterface $context,
         ProductInterface $product
     ): void {
@@ -51,7 +51,7 @@ final class UniqueSimpleProductCodeValidatorSpec extends ObjectBehavior
         $this->validate($product, $constraint);
     }
 
-    function it_does_not_add_violation_if_product_is_simple_but_code_has_not_been_used_among_neither_producs_nor_product_variants(
+    public function it_does_not_add_violation_if_product_is_simple_but_code_has_not_been_used_among_neither_producs_nor_product_variants(
         ExecutionContextInterface $context,
         ProductInterface $product,
         ProductVariantRepositoryInterface $productVariantRepository
@@ -70,7 +70,7 @@ final class UniqueSimpleProductCodeValidatorSpec extends ObjectBehavior
         $this->validate($product, $constraint);
     }
 
-    function it_does_not_add_violation_if_product_is_simple_code_has_been_used_but_for_the_same_product(
+    public function it_does_not_add_violation_if_product_is_simple_code_has_been_used_but_for_the_same_product(
         ExecutionContextInterface $context,
         ProductInterface $product,
         ProductVariantInterface $existingProductVariant,
@@ -92,7 +92,7 @@ final class UniqueSimpleProductCodeValidatorSpec extends ObjectBehavior
         $this->validate($product, $constraint);
     }
 
-    function it_add_violation_if_product_is_simple_and_code_has_been_used_in_other_product_variant(
+    public function it_add_violation_if_product_is_simple_and_code_has_been_used_in_other_product_variant(
         ExecutionContextInterface $context,
         ProductInterface $product,
         ProductInterface $existingProduct,

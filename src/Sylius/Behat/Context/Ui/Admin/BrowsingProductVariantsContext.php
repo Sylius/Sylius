@@ -32,10 +32,6 @@ final class BrowsingProductVariantsContext implements Context
      */
     private $defaultProductVariantResolver;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param ProductVariantResolverInterface $defaultProductVariantResolver
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         ProductVariantResolverInterface $defaultProductVariantResolver
@@ -47,7 +43,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @When I start sorting variants by :field
      */
-    public function iSortProductsBy($field)
+    public function iSortProductsBy($field): void
     {
         $this->indexPage->sortBy($field);
     }
@@ -55,7 +51,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then the :productVariantCode variant of the :product product should appear in the store
      */
-    public function theProductVariantShouldAppearInTheShop($productVariantCode, ProductInterface $product)
+    public function theProductVariantShouldAppearInTheShop($productVariantCode, ProductInterface $product): void
     {
         $this->indexPage->open(['productId' => $product->getId()]);
 
@@ -73,7 +69,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then the :productVariantCode variant of the :product product should not appear in the store
      */
-    public function theProductVariantShouldNotAppearInTheShop($productVariantCode, ProductInterface $product)
+    public function theProductVariantShouldNotAppearInTheShop($productVariantCode, ProductInterface $product): void
     {
         $this->indexPage->open(['productId' => $product->getId()]);
 
@@ -83,7 +79,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then the :product product should have no variants
      */
-    public function theProductShouldHaveNoVariants(ProductInterface $product)
+    public function theProductShouldHaveNoVariants(ProductInterface $product): void
     {
         $this->indexPage->open(['productId' => $product->getId()]);
 
@@ -93,7 +89,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then the :product product should have only one variant
      */
-    public function theProductShouldHaveOnlyOneVariant(ProductInterface $product)
+    public function theProductShouldHaveOnlyOneVariant(ProductInterface $product): void
     {
         $this->indexPage->open(['productId' => $product->getId()]);
 
@@ -105,7 +101,7 @@ final class BrowsingProductVariantsContext implements Context
      * @When /^I (?:|want to )view all variants of (this product)$/
      * @When /^I view(?:| all) variants of the (product "[^"]+")$/
      */
-    public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product)
+    public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product): void
     {
         $this->indexPage->open(['productId' => $product->getId()]);
     }
@@ -115,7 +111,7 @@ final class BrowsingProductVariantsContext implements Context
      * @Then I should see :numberOfProductVariants variant in the list
      * @Then I should not see any variants in the list
      */
-    public function iShouldSeeProductVariantsInTheList($numberOfProductVariants = 0)
+    public function iShouldSeeProductVariantsInTheList($numberOfProductVariants = 0): void
     {
         Assert::same($this->indexPage->countItems(), (int) $numberOfProductVariants);
     }
@@ -131,7 +127,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then /^(this variant) should not exist in the product catalog$/
      */
-    public function productVariantShouldNotExist(ProductVariantInterface $productVariant)
+    public function productVariantShouldNotExist(ProductVariantInterface $productVariant): void
     {
         $this->indexPage->open(['productId' => $productVariant->getProduct()->getId()]);
 
@@ -141,7 +137,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then /^(this variant) should still exist in the product catalog$/
      */
-    public function productShouldExistInTheProductCatalog(ProductVariantInterface $productVariant)
+    public function productShouldExistInTheProductCatalog(ProductVariantInterface $productVariant): void
     {
         $this->theProductVariantShouldAppearInTheShop($productVariant->getCode(), $productVariant->getProduct());
     }
@@ -149,7 +145,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then /^the variant "([^"]+)" should have (\d+) items on hand$/
      */
-    public function thisVariantShouldHaveItemsOnHand($productVariantName, $quantity)
+    public function thisVariantShouldHaveItemsOnHand($productVariantName, $quantity): void
     {
         Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
             ['name' => $productVariantName],
@@ -160,7 +156,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then /^the "([^"]+)" variant of ("[^"]+" product) should have (\d+) items on hand$/
      */
-    public function theVariantOfProductShouldHaveItemsOnHand($productVariantName, ProductInterface $product, $quantity)
+    public function theVariantOfProductShouldHaveItemsOnHand($productVariantName, ProductInterface $product, $quantity): void
     {
         $this->indexPage->open(['productId' => $product->getId()]);
 
@@ -173,7 +169,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then /^I should see that the ("([^"]+)" variant) is not tracked$/
      */
-    public function iShouldSeeThatIsNotTracked(ProductVariantInterface $productVariant)
+    public function iShouldSeeThatIsNotTracked(ProductVariantInterface $productVariant): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage([
             'name' => $productVariant->getName(),
@@ -184,7 +180,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then /^I should see that the ("[^"]+" variant) has zero on hand quantity$/
      */
-    public function iShouldSeeThatTheVariantHasZeroOnHandQuantity(ProductVariantInterface $productVariant)
+    public function iShouldSeeThatTheVariantHasZeroOnHandQuantity(ProductVariantInterface $productVariant): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage([
             'name' => $productVariant->getName(),
@@ -195,7 +191,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then /^(\d+) units of (this product) should be on hold$/
      */
-    public function unitsOfThisProductShouldBeOnHold($quantity, ProductInterface $product)
+    public function unitsOfThisProductShouldBeOnHold($quantity, ProductInterface $product): void
     {
         /** @var ProductVariantInterface $variant */
         $variant = $this->defaultProductVariantResolver->getVariant($product);
@@ -206,7 +202,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then /^(\d+) units of (this product) should be on hand$/
      */
-    public function unitsOfThisProductShouldBeOnHand($quantity, ProductInterface $product)
+    public function unitsOfThisProductShouldBeOnHand($quantity, ProductInterface $product): void
     {
         /** @var ProductVariantInterface $variant */
         $variant = $this->defaultProductVariantResolver->getVariant($product);
@@ -217,7 +213,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then /^there should be no units of (this product) on hold$/
      */
-    public function thereShouldBeNoUnitsOfThisProductOnHold(ProductInterface $product)
+    public function thereShouldBeNoUnitsOfThisProductOnHold(ProductInterface $product): void
     {
         /** @var ProductVariantInterface $variant */
         $variant = $this->defaultProductVariantResolver->getVariant($product);
@@ -228,7 +224,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then the :variant variant should have :amount items on hold
      */
-    public function thisVariantShouldHaveItemsOnHold(ProductVariantInterface $variant, $amount)
+    public function thisVariantShouldHaveItemsOnHold(ProductVariantInterface $variant, $amount): void
     {
         $this->assertOnHoldQuantityOfVariant((int) $amount, $variant);
     }
@@ -236,7 +232,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then the :variant variant of :product product should have :amount items on hold
      */
-    public function theVariantOfProductShouldHaveItemsOnHold(ProductVariantInterface $variant, ProductInterface $product, $amount)
+    public function theVariantOfProductShouldHaveItemsOnHold(ProductVariantInterface $variant, ProductInterface $product, $amount): void
     {
         $this->indexPage->open(['productId' => $product->getId()]);
 
@@ -246,7 +242,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then the first variant in the list should have :field :value
      */
-    public function theFirstVariantInTheListShouldHave($field, $value)
+    public function theFirstVariantInTheListShouldHave($field, $value): void
     {
         Assert::same($this->indexPage->getColumnFields($field)[0], $value);
     }
@@ -254,7 +250,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then the last variant in the list should have :field :value
      */
-    public function theLastVariantInTheListShouldHave($field, $value)
+    public function theLastVariantInTheListShouldHave($field, $value): void
     {
         $values = $this->indexPage->getColumnFields($field);
 
@@ -264,7 +260,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then /^(this variant) should have a (\d+) item currently in stock$/
      */
-    public function thisVariantShouldHaveAItemCurrentlyInStock(ProductVariantInterface $productVariant, $amountInStock)
+    public function thisVariantShouldHaveAItemCurrentlyInStock(ProductVariantInterface $productVariant, $amountInStock): void
     {
         $this->indexPage->open(['productId' => $productVariant->getProduct()->getId()]);
 
@@ -272,12 +268,9 @@ final class BrowsingProductVariantsContext implements Context
     }
 
     /**
-     * @param int $expectedAmount
-     * @param ProductVariantInterface $variant
-     *
      * @throws \InvalidArgumentException
      */
-    private function assertOnHoldQuantityOfVariant($expectedAmount, $variant)
+    private function assertOnHoldQuantityOfVariant(int $expectedAmount, ProductVariantInterface $variant): void
     {
         $actualAmount = $this->indexPage->getOnHoldQuantityFor($variant);
 
@@ -293,10 +286,7 @@ final class BrowsingProductVariantsContext implements Context
         );
     }
 
-    /**
-     * @param int $amount
-     */
-    private function assertNumberOfVariantsOnProductPage($amount)
+    private function assertNumberOfVariantsOnProductPage(int $amount): void
     {
         Assert::same((int) $this->indexPage->countItems(), $amount, 'Product has %d variants, but should have %d');
     }

@@ -57,13 +57,6 @@ final class ProductAttributeContext implements Context
      */
     private $faker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $productAttributeRepository
-     * @param AttributeFactoryInterface $productAttributeFactory
-     * @param FactoryInterface $productAttributeValueFactory
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productAttributeRepository,
@@ -83,7 +76,7 @@ final class ProductAttributeContext implements Context
     /**
      * @Given the store has a :type product attribute :name with code :code
      */
-    public function theStoreHasAProductAttributeWithCode($type, $name, $code)
+    public function theStoreHasAProductAttributeWithCode($type, $name, $code): void
     {
         $productAttribute = $this->createProductAttribute($type, $name, $code);
 
@@ -93,7 +86,7 @@ final class ProductAttributeContext implements Context
     /**
      * @Given the store has( also) a :type product attribute :name at position :position
      */
-    public function theStoreHasAProductAttributeWithPosition($type, $name, $position)
+    public function theStoreHasAProductAttributeWithPosition($type, $name, $position): void
     {
         $productAttribute = $this->createProductAttribute($type, $name);
         $productAttribute->setPosition((int) $position);
@@ -189,7 +182,7 @@ final class ProductAttributeContext implements Context
     /**
      * @Given /^(this product attribute) has set min value as (\d+) and max value as (\d+)$/
      */
-    public function thisAttributeHasSetMinValueAsAndMaxValueAs(ProductAttributeInterface $attribute, $min, $max)
+    public function thisAttributeHasSetMinValueAsAndMaxValueAs(ProductAttributeInterface $attribute, $min, $max): void
     {
         $attribute->setConfiguration(['min' => $min, 'max' => $max]);
 
@@ -241,7 +234,7 @@ final class ProductAttributeContext implements Context
     /**
      * @Given /^(this product) has percent attribute "([^"]+)" with value ([^"]+)%$/
      */
-    public function thisProductHasPercentAttributeWithValue(ProductInterface $product, $productAttributeName, $value)
+    public function thisProductHasPercentAttributeWithValue(ProductInterface $product, $productAttributeName, $value): void
     {
         $attribute = $this->provideProductAttribute('percent', $productAttributeName);
         $attributeValue = $this->createProductAttributeValue($value / 100, $attribute);
@@ -258,7 +251,7 @@ final class ProductAttributeContext implements Context
         $productAttributeType,
         $productAttributeName,
         $value
-    ) {
+    ): void {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $booleanValue = ('Yes' === $value);
         $attributeValue = $this->createProductAttributeValue($booleanValue, $attribute);
@@ -274,10 +267,10 @@ final class ProductAttributeContext implements Context
         ProductInterface $product,
         $productAttributeName,
         $position
-    ) {
+    ): void {
         $attribute = $this->provideProductAttribute('percent', $productAttributeName);
         $attribute->setPosition((int) $position);
-        $attributeValue = $this->createProductAttributeValue(rand(1, 100) / 100, $attribute);
+        $attributeValue = $this->createProductAttributeValue(random_int(1, 100) / 100, $attribute);
 
         $product->addAttribute($attributeValue);
 
@@ -292,7 +285,7 @@ final class ProductAttributeContext implements Context
         $productAttributeType,
         $productAttributeName,
         $date
-    ) {
+    ): void {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $attributeValue = $this->createProductAttributeValue(new \DateTime($date), $attribute);
 
@@ -302,13 +295,11 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @param string $type
-     * @param string $name
      * @param string|null $code
      *
      * @return ProductAttributeInterface
      */
-    private function createProductAttribute($type, $name, $code = null)
+    private function createProductAttribute(string $type, string $name, ?string $code = null): ProductAttributeInterface
     {
         $productAttribute = $this->productAttributeFactory->createTyped($type);
 
@@ -321,13 +312,11 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @param string $type
-     * @param string $name
      * @param string|null $code
      *
      * @return ProductAttributeInterface
      */
-    private function provideProductAttribute($type, $name, $code = null)
+    private function provideProductAttribute(string $type, string $name, ?string $code = null): ProductAttributeInterface
     {
         $code = $code ?: StringInflector::nameToCode($name);
 
@@ -345,10 +334,6 @@ final class ProductAttributeContext implements Context
 
     /**
      * @param mixed $value
-     * @param ProductAttributeInterface $attribute
-     * @param string $localeCode
-     *
-     * @return ProductAttributeValueInterface
      */
     private function createProductAttributeValue(
         $value,
@@ -366,21 +351,12 @@ final class ProductAttributeContext implements Context
         return $attributeValue;
     }
 
-    /**
-     * @param ProductAttributeInterface $productAttribute
-     */
-    private function saveProductAttribute(ProductAttributeInterface $productAttribute)
+    private function saveProductAttribute(ProductAttributeInterface $productAttribute): void
     {
         $this->productAttributeRepository->add($productAttribute);
         $this->sharedStorage->set('product_attribute', $productAttribute);
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param string $productAttributeName
-     * @param array $values
-     * @param string $localeCode
-     */
     private function createSelectProductAttributeValue(
         ProductInterface $product,
         string $productAttributeName,

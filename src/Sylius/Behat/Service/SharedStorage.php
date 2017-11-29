@@ -48,7 +48,7 @@ class SharedStorage implements SharedStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function set($key, $resource)
+    public function set($key, $resource): void
     {
         $this->clipboard[$key] = $resource;
         $this->latestKey = $key;
@@ -69,7 +69,7 @@ class SharedStorage implements SharedStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function setClipboard(array $clipboard)
+    public function setClipboard(array $clipboard): void
     {
         $this->clipboard = $clipboard;
     }

@@ -23,7 +23,7 @@ final class NotificationExpectationMismatchException extends \RuntimeException
         NotificationType $actualType,
         $actualMessage,
         $code = 0,
-        \Exception $previous = null
+        ?\Throwable $previous = null
     ) {
         $message = sprintf(
             "Expected *%s* notification with a \"%s\" message was not found.\n *%s* notification with a \"%s\" message has been found.",

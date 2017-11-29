@@ -33,21 +33,12 @@ final class ProductVariantFormMenuBuilder
      */
     private $eventDispatcher;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
     {
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return ItemInterface
-     */
     public function createMenu(array $options = []): ItemInterface
     {
         $menu = $this->factory->createItem('root');

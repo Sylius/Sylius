@@ -43,7 +43,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     /**
      * {@inheritdoc}
      */
-    public function specifyFirstName($firstName)
+    public function specifyFirstName($firstName): void
     {
         $this->getDocument()->fillField('First name', $firstName);
     }
@@ -51,7 +51,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     /**
      * {@inheritdoc}
      */
-    public function specifyLastName($lastName)
+    public function specifyLastName($lastName): void
     {
         $this->getDocument()->fillField('Last name', $lastName);
     }
@@ -59,7 +59,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     /**
      * {@inheritdoc}
      */
-    public function specifyEmail($email)
+    public function specifyEmail($email): void
     {
         $this->getDocument()->fillField('Email', $email);
     }
@@ -67,12 +67,12 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     /**
      * {@inheritdoc}
      */
-    public function saveChanges()
+    public function saveChanges(): void
     {
         $this->getDocument()->pressButton('Save changes');
     }
 
-    public function subscribeToTheNewsletter()
+    public function subscribeToTheNewsletter(): void
     {
         $this->getDocument()->checkField('Subscribe to the newsletter');
     }

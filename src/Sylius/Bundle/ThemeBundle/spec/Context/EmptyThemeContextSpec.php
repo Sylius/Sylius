@@ -18,12 +18,12 @@ use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 
 final class EmptyThemeContextSpec extends ObjectBehavior
 {
-    function it_implements_theme_context_interface(): void
+    public function it_implements_theme_context_interface(): void
     {
         $this->shouldImplement(ThemeContextInterface::class);
     }
 
-    function it_always_returns_null(): void
+    public function it_always_returns_null(): void
     {
         $this->getTheme()->shouldReturn(null);
     }

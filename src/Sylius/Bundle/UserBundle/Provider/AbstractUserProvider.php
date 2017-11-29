@@ -38,8 +38,6 @@ abstract class AbstractUserProvider implements UserProviderInterface
 
     /**
      * @param string $supportedUserClass FQCN
-     * @param UserRepositoryInterface $userRepository
-     * @param CanonicalizerInterface $canonicalizer
      */
     public function __construct(
         string $supportedUserClass,
@@ -90,11 +88,6 @@ abstract class AbstractUserProvider implements UserProviderInterface
         return $reloadedUser;
     }
 
-    /**
-     * @param string $uniqueIdentifier
-     *
-     * @return UserInterface|null
-     */
     abstract protected function findUser(string $uniqueIdentifier): ?UserInterface;
 
     /**

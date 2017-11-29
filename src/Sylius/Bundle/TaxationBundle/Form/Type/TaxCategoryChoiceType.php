@@ -28,9 +28,6 @@ final class TaxCategoryChoiceType extends AbstractType
      */
     private $taxCategoryRepository;
 
-    /**
-     * @param RepositoryInterface $taxCategoryRepository
-     */
     public function __construct(RepositoryInterface $taxCategoryRepository)
     {
         $this->taxCategoryRepository = $taxCategoryRepository;

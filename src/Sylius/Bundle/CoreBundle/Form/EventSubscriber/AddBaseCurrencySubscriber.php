@@ -32,9 +32,6 @@ final class AddBaseCurrencySubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
         $resource = $event->getData();
@@ -51,7 +48,6 @@ final class AddBaseCurrencySubscriber implements EventSubscriberInterface
     /**
      * @param mixed $resource
      *
-     * @return bool
      *
      * @throws UnexpectedTypeException
      */

@@ -24,9 +24,6 @@ final class PaymentDescriptionProvider implements PaymentDescriptionProviderInte
      */
     private $translator;
 
-    /**
-     * @param TranslatorInterface $translator
-     */
     public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;

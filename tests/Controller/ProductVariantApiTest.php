@@ -39,7 +39,7 @@ final class ProductVariantApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_product_variant_list_when_access_is_denied()
+    public function it_does_not_allow_to_show_product_variant_list_when_access_is_denied(): void
     {
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
 
@@ -55,7 +55,7 @@ final class ProductVariantApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_product_variant_when_it_does_not_exist()
+    public function it_does_not_allow_to_show_product_variant_when_it_does_not_exist(): void
     {
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
@@ -72,7 +72,7 @@ final class ProductVariantApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_product_variant()
+    public function it_allows_showing_product_variant(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -92,7 +92,7 @@ final class ProductVariantApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_indexing_product_variants()
+    public function it_allows_indexing_product_variants(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -109,7 +109,7 @@ final class ProductVariantApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_paginating_the_index_of_product_variant()
+    public function it_allows_paginating_the_index_of_product_variant(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -126,7 +126,7 @@ final class ProductVariantApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_sorting_the_index_of_product_variants()
+    public function it_allows_sorting_the_index_of_product_variants(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -143,7 +143,7 @@ final class ProductVariantApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_create_product_variant()
+    public function it_allows_create_product_variant(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -167,7 +167,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_product_variant_without_required_fields()
+    public function it_does_not_allow_to_create_product_variant_without_required_fields(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -184,7 +184,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_create_product_variant_with_multiple_translations()
+    public function it_allows_create_product_variant_with_multiple_translations(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -217,7 +217,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_create_product_variant_with_channel_pricings()
+    public function it_allows_create_product_variant_with_channel_pricings(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -249,7 +249,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_create_tracked_product_variant()
+    public function it_allows_create_tracked_product_variant(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -275,7 +275,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_create_product_variant_with_tax_category()
+    public function it_allows_create_product_variant_with_tax_category(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -301,7 +301,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_create_product_variant_with_shipping_category()
+    public function it_allows_create_product_variant_with_shipping_category(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -327,7 +327,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_create_product_variant_with_product_option()
+    public function it_allows_create_product_variant_with_product_option(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -355,7 +355,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_delete_product_variant_if_it_does_not_exist()
+    public function it_does_not_allow_delete_product_variant_if_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -372,7 +372,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_delete_product_variant()
+    public function it_allows_delete_product_variant(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -400,7 +400,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_information_about_product_variant()
+    public function it_allows_updating_information_about_product_variant(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -429,7 +429,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_partial_information_about_product_variant()
+    public function it_allows_updating_partial_information_about_product_variant(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -462,7 +462,7 @@ EOT;
     /**
      * @test
      */
-    public function it_not_change_on_hand_after_updating_product_variant()
+    public function it_not_change_on_hand_after_updating_product_variant(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
@@ -491,23 +491,12 @@ EOT;
         $this->assertResponse($response, 'product_variant/not_changed_on_hand_response', Response::HTTP_OK);
     }
 
-    /**
-     * @param ProductInterface $product
-     *
-     * @return string
-     */
-    private function getVariantListUrl(ProductInterface $product)
+    private function getVariantListUrl(ProductInterface $product): string
     {
         return sprintf('/api/v1/products/%s/variants/', $product->getCode());
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param ProductVariantInterface $productVariant
-     *
-     * @return string
-     */
-    private function getVariantUrl(ProductInterface $product, ProductVariantInterface $productVariant)
+    private function getVariantUrl(ProductInterface $product, ProductVariantInterface $productVariant): string
     {
         return sprintf('%s%s', $this->getVariantListUrl($product), $productVariant->getCode());
     }

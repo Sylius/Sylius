@@ -25,9 +25,6 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
      */
     private $documentManager;
 
-    /**
-     * @param DocumentManagerInterface $documentManager
-     */
     public function __construct(
         DocumentManagerInterface $documentManager
     ) {

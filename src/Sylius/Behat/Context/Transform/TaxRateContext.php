@@ -24,9 +24,6 @@ final class TaxRateContext implements Context
      */
     private $taxRateRepository;
 
-    /**
-     * @param RepositoryInterface $taxRateRepository
-     */
     public function __construct(RepositoryInterface $taxRateRepository)
     {
         $this->taxRateRepository = $taxRateRepository;

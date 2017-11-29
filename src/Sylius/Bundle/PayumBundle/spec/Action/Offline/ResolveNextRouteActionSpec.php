@@ -19,12 +19,12 @@ use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 
 final class ResolveNextRouteActionSpec extends ObjectBehavior
 {
-    function it_is_a_payum_action(): void
+    public function it_is_a_payum_action(): void
     {
         $this->shouldImplement(ActionInterface::class);
     }
 
-    function it_resolves_next_route(ResolveNextRoute $resolveNextRouteRequest): void
+    public function it_resolves_next_route(ResolveNextRoute $resolveNextRouteRequest): void
     {
         $resolveNextRouteRequest->setRouteName('sylius_shop_order_thank_you')->shouldBeCalled();
 

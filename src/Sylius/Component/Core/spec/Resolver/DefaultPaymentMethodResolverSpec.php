@@ -25,23 +25,23 @@ use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 
 final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
 {
-    function let(PaymentMethodRepositoryInterface $paymentMethodRepository): void
+    public function let(PaymentMethodRepositoryInterface $paymentMethodRepository): void
     {
         $this->beConstructedWith($paymentMethodRepository);
     }
 
-    function it_implements_a_payment_method_resolver_interface(): void
+    public function it_implements_a_payment_method_resolver_interface(): void
     {
         $this->shouldImplement(DefaultPaymentMethodResolverInterface::class);
     }
 
-    function it_throws_an_invalid_argument_exception_if_subject_not_implements_core_payment_interface(
+    public function it_throws_an_invalid_argument_exception_if_subject_not_implements_core_payment_interface(
         PaymentInterface $payment
     ): void {
         $this->shouldThrow(\InvalidArgumentException::class)->during('getDefaultPaymentMethod', [$payment]);
     }
 
-    function it_throws_an_unresolved_default_payment_method_exception_if_there_is_no_enabled_payment_methods_in_database(
+    public function it_throws_an_unresolved_default_payment_method_exception_if_there_is_no_enabled_payment_methods_in_database(
         CorePaymentInterface $payment,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ChannelInterface $channel,
@@ -57,7 +57,7 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_first_payment_method_from_availables_which_is_enclosed_in_channel(
+    public function it_returns_first_payment_method_from_availables_which_is_enclosed_in_channel(
         CorePaymentInterface $payment,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentMethodInterface $firstPaymentMethod,

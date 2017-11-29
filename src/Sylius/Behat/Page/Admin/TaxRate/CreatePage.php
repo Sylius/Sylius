@@ -25,7 +25,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseZone($name)
+    public function chooseZone($name): void
     {
         $this->getDocument()->selectFieldOption('Zone', $name);
     }
@@ -33,7 +33,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseCategory($name)
+    public function chooseCategory($name): void
     {
         $this->getDocument()->selectFieldOption('Category', $name);
     }
@@ -41,7 +41,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseCalculator($name)
+    public function chooseCalculator($name): void
     {
         $this->getDocument()->selectFieldOption('Calculator', $name);
     }
@@ -49,12 +49,12 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyAmount($amount)
+    public function specifyAmount($amount): void
     {
         $this->getDocument()->fillField('Amount', $amount);
     }
 
-    public function chooseIncludedInPrice()
+    public function chooseIncludedInPrice(): void
     {
         $this->getDocument()->find('css', 'label[for=sylius_tax_rate_includedInPrice]')->click();
     }

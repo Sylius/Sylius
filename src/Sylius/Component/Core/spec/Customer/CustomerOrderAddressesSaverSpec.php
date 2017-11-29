@@ -24,17 +24,17 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 
 final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
 {
-    function let(CustomerAddressAdderInterface $addressAdder): void
+    public function let(CustomerAddressAdderInterface $addressAdder): void
     {
         $this->beConstructedWith($addressAdder);
     }
 
-    function it_implements_order_addresses_saver_interface(): void
+    public function it_implements_order_addresses_saver_interface(): void
     {
         $this->shouldImplement(OrderAddressesSaverInterface::class);
     }
 
-    function it_saves_addresses_from_given_order(
+    public function it_saves_addresses_from_given_order(
         CustomerAddressAdderInterface $addressAdder,
         OrderInterface $order,
         CustomerInterface $customer,
@@ -54,7 +54,7 @@ final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
         $this->saveAddresses($order);
     }
 
-    function it_does_not_save_addresses_for_guest_order(
+    public function it_does_not_save_addresses_for_guest_order(
         CustomerAddressAdderInterface $addressAdder,
         OrderInterface $order,
         CustomerInterface $customer

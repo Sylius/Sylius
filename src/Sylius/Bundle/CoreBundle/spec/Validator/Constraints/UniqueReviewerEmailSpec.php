@@ -18,22 +18,22 @@ use Symfony\Component\Validator\Constraint;
 
 final class UniqueReviewerEmailSpec extends ObjectBehavior
 {
-    function it_extends_constraint_class(): void
+    public function it_extends_constraint_class(): void
     {
         $this->shouldHaveType(Constraint::class);
     }
 
-    function it_has_a_message(): void
+    public function it_has_a_message(): void
     {
         $this->message->shouldReturn('sylius.review.author.already_exists');
     }
 
-    function it_is_validate_by_unique_user_email_validator(): void
+    public function it_is_validate_by_unique_user_email_validator(): void
     {
         $this->validatedBy()->shouldReturn('sylius_unique_reviewer_email_validator');
     }
 
-    function it_has_targets(): void
+    public function it_has_targets(): void
     {
         $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
     }

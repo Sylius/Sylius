@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 
 final class OrderItemNamesSetter implements OrderItemNamesSetterInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function __invoke(OrderInterface $order): void
     {
         $localeCode = $order->getLocaleCode();

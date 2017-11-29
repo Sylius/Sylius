@@ -27,18 +27,12 @@ final class ExpressionVisitor
 {
     private $queryBuilder;
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     */
     public function __construct(QueryBuilder $queryBuilder)
     {
         $this->queryBuilder = $queryBuilder;
     }
 
     /**
-     * @param Comparison $comparison
-     * @param AbstractNode $parentNode
-     *
      * @return mixed
      *
      * @throws \RuntimeException
@@ -82,9 +76,6 @@ final class ExpressionVisitor
     }
 
     /**
-     * @param CompositeExpression $expr
-     * @param AbstractNode $parentNode
-     *
      * @return mixed
      *
      * @throws \RuntimeException
@@ -137,7 +128,6 @@ final class ExpressionVisitor
     /**
      * Walk the given expression to build up the PHPCR-ODM query builder.
      *
-     * @param Expression $expr
      * @param AbstractNode|null $parentNode
      *
      * @return mixed
@@ -160,21 +150,11 @@ final class ExpressionVisitor
         throw new \RuntimeException('Unknown Expression: ' . get_class($expr));
     }
 
-    /**
-     * @param string $field
-     *
-     * @return string
-     */
     private function getField(string $field): string
     {
         return Driver::QB_SOURCE_ALIAS . '.' . $field;
     }
 
-    /**
-     * @param AbstractNode $parentNode
-     * @param string $field
-     * @param array $values
-     */
     private function getInConstraint(AbstractNode $parentNode, string $field, array $values): void
     {
         $orNode = $parentNode->orx();

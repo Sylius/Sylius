@@ -24,7 +24,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ReviewerReviewsRemoverSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         EntityRepository $reviewRepository,
         ObjectManager $reviewManager,
         ReviewableRatingUpdaterInterface $averageRatingUpdater
@@ -32,12 +32,12 @@ final class ReviewerReviewsRemoverSpec extends ObjectBehavior
         $this->beConstructedWith($reviewRepository, $reviewManager, $averageRatingUpdater);
     }
 
-    function it_implements_reviewer_reviews_remover_interface(): void
+    public function it_implements_reviewer_reviews_remover_interface(): void
     {
         $this->shouldImplement(ReviewerReviewsRemoverInterface::class);
     }
 
-    function it_removes_soft_deleted_customer_reviews_and_recalculates_their_product_ratings(
+    public function it_removes_soft_deleted_customer_reviews_and_recalculates_their_product_ratings(
         $averageRatingUpdater,
         $reviewRepository,
         $reviewManager,

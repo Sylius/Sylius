@@ -32,10 +32,6 @@ final class ManagingPromotionsContext implements Context
      */
     private $promotionRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param PromotionRepositoryInterface $promotionRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PromotionRepositoryInterface $promotionRepository
@@ -47,7 +43,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When /^I delete a ("([^"]+)" promotion)$/
      */
-    public function iDeletePromotion(PromotionInterface $promotion)
+    public function iDeletePromotion(PromotionInterface $promotion): void
     {
         $this->promotionRepository->remove($promotion);
     }
@@ -55,7 +51,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When /^I try to delete a ("([^"]+)" promotion)$/
      */
-    public function iTryToDeletePromotion(PromotionInterface $promotion)
+    public function iTryToDeletePromotion(PromotionInterface $promotion): void
     {
         try {
             $this->promotionRepository->remove($promotion);
@@ -67,7 +63,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then /^(this promotion) should no longer exist in the promotion registry$/
      */
-    public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion)
+    public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion): void
     {
         Assert::null($this->promotionRepository->findOneBy(['code' => $promotion->getCode()]));
     }
@@ -75,7 +71,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then promotion :promotion should still exist in the registry
      */
-    public function promotionShouldStillExistInTheRegistry(PromotionInterface $promotion)
+    public function promotionShouldStillExistInTheRegistry(PromotionInterface $promotion): void
     {
         Assert::notNull($this->promotionRepository->find($promotion->getId()));
     }
@@ -83,7 +79,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then I should be notified that it is in use and cannot be deleted
      */
-    public function iShouldBeNotifiedOfFailure()
+    public function iShouldBeNotifiedOfFailure(): void
     {
         Assert::isInstanceOf($this->sharedStorage->get('last_exception'), ForeignKeyConstraintViolationException::class);
     }

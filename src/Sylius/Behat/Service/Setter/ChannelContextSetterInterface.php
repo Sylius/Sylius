@@ -20,5 +20,5 @@ interface ChannelContextSetterInterface
     /**
      * @param ChannelInterface $channel
      */
-    public function setChannel(ChannelInterface $channel);
+    public function setChannel(ChannelInterface $channel): void;
 }

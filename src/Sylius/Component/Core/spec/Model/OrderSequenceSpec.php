@@ -20,22 +20,22 @@ use Sylius\Component\Resource\Model\VersionedInterface;
 
 final class OrderSequenceSpec extends ObjectBehavior
 {
-    function it_implements_an_order_sequence_interface(): void
+    public function it_implements_an_order_sequence_interface(): void
     {
         $this->shouldImplement(OrderSequenceInterface::class);
     }
 
-    function it_implements_a_versioned_interface(): void
+    public function it_implements_a_versioned_interface(): void
     {
         $this->shouldImplement(VersionedInterface::class);
     }
 
-    function it_extends_an_order_sequence(): void
+    public function it_extends_an_order_sequence(): void
     {
         $this->shouldHaveType(BaseOrderSequence::class);
     }
 
-    function it_has_version_1_by_default(): void
+    public function it_has_version_1_by_default(): void
     {
         $this->getVersion()->shouldReturn(1);
     }

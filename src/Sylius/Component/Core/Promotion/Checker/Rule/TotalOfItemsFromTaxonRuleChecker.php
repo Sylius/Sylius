@@ -29,9 +29,6 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
      */
     private $taxonRepository;
 
-    /**
-     * @param TaxonRepositoryInterface $taxonRepository
-     */
     public function __construct(TaxonRepositoryInterface $taxonRepository)
     {
         $this->taxonRepository = $taxonRepository;

@@ -22,17 +22,17 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 final class TaxRateResolverSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $taxRateRepository): void
+    public function let(RepositoryInterface $taxRateRepository): void
     {
         $this->beConstructedWith($taxRateRepository);
     }
 
-    function it_implements_tax_rate_resolver_interface(): void
+    public function it_implements_tax_rate_resolver_interface(): void
     {
         $this->shouldImplement(TaxRateResolverInterface::class);
     }
 
-    function it_returns_tax_rate_for_given_taxable_category(
+    public function it_returns_tax_rate_for_given_taxable_category(
         $taxRateRepository,
         TaxableInterface $taxable,
         TaxCategoryInterface $taxCategory,
@@ -44,7 +44,7 @@ final class TaxRateResolverSpec extends ObjectBehavior
         $this->resolve($taxable)->shouldReturn($taxRate);
     }
 
-    function it_returns_null_if_tax_rate_for_given_taxable_category_does_not_exist(
+    public function it_returns_null_if_tax_rate_for_given_taxable_category_does_not_exist(
         $taxRateRepository,
         TaxableInterface $taxable,
         TaxCategoryInterface $taxCategory
@@ -55,7 +55,7 @@ final class TaxRateResolverSpec extends ObjectBehavior
         $this->resolve($taxable)->shouldReturn(null);
     }
 
-    function it_returns_null_if_taxable_does_not_belong_to_any_category(
+    public function it_returns_null_if_taxable_does_not_belong_to_any_category(
         TaxableInterface $taxable
     ): void {
         $taxable->getTaxCategory()->willReturn(null);

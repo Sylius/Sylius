@@ -44,12 +44,6 @@ final class DashboardController
      */
     private $router;
 
-    /**
-     * @param DashboardStatisticsProviderInterface $statisticsProvider
-     * @param ChannelRepositoryInterface $channelRepository
-     * @param EngineInterface $templatingEngine
-     * @param RouterInterface $router
-     */
     public function __construct(
         DashboardStatisticsProviderInterface $statisticsProvider,
         ChannelRepositoryInterface $channelRepository,
@@ -63,8 +57,6 @@ final class DashboardController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function indexAction(Request $request): Response
@@ -88,8 +80,6 @@ final class DashboardController
 
     /**
      * @param string|null $channelCode
-     *
-     * @return ChannelInterface|null
      */
     private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface
     {

@@ -30,10 +30,6 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
      */
     private $provinceRepository;
 
-    /**
-     * @param RepositoryInterface $countryRepository
-     * @param RepositoryInterface $provinceRepository
-     */
     public function __construct(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository)
     {
         $this->countryRepository = $countryRepository;
@@ -64,11 +60,6 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
         }
     }
 
-    /**
-     * @param AddressInterface $address
-     *
-     * @return bool
-     */
     protected function isProvinceValid(AddressInterface $address): bool
     {
         $countryCode = $address->getCountryCode();

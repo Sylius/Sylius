@@ -10,6 +10,7 @@
  */
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Sylius package.
  *
@@ -29,7 +30,7 @@ class BookApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_creating_a_book()
+    public function it_allows_creating_a_book(): void
     {
         $data =
 <<<EOT
@@ -51,7 +52,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_a_book()
+    public function it_allows_updating_a_book(): void
     {
         $objects = $this->loadFixturesFromFile('books.yml');
 
@@ -78,7 +79,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_partial_information_about_a_book()
+    public function it_allows_updating_partial_information_about_a_book(): void
     {
         $objects = $this->loadFixturesFromFile('books.yml');
 
@@ -97,7 +98,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_removing_a_book()
+    public function it_allows_removing_a_book(): void
     {
         $objects = $this->loadFixturesFromFile('books.yml');
 
@@ -109,7 +110,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_showing_a_book()
+    public function it_allows_showing_a_book(): void
     {
         $objects = $this->loadFixturesFromFile('books.yml');
 
@@ -121,7 +122,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_indexing_books()
+    public function it_allows_indexing_books(): void
     {
         $this->loadFixturesFromFile('books.yml');
 
@@ -133,7 +134,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_paginating_the_index_of_books()
+    public function it_allows_paginating_the_index_of_books(): void
     {
         $this->loadFixturesFromFile('more_books.yml');
 
@@ -145,7 +146,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_showing_resource_if_it_not_exists()
+    public function it_does_not_allow_showing_resource_if_it_not_exists(): void
     {
         $this->loadFixturesFromFile('books.yml');
 
@@ -157,7 +158,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_apply_sorting_for_un_existing_field()
+    public function it_does_not_apply_sorting_for_un_existing_field(): void
     {
         $this->loadFixturesFromFile('more_books.yml');
 
@@ -170,7 +171,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_apply_filtering_for_un_existing_field()
+    public function it_does_not_apply_filtering_for_un_existing_field(): void
     {
         $this->loadFixturesFromFile('more_books.yml');
 
@@ -183,7 +184,7 @@ EOT;
     /**
      * @test
      */
-    public function it_applies_sorting_for_existing_field()
+    public function it_applies_sorting_for_existing_field(): void
     {
         $this->loadFixturesFromFile('more_books.yml');
 
@@ -196,7 +197,7 @@ EOT;
     /**
      * @test
      */
-    public function it_applies_filtering_for_existing_field()
+    public function it_applies_filtering_for_existing_field(): void
     {
         $this->loadFixturesFromFile('more_books.yml');
 

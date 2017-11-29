@@ -29,27 +29,27 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class TextAttributeTypeSpec extends ObjectBehavior
 {
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(TextAttributeType::class);
     }
 
-    function it_implements_attribute_type_interface(): void
+    public function it_implements_attribute_type_interface(): void
     {
         $this->shouldImplement(AttributeTypeInterface::class);
     }
 
-    function its_storage_type_is_text(): void
+    public function its_storage_type_is_text(): void
     {
         $this->getStorageType()->shouldReturn('text');
     }
 
-    function its_type_is_text(): void
+    public function its_type_is_text(): void
     {
         $this->getType()->shouldReturn('text');
     }
 
-    function it_checks_if_attribute_value_is_valid_according_to_min_and_max_constraint(
+    public function it_checks_if_attribute_value_is_valid_according_to_min_and_max_constraint(
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
@@ -79,7 +79,7 @@ final class TextAttributeTypeSpec extends ObjectBehavior
         $this->validate($attributeValue, $context, ['min' => 2, 'max' => 255]);
     }
 
-    function it_checks_if_attribute_value_is_valid_according_to_required_constraint(
+    public function it_checks_if_attribute_value_is_valid_according_to_required_constraint(
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
@@ -87,7 +87,7 @@ final class TextAttributeTypeSpec extends ObjectBehavior
         ConstraintViolationListInterface $constraintViolationList,
         ExecutionContextInterface $context,
         ValidatorInterface $validator
-    ) {
+    ): void {
         $attributeValue->getAttribute()->willReturn($attribute);
 
         $attributeValue->getValue()->willReturn(null);

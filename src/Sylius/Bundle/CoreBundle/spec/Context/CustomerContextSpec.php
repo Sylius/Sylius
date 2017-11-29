@@ -22,12 +22,12 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class CustomerContextSpec extends ObjectBehavior
 {
-    function let(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker): void
+    public function let(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker): void
     {
         $this->beConstructedWith($tokenStorage, $authorizationChecker);
     }
 
-    function it_gets_customer_from_currently_logged_user(
+    public function it_gets_customer_from_currently_logged_user(
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker,
         TokenInterface $token,
@@ -42,7 +42,7 @@ final class CustomerContextSpec extends ObjectBehavior
         $this->getCustomer()->shouldReturn($customer);
     }
 
-    function it_returns_null_if_user_is_not_logged_in($tokenStorage): void
+    public function it_returns_null_if_user_is_not_logged_in($tokenStorage): void
     {
         $tokenStorage->getToken()->willReturn(null);
 

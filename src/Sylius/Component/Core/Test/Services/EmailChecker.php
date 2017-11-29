@@ -24,9 +24,6 @@ final class EmailChecker implements EmailCheckerInterface
      */
     private $spoolDirectory;
 
-    /**
-     * @param string $spoolDirectory
-     */
     public function __construct(string $spoolDirectory)
     {
         $this->spoolDirectory = $spoolDirectory;
@@ -95,20 +92,12 @@ final class EmailChecker implements EmailCheckerInterface
         return $this->spoolDirectory;
     }
 
-    /**
-     * @param \Swift_Message $message
-     * @param string $recipient
-     *
-     * @return bool
-     */
     private function isMessageTo(\Swift_Message $message, string $recipient): bool
     {
         return array_key_exists($recipient, $message->getTo());
     }
 
     /**
-     * @param string $recipient
-     *
      * @throws /InvalidArgumentException
      */
     private function assertRecipientIsValid(string $recipient): void
@@ -123,8 +112,6 @@ final class EmailChecker implements EmailCheckerInterface
     }
 
     /**
-     * @param string $directory
-     *
      * @return array|\Swift_Message[]
      */
     private function getMessages(string $directory): array

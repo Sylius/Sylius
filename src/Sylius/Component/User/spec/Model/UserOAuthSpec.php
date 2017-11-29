@@ -18,7 +18,7 @@ use Sylius\Component\User\Model\UserOAuthInterface;
 
 final class UserOAuthSpec extends ObjectBehavior
 {
-    function it_implements_user_oauth_interface(): void
+    public function it_implements_user_oauth_interface(): void
     {
         $this->shouldImplement(UserOAuthInterface::class);
     }

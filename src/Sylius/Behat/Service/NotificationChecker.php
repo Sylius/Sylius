@@ -24,9 +24,6 @@ final class NotificationChecker implements NotificationCheckerInterface
      */
     private $notificationAccessor;
 
-    /**
-     * @param NotificationAccessorInterface $notificationAccessor
-     */
     public function __construct(NotificationAccessorInterface $notificationAccessor)
     {
         $this->notificationAccessor = $notificationAccessor;
@@ -35,7 +32,7 @@ final class NotificationChecker implements NotificationCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function checkNotification($message, NotificationType $type)
+    public function checkNotification($message, NotificationType $type): void
     {
         if ($this->hasType($type) && $this->hasMessage($message)) {
             return;
@@ -49,22 +46,12 @@ final class NotificationChecker implements NotificationCheckerInterface
         );
     }
 
-    /**
-     * @param NotificationType $type
-     *
-     * @return bool
-     */
-    private function hasType(NotificationType $type)
+    private function hasType(NotificationType $type): bool
     {
         return $type === $this->notificationAccessor->getType();
     }
 
-    /**
-     * @param string $message
-     *
-     * @return bool
-     */
-    private function hasMessage($message)
+    private function hasMessage(string $message): bool
     {
         return false !== strpos($this->notificationAccessor->getMessage(), $message);
     }

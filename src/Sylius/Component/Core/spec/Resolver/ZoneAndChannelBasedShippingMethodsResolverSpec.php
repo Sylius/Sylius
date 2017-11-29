@@ -29,7 +29,7 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ZoneMatcherInterface $zoneMatcher,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker
@@ -37,12 +37,12 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $this->beConstructedWith($shippingMethodRepository, $zoneMatcher, $eligibilityChecker);
     }
 
-    function it_implements_a_shipping_methods_by_zones_and_channel_resolver_interface(): void
+    public function it_implements_a_shipping_methods_by_zones_and_channel_resolver_interface(): void
     {
         $this->shouldImplement(ShippingMethodsResolverInterface::class);
     }
 
-    function it_returns_shipping_methods_matched_for_shipment_order_shipping_address_and_order_channel(
+    public function it_returns_shipping_methods_matched_for_shipment_order_shipping_address_and_order_channel(
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         AddressInterface $address,
         ChannelInterface $channel,
@@ -72,7 +72,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $this->getSupportedMethods($shipment)->shouldReturn([$firstShippingMethod, $secondShippingMethod]);
     }
 
-    function it_returns_an_empty_array_if_zone_matcher_could_not_match_any_zone(
+    public function it_returns_an_empty_array_if_zone_matcher_could_not_match_any_zone(
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         OrderInterface $order,
         AddressInterface $address,
@@ -89,7 +89,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $this->getSupportedMethods($shipment)->shouldReturn([]);
     }
 
-    function it_returns_only_shipping_methods_that_are_eligible(
+    public function it_returns_only_shipping_methods_that_are_eligible(
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         AddressInterface $address,
         ChannelInterface $channel,
@@ -119,7 +119,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $this->getSupportedMethods($shipment)->shouldReturn([$secondShippingMethod]);
     }
 
-    function it_supports_shipments_with_order_and_its_shipping_address_defined(
+    public function it_supports_shipments_with_order_and_its_shipping_address_defined(
         OrderInterface $order,
         AddressInterface $address,
         ChannelInterface $channel,
@@ -132,7 +132,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $this->supports($shipment)->shouldReturn(true);
     }
 
-    function it_does_not_support_shipments_which_order_has_no_shipping_address_defined(
+    public function it_does_not_support_shipments_which_order_has_no_shipping_address_defined(
         OrderInterface $order,
         ChannelInterface $channel,
         ShipmentInterface $shipment
@@ -144,7 +144,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $this->supports($shipment)->shouldReturn(false);
     }
 
-    function it_does_not_support_shipments_for_order_with_not_assigned_channel(
+    public function it_does_not_support_shipments_for_order_with_not_assigned_channel(
         OrderInterface $order,
         AddressInterface $address,
         ShipmentInterface $shipment
@@ -156,14 +156,14 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $this->supports($shipment)->shouldReturn(false);
     }
 
-    function it_does_not_support_shipments_which_has_no_order_defined(ShipmentInterface $shipment): void
+    public function it_does_not_support_shipments_which_has_no_order_defined(ShipmentInterface $shipment): void
     {
         $shipment->getOrder()->willReturn(null);
 
         $this->supports($shipment)->shouldReturn(false);
     }
 
-    function it_does_not_support_different_shipping_subject_than_shipment(ShippingSubjectInterface $subject): void
+    public function it_does_not_support_different_shipping_subject_than_shipment(ShippingSubjectInterface $subject): void
     {
         $this->supports($subject)->shouldReturn(false);
     }

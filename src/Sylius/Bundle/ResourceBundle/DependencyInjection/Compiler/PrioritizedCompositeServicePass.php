@@ -40,12 +40,6 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
      */
     private $methodName;
 
-    /**
-     * @param string $serviceId
-     * @param string $compositeId
-     * @param string $tagName
-     * @param string $methodName
-     */
     public function __construct(string $serviceId, string $compositeId, string $tagName, string $methodName)
     {
         $this->serviceId = $serviceId;
@@ -67,9 +61,6 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
         $this->addAliasForCompositeIfServiceDoesNotExist($container);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     private function injectTaggedServicesIntoComposite(ContainerBuilder $container): void
     {
         $channelContextDefinition = $container->findDefinition($this->compositeId);
@@ -80,9 +71,6 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
         }
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     private function addAliasForCompositeIfServiceDoesNotExist(ContainerBuilder $container): void
     {
         if ($container->has($this->serviceId)) {
@@ -92,11 +80,6 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
         $container->setAlias($this->serviceId, $this->compositeId);
     }
 
-    /**
-     * @param Definition $channelContextDefinition
-     * @param string $id
-     * @param array $tags
-     */
     private function addMethodCalls(Definition $channelContextDefinition, string $id, array $tags): void
     {
         foreach ($tags as $attributes) {
@@ -104,11 +87,6 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
         }
     }
 
-    /**
-     * @param Definition $channelContextDefinition
-     * @param string $id
-     * @param array $attributes
-     */
     private function addMethodCall(Definition $channelContextDefinition, string $id, array $attributes): void
     {
         $arguments = [new Reference($id)];

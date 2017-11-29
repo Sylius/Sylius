@@ -26,17 +26,17 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 final class OrderPaymentProcessorSpec extends ObjectBehavior
 {
-    function let(OrderPaymentProviderInterface $orderPaymentProvider): void
+    public function let(OrderPaymentProviderInterface $orderPaymentProvider): void
     {
         $this->beConstructedWith($orderPaymentProvider, PaymentInterface::STATE_CART);
     }
 
-    function it_is_an_order_processor(): void
+    public function it_is_an_order_processor(): void
     {
         $this->shouldImplement(OrderProcessorInterface::class);
     }
 
-    function it_throws_exception_if_passed_order_is_not_core_order(BaseOrderInterface $order): void
+    public function it_throws_exception_if_passed_order_is_not_core_order(BaseOrderInterface $order): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -44,7 +44,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         ;
     }
 
-    function it_removes_cart_payments_from_order_if_its_total_is_zero(
+    public function it_removes_cart_payments_from_order_if_its_total_is_zero(
         OrderInterface $order,
         PaymentInterface $cartPayment
     ): void {
@@ -57,7 +57,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_does_nothing_if_the_order_is_cancelled(OrderInterface $order): void
+    public function it_does_nothing_if_the_order_is_cancelled(OrderInterface $order): void
     {
         $order->getState()->willReturn(OrderInterface::STATE_CANCELLED);
         $order->getLastPayment(Argument::any())->shouldNotBeCalled();
@@ -65,7 +65,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_sets_last_order_currency_with_target_state_currency_code_and_amount(
+    public function it_sets_last_order_currency_with_target_state_currency_code_and_amount(
         OrderInterface $order,
         PaymentInterface $payment
     ): void {
@@ -81,7 +81,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_sets_provided_order_payment_if_it_is_not_null(
+    public function it_sets_provided_order_payment_if_it_is_not_null(
         OrderInterface $order,
         OrderPaymentProviderInterface $orderPaymentProvider,
         PaymentInterface $payment
@@ -96,7 +96,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_does_not_set_order_payment_if_it_cannot_be_provided(
+    public function it_does_not_set_order_payment_if_it_cannot_be_provided(
         OrderInterface $order,
         OrderPaymentProviderInterface $orderPaymentProvider
     ): void {

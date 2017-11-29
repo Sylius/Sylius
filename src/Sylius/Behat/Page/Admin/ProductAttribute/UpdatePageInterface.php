@@ -21,17 +21,17 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param string $name
      * @param string $language
      */
-    public function changeName($name, $language);
+    public function changeName(string $name, string $language): void;
 
     /**
      * @return bool
      */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
     /**
      * @return bool
      */
-    public function isTypeDisabled();
+    public function isTypeDisabled(): bool;
 
     /**
      * @param string $oldValue

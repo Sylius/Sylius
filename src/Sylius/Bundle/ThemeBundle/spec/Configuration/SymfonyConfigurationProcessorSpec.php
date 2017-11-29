@@ -20,17 +20,17 @@ use Symfony\Component\Config\Definition\Processor;
 
 final class SymfonyConfigurationProcessorSpec extends ObjectBehavior
 {
-    function let(ConfigurationInterface $configuration, Processor $processor): void
+    public function let(ConfigurationInterface $configuration, Processor $processor): void
     {
         $this->beConstructedWith($configuration, $processor);
     }
 
-    function it_implements_configuration_processor_interface(): void
+    public function it_implements_configuration_processor_interface(): void
     {
         $this->shouldImplement(ConfigurationProcessorInterface::class);
     }
 
-    function it_proxies_configuration_processing_to_symfony_configuration_processor(
+    public function it_proxies_configuration_processing_to_symfony_configuration_processor(
         ConfigurationInterface $configuration,
         Processor $processor
     ): void {
@@ -42,15 +42,15 @@ final class SymfonyConfigurationProcessorSpec extends ObjectBehavior
         $this->process([['name' => 'example/theme']])->shouldReturn(['name' => 'example/theme']);
     }
 
-    function it_does_not_catch_any_exception_thrown_by_symfony_configuration_processor(
+    public function it_does_not_catch_any_exception_thrown_by_symfony_configuration_processor(
         ConfigurationInterface $configuration,
         Processor $processor
     ): void {
         $processor
             ->processConfiguration($configuration, [])
-            ->willThrow(\Exception::class)
+            ->willThrow(\Throwable::class)
         ;
 
-        $this->shouldThrow(\Exception::class)->duringProcess([]);
+        $this->shouldThrow(\Throwable::class)->duringProcess([]);
     }
 }

@@ -84,8 +84,6 @@ interface ProductVariantInterface extends
     public function setPosition(?int $position): void;
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductVariantTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

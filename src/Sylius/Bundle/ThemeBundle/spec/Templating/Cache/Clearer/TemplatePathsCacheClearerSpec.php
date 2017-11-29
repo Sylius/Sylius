@@ -20,24 +20,24 @@ use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
 
 final class TemplatePathsCacheClearerSpec extends ObjectBehavior
 {
-    function let(Cache $cache): void
+    public function let(Cache $cache): void
     {
         $this->beConstructedWith($cache);
     }
 
-    function it_implements_cache_clearer_interface(): void
+    public function it_implements_cache_clearer_interface(): void
     {
         $this->shouldImplement(CacheClearerInterface::class);
     }
 
-    function it_deletes_all_elements_if_cache_is_clearable(ClearableCache $cache): void
+    public function it_deletes_all_elements_if_cache_is_clearable(ClearableCache $cache): void
     {
         $cache->deleteAll()->shouldBeCalled();
 
         $this->clear(null);
     }
 
-    function it_does_not_throw_any_error_if_cache_is_not_clearable(): void
+    public function it_does_not_throw_any_error_if_cache_is_not_clearable(): void
     {
         $this->clear(null);
     }

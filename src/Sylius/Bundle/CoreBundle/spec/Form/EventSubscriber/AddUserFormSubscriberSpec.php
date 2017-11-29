@@ -23,17 +23,17 @@ use Symfony\Component\Form\FormEvent;
 
 final class AddUserFormSubscriberSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith('\Fully\Qualified\ClassName');
     }
 
-    function it_is_event_subscriber_instance(): void
+    public function it_is_event_subscriber_instance(): void
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_adds_user_form_type_and_create_user_check(
+    public function it_adds_user_form_type_and_create_user_check(
         FormEvent $event,
         Form $form
     ): void {
@@ -45,7 +45,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_replaces_user_form_by_new_user_form_when_create_user_check_is_not_checked(
+    public function it_replaces_user_form_by_new_user_form_when_create_user_check_is_not_checked(
         FormEvent $event,
         Form $form,
         Form $createUserCheckForm,
@@ -70,7 +70,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $this->submit($event);
     }
 
-    function it_does_not_replace_user_form_by_new_user_form_when_create_user_check_is_checked(
+    public function it_does_not_replace_user_form_by_new_user_form_when_create_user_check_is_checked(
         FormEvent $event,
         Form $form,
         Form $createUserCheckForm,
@@ -95,7 +95,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $this->submit($event);
     }
 
-    function it_does_not_replace_user_form_by_new_user_form_when_user_has_an_id(
+    public function it_does_not_replace_user_form_by_new_user_form_when_user_has_an_id(
         FormEvent $event,
         Form $form,
         Form $createUserCheckForm,
@@ -120,7 +120,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $this->submit($event);
     }
 
-    function it_throws_invalid_argument_exception_when_data_does_not_implement_user_aware_interface(
+    public function it_throws_invalid_argument_exception_when_data_does_not_implement_user_aware_interface(
         FormEvent $event,
         Form $form,
         Form $createUserCheckForm,

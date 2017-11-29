@@ -17,27 +17,27 @@ use PhpSpec\ObjectBehavior;
 
 final class RequirementSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith('PHP version', true, true, 'Please upgrade.');
     }
 
-    function it_gets_label(): void
+    public function it_gets_label(): void
     {
         $this->getLabel()->shouldReturn('PHP version');
     }
 
-    function it_gets_fulfilled(): void
+    public function it_gets_fulfilled(): void
     {
         $this->isFulfilled()->shouldReturn(true);
     }
 
-    function it_gets_required(): void
+    public function it_gets_required(): void
     {
         $this->isRequired()->shouldReturn(true);
     }
 
-    function it_gets_help(): void
+    public function it_gets_help(): void
     {
         $this->getHelp()->shouldReturn('Please upgrade.');
     }

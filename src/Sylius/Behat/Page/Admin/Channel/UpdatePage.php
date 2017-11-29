@@ -25,7 +25,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setTheme($themeName)
+    public function setTheme($themeName): void
     {
         $this->getDocument()->selectFieldOption('Theme', $themeName);
     }
@@ -33,7 +33,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function unsetTheme()
+    public function unsetTheme(): void
     {
         $this->getDocument()->selectFieldOption('Theme', '');
     }
@@ -41,7 +41,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseLocale($language)
+    public function chooseLocale($language): void
     {
         $this->getDocument()->selectFieldOption('Locales', $language);
     }
@@ -57,7 +57,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseCurrency($currencyCode)
+    public function chooseCurrency($currencyCode): void
     {
         $this->getDocument()->selectFieldOption('Currencies', $currencyCode);
     }
@@ -73,7 +73,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseDefaultTaxZone($taxZone)
+    public function chooseDefaultTaxZone($taxZone): void
     {
         $this->getDocument()->selectFieldOption('Default tax zone', (null === $taxZone) ? '' : $taxZone);
     }
@@ -81,7 +81,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseTaxCalculationStrategy($taxZone)
+    public function chooseTaxCalculationStrategy($taxZone): void
     {
         $this->getDocument()->selectFieldOption('Tax calculation strategy', $taxZone);
     }

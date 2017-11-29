@@ -24,17 +24,17 @@ use Sylius\Component\Order\OrderTransitions;
 
 final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, Factory $stateMachineFactory): void
+    public function let(OrderRepositoryInterface $orderRepository, Factory $stateMachineFactory): void
     {
         $this->beConstructedWith($orderRepository, $stateMachineFactory, '10 months');
     }
 
-    function it_implements_an_expired_orders_state_updater_interface(): void
+    public function it_implements_an_expired_orders_state_updater_interface(): void
     {
         $this->shouldImplement(UnpaidOrdersStateUpdaterInterface::class);
     }
 
-    function it_cancels_unpaid_orders(
+    public function it_cancels_unpaid_orders(
         Factory $stateMachineFactory,
         OrderInterface $firstOrder,
         OrderInterface $secondOrder,

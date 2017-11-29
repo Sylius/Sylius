@@ -19,9 +19,6 @@ final class SettingsRequirements extends RequirementCollection
 {
     public const RECOMMENDED_PHP_VERSION = '7.0';
 
-    /**
-     * @param TranslatorInterface $translator
-     */
     public function __construct(TranslatorInterface $translator)
     {
         parent::__construct($translator->trans('sylius.installer.settings.header', []));
@@ -50,11 +47,6 @@ final class SettingsRequirements extends RequirementCollection
         ;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
     private function isOn(string $key): bool
     {
         $value = ini_get($key);

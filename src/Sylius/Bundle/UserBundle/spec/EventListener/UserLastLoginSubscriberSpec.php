@@ -26,17 +26,17 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 final class UserLastLoginSubscriberSpec extends ObjectBehavior
 {
-    function let(ObjectManager $userManager): void
+    public function let(ObjectManager $userManager): void
     {
         $this->beConstructedWith($userManager, 'Sylius\Component\User\Model\UserInterface');
     }
 
-    function it_is_subscriber(): void
+    public function it_is_subscriber(): void
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function its_subscribed_to_events(): void
+    public function its_subscribed_to_events(): void
     {
         $this::getSubscribedEvents()->shouldReturn([
             SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
@@ -44,7 +44,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         ]);
     }
 
-    function it_updates_user_last_login_on_security_interactive_login(
+    public function it_updates_user_last_login_on_security_interactive_login(
         ObjectManager $userManager,
         InteractiveLoginEvent $event,
         TokenInterface $token,
@@ -61,7 +61,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         $this->onSecurityInteractiveLogin($event);
     }
 
-    function it_updates_user_last_login_on_implicit_login(
+    public function it_updates_user_last_login_on_implicit_login(
         ObjectManager $userManager,
         UserEvent $event,
         UserInterface $user
@@ -76,7 +76,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         $this->onImplicitLogin($event);
     }
 
-    function it_updates_only_user_specified_in_constructor(
+    public function it_updates_only_user_specified_in_constructor(
         ObjectManager $userManager,
         UserEvent $event,
         UserInterface $user

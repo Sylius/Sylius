@@ -35,7 +35,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function nameItIn($name, $localeCode)
+    public function nameItIn($name, $localeCode): void
     {
         $this->activateLanguageTab($localeCode);
         $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
@@ -51,7 +51,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($channelName, $price)
+    public function specifyPrice($channelName, $price): void
     {
         $this->getElement('price', ['%channelName%' => $channelName])->setValue($price);
     }
@@ -59,12 +59,12 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function specifyOriginalPrice($channelName, $originalPrice)
+    public function specifyOriginalPrice($channelName, $originalPrice): void
     {
         $this->getElement('original_price', ['%channelName%' => $channelName])->setValue($originalPrice);
     }
 
-    public function addSelectedAttributes()
+    public function addSelectedAttributes(): void
     {
         $this->clickTabIfItsNotActive('attributes');
         $this->getDocument()->pressButton('Add attributes');
@@ -79,7 +79,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function removeAttribute($attributeName, $localeCode)
+    public function removeAttribute($attributeName, $localeCode): void
     {
         $this->clickTabIfItsNotActive('attributes');
 
@@ -129,7 +129,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function selectMainTaxon(TaxonInterface $taxon)
+    public function selectMainTaxon(TaxonInterface $taxon): void
     {
         $this->openTaxonBookmarks();
 
@@ -148,12 +148,12 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
     }
 
-    public function disableTracking()
+    public function disableTracking(): void
     {
         $this->getElement('tracked')->uncheck();
     }
 
-    public function enableTracking()
+    public function enableTracking(): void
     {
         $this->getElement('tracked')->check();
     }
@@ -169,7 +169,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function enableSlugModification($locale)
+    public function enableSlugModification($locale): void
     {
         SlugGenerationHelper::enableSlugModification(
             $this->getSession(),
@@ -199,7 +199,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function attachImage($path, $type = null)
+    public function attachImage($path, $type = null): void
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -218,7 +218,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function changeImageWithType($type, $path)
+    public function changeImageWithType($type, $path): void
     {
         $filesPath = $this->getParameter('files_path');
 
@@ -229,7 +229,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function removeImageWithType($type)
+    public function removeImageWithType($type): void
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -242,7 +242,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $imageElement->clickLink('Delete');
     }
 
-    public function removeFirstImage()
+    public function removeFirstImage(): void
     {
         $this->clickTabIfItsNotActive('media');
         $imageElement = $this->getFirstImageElement();
@@ -261,7 +261,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function modifyFirstImageType($type)
+    public function modifyFirstImageType($type): void
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -293,7 +293,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames)
+    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void
     {
         $this->clickTab('associations');
 
@@ -336,7 +336,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType)
+    public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType): void
     {
         $this->clickTabIfItsNotActive('associations');
 
@@ -375,7 +375,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function specifySlugIn($slug, $locale)
+    public function specifySlugIn($slug, $locale): void
     {
         $this->activateLanguageTab($locale);
 
@@ -385,7 +385,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function activateLanguageTab($locale)
+    public function activateLanguageTab($locale): void
     {
         if (!$this->getDriver() instanceof Selenium2Driver) {
             return;
@@ -468,15 +468,12 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         ]);
     }
 
-    private function openTaxonBookmarks()
+    private function openTaxonBookmarks(): void
     {
         $this->getElement('taxonomy')->click();
     }
 
-    /**
-     * @param string $tabName
-     */
-    private function clickTabIfItsNotActive($tabName)
+    private function clickTabIfItsNotActive(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
         if (!$attributesTab->hasClass('active')) {
@@ -484,19 +481,13 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         }
     }
 
-    /**
-     * @param string $tabName
-     */
-    private function clickTab($tabName)
+    private function clickTab(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
         $attributesTab->click();
     }
 
-    /**
-     * @param string $localeCode
-     */
-    private function clickLocaleTabIfItsNotActive($localeCode)
+    private function clickLocaleTabIfItsNotActive(string $localeCode): void
     {
         $localeTab = $this->getElement('locale_tab', ['%localeCode%' => $localeCode]);
         if (!$localeTab->hasClass('active')) {
@@ -505,11 +496,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     }
 
     /**
-     * @param string $type
-     *
      * @return NodeElement
      */
-    private function getImageElementByType($type)
+    private function getImageElementByType(string $type): NodeElement
     {
         $images = $this->getElement('images');
         $typeInput = $images->find('css', 'input[value="' . $type . '"]');
@@ -534,7 +523,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * @return NodeElement
      */
-    private function getLastImageElement()
+    private function getLastImageElement(): NodeElement
     {
         $imageElements = $this->getImageElements();
 
@@ -546,7 +535,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * @return NodeElement
      */
-    private function getFirstImageElement()
+    private function getFirstImageElement(): NodeElement
     {
         $imageElements = $this->getImageElements();
 
@@ -555,11 +544,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return reset($imageElements);
     }
 
-    /**
-     * @param NodeElement $imageElement
-     * @param string $type
-     */
-    private function setImageType(NodeElement $imageElement, $type)
+    private function setImageType(NodeElement $imageElement, string $type): void
     {
         $typeField = $imageElement->findField('Type');
         $typeField->setValue($type);

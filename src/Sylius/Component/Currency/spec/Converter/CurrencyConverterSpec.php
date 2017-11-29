@@ -21,17 +21,17 @@ use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
 final class CurrencyConverterSpec extends ObjectBehavior
 {
-    function let(ExchangeRateRepositoryInterface $exchangeRateRepository): void
+    public function let(ExchangeRateRepositoryInterface $exchangeRateRepository): void
     {
         $this->beConstructedWith($exchangeRateRepository);
     }
 
-    function it_implements_a_currency_converter_interface(): void
+    public function it_implements_a_currency_converter_interface(): void
     {
         $this->shouldImplement(CurrencyConverterInterface::class);
     }
 
-    function it_converts_multipling_ratio_based_on_currency_pair_exchange_rate(
+    public function it_converts_multipling_ratio_based_on_currency_pair_exchange_rate(
         ExchangeRateRepositoryInterface $exchangeRateRepository,
         CurrencyInterface $sourceCurrency,
         ExchangeRateInterface $exchangeRate
@@ -45,7 +45,7 @@ final class CurrencyConverterSpec extends ObjectBehavior
         $this->convert(666, 'GBP', 'USD')->shouldReturn(866);
     }
 
-    function it_converts_dividing_ratio_based_on_reversed_currency_pair_exchange_rate(
+    public function it_converts_dividing_ratio_based_on_reversed_currency_pair_exchange_rate(
         ExchangeRateRepositoryInterface $exchangeRateRepository,
         CurrencyInterface $sourceCurrency,
         ExchangeRateInterface $exchangeRate
@@ -59,7 +59,7 @@ final class CurrencyConverterSpec extends ObjectBehavior
         $this->convert(666, 'GBP', 'USD')->shouldReturn(512);
     }
 
-    function it_return_given_value_if_exchange_rate_for_given_currency_pair_has_not_been_found(
+    public function it_return_given_value_if_exchange_rate_for_given_currency_pair_has_not_been_found(
         ExchangeRateRepositoryInterface $exchangeRateRepository
     ): void {
         $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'USD')->willReturn(null);
@@ -67,7 +67,7 @@ final class CurrencyConverterSpec extends ObjectBehavior
         $this->convert(666, 'GBP', 'USD')->shouldReturn(666);
     }
 
-    function it_return_given_value_if_both_currencie_in_currency_pair_are_the_same(
+    public function it_return_given_value_if_both_currencie_in_currency_pair_are_the_same(
         ExchangeRateRepositoryInterface $exchangeRateRepository
     ): void {
         $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'GBP')->willReturn(null);

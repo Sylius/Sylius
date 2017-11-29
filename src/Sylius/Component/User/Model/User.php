@@ -136,9 +136,6 @@ class User implements UserInterface
         $this->enabled = false;
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getUsername();
@@ -510,8 +507,6 @@ class User implements UserInterface
 
     /**
      * The serialized data have to contain the fields used by the equals method and the username.
-     *
-     * @return string
      */
     public function serialize(): string
     {
@@ -526,10 +521,7 @@ class User implements UserInterface
         ]);
     }
 
-    /**
-     * @param string $serialized
-     */
-    public function unserialize($serialized): void
+    public function unserialize(string $serialized): void
     {
         $data = unserialize($serialized);
         // add a few extra elements in the array to ensure that we have enough keys when unserializing
@@ -549,8 +541,6 @@ class User implements UserInterface
 
     /**
      * @param \DateTimeInterface|null $date
-     *
-     * @return bool
      */
     protected function hasExpired(?\DateTimeInterface $date): bool
     {

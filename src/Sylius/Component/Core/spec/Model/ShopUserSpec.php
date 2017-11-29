@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 
 final class ShopUserSpec extends ObjectBehavior
 {
-    function it_implements_user_component_interface(): void
+    public function it_implements_user_component_interface(): void
     {
         $this->shouldImplement(ShopUserInterface::class);
     }

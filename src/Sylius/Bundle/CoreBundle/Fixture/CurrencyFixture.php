@@ -31,10 +31,6 @@ class CurrencyFixture extends AbstractFixture
      */
     private $currencyManager;
 
-    /**
-     * @param FactoryInterface $currencyFactory
-     * @param ObjectManager $currencyManager
-     */
     public function __construct(FactoryInterface $currencyFactory, ObjectManager $currencyManager)
     {
         $this->currencyFactory = $currencyFactory;

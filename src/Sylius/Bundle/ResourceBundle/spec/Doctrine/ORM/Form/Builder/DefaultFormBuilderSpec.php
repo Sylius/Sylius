@@ -24,17 +24,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class DefaultFormBuilderSpec extends ObjectBehavior
 {
-    function let(EntityManagerInterface $entityManager): void
+    public function let(EntityManagerInterface $entityManager): void
     {
         $this->beConstructedWith($entityManager);
     }
 
-    function it_is_a_default_form_builder(): void
+    public function it_is_a_default_form_builder(): void
     {
         $this->shouldImplement(DefaultFormBuilderInterface::class);
     }
 
-    function it_does_not_support_entities_with_multiple_primary_keys(
+    public function it_does_not_support_entities_with_multiple_primary_keys(
         MetadataInterface $metadata,
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
@@ -50,7 +50,7 @@ final class DefaultFormBuilderSpec extends ObjectBehavior
         ;
     }
 
-    function it_excludes_non_natural_identifier_from_the_field_list(
+    public function it_excludes_non_natural_identifier_from_the_field_list(
         MetadataInterface $metadata,
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
@@ -75,7 +75,7 @@ final class DefaultFormBuilderSpec extends ObjectBehavior
         $this->build($metadata, $formBuilder, []);
     }
 
-    function it_does_not_exclude_natural_identifier_from_the_field_list(
+    public function it_does_not_exclude_natural_identifier_from_the_field_list(
         MetadataInterface $metadata,
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
@@ -101,7 +101,7 @@ final class DefaultFormBuilderSpec extends ObjectBehavior
         $this->build($metadata, $formBuilder, []);
     }
 
-    function it_uses_metadata_to_create_appropriate_fields(
+    public function it_uses_metadata_to_create_appropriate_fields(
         MetadataInterface $metadata,
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
@@ -124,7 +124,7 @@ final class DefaultFormBuilderSpec extends ObjectBehavior
         $this->build($metadata, $formBuilder, []);
     }
 
-    function it_uses_single_text_widget_for_datetime_field(
+    public function it_uses_single_text_widget_for_datetime_field(
         MetadataInterface $metadata,
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
@@ -149,7 +149,7 @@ final class DefaultFormBuilderSpec extends ObjectBehavior
         $this->build($metadata, $formBuilder, []);
     }
 
-    function it_also_creates_fields_for_relations_other_than_one_to_many(
+    public function it_also_creates_fields_for_relations_other_than_one_to_many(
         MetadataInterface $metadata,
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
@@ -179,7 +179,7 @@ final class DefaultFormBuilderSpec extends ObjectBehavior
         $this->build($metadata, $formBuilder, []);
     }
 
-    function it_excludes_common_fields_like_createdAt_and_updatedAt(
+    public function it_excludes_common_fields_like_createdAt_and_updatedAt(
         MetadataInterface $metadata,
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,

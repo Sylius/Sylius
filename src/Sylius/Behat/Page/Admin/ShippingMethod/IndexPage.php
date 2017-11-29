@@ -20,7 +20,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseArchival($isArchival)
+    public function chooseArchival($isArchival): void
     {
         $this->getElement('filter_archival')->selectOption($isArchival);
     }

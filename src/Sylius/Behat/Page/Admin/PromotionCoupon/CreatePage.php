@@ -23,7 +23,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomerUsageLimit($limit)
+    public function setCustomerUsageLimit($limit): void
     {
         $this->getDocument()->fillField('Per-Customer Usage Limit', $limit);
     }
@@ -31,7 +31,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTimeInterface $date)
+    public function setExpiresAt(\DateTimeInterface $date): void
     {
         $timestamp = $date->getTimestamp();
 
@@ -41,7 +41,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setUsageLimit($limit)
+    public function setUsageLimit($limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);
     }

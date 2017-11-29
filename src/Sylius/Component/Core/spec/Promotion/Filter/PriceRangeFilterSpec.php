@@ -22,17 +22,17 @@ use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 
 final class PriceRangeFilterSpec extends ObjectBehavior
 {
-    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
+    public function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
     {
         $this->beConstructedWith($productVariantPriceCalculator);
     }
 
-    function it_implements_a_filter_interface(): void
+    public function it_implements_a_filter_interface(): void
     {
         $this->shouldImplement(FilterInterface::class);
     }
 
-    function it_filters_items_which_has_product_with_price_that_fits_in_configured_range(
+    public function it_filters_items_which_has_product_with_price_that_fits_in_configured_range(
         ChannelInterface $channel,
         OrderItemInterface $item1,
         OrderItemInterface $item2,
@@ -59,7 +59,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ;
     }
 
-    function it_filters_items_which_has_product_with_price_equal_to_minimum_criteria(
+    public function it_filters_items_which_has_product_with_price_equal_to_minimum_criteria(
         ChannelInterface $channel,
         OrderItemInterface $item1,
         OrderItemInterface $item2,
@@ -82,7 +82,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ;
     }
 
-    function it_filters_items_which_has_product_with_price_equal_to_maximum_criteria(
+    public function it_filters_items_which_has_product_with_price_equal_to_maximum_criteria(
         ChannelInterface $channel,
         OrderItemInterface $item1,
         OrderItemInterface $item2,
@@ -105,7 +105,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ;
     }
 
-    function it_filters_items_which_has_product_with_price_that_is_bigger_than_configured_minimum_criteria(
+    public function it_filters_items_which_has_product_with_price_that_is_bigger_than_configured_minimum_criteria(
         ChannelInterface $channel,
         OrderItemInterface $item1,
         OrderItemInterface $item2,
@@ -132,7 +132,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ;
     }
 
-    function it_filters_items_which_has_product_with_price_equal_to_configured_minimum_criteria(
+    public function it_filters_items_which_has_product_with_price_equal_to_configured_minimum_criteria(
         ChannelInterface $channel,
         OrderItemInterface $item1,
         OrderItemInterface $item2,
@@ -155,7 +155,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_all_items_if_configuration_is_invalid(
+    public function it_returns_all_items_if_configuration_is_invalid(
         ChannelInterface $channel,
         OrderItemInterface $item1,
         OrderItemInterface $item2
@@ -167,7 +167,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ])->shouldReturn([$item1, $item2]);
     }
 
-    function it_throws_exception_if_channel_is_not_configured(
+    public function it_throws_exception_if_channel_is_not_configured(
         OrderItemInterface $item1,
         OrderItemInterface $item2
     ): void {

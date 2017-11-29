@@ -20,30 +20,30 @@ interface IndexPageInterface extends BaseIndexPageInterface
     /**
      * @param \DateTimeInterface $dateTime
      */
-    public function specifyFilterDateFrom(\DateTimeInterface $dateTime);
+    public function specifyFilterDateFrom(\DateTimeInterface $dateTime): void;
 
     /**
      * @param \DateTimeInterface $dateTime
      */
-    public function specifyFilterDateTo(\DateTimeInterface $dateTime);
+    public function specifyFilterDateTo(\DateTimeInterface $dateTime): void;
 
     /**
      * @param string $channelName
      */
-    public function chooseChannelFilter($channelName);
+    public function chooseChannelFilter(string $channelName): void;
 
     /**
      * @param string $currencyName
      */
-    public function chooseCurrencyFilter($currencyName);
+    public function chooseCurrencyFilter(string $currencyName): void;
 
     /**
      * @param string $total
      */
-    public function specifyFilterTotalGreaterThan($total);
+    public function specifyFilterTotalGreaterThan(string $total): void;
 
     /**
      * @param string $total
      */
-    public function specifyFilterTotalLessThan($total);
+    public function specifyFilterTotalLessThan(string $total): void;
 }

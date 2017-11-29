@@ -23,17 +23,17 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class CachedPerRequestChannelContextSpec extends ObjectBehavior
 {
-    function let(ChannelContextInterface $decoratedChannelContext, RequestStack $requestStack): void
+    public function let(ChannelContextInterface $decoratedChannelContext, RequestStack $requestStack): void
     {
         $this->beConstructedWith($decoratedChannelContext, $requestStack);
     }
 
-    function it_implements_channel_context_interface(): void
+    public function it_implements_channel_context_interface(): void
     {
         $this->shouldImplement(ChannelContextInterface::class);
     }
 
-    function it_caches_channels_for_the_same_request(
+    public function it_caches_channels_for_the_same_request(
         ChannelContextInterface $decoratedChannelContext,
         RequestStack $requestStack,
         Request $request,
@@ -47,7 +47,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($channel);
     }
 
-    function it_does_not_cache_channels_for_different_requests(
+    public function it_does_not_cache_channels_for_different_requests(
         ChannelContextInterface $decoratedChannelContext,
         RequestStack $requestStack,
         Request $firstRequest,
@@ -63,7 +63,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($secondChannel);
     }
 
-    function it_caches_channels_for_the_same_request_even_if_there_are_other_request_in_between(
+    public function it_caches_channels_for_the_same_request_even_if_there_are_other_request_in_between(
         ChannelContextInterface $decoratedChannelContext,
         RequestStack $requestStack,
         Request $firstRequest,
@@ -80,7 +80,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($firstChannel);
     }
 
-    function it_does_not_cache_results_while_there_are_no_master_requests(
+    public function it_does_not_cache_results_while_there_are_no_master_requests(
         ChannelContextInterface $decoratedChannelContext,
         RequestStack $requestStack,
         ChannelInterface $firstChannel,
@@ -94,7 +94,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($secondChannel);
     }
 
-    function it_caches_channel_not_found_exceptions_for_the_same_request(
+    public function it_caches_channel_not_found_exceptions_for_the_same_request(
         ChannelContextInterface $decoratedChannelContext,
         RequestStack $requestStack,
         Request $request
@@ -107,7 +107,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 
-    function it_does_not_cache_channel_not_found_exceptions_for_null_master_requests(
+    public function it_does_not_cache_channel_not_found_exceptions_for_null_master_requests(
         ChannelContextInterface $decoratedChannelContext,
         RequestStack $requestStack,
         ChannelInterface $channel

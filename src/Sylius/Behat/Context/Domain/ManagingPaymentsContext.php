@@ -25,9 +25,6 @@ final class ManagingPaymentsContext implements Context
      */
     private $paymentRepository;
 
-    /**
-     * @param PaymentRepositoryInterface $paymentRepository
-     */
     public function __construct(PaymentRepositoryInterface $paymentRepository)
     {
         $this->paymentRepository = $paymentRepository;
@@ -36,7 +33,7 @@ final class ManagingPaymentsContext implements Context
     /**
      * @Then /^there should be no ("[^"]+" payments) in the registry$/
      */
-    public function paymentShouldNotExistInTheRegistry(PaymentMethodInterface $paymentMethod)
+    public function paymentShouldNotExistInTheRegistry(PaymentMethodInterface $paymentMethod): void
     {
         $payments = $this->paymentRepository->findBy(['method' => $paymentMethod]);
 

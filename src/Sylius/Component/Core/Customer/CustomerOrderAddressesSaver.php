@@ -23,17 +23,11 @@ final class CustomerOrderAddressesSaver implements OrderAddressesSaverInterface
      */
     private $addressAdder;
 
-    /**
-     * @param CustomerAddressAdderInterface $addressAdder
-     */
     public function __construct(CustomerAddressAdderInterface $addressAdder)
     {
         $this->addressAdder = $addressAdder;
     }
 
-    /**
-     * @param OrderInterface $order
-     */
     public function saveAddresses(OrderInterface $order): void
     {
         /** @var CustomerInterface $customer */

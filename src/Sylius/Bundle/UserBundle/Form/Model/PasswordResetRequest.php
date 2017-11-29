@@ -20,9 +20,6 @@ class PasswordResetRequest
      */
     private $email;
 
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string
     {
         return $this->email;

@@ -34,10 +34,6 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
      */
     private $unitsPromotionAdjustmentsApplicator;
 
-    /**
-     * @param ProportionalIntegerDistributorInterface $distributor
-     * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
-     */
     public function __construct(
         ProportionalIntegerDistributorInterface $distributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
@@ -88,12 +84,6 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
         }
     }
 
-    /**
-     * @param int $promotionSubjectTotal
-     * @param float $percentage
-     *
-     * @return int
-     */
     private function calculateAdjustmentAmount(int $promotionSubjectTotal, float $percentage): int
     {
         return -1 * (int) round($promotionSubjectTotal * $percentage);

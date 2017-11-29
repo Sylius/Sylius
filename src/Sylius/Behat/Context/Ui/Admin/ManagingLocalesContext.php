@@ -30,10 +30,6 @@ final class ManagingLocalesContext implements Context
      */
     private $indexPage;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     */
     public function __construct(CreatePageInterface $createPage, IndexPageInterface $indexPage)
     {
         $this->createPage = $createPage;
@@ -44,7 +40,7 @@ final class ManagingLocalesContext implements Context
      * @Given I want to create a new locale
      * @Given I want to add a new locale
      */
-    public function iWantToCreateNewLocale()
+    public function iWantToCreateNewLocale(): void
     {
         $this->createPage->open();
     }
@@ -52,7 +48,7 @@ final class ManagingLocalesContext implements Context
     /**
      * @When I choose :name
      */
-    public function iChoose($name)
+    public function iChoose($name): void
     {
         $this->createPage->chooseName($name);
     }
@@ -60,7 +56,7 @@ final class ManagingLocalesContext implements Context
     /**
      * @When I add it
      */
-    public function iAdd()
+    public function iAdd(): void
     {
         $this->createPage->create();
     }
@@ -68,7 +64,7 @@ final class ManagingLocalesContext implements Context
     /**
      * @Then the store should be available in the :name language
      */
-    public function storeShouldBeAvailableInLanguage($name)
+    public function storeShouldBeAvailableInLanguage($name): void
     {
         $doesLocaleExist = $this->indexPage->isSingleResourceOnPage(['name' => $name]);
 
@@ -78,7 +74,7 @@ final class ManagingLocalesContext implements Context
     /**
      * @Then I should not be able to choose :name
      */
-    public function iShouldNotBeAbleToChoose($name)
+    public function iShouldNotBeAbleToChoose($name): void
     {
         Assert::false($this->createPage->isOptionAvailable($name));
     }

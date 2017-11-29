@@ -29,7 +29,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillAddressData(AddressInterface $address)
+    public function fillAddressData(AddressInterface $address): void
     {
         $this->getElement('first_name')->setValue($address->getFirstName());
         $this->getElement('last_name')->setValue($address->getLastName());
@@ -42,7 +42,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectCountry($name)
+    public function selectCountry($name): void
     {
         $this->getElement('country')->selectOption($name);
 
@@ -54,7 +54,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addAddress()
+    public function addAddress(): void
     {
         $this->getElement('add_button')->press();
     }

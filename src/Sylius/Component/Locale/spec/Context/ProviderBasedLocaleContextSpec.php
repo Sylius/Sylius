@@ -20,17 +20,17 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 final class ProviderBasedLocaleContextSpec extends ObjectBehavior
 {
-    function let(LocaleProviderInterface $localeProvider): void
+    public function let(LocaleProviderInterface $localeProvider): void
     {
         $this->beConstructedWith($localeProvider);
     }
 
-    function it_is_a_locale_context(): void
+    public function it_is_a_locale_context(): void
     {
         $this->shouldImplement(LocaleContextInterface::class);
     }
 
-    function it_returns_the_channels_default_locale(LocaleProviderInterface $localeProvider): void
+    public function it_returns_the_channels_default_locale(LocaleProviderInterface $localeProvider): void
     {
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'en_US']);
         $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
@@ -38,7 +38,7 @@ final class ProviderBasedLocaleContextSpec extends ObjectBehavior
         $this->getLocaleCode()->shouldReturn('pl_PL');
     }
 
-    function it_throws_a_locale_not_found_exception_if_default_locale_is_not_available(
+    public function it_throws_a_locale_not_found_exception_if_default_locale_is_not_available(
         LocaleProviderInterface $localeProvider
     ): void {
         $localeProvider->getAvailableLocalesCodes()->willReturn(['es_ES', 'en_US']);

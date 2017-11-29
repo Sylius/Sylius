@@ -21,24 +21,14 @@ use Webmozart\Assert\Assert;
 final class CartesianSetBuilder
 {
     /**
-     * @param array $setTuples
-     *
-     * @return array
-     *
      * @throws \InvalidArgumentException If the array is empty.
      * @throws \InvalidArgumentException If the array does not contain arrays of set tuples.
      */
-    public function build(array $setTuples)
+    public function build(array $setTuples): array
     {
         return $this->doBuild($setTuples, false);
     }
 
-    /**
-     * @param array $setTuples
-     * @param bool $isRecursiveStep
-     *
-     * @return array
-     */
     private function doBuild(array $setTuples, bool $isRecursiveStep): array
     {
         $countTuples = count($setTuples);
@@ -71,11 +61,6 @@ final class CartesianSetBuilder
     }
 
     /**
-     * @param array $setTuples
-     * @param int $countTuples
-     *
-     * @return array
-     *
      * @throws \InvalidArgumentException
      */
     private function validateTuples(array $setTuples, int $countTuples): array
@@ -90,13 +75,9 @@ final class CartesianSetBuilder
     }
 
     /**
-     * @param bool $isRecursiveStep
      * @param mixed $k
-     * @param array $keys
      * @param mixed $valueA
      * @param mixed $valueB
-     *
-     * @return array
      */
     private function getResult(bool $isRecursiveStep, $k, array $keys, $valueA, $valueB): array
     {

@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 
 final class PasswordResetSpec extends ObjectBehavior
 {
-    function it_has_new_password(): void
+    public function it_has_new_password(): void
     {
         $this->setPassword('testPassword');
         $this->getPassword()->shouldReturn('testPassword');

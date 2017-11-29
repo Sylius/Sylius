@@ -53,11 +53,6 @@ EOT
         $this->setupAdministratorUser($input, $output, $locale->getCode());
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @param string $localeCode
-     */
     protected function setupAdministratorUser(InputInterface $input, OutputInterface $output, string $localeCode): void
     {
         $outputStyle = new SymfonyStyle($input, $output);
@@ -83,10 +78,6 @@ EOT
     }
 
     /**
-     * @param AdminUserInterface $user
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
      * @return AdminUserInterface
      */
     private function configureNewUser(
@@ -134,12 +125,6 @@ EOT
         ;
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return string
-     */
     private function getAdministratorEmail(InputInterface $input, OutputInterface $output): string
     {
         /** @var QuestionHelper $questionHelper */
@@ -160,13 +145,6 @@ EOT
         return $email;
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @param string $email
-     *
-     * @return string
-     */
     private function getAdministratorUsername(InputInterface $input, OutputInterface $output, string $email): string
     {
         /** @var QuestionHelper $questionHelper */
@@ -188,9 +166,6 @@ EOT
     }
 
     /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
      * @return mixed
      */
     private function getAdministratorPassword(InputInterface $input, OutputInterface $output)
@@ -214,9 +189,6 @@ EOT
         return $password;
     }
 
-    /**
-     * @return \Closure
-     */
     private function getPasswordQuestionValidator(): \Closure
     {
         return function ($value) {
@@ -231,9 +203,6 @@ EOT
     }
 
     /**
-     * @param string $message
-     * @param \Closure $validator
-     *
      * @return Question
      */
     private function createPasswordQuestion(string $message, \Closure $validator): Question

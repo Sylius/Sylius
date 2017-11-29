@@ -23,9 +23,6 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
      */
     private $orderItemUnitFactory;
 
-    /**
-     * @param OrderItemUnitFactoryInterface $orderItemUnitFactory
-     */
     public function __construct(OrderItemUnitFactoryInterface $orderItemUnitFactory)
     {
         $this->orderItemUnitFactory = $orderItemUnitFactory;
@@ -48,10 +45,6 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
         }
     }
 
-    /**
-     * @param OrderItemInterface $orderItem
-     * @param int $increaseBy
-     */
     private function increaseUnitsNumber(OrderItemInterface $orderItem, int $increaseBy): void
     {
         for ($i = 0; $i < $increaseBy; ++$i) {
@@ -59,10 +52,6 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
         }
     }
 
-    /**
-     * @param OrderItemInterface $orderItem
-     * @param int $decreaseBy
-     */
     private function decreaseUnitsNumber(OrderItemInterface $orderItem, int $decreaseBy): void
     {
         foreach ($orderItem->getUnits() as $unit) {

@@ -28,19 +28,19 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ProportionalIntegerDistributorInterface $distributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ): void {
         $this->beConstructedWith($distributor, $unitsPromotionAdjustmentsApplicator);
     }
 
-    function it_implements_a_promotion_action_interface(): void
+    public function it_implements_a_promotion_action_interface(): void
     {
         $this->shouldImplement(PromotionActionCommandInterface::class);
     }
 
-    function it_uses_distributor_and_applicator_to_execute_promotion_action(
+    public function it_uses_distributor_and_applicator_to_execute_promotion_action(
         OrderInterface $order,
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
@@ -62,7 +62,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(true);
     }
 
-    function it_does_not_apply_discount_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion): void
+    public function it_does_not_apply_discount_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion): void
     {
         $order->countItems()->willReturn(0);
         $order->getPromotionSubjectTotal()->shouldNotBeCalled();
@@ -70,7 +70,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(false);
     }
 
-    function it_does_not_apply_discount_if_adjustment_amount_would_be_0(
+    public function it_does_not_apply_discount_if_adjustment_amount_would_be_0(
         OrderInterface $order,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $distributor
@@ -83,7 +83,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(false);
     }
 
-    function it_does_not_apply_discount_if_configuration_is_invalid(
+    public function it_does_not_apply_discount_if_configuration_is_invalid(
         OrderInterface $order,
         PromotionInterface $promotion
     ): void {
@@ -93,7 +93,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['percentage' => 'string'], $promotion)->shouldReturn(false);
     }
 
-    function it_throws_exception_if_subject_is_not_an_order(
+    public function it_throws_exception_if_subject_is_not_an_order(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
     ): void {
@@ -103,7 +103,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         ;
     }
 
-    function it_reverts_order_units_order_promotion_adjustments(
+    public function it_reverts_order_units_order_promotion_adjustments(
         AdjustmentInterface $firstAdjustment,
         AdjustmentInterface $secondAdjustment,
         OrderInterface $order,
@@ -132,7 +132,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->revert($order, [], $promotion);
     }
 
-    function it_does_not_revert_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion): void
+    public function it_does_not_revert_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion): void
     {
         $order->countItems()->willReturn(0);
         $order->getItems()->shouldNotBeCalled();
@@ -140,7 +140,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->revert($order, [], $promotion);
     }
 
-    function it_throws_an_exception_while_reverting_subject_which_is_not_order(
+    public function it_throws_an_exception_while_reverting_subject_which_is_not_order(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
     ): void {

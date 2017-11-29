@@ -22,9 +22,6 @@ final class CheckoutStepsExtension extends \Twig_Extension
      */
     private $checkoutStepsHelper;
 
-    /**
-     * @param CheckoutStepsHelper $checkoutStepsHelper
-     */
     public function __construct(CheckoutStepsHelper $checkoutStepsHelper)
     {
         $this->checkoutStepsHelper = $checkoutStepsHelper;

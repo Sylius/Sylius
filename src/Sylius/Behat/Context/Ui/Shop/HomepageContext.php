@@ -24,9 +24,6 @@ final class HomepageContext implements Context
      */
     private $homePage;
 
-    /**
-     * @param HomePageInterface $homepage
-     */
     public function __construct(HomePageInterface $homepage)
     {
         $this->homePage = $homepage;
@@ -35,7 +32,7 @@ final class HomepageContext implements Context
     /**
      * @When I check latest products
      */
-    public function iCheckLatestProducts()
+    public function iCheckLatestProducts(): void
     {
         $this->homePage->open();
     }
@@ -43,7 +40,7 @@ final class HomepageContext implements Context
     /**
      * @Then I should be redirected to the homepage
      */
-    public function iShouldBeRedirectedToTheHomepage()
+    public function iShouldBeRedirectedToTheHomepage(): void
     {
         $this->homePage->verify();
     }
@@ -51,7 +48,7 @@ final class HomepageContext implements Context
     /**
      * @Then I should see :numberOfProducts products in the list
      */
-    public function iShouldSeeProductsInTheList($numberOfProducts)
+    public function iShouldSeeProductsInTheList($numberOfProducts): void
     {
         Assert::same(count($this->homePage->getLatestProductsNames()), (int) $numberOfProducts);
     }

@@ -31,19 +31,12 @@ final class OrderCustomerIpListener
      */
     private $requestStack;
 
-    /**
-     * @param IpAssignerInterface $ipAssigner
-     * @param RequestStack $requestStack
-     */
     public function __construct(IpAssignerInterface $ipAssigner, RequestStack $requestStack)
     {
         $this->ipAssigner = $ipAssigner;
         $this->requestStack = $requestStack;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function assignCustomerIpToOrder(GenericEvent $event): void
     {
         $subject = $event->getSubject();

@@ -23,7 +23,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 final class OptionsParserSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ContainerInterface $container,
         ExpressionLanguage $expression,
         PropertyAccessorInterface $propertyAccessor
@@ -31,12 +31,12 @@ final class OptionsParserSpec extends ObjectBehavior
         $this->beConstructedWith($container, $expression, $propertyAccessor);
     }
 
-    function it_is_an_options_parser(): void
+    public function it_is_an_options_parser(): void
     {
         $this->shouldImplement(OptionsParserInterface::class);
     }
 
-    function it_parses_options(Request $request): void
+    public function it_parses_options(Request $request): void
     {
         $request->get('id')->willReturn(7);
 
@@ -46,7 +46,7 @@ final class OptionsParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parses_options_with_expression(
+    public function it_parses_options_with_expression(
         ContainerInterface $container,
         ExpressionLanguage $expression,
         Request $request
@@ -77,7 +77,7 @@ final class OptionsParserSpec extends ObjectBehavior
         );
     }
 
-    function it_parses_options_with_parameter_from_resource(
+    public function it_parses_options_with_parameter_from_resource(
         PropertyAccessorInterface $propertyAccessor,
         Request $request,
         ResourceInterface $data

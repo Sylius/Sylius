@@ -22,17 +22,17 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 final class DashboardStatisticsProviderSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, CustomerRepositoryInterface $customerRepository): void
+    public function let(OrderRepositoryInterface $orderRepository, CustomerRepositoryInterface $customerRepository): void
     {
         $this->beConstructedWith($orderRepository, $customerRepository);
     }
 
-    function it_implements_a_dashboard_statistics_provider_interface(): void
+    public function it_implements_a_dashboard_statistics_provider_interface(): void
     {
         $this->shouldImplement(DashboardStatisticsProviderInterface::class);
     }
 
-    function it_obtains_order_and_customer_statistics_by_given_channel(
+    public function it_obtains_order_and_customer_statistics_by_given_channel(
         OrderRepositoryInterface $orderRepository,
         CustomerRepositoryInterface $customerRepository,
         ChannelInterface $channel

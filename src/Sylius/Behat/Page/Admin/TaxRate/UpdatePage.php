@@ -20,7 +20,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
 
-    public function removeZone()
+    public function removeZone(): void
     {
         $this->getDocument()->selectFieldOption('Zone', 'Select');
     }

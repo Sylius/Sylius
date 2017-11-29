@@ -86,8 +86,6 @@ interface ProductInterface extends
     public function getAcceptedReviews(): Collection;
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

@@ -46,13 +46,6 @@ final class ShippingMethodType extends AbstractResourceType
      */
     private $formTypeRegistry;
 
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param string $shippingMethodTranslationType
-     * @param ServiceRegistryInterface $calculatorRegistry
-     * @param FormTypeRegistryInterface $formTypeRegistry
-     */
     public function __construct(
         string $dataClass,
         array $validationGroups,
@@ -103,7 +96,7 @@ final class ShippingMethodType extends AbstractResourceType
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.locale.enabled',
             ])
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
                 $method = $event->getData();
 
                 if (null === $method || null === $method->getId()) {
@@ -112,7 +105,7 @@ final class ShippingMethodType extends AbstractResourceType
 
                 $this->addConfigurationField($event->getForm(), $method->getCalculator());
             })
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
                 $data = $event->getData();
 
                 if (empty($data) || !array_key_exists('calculator', $data)) {
@@ -161,10 +154,6 @@ final class ShippingMethodType extends AbstractResourceType
         return 'sylius_shipping_method';
     }
 
-    /**
-     * @param FormInterface $form
-     * @param string $calculatorName
-     */
     private function addConfigurationField(FormInterface $form, string $calculatorName): void
     {
         /** @var CalculatorInterface $calculator */

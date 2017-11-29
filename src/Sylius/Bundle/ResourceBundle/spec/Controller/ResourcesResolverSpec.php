@@ -22,12 +22,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ResourcesResolverSpec extends ObjectBehavior
 {
-    function it_implements_resources_resolver_interface(): void
+    public function it_implements_resources_resolver_interface(): void
     {
         $this->shouldImplement(ResourcesResolverInterface::class);
     }
 
-    function it_gets_all_resources_if_has_no_criteria(
+    public function it_gets_all_resources_if_has_no_criteria(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         ResourceInterface $firstResource,
@@ -46,7 +46,7 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $this->getResources($requestConfiguration, $repository)->shouldReturn([$firstResource, $secondResource]);
     }
 
-    function it_finds_resources_by_criteria_if_not_paginated(
+    public function it_finds_resources_by_criteria_if_not_paginated(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         ResourceInterface $firstResource,
@@ -70,7 +70,7 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $this->getResources($requestConfiguration, $repository)->shouldReturn([$firstResource, $secondResource, $thirdResource]);
     }
 
-    function it_uses_custom_method_and_arguments_if_specified(
+    public function it_uses_custom_method_and_arguments_if_specified(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         ResourceInterface $firstResource
@@ -88,7 +88,7 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $this->getResources($requestConfiguration, $repository)->shouldReturn([$firstResource]);
     }
 
-    function it_creates_paginator_by_default(
+    public function it_creates_paginator_by_default(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         Pagerfanta $paginator

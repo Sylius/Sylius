@@ -28,27 +28,27 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class IntegerAttributeTypeSpec extends ObjectBehavior
 {
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(IntegerAttributeType::class);
     }
 
-    function it_implements_attribute_type_interface(): void
+    public function it_implements_attribute_type_interface(): void
     {
         $this->shouldImplement(AttributeTypeInterface::class);
     }
 
-    function its_storage_type_is_text(): void
+    public function its_storage_type_is_text(): void
     {
         $this->getStorageType()->shouldReturn('integer');
     }
 
-    function its_type_is_text(): void
+    public function its_type_is_text(): void
     {
         $this->getType()->shouldReturn('integer');
     }
 
-    function it_checks_if_attribute_value_is_valid(
+    public function it_checks_if_attribute_value_is_valid(
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,

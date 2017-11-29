@@ -24,7 +24,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class DefaultChannelFactorySpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ChannelFactoryInterface $channelFactory,
         FactoryInterface $currencyFactory,
         FactoryInterface $localeFactory,
@@ -43,12 +43,12 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         );
     }
 
-    function it_implements_a_default_channel_factory_interface(): void
+    public function it_implements_a_default_channel_factory_interface(): void
     {
         $this->shouldImplement(DefaultChannelFactoryInterface::class);
     }
 
-    function it_creates_a_default_channel_and_persist_it(
+    public function it_creates_a_default_channel_and_persist_it(
         ChannelFactoryInterface $channelFactory,
         FactoryInterface $currencyFactory,
         FactoryInterface $localeFactory,

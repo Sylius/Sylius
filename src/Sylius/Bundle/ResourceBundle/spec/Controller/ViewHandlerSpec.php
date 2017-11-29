@@ -23,17 +23,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ViewHandlerSpec extends ObjectBehavior
 {
-    function let(RestViewHandler $restViewHandler): void
+    public function let(RestViewHandler $restViewHandler): void
     {
         $this->beConstructedWith($restViewHandler);
     }
 
-    function it_implements_view_handler_interface(): void
+    public function it_implements_view_handler_interface(): void
     {
         $this->shouldImplement(ViewHandlerInterface::class);
     }
 
-    function it_handles_view_normally_for_html_requests(
+    public function it_handles_view_normally_for_html_requests(
         RequestConfiguration $requestConfiguration,
         RestViewHandler $restViewHandler,
         Response $response
@@ -46,7 +46,7 @@ final class ViewHandlerSpec extends ObjectBehavior
         $this->handle($requestConfiguration, $view)->shouldReturn($response);
     }
 
-    function it_sets_proper_values_for_non_html_requests(
+    public function it_sets_proper_values_for_non_html_requests(
         RequestConfiguration $requestConfiguration,
         RestViewHandler $restViewHandler,
         Response $response

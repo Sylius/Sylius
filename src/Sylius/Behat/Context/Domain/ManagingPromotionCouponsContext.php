@@ -33,10 +33,6 @@ final class ManagingPromotionCouponsContext implements Context
      */
     private $couponRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param PromotionCouponRepositoryInterface $couponRepository
-     */
     public function __construct(SharedStorageInterface $sharedStorage, PromotionCouponRepositoryInterface $couponRepository)
     {
         $this->sharedStorage = $sharedStorage;
@@ -46,7 +42,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When /^I delete ("[^"]+" coupon) related to (this promotion)$/
      */
-    public function iDeleteCoupon(PromotionCouponInterface $coupon, PromotionInterface $promotion)
+    public function iDeleteCoupon(PromotionCouponInterface $coupon, PromotionInterface $promotion): void
     {
         $promotion->removeCoupon($coupon);
         $this->couponRepository->remove($coupon);
@@ -55,7 +51,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When /^I try to delete ("[^"]+" coupon) related to (this promotion)$/
      */
-    public function iTryToDeleteCoupon(PromotionCouponInterface $coupon, PromotionInterface $promotion)
+    public function iTryToDeleteCoupon(PromotionCouponInterface $coupon, PromotionInterface $promotion): void
     {
         try {
             $promotion->removeCoupon($coupon);
@@ -68,7 +64,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then /^(this coupon) should no longer exist in the coupon registry$/
      */
-    public function couponShouldNotExistInTheRegistry(PromotionCouponInterface $coupon)
+    public function couponShouldNotExistInTheRegistry(PromotionCouponInterface $coupon): void
     {
         Assert::null($this->couponRepository->findOneBy(['code' => $coupon->getCode()]));
     }
@@ -76,7 +72,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then I should be notified that it is in use and cannot be deleted
      */
-    public function iShouldBeNotifiedOfFailure()
+    public function iShouldBeNotifiedOfFailure(): void
     {
         Assert::isInstanceOf($this->sharedStorage->get('last_exception'), ForeignKeyConstraintViolationException::class);
     }
@@ -84,7 +80,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then /^([^"]+) should still exist in the registry$/
      */
-    public function couponShouldStillExistInTheRegistry(PromotionCouponInterface $coupon)
+    public function couponShouldStillExistInTheRegistry(PromotionCouponInterface $coupon): void
     {
         Assert::notNull($this->couponRepository->find($coupon->getId()));
     }

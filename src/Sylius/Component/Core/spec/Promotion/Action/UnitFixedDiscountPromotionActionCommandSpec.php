@@ -30,7 +30,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
@@ -44,12 +44,12 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         );
     }
 
-    function it_is_a_discount_action(): void
+    public function it_is_a_discount_action(): void
     {
         $this->shouldHaveType(UnitDiscountPromotionActionCommand::class);
     }
 
-    function it_applies_a_fixed_discount_on_every_unit_in_order(
+    public function it_applies_a_fixed_discount_on_every_unit_in_order(
         ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
@@ -101,7 +101,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 500]], $promotion)->shouldReturn(true);
     }
 
-    function it_does_not_apply_a_discount_if_all_items_have_been_filtered_out(
+    public function it_does_not_apply_a_discount_if_all_items_have_been_filtered_out(
         ChannelInterface $channel,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
@@ -123,7 +123,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 500]], $promotion)->shouldReturn(false);
     }
 
-    function it_does_not_apply_discount_with_amount_0(
+    public function it_does_not_apply_discount_with_amount_0(
         ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         OrderInterface $order,
@@ -142,7 +142,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 0]], $promotion)->shouldReturn(false);
     }
 
-    function it_does_not_apply_bigger_discount_than_unit_total(
+    public function it_does_not_apply_bigger_discount_than_unit_total(
         ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
@@ -194,7 +194,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
     }
 
-    function it_does_not_apply_discount_if_no_amount_is_defined_for_order_channel(
+    public function it_does_not_apply_discount_if_no_amount_is_defined_for_order_channel(
         ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         OrderInterface $order,
@@ -208,7 +208,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_PL' => ['amount' => 0]], $promotion)->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_passed_subject_to_execute_is_not_order(
+    public function it_throws_an_exception_if_passed_subject_to_execute_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ): void {
@@ -218,7 +218,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ;
     }
 
-    function it_reverts_a_proper_promotion_adjustment_from_all_units(
+    public function it_reverts_a_proper_promotion_adjustment_from_all_units(
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         ChannelInterface $channel,
@@ -252,7 +252,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->revert($order, ['WEB_US' => ['amount' => 1000]], $promotion);
     }
 
-    function it_throws_an_exception_if_passed_subject_to_revert_is_not_order(
+    public function it_throws_an_exception_if_passed_subject_to_revert_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ): void {

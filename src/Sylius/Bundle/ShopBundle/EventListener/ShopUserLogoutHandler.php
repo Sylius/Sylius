@@ -34,9 +34,6 @@ final class ShopUserLogoutHandler extends DefaultLogoutSuccessHandler
 
     /**
      * {@inheritdoc}
-     *
-     * @param ChannelContextInterface $channelContext
-     * @param CartStorageInterface $cartStorage
      */
     public function __construct(
         HttpUtils $httpUtils,

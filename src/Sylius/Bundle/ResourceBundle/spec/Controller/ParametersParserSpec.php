@@ -21,17 +21,17 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class ParametersParserSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith(new Container(), new ExpressionLanguage());
     }
 
-    function it_implements_parameters_parser_interface(): void
+    public function it_implements_parameters_parser_interface(): void
     {
         $this->shouldImplement(ParametersParserInterface::class);
     }
 
-    function it_parses_string_parameters(): void
+    public function it_parses_string_parameters(): void
     {
         $request = new Request();
         $request->request->set('string', 'Lorem ipsum');
@@ -42,7 +42,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parses_boolean_parameters(): void
+    public function it_parses_boolean_parameters(): void
     {
         $request = new Request();
         $request->request->set('boolean', true);
@@ -53,7 +53,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parses_array_parameters(): void
+    public function it_parses_array_parameters(): void
     {
         $request = new Request();
         $request->request->set('array', ['foo' => 'bar']);
@@ -64,7 +64,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parses_string_parameter_and_casts_it_into_int(): void
+    public function it_parses_string_parameter_and_casts_it_into_int(): void
     {
         $request = new Request();
         $request->request->set('int', '5');
@@ -75,7 +75,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parses_string_parameter_and_casts_it_into_float(): void
+    public function it_parses_string_parameter_and_casts_it_into_float(): void
     {
         $request = new Request();
         $request->request->set('float', '5.4');
@@ -86,7 +86,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_string_parameter_is_going_to_be_casted_into_invalid_type()
+    public function it_throws_exception_if_string_parameter_is_going_to_be_casted_into_invalid_type(): void
     {
         $request = new Request();
         $request->request->set('int', 5);
@@ -97,7 +97,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_invalid_typecast_is_provided()
+    public function it_throws_exception_if_invalid_typecast_is_provided(): void
     {
         $request = new Request();
         $request->request->set('int', 5);
@@ -113,7 +113,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parses_string_parameter_and_casts_it_into_bool(): void
+    public function it_parses_string_parameter_and_casts_it_into_bool(): void
     {
         $request = new Request();
         $request->request->set('bool0', '0');
@@ -130,7 +130,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parses_an_expression_and_casts_it_into_a_given_type(): void
+    public function it_parses_an_expression_and_casts_it_into_a_given_type(): void
     {
         $request = new Request();
 
@@ -140,7 +140,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parses_an_expression_with_spaces_and_casts_it_into_a_given_type(): void
+    public function it_parses_an_expression_with_spaces_and_casts_it_into_a_given_type(): void
     {
         $request = new Request();
 
@@ -150,7 +150,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parses_expressions(): void
+    public function it_parses_expressions(): void
     {
         $request = new Request();
 
@@ -160,7 +160,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parses_expressions_with_string_parameters(): void
+    public function it_parses_expressions_with_string_parameters(): void
     {
         $request = new Request();
         $request->request->set('string', 'lorem ipsum');
@@ -171,7 +171,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_parses_expressions_with_scalar_parameters(): void
+    public function it_parses_expressions_with_scalar_parameters(): void
     {
         $request = new Request();
         $request->request->set('number', 6);
@@ -182,7 +182,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_array_parameter_is_injected_into_expression(): void
+    public function it_throws_an_exception_if_array_parameter_is_injected_into_expression(): void
     {
         $request = new Request();
         $request->request->set('array', ['foo', 'bar']);
@@ -193,7 +193,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_object_parameter_is_injected_into_expression(): void
+    public function it_throws_an_exception_if_object_parameter_is_injected_into_expression(): void
     {
         $request = new Request();
         $request->request->set('object', new \stdClass());

@@ -20,17 +20,17 @@ interface IndexPageInterface extends PageInterface
     /**
      * @return int
      */
-    public function countReviews();
+    public function countReviews(): int;
 
     /**
      * @param string $title
      *
      * @return bool
      */
-    public function hasReviewTitled($title);
+    public function hasReviewTitled(string $title): bool;
 
     /**
      * @return bool
      */
-    public function hasNoReviewsMessage();
+    public function hasNoReviewsMessage(): bool;
 }

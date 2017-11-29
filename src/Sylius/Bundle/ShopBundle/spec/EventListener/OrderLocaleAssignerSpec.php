@@ -20,12 +20,12 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 final class OrderLocaleAssignerSpec extends ObjectBehavior
 {
-    function let(LocaleContextInterface $localeContext): void
+    public function let(LocaleContextInterface $localeContext): void
     {
         $this->beConstructedWith($localeContext);
     }
 
-    function it_assigns_locale_to_an_order(
+    public function it_assigns_locale_to_an_order(
         LocaleContextInterface $localeContext,
         OrderInterface $order,
         ResourceControllerEvent $event
@@ -38,7 +38,7 @@ final class OrderLocaleAssignerSpec extends ObjectBehavior
         $this->assignLocale($event);
     }
 
-    function it_throws_invalid_argument_exception_if_subject_it_not_order(ResourceControllerEvent $event): void
+    public function it_throws_invalid_argument_exception_if_subject_it_not_order(ResourceControllerEvent $event): void
     {
         $event->getSubject()->willReturn(new \stdClass());
 

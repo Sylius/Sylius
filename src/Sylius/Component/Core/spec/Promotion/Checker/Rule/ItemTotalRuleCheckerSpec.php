@@ -21,17 +21,17 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 final class ItemTotalRuleCheckerSpec extends ObjectBehavior
 {
-    function let(RuleCheckerInterface $itemTotalRuleChecker): void
+    public function let(RuleCheckerInterface $itemTotalRuleChecker): void
     {
         $this->beConstructedWith($itemTotalRuleChecker);
     }
 
-    function it_is_be_a_rule_checker(): void
+    public function it_is_be_a_rule_checker(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_uses_decorated_checker_to_check_eligibility_for_order_channel(
+    public function it_uses_decorated_checker_to_check_eligibility_for_order_channel(
         ChannelInterface $channel,
         OrderInterface $order,
         RuleCheckerInterface $itemTotalRuleChecker
@@ -44,7 +44,7 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, ['WEB_US' => ['amount' => 1000]])->shouldReturn(true);
     }
 
-    function it_returns_false_if_there_is_no_configuration_for_order_channel(
+    public function it_returns_false_if_there_is_no_configuration_for_order_channel(
         ChannelInterface $channel,
         OrderInterface $order
     ): void {
@@ -54,7 +54,7 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, [])->shouldReturn(false);
     }
 
-    function it_throws_exception_if_passed_subject_is_not_order(PromotionSubjectInterface $promotionSubject): void
+    public function it_throws_exception_if_passed_subject_is_not_order(PromotionSubjectInterface $promotionSubject): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

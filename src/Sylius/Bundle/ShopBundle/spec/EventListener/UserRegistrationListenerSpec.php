@@ -28,7 +28,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class UserRegistrationListenerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ObjectManager $userManager,
         GeneratorInterface $tokenGenerator,
         EventDispatcherInterface $eventDispatcher,
@@ -45,7 +45,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         );
     }
 
-    function it_sends_an_user_verification_email(
+    public function it_sends_an_user_verification_email(
         ObjectManager $userManager,
         GeneratorInterface $tokenGenerator,
         EventDispatcherInterface $eventDispatcher,
@@ -75,7 +75,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $this->handleUserVerification($event);
     }
 
-    function it_enables_and_signs_in_user(
+    public function it_enables_and_signs_in_user(
         ObjectManager $userManager,
         GeneratorInterface $tokenGenerator,
         EventDispatcherInterface $eventDispatcher,
@@ -110,7 +110,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $this->handleUserVerification($event);
     }
 
-    function it_does_not_send_verification_email_if_it_is_not_required_on_channel(
+    public function it_does_not_send_verification_email_if_it_is_not_required_on_channel(
         ObjectManager $userManager,
         GeneratorInterface $tokenGenerator,
         EventDispatcherInterface $eventDispatcher,
@@ -145,7 +145,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $this->handleUserVerification($event);
     }
 
-    function it_throws_an_invalid_argument_exception_if_event_subject_is_not_customer_type(
+    public function it_throws_an_invalid_argument_exception_if_event_subject_is_not_customer_type(
         GenericEvent $event,
         \stdClass $customer
     ): void {
@@ -154,7 +154,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('handleUserVerification', [$event]);
     }
 
-    function it_throws_an_invalid_argument_exception_if_user_is_null(
+    public function it_throws_an_invalid_argument_exception_if_user_is_null(
         GenericEvent $event,
         CustomerInterface $customer
     ): void {

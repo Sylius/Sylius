@@ -24,17 +24,17 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 final class OrderPaymentStateResolverSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $stateMachineFactory): void
+    public function let(FactoryInterface $stateMachineFactory): void
     {
         $this->beConstructedWith($stateMachineFactory);
     }
 
-    function it_implements_an_order_state_resolver_interface(): void
+    public function it_implements_an_order_state_resolver_interface(): void
     {
         $this->shouldImplement(StateResolverInterface::class);
     }
 
-    function it_marks_an_order_as_refunded_if_all_its_payments_are_refunded(
+    public function it_marks_an_order_as_refunded_if_all_its_payments_are_refunded(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
@@ -59,7 +59,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_refunded_if_its_payments_are_refunded_or_failed_but_at_least_one_is_refunded(
+    public function it_marks_an_order_as_refunded_if_its_payments_are_refunded_or_failed_but_at_least_one_is_refunded(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
@@ -84,7 +84,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_paid_if_fully_paid(
+    public function it_marks_an_order_as_paid_if_fully_paid(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
@@ -105,11 +105,11 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_paid_if_it_does_not_have_any_payments(
+    public function it_marks_an_order_as_paid_if_it_does_not_have_any_payments(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order
-    ) {
+    ): void {
         $order->getPayments()->willReturn(new ArrayCollection([]));
         $order->getTotal()->willReturn(0);
 
@@ -120,7 +120,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_paid_if_fully_paid_even_if_previous_payment_was_failed(
+    public function it_marks_an_order_as_paid_if_fully_paid_even_if_previous_payment_was_failed(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
@@ -144,7 +144,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_partially_refunded_if_one_of_the_payment_is_completed(
+    public function it_marks_an_order_as_partially_refunded_if_one_of_the_payment_is_completed(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
@@ -169,7 +169,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_completed_if_fully_paid_multiple_payments(
+    public function it_marks_an_order_as_completed_if_fully_paid_multiple_payments(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
@@ -194,7 +194,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_partially_paid_if_one_of_the_payment_is_processing(
+    public function it_marks_an_order_as_partially_paid_if_one_of_the_payment_is_processing(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,

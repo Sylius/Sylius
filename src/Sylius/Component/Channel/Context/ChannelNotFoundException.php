@@ -18,7 +18,7 @@ class ChannelNotFoundException extends \RuntimeException
     /**
      * {@inheritdoc}
      */
-    public function __construct(?\Exception $previousException = null)
+    public function __construct(?\Throwable $previousException = null)
     {
         parent::__construct('Channel could not be found! Tip: You can use the Web Debug Toolbar to switch between channels in development.', 0, $previousException);
     }

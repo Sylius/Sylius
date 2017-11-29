@@ -18,22 +18,22 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 final class CircularDependencyFoundExceptionSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith([]);
     }
 
-    function it_is_a_domain_exception(): void
+    public function it_is_a_domain_exception(): void
     {
         $this->shouldHaveType(\DomainException::class);
     }
 
-    function it_is_a_logic_exception(): void
+    public function it_is_a_logic_exception(): void
     {
         $this->shouldHaveType(\LogicException::class);
     }
 
-    function it_transforms_a_cycle_to_user_friendly_message(
+    public function it_transforms_a_cycle_to_user_friendly_message(
         ThemeInterface $firstTheme,
         ThemeInterface $secondTheme,
         ThemeInterface $thirdTheme,
@@ -49,7 +49,7 @@ final class CircularDependencyFoundExceptionSpec extends ObjectBehavior
         $this->getMessage()->shouldReturn('Circular dependency was found while resolving theme "first/theme", caused by cycle "third/theme -> fourth/theme -> third/theme".');
     }
 
-    function it_throws_another_exception_if_there_is_no_cycle_in_given_elements(
+    public function it_throws_another_exception_if_there_is_no_cycle_in_given_elements(
         ThemeInterface $firstTheme,
         ThemeInterface $secondTheme,
         ThemeInterface $thirdTheme,

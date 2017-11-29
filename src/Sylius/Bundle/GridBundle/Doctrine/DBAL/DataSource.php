@@ -32,9 +32,6 @@ final class DataSource implements DataSourceInterface
      */
     private $expressionBuilder;
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     */
     public function __construct(QueryBuilder $queryBuilder)
     {
         $this->queryBuilder = $queryBuilder;
@@ -71,7 +68,7 @@ final class DataSource implements DataSourceInterface
      */
     public function getData(Parameters $parameters)
     {
-        $countQueryBuilderModifier = function ($queryBuilder) {
+        $countQueryBuilderModifier = function ($queryBuilder): void {
             $queryBuilder
                 ->select('COUNT(DISTINCT o.id) AS total_results')
                 ->setMaxResults(1)

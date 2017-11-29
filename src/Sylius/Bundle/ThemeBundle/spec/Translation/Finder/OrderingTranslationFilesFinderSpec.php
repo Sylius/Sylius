@@ -18,17 +18,17 @@ use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface
 
 final class OrderingTranslationFilesFinderSpec extends ObjectBehavior
 {
-    function let(TranslationFilesFinderInterface $translationFilesFinder): void
+    public function let(TranslationFilesFinderInterface $translationFilesFinder): void
     {
         $this->beConstructedWith($translationFilesFinder);
     }
 
-    function it_implements_Translation_Files_Finder_interface(): void
+    public function it_implements_Translation_Files_Finder_interface(): void
     {
         $this->shouldImplement(TranslationFilesFinderInterface::class);
     }
 
-    function it_puts_application_translations_files_before_bundle_translations_files(
+    public function it_puts_application_translations_files_before_bundle_translations_files(
         TranslationFilesFinderInterface $translationFilesFinder
     ): void {
         $translationFilesFinder->findTranslationFiles('/some/path/to/theme')->willReturn([

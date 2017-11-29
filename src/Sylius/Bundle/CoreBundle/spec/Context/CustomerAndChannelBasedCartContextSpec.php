@@ -26,7 +26,7 @@ use Sylius\Component\Order\Context\CartNotFoundException;
 
 final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CustomerContextInterface $customerContext,
         ChannelContextInterface $channelContext,
         OrderRepositoryInterface $orderRepository
@@ -34,12 +34,12 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         $this->beConstructedWith($customerContext, $channelContext, $orderRepository);
     }
 
-    function it_implements_cart_context_interface(): void
+    public function it_implements_cart_context_interface(): void
     {
         $this->shouldImplement(CartContextInterface::class);
     }
 
-    function it_returns_uncompleted_cart_for_currently_logged_user(
+    public function it_returns_uncompleted_cart_for_currently_logged_user(
         ChannelInterface $channel,
         ChannelContextInterface $channelContext,
         CustomerContextInterface $customerContext,
@@ -55,7 +55,7 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($order);
     }
 
-    function it_throws_exception_if_no_cart_can_be_provided(
+    public function it_throws_exception_if_no_cart_can_be_provided(
         ChannelInterface $channel,
         ChannelContextInterface $channelContext,
         CustomerContextInterface $customerContext,
@@ -73,7 +73,7 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_there_is_no_logged_in_customer(
+    public function it_throws_exception_if_there_is_no_logged_in_customer(
         CustomerContextInterface $customerContext,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
@@ -87,7 +87,7 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_channel_could_not_be_found(ChannelContextInterface $channelContext): void
+    public function it_does_nothing_if_channel_could_not_be_found(ChannelContextInterface $channelContext): void
     {
         $channelContext->getChannel()->willThrow(new ChannelNotFoundException());
 

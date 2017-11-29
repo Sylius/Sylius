@@ -20,5 +20,5 @@ interface IndexPageInterface extends BaseIndexPageInterface
     /**
      * @param string $currencyName
      */
-    public function chooseCurrencyFilter($currencyName);
+    public function chooseCurrencyFilter(string $currencyName): void;
 }

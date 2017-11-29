@@ -19,12 +19,12 @@ use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 
 final class CompositeTranslatorResourceProviderSpec extends ObjectBehavior
 {
-    function it_implements_translator_resource_provider_interface(): void
+    public function it_implements_translator_resource_provider_interface(): void
     {
         $this->shouldImplement(TranslatorResourceProviderInterface::class);
     }
 
-    function it_aggregates_the_resources(
+    public function it_aggregates_the_resources(
         TranslatorResourceProviderInterface $firstResourceProvider,
         TranslatorResourceProviderInterface $secondResourceProvider,
         TranslationResourceInterface $firstResource,
@@ -38,7 +38,7 @@ final class CompositeTranslatorResourceProviderSpec extends ObjectBehavior
         $this->getResources()->shouldReturn([$firstResource, $secondResource, $firstResource]);
     }
 
-    function it_aggregates_the_resources_locales(
+    public function it_aggregates_the_resources_locales(
         TranslatorResourceProviderInterface $firstResourceProvider,
         TranslatorResourceProviderInterface $secondResourceProvider
     ): void {
@@ -50,7 +50,7 @@ final class CompositeTranslatorResourceProviderSpec extends ObjectBehavior
         $this->getResourcesLocales()->shouldReturn(['first-locale', 'second-locale']);
     }
 
-    function it_aggregates_the_unique_resources_locales(
+    public function it_aggregates_the_unique_resources_locales(
         TranslatorResourceProviderInterface $firstResourceProvider,
         TranslatorResourceProviderInterface $secondResourceProvider
     ): void {

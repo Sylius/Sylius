@@ -25,9 +25,6 @@ final class CollectionToStringTransformer implements DataTransformerInterface
      */
     private $delimiter;
 
-    /**
-     * @param string $delimiter
-     */
     public function __construct(string $delimiter)
     {
         $this->delimiter = $delimiter;

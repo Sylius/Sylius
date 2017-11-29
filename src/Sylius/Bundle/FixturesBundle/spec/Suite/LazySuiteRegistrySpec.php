@@ -21,17 +21,17 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteRegistryInterface;
 
 final class LazySuiteRegistrySpec extends ObjectBehavior
 {
-    function let(SuiteFactoryInterface $suiteFactory): void
+    public function let(SuiteFactoryInterface $suiteFactory): void
     {
         $this->beConstructedWith($suiteFactory);
     }
 
-    function it_implements_suite_registry_interface(): void
+    public function it_implements_suite_registry_interface(): void
     {
         $this->shouldImplement(SuiteRegistryInterface::class);
     }
 
-    function it_returns_a_constructed_suite(SuiteFactoryInterface $suiteFactory, SuiteInterface $suite): void
+    public function it_returns_a_constructed_suite(SuiteFactoryInterface $suiteFactory, SuiteInterface $suite): void
     {
         $this->addSuite('suite_name', ['fixtures' => []]);
 
@@ -41,7 +41,7 @@ final class LazySuiteRegistrySpec extends ObjectBehavior
         $this->getSuites()->shouldReturn(['suite_name' => $suite]);
     }
 
-    function it_constructs_a_suite_only_once(SuiteFactoryInterface $suiteFactory, SuiteInterface $suite): void
+    public function it_constructs_a_suite_only_once(SuiteFactoryInterface $suiteFactory, SuiteInterface $suite): void
     {
         $this->addSuite('suite_name', ['fixtures' => []]);
 
@@ -51,12 +51,12 @@ final class LazySuiteRegistrySpec extends ObjectBehavior
         $this->getSuite('suite_name')->shouldReturn($suite);
     }
 
-    function it_returns_an_empty_suites_list_if_none_was_registered(): void
+    public function it_returns_an_empty_suites_list_if_none_was_registered(): void
     {
         $this->getSuites()->shouldReturn([]);
     }
 
-    function it_throws_an_exception_if_trying_to_get_unexisting_suite(): void
+    public function it_throws_an_exception_if_trying_to_get_unexisting_suite(): void
     {
         $this->shouldThrow(SuiteNotFoundException::class)->during('getSuite', ['the_river_snake_is_dangerous']);
     }

@@ -31,7 +31,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 final class UserProviderSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FactoryInterface $customerFactory,
         FactoryInterface $userFactory,
         UserRepositoryInterface $userRepository,
@@ -54,17 +54,17 @@ final class UserProviderSpec extends ObjectBehavior
         );
     }
 
-    function it_implements_Hwi_oauth_aware_user_provider_interface(): void
+    public function it_implements_Hwi_oauth_aware_user_provider_interface(): void
     {
         $this->shouldImplement(OAuthAwareUserProviderInterface::class);
     }
 
-    function it_implements_account_connector_interface(): void
+    public function it_implements_account_connector_interface(): void
     {
         $this->shouldImplement(AccountConnectorInterface::class);
     }
 
-    function it_should_connect_oauth_account_with_given_user(
+    public function it_should_connect_oauth_account_with_given_user(
         $userManager,
         FactoryInterface $oauthFactory,
         ShopUserInterface $user,
@@ -95,7 +95,7 @@ final class UserProviderSpec extends ObjectBehavior
         $this->connect($user, $response);
     }
 
-    function it_should_return_user_if_relation_exists(
+    public function it_should_return_user_if_relation_exists(
         $oauthRepository,
         ShopUserInterface $user,
         UserOAuthInterface $oauth,
@@ -113,7 +113,7 @@ final class UserProviderSpec extends ObjectBehavior
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
     }
 
-    function it_should_update_user_when_he_was_found_by_email(
+    public function it_should_update_user_when_he_was_found_by_email(
         $userManager,
         $userRepository,
         FactoryInterface $oauthFactory,
@@ -149,7 +149,7 @@ final class UserProviderSpec extends ObjectBehavior
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
     }
 
-    function it_should_create_new_user_when_none_was_found(
+    public function it_should_create_new_user_when_none_was_found(
         $userManager,
         FactoryInterface $customerFactory,
         FactoryInterface $userFactory,

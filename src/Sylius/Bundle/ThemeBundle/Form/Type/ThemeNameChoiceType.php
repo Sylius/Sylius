@@ -26,9 +26,6 @@ final class ThemeNameChoiceType extends AbstractType
      */
     private $themeRepository;
 
-    /**
-     * @param ThemeRepositoryInterface $themeRepository
-     */
     public function __construct(ThemeRepositoryInterface $themeRepository)
     {
         $this->themeRepository = $themeRepository;

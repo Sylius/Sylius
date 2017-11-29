@@ -21,12 +21,12 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 final class RequestLocaleSetterSpec extends ObjectBehavior
 {
-    function let(LocaleContextInterface $localeContext, LocaleProviderInterface $localeProvider): void
+    public function let(LocaleContextInterface $localeContext, LocaleProviderInterface $localeProvider): void
     {
         $this->beConstructedWith($localeContext, $localeProvider);
     }
 
-    function it_sets_locale_and_default_locale_on_request(
+    public function it_sets_locale_and_default_locale_on_request(
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider,
         GetResponseEvent $event,

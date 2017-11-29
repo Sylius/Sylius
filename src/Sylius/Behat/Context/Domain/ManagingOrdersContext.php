@@ -66,16 +66,6 @@ final class ManagingOrdersContext implements Context
      */
     private $unpaidOrdersStateUpdater;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param OrderRepositoryInterface $orderRepository
-     * @param RepositoryInterface $orderItemRepository
-     * @param RepositoryInterface $addressRepository
-     * @param RepositoryInterface $adjustmentRepository
-     * @param ObjectManager $orderManager
-     * @param ProductVariantResolverInterface $variantResolver
-     * @param UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         OrderRepositoryInterface $orderRepository,
@@ -99,7 +89,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @When I delete the order :order
      */
-    public function iDeleteTheOrder(OrderInterface $order)
+    public function iDeleteTheOrder(OrderInterface $order): void
     {
         $adjustmentsId = [];
         foreach ($order->getAdjustments() as $adjustment) {
@@ -119,7 +109,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then this order should not exist in the registry
      */
-    public function orderShouldNotExistInTheRegistry()
+    public function orderShouldNotExistInTheRegistry(): void
     {
         $orderId = $this->sharedStorage->get('order_id');
         $order = $this->orderRepository->find($orderId);
@@ -130,7 +120,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then the order item with product :product should not exist
      */
-    public function orderItemShouldNotExistInTheRegistry(ProductInterface $product)
+    public function orderItemShouldNotExistInTheRegistry(ProductInterface $product): void
     {
         $orderItems = $this->orderItemRepository->findBy(['variant' => $this->variantResolver->getVariant($product)]);
 
@@ -140,7 +130,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then billing and shipping addresses of this order should not exist
      */
-    public function addressesShouldNotExistInTheRegistry()
+    public function addressesShouldNotExistInTheRegistry(): void
     {
         $addresses = $this->sharedStorage->get('deleted_addresses');
 
@@ -152,7 +142,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then adjustments of this order should not exist
      */
-    public function adjustmentShouldNotExistInTheRegistry()
+    public function adjustmentShouldNotExistInTheRegistry(): void
     {
         $adjustments = $this->sharedStorage->get('deleted_adjustments');
 
@@ -164,7 +154,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Given /^(this order) has not been paid for (\d+) (day|days|hour|hours)$/
      */
-    public function thisOrderHasNotBeenPaidForDays(OrderInterface $order, $amount, $time)
+    public function thisOrderHasNotBeenPaidForDays(OrderInterface $order, $amount, $time): void
     {
         $order->setCheckoutCompletedAt(new \DateTime('-' . $amount . ' ' . $time));
         $this->orderManager->flush();
@@ -175,7 +165,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then /^(this order) should be automatically cancelled$/
      */
-    public function thisOrderShouldBeAutomaticallyCancelled(OrderInterface $order)
+    public function thisOrderShouldBeAutomaticallyCancelled(OrderInterface $order): void
     {
         Assert::same($order->getState(), OrderInterface::STATE_CANCELLED);
     }
@@ -183,7 +173,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then /^(this order) should not be cancelled$/
      */
-    public function thisOrderShouldNotBeCancelled(OrderInterface $order)
+    public function thisOrderShouldNotBeCancelled(OrderInterface $order): void
     {
         Assert::notSame($order->getState(), OrderInterface::STATE_CANCELLED);
     }

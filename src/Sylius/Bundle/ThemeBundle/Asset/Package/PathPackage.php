@@ -35,10 +35,6 @@ class PathPackage extends BasePathPackage
     protected $pathResolver;
 
     /**
-     * @param string $basePath
-     * @param VersionStrategyInterface $versionStrategy
-     * @param ThemeContextInterface $themeContext
-     * @param PathResolverInterface $pathResolver
      * @param ContextInterface|null $context
      */
     public function __construct(

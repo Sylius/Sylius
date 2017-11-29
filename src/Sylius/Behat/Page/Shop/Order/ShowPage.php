@@ -29,7 +29,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function pay()
+    public function pay(): void
     {
         $this->getElement('pay_link')->click();
     }
@@ -53,7 +53,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function choosePaymentMethod($paymentMethodName)
+    public function choosePaymentMethod($paymentMethodName): void
     {
         $paymentMethodElement = $this->getElement('payment_method', ['%name%' => $paymentMethodName]);
         $paymentMethodElement->selectOption($paymentMethodElement->getAttribute('value'));

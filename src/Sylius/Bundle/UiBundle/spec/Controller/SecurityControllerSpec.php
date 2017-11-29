@@ -28,7 +28,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 final class SecurityControllerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         AuthenticationUtils $authenticationUtils,
         FormFactoryInterface $formFactory,
         EngineInterface $templatingEngine,
@@ -38,7 +38,7 @@ final class SecurityControllerSpec extends ObjectBehavior
         $this->beConstructedWith($authenticationUtils, $formFactory, $templatingEngine, $authorizationChecker, $router);
     }
 
-    function it_renders_login_form(
+    public function it_renders_login_form(
         Request $request,
         ParameterBag $requestAttributes,
         AuthenticationUtils $authenticationUtils,
@@ -75,7 +75,7 @@ final class SecurityControllerSpec extends ObjectBehavior
         $this->loginAction($request)->shouldReturn($response);
     }
 
-    function it_redirects_when_user_is_logged_in(
+    public function it_redirects_when_user_is_logged_in(
         Request $request,
         ParameterBag $requestAttributes,
         AuthorizationCheckerInterface $authorizationChecker,
@@ -89,14 +89,14 @@ final class SecurityControllerSpec extends ObjectBehavior
         $this->loginAction($request)->shouldHaveType(RedirectResponse::class);
     }
 
-    function it_throws_an_exception_when_check_action_is_accessed(Request $request): void
+    public function it_throws_an_exception_when_check_action_is_accessed(Request $request): void
     {
         $this
             ->shouldThrow(new \RuntimeException('You must configure the check path to be handled by the firewall.'))
             ->during('checkAction', [$request]);
     }
 
-    function it_throws_an_exception_when_logout_action_is_accessed(Request $request): void
+    public function it_throws_an_exception_when_logout_action_is_accessed(Request $request): void
     {
         $this
             ->shouldThrow(new \RuntimeException('You must configure the logout path to be handled by the firewall.'))

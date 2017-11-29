@@ -42,12 +42,6 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
      */
     private $generationPolicy;
 
-    /**
-     * @param FactoryInterface $couponFactory
-     * @param PromotionCouponRepositoryInterface $couponRepository
-     * @param ObjectManager $objectManager
-     * @param GenerationPolicyInterface $generationPolicy
-     */
     public function __construct(
         FactoryInterface $couponFactory,
         PromotionCouponRepositoryInterface $couponRepository,
@@ -87,11 +81,6 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
     }
 
     /**
-     * @param int $codeLength
-     * @param array $generatedCoupons
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     private function generateUniqueCode(int $codeLength, array $generatedCoupons): string
@@ -106,12 +95,6 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
         return $code;
     }
 
-    /**
-     * @param string $code
-     * @param array $generatedCoupons
-     *
-     * @return bool
-     */
     private function isUsedCode(string $code, array $generatedCoupons): bool
     {
         if (isset($generatedCoupons[$code])) {
@@ -122,8 +105,6 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
     }
 
     /**
-     * @param PromotionCouponGeneratorInstructionInterface $instruction
-     *
      * @throws FailedGenerationException
      */
     private function assertGenerationIsPossible(PromotionCouponGeneratorInstructionInterface $instruction)

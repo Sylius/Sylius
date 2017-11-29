@@ -29,22 +29,22 @@ use Symfony\Component\Form\FormInterface;
 
 final class BuildAddressFormSubscriberSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $countryRepository, FormFactoryInterface $formFactory): void
+    public function let(RepositoryInterface $countryRepository, FormFactoryInterface $formFactory): void
     {
         $this->beConstructedWith($countryRepository, $formFactory);
     }
 
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(BuildAddressFormSubscriber::class);
     }
 
-    function it_is_a_subscriber(): void
+    public function it_is_a_subscriber(): void
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_subscribes_to_event(): void
+    public function it_subscribes_to_event(): void
     {
         $this::getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -52,7 +52,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         ]);
     }
 
-    function it_adds_provinces_on_pre_set_data(
+    public function it_adds_provinces_on_pre_set_data(
         FormFactoryInterface $formFactory,
         FormEvent $event,
         FormInterface $form,
@@ -79,7 +79,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_adds_province_name_field_on_pre_set_data_if_country_does_not_have_provinces(
+    public function it_adds_province_name_field_on_pre_set_data_if_country_does_not_have_provinces(
         FormFactoryInterface $formFactory,
         FormEvent $event,
         FormInterface $form,
@@ -106,7 +106,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_adds_provinces_on_pre_submit(
+    public function it_adds_provinces_on_pre_submit(
         FormFactoryInterface $formFactory,
         RepositoryInterface $countryRepository,
         FormEvent $event,
@@ -131,7 +131,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_adds_province_name_field_on_pre_submit_if_country_does_not_have_provinces(
+    public function it_adds_province_name_field_on_pre_submit_if_country_does_not_have_provinces(
         FormFactoryInterface $formFactory,
         FormEvent $event,
         FormInterface $form,

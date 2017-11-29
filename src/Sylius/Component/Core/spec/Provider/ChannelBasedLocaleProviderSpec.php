@@ -23,17 +23,17 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
 {
-    function let(ChannelContextInterface $channelContext): void
+    public function let(ChannelContextInterface $channelContext): void
     {
         $this->beConstructedWith($channelContext, 'pl_PL');
     }
 
-    function it_is_a_locale_provider(): void
+    public function it_is_a_locale_provider(): void
     {
         $this->shouldImplement(LocaleProviderInterface::class);
     }
 
-    function it_returns_all_channels_locales_as_available_ones(
+    public function it_returns_all_channels_locales_as_available_ones(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
         LocaleInterface $enabledLocale
@@ -49,7 +49,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
         $this->getAvailableLocalesCodes()->shouldReturn(['en_US']);
     }
 
-    function it_returns_the_default_locale_as_the_available_one_if_channel_cannot_be_determined(
+    public function it_returns_the_default_locale_as_the_available_one_if_channel_cannot_be_determined(
         ChannelContextInterface $channelContext
     ): void {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
@@ -57,7 +57,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
         $this->getAvailableLocalesCodes()->shouldReturn(['pl_PL']);
     }
 
-    function it_returns_channels_default_locale(
+    public function it_returns_channels_default_locale(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
         LocaleInterface $locale
@@ -71,7 +71,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
         $this->getDefaultLocaleCode()->shouldReturn('en_US');
     }
 
-    function it_returns_the_default_locale_if_channel_cannot_be_determined(
+    public function it_returns_the_default_locale_if_channel_cannot_be_determined(
         ChannelContextInterface $channelContext
     ): void {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);

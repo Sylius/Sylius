@@ -37,11 +37,6 @@ final class ManagingCurrenciesContext implements Context
      */
     private $updatePage;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -55,7 +50,7 @@ final class ManagingCurrenciesContext implements Context
     /**
      * @Given I want to add a new currency
      */
-    public function iWantToAddNewCurrency()
+    public function iWantToAddNewCurrency(): void
     {
         $this->createPage->open();
     }
@@ -63,7 +58,7 @@ final class ManagingCurrenciesContext implements Context
     /**
      * @When I choose :currencyName
      */
-    public function iChoose($currencyName)
+    public function iChoose($currencyName): void
     {
         $this->createPage->chooseName($currencyName);
     }
@@ -72,7 +67,7 @@ final class ManagingCurrenciesContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -81,7 +76,7 @@ final class ManagingCurrenciesContext implements Context
      * @Then the currency :currency should appear in the store
      * @Then I should see the currency :currency in the list
      */
-    public function currencyShouldAppearInTheStore(CurrencyInterface $currency)
+    public function currencyShouldAppearInTheStore(CurrencyInterface $currency): void
     {
         $this->indexPage->open();
 
@@ -91,7 +86,7 @@ final class ManagingCurrenciesContext implements Context
     /**
      * @Given /^I want to edit (this currency)$/
      */
-    public function iWantToEditThisCurrency(CurrencyInterface $currency)
+    public function iWantToEditThisCurrency(CurrencyInterface $currency): void
     {
         $this->updatePage->open(['id' => $currency->getId()]);
     }
@@ -99,7 +94,7 @@ final class ManagingCurrenciesContext implements Context
     /**
      * @When I enable it
      */
-    public function iEnableIt()
+    public function iEnableIt(): void
     {
         $this->updatePage->enable();
     }
@@ -107,7 +102,7 @@ final class ManagingCurrenciesContext implements Context
     /**
      * @When I disable it
      */
-    public function iDisableIt()
+    public function iDisableIt(): void
     {
         $this->updatePage->disable();
     }
@@ -116,7 +111,7 @@ final class ManagingCurrenciesContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -124,7 +119,7 @@ final class ManagingCurrenciesContext implements Context
     /**
      * @Then the code field should be disabled
      */
-    public function theCodeFiledShouldBeDisabled()
+    public function theCodeFiledShouldBeDisabled(): void
     {
         Assert::same($this->updatePage->getCodeDisabledAttribute(), 'disabled');
     }
@@ -132,7 +127,7 @@ final class ManagingCurrenciesContext implements Context
     /**
      * @Then I should be notified that currency code must be unique
      */
-    public function iShouldBeNotifiedThatCurrencyCodeMustBeUnique()
+    public function iShouldBeNotifiedThatCurrencyCodeMustBeUnique(): void
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'Currency code must be unique.');
     }
@@ -140,7 +135,7 @@ final class ManagingCurrenciesContext implements Context
     /**
      * @Then there should still be only one currency with :element :code
      */
-    public function thereShouldStillBeOnlyOneCurrencyWithCode($element, $codeValue)
+    public function thereShouldStillBeOnlyOneCurrencyWithCode($element, $codeValue): void
     {
         $this->indexPage->open();
 
@@ -150,7 +145,7 @@ final class ManagingCurrenciesContext implements Context
     /**
      * @Given I want to browse currencies of the store
      */
-    public function iWantToSeeAllCurrenciesInStore()
+    public function iWantToSeeAllCurrenciesInStore(): void
     {
         $this->indexPage->open();
     }
@@ -158,7 +153,7 @@ final class ManagingCurrenciesContext implements Context
     /**
      * @Then /^I should see (\d+) currencies in the list$/
      */
-    public function iShouldSeeCurrenciesInTheList($amountOfCurrencies)
+    public function iShouldSeeCurrenciesInTheList($amountOfCurrencies): void
     {
         Assert::same($this->indexPage->countItems(), (int) $amountOfCurrencies);
     }

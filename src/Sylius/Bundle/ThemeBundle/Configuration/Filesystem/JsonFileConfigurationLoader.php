@@ -22,9 +22,6 @@ final class JsonFileConfigurationLoader implements ConfigurationLoaderInterface
      */
     private $filesystem;
 
-    /**
-     * @param FilesystemInterface $filesystem
-     */
     public function __construct(FilesystemInterface $filesystem)
     {
         $this->filesystem = $filesystem;
@@ -45,9 +42,6 @@ final class JsonFileConfigurationLoader implements ConfigurationLoaderInterface
         );
     }
 
-    /**
-     * @param string $path
-     */
     private function assertFileExists(string $path): void
     {
         if (!$this->filesystem->exists($path)) {

@@ -23,17 +23,17 @@ use Sylius\Component\Currency\Model\Currency;
 
 final class ChannelAwareCurrencyContextSpec extends ObjectBehavior
 {
-    function let(CurrencyContextInterface $currencyContext, ChannelContextInterface $channelContext): void
+    public function let(CurrencyContextInterface $currencyContext, ChannelContextInterface $channelContext): void
     {
         $this->beConstructedWith($currencyContext, $channelContext);
     }
 
-    function it_is_a_currency_context(): void
+    public function it_is_a_currency_context(): void
     {
         $this->shouldImplement(CurrencyContextInterface::class);
     }
 
-    function it_returns_the_currency_code_from_decorated_context_if_it_is_available_in_current_channel(
+    public function it_returns_the_currency_code_from_decorated_context_if_it_is_available_in_current_channel(
         CurrencyContextInterface $currencyContext,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
@@ -52,7 +52,7 @@ final class ChannelAwareCurrencyContextSpec extends ObjectBehavior
         $this->getCurrencyCode()->shouldReturn('USD');
     }
 
-    function it_returns_the_channels_base_currency_if_the_one_from_context_is_not_available(
+    public function it_returns_the_channels_base_currency_if_the_one_from_context_is_not_available(
         CurrencyContextInterface $currencyContext,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
@@ -69,7 +69,7 @@ final class ChannelAwareCurrencyContextSpec extends ObjectBehavior
         $this->getCurrencyCode()->shouldReturn('EUR');
     }
 
-    function it_returns_the_channels_base_currency_if_currency_was_not_found(
+    public function it_returns_the_channels_base_currency_if_currency_was_not_found(
         CurrencyContextInterface $currencyContext,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel

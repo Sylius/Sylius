@@ -16,7 +16,6 @@ namespace Sylius\Component\Core\Test\Services;
 interface DefaultChannelFactoryInterface
 {
     /**
-     * @param string|null $code
      * @param string|null $name
      * @param string|null $currencyCode
      *

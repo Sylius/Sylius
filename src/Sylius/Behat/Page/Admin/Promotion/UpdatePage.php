@@ -25,7 +25,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPriority($priority)
+    public function setPriority($priority): void
     {
         $this->getDocument()->fillField('Priority', $priority);
     }
@@ -51,22 +51,22 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillUsageLimit($limit)
+    public function fillUsageLimit($limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);
     }
 
-    public function makeExclusive()
+    public function makeExclusive(): void
     {
         $this->getDocument()->checkField('Exclusive');
     }
 
-    public function checkCouponBased()
+    public function checkCouponBased(): void
     {
         $this->getDocument()->checkField('Coupon based');
     }
 
-    public function checkChannel($name)
+    public function checkChannel($name): void
     {
         $this->getDocument()->checkField($name);
     }
@@ -74,7 +74,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setStartsAt(\DateTimeInterface $dateTime)
+    public function setStartsAt(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -85,7 +85,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setEndsAt(\DateTimeInterface $dateTime)
+    public function setEndsAt(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 

@@ -24,22 +24,22 @@ use Symfony\Component\Form\FormInterface;
 
 final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $customerRepository): void
+    public function let(RepositoryInterface $customerRepository): void
     {
         $this->beConstructedWith($customerRepository);
     }
 
-    function it_is_event_subscriber_instance(): void
+    public function it_is_event_subscriber_instance(): void
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_listens_on_pre_submit_data_event(): void
+    public function it_listens_on_pre_submit_data_event(): void
     {
         $this->getSubscribedEvents()->shouldReturn([FormEvents::PRE_SUBMIT => 'preSubmit']);
     }
 
-    function it_sets_user_for_existing_customer(
+    public function it_sets_user_for_existing_customer(
         FormEvent $event,
         FormInterface $form,
         CustomerInterface $customer,
@@ -62,7 +62,7 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_throws_unexpected_type_exception_if_data_is_not_customer_type(
+    public function it_throws_unexpected_type_exception_if_data_is_not_customer_type(
         FormEvent $event,
         FormInterface $form,
         ShopUserInterface $user
@@ -74,7 +74,7 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('preSubmit', [$event]);
     }
 
-    function it_does_not_set_user_if_customer_with_given_email_has_set_user(
+    public function it_does_not_set_user_if_customer_with_given_email_has_set_user(
         FormEvent $event,
         FormInterface $form,
         CustomerInterface $customer,

@@ -27,17 +27,17 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 final class OrderPricesRecalculatorSpec extends ObjectBehavior
 {
-    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
+    public function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
     {
         $this->beConstructedWith($productVariantPriceCalculator);
     }
 
-    function it_is_an_order_processor(): void
+    public function it_is_an_order_processor(): void
     {
         $this->shouldImplement(OrderProcessorInterface::class);
     }
 
-    function it_recalculates_prices_adding_customer_to_the_context(
+    public function it_recalculates_prices_adding_customer_to_the_context(
         ChannelInterface $channel,
         CustomerGroupInterface $group,
         CustomerInterface $customer,
@@ -68,7 +68,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_throws_exception_if_passed_order_is_not_a_core_order(BaseOrderInterface $order): void
+    public function it_throws_exception_if_passed_order_is_not_a_core_order(BaseOrderInterface $order): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

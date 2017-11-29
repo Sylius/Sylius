@@ -25,12 +25,12 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class FakeChannelPersisterSpec extends ObjectBehavior
 {
-    function let(FakeChannelCodeProviderInterface $fakeHostnameProvider): void
+    public function let(FakeChannelCodeProviderInterface $fakeHostnameProvider): void
     {
         $this->beConstructedWith($fakeHostnameProvider);
     }
 
-    function it_applies_only_to_master_requests(FilterResponseEvent $filterResponseEvent): void
+    public function it_applies_only_to_master_requests(FilterResponseEvent $filterResponseEvent): void
     {
         $filterResponseEvent->getRequestType()->willReturn(HttpKernelInterface::SUB_REQUEST);
 
@@ -40,7 +40,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         $this->onKernelResponse($filterResponseEvent);
     }
 
-    function it_applies_only_for_request_with_fake_channel_code(
+    public function it_applies_only_for_request_with_fake_channel_code(
         FakeChannelCodeProviderInterface $fakeHostnameProvider,
         FilterResponseEvent $filterResponseEvent,
         Request $request
@@ -55,7 +55,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         $this->onKernelResponse($filterResponseEvent);
     }
 
-    function it_persists_fake_channel_codes_in_a_cookie(
+    public function it_persists_fake_channel_codes_in_a_cookie(
         FakeChannelCodeProviderInterface $fakeHostnameProvider,
         FilterResponseEvent $filterResponseEvent,
         Request $request,

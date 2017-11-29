@@ -23,17 +23,17 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 final class InStockValidatorSpec extends ObjectBehavior
 {
-    function let(AvailabilityCheckerInterface $availabilityChecker): void
+    public function let(AvailabilityCheckerInterface $availabilityChecker): void
     {
         $this->beConstructedWith($availabilityChecker);
     }
 
-    function it_is_a_constraint_validator(): void
+    public function it_is_a_constraint_validator(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
 
-    function it_does_not_add_violation_if_there_is_no_stockable(
+    public function it_does_not_add_violation_if_there_is_no_stockable(
         InventoryUnitInterface $inventoryUnit,
         PropertyAccessor $propertyAccessor
     ): void {
@@ -44,7 +44,7 @@ final class InStockValidatorSpec extends ObjectBehavior
         $this->validate($inventoryUnit, $constraint);
     }
 
-    function it_does_not_add_violation_if_there_is_no_quantity(
+    public function it_does_not_add_violation_if_there_is_no_quantity(
         InventoryUnitInterface $inventoryUnit,
         PropertyAccessor $propertyAccessor,
         StockableInterface $stockable
@@ -57,7 +57,7 @@ final class InStockValidatorSpec extends ObjectBehavior
         $this->validate($inventoryUnit, $constraint);
     }
 
-    function it_does_not_add_violation_if_stock_is_sufficient(
+    public function it_does_not_add_violation_if_stock_is_sufficient(
         AvailabilityCheckerInterface $availabilityChecker,
         InventoryUnitInterface $inventoryUnit,
         PropertyAccessor $propertyAccessor,

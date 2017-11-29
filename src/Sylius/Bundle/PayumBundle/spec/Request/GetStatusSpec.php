@@ -21,28 +21,28 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 final class GetStatusSpec extends ObjectBehavior
 {
-    function let(TokenInterface $token): void
+    public function let(TokenInterface $token): void
     {
         $this->beConstructedWith($token);
     }
 
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(GetStatus::class);
     }
 
-    function it_is_get_status_request(): void
+    public function it_is_get_status_request(): void
     {
         $this->shouldImplement(GetStatusInterface::class);
     }
 
-    function it_has_unknown_status_by_default(): void
+    public function it_has_unknown_status_by_default(): void
     {
         $this->isUnknown()->shouldReturn(true);
         $this->getValue()->shouldReturn(PaymentInterface::STATE_UNKNOWN);
     }
 
-    function it_can_be_marked_as_new(): void
+    public function it_can_be_marked_as_new(): void
     {
         $this->markNew();
 
@@ -50,7 +50,7 @@ final class GetStatusSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(PaymentInterface::STATE_NEW);
     }
 
-    function it_can_be_marked_as_suspended(): void
+    public function it_can_be_marked_as_suspended(): void
     {
         $this->markSuspended();
 
@@ -58,7 +58,7 @@ final class GetStatusSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(PaymentInterface::STATE_PROCESSING);
     }
 
-    function it_can_be_marked_as_expired(): void
+    public function it_can_be_marked_as_expired(): void
     {
         $this->markExpired();
 
@@ -66,7 +66,7 @@ final class GetStatusSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(PaymentInterface::STATE_FAILED);
     }
 
-    function it_can_be_marked_as_canceled(): void
+    public function it_can_be_marked_as_canceled(): void
     {
         $this->markCanceled();
 
@@ -74,7 +74,7 @@ final class GetStatusSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(PaymentInterface::STATE_CANCELLED);
     }
 
-    function it_can_be_marked_as_pending(): void
+    public function it_can_be_marked_as_pending(): void
     {
         $this->markPending();
 
@@ -82,7 +82,7 @@ final class GetStatusSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(PaymentInterface::STATE_PROCESSING);
     }
 
-    function it_can_be_marked_as_failed(): void
+    public function it_can_be_marked_as_failed(): void
     {
         $this->markFailed();
 
@@ -90,7 +90,7 @@ final class GetStatusSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(PaymentInterface::STATE_FAILED);
     }
 
-    function it_can_be_marked_as_unknown(): void
+    public function it_can_be_marked_as_unknown(): void
     {
         $this->markUnknown();
 
@@ -98,7 +98,7 @@ final class GetStatusSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(PaymentInterface::STATE_UNKNOWN);
     }
 
-    function it_can_be_marked_as_captured(): void
+    public function it_can_be_marked_as_captured(): void
     {
         $this->markCaptured();
 
@@ -106,7 +106,7 @@ final class GetStatusSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(PaymentInterface::STATE_COMPLETED);
     }
 
-    function it_can_be_marked_as_authorized(): void
+    public function it_can_be_marked_as_authorized(): void
     {
         $this->markAuthorized();
 
@@ -114,7 +114,7 @@ final class GetStatusSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(PaymentInterface::STATE_AUTHORIZED);
     }
 
-    function it_can_be_marked_as_refunded(): void
+    public function it_can_be_marked_as_refunded(): void
     {
         $this->markRefunded();
 
@@ -122,7 +122,7 @@ final class GetStatusSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(PaymentInterface::STATE_REFUNDED);
     }
 
-    function it_can_be_marked_as_paydout(): void
+    public function it_can_be_marked_as_paydout(): void
     {
         $this->markPayedout();
 

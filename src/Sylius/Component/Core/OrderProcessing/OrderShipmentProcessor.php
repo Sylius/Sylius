@@ -34,10 +34,6 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
      */
     private $shipmentFactory;
 
-    /**
-     * @param DefaultShippingMethodResolverInterface $defaultShippingMethodResolver
-     * @param FactoryInterface $shipmentFactory
-     */
     public function __construct(
         DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         FactoryInterface $shipmentFactory
@@ -78,11 +74,9 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param OrderInterface $order
-     *
      * @return ShipmentInterface
      */
-    private function getOrderShipment(OrderInterface $order)
+    private function getOrderShipment(OrderInterface $order): ShipmentInterface
     {
         if ($order->hasShipments()) {
             return $order->getShipments()->first();

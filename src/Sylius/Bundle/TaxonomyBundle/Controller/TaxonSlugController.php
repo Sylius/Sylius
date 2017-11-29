@@ -43,8 +43,6 @@ final class TaxonSlugController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function generateAction(Request $request): Response

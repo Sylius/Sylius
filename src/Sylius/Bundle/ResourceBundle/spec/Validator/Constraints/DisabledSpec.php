@@ -19,22 +19,22 @@ use Symfony\Component\Validator\Constraint;
 
 final class DisabledSpec extends ObjectBehavior
 {
-    function it_is_constraint(): void
+    public function it_is_constraint(): void
     {
         $this->shouldHaveType(Constraint::class);
     }
 
-    function it_is_a_property_constraint(): void
+    public function it_is_a_property_constraint(): void
     {
         $this->getTargets()->shouldContain(Constraint::PROPERTY_CONSTRAINT);
     }
 
-    function it_is_a_class_constraint(): void
+    public function it_is_a_class_constraint(): void
     {
         $this->getTargets()->shouldContain(Constraint::CLASS_CONSTRAINT);
     }
 
-    function it_is_validated_by_disabled_validator(): void
+    public function it_is_validated_by_disabled_validator(): void
     {
         $this->validatedBy()->shouldReturn(DisabledValidator::class);
     }

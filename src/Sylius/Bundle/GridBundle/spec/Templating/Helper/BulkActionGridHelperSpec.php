@@ -22,22 +22,22 @@ use Symfony\Component\Templating\Helper\HelperInterface;
 
 final class BulkActionGridHelperSpec extends ObjectBehavior
 {
-    function let(BulkActionGridRendererInterface $bulkActionGridRenderer): void
+    public function let(BulkActionGridRendererInterface $bulkActionGridRenderer): void
     {
         $this->beConstructedWith($bulkActionGridRenderer);
     }
 
-    function it_is_a_templating_helper(): void
+    public function it_is_a_templating_helper(): void
     {
         $this->shouldImplement(HelperInterface::class);
     }
 
-    function it_extends_base_templating_helper(): void
+    public function it_extends_base_templating_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_uses_a_grid_renderer_to_render_a_bulk_action(
+    public function it_uses_a_grid_renderer_to_render_a_bulk_action(
         BulkActionGridRendererInterface $bulkActionGridRenderer,
         GridView $gridView,
         Action $bulkAction
@@ -46,7 +46,7 @@ final class BulkActionGridHelperSpec extends ObjectBehavior
         $this->renderBulkAction($gridView, $bulkAction)->shouldReturn('<a href="#">Delete</a>');
     }
 
-    function it_has_name(): void
+    public function it_has_name(): void
     {
         $this->getName()->shouldReturn('sylius_bulk_action_grid');
     }

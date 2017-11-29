@@ -25,7 +25,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 
 final class TemplatePathsCacheWarmerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         TemplateFinderInterface $templateFinder,
         TemplateLocatorInterface $templateLocator,
         ThemeRepositoryInterface $themeRepository,
@@ -34,12 +34,12 @@ final class TemplatePathsCacheWarmerSpec extends ObjectBehavior
         $this->beConstructedWith($templateFinder, $templateLocator, $themeRepository, $cache);
     }
 
-    function it_implements_cache_warmer_interface(): void
+    public function it_implements_cache_warmer_interface(): void
     {
         $this->shouldImplement(CacheWarmerInterface::class);
     }
 
-    function it_builds_cache_by_warming_up_every_template_and_every_theme_together(
+    public function it_builds_cache_by_warming_up_every_template_and_every_theme_together(
         TemplateFinderInterface $templateFinder,
         TemplateLocatorInterface $templateLocator,
         ThemeRepositoryInterface $themeRepository,

@@ -21,46 +21,46 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class ProductVariantSpec extends ObjectBehavior
 {
-    function let()
+    public function let(): void
     {
         $this->setCurrentLocale('en_US');
         $this->setFallbackLocale('en_US');
     }
 
-    function it_implements_sylius_product_variant_interface(): void
+    public function it_implements_sylius_product_variant_interface(): void
     {
         $this->shouldImplement(ProductVariantInterface::class);
     }
 
-    function it_implements_sylius_resource_interface(): void
+    public function it_implements_sylius_resource_interface(): void
     {
         $this->shouldImplement(ResourceInterface::class);
     }
 
-    function it_initializes_option_values_collection_by_default(): void
+    public function it_initializes_option_values_collection_by_default(): void
     {
         $this->getOptionValues()->shouldHaveType(Collection::class);
     }
 
-    function it_adds_an_option_value(ProductOptionValueInterface $optionValue): void
+    public function it_adds_an_option_value(ProductOptionValueInterface $optionValue): void
     {
         $this->addOptionValue($optionValue);
         $this->hasOptionValue($optionValue)->shouldReturn(true);
     }
 
-    function it_removes_an_option_value(ProductOptionValueInterface $optionValue): void
+    public function it_removes_an_option_value(ProductOptionValueInterface $optionValue): void
     {
         $this->addOptionValue($optionValue);
         $this->removeOptionValue($optionValue);
         $this->hasOptionValue($optionValue)->shouldReturn(false);
     }
 
-    function it_has_no_position_by_default(): void
+    public function it_has_no_position_by_default(): void
     {
         $this->getPosition()->shouldReturn(null);
     }
 
-    function its_position_is_mutable(): void
+    public function its_position_is_mutable(): void
     {
         $this->setPosition(10);
         $this->getPosition()->shouldReturn(10);

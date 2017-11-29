@@ -19,7 +19,7 @@ use Sylius\Behat\Page\SymfonyPage;
 
 class GeneratePage extends SymfonyPage implements GeneratePageInterface
 {
-    public function generate()
+    public function generate(): void
     {
         $this->getDocument()->pressButton('Generate');
     }
@@ -27,7 +27,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($nth, $price, $channelName)
+    public function specifyPrice($nth, $price, $channelName): void
     {
         $this->getElement('price', ['%position%' => $nth, '%channelName%' => $channelName])->setValue($price);
     }
@@ -35,7 +35,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyCode($nth, $code)
+    public function specifyCode($nth, $code): void
     {
         $this->getDocument()->fillField(sprintf('sylius_product_generate_variants_variants_%s_code', $nth), $code);
     }
@@ -43,7 +43,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function removeVariant($nth)
+    public function removeVariant($nth): void
     {
         $item = $this->getDocument()->find('css', sprintf('div[data-form-collection-index="%s"]', $nth));
 
@@ -95,13 +95,11 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     }
 
     /**
-     * @param NodeElement $element
-     *
      * @return NodeElement
      *
      * @throws ElementNotFoundException
      */
-    private function getValidatedField(NodeElement $element)
+    private function getValidatedField(NodeElement $element): NodeElement
     {
         while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();

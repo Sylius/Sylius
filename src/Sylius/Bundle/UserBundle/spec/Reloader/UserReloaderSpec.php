@@ -20,17 +20,17 @@ use Sylius\Component\User\Model\UserInterface;
 
 final class UserReloaderSpec extends ObjectBehavior
 {
-    function let(ObjectManager $objectManager): void
+    public function let(ObjectManager $objectManager): void
     {
         $this->beConstructedWith($objectManager);
     }
 
-    function it_implements_user_reloader_interface(): void
+    public function it_implements_user_reloader_interface(): void
     {
         $this->shouldImplement(UserReloaderInterface::class);
     }
 
-    function it_reloads_user(ObjectManager $objectManager, UserInterface $user): void
+    public function it_reloads_user(ObjectManager $objectManager, UserInterface $user): void
     {
         $objectManager->refresh($user)->shouldBeCalled();
 

@@ -25,7 +25,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaypalGatewayUsername($username)
+    public function setPaypalGatewayUsername($username): void
     {
         $this->getDocument()->fillField('Username', $username);
     }
@@ -33,7 +33,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaypalGatewayPassword($password)
+    public function setPaypalGatewayPassword($password): void
     {
         $this->getDocument()->fillField('Password', $password);
     }
@@ -41,7 +41,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaypalGatewaySignature($signature)
+    public function setPaypalGatewaySignature($signature): void
     {
         $this->getDocument()->fillField('Signature', $signature);
     }
@@ -49,7 +49,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameIt($name, $languageCode)
+    public function nameIt($name, $languageCode): void
     {
         $this->getDocument()->fillField(sprintf('sylius_payment_method_translations_%s_name', $languageCode), $name);
     }

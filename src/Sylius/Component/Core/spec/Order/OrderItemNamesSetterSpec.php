@@ -25,12 +25,12 @@ use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 
 final class OrderItemNamesSetterSpec extends ObjectBehavior
 {
-    function it_implements_order_item_names_setter_interface(): void
+    public function it_implements_order_item_names_setter_interface(): void
     {
         $this->shouldImplement(OrderItemNamesSetterInterface::class);
     }
 
-    function it_sets_product_and_product_variant_names_on_order_items(
+    public function it_sets_product_and_product_variant_names_on_order_items(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant,

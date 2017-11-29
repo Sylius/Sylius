@@ -49,13 +49,6 @@ final class ChannelContext implements Context
      */
     private $channelManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param DefaultChannelFactoryInterface $unitedStatesChannelFactory
-     * @param DefaultChannelFactoryInterface $defaultChannelFactory
-     * @param ChannelRepositoryInterface $channelRepository
-     * @param ObjectManager $channelManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         DefaultChannelFactoryInterface $unitedStatesChannelFactory,
@@ -83,7 +76,7 @@ final class ChannelContext implements Context
     /**
      * @Given the store operates on a single channel in "United States"
      */
-    public function storeOperatesOnASingleChannelInUnitedStates()
+    public function storeOperatesOnASingleChannelInUnitedStates(): void
     {
         $defaultData = $this->unitedStatesChannelFactory->create();
 
@@ -94,7 +87,7 @@ final class ChannelContext implements Context
     /**
      * @Given the store operates on a single channel in the "United States" named :channelIdentifier
      */
-    public function storeOperatesOnASingleChannelInTheUnitedStatesNamed($channelIdentifier)
+    public function storeOperatesOnASingleChannelInTheUnitedStatesNamed($channelIdentifier): void
     {
         $defaultData = $this->unitedStatesChannelFactory->create($channelIdentifier, $channelIdentifier);
 
@@ -106,7 +99,7 @@ final class ChannelContext implements Context
      * @Given the store operates on a single channel
      * @Given the store operates on a single channel in :currencyCode currency
      */
-    public function storeOperatesOnASingleChannel($currencyCode = null)
+    public function storeOperatesOnASingleChannel($currencyCode = null): void
     {
         $defaultData = $this->defaultChannelFactory->create(null, null, $currencyCode);
 
@@ -119,7 +112,7 @@ final class ChannelContext implements Context
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency$/
      * @Given the store operates on a channel identified by :code code
      */
-    public function theStoreOperatesOnAChannelNamed($channelName, $currencyCode = null)
+    public function theStoreOperatesOnAChannelNamed($channelName, $currencyCode = null): void
     {
         $channelCode = StringInflector::nameToLowercaseCode($channelName);
         $defaultData = $this->defaultChannelFactory->create($channelCode, $channelName, $currencyCode);
@@ -131,7 +124,7 @@ final class ChannelContext implements Context
     /**
      * @Given the channel :channel is enabled
      */
-    public function theChannelIsEnabled(ChannelInterface $channel)
+    public function theChannelIsEnabled(ChannelInterface $channel): void
     {
         $this->changeChannelState($channel, true);
     }
@@ -140,7 +133,7 @@ final class ChannelContext implements Context
      * @Given the channel :channel is disabled
      * @Given the channel :channel has been disabled
      */
-    public function theChannelIsDisabled(ChannelInterface $channel)
+    public function theChannelIsDisabled(ChannelInterface $channel): void
     {
         $this->changeChannelState($channel, false);
     }
@@ -148,7 +141,7 @@ final class ChannelContext implements Context
     /**
      * @Given channel :channel has been deleted
      */
-    public function iChannelHasBeenDeleted(ChannelInterface $channel)
+    public function iChannelHasBeenDeleted(ChannelInterface $channel): void
     {
         $this->channelRepository->remove($channel);
     }
@@ -156,7 +149,7 @@ final class ChannelContext implements Context
     /**
      * @Given /^(its) default tax zone is (zone "([^"]+)")$/
      */
-    public function itsDefaultTaxRateIs(ChannelInterface $channel, ZoneInterface $defaultTaxZone)
+    public function itsDefaultTaxRateIs(ChannelInterface $channel, ZoneInterface $defaultTaxZone): void
     {
         $channel->setDefaultTaxZone($defaultTaxZone);
         $this->channelManager->flush();
@@ -166,7 +159,7 @@ final class ChannelContext implements Context
      * @Given /^(this channel) has contact email set as "([^"]+)"$/
      * @Given /^(this channel) has no contact email set$/
      */
-    public function thisChannelHasContactEmailSetAs(ChannelInterface $channel, $contactEmail = null)
+    public function thisChannelHasContactEmailSetAs(ChannelInterface $channel, $contactEmail = null): void
     {
         $channel->setContactEmail($contactEmail);
         $this->channelManager->flush();
@@ -175,7 +168,7 @@ final class ChannelContext implements Context
     /**
      * @Given /^on (this channel) shipping step is skipped if only a single shipping method is available$/
      */
-    public function onThisChannelShippingStepIsSkippedIfOnlyASingleShippingMethodIsAvailable(ChannelInterface $channel)
+    public function onThisChannelShippingStepIsSkippedIfOnlyASingleShippingMethodIsAvailable(ChannelInterface $channel): void
     {
         $channel->setSkippingShippingStepAllowed(true);
 
@@ -187,7 +180,7 @@ final class ChannelContext implements Context
      */
     public function onThisChannelPaymentStepIsSkippedIfOnlyASinglePaymentMethodIsAvailable(
         ChannelInterface $channel
-    ) {
+    ): void {
         $channel->setSkippingPaymentStepAllowed(true);
 
         $this->channelManager->flush();
@@ -196,18 +189,14 @@ final class ChannelContext implements Context
     /**
      * @Given /^on (this channel) account verification is not required$/
      */
-    public function onThisChannelAccountVerificationIsNotRequired(ChannelInterface $channel)
+    public function onThisChannelAccountVerificationIsNotRequired(ChannelInterface $channel): void
     {
         $channel->setAccountVerificationRequired(false);
 
         $this->channelManager->flush();
     }
 
-    /**
-     * @param ChannelInterface $channel
-     * @param bool $state
-     */
-    private function changeChannelState(ChannelInterface $channel, $state)
+    private function changeChannelState(ChannelInterface $channel, bool $state): void
     {
         $channel->setEnabled($state);
         $this->channelManager->flush();

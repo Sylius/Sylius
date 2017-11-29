@@ -33,12 +33,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     private $addressFactory;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param AddressFactoryInterface $addressFactory
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -61,7 +55,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseDifferentBillingAddress()
+    public function chooseDifferentBillingAddress(): void
     {
         $driver = $this->getDriver();
         if ($driver instanceof Selenium2Driver) {
@@ -119,7 +113,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyShippingAddress(AddressInterface $shippingAddress)
+    public function specifyShippingAddress(AddressInterface $shippingAddress): void
     {
         $this->specifyAddress($shippingAddress, self::TYPE_SHIPPING);
     }
@@ -127,7 +121,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectShippingAddressProvince($province)
+    public function selectShippingAddressProvince($province): void
     {
         $this->waitForElement(5, 'shipping_country_province');
         $this->getElement('shipping_country_province')->selectOption($province);
@@ -136,7 +130,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyBillingAddress(AddressInterface $billingAddress)
+    public function specifyBillingAddress(AddressInterface $billingAddress): void
     {
         $this->specifyAddress($billingAddress, self::TYPE_BILLING);
     }
@@ -144,7 +138,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectBillingAddressProvince($province)
+    public function selectBillingAddressProvince($province): void
     {
         $this->waitForElement(5, 'billing_country_province');
         $this->getElement('billing_country_province')->selectOption($province);
@@ -153,7 +147,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyEmail($email)
+    public function specifyEmail($email): void
     {
         $this->getElement('customer_email')->setValue($email);
     }
@@ -161,7 +155,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyShippingAddressFullName(string $fullName)
+    public function specifyShippingAddressFullName(string $fullName): void
     {
         $names = explode(' ', $fullName);
 
@@ -180,7 +174,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function signIn()
+    public function signIn(): void
     {
         $this->waitForElement(5, 'login_button');
 
@@ -196,7 +190,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPassword($password)
+    public function specifyPassword($password): void
     {
         $this->getDocument()->waitFor(5, function () {
             return $this->getElement('login_password')->isVisible();
@@ -225,12 +219,12 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $this->getElement('shipping_country')->find('css', 'option:selected')->getText();
     }
 
-    public function nextStep()
+    public function nextStep(): void
     {
         $this->getElement('next_step')->press();
     }
 
-    public function backToStore()
+    public function backToStore(): void
     {
         $this->getDocument()->clickLink('Back to store');
     }
@@ -238,7 +232,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyBillingAddressProvince($provinceName)
+    public function specifyBillingAddressProvince($provinceName): void
     {
         $this->waitForElement(5, 'billing_province');
         $this->getElement('billing_province')->setValue($provinceName);
@@ -247,7 +241,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyShippingAddressProvince($provinceName)
+    public function specifyShippingAddressProvince($provinceName): void
     {
         $this->waitForElement(5, 'shipping_province');
         $this->getElement('shipping_province')->setValue($provinceName);
@@ -272,7 +266,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectShippingAddressFromAddressBook(AddressInterface $address)
+    public function selectShippingAddressFromAddressBook(AddressInterface $address): void
     {
         $this->waitForElement(2, sprintf('%s_province', self::TYPE_SHIPPING));
         $addressBookSelect = $this->getElement('shipping_address_book');
@@ -292,7 +286,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectBillingAddressFromAddressBook(AddressInterface $address)
+    public function selectBillingAddressFromAddressBook(AddressInterface $address): void
     {
         $this->waitForElement(2, sprintf('%s_province', self::TYPE_BILLING));
         $addressBookSelect = $this->getElement('billing_address_book');
@@ -360,11 +354,9 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     }
 
     /**
-     * @param string $type
-     *
      * @return AddressInterface
      */
-    private function getPreFilledAddress($type)
+    private function getPreFilledAddress(string $type): AddressInterface
     {
         $this->assertAddressType($type);
 
@@ -388,11 +380,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $address;
     }
 
-    /**
-     * @param AddressInterface $address
-     * @param string $type
-     */
-    private function specifyAddress(AddressInterface $address, $type)
+    private function specifyAddress(AddressInterface $address, string $type): void
     {
         $this->assertAddressType($type);
 
@@ -414,13 +402,9 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     }
 
     /**
-     * @param string $element
-     *
-     * @return NodeElement|null
-     *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement($element)
+    private function getFieldElement(string $element): ?NodeElement
     {
         $element = $this->getElement($element);
         while (null !== $element && !$element->hasClass('field')) {
@@ -430,30 +414,21 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $element;
     }
 
-    /**
-     * @return bool
-     */
-    private function waitForLoginAction()
+    private function waitForLoginAction(): bool
     {
         return $this->getDocument()->waitFor(5, function () {
             return !$this->hasElement('login_password');
         });
     }
 
-    /**
-     * @return bool
-     */
-    private function waitForElement($timeout, $elementName)
+    private function waitForElement($timeout, $elementName): bool
     {
         return $this->getDocument()->waitFor($timeout, function () use ($elementName) {
             return $this->hasElement($elementName);
         });
     }
 
-    /**
-     * @param string $type
-     */
-    private function assertAddressType($type)
+    private function assertAddressType(string $type): void
     {
         $availableTypes = [self::TYPE_BILLING, self::TYPE_SHIPPING];
 

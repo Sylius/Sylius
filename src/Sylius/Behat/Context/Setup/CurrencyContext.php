@@ -43,12 +43,6 @@ final class CurrencyContext implements Context
      */
     private $channelManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $currencyRepository
-     * @param FactoryInterface $currencyFactory
-     * @param ObjectManager $channelManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $currencyRepository,
@@ -64,7 +58,7 @@ final class CurrencyContext implements Context
     /**
      * @Given the store has currency :currencyCode
      */
-    public function theStoreHasCurrency($currencyCode)
+    public function theStoreHasCurrency($currencyCode): void
     {
         $currency = $this->createCurrency($currencyCode);
 
@@ -76,7 +70,7 @@ final class CurrencyContext implements Context
      * @Given the store has currency :currencyCode and :secondCurrencyCode
      * @Given the store has currency :currencyCode, :secondCurrencyCode and :thirdCurrencyCode
      */
-    public function theStoreHasCurrencyAnd($currencyCode, $secondCurrencyCode, $thirdCurrencyCode = null)
+    public function theStoreHasCurrencyAnd($currencyCode, $secondCurrencyCode, $thirdCurrencyCode = null): void
     {
         $this->saveCurrency($this->createCurrency($currencyCode));
         $this->saveCurrency($this->createCurrency($secondCurrencyCode));
@@ -89,7 +83,7 @@ final class CurrencyContext implements Context
     /**
      * @Given the currency :currencyCode has been disabled
      */
-    public function theStoreHasDisabledCurrency($currencyCode)
+    public function theStoreHasDisabledCurrency($currencyCode): void
     {
         $currency = $this->provideCurrency($currencyCode);
 
@@ -101,7 +95,7 @@ final class CurrencyContext implements Context
      * @Given /^(that channel)(?: also|) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
      * @Given /^(that channel)(?: also|) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" currencies$/
      */
-    public function thatChannelAllowsToShopUsingAndCurrencies(ChannelInterface $channel, ...$currenciesCodes)
+    public function thatChannelAllowsToShopUsingAndCurrencies(ChannelInterface $channel, ...$currenciesCodes): void
     {
         foreach ($currenciesCodes as $currencyCode) {
             $channel->addCurrency($this->provideCurrency($currencyCode));
@@ -110,21 +104,16 @@ final class CurrencyContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @param CurrencyInterface $currency
-     */
-    private function saveCurrency(CurrencyInterface $currency)
+    private function saveCurrency(CurrencyInterface $currency): void
     {
         $this->sharedStorage->set('currency', $currency);
         $this->currencyRepository->add($currency);
     }
 
     /**
-     * @param $currencyCode
-     *
      * @return CurrencyInterface
      */
-    private function createCurrency($currencyCode)
+    private function createCurrency($currencyCode): CurrencyInterface
     {
         /** @var CurrencyInterface $currency */
         $currency = $this->currencyFactory->createNew();
@@ -134,11 +123,9 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @param string $currencyCode
-     *
      * @return CurrencyInterface
      */
-    private function provideCurrency($currencyCode)
+    private function provideCurrency(string $currencyCode): CurrencyInterface
     {
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
         if (null === $currency) {

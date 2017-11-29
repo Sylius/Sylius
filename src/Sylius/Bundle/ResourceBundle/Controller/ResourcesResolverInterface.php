@@ -18,7 +18,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface ResourcesResolverInterface
 {
     /**
-     * @param RequestConfiguration $requestConfiguration
      * @param RepositoryInterface $repository
      *
      * @return mixed

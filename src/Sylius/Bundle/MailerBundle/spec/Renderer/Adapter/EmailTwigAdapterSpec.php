@@ -24,17 +24,17 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class EmailTwigAdapterSpec extends ObjectBehavior
 {
-    function let(\Twig_Environment $twig): void
+    public function let(\Twig_Environment $twig): void
     {
         $this->beConstructedWith($twig);
     }
 
-    function it_is_an_adapter(): void
+    public function it_is_an_adapter(): void
     {
         $this->shouldHaveType(AbstractAdapter::class);
     }
 
-    function it_renders_an_email(
+    public function it_renders_an_email(
         \Twig_Environment $twig,
         \Twig_Template $template,
         EmailInterface $email,
@@ -62,7 +62,7 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
         $this->render($email, [])->shouldReturn($renderedEmail);
     }
 
-    function it_creates_and_renders_an_email(
+    public function it_creates_and_renders_an_email(
         EmailInterface $email,
         EmailRenderEvent $event,
         EventDispatcherInterface $dispatcher,

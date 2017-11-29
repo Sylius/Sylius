@@ -33,7 +33,7 @@ interface CredentialsHolderInterface
      *
      * @return string|null
      */
-    public function getPassword();
+    public function getPassword(): ?string;
 
     /**
      * @param string|null $encodedPassword
@@ -47,7 +47,7 @@ interface CredentialsHolderInterface
      *
      * @return string|null
      */
-    public function getSalt();
+    public function getSalt(): ?string;
 
     /**
      * Removes sensitive data from the user.
@@ -55,5 +55,5 @@ interface CredentialsHolderInterface
      * This is important if, at any given point, sensitive information like
      * the plain-text password is stored on this object.
      */
-    public function eraseCredentials();
+    public function eraseCredentials(): void;
 }

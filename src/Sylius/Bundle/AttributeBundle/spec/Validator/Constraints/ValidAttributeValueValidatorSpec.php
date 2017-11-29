@@ -28,23 +28,23 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class ValidAttributeValueValidatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $attributeTypesRegistry, ExecutionContextInterface $context): void
+    public function let(ServiceRegistryInterface $attributeTypesRegistry, ExecutionContextInterface $context): void
     {
         $this->beConstructedWith($attributeTypesRegistry);
         $this->initialize($context);
     }
 
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ValidAttributeValueValidator::class);
     }
 
-    function it_is_constraint_validator(): void
+    public function it_is_constraint_validator(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
 
-    function it_validates_attribute_value_based_on_their_type(
+    public function it_validates_attribute_value_based_on_their_type(
         AttributeInterface $attribute,
         AttributeTypeInterface $attributeType,
         AttributeValueInterface $attributeValue,
@@ -61,7 +61,7 @@ final class ValidAttributeValueValidatorSpec extends ObjectBehavior
         $this->validate($attributeValue, $attributeValueConstraint);
     }
 
-    function it_throws_exception_if_validated_value_is_not_attribute_value(
+    public function it_throws_exception_if_validated_value_is_not_attribute_value(
         \DateTime $badObject,
         ValidAttributeValue $attributeValueConstraint
     ): void {

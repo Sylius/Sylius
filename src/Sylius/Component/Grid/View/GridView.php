@@ -36,8 +36,6 @@ class GridView implements GridViewInterface
 
     /**
      * @param mixed $data
-     * @param Grid $definition
-     * @param Parameters $parameters
      */
     public function __construct($data, Grid $definition, Parameters $parameters)
     {
@@ -105,9 +103,6 @@ class GridView implements GridViewInterface
         return $fieldName === array_shift($sortedFields);
     }
 
-    /**
-     * @return array
-     */
     private function getCurrentlySortedBy(): array
     {
         return $this->parameters->has('sorting')
@@ -117,8 +112,6 @@ class GridView implements GridViewInterface
     }
 
     /**
-     * @param string $fieldName
-     *
      * @throws \InvalidArgumentException
      */
     private function assertFieldIsSortable(string $fieldName): void

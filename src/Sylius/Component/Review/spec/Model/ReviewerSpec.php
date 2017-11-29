@@ -18,24 +18,24 @@ use Sylius\Component\Review\Model\ReviewerInterface;
 
 final class ReviewerSpec extends ObjectBehavior
 {
-    function it_implements_reviewer_interface(): void
+    public function it_implements_reviewer_interface(): void
     {
         $this->shouldImplement(ReviewerInterface::class);
     }
 
-    function it_has_an_email(): void
+    public function it_has_an_email(): void
     {
         $this->setEmail('john.doe@example.com');
         $this->getEmail()->shouldReturn('john.doe@example.com');
     }
 
-    function it_has_a_first_name(): void
+    public function it_has_a_first_name(): void
     {
         $this->setFirstName('John');
         $this->getFirstName()->shouldReturn('John');
     }
 
-    function it_has_a_last_name(): void
+    public function it_has_a_last_name(): void
     {
         $this->setLastName('Doe');
         $this->getLastName()->shouldReturn('Doe');

@@ -19,17 +19,17 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 final class PerUnitRateCalculatorSpec extends ObjectBehavior
 {
-    function it_should_implement_shipping_calculator_interface(): void
+    public function it_should_implement_shipping_calculator_interface(): void
     {
         $this->shouldImplement(CalculatorInterface::class);
     }
 
-    function it_returns_per_unit_type(): void
+    public function it_returns_per_unit_type(): void
     {
         $this->getType()->shouldReturn('per_unit_rate');
     }
 
-    function it_should_calculate_the_total_with_the_per_unit_amount_configured_on_the_method(
+    public function it_should_calculate_the_total_with_the_per_unit_amount_configured_on_the_method(
         ShipmentInterface $subject
     ): void {
         $subject->getShippingUnitCount()->willReturn(11);
@@ -37,7 +37,7 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
         $this->calculate($subject, ['amount' => 200])->shouldReturn(2200);
     }
 
-    function its_calculated_value_should_be_an_integer(ShipmentInterface $subject): void
+    public function its_calculated_value_should_be_an_integer(ShipmentInterface $subject): void
     {
         $subject->getShippingUnitCount()->willReturn(6);
 

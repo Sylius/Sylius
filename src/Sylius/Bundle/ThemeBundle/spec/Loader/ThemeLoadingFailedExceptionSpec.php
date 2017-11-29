@@ -17,12 +17,12 @@ use PhpSpec\ObjectBehavior;
 
 final class ThemeLoadingFailedExceptionSpec extends ObjectBehavior
 {
-    function it_is_a_domain_exception(): void
+    public function it_is_a_domain_exception(): void
     {
         $this->shouldHaveType(\DomainException::class);
     }
 
-    function it_is_a_logic_exception(): void
+    public function it_is_a_logic_exception(): void
     {
         $this->shouldHaveType(\LogicException::class);
     }

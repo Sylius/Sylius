@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class FakeChannelContextSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
         ChannelRepositoryInterface $channelRepository,
         RequestStack $requestStack
@@ -33,12 +33,12 @@ final class FakeChannelContextSpec extends ObjectBehavior
         $this->beConstructedWith($fakeChannelCodeProvider, $channelRepository, $requestStack);
     }
 
-    function it_implements_channel_context_interface(): void
+    public function it_implements_channel_context_interface(): void
     {
         $this->shouldImplement(ChannelContextInterface::class);
     }
 
-    function it_returns_a_fake_channel_with_the_given_code(
+    public function it_returns_a_fake_channel_with_the_given_code(
         FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
         ChannelRepositoryInterface $channelRepository,
         RequestStack $requestStack,
@@ -54,14 +54,14 @@ final class FakeChannelContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($channel);
     }
 
-    function it_throws_a_channel_not_found_exception_if_there_is_no_master_request(RequestStack $requestStack): void
+    public function it_throws_a_channel_not_found_exception_if_there_is_no_master_request(RequestStack $requestStack): void
     {
         $requestStack->getMasterRequest()->willReturn(null);
 
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 
-    function it_throws_a_channel_not_found_exception_if_provided_code_was_null(
+    public function it_throws_a_channel_not_found_exception_if_provided_code_was_null(
         FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
         ChannelRepositoryInterface $channelRepository,
         RequestStack $requestStack,
@@ -76,7 +76,7 @@ final class FakeChannelContextSpec extends ObjectBehavior
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 
-    function it_throws_a_channel_not_found_exception_if_channel_with_given_code_was_not_found(
+    public function it_throws_a_channel_not_found_exception_if_channel_with_given_code_was_not_found(
         FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
         ChannelRepositoryInterface $channelRepository,
         RequestStack $requestStack,

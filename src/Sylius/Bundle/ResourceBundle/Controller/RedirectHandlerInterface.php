@@ -35,11 +35,8 @@ interface RedirectHandlerInterface
     public function redirectToIndex(RequestConfiguration $configuration, ?ResourceInterface $resource = null): Response;
 
     /**
-     * @param RequestConfiguration $configuration
      * @param string               $route
      * @param array                $parameters
-     *
-     * @return Response
      */
     public function redirectToRoute(RequestConfiguration $configuration, string $route, array $parameters = []): Response;
 

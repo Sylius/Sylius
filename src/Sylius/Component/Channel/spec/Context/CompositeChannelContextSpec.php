@@ -20,17 +20,17 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 
 final class CompositeChannelContextSpec extends ObjectBehavior
 {
-    function it_implements_channel_context_interface(): void
+    public function it_implements_channel_context_interface(): void
     {
         $this->shouldImplement(ChannelContextInterface::class);
     }
 
-    function it_throws_a_channel_not_found_exception_if_there_are_no_nested_channel_contexts_defined(): void
+    public function it_throws_a_channel_not_found_exception_if_there_are_no_nested_channel_contexts_defined(): void
     {
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 
-    function it_throws_a_channel_not_found_exception_if_none_of_nested_channel_contexts_returned_a_channel(
+    public function it_throws_a_channel_not_found_exception_if_none_of_nested_channel_contexts_returned_a_channel(
         ChannelContextInterface $channelContext
     ): void {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
@@ -40,7 +40,7 @@ final class CompositeChannelContextSpec extends ObjectBehavior
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 
-    function it_returns_first_result_returned_by_nested_request_resolvers(
+    public function it_returns_first_result_returned_by_nested_request_resolvers(
         ChannelContextInterface $firstChannelContext,
         ChannelContextInterface $secondChannelContext,
         ChannelContextInterface $thirdChannelContext,
@@ -57,7 +57,7 @@ final class CompositeChannelContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($channel);
     }
 
-    function its_nested_request_resolvers_can_have_priority(
+    public function its_nested_request_resolvers_can_have_priority(
         ChannelContextInterface $firstChannelContext,
         ChannelContextInterface $secondChannelContext,
         ChannelContextInterface $thirdChannelContext,

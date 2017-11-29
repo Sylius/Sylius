@@ -39,7 +39,7 @@ final class PromotionCouponApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_promotion_coupons_list_when_access_is_denied()
+    public function it_does_not_allow_to_show_promotion_coupons_list_when_access_is_denied(): void
     {
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
         $promotion = $promotions['promotion2'];
@@ -55,7 +55,7 @@ final class PromotionCouponApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_indexing_promotion_coupons()
+    public function it_allows_indexing_promotion_coupons(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -71,7 +71,7 @@ final class PromotionCouponApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_coupon_for_not_authenticated_users()
+    public function it_does_not_allow_to_create_coupon_for_not_authenticated_users(): void
     {
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
         $promotion = $promotions['promotion2'];
@@ -85,7 +85,7 @@ final class PromotionCouponApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_coupon_without_specifying_required_data()
+    public function it_does_not_allow_to_create_coupon_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -100,7 +100,7 @@ final class PromotionCouponApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_coupon_with_given_code()
+    public function it_allows_to_create_coupon_with_given_code(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -122,7 +122,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_coupon_with_given_code_expiration_date_and_usage_limits()
+    public function it_allows_to_create_coupon_with_given_code_expiration_date_and_usage_limits(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -147,7 +147,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_coupon_for_non_authenticated_user()
+    public function it_denies_getting_coupon_for_non_authenticated_user(): void
     {
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
         $promotion = $promotions['promotion2'];
@@ -161,7 +161,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_a_coupon_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_a_coupon_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -176,7 +176,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_a_coupon()
+    public function it_allows_to_get_a_coupon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -194,7 +194,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_coupon_full_update_for_not_authenticated_users()
+    public function it_denies_coupon_full_update_for_not_authenticated_users(): void
     {
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
         $promotion = $promotions['promotion2'];
@@ -208,7 +208,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_full_update_of_a_coupon_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_full_update_of_a_coupon_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -223,7 +223,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_fully_update_coupon()
+    public function it_allows_to_fully_update_coupon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -253,7 +253,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_coupon_partial_update_for_not_authenticated_users()
+    public function it_denies_coupon_partial_update_for_not_authenticated_users(): void
     {
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
         $promotion = $promotions['promotion2'];
@@ -267,7 +267,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_partial_update_of_a_coupon_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_partial_update_of_a_coupon_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -282,7 +282,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_partially_update_coupon()
+    public function it_allows_to_partially_update_coupon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -311,7 +311,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_coupon_delete_for_not_authenticated_users()
+    public function it_denies_coupon_delete_for_not_authenticated_users(): void
     {
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
         $promotion = $promotions['promotion2'];
@@ -325,7 +325,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_delete_of_a_coupon_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_delete_of_a_coupon_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -340,7 +340,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_a_coupon()
+    public function it_allows_to_delete_a_coupon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
@@ -360,22 +360,14 @@ EOT;
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param PromotionCouponInterface|null $coupon
-     *
-     * @return string
      */
-    private function getPromotionCouponUrl(PromotionInterface $promotion, PromotionCouponInterface $coupon = null)
+    private function getPromotionCouponUrl(PromotionInterface $promotion, ?PromotionCouponInterface $coupon = null): string
     {
         return sprintf('/api/v1/promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode());
     }
 
-    /**
-     * @param PromotionInterface $promotion
-     *
-     * @return string
-     */
-    private function getPromotionCouponsUrl(PromotionInterface $promotion)
+    private function getPromotionCouponsUrl(PromotionInterface $promotion): string
     {
         return sprintf('/api/v1/promotions/%s/coupons/', $promotion->getCode());
     }

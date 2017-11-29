@@ -21,7 +21,6 @@ interface ServiceRegistryInterface
     public function all(): array;
 
     /**
-     * @param string $identifier
      * @param object $service
      *
      * @throws ExistingServiceException
@@ -44,8 +43,6 @@ interface ServiceRegistryInterface
     public function has(string $identifier): bool;
 
     /**
-     * @param string $identifier
-     *
      * @return object
      *
      * @throws NonExistingServiceException

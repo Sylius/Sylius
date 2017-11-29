@@ -59,7 +59,7 @@ final class PaypalGatewayConfigurationType extends AbstractType
             ->add('sandbox', CheckboxType::class, [
                 'label' => 'sylius.form.gateway_configuration.paypal.sandbox',
             ])
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
                 $data = $event->getData();
 
                 $data['payum.http_client'] = '@sylius.payum.http_client';

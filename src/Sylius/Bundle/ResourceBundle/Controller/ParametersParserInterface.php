@@ -19,7 +19,6 @@ interface ParametersParserInterface
 {
     /**
      * @param array $parameters
-     * @param Request $request
      *
      * @return array
      */

@@ -20,12 +20,12 @@ use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 
 final class SortByExtensionSpec extends ObjectBehavior
 {
-    function it_extends_twig_extensions(): void
+    public function it_extends_twig_extensions(): void
     {
         $this->shouldHaveType(\Twig_Extension::class);
     }
 
-    function it_sorts_in_ascending_order_by_default(
+    public function it_sorts_in_ascending_order_by_default(
         SampleInterface $firstSample,
         SampleInterface $secondSample,
         SampleInterface $thirdSample
@@ -49,7 +49,7 @@ final class SortByExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_sorts_an_array_of_objects_by_various_properties(
+    public function it_sorts_an_array_of_objects_by_various_properties(
         SampleInterface $firstSample,
         SampleInterface $secondSample,
         SampleInterface $thirdSample
@@ -97,7 +97,7 @@ final class SortByExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_sorts_an_array_of_objects_in_descending_order_by_a_property(
+    public function it_sorts_an_array_of_objects_in_descending_order_by_a_property(
         SampleInterface $firstSample,
         SampleInterface $secondSample,
         SampleInterface $thirdSample
@@ -121,7 +121,7 @@ final class SortByExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_sorts_an_array_of_objects_by_a_nested_property(
+    public function it_sorts_an_array_of_objects_by_a_nested_property(
         SampleInterface $firstSample,
         SampleInterface $secondSample,
         SampleInterface $thirdSample,
@@ -152,7 +152,7 @@ final class SortByExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_throws_an_exception_if_the_property_is_not_found_on_objects(
+    public function it_throws_an_exception_if_the_property_is_not_found_on_objects(
         SampleInterface $firstSample,
         SampleInterface $secondSample,
         SampleInterface $thirdSample
@@ -169,17 +169,17 @@ final class SortByExtensionSpec extends ObjectBehavior
         ;
     }
 
-    function it_return_input_array_if_there_is_only_one_object_inside(SampleInterface $sample): void
+    public function it_return_input_array_if_there_is_only_one_object_inside(SampleInterface $sample): void
     {
         $this->sortBy([$sample], 'property')->shouldReturn([$sample]);
     }
 
-    function it_does_nothing_if_array_is_empty(): void
+    public function it_does_nothing_if_array_is_empty(): void
     {
         $this->sortBy([], 'property')->shouldReturn([]);
     }
 
-    function it_does_nothing_if_collection_is_empty(): void
+    public function it_does_nothing_if_collection_is_empty(): void
     {
         $this->sortBy(new ArrayCollection(), 'property')->shouldReturn([]);
     }

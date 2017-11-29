@@ -25,7 +25,7 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
 final class ShopUserLogoutHandlerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         HttpUtils $httpUtils,
         ChannelContextInterface $channelContext,
         CartStorageInterface $cartStorage
@@ -33,17 +33,17 @@ final class ShopUserLogoutHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($httpUtils, '/', $channelContext, $cartStorage);
     }
 
-    function it_is_default_logout_success_handler(): void
+    public function it_is_default_logout_success_handler(): void
     {
         $this->shouldHaveType(DefaultLogoutSuccessHandler::class);
     }
 
-    function it_implements_logout_success_handler_interface(): void
+    public function it_implements_logout_success_handler_interface(): void
     {
         $this->shouldImplement(LogoutSuccessHandlerInterface::class);
     }
 
-    function it_clears_cart_session_after_logging_out_and_return_default_handler_response(
+    public function it_clears_cart_session_after_logging_out_and_return_default_handler_response(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
         HttpUtils $httpUtils,

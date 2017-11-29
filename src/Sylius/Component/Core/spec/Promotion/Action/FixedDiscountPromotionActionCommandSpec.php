@@ -29,7 +29,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ): void {
@@ -39,12 +39,12 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         );
     }
 
-    function it_implements_promotion_action_interface(): void
+    public function it_implements_promotion_action_interface(): void
     {
         $this->shouldImplement(PromotionActionCommandInterface::class);
     }
 
-    function it_uses_a_distributor_and_applicator_to_execute_promotion_action(
+    public function it_uses_a_distributor_and_applicator_to_execute_promotion_action(
         ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $firstItem,
@@ -74,7 +74,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
     }
 
-    function it_does_not_apply_bigger_discount_than_promotion_subject_total(
+    public function it_does_not_apply_bigger_discount_than_promotion_subject_total(
         ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $firstItem,
@@ -104,7 +104,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 15000]], $promotion)->shouldReturn(true);
     }
 
-    function it_does_not_apply_discount_if_order_has_no_items(
+    public function it_does_not_apply_discount_if_order_has_no_items(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
@@ -118,7 +118,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(false);
     }
 
-    function it_does_not_apply_discount_if_subject_total_is_0(
+    public function it_does_not_apply_discount_if_subject_total_is_0(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion,
@@ -134,7 +134,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(false);
     }
 
-    function it_does_not_apply_discount_if_promotion_amount_is_0(
+    public function it_does_not_apply_discount_if_promotion_amount_is_0(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion,
@@ -150,7 +150,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 0]], $promotion)->shouldReturn(false);
     }
 
-    function it_does_not_apply_discount_if_amount_for_order_channel_is_not_configured(
+    public function it_does_not_apply_discount_if_amount_for_order_channel_is_not_configured(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
@@ -164,7 +164,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_PL' => ['amount' => 1000]], $promotion)->shouldReturn(false);
     }
 
-    function it_does_not_apply_discount_if_configuration_is_invalid(
+    public function it_does_not_apply_discount_if_configuration_is_invalid(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
@@ -177,7 +177,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 'string']], $promotion)->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_subject_is_not_an_order(
+    public function it_throws_an_exception_if_subject_is_not_an_order(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
     ): void {
@@ -187,7 +187,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ;
     }
 
-    function it_reverts_an_order_units_order_promotion_adjustments(
+    public function it_reverts_an_order_units_order_promotion_adjustments(
         AdjustmentInterface $firstAdjustment,
         AdjustmentInterface $secondAdjustment,
         OrderInterface $order,
@@ -216,7 +216,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->revert($order, [], $promotion);
     }
 
-    function it_does_not_revert_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion): void
+    public function it_does_not_revert_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion): void
     {
         $order->countItems()->willReturn(0);
         $order->getItems()->shouldNotBeCalled();
@@ -224,7 +224,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->revert($order, [], $promotion);
     }
 
-    function it_throws_an_exception_while_reverting_subject_which_is_not_order(
+    public function it_throws_an_exception_while_reverting_subject_which_is_not_order(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
     ): void {

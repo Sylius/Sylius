@@ -23,22 +23,22 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 
 final class ServiceRegistrySpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith(SampleServiceInterface::class);
     }
 
-    function it_implements_service_registry_interface(): void
+    public function it_implements_service_registry_interface(): void
     {
         $this->shouldImplement(ServiceRegistryInterface::class);
     }
 
-    function it_initializes_services_array_by_default(): void
+    public function it_initializes_services_array_by_default(): void
     {
         $this->all()->shouldReturn([]);
     }
 
-    function it_registers_service_with_given_interface(SampleServiceInterface $service): void
+    public function it_registers_service_with_given_interface(SampleServiceInterface $service): void
     {
         $this->has('test')->shouldReturn(false);
         $this->register('test', $service);
@@ -47,7 +47,7 @@ final class ServiceRegistrySpec extends ObjectBehavior
         $this->get('test')->shouldReturn($service);
     }
 
-    function it_registers_service_with_given_parent_class(\stdClass $service): void
+    public function it_registers_service_with_given_parent_class(\stdClass $service): void
     {
         $this->beConstructedWith(\stdClass::class);
         $this->has('test')->shouldReturn(false);
@@ -57,7 +57,7 @@ final class ServiceRegistrySpec extends ObjectBehavior
         $this->get('test')->shouldReturn($service);
     }
 
-    function it_throws_exception_when_trying_to_register_service_with_taken_interface(SampleServiceInterface $service): void
+    public function it_throws_exception_when_trying_to_register_service_with_taken_interface(SampleServiceInterface $service): void
     {
         $this->register('test', $service);
 
@@ -67,7 +67,7 @@ final class ServiceRegistrySpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_when_trying_to_register_service_with_taken_parent_class(\stdClass $service): void
+    public function it_throws_exception_when_trying_to_register_service_with_taken_parent_class(\stdClass $service): void
     {
         $this->beConstructedWith(\stdClass::class);
         $this->register('test', $service);
@@ -78,7 +78,7 @@ final class ServiceRegistrySpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_when_trying_to_register_service_without_required_interface(
+    public function it_throws_exception_when_trying_to_register_service_without_required_interface(
         \stdClass $service
     ): void {
         $this
@@ -87,7 +87,7 @@ final class ServiceRegistrySpec extends ObjectBehavior
         ;
     }
 
-    function it_unregisters_service_with_given_interface(SampleServiceInterface $service): void
+    public function it_unregisters_service_with_given_interface(SampleServiceInterface $service): void
     {
         $this->register('foo', $service);
         $this->has('foo')->shouldReturn(true);
@@ -96,7 +96,7 @@ final class ServiceRegistrySpec extends ObjectBehavior
         $this->has('foo')->shouldReturn(false);
     }
 
-    function it_unregisters_service_with_given_parent_class(\stdClass $service): void
+    public function it_unregisters_service_with_given_parent_class(\stdClass $service): void
     {
         $this->beConstructedWith(\stdClass::class);
         $this->register('foo', $service);
@@ -106,20 +106,20 @@ final class ServiceRegistrySpec extends ObjectBehavior
         $this->has('foo')->shouldReturn(false);
     }
 
-    function it_retrieves_registered_service_by_interface(SampleServiceInterface $service): void
+    public function it_retrieves_registered_service_by_interface(SampleServiceInterface $service): void
     {
         $this->register('test', $service);
         $this->get('test')->shouldReturn($service);
     }
 
-    function it_retrieves_registered_service_by_parent_class(\stdClass $service): void
+    public function it_retrieves_registered_service_by_parent_class(\stdClass $service): void
     {
         $this->beConstructedWith(\stdClass::class);
         $this->register('test', $service);
         $this->get('test')->shouldReturn($service);
     }
 
-    function it_throws_exception_if_trying_to_get_service_of_non_existing_type(): void
+    public function it_throws_exception_if_trying_to_get_service_of_non_existing_type(): void
     {
         $this
             ->shouldThrow(new NonExistingServiceException('service', 'foo', []))

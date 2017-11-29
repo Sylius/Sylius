@@ -26,17 +26,17 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class UserMailerListenerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $emailSender, ChannelContextInterface $channelContext): void
+    public function let(SenderInterface $emailSender, ChannelContextInterface $channelContext): void
     {
         $this->beConstructedWith($emailSender, $channelContext);
     }
 
-    function it_is_a_mailer_listener(): void
+    public function it_is_a_mailer_listener(): void
     {
         $this->shouldHaveType(MailerListener::class);
     }
 
-    function it_throws_an_exception_if_event_subject_is_not_a_customer_instance_sending_confirmation(
+    public function it_throws_an_exception_if_event_subject_is_not_a_customer_instance_sending_confirmation(
         GenericEvent $event,
         \stdClass $customer
     ): void {
@@ -45,7 +45,7 @@ final class UserMailerListenerSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('sendUserRegistrationEmail', [$event]);
     }
 
-    function it_does_not_send_the_email_confirmation_if_the_customer_user_is_null(
+    public function it_does_not_send_the_email_confirmation_if_the_customer_user_is_null(
         SenderInterface $emailSender,
         GenericEvent $event,
         CustomerInterface $customer
@@ -58,7 +58,7 @@ final class UserMailerListenerSpec extends ObjectBehavior
         $this->sendUserRegistrationEmail($event);
     }
 
-    function it_does_not_send_the_email_registration_if_the_customer_user_does_not_have_email(
+    public function it_does_not_send_the_email_registration_if_the_customer_user_does_not_have_email(
         SenderInterface $emailSender,
         GenericEvent $event,
         CustomerInterface $customer,
@@ -73,7 +73,7 @@ final class UserMailerListenerSpec extends ObjectBehavior
         $this->sendUserRegistrationEmail($event);
     }
 
-    function it_sends_an_email_registration_successfully(
+    public function it_sends_an_email_registration_successfully(
         SenderInterface $emailSender,
         ChannelContextInterface $channelContext,
         GenericEvent $event,

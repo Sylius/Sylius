@@ -19,12 +19,12 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 
 final class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
 {
-    function it_implements_adjustments_aggregator_interface(): void
+    public function it_implements_adjustments_aggregator_interface(): void
     {
         $this->shouldImplement(AdjustmentsAggregatorInterface::class);
     }
 
-    function it_aggregates_given_adjustments_array_by_description(
+    public function it_aggregates_given_adjustments_array_by_description(
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         AdjustmentInterface $adjustment3,
@@ -45,7 +45,7 @@ final class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
         ]);
     }
 
-    function it_throws_exception_if_any_array_element_is_not_adjustment(
+    public function it_throws_exception_if_any_array_element_is_not_adjustment(
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2
     ): void {

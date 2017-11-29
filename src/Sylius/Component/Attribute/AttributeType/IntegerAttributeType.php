@@ -62,7 +62,6 @@ final class IntegerAttributeType implements AttributeTypeInterface
     }
 
     /**
-     * @param ExecutionContextInterface $context
      * @param int|null $value
      *
      * @return ConstraintViolationListInterface

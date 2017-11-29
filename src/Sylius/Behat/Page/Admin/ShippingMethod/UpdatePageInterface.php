@@ -21,20 +21,20 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     /**
      * @return bool
      */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
     /**
      * @param string $channelName
      *
      * @return bool
      */
-    public function isAvailableInChannel($channelName);
+    public function isAvailableInChannel(string $channelName): bool;
 
-    public function enable();
+    public function enable(): void;
 
-    public function disable();
+    public function disable(): void;
 
-    public function removeZone();
+    public function removeZone(): void;
 
     /**
      * @param string $channelCode
@@ -43,5 +43,5 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      *
      * @throws ElementNotFoundException
      */
-    public function getValidationMessageForAmount($channelCode);
+    public function getValidationMessageForAmount(string $channelCode): string;
 }

@@ -42,12 +42,6 @@ final class ShopSecurityContext implements Context
      */
     private $userRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param SecurityServiceInterface $securityService
-     * @param ExampleFactoryInterface $userFactory
-     * @param UserRepositoryInterface $userRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
@@ -63,7 +57,7 @@ final class ShopSecurityContext implements Context
     /**
      * @Given I am logged in as :email
      */
-    public function iAmLoggedInAs($email)
+    public function iAmLoggedInAs($email): void
     {
         $user = $this->userRepository->findOneByEmail($email);
         Assert::notNull($user);
@@ -74,7 +68,7 @@ final class ShopSecurityContext implements Context
     /**
      * @Given I am a logged in customer
      */
-    public function iAmLoggedInCustomer()
+    public function iAmLoggedInCustomer(): void
     {
         $user = $this->userFactory->create(['email' => 'sylius@example.com', 'password' => 'sylius', 'enabled' => true]);
         $this->userRepository->add($user);

@@ -20,7 +20,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_denies_order_addressing_for_non_authenticated_user()
+    public function it_denies_order_addressing_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', '/api/v1/checkouts/addressing/1');
 
@@ -31,7 +31,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_address_unexisting_order()
+    public function it_does_not_allow_to_address_unexisting_order(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -44,7 +44,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_address_order_without_specifying_shipping_address()
+    public function it_does_not_allow_to_address_order_without_specifying_shipping_address(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -68,7 +68,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_address_order_with_the_same_shipping_and_billing_address()
+    public function it_allows_to_address_order_with_the_same_shipping_and_billing_address(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -101,7 +101,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_address_order_with_different_addresses_if_billing_address_is_not_defined()
+    public function it_does_not_allow_to_address_order_with_different_addresses_if_billing_address_is_not_defined(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -135,7 +135,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_address_order_with_different_shipping_and_billing_address()
+    public function it_allows_to_address_order_with_different_shipping_and_billing_address(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -181,7 +181,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_change_order_address_after_the_order_has_already_been_addressed()
+    public function it_allows_to_change_order_address_after_the_order_has_already_been_addressed(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -231,7 +231,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_change_order_address_after_selecting_shipping_method()
+    public function it_allows_to_change_order_address_after_selecting_shipping_method(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -283,7 +283,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_change_order_address_after_selecting_payment_method()
+    public function it_allows_to_change_order_address_after_selecting_payment_method(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -335,10 +335,8 @@ EOT;
 
     /**
      * @param mixed $cartId
-     *
-     * @return string
      */
-    private function getAddressingUrl($cartId)
+    private function getAddressingUrl($cartId): string
     {
         return sprintf('/api/v1/checkouts/addressing/%d', $cartId);
     }

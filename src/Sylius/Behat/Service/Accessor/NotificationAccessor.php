@@ -25,9 +25,6 @@ final class NotificationAccessor implements NotificationAccessorInterface
      */
     private $session;
 
-    /**
-     * @param Session $session
-     */
     public function __construct(Session $session)
     {
         $this->session = $session;
@@ -62,7 +59,7 @@ final class NotificationAccessor implements NotificationAccessorInterface
      *
      * @throws ElementNotFoundException
      */
-    private function getMessageElement()
+    private function getMessageElement(): NodeElement
     {
         $messageElement = $this->session->getPage()->find('css', '.sylius-flash-message');
 

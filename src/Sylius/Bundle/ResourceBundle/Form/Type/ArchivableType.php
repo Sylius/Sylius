@@ -29,7 +29,7 @@ final class ArchivableType extends AbstractType
     {
         $builder
             ->add('archivedAt', DateTimeType::class)
-            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
                 /** @var ArchivableInterface $archivable */
                 $archivable = $event->getData();
 

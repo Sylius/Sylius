@@ -21,17 +21,17 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 final class SuiteLoaderSpec extends ObjectBehavior
 {
-    function let(FixtureLoaderInterface $fixtureLoader): void
+    public function let(FixtureLoaderInterface $fixtureLoader): void
     {
         $this->beConstructedWith($fixtureLoader);
     }
 
-    function it_implements_suite_loader_interface(): void
+    public function it_implements_suite_loader_interface(): void
     {
         $this->shouldImplement(SuiteLoaderInterface::class);
     }
 
-    function it_loads_suite_fixtures(
+    public function it_loads_suite_fixtures(
         FixtureLoaderInterface $fixtureLoader,
         SuiteInterface $suite,
         FixtureInterface $firstFixture,

@@ -10,6 +10,7 @@
  */
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Sylius package.
  *
@@ -30,17 +31,17 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ResourceDeleteHandlerSpec extends ObjectBehavior
 {
-    function let(ResourceDeleteHandlerInterface $decoratedHandler): void
+    public function let(ResourceDeleteHandlerInterface $decoratedHandler): void
     {
         $this->beConstructedWith($decoratedHandler);
     }
 
-    function it_implements_resource_delete_handler_interface(): void
+    public function it_implements_resource_delete_handler_interface(): void
     {
         $this->shouldImplement(ResourceDeleteHandlerInterface::class);
     }
 
-    function it_uses_decorated_handler_to_handle_resource_deletion(
+    public function it_uses_decorated_handler_to_handle_resource_deletion(
         ResourceDeleteHandlerInterface $decoratedHandler,
         RepositoryInterface $repository,
         ResourceInterface $resource
@@ -50,7 +51,7 @@ final class ResourceDeleteHandlerSpec extends ObjectBehavior
         $this->handle($resource, $repository);
     }
 
-    function it_throws_delete_handling_exception_if_something_gone_wrong_with_orm_while_deleting_resource(
+    public function it_throws_delete_handling_exception_if_something_gone_wrong_with_orm_while_deleting_resource(
         ResourceDeleteHandlerInterface $decoratedHandler,
         RepositoryInterface $repository,
         ResourceInterface $resource

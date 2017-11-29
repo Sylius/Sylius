@@ -30,10 +30,6 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
      */
     private $routeCollection = [];
 
-    /**
-     * @param RouterInterface $router
-     * @param array $routeCollection
-     */
     public function __construct(RouterInterface $router, array $routeCollection)
     {
         $this->router = $router;

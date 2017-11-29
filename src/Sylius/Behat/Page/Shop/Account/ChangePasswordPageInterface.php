@@ -21,17 +21,17 @@ interface ChangePasswordPageInterface extends PageInterface
     /**
      * @param string $password
      */
-    public function specifyCurrentPassword($password);
+    public function specifyCurrentPassword(string $password): void;
 
     /**
      * @param string $password
      */
-    public function specifyNewPassword($password);
+    public function specifyNewPassword(string $password): void;
 
     /**
      * @param string $password
      */
-    public function specifyConfirmationPassword($password);
+    public function specifyConfirmationPassword(string $password): void;
 
     /**
      * @param string $element
@@ -41,5 +41,5 @@ interface ChangePasswordPageInterface extends PageInterface
      *
      * @throws ElementNotFoundException
      */
-    public function checkValidationMessageFor($element, $message);
+    public function checkValidationMessageFor(string $element, string $message): bool;
 }

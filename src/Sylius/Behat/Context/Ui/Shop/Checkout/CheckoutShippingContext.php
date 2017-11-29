@@ -36,11 +36,6 @@ final class CheckoutShippingContext implements Context
      */
     private $completePage;
 
-    /**
-     * @param SelectShippingPageInterface $selectShippingPage
-     * @param SelectPaymentPageInterface $selectPaymentPage
-     * @param CompletePageInterface $completePage
-     */
     public function __construct(
         SelectShippingPageInterface $selectShippingPage,
         SelectPaymentPageInterface $selectPaymentPage,
@@ -55,7 +50,7 @@ final class CheckoutShippingContext implements Context
      * @Given I have proceeded selecting :shippingMethodName shipping method
      * @When I proceed with :shippingMethodName shipping method
      */
-    public function iHaveProceededSelectingShippingMethod($shippingMethodName)
+    public function iHaveProceededSelectingShippingMethod($shippingMethodName): void
     {
         $this->iSelectShippingMethod($shippingMethodName);
         $this->selectShippingPage->nextStep();
@@ -65,7 +60,7 @@ final class CheckoutShippingContext implements Context
      * @Given I have selected :shippingMethod shipping method
      * @When I select :shippingMethod shipping method
      */
-    public function iSelectShippingMethod($shippingMethod)
+    public function iSelectShippingMethod($shippingMethod): void
     {
         $this->selectShippingPage->selectShippingMethod($shippingMethod);
     }
@@ -73,7 +68,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @When I try to open checkout shipping page
      */
-    public function iTryToOpenCheckoutShippingPage()
+    public function iTryToOpenCheckoutShippingPage(): void
     {
         $this->selectShippingPage->tryToOpen();
     }
@@ -81,7 +76,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @When /^I(?:| try to) complete the shipping step$/
      */
-    public function iCompleteTheShippingStep()
+    public function iCompleteTheShippingStep(): void
     {
         $this->selectShippingPage->nextStep();
     }
@@ -89,7 +84,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @When I decide to change my address
      */
-    public function iDecideToChangeMyAddress()
+    public function iDecideToChangeMyAddress(): void
     {
         $this->selectShippingPage->changeAddress();
     }
@@ -97,7 +92,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @When I go back to shipping step of the checkout
      */
-    public function iGoBackToShippingStepOfTheCheckout()
+    public function iGoBackToShippingStepOfTheCheckout(): void
     {
         $this->selectShippingPage->open();
     }
@@ -105,7 +100,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should not be able to select :shippingMethodName shipping method
      */
-    public function iShouldNotBeAbleToSelectShippingMethod($shippingMethodName)
+    public function iShouldNotBeAbleToSelectShippingMethod($shippingMethodName): void
     {
         Assert::false(in_array($shippingMethodName, $this->selectShippingPage->getShippingMethods(), true));
     }
@@ -113,7 +108,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should have :shippingMethodName shipping method available as the first choice
      */
-    public function iShouldHaveShippingMethodAvailableAsFirstChoice($shippingMethodName)
+    public function iShouldHaveShippingMethodAvailableAsFirstChoice($shippingMethodName): void
     {
         $shippingMethods = $this->selectShippingPage->getShippingMethods();
 
@@ -123,7 +118,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should have :shippingMethodName shipping method available as the last choice
      */
-    public function iShouldHaveShippingMethodAvailableAsLastChoice($shippingMethodName)
+    public function iShouldHaveShippingMethodAvailableAsLastChoice($shippingMethodName): void
     {
         $shippingMethods = $this->selectShippingPage->getShippingMethods();
 
@@ -134,7 +129,7 @@ final class CheckoutShippingContext implements Context
      * @Then I should be on the checkout shipping step
      * @Then I should be redirected to the shipping step
      */
-    public function iShouldBeOnTheCheckoutShippingStep()
+    public function iShouldBeOnTheCheckoutShippingStep(): void
     {
         $this->selectShippingPage->verify();
     }
@@ -142,7 +137,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should be informed that my order cannot be shipped to this address
      */
-    public function iShouldBeInformedThatMyOrderCannotBeShippedToThisAddress()
+    public function iShouldBeInformedThatMyOrderCannotBeShippedToThisAddress(): void
     {
         Assert::true($this->selectShippingPage->hasNoShippingMethodsMessage());
     }
@@ -150,7 +145,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should be able to go to the complete step again
      */
-    public function iShouldBeAbleToGoToTheCompleteStepAgain()
+    public function iShouldBeAbleToGoToTheCompleteStepAgain(): void
     {
         $this->selectShippingPage->nextStep();
 
@@ -160,7 +155,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should be able to go to the payment step again
      */
-    public function iShouldBeAbleToGoToThePaymentStepAgain()
+    public function iShouldBeAbleToGoToThePaymentStepAgain(): void
     {
         $this->selectShippingPage->nextStep();
 
@@ -170,7 +165,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should see shipping method :shippingMethodName with fee :fee
      */
-    public function iShouldSeeShippingFee($shippingMethodName, $fee)
+    public function iShouldSeeShippingFee($shippingMethodName, $fee): void
     {
         Assert::true($this->selectShippingPage->hasShippingMethodFee($shippingMethodName, $fee));
     }
@@ -178,7 +173,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then there should be information about no available shipping methods
      */
-    public function thereShouldBeInformationAboutNoShippingMethodsAvailableForMyShippingAddress()
+    public function thereShouldBeInformationAboutNoShippingMethodsAvailableForMyShippingAddress(): void
     {
         Assert::true($this->selectShippingPage->hasNoAvailableShippingMethodsWarning());
     }
@@ -186,7 +181,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should see :shippingMethodName shipping method
      */
-    public function iShouldSeeShippingMethod($shippingMethodName)
+    public function iShouldSeeShippingMethod($shippingMethodName): void
     {
         Assert::true($this->selectShippingPage->hasShippingMethod($shippingMethodName));
     }
@@ -194,7 +189,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should not see :shippingMethodName shipping method
      */
-    public function iShouldNotSeeShippingMethod($shippingMethodName)
+    public function iShouldNotSeeShippingMethod($shippingMethodName): void
     {
         Assert::false($this->selectShippingPage->hasShippingMethod($shippingMethodName));
     }
@@ -202,7 +197,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should be checking out as :email
      */
-    public function iShouldBeCheckingOutAs($email)
+    public function iShouldBeCheckingOutAs($email): void
     {
         Assert::same($this->selectShippingPage->getPurchaserEmail(), 'Checking out as ' . $email . '.');
     }

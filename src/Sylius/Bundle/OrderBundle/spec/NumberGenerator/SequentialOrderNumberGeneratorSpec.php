@@ -22,17 +22,17 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
 {
-    function let(EntityRepository $sequenceRepository, FactoryInterface $sequenceFactory): void
+    public function let(EntityRepository $sequenceRepository, FactoryInterface $sequenceFactory): void
     {
         $this->beConstructedWith($sequenceRepository, $sequenceFactory);
     }
 
-    function it_implements_an_order_number_generator_interface(): void
+    public function it_implements_an_order_number_generator_interface(): void
     {
         $this->shouldImplement(OrderNumberGeneratorInterface::class);
     }
 
-    function it_generates_an_order_number(
+    public function it_generates_an_order_number(
         EntityRepository $sequenceRepository,
         OrderSequenceInterface $sequence,
         OrderInterface $order
@@ -45,7 +45,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
         $this->generate($order)->shouldReturn('000000007');
     }
 
-    function it_generates_an_order_number_when_sequence_is_null(
+    public function it_generates_an_order_number_when_sequence_is_null(
         EntityRepository $sequenceRepository,
         FactoryInterface $sequenceFactory,
         OrderSequenceInterface $sequence,

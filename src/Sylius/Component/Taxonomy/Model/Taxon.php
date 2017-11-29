@@ -77,9 +77,6 @@ class Taxon implements TaxonInterface
         $this->children = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();
@@ -321,8 +318,6 @@ class Taxon implements TaxonInterface
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return TaxonTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

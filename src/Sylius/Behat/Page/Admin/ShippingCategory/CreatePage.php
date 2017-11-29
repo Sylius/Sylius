@@ -25,7 +25,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyDescription($description)
+    public function specifyDescription($description): void
     {
         $this->getElement('description')->setValue($description);
     }

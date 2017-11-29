@@ -79,7 +79,7 @@ final class ProductOptionValueCollectionType extends AbstractType
      *
      * @throws \InvalidArgumentException
      */
-    private function assertOptionsAreValid($options)
+    private function assertOptionsAreValid($options): void
     {
         Assert::false((
             !isset($options['options']) ||

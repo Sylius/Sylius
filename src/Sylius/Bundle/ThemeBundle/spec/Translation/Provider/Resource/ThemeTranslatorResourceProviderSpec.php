@@ -23,7 +23,7 @@ use Sylius\Bundle\ThemeBundle\Translation\Resource\ThemeTranslationResource;
 
 final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         TranslationFilesFinderInterface $translationFilesFinder,
         ThemeRepositoryInterface $themeRepository,
         ThemeHierarchyProviderInterface $themeHierarchyProvider
@@ -31,12 +31,12 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         $this->beConstructedWith($translationFilesFinder, $themeRepository, $themeHierarchyProvider);
     }
 
-    function it_implements_translator_resource_provider_interface(): void
+    public function it_implements_translator_resource_provider_interface(): void
     {
         $this->shouldImplement(TranslatorResourceProviderInterface::class);
     }
 
-    function it_returns_translation_files_found_in_given_paths(
+    public function it_returns_translation_files_found_in_given_paths(
         TranslationFilesFinderInterface $translationFilesFinder,
         ThemeRepositoryInterface $themeRepository,
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
@@ -55,7 +55,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_returns_inherited_themes_as_the_main_theme_resources(
+    public function it_returns_inherited_themes_as_the_main_theme_resources(
         TranslationFilesFinderInterface $translationFilesFinder,
         ThemeRepositoryInterface $themeRepository,
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
@@ -80,7 +80,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_doubles_resources_if_used_in_more_than_one_theme(
+    public function it_doubles_resources_if_used_in_more_than_one_theme(
         TranslationFilesFinderInterface $translationFilesFinder,
         ThemeRepositoryInterface $themeRepository,
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
@@ -107,7 +107,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_returns_resources_locales_while_using_just_one_theme(
+    public function it_returns_resources_locales_while_using_just_one_theme(
         TranslationFilesFinderInterface $translationFilesFinder,
         ThemeRepositoryInterface $themeRepository,
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
@@ -124,7 +124,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         $this->getResourcesLocales()->shouldReturn(['en@theme-name']);
     }
 
-    function it_returns_resources_locales_while_using_one_nested_theme(
+    public function it_returns_resources_locales_while_using_one_nested_theme(
         TranslationFilesFinderInterface $translationFilesFinder,
         ThemeRepositoryInterface $themeRepository,
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
@@ -146,7 +146,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         $this->getResourcesLocales()->shouldReturn(['en@main-theme-name']);
     }
 
-    function it_returns_resources_locales_while_using_more_than_one_theme(
+    public function it_returns_resources_locales_while_using_more_than_one_theme(
         TranslationFilesFinderInterface $translationFilesFinder,
         ThemeRepositoryInterface $themeRepository,
         ThemeHierarchyProviderInterface $themeHierarchyProvider,

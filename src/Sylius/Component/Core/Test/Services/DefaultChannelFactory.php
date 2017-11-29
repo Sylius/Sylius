@@ -61,15 +61,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
      */
     private $defaultLocaleCode;
 
-    /**
-     * @param ChannelFactoryInterface $channelFactory
-     * @param FactoryInterface $currencyFactory
-     * @param FactoryInterface $localeFactory
-     * @param RepositoryInterface $channelRepository
-     * @param RepositoryInterface $currencyRepository
-     * @param RepositoryInterface $localeRepository
-     * @param string $defaultLocaleCode
-     */
     public function __construct(
         ChannelFactoryInterface $channelFactory,
         FactoryInterface $currencyFactory,

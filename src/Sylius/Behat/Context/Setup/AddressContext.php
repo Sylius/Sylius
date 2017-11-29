@@ -33,10 +33,6 @@ final class AddressContext implements Context
      */
     private $customerManager;
 
-    /**
-     * @param AddressRepositoryInterface $addressRepository
-     * @param ObjectManager $customerManager
-     */
     public function __construct(AddressRepositoryInterface $addressRepository, ObjectManager $customerManager)
     {
         $this->addressRepository = $addressRepository;
@@ -47,7 +43,7 @@ final class AddressContext implements Context
      * @Given /^(their) default (address is "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      * @Given /^(their) default (address is "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+")$/
      */
-    public function theirDefaultAddressIs(CustomerInterface $customer, AddressInterface $address)
+    public function theirDefaultAddressIs(CustomerInterface $customer, AddressInterface $address): void
     {
         $this->setDefaultAddressOfCustomer($customer, $address);
     }
@@ -55,7 +51,7 @@ final class AddressContext implements Context
     /**
      * @Given /^(my) default address is of "([^"]+)"$/
      */
-    public function myDefaultAddressIsOf(ShopUserInterface $user, $fullName)
+    public function myDefaultAddressIsOf(ShopUserInterface $user, $fullName): void
     {
         [$firstName, $lastName] = explode(' ', $fullName);
 
@@ -72,7 +68,7 @@ final class AddressContext implements Context
     /**
      * @Given /^(I) have an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) in my address book$/
      */
-    public function iHaveAnAddressInAddressBook(ShopUserInterface $user, AddressInterface $address)
+    public function iHaveAnAddressInAddressBook(ShopUserInterface $user, AddressInterface $address): void
     {
         /** @var CustomerInterface $customer */
         $customer = $user->getCustomer();
@@ -84,27 +80,19 @@ final class AddressContext implements Context
      * @Given /^(this customer) has an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) in their address book$/
      * @Given /^(this customer) has an? ("[^"]+" based address) in their address book$/
      */
-    public function thisCustomerHasAnAddressInAddressBook(CustomerInterface $customer, AddressInterface $address)
+    public function thisCustomerHasAnAddressInAddressBook(CustomerInterface $customer, AddressInterface $address): void
     {
         $this->addAddressToCustomer($customer, $address);
     }
 
-    /**
-     * @param CustomerInterface $customer
-     * @param AddressInterface $address
-     */
-    private function addAddressToCustomer(CustomerInterface $customer, AddressInterface $address)
+    private function addAddressToCustomer(CustomerInterface $customer, AddressInterface $address): void
     {
         $customer->addAddress($address);
 
         $this->customerManager->flush();
     }
 
-    /**
-     * @param CustomerInterface $customer
-     * @param AddressInterface $address
-     */
-    private function setDefaultAddressOfCustomer(CustomerInterface $customer, AddressInterface $address)
+    private function setDefaultAddressOfCustomer(CustomerInterface $customer, AddressInterface $address): void
     {
         $customer->setDefaultAddress($address);
 

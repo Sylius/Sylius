@@ -18,22 +18,22 @@ use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInte
 
 final class ImmutableTranslationLocaleProviderSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith(['pl_PL', 'en_US'], 'pl_PL');
     }
 
-    function it_implements_translation_locale_provider_interface(): void
+    public function it_implements_translation_locale_provider_interface(): void
     {
         $this->shouldImplement(TranslationLocaleProviderInterface::class);
     }
 
-    function it_returns_defined_locales_codes(): void
+    public function it_returns_defined_locales_codes(): void
     {
         $this->getDefinedLocalesCodes()->shouldReturn(['pl_PL', 'en_US']);
     }
 
-    function it_returns_the_default_locale_code(): void
+    public function it_returns_the_default_locale_code(): void
     {
         $this->getDefaultLocaleCode()->shouldReturn('pl_PL');
     }

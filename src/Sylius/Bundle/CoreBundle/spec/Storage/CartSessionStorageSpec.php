@@ -22,17 +22,17 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class CartSessionStorageSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session, OrderRepositoryInterface $orderRepository): void
+    public function let(SessionInterface $session, OrderRepositoryInterface $orderRepository): void
     {
         $this->beConstructedWith($session, 'session_key_name', $orderRepository);
     }
 
-    function it_implements_a_cart_storage_interface(): void
+    public function it_implements_a_cart_storage_interface(): void
     {
         $this->shouldImplement(CartStorageInterface::class);
     }
 
-    function it_sets_a_cart_in_a_session(SessionInterface $session, ChannelInterface $channel, OrderInterface $cart): void
+    public function it_sets_a_cart_in_a_session(SessionInterface $session, ChannelInterface $channel, OrderInterface $cart): void
     {
         $channel->getCode()->willReturn('channel_code');
         $cart->getId()->willReturn(14);
@@ -42,7 +42,7 @@ final class CartSessionStorageSpec extends ObjectBehavior
         $this->setForChannel($channel, $cart);
     }
 
-    function it_returns_a_cart_from_a_session(
+    public function it_returns_a_cart_from_a_session(
         SessionInterface $session,
         OrderRepositoryInterface $orderRepository,
         ChannelInterface $channel,
@@ -58,7 +58,7 @@ final class CartSessionStorageSpec extends ObjectBehavior
         $this->getForChannel($channel)->shouldReturn($cart);
     }
 
-    function it_removes_a_cart_from_a_session(SessionInterface $session, ChannelInterface $channel): void
+    public function it_removes_a_cart_from_a_session(SessionInterface $session, ChannelInterface $channel): void
     {
         $channel->getCode()->willReturn('channel_code');
 

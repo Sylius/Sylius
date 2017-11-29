@@ -23,17 +23,17 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 final class HookableFixtureLoaderSpec extends ObjectBehavior
 {
-    function let(FixtureLoaderInterface $decoratedFixtureLoader): void
+    public function let(FixtureLoaderInterface $decoratedFixtureLoader): void
     {
         $this->beConstructedWith($decoratedFixtureLoader);
     }
 
-    function it_implements_fixture_loader_interface(): void
+    public function it_implements_fixture_loader_interface(): void
     {
         $this->shouldImplement(FixtureLoaderInterface::class);
     }
 
-    function it_delegates_fixture_loading_to_the_base_loader(
+    public function it_delegates_fixture_loading_to_the_base_loader(
         FixtureLoaderInterface $decoratedFixtureLoader,
         SuiteInterface $suite,
         FixtureInterface $fixture
@@ -45,7 +45,7 @@ final class HookableFixtureLoaderSpec extends ObjectBehavior
         $this->load($suite, $fixture, ['fixture_option' => 'fixture_value']);
     }
 
-    function it_executes_before_fixture_listeners(
+    public function it_executes_before_fixture_listeners(
         FixtureLoaderInterface $decoratedFixtureLoader,
         SuiteInterface $suite,
         FixtureInterface $fixture,
@@ -62,7 +62,7 @@ final class HookableFixtureLoaderSpec extends ObjectBehavior
         $this->load($suite, $fixture, ['fixture_option' => 'fixture_value']);
     }
 
-    function it_executes_after_fixture_listeners(
+    public function it_executes_after_fixture_listeners(
         FixtureLoaderInterface $decoratedFixtureLoader,
         SuiteInterface $suite,
         FixtureInterface $fixture,
@@ -79,7 +79,7 @@ final class HookableFixtureLoaderSpec extends ObjectBehavior
         $this->load($suite, $fixture, ['fixture_option' => 'fixture_value']);
     }
 
-    function it_executes_customized_fixture_listeners(
+    public function it_executes_customized_fixture_listeners(
         FixtureLoaderInterface $decoratedFixtureLoader,
         SuiteInterface $suite,
         FixtureInterface $fixture,

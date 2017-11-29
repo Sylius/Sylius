@@ -20,10 +20,10 @@ interface NotificationAccessorInterface
     /**
      * @return string
      */
-    public function getMessage();
+    public function getMessage(): string;
 
     /**
      * @return NotificationType
      */
-    public function getType();
+    public function getType(): NotificationType;
 }

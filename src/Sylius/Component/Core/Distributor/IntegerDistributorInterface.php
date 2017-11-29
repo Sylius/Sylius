@@ -16,7 +16,6 @@ namespace Sylius\Component\Core\Distributor;
 interface IntegerDistributorInterface
 {
     /**
-     * @param float $amount
      * @param int $numberOfTargets
      *
      * @return array

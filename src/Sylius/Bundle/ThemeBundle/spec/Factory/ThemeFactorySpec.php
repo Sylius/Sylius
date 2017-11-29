@@ -19,12 +19,12 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 final class ThemeFactorySpec extends ObjectBehavior
 {
-    function it_implements_theme_factory_interface(): void
+    public function it_implements_theme_factory_interface(): void
     {
         $this->shouldImplement(ThemeFactoryInterface::class);
     }
 
-    function it_creates_a_theme(): void
+    public function it_creates_a_theme(): void
     {
         $this->create('example/theme', '/theme/path')->shouldHaveNameAndPath('example/theme', '/theme/path');
     }

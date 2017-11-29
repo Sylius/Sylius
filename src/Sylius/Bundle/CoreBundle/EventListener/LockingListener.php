@@ -26,17 +26,11 @@ final class LockingListener
      */
     private $manager;
 
-    /**
-     * @param EntityManagerInterface $manager
-     */
     public function __construct(EntityManagerInterface $manager)
     {
         $this->manager = $manager;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function lock(GenericEvent $event): void
     {
         $subject = $event->getSubject();

@@ -31,10 +31,6 @@ class PaypalApiMocker
      */
     private $responseLoader;
 
-    /**
-     * @param MockerInterface $mocker
-     * @param ResponseLoaderInterface $responseLoader
-     */
     public function __construct(MockerInterface $mocker, ResponseLoaderInterface $responseLoader)
     {
         $this->mocker = $mocker;
@@ -44,7 +40,7 @@ class PaypalApiMocker
     /**
      * @param callable $action
      */
-    public function performActionInApiInitializeScope(callable $action)
+    public function performActionInApiInitializeScope(callable $action): void
     {
         $this->mockApiPaymentInitializeResponse();
         $action();
@@ -54,14 +50,14 @@ class PaypalApiMocker
     /**
      * @param callable $action
      */
-    public function performActionInApiSuccessfulScope(callable $action)
+    public function performActionInApiSuccessfulScope(callable $action): void
     {
         $this->mockApiSuccessfulPaymentResponse();
         $action();
         $this->mocker->unmockAll();
     }
 
-    private function mockApiSuccessfulPaymentResponse()
+    private function mockApiSuccessfulPaymentResponse(): void
     {
         $mockedResponse = $this->responseLoader->getMockedResponse('Paypal/paypal_api_successful_payment.json');
         $firstGetExpressCheckoutDetailsStream = $this->mockStream($mockedResponse['firstGetExpressCheckoutDetails']);
@@ -83,7 +79,7 @@ class PaypalApiMocker
         ;
     }
 
-    private function mockApiPaymentInitializeResponse()
+    private function mockApiPaymentInitializeResponse(): void
     {
         $mockedResponse = $this->responseLoader->getMockedResponse('Paypal/paypal_api_initialize_payment.json');
         $setExpressCheckoutStream = $this->mockStream($mockedResponse['setExpressCheckout']);
@@ -100,11 +96,9 @@ class PaypalApiMocker
     }
 
     /**
-     * @param string $content
-     *
      * @return Mock
      */
-    private function mockStream($content)
+    private function mockStream(string $content): Mock
     {
         $mockedStream = $this->mocker->mockCollaborator(StreamInterface::class);
         $mockedStream->shouldReceive('getContents')->once()->andReturn($content);
@@ -114,12 +108,11 @@ class PaypalApiMocker
     }
 
     /**
-     * @param int $statusCode
      * @param mixed $streamMock
      *
      * @return Mock
      */
-    private function mockHttpResponse($statusCode, $streamMock)
+    private function mockHttpResponse(int $statusCode, $streamMock): Mock
     {
         $mockedHttpResponse = $this->mocker->mockCollaborator(ResponseInterface::class);
         $mockedHttpResponse->shouldReceive('getStatusCode')->once()->andReturn($statusCode);

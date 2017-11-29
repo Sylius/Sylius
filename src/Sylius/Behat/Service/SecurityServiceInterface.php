@@ -24,19 +24,19 @@ interface SecurityServiceInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function logIn(UserInterface $user);
+    public function logIn(UserInterface $user): void;
 
-    public function logOut();
+    public function logOut(): void;
 
     /**
      * @return TokenInterface
      *
      * @throws TokenNotFoundException
      */
-    public function getCurrentToken();
+    public function getCurrentToken(): TokenInterface;
 
     /**
      * @param TokenInterface $token
      */
-    public function restoreToken(TokenInterface $token);
+    public function restoreToken(TokenInterface $token): void;
 }

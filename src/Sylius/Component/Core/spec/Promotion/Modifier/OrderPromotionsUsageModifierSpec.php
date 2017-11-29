@@ -22,12 +22,12 @@ use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterfa
 
 final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
 {
-    function it_implements_an_order_promotions_usage_modifier_interface(): void
+    public function it_implements_an_order_promotions_usage_modifier_interface(): void
     {
         $this->shouldImplement(OrderPromotionsUsageModifierInterface::class);
     }
 
-    function it_increments_a_usage_of_promotions_applied_on_order(
+    public function it_increments_a_usage_of_promotions_applied_on_order(
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion
@@ -43,7 +43,7 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         $this->increment($order);
     }
 
-    function it_decrements_a_usage_of_promotions_applied_on_order(
+    public function it_decrements_a_usage_of_promotions_applied_on_order(
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion
@@ -59,7 +59,7 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         $this->decrement($order);
     }
 
-    function it_increments_a_usage_of_promotions_and_promotion_coupon_applied_on_order(
+    public function it_increments_a_usage_of_promotions_and_promotion_coupon_applied_on_order(
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion,
@@ -78,7 +78,7 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         $this->increment($order);
     }
 
-    function it_decrements_a_usage_of_promotions_and_promotion_coupon_applied_on_order(
+    public function it_decrements_a_usage_of_promotions_and_promotion_coupon_applied_on_order(
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion,

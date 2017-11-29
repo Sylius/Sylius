@@ -22,7 +22,6 @@ interface PrioritizedServiceRegistryInterface
 
     /**
      * @param object $service
-     * @param int $priority
      *
      * @throws ExistingServiceException
      * @throws \InvalidArgumentException
@@ -38,8 +37,6 @@ interface PrioritizedServiceRegistryInterface
 
     /**
      * @param object $service
-     *
-     * @return bool
      */
     public function has($service): bool;
 }

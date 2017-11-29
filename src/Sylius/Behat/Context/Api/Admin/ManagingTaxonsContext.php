@@ -32,10 +32,6 @@ final class ManagingTaxonsContext implements Context
      */
     private $session;
 
-    /**
-     * @param Client $client
-     * @param SessionInterface $session
-     */
     public function __construct(Client $client, SessionInterface $session)
     {
         $this->client = $client;
@@ -45,7 +41,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I look for a taxon with :phrase in name
      */
-    public function iTypeIn($phrase)
+    public function iTypeIn($phrase): void
     {
         $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
         $this->client->request('GET', '/admin/ajax/taxons/search', ['phrase' => $phrase], [], ['ACCEPT' => 'application/json']);
@@ -54,7 +50,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I want to get taxon with :code code
      */
-    public function iWantToGetTaxonWithCode($code)
+    public function iWantToGetTaxonWithCode($code): void
     {
         $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
         $this->client->request('GET', '/admin/ajax/taxons/leaf', ['code' => $code], [], ['ACCEPT' => 'application/json']);
@@ -63,7 +59,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When /^I want to get children from (taxon "[^"]+")/
      */
-    public function iWantToGetChildrenFromTaxon(TaxonInterface $taxon)
+    public function iWantToGetChildrenFromTaxon(TaxonInterface $taxon): void
     {
         $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
         $this->client->request('GET', '/admin/ajax/taxons/leafs', ['parentCode' => $taxon->getCode()], [], ['ACCEPT' => 'application/json']);
@@ -72,7 +68,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I want to get taxon root
      */
-    public function iWantToGetTaxonRoot()
+    public function iWantToGetTaxonRoot(): void
     {
         $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
         $this->client->request('GET', '/admin/ajax/taxons/root-nodes', [], [], ['ACCEPT' => 'application/json']);
@@ -81,7 +77,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then /^I should see (\d+) taxons on the list$/
      */
-    public function iShouldSeeTaxonsInTheList($number)
+    public function iShouldSeeTaxonsInTheList($number): void
     {
         $response = json_decode($this->client->getResponse()->getContent(), true);
 
@@ -94,7 +90,7 @@ final class ManagingTaxonsContext implements Context
      * @Then I should see the taxon named :firstName, :secondName and :thirdName in the list
      * @Then I should see the taxon named :firstName, :secondName, :thirdName and :fourthName in the list
      */
-    public function iShouldSeeTheTaxonNamedAnd(...$expectedTaxonNames)
+    public function iShouldSeeTheTaxonNamedAnd(...$expectedTaxonNames): void
     {
         $response = json_decode($this->client->getResponse()->getContent(), true);
         $taxonNames = array_map(function ($item) {

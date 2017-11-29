@@ -24,18 +24,18 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $context, ProductVariantsParityCheckerInterface $variantsParityChecker): void
+    public function let(ExecutionContextInterface $context, ProductVariantsParityCheckerInterface $variantsParityChecker): void
     {
         $this->beConstructedWith($variantsParityChecker);
         $this->initialize($context);
     }
 
-    function it_is_a_constraint_validator(): void
+    public function it_is_a_constraint_validator(): void
     {
         $this->shouldImplement(ConstraintValidator::class);
     }
 
-    function it_does_not_add_violation_if_product_does_not_have_options(
+    public function it_does_not_add_violation_if_product_does_not_have_options(
         ExecutionContextInterface $context,
         ProductInterface $product,
         ProductVariantInterface $variant,
@@ -57,7 +57,7 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         $this->validate($variant, $constraint);
     }
 
-    function it_does_not_add_violation_if_product_does_not_have_variants(
+    public function it_does_not_add_violation_if_product_does_not_have_variants(
         ExecutionContextInterface $context,
         ProductInterface $product,
         ProductVariantInterface $variant,
@@ -79,7 +79,7 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         $this->validate($variant, $constraint);
     }
 
-    function it_adds_violation_if_variant_with_given_same_options_already_exists(
+    public function it_adds_violation_if_variant_with_given_same_options_already_exists(
         ExecutionContextInterface $context,
         ProductInterface $product,
         ProductVariantInterface $variant,

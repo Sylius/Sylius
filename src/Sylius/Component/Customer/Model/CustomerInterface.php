@@ -34,8 +34,6 @@ interface CustomerInterface extends TimestampableInterface, ResourceInterface
 
     /**
      * Gets normalized email (should be used in search and sort queries).
-     *
-     * @return string|null
      */
     public function getEmailCanonical(): ?string;
 
@@ -86,8 +84,6 @@ interface CustomerInterface extends TimestampableInterface, ResourceInterface
 
     /**
      * You should use interface constants for that.
-     *
-     * @param string $gender
      */
     public function setGender(string $gender): void;
 

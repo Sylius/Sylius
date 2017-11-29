@@ -23,17 +23,17 @@ use Symfony\Component\Form\FormEvent;
 
 final class AddUserFormSubscriberSpec extends ObjectBehavior
 {
-    function let(): void
+    public function let(): void
     {
         $this->beConstructedWith('\Fully\Qualified\ClassName');
     }
 
-    function it_is_event_subscriber_instance(): void
+    public function it_is_event_subscriber_instance(): void
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_adds_user_form_type_and_create_user_check(
+    public function it_adds_user_form_type_and_create_user_check(
         FormEvent $event,
         Form $form
     ): void {
@@ -44,7 +44,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_removes_user_form_type_by_default(
+    public function it_removes_user_form_type_by_default(
         FormEvent $event,
         Form $form,
         UserAwareInterface $customer
@@ -61,7 +61,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_does_not_remove_user_form_type_if_users_data_is_submitted_and_user_data_is_created(
+    public function it_does_not_remove_user_form_type_if_users_data_is_submitted_and_user_data_is_created(
         FormEvent $event,
         Form $form,
         UserAwareInterface $customer,
@@ -77,7 +77,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_remove_user_form_type_if_users_data_is_not_submitted_and_user_is_not_created(
+    public function it_remove_user_form_type_if_users_data_is_not_submitted_and_user_is_not_created(
         FormEvent $event,
         Form $form,
         UserAwareInterface $customer
@@ -93,7 +93,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_does_not_remove_user_form_type_if_users_data_is_submitted_and_user_is_not_created(
+    public function it_does_not_remove_user_form_type_if_users_data_is_submitted_and_user_is_not_created(
         FormEvent $event,
         Form $form,
         UserAwareInterface $customer
@@ -108,7 +108,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_does_not_remove_user_form_type_if_users_data_is_not_submitted_and_user_is_created(
+    public function it_does_not_remove_user_form_type_if_users_data_is_not_submitted_and_user_is_created(
         FormEvent $event,
         Form $form,
         UserAwareInterface $customer,
@@ -124,7 +124,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_throws_invalid_argument_exception_when_forms_normalized_data_does_not_implement_user_aware_interface(
+    public function it_throws_invalid_argument_exception_when_forms_normalized_data_does_not_implement_user_aware_interface(
         FormEvent $event,
         Form $form,
         UserInterface $user

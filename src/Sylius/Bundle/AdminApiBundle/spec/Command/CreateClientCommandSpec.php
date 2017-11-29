@@ -24,12 +24,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class CreateClientCommandSpec extends ObjectBehavior
 {
-    public function it_is_a_container_aware_command()
+    public function it_is_a_container_aware_command(): void
     {
         $this->shouldHaveType(ContainerAwareCommand::class);
     }
 
-    public function it_has_a_name()
+    public function it_has_a_name(): void
     {
         $this->getName()->shouldReturn('sylius:oauth-server:create-client');
     }
@@ -40,7 +40,7 @@ final class CreateClientCommandSpec extends ObjectBehavior
         OutputInterface $output,
         ClientManager $clientManager,
         Client $client
-    ) {
+    ): void {
         $input->bind(Argument::any())->shouldBeCalled();
         $input->isInteractive()->shouldBeCalled();
         $input->validate()->shouldBeCalled();

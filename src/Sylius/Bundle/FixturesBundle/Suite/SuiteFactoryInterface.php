@@ -16,10 +16,7 @@ namespace Sylius\Bundle\FixturesBundle\Suite;
 interface SuiteFactoryInterface
 {
     /**
-     * @param string $name
      * @param array $configuration
-     *
-     * @return SuiteInterface
      */
     public function createSuite(string $name, array $configuration): SuiteInterface;
 }

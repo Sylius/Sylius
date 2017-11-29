@@ -20,12 +20,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class FakeChannelCodeProviderSpec extends ObjectBehavior
 {
-    function it_implements_a_channel_code_provider_interface(): void
+    public function it_implements_a_channel_code_provider_interface(): void
     {
         $this->shouldImplement(FakeChannelCodeProviderInterface::class);
     }
 
-    function it_returns_fake_channel_code_from_query_string(Request $request, ParameterBag $queryBag): void
+    public function it_returns_fake_channel_code_from_query_string(Request $request, ParameterBag $queryBag): void
     {
         $queryBag->get('_channel_code')->willReturn('channel_code_form_get');
         $request->query = $queryBag;
@@ -33,7 +33,7 @@ final class FakeChannelCodeProviderSpec extends ObjectBehavior
         $this->getCode($request)->shouldReturn('channel_code_form_get');
     }
 
-    function it_returns_fake_channel_code_from_cookie_if_there_is_none_in_query_string(
+    public function it_returns_fake_channel_code_from_cookie_if_there_is_none_in_query_string(
         Request $request,
         ParameterBag $queryBag,
         ParameterBag $cookiesBag
@@ -47,7 +47,7 @@ final class FakeChannelCodeProviderSpec extends ObjectBehavior
         $this->getCode($request)->shouldReturn('channel_code_form_cookie');
     }
 
-    function it_returns_null_channel_code_if_no_fake_channel_code_was_found(
+    public function it_returns_null_channel_code_if_no_fake_channel_code_was_found(
         Request $request,
         ParameterBag $queryBag,
         ParameterBag $cookiesBag

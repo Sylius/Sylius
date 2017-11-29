@@ -18,13 +18,13 @@ use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 final class ProductAssociationTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let(): void
     {
         $this->setCurrentLocale('en_US');
         $this->setFallbackLocale('en_US');
     }
 
-    function it_implements_association_type_interface(): void
+    public function it_implements_association_type_interface(): void
     {
         $this->shouldImplement(ProductAssociationTypeInterface::class);
     }

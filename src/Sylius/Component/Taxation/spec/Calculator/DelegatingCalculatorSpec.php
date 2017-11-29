@@ -20,19 +20,19 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 final class DelegatingCalculatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $calculators, CalculatorInterface $calculator): void
+    public function let(ServiceRegistryInterface $calculators, CalculatorInterface $calculator): void
     {
         $calculators->get('default')->willReturn($calculator);
 
         $this->beConstructedWith($calculators);
     }
 
-    function it_is_a_calculator(): void
+    public function it_is_a_calculator(): void
     {
         $this->shouldImplement(CalculatorInterface::class);
     }
 
-    function it_should_delegate_calculation_to_a_correct_calculator(
+    public function it_should_delegate_calculation_to_a_correct_calculator(
         CalculatorInterface $calculator,
         TaxRateInterface $rate
     ): void {

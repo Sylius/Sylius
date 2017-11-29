@@ -24,17 +24,17 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 final class ProductTaxonToTaxonTransformerSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $productTaxonFactory, RepositoryInterface $productTaxonRepository, ProductInterface $product): void
+    public function let(FactoryInterface $productTaxonFactory, RepositoryInterface $productTaxonRepository, ProductInterface $product): void
     {
         $this->beConstructedWith($productTaxonFactory, $productTaxonRepository, $product);
     }
 
-    function it_implements_data_transformer_interface(): void
+    public function it_implements_data_transformer_interface(): void
     {
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
-    function it_transforms_product_taxon_to_taxon(
+    public function it_transforms_product_taxon_to_taxon(
         ProductTaxonInterface $productTaxon,
         TaxonInterface $taxon
     ): void {
@@ -43,12 +43,12 @@ final class ProductTaxonToTaxonTransformerSpec extends ObjectBehavior
         $this->transform($productTaxon)->shouldReturn($taxon);
     }
 
-    function it_returns_null_during_transform(): void
+    public function it_returns_null_during_transform(): void
     {
         $this->transform(null)->shouldReturn(null);
     }
 
-    function it_transforms_taxon_to_new_product_taxon(
+    public function it_transforms_taxon_to_new_product_taxon(
         FactoryInterface $productTaxonFactory,
         RepositoryInterface $productTaxonRepository,
         ProductInterface $product,
@@ -63,7 +63,7 @@ final class ProductTaxonToTaxonTransformerSpec extends ObjectBehavior
         $this->reverseTransform($taxon)->shouldReturn($productTaxon);
     }
 
-    function it_transforms_taxon_to_existing_product_taxon(
+    public function it_transforms_taxon_to_existing_product_taxon(
         RepositoryInterface $productTaxonRepository,
         ProductTaxonInterface $productTaxon,
         ProductInterface $product,
@@ -74,12 +74,12 @@ final class ProductTaxonToTaxonTransformerSpec extends ObjectBehavior
         $this->reverseTransform($taxon)->shouldReturn($productTaxon);
     }
 
-    function it_returns_null_during_reverse_transform(): void
+    public function it_returns_null_during_reverse_transform(): void
     {
         $this->reverseTransform(null)->shouldReturn(null);
     }
 
-    function it_throws_transformation_failed_exception_during_transforms(): void
+    public function it_throws_transformation_failed_exception_during_transforms(): void
     {
         $this->shouldThrow(TransformationFailedException::class)->during('transform', [new \stdClass()]);
         $this->shouldThrow(TransformationFailedException::class)->during('reverseTransform', [new \stdClass()]);

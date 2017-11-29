@@ -20,12 +20,12 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 final class OrderAdjustmentsClearerSpec extends ObjectBehavior
 {
-    function it_is_an_order_processor(): void
+    public function it_is_an_order_processor(): void
     {
         $this->shouldImplement(OrderProcessorInterface::class);
     }
 
-    function it_removes_adjustments_from_order_recursively(OrderInterface $order): void
+    public function it_removes_adjustments_from_order_recursively(OrderInterface $order): void
     {
         $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();

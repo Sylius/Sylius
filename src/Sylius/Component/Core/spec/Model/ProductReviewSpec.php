@@ -18,7 +18,7 @@ use Sylius\Component\Review\Model\Review;
 
 final class ProductReviewSpec extends ObjectBehavior
 {
-    function it_extends_a_review(): void
+    public function it_extends_a_review(): void
     {
         $this->shouldHaveType(Review::class);
     }

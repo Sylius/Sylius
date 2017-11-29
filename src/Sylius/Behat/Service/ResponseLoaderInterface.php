@@ -20,12 +20,12 @@ interface ResponseLoaderInterface
      *
      * @return array
      */
-    public function getMockedResponse($source);
+    public function getMockedResponse(string $source): array;
 
     /**
      * @param string $source
      *
      * @return array
      */
-    public function getExpectedResponse($source);
+    public function getExpectedResponse(string $source): array;
 }

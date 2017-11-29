@@ -26,9 +26,6 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
      */
     private $productVariantPriceCalculator;
 
-    /**
-     * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
-     */
     public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
     {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
@@ -49,12 +46,6 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
         return $variantsPrices;
     }
 
-    /**
-     * @param ProductVariantInterface $variant
-     * @param ChannelInterface $channel
-     *
-     * @return array
-     */
     private function constructOptionsMap(ProductVariantInterface $variant, ChannelInterface $channel): array
     {
         $optionMap = [];

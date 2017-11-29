@@ -19,28 +19,19 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 
 final class ODMRepositoryClassSubscriber extends AbstractDoctrineSubscriber
 {
-    /**
-     * @return array
-     */
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             Events::loadClassMetadata,
         ];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArgs
-     */
-    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
         $this->setCustomRepositoryClass($eventArgs->getClassMetadata());
     }
 
-    /**
-     * @param ClassMetadata $metadata
-     */
-    private function setCustomRepositoryClass(ClassMetadata $metadata)
+    private function setCustomRepositoryClass(ClassMetadata $metadata): void
     {
         try {
             $resourceMetadata = $this->resourceRegistry->getByClass($metadata->getName());

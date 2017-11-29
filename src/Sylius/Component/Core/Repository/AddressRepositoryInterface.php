@@ -20,8 +20,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface AddressRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param CustomerInterface $customer
-     *
      * @return array|AddressInterface[]
      */
     public function findByCustomer(CustomerInterface $customer): array;

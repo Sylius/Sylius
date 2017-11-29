@@ -47,7 +47,6 @@ interface RegistryInterface
     public function add(MetadataInterface $metadata): void;
 
     /**
-     * @param string $alias
      * @param array $configuration
      */
     public function addFromAliasAndConfiguration(string $alias, array $configuration): void;

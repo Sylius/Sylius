@@ -21,17 +21,17 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 final class ProductsToCodesTransformerSpec extends ObjectBehavior
 {
-    function let(ProductRepositoryInterface $productRepository): void
+    public function let(ProductRepositoryInterface $productRepository): void
     {
         $this->beConstructedWith($productRepository);
     }
 
-    function it_implements_data_transformer_interface(): void
+    public function it_implements_data_transformer_interface(): void
     {
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
-    function it_transforms_array_of_products_codes_to_products_collection(
+    public function it_transforms_array_of_products_codes_to_products_collection(
         ProductRepositoryInterface $productRepository,
         ProductInterface $bow,
         ProductInterface $sword
@@ -41,7 +41,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
         $this->transform(['bow', 'sword'])->shouldIterateAs([$bow, $sword]);
     }
 
-    function it_transforms_only_existing_products(
+    public function it_transforms_only_existing_products(
         ProductRepositoryInterface $productRepository,
         ProductInterface $bow
     ): void {
@@ -50,12 +50,12 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
         $this->transform(['bow', 'sword'])->shouldIterateAs([$bow]);
     }
 
-    function it_transforms_empty_array_into_empty_collection(): void
+    public function it_transforms_empty_array_into_empty_collection(): void
     {
         $this->transform([])->shouldIterateAs([]);
     }
 
-    function it_throws_exception_if_value_to_transform_is_not_array(): void
+    public function it_throws_exception_if_value_to_transform_is_not_array(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -63,7 +63,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_reverse_transforms_into_array_of_products_codes(
+    public function it_reverse_transforms_into_array_of_products_codes(
         ProductInterface $axes,
         ProductInterface $shields
     ): void {
@@ -76,7 +76,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_reverse_transformed_object_is_not_collection(): void
+    public function it_throws_exception_if_reverse_transformed_object_is_not_collection(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -84,7 +84,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_empty_array_if_passed_collection_is_empty(): void
+    public function it_returns_empty_array_if_passed_collection_is_empty(): void
     {
         $this->reverseTransform(new ArrayCollection())->shouldReturn([]);
     }

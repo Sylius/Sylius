@@ -50,12 +50,6 @@ class TshirtProductFixture extends AbstractFixture
      */
     private $optionsResolver;
 
-    /**
-     * @param AbstractResourceFixture $taxonFixture
-     * @param AbstractResourceFixture $productAttributeFixture
-     * @param AbstractResourceFixture $productOptionFixture
-     * @param AbstractResourceFixture $productFixture
-     */
     public function __construct(
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $productAttributeFixture,
@@ -155,7 +149,7 @@ class TshirtProductFixture extends AbstractFixture
                 'taxons' => ['t_shirts', $categoryTaxonCode],
                 'product_attributes' => [
                     't_shirt_brand' => $this->faker->randomElement(['Nike', 'Adidas', 'JKM-476 Streetwear', 'Potato', 'Centipede Wear']),
-                    't_shirt_collection' => sprintf('Sylius %s %s', $this->faker->randomElement(['Summer', 'Winter', 'Spring', 'Autumn']), mt_rand(1995, 2012)),
+                    't_shirt_collection' => sprintf('Sylius %s %s', $this->faker->randomElement(['Summer', 'Winter', 'Spring', 'Autumn']), random_int(1995, 2012)),
                     't_shirt_material' => $this->faker->randomElement(['Centipede', 'Wool', 'Centipede 10% / Wool 90%', 'Potato 100%']),
                 ],
                 'product_options' => ['t_shirt_color', 't_shirt_size'],
@@ -180,11 +174,6 @@ class TshirtProductFixture extends AbstractFixture
         ;
     }
 
-    /**
-     * @param int $amount
-     *
-     * @return array
-     */
     private function getUniqueNames(int $amount): array
     {
         $productsNames = [];

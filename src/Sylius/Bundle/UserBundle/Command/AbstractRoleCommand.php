@@ -98,9 +98,6 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param string $email
-     * @param string $userType
-     *
      * @return UserInterface
      *
      * @throws \InvalidArgumentException
@@ -118,8 +115,6 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param string $userType
-     *
      * @return ObjectManager
      */
     protected function getEntityManager(string $userType): ObjectManager
@@ -130,8 +125,6 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param string $userType
-     *
      * @return UserRepositoryInterface
      */
     protected function getUserRepository(string $userType): UserRepositoryInterface
@@ -141,9 +134,6 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         return $this->getEntityManager($userType)->getRepository($class);
     }
 
-    /**
-     * @return array
-     */
     protected function getAvailableUserTypes(): array
     {
         $config = $this->getContainer()->getParameter('sylius.user.users');
@@ -157,10 +147,6 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param string $userType
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     protected function getUserModelClass(string $userType): string
@@ -173,11 +159,5 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         return $config[$userType]['user']['classes']['model'];
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @param UserInterface $user
-     * @param array $securityRoles
-     */
     abstract protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void;
 }

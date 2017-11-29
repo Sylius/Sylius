@@ -25,23 +25,23 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ZoneMatcherSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository): void
+    public function let(RepositoryInterface $repository): void
     {
         $this->beConstructedWith($repository);
     }
 
-    function it_implements_zone_matcher_interface(): void
+    public function it_implements_zone_matcher_interface(): void
     {
         $this->shouldImplement(ZoneMatcherInterface::class);
     }
 
-    function it_returns_null_if_there_are_no_zones(RepositoryInterface $repository, AddressInterface $address): void
+    public function it_returns_null_if_there_are_no_zones(RepositoryInterface $repository, AddressInterface $address): void
     {
         $repository->findAll()->willReturn([]);
         $this->match($address)->shouldReturn(null);
     }
 
-    function it_should_match_address_by_province(
+    public function it_should_match_address_by_province(
         RepositoryInterface $repository,
         ProvinceInterface $province,
         AddressInterface $address,
@@ -60,7 +60,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address)->shouldReturn($zone);
     }
 
-    function it_should_match_address_by_province_and_scope(
+    public function it_should_match_address_by_province_and_scope(
         RepositoryInterface $repository,
         ProvinceInterface $province,
         AddressInterface $address,
@@ -78,7 +78,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address, 'shipping')->shouldReturn($zone);
     }
 
-    function it_should_match_address_by_country(
+    public function it_should_match_address_by_country(
         RepositoryInterface $repository,
         CountryInterface $country,
         AddressInterface $address,
@@ -96,7 +96,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address)->shouldReturn($zone);
     }
 
-    function it_should_match_address_by_country_and_scope(
+    public function it_should_match_address_by_country_and_scope(
         RepositoryInterface $repository,
         CountryInterface $country,
         AddressInterface $address,
@@ -114,7 +114,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address, 'shipping')->shouldReturn($zone);
     }
 
-    function it_should_match_address_for_nested_zones(
+    public function it_should_match_address_for_nested_zones(
         RepositoryInterface $repository,
         CountryInterface $country,
         AddressInterface $address,
@@ -142,7 +142,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address)->shouldReturn($rootZone);
     }
 
-    function it_should_match_address_for_nested_zones_and_scope(
+    public function it_should_match_address_for_nested_zones_and_scope(
         RepositoryInterface $repository,
         CountryInterface $country,
         AddressInterface $address,
@@ -171,7 +171,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address, 'shipping')->shouldReturn($rootZone);
     }
 
-    function it_matches_address_from_province_when_many_are_found(
+    public function it_matches_address_from_province_when_many_are_found(
         RepositoryInterface $repository,
         CountryInterface $country,
         ProvinceInterface $province,
@@ -202,7 +202,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address)->shouldReturn($zoneProvince);
     }
 
-    function it_matches_address_from_province_when_many_are_found_by_scope(
+    public function it_matches_address_from_province_when_many_are_found_by_scope(
         RepositoryInterface $repository,
         AddressInterface $address,
         ZoneMemberInterface $memberCountry,
@@ -229,7 +229,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address, 'shipping')->shouldReturn($zoneProvince);
     }
 
-    function it_matches_all_zones_with_given_address(
+    public function it_matches_all_zones_with_given_address(
         RepositoryInterface $repository,
         AddressInterface $address,
         ZoneMemberInterface $memberProvince,
@@ -266,7 +266,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->matchAll($address)->shouldReturn([$zoneProvince, $zoneCountry, $zoneZone]);
     }
 
-    function it_matches_all_zones_by_scope_when_one_zone_for_address_is_defined(
+    public function it_matches_all_zones_by_scope_when_one_zone_for_address_is_defined(
         RepositoryInterface $repository,
         AddressInterface $address,
         ZoneMemberInterface $memberCountry,

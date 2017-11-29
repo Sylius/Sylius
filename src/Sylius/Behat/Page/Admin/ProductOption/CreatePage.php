@@ -26,7 +26,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameItIn($name, $language)
+    public function nameItIn($name, $language): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_option_translations_%s_name', $language), $name
@@ -36,7 +36,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addOptionValue($code, $value)
+    public function addOptionValue($code, $value): void
     {
         $this->getDocument()->clickLink('Add value');
 

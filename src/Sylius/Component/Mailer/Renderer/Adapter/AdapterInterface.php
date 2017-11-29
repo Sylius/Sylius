@@ -19,10 +19,7 @@ use Sylius\Component\Mailer\Renderer\RenderedEmail;
 interface AdapterInterface
 {
     /**
-     * @param EmailInterface $email
      * @param array $data
-     *
-     * @return RenderedEmail
      */
     public function render(EmailInterface $email, array $data = []): RenderedEmail;
 }
