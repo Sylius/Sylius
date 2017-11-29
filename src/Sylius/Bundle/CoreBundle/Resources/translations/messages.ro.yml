@@ -106,7 +106,7 @@ sylius:
             query: Căutare
         variant:
             depth: Adâncime
-            height: Înălţime
+            height: 'Înălţime'
             on_hand: Stoc curent
             price: Preț
             sku: SKU
@@ -201,7 +201,7 @@ sylius:
             timezone: Fus orar
             timezone_deprecated:
                 header: Fus orar învechit
-                help: 'Fusul orar %timezone% este învechit. Corectează fişierul php.ini (lista fusuri orere învechite http://php.net/manual/en/timezones.others.php).'
+                help: Fusul orar %timezone% este învechit. Corectează fişierul php.ini (lista fusuri orere învechite http://php.net/manual/en/timezones.others.php).
             version: Versiunea PHP
             version_recommended: Versiunea PHP recomandată
     payum_gateway:

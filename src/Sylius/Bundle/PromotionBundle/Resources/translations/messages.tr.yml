@@ -10,9 +10,9 @@ sylius:
             coupon_based: Kupona dayalı
             description: Açıklama
             ends_at: Sona erdi
-            exclusive: Özel
+            exclusive: 'Özel'
             name: Ad
-            priority: Öncelik
+            priority: 'Öncelik'
             rules: Kurallar
             starts_at: ''' Dan başlar'
             usage_limit: Kullanım sınırı
@@ -29,9 +29,9 @@ sylius:
             cart_quantity_configuration:
                 count: Sayısı
             contains_product_configuration:
-                variants: Ürünler
+                variants: 'Ürünler'
             item_total_configuration:
                 amount: Miktar
             shipping_country_configuration:
-                country: Ülke
+                country: 'Ülke'
             type: Türü

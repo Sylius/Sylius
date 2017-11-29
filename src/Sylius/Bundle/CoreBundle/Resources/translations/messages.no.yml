@@ -167,7 +167,7 @@ sylius:
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
-            session_start: Økt
+            session_start: 'Økt'
             simplexml_import_dom: SimpleXML
             token_get_all: Tokenizer
         filesystem:
@@ -201,7 +201,7 @@ sylius:
             timezone: tidssone
             timezone_deprecated:
                 header: Utgått tidssone
-                help: 'Tidssonen %timezone% er avskrevet. Du må redigere din php.ini-fil (liste over avskrevene tidssoner http://php.net/manual/en/timezones.others.php).'
+                help: Tidssonen %timezone% er avskrevet. Du må redigere din php.ini-fil (liste over avskrevene tidssoner http://php.net/manual/en/timezones.others.php).
             version: PHP-versjon
             version_recommended: Anbefalt PHP-versjon
     payum_gateway:

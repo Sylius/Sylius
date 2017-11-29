@@ -4,5 +4,5 @@
 sylius:
     form:
         collection:
-            add: ﺍﻓﺰﻭﺩﻥ
-            delete: حذف
+            add: 'ﺍﻓﺰﻭﺩﻥ'
+            delete: 'حذف'

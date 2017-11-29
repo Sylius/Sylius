@@ -60,7 +60,7 @@ sylius:
             title: Títol
         product:
             images: Imatges
-            restricted_zone: Àrea restringida
+            restricted_zone: 'Àrea restringida'
             short_description: Descripció breu
             variant_selection_method: Mètode de selecció de variant
             channels: Canals
@@ -184,5 +184,5 @@ sylius:
             short_open_tag: short_open_tag
             timezone: fus horari
             timezone_deprecated:
-                help: 'El fus horari %timezone% és obsolet. Cal corregir el fitxer php. ini (llista de zones horàries obsolet http://php.net/manual/en/timezones.others.php).'
+                help: El fus horari %timezone% és obsolet. Cal corregir el fitxer php. ini (llista de zones horàries obsolet http://php.net/manual/en/timezones.others.php).
             version: Versió PHP

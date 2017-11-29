@@ -201,7 +201,7 @@ sylius:
             timezone: fuso horário
             timezone_deprecated:
                 header: Fuso Horário obsoleto
-                help: 'Fuso horário %timezone% está obsoleto. Corrija o seu arquivo php. ini (lista de fusos horários preterido http://php.net/manual/en/timezones.others.php).'
+                help: Fuso horário %timezone% está obsoleto. Corrija o seu arquivo php. ini (lista de fusos horários preterido http://php.net/manual/en/timezones.others.php).
             version: Versão do PHP
             version_recommended: Versão recomendada do PHP
     payum_gateway:

@@ -4,4 +4,4 @@
 sylius:
     form:
         collection:
-            delete: Обриши
+            delete: 'Обриши'

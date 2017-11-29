@@ -7,5 +7,5 @@ sylius:
             type: Türü
         gateway_configuration:
             paypal:
-                password: Şifre
+                password: 'Şifre'
                 username: Kullanıcı adı

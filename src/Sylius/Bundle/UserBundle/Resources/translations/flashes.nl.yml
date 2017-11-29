@@ -10,4 +10,5 @@ sylius:
         verify_email: 'Uw e-mailadres is succesvol geverifieerd.'
         verify_email_by_invalid_token: 'De verificatie-teken is ongeldig.'
         verify_email_request: 'Een e-mail met de verificatielink is verstuurd naar uw e-mailadres.'
+        verify_no_user: 'Er is geen ingelogde gebruiker.'
         verify_verified_email: 'Uw e-mailadres is al geverifieerd.'
