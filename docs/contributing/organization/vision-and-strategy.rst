@@ -37,11 +37,11 @@ Labels (Issue Types)
 * **Enhancement** - Minor issues and PRs improving the current solutions (optimizations, typo fixes, etc.).
 * **Environment** - Environment (OS, databases, libraries, etc.) specific issues.
 * **Feature** - New feature proposals.
+* **Help Wanted** - Issues needing help and clarification.
 * **Maintenance** - Travis configurations, READMEs, releases, etc.
 * **Potential Bug** - Bug reports, should become a *Bug* after confirming it.
 * **RFC** - Discussions about potential changes or new features.
 * **Shop** - ShopBundle related issues and PRs.
-* **Support Request** - Issues needing help and clarification.
 * **Symfony 4.0** - Symfony 4.0 related issues and PRs.
 * **UX** - Issues and PRs aimed at improving User eXperience.
 
