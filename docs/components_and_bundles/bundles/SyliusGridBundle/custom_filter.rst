@@ -44,7 +44,7 @@ And the form type:
         {
             $builder->add(
                 'stats',
-                ChoiceType:class,
+                ChoiceType::class,
                 ['choices' => range($options['range'][0], $options['range'][1])]
             );
         }
