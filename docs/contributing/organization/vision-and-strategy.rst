@@ -43,6 +43,7 @@ Labels (Issue Types)
 * **Shop** - ShopBundle related issues and PRs.
 * **Support Request** - Issues needing help and clarification.
 * **Symfony 4.0** - Symfony 4.0 related issues and PRs.
+* **Stale** - Issues and PRs with no recent activity, about to be closed soon.
 * **UX** - Issues and PRs aimed at improving User eXperience.
 
 Pull Request Checklist
