@@ -103,7 +103,7 @@ interface ShowPageInterface extends SymfonyPageInterface
      *
      * @return bool
      */
-    public function isProductInTheList($productName);
+    public function isProductInTheList(string $productName): bool;
 
     /**
      * @return string

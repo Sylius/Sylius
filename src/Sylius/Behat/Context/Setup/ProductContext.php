@@ -783,6 +783,16 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given the product :product was renamed to :productName
+     */
+    public function theProductWasRenamedTo(ProductInterface $product, string $productName): void
+    {
+        $product->setName($productName);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $price
      *
      * @return int

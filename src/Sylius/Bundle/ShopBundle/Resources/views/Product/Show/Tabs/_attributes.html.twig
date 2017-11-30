@@ -7,7 +7,7 @@
             <tr>
                 <td class="sylius-product-attribute-name">{{ attribute.name }}</td>
                 <td class="sylius-product-attribute-value">
-                    {% include [('SyliusAttributeBundle:Types:'~attribute.attribute.type~'.html.twig'), 'SyliusAttributeBundle:Types:default.html.twig'] with {'attribute': attribute} %}
+                    {% include [('SyliusAttributeBundle:Types:'~attribute.attribute.type~'.html.twig'), 'SyliusAttributeBundle:Types:default.html.twig'] with {'attribute': attribute, 'locale': configuration.request.locale, 'fallbackLocale': configuration.request.defaultLocale} %}
                 </td>
             </tr>
         {% endfor %}
