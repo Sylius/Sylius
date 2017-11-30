@@ -36,7 +36,7 @@ class VariantResolverHelper extends Helper
     /**
      * @param ProductInterface $product
      *
-     * @return null|ProductVariantInterface
+     * @return ProductVariantInterface|null
      */
     public function resolveVariant(ProductInterface $product): ?ProductVariantInterface
     {
