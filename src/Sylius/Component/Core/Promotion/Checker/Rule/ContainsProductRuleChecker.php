@@ -34,7 +34,7 @@ final class ContainsProductRuleChecker implements RuleCheckerInterface
             throw new UnsupportedTypeException($subject, OrderInterface::class);
         }
 
-        /** @var $item OrderItemInterface */
+        /** @var OrderItemInterface $item */
         foreach ($subject->getItems() as $item) {
             if ($configuration['product_code'] === $item->getProduct()->getCode()) {
                 return true;

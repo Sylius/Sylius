@@ -43,7 +43,7 @@ interface ProductTaxonInterface extends ResourceInterface
     public function getPosition(): ?int;
 
     /**
-     * @param int|void $position
+     * @param int|null $position
      */
     public function setPosition(?int $position): void;
 }

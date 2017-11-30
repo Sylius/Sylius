@@ -120,7 +120,7 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @param $currencyCode
+     * @param string $currencyCode
      *
      * @return CurrencyInterface
      */
