@@ -535,7 +535,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @param string $element
-     * @param $message
+     * @param string $message
      */
     private function assertValidationMessage($element, $message)
     {

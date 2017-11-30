@@ -228,7 +228,7 @@ class Order extends BaseOrder implements OrderInterface
     {
         $units = new ArrayCollection();
 
-        /** @var $item OrderItem */
+        /** @var OrderItem $item */
         foreach ($this->getItems() as $item) {
             foreach ($item->getUnits() as $unit) {
                 $units->add($unit);
@@ -269,7 +269,7 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function addPayment(BasePaymentInterface $payment): void
     {
-        /** @var $payment PaymentInterface */
+        /** @var PaymentInterface $payment */
         if (!$this->hasPayment($payment)) {
             $this->payments->add($payment);
             $payment->setOrder($this);
@@ -281,7 +281,7 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function removePayment(BasePaymentInterface $payment): void
     {
-        /** @var $payment PaymentInterface */
+        /** @var PaymentInterface $payment */
         if ($this->hasPayment($payment)) {
             $this->payments->removeElement($payment);
             $payment->setOrder(null);

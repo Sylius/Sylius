@@ -22,7 +22,7 @@ interface ViewHandlerInterface
      * @param RequestConfiguration $requestConfiguration
      * @param View $view
      *
-     * @return mixed
+     * @return Response
      */
     public function handle(RequestConfiguration $requestConfiguration, View $view): Response;
 }
