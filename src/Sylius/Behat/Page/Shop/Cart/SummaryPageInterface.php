@@ -135,7 +135,7 @@ interface SummaryPageInterface extends PageInterface
     public function isEmpty();
 
     /**
-     * @param $productName
+     * @param string $productName
      *
      * @return int
      */

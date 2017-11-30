@@ -47,7 +47,7 @@ interface OrderInterface extends AdjustableInterface, ResourceInterface, Timesta
     public function getNumber(): ?string;
 
     /**
-     * @param string|null
+     * @param string|null $number
      */
     public function setNumber(?string $number): void;
 

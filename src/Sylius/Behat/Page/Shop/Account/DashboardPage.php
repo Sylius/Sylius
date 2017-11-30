@@ -77,7 +77,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     }
 
     /**
-     * @param $value
+     * @param string $value
      *
      * @return bool
      */

@@ -298,8 +298,8 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     }
 
     /**
-     * @param $attributeName
-     * @param $selector
+     * @param string $attributeName
+     * @param string|array $selector
      *
      * @return bool
      *
