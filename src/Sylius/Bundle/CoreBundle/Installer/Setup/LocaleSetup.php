@@ -55,7 +55,7 @@ final class LocaleSetup implements LocaleSetupInterface
      * {@inheritdoc}
      */
     public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): LocaleInterface
-    {   
+    {
         $code = $this->getLocaleCodeFromUser($input, $output, $questionHelper);
         $name = $this->getLanguageName($code);
 
@@ -118,7 +118,6 @@ final class LocaleSetup implements LocaleSetupInterface
      */
     private function getNewLocaleCode(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): string
     {
-
         $question = new Question("Locale (press enter to use {$this->locale}): ", $this->locale);
 
         return trim($questionHelper->ask($input, $output, $question));
