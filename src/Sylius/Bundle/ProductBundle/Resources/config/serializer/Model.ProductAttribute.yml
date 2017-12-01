@@ -7,6 +7,10 @@ Sylius\Component\Product\Model\ProductAttribute:
             type: integer
             xml_attribute: true
             groups: [Default, Detailed]
+        selectOptions:
+            expose: true
+            type: array
+            groups: [Default, Detailed]
     relations:
         -   rel: self
             href:

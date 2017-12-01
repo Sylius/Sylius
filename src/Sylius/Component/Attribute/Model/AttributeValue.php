@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Attribute\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Webmozart\Assert\Assert;
 
 class AttributeValue implements AttributeValueInterface
@@ -71,6 +73,17 @@ class AttributeValue implements AttributeValueInterface
      * @var array
      */
     private $json;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $selectOptions;
+    
+    
+    function __construct()
+    {
+        $this->selectOptions = new ArrayCollection();
+    }
 
     /**
      * {@inheritdoc}
@@ -299,6 +312,55 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
+     * @return bool
+     */
+    public function hasSelectedOptions(): bool
+    {
+        return !$this->selectOptions->isEmpty();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSelectOptions(): Collection
+    {
+        if( $this->selectOptions === null )
+            $this->selectOptions = new ArrayCollection();
+
+        return $this->selectOptions;
+    }
+
+    /**
+     * @param AttributeSelectOptionInterface $attributeSelectOption
+     */
+    public function addSelectOption(AttributeSelectOptionInterface $attributeSelectOption): void
+    {
+        if (!$this->hasSelectOption($attributeSelectOption)) {
+            $this->selectOptions->add($attributeSelectOption);
+        }
+    }
+
+    /**
+     * @param AttributeSelectOptionInterface $attributeSelectOption
+     */
+    public function removeSelectOption(AttributeSelectOptionInterface $attributeSelectOption): void
+    {
+        if (!$this->hasSelectOption($attributeSelectOption)) {
+            $this->selectOptions->removeElement($attributeSelectOption);
+        }
+    }
+
+    /**
+     * @param AttributeSelectOptionInterface $attributeSelectOption
+     * @return bool
+     */
+    public function hasSelectOption(AttributeSelectOptionInterface $attributeSelectOption): bool
+    {
+        return $this->selectOptions->contains($attributeSelectOption);
+    }
+
+
+    /**
      * @throws \BadMethodCallException
      */
     protected function assertAttributeIsSet()
@@ -307,4 +369,5 @@ class AttributeValue implements AttributeValueInterface
             throw new \BadMethodCallException('The attribute is undefined, so you cannot access proxy methods.');
         }
     }
+
 }

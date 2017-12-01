@@ -37,7 +37,6 @@ final class RegisterAttributeTypePass implements CompilerPassInterface
             if (!isset($attributeType['attribute_type'], $attributeType['label'], $attributeType['form_type'])) {
                 throw new \InvalidArgumentException('Tagged attribute type needs to have `attribute_type`, `label` and `form_type` attributes.');
             }
-
             $registry->addMethodCall('register', [$attributeType['attribute_type'], new Reference($id)]);
             $formRegistry->addMethodCall('add', [$attributeType['attribute_type'], 'default', $attributeType['form_type']]);
 

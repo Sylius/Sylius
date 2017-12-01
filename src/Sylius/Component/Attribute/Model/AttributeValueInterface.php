@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Attribute\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface AttributeValueInterface extends ResourceInterface
@@ -81,4 +82,29 @@ interface AttributeValueInterface extends ResourceInterface
      * @param string|null $localeCode
      */
     public function setLocaleCode(?string $localeCode): void;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasSelectedOptions(): bool;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSelectOptions(): Collection;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addSelectOption(AttributeSelectOptionInterface $attributeValueSelectOption): void;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeSelectOption(AttributeSelectOptionInterface $attributeValueSelectOption): void;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasSelectOption(AttributeSelectOptionInterface $attributeValueSelectOption): bool;
 }

@@ -31,6 +31,18 @@
             <argument>attribute type</argument>
         </service>
 
+        <service id="sylius.form.type.attribute_select_option"
+                 class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeSelectOptionType">
+            <argument>Sylius\Component\Attribute\Model\AttributeSelectOption</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.attribute_select_option_translation"
+                 class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeSelectOptionTranslationType">
+            <argument>Sylius\Component\Attribute\Model\AttributeSelectOptionTranslation</argument>
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.form_registry.attribute_type" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
 
         <service id="sylius.form.type.attribute_type_choice" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType">

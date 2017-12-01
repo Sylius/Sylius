@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use Sylius\Component\Product\Model\ProductAttributeSelectOption;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
@@ -417,6 +418,14 @@ EOT;
         $this->loadFixturesFromFile('resources/locales.yml');
         $this->loadFixturesFromFile('resources/product_attributes.yml');
 
+        $options = $this->getSelectOptionsFixturesInDB(["yellow", "green"]);
+        $option_ids = [];
+        foreach ($options as $option)
+        {
+            $option_ids[] = $option->getId();
+        }
+        $option_ids = implode(",", $option_ids);
+
         $data =
 <<<EOT
         {
@@ -425,10 +434,7 @@ EOT;
                 {
                     "attribute": "mug_color",
                     "localeCode": "en_US",
-                    "value": [
-                        "7a968ac4-a1e3-4a37-a707-f22a839130c4", 
-                        "ff62a939-d946-4d6b-b742-b7115875ae75"
-                    ]
+                    "selectOptions": [{$option_ids}]
                 }
             ],
             "translations": {
@@ -439,6 +445,7 @@ EOT;
             }
         }
 EOT;
+
 
         $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
 
@@ -532,5 +539,16 @@ EOT;
     private function getProductUrl(ProductInterface $product)
     {
         return '/api/v1/products/' . $product->getCode();
+    }
+
+    private function getSelectOptionsFixturesInDB(array $option_names)
+    {
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("so")
+            ->from(ProductAttributeSelectOption::class, "so")
+            ->innerJoin("so.translations", "t")
+            ->where("t.name IN (:option_names)")
+            ->setParameter("option_names", $option_names)
+            ->getQuery()->getResult();
     }
 }

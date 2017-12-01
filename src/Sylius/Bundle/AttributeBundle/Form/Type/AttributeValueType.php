@@ -17,9 +17,11 @@ use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -94,6 +96,8 @@ abstract class AttributeValueType extends AbstractResourceType
 
                 $localeCode = $attributeValue->getLocaleCode();
 
+
+
                 $this->addValueField($event->getForm(), $attribute, $localeCode);
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
@@ -106,6 +110,20 @@ abstract class AttributeValueType extends AbstractResourceType
                 $attribute = $this->attributeRepository->findOneBy(['code' => $attributeValue['attribute']]);
                 if (!$attribute instanceof AttributeInterface) {
                     return;
+                }
+
+                if($attribute->getType() == SelectAttributeType::TYPE
+                    && isset($attributeValue["selectOptions"] )
+                    && (!isset($attributeValue["value"]) || !$attributeValue["value"]))
+                {
+                    $options_values = [];
+                    foreach ($attributeValue["selectOptions"] as $option_id)
+                    {
+                        $options_values[] = (string)$option_id;
+                    }
+
+                    $attributeValue["value"] = $options_values;
+                    $event->setData($attributeValue);
                 }
 
                 $this->addValueField($event->getForm(), $attribute);
@@ -127,11 +145,30 @@ abstract class AttributeValueType extends AbstractResourceType
         AttributeInterface $attribute,
         ?string $localeCode = null
     ): void {
-        $form->add('value', $this->formTypeRegistry->get($attribute->getType(), 'default'), [
-            'auto_initialize' => false,
-            'configuration' => $attribute->getConfiguration(),
-            'label' => $attribute->getName(),
-            'locale_code' => $localeCode,
-        ]);
+
+        if($attribute->getType() == SelectAttributeType::TYPE)
+        {
+
+            $form->add('selectOptions', $this->getAttributeValueSelectOptionTypeName(), [
+                "attribute" => $attribute
+            ]);
+            $form->add("value", HiddenType::class);
+
+        }else{
+
+            $form->add('value', $this->formTypeRegistry->get($attribute->getType(), 'default'), [
+                'auto_initialize' => false,
+                'configuration' => $attribute->getConfiguration(),
+                'label' => $attribute->getName(),
+                'locale_code' => $localeCode,
+            ]);
+
+        }
+
     }
+
+    /**
+     * @return string
+     */
+    abstract protected function getAttributeValueSelectOptionTypeName(): string;
 }

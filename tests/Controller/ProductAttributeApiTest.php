@@ -291,15 +291,36 @@ EOT;
         {
             "code": "mug_color",
             "configuration": {
-                "choices": [
-                    {"en_US": "yellow", "fr_FR": "jaune"},
-                    {"en_US": "green"},
-                    {"en_US": "black"}
-                ],
                 "multiple": true,
                 "min": 1,
                 "max": 2
             },
+            "selectOptions": [
+                {
+                    "translations": {
+                        "en_US": {
+                            "name": "yellow"
+                        },
+                        "fr_FR": {
+                            "name": "jaune"
+                        }
+                    }
+                },
+                {
+                    "translations": {
+                        "en_US": {
+                            "name": "green"
+                        }
+                    }
+                },
+                {
+                    "translations": {
+                        "en_US": {
+                            "name": "black"
+                        }
+                    }
+                }
+            ],
             "translations": {
                 "de_CH": {
                     "name": "Becher Farbe"
@@ -316,12 +337,6 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product_attribute/create_select_response', Response::HTTP_CREATED);
 
-        $expectedChoiceValues = [
-            ['en_US' => 'yellow', 'fr_FR' => 'jaune'],
-            ['en_US' => 'green'],
-            ['en_US' => 'black'],
-        ];
-        $this->assertSelectChoicesInResponse($response, $expectedChoiceValues);
     }
 
     /**

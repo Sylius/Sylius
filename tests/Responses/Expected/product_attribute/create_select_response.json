@@ -2,8 +2,44 @@
     "id": @integer@,
     "code": "mug_color",
     "type": "select",
+    "selectOptions": [
+        {
+            "id": @integer@,
+            "translations": {
+                "en_US": {
+                    "id": @integer@,
+                    "locale": "en_US",
+                    "name": "yellow"
+                },
+                "fr_FR": {
+                    "id": @integer@,
+                    "locale": "fr_FR",
+                    "name": "jaune"
+                }
+            }
+        },
+        {
+            "id": @integer@,
+            "translations": {
+                "en_US": {
+                    "id": @integer@,
+                    "locale": "en_US",
+                    "name": "green"
+                }
+            }
+        },
+        {
+            "id": @integer@,
+            "translations": {
+                "en_US": {
+                    "id": @integer@,
+                    "locale": "en_US",
+                    "name": "black"
+                }
+            }
+        }
+    ],
     "configuration": {
-        "choices": @array@,
         "multiple": true,
         "min": 1,
         "max": 2

@@ -109,12 +109,7 @@ class MugProductFixture extends AbstractFixture
             ],
         ]]]);
 
-        $mugMaterials = [
-            $this->faker->uuid => [$this->baseLocaleCode => 'Invisible porcelain'],
-            $this->faker->uuid => [$this->baseLocaleCode => 'Banana skin'],
-            $this->faker->uuid => [$this->baseLocaleCode => 'Porcelain'],
-            $this->faker->uuid => [$this->baseLocaleCode => 'Centipede'],
-        ];
+
         $this->productAttributeFixture->load(['custom' => [
             [
                 'name' => 'Mug material',
@@ -122,8 +117,21 @@ class MugProductFixture extends AbstractFixture
                 'type' => SelectAttributeType::TYPE,
                 'configuration' => [
                     'multiple' => false,
-                    'choices' => $mugMaterials,
                 ],
+                'selectOptions' => [
+                    [
+                        'name' => 'Invisible porcelain'
+                    ],
+                    [
+                        'name' => 'Banana skin'
+                    ],
+                    [
+                        'name' => 'Porcelain'
+                    ],
+                    [
+                        'name' => 'Centipede'
+                    ]
+                ]
             ],
         ]]);
 
@@ -148,7 +156,7 @@ class MugProductFixture extends AbstractFixture
                 'main_taxon' => 'mugs',
                 'taxons' => ['mugs'],
                 'product_attributes' => [
-                    'mug_material' => [$this->faker->randomKey($mugMaterials)],
+                    'mug_material' => ['Porcelain'],
                 ],
                 'product_options' => ['mug_type'],
                 'images' => [

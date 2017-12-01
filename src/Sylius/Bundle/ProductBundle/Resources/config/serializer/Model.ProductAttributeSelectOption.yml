@@ -1,0 +1,13 @@
+Sylius\Component\Product\Model\ProductAttributeSelectOption:
+    exclusion_policy: ALL
+    xml_root_name: product-attribute-select-option
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+            groups: [Default, Detailed]
+        translations:
+            expose: false
+            type: array
+            groups: [Default, Detailed]

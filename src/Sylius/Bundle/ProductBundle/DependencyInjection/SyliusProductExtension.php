@@ -15,16 +15,23 @@ namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
 use Sylius\Bundle\ProductBundle\Controller\ProductAttributeController;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAttributeValueRepository;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeSelectOptionTranslationType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeSelectOptionType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueType;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Product\Model\ProductAttribute;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeSelectOption;
+use Sylius\Component\Product\Model\ProductAttributeSelectOptionInterface;
+use Sylius\Component\Product\Model\ProductAttributeSelectOptionTranslation;
+use Sylius\Component\Product\Model\ProductAttributeSelectOptionTranslationInterface;
 use Sylius\Component\Product\Model\ProductAttributeTranslation;
 use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
+use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -83,6 +90,21 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
                                 'model' => ProductAttributeTranslation::class,
                                 'interface' => ProductAttributeTranslationInterface::class,
                                 'form' => ProductAttributeTranslationType::class,
+                            ],
+                        ],
+                    ],
+                    'attribute_select_option' => [
+                        'classes' => [
+                            'model'      => ProductAttributeSelectOption::class,
+                            'interface'  => ProductAttributeSelectOptionInterface::class,
+                            'factory'    => TranslatableFactory::class,
+                            'form'       => ProductAttributeSelectOptionType::class
+                        ],
+                        'translation' => [
+                            'classes' => [
+                                'model'     => ProductAttributeSelectOptionTranslation::class,
+                                'interface' => ProductAttributeSelectOptionTranslationInterface::class,
+                                'form'      => ProductAttributeSelectOptionTranslationType::class
                             ],
                         ],
                     ],

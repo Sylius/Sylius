@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Attribute\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -81,4 +82,31 @@ interface AttributeInterface extends
      * @return AttributeTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;
+
+    /**
+     * @return bool
+     */
+    public function hasSelectOptions(): bool;
+
+    /**
+     * @return Collection|AttributeSelectOptionInterface[]
+     */
+    public function getSelectOptions(): Collection;
+
+    /**
+     * @param AttributeSelectOptionInterface $SelectOption
+     */
+    public function addSelectOption(AttributeSelectOptionInterface $SelectOption): void;
+
+    /**
+     * @param AttributeSelectOptionInterface $SelectOption
+     */
+    public function removeSelectOption(AttributeSelectOptionInterface $SelectOption): void;
+
+    /**
+     * @param AttributeSelectOptionInterface $SelectOption
+     *
+     * @return bool
+     */
+    public function hasSelectOption(AttributeSelectOptionInterface $SelectOption): bool;
 }

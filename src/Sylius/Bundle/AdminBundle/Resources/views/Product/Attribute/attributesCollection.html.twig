@@ -28,23 +28,39 @@
 {% macro collection_item(form, allow_delete, button_delete_label, index) %}
     <div class="attribute" data-id="{{ form.vars.data.attribute.code }}">
         {% set id = form.vars.id %}
-        {% if 'checkbox' in form.children.value.vars.block_prefixes %}
-            <div class="ui toggle checkbox" style="margin-top: 15px; margin-bottom: 15px;">
-                {{ form_widget(form.value) }}
-                <label>{{ form.vars.value.attribute.name }}</label>
-            </div>
-            <button class="ui red right labeled icon button" style="float: right;">
-                <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
-            </button>
-        {% else %}
+
+        {% if form.children.selectOptions is defined %}
+
             <div class="ui right fluid labeled input" style="margin-top: 15px; margin-bottom: 15px;">
-                <div class="ui label">{{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}</div>
-                {{ form_widget(form.value) }}
+                <div class="ui label">{{ form.vars.value.attribute.name }}</div>
+                {{ form_widget(form.selectOptions) }}
                 <button class="ui red right labeled icon button">
                     <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
                 </button>
             </div>
-            {{ form_errors(form.value) }}
+            {{ form_errors(form.selectOptions) }}
+
+        {% else %}
+
+            {% if 'checkbox' in form.children.value.vars.block_prefixes %}
+                <div class="ui toggle checkbox" style="margin-top: 15px; margin-bottom: 15px;">
+                    {{ form_widget(form.value) }}
+                    <label>{{ form.vars.value.attribute.name }}</label>
+                </div>
+                <button class="ui red right labeled icon button" style="float: right;">
+                    <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
+                </button>
+            {% else %}
+                <div class="ui right fluid labeled input" style="margin-top: 15px; margin-bottom: 15px;">
+                    <div class="ui label">{{ form.vars.value.attribute.name }}</div>
+                    {{ form_widget(form.value) }}
+                    <button class="ui red right labeled icon button">
+                        <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
+                    </button>
+                </div>
+                {{ form_errors(form.value) }}
+            {% endif %}
+
         {% endif %}
         <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.code }}"/>
         <input type="hidden" name="{{ form.localeCode.vars.full_name }}" id="{{ form.localeCode.vars.id }}" value="{{ form.localeCode.vars.value }}"/>

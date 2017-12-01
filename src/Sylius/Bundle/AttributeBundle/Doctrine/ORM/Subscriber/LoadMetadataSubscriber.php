@@ -16,6 +16,7 @@ namespace Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
@@ -52,13 +53,57 @@ final class LoadMetadataSubscriber implements EventSubscriber
         $metadata = $eventArgs->getClassMetadata();
         $metadataFactory = $eventArgs->getEntityManager()->getMetadataFactory();
 
+
+
         foreach ($this->subjects as $subject => $class) {
+
             if ($class['attribute_value']['classes']['model'] === $metadata->getName()) {
                 $this->mapSubjectOnAttributeValue($subject, $class['subject'], $metadata, $metadataFactory);
                 $this->mapAttributeOnAttributeValue($class['attribute']['classes']['model'], $metadata, $metadataFactory);
+                $this->mapSelectOptionsOnAttributeValue($subject, $class['attribute_select_option']['classes']['model'], $metadata);
             }
+
+            $this->mapSelectOptionRelations($class, $metadata, $metadataFactory);
         }
     }
+
+
+    private function mapSelectOptionRelations($class,
+                                              ClassMetadataInfo $metadata,
+                                              ClassMetadataFactory $metadataFactory)
+    {
+
+        if($class['attribute']['classes']['model'] === $metadata->getName())
+        {
+            $metadata->mapOneToMany([
+                'fieldName'    => 'selectOptions',
+                'targetEntity' => $class['attribute_select_option']['classes']['model'],
+                'mappedBy'     => 'attribute',
+                'fetch'        => 'EAGER',
+                'cascade'      => ['persist', 'remove'],
+                'orphanRemoval'=> true
+            ]);
+        }
+
+
+
+        if($class['attribute_select_option']['classes']['model'] === $metadata->getName())
+        {
+            $metadata->mapManyToOne([
+                'fieldName'    => 'attribute',
+                'targetEntity' => $class['attribute']['classes']['model'],
+                'inversedBy'   => 'selectOptions',
+                'joinColumns' => [[
+                    'name'                 => 'attribute_id',
+                    'referencedColumnName' => 'id',
+                    'nullable'             => false,
+                    'onDelete'             => 'CASCADE',
+                ]],
+            ]);
+        }
+
+    }
+
 
     /**
      * @param string $subject
@@ -88,6 +133,8 @@ final class LoadMetadataSubscriber implements EventSubscriber
         $this->mapManyToOne($metadata, $subjectMapping);
     }
 
+
+
     /**
      * @param string $attributeClass
      * @param ClassMetadataInfo $metadata
@@ -107,11 +154,35 @@ final class LoadMetadataSubscriber implements EventSubscriber
                 'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'],
                 'nullable' => false,
                 'onDelete' => 'CASCADE',
-            ]],
+            ]]
         ];
 
         $this->mapManyToOne($metadata, $attributeMapping);
     }
+
+    /**
+     * @param string $subjectClass
+     * @param ClassMetadataInfo $metadata
+     */
+    private function mapSelectOptionsOnAttributeValue(
+        string $subject,
+        string $targetClass,
+        ClassMetadataInfo $metadata
+    ): void {
+
+        $subjectMapping = [
+            'fieldName'    => 'selectOptions',
+            'targetEntity' => $targetClass,
+            'fetch'        => 'EAGER',
+            'cascade'      => ['persist', 'remove'],
+            'joinTable'    => [
+                "name" => 'sylius_' . $subject .'_attribute_value_attribute_select_option'
+            ]
+        ];
+
+        $metadata->mapManyToMany($subjectMapping);
+    }
+
 
     /**
      * @param ClassMetadataInfo|ClassMetadata $metadata

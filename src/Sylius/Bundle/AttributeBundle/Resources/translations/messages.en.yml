@@ -8,6 +8,7 @@ sylius:
             name: Name
             translations: Translations
             type: Type
+            select_option_values: Select values
         attribute_type:
             checkbox: Checkbox
             configuration: Configuration

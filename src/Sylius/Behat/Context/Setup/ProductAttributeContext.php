@@ -18,9 +18,12 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
+use Sylius\Component\Attribute\Factory\AttributeSelectOptionFactoryInterface;
+use Sylius\Component\Attribute\Model\AttributeSelectOptionTranslation;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeSelectOptionTranslation;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -43,6 +46,11 @@ final class ProductAttributeContext implements Context
     private $productAttributeFactory;
 
     /**
+     * @var AttributeSelectOptionFactoryInterface
+     */
+    private $productAttributeSelectOptionFactory;
+
+    /**
      * @var FactoryInterface
      */
     private $productAttributeValueFactory;
@@ -57,10 +65,13 @@ final class ProductAttributeContext implements Context
      */
     private $faker;
 
+
     /**
+     * ProductAttributeContext constructor.
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $productAttributeRepository
      * @param AttributeFactoryInterface $productAttributeFactory
+     * @param AttributeSelectOptionFactoryInterface $productAttributeSelectOptionFactory
      * @param FactoryInterface $productAttributeValueFactory
      * @param ObjectManager $objectManager
      */
@@ -68,12 +79,14 @@ final class ProductAttributeContext implements Context
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productAttributeRepository,
         AttributeFactoryInterface $productAttributeFactory,
+        AttributeSelectOptionFactoryInterface $productAttributeSelectOptionFactory,
         FactoryInterface $productAttributeValueFactory,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productAttributeRepository = $productAttributeRepository;
         $this->productAttributeFactory = $productAttributeFactory;
+        $this->productAttributeSelectOptionFactory = $productAttributeSelectOptionFactory;
         $this->productAttributeValueFactory = $productAttributeValueFactory;
         $this->objectManager = $objectManager;
 
@@ -119,15 +132,16 @@ final class ProductAttributeContext implements Context
         string $value,
         string $localeCode
     ): void {
-        $choices = [
-            $this->faker->uuid => [
-                $localeCode => $value,
-            ],
-        ];
 
-        $configuration = $productAttribute->getConfiguration();
-        $configuration['choices'] = array_merge($configuration['choices'], $choices);
-        $productAttribute->setConfiguration($configuration);
+        $selectOption = $this->productAttributeSelectOptionFactory->createForAttribute($productAttribute);
+        $selectOption->setName($value);
+        $trans = new ProductAttributeSelectOptionTranslation();
+        $trans->setLocale($localeCode);
+        $trans->setName($value);
+
+
+        $selectOption->addTranslation( $trans );
+        $productAttribute->addSelectOption($selectOption);
 
         $this->saveProductAttribute($productAttribute);
     }
@@ -142,16 +156,23 @@ final class ProductAttributeContext implements Context
         string $secondValue,
         string $secondLocaleCode
     ): void {
-        $choices = [
-            $this->faker->uuid => [
-                $firstLocaleCode => $firstValue,
-                $secondLocaleCode => $secondValue,
-            ],
-        ];
 
-        $configuration = $productAttribute->getConfiguration();
-        $configuration['choices'] = array_merge($configuration['choices'], $choices);
-        $productAttribute->setConfiguration($configuration);
+
+        $selectOption = $this->productAttributeSelectOptionFactory->createForAttribute($productAttribute);
+        $selectOption->setName($firstValue);
+
+        $trans1 = new ProductAttributeSelectOptionTranslation();
+        $trans1->setLocale($firstLocaleCode);
+        $trans1->setName($firstValue);
+
+        $trans2 = new ProductAttributeSelectOptionTranslation();
+        $trans2->setLocale($secondLocaleCode);
+        $trans2->setName($secondValue);
+
+        $selectOption->addTranslation( $trans1 );
+        $selectOption->addTranslation( $trans2 );
+
+        $productAttribute->addSelectOption($selectOption);
 
         $this->saveProductAttribute($productAttribute);
     }
@@ -170,18 +191,21 @@ final class ProductAttributeContext implements Context
      */
     public function theStoreHasASelectProductAttributeWithValue(string $name, string ...$values): void
     {
-        $choices = [];
-        foreach ($values as $value) {
-            $choices[$this->faker->uuid] = ['en_US' => $value];
-        }
-
         $productAttribute = $this->createProductAttribute(SelectAttributeType::TYPE, $name);
         $productAttribute->setConfiguration([
             'multiple' => true,
-            'choices' => $choices,
             'min' => null,
             'max' => null,
         ]);
+
+        foreach ($values as $value) {
+            $selectOption = $this->productAttributeSelectOptionFactory->createForAttribute($productAttribute);
+            $selectOption->setName($value);
+            $selectOption->setCurrentLocale("en_US");
+            $selectOption->setFallbackLocale("en_US");
+            $productAttribute->addSelectOption($selectOption);
+        }
+
 
         $this->saveProductAttribute($productAttribute);
     }
@@ -367,6 +391,33 @@ final class ProductAttributeContext implements Context
     }
 
     /**
+     * @param array $options
+     * @param ProductAttributeInterface $attribute
+     * @param string $localeCode
+     *
+     * @return ProductAttributeValueInterface
+     */
+    private function createProductAttributeSelectValue(
+        array $options,
+        ProductAttributeInterface $attribute,
+        string $localeCode = 'en_US'
+    ): ProductAttributeValueInterface {
+        /** @var ProductAttributeValueInterface $attributeValue */
+        $attributeValue = $this->productAttributeValueFactory->createNew();
+        $attributeValue->setAttribute($attribute);
+        $attributeValue->setLocaleCode($localeCode);
+
+        foreach ($options as $option)
+        {
+            $attributeValue->addSelectOption($option);
+        }
+
+        $this->objectManager->persist($attributeValue);
+
+        return $attributeValue;
+    }
+
+    /**
      * @param ProductAttributeInterface $productAttribute
      */
     private function saveProductAttribute(ProductAttributeInterface $productAttribute)
@@ -387,20 +438,19 @@ final class ProductAttributeContext implements Context
         array $values,
         string $localeCode = 'en_US'
     ): void {
+
         $attribute = $this->provideProductAttribute(SelectAttributeType::TYPE, $productAttributeName);
 
-        $choices = $attribute->getConfiguration()['choices'];
-        $choiceKeys = [];
+        $options = [];
         foreach ($values as $value) {
-            foreach ($choices as $choiceKey => $choiceValues) {
-                $key = array_search($value, $choiceValues);
-                if ($localeCode === $key) {
-                    $choiceKeys[] = $choiceKey;
-                }
+            foreach ($attribute->getSelectOptions() as $option)
+            {
+                if($value == $option->getName())
+                    $options[] = $option;
             }
         }
 
-        $attributeValue = $this->createProductAttributeValue($choiceKeys, $attribute, $localeCode);
+        $attributeValue = $this->createProductAttributeSelectValue($options, $attribute, $localeCode);
         $product->addAttribute($attributeValue);
 
         $this->objectManager->flush();

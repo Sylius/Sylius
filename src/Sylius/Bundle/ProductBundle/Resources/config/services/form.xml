@@ -112,6 +112,18 @@
             <tag name="form.type" />
         </service>
 
+        <service id="sylius.form.type.product_attribute_select_option"
+                 class="Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeSelectOptionType">
+            <argument>Sylius\Component\Product\Model\ProductAttributeSelectOption</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.product_attribute_select_option_translation"
+                 class="Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeSelectOptionTranslationType">
+            <argument>Sylius\Component\Product\Model\ProductAttributeSelectOptionTranslation</argument>
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.form.type.product_attribute_value" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueType">
             <argument>%sylius.model.product_attribute_value.class%</argument>
             <argument>%sylius.form.type.product_attribute_value.validation_groups%</argument>
@@ -119,6 +131,18 @@
             <argument type="service" id="sylius.repository.product_attribute" />
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.form_registry.attribute_type" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.attribute_select_type" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType">
+            <argument type="service" id="sylius.repository.product_attribute_select_option"/>
+            <argument type="service" id="sylius.translation_locale_provider" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.product_attribute_value_select_option" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueSelectOptionType">
+            <argument type="service" id="sylius.repository.product_attribute_select_option"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
             <tag name="form.type" />
         </service>
 

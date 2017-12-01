@@ -13,10 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection;
 
+use Sylius\Bundle\AttributeBundle\Doctrine\ORM\Repository\AttributeSelectOptionRepository;
+use Sylius\Bundle\AttributeBundle\Form\Type\AttributeSelectOptionType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Attribute\Model\AttributeSelectOption;
+use Sylius\Component\Attribute\Model\AttributeSelectOptionInterface;
+use Sylius\Component\Attribute\Model\AttributeSelectOptionTranslation;
+use Sylius\Component\Attribute\Model\AttributeSelectOptionTranslationInterface;
 use Sylius\Component\Attribute\Model\AttributeTranslation;
 use Sylius\Component\Attribute\Model\AttributeTranslationInterface;
 use Sylius\Component\Resource\Factory\Factory;
@@ -83,6 +89,40 @@ final class Configuration implements ConfigurationInterface
                                                 ->children()
                                                     ->scalarNode('model')->defaultValue(AttributeTranslation::class)->cannotBeEmpty()->end()
                                                     ->scalarNode('interface')->defaultValue(AttributeTranslationInterface::class)->cannotBeEmpty()->end()
+                                                    ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                                    ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                    ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                                    ->scalarNode('form')->cannotBeEmpty()->end()
+                                                ->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                            ->arrayNode('attribute_select_option')
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->variableNode('options')->end()
+                                    ->arrayNode('classes')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->scalarNode('model')->defaultValue(AttributeSelectOption::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('interface')->defaultValue(AttributeSelectOptionInterface::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('controller')->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->defaultValue(AttributeSelectOptionRepository::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('factory')->cannotBeEmpty()->end()
+                                            ->scalarNode('form')->defaultValue(AttributeSelectOptionType::class)->cannotBeEmpty()->end()
+                                        ->end()
+                                    ->end()
+                                    ->arrayNode('translation')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->variableNode('options')->end()
+                                            ->arrayNode('classes')
+                                                ->addDefaultsIfNotSet()
+                                                ->children()
+                                                    ->scalarNode('model')->defaultValue(AttributeSelectOptionTranslation::class)->cannotBeEmpty()->end()
+                                                    ->scalarNode('interface')->defaultValue(AttributeSelectOptionTranslationInterface::class)->cannotBeEmpty()->end()
                                                     ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                                     ->scalarNode('repository')->cannotBeEmpty()->end()
                                                     ->scalarNode('factory')->defaultValue(Factory::class)->end()

@@ -24,4 +24,10 @@ final class ProductAttributeValueType extends AttributeValueType
     {
         return 'sylius_product_attribute_value';
     }
+
+
+    protected function getAttributeValueSelectOptionTypeName(): string
+    {
+        return ProductAttributeValueSelectOptionType::class;
+    }
 }
