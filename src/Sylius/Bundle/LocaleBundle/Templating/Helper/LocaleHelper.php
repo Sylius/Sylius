@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\LocaleBundle\Templating\Helper;
 
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class LocaleHelper extends Helper implements LocaleHelperInterface
 {
     /**
@@ -35,7 +34,7 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function convertCodeToName($localeCode)
+    public function convertCodeToName(string $localeCode): ?string
     {
         return $this->localeConverter->convertCodeToName($localeCode);
     }
@@ -43,7 +42,7 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_locale';
     }

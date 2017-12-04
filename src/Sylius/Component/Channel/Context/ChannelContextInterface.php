@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Channel\Context;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ChannelContextInterface
 {
     /**
@@ -23,5 +22,5 @@ interface ChannelContextInterface
      *
      * @throws ChannelNotFoundException
      */
-    public function getChannel();
+    public function getChannel(): ChannelInterface;
 }

@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UiBundle\Twig;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class PercentageExtension extends \Twig_Extension
 {
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-            new \Twig_SimpleFilter('sylius_percentage', [$this, 'getPercentage']),
+            new \Twig_Filter('sylius_percentage', [$this, 'getPercentage']),
         ];
     }
 
@@ -31,10 +30,10 @@ class PercentageExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function getPercentage($number)
+    public function getPercentage(float $number): string
     {
         $percentage = $number * 100;
 
-        return $percentage.' %';
+        return $percentage . ' %';
     }
 }

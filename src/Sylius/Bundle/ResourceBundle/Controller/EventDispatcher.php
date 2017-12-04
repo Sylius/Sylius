@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface as SymfonyEventDispatcherInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class EventDispatcher implements EventDispatcherInterface
 {
     /**
@@ -36,11 +35,14 @@ final class EventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function dispatch($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource)
-    {
+    public function dispatch(
+        string $eventName,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ): ResourceControllerEvent {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
-        $event = $this->getEvent($resource);
+        $event = new ResourceControllerEvent($resource);
 
         $this->eventDispatcher->dispatch(sprintf('%s.%s.%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), $event);
 
@@ -50,11 +52,31 @@ final class EventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function dispatchPreEvent($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource)
-    {
+    public function dispatchMultiple(
+        string $eventName,
+        RequestConfiguration $requestConfiguration,
+        $resources
+    ): ResourceControllerEvent {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
-        $event = $this->getEvent($resource);
+        $event = new ResourceControllerEvent($resources);
+
+        $this->eventDispatcher->dispatch(sprintf('%s.%s.%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), $event);
+
+        return $event;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function dispatchPreEvent(
+        string $eventName,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ): ResourceControllerEvent {
+        $eventName = $requestConfiguration->getEvent() ?: $eventName;
+        $metadata = $requestConfiguration->getMetadata();
+        $event = new ResourceControllerEvent($resource);
 
         $this->eventDispatcher->dispatch(sprintf('%s.%s.pre_%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), $event);
 
@@ -64,11 +86,14 @@ final class EventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function dispatchPostEvent($eventName, RequestConfiguration $requestConfiguration, ResourceInterface $resource)
-    {
+    public function dispatchPostEvent(
+        string $eventName,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ): ResourceControllerEvent {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
-        $event = $this->getEvent($resource);
+        $event = new ResourceControllerEvent($resource);
 
         $this->eventDispatcher->dispatch(sprintf('%s.%s.post_%s', $metadata->getApplicationName(), $metadata->getName(), $eventName), $event);
 
@@ -79,13 +104,13 @@ final class EventDispatcher implements EventDispatcherInterface
      * {@inheritdoc}
      */
     public function dispatchInitializeEvent(
-        $eventName,
+        string $eventName,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
-    ) {
+    ): ResourceControllerEvent {
         $eventName = $requestConfiguration->getEvent() ?: $eventName;
         $metadata = $requestConfiguration->getMetadata();
-        $event = $this->getEvent($resource);
+        $event = new ResourceControllerEvent($resource);
 
         $this->eventDispatcher->dispatch(
             sprintf('%s.%s.initialize_%s', $metadata->getApplicationName(), $metadata->getName(), $eventName),
@@ -93,15 +118,5 @@ final class EventDispatcher implements EventDispatcherInterface
         );
 
         return $event;
-    }
-
-    /**
-     * @param ResourceInterface $resource
-     *
-     * @return ResourceControllerEvent
-     */
-    private function getEvent(ResourceInterface $resource)
-    {
-        return new ResourceControllerEvent($resource);
     }
 }

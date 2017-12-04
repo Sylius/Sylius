@@ -9,52 +9,45 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemAvailability;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemAvailabilityValidator;
 use Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock;
 use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $executionContext, AvailabilityCheckerInterface $availabilityChecker)
+    function let(ExecutionContextInterface $executionContext, AvailabilityCheckerInterface $availabilityChecker): void
     {
         $this->beConstructedWith($availabilityChecker);
 
         $this->initialize($executionContext);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CartItemAvailabilityValidator::class);
-    }
-
-    function it_is_constraint_validator()
+    function it_is_constraint_validator(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
 
-    function it_validates_only_add_cart_item_commands(OrderInterface $order)
+    function it_validates_only_add_cart_item_commands(OrderInterface $order): void
     {
         $cartItemAvailabilityConstraint = new CartItemAvailability();
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('validate', [$order, $cartItemAvailabilityConstraint]);
     }
 
-    function it_is_cart_item_availability_validator(AddToCartCommandInterface $addCartItemCommand)
+    function it_is_cart_item_availability_validator(AddToCartCommandInterface $addCartItemCommand): void
     {
         $inStockConstraint = new InStock();
 
@@ -68,12 +61,12 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant
-    ) {
+    ): void {
         $addCartItemCommand->getCart()->willReturn($order);
         $addCartItemCommand->getCartItem()->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getQuantity()->willReturn(10);
-        $order->getItems()->willReturn([]);
+        $order->getItems()->willReturn(new ArrayCollection([]));
 
         $availabilityChecker->isStockSufficient($productVariant, 10)->willReturn(true);
 
@@ -91,12 +84,12 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant
-    ) {
+    ): void {
         $addCartItemCommand->getCart()->willReturn($order);
         $addCartItemCommand->getCartItem()->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getQuantity()->willReturn(10);
-        $order->getItems()->willReturn([]);
+        $order->getItems()->willReturn(new ArrayCollection([]));
         $productVariant->getInventoryName()->willReturn('Mug');
 
         $availabilityChecker->isStockSufficient($productVariant, 10)->willReturn(false);
@@ -117,14 +110,14 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         OrderItemInterface $existingOrderItem,
         ProductVariantInterface $productVariant
-    ) {
+    ): void {
         $addCartItemCommand->getCart()->willReturn($order);
         $addCartItemCommand->getCartItem()->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getQuantity()->willReturn(10);
         $productVariant->getInventoryName()->willReturn('Mug');
 
-        $order->getItems()->willReturn([$existingOrderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$existingOrderItem->getWrappedObject()]));
         $existingOrderItem->getQuantity()->willReturn(10);
         $existingOrderItem->equals($orderItem)->willReturn(true);
 
@@ -146,14 +139,14 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         OrderItemInterface $existingOrderItem,
         ProductVariantInterface $productVariant
-    ) {
+    ): void {
         $addCartItemCommand->getCart()->willReturn($order);
         $addCartItemCommand->getCartItem()->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getQuantity()->willReturn(10);
         $existingOrderItem->equals($orderItem)->willReturn(true);
 
-        $order->getItems()->willReturn([$existingOrderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$existingOrderItem->getWrappedObject()]));
         $existingOrderItem->getQuantity()->willReturn(10);
 
         $availabilityChecker->isStockSufficient($productVariant, 20)->willReturn(true);

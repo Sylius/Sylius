@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\View;
 
 use Sylius\Component\Grid\Data\DataProviderInterface;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class GridViewFactory implements GridViewFactoryInterface
 {
     /**
@@ -36,7 +35,7 @@ final class GridViewFactory implements GridViewFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create(Grid $grid, Parameters $parameters)
+    public function create(Grid $grid, Parameters $parameters): GridViewInterface
     {
         return new GridView($this->dataProvider->getData($grid, $parameters), $grid, $parameters);
     }

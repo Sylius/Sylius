@@ -9,32 +9,25 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ReviewBundle\Updater;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ReviewBundle\Updater\AverageRatingUpdater;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Calculator\ReviewableRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AverageRatingUpdaterSpec extends ObjectBehavior
 {
-    function let(ReviewableRatingCalculatorInterface $averageRatingCalculator, ObjectManager $reviewSubjectManager)
+    function let(ReviewableRatingCalculatorInterface $averageRatingCalculator, ObjectManager $reviewSubjectManager): void
     {
         $this->beConstructedWith($averageRatingCalculator, $reviewSubjectManager);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(AverageRatingUpdater::class);
-    }
-
-    function it_implements_product_average_rating_updater_interface()
+    function it_implements_product_average_rating_updater_interface(): void
     {
         $this->shouldImplement(ReviewableRatingUpdaterInterface::class);
     }
@@ -43,7 +36,7 @@ final class AverageRatingUpdaterSpec extends ObjectBehavior
         $averageRatingCalculator,
         $reviewSubjectManager,
         ReviewableInterface $reviewSubject
-    ) {
+    ): void {
         $averageRatingCalculator->calculate($reviewSubject)->willReturn(4.5);
 
         $reviewSubject->setAverageRating(4.5)->shouldBeCalled();
@@ -57,7 +50,7 @@ final class AverageRatingUpdaterSpec extends ObjectBehavior
         $reviewSubjectManager,
         ReviewableInterface $reviewSubject,
         ReviewInterface $review
-    ) {
+    ): void {
         $review->getReviewSubject()->willReturn($reviewSubject);
         $averageRatingCalculator->calculate($reviewSubject)->willReturn(4.5);
 

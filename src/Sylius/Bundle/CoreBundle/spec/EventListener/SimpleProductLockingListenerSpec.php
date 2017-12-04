@@ -9,30 +9,23 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EventListener\SimpleProductLockingListener;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class SimpleProductLockingListenerSpec extends ObjectBehavior
 {
-    function let(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver)
+    function let(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver): void
     {
         $this->beConstructedWith($manager, $variantResolver);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SimpleProductLockingListener::class);
     }
 
     function it_locks_variant_of_a_simple_product_entity(
@@ -41,7 +34,7 @@ final class SimpleProductLockingListenerSpec extends ObjectBehavior
         GenericEvent $event,
         ProductInterface $product,
         ProductVariantInterface $productVariant
-    ) {
+    ): void {
         $event->getSubject()->willReturn($product);
         $product->isSimple()->willReturn(true);
         $variantResolver->getVariant($product)->willReturn($productVariant);
@@ -55,14 +48,14 @@ final class SimpleProductLockingListenerSpec extends ObjectBehavior
     function it_does_not_lock_variant_of_a_configurable_product_entity(
         GenericEvent $event,
         ProductInterface $product
-    ) {
+    ): void {
         $event->getSubject()->willReturn($product);
         $product->isSimple()->willReturn(false);
 
         $this->lock($event);
     }
 
-    function it_throws_an_invalid_argument_exception_if_event_subject_is_not_a_product(GenericEvent $event)
+    function it_throws_an_invalid_argument_exception_if_event_subject_is_not_a_product(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject');
 

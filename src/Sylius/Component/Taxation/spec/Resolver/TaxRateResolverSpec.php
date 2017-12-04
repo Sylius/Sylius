@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Taxation\Resolver;
 
 use PhpSpec\ObjectBehavior;
@@ -18,22 +20,14 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class TaxRateResolverSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $taxRateRepository)
+    function let(RepositoryInterface $taxRateRepository): void
     {
         $this->beConstructedWith($taxRateRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType('Sylius\Component\Taxation\Resolver\TaxRateResolver');
-    }
-
-    function it_implements_Sylius_tax_rate_resolver_interface()
+    function it_implements_tax_rate_resolver_interface(): void
     {
         $this->shouldImplement(TaxRateResolverInterface::class);
     }
@@ -43,7 +37,7 @@ final class TaxRateResolverSpec extends ObjectBehavior
         TaxableInterface $taxable,
         TaxCategoryInterface $taxCategory,
         TaxRateInterface $taxRate
-    ) {
+    ): void {
         $taxable->getTaxCategory()->willReturn($taxCategory);
         $taxRateRepository->findOneBy(['category' => $taxCategory])->shouldBeCalled()->willReturn($taxRate);
 
@@ -54,7 +48,7 @@ final class TaxRateResolverSpec extends ObjectBehavior
         $taxRateRepository,
         TaxableInterface $taxable,
         TaxCategoryInterface $taxCategory
-    ) {
+    ): void {
         $taxable->getTaxCategory()->willReturn($taxCategory);
         $taxRateRepository->findOneBy(['category' => $taxCategory])->shouldBeCalled()->willReturn(null);
 
@@ -63,7 +57,7 @@ final class TaxRateResolverSpec extends ObjectBehavior
 
     function it_returns_null_if_taxable_does_not_belong_to_any_category(
         TaxableInterface $taxable
-    ) {
+    ): void {
         $taxable->getTaxCategory()->willReturn(null);
 
         $this->resolve($taxable)->shouldReturn(null);

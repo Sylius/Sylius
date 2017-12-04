@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
@@ -20,10 +22,6 @@ use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 abstract class AbstractResourceBundle extends Bundle implements ResourceBundleInterface
 {
     /**
@@ -36,11 +34,11 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         if (null !== $this->getModelNamespace()) {
             foreach ($this->getSupportedDrivers() as $driver) {
-                list($compilerPassClassName, $compilerPassMethod) = $this->getMappingCompilerPassInfo($driver);
+                [$compilerPassClassName, $compilerPassMethod] = $this->getMappingCompilerPassInfo($driver);
 
                 if (class_exists($compilerPassClassName)) {
                     if (!method_exists($compilerPassClassName, $compilerPassMethod)) {
@@ -57,8 +55,8 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
                                 [$this->getObjectManagerParameter()],
                                 sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
                             ));
-                            break;
 
+                            break;
                         case ResourceBundleInterface::MAPPING_ANNOTATION:
                             $container->addCompilerPass($compilerPassClassName::$compilerPassMethod(
                                 [$this->getModelNamespace()],
@@ -79,7 +77,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      *
      * @return string
      */
-    protected function getBundlePrefix()
+    protected function getBundlePrefix(): string
     {
         return Container::underscore(substr(strrchr(get_class($this), '\\'), 1, -6));
     }
@@ -89,7 +87,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      *
      * @return string
      */
-    protected function getDoctrineMappingDirectory()
+    protected function getDoctrineMappingDirectory(): string
     {
         return 'model';
     }
@@ -99,7 +97,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      *
      * @return string
      */
-    protected function getModelNamespace()
+    protected function getModelNamespace(): ?string
     {
         return null;
     }
@@ -113,17 +111,20 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      *
      * @throws UnknownDriverException
      */
-    protected function getMappingCompilerPassInfo($driverType)
+    protected function getMappingCompilerPassInfo(string $driverType): array
     {
         switch ($driverType) {
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
                 $mappingsPassClassname = DoctrineMongoDBMappingsPass::class;
+
                 break;
             case SyliusResourceBundle::DRIVER_DOCTRINE_ORM:
                 $mappingsPassClassname = DoctrineOrmMappingsPass::class;
+
                 break;
             case SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM:
                 $mappingsPassClassname = DoctrinePhpcrMappingsPass::class;
+
                 break;
             default:
                 throw new UnknownDriverException($driverType);
@@ -139,7 +140,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      *
      * @return string
      */
-    protected function getConfigFilesPath()
+    protected function getConfigFilesPath(): string
     {
         return sprintf(
             '%s/Resources/config/doctrine/%s',
@@ -151,7 +152,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     /**
      * @return string
      */
-    protected function getObjectManagerParameter()
+    protected function getObjectManagerParameter(): string
     {
         return sprintf('%s.object_manager', $this->getBundlePrefix());
     }

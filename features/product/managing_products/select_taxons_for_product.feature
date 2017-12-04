@@ -10,6 +10,7 @@ Feature: Select taxon for a product
         And the store has a "T-Shirt Banana" configurable product
         And the store has a product "T-Shirt Batman"
         And I am logged in as an administrator
+        And I am using "English (United Kingdom)" locale for my panel
 
     @ui @javascript
     Scenario: Specifying main taxon for configurable product

@@ -9,32 +9,24 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Joseph Bielawski <stloyd@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class HasTaxonRuleCheckerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(HasTaxonRuleChecker::class);
-    }
-
-    function it_is_a_rule_checker()
+    function it_is_a_rule_checker(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
@@ -44,13 +36,13 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         OrderItemInterface $item,
         ProductInterface $bastardSword,
         TaxonInterface $swords
-    ) {
+    ): void {
         $configuration = ['taxons' => ['swords']];
 
         $swords->getCode()->willReturn('swords');
-        $bastardSword->getTaxons()->willReturn([$swords]);
+        $bastardSword->getTaxons()->willReturn(new ArrayCollection([$swords->getWrappedObject()]));
         $item->getProduct()->willReturn($bastardSword);
-        $subject->getItems()->willReturn([$item]);
+        $subject->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 
         $this->isEligible($subject, $configuration)->shouldReturn(true);
     }
@@ -59,15 +51,14 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $bastardSword,
-        ProductTaxonInterface $bastardSwordProductTaxon,
         TaxonInterface $swords
-    ) {
+    ): void {
         $configuration = ['taxons' => ['swords', 'axes']];
 
         $swords->getCode()->willReturn('swords');
-        $bastardSword->getTaxons()->willReturn([$swords]);
+        $bastardSword->getTaxons()->willReturn(new ArrayCollection([$swords->getWrappedObject()]));
         $item->getProduct()->willReturn($bastardSword);
-        $subject->getItems()->willReturn([$item]);
+        $subject->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 
         $this->isEligible($subject, $configuration)->shouldReturn(true);
     }
@@ -76,20 +67,19 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $reflexBow,
-        ProductTaxonInterface $reflexBowProductTaxon,
         TaxonInterface $bows
-    ) {
+    ): void {
         $configuration = ['taxons' => ['swords', 'axes']];
 
         $bows->getCode()->willReturn('bows');
-        $reflexBow->getTaxons()->willReturn([$bows]);
+        $reflexBow->getTaxons()->willReturn(new ArrayCollection([$bows->getWrappedObject()]));
         $item->getProduct()->willReturn($reflexBow);
-        $subject->getItems()->willReturn([$item]);
+        $subject->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
 
         $this->isEligible($subject, $configuration)->shouldReturn(false);
     }
 
-    function it_does_nothing_if_a_configuration_is_invalid(OrderInterface $subject)
+    function it_does_nothing_if_a_configuration_is_invalid(OrderInterface $subject): void
     {
         $subject->getItems()->shouldNotBeCalled();
 
@@ -99,7 +89,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
     function it_throws_an_exception_if_promotion_subject_is_not_order(
         Collection $taxonsCollection,
         PromotionSubjectInterface $subject
-    ) {
+    ): void {
         $this
             ->shouldThrow(new UnsupportedTypeException($subject->getWrappedObject(), OrderInterface::class))
             ->during('isEligible', [$subject, ['taxons' => $taxonsCollection]])

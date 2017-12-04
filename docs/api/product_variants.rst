@@ -74,7 +74,7 @@ If you request more detailed data, you will receive an object with the following
 
 .. note::
 
-    Read more about :doc:`ProductVariant model in the component docs</components/Product/models>`.
+    Read more about :doc:`ProductVariant model in the component docs</components_and_bundles/components/Product/models>`.
 
 Creating a Product Variant
 --------------------------

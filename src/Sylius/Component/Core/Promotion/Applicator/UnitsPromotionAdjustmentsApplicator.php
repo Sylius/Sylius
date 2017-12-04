@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Applicator;
 
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
@@ -17,12 +19,10 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
+use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsApplicatorInterface
 {
     /**
@@ -49,8 +49,10 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnsupportedTypeException
      */
-    public function apply(OrderInterface $order, PromotionInterface $promotion, array $adjustmentsAmounts)
+    public function apply(OrderInterface $order, PromotionInterface $promotion, array $adjustmentsAmounts): void
     {
         Assert::eq($order->countItems(), count($adjustmentsAmounts));
 
@@ -73,8 +75,8 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
     private function applyAdjustmentsOnItemUnits(
         OrderItemInterface $item,
         PromotionInterface $promotion,
-        $itemPromotionAmount
-    ) {
+        int $itemPromotionAmount
+    ): void {
         $splitPromotionAmount = $this->distributor->distribute($itemPromotionAmount, $item->getQuantity());
 
         $i = 0;
@@ -93,7 +95,7 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
      * @param OrderItemUnitInterface $unit
      * @param int $amount
      */
-    private function addAdjustment(PromotionInterface $promotion, OrderItemUnitInterface $unit, $amount)
+    private function addAdjustment(PromotionInterface $promotion, OrderItemUnitInterface $unit, int $amount): void
     {
         $adjustment = $this->adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, $promotion->getName(), $amount)

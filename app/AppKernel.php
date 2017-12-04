@@ -9,18 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 use Sylius\Bundle\CoreBundle\Application\Kernel;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class AppKernel extends Kernel
 {
     /**
      * {@inheritdoc}
      */
-    public function registerBundles()
+    public function registerBundles(): array
     {
         $bundles = [
             new \Sylius\Bundle\AdminBundle\SyliusAdminBundle(),

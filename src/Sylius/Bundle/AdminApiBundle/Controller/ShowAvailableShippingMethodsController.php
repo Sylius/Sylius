@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Controller;
 
 use FOS\RestBundle\View\View;
@@ -25,9 +27,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ShowAvailableShippingMethodsController
 {
     /**
@@ -81,7 +80,7 @@ final class ShowAvailableShippingMethodsController
      *
      * @return Response
      */
-    public function showAction(Request $request)
+    public function showAction(Request $request): Response
     {
         /** @var OrderInterface $cart */
         $cart = $this->getCartOr404($request->attributes->get('orderId'));
@@ -105,13 +104,15 @@ final class ShowAvailableShippingMethodsController
      * @param mixed $cartId
      *
      * @return OrderInterface
+     *
+     * @throws NotFoundHttpException
      */
-    private function getCartOr404($cartId)
+    private function getCartOr404($cartId): OrderInterface
     {
         $cart = $this->orderRepository->findCartById($cartId);
 
         if (null === $cart) {
-            throw new NotFoundHttpException(sprintf("The cart with %s id could not be found!", $cartId));
+            throw new NotFoundHttpException(sprintf('The cart with %s id could not be found!', $cartId));
         }
 
         return $cart;
@@ -123,7 +124,7 @@ final class ShowAvailableShippingMethodsController
      *
      * @return bool
      */
-    private function isCheckoutTransitionPossible(OrderInterface $cart, $transition)
+    private function isCheckoutTransitionPossible(OrderInterface $cart, string $transition): bool
     {
         return $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->can($transition);
     }
@@ -134,9 +135,9 @@ final class ShowAvailableShippingMethodsController
      *
      * @return array
      */
-    private function getCalculatedShippingMethods(ShipmentInterface $shipment, $locale)
+    private function getCalculatedShippingMethods(ShipmentInterface $shipment, string $locale): array
     {
-        $shippingMethods =  $this->shippingMethodsResolver->getSupportedMethods($shipment);
+        $shippingMethods = $this->shippingMethodsResolver->getSupportedMethods($shipment);
 
         $rawShippingMethods = [];
 

@@ -18,19 +18,22 @@ Feature: Seeing customer's orders' statistics
         Then I should see the customer has not placed any orders yet
 
     @ui
-    Scenario: Seeing how many orders the customer has placed in specific channel
-        Given customer "lirael.clayr@abhorsen.ok" has placed 12 orders on the "Web-UK" channel in each buying 2 "Onion" products
+    Scenario: Seeing how many fulfilled orders the customer has placed in specific channel
+        Given customer "lirael.clayr@abhorsen.ok" has fulfilled 12 orders placed on the "Web-UK" channel in each buying 2 "Onion" products
+        And customer "lirael.clayr@abhorsen.ok" has placed 3 orders on the "Web-UK" channel in each buying 3 "Onion" products
         When I view their details
         Then I should see that they have placed 12 orders in the "Web-UK" channel
 
     @ui
-    Scenario: Seeing the total value of customer's orders' in given channel in its base currency
-        Given customer "lirael.clayr@abhorsen.ok" has placed 5 orders on the "Web-US" channel in each buying 5 "Onion" products
+    Scenario: Seeing the total value of customer's fulfilled orders' in given channel in its base currency
+        Given customer "lirael.clayr@abhorsen.ok" has fulfilled 5 orders placed on the "Web-US" channel in each buying 5 "Onion" products
+        And customer "lirael.clayr@abhorsen.ok" has placed 2 orders on the "Web-US" channel in each buying 2 "Onion" products
         When I view their details
         Then I should see that the overall total value of all their orders in the "Web-US" channel is "$5,000.00"
 
     @ui
-    Scenario: Seeing the average total of customer's order in given channel in its base currency
-        Given customer "lirael.clayr@abhorsen.ok" has placed 12 orders on the "Web-UK" channel in each buying 2 "Onion" products
+    Scenario: Seeing the average total of customer's fulfilled order in given channel in its base currency
+        Given customer "lirael.clayr@abhorsen.ok" has fulfilled 12 orders placed on the "Web-UK" channel in each buying 2 "Onion" products
+        And customer "lirael.clayr@abhorsen.ok" has placed 2 orders on the "Web-UK" channel in each buying 2 "Onion" products
         When I view their details
         Then I should see that the average total value of their order in the "Web-UK" channel is "£2,400.00"

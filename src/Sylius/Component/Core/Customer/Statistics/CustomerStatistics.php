@@ -9,22 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Customer\Statistics;
 
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class CustomerStatistics
 {
     /**
-     * @var PerChannelCustomerStatistics[]
+     * @var array|PerChannelCustomerStatistics[]
      */
     private $perChannelsStatistics;
 
     /**
-     * @param PerChannelCustomerStatistics[] $perChannelStatistics
+     * @param array|PerChannelCustomerStatistics[] $perChannelStatistics
      */
     public function __construct(array $perChannelStatistics)
     {
@@ -36,7 +35,7 @@ final class CustomerStatistics
     /**
      * @return int
      */
-    public function getAllOrdersCount()
+    public function getAllOrdersCount(): int
     {
         return array_sum(array_map(function (PerChannelCustomerStatistics $statistics) {
             return $statistics->getOrdersCount();
@@ -44,9 +43,9 @@ final class CustomerStatistics
     }
 
     /**
-     * @return PerChannelCustomerStatistics[]
+     * @return array|PerChannelCustomerStatistics[]
      */
-    public function getPerChannelsStatistics()
+    public function getPerChannelsStatistics(): array
     {
         return $this->perChannelsStatistics;
     }

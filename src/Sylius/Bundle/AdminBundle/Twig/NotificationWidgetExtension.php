@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Twig;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
+use Sylius\Bundle\CoreBundle\Application\Kernel;
+
 final class NotificationWidgetExtension extends \Twig_Extension
 {
     /**
@@ -30,7 +31,7 @@ final class NotificationWidgetExtension extends \Twig_Extension
      * @param bool $areNotificationsEnabled
      * @param int $checkFrequency
      */
-    public function __construct($areNotificationsEnabled, $checkFrequency)
+    public function __construct(bool $areNotificationsEnabled, int $checkFrequency)
     {
         $this->areNotificationsEnabled = $areNotificationsEnabled;
         $this->checkFrequency = $checkFrequency;
@@ -39,10 +40,10 @@ final class NotificationWidgetExtension extends \Twig_Extension
     /**
      * @return array
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction(
+            new \Twig_Function(
                 'sylius_render_notifications_widget',
                 [$this, 'renderWidget'],
                 [
@@ -58,7 +59,7 @@ final class NotificationWidgetExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function renderWidget(\Twig_Environment $environment)
+    public function renderWidget(\Twig_Environment $environment): string
     {
         if (!$this->areNotificationsEnabled) {
             return '';
@@ -66,6 +67,7 @@ final class NotificationWidgetExtension extends \Twig_Extension
 
         return $environment->render('@SyliusAdmin/_notification.html.twig', [
             'frequency' => $this->checkFrequency,
+            'currentVersion' => Kernel::VERSION,
         ]);
     }
 }

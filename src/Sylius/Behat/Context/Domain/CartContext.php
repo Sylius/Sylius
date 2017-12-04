@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
@@ -17,9 +19,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CartContext implements Context
 {
     /**
@@ -49,7 +48,7 @@ final class CartContext implements Context
      */
     public function theyAbandonedTheirCart(OrderInterface $cart, $amount, $time)
     {
-        $cart->setUpdatedAt(new \DateTime('-'.$amount.' '.$time));
+        $cart->setUpdatedAt(new \DateTime('-' . $amount . ' ' . $time));
         $this->orderManager->flush();
     }
 

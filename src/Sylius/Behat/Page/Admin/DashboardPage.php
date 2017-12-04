@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin;
 
 use Behat\Mink\Session;
@@ -16,9 +18,6 @@ use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class DashboardPage extends SymfonyPage implements DashboardPageInterface
 {
     /**
@@ -135,7 +134,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'order_list' => '#orders',
             'total_sales' => '#total-sales',
             'sub_header' => '.ui.header .content .sub.header',
-            'channel_choosing_link' => 'a:contains("%channelName%")'
+            'channel_choosing_link' => 'a:contains("%channelName%")',
         ]);
     }
 }

@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\OrderBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\View\View;
-use Payum\Core\Registry\RegistryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -23,11 +23,9 @@ use Sylius\Component\Order\SyliusCartEvents;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Webmozart\Assert\Assert;
 
 class OrderController extends ResourceController
 {
@@ -36,7 +34,7 @@ class OrderController extends ResourceController
      *
      * @return Response
      */
-    public function summaryAction(Request $request)
+    public function summaryAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -61,12 +59,13 @@ class OrderController extends ResourceController
 
         return $this->viewHandler->handle($configuration, $view);
     }
+
     /**
      * @param Request $request
      *
      * @return Response
      */
-    public function widgetAction(Request $request)
+    public function widgetAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -89,7 +88,7 @@ class OrderController extends ResourceController
      *
      * @return Response
      */
-    public function saveAction(Request $request)
+    public function saveAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -152,7 +151,7 @@ class OrderController extends ResourceController
      *
      * @return Response
      */
-    public function clearAction(Request $request)
+    public function clearAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -189,9 +188,9 @@ class OrderController extends ResourceController
     /**
      * @param RequestConfiguration $configuration
      *
-     * @return RedirectResponse
+     * @return Response
      */
-    protected function redirectToCartSummary(RequestConfiguration $configuration)
+    protected function redirectToCartSummary(RequestConfiguration $configuration): Response
     {
         if (null === $configuration->getParameters()->get('redirect')) {
             return $this->redirectHandler->redirectToRoute($configuration, $this->getCartSummaryRoute());
@@ -203,7 +202,7 @@ class OrderController extends ResourceController
     /**
      * @return string
      */
-    protected function getCartSummaryRoute()
+    protected function getCartSummaryRoute(): string
     {
         return 'sylius_cart_summary';
     }
@@ -211,7 +210,7 @@ class OrderController extends ResourceController
     /**
      * @return OrderInterface
      */
-    protected function getCurrentCart()
+    protected function getCurrentCart(): OrderInterface
     {
         return $this->getContext()->getCart();
     }
@@ -219,7 +218,7 @@ class OrderController extends ResourceController
     /**
      * @return CartContextInterface
      */
-    protected function getContext()
+    protected function getContext(): CartContextInterface
     {
         return $this->get('sylius.context.cart');
     }
@@ -227,7 +226,7 @@ class OrderController extends ResourceController
     /**
      * @return OrderRepositoryInterface
      */
-    protected function getOrderRepository()
+    protected function getOrderRepository(): OrderRepositoryInterface
     {
         return $this->get('sylius.repository.order');
     }
@@ -235,7 +234,7 @@ class OrderController extends ResourceController
     /**
      * @return EventDispatcherInterface
      */
-    protected function getEventDispatcher()
+    protected function getEventDispatcher(): EventDispatcherInterface
     {
         return $this->container->get('event_dispatcher');
     }

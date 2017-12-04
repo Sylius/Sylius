@@ -9,42 +9,41 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Review\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface ReviewerInterface extends ResourceInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail();
+    public function getEmail(): ?string;
 
     /**
-     * @param string $email
+     * @param string|null $email
      */
-    public function setEmail($email);
+    public function setEmail(?string $email): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFirstName();
+    public function getFirstName(): ?string;
 
     /**
-     * @param string $firstName
+     * @param string|null $firstName
      */
-    public function setFirstName($firstName);
+    public function setFirstName(?string $firstName): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName();
+    public function getLastName(): ?string;
 
     /**
-     * @param string $lastName
+     * @param string|null $lastName
      */
-    public function setLastName($lastName);
+    public function setLastName(?string $lastName): void;
 }

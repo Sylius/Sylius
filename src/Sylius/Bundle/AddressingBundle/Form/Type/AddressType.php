@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -18,9 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class AddressType extends AbstractResourceType
 {
     /**
@@ -33,7 +32,7 @@ final class AddressType extends AbstractResourceType
      * @param string[] $validationGroups
      * @param EventSubscriberInterface $buildAddressFormSubscriber
      */
-    public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $buildAddressFormSubscriber)
+    public function __construct(string $dataClass, array $validationGroups, EventSubscriberInterface $buildAddressFormSubscriber)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -43,7 +42,7 @@ final class AddressType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('firstName', TextType::class, [
@@ -80,7 +79,7 @@ final class AddressType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 
@@ -102,7 +101,7 @@ final class AddressType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_address';
     }

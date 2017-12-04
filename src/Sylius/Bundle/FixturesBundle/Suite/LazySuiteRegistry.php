@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Suite;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class LazySuiteRegistry implements SuiteRegistryInterface
 {
     /**
@@ -43,7 +42,7 @@ final class LazySuiteRegistry implements SuiteRegistryInterface
      * @param string $name
      * @param array $configuration
      */
-    public function addSuite($name, array $configuration)
+    public function addSuite(string $name, array $configuration): void
     {
         $this->suiteDefinitions[$name] = $configuration;
     }
@@ -51,7 +50,7 @@ final class LazySuiteRegistry implements SuiteRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function getSuite($name)
+    public function getSuite(string $name): SuiteInterface
     {
         if (isset($this->suites[$name])) {
             return $this->suites[$name];
@@ -67,7 +66,7 @@ final class LazySuiteRegistry implements SuiteRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function getSuites()
+    public function getSuites(): array
     {
         $suites = [];
         foreach (array_keys($this->suiteDefinitions) as $name) {

@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Currency\Converter;
 
 use Symfony\Component\Intl\Intl;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class CurrencyNameConverter implements CurrencyNameConverterInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function convertToCode($name, $locale = 'en')
+    public function convertToCode(string $name, ?string $locale = null): string
     {
-        $names = Intl::getCurrencyBundle()->getCurrencyNames($locale);
+        $names = Intl::getCurrencyBundle()->getCurrencyNames($locale ?? 'en');
         $currencyCode = array_search($name, $names, true);
 
         if (false === $currencyCode) {

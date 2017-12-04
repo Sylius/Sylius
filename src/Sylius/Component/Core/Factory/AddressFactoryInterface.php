@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface AddressFactoryInterface extends FactoryInterface
 {
     /**
@@ -25,5 +24,5 @@ interface AddressFactoryInterface extends FactoryInterface
      *
      * @return AddressInterface
      */
-    public function createForCustomer(CustomerInterface $customer);
+    public function createForCustomer(CustomerInterface $customer): AddressInterface;
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
@@ -18,12 +20,12 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConfigurableProductPageInterface
 {
     use ChecksCodeImmutability;
+
+    /** @var array */
+    private $imageUrls = [];
 
     /**
      * {@inheritdoc}
@@ -40,7 +42,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
      */
     public function isProductOptionChosen($option)
     {
-        return $this->getElement('options')->find('named', array('option', $option))->hasAttribute('selected');
+        return $this->getElement('options')->find('named', ['option', $option])->hasAttribute('selected');
     }
 
     /**
@@ -95,11 +97,11 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     {
         $imageElement = $this->getImageElementByType($type);
 
-        if (null === $imageElement) {
+        $imageUrl = $imageElement ? $imageElement->find('css', 'img')->getAttribute('src') : $this->provideImageUrlForType($type);
+        if (null === $imageElement && null === $imageUrl) {
             return false;
         }
 
-        $imageUrl = $imageElement->find('css', 'img')->getAttribute('src');
         $this->getDriver()->visit($imageUrl);
         $pageText = $this->getDocument()->getText();
         $this->getDriver()->back();
@@ -123,7 +125,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
             $imageForm->fillField('Type', $type);
         }
 
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
     /**
@@ -134,7 +136,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $filesPath = $this->getParameter('files_path');
 
         $imageForm = $this->getImageElementByType($type);
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
     /**
@@ -145,12 +147,28 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $this->clickTabIfItsNotActive('media');
 
         $imageElement = $this->getImageElementByType($type);
+        $imageSourceElement = $imageElement->find('css', 'img');
+        if (null !== $imageSourceElement) {
+            $this->saveImageUrlForType($type, $imageSourceElement->getAttribute('src'));
+        }
+
         $imageElement->clickLink('Delete');
     }
 
     public function removeFirstImage()
     {
+        $this->clickTabIfItsNotActive('media');
         $imageElement = $this->getFirstImageElement();
+        $imageTypeElement = $imageElement->find('css', 'input[type=text]');
+        $imageSourceElement = $imageElement->find('css', 'img');
+
+        if (null !== $imageTypeElement && null !== $imageSourceElement) {
+            $this->saveImageUrlForType(
+                $imageTypeElement->getValue(),
+                $imageSourceElement->getAttribute('src')
+            );
+        }
+
         $imageElement->clickLink('Delete');
     }
 
@@ -227,7 +245,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     private function getImageElementByType($type)
     {
         $images = $this->getElement('images');
-        $typeInput = $images->find('css', 'input[value="'.$type.'"]');
+        $typeInput = $images->find('css', 'input[value="' . $type . '"]');
 
         if (null === $typeInput) {
             return null;
@@ -278,5 +296,15 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     {
         $typeField = $imageElement->findField('Type');
         $typeField->setValue($type);
+    }
+
+    private function provideImageUrlForType(string $type): ?string
+    {
+        return $this->imageUrls[$type] ?? null;
+    }
+
+    private function saveImageUrlForType(string $type, string $imageUrl): void
+    {
+        $this->imageUrls[$type] = $imageUrl;
     }
 }

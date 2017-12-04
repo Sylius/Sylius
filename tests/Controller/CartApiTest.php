@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
@@ -16,9 +18,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CartApiTest extends JsonApiTestCase
 {
     /**
@@ -427,7 +426,6 @@ EOT;
         }
 EOT;
 
-
         $this->client->request('PUT', $this->getCartItemUrl($cart, $cartItem), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
@@ -584,6 +582,7 @@ EOT;
     /**
      * @param OrderInterface $cart
      * @param OrderItemInterface $cartItem
+     *
      * @return string
      */
     private function getCartItemUrl(OrderInterface $cart, OrderItemInterface $cartItem)

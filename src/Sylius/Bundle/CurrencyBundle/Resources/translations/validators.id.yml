@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    currency:
+        code:
+            exact_length: Kode mata uang harus 3 karakter.
+            not_blank: Silakan pilih kode mata uang.
+            regex: Kode mata uang hanya boleh terdiri dari huruf, angka, tanda strip, dan garis bawah.
+            unique: Kode mata uang harus unik.
+        exchange_rate:
+            not_blank: Mohon masukan rate nilai tukar.
+    exchange_rate:
+        ratio:
+            greater_than: Rasio harus lebih besar dari 0.
+            invalid: Selisih harus berupa angka.
+            not_blank: Mohon masukan selisih rate nilai tukar.
+        source_currency:
+            not_blank: Mohon masukan kemana rate nilai tukar tersebut dikenakan.
+        target_currency:
+            not_blank: Mohon masukan ke mata uang yang mana rate nilai tukar tersebut dikenakan.
+        unique_currency_pair: Pasangan kode mata uang harus unik.
+        different_source_target_currency: Asal dan target mata uang harus berbeda.

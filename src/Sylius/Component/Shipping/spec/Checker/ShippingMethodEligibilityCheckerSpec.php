@@ -9,28 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Shipping\Checker;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ShippingMethodEligibilityChecker::class);
-    }
-
-    function it_implements_Sylius_shipping_method_eligibility_checker_interface()
+    function it_implements_Sylius_shipping_method_eligibility_checker_interface(): void
     {
         $this->shouldImplement(ShippingMethodEligibilityCheckerInterface::class);
     }
@@ -40,12 +33,12 @@ final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory,
         ShippableInterface $shippable
-    ) {
+    ): void {
         $shippingMethod->getCategory()->willReturn($shippingCategory);
         $shippingMethod->getCategoryRequirement()->willReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
 
         $shippable->getShippingCategory()->willReturn($shippingCategory);
-        $subject->getShippables()->willReturn([$shippable]);
+        $subject->getShippables()->willReturn(new ArrayCollection([$shippable->getWrappedObject()]));
 
         $this->isEligible($subject, $shippingMethod)->shouldReturn(true);
     }
@@ -53,7 +46,7 @@ final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
     function it_approves_category_requirement_if_no_category_is_required(
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $shippingMethod
-    ) {
+    ): void {
         $shippingMethod->getCategory()->willReturn(null);
 
         $this->isEligible($subject, $shippingMethod)->shouldReturn(true);
@@ -65,12 +58,12 @@ final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         ShippingCategoryInterface $shippingCategory,
         ShippingCategoryInterface $shippingCategory2,
         ShippableInterface $shippable
-    ) {
+    ): void {
         $shippingMethod->getCategory()->willReturn($shippingCategory);
         $shippingMethod->getCategoryRequirement()->willReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
 
         $shippable->getShippingCategory()->willReturn($shippingCategory2);
-        $subject->getShippables()->willReturn([$shippable]);
+        $subject->getShippables()->willReturn(new ArrayCollection([$shippable->getWrappedObject()]));
 
         $this->isEligible($subject, $shippingMethod)->shouldReturn(false);
     }

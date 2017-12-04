@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Repository;
 
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Łukasz Chruściel <lchrusciel@gmail.com>
- */
 interface OrderItemRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param mixed $id
      * @param mixed $cartId
      *
-     * @return OrderItemInterface
+     * @return OrderItemInterface|null
      */
-    public function findOneByIdAndCartId($id, $cartId);
+    public function findOneByIdAndCartId($id, $cartId): ?OrderItemInterface;
 }

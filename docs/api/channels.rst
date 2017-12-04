@@ -44,7 +44,7 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`Channels </components/Channel/models>`.
+    Read more about :doc:`Channels docs </components_and_bundles/components/Channel/models>`.
 
 Getting a Single Channel
 ------------------------

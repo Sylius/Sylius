@@ -9,25 +9,24 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Addressing\Model\Address as BaseAddress;
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Address extends BaseAddress implements AddressInterface
 {
     /**
-     * @var CustomerInterface
+     * @var CustomerInterface|null
      */
     protected $customer;
 
     /**
      * {@inheritdoc}
      */
-    public function getCustomer()
+    public function getCustomer(): ?BaseCustomerInterface
     {
         return $this->customer;
     }
@@ -35,7 +34,7 @@ class Address extends BaseAddress implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(BaseCustomerInterface $customer = null)
+    public function setCustomer(?BaseCustomerInterface $customer): void
     {
         $this->customer = $customer;
     }

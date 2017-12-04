@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Locale\Context;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ImmutableLocaleContext implements LocaleContextInterface
 {
     /**
@@ -24,7 +23,7 @@ final class ImmutableLocaleContext implements LocaleContextInterface
     /**
      * @param string $localeCode
      */
-    public function __construct($localeCode)
+    public function __construct(string $localeCode)
     {
         $this->localeCode = $localeCode;
     }
@@ -32,7 +31,7 @@ final class ImmutableLocaleContext implements LocaleContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): string
     {
         return $this->localeCode;
     }

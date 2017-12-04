@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderAdjustmentsClearer implements OrderProcessorInterface
 {
     /**
@@ -28,13 +27,13 @@ final class OrderAdjustmentsClearer implements OrderProcessorInterface
         AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
         AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT,
         AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT,
-        AdjustmentInterface::TAX_ADJUSTMENT
+        AdjustmentInterface::TAX_ADJUSTMENT,
     ];
 
     /**
      * {@inheritdoc}
      */
-    public function process(OrderInterface $order)
+    public function process(OrderInterface $order): void
     {
         foreach (self::$adjustmentsToRemove as $type) {
             $order->removeAdjustmentsRecursively($type);

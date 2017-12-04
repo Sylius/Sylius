@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class PromotionCouponRepository extends EntityRepository implements PromotionCouponRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function createQueryBuilderByPromotionId($promotionId)
+    public function createQueryBuilderByPromotionId($promotionId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.promotion = :promotionId')
@@ -34,7 +34,7 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
     /**
      * {@inheritdoc}
      */
-    public function countByCodeLength($codeLength)
+    public function countByCodeLength(int $codeLength): int
     {
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
@@ -48,7 +48,7 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
     /**
      * {@inheritdoc}
      */
-    public function findOneByCodeAndPromotionCode($code, $promotionCode)
+    public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): ?PromotionCouponInterface
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.promotion', 'promotion')
@@ -59,5 +59,19 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createPaginatorForPromotion(string $promotionCode): iterable
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->leftJoin('o.promotion', 'promotion')
+            ->where('promotion.code = :promotionCode')
+            ->setParameter('promotionCode', $promotionCode)
+        ;
+
+        return $this->getPaginator($queryBuilder);
     }
 }

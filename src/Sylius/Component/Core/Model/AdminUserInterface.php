@@ -9,44 +9,43 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface AdminUserInterface extends BaseUserInterface
 {
-    const DEFAULT_ADMIN_ROLE = 'ROLE_ADMINISTRATION_ACCESS';
+    public const DEFAULT_ADMIN_ROLE = 'ROLE_ADMINISTRATION_ACCESS';
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFirstName();
+    public function getFirstName(): ?string;
 
     /**
-     * @param string $firstName
+     * @param string|null $firstName
      */
-    public function setFirstName($firstName);
+    public function setFirstName(?string $firstName): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName();
+    public function getLastName(): ?string;
 
     /**
-     * @param string $lastName
+     * @param string|null $lastName
      */
-    public function setLastName($lastName);
+    public function setLastName(?string $lastName): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLocaleCode();
+    public function getLocaleCode(): ?string;
 
     /**
-     * @param string $code
+     * @param string|null $code
      */
-    public function setLocaleCode($code);
+    public function setLocaleCode(?string $code): void;
 }

@@ -29,7 +29,7 @@ PHP required modules and configuration
 **PHP version**:
 
 +---------------+-----------------------+
-| PHP           | ^5.6|^7.0             |
+| PHP           | ^7.1                  |
 +---------------+-----------------------+
 
 **PHP extensions**:
@@ -54,7 +54,7 @@ PHP required modules and configuration
 
 .. warning::
 
-    Use your local timezone, for example America/Los_Angeles or Europe/Berlin. See http://www.php.net/timezones for the list of all available timezones.
+    Use your local timezone, for example America/Los_Angeles or Europe/Berlin. See http://php.net/manual/en/timezones.php for the list of all available timezones.
 
 Database
 --------
@@ -72,13 +72,13 @@ By default, the database connection is pre-configured to work with a following M
 Access rights
 -------------
 
-Most of the application folders and files require only read access, but a few folders need also the write access for the Apache user:
+Most of the application folders and files require only read access, but a few folders need also the write access for the Apache/Nginx user:
 
 * var/cache
 * var/logs
 * web/media
 
-You can read how to set these permissions in the `Symfony - setting up permissions <http://symfony.com/doc/current/book/installation.html#book-installation-permissions>`_ section.
+You can read how to set these permissions in the `Symfony - setting up permissions <http://symfony.com/doc/current/setup/file_permissions.html>`_ section.
 
 .. _`gd`: http://php.net/manual/en/book.fileinfo.php
 .. _`exif`: http://php.net/manual/en/book.exif.php

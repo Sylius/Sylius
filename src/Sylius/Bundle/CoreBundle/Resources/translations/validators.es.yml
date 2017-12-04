@@ -64,7 +64,7 @@ sylius:
             min: El peso no puede ser negativo.
             invalid: El peso debe ser un número.
         width:
-            min: El peso no puede ser negativo.
+            min: El ancho no puede ser negativo.
             invalid: El ancho debe ser un número.
         height:
             min: La altura no puede ser negativa.
@@ -76,7 +76,7 @@ sylius:
             all_defined: 'Debes definir el precio para cada canal.'
     product_translation:
         short_description:
-            max: Breve descripción. No debe superar {{ limit }} caractéres.
+            max: La descripción corta no debe superar los {{ limit }} caracteres.
     taxon_image:
         file:
             max_size: La imagen es demasiado grande - {{ size }}{{ suffix }}. El tamaño máximo permitido es {{ limit }}{{ suffix }}.

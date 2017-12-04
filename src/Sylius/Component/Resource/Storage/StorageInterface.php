@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Storage;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 interface StorageInterface
 {
     /**
@@ -21,7 +20,7 @@ interface StorageInterface
      *
      * @return bool
      */
-    public function has($name);
+    public function has(string $name): bool;
 
     /**
      * @param string $name
@@ -29,21 +28,21 @@ interface StorageInterface
      *
      * @return mixed
      */
-    public function get($name, $default = null);
+    public function get(string $name, $default = null);
 
     /**
      * @param string $name
      * @param mixed $value
      */
-    public function set($name, $value);
+    public function set(string $name, $value): void;
 
     /**
      * @param string $name
      */
-    public function remove($name);
+    public function remove(string $name): void;
 
     /**
      * @return array
      */
-    public function all();
+    public function all(): array;
 }

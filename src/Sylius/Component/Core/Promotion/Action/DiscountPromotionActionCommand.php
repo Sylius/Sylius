@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -19,21 +21,19 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 abstract class DiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
     /**
      * @param array $configuration
+     *
+     * @throws \InvalidArgumentException
      */
-    abstract protected function isConfigurationValid(array $configuration);
+    abstract protected function isConfigurationValid(array $configuration): void;
 
     /**
      * {@inheritdoc}
      */
-    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void
     {
         if (!$this->isSubjectValid($subject)) {
             return;
@@ -53,7 +53,7 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
      *
      * @throws \InvalidArgumentException
      */
-    protected function isSubjectValid(PromotionSubjectInterface $subject)
+    protected function isSubjectValid(PromotionSubjectInterface $subject): bool
     {
         Assert::implementsInterface($subject, OrderInterface::class);
 
@@ -67,7 +67,7 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
     private function removeUnitOrderPromotionAdjustmentsByOrigin(
         OrderItemUnitInterface $unit,
         PromotionInterface $promotion
-    ) {
+    ): void {
         foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
             if ($promotion->getCode() === $adjustment->getOriginCode()) {
                 $unit->removeAdjustment($adjustment);

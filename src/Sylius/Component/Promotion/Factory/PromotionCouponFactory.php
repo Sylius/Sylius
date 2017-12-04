@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Factory;
 
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class PromotionCouponFactory implements PromotionCouponFactoryInterface
 {
     /**
@@ -36,7 +36,7 @@ final class PromotionCouponFactory implements PromotionCouponFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(): PromotionCouponInterface
     {
         return $this->factory->createNew();
     }
@@ -44,13 +44,14 @@ final class PromotionCouponFactory implements PromotionCouponFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createForPromotion(PromotionInterface $promotion)
+    public function createForPromotion(PromotionInterface $promotion): PromotionCouponInterface
     {
         Assert::true(
             $promotion->isCouponBased(),
             sprintf('Promotion with name %s is not coupon based.', $promotion->getName())
         );
 
+        /** @var PromotionCouponInterface $coupon */
         $coupon = $this->factory->createNew();
         $coupon->setPromotion($promotion);
 

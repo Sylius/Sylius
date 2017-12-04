@@ -10,8 +10,8 @@ It represents an order that can be either placed or in progress (cart).
 **Order** holds a collection of **OrderItem** instances, which represent products from the shop,
 as its physical copies, with chosen variants and quantities.
 
-Each Order is **assigned to the channel** in which it has been created. Moreover the **language** the customer was using
-and the **currency with its exchange rate** at the moment of creation are saved.
+Each Order is **assigned to the channel** in which it has been created as well as the **language** the customer was using
+while placing the order. The order currency code will be the base currency of the current channel by default.
 
 How to create an Order programmatically?
 ----------------------------------------
@@ -234,5 +234,5 @@ two transitions ``request_payment`` and ``pay``.
 Learn more
 ----------
 
-* :doc:`Order - Component Documentation </components/Order/index>`
-* :doc:`Order - Bundle Documentation </bundles/SyliusOrderBundle/index>`
+* :doc:`Order - Component Documentation </components_and_bundles/components/Order/index>`
+* :doc:`Order - Bundle Documentation </components_and_bundles/bundles/SyliusOrderBundle/index>`

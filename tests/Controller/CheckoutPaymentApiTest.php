@@ -9,16 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CheckoutPaymentApiTest extends CheckoutApiTestCase
 {
     /**
@@ -57,7 +53,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
         $this->addItemToCart($cartId);
         $this->addressOrder($cartId);
 
-        $this->client->request('PATCH',  $this->getSelectPaymentUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PATCH', $this->getSelectPaymentUrl($cartId), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/payment_invalid_order_state', Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -87,7 +83,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
         }
 EOT;
 
-        $this->client->request('PUT',  $this->getSelectPaymentUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', $this->getSelectPaymentUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
 

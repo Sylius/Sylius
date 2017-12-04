@@ -9,17 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
+use Doctrine\ORM\QueryBuilder;
+
 final class ResourceLogEntryRepository extends EntityRepository implements ResourceLogEntryRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function createByObjectIdQueryBuilder($objectId)
+    public function createByObjectIdQueryBuilder(string $objectId): QueryBuilder
     {
         return $this->createQueryBuilder('log')
             ->where('log.objectId = :objectId')

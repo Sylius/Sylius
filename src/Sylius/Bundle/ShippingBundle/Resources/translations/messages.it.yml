@@ -5,13 +5,13 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: Conta
+                count: Quantità
                 equal: Uguale a
             type: Tipo di regola
         shipment:
             state: Stato
             states:
-                checkout: Checkout
+                checkout: Vai alla cassa
                 pending: In attesa
                 ready: Pronto
                 shipped: Spedito
@@ -20,7 +20,7 @@ sylius:
             tracking_code: Codice di monitoraggio della spedizione
         shipping_calculator:
             flat_rate_configuration:
-                label: Tariffa fissa di spedizione
+                label: Tariffa fissa per spedizione
                 amount: Importo
             per_unit_rate_configuration:
                 label: Tariffa fissa per unità
@@ -37,5 +37,6 @@ sylius:
             description: Descrizione
             enabled: Abilitato
             name: Nome
+            position: Posizione
             tax_category: Categoria fiscale
             translations: Traduzioni

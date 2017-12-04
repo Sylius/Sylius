@@ -2,6 +2,7 @@ sylius_admin_product_association_type:
     resource: |
         alias: sylius.product_association_type
         section: admin
+        permission: true
         templates: SyliusAdminBundle:Crud
         except: ['show']
         redirect: update

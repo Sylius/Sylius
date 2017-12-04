@@ -9,23 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface ZoneMemberInterface extends ResourceInterface, CodeAwareInterface
 {
     /**
-     * @return ZoneInterface
+     * @return ZoneInterface|null
      */
-    public function getBelongsTo();
+    public function getBelongsTo(): ?ZoneInterface;
 
     /**
-     * @param ZoneInterface $belongsTo
+     * @param ZoneInterface|null $belongsTo
      */
-    public function setBelongsTo(ZoneInterface $belongsTo = null);
+    public function setBelongsTo(?ZoneInterface $belongsTo): void;
 }

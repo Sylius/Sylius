@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Checkout;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Checkout\CheckoutRedirectListener;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutStateUrlGeneratorInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -23,22 +24,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CheckoutRedirectListenerSpec extends ObjectBehavior
 {
     function let(
         RequestStack $requestStack,
         CheckoutStateUrlGeneratorInterface $checkoutStateUrlGenerator,
         RequestMatcherInterface $requestMatcher
-    ) {
+    ): void {
         $this->beConstructedWith($requestStack, $checkoutStateUrlGenerator, $requestMatcher);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CheckoutRedirectListener::class);
     }
 
     function it_redirects_to_proper_route_based_on_order_checkout_state(
@@ -48,7 +41,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
         RequestMatcherInterface $requestMatcher,
         RequestStack $requestStack,
         ResourceControllerEvent $resourceControllerEvent
-    ) {
+    ): void {
         $requestStack->getCurrentRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);
         $request->attributes = new ParameterBag(['_sylius' => []]);
@@ -66,7 +59,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
         RequestMatcherInterface $requestMatcher,
         RequestStack $requestStack,
         ResourceControllerEvent $resourceControllerEvent
-    ) {
+    ): void {
         $requestStack->getCurrentRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(false);
 
@@ -80,7 +73,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
         RequestMatcherInterface $requestMatcher,
         RequestStack $requestStack,
         ResourceControllerEvent $resourceControllerEvent
-    ) {
+    ): void {
         $requestStack->getCurrentRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);
         $request->attributes = new ParameterBag(['_sylius' => ['redirect' => 'redirect_route']]);
@@ -95,7 +88,7 @@ final class CheckoutRedirectListenerSpec extends ObjectBehavior
         RequestMatcherInterface $requestMatcher,
         RequestStack $requestStack,
         ResourceControllerEvent $resourceControllerEvent
-    ) {
+    ): void {
         $requestStack->getCurrentRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);
         $request->attributes = new ParameterBag(['_sylius' => []]);

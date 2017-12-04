@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\OrderBundle\Controller;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
@@ -22,18 +23,15 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class OrderItemController extends ResourceController
 {
     /**
@@ -41,7 +39,7 @@ class OrderItemController extends ResourceController
      *
      * @return Response
      */
-    public function addAction(Request $request)
+    public function addAction(Request $request): Response
     {
         $cart = $this->getCurrentCart();
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -121,7 +119,7 @@ class OrderItemController extends ResourceController
      *
      * @return Response
      */
-    public function removeAction(Request $request)
+    public function removeAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -175,9 +173,9 @@ class OrderItemController extends ResourceController
     }
 
     /**
-     * @return ObjectRepository
+     * @return OrderRepositoryInterface
      */
-    protected function getOrderRepository()
+    protected function getOrderRepository(): OrderRepositoryInterface
     {
         return $this->get('sylius.repository.order');
     }
@@ -185,9 +183,9 @@ class OrderItemController extends ResourceController
     /**
      * @param RequestConfiguration $configuration
      *
-     * @return RedirectResponse
+     * @return Response
      */
-    protected function redirectToCartSummary(RequestConfiguration $configuration)
+    protected function redirectToCartSummary(RequestConfiguration $configuration): Response
     {
         if (null === $configuration->getParameters()->get('redirect')) {
             return $this->redirectHandler->redirectToRoute($configuration, $this->getCartSummaryRoute());
@@ -199,7 +197,7 @@ class OrderItemController extends ResourceController
     /**
      * @return string
      */
-    protected function getCartSummaryRoute()
+    protected function getCartSummaryRoute(): string
     {
         return 'sylius_cart_summary';
     }
@@ -207,7 +205,7 @@ class OrderItemController extends ResourceController
     /**
      * @return OrderInterface
      */
-    protected function getCurrentCart()
+    protected function getCurrentCart(): OrderInterface
     {
         return $this->getContext()->getCart();
     }
@@ -215,7 +213,7 @@ class OrderItemController extends ResourceController
     /**
      * @return CartContextInterface
      */
-    protected function getContext()
+    protected function getContext(): CartContextInterface
     {
         return $this->get('sylius.context.cart');
     }
@@ -226,7 +224,7 @@ class OrderItemController extends ResourceController
      *
      * @return AddToCartCommandInterface
      */
-    protected function createAddToCartCommand(OrderInterface $cart, OrderItemInterface $cartItem)
+    protected function createAddToCartCommand(OrderInterface $cart, OrderItemInterface $cartItem): AddToCartCommandInterface
     {
         return $this->get('sylius.factory.add_to_cart_command')->createWithCartAndCartItem($cart, $cartItem);
     }
@@ -234,7 +232,7 @@ class OrderItemController extends ResourceController
     /**
      * @return FormFactoryInterface
      */
-    protected function getFormFactory()
+    protected function getFormFactory(): FormFactoryInterface
     {
         return $this->get('form.factory');
     }
@@ -242,7 +240,7 @@ class OrderItemController extends ResourceController
     /**
      * @return OrderItemQuantityModifierInterface
      */
-    protected function getQuantityModifier()
+    protected function getQuantityModifier(): OrderItemQuantityModifierInterface
     {
         return $this->get('sylius.order_item_quantity_modifier');
     }
@@ -250,7 +248,7 @@ class OrderItemController extends ResourceController
     /**
      * @return OrderModifierInterface
      */
-    protected function getOrderModifier()
+    protected function getOrderModifier(): OrderModifierInterface
     {
         return $this->get('sylius.order_modifier');
     }
@@ -258,7 +256,7 @@ class OrderItemController extends ResourceController
     /**
      * @return EntityManagerInterface
      */
-    protected function getCartManager()
+    protected function getCartManager(): EntityManagerInterface
     {
         return $this->get('sylius.manager.order');
     }
@@ -268,7 +266,7 @@ class OrderItemController extends ResourceController
      *
      * @return ConstraintViolationListInterface
      */
-    private function getCartItemErrors(OrderItemInterface $orderItem)
+    private function getCartItemErrors(OrderItemInterface $orderItem): ConstraintViolationListInterface
     {
         return $this
             ->get('validator')
@@ -282,7 +280,7 @@ class OrderItemController extends ResourceController
      *
      * @return FormInterface
      */
-    private function getAddToCartFormWithErrors(ConstraintViolationListInterface $errors, FormInterface $form)
+    private function getAddToCartFormWithErrors(ConstraintViolationListInterface $errors, FormInterface $form): FormInterface
     {
         foreach ($errors as $error) {
             $form->get('cartItem')->get($error->getPropertyPath())->addError(new FormError($error->getMessage()));
@@ -297,7 +295,7 @@ class OrderItemController extends ResourceController
      *
      * @return Response
      */
-    private function handleBadAjaxRequestView(RequestConfiguration $configuration, FormInterface $form)
+    private function handleBadAjaxRequestView(RequestConfiguration $configuration, FormInterface $form): Response
     {
         return $this->viewHandler->handle(
             $configuration,

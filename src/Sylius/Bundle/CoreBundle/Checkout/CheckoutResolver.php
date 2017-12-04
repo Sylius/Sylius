@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Checkout;
 
 use SM\Factory\FactoryInterface;
@@ -21,9 +23,6 @@ use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class CheckoutResolver implements EventSubscriberInterface
 {
     /**
@@ -67,7 +66,7 @@ final class CheckoutResolver implements EventSubscriberInterface
     /**
      * @param GetResponseEvent $event
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(GetResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -82,7 +81,7 @@ final class CheckoutResolver implements EventSubscriberInterface
         /** @var OrderInterface $order */
         $order = $this->cartContext->getCart();
         if ($order->isEmpty()) {
-            $event->setResponse(new RedirectResponse($this->urlGenerator->generate('sylius_shop_cart_summary')));
+            $event->setResponse(new RedirectResponse($this->urlGenerator->generateForCart()));
         }
 
         $stateMachine = $this->stateMachineFactory->get($order, $this->getRequestedGraph($request));
@@ -97,7 +96,7 @@ final class CheckoutResolver implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::REQUEST => 'onKernelRequest',
@@ -109,7 +108,7 @@ final class CheckoutResolver implements EventSubscriberInterface
      *
      * @return string
      */
-    private function getRequestedGraph(Request $request)
+    private function getRequestedGraph(Request $request): string
     {
         return $request->attributes->get('_sylius')['state_machine']['graph'];
     }
@@ -119,18 +118,8 @@ final class CheckoutResolver implements EventSubscriberInterface
      *
      * @return string
      */
-    private function getRequestedTransition(Request $request)
+    private function getRequestedTransition(Request $request): string
     {
         return $request->attributes->get('_sylius')['state_machine']['transition'];
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return null|string
-     */
-    private function getReferer(Request $request)
-    {
-        return $request->headers->get('referer');
     }
 }

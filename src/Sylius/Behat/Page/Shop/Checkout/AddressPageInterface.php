@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface AddressPageInterface extends SymfonyPageInterface
 {
     /**
@@ -68,6 +67,11 @@ interface AddressPageInterface extends SymfonyPageInterface
      * @param string $email
      */
     public function specifyEmail($email);
+
+    /**
+     * @param string $fullName
+     */
+    public function specifyShippingAddressFullName(string $fullName);
 
     /**
      * @param string $password

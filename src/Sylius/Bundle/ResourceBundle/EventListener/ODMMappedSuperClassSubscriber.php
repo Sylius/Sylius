@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\EventListener;
 
 use Doctrine\ODM\MongoDB\Event\LoadClassMetadataEventArgs;
@@ -18,8 +20,6 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
 
 /**
  * Doctrine listener used to manipulate mappings.
- *
- * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
  */
 final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
 {

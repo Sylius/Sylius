@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Service;
 
 use Behat\Mink\Session;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 abstract class JQueryHelper
 {
     /**

@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class ProductOptionValue implements ProductOptionValueInterface
 {
     use TranslatableTrait {
         __construct as private initializeTranslationCollection;
+        getTranslation as private doGetTranslation;
     }
 
     /**
@@ -46,9 +46,9 @@ class ProductOptionValue implements ProductOptionValueInterface
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getValue();
+        return (string) $this->getValue();
     }
 
     /**
@@ -62,7 +62,7 @@ class ProductOptionValue implements ProductOptionValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -70,7 +70,7 @@ class ProductOptionValue implements ProductOptionValueInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
@@ -78,7 +78,7 @@ class ProductOptionValue implements ProductOptionValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getOption()
+    public function getOption(): ?ProductOptionInterface
     {
         return $this->option;
     }
@@ -86,7 +86,7 @@ class ProductOptionValue implements ProductOptionValueInterface
     /**
      * {@inheritdoc}
      */
-    public function setOption(ProductOptionInterface $option = null)
+    public function setOption(?ProductOptionInterface $option): void
     {
         $this->option = $option;
     }
@@ -94,7 +94,7 @@ class ProductOptionValue implements ProductOptionValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getValue()
+    public function getValue(): ?string
     {
         return $this->getTranslation()->getValue();
     }
@@ -102,7 +102,7 @@ class ProductOptionValue implements ProductOptionValueInterface
     /**
      * {@inheritdoc}
      */
-    public function setValue($value)
+    public function setValue(?string $value): void
     {
         $this->getTranslation()->setValue($value);
     }
@@ -112,7 +112,7 @@ class ProductOptionValue implements ProductOptionValueInterface
      *
      * @throws \BadMethodCallException
      */
-    public function getOptionCode()
+    public function getOptionCode(): ?string
     {
         if (null === $this->option) {
             throw new \BadMethodCallException(
@@ -128,7 +128,7 @@ class ProductOptionValue implements ProductOptionValueInterface
      *
      * @throws \BadMethodCallException
      */
-    public function getName()
+    public function getName(): ?string
     {
         if (null === $this->option) {
             throw new \BadMethodCallException(
@@ -140,9 +140,22 @@ class ProductOptionValue implements ProductOptionValueInterface
     }
 
     /**
+     * @param string|null $locale
+     *
+     * @return ProductOptionValueTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var ProductOptionValueTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
+    }
+
+    /**
      * {@inheritdoc}
      */
-    protected function createTranslation()
+    protected function createTranslation(): ProductOptionValueTranslationInterface
     {
         return new ProductOptionValueTranslation();
     }

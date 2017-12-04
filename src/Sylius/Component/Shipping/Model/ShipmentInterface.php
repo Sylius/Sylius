@@ -9,76 +9,75 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ShipmentInterface extends ResourceInterface, ShippingSubjectInterface, TimestampableInterface
 {
-    const STATE_CART = 'cart';
-    const STATE_READY = 'ready';
-    const STATE_SHIPPED = 'shipped';
-    const STATE_CANCELLED = 'cancelled';
+    public const STATE_CART = 'cart';
+    public const STATE_READY = 'ready';
+    public const STATE_SHIPPED = 'shipped';
+    public const STATE_CANCELLED = 'cancelled';
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getState();
+    public function getState(): ?string;
 
     /**
-     * @param string $state
+     * @param string|null $state
      */
-    public function setState($state);
+    public function setState(?string $state): void;
 
     /**
-     * @return ShippingMethodInterface
+     * @return ShippingMethodInterface|null
      */
-    public function getMethod();
+    public function getMethod(): ?ShippingMethodInterface;
 
     /**
-     * @param ShippingMethodInterface $method
+     * @param ShippingMethodInterface|null $method
      */
-    public function setMethod(ShippingMethodInterface $method = null);
+    public function setMethod(?ShippingMethodInterface $method): void;
 
     /**
      * @return Collection|ShipmentUnitInterface[]
      */
-    public function getUnits();
+    public function getUnits(): Collection;
 
     /**
      * @param ShipmentUnitInterface $unit
      */
-    public function addUnit(ShipmentUnitInterface $unit);
+    public function addUnit(ShipmentUnitInterface $unit): void;
 
     /**
      * @param ShipmentUnitInterface $unit
      */
-    public function removeUnit(ShipmentUnitInterface $unit);
+    public function removeUnit(ShipmentUnitInterface $unit): void;
 
     /**
      * @param ShipmentUnitInterface $unit
      *
      * @return bool
      */
-    public function hasUnit(ShipmentUnitInterface $unit);
+    public function hasUnit(ShipmentUnitInterface $unit): bool;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTracking();
+    public function getTracking(): ?string;
 
     /**
-     * @param string $tracking
+     * @param string|null $tracking
      */
-    public function setTracking($tracking);
+    public function setTracking(?string $tracking): void;
 
     /**
      * @return bool
      */
-    public function isTracked();
+    public function isTracked(): bool;
 }

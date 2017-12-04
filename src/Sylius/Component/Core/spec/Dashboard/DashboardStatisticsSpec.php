@@ -9,57 +9,40 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Dashboard;
 
-use Sylius\Component\Core\Dashboard\DashboardStatistics;
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DashboardStatisticsSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith(2564, 24, 10);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DashboardStatistics::class);
-    }
-
-    function it_throws_an_exception_if_any_of_values_if_not_an_int()
-    {
-        $this->beConstructedWith('string', 2.5, 'foo');
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->duringInstantiation()
-        ;
-    }
-
-    function it_has_total_sales_stat()
+    function it_has_total_sales_stat(): void
     {
         $this->getTotalSales()->shouldReturn(2564);
     }
 
-    function it_has_new_orders_stat()
+    function it_has_new_orders_stat(): void
     {
         $this->getNumberOfNewOrders()->shouldReturn(24);
     }
 
-    function ith_has_new_customers_stat()
+    function ith_has_new_customers_stat(): void
     {
         $this->getNumberOfNewCustomers()->shouldReturn(10);
     }
 
-    function it_calculates_an_average_order_value()
+    function it_calculates_an_average_order_value(): void
     {
         $this->getAverageOrderValue()->shouldReturn(107);
     }
 
-    function it_returns_0_as_average_order_value_when_there_are_no_orders()
+    function it_returns_0_as_average_order_value_when_there_are_no_orders(): void
     {
         $this->beConstructedWith(0, 0, 2);
 

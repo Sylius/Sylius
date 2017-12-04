@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Aggregator;
 
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function aggregate(array $adjustments)
+    public function aggregate(iterable $adjustments): array
     {
         $aggregatedAdjustments = [];
         foreach ($adjustments as $adjustment) {

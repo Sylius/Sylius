@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface OrderShippingMethodSelectionRequirementCheckerInterface
 {
     /**
@@ -23,5 +22,5 @@ interface OrderShippingMethodSelectionRequirementCheckerInterface
      *
      * @return bool
      */
-    public function isShippingMethodSelectionRequired(OrderInterface $order);
+    public function isShippingMethodSelectionRequired(OrderInterface $order): bool;
 }

@@ -26,8 +26,6 @@ in your system will be saved in the database - all the product names, texts on w
 Locale Context
 --------------
 
-With the default configuration, customers are able to change the store language in the frontend.
-
 To manage the currently used language, we use the **LocaleContext**. You can always access it with the ID ``sylius.context.locale`` in the container.
 
 .. code-block:: php
@@ -36,18 +34,7 @@ To manage the currently used language, we use the **LocaleContext**. You can alw
 
     public function fooAction()
     {
-        $locale = $this->get('sylius.context.locale')->getLocale();
-    }
-
-To change the locale use the ``setLocale()`` method of the context service.
-
-.. code-block:: php
-
-    <?php
-
-    public function fooAction()
-    {
-        $this->get('sylius.context.locale')->setLocale('pl_PL'); // Store will be displayed in Polish.
+        $locale = $this->get('sylius.context.locale')->getLocaleCode();
     }
 
 The locale context can be injected into any of your services and give you access to the currently used locale.
@@ -82,4 +69,4 @@ To get all languages configured in the store, regardless of your availability lo
 Learn more
 ----------
 
-* :doc:`Locale - Component Documentation </components/Locale/index>`.
+* :doc:`Locale - Component Documentation </components_and_bundles/components/Locale/index>`.

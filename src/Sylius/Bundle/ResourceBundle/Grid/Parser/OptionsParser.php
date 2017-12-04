@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Grid\Parser;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -16,9 +18,6 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OptionsParser implements OptionsParserInterface
 {
     /**
@@ -54,7 +53,7 @@ final class OptionsParser implements OptionsParserInterface
     /**
      * {@inheritdoc}
      */
-    public function parseOptions(array $parameters, Request $request, $data = null)
+    public function parseOptions(array $parameters, Request $request, $data = null): array
     {
         return array_map(function ($parameter) use ($request, $data) {
             if (is_array($parameter)) {
@@ -74,6 +73,10 @@ final class OptionsParser implements OptionsParserInterface
      */
     private function parseOption($parameter, Request $request, $data)
     {
+        if (!is_string($parameter)) {
+            return $parameter;
+        }
+
         if (0 === strpos($parameter, '$')) {
             return $request->get(substr($parameter, 1));
         }
@@ -93,11 +96,11 @@ final class OptionsParser implements OptionsParserInterface
      * @param string $expression
      * @param Request $request
      *
-     * @return string
+     * @return mixed
      */
-    private function parseOptionExpression($expression, Request $request)
+    private function parseOptionExpression(string $expression, Request $request)
     {
-        $expression = preg_replace_callback('/\$(\w+)/', function ($matches) use ($request) {
+        $expression = preg_replace_callback('/\$(\w+)/', function (array $matches) use ($request) {
             $variable = $request->get($matches[1]);
 
             return is_string($variable) ? sprintf('"%s"', $variable) : $variable;
@@ -110,9 +113,9 @@ final class OptionsParser implements OptionsParserInterface
      * @param string $value
      * @param mixed $data
      *
-     * @return string
+     * @return mixed
      */
-    private function parseOptionResourceField($value, $data)
+    private function parseOptionResourceField(string $value, $data)
     {
         return $this->propertyAccessor->getValue($data, $value);
     }

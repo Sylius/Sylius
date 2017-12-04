@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -20,9 +22,6 @@ use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class CartBlamerListener
 {
     /**
@@ -48,7 +47,7 @@ final class CartBlamerListener
     /**
      * @param UserEvent $userEvent
      */
-    public function onImplicitLogin(UserEvent $userEvent)
+    public function onImplicitLogin(UserEvent $userEvent): void
     {
         $user = $userEvent->getUser();
         if (!$user instanceof ShopUserInterface) {
@@ -61,7 +60,7 @@ final class CartBlamerListener
     /**
      * @param InteractiveLoginEvent $interactiveLoginEvent
      */
-    public function onInteractiveLogin(InteractiveLoginEvent $interactiveLoginEvent)
+    public function onInteractiveLogin(InteractiveLoginEvent $interactiveLoginEvent): void
     {
         $user = $interactiveLoginEvent->getAuthenticationToken()->getUser();
         if (!$user instanceof ShopUserInterface) {
@@ -74,7 +73,7 @@ final class CartBlamerListener
     /**
      * @param ShopUserInterface $user
      */
-    private function blame(ShopUserInterface $user)
+    private function blame(ShopUserInterface $user): void
     {
         $cart = $this->getCart();
         if (null === $cart) {
@@ -87,11 +86,11 @@ final class CartBlamerListener
     }
 
     /**
-     * @return OrderInterface
+     * @return OrderInterface|null
      *
      * @throws UnexpectedTypeException
      */
-    private function getCart()
+    private function getCart(): ?OrderInterface
     {
         try {
             $cart = $this->cartContext->getCart();

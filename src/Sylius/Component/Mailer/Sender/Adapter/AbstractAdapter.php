@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Mailer\Sender\Adapter;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Jérémy Leherpeur <jeremy@leherpeur.net>
- */
 abstract class AbstractAdapter implements AdapterInterface
 {
     /**
@@ -25,9 +23,9 @@ abstract class AbstractAdapter implements AdapterInterface
     protected $dispatcher;
 
     /**
-     * @param  EventDispatcherInterface $dispatcher
+     * @param EventDispatcherInterface $dispatcher
      */
-    public function setEventDispatcher(EventDispatcherInterface $dispatcher)
+    public function setEventDispatcher(EventDispatcherInterface $dispatcher): void
     {
         $this->dispatcher = $dispatcher;
     }

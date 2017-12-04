@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\User\Model\User;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class AdminUser extends User implements AdminUserInterface
 {
     /**
@@ -43,7 +42,7 @@ class AdminUser extends User implements AdminUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
@@ -51,7 +50,7 @@ class AdminUser extends User implements AdminUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setFirstName($firstName)
+    public function setFirstName(?string $firstName): void
     {
         $this->firstName = $firstName;
     }
@@ -59,7 +58,7 @@ class AdminUser extends User implements AdminUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
@@ -67,7 +66,7 @@ class AdminUser extends User implements AdminUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setLastName($lastName)
+    public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -75,7 +74,7 @@ class AdminUser extends User implements AdminUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocaleCode()
+    public function getLocaleCode(): ?string
     {
         return $this->localeCode;
     }
@@ -83,7 +82,7 @@ class AdminUser extends User implements AdminUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setLocaleCode($code)
+    public function setLocaleCode(?string $code): void
     {
         $this->localeCode = $code;
     }

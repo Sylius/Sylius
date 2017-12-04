@@ -13,3 +13,5 @@ sylius:
         enable: '%resource% був успішно ввімкнений.'
         disable: '%resource% був успішно вимкнений.'
         delete_error: 'Неможливо видалити, %resource% знаходиться у використанні.'
+        race_condition_error: 'Не вдається оновити, %resource% був змінений раніше.'
+        something_went_wrong_error: 'Щось пішло не так. Будь ласка, спробуйте ще раз.'

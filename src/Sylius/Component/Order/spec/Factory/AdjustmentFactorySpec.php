@@ -9,30 +9,23 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Order\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Order\Factory\AdjustmentFactory;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AdjustmentFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $adjustmentFactory)
+    function let(FactoryInterface $adjustmentFactory): void
     {
         $this->beConstructedWith($adjustmentFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(AdjustmentFactory::class);
-    }
-
-    function it_implements_an_adjustment_factory_interface()
+    function it_implements_an_adjustment_factory_interface(): void
     {
         $this->shouldImplement(AdjustmentFactoryInterface::class);
     }
@@ -40,7 +33,7 @@ final class AdjustmentFactorySpec extends ObjectBehavior
     function it_creates_new_adjustment(
         FactoryInterface $adjustmentFactory,
         AdjustmentInterface $adjustment
-    ) {
+    ): void {
         $adjustmentFactory->createNew()->willReturn($adjustment);
 
         $this->createNew()->shouldReturn($adjustment);
@@ -49,7 +42,7 @@ final class AdjustmentFactorySpec extends ObjectBehavior
     function it_creates_new_adjustment_with_provided_data(
         FactoryInterface $adjustmentFactory,
         AdjustmentInterface $adjustment
-    ) {
+    ): void {
         $adjustmentFactory->createNew()->willReturn($adjustment);
         $adjustment->setType('tax')->shouldBeCalled();
         $adjustment->setLabel('Tax description')->shouldBeCalled();

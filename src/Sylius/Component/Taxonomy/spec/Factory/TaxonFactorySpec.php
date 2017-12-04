@@ -9,30 +9,23 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Taxonomy\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Taxonomy\Factory\TaxonFactory;
 use Sylius\Component\Taxonomy\Factory\TaxonFactoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TaxonFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory)
+    function let(FactoryInterface $factory): void
     {
         $this->beConstructedWith($factory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TaxonFactory::class);
-    }
-
-    function it_implements_taxon_factory_interface()
+    function it_implements_taxon_factory_interface(): void
     {
         $this->shouldImplement(TaxonFactoryInterface::class);
     }
@@ -40,7 +33,7 @@ final class TaxonFactorySpec extends ObjectBehavior
     function it_uses_decorated_factory_to_create_new_taxon(
         FactoryInterface $factory,
         TaxonInterface $taxon
-    ) {
+    ): void {
         $factory->createNew()->willReturn($taxon);
 
         $this->createNew()->shouldReturn($taxon);
@@ -50,7 +43,7 @@ final class TaxonFactorySpec extends ObjectBehavior
         FactoryInterface $factory,
         TaxonInterface $parent,
         TaxonInterface $taxon
-    ) {
+    ): void {
         $factory->createNew()->willReturn($taxon);
         $taxon->setParent($parent)->shouldBeCalled();
 

@@ -27,7 +27,7 @@ winzou_state_machine:
                     args: ["object"]
                 sylius_assign_token:
                     on: ["create"]
-                    do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
+                    do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValueIfNotSet"]
                     args: ["object"]
             after:
                 sylius_request_shipping:
@@ -57,6 +57,10 @@ winzou_state_machine:
                 sylius_save_addresses_on_customer:
                     on: ["create"]
                     do: ["@sylius.customer_order_addresses_saver", "saveAddresses"]
+                    args: ["object"]
+                sylius_set_order_immutable_names:
+                    on: ["create"]
+                    do: ["@sylius.order_item_names_setter", "__invoke"]
                     args: ["object"]
                 sylius_cancel_payment:
                     on: ["cancel"]

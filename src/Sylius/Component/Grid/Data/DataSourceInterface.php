@@ -9,30 +9,27 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Data;
 
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Paweł Jędrzejewski <pawel@svaluelius.org>
- */
 interface DataSourceInterface
 {
-    const CONDITION_AND = 'and';
-    const CONDITION_OR  = 'or';
+    public const CONDITION_AND = 'and';
+    public const CONDITION_OR = 'or';
 
     /**
      * @param mixed $expression
      * @param string $condition
-     *
-     * @return mixed
      */
-    public function restrict($expression, $condition = self::CONDITION_AND);
+    public function restrict($expression, string $condition = self::CONDITION_AND): void;
 
     /**
      * @return ExpressionBuilderInterface
      */
-    public function getExpressionBuilder();
+    public function getExpressionBuilder(): ExpressionBuilderInterface;
 
     /**
      * @param Parameters $parameters

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -19,13 +21,9 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
 {
-    const TYPE = 'unit_fixed_discount';
+    public const TYPE = 'unit_fixed_discount';
 
     /**
      * @var FilterInterface
@@ -64,7 +62,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
     /**
      * {@inheritdoc}
      */
-    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         if (!$subject instanceof OrderInterface) {
             throw new UnexpectedTypeException($subject, OrderInterface::class);
@@ -103,7 +101,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
      * @param int $amount
      * @param PromotionInterface $promotion
      */
-    private function setUnitsAdjustments(OrderItemInterface $item, $amount, PromotionInterface $promotion)
+    private function setUnitsAdjustments(OrderItemInterface $item, int $amount, PromotionInterface $promotion): void
     {
         foreach ($item->getUnits() as $unit) {
             $this->addAdjustmentToUnit(

@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Resource\Fixtures;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface SampleBookResourceInterface extends ResourceInterface
 {
     /**

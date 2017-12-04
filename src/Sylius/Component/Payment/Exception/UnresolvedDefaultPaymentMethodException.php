@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Payment\Exception;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class UnresolvedDefaultPaymentMethodException extends \Exception
 {
     public function __construct()

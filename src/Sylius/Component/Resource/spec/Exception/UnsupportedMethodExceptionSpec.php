@@ -9,32 +9,25 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Resource\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class UnsupportedMethodExceptionSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith('methodName');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UnsupportedMethodException::class);
-    }
-
-    function it_extends_exception()
+    function it_extends_exception(): void
     {
         $this->shouldHaveType(\Exception::class);
     }
 
-    function it_has_a_message()
+    function it_has_a_message(): void
     {
         $this->getMessage()->shouldReturn('The method "methodName" is not supported.');
     }

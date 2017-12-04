@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface RequestConfigurationFactoryInterface
 {
     /**
@@ -27,5 +26,5 @@ interface RequestConfigurationFactoryInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function create(MetadataInterface $metadata, Request $request);
+    public function create(MetadataInterface $metadata, Request $request): RequestConfiguration;
 }

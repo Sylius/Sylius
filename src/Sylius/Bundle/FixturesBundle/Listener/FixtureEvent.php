@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Listener;
 
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class FixtureEvent
 {
     /**
@@ -49,7 +48,7 @@ final class FixtureEvent
     /**
      * @return SuiteInterface
      */
-    public function suite()
+    public function suite(): SuiteInterface
     {
         return $this->suite;
     }
@@ -57,7 +56,7 @@ final class FixtureEvent
     /**
      * @return FixtureInterface
      */
-    public function fixture()
+    public function fixture(): FixtureInterface
     {
         return $this->fixture;
     }
@@ -65,7 +64,7 @@ final class FixtureEvent
     /**
      * @return array
      */
-    public function fixtureOptions()
+    public function fixtureOptions(): array
     {
         return $this->fixtureOptions;
     }

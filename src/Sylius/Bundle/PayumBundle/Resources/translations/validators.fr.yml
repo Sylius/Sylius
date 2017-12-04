@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: Veuillez entrer votre mot de passe PayPal.
+            signature:
+                not_blank: Veuillez entrer la signature Paypal.
+            username:
+                not_blank: Veuillez entrer votre nom d'utilisateur PayPal.
+        stripe:
+            secret_key:
+                not_blank: Veuillez entrer votre clé secrète Stripe.
+            publishable_key:
+                not_blank: Veuillez entrer votre clé publique Stripe.

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Payment\Provider;
 
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
@@ -22,9 +24,6 @@ use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderPaymentProvider implements OrderPaymentProviderInterface
 {
     /**
@@ -60,7 +59,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function provideOrderPayment(OrderInterface $order, $targetState)
+    public function provideOrderPayment(OrderInterface $order, string $targetState): ?PaymentInterface
     {
         /** @var PaymentInterface $payment */
         $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
@@ -87,7 +86,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
      *
      * @return PaymentInterface|null
      */
-    private function getLastPayment(OrderInterface $order)
+    private function getLastPayment(OrderInterface $order): ?PaymentInterface
     {
         $lastCancelledPayment = $order->getLastPayment(PaymentInterface::STATE_CANCELLED);
         if (null !== $lastCancelledPayment) {
@@ -108,7 +107,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
      *
      * @return PaymentMethodInterface|null
      */
-    private function getDefaultPaymentMethod(PaymentInterface $payment, OrderInterface $order)
+    private function getDefaultPaymentMethod(PaymentInterface $payment, OrderInterface $order): ?PaymentMethodInterface
     {
         try {
             $payment->setOrder($order);
@@ -124,7 +123,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
      * @param PaymentInterface $payment
      * @param string $targetState
      */
-    private function applyRequiredTransition(PaymentInterface $payment, $targetState)
+    private function applyRequiredTransition(PaymentInterface $payment, string $targetState): void
     {
         if ($targetState === $payment->getState()) {
             return;

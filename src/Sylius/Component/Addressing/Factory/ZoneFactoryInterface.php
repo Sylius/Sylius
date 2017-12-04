@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Factory;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface ZoneFactoryInterface extends FactoryInterface
 {
     /**
@@ -24,12 +23,12 @@ interface ZoneFactoryInterface extends FactoryInterface
      *
      * @return ZoneInterface
      */
-    public function createTyped($type);
+    public function createTyped(string $type): ZoneInterface;
 
     /**
      * @param array $membersCodes
      *
      * @return ZoneInterface
      */
-    public function createWithMembers(array $membersCodes);
+    public function createWithMembers(array $membersCodes): ZoneInterface;
 }

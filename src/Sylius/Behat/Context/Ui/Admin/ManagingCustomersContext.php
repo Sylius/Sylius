@@ -9,24 +9,24 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Customer\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Customer\IndexPageInterface as CustomerIndexPageInterface;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ManagingCustomersContext implements Context
 {
     /**
-     * @var IndexPageInterface
+     * @var CustomerIndexPageInterface
      */
     private $indexPage;
 
@@ -57,7 +57,7 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
+     * @param CustomerIndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
      * @param ShowPageInterface $showPage
      * @param IndexPageInterface $ordersIndexPage
@@ -114,6 +114,15 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I change their email to :email
+     * @When I remove its email
+     */
+    public function iChangeTheirEmailTo(?string $email = null): void
+    {
+        $this->updatePage->changeEmail($email);
+    }
+
+    /**
      * @When I add them
      * @When I try to add them
      */
@@ -158,7 +167,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given /^I want to edit (this customer)$/
+     * @When /^I want to edit (this customer)$/
      */
     public function iWantToEditThisCustomer(CustomerInterface $customer)
     {
@@ -276,14 +285,6 @@ final class ManagingCustomersContext implements Context
         $this->updatePage->open(['id' => $customer->getId()]);
 
         Assert::eq($this->updatePage->getLastName(), '');
-    }
-
-    /**
-     * @When I remove its email
-     */
-    public function iRemoveItsEmail()
-    {
-        $this->updatePage->changeEmail('');
     }
 
     /**

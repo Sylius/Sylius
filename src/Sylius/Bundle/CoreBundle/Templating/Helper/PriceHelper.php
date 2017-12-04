@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
@@ -16,9 +18,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Templating\Helper\Helper;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class PriceHelper extends Helper
 {
     /**
@@ -36,8 +35,10 @@ class PriceHelper extends Helper
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function getPrice(ProductVariantInterface $productVariant, array $context)
+    public function getPrice(ProductVariantInterface $productVariant, array $context): int
     {
         Assert::keyExists($context, 'channel');
 
@@ -50,7 +51,7 @@ class PriceHelper extends Helper
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_calculate_price';
     }

@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
-/**
- * @author Axel Vankrunkelsven <axel@digilabs.be>
- */
 interface CurrencyHelperInterface
 {
     /**
@@ -21,5 +20,5 @@ interface CurrencyHelperInterface
      *
      * @return string
      */
-    public function convertCurrencyCodeToSymbol($code);
+    public function convertCurrencyCodeToSymbol(string $code): string;
 }

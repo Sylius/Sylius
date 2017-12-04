@@ -9,35 +9,28 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Channel\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Channel\Factory\ChannelFactory;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ChannelFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $defaultFactory)
+    function let(FactoryInterface $defaultFactory): void
     {
         $this->beConstructedWith($defaultFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ChannelFactory::class);
-    }
-
-    function it_implements_channel_factory_interface()
+    function it_implements_channel_factory_interface(): void
     {
         $this->shouldImplement(ChannelFactoryInterface::class);
     }
 
-    function it_creates_channel_with_name($defaultFactory, ChannelInterface $channel)
+    function it_creates_channel_with_name($defaultFactory, ChannelInterface $channel): void
     {
         $defaultFactory->createNew()->willReturn($channel);
 
@@ -46,7 +39,7 @@ final class ChannelFactorySpec extends ObjectBehavior
         $this->createNamed('United States Webstore')->shouldReturn($channel);
     }
 
-    function it_creates_empty_channel($defaultFactory, ChannelInterface $channel)
+    function it_creates_empty_channel($defaultFactory, ChannelInterface $channel): void
     {
         $defaultFactory->createNew()->willReturn($channel);
 

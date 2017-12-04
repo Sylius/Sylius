@@ -9,32 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Order\Modifier;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
-use Sylius\Component\Order\Modifier\OrderItemQuantityModifier;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderItemQuantityModifierSpec extends ObjectBehavior
 {
-    function let(OrderItemUnitFactoryInterface $orderItemUnitFactory)
+    function let(OrderItemUnitFactoryInterface $orderItemUnitFactory): void
     {
         $this->beConstructedWith($orderItemUnitFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderItemQuantityModifier::class);
-    }
-
-    function it_implements_an_order_item_quantity_modifier_interface()
+    function it_implements_an_order_item_quantity_modifier_interface(): void
     {
         $this->shouldImplement(OrderItemQuantityModifierInterface::class);
     }
@@ -42,7 +36,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
     function it_adds_proper_number_of_order_item_units_to_an_order_item(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $orderItem->getQuantity()->willReturn(1);
 
         $orderItemUnitFactory->createForItem($orderItem)->shouldBeCalledTimes(2);
@@ -56,9 +50,14 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         OrderItemUnitInterface $unit2,
         OrderItemUnitInterface $unit3,
         OrderItemUnitInterface $unit4
-    ) {
+    ): void {
         $orderItem->getQuantity()->willReturn(4);
-        $orderItem->getUnits()->willReturn([$unit1, $unit2, $unit3, $unit4]);
+        $orderItem->getUnits()->willReturn(new ArrayCollection([
+            $unit1->getWrappedObject(),
+            $unit2->getWrappedObject(),
+            $unit3->getWrappedObject(),
+            $unit4->getWrappedObject(),
+        ]));
         $orderItem->removeUnit($unit1)->shouldBeCalled();
 
         $this->modify($orderItem, 3);
@@ -67,7 +66,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
     function it_does_nothing_if_target_quantity_is_equal_to_current(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $orderItem->getQuantity()->willReturn(3);
 
         $orderItemUnitFactory->createForItem(Argument::any())->shouldNotBeCalled();
@@ -80,7 +79,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
     function it_does_nothing_if_target_quantity_is_0(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $orderItem->getQuantity()->willReturn(3);
 
         $orderItemUnitFactory->createForItem(Argument::any())->shouldNotBeCalled();
@@ -93,7 +92,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
     function it_does_nothing_if_target_quantity_is_below_0(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $orderItem->getQuantity()->willReturn(3);
 
         $orderItemUnitFactory->createForItem(Argument::any())->shouldNotBeCalled();

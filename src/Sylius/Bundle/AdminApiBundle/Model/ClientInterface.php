@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Model;
 
 use FOS\OAuthServerBundle\Model\ClientInterface as BaseClientInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ClientInterface extends BaseClientInterface, ResourceInterface
 {
 }

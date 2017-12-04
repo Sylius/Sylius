@@ -44,7 +44,7 @@ Feature: Shipping method validation
         When I remove its name from "English (United States)" translation
         And I try to save my changes
         Then I should be notified that name is required
-        And this shipping method should still be named "United States Sales Tax"
+        And this shipping method should still be named "UPS Ground"
 
     @ui
     Scenario: Trying to remove zone from existing shipping method

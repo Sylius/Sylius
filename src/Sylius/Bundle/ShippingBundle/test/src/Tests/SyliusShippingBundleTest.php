@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShippingBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
- */
-class SyliusShippingBundleTest extends WebTestCase
+final class SyliusShippingBundleTest extends WebTestCase
 {
     /**
      * @test
      */
-    public function its_services_are_initializable()
+    public function its_services_are_initializable(): void
     {
         /** @var ContainerInterface $container */
         $container = self::createClient()->getContainer();

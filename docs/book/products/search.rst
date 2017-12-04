@@ -39,7 +39,7 @@ The search bar in many shops should be more sophisticated, than just a simple te
 searching by price, reviews, sizes or colors.
 
 If you would like to extend this built-in functionality read
-:doc:`this article about grids customizations </customization/grid>`, and :doc:`the GridBundle docs </bundles/SyliusGridBundle/index>`.
+:doc:`this article about grids customizations </customization/grid>`, and :doc:`the GridBundle docs </components_and_bundles/bundles/SyliusGridBundle/index>`.
 
 ElasticSearch
 -------------
@@ -47,15 +47,15 @@ ElasticSearch
 When the grids filtering is not enough for you, and your needs are more complex you should go for the
 `ElasticSearch <https://www.elastic.co/products/elasticsearch>`_ integration.
 
-There is the `Lakion/SyliusElasticSearchBundle <https://github.com/Lakion/SyliusElasticSearchBundle>`_ integration extension,
+There is the `Sylius/SyliusElasticSearchPlugin <https://github.com/Sylius/SyliusElasticSearchPlugin>`_ integration extension,
 which you can use to extend Sylius functionalities with ElasticSearch.
 
-All you have to do is require the bundle in your project via composer, install the ElasticSearch server, and configure ElasticSearch
-in your application. Everything is well described in the Lakion/SyliusElasticSearchBundle's readme.
+All you have to do is require the plugin in your project via composer, install the ElasticSearch server, and configure ElasticSearch
+in your application. Everything is well described in the Sylius/SyliusElasticSearchPlugin's readme.
 
 Learn more
 ----------
 
-* `SyliusElasticSearchBundle <https://github.com/Lakion/SyliusElasticSearchBundle>`_
-* :doc:`Grid Bundle documentation </bundles/SyliusGridBundle/index>`
-* :doc:`Grid Component documentation </components/Grid/index>`
+* `SyliusElasticSearchPlugin <https://github.com/Sylius/SyliusElasticSearchPlugin>`_
+* :doc:`Grid Bundle documentation </components_and_bundles/bundles/SyliusGridBundle/index>`
+* :doc:`Grid Component documentation </components_and_bundles/components/Grid/index>`

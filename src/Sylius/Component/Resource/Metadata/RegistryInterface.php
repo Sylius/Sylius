@@ -9,42 +9,46 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Metadata;
 
 /**
  * Interface for the registry of all resources.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface RegistryInterface
 {
     /**
-     * @return MetadataInterface[]
+     * @return iterable|MetadataInterface[]
      */
-    public function getAll();
+    public function getAll(): iterable;
 
     /**
      * @param string $alias
      *
      * @return MetadataInterface
+     *
+     * @throws \InvalidArgumentException
      */
-    public function get($alias);
+    public function get(string $alias): MetadataInterface;
 
     /**
      * @param string $className
      *
      * @return MetadataInterface
+     *
+     * @throws \InvalidArgumentException
      */
-    public function getByClass($className);
+    public function getByClass(string $className): MetadataInterface;
 
     /**
      * @param MetadataInterface $metadata
      */
-    public function add(MetadataInterface $metadata);
+    public function add(MetadataInterface $metadata): void;
 
     /**
      * @param string $alias
      * @param array $configuration
      */
-    public function addFromAliasAndConfiguration($alias, array $configuration);
+    public function addFromAliasAndConfiguration(string $alias, array $configuration): void;
 }

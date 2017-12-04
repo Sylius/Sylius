@@ -36,6 +36,7 @@ default:
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_variant
+                - sylius.behat.context.transform.promotion
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.tax_category
                 - sylius.behat.context.transform.taxon

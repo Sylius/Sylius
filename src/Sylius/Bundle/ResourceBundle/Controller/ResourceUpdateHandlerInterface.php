@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ResourceUpdateHandlerInterface
 {
     /**
@@ -28,5 +27,5 @@ interface ResourceUpdateHandlerInterface
         ResourceInterface $resource,
         RequestConfiguration $requestConfiguration,
         ObjectManager $manager
-    );
+    ): void;
 }

@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as CrudIndexPageInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface IndexPerTaxonPageInterface extends CrudIndexPageInterface
 {
     /**
@@ -27,7 +26,6 @@ interface IndexPerTaxonPageInterface extends CrudIndexPageInterface
 
     /**
      * @param string $productName
-     *
      * @param int $position
      */
     public function setPositionOfProduct($productName, $position);

@@ -42,4 +42,4 @@ sylius:
         code:
             not_blank: 'Por favor, introduzca el código de método de pago.'
             regex: 'El código de método de pago solo puede contener letras, números, guiones y guiones bajos.'
-            unique: 'Ya existe un método de pago con el código introducido.'
+            unique: 'Ya existe un método de pago con ese código.'

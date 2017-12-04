@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Templating\Locator;
 
 use Doctrine\Common\Cache\Cache;
@@ -16,9 +18,6 @@ use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class CachedTemplateLocator implements TemplateLocatorInterface
 {
     /**
@@ -44,7 +43,7 @@ final class CachedTemplateLocator implements TemplateLocatorInterface
     /**
      * {@inheritdoc}
      */
-    public function locateTemplate(TemplateReferenceInterface $template, ThemeInterface $theme)
+    public function locateTemplate(TemplateReferenceInterface $template, ThemeInterface $theme): string
     {
         $cacheKey = $this->getCacheKey($template, $theme);
         if ($this->cache->contains($cacheKey)) {
@@ -66,8 +65,8 @@ final class CachedTemplateLocator implements TemplateLocatorInterface
      *
      * @return string
      */
-    private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme)
+    private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme): string
     {
-        return $template->getLogicalName().'|'.$theme->getName();
+        return $template->getLogicalName() . '|' . $theme->getName();
     }
 }

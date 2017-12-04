@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Filtering;
 
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface FiltersApplicatorInterface
 {
     /**
@@ -25,5 +24,5 @@ interface FiltersApplicatorInterface
      * @param Grid $grid
      * @param Parameters $parameters
      */
-    public function apply(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters);
+    public function apply(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters): void;
 }

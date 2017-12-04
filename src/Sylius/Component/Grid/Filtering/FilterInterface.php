@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Filtering;
 
 use Sylius\Component\Grid\Data\DataSourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface FilterInterface
 {
     /**
@@ -24,5 +23,5 @@ interface FilterInterface
      * @param mixed $data
      * @param array $options
      */
-    public function apply(DataSourceInterface $dataSource, $name, $data, array $options);
+    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options): void;
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\GridBundle\Doctrine\ORM;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -17,31 +19,22 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\GridBundle\Doctrine\ORM\DataSource;
-use Sylius\Bundle\GridBundle\Doctrine\ORM\Driver;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DriverSpec extends ObjectBehavior
 {
-    function let(ManagerRegistry $managerRegistry)
+    function let(ManagerRegistry $managerRegistry): void
     {
         $this->beConstructedWith($managerRegistry);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Driver::class);
-    }
-
-    function it_implements_grid_driver()
+    function it_implements_grid_driver(): void
     {
         $this->shouldImplement(DriverInterface::class);
     }
 
-    function it_throws_exception_if_class_is_undefined()
+    function it_throws_exception_if_class_is_undefined(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -53,7 +46,7 @@ final class DriverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         EntityRepository $entityRepository,
         QueryBuilder $queryBuilder
-    ) {
+    ): void {
         $managerRegistry->getManagerForClass('App:Book')->willReturn($entityManager);
         $entityManager->getRepository('App:Book')->willReturn($entityRepository);
         $entityRepository->createQueryBuilder('o')->willReturn($queryBuilder);

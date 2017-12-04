@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Resolver;
 
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface ProductVariantResolverInterface
 {
     /**
      * @param ProductInterface $subject
      *
-     * @return ProductVariantInterface
+     * @return ProductVariantInterface|null
      */
-    public function getVariant(ProductInterface $subject);
+    public function getVariant(ProductInterface $subject): ?ProductVariantInterface;
 }

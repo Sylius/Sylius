@@ -31,8 +31,14 @@
             throttle: 1500,
 
             beforeSend: function (settings) {
+                var email = $('#sylius_checkout_address_customer_email').val();
+
+                if (email.length < 3) {
+                    return false;
+                }
+
                 settings.data = {
-                    email: $('#sylius_checkout_address_customer_email').val()
+                    email: email
                 };
 
                 return settings;

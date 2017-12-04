@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ShipmentTransitions
 {
-    const GRAPH = 'sylius_shipment';
+    public const GRAPH = 'sylius_shipment';
 
-    const TRANSITION_CREATE = 'create';
-    const TRANSITION_SHIP = 'ship';
-    const TRANSITION_CANCEL = 'cancel';
+    public const TRANSITION_CREATE = 'create';
+    public const TRANSITION_SHIP = 'ship';
+    public const TRANSITION_CANCEL = 'cancel';
 
     private function __construct()
     {

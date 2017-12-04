@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Channel\Factory;
 
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
-class ChannelFactory implements ChannelFactoryInterface
+final class ChannelFactory implements ChannelFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -34,7 +34,7 @@ class ChannelFactory implements ChannelFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(): ChannelInterface
     {
         return $this->defaultFactory->createNew();
     }
@@ -42,8 +42,9 @@ class ChannelFactory implements ChannelFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createNamed($name)
+    public function createNamed(string $name): ChannelInterface
     {
+        /** @var ChannelInterface $channel */
         $channel = $this->defaultFactory->createNew();
         $channel->setName($name);
 

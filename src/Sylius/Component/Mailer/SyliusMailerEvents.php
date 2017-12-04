@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Mailer;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class SyliusMailerEvents
 {
-    const EMAIL_PRE_RENDER = 'sylius.email_rendered';
-    const EMAIL_PRE_SEND = 'sylius.email_send.pre_send';
-    const EMAIL_POST_SEND = 'sylius.email_send.post_send';
+    public const EMAIL_PRE_RENDER = 'sylius.email_rendered';
+    public const EMAIL_PRE_SEND = 'sylius.email_send.pre_send';
+    public const EMAIL_POST_SEND = 'sylius.email_send.post_send';
 }

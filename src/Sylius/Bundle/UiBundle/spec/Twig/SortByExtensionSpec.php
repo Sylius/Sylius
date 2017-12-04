@@ -9,20 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\UiBundle\Twig;
 
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\UiBundle\Twig\SortByExtension;
 use Sylius\Bundle\UiBundle\spec\Fixtures\SampleInterface;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class SortByExtensionSpec extends ObjectBehavior
 {
-    function it_extends_twig_extensions()
+    function it_extends_twig_extensions(): void
     {
         $this->shouldHaveType(\Twig_Extension::class);
     }
@@ -31,7 +29,7 @@ final class SortByExtensionSpec extends ObjectBehavior
         SampleInterface $firstSample,
         SampleInterface $secondSample,
         SampleInterface $thirdSample
-    ) {
+    ): void {
         $firstSample->getInt()->willReturn(3);
         $secondSample->getInt()->willReturn(5);
         $thirdSample->getInt()->willReturn(1);
@@ -55,7 +53,7 @@ final class SortByExtensionSpec extends ObjectBehavior
         SampleInterface $firstSample,
         SampleInterface $secondSample,
         SampleInterface $thirdSample
-    ) {
+    ): void {
         $firstSample->getInt()->willReturn(3);
         $secondSample->getInt()->willReturn(5);
         $thirdSample->getInt()->willReturn(1);
@@ -103,7 +101,7 @@ final class SortByExtensionSpec extends ObjectBehavior
         SampleInterface $firstSample,
         SampleInterface $secondSample,
         SampleInterface $thirdSample
-    ) {
+    ): void {
         $firstSample->getInt()->willReturn(3);
         $secondSample->getInt()->willReturn(5);
         $thirdSample->getInt()->willReturn(1);
@@ -130,7 +128,7 @@ final class SortByExtensionSpec extends ObjectBehavior
         SampleInterface $firstInnerSample,
         SampleInterface $secondInnerSample,
         SampleInterface $thirdInnerSample
-    ) {
+    ): void {
         $firstInnerSample->getString()->willReturn('m');
         $secondInnerSample->getString()->willReturn('Z');
         $thirdInnerSample->getString()->willReturn('A');
@@ -158,7 +156,7 @@ final class SortByExtensionSpec extends ObjectBehavior
         SampleInterface $firstSample,
         SampleInterface $secondSample,
         SampleInterface $thirdSample
-    ) {
+    ): void {
         $arrayBeforeSorting = [
             $firstSample,
             $secondSample,
@@ -171,20 +169,18 @@ final class SortByExtensionSpec extends ObjectBehavior
         ;
     }
 
-    function it_return_input_array_if_there_is_only_one_object_inside(SampleInterface $sample)
+    function it_return_input_array_if_there_is_only_one_object_inside(SampleInterface $sample): void
     {
         $this->sortBy([$sample], 'property')->shouldReturn([$sample]);
     }
 
-    function it_does_nothing_if_array_is_empty()
+    function it_does_nothing_if_array_is_empty(): void
     {
         $this->sortBy([], 'property')->shouldReturn([]);
     }
 
-    function it_does_nothing_if_collection_is_empty(Collection $collection)
+    function it_does_nothing_if_collection_is_empty(): void
     {
-        $collection->toArray()->willReturn([]);
-
-        $this->sortBy($collection, 'property')->shouldReturn([]);
+        $this->sortBy(new ArrayCollection(), 'property')->shouldReturn([]);
     }
 }

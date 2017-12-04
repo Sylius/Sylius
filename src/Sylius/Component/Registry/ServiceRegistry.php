@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Registry;
 
 /**
  * Cannot be final, because it is proxied
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ServiceRegistry implements ServiceRegistryInterface
 {
@@ -24,11 +24,11 @@ class ServiceRegistry implements ServiceRegistryInterface
     private $services = [];
 
     /**
-     * Interface which is required by all services.
+     * Interface or parent class which is required by all services.
      *
      * @var string
      */
-    private $interface;
+    private $className;
 
     /**
      * Human readable context for these services, e.g. "grid field"
@@ -38,19 +38,19 @@ class ServiceRegistry implements ServiceRegistryInterface
     private $context;
 
     /**
-     * @param string $interface
+     * @param string $className
      * @param string $context
      */
-    public function __construct($interface, $context = 'service')
+    public function __construct(string $className, string $context = 'service')
     {
-        $this->interface = $interface;
+        $this->className = $className;
         $this->context = $context;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function all()
+    public function all(): array
     {
         return $this->services;
     }
@@ -58,7 +58,7 @@ class ServiceRegistry implements ServiceRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function register($identifier, $service)
+    public function register(string $identifier, $service): void
     {
         if ($this->has($identifier)) {
             throw new ExistingServiceException($this->context, $identifier);
@@ -68,9 +68,9 @@ class ServiceRegistry implements ServiceRegistryInterface
             throw new \InvalidArgumentException(sprintf('%s needs to be an object, %s given.', ucfirst($this->context), gettype($service)));
         }
 
-        if (!in_array($this->interface, class_implements($service), true)) {
+        if (!$service instanceof $this->className) {
             throw new \InvalidArgumentException(
-                sprintf('%s needs to implement "%s", "%s" given.', ucfirst($this->context), $this->interface, get_class($service))
+                sprintf('%s needs to be of type "%s", "%s" given.', ucfirst($this->context), $this->className, get_class($service))
             );
         }
 
@@ -80,7 +80,7 @@ class ServiceRegistry implements ServiceRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function unregister($identifier)
+    public function unregister(string $identifier): void
     {
         if (!$this->has($identifier)) {
             throw new NonExistingServiceException($this->context, $identifier, array_keys($this->services));
@@ -92,7 +92,7 @@ class ServiceRegistry implements ServiceRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function has($identifier)
+    public function has(string $identifier): bool
     {
         return isset($this->services[$identifier]);
     }
@@ -100,7 +100,7 @@ class ServiceRegistry implements ServiceRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function get($identifier)
+    public function get(string $identifier)
     {
         if (!$this->has($identifier)) {
             throw new NonExistingServiceException($this->context, $identifier, array_keys($this->services));

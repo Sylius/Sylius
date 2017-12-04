@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -27,9 +29,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class OrderFixture extends AbstractFixture
 {
     /**
@@ -160,13 +159,13 @@ class OrderFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options): void
     {
         $channels = $this->channelRepository->findAll();
         $customers = $this->customerRepository->findAll();
         $countries = $this->countryRepository->findAll();
 
-        for ($i = 0; $i < $options['amount']; $i++) {
+        for ($i = 0; $i < $options['amount']; ++$i) {
             $channel = $this->faker->randomElement($channels);
             $customer = $this->faker->randomElement($customers);
             $countryCode = $this->faker->randomElement($countries)->getCode();
@@ -200,7 +199,7 @@ class OrderFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'order';
     }
@@ -208,7 +207,7 @@ class OrderFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()
@@ -219,12 +218,12 @@ class OrderFixture extends AbstractFixture
     /**
      * @param OrderInterface $order
      */
-    private function generateItems(OrderInterface $order)
+    private function generateItems(OrderInterface $order): void
     {
         $numberOfItems = rand(1, 5);
         $products = $this->productRepository->findAll();
 
-        for ($i = 0; $i < $numberOfItems; $i++) {
+        for ($i = 0; $i < $numberOfItems; ++$i) {
             $item = $this->orderItemFactory->createNew();
 
             $product = $this->faker->randomElement($products);
@@ -241,12 +240,12 @@ class OrderFixture extends AbstractFixture
      * @param OrderInterface $order
      * @param string $countryCode
      */
-    private function address(OrderInterface $order, $countryCode)
+    private function address(OrderInterface $order, string $countryCode): void
     {
         /** @var AddressInterface $address */
         $address = $this->addressFactory->createNew();
-        $address->setFirstname($this->faker->firstName);
-        $address->setLastname($this->faker->lastName);
+        $address->setFirstName($this->faker->firstName);
+        $address->setLastName($this->faker->lastName);
         $address->setStreet($this->faker->streetName);
         $address->setCountryCode($countryCode);
         $address->setCity($this->faker->city);
@@ -261,7 +260,7 @@ class OrderFixture extends AbstractFixture
     /**
      * @param OrderInterface $order
      */
-    private function selectShipping(OrderInterface $order)
+    private function selectShipping(OrderInterface $order): void
     {
         $shippingMethod = $this
             ->faker
@@ -281,7 +280,7 @@ class OrderFixture extends AbstractFixture
     /**
      * @param OrderInterface $order
      */
-    private function selectPayment(OrderInterface $order)
+    private function selectPayment(OrderInterface $order): void
     {
         $paymentMethod = $this
             ->faker
@@ -301,7 +300,7 @@ class OrderFixture extends AbstractFixture
     /**
      * @param OrderInterface $order
      */
-    private function completeCheckout(OrderInterface $order)
+    private function completeCheckout(OrderInterface $order): void
     {
         if ($this->faker->boolean(25)) {
             $order->setNotes($this->faker->sentence);
@@ -314,7 +313,7 @@ class OrderFixture extends AbstractFixture
      * @param OrderInterface $order
      * @param string $transition
      */
-    private function applyCheckoutStateTransition(OrderInterface $order, $transition)
+    private function applyCheckoutStateTransition(OrderInterface $order, string $transition): void
     {
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
     }

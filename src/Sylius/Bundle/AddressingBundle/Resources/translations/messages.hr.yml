@@ -11,7 +11,6 @@ sylius:
             last_name: Prezime
             phone_number: Kontakt telefon
             postcode: Poštanski broj
-            street: Ulica
             province: Pokrajina
             zone: Regija
         country:
@@ -26,7 +25,7 @@ sylius:
             select: Odaberite
         zone:
             add_member: Dodaj
-            members: Članovi
+            members: 'Članovi'
             name: Naziv regije
             type: Vrsta
             types:

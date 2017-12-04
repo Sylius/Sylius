@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Service\Mocker;
 
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class Mocker implements MockerInterface
 {
     /**

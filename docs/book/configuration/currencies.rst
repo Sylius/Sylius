@@ -71,8 +71,24 @@ the ``Sylius\Component\Core\Currency\CurrencyStorageInterface`` with methods
 
     $container->get('sylius.storage.currency')->set($channel, 'PLN');
 
+Displaying Currencies in the templates
+--------------------------------------
+
+There are some useful helpers for rendering money values in the front end.
+Simply import the money macros of the ``ShopBundle`` in your twig template and use the functions to display the value:
+
+.. code-block:: twig
+
+    ..
+    {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+    ..
+
+    <span class="price">{{ money.format(price, 'EUR') }}</span>
+
+Sylius provides you with some handy :doc:`Global Twig variables </customization/template>` to facilitate displaying money values even more.
+
 Learn more
 ----------
 
-* :doc:`Currency - Component Documentation </components/Currency/index>`
+* :doc:`Currency - Component Documentation </components_and_bundles/components/Currency/index>`
 * :doc:`Pricing Concept Documentation </book/products/pricing>`

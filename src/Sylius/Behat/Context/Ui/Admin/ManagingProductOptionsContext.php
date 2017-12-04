@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -19,9 +21,6 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ManagingProductOptionsContext implements Context
 {
     /**
@@ -149,10 +148,27 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @When I check (also) the :productOptionName product option
+     */
+    public function iCheckTheProductOption(string $productOptionName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $productOptionName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @Then I should see the product option :productOptionName in the list
      * @Then the product option :productOptionName should appear in the registry
      * @Then the product option :productOptionName should be in the registry
      */
-    public function theProductOptionShouldAppearInTheRegistry($productOptionName)
+    public function theProductOptionShouldAppearInTheRegistry(string $productOptionName): void
     {
         $this->iBrowseProductOptions();
 
@@ -234,11 +250,12 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) product options in the list$/
+     * @Then I should see a single product option in the list
+     * @Then I should see :amount product options in the list
      */
-    public function iShouldSeeProductOptionsInTheList($amount)
+    public function iShouldSeeProductOptionsInTheList(int $amount = 1): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $amount);
+        Assert::same($this->indexPage->countItems(), $amount);
     }
 
     /**

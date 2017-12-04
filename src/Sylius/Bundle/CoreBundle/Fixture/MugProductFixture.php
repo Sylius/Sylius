@@ -9,17 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
-use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 class MugProductFixture extends AbstractFixture
 {
     /**
@@ -43,6 +41,11 @@ class MugProductFixture extends AbstractFixture
     private $productFixture;
 
     /**
+     * @var string
+     */
+    private $baseLocaleCode;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -57,17 +60,20 @@ class MugProductFixture extends AbstractFixture
      * @param AbstractResourceFixture $productAttributeFixture
      * @param AbstractResourceFixture $productOptionFixture
      * @param AbstractResourceFixture $productFixture
+     * @param string $baseLocaleCode
      */
     public function __construct(
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $productAttributeFixture,
         AbstractResourceFixture $productOptionFixture,
-        AbstractResourceFixture $productFixture
+        AbstractResourceFixture $productFixture,
+        string $baseLocaleCode
     ) {
         $this->taxonFixture = $taxonFixture;
         $this->productAttributeFixture = $productAttributeFixture;
         $this->productOptionFixture = $productOptionFixture;
         $this->productFixture = $productFixture;
+        $this->baseLocaleCode = $baseLocaleCode;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver =
@@ -80,7 +86,7 @@ class MugProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'mug_product';
     }
@@ -88,7 +94,7 @@ class MugProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -99,11 +105,16 @@ class MugProductFixture extends AbstractFixture
                 [
                     'code' => 'mugs',
                     'name' => 'Mugs',
-                ]
-            ]
+                ],
+            ],
         ]]]);
 
-        $mugMaterials = ['invisible_porcelain' => 'Invisible porcelain', 'banana_skin' => 'Banana skin', 'porcelain' => 'Porcelain', 'centipede' => 'Centipede'];
+        $mugMaterials = [
+            $this->faker->uuid => [$this->baseLocaleCode => 'Invisible porcelain'],
+            $this->faker->uuid => [$this->baseLocaleCode => 'Banana skin'],
+            $this->faker->uuid => [$this->baseLocaleCode => 'Porcelain'],
+            $this->faker->uuid => [$this->baseLocaleCode => 'Centipede'],
+        ];
         $this->productAttributeFixture->load(['custom' => [
             [
                 'name' => 'Mug material',
@@ -112,7 +123,7 @@ class MugProductFixture extends AbstractFixture
                 'configuration' => [
                     'multiple' => false,
                     'choices' => $mugMaterials,
-                ]
+                ],
             ],
         ]]);
 
@@ -153,7 +164,7 @@ class MugProductFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()
@@ -164,9 +175,9 @@ class MugProductFixture extends AbstractFixture
     /**
      * @param int $amount
      *
-     * @return string
+     * @return array
      */
-    private function getUniqueNames($amount)
+    private function getUniqueNames(int $amount): array
     {
         $productsNames = [];
 

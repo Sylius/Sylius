@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Context;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class SettableThemeContext implements ThemeContextInterface
 {
     /**
@@ -26,7 +25,7 @@ final class SettableThemeContext implements ThemeContextInterface
     /**
      * {@inheritdoc}
      */
-    public function setTheme(ThemeInterface $theme)
+    public function setTheme(ThemeInterface $theme): void
     {
         $this->theme = $theme;
     }
@@ -34,7 +33,7 @@ final class SettableThemeContext implements ThemeContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getTheme()
+    public function getTheme(): ?ThemeInterface
     {
         return $this->theme;
     }

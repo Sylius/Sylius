@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Payment;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class RandomInvoiceNumberGenerator implements InvoiceNumberGeneratorInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function generate(OrderInterface $order, PaymentInterface $payment)
+    public function generate(OrderInterface $order, PaymentInterface $payment): string
     {
-        return mt_rand(1, 100000).'-'.mt_rand(1, 100000);
+        return mt_rand(1, 100000) . '-' . mt_rand(1, 100000);
     }
 }

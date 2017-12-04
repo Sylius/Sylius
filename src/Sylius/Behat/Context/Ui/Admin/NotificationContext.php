@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class NotificationContext implements Context
 {
     /**
@@ -55,5 +54,13 @@ final class NotificationContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted()
     {
         $this->notificationChecker->checkNotification('has been successfully deleted.', NotificationType::success());
+    }
+
+    /**
+     * @Then I should be notified that they have been successfully deleted
+     */
+    public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted()
+    {
+        $this->notificationChecker->checkNotification('have been successfully deleted.', NotificationType::success());
     }
 }

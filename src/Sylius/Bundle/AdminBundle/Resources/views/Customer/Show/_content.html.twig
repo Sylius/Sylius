@@ -1,3 +1,5 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
 <div class="eight wide column" id="info">
     <div class="ui fluid card">
         {{ sonata_block_render_event('sylius.admin.customer.show.before_information', {'resource': resource}) }}
@@ -26,7 +28,9 @@
                     {{ 'sylius.ui.email_verified'|trans }}
                 </div>
                 <br />
-                {{ buttons.default(path('sylius_admin_impersonate_user', {'username': user.emailCanonical}), 'sylius.ui.impersonate', 'impersonate', 'unhide', 'blue') }}
+                {% if is_shop_enabled() %}
+                    {{ buttons.default(path('sylius_admin_impersonate_user', {'username': user.emailCanonical}), 'sylius.ui.impersonate', 'impersonate', 'unhide', 'blue') }}
+                {% endif %}
             {% endif %}
         </div>
         <div class="extra content">

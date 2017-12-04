@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Factory;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 interface ThemeAuthorFactoryInterface
 {
     /**
@@ -23,5 +22,5 @@ interface ThemeAuthorFactoryInterface
      *
      * @return ThemeAuthor
      */
-    public function createFromArray(array $data);
+    public function createFromArray(array $data): ThemeAuthor;
 }

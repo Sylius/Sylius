@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        accept: 'Anmeldelse er blevet godkendt.'
+        reject: 'Anmeldelse er blevet afvist.'
+        wait_for_the_acceptation: 'Din anmeldelse afventer godkendelse.'

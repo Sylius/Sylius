@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -16,17 +18,14 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
 {
     /**
-     * @param OrderInterface $order
-     *
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function validate($order, Constraint $constraint)
+    public function validate($order, Constraint $constraint): void
     {
         Assert::isInstanceOf($order, OrderInterface::class);
 

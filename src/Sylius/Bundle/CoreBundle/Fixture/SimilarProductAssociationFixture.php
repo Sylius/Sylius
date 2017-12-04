@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
@@ -17,9 +19,6 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class SimilarProductAssociationFixture extends AbstractFixture
 {
     /**
@@ -72,7 +71,7 @@ class SimilarProductAssociationFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'similar_product_association';
     }
@@ -80,7 +79,7 @@ class SimilarProductAssociationFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -108,7 +107,7 @@ class SimilarProductAssociationFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()
@@ -119,9 +118,9 @@ class SimilarProductAssociationFixture extends AbstractFixture
     /**
      * @param ProductInterface $owner
      *
-     * @return string[]
+     * @return array|string[]
      */
-    private function getAssociatedProductsAsArray(ProductInterface $owner)
+    private function getAssociatedProductsAsArray(ProductInterface $owner): array
     {
         $products = $this->productRepository->findBy(['mainTaxon' => $owner->getMainTaxon()]);
         $products = $this->faker->randomElements($products, 3);

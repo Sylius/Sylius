@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\LocaleBundle\Twig;
 
 use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class LocaleExtension extends \Twig_Extension
 {
     /**
@@ -35,10 +33,10 @@ final class LocaleExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-            new \Twig_SimpleFilter('sylius_locale_name', [$this->localeHelper, 'convertCodeToName']),
+            new \Twig_Filter('sylius_locale_name', [$this->localeHelper, 'convertCodeToName']),
         ];
     }
 }

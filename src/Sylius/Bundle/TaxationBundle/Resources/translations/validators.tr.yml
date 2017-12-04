@@ -5,6 +5,8 @@ sylius:
     tax_category:
         name:
             not_blank: Lütfen vergi kategorisinin adını giriniz.
+        code:
+            not_blank: Lütfen vergi kategorisinin adını giriniz.
     tax_rate:
         category:
             not_blank: Lütfen vergi kategorisi seçiniz.

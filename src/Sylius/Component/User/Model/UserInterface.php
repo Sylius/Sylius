@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Model;
 
 use Doctrine\Common\Collections\Collection;
@@ -17,11 +19,6 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 interface UserInterface extends
     AdvancedUserInterface,
     CredentialsHolderInterface,
@@ -30,118 +27,133 @@ interface UserInterface extends
     TimestampableInterface,
     ToggleableInterface
 {
-    const DEFAULT_ROLE = 'ROLE_USER';
+    public const DEFAULT_ROLE = 'ROLE_USER';
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail();
+    public function getEmail(): ?string;
 
     /**
-     * @param string $email
+     * @param string|null $email
      */
-    public function setEmail($email);
+    public function setEmail(?string $email): void;
 
     /**
      * Gets normalized email (should be used in search and sort queries).
      *
-     * @return string
+     * @return string|null
      */
-    public function getEmailCanonical();
+    public function getEmailCanonical(): ?string;
 
     /**
-     * @param string $emailCanonical
+     * @param string|null $emailCanonical
      */
-    public function setEmailCanonical($emailCanonical);
+    public function setEmailCanonical(?string $emailCanonical): void;
 
     /**
-     * @param string $username
+     * @param string|null $username
      */
-    public function setUsername($username);
+    public function setUsername(?string $username): void;
 
     /**
      * Gets normalized username (should be used in search and sort queries).
      *
-     * @return string
+     * @return string|null
      */
-    public function getUsernameCanonical();
+    public function getUsernameCanonical(): ?string;
 
     /**
-     * @param string $usernameCanonical
+     * @param string|null $usernameCanonical
      */
-    public function setUsernameCanonical($usernameCanonical);
+    public function setUsernameCanonical(?string $usernameCanonical): void;
 
     /**
      * @param bool $locked
      */
-    public function setLocked($locked);
+    public function setLocked(bool $locked): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmailVerificationToken();
+    public function getEmailVerificationToken(): ?string;
 
     /**
-     * @param string $verificationToken
+     * @param string|null $verificationToken
      */
-    public function setEmailVerificationToken($verificationToken);
+    public function setEmailVerificationToken(?string $verificationToken): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPasswordResetToken();
+    public function getPasswordResetToken(): ?string;
 
     /**
-     * @param string $passwordResetToken
+     * @param string|null $passwordResetToken
      */
-    public function setPasswordResetToken($passwordResetToken);
+    public function setPasswordResetToken(?string $passwordResetToken): void;
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
-    public function getPasswordRequestedAt();
+    public function getPasswordRequestedAt(): ?\DateTimeInterface;
 
     /**
-     * @param \DateTime|null $date
+     * @param \DateTimeInterface|null $date
      */
-    public function setPasswordRequestedAt(\DateTime $date = null);
+    public function setPasswordRequestedAt(?\DateTimeInterface $date): void;
 
     /**
      * @param \DateInterval $ttl
      *
      * @return bool
      */
-    public function isPasswordRequestNonExpired(\DateInterval $ttl);
+    public function isPasswordRequestNonExpired(\DateInterval $ttl): bool;
 
     /**
      * @return bool
      */
-    public function isVerified();
+    public function isVerified(): bool;
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
-    public function getVerifiedAt();
+    public function getVerifiedAt(): ?\DateTimeInterface;
 
     /**
-     * @param \DateTime|null $verifiedAt
+     * @param \DateTimeInterface|null $verifiedAt
      */
-    public function setVerifiedAt(\DateTime $verifiedAt = null);
+    public function setVerifiedAt(?\DateTimeInterface $verifiedAt): void;
 
     /**
-     * @param \DateTime|null $date
+     * @return \DateTimeInterface|null
      */
-    public function setCredentialsExpireAt(\DateTime $date = null);
+    public function getExpiresAt(): ?\DateTimeInterface;
 
     /**
-     * @return \DateTime|null
+     * @param \DateTimeInterface|null $date
      */
-    public function getLastLogin();
+    public function setExpiresAt(?\DateTimeInterface $date): void;
 
     /**
-     * @param \DateTime|null $time
+     * @return \DateTimeInterface|null
      */
-    public function setLastLogin(\DateTime $time = null);
+    public function getCredentialsExpireAt(): ?\DateTimeInterface;
+
+    /**
+     * @param \DateTimeInterface|null $date
+     */
+    public function setCredentialsExpireAt(?\DateTimeInterface $date): void;
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getLastLogin(): ?\DateTimeInterface;
+
+    /**
+     * @param \DateTimeInterface|null $time
+     */
+    public function setLastLogin(?\DateTimeInterface $time): void;
 
     /**
      * Never use this to check if this user has access to anything!
@@ -155,32 +167,32 @@ interface UserInterface extends
      *
      * @return bool
      */
-    public function hasRole($role);
+    public function hasRole(string $role): bool;
 
     /**
      * @param string $role
      */
-    public function addRole($role);
+    public function addRole(string $role): void;
 
     /**
      * @param string $role
      */
-    public function removeRole($role);
+    public function removeRole(string $role): void;
 
     /**
      * @return Collection|UserOAuthInterface[]
      */
-    public function getOAuthAccounts();
+    public function getOAuthAccounts(): Collection;
 
     /**
      * @param string $provider
      *
      * @return UserOAuthInterface|null
      */
-    public function getOAuthAccount($provider);
+    public function getOAuthAccount(string $provider): ?UserOAuthInterface;
 
     /**
      * @param UserOAuthInterface $oauth
      */
-    public function addOAuthAccount(UserOAuthInterface $oauth);
+    public function addOAuthAccount(UserOAuthInterface $oauth): void;
 }

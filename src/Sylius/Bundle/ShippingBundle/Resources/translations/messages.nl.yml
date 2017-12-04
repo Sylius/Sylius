@@ -36,7 +36,10 @@ sylius:
             configuration: Configuratie
             description: Omschrijving
             enabled: Toegestaan
+            match_all_category_requirement: Alle eenheden moeten overeenkomen met de methodecategorie
+            match_any_category_requirement: Minstens 1 eenheid moet overeenkomen met de methodecategorie
+            match_none_category_requirement: Geen van de eenheden hoeven overeen te komen met de methodecategorie
             name: Naam
+            position: Positie
             tax_category: Belasting categorie
             translations: Vertalingen
-            position: Positie

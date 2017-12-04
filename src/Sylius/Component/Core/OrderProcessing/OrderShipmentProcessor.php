@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -20,9 +22,6 @@ use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class OrderShipmentProcessor implements OrderProcessorInterface
 {
     /**
@@ -50,12 +49,12 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(BaseOrderInterface $order)
+    public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        if ($order->isEmpty()) {
+        if ($order->isEmpty() || !$order->isShippingRequired()) {
             $order->removeShipments();
 
             return;
@@ -67,6 +66,10 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             return;
         }
 
+        foreach ($shipment->getUnits() as $unit) {
+            $shipment->removeUnit($unit);
+        }
+
         foreach ($order->getItemUnits() as $itemUnit) {
             if (null === $itemUnit->getShipment()) {
                 $shipment->addUnit($itemUnit);
@@ -75,11 +78,11 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param BaseOrderInterface $order
+     * @param OrderInterface $order
      *
      * @return ShipmentInterface
      */
-    private function getOrderShipment(BaseOrderInterface $order)
+    private function getOrderShipment(OrderInterface $order)
     {
         if ($order->hasShipments()) {
             return $order->getShipments()->first();

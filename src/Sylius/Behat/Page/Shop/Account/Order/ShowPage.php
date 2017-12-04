@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Account\Order;
 
 use Behat\Mink\Session;
@@ -16,9 +18,6 @@ use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     /**
@@ -123,15 +122,24 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isProductInTheList($name)
+    public function isProductInTheList(string $productName): bool
     {
         try {
+            $table = $this->getElement('order_items');
             $rows = $this->tableAccessor->getRowsWithFields(
-                $this->getElement('order_items'),
-                ['item' => $name]
+                $table,
+                ['item' => $productName]
             );
 
-            return 1 === count($rows);
+            foreach ($rows as $row) {
+                $field = $this->tableAccessor->getFieldFromRow($table, $row, 'item');
+                $name = $field->find('css', '.sylius-product-name');
+                if (null !== $name && $name->getText() === $productName) {
+                    return true;
+                }
+            }
+
+            return false;
         } catch (\InvalidArgumentException $exception) {
             return false;
         }
@@ -197,7 +205,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return
             (stripos($elementText, $customerName) !== false) &&
             (stripos($elementText, $street) !== false) &&
-            (stripos($elementText, $city.', '.$postcode) !== false) &&
+            (stripos($elementText, $city . ', ' . $postcode) !== false) &&
             (stripos($elementText, $countryName) !== false)
         ;
     }

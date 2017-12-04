@@ -9,15 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Cart;
 
 use Sylius\Behat\Page\PageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface SummaryPageInterface extends PageInterface
 {
     /**
@@ -137,7 +135,7 @@ interface SummaryPageInterface extends PageInterface
     public function isEmpty();
 
     /**
-     * @param $productName
+     * @param string $productName
      *
      * @return int
      */

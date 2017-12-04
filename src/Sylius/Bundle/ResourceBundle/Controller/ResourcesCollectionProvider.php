@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Hateoas\Configuration\Route;
@@ -17,9 +19,6 @@ use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ResourcesCollectionProvider implements ResourcesCollectionProviderInterface
 {
     /**
@@ -61,7 +60,7 @@ final class ResourcesCollectionProvider implements ResourcesCollectionProviderIn
             $request = $requestConfiguration->getRequest();
 
             $paginator->setMaxPerPage($this->resolveMaxPerPage(
-                $request->query->get('limit'),
+                $request->query->has('limit') ? $request->query->getInt('limit') : null,
                 $requestConfiguration->getPaginationMaxPerPage(),
                 $paginationLimits
             ));
@@ -81,13 +80,13 @@ final class ResourcesCollectionProvider implements ResourcesCollectionProviderIn
     }
 
     /**
-     * @param int $requestLimit
+     * @param int|null $requestLimit
      * @param int $configurationLimit
      * @param int[] $gridLimits
      *
      * @return int
      */
-    private function resolveMaxPerPage($requestLimit, $configurationLimit, array $gridLimits = [])
+    private function resolveMaxPerPage(?int $requestLimit, int $configurationLimit, array $gridLimits = []): int
     {
         if (null === $requestLimit) {
             return reset($gridLimits) ?: $configurationLimit;

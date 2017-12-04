@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -21,9 +23,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 final class ProductReviewContext implements Context
 {
     /**
@@ -86,7 +85,7 @@ final class ProductReviewContext implements Context
     ) {
         $review = $this->createProductReview($product, $title, $rating, $title, $customer);
         if (null !== $daysSinceCreation) {
-            $review->setCreatedAt(new \DateTime('-'.$daysSinceCreation.' days'));
+            $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
         }
 
         $this->productReviewRepository->add($review);
@@ -129,7 +128,7 @@ final class ProductReviewContext implements Context
     {
         $customer = $this->sharedStorage->get('customer');
         foreach ($rates as $key => $rate) {
-            $review = $this->createProductReview($product, 'Title '.$key, $rate, 'Comment '.$key, $customer);
+            $review = $this->createProductReview($product, 'Title ' . $key, $rate, 'Comment ' . $key, $customer);
             $this->productReviewRepository->add($review);
         }
     }
@@ -175,7 +174,7 @@ final class ProductReviewContext implements Context
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->createNew();
         $review->setTitle($title);
-        $review->setRating($rating);
+        $review->setRating((int) $rating);
         $review->setComment($comment);
         $review->setReviewSubject($product);
         $review->setAuthor($customer);

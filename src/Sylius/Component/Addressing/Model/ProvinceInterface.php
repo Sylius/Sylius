@@ -9,43 +9,42 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ProvinceInterface extends ResourceInterface, CodeAwareInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName($name);
+    public function setName(?string $name): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAbbreviation();
+    public function getAbbreviation(): ?string;
 
     /**
-     * @param string $abbreviation
+     * @param string|null $abbreviation
      */
-    public function setAbbreviation($abbreviation);
+    public function setAbbreviation(?string $abbreviation): void;
 
     /**
-     * @return CountryInterface
+     * @return CountryInterface|null
      */
-    public function getCountry();
+    public function getCountry(): ?CountryInterface;
 
     /**
      * @param CountryInterface $country
      */
-    public function setCountry(CountryInterface $country = null);
+    public function setCountry(?CountryInterface $country): void;
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\Validator;
 
 use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
@@ -17,10 +19,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
-class ProductVariantCombinationValidator extends ConstraintValidator
+final class ProductVariantCombinationValidator extends ConstraintValidator
 {
     /**
      * @var ProductVariantsParityCheckerInterface
@@ -38,7 +37,7 @@ class ProductVariantCombinationValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$value instanceof ProductVariantInterface) {
             throw new UnexpectedTypeException($value, ProductVariantInterface::class);

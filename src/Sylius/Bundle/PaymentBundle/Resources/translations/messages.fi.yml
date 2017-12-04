@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        credit_card:
+            cardholder_name: Kortinhaltijan nimi
+            expiry_month: Voimassaolo päätyy, kuukausi
+            expiry_year: Voimassaolo päättyy, vuosi
+            number: Kortin numero
+            security_code: Tarkistusluku (CVV-koodi)
+            type: Kortin tyyppi
+        payment:
+            amount: Maksettava summa
+            method: Maksutapa
+            state:
+                header: Maksun tila
+                checkout: Kassa
+                completed: Valmis
+                authorized: Hyväksytty
+                failed: Epäonnistunut
+                new: Uusi
+                pending: Odottaa
+                processing: Käsitellään
+                unknown: Tuntematon
+                void: Mitätön
+                cancelled: Peruutettu
+                refunded: Hyvitetty
+        payment_method:
+            description: Kuvaus
+            enabled: Otettu käyttöön?
+            instructions: Ohjeet
+            name: Nimi
+            position: Asema

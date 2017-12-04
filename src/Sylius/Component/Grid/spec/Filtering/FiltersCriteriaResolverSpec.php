@@ -9,31 +9,24 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Grid\Filtering;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Definition\Grid;
-use Sylius\Component\Grid\Filtering\FiltersCriteriaResolver;
 use Sylius\Component\Grid\Filtering\FiltersCriteriaResolverInterface;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class FiltersCriteriaResolverSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(FiltersCriteriaResolver::class);
-    }
-
-    function it_implements_filters_criteria_resolver_interface()
+    function it_implements_filters_criteria_resolver_interface(): void
     {
         $this->shouldImplement(FiltersCriteriaResolverInterface::class);
     }
 
-    function it_checks_whether_any_criteria_are_available(Grid $grid, Filter $filter)
+    function it_checks_whether_any_criteria_are_available(Grid $grid, Filter $filter): void
     {
         $emptyParameters = new Parameters();
         $criteriaParameters = new Parameters(['criteria' => ['czapla']]);
@@ -65,7 +58,7 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
         $this->hasCriteria($grid, $criteriaParameters)->shouldReturn(true);
     }
 
-    function it_gets_default_criteria_from_grid_filters(Grid $grid, Filter $firstFilter, Filter $secondFilter)
+    function it_gets_default_criteria_from_grid_filters(Grid $grid, Filter $firstFilter, Filter $secondFilter): void
     {
         $startDate = new \DateTime();
         $endDate = new \DateTime();
@@ -75,13 +68,13 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
 
         $grid->getFilters()->willReturn(['favourite' => $firstFilter, 'date' => $secondFilter]);
 
-        $this->getCriteria($grid, new Parameters())->shouldBeSameAs([
+        $this->getCriteria($grid, new Parameters())->shouldIterateAs([
             'favourite' => 'Pug',
             'date' => ['start' => $startDate, 'end' => $endDate],
         ]);
     }
 
-    function it_gets_criteria_from_parameters(Grid $grid, Filter $firstFilter, Filter $secondFilter)
+    function it_gets_criteria_from_parameters(Grid $grid, Filter $firstFilter, Filter $secondFilter): void
     {
         $startDate = new \DateTime();
         $endDate = new \DateTime();
@@ -95,10 +88,10 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
             'criteria' => [
                 'favourite' => 'Pug',
                 'date' => ['start' => $startDate, 'end' => $endDate],
-            ]
+            ],
         ]);
 
-        $this->getCriteria($grid, $parameters)->shouldBeSameAs([
+        $this->getCriteria($grid, $parameters)->shouldIterateAs([
             'favourite' => 'Pug',
             'date' => ['start' => $startDate, 'end' => $endDate],
         ]);
@@ -108,7 +101,7 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
         Grid $grid,
         Filter $firstFilter,
         Filter $secondFilter
-    ) {
+    ): void {
         $parametersDate = new \DateTime();
 
         $firstFilter->getCriteria()->willReturn('Rum');
@@ -120,42 +113,12 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
             'criteria' => [
                 'favourite' => 'Pug',
                 'date' => ['now' => $parametersDate],
-            ]
+            ],
         ]);
 
-        $this->getCriteria($grid, $parameters)->shouldBeSameAs([
+        $this->getCriteria($grid, $parameters)->shouldIterateAs([
             'favourite' => 'Pug',
             'date' => ['now' => $parametersDate],
         ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMatchers()
-    {
-        return [
-            'beSameAs' => function ($subject, $key) {
-                if (!is_array($subject) || !is_array($key)) {
-                    return false;
-                }
-
-                if (count($subject) !== count($key)) {
-                    return false;
-                }
-
-                if (0 !== count(array_diff_key($key, $subject))) {
-                    return false;
-                }
-
-                foreach (array_keys($key) as $arrayKey) {
-                    if ($key[$arrayKey] !== $subject[$arrayKey]) {
-                        return false;
-                    }
-                }
-
-                return true;
-            },
-        ];
     }
 }

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
@@ -19,9 +21,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class CartItemAvailabilityValidator extends ConstraintValidator
 {
     /**
@@ -42,7 +41,7 @@ final class CartItemAvailabilityValidator extends ConstraintValidator
      *
      * {@inheritdoc}
      */
-    public function validate($addCartItemCommand, Constraint $constraint)
+    public function validate($addCartItemCommand, Constraint $constraint): void
     {
         Assert::isInstanceOf($addCartItemCommand, AddToCartCommandInterface::class);
         Assert::isInstanceOf($constraint, CartItemAvailability::class);
@@ -69,7 +68,7 @@ final class CartItemAvailabilityValidator extends ConstraintValidator
      *
      * @return int
      */
-    private function getExistingCartItemQuantityFromCart(OrderInterface $cart, OrderItemInterface $cartItem)
+    private function getExistingCartItemQuantityFromCart(OrderInterface $cart, OrderItemInterface $cartItem): int
     {
         foreach ($cart->getItems() as $existingCartItem) {
             if ($existingCartItem->equals($cartItem)) {

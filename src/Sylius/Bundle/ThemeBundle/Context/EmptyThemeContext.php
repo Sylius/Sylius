@@ -9,19 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Context;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+
 final class EmptyThemeContext implements ThemeContextInterface
 {
     /**
      * {@inheritdoc}
-     *
-     * @return null
      */
-    public function getTheme()
+    public function getTheme(): ?ThemeInterface
     {
         return null;
     }

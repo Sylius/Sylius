@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -23,9 +25,6 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ManagingPromotionCouponsContext implements Context
 {
     /**
@@ -83,6 +82,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @Given /^I browse coupons of (this promotion)$/
      * @Given /^I want to view all coupons of (this promotion)$/
      * @When /^I browse all coupons of ("[^"]+" promotion)$/
      */
@@ -135,7 +135,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When I make generated coupons valid until :date
      */
-    public function iMakeGeneratedCouponsValidUntil(\DateTime $date)
+    public function iMakeGeneratedCouponsValidUntil(\DateTimeInterface $date)
     {
         $this->generatePage->setExpiresAt($date);
     }
@@ -193,7 +193,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When I make it valid until :date
      */
-    public function iMakeItValidUntil(\DateTime $date)
+    public function iMakeItValidUntil(\DateTimeInterface $date)
     {
         $this->createPage->setExpiresAt($date);
     }
@@ -201,7 +201,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When I change expires date to :date
      */
-    public function iChangeExpiresDateTo(\DateTime $date)
+    public function iChangeExpiresDateTo(\DateTimeInterface $date)
     {
         $this->updatePage->setExpiresAt($date);
     }
@@ -243,6 +243,22 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When I check (also) the :couponCode coupon
+     */
+    public function iCheckTheCoupon(string $couponCode): void
+    {
+        $this->indexPage->checkResourceOnPage(['code' => $couponCode]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
      * @Then /^there should be (\d+) coupon related to (this promotion)$/
      */
     public function thereShouldBeCouponRelatedTo($number, PromotionInterface $promotion)
@@ -250,6 +266,14 @@ final class ManagingPromotionCouponsContext implements Context
         $this->indexPage->open(['promotionId' => $promotion->getId()]);
 
         Assert::same($this->indexPage->countItems(), (int) $number);
+    }
+
+    /**
+     * @Then I should see a single coupon in the list
+     */
+    public function iShouldSeeASingleCouponInTheList(): void
+    {
+        Assert::same($this->indexPage->countItems(), 1);
     }
 
     /**
@@ -263,7 +287,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then this coupon should be valid until :date
      */
-    public function thisCouponShouldBeValidUntil(\DateTime $date)
+    public function thisCouponShouldBeValidUntil(\DateTimeInterface $date)
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['expiresAt' => date('d-m-Y', $date->getTimestamp())]));
     }
@@ -402,5 +426,13 @@ final class ManagingPromotionCouponsContext implements Context
         $message = sprintf('Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length equals %d. Possible generate amount is 8.', $amount, $codeLength);
 
         Assert::true($this->generatePage->checkGenerationValidation($message));
+    }
+
+    /**
+     * @Then I should see the coupon :couponCode in the list
+     */
+    public function iShouldSeeTheCouponInTheList(string $couponCode): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $couponCode]));
     }
 }

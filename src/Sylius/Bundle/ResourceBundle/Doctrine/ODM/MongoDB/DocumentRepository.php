@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
@@ -20,8 +22,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Doctrine ODM driver resource manager.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class DocumentRepository extends BaseDocumentRepository implements RepositoryInterface
 {
@@ -71,13 +71,13 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
 
     /**
      * @param array $criteria
-     * @param array $sorting
-     * @param int   $limit
-     * @param int   $offset
+     * @param array|null $sorting
+     * @param int $limit
+     * @param int $offset
      *
      * @return array
      */
-    public function findBy(array $criteria, array $sorting = [], $limit = null, $offset = null)
+    public function findBy(array $criteria, ?array $sorting = null, $limit = null, $offset = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 

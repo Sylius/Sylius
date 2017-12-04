@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Validator\Constraints;
 
 use Sylius\Bundle\ResourceBundle\Validator\EnabledValidator;
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class Enabled extends Constraint
 {
     public $message = 'sylius.resource.not_enabled';
@@ -24,7 +23,7 @@ final class Enabled extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): array
     {
         return [self::PROPERTY_CONSTRAINT, self::CLASS_CONSTRAINT];
     }
@@ -32,7 +31,7 @@ final class Enabled extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return EnabledValidator::class;
     }

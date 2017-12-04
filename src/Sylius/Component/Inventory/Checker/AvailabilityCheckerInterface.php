@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Inventory\Checker;
 
 use Sylius\Component\Inventory\Model\StockableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface AvailabilityCheckerInterface
 {
     /**
@@ -23,7 +22,7 @@ interface AvailabilityCheckerInterface
      *
      * @return bool
      */
-    public function isStockAvailable(StockableInterface $stockable);
+    public function isStockAvailable(StockableInterface $stockable): bool;
 
     /**
      * @param StockableInterface $stockable
@@ -31,5 +30,5 @@ interface AvailabilityCheckerInterface
      *
      * @return bool
      */
-    public function isStockSufficient(StockableInterface $stockable, $quantity);
+    public function isStockSufficient(StockableInterface $stockable, int $quantity): bool;
 }

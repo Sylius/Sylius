@@ -9,42 +9,35 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Shipping\Resolver;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Sylius\Component\Shipping\Resolver\CompositeMethodsResolver;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CompositeMethodsResolverSpec extends ObjectBehavior
 {
-    function let(PrioritizedServiceRegistryInterface $resolversRegistry)
+    function let(PrioritizedServiceRegistryInterface $resolversRegistry): void
     {
         $this->beConstructedWith($resolversRegistry);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CompositeMethodsResolver::class);
-    }
-
-    function it_implements_methods_resolver_interface()
+    function it_implements_methods_resolver_interface(): void
     {
         $this->shouldImplement(ShippingMethodsResolverInterface::class);
     }
-    
+
     function it_uses_registry_to_provide_shipping_methods_for_shipping_subject(
         ShippingMethodsResolverInterface $firstMethodsResolver,
         ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         ShippingMethodInterface $shippingMethod,
         ShippingSubjectInterface $shippingSubject
-    ) {
+    ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
         $firstMethodsResolver->supports($shippingSubject)->willReturn(false);
@@ -60,7 +53,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         ShippingSubjectInterface $shippingSubject
-    ) {
+    ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
         $firstMethodsResolver->supports($shippingSubject)->willReturn(false);
@@ -74,7 +67,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         ShippingSubjectInterface $shippingSubject
-    ) {
+    ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
         $firstMethodsResolver->supports($shippingSubject)->willReturn(false);
@@ -88,11 +81,11 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         ShippingSubjectInterface $shippingSubject
-    ) {
+    ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
         $firstMethodsResolver->supports($shippingSubject)->willReturn(false);
-        $firstMethodsResolver->supports($shippingSubject)->willReturn(false);
+        $secondMethodsResolver->supports($shippingSubject)->willReturn(false);
 
         $this->supports($shippingSubject)->shouldReturn(false);
     }

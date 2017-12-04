@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
-/**
- * @author Saidul Islam <saidul.04@gmail.com>
- */
 interface TaxonImageInterface extends ImageInterface
 {
 }

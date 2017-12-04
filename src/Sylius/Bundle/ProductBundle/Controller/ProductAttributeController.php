@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\Controller;
 
 use FOS\RestBundle\View\View;
@@ -16,14 +18,10 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class ProductAttributeController extends ResourceController
 {
     /**
@@ -32,7 +30,7 @@ class ProductAttributeController extends ResourceController
      *
      * @return Response
      */
-    public function getAttributeTypesAction(Request $request, $template)
+    public function getAttributeTypesAction(Request $request, string $template): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -51,7 +49,7 @@ class ProductAttributeController extends ResourceController
     /**
      * @return Response
      */
-    public function renderAttributesAction(Request $request)
+    public function renderAttributesAction(Request $request): Response
     {
         $template = $request->attributes->get('template', 'SyliusAttributeBundle::attributeChoice.html.twig');
 
@@ -67,7 +65,7 @@ class ProductAttributeController extends ResourceController
      *
      * @return Response
      */
-    public function renderAttributeValueFormsAction(Request $request)
+    public function renderAttributeValueFormsAction(Request $request): Response
     {
         $template = $request->attributes->get('template', 'SyliusAttributeBundle::attributeValueForms.html.twig');
 
@@ -83,6 +81,7 @@ class ProductAttributeController extends ResourceController
 
         $localeCodes = $this->get('sylius.translation_locale_provider')->getDefinedLocalesCodes();
 
+        $forms = [];
         foreach ($attributes as $attribute) {
             $forms[$attribute->getCode()] = $this->getAttributeFormsInAllLocales($attribute, $localeCodes);
         }
@@ -96,11 +95,11 @@ class ProductAttributeController extends ResourceController
 
     /**
      * @param AttributeInterface $attribute
-     * @param string[] $localeCodes
+     * @param array|string[] $localeCodes
      *
-     * @return FormView[]
+     * @return array|FormView[]
      */
-    protected function getAttributeFormsInAllLocales(AttributeInterface $attribute, array $localeCodes)
+    protected function getAttributeFormsInAllLocales(AttributeInterface $attribute, array $localeCodes): array
     {
         $attributeForm = $this->get('sylius.form_registry.attribute_type')->get($attribute->getType(), 'default');
 

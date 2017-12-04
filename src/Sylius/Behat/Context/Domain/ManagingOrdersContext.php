@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
@@ -22,9 +24,6 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ManagingOrdersContext implements Context
 {
     /**
@@ -167,7 +166,7 @@ final class ManagingOrdersContext implements Context
      */
     public function thisOrderHasNotBeenPaidForDays(OrderInterface $order, $amount, $time)
     {
-        $order->setCheckoutCompletedAt(new \DateTime('-'.$amount.' '.$time));
+        $order->setCheckoutCompletedAt(new \DateTime('-' . $amount . ' ' . $time));
         $this->orderManager->flush();
 
         $this->unpaidOrdersStateUpdater->cancel();

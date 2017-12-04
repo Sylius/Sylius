@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Uploader;
 
 use Gaufrette\Filesystem;
@@ -32,19 +34,19 @@ class ImageUploader implements ImageUploaderInterface
     /**
      * {@inheritdoc}
      */
-    public function upload(ImageInterface $image)
+    public function upload(ImageInterface $image): void
     {
         if (!$image->hasFile()) {
             return;
         }
 
-        if (null !== $image->getPath()) {
+        if (null !== $image->getPath() && $this->has($image->getPath())) {
             $this->remove($image->getPath());
         }
 
         do {
-            $hash = md5(uniqid(mt_rand(), true));
-            $path = $this->expandPath($hash.'.'.$image->getFile()->guessExtension());
+            $hash = md5(uniqid((string) mt_rand(), true));
+            $path = $this->expandPath($hash . '.' . $image->getFile()->guessExtension());
         } while ($this->filesystem->has($path));
 
         $image->setPath($path);
@@ -58,9 +60,13 @@ class ImageUploader implements ImageUploaderInterface
     /**
      * {@inheritdoc}
      */
-    public function remove($path)
+    public function remove(string $path): bool
     {
-        return $this->filesystem->delete($path);
+        if ($this->filesystem->has($path)) {
+            return $this->filesystem->delete($path);
+        }
+
+        return false;
     }
 
     /**
@@ -68,7 +74,7 @@ class ImageUploader implements ImageUploaderInterface
      *
      * @return string
      */
-    private function expandPath($path)
+    private function expandPath(string $path): string
     {
         return sprintf(
             '%s/%s/%s',
@@ -76,5 +82,15 @@ class ImageUploader implements ImageUploaderInterface
             substr($path, 2, 2),
             substr($path, 4)
         );
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return bool
+     */
+    private function has(string $path): bool
+    {
+        return $this->filesystem->has($path);
     }
 }

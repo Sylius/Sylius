@@ -7,7 +7,7 @@ sylius:
             account:
                 address_book: 'Rubrica degli indirizzi'
                 change_password: 'Modifica la password'
-                dashboard: 'Pannello amministrazione'
-                header: 'Il tuo conto'
+                dashboard: 'Pannello di amministrazione'
+                header: 'Il tuo conto cliente'
                 order_history: 'Storico ordini'
-                personal_information: 'Informationi personali'
+                personal_information: 'Informazioni personali'

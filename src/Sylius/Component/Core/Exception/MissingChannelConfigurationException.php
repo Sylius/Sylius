@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Exception;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
-class MissingChannelConfigurationException extends \RuntimeException
+final class MissingChannelConfigurationException extends \RuntimeException
 {
     /**
      * {@inheritdoc}
      */
-    public function __construct($message, \Exception $previousException = null)
+    public function __construct(string $message, ?\Exception $previousException = null)
     {
         parent::__construct($message, 0, $previousException);
     }

@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Grid\Data;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Grid\Data\DataProvider;
 use Sylius\Component\Grid\Data\DataProviderInterface;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Data\DataSourceProviderInterface;
@@ -21,22 +22,17 @@ use Sylius\Component\Grid\Filtering\FiltersApplicatorInterface;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\Sorting\SorterInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DataProviderSpec extends ObjectBehavior
 {
-    function let(DataSourceProviderInterface $dataSourceProvider, FiltersApplicatorInterface $filtersApplicator, SorterInterface $sorter)
-    {
+    function let(
+        DataSourceProviderInterface $dataSourceProvider,
+        FiltersApplicatorInterface $filtersApplicator,
+        SorterInterface $sorter
+    ): void {
         $this->beConstructedWith($dataSourceProvider, $filtersApplicator, $sorter);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DataProvider::class);
-    }
-
-    function it_implements_grid_data_provider_interface()
+    function it_implements_grid_data_provider_interface(): void
     {
         $this->shouldImplement(DataProviderInterface::class);
     }
@@ -47,7 +43,7 @@ final class DataProviderSpec extends ObjectBehavior
         FiltersApplicatorInterface $filtersApplicator,
         SorterInterface $sorter,
         Grid $grid
-    ) {
+    ): void {
         $parameters = new Parameters();
 
         $dataSourceProvider->getDataSource($grid, $parameters)->willReturn($dataSource);

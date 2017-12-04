@@ -5,25 +5,25 @@ sylius:
     shipping_category:
         name:
             max_length: 'Il nome della categoria non deve essere più lungo di {{ limit }} caratteri.'
-            min_length: 'Il nome categoria deve essere lungo almeno {{ limit }} caratteri.'
-            not_blank: 'Inserisci il nome di categoria della spedizione.'
+            min_length: 'Il nome della categoria deve essere lungo almeno {{ limit }} caratteri.'
+            not_blank: 'Inserisci il nome della categoria dei costi di spedizione.'
         code:
-            not_blank: 'Inserisci il codice di categoria della spedizione.'
+            not_blank: 'Inserisci il codice della categoria di spedizione.'
             regex: 'Il codice della categoria di spedizione può contenere solo lettere, numeri, trattini e underscore.'
             unique: 'La categoria di spedizione con il codice dato esiste già.'
     shipping_method:
         calculator:
             max_length: La lunghezza del nome della calcolatrice può essere al massimo di {{limit}} caratteri
-            min_length: La lunghezza del nome della calcolatrice deve essere di almeno {{limit}} caratteri
-            not_blank: Per favore scegliere una calcolatrice
+            min_length: La lunghezza del nome del cacolatore deve essere di almeno {{limit}} caratteri
+            not_blank: Per favore scegliere un calcolatore
         name:
-            max_length: 'Il metodo di spedizione non deve essere più lungo di {{ limit }} caratteri.'
-            min_length: 'Il metodo di spedizione deve essere lungo almeno {{ limit }} caratteri.'
+            max_length: 'Il nome del metodo di spedizione non deve essere più lungo di {{ limit }} caratteri.'
+            min_length: 'Il nome del metodo di spedizione deve essere lungo almeno {{ limit }} caratteri.'
             not_blank: 'Inserisci il nome del metodo di spedizione.'
         code:
             not_blank: 'Inserisci il codice del metodo di spedizione.'
             regex: 'Il codice del metodo di spedizione può contenere solo lettere, numeri, trattini e underscore.'
-            unique: 'Il metodo di spedizione con il codice dato esiste già.'
+            unique: 'Il metodo di spedizione con il codice assegnato esiste già.'
         zone:
             not_blank: 'Seleziona la zona del metodo di spedizione.'
     shipment:

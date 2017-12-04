@@ -9,81 +9,79 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface ZoneInterface extends ResourceInterface, CodeAwareInterface
 {
-    const TYPE_COUNTRY = 'country';
-    const TYPE_PROVINCE = 'province';
-    const TYPE_ZONE = 'zone';
+    public const TYPE_COUNTRY = 'country';
+    public const TYPE_PROVINCE = 'province';
+    public const TYPE_ZONE = 'zone';
 
     /**
      * @return string[]
      */
-    public static function getTypes();
+    public static function getTypes(): array;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName($name);
+    public function setName(?string $name): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType();
+    public function getType(): ?string;
 
     /**
-     * @param string $type
+     * @param string|null $type
      */
-    public function setType($type);
+    public function setType(?string $type): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getScope();
+    public function getScope(): ?string;
 
     /**
-     * @param string $scope
+     * @param string|null $scope
      */
-    public function setScope($scope);
+    public function setScope(?string $scope): void;
 
     /**
      * @return Collection|ZoneMemberInterface[]
      */
-    public function getMembers();
+    public function getMembers(): Collection;
 
     /**
      * @return bool
      */
-    public function hasMembers();
+    public function hasMembers(): bool;
 
     /**
      * @param ZoneMemberInterface $member
      */
-    public function addMember(ZoneMemberInterface $member);
+    public function addMember(ZoneMemberInterface $member): void;
 
     /**
      * @param ZoneMemberInterface $member
      */
-    public function removeMember(ZoneMemberInterface $member);
+    public function removeMember(ZoneMemberInterface $member): void;
 
     /**
      * @param ZoneMemberInterface $member
      *
      * @return bool
      */
-    public function hasMember(ZoneMemberInterface $member);
+    public function hasMember(ZoneMemberInterface $member): bool;
 }

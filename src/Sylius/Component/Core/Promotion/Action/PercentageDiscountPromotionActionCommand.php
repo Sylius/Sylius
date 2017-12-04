@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
@@ -18,14 +20,9 @@ use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PercentageDiscountPromotionActionCommand extends DiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
-    const TYPE = 'order_percentage_discount';
+    public const TYPE = 'order_percentage_discount';
 
     /**
      * @var ProportionalIntegerDistributorInterface
@@ -52,7 +49,7 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
     /**
      * {@inheritdoc}
      */
-    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         /** @var OrderInterface $subject */
         if (!$this->isSubjectValid($subject)) {
@@ -84,7 +81,7 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
     /**
      * {@inheritdoc}
      */
-    protected function isConfigurationValid(array $configuration)
+    protected function isConfigurationValid(array $configuration): void
     {
         if (!isset($configuration['percentage']) || !is_float($configuration['percentage'])) {
             throw new \InvalidArgumentException('"percentage" must be set and must be a float.');
@@ -93,11 +90,11 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
 
     /**
      * @param int $promotionSubjectTotal
-     * @param int $percentage
+     * @param float $percentage
      *
      * @return int
      */
-    private function calculateAdjustmentAmount($promotionSubjectTotal, $percentage)
+    private function calculateAdjustmentAmount(int $promotionSubjectTotal, float $percentage): int
     {
         return -1 * (int) round($promotionSubjectTotal * $percentage);
     }

@@ -9,58 +9,57 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface ProductAssociationInterface extends TimestampableInterface, ResourceInterface
 {
     /**
-     * @return ProductAssociationType
+     * @return ProductAssociationTypeInterface|null
      */
-    public function getType();
+    public function getType(): ?ProductAssociationTypeInterface;
 
     /**
-     * @param ProductAssociationTypeInterface $type
+     * @param ProductAssociationTypeInterface|null $type
      */
-    public function setType(ProductAssociationTypeInterface $type);
+    public function setType(?ProductAssociationTypeInterface $type): void;
 
     /**
-     * @return ProductInterface
+     * @return ProductInterface|null
      */
-    public function getOwner();
+    public function getOwner(): ?ProductInterface;
 
     /**
      * @param ProductInterface|null $owner
      */
-    public function setOwner(ProductInterface $owner = null);
+    public function setOwner(?ProductInterface $owner): void;
 
     /**
      * @return Collection|ProductInterface[]
      */
-    public function getAssociatedProducts();
+    public function getAssociatedProducts(): Collection;
 
     /**
      * @param ProductInterface $product
      */
-    public function addAssociatedProduct(ProductInterface $product);
+    public function addAssociatedProduct(ProductInterface $product): void;
 
     /**
      * @param ProductInterface $product
      */
-    public function removeAssociatedProduct(ProductInterface $product);
+    public function removeAssociatedProduct(ProductInterface $product): void;
 
     /**
      * @param ProductInterface $product
      *
      * @return bool
      */
-    public function hasAssociatedProduct(ProductInterface $product);
+    public function hasAssociatedProduct(ProductInterface $product): bool;
 
-    public function clearAssociatedProducts();
+    public function clearAssociatedProducts(): void;
 }

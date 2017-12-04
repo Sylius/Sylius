@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        code:
+            not_blank: Angiv venligst kanalkode.
+            regex: Kanalkode kan må kun udgøre bogstaver, tal, bindestreger og understregninger.
+            unique: Kanalkode skal være entydig.
+        name:
+            not_blank: Angiv venligst kanalnavn.

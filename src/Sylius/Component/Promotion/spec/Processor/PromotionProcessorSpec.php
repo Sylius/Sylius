@@ -9,36 +9,30 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Promotion\Processor;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Promotion\Processor\PromotionProcessor;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class PromotionProcessorSpec extends ObjectBehavior
 {
     function let(
         PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider,
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
         PromotionApplicatorInterface $promotionApplicator
-    ) {
+    ): void {
         $this->beConstructedWith($preQualifiedPromotionsProvider, $promotionEligibilityChecker, $promotionApplicator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionProcessor::class);
-    }
-
-    function it_is_a_promotion_processor()
+    function it_is_a_promotion_processor(): void
     {
         $this->shouldImplement(PromotionProcessorInterface::class);
     }
@@ -49,10 +43,11 @@ final class PromotionProcessorSpec extends ObjectBehavior
         PromotionApplicatorInterface $promotionApplicator,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
-    ) {
-        $subject->getPromotions()->willReturn([]);
+    ): void {
+        $subject->getPromotions()->willReturn(new ArrayCollection([]));
         $preQualifiedPromotionsProvider->getPromotions($subject)->willReturn([$promotion]);
 
+        $promotion->isExclusive()->willReturn(false);
         $promotionEligibilityChecker->isEligible($subject, $promotion)->willReturn(false);
 
         $promotionApplicator->apply($subject, $promotion)->shouldNotBeCalled();
@@ -67,10 +62,11 @@ final class PromotionProcessorSpec extends ObjectBehavior
         PromotionApplicatorInterface $promotionApplicator,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
-    ) {
-        $subject->getPromotions()->willReturn([]);
+    ): void {
+        $subject->getPromotions()->willReturn(new ArrayCollection([]));
         $preQualifiedPromotionsProvider->getPromotions($subject)->willReturn([$promotion]);
 
+        $promotion->isExclusive()->willReturn(false);
         $promotionEligibilityChecker->isEligible($subject, $promotion)->willReturn(true);
 
         $promotionApplicator->apply($subject, $promotion)->shouldBeCalled();
@@ -86,11 +82,12 @@ final class PromotionProcessorSpec extends ObjectBehavior
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         PromotionInterface $exclusivePromotion
-    ) {
-        $subject->getPromotions()->willReturn([]);
+    ): void {
+        $subject->getPromotions()->willReturn(new ArrayCollection([]));
         $preQualifiedPromotionsProvider->getPromotions($subject)->willReturn([$promotion, $exclusivePromotion]);
 
         $exclusivePromotion->isExclusive()->willReturn(true);
+        $promotion->isExclusive()->willReturn(false);
         $promotionEligibilityChecker->isEligible($subject, $promotion)->willReturn(true);
         $promotionEligibilityChecker->isEligible($subject, $exclusivePromotion)->willReturn(true);
 
@@ -108,10 +105,11 @@ final class PromotionProcessorSpec extends ObjectBehavior
         PromotionApplicatorInterface $promotionApplicator,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
-    ) {
-        $subject->getPromotions()->willReturn([$promotion]);
+    ): void {
+        $subject->getPromotions()->willReturn(new ArrayCollection([$promotion->getWrappedObject()]));
         $preQualifiedPromotionsProvider->getPromotions($subject)->willReturn([$promotion]);
 
+        $promotion->isExclusive()->willReturn(false);
         $promotionEligibilityChecker->isEligible($subject, $promotion)->willReturn(false);
 
         $promotionApplicator->apply($subject, $promotion)->shouldNotBeCalled();

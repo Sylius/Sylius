@@ -9,43 +9,36 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Model\Scope;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Core\OrderProcessing\OrderTaxesProcessor;
+use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class OrderTaxesProcessorSpec extends ObjectBehavior
 {
     function let(
         ZoneProviderInterface $defaultTaxZoneProvider,
         ZoneMatcherInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry
-    ) {
+    ): void {
         $this->beConstructedWith($defaultTaxZoneProvider, $zoneMatcher, $strategyRegistry);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderTaxesProcessor::class);
-    }
-
-    function it_is_an_order_processor()
+    function it_is_an_order_processor(): void
     {
         $this->shouldImplement(OrderProcessorInterface::class);
     }
@@ -59,8 +52,8 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         ZoneInterface $zone,
         TaxCalculationStrategyInterface $strategyOne,
         TaxCalculationStrategyInterface $strategyTwo
-    ) {
-        $order->getItems()->willReturn([$orderItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
         $order->getShippingAddress()->willReturn($address);
 
@@ -87,8 +80,8 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         AddressInterface $address,
         ZoneInterface $zone,
         TaxCalculationStrategyInterface $strategy
-    ) {
-        $order->getItems()->willReturn([$orderItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
         $order->getShippingAddress()->willReturn($address);
 
@@ -105,10 +98,10 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $this->shouldThrow(UnsupportedTaxCalculationStrategyException::class)->during('process', [$order]);
     }
 
-    function it_does_not_process_taxes_if_there_is_no_order_item(OrderInterface $order)
+    function it_does_not_process_taxes_if_there_is_no_order_item(OrderInterface $order): void
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-        $order->getItems()->willReturn([]);
+        $order->getItems()->willReturn(new ArrayCollection([]));
         $order->isEmpty()->willReturn(true);
 
         $order->getShippingAddress()->shouldNotBeCalled();
@@ -123,8 +116,8 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         AddressInterface $address
-    ) {
-        $order->getItems()->willReturn([$orderItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
 
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();

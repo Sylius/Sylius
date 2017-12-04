@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Event;
 
 use Sylius\Component\Grid\Definition\Grid;
 use Symfony\Component\EventDispatcher\Event;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class GridDefinitionConverterEvent extends Event
 {
     /**
@@ -35,7 +34,7 @@ final class GridDefinitionConverterEvent extends Event
     /**
      * @return Grid
      */
-    public function getGrid()
+    public function getGrid(): Grid
     {
         return $this->grid;
     }

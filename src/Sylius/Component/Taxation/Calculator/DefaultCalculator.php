@@ -9,25 +9,23 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Taxation\Calculator;
 
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class DefaultCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function calculate($base, TaxRateInterface $rate)
+    public function calculate(float $base, TaxRateInterface $rate): float
     {
         if ($rate->isIncludedInPrice()) {
-            return (int) round($base - ($base / (1 + $rate->getAmount())));
+            return round($base - ($base / (1 + $rate->getAmount())));
         }
 
-        return (int) round($base * $rate->getAmount());
+        return round($base * $rate->getAmount());
     }
 }

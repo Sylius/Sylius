@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Updater;
 
 use PhpSpec\ObjectBehavior;
@@ -16,27 +18,18 @@ use Prophecy\Argument;
 use SM\Factory\Factory;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater;
 use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, Factory $stateMachineFactory)
+    function let(OrderRepositoryInterface $orderRepository, Factory $stateMachineFactory): void
     {
         $this->beConstructedWith($orderRepository, $stateMachineFactory, '10 months');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UnpaidOrdersStateUpdater::class);
-    }
-
-    function it_implements_an_expired_orders_state_updater_interface()
+    function it_implements_an_expired_orders_state_updater_interface(): void
     {
         $this->shouldImplement(UnpaidOrdersStateUpdaterInterface::class);
     }
@@ -48,10 +41,10 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         StateMachineInterface $firstOrderStateMachine,
         StateMachineInterface $secondOrderStateMachine
-    ) {
-        $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTime::class))->willReturn([
+    ): void {
+        $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class))->willReturn([
            $firstOrder,
-           $secondOrder
+           $secondOrder,
         ]);
 
         $stateMachineFactory->get($firstOrder, 'sylius_order')->willReturn($firstOrderStateMachine);

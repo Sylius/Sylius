@@ -9,16 +9,23 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
- */
 class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
 {
     /**
@@ -31,7 +38,10 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
      */
     protected $promotions;
 
-    public function getId()
+    /**
+     * {@inheritdoc}
+     */
+    public function getId(): int
     {
         return $this->id;
     }
@@ -39,7 +49,7 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPromotion(PromotionInterface $promotion)
+    public function hasPromotion(PromotionInterface $promotion): bool
     {
         return $this->promotions->contains($promotion);
     }
@@ -47,7 +57,7 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
     /**
      * {@inheritdoc}
      */
-    public function addPromotion(PromotionInterface $promotion)
+    public function addPromotion(PromotionInterface $promotion): void
     {
         if (!$this->hasPromotion($promotion)) {
             $this->promotions->add($promotion);
@@ -57,7 +67,7 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
     /**
      * {@inheritdoc}
      */
-    public function removePromotion(PromotionInterface $promotion)
+    public function removePromotion(PromotionInterface $promotion): void
     {
         if ($this->hasPromotion($promotion)) {
             $this->promotions->removeElement($promotion);
@@ -67,7 +77,7 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotions()
+    public function getPromotions(): Collection
     {
         return $this->promotions;
     }
@@ -75,7 +85,8 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionSubjectTotal()
+    public function getPromotionSubjectTotal(): int
     {
+        return 0;
     }
 }

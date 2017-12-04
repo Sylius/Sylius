@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Driver\Selenium2Driver;
@@ -21,13 +23,10 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class AddressPage extends SymfonyPage implements AddressPageInterface
 {
-    const TYPE_BILLING = 'billing';
-    const TYPE_SHIPPING = 'shipping';
+    public const TYPE_BILLING = 'billing';
+    public const TYPE_SHIPPING = 'shipping';
 
     /**
      * @var AddressFactoryInterface
@@ -162,6 +161,17 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
+    public function specifyShippingAddressFullName(string $fullName)
+    {
+        $names = explode(' ', $fullName);
+
+        $this->getElement('shipping_first_name')->setValue($names[0]);
+        $this->getElement('shipping_last_name')->setValue($names[1]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function canSignIn()
     {
         return $this->waitForElement(5, 'login_button');
@@ -173,6 +183,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     public function signIn()
     {
         $this->waitForElement(5, 'login_button');
+
         try {
             $this->getElement('login_button')->press();
         } catch (ElementNotFoundException $elementNotFoundException) {
@@ -367,6 +378,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $address->setCity($this->getElement(sprintf('%s_city', $type))->getValue());
         $address->setPostcode($this->getElement(sprintf('%s_postcode', $type))->getValue());
         $this->waitForElement(5, sprintf('%s_province', $type));
+
         try {
             $address->setProvinceName($this->getElement(sprintf('%s_province', $type))->getValue());
         } catch (ElementNotFoundException $exception) {

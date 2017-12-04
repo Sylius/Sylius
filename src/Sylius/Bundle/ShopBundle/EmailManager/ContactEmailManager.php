@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\EmailManager;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ContactEmailManager implements ContactEmailManagerInterface
 {
     /**
@@ -35,8 +34,8 @@ final class ContactEmailManager implements ContactEmailManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function sendContactRequest(array $data, array $recipients)
+    public function sendContactRequest(array $data, array $recipients): void
     {
-        $this->emailSender->send(Emails::CONTACT_REQUEST, $recipients, ['data' => $data]);
+        $this->emailSender->send(Emails::CONTACT_REQUEST, $recipients, ['data' => $data], [], [$data['email']]);
     }
 }

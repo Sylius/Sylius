@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ResourceLocator implements ResourceLocatorInterface
 {
     /**
@@ -43,7 +42,7 @@ final class ResourceLocator implements ResourceLocatorInterface
     /**
      * {@inheritdoc}
      */
-    public function locateResource($resourcePath, ThemeInterface $theme)
+    public function locateResource(string $resourcePath, ThemeInterface $theme): string
     {
         if (0 === strpos($resourcePath, '@')) {
             return $this->bundleResourceLocator->locateResource($resourcePath, $theme);

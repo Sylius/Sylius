@@ -9,34 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Arnaud Langade <arn0d.dev@gmail.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class RequestConfigurationFactorySpec extends ObjectBehavior
 {
-    function let(ParametersParserInterface $parametersParser)
+    function let(ParametersParserInterface $parametersParser): void
     {
         $this->beConstructedWith($parametersParser, RequestConfiguration::class);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(RequestConfigurationFactory::class);
-    }
-
-    function it_implements_request_configuration_factory_interface()
+    function it_implements_request_configuration_factory_interface(): void
     {
         $this->shouldImplement(RequestConfigurationFactoryInterface::class);
     }
@@ -47,11 +39,11 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         Request $request,
         ParameterBag $headersBag,
         ParameterBag $attributesBag
-    ) {
+    ): void {
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
 
-        $headersBag->get('Accept')->willReturn(null);
+        $headersBag->get('Accept', null, false)->willReturn([]);
 
         $attributesBag->get('_sylius', [])->willReturn(['template' => ':Product:show.html.twig']);
         $parametersParser
@@ -68,13 +60,101 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         Request $request,
         ParameterBag $headersBag,
         ParameterBag $attributesBag
-    ) {
+    ): void {
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
+
+        $headersBag->get('Accept', null, false)->willReturn([]);
 
         $attributesBag->get('_sylius', [])->willReturn(['template' => ':Product:list.html.twig']);
         $parametersParser
             ->parseRequestValues(['template' => ':Product:list.html.twig'], $request)
+            ->willReturn(['template' => ':Product:list.html.twig'])
+        ;
+
+        $this->create($metadata, $request)->isSortable()->shouldReturn(false);
+    }
+
+    function it_creates_configuration_for_serialization_group_from_single_header(
+        ParametersParserInterface $parametersParser,
+        MetadataInterface $metadata,
+        Request $request,
+        ParameterBag $headersBag,
+        ParameterBag $attributesBag
+    ): void {
+        $request->headers = $headersBag;
+        $request->attributes = $attributesBag;
+
+        $headersBag->get('Accept', null, false)->willReturn(['groups=Default,Detailed']);
+
+        $attributesBag->get('_sylius', [])->willReturn([]);
+        $parametersParser
+            ->parseRequestValues(['serialization_groups' => ['Default', 'Detailed']], $request)
+            ->willReturn(['template' => ':Product:list.html.twig'])
+        ;
+
+        $this->create($metadata, $request)->isSortable()->shouldReturn(false);
+    }
+
+    function it_creates_configuration_for_serialization_group_from_multiple_headers(
+        ParametersParserInterface $parametersParser,
+        MetadataInterface $metadata,
+        Request $request,
+        ParameterBag $headersBag,
+        ParameterBag $attributesBag
+    ): void {
+        $request->headers = $headersBag;
+        $request->attributes = $attributesBag;
+
+        $headersBag->get('Accept', null, false)->willReturn(['application/json', 'groups=Default,Detailed']);
+
+        $attributesBag->get('_sylius', [])->willReturn([]);
+        $parametersParser
+            ->parseRequestValues(['serialization_groups' => ['Default', 'Detailed']], $request)
+            ->willReturn(['template' => ':Product:list.html.twig'])
+        ;
+
+        $this->create($metadata, $request)->isSortable()->shouldReturn(false);
+    }
+
+    function it_creates_configuration_for_serialization_version_from_single_header(
+        ParametersParserInterface $parametersParser,
+        MetadataInterface $metadata,
+        Request $request,
+        ParameterBag $headersBag,
+        ParameterBag $attributesBag
+    ): void {
+        $request->headers = $headersBag;
+        $request->attributes = $attributesBag;
+
+        $headersBag->get('Accept', null, false)->willReturn(['version=1.0.0']);
+
+        $attributesBag->get('_sylius', [])->willReturn([]);
+
+        $parametersParser
+            ->parseRequestValues(['serialization_version' => '1.0.0'], $request)
+            ->willReturn(['template' => ':Product:list.html.twig'])
+        ;
+
+        $this->create($metadata, $request)->isSortable()->shouldReturn(false);
+    }
+
+    function it_creates_configuration_for_serialization_version_from_multiple_headers(
+        ParametersParserInterface $parametersParser,
+        MetadataInterface $metadata,
+        Request $request,
+        ParameterBag $headersBag,
+        ParameterBag $attributesBag
+    ): void {
+        $request->headers = $headersBag;
+        $request->attributes = $attributesBag;
+
+        $headersBag->get('Accept', null, false)->willReturn(['application/xml', 'version=1.0.0']);
+
+        $attributesBag->get('_sylius', [])->willReturn([]);
+
+        $parametersParser
+            ->parseRequestValues(['serialization_version' => '1.0.0'], $request)
             ->willReturn(['template' => ':Product:list.html.twig'])
         ;
 
@@ -87,11 +167,13 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         Request $request,
         ParameterBag $headersBag,
         ParameterBag $attributesBag
-    ) {
+    ): void {
         $this->beConstructedWith($parametersParser, RequestConfiguration::class, ['sortable' => true]);
 
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
+
+        $headersBag->get('Accept', null, false)->willReturn([]);
 
         $attributesBag->get('_sylius', [])->willReturn(['template' => ':Product:list.html.twig']);
 

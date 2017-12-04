@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\TaxRate;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**
@@ -47,6 +46,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $name
      */
     public function chooseCalculator($name);
-    
+
     public function chooseIncludedInPrice();
 }

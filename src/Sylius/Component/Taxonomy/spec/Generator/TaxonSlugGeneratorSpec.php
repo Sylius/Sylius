@@ -9,57 +9,92 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Taxonomy\Generator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TaxonSlugGeneratorSpec extends ObjectBehavior
 {
-    function let(TaxonRepositoryInterface $taxonRepository)
-    {
-        $this->beConstructedWith($taxonRepository);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TaxonSlugGenerator::class);
-    }
-
-    function it_implements_taxon_slug_generator_interface()
+    function it_implements_taxon_slug_generator_interface(): void
     {
         $this->shouldImplement(TaxonSlugGeneratorInterface::class);
     }
 
-    function it_generates_slug_based_on_new_taxon_name_and_parent_taxon_slug(
-        TaxonInterface $parent,
-        TaxonRepositoryInterface $taxonRepository
-    ) {
-        $taxonRepository->find(1)->willReturn($parent);
-        $parent->getSlug()->willReturn('board-games');
+    function it_generates_slug_for_root_taxon(
+        TaxonInterface $taxon,
+        TaxonTranslationInterface $taxonTranslation
+    ): void {
+        $taxon->getTranslation('pl_PL')->willReturn($taxonTranslation);
+        $taxonTranslation->getName()->willReturn('Board games');
 
-        $this->generate('Battle games', 1)->shouldReturn('board-games/battle-games');;
+        $taxon->getParent()->willReturn(null);
+
+        $this->generate($taxon, 'pl_PL')->shouldReturn('board-games');
     }
 
-    function it_generates_slug_based_on_new_taxon_name_if_this_taxon_has_no_parent()
-    {
-        $this->generate('Board games')->shouldReturn('board-games');;
+    function it_generates_slug_for_root_taxon_replacing_apostrophes_with_hyphens(
+        TaxonInterface $taxon,
+        TaxonTranslationInterface $taxonTranslation
+    ): void {
+        $taxon->getTranslation('pl_PL')->willReturn($taxonTranslation);
+        $taxonTranslation->getName()->willReturn('Rock\'n\'roll');
+
+        $taxon->getParent()->willReturn(null);
+
+        $this->generate($taxon, 'pl_PL')->shouldReturn('rock-n-roll');
     }
 
-    function it_throws_exception_if_parent_taxon_with_given_id_does_not_exist(
-        TaxonRepositoryInterface $taxonRepository
-    ) {
-        $taxonRepository->find(1)->willReturn(null);
+    function it_generates_slug_for_child_taxon_when_parent_taxon_already_has_slug(
+        TaxonInterface $taxon,
+        TaxonTranslationInterface $taxonTranslation,
+        TaxonInterface $parentTaxon,
+        TaxonTranslationInterface $parentTaxonTranslation
+    ): void {
+        $taxon->getTranslation('pl_PL')->willReturn($taxonTranslation);
+        $taxonTranslation->getName()->willReturn('Battle games');
 
-        $this
-            ->shouldThrow(new \InvalidArgumentException('There is no parent taxon with id 1.'))
-            ->during('generate', ['Battle games', 1])
-        ;
+        $taxon->getParent()->willReturn($parentTaxon);
+
+        $parentTaxon->getTranslation('pl_PL')->willReturn($parentTaxonTranslation);
+        $parentTaxonTranslation->getSlug()->willReturn('board-games');
+
+        $this->generate($taxon, 'pl_PL')->shouldReturn('board-games/battle-games');
+    }
+
+    function it_generates_slug_for_child_taxon_even_when_parent_taxon_does_not_have_slug(
+        TaxonInterface $taxon,
+        TaxonTranslationInterface $taxonTranslation,
+        TaxonInterface $parentTaxon,
+        TaxonTranslationInterface $parentTaxonTranslation
+    ): void {
+        $taxon->getTranslation('pl_PL')->willReturn($taxonTranslation);
+        $taxonTranslation->getName()->willReturn('Battle games');
+
+        $taxon->getParent()->willReturn($parentTaxon);
+
+        $parentTaxon->getTranslation('pl_PL')->willReturn($parentTaxonTranslation);
+        $parentTaxonTranslation->getSlug()->willReturn(null);
+        $parentTaxonTranslation->getName()->willReturn('Board games');
+
+        $parentTaxon->getParent()->willReturn(null);
+
+        $this->generate($taxon, 'pl_PL')->shouldReturn('board-games/battle-games');
+    }
+
+    function it_throws_an_exception_if_passed_taxon_has_no_name(
+        TaxonInterface $taxon,
+        TaxonTranslationInterface $taxonTranslation
+    ): void {
+        $taxon->getTranslation('pl_PL')->willReturn($taxonTranslation);
+        $taxonTranslation->getName()->willReturn('');
+
+        $taxon->getParent()->willReturn(null);
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', [$taxon, 'pl_PL']);
     }
 }

@@ -9,22 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz CHruściel <lukasz.chrusciel@lakion.com>
- */
-class UserReloaderListener
+final class UserReloaderListener
 {
     /**
      * @var UserReloaderInterface
      */
-    protected $userReloader;
+    private $userReloader;
 
     /**
      * @param UserReloaderInterface $userReloader
@@ -37,16 +36,11 @@ class UserReloaderListener
     /**
      * @param GenericEvent $event
      */
-    public function reloadUser(GenericEvent $event)
+    public function reloadUser(GenericEvent $event): void
     {
         $user = $event->getSubject();
 
-        if (!$user instanceof UserInterface) {
-            throw new UnexpectedTypeException(
-                $user,
-                UserInterface::class
-            );
-        }
+        Assert::isInstanceOf($user, UserInterface::class);
 
         $this->userReloader->reloadUser($user);
     }

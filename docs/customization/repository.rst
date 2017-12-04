@@ -46,7 +46,7 @@ As a result you will get the ``Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepo
          *
          * @return array
          */
-        public function findByOnHand($limit = 8)
+        public function findByOnHand(int $limit = 8): array
         {
             return $this->createQueryBuilder('o')
                 ->addSelect('variant')
@@ -97,5 +97,7 @@ What happens while overriding Repositories?
 * The parameter ``sylius.repository.product.class`` contains ``AppBundle\Repository\ProductRepository``.
 * The repository service ``sylius.repository.product`` is using your new class.
 * Under the ``sylius.repository.product`` service you have got all methods from the base repository available plus the one you have added.
+
+.. include:: /customization/plugins.rst.inc
 
 .. _`Query Builder`: http://doctrine-orm.readthedocs.io/projects/doctrine-orm/en/latest/reference/query-builder.html

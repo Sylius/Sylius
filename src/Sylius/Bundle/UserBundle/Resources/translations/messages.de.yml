@@ -9,7 +9,7 @@ sylius:
             password:
                 label: Passwort
                 confirmation: Bestätigung
-            remember_me: Eingeloggt bleiben
+            remember_me: Angemeldet bleiben
             shipping_address: Lieferadresse
             username: Benutzername
         user_filter:

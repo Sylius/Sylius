@@ -24,7 +24,7 @@
 
         <field name="number" column="number" type="string" unique="true" nullable="true" />
 
-        <field name="notes" column="notes" type="string" nullable="true" length="1000" />
+        <field name="notes" column="notes" type="text" nullable="true" />
 
         <field name="state" column="state" type="string" />
         <field name="checkoutCompletedAt" column="checkout_completed_at" type="datetime" nullable="true" />

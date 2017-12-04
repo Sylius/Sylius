@@ -9,15 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Payment\Model;
 
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Payment implements PaymentInterface
 {
     use TimestampableTrait;
@@ -68,7 +66,7 @@ class Payment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function getMethod()
+    public function getMethod(): ?PaymentMethodInterface
     {
         return $this->method;
     }
@@ -76,7 +74,7 @@ class Payment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function setMethod(PaymentMethodInterface $method = null)
+    public function setMethod(?PaymentMethodInterface $method): void
     {
         $this->method = $method;
     }
@@ -84,7 +82,7 @@ class Payment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrencyCode()
+    public function getCurrencyCode(): ?string
     {
         return $this->currencyCode;
     }
@@ -92,7 +90,7 @@ class Payment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrencyCode($currencyCode)
+    public function setCurrencyCode(string $currencyCode): void
     {
         Assert::string($currencyCode);
 
@@ -102,29 +100,23 @@ class Payment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function getAmount()
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \InvalidArgumentException
      */
-    public function setAmount($amount)
+    public function setAmount(int $amount): void
     {
-        if (!is_int($amount)) {
-            throw new \InvalidArgumentException('Amount must be an integer.');
-        }
-
         $this->amount = $amount;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getState()
+    public function getState(): ?string
     {
         return $this->state;
     }
@@ -132,7 +124,7 @@ class Payment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function setState($state)
+    public function setState(string $state): void
     {
         $this->state = $state;
     }
@@ -140,26 +132,16 @@ class Payment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function getDetails()
+    public function getDetails(): array
     {
         return $this->details;
     }
 
     /**
      * {@inheritdoc}
-     *
-     * @throws UnexpectedTypeException
      */
-    public function setDetails($details)
+    public function setDetails(array $details): void
     {
-        if ($details instanceof \Traversable) {
-            $details = iterator_to_array($details);
-        }
-
-        if (!is_array($details)) {
-            throw new UnexpectedTypeException($details, 'array');
-        }
-
         $this->details = $details;
     }
 }

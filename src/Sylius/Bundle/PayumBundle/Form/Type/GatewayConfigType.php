@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Form\Type;
 
 use Payum\Core\Model\GatewayConfigInterface;
@@ -18,11 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class GatewayConfigType extends AbstractResourceType
 {
     /**
@@ -36,7 +34,7 @@ final class GatewayConfigType extends AbstractResourceType
      * @param FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
      */
     public function __construct(
-        $dataClass,
+        string $dataClass,
         array $validationGroups = [],
         FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
     ) {
@@ -48,7 +46,7 @@ final class GatewayConfigType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $factoryName = $options['data']->getFactoryName();
 
@@ -81,7 +79,7 @@ final class GatewayConfigType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_payum_gateway_config';
     }

@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Renderer;
 
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TableRenderer
 {
     /**
@@ -56,7 +55,7 @@ final class TableRenderer
     /**
      * @param array $headers
      */
-    public function setHeaders(array $headers)
+    public function setHeaders(array $headers): void
     {
         $this->headers = $headers;
     }
@@ -64,20 +63,20 @@ final class TableRenderer
     /**
      * @param array $row
      */
-    public function addRow(array $row)
+    public function addRow(array $row): void
     {
         $this->rows[] = $row;
     }
 
     /**
-     * @param $label
+     * @param string $label
      */
-    public function setLabel($label)
+    public function setLabel(string $label): void
     {
         $this->label = $label;
     }
 
-    public function render()
+    public function render(): void
     {
         if (null !== $this->label) {
             $this->output->writeln(sprintf('<comment>%s</comment>', $this->label));
@@ -93,7 +92,7 @@ final class TableRenderer
     /**
      * @return bool
      */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return empty($this->rows);
     }

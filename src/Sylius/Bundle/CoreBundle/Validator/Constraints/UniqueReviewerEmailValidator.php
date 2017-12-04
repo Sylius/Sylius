@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
@@ -21,10 +23,6 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class UniqueReviewerEmailValidator extends ConstraintValidator
 {
     /**
@@ -60,14 +58,18 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($review, Constraint $constraint)
+    public function validate($review, Constraint $constraint): void
     {
-        /* @var $customer ReviewerInterface */
+        /** @var ReviewerInterface|null $customer */
         $customer = $review->getAuthor();
 
         $token = $this->tokenStorage->getToken();
-        if ($this->checkIfUserIsAuthenticated($token)) {
-            if (null !== $customer && $token->getUser()->getCustomer()->getEmail() === $customer->getEmail()) {
+        if (null !== $customer) {
+            if (null === $customer->getEmail()) {
+                return;
+            }
+
+            if ($customer->getEmail() === $this->getAuthenticatedUserEmail($token)) {
                 return;
             }
         }
@@ -80,14 +82,23 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
     /**
      * @param TokenInterface $token
      *
-     * @return bool
+     * @return string|null
      */
-    private function checkIfUserIsAuthenticated(TokenInterface $token)
+    private function getAuthenticatedUserEmail(TokenInterface $token): ?string
     {
-        return
-            null !== $token &&
-            $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') &&
-            $token->getUser() instanceof UserInterface
-            ;
+        if (null === $token) {
+            return null;
+        }
+
+        if (!$this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return null;
+        }
+
+        $user = $token->getUser();
+        if (!$user instanceof UserInterface) {
+            return null;
+        }
+
+        return $user->getEmail();
     }
 }

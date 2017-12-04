@@ -9,15 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Joeri Timmermans <joeri.timmermans@intracto.com>
- * @group joeri
- */
 final class LocaleApiTest extends JsonApiTestCase
 {
     /**
@@ -71,7 +69,7 @@ final class LocaleApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $locales = $this->loadFixturesFromFile('resources/locales.yml');
 
-        $this->client->request('GET', '/api/v1/locales/'.$locales['locale_en_US']->getCode(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/locales/' . $locales['locale_en_US']->getCode(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'locale/show_response', Response::HTTP_OK);
@@ -156,12 +154,12 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $locales = $this->loadFixturesFromFile('resources/locales.yml');
 
-        $this->client->request('DELETE', '/api/v1/locales/'.$locales['locale_en_US']->getCode(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', '/api/v1/locales/' . $locales['locale_en_US']->getCode(), [], [], static::$authorizedHeaderWithContentType, []);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/v1/locales/'.$locales['locale_en_US']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/v1/locales/' . $locales['locale_en_US']->getId(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);

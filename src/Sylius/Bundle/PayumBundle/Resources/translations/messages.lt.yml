@@ -8,4 +8,16 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Slaptažodis
+                signature: Parašas
                 username: Vartotojo vardas
+                sandbox: Sandbox
+            stripe:
+                publishable_key: Viešas raktas
+                secret_key: Slaptas raktas
+    payum_gateway_factory:
+        offline: Neprisijungęs
+        paypal_express_checkout: PayPal greitas atsiskaitymas
+        stripe_checkout: Stripe atsiskaitymas
+    payum_action:
+        payment:
+            description: Apmokėjime yra %items% prekė iš %total% | Apmokėjime yra %items% prekių iš %total%

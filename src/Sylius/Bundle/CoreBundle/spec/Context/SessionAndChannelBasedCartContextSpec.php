@@ -9,88 +9,70 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Sylius\Component\Order\Model\OrderInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session, OrderRepositoryInterface $orderRepository, ChannelContextInterface $channelContext)
+    function let(CartStorageInterface $cartStorage, ChannelContextInterface $channelContext): void
     {
-        $this->beConstructedWith($session, 'session_key_name', $channelContext, $orderRepository);
+        $this->beConstructedWith($cartStorage, $channelContext);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SessionAndChannelBasedCartContext::class);
-    }
-
-    function it_implements_cart_context_interface()
+    function it_implements_cart_context_interface(): void
     {
         $this->shouldImplement(CartContextInterface::class);
     }
 
     function it_returns_cart_based_on_id_stored_in_session_and_current_channel(
-        SessionInterface $session,
-        OrderRepositoryInterface $orderRepository,
+        CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
         OrderInterface $cart
-    ) {
-
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
-        $channel->getCode()->willReturn('Poland');
-        $session->has('session_key_name.Poland')->willReturn(true);
-        $session->get('session_key_name.Poland')->willReturn(12345);
-
-        $orderRepository->findCartByChannel(12345, $channel)->willReturn($cart);
+        $cartStorage->hasForChannel($channel)->willReturn(true);
+        $cartStorage->getForChannel($channel)->willReturn($cart);
 
         $this->getCart()->shouldReturn($cart);
     }
 
     function it_throws_cart_not_found_exception_if_session_key_does_not_exist(
-        SessionInterface $session,
+        CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
-        $channel->getCode()->willReturn('Poland');
-        $session->has('session_key_name.Poland')->willReturn(false);
+        $cartStorage->hasForChannel($channel)->willReturn(false);
 
         $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }
 
     function it_throws_cart_not_found_exception_and_removes_id_from_session_when_cart_was_not_found(
-        SessionInterface $session,
-        OrderRepositoryInterface $orderRepository,
+        CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
-    ) {
+    ): void {
         $channelContext->getChannel()->willReturn($channel);
-        $channel->getCode()->willReturn('Poland');
-        $session->has('session_key_name.Poland')->willReturn(true);
-        $session->get('session_key_name.Poland')->willReturn(12345);
+        $cartStorage->hasForChannel($channel)->willReturn(true);
+        $cartStorage->getForChannel($channel)->willReturn(null);
 
-        $orderRepository->findCartByChannel(12345, $channel)->willReturn(null);
-
-        $session->remove('session_key_name.Poland')->shouldBeCalled();
+        $cartStorage->removeForChannel($channel)->shouldBeCalled();
 
         $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }
 
-    function it_throws_cart_not_found_exception_if_channel_was_not_found(ChannelContextInterface $channelContext)
+    function it_throws_cart_not_found_exception_if_channel_was_not_found(ChannelContextInterface $channelContext): void
     {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 

@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Metadata;
 
 use Doctrine\Common\Inflector\Inflector;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class Metadata implements MetadataInterface
 {
     /**
@@ -48,7 +47,7 @@ final class Metadata implements MetadataInterface
      * @param string $applicationName
      * @param array $parameters
      */
-    private function __construct($name, $applicationName, array $parameters)
+    private function __construct(string $name, string $applicationName, array $parameters)
     {
         $this->name = $name;
         $this->applicationName = $applicationName;
@@ -65,9 +64,9 @@ final class Metadata implements MetadataInterface
      *
      * @return self
      */
-    public static function fromAliasAndConfiguration($alias, array $parameters)
+    public static function fromAliasAndConfiguration(string $alias, array $parameters): self
     {
-        list($applicationName, $name) = self::parseAlias($alias);
+        [$applicationName, $name] = self::parseAlias($alias);
 
         return new self($name, $applicationName, $parameters);
     }
@@ -75,15 +74,15 @@ final class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getAlias()
+    public function getAlias(): string
     {
-        return $this->applicationName.'.'.$this->name;
+        return $this->applicationName . '.' . $this->name;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getApplicationName()
+    public function getApplicationName(): string
     {
         return $this->applicationName;
     }
@@ -91,7 +90,7 @@ final class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -99,15 +98,15 @@ final class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getHumanizedName()
+    public function getHumanizedName(): string
     {
-        return trim(strtolower(preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $this->name)));
+        return strtolower(trim(preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $this->name)));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPluralName()
+    public function getPluralName(): string
     {
         return Inflector::pluralize($this->name);
     }
@@ -115,7 +114,7 @@ final class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getDriver()
+    public function getDriver(): string
     {
         return $this->driver;
     }
@@ -123,7 +122,7 @@ final class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getTemplatesNamespace()
+    public function getTemplatesNamespace(): ?string
     {
         return $this->templatesNamespace;
     }
@@ -131,7 +130,7 @@ final class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getParameter($name)
+    public function getParameter(string $name)
     {
         if (!$this->hasParameter($name)) {
             throw new \InvalidArgumentException(sprintf('Parameter "%s" is not configured for resource "%s".', $name, $this->getAlias()));
@@ -143,7 +142,7 @@ final class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function hasParameter($name)
+    public function hasParameter(string $name): bool
     {
         return array_key_exists($name, $this->parameters);
     }
@@ -151,7 +150,7 @@ final class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         return $this->parameters;
     }
@@ -159,7 +158,7 @@ final class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getClass($name)
+    public function getClass(string $name): string
     {
         if (!$this->hasClass($name)) {
             throw new \InvalidArgumentException(sprintf('Class "%s" is not configured for resource "%s".', $name, $this->getAlias()));
@@ -171,7 +170,7 @@ final class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function hasClass($name)
+    public function hasClass(string $name): bool
     {
         return isset($this->parameters['classes'][$name]);
     }
@@ -179,7 +178,7 @@ final class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getServiceId($serviceName)
+    public function getServiceId(string $serviceName): string
     {
         return sprintf('%s.%s.%s', $this->applicationName, $serviceName, $this->name);
     }
@@ -187,7 +186,7 @@ final class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getPermissionCode($permissionName)
+    public function getPermissionCode(string $permissionName): string
     {
         return sprintf('%s.%s.%s', $this->applicationName, $this->name, $permissionName);
     }
@@ -197,10 +196,10 @@ final class Metadata implements MetadataInterface
      *
      * @return array
      */
-    private static function parseAlias($alias)
+    private static function parseAlias(string $alias): array
     {
         if (false === strpos($alias, '.')) {
-            throw new \InvalidArgumentException('Invalid alias supplied, it should conform to the following format "<applicationName>.<name>".');
+            throw new \InvalidArgumentException(sprintf('Invalid alias "%s" supplied, it should conform to the following format "<applicationName>.<name>".', $alias));
         }
 
         return explode('.', $alias);

@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: Vennligst oppgi ditt paypal passord.
+            signature:
+                not_blank: Vennligst oppgi din paypal signatur.
+            username:
+                not_blank: Vennligst oppgi ditt paypal brukernavn.
+        stripe:
+            secret_key:
+                not_blank: Vennsligst oppgi stripe hemmelig nøkkel.
+            publishable_key:
+                not_blank: Vennligst oppgi stripe offentlig nøkkel.

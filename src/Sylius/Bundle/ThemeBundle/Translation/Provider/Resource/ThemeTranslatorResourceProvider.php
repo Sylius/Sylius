@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Resource;
 
 use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
@@ -18,9 +20,6 @@ use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface
 use Sylius\Bundle\ThemeBundle\Translation\Resource\ThemeTranslationResource;
 use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ThemeTranslatorResourceProvider implements TranslatorResourceProviderInterface
 {
     /**
@@ -56,7 +55,7 @@ final class ThemeTranslatorResourceProvider implements TranslatorResourceProvide
     /**
      * {@inheritdoc}
      */
-    public function getResources()
+    public function getResources(): array
     {
         /** @var ThemeInterface[] $themes */
         $themes = $this->themeRepository->findAll();
@@ -72,9 +71,9 @@ final class ThemeTranslatorResourceProvider implements TranslatorResourceProvide
     /**
      * {@inheritdoc}
      */
-    public function getResourcesLocales()
+    public function getResourcesLocales(): array
     {
-        return array_values(array_unique(array_map(function (TranslationResourceInterface $translationResource) {
+        return array_values(array_unique(array_map(function (TranslationResourceInterface $translationResource): string {
             return $translationResource->getLocale();
         }, $this->getResources())));
     }
@@ -84,7 +83,7 @@ final class ThemeTranslatorResourceProvider implements TranslatorResourceProvide
      *
      * @return array
      */
-    private function extractResourcesFromTheme(ThemeInterface $mainTheme)
+    private function extractResourcesFromTheme(ThemeInterface $mainTheme): array
     {
         /** @var ThemeInterface[] $themes */
         $themes = array_reverse($this->themeHierarchyProvider->getThemeHierarchy($mainTheme));

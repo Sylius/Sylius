@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Currency\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
-use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class ExchangeRate implements ExchangeRateInterface
 {
     use TimestampableTrait;
@@ -27,17 +25,17 @@ class ExchangeRate implements ExchangeRateInterface
     protected $id;
 
     /**
-     * @var float
+     * @var float|null
      */
     protected $ratio;
 
     /**
-     * @var CurrencyInterface
+     * @var CurrencyInterface|null
      */
     protected $sourceCurrency;
 
     /**
-     * @var CurrencyInterface
+     * @var CurrencyInterface|null
      */
     protected $targetCurrency;
 
@@ -57,9 +55,10 @@ class ExchangeRate implements ExchangeRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getRatio()
+    public function getRatio(): ?float
     {
-        return $this->ratio;
+        // It looks like Doctrine is hydrating decimal field as string, force casting to float.
+        return is_string($this->ratio) ? (float) $this->ratio : $this->ratio;
     }
 
     /**
@@ -67,17 +66,15 @@ class ExchangeRate implements ExchangeRateInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function setRatio($ratio)
+    public function setRatio(?float $ratio): void
     {
-        Assert::nullOrFloat($ratio);
-
         $this->ratio = $ratio;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getSourceCurrency()
+    public function getSourceCurrency(): ?CurrencyInterface
     {
         return $this->sourceCurrency;
     }
@@ -85,7 +82,7 @@ class ExchangeRate implements ExchangeRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setSourceCurrency(CurrencyInterface $currency)
+    public function setSourceCurrency(CurrencyInterface $currency): void
     {
         $this->sourceCurrency = $currency;
     }
@@ -93,7 +90,7 @@ class ExchangeRate implements ExchangeRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getTargetCurrency()
+    public function getTargetCurrency(): ?CurrencyInterface
     {
         return $this->targetCurrency;
     }
@@ -101,7 +98,7 @@ class ExchangeRate implements ExchangeRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setTargetCurrency(CurrencyInterface $currency)
+    public function setTargetCurrency(CurrencyInterface $currency): void
     {
         $this->targetCurrency = $currency;
     }

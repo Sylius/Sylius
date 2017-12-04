@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        first_name:
+            max: Ime mora biti duže od {{ limit }} karaktera.
+        email:
+            already_used: E-Mail je već registrovan, ulogujete se ili izaberite opciju `zaboravljena lozinka`.
+            not_blank: Unеsite vaš e-mail.
+            invalid: E-mail nije validan.
+            registered: E-Mail je već registrovan, ulogujete se ili izaberite opciju `zaboravljena lozinka`.

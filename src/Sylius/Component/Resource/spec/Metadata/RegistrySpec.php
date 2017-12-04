@@ -9,29 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Resource\Metadata;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Sylius\Component\Resource\Metadata\Registry;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class RegistrySpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Registry::class);
-    }
-
-    function it_implements_registry_interface()
+    function it_implements_registry_interface(): void
     {
         $this->shouldImplement(RegistryInterface::class);
     }
 
-    function it_returns_all_resources_metadata(MetadataInterface $metadata1, MetadataInterface $metadata2)
+    function it_returns_all_resources_metadata(MetadataInterface $metadata1, MetadataInterface $metadata2): void
     {
         $metadata1->getAlias()->willReturn('app.product');
         $metadata2->getAlias()->willReturn('app.order');
@@ -42,7 +35,7 @@ final class RegistrySpec extends ObjectBehavior
         $this->getAll()->shouldReturn(['app.product' => $metadata1, 'app.order' => $metadata2]);
     }
 
-    function it_throws_an_exception_if_resource_is_not_registered()
+    function it_throws_an_exception_if_resource_is_not_registered(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -50,7 +43,7 @@ final class RegistrySpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_specific_metadata(MetadataInterface $metadata)
+    function it_returns_specific_metadata(MetadataInterface $metadata): void
     {
         $metadata->getAlias()->willReturn('app.shipping_method');
 
@@ -59,7 +52,7 @@ final class RegistrySpec extends ObjectBehavior
         $this->get('app.shipping_method')->shouldReturn($metadata);
     }
 
-    function it_throws_an_exception_if_resource_is_not_registered_with_class()
+    function it_throws_an_exception_if_resource_is_not_registered_with_class(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -67,7 +60,7 @@ final class RegistrySpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_specific_metadata_by_model_class(MetadataInterface $metadata1, MetadataInterface $metadata2)
+    function it_returns_specific_metadata_by_model_class(MetadataInterface $metadata1, MetadataInterface $metadata2): void
     {
         $metadata1->getAlias()->willReturn('app.product');
         $metadata1->getClass('model')->willReturn('App\Model\Product');
@@ -81,7 +74,7 @@ final class RegistrySpec extends ObjectBehavior
         $this->getByClass('App\Model\Order')->shouldReturn($metadata2);
     }
 
-    function it_adds_metadata_from_configuration_array()
+    function it_adds_metadata_from_configuration_array(): void
     {
         $this->addFromAliasAndConfiguration('app.product', [
             'driver' => 'doctrine/orm',

@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class AddressFactory implements AddressFactoryInterface
 {
     /**
@@ -36,7 +35,7 @@ class AddressFactory implements AddressFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(): AddressInterface
     {
         return $this->decoratedFactory->createNew();
     }
@@ -44,12 +43,12 @@ class AddressFactory implements AddressFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createForCustomer(CustomerInterface $customer)
+    public function createForCustomer(CustomerInterface $customer): AddressInterface
     {
-        /** @var  AddressInterface $address*/
+        /** @var AddressInterface $address */
         $address = $this->decoratedFactory->createNew();
         $address->setCustomer($customer);
-        
+
         return $address;
     }
 }

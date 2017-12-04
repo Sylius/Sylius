@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,29 +19,19 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
 {
-    function let(TaxonRepositoryInterface $taxonRepository)
+    function let(TaxonRepositoryInterface $taxonRepository): void
     {
         $this->beConstructedWith($taxonRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TotalOfItemsFromTaxonRuleChecker::class);
-    }
-
-    function it_implements_a_rule_checker_interface()
+    function it_implements_a_rule_checker_interface(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
@@ -55,11 +47,15 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         ProductInterface $longsword,
         ProductInterface $reflexBow,
         TaxonInterface $bows
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
-        $order->getItems()->willReturn([$compositeBowItem, $longswordItem, $reflexBowItem]);
+        $order->getItems()->willReturn(new ArrayCollection([
+            $compositeBowItem->getWrappedObject(),
+            $longswordItem->getWrappedObject(),
+            $reflexBowItem->getWrappedObject(),
+        ]));
 
         $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
 
@@ -87,11 +83,11 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         ProductInterface $reflexBow,
         TaxonInterface $bows,
         TaxonRepositoryInterface $taxonRepository
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
-        $order->getItems()->willReturn([$compositeBowItem, $reflexBowItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$compositeBowItem->getWrappedObject(), $reflexBowItem->getWrappedObject()]));
 
         $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
 
@@ -115,11 +111,11 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         ProductInterface $longsword,
         TaxonInterface $bows,
         TaxonRepositoryInterface $taxonRepository
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
-        $order->getItems()->willReturn([$compositeBowItem, $longswordItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$compositeBowItem->getWrappedObject(), $longswordItem->getWrappedObject()]));
 
         $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
 
@@ -137,7 +133,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
     function it_returns_false_if_configuration_is_invalid(
         ChannelInterface $channel,
         OrderInterface $order
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -148,7 +144,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
     function it_returns_false_if_there_is_no_configuration_for_order_channel(
         ChannelInterface $channel,
         OrderInterface $order
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -159,7 +155,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         TaxonRepositoryInterface $taxonRepository
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -168,7 +164,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, ['WEB_US' => ['taxon' => 'sniper_rifles', 'amount' => 1000]])->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_passed_subject_is_not_order(PromotionSubjectInterface $subject)
+    function it_throws_an_exception_if_passed_subject_is_not_order(PromotionSubjectInterface $subject): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

@@ -82,7 +82,7 @@ Promotion Coupon Generator
 --------------------------
 
 Making up new codes might become difficult if you would like to prepare a lot of coupons at once. That is why Sylius
-provides a service that generates random codes for you - `CouponGenerator <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Promotion/Generator/CouponGenerator.php>`_.
+provides a service that generates random codes for you - `CouponGenerator <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Promotion/Generator/PromotionCouponGenerator.php>`_.
 In its **PromotionCouponGeneratorInstruction** you can define the amount of coupons that will be generated, length of their codes, expiration date and usage limit.
 
 .. code-block:: php
@@ -111,5 +111,5 @@ Learn more
 ----------
 
 * :doc:`Promotions Concept Documentation </book/orders/promotions>`
-* :doc:`promotion - Component Documentation </components/Promotion/index>`
-* :doc:`promotion - Bundle Documentation </bundles/SyliusPromotionBundle/index>`
+* :doc:`promotion - Component Documentation </components_and_bundles/components/Promotion/index>`
+* :doc:`promotion - Bundle Documentation </components_and_bundles/bundles/SyliusPromotionBundle/index>`

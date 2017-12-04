@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface AuthorizationCheckerInterface
 {
     /**
@@ -27,9 +26,9 @@ interface AuthorizationCheckerInterface
      * - custom_action
      *
      * @param RequestConfiguration $configuration
-     * @param $permission
+     * @param string $permission
      *
      * @return bool
      */
-    public function isGranted(RequestConfiguration $configuration, $permission);
+    public function isGranted(RequestConfiguration $configuration, string $permission): bool;
 }

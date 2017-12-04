@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\Controller;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -21,9 +23,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class CurrencySwitchController
 {
     /**
@@ -67,7 +66,7 @@ final class CurrencySwitchController
     /**
      * @return Response
      */
-    public function renderAction()
+    public function renderAction(): Response
     {
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
@@ -91,7 +90,7 @@ final class CurrencySwitchController
      *
      * @return Response
      */
-    public function switchAction(Request $request, $code)
+    public function switchAction(Request $request, string $code): Response
     {
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();

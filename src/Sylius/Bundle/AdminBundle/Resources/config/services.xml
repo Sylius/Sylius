@@ -30,6 +30,10 @@
             <argument>%sylius.admin.notification.frequency%</argument>
             <tag name="twig.extension" />
         </service>
+        <service id="sylius.twig.extension.shop" class="Sylius\Bundle\AdminBundle\Twig\ShopExtension">
+            <argument>%sylius.admin.shop_enabled%</argument>
+            <tag name="twig.extension" />
+        </service>
 
         <service id="sylius.http_client" class="GuzzleHttp\Client" public="false" />
         <service id="sylius.http_message_factory" class="Http\Message\MessageFactory\GuzzleMessageFactory" public="false" />

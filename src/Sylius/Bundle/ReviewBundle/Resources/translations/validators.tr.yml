@@ -5,3 +5,7 @@ sylius:
     review:
         author:
             already_exists: Bu e-posta zaten kullanılıyor, lütfen giriş yapın veya unutulan parolayı kullanın.
+        comment:
+            not_blank: Gözden geçirme yorumu boş olmamalıdır.
+        rating:
+            not_blank: Gözden geçirmeleri kontrol etmelisiniz.

@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PaymentMethodFactory implements PaymentMethodFactoryInterface
 {
     /**
@@ -42,7 +41,7 @@ final class PaymentMethodFactory implements PaymentMethodFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(): PaymentMethodInterface
     {
         return $this->decoratedFactory->createNew();
     }
@@ -50,7 +49,7 @@ final class PaymentMethodFactory implements PaymentMethodFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createWithGateway($gatewayFactory)
+    public function createWithGateway(string $gatewayFactory): PaymentMethodInterface
     {
         $gatewayConfig = $this->gatewayConfigFactory->createNew();
         $gatewayConfig->setFactoryName($gatewayFactory);

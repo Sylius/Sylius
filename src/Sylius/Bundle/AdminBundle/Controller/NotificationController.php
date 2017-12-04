@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Controller;
 
 use GuzzleHttp\ClientInterface;
@@ -20,36 +22,44 @@ use Sylius\Bundle\CoreBundle\Application\Kernel;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
-class NotificationController
+final class NotificationController
 {
     /**
      * @var ClientInterface
      */
-    protected $client;
+    private $client;
 
     /**
      * @var MessageFactory
      */
-    protected $messageFactory;
+    private $messageFactory;
 
     /**
      * @var UriInterface
      */
-    protected $hubUri;
+    private $hubUri;
+
+    /**
+     * @var string
+     */
+    private $environment;
 
     /**
      * @param ClientInterface $client
      * @param MessageFactory $messageFactory
      * @param string $hubUri
+     * @param string $environment
      */
-    public function __construct(ClientInterface $client, MessageFactory $messageFactory, $hubUri)
-    {
+    public function __construct(
+        ClientInterface $client,
+        MessageFactory $messageFactory,
+        string $hubUri,
+        string $environment
+    ) {
         $this->client = $client;
         $this->messageFactory = $messageFactory;
         $this->hubUri = new Uri($hubUri);
+        $this->environment = $environment;
     }
 
     /**
@@ -57,13 +67,14 @@ class NotificationController
      *
      * @return JsonResponse
      */
-    public function getVersionAction(Request $request)
+    public function getVersionAction(Request $request): JsonResponse
     {
         $content = [
             'version' => Kernel::VERSION,
             'hostname' => $request->getHost(),
             'locale' => $request->getLocale(),
             'user_agent' => $request->headers->get('User-Agent'),
+            'environment' => $this->environment,
         ];
 
         $headers = ['Content-Type' => 'application/json'];
@@ -81,6 +92,8 @@ class NotificationController
             return JsonResponse::create('', JsonResponse::HTTP_NO_CONTENT);
         }
 
-        return JsonResponse::fromJsonString($hubResponse->getBody()->getContents());
+        $hubResponse = json_decode($hubResponse->getBody()->getContents(), true);
+
+        return new JsonResponse($hubResponse);
     }
 }

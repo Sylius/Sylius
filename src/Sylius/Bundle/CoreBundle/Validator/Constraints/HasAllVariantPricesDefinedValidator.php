@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -19,15 +21,12 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class HasAllVariantPricesDefinedValidator extends ConstraintValidator
 {
     /**
      * {@inheritdoc}
      */
-    public function validate($product, Constraint $constraint)
+    public function validate($product, Constraint $constraint): void
     {
         Assert::isInstanceOf($product, ProductInterface::class);
 
@@ -37,7 +36,7 @@ final class HasAllVariantPricesDefinedValidator extends ConstraintValidator
 
         $channels = $product->getChannels();
 
-        /** @var ProductVariantInterface $variant */
+        /* @var ProductVariantInterface $productVariant */
         foreach ($product->getVariants() as $productVariant) {
             /** @var ChannelInterface $channel */
             foreach ($channels as $channel) {

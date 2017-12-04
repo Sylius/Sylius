@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Inventory\Operator;
 
 use Sylius\Component\Core\Model\OrderInterface;
@@ -16,15 +18,12 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class OrderInventoryOperator implements OrderInventoryOperatorInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function cancel(OrderInterface $order)
+    public function cancel(OrderInterface $order): void
     {
         if (in_array(
             $order->getPaymentState(),
@@ -42,7 +41,7 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function hold(OrderInterface $order)
+    public function hold(OrderInterface $order): void
     {
         /** @var OrderItemInterface $orderItem */
         foreach ($order->getItems() as $orderItem) {
@@ -59,7 +58,7 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function sell(OrderInterface $order)
+    public function sell(OrderInterface $order): void
     {
         /** @var OrderItemInterface $orderItem */
         foreach ($order->getItems() as $orderItem) {
@@ -97,7 +96,7 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
      *
      * @throws \InvalidArgumentException
      */
-    private function release(OrderInterface $order)
+    private function release(OrderInterface $order): void
     {
         /** @var OrderItemInterface $orderItem */
         foreach ($order->getItems() as $orderItem) {
@@ -123,7 +122,7 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     /**
      * @param OrderInterface $order
      */
-    private function giveBack(OrderInterface $order)
+    private function giveBack(OrderInterface $order): void
     {
         /** @var OrderItemInterface $orderItem */
         foreach ($order->getItems() as $orderItem) {

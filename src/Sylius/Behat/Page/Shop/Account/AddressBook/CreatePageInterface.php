@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface CreatePageInterface extends SymfonyPageInterface
 {
     /**
@@ -28,7 +27,7 @@ interface CreatePageInterface extends SymfonyPageInterface
      * @param string $name
      */
     public function selectCountry($name);
-    
+
     public function addAddress();
 
     /**

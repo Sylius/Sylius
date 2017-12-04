@@ -9,26 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Promotion\Modifier;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderPromotionsUsageModifier::class);
-    }
-
-    function it_implements_an_order_promotions_usage_modifier_interface()
+    function it_implements_an_order_promotions_usage_modifier_interface(): void
     {
         $this->shouldImplement(OrderPromotionsUsageModifierInterface::class);
     }
@@ -37,8 +31,10 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion
-    ) {
-        $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+    ): void {
+        $order->getPromotions()->willReturn(
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+        );
         $order->getPromotionCoupon()->willReturn(null);
 
         $firstPromotion->incrementUsed()->shouldBeCalled();
@@ -51,8 +47,10 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion
-    ) {
-        $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+    ): void {
+        $order->getPromotions()->willReturn(
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+        );
         $order->getPromotionCoupon()->willReturn(null);
 
         $firstPromotion->decrementUsed()->shouldBeCalled();
@@ -66,8 +64,10 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion,
         PromotionCouponInterface $promotionCoupon
-    ) {
-        $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+    ): void {
+        $order->getPromotions()->willReturn(
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+        );
         $order->getPromotionCoupon()->willReturn($promotionCoupon);
 
         $firstPromotion->incrementUsed()->shouldBeCalled();
@@ -83,8 +83,10 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion,
         PromotionCouponInterface $promotionCoupon
-    ) {
-        $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+    ): void {
+        $order->getPromotions()->willReturn(
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+        );
         $order->getPromotionCoupon()->willReturn($promotionCoupon);
 
         $firstPromotion->decrementUsed()->shouldBeCalled();

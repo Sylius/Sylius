@@ -9,42 +9,35 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Product\Generator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Product\Generator\CartesianSetBuilder;
 
-/**
- * @author Adam Elsodaney <adam.elso@gmail.com>
- */
 final class CartesianSetBuilderSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CartesianSetBuilder::class);
-    }
-
-    function it_requires_an_array_of_set_tuples_to_build_from()
+    function it_requires_an_array_of_set_tuples_to_build_from(): void
     {
         $tupleSetNotInArray = ['a', 'b', 'c'];
 
         $this->shouldThrow(\InvalidArgumentException::class)->duringBuild($tupleSetNotInArray, Argument::any());
     }
 
-    function it_requires_at_least_one_set_tuple()
+    function it_requires_at_least_one_set_tuple(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->duringBuild([], Argument::any());
     }
 
-    function it_returns_the_same_set_as_the_cartesian_product_when_only_one_was_given()
+    function it_returns_the_same_set_as_the_cartesian_product_when_only_one_was_given(): void
     {
         $set = ['a', 'b', 'c'];
 
         $this->build([$set], false)->shouldReturn($set);
     }
 
-    function it_builds_the_cartesian_product_set_from_two_sets()
+    function it_builds_the_cartesian_product_set_from_two_sets(): void
     {
         $setA = ['a', 'b', 'c'];
         $setB = ['1', '2', '3'];
@@ -64,7 +57,7 @@ final class CartesianSetBuilderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_builds_the_cartesian_product_set_from_more_than_two_sets()
+    function it_builds_the_cartesian_product_set_from_more_than_two_sets(): void
     {
         $setA = ['a', 'b', 'c'];
         $setB = ['1', '2', '3'];

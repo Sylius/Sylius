@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
@@ -21,15 +23,9 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Prezent Internet B.V. <info@prezent.nl>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ORMTranslatableListener implements EventSubscriber
 {
     /**
@@ -57,7 +53,7 @@ final class ORMTranslatableListener implements EventSubscriber
     /**
      * {@inheritdoc}
      */
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             Events::loadClassMetadata,
@@ -70,7 +66,7 @@ final class ORMTranslatableListener implements EventSubscriber
      *
      * @param LoadClassMetadataEventArgs $eventArgs
      */
-    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
         $classMetadata = $eventArgs->getClassMetadata();
         $reflection = $classMetadata->reflClass;
@@ -91,7 +87,7 @@ final class ORMTranslatableListener implements EventSubscriber
     /**
      * @param LifecycleEventArgs $args
      */
-    public function postLoad(LifecycleEventArgs $args)
+    public function postLoad(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
 
@@ -107,7 +103,7 @@ final class ORMTranslatableListener implements EventSubscriber
      *
      * @param ClassMetadata $metadata
      */
-    private function mapTranslatable(ClassMetadata $metadata)
+    private function mapTranslatable(ClassMetadata $metadata): void
     {
         $className = $metadata->name;
 
@@ -122,17 +118,19 @@ final class ORMTranslatableListener implements EventSubscriber
         }
 
         /** @var MetadataInterface $translationResourceMetadata */
-        $translationResourceMetadata = $this->resourceMetadataRegistry->get($resourceMetadata->getAlias().'_translation');
+        $translationResourceMetadata = $this->resourceMetadataRegistry->get($resourceMetadata->getAlias() . '_translation');
 
-        $metadata->mapOneToMany([
-            'fieldName' => 'translations',
-            'targetEntity' => $translationResourceMetadata->getClass('model'),
-            'mappedBy' => 'translatable',
-            'fetch' => ClassMetadataInfo::FETCH_EXTRA_LAZY,
-            'indexBy' => 'locale',
-            'cascade' => ['persist', 'merge', 'remove'],
-            'orphanRemoval' => true,
-        ]);
+        if (!$metadata->hasAssociation('translations')) {
+            $metadata->mapOneToMany([
+                'fieldName' => 'translations',
+                'targetEntity' => $translationResourceMetadata->getClass('model'),
+                'mappedBy' => 'translatable',
+                'fetch' => ClassMetadataInfo::FETCH_EXTRA_LAZY,
+                'indexBy' => 'locale',
+                'cascade' => ['persist', 'merge', 'remove'],
+                'orphanRemoval' => true,
+            ]);
+        }
     }
 
     /**
@@ -140,7 +138,7 @@ final class ORMTranslatableListener implements EventSubscriber
      *
      * @param ClassMetadata $metadata
      */
-    private function mapTranslation(ClassMetadata $metadata)
+    private function mapTranslation(ClassMetadata $metadata): void
     {
         $className = $metadata->name;
 
@@ -153,17 +151,19 @@ final class ORMTranslatableListener implements EventSubscriber
         /** @var MetadataInterface $translatableResourceMetadata */
         $translatableResourceMetadata = $this->resourceMetadataRegistry->get(str_replace('_translation', '', $resourceMetadata->getAlias()));
 
-        $metadata->mapManyToOne([
-            'fieldName' => 'translatable',
-            'targetEntity' => $translatableResourceMetadata->getClass('model'),
-            'inversedBy' => 'translations',
-            'joinColumns' => [[
-                'name' => 'translatable_id',
-                'referencedColumnName' => 'id',
-                'onDelete' => 'CASCADE',
-                'nullable' => false,
-            ]],
-        ]);
+        if (!$metadata->hasAssociation('translatable')) {
+            $metadata->mapManyToOne([
+                'fieldName' => 'translatable',
+                'targetEntity' => $translatableResourceMetadata->getClass('model'),
+                'inversedBy' => 'translations',
+                'joinColumns' => [[
+                    'name' => 'translatable_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'CASCADE',
+                    'nullable' => false,
+                ]],
+            ]);
+        }
 
         if (!$metadata->hasField('locale')) {
             $metadata->mapField([
@@ -180,9 +180,9 @@ final class ORMTranslatableListener implements EventSubscriber
         ];
 
         if (!$this->hasUniqueConstraint($metadata, $columns)) {
-            $constraints = isset($metadata->table['uniqueConstraints']) ? $metadata->table['uniqueConstraints'] : [];
+            $constraints = $metadata->table['uniqueConstraints'] ?? [];
 
-            $constraints[$metadata->getTableName().'_uniq_trans'] = [
+            $constraints[$metadata->getTableName() . '_uniq_trans'] = [
                 'columns' => $columns,
             ];
 
@@ -200,7 +200,7 @@ final class ORMTranslatableListener implements EventSubscriber
      *
      * @return bool
      */
-    private function hasUniqueConstraint(ClassMetadata $metadata, array $columns)
+    private function hasUniqueConstraint(ClassMetadata $metadata, array $columns): bool
     {
         if (!isset($metadata->table['uniqueConstraints'])) {
             return false;

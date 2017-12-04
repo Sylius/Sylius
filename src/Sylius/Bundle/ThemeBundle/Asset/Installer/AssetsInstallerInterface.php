@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Asset\Installer;
 
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 interface AssetsInstallerInterface
 {
     /**
@@ -25,7 +24,7 @@ interface AssetsInstallerInterface
      * @see AssetsInstallerInterface::installBundleAssets()
      * @see AssetsInstallerInterface::installDirAssets()
      */
-    const HARD_COPY = 0;
+    public const HARD_COPY = 0;
 
     /**
      * Constant used as parameter and returned in installAssets() methods.
@@ -34,7 +33,7 @@ interface AssetsInstallerInterface
      * @see AssetsInstallerInterface::installBundleAssets()
      * @see AssetsInstallerInterface::installDirAssets()
      */
-    const SYMLINK = 1;
+    public const SYMLINK = 1;
 
     /**
      * Constant used as parameter and returned in installAssets() methods.
@@ -43,7 +42,7 @@ interface AssetsInstallerInterface
      * @see AssetsInstallerInterface::installBundleAssets()
      * @see AssetsInstallerInterface::installDirAssets()
      */
-    const RELATIVE_SYMLINK = 2;
+    public const RELATIVE_SYMLINK = 2;
 
     /**
      * @param string $targetDir
@@ -51,7 +50,7 @@ interface AssetsInstallerInterface
      *
      * @return int Effective symlink mask (lowest value received from installBundleAssets() method)
      */
-    public function installAssets($targetDir, $symlinkMask);
+    public function installAssets(string $targetDir, int $symlinkMask);
 
     /**
      * @param BundleInterface $bundle
@@ -60,5 +59,5 @@ interface AssetsInstallerInterface
      *
      * @return int Effective symlink mask (lowest value received from installDirAssets() method)
      */
-    public function installBundleAssets(BundleInterface $bundle, $targetDir, $symlinkMask);
+    public function installBundleAssets(BundleInterface $bundle, string $targetDir, int $symlinkMask);
 }

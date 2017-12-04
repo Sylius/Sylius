@@ -9,22 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Resource;
 
 use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 interface TranslatorResourceProviderInterface
 {
     /**
-     * @return TranslationResourceInterface[]
+     * @return array|TranslationResourceInterface[]
      */
-    public function getResources();
+    public function getResources(): array;
 
     /**
-     * @return array
+     * @return array|string[]
      */
-    public function getResourcesLocales();
+    public function getResourcesLocales(): array;
 }

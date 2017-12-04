@@ -9,15 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Sylius\Component\User\Model\User as BaseUser;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class ShopUser extends BaseUser implements ShopUserInterface
 {
     /**
@@ -28,7 +26,7 @@ class ShopUser extends BaseUser implements ShopUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getCustomer()
+    public function getCustomer(): ?BaseCustomerInterface
     {
         return $this->customer;
     }
@@ -36,25 +34,36 @@ class ShopUser extends BaseUser implements ShopUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(BaseCustomerInterface $customer = null)
+    public function setCustomer(?BaseCustomerInterface $customer): void
     {
-        if ($this->customer !== $customer) {
-            $this->customer = $customer;
-            $this->assignUser($customer);
+        if ($this->customer === $customer) {
+            return;
+        }
+
+        $previousCustomer = $this->customer;
+        $this->customer = $customer;
+
+        if ($previousCustomer instanceof CustomerInterface) {
+            $previousCustomer->setUser(null);
+        }
+
+        if ($customer instanceof CustomerInterface) {
+            $customer->setUser($this);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->customer->getEmail();
     }
+
     /**
      * {@inheritdoc}
      */
-    public function setEmail($email)
+    public function setEmail(?string $email): void
     {
         $this->customer->setEmail($email);
     }
@@ -62,7 +71,7 @@ class ShopUser extends BaseUser implements ShopUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getEmailCanonical()
+    public function getEmailCanonical(): ?string
     {
         return $this->customer->getEmailCanonical();
     }
@@ -70,18 +79,8 @@ class ShopUser extends BaseUser implements ShopUserInterface
     /**
      * {@inheritdoc}
      */
-    public function setEmailCanonical($emailCanonical)
+    public function setEmailCanonical(?string $emailCanonical): void
     {
         $this->customer->setEmailCanonical($emailCanonical);
-    }
-
-    /**
-     * @param CustomerInterface $customer
-     */
-    protected function assignUser(CustomerInterface $customer = null)
-    {
-        if (null !== $customer) {
-            $customer->setUser($this);
-        }
     }
 }

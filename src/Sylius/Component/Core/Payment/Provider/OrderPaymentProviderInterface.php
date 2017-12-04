@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Payment\Provider;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface OrderPaymentProviderInterface
 {
     /**
@@ -25,5 +24,5 @@ interface OrderPaymentProviderInterface
      *
      * @return PaymentInterface|null
      */
-    public function provideOrderPayment(OrderInterface $order, $targetState);
+    public function provideOrderPayment(OrderInterface $order, string $targetState): ?PaymentInterface;
 }

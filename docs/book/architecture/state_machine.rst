@@ -129,7 +129,7 @@ would become ``shipping_selected``.
                        args: ["object"]
                    sylius_assign_token:
                        on: ["complete"]
-                       do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
+                       do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValueIfNotSet"]
                        args: ["object"]
 
 Learn more

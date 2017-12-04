@@ -28,7 +28,11 @@ To create a new project using Sylius Standard Edition, run this command:
 
 .. code-block:: bash
 
-    $ composer create-project -s beta sylius/sylius-standard acme
+    $ composer create-project sylius/sylius-standard acme
+
+.. note::
+
+    Make sure to use PHP ^7.1. Using an older PHP version will result in installing an older version of Sylius.
 
 This will create a new Symfony project in ``acme`` directory. When all the
 dependencies are installed, you'll be asked to fill the ``parameters.yml``
@@ -53,7 +57,11 @@ Installing assets
 
 In order to see a fully functional frontend you will need to install its assets.
 
-**Sylius** already has a ``gulpfile.js``, therefore you just need to get `Gulp`_ using `Yarn`_.
+**Sylius** already has a ``Gulpfile.js``, therefore you just need to get `Gulp`_ using `Yarn`_.
+
+.. note::
+
+    We recommend using stable versions (`^1.0.0`) of `Yarn`_.
 
 Having Yarn installed go to your project directory and run:
 

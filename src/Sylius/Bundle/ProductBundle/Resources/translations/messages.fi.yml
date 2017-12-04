@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        product:
+            description: Kuvaus
         association_type:
             translations: Käännökset
         option_value:

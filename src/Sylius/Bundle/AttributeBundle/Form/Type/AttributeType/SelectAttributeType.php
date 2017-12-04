@@ -9,8 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -18,15 +21,25 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Laurent Paganin-Gioanni <l.paganin@algo-factory.com>
- */
 final class SelectAttributeType extends AbstractType
 {
     /**
+     * @var string
+     */
+    private $defaultLocaleCode;
+
+    /**
+     * @param TranslationLocaleProviderInterface $localeProvider
+     */
+    public function __construct(TranslationLocaleProviderInterface $localeProvider)
+    {
+        $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return ChoiceType::class;
     }
@@ -34,7 +47,7 @@ final class SelectAttributeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (is_array($options['configuration'])
             && isset($options['configuration']['multiple'])
@@ -48,7 +61,7 @@ final class SelectAttributeType extends AbstractType
                     return null;
                 },
                 function ($string) {
-                    if (!is_null($string)) {
+                    if (null !== $string) {
                         return [$string];
                     }
 
@@ -61,16 +74,30 @@ final class SelectAttributeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setRequired('configuration')
             ->setDefault('placeholder', 'sylius.form.attribute_type_configuration.select.choose')
+            ->setDefault('locale_code', $this->defaultLocaleCode)
             ->setNormalizer('choices', function (Options $options) {
                 if (is_array($options['configuration'])
                     && isset($options['configuration']['choices'])
                     && is_array($options['configuration']['choices'])) {
-                    $choices = array_flip($options['configuration']['choices']);
+                    $choices = [];
+                    $localeCode = $options['locale_code'] ?? $this->defaultLocaleCode;
+
+                    foreach ($options['configuration']['choices'] as $key => $choice) {
+                        if (isset($options[$localeCode]) && '' !== $choice[$localeCode] && null !== $choice[$localeCode]) {
+                            $choices[$key] = $choice[$localeCode];
+
+                            continue;
+                        }
+
+                        $choices[$key] = $choice[$this->defaultLocaleCode];
+                    }
+
+                    $choices = array_flip($choices);
                     ksort($choices);
 
                     return $choices;
@@ -91,7 +118,7 @@ final class SelectAttributeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_attribute_type_select';
     }

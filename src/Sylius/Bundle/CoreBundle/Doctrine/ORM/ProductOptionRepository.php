@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository as BaseProductOptionRepository;
+use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 class ProductOptionRepository extends BaseProductOptionRepository
 {
     /**
@@ -28,17 +28,17 @@ class ProductOptionRepository extends BaseProductOptionRepository
     /**
      * {@inheritdoc}
      */
-    public function __construct(EntityManager $em, Mapping\ClassMetadata $class)
+    public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
     {
-        parent::__construct($em, $class);
+        parent::__construct($entityManager, $class);
 
-        $this->associationHydrator = new AssociationHydrator($this->_em, $class);
+        $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findAll()
+    public function findAll(): array
     {
         $productOptions = parent::findAll();
 

@@ -80,7 +80,7 @@ How to remove a state and its transitions?
 .. warning::
 
     If you are willing to remove a state or a transition you have to override **the whole states/transitions section**
-    of the state machine you are willing to modify. See how we do it in the :doc:`customization of the Checkout process </cookbook/checkout>`.
+    of the state machine you are willing to modify. See how we do it in the :doc:`customization of the Checkout process </cookbook/shop/checkout>`.
 
 How to add a new callback?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -142,6 +142,8 @@ On the example of the state machine of ProductReview, we can turn off the ``upda
                 after:
                     update_price:
                         disabled: true
+
+.. include:: /customization/plugins.rst.inc
 
 Learn more
 ----------

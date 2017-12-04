@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Provider;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface ProvinceNamingProviderInterface
 {
     /**
@@ -24,12 +22,12 @@ interface ProvinceNamingProviderInterface
      *
      * @return string
      */
-    public function getName(AddressInterface $address);
+    public function getName(AddressInterface $address): string;
 
     /**
      * @param AddressInterface $address
      *
      * @return string
      */
-    public function getAbbreviation(AddressInterface $address);
+    public function getAbbreviation(AddressInterface $address): string;
 }

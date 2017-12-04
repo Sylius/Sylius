@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Provider;
 
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface PreQualifiedPromotionsProviderInterface
 {
     /**
@@ -24,5 +23,5 @@ interface PreQualifiedPromotionsProviderInterface
      *
      * @return PromotionInterface[]
      */
-    public function getPromotions(PromotionSubjectInterface $subject);
+    public function getPromotions(PromotionSubjectInterface $subject): array;
 }

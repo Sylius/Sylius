@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Controller;
 
 use FOS\RestBundle\View\View;
@@ -24,9 +26,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ShowAvailablePaymentMethodsController
 {
     /**
@@ -72,7 +71,7 @@ final class ShowAvailablePaymentMethodsController
      *
      * @return Response
      */
-    public function showAction(Request $request)
+    public function showAction(Request $request): Response
     {
         /** @var OrderInterface $cart */
         $cart = $this->getCartOr404($request->attributes->get('orderId'));
@@ -96,13 +95,15 @@ final class ShowAvailablePaymentMethodsController
      * @param mixed $cartId
      *
      * @return OrderInterface
+     *
+     * @throws NotFoundHttpException
      */
-    private function getCartOr404($cartId)
+    private function getCartOr404($cartId): OrderInterface
     {
         $cart = $this->orderRepository->findCartById($cartId);
 
         if (null === $cart) {
-            throw new NotFoundHttpException(sprintf("The cart with %s id could not be found!", $cartId));
+            throw new NotFoundHttpException(sprintf('The cart with %s id could not be found!', $cartId));
         }
 
         return $cart;
@@ -114,7 +115,7 @@ final class ShowAvailablePaymentMethodsController
      *
      * @return bool
      */
-    private function isCheckoutTransitionPossible(OrderInterface $cart, $transition)
+    private function isCheckoutTransitionPossible(OrderInterface $cart, string $transition): bool
     {
         return $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->can($transition);
     }
@@ -125,9 +126,9 @@ final class ShowAvailablePaymentMethodsController
      *
      * @return array
      */
-    private function getPaymentMethods(PaymentInterface $payment, $locale)
+    private function getPaymentMethods(PaymentInterface $payment, string $locale): array
     {
-        $paymentMethods =  $this->paymentMethodResolver->getSupportedMethods($payment);
+        $paymentMethods = $this->paymentMethodResolver->getSupportedMethods($payment);
 
         $rawPaymentMethods = [];
 

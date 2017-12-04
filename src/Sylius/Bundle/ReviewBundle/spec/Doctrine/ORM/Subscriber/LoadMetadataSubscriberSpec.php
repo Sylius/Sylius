@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
@@ -18,15 +20,10 @@ use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith([
             'reviewable' => [
@@ -45,17 +42,12 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         ]);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(LoadMetadataSubscriber::class);
-    }
-
-    function it_implements_event_subscriber()
+    function it_implements_event_subscriber(): void
     {
         $this->shouldImplement(EventSubscriber::class);
     }
 
-    function it_has_subscribed_events()
+    function it_has_subscribed_events(): void
     {
         $this->getSubscribedEvents()->shouldReturn(['loadClassMetadata']);
     }
@@ -66,7 +58,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         ClassMetadataInfo $metadata,
         EntityManager $entityManager,
         LoadClassMetadataEventArgs $eventArguments
-    ) {
+    ): void {
         $eventArguments->getClassMetadata()->willReturn($metadata);
         $eventArguments->getEntityManager()->willReturn($entityManager);
         $entityManager->getMetadataFactory()->willReturn($metadataFactory);
@@ -108,7 +100,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         ClassMetadataInfo $metadata,
         EntityManager $entityManager,
         LoadClassMetadataEventArgs $eventArguments
-    ) {
+    ): void {
         $eventArguments->getClassMetadata()->willReturn($metadata);
         $eventArguments->getEntityManager()->willReturn($entityManager);
         $entityManager->getMetadataFactory()->willReturn($metadataFactory);
@@ -129,7 +121,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         ClassMetadataInfo $metadata,
         EntityManager $entityManager,
         LoadClassMetadataEventArgs $eventArguments
-    ) {
+    ): void {
         $this->beConstructedWith([
             'reviewable' => [
                 'subject' => 'AcmeBundle\Entity\ReviewableModel',

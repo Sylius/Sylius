@@ -15,6 +15,18 @@ Sylius\Component\Product\Model\ProductAssociationType:
             expose: true
             type: array
             groups: [Default, Detailed]
-    virtual_properties:
-        getName:
-            serialized_name: name
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
+    relations:
+        -   rel: self
+            href:
+                route: sylius_admin_api_product_association_type_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

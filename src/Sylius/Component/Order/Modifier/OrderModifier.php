@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Modifier;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
-/**
- * @author Łukasz Chrusciel <lukasz.chrusciel@lakion.com>
- */
 final class OrderModifier implements OrderModifierInterface
 {
     /**
@@ -43,10 +42,9 @@ final class OrderModifier implements OrderModifierInterface
     }
 
     /**
-     * @param OrderInterface $order
-     * @param OrderItemInterface $item
+     * {@inheritdoc}
      */
-    public function addToOrder(OrderInterface $order, OrderItemInterface $item)
+    public function addToOrder(OrderInterface $order, OrderItemInterface $item): void
     {
         $this->resolveOrderItem($order, $item);
 
@@ -54,10 +52,9 @@ final class OrderModifier implements OrderModifierInterface
     }
 
     /**
-     * @param OrderInterface $order
-     * @param OrderItemInterface $item
+     * {@inheritdoc}
      */
-    public function removeFromOrder(OrderInterface $order, OrderItemInterface $item)
+    public function removeFromOrder(OrderInterface $order, OrderItemInterface $item): void
     {
         $order->removeItem($item);
         $this->orderProcessor->process($order);
@@ -67,7 +64,7 @@ final class OrderModifier implements OrderModifierInterface
      * @param OrderInterface $order
      * @param OrderItemInterface $item
      */
-    private function resolveOrderItem(OrderInterface $order, OrderItemInterface $item)
+    private function resolveOrderItem(OrderInterface $order, OrderItemInterface $item): void
     {
         foreach ($order->getItems() as $existingItem) {
             if ($item->equals($existingItem)) {

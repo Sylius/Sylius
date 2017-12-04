@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 class PromotionCoupon implements PromotionCouponInterface
 {
     use TimestampableTrait;
@@ -46,7 +45,7 @@ class PromotionCoupon implements PromotionCouponInterface
     protected $promotion;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $expiresAt;
 
@@ -61,7 +60,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -69,7 +68,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
@@ -77,7 +76,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getUsageLimit()
+    public function getUsageLimit(): ?int
     {
         return $this->usageLimit;
     }
@@ -85,7 +84,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setUsageLimit($usageLimit)
+    public function setUsageLimit(?int $usageLimit): void
     {
         $this->usageLimit = $usageLimit;
     }
@@ -93,7 +92,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getUsed()
+    public function getUsed(): int
     {
         return $this->used;
     }
@@ -101,17 +100,17 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setUsed($used)
+    public function setUsed(int $used): void
     {
         $this->used = $used;
     }
 
-    public function incrementUsed()
+    public function incrementUsed(): void
     {
         ++$this->used;
     }
 
-    public function decrementUsed()
+    public function decrementUsed(): void
     {
         --$this->used;
     }
@@ -119,7 +118,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotion()
+    public function getPromotion(): ?PromotionInterface
     {
         return $this->promotion;
     }
@@ -127,7 +126,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setPromotion(PromotionInterface $promotion = null)
+    public function setPromotion(?PromotionInterface $promotion): void
     {
         $this->promotion = $promotion;
     }
@@ -135,7 +134,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getExpiresAt()
+    public function getExpiresAt(): ?\DateTimeInterface
     {
         return $this->expiresAt;
     }
@@ -143,7 +142,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTime $expiresAt = null)
+    public function setExpiresAt(?\DateTimeInterface $expiresAt = null): void
     {
         $this->expiresAt = $expiresAt;
     }
@@ -151,7 +150,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
-    public function isValid()
+    public function isValid(): bool
     {
         if (null !== $this->usageLimit && $this->used >= $this->usageLimit) {
             return false;

@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class PromotionContext implements Context
 {
     /**
@@ -26,12 +26,16 @@ final class PromotionContext implements Context
     private $promotionRepository;
 
     /**
-     * @param PromotionRepositoryInterface $promotionRepository
+     * @var PromotionCouponRepositoryInterface
      */
+    private $promotionCouponRepository;
+
     public function __construct(
-        PromotionRepositoryInterface $promotionRepository
+        PromotionRepositoryInterface $promotionRepository,
+        PromotionCouponRepositoryInterface $promotionCouponRepository
     ) {
         $this->promotionRepository = $promotionRepository;
+        $this->promotionCouponRepository = $promotionCouponRepository;
     }
 
     /**
@@ -49,5 +53,22 @@ final class PromotionContext implements Context
         );
 
         return $promotion;
+    }
+
+    /**
+     * @Transform /^coupon "([^"]+)"$/
+     * @Transform /^"([^"]+)" coupon$/
+     * @Transform :coupon
+     */
+    public function getPromotionCouponByCode($promotionCouponCode)
+    {
+        $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $promotionCouponCode]);
+
+        Assert::notNull(
+            $promotionCoupon,
+            sprintf('Promotion coupon with code "%s" does not exist', $promotionCouponCode)
+        );
+
+        return $promotionCoupon;
     }
 }

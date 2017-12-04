@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Webmozart\Assert\Assert;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class CustomerRegistrationFormSubscriber implements EventSubscriberInterface
 {
     /**
@@ -39,7 +38,7 @@ final class CustomerRegistrationFormSubscriber implements EventSubscriberInterfa
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SUBMIT => 'preSubmit',
@@ -48,16 +47,16 @@ final class CustomerRegistrationFormSubscriber implements EventSubscriberInterfa
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function preSubmit(FormEvent $event)
+    public function preSubmit(FormEvent $event): void
     {
         $rawData = $event->getData();
         $form = $event->getForm();
         $data = $form->getData();
 
-        if (!$data instanceof CustomerInterface) {
-            throw new UnexpectedTypeException($data, CustomerInterface::class);
-        }
+        Assert::isInstanceOf($data, CustomerInterface::class);
 
         // if email is not filled in, go on
         if (!isset($rawData['email']) || empty($rawData['email'])) {

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Processor;
 
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
@@ -16,9 +18,6 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerIn
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class PromotionProcessor implements PromotionProcessorInterface
 {
     /**
@@ -54,7 +53,7 @@ final class PromotionProcessor implements PromotionProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(PromotionSubjectInterface $subject)
+    public function process(PromotionSubjectInterface $subject): void
     {
         foreach ($subject->getPromotions() as $promotion) {
             $this->promotionApplicator->revert($subject, $promotion);

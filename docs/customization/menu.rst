@@ -40,7 +40,7 @@ In the example below we are adding a one new item and sub-item to the Admin pane
         /**
          * @param MenuBuilderEvent $event
          */
-        public function addAdminMenuItems(MenuBuilderEvent $event)
+        public function addAdminMenuItems(MenuBuilderEvent $event): void
         {
             $menu = $event->getMenu();
 
@@ -99,7 +99,7 @@ In the example below we are adding a one new item to **the menu in the My Accoun
         /**
          * @param MenuBuilderEvent $event
          */
-        public function addAccountMenuItems(MenuBuilderEvent $event)
+        public function addAccountMenuItems(MenuBuilderEvent $event): void
         {
             $menu = $event->getMenu();
 
@@ -168,7 +168,7 @@ type is default to make the example easily customizable.
         /**
          * @param CustomerShowMenuBuilderEvent $event
          */
-        public function addAdminCustomerShowMenuItems(CustomerShowMenuBuilderEvent $event)
+        public function addAdminCustomerShowMenuItems(CustomerShowMenuBuilderEvent $event): void
         {
             $menu = $event->getMenu();
             $customer = $event->getCustomer();
@@ -241,7 +241,7 @@ that will let the admin fulfill the order.
         /**
          * @param OrderShowMenuBuilderEvent $event
          */
-        public function addAdminOrderShowMenuItems(OrderShowMenuBuilderEvent $event)
+        public function addAdminOrderShowMenuItems(OrderShowMenuBuilderEvent $event): void
         {
             $menu = $event->getMenu();
             $order = $event->getOrder();
@@ -307,7 +307,7 @@ Provided you have created a new template with all the required form fields and s
         /**
          * @param ProductMenuBuilderEvent $event
          */
-        public function addItems(ProductMenuBuilderEvent $event)
+        public function addItems(ProductMenuBuilderEvent $event): void
         {
             $menu = $event->getMenu();
 
@@ -364,7 +364,7 @@ Provided you have created a new template with the required form fields and saved
         /**
          * @param ProductVariantMenuBuilderEvent $event
          */
-        public function addItems(ProductVariantMenuBuilderEvent $event)
+        public function addItems(ProductVariantMenuBuilderEvent $event): void
         {
             $menu = $event->getMenu();
 
@@ -387,5 +387,7 @@ listener to the ``sylius.menu.admin.product_variant.form`` event in the ``AppBun
             class: AppBundle\Menu\AdminProductVariantFormMenuListener
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.admin.product_variant.form, method: addItems }
+
+.. include:: /customization/plugins.rst.inc
 
 .. _KnpMenu: https://github.com/KnpLabs/KnpMenu

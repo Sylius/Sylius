@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
@@ -20,11 +22,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProductContext implements Context
 {
     /**
@@ -143,6 +140,25 @@ final class ProductContext implements Context
     public function iShouldSeeTheProductAttributeWithValue($attributeName, $expectedAttribute)
     {
         Assert::same($this->showPage->getAttributeByName($attributeName), $expectedAttribute);
+    }
+
+    /**
+     * @Then I should not see the product attribute :attributeName
+     */
+    public function iShouldNotSeeTheProductAttribute(string $attributeName): void
+    {
+        $this->showPage->getAttributeByName($attributeName);
+    }
+
+    /**
+     * @Then I should (also) see the product attribute :attributeName with date :expectedAttribute
+     */
+    public function iShouldSeeTheProductAttributeWithDate($attributeName, $expectedAttribute)
+    {
+        Assert::eq(
+            new \DateTime($this->showPage->getAttributeByName($attributeName)),
+            new \DateTime($expectedAttribute)
+        );
     }
 
     /**

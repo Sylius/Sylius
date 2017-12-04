@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -19,12 +21,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
-class DashboardController
+final class DashboardController
 {
     /**
      * @var DashboardStatisticsProviderInterface
@@ -69,7 +67,7 @@ class DashboardController
      *
      * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): Response
     {
         $channelCode = $request->query->get('channel');
 
@@ -89,11 +87,11 @@ class DashboardController
     }
 
     /**
-     * @param string $channelCode
+     * @param string|null $channelCode
      *
      * @return ChannelInterface|null
      */
-    private function findChannelByCodeOrFindFirst($channelCode)
+    private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface
     {
         $channel = null;
         if (null !== $channelCode) {

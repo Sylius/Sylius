@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
 {
     /**
@@ -39,7 +38,7 @@ final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
         ResourceInterface $resource,
         RequestConfiguration $configuration,
         ObjectManager $manager
-    ) {
+    ): void {
         if ($configuration->hasStateMachine()) {
             $this->stateMachine->apply($configuration, $resource);
         }

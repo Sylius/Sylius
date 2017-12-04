@@ -35,6 +35,9 @@ sylius:
     order:
         currency_code:
             not_valid: Le code de devise que vous avez entré n’est pas valide.
+        payment_method_eligibility: 'Cette méthode de paiement %paymentMethodName% a été désactivée. Veuillez sélectionner une nouvelle fois votre mode de paiement.'
+        product_eligibility: 'Le produit %productName% a été désactivé.'
+        shipping_method_eligibility: 'Ce produit n''est pas éligible au mode de livraison %shippingMethodName%. Veuillez sélectionner une nouvelle fois votre mode de livraison.'
     locale:
         code:
             not_blank: Veuillez saisir le code de la locale.
@@ -81,6 +84,8 @@ sylius:
     user:
         email:
             unique: Cet e-mail est déjà utilisé.
+            min: L'e-mail doit contenir au moins {{ min }} caractères.
+            max: L'e-mail doit contenir au plus {{ max }} caractères.
             invalid: Cet e-mail n'est pas valide.
         username:
             unique: Ce nom d'utilisateur est déjà utilisé.

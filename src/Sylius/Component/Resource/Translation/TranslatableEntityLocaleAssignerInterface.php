@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Translation;
 
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 interface TranslatableEntityLocaleAssignerInterface
 {
     /**
      * @param TranslatableInterface $translatableEntity
      */
-    public function assignLocale(TranslatableInterface $translatableEntity);
+    public function assignLocale(TranslatableInterface $translatableEntity): void;
 }

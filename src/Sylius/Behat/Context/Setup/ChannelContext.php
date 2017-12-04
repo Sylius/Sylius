@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -16,14 +18,10 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Sylius\Component\Core\Currency\CurrencyStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ChannelContext implements Context
 {
     /**
@@ -73,6 +71,16 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given :channel channel has account verification disabled
+     */
+    public function channelHasAccountVerificationDisabled(ChannelInterface $channel): void
+    {
+        $channel->setAccountVerificationRequired(false);
+
+        $this->channelManager->flush();
+    }
+
+    /**
      * @Given the store operates on a single channel in "United States"
      */
     public function storeOperatesOnASingleChannelInUnitedStates()
@@ -111,9 +119,10 @@ final class ChannelContext implements Context
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency$/
      * @Given the store operates on a channel identified by :code code
      */
-    public function theStoreOperatesOnAChannelNamed($channelIdentifier, $currencyCode = null)
+    public function theStoreOperatesOnAChannelNamed($channelName, $currencyCode = null)
     {
-        $defaultData = $this->defaultChannelFactory->create($channelIdentifier, $channelIdentifier, $currencyCode);
+        $channelCode = StringInflector::nameToLowercaseCode($channelName);
+        $defaultData = $this->defaultChannelFactory->create($channelCode, $channelName, $currencyCode);
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);

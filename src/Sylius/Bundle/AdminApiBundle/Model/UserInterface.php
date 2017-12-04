@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Model;
 
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface UserInterface extends BaseUserInterface
 {
 }

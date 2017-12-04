@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
+use PHPUnit\Framework\Assert;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProductAttributeApiTest extends JsonApiTestCase
 {
     /**
@@ -56,7 +56,6 @@ final class ProductAttributeApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/product_attributes.yml');
-
 
         $this->client->request('GET', '/api/v1/product-attributes/', [], [], static::$authorizedHeaderWithAccept);
 
@@ -293,9 +292,9 @@ EOT;
             "code": "mug_color",
             "configuration": {
                 "choices": [
-                    "yellow",
-                    "green",
-                    "black"
+                    {"en_US": "yellow", "fr_FR": "jaune"},
+                    {"en_US": "green"},
+                    {"en_US": "black"}
                 ],
                 "multiple": true,
                 "min": 1,
@@ -316,6 +315,13 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product_attribute/create_select_response', Response::HTTP_CREATED);
+
+        $expectedChoiceValues = [
+            ['en_US' => 'yellow', 'fr_FR' => 'jaune'],
+            ['en_US' => 'green'],
+            ['en_US' => 'black'],
+        ];
+        $this->assertSelectChoicesInResponse($response, $expectedChoiceValues);
     }
 
     /**
@@ -326,5 +332,29 @@ EOT;
     private function getProductAttributeUrl(ProductAttributeInterface $productAttribute)
     {
         return '/api/v1/product-attributes/' . $productAttribute->getCode();
+    }
+
+    /**
+     * @param Response $response
+     * @param array|string[] $expectedChoiceValues
+     */
+    private function assertSelectChoicesInResponse(Response $response, array $expectedChoiceValues): void
+    {
+        $responseContent = json_decode($response->getContent(), true);
+        Assert::assertArrayHasKey('configuration', $responseContent);
+
+        $configuration = $responseContent['configuration'];
+        Assert::assertArrayHasKey('choices', $configuration);
+
+        $choices = $configuration['choices'];
+        Assert::assertCount(count($expectedChoiceValues), $choices);
+
+        foreach ($expectedChoiceValues as $expectedChoiceValue) {
+            Assert::assertContains($expectedChoiceValue, $choices);
+        }
+
+        foreach ($choices as $choiceKey => $choiceValue) {
+            Assert::assertRegExp('/^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i', $choiceKey);
+        }
     }
 }

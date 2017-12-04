@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,9 +20,6 @@ use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Channel extends BaseChannel implements ChannelInterface
 {
     /**
@@ -89,7 +88,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getBaseCurrency()
+    public function getBaseCurrency(): ?CurrencyInterface
     {
         return $this->baseCurrency;
     }
@@ -97,7 +96,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setBaseCurrency(CurrencyInterface $baseCurrency)
+    public function setBaseCurrency(?CurrencyInterface $baseCurrency): void
     {
         $this->baseCurrency = $baseCurrency;
     }
@@ -105,7 +104,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultLocale()
+    public function getDefaultLocale(): ?LocaleInterface
     {
         return $this->defaultLocale;
     }
@@ -113,7 +112,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultLocale(LocaleInterface $defaultLocale)
+    public function setDefaultLocale(?LocaleInterface $defaultLocale): void
     {
         $this->defaultLocale = $defaultLocale;
     }
@@ -121,7 +120,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultTaxZone()
+    public function getDefaultTaxZone(): ?ZoneInterface
     {
         return $this->defaultTaxZone;
     }
@@ -129,7 +128,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultTaxZone(ZoneInterface $defaultTaxZone = null)
+    public function setDefaultTaxZone(?ZoneInterface $defaultTaxZone): void
     {
         $this->defaultTaxZone = $defaultTaxZone;
     }
@@ -137,7 +136,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getTaxCalculationStrategy()
+    public function getTaxCalculationStrategy(): ?string
     {
         return $this->taxCalculationStrategy;
     }
@@ -145,7 +144,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setTaxCalculationStrategy($taxCalculationStrategy)
+    public function setTaxCalculationStrategy(?string $taxCalculationStrategy): void
     {
         $this->taxCalculationStrategy = $taxCalculationStrategy;
     }
@@ -153,7 +152,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrencies()
+    public function getCurrencies(): Collection
     {
         return $this->currencies;
     }
@@ -161,7 +160,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function addCurrency(CurrencyInterface $currency)
+    public function addCurrency(CurrencyInterface $currency): void
     {
         if (!$this->hasCurrency($currency)) {
             $this->currencies->add($currency);
@@ -171,7 +170,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function removeCurrency(CurrencyInterface $currency)
+    public function removeCurrency(CurrencyInterface $currency): void
     {
         if ($this->hasCurrency($currency)) {
             $this->currencies->removeElement($currency);
@@ -181,7 +180,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCurrency(CurrencyInterface $currency)
+    public function hasCurrency(CurrencyInterface $currency): bool
     {
         return $this->currencies->contains($currency);
     }
@@ -189,7 +188,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocales()
+    public function getLocales(): Collection
     {
         return $this->locales;
     }
@@ -197,7 +196,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function addLocale(LocaleInterface $locale)
+    public function addLocale(LocaleInterface $locale): void
     {
         if (!$this->hasLocale($locale)) {
             $this->locales->add($locale);
@@ -207,7 +206,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function removeLocale(LocaleInterface $locale)
+    public function removeLocale(LocaleInterface $locale): void
     {
         if ($this->hasLocale($locale)) {
             $this->locales->removeElement($locale);
@@ -217,7 +216,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function hasLocale(LocaleInterface $locale)
+    public function hasLocale(LocaleInterface $locale): bool
     {
         return $this->locales->contains($locale);
     }
@@ -225,7 +224,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getThemeName()
+    public function getThemeName(): ?string
     {
         return $this->themeName;
     }
@@ -233,7 +232,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setThemeName($themeName)
+    public function setThemeName(?string $themeName): void
     {
         $this->themeName = $themeName;
     }
@@ -241,7 +240,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getContactEmail()
+    public function getContactEmail(): ?string
     {
         return $this->contactEmail;
     }
@@ -249,7 +248,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setContactEmail($contactEmail)
+    public function setContactEmail(?string $contactEmail): void
     {
         $this->contactEmail = $contactEmail;
     }
@@ -257,7 +256,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function isSkippingShippingStepAllowed()
+    public function isSkippingShippingStepAllowed(): bool
     {
         return $this->skippingShippingStepAllowed;
     }
@@ -265,7 +264,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setSkippingShippingStepAllowed($skippingShippingStepAllowed)
+    public function setSkippingShippingStepAllowed(bool $skippingShippingStepAllowed): void
     {
         $this->skippingShippingStepAllowed = $skippingShippingStepAllowed;
     }
@@ -273,7 +272,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function isSkippingPaymentStepAllowed()
+    public function isSkippingPaymentStepAllowed(): bool
     {
         return $this->skippingPaymentStepAllowed;
     }
@@ -281,7 +280,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setSkippingPaymentStepAllowed($skippingPaymentStepAllowed)
+    public function setSkippingPaymentStepAllowed(bool $skippingPaymentStepAllowed): void
     {
         $this->skippingPaymentStepAllowed = $skippingPaymentStepAllowed;
     }
@@ -289,7 +288,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function isAccountVerificationRequired()
+    public function isAccountVerificationRequired(): bool
     {
         return $this->accountVerificationRequired;
     }
@@ -297,7 +296,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setAccountVerificationRequired($accountVerificationRequired)
+    public function setAccountVerificationRequired(bool $accountVerificationRequired): void
     {
         $this->accountVerificationRequired = $accountVerificationRequired;
     }

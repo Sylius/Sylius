@@ -9,29 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Promotion\Checker\Rule;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class CartQuantityRuleCheckerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CartQuantityRuleChecker::class);
-    }
-
-    function it_is_a_rule_checker()
+    function it_is_a_rule_checker(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_recognizes_empty_subject_as_not_eligible(CountablePromotionSubjectInterface $subject)
+    function it_recognizes_empty_subject_as_not_eligible(CountablePromotionSubjectInterface $subject): void
     {
         $subject->getPromotionSubjectCount()->willReturn(0);
 
@@ -40,7 +33,7 @@ final class CartQuantityRuleCheckerSpec extends ObjectBehavior
 
     function it_recognizes_a_subject_as_not_eligible_if_a_cart_quantity_is_less_then_configured(
         CountablePromotionSubjectInterface $subject
-    ) {
+    ): void {
         $subject->getPromotionSubjectCount()->willReturn(7);
 
         $this->isEligible($subject, ['count' => 10])->shouldReturn(false);
@@ -48,7 +41,7 @@ final class CartQuantityRuleCheckerSpec extends ObjectBehavior
 
     function it_recognizes_a_subject_as_eligible_if_a_cart_quantity_is_greater_then_configured(
         CountablePromotionSubjectInterface $subject
-    ) {
+    ): void {
         $subject->getPromotionSubjectCount()->willReturn(12);
 
         $this->isEligible($subject, ['count' => 10])->shouldReturn(true);
@@ -56,7 +49,7 @@ final class CartQuantityRuleCheckerSpec extends ObjectBehavior
 
     function it_recognizes_a_subject_as_eligible_if_a_cart_quantity_is_equal_with_configured(
         CountablePromotionSubjectInterface $subject
-    ) {
+    ): void {
         $subject->getPromotionSubjectCount()->willReturn(10);
 
         $this->isEligible($subject, ['count' => 10])->shouldReturn(true);

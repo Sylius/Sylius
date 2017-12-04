@@ -18,10 +18,3 @@ Sylius\Component\Shipping\Model\ShippingMethod:
             expose: true
             type: string
             groups: [Default, Detailed]
-    relations:
-        -   rel: self
-            href:
-                route: sylius_admin_api_shipping_method_show
-                parameters:
-                    code: expr(object.getCode())
-                    version: 1

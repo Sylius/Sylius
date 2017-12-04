@@ -17,3 +17,10 @@ sylius_admin_api:
         api_user:
             classes:
                 model: "%sylius.model.admin_user.class%"
+
+jms_serializer:
+    metadata:
+        directories:
+            sylius-core:
+                namespace_prefix: "Sylius\\Component\\Core"
+                path: "@SyliusAdminApiBundle/Resources/config/serializer"

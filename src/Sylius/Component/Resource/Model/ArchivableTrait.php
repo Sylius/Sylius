@@ -9,32 +9,32 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Model;
 
 /**
  * @see ArchivableInterface
- *
- * @author Jan Góralski <jan.goralski@lakion.com>
  */
 trait ArchivableTrait
 {
     /**
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
     protected $archivedAt;
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
-    public function getArchivedAt()
+    public function getArchivedAt(): ?\DateTimeInterface
     {
         return $this->archivedAt;
     }
 
     /**
-     * @param \DateTime|null $archivedAt
+     * @param \DateTimeInterface|null $archivedAt
      */
-    public function setArchivedAt(\DateTime $archivedAt = null)
+    public function setArchivedAt(?\DateTimeInterface $archivedAt): void
     {
         $this->archivedAt = $archivedAt;
     }

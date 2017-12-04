@@ -17,6 +17,11 @@ sylius:
             starts_at: Data rozpoczęcia
             usage_limit: Limit użycia
         promotion_action:
+            item_fixed_discount: Stała kwota zniżki na przedmioty
+            item_percentage_discount: Procentowa kwota zniżki na przedmioty
+            order_fixed_discount: Stała kwota zniżki na zamówienie
+            order_percentage_discount: Procentowa kwota zniżki na zamówienie
+            shipping_percentage_discount: Procentowa kwota zniżki na koszty wysyłki
             fixed_discount_configuration:
                 amount: Kwota
             percentage_discount_configuration:
@@ -33,6 +38,15 @@ sylius:
         promotion_filter:
             price_range: Zakres ceny
         promotion_rule:
+            cart_quantity: Ilość
+            contains_product: Zawiera produkt
+            customer_group: Grupa klientów
+            has_at_least_one_from_taxons: Posiada przynajmniej jeden pochodzący z taksonów
+            item_total: Suma
+            nth_order: N-te zamówienie
+            shipping_country: Kraj wysyłki
+            taxonomy: Taksonomia
+            total_price_of_items_from_taxon: Suma cen produktów pochodzących z taksonu
             cart_quantity_configuration:
                 count: Ilość
                 equal: Równe

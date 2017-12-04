@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\Form\DataTransformer;
 
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ProductVariantToProductOptionsTransformer implements DataTransformerInterface
 {
     /**
@@ -38,8 +37,10 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnexpectedTypeException
      */
-    public function transform($value)
+    public function transform($value): array
     {
         if (null === $value) {
             return [];
@@ -60,7 +61,7 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($value)
+    public function reverseTransform($value): ?ProductVariantInterface
     {
         if (null === $value || '' === $value) {
             return null;
@@ -77,8 +78,10 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
      * @param ProductOptionValueInterface[] $optionValues
      *
      * @return ProductVariantInterface|null
+     *
+     * @throws TransformationFailedException
      */
-    private function matches(array $optionValues)
+    private function matches(array $optionValues): ?ProductVariantInterface
     {
         foreach ($this->product->getVariants() as $variant) {
             foreach ($optionValues as $optionValue) {

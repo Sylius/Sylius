@@ -3,8 +3,8 @@ Customizing Grids
 
 .. note::
 
-    We assume that you are familiar with grids. If not check the documentation of the :doc:`Grid Bundle </bundles/SyliusGridBundle/index>`
-    and :doc:`Grid Component </components/Grid/index>` first.
+    We assume that you are familiar with grids. If not check the documentation of the :doc:`Grid Bundle </components_and_bundles/bundles/SyliusGridBundle/index>`
+    and :doc:`Grid Component </components_and_bundles/components/Grid/index>` first.
 
 Why would you customize grids?
 ------------------------------
@@ -283,8 +283,10 @@ In the above example the ``delete`` action and the filters section have been rem
 .. image:: ../_images/overriding_grids.png
     :align: center
 
+.. include:: /customization/plugins.rst.inc
+
 Learn more
 ----------
 
-* :doc:`Grid - Component Documentation </components/Grid/index>`
-* :doc:`Grid - Bundle Documentation </bundles/SyliusGridBundle/index>`
+* :doc:`Grid - Component Documentation </components_and_bundles/components/Grid/index>`
+* :doc:`Grid - Bundle Documentation </components_and_bundles/bundles/SyliusGridBundle/index>`

@@ -9,12 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Canonicalizer;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface CanonicalizerInterface
 {
-    public function canonicalize($string);
+    public function canonicalize(?string $string): ?string;
 }

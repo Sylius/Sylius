@@ -1,0 +1,45 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    credit_card:
+        cardholder_name:
+            min_length: Kortinhaltijan nimessä on oltava vähintään {{ limit }} merkkiä.
+            not_blank: Kirjoita kortinhaltijan nimi.
+        expiry_month:
+            max_range: Kortin voimassaolon päättymiskuukauden on oltava väliltä {{ min }}–{{ max }}.
+            min_range: Kortin voimassaolon päättymiskuukauden on oltava väliltä {{ min }}–{{ max }}.
+            not_blank: Valitse voimassaolon päättymiskuukausi.
+        number:
+            not_blank: Kirjoita kortin numero.
+            luhn: Ilmoittamasi luottokortti ei kelpaa.
+        security_code:
+            not_blank: Kirjoita varmistuskoodi.
+            max_length: Luottokortin CVV-koodissa vähintään {{ limit }} merkkiä.
+            min_length: Luottokortin CVV-koodissa saa olla enintään {{ limit }} merkkiä.
+        expiry_year:
+            not_blank: Valitse voimassaolon päättymisvuosi.
+    payment:
+        currency_code:
+            not_valid: Ilmoittamasi valuuttakoodi ei kelpaa.
+        method:
+            not_blank: 'Valitse maksutapa.'
+    payment_method:
+        gateway:
+            not_blank: Valitse maksutavan yhdyskäytävä.
+        name:
+            max_length: Maksutavan nimessä saa olla enintään {{ limit }} merkkiä.
+            min_length: Maksutavan nimessä on oltava vähintään {{ limit }} merkkiä.
+            not_blank: Kirjoita maksutavan nimi.
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: Palkkio voi olla enintään {{ compared_value }}.
+                not_blank: Kirjoita palkkion määrä.
+            percent:
+                max_range: Prosentuaalinen palkkio voi olla enintään {{ limit }}.
+                min_range: Prosentuaalisen palkkion on oltava vähintään {{ limit }}.
+                not_blank: Kirjoita palkkion määrä prosentteina.
+        code:
+            not_blank: 'Kirjoita maksutavan koodi.'
+            regex: 'Maksutavan koodissa voi olla vain kirjaimia, numeroita, ajatusviivoja ja alaviivoja.'
+            unique: 'Tällä koodilla varustettu maksutapa on jo olemassa.'

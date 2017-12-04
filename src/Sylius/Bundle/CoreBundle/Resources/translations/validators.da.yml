@@ -2,10 +2,93 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        base_currency:
+            not_blank: Angiv venligst kanalens basisvaluta.
+        default_locale:
+            not_blank: Angiv venligst standard landekode for kanalen.
+        contact_email:
+            invalid: Denne email er ugyldig.
+            max: Emailen må ikke være længere end {{ limit }} tegn.
+            min: Emailen skal være mindst {{ limit }} tegn.
+    channel_pricing:
+        price:
+            min: Prisen skal være mindst {{ limit }}.
+            not_blank: Angiv prisen.
+    checkout:
+        shipping_method:
+            not_blank: Vælg venligst forsendelsesmetode.
     contact:
         email:
+            invalid: Denne email er ugyldig.
             not_blank: Indtast venligst din email.
+        message:
+            not_blank: Indtast venligst din besked.
+    currency:
+        enabled:
+            cannot_disable_base: Grundvalutaen kan ikke deaktiveres.
+    customer:
+        currency_code:
+            not_valid: Valutakoden du indtastede er ugyldig.
+    cart_item:
+        not_available: '%itemName% har ikke tilstrækkeligt lager.'
+    order:
+        currency_code:
+            not_valid: Valutakoden du indtastede er ugyldig.
+        payment_method_eligibility: 'Denne betaling metode %paymentMethodName% er blevet deaktiveret. Venligst Vælg din betalingsmetode.'
+        product_eligibility: 'Dette produkt %productName% er blevet deaktiveret.'
+        shipping_method_eligibility: 'Produktet passer ikke krav til %shippingMethodName% forsendelsesmetode. Vælg venligst din forsendelsesmetode.'
     locale:
         code:
             not_blank: Venligst angiv landekode.
             unique: Denne landekode eksisterer allerede.
+        enabled:
+            cannot_disable_base: Grundvalutaen kan ikke deaktiveres.
+    product:
+        variants:
+            all_prices_defined: Du skal definere produktvariant-priser for nyligt tildelte kanaler først.
+    product_attribute:
+        invalid: Position skal være et heltal.
+    product_image:
+        file:
+            max_size: Billedet er for stort - {{ size }}{{ suffix }}. Maksimalt tilladte størrelse er {{ limit }}{{ suffix }}.
+            upload_ini_size: Billedet er for stort. Maksimalt tilladte størrelse er {{ limit }}{{ suffix }}.
+    product_variant:
+        onHand:
+            min: Lagerantal skal være større end {{ limit }}.
+            not_blank: Angiv venligst lagerantal.
+            reserved: Antal enheder på lager skal være større end antal reserverede
+        original_price:
+            min: Den originale pris må ikke være negativ.
+        weight:
+            min: Vægten må ikke være negativ.
+            invalid: Vægt skal være et tal.
+        width:
+            min: Bredde må ikke være negativ.
+            invalid: Bredden skal være et tal.
+        height:
+            min: Højden kan ikke være negativ.
+            invalid: Højden skal være et tal.
+        depth:
+            min: Dybden kan ikke være negativ.
+            invalid: Dybden skal være et tal.
+        channel_pricing:
+            all_defined: 'Du skal definere pris for hver kanal.'
+    product_translation:
+        short_description:
+            max: Den korte beskrivelse må ikke være længere end {{ limit }} tegn.
+    taxon_image:
+        file:
+            max_size: Billedet er for stort - {{ size }}{{ suffix }}. Maksimalt tilladte størrelse er {{ limit }}{{ suffix }}.
+            upload_ini_size: Billedet er for stort. Maksimalt tilladte størrelse er {{ limit }}{{ suffix }}.
+    user:
+        email:
+            unique: Denne e-mail er allerede i brug.
+            min: E-mailen skal være mindst {{ min }} tegn.
+            max: E-mailen må have maximum {{ max }} tegn.
+            invalid: Denne email er ugyldig.
+        username:
+            unique: Brugernavnet er allerede i brug.
+            not_blank: Angiv venligst dit navn.
+        locale_code:
+            not_blank: Vælg venligst en landekode.

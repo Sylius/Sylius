@@ -9,20 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository as BaseUserRepository;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class UserRepository extends BaseUserRepository implements UserRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function findOneByEmail($email)
+    public function findOneByEmail(string $email): ?UserInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.customer', 'customer')

@@ -12,7 +12,7 @@ There are two types of resources in **Sylius**:
 * registered by default - their names begin with ``sylius.*`` for example: ``sylius.product``
 * custom resources, from your application which have a separate convention. We place them under ``sylius_resource:`` ``resource_name:`` in the ``config.yml``. For these we recommend using the naming convention of ``app.*`` for instance ``app.my_entity``.
 
-Sylius resource management system lives in the **SyliusResourceBundle** and can be used in any Symfony2 project.
+Sylius resource management system lives in the **SyliusResourceBundle** and can be used in any Symfony project.
 
 Services
 ~~~~~~~~
@@ -188,6 +188,6 @@ Creating a product using custom form and a redirection method:
                     route: app_product_index # Redirect the user to his products.
                     parameters: [$store]
 
-All other methods have the same level of flexibility and are documented in the :doc:`Resource Bundle Guide </bundles/SyliusResourceBundle/index>`.
+All other methods have the same level of flexibility and are documented in the :doc:`Resource Bundle Guide </components_and_bundles/bundles/SyliusResourceBundle/index>`.
 
 .. _`ObjectManager`: http://www.doctrine-project.org/api/common/2.4/class-Doctrine.Common.Persistence.ObjectManager.html

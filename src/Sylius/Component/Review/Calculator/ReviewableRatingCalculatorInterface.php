@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Review\Calculator;
 
 use Sylius\Component\Review\Model\ReviewableInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ReviewableRatingCalculatorInterface
 {
     /**
@@ -24,5 +22,5 @@ interface ReviewableRatingCalculatorInterface
      *
      * @return float
      */
-    public function calculate(ReviewableInterface $reviewable);
+    public function calculate(ReviewableInterface $reviewable): float;
 }

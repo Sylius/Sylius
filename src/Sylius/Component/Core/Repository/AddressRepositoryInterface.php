@@ -9,24 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Repository;
 
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface AddressRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param CustomerInterface $customer
      *
-     * @return AddressInterface[]
+     * @return array|AddressInterface[]
      */
-    public function findByCustomer(CustomerInterface $customer);
+    public function findByCustomer(CustomerInterface $customer): array;
 
     /**
      * @param string $id
@@ -34,5 +32,5 @@ interface AddressRepositoryInterface extends RepositoryInterface
      *
      * @return AddressInterface|null
      */
-    public function findOneByCustomer($id, CustomerInterface $customer);
+    public function findOneByCustomer(string $id, CustomerInterface $customer): ?AddressInterface;
 }

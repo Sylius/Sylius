@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Asset\Installer;
 
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class OutputAwareAssetsInstaller implements AssetsInstallerInterface, OutputAwareInterface
 {
     /**
@@ -42,7 +41,7 @@ final class OutputAwareAssetsInstaller implements AssetsInstallerInterface, Outp
     /**
      * {@inheritdoc}
      */
-    public function setOutput(OutputInterface $output)
+    public function setOutput(OutputInterface $output): void
     {
         $this->output = $output;
     }
@@ -50,7 +49,7 @@ final class OutputAwareAssetsInstaller implements AssetsInstallerInterface, Outp
     /**
      * {@inheritdoc}
      */
-    public function installAssets($targetDir, $symlinkMask)
+    public function installAssets(string $targetDir, int $symlinkMask): int
     {
         $this->output->writeln($this->provideExpectationComment($symlinkMask));
 
@@ -60,9 +59,13 @@ final class OutputAwareAssetsInstaller implements AssetsInstallerInterface, Outp
     /**
      * {@inheritdoc}
      */
-    public function installBundleAssets(BundleInterface $bundle, $targetDir, $symlinkMask)
+    public function installBundleAssets(BundleInterface $bundle, string $targetDir, int $symlinkMask): int
     {
-        $this->output->writeln(sprintf('Installing assets for <comment>%s</comment>', $bundle->getNamespace(), $targetDir));
+        $this->output->writeln(sprintf(
+            'Installing assets for <comment>%s</comment> into <comment>%s</comment>',
+            $bundle->getNamespace(),
+            $targetDir
+        ));
 
         $effectiveSymlinkMask = $this->assetsInstaller->installBundleAssets($bundle, $targetDir, $symlinkMask);
 
@@ -77,7 +80,7 @@ final class OutputAwareAssetsInstaller implements AssetsInstallerInterface, Outp
      *
      * @return string
      */
-    private function provideResultComment($symlinkMask, $effectiveSymlinkMask)
+    private function provideResultComment(int $symlinkMask, int $effectiveSymlinkMask): string
     {
         if ($effectiveSymlinkMask === $symlinkMask) {
             switch ($symlinkMask) {
@@ -106,7 +109,7 @@ final class OutputAwareAssetsInstaller implements AssetsInstallerInterface, Outp
      *
      * @return string
      */
-    private function provideExpectationComment($symlinkMask)
+    private function provideExpectationComment(int $symlinkMask): string
     {
         if (AssetsInstallerInterface::HARD_COPY === $symlinkMask) {
             return 'Installing assets as <comment>hard copies</comment>.';

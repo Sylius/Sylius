@@ -29,7 +29,8 @@ sylius:
             date:
                 format: Formátum
             select:
-                values: Értékek
+                values: 'Értékek'
+                choose: Válassz egy lehetőséget
             text:
                 min: Minimális hossz
                 max: Maximális hossz

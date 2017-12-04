@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UserBundle\Tests\Functional;
 
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Container;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
- */
 final class SyliusUserBundleTest extends KernelTestCase
 {
     /**

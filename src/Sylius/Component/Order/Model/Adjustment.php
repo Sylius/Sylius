@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
-use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Adjustment implements AdjustmentInterface
 {
     use TimestampableTrait;
@@ -27,27 +25,27 @@ class Adjustment implements AdjustmentInterface
     protected $id;
 
     /**
-     * @var OrderInterface
+     * @var OrderInterface|null
      */
     protected $order;
 
     /**
-     * @var OrderItemInterface
+     * @var OrderItemInterface|null
      */
     protected $orderItem;
 
     /**
-     * @var OrderItemUnitInterface
+     * @var OrderItemUnitInterface|null
      */
     protected $orderItemUnit;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $label;
 
@@ -67,7 +65,7 @@ class Adjustment implements AdjustmentInterface
     protected $locked = false;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $originCode;
 
@@ -87,7 +85,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdjustable()
+    public function getAdjustable(): ?AdjustableInterface
     {
         if (null !== $this->order) {
             return $this->order;
@@ -107,7 +105,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function setAdjustable(AdjustableInterface $adjustable = null)
+    public function setAdjustable(?AdjustableInterface $adjustable): void
     {
         $this->assertNotLocked();
 
@@ -132,7 +130,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -140,7 +138,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function setType($type)
+    public function setType(?string $type): void
     {
         $this->type = $type;
     }
@@ -148,7 +146,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->label;
     }
@@ -156,7 +154,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function setLabel($label)
+    public function setLabel(?string $label): void
     {
         $this->label = $label;
     }
@@ -164,20 +162,16 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getAmount()
+    public function getAmount(): int
     {
         return $this->amount;
     }
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \InvalidArgumentException
      */
-    public function setAmount($amount)
+    public function setAmount(int $amount): void
     {
-        Assert::integer($amount, 'Amount must be an integer.');
-
         $this->amount = $amount;
         if (!$this->isNeutral()) {
             $this->recalculateAdjustable();
@@ -187,7 +181,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function isNeutral()
+    public function isNeutral(): bool
     {
         return $this->neutral;
     }
@@ -195,10 +189,8 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function setNeutral($neutral)
+    public function setNeutral(bool $neutral): void
     {
-        $neutral = (bool) $neutral;
-
         if ($this->neutral !== $neutral) {
             $this->neutral = $neutral;
             $this->recalculateAdjustable();
@@ -208,17 +200,23 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function isLocked()
+    public function isLocked(): bool
     {
         return $this->locked;
     }
 
-    public function lock()
+    /**
+     * {@inheritdoc}
+     */
+    public function lock(): void
     {
         $this->locked = true;
     }
 
-    public function unlock()
+    /**
+     * {@inheritdoc}
+     */
+    public function unlock(): void
     {
         $this->locked = false;
     }
@@ -226,7 +224,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function isCharge()
+    public function isCharge(): bool
     {
         return 0 > $this->amount;
     }
@@ -234,7 +232,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function isCredit()
+    public function isCredit(): bool
     {
         return 0 < $this->amount;
     }
@@ -242,7 +240,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getOriginCode()
+    public function getOriginCode(): ?string
     {
         return $this->originCode;
     }
@@ -250,12 +248,12 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function setOriginCode($originCode)
+    public function setOriginCode(?string $originCode): void
     {
         $this->originCode = $originCode;
     }
 
-    private function recalculateAdjustable()
+    private function recalculateAdjustable(): void
     {
         $adjustable = $this->getAdjustable();
         if (null !== $adjustable) {
@@ -268,7 +266,7 @@ class Adjustment implements AdjustmentInterface
      *
      * @throws \InvalidArgumentException
      */
-    private function assignAdjustable(AdjustableInterface $adjustable)
+    private function assignAdjustable(AdjustableInterface $adjustable): void
     {
         if ($adjustable instanceof OrderInterface) {
             $this->order = $adjustable;
@@ -294,7 +292,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * @throws \LogicException
      */
-    private function assertNotLocked()
+    private function assertNotLocked(): void
     {
         if ($this->isLocked()) {
             throw new \LogicException('Adjustment is locked and cannot be modified.');

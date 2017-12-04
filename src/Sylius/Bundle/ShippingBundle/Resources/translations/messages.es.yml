@@ -16,7 +16,7 @@ sylius:
                 ready: Listo
                 shipped: Enviado
                 returned: Devuelto
-                cancelled: Cancelado/a
+                cancelled: Cancelado
             tracking_code: Código de seguimiento
         shipping_calculator:
             flat_rate_configuration:
@@ -36,7 +36,10 @@ sylius:
             configuration: Configuración
             description: Descripción
             enabled: Activado
+            match_all_category_requirement: Todas las unidades deben coincidir con la categoría del método de envío
+            match_any_category_requirement: Al menos 1 unidad debe coincidir con la categoría del método de envío
+            match_none_category_requirement: Ninguna de las unidades debe coincidir con la categoría del método de envío
             name: Nombre
+            position: Posición
             tax_category: Categoría de impuestos
             translations: Traducciones
-            position: Posición

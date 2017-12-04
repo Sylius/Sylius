@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 abstract class SymfonyPage extends Page implements SymfonyPageInterface
 {
     /**
@@ -85,6 +84,65 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
     }
 
     /**
+     * @param array $requiredUrlParameters
+     *
+     * @throws UnexpectedPageException
+     */
+    public function verifyRoute(array $requiredUrlParameters = [])
+    {
+        $url = $this->getDriver()->getCurrentUrl();
+        $path = parse_url($url)['path'];
+
+        $path = preg_replace('#^/app(_dev|_test|_test_cached)?\.php/#', '/', $path);
+        $matchedRoute = $this->router->match($path);
+
+        $this->verifyRouteName($matchedRoute, $url);
+        $this->verifyRouteParameters($requiredUrlParameters, $matchedRoute);
+    }
+
+    /**
+     * @param array $matchedRoute
+     * @param string $url
+     *
+     * @throws UnexpectedPageException
+     */
+    private function verifyRouteName(array $matchedRoute, string $url)
+    {
+        if ($matchedRoute['_route'] !== $this->getRouteName()) {
+            throw new UnexpectedPageException(
+                sprintf(
+                    "Matched route '%s' does not match the expected route '%s' for URL '%s'",
+                    $matchedRoute['_route'],
+                    $this->getRouteName(),
+                    $url
+                )
+            );
+        }
+    }
+
+    /**
+     * @param array $requiredUrlParameters
+     * @param array $matchedRoute
+     *
+     * @throws UnexpectedPageException
+     */
+    private function verifyRouteParameters(array $requiredUrlParameters, array $matchedRoute)
+    {
+        foreach ($requiredUrlParameters as $key => $value) {
+            if (!isset($matchedRoute[$key]) || $matchedRoute[$key] !== $value) {
+                throw new UnexpectedPageException(
+                    sprintf(
+                        "Matched route does not match the expected parameter '%s'='%s' (%s found)",
+                        $key,
+                        $value,
+                        $matchedRoute[$key] ?? 'null'
+                    )
+                );
+            }
+        }
+    }
+
+    /**
      * @param NodeElement $modalContainer
      * @param string $appearClass
      *
@@ -104,8 +162,8 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
      */
     final protected function makePathAbsolute($path)
     {
-        $baseUrl = rtrim($this->getParameter('base_url'), '/').'/';
+        $baseUrl = rtrim($this->getParameter('base_url'), '/') . '/';
 
-        return 0 !== strpos($path, 'http') ? $baseUrl.ltrim($path, '/') : $path;
+        return 0 !== strpos($path, 'http') ? $baseUrl . ltrim($path, '/') : $path;
     }
 }

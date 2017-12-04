@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
 final class SettingsRequirements extends RequirementCollection
 {
-    const RECOMMENDED_PHP_VERSION = '7.0';
+    public const RECOMMENDED_PHP_VERSION = '7.0';
 
     /**
      * @param TranslatorInterface $translator
@@ -32,7 +34,7 @@ final class SettingsRequirements extends RequirementCollection
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.installer.settings.version_recommended', []),
-                version_compare(phpversion(), self::RECOMMENDED_PHP_VERSION, '>='),
+                version_compare(PHP_VERSION, self::RECOMMENDED_PHP_VERSION, '>='),
                 false
             ))
             ->add(new Requirement(
@@ -53,7 +55,7 @@ final class SettingsRequirements extends RequirementCollection
      *
      * @return bool
      */
-    private function isOn($key)
+    private function isOn(string $key): bool
     {
         $value = ini_get($key);
 

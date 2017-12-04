@@ -78,25 +78,26 @@
 
 {% block collection_widget -%}
     {% from 'SyliusResourceBundle:Macros:notification.html.twig' import error %}
+    {% import _self as self %}
     {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
 
     {% spaceless %}
         <div data-form-type="collection" {{ block('widget_container_attributes') }}
             {% if prototype is defined and allow_add %}
-                data-prototype='{{ _self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
+                data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
             {%- endif -%}
         >
             {{ error(form.vars.errors) }}
 
             {% if prototypes|default is iterable %}
                 {% for key, subPrototype in prototypes %}
-                    <input type="hidden" data-form-prototype="{{ key }}" value="{{ _self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}" />
+                    <input type="hidden" data-form-prototype="{{ key }}" value="{{ self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}" />
                 {% endfor %}
             {% endif %}
 
             <div data-form-collection="list">
                 {% for child in form %}
-                    {{ _self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+                    {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
                 {% endfor %}
             </div>
 
@@ -210,5 +211,21 @@
             <div class="menu"></div>
         </div>
         {{- form_errors(form) -}}
+    </div>
+{% endblock %}
+
+{% block sylius_product_variant_generation_widget %}
+    <div class="ui segment">
+        <div class="ui two column stackable grid">
+            <div class="column">
+                {{ form_row(form.optionValues, {'label': false}) }}
+            </div>
+            <div class="column">
+                {{ form_row(form.code) }}
+                {{ form_row(form.name) }}
+            </div>
+        </div>
+        <h4 class="ui dividing header">{{ 'sylius.ui.pricing'|trans }}</h4>
+        {{ form_row(form.channelPricings, {'label': false}) }}
     </div>
 {% endblock %}

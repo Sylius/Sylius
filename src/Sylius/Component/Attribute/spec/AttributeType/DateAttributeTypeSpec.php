@@ -9,33 +9,32 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Attribute\AttributeType;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\AttributeType\DateAttributeType;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class DateAttributeTypeSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(DateAttributeType::class);
     }
 
-    function it_implements_attribute_type_interface()
+    function it_implements_attribute_type_interface(): void
     {
         $this->shouldImplement(AttributeTypeInterface::class);
     }
 
-    function its_storage_type_is_text()
+    function its_storage_type_is_text(): void
     {
         $this->getStorageType()->shouldReturn('date');
     }
 
-    function its_type_is_text()
+    function its_type_is_text(): void
     {
         $this->getType()->shouldReturn('date');
     }

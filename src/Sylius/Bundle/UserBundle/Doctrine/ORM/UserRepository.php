@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class UserRepository extends EntityRepository implements UserRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function findOneByEmail($email)
+    public function findOneByEmail(string $email): ?UserInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.emailCanonical = :email')

@@ -9,44 +9,38 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
 use PHPCR\NodeInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameResolverListener;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
  * @require Doctrine\ODM\PHPCR\DocumentManagerInterface
- *
- * @author Daniel Leech <daniel@dantleech.com>
  */
 final class NameResolverListenerSpec extends ObjectBehavior
 {
-    function let(DocumentManagerInterface $documentManager)
+    function let(DocumentManagerInterface $documentManager): void
     {
         $this->beConstructedWith($documentManager);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(NameResolverListener::class);
     }
 
     function it_throws_an_exception_when_the_generator_type_is_not_parent(
         DocumentManagerInterface $documentManager,
         ResourceControllerEvent $event,
         ClassMetadata $metadata
-    ) {
+    ): void {
         $document = new \stdClass();
         $event->getSubject()->willReturn($document);
         $documentManager->getClassMetadata('stdClass')->willReturn($metadata);
         $metadata->idGenerator = 'foo';
 
         $this->shouldThrow(new \RuntimeException('Document of class "stdClass" must be using the GENERATOR_TYPE_PARENT identificatio strategy (value 3), it is current using "foo" (this may be an automatic configuration: be sure to map both the `nodename` and the `parentDocument`).'))->during(
-            'onEvent', [ $event ]
+            'onEvent', [$event]
         );
     }
 
@@ -55,7 +49,7 @@ final class NameResolverListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $metadata,
         NodeInterface $node
-    ) {
+    ): void {
         $document = new \stdClass();
         $parentDocument = new \stdClass();
         $event->getSubject()->willReturn($document);
@@ -80,7 +74,7 @@ final class NameResolverListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $metadata,
         NodeInterface $node
-    ) {
+    ): void {
         $document = new \stdClass();
         $parentDocument = new \stdClass();
         $existingDocument = new \stdClass();

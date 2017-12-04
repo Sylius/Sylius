@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Action;
 
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface PromotionActionCommandInterface
 {
     /**
@@ -26,14 +25,12 @@ interface PromotionActionCommandInterface
      *
      * @return bool
      */
-    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
+    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool;
 
     /**
      * @param PromotionSubjectInterface $subject
      * @param array $configuration
      * @param PromotionInterface $promotion
-     *
-     * @return mixed
      */
-    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void;
 }

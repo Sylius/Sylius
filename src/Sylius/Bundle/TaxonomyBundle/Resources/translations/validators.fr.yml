@@ -5,7 +5,7 @@ sylius:
     taxon:
         code:
             not_blank: Veuillez entrer le code de taxon.
-            regex: Le code du taxon ne peut être constitué que de lettres, nombres et tirets.
+            regex: Le code du taxon ne peut être constitué que de lettres, nombres, tirets et traits de soulignement.
             unique: Ce code de taxon existe déjà.
         name:
             max_length: La taxon ne peux dépasser les 255 caractères.

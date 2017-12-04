@@ -100,7 +100,7 @@ sylius:
             depth: Thellësia
             height: Lartësia
             on_hand: Fondi aktual
-            price: Çmimi
+            price: 'Çmimi'
             sku: SKU
             weight: Pesha
             width: Gjerësia
@@ -161,7 +161,7 @@ sylius:
             writable: I shkrueshëm
         settings:
             header: Parametra dhe version PHP
-            any: Çfarëdo
+            any: 'Çfarëdo'
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: Nuk kundërshtohet
@@ -174,5 +174,5 @@ sylius:
             timezone: Zona orare
             timezone_deprecated:
                 header: Zonë orare e papranueshme
-                help: 'Zona orare %timezone% nuk pranohet. is deprecated. Korrigjo php.ini file (lista e zonave orare të kundërshtuara http://php.net/manual/en/timezones.others.php).'
+                help: Zona orare %timezone% nuk pranohet. is deprecated. Korrigjo php.ini file (lista e zonave orare të kundërshtuara http://php.net/manual/en/timezones.others.php).
             version: Versioni PHP

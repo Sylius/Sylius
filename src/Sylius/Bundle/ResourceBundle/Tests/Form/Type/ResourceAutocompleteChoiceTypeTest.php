@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Tests\Form\Type;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -21,9 +23,6 @@ use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
 {
     /**
@@ -31,14 +30,14 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
      */
     private $resourceRepositoryRegistry;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->resourceRepositoryRegistry = $this->prophesize(ServiceRegistryInterface::class);
 
         parent::setUp();
     }
 
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         $resourceAutoCompleteType = new ResourceAutocompleteChoiceType($this->resourceRepositoryRegistry->reveal());
 
@@ -50,7 +49,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_returns_resource_from_its_code()
+    public function it_returns_resource_from_its_code(): void
     {
         $resourceRepository = $this->prophesize(RepositoryInterface::class);
         $resource = $this->prophesize(ResourceInterface::class);
@@ -72,7 +71,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_returns_resource_from_its_id()
+    public function it_returns_resource_from_its_id(): void
     {
         $resourceRepository = $this->prophesize(RepositoryInterface::class);
         $resource = $this->prophesize(ResourceInterface::class);
@@ -94,7 +93,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_returns_different_resource_from_its_identifier()
+    public function it_returns_different_resource_from_its_identifier(): void
     {
         $resourceRepository = $this->prophesize(RepositoryInterface::class);
         $resource = $this->prophesize(ResourceInterface::class);
@@ -116,7 +115,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_has_identifier_as_view_value()
+    public function it_has_identifier_as_view_value(): void
     {
         $resourceRepository = $this->prophesize(RepositoryInterface::class);
         $resource = $this->prophesize(ResourceInterface::class);
@@ -138,7 +137,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_has_different_view_based_on_passed_configuration()
+    public function it_has_different_view_based_on_passed_configuration(): void
     {
         $resourceRepository = $this->prophesize(RepositoryInterface::class);
         $resource = $this->prophesize(ResourceInterface::class);
@@ -161,7 +160,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_returns_collection_of_resources_from_identifiers()
+    public function it_returns_collection_of_resources_from_identifiers(): void
     {
         $resourceRepository = $this->prophesize(RepositoryInterface::class);
         $mug = $this->prophesize(ResourceInterface::class);
@@ -190,7 +189,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function its_resource_option_should_be_string()
+    public function its_resource_option_should_be_string(): void
     {
         $this->expectException(InvalidOptionsException::class);
 
@@ -204,7 +203,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function its_choice_name_option_should_be_string()
+    public function its_choice_name_option_should_be_string(): void
     {
         $this->expectException(InvalidOptionsException::class);
 
@@ -218,7 +217,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function its_choice_value_option_should_be_string()
+    public function its_choice_value_option_should_be_string(): void
     {
         $this->expectException(InvalidOptionsException::class);
 
@@ -232,7 +231,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function its_multiple_option_should_be_boolean()
+    public function its_multiple_option_should_be_boolean(): void
     {
         $this->expectException(InvalidOptionsException::class);
 
@@ -246,7 +245,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function its_placeholder_option_should_be_string()
+    public function its_placeholder_option_should_be_string(): void
     {
         $this->expectException(InvalidOptionsException::class);
 
@@ -260,7 +259,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_cannot_be_created_without_resource_option()
+    public function it_cannot_be_created_without_resource_option(): void
     {
         $this->expectException(MissingOptionsException::class);
 
@@ -274,7 +273,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_cannot_be_created_without_choice_name_option()
+    public function it_cannot_be_created_without_choice_name_option(): void
     {
         $this->expectException(MissingOptionsException::class);
 
@@ -288,7 +287,7 @@ final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_cannot_be_created_without_choice_value_option()
+    public function it_cannot_be_created_without_choice_value_option(): void
     {
         $this->expectException(MissingOptionsException::class);
 

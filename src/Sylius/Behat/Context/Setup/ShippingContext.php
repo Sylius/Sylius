@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -28,9 +30,6 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ShippingContext implements Context
 {
     /**
@@ -177,7 +176,7 @@ final class ShippingContext implements Context
             'zone' => $this->getShippingZone(),
         ]);
 
-        $shippingMethod->setPosition($position);
+        $shippingMethod->setPosition((int) $position);
 
         $this->saveShippingMethod($shippingMethod);
     }
@@ -199,8 +198,9 @@ final class ShippingContext implements Context
 
     /**
      * @Given the store allows shipping with :firstName and :secondName
+     * @Given the store allows shipping with :firstName, :secondName and :thirdName
      */
-    public function theStoreAllowsShippingWithAnd(...$names)
+    public function theStoreAllowsShippingWithAnd(string ...$names): void
     {
         foreach ($names as $name) {
             $this->theStoreAllowsShippingMethodWithName($name);
@@ -274,18 +274,26 @@ final class ShippingContext implements Context
     }
 
     /**
+     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee per unit for ("[^"]+" channel)$/
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee per unit for ("[^"]+" channel) and ("[^"]+") for ("[^"]+" channel)$/
      */
     public function storeHasShippingMethodWithFeePerUnitForChannels(
         $shippingMethodName,
         $firstFee,
         ChannelInterface $firstChannel,
-        $secondFee,
-        ChannelInterface $secondChannel
+        $secondFee = null,
+        ChannelInterface $secondChannel = null
     ) {
         $configuration = [];
+        $channels = [];
+
         $configuration[$firstChannel->getCode()] = ['amount' => $firstFee];
-        $configuration[$secondChannel->getCode()] = ['amount' => $secondFee];
+        $channels[] = $firstChannel;
+
+        if (null !== $secondFee) {
+            $configuration[$secondChannel->getCode()] = ['amount' => $secondFee];
+            $channels[] = $secondChannel;
+        }
 
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
             'name' => $shippingMethodName,
@@ -295,7 +303,7 @@ final class ShippingContext implements Context
                 'type' => DefaultCalculators::PER_UNIT_RATE,
                 'configuration' => $configuration,
             ],
-            'channels' => [$firstChannel, $secondChannel],
+            'channels' => $channels,
         ]));
     }
 

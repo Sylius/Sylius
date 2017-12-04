@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is a part of the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\Convert;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentAction;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -24,23 +26,14 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ConvertPaymentActionSpec extends ObjectBehavior
 {
-    function let(
-        InvoiceNumberGeneratorInterface $invoiceNumberGenerator
-    ) {
+    function let(InvoiceNumberGeneratorInterface $invoiceNumberGenerator): void
+    {
         $this->beConstructedWith($invoiceNumberGenerator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ConvertPaymentAction::class);
-    }
-
-    function it_implements_action_interface()
+    function it_implements_action_interface(): void
     {
         $this->shouldImplement(ActionInterface::class);
     }
@@ -53,7 +46,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
         ProductInterface $product
-    ) {
+    ): void {
         $request->getTo()->willReturn('array');
 
         $payment->getId()->willReturn(19);
@@ -62,7 +55,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         $order->getId()->willReturn(92);
         $order->getCurrencyCode()->willReturn('PLN');
         $order->getTotal()->willReturn(88000);
-        $order->getItems()->willReturn([$orderItem]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->getAdjustmentsTotalRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->willReturn(0);
         $order->getOrderPromotionTotal()->willReturn(0);
         $order->getShippingTotal()->willReturn(8000);
@@ -97,7 +90,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         $this->execute($request);
     }
 
-    function it_throws_exception_when_source_is_not_a_payment_interface(Convert $request)
+    function it_throws_exception_when_source_is_not_a_payment_interface(Convert $request): void
     {
         $request->getSource()->willReturn(null);
 

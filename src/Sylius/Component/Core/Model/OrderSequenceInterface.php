@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderSequenceInterface as BaseOrderSequenceInterface;
 use Sylius\Component\Resource\Model\VersionedInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface OrderSequenceInterface extends BaseOrderSequenceInterface, VersionedInterface
 {
 }

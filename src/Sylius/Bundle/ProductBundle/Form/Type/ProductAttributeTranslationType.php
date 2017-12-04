@@ -9,19 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeTranslationType;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ProductAttributeTranslationType extends AttributeTranslationType
 {
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_product_attribute_translation';
     }

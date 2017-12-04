@@ -9,24 +9,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Order\Aggregator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
-use Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(AdjustmentsByLabelAggregator::class);
-    }
-
-    function it_implements_adjustments_aggregator_interface()
+    function it_implements_adjustments_aggregator_interface(): void
     {
         $this->shouldImplement(AdjustmentsAggregatorInterface::class);
     }
@@ -36,7 +29,7 @@ final class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
         AdjustmentInterface $adjustment2,
         AdjustmentInterface $adjustment3,
         AdjustmentInterface $adjustment4
-    ) {
+    ): void {
         $adjustment1->getLabel()->willReturn('tax 1');
         $adjustment1->getAmount()->willReturn(1000);
         $adjustment2->getLabel()->willReturn('tax 1');
@@ -55,7 +48,7 @@ final class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
     function it_throws_exception_if_any_array_element_is_not_adjustment(
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2
-    ) {
+    ): void {
         $adjustment1->getLabel()->willReturn('tax 1');
         $adjustment1->getAmount()->willReturn(1000);
         $adjustment2->getLabel()->willReturn('tax 1');

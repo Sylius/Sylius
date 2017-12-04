@@ -24,14 +24,6 @@
             <argument type="service" id="router" />
         </service>
 
-        <service id="sylius.controller.impersonate_user" class="Sylius\Bundle\AdminBundle\Controller\ImpersonateUserController">
-            <argument type="service" id="sylius.security.user_impersonator" />
-            <argument type="service" id="security.authorization_checker" />
-            <argument type="service" id="sylius.shop_user_provider.email_or_name_based" />
-            <argument type="service" id="router" />
-            <argument type="string">ROLE_ADMINISTRATION_ACCESS</argument>
-        </service>
-
         <service id="sylius.controller.customer_statistics" class="Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController">
             <argument type='service' id="sylius.customer_statistics_provider" />
             <argument type='service' id="sylius.repository.customer" />
@@ -42,6 +34,7 @@
             <argument type="service" id="sylius.http_client" />
             <argument type="service" id="sylius.http_message_factory" />
             <argument type="string">%sylius.admin.notification.uri%</argument>
+            <argument type="string">%kernel.environment%</argument>
         </service>
     </services>
 </container>

@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Attribute\Model\AttributeTranslation as BaseAttributeTranslation;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class ProductAttributeTranslation extends BaseAttributeTranslation implements ProductAttributeTranslationInterface
 {
 }

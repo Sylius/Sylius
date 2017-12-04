@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Tests\Configuration;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\ThemeBundle\Configuration\ThemeConfiguration;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
@@ -24,7 +24,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_requires_only_name()
+    public function it_requires_only_name(): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -38,7 +38,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_name_is_required_and_cannot_be_empty()
+    public function its_name_is_required_and_cannot_be_empty(): void
     {
         $this->assertPartialConfigurationIsInvalid(
             [
@@ -58,7 +58,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_title_is_optional_but_cannot_be_empty()
+    public function its_title_is_optional_but_cannot_be_empty(): void
     {
         $this->assertPartialConfigurationIsInvalid(
             [
@@ -78,7 +78,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_description_is_optional_but_cannot_be_empty()
+    public function its_description_is_optional_but_cannot_be_empty(): void
     {
         $this->assertPartialConfigurationIsInvalid(
             [
@@ -98,7 +98,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_path_is_optional_but_cannot_be_empty()
+    public function its_path_is_optional_but_cannot_be_empty(): void
     {
         $this->assertPartialConfigurationIsInvalid(
             [
@@ -118,7 +118,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_authors_are_optional()
+    public function its_authors_are_optional(): void
     {
         $this->assertConfigurationIsValid(
             [
@@ -131,7 +131,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_author_can_have_only_name_email_homepage_and_role_properties()
+    public function its_author_can_have_only_name_email_homepage_and_role_properties(): void
     {
         $this->assertConfigurationIsValid(
             [
@@ -172,7 +172,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_author_must_have_at_least_one_property()
+    public function its_author_must_have_at_least_one_property(): void
     {
         $this->assertPartialConfigurationIsInvalid(
             [
@@ -186,7 +186,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_authors_replaces_other_authors_defined_elsewhere()
+    public function its_authors_replaces_other_authors_defined_elsewhere(): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -201,7 +201,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_ignores_undefined_root_level_fields()
+    public function it_ignores_undefined_root_level_fields(): void
     {
         $this->assertConfigurationIsValid(
             [
@@ -213,7 +213,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_parents_are_optional_but_has_to_have_at_least_one_element()
+    public function its_parents_are_optional_but_has_to_have_at_least_one_element(): void
     {
         $this->assertConfigurationIsValid(
             [
@@ -233,7 +233,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_parent_is_strings()
+    public function its_parent_is_strings(): void
     {
         $this->assertConfigurationIsValid(
             [
@@ -246,7 +246,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_parent_cannot_be_empty()
+    public function its_parent_cannot_be_empty(): void
     {
         $this->assertPartialConfigurationIsInvalid(
             [
@@ -259,7 +259,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_parents_replaces_other_parents_defined_elsewhere()
+    public function its_parents_replaces_other_parents_defined_elsewhere(): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -274,7 +274,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_screenshots_are_strings()
+    public function its_screenshots_are_strings(): void
     {
         $this->assertConfigurationIsValid(
             [
@@ -287,7 +287,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_screenshots_are_optional()
+    public function its_screenshots_are_optional(): void
     {
         $this->assertConfigurationIsValid(
             [
@@ -300,7 +300,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_screenshots_must_have_at_least_one_element()
+    public function its_screenshots_must_have_at_least_one_element(): void
     {
         $this->assertPartialConfigurationIsInvalid(
             [
@@ -313,7 +313,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_screenshots_cannot_be_empty()
+    public function its_screenshots_cannot_be_empty(): void
     {
         $this->assertPartialConfigurationIsInvalid(
             [
@@ -326,7 +326,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_screenshots_replaces_other_screenshots_defined_elsewhere()
+    public function its_screenshots_replaces_other_screenshots_defined_elsewhere(): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -341,7 +341,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_screenshots_are_an_array()
+    public function its_screenshots_are_an_array(): void
     {
         $this->assertConfigurationIsValid(
             [
@@ -354,7 +354,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_screenshots_must_have_a_path()
+    public function its_screenshots_must_have_a_path(): void
     {
         $this->assertPartialConfigurationIsInvalid(
             [
@@ -367,7 +367,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_screenshots_have_optional_title_and_description()
+    public function its_screenshots_have_optional_title_and_description(): void
     {
         $this->assertConfigurationIsValid(
             [
@@ -384,7 +384,7 @@ final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): ConfigurationInterface
     {
         return new ThemeConfiguration();
     }

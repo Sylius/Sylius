@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Review\Factory;
 
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ReviewFactory implements ReviewFactoryInterface
 {
     /**
@@ -36,7 +36,7 @@ final class ReviewFactory implements ReviewFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createNew()
+    public function createNew(): ReviewInterface
     {
         return $this->factory->createNew();
     }
@@ -44,8 +44,9 @@ final class ReviewFactory implements ReviewFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createForSubject(ReviewableInterface $subject)
+    public function createForSubject(ReviewableInterface $subject): ReviewInterface
     {
+        /** @var ReviewInterface $review */
         $review = $this->factory->createNew();
         $review->setReviewSubject($subject);
 
@@ -55,8 +56,9 @@ final class ReviewFactory implements ReviewFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createForSubjectWithReviewer(ReviewableInterface $subject, ReviewerInterface $reviewer = null)
+    public function createForSubjectWithReviewer(ReviewableInterface $subject, ?ReviewerInterface $reviewer): ReviewInterface
     {
+        /** @var ReviewInterface $review */
         $review = $this->createForSubject($subject);
         $review->setAuthor($reviewer);
 

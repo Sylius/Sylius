@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Data;
 
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DataSourceProvider implements DataSourceProviderInterface
 {
     /**
@@ -36,7 +35,7 @@ final class DataSourceProvider implements DataSourceProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getDataSource(Grid $grid, Parameters $parameters)
+    public function getDataSource(Grid $grid, Parameters $parameters): DataSourceInterface
     {
         $driverName = $grid->getDriver();
 

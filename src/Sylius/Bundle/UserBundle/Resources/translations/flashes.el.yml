@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        expire_password_reset_token: 'Το διακριτικό επαναφοράς του κωδικού πρόσβασης σας έχει λήξει.'
+        change_password: 'Το συνθηματικό σας άλλαξε επιτυχώς!'
+        reset_password: 'Η επαναφορά του κωδικού πρόσβασης σας ολοκληρώθηκε με επιτυχία!'
+        reset_password_request: 'Εάν το email που καθορίσατε υπάρχει στο σύστημά μας, έχουμε στείλει εκεί οδηγίες για το πώς να επαναφέρετε τον κωδικό πρόσβασης σας.'
+        verify_email: 'Το email σας έχει επαληθευτεί με επιτυχία.'
+        verify_email_by_invalid_token: 'Το διακριτικό επαλήθευσης δεν είναι έγκυρο.'
+        verify_email_request: 'Ένα email με σύνδεσμο επαλήθευσης έχει σταλεί στην διεύθυνση email σας.'
+        verify_no_user: 'Δεν υπάρχει κανένας συνδεδεμένος χρήστης.'
+        verify_verified_email: 'Το email σας έχει ήδη επαληθευτεί.'

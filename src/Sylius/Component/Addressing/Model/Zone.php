@@ -9,15 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class Zone implements ZoneInterface
 {
     /**
@@ -26,22 +24,22 @@ class Zone implements ZoneInterface
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $scope = Scope::ALL;
 
@@ -58,15 +56,15 @@ class Zone implements ZoneInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function getTypes()
+    public static function getTypes(): array
     {
         return [self::TYPE_COUNTRY, self::TYPE_PROVINCE, self::TYPE_ZONE];
     }
@@ -82,7 +80,7 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -90,7 +88,7 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
@@ -98,7 +96,7 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -106,7 +104,7 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -114,7 +112,7 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -124,9 +122,9 @@ class Zone implements ZoneInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function setType($type)
+    public function setType(?string $type): void
     {
-        if (!in_array($type, self::getTypes())) {
+        if (!in_array($type, static::getTypes(), true)) {
             throw new \InvalidArgumentException('Wrong zone type supplied.');
         }
 
@@ -136,7 +134,7 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function getScope()
+    public function getScope(): ?string
     {
         return $this->scope;
     }
@@ -144,7 +142,7 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function setScope($scope)
+    public function setScope(?string $scope): void
     {
         $this->scope = $scope;
     }
@@ -152,7 +150,7 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function getMembers()
+    public function getMembers(): Collection
     {
         return $this->members;
     }
@@ -160,7 +158,7 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function hasMembers()
+    public function hasMembers(): bool
     {
         return !$this->members->isEmpty();
     }
@@ -168,7 +166,7 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function addMember(ZoneMemberInterface $member)
+    public function addMember(ZoneMemberInterface $member): void
     {
         if (!$this->hasMember($member)) {
             $this->members->add($member);
@@ -179,7 +177,7 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function removeMember(ZoneMemberInterface $member)
+    public function removeMember(ZoneMemberInterface $member): void
     {
         if ($this->hasMember($member)) {
             $this->members->removeElement($member);
@@ -190,7 +188,7 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function hasMember(ZoneMemberInterface $member)
+    public function hasMember(ZoneMemberInterface $member): bool
     {
         return $this->members->contains($member);
     }

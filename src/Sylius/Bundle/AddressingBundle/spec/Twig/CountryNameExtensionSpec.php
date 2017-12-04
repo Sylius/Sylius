@@ -9,35 +9,33 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\AddressingBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AddressingBundle\Twig\CountryNameExtension;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class CountryNameExtensionSpec extends ObjectBehavior
 {
-    function it_is_a_twig_extension()
+    function it_is_a_twig_extension(): void
     {
         $this->shouldHaveType(\Twig_Extension::class);
     }
 
-    function it_translates_country_iso_code_into_name()
+    function it_translates_country_iso_code_into_name(): void
     {
         $this->translateCountryIsoCode('IE')->shouldReturn('Ireland');
     }
 
-    function it_translates_country_into_name(CountryInterface $country)
+    function it_translates_country_into_name(CountryInterface $country): void
     {
         $country->getCode()->willReturn('IE');
 
         $this->translateCountryIsoCode($country)->shouldReturn('Ireland');
     }
 
-    function it_translates_country_code_to_name_according_to_locale()
+    function it_translates_country_code_to_name_according_to_locale(): void
     {
         $this->translateCountryIsoCode('IE', 'es')->shouldReturn('Irlanda');
     }

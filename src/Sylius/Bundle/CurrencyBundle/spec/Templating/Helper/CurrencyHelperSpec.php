@@ -9,35 +9,27 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CurrencyHelperSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CurrencyHelper::class);
-    }
-
-    function it_is_a_templating_helper()
+    function it_is_a_templating_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_implements_a_currency_helper_interface()
+    function it_implements_a_currency_helper_interface(): void
     {
         $this->shouldImplement(CurrencyHelperInterface::class);
     }
 
-    function it_transforms_a_currency_code_into_symbol()
+    function it_transforms_a_currency_code_into_symbol(): void
     {
         $this->convertCurrencyCodeToSymbol('USD')->shouldReturn('$');
     }

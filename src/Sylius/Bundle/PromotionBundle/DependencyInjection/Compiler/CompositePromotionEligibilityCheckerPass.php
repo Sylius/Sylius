@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class CompositePromotionEligibilityCheckerPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has('sylius.promotion_eligibility_checker')) {
             return;
@@ -35,7 +34,7 @@ final class CompositePromotionEligibilityCheckerPass implements CompilerPassInte
                     return new Reference($id);
                 },
                 array_keys($container->findTaggedServiceIds('sylius.promotion_eligibility_checker'))
-            )
+            ),
         ]);
     }
 }

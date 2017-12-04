@@ -9,17 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UserBundle\Provider;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
+use Symfony\Component\Security\Core\User\UserInterface;
+
 class UsernameOrEmailProvider extends AbstractUserProvider
 {
     /**
      * {@inheritdoc}
      */
-    protected function findUser($usernameOrEmail)
+    protected function findUser(string $usernameOrEmail): ?UserInterface
     {
         if (filter_var($usernameOrEmail, FILTER_VALIDATE_EMAIL)) {
             return $this->userRepository->findOneByEmail($usernameOrEmail);

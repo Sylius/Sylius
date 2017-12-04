@@ -4,6 +4,6 @@
 jms_serializer:
     metadata:
         directories:
-            sylius-user:
+            sylius-customer:
                 namespace_prefix: "Sylius\\Component\\Customer"
                 path: "@SyliusCustomerBundle/Resources/config/serializer"

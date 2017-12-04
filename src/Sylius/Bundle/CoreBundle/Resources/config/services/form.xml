@@ -93,9 +93,6 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionFilterCollectionType" />
         </service>
         <service id="sylius.form.extension.type.shipping_method" class="Sylius\Bundle\CoreBundle\Form\Extension\ShippingMethodTypeExtension">
-            <argument type="service" id="sylius.registry.shipping_rule_checker" />
-            <argument type="service" id="sylius.registry.shipping_calculator" />
-            <argument type="service" id="sylius.form_registry.shipping_calculator" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType" />
         </service>
         <service id="sylius.form.extension.type.product" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductTypeExtension">
@@ -196,6 +193,7 @@
             <argument>%sylius.model.customer.class%</argument>
             <argument>%sylius.form.type.customer_guest.validation_groups%</argument>
             <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.factory.customer" />
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.customer_simple_registration" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerSimpleRegistrationType">

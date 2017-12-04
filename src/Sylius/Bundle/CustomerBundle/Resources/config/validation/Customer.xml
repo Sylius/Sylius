@@ -60,8 +60,6 @@
                 </option>
             </constraint>
             <constraint name="Length">
-                <option name="min">2</option>
-                <option name="minMessage">sylius.customer.email.min</option>
                 <option name="max">254</option>
                 <option name="maxMessage">sylius.customer.email.max</option>
                 <option name="groups">

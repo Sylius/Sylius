@@ -3,7 +3,7 @@
 {% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
 {% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
 
-{% block title %}{{ parent() }} {{ 'sylius.ui.edit_order'|trans ~' #'~ order.number }}{% endblock %}
+{% block title %}{{ 'sylius.ui.edit_order'|trans ~' #'~ order.number }} {{ parent() }}{% endblock %}
 
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
@@ -27,7 +27,7 @@
 
 {{ form_start(form, {'action': path('sylius_admin_order_update', {'id': order.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     <div class="ui segment">
-        <input type="hidden" name="_method" value="PATCH" />
+        <input type="hidden" name="_method" value="PUT" />
 
         <div class="ui segment">
             <h4 class="ui dividing header">{{ 'sylius.ui.shipping_address'|trans }}</h4>

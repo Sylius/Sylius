@@ -9,15 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * This bundle contains default Sylius administration panel.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusAdminBundle extends Bundle
 {
 }

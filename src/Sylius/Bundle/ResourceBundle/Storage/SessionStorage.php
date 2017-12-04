@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Storage;
 
 use Sylius\Component\Resource\Storage\StorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class SessionStorage implements StorageInterface
 {
     /**
@@ -35,7 +34,7 @@ final class SessionStorage implements StorageInterface
     /**
      * {@inheritdoc}
      */
-    public function has($name)
+    public function has(string $name): bool
     {
         return $this->session->has($name);
     }
@@ -43,7 +42,7 @@ final class SessionStorage implements StorageInterface
     /**
      * {@inheritdoc}
      */
-    public function get($name, $default = null)
+    public function get(string $name, $default = null)
     {
         return $this->session->get($name, $default);
     }
@@ -51,15 +50,15 @@ final class SessionStorage implements StorageInterface
     /**
      * {@inheritdoc}
      */
-    public function set($name, $value)
+    public function set(string $name, $value): void
     {
-        return $this->session->set($name, $value);
+        $this->session->set($name, $value);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function remove($name)
+    public function remove(string $name): void
     {
         $this->session->remove($name);
     }
@@ -67,7 +66,7 @@ final class SessionStorage implements StorageInterface
     /**
      * {@inheritdoc}
      */
-    public function all()
+    public function all(): array
     {
         return $this->session->all();
     }

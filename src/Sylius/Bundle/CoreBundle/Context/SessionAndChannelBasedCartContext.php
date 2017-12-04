@@ -9,35 +9,23 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Context;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class SessionAndChannelBasedCartContext implements CartContextInterface
 {
     /**
-     * @var SessionInterface
+     * @var CartStorageInterface
      */
-    private $session;
-
-    /**
-     * @var string
-     */
-    private $sessionKeyName;
-
-    /**
-     * @var OrderRepositoryInterface
-     */
-    private $orderRepository;
+    private $cartStorage;
 
     /**
      * @var ChannelContextInterface
@@ -45,45 +33,33 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
     private $channelContext;
 
     /**
-     * @param SessionInterface $session
-     * @param string $sessionKeyName
+     * @param CartStorageInterface $cartStorage
      * @param ChannelContextInterface $channelContext
-     * @param OrderRepositoryInterface $orderRepository
      */
-    public function __construct(
-        SessionInterface $session,
-        $sessionKeyName,
-        ChannelContextInterface $channelContext,
-        OrderRepositoryInterface $orderRepository
-    ) {
-        $this->session = $session;
-        $this->sessionKeyName = $sessionKeyName;
+    public function __construct(CartStorageInterface $cartStorage, ChannelContextInterface $channelContext)
+    {
+        $this->cartStorage = $cartStorage;
         $this->channelContext = $channelContext;
-        $this->orderRepository = $orderRepository;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCart()
+    public function getCart(): OrderInterface
     {
         try {
             $channel = $this->channelContext->getChannel();
         } catch (ChannelNotFoundException $exception) {
-            throw new CartNotFoundException($exception);
+            throw new CartNotFoundException(null, $exception);
         }
 
-        if (!$this->session->has(sprintf('%s.%s', $this->sessionKeyName, $channel->getCode()))) {
+        if (!$this->cartStorage->hasForChannel($channel)) {
             throw new CartNotFoundException('Sylius was not able to find the cart in session');
         }
 
-        $cart = $this->orderRepository->findCartByChannel(
-            $this->session->get(sprintf('%s.%s', $this->sessionKeyName, $channel->getCode())),
-            $channel
-        );
-
+        $cart = $this->cartStorage->getForChannel($channel);
         if (null === $cart) {
-            $this->session->remove(sprintf('%s.%s', $this->sessionKeyName, $channel->getCode()));
+            $this->cartStorage->removeForChannel($channel);
 
             throw new CartNotFoundException('Sylius was not able to find the cart in session');
         }

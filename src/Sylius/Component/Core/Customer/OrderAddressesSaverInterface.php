@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Customer;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface OrderAddressesSaverInterface
 {
     /**
      * @param OrderInterface $order
      */
-    public function saveAddresses(OrderInterface $order);
+    public function saveAddresses(OrderInterface $order): void;
 }

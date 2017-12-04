@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -19,9 +21,6 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ManagingTaxRateContext implements Context
 {
     /**
@@ -136,9 +135,10 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
+     * @Then I should see the tax rate :taxRateName in the list
      * @Then the tax rate :taxRateName should appear in the registry
      */
-    public function theTaxRateShouldAppearInTheRegistry($taxRateName)
+    public function theTaxRateShouldAppearInTheRegistry(string $taxRateName): void
     {
         $this->indexPage->open();
 
@@ -288,6 +288,38 @@ final class ManagingTaxRateContext implements Context
     public function iDoNotSpecifyRelatedTaxCategory()
     {
         // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @When I check (also) the :taxRateName tax rate
+     */
+    public function iCheckTheTaxRate(string $taxRateName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $taxRateName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @When I browse tax rates
+     */
+    public function iWantToBrowseTaxRates(): void
+    {
+        $this->indexPage->open();
+    }
+
+    /**
+     * @Then I should see a single tax rate in the list
+     */
+    public function iShouldSeeASingleTaxRateInTheList(): void
+    {
+        Assert::same($this->indexPage->countItems(), 1);
     }
 
     /**

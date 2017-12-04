@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Data;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class UnsupportedDriverException extends \InvalidArgumentException
 {
     /**
      * @param string $name
      */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         parent::__construct(sprintf('Grid data driver "%s" is not supported.', $name));
     }

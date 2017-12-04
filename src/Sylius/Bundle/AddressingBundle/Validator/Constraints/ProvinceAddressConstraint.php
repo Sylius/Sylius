@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
 /**
  * Constraint to require a province to be valid.
- *
- * @author Julien Janvier <j.janvier@gmail.com>
  */
 class ProvinceAddressConstraint extends Constraint
 {
@@ -28,7 +28,7 @@ class ProvinceAddressConstraint extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
@@ -36,7 +36,7 @@ class ProvinceAddressConstraint extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'sylius_province_address_validator';
     }

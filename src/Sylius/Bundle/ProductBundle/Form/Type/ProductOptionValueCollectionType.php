@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -16,27 +18,25 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webmozart\Assert\Assert;
 
 /**
  * This is special collection type, inspired by original 'collection' type
  * implementation, designed to handle option values assigned to object variant.
  * Array of OptionInterface objects should be passed as 'options' option to build proper
  * set of choice types with option values list.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ProductOptionValueCollectionType extends AbstractType
 {
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
+     * @throws InvalidConfigurationException
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        if ($this->areOptionsValid($options)) {
-            throw new InvalidConfigurationException(
-                'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Variation\Model\OptionInterface" must be passed to collection'
-            );
-        }
+        $this->assertOptionsAreValid($options);
 
         foreach ($options['options'] as $i => $option) {
             if (!$option instanceof ProductOptionInterface) {
@@ -48,15 +48,16 @@ final class ProductOptionValueCollectionType extends AbstractType
             $builder->add((string) $option->getCode(), ProductOptionValueChoiceType::class, [
                 'label' => $option->getName() ?: $option->getCode(),
                 'option' => $option,
-                'property_path' => '['.$i.']',
+                'property_path' => '[' . $i . ']',
                 'block_name' => 'entry',
             ]);
         }
     }
+
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
@@ -64,10 +65,11 @@ final class ProductOptionValueCollectionType extends AbstractType
             ])
         ;
     }
+
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_product_option_value_collection';
     }
@@ -75,14 +77,15 @@ final class ProductOptionValueCollectionType extends AbstractType
     /**
      * @param mixed $options
      *
-     * @return bool
+     * @throws \InvalidArgumentException
      */
-    private function areOptionsValid($options)
+    private function assertOptionsAreValid($options)
     {
-        return
+        Assert::false((
             !isset($options['options']) ||
             !is_array($options['options']) &&
-            !($options['options'] instanceof \Traversable && $options['options'] instanceof \ArrayAccess)
-        ;
+            !($options['options'] instanceof \Traversable && $options['options'] instanceof \ArrayAccess)),
+            'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Variation\Model\OptionInterface" must be passed to collection'
+        );
     }
 }

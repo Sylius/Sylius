@@ -5,6 +5,7 @@ sylius:
     channel:
         code:
             not_blank: Lütfen kanal kodunu giriniz.
+            regex: Kanal kodu yalnızca harf, sayı, tire ve alt çizgi oluşur.
             unique: Kanal kodunun diğerlerinden farklı olması gerekir.
         name:
             not_blank: Lütfen kanal ismini giriniz.

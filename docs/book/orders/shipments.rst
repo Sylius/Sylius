@@ -130,4 +130,4 @@ There are two events that are triggered on the shipment ``ship`` action:
 Learn more
 ----------
 
-* :doc:`Shipping - Component Documentation </components/Shipping/index>`
+* :doc:`Shipping - Component Documentation </components_and_bundles/components/Shipping/index>`

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use Doctrine\Common\Persistence\ObjectRepository;
@@ -24,10 +26,6 @@ use Symfony\Component\Form\FormInterface;
 
 /**
  * @internal
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Jan Góralski <jan.goralski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class BuildAddressFormSubscriber implements EventSubscriberInterface
 {
@@ -54,7 +52,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -65,9 +63,9 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function preSetData(FormEvent $event)
+    public function preSetData(FormEvent $event): void
     {
-        /* @var AddressInterface $address */
+        /** @var AddressInterface $address */
         $address = $event->getData();
         if (null === $address) {
             return;
@@ -78,7 +76,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /* @var CountryInterface $country */
+        /** @var CountryInterface $country */
         $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
         if (null === $country) {
             return;
@@ -98,7 +96,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function preSubmit(FormEvent $event)
+    public function preSubmit(FormEvent $event): void
     {
         $data = $event->getData();
         if (!is_array($data) || !array_key_exists('countryCode', $data)) {
@@ -109,7 +107,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /* @var CountryInterface $country */
+        /** @var CountryInterface $country */
         $country = $this->countryRepository->findOneBy(['code' => $data['countryCode']]);
         if (null === $country) {
             return;
@@ -132,11 +130,13 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
      *
      * @return FormInterface
      */
-    private function createProvinceCodeChoiceForm(CountryInterface $country, $provinceCode = null)
+    private function createProvinceCodeChoiceForm(CountryInterface $country, ?string $provinceCode = null): FormInterface
     {
         return $this->formFactory->createNamed('provinceCode', ProvinceCodeChoiceType::class, $provinceCode, [
             'country' => $country,
             'auto_initialize' => false,
+            'label' => 'sylius.form.address.province',
+            'placeholder' => 'sylius.form.province.select',
         ]);
     }
 
@@ -145,11 +145,12 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
      *
      * @return FormInterface
      */
-    private function createProvinceNameTextForm($provinceName = null)
+    private function createProvinceNameTextForm(?string $provinceName = null): FormInterface
     {
         return $this->formFactory->createNamed('provinceName', TextType::class, $provinceName, [
             'required' => false,
             'auto_initialize' => false,
+            'label' => 'sylius.form.address.province',
         ]);
     }
 }

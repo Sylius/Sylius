@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Extension;
 
 use Payum\Core\Extension\Context;
@@ -26,7 +28,7 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
     /**
      * @var FactoryInterface
      */
-    protected $factory;
+    private $factory;
 
     /**
      * @param FactoryInterface $factory
@@ -39,29 +41,29 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
     /**
      * {@inheritdoc}
      */
-    public function onPreExecute(Context $context)
+    public function onPreExecute(Context $context): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function onExecute(Context $context)
+    public function onExecute(Context $context): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function onPostExecute(Context $context)
+    public function onPostExecute(Context $context): void
     {
         $previousStack = $context->getPrevious();
         $previousStackSize = count($previousStack);
-        
+
         if ($previousStackSize > 1) {
             return;
         }
-        
+
         if ($previousStackSize === 1) {
             $previousActionClassName = get_class($previousStack[0]->getAction());
             if (false === stripos($previousActionClassName, 'NotifyNullAction')) {
@@ -96,7 +98,7 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
      * @param PaymentInterface $payment
      * @param string $nextState
      */
-    protected function updatePaymentState(PaymentInterface $payment, $nextState)
+    private function updatePaymentState(PaymentInterface $payment, string $nextState): void
     {
         $stateMachine = $this->factory->get($payment, PaymentTransitions::GRAPH);
 

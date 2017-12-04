@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Modifier;
 
 use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
 {
     /**
@@ -35,7 +34,7 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
     /**
      * {@inheritdoc}
      */
-    public function modify(OrderItemInterface $orderItem, $targetQuantity)
+    public function modify(OrderItemInterface $orderItem, int $targetQuantity): void
     {
         $currentQuantity = $orderItem->getQuantity();
         if (0 >= $targetQuantity || $currentQuantity === $targetQuantity) {
@@ -53,7 +52,7 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
      * @param OrderItemInterface $orderItem
      * @param int $increaseBy
      */
-    private function increaseUnitsNumber(OrderItemInterface $orderItem, $increaseBy)
+    private function increaseUnitsNumber(OrderItemInterface $orderItem, int $increaseBy): void
     {
         for ($i = 0; $i < $increaseBy; ++$i) {
             $this->orderItemUnitFactory->createForItem($orderItem);
@@ -64,7 +63,7 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
      * @param OrderItemInterface $orderItem
      * @param int $decreaseBy
      */
-    private function decreaseUnitsNumber(OrderItemInterface $orderItem, $decreaseBy)
+    private function decreaseUnitsNumber(OrderItemInterface $orderItem, int $decreaseBy): void
     {
         foreach ($orderItem->getUnits() as $unit) {
             if (0 >= $decreaseBy--) {

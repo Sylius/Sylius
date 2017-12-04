@@ -66,7 +66,7 @@ getting a list of recommended products from your external api.
          *
          * @return Response
          */
-        public function showAction(Request $request)
+        public function showAction(Request $request): Response
         {
             $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -148,7 +148,7 @@ If you still need the methods of the original HomepageController, then copy its 
          *
          * @return Response
          */
-        public function indexAction(Request $request)
+        public function indexAction(Request $request): Response
         {
             return $this->templatingEngine->renderResponse('@SyliusShop/Homepage/index.html.twig');
         }
@@ -158,7 +158,7 @@ If you still need the methods of the original HomepageController, then copy its 
          *
          * @return Response
          */
-        public function customAction(Request $request)
+        public function customAction(Request $request): Response
         {
             // Put your custom logic here
         }
@@ -187,3 +187,5 @@ Remember to import the ``app/config/services.yml`` into the ``app/config/config.
     Run ``$ php bin/console debug:container sylius.controller.shop.homepage`` to check if the class has changed to your implementation.
 
 From now on your ``customAction`` of the ``HomepageController`` will be available alongside the ``indexAction`` from the base class.
+
+.. include:: /customization/plugins.rst.inc

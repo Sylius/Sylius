@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Provider;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface ProductVariantsPricesProviderInterface
 {
     /**
@@ -25,5 +24,5 @@ interface ProductVariantsPricesProviderInterface
      *
      * @return array
      */
-    public function provideVariantsPrices(ProductInterface $product, ChannelInterface $channel);
+    public function provideVariantsPrices(ProductInterface $product, ChannelInterface $channel): array;
 }

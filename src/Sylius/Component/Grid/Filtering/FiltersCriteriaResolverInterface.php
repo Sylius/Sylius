@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Filtering;
 
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface FiltersCriteriaResolverInterface
 {
     /**
@@ -25,7 +24,7 @@ interface FiltersCriteriaResolverInterface
      *
      * @return bool
      */
-    public function hasCriteria(Grid $grid, Parameters $parameters);
+    public function hasCriteria(Grid $grid, Parameters $parameters): bool;
 
     /**
      * @param Grid $grid
@@ -33,5 +32,5 @@ interface FiltersCriteriaResolverInterface
      *
      * @return array
      */
-    public function getCriteria(Grid $grid, Parameters $parameters);
+    public function getCriteria(Grid $grid, Parameters $parameters): array;
 }

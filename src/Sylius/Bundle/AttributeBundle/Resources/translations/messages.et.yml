@@ -4,6 +4,8 @@
 sylius:
     form:
         attribute:
+            code: Kood
+            name: Nimi
             type: Tüüp
         attribute_type:
             select: Vali

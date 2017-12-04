@@ -4,4 +4,14 @@
 sylius:
     form:
         review:
-            author: Автор
+            author: 'Автор'
+            comment: 'Коментар'
+            header: 'Добави отзив'
+            rating: 'Рейтинг'
+            status:
+                approved: 'Одобрен'
+                label: 'Статус'
+                new: 'Ново'
+                rejected: 'Отхвърлен'
+            submit: 'Изпрати'
+            title: 'Заглавие'

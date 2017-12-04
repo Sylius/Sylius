@@ -9,31 +9,24 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Currency\Converter;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Currency\Converter\CurrencyConverter;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
-/**
- * @author Łukasz Chruściel <lchrusciel@gmail.com>
- */
 final class CurrencyConverterSpec extends ObjectBehavior
 {
-    function let(ExchangeRateRepositoryInterface $exchangeRateRepository)
+    function let(ExchangeRateRepositoryInterface $exchangeRateRepository): void
     {
         $this->beConstructedWith($exchangeRateRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CurrencyConverter::class);
-    }
-
-    function it_implements_a_currency_converter_interface()
+    function it_implements_a_currency_converter_interface(): void
     {
         $this->shouldImplement(CurrencyConverterInterface::class);
     }
@@ -42,7 +35,7 @@ final class CurrencyConverterSpec extends ObjectBehavior
         ExchangeRateRepositoryInterface $exchangeRateRepository,
         CurrencyInterface $sourceCurrency,
         ExchangeRateInterface $exchangeRate
-    ) {
+    ): void {
         $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'USD')->willReturn($exchangeRate);
         $exchangeRate->getRatio()->willReturn(1.30);
         $exchangeRate->getSourceCurrency()->willReturn($sourceCurrency);
@@ -56,7 +49,7 @@ final class CurrencyConverterSpec extends ObjectBehavior
         ExchangeRateRepositoryInterface $exchangeRateRepository,
         CurrencyInterface $sourceCurrency,
         ExchangeRateInterface $exchangeRate
-    ) {
+    ): void {
         $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'USD')->willReturn($exchangeRate);
         $exchangeRate->getRatio()->willReturn(1.30);
         $exchangeRate->getSourceCurrency()->willReturn($sourceCurrency);
@@ -68,7 +61,7 @@ final class CurrencyConverterSpec extends ObjectBehavior
 
     function it_return_given_value_if_exchange_rate_for_given_currency_pair_has_not_been_found(
         ExchangeRateRepositoryInterface $exchangeRateRepository
-    ) {
+    ): void {
         $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'USD')->willReturn(null);
 
         $this->convert(666, 'GBP', 'USD')->shouldReturn(666);
@@ -76,7 +69,7 @@ final class CurrencyConverterSpec extends ObjectBehavior
 
     function it_return_given_value_if_both_currencie_in_currency_pair_are_the_same(
         ExchangeRateRepositoryInterface $exchangeRateRepository
-    ) {
+    ): void {
         $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'GBP')->willReturn(null);
 
         $this->convert(666, 'GBP', 'GBP')->shouldReturn(666);

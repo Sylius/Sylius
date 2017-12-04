@@ -9,33 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\AdminApiBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\AdminApiBundle\Form\EventSubscriber\AddUserFormSubscriber;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserAwareInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class AddUserFormSubscriberSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith('\Fully\Qualified\ClassName');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(AddUserFormSubscriber::class);
-    }
-
-    function it_is_event_subscriber_instance()
+    function it_is_event_subscriber_instance(): void
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }
@@ -43,7 +36,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
     function it_adds_user_form_type_and_create_user_check(
         FormEvent $event,
         Form $form
-    ) {
+    ): void {
         $event->getForm()->willReturn($form);
 
         $form->add('user', '\Fully\Qualified\ClassName', Argument::type('array'))->shouldBeCalled();
@@ -55,7 +48,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         Form $form,
         UserAwareInterface $customer
-    ) {
+    ): void {
         $event->getData()->willReturn([], ['user' => ['plainPassword' => '']]);
         $event->getForm()->willReturn($form);
         $form->getNormData()->willReturn($customer);
@@ -73,7 +66,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         Form $form,
         UserAwareInterface $customer,
         UserInterface $user
-    ) {
+    ): void {
         $event->getData()->willReturn(['user' => ['plainPassword' => 'test']]);
         $event->getForm()->willReturn($form);
         $form->getNormData()->willReturn($customer);
@@ -88,7 +81,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         Form $form,
         UserAwareInterface $customer
-    ) {
+    ): void {
         $event->getData()->willReturn(['user' => ['plainPassword' => '']]);
         $event->getForm()->willReturn($form);
         $form->getNormData()->willReturn($customer);
@@ -104,7 +97,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         Form $form,
         UserAwareInterface $customer
-    ) {
+    ): void {
         $event->getData()->willReturn(['user' => ['plainPassword' => 'test']]);
         $event->getForm()->willReturn($form);
         $form->getNormData()->willReturn($customer);
@@ -120,7 +113,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         Form $form,
         UserAwareInterface $customer,
         UserInterface $user
-    ) {
+    ): void {
         $event->getData()->willReturn(['user' => ['plainPassword' => '']]);
         $event->getForm()->willReturn($form);
         $form->getNormData()->willReturn($customer);
@@ -135,7 +128,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         Form $form,
         UserInterface $user
-    ) {
+    ): void {
         $event->getData()->willReturn(['user' => ['plainPassword' => '']]);
         $event->getForm()->willReturn($form);
         $form->getNormData()->willReturn($user);

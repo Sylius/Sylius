@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\Locale;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 interface LocaleSwitcherInterface
 {
     /**
      * @param Request $request
      * @param string $localeCode
      *
-     * @return Response
+     * @return RedirectResponse
      */
-    public function handle(Request $request, $localeCode);
+    public function handle(Request $request, string $localeCode): RedirectResponse;
 }

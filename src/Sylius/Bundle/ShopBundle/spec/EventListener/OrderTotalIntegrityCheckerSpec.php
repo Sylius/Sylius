@@ -9,38 +9,31 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Bundle\ShopBundle\EventListener\OrderTotalIntegrityChecker;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class OrderTotalIntegrityCheckerSpec extends ObjectBehavior
 {
-    function let(OrderProcessorInterface $orderProcessor, RouterInterface $router, ObjectManager $manager)
+    function let(OrderProcessorInterface $orderProcessor, RouterInterface $router, ObjectManager $manager): void
     {
         $this->beConstructedWith($orderProcessor, $router, $manager);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderTotalIntegrityChecker::class);
     }
 
     function it_does_nothing_if_prices_do_not_change(
         OrderProcessorInterface $orderProcessor,
         OrderInterface $order,
         ResourceControllerEvent $event
-    ) {
+    ): void {
         $event->getSubject()->willReturn($order);
 
         $orderProcessor->process($order)->shouldBeCalled();
@@ -60,7 +53,7 @@ final class OrderTotalIntegrityCheckerSpec extends ObjectBehavior
         ObjectManager $manager,
         OrderInterface $order,
         ResourceControllerEvent $event
-    ) {
+    ): void {
         $event->getSubject()->willReturn($order);
 
         $order->getTotal()->willReturn(1000, 1500);
@@ -76,7 +69,7 @@ final class OrderTotalIntegrityCheckerSpec extends ObjectBehavior
         $this->check($event);
     }
 
-    function it_throws_invalid_argument_exception_if_subject_it_not_order(ResourceControllerEvent $event)
+    function it_throws_invalid_argument_exception_if_subject_it_not_order(ResourceControllerEvent $event): void
     {
         $event->getSubject()->willReturn(new \stdClass());
 

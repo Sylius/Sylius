@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Listener;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 interface ListenerInterface extends ConfigurationInterface
 {
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 }

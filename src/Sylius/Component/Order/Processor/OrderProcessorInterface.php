@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Processor;
 
 use Sylius\Component\Order\Model\OrderInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface OrderProcessorInterface
 {
     /**
      * @param OrderInterface $order
      */
-    public function process(OrderInterface $order);
+    public function process(OrderInterface $order): void;
 }

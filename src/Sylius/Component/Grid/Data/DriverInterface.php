@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Data;
 
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface DriverInterface
 {
     /**
@@ -24,5 +23,5 @@ interface DriverInterface
      *
      * @return DataSourceInterface
      */
-    public function getDataSource(array $configuration, Parameters $parameters);
+    public function getDataSource(array $configuration, Parameters $parameters): DataSourceInterface;
 }

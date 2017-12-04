@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Event;
 
 use Knp\Menu\FactoryInterface;
@@ -16,9 +18,6 @@ use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Product\Model\ProductInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class ProductMenuBuilderEvent extends MenuBuilderEvent
 {
     /**
@@ -41,7 +40,7 @@ class ProductMenuBuilderEvent extends MenuBuilderEvent
     /**
      * @return ProductInterface
      */
-    public function getProduct()
+    public function getProduct(): ProductInterface
     {
         return $this->product;
     }

@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Form\FormInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ResourceFormFactoryInterface
 {
     /**
@@ -25,5 +24,5 @@ interface ResourceFormFactoryInterface
      *
      * @return FormInterface
      */
-    public function create(RequestConfiguration $requestConfiguration, ResourceInterface $resource);
+    public function create(RequestConfiguration $requestConfiguration, ResourceInterface $resource): FormInterface;
 }

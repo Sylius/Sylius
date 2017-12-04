@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
@@ -22,10 +24,6 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class UserMailerListener extends MailerListener
 {
     /**
@@ -49,50 +47,35 @@ final class UserMailerListener extends MailerListener
      *
      * @throws UnexpectedTypeException
      */
-    public function sendUserRegistrationEmail(GenericEvent $event)
+    public function sendUserRegistrationEmail(GenericEvent $event): void
     {
         $customer = $event->getSubject();
 
         Assert::isInstanceOf($customer, CustomerInterface::class);
 
-        if (null === ($user = $customer->getUser())) {
+        $user = $customer->getUser();
+        if (null === $user) {
             return;
         }
 
-        if (null === ($email = $customer->getEmail()) || empty($email)) {
+        $email = $customer->getEmail();
+        if (empty($email)) {
             return;
         }
 
-        /** @var ShopUserInterface $user */
         Assert::isInstanceOf($user, ShopUserInterface::class);
 
-        $this->emailSender->send(
-            Emails::USER_REGISTRATION,
-            [
-                $user->getEmail(),
-            ],
-            [
-                'user' => $user,
-            ]
-        );
+        $this->sendEmail($user, Emails::USER_REGISTRATION);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function sendEmail($user, $emailCode)
+    protected function sendEmail(UserInterface $user, string $emailCode): void
     {
-        Assert::isInstanceOf($user, UserInterface::class);
-
-        $this->emailSender->send(
-            $emailCode,
-            [
-                $user->getEmail(),
-            ],
-            [
-                'user' => $user,
-                'channel' => $this->channelContext->getChannel(),
-            ]
-        );
+        $this->emailSender->send($emailCode, [$user->getEmail()], [
+            'user' => $user,
+            'channel' => $this->channelContext->getChannel(),
+        ]);
     }
 }

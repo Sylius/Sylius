@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CurrencyBundle\Validator\Constraints;
 
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
@@ -16,9 +18,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class DifferentSourceTargetCurrencyValidator extends ConstraintValidator
 {
     /**

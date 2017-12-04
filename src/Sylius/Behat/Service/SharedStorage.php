@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Service;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class SharedStorage implements SharedStorageInterface
 {
     /**
@@ -61,7 +60,7 @@ class SharedStorage implements SharedStorageInterface
     public function getLatestResource()
     {
         if (!isset($this->clipboard[$this->latestKey])) {
-            throw new \InvalidArgumentException(sprintf('There is no latest resource!', $this->latestKey));
+            throw new \InvalidArgumentException(sprintf('There is no "%s" latest resource!', $this->latestKey));
         }
 
         return $this->clipboard[$this->latestKey];

@@ -16,7 +16,7 @@ default:
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.product
 
-                - sylius.behat.context.ui.shop.current_channel
+                - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.shop.locale
                 - sylius.behat.context.ui.shop.product
             filters:

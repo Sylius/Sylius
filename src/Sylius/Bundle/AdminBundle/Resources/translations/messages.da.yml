@@ -6,20 +6,35 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Associerede typer
+                    attributes: Egenskaber
+                    header: Katalog
                     inventory: Lager
                     options: Indstillinger
+                    products: Produkter
+                    taxons: Kategorier
                 configuration:
+                    admin_users: Administrator
+                    channels: Kanaler
                     countries: Lande
+                    currencies: Valutaer
+                    exchange_rates: Valutakurser
                     header: Konfiguration
                     locales: Landekoder
                     payment_methods: Betalingsmetoder
+                    shipping_categories: Forsendelseskategorier
                     shipping_methods: Fragtmetoder
+                    tax_categories: Momskategorier
                     tax_rates: Momssatser
                     zones: Zoner
                 marketing:
+                    header: Markedsføring
+                    product_reviews: Produktanmeldelser
                     promotions: Kampagner
                 customers:
+                    customers: Kunder
                     groups: Grupper
+                    header: Kunde
                 sales:
                     header: Salg
                     orders: Ordrer

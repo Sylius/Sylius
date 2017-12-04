@@ -9,6 +9,7 @@ sylius:
                     attributes: Thuộc tính
                     inventory: Hàng tồn kho
                     options: Tùy chọn
+                    taxons: Phân loại
                 configuration:
                     channels: Kênh
                     countries: Quốc gia
@@ -23,4 +24,4 @@ sylius:
                     groups: Nhóm
                     header: Khách hàng
                 sales:
-                    orders: Đơn đặt hàng
+                    orders: 'Đơn đặt hàng'

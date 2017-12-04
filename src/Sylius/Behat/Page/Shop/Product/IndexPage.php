@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Product;
 
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
     /**

@@ -9,136 +9,135 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface OrderInterface extends AdjustableInterface, ResourceInterface, TimestampableInterface
 {
-    const STATE_CART = 'cart';
-    const STATE_NEW = 'new';
-    const STATE_CANCELLED = 'cancelled';
-    const STATE_FULFILLED = 'fulfilled';
+    public const STATE_CART = 'cart';
+    public const STATE_NEW = 'new';
+    public const STATE_CANCELLED = 'cancelled';
+    public const STATE_FULFILLED = 'fulfilled';
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface|null
      */
-    public function getCheckoutCompletedAt();
+    public function getCheckoutCompletedAt(): ?\DateTimeInterface;
 
     /**
-     * @param null|\DateTime $checkoutCompletedAt
+     * @param \DateTimeInterface|null $checkoutCompletedAt
      */
-    public function setCheckoutCompletedAt(\DateTime $checkoutCompletedAt = null);
+    public function setCheckoutCompletedAt(?\DateTimeInterface $checkoutCompletedAt): void;
 
     /**
      * @return bool
      */
-    public function isCheckoutCompleted();
+    public function isCheckoutCompleted(): bool;
 
-    public function completeCheckout();
-
-    /**
-     * @return string
-     */
-    public function getNumber();
+    public function completeCheckout(): void;
 
     /**
-     * @param string
+     * @return string|null
      */
-    public function setNumber($number);
+    public function getNumber(): ?string;
 
     /**
-     * @return string
+     * @param string|null $number
      */
-    public function getNotes();
+    public function setNumber(?string $number): void;
 
     /**
-     * @param string $notes
+     * @return string|null
      */
-    public function setNotes($notes);
+    public function getNotes(): ?string;
+
+    /**
+     * @param string|null $notes
+     */
+    public function setNotes(?string $notes): void;
 
     /**
      * @return Collection|OrderItemInterface[]
      */
-    public function getItems();
+    public function getItems(): Collection;
 
-    public function clearItems();
+    public function clearItems(): void;
 
     /**
      * @return int
      */
-    public function countItems();
+    public function countItems(): int;
 
     /**
      * @param OrderItemInterface $item
      */
-    public function addItem(OrderItemInterface $item);
+    public function addItem(OrderItemInterface $item): void;
 
     /**
      * @param OrderItemInterface $item
      */
-    public function removeItem(OrderItemInterface $item);
+    public function removeItem(OrderItemInterface $item): void;
 
     /**
      * @param OrderItemInterface $item
      *
      * @return bool
      */
-    public function hasItem(OrderItemInterface $item);
+    public function hasItem(OrderItemInterface $item): bool;
 
     /**
      * @return int
      */
-    public function getItemsTotal();
+    public function getItemsTotal(): int;
 
-    public function recalculateItemsTotal();
-
-    /**
-     * @return int
-     */
-    public function getTotal();
+    public function recalculateItemsTotal(): void;
 
     /**
      * @return int
      */
-    public function getTotalQuantity();
+    public function getTotal(): int;
+
+    /**
+     * @return int
+     */
+    public function getTotalQuantity(): int;
 
     /**
      * @return string
      */
-    public function getState();
+    public function getState(): string;
 
     /**
      * @param string $state
      */
-    public function setState($state);
+    public function setState(string $state): void;
 
     /**
      * @return bool
      */
-    public function isEmpty();
+    public function isEmpty(): bool;
 
     /**
      * @param string|null $type
      *
-     * @return array
+     * @return Collection|AdjustmentInterface[]
      */
-    public function getAdjustmentsRecursively($type = null);
+    public function getAdjustmentsRecursively(?string $type = null): Collection;
 
     /**
      * @param string|null $type
      *
      * @return int
      */
-    public function getAdjustmentsTotalRecursively($type = null);
+    public function getAdjustmentsTotalRecursively(?string $type = null): int;
 
     /**
      * @param string|null $type
      */
-    public function removeAdjustmentsRecursively($type = null);
+    public function removeAdjustmentsRecursively(?string $type = null): void;
 }

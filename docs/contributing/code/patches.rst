@@ -14,7 +14,7 @@ Before working on Sylius, setup a Symfony friendly environment with the followin
 software:
 
 * Git
-* PHP version 5.5.9 or above
+* PHP version 7.1 or above
 * MySQL
 
 Configure Git
@@ -95,11 +95,23 @@ Before you start, you must know that all the patches you are going to submit
 must be released under the *MIT license*, unless explicitly specified in your
 commits.
 
+Choose the right Base Branch
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Before starting to work on a patch, you must determine on which branch you need to work. It will be:
+
+* ``1.0``, if you are fixing a bug for an existing feature or want to make a change that falls into the list of acceptable changes in patch versions
+* ``master``, if you are adding a new feature.
+
+.. note::
+
+    All bug fixes merged into the ``1.0`` maintenance branch are also merged into ``master`` on a regular basis.
+
 Create a Topic Branch
 ~~~~~~~~~~~~~~~~~~~~~
 
 Each time you want to work on a patch for a bug or on an enhancement, create a
-topic branch:
+topic branch, starting from the previously chosen base branch:
 
 .. code-block:: bash
 
@@ -170,6 +182,8 @@ Rebase your Patch
 Before submitting your patch, update your branch (needed if it takes you a
 while to finish your changes):
 
+If you are basing on the ``master`` branch:
+
 .. code-block:: bash
 
     $ git checkout master
@@ -177,6 +191,16 @@ while to finish your changes):
     $ git merge upstream/master
     $ git checkout BRANCH_NAME
     $ git rebase master
+
+If you are basing on the ``1.0`` branch:
+
+.. code-block:: bash
+
+    $ git checkout 1.0
+    $ git fetch upstream
+    $ git merge upstream/1.0
+    $ git checkout BRANCH_NAME
+    $ git rebase 1.0
 
 When doing the ``rebase`` command, you might have to fix merge conflicts.
 ``git status`` will show you the *unmerged* files. Resolve all the conflicts,
@@ -191,10 +215,15 @@ Push your branch remotely:
 
 .. code-block:: bash
 
-    $ git push --force origin BRANCH_NAME
+    $ git push --force-with-lease origin BRANCH_NAME
 
 Make a Pull Request
 ~~~~~~~~~~~~~~~~~~~
+
+.. warning::
+
+    Please remember that bug fixes must be submitted against the ``1.0`` branch,
+    but features and deprecations against the ``master`` branch. Just accordingly to which branch you chose as the base branch before.
 
 You can now make a pull request on the ``Sylius/Sylius`` GitHub repository.
 
@@ -213,48 +242,40 @@ possible:
 
 .. code-block:: text
 
-    | Q             | A
-    | ------------- | ---
-    | Bug fix?      | [yes|no]
-    | New feature?  | [yes|no]
-    | BC breaks?    | [yes|no]
-    | Deprecations? | [yes|no]
-    | Fixed tickets | [comma separated list of tickets fixed by the PR]
-    | License       | MIT
-    | Doc PR        | [The reference to the documentation PR if any]
+    | Q               | A
+    | --------------- | -----
+    | Branch?         | 1.0 or master
+    | Bug fix?        | no/yes
+    | New feature?    | no/yes
+    | BC breaks?      | no/yes
+    | Deprecations?   | no/yes
+    | Related tickets | fixes #X, partially #Y, mentioned in #Z
+    | License         | MIT
 
 An example submission could now look as follows:
 
 .. code-block:: text
 
-    | Q             | A
-    | ------------- | ---
-    | Bug fix?      | no
-    | New feature?  | no
-    | BC breaks?    | no
-    | Deprecations? | no
-    | Fixed tickets | #12, #43
-    | License       | MIT
-    | Doc PR        | Sylius/Sylius-Docs#123
+    | Q               | A
+    | --------------- | -----
+    | Branch?         | 1.0
+    | Bug fix?        | yes
+    | New feature?    | no
+    | BC breaks?      | no
+    | Deprecations?   | no
+    | Related tickets | fixes #12
+    | License         | MIT
 
 The whole table must be included (do **not** remove lines that you think are
-not relevant). For simple typos, minor changes in the PHPDocs, or changes in
-translation files, use the shorter version of the check-list:
-
-.. code-block:: text
-
-    | Q             | A
-    | ------------- | ---
-    | Fixed tickets | [comma separated list of tickets fixed by the PR]
-    | License       | MIT
+not relevant).
 
 Some answers to the questions trigger some more requirements:
 
  * If you answer yes to "Bug fix?", check if the bug is already listed in the
-   Sylius issues and reference it/them in "Fixed tickets";
+   Sylius issues and reference it/them in "Related tickets";
 
- * If you answer yes to "New feature?", you must submit a pull request to the
-   documentation and reference it under the "Doc PR" section;
+ * If you answer yes to "New feature?", you should submit a pull request to the
+   documentation;
 
  * If you answer yes to "BC breaks?", the patch must contain updates to the
    relevant ``CHANGELOG`` and ``UPGRADE`` files;
@@ -295,17 +316,24 @@ Rework your Patch
 ~~~~~~~~~~~~~~~~~
 
 Based on the feedback on the pull request, you might need to rework your
-patch. Before re-submitting the patch, rebase with ``upstream/master``, don't merge; and force the push to the origin:
+patch. Before re-submitting the patch, rebase with your base branch (``master`` or ``1.0``), don't merge; and force the push to the origin:
 
 .. code-block:: bash
 
     $ git rebase -f upstream/master
-    $ git push --force origin BRANCH_NAME
+    $ git push --force-with-lease origin BRANCH_NAME
+
+or
+
+.. code-block:: bash
+
+    $ git rebase -f upstream/1.0
+    $ git push --force-with-lease origin BRANCH_NAME
 
 .. note::
 
-    When doing a ``push --force``, always specify the branch name explicitly
-    to avoid messing other branches in the repo (``--force`` tells Git that
+    When doing a ``push --force-wth-lease``, always specify the branch name explicitly
+    to avoid messing other branches in the repo (``--force-with-lease`` tells Git that
     you really want to mess with things so do it carefully).
 
 Often, Sylius team members will ask you to "squash" your commits. This means you will
@@ -314,7 +342,14 @@ convert many commits to one commit. To do this, use the rebase command:
 .. code-block:: bash
 
     $ git rebase -i upstream/master
-    $ git push --force origin BRANCH_NAME
+    $ git push --force-with-lease origin BRANCH_NAME
+
+or
+
+.. code-block:: bash
+
+    $ git rebase -i upstream/1.0
+    $ git push --force-with-lease origin BRANCH_NAME
 
 After you type this command, an editor will popup showing a list of commits:
 

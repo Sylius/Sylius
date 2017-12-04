@@ -9,16 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Test\Services;
 
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class EmailChecker implements EmailCheckerInterface
 {
     /**
@@ -29,7 +27,7 @@ final class EmailChecker implements EmailCheckerInterface
     /**
      * @param string $spoolDirectory
      */
-    public function __construct($spoolDirectory)
+    public function __construct(string $spoolDirectory)
     {
         $this->spoolDirectory = $spoolDirectory;
     }
@@ -37,7 +35,7 @@ final class EmailChecker implements EmailCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function hasRecipient($recipient)
+    public function hasRecipient(string $recipient): bool
     {
         $this->assertRecipientIsValid($recipient);
 
@@ -54,7 +52,7 @@ final class EmailChecker implements EmailCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function hasMessageTo($message, $recipient)
+    public function hasMessageTo(string $message, string $recipient): bool
     {
         $this->assertRecipientIsValid($recipient);
 
@@ -73,7 +71,7 @@ final class EmailChecker implements EmailCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function countMessagesTo($recipient)
+    public function countMessagesTo(string $recipient): int
     {
         $this->assertRecipientIsValid($recipient);
 
@@ -92,7 +90,7 @@ final class EmailChecker implements EmailCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function getSpoolDirectory()
+    public function getSpoolDirectory(): string
     {
         return $this->spoolDirectory;
     }
@@ -103,7 +101,7 @@ final class EmailChecker implements EmailCheckerInterface
      *
      * @return bool
      */
-    private function isMessageTo($message, $recipient)
+    private function isMessageTo(\Swift_Message $message, string $recipient): bool
     {
         return array_key_exists($recipient, $message->getTo());
     }
@@ -113,7 +111,7 @@ final class EmailChecker implements EmailCheckerInterface
      *
      * @throws /InvalidArgumentException
      */
-    private function assertRecipientIsValid($recipient)
+    private function assertRecipientIsValid(string $recipient): void
     {
         Assert::notEmpty($recipient, 'The recipient cannot be empty.');
         Assert::string($recipient, sprintf('The recipient must be a string, %s given.', gettype($recipient)));
@@ -127,9 +125,9 @@ final class EmailChecker implements EmailCheckerInterface
     /**
      * @param string $directory
      *
-     * @return \Swift_Message[]
+     * @return array|\Swift_Message[]
      */
-    private function getMessages($directory)
+    private function getMessages(string $directory): array
     {
         $finder = new Finder();
         $finder->files()->name('*.message')->in($directory);

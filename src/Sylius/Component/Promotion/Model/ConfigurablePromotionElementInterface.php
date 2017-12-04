@@ -9,27 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface ConfigurablePromotionElementInterface extends ResourceInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType();
+    public function getType(): ?string;
 
     /**
      * @return array
      */
-    public function getConfiguration();
+    public function getConfiguration(): array;
 
     /**
-     * @return PromotionInterface
+     * @return PromotionInterface|null
      */
-    public function getPromotion();
+    public function getPromotion(): ?PromotionInterface;
 }

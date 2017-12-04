@@ -10,6 +10,7 @@ sylius:
                 password: Hasło
                 signature: Podpis
                 username: Nazwa użytkownika
+                sandbox: Sandbox
             stripe:
                 publishable_key: Klucz jawny
                 secret_key: Klucz tajny
@@ -17,3 +18,6 @@ sylius:
         offline: Tryb offline
         paypal_express_checkout: Ekspresowa realizacja transakcji PayPal
         stripe_checkout: Kasa Stripe
+    payum_action:
+        payment:
+            description: Płatność zawiera %items% pozycji łącznie z %total% | Płatność zawiera %items% pozycji łącznie z %total%

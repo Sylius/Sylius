@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ExchangeRateApiTest extends JsonApiTestCase
 {
     /**
@@ -241,7 +240,6 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'exchange_rate/update_response', Response::HTTP_OK);
     }
-
 
     /**
      * @test

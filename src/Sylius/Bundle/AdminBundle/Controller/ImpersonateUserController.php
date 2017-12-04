@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Bundle\CoreBundle\Security\UserImpersonatorInterface;
@@ -21,35 +23,32 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
-class ImpersonateUserController
+final class ImpersonateUserController
 {
     /**
      * @var UserImpersonatorInterface
      */
-    protected $impersonator;
+    private $impersonator;
 
     /**
      * @var AuthorizationCheckerInterface
      */
-    protected $authorizationChecker;
+    private $authorizationChecker;
 
     /**
      * @var UserProviderInterface
      */
-    protected $userProvider;
+    private $userProvider;
 
     /**
      * @var RouterInterface
      */
-    protected $router;
+    private $router;
 
     /**
      * @var string
      */
-    protected $authorizationRole;
+    private $authorizationRole;
 
     /**
      * @param UserImpersonatorInterface $impersonator
@@ -63,7 +62,7 @@ class ImpersonateUserController
         AuthorizationCheckerInterface $authorizationChecker,
         UserProviderInterface $userProvider,
         RouterInterface $router,
-        $authorizationRole
+        string $authorizationRole
     ) {
         $this->impersonator = $impersonator;
         $this->authorizationChecker = $authorizationChecker;
@@ -78,7 +77,7 @@ class ImpersonateUserController
      *
      * @return Response
      */
-    public function impersonateAction(Request $request, $username)
+    public function impersonateAction(Request $request, string $username): Response
     {
         if (!$this->authorizationChecker->isGranted($this->authorizationRole)) {
             throw new HttpException(Response::HTTP_UNAUTHORIZED);
@@ -100,13 +99,13 @@ class ImpersonateUserController
      * @param Request $request
      * @param string $username
      */
-    private function addFlash(Request $request, $username)
+    private function addFlash(Request $request, string $username): void
     {
         /** @var Session $session */
         $session = $request->getSession();
         $session->getFlashBag()->add('success', [
             'message' => 'sylius.customer.impersonate',
-            'parameters' => ['%name%' => $username]
+            'parameters' => ['%name%' => $username],
         ]);
     }
 }

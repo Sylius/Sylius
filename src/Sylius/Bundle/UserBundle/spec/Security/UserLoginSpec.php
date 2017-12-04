@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\UserBundle\Security;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
-use Sylius\Bundle\UserBundle\Security\UserLogin;
 use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
@@ -26,23 +27,14 @@ use Symfony\Component\Security\Core\Exception\CredentialsExpiredException;
 use Symfony\Component\Security\Core\Exception\DisabledException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class UserLoginSpec extends ObjectBehavior
 {
-    function let(TokenStorageInterface $tokenStorage, UserCheckerInterface $userChecker, EventDispatcherInterface $eventDispatcher)
+    function let(TokenStorageInterface $tokenStorage, UserCheckerInterface $userChecker, EventDispatcherInterface $eventDispatcher): void
     {
         $this->beConstructedWith($tokenStorage, $userChecker, $eventDispatcher);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UserLogin::class);
-    }
-
-    function it_implements_user_login_interface()
+    function it_implements_user_login_interface(): void
     {
         $this->shouldImplement(UserLoginInterface::class);
     }
@@ -52,7 +44,7 @@ final class UserLoginSpec extends ObjectBehavior
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
         UserInterface $user
-    ) {
+    ): void {
         $user->getRoles()->willReturn(['ROLE_TEST']);
         $userChecker->checkPreAuth($user)->willThrow(DisabledException::class);
 
@@ -67,7 +59,7 @@ final class UserLoginSpec extends ObjectBehavior
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
         UserInterface $user
-    ) {
+    ): void {
         $user->getRoles()->willReturn(['ROLE_TEST']);
         $userChecker->checkPreAuth($user)->shouldBeCalled();
         $userChecker->checkPostAuth($user)->willThrow(CredentialsExpiredException::class);
@@ -83,7 +75,7 @@ final class UserLoginSpec extends ObjectBehavior
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
         UserInterface $user
-    ) {
+    ): void {
         $user->getRoles()->willReturn([]);
         $userChecker->checkPreAuth($user)->shouldBeCalled();
         $userChecker->checkPostAuth($user)->shouldBeCalled();
@@ -99,7 +91,7 @@ final class UserLoginSpec extends ObjectBehavior
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
         UserInterface $user
-    ) {
+    ): void {
         $user->getRoles()->willReturn(['ROLE_TEST']);
 
         $userChecker->checkPreAuth($user)->shouldBeCalled();

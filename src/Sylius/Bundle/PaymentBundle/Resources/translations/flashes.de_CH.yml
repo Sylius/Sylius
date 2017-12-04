@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: 'Zahlung wurde abgebrochen.'
+        completed: 'Zahlung wurde abgeschlossen.'
+        failed: 'Zahlung ist fehlgeschlagen.'
+        processing: 'Zahlung wird bearbeitet.'
+        refunded: 'Zahlung wurde erfolgreich erstattet.'
+        unknown: 'Es trat ein unbekanntes Problem mit der Zahlung auf.'

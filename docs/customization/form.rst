@@ -61,7 +61,7 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
         /**
          * {@inheritdoc}
          */
-        public function buildForm(FormBuilderInterface $builder, array $options)
+        public function buildForm(FormBuilderInterface $builder, array $options): void
         {
             // Adding new fields works just like in the parent form type.
             $builder->add('contactHours', TextType::class, [
@@ -81,7 +81,7 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
         /**
          * {@inheritdoc}
          */
-        public function getExtendedType()
+        public function getExtendedType(): string
         {
             return CustomerProfileType::class;
         }
@@ -121,7 +121,87 @@ Need more information?
 
 .. warning::
 
-    Some of the forms already have extensions in Sylius. Learn more about Extensions `here <http://symfony.com/doc/current/bundles/extension.html>`_.
+    Some of the forms already have extensions in Sylius. Learn more about Extensions `here <http://symfony.com/doc/current/form/create_form_type_extension.html>`_.
+
+For instance the ``ProductVariant`` admin form is defined under ``Sylius/Bundle/ProductBundle/Form/Type/ProductVariantType.php`` and later extended in
+``Sylius/Bundle/CoreBundle/Form/Extension/ProductVariantTypeExtension.php``. If you again extend the base type form like this:
+
+.. code-block:: yaml
+
+    services:
+        app.form.extension.type.product_variant:
+            class: AppBundle\Form\Extension\ProductVariantTypeMyExtension
+            tags:
+                - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType, priority: -5 }
+
+your form extension will also be executed. Whether before or after the other extensions depends on priority tag set.
+
+Having a look at the extensions and possible additionally defined event handlers can also be useful when form elements are embedded dynamically,
+as is done in the ``ProductVariantTypeExtension`` by the ``CoreBundle``:
+
+.. code-block:: php
+
+    <?php
+
+    ...
+
+    final class ProductVariantTypeExtension extends AbstractTypeExtension
+    {
+        /**
+         * {@inheritdoc}
+         */
+        public function buildForm(FormBuilderInterface $builder, array $options): void
+        {
+            ...
+
+            $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                $productVariant = $event->getData();
+
+                $event->getForm()->add('channelPricings', ChannelCollectionType::class, [
+                    'entry_type' => ChannelPricingType::class,
+                    'entry_options' => function (ChannelInterface $channel) use ($productVariant) {
+                        return [
+                            'channel' => $channel,
+                            'product_variant' => $productVariant,
+                            'required' => false,
+                        ];
+                    },
+                    'label' => 'sylius.form.variant.price',
+                ]);
+            });
+        }
+
+        ...
+    }
+
+The ``channelPricings`` get added on ``FormEvents::PRE_SET_DATA``, so when you wish to remove or alter this form definition,
+you will also have to set up an event listener and then remove the field:
+
+.. code-block:: php
+
+    <?php
+
+    ...
+
+    final class ProductVariantTypeMyExtension extends AbstractTypeExtension
+    {
+        ...
+
+        public function buildForm(FormBuilderInterface $builder, array $options): void
+        {
+            ...
+
+            $builder
+                ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                    $event->getForm()->remove('channelPricings');
+                })
+                ->addEventSubscriber(new AddCodeFormSubscriber(NULL, ['label' => 'app.form.my_other_code_label']))
+            ;
+
+            ...
+
+        }
+    }
 
 Overriding forms completely
 ---------------------------
@@ -130,3 +210,5 @@ Overriding forms completely
 
     If you need to create a new form type on top of an existing one -  create this new alternative form type and define `getParent()`
     to the old one. `See details in the Symfony docs <http://symfony.com/doc/current/form/create_custom_field_type.html>`_.
+
+.. include:: /customization/plugins.rst.inc

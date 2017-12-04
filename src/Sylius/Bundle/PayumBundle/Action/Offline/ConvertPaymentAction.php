@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Action\Offline;
 
 use Payum\Core\Action\ActionInterface;
@@ -17,9 +19,6 @@ use Payum\Core\Model\PaymentInterface;
 use Payum\Core\Request\Convert;
 use Payum\Offline\Constants;
 
-/**
- * @author Antonio Peric <antonio@locastic.com>
- */
 final class ConvertPaymentAction implements ActionInterface
 {
     /**
@@ -27,7 +26,7 @@ final class ConvertPaymentAction implements ActionInterface
      *
      * @param Convert $request
      */
-    public function execute($request)
+    public function execute($request): void
     {
         RequestNotSupportedException::assertSupports($this, $request);
 
@@ -39,7 +38,7 @@ final class ConvertPaymentAction implements ActionInterface
     /**
      * {@inheritdoc}
      */
-    public function supports($request)
+    public function supports($request): bool
     {
         return
             $request instanceof Convert &&

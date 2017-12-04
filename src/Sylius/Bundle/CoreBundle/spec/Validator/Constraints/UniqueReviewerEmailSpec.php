@@ -9,39 +9,31 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmail;
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class UniqueReviewerEmailSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UniqueReviewerEmail::class);
-    }
-
-    function it_extends_constraint_class()
+    function it_extends_constraint_class(): void
     {
         $this->shouldHaveType(Constraint::class);
     }
 
-    function it_has_a_message()
+    function it_has_a_message(): void
     {
         $this->message->shouldReturn('sylius.review.author.already_exists');
     }
 
-    function it_is_validate_by_unique_user_email_validator()
+    function it_is_validate_by_unique_user_email_validator(): void
     {
         $this->validatedBy()->shouldReturn('sylius_unique_reviewer_email_validator');
     }
 
-    function it_has_targets()
+    function it_has_targets(): void
     {
         $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
     }

@@ -9,22 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Metadata;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class Registry implements RegistryInterface
 {
     /**
-     * @var array
+     * @var array|MetadataInterface[]
      */
     private $metadata = [];
 
     /**
      * {@inheritdoc}
      */
-    public function getAll()
+    public function getAll(): iterable
     {
         return $this->metadata;
     }
@@ -32,7 +31,7 @@ final class Registry implements RegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function get($alias)
+    public function get(string $alias): MetadataInterface
     {
         if (!array_key_exists($alias, $this->metadata)) {
             throw new \InvalidArgumentException(sprintf('Resource "%s" does not exist.', $alias));
@@ -44,7 +43,7 @@ final class Registry implements RegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function getByClass($className)
+    public function getByClass(string $className): MetadataInterface
     {
         foreach ($this->metadata as $metadata) {
             if ($className === $metadata->getClass('model')) {
@@ -58,7 +57,7 @@ final class Registry implements RegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function add(MetadataInterface $metadata)
+    public function add(MetadataInterface $metadata): void
     {
         $this->metadata[$metadata->getAlias()] = $metadata;
     }
@@ -66,7 +65,7 @@ final class Registry implements RegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function addFromAliasAndConfiguration($alias, array $configuration)
+    public function addFromAliasAndConfiguration(string $alias, array $configuration): void
     {
         $this->add(Metadata::fromAliasAndConfiguration($alias, $configuration));
     }

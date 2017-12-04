@@ -10,6 +10,8 @@ sylius:
             options: Opções
             meta_keywords: Meta palavra-chaves
             meta_description: Meta descrição
+            slug: Slug
+            taxons: Categorias
         product_variant:
             name: Nome
         association_type:
@@ -22,6 +24,7 @@ sylius:
             name: Nome
         option:
             name: Nome
+            position: Posição
             values: Valores possíveis
         option_value:
             add_value: Adicionar valor

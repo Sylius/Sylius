@@ -9,39 +9,31 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Registry;
 
-require_once __DIR__.'/Fixture/SampleServiceInterface.php';
+require_once __DIR__ . '/Fixture/SampleServiceInterface.php';
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use spec\Sylius\Component\Registry\Fixture\SampleServiceInterface;
 use Sylius\Component\Registry\NonExistingServiceException;
-use Sylius\Component\Registry\PrioritizedServiceRegistry;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Zend\Stdlib\PriorityQueue;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class PrioritizedServiceRegistrySpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith(SampleServiceInterface::class);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PrioritizedServiceRegistry::class);
-    }
-
-    function it_implements_prioritized_service_registry_interface()
+    function it_implements_prioritized_service_registry_interface(): void
     {
         $this->shouldImplement(PrioritizedServiceRegistryInterface::class);
     }
 
-    function it_initializes_services_priority_queue_by_default()
+    function it_initializes_services_priority_queue_by_default(): void
     {
         $this->all()->shouldReturnAnInstanceOf(PriorityQueue::class);
 
@@ -52,7 +44,7 @@ final class PrioritizedServiceRegistrySpec extends ObjectBehavior
         SampleServiceInterface $serviceOne,
         SampleServiceInterface $serviceTwo,
         SampleServiceInterface $serviceThree
-    ) {
+    ): void {
         $this->has($serviceOne)->shouldReturn(false);
         $this->has($serviceTwo)->shouldReturn(false);
         $this->has($serviceThree)->shouldReturn(false);
@@ -71,7 +63,7 @@ final class PrioritizedServiceRegistrySpec extends ObjectBehavior
         $this->all()->shouldHavePriority(-1);
     }
 
-    function it_throws_exception_when_trying_to_register_service_without_required_interface(\stdClass $service)
+    function it_throws_exception_when_trying_to_register_service_without_required_interface(\stdClass $service): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -81,14 +73,14 @@ final class PrioritizedServiceRegistrySpec extends ObjectBehavior
 
     function it_throws_exception_when_trying_to_check_for_a_registered_service_without_required_interface(
         \stdClass $service
-    ) {
+    ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->duringHas($service)
         ;
     }
 
-    function it_unregisters_service(SampleServiceInterface $service)
+    function it_unregisters_service(SampleServiceInterface $service): void
     {
         $this->register($service);
         $this->has($service)->shouldReturn(true);
@@ -97,7 +89,7 @@ final class PrioritizedServiceRegistrySpec extends ObjectBehavior
         $this->has($service)->shouldReturn(false);
     }
 
-    function it_throws_exception_if_trying_to_unregister_service_of_non_existing_type(SampleServiceInterface $service)
+    function it_throws_exception_if_trying_to_unregister_service_of_non_existing_type(SampleServiceInterface $service): void
     {
         $this
             ->shouldThrow(NonExistingServiceException::class)

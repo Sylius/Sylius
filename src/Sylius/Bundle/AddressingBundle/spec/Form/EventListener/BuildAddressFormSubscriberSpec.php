@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
@@ -25,28 +27,24 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class BuildAddressFormSubscriberSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $countryRepository, FormFactoryInterface $formFactory)
+    function let(RepositoryInterface $countryRepository, FormFactoryInterface $formFactory): void
     {
         $this->beConstructedWith($countryRepository, $formFactory);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(BuildAddressFormSubscriber::class);
     }
 
-    function it_is_a_subscriber()
+    function it_is_a_subscriber(): void
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_subscribes_to_event()
+    function it_subscribes_to_event(): void
     {
         $this::getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -62,7 +60,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         AddressInterface $address,
         CountryInterface $country,
         RepositoryInterface $countryRepository
-    ) {
+    ): void {
         $event->getData()->willReturn($address);
         $event->getForm()->willReturn($form);
 
@@ -89,7 +87,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         AddressInterface $address,
         CountryInterface $country,
         RepositoryInterface $countryRepository
-    ) {
+    ): void {
         $event->getData()->willReturn($address);
         $event->getForm()->willReturn($form);
 
@@ -115,7 +113,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         FormInterface $form,
         FormInterface $provinceForm,
         CountryInterface $country
-    ) {
+    ): void {
         $event->getForm()->willReturn($form);
         $event->getData()->willReturn([
             'countryCode' => 'FR',
@@ -140,7 +138,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         FormInterface $provinceForm,
         CountryInterface $country,
         RepositoryInterface $countryRepository
-    ) {
+    ): void {
         $event->getData()->willReturn([
             'countryCode' => 'US',
         ]);

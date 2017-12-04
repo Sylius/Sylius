@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
@@ -18,10 +20,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 final class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**
@@ -51,10 +49,10 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
@@ -69,7 +67,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
     /**
      * {@inheritdoc}
      */
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $config = $container->getExtensionConfig($this->getAlias());
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
@@ -82,7 +80,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $this->prependHwiOauth($container, $loader);
     }
 
@@ -90,7 +88,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
      * @param ContainerBuilder $container
      * @param LoaderInterface $loader
      */
-    private function prependHwiOauth(ContainerBuilder $container, LoaderInterface $loader)
+    private function prependHwiOauth(ContainerBuilder $container, LoaderInterface $loader): void
     {
         if (!$container->hasExtension('hwi_oauth')) {
             return;

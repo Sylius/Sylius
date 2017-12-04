@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -16,15 +18,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 interface ConfigurationSourceFactoryInterface
 {
     /**
      * @param ArrayNodeDefinition $node
      */
-    public function buildConfiguration(ArrayNodeDefinition $node);
+    public function buildConfiguration(ArrayNodeDefinition $node): void;
 
     /**
      * @see ConfigurationProviderInterface
@@ -39,5 +38,5 @@ interface ConfigurationSourceFactoryInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 }

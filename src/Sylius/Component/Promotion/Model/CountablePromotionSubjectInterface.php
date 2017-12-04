@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Model;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface CountablePromotionSubjectInterface extends PromotionSubjectInterface
 {
     /**
      * @return int
      */
-    public function getPromotionSubjectCount();
+    public function getPromotionSubjectCount(): int;
 }

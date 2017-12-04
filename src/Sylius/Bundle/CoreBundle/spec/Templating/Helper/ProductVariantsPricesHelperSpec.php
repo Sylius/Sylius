@@ -9,31 +9,24 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ProductVariantsPricesHelperSpec extends ObjectBehavior
 {
-    function let(ProductVariantsPricesProviderInterface $productVariantsPricesProvider)
+    function let(ProductVariantsPricesProviderInterface $productVariantsPricesProvider): void
     {
         $this->beConstructedWith($productVariantsPricesProvider);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProductVariantsPricesHelper::class);
-    }
-
-    function it_is_helper()
+    function it_is_helper(): void
     {
         $this->shouldHaveType(Helper::class);
     }
@@ -42,15 +35,15 @@ final class ProductVariantsPricesHelperSpec extends ObjectBehavior
         ChannelInterface $channel,
         ProductInterface $product,
         ProductVariantsPricesProviderInterface $productVariantsPricesProvider
-    ) {
+    ): void {
         $productVariantsPricesProvider->provideVariantsPrices($product, $channel)->willReturn([
-            ['color' => 'black', 'value' => 1000]
+            ['color' => 'black', 'value' => 1000],
         ]);
 
         $this->getPrices($product, $channel)->shouldReturn([['color' => 'black', 'value' => 1000]]);
     }
 
-    function it_has_name()
+    function it_has_name(): void
     {
         $this->getName()->shouldReturn('sylius_product_variants_prices');
     }

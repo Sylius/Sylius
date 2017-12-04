@@ -48,13 +48,17 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="members">
+        <getter property="members">
+            <constraint name="Sylius\Bundle\ResourceBundle\Validator\Constraints\UniqueWithinCollectionConstraint">
+                <option name="message">sylius.zone_member.unique</option>
+                <option name="groups">sylius</option>
+            </constraint>
             <constraint name="Valid" />
             <constraint name="Count">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.zone.members.min_count</option>
                 <option name="groups">sylius</option>
             </constraint>
-        </property>
+        </getter>
     </class>
 </constraint-mapping>

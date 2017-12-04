@@ -16,7 +16,6 @@ sylius:
         email:
             already_used: Questa e-mail è già utilizzata, effettua il login o utilizza la password dimenticata.
             max: L'e-mail non dovrebbe contenere più di {{ limit }} caratteri.
-            min: L'e-mail dovrebbe contenere almeno {{ limit }} caratteri.
             not_blank: Inserisci la tua email.
             invalid: Questa e-mail non è valida.
             unique: Questa e-mail è già in uso.

@@ -9,24 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Promotion\Generator;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Promotion\Exception\FailedGenerationException;
-use Sylius\Component\Promotion\Generator\PromotionCouponGenerator;
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class PromotionCouponGeneratorSpec extends ObjectBehavior
 {
     function let(
@@ -34,7 +32,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         PromotionCouponRepositoryInterface $promotionCouponRepository,
         ObjectManager $objectManager,
         GenerationPolicyInterface $generationPolicy
-    ) {
+    ): void {
         $this->beConstructedWith(
             $promotionCouponFactory,
             $promotionCouponRepository,
@@ -43,12 +41,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionCouponGenerator::class);
-    }
-
-    function it_implements_a_promotion_coupon_generator_interface()
+    function it_implements_a_promotion_coupon_generator_interface(): void
     {
         $this->shouldImplement(PromotionCouponGeneratorInterface::class);
     }
@@ -61,7 +54,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         PromotionCouponInterface $promotionCoupon,
         PromotionCouponGeneratorInstructionInterface $instruction,
         GenerationPolicyInterface $generationPolicy
-    ) {
+    ): void {
         $instruction->getAmount()->willReturn(1);
         $instruction->getUsageLimit()->willReturn(null);
         $instruction->getExpiresAt()->willReturn(null);
@@ -85,7 +78,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         GenerationPolicyInterface $generationPolicy,
         PromotionInterface $promotion,
         PromotionCouponGeneratorInstructionInterface $instruction
-    ) {
+    ): void {
         $instruction->getAmount()->willReturn(16);
         $instruction->getCodeLength()->willReturn(1);
         $generationPolicy->isGenerationPossible($instruction)->willReturn(false);
@@ -99,7 +92,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         GenerationPolicyInterface $generationPolicy,
         PromotionInterface $promotion,
         PromotionCouponGeneratorInstructionInterface $instruction
-    ) {
+    ): void {
         $instruction->getAmount()->willReturn(16);
         $instruction->getCodeLength()->willReturn(-1);
         $generationPolicy->isGenerationPossible($instruction)->willReturn(true);

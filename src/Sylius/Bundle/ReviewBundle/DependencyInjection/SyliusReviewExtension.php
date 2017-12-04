@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ReviewBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
@@ -20,19 +22,15 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class SyliusReviewExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
@@ -42,9 +40,12 @@ final class SyliusReviewExtension extends AbstractResourceExtension
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $resources
+     * @param ContainerBuilder $container
+     *
+     * @return array
      */
-    private function resolveResources(array $resources, ContainerBuilder $container)
+    private function resolveResources(array $resources, ContainerBuilder $container): array
     {
         $container->setParameter('sylius.review.subjects', $resources);
 
@@ -54,7 +55,7 @@ final class SyliusReviewExtension extends AbstractResourceExtension
         foreach ($resources as $subjectName => $subjectConfig) {
             foreach ($subjectConfig as $resourceName => $resourceConfig) {
                 if (is_array($resourceConfig)) {
-                    $resolvedResources[$subjectName.'_'.$resourceName] = $resourceConfig;
+                    $resolvedResources[$subjectName . '_' . $resourceName] = $resourceConfig;
                 }
             }
         }
@@ -66,21 +67,24 @@ final class SyliusReviewExtension extends AbstractResourceExtension
      * @param array $reviewSubjects
      * @param ContainerBuilder $container
      */
-    private function createReviewListeners(array $reviewSubjects, ContainerBuilder $container)
+    private function createReviewListeners(array $reviewSubjects, ContainerBuilder $container): void
     {
         foreach ($reviewSubjects as $reviewSubject) {
             $reviewChangeListener = new Definition(ReviewChangeListener::class, [
                 new Reference(sprintf('sylius.%s_review.average_rating_updater', $reviewSubject)),
             ]);
 
-            $reviewChangeListener->addTag('kernel.event_listener', [
-                'event' => sprintf('sylius.%s_review.post_update', $reviewSubject),
-                'method' => 'recalculateSubjectRating',
-            ]);
-            $reviewChangeListener->addTag('kernel.event_listener', [
-                'event' => sprintf('sylius.%s_review.post_delete', $reviewSubject),
-                'method' => 'recalculateSubjectRating',
-            ]);
+            $reviewChangeListener
+                ->addTag('doctrine.event_listener', [
+                    'event' => 'postPersist',
+                ])
+                ->addTag('doctrine.event_listener', [
+                    'event' => 'postUpdate',
+                ])
+                ->addTag('doctrine.event_listener', [
+                    'event' => 'postRemove',
+                ])
+            ;
 
             $container->addDefinitions([
                 sprintf('sylius.%s_review.average_rating_updater', $reviewSubject) => new Definition(AverageRatingUpdater::class, [

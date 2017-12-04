@@ -9,39 +9,31 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
-use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class OrderItemUnitSpec extends ObjectBehavior
 {
-    function let(OrderItemInterface $orderItem)
+    function let(OrderItemInterface $orderItem): void
     {
         $orderItem->getUnitPrice()->willReturn(1000);
         $orderItem->addUnit(Argument::type(OrderItemUnitInterface::class))->shouldBeCalled();
         $this->beConstructedWith($orderItem);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderItemUnit::class);
-    }
-
-    function it_implements_an_order_item_unit_interface()
+    function it_implements_an_order_item_unit_interface(): void
     {
         $this->shouldImplement(OrderItemUnitInterface::class);
     }
 
-    function it_has_a_correct_total_when_there_are_no_adjustments()
+    function it_has_a_correct_total_when_there_are_no_adjustments(): void
     {
         $this->getTotal()->shouldReturn(1000);
     }
@@ -49,7 +41,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
     function it_includes_non_neutral_adjustments_in_total(
         AdjustmentInterface $adjustment,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $adjustment->isNeutral()->willReturn(false);
         $adjustment->getAmount()->willReturn(400);
 
@@ -64,7 +56,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
     function it_returns_0_as_total_even_when_adjustments_decreases_it_below_0(
         AdjustmentInterface $adjustment,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $adjustment->isNeutral()->willReturn(false);
         $adjustment->getAmount()->willReturn(-1400);
 
@@ -76,7 +68,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(0);
     }
 
-    function it_adds_and_removes_adjustments(AdjustmentInterface $adjustment, OrderItemInterface $orderItem)
+    function it_adds_and_removes_adjustments(AdjustmentInterface $adjustment, OrderItemInterface $orderItem): void
     {
         $orderItem->recalculateUnitsTotal()->shouldBeCalled();
 
@@ -96,7 +88,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
     function it_does_not_remove_adjustment_when_it_is_locked(
         AdjustmentInterface $adjustment,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $orderItem->recalculateUnitsTotal()->shouldBeCalledTimes(1);
 
         $adjustment->isNeutral()->willReturn(true);
@@ -116,7 +108,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         AdjustmentInterface $adjustment2,
         AdjustmentInterface $adjustment3,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $orderItem->recalculateUnitsTotal()->shouldBeCalledTimes(4);
 
         $adjustment1->isNeutral()->willReturn(false);
@@ -147,7 +139,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
     function it_has_correct_total_after_neutral_adjustment_add_and_remove(
         AdjustmentInterface $adjustment,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $orderItem->recalculateUnitsTotal()->shouldBeCalled();
 
         $adjustment->isNeutral()->willReturn(true);
@@ -168,7 +160,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $orderItem->recalculateUnitsTotal()->shouldBeCalledTimes(2);
 
         $adjustment1->isNeutral()->willReturn(false);
@@ -191,7 +183,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $orderItem->recalculateUnitsTotal()->shouldBeCalledTimes(2);
 
         $adjustment1->isNeutral()->willReturn(false);

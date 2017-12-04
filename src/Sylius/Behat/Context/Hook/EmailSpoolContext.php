@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class EmailSpoolContext implements Context
 {
     /**

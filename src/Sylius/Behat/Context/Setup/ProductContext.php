@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -16,7 +18,6 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -35,17 +36,11 @@ use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 final class ProductContext implements Context
 {
     /**
@@ -197,7 +192,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) is also priced at ("[^"]+") in ("[^"]+" channel)$/
+     * @Given /^(this product) is(?:| also) priced at ("[^"]+") in ("[^"]+" channel)$/
      */
     public function thisProductIsAlsoPricedAtInChannel(ProductInterface $product, $price, ChannelInterface $channel)
     {
@@ -211,10 +206,18 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) is(?:| also) available in ("[^"]+" channel)$/
+     */
+    public function thisProductIsAlsoAvailableInChannel(ProductInterface $product, ChannelInterface $channel): void
+    {
+        $this->thisProductIsAlsoPricedAtInChannel($product, 0, $channel);
+    }
+
+    /**
      * @Given the store( also) has a product :productName with code :code
      * @Given the store( also) has a product :productName with code :code, created at :date
      */
-    public function storeHasProductWithCode($productName, $code, $date = null)
+    public function storeHasProductWithCode($productName, $code, $date = 'now')
     {
         $product = $this->createProduct($productName);
         $product->setCreatedAt(new \DateTime($date));
@@ -542,7 +545,9 @@ final class ProductContext implements Context
         TaxCategoryInterface $taxCategory
     ) {
         $productVariant->setTaxCategory($taxCategory);
-        $this->objectManager->flush($productVariant);
+
+        $this->objectManager->persist($productVariant);
+        $this->objectManager->flush();
     }
 
     /**
@@ -578,7 +583,7 @@ final class ProductContext implements Context
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productVariant->setOnHand($quantity);
+        $productVariant->setOnHand((int) $quantity);
 
         $this->objectManager->flush();
     }
@@ -707,7 +712,7 @@ final class ProductContext implements Context
     public function thereAreItemsOfProductInVariantAvailableInTheInventory($quantity, ProductVariantInterface $productVariant)
     {
         $productVariant->setTracked(true);
-        $productVariant->setOnHand($quantity);
+        $productVariant->setOnHand((int) $quantity);
 
         $this->objectManager->flush();
     }
@@ -748,13 +753,14 @@ final class ProductContext implements Context
 
         /** @var ImageInterface $productImage */
         $productImage = $this->productImageFactory->createNew();
-        $productImage->setFile(new UploadedFile($filesPath.$imagePath, basename($imagePath)));
+        $productImage->setFile(new UploadedFile($filesPath . $imagePath, basename($imagePath)));
         $productImage->setType($imageType);
         $this->imageUploader->upload($productImage);
 
         $product->addImage($productImage);
 
-        $this->objectManager->flush($product);
+        $this->objectManager->persist($product);
+        $this->objectManager->flush();
     }
 
     /**
@@ -773,6 +779,16 @@ final class ProductContext implements Context
     public function thisProductHasBeenDisabled(ProductInterface $product)
     {
         $product->disable();
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the product :product was renamed to :productName
+     */
+    public function theProductWasRenamedTo(ProductInterface $product, string $productName): void
+    {
+        $product->setName($productName);
+
         $this->objectManager->flush();
     }
 
@@ -873,7 +889,7 @@ final class ProductContext implements Context
 
     /**
      * @param ProductInterface $product
-     * @param $productVariantName
+     * @param string $productVariantName
      * @param int $price
      * @param string $code
      * @param ChannelInterface $channel
@@ -900,7 +916,7 @@ final class ProductContext implements Context
         $variant->setCode($code);
         $variant->setProduct($product);
         $variant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
-        $variant->setPosition($position);
+        $variant->setPosition((null === $position) ? null : (int) $position);
         $variant->setShippingRequired($shippingRequired);
 
         $product->addVariant($variant);

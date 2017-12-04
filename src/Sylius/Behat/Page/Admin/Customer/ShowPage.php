@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Customer;
 
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPage;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     /**
@@ -132,7 +131,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         Assert::notNull($group, 'There should be element group on page.');
 
-        list($text, $groupName) = explode(':', $group->getText());
+        [$text, $groupName] = explode(':', $group->getText());
 
         return trim($groupName);
     }

@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderAwareInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 
-/**
- * @author Ka Yue Yeung <kayuey@gmail.com>
- */
 interface PaymentInterface extends BasePaymentInterface, OrderAwareInterface
 {
 }

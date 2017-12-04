@@ -9,19 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\LocaleBundle\Templating\Helper;
 
 use Symfony\Component\Templating\Helper\HelperInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface LocaleHelperInterface extends HelperInterface
 {
     /**
      * @param string $localeCode
      *
-     * @return string
+     * @return string|null
      */
-    public function convertCodeToName($localeCode);
+    public function convertCodeToName(string $localeCode): ?string;
 }

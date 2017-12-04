@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
-use Sylius\Bundle\ShopBundle\EventListener\UserMailerListener;
 use Sylius\Bundle\UserBundle\EventListener\MailerListener;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -23,23 +24,14 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Manuel Gonzalez <mgonyan@gmail.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class UserMailerListenerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $emailSender, ChannelContextInterface $channelContext)
+    function let(SenderInterface $emailSender, ChannelContextInterface $channelContext): void
     {
         $this->beConstructedWith($emailSender, $channelContext);
     }
 
-    function it_is_instializable()
-    {
-        $this->shouldHaveType(UserMailerListener::class);
-    }
-
-    function it_is_a_user_mailer_listener()
+    function it_is_a_mailer_listener(): void
     {
         $this->shouldHaveType(MailerListener::class);
     }
@@ -47,7 +39,7 @@ final class UserMailerListenerSpec extends ObjectBehavior
     function it_throws_an_exception_if_event_subject_is_not_a_customer_instance_sending_confirmation(
         GenericEvent $event,
         \stdClass $customer
-    ) {
+    ): void {
         $event->getSubject()->willReturn($customer);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('sendUserRegistrationEmail', [$event]);
@@ -57,11 +49,11 @@ final class UserMailerListenerSpec extends ObjectBehavior
         SenderInterface $emailSender,
         GenericEvent $event,
         CustomerInterface $customer
-    ) {
+    ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn(null);
 
-        $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
+        $emailSender->send(Argument::cetera())->shouldNotBeCalled();
 
         $this->sendUserRegistrationEmail($event);
     }
@@ -71,12 +63,12 @@ final class UserMailerListenerSpec extends ObjectBehavior
         GenericEvent $event,
         CustomerInterface $customer,
         ShopUserInterface $user
-    ) {
+    ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
         $customer->getEmail()->willReturn(null);
 
-        $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
+        $emailSender->send(Argument::cetera())->shouldNotBeCalled();
 
         $this->sendUserRegistrationEmail($event);
     }
@@ -88,7 +80,7 @@ final class UserMailerListenerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ShopUserInterface $user,
         ChannelInterface $channel
-    ) {
+    ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
         $customer->getEmail()->willReturn('fulanito@sylius.com');
@@ -97,18 +89,10 @@ final class UserMailerListenerSpec extends ObjectBehavior
 
         $channelContext->getChannel()->willReturn($channel);
 
-        $emailSender
-            ->send(
-                Emails::USER_REGISTRATION,
-                [
-                    'fulanito@sylius.com',
-                ],
-                [
-                    'user' => $user,
-                ]
-            )
-            ->shouldBeCalled()
-        ;
+        $emailSender->send(Emails::USER_REGISTRATION, ['fulanito@sylius.com'], [
+            'user' => $user,
+            'channel' => $channel,
+        ])->shouldBeCalled();
 
         $this->sendUserRegistrationEmail($event);
     }

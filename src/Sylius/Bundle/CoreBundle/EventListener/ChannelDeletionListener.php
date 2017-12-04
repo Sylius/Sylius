@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\ChannelBundle\Doctrine\ORM\ChannelRepository;
@@ -16,9 +18,6 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
-/**
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 final class ChannelDeletionListener
 {
     /**
@@ -39,7 +38,7 @@ final class ChannelDeletionListener
      *
      * @param ResourceControllerEvent $event
      */
-    public function onChannelPreDelete(ResourceControllerEvent $event)
+    public function onChannelPreDelete(ResourceControllerEvent $event): void
     {
         $channel = $event->getSubject();
 

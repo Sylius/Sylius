@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Grid\Filter;
 
 use PhpSpec\ObjectBehavior;
@@ -18,22 +20,19 @@ use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Filter\MoneyFilter;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class MoneyFilterSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(MoneyFilter::class);
     }
 
-    function it_implements_filter_interface()
+    function it_implements_filter_interface(): void
     {
         $this->shouldImplement(FilterInterface::class);
     }
 
-    function it_does_nothing_when_there_is_no_data(DataSourceInterface $dataSource)
+    function it_does_nothing_when_there_is_no_data(DataSourceInterface $dataSource): void
     {
         $this->apply(
             $dataSource,
@@ -46,7 +45,7 @@ final class MoneyFilterSpec extends ObjectBehavior
     function it_filters_by_total_alone_in_all_currencies_when_none_has_been_given(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder
@@ -79,7 +78,7 @@ final class MoneyFilterSpec extends ObjectBehavior
     function it_filters_by_given_currency(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR');
@@ -118,7 +117,7 @@ final class MoneyFilterSpec extends ObjectBehavior
     function it_filters_money_greater_than(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR');
@@ -144,7 +143,7 @@ final class MoneyFilterSpec extends ObjectBehavior
     function it_filters_money_less_than(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR');
@@ -170,7 +169,7 @@ final class MoneyFilterSpec extends ObjectBehavior
     function it_filters_money_in_specified_range(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR');
@@ -200,7 +199,7 @@ final class MoneyFilterSpec extends ObjectBehavior
     function its_amount_scale_can_be_configured(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    ) {
+    ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR');

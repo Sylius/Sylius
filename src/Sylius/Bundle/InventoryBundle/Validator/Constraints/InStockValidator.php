@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
@@ -18,9 +20,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class InStockValidator extends ConstraintValidator
 {
     /**
@@ -45,7 +44,7 @@ final class InStockValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         /** @var InStock $constraint */
         Assert::isInstanceOf($constraint, InStock::class);
@@ -63,7 +62,7 @@ final class InStockValidator extends ConstraintValidator
         if (!$this->availabilityChecker->isStockSufficient($stockable, $quantity)) {
             $this->context->addViolation(
                 $constraint->message,
-                ['%stockable%' => $stockable->getInventoryName()]
+                ['%itemName%' => $stockable->getInventoryName()]
             );
         }
     }

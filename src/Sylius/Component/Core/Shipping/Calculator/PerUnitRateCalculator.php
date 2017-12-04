@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Shipping\Calculator;
 
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
@@ -17,9 +19,6 @@ use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class PerUnitRateCalculator implements CalculatorInterface
 {
     /**
@@ -27,7 +26,7 @@ final class PerUnitRateCalculator implements CalculatorInterface
      *
      * @throws MissingChannelConfigurationException
      */
-    public function calculate(BaseShipmentInterface $subject, array $configuration)
+    public function calculate(BaseShipmentInterface $subject, array $configuration): int
     {
         Assert::isInstanceOf($subject, ShipmentInterface::class);
 
@@ -47,7 +46,7 @@ final class PerUnitRateCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'per_unit_rate';
     }

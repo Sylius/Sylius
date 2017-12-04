@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 interface FakeChannelCodeProviderInterface
 {
     /**
@@ -23,5 +22,5 @@ interface FakeChannelCodeProviderInterface
      *
      * @return string|null
      */
-    public function getCode(Request $request);
+    public function getCode(Request $request): ?string;
 }

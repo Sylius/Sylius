@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Generator;
 
 use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
@@ -17,10 +19,6 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductVariantGenerator implements ProductVariantGeneratorInterface
 {
     /**
@@ -54,7 +52,7 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generate(ProductInterface $product)
+    public function generate(ProductInterface $product): void
     {
         Assert::true($product->hasOptions(), 'Cannot generate variants for an object without options.');
 
@@ -63,8 +61,8 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
 
         foreach ($product->getOptions() as $key => $option) {
             foreach ($option->getValues() as $value) {
-                $optionSet[$key][] = $value->getId();
-                $optionMap[$value->getId()] = $value;
+                $optionSet[$key][] = $value->getCode();
+                $optionMap[$value->getCode()] = $value;
             }
         }
 
@@ -86,7 +84,7 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
      *
      * @return ProductVariantInterface
      */
-    protected function createVariant(ProductInterface $product, array $optionMap, $permutation)
+    private function createVariant(ProductInterface $product, array $optionMap, $permutation): ProductVariantInterface
     {
         /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createForProduct($product);
@@ -100,7 +98,7 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
      * @param array $optionMap
      * @param mixed $permutation
      */
-    private function addOptionValue(ProductVariantInterface $variant, array $optionMap, $permutation)
+    private function addOptionValue(ProductVariantInterface $variant, array $optionMap, $permutation): void
     {
         if (!is_array($permutation)) {
             $variant->addOptionValue($optionMap[$permutation]);
@@ -108,8 +106,8 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
             return;
         }
 
-        foreach ($permutation as $id) {
-            $variant->addOptionValue($optionMap[$id]);
+        foreach ($permutation as $code) {
+            $variant->addOptionValue($optionMap[$code]);
         }
     }
 }

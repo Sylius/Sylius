@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
@@ -23,11 +25,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Intl\Intl;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 final class CountryTypeExtension extends AbstractTypeExtension
 {
     /**
@@ -46,9 +43,9 @@ final class CountryTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
             $options = [
                 'label' => 'sylius.form.country.name',
                 'choice_loader' => null,
@@ -83,25 +80,25 @@ final class CountryTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return CountryType::class;
     }
 
     /**
-     * @param $code
+     * @param string $code
      *
-     * @return null|string
+     * @return string|null
      */
-    private function getCountryName($code)
+    private function getCountryName(string $code): ?string
     {
         return Intl::getRegionBundle()->getCountryName($code);
     }
 
     /**
-     * @return array
+     * @return array|CountryInterface[]
      */
-    private function getAvailableCountries()
+    private function getAvailableCountries(): array
     {
         $availableCountries = Intl::getRegionBundle()->getCountryNames();
 

@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Repository\Exception;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class ExistingResourceException extends \Exception
 {
     public function __construct()

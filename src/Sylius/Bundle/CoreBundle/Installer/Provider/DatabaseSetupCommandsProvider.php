@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Provider;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -19,9 +21,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProviderInterface
 {
     /**
@@ -40,12 +39,12 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     /**
      * {@inheritdoc}
      */
-    public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
+    public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         if (!$this->isDatabasePresent()) {
             return [
                 'doctrine:database:create',
-                'doctrine:schema:create',
+                'doctrine:migrations:migrate' => ['--no-interaction' => true],
                 'cache:clear',
             ];
         }
@@ -65,13 +64,13 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
      *
      * @throws \Exception
      */
-    private function isDatabasePresent()
+    private function isDatabasePresent(): bool
     {
         $databaseName = $this->getDatabaseName();
 
         try {
             $schemaManager = $this->getSchemaManager();
-            
+
             return in_array($databaseName, $schemaManager->listDatabases());
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -94,10 +93,10 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
      *
      * @return array
      */
-    private function getRequiredCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
+    private function getRequiredCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         if ($input->getOption('no-interaction')) {
-            $commands['doctrine:schema:update'] = ['--force' => true];
+            $commands['doctrine:migrations:migrate'] = ['--no-interaction' => true];
         }
 
         return $this->setupDatabase($input, $output, $questionHelper);
@@ -110,7 +109,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
      *
      * @return array
      */
-    private function setupDatabase(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
+    private function setupDatabase(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln('It appears that your database already exists.');
@@ -121,12 +120,12 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
             return [
                 'doctrine:database:drop' => ['--force' => true],
                 'doctrine:database:create',
-                'doctrine:schema:create',
+                'doctrine:migrations:migrate' => ['--no-interaction' => true],
             ];
         }
 
         if (!$this->isSchemaPresent()) {
-            return ['doctrine:schema:create'];
+            return ['doctrine:migrations:migrate' => ['--no-interaction' => true]];
         }
 
         $outputStyle->writeln('Seems like your database contains schema.');
@@ -135,7 +134,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         if ($questionHelper->ask($input, $output, $question)) {
             return [
                 'doctrine:schema:drop' => ['--force' => true],
-                'doctrine:schema:create',
+                'doctrine:migrations:migrate' => ['--no-interaction' => true],
             ];
         }
 
@@ -145,7 +144,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     /**
      * @return bool
      */
-    private function isSchemaPresent()
+    private function isSchemaPresent(): bool
     {
         return 0 !== count($this->getSchemaManager()->listTableNames());
     }
@@ -153,7 +152,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     /**
      * @return string
      */
-    private function getDatabaseName()
+    private function getDatabaseName(): string
     {
         return $this->doctrineRegistry->getManager()->getConnection()->getDatabase();
     }
@@ -161,7 +160,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     /**
      * @return AbstractSchemaManager
      */
-    private function getSchemaManager()
+    private function getSchemaManager(): AbstractSchemaManager
     {
         return $this->doctrineRegistry->getManager()->getConnection()->getSchemaManager();
     }

@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Provider;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class TranslationLocaleProvider implements TranslationLocaleProviderInterface
 {
     /**
@@ -34,7 +33,7 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
      * @param RepositoryInterface $localeRepository
      * @param string $defaultLocaleCode
      */
-    public function __construct(RepositoryInterface $localeRepository, $defaultLocaleCode)
+    public function __construct(RepositoryInterface $localeRepository, string $defaultLocaleCode)
     {
         $this->localeRepository = $localeRepository;
         $this->defaultLocaleCode = $defaultLocaleCode;
@@ -43,7 +42,7 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
     /**
      * {@inheritdoc}
      */
-    public function getDefinedLocalesCodes()
+    public function getDefinedLocalesCodes(): array
     {
         $locales = $this->localeRepository->findAll();
 
@@ -58,7 +57,7 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
     /**
      * {@inheritdoc}
      */
-    public function getDefaultLocaleCode()
+    public function getDefaultLocaleCode(): string
     {
         return $this->defaultLocaleCode;
     }

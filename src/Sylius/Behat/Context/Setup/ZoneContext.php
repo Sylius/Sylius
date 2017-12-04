@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -20,15 +22,13 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Intl\Intl;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ZoneContext implements Context
 {
     /**
@@ -118,12 +118,23 @@ final class ZoneContext implements Context
     }
 
     /**
+     * @Given the store has (also) a zone :zoneName
      * @Given the store has a zone :zoneName with code :code
      * @Given the store also has a zone :zoneName with code :code
      */
-    public function theStoreHasAZoneWithCode($zoneName, $code)
+    public function theStoreHasAZoneWithCode(string $zoneName, string $code = null): void
     {
-        $this->saveZone($this->setUpZone($zoneName, $code, Scope::ALL), 'zone');
+        $this->saveZone($this->createZone($zoneName, $code, Scope::ALL), 'zone');
+    }
+
+    /**
+     * @Given the store has zones :firstName, :secondName and :thirdName
+     */
+    public function theStoreHasZones(string ...$names): void
+    {
+        foreach ($names as $name) {
+            $this->theStoreHasAZoneWithCode($name);
+        }
     }
 
     /**
@@ -131,7 +142,7 @@ final class ZoneContext implements Context
      */
     public function theStoreHasAScopedZoneWithCode($scope, $zoneName, $code)
     {
-        $this->saveZone($this->setUpZone($zoneName, $code, $scope), $scope . '_zone');
+        $this->saveZone($this->createZone($zoneName, $code, $scope), $scope . '_zone');
     }
 
     /**
@@ -192,17 +203,17 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @param string $zoneName
-     * @param string $code
+     * @param string $name
+     * @param string|null $code
      * @param string $scope
      *
      * @return ZoneInterface
      */
-    private function setUpZone($zoneName, $code, $scope)
+    private function createZone(string $name, ?string $code = null, ?string $scope = Scope::ALL): ZoneInterface
     {
         $zone = $this->zoneFactory->createTyped(ZoneInterface::TYPE_ZONE);
-        $zone->setCode($code);
-        $zone->setName($zoneName);
+        $zone->setCode($code ?? StringInflector::nameToCode($name));
+        $zone->setName($name);
         $zone->setScope($scope);
 
         return $zone;

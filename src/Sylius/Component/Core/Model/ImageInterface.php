@@ -9,49 +9,48 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ImageInterface extends ResourceInterface
 {
     /**
      * @return string
      */
-    public function getType();
+    public function getType(): ?string;
 
     /**
-     * @param string $type
+     * @param string|null $type
      */
-    public function setType($type);
+    public function setType(?string $type): void;
 
     /**
-     * @return null|\SplFileInfo
+     * @return \SplFileInfo|null
      */
-    public function getFile();
+    public function getFile(): ?\SplFileInfo;
 
     /**
-     * @param \SplFileInfo $file
+     * @param \SplFileInfo|null $file
      */
-    public function setFile(\SplFileInfo $file);
+    public function setFile(?\SplFileInfo $file): void;
 
     /**
      * @return bool
      */
-    public function hasFile();
+    public function hasFile(): bool;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPath();
+    public function getPath(): ?string;
 
     /**
-     * @param string $path
+     * @param string|null $path
      */
-    public function setPath($path);
+    public function setPath(?string $path): void;
 
     /**
      * @return object
@@ -61,5 +60,5 @@ interface ImageInterface extends ResourceInterface
     /**
      * @param object|null $owner
      */
-    public function setOwner($owner);
+    public function setOwner($owner): void;
 }

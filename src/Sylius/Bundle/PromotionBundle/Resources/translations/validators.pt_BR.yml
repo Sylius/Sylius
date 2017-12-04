@@ -5,6 +5,7 @@ sylius:
     promotion:
         code:
             unique: O método de pagamento com determinado código já existe.
+            regex: O código da promoção só pode conter letras, números, hifens e sublinhados.
             not_blank: Por favor, digite o código de promoção.
         description:
             max_length: Descrição da promoção não deve ser superior a 1 caracter. |Descrição da promoção não deve ter mais de {{limit}} caracteres.
@@ -15,11 +16,28 @@ sylius:
             max_length: Nome do produto não deve ser superior a 1 caractere. |Nome do produto não deve ter mais de {{limit}} caracteres.
             min_length: Nome do produto deve ter pelo menos 1 caracter. |Nome do produto deve ter pelo menos {{limit}} caracteres.
             not_blank: Por favor, digite o nome da promoção.
+    promotion_action:
+        percentage_discount_configuration:
+            min: O valor de um percentual de desconto deve ser no mínimo de 0%.
+            max: O valor máximo de um percentagem de desconto é de 100%.
     promotion_coupon:
         code:
             max_length: Código de cupom não deve ter mais de 1 caractere. |Código de cupom não deve ter mais de {{limit}} caracteres.
             min_length: Código do cupom deve ter pelo menos 1 caracter. |Código do cupom deve ter pelo menos {{limit}} caracteres.
             not_blank: Por favor digite o código do cupom.
+            regex: Código do Cupom somente pode ser composto por letras, números, hifens e traços.
             unique: Este cupom já existe.
+        is_invalid: Código do Cupom inválido.
         usage_limit:
             min: Limite de uso de cupom deve ser pelo menos {{limit}}.
+    promotion_coupon_generator_instruction:
+        amount:
+            min: Total de cupons para gerar deve ser pelo menos {{ limit }}.
+            not_blank: Por favor, digite o total de cupons para gerar.
+        code_length:
+            min: Código do cupom deve ter pelo menos {{ limit }} caracteres.
+            max: Código de cupom não deve ter mais de {{ limit }} caracteres.
+            not_blank: Por favor digite o tamanho do código de cupom.
+        possible_generation_amount: Cupom Inválido pelo código ou valor. Não é possível gerar único %expectedAmount% de cupons com tamanho de comprimento igual a %codeLength%. Possibilidade de gerar é no valor de %possibleAmount%.
+        usage_limit:
+            min: Limite de uso de cupons gerados deve ser pelo menos {{ limit }}.

@@ -9,15 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderPaymentMethodSelectionRequirementChecker implements OrderPaymentMethodSelectionRequirementCheckerInterface
 {
     /**
@@ -33,7 +31,7 @@ final class OrderPaymentMethodSelectionRequirementChecker implements OrderPaymen
     /**
      * {@inheritdoc}
      */
-    public function isPaymentMethodSelectionRequired(OrderInterface $order)
+    public function isPaymentMethodSelectionRequired(OrderInterface $order): bool
     {
         if ($order->getTotal() <= 0) {
             return false;

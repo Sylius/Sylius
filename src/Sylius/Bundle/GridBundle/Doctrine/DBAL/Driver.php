@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\GridBundle\Doctrine\DBAL;
 
 use Doctrine\DBAL\Connection;
+use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class Driver implements DriverInterface
 {
-    const NAME = 'doctrine/dbal';
+    public const NAME = 'doctrine/dbal';
 
     /**
      * @var Connection
@@ -38,7 +38,7 @@ final class Driver implements DriverInterface
     /**
      * {@inheritdoc}
      */
-    public function getDataSource(array $configuration, Parameters $parameters)
+    public function getDataSource(array $configuration, Parameters $parameters): DataSourceInterface
     {
         if (!array_key_exists('table', $configuration)) {
             throw new \InvalidArgumentException('"table" must be configured.');

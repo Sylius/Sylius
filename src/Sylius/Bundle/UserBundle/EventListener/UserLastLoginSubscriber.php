@@ -9,22 +9,23 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\UserEvents;
-use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
-class UserLastLoginSubscriber implements EventSubscriberInterface
+final class UserLastLoginSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ObjectManager
      */
-    protected $userManager;
+    private $userManager;
 
     /**
      * @var string
@@ -35,7 +36,7 @@ class UserLastLoginSubscriber implements EventSubscriberInterface
      * @param ObjectManager $userManager
      * @param string $userClass
      */
-    public function __construct(ObjectManager $userManager, $userClass)
+    public function __construct(ObjectManager $userManager, string $userClass)
     {
         $this->userManager = $userManager;
         $this->userClass = $userClass;
@@ -44,7 +45,7 @@ class UserLastLoginSubscriber implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
@@ -57,8 +58,7 @@ class UserLastLoginSubscriber implements EventSubscriberInterface
      */
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
-        $user = $event->getAuthenticationToken()->getUser();
-        $this->updateUserLastLogin($user);
+        $this->updateUserLastLogin($event->getAuthenticationToken()->getUser());
     }
 
     /**
@@ -70,14 +70,16 @@ class UserLastLoginSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param UserInterface $user
+     * @param object $user
      */
-    protected function updateUserLastLogin($user)
+    private function updateUserLastLogin($user): void
     {
-        if ($user instanceof $this->userClass) {
-            $user->setLastLogin(new \DateTime());
-            $this->userManager->persist($user);
-            $this->userManager->flush();
+        if (!$user instanceof $this->userClass) {
+            return;
         }
+
+        $user->setLastLogin(new \DateTime());
+        $this->userManager->persist($user);
+        $this->userManager->flush();
     }
 }

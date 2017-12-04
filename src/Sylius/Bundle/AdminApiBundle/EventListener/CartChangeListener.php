@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -18,9 +20,6 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CartChangeListener
 {
     /**
@@ -46,7 +45,7 @@ final class CartChangeListener
     /**
      * @param GenericEvent $event
      */
-    public function recalculateOrderOnAdd(GenericEvent $event)
+    public function recalculateOrderOnAdd(GenericEvent $event): void
     {
         $item = $event->getSubject();
         Assert::isInstanceOf($item, OrderItemInterface::class);
@@ -60,7 +59,7 @@ final class CartChangeListener
     /**
      * @param GenericEvent $event
      */
-    public function recalculateOrderOnDelete(GenericEvent $event)
+    public function recalculateOrderOnDelete(GenericEvent $event): void
     {
         $item = $event->getSubject();
         Assert::isInstanceOf($item, OrderItemInterface::class);

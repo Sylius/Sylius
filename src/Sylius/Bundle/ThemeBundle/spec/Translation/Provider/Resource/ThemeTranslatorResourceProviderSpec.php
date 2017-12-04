@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Provider;
 
 use PhpSpec\ObjectBehavior;
@@ -16,29 +18,20 @@ use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\ThemeTranslatorResourceProvider;
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProviderInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Resource\ThemeTranslationResource;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
 {
     function let(
         TranslationFilesFinderInterface $translationFilesFinder,
         ThemeRepositoryInterface $themeRepository,
         ThemeHierarchyProviderInterface $themeHierarchyProvider
-    ) {
+    ): void {
         $this->beConstructedWith($translationFilesFinder, $themeRepository, $themeHierarchyProvider);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ThemeTranslatorResourceProvider::class);
-    }
-
-    function it_implements_translator_resource_provider_interface()
+    function it_implements_translator_resource_provider_interface(): void
     {
         $this->shouldImplement(TranslatorResourceProviderInterface::class);
     }
@@ -48,7 +41,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         ThemeRepositoryInterface $themeRepository,
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ThemeInterface $theme
-    ) {
+    ): void {
         $themeRepository->findAll()->willReturn([$theme]);
         $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
 
@@ -68,7 +61,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ThemeInterface $mainTheme,
         ThemeInterface $parentTheme
-    ) {
+    ): void {
         $themeRepository->findAll()->willReturn([$mainTheme]);
         $themeHierarchyProvider->getThemeHierarchy($mainTheme)->willReturn([$mainTheme, $parentTheme]);
 
@@ -93,7 +86,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ThemeInterface $mainTheme,
         ThemeInterface $parentTheme
-    ) {
+    ): void {
         $themeRepository->findAll()->willReturn([$mainTheme, $parentTheme]);
         $themeHierarchyProvider->getThemeHierarchy($mainTheme)->willReturn([$mainTheme, $parentTheme]);
         $themeHierarchyProvider->getThemeHierarchy($parentTheme)->willReturn([$parentTheme]);
@@ -119,7 +112,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         ThemeRepositoryInterface $themeRepository,
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ThemeInterface $theme
-    ) {
+    ): void {
         $themeRepository->findAll()->willReturn([$theme]);
         $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
 
@@ -137,7 +130,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ThemeInterface $mainTheme,
         ThemeInterface $parentTheme
-    ) {
+    ): void {
         $themeRepository->findAll()->willReturn([$mainTheme]);
         $themeHierarchyProvider->getThemeHierarchy($mainTheme)->willReturn([$mainTheme, $parentTheme]);
 
@@ -159,7 +152,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         ThemeHierarchyProviderInterface $themeHierarchyProvider,
         ThemeInterface $mainTheme,
         ThemeInterface $parentTheme
-    ) {
+    ): void {
         $themeRepository->findAll()->willReturn([$mainTheme, $parentTheme]);
         $themeHierarchyProvider->getThemeHierarchy($mainTheme)->willReturn([$mainTheme, $parentTheme]);
         $themeHierarchyProvider->getThemeHierarchy($parentTheme)->willReturn([$parentTheme]);

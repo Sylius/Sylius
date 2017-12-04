@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class LexicalContext implements Context
 {
     /**
@@ -47,7 +46,7 @@ final class LexicalContext implements Context
      */
     private function validatePriceString($price)
     {
-        if (strlen(substr(strrchr($price, '.'), 1)) > 2) {
+        if (!(bool) preg_match('/^\d+(?:\.\d{1,2})?$/', $price)) {
             throw new \InvalidArgumentException('Price string should not have more than 2 decimal digits.');
         }
     }

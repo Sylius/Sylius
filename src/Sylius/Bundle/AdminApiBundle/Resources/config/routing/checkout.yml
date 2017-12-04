@@ -75,7 +75,10 @@ sylius_admin_api_checkout_complete:
         _controller: sylius.controller.order:updateAction
         _sylius:
             serialization_version: $version
-            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType
+            form:
+                type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType
+                options:
+                    validation_groups: 'sylius_checkout_complete'
             repository:
                 method: find
                 arguments: [$orderId]

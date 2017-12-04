@@ -9,16 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Sylius\Component\Resource\Repository\TranslatableRepositoryInterface;
 
 /**
  * Doctrine ORM driver translatable entity repository.
- *
- * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
  */
 class TranslatableRepository extends DocumentRepository implements TranslatableRepositoryInterface
 {

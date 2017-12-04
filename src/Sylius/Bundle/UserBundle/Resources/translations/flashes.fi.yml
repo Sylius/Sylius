@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        expire_password_reset_token: 'Salasanan vaihtotunniste on vanhentunut.'
+        change_password: 'Salasanan vaihto onnistui!'
+        reset_password: 'Salasanan nollaus onnistui!'
+        reset_password_request: 'Jos määrittämäsi sähköpostiosoite on olemassa järjestelmässämme, olemme lähettäneet siihen salasanan vaihto-ohjeet.'
+        verify_email: 'Sähköpostiosoitteen varmennus onnistui.'
+        verify_email_by_invalid_token: 'Varmennustunniste ei kelpaa.'
+        verify_email_request: 'Varmennuslinkin sisältävä viesti on lähetetty sähköpostiosoitteeseesi.'
+        verify_verified_email: 'Sähköpostiosoitteesi on jo varmennettu.'

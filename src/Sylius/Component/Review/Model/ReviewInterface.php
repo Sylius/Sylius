@@ -9,78 +9,76 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Review\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Daniel Richter <nexyz9@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface ReviewInterface extends TimestampableInterface, ResourceInterface
 {
-    const STATUS_NEW = 'new';
-    const STATUS_ACCEPTED = 'accepted';
-    const STATUS_REJECTED = 'rejected';
+    public const STATUS_NEW = 'new';
+    public const STATUS_ACCEPTED = 'accepted';
+    public const STATUS_REJECTED = 'rejected';
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle();
+    public function getTitle(): ?string;
 
     /**
-     * @param string $title
+     * @param string|null $title
      */
-    public function setTitle($title);
+    public function setTitle(?string $title): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getRating();
+    public function getRating(): ?int;
 
     /**
-     * @param int $rating
+     * @param int|null $rating
      */
-    public function setRating($rating);
+    public function setRating(?int $rating): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getComment();
+    public function getComment(): ?string;
 
     /**
-     * @param string $comment
+     * @param string|null $comment
      */
-    public function setComment($comment);
+    public function setComment(?string $comment): void;
 
     /**
-     * @return ReviewerInterface
+     * @return ReviewerInterface|null
      */
-    public function getAuthor();
+    public function getAuthor(): ?ReviewerInterface;
 
     /**
-     * @param ReviewerInterface $author
+     * @param ReviewerInterface|null $author
      */
-    public function setAuthor(ReviewerInterface $author = null);
+    public function setAuthor(?ReviewerInterface $author): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStatus();
+    public function getStatus(): ?string;
 
     /**
-     * @param string $status
+     * @param string|null $status
      */
-    public function setStatus($status);
+    public function setStatus(?string $status): void;
 
     /**
-     * @return ReviewableInterface
+     * @return ReviewableInterface|null
      */
-    public function getReviewSubject();
+    public function getReviewSubject(): ?ReviewableInterface;
 
     /**
-     * @param ReviewableInterface $reviewSubject
+     * @param ReviewableInterface|null $reviewSubject
      */
-    public function setReviewSubject(ReviewableInterface $reviewSubject);
+    public function setReviewSubject(?ReviewableInterface $reviewSubject): void;
 }

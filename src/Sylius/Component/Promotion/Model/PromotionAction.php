@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Model;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 class PromotionAction implements PromotionActionInterface
 {
     /**
@@ -47,7 +46,7 @@ class PromotionAction implements PromotionActionInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -55,7 +54,7 @@ class PromotionAction implements PromotionActionInterface
     /**
      * {@inheritdoc}
      */
-    public function setType($type)
+    public function setType(?string $type): void
     {
         $this->type = $type;
     }
@@ -63,7 +62,7 @@ class PromotionAction implements PromotionActionInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfiguration()
+    public function getConfiguration(): array
     {
         return $this->configuration;
     }
@@ -71,7 +70,7 @@ class PromotionAction implements PromotionActionInterface
     /**
      * {@inheritdoc}
      */
-    public function setConfiguration(array $configuration)
+    public function setConfiguration(array $configuration): void
     {
         $this->configuration = $configuration;
     }
@@ -79,7 +78,7 @@ class PromotionAction implements PromotionActionInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotion()
+    public function getPromotion(): ?PromotionInterface
     {
         return $this->promotion;
     }
@@ -87,7 +86,7 @@ class PromotionAction implements PromotionActionInterface
     /**
      * {@inheritdoc}
      */
-    public function setPromotion(PromotionInterface $promotion = null)
+    public function setPromotion(?PromotionInterface $promotion): void
     {
         $this->promotion = $promotion;
     }

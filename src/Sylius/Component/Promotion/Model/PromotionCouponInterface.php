@@ -9,63 +9,62 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface PromotionCouponInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
     /**
      * @return int|null
      */
-    public function getUsageLimit();
+    public function getUsageLimit(): ?int;
 
     /**
      * @param int|null $usageLimit
      */
-    public function setUsageLimit($usageLimit);
+    public function setUsageLimit(?int $usageLimit): void;
 
     /**
      * @return int
      */
-    public function getUsed();
+    public function getUsed(): int;
 
     /**
      * @param int $used
      */
-    public function setUsed($used);
+    public function setUsed(int $used): void;
 
-    public function incrementUsed();
+    public function incrementUsed(): void;
 
-    public function decrementUsed();
+    public function decrementUsed(): void;
 
     /**
      * @return PromotionInterface
      */
-    public function getPromotion();
+    public function getPromotion(): ?PromotionInterface;
 
     /**
-     * @param PromotionInterface $promotion
+     * @param PromotionInterface|null $promotion
      */
-    public function setPromotion(PromotionInterface $promotion = null);
+    public function setPromotion(?PromotionInterface $promotion): void;
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface|null
      */
-    public function getExpiresAt();
+    public function getExpiresAt(): ?\DateTimeInterface;
 
     /**
-     * @param \DateTime $expiresAt
+     * @param \DateTimeInterface $expiresAt
      */
-    public function setExpiresAt(\DateTime $expiresAt = null);
+    public function setExpiresAt(?\DateTimeInterface $expiresAt): void;
 
     /**
      * @return bool
      */
-    public function isValid();
+    public function isValid(): bool;
 }

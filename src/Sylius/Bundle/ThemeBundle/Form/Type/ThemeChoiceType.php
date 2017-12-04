@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Form\Type;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -18,9 +20,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ThemeChoiceType extends AbstractType
 {
     /**
@@ -39,13 +38,13 @@ final class ThemeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'choices' => function (Options $options) {
+            'choices' => function (Options $options): array {
                 return $this->themeRepository->findAll();
             },
-            'choice_label' => function (ThemeInterface $theme) {
+            'choice_label' => function (ThemeInterface $theme): string {
                 return (string) $theme;
             },
         ]);
@@ -54,7 +53,7 @@ final class ThemeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return ChoiceType::class;
     }
@@ -62,7 +61,7 @@ final class ThemeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_theme_choice';
     }

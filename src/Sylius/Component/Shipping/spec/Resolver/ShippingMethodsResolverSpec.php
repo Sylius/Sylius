@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Shipping\Resolver;
 
 use Doctrine\Common\Persistence\ObjectRepository;
@@ -16,27 +18,18 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Sylius\Component\Shipping\Resolver\ShippingMethodsResolver;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ShippingMethodsResolverSpec extends ObjectBehavior
 {
     function let(
         ObjectRepository $methodRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker
-    ) {
+    ): void {
         $this->beConstructedWith($methodRepository, $eligibilityChecker);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ShippingMethodsResolver::class);
-    }
-
-    function it_implements_Sylius_shipping_methods_resolver_interface()
+    function it_implements_Sylius_shipping_methods_resolver_interface(): void
     {
         $this->shouldImplement(ShippingMethodsResolverInterface::class);
     }
@@ -48,7 +41,7 @@ final class ShippingMethodsResolverSpec extends ObjectBehavior
         ShippingMethodInterface $method1,
         ShippingMethodInterface $method2,
         ShippingMethodInterface $method3
-    ) {
+    ): void {
         $methods = [$method1, $method2, $method3];
         $methodRepository->findBy(['enabled' => true])->shouldBeCalled()->willReturn($methods);
 

@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CurrencyBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class DifferentSourceTargetCurrency extends Constraint
 {
     /**
@@ -26,7 +25,7 @@ class DifferentSourceTargetCurrency extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }

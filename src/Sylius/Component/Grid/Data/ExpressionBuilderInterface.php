@@ -9,24 +9,23 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Data;
 
-/**
- * @author Paweł Jędrzejewski <pawel@svaluelius.org>
- */
 interface ExpressionBuilderInterface
 {
     /**
      * @param mixed ...$expressions
      *
-     * @return self
+     * @return mixed
      */
     public function andX(...$expressions);
 
     /**
      * @param mixed ...$expressions
      *
-     * @return self
+     * @return mixed
      */
     public function orX(...$expressions);
 
@@ -35,117 +34,117 @@ interface ExpressionBuilderInterface
      * @param string $operator
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function comparison($field, $operator, $value);
+    public function comparison(string $field, string $operator, $value);
 
     /**
      * @param string $field
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function equals($field, $value);
+    public function equals(string $field, $value);
 
     /**
      * @param string $field
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function notEquals($field, $value);
+    public function notEquals(string $field, $value);
 
     /**
      * @param string $field
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function lessThan($field, $value);
+    public function lessThan(string $field, $value);
 
     /**
      * @param string $field
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function lessThanOrEqual($field, $value);
+    public function lessThanOrEqual(string $field, $value);
 
     /**
      * @param string $field
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function greaterThan($field, $value);
+    public function greaterThan(string $field, $value);
 
     /**
      * @param string $field
      * @param mixed $value
      *
-     * @return self
+     * @return mixed
      */
-    public function greaterThanOrEqual($field, $value);
+    public function greaterThanOrEqual(string $field, $value);
 
     /**
      * @param string $field
      * @param array $values
      *
-     * @return self
+     * @return mixed
      */
-    public function in($field, array $values);
+    public function in(string $field, array $values);
 
     /**
      * @param string $field
      * @param array $values
      *
-     * @return self
+     * @return mixed
      */
-    public function notIn($field, array $values);
+    public function notIn(string $field, array $values);
 
     /**
      * @param string $field
      *
-     * @return self
+     * @return mixed
      */
-    public function isNull($field);
+    public function isNull(string $field);
 
     /**
      * @param string $field
      *
-     * @return self
+     * @return mixed
      */
-    public function isNotNull($field);
-
-    /**
-     * @param string $field
-     * @param string $pattern
-     *
-     * @return self
-     */
-    public function like($field, $pattern);
+    public function isNotNull(string $field);
 
     /**
      * @param string $field
      * @param string $pattern
      *
-     * @return self
+     * @return mixed
      */
-    public function notLike($field, $pattern);
+    public function like(string $field, string $pattern);
+
+    /**
+     * @param string $field
+     * @param string $pattern
+     *
+     * @return mixed
+     */
+    public function notLike(string $field, string $pattern);
 
     /**
      * @param string $field
      * @param string $direction
      *
-     * @return self
+     * @return mixed
      */
-    public function orderBy($field, $direction);
+    public function orderBy(string $field, string $direction);
 
     /**
      * @param string $field
      * @param string $direction
      *
-     * @return self
+     * @return mixed
      */
-    public function addOrderBy($field, $direction);
+    public function addOrderBy(string $field, string $direction);
 }

@@ -9,42 +9,35 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\UserBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Provider\AbstractUserProvider;
-use Sylius\Bundle\UserBundle\Provider\EmailProvider;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class EmailProviderSpec extends ObjectBehavior
 {
-    function let(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
+    function let(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer): void
     {
         $this->beConstructedWith(User::class, $userRepository, $canonicalizer);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(EmailProvider::class);
-    }
-
-    function it_implements_symfony_user_provider_interface()
+    function it_implements_symfony_user_provider_interface(): void
     {
         $this->shouldImplement(UserProviderInterface::class);
     }
 
-    function it_should_extend_user_provider()
+    function it_should_extend_user_provider(): void
     {
         $this->shouldHaveType(AbstractUserProvider::class);
     }
 
-    function it_supports_sylius_user_model()
+    function it_supports_sylius_user_model(): void
     {
         $this->supportsClass(User::class)->shouldReturn(true);
     }
@@ -53,7 +46,7 @@ final class EmailProviderSpec extends ObjectBehavior
         UserRepositoryInterface $userRepository,
         CanonicalizerInterface $canonicalizer,
         User $user
-    ) {
+    ): void {
         $canonicalizer->canonicalize('test@user.com')->willReturn('test@user.com');
 
         $userRepository->findOneByEmail('test@user.com')->willReturn($user);
@@ -61,7 +54,7 @@ final class EmailProviderSpec extends ObjectBehavior
         $this->loadUserByUsername('test@user.com')->shouldReturn($user);
     }
 
-    function it_updates_user_by_user_name(UserRepositoryInterface $userRepository, User $user)
+    function it_updates_user_by_user_name(UserRepositoryInterface $userRepository, User $user): void
     {
         $userRepository->find(1)->willReturn($user);
 

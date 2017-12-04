@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\PromotionBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
@@ -20,23 +22,20 @@ use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInte
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
 {
-    function let(GenerationPolicyInterface $generationPolicy, ExecutionContextInterface $context)
+    function let(GenerationPolicyInterface $generationPolicy, ExecutionContextInterface $context): void
     {
         $this->beConstructedWith($generationPolicy);
         $this->initialize($context);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(CouponGenerationAmountValidator::class);
     }
 
-    function it_is_a_constraint_validator()
+    function it_is_a_constraint_validator(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
@@ -45,7 +44,7 @@ final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $context,
         PromotionCouponGeneratorInstructionInterface $instruction,
         GenerationPolicyInterface $generationPolicy
-    ) {
+    ): void {
         $constraint = new CouponPossibleGenerationAmount();
 
         $instruction->getAmount()->willReturn(17);
@@ -61,7 +60,7 @@ final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $context,
         PromotionCouponGeneratorInstructionInterface $instruction,
         GenerationPolicyInterface $generationPolicy
-    ) {
+    ): void {
         $constraint = new CouponPossibleGenerationAmount();
 
         $instruction->getAmount()->willReturn(5);

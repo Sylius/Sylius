@@ -1,11 +1,81 @@
+Sylius\Component\Core\Model\Product:
+    mug:
+        code: "MUG"
+        channels: ["@channel_web"]
+        currentLocale: "en_US"
+        currentTranslation: "@mug_translation"
+
+Sylius\Component\Core\Model\ProductTranslation:
+    mug_translation:
+        slug: "mug"
+        locale: "en_US"
+        name: "Mug"
+        description: "<paragraph(2)>"
+        translatable: "@mug"
+
+Sylius\Component\Core\Model\ProductVariant:
+    mug_sw:
+        code: "MUG_SW"
+        product: "@mug"
+        currentLocale: "en_US"
+        currentTranslation: "@sw_mug_translation"
+        updatedAt: "<(new \\DateTime('2015-10-10'))>"
+        channelPricings:
+            WEB: "@sw_mug_web_channel_pricing"
+    mug_lotr:
+        code: "MUG_LOTR"
+        product: "@mug"
+        currentLocale: "en_US"
+        currentTranslation: "@lotr_mug_translation"
+        updatedAt: "<(new \\DateTime('2015-10-04'))>"
+        channelPricings:
+            WEB: "@lotr_mug_web_channel_pricing"
+    mug_bb:
+        code: "MUG_BB"
+        product: "@mug"
+        currentLocale: "en_US"
+        currentTranslation: "@bb_mug_translation"
+        updatedAt: "<(new \\DateTime('2015-10-05'))>"
+        channelPricings:
+            WEB: "@bb_mug_web_channel_pricing"
+    hard_available_mug:
+        code: "HARD_AVAILABLE_MUG"
+        product: "@mug"
+        currentLocale: "en_US"
+        currentTranslation: "@hard_available_mug_translation"
+        updatedAt: "<(new \\DateTime('2015-10-05'))>"
+        channelPricings:
+            WEB: "@hard_available_mug_web_channel_pricing"
+        tracked: true
+        onHand: 2
+        onHold: 1
+
+Sylius\Component\Product\Model\ProductVariantTranslation:
+    sw_mug_translation:
+        locale: "en_US"
+        name: "Star wars mug"
+        translatable: "@mug_sw"
+    lotr_mug_translation:
+        locale: "en_US"
+        name: "Lotr mug"
+        translatable: "@mug_lotr"
+    bb_mug_translation:
+        locale: "en_US"
+        name: "Breaking bad mug"
+        translatable: "@mug_bb"
+    hard_available_mug_translation:
+        locale: "en_US"
+        name: "Breaking bad mug"
+        translatable: "@hard_available_mug"
+
 Sylius\Component\Core\Model\Order:
     cart_with_items:
         channel: "@channel_web"
         addItem: ["@sw_mug_item", "@hard_available_mug_item"]
-        currencyCode: USD
-        localeCode: en_US
+        currencyCode: "USD"
+        localeCode: "en_US"
         customer: "@customer_oliver"
-        state: cart
+        state: "cart"
 
 Sylius\Component\Core\Model\OrderItem:
     sw_mug_item:
@@ -41,89 +111,19 @@ Sylius\Component\Core\Model\Channel:
 
 Sylius\Component\Currency\Model\Currency:
     currency:
-        code: USD
+        code: "USD"
 
 Sylius\Component\Locale\Model\Locale:
     locale:
-        code: en_US
+        code: "en_US"
 
 Sylius\Component\Core\Model\Customer:
     customer_oliver:
-        firstName: Oliver
-        lastName: Queen
-        email: oliver.queen@star-city.com
-        emailCanonical: oliver.queen@star-city.com
-        birthday: <date()>
-
-Sylius\Component\Core\Model\Product:
-    mug:
-        code: MUG
-        channels: ["@channel_web"]
-        currentLocale: en_US
-        currentTranslation: "@mug_translation"
-
-Sylius\Component\Core\Model\ProductTranslation:
-    mug_translation:
-        slug: mug
-        locale: en_US
-        name: 'Mug'
-        description: <paragraph(2)>
-        translatable: "@mug"
-
-Sylius\Component\Core\Model\ProductVariant:
-    mug_sw:
-        code: MUG_SW
-        product: "@mug"
-        currentLocale: en_US
-        currentTranslation: "@sw_mug_translation"
-        updatedAt: 2015-10-10
-        channelPricings:
-            WEB: "@sw_mug_web_channel_pricing"
-    mug_lotr:
-        code: MUG_LOTR
-        product: "@mug"
-        currentLocale: en_US
-        currentTranslation: "@lotr_mug_translation"
-        updatedAt: 2015-10-04
-        channelPricings:
-            WEB: "@lotr_mug_web_channel_pricing"
-    mug_bb:
-        code: MUG_BB
-        product: "@mug"
-        currentLocale: en_US
-        currentTranslation: "@bb_mug_translation"
-        updatedAt: 2015-10-05
-        channelPricings:
-            WEB: "@bb_mug_web_channel_pricing"
-    hard_available_mug:
-        code: HARD_AVAILABLE_MUG
-        product: "@mug"
-        currentLocale: en_US
-        currentTranslation: "@hard_available_mug_translation"
-        updatedAt: 2015-10-05
-        channelPricings:
-            WEB: "@hard_available_mug_web_channel_pricing"
-        tracked: true
-        onHand: 2
-        onHold: 1
-
-Sylius\Component\Product\Model\ProductVariantTranslation:
-    sw_mug_translation:
-        locale: en_US
-        name: 'Star wars mug'
-        translatable: "@mug_sw"
-    lotr_mug_translation:
-        locale: en_US
-        name: 'Lotr mug'
-        translatable: "@mug_lotr"
-    bb_mug_translation:
-        locale: en_US
-        name: 'Breaking bad mug'
-        translatable: "@mug_bb"
-    hard_available_mug_translation:
-        locale: en_US
-        name: 'Breaking bad mug'
-        translatable: "@hard_available_mug"
+        firstName: "Oliver"
+        lastName: "Queen"
+        email: "oliver.queen@star-city.com"
+        emailCanonical: "oliver.queen@star-city.com"
+        birthday: "<(new \\DateTime())>"
 
 Sylius\Component\Core\Model\ChannelPricing:
     sw_mug_web_channel_pricing:

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -18,9 +20,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class BrowsingProductVariantsContext implements Context
 {
     /**
@@ -64,6 +63,14 @@ final class BrowsingProductVariantsContext implements Context
     }
 
     /**
+     * @Then I should see the product variant :productVariantName in the list
+     */
+    public function iShouldSeeTheProductVariantInTheList(string $productVariantName): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $productVariantName]));
+    }
+
+    /**
      * @Then the :productVariantCode variant of the :product product should not appear in the store
      */
     public function theProductVariantShouldNotAppearInTheShop($productVariantCode, ProductInterface $product)
@@ -94,6 +101,7 @@ final class BrowsingProductVariantsContext implements Context
     }
 
     /**
+     * @When /^I browse variants of (this product)$/
      * @When /^I (?:|want to )view all variants of (this product)$/
      * @When /^I view(?:| all) variants of the (product "[^"]+")$/
      */
@@ -110,6 +118,14 @@ final class BrowsingProductVariantsContext implements Context
     public function iShouldSeeProductVariantsInTheList($numberOfProductVariants = 0)
     {
         Assert::same($this->indexPage->countItems(), (int) $numberOfProductVariants);
+    }
+
+    /**
+     * @Then I should see a single product variant in the list
+     */
+    public function iShouldSeeASingleProductVariantInTheList(): void
+    {
+        $this->iShouldSeeProductVariantsInTheList(1);
     }
 
     /**

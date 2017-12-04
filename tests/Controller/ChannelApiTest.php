@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ChannelApiTest extends JsonApiTestCase
 {
     /**
@@ -56,7 +55,6 @@ final class ChannelApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/channels.yml');
-
 
         $this->client->request('GET', '/api/v1/channels/', [], [], static::$authorizedHeaderWithAccept);
 
@@ -105,12 +103,12 @@ final class ChannelApiTest extends JsonApiTestCase
     }
 
     /**
-    * @param ChannelInterface $channel
+     * @param ChannelInterface $channel
      *
      * @return string
      */
     private function getChannelUrl(ChannelInterface $channel)
     {
-         return '/api/v1/channels/' . $channel->getCode();
+        return '/api/v1/channels/' . $channel->getCode();
     }
 }

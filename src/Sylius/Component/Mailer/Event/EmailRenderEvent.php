@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Mailer\Event;
 
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Symfony\Component\EventDispatcher\Event;
 
-/**
- * @author Jérémy Leherpeur <jeremy@leherpeur.net>
- */
 class EmailRenderEvent extends Event
 {
     /**
@@ -42,27 +41,23 @@ class EmailRenderEvent extends Event
     /**
      * @return RenderedEmail
      */
-    public function getRenderedEmail()
+    public function getRenderedEmail(): RenderedEmail
     {
         return $this->renderedEmail;
     }
 
     /**
      * @param RenderedEmail $renderedEmail
-     *
-     * @return $this
      */
-    public function setRenderedEmail(RenderedEmail $renderedEmail)
+    public function setRenderedEmail(RenderedEmail $renderedEmail): void
     {
         $this->renderedEmail = $renderedEmail;
-
-        return $this;
     }
 
     /**
      * @return array
      */
-    public function getRecipients()
+    public function getRecipients(): array
     {
         return $this->recipients;
     }
@@ -70,7 +65,7 @@ class EmailRenderEvent extends Event
     /**
      * @param array $recipients
      */
-    public function setRecipients(array $recipients)
+    public function setRecipients(array $recipients): void
     {
         $this->recipients = $recipients;
     }

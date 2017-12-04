@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -16,9 +18,6 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\PaymentMethodFixture;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
@@ -26,7 +25,7 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function payment_methods_are_optional()
+    public function payment_methods_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'custom');
     }
@@ -34,7 +33,7 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function payment_methods_can_be_generated_randomly()
+    public function payment_methods_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
         $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
@@ -43,7 +42,7 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function payment_method_code_is_optional()
+    public function payment_method_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['code' => 'CUSTOM']]]], 'custom.*.code');
     }
@@ -51,7 +50,7 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function payment_method_gateway_name_is_optional()
+    public function payment_method_gateway_name_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['gatewayName' => 'Online']]]], 'custom.*.gatewayName');
     }
@@ -59,7 +58,7 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function payment_method_gateway_factory_is_optional()
+    public function payment_method_gateway_factory_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['gatewayFactory' => 'offline']]]], 'custom.*.gatewayFactory');
     }
@@ -67,7 +66,7 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function payment_method_gateway_configuration_is_optional()
+    public function payment_method_gateway_configuration_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['gatewayConfig' => []]]]], 'custom.*.gatewayConfig');
     }
@@ -75,7 +74,7 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function payment_method_gateway_configuration_must_by_array()
+    public function payment_method_gateway_configuration_must_by_array(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['gatewayConfig' => ['username' => 'USERNAME']]]]], 'custom.*.gatewayConfig');
         $this->assertConfigurationIsInvalid([['custom' => [['gatewayConfig' => 'USERNAME']]]], 'Invalid type for path "payment_method.custom.0.gatewayConfig". Expected array, but got string');
@@ -84,7 +83,7 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function payment_method_may_be_toggled()
+    public function payment_method_may_be_toggled(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['enabled' => false]]]], 'custom.*.enabled');
     }
@@ -92,7 +91,7 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): PaymentMethodFixture
     {
         return new PaymentMethodFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),

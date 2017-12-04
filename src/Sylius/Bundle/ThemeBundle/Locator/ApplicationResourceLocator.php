@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ApplicationResourceLocator implements ResourceLocatorInterface
 {
     /**
@@ -35,7 +34,7 @@ final class ApplicationResourceLocator implements ResourceLocatorInterface
     /**
      * {@inheritdoc}
      */
-    public function locateResource($resourceName, ThemeInterface $theme)
+    public function locateResource(string $resourceName, ThemeInterface $theme): string
     {
         $path = sprintf('%s/%s', $theme->getPath(), $resourceName);
         if (!$this->filesystem->exists($path)) {

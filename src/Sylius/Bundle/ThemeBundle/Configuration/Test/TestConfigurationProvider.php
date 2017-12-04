@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration\Test;
 
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class TestConfigurationProvider implements ConfigurationProviderInterface
 {
     /**
@@ -34,7 +33,7 @@ final class TestConfigurationProvider implements ConfigurationProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigurations()
+    public function getConfigurations(): array
     {
         return $this->testThemeConfigurationManager->findAll();
     }

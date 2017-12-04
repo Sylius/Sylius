@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Model;
 
-/**
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 interface SlugAwareInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSlug();
+    public function getSlug(): ?string;
 
     /**
-     * @param string $slug
+     * @param string|null $slug
      */
-    public function setSlug($slug = null);
+    public function setSlug(?string $slug): void;
 }

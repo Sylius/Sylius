@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
 use Doctrine\Common\Collections\Expr\Comparison;
@@ -21,7 +23,7 @@ use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
  * Walks a Doctrine\Commons\Expr object graph and builds up a PHPCR-ODM
  * query using the (fluent) PHPCR-ODM query builder.
  */
-class ExpressionVisitor
+final class ExpressionVisitor
 {
     private $queryBuilder;
 
@@ -34,7 +36,12 @@ class ExpressionVisitor
     }
 
     /**
-     * {@inheritdoc}
+     * @param Comparison $comparison
+     * @param AbstractNode $parentNode
+     *
+     * @return mixed
+     *
+     * @throws \RuntimeException
      */
     public function walkComparison(Comparison $comparison, AbstractNode $parentNode)
     {
@@ -44,39 +51,29 @@ class ExpressionVisitor
         switch ($comparison->getOperator()) {
             case Comparison::EQ:
                 return $parentNode->eq()->field($this->getField($field))->literal($value)->end();
-
             case Comparison::NEQ:
                 return $parentNode->neq()->field($this->getField($field))->literal($value)->end();
-
             case Comparison::LT:
                 return $parentNode->lt()->field($this->getField($field))->literal($value)->end();
-
             case Comparison::LTE:
                 return $parentNode->lte()->field($this->getField($field))->literal($value)->end();
-
             case Comparison::GT:
                 return $parentNode->gt()->field($this->getField($field))->literal($value)->end();
-
             case Comparison::GTE:
                 return $parentNode->gte()->field($this->getField($field))->literal($value)->end();
-
             case Comparison::IN:
                 return $this->getInConstraint($parentNode, $field, $value);
-
             case Comparison::NIN:
                 $node = $parentNode->not();
                 $this->getInConstraint($node, $field, $value);
-                return $node->end();
 
+                return $node->end();
             case Comparison::CONTAINS:
                 return $parentNode->like()->field($this->getField($field))->literal($value)->end();
-
             case ExtraComparison::NOT_CONTAINS:
                 return $parentNode->not()->like()->field($this->getField($field))->literal($value)->end()->end();
-
             case ExtraComparison::IS_NULL:
                 return $parentNode->not()->fieldIsset($this->getField($field))->end();
-
             case ExtraComparison::IS_NOT_NULL:
                 return $parentNode->fieldIsset($this->getField($field));
         }
@@ -85,16 +82,23 @@ class ExpressionVisitor
     }
 
     /**
-     * {@inheritdoc}
+     * @param CompositeExpression $expr
+     * @param AbstractNode $parentNode
+     *
+     * @return mixed
+     *
+     * @throws \RuntimeException
      */
     public function walkCompositeExpression(CompositeExpression $expr, AbstractNode $parentNode)
     {
         switch ($expr->getType()) {
             case CompositeExpression::TYPE_AND:
                 $node = $parentNode->andX();
+
                 break;
             case CompositeExpression::TYPE_OR:
                 $node = $parentNode->orX();
+
                 break;
             default:
                 throw new \RuntimeException('Unknown composite: ' . $expr->getType());
@@ -109,15 +113,18 @@ class ExpressionVisitor
         foreach ($expressions as $index => $expression) {
             if (count($expressions) === $index + 1) {
                 $this->dispatch($expression, $parentNode);
+
                 break;
             }
 
             switch ($expr->getType()) {
                 case CompositeExpression::TYPE_AND:
                     $parentNode = $parentNode->andX();
+
                     break;
                 case CompositeExpression::TYPE_OR:
                     $parentNode = $parentNode->orX();
+
                     break;
             }
 
@@ -132,18 +139,21 @@ class ExpressionVisitor
      *
      * @param Expression $expr
      * @param AbstractNode|null $parentNode
+     *
+     * @return mixed
+     *
+     * @throws \RuntimeException
      */
-    public function dispatch(Expression $expr, AbstractNode $parentNode = null)
+    public function dispatch(Expression $expr, ?AbstractNode $parentNode = null)
     {
         if ($parentNode === null) {
             $parentNode = $this->queryBuilder->where();
         }
 
         switch (true) {
-            case ($expr instanceof Comparison):
+            case $expr instanceof Comparison:
                 return $this->walkComparison($expr, $parentNode);
-
-            case ($expr instanceof CompositeExpression):
+            case $expr instanceof CompositeExpression:
                 return $this->walkCompositeExpression($expr, $parentNode);
         }
 
@@ -155,7 +165,7 @@ class ExpressionVisitor
      *
      * @return string
      */
-    private function getField($field)
+    private function getField(string $field): string
     {
         return Driver::QB_SOURCE_ALIAS . '.' . $field;
     }
@@ -165,7 +175,7 @@ class ExpressionVisitor
      * @param string $field
      * @param array $values
      */
-    private function getInConstraint(AbstractNode $parentNode, $field, array $values)
+    private function getInConstraint(AbstractNode $parentNode, string $field, array $values): void
     {
         $orNode = $parentNode->orx();
 

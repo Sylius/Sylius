@@ -5,4 +5,5 @@ sylius:
     locale:
         code:
             not_blank: Lütfen dil kodunu seçiniz.
+            regex: Dil kodu yalnızca harf, sayı, tire ve alt çizgi oluşur.
             unique: Dil kodu mutlaka benzersiz olmalıdır.

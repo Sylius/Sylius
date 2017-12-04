@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Locale\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Symfony\Component\Intl\Intl;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Locale implements LocaleInterface
 {
     use TimestampableTrait;
@@ -27,7 +26,7 @@ class Locale implements LocaleInterface
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $code;
 
@@ -39,9 +38,9 @@ class Locale implements LocaleInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**
@@ -55,7 +54,7 @@ class Locale implements LocaleInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -63,7 +62,7 @@ class Locale implements LocaleInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
@@ -71,7 +70,7 @@ class Locale implements LocaleInterface
     /**
      * {@inheritdoc}
      */
-    public function getName($locale = null)
+    public function getName(?string $locale = null): ?string
     {
         return Intl::getLocaleBundle()->getLocaleName($this->getCode(), $locale);
     }

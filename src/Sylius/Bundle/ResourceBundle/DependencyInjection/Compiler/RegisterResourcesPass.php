@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -16,15 +18,12 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class RegisterResourcesPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         try {
             $resources = $container->getParameter('sylius.resources');
@@ -42,7 +41,7 @@ final class RegisterResourcesPass implements CompilerPassInterface
     /**
      * @param string $class
      */
-    private function validateSyliusResource($class)
+    private function validateSyliusResource(string $class): void
     {
         if (!in_array(ResourceInterface::class, class_implements($class), true)) {
             throw new InvalidArgumentException(sprintf(

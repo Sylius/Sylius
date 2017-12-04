@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
@@ -19,11 +21,8 @@ use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface ProductInterface extends
     AttributeSubjectInterface,
     CodeAwareInterface,
@@ -34,121 +33,128 @@ interface ProductInterface extends
     TranslatableInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName($name);
+    public function setName(?string $name): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription();
+    public function getDescription(): ?string;
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
-    public function setDescription($description);
+    public function setDescription(?string $description): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMetaKeywords();
+    public function getMetaKeywords(): ?string;
 
     /**
-     * @param string $metaKeywords
+     * @param string|null $metaKeywords
      */
-    public function setMetaKeywords($metaKeywords);
+    public function setMetaKeywords(?string $metaKeywords): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMetaDescription();
+    public function getMetaDescription(): ?string;
 
     /**
-     * @param string $metaDescription
+     * @param string|null $metaDescription
      */
-    public function setMetaDescription($metaDescription);
+    public function setMetaDescription(?string $metaDescription): void;
 
     /**
      * @return bool
      */
-    public function hasVariants();
+    public function hasVariants(): bool;
 
     /**
      * @return Collection|ProductVariantInterface[]
      */
-    public function getVariants();
+    public function getVariants(): Collection;
 
     /**
      * @param ProductVariantInterface $variant
      */
-    public function addVariant(ProductVariantInterface $variant);
+    public function addVariant(ProductVariantInterface $variant): void;
 
     /**
      * @param ProductVariantInterface $variant
      */
-    public function removeVariant(ProductVariantInterface $variant);
+    public function removeVariant(ProductVariantInterface $variant): void;
 
     /**
      * @param ProductVariantInterface $variant
      *
      * @return bool
      */
-    public function hasVariant(ProductVariantInterface $variant);
+    public function hasVariant(ProductVariantInterface $variant): bool;
 
     /**
      * @return bool
      */
-    public function hasOptions();
+    public function hasOptions(): bool;
 
     /**
      * @return Collection|ProductOptionInterface[]
      */
-    public function getOptions();
+    public function getOptions(): Collection;
 
     /**
      * @param ProductOptionInterface $option
      */
-    public function addOption(ProductOptionInterface $option);
+    public function addOption(ProductOptionInterface $option): void;
 
     /**
      * @param ProductOptionInterface $option
      */
-    public function removeOption(ProductOptionInterface $option);
+    public function removeOption(ProductOptionInterface $option): void;
 
     /**
      * @param ProductOptionInterface $option
      *
      * @return bool
      */
-    public function hasOption(ProductOptionInterface $option);
+    public function hasOption(ProductOptionInterface $option): bool;
+
+    /**
+     * @return Collection|ProductAssociationInterface[]
+     */
+    public function getAssociations(): Collection;
 
     /**
      * @param ProductAssociationInterface $association
      */
-    public function addAssociation(ProductAssociationInterface $association);
-
-    /**
-     * @return ProductAssociationInterface[]
-     */
-    public function getAssociations();
+    public function addAssociation(ProductAssociationInterface $association): void;
 
     /**
      * @param ProductAssociationInterface $association
      */
-    public function removeAssociation(ProductAssociationInterface $association);
+    public function removeAssociation(ProductAssociationInterface $association): void;
 
     /**
      * @return bool
      */
-    public function isSimple();
+    public function isSimple(): bool;
 
     /**
      * @return bool
      */
-    public function isConfigurable();
+    public function isConfigurable(): bool;
+
+    /**
+     * @param string|null $locale
+     *
+     * @return ProductTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface;
 }

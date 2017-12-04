@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface DashboardPageInterface extends SymfonyPageInterface
 {
     /**

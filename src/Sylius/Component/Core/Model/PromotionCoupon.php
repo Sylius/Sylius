@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Promotion\Model\PromotionCoupon as BasePromotionCoupon;
@@ -23,7 +25,7 @@ class PromotionCoupon extends BasePromotionCoupon implements PromotionCouponInte
     /**
      * {@inheritdoc}
      */
-    public function getPerCustomerUsageLimit()
+    public function getPerCustomerUsageLimit(): ?int
     {
         return $this->perCustomerUsageLimit;
     }
@@ -31,7 +33,7 @@ class PromotionCoupon extends BasePromotionCoupon implements PromotionCouponInte
     /**
      * {@inheritdoc}
      */
-    public function setPerCustomerUsageLimit($perCustomerUsageLimit)
+    public function setPerCustomerUsageLimit(?int $perCustomerUsageLimit): void
     {
         $this->perCustomerUsageLimit = $perCustomerUsageLimit;
     }

@@ -4,11 +4,15 @@
 sylius:
     taxon:
         code:
-            not_blank: Inserisci il codice del taxon.
-            unique: Taxon con il codice dato esiste già.
+            not_blank: Inserisci la classe tassa per il gruppo di prodotti.
+            regex: Il codice della classe tassa può essere composto solo da lettere, numeri, trattini e underscore.
+            unique: Il codice della classe tassa con il codice assegnato esiste già.
         name:
-            max_length: il nome del taxon non deve essere più lungo di 255 caratteri.
-            not_blank: Inserisci il nome del taxon.
+            max_length: il nome del codice della classe tassa non deve essere più lungo di 255 caratteri.
+            not_blank: Inserisci il nome della classe tassa 
+        slug:
+            not_blank: Inserisci lo il SEO-URL della classe tassa 
+            unique: Il SEP-URL della classe tassa deve essere unico.
     taxonomy:
         name:
             max_length: Il nome della tassonomia non deve essere più lungo di 255 caratteri.

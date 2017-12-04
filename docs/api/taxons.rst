@@ -56,7 +56,7 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`Taxons </components/Taxonomy/models>`.
+    Read more about :doc:`Taxons </components_and_bundles/components/Taxonomy/models>`.
 
 Creating a Taxon
 ----------------

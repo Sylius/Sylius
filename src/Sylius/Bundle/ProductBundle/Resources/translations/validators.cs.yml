@@ -6,11 +6,32 @@ sylius:
         sku:
             not_blank: Prosím zvolte Jednotku vedení skladu pro produkt.
             unique: Jednotka vedení skladu musí být unikátní.
+        slug:
+            not_blank: Zadejte prosím unikátní identifikátor URL (slug).
+            unique: Identifikátor URL produktu (slug) musí být unikátní.
+        code:
+            not_blank: Zadejte prosím produktový kód.
+            regex: Produktový kód můžou tvořit pouze písmena, číslice, pomlčky a podtržítka.
+            unique: Produktový kód musí být unikátní.
         name:
             not_blank: Zadejte název produktu.
             min_length: Vyplňte název produktu.|Název musí obsahovat alespoň {{ limit }} znaků.
             max_length: Název produktu nesmí být delší než 1 znak. |Název produktu nesmí být delší než {{ limit }} znaků.
+    product_variant:
+        combination: Varianta s touto sadou možností již existuje.
+        code:
+            not_blank: Zadejte kód.
+            regex: Kód varianty produktu můžou tvořit pouze písmena, číslice, pomlčky a podtržítka.
+            unique: Kód varianty produktu musí být unikátní.
+            within_product_unique: Tento kód musí být unikátní v rámci tohoto produktu.
+    simple_product:
+        code:
+            unique: Jednoduchý produktový kód musí být unikátní mezi všemi produkty a jejich variantami.
     option:
+        code:
+            not_blank: Zadejte prosím kód možnosti.
+            regex: Kód možnosti můžou tvořit pouze písmena, číslice, pomlčky a podtržítka.
+            unique: Možnost se zadaným kódem již existuje.
         name:
             not_blank: Prosím zadejte název možnosti.
             min_length: Název možnosti musí být nejméně 1 znak. |Název možnosti musí být alespoň {{ limit }} znaků.
@@ -18,5 +39,9 @@ sylius:
         values:
             min_count: Prosím přidejte alespoň {{ limit }} hodnotu možnosti.|Prosím vložte alespoň {{ limit }} hodnoty možností.
     option_value:
+        code:
+            not_blank: Zadejte prosím kód pro hodnotu volby.
+            regex: Kód hodnoty možnosti můžou tvořit pouze písmena, číslice, pomlčky a podtržítka.
+            unique: Hodnota možnosti se zadaným kódem již existuje.
         value:
             not_blank: Vložte prosím hodnotu možnosti.

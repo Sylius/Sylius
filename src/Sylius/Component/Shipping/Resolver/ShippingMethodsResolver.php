@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping\Resolver;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
 {
     /**
@@ -45,7 +44,7 @@ final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function getSupportedMethods(ShippingSubjectInterface $subject)
+    public function getSupportedMethods(ShippingSubjectInterface $subject): array
     {
         $methods = [];
 
@@ -61,7 +60,7 @@ final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function supports(ShippingSubjectInterface $subject)
+    public function supports(ShippingSubjectInterface $subject): bool
     {
         return true;
     }

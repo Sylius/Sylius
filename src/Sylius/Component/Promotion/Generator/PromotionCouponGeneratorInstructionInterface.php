@@ -9,50 +9,49 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Generator;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface PromotionCouponGeneratorInstructionInterface
 {
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAmount();
+    public function getAmount(): ?int;
 
     /**
-     * @param int $amount
+     * @param int|null $amount
      */
-    public function setAmount($amount);
+    public function setAmount(?int $amount): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCodeLength();
+    public function getCodeLength(): ?int;
 
     /**
-     * @param int $codeLength
+     * @param int|null $codeLength
      */
-    public function setCodeLength($codeLength);
+    public function setCodeLength(?int $codeLength): void;
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface|null
      */
-    public function getExpiresAt();
+    public function getExpiresAt(): ?\DateTimeInterface;
 
     /**
-     * @param \DateTime $expiresAt
+     * @param \DateTimeInterface $expiresAt
      */
-    public function setExpiresAt(\DateTime $expiresAt = null);
+    public function setExpiresAt(?\DateTimeInterface $expiresAt): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getUsageLimit();
+    public function getUsageLimit(): ?int;
 
     /**
      * @param int $usageLimit
      */
-    public function setUsageLimit($usageLimit);
+    public function setUsageLimit(int $usageLimit): void;
 }

@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+declare(strict_types=1);
+
 namespace Sylius\Bundle\MoneyBundle\Formatter;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface MoneyFormatterInterface
 {
     /**
      * @param int $amount
      * @param string $currencyCode
-     * @param string $locale
+     * @param string|null $locale
      *
      * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function format($amount, $currencyCode, $locale = 'en');
+    public function format(int $amount, string $currencyCode, ?string $locale = null): string;
 }

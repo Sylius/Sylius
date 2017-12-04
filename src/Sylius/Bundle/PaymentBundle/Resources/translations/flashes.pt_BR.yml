@@ -8,3 +8,4 @@ sylius:
         failed: 'Pagamento falhou.'
         processing: 'O pagamento está sendo processado.'
         refunded: 'Pagamento foi reembolsado com êxito.'
+        unknown: 'Houve um problema desconhecido com o pagamento.'

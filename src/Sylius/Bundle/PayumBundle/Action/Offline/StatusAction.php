@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Action\Offline;
 
 use Payum\Core\Action\ActionInterface;
@@ -17,17 +19,14 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\GetStatusInterface;
 use Payum\Offline\Constants;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class StatusAction implements ActionInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function execute($request)
+    public function execute($request): void
     {
-        /** @var $request GetStatusInterface */
+        /** @var GetStatusInterface $request */
         RequestNotSupportedException::assertSupports($this, $request);
 
         $model = ArrayObject::ensureArrayObject($request->getModel());
@@ -68,7 +67,7 @@ final class StatusAction implements ActionInterface
     /**
      * {@inheritdoc}
      */
-    public function supports($request)
+    public function supports($request): bool
     {
         return
             $request instanceof GetStatusInterface &&

@@ -4,12 +4,19 @@
 sylius:
     attribute:
         name:
-            not_blank: Angiv attributtens navn.
-            min_length: Attributnavn skal være mindst 1 tegn langt. | Attributnavn skal være mindst {{ limit }} tegn langt.
+            not_blank: Angiv venligst egenskabsnavn.
+            min_length: Egenskabsnavn skal minimum udgøre 1 tegn. | Egenskabsnavn skal minimum udgøre {{ limit }} tegn.
+            max_length: Egenskabsnavn må maksimalt udgøre 1 tegn. | Egenskabsnavn må maksimalt udgøre {{ limit }} tegn.
+        code:
+            not_blank: Angiv venligst egenskabskode.
+            regex: Egenskabskode må kun udgøre bogstaver, tal, bindestreger og understregninger.
+            unique: Koden benyttes allerede.
         presentation:
-            min_length: Attributten præsentation skal være mindst 1 tegn langt. | Attributten præsentation skal være mindst {{ limit }} tegn.
+            not_blank: Angiv venligst egenskabspræsentation.
+            min_length: Attributpræsentation skal minimum udgøre 1 tegn. | Attributpræsentation skal minimum udgøre {{ limit }} tegn.
+            max_length: Egenskabspræsentation må maksimalt udgøre 1 tegn.|Egenskabspræsentation må maksimalt udgøre {{ limit }} tegn.
     attribute_value:
         attribute:
-            not_blank: Vælg venligst attributten.
+            not_blank: Vælg venligst egenskab.
         value:
-            not_blank: Angiv attributtens navn.
+            not_blank: Angiv venligst attributnavn.

@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\TaxationBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class TaxCategoryRepository extends EntityRepository implements TaxCategoryRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function findByName($name)
+    public function findByName(string $name): array
     {
         return $this->findBy(['name' => $name]);
     }

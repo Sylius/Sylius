@@ -9,37 +9,30 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Promotion\Checker\Rule\ShippingCountryRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $countryRepository)
+    function let(RepositoryInterface $countryRepository): void
     {
         $this->beConstructedWith($countryRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ShippingCountryRuleChecker::class);
-    }
-
-    function it_is_a_rule_checker()
+    function it_is_a_rule_checker(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_recognizes_no_shipping_address_as_not_eligible(OrderInterface $subject)
+    function it_recognizes_no_shipping_address_as_not_eligible(OrderInterface $subject): void
     {
         $subject->getShippingAddress()->willReturn(null);
 
@@ -51,7 +44,7 @@ final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         AddressInterface $address,
         CountryInterface $country,
         RepositoryInterface $countryRepository
-    ) {
+    ): void {
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');
         $subject->getShippingAddress()->willReturn($address);
@@ -66,7 +59,7 @@ final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         AddressInterface $address,
         CountryInterface $country,
         RepositoryInterface $countryRepository
-    ) {
+    ): void {
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');
         $subject->getShippingAddress()->willReturn($address);

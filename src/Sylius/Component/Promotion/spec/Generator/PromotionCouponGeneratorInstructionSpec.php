@@ -9,44 +9,37 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Promotion\Generator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class PromotionCouponGeneratorInstructionSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionCouponGeneratorInstruction::class);
-    }
-
-    function it_implements_an_promotion_coupon_genarator_instruction_interface()
+    function it_implements_an_promotion_coupon_genarator_instruction_interface(): void
     {
         $this->shouldImplement(PromotionCouponGeneratorInstructionInterface::class);
     }
 
-    function it_has_amount_equal_to_5_by_default()
+    function it_has_amount_equal_to_5_by_default(): void
     {
         $this->getAmount()->shouldReturn(5);
     }
 
-    function its_amount_should_be_mutable()
+    function its_amount_should_be_mutable(): void
     {
         $this->setAmount(500);
         $this->getAmount()->shouldReturn(500);
     }
 
-    function it_does_not_have_usage_limit_by_default()
+    function it_does_not_have_usage_limit_by_default(): void
     {
         $this->getUsageLimit()->shouldReturn(null);
     }
 
-    function its_usage_limit_is_mutable()
+    function its_usage_limit_is_mutable(): void
     {
         $this->setUsageLimit(3);
         $this->getUsageLimit()->shouldReturn(3);

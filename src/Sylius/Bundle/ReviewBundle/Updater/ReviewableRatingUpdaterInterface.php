@@ -9,24 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ReviewBundle\Updater;
 
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ReviewableRatingUpdaterInterface
 {
     /**
      * @param ReviewableInterface $reviewSubject
      */
-    public function update(ReviewableInterface $reviewSubject);
+    public function update(ReviewableInterface $reviewSubject): void;
 
     /**
      * @param ReviewInterface $review
      */
-    public function updateFromReview(ReviewInterface $review);
+    public function updateFromReview(ReviewInterface $review): void;
 }

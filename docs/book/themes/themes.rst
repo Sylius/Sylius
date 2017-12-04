@@ -62,7 +62,24 @@ Let it be ``CrimsonTheme/`` for instance.
        }
    }
 
-3. Customize a template:
+3. Install theme assets
+
+Theme assets are installed by running the ``sylius:theme:assets:install`` command, which is supplementary for and should be used after ``assets:install``.
+
+.. code-block:: bash
+
+   bin/console sylius:theme:assets:install
+
+The command run with ``--symlink`` or ``--relative`` parameters creates symlinks for every installed asset file,
+not for entire asset directory (eg. if ``AcmeBundle/Resources/public/asset.js`` exists, it creates symlink ``web/bundles/acme/asset.js``
+leading to ``AcmeBundle/Resources/public/asset.js`` instead of symlink ``web/bundles/acme/`` leading to ``AcmeBundle/Resources/public/``).
+When you create a new asset or delete an existing one, it is required to rerun this command to apply changes (just as the hard copy option works).
+
+.. note::
+
+   Whenever you install a new bundle with assets you will need to run ``sylius:theme:assets:install`` again to make sure they are accessible in your theme.
+
+4. Customize a template:
 
 In order to customize the login view you should take the content of ``@SyliusShopBundle/views/login.html.twig`` file
 and paste it to your theme directory: ``app/themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``
@@ -98,25 +115,20 @@ Let's remove the registration column in this example:
 
    Learn more about customizing templates :doc:`here </customization/template>`.
 
-4. Choose your new theme on the channel:
+5. Choose your new theme on the channel:
 
 In the administration panel go to channels and change the theme of your desired channel to ``Crimson Theme``.
 
 .. image:: ../../_images/channel_theme.png
    :align: center
 
-5. If changes are not yet visible, clear the cache:
+6. If changes are not yet visible, clear the cache:
 
 .. code-block:: bash
 
    $ php bin/console cache:clear
 
-.. note::
-
-   You can override any template of Sylius like that, as well as static files by adding a ``web/assets/`` directory
-   in the theme directory to override CSS or JS files.
-
 Learn more
 ----------
 
-* :doc:`Theme - Bundle Documentation </bundles/SyliusThemeBundle/index>`.
+* :doc:`Theme - Bundle Documentation </components_and_bundles/bundles/SyliusThemeBundle/index>`.

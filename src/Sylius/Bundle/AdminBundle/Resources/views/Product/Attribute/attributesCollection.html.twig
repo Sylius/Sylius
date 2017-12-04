@@ -2,6 +2,7 @@
 
 {% block collection_widget -%}
     {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+    {% import _self as self %}
 
     <div class="ui top attached tabular menu">
         {% for localeCode, translationForm in attr.translations %}
@@ -16,7 +17,7 @@
             {% spaceless %}
                 {% for child in form %}
                     {% if localeCode == child.localeCode.vars.value %}
-                        {{ _self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+                        {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
                     {% endif %}
                 {% endfor %}
             {% endspaceless %}
@@ -37,7 +38,7 @@
             </button>
         {% else %}
             <div class="ui right fluid labeled input" style="margin-top: 15px; margin-bottom: 15px;">
-                <div class="ui label">{{ form.vars.value.attribute.name }}</div>
+                <div class="ui label">{{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}</div>
                 {{ form_widget(form.value) }}
                 <button class="ui red right labeled icon button">
                     <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}

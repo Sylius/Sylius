@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -16,9 +18,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
 {
     /**
@@ -47,7 +46,7 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
      * @param string $tagName
      * @param string $methodName
      */
-    public function __construct($serviceId, $compositeId, $tagName, $methodName)
+    public function __construct(string $serviceId, string $compositeId, string $tagName, string $methodName)
     {
         $this->serviceId = $serviceId;
         $this->compositeId = $compositeId;
@@ -58,7 +57,7 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition($this->compositeId)) {
             return;
@@ -71,7 +70,7 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
     /**
      * @param ContainerBuilder $container
      */
-    private function injectTaggedServicesIntoComposite(ContainerBuilder $container)
+    private function injectTaggedServicesIntoComposite(ContainerBuilder $container): void
     {
         $channelContextDefinition = $container->findDefinition($this->compositeId);
 
@@ -84,7 +83,7 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
     /**
      * @param ContainerBuilder $container
      */
-    private function addAliasForCompositeIfServiceDoesNotExist(ContainerBuilder $container)
+    private function addAliasForCompositeIfServiceDoesNotExist(ContainerBuilder $container): void
     {
         if ($container->has($this->serviceId)) {
             return;
@@ -98,7 +97,7 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
      * @param string $id
      * @param array $tags
      */
-    private function addMethodCalls(Definition $channelContextDefinition, $id, $tags)
+    private function addMethodCalls(Definition $channelContextDefinition, string $id, array $tags): void
     {
         foreach ($tags as $attributes) {
             $this->addMethodCall($channelContextDefinition, $id, $attributes);
@@ -110,7 +109,7 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
      * @param string $id
      * @param array $attributes
      */
-    private function addMethodCall(Definition $channelContextDefinition, $id, $attributes)
+    private function addMethodCall(Definition $channelContextDefinition, string $id, array $attributes): void
     {
         $arguments = [new Reference($id)];
 

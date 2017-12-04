@@ -9,33 +9,57 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
+use Ramsey\Uuid\Uuid;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class SelectAttributeChoicesCollectionType extends AbstractType
 {
     /**
+     * @var string
+     */
+    private $defaultLocaleCode;
+
+    /**
+     * @param TranslationLocaleProviderInterface $localeProvider
+     */
+    public function __construct(TranslationLocaleProviderInterface $localeProvider)
+    {
+        $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
             $data = $event->getData();
             $form = $event->getForm();
 
             if (null !== $data) {
-                $fixedArray = [];
-                foreach ($data as $key => $value) {
-                    $newKey = strtolower(str_replace(' ', '_', $value));
-                    $fixedArray[$newKey] = $value;
+                $fixedData = [];
+                foreach ($data as $key => $values) {
+                    if (!is_int($key)) {
+                        $fixedData[$key] = $this->resolveValues($values);
+
+                        continue;
+                    }
+
+                    if (!array_key_exists($this->defaultLocaleCode, $values)) {
+                        continue;
+                    }
+
+                    $newKey = $this->getUniqueKey();
+                    $fixedData[$newKey] = $this->resolveValues($values);
 
                     if ($form->offsetExists($key)) {
                         $form->offsetUnset($key);
@@ -43,7 +67,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
                     }
                 }
 
-                $event->setData($fixedArray);
+                $event->setData($fixedData);
             }
         });
     }
@@ -51,7 +75,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return CollectionType::class;
     }
@@ -59,8 +83,33 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_select_attribute_choices_collection';
+    }
+
+    /**
+     * @return string
+     */
+    private function getUniqueKey(): string
+    {
+        return Uuid::uuid1()->toString();
+    }
+
+    /**
+     * @param array $values
+     *
+     * @return array
+     */
+    private function resolveValues(array $values): array
+    {
+        $fixedValues = [];
+        foreach ($values as $locale => $value) {
+            if ('' !== $value && null !== $value) {
+                $fixedValues[$locale] = $value;
+            }
+        }
+
+        return $fixedValues;
     }
 }

@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Checkout;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface CheckoutStateUrlGeneratorInterface extends UrlGeneratorInterface
 {
     /**
@@ -26,5 +25,17 @@ interface CheckoutStateUrlGeneratorInterface extends UrlGeneratorInterface
      *
      * @return string
      */
-    public function generateForOrderCheckoutState(OrderInterface $order, $parameters = [], $referenceType = self::ABSOLUTE_PATH);
+    public function generateForOrderCheckoutState(
+        OrderInterface $order,
+        array $parameters = [],
+        int $referenceType = self::ABSOLUTE_PATH
+    ): string;
+
+    /**
+     * @param array $parameters
+     * @param int $referenceType
+     *
+     * @return string
+     */
+    public function generateForCart(array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string;
 }

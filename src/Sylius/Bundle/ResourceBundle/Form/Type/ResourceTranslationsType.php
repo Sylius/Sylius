@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
 use Sylius\Component\Resource\Model\TranslationInterface;
@@ -19,9 +21,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ResourceTranslationsType extends AbstractType
 {
     /**
@@ -46,7 +45,7 @@ final class ResourceTranslationsType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             /** @var TranslationInterface[] $translations */
@@ -71,25 +70,25 @@ final class ResourceTranslationsType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'entries' => $this->definedLocalesCodes,
-            'entry_name' => function ($localeCode) {
+            'entry_name' => function (string $localeCode): string {
                 return $localeCode;
             },
-            'entry_options' => function ($localeCode) {
+            'entry_options' => function (string $localeCode): array {
                 return [
                     'required' => $localeCode === $this->defaultLocaleCode,
                 ];
-            }
+            },
         ]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
         return FixedCollectionType::class;
     }
@@ -97,7 +96,7 @@ final class ResourceTranslationsType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_translations';
     }

@@ -17,6 +17,7 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.taxon
 
+                - sylius.behat.context.setup.admin_user
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.customer
@@ -29,7 +30,8 @@ default:
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.taxonomy
 
-                - sylius.behat.context.ui.shop.current_channel
+                - sylius.behat.context.ui.admin.managing_product_attributes
+                - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.shop.locale
                 - sylius.behat.context.ui.shop.product
             filters:

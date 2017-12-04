@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception;
 
-/**
- * @author Arnaud Langlade <aRn0D.dev@gmail.com>
- */
 class InvalidDriverException extends \Exception
 {
-    public function __construct($driver, $className)
+    public function __construct(string $driver, string $className)
     {
         parent::__construct(sprintf(
             'Driver "%s" is not supported by %s.',

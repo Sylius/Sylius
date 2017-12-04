@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Checker;
 
 use Sylius\Bundle\CoreBundle\Installer\Renderer\TableRenderer;
@@ -18,9 +20,6 @@ use Sylius\Bundle\CoreBundle\Installer\Requirement\SyliusRequirements;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class SyliusRequirementsChecker implements RequirementsCheckerInterface
 {
     /**
@@ -44,15 +43,14 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function check(InputInterface $input, OutputInterface $output)
+    public function check(InputInterface $input, OutputInterface $output): bool
     {
-        $notFulfilledTable = new TableRenderer($output);
-        $notFulfilledTable->setHeaders(['Requirement', 'Status']);
-
         $helpTable = new TableRenderer($output);
         $helpTable->setHeaders(['Issue', 'Recommendation']);
 
         foreach ($this->syliusRequirements as $collection) {
+            $notFulfilledTable = new TableRenderer($output);
+            $notFulfilledTable->setHeaders(['Requirement', 'Status']);
             $this->checkRequirementsInCollection($collection, $notFulfilledTable, $helpTable, $input->getOption('verbose'));
         }
 
@@ -74,7 +72,7 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
         TableRenderer $notFulfilledTable,
         TableRenderer $helpTable,
         $verbose
-    ) {
+    ): void {
         /** @var Requirement $requirement */
         foreach ($collection as $requirement) {
             $label = $requirement->getLabel();
@@ -100,7 +98,7 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
      *
      * @return string
      */
-    private function getRequirementRequiredMessage(Requirement $requirement)
+    private function getRequirementRequiredMessage(Requirement $requirement): string
     {
         if ($requirement->isRequired()) {
             $this->fulfilled = false;

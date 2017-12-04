@@ -9,33 +9,27 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator\OrderInventoryOperator;
 use Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderInventoryOperatorSpec extends ObjectBehavior
 {
-    function let(OrderInventoryOperatorInterface $decoratedOperator, EntityManagerInterface $productVariantManager)
+    function let(OrderInventoryOperatorInterface $decoratedOperator, EntityManagerInterface $productVariantManager): void
     {
         $this->beConstructedWith($decoratedOperator, $productVariantManager);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderInventoryOperator::class);
-    }
-
-    function it_implements_an_order_inventory_operator_interface()
+    function it_implements_an_order_inventory_operator_interface(): void
     {
         $this->shouldImplement(OrderInventoryOperatorInterface::class);
     }
@@ -46,8 +40,8 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
-        $order->getItems()->willReturn([$orderItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(true);
         $variant->getVersion()->willReturn('7');
@@ -65,8 +59,8 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
-        $order->getItems()->willReturn([$orderItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(true);
         $variant->getVersion()->willReturn('7');
@@ -84,8 +78,8 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
-    ) {
-        $order->getItems()->willReturn([$orderItem]);
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
         $variant->isTracked()->willReturn(true);
         $variant->getVersion()->willReturn('7');

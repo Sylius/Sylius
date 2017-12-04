@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -19,9 +21,6 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ManagingProductReviewsContext implements Context
 {
     /**
@@ -55,11 +54,28 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
+     * @When I browse product reviews
      * @When I want to browse product reviews
      */
     public function iWantToBrowseProductReviews()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When I check (also) the :productReviewTitle product review
+     */
+    public function iCheckTheProductReview(string $productReviewTitle): void
+    {
+        $this->indexPage->checkResourceOnPage(['title' => $productReviewTitle]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
     }
 
     /**
@@ -71,11 +87,12 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
+     * @Then I should see a single product review in the list
      * @Then I should see :amount reviews in the list
      */
-    public function iShouldSeeReviewsInTheList($amount)
+    public function iShouldSeeReviewsInTheList(int $amount = 1): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $amount);
+        Assert::same($this->indexPage->countItems(), $amount);
     }
 
     /**

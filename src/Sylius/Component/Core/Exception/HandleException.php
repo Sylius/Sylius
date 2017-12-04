@@ -9,19 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Exception;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
-class HandleException extends \RuntimeException
+final class HandleException extends \RuntimeException
 {
     /**
      * @param string $handlerName
      * @param string $message
      * @param \Exception|null $previousException
      */
-    public function __construct($handlerName, $message, \Exception $previousException = null)
+    public function __construct(string $handlerName, string $message, ?\Exception $previousException = null)
     {
         parent::__construct(
             sprintf(

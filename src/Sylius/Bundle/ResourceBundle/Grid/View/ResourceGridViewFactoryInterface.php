@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Grid\View;
 
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
@@ -16,9 +18,6 @@ use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ResourceGridViewFactoryInterface
 {
     /**
@@ -29,5 +28,10 @@ interface ResourceGridViewFactoryInterface
      *
      * @return ResourceGridView
      */
-    public function create(Grid $grid, Parameters $parameters, MetadataInterface $metadata, RequestConfiguration $requestConfiguration);
+    public function create(
+        Grid $grid,
+        Parameters $parameters,
+        MetadataInterface $metadata,
+        RequestConfiguration $requestConfiguration
+    ): ResourceGridView;
 }

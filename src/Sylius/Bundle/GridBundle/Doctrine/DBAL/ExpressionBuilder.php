@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\GridBundle\Doctrine\DBAL;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ExpressionBuilder implements ExpressionBuilderInterface
 {
     /**
@@ -51,7 +50,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function comparison($field, $operator, $value)
+    public function comparison(string $field, string $operator, $value)
     {
         return $this->queryBuilder->expr()->comparison($field, $operator, $value);
     }
@@ -59,59 +58,59 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function equals($field, $value)
+    public function equals(string $field, $value)
     {
         $this->queryBuilder->setParameter($field, $value);
 
-        return $this->queryBuilder->expr()->eq($field, ':'.$field);
+        return $this->queryBuilder->expr()->eq($field, ':' . $field);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function notEquals($field, $value)
+    public function notEquals(string $field, $value)
     {
         $this->queryBuilder->setParameter($field, $value);
 
-        return $this->queryBuilder->expr()->neq($field, ':'.$field);
+        return $this->queryBuilder->expr()->neq($field, ':' . $field);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function lessThan($field, $value)
+    public function lessThan(string $field, $value)
     {
-        $this->queryBuilder->andWhere($field.' < :'.$field)->setParameter($field, $value);
+        $this->queryBuilder->andWhere($field . ' < :' . $field)->setParameter($field, $value);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function lessThanOrEqual($field, $value)
+    public function lessThanOrEqual(string $field, $value)
     {
-        $this->queryBuilder->andWhere($field.' =< :'.$field)->setParameter($field, $value);
+        $this->queryBuilder->andWhere($field . ' =< :' . $field)->setParameter($field, $value);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function greaterThan($field, $value)
+    public function greaterThan(string $field, $value)
     {
-        $this->queryBuilder->andWhere($field.' > :'.$field)->setParameter($field, $value);
+        $this->queryBuilder->andWhere($field . ' > :' . $field)->setParameter($field, $value);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function greaterThanOrEqual($field, $value)
+    public function greaterThanOrEqual(string $field, $value)
     {
-        $this->queryBuilder->andWhere($field.' => :%s'.$field)->setParameter($field, $value);
+        $this->queryBuilder->andWhere($field . ' => :%s' . $field)->setParameter($field, $value);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function in($field, array $values)
+    public function in(string $field, array $values)
     {
         return $this->queryBuilder->expr()->in($field, $values);
     }
@@ -119,7 +118,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function notIn($field, array $values)
+    public function notIn(string $field, array $values)
     {
         return $this->queryBuilder->expr()->notIn($field, $values);
     }
@@ -127,7 +126,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function isNull($field)
+    public function isNull(string $field)
     {
         return $this->queryBuilder->expr()->isNull($field);
     }
@@ -135,7 +134,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function isNotNull($field)
+    public function isNotNull(string $field)
     {
         return $this->queryBuilder->expr()->isNotNull($field);
     }
@@ -143,7 +142,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function like($field, $pattern)
+    public function like(string $field, string $pattern)
     {
         return $this->queryBuilder->expr()->like($field, $this->queryBuilder->expr()->literal($pattern));
     }
@@ -151,7 +150,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function notLike($field, $pattern)
+    public function notLike(string $field, string $pattern)
     {
         return $this->queryBuilder->expr()->notLike($field, $this->queryBuilder->expr()->literal($pattern));
     }
@@ -159,7 +158,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function orderBy($field, $direction)
+    public function orderBy(string $field, string $direction)
     {
         return $this->queryBuilder->orderBy($field, $direction);
     }
@@ -167,7 +166,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function addOrderBy($field, $direction)
+    public function addOrderBy(string $field, string $direction)
     {
         return $this->queryBuilder->addOrderBy($field, $direction);
     }

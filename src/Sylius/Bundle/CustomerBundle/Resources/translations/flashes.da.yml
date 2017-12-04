@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        register: 'Tak for din oprettelse, tjek din e-mail for at bekræfte din konto.'

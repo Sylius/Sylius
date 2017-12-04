@@ -9,22 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Sorting;
 
 use Sylius\Component\Grid\Data\DataSourceInterface;
-use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class Sorter implements SorterInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function sort(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters)
+    public function sort(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters): void
     {
         $expressionBuilder = $dataSource->getExpressionBuilder();
 
@@ -34,7 +32,9 @@ final class Sorter implements SorterInterface
             $gridField = $grid->getField($field);
             $property = $gridField->getSortable();
 
-            $expressionBuilder->addOrderBy($property, $order);
+            if (null !== $property) {
+                $expressionBuilder->addOrderBy($property, $order);
+            }
         }
     }
 }

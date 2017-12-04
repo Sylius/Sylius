@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Distributor;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
-class IntegerDistributor implements IntegerDistributorInterface
+use Webmozart\Assert\Assert;
+
+final class IntegerDistributor implements IntegerDistributorInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function distribute($amount, $numberOfTargets)
+    public function distribute(float $amount, int $numberOfTargets): array
     {
-        if (!$this->validateNumberOfTargets($numberOfTargets)) {
-            throw new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.');
-        }
+        Assert::true((1 <= $numberOfTargets), 'Number of targets must be bigger than 0.');
 
         $sign = $amount < 0 ? -1 : 1;
         $amount = abs($amount);
@@ -43,15 +42,5 @@ class IntegerDistributor implements IntegerDistributorInterface
         }
 
         return $result;
-    }
-
-    /**
-     * @param int $numberOfTargets
-     *
-     * @return bool
-     */
-    private function validateNumberOfTargets($numberOfTargets)
-    {
-        return is_int($numberOfTargets) && 1 <= $numberOfTargets;
     }
 }

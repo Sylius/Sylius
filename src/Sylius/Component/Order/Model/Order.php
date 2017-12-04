@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Order implements OrderInterface
 {
     use TimestampableTrait;
@@ -28,17 +27,17 @@ class Order implements OrderInterface
     protected $id;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      */
     protected $checkoutCompletedAt;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $number;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $notes;
 
@@ -92,7 +91,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getCheckoutCompletedAt()
+    public function getCheckoutCompletedAt(): ?\DateTimeInterface
     {
         return $this->checkoutCompletedAt;
     }
@@ -100,7 +99,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCheckoutCompletedAt(\DateTime $checkoutCompletedAt = null)
+    public function setCheckoutCompletedAt(?\DateTimeInterface $checkoutCompletedAt): void
     {
         $this->checkoutCompletedAt = $checkoutCompletedAt;
     }
@@ -108,7 +107,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function isCheckoutCompleted()
+    public function isCheckoutCompleted(): bool
     {
         return null !== $this->checkoutCompletedAt;
     }
@@ -116,7 +115,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function completeCheckout()
+    public function completeCheckout(): void
     {
         $this->checkoutCompletedAt = new \DateTime();
     }
@@ -124,7 +123,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getNumber()
+    public function getNumber(): ?string
     {
         return $this->number;
     }
@@ -132,7 +131,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setNumber($number)
+    public function setNumber(?string $number): void
     {
         $this->number = $number;
     }
@@ -140,7 +139,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getNotes()
+    public function getNotes(): ?string
     {
         return $this->notes;
     }
@@ -148,7 +147,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setNotes($notes)
+    public function setNotes(?string $notes): void
     {
         $this->notes = $notes;
     }
@@ -156,12 +155,15 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getItems()
+    public function getItems(): Collection
     {
         return $this->items;
     }
 
-    public function clearItems()
+    /**
+     * {@inheritdoc}
+     */
+    public function clearItems(): void
     {
         $this->items->clear();
 
@@ -171,7 +173,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function countItems()
+    public function countItems(): int
     {
         return $this->items->count();
     }
@@ -179,7 +181,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addItem(OrderItemInterface $item)
+    public function addItem(OrderItemInterface $item): void
     {
         if ($this->hasItem($item)) {
             return;
@@ -195,7 +197,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function removeItem(OrderItemInterface $item)
+    public function removeItem(OrderItemInterface $item): void
     {
         if ($this->hasItem($item)) {
             $this->items->removeElement($item);
@@ -208,7 +210,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function hasItem(OrderItemInterface $item)
+    public function hasItem(OrderItemInterface $item): bool
     {
         return $this->items->contains($item);
     }
@@ -216,12 +218,15 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemsTotal()
+    public function getItemsTotal(): int
     {
         return $this->itemsTotal;
     }
 
-    public function recalculateItemsTotal()
+    /**
+     * {@inheritdoc}
+     */
+    public function recalculateItemsTotal(): void
     {
         $this->itemsTotal = 0;
         foreach ($this->items as $item) {
@@ -234,7 +239,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotal()
+    public function getTotal(): int
     {
         return $this->total;
     }
@@ -242,7 +247,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotalQuantity()
+    public function getTotalQuantity(): int
     {
         $quantity = 0;
 
@@ -256,7 +261,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getState()
+    public function getState(): string
     {
         return $this->state;
     }
@@ -264,7 +269,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setState($state)
+    public function setState(string $state): void
     {
         $this->state = $state;
     }
@@ -272,7 +277,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return $this->items->isEmpty();
     }
@@ -280,7 +285,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdjustments($type = null)
+    public function getAdjustments(?string $type = null): Collection
     {
         if (null === $type) {
             return $this->adjustments;
@@ -294,11 +299,13 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdjustmentsRecursively($type = null)
+    public function getAdjustmentsRecursively(?string $type = null): Collection
     {
-        $adjustments = $this->getAdjustments($type)->toArray();
+        $adjustments = clone $this->getAdjustments($type);
         foreach ($this->items as $item) {
-            $adjustments = array_merge($adjustments, $item->getAdjustmentsRecursively($type));
+            foreach ($item->getAdjustmentsRecursively($type) as $adjustment) {
+                $adjustments->add($adjustment);
+            }
         }
 
         return $adjustments;
@@ -307,7 +314,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addAdjustment(AdjustmentInterface $adjustment)
+    public function addAdjustment(AdjustmentInterface $adjustment): void
     {
         if (!$this->hasAdjustment($adjustment)) {
             $this->adjustments->add($adjustment);
@@ -319,7 +326,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAdjustment(AdjustmentInterface $adjustment)
+    public function removeAdjustment(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isLocked() && $this->hasAdjustment($adjustment)) {
             $this->adjustments->removeElement($adjustment);
@@ -331,7 +338,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAdjustment(AdjustmentInterface $adjustment)
+    public function hasAdjustment(AdjustmentInterface $adjustment): bool
     {
         return $this->adjustments->contains($adjustment);
     }
@@ -339,7 +346,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdjustmentsTotal($type = null)
+    public function getAdjustmentsTotal(?string $type = null): int
     {
         if (null === $type) {
             return $this->adjustmentsTotal;
@@ -358,7 +365,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdjustmentsTotalRecursively($type = null)
+    public function getAdjustmentsTotalRecursively(?string $type = null): int
     {
         $total = 0;
         foreach ($this->getAdjustmentsRecursively($type) as $adjustment) {
@@ -373,7 +380,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAdjustments($type)
+    public function removeAdjustments(?string $type = null): void
     {
         foreach ($this->getAdjustments($type) as $adjustment) {
             if ($adjustment->isLocked()) {
@@ -387,7 +394,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAdjustmentsRecursively($type = null)
+    public function removeAdjustmentsRecursively(?string $type = null): void
     {
         $this->removeAdjustments($type);
         foreach ($this->items as $item) {
@@ -398,7 +405,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function recalculateAdjustmentsTotal()
+    public function recalculateAdjustmentsTotal(): void
     {
         $this->adjustmentsTotal = 0;
 
@@ -414,7 +421,7 @@ class Order implements OrderInterface
     /**
      * Items total + Adjustments total.
      */
-    protected function recalculateTotal()
+    protected function recalculateTotal(): void
     {
         $this->total = $this->itemsTotal + $this->adjustmentsTotal;
 
@@ -426,7 +433,7 @@ class Order implements OrderInterface
     /**
      * @param AdjustmentInterface $adjustment
      */
-    protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment)
+    protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {
             $this->adjustmentsTotal += $adjustment->getAmount();
@@ -437,7 +444,7 @@ class Order implements OrderInterface
     /**
      * @param AdjustmentInterface $adjustment
      */
-    protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment)
+    protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {
             $this->adjustmentsTotal -= $adjustment->getAmount();

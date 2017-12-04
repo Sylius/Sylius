@@ -9,17 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
-use Sylius\Bundle\AdminApiBundle\Form\Type\ProductVariantType;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProductVariantApiTest extends JsonApiTestCase
 {
     /**
@@ -228,7 +226,6 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productVariantsData['product1'];
 
-
         $data =
 <<<EOT
         {
@@ -428,7 +425,6 @@ EOT;
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
-
 
     /**
      * @test

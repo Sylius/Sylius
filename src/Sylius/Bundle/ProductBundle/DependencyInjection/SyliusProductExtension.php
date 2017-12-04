@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
 use Sylius\Bundle\ProductBundle\Controller\ProductAttributeController;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAttributeValueRepository;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueType;
@@ -27,18 +30,15 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusProductExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 
@@ -50,7 +50,7 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
     /**
      * {@inheritdoc}
      */
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
@@ -61,7 +61,7 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
      * @param ContainerBuilder $container
      * @param array $config
      */
-    private function prependAttribute(ContainerBuilder $container, array $config)
+    private function prependAttribute(ContainerBuilder $container, array $config): void
     {
         if (!$container->hasExtension('sylius_attribute')) {
             return;
@@ -90,6 +90,7 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
                         'classes' => [
                             'model' => ProductAttributeValue::class,
                             'interface' => ProductAttributeValueInterface::class,
+                            'repository' => ProductAttributeValueRepository::class,
                             'form' => ProductAttributeValueType::class,
                         ],
                     ],

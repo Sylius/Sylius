@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Fixture\Factory;
 
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
@@ -17,9 +19,6 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class ApiClientExampleFactory extends AbstractExampleFactory
 {
     /**
@@ -53,7 +52,7 @@ class ApiClientExampleFactory extends AbstractExampleFactory
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): ClientInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -71,7 +70,7 @@ class ApiClientExampleFactory extends AbstractExampleFactory
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefault('random_id', function (Options $options) {

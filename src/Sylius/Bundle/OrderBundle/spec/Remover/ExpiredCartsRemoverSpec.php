@@ -9,34 +9,27 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\OrderBundle\Remover;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\OrderBundle\Remover\ExpiredCartsRemover;
 use Sylius\Bundle\OrderBundle\SyliusExpiredCartsEvents;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ExpiredCartsRemoverSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, ObjectManager $orderManager, EventDispatcher $eventDispatcher)
+    function let(OrderRepositoryInterface $orderRepository, ObjectManager $orderManager, EventDispatcher $eventDispatcher): void
     {
         $this->beConstructedWith($orderRepository, $orderManager, $eventDispatcher, '2 months');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ExpiredCartsRemover::class);
-    }
-
-    function it_implements_an_expired_carts_remover_interface()
+    function it_implements_an_expired_carts_remover_interface(): void
     {
         $this->shouldImplement(ExpiredCartsRemoverInterface::class);
     }
@@ -47,10 +40,10 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
         EventDispatcher $eventDispatcher,
         OrderInterface $firstCart,
         OrderInterface $secondCart
-    ) {
-        $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTime'))->willReturn([
+    ): void {
+        $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTimeInterface'))->willReturn([
             $firstCart,
-            $secondCart
+            $secondCart,
         ]);
 
         $eventDispatcher

@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 
-/**
- * @author Arnaud Langade <arn0d.dev@gmail.com>
- */
 class Parameters extends ParameterBag
 {
     /**

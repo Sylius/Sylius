@@ -9,33 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\OrderBundle\Form\DataMapper;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderItemQuantityDataMapperSpec extends ObjectBehavior
 {
     function let(
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         DataMapperInterface $propertyPathDataMapper
-    ) {
+    ): void {
         $this->beConstructedWith($orderItemQuantityModifier, $propertyPathDataMapper);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderItemQuantityDataMapper::class);
-    }
-
-    function it_implements_a_data_mapper_interface()
+    function it_implements_a_data_mapper_interface(): void
     {
         $this->shouldImplement(DataMapperInterface::class);
     }
@@ -44,7 +37,7 @@ final class OrderItemQuantityDataMapperSpec extends ObjectBehavior
         DataMapperInterface $propertyPathDataMapper,
         FormInterface $form,
         OrderItemInterface $orderItem
-    ) {
+    ): void {
         $propertyPathDataMapper->mapDataToForms($orderItem, [$form])->shouldBeCalled();
 
         $this->mapDataToForms($orderItem, [$form]);

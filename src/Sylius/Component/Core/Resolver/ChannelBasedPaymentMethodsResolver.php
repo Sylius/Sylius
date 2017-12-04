@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -17,9 +19,6 @@ use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolverInterface
 {
     /**
@@ -38,7 +37,7 @@ final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolver
     /**
      * {@inheritdoc}
      */
-    public function getSupportedMethods(BasePaymentInterface $payment)
+    public function getSupportedMethods(BasePaymentInterface $payment): array
     {
         Assert::true($this->supports($payment), 'This payment method is not support by resolver');
 
@@ -48,7 +47,7 @@ final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolver
     /**
      * {@inheritdoc}
      */
-    public function supports(BasePaymentInterface $payment)
+    public function supports(BasePaymentInterface $payment): bool
     {
         return $payment instanceof PaymentInterface &&
             null !== $payment->getOrder() &&

@@ -9,34 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ResourceFormFactorySpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $formFactory)
+    function let(FormFactoryInterface $formFactory): void
     {
         $this->beConstructedWith($formFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResourceFormFactory::class);
-    }
-
-    function it_implements_resource_form_factory_interface()
+    function it_implements_resource_form_factory_interface(): void
     {
         $this->shouldImplement(ResourceFormFactoryInterface::class);
     }
@@ -46,7 +38,7 @@ final class ResourceFormFactorySpec extends ObjectBehavior
         ResourceInterface $resource,
         FormFactoryInterface $formFactory,
         FormInterface $form
-    ) {
+    ): void {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getFormType()->willReturn('sylius_product_pricing');
         $requestConfiguration->getFormOptions()->willReturn([]);
@@ -60,7 +52,7 @@ final class ResourceFormFactorySpec extends ObjectBehavior
         ResourceInterface $resource,
         FormFactoryInterface $formFactory,
         FormInterface $form
-    ) {
+    ): void {
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $requestConfiguration->getFormType()->willReturn('sylius_product_api');
         $requestConfiguration->getFormOptions()->willReturn([]);

@@ -13,6 +13,7 @@ sylius:
             postcode: Postinumero
             street: Katuosoite
             province: Lääni
+            zone: Vyöhyke
         country:
             add_province: Lisää maakunta
             name: Nimi
@@ -32,8 +33,10 @@ sylius:
                 country: Maa
                 province: Lääni
                 zone: Alue
+            scope: Alue
             scopes:
                 all: Kaikki
             select: Valitse
+            select_scope: Valitse alue
         zone_member:
             select: Valitse

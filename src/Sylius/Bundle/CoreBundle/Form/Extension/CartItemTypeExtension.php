@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\OrderBundle\Form\Type\CartItemType;
@@ -26,15 +28,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * when we're adding product to cart, but not when we edit quantity in cart.
  * We'll use simple option for that, passing the product instance required by
  * variant choice type.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CartItemTypeExtension extends AbstractTypeExtension
+final class CartItemTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('quantity', IntegerType::class, [
             'attr' => ['min' => 1],
@@ -61,7 +61,7 @@ class CartItemTypeExtension extends AbstractTypeExtension
      *
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefined([
@@ -74,7 +74,7 @@ class CartItemTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return CartItemType::class;
     }

@@ -4,8 +4,27 @@
 sylius:
     customer:
         first_name:
+            max: Fornavn må ikke være lengre enn {{ limit }} tegn.
+            min: Fornavn må være minst {{ limit }} tegn.
             not_blank: Vennligst skriv inn ditt fornavn.
         last_name:
+            max: Etternavn må ikke være lengre enn {{ limit }} tegn.
+            min: Etternavnet må være minst {{ limit }} tegn.
             not_blank: Vennligst skriv inn ditt etternavn.
+        gender:
+            not_blank: Oppgi kjønn.
         email:
+            already_used: Denne e-postadressen er allerede registrert, vennligst logg inn eller bruk glemt passord.
+            max: E-post må ikke være lengre enn {{ limit }} tegn.
             not_blank: Skriv inn din e-post.
+            invalid: Ugyldig epostadresse.
+            unique: Denne e-postadressen er allerede i bruk.
+            registered: Denne e-postadressen er allerede registrert, vennligst logg inn eller bruk glemt passord.
+    customer_group:
+        code:
+            regex: Kundegruppe kan kun bestå av bokstaver, tall, bindestrek og understrek.
+            unique: Kundegruppe må være unik.
+        name:
+            max: Navn på kundegruppe kan ikke være lenger enn {{ limit }} tegn.
+            min: Navn på kundegruppe må være på minst {{ limit }} tegn.
+            not_blank: Vennligst oppgi navn på kundegruppe.

@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Remover;
 
 use Sylius\Component\Review\Model\ReviewerInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ReviewerReviewsRemoverInterface
 {
     /**
      * @param ReviewerInterface $author
      */
-    public function removeReviewerReviews(ReviewerInterface $author);
+    public function removeReviewerReviews(ReviewerInterface $author): void;
 }

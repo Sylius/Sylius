@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Security;
 
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 interface UserPasswordEncoderInterface
 {
     /**
@@ -23,5 +22,5 @@ interface UserPasswordEncoderInterface
      *
      * @return string
      */
-    public function encode(CredentialsHolderInterface $user);
+    public function encode(CredentialsHolderInterface $user): string;
 }

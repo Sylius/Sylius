@@ -1,0 +1,63 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 2,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/product-association-types\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/product-association-types\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/product-association-types\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "cross_sell",
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Cross sell"
+                    },
+                    "nl_NL": {
+                        "id": @integer@,
+                        "locale": "nl_NL",
+                        "name": "Cross sell (nl_NL)"
+                    }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "up_sell",
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Up sell"
+                    },
+                    "nl_NL": {
+                        "id": @integer@,
+                        "locale": "nl_NL",
+                        "name": "Up sell (nl_NL)"
+                    }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            }
+        ]
+    }
+}

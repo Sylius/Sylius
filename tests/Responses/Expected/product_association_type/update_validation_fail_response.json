@@ -1,0 +1,41 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "translations": {
+                "children": {
+                    "en_US": {
+                        "children": {
+                            "name": {
+                                "errors": [
+                                    "Please enter association type name."
+                                ]
+                            }
+                        }
+                    },
+                    "nl_NL": {
+                        "children": {
+                            "name": {
+                                "errors": [
+                                    "Please enter association type name."
+                                ]
+                            }
+                        }
+                    },
+                    "fr_FR": {
+                        "children": {
+                            "name": {}
+                        }
+                    },
+                    "de_CH": {
+                        "children": {
+                            "name": {}
+                        }
+                    }
+                }
+            },
+            "code": {}
+        }
+    }
+}

@@ -9,96 +9,95 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface AdjustmentInterface extends ResourceInterface, TimestampableInterface
 {
     /**
-     * @return AdjustableInterface
+     * @return AdjustableInterface|null
      */
-    public function getAdjustable();
+    public function getAdjustable(): ?AdjustableInterface;
 
     /**
      * @param AdjustableInterface|null $adjustable
      */
-    public function setAdjustable(AdjustableInterface $adjustable = null);
+    public function setAdjustable(?AdjustableInterface $adjustable): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType();
+    public function getType(): ?string;
 
     /**
-     * @param string $type
+     * @param string|null $type
      */
-    public function setType($type);
+    public function setType(?string $type): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLabel();
+    public function getLabel(): ?string;
 
     /**
-     * @param string $label
+     * @param string|null $label
      */
-    public function setLabel($label);
+    public function setLabel(?string $label): void;
 
     /**
      * @return int
      */
-    public function getAmount();
+    public function getAmount(): int;
 
     /**
      * @param int $amount
      */
-    public function setAmount($amount);
+    public function setAmount(int $amount): void;
 
     /**
      * @return bool
      */
-    public function isNeutral();
+    public function isNeutral(): bool;
 
     /**
      * @param bool $neutral
      */
-    public function setNeutral($neutral);
+    public function setNeutral(bool $neutral): void;
 
     /**
      * @return bool
      */
-    public function isLocked();
+    public function isLocked(): bool;
 
-    public function lock();
+    public function lock(): void;
 
-    public function unlock();
+    public function unlock(): void;
 
     /**
      * Adjustments with amount < 0 are called "charges".
      *
      * @return bool
      */
-    public function isCharge();
+    public function isCharge(): bool;
 
     /**
      * Adjustments with amount > 0 are called "credits".
      *
      * @return bool
      */
-    public function isCredit();
+    public function isCredit(): bool;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getOriginCode();
+    public function getOriginCode(): ?string;
 
     /**
-     * @param string $originCode
+     * @param string|null $originCode
      */
-    public function setOriginCode($originCode);
+    public function setOriginCode(?string $originCode): void;
 }

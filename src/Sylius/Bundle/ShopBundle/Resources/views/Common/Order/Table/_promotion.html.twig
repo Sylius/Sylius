@@ -1,10 +1,10 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 {% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+{% set orderPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderPromotionAdjustment)) %}
 
-<td colspan="2" id="promotion-discounts">
-    {% set orderPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderPromotionAdjustment)) %}
-    {% if not orderPromotions is empty %}
+{% if not orderPromotions is empty %}
+    <td colspan="2" id="promotion-discounts">
         <div class="ui relaxed divided list">
             {% for label, amount in orderPromotions %}
                 <div class="item">
@@ -17,9 +17,9 @@
                 </div>
             {% endfor %}
         </div>
-    {% endif %}
-</td>
-<td colspan="2" id="promotion-total" class="right aligned">
+    </td>
+{% endif %}
+<td colspan="{% if not orderPromotions is empty %}2{% else %}4{% endif %}" id="promotion-total" class="right aligned">
     {{ 'sylius.ui.promotion_total'|trans }}:
     {{ money.format(order.orderPromotionTotal, order.currencyCode) }}
 </td>

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Form\Type\Customer;
 
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
@@ -20,9 +22,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class CustomerSimpleRegistrationType extends AbstractResourceType
 {
     /**
@@ -35,7 +34,7 @@ final class CustomerSimpleRegistrationType extends AbstractResourceType
      * @param array $validationGroups
      * @param RepositoryInterface $customerRepository
      */
-    public function __construct($dataClass, array $validationGroups, RepositoryInterface $customerRepository)
+    public function __construct(string $dataClass, array $validationGroups, RepositoryInterface $customerRepository)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -45,7 +44,7 @@ final class CustomerSimpleRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = [])
+    public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
         $builder
             ->add('email', EmailType::class, [
@@ -63,7 +62,7 @@ final class CustomerSimpleRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => $this->dataClass,
@@ -74,7 +73,7 @@ final class CustomerSimpleRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_customer_simple_registration';
     }

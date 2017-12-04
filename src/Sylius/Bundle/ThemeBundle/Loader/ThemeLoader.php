@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Loader;
 
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
@@ -20,9 +22,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 use Zend\Hydrator\HydrationInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ThemeLoader implements ThemeLoaderInterface
 {
     /**
@@ -82,7 +81,7 @@ final class ThemeLoader implements ThemeLoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load()
+    public function load(): array
     {
         $configurations = $this->configurationProvider->getConfigurations();
 
@@ -97,9 +96,9 @@ final class ThemeLoader implements ThemeLoaderInterface
     /**
      * @param array $configurations
      *
-     * @return ThemeInterface[]
+     * @return array|ThemeInterface[]
      */
-    private function initializeThemes(array $configurations)
+    private function initializeThemes(array $configurations): array
     {
         $themes = [];
         foreach ($configurations as $configuration) {
@@ -112,11 +111,11 @@ final class ThemeLoader implements ThemeLoaderInterface
 
     /**
      * @param array $configurations
-     * @param ThemeInterface[] $themes
+     * @param array|ThemeInterface[] $themes
      *
-     * @return ThemeInterface[]
+     * @return array|ThemeInterface[]
      */
-    private function hydrateThemes(array $configurations, array $themes)
+    private function hydrateThemes(array $configurations, array $themes): array
     {
         foreach ($configurations as $configuration) {
             $themeName = $configuration['name'];
@@ -132,9 +131,9 @@ final class ThemeLoader implements ThemeLoaderInterface
     }
 
     /**
-     * @param ThemeInterface[] $themes
+     * @param array|ThemeInterface[] $themes
      */
-    private function checkForCircularDependencies(array $themes)
+    private function checkForCircularDependencies(array $themes): void
     {
         try {
             foreach ($themes as $theme) {
@@ -150,9 +149,9 @@ final class ThemeLoader implements ThemeLoaderInterface
      * @param array $parentsNames
      * @param array $existingThemes
      *
-     * @return ThemeInterface[]
+     * @return array|ThemeInterface[]
      */
-    private function convertParentsNamesToParentsObjects($themeName, array $parentsNames, array $existingThemes)
+    private function convertParentsNamesToParentsObjects(string $themeName, array $parentsNames, array $existingThemes): array
     {
         return array_map(function ($parentName) use ($themeName, $existingThemes) {
             if (!isset($existingThemes[$parentName])) {
@@ -170,9 +169,9 @@ final class ThemeLoader implements ThemeLoaderInterface
     /**
      * @param array $authorsArrays
      *
-     * @return ThemeAuthor[]
+     * @return array|ThemeAuthor[]
      */
-    private function convertAuthorsArraysToAuthorsObjects(array $authorsArrays)
+    private function convertAuthorsArraysToAuthorsObjects(array $authorsArrays): array
     {
         return array_map(function (array $authorArray) {
             return $this->themeAuthorFactory->createFromArray($authorArray);
@@ -182,9 +181,9 @@ final class ThemeLoader implements ThemeLoaderInterface
     /**
      * @param array $screenshotsArrays
      *
-     * @return ThemeScreenshot[]
+     * @return array|ThemeScreenshot[]
      */
-    private function convertScreenshotsArraysToScreenshotsObjects(array $screenshotsArrays)
+    private function convertScreenshotsArraysToScreenshotsObjects(array $screenshotsArrays): array
     {
         return array_map(function (array $screenshotArray) {
             return $this->themeScreenshotFactory->createFromArray($screenshotArray);

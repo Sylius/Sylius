@@ -1,20 +1,27 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
-use Sylius\Bundle\CoreBundle\Fixture\GeographicalFixture;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
+use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class GeographicalFixtureSpec extends ObjectBehavior
 {
     function let(
@@ -24,7 +31,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ObjectManager $provinceManager,
         ZoneFactoryInterface $zoneFactory,
         ObjectManager $zoneManager
-    ) {
+    ): void {
         $this->beConstructedWith(
             $countryFactory,
             $countryManager,
@@ -35,12 +42,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(GeographicalFixture::class);
-    }
-
-    function it_is_a_fixture()
+    function it_is_a_fixture(): void
     {
         $this->shouldImplement(FixtureInterface::class);
     }
@@ -49,7 +51,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
         CountryInterface $country
-    ) {
+    ): void {
         $countryFactory->createNew()->willReturn($country);
         $country->setCode('PL')->shouldBeCalled();
         $country->enable()->shouldBeCalled();
@@ -67,7 +69,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ObjectManager $provinceManager,
         CountryInterface $country,
         ProvinceInterface $province
-    ) {
+    ): void {
         $countryFactory->createNew()->willReturn($country);
         $country->setCode('PL')->shouldBeCalled();
         $country->enable()->shouldBeCalled();
@@ -87,7 +89,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         $this->load(['countries' => ['PL'], 'provinces' => ['PL' => ['PL-SL' => 'Silesia']], 'zones' => []]);
     }
 
-    function it_throws_an_exception_if_trying_to_create_a_province_for_unexisting_country()
+    function it_throws_an_exception_if_trying_to_create_a_province_for_unexisting_country(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('load', [['countries' => [], 'provinces' => ['PL' => ['PL-SL' => 'Silesia']], 'zones' => []]]);
     }
@@ -99,7 +101,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ObjectManager $zoneManager,
         CountryInterface $country,
         ZoneInterface $zone
-    ) {
+    ): void {
         $countryFactory->createNew()->willReturn($country);
         $country->setCode('PL')->shouldBeCalled();
         $country->enable()->shouldBeCalled();
@@ -132,7 +134,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ObjectManager $zoneManager,
         CountryInterface $country,
         ZoneInterface $zone
-    ) {
+    ): void {
         $countryFactory->createNew()->willReturn($country);
         $country->setCode('PL')->shouldBeCalled();
         $country->enable()->shouldBeCalled();
@@ -169,7 +171,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         CountryInterface $country,
         ProvinceInterface $province,
         ZoneInterface $zone
-    ) {
+    ): void {
         $countryFactory->createNew()->willReturn($country);
         $country->setCode('PL')->shouldBeCalled();
         $country->enable()->shouldBeCalled();
@@ -211,7 +213,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         CountryInterface $country,
         ZoneInterface $countryTypeZone,
         ZoneInterface $zoneTypeZone
-    ) {
+    ): void {
         $countryFactory->createNew()->willReturn($country);
         $country->setCode('PL')->shouldBeCalled();
         $country->enable()->shouldBeCalled();
@@ -249,7 +251,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ]]);
     }
 
-    function it_throws_an_exception_if_trying_to_create_a_zone_with_unexisting_country()
+    function it_throws_an_exception_if_trying_to_create_a_zone_with_unexisting_country(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('load', [['countries' => [], 'provinces' => [], 'zones' => [
             'ZONE' => [
@@ -257,11 +259,11 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => ['PL'],
                 'provinces' => [],
                 'zones' => [],
-            ]
+            ],
         ]]]);
     }
 
-    function it_throws_an_exception_if_trying_to_create_a_zone_with_unexisting_province()
+    function it_throws_an_exception_if_trying_to_create_a_zone_with_unexisting_province(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('load', [['countries' => [], 'provinces' => [], 'zones' => [
             'ZONE' => [
@@ -269,11 +271,11 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => [],
                 'provinces' => ['PL-SL'],
                 'zones' => [],
-            ]
+            ],
         ]]]);
     }
 
-    function it_throws_an_exception_if_trying_to_create_a_zone_with_unexisting_zone()
+    function it_throws_an_exception_if_trying_to_create_a_zone_with_unexisting_zone(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('load', [['countries' => [], 'provinces' => [], 'zones' => [
             'ZONE' => [
@@ -281,7 +283,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
                 'countries' => [],
                 'provinces' => [],
                 'zones' => ['DAWG'],
-            ]
+            ],
         ]]]);
     }
 }

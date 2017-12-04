@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Context;
 
+use Sylius\Component\Order\Model\OrderInterface;
 use Zend\Stdlib\PriorityQueue;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class CompositeCartContext implements CartContextInterface
 {
     /**
@@ -32,7 +32,7 @@ final class CompositeCartContext implements CartContextInterface
      * @param CartContextInterface $cartContext
      * @param int $priority
      */
-    public function addContext(CartContextInterface $cartContext, $priority = 0)
+    public function addContext(CartContextInterface $cartContext, int $priority = 0): void
     {
         $this->cartContexts->insert($cartContext, $priority);
     }
@@ -40,7 +40,7 @@ final class CompositeCartContext implements CartContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCart()
+    public function getCart(): OrderInterface
     {
         foreach ($this->cartContexts as $cartContext) {
             try {

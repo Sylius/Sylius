@@ -9,14 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace AppBundle\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ComicBookApiTest extends JsonApiTestCase
 {
     /**
@@ -37,6 +44,7 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'comic-books/create_response', Response::HTTP_CREATED);
     }
+
     /**
      * @test
      */
@@ -72,7 +80,7 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PUT', '/v1/comic-books/'. $objects["comic-book1"]->getId(), [], [], ['CONTENT_TYPE' => 'application/json'], $data);
+        $this->client->request('PUT', '/v1/comic-books/' . $objects['comic-book1']->getId(), [], [], ['CONTENT_TYPE' => 'application/json'], $data);
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -92,7 +100,7 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PATCH', '/v1/comic-books/'. $objects["comic-book1"]->getId(), [], [], ['CONTENT_TYPE' => 'application/json'], $data);
+        $this->client->request('PATCH', '/v1/comic-books/' . $objects['comic-book1']->getId(), [], [], ['CONTENT_TYPE' => 'application/json'], $data);
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -104,7 +112,7 @@ EOT;
     {
         $objects = $this->loadFixturesFromFile('comic_books.yml');
 
-        $this->client->request('DELETE', '/v1/comic-books/'. $objects["comic-book1"]->getId());
+        $this->client->request('DELETE', '/v1/comic-books/' . $objects['comic-book1']->getId());
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
@@ -116,7 +124,7 @@ EOT;
     {
         $objects = $this->loadFixturesFromFile('comic_books.yml');
 
-        $this->client->request('GET', '/v1/comic-books/'. $objects["comic-book1"]->getId());
+        $this->client->request('GET', '/v1/comic-books/' . $objects['comic-book1']->getId());
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'comic-books/show_response');
     }
@@ -128,7 +136,7 @@ EOT;
     {
         $objects = $this->loadFixturesFromFile('comic_books.yml');
 
-        $this->client->request('GET', '/v1.2/comic-books/'. $objects["comic-book1"]->getId());
+        $this->client->request('GET', '/v1.2/comic-books/' . $objects['comic-book1']->getId());
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'comic-books/versioned_show_response');
     }

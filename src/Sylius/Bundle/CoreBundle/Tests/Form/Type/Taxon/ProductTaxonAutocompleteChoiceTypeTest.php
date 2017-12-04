@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Tests\Form\Type\Taxon;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,9 +26,6 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
 {
     /**
@@ -44,7 +43,7 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
      */
     private $productTaxonRepository;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->resourceRepositoryRegistry = $this->prophesize(ServiceRegistryInterface::class);
         $this->productTaxonFactory = $this->prophesize(FactoryInterface::class);
@@ -53,7 +52,7 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
         parent::setUp();
     }
 
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         $productTaxonAutoCompleteType = new ProductTaxonAutocompleteChoiceType(
             $this->productTaxonFactory->reveal(),
@@ -69,7 +68,7 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_creates_new_product_taxons_based_on_given_product_and_passed_taxon_codes()
+    public function it_creates_new_product_taxons_based_on_given_product_and_passed_taxon_codes(): void
     {
         $taxon = $this->prophesize(TaxonInterface::class);
         $product = $this->prophesize(ProductInterface::class);
@@ -98,7 +97,7 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_returns_existing_product_taxons_based_on_given_product_and_passed_taxon_codes()
+    public function it_returns_existing_product_taxons_based_on_given_product_and_passed_taxon_codes(): void
     {
         $taxon = $this->prophesize(TaxonInterface::class);
         $product = $this->prophesize(ProductInterface::class);
@@ -123,7 +122,7 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_returns_new_product_taxon_based_on_given_product_and_passed_taxon_code()
+    public function it_returns_new_product_taxon_based_on_given_product_and_passed_taxon_code(): void
     {
         $taxon = $this->prophesize(TaxonInterface::class);
         $product = $this->prophesize(ProductInterface::class);
@@ -150,7 +149,7 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
     /**
      * @test
      */
-    public function it_returns_existing_product_taxon_based_on_given_product_and_passed_taxon_code()
+    public function it_returns_existing_product_taxon_based_on_given_product_and_passed_taxon_code(): void
     {
         $taxon = $this->prophesize(TaxonInterface::class);
         $product = $this->prophesize(ProductInterface::class);

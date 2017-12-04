@@ -4,6 +4,11 @@
 sylius:
     form:
         tax_category:
-            name: الاسم
+            name: 'الاسم'
+            description: 'الوصف'
         tax_rate:
-            name: الاسم
+            category: 'القسم'
+            name: 'الاسم'
+            amount: 'القيمة'
+            included_in_price: 'مشمول السعر؟'
+            calculator: 'الحاسبة'

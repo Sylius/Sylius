@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Configuration;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 interface ConfigurationProviderInterface
 {
     /**
      * @return array
      */
-    public function getConfigurations();
+    public function getConfigurations(): array;
 }

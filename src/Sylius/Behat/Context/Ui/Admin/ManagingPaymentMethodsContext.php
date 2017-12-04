@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -21,10 +23,6 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ManagingPaymentMethodsContext implements Context
 {
     /**
@@ -96,6 +94,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iNameItIn($name = null, $language)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->nameIt($name, $language);
@@ -157,6 +156,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iChooseGateway($gatewayName)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->chooseGateway($gatewayName);
@@ -222,10 +222,27 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @When I check (also) the :paymentMethodName payment method
+     */
+    public function iCheckThePaymentMethod(string $paymentMethodName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $paymentMethodName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
      * @Then the payment method :paymentMethodName should appear in the registry
      * @Then the payment method :paymentMethodName should be in the registry
+     * @Then I should see the payment method :paymentMethodName in the list
      */
-    public function thePaymentMethodShouldAppearInTheRegistry($paymentMethodName)
+    public function thePaymentMethodShouldAppearInTheRegistry(string $paymentMethodName): void
     {
         $this->indexPage->open();
 
@@ -278,9 +295,10 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Then I should see a single payment method in the list
      * @Then I should see :amount payment methods in the list
      */
-    public function iShouldSeePaymentMethodsInTheList($amount)
+    public function iShouldSeePaymentMethodsInTheList(int $amount = 1): void
     {
         Assert::same($this->indexPage->countItems(), (int) $amount);
     }
@@ -299,7 +317,7 @@ final class ManagingPaymentMethodsContext implements Context
     public function iShouldBeNotifiedThatIHaveToSpecifyPaypal($element)
     {
         Assert::same(
-            $this->createPage->getValidationMessage('paypal_'.$element),
+            $this->createPage->getValidationMessage('paypal_' . $element),
             sprintf('Please enter paypal %s.', $element)
         );
     }

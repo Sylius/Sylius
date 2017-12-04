@@ -9,41 +9,34 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Product\Generator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Product\Generator\SlugGenerator;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class SlugGeneratorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SlugGenerator::class);
-    }
-
-    function it_implements_slug_generator_interface()
+    function it_implements_slug_generator_interface(): void
     {
         $this->shouldImplement(SlugGeneratorInterface::class);
     }
 
-    function it_generates_slug_based_on_given_name()
+    function it_generates_slug_based_on_given_name(): void
     {
         $this->generate('Cyclades')->shouldReturn('cyclades');
         $this->generate('Small World')->shouldReturn('small-world');
     }
 
-    function it_generates_slug_without_punctuation_marks()
+    function it_generates_slug_without_punctuation_marks(): void
     {
         $this->generate('"Ticket to Ride: Europe"')->shouldReturn('ticket-to-ride-europe');
         $this->generate('Tzolk\'in: The Mayan Calendar')->shouldReturn('tzolk-in-the-mayan-calendar');
         $this->generate('Game of Thrones: The Board Game')->shouldReturn('game-of-thrones-the-board-game');
     }
 
-    function it_generates_slug_without_special_signs()
+    function it_generates_slug_without_special_signs(): void
     {
         $this->generate('Wsiąść do Pociągu: Europa')->shouldReturn('wsiasc-do-pociagu-europa');
     }

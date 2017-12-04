@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
@@ -17,10 +19,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 class RegisterResourcesPassTest extends AbstractCompilerPassTestCase
 {
     /**

@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class RequestConfigurationFactory implements RequestConfigurationFactoryInterface
 {
-    const API_VERSION_HEADER = 'Accept';
-    const API_GROUPS_HEADER = 'Accept';
+    private const API_VERSION_HEADER = 'Accept';
+    private const API_GROUPS_HEADER = 'Accept';
 
-    const API_VERSION_REGEXP = '/(v|version)=(?P<version>[0-9\.]+)/i';
-    const API_GROUPS_REGEXP = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
+    private const API_VERSION_REGEXP = '/(v|version)=(?P<version>[0-9\.]+)/i';
+    private const API_GROUPS_REGEXP = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
 
     /**
      * @var ParametersParserInterface
@@ -45,7 +44,7 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
      * @param string $configurationClass
      * @param array $defaultParameters
      */
-    public function __construct(ParametersParserInterface $parametersParser, $configurationClass, array $defaultParameters = [])
+    public function __construct(ParametersParserInterface $parametersParser, string $configurationClass, array $defaultParameters = [])
     {
         $this->parametersParser = $parametersParser;
         $this->configurationClass = $configurationClass;
@@ -55,7 +54,7 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     /**
      * {@inheritdoc}
      */
-    public function create(MetadataInterface $metadata, Request $request)
+    public function create(MetadataInterface $metadata, Request $request): RequestConfiguration
     {
         $parameters = array_merge($this->defaultParameters, $this->parseApiParameters($request));
         $parameters = $this->parametersParser->parseRequestValues($parameters, $request);
@@ -70,16 +69,22 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
      *
      * @throws \InvalidArgumentException
      */
-    private function parseApiParameters(Request $request)
+    private function parseApiParameters(Request $request): array
     {
         $parameters = [];
 
-        if (preg_match(self::API_VERSION_REGEXP, $request->headers->get(self::API_VERSION_HEADER), $matches)) {
-            $parameters['serialization_version'] = $matches['version'];
+        $apiVersionHeaders = $request->headers->get(self::API_VERSION_HEADER, null, false);
+        foreach ($apiVersionHeaders as $apiVersionHeader) {
+            if (preg_match(self::API_VERSION_REGEXP, $apiVersionHeader, $matches)) {
+                $parameters['serialization_version'] = $matches['version'];
+            }
         }
 
-        if (preg_match(self::API_GROUPS_REGEXP, $request->headers->get(self::API_GROUPS_HEADER), $matches)) {
-            $parameters['serialization_groups'] = array_map('trim', explode(',', $matches['groups']));
+        $apiGroupsHeaders = $request->headers->get(self::API_GROUPS_HEADER, null, false);
+        foreach ($apiGroupsHeaders as $apiGroupsHeader) {
+            if (preg_match(self::API_GROUPS_REGEXP, $apiGroupsHeader, $matches)) {
+                $parameters['serialization_groups'] = array_map('trim', explode(',', $matches['groups']));
+            }
         }
 
         return array_merge($request->attributes->get('_sylius', []), $parameters);

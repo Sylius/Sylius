@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -16,9 +18,6 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\ProductOptionFixture;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ProductOptionFixtureTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
@@ -26,7 +25,7 @@ final class ProductOptionFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_options_are_optional()
+    public function product_options_are_optional(): void
     {
         $this->assertConfigurationIsValid([[]], 'custom');
     }
@@ -34,7 +33,7 @@ final class ProductOptionFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_options_can_be_generated_randomly()
+    public function product_options_can_be_generated_randomly(): void
     {
         $this->assertConfigurationIsValid([['random' => 4]], 'random');
         $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
@@ -43,7 +42,7 @@ final class ProductOptionFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_option_code_is_optional()
+    public function product_option_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['code' => 'CUSTOM']]]], 'custom.*.code');
     }
@@ -51,7 +50,7 @@ final class ProductOptionFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_option_values_are_optional()
+    public function product_option_values_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['values' => ['code' => 'value']]]]], 'custom.*.values');
     }
@@ -59,7 +58,7 @@ final class ProductOptionFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): ProductOptionFixture
     {
         return new ProductOptionFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),

@@ -9,37 +9,30 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Registry;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Registry\NonExistingServiceException;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class NonExistingServiceExceptionSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith('renderer', 'foo', ['service1', 'service2']);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(NonExistingServiceException::class);
-    }
-
-    function it_is_an_exception()
+    function it_is_an_exception(): void
     {
         $this->shouldHaveType(\Exception::class);
     }
 
-    function it_is_an_invalid_argument_exception()
+    function it_is_an_invalid_argument_exception(): void
     {
         $this->shouldHaveType(\InvalidArgumentException::class);
     }
 
-    function it_should_show_the_context_and_available_services_in_the_message()
+    function it_should_show_the_context_and_available_services_in_the_message(): void
     {
         $this->getMessage()->shouldReturn('Renderer service "foo" does not exist, available renderer services: "service1", "service2"');
     }

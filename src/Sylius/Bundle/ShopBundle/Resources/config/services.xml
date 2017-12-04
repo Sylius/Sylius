@@ -18,4 +18,23 @@
         <import resource="services/listeners.xml" />
         <import resource="services/menu.xml" />
     </imports>
+    <services>
+        <service id="sylius.handler.shop_user_logout" class="Sylius\Bundle\ShopBundle\EventListener\ShopUserLogoutHandler">
+            <argument type="service" id="security.http_utils" />
+            <argument>/</argument>
+            <argument type="service" id="sylius.context.channel.composite" />
+            <argument type="service" id="sylius.storage.cart_session" />
+        </service>
+        <service id="sylius.context.cart.session_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext">
+            <argument type="service" id="sylius.storage.cart_session" />
+            <argument type="service" id="sylius.context.channel" />
+            <tag name="sylius.context.cart" priority="-777" />
+        </service>
+
+        <service id="sylius.storage.cart_session" class="Sylius\Bundle\CoreBundle\Storage\CartSessionStorage">
+            <argument type="service" id="session" />
+            <argument>_sylius.cart</argument>
+            <argument type="service" id="sylius.repository.order" />
+        </service>
+    </services>
 </container>

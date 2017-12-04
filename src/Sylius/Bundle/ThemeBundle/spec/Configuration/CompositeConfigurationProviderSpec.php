@@ -9,33 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Configuration;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Configuration\CompositeConfigurationProvider;
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class CompositeConfigurationProviderSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith([]);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CompositeConfigurationProvider::class);
-    }
-
-    function it_implements_configuration_provider_interface()
+    function it_implements_configuration_provider_interface(): void
     {
         $this->shouldImplement(ConfigurationProviderInterface::class);
     }
 
-    function it_returns_empty_array_if_no_configurations_are_loaded()
+    function it_returns_empty_array_if_no_configurations_are_loaded(): void
     {
         $this->getConfigurations()->shouldReturn([]);
     }
@@ -43,7 +36,7 @@ final class CompositeConfigurationProviderSpec extends ObjectBehavior
     function it_returns_sum_of_configurations_returned_by_nested_configuration_providers(
         ConfigurationProviderInterface $firstConfigurationProvider,
         ConfigurationProviderInterface $secondConfigurationProvider
-    ) {
+    ): void {
         $this->beConstructedWith([
             $firstConfigurationProvider,
             $secondConfigurationProvider,

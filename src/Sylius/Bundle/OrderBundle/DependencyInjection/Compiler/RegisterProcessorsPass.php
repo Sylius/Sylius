@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\OrderBundle\DependencyInjection\Compiler;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\PrioritizedCompositeServicePass;
 
-/**
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 final class RegisterProcessorsPass extends PrioritizedCompositeServicePass
 {
     public function __construct()

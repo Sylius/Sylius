@@ -47,7 +47,7 @@ If you request for more detailed data, you will receive an object with the follo
 
 .. note::
 
-    Read more about :doc:`the Zone model in the component docs</components/Addressing/models>`.
+    Read more about :doc:`the Zone model in the component docs</components_and_bundles/components/Addressing/models>`.
 
 Creating a Zone
 ---------------
@@ -79,7 +79,7 @@ Definition
 
 .. note::
 
-    Read more about :doc:`Zone types in the component docs</components/Addressing/zone_types>`.
+    Read more about :doc:`Zone types in the component docs</components_and_bundles/components/Addressing/zone_types>`.
 
 Example
 ^^^^^^^

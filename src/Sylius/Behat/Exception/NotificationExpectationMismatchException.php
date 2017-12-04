@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Exception;
 
 use Sylius\Behat\NotificationType;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class NotificationExpectationMismatchException extends \RuntimeException
 {
     public function __construct(

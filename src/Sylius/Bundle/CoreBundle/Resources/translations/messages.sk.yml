@@ -35,6 +35,7 @@ sylius:
             payment_methods: Spôsoby platby
             shipping_methods: Spôsoby doručenia
             skipping_shipping_step_allowed: Preskočiť výber dopravy, ak je dostupný iba jeden spôsob dopravy?
+            skipping_payment_step_allowed: Preskočiť krok platby ak je dostupná len jedna platobná metóda?
             tax_calculation_strategy: Spôsob výpočtu dane
             tax_zone_default: Predvolené daňové pásmo
             taxonomies: Triedenia
@@ -48,7 +49,7 @@ sylius:
         order_filter:
             created_at_from: Vytvorené po
             created_at_to: Vytvorené pred
-            number: Číslo
+            number: 'Číslo'
             total_from: Od
             total_to: Do
             payment_state: Stav platby
@@ -74,13 +75,13 @@ sylius:
         shipment_filter:
             created_at_from: Od
             created_at_to: Do
-            number: Číslo objednávky
+            number: 'Číslo objednávky'
             shipping_address: Meno príjemcu
             channel: Všetky kanály
         payment_filter:
             created_at_from: Od
             created_at_to: Do
-            number: Číslo objednávky
+            number: 'Číslo objednávky'
             billing_address: Fakturovať na
             channel: Všetky kanály
         shipping_method:
@@ -110,7 +111,7 @@ sylius:
             price: Cena
             sku: Skladový kód (SKU)
             weight: Hmotnosť
-            width: Šírka
+            width: 'Šírka'
         attribute:
             product_attribute_value:
                 attribute: Vlastnosť
@@ -196,7 +197,7 @@ sylius:
             session:
                 auto_start: session.auto_start
             short_open_tag: short_open_tag
-            timezone: časové pásmo
+            timezone: 'časové pásmo'
             timezone_deprecated:
                 header: Zastaralé časové pásmo
                 help: 'Časové pásmo %timezone% je zastaralé. Opravte si Váš súbor php.ini (zoznam zastaralých časových pasiem http://php.net/manual/en/timezones.others.php).'

@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Product\Generator;
 
 use Webmozart\Assert\Assert;
 
 /**
  * Builds the Cartesian product set from one or more given sets.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class CartesianSetBuilder
 {
@@ -39,7 +39,7 @@ final class CartesianSetBuilder
      *
      * @return array
      */
-    private function doBuild(array $setTuples, $isRecursiveStep)
+    private function doBuild(array $setTuples, bool $isRecursiveStep): array
     {
         $countTuples = count($setTuples);
 
@@ -78,9 +78,9 @@ final class CartesianSetBuilder
      *
      * @throws \InvalidArgumentException
      */
-    private function validateTuples(array $setTuples, $countTuples)
+    private function validateTuples(array $setTuples, int $countTuples): array
     {
-        Assert::notEq(0, $countTuples, 'The set builder requires a single array of one or more array sets.1');
+        Assert::notEq(0, $countTuples, 'The set builder requires a single array of one or more array sets.');
 
         foreach ($setTuples as $tuple) {
             Assert::isArray($tuple, 'The set builder requires a single array of one or more array sets.');
@@ -98,7 +98,7 @@ final class CartesianSetBuilder
      *
      * @return array
      */
-    private function getResult($isRecursiveStep, $k, array $keys, $valueA, $valueB)
+    private function getResult(bool $isRecursiveStep, $k, array $keys, $valueA, $valueB): array
     {
         if ($isRecursiveStep) {
             return array_merge([$valueA], (array) $valueB);

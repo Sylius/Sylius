@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -16,9 +18,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductGenerateVariantsType extends AbstractResourceType
 {
     /**
@@ -28,10 +27,10 @@ final class ProductGenerateVariantsType extends AbstractResourceType
 
     /**
      * @param string $dataClass
-     * @param string[] $validationGroups
+     * @param array|string[] $validationGroups
      * @param EventSubscriberInterface $generateProductVariants
      */
-    public function __construct($dataClass, $validationGroups, EventSubscriberInterface $generateProductVariants)
+    public function __construct(string $dataClass, array $validationGroups, EventSubscriberInterface $generateProductVariants)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -41,23 +40,22 @@ final class ProductGenerateVariantsType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('variants', CollectionType::class, [
                 'entry_type' => ProductVariantGenerationType::class,
-                'allow_add' => true,
+                'allow_add' => false,
                 'allow_delete' => true,
                 'by_reference' => false,
             ])
             ->addEventSubscriber($this->generateProductVariantsSubscriber);
-        ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_product_generate_variants';
     }

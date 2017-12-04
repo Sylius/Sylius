@@ -9,44 +9,38 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Taxation\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class TaxRateSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType('Sylius\Component\Taxation\Model\TaxRate');
-    }
-
-    function it_should_implement_Sylius_tax_rate_interface()
+    function it_implements_tax_rate_interface(): void
     {
         $this->shouldImplement(TaxRateInterface::class);
     }
 
-    function it_should_not_have_id_by_default()
+    function it_does_not_have_id_by_default(): void
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_belong_to_category_by_default()
+    function it_does_not_belong_to_category_by_default(): void
     {
         $this->getCategory()->shouldReturn(null);
     }
 
-    function it_should_allow_assigning_itself_to_category(TaxCategoryInterface $category)
+    function it_allows_assigning_itself_to_category(TaxCategoryInterface $category): void
     {
         $this->setCategory($category);
         $this->getCategory()->shouldReturn($category);
     }
 
-    function it_should_allow_detaching_itself_from_category(TaxCategoryInterface $category)
+    function it_allows_detaching_itself_from_category(TaxCategoryInterface $category): void
     {
         $this->setCategory($category);
 
@@ -54,35 +48,35 @@ final class TaxRateSpec extends ObjectBehavior
         $this->getCategory()->shouldReturn(null);
     }
 
-    function it_should_be_unnamed_by_default()
+    function it_is_unnamed_by_default(): void
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_should_be_mutable()
+    function its_name_should_be_mutable(): void
     {
         $this->setName('Taxable goods');
         $this->getName()->shouldReturn('Taxable goods');
     }
 
-    function it_has_mutable_code()
+    function it_has_mutable_code(): void
     {
         $this->setCode('TR1');
         $this->getCode()->shouldReturn('TR1');
     }
 
-    function it_should_have_amount_equal_to_0_by_default()
+    function it_has_amount_equal_to_0_by_default(): void
     {
-        $this->getAmount()->shouldReturn(0);
+        $this->getAmount()->shouldReturn(0.00);
     }
 
-    function its_amount_should_be_mutable()
+    function its_amount_should_be_mutable(): void
     {
         $this->setAmount(0.23);
         $this->getAmount()->shouldReturn(0.23);
     }
 
-    function it_should_represent_amount_as_percentage()
+    function it_represents_amount_as_percentage(): void
     {
         $this->setAmount(0.23);
         $this->getAmountAsPercentage()->shouldReturn(23.00);
@@ -91,39 +85,39 @@ final class TaxRateSpec extends ObjectBehavior
         $this->getAmountAsPercentage()->shouldReturn(12.5);
     }
 
-    function it_should_not_be_included_in_price_by_default()
+    function it_is_not_included_in_price_by_default(): void
     {
         $this->shouldNotBeIncludedInPrice();
     }
 
-    function its_inclusion_in_price_should_be_mutable()
+    function its_inclusion_in_price_should_be_mutable(): void
     {
         $this->setIncludedInPrice(true);
         $this->shouldBeIncludedInPrice();
     }
 
-    function it_should_not_have_calculator_defined_by_default()
+    function it_dose_not_have_calculator_defined_by_default(): void
     {
         $this->getCalculator()->shouldReturn(null);
     }
 
-    function its_calculator_should_be_mutable()
+    function its_calculator_should_be_mutable(): void
     {
         $this->setCalculator('default');
         $this->getCalculator()->shouldReturn('default');
     }
 
-    function it_should_initialize_creation_date_by_default()
+    function it_initializes_creation_date_by_default(): void
     {
-        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
     }
 
-    function it_should_not_have_last_update_date_by_default()
+    function it_does_not_have_last_update_date_by_default(): void
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function it_has_label()
+    function it_has_label(): void
     {
         $this->setName('Test tax');
         $this->setAmount(0.23);

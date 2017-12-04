@@ -9,40 +9,33 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Payment\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Payment\Factory\PaymentFactory;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class PaymentFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $paymentFactory)
+    function let(FactoryInterface $paymentFactory): void
     {
         $this->beConstructedWith($paymentFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PaymentFactory::class);
-    }
-
-    function it_implements_Sylius_shipment_factory_interface()
+    function it_implements_Sylius_shipment_factory_interface(): void
     {
         $this->shouldImplement(PaymentFactoryInterface::class);
     }
 
-    function it_implements_factory_interface()
+    function it_implements_factory_interface(): void
     {
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_delegates_creation_of_new_resource(FactoryInterface $paymentFactory, PaymentInterface $payment)
+    function it_delegates_creation_of_new_resource(FactoryInterface $paymentFactory, PaymentInterface $payment): void
     {
         $paymentFactory->createNew()->willReturn($payment);
 
@@ -52,7 +45,7 @@ final class PaymentFactorySpec extends ObjectBehavior
     function it_creates_payment_with_currency_and_amount(
         FactoryInterface $paymentFactory,
         PaymentInterface $payment
-    ) {
+    ): void {
         $paymentFactory->createNew()->willReturn($payment);
 
         $payment->setAmount(1234)->shouldBeCalled();

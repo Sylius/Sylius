@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -22,9 +24,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class BuildAttributesFormSubscriber implements EventSubscriberInterface
 {
     /**
@@ -52,7 +51,7 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -65,7 +64,7 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function preSetData(FormEvent $event)
+    public function preSetData(FormEvent $event): void
     {
         /** @var ProductInterface $product */
         $product = $event->getData();
@@ -90,7 +89,7 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function postSubmit(FormEvent $event)
+    public function postSubmit(FormEvent $event): void
     {
         /** @var ProductInterface $product */
         $product = $event->getData();
@@ -109,7 +108,7 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
      * @param ProductInterface $product
      * @param ProductAttributeValueInterface $attribute
      */
-    private function resolveLocalizedAttributes(ProductInterface $product, ProductAttributeValueInterface $attribute)
+    private function resolveLocalizedAttributes(ProductInterface $product, ProductAttributeValueInterface $attribute): void
     {
         $localeCodes = $this->localeProvider->getDefinedLocalesCodes();
 
@@ -127,8 +126,10 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
      *
      * @return ProductAttributeValueInterface
      */
-    private function createProductAttributeValue(ProductAttributeInterface $attribute, $localeCode)
-    {
+    private function createProductAttributeValue(
+        ProductAttributeInterface $attribute,
+        string $localeCode
+    ): ProductAttributeValueInterface {
         /** @var ProductAttributeValueInterface $attributeValue */
         $attributeValue = $this->attributeValueFactory->createNew();
         $attributeValue->setAttribute($attribute);

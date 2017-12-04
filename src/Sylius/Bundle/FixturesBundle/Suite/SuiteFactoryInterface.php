@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Suite;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 interface SuiteFactoryInterface
 {
     /**
@@ -22,5 +21,5 @@ interface SuiteFactoryInterface
      *
      * @return SuiteInterface
      */
-    public function createSuite($name, array $configuration);
+    public function createSuite(string $name, array $configuration): SuiteInterface;
 }

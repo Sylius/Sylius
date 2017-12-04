@@ -9,35 +9,28 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\StateResolver;
 
-use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SM\Factory\FactoryInterface;
+use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderShippingStates;
-use Sylius\Component\Core\StateResolver\OrderStateResolver;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class OrderStateResolverSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $stateMachineFactory)
+    function let(FactoryInterface $stateMachineFactory): void
     {
         $this->beConstructedWith($stateMachineFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OrderStateResolver::class);
-    }
-
-    function it_implements_a_state_resolver_interface()
+    function it_implements_a_state_resolver_interface(): void
     {
         $this->shouldImplement(StateResolverInterface::class);
     }
@@ -46,7 +39,7 @@ final class OrderStateResolverSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         StateMachineInterface $stateMachine
-    ) {
+    ): void {
         $order->getShippingState()->willReturn(OrderShippingStates::STATE_SHIPPED);
         $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_PAID);
 
@@ -62,7 +55,7 @@ final class OrderStateResolverSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         StateMachineInterface $stateMachine
-    ) {
+    ): void {
         $order->getShippingState()->willReturn(Argument::not(OrderShippingStates::STATE_SHIPPED));
         $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_PAID);
 
@@ -78,7 +71,7 @@ final class OrderStateResolverSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         StateMachineInterface $stateMachine
-    ) {
+    ): void {
         $order->getShippingState()->willReturn(OrderShippingStates::STATE_SHIPPED);
         $order->getPaymentState()->willReturn(Argument::not(OrderPaymentStates::STATE_PAID));
 

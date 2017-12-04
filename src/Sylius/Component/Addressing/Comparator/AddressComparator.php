@@ -9,19 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Addressing\Comparator;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class AddressComparator implements AddressComparatorInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function equal(AddressInterface $firstAddress, AddressInterface $secondAddress)
+    public function equal(AddressInterface $firstAddress, AddressInterface $secondAddress): bool
     {
         return $this->normalizeAddress($firstAddress) === $this->normalizeAddress($secondAddress);
     }
@@ -31,10 +30,10 @@ final class AddressComparator implements AddressComparatorInterface
      *
      * @return array
      */
-    private function normalizeAddress(AddressInterface $address)
+    private function normalizeAddress(AddressInterface $address): array
     {
         return array_map(function ($value) {
-            return trim(strtolower($value));
+            return strtolower(trim((string) $value));
         }, [
             $address->getCity(),
             $address->getCompany(),

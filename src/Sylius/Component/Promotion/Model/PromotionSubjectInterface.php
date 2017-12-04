@@ -9,40 +9,38 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface PromotionSubjectInterface
 {
     /**
      * @return int
      */
-    public function getPromotionSubjectTotal();
+    public function getPromotionSubjectTotal(): int;
 
     /**
      * @return Collection|PromotionInterface[]
      */
-    public function getPromotions();
+    public function getPromotions(): Collection;
 
     /**
      * @param PromotionInterface $promotion
      *
      * @return bool
      */
-    public function hasPromotion(PromotionInterface $promotion);
+    public function hasPromotion(PromotionInterface $promotion): bool;
 
     /**
      * @param PromotionInterface $promotion
      */
-    public function addPromotion(PromotionInterface $promotion);
+    public function addPromotion(PromotionInterface $promotion): void;
 
     /**
      * @param PromotionInterface $promotion
      */
-    public function removePromotion(PromotionInterface $promotion);
+    public function removePromotion(PromotionInterface $promotion): void;
 }

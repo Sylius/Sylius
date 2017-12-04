@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class FakeChannelPersister
 {
     /**
@@ -36,7 +35,7 @@ final class FakeChannelPersister
     /**
      * @param FilterResponseEvent $filterResponseEvent
      */
-    public function onKernelResponse(FilterResponseEvent $filterResponseEvent)
+    public function onKernelResponse(FilterResponseEvent $filterResponseEvent): void
     {
         if (HttpKernelInterface::SUB_REQUEST === $filterResponseEvent->getRequestType()) {
             return;

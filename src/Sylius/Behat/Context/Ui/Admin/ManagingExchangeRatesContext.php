@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\ExchangeRate\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ExchangeRate\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ExchangeRate\UpdatePageInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ManagingExchangeRatesContext implements Context
 {
     /**
@@ -71,7 +71,8 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @When I am browsing exchange rates of the store
+     * @Given I am browsing exchange rates of the store
+     * @When I browse exchange rates
      * @When I browse exchange rates of the store
      */
     public function iWantToBrowseExchangeRatesOfTheStore()
@@ -117,7 +118,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChangeRatioTo($ratio)
     {
-        $this->updatePage->changeRatio((float)$ratio);
+        $this->updatePage->changeRatio((float) $ratio);
     }
 
     /**
@@ -158,6 +159,25 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
+     * @When I check (also) the exchange rate between :sourceCurrencyName and :targetCurrencyName
+     */
+    public function iCheckTheExchangeRateBetweenAnd(string $sourceCurrencyName, string $targetCurrencyName): void
+    {
+        $this->indexPage->checkResourceOnPage([
+            'sourceCurrency' => $sourceCurrencyName,
+            'targetCurrency' => $targetCurrencyName,
+        ]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
      * @Then I should see :count exchange rates on the list
      */
     public function iShouldSeeExchangeRatesOnTheList($count = 0)
@@ -166,6 +186,7 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
+     * @Then I should see a single exchange rate in the list
      * @Then I should( still) see one exchange rate on the list
      */
     public function iShouldSeeOneExchangeRateOnTheList()
@@ -178,18 +199,21 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then the exchange rate with ratio :ratio between :sourceCurrency and :targetCurrency should appear in the store
      */
-    public function theExchangeRateBetweenAndShouldAppearInTheStore($ratio, $sourceCurrency, $targetCurrency)
+    public function theExchangeRateBetweenAndShouldAppearInTheStore($ratio, CurrencyInterface $sourceCurrency, CurrencyInterface $targetCurrency)
     {
         $this->indexPage->open();
 
-        $this->assertExchangeRateWithRatioIsOnTheList($ratio, $sourceCurrency, $targetCurrency);
+        $this->assertExchangeRateWithRatioIsOnTheList((float) $ratio, $sourceCurrency->getName(), $targetCurrency->getName());
     }
 
     /**
+     * @Then I should see the exchange rate between :sourceCurrencyName and :targetCurrencyName in the list
      * @Then I should (also) see an exchange rate between :sourceCurrencyName and :targetCurrencyName on the list
      */
-    public function iShouldSeeAnExchangeRateBetweenAndOnTheList($sourceCurrencyName, $targetCurrencyName)
-    {
+    public function iShouldSeeAnExchangeRateBetweenAndOnTheList(
+        string $sourceCurrencyName,
+        string $targetCurrencyName
+    ): void {
         Assert::true($this->indexPage->isSingleResourceOnPage([
             'sourceCurrency' => $sourceCurrencyName,
             'targetCurrency' => $targetCurrencyName,
@@ -298,7 +322,7 @@ final class ManagingExchangeRatesContext implements Context
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([
-                'ratio' => $ratio,
+                'ratio' => (string) $ratio,
                 'sourceCurrency' => $sourceCurrencyName,
                 'targetCurrency' => $targetCurrencyName,
             ]),

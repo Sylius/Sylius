@@ -9,32 +9,33 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\UiBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\UiBundle\Controller\SecurityController;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SecurityControllerSpec extends ObjectBehavior
 {
-    function let(AuthenticationUtils $authenticationUtils, FormFactoryInterface $formFactory, EngineInterface $templatingEngine)
-    {
-        $this->beConstructedWith($authenticationUtils, $formFactory, $templatingEngine);
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(SecurityController::class);
+    function let(
+        AuthenticationUtils $authenticationUtils,
+        FormFactoryInterface $formFactory,
+        EngineInterface $templatingEngine,
+        AuthorizationCheckerInterface $authorizationChecker,
+        RouterInterface $router
+    ): void {
+        $this->beConstructedWith($authenticationUtils, $formFactory, $templatingEngine, $authorizationChecker, $router);
     }
 
     function it_renders_login_form(
@@ -45,8 +46,11 @@ final class SecurityControllerSpec extends ObjectBehavior
         Form $form,
         FormView $formView,
         EngineInterface $templatingEngine,
+        AuthorizationCheckerInterface $authorizationChecker,
         Response $response
-    ) {
+    ): void {
+        $authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')->willReturn(false);
+
         $authenticationUtils->getLastAuthenticationError()->willReturn('Bad credentials.');
         $authenticationUtils->getLastUsername()->willReturn('john.doe');
 
@@ -71,14 +75,28 @@ final class SecurityControllerSpec extends ObjectBehavior
         $this->loginAction($request)->shouldReturn($response);
     }
 
-    function it_throws_an_exception_when_check_action_is_accessed(Request $request)
+    function it_redirects_when_user_is_logged_in(
+        Request $request,
+        ParameterBag $requestAttributes,
+        AuthorizationCheckerInterface $authorizationChecker,
+        RouterInterface $router
+    ): void {
+        $request->attributes = $requestAttributes;
+        $requestAttributes->get('_sylius')->willReturn(['logged_in_route' => 'foo_bar']);
+        $authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')->willReturn(true);
+        $router->generate('foo_bar')->willReturn('/login');
+
+        $this->loginAction($request)->shouldHaveType(RedirectResponse::class);
+    }
+
+    function it_throws_an_exception_when_check_action_is_accessed(Request $request): void
     {
         $this
             ->shouldThrow(new \RuntimeException('You must configure the check path to be handled by the firewall.'))
             ->during('checkAction', [$request]);
     }
 
-    function it_throws_an_exception_when_logout_action_is_accessed(Request $request)
+    function it_throws_an_exception_when_logout_action_is_accessed(Request $request): void
     {
         $this
             ->shouldThrow(new \RuntimeException('You must configure the logout path to be handled by the firewall.'))

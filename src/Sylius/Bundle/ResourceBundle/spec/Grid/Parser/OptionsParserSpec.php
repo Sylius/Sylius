@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Grid\Parser;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Grid\Parser\OptionsParser;
 use Sylius\Bundle\ResourceBundle\Grid\Parser\OptionsParserInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -20,30 +21,22 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OptionsParserSpec extends ObjectBehavior
 {
     function let(
         ContainerInterface $container,
         ExpressionLanguage $expression,
         PropertyAccessorInterface $propertyAccessor
-    ) {
+    ): void {
         $this->beConstructedWith($container, $expression, $propertyAccessor);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(OptionsParser::class);
-    }
-
-    function it_is_an_options_parser()
+    function it_is_an_options_parser(): void
     {
         $this->shouldImplement(OptionsParserInterface::class);
     }
 
-    function it_parses_options(Request $request)
+    function it_parses_options(Request $request): void
     {
         $request->get('id')->willReturn(7);
 
@@ -57,7 +50,7 @@ final class OptionsParserSpec extends ObjectBehavior
         ContainerInterface $container,
         ExpressionLanguage $expression,
         Request $request
-    ) {
+    ): void {
         $expression->evaluate('service("demo_service")', ['container' => $container])->willReturn('demo_object');
 
         $this
@@ -88,7 +81,7 @@ final class OptionsParserSpec extends ObjectBehavior
         PropertyAccessorInterface $propertyAccessor,
         Request $request,
         ResourceInterface $data
-    ) {
+    ): void {
         $propertyAccessor->getValue($data, 'id')->willReturn(21);
 
         $this

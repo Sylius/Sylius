@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer;
 
 use Doctrine\Common\Cache\Cache;
@@ -16,15 +18,11 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
-use Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer\TemplatePathsCacheWarmer;
 use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocatorInterface;
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
 use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class TemplatePathsCacheWarmerSpec extends ObjectBehavior
 {
     function let(
@@ -32,16 +30,11 @@ final class TemplatePathsCacheWarmerSpec extends ObjectBehavior
         TemplateLocatorInterface $templateLocator,
         ThemeRepositoryInterface $themeRepository,
         Cache $cache
-    ) {
+    ): void {
         $this->beConstructedWith($templateFinder, $templateLocator, $themeRepository, $cache);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TemplatePathsCacheWarmer::class);
-    }
-
-    function it_implements_cache_warmer_interface()
+    function it_implements_cache_warmer_interface(): void
     {
         $this->shouldImplement(CacheWarmerInterface::class);
     }
@@ -54,7 +47,7 @@ final class TemplatePathsCacheWarmerSpec extends ObjectBehavior
         ThemeInterface $theme,
         TemplateReferenceInterface $firstTemplate,
         TemplateReferenceInterface $secondTemplate
-    ) {
+    ): void {
         $templateFinder->findAllTemplates()->willReturn([$firstTemplate, $secondTemplate]);
 
         $themeRepository->findAll()->willReturn([$theme]);

@@ -41,7 +41,7 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
 
     namespace AppBundle\Factory;
 
-    use Sylius\Component\Core\Model\ProductInterface;
+    use Sylius\Component\Product\Model\ProductInterface;
     use Sylius\Component\Product\Factory\ProductFactoryInterface;
 
     class ProductFactory implements ProductFactoryInterface
@@ -62,7 +62,7 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
         /**
          * {@inheritdoc}
          */
-        public function createNew()
+        public function createNew(): ProductInterface
         {
             return $this->decoratedFactory->createNew();
         }
@@ -70,7 +70,7 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
         /**
          * {@inheritdoc}
          */
-        public function createWithVariant()
+        public function createWithVariant(): ProductInterface
         {
             return $this->decoratedFactory->createWithVariant();
         }
@@ -78,7 +78,7 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
         /**
          * @return ProductInterface
          */
-        public function createDisabled()
+        public function createDisabled(): ProductInterface
         {
             /** @var ProductInterface $product */
             $product = $this->decoratedFactory->createNew();
@@ -126,7 +126,9 @@ You can for example override ``sylius_admin_product_create_simple`` route like b
                     route:
                         name: sylius_admin_product_create_simple
 
+.. include:: /customization/plugins.rst.inc
+
 Learn more
 ----------
 
-* :doc:`SyliusResourceBundle creating resources </bundles/SyliusResourceBundle/create_resource>`
+* :doc:`SyliusResourceBundle creating resources </components_and_bundles/bundles/SyliusResourceBundle/create_resource>`

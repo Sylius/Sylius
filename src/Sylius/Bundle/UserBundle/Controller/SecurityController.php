@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UserBundle\Controller;
 
 use Sylius\Bundle\UserBundle\Form\Type\UserLoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class SecurityController extends Controller
 {
     /**
      * Login form action.
      */
-    public function loginAction(Request $request)
+    public function loginAction(Request $request): Response
     {
         $authenticationUtils = $this->get('security.authentication_utils');
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -32,10 +32,10 @@ class SecurityController extends Controller
 
         $options = $request->attributes->get('_sylius');
 
-        $template = isset($options['template']) ? $options['template'] : null;
+        $template = $options['template'] ?? null;
         Assert::notNull($template, 'Template is not configured.');
 
-        $formType = isset($options['form']) ? $options['form'] : UserLoginType::class;
+        $formType = $options['form'] ?? UserLoginType::class;
         $form = $this->get('form.factory')->createNamed('', $formType);
 
         return $this->render($template, [
@@ -48,7 +48,7 @@ class SecurityController extends Controller
     /**
      * Login check action. This action should never be called.
      */
-    public function checkAction(Request $request)
+    public function checkAction(Request $request): Response
     {
         throw new \RuntimeException('You must configure the check path to be handled by the firewall.');
     }
@@ -56,7 +56,7 @@ class SecurityController extends Controller
     /**
      * Logout action. This action should never be called.
      */
-    public function logoutAction(Request $request)
+    public function logoutAction(Request $request): Response
     {
         throw new \RuntimeException('You must configure the logout path to be handled by the firewall.');
     }

@@ -8,8 +8,8 @@ sylius:
                 catalog:
                     association_types: Relatietypes
                     attributes: Attributen
-                    header: Cataloog
-                    inventory: Locaties
+                    header: Catalogus
+                    inventory: Voorraad
                     options: Opties
                     products: Producten
                     taxons: Taxa
@@ -17,7 +17,7 @@ sylius:
                     admin_users: Beheerders
                     channels: Kanalen
                     countries: Landen
-                    currencies: Valuta's
+                    currencies: Valuta
                     exchange_rates: Wisselkoersen
                     header: Configuratie
                     locales: Talen/Regio's

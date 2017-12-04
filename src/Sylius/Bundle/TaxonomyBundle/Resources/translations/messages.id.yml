@@ -4,6 +4,8 @@
 sylius:
     form:
         taxon:
+            description: Keterangan
             name: Nama
+            slug: Slug
         taxonomy:
             name: Nama

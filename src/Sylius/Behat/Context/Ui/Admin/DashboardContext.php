@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DashboardContext implements Context
 {
     /**
@@ -42,11 +42,11 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @When I open administration dashboard for :code channel
+     * @When I open administration dashboard for :name channel
      */
-    public function iOpenAdministrationDashboardForChannel($code)
+    public function iOpenAdministrationDashboardForChannel($name)
     {
-        $this->dashboardPage->open(['channel' => $code]);
+        $this->dashboardPage->open(['channel' => StringInflector::nameToLowercaseCode($name)]);
     }
 
     /**

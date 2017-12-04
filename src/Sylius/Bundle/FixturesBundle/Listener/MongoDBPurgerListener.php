@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Listener;
 
 use Doctrine\Common\DataFixtures\Purger\MongoDBPurger;
@@ -16,9 +18,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class MongoDBPurgerListener extends AbstractListener implements BeforeSuiteListenerInterface
 {
     /**
@@ -37,7 +36,7 @@ final class MongoDBPurgerListener extends AbstractListener implements BeforeSuit
     /**
      * {@inheritdoc}
      */
-    public function beforeSuite(SuiteEvent $suiteEvent, array $options)
+    public function beforeSuite(SuiteEvent $suiteEvent, array $options): void
     {
         foreach ($options['managers'] as $managerName) {
             /** @var DocumentManager $manager */
@@ -51,7 +50,7 @@ final class MongoDBPurgerListener extends AbstractListener implements BeforeSuit
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'mongodb_purger';
     }
@@ -59,7 +58,7 @@ final class MongoDBPurgerListener extends AbstractListener implements BeforeSuit
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()

@@ -20,3 +20,5 @@ The Customization Guide is helpful while wanting to adapt Sylius to your persona
     grid
 
 .. include:: /customization/map.rst.inc
+
+.. include:: /customization/plugins.rst.inc

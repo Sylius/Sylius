@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\User\Security;
 
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class PasswordUpdater implements PasswordUpdaterInterface
 {
     /**
@@ -35,7 +33,7 @@ final class PasswordUpdater implements PasswordUpdaterInterface
     /**
      * {@inheritdoc}
      */
-    public function updatePassword(CredentialsHolderInterface $user)
+    public function updatePassword(CredentialsHolderInterface $user): void
     {
         if ('' !== $password = $user->getPlainPassword()) {
             $user->setPassword($this->userPasswordEncoder->encode($user));

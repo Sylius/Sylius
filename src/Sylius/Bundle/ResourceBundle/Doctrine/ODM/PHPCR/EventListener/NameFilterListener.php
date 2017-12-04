@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
@@ -20,8 +22,6 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  *
  * @see http://www.day.com/specs/jcr/2.0/3_Repository_Model.html#3.2.2%20Local%20Names
  * @see https://github.com/phpcr/phpcr-utils/blob/master/src/PHPCR/Util/PathHelper.php#L95
- *
- * @author Daniel Leech <daniel@dantleech.com>
  */
 class NameFilterListener
 {

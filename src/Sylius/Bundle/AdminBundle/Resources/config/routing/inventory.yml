@@ -7,6 +7,7 @@ sylius_admin_inventory_index:
             template: "@SyliusAdmin/Crud/index.html.twig"
             grid: sylius_admin_inventory
             section: admin
+            permission: true
             vars:
                 icon: history
                 templates:

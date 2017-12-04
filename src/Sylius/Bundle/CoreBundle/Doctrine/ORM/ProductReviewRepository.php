@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -16,15 +18,12 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class ProductReviewRepository extends EntityRepository implements ProductReviewRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function findLatestByProductId($productId, $count)
+    public function findLatestByProductId($productId, int $count): array
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.reviewSubject = :productId')
@@ -41,7 +40,7 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
     /**
      * {@inheritdoc}
      */
-    public function findAcceptedByProductSlugAndChannel($slug, $locale, ChannelInterface $channel)
+    public function findAcceptedByProductSlugAndChannel(string $slug, string $locale, ChannelInterface $channel): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.reviewSubject', 'product')

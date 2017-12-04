@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Request;
 
 use Payum\Core\Request\Generic;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
-class ResolveNextRoute extends Generic
+class ResolveNextRoute extends Generic implements ResolveNextRouteInterface
 {
     /**
      * @var string
@@ -28,34 +27,22 @@ class ResolveNextRoute extends Generic
      */
     private $routeParameters = [];
 
-    /**
-     * @return string
-     */
-    public function getRouteName()
+    public function getRouteName(): ?string
     {
         return $this->routeName;
     }
 
-    /**
-     * @param string $routeName
-     */
-    public function setRouteName($routeName)
+    public function setRouteName(string $routeName): void
     {
         $this->routeName = $routeName;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getRouteParameters()
+    public function getRouteParameters(): array
     {
         return $this->routeParameters;
     }
 
-    /**
-     * @param array $parameters
-     */
-    public function setRouteParameters(array $parameters)
+    public function setRouteParameters(array $parameters): void
     {
         $this->routeParameters = $parameters;
     }

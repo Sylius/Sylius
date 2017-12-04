@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,9 +18,6 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class RecursiveTransformer implements DataTransformerInterface
 {
     /**
@@ -37,7 +36,7 @@ final class RecursiveTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function transform($values)
+    public function transform($values): Collection
     {
         if (null === $values) {
             return new ArrayCollection();
@@ -53,7 +52,7 @@ final class RecursiveTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($values)
+    public function reverseTransform($values): Collection
     {
         if (null === $values) {
             return new ArrayCollection();
@@ -67,12 +66,12 @@ final class RecursiveTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param string $value
+     * @param mixed $value
      * @param string $expectedType
      *
      * @throws TransformationFailedException
      */
-    private function assertTransformationValueType($value, $expectedType)
+    private function assertTransformationValueType($value, string $expectedType): void
     {
         if (!($value instanceof $expectedType)) {
             throw new TransformationFailedException(

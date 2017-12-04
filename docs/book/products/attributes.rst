@@ -38,7 +38,7 @@ How to create an Attribute?
 To give you a better insight into Attributes, let's have a look how to prepare and add an Attribute with a Product to the system programatically.
 
 To assign Attributes to Products firstly you will need a factory for ProductAttributes.
-The AttributeFactory has a special method createWithType($type), where $type is a string.
+The AttributeFactory has a special method createTyped($type), where $type is a string.
 
 The Attribute needs a ``code`` and a ``name`` before it can be saved in the repository.
 
@@ -48,7 +48,7 @@ The Attribute needs a ``code`` and a ``name`` before it can be saved in the repo
    $attributeFactory = $this->container->get('sylius.factory.product_attribute');
 
    /** @var AttributeInterface $attribute */
-   $attribute = $attributeFactory->createWithType('text');
+   $attribute = $attributeFactory->createTyped('text');
 
    $attribute->setName('Book cover');
    $attribute->setCode('book_cover');
@@ -111,4 +111,4 @@ Your Product will now have two Attributes.
 Learn more
 ----------
 
-* :doc:`Attribute - Component Documentation </components/Attribute/index>`
+* :doc:`Attribute - Component Documentation </components_and_bundles/components/Attribute/index>`

@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface SelectPaymentPageInterface extends SymfonyPageInterface
 {
     /**
      * @param string $paymentMethod
      */
     public function selectPaymentMethod($paymentMethod);
-    
+
     /**
      * @param string $paymentMethodName
      *

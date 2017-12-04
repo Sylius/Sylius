@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 
-use ArrayIterator;
-use IteratorAggregate;
-
-final class SyliusRequirements implements IteratorAggregate
+final class SyliusRequirements implements \IteratorAggregate
 {
     /**
-     * @var RequirementCollection[]
+     * @var array|RequirementCollection[]
      */
     private $collections = [];
 
     /**
-     * @param RequirementCollection[] $requirementCollections
+     * @param array|RequirementCollection[] $requirementCollections
      */
     public function __construct(array $requirementCollections)
     {
@@ -32,17 +31,17 @@ final class SyliusRequirements implements IteratorAggregate
     }
 
     /**
-     * @return ArrayIterator
+     * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
-        return new ArrayIterator($this->collections);
+        return new \ArrayIterator($this->collections);
     }
 
     /**
      * @param RequirementCollection $collection
      */
-    public function add(RequirementCollection $collection)
+    public function add(RequirementCollection $collection): void
     {
         $this->collections[] = $collection;
     }

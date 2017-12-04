@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -29,9 +31,6 @@ use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PromotionContext implements Context
 {
     /**
@@ -97,10 +96,10 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given there is a promotion :promotionName
+     * @Given there is (also) a promotion :promotionName
      * @Given there is a promotion :promotionName identified by :promotionCode code
      */
-    public function thereIsPromotion($promotionName, $promotionCode = null)
+    public function thereIsPromotion(string $promotionName, ?string $promotionCode = null): void
     {
         $promotion = $this->testPromotionFactory
             ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
@@ -123,7 +122,7 @@ final class PromotionContext implements Context
             ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
         ;
 
-        $promotion->setPriority($priority);
+        $promotion->setPriority((int) $priority);
 
         $this->promotionRepository->add($promotion);
         $this->sharedStorage->set('promotion', $promotion);
@@ -139,7 +138,7 @@ final class PromotionContext implements Context
         ;
 
         $promotion->setExclusive(true);
-        $promotion->setPriority($priority);
+        $promotion->setPriority((int) $priority);
 
         $this->promotionRepository->add($promotion);
         $this->sharedStorage->set('promotion', $promotion);
@@ -152,7 +151,7 @@ final class PromotionContext implements Context
     {
         $promotion = $this->testPromotionFactory->createForChannel($promotionName, $this->sharedStorage->get('channel'));
 
-        $promotion->setUsageLimit($usageLimit);
+        $promotion->setUsageLimit((int) $usageLimit);
 
         $this->promotionRepository->add($promotion);
         $this->sharedStorage->set('promotion', $promotion);
@@ -162,12 +161,9 @@ final class PromotionContext implements Context
      * @Given the store has promotion :promotionName with coupon :couponCode
      * @Given the store has a promotion :promotionName with a coupon :couponCode that is limited to :usageLimit usages
      */
-    public function thereIsPromotionWithCoupon($promotionName, $couponCode, $usageLimit = null)
+    public function thereIsPromotionWithCoupon(string $promotionName, string $couponCode, ?int $usageLimit = null): void
     {
-        /** @var PromotionCouponInterface $coupon */
-        $coupon = $this->couponFactory->createNew();
-        $coupon->setCode($couponCode);
-        $coupon->setUsageLimit($usageLimit);
+        $coupon = $this->createCoupon($couponCode, $usageLimit);
 
         $promotion = $this->testPromotionFactory
             ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
@@ -179,6 +175,21 @@ final class PromotionContext implements Context
 
         $this->sharedStorage->set('promotion', $promotion);
         $this->sharedStorage->set('coupon', $coupon);
+    }
+
+    /**
+     * @Given /^(this promotion) has "([^"]+)", "([^"]+)" and "([^"]+)" coupons/
+     */
+    public function thisPromotionHasCoupons(PromotionInterface $promotion, string ...$couponCodes): void
+    {
+        foreach ($couponCodes as $couponCode) {
+            $coupon = $this->createCoupon($couponCode);
+            $promotion->addCoupon($coupon);
+        }
+
+        $promotion->setCouponBased(true);
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -257,7 +268,7 @@ final class PromotionContext implements Context
      */
     public function thisCouponCanBeUsedNTimes(PromotionCouponInterface $coupon, $usageLimit)
     {
-        $coupon->setUsageLimit($usageLimit);
+        $coupon->setUsageLimit((int) $usageLimit);
 
         $this->objectManager->flush();
     }
@@ -819,5 +830,21 @@ final class PromotionContext implements Context
         }
 
         $this->objectManager->flush();
+    }
+
+    /**
+     * @param string $couponCode
+     * @param int|null $usageLimit
+     *
+     * @return PromotionCouponInterface
+     */
+    private function createCoupon(string $couponCode, ?int $usageLimit = null): PromotionCouponInterface
+    {
+        /** @var PromotionCouponInterface $coupon */
+        $coupon = $this->couponFactory->createNew();
+        $coupon->setCode($couponCode);
+        $coupon->setUsageLimit($usageLimit);
+
+        return $coupon;
     }
 }

@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface ResourceLogEntryRepositoryInterface
 {
     /**
@@ -23,5 +22,5 @@ interface ResourceLogEntryRepositoryInterface
      *
      * @return QueryBuilder
      */
-    public function createByObjectIdQueryBuilder($objectId);
+    public function createByObjectIdQueryBuilder(string $objectId): QueryBuilder;
 }

@@ -16,3 +16,5 @@ sylius:
             name: Nom
         option:
             name: Nom
+        option_value:
+            value: Valor

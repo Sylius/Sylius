@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\UserBundle\Authentication;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -21,27 +22,19 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerI
 use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler;
 use Symfony\Component\Security\Http\HttpUtils;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class AuthenticationFailureHandlerSpec extends ObjectBehavior
 {
-    function let(HttpKernelInterface $httpKernel, HttpUtils $httpUtils)
+    function let(HttpKernelInterface $httpKernel, HttpUtils $httpUtils): void
     {
         $this->beConstructedWith($httpKernel, $httpUtils);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(AuthenticationFailureHandler::class);
-    }
-
-    function it_extends_default_authentication_failure_handler()
+    function it_extends_default_authentication_failure_handler(): void
     {
         $this->shouldHaveType(DefaultAuthenticationFailureHandler::class);
     }
 
-    function it_is_a_authentication_failure_handler()
+    function it_is_a_authentication_failure_handler(): void
     {
         $this->shouldImplement(AuthenticationFailureHandlerInterface::class);
     }
@@ -49,7 +42,7 @@ final class AuthenticationFailureHandlerSpec extends ObjectBehavior
     function it_returns_json_response_if_request_is_xml_based(
         Request $request,
         AuthenticationException $authenticationException
-    ) {
+    ): void {
         $request->isXmlHttpRequest()->willReturn(true);
         $authenticationException->getMessageKey()->willReturn('Invalid credentials.');
 

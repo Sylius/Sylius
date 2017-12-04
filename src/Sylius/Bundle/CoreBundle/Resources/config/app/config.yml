@@ -34,13 +34,6 @@ doctrine_cache:
     providers:
         sylius_rbac: "%sylius.cache%"
 
-jms_serializer:
-    metadata:
-        directories:
-            sylius-core:
-                namespace_prefix: "Sylius\\Component\\Core"
-                path: "@SyliusCoreBundle/Resources/config/serializer"
-
 knp_gaufrette:
     adapters:
         sylius_image:
@@ -100,6 +93,9 @@ twig:
     exception_controller: "FOS\\RestBundle\\Controller\\ExceptionController::showAction"
     globals:
         sylius: "@sylius.context.shopper"
+        sylius_base_locale: "%locale%"
+        sylius_meta:
+            version: !php/const:Sylius\Bundle\CoreBundle\Application\Kernel::VERSION
 
 sonata_block:
     blocks:

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -19,19 +21,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class ProductVariantController extends ResourceController
 {
     /**
      * @param Request $request
      *
-     * @return JsonResponse
+     * @return Response
      *
      * @throws HttpException
      */
-    public function updatePositionsAction(Request $request)
+    public function updatePositionsAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
@@ -52,7 +51,7 @@ class ProductVariantController extends ResourceController
 
                 /** @var ProductVariantInterface $productVariant */
                 $productVariant = $this->repository->findOneBy(['id' => $productVariantToUpdate['id']]);
-                $productVariant->setPosition($productVariantToUpdate['position']);
+                $productVariant->setPosition((int) $productVariantToUpdate['position']);
                 $this->manager->flush();
             }
         }

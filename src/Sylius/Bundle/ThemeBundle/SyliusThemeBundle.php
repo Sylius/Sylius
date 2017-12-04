@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle;
 
 use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationSourceFactory;
@@ -20,15 +22,12 @@ use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\Translato
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class SyliusThemeBundle extends Bundle
 {
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         /** @var SyliusThemeExtension $themeExtension */
         $themeExtension = $container->getExtension('sylius_theme');

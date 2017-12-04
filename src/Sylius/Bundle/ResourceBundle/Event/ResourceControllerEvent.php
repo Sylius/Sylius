@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Event;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Jérémy Leherpeur <jeremy@leherpeur.net>
- */
 class ResourceControllerEvent extends GenericEvent
 {
-    const TYPE_ERROR = 'error';
-    const TYPE_WARNING = 'warning';
-    const TYPE_INFO = 'info';
-    const TYPE_SUCCESS = 'success';
+    public const TYPE_ERROR = 'error';
+    public const TYPE_WARNING = 'warning';
+    public const TYPE_INFO = 'info';
+    public const TYPE_SUCCESS = 'success';
 
     /**
      * @var string
@@ -55,7 +54,7 @@ class ResourceControllerEvent extends GenericEvent
      * @param array $parameters
      * @param int $errorCode
      */
-    public function stop($message, $type = self::TYPE_ERROR, $parameters = [], $errorCode = 500)
+    public function stop(string $message, string $type = self::TYPE_ERROR, array $parameters = [], int $errorCode = 500)
     {
         $this->messageType = $type;
         $this->message = $message;
@@ -68,7 +67,7 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @return bool
      */
-    public function isStopped()
+    public function isStopped(): bool
     {
         return $this->isPropagationStopped();
     }
@@ -76,7 +75,7 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @return string
      */
-    public function getMessageType()
+    public function getMessageType(): string
     {
         return $this->messageType;
     }
@@ -84,7 +83,7 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @param string $messageType Should be one of ResourceEvent's TYPE constants
      */
-    public function setMessageType($messageType)
+    public function setMessageType($messageType): void
     {
         $this->messageType = $messageType;
     }
@@ -92,7 +91,7 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -100,7 +99,7 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @param string $message
      */
-    public function setMessage($message)
+    public function setMessage(string $message): void
     {
         $this->message = $message;
     }
@@ -108,7 +107,7 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @return array
      */
-    public function getMessageParameters()
+    public function getMessageParameters(): array
     {
         return $this->messageParameters;
     }
@@ -116,7 +115,7 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @param array $messageParameters
      */
-    public function setMessageParameters(array $messageParameters)
+    public function setMessageParameters(array $messageParameters): void
     {
         $this->messageParameters = $messageParameters;
     }
@@ -124,7 +123,7 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @return int
      */
-    public function getErrorCode()
+    public function getErrorCode(): int
     {
         return $this->errorCode;
     }
@@ -132,7 +131,7 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @param int $errorCode
      */
-    public function setErrorCode($errorCode)
+    public function setErrorCode(int $errorCode): void
     {
         $this->errorCode = $errorCode;
     }
@@ -140,7 +139,7 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @param Response $response
      */
-    public function setResponse(Response $response)
+    public function setResponse(Response $response): void
     {
         $this->response = $response;
     }
@@ -148,15 +147,15 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @return bool
      */
-    public function hasResponse()
+    public function hasResponse(): bool
     {
         return null !== $this->response;
     }
 
     /**
-     * @return Response
+     * @return Response|null
      */
-    public function getResponse()
+    public function getResponse(): ?Response
     {
         return $this->response;
     }

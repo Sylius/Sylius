@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Channel\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
@@ -16,9 +18,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ChannelInterface extends
     CodeAwareInterface,
     TimestampableInterface,
@@ -26,42 +25,42 @@ interface ChannelInterface extends
     ResourceInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName($name);
+    public function setName(?string $name): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription();
+    public function getDescription(): ?string;
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
-    public function setDescription($description);
+    public function setDescription(?string $description): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getHostname();
+    public function getHostname(): ?string;
 
     /**
-     * @param string $hostname
+     * @param string|null $hostname
      */
-    public function setHostname($hostname);
+    public function setHostname(?string $hostname): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getColor();
+    public function getColor(): ?string;
 
     /**
-     * @param string $color
+     * @param string|null $color
      */
-    public function setColor($color);
+    public function setColor(?string $color): void;
 }

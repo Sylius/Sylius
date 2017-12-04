@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\EmailManager;
 
 use Sylius\Component\Core\Model\ShipmentInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ShipmentEmailManagerInterface
 {
     /**
      * @param ShipmentInterface $shipment
      */
-    public function sendConfirmationEmail(ShipmentInterface $shipment);
+    public function sendConfirmationEmail(ShipmentInterface $shipment): void;
 }

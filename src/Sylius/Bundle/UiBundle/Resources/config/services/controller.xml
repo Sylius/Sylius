@@ -17,6 +17,8 @@
             <argument type="service" id="security.authentication_utils" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="templating" />
+            <argument type="service" id="security.authorization_checker" />
+            <argument type="service" id="router" />
         </service>
     </services>
 </container>

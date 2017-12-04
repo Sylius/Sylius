@@ -9,23 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\EventListener;
 
+use Doctrine\ORM\Configuration;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
-/**
- * @author Ivan Molchanov <ivan.molchanov@opensoftdev.ru>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
 {
     /**
      * @return array
      */
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             Events::loadClassMetadata,
@@ -35,7 +34,7 @@ final class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     /**
      * @param LoadClassMetadataEventArgs $eventArgs
      */
-    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
         $metadata = $eventArgs->getClassMetadata();
 
@@ -51,7 +50,7 @@ final class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     /**
      * @param ClassMetadataInfo $metadata
      */
-    private function convertToEntityIfNeeded(ClassMetadataInfo $metadata)
+    private function convertToEntityIfNeeded(ClassMetadataInfo $metadata): void
     {
         if (false === $metadata->isMappedSuperclass) {
             return;
@@ -70,16 +69,16 @@ final class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
 
     /**
      * @param ClassMetadataInfo $metadata
-     * @param $configuration
+     * @param Configuration $configuration
      */
-    private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration)
+    private function setAssociationMappings(ClassMetadataInfo $metadata, Configuration $configuration): void
     {
         $class = $metadata->getName();
         if (!class_exists($class)) {
             return;
         }
         foreach (class_parents($class) as $parent) {
-            if (false === in_array($parent, $configuration->getMetadataDriverImpl()->getAllClassNames())) {
+            if (false === in_array($parent, $configuration->getMetadataDriverImpl()->getAllClassNames(), true)) {
                 continue;
             }
 
@@ -111,7 +110,7 @@ final class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     /**
      * @param ClassMetadataInfo $metadata
      */
-    private function unsetAssociationMappings(ClassMetadataInfo $metadata)
+    private function unsetAssociationMappings(ClassMetadataInfo $metadata): void
     {
         if (false === $this->isResource($metadata)) {
             return;
@@ -125,11 +124,11 @@ final class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     }
 
     /**
-     * @param string $type
+     * @param int $type
      *
      * @return bool
      */
-    private function isRelation($type)
+    private function isRelation(int $type): bool
     {
         return in_array(
             $type,

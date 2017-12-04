@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
@@ -17,15 +19,9 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand
 {
-    const TYPE = 'order_fixed_discount';
+    public const TYPE = 'order_fixed_discount';
 
     /**
      * @var ProportionalIntegerDistributorInterface
@@ -52,7 +48,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
     /**
      * {@inheritdoc}
      */
-    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         if (!$this->isSubjectValid($subject)) {
             return false;
@@ -92,7 +88,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
     /**
      * {@inheritdoc}
      */
-    protected function isConfigurationValid(array $configuration)
+    protected function isConfigurationValid(array $configuration): void
     {
         Assert::keyExists($configuration, 'amount');
         Assert::integer($configuration['amount']);
@@ -104,7 +100,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
      *
      * @return int
      */
-    private function calculateAdjustmentAmount($promotionSubjectTotal, $targetPromotionAmount)
+    private function calculateAdjustmentAmount(int $promotionSubjectTotal, int $targetPromotionAmount): int
     {
         return -1 * min($promotionSubjectTotal, $targetPromotionAmount);
     }

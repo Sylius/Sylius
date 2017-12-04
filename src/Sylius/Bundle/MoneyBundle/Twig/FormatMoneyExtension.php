@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\MoneyBundle\Twig;
 
 use Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class FormatMoneyExtension extends \Twig_Extension
 {
     /**
@@ -34,10 +33,10 @@ final class FormatMoneyExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-            new \Twig_SimpleFilter('sylius_format_money', [$this->helper, 'formatAmount']),
+            new \Twig_Filter('sylius_format_money', [$this->helper, 'formatAmount']),
         ];
     }
 }

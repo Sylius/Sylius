@@ -9,46 +9,37 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EventListener\CustomerReviewsDeleteListener;
-use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemoverInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class CustomerReviewsDeleteListenerSpec extends ObjectBehavior
 {
-    function let(ReviewerReviewsRemover $reviewerReviewsRemover)
+    function let(ReviewerReviewsRemoverInterface $reviewerReviewsRemover): void
     {
         $this->beConstructedWith($reviewerReviewsRemover);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CustomerReviewsDeleteListener::class);
-    }
-
     function it_removes_soft_deleted_customer_reviews_and_recalculates_their_product_ratings(
-        $reviewerReviewsRemover,
+        ReviewerReviewsRemoverInterface $reviewerReviewsRemover,
         GenericEvent $event,
         ReviewerInterface $author
-    ) {
+    ): void {
         $event->getSubject()->willReturn($author);
         $reviewerReviewsRemover->removeReviewerReviews($author)->shouldBeCalled();
 
         $this->removeCustomerReviews($event);
     }
 
-    function it_throws_exception_if_event_subject_is_not_customer_object(GenericEvent $event)
+    function it_throws_exception_if_event_subject_is_not_customer_object(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
 
-        $this->shouldThrow(new UnexpectedTypeException('badObject', ReviewerInterface::class))->during('removeCustomerReviews', [$event]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('removeCustomerReviews', [$event]);
     }
 }

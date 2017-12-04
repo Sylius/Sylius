@@ -11,21 +11,21 @@ sylius:
             security_code: Güvenlik (CVV) kodu
             type: Kart türü
         payment:
-            amount: Ödeme tutarı
-            method: Ödeme tipi
+            amount: 'Ödeme tutarı'
+            method: 'Ödeme tipi'
             state:
-                header: Ödeme durumu
-                checkout: Ödeme  yap
+                header: 'Ödeme durumu'
+                checkout: 'Ödeme  yap'
                 completed: Tamamlandı
                 authorized: Yetkili
                 failed: Başarısız oldu
                 new: Yeni
                 pending: Beklemede
-                processing: İşlem Yapılıyor
+                processing: 'İşlem Yapılıyor'
                 unknown: Bilinmiyor
                 void: Boş
-                cancelled: İptal Edildi
-                refunded: İade Edildi
+                cancelled: 'İptal Edildi'
+                refunded: 'İade Edildi'
         payment_method:
             description: Açıklama
             enabled: Etkin?

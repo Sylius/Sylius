@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -25,9 +27,6 @@ use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TaxonomyContext implements Context
 {
     /**
@@ -136,13 +135,14 @@ final class TaxonomyContext implements Context
 
         /** @var ImageInterface $taxonImage */
         $taxonImage = $this->taxonImageFactory->createNew();
-        $taxonImage->setFile(new UploadedFile($filesPath.$imagePath, basename($imagePath)));
+        $taxonImage->setFile(new UploadedFile($filesPath . $imagePath, basename($imagePath)));
         $taxonImage->setType($imageType);
         $this->imageUploader->upload($taxonImage);
 
         $taxon->addImage($taxonImage);
 
-        $this->objectManager->flush($taxon);
+        $this->objectManager->persist($taxon);
+        $this->objectManager->flush();
     }
 
     /**
@@ -153,7 +153,8 @@ final class TaxonomyContext implements Context
         $taxon->addChild($this->createTaxon($firstTaxonName));
         $taxon->addChild($this->createTaxon($secondTaxonName));
 
-        $this->objectManager->flush($taxon);
+        $this->objectManager->persist($taxon);
+        $this->objectManager->flush();
     }
 
     /**
@@ -167,7 +168,7 @@ final class TaxonomyContext implements Context
         $taxon = $this->taxonFactory->createNew();
         $taxon->setName($name);
         $taxon->setCode(StringInflector::nameToCode($name));
-        $taxon->setSlug($this->taxonSlugGenerator->generate($name));
+        $taxon->setSlug($this->taxonSlugGenerator->generate($taxon));
 
         return $taxon;
     }
@@ -187,9 +188,10 @@ final class TaxonomyContext implements Context
             $taxonTranslation = $this->taxonTranslationFactory->createNew();
             $taxonTranslation->setLocale($locale);
             $taxonTranslation->setName($name);
-            $taxonTranslation->setSlug($this->taxonSlugGenerator->generate($name));
 
             $taxon->addTranslation($taxonTranslation);
+
+            $taxonTranslation->setSlug($this->taxonSlugGenerator->generate($taxon, $locale));
         }
 
         return $taxon;

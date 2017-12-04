@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
@@ -18,12 +20,9 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class RegisterAttributeFactoryPassSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(RegisterAttributeFactoryPass::class);
     }
@@ -38,7 +37,7 @@ final class RegisterAttributeFactoryPassSpec extends ObjectBehavior
         Definition $attributeTypeRegistryDefinition,
         Definition $oldAttributeFactoryDefinition,
         Definition $newAttributeFactoryDefinition
-    ) {
+    ): void {
         $container->hasDefinition('sylius.registry.attribute_type')->willReturn(true);
         $container->getDefinition('sylius.registry.attribute_type')->willReturn($attributeTypeRegistryDefinition);
 
@@ -59,7 +58,7 @@ final class RegisterAttributeFactoryPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_does_not_process_if_container_has_not_proper_definition(ContainerBuilder $container)
+    function it_does_not_process_if_container_has_not_proper_definition(ContainerBuilder $container): void
     {
         $container->hasDefinition('sylius.registry.attribute_type')->willReturn(false);
         $container->getDefinition('sylius.registry.attribute_type')->shouldNotBeCalled();

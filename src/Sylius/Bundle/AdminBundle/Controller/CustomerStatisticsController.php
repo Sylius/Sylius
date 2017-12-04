@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProviderInterface;
@@ -19,10 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
-class CustomerStatisticsController
+final class CustomerStatisticsController
 {
     /**
      * @var CustomerStatisticsProviderInterface
@@ -61,7 +60,7 @@ class CustomerStatisticsController
      *
      * @throws HttpException
      */
-    public function renderAction(Request $request)
+    public function renderAction(Request $request): Response
     {
         $customerId = $request->query->get('customerId');
 

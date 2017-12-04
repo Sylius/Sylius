@@ -31,3 +31,4 @@ sylius:
             enabled: Abilitato?
             instructions: Istruzioni
             name: Nome
+            position: Posizione

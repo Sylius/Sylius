@@ -9,41 +9,34 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Promotion\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Factory\PromotionCouponFactory;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class PromotionCouponFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory)
+    function let(FactoryInterface $factory): void
     {
         $this->beConstructedWith($factory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionCouponFactory::class);
-    }
-
-    function it_is_a_resource_factory()
+    function it_is_a_resource_factory(): void
     {
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_implements_a_coupon_factory_interface()
+    function it_implements_a_coupon_factory_interface(): void
     {
         $this->shouldImplement(PromotionCouponFactoryInterface::class);
     }
 
-    function it_creates_a_new_coupon(FactoryInterface $factory, PromotionCouponInterface $coupon)
+    function it_creates_a_new_coupon(FactoryInterface $factory, PromotionCouponInterface $coupon): void
     {
         $factory->createNew()->willReturn($coupon);
 
@@ -52,7 +45,7 @@ final class PromotionCouponFactorySpec extends ObjectBehavior
 
     function it_throws_an_invalid_argument_exception_when_promotion_is_not_coupon_based(
         PromotionInterface $promotion
-    ) {
+    ): void {
         $promotion->getName()->willReturn('Christmas sale');
         $promotion->isCouponBased()->willReturn(false);
 
@@ -66,7 +59,7 @@ final class PromotionCouponFactorySpec extends ObjectBehavior
         FactoryInterface $factory,
         PromotionInterface $promotion,
         PromotionCouponInterface $coupon
-    ) {
+    ): void {
         $factory->createNew()->willReturn($coupon);
         $promotion->getName()->willReturn('Christmas sale');
         $promotion->isCouponBased()->willReturn(true);

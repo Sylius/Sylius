@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Mailer\Provider;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface DefaultSettingsProviderInterface
 {
     /**
      * @return string
      */
-    public function getSenderName();
+    public function getSenderName(): string;
 
     /**
      * @return string
      */
-    public function getSenderAddress();
+    public function getSenderAddress(): string;
 }

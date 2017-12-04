@@ -9,16 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderShippingMethodSelectionRequirementChecker implements OrderShippingMethodSelectionRequirementCheckerInterface
 {
     /**
@@ -37,9 +35,9 @@ final class OrderShippingMethodSelectionRequirementChecker implements OrderShipp
     /**
      * {@inheritdoc}
      */
-    public function isShippingMethodSelectionRequired(OrderInterface $order)
+    public function isShippingMethodSelectionRequired(OrderInterface $order): bool
     {
-        if (!$this->ifItemsRequireShipping($order)) {
+        if (!$order->isShippingRequired()) {
             return false;
         }
 
@@ -54,23 +52,6 @@ final class OrderShippingMethodSelectionRequirementChecker implements OrderShipp
         /** @var ShipmentInterface $shipment */
         foreach ($order->getShipments() as $shipment) {
             if (1 !== count($this->shippingMethodsResolver->getSupportedMethods($shipment))) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
-    private function ifItemsRequireShipping(OrderInterface $order)
-    {
-        /** @var OrderItemInterface $orderItem */
-        foreach ($order->getItems() as $orderItem) {
-            if ($orderItem->getVariant()->isShippingRequired()) {
                 return true;
             }
         }

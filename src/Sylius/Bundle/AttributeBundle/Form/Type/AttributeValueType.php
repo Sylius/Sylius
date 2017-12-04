@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
@@ -24,10 +26,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\ReversedTransformer;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 abstract class AttributeValueType extends AbstractResourceType
 {
     /**
@@ -59,9 +57,9 @@ abstract class AttributeValueType extends AbstractResourceType
      * @param FormTypeRegistryInterface $formTypeTypeRegistry
      */
     public function __construct(
-        $dataClass,
+        string $dataClass,
         array $validationGroups,
-        $attributeChoiceType,
+        string $attributeChoiceType,
         RepositoryInterface $attributeRepository,
         RepositoryInterface $localeRepository,
         FormTypeRegistryInterface $formTypeTypeRegistry
@@ -77,7 +75,7 @@ abstract class AttributeValueType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('localeCode', LocaleChoiceType::class)
@@ -94,7 +92,9 @@ abstract class AttributeValueType extends AbstractResourceType
                     return;
                 }
 
-                $this->addValueField($event->getForm(), $attribute);
+                $localeCode = $attributeValue->getLocaleCode();
+
+                $this->addValueField($event->getForm(), $attribute, $localeCode);
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
                 $attributeValue = $event->getData();
@@ -120,13 +120,18 @@ abstract class AttributeValueType extends AbstractResourceType
     /**
      * @param FormInterface $form
      * @param AttributeInterface $attribute
+     * @param string|null $localeCode
      */
-    protected function addValueField(FormInterface $form, AttributeInterface $attribute)
-    {
+    protected function addValueField(
+        FormInterface $form,
+        AttributeInterface $attribute,
+        ?string $localeCode = null
+    ): void {
         $form->add('value', $this->formTypeRegistry->get($attribute->getType(), 'default'), [
             'auto_initialize' => false,
             'configuration' => $attribute->getConfiguration(),
             'label' => $attribute->getName(),
+            'locale_code' => $localeCode,
         ]);
     }
 }

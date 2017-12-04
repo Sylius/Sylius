@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Taxonomy\Factory;
 
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface TaxonFactoryInterface extends FactoryInterface
 {
     /**
@@ -24,5 +23,5 @@ interface TaxonFactoryInterface extends FactoryInterface
      *
      * @return TaxonInterface
      */
-    public function createForParent(TaxonInterface $parent);
+    public function createForParent(TaxonInterface $parent): TaxonInterface;
 }

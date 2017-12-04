@@ -33,7 +33,18 @@ Add also the main repository as the ``upstream`` remote.
     $ git remote add upstream git@github.com:Sylius/Sylius.git
 
 
-The ``master`` branch holds the documentation for the development branch of the code.
+
+Choose the right Base Branch
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Before starting to work on a patch, you must determine on which branch you need to work. It will be:
+
+* ``1.0``, if you are fixing or adding docs for an existing feature
+* ``master``, if you are documenting a new feature, that was not in ``1.0``
+
+.. note::
+
+    All bug fixes merged into the ``1.0`` maintenance branch are also merged into ``master`` on a regular basis.
 
 Create a dedicated branch for your changes (for organization):
 
@@ -48,7 +59,6 @@ When you're done, push this branch to *your* GitHub fork and initiate a pull req
 
 Your pull request will be reviewed, you will be asked to apply fixes if necessary and then it will be merged into the main repository.
 
-
 Testing Documentation
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -60,7 +70,7 @@ To test the documentation before a commit:
 
 .. code-block:: bash
 
-    $ pip install -r requirements.txt
+    $ pip install -r docs/requirements.txt
     # This makes sure that the version of Sphinx you'll get is >=1.4.2!
 
 * Install `Sphinx`_,
@@ -94,11 +104,11 @@ You can prefix the title of your pull request in a few cases:
   pull request, but you would like it to be reviewed. The pull request won't
   be merged until you say it is ready.
 
-* ``[ComponentName]`` if you are contributing docs that regard on of :doc:`the Sylius Components </components/general/index>`.
+* ``[ComponentName]`` if you are contributing docs that regard on of :doc:`the Sylius Components </components_and_bundles/components/general/index>`.
 
-* ``[BundleName]`` when you add documentation of :doc:`the Sylius Bundles </bundles/index>`.
+* ``[BundleName]`` when you add documentation of :doc:`the Sylius Bundles </components_and_bundles/bundles/index>`.
 
-* ``[Behat]`` if you modify something in the :doc:`the Behat guide </behat/index>`.
+* ``[Behat]`` if you modify something in the :doc:`the BDD guide </bdd/index>`.
 
 * ``[API]`` when you are contributing docs to :doc:`the API guide </api/index>`.
 

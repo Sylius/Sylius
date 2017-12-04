@@ -9,31 +9,24 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Factory;
 
 use Payum\Core\Model\GatewayConfigInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Factory\PaymentMethodFactory;
 use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PaymentMethodFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $decoratedFactory, FactoryInterface $gatewayConfigFactory)
+    function let(FactoryInterface $decoratedFactory, FactoryInterface $gatewayConfigFactory): void
     {
         $this->beConstructedWith($decoratedFactory, $gatewayConfigFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PaymentMethodFactory::class);
-    }
-
-    function it_implements_payment_method_factory_interface()
+    function it_implements_payment_method_factory_interface(): void
     {
         $this->shouldImplement(PaymentMethodFactoryInterface::class);
     }
@@ -43,7 +36,7 @@ final class PaymentMethodFactorySpec extends ObjectBehavior
         FactoryInterface $gatewayConfigFactory,
         GatewayConfigInterface $gatewayConfig,
         PaymentMethodInterface $paymentMethod
-    ) {
+    ): void {
         $gatewayConfigFactory->createNew()->willReturn($gatewayConfig);
         $gatewayConfig->setFactoryName('offline')->shouldBeCalled();
 

@@ -4,4 +4,6 @@
 sylius:
     form:
         review:
-            title: Τίτλος
+            status:
+                new: 'Νέα'
+            title: 'Τίτλος'

@@ -9,27 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Resource\Model;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class AbstractTranslation implements TranslationInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $locale;
 
     /**
-     * @var TranslatableInterface
+     * @var TranslatableInterface|null
      */
     protected $translatable;
 
     /**
      * {@inheritdoc}
      */
-    public function getTranslatable()
+    public function getTranslatable(): TranslatableInterface
     {
         return $this->translatable;
     }
@@ -37,7 +36,7 @@ class AbstractTranslation implements TranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function setTranslatable(TranslatableInterface $translatable = null)
+    public function setTranslatable(?TranslatableInterface $translatable): void
     {
         if ($translatable === $this->translatable) {
             return;
@@ -58,7 +57,7 @@ class AbstractTranslation implements TranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocale()
+    public function getLocale(): ?string
     {
         return $this->locale;
     }
@@ -66,7 +65,7 @@ class AbstractTranslation implements TranslationInterface
     /**
      * {@inheritdoc}
      */
-    public function setLocale($locale)
+    public function setLocale(?string $locale): void
     {
         $this->locale = $locale;
     }

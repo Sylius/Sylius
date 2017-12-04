@@ -28,11 +28,14 @@ sylius:
             contact_email: Email de contact
             currencies: Devises
             currency_base: Devise de référence
+            account_verification_required: La vérification des comptes est-elle requise ?
             hostname: Nom d'hôte
             locale_default: Paramètres régionaux par défaut
             locales: Locales
             payment_methods: Moyens de paiement
             shipping_methods: Modes de livraison
+            skipping_shipping_step_allowed: Ignorez l’étape expédition si un seul mode de livraison est disponible ?
+            skipping_payment_step_allowed: Ignorez l’étape paiement si un seul mode de paiement est disponible ?
             tax_calculation_strategy: Stratégie de calcul de la TVA
             tax_zone_default: Zone de taxe par défaut
             taxonomies: Taxonomies
@@ -48,7 +51,7 @@ sylius:
             created_at_to: Créé avant le
             number: Numéro
             total_from: De
-            total_to: À
+            total_to: 'À'
             payment_state: Etat du paiement
             channel: Tous les canaux
         page:
@@ -71,13 +74,13 @@ sylius:
             shipping_category: Catégorie de livraison
         shipment_filter:
             created_at_from: De
-            created_at_to: À
+            created_at_to: 'À'
             number: Numéro de commande
             shipping_address: Expédié à
             channel: Tous les canaux
         payment_filter:
             created_at_from: De
-            created_at_to: À
+            created_at_to: 'À'
             number: Numéro de commande
             billing_address: Adresse de facturation
             channel: Tous les canaux
@@ -107,6 +110,7 @@ sylius:
             on_hand: Stock actuel
             price: Prix
             sku: Référence
+            shipping_required: Expédition requise ?
             weight: Poids
             width: Largeur
         attribute:
@@ -197,7 +201,7 @@ sylius:
             timezone: fuseau horaire
             timezone_deprecated:
                 header: Fuseau horaire obsolète
-                help: 'Le fuseau horaire %timezone% est déconseillé. Corrigez votre fichier php.ini (liste des fuseaux horaires obsolètes http://php.net/manual/fr/timezones.others.php).'
+                help: Le fuseau horaire %timezone% est déconseillé. Corrigez votre fichier php.ini (liste des fuseaux horaires obsolètes http://php.net/manual/fr/timezones.others.php).
             version: Version de PHP
             version_recommended: Version de PHP recommandée
     payum_gateway:

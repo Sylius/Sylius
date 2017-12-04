@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\Criteria;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
+use Sylius\Component\Product\Model\ProductTranslationInterface as BaseProductTranslationInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
+use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class Product extends BaseProduct implements ProductInterface, ReviewableProductInterface
 {
     /**
@@ -74,7 +73,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getVariantSelectionMethod()
+    public function getVariantSelectionMethod(): string
     {
         return $this->variantSelectionMethod;
     }
@@ -82,11 +81,13 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function setVariantSelectionMethod($variantSelectionMethod)
+    public function setVariantSelectionMethod(?string $variantSelectionMethod): void
     {
-        if (!in_array($variantSelectionMethod, [self::VARIANT_SELECTION_CHOICE, self::VARIANT_SELECTION_MATCH])) {
-            throw new \InvalidArgumentException(sprintf('Wrong variant selection method "%s" given.', $variantSelectionMethod));
-        }
+        Assert::oneOf(
+            $variantSelectionMethod,
+            [self::VARIANT_SELECTION_CHOICE, self::VARIANT_SELECTION_MATCH],
+            sprintf('Wrong variant selection method "%s" given.', $variantSelectionMethod)
+        );
 
         $this->variantSelectionMethod = $variantSelectionMethod;
     }
@@ -94,7 +95,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function isVariantSelectionMethodChoice()
+    public function isVariantSelectionMethodChoice(): bool
     {
         return self::VARIANT_SELECTION_CHOICE === $this->variantSelectionMethod;
     }
@@ -102,7 +103,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getVariantSelectionMethodLabel()
+    public function getVariantSelectionMethodLabel(): string
     {
         $labels = self::getVariantSelectionMethodLabels();
 
@@ -112,7 +113,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getProductTaxons()
+    public function getProductTaxons(): Collection
     {
         return $this->productTaxons;
     }
@@ -120,7 +121,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function addProductTaxon(ProductTaxonInterface $productTaxon)
+    public function addProductTaxon(ProductTaxonInterface $productTaxon): void
     {
         if (!$this->hasProductTaxon($productTaxon)) {
             $this->productTaxons->add($productTaxon);
@@ -131,7 +132,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function removeProductTaxon(ProductTaxonInterface $productTaxon)
+    public function removeProductTaxon(ProductTaxonInterface $productTaxon): void
     {
         if ($this->hasProductTaxon($productTaxon)) {
             $this->productTaxons->removeElement($productTaxon);
@@ -141,7 +142,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function hasProductTaxon(ProductTaxonInterface $productTaxon)
+    public function hasProductTaxon(ProductTaxonInterface $productTaxon): bool
     {
         return $this->productTaxons->contains($productTaxon);
     }
@@ -149,9 +150,9 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getTaxons()
+    public function getTaxons(): Collection
     {
-        return $this->productTaxons->map(function (ProductTaxonInterface $productTaxon) {
+        return $this->productTaxons->map(function (ProductTaxonInterface $productTaxon): TaxonInterface {
             return $productTaxon->getTaxon();
         });
     }
@@ -159,7 +160,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function hasTaxon(TaxonInterface $taxon)
+    public function hasTaxon(TaxonInterface $taxon): bool
     {
         return $this->getTaxons()->contains($taxon);
     }
@@ -167,7 +168,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getChannels()
+    public function getChannels(): Collection
     {
         return $this->channels;
     }
@@ -175,7 +176,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function addChannel(BaseChannelInterface $channel)
+    public function addChannel(BaseChannelInterface $channel): void
     {
         if (!$this->hasChannel($channel)) {
             $this->channels->add($channel);
@@ -185,7 +186,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function removeChannel(BaseChannelInterface $channel)
+    public function removeChannel(BaseChannelInterface $channel): void
     {
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
@@ -195,7 +196,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function hasChannel(BaseChannelInterface $channel)
+    public function hasChannel(BaseChannelInterface $channel): bool
     {
         return $this->channels->contains($channel);
     }
@@ -203,18 +204,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public static function getVariantSelectionMethodLabels()
-    {
-        return [
-            self::VARIANT_SELECTION_CHOICE => 'sylius.ui.variant_choice',
-            self::VARIANT_SELECTION_MATCH => 'sylius.ui.options_matching',
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShortDescription()
+    public function getShortDescription(): ?string
     {
         return $this->getTranslation()->getShortDescription();
     }
@@ -222,7 +212,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function setShortDescription($shortDescription)
+    public function setShortDescription(?string $shortDescription): void
     {
         $this->getTranslation()->setShortDescription($shortDescription);
     }
@@ -230,7 +220,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getMainTaxon()
+    public function getMainTaxon(): ?TaxonInterface
     {
         return $this->mainTaxon;
     }
@@ -238,7 +228,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function setMainTaxon(TaxonInterface $mainTaxon = null)
+    public function setMainTaxon(?TaxonInterface $mainTaxon): void
     {
         $this->mainTaxon = $mainTaxon;
     }
@@ -246,7 +236,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getReviews()
+    public function getReviews(): Collection
     {
         return $this->reviews;
     }
@@ -254,19 +244,17 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getAcceptedReviews()
+    public function getAcceptedReviews(): Collection
     {
-        $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq('status', ReviewInterface::STATUS_ACCEPTED))
-        ;
-
-        return $this->reviews->matching($criteria);
+        return $this->reviews->filter(function (ReviewInterface $review): bool {
+            return ReviewInterface::STATUS_ACCEPTED === $review->getStatus();
+        });
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addReview(ReviewInterface $review)
+    public function addReview(ReviewInterface $review): void
     {
         $this->reviews->add($review);
     }
@@ -274,7 +262,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function removeReview(ReviewInterface $review)
+    public function removeReview(ReviewInterface $review): void
     {
         $this->reviews->remove($review);
     }
@@ -282,7 +270,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getAverageRating()
+    public function getAverageRating(): ?float
     {
         return $this->averageRating;
     }
@@ -290,7 +278,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function setAverageRating($averageRating)
+    public function setAverageRating(float $averageRating): void
     {
         $this->averageRating = $averageRating;
     }
@@ -298,7 +286,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getImages()
+    public function getImages(): Collection
     {
         return $this->images;
     }
@@ -306,9 +294,9 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getImagesByType($type)
+    public function getImagesByType(string $type): Collection
     {
-        return $this->images->filter(function (ImageInterface $image) use ($type) {
+        return $this->images->filter(function (ImageInterface $image) use ($type): bool {
             return $type === $image->getType();
         });
     }
@@ -316,7 +304,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function hasImages()
+    public function hasImages(): bool
     {
         return !$this->images->isEmpty();
     }
@@ -324,7 +312,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function hasImage(ImageInterface $image)
+    public function hasImage(ImageInterface $image): bool
     {
         return $this->images->contains($image);
     }
@@ -332,7 +320,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function addImage(ImageInterface $image)
+    public function addImage(ImageInterface $image): void
     {
         $image->setOwner($this);
         $this->images->add($image);
@@ -341,7 +329,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function removeImage(ImageInterface $image)
+    public function removeImage(ImageInterface $image): void
     {
         if ($this->hasImage($image)) {
             $image->setOwner(null);
@@ -352,7 +340,28 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    protected function createTranslation()
+    public static function getVariantSelectionMethodLabels(): array
+    {
+        return [
+            self::VARIANT_SELECTION_CHOICE => 'sylius.ui.variant_choice',
+            self::VARIANT_SELECTION_MATCH => 'sylius.ui.options_matching',
+        ];
+    }
+
+    /**
+     * @param string|null $locale
+     *
+     * @return ProductTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        return parent::getTranslation($locale);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation(): BaseProductTranslationInterface
     {
         return new ProductTranslation();
     }

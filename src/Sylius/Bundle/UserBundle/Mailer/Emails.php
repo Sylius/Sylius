@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UserBundle\Mailer;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
-class Emails
+final class Emails
 {
-    const RESET_PASSWORD_TOKEN = 'reset_password_token';
-    const RESET_PASSWORD_PIN = 'reset_password_pin';
-    const EMAIL_VERIFICATION_TOKEN = 'verification_token';
+    public const RESET_PASSWORD_TOKEN = 'reset_password_token';
+    public const RESET_PASSWORD_PIN = 'reset_password_pin';
+    public const EMAIL_VERIFICATION_TOKEN = 'verification_token';
 }

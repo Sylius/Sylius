@@ -9,31 +9,24 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\UserBundle\EventListener\MailerListener;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class MailerListenerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $sender)
+    function let(SenderInterface $sender): void
     {
         $this->beConstructedWith($sender);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(MailerListener::class);
-    }
-
-    function it_send_password_reset_token_mail(SenderInterface $sender, GenericEvent $event, UserInterface $user)
+    function it_send_password_reset_token_mail(SenderInterface $sender, GenericEvent $event, UserInterface $user): void
     {
         $event->getSubject()->willReturn($user);
 
@@ -44,7 +37,7 @@ final class MailerListenerSpec extends ObjectBehavior
         $this->sendResetPasswordTokenEmail($event);
     }
 
-    function it_send_password_reset_pin_mail(SenderInterface $sender, GenericEvent $event, UserInterface $user)
+    function it_send_password_reset_pin_mail(SenderInterface $sender, GenericEvent $event, UserInterface $user): void
     {
         $event->getSubject()->willReturn($user);
 

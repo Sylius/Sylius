@@ -9,42 +9,35 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\User\Security\Checker;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\User\Security\Checker\TokenUniquenessChecker;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class TokenUniquenessCheckerSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    function let(RepositoryInterface $repository): void
     {
         $this->beConstructedWith($repository, 'aRandomToken');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(TokenUniquenessChecker::class);
-    }
-
-    function it_implements_token_uniqueness_checker_interface()
+    function it_implements_token_uniqueness_checker_interface(): void
     {
         $this->shouldImplement(UniquenessCheckerInterface::class);
     }
 
-    function it_returns_true_when_token_is_not_used(RepositoryInterface $repository)
+    function it_returns_true_when_token_is_not_used(RepositoryInterface $repository): void
     {
         $repository->findOneBy(['aRandomToken' => 'freeToken'])->willReturn(null);
 
         $this->isUnique('freeToken')->shouldReturn(true);
     }
 
-    function it_returns_false_when_token_is_in_use(RepositoryInterface $repository)
+    function it_returns_false_when_token_is_in_use(RepositoryInterface $repository): void
     {
         $repository->findOneBy(['aRandomToken' => 'takenToken'])->willReturn(Argument::any());
 

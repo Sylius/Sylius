@@ -9,20 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ViewHandlerInterface
 {
     /**
      * @param RequestConfiguration $requestConfiguration
      * @param View $view
      *
-     * @return mixed
+     * @return Response
      */
-    public function handle(RequestConfiguration $requestConfiguration, View $view);
+    public function handle(RequestConfiguration $requestConfiguration, View $view): Response;
 }

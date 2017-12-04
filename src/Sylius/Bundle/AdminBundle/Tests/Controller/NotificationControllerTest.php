@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Tests\Controller;
 
 use GuzzleHttp\ClientInterface;
@@ -19,12 +21,9 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Sylius\Bundle\AdminBundle\Controller\NotificationController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class NotificationControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -50,7 +49,7 @@ final class NotificationControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_returns_an_empty_json_response_upon_client_exception()
+    public function it_returns_an_empty_json_response_upon_client_exception(): void
     {
         $this->messageFactory->createRequest(Argument::cetera())
             ->willReturn($this->prophesize(RequestInterface::class)->reveal())
@@ -67,7 +66,7 @@ final class NotificationControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_returns_json_response_from_client_on_success()
+    public function it_returns_json_response_from_client_on_success(): void
     {
         $content = json_encode(['version' => '9001']);
 
@@ -92,7 +91,7 @@ final class NotificationControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->client = $this->prophesize(ClientInterface::class);
         $this->messageFactory = $this->prophesize(MessageFactory::class);
@@ -100,7 +99,8 @@ final class NotificationControllerTest extends \PHPUnit_Framework_TestCase
         $this->controller = new NotificationController(
             $this->client->reveal(),
             $this->messageFactory->reveal(),
-            self::$hubUri
+            self::$hubUri,
+            'environment'
         );
 
         parent::setUp();

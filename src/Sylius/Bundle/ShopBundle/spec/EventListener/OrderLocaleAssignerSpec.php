@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
@@ -16,12 +18,9 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class OrderLocaleAssignerSpec extends ObjectBehavior
 {
-    function let(LocaleContextInterface $localeContext)
+    function let(LocaleContextInterface $localeContext): void
     {
         $this->beConstructedWith($localeContext);
     }
@@ -30,7 +29,7 @@ final class OrderLocaleAssignerSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
         OrderInterface $order,
         ResourceControllerEvent $event
-    ) {
+    ): void {
         $event->getSubject()->willReturn($order);
         $localeContext->getLocaleCode()->willReturn('pl_PL');
 
@@ -39,7 +38,7 @@ final class OrderLocaleAssignerSpec extends ObjectBehavior
         $this->assignLocale($event);
     }
 
-    function it_throws_invalid_argument_exception_if_subject_it_not_order(ResourceControllerEvent $event)
+    function it_throws_invalid_argument_exception_if_subject_it_not_order(ResourceControllerEvent $event): void
     {
         $event->getSubject()->willReturn(new \stdClass());
 

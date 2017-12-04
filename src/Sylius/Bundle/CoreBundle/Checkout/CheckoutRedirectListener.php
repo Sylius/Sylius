@@ -9,21 +9,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Checkout;
 
-use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CheckoutRedirectListener
 {
     /**
@@ -59,7 +55,7 @@ final class CheckoutRedirectListener
     /**
      * @param ResourceControllerEvent $resourceControllerEvent
      */
-    public function handleCheckoutRedirect(ResourceControllerEvent $resourceControllerEvent)
+    public function handleCheckoutRedirect(ResourceControllerEvent $resourceControllerEvent): void
     {
         $request = $this->requestStack->getCurrentRequest();
         if (!$this->requestMatcher->matches($request) || isset($request->attributes->get('_sylius')['redirect'])) {

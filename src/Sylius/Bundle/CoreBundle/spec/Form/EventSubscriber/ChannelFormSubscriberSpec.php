@@ -9,37 +9,30 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\ChannelFormSubscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ChannelFormSubscriberSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ChannelFormSubscriber::class);
-    }
-
-    function it_is_an_event_subscriber_instance()
+    function it_is_an_event_subscriber_instance(): void
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_listens_on_pre_submit_data_event()
+    function it_listens_on_pre_submit_data_event(): void
     {
         $this->getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SUBMIT => 'preSubmit',
         ]);
     }
 
-    function it_adds_a_base_currency_to_currencies_when_it_is_not_there(FormEvent $event)
+    function it_adds_a_base_currency_to_currencies_when_it_is_not_there(FormEvent $event): void
     {
         $event
             ->getData()
@@ -63,7 +56,7 @@ final class ChannelFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_appends_a_base_currency_to_currencies_when_it_is_not_there(FormEvent $event)
+    function it_appends_a_base_currency_to_currencies_when_it_is_not_there(FormEvent $event): void
     {
         $event
             ->getData()
@@ -88,7 +81,7 @@ final class ChannelFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_adds_a_default_locale_to_locales_when_it_is_not_there(FormEvent $event)
+    function it_adds_a_default_locale_to_locales_when_it_is_not_there(FormEvent $event): void
     {
         $event
             ->getData()
@@ -112,7 +105,7 @@ final class ChannelFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_appends_a_default_locale_to_locales_when_it_is_not_there(FormEvent $event)
+    function it_appends_a_default_locale_to_locales_when_it_is_not_there(FormEvent $event): void
     {
         $event
             ->getData()
@@ -137,7 +130,7 @@ final class ChannelFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_adds_a_default_locale_and_a_base_currency_when_they_are_not_there(FormEvent $event)
+    function it_adds_a_default_locale_and_a_base_currency_when_they_are_not_there(FormEvent $event): void
     {
         $event
             ->getData()

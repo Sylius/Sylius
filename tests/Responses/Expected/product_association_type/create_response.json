@@ -1,0 +1,18 @@
+{
+    "id": @integer@,
+    "code": "cross_sell",
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "translations": {
+        "en_US": {
+            "id": @integer@,
+            "locale": "en_US",
+            "name": "Cross sell"
+        }
+    },
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
+}

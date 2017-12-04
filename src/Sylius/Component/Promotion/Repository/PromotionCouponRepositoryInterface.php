@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface PromotionCouponRepositoryInterface extends RepositoryInterface
 {
     /**
@@ -25,20 +24,27 @@ interface PromotionCouponRepositoryInterface extends RepositoryInterface
      *
      * @return QueryBuilder
      */
-    public function createQueryBuilderByPromotionId($promotionId);
+    public function createQueryBuilderByPromotionId($promotionId): QueryBuilder;
 
     /**
      * @param int $codeLength
      *
      * @return int
      */
-    public function countByCodeLength($codeLength);
+    public function countByCodeLength(int $codeLength): int;
 
     /**
      * @param string $code
      * @param string $promotionCode
      *
-     * @return PromotionInterface
+     * @return PromotionCouponInterface|null
      */
-    public function findOneByCodeAndPromotionCode($code, $promotionCode);
+    public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): ?PromotionCouponInterface;
+
+    /**
+     * @param string $promotionCode
+     *
+     * @return iterable
+     */
+    public function createPaginatorForPromotion(string $promotionCode): iterable;
 }

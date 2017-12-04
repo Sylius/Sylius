@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Taxation\Strategy;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -18,9 +20,6 @@ use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
 {
     /**
@@ -29,15 +28,15 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     private $type;
 
     /**
-     * @var OrderTaxesApplicatorInterface[]
+     * @var array|OrderTaxesApplicatorInterface[]
      */
     private $applicators;
 
     /**
      * @param string $type
-     * @param OrderTaxesApplicatorInterface[] $applicators
+     * @param array|OrderTaxesApplicatorInterface[] $applicators
      */
-    public function __construct($type, array $applicators)
+    public function __construct(string $type, array $applicators)
     {
         $this->assertApplicatorsHaveCorrectType($applicators);
 
@@ -48,7 +47,7 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     /**
      * {@inheritdoc}
      */
-    public function applyTaxes(OrderInterface $order, ZoneInterface $zone)
+    public function applyTaxes(OrderInterface $order, ZoneInterface $zone): void
     {
         foreach ($this->applicators as $applicator) {
             $applicator->apply($order, $zone);
@@ -57,8 +56,10 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function supports(OrderInterface $order, ZoneInterface $zone)
+    public function supports(OrderInterface $order, ZoneInterface $zone): bool
     {
         $channel = $order->getChannel();
 
@@ -71,15 +72,17 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @param OrderTaxesApplicatorInterface[] $applicators
+     * @param array|OrderTaxesApplicatorInterface[] $applicators
+     *
+     * @throws \InvalidArgumentException
      */
-    private function assertApplicatorsHaveCorrectType(array $applicators)
+    private function assertApplicatorsHaveCorrectType(array $applicators): void
     {
         Assert::allIsInstanceOf(
             $applicators,

@@ -9,46 +9,39 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Grid\View;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
-use Sylius\Component\Grid\View\GridView;
 use Sylius\Component\Grid\View\GridViewInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class GridViewSpec extends ObjectBehavior
 {
-    function let(Grid $gridDefinition)
+    function let(Grid $gridDefinition): void
     {
         $this->beConstructedWith(['foo', 'bar'], $gridDefinition, new Parameters());
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(GridView::class);
-    }
-
-    function it_implements_a_grid_view_interface()
+    function it_implements_a_grid_view_interface(): void
     {
         $this->shouldHaveType(GridViewInterface::class);
     }
 
-    function it_has_data()
+    function it_has_data(): void
     {
         $this->getData()->shouldReturn(['foo', 'bar']);
     }
 
-    function it_has_definition(Grid $gridDefinition)
+    function it_has_definition(Grid $gridDefinition): void
     {
         $this->getDefinition()->shouldReturn($gridDefinition);
     }
 
-    function it_has_parameters()
+    function it_has_parameters(): void
     {
         $this->getParameters()->shouldBeLike(new Parameters());
     }
@@ -57,7 +50,7 @@ final class GridViewSpec extends ObjectBehavior
         Grid $gridDefinition,
         Field $codeField,
         Field $nameField
-    ) {
+    ): void {
         $gridDefinition->hasField('foo')->willReturn(true);
 
         $gridDefinition->hasField('code')->willReturn(true);
@@ -75,7 +68,7 @@ final class GridViewSpec extends ObjectBehavior
         $this->isSortedBy('name')->shouldReturn(true);
     }
 
-    function it_knows_which_field_it_has_been_sorted_by(Grid $gridDefinition, Field $codeField, Field $nameField)
+    function it_knows_which_field_it_has_been_sorted_by(Grid $gridDefinition, Field $codeField, Field $nameField): void
     {
         $this->beConstructedWith(['foo', 'bar'], $gridDefinition, new Parameters([
             'sorting' => ['name' => ['direction' => 'asc']],
@@ -99,7 +92,7 @@ final class GridViewSpec extends ObjectBehavior
         $this->isSortedBy('code')->shouldReturn(false);
     }
 
-    function it_throws_exception_when_trying_to_sort_by_a_non_existent_field(Grid $gridDefinition)
+    function it_throws_exception_when_trying_to_sort_by_a_non_existent_field(Grid $gridDefinition): void
     {
         $gridDefinition->hasField('code')->willReturn(false);
 
@@ -112,7 +105,7 @@ final class GridViewSpec extends ObjectBehavior
     function it_throws_exception_when_trying_to_sort_by_a_non_sortable_field(
         Grid $gridDefinition,
         Field $nameField
-    ) {
+    ): void {
         $gridDefinition->hasField('code')->willReturn(true);
 
         $gridDefinition->hasField('name')->willReturn(true);

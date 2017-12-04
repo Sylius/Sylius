@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Zone\CreatePageInterface;
@@ -22,9 +25,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ManagingZonesContext implements Context
 {
     /**
@@ -82,6 +82,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
+     * @When I browse zones
      * @When I want to see all zones in store
      */
     public function iWantToSeeAllZonesInStore()
@@ -194,6 +195,22 @@ final class ManagingZonesContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When I check (also) the :zoneName zone
+     */
+    public function iCheckTheZone(string $zoneName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $zoneName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
     }
 
     /**
@@ -313,11 +330,12 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) zones in the list$/
+     * @Then I should see a single zone in the list
+     * @Then I should see :amount zones in the list
      */
-    public function iShouldSeeZonesInTheList($number)
+    public function iShouldSeeZonesInTheList(int $amount = 1): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $number);
+        Assert::same($this->indexPage->countItems(), $amount);
     }
 
     /**
@@ -326,6 +344,14 @@ final class ManagingZonesContext implements Context
     public function iShouldSeeTheZoneNamedInTheList(ZoneInterface $zone)
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $zone->getCode(), 'name' => $zone->getName()]));
+    }
+
+    /**
+     * @Then I should see the zone :zoneName in the list
+     */
+    public function iShouldSeeTheZoneInTheList(string $zoneName): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $zoneName]));
     }
 
     /**
@@ -353,5 +379,19 @@ final class ManagingZonesContext implements Context
         );
 
         Assert::true($this->updatePage->hasMember($zoneMember));
+    }
+
+    /**
+     * @Then /^I can not add a(?: country| province| zone) "([^"]+)"$/
+     */
+    public function iCanNotAddAZoneMember($name)
+    {
+        $member = null;
+
+        try {
+            $member = $this->createPage->chooseMember($name);
+        } catch (ElementNotFoundException $exception) {
+        }
+        Assert::isEmpty($member);
     }
 }

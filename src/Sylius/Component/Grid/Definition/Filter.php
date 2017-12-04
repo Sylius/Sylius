@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Definition;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Filter
 {
     /**
@@ -32,7 +31,7 @@ class Filter
     private $label;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $enabled = true;
 
@@ -68,7 +67,7 @@ class Filter
      * @param string $name
      * @param string $type
      */
-    private function __construct($name, $type)
+    private function __construct(string $name, string $type)
     {
         $this->name = $name;
         $this->type = $type;
@@ -82,7 +81,7 @@ class Filter
      *
      * @return self
      */
-    public static function fromNameAndType($name, $type)
+    public static function fromNameAndType(string $name, string $type): self
     {
         return new self($name, $type);
     }
@@ -90,7 +89,7 @@ class Filter
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -98,13 +97,13 @@ class Filter
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getLabel()
     {
@@ -112,33 +111,33 @@ class Filter
     }
 
     /**
-     * @param string $label
+     * @param mixed $label
      */
-    public function setLabel($label)
+    public function setLabel($label): void
     {
         $this->label = $label;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         return $this->enabled;
     }
 
     /**
-     * @param boolean $enabled
+     * @param bool $enabled
      */
-    public function setEnabled($enabled)
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTemplate()
+    public function getTemplate(): ?string
     {
         return $this->template;
     }
@@ -146,7 +145,7 @@ class Filter
     /**
      * @param string $template
      */
-    public function setTemplate($template)
+    public function setTemplate(string $template): void
     {
         $this->template = $template;
     }
@@ -154,7 +153,7 @@ class Filter
     /**
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }
@@ -162,7 +161,7 @@ class Filter
     /**
      * @param array $options
      */
-    public function setOptions($options)
+    public function setOptions(array $options): void
     {
         $this->options = $options;
     }
@@ -170,7 +169,7 @@ class Filter
     /**
      * @return array
      */
-    public function getFormOptions()
+    public function getFormOptions(): array
     {
         return $this->formOptions;
     }
@@ -178,7 +177,7 @@ class Filter
     /**
      * @param array $formOptions
      */
-    public function setFormOptions($formOptions)
+    public function setFormOptions(array $formOptions): void
     {
         $this->formOptions = $formOptions;
     }
@@ -186,7 +185,7 @@ class Filter
     /**
      * @return int
      */
-    public function getPosition()
+    public function getPosition(): int
     {
         return $this->position;
     }
@@ -194,7 +193,7 @@ class Filter
     /**
      * @param int $position
      */
-    public function setPosition($position)
+    public function setPosition(int $position): void
     {
         $this->position = $position;
     }

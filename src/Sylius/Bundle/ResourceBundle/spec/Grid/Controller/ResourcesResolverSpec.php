@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Grid\Controller;
 
 use Pagerfanta\Pagerfanta;
@@ -16,7 +18,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesResolverInterface;
-use Sylius\Bundle\ResourceBundle\Grid\Controller\ResourcesResolver;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactoryInterface;
 use Sylius\Component\Grid\Definition\Grid;
@@ -28,25 +29,17 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ResourcesResolverSpec extends ObjectBehavior
 {
     function let(
         ResourcesResolverInterface $decoratedResolver,
         GridProviderInterface $gridProvider,
         ResourceGridViewFactoryInterface $gridViewFactory
-    ) {
+    ): void {
         $this->beConstructedWith($decoratedResolver, $gridProvider, $gridViewFactory);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ResourcesResolver::class);
-    }
-
-    function it_implements_resources_resolver_interface()
+    function it_implements_resources_resolver_interface(): void
     {
         $this->shouldImplement(ResourcesResolverInterface::class);
     }
@@ -56,7 +49,7 @@ final class ResourcesResolverSpec extends ObjectBehavior
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         ResourceInterface $resource
-    ) {
+    ): void {
         $requestConfiguration->hasGrid()->willReturn(false);
 
         $decoratedResolver->getResources($requestConfiguration, $repository)->willReturn([$resource]);
@@ -74,7 +67,7 @@ final class ResourcesResolverSpec extends ObjectBehavior
         MetadataInterface $metadata,
         Request $request,
         ParameterBag $queryParameters
-    ) {
+    ): void {
         $requestConfiguration->hasGrid()->willReturn(true);
         $requestConfiguration->getGrid()->willReturn('sylius_admin_tax_category');
         $requestConfiguration->getMetadata()->willReturn($metadata);
@@ -101,7 +94,7 @@ final class ResourcesResolverSpec extends ObjectBehavior
         MetadataInterface $metadata,
         Request $request,
         ParameterBag $queryParameters
-    ) {
+    ): void {
         $requestConfiguration->hasGrid()->willReturn(true);
         $requestConfiguration->getGrid()->willReturn('sylius_admin_tax_category');
         $requestConfiguration->getMetadata()->willReturn($metadata);

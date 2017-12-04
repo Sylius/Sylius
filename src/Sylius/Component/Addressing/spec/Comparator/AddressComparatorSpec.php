@@ -9,29 +9,28 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Addressing\Comparator;
 
-use Sylius\Component\Addressing\Comparator\AddressComparator;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Comparator\AddressComparator;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class AddressComparatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(AddressComparator::class);
     }
 
-    function it_implements_address_comparator_interface()
+    function it_implements_address_comparator_interface(): void
     {
         $this->shouldImplement(AddressComparatorInterface::class);
     }
 
-    function it_returns_false_if_addresses_differ(AddressInterface $firstAddress, AddressInterface $secondAddress)
+    function it_returns_false_if_addresses_differ(AddressInterface $firstAddress, AddressInterface $secondAddress): void
     {
         $firstAddress->getCity()->willReturn('Stoke-On-Trent');
         $firstAddress->getStreet()->willReturn('Villiers St');
@@ -58,7 +57,7 @@ final class AddressComparatorSpec extends ObjectBehavior
         $this->equal($firstAddress, $secondAddress)->shouldReturn(false);
     }
 
-    function it_returns_true_when_addresses_are_the_same(AddressInterface $address)
+    function it_returns_true_when_addresses_are_the_same(AddressInterface $address): void
     {
         $address->getCity()->willReturn('Toowoomba');
         $address->getStreet()->willReturn('Ryans Dr');
@@ -74,7 +73,7 @@ final class AddressComparatorSpec extends ObjectBehavior
         $this->equal($address, $address)->shouldReturn(true);
     }
 
-    function it_ignores_leading_and_trailing_spaces_or_letter_cases(AddressInterface $firstAddress, AddressInterface $secondAddress)
+    function it_ignores_leading_and_trailing_spaces_or_letter_cases(AddressInterface $firstAddress, AddressInterface $secondAddress): void
     {
         $firstAddress->getCity()->willReturn('TOOWOOMBA');
         $firstAddress->getStreet()->willReturn('Ryans Dr     ');

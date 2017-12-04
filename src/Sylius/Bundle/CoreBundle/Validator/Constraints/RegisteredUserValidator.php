@@ -9,16 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class RegisteredUserValidator extends ConstraintValidator
 {
     /**
@@ -37,7 +35,7 @@ final class RegisteredUserValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($customer, Constraint $constraint)
+    public function validate($customer, Constraint $constraint): void
     {
         $existingCustomer = $this->customerRepository->findOneBy(['email' => $customer->getEmail()]);
         if (null !== $existingCustomer && null !== $existingCustomer->getUser()) {

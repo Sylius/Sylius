@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
+use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
 
@@ -20,12 +23,12 @@ final class Driver implements DriverInterface
     /**
      * Driver name
      */
-    const NAME = 'doctrine/phpcr-odm';
+    public const NAME = 'doctrine/phpcr-odm';
 
     /**
      * Alias to use to reference fields from the data source class.
      */
-    const QB_SOURCE_ALIAS = 'o';
+    public const QB_SOURCE_ALIAS = 'o';
 
     /**
      * @var DocumentManagerInterface
@@ -43,7 +46,7 @@ final class Driver implements DriverInterface
     /**
      * {@inheritdoc}
      */
-    public function getDataSource(array $configuration, Parameters $parameters)
+    public function getDataSource(array $configuration, Parameters $parameters): DataSourceInterface
     {
         if (!array_key_exists('class', $configuration)) {
             throw new \InvalidArgumentException('"class" must be configured.');

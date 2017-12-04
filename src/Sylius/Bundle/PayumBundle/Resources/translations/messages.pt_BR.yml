@@ -8,6 +8,16 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Senha
+                signature: Assinatura
                 username: Login
+                sandbox: Sandbox
+            stripe:
+                publishable_key: Chave publicável
+                secret_key: Código secreto
     payum_gateway_factory:
         offline: Desconectado
+        paypal_express_checkout: Pagamento Paypal Express
+        stripe_checkout: Pagamento Stripe
+    payum_action:
+        payment:
+            description: O Pagamento contém %items% item(ns) de um total de %total%|O pagamento contém %items% item(ns) de um total de %total%

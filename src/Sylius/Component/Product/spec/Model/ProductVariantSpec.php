@@ -9,65 +9,58 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
-use Sylius\Component\Product\Model\ProductVariant;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductVariantSpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
         $this->setCurrentLocale('en_US');
         $this->setFallbackLocale('en_US');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProductVariant::class);
-    }
-
-    function it_implements_sylius_product_variant_interface()
+    function it_implements_sylius_product_variant_interface(): void
     {
         $this->shouldImplement(ProductVariantInterface::class);
     }
 
-    function it_implements_sylius_resource_interface()
+    function it_implements_sylius_resource_interface(): void
     {
         $this->shouldImplement(ResourceInterface::class);
     }
 
-    function it_initializes_option_values_collection_by_default()
+    function it_initializes_option_values_collection_by_default(): void
     {
         $this->getOptionValues()->shouldHaveType(Collection::class);
     }
 
-    function it_adds_an_option_value(ProductOptionValueInterface $optionValue)
+    function it_adds_an_option_value(ProductOptionValueInterface $optionValue): void
     {
         $this->addOptionValue($optionValue);
         $this->hasOptionValue($optionValue)->shouldReturn(true);
     }
 
-    function it_removes_an_option_value(ProductOptionValueInterface $optionValue)
+    function it_removes_an_option_value(ProductOptionValueInterface $optionValue): void
     {
         $this->addOptionValue($optionValue);
         $this->removeOptionValue($optionValue);
         $this->hasOptionValue($optionValue)->shouldReturn(false);
     }
 
-    function it_has_no_position_by_default()
+    function it_has_no_position_by_default(): void
     {
         $this->getPosition()->shouldReturn(null);
     }
 
-    function its_position_is_mutable()
+    function its_position_is_mutable(): void
     {
         $this->setPosition(10);
         $this->getPosition()->shouldReturn(10);

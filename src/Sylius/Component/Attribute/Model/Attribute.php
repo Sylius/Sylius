@@ -9,24 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Attribute\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class Attribute implements AttributeInterface
 {
     use TimestampableTrait;
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
+        getTranslation as private doGetTranslation;
     }
 
     /**
@@ -67,11 +64,11 @@ class Attribute implements AttributeInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**
@@ -85,7 +82,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -93,7 +90,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
@@ -101,7 +98,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->getTranslation()->getName();
     }
@@ -109,7 +106,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
     }
@@ -117,7 +114,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -125,7 +122,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function setType($type)
+    public function setType(?string $type): void
     {
         $this->type = $type;
     }
@@ -133,7 +130,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfiguration()
+    public function getConfiguration(): array
     {
         return $this->configuration;
     }
@@ -141,7 +138,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function setConfiguration(array $configuration)
+    public function setConfiguration(array $configuration): void
     {
         $this->configuration = $configuration;
     }
@@ -149,7 +146,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function getStorageType()
+    public function getStorageType(): ?string
     {
         return $this->storageType;
     }
@@ -157,7 +154,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function setStorageType($storageType)
+    public function setStorageType(?string $storageType): void
     {
         $this->storageType = $storageType;
     }
@@ -165,7 +162,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function getPosition()
+    public function getPosition(): ?int
     {
         return $this->position;
     }
@@ -173,15 +170,28 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function setPosition($position)
+    public function setPosition(?int $position): void
     {
         $this->position = $position;
     }
 
     /**
-     * {@inheritdoc}
+     * @param string|null $locale
+     *
+     * @return AttributeTranslationInterface
      */
-    protected function createTranslation()
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var AttributeTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
+    }
+
+    /**
+     * @return AttributeTranslationInterface
+     */
+    protected function createTranslation(): AttributeTranslationInterface
     {
         return new AttributeTranslation();
     }

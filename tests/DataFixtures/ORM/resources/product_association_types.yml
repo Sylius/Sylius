@@ -1,0 +1,33 @@
+Sylius\Component\Product\Model\ProductAssociationTypeTranslation:
+    associationTypeTranslation1nl:
+        locale: nl_NL
+        name: "Cross sell (nl_NL)"
+        translatable: "@productAssociationType1"
+    associationTypeTranslation1en:
+        locale: en_US
+        name: "Cross sell"
+        translatable: "@productAssociationType1"
+    associationTypeTranslation2nl:
+        locale: nl_NL
+        name: "Up sell (nl_NL)"
+        translatable: "@productAssociationType2"
+    associationTypeTranslation2en:
+        locale: en_US
+        name: "Up sell"
+        translatable: "@productAssociationType2"
+
+Sylius\Component\Product\Model\ProductAssociationType:
+    productAssociationType1:
+        fallbackLocale: en_US
+        currentLocale: nl_NL
+        code: cross_sell
+        translations:
+            - "@associationTypeTranslation1nl"
+            - "@associationTypeTranslation1en"
+    productAssociationType2:
+        fallbackLocale: en_US
+        currentLocale: nl_NL
+        code: up_sell
+        translations:
+            - "@associationTypeTranslation2nl"
+            - "@associationTypeTranslation2en"

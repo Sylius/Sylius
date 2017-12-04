@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
+use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductsToCodesTransformer implements DataTransformerInterface
 {
     /**
@@ -38,12 +37,12 @@ final class ProductsToCodesTransformer implements DataTransformerInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function transform($value)
+    public function transform($value): Collection
     {
-        if (!is_array($value) && !is_null($value)) {
-            throw new UnexpectedTypeException($value, 'array');
-        }
+        Assert::nullOrIsArray($value);
 
         if (empty($value)) {
             return new ArrayCollection();
@@ -54,12 +53,12 @@ final class ProductsToCodesTransformer implements DataTransformerInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
-    public function reverseTransform($products)
+    public function reverseTransform($products): array
     {
-        if (!$products instanceof Collection) {
-            throw new UnexpectedTypeException($products, Collection::class);
-        }
+        Assert::isInstanceOf($products, Collection::class);
 
         if (null === $products) {
             return [];

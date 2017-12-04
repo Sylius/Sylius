@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Repository;
 
 use Sylius\Bundle\ThemeBundle\Loader\ThemeLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class InMemoryThemeRepository implements ThemeRepositoryInterface
 {
     /**
@@ -45,7 +44,7 @@ final class InMemoryThemeRepository implements ThemeRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function findAll()
+    public function findAll(): array
     {
         $this->loadThemesIfNeeded();
 
@@ -55,17 +54,17 @@ final class InMemoryThemeRepository implements ThemeRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function findOneByName($name)
+    public function findOneByName(string $name): ?ThemeInterface
     {
         $this->loadThemesIfNeeded();
 
-        return isset($this->themes[$name]) ? $this->themes[$name] : null;
+        return $this->themes[$name] ?? null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findOneByTitle($title)
+    public function findOneByTitle(string $title): ?ThemeInterface
     {
         $this->loadThemesIfNeeded();
 
@@ -78,7 +77,7 @@ final class InMemoryThemeRepository implements ThemeRepositoryInterface
         return null;
     }
 
-    private function loadThemesIfNeeded()
+    private function loadThemesIfNeeded(): void
     {
         if ($this->themesLoaded) {
             return;

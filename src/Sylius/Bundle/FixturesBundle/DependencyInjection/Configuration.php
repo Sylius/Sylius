@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_fixtures');
@@ -36,7 +35,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $rootNode
      */
-    private function buildSuitesNode(ArrayNodeDefinition $rootNode)
+    private function buildSuitesNode(ArrayNodeDefinition $rootNode): void
     {
         /** @var ArrayNodeDefinition $suitesNode */
         $suitesNode = $rootNode
@@ -71,7 +70,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $suitesNode
      */
-    private function buildFixturesNode(ArrayNodeDefinition $suitesNode)
+    private function buildFixturesNode(ArrayNodeDefinition $suitesNode): void
     {
         /** @var ArrayNodeDefinition $fixturesNode */
         $fixturesNode = $suitesNode
@@ -89,7 +88,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $suitesNode
      */
-    private function buildListenersNode(ArrayNodeDefinition $suitesNode)
+    private function buildListenersNode(ArrayNodeDefinition $suitesNode): void
     {
         /** @var ArrayNodeDefinition $listenersNode */
         $listenersNode = $suitesNode
@@ -105,7 +104,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function buildAttributesNode(ArrayNodeDefinition $node)
+    private function buildAttributesNode(ArrayNodeDefinition $node): void
     {
         $attributesNodeBuilder = $node->canBeUnset()->children();
         $attributesNodeBuilder->integerNode('priority')->defaultValue(0);

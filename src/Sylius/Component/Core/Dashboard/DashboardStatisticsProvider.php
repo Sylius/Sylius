@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Dashboard;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class DashboardStatisticsProvider implements DashboardStatisticsProviderInterface
 {
     /**
@@ -45,12 +44,12 @@ class DashboardStatisticsProvider implements DashboardStatisticsProviderInterfac
     /**
      * {@inheritdoc}
      */
-    public function getStatisticsForChannel(ChannelInterface $channel)
+    public function getStatisticsForChannel(ChannelInterface $channel): DashboardStatistics
     {
         return new DashboardStatistics(
             $this->orderRepository->getTotalSalesForChannel($channel),
-            $this->orderRepository->countByChannel($channel),
-            $this->customerRepository->count()
+            $this->orderRepository->countFulfilledByChannel($channel),
+            $this->customerRepository->countCustomers()
         );
     }
 }

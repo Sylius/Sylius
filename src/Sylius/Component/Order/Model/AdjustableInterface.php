@@ -9,46 +9,45 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface AdjustableInterface
 {
     /**
-     * @param null|string $type
+     * @param string|null $type
      *
      * @return Collection|AdjustmentInterface[]
      */
-    public function getAdjustments($type = null);
+    public function getAdjustments(?string $type = null): Collection;
 
     /**
      * @param AdjustmentInterface $adjustment
      */
-    public function addAdjustment(AdjustmentInterface $adjustment);
+    public function addAdjustment(AdjustmentInterface $adjustment): void;
 
     /**
      * @param AdjustmentInterface $adjustment
      */
-    public function removeAdjustment(AdjustmentInterface $adjustment);
+    public function removeAdjustment(AdjustmentInterface $adjustment): void;
 
     /**
-     * @param null|string $type
+     * @param string|null $type
      *
      * @return int
      */
-    public function getAdjustmentsTotal($type = null);
+    public function getAdjustmentsTotal(?string $type = null): int;
 
     /**
-     * @param string $type
+     * @param string|null $type
      */
-    public function removeAdjustments($type);
+    public function removeAdjustments(?string $type = null): void;
 
     /**
      * Recalculates adjustments total. Should be used after adjustment change.
      */
-    public function recalculateAdjustmentsTotal();
+    public function recalculateAdjustmentsTotal(): void;
 }

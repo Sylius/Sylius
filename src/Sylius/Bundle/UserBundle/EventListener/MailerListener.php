@@ -9,17 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Bundle\UserBundle\Mailer\Emails;
 use Sylius\Component\Mailer\Sender\SenderInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class MailerListener
 {
     /**
@@ -38,7 +36,7 @@ class MailerListener
     /**
      * @param GenericEvent $event
      */
-    public function sendResetPasswordTokenEmail(GenericEvent $event)
+    public function sendResetPasswordTokenEmail(GenericEvent $event): void
     {
         $this->sendEmail($event->getSubject(), Emails::RESET_PASSWORD_TOKEN);
     }
@@ -46,7 +44,7 @@ class MailerListener
     /**
      * @param GenericEvent $event
      */
-    public function sendResetPasswordPinEmail(GenericEvent $event)
+    public function sendResetPasswordPinEmail(GenericEvent $event): void
     {
         $this->sendEmail($event->getSubject(), Emails::RESET_PASSWORD_PIN);
     }
@@ -54,29 +52,17 @@ class MailerListener
     /**
      * @param GenericEvent $event
      */
-    public function sendVerificationTokenEmail(GenericEvent $event)
+    public function sendVerificationTokenEmail(GenericEvent $event): void
     {
         $this->sendEmail($event->getSubject(), Emails::EMAIL_VERIFICATION_TOKEN);
     }
 
     /**
-     * @param mixed  $user
+     * @param UserInterface $user
      * @param string $emailCode
      */
-    protected function sendEmail($user, $emailCode)
+    protected function sendEmail(UserInterface $user, string $emailCode): void
     {
-        if (!$user instanceof UserInterface) {
-            throw new UnexpectedTypeException(
-                $user,
-                UserInterface::class
-            );
-        }
-
-        $this->emailSender->send($emailCode,
-            [$user->getEmail()],
-            [
-                'user' => $user,
-            ]
-        );
+        $this->emailSender->send($emailCode, [$user->getEmail()], ['user' => $user]);
     }
 }

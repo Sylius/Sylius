@@ -8,7 +8,7 @@ sylius:
             last_name: Last name
             phone_number: Phone number
             postcode: Postcode
-            street: Street
+            street: Street address
             province: Province
             zone: Zone
         country:

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,9 +19,6 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class Taxon extends BaseTaxon implements TaxonInterface
 {
     use TimestampableTrait;
@@ -34,14 +33,13 @@ class Taxon extends BaseTaxon implements TaxonInterface
         parent::__construct();
 
         $this->createdAt = new \DateTime();
-        $this->products = new ArrayCollection();
         $this->images = new ArrayCollection();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getImages()
+    public function getImages(): Collection
     {
         return $this->images;
     }
@@ -49,9 +47,9 @@ class Taxon extends BaseTaxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function getImagesByType($type)
+    public function getImagesByType(string $type): Collection
     {
-        return $this->images->filter(function (ImageInterface $image) use ($type) {
+        return $this->images->filter(function (ImageInterface $image) use ($type): bool {
             return $type === $image->getType();
         });
     }
@@ -59,7 +57,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function hasImages()
+    public function hasImages(): bool
     {
         return !$this->images->isEmpty();
     }
@@ -67,7 +65,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function hasImage(ImageInterface $image)
+    public function hasImage(ImageInterface $image): bool
     {
         return $this->images->contains($image);
     }
@@ -75,7 +73,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function addImage(ImageInterface $image)
+    public function addImage(ImageInterface $image): void
     {
         $image->setOwner($this);
         $this->images->add($image);
@@ -84,7 +82,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function removeImage(ImageInterface $image)
+    public function removeImage(ImageInterface $image): void
     {
         if ($this->hasImage($image)) {
             $image->setOwner(null);
@@ -95,7 +93,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public static function getTranslationClass()
+    public static function getTranslationClass(): string
     {
         return TaxonTranslation::class;
     }

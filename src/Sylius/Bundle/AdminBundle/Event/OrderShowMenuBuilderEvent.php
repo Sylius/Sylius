@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminBundle\Event;
 
 use Knp\Menu\FactoryInterface;
@@ -17,9 +19,6 @@ use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class OrderShowMenuBuilderEvent extends MenuBuilderEvent
 {
     /**
@@ -53,7 +52,7 @@ class OrderShowMenuBuilderEvent extends MenuBuilderEvent
     /**
      * @return OrderInterface
      */
-    public function getOrder()
+    public function getOrder(): OrderInterface
     {
         return $this->order;
     }
@@ -61,7 +60,7 @@ class OrderShowMenuBuilderEvent extends MenuBuilderEvent
     /**
      * @return StateMachineInterface
      */
-    public function getStateMachine()
+    public function getStateMachine(): StateMachineInterface
     {
         return $this->stateMachine;
     }

@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Checker\Rule;
 
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface RuleCheckerInterface
 {
     /**
      * @param PromotionSubjectInterface $subject
-     * @param array                     $configuration
+     * @param array $configuration
      *
      * @return bool
      */
-    public function isEligible(PromotionSubjectInterface $subject, array $configuration);
+    public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool;
 }

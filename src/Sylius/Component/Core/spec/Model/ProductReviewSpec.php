@@ -9,23 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ProductReview;
 use Sylius\Component\Review\Model\Review;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ProductReviewSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProductReview::class);
-    }
-
-    function it_extends_a_review()
+    function it_extends_a_review(): void
     {
         $this->shouldHaveType(Review::class);
     }

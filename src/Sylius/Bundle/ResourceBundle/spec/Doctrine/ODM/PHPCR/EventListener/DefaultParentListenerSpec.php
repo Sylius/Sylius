@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
@@ -17,31 +19,23 @@ use PHPCR\NodeInterface;
 use PHPCR\SessionInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultParentListener;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
  * @require Doctrine\ODM\PHPCR\DocumentManagerInterface
- *
- * @author Daniel Leech <daniel@dantleech.com>
  */
 final class DefaultParentListenerSpec extends ObjectBehavior
 {
-    function let(DocumentManagerInterface $documentManager)
+    function let(DocumentManagerInterface $documentManager): void
     {
         $this->beConstructedWith($documentManager, '/path/to');
-    }
-
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(DefaultParentListener::class);
     }
 
     function it_should_throw_an_exception_if_no_parent_mapping_exists(
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    ) {
+    ): void {
         $event->getSubject()->willReturn(new \stdClass());
         $documentManager->getClassMetadata(\stdClass::class)->willReturn(
             $documentMetadata
@@ -52,7 +46,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
             'A default parent path has been specified, but no parent mapping has been applied to document "stdClass"'
         ))->during(
             'onPreCreate',
-            [ $event ]
+            [$event]
         );
     }
 
@@ -60,7 +54,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    ) {
+    ): void {
         $this->beConstructedWith(
             $documentManager,
             '/path/to',
@@ -77,7 +71,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
             'Document at default parent path "/path/to" does not exist. `autocreate` was set to "false"'
         ))->during(
             'onPreCreate',
-            [ $event ]
+            [$event]
         );
     }
 
@@ -85,7 +79,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    ) {
+    ): void {
         $subjectDocument = new \stdClass();
         $parentDocument = new \stdClass();
 
@@ -107,7 +101,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         DocumentManagerInterface $documentManager,
         SessionInterface $session,
         NodeInterface $node
-    ) {
+    ): void {
         $this->beConstructedWith(
             $documentManager,
             '/path/to',
@@ -133,7 +127,6 @@ final class DefaultParentListenerSpec extends ObjectBehavior
             ->willReturn($node)
             ->shouldBeCalledTimes(2);
 
-
         $documentMetadata->setFieldValue($subjectDocument, 'parent', $parentDocument);
         $this->onPreCreate($event);
     }
@@ -142,7 +135,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    ) {
+    ): void {
         $this->beConstructedWith(
             $documentManager,
             '/path/to',
@@ -171,7 +164,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    ) {
+    ): void {
         $subjectDocument = new \stdClass();
 
         $event->getSubject()->willReturn($subjectDocument);

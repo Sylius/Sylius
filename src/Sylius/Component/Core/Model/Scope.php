@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class Scope
 {
-    const SHIPPING = 'shipping';
-    const TAX = 'tax';
+    public const SHIPPING = 'shipping';
+    public const TAX = 'tax';
 
     private function __construct()
     {

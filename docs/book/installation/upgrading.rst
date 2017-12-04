@@ -4,7 +4,7 @@
 Upgrading
 =========
 
-Sylius is releasing new versions from time to time. Each release is supported with an UPGRADE file, which is meant to help in the upgrading process,
+Sylius is releasing new versions from time to time. Each release is supported with an `UPGRADE <https://github.com/Sylius/Sylius/blob/1.0/UPGRADE-1.0.md>`_ file, which is meant to help in the upgrading process,
 especially for the major versions, which can break the backwards compatibility.
 
 **Update the Sylius library version constraint by modifying the** ``composer.json`` **file:**

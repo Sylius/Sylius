@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface as BaseShippingMethodRepositoryInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 interface ShippingMethodRepositoryInterface extends BaseShippingMethodRepositoryInterface
 {
     /**
@@ -25,20 +25,20 @@ interface ShippingMethodRepositoryInterface extends BaseShippingMethodRepository
      *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder($locale);
+    public function createListQueryBuilder(string $locale): QueryBuilder;
 
     /**
      * @param ChannelInterface $channel
      *
-     * @return array
+     * @return array|ShippingMethodInterface[]
      */
-    public function findEnabledForChannel(ChannelInterface $channel);
+    public function findEnabledForChannel(ChannelInterface $channel): array;
 
     /**
      * @param array $zones
      * @param ChannelInterface $channel
      *
-     * @return array
+     * @return array|ShippingMethodInterface[]
      */
-    public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel);
+    public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel): array;
 }

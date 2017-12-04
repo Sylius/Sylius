@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\External;
 
 use Behat\Mink\Session;
@@ -17,9 +19,6 @@ use Sylius\Behat\Page\Page;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPageInterface
 {
     /**

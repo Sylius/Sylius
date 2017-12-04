@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\UserBundle\Security;
 
 use Sylius\Component\User\Model\UserInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface UserLoginInterface
 {
     /**
      * @param UserInterface $user
-     * @param string $firewallName
+     * @param string|null $firewallName
      */
-    public function login(UserInterface $user, $firewallName = 'main');
+    public function login(UserInterface $user, ?string $firewallName = null);
 }

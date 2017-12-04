@@ -9,17 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 class RequestConfiguration
 {
     /**
@@ -90,13 +87,13 @@ class RequestConfiguration
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
-     * @return null|string
+     * @return string|null
      */
     public function getDefaultTemplate($name)
     {
-        $templatesNamespace = $this->metadata->getTemplatesNamespace();
+        $templatesNamespace = (string) $this->metadata->getTemplatesNamespace();
 
         if (false !== strpos($templatesNamespace, ':')) {
             return sprintf('%s:%s.%s', $templatesNamespace ?: ':', $name, 'twig');
@@ -106,7 +103,7 @@ class RequestConfiguration
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return mixed|null
      */
@@ -163,15 +160,15 @@ class RequestConfiguration
      */
     public function getRouteName($name)
     {
-        $sectionPrefix = $this->getSection() ? $this->getSection().'_' : '';
+        $sectionPrefix = $this->getSection() ? $this->getSection() . '_' : '';
 
         return sprintf('%s_%s%s_%s', $this->metadata->getApplicationName(), $sectionPrefix, $this->metadata->getName(), $name);
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
-     * @return mixed|null|string
+     * @return mixed|string|null
      */
     public function getRedirectRoute($name)
     {
@@ -205,7 +202,7 @@ class RequestConfiguration
             return '';
         }
 
-        return '#'.$redirect['hash'];
+        return '#' . $redirect['hash'];
     }
 
     /**
@@ -247,10 +244,32 @@ class RequestConfiguration
             $redirect = ['parameters' => []];
         }
 
-        $parameters = isset($redirect['parameters']) ? $redirect['parameters'] : [];
+        $parameters = $redirect['parameters'] ?? [];
+        $parameters = $this->addExtraRedirectParameters($parameters);
 
         if (null !== $resource) {
             $parameters = $this->parseResourceValues($parameters, $resource);
+        }
+
+        return $parameters;
+    }
+
+    /**
+     * @param array $parameters
+     *
+     * @return array
+     */
+    private function addExtraRedirectParameters($parameters)
+    {
+        $vars = $this->getVars();
+        $accessor = PropertyAccess::createPropertyAccessor();
+
+        if ($accessor->isReadable($vars, '[redirect][parameters]')) {
+            $extraParameters = $accessor->getValue($vars, '[redirect][parameters]');
+
+            if (is_array($extraParameters)) {
+                $parameters = array_merge($parameters, $extraParameters);
+            }
         }
 
         return $parameters;
@@ -283,7 +302,9 @@ class RequestConfiguration
      */
     public function isPaginated()
     {
-        return (bool) $this->parameters->get('paginate', true);
+        $pagination = $this->parameters->get('paginate', true);
+
+        return $pagination !== false && $pagination !== null;
     }
 
     /**
@@ -350,7 +371,7 @@ class RequestConfiguration
     }
 
     /**
-     * @param $parameter
+     * @param string $parameter
      * @param array $defaults
      *
      * @return array
@@ -586,7 +607,7 @@ class RequestConfiguration
     {
         $options = $this->parameters->get('state_machine');
 
-        return isset($options['graph']) ? $options['graph'] : null;
+        return $options['graph'] ?? null;
     }
 
     /**
@@ -596,7 +617,7 @@ class RequestConfiguration
     {
         $options = $this->parameters->get('state_machine');
 
-        return isset($options['transition']) ? $options['transition'] : null;
+        return $options['transition'] ?? null;
     }
 
     /**

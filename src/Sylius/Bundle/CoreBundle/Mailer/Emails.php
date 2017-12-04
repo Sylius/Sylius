@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Mailer;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class Emails
 {
-    const CONTACT_REQUEST = 'contact_request';
-    const ORDER_CONFIRMATION = 'order_confirmation';
-    const SHIPMENT_CONFIRMATION = 'shipment_confirmation';
-    const USER_REGISTRATION = 'user_registration';
+    public const CONTACT_REQUEST = 'contact_request';
+    public const ORDER_CONFIRMATION = 'order_confirmation';
+    public const SHIPMENT_CONFIRMATION = 'shipment_confirmation';
+    public const USER_REGISTRATION = 'user_registration';
 
     private function __construct()
     {

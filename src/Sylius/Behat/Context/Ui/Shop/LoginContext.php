@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
@@ -20,9 +22,6 @@ use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class LoginContext implements Context
 {
     /**
@@ -132,6 +131,17 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When I sign in with email :email and password :password
+     */
+    public function iSignInWithEmailAndPassword(string $email, string $password): void
+    {
+        $this->iWantToLogIn();
+        $this->iSpecifyTheUsername($email);
+        $this->iSpecifyThePasswordAs($password);
+        $this->iLogIn();
+    }
+
+    /**
      * @When I register with email :email and password :password
      */
     public function iRegisterWithEmailAndPassword($email, $password)
@@ -196,6 +206,7 @@ final class LoginContext implements Context
 
     /**
      * @Then I should be able to log in as :email with :password password
+     * @Then the customer should be able to log in as :email with :password password
      */
     public function iShouldBeAbleToLogInAsWithPassword($email, $password)
     {

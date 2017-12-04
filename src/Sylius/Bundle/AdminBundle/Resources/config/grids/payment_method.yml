@@ -26,10 +26,12 @@ sylius_grid:
                     label: sylius.ui.name
                     sortable: translation.name
                 gateway:
-                    type: string
-                    path: gatewayConfig.gatewayName
+                    type: twig
+                    path: gatewayConfig.factoryName
                     label: sylius.ui.gateway
-                    sortable: gatewayConfig.gatewayName
+                    sortable: gatewayConfig.factoryName
+                    options:
+                        template: "@SyliusUi/Grid/Field/humanized.html.twig"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
@@ -52,5 +54,8 @@ sylius_grid:
                 item:
                     update:
                         type: update
+                    delete:
+                        type: delete
+                bulk:
                     delete:
                         type: delete

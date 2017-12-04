@@ -9,19 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Order;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     /**
@@ -146,15 +145,24 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isProductInTheList($productName)
+    public function isProductInTheList(string $productName): bool
     {
         try {
+            $table = $this->getElement('table');
             $rows = $this->tableAccessor->getRowsWithFields(
-                $this->getElement('table'),
+                $table,
                 ['item' => $productName]
             );
 
-            return 1 === count($rows);
+            foreach ($rows as $row) {
+                $field = $this->tableAccessor->getFieldFromRow($table, $row, 'item');
+                $name = $field->find('css', '.sylius-product-name');
+                if (null !== $name && $name->getText() === $productName) {
+                    return true;
+                }
+            }
+
+            return false;
         } catch (\InvalidArgumentException $exception) {
             return false;
         }
@@ -327,9 +335,27 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function getPaymentsCount()
     {
-        $payments = $this->getElement('payments')->findAll('css', '.item');
+        try {
+            $payments = $this->getElement('payments')->findAll('css', '.item');
+        } catch (ElementNotFoundException $exception) {
+            return 0;
+        }
 
         return count($payments);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShipmentsCount(): int
+    {
+        try {
+            $shipments = $this->getElement('shipments')->findAll('css', '.item');
+        } catch (ElementNotFoundException $exception) {
+            return 0;
+        }
+
+        return count($shipments);
     }
 
     /**
@@ -354,6 +380,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function getPaymentState()
     {
         return $this->getElement('order_payment_state')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingState()
+    {
+        return $this->getElement('order_shipping_state')->getText();
     }
 
     public function cancelOrder()
@@ -449,6 +483,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'items_total' => '#items-total',
             'order_notes' => '#sylius-order-notes',
             'order_payment_state' => '#payment-state > span',
+            'order_shipping_state' => '#shipping-state > span',
             'order_state' => '#sylius-order-state',
             'payments' => '#sylius-payments',
             'promotion_discounts' => '#promotion-discounts',
@@ -489,7 +524,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             (stripos($elementText, $customerName) !== false) &&
             (stripos($elementText, $street) !== false) &&
             (stripos($elementText, $city) !== false) &&
-            (stripos($elementText, $countryName.' '.$postcode) !== false)
+            (stripos($elementText, $countryName . ' ' . $postcode) !== false)
         ;
     }
 
@@ -506,7 +541,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             ['item' => $itemName]
         );
 
-        return $rows[0]->find('css', '.'.$property)->getText();
+        return $rows[0]->find('css', '.' . $property)->getText();
     }
 
     /**

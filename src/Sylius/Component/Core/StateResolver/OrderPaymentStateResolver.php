@@ -9,20 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\StateResolver;
 
+use Doctrine\Common\Collections\Collection;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
-use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\OrderPaymentTransitions;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderPaymentStateResolver implements StateResolverInterface
 {
     /**
@@ -41,7 +39,7 @@ final class OrderPaymentStateResolver implements StateResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(OrderInterface $order)
+    public function resolve(OrderInterface $order): void
     {
         $stateMachine = $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
         $targetTransition = $this->getTargetTransition($order);
@@ -55,7 +53,7 @@ final class OrderPaymentStateResolver implements StateResolverInterface
      * @param StateMachineInterface $stateMachine
      * @param string $transition
      */
-    private function applyTransition(StateMachineInterface $stateMachine, $transition)
+    private function applyTransition(StateMachineInterface $stateMachine, string $transition): void
     {
         if ($stateMachine->can($transition)) {
             $stateMachine->apply($transition);
@@ -67,7 +65,7 @@ final class OrderPaymentStateResolver implements StateResolverInterface
      *
      * @return string|null
      */
-    private function getTargetTransition(OrderInterface $order)
+    private function getTargetTransition(OrderInterface $order): ?string
     {
         $refundedPaymentTotal = 0;
         $refundedPayments = $this->getPaymentsWithState($order, PaymentInterface::STATE_REFUNDED);
@@ -91,7 +89,10 @@ final class OrderPaymentStateResolver implements StateResolverInterface
             $completedPaymentTotal += $payment->getAmount();
         }
 
-        if (0 < $completedPayments->count() && $completedPaymentTotal >= $order->getTotal()) {
+        if (
+            (0 < $completedPayments->count() && $completedPaymentTotal >= $order->getTotal()) ||
+            $order->getPayments()->isEmpty()
+        ) {
             return OrderPaymentTransitions::TRANSITION_PAY;
         }
 
@@ -106,9 +107,9 @@ final class OrderPaymentStateResolver implements StateResolverInterface
      * @param OrderInterface $order
      * @param string $state
      *
-     * @return PaymentInterface[]
+     * @return Collection|PaymentInterface[]
      */
-    private function getPaymentsWithState(OrderInterface $order, $state)
+    private function getPaymentsWithState(OrderInterface $order, string $state): Collection
     {
         return $order->getPayments()->filter(function (PaymentInterface $payment) use ($state) {
             return $state === $payment->getState();

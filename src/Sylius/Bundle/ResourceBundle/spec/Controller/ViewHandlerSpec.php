@@ -9,34 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\View\ViewHandler as RestViewHandler;
-use JMS\Serializer\SerializationContext;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ResourceBundle\Controller\ViewHandler;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ViewHandlerSpec extends ObjectBehavior
 {
-    function let(RestViewHandler $restViewHandler)
+    function let(RestViewHandler $restViewHandler): void
     {
         $this->beConstructedWith($restViewHandler);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ViewHandler::class);
-    }
-
-    function it_implements_view_handler_interface()
+    function it_implements_view_handler_interface(): void
     {
         $this->shouldImplement(ViewHandlerInterface::class);
     }
@@ -45,7 +37,7 @@ final class ViewHandlerSpec extends ObjectBehavior
         RequestConfiguration $requestConfiguration,
         RestViewHandler $restViewHandler,
         Response $response
-    ) {
+    ): void {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $view = View::create();
 
@@ -58,7 +50,7 @@ final class ViewHandlerSpec extends ObjectBehavior
         RequestConfiguration $requestConfiguration,
         RestViewHandler $restViewHandler,
         Response $response
-    ) {
+    ): void {
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $view = View::create();
         $view->setContext(new Context());

@@ -9,42 +9,36 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Product\Generator;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
 use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
-use Sylius\Component\Product\Generator\ProductVariantGenerator;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 
-/**
- * @author Adam Elsodaney <adam.elso@gmail.com>
- */
 final class ProductVariantGeneratorSpec extends ObjectBehavior
 {
     function let(
         ProductVariantFactoryInterface $productVariantFactory,
         ProductVariantsParityCheckerInterface $variantsParityChecker
-    ) {
+    ): void {
         $this->beConstructedWith($productVariantFactory, $variantsParityChecker);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ProductVariantGenerator::class);
-    }
-
-    function it_implements_product_variant_generator_interfave()
+    function it_implements_product_variant_generator_interfave(): void
     {
         $this->shouldImplement(ProductVariantGeneratorInterface::class);
     }
 
-    function it_cannot_generate_variants_for_an_object_without_options(ProductInterface $variable)
+    function it_cannot_generate_variants_for_an_object_without_options(ProductInterface $variable): void
     {
         $variable->hasOptions()->willReturn(false);
 
@@ -60,16 +54,18 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         ProductVariantFactoryInterface $productVariantFactory,
         ProductVariantInterface $permutationVariant,
         ProductVariantsParityCheckerInterface $variantsParityChecker
-    ) {
+    ): void {
         $productVariable->hasOptions()->willReturn(true);
 
-        $productVariable->getOptions()->willReturn([$colorOption]);
+        $productVariable->getOptions()->willReturn(new ArrayCollection([$colorOption->getWrappedObject()]));
 
-        $colorOption->getValues()->willReturn([$blackColor, $whiteColor, $redColor]);
+        $colorOption->getValues()->willReturn(
+            new ArrayCollection([$blackColor->getWrappedObject(), $whiteColor->getWrappedObject(), $redColor->getWrappedObject()])
+        );
 
-        $blackColor->getId()->willReturn('black1');
-        $whiteColor->getId()->willReturn('white2');
-        $redColor->getId()->willReturn('red3');
+        $blackColor->getCode()->willReturn('black1');
+        $whiteColor->getCode()->willReturn('white2');
+        $redColor->getCode()->willReturn('red3');
 
         $variantsParityChecker->checkParity($permutationVariant, $productVariable)->willReturn(false);
 
@@ -90,16 +86,18 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         ProductVariantFactoryInterface $productVariantFactory,
         ProductVariantInterface $permutationVariant,
         ProductVariantsParityCheckerInterface $variantsParityChecker
-    ) {
+    ): void {
         $productVariable->hasOptions()->willReturn(true);
 
-        $productVariable->getOptions()->willReturn([$colorOption]);
+        $productVariable->getOptions()->willReturn(new ArrayCollection([$colorOption->getWrappedObject()]));
 
-        $colorOption->getValues()->willReturn([$blackColor, $whiteColor, $redColor]);
+        $colorOption->getValues()->willReturn(
+            new ArrayCollection([$blackColor->getWrappedObject(), $whiteColor->getWrappedObject(), $redColor->getWrappedObject()])
+        );
 
-        $blackColor->getId()->willReturn('black1');
-        $whiteColor->getId()->willReturn('white2');
-        $redColor->getId()->willReturn('red3');
+        $blackColor->getCode()->willReturn('black1');
+        $whiteColor->getCode()->willReturn('white2');
+        $redColor->getCode()->willReturn('red3');
 
         $variantsParityChecker->checkParity($permutationVariant, $productVariable)->willReturn(true);
 
@@ -124,20 +122,26 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         ProductVariantFactoryInterface $productVariantFactory,
         ProductVariantInterface $permutationVariant,
         ProductVariantsParityCheckerInterface $variantsParityChecker
-    ) {
+    ): void {
         $productVariable->hasOptions()->willReturn(true);
 
-        $productVariable->getOptions()->willReturn([$colorOption, $sizeOption]);
+        $productVariable->getOptions()->willReturn(
+            new ArrayCollection([$colorOption->getWrappedObject(), $sizeOption->getWrappedObject()])
+        );
 
-        $colorOption->getValues()->willReturn([$blackColor, $whiteColor, $redColor]);
-        $sizeOption->getValues()->willReturn([$smallSize, $mediumSize, $largeSize]);
+        $colorOption->getValues()->willReturn(
+            new ArrayCollection([$blackColor->getWrappedObject(), $whiteColor->getWrappedObject(), $redColor->getWrappedObject()])
+        );
+        $sizeOption->getValues()->willReturn(
+            new ArrayCollection([$smallSize->getWrappedObject(), $mediumSize->getWrappedObject(), $largeSize->getWrappedObject()])
+        );
 
-        $blackColor->getId()->willReturn('black1');
-        $whiteColor->getId()->willReturn('white2');
-        $redColor->getId()->willReturn('red3');
-        $smallSize->getId()->willReturn('small4');
-        $mediumSize->getId()->willReturn('medium5');
-        $largeSize->getId()->willReturn('large6');
+        $blackColor->getCode()->willReturn('black1');
+        $whiteColor->getCode()->willReturn('white2');
+        $redColor->getCode()->willReturn('red3');
+        $smallSize->getCode()->willReturn('small4');
+        $mediumSize->getCode()->willReturn('medium5');
+        $largeSize->getCode()->willReturn('large6');
 
         $variantsParityChecker->checkParity($permutationVariant, $productVariable)->willReturn(false);
 

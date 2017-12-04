@@ -11,7 +11,6 @@ sylius:
             last_name: Apelido
             phone_number: Número de telefone
             postcode: Código postal
-            street: Rua
             province: Distrito
             zone: Zona
         country:
@@ -33,7 +32,7 @@ sylius:
                 country: País
                 province: Distrito
                 zone: Zona
-            scope: Âmbito
+            scope: 'Âmbito'
             scopes:
                 all: Tudo
             select: Seleccionar

@@ -9,40 +9,31 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ThemeBundle\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Factory\ThemeFactory;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ThemeFactorySpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ThemeFactory::class);
-    }
-
-    function it_implements_theme_factory_interface()
+    function it_implements_theme_factory_interface(): void
     {
         $this->shouldImplement(ThemeFactoryInterface::class);
     }
 
-    function it_creates_a_theme()
+    function it_creates_a_theme(): void
     {
         $this->create('example/theme', '/theme/path')->shouldHaveNameAndPath('example/theme', '/theme/path');
     }
 
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'haveNameAndPath' => function (ThemeInterface $theme, $expectedName, $expectedPath) {
-                return $expectedName === $theme->getName()
-                    && $expectedPath === $theme->getPath()
-                ;
+                return $expectedName === $theme->getName() && $expectedPath === $theme->getPath();
             },
         ];
     }

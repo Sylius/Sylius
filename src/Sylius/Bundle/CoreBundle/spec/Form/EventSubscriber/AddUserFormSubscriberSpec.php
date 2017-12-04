@@ -9,34 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddUserFormSubscriber;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserAwareInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class AddUserFormSubscriberSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith('\Fully\Qualified\ClassName');
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(AddUserFormSubscriber::class);
-    }
-
-    function it_is_event_subscriber_instance()
+    function it_is_event_subscriber_instance(): void
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }
@@ -44,7 +36,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
     function it_adds_user_form_type_and_create_user_check(
         FormEvent $event,
         Form $form
-    ) {
+    ): void {
         $event->getForm()->willReturn($form);
 
         $form->add('user', '\Fully\Qualified\ClassName', Argument::type('array'))->shouldBeCalled();
@@ -52,15 +44,20 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
 
         $this->preSetData($event);
     }
-    
+
     function it_replaces_user_form_by_new_user_form_when_create_user_check_is_not_checked(
         FormEvent $event,
         Form $form,
         Form $createUserCheckForm,
-        UserAwareInterface $customer
-    ) {
+        UserAwareInterface $customer,
+        UserInterface $user
+    ): void {
         $event->getData()->willReturn($customer);
         $event->getForm()->willReturn($form);
+
+        $customer->getUser()->willReturn($user);
+        $user->getId()->willReturn(null);
+
         $form->get('createUser')->willReturn($createUserCheckForm);
         $createUserCheckForm->getViewData()->willReturn(null);
 
@@ -77,12 +74,42 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         Form $form,
         Form $createUserCheckForm,
-        UserAwareInterface $customer
-    ) {
+        UserAwareInterface $customer,
+        UserInterface $user
+    ): void {
         $event->getData()->willReturn($customer);
         $event->getForm()->willReturn($form);
+
+        $customer->getUser()->willReturn($user);
+        $user->getId()->willReturn(null);
+
         $form->get('createUser')->willReturn($createUserCheckForm);
         $createUserCheckForm->getViewData()->willReturn('1');
+
+        $customer->setUser(null)->shouldNotBeCalled();
+        $event->setData($customer)->shouldNotBeCalled();
+
+        $form->remove('user')->shouldNotBeCalled();
+        $form->add('user', '\Fully\Qualified\ClassName', Argument::type('array'))->shouldNotBeCalled();
+
+        $this->submit($event);
+    }
+
+    function it_does_not_replace_user_form_by_new_user_form_when_user_has_an_id(
+        FormEvent $event,
+        Form $form,
+        Form $createUserCheckForm,
+        UserAwareInterface $customer,
+        UserInterface $user
+    ): void {
+        $event->getData()->willReturn($customer);
+        $event->getForm()->willReturn($form);
+
+        $customer->getUser()->willReturn($user);
+        $user->getId()->willReturn(1);
+
+        $form->get('createUser')->willReturn($createUserCheckForm);
+        $createUserCheckForm->getViewData()->willReturn(null);
 
         $customer->setUser(null)->shouldNotBeCalled();
         $event->setData($customer)->shouldNotBeCalled();
@@ -98,12 +125,12 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         Form $form,
         Form $createUserCheckForm,
         UserInterface $user
-    ) {
+    ): void {
         $event->getData()->willReturn($user);
         $event->getForm()->willReturn($form);
         $form->get('createUser')->willReturn($createUserCheckForm);
         $createUserCheckForm->getViewData()->willReturn(null);
-        
+
         $this->shouldThrow(\InvalidArgumentException::class)->during('submit', [$event]);
     }
 }

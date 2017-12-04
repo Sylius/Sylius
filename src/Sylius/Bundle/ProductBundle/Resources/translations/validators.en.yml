@@ -14,8 +14,6 @@ sylius:
             not_blank: Please enter product name.
             min_length: Product name must be at least 1 character long.|Product name must be at least {{ limit }} characters long.
             max_length: Product name must not be longer than 1 character.|Product name must not be longer than {{ limit }} characters.
-        slug:
-            not_blank: Please enter product slug.
     product_variant:
         combination: Variant with this option set already exists.
         code:

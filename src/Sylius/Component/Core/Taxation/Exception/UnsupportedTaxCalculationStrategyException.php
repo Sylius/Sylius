@@ -9,12 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Taxation\Exception;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
-class UnsupportedTaxCalculationStrategyException extends \RuntimeException
+final class UnsupportedTaxCalculationStrategyException extends \RuntimeException
 {
     /**
      * {@inheritdoc}

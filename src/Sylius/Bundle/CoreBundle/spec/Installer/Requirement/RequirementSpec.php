@@ -9,34 +9,35 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\Installer\Requirement;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Installer\Requirement\Requirement;
 
 final class RequirementSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith('PHP version', true, true, 'Please upgrade.');
     }
 
-    function it_gets_label()
+    function it_gets_label(): void
     {
         $this->getLabel()->shouldReturn('PHP version');
     }
 
-    function it_gets_fulfilled()
+    function it_gets_fulfilled(): void
     {
         $this->isFulfilled()->shouldReturn(true);
     }
 
-    function it_gets_required()
+    function it_gets_required(): void
     {
         $this->isRequired()->shouldReturn(true);
     }
 
-    function it_gets_help()
+    function it_gets_help(): void
     {
         $this->getHelp()->shouldReturn('Please upgrade.');
     }

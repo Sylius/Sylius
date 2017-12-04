@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ShipmentInterface as CoreShipmentInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Core\Model\ShipmentInterface as CoreShipmentInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
 {
     /**
@@ -40,11 +40,11 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
     /**
      * {@inheritdoc}
      */
-    public function getDefaultShippingMethod(ShipmentInterface $shipment)
+    public function getDefaultShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface
     {
         /** @var CoreShipmentInterface $shipment */
         Assert::isInstanceOf($shipment, CoreShipmentInterface::class);
-        
+
         /** @var ChannelInterface $channel */
         $channel = $shipment->getOrder()->getChannel();
 
@@ -52,7 +52,7 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
         if (empty($shippingMethods)) {
             throw new UnresolvedDefaultShippingMethodException();
         }
-        
+
         return $shippingMethods[0];
     }
 }

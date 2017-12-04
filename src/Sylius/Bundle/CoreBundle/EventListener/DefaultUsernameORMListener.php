@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,8 +21,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 
 /**
  * Keeps user's username synchronized with email.
- *
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 final class DefaultUsernameORMListener
 {
@@ -39,8 +39,9 @@ final class DefaultUsernameORMListener
     /**
      * @param array $entities
      * @param EntityManagerInterface $entityManager
+     * @param UnitOfWork $unitOfWork
      */
-    private function processEntities($entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork)
+    private function processEntities(array $entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork): void
     {
         foreach ($entities as $customer) {
             if (!$customer instanceof CustomerInterface) {

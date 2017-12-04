@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Listener;
 
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class SuiteEvent
 {
     /**
@@ -34,7 +33,7 @@ final class SuiteEvent
     /**
      * @return SuiteInterface
      */
-    public function suite()
+    public function suite(): SuiteInterface
     {
         return $this->suite;
     }

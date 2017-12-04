@@ -49,3 +49,5 @@ override its translation key which is ``sylius.form.customer.email``.
 
     .. image:: ../_images/translations.png
         :align: center
+
+.. include:: /customization/plugins.rst.inc

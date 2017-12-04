@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
@@ -18,9 +20,6 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class EmailContext implements Context
 {
     /**
@@ -102,15 +101,6 @@ final class EmailContext implements Context
     private function assertEmailContainsMessageTo($message, $recipient)
     {
         Assert::true($this->emailChecker->hasMessageTo($message, $recipient));
-    }
-
-    /**
-     * @param string $message
-     * @param string $recipient
-     */
-    private function assertEmailNotContainsMessageTo($message, $recipient)
-    {
-        Assert::false($this->emailChecker->hasMessageTo($message, $recipient));
     }
 
     /**

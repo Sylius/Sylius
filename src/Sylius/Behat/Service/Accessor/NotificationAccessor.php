@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Service\Accessor;
 
 use Behat\Mink\Element\NodeElement;
@@ -16,13 +18,8 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\NotificationType;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class NotificationAccessor implements NotificationAccessorInterface
 {
-    const NOTIFICATION_ELEMENT_CSS = '#sylius-flash-messages';
-
     /**
      * @var Session
      */
@@ -67,10 +64,10 @@ final class NotificationAccessor implements NotificationAccessorInterface
      */
     private function getMessageElement()
     {
-        $messageElement = $this->session->getPage()->find('css', self::NOTIFICATION_ELEMENT_CSS);
+        $messageElement = $this->session->getPage()->find('css', '.sylius-flash-message');
 
         if (null === $messageElement) {
-            throw new ElementNotFoundException($this->session->getDriver(), 'message element', 'css', self::NOTIFICATION_ELEMENT_CSS);
+            throw new ElementNotFoundException($this->session->getDriver(), 'message element', 'css', '.sylius-flash-message');
         }
 
         return $messageElement;

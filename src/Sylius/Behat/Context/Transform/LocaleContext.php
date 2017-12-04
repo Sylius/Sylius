@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class LocaleContext implements Context
 {
     /**
@@ -40,11 +39,7 @@ final class LocaleContext implements Context
      */
     public function castToLocaleCode($localeName)
     {
-        try {
-            return $this->localeNameConverter->convertNameToCode($localeName);
-        } catch (\InvalidArgumentException $exception) {
-            return $localeName;
-        }
+        return $this->localeNameConverter->convertNameToCode($localeName);
     }
 
     /**
@@ -52,10 +47,6 @@ final class LocaleContext implements Context
      */
     public function castToLocaleName($localeCode)
     {
-        try {
-            return $this->localeNameConverter->convertCodeToName($localeCode);
-        } catch (\InvalidArgumentException $exception) {
-            return $localeCode;
-        }
+        return $this->localeNameConverter->convertCodeToName($localeCode);
     }
 }

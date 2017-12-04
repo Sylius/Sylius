@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
@@ -12,9 +23,6 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class CheckoutAddressingContext implements Context
 {
     /**
@@ -135,8 +143,8 @@ final class CheckoutAddressingContext implements Context
     {
         $key = sprintf(
             'shipping_address_%s_%s',
-            strtolower($address->getFirstName()),
-            strtolower($address->getLastName())
+            strtolower((string) $address->getFirstName()),
+            strtolower((string) $address->getLastName())
         );
         $this->sharedStorage->set($key, $address);
 
@@ -170,8 +178,8 @@ final class CheckoutAddressingContext implements Context
 
         $key = sprintf(
             'billing_address_%s_%s',
-            strtolower($address->getFirstName()),
-            strtolower($address->getLastName())
+            strtolower((string) $address->getFirstName()),
+            strtolower((string) $address->getLastName())
         );
         $this->sharedStorage->set($key, $address);
 
@@ -190,7 +198,7 @@ final class CheckoutAddressingContext implements Context
         $this->addressPage->open();
         $this->iSpecifyTheShippingAddressAs($address);
 
-        $key = sprintf('billing_address_%s_%s', strtolower($address->getFirstName()), strtolower($address->getLastName()));
+        $key = sprintf('billing_address_%s_%s', strtolower((string) $address->getFirstName()), strtolower((string) $address->getLastName()));
         $this->sharedStorage->set($key, $address);
 
         $this->iCompleteTheAddressingStep();
@@ -203,6 +211,14 @@ final class CheckoutAddressingContext implements Context
     public function iSpecifyTheEmail($email = null)
     {
         $this->addressPage->specifyEmail($email);
+    }
+
+    /**
+     * @When I specify the first and last name as :fullName for shipping address
+     */
+    public function iSpecifyTheStreetAsForShippingAddress(string $fullName)
+    {
+        $this->addressPage->specifyShippingAddressFullName($fullName);
     }
 
     /**

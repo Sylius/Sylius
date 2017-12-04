@@ -25,7 +25,7 @@ function handleProductOptionsChange() {
     $('[name*="sylius_add_to_cart[cartItem][variant]"]').on('change', function() {
         var $selector = '';
 
-        $('#sylius-product-adding-to-cart select').each(function() {
+        $('#sylius-product-adding-to-cart select[data-option]').each(function() {
             var option = $(this).find('option:selected').val();
             $selector += '[data-' + $(this).attr('data-option') + '="' + option + '"]';
         });
@@ -44,7 +44,7 @@ function handleProductOptionsChange() {
 
 function handleProductVariantsChange() {
     $('[name="sylius_add_to_cart[cartItem][variant]"]').on('change', function() {
-        var $price = $(this).parents('tr').find('td:nth-child(2)').text();
+        var $price = $(this).parents('tr').find('.sylius-product-variant-price').text();
         $('#product-price').text($price);
     });
 }

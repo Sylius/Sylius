@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Channel\Context\RequestBased;
 
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class HostnameBasedRequestResolver implements RequestResolverInterface
 {
     /**
@@ -35,7 +35,7 @@ final class HostnameBasedRequestResolver implements RequestResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function findChannel(Request $request)
+    public function findChannel(Request $request): ?ChannelInterface
     {
         return $this->channelRepository->findOneByHostname($request->getHost());
     }

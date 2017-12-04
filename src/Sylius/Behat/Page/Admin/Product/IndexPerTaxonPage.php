@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as CrudIndexPage;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterface
 {
     /**
@@ -53,7 +52,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         $this->getElement('save_configuration_button')->press();
 
         $this->getDocument()->waitFor(5, function () {
-            return false === $this->getElement('save_configuration_button')->hasClass('loading');
+            return null === $this->getElement('save_configuration_button')->find('css', '.loading');
         });
     }
 

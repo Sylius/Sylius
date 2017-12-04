@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class AdminUserApiTest extends JsonApiTestCase
 {
     /**
@@ -340,7 +339,7 @@ EOT;
         $this->client->request('DELETE', $this->getAdminUserUrl($user['admin']), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'admin_user/deletion_fail_response',  Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse($response, 'admin_user/deletion_fail_response', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /**

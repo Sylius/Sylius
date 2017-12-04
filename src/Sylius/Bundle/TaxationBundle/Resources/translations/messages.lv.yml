@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        tax_category:
+            name: Nosaukums
+            description: Apraksts
+        tax_rate:
+            category: Kategorija
+            name: Nosaukums
+            amount: Summa
+            included_in_price: Cenā iekļauts?
+            calculator: '- Kalkulators'

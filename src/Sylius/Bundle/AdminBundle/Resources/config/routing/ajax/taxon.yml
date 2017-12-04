@@ -5,6 +5,7 @@ sylius_admin_ajax_taxon_root_nodes:
         _controller: sylius.controller.taxon:indexAction
         _sylius:
             serialization_groups: [Autocomplete]
+            permission: true
             repository:
                 method: findRootNodes
 
@@ -15,11 +16,11 @@ sylius_admin_ajax_taxon_leafs:
         _controller: sylius.controller.taxon:indexAction
         _sylius:
             serialization_groups: [Autocomplete]
+            permission: true
             repository:
                 method: findChildren
                 arguments:
                     parentCode: $parentCode
-                    locale: expr:service('sylius.context.locale').getLocaleCode()
 
 sylius_admin_ajax_taxon_by_code:
     path: /leaf
@@ -28,6 +29,7 @@ sylius_admin_ajax_taxon_by_code:
         _controller: sylius.controller.taxon:indexAction
         _sylius:
             serialization_groups: [Autocomplete]
+            permission: true
             repository:
                 method: findBy
                 arguments: [code: $code]
@@ -39,11 +41,11 @@ sylius_admin_ajax_taxon_by_name_phrase:
         _controller: sylius.controller.taxon:indexAction
         _sylius:
             serialization_groups: [Autocomplete]
+            permission: true
             repository:
                 method: findByNamePart
                 arguments:
                     phrase: $phrase
-                    locale: expr:service('sylius.context.locale').getLocaleCode()
 
 sylius_admin_ajax_generate_taxon_slug:
     path: /generate-slug/
@@ -57,4 +59,5 @@ sylius_admin_ajax_taxon_move:
     defaults:
         _controller: sylius.controller.taxon:updateAction
         _sylius:
+            permission: true
             form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonPositionType

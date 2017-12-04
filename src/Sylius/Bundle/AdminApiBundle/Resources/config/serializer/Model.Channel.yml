@@ -1,0 +1,17 @@
+Sylius\Component\Core\Model\Channel:
+    exclusion_policy: ALL
+    xml_root_name: channel
+    properties:
+        taxCalculationStrategy:
+            expose: true
+            type: string
+            groups: [Detailed]
+    relations:
+        - rel: self
+          href:
+            route: sylius_admin_api_channel_show
+            parameters:
+                code: expr(object.getCode())
+                version: 1
+          exclusion:
+            groups: [Default, Detailed, DetailedCart]

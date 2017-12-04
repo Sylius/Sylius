@@ -4,6 +4,9 @@
 sylius:
     form:
         taxon:
-            name: الاسم
+            description: 'الوصف'
+            name: 'الاسم'
+            parent: 'الجذر'
+            slug: 'سبيكة'
         taxonomy:
-            name: الاسم
+            name: 'الاسم'

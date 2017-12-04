@@ -9,29 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\User\Security;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
-use Sylius\Component\User\Security\UserPbkdf2PasswordEncoder;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class UserPbkdf2PasswordEncoderSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UserPbkdf2PasswordEncoder::class);
-    }
-
-    function it_implements_password_updater_interface()
+    function it_implements_password_updater_interface(): void
     {
         $this->shouldImplement(UserPasswordEncoderInterface::class);
     }
 
-    function it_encodes_password(CredentialsHolderInterface $user)
+    function it_encodes_password(CredentialsHolderInterface $user): void
     {
         $user->getPlainPassword()->willReturn('myPassword');
         $user->getSalt()->willReturn('typicalSalt');

@@ -9,28 +9,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\User\Canonicalizer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\User\Canonicalizer\Canonicalizer;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CanonicalizerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(Canonicalizer::class);
-    }
-
-    function it_implements_canonicalizer_interface()
+    function it_implements_canonicalizer_interface(): void
     {
         $this->shouldImplement(CanonicalizerInterface::class);
     }
 
-    function it_converts_strings_to_lower_case()
+    function it_converts_strings_to_lower_case(): void
     {
         $testString = 'tEsTsTrInG';
         $this->canonicalize($testString)->shouldReturn('teststring');

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
@@ -18,9 +20,6 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class NonChannelLocaleListener
 {
     /**
@@ -61,7 +60,7 @@ final class NonChannelLocaleListener
      *
      * @throws NotFoundHttpException
      */
-    public function restrictRequestLocale(GetResponseEvent $event)
+    public function restrictRequestLocale(GetResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -86,7 +85,7 @@ final class NonChannelLocaleListener
      *
      * @return bool
      */
-    private function isFirewallSupported(FirewallConfig $firewall = null)
+    private function isFirewallSupported(?FirewallConfig $firewall = null): bool
     {
         return
             null !== $firewall &&

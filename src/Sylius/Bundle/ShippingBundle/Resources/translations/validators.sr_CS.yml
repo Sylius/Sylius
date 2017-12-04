@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    shipping_category:
+        name:
+            max_length: 'Ima kategorije mora biti duže od {{ limit }} characters.'
+            min_length: 'Ime kategorije mora imati najmanje {{ limit }} karaktera.'
+    shipment:
+        shipping_method:
+            not_blank: 'Molimo odaberide metod dostave.'

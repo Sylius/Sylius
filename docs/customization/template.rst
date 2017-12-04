@@ -18,15 +18,18 @@ Methods of templates customizing
 
 .. warning::
 
-    There are two ways of customizing templates of Sylius:
+    There are three ways of customizing templates of Sylius:
 
     The first one is simple **templates overriding** inside of the ``app/Resources`` directory of your project. Using
-    this method you can completely change the content of templates, it is a suggested way of integrating themes, custom
-    layouts.
+    this method you can completely change the content of templates.
 
     The second method is **templates customization via events**. You are able to listen on these template events,
     and by that add your own blocks without copying and pasting the whole templates. This feature is really useful
     when :doc:`creating Sylius Extensions </plugins/creating-plugin>`.
+
+    The third method is **using Sylius themes**. Creating a Sylius theme requires a few more steps than basic template overriding,
+    but allows you to have a different design on multiple channels of the same Sylius instance. :doc:`Learn more about themes here </book/themes/themes>`.
+
 
 How to customize templates by overriding?
 -----------------------------------------
@@ -133,7 +136,7 @@ on the create action of Resources, at the bottom of the page (after the content 
 
 .. code-block:: twig
 
-    {# Fist we are setting the event_prefix based on route as it was mentioned before #}
+    {# First we are setting the event_prefix based on route as it was mentioned before #}
     {% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.create' %}
 
     {# And then the slot name is appended to the event_prefix #}
@@ -141,8 +144,8 @@ on the create action of Resources, at the bottom of the page (after the content 
 
 .. note::
 
-    Besides the events that are named basing on routing, Sylius has also some more general events. Thos that will appear
-    on every site of Sylius admin or shop. Examples: ``sylius.shop.layout.slot_name`` or ``sylius.admin.layout.slot_name``.
+    Besides the events that are named based on routing, Sylius also has some other general events: those that will appear
+    on every Sylius admin or shop. Examples: ``sylius.shop.layout.slot_name`` or ``sylius.admin.layout.slot_name``.
     They are rendered in the ``layout.html.twig`` views for both Admin and Shop.
 
 .. tip::
@@ -194,6 +197,17 @@ For the space below the header it will be ``sylius.shop.layout.after_header``.
 
 That's it. Your new block should appear in the view.
 
+.. tip::
+
+    Learn more about adding custom Admin JS & CSS in the cookbook :doc:`here </cookbook/frontend/admin-js-and-css>`.
+
+How to use themes for customizations?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can refer to the theme documentation available here:
+- :doc:`Themes (The book) </book/themes/themes>`
+- :doc:`SyliusThemeBundle (Bundle documentation) </components_and_bundles/bundles/SyliusThemeBundle/index>`
+
 Global Twig variables
 ---------------------
 
@@ -227,3 +241,5 @@ You can check for example what is the current channel by dumping the ``sylius.ch
     {{ dump(sylius.channel) }}
 
 That's it, this will dump the content of the current Channel object.
+
+.. include:: /customization/plugins.rst.inc

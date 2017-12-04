@@ -24,7 +24,7 @@
                 "values": [],
                 "_links": {
                     "self": {
-                        "href": "\/api\/v1\/products\/MUG_COLOR"
+                        "href": "\/api\/v1\/product-options\/MUG_COLOR"
                     }
                 }
             }

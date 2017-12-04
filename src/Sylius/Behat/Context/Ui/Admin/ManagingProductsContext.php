@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
@@ -32,12 +34,6 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 final class ManagingProductsContext implements Context
 {
     /**
@@ -254,11 +250,12 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should see the product :productName in the list
      * @Then the product :productName should appear in the store
      * @Then the product :productName should be in the shop
      * @Then this product should still be named :productName
      */
-    public function theProductShouldAppearInTheShop($productName)
+    public function theProductShouldAppearInTheShop(string $productName): void
     {
         $this->iWantToBrowseProducts();
 
@@ -267,6 +264,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Given I am browsing products
+     * @When I browse products
      * @When I want to browse products
      */
     public function iWantToBrowseProducts()
@@ -288,6 +286,22 @@ final class ManagingProductsContext implements Context
     public function iFilterThemByTaxon($taxonName)
     {
         $this->indexPage->filterByTaxon($taxonName);
+    }
+
+    /**
+     * @When I check (also) the :productName product
+     */
+    public function iCheckTheProduct(string $productName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $productName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
     }
 
     /**
@@ -337,9 +351,10 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should see a single product in the list
      * @Then I should see :numberOfProducts products in the list
      */
-    public function iShouldSeeProductsInTheList($numberOfProducts)
+    public function iShouldSeeProductsInTheList(int $numberOfProducts = 1): void
     {
         Assert::same($this->indexPage->countItems(), (int) $numberOfProducts);
     }
@@ -395,6 +410,7 @@ final class ManagingProductsContext implements Context
 
         if ($product->isSimple()) {
             $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
             return;
         }
 
@@ -921,7 +937,6 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then I should be notified that I have to define the :attribute attribute in :language
-     *
      */
     public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn($attribute, $language)
     {

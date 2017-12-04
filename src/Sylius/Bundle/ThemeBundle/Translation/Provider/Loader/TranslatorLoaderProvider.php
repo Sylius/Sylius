@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Loader;
 
 use Symfony\Component\Translation\Loader\LoaderInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class TranslatorLoaderProvider implements TranslatorLoaderProviderInterface
 {
     /**
@@ -34,7 +33,7 @@ final class TranslatorLoaderProvider implements TranslatorLoaderProviderInterfac
     /**
      * {@inheritdoc}
      */
-    public function getLoaders()
+    public function getLoaders(): array
     {
         return $this->loaders;
     }

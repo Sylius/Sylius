@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ChannelBundle\Collector;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -19,9 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ChannelCollector extends DataCollector
 {
     /**
@@ -37,7 +36,7 @@ final class ChannelCollector extends DataCollector
     public function __construct(
         ChannelRepositoryInterface $channelRepository,
         ChannelContextInterface $channelContext,
-        $channelChangeSupport = false
+        bool $channelChangeSupport = false
     ) {
         $this->channelContext = $channelContext;
 
@@ -49,17 +48,17 @@ final class ChannelCollector extends DataCollector
     }
 
     /**
-     * @return ChannelInterface
+     * @return ChannelInterface|null
      */
-    public function getChannel()
+    public function getChannel(): ?ChannelInterface
     {
         return $this->data['channel'];
     }
 
     /**
-     * @return ChannelInterface[]
+     * @return iterable|ChannelInterface[]
      */
-    public function getChannels()
+    public function getChannels(): iterable
     {
         return $this->data['channels'];
     }
@@ -67,7 +66,7 @@ final class ChannelCollector extends DataCollector
     /**
      * @return bool
      */
-    public function isChannelChangeSupported()
+    public function isChannelChangeSupported(): bool
     {
         return $this->data['channel_change_support'];
     }
@@ -75,7 +74,7 @@ final class ChannelCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
+    public function collect(Request $request, Response $response, \Exception $exception = null): void
     {
         try {
             $this->data['channel'] = $this->channelContext->getChannel();
@@ -86,7 +85,7 @@ final class ChannelCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius.channel_collector';
     }

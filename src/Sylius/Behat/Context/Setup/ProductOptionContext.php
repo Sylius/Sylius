@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -20,9 +22,6 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductOptionContext implements Context
 {
     /**
@@ -72,7 +71,7 @@ final class ProductOptionContext implements Context
     }
 
     /**
-     * @Given the store has a product option :name
+     * @Given the store has (also) a product option :name
      * @Given the store has a product option :name with a code :code
      */
     public function theStoreHasAProductOptionWithACode($name, $code = null)
@@ -115,7 +114,7 @@ final class ProductOptionContext implements Context
         $productOption = $this->productOptionFactory->createNew();
         $productOption->setName($name);
         $productOption->setCode($code ?: StringInflector::nameToCode($name));
-        $productOption->setPosition($position);
+        $productOption->setPosition((null === $position) ? null : (int) $position);
 
         $this->sharedStorage->set('product_option', $productOption);
         $this->productOptionRepository->add($productOption);

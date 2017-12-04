@@ -10,6 +10,9 @@ imports:
     - { resource: "parameters.yml" }
     - { resource: "security.yml" }
 
+parameters:
+    locale: en_US
+
 framework:
     translator: { fallbacks: ["%locale%", "en"] }
     secret: "%secret%"
@@ -21,7 +24,6 @@ framework:
     validation: { enable_annotations: true }
     templating: { engines: ["twig"] }
     default_locale: "%locale%"
-    trusted_proxies: ~
     session:
         handler_id: ~
 
@@ -57,5 +59,5 @@ fos_rest:
         empty_content: 204
     format_listener:
         rules:
-            - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+            - { path: '^/api/.*', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
             - { path: '^/', stop: true }

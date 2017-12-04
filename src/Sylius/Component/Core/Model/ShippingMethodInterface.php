@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -17,23 +19,20 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface as BaseShippingMetho
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ShippingMethodInterface extends BaseShippingMethodInterface, TaxableInterface, ChannelsAwareInterface
 {
     /**
-     * @return ZoneInterface
+     * @return ZoneInterface|null
      */
-    public function getZone();
+    public function getZone(): ?ZoneInterface;
 
     /**
      * @param ZoneInterface|null $zone
      */
-    public function setZone(ZoneInterface $zone = null);
+    public function setZone(?ZoneInterface $zone): void;
 
     /**
      * @param TaxCategoryInterface|null $category
      */
-    public function setTaxCategory(TaxCategoryInterface $category = null);
+    public function setTaxCategory(?TaxCategoryInterface $category): void;
 }

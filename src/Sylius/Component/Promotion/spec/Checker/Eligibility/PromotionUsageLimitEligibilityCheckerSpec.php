@@ -9,25 +9,18 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
-use Sylius\Component\Promotion\Checker\Eligibility\PromotionUsageLimitEligibilityChecker;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PromotionUsageLimitEligibilityCheckerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PromotionUsageLimitEligibilityChecker::class);
-    }
-
-    function it_implements_a_promotion_eligibility_checker_interface()
+    function it_implements_a_promotion_eligibility_checker_interface(): void
     {
         $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }
@@ -35,7 +28,7 @@ final class PromotionUsageLimitEligibilityCheckerSpec extends ObjectBehavior
     function it_returns_true_if_promotion_has_no_usage_limit(
         PromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $promotion->getUsageLimit()->willReturn(null);
 
         $this->isEligible($promotionSubject, $promotion)->shouldReturn(true);
@@ -44,7 +37,7 @@ final class PromotionUsageLimitEligibilityCheckerSpec extends ObjectBehavior
     function it_returns_true_if_usage_limit_has_not_been_exceeded(
         PromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $promotion->getUsageLimit()->willReturn(10);
         $promotion->getUsed()->willReturn(5);
 
@@ -54,7 +47,7 @@ final class PromotionUsageLimitEligibilityCheckerSpec extends ObjectBehavior
     function it_returns_false_if_usage_limit_has_been_exceeded(
         PromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion
-    ) {
+    ): void {
         $promotion->getUsageLimit()->willReturn(10);
         $promotion->getUsed()->willReturn(15);
 

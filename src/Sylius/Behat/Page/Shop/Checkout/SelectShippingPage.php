@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterface
 {
     /**
@@ -182,7 +181,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
             'shipping_method_fee' => '.item:contains("%shipping_method%") .fee',
             'shipping_method_select' => '.item:contains("%shipping_method%") > .field > .ui.radio.checkbox',
             'shipping_method_option' => '.item:contains("%shipping_method%") input',
-            'warning_no_shipping_methods' => '#sylius-order-cannot-be-shipped'
+            'warning_no_shipping_methods' => '#sylius-order-cannot-be-shipped',
         ]);
     }
 }

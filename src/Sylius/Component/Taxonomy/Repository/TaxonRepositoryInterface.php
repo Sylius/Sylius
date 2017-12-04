@@ -9,32 +9,28 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Taxonomy\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface TaxonRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param string $parentCode
-     * @param string $locale
+     * @param string|null $locale
      *
-     * @return TaxonInterface[]
+     * @return array|TaxonInterface[]
      */
-    public function findChildren($parentCode, $locale);
+    public function findChildren(string $parentCode, ?string $locale = null): array;
 
     /**
-     * @return TaxonInterface[]
+     * @return array|TaxonInterface[]
      */
-    public function findRootNodes();
+    public function findRootNodes(): array;
 
     /**
      * @param string $slug
@@ -42,26 +38,26 @@ interface TaxonRepositoryInterface extends RepositoryInterface
      *
      * @return TaxonInterface|null
      */
-    public function findOneBySlug($slug, $locale);
+    public function findOneBySlug(string $slug, string $locale): ?TaxonInterface;
 
     /**
      * @param string $name
      * @param string $locale
      *
-     * @return TaxonInterface[]
+     * @return array|TaxonInterface[]
      */
-    public function findByName($name, $locale);
+    public function findByName(string $name, string $locale): array;
 
     /**
      * @param string $phrase
-     * @param string $locale
+     * @param string|null $locale
      *
-     * @return TaxonInterface[]
+     * @return array|TaxonInterface[]
      */
-    public function findByNamePart($phrase, $locale);
+    public function findByNamePart(string $phrase, ?string $locale = null): array;
 
     /**
      * @return QueryBuilder
      */
-    public function createListQueryBuilder();
+    public function createListQueryBuilder(): QueryBuilder;
 }

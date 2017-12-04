@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Currency\Context;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -17,9 +19,6 @@ use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class ChannelAwareCurrencyContext implements CurrencyContextInterface
 {
     /**
@@ -36,7 +35,7 @@ final class ChannelAwareCurrencyContext implements CurrencyContextInterface
      * @param CurrencyContextInterface $currencyContext
      * @param ChannelContextInterface $channelContext
      */
-    public function __construct(CurrencyContextInterface $currencyContext, ChannelContextInterface$channelContext)
+    public function __construct(CurrencyContextInterface $currencyContext, ChannelContextInterface $channelContext)
     {
         $this->currencyContext = $currencyContext;
         $this->channelContext = $channelContext;
@@ -45,7 +44,7 @@ final class ChannelAwareCurrencyContext implements CurrencyContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrencyCode()
+    public function getCurrencyCode(): string
     {
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
@@ -69,7 +68,7 @@ final class ChannelAwareCurrencyContext implements CurrencyContextInterface
      *
      * @return bool
      */
-    private function isAvailableCurrency($currencyCode, ChannelInterface $channel)
+    private function isAvailableCurrency(string $currencyCode, ChannelInterface $channel): bool
     {
         $availableCurrencies = array_map(
             function (CurrencyInterface $currency) {

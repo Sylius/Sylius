@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\DBAL\LockMode;
@@ -19,9 +21,6 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class SimpleProductLockingListener
 {
     /**
@@ -46,8 +45,10 @@ final class SimpleProductLockingListener
 
     /**
      * @param GenericEvent $event
+     *
+     * @throws \InvalidArgumentException
      */
-    public function lock(GenericEvent $event)
+    public function lock(GenericEvent $event): void
     {
         $product = $event->getSubject();
 

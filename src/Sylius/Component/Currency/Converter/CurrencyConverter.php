@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Currency\Converter;
 
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class CurrencyConverter implements CurrencyConverterInterface
 {
     /**
@@ -25,7 +24,7 @@ final class CurrencyConverter implements CurrencyConverterInterface
     private $exchangeRateRepository;
 
     /**
-     * @var array
+     * @var array|ExchangeRateInterface[]
      */
     private $cache;
 
@@ -40,13 +39,13 @@ final class CurrencyConverter implements CurrencyConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function convert($amount, $sourceCurrencyCode, $targetCurrencyCode)
+    public function convert(int $amount, string $sourceCurrencyCode, string $targetCurrencyCode): int
     {
         if ($sourceCurrencyCode === $targetCurrencyCode) {
             return $amount;
         }
 
-        $exchangeRate = $this->getExchangeRate($sourceCurrencyCode, $targetCurrencyCode);
+        $exchangeRate = $this->findExchangeRate($sourceCurrencyCode, $targetCurrencyCode);
 
         if (null === $exchangeRate) {
             return $amount;
@@ -63,9 +62,9 @@ final class CurrencyConverter implements CurrencyConverterInterface
      * @param string $sourceCode
      * @param string $targetCode
      *
-     * @return ExchangeRateInterface
+     * @return ExchangeRateInterface|null
      */
-    private function getExchangeRate($sourceCode, $targetCode)
+    private function findExchangeRate(string $sourceCode, string $targetCode): ?ExchangeRateInterface
     {
         $sourceTargetIndex = $this->createIndex($sourceCode, $targetCode);
 
@@ -83,12 +82,12 @@ final class CurrencyConverter implements CurrencyConverterInterface
     }
 
     /**
-     * @param $prefix
-     * @param $suffix
+     * @param string $prefix
+     * @param string $suffix
      *
      * @return string
      */
-    private function createIndex($prefix, $suffix)
+    private function createIndex(string $prefix, string $suffix): string
     {
         return sprintf('%s-%s', $prefix, $suffix);
     }

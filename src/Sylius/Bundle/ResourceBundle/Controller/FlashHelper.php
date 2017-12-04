@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
+use Doctrine\Common\Inflector\Inflector;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class FlashHelper implements FlashHelperInterface
 {
     /**
@@ -43,7 +42,7 @@ final class FlashHelper implements FlashHelperInterface
      * @param TranslatorInterface $translator
      * @param string $defaultLocale
      */
-    public function __construct(SessionInterface $session, TranslatorInterface $translator, $defaultLocale)
+    public function __construct(SessionInterface $session, TranslatorInterface $translator, string $defaultLocale)
     {
         $this->session = $session;
         $this->translator = $translator;
@@ -53,15 +52,18 @@ final class FlashHelper implements FlashHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function addSuccessFlash(RequestConfiguration $requestConfiguration, $actionName, ResourceInterface $resource = null)
-    {
+    public function addSuccessFlash(
+        RequestConfiguration $requestConfiguration,
+        string $actionName,
+        ?ResourceInterface $resource = null
+    ): void {
         $this->addFlashWithType($requestConfiguration, $actionName, 'success');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addErrorFlash(RequestConfiguration $requestConfiguration, $actionName)
+    public function addErrorFlash(RequestConfiguration $requestConfiguration, string $actionName): void
     {
         $this->addFlashWithType($requestConfiguration, $actionName, 'error');
     }
@@ -69,7 +71,7 @@ final class FlashHelper implements FlashHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function addFlashFromEvent(RequestConfiguration $requestConfiguration, ResourceControllerEvent $event)
+    public function addFlashFromEvent(RequestConfiguration $requestConfiguration, ResourceControllerEvent $event): void
     {
         $this->addFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParameters());
     }
@@ -79,14 +81,14 @@ final class FlashHelper implements FlashHelperInterface
      * @param string $actionName
      * @param string $type
      */
-    private function addFlashWithType(RequestConfiguration $requestConfiguration, $actionName, $type)
+    private function addFlashWithType(RequestConfiguration $requestConfiguration, string $actionName, string $type): void
     {
         $metadata = $requestConfiguration->getMetadata();
         $metadataName = ucfirst($metadata->getHumanizedName());
-        $parameters = ['%resource%' => $metadataName];
+        $parameters = $this->getParametersWithName($metadataName, $actionName);
 
-        $message = $requestConfiguration->getFlashMessage($actionName);
-        if (false === $message) {
+        $message = (string) $requestConfiguration->getFlashMessage($actionName);
+        if (empty($message)) {
             return;
         }
 
@@ -114,7 +116,7 @@ final class FlashHelper implements FlashHelperInterface
      * @param string $message
      * @param array $parameters
      */
-    private function addFlash($type, $message, array $parameters = [])
+    private function addFlash(string $type, string $message, array $parameters = []): void
     {
         if (!empty($parameters)) {
             $message = $this->prepareMessage($message, $parameters);
@@ -129,7 +131,7 @@ final class FlashHelper implements FlashHelperInterface
      *
      * @return array
      */
-    private function prepareMessage($message, array $parameters)
+    private function prepareMessage(string $message, array $parameters): array
     {
         return [
             'message' => $message,
@@ -142,7 +144,7 @@ final class FlashHelper implements FlashHelperInterface
      *
      * @return string
      */
-    private function getResourceMessage($actionName)
+    private function getResourceMessage(string $actionName): string
     {
         return sprintf('sylius.resource.%s', $actionName);
     }
@@ -154,7 +156,7 @@ final class FlashHelper implements FlashHelperInterface
      *
      * @return bool
      */
-    private function isTranslationDefined($message, $locale, array $parameters)
+    private function isTranslationDefined(string $message, string $locale, array $parameters): bool
     {
         if ($this->translator instanceof TranslatorBagInterface) {
             $defaultCatalogue = $this->translator->getCatalogue($locale);
@@ -163,5 +165,20 @@ final class FlashHelper implements FlashHelperInterface
         }
 
         return $message !== $this->translator->trans($message, $parameters, 'flashes');
+    }
+
+    /**
+     * @param string $metadataName
+     * @param string $actionName
+     *
+     * @return array
+     */
+    private function getParametersWithName(string $metadataName, string $actionName): array
+    {
+        if (stripos($actionName, 'bulk') !== false) {
+            return ['%resources%' => ucfirst(Inflector::pluralize($metadataName))];
+        }
+
+        return ['%resource%' => ucfirst($metadataName)];
     }
 }

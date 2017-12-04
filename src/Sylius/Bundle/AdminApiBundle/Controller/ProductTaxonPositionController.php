@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\AdminApiBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,9 +22,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProductTaxonPositionController
 {
     /**
@@ -50,9 +49,9 @@ final class ProductTaxonPositionController
     /**
      * @param Request $request
      *
-     * @return Response
+     * @return JsonResponse
      */
-    public function updatePositionsAction(Request $request)
+    public function updatePositionsAction(Request $request): JsonResponse
     {
         $productsPositions = $request->request->get('productsPositions');
 

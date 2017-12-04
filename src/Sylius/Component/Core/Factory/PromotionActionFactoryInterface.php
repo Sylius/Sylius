@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface PromotionActionFactoryInterface extends FactoryInterface
 {
     /**
@@ -25,7 +24,7 @@ interface PromotionActionFactoryInterface extends FactoryInterface
      *
      * @return PromotionActionInterface
      */
-    public function createFixedDiscount($amount, $channelCode);
+    public function createFixedDiscount(int $amount, string $channelCode): PromotionActionInterface;
 
     /**
      * @param int $amount
@@ -33,14 +32,14 @@ interface PromotionActionFactoryInterface extends FactoryInterface
      *
      * @return PromotionActionInterface
      */
-    public function createUnitFixedDiscount($amount, $channelCode);
+    public function createUnitFixedDiscount(int $amount, string $channelCode): PromotionActionInterface;
 
     /**
      * @param float $percentage
      *
      * @return PromotionActionInterface
      */
-    public function createPercentageDiscount($percentage);
+    public function createPercentageDiscount(float $percentage): PromotionActionInterface;
 
     /**
      * @param float $percentage
@@ -48,12 +47,12 @@ interface PromotionActionFactoryInterface extends FactoryInterface
      *
      * @return PromotionActionInterface
      */
-    public function createUnitPercentageDiscount($percentage, $channelCode);
+    public function createUnitPercentageDiscount(float $percentage, string $channelCode): PromotionActionInterface;
 
     /**
      * @param float $percentage
      *
      * @return PromotionActionInterface
      */
-    public function createShippingPercentageDiscount($percentage);
+    public function createShippingPercentageDiscount(float $percentage): PromotionActionInterface;
 }

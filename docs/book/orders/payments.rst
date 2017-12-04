@@ -90,11 +90,11 @@ As usually, use a factory to create a new PaymentMethod and give it a unique cod
 
     $this->container->get('sylius.repository.payment_method')->add($paymentMethod);
 
-In order to have your new payment method available in the checkout remember to **add it to your desired channels**:
+In order to have your new payment method available in the checkout remember to **add your desired channel to the payment method**:
 
 .. code-block:: php
 
-    $channel->addPaymentMethod($paymentMethod);
+    $paymentMethod->addChannel($channel)
 
 Payment Gateway configuration
 -----------------------------
@@ -166,5 +166,5 @@ There are two events that are triggered on the payment complete action:
 Learn more
 ----------
 
-* :doc:`Payment - Component Documentation </components/Payment/index>`
+* :doc:`Payment - Component Documentation </components_and_bundles/components/Payment/index>`
 * `Payum - Project Documentation <https://github.com/Payum/Payum/blob/master/src/Payum/Core/Resources/docs/index.md>`_

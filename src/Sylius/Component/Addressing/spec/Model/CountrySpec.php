@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\Collection;
@@ -19,72 +21,67 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 final class CountrySpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(Country::class);
     }
 
-    function it_implements_Sylius_country_interface()
+    function it_implements_Sylius_country_interface(): void
     {
         $this->shouldImplement(CountryInterface::class);
     }
 
-    function it_is_toggleable()
+    function it_is_toggleable(): void
     {
         $this->shouldImplement(ToggleableInterface::class);
     }
 
-    function it_implements_code_aware_interface()
+    function it_implements_code_aware_interface(): void
     {
         $this->shouldImplement(CodeAwareInterface::class);
     }
 
-    function it_has_no_id_by_default()
+    function it_has_no_id_by_default(): void
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_returns_name_when_converted_to_string()
+    function it_returns_name_when_converted_to_string(): void
     {
         $this->setCode('VE');
         $this->__toString()->shouldReturn('Venezuela');
     }
 
-    function it_has_no_code_by_default()
+    function it_has_no_code_by_default(): void
     {
         $this->getCode()->shouldReturn(null);
     }
 
-    function its_code_is_mutable()
+    function its_code_is_mutable(): void
     {
         $this->setCode('MX');
         $this->getCode()->shouldReturn('MX');
     }
 
-    function it_initializes_provinces_collection_by_default()
+    function it_initializes_provinces_collection_by_default(): void
     {
         $this->getProvinces()->shouldHaveType(Collection::class);
     }
 
-    function it_has_no_provinces_by_default()
+    function it_has_no_provinces_by_default(): void
     {
         $this->hasProvinces()->shouldReturn(false);
     }
 
-    function it_adds_province(ProvinceInterface $province)
+    function it_adds_province(ProvinceInterface $province): void
     {
         $this->addProvince($province);
         $this->hasProvince($province)->shouldReturn(true);
     }
 
-    function it_removes_province(ProvinceInterface $province)
+    function it_removes_province(ProvinceInterface $province): void
     {
         $this->addProvince($province);
         $this->hasProvince($province)->shouldReturn(true);
@@ -93,13 +90,13 @@ final class CountrySpec extends ObjectBehavior
         $this->hasProvince($province)->shouldReturn(false);
     }
 
-    function it_sets_country_on_added_province(ProvinceInterface $province)
+    function it_sets_country_on_added_province(ProvinceInterface $province): void
     {
         $province->setCountry($this)->shouldBeCalled();
         $this->addProvince($province);
     }
 
-    function it_unsets_country_on_removed_province(ProvinceInterface $province)
+    function it_unsets_country_on_removed_province(ProvinceInterface $province): void
     {
         $this->addProvince($province);
         $this->hasProvince($province)->shouldReturn(true);
@@ -109,18 +106,18 @@ final class CountrySpec extends ObjectBehavior
         $this->removeProvince($province);
     }
 
-    function it_is_enabled_by_default()
+    function it_is_enabled_by_default(): void
     {
         $this->isEnabled()->shouldReturn(true);
     }
 
-    function it_can_be_disabled()
+    function it_can_be_disabled(): void
     {
         $this->disable();
         $this->isEnabled()->shouldReturn(false);
     }
 
-    function it_can_be_enabled()
+    function it_can_be_enabled(): void
     {
         $this->disable();
         $this->isEnabled()->shouldReturn(false);
@@ -129,7 +126,7 @@ final class CountrySpec extends ObjectBehavior
         $this->isEnabled()->shouldReturn(true);
     }
 
-    function it_can_set_enabled_value()
+    function it_can_set_enabled_value(): void
     {
         $this->setEnabled(false);
         $this->isEnabled()->shouldReturn(false);

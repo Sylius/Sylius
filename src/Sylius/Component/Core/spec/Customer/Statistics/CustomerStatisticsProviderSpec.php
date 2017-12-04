@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Customer\Statistics;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Customer\Statistics\CustomerStatistics;
-use Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProvider;
 use Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProviderInterface;
 use Sylius\Component\Core\Customer\Statistics\PerChannelCustomerStatistics;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -22,22 +23,14 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class CustomerStatisticsProviderSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, RepositoryInterface $channelRepository)
+    function let(OrderRepositoryInterface $orderRepository, RepositoryInterface $channelRepository): void
     {
         $this->beConstructedWith($orderRepository, $channelRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CustomerStatisticsProvider::class);
-    }
-
-    function it_implements_customer_statistics_provider_interface()
+    function it_implements_customer_statistics_provider_interface(): void
     {
         $this->shouldImplement(CustomerStatisticsProviderInterface::class);
     }
@@ -47,7 +40,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         RepositoryInterface $channelRepository,
         ChannelInterface $channel,
         CustomerInterface $customer
-    ) {
+    ): void {
         $expectedStatistics = new CustomerStatistics([]);
 
         $channelRepository->findAll()->willReturn([$channel]);
@@ -64,7 +57,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         OrderInterface $firstOrder,
         OrderInterface $secondOrder,
         CustomerInterface $customer
-    ) {
+    ): void {
         $firstOrder->getChannel()->willReturn($channel);
         $secondOrder->getChannel()->willReturn($channel);
 
@@ -72,7 +65,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         $secondOrder->getTotal()->willReturn(23000);
 
         $expectedStatistics = new CustomerStatistics([
-            new PerChannelCustomerStatistics(2, 33000, $channel->getWrappedObject())
+            new PerChannelCustomerStatistics(2, 33000, $channel->getWrappedObject()),
         ]);
 
         $channelRepository->findAll()->willReturn([$channel, $channelWithoutOrders]);
@@ -92,7 +85,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         OrderInterface $fourthOrder,
         OrderInterface $fifthOrder,
         CustomerInterface $customer
-    ) {
+    ): void {
         $allOrders = [$firstOrder, $secondOrder, $thirdOrder, $fourthOrder, $fifthOrder];
 
         $firstOrder->getChannel()->willReturn($firstChannel);
@@ -111,7 +104,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
 
         $expectedStatistics = new CustomerStatistics([
             new PerChannelCustomerStatistics(2, 33000, $firstChannel->getWrappedObject()),
-            new PerChannelCustomerStatistics(3, 11000, $secondChannel->getWrappedObject())
+            new PerChannelCustomerStatistics(3, 11000, $secondChannel->getWrappedObject()),
         ]);
 
         $channelRepository->findAll()->willReturn([$firstChannel, $secondChannel]);

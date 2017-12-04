@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout;
 
 use Payum\Core\Action\ActionInterface;
@@ -29,9 +31,8 @@ final class ConvertPaymentAction implements ActionInterface
     /**
      * @param InvoiceNumberGeneratorInterface $invoiceNumberGenerator
      */
-    public function __construct(
-        InvoiceNumberGeneratorInterface $invoiceNumberGenerator
-    ) {
+    public function __construct(InvoiceNumberGeneratorInterface $invoiceNumberGenerator)
+    {
         $this->invoiceNumberGenerator = $invoiceNumberGenerator;
     }
 
@@ -40,7 +41,7 @@ final class ConvertPaymentAction implements ActionInterface
      *
      * @param Convert $request
      */
-    public function execute($request)
+    public function execute($request): void
     {
         RequestNotSupportedException::assertSupports($this, $request);
 
@@ -57,33 +58,33 @@ final class ConvertPaymentAction implements ActionInterface
 
         $m = 0;
         foreach ($order->getItems() as $item) {
-            $details['L_PAYMENTREQUEST_0_NAME'.$m] = $item->getVariant()->getProduct()->getName();
-            $details['L_PAYMENTREQUEST_0_AMT'.$m] = $this->formatPrice($item->getDiscountedUnitPrice());
-            $details['L_PAYMENTREQUEST_0_QTY'.$m] = $item->getQuantity();
+            $details['L_PAYMENTREQUEST_0_NAME' . $m] = $item->getVariant()->getProduct()->getName();
+            $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice($item->getDiscountedUnitPrice());
+            $details['L_PAYMENTREQUEST_0_QTY' . $m] = $item->getQuantity();
 
             ++$m;
         }
 
         if (0 !== $taxTotal = $order->getAdjustmentsTotalRecursively(AdjustmentInterface::TAX_ADJUSTMENT)) {
-            $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Tax Total';
-            $details['L_PAYMENTREQUEST_0_AMT'.$m] = $this->formatPrice($taxTotal);
-            $details['L_PAYMENTREQUEST_0_QTY'.$m] = 1;
+            $details['L_PAYMENTREQUEST_0_NAME' . $m] = 'Tax Total';
+            $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice($taxTotal);
+            $details['L_PAYMENTREQUEST_0_QTY' . $m] = 1;
 
             ++$m;
         }
 
         if (0 !== $promotionTotal = $order->getOrderPromotionTotal()) {
-            $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Discount';
-            $details['L_PAYMENTREQUEST_0_AMT'.$m] = $this->formatPrice($promotionTotal);
-            $details['L_PAYMENTREQUEST_0_QTY'.$m] = 1;
+            $details['L_PAYMENTREQUEST_0_NAME' . $m] = 'Discount';
+            $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice($promotionTotal);
+            $details['L_PAYMENTREQUEST_0_QTY' . $m] = 1;
 
             ++$m;
         }
 
         if (0 !== $shippingTotal = $order->getShippingTotal()) {
-            $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Shipping Total';
-            $details['L_PAYMENTREQUEST_0_AMT'.$m] = $this->formatPrice($shippingTotal);
-            $details['L_PAYMENTREQUEST_0_QTY'.$m] = 1;
+            $details['L_PAYMENTREQUEST_0_NAME' . $m] = 'Shipping Total';
+            $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice($shippingTotal);
+            $details['L_PAYMENTREQUEST_0_QTY' . $m] = 1;
         }
 
         $request->setResult($details);
@@ -92,7 +93,7 @@ final class ConvertPaymentAction implements ActionInterface
     /**
      * {@inheritdoc}
      */
-    public function supports($request)
+    public function supports($request): bool
     {
         return
             $request instanceof Convert &&
@@ -103,11 +104,10 @@ final class ConvertPaymentAction implements ActionInterface
 
     /**
      * @param int $price
-     * @param string $currencyCode
      *
      * @return float
      */
-    private function formatPrice($price)
+    private function formatPrice(int $price): float
     {
         return round($price / 100, 2);
     }

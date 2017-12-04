@@ -3,4 +3,5 @@
 
 sylius:
     payment:
+        cancelled: 'Uplata je otkazana.'
         refunded: 'Uplata je uspešno refundirana.'

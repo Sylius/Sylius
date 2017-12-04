@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\FixturesBundle\Fixture;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 final class FixtureNotFoundException extends \InvalidArgumentException
 {
     /**
      * @param string $name
      * @param \Exception|null $previous
      */
-    public function __construct($name, \Exception $previous = null)
+    public function __construct(string $name, ?\Exception $previous = null)
     {
         parent::__construct(sprintf('Fixture with name "%s" could not be found!', $name), 0, $previous);
     }

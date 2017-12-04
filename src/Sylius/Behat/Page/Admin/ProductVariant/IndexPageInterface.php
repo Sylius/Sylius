@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Page\Admin\ProductVariant;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface IndexPageInterface extends BaseIndexPageInterface
 {
     /**
@@ -35,7 +34,6 @@ interface IndexPageInterface extends BaseIndexPageInterface
 
     /**
      * @param string $name
-     *
      * @param int $position
      */
     public function setPosition($name, $position);

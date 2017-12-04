@@ -9,24 +9,24 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Promotion\Generator;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class PromotionCouponGeneratorInstruction implements PromotionCouponGeneratorInstructionInterface
 {
     /**
      * @var int
      */
     private $amount = 5;
+
     /**
      * @var int
      */
     private $codeLength = 6;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $expiresAt;
 
@@ -38,7 +38,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function getAmount()
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
@@ -46,7 +46,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function setAmount($amount)
+    public function setAmount(?int $amount): void
     {
         $this->amount = $amount;
     }
@@ -54,7 +54,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function getCodeLength()
+    public function getCodeLength(): ?int
     {
         return $this->codeLength;
     }
@@ -62,7 +62,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function setCodeLength($codeLength)
+    public function setCodeLength(?int $codeLength): void
     {
         $this->codeLength = $codeLength;
     }
@@ -70,7 +70,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function getExpiresAt()
+    public function getExpiresAt(): ?\DateTimeInterface
     {
         return $this->expiresAt;
     }
@@ -78,7 +78,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTime $expiresAt = null)
+    public function setExpiresAt(?\DateTimeInterface $expiresAt): void
     {
         $this->expiresAt = $expiresAt;
     }
@@ -86,7 +86,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function getUsageLimit()
+    public function getUsageLimit(): ?int
     {
         return $this->usageLimit;
     }
@@ -94,7 +94,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /**
      * {@inheritdoc}
      */
-    public function setUsageLimit($usageLimit)
+    public function setUsageLimit(int $usageLimit): void
     {
         $this->usageLimit = $usageLimit;
     }

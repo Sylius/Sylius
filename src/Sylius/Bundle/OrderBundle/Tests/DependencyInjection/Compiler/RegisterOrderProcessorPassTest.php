@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\OrderBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
@@ -20,15 +22,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
-final class RegisterProcessorPassTest extends AbstractCompilerPassTestCase
+final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
 {
     /**
      * @test
      */
-    public function it_adds_method_call_to_composite_order_processor_if_exist()
+    public function it_adds_method_call_to_composite_order_processor_if_exist(): void
     {
         $compositeOrderProcessorDefinition = new Definition(CompositeOrderProcessor::class);
         $this->setDefinition('sylius.order_processing.order_processor', $compositeOrderProcessorDefinition);
@@ -44,7 +43,7 @@ final class RegisterProcessorPassTest extends AbstractCompilerPassTestCase
             'sylius.order_processing.order_processor',
             'addProcessor', [
                 new Reference('sylius.order_processing.order_adjustments_clearer'),
-                0
+                0,
             ]
         );
     }
@@ -52,7 +51,7 @@ final class RegisterProcessorPassTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function it_adds_method_call_to_composite_order_processor_with_custom_priority()
+    public function it_adds_method_call_to_composite_order_processor_with_custom_priority(): void
     {
         $compositeOrderProcessorDefinition = new Definition(CompositeOrderProcessor::class);
         $this->setDefinition('sylius.order_processing.order_processor', $compositeOrderProcessorDefinition);
@@ -68,7 +67,7 @@ final class RegisterProcessorPassTest extends AbstractCompilerPassTestCase
             'sylius.order_processing.order_processor',
             'addProcessor', [
                 new Reference('sylius.order_processing.order_adjustments_clearer'),
-                10
+                10,
             ]
         );
     }
@@ -76,7 +75,7 @@ final class RegisterProcessorPassTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function it_does_not_add_method_call_if_there_are_no_tagged_processors()
+    public function it_does_not_add_method_call_if_there_are_no_tagged_processors(): void
     {
         $compositeOrderProcessorDefinition = new Definition(CompositeOrderProcessor::class);
         $this->setDefinition('sylius.order_processing.order_processor', $compositeOrderProcessorDefinition);
@@ -91,7 +90,7 @@ final class RegisterProcessorPassTest extends AbstractCompilerPassTestCase
      * @param string $serviceId
      * @param string $method
      */
-    private function assertContainerBuilderDoesNotHaveServiceDefinitionWithMethodCall($serviceId, $method)
+    private function assertContainerBuilderDoesNotHaveServiceDefinitionWithMethodCall(string $serviceId, string $method): void
     {
         $definition = $this->container->findDefinition($serviceId);
 
@@ -104,7 +103,7 @@ final class RegisterProcessorPassTest extends AbstractCompilerPassTestCase
     /**
      * {@inheritdoc}
      */
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new RegisterProcessorsPass());
     }

@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Ця позиція була додана в кошик'
+        cannot_modify: 'Замовлення вже надіслано для кошика, який ви намагалися змінити.'
+        remove_item: 'Товар був видалений з кошика'
+        save: 'Кошик був успішно оновлений'

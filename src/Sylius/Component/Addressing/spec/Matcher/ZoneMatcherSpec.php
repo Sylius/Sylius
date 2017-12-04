@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Addressing\Matcher;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Matcher\ZoneMatcher;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -21,29 +23,19 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ZoneMatcherSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    function let(RepositoryInterface $repository): void
     {
         $this->beConstructedWith($repository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ZoneMatcher::class);
-    }
-
-    function it_implements_zone_matcher_interface()
+    function it_implements_zone_matcher_interface(): void
     {
         $this->shouldImplement(ZoneMatcherInterface::class);
     }
 
-    function it_returns_null_if_there_are_no_zones(RepositoryInterface $repository, AddressInterface $address)
+    function it_returns_null_if_there_are_no_zones(RepositoryInterface $repository, AddressInterface $address): void
     {
         $repository->findAll()->willReturn([]);
         $this->match($address)->shouldReturn(null);
@@ -55,14 +47,14 @@ final class ZoneMatcherSpec extends ObjectBehavior
         AddressInterface $address,
         ZoneMemberInterface $memberProvince,
         ZoneInterface $zone
-    ) {
+    ): void {
         $province->getCode()->willReturn('DU');
         $repository->findAll()->willReturn([$zone]);
         $address->getProvinceCode()->willReturn('DU');
         $memberProvince->getCode()->willReturn('DU');
 
         $zone->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
-        $zone->getMembers()->willReturn([$memberProvince]);
+        $zone->getMembers()->willReturn(new ArrayCollection([$memberProvince->getWrappedObject()]));
         $memberProvince->getBelongsTo()->willReturn($zone);
 
         $this->match($address)->shouldReturn($zone);
@@ -74,13 +66,13 @@ final class ZoneMatcherSpec extends ObjectBehavior
         AddressInterface $address,
         ZoneMemberInterface $memberProvince,
         ZoneInterface $zone
-    ) {
+    ): void {
         $repository->findBy(['scope' => ['shipping', 'all']])->shouldBeCalled()->willReturn([$zone]);
         $province->getCode()->willReturn('TX');
         $address->getProvinceCode()->willReturn('TX');
         $memberProvince->getCode()->willReturn('TX');
         $zone->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
-        $zone->getMembers()->willReturn([$memberProvince]);
+        $zone->getMembers()->willReturn(new ArrayCollection([$memberProvince->getWrappedObject()]));
         $memberProvince->getBelongsTo()->willReturn($zone);
 
         $this->match($address, 'shipping')->shouldReturn($zone);
@@ -92,13 +84,13 @@ final class ZoneMatcherSpec extends ObjectBehavior
         AddressInterface $address,
         ZoneMemberInterface $memberCountry,
         ZoneInterface $zone
-    ) {
+    ): void {
         $repository->findAll()->willReturn([$zone]);
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');
         $memberCountry->getCode()->willReturn('IE');
         $zone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
-        $zone->getMembers()->willReturn([$memberCountry]);
+        $zone->getMembers()->willReturn(new ArrayCollection([$memberCountry->getWrappedObject()]));
         $memberCountry->getBelongsTo()->willReturn($zone);
 
         $this->match($address)->shouldReturn($zone);
@@ -110,13 +102,13 @@ final class ZoneMatcherSpec extends ObjectBehavior
         AddressInterface $address,
         ZoneMemberInterface $memberCountry,
         ZoneInterface $zone
-    ) {
+    ): void {
         $repository->findBy(['scope' => ['shipping', 'all']])->willReturn([$zone]);
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');
         $memberCountry->getCode()->willReturn('IE');
         $zone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
-        $zone->getMembers()->willReturn([$memberCountry]);
+        $zone->getMembers()->willReturn(new ArrayCollection([$memberCountry->getWrappedObject()]));
         $memberCountry->getBelongsTo()->willReturn($zone);
 
         $this->match($address, 'shipping')->shouldReturn($zone);
@@ -130,16 +122,16 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneMemberInterface $memberZone,
         ZoneInterface $subZone,
         ZoneInterface $rootZone
-    ) {
+    ): void {
         $country->getCode()->willReturn('IE');
 
         $address->getCountryCode()->willReturn('IE');
         $memberCountry->getCode()->willReturn('IE');
-        $subZone->getMembers()->willReturn([$memberCountry]);
+        $subZone->getMembers()->willReturn(new ArrayCollection([$memberCountry->getWrappedObject()]));
         $subZone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
         $subZone->getCode()->willReturn('Ireland');
         $memberZone->getCode()->willReturn('Ireland');
-        $rootZone->getMembers()->willReturn([$memberZone]);
+        $rootZone->getMembers()->willReturn(new ArrayCollection([$memberZone->getWrappedObject()]));
         $rootZone->getType()->willReturn(ZoneInterface::TYPE_ZONE);
 
         $memberCountry->getBelongsTo()->willReturn($subZone);
@@ -158,17 +150,17 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneMemberInterface $memberZone,
         ZoneInterface $subZone,
         ZoneInterface $rootZone
-    ) {
+    ): void {
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');
 
         $memberCountry->getCode()->willReturn('IE');
-        $subZone->getMembers()->willReturn([$memberCountry]);
+        $subZone->getMembers()->willReturn(new ArrayCollection([$memberCountry->getWrappedObject()]));
         $subZone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
         $subZone->getCode()->willReturn('Ireland');
         $memberZone->getCode()->willReturn('Ireland');
 
-        $rootZone->getMembers()->willReturn([$memberZone]);
+        $rootZone->getMembers()->willReturn(new ArrayCollection([$memberZone->getWrappedObject()]));
         $rootZone->getType()->willReturn(ZoneInterface::TYPE_ZONE);
 
         $memberCountry->getBelongsTo()->willReturn($subZone);
@@ -188,7 +180,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneMemberInterface $memberProvince,
         ZoneInterface $zoneCountry,
         ZoneInterface $zoneProvince
-    ) {
+    ): void {
         $province->getCode()->willReturn('DU');
         $country->getCode()->willReturn('IE');
 
@@ -198,9 +190,9 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $memberCountry->getCode()->willReturn('IE');
         $memberProvince->getCode()->willReturn('DU');
 
-        $zoneProvince->getMembers()->willReturn([$memberProvince]);
+        $zoneProvince->getMembers()->willReturn(new ArrayCollection([$memberProvince->getWrappedObject()]));
         $zoneProvince->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
-        $zoneCountry->getMembers()->willReturn([$memberCountry]);
+        $zoneCountry->getMembers()->willReturn(new ArrayCollection([$memberCountry->getWrappedObject()]));
         $zoneCountry->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
 
         $repository->findAll()->willReturn([$zoneCountry, $zoneProvince]);
@@ -217,17 +209,17 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneMemberInterface $memberProvince,
         ZoneInterface $zoneCountry,
         ZoneInterface $zoneProvince
-    ) {
+    ): void {
         $address->getCountryCode()->willReturn('IE');
         $memberCountry->getCode()->willReturn('IE');
 
         $address->getProvinceCode()->willReturn('DU');
         $memberProvince->getCode()->willReturn('DU');
 
-        $zoneCountry->getMembers()->willReturn([$memberCountry]);
+        $zoneCountry->getMembers()->willReturn(new ArrayCollection([$memberCountry->getWrappedObject()]));
         $zoneCountry->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
 
-        $zoneProvince->getMembers()->willReturn([$memberProvince]);
+        $zoneProvince->getMembers()->willReturn(new ArrayCollection([$memberProvince->getWrappedObject()]));
         $zoneProvince->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
 
         $repository->findBy(['scope' => ['shipping', 'all']])->willReturn([$zoneCountry, $zoneProvince]);
@@ -246,7 +238,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneInterface $zoneProvince,
         ZoneInterface $zoneCountry,
         ZoneInterface $zoneZone
-    ) {
+    ): void {
         $repository->findAll()->willReturn([$zoneProvince, $zoneCountry, $zoneZone]);
 
         $address->getProvinceCode()->willReturn('TX');
@@ -254,19 +246,19 @@ final class ZoneMatcherSpec extends ObjectBehavior
 
         $memberProvince->getBelongsTo()->willReturn($zoneProvince);
         $zoneProvince->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
-        $zoneProvince->getMembers()->willReturn([$memberProvince]);
+        $zoneProvince->getMembers()->willReturn(new ArrayCollection([$memberProvince->getWrappedObject()]));
 
         $address->getCountryCode()->willReturn('US');
         $memberCountry->getCode()->willReturn('US');
 
         $zoneCountry->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
-        $zoneCountry->getMembers()->willReturn([$memberCountry]);
+        $zoneCountry->getMembers()->willReturn(new ArrayCollection([$memberCountry->getWrappedObject()]));
         $zoneCountry->getCode()->willReturn('USA');
         $memberCountry->getBelongsTo()->willReturn($zoneCountry);
 
         $memberZone->getCode()->willReturn('USA');
         $zoneZone->getType()->willReturn(ZoneInterface::TYPE_ZONE);
-        $zoneZone->getMembers()->willReturn([$memberZone]);
+        $zoneZone->getMembers()->willReturn(new ArrayCollection([$memberZone->getWrappedObject()]));
         $memberZone->getBelongsTo()->willReturn($zoneZone);
 
         $repository->findOneBy(['code' => 'USA'])->willReturn($zoneCountry);
@@ -279,14 +271,14 @@ final class ZoneMatcherSpec extends ObjectBehavior
         AddressInterface $address,
         ZoneMemberInterface $memberCountry,
         ZoneInterface $zoneCountry
-    ) {
+    ): void {
         $repository->findBy(['scope' => ['shipping', 'all']])->willReturn([$zoneCountry]);
 
         $address->getCountryCode()->willReturn('US');
 
         $memberCountry->getCode()->willReturn('US');
         $zoneCountry->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
-        $zoneCountry->getMembers()->willReturn([$memberCountry]);
+        $zoneCountry->getMembers()->willReturn(new ArrayCollection([$memberCountry->getWrappedObject()]));
         $memberCountry->getBelongsTo()->willReturn($zoneCountry);
 
         $this->matchAll($address, 'shipping')->shouldReturn([$zoneCountry]);

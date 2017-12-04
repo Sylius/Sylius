@@ -16,7 +16,6 @@ sylius:
         email:
             already_used: Diese E-Mail wird bereits verwendet, bitte loggen Sie sich ein oder benutzen Sie Passwort vergessen.
             max: E-Mail darf nicht länger als {{ limit }} Zeichen sein.
-            min: E-Mail muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie Ihre E-Mail-Adresse ein.
             invalid: Diese E-Mail Adresse ist ungültig.
             unique: Diese E-Mail-Adresse wird bereits verwendet.
@@ -28,4 +27,4 @@ sylius:
         name:
             max: Name der Kundengruppe darf nicht länger als {{ limit }} Zeichen sein.
             min: Name der Kundengruppe muss mindestens {{ limit }} Zeichen lang sein.
-            not_blank: Bitte geben Sie einen Namen der Kundengruppe an.
+            not_blank: Bitte geben Sie einen Namen für die Kundengruppe an.

@@ -4,6 +4,8 @@
 sylius:
     form:
         taxon:
+            description: Opis
             name: Ime
+            parent: Roditelj
         taxonomy:
             name: Ime

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Repository;
 
 use Doctrine\ORM\QueryBuilder;
@@ -17,9 +19,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProductRepositoryInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
     /**
@@ -28,7 +27,7 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder($locale, $taxonId = null);
+    public function createListQueryBuilder(string $locale, $taxonId = null): QueryBuilder;
 
     /**
      * @param ChannelInterface $channel
@@ -38,16 +37,16 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      *
      * @return QueryBuilder
      */
-    public function createShopListQueryBuilder(ChannelInterface $channel, TaxonInterface $taxon, $locale, array $sorting = []);
+    public function createShopListQueryBuilder(ChannelInterface $channel, TaxonInterface $taxon, string $locale, array $sorting = []): QueryBuilder;
 
     /**
      * @param ChannelInterface $channel
      * @param string $locale
      * @param int $count
      *
-     * @return ProductInterface[]
+     * @return array|ProductInterface[]
      */
-    public function findLatestByChannel(ChannelInterface $channel, $locale, $count);
+    public function findLatestByChannel(ChannelInterface $channel, string $locale, int $count): array;
 
     /**
      * @param ChannelInterface $channel
@@ -56,12 +55,12 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      *
      * @return ProductInterface|null
      */
-    public function findOneByChannelAndSlug(ChannelInterface $channel, $locale, $slug);
+    public function findOneByChannelAndSlug(ChannelInterface $channel, string $locale, string $slug): ?ProductInterface;
 
     /**
      * @param string $code
      *
      * @return ProductInterface|null
      */
-    public function findOneByCode($code);
+    public function findOneByCode(string $code): ?ProductInterface;
 }

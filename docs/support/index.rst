@@ -20,7 +20,7 @@ We have created following rooms so far:
 
 If you have any suggestions, please let us know on Slack!
 
-Slack requires inviting new members, but this can be done automatically, just go to `slackinvite.me/to/sylius-devs <https://slackinvite.me/to/sylius-devs>`_,
+Slack requires inviting new members, but this can be done automatically, just go to `sylius.org/slack <http://sylius.org/slack>`_,
 enter your email and you will get an invitation.
 If possible, please use GitHub username - it will help us to recognize each other easily!
 
@@ -35,12 +35,3 @@ We encourage asking Sylius related questions on the `stackoverflow.com <http://s
 
 To view all Sylius related questions - visit `this link <http://stackoverflow.com/questions/tagged/sylius>`_.
 You can also `search for phrase <http://stackoverflow.com/search?tab=newest&q=sylius>`_.
-
-Facebook Group (Sylius Developers)
-----------------------------------
-
-A lot of us use Facebook and it is quite convenient to have a Facebook group that gathers other eCommerce developers and Sylius contributors.
-
-Group is public, you just need to send a join request and other group members can accept the invitation.
-
-Join the group `here <https://www.facebook.com/groups/sylius/>`_. See you there!

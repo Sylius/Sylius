@@ -9,8 +9,10 @@ sylius_admin_partial_customer_latest:
         _sylius:
             repository:
                 method: findLatest
-                arguments: [$count]
+                arguments:
+                    - !!int $count
             template: $template
+            permission: true
 
 sylius_admin_partial_customer_show:
     path: /{id}
@@ -20,3 +22,4 @@ sylius_admin_partial_customer_show:
         _sylius:
             template: $template
             vars: $vars
+            permission: true

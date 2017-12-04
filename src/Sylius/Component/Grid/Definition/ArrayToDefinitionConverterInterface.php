@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Grid\Definition;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ArrayToDefinitionConverterInterface
 {
     /**
@@ -22,5 +21,5 @@ interface ArrayToDefinitionConverterInterface
      *
      * @return Grid
      */
-    public function convert($code, array $configuration);
+    public function convert(string $code, array $configuration): Grid;
 }

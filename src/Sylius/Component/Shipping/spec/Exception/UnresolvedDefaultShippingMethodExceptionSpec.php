@@ -9,27 +9,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Shipping\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class UnresolvedDefaultShippingMethodExceptionSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(UnresolvedDefaultShippingMethodException::class);
-    }
-
-    function it_is_an_exception()
+    function it_is_an_exception(): void
     {
         $this->shouldHaveType(\Exception::class);
     }
 
-    function it_has_a_custom_message()
+    function it_has_a_custom_message(): void
     {
         $this->getMessage()->shouldReturn('Default shipping method could not be resolved!');
     }

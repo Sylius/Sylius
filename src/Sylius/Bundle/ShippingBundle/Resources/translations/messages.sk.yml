@@ -12,7 +12,7 @@ sylius:
             state: Stav
             states:
                 checkout: Košík
-                pending: Čakajúca
+                pending: 'Čakajúca'
                 ready: Pripravená
                 shipped: Odoslané
                 returned: Vrátená
@@ -37,6 +37,6 @@ sylius:
             description: Popis
             enabled: Zapnuté
             name: Názov
+            position: Pozícia
             tax_category: Daňová kategória
             translations: Preklady
-            position: Pozícia

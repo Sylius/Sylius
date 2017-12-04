@@ -9,31 +9,24 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ItemTotalRuleCheckerSpec extends ObjectBehavior
 {
-    function let(RuleCheckerInterface $itemTotalRuleChecker)
+    function let(RuleCheckerInterface $itemTotalRuleChecker): void
     {
         $this->beConstructedWith($itemTotalRuleChecker);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ItemTotalRuleChecker::class);
-    }
-
-    function it_is_be_a_rule_checker()
+    function it_is_be_a_rule_checker(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
@@ -42,7 +35,7 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         RuleCheckerInterface $itemTotalRuleChecker
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
@@ -54,14 +47,14 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
     function it_returns_false_if_there_is_no_configuration_for_order_channel(
         ChannelInterface $channel,
         OrderInterface $order
-    ) {
+    ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
         $this->isEligible($order, [])->shouldReturn(false);
     }
 
-    function it_throws_exception_if_passed_subject_is_not_order(PromotionSubjectInterface $promotionSubject)
+    function it_throws_exception_if_passed_subject_is_not_order(PromotionSubjectInterface $promotionSubject): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

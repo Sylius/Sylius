@@ -9,32 +9,24 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Payment\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Resolver\PaymentMethodsResolver;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class PaymentMethodsResolverSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $methodRepository)
+    function let(RepositoryInterface $methodRepository): void
     {
         $this->beConstructedWith($methodRepository);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(PaymentMethodsResolver::class);
-    }
-
-    function it_implements_methods_resolver_interface()
+    function it_implements_methods_resolver_interface(): void
     {
         $this->shouldImplement(PaymentMethodsResolverInterface::class);
     }
@@ -44,13 +36,13 @@ final class PaymentMethodsResolverSpec extends ObjectBehavior
         PaymentInterface $payment,
         PaymentMethodInterface $method1,
         PaymentMethodInterface $method2
-    ) {
+    ): void {
         $methodRepository->findBy(['enabled' => true])->willReturn([$method1, $method2]);
 
         $this->getSupportedMethods($payment)->shouldReturn([$method1, $method2]);
     }
 
-    function it_supports_every_payment(PaymentInterface $payment)
+    function it_supports_every_payment(PaymentInterface $payment): void
     {
         $this->supports($payment)->shouldReturn(true);
     }

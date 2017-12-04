@@ -9,40 +9,39 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Shipping\Model;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ShippableInterface
 {
     /**
-     * @return int
+     * @return float|null
      */
-    public function getShippingWeight();
+    public function getShippingWeight(): ?float;
 
     /**
-     * @return int
+     * @return float|null
      */
-    public function getShippingVolume();
+    public function getShippingVolume(): ?float;
 
     /**
-     * @return int
+     * @return float|null
      */
-    public function getShippingWidth();
+    public function getShippingWidth(): ?float;
 
     /**
-     * @return int
+     * @return float|null
      */
-    public function getShippingHeight();
+    public function getShippingHeight(): ?float;
 
     /**
-     * @return int
+     * @return float|null
      */
-    public function getShippingDepth();
+    public function getShippingDepth(): ?float;
 
     /**
-     * @return ShippingCategoryInterface
+     * @return ShippingCategoryInterface|null
      */
-    public function getShippingCategory();
+    public function getShippingCategory(): ?ShippingCategoryInterface;
 }

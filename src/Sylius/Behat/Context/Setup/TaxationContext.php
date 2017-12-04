@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
@@ -23,9 +25,6 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TaxationContext implements Context
 {
     /**
@@ -85,7 +84,7 @@ final class TaxationContext implements Context
     /**
      * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone
      * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone identified by the :taxRateCode code
-     * @Given /^the store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for the (rest of the world)$/
+     * @Given /^the store has(?:| also) "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for the (rest of the world)$/
      */
     public function storeHasTaxRateWithinZone(
         $taxRateName,
@@ -106,7 +105,7 @@ final class TaxationContext implements Context
         $taxRate->setName($taxRateName);
         $taxRate->setCode($taxRateCode);
         $taxRate->setZone($zone);
-        $taxRate->setAmount($this->getAmountFromString($taxRateAmount));
+        $taxRate->setAmount((float) $this->getAmountFromString($taxRateAmount));
         $taxRate->setCategory($taxCategory);
         $taxRate->setCalculator('default');
         $taxRate->setIncludedInPrice($includedInPrice);
@@ -137,6 +136,16 @@ final class TaxationContext implements Context
     }
 
     /**
+     * @Given the store has tax categories :firstName, :secondName and :thirdName
+     */
+    public function theStoreHasTaxCategories(string ...$names): void
+    {
+        foreach ($names as $name) {
+            $this->theStoreHasTaxCategoryWithCode($name);
+        }
+    }
+
+    /**
      * @Given the store does not have any categories defined
      */
     public function theStoreDoesNotHaveAnyCategoriesDefined()
@@ -153,7 +162,7 @@ final class TaxationContext implements Context
      */
     public function theTaxRateIsOfAmount(TaxRateInterface $taxRate, $amount)
     {
-        $taxRate->setAmount($this->getAmountFromString($amount));
+        $taxRate->setAmount((float) $this->getAmountFromString($amount));
 
         $this->objectManager->flush();
     }
@@ -229,6 +238,6 @@ final class TaxationContext implements Context
      */
     private function getCodeFromNameAndZoneCode($taxRateName, $zoneCode)
     {
-        return $this->getCodeFromName($taxRateName).'_'.strtolower($zoneCode);
+        return $this->getCodeFromName($taxRateName) . '_' . strtolower($zoneCode);
     }
 }

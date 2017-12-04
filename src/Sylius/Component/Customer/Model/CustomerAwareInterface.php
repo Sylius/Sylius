@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Customer\Model;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 interface CustomerAwareInterface
 {
     /**
-     * @return CustomerInterface
+     * @return CustomerInterface|null
      */
-    public function getCustomer();
+    public function getCustomer(): ?CustomerInterface;
 
     /**
-     * @param CustomerInterface $customer
+     * @param CustomerInterface|null $customer
      */
-    public function setCustomer(CustomerInterface $customer = null);
+    public function setCustomer(?CustomerInterface $customer): void;
 }

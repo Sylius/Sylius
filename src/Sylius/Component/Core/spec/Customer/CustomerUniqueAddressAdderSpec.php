@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Customer;
 
 use Doctrine\Common\Collections\Collection;
@@ -16,26 +18,17 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
 use Sylius\Component\Core\Customer\CustomerAddressAdderInterface;
-use Sylius\Component\Core\Customer\CustomerUniqueAddressAdder;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
 {
-    function let(AddressComparatorInterface $addressComparator)
+    function let(AddressComparatorInterface $addressComparator): void
     {
         $this->beConstructedWith($addressComparator);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CustomerUniqueAddressAdder::class);
-    }
-
-    function it_implements_address_adder_interface()
+    function it_implements_address_adder_interface(): void
     {
         $this->shouldImplement(CustomerAddressAdderInterface::class);
     }
@@ -46,7 +39,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
         AddressInterface $address,
         Collection $addresses,
         \Iterator $iterator
-    ) {
+    ): void {
         $iterator->rewind()->shouldBeCalled();
         $iterator->valid()->willReturn(true);
         $iterator->current()->willReturn($address);
@@ -67,7 +60,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
         AddressInterface $address,
         Collection $addresses,
         \Iterator $iterator
-    ) {
+    ): void {
         $iterator->rewind()->shouldBeCalled();
         $iterator->valid()->willReturn(false);
 
@@ -91,7 +84,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
         AddressInterface $newAddress,
         Collection $addresses,
         \Iterator $iterator
-    ) {
+    ): void {
         $iterator->rewind()->shouldBeCalled();
         $iterator->valid()->willReturn(true);
         $iterator->current()->willReturn($customerAddress);

@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 /**
  * This authorization checker always returns true. Useful if you don't want to have authorization checks at all.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DisabledAuthorizationChecker implements AuthorizationCheckerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function isGranted(RequestConfiguration $requestConfiguration, $permission)
+    public function isGranted(RequestConfiguration $requestConfiguration, string $permission): bool
     {
         return true;
     }

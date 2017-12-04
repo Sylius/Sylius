@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use Sylius\Component\User\Model\UserAwareInterface;
@@ -19,10 +21,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\Valid;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class AddUserFormSubscriber implements EventSubscriberInterface
 {
     /**
@@ -33,7 +31,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @param string $entryType
      */
-    public function __construct($entryType)
+    public function __construct(string $entryType)
     {
         $this->entryType = $entryType;
     }
@@ -41,7 +39,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @return array
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -52,7 +50,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function preSetData(FormEvent $event)
+    public function preSetData(FormEvent $event): void
     {
         $form = $event->getForm();
         $form->add('user', $this->entryType, ['constraints' => [new Valid()]]);
@@ -66,14 +64,15 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function submit(FormEvent $event)
+    public function submit(FormEvent $event): void
     {
         $data = $event->getData();
         $form = $event->getForm();
 
-        if (null === $form->get('createUser')->getViewData()) {
-            Assert::isInstanceOf($data, UserAwareInterface::class);
+        /** @var UserAwareInterface $data */
+        Assert::isInstanceOf($data, UserAwareInterface::class);
 
+        if (null === $data->getUser()->getId() && null === $form->get('createUser')->getViewData()) {
             $data->setUser(null);
             $event->setData($data);
 

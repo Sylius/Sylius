@@ -33,5 +33,5 @@ Exchange rates are used for viewing the *approximate* price in a currency differ
 Learn more
 ----------
 
-* :doc:`Currency - Component Documentation </components/Currency/index>`
+* :doc:`Currency - Component Documentation </components_and_bundles/components/Currency/index>`
 * :doc:`Currencies Concept Documentation </book/configuration/currencies>`

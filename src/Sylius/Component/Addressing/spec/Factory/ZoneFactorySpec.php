@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Addressing\Factory;
 
 use PhpSpec\ObjectBehavior;
@@ -18,32 +20,29 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ZoneFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory, FactoryInterface $zoneMemberFactory)
+    function let(FactoryInterface $factory, FactoryInterface $zoneMemberFactory): void
     {
         $this->beConstructedWith($factory, $zoneMemberFactory);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(ZoneFactory::class);
     }
 
-    function it_implements_factory_interface()
+    function it_implements_factory_interface(): void
     {
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_implements_zone_factory_interface()
+    function it_implements_zone_factory_interface(): void
     {
         $this->shouldImplement(ZoneFactoryInterface::class);
     }
 
-    function it_creates_zone_with_type(FactoryInterface $factory, ZoneInterface $zone)
+    function it_creates_zone_with_type(FactoryInterface $factory, ZoneInterface $zone): void
     {
         $factory->createNew()->willReturn($zone);
         $zone->setType('country')->shouldBeCalled();
@@ -57,7 +56,7 @@ final class ZoneFactorySpec extends ObjectBehavior
         ZoneInterface $zone,
         ZoneMemberInterface $zoneMember1,
         ZoneMemberInterface $zoneMember2
-    ) {
+    ): void {
         $factory->createNew()->willReturn($zone);
         $zoneMemberFactory->createNew()->willReturn($zoneMember1, $zoneMember2);
 

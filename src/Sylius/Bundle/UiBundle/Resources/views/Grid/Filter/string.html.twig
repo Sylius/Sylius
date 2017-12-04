@@ -3,4 +3,4 @@
 {% if form.type is defined %}
 {{ form_row(form.type, {'label': filter.label}) }}
 {% endif %}
-{{ form_row(form.value, {'label': form.type is defined ? '' : false}) }}
+{{ form_row(form.value, {'label': form.type is defined ? form.value.vars.label : filter.label}) }}

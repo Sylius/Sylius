@@ -4,4 +4,5 @@
 sylius:
     form:
         collection:
-            delete: Выдаліць
+            add: 'Дадаць'
+            delete: 'Выдаліць'

@@ -6,3 +6,18 @@ sylius:
         user:
             email: E-Mail
             enabled: Aktiviert
+            password:
+                label: Passwort
+                confirmation: Bestätigung
+            remember_me: Angemeldet bleiben
+            shipping_address: Lieferadresse
+            username: Benutzername
+        user_filter:
+            query: Suche
+        user_change_password:
+            confirmation: Bestätigung
+            current: Aktuelles Passwort
+            new: Neues Passwort
+        user_reset_password:
+            confirmation: Bestätigung
+            new: Neues Passwort

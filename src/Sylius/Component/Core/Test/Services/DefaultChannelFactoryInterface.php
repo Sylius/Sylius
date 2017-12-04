@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Core\Test\Services;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface DefaultChannelFactoryInterface
 {
     /**
@@ -23,5 +22,5 @@ interface DefaultChannelFactoryInterface
      *
      * @return array
      */
-    public function create($code = null, $name = null, $currencyCode = null);
+    public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null): array;
 }

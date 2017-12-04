@@ -18,6 +18,12 @@
             <option name="message">sylius.attribute.code.unique</option>
             <option name="groups">sylius</option>
         </constraint>
+        <constraint name="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidTextAttributeConfiguration">
+            <option name="groups">sylius</option>
+        </constraint>
+        <constraint name="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidSelectAttributeConfiguration">
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="code">
             <constraint name="NotBlank">
                 <option name="message">sylius.attribute.code.not_blank</option>

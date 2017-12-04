@@ -9,42 +9,35 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Core\Resolver;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver;
+use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavior
 {
     function let(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ZoneMatcherInterface $zoneMatcher,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker
-    ) {
+    ): void {
         $this->beConstructedWith($shippingMethodRepository, $zoneMatcher, $eligibilityChecker);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(ZoneAndChannelBasedShippingMethodsResolver::class);
-    }
-
-    function it_implements_a_shipping_methods_by_zones_and_channel_resolver_interface()
+    function it_implements_a_shipping_methods_by_zones_and_channel_resolver_interface(): void
     {
         $this->shouldImplement(ShippingMethodsResolverInterface::class);
     }
@@ -61,7 +54,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         ZoneInterface $firstZone,
         ZoneInterface $secondZone,
         ZoneMatcherInterface $zoneMatcher
-    ) {
+    ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getShippingAddress()->willReturn($address);
         $order->getChannel()->willReturn($channel);
@@ -86,7 +79,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         ChannelInterface $channel,
         ShipmentInterface $shipment,
         ZoneMatcherInterface $zoneMatcher
-    ) {
+    ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getShippingAddress()->willReturn($address);
         $order->getChannel()->willReturn($channel);
@@ -108,7 +101,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         ZoneInterface $firstZone,
         ZoneInterface $secondZone,
         ZoneMatcherInterface $zoneMatcher
-    ) {
+    ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getShippingAddress()->willReturn($address);
         $order->getChannel()->willReturn($channel);
@@ -131,7 +124,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         AddressInterface $address,
         ChannelInterface $channel,
         ShipmentInterface $shipment
-    ) {
+    ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getShippingAddress()->willReturn($address);
         $order->getChannel()->willReturn($channel);
@@ -143,7 +136,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         OrderInterface $order,
         ChannelInterface $channel,
         ShipmentInterface $shipment
-    ) {
+    ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getShippingAddress()->willReturn(null);
         $order->getChannel()->willReturn($channel);
@@ -155,7 +148,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         OrderInterface $order,
         AddressInterface $address,
         ShipmentInterface $shipment
-    ) {
+    ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getShippingAddress()->willReturn($address);
         $order->getChannel()->willReturn(null);
@@ -163,14 +156,14 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $this->supports($shipment)->shouldReturn(false);
     }
 
-    function it_does_not_support_shipments_which_has_no_order_defined(ShipmentInterface $shipment)
+    function it_does_not_support_shipments_which_has_no_order_defined(ShipmentInterface $shipment): void
     {
         $shipment->getOrder()->willReturn(null);
 
         $this->supports($shipment)->shouldReturn(false);
     }
 
-    function it_does_not_support_different_shipping_subject_than_shipment(ShippingSubjectInterface $subject)
+    function it_does_not_support_different_shipping_subject_than_shipment(ShippingSubjectInterface $subject): void
     {
         $this->supports($subject)->shouldReturn(false);
     }

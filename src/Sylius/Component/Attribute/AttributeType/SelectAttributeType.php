@@ -9,27 +9,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Attribute\AttributeType;
 
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
-use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Laurent Paganin-Gioanni <l.paganin@algo-factory.com>
- */
-class SelectAttributeType implements AttributeTypeInterface
+final class SelectAttributeType implements AttributeTypeInterface
 {
-    const TYPE = 'select';
+    public const TYPE = 'select';
 
     /**
      * {@inheritdoc}
      */
-    public function getStorageType()
+    public function getStorageType(): string
     {
         return AttributeValueInterface::STORAGE_JSON;
     }
@@ -37,7 +36,7 @@ class SelectAttributeType implements AttributeTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return static::TYPE;
     }
@@ -45,8 +44,11 @@ class SelectAttributeType implements AttributeTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context, array $configuration)
-    {
+    public function validate(
+        AttributeValueInterface $attributeValue,
+        ExecutionContextInterface $context,
+        array $configuration
+    ): void {
         if (!isset($configuration['required']) && !isset($configuration['multiple'])) {
             return;
         }
@@ -64,20 +66,23 @@ class SelectAttributeType implements AttributeTypeInterface
 
     /**
      * @param ExecutionContextInterface $context
-     * @param string $value
+     * @param array|null $value
      * @param array $validationConfiguration
      *
      * @return ConstraintViolationListInterface
      */
-    private function getValidationErrors(ExecutionContextInterface $context, $value, array $validationConfiguration)
-    {
+    private function getValidationErrors(
+        ExecutionContextInterface $context,
+        ?array $value,
+        array $validationConfiguration
+    ): ConstraintViolationListInterface {
         $validator = $context->getValidator();
 
         $constraints = [
             new All([
                 new Type([
                     'type' => 'string',
-                ])
+                ]),
             ]),
         ];
 

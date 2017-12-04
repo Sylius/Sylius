@@ -9,23 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Component\Order\Factory;
 
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface AdjustmentFactoryInterface extends FactoryInterface
 {
     /**
      * @param string $type
      * @param string $label
-     * @param string $amount
+     * @param int $amount
      * @param bool $neutral
      *
      * @return AdjustmentInterface
      */
-    public function createWithData($type, $label, $amount, $neutral = false);
+    public function createWithData(string $type, string $label, int $amount, bool $neutral = false): AdjustmentInterface;
 }

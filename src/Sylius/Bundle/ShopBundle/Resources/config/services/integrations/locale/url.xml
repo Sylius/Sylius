@@ -21,7 +21,7 @@
             <argument type="service" id="sylius.locale_provider" />
             <argument type="service" id="security.firewall.map" />
             <argument type="collection">
-                <argument type="string">shop</argument>
+                <argument type="string">%sylius_shop.firewall_context_name%</argument>
             </argument>
             <tag name="kernel.event_listener" event="kernel.request" method="restrictRequestLocale" priority="10"/>
         </service>

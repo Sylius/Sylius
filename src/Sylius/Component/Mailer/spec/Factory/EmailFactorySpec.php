@@ -9,29 +9,22 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Component\Mailer\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Mailer\Factory\EmailFactory;
 use Sylius\Component\Mailer\Factory\EmailFactoryInterface;
 use Sylius\Component\Mailer\Model\Email;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class EmailFactorySpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(EmailFactory::class);
-    }
-
-    function it_implements_email_factory_interface()
+    function it_implements_email_factory_interface(): void
     {
         $this->shouldImplement(EmailFactoryInterface::class);
     }
 
-    function it_creates_new_email()
+    function it_creates_new_email(): void
     {
         $this->createNew()->shouldHaveType(Email::class);
     }
