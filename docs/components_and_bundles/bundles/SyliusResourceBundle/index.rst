@@ -15,7 +15,7 @@ So far we support:
 * Doctrine MongoDB ODM
 * Doctrine PHPCR ODM
 * InMemory
-* ElasticSearch (via an `extension <https://github.com/Lakion/SyliusElasticSearchBundle>`_)
+* ElasticSearch (via an `extension <https://github.com/Sylius/SyliusElasticSearchPlugin>`_)
 
 .. toctree::
    :numbered:
