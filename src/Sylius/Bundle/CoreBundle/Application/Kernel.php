@@ -29,12 +29,12 @@ use Symfony\Component\HttpKernel\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
 {
-    public const VERSION = '1.0.5';
-    public const VERSION_ID = '10005';
+    public const VERSION = '1.0.6-DEV';
+    public const VERSION_ID = '10006';
     public const MAJOR_VERSION = '1';
     public const MINOR_VERSION = '0';
-    public const RELEASE_VERSION = '5';
-    public const EXTRA_VERSION = '';
+    public const RELEASE_VERSION = '6';
+    public const EXTRA_VERSION = 'DEV';
 
     /**
      * {@inheritdoc}
