@@ -67,7 +67,7 @@ final class ParametersParser implements ParametersParserInterface
         }
 
         if (0 === strpos($parameter, '$')) {
-            return $request->get(substr($parameter, 1));
+            return $this->getRequestValue(substr($parameter, 1), $request);
         }
 
         if (0 === strpos($parameter, 'expr:')) {
@@ -82,6 +82,36 @@ final class ParametersParser implements ParametersParserInterface
     }
 
     /**
+     * @param string $parameter
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    private function getRequestValue($parameter, Request $request)
+    {
+        $parameters = explode('.', $parameter);
+        $value = $request->get($parameters[0]);
+
+        if (null === $value) {
+            return;
+        }
+
+        foreach ($parameters as $i => $parameter) {
+            if (0 === $i) {
+                continue;
+            }
+
+            if (null === $value || !array_key_exists($parameter, $value)) {
+                return;
+            }
+
+            $value = $value[$parameter];
+        }
+
+        return $value;
+    }
+
+    /**
      * @param string $expression
      * @param Request $request
      *
@@ -89,8 +119,8 @@ final class ParametersParser implements ParametersParserInterface
      */
     private function parseRequestValueExpression(string $expression, Request $request)
     {
-        $expression = preg_replace_callback('/(\$\w+)/', function ($matches) use ($request) {
-            $variable = $request->get(substr($matches[1], 1));
+        $expression = preg_replace_callback('/(\$(:?\S+)?\w+)/', function ($matches) use ($request) {
+            $variable = $this->getRequestValue(substr($matches[1], 1), $request);
 
             if (is_array($variable) || is_object($variable)) {
                 throw new \InvalidArgumentException(sprintf(

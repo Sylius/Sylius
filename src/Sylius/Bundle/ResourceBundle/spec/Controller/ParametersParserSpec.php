@@ -64,6 +64,18 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
+
+    function it_parses_nested_parameters(): void
+    {
+        $request = new Request();
+        $request->request->set('array', ['foo' => 'bar']);
+
+        $this
+            ->parseRequestValues(['nested' => ['value' => '$array.foo']], $request)
+            ->shouldReturn(['nested' => ['value' => 'bar']])
+        ;
+    }
+
     function it_parses_string_parameter_and_casts_it_into_int(): void
     {
         $request = new Request();
@@ -86,7 +98,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_string_parameter_is_going_to_be_casted_into_invalid_type()
+    function it_throws_exception_if_string_parameter_is_going_to_be_casted_into_invalid_type(): void
     {
         $request = new Request();
         $request->request->set('int', 5);
@@ -97,7 +109,7 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_invalid_typecast_is_provided()
+    function it_throws_exception_if_invalid_typecast_is_provided(): void
     {
         $request = new Request();
         $request->request->set('int', 5);
@@ -182,6 +194,17 @@ final class ParametersParserSpec extends ObjectBehavior
         ;
     }
 
+    function it_parses_expressions_with_nested_scalar_parameters(): void
+    {
+        $request = new Request();
+        $request->request->set('number', ['sixth' => 6]);
+
+        $this
+            ->parseRequestValues(['expression' => 'expr:$number.sixth === 6'], $request)
+            ->shouldReturn(['expression' => true])
+        ;
+    }
+
     function it_throws_an_exception_if_array_parameter_is_injected_into_expression(): void
     {
         $request = new Request();
@@ -200,7 +223,7 @@ final class ParametersParserSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('parseRequestValues', [['expression' => 'expr:$object.callMethod()'], $request])
+            ->during('parseRequestValues', [['expression' => 'expr:$object'], $request])
         ;
     }
 }
