@@ -1,5 +1,16 @@
 ## CHANGELOG
 
+### v1.0.5 2017-12-04
+
+- [#8996](https://github.com/Sylius/Sylius/pull/8996) Setup "Stale" probot (@pamil)
+- [#8998](https://github.com/Sylius/Sylius/pull/8998) Syntax error fix in doc code snippet (@t-geindre)
+- [#8997](https://github.com/Sylius/Sylius/pull/8997) PHPDoc fixes (@JanTvrdik)
+- [#8978](https://github.com/Sylius/Sylius/pull/8978) Decouple reviews customer (@kochen)
+- [#8992](https://github.com/Sylius/Sylius/pull/8992) Change "Support Request" label to "Help Wanted" (@pamil)
+- [#8990](https://github.com/Sylius/Sylius/pull/8990) [Documentation] Remove facebook group (@lchrusciel)
+- [#8979](https://github.com/Sylius/Sylius/pull/8979) ensure we return null rather than void in SyliusPluginTrait::getContainerExtension (@lsmith77)
+- [#8951](https://github.com/Sylius/Sylius/pull/8951) Community organization (@pamil)
+
 ### v1.0.4 2017-11-17
 
 - [#8968](https://github.com/Sylius/Sylius/pull/8968) Security release 1.0.4 - allowing to update to Symfony 3.3.13 (@pamil)
