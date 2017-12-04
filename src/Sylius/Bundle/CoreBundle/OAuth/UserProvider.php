@@ -193,7 +193,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         $oauth->setAccessToken($response->getAccessToken());
         $oauth->setRefreshToken($response->getRefreshToken());
 
-        /** @var $user SyliusUserInterface */
+        /** @var SyliusUserInterface $user */
         $user->addOAuthAccount($oauth);
 
         $this->userManager->persist($user);

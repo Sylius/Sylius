@@ -39,7 +39,7 @@ final class HasTaxonRuleChecker implements RuleCheckerInterface
             throw new UnsupportedTypeException($subject, OrderInterface::class);
         }
 
-        /** @var $item OrderItemInterface */
+        /** @var OrderItemInterface $item */
         foreach ($subject->getItems() as $item) {
             if ($this->hasProductValidTaxon($item->getProduct(), $configuration)) {
                 return true;

@@ -74,8 +74,8 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
     public function addAttribute($attributeName, $value, $localeCode);
 
     /**
-     * @param $attributeName
-     * @param $localeCode
+     * @param string $attributeName
+     * @param string $localeCode
      *
      * @return string
      */

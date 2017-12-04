@@ -48,7 +48,7 @@ final class CapturePaymentAction extends GatewayAwareAction
     {
         RequestNotSupportedException::assertSupports($this, $request);
 
-        /** @var $payment SyliusPaymentInterface */
+        /** @var SyliusPaymentInterface $payment */
         $payment = $request->getModel();
 
         /** @var OrderInterface $order */

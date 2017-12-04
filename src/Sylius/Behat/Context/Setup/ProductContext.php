@@ -889,7 +889,7 @@ final class ProductContext implements Context
 
     /**
      * @param ProductInterface $product
-     * @param $productVariantName
+     * @param string $productVariantName
      * @param int $price
      * @param string $code
      * @param ChannelInterface $channel
