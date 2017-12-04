@@ -203,4 +203,37 @@ final class ParametersParserSpec extends ObjectBehavior
             ->during('parseRequestValues', [['expression' => 'expr:$object.callMethod()'], $request])
         ;
     }
+
+    function it_parses_nested_parameters(): void
+     {
+         $request = new Request();
+         $request->request->set('array', ['foo' => 'bar']);
+
+         $this
+             ->parseRequestValues(['nested' => ['value' => '$array[foo]']], $request)
+             ->shouldReturn(['nested' => ['value' => 'bar']])
+         ;
+     }
+
+    function it_should_be_null_if_no_path_when_parses_nested_parameters(): void
+     {
+         $request = new Request();
+         $request->request->set('array', ['foo' => 'bar']);
+
+         $this
+             ->parseRequestValues(['nested' => ['value' => '$array[baz]']], $request)
+             ->shouldReturn(['nested' => ['value' => null]])
+         ;
+     }
+
+    function it_parses_expressions_with_nested_scalar_parameters(): void
+    {
+        $request = new Request();
+        $request->request->set('number', ['sixth' => 6]);
+
+        $this
+            ->parseRequestValues(['expression' => 'expr:$number[sixth] === 6'], $request)
+            ->shouldReturn(['expression' => true])
+        ;
+    }
 }

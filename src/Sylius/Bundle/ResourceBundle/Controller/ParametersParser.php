@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Webmozart\Assert\Assert;
 
 final class ParametersParser implements ParametersParserInterface
@@ -67,7 +68,7 @@ final class ParametersParser implements ParametersParserInterface
         }
 
         if (0 === strpos($parameter, '$')) {
-            return $request->get(substr($parameter, 1));
+            return $this->getRequestValue(substr($parameter, 1), $request);
         }
 
         if (0 === strpos($parameter, 'expr:')) {
@@ -82,6 +83,31 @@ final class ParametersParser implements ParametersParserInterface
     }
 
     /**
+     * @param string $parameter
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    private function getRequestValue($parameter, Request $request)
+    {
+        preg_match('/[a-z0-9]+/i', $parameter, $match);
+        $variable = $match[0];
+        $property = preg_replace("/^$variable/", '', $parameter);
+        $value = $request->get($variable);
+
+        if (!$property) {
+            return $value;
+        }
+
+        $accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->disableExceptionOnInvalidIndex()
+            ->getPropertyAccessor()
+        ;
+
+        return $accessor->getValue((array) $value, $property);
+    }
+
+    /**
      * @param string $expression
      * @param Request $request
      *
@@ -89,9 +115,8 @@ final class ParametersParser implements ParametersParserInterface
      */
     private function parseRequestValueExpression(string $expression, Request $request)
     {
-        $expression = preg_replace_callback('/(\$\w+)/', function ($matches) use ($request) {
-            $variable = $request->get(substr($matches[1], 1));
-
+        $expression = preg_replace_callback('/(\$[\w\[\]]+)/', function ($matches) use ($request) {
+            $variable = $this->getRequestValue(substr($matches[1], 1), $request);
             if (is_array($variable) || is_object($variable)) {
                 throw new \InvalidArgumentException(sprintf(
                     'Cannot use %s ($%s) as parameter in expression.',
