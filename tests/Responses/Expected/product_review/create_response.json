@@ -1,16 +1,16 @@
 {
     "id": @integer@,
-    "title": "J_REVIEW",
+    "title": "A good product",
     "rating": 3,
-    "comment": "J_REVIEW_COMMENT",
+    "comment": "This is a good product.",
     "author": {
         "id": @integer@,
-        "email": "j@example.com",
-        "emailCanonical": "j@example.com",
+        "email": "my_review@example.com",
+        "emailCanonical": "my_review@example.com",
         "gender": "u",
         "_links": {
             "self": {
-                "href": @string@
+                "href": "@string@"
             }
         }
     },
@@ -43,13 +43,13 @@
                     "gender": "u",
                     "_links": {
                         "self": {
-                            "href": @string@
+                            "href": "@string@"
                         }
                     }
                 },
                 "status": "new",
-                "createdAt": @string@,
-                "updatedAt": @string@
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()"
             },
             {
                 "id": @integer@,
@@ -65,13 +65,13 @@
                     "gender": "u",
                     "_links": {
                         "self": {
-                            "href": @string@
+                            "href": "@string@"
                         }
                     }
                 },
                 "status": "new",
-                "createdAt": @string@,
-                "updatedAt": @string@
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()"
             },
             {
                 "id": @integer@,
@@ -87,13 +87,13 @@
                     "gender": "u",
                     "_links": {
                         "self": {
-                            "href": @string@
+                            "href": "@string@"
                         }
                     }
                 },
                 "status": "rejected",
-                "createdAt": @string@,
-                "updatedAt": @string@
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()"
             }
         ],
         "averageRating": 0,
@@ -102,11 +102,11 @@
             "self": {
                 "href": "\/api\/v1\/products\/MUG_REVIEW_BEST"
             },
-             "variants": {
+            "variants": {
                 "href": "\/api\/v1\/products\/MUG_REVIEW_BEST\/variants\/"
-             }
+            }
         }
     },
-    "createdAt": @string@,
-    "updatedAt": @string@
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()"
 }

@@ -12,7 +12,7 @@
         "gender": "u",
         "_links": {
             "self": {
-                "href": @string@
+                "href": "@string@"
             }
         }
     },
@@ -45,13 +45,13 @@
                     "gender": "u",
                     "_links": {
                         "self": {
-                            "href": @string@
+                            "href": "@string@"
                         }
                     }
                 },
                 "status": "new",
-                "createdAt": @string@,
-                "updatedAt": @string@
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()"
             },
             "2": {
                 "id": @integer@,
@@ -67,14 +67,14 @@
                     "gender": "u",
                     "_links": {
                         "self": {
-                            "href": @string@
+                            "href": "@string@"
                         }
                     }
                 },
                 "status": "rejected",
-                "createdAt": @string@,
-                "updatedAt": @string@
-              }
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()"
+            }
         },
         "averageRating": 4,
         "images": [],
@@ -87,6 +87,6 @@
             }
         }
     },
-    "createdAt": @string@,
-    "updatedAt": @string@
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()"
 }

@@ -23,12 +23,13 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class ProductReviewApiTest extends JsonApiTestCase
 {
+
     /**
      * @var array
      */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'CONTENT_TYPE' => 'application/json',
+        'CONTENT_TYPE'       => 'application/json',
     ];
 
     /**
@@ -36,13 +37,13 @@ final class ProductReviewApiTest extends JsonApiTestCase
      */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'ACCEPT' => 'application/json',
+        'ACCEPT'             => 'application/json',
     ];
 
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_product_review_list_when_access_is_denied()
+    public function it_does_not_allows_showing_product_review_list_when_access_is_denied()
     {
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
 
@@ -58,7 +59,7 @@ final class ProductReviewApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_product_review_when_it_does_not_exist()
+    public function it_does_not_allows_showing_product_review_when_it_does_not_exist()
     {
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
@@ -112,7 +113,7 @@ final class ProductReviewApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_create_product_review()
+    public function it_allows_creating_product_review()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -121,13 +122,13 @@ final class ProductReviewApiTest extends JsonApiTestCase
         $product = $productReviewsData['product1'];
 
         $data =
-<<<EOT
+            <<<EOT
         {
-          "title": "J_REVIEW",
+          "title": "A good product",
           "rating": "3",
-          "comment": "J_REVIEW_COMMENT",
+          "comment": "This is a good product.",
           "author": {
-            "email": "j@example.com"
+            "email": "my_review@example.com"
           }
         }
 EOT;
@@ -141,7 +142,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_product_review_without_required_fields()
+    public function it_does_not_allows_creating_product_review_without_required_fields()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -158,7 +159,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_delete_product_review_if_it_does_not_exist()
+    public function it_does_not_allows_deleting_product_review_if_it_does_not_exist()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -175,7 +176,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_delete_product_review()
+    public function it_allows_deleting_product_review()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -215,7 +216,7 @@ EOT;
         $productReview = $productReviewsData['productReview1'];
 
         $data =
-<<<EOT
+            <<<EOT
         {
             "title": "NEW_REVIEW_TITLE",
             "rating": "1",
@@ -244,7 +245,7 @@ EOT;
         $productReview = $productReviewsData['productReview1'];
 
         $data =
-<<<EOT
+            <<<EOT
         {
             "comment": "A_NEW_REVIEW_COMMENT"
         }
@@ -259,7 +260,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_accept_product_review()
+    public function it_allows_accepting_product_review()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -267,7 +268,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-         /** @var ReviewInterface $productReview */
+        /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview1'];
 
         $this->client->request('PATCH', $this->getReviewUrl($product, $productReview) . '/accept', [], [], static::$authorizedHeaderWithAccept);
@@ -279,7 +280,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allows_accept_product_review_if_it_has_not_new_status()
+    public function it_does_not_allows_accepting_product_review_if_it_has_not_new_status()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -287,7 +288,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-         /** @var ReviewInterface $productReview */
+        /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview3'];
 
         $this->client->request('POST', $this->getReviewUrl($product, $productReview) . '/accept', [], [], static::$authorizedHeaderWithAccept);
@@ -299,7 +300,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_reject_product_review()
+    public function it_allows_rejecting_product_review()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -307,7 +308,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-         /** @var ReviewInterface $productReview */
+        /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview1'];
 
         $this->client->request('PATCH', $this->getReviewUrl($product, $productReview) . '/reject', [], [], static::$authorizedHeaderWithAccept);
@@ -316,10 +317,10 @@ EOT;
         $this->assertResponse($response, 'product_review/reject_response', Response::HTTP_OK);
     }
 
-     /**
+    /**
      * @test
      */
-    public function it_does_not_allows_reject_product_review_if_it_has_not_new_status()
+    public function it_does_not_allows_rejecting_product_review_if_it_has_not_new_status()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -327,7 +328,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-         /** @var ReviewInterface $productReview */
+        /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview3'];
 
         $this->client->request('POST', $this->getReviewUrl($product, $productReview) . '/accept', [], [], static::$authorizedHeaderWithAccept);
@@ -348,7 +349,7 @@ EOT;
 
     /**
      * @param ProductInterface $product
-     * @param ReviewInterface $productReview
+     * @param ReviewInterface  $productReview
      *
      * @return string
      */
