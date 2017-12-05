@@ -10,6 +10,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
 var argv = require('yargs').argv;
+var debug = require('gulp-debug');
 
 var rootPath = argv.rootPath;
 var shopRootPath = rootPath + 'shop/';
@@ -47,9 +48,11 @@ var paths = {
 
 gulp.task('shop-js', function () {
     return gulp.src(paths.shop.js)
+        .pipe(debug({title: 'shop-js-source:'}))
         .pipe(concat('app.js'))
         .pipe(gulpif(env === 'prod', uglify()))
         .pipe(sourcemaps.write('./'))
+        .pipe(debug({title: 'shop-js-dest:'}))
         .pipe(gulp.dest(shopRootPath + 'js/'))
     ;
 });
@@ -58,19 +61,23 @@ gulp.task('shop-css', function() {
     gulp.src([nodeModulesPath + 'semantic-ui-css/themes/**/*']).pipe(gulp.dest(shopRootPath + 'css/themes/'));
 
     var cssStream = gulp.src(paths.shop.css)
+            .pipe(debug({title: 'shop-css-file:'}))
             .pipe(concat('css-files.css'))
         ;
 
     var sassStream = gulp.src(paths.shop.sass)
+            .pipe(debug({title: 'shop-scss-file:'}))
             .pipe(sass())
             .pipe(concat('sass-files.scss'))
         ;
 
     return merge(cssStream, sassStream)
+        .pipe(debug({title: 'shop-css-source:'}))
         .pipe(order(['css-files.css', 'sass-files.scss']))
         .pipe(concat('style.css'))
         .pipe(gulpif(env === 'prod', uglifycss()))
         .pipe(sourcemaps.write('./'))
+        .pipe(debug({title: 'shop-css-dest:'}))
         .pipe(gulp.dest(shopRootPath + 'css/'))
         .pipe(livereload())
     ;
@@ -80,7 +87,9 @@ gulp.task('shop-img', function() {
     gulp.src([nodeModulesPath + 'lightbox2/dist/images/*']).pipe(gulp.dest(shopRootPath + 'images/'));
 
     return gulp.src(paths.shop.img)
+        .pipe(debug({title: 'shop-img-source:'}))
         .pipe(sourcemaps.write('./'))
+        .pipe(debug({title: 'shop-img-dest:'}))
         .pipe(gulp.dest(shopRootPath + 'img/'))
     ;
 });
