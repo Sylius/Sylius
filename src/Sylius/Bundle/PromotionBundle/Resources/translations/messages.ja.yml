@@ -4,8 +4,8 @@
 sylius:
     form:
         promotion:
-            add_action: '値引き設定を追加'
-            add_rule: '条件を追加'
+            add_action: 値引き設定を追加
+            add_rule: 条件を追加
         promotion_rule:
             shipping_country_configuration:
-                country: '国'
+                country: 国

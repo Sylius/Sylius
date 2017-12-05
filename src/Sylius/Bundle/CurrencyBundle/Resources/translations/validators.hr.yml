@@ -5,6 +5,6 @@ sylius:
     currency:
         code:
             not_blank: Molim odaberite šifru valute.
-            unique: 'Šifra valute mora biti jedinstvena.'
+            unique: Šifra valute mora biti jedinstvena.
         exchange_rate:
             not_blank: Molim unesite tečaj.

@@ -4,4 +4,4 @@
 sylius:
     form:
         locale:
-            name: '名稱'
+            name: 名稱

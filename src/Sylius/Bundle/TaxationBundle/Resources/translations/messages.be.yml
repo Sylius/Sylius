@@ -4,11 +4,11 @@
 sylius:
     form:
         tax_category:
-            name: 'Назва'
-            description: 'Апісанне'
+            name: Назва
+            description: Апісанне
         tax_rate:
-            category: 'Катэгорыя'
-            name: 'Назва'
-            amount: 'Сума'
-            included_in_price: 'Уваходзіць у цэну?'
-            calculator: 'Калькулятар'
+            category: Катэгорыя
+            name: Назва
+            amount: Сума
+            included_in_price: Уваходзіць у цэну?
+            calculator: Калькулятар

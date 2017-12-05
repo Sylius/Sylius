@@ -49,7 +49,7 @@ sylius:
         order_filter:
             created_at_from: Vytvorené po
             created_at_to: Vytvorené pred
-            number: 'Číslo'
+            number: Číslo
             total_from: Od
             total_to: Do
             payment_state: Stav platby
@@ -75,13 +75,13 @@ sylius:
         shipment_filter:
             created_at_from: Od
             created_at_to: Do
-            number: 'Číslo objednávky'
+            number: Číslo objednávky
             shipping_address: Meno príjemcu
             channel: Všetky kanály
         payment_filter:
             created_at_from: Od
             created_at_to: Do
-            number: 'Číslo objednávky'
+            number: Číslo objednávky
             billing_address: Fakturovať na
             channel: Všetky kanály
         shipping_method:
@@ -111,7 +111,7 @@ sylius:
             price: Cena
             sku: Skladový kód (SKU)
             weight: Hmotnosť
-            width: 'Šírka'
+            width: Šírka
         attribute:
             product_attribute_value:
                 attribute: Vlastnosť
@@ -197,10 +197,10 @@ sylius:
             session:
                 auto_start: session.auto_start
             short_open_tag: short_open_tag
-            timezone: 'časové pásmo'
+            timezone: časové pásmo
             timezone_deprecated:
                 header: Zastaralé časové pásmo
-                help: 'Časové pásmo %timezone% je zastaralé. Opravte si Váš súbor php.ini (zoznam zastaralých časových pasiem http://php.net/manual/en/timezones.others.php).'
+                help: Časové pásmo %timezone% je zastaralé. Opravte si Váš súbor php.ini (zoznam zastaralých časových pasiem http://php.net/manual/en/timezones.others.php).
             version: Verzia PHP
             version_recommended: Odporúčaná verzia PHP
     payum_gateway:

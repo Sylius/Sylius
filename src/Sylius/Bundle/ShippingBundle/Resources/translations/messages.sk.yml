@@ -12,7 +12,7 @@ sylius:
             state: Stav
             states:
                 checkout: Košík
-                pending: 'Čakajúca'
+                pending: Čakajúca
                 ready: Pripravená
                 shipped: Odoslané
                 returned: Vrátená

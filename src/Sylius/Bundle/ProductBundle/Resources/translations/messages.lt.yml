@@ -10,7 +10,7 @@ sylius:
             options: Parinktys
             meta_keywords: Meta raktažodžiai
             meta_description: Meta aprašymas
-            slug: 'Šliužas (nuorodos dalis)'
+            slug: Šliužas (nuorodos dalis)
             taxons: Taksonai
         product_variant:
             name: Pavadinimas

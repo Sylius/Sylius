@@ -4,11 +4,11 @@
 sylius:
     form:
         promotion:
-            add_action: 'Додајте акцију'
-            add_rule: 'Додајте правило'
+            add_action: Додајте акцију
+            add_rule: Додајте правило
         promotion_action:
-            type: 'Тип'
+            type: Тип
         promotion_rule:
             shipping_country_configuration:
-                country: 'Земља'
-            type: 'Тип'
+                country: Земља
+            type: Тип

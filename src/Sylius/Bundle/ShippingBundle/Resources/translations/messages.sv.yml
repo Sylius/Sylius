@@ -37,9 +37,9 @@ sylius:
             description: Beskrivning
             enabled: Aktiverad
             match_all_category_requirement: Alla enheter måste matcha metodkategorin
-            match_any_category_requirement: 'Åtminstone 1 enhet måste matcha metodkategorin'
+            match_any_category_requirement: Åtminstone 1 enhet måste matcha metodkategorin
             match_none_category_requirement: Inga av enheterna måste matcha metodkategorin
             name: Namn
             position: Position
             tax_category: Momskategori
-            translations: 'Översättningar'
+            translations: Översättningar

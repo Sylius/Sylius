@@ -35,7 +35,7 @@ sylius:
             channels: Kanalai
             configuration: Konfigūracija
             description: Aprašymas
-            enabled: 'Įjungta'
+            enabled: Įjungta
             name: Pavadinimas
             position: Pozicija
             tax_category: Mokesčių kategorija

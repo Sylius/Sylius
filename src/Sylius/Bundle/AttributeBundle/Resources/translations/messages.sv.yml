@@ -9,7 +9,7 @@ sylius:
             choices: Val
             code: Kod
             name: Namn
-            translations: 'Översättningar'
+            translations: Översättningar
             type: Typ
         attribute_type:
             checkbox: Kryssruta

@@ -24,4 +24,4 @@ sylius:
                     groups: Nhóm
                     header: Khách hàng
                 sales:
-                    orders: 'Đơn đặt hàng'
+                    orders: Đơn đặt hàng

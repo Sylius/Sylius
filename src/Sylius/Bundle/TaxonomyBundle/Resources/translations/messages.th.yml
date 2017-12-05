@@ -4,9 +4,9 @@
 sylius:
     form:
         taxon:
-            description: 'คำอธิบาย'
-            name: 'ชื่อ'
-            parent: 'หมวดแม่'
+            description: คำอธิบาย
+            name: ชื่อ
+            parent: หมวดแม่
             slug: Slug
         taxonomy:
-            name: 'ชื่อ'
+            name: ชื่อ

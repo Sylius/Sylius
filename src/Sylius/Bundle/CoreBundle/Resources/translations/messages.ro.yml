@@ -106,7 +106,7 @@ sylius:
             query: Căutare
         variant:
             depth: Adâncime
-            height: 'Înălţime'
+            height: Înălţime
             on_hand: Stoc curent
             price: Preț
             sku: SKU

@@ -11,10 +11,10 @@ sylius:
             min_range: Kredito kortelės galiojimo pabaigos mėnesis turi būti tarp {{ min }} ir {{ max }}.
             not_blank: Pasirinkite galiojimo pabaigos mėnesį.
         number:
-            not_blank: 'Įveskite kortelės numerį.'
+            not_blank: Įveskite kortelės numerį.
             luhn: Jūsų įvestas kredito kortelės numeris yra neteisingas.
         security_code:
-            not_blank: 'Įveskite saugos kodą.'
+            not_blank: Įveskite saugos kodą.
             max_length: Kredito kortelės CVV kodas turi būti ne mažiau kaip {{ limit }} skaitmenų ilgio.
             min_length: Kredito kortelės CVV kodas turi būti ne ilgesnis nei {{ limit }} skaitmenų ilgio.
         expiry_year:
@@ -30,7 +30,7 @@ sylius:
         name:
             max_length: Mokėjimo metodo pavadinimas turi būti {{ limit }} simbolių arba mažiau.
             min_length: Mokėjimo metodo pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.
-            not_blank: 'Įveskite mokėjimo metodo pavadinimą.'
+            not_blank: Įveskite mokėjimo metodo pavadinimą.
         fee_calculator_configuration:
             amount:
                 greater_than_or_equal: Mokestis negali būti mažesnis už {{ compared_value }}.

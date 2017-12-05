@@ -6,6 +6,6 @@ sylius:
         channel:
             color: Spalva
             description: Aprašymas
-            enabled: 'Įjungta'
+            enabled: Įjungta
             name: Pavadinimas
             url: URL

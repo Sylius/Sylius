@@ -16,7 +16,7 @@ sylius:
             configuration: Konfigurace
             date: Datum
             datetime: Datum a čas
-            integer: 'Číslo'
+            integer: Číslo
             percent: Procent
             select: Vybrat
             text: Text

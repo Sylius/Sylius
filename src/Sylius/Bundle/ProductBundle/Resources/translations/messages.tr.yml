@@ -14,7 +14,7 @@ sylius:
             name: Ad
         association_type:
             name: Ad
-            translations: 'Çeviriler'
+            translations: Çeviriler
         variant:
             name: Ad
         option:

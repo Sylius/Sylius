@@ -42,4 +42,4 @@ sylius:
             name: Name
             position: Position
             tax_category: Steuerkategorie
-            translations: 'Übersetzungen'
+            translations: Übersetzungen

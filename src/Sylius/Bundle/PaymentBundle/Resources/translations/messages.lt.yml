@@ -28,7 +28,7 @@ sylius:
                 refunded: Grąžinta
         payment_method:
             description: Aprašymas
-            enabled: 'Įjungtas?'
+            enabled: Įjungtas?
             instructions: Instrukcijos
             name: Pavadinimas
             position: Pozicija

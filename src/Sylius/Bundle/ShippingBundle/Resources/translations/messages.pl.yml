@@ -38,7 +38,7 @@ sylius:
             enabled: Aktywne
             match_all_category_requirement: Wszystkie przedmioty muszą pochodzić z tej samej kategorii wysyłki
             match_any_category_requirement: Przynajmniej 1 przedmiot musi pochodzić z kategorii wysyłki
-            match_none_category_requirement: 'Żaden przedmiot nie musi pochodzić z kategorii wysyłki'
+            match_none_category_requirement: Żaden przedmiot nie musi pochodzić z kategorii wysyłki
             name: Nazwa
             position: Pozycja
             tax_category: Kategoria podatkowa

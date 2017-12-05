@@ -4,4 +4,4 @@
 sylius:
     form:
         gateway_config:
-            type: '타입'
+            type: 타입

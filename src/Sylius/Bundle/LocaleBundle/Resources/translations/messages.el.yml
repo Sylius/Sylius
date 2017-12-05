@@ -4,4 +4,4 @@
 sylius:
     form:
         locale:
-            name: 'Ονομασία'
+            name: Ονομασία

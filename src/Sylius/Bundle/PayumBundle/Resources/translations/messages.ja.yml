@@ -5,5 +5,5 @@ sylius:
     form:
         gateway_configuration:
             paypal:
-                password: 'パスワード'
-                username: 'ユーザー名'
+                password: パスワード
+                username: ユーザー名

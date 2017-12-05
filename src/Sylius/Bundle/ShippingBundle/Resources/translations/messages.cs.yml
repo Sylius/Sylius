@@ -11,7 +11,7 @@ sylius:
             state: Stát
             states:
                 checkout: Objednat
-                pending: 'Čekající'
+                pending: Čekající
                 ready: Připraven
                 shipped: Dodáno
                 returned: Vráceno

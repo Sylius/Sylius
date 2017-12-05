@@ -5,7 +5,7 @@ sylius:
     form:
         user:
             email: El. paštas
-            enabled: 'Įjungta'
+            enabled: Įjungta
             password:
                 label: Slaptažodis
                 confirmation: Patikrinimas

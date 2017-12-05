@@ -26,7 +26,7 @@ sylius:
             select: Vybrat
         zone:
             add_member: Přidat člena
-            members: 'Členové'
+            members: Členové
             name: Jméno
             type: Typ
             types:

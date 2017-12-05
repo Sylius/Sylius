@@ -4,22 +4,22 @@
 sylius:
     form:
         address:
-            city: '市町村'
-            company: '会社名'
-            country: '国'
-            first_name: '名'
-            last_name: '姓'
-            phone_number: '電話番号'
-            postcode: '郵便番号'
-            province: '都道府県'
-            zone: '対象の地域'
+            city: 市町村
+            company: 会社名
+            country: 国
+            first_name: 名
+            last_name: 姓
+            phone_number: 電話番号
+            postcode: 郵便番号
+            province: 都道府県
+            zone: 対象の地域
         country:
-            add_province: '都道府県を設定する'
-            provinces: '都道府県'
+            add_province: 都道府県を設定する
+            provinces: 都道府県
         zone:
-            add_member: '追加'
-            members: '地域'
+            add_member: 追加
+            members: 地域
             types:
-                country: '国'
-                province: '都道府県'
-                zone: '対象の地域'
+                country: 国
+                province: 都道府県
+                zone: 対象の地域

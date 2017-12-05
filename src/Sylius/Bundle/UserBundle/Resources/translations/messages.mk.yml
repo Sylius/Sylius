@@ -4,20 +4,20 @@
 sylius:
     form:
         user:
-            email: 'Е-пошта'
-            enabled: 'Овозможено'
+            email: Е-пошта
+            enabled: Овозможено
             password:
-                label: 'Лозинка'
-                confirmation: 'Верификација'
-            remember_me: 'Запамти ме'
-            shipping_address: 'Адреса за испорака'
-            username: 'Корисничко име'
+                label: Лозинка
+                confirmation: Верификација
+            remember_me: Запамти ме
+            shipping_address: Адреса за испорака
+            username: Корисничко име
         user_filter:
-            query: 'Пребарај'
+            query: Пребарај
         user_change_password:
-            confirmation: 'Потврда'
-            current: 'Тековна лозинка'
-            new: 'Нова лозинка'
+            confirmation: Потврда
+            current: Тековна лозинка
+            new: Нова лозинка
         user_reset_password:
-            confirmation: 'Потврда'
-            new: 'Нова лозинка'
+            confirmation: Потврда
+            new: Нова лозинка

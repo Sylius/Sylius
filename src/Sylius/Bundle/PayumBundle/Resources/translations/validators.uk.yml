@@ -5,13 +5,13 @@ sylius:
     gateway_config:
         paypal:
             password:
-                not_blank: 'Будь-ласка, введіть пароль для PayPal.'
+                not_blank: Будь-ласка, введіть пароль для PayPal.
             signature:
-                not_blank: 'Будь ласка, введіть підпис paypal.'
+                not_blank: Будь ласка, введіть підпис paypal.
             username:
-                not_blank: 'Будь ласка, введіть ім''я користувача PayPal.'
+                not_blank: Будь ласка, введіть ім'я користувача PayPal.
         stripe:
             secret_key:
-                not_blank: 'Будь ласка, введіть секретний ключ.'
+                not_blank: Будь ласка, введіть секретний ключ.
             publishable_key:
-                not_blank: 'Будь ласка, введіть публічний ключ.'
+                not_blank: Будь ласка, введіть публічний ключ.

@@ -16,7 +16,7 @@ sylius:
             name: Name
         association_type:
             name: Name
-            translations: 'Übersetzungen'
+            translations: Übersetzungen
         association:
             type: Verbindungs-Typ
             product: Zugehöriges Produkt

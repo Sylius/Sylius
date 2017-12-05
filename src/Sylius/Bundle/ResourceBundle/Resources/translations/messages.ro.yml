@@ -5,4 +5,4 @@ sylius:
     form:
         collection:
             add: Adăugați
-            delete: 'Șterge'
+            delete: Șterge

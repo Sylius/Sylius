@@ -4,9 +4,9 @@
 sylius:
     form:
         address:
-            city: 'Şehir'
-            company: 'Şirket'
-            country: 'Ülke'
+            city: Şehir
+            company: Şirket
+            country: Ülke
             first_name: Ad
             last_name: Soyad
             phone_number: Telefon numarası
@@ -16,27 +16,27 @@ sylius:
             zone: Bölge
         country:
             add_province: Bölge ekle
-            name: 'Ülke adı'
-            provinces: 'İller'
-            select: 'Ülke seçin'
+            name: Ülke adı
+            provinces: İller
+            select: Ülke seçin
             enabled: Etkin
         province:
             name: Ad
             abbreviation: Kısaltma
             select: Seçiniz
         zone:
-            add_member: 'Üye ekle'
-            members: 'Üyeler'
+            add_member: Üye ekle
+            members: Üyeler
             name: Bölge adı
             type: Türü
             types:
-                country: 'Ülke'
+                country: Ülke
                 province: Eyalet
                 zone: Bölge
             scope: Kapsam
             scopes:
                 all: Tümü
-            select: 'Ülke seçin'
-            select_scope: 'Ölçek seçiniz'
+            select: Ülke seçin
+            select_scope: Ölçek seçiniz
         zone_member:
-            select: 'Ülke seçin'
+            select: Ülke seçin

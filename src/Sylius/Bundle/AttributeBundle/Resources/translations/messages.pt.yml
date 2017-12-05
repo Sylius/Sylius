@@ -20,7 +20,7 @@ sylius:
             percent: Percentagem
             select: Seleccionar
             text: Texto
-            textarea: 'Área de texto'
+            textarea: Área de texto
             title: Tipo de atributo
             validation: Validação
         attribute_type_configuration:

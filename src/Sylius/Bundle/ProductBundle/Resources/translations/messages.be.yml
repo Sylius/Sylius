@@ -4,21 +4,21 @@
 sylius:
     form:
         product:
-            name: 'Імя'
-            description: 'Апісанне'
-            options: 'Опцыі'
+            name: Імя
+            description: Апісанне
+            options: Опцыі
             meta_keywords: Meta keywords
             meta_description: Meta description
         product_variant:
-            name: 'Імя'
+            name: Імя
         association_type:
-            name: 'Імя'
-            translations: 'Пераклады'
+            name: Імя
+            translations: Пераклады
         variant:
-            name: 'Імя'
+            name: Імя
         option:
-            name: 'Імя'
-            values: 'Магчымыя значэнні'
+            name: Імя
+            values: Магчымыя значэнні
         option_value:
-            add_value: 'Дадаць значэнне'
-            value: 'Значэнне'
+            add_value: Дадаць значэнне
+            value: Значэнне

@@ -167,7 +167,7 @@ sylius:
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
-            session_start: 'Økt'
+            session_start: Økt
             simplexml_import_dom: SimpleXML
             token_get_all: Tokenizer
         filesystem:

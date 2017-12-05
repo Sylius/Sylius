@@ -4,7 +4,7 @@
 sylius:
     form:
         review:
-            author: 'Аўтар'
+            author: Аўтар
             status:
-                new: 'Новы'
-            title: 'Назва'
+                new: Новы
+            title: Назва

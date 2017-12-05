@@ -49,7 +49,7 @@ sylius:
             total_price_of_items_from_taxon: Prix total des Articles du taxon
             cart_quantity_configuration:
                 count: Nombre
-                equal: 'Égal'
+                equal: Égal
             contains_product_configuration:
                 exclude: Exclure
                 variants: Produits

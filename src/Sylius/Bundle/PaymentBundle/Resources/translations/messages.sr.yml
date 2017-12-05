@@ -5,4 +5,4 @@ sylius:
     form:
         payment:
             state:
-                header: 'Стање плаћања'
+                header: Стање плаћања

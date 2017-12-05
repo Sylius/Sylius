@@ -4,4 +4,4 @@
 sylius:
     form:
         gateway_config:
-            type: 'Вид'
+            type: Вид

@@ -4,13 +4,13 @@
 sylius:
     tax_category:
         name:
-            not_blank: 'Įveskite mokesčių kategorijos pavadinimą.'
+            not_blank: Įveskite mokesčių kategorijos pavadinimą.
     tax_rate:
         category:
             not_blank: Pasirinkite mokesčių kategoriją.
         name:
-            not_blank: 'Įveskite mokesčių tarifo pavadinimą.'
+            not_blank: Įveskite mokesčių tarifo pavadinimą.
         amount:
-            not_blank: 'Įveskite mokesčių tarifo sumą.'
+            not_blank: Įveskite mokesčių tarifo sumą.
         calculator:
             not_blank: Pasirinkite mokesčių skaičiuoklę.

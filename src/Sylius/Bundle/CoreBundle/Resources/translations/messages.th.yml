@@ -6,155 +6,155 @@ sylius:
         block:
             body: Body
             id: ID
-            title: 'หัวข้อ'
+            title: หัวข้อ
         cart:
-            coupon: 'คูปอง'
+            coupon: คูปอง
         checkout:
             addressing:
-                different_billing_address: 'ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่'
-            payment_method: 'วิธีการชำระเงิน'
-            shipping_method: 'วิธีการจัดส่ง'
+                different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
+            payment_method: วิธีการชำระเงิน
+            shipping_method: วิธีการจัดส่ง
         promotion:
-            channels: 'ช่องทางจำหน่าย'
+            channels: ช่องทางจำหน่าย
         promotion_action:
             add_product_configuration:
-                product: 'สินค้า'
+                product: สินค้า
         promotion_coupon:
-            per_customer_usage_limit: 'จำกัดการใช้งานสำหรับลูกค้าแต่ละคน'
+            per_customer_usage_limit: จำกัดการใช้งานสำหรับลูกค้าแต่ละคน
         group:
-            name: 'ชื่อ'
+            name: ชื่อ
             roles: Roles
         channel:
-            contact_email: 'ติดต่ออีเมล์'
-            currencies: 'สกุลเงิน'
-            currency_base: 'ฐานสกุลเงิน'
-            account_verification_required: 'จำเป็นต้องยืนยันบัญชีหรือไม่?'
+            contact_email: ติดต่ออีเมล์
+            currencies: สกุลเงิน
+            currency_base: ฐานสกุลเงิน
+            account_verification_required: จำเป็นต้องยืนยันบัญชีหรือไม่?
             hostname: Hostname
-            locale_default: 'ตำแหน่งที่ตั้งเริ่มต้น'
-            locales: 'ภาษาที่ใช้'
-            payment_methods: 'วิธีการชำระเงิน'
-            shipping_methods: 'วิธีการจัดส่ง'
-            skipping_shipping_step_allowed: 'ข้ามขั้นตอนจัดส่งถ้ามีวิธีจัดส่งเพียงวิธีเดียว'
-            skipping_payment_step_allowed: 'ข้ามขั้นตอนการชำระเงินถ้ามีวิธีการชำระเงินเพียงวิธีเดียว'
-            tax_calculation_strategy: 'กลยุทธ์การคำนวณภาษี'
-            tax_zone_default: 'เขตภาษีเริ่มต้น'
-            taxonomies: 'การจัดประเภท'
-            theme: 'ธีม'
+            locale_default: ตำแหน่งที่ตั้งเริ่มต้น
+            locales: ภาษาที่ใช้
+            payment_methods: วิธีการชำระเงิน
+            shipping_methods: วิธีการจัดส่ง
+            skipping_shipping_step_allowed: ข้ามขั้นตอนจัดส่งถ้ามีวิธีจัดส่งเพียงวิธีเดียว
+            skipping_payment_step_allowed: ข้ามขั้นตอนการชำระเงินถ้ามีวิธีการชำระเงินเพียงวิธีเดียว
+            tax_calculation_strategy: กลยุทธ์การคำนวณภาษี
+            tax_zone_default: เขตภาษีเริ่มต้น
+            taxonomies: การจัดประเภท
+            theme: ธีม
         image:
-            type: 'ชนิด'
-            file: 'รูปภาพ'
+            type: ชนิด
+            file: รูปภาพ
         locale:
-            code: 'รหัส'
-            enabled: 'เปิดใช้งานแล้ว'
+            code: รหัส
+            enabled: เปิดใช้งานแล้ว
         order_filter:
-            created_at_from: 'สร้างหลังจาก'
-            created_at_to: 'สร้างก่อน'
-            number: 'หมายเลข'
-            total_from: 'จาก'
-            total_to: 'ถึง'
-            payment_state: 'สถานะการชำระเงิน'
-            channel: 'ทุกช่องทาง'
+            created_at_from: สร้างหลังจาก
+            created_at_to: สร้างก่อน
+            number: หมายเลข
+            total_from: จาก
+            total_to: ถึง
+            payment_state: สถานะการชำระเงิน
+            channel: ทุกช่องทาง
         page:
             body: Body
             id: ID
-            title: 'หัวข้อ'
+            title: หัวข้อ
         product:
-            images: 'ภาพ'
-            restricted_zone: 'จำกัดโซน'
-            short_description: 'คำอธิบายโดยย่อ'
-            variant_selection_method: 'วิธีการเลือกตัวแปร'
-            main_taxon: 'หมวดหมู่หลัก'
-            channels: 'ช่องทางจำหน่าย'
-            enabled: 'เปิดใช้งานแล้ว'
+            images: ภาพ
+            restricted_zone: จำกัดโซน
+            short_description: คำอธิบายโดยย่อ
+            variant_selection_method: วิธีการเลือกตัวแปร
+            main_taxon: หมวดหมู่หลัก
+            channels: ช่องทางจำหน่าย
+            enabled: เปิดใช้งานแล้ว
         product_filter:
-            name: 'ชื่อ'
-            code: 'รหัส'
+            name: ชื่อ
+            code: รหัส
         product_variant:
-            tax_category: 'ประเภทภาษี'
-            shipping_category: 'ประเภทการจัดส่ง'
+            tax_category: ประเภทภาษี
+            shipping_category: ประเภทการจัดส่ง
         shipment_filter:
-            created_at_from: 'จาก'
-            created_at_to: 'ถึง'
-            number: 'หมายเลขคำสั่งซื้อ'
-            shipping_address: 'ส่งให้กับ'
-            channel: 'ทุกช่องทาง'
+            created_at_from: จาก
+            created_at_to: ถึง
+            number: หมายเลขคำสั่งซื้อ
+            shipping_address: ส่งให้กับ
+            channel: ทุกช่องทาง
         payment_filter:
-            created_at_from: 'จาก'
-            created_at_to: 'ถึง'
-            number: 'หมายเลขคำสั่งซื้อ'
-            billing_address: 'ใบกำกับภาษี ถึง'
-            channel: 'ทุกช่องทาง'
+            created_at_from: จาก
+            created_at_to: ถึง
+            number: หมายเลขคำสั่งซื้อ
+            billing_address: ใบกำกับภาษี ถึง
+            channel: ทุกช่องทาง
         shipping_method:
-            zone: 'โซน'
+            zone: โซน
         taxon:
-            code: 'รหัส'
-            file: 'เลือกรูปภาพ'
-            images: 'ภาพ'
+            code: รหัส
+            file: เลือกรูปภาพ
+            images: ภาพ
         taxonomy:
-            file: 'เลือกรูปภาพ'
+            file: เลือกรูปภาพ
         user:
-            billing_address: 'ที่อยู่สำหรับออกใบเสร็จ'
-            different_billing_address: 'ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่'
-            enabled: 'เปิดใช้งานแล้ว'
-            first_name: 'ชื่อ'
-            groups: 'กลุ่ม'
+            billing_address: ที่อยู่สำหรับออกใบเสร็จ
+            different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
+            enabled: เปิดใช้งานแล้ว
+            first_name: ชื่อ
+            groups: กลุ่ม
             roles: Roles
-            last_name: 'นามสกุล'
-            password: 'รหัสผ่าน'
-            shipping_address: 'ที่อยู่สำหรับจัดส่งสินค้า'
+            last_name: นามสกุล
+            password: รหัสผ่าน
+            shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
         user_filter:
-            query: 'ค้นหา'
+            query: ค้นหา
         variant:
-            depth: 'ความลึก'
-            height: 'ความสูง'
-            on_hand: 'จำนวนสินค้าปัจจุบัน'
-            price: 'ราคา'
+            depth: ความลึก
+            height: ความสูง
+            on_hand: จำนวนสินค้าปัจจุบัน
+            price: ราคา
             sku: SKU
-            shipping_required: 'จำเป็นต้องระบุการจัดส่งหรือไม่?'
-            weight: 'น้ำหนัก'
-            width: 'ความกว้าง'
+            shipping_required: จำเป็นต้องระบุการจัดส่งหรือไม่?
+            weight: น้ำหนัก
+            width: ความกว้าง
         attribute:
             product_attribute_value:
-                attribute: 'คุณลักษณะ (Attribute)'
-                value: 'ค่า'
+                attribute: คุณลักษณะ (Attribute)
+                value: ค่า
         guest:
-            email: 'อีเมล'
+            email: อีเมล
         product_association:
-            product: 'สินค้าที่เกี่ยวข้อง'
-            type: 'ชนิดสินค้าที่เกี่ยวข้อง'
+            product: สินค้าที่เกี่ยวข้อง
+            type: ชนิดสินค้าที่เกี่ยวข้อง
         product_association_type:
-            name: 'ชื่อ'
+            name: ชื่อ
         promotion_filter:
-            products: 'ตัวกรองสินค้า'
-            taxons: 'ตัวกรอง taxons'
+            products: ตัวกรองสินค้า
+            taxons: ตัวกรอง taxons
         promotion_rule:
             customer_group:
-                group: 'กลุ่มลูกค้า'
+                group: กลุ่มลูกค้า
             has_taxon:
-                taxons: 'การจัดหมวดหมู่'
+                taxons: การจัดหมวดหมู่
             product:
-                products: 'สินค้า'
+                products: สินค้า
             total_of_items_from_taxon:
-                taxon: 'หมวดหมู่'
-                amount: 'ยอดเงิน'
+                taxon: หมวดหมู่
+                amount: ยอดเงิน
         payment_method:
-            channels: 'ช่องทางจำหน่าย'
+            channels: ช่องทางจำหน่าย
         product_attribute:
-            position: 'ตำแหน่ง'
+            position: ตำแหน่ง
         zone:
             scopes:
-                shipping: 'จัดส่ง'
-                tax: 'ภาษี'
+                shipping: จัดส่ง
+                tax: ภาษี
     installer:
         extensions:
-            header: 'ส่วนขยาย'
+            header: ส่วนขยาย
             accelerator:
-                header: 'ตัวเร่ง'
-                help: 'เปิดใช้งาน Zend OpCache (แนะนำ)'
+                header: ตัวเร่ง
+                help: เปิดใช้งาน Zend OpCache (แนะนำ)
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'ติดตั้ง และเปิดใช้งาน extension %extension%'
+            help: ติดตั้ง และเปิดใช้งาน extension %extension%
             iconv: Iconv
             exif: Exif
             fileinfo: Fileinfo
@@ -171,13 +171,13 @@ sylius:
             simplexml_import_dom: SimpleXML
             token_get_all: Tokenizer
         filesystem:
-            header: 'ระบบแฟ้ม'
+            header: ระบบแฟ้ม
             cache:
-                header: 'แคช'
+                header: แคช
                 help: 'ตั้งค่า permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: exists
             logs:
-                header: 'บันทึก'
+                header: บันทึก
                 help: 'ตั้งค่า permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: not exists
             not_writable: not writable
@@ -187,7 +187,7 @@ sylius:
             vendors: vendors
             writable: writable
         settings:
-            header: 'รุ่นของ PHP และการตั้งค่า'
+            header: รุ่นของ PHP และการตั้งค่า
             any: any
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
@@ -200,13 +200,13 @@ sylius:
             short_open_tag: short_open_tag
             timezone: timezone
             timezone_deprecated:
-                header: 'เขตเวลาที่เลิกใช้งาน'
+                header: เขตเวลาที่เลิกใช้งาน
                 help: Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).
             version: PHP เวอร์ชัน
             version_recommended: PHP เวอร์ชันที่แนะนำ
     payum_gateway:
-        cash_on_delivery: 'ชำระด้วยเงินสด'
-        offline: 'ออฟไลน์'
-        paypal_express_checkout: 'ชำระเงินด้วย Paypal'
+        cash_on_delivery: ชำระด้วยเงินสด
+        offline: ออฟไลน์
+        paypal_express_checkout: ชำระเงินด้วย Paypal
     shipping_method_resolver:
-        by_zones_and_channel: 'โดยพื้นที่และช่องทาง'
+        by_zones_and_channel: โดยพื้นที่และช่องทาง

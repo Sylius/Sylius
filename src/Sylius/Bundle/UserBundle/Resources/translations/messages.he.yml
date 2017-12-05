@@ -4,20 +4,20 @@
 sylius:
     form:
         user:
-            email: 'דוא"ל'
-            enabled: 'הופעל'
+            email: דוא"ל
+            enabled: הופעל
             password:
-                label: 'סיסמה'
-                confirmation: 'אימות'
-            remember_me: 'זכור אותי'
-            shipping_address: 'כתובת למשלוח'
-            username: 'שם משתמש'
+                label: סיסמה
+                confirmation: אימות
+            remember_me: זכור אותי
+            shipping_address: כתובת למשלוח
+            username: שם משתמש
         user_filter:
-            query: 'חפש'
+            query: חפש
         user_change_password:
-            confirmation: 'אישור'
-            current: 'סיסמה נוכחית'
-            new: 'סיסמה חדשה'
+            confirmation: אישור
+            current: סיסמה נוכחית
+            new: סיסמה חדשה
         user_reset_password:
-            confirmation: 'אימות'
-            new: 'סיסמה חדשה'
+            confirmation: אימות
+            new: סיסמה חדשה

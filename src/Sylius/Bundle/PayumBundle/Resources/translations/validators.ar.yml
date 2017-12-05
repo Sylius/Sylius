@@ -5,13 +5,13 @@ sylius:
     gateway_config:
         paypal:
             password:
-                not_blank: 'الرجاء إدخال كلمة المرور بأي بال.'
+                not_blank: الرجاء إدخال كلمة المرور بأي بال.
             signature:
-                not_blank: 'الرجاء إدخال التوقيع بأي بال.'
+                not_blank: الرجاء إدخال التوقيع بأي بال.
             username:
-                not_blank: 'الرجاء إدخال اسم المستخدم الخاص بك.'
+                not_blank: الرجاء إدخال اسم المستخدم الخاص بك.
         stripe:
             secret_key:
-                not_blank: 'الرجاء إدخال مفتاح سري شريطية.'
+                not_blank: الرجاء إدخال مفتاح سري شريطية.
             publishable_key:
-                not_blank: 'الرجاء إدخال مفتاح publishable شريطية.'
+                not_blank: الرجاء إدخال مفتاح publishable شريطية.

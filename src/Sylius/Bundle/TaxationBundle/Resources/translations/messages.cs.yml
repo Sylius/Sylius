@@ -9,6 +9,6 @@ sylius:
         tax_rate:
             category: Kategorie
             name: Jméno
-            amount: 'Částka'
+            amount: Částka
             included_in_price: Zahrnuto v ceně?
             calculator: Kalkulačka

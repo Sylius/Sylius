@@ -21,7 +21,7 @@ sylius:
             min: Drejtimi duhet të jetë më i madh se {{ limit }}.
             not_blank: Shkruaj drejtimin.
         original_price:
-            min: 'çmimi fillestar nuk mund të jetë negativ.'
+            min: çmimi fillestar nuk mund të jetë negativ.
     product_translation:
         short_description:
             max: Përshkrimi i shkurtër nuk duhet të përmbajë më shumë se {{ limit }} karaktere.

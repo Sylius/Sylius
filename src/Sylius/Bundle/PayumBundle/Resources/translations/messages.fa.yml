@@ -4,15 +4,15 @@
 sylius:
     form:
         gateway_config:
-            type: 'نوع'
+            type: نوع
         gateway_configuration:
             paypal:
-                password: 'کلمه عبور'
-                signature: 'امضا'
-                username: 'نام کاربری'
+                password: کلمه عبور
+                signature: امضا
+                username: نام کاربری
             stripe:
-                publishable_key: 'کلید قابل انتشار'
-                secret_key: 'کلید رمز'
+                publishable_key: کلید قابل انتشار
+                secret_key: کلید رمز
     payum_gateway_factory:
-        offline: 'آفلاین'
-        paypal_express_checkout: 'پرداخت با پی‌پال'
+        offline: آفلاین
+        paypal_express_checkout: پرداخت با پی‌پال

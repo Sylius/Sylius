@@ -4,4 +4,4 @@
 sylius:
     review:
         author:
-            already_exists: 'Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.'
+            already_exists: Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.

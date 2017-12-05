@@ -4,4 +4,4 @@
 sylius:
     form:
         collection:
-            add: '新增'
+            add: 新增

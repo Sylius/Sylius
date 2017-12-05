@@ -21,4 +21,4 @@ sylius:
     gender:
         unknown: Neznámý
         male: Muž
-        female: 'Žena'
+        female: Žena

@@ -4,4 +4,4 @@
 sylius:
     form:
         locale:
-            name: 'ชื่อภาษา'
+            name: ชื่อภาษา

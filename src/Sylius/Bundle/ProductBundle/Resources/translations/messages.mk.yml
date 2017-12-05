@@ -4,7 +4,7 @@
 sylius:
     form:
         option:
-            values: 'Можни вредности'
+            values: Можни вредности
         option_value:
-            add_value: 'Додај вредност'
-            value: 'Вредност'
+            add_value: Додај вредност
+            value: Вредност

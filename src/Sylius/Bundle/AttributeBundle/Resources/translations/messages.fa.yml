@@ -4,36 +4,36 @@
 sylius:
     form:
         attribute:
-            add: 'ﺍﻓﺰﻭﺩﻥ'
-            add_attributes: 'افزودن قابلیت'
-            choices: 'انتخاب ها'
-            code: 'نام انگلیسی'
-            name: 'نام'
-            translations: 'زبان های'
-            type: 'نوع'
+            add: ﺍﻓﺰﻭﺩﻥ
+            add_attributes: افزودن قابلیت
+            choices: انتخاب ها
+            code: نام انگلیسی
+            name: نام
+            translations: زبان های
+            type: نوع
         attribute_type:
-            checkbox: 'گزینشی'
-            configuration: 'تنظیمات'
-            date: 'تاریخ'
-            datetime: 'تاریخ و زمان'
-            integer: 'عددی'
-            percent: 'درصدی'
-            select: 'انتخاب'
-            text: 'متنی'
-            textarea: 'متن طولانی'
-            title: 'انواع قابلیت'
-            validation: 'اعتبار'
+            checkbox: گزینشی
+            configuration: تنظیمات
+            date: تاریخ
+            datetime: تاریخ و زمان
+            integer: عددی
+            percent: درصدی
+            select: انتخاب
+            text: متنی
+            textarea: متن طولانی
+            title: انواع قابلیت
+            validation: اعتبار
         attribute_type_configuration:
             datetime:
-                format: 'فرمت تاریخ'
+                format: فرمت تاریخ
             date:
-                format: 'فرمت تاریخ'
+                format: فرمت تاریخ
             select:
-                multiple: 'چند'
-                values: 'مقادیر'
-                choose: 'یک گزینه را انتخاب کنید'
-                min: 'حداقل موارد'
-                max: 'حداکثر موارد'
+                multiple: چند
+                values: مقادیر
+                choose: یک گزینه را انتخاب کنید
+                min: حداقل موارد
+                max: حداکثر موارد
             text:
-                min: 'حداقل تعداد حروف'
-                max: 'حداکثر تعداد حروف'
+                min: حداقل تعداد حروف
+                max: حداکثر تعداد حروف

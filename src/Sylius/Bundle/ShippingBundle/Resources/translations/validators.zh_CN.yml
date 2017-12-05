@@ -13,9 +13,9 @@ sylius:
             unique: '给定代码配送编码已存在。'
     shipping_method:
         calculator:
-            max_length: '最大长度'
-            min_length: '请输入配送方式价格计算最小值'
-            not_blank: '请选择配送方式的价格计算器'
+            max_length: 最大长度
+            min_length: 请输入配送方式价格计算最小值
+            not_blank: 请选择配送方式的价格计算器
         name:
             max_length: '配送方式名称需要在 {{ limit }} 个字符以内。'
             min_length: '配送方式名称至少要 {{ limit }} 个字符。'

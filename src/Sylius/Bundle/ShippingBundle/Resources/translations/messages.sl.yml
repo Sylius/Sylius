@@ -5,7 +5,7 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: 'Število'
+                count: Število
             type: Vrsta pravila
         shipment:
             state: Stanje

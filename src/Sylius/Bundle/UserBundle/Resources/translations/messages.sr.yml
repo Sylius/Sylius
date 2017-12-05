@@ -4,9 +4,9 @@
 sylius:
     form:
         user:
-            username: 'Кросницко име'
+            username: Кросницко име
         user_change_password:
-            current: 'Тренутна лозинка'
-            new: 'Нова лозинка'
+            current: Тренутна лозинка
+            new: Нова лозинка
         user_reset_password:
-            new: 'Нова лозинка'
+            new: Нова лозинка

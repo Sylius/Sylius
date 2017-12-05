@@ -4,39 +4,39 @@
 sylius:
     form:
         address:
-            city: 'Πόλη'
-            company: 'Εταιρεία'
-            country: 'Χώρα'
-            first_name: 'Όνομα'
-            last_name: 'Επώνυμο'
-            phone_number: 'Αριθμός τηλεφώνου'
-            postcode: 'Ταχ. Κώδικας'
-            street: 'Οδός'
-            province: 'Επαρχία'
-            zone: 'Ζώνη'
+            city: Πόλη
+            company: Εταιρεία
+            country: Χώρα
+            first_name: Όνομα
+            last_name: Επώνυμο
+            phone_number: Αριθμός τηλεφώνου
+            postcode: Ταχ. Κώδικας
+            street: Οδός
+            province: Επαρχία
+            zone: Ζώνη
         country:
-            add_province: 'Προσθήκη επαρχίας'
-            name: 'Ονομασία'
-            provinces: 'Επαρχίες'
-            select: 'Επιλέξτε'
-            enabled: 'Ενεργοποιημένο'
+            add_province: Προσθήκη επαρχίας
+            name: Ονομασία
+            provinces: Επαρχίες
+            select: Επιλέξτε
+            enabled: Ενεργοποιημένο
         province:
-            name: 'Ονομασία'
-            abbreviation: 'Συντομογραφία'
-            select: 'Επιλέξτε'
+            name: Ονομασία
+            abbreviation: Συντομογραφία
+            select: Επιλέξτε
         zone:
-            add_member: 'Προσθήκη μέλους'
-            members: 'Μέλη'
-            name: 'Ονομασία'
-            type: 'Τύπος'
+            add_member: Προσθήκη μέλους
+            members: Μέλη
+            name: Ονομασία
+            type: Τύπος
             types:
-                country: 'Χώρα'
-                province: 'Επαρχία'
-                zone: 'Ζώνη'
-            scope: 'Πεδίο εφαρμογής'
+                country: Χώρα
+                province: Επαρχία
+                zone: Ζώνη
+            scope: Πεδίο εφαρμογής
             scopes:
-                all: 'Όλα'
-            select: 'Επιλέξτε'
-            select_scope: 'Επιλέξτε πεδίο'
+                all: Όλα
+            select: Επιλέξτε
+            select_scope: Επιλέξτε πεδίο
         zone_member:
-            select: 'Επιλέξτε'
+            select: Επιλέξτε

@@ -10,5 +10,5 @@ sylius:
             category: Kategorija
             name: Pavadinimas
             amount: Suma
-            included_in_price: 'Įeina į kainą?'
+            included_in_price: Įeina į kainą?
             calculator: Skaičiuoklė

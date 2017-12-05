@@ -20,8 +20,8 @@ sylius:
                 authorized: Autorizată
                 failed: Eșuată
                 new: Nouă
-                pending: 'În așteptare'
-                processing: 'În curs de procesare'
+                pending: În așteptare
+                processing: În curs de procesare
                 unknown: Necunoscută
                 void: Nulă
                 cancelled: Anulată

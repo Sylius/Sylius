@@ -19,6 +19,8 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Produto
+        promotion_coupon:
+            per_customer_usage_limit: Limite de uso por cliente
         group:
             name: Nome
             roles: Funções
@@ -26,7 +28,7 @@ sylius:
             contact_email: E-mail de Contacto
             currencies: Moedas
             currency_base: Moeda base
-            account_verification_required: 'É necessária a verificação da conta?'
+            account_verification_required: É necessária a verificação da conta?
             hostname: Nome do servidor
             locale_default: Localidade padrão
             locales: Linguagens

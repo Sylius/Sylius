@@ -5,41 +5,41 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: 'Кол-во'
-                equal: 'Равно'
-            type: 'Тип измерения'
+                count: Кол-во
+                equal: Равно
+            type: Тип измерения
         shipment:
             state: Cтатус
             states:
-                checkout: 'Оформление заказа'
-                pending: 'В обработке'
-                ready: 'Готов'
-                shipped: 'Доставлено'
-                returned: 'Возвращено'
-                cancelled: 'Отменён'
-            tracking_code: 'Код отслеживания'
+                checkout: Оформление заказа
+                pending: В обработке
+                ready: Готов
+                shipped: Доставлено
+                returned: Возвращено
+                cancelled: Отменён
+            tracking_code: Код отслеживания
         shipping_calculator:
             flat_rate_configuration:
-                label: 'Фиксированная ставка за доставку'
-                amount: 'Сумма'
+                label: Фиксированная ставка за доставку
+                amount: Сумма
             per_unit_rate_configuration:
-                label: 'Фиксированная ставка за единицу товара'
-                amount: 'Сумма'
+                label: Фиксированная ставка за единицу товара
+                amount: Сумма
         shipping_category:
-            description: 'Описание'
-            name: 'Название'
+            description: Описание
+            name: Название
         shipping_method:
-            calculator: 'Калькулятор'
-            category: 'Категория'
-            category_requirement: 'Условия категории'
-            channels: 'Каналы'
-            configuration: 'Конфигурация'
-            description: 'Описание'
-            enabled: 'Активен'
-            match_all_category_requirement: 'Все единицы товара должны соответствовать способу доставки'
-            match_any_category_requirement: 'По крайней мере одна единица товара должны соответствовать способу доставки'
-            match_none_category_requirement: 'Ни одна из единиц товара не должна соответствовать способу доставки'
-            name: 'Название'
-            position: 'Позиция'
-            tax_category: 'Категория налогов'
+            calculator: Калькулятор
+            category: Категория
+            category_requirement: Условия категории
+            channels: Каналы
+            configuration: Конфигурация
+            description: Описание
+            enabled: Активен
+            match_all_category_requirement: Все единицы товара должны соответствовать способу доставки
+            match_any_category_requirement: По крайней мере одна единица товара должны соответствовать способу доставки
+            match_none_category_requirement: Ни одна из единиц товара не должна соответствовать способу доставки
+            name: Название
+            position: Позиция
+            tax_category: Категория налогов
             translations: '﻿Переводы'

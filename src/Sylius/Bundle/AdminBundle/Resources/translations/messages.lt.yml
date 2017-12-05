@@ -16,7 +16,7 @@ sylius:
                 configuration:
                     admin_users: Administratoriai
                     channels: Kanalai
-                    countries: 'Šalys'
+                    countries: Šalys
                     currencies: Valiutos
                     exchange_rates: Valiutų kursai
                     header: Konfigūracija

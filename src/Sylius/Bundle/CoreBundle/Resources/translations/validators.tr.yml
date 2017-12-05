@@ -13,6 +13,8 @@ sylius:
         email:
             invalid: Bu e-posta geçerli değil.
             not_blank: Lütfen e-posta adresinizi girin.
+        message:
+            not_blank: Lütfen mesajınızı girin.
     locale:
         code:
             not_blank: Lütfen bölge kodunu giriniz.
