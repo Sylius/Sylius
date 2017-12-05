@@ -50,6 +50,11 @@ Same comes with the bundle resources, eg. for ``FOSUserBundle`` the paths should
     └── views
         └── template.html.twig
 
+.. danger::
+
+   Due to performance issues, we recommend to have as little files in theme directories as it is possible. If you have i.e. ``node_modules`` in your theme, move it to your application bundle's resources or to the project root directory.
+
+
 Enabling themes
 ---------------
 
