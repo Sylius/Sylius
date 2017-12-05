@@ -4,33 +4,33 @@
 sylius:
     form:
         promotion:
-            actions: 'Дзеянні'
-            add_action: 'Дадаць дзеянне'
-            add_rule: 'Дадаць правіла'
-            coupon_based: 'Заснавана на купонах'
-            description: 'Апісанне'
-            ends_at: 'Канец'
-            name: 'Назва'
-            rules: 'Правілы'
-            starts_at: 'Пачатак'
-            usage_limit: 'Ліміт карыстання'
+            actions: Дзеянні
+            add_action: Дадаць дзеянне
+            add_rule: Дадаць правіла
+            coupon_based: Заснавана на купонах
+            description: Апісанне
+            ends_at: Канец
+            name: Назва
+            rules: Правілы
+            starts_at: Пачатак
+            usage_limit: Ліміт карыстання
         promotion_action:
             fixed_discount_configuration:
-                amount: 'Сума'
-            type: 'Тып'
+                amount: Сума
+            type: Тып
         promotion_coupon:
-            usage_limit: 'Ліміт карыстання'
+            usage_limit: Ліміт карыстання
         promotion_coupon_generator_instruction:
-            amount: 'Сума'
-            usage_limit: 'Ліміт карыстання'
+            amount: Сума
+            usage_limit: Ліміт карыстання
         promotion_rule:
-            customer_group: 'Група кліентаў'
+            customer_group: Група кліентаў
             cart_quantity_configuration:
-                count: 'Колькасць'
+                count: Колькасць
             contains_product_configuration:
-                variants: 'Прадукты'
+                variants: Прадукты
             item_total_configuration:
-                amount: 'Сума'
+                amount: Сума
             shipping_country_configuration:
-                country: 'Краіна'
-            type: 'Тып'
+                country: Краіна
+            type: Тып

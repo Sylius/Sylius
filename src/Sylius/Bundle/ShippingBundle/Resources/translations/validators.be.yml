@@ -9,7 +9,7 @@ sylius:
             not_blank: 'Калі ласка, увядзіце назоў катэгорыі транспартыроўкі.'
     shipping_method:
         calculator:
-            max_length: 'Калі ласка, увядзіце назву катэгорыі транспартыроўкі.'
+            max_length: Калі ласка, увядзіце назву катэгорыі транспартыроўкі.
             min_length: sylius.shipping_method.calculator.мінімальная_даўжыня
             not_blank: sylius.shipping_method.calculator.без_пропускаў
         name:

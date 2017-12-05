@@ -41,7 +41,7 @@ sylius:
         order_filter:
             created_at_from: Ustvarjeno po
             created_at_to: Ustvarjeno pred
-            number: 'Številka'
+            number: Številka
             total_from: Od
             total_to: Za
             payment_state: Stanje plačila
@@ -66,13 +66,13 @@ sylius:
         shipment_filter:
             created_at_from: Od
             created_at_to: Za
-            number: 'Številka naročila'
+            number: Številka naročila
             shipping_address: Dostava na ime
             channel: Vsi kanali
         payment_filter:
             created_at_from: Od
             created_at_to: Za
-            number: 'Številka naročila'
+            number: Številka naročila
             billing_address: Račun na ime
             channel: Vsi kanali
         shipping_method:
@@ -94,7 +94,7 @@ sylius:
             price: Cena
             sku: SKU
             weight: Teža
-            width: 'Širina'
+            width: Širina
         attribute:
             product_attribute_value:
                 attribute: Atribut
@@ -160,8 +160,8 @@ sylius:
             session:
                 auto_start: session.auto_start
             short_open_tag: short_open_tag
-            timezone: 'časovni pas'
+            timezone: časovni pas
             timezone_deprecated:
                 header: Opuščeni časovni pas
-                help: 'Časovni pas %timezone% je opuščen. Popravite vašo datoteko php.ini (seznam opuščenih časovni pasov http://php.net/manual/en/timezones.others.php).'
+                help: Časovni pas %timezone% je opuščen. Popravite vašo datoteko php.ini (seznam opuščenih časovni pasov http://php.net/manual/en/timezones.others.php).
             version: Različica PHP

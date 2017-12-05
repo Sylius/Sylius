@@ -4,12 +4,12 @@
 sylius:
     form:
         image:
-            type: 'Вид'
+            type: Вид
         attribute:
             product_attribute_value:
-                value: 'Вредност'
+                value: Вредност
         guest:
-            email: 'Е-пошта'
+            email: Е-пошта
     installer:
         extensions:
             "off": false

@@ -64,7 +64,7 @@ sylius:
             name: Név
             code: Kód
         product_variant:
-            tax_category: 'ÁFA-kategória'
+            tax_category: ÁFA-kategória
             shipping_category: Szállítási kategória
         shipment_filter:
             created_at_from: '-tól'
@@ -102,14 +102,14 @@ sylius:
             depth: Mélység
             height: Magasság
             on_hand: Aktuális készlet
-            price: 'Ár'
+            price: Ár
             sku: SKU
             weight: Súly
             width: Szélesség
         attribute:
             product_attribute_value:
                 attribute: Tulajdonság
-                value: 'Érték'
+                value: Érték
         guest:
             email: E-mail
         product_association:
@@ -165,7 +165,7 @@ sylius:
             parameters:
                 header: parameters.yml
             vendors: vendors
-            writable: 'írható'
+            writable: írható
         settings:
             header: PHP verzió és beállítások
             any: bármely

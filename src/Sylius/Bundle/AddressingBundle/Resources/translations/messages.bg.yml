@@ -4,39 +4,39 @@
 sylius:
     form:
         address:
-            city: 'Град'
-            company: 'Фирма'
-            country: 'Държава'
-            first_name: 'Собствено име'
-            last_name: 'Фамилно име'
-            phone_number: 'Телефонен номер'
-            postcode: 'Пощенски код'
-            street: 'Адрес'
-            province: 'Област'
-            zone: 'Зона'
+            city: Град
+            company: Фирма
+            country: Държава
+            first_name: Собствено име
+            last_name: Фамилно име
+            phone_number: Телефонен номер
+            postcode: Пощенски код
+            street: Адрес
+            province: Област
+            zone: Зона
         country:
-            add_province: 'Добавяне на провинция'
-            name: 'Име'
-            provinces: 'Области'
-            select: 'Изберете'
-            enabled: 'Активно'
+            add_province: Добавяне на провинция
+            name: Име
+            provinces: Области
+            select: Изберете
+            enabled: Активно
         province:
-            name: 'Име'
-            abbreviation: 'Съкращение'
-            select: 'Изберете'
+            name: Име
+            abbreviation: Съкращение
+            select: Изберете
         zone:
-            add_member: 'Добавяне на член'
-            members: 'Членове'
-            name: 'Име'
-            type: 'Тип'
+            add_member: Добавяне на член
+            members: Членове
+            name: Име
+            type: Тип
             types:
-                country: 'Държава'
-                province: 'Област'
-                zone: 'Зона'
+                country: Държава
+                province: Област
+                zone: Зона
             scope: Oбсег
             scopes:
-                all: 'Всички'
-            select: 'Изберете'
-            select_scope: 'Изберете обхват'
+                all: Всички
+            select: Изберете
+            select_scope: Изберете обхват
         zone_member:
-            select: 'Изберете'
+            select: Изберете

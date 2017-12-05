@@ -16,7 +16,7 @@ sylius:
             name: Namn
         association_type:
             name: Namn
-            translations: 'Översättningar'
+            translations: Översättningar
         association:
             type: Associationstyp
             product: Tillhörande produkt

@@ -4,5 +4,5 @@
 sylius:
     form:
         user:
-            enabled: '啓用'
-            username: '使用者名稱'
+            enabled: 啓用
+            username: 使用者名稱

@@ -14,7 +14,7 @@ sylius:
             name: Nume
             priority: Prioritate
             rules: Reguli
-            starts_at: 'Începe la'
+            starts_at: Începe la
             usage_limit: Limita de utilizare
         promotion_action:
             item_fixed_discount: Discount fix per item
@@ -44,7 +44,7 @@ sylius:
             has_at_least_one_from_taxons: Are cel puțin un produs din taxoanele
             item_total: Total valoare articole
             nth_order: A câta comandă
-            shipping_country: 'Țara de livrare'
+            shipping_country: Țara de livrare
             taxonomy: Taxonomie
             total_price_of_items_from_taxon: Total valoare produse din taxon
             cart_quantity_configuration:
@@ -58,7 +58,7 @@ sylius:
             nth_order_configuration:
                 nth: Al n-lea
             shipping_country_configuration:
-                country: 'Țară'
+                country: Țară
             taxonomy_configuration:
                 exclude: Exclude
                 taxons: Taxoni

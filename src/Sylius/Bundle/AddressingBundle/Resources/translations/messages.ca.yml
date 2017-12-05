@@ -32,7 +32,7 @@ sylius:
                 country: País
                 province: Província
                 zone: Zona
-            scope: 'Àmbit d''aplicació'
+            scope: Àmbit d'aplicació
             scopes:
                 all: Totes
             select: Tria

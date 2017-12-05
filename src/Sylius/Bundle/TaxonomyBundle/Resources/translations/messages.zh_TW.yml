@@ -4,7 +4,7 @@
 sylius:
     form:
         taxon:
-            name: '名稱'
+            name: 名稱
             slug: Slug
         taxonomy:
-            name: '名稱'
+            name: 名稱

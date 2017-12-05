@@ -9,16 +9,16 @@ sylius:
                     inventory: sylius.breadcrumb.inventory.index
                     options: sylius.breadcrumb.option.index
                 configuration:
-                    countries: '国の設定'
-                    currencies: '通貨'
-                    payment_methods: '支払い方法の管理'
-                    shipping_methods: '配送方法管理'
-                    tax_rates: '税管理'
-                    zones: '地域'
+                    countries: 国の設定
+                    currencies: 通貨
+                    payment_methods: 支払い方法の管理
+                    shipping_methods: 配送方法管理
+                    tax_rates: 税管理
+                    zones: 地域
                 marketing:
-                    promotions: 'プロモーション管理'
+                    promotions: プロモーション管理
                 customers:
-                    groups: 'グループ'
+                    groups: グループ
                 sales:
                     header: sylius.breadcrumb.sales
-                    orders: '注文管理'
+                    orders: 注文管理

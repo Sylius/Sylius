@@ -11,13 +11,13 @@ sylius:
         shipment:
             state: Durum
             states:
-                checkout: 'Ödeme  yap'
+                checkout: Ödeme  yap
                 pending: Beklemede
                 ready: Hazır
                 shipped: Kargolandı
-                returned: 'İade Edildi'
-                cancelled: 'İptal Edildi'
-            tracking_code: 'İzleme Kodu'
+                returned: İade Edildi
+                cancelled: İptal Edildi
+            tracking_code: İzleme Kodu
         shipping_calculator:
             flat_rate_configuration:
                 label: Sevkıyat başına sabit oran
@@ -37,4 +37,4 @@ sylius:
             enabled: Etkin
             name: Ad
             tax_category: Vergi kategorisi
-            translations: 'Çeviriler'
+            translations: Çeviriler

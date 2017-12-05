@@ -5,8 +5,8 @@ sylius:
     form:
         address:
             city: Miestas
-            company: 'įmonė'
-            country: 'Šalis'
+            company: įmonė
+            country: Šalis
             first_name: Vardas
             last_name: Pavardė
             phone_number: Telefono numeris
@@ -18,7 +18,7 @@ sylius:
             name: Pavadinimas
             provinces: Provincijos
             select: Pasirinkite
-            enabled: 'Įjungta'
+            enabled: Įjungta
         province:
             name: Pavadinimas
             abbreviation: Santrumpa
@@ -29,7 +29,7 @@ sylius:
             name: Pavadinimas
             type: Tipas
             types:
-                country: 'Šalis'
+                country: Šalis
                 province: Provincija
                 zone: Zona
             scope: Apimtis

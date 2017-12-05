@@ -49,7 +49,7 @@ sylius:
         order_filter:
             created_at_from: Vytvořeno po
             created_at_to: Vytvořeno před
-            number: 'Číslo'
+            number: Číslo
             total_from: Od
             total_to: Do
             payment_state: Stav platby
@@ -75,13 +75,13 @@ sylius:
         shipment_filter:
             created_at_from: Od
             created_at_to: Do
-            number: 'Číslo objednávky'
+            number: Číslo objednávky
             shipping_address: Jméno příjemce
             channel: Všechny kanály
         payment_filter:
             created_at_from: Od
             created_at_to: Do
-            number: 'Číslo objednávky'
+            number: Číslo objednávky
             billing_address: Fakturační adresa – jméno
             channel: Všechny kanály
         shipping_method:
@@ -111,7 +111,7 @@ sylius:
             price: Cena
             sku: SKU
             weight: Hmotnost
-            width: 'Šířka'
+            width: Šířka
         attribute:
             product_attribute_value:
                 attribute: Atribut
@@ -135,7 +135,7 @@ sylius:
                 products: Produkty
             total_of_items_from_taxon:
                 taxon: Taxonu
-                amount: 'Částka'
+                amount: Částka
         payment_method:
             channels: Kanály
         product_attribute:
@@ -197,10 +197,10 @@ sylius:
             session:
                 auto_start: session.auto_start
             short_open_tag: short_open_tag
-            timezone: 'Časové pásmo'
+            timezone: Časové pásmo
             timezone_deprecated:
                 header: Zastaralé časové pásmo
-                help: 'Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).'
+                help: Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).
             version: Verze PHP
             version_recommended: Doporučená verze PHP
     payum_gateway:

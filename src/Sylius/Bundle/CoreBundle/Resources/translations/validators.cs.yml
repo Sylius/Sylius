@@ -64,8 +64,8 @@ sylius:
             min: Hmotnost nemůže být záporná.
             invalid: Váha musí být číslo.
         width:
-            min: 'Šířka nemůže být záporná.'
-            invalid: 'Šířka musí být číslo.'
+            min: Šířka nemůže být záporná.
+            invalid: Šířka musí být číslo.
         height:
             min: Hmotnost nemůže být záporná.
             invalid: Váha musí být číslo.

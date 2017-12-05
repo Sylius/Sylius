@@ -25,7 +25,7 @@ sylius:
             select: Izaberite
         zone:
             add_member: Dodajte člana
-            members: 'Članovi'
+            members: Članovi
             name: Ime
             type: Tip
             types:

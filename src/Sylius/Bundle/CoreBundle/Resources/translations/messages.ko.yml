@@ -4,7 +4,7 @@
 sylius:
     form:
         image:
-            type: '타입'
+            type: 타입
     installer:
         extensions:
             "off": false

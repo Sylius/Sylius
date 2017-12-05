@@ -46,7 +46,7 @@ sylius:
             nth_order_configuration:
                 nth: N-tasis
             shipping_country_configuration:
-                country: 'Šalis'
+                country: Šalis
             taxonomy_configuration:
                 exclude: Neįtraukti
                 taxons: Taksonai

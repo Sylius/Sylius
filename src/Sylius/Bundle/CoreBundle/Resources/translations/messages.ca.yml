@@ -60,7 +60,7 @@ sylius:
             title: Títol
         product:
             images: Imatges
-            restricted_zone: 'Àrea restringida'
+            restricted_zone: Àrea restringida
             short_description: Descripció breu
             variant_selection_method: Mètode de selecció de variant
             channels: Canals

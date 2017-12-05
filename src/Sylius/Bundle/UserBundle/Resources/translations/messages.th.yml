@@ -4,20 +4,20 @@
 sylius:
     form:
         user:
-            email: 'อีเมล'
-            enabled: 'เปิดใช้งานแล้ว'
+            email: อีเมล
+            enabled: เปิดใช้งานแล้ว
             password:
-                label: 'รหัสผ่าน'
-                confirmation: 'ยืนยันรหัสผ่าน'
-            remember_me: 'จำฉันไว้'
-            shipping_address: 'ที่อยู่สำหรับจัดส่งสินค้า'
-            username: 'ชื่อผู้ใช้'
+                label: รหัสผ่าน
+                confirmation: ยืนยันรหัสผ่าน
+            remember_me: จำฉันไว้
+            shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
+            username: ชื่อผู้ใช้
         user_filter:
-            query: 'ค้นหา'
+            query: ค้นหา
         user_change_password:
-            confirmation: 'การยืนยัน'
-            current: 'รหัสผ่านปัจจุบัน'
-            new: 'รหัสผ่านใหม่'
+            confirmation: การยืนยัน
+            current: รหัสผ่านปัจจุบัน
+            new: รหัสผ่านใหม่
         user_reset_password:
-            confirmation: 'การยืนยัน'
-            new: 'รหัสผ่านใหม่'
+            confirmation: การยืนยัน
+            new: รหัสผ่านใหม่

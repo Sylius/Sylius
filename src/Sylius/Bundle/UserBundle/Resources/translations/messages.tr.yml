@@ -7,7 +7,7 @@ sylius:
             email: E-posta
             enabled: Etkin
             password:
-                label: 'Şifre'
+                label: Şifre
                 confirmation: Doğrulama
             remember_me: Beni hatırla
             shipping_address: Teslimat adresi

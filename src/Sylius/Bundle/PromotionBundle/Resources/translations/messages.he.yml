@@ -4,10 +4,10 @@
 sylius:
     form:
         promotion_action:
-            type: 'סוג'
+            type: סוג
         promotion_rule:
             shipping_country_configuration:
-                country: 'מדינה'
+                country: מדינה
             taxonomy_configuration:
-                taxons: 'קבוצות טקסונומיות'
-            type: 'סוג'
+                taxons: קבוצות טקסונומיות
+            type: סוג

@@ -5,4 +5,4 @@ sylius:
     locale:
         code:
             not_blank: Molim odaberite šifru jezičnog područja.
-            unique: 'Šifra jezičnog područja mora biti jedinstvena.'
+            unique: Šifra jezičnog područja mora biti jedinstvena.

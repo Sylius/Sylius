@@ -4,8 +4,8 @@
 sylius:
     customer:
         first_name:
-            not_blank: 'Внесете го вашето име.'
+            not_blank: Внесете го вашето име.
         last_name:
-            not_blank: 'Внесете го вашето презиме.'
+            not_blank: Внесете го вашето презиме.
         email:
-            not_blank: 'Внесете ја вашата адреса за е-пошта.'
+            not_blank: Внесете ја вашата адреса за е-пошта.

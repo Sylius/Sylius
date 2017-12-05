@@ -4,36 +4,36 @@
 sylius:
     form:
         attribute:
-            add: 'Добавить'
-            add_attributes: 'Добавить атрибуты'
-            choices: 'Выбор'
-            code: 'Код'
-            name: 'Название'
+            add: Добавить
+            add_attributes: Добавить атрибуты
+            choices: Выбор
+            code: Код
+            name: Название
             translations: '﻿Переводы'
-            type: 'Тип'
+            type: Тип
         attribute_type:
-            checkbox: 'Флажок'
-            configuration: 'Конфигурация'
-            date: 'Дата'
-            datetime: 'Дата и время'
-            integer: 'Целое число'
-            percent: 'Процент'
-            select: 'Выбрать'
-            text: 'Текст'
-            textarea: 'Текстовая область'
-            title: 'Тип атрибута'
-            validation: 'Проверка'
+            checkbox: Флажок
+            configuration: Конфигурация
+            date: Дата
+            datetime: Дата и время
+            integer: Целое число
+            percent: Процент
+            select: Выбрать
+            text: Текст
+            textarea: Текстовая область
+            title: Тип атрибута
+            validation: Проверка
         attribute_type_configuration:
             datetime:
-                format: 'Формат'
+                format: Формат
             date:
-                format: 'Формат'
+                format: Формат
             select:
-                multiple: 'Несколько'
-                values: 'Значения'
-                choose: 'Выберите настройку'
-                min: 'Минимальное количество'
-                max: 'Максимальное количество'
+                multiple: Несколько
+                values: Значения
+                choose: Выберите настройку
+                min: Минимальное количество
+                max: Максимальное количество
             text:
-                min: 'Минимальная длина'
-                max: 'Максимальная длина'
+                min: Минимальная длина
+                max: Максимальная длина

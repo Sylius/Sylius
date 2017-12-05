@@ -6,35 +6,35 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: 'Типы взаимосвязей'
-                    attributes: 'Атрибуты'
-                    header: 'Каталог'
-                    inventory: 'Запасы'
-                    options: 'Список опций'
-                    products: 'Товары'
-                    taxons: 'Таксоны'
+                    association_types: Типы взаимосвязей
+                    attributes: Атрибуты
+                    header: Каталог
+                    inventory: Остатки
+                    options: Список опций
+                    products: Товары
+                    taxons: Таксоны
                 configuration:
-                    admin_users: 'Администраторы'
-                    channels: 'Каналы'
-                    countries: 'Страны'
-                    currencies: 'Валюты'
-                    exchange_rates: 'Курсы валют'
-                    header: 'Конфигурация'
-                    locales: 'Языки'
-                    payment_methods: 'Способы оплаты'
-                    shipping_categories: 'Категории доставки'
-                    shipping_methods: 'Способы доставки'
-                    tax_categories: 'Список налоговых категорий'
-                    tax_rates: 'Налоговые ставки'
-                    zones: 'Зоны'
+                    admin_users: Администраторы
+                    channels: Каналы
+                    countries: Страны
+                    currencies: Валюты
+                    exchange_rates: Курсы валют
+                    header: Конфигурация
+                    locales: Языки
+                    payment_methods: Способы оплаты
+                    shipping_categories: Категории доставки
+                    shipping_methods: Способы доставки
+                    tax_categories: Список налоговых категорий
+                    tax_rates: Налоговые ставки
+                    zones: Зоны
                 marketing:
-                    header: 'Маркетинг'
-                    product_reviews: 'Обзоры товара'
-                    promotions: 'Рекламные акции'
+                    header: Маркетинг
+                    product_reviews: Обзоры товара
+                    promotions: Рекламные акции
                 customers:
-                    customers: 'Клиенты'
-                    groups: 'Группы'
-                    header: 'Клиент'
+                    customers: Клиенты
+                    groups: Группы
+                    header: Клиент
                 sales:
-                    header: 'Продажи'
-                    orders: 'Заказы'
+                    header: Продажи
+                    orders: Заказы

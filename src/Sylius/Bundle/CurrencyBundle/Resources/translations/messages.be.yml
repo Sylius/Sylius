@@ -4,6 +4,6 @@
 sylius:
     form:
         currency:
-            code: 'Імя'
-            enabled: 'Уключана'
-            exchange_rate: 'Абменны курс'
+            code: Імя
+            enabled: Уключана
+            exchange_rate: Абменны курс

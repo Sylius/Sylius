@@ -5,19 +5,19 @@ sylius:
     form:
         user:
             email: Email
-            enabled: 'Активен'
+            enabled: Активен
             password:
-                label: 'Пароль'
-                confirmation: 'Верификация'
-            remember_me: 'Запомнить меня'
-            shipping_address: 'Адрес доставки'
-            username: 'Логин'
+                label: Пароль
+                confirmation: Верификация
+            remember_me: Запомнить меня
+            shipping_address: Адрес доставки
+            username: Логин
         user_filter:
-            query: 'Поиск'
+            query: Поиск
         user_change_password:
-            confirmation: 'Подтверждение'
-            current: 'Текущий пароль'
-            new: 'Новый пароль'
+            confirmation: Подтверждение
+            current: Текущий пароль
+            new: Новый пароль
         user_reset_password:
-            confirmation: 'Подтверждение'
-            new: 'Новый пароль'
+            confirmation: Подтверждение
+            new: Новый пароль

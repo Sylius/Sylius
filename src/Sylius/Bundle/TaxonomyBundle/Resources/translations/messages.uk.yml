@@ -4,9 +4,9 @@
 sylius:
     form:
         taxon:
-            description: 'Опис'
-            name: 'Назва'
-            parent: 'Батьківський об''єкт'
-            slug: 'Слаґ'
+            description: Опис
+            name: Назва
+            parent: Батьківський об'єкт
+            slug: Слаґ
         taxonomy:
-            name: 'Назва'
+            name: Назва

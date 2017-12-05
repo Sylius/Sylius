@@ -4,39 +4,39 @@
 sylius:
     form:
         address:
-            city: 'Горад'
-            company: 'Кампанія'
-            country: 'Краіна'
-            first_name: 'Імя'
-            last_name: 'Прозвішча'
-            phone_number: 'Нумар тэлефону'
-            postcode: 'Індэкс'
-            street: 'Вуліца і нумар дома'
-            province: 'Вобласць (рэгіён)'
-            zone: 'Зона'
+            city: Горад
+            company: Кампанія
+            country: Краіна
+            first_name: Імя
+            last_name: Прозвішча
+            phone_number: Нумар тэлефону
+            postcode: Індэкс
+            street: Вуліца і нумар дома
+            province: Вобласць (рэгіён)
+            zone: Зона
         country:
-            add_province: 'Дадаць вобласць'
-            name: 'Назва'
-            provinces: 'Вобласці'
-            select: 'Выбярыце'
-            enabled: 'Уключана'
+            add_province: Дадаць вобласць
+            name: Назва
+            provinces: Вобласці
+            select: Выбярыце
+            enabled: Уключана
         province:
-            name: 'Імя'
-            abbreviation: 'Абрэвіятура вобласці (рэгіёну)'
-            select: 'Выберыце'
+            name: Імя
+            abbreviation: Абрэвіятура вобласці (рэгіёну)
+            select: Выберыце
         zone:
-            add_member: 'Дадаць удзельніка'
-            members: 'Удзельнікі'
-            name: 'Імя'
-            type: 'Тып'
+            add_member: Дадаць удзельніка
+            members: Удзельнікі
+            name: Імя
+            type: Тып
             types:
-                country: 'Краіна'
-                province: 'Вобласць (рэгіён)'
-                zone: 'Зона'
-            scope: 'Сфера ўжывання'
+                country: Краіна
+                province: Вобласць (рэгіён)
+                zone: Зона
+            scope: Сфера ўжывання
             scopes:
-                all: 'Усе'
-            select: 'Выбярыце'
-            select_scope: 'Выбярыце сферу ўжывання'
+                all: Усе
+            select: Выбярыце
+            select_scope: Выбярыце сферу ўжывання
         zone_member:
-            select: 'Выбярыце'
+            select: Выбярыце

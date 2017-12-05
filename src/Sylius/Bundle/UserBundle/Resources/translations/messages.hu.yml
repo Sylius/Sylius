@@ -17,7 +17,7 @@ sylius:
         user_change_password:
             confirmation: Megerősítés
             current: Aktuális jelszó
-            new: 'Új jelszó'
+            new: Új jelszó
         user_reset_password:
             confirmation: Megerősítés
-            new: 'Új jelszó'
+            new: Új jelszó

@@ -5,20 +5,20 @@ sylius:
     form:
         customer:
             first_name: Iм'я
-            group: 'Група'
-            last_name: 'Прізвище'
-            email: 'Адреса електронної пошти'
-            phone_number: 'Номер телефону'
-            gender: 'Стать'
-            birthday: 'Дата народження'
-            billing_address: 'Адреса для рахунків'
-            different_billing_address: 'Використати іншу адресу для рахунків?'
-            only_customer_registration: 'Створити обліковку?'
-            subscribed_to_newsletter: 'Підписатись на інформаційний бюлетень'
+            group: Група
+            last_name: Прізвище
+            email: Адреса електронної пошти
+            phone_number: Номер телефону
+            gender: Стать
+            birthday: Дата народження
+            billing_address: Адреса для рахунків
+            different_billing_address: Використати іншу адресу для рахунків?
+            only_customer_registration: Створити обліковку?
+            subscribed_to_newsletter: Підписатись на інформаційний бюлетень
         customer_group:
-            name: 'Назва'
-            roles: 'Ролі'
+            name: Назва
+            roles: Ролі
     gender:
-        unknown: 'Не вказана'
-        male: 'Чоловіча'
-        female: 'Жіноча'
+        unknown: Не вказана
+        male: Чоловіча
+        female: Жіноча

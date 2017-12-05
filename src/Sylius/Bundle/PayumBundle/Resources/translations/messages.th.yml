@@ -4,10 +4,10 @@
 sylius:
     form:
         gateway_config:
-            type: 'ชนิด'
+            type: ชนิด
         gateway_configuration:
             paypal:
-                password: 'รหัสผ่าน'
-                username: 'ชื่อผู้ใช้'
+                password: รหัสผ่าน
+                username: ชื่อผู้ใช้
     payum_gateway_factory:
-        offline: 'ออฟไลน์'
+        offline: ออฟไลน์

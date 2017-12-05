@@ -18,7 +18,7 @@ sylius:
                 checkout: Paiement
                 completed: Complété
                 authorized: Autorisé
-                failed: 'Échoué'
+                failed: Échoué
                 new: Nouveau
                 pending: En attente
                 processing: En cours

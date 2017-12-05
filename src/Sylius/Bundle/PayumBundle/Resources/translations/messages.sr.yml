@@ -4,7 +4,7 @@
 sylius:
     form:
         gateway_config:
-            type: 'Тип'
+            type: Тип
         gateway_configuration:
             paypal:
-                username: 'Кросницко име'
+                username: Кросницко име

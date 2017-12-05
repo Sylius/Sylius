@@ -5,4 +5,4 @@ sylius:
     form:
         payment:
             state:
-                header: '入金状況'
+                header: 入金状況

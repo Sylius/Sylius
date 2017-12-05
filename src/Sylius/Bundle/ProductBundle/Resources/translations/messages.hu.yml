@@ -25,4 +25,4 @@ sylius:
             values: Lehetséges értékek
         option_value:
             add_value: Adja hozzá az értéket
-            value: 'Érték'
+            value: Érték

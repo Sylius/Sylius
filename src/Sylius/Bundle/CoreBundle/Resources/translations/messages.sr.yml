@@ -5,13 +5,13 @@ sylius:
     form:
         promotion_action:
             add_product_configuration:
-                product: 'Производ'
+                product: Производ
         image:
-            type: 'Тип'
+            type: Тип
         order_filter:
-            payment_state: 'Стање плаћања'
+            payment_state: Стање плаћања
         product_variant:
-            tax_category: 'Категорија производа'
+            tax_category: Категорија производа
     installer:
         extensions:
             "off": false

@@ -12,7 +12,7 @@ sylius:
             not_blank: Prosimo, izberite mesec poteka.
         number:
             not_blank: Prosimo, vnesite številko kartice.
-            luhn: 'Številka kreditne kartice, ki ste jo vnesli, ni veljavna.'
+            luhn: Številka kreditne kartice, ki ste jo vnesli, ni veljavna.
         security_code:
             not_blank: Prosimo, vnesite zaščitno kodo.
             max_length: Koda CVV kreditne kartice mora biti dolga vsaj {{ limit }} številk.

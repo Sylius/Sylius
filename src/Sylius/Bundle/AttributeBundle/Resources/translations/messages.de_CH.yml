@@ -9,7 +9,7 @@ sylius:
             choices: Auswahlmöglichkeiten
             code: Code
             name: Name
-            translations: 'Übersetzungen'
+            translations: Übersetzungen
             type: Typ
         attribute_type:
             checkbox: Kontrollkästchen
@@ -22,7 +22,7 @@ sylius:
             text: Text
             textarea: Textfeld
             title: Attributtyp
-            validation: 'Überprüfung'
+            validation: Überprüfung
         attribute_type_configuration:
             datetime:
                 format: Format

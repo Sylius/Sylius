@@ -5,38 +5,38 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: 'Кількість'
-                equal: 'Дорівнює'
-            type: 'Тип правила'
+                count: Кількість
+                equal: Дорівнює
+            type: Тип правила
         shipment:
-            state: 'Стан'
+            state: Стан
             states:
-                checkout: 'Підрахунок'
-                pending: 'В очікуванні'
-                ready: 'Готове'
-                shipped: 'Доставлене'
-                returned: 'Повернене'
-                cancelled: 'Скасоване'
-            tracking_code: 'Код відстеження'
+                checkout: Підрахунок
+                pending: В очікуванні
+                ready: Готове
+                shipped: Доставлене
+                returned: Повернене
+                cancelled: Скасоване
+            tracking_code: Код відстеження
         shipping_calculator:
             flat_rate_configuration:
-                label: 'Фіксована ставка за доставку'
-                amount: 'Сума'
+                label: Фіксована ставка за доставку
+                amount: Сума
             per_unit_rate_configuration:
-                label: 'Фіксована ставка за одиницю'
-                amount: 'Сума'
+                label: Фіксована ставка за одиницю
+                amount: Сума
         shipping_category:
-            description: 'Опис'
-            name: 'Назва'
+            description: Опис
+            name: Назва
         shipping_method:
-            calculator: 'Калькулятор'
-            category: 'Категорія'
-            category_requirement: 'Вимоги категорії'
-            channels: 'Канали'
-            configuration: 'Конфігурація'
-            description: 'Опис'
-            enabled: 'Увімкнено'
-            name: 'Назва'
-            position: 'Позиція'
-            tax_category: 'Категорія податку'
-            translations: 'Переклади'
+            calculator: Калькулятор
+            category: Категорія
+            category_requirement: Вимоги категорії
+            channels: Канали
+            configuration: Конфігурація
+            description: Опис
+            enabled: Увімкнено
+            name: Назва
+            position: Позиція
+            tax_category: Категорія податку
+            translations: Переклади

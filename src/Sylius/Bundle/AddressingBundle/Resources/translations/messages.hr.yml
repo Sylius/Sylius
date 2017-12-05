@@ -25,7 +25,7 @@ sylius:
             select: Odaberite
         zone:
             add_member: Dodaj
-            members: 'Članovi'
+            members: Članovi
             name: Naziv regije
             type: Vrsta
             types:

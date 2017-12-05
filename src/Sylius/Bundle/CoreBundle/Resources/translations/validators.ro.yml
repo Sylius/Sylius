@@ -67,8 +67,8 @@ sylius:
             min: Lățimea nu poate fi negativă.
             invalid: Lățimea trebuie exprimată printr-un număr.
         height:
-            min: 'Înălțimea nu poate fi negativă.'
-            invalid: 'Înălțimea trebuie exprimată printr-un număr.'
+            min: Înălțimea nu poate fi negativă.
+            invalid: Înălțimea trebuie exprimată printr-un număr.
         depth:
             min: Adâncimea nu poate fi negativă.
             invalid: Adâncimea trebuie exprimată printr-un număr.

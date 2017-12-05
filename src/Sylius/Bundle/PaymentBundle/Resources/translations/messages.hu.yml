@@ -19,7 +19,7 @@ sylius:
                 completed: Befejezve
                 authorized: Engedélyezve 
                 failed: Sikertelen
-                new: 'Új'
+                new: Új
                 pending: Függőben
                 processing: Feldolgozás alatt
                 unknown: Ismeretlen

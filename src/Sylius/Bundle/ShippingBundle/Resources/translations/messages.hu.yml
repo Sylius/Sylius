@@ -9,7 +9,7 @@ sylius:
                 equal: Egyenlő
             type: Szabály típusa
         shipment:
-            state: 'Állapot'
+            state: Állapot
             states:
                 checkout: Fizetés
                 pending: Függőben
@@ -20,9 +20,9 @@ sylius:
             tracking_code: Követési kód
         shipping_calculator:
             flat_rate_configuration:
-                label: 'Átalánydíj szállítmányonként'
+                label: Átalánydíj szállítmányonként
             per_unit_rate_configuration:
-                label: 'Átalánydíj per elem'
+                label: Átalánydíj per elem
         shipping_category:
             description: Leírás
             name: Név
@@ -35,5 +35,5 @@ sylius:
             description: Leírás
             enabled: Engedélyezve
             name: Név
-            tax_category: 'ÁFA-kategória'
+            tax_category: ÁFA-kategória
             translations: Fordítások

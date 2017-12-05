@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
-            author: 'מחבר'
-            comment: 'תגובה'
-            header: 'הוסף סקירה'
-            rating: 'דירוג'
+            author: מחבר
+            comment: תגובה
+            header: הוסף סקירה
+            rating: דירוג
             status:
-                approved: 'אושר'
-                label: 'מצב'
-                new: 'חדש'
-                rejected: 'נדחה'
-            submit: 'שלח'
-            title: 'כותרת'
+                approved: אושר
+                label: מצב
+                new: חדש
+                rejected: נדחה
+            submit: שלח
+            title: כותרת

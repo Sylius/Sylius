@@ -4,20 +4,20 @@
 sylius:
     form:
         user:
-            email: 'ایمیل'
-            enabled: 'فعال'
+            email: ایمیل
+            enabled: فعال
             password:
-                label: 'کلمه عبور'
-                confirmation: 'تکرار کلمه عبور'
-            remember_me: 'مرا به خاطر بسپار'
-            shipping_address: 'آدرس تحویل سفارش'
-            username: 'نام کاربری'
+                label: کلمه عبور
+                confirmation: تکرار کلمه عبور
+            remember_me: مرا به خاطر بسپار
+            shipping_address: آدرس تحویل سفارش
+            username: نام کاربری
         user_filter:
-            query: 'جستجو'
+            query: جستجو
         user_change_password:
-            confirmation: 'تایید'
-            current: 'کلمه عبور فعلی'
-            new: 'کلمه عبور جدید'
+            confirmation: تایید
+            current: کلمه عبور فعلی
+            new: کلمه عبور جدید
         user_reset_password:
-            confirmation: 'تایید'
-            new: 'کلمه عبور جدید'
+            confirmation: تایید
+            new: کلمه عبور جدید

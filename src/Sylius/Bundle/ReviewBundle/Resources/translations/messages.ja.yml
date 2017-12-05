@@ -4,4 +4,4 @@
 sylius:
     form:
         review:
-            title: 'タイトル'
+            title: タイトル

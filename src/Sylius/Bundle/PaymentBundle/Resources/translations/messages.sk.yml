@@ -7,7 +7,7 @@ sylius:
             cardholder_name: Meno držiteľa karty
             expiry_month: Mesiac expirácie
             expiry_year: Rok expirácie
-            number: 'Číslo karty'
+            number: Číslo karty
             security_code: Bezpečnostný (CVV) kód
             type: Typ karty
         payment:
@@ -20,7 +20,7 @@ sylius:
                 authorized: Autorizovaná
                 failed: Neúspešná
                 new: Nová
-                pending: 'Čakajúca'
+                pending: Čakajúca
                 processing: Spracúvava sa
                 unknown: Neznáme
                 void: Neplatná

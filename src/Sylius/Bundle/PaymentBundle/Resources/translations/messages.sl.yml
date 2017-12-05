@@ -7,7 +7,7 @@ sylius:
             cardholder_name: Ime imetnika kartice
             expiry_month: Mesec poteka
             expiry_year: Leto poteka
-            number: 'Številka kartice'
+            number: Številka kartice
             security_code: Zaščitna koda (CVV)
             type: Vrsta kartice
         payment:

@@ -4,39 +4,39 @@
 sylius:
     form:
         address:
-            city: 'Город'
-            company: 'Компания'
-            country: 'Страна'
-            first_name: 'Имя'
-            last_name: 'Фамилия'
-            phone_number: 'Контактный телефон'
-            postcode: 'Индекс'
-            street: 'Улица'
-            province: 'Район'
-            zone: 'Зона'
+            city: Город
+            company: Компания
+            country: Страна
+            first_name: Имя
+            last_name: Фамилия
+            phone_number: Контактный телефон
+            postcode: Индекс
+            street: Улица
+            province: Район
+            zone: Зона
         country:
-            add_province: 'Добавить регион'
-            name: 'Страна'
-            provinces: 'Области'
-            select: 'Выбрать'
-            enabled: 'Активен'
+            add_province: Добавить регион
+            name: Страна
+            provinces: Области
+            select: Выбрать
+            enabled: Активен
         province:
-            name: 'Округ'
-            abbreviation: 'Аббревиатура'
-            select: 'Выбрать'
+            name: Округ
+            abbreviation: Аббревиатура
+            select: Выбрать
         zone:
-            add_member: 'Добавить'
-            members: 'Области'
-            name: 'Название'
-            type: 'Тип'
+            add_member: Добавить
+            members: Области
+            name: Название
+            type: Тип
             types:
-                country: 'Страна'
-                province: 'Область'
-                zone: 'Зона'
-            scope: 'Область'
+                country: Страна
+                province: Область
+                zone: Зона
+            scope: Область
             scopes:
-                all: 'Все'
-            select: 'Выбрать'
-            select_scope: 'Выберите область'
+                all: Все
+            select: Выбрать
+            select_scope: Выберите область
         zone_member:
-            select: 'Выбрать'
+            select: Выбрать

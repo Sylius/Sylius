@@ -4,11 +4,11 @@
 sylius:
     form:
         currency:
-            base: 'Основна валута'
-            code: 'Име'
-            enabled: 'Активирано'
-            exchange_rate: 'Обменен курс'
+            base: Основна валута
+            code: Име
+            enabled: Активирано
+            exchange_rate: Обменен курс
         exchange_rate:
-            source_currency: 'Валута източник'
-            target_currency: 'Целева валута'
-            ratio: 'Съотношение'
+            source_currency: Валута източник
+            target_currency: Целева валута
+            ratio: Съотношение

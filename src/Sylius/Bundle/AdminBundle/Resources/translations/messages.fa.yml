@@ -6,35 +6,35 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: 'انواع ارتباط ها'
-                    attributes: 'ویژگی‌ها'
-                    header: 'فهرست'
-                    inventory: 'موجودی کالا'
-                    options: 'گزینه‎ها'
-                    products: 'محصولات'
-                    taxons: 'دسته بندی ها'
+                    association_types: انواع ارتباط ها
+                    attributes: ویژگی‌ها
+                    header: فهرست
+                    inventory: موجودی کالا
+                    options: گزینه‎ها
+                    products: محصولات
+                    taxons: دسته بندی ها
                 configuration:
-                    admin_users: 'مدیران'
-                    channels: 'کانال های فروش'
-                    countries: 'كشور‌ها'
-                    currencies: 'واحدهای پول'
-                    exchange_rates: 'نرخ تبدیل ارز'
-                    header: 'تنظیمات'
-                    locales: 'زبان ها'
-                    payment_methods: 'روش‌های پرداخت'
-                    shipping_categories: 'انواع ارسال'
-                    shipping_methods: 'روش‌های ارسال'
-                    tax_categories: 'رده های مالیات'
-                    tax_rates: 'نرخ های مالیات'
-                    zones: 'منطقه‌ها'
+                    admin_users: مدیران
+                    channels: کانال های فروش
+                    countries: كشور‌ها
+                    currencies: واحدهای پول
+                    exchange_rates: نرخ تبدیل ارز
+                    header: تنظیمات
+                    locales: زبان ها
+                    payment_methods: روش‌های پرداخت
+                    shipping_categories: انواع ارسال
+                    shipping_methods: روش‌های ارسال
+                    tax_categories: رده های مالیات
+                    tax_rates: نرخ های مالیات
+                    zones: منطقه‌ها
                 marketing:
-                    header: 'بازاریابی'
-                    product_reviews: 'نقد و بررسی محصول'
-                    promotions: 'فروش های ویژه'
+                    header: بازاریابی
+                    product_reviews: نقد و بررسی محصول
+                    promotions: فروش های ویژه
                 customers:
-                    customers: 'مشتریان'
-                    groups: 'گروه‌ها'
-                    header: 'مشتری'
+                    customers: مشتریان
+                    groups: گروه‌ها
+                    header: مشتری
                 sales:
-                    header: 'فروش‌ها'
-                    orders: 'سفارش‌ها'
+                    header: فروش‌ها
+                    orders: سفارش‌ها

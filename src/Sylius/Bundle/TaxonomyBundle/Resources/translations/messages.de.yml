@@ -6,7 +6,7 @@ sylius:
         taxon:
             description: Beschreibung
             name: Name
-            parent: 'Übergeordnet'
+            parent: Übergeordnet
             slug: Kategorie SEO-URL
         taxonomy:
             name: Name

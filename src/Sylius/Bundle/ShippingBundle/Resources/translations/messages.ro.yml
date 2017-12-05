@@ -12,7 +12,7 @@ sylius:
             state: Status
             states:
                 checkout: Finalizare comandă
-                pending: 'În așteptare'
+                pending: În așteptare
                 ready: Gata
                 shipped: Expediată
                 returned: Returnată

@@ -51,7 +51,7 @@ sylius:
             created_at_to: Créé avant le
             number: Numéro
             total_from: De
-            total_to: 'À'
+            total_to: À
             payment_state: Etat du paiement
             channel: Tous les canaux
         page:
@@ -74,13 +74,13 @@ sylius:
             shipping_category: Catégorie de livraison
         shipment_filter:
             created_at_from: De
-            created_at_to: 'À'
+            created_at_to: À
             number: Numéro de commande
             shipping_address: Expédié à
             channel: Tous les canaux
         payment_filter:
             created_at_from: De
-            created_at_to: 'À'
+            created_at_to: À
             number: Numéro de commande
             billing_address: Adresse de facturation
             channel: Tous les canaux
