@@ -72,7 +72,6 @@ final class ChannelApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'channel/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-
     /**
      * @test
      */
@@ -119,8 +118,9 @@ final class ChannelApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
         $this->loadFixturesFromFile('resources/currencies.yml');
+
         $data =
-            <<<EOT
+<<<EOT
         {
             "code": "mob",
             "name": "Channel for mobile",
@@ -146,8 +146,9 @@ EOT;
         $this->loadFixturesFromFile('resources/locales.yml');
         $this->loadFixturesFromFile('resources/currencies.yml');
         $this->loadFixturesFromFile('resources/zones.yml');
+
         $data =
-            <<<EOT
+<<<EOT
         {
             "code": "android",
             "name": "Channel for Android client",
@@ -174,7 +175,6 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'channel/create_with_extra_response', Response::HTTP_CREATED);
     }
-
 
     /**
      * @test
@@ -222,3 +222,4 @@ EOT;
         return '/api/v1/channels/' . $channel->getCode();
     }
 }
+
