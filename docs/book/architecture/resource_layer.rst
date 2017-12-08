@@ -185,7 +185,7 @@ Creating a product using custom form and a redirection method:
                     method: createForStore # Use a custom factory method to create a product.
                     arguments: [$store] # Pass the store name from the url.
                 redirect:
-                    route: app_product_index # Redirect the user to his products.
+                    route: app_product_index # Redirect the user to their products.
                     parameters: [$store]
 
 All other methods have the same level of flexibility and are documented in the :doc:`Resource Bundle Guide </components_and_bundles/bundles/SyliusResourceBundle/index>`.
