@@ -1,4 +1,5 @@
 /.php_cs.cache
+/.phpintel
 
 /app/config/parameters.yml
 /app/config/*.local.yml
