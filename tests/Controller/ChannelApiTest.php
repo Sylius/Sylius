@@ -120,7 +120,7 @@ final class ChannelApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('resources/currencies.yml');
 
         $data =
-<<<EOT
+            <<<EOT
         {
             "code": "mob",
             "name": "Channel for mobile",
@@ -148,7 +148,7 @@ EOT;
         $this->loadFixturesFromFile('resources/zones.yml');
 
         $data =
-<<<EOT
+            <<<EOT
         {
             "code": "android",
             "name": "Channel for Android client",
@@ -179,6 +179,68 @@ EOT;
     /**
      * @test
      */
+    public function it_denies_updating_channel_for_non_authenticated_user()
+    {
+        $this->client->request('PUT', '/api/v1/channels/1');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_update_channel_without_specifying_required_data()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $channels = $this->loadFixturesFromFile('resources/channels.yml');
+
+        /** @var ChannelInterface $channel */
+        $channel = $channels['channel_web'];
+
+        $this->client->request('PUT', $this->getChannelUrl($channel), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'channel/update_validation_fail_response', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_update_channel()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $channels = $this->loadFixturesFromFile('resources/channels.yml');
+
+        /** @var ChannelInterface $channel */
+        $channel = $channels['channel_web'];
+
+        $data =
+            <<<EOT
+        {
+            "color": "black",
+            "enabled": false,
+            "description": "Lorem ipsum",
+            "name": "Web Channel",
+            "hostname": "localhost",
+            "taxCalculationStrategy": "order_items_based"
+        }
+EOT;
+
+        $this->client->request('PUT', $this->getChannelUrl($channel), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getChannelUrl($channel), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'channel/update_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
     public function it_allows_showing_channel()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
@@ -190,6 +252,62 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'channel/show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_partially_updating_channel_which_does_not_exist()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('PATCH', '/api/v1/channels/-1', [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_partially_update_channel()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $channels = $this->loadFixturesFromFile('resources/channels.yml');
+
+        /** @var ChannelInterface $channel */
+        $channel = $channels['channel_web'];
+
+        $data =
+            <<<EOT
+        {
+            "color": "black",
+            "enabled": false
+        }
+EOT;
+
+        $this->client->request('PATCH', $this->getChannelUrl($channel), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getChannelUrl($channel), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'channel/update_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_delete_non_existing_channel()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('DELETE', '/api/v1/channels/-1', [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
     /**
