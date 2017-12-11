@@ -31,6 +31,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^4.0",
+        "symfony/dependency-injection": "^3.2",
         "symfony/form": "^3.2",
         "twig/twig": "^2.0"
     },

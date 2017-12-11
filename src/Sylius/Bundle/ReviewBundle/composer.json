@@ -47,6 +47,7 @@
         "symfony/form": "^3.2",
         "symfony/validator": "^3.2",
         "symfony/browser-kit": "^3.2",
+        "symfony/dependency-injection": "^3.2",
         "symfony/security-bundle": "^3.2",
         "symfony/swiftmailer-bundle": "^3.0",
         "incenteev/composer-parameter-handler": "~2.0",

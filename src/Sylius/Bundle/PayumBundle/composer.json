@@ -36,7 +36,8 @@
         "sylius/resource-bundle": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.0"
+        "phpspec/phpspec": "^4.0",
+        "symfony/dependency-injection": "^3.2"
     },
     "config": {
         "bin-dir": "bin"

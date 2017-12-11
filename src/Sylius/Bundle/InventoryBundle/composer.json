@@ -34,6 +34,7 @@
         "phpunit/phpunit": "^5.6",
         "twig/twig": "^2.0",
         "symfony/browser-kit": "^3.2",
+        "symfony/dependency-injection": "^3.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },

@@ -45,6 +45,7 @@
         "hwi/oauth-bundle": "^0.5",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
+        "symfony/dependency-injection": "^3.2",
         "symfony/security-bundle": "^3.2",
         "symfony/swiftmailer-bundle": "^3.0",
         "incenteev/composer-parameter-handler": "~2.0"
