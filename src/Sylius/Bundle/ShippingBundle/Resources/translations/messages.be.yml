@@ -5,33 +5,33 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: 'Колькасць'
+                count: Колькасць
         shipment:
-            state: 'Статус'
+            state: Статус
             states:
-                checkout: 'Афармленне заказа'
-                pending: 'У апрацоўцы'
-                ready: 'Гатова'
-                shipped: 'Дастаўлена'
-                returned: 'Вернута'
-                cancelled: 'Адменена'
-            tracking_code: 'Трэкінг-код'
+                checkout: Афармленне заказа
+                pending: У апрацоўцы
+                ready: Гатова
+                shipped: Дастаўлена
+                returned: Вернута
+                cancelled: Адменена
+            tracking_code: Трэкінг-код
         shipping_calculator:
             flat_rate_configuration:
-                amount: 'Сума'
+                amount: Сума
             per_unit_rate_configuration:
-                amount: 'Сума'
+                amount: Сума
         shipping_category:
-            description: 'Апісанне'
-            name: 'Назва'
+            description: Апісанне
+            name: Назва
         shipping_method:
-            calculator: 'Калькулятар'
-            category: 'Катэгорыя'
-            category_requirement: 'Умовы катэгорыі'
-            channels: 'Каналы'
-            configuration: 'Канфігурацыя'
-            description: 'Апісанне'
-            enabled: 'Уключана'
-            name: 'Назва'
-            tax_category: 'Катэгорыя падатку'
-            translations: 'Пераклады'
+            calculator: Калькулятар
+            category: Катэгорыя
+            category_requirement: Умовы катэгорыі
+            channels: Каналы
+            configuration: Канфігурацыя
+            description: Апісанне
+            enabled: Уключана
+            name: Назва
+            tax_category: Катэгорыя падатку
+            translations: Пераклады

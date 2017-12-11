@@ -6,22 +6,22 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: 'İlişki türleri'
+                    association_types: İlişki türleri
                     attributes: Nitelikler
                     header: Katalog
                     inventory: Stok
                     options: Ayarlar
-                    products: 'Ürünler'
+                    products: Ürünler
                     taxons: Kategoriler
                 configuration:
                     admin_users: Yöneticiler
                     channels: Kanallar
-                    countries: 'Ülkeler'
+                    countries: Ülkeler
                     currencies: Para birimi
                     exchange_rates: Döviz Kurları
                     header: Ayarlar
                     locales: Diller
-                    payment_methods: 'Ödeme Yöntemleri'
+                    payment_methods: Ödeme Yöntemleri
                     shipping_categories: Kargo Kategorileri
                     shipping_methods: Gönderim metodları
                     tax_categories: Vergi Kategorileri
@@ -29,7 +29,7 @@ sylius:
                     zones: Bölgeler
                 marketing:
                     header: Pazarlama
-                    product_reviews: 'Ürün Yorumları'
+                    product_reviews: Ürün Yorumları
                     promotions: Promosyonlar
                 customers:
                     customers: Müşteriler

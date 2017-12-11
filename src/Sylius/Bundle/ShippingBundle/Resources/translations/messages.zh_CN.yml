@@ -5,41 +5,41 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: '计数'
-                equal: '等于'
-            type: '规则类型'
+                count: 计数
+                equal: 等于
+            type: 规则类型
         shipment:
-            state: '州'
+            state: 州
             states:
-                checkout: '结账'
-                pending: '等待中'
-                ready: '就绪'
-                shipped: '已发货'
-                returned: '已返还'
-                cancelled: '已取消.'
-            tracking_code: '跟踪代码'
+                checkout: 结账
+                pending: 等待中
+                ready: 就绪
+                shipped: 已发货
+                returned: 已返还
+                cancelled: 已取消.
+            tracking_code: 跟踪代码
         shipping_calculator:
             flat_rate_configuration:
-                label: '统一费用/每次配送'
-                amount: '金额'
+                label: 统一费用/每次配送
+                amount: 金额
             per_unit_rate_configuration:
-                label: '每个单位的费用'
-                amount: '金额'
+                label: 每个单位的费用
+                amount: 金额
         shipping_category:
-            description: '描述'
-            name: '名称'
+            description: 描述
+            name: 名称
         shipping_method:
-            calculator: '计算器'
-            category: '分类'
-            category_requirement: '类别要求'
-            channels: '频道'
-            configuration: '配置：'
-            description: '描述'
-            enabled: '已启用'
-            match_all_category_requirement: '所有单位都必须匹配送货方式的分类'
-            match_any_category_requirement: '至少一个单位必须匹配送货方式的分类'
-            match_none_category_requirement: '所有单位都无需匹配送货方式的分类'
-            name: '名称'
-            position: '位置'
-            tax_category: '税类别'
-            translations: '翻译'
+            calculator: 计算器
+            category: 分类
+            category_requirement: 类别要求
+            channels: 频道
+            configuration: 配置：
+            description: 描述
+            enabled: 已启用
+            match_all_category_requirement: 所有单位都必须匹配送货方式的分类
+            match_any_category_requirement: 至少一个单位必须匹配送货方式的分类
+            match_none_category_requirement: 所有单位都无需匹配送货方式的分类
+            name: 名称
+            position: 位置
+            tax_category: 税类别
+            translations: 翻译

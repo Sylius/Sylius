@@ -17,7 +17,7 @@ sylius:
                     channels: Csatornák
                     countries: Országok
                     currencies: Pénznemek
-                    exchange_rates: 'Árfolyamok'
+                    exchange_rates: Árfolyamok
                     header: Konfiguráció
                     locales: Területi beállítások
                     payment_methods: Fizetési módok
@@ -31,9 +31,9 @@ sylius:
                     product_reviews: Termék értékelések
                     promotions: Promóciók
                 customers:
-                    customers: 'Ügyfelek'
+                    customers: Ügyfelek
                     groups: Csoportok
-                    header: 'Ügyfél'
+                    header: Ügyfél
                 sales:
-                    header: 'Értékesítés'
+                    header: Értékesítés
                     orders: Rendelések

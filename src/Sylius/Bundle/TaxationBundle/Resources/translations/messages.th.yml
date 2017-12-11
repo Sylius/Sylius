@@ -4,11 +4,11 @@
 sylius:
     form:
         tax_category:
-            name: 'ชื่อ'
-            description: 'รายละเอียด'
+            name: ชื่อ
+            description: รายละเอียด
         tax_rate:
-            category: 'หมวดหมู่'
-            name: 'ชื่อ'
-            amount: 'รวม'
-            included_in_price: 'รวมในราคาสินค้า?'
-            calculator: 'การคำนวณ'
+            category: หมวดหมู่
+            name: ชื่อ
+            amount: รวม
+            included_in_price: รวมในราคาสินค้า?
+            calculator: การคำนวณ

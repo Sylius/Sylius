@@ -4,20 +4,20 @@
 sylius:
     form:
         gateway_config:
-            type: 'Тип'
+            type: Тип
         gateway_configuration:
             paypal:
-                password: 'Парола'
-                signature: 'Подпис'
-                username: 'Потребителско име'
-                sandbox: 'Тестовата среда'
+                password: Парола
+                signature: Подпис
+                username: Потребителско име
+                sandbox: Тестовата среда
             stripe:
-                publishable_key: 'Ключ за публикуване'
-                secret_key: 'Таен ключ'
+                publishable_key: Ключ за публикуване
+                secret_key: Таен ключ
     payum_gateway_factory:
-        offline: 'Офлайн'
+        offline: Офлайн
         paypal_express_checkout: PayPal експресно плащане
         stripe_checkout: Stripe плащане
     payum_action:
         payment:
-            description: 'Плащането съдържа %items% продукта за общо %total%|Плащането съдържа %items% продукта за общо %total%'
+            description: Плащането съдържа %items% продукта за общо %total%|Плащането съдържа %items% продукта за общо %total%

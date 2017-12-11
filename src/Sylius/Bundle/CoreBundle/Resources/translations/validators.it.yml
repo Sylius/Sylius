@@ -46,7 +46,7 @@ sylius:
             cannot_disable_base: Le impostazioni locali di base non possono essere disattivate.
     product:
         variants:
-            all_prices_defined: 'È necessario prima definire i prezzi di varianti di prodotto per i canali appena assegnati.'
+            all_prices_defined: È necessario prima definire i prezzi di varianti di prodotto per i canali appena assegnati.
     product_attribute:
         invalid: La posizione deve essere un valore intero.
     product_image:

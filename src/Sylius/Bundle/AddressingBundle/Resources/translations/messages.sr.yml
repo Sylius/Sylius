@@ -4,35 +4,35 @@
 sylius:
     form:
         address:
-            city: 'Град'
-            company: 'Компанија'
-            country: 'Земља'
-            first_name: 'Име'
-            last_name: 'Презиме'
-            phone_number: 'Број телефона'
-            postcode: 'Поштански број'
-            province: 'Провинција'
+            city: Град
+            company: Компанија
+            country: Земља
+            first_name: Име
+            last_name: Презиме
+            phone_number: Број телефона
+            postcode: Поштански број
+            province: Провинција
         country:
-            add_province: 'Додај провинцију'
-            name: 'Име'
-            provinces: 'Провинције'
-            select: 'Изаберите'
-            enabled: 'Омогућено'
+            add_province: Додај провинцију
+            name: Име
+            provinces: Провинције
+            select: Изаберите
+            enabled: Омогућено
         province:
-            name: 'Име'
-            abbreviation: 'Скраћеница'
-            select: 'Изаберите'
+            name: Име
+            abbreviation: Скраћеница
+            select: Изаберите
         zone:
-            add_member: 'Додајте члана'
-            members: 'Чланови'
-            name: 'Име'
-            type: 'Тип'
+            add_member: Додајте члана
+            members: Чланови
+            name: Име
+            type: Тип
             types:
-                country: 'Земља'
-                province: 'Провинција'
-                zone: 'Зона'
-            scope: 'Обухват'
-            select: 'Изаберите'
-            select_scope: 'Изабери обухват'
+                country: Земља
+                province: Провинција
+                zone: Зона
+            scope: Обухват
+            select: Изаберите
+            select_scope: Изабери обухват
         zone_member:
-            select: 'Изаберите'
+            select: Изаберите

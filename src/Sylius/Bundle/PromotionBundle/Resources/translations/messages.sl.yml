@@ -19,7 +19,7 @@ sylius:
             type: Vrsta
         promotion_rule:
             cart_quantity_configuration:
-                count: 'Število'
+                count: Število
             shipping_country_configuration:
                 country: Država
             type: Vrsta

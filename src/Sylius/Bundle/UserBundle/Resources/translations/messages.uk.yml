@@ -4,20 +4,20 @@
 sylius:
     form:
         user:
-            email: 'Адреса електронної пошти'
-            enabled: 'Увімкнено'
+            email: Адреса електронної пошти
+            enabled: Увімкнено
             password:
-                label: 'Пароль'
-                confirmation: 'Перевірка'
-            remember_me: 'Пам''ятати мене'
-            shipping_address: 'Адреса доставки'
-            username: 'Ім''я користувача'
+                label: Пароль
+                confirmation: Перевірка
+            remember_me: Пам'ятати мене
+            shipping_address: Адреса доставки
+            username: Ім'я користувача
         user_filter:
-            query: 'Пошук'
+            query: Пошук
         user_change_password:
-            confirmation: 'Підтвердження'
-            current: 'Поточний пароль'
-            new: 'Новий пароль'
+            confirmation: Підтвердження
+            current: Поточний пароль
+            new: Новий пароль
         user_reset_password:
-            confirmation: 'Підтвердження'
-            new: 'Новий пароль'
+            confirmation: Підтвердження
+            new: Новий пароль

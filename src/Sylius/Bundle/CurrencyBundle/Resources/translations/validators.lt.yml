@@ -7,4 +7,4 @@ sylius:
             not_blank: Pasirinkite valiutos kodą.
             unique: Valiutos kodas turi būti unikalus.
         exchange_rate:
-            not_blank: 'Įveskite valiutos kursą.'
+            not_blank: Įveskite valiutos kursą.

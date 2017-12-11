@@ -7,11 +7,11 @@ sylius:
             author: Szerző
             comment: Hozzászólás
             header: Vélemény hozzáadása
-            rating: 'Értékelés'
+            rating: Értékelés
             status:
                 approved: Jóváhagyott
-                label: 'Állapot'
-                new: 'Új'
+                label: Állapot
+                new: Új
                 rejected: Elutasított
             submit: Elküld
             title: Cím

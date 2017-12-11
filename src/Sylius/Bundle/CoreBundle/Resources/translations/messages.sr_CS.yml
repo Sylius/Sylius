@@ -79,7 +79,7 @@ sylius:
             price: Cena
             sku: SKU
             weight: Težina
-            width: 'Širina'
+            width: Širina
         attribute:
             product_attribute_value:
                 attribute: Atribut

@@ -5,38 +5,38 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: 'จำนวน'
-                equal: 'เท่ากับ'
-            type: 'ชนิดของกฎ'
+                count: จำนวน
+                equal: เท่ากับ
+            type: ชนิดของกฎ
         shipment:
-            state: 'สถานะ'
+            state: สถานะ
             states:
-                checkout: 'ชำระเงิน'
-                pending: 'อยู่ระหว่างดำเนินการ'
-                ready: 'พร้อมส่ง'
-                shipped: 'ส่งของแล้ว'
-                returned: 'ถูกส่งคืน'
-                cancelled: 'ถูกยกเลิก'
-            tracking_code: 'รหัสการติดตาม'
+                checkout: ชำระเงิน
+                pending: อยู่ระหว่างดำเนินการ
+                ready: พร้อมส่ง
+                shipped: ส่งของแล้ว
+                returned: ถูกส่งคืน
+                cancelled: ถูกยกเลิก
+            tracking_code: รหัสการติดตาม
         shipping_calculator:
             flat_rate_configuration:
-                label: 'อัตราต่อการจัดส่ง'
-                amount: 'ยอดเงิน'
+                label: อัตราต่อการจัดส่ง
+                amount: ยอดเงิน
             per_unit_rate_configuration:
-                label: 'อัตราต่อหน่วย'
-                amount: 'ยอดเงิน'
+                label: อัตราต่อหน่วย
+                amount: ยอดเงิน
         shipping_category:
-            description: 'คำอธิบาย'
-            name: 'ชื่อ'
+            description: คำอธิบาย
+            name: ชื่อ
         shipping_method:
-            calculator: 'การคำนวณราคา'
-            category: 'หมวดหมู่'
-            category_requirement: 'ความต้องการสำหรับหมวดหมู่'
-            channels: 'ช่องทางจำหน่าย'
-            configuration: 'การกำหนดค่า (Configuration)'
-            description: 'คำอธิบาย'
-            enabled: 'เปิดใช้งานแล้ว'
-            name: 'ชื่อ'
-            position: 'ตำแหน่ง'
-            tax_category: 'ประเภทภาษี'
-            translations: 'การแปลภาษา'
+            calculator: การคำนวณราคา
+            category: หมวดหมู่
+            category_requirement: ความต้องการสำหรับหมวดหมู่
+            channels: ช่องทางจำหน่าย
+            configuration: การกำหนดค่า (Configuration)
+            description: คำอธิบาย
+            enabled: เปิดใช้งานแล้ว
+            name: ชื่อ
+            position: ตำแหน่ง
+            tax_category: ประเภทภาษี
+            translations: การแปลภาษา

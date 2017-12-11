@@ -6,6 +6,6 @@ sylius:
         taxon:
             description: Açıklama
             name: Ad
-            parent: 'Üst'
+            parent: Üst
         taxonomy:
             name: Ad

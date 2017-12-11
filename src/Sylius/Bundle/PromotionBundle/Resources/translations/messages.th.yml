@@ -4,50 +4,50 @@
 sylius:
     form:
         promotion:
-            actions: 'ดำเนินการ'
-            add_action: 'เพิ่มการลดราคา'
-            add_rule: 'เพิ่มเงื่อนไข'
-            coupon_based: 'ขึ้นกับคูปอง'
-            description: 'คำอธิบาย'
-            ends_at: 'สิ้นสุด'
-            exclusive: 'พิเศษ'
-            name: 'ชื่อ'
-            priority: 'ระดับความสำคัญ'
-            rules: 'เงื่อนไข'
-            starts_at: 'เริ่มต้น'
-            usage_limit: 'ขีดจำกัดการใช้งาน'
+            actions: ดำเนินการ
+            add_action: เพิ่มการลดราคา
+            add_rule: เพิ่มเงื่อนไข
+            coupon_based: ขึ้นกับคูปอง
+            description: คำอธิบาย
+            ends_at: สิ้นสุด
+            exclusive: พิเศษ
+            name: ชื่อ
+            priority: ระดับความสำคัญ
+            rules: เงื่อนไข
+            starts_at: เริ่มต้น
+            usage_limit: ขีดจำกัดการใช้งาน
         promotion_action:
             fixed_discount_configuration:
-                amount: 'ยอดเงิน'
+                amount: ยอดเงิน
             percentage_discount_configuration:
-                percentage: 'เปอร์เซ็นต์'
-            type: 'ชนิด'
+                percentage: เปอร์เซ็นต์
+            type: ชนิด
         promotion_coupon:
-            expires_at: 'หมดอายุ'
-            usage_limit: 'ขีดจำกัดการใช้งาน'
+            expires_at: หมดอายุ
+            usage_limit: ขีดจำกัดการใช้งาน
         promotion_coupon_generator_instruction:
-            amount: 'ยอดเงิน'
-            code_length: 'ความยาวของรหัส'
-            expires_at: 'หมดอายุ'
-            usage_limit: 'ขีดจำกัดการใช้งาน'
+            amount: ยอดเงิน
+            code_length: ความยาวของรหัส
+            expires_at: หมดอายุ
+            usage_limit: ขีดจำกัดการใช้งาน
         promotion_filter:
-            price_range: 'กรองช่วงราคา'
+            price_range: กรองช่วงราคา
         promotion_rule:
-            customer_group: 'กลุ่มลูกค้า'
-            taxonomy: 'การจัดประเภท'
+            customer_group: กลุ่มลูกค้า
+            taxonomy: การจัดประเภท
             cart_quantity_configuration:
-                count: 'จำนวน'
-                equal: 'เท่ากับ'
+                count: จำนวน
+                equal: เท่ากับ
             contains_product_configuration:
-                exclude: 'ไม่รวม'
-                variants: 'สินค้า'
+                exclude: ไม่รวม
+                variants: สินค้า
             item_total_configuration:
-                amount: 'ยอดเงิน'
+                amount: ยอดเงิน
             nth_order_configuration:
                 nth: Nth
             shipping_country_configuration:
-                country: 'ประเทศ'
+                country: ประเทศ
             taxonomy_configuration:
-                exclude: 'ไม่รวม'
-                taxons: 'การจัดหมวดหมู่'
-            type: 'ชนิด'
+                exclude: ไม่รวม
+                taxons: การจัดหมวดหมู่
+            type: ชนิด

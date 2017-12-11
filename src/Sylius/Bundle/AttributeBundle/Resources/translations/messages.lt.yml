@@ -12,7 +12,7 @@ sylius:
             translations: Vertimai
             type: Tipas
         attribute_type:
-            checkbox: 'Žymės langelis'
+            checkbox: Žymės langelis
             configuration: Konfigūracija
             date: Data
             datetime: Data ir laikas

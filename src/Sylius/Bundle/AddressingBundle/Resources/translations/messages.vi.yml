@@ -17,7 +17,7 @@ sylius:
             name: Tên
             provinces: Tỉnh
             select: Chọn
-            enabled: 'Đã kích hoạt'
+            enabled: Đã kích hoạt
         province:
             name: Tên
             select: Chọn

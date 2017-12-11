@@ -6,7 +6,7 @@ sylius:
         address:
             city: Oraș
             company: Firmă
-            country: 'Țară'
+            country: Țară
             first_name: Prenume
             last_name: Nume
             phone_number: Număr de telefon
@@ -30,7 +30,7 @@ sylius:
             name: Nume
             type: Tip
             types:
-                country: 'Țară'
+                country: Țară
                 province: Județ
                 zone: Zonă
             scope: Domeniul de aplicare

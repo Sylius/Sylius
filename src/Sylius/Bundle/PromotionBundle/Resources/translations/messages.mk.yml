@@ -4,8 +4,8 @@
 sylius:
     form:
         promotion_action:
-            type: 'Вид'
+            type: Вид
         promotion_rule:
             shipping_country_configuration:
-                country: 'Држава'
-            type: 'Вид'
+                country: Држава
+            type: Вид

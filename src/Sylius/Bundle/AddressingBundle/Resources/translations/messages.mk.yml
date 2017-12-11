@@ -4,32 +4,32 @@
 sylius:
     form:
         address:
-            city: 'Град'
-            company: 'Компанија'
-            country: 'Држава'
-            first_name: 'Име'
-            last_name: 'Презиме'
-            phone_number: 'Телефонски Број'
-            postcode: 'Поштенски Број'
-            province: 'Регион'
-            zone: 'Зона'
+            city: Град
+            company: Компанија
+            country: Држава
+            first_name: Име
+            last_name: Презиме
+            phone_number: Телефонски Број
+            postcode: Поштенски Број
+            province: Регион
+            zone: Зона
         country:
-            name: 'Назив'
-            provinces: 'Региони'
-            select: 'Изберете'
+            name: Назив
+            provinces: Региони
+            select: Изберете
         province:
-            name: 'Име'
-            select: 'Изберете'
+            name: Име
+            select: Изберете
         zone:
-            members: 'Членови'
-            name: 'Назив'
-            type: 'Вид'
+            members: Членови
+            name: Назив
+            type: Вид
             types:
-                country: 'Држава'
-                province: 'Регион'
-                zone: 'Зона'
-            scope: 'Опсег'
-            select: 'Изберете'
-            select_scope: 'Изберете опсег'
+                country: Држава
+                province: Регион
+                zone: Зона
+            scope: Опсег
+            select: Изберете
+            select_scope: Изберете опсег
         zone_member:
-            select: 'Изберете'
+            select: Изберете

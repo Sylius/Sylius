@@ -5,79 +5,79 @@ sylius:
     form:
         block:
             id: ID
-            title: 'タイトル'
+            title: タイトル
         cart:
-            coupon: 'クーポン'
+            coupon: クーポン
         checkout:
             addressing:
-                different_billing_address: '請求先として別の住所を指定する'
-            payment_method: 'お支払い方法'
-            shipping_method: '発送方法'
+                different_billing_address: 請求先として別の住所を指定する
+            payment_method: お支払い方法
+            shipping_method: 発送方法
         promotion_action:
             add_product_configuration:
-                product: '商品名'
+                product: 商品名
         channel:
-            currencies: '通貨'
-            hostname: 'ホスト名'
+            currencies: 通貨
+            hostname: ホスト名
             payment_methods: sylius.breadcrumb.payment_method.index
             shipping_methods: sylius.breadcrumb.shipping_method.index
-            tax_zone_default: 'デフォルトの課税地域'
+            tax_zone_default: デフォルトの課税地域
             taxonomies: sylius.breadcrumb.taxonomy.index
-            theme: 'テーマ'
+            theme: テーマ
         image:
-            file: '画像'
+            file: 画像
         locale:
-            code: 'コード'
+            code: コード
         order_filter:
-            number: '注文番号'
-            total_from: '合計金額(下限)'
-            total_to: '合計金額(上限)'
-            payment_state: '入金状況'
+            number: 注文番号
+            total_from: 合計金額(下限)
+            total_to: 合計金額(上限)
+            payment_state: 入金状況
         page:
             id: ID
-            title: 'タイトル'
+            title: タイトル
         product:
-            images: '画像'
-            short_description: '商品概要'
-            variant_selection_method: 'バリエーション指定方法'
+            images: 画像
+            short_description: 商品概要
+            variant_selection_method: バリエーション指定方法
         product_filter:
-            name: '商品名'
-            code: 'コード'
+            name: 商品名
+            code: コード
         product_variant:
-            tax_category: '税区分'
+            tax_category: 税区分
         shipment_filter:
-            created_at_from: '合計金額(下限)'
-            created_at_to: '合計金額(上限)'
+            created_at_from: 合計金額(下限)
+            created_at_to: 合計金額(上限)
         payment_filter:
-            created_at_from: '合計金額(下限)'
-            created_at_to: '合計金額(上限)'
-            number: '注文番号'
+            created_at_from: 合計金額(下限)
+            created_at_to: 合計金額(上限)
+            number: 注文番号
         shipping_method:
-            zone: '対象の地域'
+            zone: 対象の地域
         taxon:
-            code: 'コード'
-            file: '画像を選択'
-            images: '画像'
+            code: コード
+            file: 画像を選択
+            images: 画像
         taxonomy:
-            file: '画像を選択'
+            file: 画像を選択
         user:
-            billing_address: 'ご請求先住所'
-            different_billing_address: '請求先として別の住所を指定する'
-            enabled: '有効'
-            first_name: '名'
-            groups: 'グループ'
-            last_name: '姓'
-            password: 'パスワード'
-            shipping_address: '配送先住所'
+            billing_address: ご請求先住所
+            different_billing_address: 請求先として別の住所を指定する
+            enabled: 有効
+            first_name: 名
+            groups: グループ
+            last_name: 姓
+            password: パスワード
+            shipping_address: 配送先住所
         user_filter:
-            query: '検索'
+            query: 検索
         variant:
-            height: '高さ'
-            on_hand: '在庫'
-            price: '価格'
-            width: '幅'
+            height: 高さ
+            on_hand: 在庫
+            price: 価格
+            width: 幅
         guest:
-            email: 'メールアドレス'
+            email: メールアドレス
     installer:
         extensions:
             "off": false

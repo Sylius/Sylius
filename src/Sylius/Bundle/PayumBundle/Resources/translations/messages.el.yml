@@ -4,10 +4,10 @@
 sylius:
     form:
         gateway_config:
-            type: 'Τύπος'
+            type: Τύπος
         gateway_configuration:
             paypal:
-                password: 'Κωδικός πρόσβασης'
-                username: 'Όνομα χρήστη'
+                password: Κωδικός πρόσβασης
+                username: Όνομα χρήστη
     payum_gateway_factory:
-        offline: 'Εκτός σύνδεσης'
+        offline: Εκτός σύνδεσης

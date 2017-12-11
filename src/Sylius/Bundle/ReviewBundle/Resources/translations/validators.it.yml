@@ -8,7 +8,7 @@ sylius:
         comment:
             not_blank: Il commento della recensione non dovrebbe essere vuoto.
         rating:
-            not_blank: 'È necessario controllare i voti della recensioni.'
+            not_blank: È necessario controllare i voti della recensioni.
         title:
             not_blank: Il titolo della recensione non deve essere vuoto.
             min_length: Il titolo della recensione deve avere almeno 2 caratteri.

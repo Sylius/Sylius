@@ -25,10 +25,10 @@ sylius:
         province:
             valid: Vui lòng chọn tỉnh thích hợp.
         street:
-            max_length: 'Địa chỉ đường không được dài quá 255 ký tự|Địa chỉ đường không được dài quá 255 ký tự.'
-            min_length: 'Địa chỉ đường phải có ít nhất 2 ký tự|Địa chỉ đường phải có ít nhất 2 ký tự.'
+            max_length: Địa chỉ đường không được dài quá 255 ký tự|Địa chỉ đường không được dài quá 255 ký tự.
+            min_length: Địa chỉ đường phải có ít nhất 2 ký tự|Địa chỉ đường phải có ít nhất 2 ký tự.
             not_blank: Vui lòng nhập địa chỉ (số nhà và tên đường).
-        not_shippable: 'Địa chỉ này không phải là một điểm đến vận chuyển hợp lệ.'
+        not_shippable: Địa chỉ này không phải là một điểm đến vận chuyển hợp lệ.
     country:
         code:
             not_blank: Vui lòng nhập mã ISO quốc gia.

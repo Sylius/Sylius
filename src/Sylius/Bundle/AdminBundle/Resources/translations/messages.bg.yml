@@ -6,35 +6,35 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: 'Типове асоциации'
-                    attributes: 'Атрибути'
-                    header: 'Каталог'
-                    inventory: 'Инвентар'
-                    options: 'Опцйи'
-                    products: 'Продукти'
-                    taxons: 'Категории'
+                    association_types: Типове асоциации
+                    attributes: Атрибути
+                    header: Каталог
+                    inventory: Инвентар
+                    options: Опцйи
+                    products: Продукти
+                    taxons: Категории
                 configuration:
-                    admin_users: 'Администратори'
-                    channels: 'Канали'
-                    countries: 'Държави'
-                    currencies: 'Валути'
-                    exchange_rates: 'Валутни курсове'
-                    header: 'Настройки'
-                    locales: 'Езикови променливи'
-                    payment_methods: 'Начин на плащане'
-                    shipping_categories: 'Категории за доставка'
-                    shipping_methods: 'Начин на доставка'
-                    tax_categories: 'Данъчни категории'
-                    tax_rates: 'Данъчни ставки'
-                    zones: 'Зони'
+                    admin_users: Администратори
+                    channels: Канали
+                    countries: Държави
+                    currencies: Валути
+                    exchange_rates: Валутни курсове
+                    header: Настройки
+                    locales: Езикови променливи
+                    payment_methods: Начин на плащане
+                    shipping_categories: Категории за доставка
+                    shipping_methods: Начин на доставка
+                    tax_categories: Данъчни категории
+                    tax_rates: Данъчни ставки
+                    zones: Зони
                 marketing:
-                    header: 'Маркетинг'
-                    product_reviews: 'Отзиви за продукти'
-                    promotions: 'Промоции'
+                    header: Маркетинг
+                    product_reviews: Отзиви за продукти
+                    promotions: Промоции
                 customers:
-                    customers: 'Клиенти'
-                    groups: 'Групи'
-                    header: 'Клиент'
+                    customers: Клиенти
+                    groups: Групи
+                    header: Клиент
                 sales:
-                    header: 'Продажби'
-                    orders: 'Поръчки'
+                    header: Продажби
+                    orders: Поръчки

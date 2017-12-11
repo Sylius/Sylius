@@ -4,4 +4,4 @@
 sylius:
     order_item:
         quantity:
-            min: 'Ürün miktarı 1''den daha düşük olamaz.'
+            min: Ürün miktarı 1'den daha düşük olamaz.

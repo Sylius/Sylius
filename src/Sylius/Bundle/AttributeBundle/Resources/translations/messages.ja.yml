@@ -4,4 +4,4 @@
 sylius:
     form:
         attribute:
-            code: 'コード'
+            code: コード

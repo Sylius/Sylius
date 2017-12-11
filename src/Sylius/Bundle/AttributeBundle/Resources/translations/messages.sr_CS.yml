@@ -19,7 +19,7 @@ sylius:
             integer: Ceo broj
             percent: Procenat
             select: Izaberite
-            text: 'Тekst'
+            text: Тekst
             textarea: Polje za tekst
             title: Tip atributa
             validation: Validacija

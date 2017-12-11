@@ -4,4 +4,4 @@
 sylius:
     order_item:
         quantity:
-            min: '商品的訂單數量不得少於 1。'
+            min: 商品的訂單數量不得少於 1。

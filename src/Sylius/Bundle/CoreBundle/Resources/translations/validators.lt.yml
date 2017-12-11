@@ -4,7 +4,7 @@
 sylius:
     channel:
         contact_email:
-            invalid: 'Šis adresas yra neteisingas.'
+            invalid: Šis adresas yra neteisingas.
             max: El. paštas turi būti ilgesnis nei {{ limit }} simbolių.
             min: El. paštas turi būti ilgesnis nei {{ limit }} simboliai.
     checkout:
@@ -12,8 +12,8 @@ sylius:
             not_blank: Pasirinkite pristatymo būdą.
     contact:
         email:
-            invalid: 'Šis adresas yra neteisingas.'
-            not_blank: 'Įveskite savo elektroninio pašto adresą.'
+            invalid: Šis adresas yra neteisingas.
+            not_blank: Įveskite savo elektroninio pašto adresą.
     customer:
         currency_code:
             not_valid: Valiutos kodas yra neteisingas.
@@ -22,12 +22,12 @@ sylius:
             not_valid: Valiutos kodas yra neteisingas.
     locale:
         code:
-            not_blank: 'Įveskite lokalės kodą.'
-            unique: 'Šią lokalė jau egzistuoja.'
+            not_blank: Įveskite lokalės kodą.
+            unique: Šią lokalė jau egzistuoja.
     product_variant:
         onHand:
             min: Atsargos turi būti didesnės nei {{ limit }}.
-            not_blank: 'Įveskite atsargas.'
+            not_blank: Įveskite atsargas.
         original_price:
             min: Pradinė kaina negali būti neigiama.
     product_translation:
@@ -35,5 +35,5 @@ sylius:
             max: Trumpas aprašymas negali būti ilgesnis nei {{ limit }} simbolių.
     user:
         email:
-            unique: 'Šis el. paštas jau naudojamas.'
-            invalid: 'Šis adresas yra neteisingas.'
+            unique: Šis el. paštas jau naudojamas.
+            invalid: Šis adresas yra neteisingas.

@@ -4,62 +4,62 @@
 sylius:
     form:
         promotion:
-            actions: 'Действия'
-            add_action: 'Добавить действие'
-            add_rule: 'Добавить правило'
-            coupon_based: 'Основана на купонах'
-            description: 'Описание'
-            ends_at: 'Конец'
-            exclusive: 'Эксклюзив'
-            name: 'Название'
-            priority: 'Приоритет'
-            rules: 'Правила'
-            starts_at: 'Старт'
-            usage_limit: 'Предел использования'
+            actions: Действия
+            add_action: Добавить действие
+            add_rule: Добавить правило
+            coupon_based: Основана на купонах
+            description: Описание
+            ends_at: Конец
+            exclusive: Эксклюзив
+            name: Название
+            priority: Приоритет
+            rules: Правила
+            starts_at: Старт
+            usage_limit: Предел использования
         promotion_action:
-            item_fixed_discount: 'Фиксированная скидка'
-            item_percentage_discount: 'Процентная скидка'
-            order_fixed_discount: 'Фиксированная скидка'
-            order_percentage_discount: 'Процент скидки на заказ'
-            shipping_percentage_discount: 'Процент скидки на доставку'
+            item_fixed_discount: Фиксированная скидка
+            item_percentage_discount: Процентная скидка
+            order_fixed_discount: Фиксированная скидка
+            order_percentage_discount: Процент скидки на заказ
+            shipping_percentage_discount: Процент скидки на доставку
             fixed_discount_configuration:
-                amount: 'Сумма'
+                amount: Сумма
             percentage_discount_configuration:
-                percentage: 'Процент'
-            type: 'Тип'
+                percentage: Процент
+            type: Тип
         promotion_coupon:
-            expires_at: 'Истекает'
-            usage_limit: 'Предел использования'
+            expires_at: Истекает
+            usage_limit: Предел использования
         promotion_coupon_generator_instruction:
-            amount: 'Сумма'
-            code_length: 'Длина кода'
-            expires_at: 'Истекает'
-            usage_limit: 'Предел использования'
+            amount: Сумма
+            code_length: Длина кода
+            expires_at: Истекает
+            usage_limit: Предел использования
         promotion_filter:
-            price_range: 'Фильтр диапазона цен'
+            price_range: Фильтр диапазона цен
         promotion_rule:
-            cart_quantity: 'Кол-во в корзине'
-            contains_product: 'Содержит продукт'
-            customer_group: 'Группа клиента'
-            has_at_least_one_from_taxons: 'Имеет по крайней мере один из таксонов'
-            item_total: 'Товаров всего'
+            cart_quantity: Кол-во в корзине
+            contains_product: Содержит продукт
+            customer_group: Группа клиента
+            has_at_least_one_from_taxons: Имеет по крайней мере один из таксонов
+            item_total: Товаров всего
             nth_order: N-й заказ
-            shipping_country: 'Страна получателя'
-            taxonomy: 'Тип товара'
-            total_price_of_items_from_taxon: 'Общая стоимость предметов из категории'
+            shipping_country: Страна получателя
+            taxonomy: Тип товара
+            total_price_of_items_from_taxon: Общая стоимость предметов из категории
             cart_quantity_configuration:
-                count: 'Кол-во'
-                equal: 'Равно'
+                count: Кол-во
+                equal: Равно
             contains_product_configuration:
-                exclude: 'Исключить'
-                variants: 'Товары'
+                exclude: Исключить
+                variants: Товары
             item_total_configuration:
-                amount: 'Сумма'
+                amount: Сумма
             nth_order_configuration:
-                nth: 'Количество'
+                nth: Количество
             shipping_country_configuration:
-                country: 'Страна'
+                country: Страна
             taxonomy_configuration:
-                exclude: 'Исключить'
-                taxons: 'Таксоны'
-            type: 'Тип'
+                exclude: Исключить
+                taxons: Категории
+            type: Тип

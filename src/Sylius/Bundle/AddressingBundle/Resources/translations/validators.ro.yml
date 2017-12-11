@@ -9,7 +9,7 @@ sylius:
             not_blank: Vă rugăm să completați orașul.
         country:
             not_blank: Vă rugăm să alegeți țara.
-            disabled: 'Țara aleasă este dezactivată. Vă rugăm să alegeţi una diferită.'
+            disabled: Țara aleasă este dezactivată. Vă rugăm să alegeţi una diferită.
         first_name:
             max_length: Prenumele nu poate depăși 255 de caractere|Prenumele nu poate depăși 255 de caractere.
             min_length: Prenumele trebuie să conțină cel puţin 2 caractere|Prenumele trebuie să conțină cel puţin 2 caractere.

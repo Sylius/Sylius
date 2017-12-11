@@ -4,28 +4,28 @@
 sylius:
     form:
         product:
-            name: 'ชื่อ'
-            description: 'คำอธิบาย'
-            attributes: 'คุณลักษณะ (Attribute)'
-            options: 'ตัวเลือก'
+            name: ชื่อ
+            description: คำอธิบาย
+            attributes: คุณลักษณะ (Attribute)
+            options: ตัวเลือก
             meta_keywords: Meta Keywords
             meta_description: Meta Description
             slug: Slug
-            taxons: 'การจัดหมวดหมู่'
+            taxons: การจัดหมวดหมู่
         product_variant:
-            name: 'ชื่อ'
+            name: ชื่อ
         association_type:
-            name: 'ชื่อ'
-            translations: 'การแปลภาษา'
+            name: ชื่อ
+            translations: การแปลภาษา
         association:
-            type: 'ชนิดที่เกี่ยวข้อง'
-            product: 'สินค้าที่เกี่ยวข้อง'
+            type: ชนิดที่เกี่ยวข้อง
+            product: สินค้าที่เกี่ยวข้อง
         variant:
-            name: 'ชื่อ'
+            name: ชื่อ
         option:
-            name: 'ชื่อ'
-            position: 'ตำแหน่ง'
-            values: 'ค่าที่เป็นไปได้'
+            name: ชื่อ
+            position: ตำแหน่ง
+            values: ค่าที่เป็นไปได้
         option_value:
-            add_value: 'เพิ่มค่า'
-            value: 'ค่า'
+            add_value: เพิ่มค่า
+            value: ค่า

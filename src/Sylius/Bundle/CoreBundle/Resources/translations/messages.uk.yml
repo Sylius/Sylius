@@ -4,209 +4,209 @@
 sylius:
     form:
         block:
-            body: 'Тіло'
+            body: Тіло
             id: ID
-            title: 'Заголовок'
+            title: Заголовок
         cart:
-            coupon: 'Купон'
+            coupon: Купон
         checkout:
             addressing:
-                different_billing_address: 'Використати іншу адресу для виставлення рахунків?'
-            payment_method: 'Спосіб оплати'
-            shipping_method: 'Спосіб доставки'
+                different_billing_address: Використати іншу адресу для виставлення рахунків?
+            payment_method: Спосіб оплати
+            shipping_method: Спосіб доставки
         promotion:
-            channels: 'Канали'
+            channels: Канали
         promotion_action:
             add_product_configuration:
-                product: 'Товар'
+                product: Товар
         promotion_coupon:
-            per_customer_usage_limit: 'Ліміт використання на клієнта'
+            per_customer_usage_limit: Ліміт використання на клієнта
         group:
-            name: 'Назва'
-            roles: 'Ролі'
+            name: Назва
+            roles: Ролі
         channel:
-            contact_email: 'Контактна електронна пошта'
-            currencies: 'Валюти'
-            currency_base: 'Основна валюта'
-            account_verification_required: 'Потрібна перевірка акаунту?'
-            hostname: 'Ім''я хоста'
-            locale_default: 'Типова локаль'
-            locales: 'Локалі'
-            payment_methods: 'Способи оплати'
-            shipping_methods: 'Методи доставки'
-            skipping_shipping_step_allowed: 'Пропустити крок доставки, якщо доступний лише один метод доставки?'
-            skipping_payment_step_allowed: 'Пропустити крок доставки, якщо доступний лише один метод доставки?'
-            tax_calculation_strategy: 'Стратегія податкового розрахунку'
-            tax_zone_default: 'Податкова зона за замовчуванням'
-            taxonomies: 'Таксономії'
-            theme: 'Тема'
+            contact_email: Контактна електронна пошта
+            currencies: Валюти
+            currency_base: Основна валюта
+            account_verification_required: Потрібна перевірка акаунту?
+            hostname: Ім'я хоста
+            locale_default: Типова локаль
+            locales: Локалі
+            payment_methods: Способи оплати
+            shipping_methods: Методи доставки
+            skipping_shipping_step_allowed: Пропустити крок доставки, якщо доступний лише один метод доставки?
+            skipping_payment_step_allowed: Пропустити крок доставки, якщо доступний лише один метод доставки?
+            tax_calculation_strategy: Стратегія податкового розрахунку
+            tax_zone_default: Податкова зона за замовчуванням
+            taxonomies: Таксономії
+            theme: Тема
         image:
-            type: 'Тип'
-            file: 'Зображення'
+            type: Тип
+            file: Зображення
         locale:
-            code: 'Код'
-            enabled: 'Увімкнено'
+            code: Код
+            enabled: Увімкнено
         order_filter:
-            created_at_from: 'Створені після'
-            created_at_to: 'Створений перед'
-            number: 'Номер'
-            total_from: 'Від'
-            total_to: 'До'
-            payment_state: 'Статус платежу'
-            channel: 'Усі канали'
+            created_at_from: Створені після
+            created_at_to: Створений перед
+            number: Номер
+            total_from: Від
+            total_to: До
+            payment_state: Статус платежу
+            channel: Усі канали
         page:
-            body: 'Тіло'
+            body: Тіло
             id: ID
-            title: 'Назва'
+            title: Назва
         product:
-            images: 'Зображення'
-            restricted_zone: 'Заборонена зона'
-            short_description: 'Короткий опис'
-            variant_selection_method: 'Метод вибору варіанту'
-            main_taxon: 'Основний таксон'
-            channels: 'Канали'
-            enabled: 'Увімкнено'
+            images: Зображення
+            restricted_zone: Заборонена зона
+            short_description: Короткий опис
+            variant_selection_method: Метод вибору варіанту
+            main_taxon: Основний таксон
+            channels: Канали
+            enabled: Увімкнено
         product_filter:
-            name: 'Ім’я'
-            code: 'Код'
+            name: Ім’я
+            code: Код
         product_variant:
-            tax_category: 'Категорія податку'
-            shipping_category: 'Категорія доставки'
+            tax_category: Категорія податку
+            shipping_category: Категорія доставки
         shipment_filter:
-            created_at_from: 'Від'
-            created_at_to: 'До'
-            number: 'Номер замовлення'
-            shipping_address: 'Ім''я одержувача'
-            channel: 'Усі канали'
+            created_at_from: Від
+            created_at_to: До
+            number: Номер замовлення
+            shipping_address: Ім'я одержувача
+            channel: Усі канали
         payment_filter:
-            created_at_from: 'Від'
-            created_at_to: 'До'
-            number: 'Номер замовлення'
-            billing_address: 'Ім''я платника'
-            channel: 'Усі канали'
+            created_at_from: Від
+            created_at_to: До
+            number: Номер замовлення
+            billing_address: Ім'я платника
+            channel: Усі канали
         shipping_method:
-            zone: 'Зона'
+            zone: Зона
         taxon:
-            code: 'Код'
-            file: 'Вибрати зображення'
-            images: 'Зображення'
+            code: Код
+            file: Вибрати зображення
+            images: Зображення
         taxonomy:
-            file: 'Вибрати зображення'
+            file: Вибрати зображення
         user:
-            billing_address: 'Адреса для рахунків'
-            different_billing_address: 'Використати іншу адресу для рахунків?'
-            enabled: 'Увімкнено'
+            billing_address: Адреса для рахунків
+            different_billing_address: Використати іншу адресу для рахунків?
+            enabled: Увімкнено
             first_name: Iм'я
-            groups: 'Групи'
-            roles: 'Ролі'
-            last_name: 'Прізвище'
-            password: 'Пароль'
-            shipping_address: 'Адреса доставки'
+            groups: Групи
+            roles: Ролі
+            last_name: Прізвище
+            password: Пароль
+            shipping_address: Адреса доставки
         user_filter:
-            query: 'Пошук'
+            query: Пошук
         variant:
-            depth: 'Глибина'
-            height: 'Висота'
-            on_hand: 'Поточний запас'
-            price: 'Ціна'
-            sku: 'Артикул'
-            shipping_required: 'Доставка потрібна?'
-            weight: 'Вага'
-            width: 'Ширина'
+            depth: Глибина
+            height: Висота
+            on_hand: Поточний запас
+            price: Ціна
+            sku: Артикул
+            shipping_required: Доставка потрібна?
+            weight: Вага
+            width: Ширина
         attribute:
             product_attribute_value:
-                attribute: 'Атрибут'
-                value: 'Значення'
+                attribute: Атрибут
+                value: Значення
         guest:
-            email: 'Адреса електронної пошти'
+            email: Адреса електронної пошти
         product_association:
-            product: 'Асоційований продукт'
-            type: 'Тип асоціювання'
+            product: Асоційований продукт
+            type: Тип асоціювання
         product_association_type:
-            name: 'Назва'
+            name: Назва
         promotion_filter:
-            products: 'Фільтр товарів'
-            taxons: 'Фільтр таксонів'
+            products: Фільтр товарів
+            taxons: Фільтр таксонів
         promotion_rule:
             customer_group:
-                group: 'Група клієнтів'
+                group: Група клієнтів
             has_taxon:
-                taxons: 'Таксони'
+                taxons: Таксони
             product:
-                products: 'Продукція'
+                products: Продукція
             total_of_items_from_taxon:
-                taxon: 'Таксон'
-                amount: 'Обсяг'
+                taxon: Таксон
+                amount: Обсяг
         payment_method:
-            channels: 'Канали'
+            channels: Канали
         product_attribute:
-            position: 'Позиція'
+            position: Позиція
         zone:
             scopes:
-                shipping: 'Спосіб доставки'
-                tax: 'Податок'
+                shipping: Спосіб доставки
+                tax: Податок
     installer:
         extensions:
-            header: 'розширення'
+            header: розширення
             accelerator:
-                header: 'Прискорювач'
-                help: 'Увімкнути Zend OpCache (настійно рекомендується).'
+                header: Прискорювач
+                help: Увімкнути Zend OpCache (настійно рекомендується).
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Установити й увімкнути розширення %extension%.'
+            help: Установити й увімкнути розширення %extension%.
             iconv: Iconv
             exif: Exif
             fileinfo: Fileinfo
             icu: ICU
             intl: Intl
             json_encode: JSON
-            mbstring: 'Багатобайтові рядки (Multibyte String)'
+            mbstring: Багатобайтові рядки (Multibyte String)
             "off": false
             "on": true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
-            session_start: 'Сесія (Session)'
+            session_start: Сесія (Session)
             simplexml_import_dom: SimpleXML
-            token_get_all: 'Лексер (Tokenizer)'
+            token_get_all: Лексер (Tokenizer)
         filesystem:
-            header: 'файлова система'
+            header: файлова система
             cache:
-                header: 'кеш'
+                header: кеш
                 help: 'Щоб встановити дозволи, запустіть: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
-            exists: 'існує'
+            exists: існує
             logs:
-                header: 'журнали'
+                header: журнали
                 help: 'Щоб встановити дозволи, запустіть: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
-            not_exists: 'не існує'
-            not_writable: 'відсутня можливість запису'
+            not_exists: не існує
+            not_writable: відсутня можливість запису
             parameters:
                 header: parameters.yml
                 help: 'Щоб встановити дозволи, запустіть: sudo chmod a+w %path%'
-            vendors: 'постачальники'
-            writable: 'наявна можливість запису'
+            vendors: постачальники
+            writable: наявна можливість запису
         settings:
-            header: 'Версія PHP та налаштування'
-            any: 'будь-які'
+            header: Версія PHP та налаштування
+            any: будь-які
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
-            non_deprecated: 'не є застарілим'
+            non_deprecated: не є застарілим
             "off": false
             "on": true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
             short_open_tag: short_open_tag
-            timezone: 'часовий пояс'
+            timezone: часовий пояс
             timezone_deprecated:
-                header: 'Застарілий часовий пояс'
-                help: 'Часовий пояс %timezone% застарілий. Виправте ваш файл php.ini (перелік застарілих часових поясів http://php.net/manual/en/timezones.others.php).'
-            version: 'Версія PHP'
-            version_recommended: 'Рекомендована версія PHP'
+                header: Застарілий часовий пояс
+                help: Часовий пояс %timezone% застарілий. Виправте ваш файл php.ini (перелік застарілих часових поясів http://php.net/manual/en/timezones.others.php).
+            version: Версія PHP
+            version_recommended: Рекомендована версія PHP
     payum_gateway:
-        cash_on_delivery: 'Накладений платіж'
-        offline: 'Автономний'
-        paypal_express_checkout: 'Платіж PayPal Express'
+        cash_on_delivery: Накладений платіж
+        offline: Автономний
+        paypal_express_checkout: Платіж PayPal Express
     shipping_method_resolver:
-        by_zones_and_channel: 'З використанням зон і каналу'
+        by_zones_and_channel: З використанням зон і каналу

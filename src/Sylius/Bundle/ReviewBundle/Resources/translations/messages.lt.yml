@@ -7,7 +7,7 @@ sylius:
             author: Autorius
             comment: Komentaras
             header: Pridėti atsiliepimą
-            rating: 'Įvertinimas'
+            rating: Įvertinimas
             status:
                 approved: Patvirtintas
                 label: Būsena

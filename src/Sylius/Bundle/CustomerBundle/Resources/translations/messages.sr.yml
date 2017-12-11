@@ -4,4 +4,4 @@
 sylius:
     form:
         customer:
-            phone_number: 'Број телефона'
+            phone_number: Број телефона

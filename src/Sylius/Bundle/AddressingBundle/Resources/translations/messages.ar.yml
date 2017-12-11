@@ -4,39 +4,39 @@
 sylius:
     form:
         address:
-            city: 'المدينة'
-            company: 'الشركة'
-            country: 'البلد'
-            first_name: 'الاسم الأول'
-            last_name: 'إسم العائلة'
-            phone_number: 'رقم الهاتف'
-            postcode: 'الرقم البريدي'
-            street: 'عنوان الشارع'
-            province: 'مقاطعة'
-            zone: 'المنطقة'
+            city: المدينة
+            company: الشركة
+            country: البلد
+            first_name: الاسم الأول
+            last_name: إسم العائلة
+            phone_number: رقم الهاتف
+            postcode: الرقم البريدي
+            street: عنوان الشارع
+            province: مقاطعة
+            zone: المنطقة
         country:
-            add_province: 'اضافة جهة/مقاطعة'
-            name: 'الاسم'
-            provinces: 'المقاطعات'
-            select: 'اختر'
-            enabled: 'تفعيل'
+            add_province: اضافة جهة/مقاطعة
+            name: الاسم
+            provinces: المقاطعات
+            select: اختر
+            enabled: تفعيل
         province:
-            name: 'الاسم'
-            abbreviation: 'مختصرات'
-            select: 'اختر'
+            name: الاسم
+            abbreviation: مختصرات
+            select: اختر
         zone:
-            add_member: 'إضافة عضو'
-            members: 'الأعضاء'
-            name: 'الاسم'
-            type: 'نوع'
+            add_member: إضافة عضو
+            members: الأعضاء
+            name: الاسم
+            type: نوع
             types:
-                country: 'البلد'
-                province: 'مقاطعة'
-                zone: 'المنطقة'
-            scope: 'نطاق'
+                country: البلد
+                province: مقاطعة
+                zone: المنطقة
+            scope: نطاق
             scopes:
-                all: 'الكل'
-            select: 'اختر'
-            select_scope: 'اختر النطاق'
+                all: الكل
+            select: اختر
+            select_scope: اختر النطاق
         zone_member:
-            select: 'اختر'
+            select: اختر

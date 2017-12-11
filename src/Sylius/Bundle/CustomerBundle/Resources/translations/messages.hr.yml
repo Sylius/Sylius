@@ -12,7 +12,7 @@ sylius:
             gender: Spol
             birthday: Rođendan
             billing_address: Adresa za dostavu
-            different_billing_address: 'Želim koristiti drugu adresu za račun.'
+            different_billing_address: Želim koristiti drugu adresu za račun.
             subscribed_to_newsletter: Pretplatite se na naš newsletter
         customer_group:
             name: Naziv grupe
@@ -20,4 +20,4 @@ sylius:
     gender:
         unknown: Nepoznato
         male: Muško
-        female: 'Žensko'
+        female: Žensko

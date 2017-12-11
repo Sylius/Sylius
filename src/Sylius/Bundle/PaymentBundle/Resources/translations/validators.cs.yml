@@ -12,7 +12,7 @@ sylius:
             not_blank: Vyberte prosím měsíc vypršení platnosti.
         number:
             not_blank: Zadejte prosím číslo karty.
-            luhn: 'Číslo kreditní karty, které jste zadali je neplatné.'
+            luhn: Číslo kreditní karty, které jste zadali je neplatné.
         security_code:
             not_blank: Zadejte prosím bezpečnostní kód.
             max_length: CVV kód kreditní karty musí být mít alespoň {{ limit }} číslic.

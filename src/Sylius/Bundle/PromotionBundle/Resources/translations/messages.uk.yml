@@ -4,50 +4,50 @@
 sylius:
     form:
         promotion:
-            actions: 'Дії'
-            add_action: 'Додати дію'
-            add_rule: 'Додати правило'
-            coupon_based: 'На основі купону'
-            description: 'Опис'
-            ends_at: 'Кінець дії'
-            exclusive: 'Ексклюзивно'
-            name: 'Назва'
-            priority: 'Пріоритет'
-            rules: 'Правила'
-            starts_at: 'Початок дії'
-            usage_limit: 'Обмеження використання'
+            actions: Дії
+            add_action: Додати дію
+            add_rule: Додати правило
+            coupon_based: На основі купону
+            description: Опис
+            ends_at: Кінець дії
+            exclusive: Ексклюзивно
+            name: Назва
+            priority: Пріоритет
+            rules: Правила
+            starts_at: Початок дії
+            usage_limit: Обмеження використання
         promotion_action:
             fixed_discount_configuration:
-                amount: 'Сума'
+                amount: Сума
             percentage_discount_configuration:
-                percentage: 'Відсоток'
-            type: 'Тип'
+                percentage: Відсоток
+            type: Тип
         promotion_coupon:
-            expires_at: 'Дійсний до'
-            usage_limit: 'Обмеження використання'
+            expires_at: Дійсний до
+            usage_limit: Обмеження використання
         promotion_coupon_generator_instruction:
-            amount: 'Сума'
-            code_length: 'Довжина коду'
-            expires_at: 'Дійсний до'
-            usage_limit: 'Обмеження використання'
+            amount: Сума
+            code_length: Довжина коду
+            expires_at: Дійсний до
+            usage_limit: Обмеження використання
         promotion_filter:
-            price_range: 'Фільтр цінових діапазонів'
+            price_range: Фільтр цінових діапазонів
         promotion_rule:
-            customer_group: 'Група клієнтів'
-            taxonomy: 'Таксономія'
+            customer_group: Група клієнтів
+            taxonomy: Таксономія
             cart_quantity_configuration:
-                count: 'Кількість'
-                equal: 'Дорівнює'
+                count: Кількість
+                equal: Дорівнює
             contains_product_configuration:
-                exclude: 'Виключити'
-                variants: 'Продукція'
+                exclude: Виключити
+                variants: Продукція
             item_total_configuration:
-                amount: 'Сума'
+                amount: Сума
             nth_order_configuration:
-                nth: 'Кількість'
+                nth: Кількість
             shipping_country_configuration:
-                country: 'Країна'
+                country: Країна
             taxonomy_configuration:
-                exclude: 'Виключити'
-                taxons: 'Таксони'
-            type: 'Тип'
+                exclude: Виключити
+                taxons: Таксони
+            type: Тип

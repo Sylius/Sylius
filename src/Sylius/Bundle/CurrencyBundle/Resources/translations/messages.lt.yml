@@ -6,9 +6,9 @@ sylius:
         currency:
             base: Bazinė valiuta
             code: Pavadinimas
-            enabled: 'Įjungta'
+            enabled: Įjungta
             exchange_rate: Valiutų kursas
         exchange_rate:
-            source_currency: 'Šaltinio valiuta'
+            source_currency: Šaltinio valiuta
             target_currency: Tikslinė valiuta
             ratio: Santykis

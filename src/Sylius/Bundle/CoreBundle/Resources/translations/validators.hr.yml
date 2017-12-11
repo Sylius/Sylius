@@ -61,8 +61,8 @@ sylius:
             min: Težina ne može biti negativan broj.
             invalid: Težina mora biti broj.
         width:
-            min: 'Širina ne može biti negativan broj.'
-            invalid: 'Širina mora biti broj.'
+            min: Širina ne može biti negativan broj.
+            invalid: Širina mora biti broj.
         height:
             min: Visina ne može biti negativan broj.
             invalid: Visina mora biti broj.

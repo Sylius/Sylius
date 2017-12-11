@@ -45,7 +45,7 @@ sylius:
             file: Paveikslėlis
         locale:
             code: Kodas
-            enabled: 'Įjungta'
+            enabled: Įjungta
         order_filter:
             created_at_from: Sukurta po
             created_at_to: Sukurta prieš
@@ -65,7 +65,7 @@ sylius:
             variant_selection_method: Varianto pasirinkimo būdas
             main_taxon: Pagrindinis taksonas
             channels: Kanalai
-            enabled: 'Įjungta'
+            enabled: Įjungta
         product_filter:
             name: Pavadinimas
             code: Kodas
@@ -95,7 +95,7 @@ sylius:
         user:
             billing_address: Mokėtojo adresas
             different_billing_address: Naudoti kitą adresą apmokėjimui?
-            enabled: 'Įjungta'
+            enabled: Įjungta
             first_name: Vardas
             groups: Grupės
             roles: Rolės
@@ -150,18 +150,18 @@ sylius:
             header: plėtiniai
             accelerator:
                 header: Greitintuvas
-                help: 'Įgalinti Zend OpCache (rekomenduojama).'
+                help: Įgalinti Zend OpCache (rekomenduojama).
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Įdiekite ir įjunkite %extension% plėtinį.'
+            help: Įdiekite ir įjunkite %extension% plėtinį.
             iconv: Iconv
             exif: Exif
             fileinfo: Fileinfo
             icu: ICU
             intl: Intl
             json_encode: JSON
-            mbstring: 'Įvairaus baitų ilgio eilutę'
+            mbstring: Įvairaus baitų ilgio eilutę
             "off": false
             "on": true
             pcre: PCRE

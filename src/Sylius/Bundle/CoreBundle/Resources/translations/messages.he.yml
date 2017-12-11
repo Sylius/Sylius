@@ -4,10 +4,10 @@
 sylius:
     form:
         image:
-            type: 'סוג'
+            type: סוג
         promotion_rule:
             has_taxon:
-                taxons: 'קבוצות טקסונומיות'
+                taxons: קבוצות טקסונומיות
     installer:
         extensions:
             "off": false

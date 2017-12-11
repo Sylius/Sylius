@@ -4,36 +4,36 @@
 sylius:
     form:
         attribute:
-            add: 'добавяне'
-            add_attributes: 'Добави атрибути'
-            choices: 'Избор'
-            code: 'Код'
-            name: 'Име'
-            translations: 'Преводи'
-            type: 'Тип'
+            add: добавяне
+            add_attributes: Добави атрибути
+            choices: Избор
+            code: Код
+            name: Име
+            translations: Преводи
+            type: Тип
         attribute_type:
-            checkbox: 'Отметка'
-            configuration: 'Конфигурация'
-            date: 'Дата'
-            datetime: 'Дата и час'
-            integer: 'Целочислено'
-            percent: 'Процент'
-            select: 'Изберете'
-            text: 'Текст'
-            textarea: 'Поле за текст'
-            title: 'Типове атрибути'
-            validation: 'Проверка'
+            checkbox: Отметка
+            configuration: Конфигурация
+            date: Дата
+            datetime: Дата и час
+            integer: Целочислено
+            percent: Процент
+            select: Изберете
+            text: Текст
+            textarea: Поле за текст
+            title: Типове атрибути
+            validation: Проверка
         attribute_type_configuration:
             datetime:
-                format: 'Форматиране'
+                format: Форматиране
             date:
-                format: 'Форматиране'
+                format: Форматиране
             select:
-                multiple: 'Множество'
-                values: 'Стойности'
-                choose: 'Изберете опция'
-                min: 'Мин. записи'
-                max: 'Макс. записи'
+                multiple: Множество
+                values: Стойности
+                choose: Изберете опция
+                min: Мин. записи
+                max: Макс. записи
             text:
-                min: 'Минимална дължина'
-                max: 'Макс. дължина'
+                min: Минимална дължина
+                max: Макс. дължина

@@ -4,4 +4,4 @@
 sylius:
     form:
         option:
-            values: '예상값'
+            values: 예상값

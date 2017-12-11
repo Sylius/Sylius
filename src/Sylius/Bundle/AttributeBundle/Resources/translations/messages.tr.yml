@@ -5,11 +5,11 @@ sylius:
     form:
         attribute:
             add: Ekle
-            add_attributes: 'Özellik ekle'
+            add_attributes: Özellik ekle
             choices: Seçimler
             code: Kod
             name: Ad
-            translations: 'Çeviriler'
+            translations: Çeviriler
             type: Türü
         attribute_type:
             checkbox: Onay Kutusu
@@ -18,10 +18,10 @@ sylius:
             datetime: Tarih/Saat
             integer: Tamsayı
             percent: Yüzde
-            select: 'Ülke seçin'
+            select: Ülke seçin
             text: Metin
             textarea: Metin Alanı
-            title: 'Özellik türü'
+            title: Özellik türü
             validation: Doğrulama
         attribute_type_configuration:
             datetime:

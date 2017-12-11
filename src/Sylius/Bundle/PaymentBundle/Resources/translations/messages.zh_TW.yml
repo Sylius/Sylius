@@ -5,7 +5,7 @@ sylius:
     form:
         payment:
             state:
-                header: '付款狀態'
+                header: 付款狀態
         payment_method:
-            name: '名稱'
-            position: '位置'
+            name: 名稱
+            position: 位置

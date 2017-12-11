@@ -9,7 +9,7 @@ sylius:
                 equal: Est égal à
             type: Type de règle
         shipment:
-            state: 'État'
+            state: État
             states:
                 checkout: Paiement
                 pending: En attente

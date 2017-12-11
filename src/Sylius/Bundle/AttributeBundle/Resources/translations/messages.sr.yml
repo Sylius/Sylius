@@ -4,6 +4,6 @@
 sylius:
     form:
         attribute:
-            type: 'Тип'
+            type: Тип
         attribute_type:
-            select: 'Изаберите'
+            select: Изаберите

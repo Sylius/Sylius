@@ -4,8 +4,8 @@
 sylius:
     form:
         channel:
-            color: 'Цвет'
-            description: 'Описание'
-            enabled: 'Активен'
-            name: 'Название'
+            color: Цвет
+            description: Описание
+            enabled: Активен
+            name: Название
             url: URL
