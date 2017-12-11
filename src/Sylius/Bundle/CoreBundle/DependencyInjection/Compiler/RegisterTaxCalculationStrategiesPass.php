@@ -38,7 +38,7 @@ final class RegisterTaxCalculationStrategiesPass implements CompilerPassInterfac
                 throw new \InvalidArgumentException('Tagged tax calculation strategies need to have `type` and `label` attributes.');
             }
 
-            $priority = isset($attributes[0]['priority']) ? (int) $attributes[0]['priority'] : 0;
+            $priority = (int) ($attributes[0]['priority'] ?? 0);
 
             $strategies[$attributes[0]['type']] = $attributes[0]['label'];
 
