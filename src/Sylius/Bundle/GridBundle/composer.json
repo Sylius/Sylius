@@ -42,6 +42,7 @@
         "phpunit/phpunit": "^5.6",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "symfony/browser-kit": "^3.2",
+        "symfony/dependency-injection": "^3.2",
         "symfony/proxy-manager-bridge": "^3.3",
         "symfony/security-csrf": "^3.2",
         "symfony/twig-bundle": "^3.2",
