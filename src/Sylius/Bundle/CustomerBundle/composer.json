@@ -43,6 +43,7 @@
     "require-dev": {
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
+        "symfony/dependency-injection": "^3.2",
         "symfony/form": "^3.2",
         "symfony/browser-kit": "^3.2",
         "incenteev/composer-parameter-handler": "~2.0",
