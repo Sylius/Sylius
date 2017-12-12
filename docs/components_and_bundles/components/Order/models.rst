@@ -18,7 +18,7 @@ Orders have the following properties:
 +--------------------------+---------------------------------------------+
 | number                   | Number is human-friendly identifier         |
 +--------------------------+---------------------------------------------+
-| notes                    | Additional inforamtion about order          |
+| notes                    | Additional information about order          |
 +--------------------------+---------------------------------------------+
 | items                    | Collection of items                         |
 +--------------------------+---------------------------------------------+
