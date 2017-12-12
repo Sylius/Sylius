@@ -36,7 +36,7 @@ final class RegisterShippingMethodsResolversPass implements CompilerPassInterfac
                 throw new \InvalidArgumentException('Tagged shipping methods resolvers need to have `type` and `label` attributes.');
             }
 
-            $priority = isset($attributes[0]['priority']) ? (int) $attributes[0]['priority'] : 0;
+            $priority = (int) ($attributes[0]['priority'] ?? 0);
 
             $resolvers[$attributes[0]['type']] = $attributes[0]['label'];
 

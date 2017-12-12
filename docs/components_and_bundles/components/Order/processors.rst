@@ -1,7 +1,7 @@
 Processors
 ==========
 
-Order processors are responsible of manipulating the orders to apply different predefined adjustments or other modifications based on order state.
+Order processors are responsible for manipulating the orders to apply different predefined adjustments or other modifications based on order state.
 
 .. _component_order_processors_order-processor-interface:
 

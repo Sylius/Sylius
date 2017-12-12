@@ -336,6 +336,7 @@ sylius:
         gateway: 'Πύλη'
         general_settings: 'Γενικές ρυθμίσεις'
         generate: 'Δημιουργία'
+        generate_variants: 'Δημιουργία παραλλαγών'
         grand_total: 'Γενικό σύνολο'
         home: 'Αρχική'
         hostname: 'Όνομα κεντρικού υπολογιστή'
