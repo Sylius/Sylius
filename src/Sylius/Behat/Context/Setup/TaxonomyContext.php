@@ -204,6 +204,6 @@ final class TaxonomyContext implements Context
      */
     private function getParameter($name)
     {
-        return isset($this->minkParameters[$name]) ? $this->minkParameters[$name] : null;
+        return $this->minkParameters[$name] ?? null;
     }
 }

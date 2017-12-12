@@ -137,7 +137,7 @@ abstract class Page implements PageInterface
      */
     protected function getParameter($name)
     {
-        return isset($this->parameters[$name]) ? $this->parameters[$name] : null;
+        return $this->parameters[$name] ?? null;
     }
 
     /**

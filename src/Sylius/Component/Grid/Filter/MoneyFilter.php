@@ -30,7 +30,7 @@ final class MoneyFilter implements FilterInterface
         }
 
         $field = $options['field'] ?? $name;
-        $scale = isset($options['scale']) ? (int) $options['scale'] : self::DEFAULT_SCALE;
+        $scale = (int) ($options['scale'] ?? self::DEFAULT_SCALE);
 
         $greaterThan = $this->getDataValue($data, 'greaterThan');
         $lessThan = $this->getDataValue($data, 'lessThan');
