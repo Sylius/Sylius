@@ -51,9 +51,9 @@ sylius:
         code:
             not_blank: 请输入区号。
             regex: 区域代码仅可以由字母、数字、破折号和下划线组成
-            unique: 区域编码必须唯一。
+            unique: 区域编码必须是唯一的。
         members:
-            min_count: 请至少添加{{ limit }} 地区会员。
+            min_count: 请至少添加 {{limit}} 区成员。
         name:
             max_length: 区域名称不能超过 255 个字符。
             min_length: 区域名称必须是至少 2 个字符长
