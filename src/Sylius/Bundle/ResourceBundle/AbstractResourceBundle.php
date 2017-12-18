@@ -99,7 +99,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      */
     protected function getModelNamespace(): ?string
     {
-        return null;
+        return (new \ReflectionClass($this))->getNamespaceName().'\\Model';
     }
 
     /**
