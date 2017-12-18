@@ -105,7 +105,7 @@ Assuming you are creating the invoicing plugin as used above, this will result i
     use Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait;
     use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-    final class AcmeExamplePlugin extends Bundle
+    final class VendorNameSyliusInvoicePlugin extends Bundle
     {
         use SyliusPluginTrait;
     }
@@ -144,7 +144,11 @@ Assuming you are creating the invoicing plugin as used above, this will result i
     {
         "autoload": {
             "psr-4": {
-                "VendorName\\SyliusInvoicePlugin\\": "src/",
+                "VendorName\\SyliusInvoicePlugin\\": "src/"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
                 "Tests\\VendorName\\SyliusInvoicePlugin\\": "tests/"
             }
         },
