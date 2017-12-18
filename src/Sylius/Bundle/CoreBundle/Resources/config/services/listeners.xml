@@ -83,5 +83,11 @@
             <argument type="service" id="sylius.product_variant_resolver.default" />
             <tag name="kernel.event_listener" event="sylius.product.initialize_update" method="lock" />
         </service>
+
+        <service id="sylius.set_session_name" class="Sylius\Bundle\CoreBundle\EventListener\SessionNameSubscriber">
+            <argument type="service" id="security.firewall.map" />
+            <argument type="service" id="session" />
+            <tag name="kernel.event_subscriber"/>
+        </service>
     </services>
 </container>
