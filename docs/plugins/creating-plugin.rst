@@ -144,7 +144,11 @@ Assuming you are creating the invoicing plugin as used above, this will result i
     {
         "autoload": {
             "psr-4": {
-                "VendorName\\SyliusInvoicePlugin\\": "src/",
+                "VendorName\\SyliusInvoicePlugin\\": "src/"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
                 "Tests\\VendorName\\SyliusInvoicePlugin\\": "tests/"
             }
         },
