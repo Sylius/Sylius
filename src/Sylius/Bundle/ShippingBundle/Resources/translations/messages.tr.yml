@@ -23,6 +23,7 @@ sylius:
                 label: Sevkıyat başına sabit oran
                 amount: Miktar
             per_unit_rate_configuration:
+                label: Her birim için sabit oran
                 amount: Miktar
         shipping_category:
             description: Açıklama
@@ -35,6 +36,10 @@ sylius:
             configuration: Ayarlar
             description: Açıklama
             enabled: Etkin
+            match_all_category_requirement: Bütün birimler yöntem katagorisi ile eşleşmelidir
+            match_any_category_requirement: En az 1 birim yöntem katagorisi ile eşleşmelidir
+            match_none_category_requirement: Hiçbir birim yöntem katagorisi ile eşleşmelidir
             name: Ad
+            position: Konum
             tax_category: Vergi kategorisi
             translations: Çeviriler

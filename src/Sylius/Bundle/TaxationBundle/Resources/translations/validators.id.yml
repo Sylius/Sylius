@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    tax_category:
+        name:
+            not_blank: Harap masukkan nama kategori pajak.
+        code:
+            not_blank: Harap masukkan kode kategori pajak.
+            regex: Kode kategori pajak hanya dapat terdiri dari huruf, angka, tanda hubung dan garis bawah.
+            unique: Kategori pajak dengan kode yang diberikan sudah ada.
+    tax_rate:
+        category:
+            not_blank: Harap pilih kategori pajak.
+        name:
+            not_blank: Harap masukkan nama tarif pajak.
+        amount:
+            not_blank: Harap masukkan jumlah pajak.
+        calculator:
+            not_blank: Silakan pilih kalkulator pajak.
+        zone:
+            not_blank: Pilih zona pajak.
+        code:
+            not_blank: Harap masukkan kode tarif pajak.
+            regex: Kode tarif pajak hanya dapat terdiri dari huruf, angka, tanda hubung dan garis bawah.
+            unique: Tarif pajak dengan kode yang diberikan sudah ada.

@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        author:
+            already_exists: Email ini sudah terdaftar, silahkan login atau gunakan password yang terlupakan.
+        comment:
+            not_blank: Komentar ulasan seharusnya tidak kosong.
+        rating:
+            not_blank: Anda harus memeriksa peringkat ulasan.
+        title:
+            not_blank: Judul ulasan tidak boleh kosong.
+            min_length: Judul ulasan harus memiliki minimal 2 karakter.
+            max_length: Judul ulasan harus memiliki paling banyak 255 karakter.

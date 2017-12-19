@@ -8,7 +8,7 @@ sylius:
         default_locale:
             not_blank: 请输入销售渠道默认区域设置。
         contact_email:
-            invalid: 电子邮件无效。
+            invalid: 电子邮件地址无效。
             max: 电子邮件必须不能超过 {{ limit }} 个字符。
             min: 电子邮件至少{{limit}}个字符
     channel_pricing:
@@ -20,7 +20,7 @@ sylius:
             not_blank: 请选择配送方式。
     contact:
         email:
-            invalid: 电子邮件无效。
+            invalid: 电子邮件地址无效。
             not_blank: 请输入您的电子邮件。
         message:
             not_blank: 请输入您的消息。
@@ -86,7 +86,7 @@ sylius:
             unique: 该电子邮件已被使用
             min: 电子邮件必须至少有 {{ min }} 个字符。
             max: 电子邮件最多 {{ max }} 个字符。
-            invalid: 电子邮件无效。
+            invalid: 电子邮件地址无效。
         username:
             unique: 此用户名已被使用。
             not_blank: 请输入您的姓名。

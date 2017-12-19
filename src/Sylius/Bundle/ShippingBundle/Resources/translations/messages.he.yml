@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        shipment:
+            states:
+                cancelled: בוטל
+            tracking_code: מספר מעקב
+        shipping_category:
+            name: שם
+        shipping_method:
+            calculator: מחשבון
+            enabled: הופעל

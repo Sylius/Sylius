@@ -17,21 +17,49 @@ sylius:
             starts_at: ''' Dan başlar'
             usage_limit: Kullanım sınırı
         promotion_action:
+            item_fixed_discount: Eşya sabit indirim
+            item_percentage_discount: Eşya yüzde indirim
+            order_fixed_discount: Sipariş İndirimi
+            order_percentage_discount: Sipariş yüzde indirim
+            shipping_percentage_discount: Nakliye yüzde indirim
             fixed_discount_configuration:
                 amount: Miktar
+            percentage_discount_configuration:
+                percentage: Yüzde
             type: Türü
         promotion_coupon:
+            expires_at: Süre sonu
             usage_limit: Kullanım sınırı
         promotion_coupon_generator_instruction:
             amount: Miktar
+            code_length: Kod uzunluğu
+            expires_at: Süre sonu
             usage_limit: Kullanım sınırı
+        promotion_filter:
+            price_range: Fiyat aralığı filtresi
         promotion_rule:
+            cart_quantity: Araba adedi
+            contains_product: Ürün içerir
+            customer_group: Müşteri Grubu
+            has_at_least_one_from_taxons: En az bir sınıf üzerinden
+            item_total: Toplam eşya
+            nth_order: Sonuncu sipariş
+            shipping_country: Nakliye yapılan ülke
+            taxonomy: Bölümlendirme
+            total_price_of_items_from_taxon: Katagoriden gelen eşyaların toplam tutarı
             cart_quantity_configuration:
                 count: Sayısı
+                equal: Eşit
             contains_product_configuration:
+                exclude: Hariç
                 variants: Ürünler
             item_total_configuration:
                 amount: Miktar
+            nth_order_configuration:
+                nth: Sonuncu
             shipping_country_configuration:
                 country: Ülke
+            taxonomy_configuration:
+                exclude: Hariç
+                taxons: Kategoriler
             type: Türü

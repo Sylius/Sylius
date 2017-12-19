@@ -5,3 +5,5 @@ sylius:
     cart:
         add_item: 'Ürün alışveriş spetinize eklendi'
         cannot_modify: 'Sipariş zaten değiştirmek istediğiniz sepeti için gönderildi.'
+        remove_item: 'Ürün sepetinizden silinmiş'
+        save: 'Sepetiniz başarıyla güncelleştirildi'
