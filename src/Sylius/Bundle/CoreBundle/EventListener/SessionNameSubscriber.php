@@ -47,7 +47,7 @@ final class SessionNameSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => ['onKernelRequest', 15]
+            KernelEvents::REQUEST => ['onKernelRequest', 15],
         ];
     }
 
@@ -56,23 +56,15 @@ final class SessionNameSubscriber implements EventSubscriberInterface
      */
     public function onKernelRequest(GetResponseEvent $event): void
     {
-        if ( null === $this->firewallMap ) {
-            return;
-        }
-
-        if ( null === $this->session ) {
-            return;
-        }
-
         $firewallConfig = $this->firewallMap->getFirewallConfig($event->getRequest());
         $cookies = $event->getRequest()->cookies;
 
-        if ($cookies->has($this->session->getName())) {
-            if($this->session->getId() !== $cookies->get($this->session->getName()) ) {
-                $this->session->setName(
-                    sprintf('sylius_%s', $firewallConfig->getName())
-                );
-            }
+        if (!$cookies->has($this->session->getName())) {
+            return;
+        }
+
+        if ($this->session->getId() !== $cookies->get($this->session->getName())) {
+            $this->session->setName(sprintf('sylius_%s', $firewallConfig->getName()));
         }
     }
 }
