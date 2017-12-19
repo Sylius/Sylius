@@ -67,4 +67,22 @@ final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
 
         $this->saveAddresses($order);
     }
+
+    function it_does_not_save_empty_addresses(
+        CustomerAddressAdderInterface $addressAdder,
+        OrderInterface $order,
+        CustomerInterface $customer,
+        ShopUserInterface $user
+    ): void {
+        $order->getCustomer()->willReturn($customer);
+        $customer->getUser()->willReturn($user);
+
+        $order->getShippingAddress()->willReturn(null);
+        $order->getBillingAddress()->willReturn(null);
+
+        $addressAdder->add($customer, Argument::any())->shouldNotBeCalled();
+        $addressAdder->add($customer, Argument::any())->shouldNotBeCalled();
+
+        $this->saveAddresses($order);
+    }
 }
