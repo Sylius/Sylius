@@ -126,24 +126,38 @@ sylius:
             name: Ad
         promotion_filter:
             products: Ürün filtresi
+            taxons: Sınıf filtresi
         promotion_rule:
+            customer_group:
+                group: Müşteri Grubu
+            has_taxon:
+                taxons: Kategoriler
             product:
                 products: Ürünler
             total_of_items_from_taxon:
+                taxon: Katagori
                 amount: Miktar
         payment_method:
             channels: Kanallar
+        product_attribute:
+            position: Konum
+        zone:
+            scopes:
+                shipping: Nakliye
+                tax: Vergi
     installer:
         extensions:
             header: Eklentiler
             accelerator:
                 header: Hızlandırıcı
+                help: Zend opcache etkinleştirin(yüksek oranda önerilen).
             apc: APC
             ctype: Ctype
             gd: GD
             help: '%extension% uzantısını yükelyin ve aktif edin.'
             iconv: Iconv
             exif: Exif
+            fileinfo: Dosya bilgisi
             icu: ICU
             intl: Intl
             json_encode: JSON
@@ -160,13 +174,16 @@ sylius:
             header: dosya sistemi
             cache:
                 header: önbellek
+                help: 'Çalıştırma izinlerini ayarlamak için: sudo setfacl -R -m u:www-veri: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-veri: rwx -m u: ''whoami'': rwx %path%'
             exists: mevcut
             logs:
                 header: loglar
+                help: 'Çalıştırma izinlerini ayarlamak için: sudo setfacl -R -m u:www-veri: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-veri: rwx -m u: ''whoami'': rwx %path%'
             not_exists: mevcut değil
             not_writable: yazılabilir değil
             parameters:
                 header: parameters.yml
+                help: 'Çalıştırma izinlerini ayarlamak için: sudo chmod a + w %path%'
             vendors: vendors
             writable: yazılabilir
         settings:
@@ -186,3 +203,10 @@ sylius:
                 header: Kullanılmayan Zaman Dilimi
                 help: '%timezone% zaman dilimi kaldırılmıştır. php.ini dosyanızda gerekli düzenlemeyi yapın. (Kaldırılan tüm zaman dilimleri http://php.net/manual/en/timezones.others.php).'
             version: PHP versiyon
+            version_recommended: Önerilen PHP sürümü
+    payum_gateway:
+        cash_on_delivery: Teslimatta Nakit Ödeme
+        offline: Çevirim dışı
+        paypal_express_checkout: Paypal Express ile Ödeme
+    shipping_method_resolver:
+        by_zones_and_channel: Bölgelere ve kanallara göre

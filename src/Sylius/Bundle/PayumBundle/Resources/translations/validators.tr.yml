@@ -8,3 +8,5 @@ sylius:
                 not_blank: Lütfen paypal şifrenizi girin.
             signature:
                 not_blank: Lütfen paypal imzanızı girin.
+            username:
+                not_blank: Lütfen paypal kullanıcı adınızı girin.

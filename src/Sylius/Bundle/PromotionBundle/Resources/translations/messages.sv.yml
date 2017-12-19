@@ -31,6 +31,7 @@ sylius:
             expires_at: Förfaller den
             usage_limit: Användningsbegränsning
         promotion_rule:
+            contains_product: Innehåller produkt
             customer_group: Kundgrupp
             taxonomy: Taxonomi
             cart_quantity_configuration:

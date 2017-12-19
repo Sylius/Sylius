@@ -9,3 +9,7 @@ sylius:
             not_blank: Gözden geçirme yorumu boş olmamalıdır.
         rating:
             not_blank: Gözden geçirmeleri kontrol etmelisiniz.
+        title:
+            not_blank: Gözden geçirme başlığı boş olmamalıdır.
+            min_length: İnceleme başlığı en az 2 karakter olmalıdır.
+            max_length: İnceleme başlığı en fazla 255 karakter olmalıdır.

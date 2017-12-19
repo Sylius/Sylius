@@ -8,5 +8,9 @@ sylius:
             comment: Yorum
             header: Bir gözden ekle
             status:
+                approved: Onaylandı
+                label: Durum
                 new: Yeni
+                rejected: Reddedildi
+            submit: Gönder
             title: Başlık

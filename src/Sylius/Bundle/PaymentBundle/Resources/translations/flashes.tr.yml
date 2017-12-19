@@ -5,3 +5,7 @@ sylius:
     payment:
         cancelled: 'Ödeme iptal edildi.'
         completed: 'Ödeme tamamlandı.'
+        failed: 'Ödeme başarısız oldu.'
+        processing: 'Ödeme işlemi yapılıyor.'
+        refunded: 'Ödeme başarılı bir şekilde iade edildi.'
+        unknown: 'Ödeme işleminde bilinmeyen bir hata oluştu.'

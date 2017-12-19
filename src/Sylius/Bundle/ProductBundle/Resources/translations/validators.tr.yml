@@ -8,11 +8,30 @@ sylius:
             unique: Ürün stok birimi benzersiz olmalıdır.
         slug:
             not_blank: Lütfen ürün bilgisi girin.
+            unique: Ürün kütle birimi benzersiz olmalıdır.
+        code:
+            not_blank: Lütfen ürün kodunu giriniz.
+            regex: Ürün kodu sadece harflerden, numaralardan, tirelerden ve alt çizgilerden oluşabilir.
+            unique: Ürün kodu benzersiz olmalıdır.
         name:
             not_blank: Lütfen ürün adı girin.
             min_length: Ürün adı en az 1 karakter uzunluğunda olmalıdır.|Ürün adı en az {{ limit }} karakter uzunluğunda olmalıdır.
             max_length: Ürün adı 1 karakterden uzun olmamalıdır.|Ürün adı {{ limit }} karakterden uzun olmamalıdır.
+    product_variant:
+        combination: Bu seçenekli varyant zaten bulunmaktadır.
+        code:
+            not_blank: Lütfen kodu giriniz.
+            regex: Ürün varyant kodu sadece harflerden, numaralardan, tirelerden ve alt çizgilerden oluşabilir.
+            unique: Ürün varyant kodu benzersiz olmalıdır.
+            within_product_unique: Bu kod bu ürün için eşsiz olmalıdır.
+    simple_product:
+        code:
+            unique: Basit ürün kodu bütün ürünler ve varyantlar için eşsiz olmalıdır.
     option:
+        code:
+            not_blank: Lütfen seçenek kodu giriniz.
+            regex: Seçenek kodu yalnızca harflerden, sayılardan, kesik çizgilerden ve altçizgilerden oluşabilir.
+            unique: Girilen seçenek kodu zaten var.
         name:
             not_blank: Seçenek adı giriniz.
             min_length: Seçenek adı en az 1 karakter uzunluğunda olmalıdır.|Seçenek adı en az {{ limit }} karakter uzunluğunda olmalıdır.
@@ -20,5 +39,18 @@ sylius:
         values:
             min_count: Lütfen en az {{ limit }} seçenek ekleyin.|Lütfen en az {{ limit }} seçenek ekleyin.
     option_value:
+        code:
+            not_blank: Lütfen seçenek değer kodu girin.
+            regex: Seçenek değer kodu yalnızca harflerden, sayılardan, kesik çizgilerden ve altçizgilerden oluşabilir.
+            unique: Girilen seçenek değer kodu zaten var.
         value:
             not_blank: Lütfen seçenek değeri girin.
+    association_type:
+        name:
+            not_blank: Lütfen işbirliği adı giriniz.
+            min_length: İşbirliği türü adı en az 1 karakter uzunluğunda olmalı.|İşbirliği adı en az {{ limit }} karekter uzunluğunda olmalı.
+            max_length: Birlik tipi ismi 1 karakterden uzun olmamalıdır.|birlik ismi {{ limit }} karakterden uzun olmamalıdır.
+        code:
+            not_blank: Lütfen işbirliği kodu giriniz.
+            regex: İşbirliği türü kodu sadece harflerden, numaralardan, tirelerden ve alt çizgilerden oluşabilir.
+            unique: Girilen işbirliği türü kodu zaten var.
