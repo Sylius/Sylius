@@ -16,7 +16,7 @@
 
             countrySelect.on('change', function(event) {
                 var select = $(event.currentTarget);
-                var provinceContainer = select.parents('.field').next('div.province-container');
+                var provinceContainer = select.parents('.field').siblings('div.province-container');
 
                 var provinceSelectFieldName = select.attr('name').replace('country', 'province');
                 var provinceInputFieldName = select.attr('name').replace('countryCode', 'provinceName');
