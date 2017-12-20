@@ -10,7 +10,7 @@
             {% endif %}
         {% endif %}
     {% endfor %}
-    {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
+    {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
         <th class="sylius-table-column-actions">{{ 'sylius.ui.actions'|trans }}</th>
     {% endif %}
 {% endmacro %}
