@@ -7,6 +7,10 @@ sylius:
             max_length: 'Kategori adı en fazla {{ limit }} karakter olabilir.'
             min_length: 'Kategori ad en az {{ limit }} karakter uzunluğunda olmalıdır.'
             not_blank: 'Lütfen kargo kategorisi adı giriniz.'
+        code:
+            not_blank: 'Lütfen kargo kategorisi numarası giriniz.'
+            regex: 'Nakliye katagorisi kodu sadece harflerden, sayılardan, tire ve alt çizgi karakterlerinden oluşur.'
+            unique: 'Girilen nakliye katagori kodu zaten var.'
     shipping_method:
         calculator:
             max_length: sylius.Kargo_mthodu.hesaplama.maksimum_uzunluk
@@ -16,3 +20,12 @@ sylius:
             max_length: 'Kargo yönteminin adı {{ limit }} karakterden daha uzun olamaz.'
             min_length: 'Kargo yönteminin adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
             not_blank: 'Lütfen kargo yönteminin adını giriniz.'
+        code:
+            not_blank: 'Lütfen teslimat yöntemi numarası giriniz.'
+            regex: 'Nakliye yöntemi kodu sadece harflerden, sayılardan, tire ve alt çizgi karakterlerinden oluşur.'
+            unique: 'Girilen nakliye yöntem kodu zaten var.'
+        zone:
+            not_blank: 'Lütfen teslimat yöntemi bölgesini seçiniz.'
+    shipment:
+        shipping_method:
+            not_blank: 'Lütfen kargoyu seçiniz.'

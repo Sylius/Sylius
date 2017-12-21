@@ -8,4 +8,11 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Şifre
+                signature: İmza
                 username: Kullanıcı adı
+            stripe:
+                secret_key: Gizli tuş
+    payum_gateway_factory:
+        offline: Çevirim dışı
+        paypal_express_checkout: Paypal Express ödemesi
+        stripe_checkout: Stripe ödemesi

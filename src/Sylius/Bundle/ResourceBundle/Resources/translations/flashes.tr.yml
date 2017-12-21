@@ -12,3 +12,6 @@ sylius:
         restore_deleted: '%resource% başarılı olarak silindi.'
         enable: '%resource% başarıyla etkinleştirildi.'
         disable: '%resource% başarıyla devre dışı bırakıldı.'
+        delete_error: 'Silinemez,%resource%kullanılıyor.'
+        race_condition_error: 'Güncellenemez,%resource% önceden değiştirilmiş.'
+        something_went_wrong_error: 'Birşeyler ters gitti, lütfen tekrar deneyin.'

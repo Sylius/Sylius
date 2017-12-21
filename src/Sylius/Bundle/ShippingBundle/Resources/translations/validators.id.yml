@@ -2,6 +2,30 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    shipping_category:
+        name:
+            max_length: 'Nama kategori tidak boleh lebih dari karakter {{ limit }}.'
+            min_length: 'Nama kategori harus paling sedikit {{ limit }} karakternya panjang.'
+            not_blank: 'Harap masukkan nama kategori pengiriman.'
+        code:
+            not_blank: 'Harap masukkan kode kategori pengiriman.'
+            regex: 'Kode kategori pengiriman hanya bisa terdiri dari huruf, angka, tanda hubung dan garis bawah.'
+            unique: 'Kategori pengiriman dengan kode yang diberikan sudah ada.'
+    shipping_method:
+        calculator:
+            max_length: sylius.shipping_method.calculator.max_length
+            min_length: sylius.shipping_method.calculator.min_length
+            not_blank: sylius.shipping_method.calculator.not_blank
+        name:
+            max_length: 'Nama metode pengiriman tidak boleh lebih dari karakter {{ limit }}.'
+            min_length: 'Nama metode pengiriman harus paling sedikit {{ limit }} karakternya panjang.'
+            not_blank: 'Harap masukkan nama metode pengiriman.'
+        code:
+            not_blank: 'Harap masukkan kode metode pengiriman.'
+            regex: 'Kode metode pengiriman hanya bisa terdiri dari huruf, angka, tanda hubung dan garis bawah.'
+            unique: 'Metode pengiriman dengan kode yang diberikan sudah ada.'
+        zone:
+            not_blank: 'Silahkan pilih zona metode pengiriman.'
     shipment:
         shipping_method:
             not_blank: 'Mohon pilih metode pengiriman.'

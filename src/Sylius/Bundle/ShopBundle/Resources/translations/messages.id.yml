@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    menu:
+        shop:
+            account:
+                address_book: 'Buku alamat'
+                change_password: 'Ganti kata sandi'
+                dashboard: 'Dasbor'
+                header: 'Akun Anda'
+                order_history: 'Riwayat pembelian'
+                personal_information: 'Informasi pribadi'
