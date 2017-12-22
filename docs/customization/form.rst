@@ -203,6 +203,50 @@ you will also have to set up an event listener and then remove the field:
         }
     }
 
+Adding constraints inside a form extension
+------------------------------------------
+
+.. warning::
+
+    When adding your constraints dynamically from inside a form extension, be aware to add the correct validation groups.
+
+Although it is advised to follow the :doc:`Validation Customization Guide </customization/validation>`, it might happen that you
+want to define the form constraints from inside the form extension. They will not be used unless the correct validation group(s)
+has been added. The example below shows how to add the default `sylius` group to a constraint.
+
+.. code-block:: php
+
+    <?php
+
+    ...
+
+    final class CustomerProfileTypeExtension extends AbstractTypeExtension
+    {
+        ...
+
+        public function buildForm(FormBuilderInterface $builder, array $options): void
+        {
+            ...
+
+            // Adding new fields works just like in the parent form type.
+            $builder->add('contactHours', TextType::class, [
+                'required' => false,
+                'label' => 'app.form.customer.contact_hours',
+                'constraints' => [
+                    new Range([
+                        'min' => 8,
+                        'max' => 17,
+                        'groups' => ['sylius'],
+                    ]),
+                ],
+            ]);
+
+            ...
+        }
+
+        ...
+    }
+
 Overriding forms completely
 ---------------------------
 
