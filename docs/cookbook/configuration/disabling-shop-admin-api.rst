@@ -52,13 +52,16 @@ The part that has to be removed from this file is shown below:
 
 .. code-block:: yaml
 
+    parameters:
+        # sylius.security.shop_regex: "^/(?!admin|api/.*|api$)[^/]++"
+
     security:
         firewalls:
     # Delete or leave this part commented
     #        shop:
     #            switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
     #            context: shop
-    #            pattern: /.*
+    #            pattern: "%sylius.security.shop_regex%"
     #            form_login:
     #                success_handler: sylius.authentication.success_handler
     #                failure_handler: sylius.authentication.failure_handler
@@ -69,11 +72,13 @@ The part that has to be removed from this file is shown below:
     #                default_target_path: sylius_shop_homepage
     #                use_forward: false
     #                use_referer: true
+    #                csrf_token_generator: security.csrf.token_manager
+    #                csrf_parameter: _csrf_shop_security_token
+    #                csrf_token_id: shop_authenticate
     #            remember_me:
     #                secret: "%secret%"
-    #                name: APP_REMEMBER_ME
+    #                name: APP_SHOP_REMEMBER_ME
     #                lifetime: 31536000
-    #                always_remember_me: true
     #                remember_me_parameter: _remember_me
     #            logout:
     #                path: sylius_shop_logout
@@ -81,6 +86,18 @@ The part that has to be removed from this file is shown below:
     #                invalidate_session: false
     #                success_handler: sylius.handler.shop_user_logout
     #            anonymous: true
+
+    access_control:
+    #    - { path: "%sylius.security.shop_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+    #    - { path: "%sylius.security.shop_regex%/_partial", role: ROLE_NO_ACCESS }
+
+    #    - { path: "%sylius.security.shop_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    #    - { path: "%sylius.security.shop_regex%/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
+    #    - { path: "%sylius.security.shop_regex%/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    #    - { path: "%sylius.security.shop_regex%/account", role: ROLE_USER }
+    #    - { path: "%sylius.security.shop_regex%/seller/register", role: ROLE_USER }
 
 **Done!** There is no shop in Sylius now, just admin and API.
 
@@ -121,7 +138,7 @@ Here you've got the line that should disappear from imports:
 
 .. code-block:: yaml
 
-    #    sylius_shop:
+    #    sylius_admin:
     #        resource: "@SyliusAdminBundle/Resources/config/routing.yml"
 
 **4.** Remove security configuration from ``app/config/security.yml``.
@@ -130,13 +147,18 @@ The part that has to be removed from this file is shown below:
 
 .. code-block:: yaml
 
+    parameters:
+    # Delete or leave this part commented
+    #    sylius.security.admin_regex: "^/admin"
+        sylius.security.shop_regex: "^/(?!api/.*|api$)[^/]++" # Remove `admin|` from the pattern
+
     security:
         firewalls:
     # Delete or leave this part commented
-    #       admin:
+    #        admin:
     #            switch_user: true
     #            context: admin
-    #            pattern: /admin(?:/.*)?$
+    #            pattern: "%sylius.security.admin_regex%"
     #            form_login:
     #                provider: sylius_admin_user_provider
     #                login_path: sylius_admin_login
@@ -145,10 +167,28 @@ The part that has to be removed from this file is shown below:
     #                default_target_path: sylius_admin_dashboard
     #                use_forward: false
     #                use_referer: true
+    #                csrf_token_generator: security.csrf.token_manager
+    #                csrf_parameter: _csrf_admin_security_token
+    #                csrf_token_id: admin_authenticate
+    #            remember_me:
+    #                secret: "%secret%"
+    #                path: /admin
+    #                name: APP_ADMIN_REMEMBER_ME
+    #                lifetime: 31536000
+    #                remember_me_parameter: _remember_me
     #            logout:
     #                path: sylius_admin_logout
     #                target: sylius_admin_login
     #            anonymous: true
+
+    access_control:
+    # Delete or leave this part commented
+    #    - { path: "%sylius.security.admin_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+    #    - { path: "%sylius.security.admin_regex%/_partial", role: ROLE_NO_ACCESS }
+
+    #    - { path: "%sylius.security.admin_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    #    - { path: "%sylius.security.admin_regex%", role: ROLE_ADMINISTRATION_ACCESS }
 
 **Done!** There is no admin in Sylius now, just api and shop.
 
@@ -198,13 +238,28 @@ The part that has to be removed from this file is shown below:
 
 .. code-block:: yaml
 
+    parameters:
+    # Delete or leave this part commented
+    #   sylius.security.api_regex: "^/api"
+        sylius.security.shop_regex: "^/(?!admin$)[^/]++" # Remove `|api/.*|api` from the pattern
+
     security:
         firewalls:
-        api:
-    #        pattern:    ^/api
-    #        fos_oauth:  true
-    #        stateless:  true
-    #        anonymous:  true
+    # Delete or leave this part commented
+    #        oauth_token:
+    #            pattern: "%sylius.security.api_regex%/oauth/v2/token"
+    #            security: false
+    #        api:
+    #           pattern:    "%sylius.security.api_regex%/.*"
+    #           fos_oauth:  true
+    #           stateless:  true
+    #           anonymous:  true
+
+    access_control:
+    # Delete or leave this part commented
+    #    - { path: "%sylius.security.api_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    #    - { path: "%sylius.security.api_regex%/.*", role: ROLE_API_ACCESS }
 
 **5.** Remove fos_rest config from ``app/config/config.yml``.
 
