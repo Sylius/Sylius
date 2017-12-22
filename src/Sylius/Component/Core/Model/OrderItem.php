@@ -24,12 +24,14 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     protected $variant;
 
     /**
-     * {@inheritdoc}
+     * @var string
      */
-    public function getProduct(): ?ProductInterface
-    {
-        return $this->variant->getProduct();
-    }
+    protected $productName;
+
+    /**
+     * @var string
+     */
+    protected $variantName;
 
     /**
      * {@inheritdoc}
@@ -45,6 +47,46 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     public function setVariant(?ProductVariantInterface $variant): void
     {
         $this->variant = $variant;
+    }
+
+    /**
+     * @return ProductInterface|null
+     */
+    public function getProduct(): ?ProductInterface
+    {
+        return $this->variant->getProduct();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductName(): ?string
+    {
+        return $this->productName ?: $this->variant->getProduct()->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProductName(?string $productName): void
+    {
+        $this->productName = $productName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariantName(): ?string
+    {
+        return $this->variantName ?: $this->variant->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVariantName(?string $variantName): void
+    {
+        $this->variantName = $variantName;
     }
 
     /**

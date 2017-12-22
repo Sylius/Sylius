@@ -37,6 +37,7 @@ final class DateAttributeType extends AbstractType
                 'label' => false,
             ])
             ->setRequired('configuration')
+            ->setDefined('locale_code')
         ;
     }
 

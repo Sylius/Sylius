@@ -60,9 +60,16 @@ interface IndexPageInterface extends SymfonyPageInterface
     public function getActionsForResource(array $parameters);
 
     /**
+     * @param array $parameters
+     */
+    public function checkResourceOnPage(array $parameters): void;
+
+    /**
      * @return int
      */
     public function countItems();
 
     public function filter();
+
+    public function bulkDelete(): void;
 }

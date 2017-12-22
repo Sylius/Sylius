@@ -31,10 +31,12 @@ final class SyliusGridExtension extends Extension
         $loader->load('services.xml');
 
         $container->setParameter('sylius.grid.templates.action', $config['templates']['action']);
+        $container->setParameter('sylius.grid.templates.bulk_action', $config['templates']['bulk_action']);
         $container->setParameter('sylius.grid.templates.filter', $config['templates']['filter']);
         $container->setParameter('sylius.grids_definitions', $config['grids']);
 
         $container->setAlias('sylius.grid.renderer', 'sylius.grid.renderer.twig');
+        $container->setAlias('sylius.grid.bulk_action_renderer', 'sylius.grid.bulk_action_renderer.twig');
         $container->setAlias('sylius.grid.data_extractor', 'sylius.grid.data_extractor.property_access');
 
         foreach ($config['drivers'] as $enabledDriver) {

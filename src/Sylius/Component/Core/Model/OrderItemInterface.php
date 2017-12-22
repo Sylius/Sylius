@@ -33,6 +33,26 @@ interface OrderItemInterface extends BaseOrderItemInterface
     public function setVariant(?ProductVariantInterface $variant): void;
 
     /**
+     * @return string|null
+     */
+    public function getProductName(): ?string;
+
+    /**
+     * @param string|null $productName
+     */
+    public function setProductName(?string $productName): void;
+
+    /**
+     * @return string|null
+     */
+    public function getVariantName(): ?string;
+
+    /**
+     * @param string|null $variantName
+     */
+    public function setVariantName(?string $variantName): void;
+
+    /**
      * @return int
      */
     public function getTaxTotal(): int;

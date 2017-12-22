@@ -37,6 +37,7 @@ final class IntegerAttributeType extends AbstractType
                 'label' => false,
             ])
             ->setRequired('configuration')
+            ->setDefined('locale_code')
         ;
     }
 

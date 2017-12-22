@@ -60,3 +60,13 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />
     </form>
 {% endmacro %}
+
+{% macro bulkDelete(url, message, labeled = true) %}
+    <form action="{{ url }}" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="ui red {% if labeled %}labeled {% endif %}icon button" type="submit" data-bulk-action-requires-confirmation>
+            <i class="icon trash"></i> {{ (message is empty and labeled) ? 'sylius.ui.delete'|trans : message }}
+        </button>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('bulk_delete') }}" />
+    </form>
+{% endmacro %}

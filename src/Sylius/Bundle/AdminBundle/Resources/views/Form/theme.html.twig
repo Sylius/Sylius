@@ -1,5 +1,24 @@
 {% extends '@SyliusUi/Form/theme.html.twig' %}
 
+{% block _sylius_product_attribute_configuration_choices_entry_widget %}
+    {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+
+    <div class="ui styled fluid accordion">
+        {% for translation in form %}
+            <div data-locale="{{ translation.vars.name }}">
+                <div class="title{% if 0 == loop.index0 %} active{% endif %}">
+                    <i class="dropdown icon"></i>
+                    {{ flags.fromLocaleCode(translation.vars.name) }} {{ translation.vars.name|sylius_locale_name }}
+                </div>
+                <div class="ui content{% if 0 == loop.index0 %} active{% endif %}">
+                    {{ form_widget(translation) }}
+                    {{- form_errors(form) -}}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
 {% block sylius_taxon_autocomplete_choice_row %}
     {{ form_row(form, {'remote_url': path('sylius_admin_ajax_taxon_by_name_phrase'), 'load_edit_url': path('sylius_admin_ajax_taxon_by_code')}) }}
 {% endblock %}
