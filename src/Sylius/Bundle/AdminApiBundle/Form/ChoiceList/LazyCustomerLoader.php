@@ -61,7 +61,13 @@ class LazyCustomerLoader implements ChoiceLoaderInterface
     public function loadValuesForChoices(array $choices, $value = null)
     {
         $mapCustomerToEmail = function($customer){
+            if($customer == null){
+                return null;
+            }
 
+            return $customer->getEmail();
         };
+
+        return array_map($mapCustomerToEmail, $choices);
     }
 }
