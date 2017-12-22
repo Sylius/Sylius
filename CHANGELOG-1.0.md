@@ -1,5 +1,22 @@
 ## CHANGELOG
 
+### v1.0.6 2017-12-22
+
+- [#9023](https://github.com/Sylius/Sylius/pull/9023) [Documenation] Turn off bundles fixes (@lchrusciel)
+- [#9045](https://github.com/Sylius/Sylius/pull/9045) [Grid] Fixes broken table when all item actions are disabled (@Tetragramat)
+- [#9033](https://github.com/Sylius/Sylius/pull/9033) Add info about constraints / validation groups when using form extensions (closes #7862) (@stefandoorn)
+- [#9036](https://github.com/Sylius/Sylius/pull/9036) [Core] Fix customer order addresses saver (@GSadee)
+- [#9024](https://github.com/Sylius/Sylius/pull/9024) [Documenation] Update plugin mapping recommendation (@lchrusciel)
+- [#9034](https://github.com/Sylius/Sylius/pull/9034) [MailerBundle] Simplify tests (@odolbeau)
+- [#9027](https://github.com/Sylius/Sylius/pull/9027) [Documentation] Update plugin name (@lchrusciel)
+- [#9025](https://github.com/Sylius/Sylius/pull/9025) [Travis] Use old Trusty image (@lchrusciel)
+- [#9012](https://github.com/Sylius/Sylius/pull/9012) [Documentation][MailerBundle] Clean installation part (@odolbeau)
+- [#9021](https://github.com/Sylius/Sylius/pull/9021) [Documentation] [Order] Fixes in Order component documentation: typo in models.rst and wording in processors.rst (@dgreda)
+- [#9018](https://github.com/Sylius/Sylius/pull/9018) Use Null Coalesce Operator (@carusogabriel)
+- [#9020](https://github.com/Sylius/Sylius/pull/9020) Restrict packages to use Symfony's DI in ^3.2 version for tests (@pamil)
+- [#9015](https://github.com/Sylius/Sylius/pull/9015) Removing gender from documentation (@mbklnd)
+- [#9000](https://github.com/Sylius/Sylius/pull/9000) Fixed: Breadcrumbs links for Taxon and Product views (@igormukhingmailcom)
+
 ### v1.0.5 2017-12-04
 
 - [#8996](https://github.com/Sylius/Sylius/pull/8996) Setup "Stale" probot (@pamil)
