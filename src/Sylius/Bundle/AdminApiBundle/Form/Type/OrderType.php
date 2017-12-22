@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminApiBundle\Form\Type;
 
+use Sylius\Bundle\AdminApiBundle\Form\ChoiceList\LazyCustomerLoader;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerChoiceType;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
@@ -33,13 +34,19 @@ final class OrderType extends AbstractResourceType
     private $localeRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $customerRepository;
+
+    /**
      * {@inheritdoc}
      */
-    public function __construct(string $dataClass, array $validationGroups = [], RepositoryInterface $localeRepository)
+    public function __construct(string $dataClass, array $validationGroups = [], RepositoryInterface $localeRepository, RepositoryInterface $customerRepository)
     {
         parent::__construct($dataClass, $validationGroups);
 
         $this->localeRepository = $localeRepository;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -52,6 +59,8 @@ final class OrderType extends AbstractResourceType
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
                 ],
+                'choices' => [],
+                'choice_loader' => new LazyCustomerLoader($this->customerRepository),
             ])
             ->add('localeCode', LocaleChoiceType::class, [
                 'constraints' => [
