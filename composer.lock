@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9adea016508c1fa8ed2c506c5f151802",
+    "content-hash": "884ed8c037df721f8911c47658bc2180",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -7844,12 +7844,12 @@
             "version": "v2.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/matthiasnoback/SymfonyConfigTest.git",
+                "url": "https://github.com/SymfonyTest/SymfonyConfigTest.git",
                 "reference": "dbf93be91b8004203029301bf98142bd06de4f5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matthiasnoback/SymfonyConfigTest/zipball/dbf93be91b8004203029301bf98142bd06de4f5a",
+                "url": "https://api.github.com/repos/SymfonyTest/SymfonyConfigTest/zipball/dbf93be91b8004203029301bf98142bd06de4f5a",
                 "reference": "dbf93be91b8004203029301bf98142bd06de4f5a",
                 "shasum": ""
             },
@@ -7892,12 +7892,12 @@
             "version": "v1.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/matthiasnoback/SymfonyDependencyInjectionTest.git",
+                "url": "https://github.com/SymfonyTest/SymfonyDependencyInjectionTest.git",
                 "reference": "95c3b8f0f708fcc49360412f84186d562add50dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matthiasnoback/SymfonyDependencyInjectionTest/zipball/95c3b8f0f708fcc49360412f84186d562add50dc",
+                "url": "https://api.github.com/repos/SymfonyTest/SymfonyDependencyInjectionTest/zipball/95c3b8f0f708fcc49360412f84186d562add50dc",
                 "reference": "95c3b8f0f708fcc49360412f84186d562add50dc",
                 "shasum": ""
             },
