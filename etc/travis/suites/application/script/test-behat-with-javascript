@@ -8,8 +8,8 @@ prepare_for_behat_with_js() {
     run_command "export DISPLAY=:99"
 
     # Download and configure ChromeDriver
-    if [ ! -f $SYLIUS_CACHE_DIR/chromedriver ]; then
-        run_command "curl http://chromedriver.storage.googleapis.com/2.30/chromedriver_linux64.zip > chromedriver.zip"
+    if [ ! -f $SYLIUS_CACHE_DIR/chromedriver ] || [ "$($SYLIUS_CACHE_DIR/chromedriver --version | grep -c 2.34)" = "0" ]; then
+        run_command "curl http://chromedriver.storage.googleapis.com/2.34/chromedriver_linux64.zip > chromedriver.zip"
         run_command "unzip chromedriver.zip"
         run_command "chmod +x chromedriver"
         run_command "mv chromedriver $SYLIUS_CACHE_DIR"
@@ -19,7 +19,7 @@ prepare_for_behat_with_js() {
     run_command "$SYLIUS_CACHE_DIR/chromedriver > /dev/null 2>&1 &"
 
     # Download and configure Selenium
-    if [ ! -f $SYLIUS_CACHE_DIR/selenium.jar ]; then
+    if [ ! -f $SYLIUS_CACHE_DIR/selenium.jar ] || [ "$(java -jar $SYLIUS_CACHE_DIR/selenium.jar --version | grep -c 3.4.0)" = "0" ]; then
         run_command "curl http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar > selenium.jar"
         run_command "mv selenium.jar $SYLIUS_CACHE_DIR"
     fi
