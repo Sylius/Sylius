@@ -9,4 +9,4 @@ run_command "echo \"extension = memcached.so\" >> ~/.phpenv/versions/$(phpenv ve
 print_header "Installing Yarn" "Sylius"
 
 # Install Node Version Manager to install newer node version
-run_command "rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout \`git describe --abbrev=0 --tags\`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION" || exit $?
+run_command "rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout \`git describe --abbrev=0 --tags\`) && source ~/.nvm/nvm.sh && nvm install $NODE_VERSION" || exit $?
