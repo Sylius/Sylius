@@ -29,7 +29,7 @@
                 },
                 onSuccess: function (response) {
                     validationElement.addClass('hidden');
-                    window.location.replace(redirectUrl);
+                    window.location.href = redirectUrl;
                 },
                 onFailure: function (response) {
                     validationElement.removeClass('hidden');
