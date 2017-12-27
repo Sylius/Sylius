@@ -27,12 +27,4 @@ final class SyliusAdminApiBundle extends AbstractResourceBundle
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelNamespace(): string
-    {
-        return 'Sylius\Bundle\AdminApiBundle\Model';
-    }
 }
