@@ -15,7 +15,6 @@ matrix:
             php: 7.1
             env:
                 - SYLIUS_SUITE="application"
-                - NODE_VERSION="6.11"
             services:
                 - memcached
         -
@@ -29,7 +28,6 @@ matrix:
             php: 7.2
             env:
                 - SYLIUS_SUITE="application"
-                - NODE_VERSION="6.11"
             services:
                 - memcached
         -
