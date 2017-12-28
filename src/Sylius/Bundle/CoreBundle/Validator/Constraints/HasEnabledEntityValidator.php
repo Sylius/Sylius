@@ -52,6 +52,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      */
     public function validate($entity, Constraint $constraint): void
     {
+        /** @var HasEnabledEntity $constraint */
         Assert::isInstanceOf($constraint, HasEnabledEntity::class);
 
         $enabled = $this->accessor->getValue($entity, $constraint->enabledPath);

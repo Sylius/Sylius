@@ -24,7 +24,7 @@ class OrderItem implements OrderItemInterface
     protected $id;
 
     /**
-     * @var OrderInterface
+     * @var OrderInterface|null
      */
     protected $order;
 

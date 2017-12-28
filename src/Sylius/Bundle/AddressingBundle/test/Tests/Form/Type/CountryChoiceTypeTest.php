@@ -123,7 +123,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
         }]);
     }
 
-    private function assertChoicesLabels(array $expectedLabels, array $formConfiguration = [])
+    private function assertChoicesLabels(array $expectedLabels, array $formConfiguration = []): void
     {
         $form = $this->factory->create(CountryChoiceType::class, null, $formConfiguration);
         $view = $form->createView();

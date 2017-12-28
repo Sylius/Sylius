@@ -52,7 +52,7 @@ final class HookableFixtureLoader implements FixtureLoaderInterface
      * @param SuiteInterface $suite
      * @param FixtureEvent $fixtureEvent
      */
-    private function executeBeforeFixtureListeners(SuiteInterface $suite, FixtureEvent $fixtureEvent)
+    private function executeBeforeFixtureListeners(SuiteInterface $suite, FixtureEvent $fixtureEvent): void
     {
         foreach ($suite->getListeners() as $listener => $listenerOptions) {
             if (!$listener instanceof BeforeFixtureListenerInterface) {

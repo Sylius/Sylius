@@ -259,7 +259,7 @@ class RequestConfiguration
      *
      * @return array
      */
-    private function addExtraRedirectParameters($parameters)
+    private function addExtraRedirectParameters($parameters): array
     {
         $vars = $this->getVars();
         $accessor = PropertyAccess::createPropertyAccessor();
@@ -549,7 +549,7 @@ class RequestConfiguration
      *
      * @return array
      */
-    private function parseResourceValues(array $parameters, $resource)
+    private function parseResourceValues(array $parameters, $resource): array
     {
         $accessor = PropertyAccess::createPropertyAccessor();
 
@@ -633,7 +633,7 @@ class RequestConfiguration
      *
      * @return bool
      */
-    private function areParametersIntentionallyEmptyArray($redirect)
+    private function areParametersIntentionallyEmptyArray($redirect): bool
     {
         return isset($redirect['parameters']) && is_array($redirect['parameters']) && empty($redirect['parameters']);
     }
