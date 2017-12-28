@@ -4,8 +4,11 @@
 sylius:
     form:
         customer:
+            first_name: Ime
+            last_name: Priimek
             email: E-pošta
             phone_number: Telefonska številka
+            billing_address: Naslov za račun
             different_billing_address: Uporabimo drug naslov za dostavo?
         customer_group:
             name: Ime
