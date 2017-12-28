@@ -15,6 +15,15 @@ matrix:
             php: 7.1
             env:
                 - SYLIUS_SUITE="application"
+                - SYMFONY_VERSION="3.3.*"
+            services:
+                - memcached
+        -
+            if: type = cron
+            php: 7.1
+            env:
+                - SYLIUS_SUITE="application"
+                - SYMFONY_VERSION="3.4.*"
             services:
                 - memcached
         -
@@ -25,9 +34,18 @@ matrix:
                     packages:
                         - parallel
         -
+            if: type = cron
             php: 7.2
             env:
                 - SYLIUS_SUITE="application"
+                - SYMFONY_VERSION="3.3.*"
+            services:
+                - memcached
+        -
+            php: 7.2
+            env:
+                - SYLIUS_SUITE="application"
+                - SYMFONY_VERSION="3.4.*"
             services:
                 - memcached
         -
