@@ -3,19 +3,16 @@
 ### v1.0.7 2017-12-30
 
 - [#9075](https://github.com/Sylius/Sylius/pull/9075) Test sylius:install command on Travis (@pamil)
-- [#9070](https://github.com/Sylius/Sylius/pull/9070) Extend Travis build matrix & setup extra jobs running nightly (1.1) (@pamil)
 - [#9071](https://github.com/Sylius/Sylius/pull/9071) Update composer.json (1.0) (@pamil)
 - [#9069](https://github.com/Sylius/Sylius/pull/9069) Extend Travis build matrix & setup extra jobs running nightly (1.0) (@pamil)
 - [#9065](https://github.com/Sylius/Sylius/pull/9065) Various Travis changes (@pamil)
 - [#9048](https://github.com/Sylius/Sylius/pull/9048) Exclude the web/media directory from firewall restrict list. (@Hailong)
-- [#9040](https://github.com/Sylius/Sylius/pull/9040) Try to auto-detect a bundle's model namespace by default (@mbabker)
 - [#9063](https://github.com/Sylius/Sylius/pull/9063) Require Symfony ^3.4 in components & bundles (@pamil)
 - [#9055](https://github.com/Sylius/Sylius/pull/9055) Remove PHP <= 7.1 Polyfills (@stefandoorn)
 - [#9052](https://github.com/Sylius/Sylius/pull/9052) Fixes history issue when adding to cart (@gabriel-cardoso)
 - [#9061](https://github.com/Sylius/Sylius/pull/9061) Require Symfony ^3.4 (@pamil)
 - [#9060](https://github.com/Sylius/Sylius/pull/9060) Remove the need for using sudo on Travis (@pamil)
 - [#9059](https://github.com/Sylius/Sylius/pull/9059) Make Travis use the most recent Chromedriver (@pamil)
-- [#9058](https://github.com/Sylius/Sylius/pull/9058) Change master branch version to 1.2.0-DEV (@pamil)
 
 ### v1.0.6 2017-12-22
 
