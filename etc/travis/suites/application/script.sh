@@ -12,6 +12,7 @@ commands=(
     validate-yarn-packages
     test-phpspec
     test-phpunit
+    test-installer
     test-fixtures
     test-behat-without-javascript
     test-behat-with-javascript
