@@ -45,12 +45,10 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
             return [
                 'doctrine:database:create',
                 'doctrine:migrations:migrate' => ['--no-interaction' => true],
-                'cache:clear',
             ];
         }
 
         return array_merge($this->getRequiredCommands($input, $output, $questionHelper), [
-            'cache:clear',
             'doctrine:migrations:version' => [
                 '--add' => true,
                 '--all' => true,
