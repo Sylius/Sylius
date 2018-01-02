@@ -12,7 +12,7 @@
 
         {{ sonata_block_render_event('sylius.shop.checkout.complete.after_content_header', {'order': order}) }}
 
-        {% include 'SyliusUiBundle::_flashes.html.twig' %}
+        {% include '@SyliusShop/_flashes.html.twig' %}
 
         {{ form_start(form, {'action': path('sylius_shop_checkout_complete'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             {{ form_errors(form) }}
