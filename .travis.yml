@@ -19,7 +19,7 @@ matrix:
             services:
                 - memcached
         -
-            if: type IN (cron, api)
+            if: type IN (cron, api) OR tag IS present
             php: 7.1
             env:
                 - SYLIUS_SUITE="application"
@@ -34,7 +34,7 @@ matrix:
                     packages:
                         - parallel
         -
-            if: type IN (cron, api)
+            if: type IN (cron, api) OR tag IS present
             php: 7.2
             env:
                 - SYLIUS_SUITE="application"
