@@ -28,7 +28,9 @@
 <div class="pusher">
     <div class="full height" id="wrapper">
         <div id="content">
-            {% include '@SyliusUi/_flashes.html.twig' %}
+            {% block flash_messages %}
+                {% include '@SyliusUi/_flashes.html.twig' %}
+            {% endblock %}
 
             {% block pre_content %}
             {% endblock %}
