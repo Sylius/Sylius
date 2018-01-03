@@ -30,17 +30,17 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
     /**
      * @return TaxonInterface|null
      */
-    public function getRoot(): ?TaxonInterface;
+    public function getRoot(): ?self;
 
     /**
      * @return TaxonInterface|null
      */
-    public function getParent(): ?TaxonInterface;
+    public function getParent(): ?self;
 
     /**
      * @param TaxonInterface|null $taxon
      */
-    public function setParent(?TaxonInterface $taxon): void;
+    public function setParent(?self $taxon): void;
 
     /**
      * @return Collection|TaxonInterface[]
@@ -57,7 +57,7 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
      *
      * @return bool
      */
-    public function hasChild(TaxonInterface $taxon): bool;
+    public function hasChild(self $taxon): bool;
 
     /**
      * @return bool
@@ -67,12 +67,12 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
     /**
      * @param TaxonInterface $taxon
      */
-    public function addChild(TaxonInterface $taxon): void;
+    public function addChild(self $taxon): void;
 
     /**
      * @param TaxonInterface $taxon
      */
-    public function removeChild(TaxonInterface $taxon): void;
+    public function removeChild(self $taxon): void;
 
     /**
      * @return string|null
