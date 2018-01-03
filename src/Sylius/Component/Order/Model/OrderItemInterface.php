@@ -51,7 +51,7 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
      *
      * @return bool
      */
-    public function equals(OrderItemInterface $orderItem): bool;
+    public function equals(self $orderItem): bool;
 
     /**
      * @return bool
