@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Paul Stoica <paul.stoica18@gmail.com>
- */
 final class ProductReviewApiTest extends JsonApiTestCase
 {
 
@@ -122,7 +119,7 @@ final class ProductReviewApiTest extends JsonApiTestCase
         $product = $productReviewsData['product1'];
 
         $data =
-            <<<EOT
+<<<EOT
         {
           "title": "A good product",
           "rating": "3",
