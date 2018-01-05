@@ -20,7 +20,9 @@ The REST API Reference
     payments
     product_attributes
     product_options
+    product_reviews
     product_variants
+    product_reviews
     products
     promotion_coupons
     promotions
