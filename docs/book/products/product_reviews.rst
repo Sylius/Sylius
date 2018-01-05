@@ -15,7 +15,7 @@ The rating of a product review is required and must be between 1 and 5.
 Product review state machine
 ----------------------------
 
-When you look inside the ``CoreBundle/Resources/config/app/state_machine/sylius_review.yml`` you will find out that a Review can have
+When you look inside the ``CoreBundle/Resources/config/app/state_machine/sylius_product_review.yml`` you will find out that a Review can have
 3 different states:
 
 * ``new``,
