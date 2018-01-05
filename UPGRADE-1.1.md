@@ -5,3 +5,6 @@
   to the `sylius_theme` configuration to restrict scanning for the theme configuration file to a specific depth inside
   the specified theme directories.
   
+* Methods `createQueryBuilderByProductCode` and `findOneByIdAndProductCode` were added to
+  `Sylius\Component\Core\Repository\ProductReviewRepositoryInterface` (no manual action needed if your implementation
+  extends `Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductReviewRepository`).
