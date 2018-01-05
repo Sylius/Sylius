@@ -14,7 +14,9 @@
 * :doc:`/api/payments`
 * :doc:`/api/product_attributes`
 * :doc:`/api/product_options`
+* :doc:`/api/product_reviews`
 * :doc:`/api/product_variants`
+* :doc:`/api/product_reviews`
 * :doc:`/api/products`
 * :doc:`/api/promotion_coupons`
 * :doc:`/api/promotions`
