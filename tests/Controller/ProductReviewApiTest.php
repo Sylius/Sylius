@@ -20,13 +20,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductReviewApiTest extends JsonApiTestCase
 {
-
     /**
      * @var array
      */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'CONTENT_TYPE'       => 'application/json',
+        'CONTENT_TYPE' => 'application/json',
     ];
 
     /**
@@ -34,7 +33,7 @@ final class ProductReviewApiTest extends JsonApiTestCase
      */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'ACCEPT'             => 'application/json',
+        'ACCEPT' => 'application/json',
     ];
 
     /**
