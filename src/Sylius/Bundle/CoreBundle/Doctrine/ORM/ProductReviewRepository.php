@@ -77,7 +77,7 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
     /**
      * {@inheritdoc}
      */
-    public function findOneByIdAndProductCode($id, string $productCode): ?ReviewInterface 
+    public function findOneByIdAndProductCode($id, string $productCode): ?ReviewInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.reviewSubject', 'product')
