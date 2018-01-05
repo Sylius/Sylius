@@ -49,7 +49,7 @@ final class FilesystemConfigurationSourceFactory implements ConfigurationSourceF
         $recursiveFileLocator = new Definition(RecursiveFileLocator::class, [
             new Reference('sylius.theme.finder_factory'),
             $config['directories'],
-            $config['scan_depth']
+            $config['scan_depth'],
         ]);
 
         $configurationLoader = new Definition(ProcessingConfigurationLoader::class, [
