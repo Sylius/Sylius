@@ -56,7 +56,6 @@ matrix:
                     packages:
                         - parallel
     allow_failures:
-        - php: 7.2
         - env:
             - SYLIUS_SUITE="application"
             - SYMFONY_VERSION="4.0.*"

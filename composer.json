@@ -40,7 +40,6 @@
         "jms/serializer-bundle": "^2.0",
         "knplabs/knp-gaufrette-bundle": "^0.3",
         "knplabs/knp-menu-bundle": "^2.1",
-        "league/uri": "^4.2.2",
         "liip/imagine-bundle": "^1.9.1",
         "ocramius/proxy-manager": "^2.1",
         "payum/payum": "^1.4",
