@@ -16,6 +16,8 @@ sylius:
         association_type:
             name: Jméno
             translations: Překlady
+        association:
+            type: Typ asociace
         variant:
             name: Jméno
         option:
