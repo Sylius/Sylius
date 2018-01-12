@@ -34,10 +34,10 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <many-to-one field="sourceCurrency" target-entity="Sylius\Component\Currency\Model\Currency">
+        <many-to-one field="sourceCurrency" target-entity="Sylius\Component\Currency\Model\CurrencyInterface">
             <join-column name="source_currency" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>
-        <many-to-one field="targetCurrency" target-entity="Sylius\Component\Currency\Model\Currency">
+        <many-to-one field="targetCurrency" target-entity="Sylius\Component\Currency\Model\CurrencyInterface">
             <join-column name="target_currency" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>
     </mapped-superclass>
