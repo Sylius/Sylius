@@ -2,15 +2,14 @@
 
 ### v1.0.8 2018-01-12
 
+- [#9101](https://github.com/Sylius/Sylius/pull/9101) Fix wrong target-entity in exchange-rate entity (@alcaeus)
+- [#9097](https://github.com/Sylius/Sylius/pull/9097) Fix UI form add button issue collection in a collection (@wadjeroudi)
+- [#9095](https://github.com/Sylius/Sylius/pull/9095) Prevent the kernel response listener for cart from continuing when the session is not actually started. (@Hailong)
 - [#9096](https://github.com/Sylius/Sylius/pull/9096) PHP 7.2 support, finally! (@pamil)
 - [#9090](https://github.com/Sylius/Sylius/pull/9090) Update README.md (@landsman)
 - [#9084](https://github.com/Sylius/Sylius/pull/9084) Minor enhancements to product review API pull request (@pamil)
 - [#9085](https://github.com/Sylius/Sylius/pull/9085) Fix referenced state machine configuration path (@pamil)
-- [#8772](https://github.com/Sylius/Sylius/pull/8772) Product reviews API (@paulstoica)
-- [#9082](https://github.com/Sylius/Sylius/pull/9082) Remove strict declaration on migration (@stefandoorn)
-- [#9081](https://github.com/Sylius/Sylius/pull/9081) Add index on Channel::hostname to prevent table scan on each request (@stefandoorn)
 - [#9079](https://github.com/Sylius/Sylius/pull/9079) [Travis] Run a full build for tags (@pamil)
-- [#9067](https://github.com/Sylius/Sylius/pull/9067) Allow specific override of flash messages for Admin and Shop. (@Takeno)
 
 ### v1.0.7 2017-12-30
 
