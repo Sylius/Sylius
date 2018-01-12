@@ -25,7 +25,7 @@
 
         this.$element.on(
             'click',
-            '[data-form-collection="add"]:first',
+            '[data-form-collection="add"]:last',
             $.proxy(this.addItem, this)
         );
 
