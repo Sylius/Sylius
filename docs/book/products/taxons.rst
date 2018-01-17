@@ -64,7 +64,7 @@ Finally **the parent taxon** has to be added to the system using a repository, a
 
 .. code-block:: php
 
-     /** @var TaxonRepositoryInterface $taxonsRepository */
+     /** @var TaxonRepositoryInterface $taxonRepository */
      $taxonRepository = $this->get('sylius.repository.taxon');
 
      $taxonRepository->add($taxon);
