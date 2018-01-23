@@ -12,8 +12,8 @@ sylius:
             email: Е-пошта
     installer:
         extensions:
-            "off": false
-            "on": true
+            off: false
+            on: true
         settings:
-            "off": false
-            "on": true
+            off: false
+            on: true
