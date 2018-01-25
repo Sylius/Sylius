@@ -60,19 +60,35 @@ Definition
 
     POST /api/v1/channels/
 
-+------------------------+----------------+------------------------------------------------------------------------+
-| Parameter              | Parameter type | Description                                                            |
-+========================+================+========================================================================+
-| Authorization          | header         | Token received during authentication                                   |
-+------------------------+----------------+------------------------------------------------------------------------+
-| code                   | request        | **(unique)** Channel identifier                                        |
-+------------------------+----------------+------------------------------------------------------------------------+
-| name                   | request        | Name of the Channel                                                    |
-+------------------------+----------------+------------------------------------------------------------------------+
-| taxCalculationStrategy | request        | Strategy which will be applied during processing orders in the channel |
-+------------------------+----------------+------------------------------------------------------------------------+
-| defaultLocale          | request        | Locale code which is already saved in Locales menu                     |
-+------------------------+----------------+------------------------------------------------------------------------+
++-----------------------------+----------------+------------------------------------------------------------------------+
+| Parameter                   | Parameter type | Description                                                            |
++=============================+================+========================================================================+
+| Authorization               | header         | Token received during authentication                                   |
++-----------------------------+----------------+------------------------------------------------------------------------+
+| code                        | request        | **(unique)** Channel identifier                                        |
++-----------------------------+----------------+------------------------------------------------------------------------+
+| name                        | request        | Name of the Channel                                                    |
++-----------------------------+----------------+------------------------------------------------------------------------+
+| taxCalculationStrategy      | request        | Strategy which will be applied during processing orders in the channel |
++-----------------------------+----------------+------------------------------------------------------------------------+
+| defaultLocale               | request        | Locale code which is already saved in Locales menu                     |
++-----------------------------+----------------+------------------------------------------------------------------------+
+| baseCurrency                | request        | Currency in which will be stored all money values in system            |
++-----------------------------+----------------+------------------------------------------------------------------------+
+| currencies                  | request        | List of available currencies                                           |
++-----------------------------+----------------+------------------------------------------------------------------------+
+| locales                     | request        | List of available locales                                              |
++-----------------------------+----------------+------------------------------------------------------------------------+
+| themeName                   | request        | Selected theme for the Channel, which is already registered in Sylius  |
++-----------------------------+----------------+------------------------------------------------------------------------+
+| contactEmail                | request        | Email which will be used in sylius_shop_contact_request route          |
++-----------------------------+----------------+------------------------------------------------------------------------+
+| skippingShippingStepAllowed | request        | Can customer skip the shipping step in checkout or not                 |
++-----------------------------+----------------+------------------------------------------------------------------------+
+| skippingPaymentStepAllowed  | request        | Can customer skip the payment step in checkout or not                  |
++-----------------------------+----------------+------------------------------------------------------------------------+
+| accountVerificationRequired | request        | Whether the customer can use his account without verification          |
++-----------------------------+----------------+------------------------------------------------------------------------+
 
 Example
 ^^^^^^^
@@ -194,8 +210,6 @@ You can also create a channel with additional (not required) fields:
 | enabled                | request        | Gives an information about channel availability                        |
 +------------------------+----------------+------------------------------------------------------------------------+
 | hostname               | request        | Name of the host for the channel                                       |
-+------------------------+----------------+------------------------------------------------------------------------+
-| defaultLocale          | request        | Locale code which is already saved in Locales menu                     |
 +------------------------+----------------+------------------------------------------------------------------------+
 | color                  | request        | Allows to recognize orders made in the channel                         |
 +------------------------+----------------+------------------------------------------------------------------------+
@@ -374,6 +388,8 @@ Exemplary Response
                 {
                     "id": 1,
                     "code": "US_WEB",
+                    "name": "US Web Store",
+                    "enabled": true,
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/channels\/US_WEB"
@@ -383,6 +399,8 @@ Exemplary Response
                 {
                     "id": 2,
                     "code": "default",
+                    "name": "Default Channel",
+                    "enabled": false,
                     "_links": {
                         "self": {
                             "href": "\/api\/v1\/channels\/default"
