@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class RegisteredUser extends Constraint
 {
     public $message = 'This email is already registered. Please log in.';

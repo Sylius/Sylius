@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Test\Services;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface EmailCheckerInterface
 {
     /**

@@ -23,10 +23,6 @@ use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
 {
     /**

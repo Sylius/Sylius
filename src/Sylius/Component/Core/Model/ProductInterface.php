@@ -16,13 +16,10 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface ProductInterface extends
     BaseProductInterface,
     ProductTaxonsAwareInterface,
@@ -87,4 +84,11 @@ interface ProductInterface extends
      * @return Collection|ReviewInterface[]
      */
     public function getAcceptedReviews(): Collection;
+
+    /**
+     * @param string|null $locale
+     *
+     * @return ProductTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface;
 }

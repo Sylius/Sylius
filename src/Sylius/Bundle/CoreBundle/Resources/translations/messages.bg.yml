@@ -201,7 +201,7 @@ sylius:
             timezone: часова зона
             timezone_deprecated:
                 header: Непрепоръчителена часова зона
-                help: 'Часовата зона %timezone% е непрепоръчителена. Коригирате вашия php.ini файл (списък на остарелите часови зони http://php.net/manual/en/timezones.others.php).'
+                help: Часовата зона %timezone% е непрепоръчителена. Коригирате вашия php.ini файл (списък на остарелите часови зони http://php.net/manual/en/timezones.others.php).
             version: Версия на PHP
             version_recommended: Препоръчителни PHP версия
     payum_gateway:

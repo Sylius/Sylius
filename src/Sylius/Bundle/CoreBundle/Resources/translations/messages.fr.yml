@@ -201,7 +201,7 @@ sylius:
             timezone: fuseau horaire
             timezone_deprecated:
                 header: Fuseau horaire obsolète
-                help: 'Le fuseau horaire %timezone% est déconseillé. Corrigez votre fichier php.ini (liste des fuseaux horaires obsolètes http://php.net/manual/fr/timezones.others.php).'
+                help: Le fuseau horaire %timezone% est déconseillé. Corrigez votre fichier php.ini (liste des fuseaux horaires obsolètes http://php.net/manual/fr/timezones.others.php).
             version: Version de PHP
             version_recommended: Version de PHP recommandée
     payum_gateway:

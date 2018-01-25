@@ -18,9 +18,6 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\CoreBundle\Fixture\AdminUserFixture;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class AdminUserFixtureTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;

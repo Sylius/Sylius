@@ -9,7 +9,7 @@ sylius:
                     association_types: Типы взаимосвязей
                     attributes: Атрибуты
                     header: Каталог
-                    inventory: Запасы
+                    inventory: Остатки
                     options: Список опций
                     products: Товары
                     taxons: Таксоны

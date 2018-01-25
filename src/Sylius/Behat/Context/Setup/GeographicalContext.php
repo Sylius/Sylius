@@ -22,10 +22,6 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class GeographicalContext implements Context
 {
     /**

@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Shop\Contact;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class ContactPage extends SymfonyPage implements ContactPageInterface
 {
     /**

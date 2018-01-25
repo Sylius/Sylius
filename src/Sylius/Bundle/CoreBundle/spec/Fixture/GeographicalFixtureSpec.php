@@ -22,9 +22,6 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class GeographicalFixtureSpec extends ObjectBehavior
 {
     function let(

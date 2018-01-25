@@ -18,9 +18,6 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityChe
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class PromotionCouponDurationEligibilityCheckerSpec extends ObjectBehavior
 {
     function it_is_a_promotion_coupon_eligibility_checker(): void

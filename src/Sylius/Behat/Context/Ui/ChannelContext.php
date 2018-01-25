@@ -21,9 +21,6 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ChannelContext implements Context
 {
     /**

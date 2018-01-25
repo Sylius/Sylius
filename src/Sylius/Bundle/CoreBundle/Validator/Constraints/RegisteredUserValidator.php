@@ -17,10 +17,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class RegisteredUserValidator extends ConstraintValidator
 {
     /**

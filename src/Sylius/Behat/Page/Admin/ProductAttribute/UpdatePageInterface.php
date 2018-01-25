@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\ProductAttribute;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     /**
@@ -51,8 +48,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     /**
      * @param string $value
+     * @param string $localeCode
      */
-    public function addAttributeValue(string $value): void;
+    public function addAttributeValue(string $value, string $localeCode): void;
 
     /**
      * @param string $value

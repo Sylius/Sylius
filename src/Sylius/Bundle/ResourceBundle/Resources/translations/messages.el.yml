@@ -5,3 +5,4 @@ sylius:
     form:
         collection:
             add: Προσθήκη
+            delete: Διαγραφή

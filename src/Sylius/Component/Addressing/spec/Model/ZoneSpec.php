@@ -20,10 +20,6 @@ use Sylius\Component\Addressing\Model\Zone;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 final class ZoneSpec extends ObjectBehavior
 {
     function it_is_initializable(): void

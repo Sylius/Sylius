@@ -20,9 +20,6 @@ use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ImpersonatingCustomersContext implements Context
 {
     /**

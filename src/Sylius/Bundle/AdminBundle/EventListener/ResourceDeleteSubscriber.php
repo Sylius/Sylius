@@ -23,9 +23,6 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ResourceDeleteSubscriber implements EventSubscriberInterface
 {
     /**
@@ -111,6 +108,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
      */
     private function getResourceNameFromRoute(string $route): string
     {
+        $route = str_replace('_bulk', '', $route);
         $routeArray = explode('_', $route);
         $routeArrayWithoutAction = array_slice($routeArray, 0, count($routeArray) - 1);
         $routeArrayWithoutPrefixes = array_slice($routeArrayWithoutAction, 2);

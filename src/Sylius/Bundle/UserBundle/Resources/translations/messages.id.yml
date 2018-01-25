@@ -8,6 +8,16 @@ sylius:
             enabled: Diaktifkan
             password:
                 label: Kata sandi
+                confirmation: Verifikasi
+            remember_me: Ingat saya
             shipping_address: Alamat pengiriman
+            username: Nama pengguna
         user_filter:
             query: Cari
+        user_change_password:
+            confirmation: Konfirmasi
+            current: Kata sandi saat ini
+            new: Kata sandi baru
+        user_reset_password:
+            confirmation: Konfirmasi
+            new: Kata sandi baru

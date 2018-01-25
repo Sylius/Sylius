@@ -11,22 +11,32 @@ sylius:
             last_name: שם משפחה
             phone_number: מספר טלפון
             postcode: מיקוד
+            street: רחוב
             province: מחוז
+            zone: איזור
         country:
+            add_province: הוסף/י מחוז
             name: שם
             provinces: מחוזות
             select: בחירה
             enabled: מופעל
         province:
             name: שם
+            abbreviation: ראשי תיבות או שם מקוצר של מחוז
             select: בחירה
         zone:
+            add_member: הוסיפו חבר/ה
+            members: חברים
             name: שם
             type: סוג
             types:
                 country: מדינה
                 province: מחוז
                 zone: איזור
+            scope: תחום
+            scopes:
+                all: כל התחומים
             select: בחירה
+            select_scope: בחרו תחום
         zone_member:
             select: בחירה

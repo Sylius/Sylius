@@ -14,14 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class ProductOptionValue implements ProductOptionValueInterface
 {
     use TranslatableTrait {
         __construct as private initializeTranslationCollection;
+        getTranslation as private doGetTranslation;
     }
 
     /**
@@ -138,6 +137,19 @@ class ProductOptionValue implements ProductOptionValueInterface
         }
 
         return $this->option->getName();
+    }
+
+    /**
+     * @param string|null $locale
+     *
+     * @return ProductOptionValueTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var ProductOptionValueTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
     }
 
     /**

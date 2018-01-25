@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface OrderItemInterface extends BaseOrderItemInterface
 {
     /**
@@ -34,6 +31,26 @@ interface OrderItemInterface extends BaseOrderItemInterface
      * @param ProductVariantInterface|null $variant
      */
     public function setVariant(?ProductVariantInterface $variant): void;
+
+    /**
+     * @return string|null
+     */
+    public function getProductName(): ?string;
+
+    /**
+     * @param string|null $productName
+     */
+    public function setProductName(?string $productName): void;
+
+    /**
+     * @return string|null
+     */
+    public function getVariantName(): ?string;
+
+    /**
+     * @param string|null $variantName
+     */
+    public function setVariantName(?string $variantName): void;
 
     /**
      * @return int

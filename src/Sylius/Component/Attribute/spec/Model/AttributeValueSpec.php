@@ -19,10 +19,6 @@ use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValue;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AttributeValueSpec extends ObjectBehavior
 {
     function it_is_initializable(): void

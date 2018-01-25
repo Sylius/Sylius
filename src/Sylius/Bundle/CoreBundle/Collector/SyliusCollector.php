@@ -23,9 +23,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SyliusCollector extends DataCollector
 {
     /**

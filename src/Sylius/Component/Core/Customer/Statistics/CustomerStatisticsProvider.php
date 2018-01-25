@@ -19,9 +19,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class CustomerStatisticsProvider implements CustomerStatisticsProviderInterface
 {
     /**

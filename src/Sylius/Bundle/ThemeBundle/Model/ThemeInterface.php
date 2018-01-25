@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ThemeBundle\Model;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 interface ThemeInterface
 {
     /**
@@ -71,12 +68,12 @@ interface ThemeInterface
     /**
      * @param ThemeInterface $theme
      */
-    public function addParent(ThemeInterface $theme): void;
+    public function addParent(self $theme): void;
 
     /**
      * @param ThemeInterface $theme
      */
-    public function removeParent(ThemeInterface $theme): void;
+    public function removeParent(self $theme): void;
 
     /**
      * @return array|ThemeScreenshot[]

@@ -23,9 +23,6 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CheckoutAddressingContext implements Context
 {
     /**

@@ -5,10 +5,10 @@ The Contribution Guide
 
     This section is based on the great `Symfony documentation <http://symfony.com/doc/current>`_.
 
-How to install Sylius to contribute?
-------------------------------------
+Install to Contribute
+---------------------
 
-Before you start contributing you need to have your own local environment for editing things.
+Before you can start contributing to Sylius code or documentation, you should install Sylius locally.
 
 To install Sylius main application from our main repository and contribute, run the following command:
 
@@ -72,9 +72,6 @@ For the contributing process questions, please refer to the `Contributing Guide 
     documentation/index
     translations/index
 
-.. _Gulp: http://gulpjs.com/
-.. _Node.js: https://nodejs.org/en/download/
-
 How to contribute using Sylius Vagrant
 --------------------------------------
 
@@ -106,3 +103,19 @@ Contributing Translations
 .. toctree::
 
     translations/index
+
+Organization
+------------
+
+Sylius is developed by a vibrant community of commercial companies and individual developers.
+The chapter describes the rules & processes we use to organize our work.
+
+.. toctree::
+    :hidden:
+
+    organization/index
+
+.. include:: /contributing/organization/map.rst.inc
+
+.. _Gulp: http://gulpjs.com/
+.. _Node.js: https://nodejs.org/en/download/

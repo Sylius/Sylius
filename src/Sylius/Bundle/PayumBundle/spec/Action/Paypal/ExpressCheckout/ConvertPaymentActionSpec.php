@@ -26,9 +26,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ConvertPaymentActionSpec extends ObjectBehavior
 {
     function let(InvoiceNumberGeneratorInterface $invoiceNumberGenerator): void

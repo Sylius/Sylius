@@ -24,9 +24,6 @@ use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ResourceGridViewFactorySpec extends ObjectBehavior
 {
     function let(DataProviderInterface $dataProvider, ParametersParserInterface $parametersParser): void

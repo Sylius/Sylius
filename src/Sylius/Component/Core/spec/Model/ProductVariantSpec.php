@@ -29,9 +29,6 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ProductVariantSpec extends ObjectBehavior
 {
     function it_implements_a_product_variant_interface(): void

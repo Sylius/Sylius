@@ -28,9 +28,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ProductVariantTypeExtension extends AbstractTypeExtension
 {
     /**

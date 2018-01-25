@@ -16,9 +16,6 @@ namespace Sylius\Bundle\UiBundle\Twig;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class SortByExtension extends \Twig_Extension
 {
     /**

@@ -17,9 +17,6 @@ use Sylius\Component\Grid\Data\DataProviderInterface;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class GridViewFactory implements GridViewFactoryInterface
 {
     /**

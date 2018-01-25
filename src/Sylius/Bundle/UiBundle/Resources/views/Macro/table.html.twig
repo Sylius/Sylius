@@ -1,6 +1,10 @@
 {% macro headers(grid, definition, requestAttributes) %}
     {% import '@SyliusUi/Macro/sorting.html.twig' as sorting %}
 
+    {% if definition.actionGroups.bulk is defined %}
+        <th></th>
+    {% endif %}
+
     {% for field in definition.fields|sort_by('position') %}
         {% if field.enabled %}
             {% if field.isSortable %}
@@ -10,13 +14,16 @@
             {% endif %}
         {% endif %}
     {% endfor %}
-    {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
+    {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
         <th class="sylius-table-column-actions">{{ 'sylius.ui.actions'|trans }}</th>
     {% endif %}
 {% endmacro %}
 
 {% macro row(grid, definition, row) %}
     <tr class="item">
+    {% if definition.actionGroups.bulk is defined %}
+        <td><input class="bulk-select-checkbox" type="checkbox" value="{{ row.id }}" /></td>
+    {% endif %}
     {% for field in definition.enabledFields|sort_by('position') %}
         <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
     {% endfor %}

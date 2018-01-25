@@ -21,10 +21,6 @@ use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterface
 {
     /**

@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Shop\Order;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface ThankYouPageInterface extends SymfonyPageInterface
 {
     public function goToOrderDetails();

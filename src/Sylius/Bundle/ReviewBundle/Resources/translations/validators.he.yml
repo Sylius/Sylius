@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        author:
+            already_exists: כתובת דוא"ל כבר רשומה, אנא התחבר או השתמשו בשיחזור סיסמה.
+        comment:
+            not_blank: הערת סקירה אינו יכולה להיות ריקה.
+        rating:
+            not_blank: יש לבדוק דירוג סקירה.
+        title:
+            not_blank: כותרת סקירה אינו יכולה להיות ריקה.
+            min_length: כותרת סקירה חייבת להיות לפחות 2 תווים.
+            max_length: כותרת סקירה חייבת להיות עד 255 תווים.

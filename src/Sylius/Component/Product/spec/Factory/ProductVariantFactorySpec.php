@@ -19,9 +19,6 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ProductVariantFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory): void

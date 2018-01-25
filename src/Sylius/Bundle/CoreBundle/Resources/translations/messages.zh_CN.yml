@@ -174,11 +174,11 @@ sylius:
             header: 文件系统
             cache:
                 header: 缓存
-                help: '设置权限运行： sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: 设置权限运行： sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%
             exists: 存在
             logs:
                 header: 日志
-                help: '设置权限运行： sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: 设置权限运行： sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%
             not_exists: 不存在
             not_writable: 不可写
             parameters:
@@ -201,7 +201,7 @@ sylius:
             timezone: 时区
             timezone_deprecated:
                 header: 过时的时区
-                help: '时区%timezone%已被否决。修复您的 php.ini 文件 （不推荐使用的时区 http://php.net/manual/en/timezones.others.php 的列表）。'
+                help: 时区%timezone%已被否决。修复您的 php.ini 文件 （不推荐使用的时区 http://php.net/manual/en/timezones.others.php 的列表）。
             version: PHP 版本
             version_recommended: 推荐的 PHP 版本
     payum_gateway:

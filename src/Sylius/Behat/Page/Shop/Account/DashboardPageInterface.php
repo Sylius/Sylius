@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Shop\Account;
 
 use Sylius\Behat\Page\PageInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface DashboardPageInterface extends PageInterface
 {
     /**

@@ -18,9 +18,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterface
 {
     /**

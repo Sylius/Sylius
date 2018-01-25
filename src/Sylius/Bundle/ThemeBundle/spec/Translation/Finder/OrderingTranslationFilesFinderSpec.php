@@ -16,9 +16,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Translation\Finder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class OrderingTranslationFilesFinderSpec extends ObjectBehavior
 {
     function let(TranslationFilesFinderInterface $translationFilesFinder): void

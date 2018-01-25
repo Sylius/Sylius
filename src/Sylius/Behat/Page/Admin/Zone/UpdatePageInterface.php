@@ -16,9 +16,6 @@ namespace Sylius\Behat\Page\Admin\Zone;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     /**

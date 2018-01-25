@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ShopBundle\EmailManager;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ContactEmailManager implements ContactEmailManagerInterface
 {
     /**

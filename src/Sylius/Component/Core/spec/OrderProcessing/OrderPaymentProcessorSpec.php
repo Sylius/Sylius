@@ -24,9 +24,6 @@ use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class OrderPaymentProcessorSpec extends ObjectBehavior
 {
     function let(OrderPaymentProviderInterface $orderPaymentProvider): void

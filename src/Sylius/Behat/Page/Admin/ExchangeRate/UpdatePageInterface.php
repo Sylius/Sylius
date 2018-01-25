@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\ExchangeRate;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     /**

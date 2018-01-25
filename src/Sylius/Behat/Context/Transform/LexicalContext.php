@@ -15,9 +15,6 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class LexicalContext implements Context
 {
     /**

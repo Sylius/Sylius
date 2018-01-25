@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface ProductTaxonInterface extends ResourceInterface
 {
     /**
@@ -46,7 +43,7 @@ interface ProductTaxonInterface extends ResourceInterface
     public function getPosition(): ?int;
 
     /**
-     * @param int|void $position
+     * @param int|null $position
      */
     public function setPosition(?int $position): void;
 }

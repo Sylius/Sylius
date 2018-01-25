@@ -20,9 +20,6 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ManagingProductVariantsContext implements Context
 {
     /**

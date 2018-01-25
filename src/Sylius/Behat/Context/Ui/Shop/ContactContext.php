@@ -20,9 +20,6 @@ use Sylius\Behat\Page\Shop\Contact\ContactPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ContactContext implements Context
 {
     /**
@@ -118,9 +115,9 @@ final class ContactContext implements Context
     }
 
     /**
-     * @Then I should be notified that a problem occured while sending the contact request
+     * @Then I should be notified that a problem occurred while sending the contact request
      */
-    public function iShouldBeNotifiedThatAProblemOccuredWhileSendingTheContactRequest()
+    public function iShouldBeNotifiedThatAProblemOccurredWhileSendingTheContactRequest()
     {
         $this->notificationChecker->checkNotification(
             'A problem occurred while sending the contact request. Please try again later.',

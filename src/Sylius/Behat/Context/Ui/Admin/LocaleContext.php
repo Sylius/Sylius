@@ -18,9 +18,6 @@ use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class LocaleContext implements Context
 {
     /**

@@ -20,10 +20,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class MoneyType extends AbstractType
 {
     /**

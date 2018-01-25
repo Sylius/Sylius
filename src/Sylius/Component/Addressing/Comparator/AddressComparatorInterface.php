@@ -15,9 +15,6 @@ namespace Sylius\Component\Addressing\Comparator;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface AddressComparatorInterface
 {
     /**

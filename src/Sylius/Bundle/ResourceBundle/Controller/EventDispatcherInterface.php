@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface EventDispatcherInterface
 {
     /**

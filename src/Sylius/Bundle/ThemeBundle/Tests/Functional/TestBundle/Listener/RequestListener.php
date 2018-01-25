@@ -19,9 +19,6 @@ use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class RequestListener
 {
     /**

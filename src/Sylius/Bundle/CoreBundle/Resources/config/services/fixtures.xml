@@ -151,6 +151,7 @@
             <argument type="service" id="sylius.fixture.product_attribute" />
             <argument type="service" id="sylius.fixture.product_option" />
             <argument type="service" id="sylius.fixture.product" />
+            <argument>%locale%</argument>
             <tag name="sylius_fixtures.fixture" />
         </service>
 
@@ -166,6 +167,7 @@
             <argument type="service" id="sylius.fixture.taxon" />
             <argument type="service" id="sylius.fixture.product_attribute" />
             <argument type="service" id="sylius.fixture.product" />
+            <argument>%locale%</argument>
             <tag name="sylius_fixtures.fixture" />
         </service>
 

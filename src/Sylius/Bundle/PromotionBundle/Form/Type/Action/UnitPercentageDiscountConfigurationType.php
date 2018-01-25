@@ -22,11 +22,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Type;
 
-/**
- * @author Viorel Craescu <viorel@craescu.com>
- * @author Gabi Udrescu <gabriel.udr@gmail.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class UnitPercentageDiscountConfigurationType extends AbstractType
 {
     /**

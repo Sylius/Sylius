@@ -22,10 +22,6 @@ use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 abstract class AbstractResourceBundle extends Bundle implements ResourceBundleInterface
 {
     /**
@@ -103,7 +99,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      */
     protected function getModelNamespace(): ?string
     {
-        return null;
+        return (new \ReflectionClass($this))->getNamespaceName() . '\\Model';
     }
 
     /**

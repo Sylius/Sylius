@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 final class ShippingMethodTranslationSpec extends ObjectBehavior
 {
     function it_is_initializable(): void

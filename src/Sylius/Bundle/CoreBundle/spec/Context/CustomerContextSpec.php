@@ -20,9 +20,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class CustomerContextSpec extends ObjectBehavior
 {
     function let(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker): void

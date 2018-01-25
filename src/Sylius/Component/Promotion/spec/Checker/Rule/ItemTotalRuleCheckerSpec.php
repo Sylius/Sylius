@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class ItemTotalRuleCheckerSpec extends ObjectBehavior
 {
     function it_is_be_a_rule_checker(): void

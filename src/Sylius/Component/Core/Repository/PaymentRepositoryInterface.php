@@ -17,9 +17,6 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface PaymentRepositoryInterface extends RepositoryInterface
 {
     /**

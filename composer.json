@@ -31,17 +31,15 @@
         "doctrine/doctrine-cache-bundle": "^1.3",
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^1.2",
-        "doctrine/orm": "^2.5",
+        "doctrine/orm": "~2.5.0",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "friendsofsymfony/rest-bundle": "^2.1",
         "fzaninotto/faker": "^1.6",
         "gedmo/doctrine-extensions": "^2.4.12",
         "incenteev/composer-parameter-handler": "^2.1",
-        "jeremykendall/php-domain-parser": "^4.0.3@alpha",
         "jms/serializer-bundle": "^2.0",
         "knplabs/knp-gaufrette-bundle": "^0.3",
         "knplabs/knp-menu-bundle": "^2.1",
-        "league/uri": "^4.2.3",
         "liip/imagine-bundle": "^1.9.1",
         "ocramius/proxy-manager": "^2.1",
         "payum/payum": "^1.4",
@@ -60,11 +58,12 @@
         "symfony/polyfill-intl-icu": "^1.3",
         "symfony/polyfill-mbstring": "^1.3",
         "symfony/swiftmailer-bundle": "^3.0",
-        "symfony/symfony": "^3.3.8",
+        "symfony/symfony": "^3.4",
         "twig/extensions": "^1.4",
         "twig/twig": "^2.0",
         "webmozart/assert": "^1.1",
         "white-october/pagerfanta-bundle": "^1.0.8",
+        "willdurand/hateoas": "~2.10.0",
         "willdurand/hateoas-bundle": "^1.2",
         "winzou/state-machine-bundle": "^0.3",
         "zendframework/zend-hydrator": "^2.2",
@@ -92,7 +91,6 @@
         "pamil/prophecy-common": "^0.1",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
-        "se/selenium-server-standalone": "^2.52",
         "stripe/stripe-php": "^4.1",
         "symplify/easy-coding-standard": "^2.4",
         "sylius-labs/coding-standard": "^1.0"
@@ -138,7 +136,11 @@
         "sylius/theme-bundle": "self.version",
         "sylius/ui-bundle": "self.version",
         "sylius/user": "self.version",
-        "sylius/user-bundle": "self.version"
+        "sylius/user-bundle": "self.version",
+
+        "symfony/polyfill-php71": "*",
+        "symfony/polyfill-php70": "*",
+        "symfony/polyfill-php56": "*"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
@@ -195,7 +197,7 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

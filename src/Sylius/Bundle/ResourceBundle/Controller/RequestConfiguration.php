@@ -17,11 +17,6 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 class RequestConfiguration
 {
     /**
@@ -92,7 +87,7 @@ class RequestConfiguration
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return string|null
      */
@@ -108,7 +103,7 @@ class RequestConfiguration
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return mixed|null
      */
@@ -171,7 +166,7 @@ class RequestConfiguration
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return mixed|string|null
      */
@@ -376,7 +371,7 @@ class RequestConfiguration
     }
 
     /**
-     * @param $parameter
+     * @param string $parameter
      * @param array $defaults
      *
      * @return array

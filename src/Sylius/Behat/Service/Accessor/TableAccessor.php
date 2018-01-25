@@ -16,9 +16,6 @@ namespace Sylius\Behat\Service\Accessor;
 use Behat\Mink\Element\NodeElement;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TableAccessor implements TableAccessorInterface
 {
     /**

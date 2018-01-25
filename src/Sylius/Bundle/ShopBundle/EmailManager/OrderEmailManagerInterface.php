@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ShopBundle\EmailManager;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface OrderEmailManagerInterface
 {
     /**

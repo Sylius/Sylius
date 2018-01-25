@@ -21,9 +21,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
 {
     function let(ChannelContextInterface $channelContext): void

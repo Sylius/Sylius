@@ -15,9 +15,6 @@ namespace Sylius\Component\Addressing\Converter;
 
 use Symfony\Component\Intl\Intl;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CountryNameConverter implements CountryNameConverterInterface
 {
     /**

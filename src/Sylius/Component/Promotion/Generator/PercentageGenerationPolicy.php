@@ -16,9 +16,6 @@ namespace Sylius\Component\Promotion\Generator;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class PercentageGenerationPolicy implements GenerationPolicyInterface
 {
     /**

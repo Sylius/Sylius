@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Exception;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class HandleException extends \RuntimeException
 {
     /**

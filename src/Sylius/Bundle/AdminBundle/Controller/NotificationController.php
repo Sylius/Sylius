@@ -22,9 +22,6 @@ use Sylius\Bundle\CoreBundle\Application\Kernel;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class NotificationController
 {
     /**

@@ -19,9 +19,6 @@ use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class UserPasswordEncoderSpec extends ObjectBehavior
 {
     function let(EncoderFactoryInterface $encoderFactory): void

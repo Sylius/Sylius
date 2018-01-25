@@ -18,9 +18,6 @@ use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderCompleteListenerSpec extends ObjectBehavior
 {
     function let(OrderEmailManagerInterface $orderEmailManager): void

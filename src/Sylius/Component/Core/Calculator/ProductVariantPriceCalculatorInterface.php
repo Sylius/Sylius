@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Calculator;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface ProductVariantPriceCalculatorInterface
 {
     /**

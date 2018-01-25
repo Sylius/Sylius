@@ -28,10 +28,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ManagingOrdersContext implements Context
 {
     /**

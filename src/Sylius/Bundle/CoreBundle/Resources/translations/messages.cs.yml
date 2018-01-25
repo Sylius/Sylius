@@ -200,7 +200,7 @@ sylius:
             timezone: Časové pásmo
             timezone_deprecated:
                 header: Zastaralé časové pásmo
-                help: 'Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).'
+                help: Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).
             version: Verze PHP
             version_recommended: Doporučená verze PHP
     payum_gateway:

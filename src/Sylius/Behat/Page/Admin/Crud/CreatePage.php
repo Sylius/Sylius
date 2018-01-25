@@ -18,9 +18,6 @@ use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class CreatePage extends SymfonyPage implements CreatePageInterface
 {
     /**

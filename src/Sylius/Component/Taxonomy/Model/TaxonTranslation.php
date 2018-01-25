@@ -15,9 +15,6 @@ namespace Sylius\Component\Taxonomy\Model;
 
 use Sylius\Component\Resource\Model\AbstractTranslation;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class TaxonTranslation extends AbstractTranslation implements TaxonTranslationInterface
 {
     /**

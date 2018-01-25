@@ -21,9 +21,6 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class CurrencyContext implements Context
 {
     /**
@@ -123,7 +120,7 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @param $currencyCode
+     * @param string $currencyCode
      *
      * @return CurrencyInterface
      */

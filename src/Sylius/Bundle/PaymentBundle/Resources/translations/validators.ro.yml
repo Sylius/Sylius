@@ -19,6 +19,11 @@ sylius:
             min_length: Codul de verificare a cardului de credit trebuie să fie de cel mult {{ limit }} cifre.
         expiry_year:
             not_blank: Vă rugăm să alegeți anul expirării.
+    payment:
+        currency_code:
+            not_valid: Codul valutei introdus este invalid.
+        method:
+            not_blank: 'Selectează o metodă de plată.'
     payment_method:
         gateway:
             not_blank: Vă rugăm să alegeți gateway-ul de plată.
@@ -26,3 +31,15 @@ sylius:
             max_length: Numele metodei de plată trebuie să conţină cu {{ limit }} caractere mai mult sau mai puţin.
             min_length: Numele metodei de plată trebuie să conțină cel puţin {{ limit }} caractere.
             not_blank: Vă rugăm să completați numele metodei de plată.
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: Taxa nu poate fi mai mică decât {{ compared_value }}.
+                not_blank: Completează valoarea taxei.
+            percent:
+                max_range: Procentul taxei nu poate fi mai mare decât {{ limit }}.
+                min_range: Procentul taxei nu poate fi mai mic decât {{ limit }}.
+                not_blank: Completează procentul taxei.
+        code:
+            not_blank: 'Completează codul metodei de plată.'
+            regex: 'Codul metodei de plată poate conține doar litere, numere, - și _.'
+            unique: 'Codul metodei de plată trebuie să fie unic.'

@@ -26,10 +26,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 final class ManagingProductVariantsContext implements Context
 {
     /**
@@ -223,6 +219,22 @@ final class ManagingProductVariantsContext implements Context
     public function iDoNotWantToHaveShippingRequiredForThisProduct()
     {
         $this->createPage->setShippingRequired(false);
+    }
+
+    /**
+     * @When I check (also) the :productVariantName product variant
+     */
+    public function iCheckTheProductVariantName(string $productVariantName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $productVariantName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
     }
 
     /**
@@ -539,7 +551,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @param string $element
-     * @param $message
+     * @param string $message
      */
     private function assertValidationMessage($element, $message)
     {

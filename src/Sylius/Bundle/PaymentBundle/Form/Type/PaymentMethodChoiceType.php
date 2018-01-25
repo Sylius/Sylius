@@ -23,12 +23,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class PaymentMethodChoiceType extends AbstractType
 {
     /**

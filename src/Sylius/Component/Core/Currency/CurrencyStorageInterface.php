@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Currency;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 interface CurrencyStorageInterface
 {
     /**

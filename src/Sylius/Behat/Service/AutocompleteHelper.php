@@ -18,9 +18,6 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 abstract class AutocompleteHelper
 {
     /**

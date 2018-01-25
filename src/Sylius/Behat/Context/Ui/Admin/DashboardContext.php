@@ -18,9 +18,6 @@ use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DashboardContext implements Context
 {
     /**

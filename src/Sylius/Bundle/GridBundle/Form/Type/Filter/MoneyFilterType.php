@@ -20,9 +20,6 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class MoneyFilterType extends AbstractType
 {
     /**

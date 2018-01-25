@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ThemeBundle\Configuration\Test;
 
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TestConfigurationProvider implements ConfigurationProviderInterface
 {
     /**

@@ -19,10 +19,6 @@ use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculator
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterShippingMethodsResolversPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 final class SyliusShippingBundle extends AbstractResourceBundle
 {
     /**

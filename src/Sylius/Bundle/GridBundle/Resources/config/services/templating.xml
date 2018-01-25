@@ -17,5 +17,13 @@
             <argument type="service" id="sylius.grid.renderer" />
             <tag name="templating.helper" alias="sylius_grid" />
         </service>
+
+        <service id="sylius.templating.helper.bulk_action_grid"
+                 class="Sylius\Bundle\GridBundle\Templating\Helper\BulkActionGridHelper"
+                 lazy="true"
+        >
+            <argument type="service" id="sylius.grid.bulk_action_renderer" />
+            <tag name="templating.helper" alias="sylius_bulk_action_grid" />
+        </service>
     </services>
 </container>

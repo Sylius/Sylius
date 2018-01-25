@@ -20,11 +20,11 @@ sylius:
                     currencies: 货币
                     exchange_rates: 汇率
                     header: 配置
-                    locales: 区域设置
-                    payment_methods: 付款方法
+                    locales: 本地化
+                    payment_methods: 支付方式
                     shipping_categories: 发货类别
                     shipping_methods: 发货方式
-                    tax_categories: 税类别
+                    tax_categories: 税种
                     tax_rates: 税率
                     zones: 区域
                 marketing:
@@ -33,7 +33,7 @@ sylius:
                     promotions: 促销活动
                 customers:
                     customers: 客户
-                    groups: 团体
+                    groups: 组
                     header: 客户
                 sales:
                     header: 销售额

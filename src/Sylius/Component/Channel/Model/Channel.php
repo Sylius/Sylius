@@ -16,9 +16,6 @@ namespace Sylius\Component\Channel\Model;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Channel implements ChannelInterface
 {
     use TimestampableTrait, ToggleableTrait;

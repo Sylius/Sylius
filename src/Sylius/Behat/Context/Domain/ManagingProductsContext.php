@@ -21,10 +21,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 final class ManagingProductsContext implements Context
 {
     /**

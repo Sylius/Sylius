@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CanonicalizerListener
 {
     /**

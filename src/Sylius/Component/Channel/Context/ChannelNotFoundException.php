@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Context;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class ChannelNotFoundException extends \RuntimeException
 {
     /**

@@ -5,6 +5,10 @@ sylius:
     tax_category:
         name:
             not_blank: Vă rugăm să completați numele categoriei de taxe.
+        code:
+            not_blank: Introdu un cod de categorie de taxe.
+            regex: Codul categoriei de taxe poate să conțină doar litere, numere, - și _.
+            unique: Codul categoriei de taxe trebuie să fie unic.
     tax_rate:
         category:
             not_blank: Vă rugăm să alegeți categoria de taxe.
@@ -14,3 +18,9 @@ sylius:
             not_blank: Vă rugăm să completați valoarea taxei.
         calculator:
             not_blank: Vă rugăm să alegeți calculatorul de taxe.
+        zone:
+            not_blank: Vă rugăm să selectaţi zona de taxe.
+        code:
+            not_blank: Vă rugăm să introduceţi codul taxei.
+            regex: Codul taxei poate să conțină doar litere, numere, - și _.
+            unique: Codul taxei trebuie să fie unic.

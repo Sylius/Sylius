@@ -2,6 +2,93 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        base_currency:
+            not_blank: الرجاء إدخال العملة الرئيسية.
+        default_locale:
+            not_blank: الرجاء إدخال اللغة الافتراضية للقناة.
+        contact_email:
+            invalid: البريد الإلكتروني غير صالح.
+            max: البريد الإلكتروني يجب أن لا تكون أطول من أحرف {{ limit }}.
+            min: البريد الإلكتروني يجب أن يكون على الأقل {{ limit }} حرفاً.
+    channel_pricing:
+        price:
+            min: يجب أن تكون الأسعار على الأقل {{ limit }}.
+            not_blank: يجب أن تدخل المحتوى.
+    checkout:
+        shipping_method:
+            not_blank: يرجى تحديد أسلوب الشحن.
     contact:
         email:
+            invalid: هذا البريد الإلكتروني غير صالح.
             not_blank: الرجاء إدخال البريدك الإلكتروني.
+        message:
+            not_blank: الرجاء إدخال رسالتك.
+    currency:
+        enabled:
+            cannot_disable_base: لا يمكن تعطيل للعملة الأساسية.
+    customer:
+        currency_code:
+            not_valid: رمز العملة الذي أدخلته غير صالح.
+    cart_item:
+        not_available: '%itemName% ليس لديها مخزون كاف.'
+    order:
+        currency_code:
+            not_valid: رمز العملة الذي أدخلته غير صالح.
+        payment_method_eligibility: 'تم تعطيل هذه %paymentMethodName% أسلوب الدفع. الرجاء إعادة تحديد طريقة الدفع الخاصة بك.'
+        product_eligibility: 'تم تعطيل هذا المنتج %productName%.'
+        shipping_method_eligibility: 'المنتج لا تتناسب مع متطلبات %shippingMethodName% أسلوب الشحن. الرجاء إعادة تحديد أسلوب الشحن الخاص بك.'
+    locale:
+        code:
+            not_blank: الرجاء إدخال رمز المنطقة.
+            unique: هذا الاسم موجود بالفعل.
+        enabled:
+            cannot_disable_base: لا يمكن تعطيل للعملة الأساسية.
+    product:
+        variants:
+            all_prices_defined: يجب عليك أولاً بتعريف أسعار المتغيرات المنتج قنوات المعين حديثا.
+    product_attribute:
+        invalid: الموقف يجب أن يكون عددا صحيحاً.
+    product_image:
+        file:
+            max_size: يتم الصورة كبيرة جداً--{{ size }}{{ suffix }}. الحد الأقصى المسموح به لحجم هو {{ limit }}{{ suffix }}.
+            upload_ini_size: الصورة كبير جداً. الحد الأقصى المسموح به لحجم هو {{ limit }}{{ suffix }}.
+    product_variant:
+        onHand:
+            min: من ناحية يجب أن تكون أكبر من {{ limit }}.
+            not_blank: الرجاء إدخال اسم المنطقة.
+            reserved: من جهة يجب أن يكون أكبر من عدد على عقد الوحدات
+        original_price:
+            min: السعر الأصلي يجب أن لا تكون سلبية.
+        weight:
+            min: الوزن لا يمكن أن يكون سلبيا.
+            invalid: الجولات يجب أن تكون عدداً.
+        width:
+            min: الوزن لا يمكن أن يكون سلبيا.
+            invalid: الجولات يجب أن تكون عدداً.
+        height:
+            min: الوزن لا يمكن أن يكون سلبيا.
+            invalid: الجولات يجب أن تكون عدداً.
+        depth:
+            min: الوزن لا يمكن أن يكون سلبيا.
+            invalid: الجولات يجب أن تكون عدداً.
+        channel_pricing:
+            all_defined: 'ويجب تحديد الأسعار لكل قناة.'
+    product_translation:
+        short_description:
+            max: البريد الإلكتروني يجب أن لا تكون أطول من أحرف {{ limit }}.
+    taxon_image:
+        file:
+            max_size: يتم الصورة كبيرة جداً--{{ size }}{{ suffix }}. الحد الأقصى المسموح به لحجم هو {{ limit }}{{ suffix }}.
+            upload_ini_size: الصورة كبير جداً. الحد الأقصى المسموح به لحجم هو {{ limit }}{{ suffix }}.
+    user:
+        email:
+            unique: هذا البريد الإلكتروني قيد الاستخدام بالفعل.
+            min: البريد الإلكتروني يجب أن يكون لديك على الأقل الأحرف {{ min }}.
+            max: يجب أن يكون البريد الإلكتروني في معظم الأحرف {{ max }}.
+            invalid: البريد الإلكتروني غير صالح.
+        username:
+            unique: اسم المستخدم هذا مستخدم سلفا.
+            not_blank: الرجاء إدخال اسمك.
+        locale_code:
+            not_blank: الرجاء اختيار لغة.

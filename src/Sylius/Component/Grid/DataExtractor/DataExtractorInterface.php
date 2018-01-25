@@ -15,9 +15,6 @@ namespace Sylius\Component\Grid\DataExtractor;
 
 use Sylius\Component\Grid\Definition\Field;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface DataExtractorInterface
 {
     /**

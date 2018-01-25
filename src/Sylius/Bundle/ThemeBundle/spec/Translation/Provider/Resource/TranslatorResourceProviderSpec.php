@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProviderInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResource;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TranslatorResourceProviderSpec extends ObjectBehavior
 {
     function it_implements_translation_resource_provider_interface(): void

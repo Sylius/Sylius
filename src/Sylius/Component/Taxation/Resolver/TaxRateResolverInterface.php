@@ -16,9 +16,6 @@ namespace Sylius\Component\Taxation\Resolver;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface TaxRateResolverInterface
 {
     /**

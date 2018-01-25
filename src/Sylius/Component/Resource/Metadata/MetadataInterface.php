@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Resource\Metadata;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface MetadataInterface
 {
     /**

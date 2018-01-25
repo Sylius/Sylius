@@ -16,9 +16,6 @@ namespace Sylius\Component\Promotion\Checker\Eligibility;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class PromotionCouponDurationEligibilityChecker implements PromotionCouponEligibilityCheckerInterface
 {
     /**

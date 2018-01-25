@@ -4,10 +4,62 @@
 sylius:
     form:
         promotion:
+            actions: الاجراءت
+            add_action: إضافة فعل
+            add_rule: إضافة قاعدة
+            coupon_based: اسم الكوبون
+            description: الوصف
+            ends_at: ينتهي عند
+            exclusive: حصري
             name: الاسم
+            priority: الأولوية
+            rules: القوانين
+            starts_at: يبدأ عند
+            usage_limit: حد الاستخدام
         promotion_action:
+            item_fixed_discount: خصم بقيمة ثابتة
+            item_percentage_discount: خصم بنسبة مؤية
+            order_fixed_discount: خصم بقيمة ثابتة
+            order_percentage_discount: خصم بنسبة مؤية
+            shipping_percentage_discount: خصم بنسبة مؤية على الشحن
+            fixed_discount_configuration:
+                amount: القيمة
+            percentage_discount_configuration:
+                percentage: النسبة
             type: نوع
+        promotion_coupon:
+            expires_at: ينتهي في
+            usage_limit: حد الاستخدام
+        promotion_coupon_generator_instruction:
+            amount: القيمة
+            code_length: طول الرمز
+            expires_at: ينتهي في
+            usage_limit: حد الاستخدام
+        promotion_filter:
+            price_range: فلتر تصفية الأسعار
         promotion_rule:
+            cart_quantity: كمية العربة
+            contains_product: المنتجات
+            customer_group: مجموعة العميل
+            has_at_least_one_from_taxons: على الأقل واحد من تاكسونس
+            item_total: مجموع الصنف
+            nth_order: ترتيب
+            shipping_country: بلد الشحن
+            taxonomy: تصنيف
+            total_price_of_items_from_taxon: الإجمالي النهائي لقيمة التاكسون
+            cart_quantity_configuration:
+                count: عد
+                equal: يساوي
+            contains_product_configuration:
+                exclude: استثناء
+                variants: المنتجات
+            item_total_configuration:
+                amount: القيمة
+            nth_order_configuration:
+                nth: Nth
             shipping_country_configuration:
                 country: البلد
+            taxonomy_configuration:
+                exclude: استثناء
+                taxons: تاكسونس
             type: نوع

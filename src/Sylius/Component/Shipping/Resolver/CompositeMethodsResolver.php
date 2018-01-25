@@ -16,9 +16,6 @@ namespace Sylius\Component\Shipping\Resolver;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CompositeMethodsResolver implements ShippingMethodsResolverInterface
 {
     /**

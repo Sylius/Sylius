@@ -19,9 +19,6 @@ use Sylius\Behat\Page\Page;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPageInterface
 {
     /**

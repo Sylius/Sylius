@@ -24,9 +24,6 @@ use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 
-/**
- * @author Adam Elsodaney <adam.elso@gmail.com>
- */
 final class ProductVariantGeneratorSpec extends ObjectBehavior
 {
     function let(

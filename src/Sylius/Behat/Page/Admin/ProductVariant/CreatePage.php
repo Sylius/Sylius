@@ -19,10 +19,6 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use SpecifiesItsCode;

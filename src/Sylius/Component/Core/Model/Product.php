@@ -18,15 +18,11 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Product\Model\ProductTranslationInterface as BaseProductTranslationInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class Product extends BaseProduct implements ProductInterface, ReviewableProductInterface
 {
     /**
@@ -350,6 +346,16 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
             self::VARIANT_SELECTION_CHOICE => 'sylius.ui.variant_choice',
             self::VARIANT_SELECTION_MATCH => 'sylius.ui.options_matching',
         ];
+    }
+
+    /**
+     * @param string|null $locale
+     *
+     * @return ProductTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        return parent::getTranslation($locale);
     }
 
     /**

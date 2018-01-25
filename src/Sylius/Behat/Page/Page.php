@@ -21,9 +21,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Selector\SelectorsHandler;
 use Behat\Mink\Session;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 abstract class Page implements PageInterface
 {
     /**
@@ -65,7 +62,7 @@ abstract class Page implements PageInterface
      */
     public function tryToOpen(array $urlParameters = [])
     {
-        $this->getDriver()->visit($this->getUrl($urlParameters));
+        $this->getSession()->visit($this->getUrl($urlParameters));
     }
 
     /**
@@ -104,7 +101,7 @@ abstract class Page implements PageInterface
     protected function verifyStatusCode()
     {
         try {
-            $statusCode = $this->getDriver()->getStatusCode();
+            $statusCode = $this->getSession()->getStatusCode();
         } catch (DriverException $exception) {
             return; // Ignore drivers which cannot check the response status code
         }
@@ -113,7 +110,7 @@ abstract class Page implements PageInterface
             return;
         }
 
-        $currentUrl = $this->getDriver()->getCurrentUrl();
+        $currentUrl = $this->getSession()->getCurrentUrl();
         $message = sprintf('Could not open the page: "%s". Received an error status code: %s', $currentUrl, $statusCode);
 
         throw new UnexpectedPageException($message);
@@ -128,8 +125,8 @@ abstract class Page implements PageInterface
      */
     protected function verifyUrl(array $urlParameters = [])
     {
-        if ($this->getDriver()->getCurrentUrl() !== $this->getUrl($urlParameters)) {
-            throw new UnexpectedPageException(sprintf('Expected to be on "%s" but found "%s" instead', $this->getUrl($urlParameters), $this->getDriver()->getCurrentUrl()));
+        if ($this->getSession()->getCurrentUrl() !== $this->getUrl($urlParameters)) {
+            throw new UnexpectedPageException(sprintf('Expected to be on "%s" but found "%s" instead', $this->getUrl($urlParameters), $this->getSession()->getCurrentUrl()));
         }
     }
 
@@ -140,7 +137,7 @@ abstract class Page implements PageInterface
      */
     protected function getParameter($name)
     {
-        return isset($this->parameters[$name]) ? $this->parameters[$name] : null;
+        return $this->parameters[$name] ?? null;
     }
 
     /**

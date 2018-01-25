@@ -17,9 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Inventory\IndexPageInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ManagingInventoryContext implements Context
 {
     /**

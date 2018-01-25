@@ -22,9 +22,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
 {
     function let(CustomerAddressAdderInterface $addressAdder): void
@@ -64,6 +61,24 @@ final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
     ): void {
         $order->getCustomer()->willReturn($customer);
         $customer->getUser()->willReturn(null);
+
+        $addressAdder->add($customer, Argument::any())->shouldNotBeCalled();
+        $addressAdder->add($customer, Argument::any())->shouldNotBeCalled();
+
+        $this->saveAddresses($order);
+    }
+
+    function it_does_not_save_empty_addresses(
+        CustomerAddressAdderInterface $addressAdder,
+        OrderInterface $order,
+        CustomerInterface $customer,
+        ShopUserInterface $user
+    ): void {
+        $order->getCustomer()->willReturn($customer);
+        $customer->getUser()->willReturn($user);
+
+        $order->getShippingAddress()->willReturn(null);
+        $order->getBillingAddress()->willReturn(null);
 
         $addressAdder->add($customer, Argument::any())->shouldNotBeCalled();
         $addressAdder->add($customer, Argument::any())->shouldNotBeCalled();

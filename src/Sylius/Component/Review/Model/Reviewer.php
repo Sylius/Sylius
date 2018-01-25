@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Review\Model;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class Reviewer implements ReviewerInterface
 {
     /**

@@ -18,9 +18,6 @@ use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- */
 final class LocaleHelperSpec extends ObjectBehavior
 {
     function let(LocaleConverterInterface $localeConverter): void

@@ -17,10 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 final class ChannelPricingSpec extends ObjectBehavior
 {
     function it_implements_channel_pricing_interface(): void

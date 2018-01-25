@@ -20,9 +20,6 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\UnknownDri
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 
-/**
- * @author Arnaud Langlade <aRn0D.dev@gmail.com>
- */
 final class DriverProvider
 {
     /**

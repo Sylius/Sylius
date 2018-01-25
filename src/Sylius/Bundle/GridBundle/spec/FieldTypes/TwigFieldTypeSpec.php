@@ -18,9 +18,6 @@ use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class TwigFieldTypeSpec extends ObjectBehavior
 {
     function let(DataExtractorInterface $dataExtractor, \Twig_Environment $twig): void

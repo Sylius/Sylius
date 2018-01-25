@@ -19,9 +19,6 @@ use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class CustomerContext implements CustomerContextInterface
 {
     /**

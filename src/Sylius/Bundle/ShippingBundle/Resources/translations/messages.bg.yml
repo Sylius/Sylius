@@ -36,6 +36,9 @@ sylius:
             configuration: Конфигурация
             description: Описание
             enabled: Активирано
+            match_all_category_requirement: Всички единици трябва да съответстват на категорията за доставка
+            match_any_category_requirement: Поне една единица трябва да съответстват на категорията за доставка
+            match_none_category_requirement: Нито една единица не трябва да съответстват на категорията за доставка
             name: Име
             position: Позиция
             tax_category: Данъчна категория

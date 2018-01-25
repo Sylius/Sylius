@@ -18,9 +18,6 @@ use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProcessorInterface;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SymfonyConfigurationProcessorSpec extends ObjectBehavior
 {
     function let(ConfigurationInterface $configuration, Processor $processor): void

@@ -18,9 +18,6 @@ use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class IdBasedInvoiceNumberGeneratorSpec extends ObjectBehavior
 {
     function it_is_an_invoice_number_generator(): void

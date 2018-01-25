@@ -21,10 +21,6 @@ use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     /**
@@ -149,15 +145,24 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isProductInTheList($productName)
+    public function isProductInTheList(string $productName): bool
     {
         try {
+            $table = $this->getElement('table');
             $rows = $this->tableAccessor->getRowsWithFields(
-                $this->getElement('table'),
+                $table,
                 ['item' => $productName]
             );
 
-            return 1 === count($rows);
+            foreach ($rows as $row) {
+                $field = $this->tableAccessor->getFieldFromRow($table, $row, 'item');
+                $name = $field->find('css', '.sylius-product-name');
+                if (null !== $name && $name->getText() === $productName) {
+                    return true;
+                }
+            }
+
+            return false;
         } catch (\InvalidArgumentException $exception) {
             return false;
         }

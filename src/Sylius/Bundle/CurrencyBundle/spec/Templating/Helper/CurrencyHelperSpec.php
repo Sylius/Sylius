@@ -17,10 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CurrencyHelperSpec extends ObjectBehavior
 {
     function it_is_a_templating_helper(): void

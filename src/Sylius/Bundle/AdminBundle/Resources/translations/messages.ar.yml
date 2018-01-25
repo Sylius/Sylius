@@ -5,5 +5,36 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    association_types: أنواع الرابطة
+                    attributes: سمات
+                    header: القائمة
+                    inventory: المخزن
+                    options: الخيارات
+                    products: المنتجات
+                    taxons: تاكسونس
                 configuration:
+                    admin_users: مدير
+                    channels: قنوات
                     countries: البلدان
+                    currencies: العملات
+                    exchange_rates: سعر الصرف
+                    header: الضبط
+                    locales: محلي
+                    payment_methods: طرق الدفع
+                    shipping_categories: فئات الشحن
+                    shipping_methods: طرق الشحن
+                    tax_categories: أقسام الضريبة
+                    tax_rates: معدلات الضريبة
+                    zones: المناطق
+                marketing:
+                    header: التسويق
+                    product_reviews: مراجعة المنتجات
+                    promotions: العروض الترويجية
+                customers:
+                    customers: العملاء
+                    groups: المجموعات
+                    header: العملاء
+                sales:
+                    header: المبيعات
+                    orders: طلبات الشراء

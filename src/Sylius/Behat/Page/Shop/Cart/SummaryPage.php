@@ -17,10 +17,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Model\ProductInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class SummaryPage extends SymfonyPage implements SummaryPageInterface
 {
     /**
@@ -302,8 +298,8 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     }
 
     /**
-     * @param $attributeName
-     * @param $selector
+     * @param string $attributeName
+     * @param string|array $selector
      *
      * @return bool
      *

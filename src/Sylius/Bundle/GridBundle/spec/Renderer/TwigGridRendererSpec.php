@@ -27,9 +27,6 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class TwigGridRendererSpec extends ObjectBehavior
 {
     function let(

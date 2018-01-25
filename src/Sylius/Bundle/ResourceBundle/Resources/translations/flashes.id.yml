@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    resource:
+        create: '%resource% telah berhasil dibuat.'
+        update: '%resource% telah berhasil diupdate.'
+        delete: '%resource% telah berhasil dihapus.'
+        move: '%resource% telah berhasil dipindahkan.'
+        generate: '%resource% s telah berhasil dihasilkan.'
+        revert: '%resource% telah berhasil dikembalikan.'
+        restore_deleted: '%resource% telah berhasil dipulihkan.'
+        enable: '%resource% telah berhasil diaktifkan.'
+        disable: '%resource% telah berhasil dinonaktifkan.'
+        delete_error: 'Tidak dapat menghapus,%resource% sedang digunakan.'
+        race_condition_error: 'Tidak dapat diperbarui,%resource% sebelumnya telah dimodifikasi.'
+        something_went_wrong_error: 'Ada yang tidak beres, coba lagi.'

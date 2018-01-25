@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Locale\Context;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface LocaleContextInterface
 {
     /**

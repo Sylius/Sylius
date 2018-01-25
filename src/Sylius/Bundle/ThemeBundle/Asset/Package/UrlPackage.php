@@ -22,8 +22,6 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
  * @see BaseUrlPackage
- *
- * @author Stefan Doorn <stefan@efectos.nl>
  */
 class UrlPackage extends BaseUrlPackage
 {

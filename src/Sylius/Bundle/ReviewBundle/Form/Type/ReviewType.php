@@ -21,11 +21,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 
-/**
- * @author Daniel Richter <nexyz9@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 abstract class ReviewType extends AbstractResourceType
 {
     /**

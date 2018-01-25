@@ -23,9 +23,6 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Yaml\Yaml;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ResourceLoader implements LoaderInterface
 {
     /**
@@ -63,7 +60,7 @@ final class ResourceLoader implements LoaderInterface
             throw new \InvalidArgumentException('You can configure only one of "except" & "only" options.');
         }
 
-        $routesToGenerate = ['show', 'index', 'create', 'update', 'delete'];
+        $routesToGenerate = ['show', 'index', 'create', 'update', 'delete', 'bulkDelete'];
 
         if (!empty($configuration['only'])) {
             $routesToGenerate = $configuration['only'];
@@ -99,6 +96,11 @@ final class ResourceLoader implements LoaderInterface
         if (in_array('show', $routesToGenerate, true)) {
             $showRoute = $this->createRoute($metadata, $configuration, $rootPath . $identifier, 'show', ['GET'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'show'), $showRoute);
+        }
+
+        if (!$isApi && in_array('bulkDelete', $routesToGenerate, true)) {
+            $bulkDeleteRoute = $this->createRoute($metadata, $configuration, $rootPath . 'bulk-delete', 'bulkDelete', ['DELETE'], $isApi);
+            $routes->add($this->getRouteName($metadata, $configuration, 'bulk_delete'), $bulkDeleteRoute);
         }
 
         if (in_array('delete', $routesToGenerate, true)) {
@@ -194,9 +196,18 @@ final class ResourceLoader implements LoaderInterface
         if (isset($configuration['vars']['all'])) {
             $defaults['_sylius']['vars'] = $configuration['vars']['all'];
         }
+
         if (isset($configuration['vars'][$actionName])) {
             $vars = $configuration['vars']['all'] ?? [];
             $defaults['_sylius']['vars'] = array_merge($vars, $configuration['vars'][$actionName]);
+        }
+
+        if ($actionName === 'bulkDelete') {
+            $defaults['_sylius']['paginate'] = false;
+            $defaults['_sylius']['repository'] = [
+                'method' => 'findById',
+                'arguments' => ['$ids'],
+            ];
         }
 
         return $this->routeFactory->createRoute($path, $defaults, [], [], '', [], $methods);

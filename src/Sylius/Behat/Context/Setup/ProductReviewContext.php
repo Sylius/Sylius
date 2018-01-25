@@ -23,9 +23,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 final class ProductReviewContext implements Context
 {
     /**

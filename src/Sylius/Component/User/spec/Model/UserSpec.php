@@ -17,10 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 
-/**
- * @author Alexandre Bacco <alexandre.bacco@gmail.com>
- * @author Bartosz Siejka <bartosz.siejka@lakion.com>
- */
 final class UserSpec extends ObjectBehavior
 {
     function it_implements_user_interface(): void

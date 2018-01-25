@@ -18,9 +18,6 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\AdminApiBundle\Fixture\ApiClientFixture;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class OAuthCredentialsFixtureTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;

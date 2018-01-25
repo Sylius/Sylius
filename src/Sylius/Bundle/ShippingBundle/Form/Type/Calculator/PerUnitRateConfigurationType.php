@@ -20,9 +20,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class PerUnitRateConfigurationType extends AbstractType
 {
     /**

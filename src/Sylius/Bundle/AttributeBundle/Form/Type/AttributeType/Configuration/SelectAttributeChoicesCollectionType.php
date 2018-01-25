@@ -14,17 +14,28 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
 use Ramsey\Uuid\Uuid;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class SelectAttributeChoicesCollectionType extends AbstractType
 {
+    /**
+     * @var string
+     */
+    private $defaultLocaleCode;
+
+    /**
+     * @param TranslationLocaleProviderInterface $localeProvider
+     */
+    public function __construct(TranslationLocaleProviderInterface $localeProvider)
+    {
+        $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -35,16 +46,20 @@ class SelectAttributeChoicesCollectionType extends AbstractType
             $form = $event->getForm();
 
             if (null !== $data) {
-                $fixedArray = [];
-                foreach ($data as $key => $value) {
+                $fixedData = [];
+                foreach ($data as $key => $values) {
                     if (!is_int($key)) {
-                        $fixedArray[$key] = $value;
+                        $fixedData[$key] = $this->resolveValues($values);
 
                         continue;
                     }
 
+                    if (!array_key_exists($this->defaultLocaleCode, $values)) {
+                        continue;
+                    }
+
                     $newKey = $this->getUniqueKey();
-                    $fixedArray[$newKey] = $value;
+                    $fixedData[$newKey] = $this->resolveValues($values);
 
                     if ($form->offsetExists($key)) {
                         $form->offsetUnset($key);
@@ -52,7 +67,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
                     }
                 }
 
-                $event->setData($fixedArray);
+                $event->setData($fixedData);
             }
         });
     }
@@ -79,5 +94,22 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     private function getUniqueKey(): string
     {
         return Uuid::uuid1()->toString();
+    }
+
+    /**
+     * @param array $values
+     *
+     * @return array
+     */
+    private function resolveValues(array $values): array
+    {
+        $fixedValues = [];
+        foreach ($values as $locale => $value) {
+            if ('' !== $value && null !== $value) {
+                $fixedValues[$locale] = $value;
+            }
+        }
+
+        return $fixedValues;
     }
 }

@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Payment\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class PaymentMethodSpec extends ObjectBehavior
 {
     function let(): void

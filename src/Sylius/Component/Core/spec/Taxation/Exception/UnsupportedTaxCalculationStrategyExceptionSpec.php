@@ -15,9 +15,6 @@ namespace spec\Sylius\Component\Core\Taxation\Exception;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class UnsupportedTaxCalculationStrategyExceptionSpec extends ObjectBehavior
 {
     function it_extends_an_exception(): void

@@ -17,9 +17,6 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Jeroen Thora <jeroen.thora@intracto.com>
- */
 final class CountryApiTest extends JsonApiTestCase
 {
     /**

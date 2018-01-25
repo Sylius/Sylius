@@ -20,9 +20,6 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class HasTaxonRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'has_taxon';
@@ -42,7 +39,7 @@ final class HasTaxonRuleChecker implements RuleCheckerInterface
             throw new UnsupportedTypeException($subject, OrderInterface::class);
         }
 
-        /** @var $item OrderItemInterface */
+        /** @var OrderItemInterface $item */
         foreach ($subject->getItems() as $item) {
             if ($this->hasProductValidTaxon($item->getProduct(), $configuration)) {
                 return true;

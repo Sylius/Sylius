@@ -19,9 +19,6 @@ use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ResourcesCollectionProvider implements ResourcesCollectionProviderInterface
 {
     /**

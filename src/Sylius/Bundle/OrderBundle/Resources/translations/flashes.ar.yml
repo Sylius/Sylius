@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'تم إضافة العنصر إلى عربة التسوق'
+        cannot_modify: 'تم تأكيد الطلب على عربة التسوق.'
+        remove_item: 'وقد تم إزالة العنصر من سلة التسوق'
+        save: 'تم بنجاح تحديث العربة'

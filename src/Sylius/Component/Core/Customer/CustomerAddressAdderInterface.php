@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Customer;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface CustomerAddressAdderInterface
 {
     /**

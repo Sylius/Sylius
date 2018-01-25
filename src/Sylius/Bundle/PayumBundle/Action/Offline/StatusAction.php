@@ -19,9 +19,6 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\GetStatusInterface;
 use Payum\Offline\Constants;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class StatusAction implements ActionInterface
 {
     /**
@@ -29,7 +26,7 @@ final class StatusAction implements ActionInterface
      */
     public function execute($request): void
     {
-        /** @var $request GetStatusInterface */
+        /** @var GetStatusInterface $request */
         RequestNotSupportedException::assertSupports($this, $request);
 
         $model = ArrayObject::ensureArrayObject($request->getModel());

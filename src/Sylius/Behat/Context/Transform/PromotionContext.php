@@ -18,9 +18,6 @@ use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class PromotionContext implements Context
 {
     /**

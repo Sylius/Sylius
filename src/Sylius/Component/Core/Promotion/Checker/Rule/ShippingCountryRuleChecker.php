@@ -20,9 +20,6 @@ use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class ShippingCountryRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'shipping_country';

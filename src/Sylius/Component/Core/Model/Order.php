@@ -27,10 +27,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterfac
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class Order extends BaseOrder implements OrderInterface
 {
     /**
@@ -232,7 +228,7 @@ class Order extends BaseOrder implements OrderInterface
     {
         $units = new ArrayCollection();
 
-        /** @var $item OrderItem */
+        /** @var OrderItem $item */
         foreach ($this->getItems() as $item) {
             foreach ($item->getUnits() as $unit) {
                 $units->add($unit);
@@ -273,7 +269,7 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function addPayment(BasePaymentInterface $payment): void
     {
-        /** @var $payment PaymentInterface */
+        /** @var PaymentInterface $payment */
         if (!$this->hasPayment($payment)) {
             $this->payments->add($payment);
             $payment->setOrder($this);
@@ -285,7 +281,7 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function removePayment(BasePaymentInterface $payment): void
     {
-        /** @var $payment PaymentInterface */
+        /** @var PaymentInterface $payment */
         if ($this->hasPayment($payment)) {
             $this->payments->removeElement($payment);
             $payment->setOrder(null);

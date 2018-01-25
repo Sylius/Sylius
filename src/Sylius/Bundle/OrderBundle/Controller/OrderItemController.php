@@ -32,9 +32,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class OrderItemController extends ResourceController
 {
     /**

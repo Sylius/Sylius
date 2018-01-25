@@ -21,9 +21,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
 {
     public const TYPE = 'unit_percentage_discount';

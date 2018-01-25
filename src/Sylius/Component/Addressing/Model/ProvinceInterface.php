@@ -16,9 +16,6 @@ namespace Sylius\Component\Addressing\Model;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ProvinceInterface extends ResourceInterface, CodeAwareInterface
 {
     /**

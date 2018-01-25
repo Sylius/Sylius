@@ -34,6 +34,7 @@ install_package() {
     fi
 
     composer_install "$1" || exit_code=$?
+    composer show --ansi --no-interaction
 
     if ${cache_support} && has_sylius_cache && ! is_package_cache_fresh "${package_path}" && [[ ${exit_code} -eq 0 ]]; then
         print_info "Storing composer.lock in cache (cache key: ${cache_key})"

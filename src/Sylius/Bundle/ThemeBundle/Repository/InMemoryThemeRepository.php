@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ThemeBundle\Repository;
 use Sylius\Bundle\ThemeBundle\Loader\ThemeLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class InMemoryThemeRepository implements ThemeRepositoryInterface
 {
     /**

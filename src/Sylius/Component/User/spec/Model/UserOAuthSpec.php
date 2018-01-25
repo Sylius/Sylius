@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\User\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\UserOAuthInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class UserOAuthSpec extends ObjectBehavior
 {
     function it_implements_user_oauth_interface(): void

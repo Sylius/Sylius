@@ -19,9 +19,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class CustomerShowMenuBuilderEventSpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory, ItemInterface $menu, CustomerInterface $customer): void

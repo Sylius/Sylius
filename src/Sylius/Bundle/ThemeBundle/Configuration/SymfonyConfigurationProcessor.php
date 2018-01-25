@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ThemeBundle\Configuration;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SymfonyConfigurationProcessor implements ConfigurationProcessorInterface
 {
     /**

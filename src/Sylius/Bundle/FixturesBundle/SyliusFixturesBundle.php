@@ -18,9 +18,6 @@ use Sylius\Bundle\FixturesBundle\DependencyInjection\Compiler\ListenerRegistryPa
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SyliusFixturesBundle extends Bundle
 {
     /**

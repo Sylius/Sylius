@@ -59,6 +59,7 @@ sylius:
             channels: Kanali
             enabled: Omogočeno
         product_filter:
+            name: Ime
             code: Koda
         product_variant:
             tax_category: Kategorija davka
@@ -79,10 +80,18 @@ sylius:
             zone: Cona
         taxon:
             code: Koda
+            file: Izberite sliko
             images: Slike
+        taxonomy:
+            file: Izberite sliko
         user:
+            billing_address: Naslov za račun
+            different_billing_address: Uporabimo drug naslov za račun?
+            enabled: Omogočeno
+            first_name: Ime
             groups: Skupine
             roles: Vloge
+            last_name: Priimek
             password: Geslo
             shipping_address: Naslov za dostavo
         user_filter:
@@ -163,5 +172,5 @@ sylius:
             timezone: časovni pas
             timezone_deprecated:
                 header: Opuščeni časovni pas
-                help: 'Časovni pas %timezone% je opuščen. Popravite vašo datoteko php.ini (seznam opuščenih časovni pasov http://php.net/manual/en/timezones.others.php).'
+                help: Časovni pas %timezone% je opuščen. Popravite vašo datoteko php.ini (seznam opuščenih časovni pasov http://php.net/manual/en/timezones.others.php).
             version: Različica PHP

@@ -7,9 +7,6 @@
  * file that was distributed with this source code.
  */
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- */
 !function($){
 
     "use strict";
@@ -28,7 +25,7 @@
 
         this.$element.on(
             'click',
-            '[data-form-collection="add"]:first',
+            '[data-form-collection="add"]:last',
             $.proxy(this.addItem, this)
         );
 

@@ -21,9 +21,6 @@ use Sylius\Component\Grid\View\GridView;
 use Symfony\Component\Templating\Helper\Helper;
 use Symfony\Component\Templating\Helper\HelperInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class GridHelperSpec extends ObjectBehavior
 {
     function let(GridRendererInterface $gridRenderer): void

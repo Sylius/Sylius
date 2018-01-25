@@ -21,9 +21,6 @@ use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
 {
     /**

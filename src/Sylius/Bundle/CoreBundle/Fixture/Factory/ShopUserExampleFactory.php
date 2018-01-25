@@ -22,9 +22,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**

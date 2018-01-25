@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Mailer\Renderer;
 
-/**
- * @author Jérémy Leherpeur <jeremy@leherpeur.net>
- */
 class RenderedEmail
 {
     /**

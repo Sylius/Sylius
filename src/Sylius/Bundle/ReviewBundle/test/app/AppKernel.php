@@ -23,9 +23,6 @@ use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
- */
 class AppKernel extends Kernel
 {
     /**
@@ -42,7 +39,6 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Sylius\Bundle\CustomerBundle\SyliusCustomerBundle(),
             new Sylius\Bundle\UserBundle\SyliusUserBundle(),
             new Sylius\Bundle\MailerBundle\SyliusMailerBundle(),
             new Sylius\Bundle\ReviewBundle\SyliusReviewBundle(),

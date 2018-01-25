@@ -19,9 +19,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ActivePromotionsProviderSpec extends ObjectBehavior
 {
     function let(PromotionRepositoryInterface $promotionRepository): void

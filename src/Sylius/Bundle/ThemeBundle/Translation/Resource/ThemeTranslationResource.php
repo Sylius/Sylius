@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ThemeBundle\Translation\Resource;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeTranslationResource implements TranslationResourceInterface
 {
     /**

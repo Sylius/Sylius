@@ -19,9 +19,6 @@ use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Filtering\FiltersCriteriaResolverInterface;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class FiltersCriteriaResolverSpec extends ObjectBehavior
 {
     function it_implements_filters_criteria_resolver_interface(): void

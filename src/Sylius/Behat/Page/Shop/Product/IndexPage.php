@@ -15,10 +15,6 @@ namespace Sylius\Behat\Page\Shop\Product;
 
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
     /**

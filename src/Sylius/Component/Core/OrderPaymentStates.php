@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderPaymentStates
 {
     public const STATE_CART = 'cart';

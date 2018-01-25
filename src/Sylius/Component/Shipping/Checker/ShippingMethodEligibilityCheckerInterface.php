@@ -16,9 +16,6 @@ namespace Sylius\Component\Shipping\Checker;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface ShippingMethodEligibilityCheckerInterface
 {
     /**

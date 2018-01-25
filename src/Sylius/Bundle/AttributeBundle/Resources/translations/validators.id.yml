@@ -11,6 +11,11 @@ sylius:
             not_blank: Silahkan masukkan kode atribut.
             regex: Atribut Kode hanya boleh terdiri dari huruf, angka, tanda strip, dan garis bawah.
             unique: Kode ini telah digunakan.
+        configuration:
+            max_entries: Konfigurasi maks entri nilai harus menjadi lebih besar atau sama dengan min entri nilai.
+            max_length: Panjang max konfigurasi harus lebih besar atau sama dengan panjang min.
+            min_entries: Konfigurasi nilai min entries harus lebih rendah atau sama dengan jumlah pilihan yang ditambahkan.
+            multiple: Beberapa konfigurasi harus benar jika nilai min atau max entries ditentukan.
         presentation:
             not_blank: Masukkan atribut presentasi.
             min_length: Presentasi atribut harus setidaknya 1 karakter . |Atribut presentasi setidaknya harus {{ limit }} karakter.

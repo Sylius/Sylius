@@ -23,9 +23,6 @@ use Sylius\Component\Promotion\Model\PromotionCouponAwarePromotionSubjectInterfa
 use Sylius\Component\Promotion\Model\PromotionCouponInterface as BaseCouponInterface;
 use Sylius\Component\User\Model\UserInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface OrderInterface extends
     BaseOrderInterface,
     PaymentsSubjectInterface,
@@ -141,7 +138,7 @@ interface OrderInterface extends
     public function getLocaleCode(): ?string;
 
     /**
-     * @param string|null
+     * @param string|null $localeCode
      */
     public function setLocaleCode(?string $localeCode): void;
 

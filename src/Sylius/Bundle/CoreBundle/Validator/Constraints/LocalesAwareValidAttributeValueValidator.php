@@ -21,9 +21,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class LocalesAwareValidAttributeValueValidator extends ConstraintValidator
 {
     /**

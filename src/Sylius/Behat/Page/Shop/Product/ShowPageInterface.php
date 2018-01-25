@@ -18,10 +18,6 @@ use Sylius\Behat\Page\PageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface ShowPageInterface extends PageInterface
 {
     /**

@@ -18,10 +18,6 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ReviewBundle\DependencyInjection\Compiler\RegisterReviewFactoryPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class SyliusReviewBundle extends AbstractResourceBundle
 {
     /**

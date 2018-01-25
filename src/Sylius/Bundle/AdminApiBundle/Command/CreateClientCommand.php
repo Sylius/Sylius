@@ -20,9 +20,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmali.com>
- */
 final class CreateClientCommand extends ContainerAwareCommand
 {
     /**

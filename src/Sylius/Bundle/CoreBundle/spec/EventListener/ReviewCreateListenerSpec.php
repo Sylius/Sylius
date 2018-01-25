@@ -19,9 +19,6 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ReviewCreateListenerSpec extends ObjectBehavior
 {
     function let(CustomerContextInterface $customerContext): void

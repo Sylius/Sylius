@@ -3,7 +3,43 @@
 
 sylius:
     form:
+        rule:
+            unit_count_configuration:
+                count: عد
+                equal: يساوي
+            type: نوع القاعدة
+        shipment:
+            state: الحالة
+            states:
+                checkout: إتمام الشراء
+                pending: مُعلقّة
+                ready: جاهز
+                shipped: شحن
+                returned: معاد
+                cancelled: ملغي
+            tracking_code: رمز التحقق
+        shipping_calculator:
+            flat_rate_configuration:
+                label: قيمة ثابتة للشحن
+                amount: القيمة
+            per_unit_rate_configuration:
+                label: قيمة ثابتة للوحدة
+                amount: القيمة
         shipping_category:
+            description: الوصف
             name: الاسم
         shipping_method:
+            calculator: الحاسبة
+            category: القسم
+            category_requirement: متطلبات القسم
+            channels: قنوات
+            configuration: الضبط
+            description: الوصف
+            enabled: تفعيل
+            match_all_category_requirement: جميع الوحدات يجب أن تطابق فئة الأسلوب
+            match_any_category_requirement: جميع الوحدات يجب أن تطابق فئة الأسلوب
+            match_none_category_requirement: جميع الوحدات يجب أن تطابق فئة الأسلوب
             name: الاسم
+            position: المهنة
+            tax_category: أقسام الضريبة
+            translations: التّرجمة

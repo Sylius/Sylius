@@ -16,9 +16,6 @@ namespace Sylius\Component\Attribute\AttributeType;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class DatetimeAttributeType implements AttributeTypeInterface
 {
     public const TYPE = 'datetime';

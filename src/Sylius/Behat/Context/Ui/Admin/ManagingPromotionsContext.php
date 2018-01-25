@@ -24,9 +24,6 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ManagingPromotionsContext implements Context
 {
     /**
@@ -128,12 +125,13 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Then I should see the promotion :promotionName in the list
      * @Then the :promotionName promotion should appear in the registry
      * @Then the :promotionName promotion should exist in the registry
      * @Then this promotion should still be named :promotionName
      * @Then promotion :promotionName should still exist in the registry
      */
-    public function thePromotionShouldAppearInTheRegistry($promotionName)
+    public function thePromotionShouldAppearInTheRegistry(string $promotionName): void
     {
         $this->indexPage->open();
 
@@ -263,15 +261,28 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then /^there should be (\d+) promotion(?:|s)$/
+     * @When I check (also) the :promotionName promotion
      */
-    public function thereShouldBePromotion($number)
+    public function iCheckThePromotion(string $promotionName): void
     {
-        Assert::same(
-            (int) $number,
-            $this->indexPage->countItems(),
-            'I should see %s promotions but i see only %2$s'
-        );
+        $this->indexPage->checkResourceOnPage(['name' => $promotionName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @Then I should see a single promotion in the list
+     * @Then there should be :amount promotions
+     */
+    public function thereShouldBePromotion(int $amount = 1): void
+    {
+        Assert::same($amount, $this->indexPage->countItems());
     }
 
     /**

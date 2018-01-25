@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Promotion\Generator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class PromotionCouponGeneratorInstructionSpec extends ObjectBehavior
 {
     function it_implements_an_promotion_coupon_genarator_instruction_interface(): void

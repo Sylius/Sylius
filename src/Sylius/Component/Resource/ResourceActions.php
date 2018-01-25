@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Resource;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ResourceActions
 {
     public const SHOW = 'show';
@@ -23,6 +20,7 @@ final class ResourceActions
     public const CREATE = 'create';
     public const UPDATE = 'update';
     public const DELETE = 'delete';
+    public const BULK_DELETE = 'bulk_delete';
 
     private function __construct()
     {

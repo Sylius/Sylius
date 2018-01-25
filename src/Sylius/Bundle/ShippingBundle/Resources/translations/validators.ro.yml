@@ -7,6 +7,10 @@ sylius:
             max_length: 'Numele categoriei nu poate depăși {{ limit }} de caractere.'
             min_length: 'Numele categoriei trebuie să conţină cel puţin {{ limit }} caractere.'
             not_blank: 'Vă rugăm să completați numele categoriei de livrare.'
+        code:
+            not_blank: 'Introdu un cod de categorie de livrare.'
+            regex: 'Codul categoriei de livrare poate să conțină doar litere, numere, - și _.'
+            unique: 'Codul categoriei de livrare există deja.'
     shipping_method:
         calculator:
             max_length: Numele calculatorului de livrare nu poate depăși {{ limit }} caractere.
@@ -16,6 +20,12 @@ sylius:
             max_length: 'Numele metodei de livrare nu poate depăși {{ limit }} caractere.'
             min_length: 'Numele metodei de livrare trebuie să conţină cel puţin {{ limit }} caractere.'
             not_blank: 'Vă rugăm să completați numele metodei de livrare.'
+        code:
+            not_blank: 'Introdu un cod de metodă de livrare.'
+            regex: 'Codul metodei de livrare poate să conțină doar litere, numere, - și _.'
+            unique: 'Codul metodei de livrare trebuie să fie unic.'
+        zone:
+            not_blank: 'Vă rugăm să alegeți zona metodei de livrare.'
     shipment:
         shipping_method:
             not_blank: 'Vă rugăm să alegeți metoda de livrare.'

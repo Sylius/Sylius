@@ -20,9 +20,6 @@ use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class AddressContext implements Context
 {
     /**

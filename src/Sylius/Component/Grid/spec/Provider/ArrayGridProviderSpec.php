@@ -19,9 +19,6 @@ use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Exception\UndefinedGridException;
 use Sylius\Component\Grid\Provider\GridProviderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ArrayGridProviderSpec extends ObjectBehavior
 {
     function let(ArrayToDefinitionConverterInterface $converter, Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid, Grid $fourthGrid): void

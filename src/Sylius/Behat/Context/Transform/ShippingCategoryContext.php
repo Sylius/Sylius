@@ -17,9 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class ShippingCategoryContext implements Context
 {
     /**

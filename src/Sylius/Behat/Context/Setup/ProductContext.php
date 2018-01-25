@@ -41,11 +41,6 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 final class ProductContext implements Context
 {
     /**
@@ -788,6 +783,16 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given the product :product was renamed to :productName
+     */
+    public function theProductWasRenamedTo(ProductInterface $product, string $productName): void
+    {
+        $product->setName($productName);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $price
      *
      * @return int
@@ -879,12 +884,12 @@ final class ProductContext implements Context
      */
     private function getParameter($name)
     {
-        return isset($this->minkParameters[$name]) ? $this->minkParameters[$name] : null;
+        return $this->minkParameters[$name] ?? null;
     }
 
     /**
      * @param ProductInterface $product
-     * @param $productVariantName
+     * @param string $productVariantName
      * @param int $price
      * @param string $code
      * @param ChannelInterface $channel

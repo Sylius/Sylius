@@ -201,7 +201,7 @@ sylius:
             timezone: timezone
             timezone_deprecated:
                 header: Zona horaria obsoleta
-                help: 'La zona horaria %timezone% está obsoleta. Arregla tu fichero php.ini (lista de zonas horarias obsoletas http://php.net/manual/en/timezones.others.php).'
+                help: La zona horaria %timezone% está obsoleta. Arregla tu fichero php.ini (lista de zonas horarias obsoletas http://php.net/manual/en/timezones.others.php).
             version: Versión de PHP
             version_recommended: Versión de PHP recomendada
     payum_gateway:

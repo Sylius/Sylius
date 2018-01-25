@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-/**
- * @author Hussein Jafferjee <hussein@jafferjee.ca>
- */
 final class ShipmentEmailManager implements ShipmentEmailManagerInterface
 {
     /**

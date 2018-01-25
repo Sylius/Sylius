@@ -15,10 +15,6 @@ namespace Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface PromotionSubjectInterface
 {
     /**

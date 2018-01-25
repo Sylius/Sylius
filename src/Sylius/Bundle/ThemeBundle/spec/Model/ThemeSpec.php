@@ -19,9 +19,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeSpec extends ObjectBehavior
 {
     function let(): void

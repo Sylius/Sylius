@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Filter;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductFilter implements FilterInterface
 {
     /**

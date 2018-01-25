@@ -54,7 +54,7 @@ abstract class RequirementCollection implements \IteratorAggregate
      *
      * @return RequirementCollection
      */
-    public function add(Requirement $requirement): RequirementCollection
+    public function add(Requirement $requirement): self
     {
         $this->requirements[] = $requirement;
 

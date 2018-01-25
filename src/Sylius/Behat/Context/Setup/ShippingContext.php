@@ -30,9 +30,6 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ShippingContext implements Context
 {
     /**
@@ -201,8 +198,9 @@ final class ShippingContext implements Context
 
     /**
      * @Given the store allows shipping with :firstName and :secondName
+     * @Given the store allows shipping with :firstName, :secondName and :thirdName
      */
-    public function theStoreAllowsShippingWithAnd(...$names)
+    public function theStoreAllowsShippingWithAnd(string ...$names): void
     {
         foreach ($names as $name) {
             $this->theStoreAllowsShippingMethodWithName($name);

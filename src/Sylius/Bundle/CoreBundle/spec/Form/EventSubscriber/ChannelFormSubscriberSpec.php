@@ -18,9 +18,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ChannelFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_an_event_subscriber_instance(): void

@@ -16,16 +16,13 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ViewHandlerInterface
 {
     /**
      * @param RequestConfiguration $requestConfiguration
      * @param View $view
      *
-     * @return mixed
+     * @return Response
      */
     public function handle(RequestConfiguration $requestConfiguration, View $view): Response;
 }

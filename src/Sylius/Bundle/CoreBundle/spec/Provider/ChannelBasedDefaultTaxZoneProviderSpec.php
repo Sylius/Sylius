@@ -19,9 +19,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ChannelBasedDefaultTaxZoneProviderSpec extends ObjectBehavior
 {
     function it_implements_default_tax_zone_provider_interface(): void

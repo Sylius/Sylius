@@ -20,9 +20,6 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolver;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CurrentPageResolverSpec extends ObjectBehavior
 {
     function let(Session $session, UrlMatcherInterface $urlMatcher)

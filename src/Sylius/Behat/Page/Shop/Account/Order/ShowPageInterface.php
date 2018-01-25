@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Shop\Account\Order;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ShowPageInterface extends SymfonyPageInterface
 {
     /**
@@ -68,11 +65,11 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function getPaymentPrice();
 
     /**
-     * @param string $name
+     * @param string $productName
      *
      * @return bool
      */
-    public function isProductInTheList($name);
+    public function isProductInTheList(string $productName): bool;
 
     /**
      * @return string

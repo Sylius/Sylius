@@ -201,7 +201,7 @@ sylius:
             timezone: ζώνη ώρας
             timezone_deprecated:
                 header: Μη χρησιμοποιούμενη ζώνη ώρας
-                help: 'Η Ζώνη ώρας %timezone% δεν χρησιμοποιείται. Διορθώσετε το αρχείο php.ini σας (λίστα με μη χρησιμοποιούμενες ζώνες ώρας εδώ http://php.net/manual/en/timezones.others.php).'
+                help: Η Ζώνη ώρας %timezone% δεν χρησιμοποιείται. Διορθώσετε το αρχείο php.ini σας (λίστα με μη χρησιμοποιούμενες ζώνες ώρας εδώ http://php.net/manual/en/timezones.others.php).
             version: Έκδοση PHP
             version_recommended: Προτεινόμενη έκδοση PHP
     payum_gateway:

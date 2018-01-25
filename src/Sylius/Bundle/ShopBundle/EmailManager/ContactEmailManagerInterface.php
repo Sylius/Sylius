@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EmailManager;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ContactEmailManagerInterface
 {
     /**

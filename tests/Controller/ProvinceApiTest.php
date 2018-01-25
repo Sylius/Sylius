@@ -16,9 +16,6 @@ namespace Sylius\Tests\Controller;
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Jeroen Thora <jeroen.thora@intracto.com>
- */
 final class ProvinceApiTest extends JsonApiTestCase
 {
     /**

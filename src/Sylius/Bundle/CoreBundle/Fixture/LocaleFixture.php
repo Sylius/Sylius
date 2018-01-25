@@ -19,9 +19,6 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class LocaleFixture extends AbstractFixture
 {
     /**

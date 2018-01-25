@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ParametersParserInterface
 {
     /**

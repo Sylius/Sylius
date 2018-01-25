@@ -24,10 +24,6 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Manuel Gonzalez <mgonyan@gmail.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class UserMailerListenerSpec extends ObjectBehavior
 {
     function let(SenderInterface $emailSender, ChannelContextInterface $channelContext): void

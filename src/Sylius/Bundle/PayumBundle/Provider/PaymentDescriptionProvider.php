@@ -17,9 +17,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-/**
- * @author Stefan Doorn <stefan@efectos.nl>
- */
 final class PaymentDescriptionProvider implements PaymentDescriptionProviderInterface
 {
     /**

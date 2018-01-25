@@ -22,9 +22,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
 {
     /**

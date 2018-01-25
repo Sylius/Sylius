@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\TaxRate;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     /**

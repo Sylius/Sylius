@@ -4,6 +4,7 @@ Contributing Code
 .. toctree::
     :hidden:
 
+    bc
     bugs
     patches
     security

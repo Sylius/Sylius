@@ -19,11 +19,6 @@ use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 
-/**
- * @author Daniel Richter <nexyz9@gmail.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Jérémy Leherpeur <jeremy@leherpeur.net>
- */
 class EmailTwigAdapter extends AbstractAdapter
 {
     /**

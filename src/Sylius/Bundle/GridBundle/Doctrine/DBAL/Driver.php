@@ -18,9 +18,6 @@ use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class Driver implements DriverInterface
 {
     public const NAME = 'doctrine/dbal';

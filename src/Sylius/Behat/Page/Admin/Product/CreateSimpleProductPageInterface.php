@@ -18,10 +18,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 {
     /**
@@ -78,8 +74,8 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
     public function addAttribute($attributeName, $value, $localeCode);
 
     /**
-     * @param $attributeName
-     * @param $localeCode
+     * @param string $attributeName
+     * @param string $localeCode
      *
      * @return string
      */

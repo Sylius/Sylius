@@ -18,9 +18,6 @@ use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CheckoutOrderDetailsContext implements Context
 {
     /**

@@ -24,9 +24,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class RedirectHandlerSpec extends ObjectBehavior
 {
     function let(RouterInterface $router): void

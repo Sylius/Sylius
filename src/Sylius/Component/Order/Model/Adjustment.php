@@ -15,9 +15,6 @@ namespace Sylius\Component\Order\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Adjustment implements AdjustmentInterface
 {
     use TimestampableTrait;

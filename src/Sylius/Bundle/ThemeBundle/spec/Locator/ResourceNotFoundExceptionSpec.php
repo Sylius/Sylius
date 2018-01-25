@@ -16,9 +16,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Locator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ResourceNotFoundExceptionSpec extends ObjectBehavior
 {
     function let(ThemeInterface $theme): void

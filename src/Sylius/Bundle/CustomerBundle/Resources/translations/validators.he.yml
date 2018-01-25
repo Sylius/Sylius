@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        first_name:
+            max: ארוך שם פרטי עד {{ limit }} תווים.
+            min: שם פרטי חייב להיות באורך לפחות {{ limit }} תווים.
+            not_blank: אנא הזינו שם הפרטי.
+        last_name:
+            max: אורך שם משפחה עד {{ limit }} תווים.
+        email:
+            invalid: כתובת דואר האלקטרוני אינה תקנית.
+            unique: כתובת דואר אלרקטרוני כבר נמצא בשימוש.
+            registered: כתובת דוא"ל כבר רשומה, אנא התחבר או השתמשו בשיחזור סיסמה.

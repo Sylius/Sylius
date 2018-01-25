@@ -3,23 +3,29 @@
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.lib.sh"
 
 prepare_for_behat_with_js() {
-    # Prepare Behat configuration
-    run_command "cp \"$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../assets/behat-javascript.yml\" ./behat.yml"
-
     # Configure display
     run_command "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1680x1050x16"
     run_command "export DISPLAY=:99"
 
     # Download and configure ChromeDriver
-    if [ ! -f $SYLIUS_CACHE_DIR/chromedriver ]; then
-        # Using ChromeDriver 2.12 which supports Chrome 36-40, we're using Chromium 37
-        run_command "curl http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip > chromedriver.zip"
+    if [ ! -f $SYLIUS_CACHE_DIR/chromedriver ] || [ "$($SYLIUS_CACHE_DIR/chromedriver --version | grep -c 2.34)" = "0" ]; then
+        run_command "curl http://chromedriver.storage.googleapis.com/2.34/chromedriver_linux64.zip > chromedriver.zip"
         run_command "unzip chromedriver.zip"
+        run_command "chmod +x chromedriver"
         run_command "mv chromedriver $SYLIUS_CACHE_DIR"
     fi
 
-    # Run Selenium with ChromeDriver
-    run_command "bin/selenium-server-standalone -Dwebdriver.chrome.driver=$SYLIUS_CACHE_DIR/chromedriver > /dev/null 2>&1 &"
+    # Run ChromeDriver
+    run_command "$SYLIUS_CACHE_DIR/chromedriver > /dev/null 2>&1 &"
+
+    # Download and configure Selenium
+    if [ ! -f $SYLIUS_CACHE_DIR/selenium.jar ] || [ "$(java -jar $SYLIUS_CACHE_DIR/selenium.jar --version | grep -c 3.4.0)" = "0" ]; then
+        run_command "curl http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar > selenium.jar"
+        run_command "mv selenium.jar $SYLIUS_CACHE_DIR"
+    fi
+
+    # Run Selenium
+    run_command "java -Dwebdriver.chrome.driver=$SYLIUS_CACHE_DIR/chromedriver -jar $SYLIUS_CACHE_DIR/selenium.jar > /dev/null 2>&1 &"
 
     # Run webserver
     run_command "bin/console server:run 127.0.0.1:8080 --env=test_cached --router=app/config/router_test_cached.php --no-debug --quiet > /dev/null 2>&1 &"

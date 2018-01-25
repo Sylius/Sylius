@@ -15,8 +15,6 @@ namespace Sylius\Component\Resource\Factory;
 
 /**
  * Creates resources based on theirs FQCN.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class Factory implements FactoryInterface
 {

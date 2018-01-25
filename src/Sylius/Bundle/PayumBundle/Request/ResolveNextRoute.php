@@ -15,9 +15,6 @@ namespace Sylius\Bundle\PayumBundle\Request;
 
 use Payum\Core\Request\Generic;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class ResolveNextRoute extends Generic implements ResolveNextRouteInterface
 {
     /**

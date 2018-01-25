@@ -71,3 +71,6 @@ sylius_grid:
                             graph: sylius_product_review
                     delete:
                         type: delete
+                bulk:
+                    delete:
+                        type: delete

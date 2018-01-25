@@ -22,9 +22,6 @@ use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInte
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
 {
     function let(GenerationPolicyInterface $generationPolicy, ExecutionContextInterface $context): void

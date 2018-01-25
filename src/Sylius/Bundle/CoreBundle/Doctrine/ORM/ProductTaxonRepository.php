@@ -17,9 +17,6 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Repository\ProductTaxonRepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class ProductTaxonRepository extends EntityRepository implements ProductTaxonRepositoryInterface
 {
     /**

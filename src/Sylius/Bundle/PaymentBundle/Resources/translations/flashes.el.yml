@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: 'Η πληρωμή ακυρώθηκε.'
+        completed: 'Η πληρωμή ολοκληρώθηκε.'
+        failed: 'Η πληρωμή απέτυχε.'
+        processing: 'Η πληρωμή σας είναι σε επεξεργασία.'
+        refunded: 'Επιτυχής επιστροφή πληρωμής.'
+        unknown: 'Υπήρξε ένα άγνωστο πρόβλημα με την πληρωμή.'

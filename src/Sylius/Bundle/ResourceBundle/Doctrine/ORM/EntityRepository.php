@@ -21,9 +21,6 @@ use Pagerfanta\Pagerfanta;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class EntityRepository extends BaseEntityRepository implements RepositoryInterface
 {
     /**

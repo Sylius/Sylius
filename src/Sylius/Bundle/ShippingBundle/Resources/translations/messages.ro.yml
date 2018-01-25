@@ -6,6 +6,8 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Număr
+                equal: Egal cu
+            type: Tipul de regulă
         shipment:
             state: Status
             states:
@@ -18,8 +20,10 @@ sylius:
             tracking_code: Codul de urmărire
         shipping_calculator:
             flat_rate_configuration:
+                label: Sumă forfetară pe expediere
                 amount: Sumă
             per_unit_rate_configuration:
+                label: Sumă forfetară pe unitate
                 amount: Sumă
         shipping_category:
             description: Descriere
@@ -32,6 +36,10 @@ sylius:
             configuration: Configurare
             description: Descriere
             enabled: Activat
+            match_all_category_requirement: Toate categoriile unităților trebuie să coincidă cu categoria metodei
+            match_any_category_requirement: Cel puțin o unitate trebuie să aibă aceeași categorie cu metoda
+            match_none_category_requirement: Nicio unitate nu trebuie să aibă aceeași categorie cu metoda
             name: Nume
+            position: Poziţie
             tax_category: Categoria de taxă
             translations: Traduceri

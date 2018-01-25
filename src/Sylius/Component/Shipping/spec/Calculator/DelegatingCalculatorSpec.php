@@ -21,9 +21,6 @@ use Sylius\Component\Shipping\Calculator\UndefinedShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DelegatingCalculatorSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $registry): void

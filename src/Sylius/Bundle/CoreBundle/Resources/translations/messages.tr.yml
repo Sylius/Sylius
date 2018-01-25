@@ -19,17 +19,27 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Ürün
+        promotion_coupon:
+            per_customer_usage_limit: Müşteri Başına Kullanım Limiti
         group:
             name: Ad
             roles: Roller
         channel:
+            contact_email: İletişim e-maili
             currencies: Para birimi
             currency_base: Ana Para Birimi
+            account_verification_required: Hesap doğrulaması gerekli mi?
+            hostname: Sunucu
+            locale_default: Varsayılan yer
             locales: Diller
             payment_methods: Ödeme Yöntemleri
             shipping_methods: Kargolama Yöntemleri
+            skipping_shipping_step_allowed: Tek bir gönderim yöntemi varsa, gönderim adımı atlansın mı?
+            skipping_payment_step_allowed: Yalnızca bir ödeme yöntemi varsa ödeme adımını atlansın mı?
+            tax_calculation_strategy: Vergi hesaplama stratejisi
             tax_zone_default: Varsayılan vergi bölgesi
             taxonomies: Kategoriler
+            theme: Tema
         image:
             type: Türü
             file: Resim
@@ -53,6 +63,7 @@ sylius:
             restricted_zone: Kısıtlı bölge
             short_description: Kısa açıklama
             variant_selection_method: Varyant seçme yöntemi
+            main_taxon: Ana takson
             channels: Kanallar
             enabled: Etkin
         product_filter:
@@ -99,6 +110,7 @@ sylius:
             on_hand: Mevcut stok
             price: Fiyatı
             sku: Stok Kodu
+            shipping_required: Gönderme gerekli mi?
             weight: Ağırlığı
             width: Genişliği
         attribute:
@@ -107,26 +119,45 @@ sylius:
                 value: Değer
         guest:
             email: E-posta
+        product_association:
+            product: İlişkili ürün
+            type: İlişki türü
         product_association_type:
             name: Ad
+        promotion_filter:
+            products: Ürün filtresi
+            taxons: Sınıf filtresi
         promotion_rule:
+            customer_group:
+                group: Müşteri Grubu
+            has_taxon:
+                taxons: Kategoriler
             product:
                 products: Ürünler
             total_of_items_from_taxon:
+                taxon: Katagori
                 amount: Miktar
         payment_method:
             channels: Kanallar
+        product_attribute:
+            position: Konum
+        zone:
+            scopes:
+                shipping: Nakliye
+                tax: Vergi
     installer:
         extensions:
             header: Eklentiler
             accelerator:
                 header: Hızlandırıcı
+                help: Zend opcache etkinleştirin(yüksek oranda önerilen).
             apc: APC
             ctype: Ctype
             gd: GD
             help: '%extension% uzantısını yükelyin ve aktif edin.'
             iconv: Iconv
             exif: Exif
+            fileinfo: Dosya bilgisi
             icu: ICU
             intl: Intl
             json_encode: JSON
@@ -143,13 +174,16 @@ sylius:
             header: dosya sistemi
             cache:
                 header: önbellek
+                help: 'Çalıştırma izinlerini ayarlamak için: sudo setfacl -R -m u:www-veri: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-veri: rwx -m u: ''whoami'': rwx %path%'
             exists: mevcut
             logs:
                 header: loglar
+                help: 'Çalıştırma izinlerini ayarlamak için: sudo setfacl -R -m u:www-veri: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-veri: rwx -m u: ''whoami'': rwx %path%'
             not_exists: mevcut değil
             not_writable: yazılabilir değil
             parameters:
                 header: parameters.yml
+                help: 'Çalıştırma izinlerini ayarlamak için: sudo chmod a + w %path%'
             vendors: vendors
             writable: yazılabilir
         settings:
@@ -169,3 +203,10 @@ sylius:
                 header: Kullanılmayan Zaman Dilimi
                 help: '%timezone% zaman dilimi kaldırılmıştır. php.ini dosyanızda gerekli düzenlemeyi yapın. (Kaldırılan tüm zaman dilimleri http://php.net/manual/en/timezones.others.php).'
             version: PHP versiyon
+            version_recommended: Önerilen PHP sürümü
+    payum_gateway:
+        cash_on_delivery: Teslimatta Nakit Ödeme
+        offline: Çevirim dışı
+        paypal_express_checkout: Paypal Express ile Ödeme
+    shipping_method_resolver:
+        by_zones_and_channel: Bölgelere ve kanallara göre

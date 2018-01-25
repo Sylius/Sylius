@@ -16,9 +16,6 @@ namespace Sylius\Bundle\AdminApiBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusAdminApiBundle extends AbstractResourceBundle
 {
     /**
@@ -29,13 +26,5 @@ final class SyliusAdminApiBundle extends AbstractResourceBundle
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelNamespace(): string
-    {
-        return 'Sylius\Bundle\AdminApiBundle\Model';
     }
 }

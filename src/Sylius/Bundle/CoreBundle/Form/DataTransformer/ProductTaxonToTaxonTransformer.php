@@ -21,9 +21,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
 {
     /**

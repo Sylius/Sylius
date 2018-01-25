@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\ExchangeRate;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePage;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface CreatePageInterface extends BaseCreatePage
 {
     /**

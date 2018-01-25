@@ -22,9 +22,6 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductOptionContext implements Context
 {
     /**
@@ -74,7 +71,7 @@ final class ProductOptionContext implements Context
     }
 
     /**
-     * @Given the store has a product option :name
+     * @Given the store has (also) a product option :name
      * @Given the store has a product option :name with a code :code
      */
     public function theStoreHasAProductOptionWithACode($name, $code = null)

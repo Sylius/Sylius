@@ -17,9 +17,6 @@ use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class StringFieldType implements FieldTypeInterface
 {
     /**

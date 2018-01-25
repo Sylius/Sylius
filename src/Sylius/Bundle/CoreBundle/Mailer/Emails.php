@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Mailer;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class Emails
 {
     public const CONTACT_REQUEST = 'contact_request';

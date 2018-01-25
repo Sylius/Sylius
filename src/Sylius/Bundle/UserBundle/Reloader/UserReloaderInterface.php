@@ -15,9 +15,6 @@ namespace Sylius\Bundle\UserBundle\Reloader;
 
 use Sylius\Component\User\Model\UserInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface UserReloaderInterface
 {
     /**

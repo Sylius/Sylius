@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\Administrator;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     /**

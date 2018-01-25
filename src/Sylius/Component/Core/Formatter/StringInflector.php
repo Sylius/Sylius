@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Formatter;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class StringInflector
 {
     /**

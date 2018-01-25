@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Mailer\Factory\EmailFactoryInterface;
 use Sylius\Component\Mailer\Model\Email;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class EmailFactorySpec extends ObjectBehavior
 {
     function it_implements_email_factory_interface(): void

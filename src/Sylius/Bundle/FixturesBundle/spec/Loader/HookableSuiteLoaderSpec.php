@@ -20,9 +20,6 @@ use Sylius\Bundle\FixturesBundle\Listener\SuiteEvent;
 use Sylius\Bundle\FixturesBundle\Loader\SuiteLoaderInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class HookableSuiteLoaderSpec extends ObjectBehavior
 {
     function let(SuiteLoaderInterface $decoratedSuiteLoader): void

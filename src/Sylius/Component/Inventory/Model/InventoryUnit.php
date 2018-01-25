@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Inventory\Model;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class InventoryUnit implements InventoryUnitInterface
 {
     /**

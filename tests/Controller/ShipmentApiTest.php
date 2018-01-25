@@ -15,9 +15,6 @@ namespace Sylius\Tests\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ShipmentApiTest extends CheckoutApiTestCase
 {
     /**

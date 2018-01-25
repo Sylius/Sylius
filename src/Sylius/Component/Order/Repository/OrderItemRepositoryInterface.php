@@ -16,9 +16,6 @@ namespace Sylius\Component\Order\Repository;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Łukasz Chruściel <lchrusciel@gmail.com>
- */
 interface OrderItemRepositoryInterface extends RepositoryInterface
 {
     /**

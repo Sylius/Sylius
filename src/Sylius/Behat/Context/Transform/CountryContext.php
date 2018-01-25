@@ -18,9 +18,6 @@ use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CountryContext implements Context
 {
     /**

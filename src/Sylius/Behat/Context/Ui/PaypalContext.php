@@ -19,9 +19,6 @@ use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class PaypalContext implements Context
 {
     /**

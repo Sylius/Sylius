@@ -4,8 +4,27 @@
 sylius:
     customer:
         first_name:
+            max: Prenumele nu poate depăși {{ limit }} caractere.
+            min: Prenumele trebuie să conţină cel puțin {{ limit }} caractere.
             not_blank: Vă rugăm să completați prenumele.
         last_name:
+            max: Numele de familie nu poate depăși {{ limit }} de caractere.
+            min: Numele de familie trebuie să conţină cel puţin {{ limit }} caractere.
             not_blank: Vă rugăm să completați numele.
+        gender:
+            not_blank: Alege-ți genul.
         email:
-            not_blank: Vă rugăm să completați adresa de e-mail.
+            already_used: Această adresă e deja folosită, autentifică-te sau resetează parola.
+            max: Adresa de email nu trebuie să aibă mai mult de {{ limit }} caractere.
+            not_blank: Introdu adresa ta de email.
+            invalid: Această adresă de e-mail este invalidă.
+            unique: Adresa de email e deja folosită.
+            registered: Acest e-mail este deja înregistrat, vă rugăm să vă autentificați sau să vă resetați parola.
+    customer_group:
+        code:
+            regex: Codul grupului de clienți poate conține doar litere, numere, - și _.
+            unique: Codul grupului de clienți trebuie să fie unic.
+        name:
+            max: Numele grupului de clienți nu poate fi mai lung de {{ limit }} caractere.
+            min: Numele grupului de clienți poate avea maxim {{ limit }} caractere.
+            not_blank: Introdu numele grupului de clienți.

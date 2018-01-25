@@ -164,5 +164,7 @@
         <service id="sylius.custom_resource_controller.resource_update_handler" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceUpdateHandler" decorates="sylius.resource_controller.resource_update_handler" public="false">
             <argument type="service" id="sylius.custom_resource_controller.resource_update_handler.inner" />
         </service>
+
+        <service id="sylius.order_item_names_setter" class="Sylius\Component\Core\Order\OrderItemNamesSetter" />
     </services>
 </container>

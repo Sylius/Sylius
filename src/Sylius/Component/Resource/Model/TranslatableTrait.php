@@ -19,8 +19,6 @@ use Doctrine\ORM\PersistentCollection;
 
 /**
  * @see TranslatableInterface
- *
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 trait TranslatableTrait
 {

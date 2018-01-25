@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Shop\Account;
 
 use Sylius\Behat\Page\SymfonyPage;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class DashboardPage extends SymfonyPage implements DashboardPageInterface
 {
     /**
@@ -80,7 +77,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     }
 
     /**
-     * @param $value
+     * @param string $value
      *
      * @return bool
      */

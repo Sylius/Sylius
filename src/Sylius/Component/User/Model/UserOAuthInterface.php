@@ -15,10 +15,6 @@ namespace Sylius\Component\User\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Sergio Marchesini
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 interface UserOAuthInterface extends UserAwareInterface, ResourceInterface
 {
     /**

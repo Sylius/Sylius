@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Security\Checker;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface UniquenessCheckerInterface
 {
     /**

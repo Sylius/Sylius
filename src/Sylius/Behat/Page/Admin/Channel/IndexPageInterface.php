@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\Channel;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface IndexPageInterface extends BaseIndexPageInterface
 {
     /**

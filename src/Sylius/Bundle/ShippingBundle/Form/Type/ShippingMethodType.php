@@ -29,11 +29,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ShippingMethodType extends AbstractResourceType
 {
     /**

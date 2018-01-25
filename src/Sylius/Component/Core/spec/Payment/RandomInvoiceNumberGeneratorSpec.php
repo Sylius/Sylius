@@ -19,9 +19,6 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 use Sylius\Component\Core\Payment\RandomInvoiceNumberGenerator;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class RandomInvoiceNumberGeneratorSpec extends ObjectBehavior
 {
     function it_is_initializable(): void

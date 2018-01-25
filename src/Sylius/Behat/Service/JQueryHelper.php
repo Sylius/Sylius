@@ -15,9 +15,6 @@ namespace Sylius\Behat\Service;
 
 use Behat\Mink\Session;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 abstract class JQueryHelper
 {
     /**

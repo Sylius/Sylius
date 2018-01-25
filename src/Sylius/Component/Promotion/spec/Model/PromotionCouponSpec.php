@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class PromotionCouponSpec extends ObjectBehavior
 {
     function it_is_a_promotion_coupon(): void

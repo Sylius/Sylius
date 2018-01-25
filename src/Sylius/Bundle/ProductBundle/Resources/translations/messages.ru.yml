@@ -11,7 +11,7 @@ sylius:
             meta_keywords: Ключевые слова метаданных
             meta_description: Описание метаданных
             slug: Псевдоним
-            taxons: Таксоны
+            taxons: Категории
         product_variant:
             name: Название
         association_type:

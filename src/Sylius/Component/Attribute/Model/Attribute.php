@@ -16,17 +16,14 @@ namespace Sylius\Component\Attribute\Model;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class Attribute implements AttributeInterface
 {
     use TimestampableTrait;
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
+        getTranslation as private doGetTranslation;
     }
 
     /**
@@ -176,6 +173,19 @@ class Attribute implements AttributeInterface
     public function setPosition(?int $position): void
     {
         $this->position = $position;
+    }
+
+    /**
+     * @param string|null $locale
+     *
+     * @return AttributeTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var AttributeTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
     }
 
     /**

@@ -19,12 +19,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand
 {
     public const TYPE = 'order_fixed_discount';

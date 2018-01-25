@@ -15,9 +15,6 @@ namespace Sylius\Bundle\MoneyBundle\Twig;
 
 use Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class FormatMoneyExtension extends \Twig_Extension
 {
     /**

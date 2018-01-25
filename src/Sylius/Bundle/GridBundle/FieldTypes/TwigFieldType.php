@@ -18,9 +18,6 @@ use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class TwigFieldType implements FieldTypeInterface
 {
     /**

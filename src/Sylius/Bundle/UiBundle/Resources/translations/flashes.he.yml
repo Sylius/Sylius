@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'אין אפשרות למחוק את הערוץ. חובה להגדיר לפחות ערוץ אחד זמין.'
+    checkout:
+        complete_error: 'הזמנתכם לא נשלחה עקב בעיה לא צפויה. אנא נסו לבצע שוב את ההזמנה.'
+    contact:
+        request_success: 'בקשתכם להתקשרות נשלחה בהצלחה.'
+        request_error: 'אירעה בעיה בעת שליחת הבקשה ליצירת קשר. נא נסה שוב מאוחר יותר.'
+    customer:
+        add_address: 'הכתובת נוספה בהצלחה.'
+        impersonate: 'התחזתם ללקוח %name% בהצלחה.'
+        set_address_as_default: 'כתובת הוגדרה כברירת מחדל.'
+    order:
+        apply_state_machine_transition_error: 'אירעה בעיה לא צפויה עם עדכון הזמנה. אנא, נסה לעדכן את ההזמנה שוב.'
+        promotion_integrity: 'תוקפו של מבצע %promotionName% פג.'
+        total_integrity: 'סך ההזמנה שלך השתנה, אנא בדקו את הההזמנה ואשרו אותה שוב.'
+        update_error: 'אירעה בעיה לא צפויה עם עדכון מוצר. אנא, נסה לעדכן את המוצר שוב.'
+    payment:
+        apply_state_machine_transition_error: 'אירעה בעיה לא צפויה עם עדכון תשלום. אנא, נסה לעדכן את התשלום שוב.'
+    product:
+        out_of_stock: 'נשארו רק %quantity% יחידות של מוצר זה במלאי.'

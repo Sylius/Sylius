@@ -19,9 +19,6 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class RequestLocaleSetterSpec extends ObjectBehavior
 {
     function let(LocaleContextInterface $localeContext, LocaleProviderInterface $localeProvider): void

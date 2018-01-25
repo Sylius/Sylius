@@ -17,9 +17,6 @@ use Behat\Mink\Session;
 use FriendsOfBehat\SymfonyExtension\Driver\SymfonyDriver;
 use Symfony\Component\BrowserKit\Cookie;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CookieSetter implements CookieSetterInterface
 {
     /**

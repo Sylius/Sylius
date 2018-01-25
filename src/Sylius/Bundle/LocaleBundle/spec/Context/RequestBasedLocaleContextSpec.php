@@ -21,9 +21,6 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class RequestBasedLocaleContextSpec extends ObjectBehavior
 {
     function let(RequestStack $requestStack, LocaleProviderInterface $localeProvider): void

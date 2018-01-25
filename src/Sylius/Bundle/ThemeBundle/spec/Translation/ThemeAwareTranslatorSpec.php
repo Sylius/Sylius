@@ -21,9 +21,6 @@ use Symfony\Component\Translation\MessageCatalogueInterface;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeAwareTranslatorSpec extends ObjectBehavior
 {
     function let(TranslatorInterface $translator, ThemeContextInterface $themeContext): void

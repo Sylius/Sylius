@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Currency\Converter;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface CurrencyNameConverterInterface
 {
     /**

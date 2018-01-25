@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
 use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class JsonFileConfigurationLoader implements ConfigurationLoaderInterface
 {
     /**

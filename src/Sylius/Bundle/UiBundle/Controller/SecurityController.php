@@ -23,9 +23,6 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SecurityController
 {
     /**

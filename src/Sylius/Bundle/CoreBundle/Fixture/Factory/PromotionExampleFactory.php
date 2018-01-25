@@ -23,9 +23,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class PromotionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**

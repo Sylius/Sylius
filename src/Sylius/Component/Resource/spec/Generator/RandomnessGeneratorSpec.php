@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Resource\Generator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class RandomnessGeneratorSpec extends ObjectBehavior
 {
     function it_implements_randomness_generator_interface(): void

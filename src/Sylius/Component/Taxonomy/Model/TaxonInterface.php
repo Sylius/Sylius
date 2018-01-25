@@ -18,11 +18,8 @@ use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, ResourceInterface, SlugAwareInterface
 {
     /**
@@ -33,17 +30,17 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
     /**
      * @return TaxonInterface|null
      */
-    public function getRoot(): ?TaxonInterface;
+    public function getRoot(): ?self;
 
     /**
      * @return TaxonInterface|null
      */
-    public function getParent(): ?TaxonInterface;
+    public function getParent(): ?self;
 
     /**
      * @param TaxonInterface|null $taxon
      */
-    public function setParent(?TaxonInterface $taxon): void;
+    public function setParent(?self $taxon): void;
 
     /**
      * @return Collection|TaxonInterface[]
@@ -60,7 +57,7 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
      *
      * @return bool
      */
-    public function hasChild(TaxonInterface $taxon): bool;
+    public function hasChild(self $taxon): bool;
 
     /**
      * @return bool
@@ -70,12 +67,12 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
     /**
      * @param TaxonInterface $taxon
      */
-    public function addChild(TaxonInterface $taxon): void;
+    public function addChild(self $taxon): void;
 
     /**
      * @param TaxonInterface $taxon
      */
-    public function removeChild(TaxonInterface $taxon): void;
+    public function removeChild(self $taxon): void;
 
     /**
      * @return string|null
@@ -136,4 +133,11 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
      * @param int|null $position
      */
     public function setPosition(?int $position): void;
+
+    /**
+     * @param string|null $locale
+     *
+     * @return TaxonTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface;
 }

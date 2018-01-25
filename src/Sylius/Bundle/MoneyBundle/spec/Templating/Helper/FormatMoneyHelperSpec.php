@@ -18,10 +18,6 @@ use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class FormatMoneyHelperSpec extends ObjectBehavior
 {
     function let(MoneyFormatterInterface $moneyFormatter): void

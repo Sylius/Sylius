@@ -18,8 +18,6 @@ use Sylius\Component\Resource\Repository\TranslatableRepositoryInterface;
 
 /**
  * Doctrine ORM driver translatable entity repository.
- *
- * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
  */
 class TranslatableRepository extends DocumentRepository implements TranslatableRepositoryInterface
 {

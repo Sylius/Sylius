@@ -22,9 +22,6 @@ use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ShopperContextSpec extends ObjectBehavior
 {
     function let(

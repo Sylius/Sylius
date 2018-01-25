@@ -28,9 +28,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 use Zend\Hydrator\HydrationInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeLoaderSpec extends ObjectBehavior
 {
     function let(

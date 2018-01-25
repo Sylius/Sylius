@@ -9,8 +9,13 @@ sylius:
             max_length: Numele atributului nu poate depăși 1 caracter.|Numele atributului nu poate depăși {{ limit }} de caractere.
         code:
             not_blank: Vă rugăm să introduceţi codul de atribut.
-            regex: Codul atributului poate fi compus doar din litere, numere, cratime şi linii de subliniere.
+            regex: Codul atributului poate fi compus doar din litere, numere, - și _.
             unique: Acest cod a fost deja folosit.
+        configuration:
+            max_entries: Numărul maxim de intrări trebuie să fie mai mare sau egal cu numărul minim de intrări.
+            max_length: Lungimea maximă configurată trebuie să fie mai mare sau egală cu lungimea minimă.
+            min_entries: Numărul minim de intrări trebuie să fie mai mic sau egal cu numărul de opțiuni adăugate.
+            multiple: Configurarea trebuie să fie multiplă dacă numărul minim sau maxim de intrări este specificat.
         presentation:
             not_blank: Vă rugăm să introduceţi prezentarea atributului.
             min_length: Prezentarea atributului trebuie să conțină cel puţin 1 caracter.|Prezentarea atributului trebuie să conțină cel puţin {{ limit }} caractere.

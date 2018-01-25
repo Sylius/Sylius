@@ -9,13 +9,13 @@ sylius:
             country: 国家
             first_name: 名
             last_name: 姓
-            phone_number: 电话
+            phone_number: 电话号码
             postcode: 邮编
-            street: 街道
+            street: 街道地址
             province: 省/直辖市/自治区
             zone: 区域
         country:
-            add_province: 添加省
+            add_province: 添加省份
             name: 名称
             provinces: 省份
             select: 请选择
@@ -30,7 +30,7 @@ sylius:
             name: 名称
             type: 类型
             types:
-                country: test
+                country: 国家
                 province: 省/直辖市/自治区
                 zone: 区域
             scope: 范围

@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Core\Distributor;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ProportionalIntegerDistributorSpec extends ObjectBehavior
 {
     function it_implements_an_integer_proportional_distributor_interface(): void

@@ -201,7 +201,7 @@ sylius:
             timezone: часовий пояс
             timezone_deprecated:
                 header: Застарілий часовий пояс
-                help: 'Часовий пояс %timezone% застарілий. Виправте ваш файл php.ini (перелік застарілих часових поясів http://php.net/manual/en/timezones.others.php).'
+                help: Часовий пояс %timezone% застарілий. Виправте ваш файл php.ini (перелік застарілих часових поясів http://php.net/manual/en/timezones.others.php).
             version: Версія PHP
             version_recommended: Рекомендована версія PHP
     payum_gateway:

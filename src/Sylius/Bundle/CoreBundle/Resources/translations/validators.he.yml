@@ -1,0 +1,43 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        base_currency:
+            not_blank: אנא הזינו מטבע ראשי של הארוץ.
+        default_locale:
+            not_blank: אנא הזינו הגדרות איזור (Locale) ברירת מחדל של ארוץ.
+        contact_email:
+            invalid: כתובת דואר האלקטרוני אינה תקנית.
+            max: דואר אלקטרוני אינו יכול להיות יותר מ-{{ limit }} תווים.
+    contact:
+        email:
+            invalid: כתובת דואר האלקטרוני אינה תקנית.
+            not_blank: אנא הזן את כתובת דואר האלקטרוני שלך.
+        message:
+            not_blank: אנא הזינו הודעה.
+    currency:
+        enabled:
+            cannot_disable_base: לא ניתן לכבות את מטבע הראשי.
+    customer:
+        currency_code:
+            not_valid: קוד המטבע אינו תקני.
+    order:
+        currency_code:
+            not_valid: קוד המטבע אינו תקני.
+        shipping_method_eligibility: 'המוצר אינו מתאים למשלוח באמצעות %shippingMethodName%. אנא בחרו שיטת משלוח אחרת.'
+    product_variant:
+        weight:
+            min: משקל אינו יכול להיות שלילי.
+            invalid: משקל חייב להיות מספר.
+        width:
+            min: רוחב אינו יכול להיות שלילי.
+            invalid: רוחב חייב להיות מספר.
+        height:
+            min: גובה אינו יכול להיות שלילי.
+            invalid: גובה חייב להיות מספר.
+        depth:
+            min: עומק אינו יכול להיות שלילי.
+    user:
+        email:
+            unique: כתובת דואר אלרקטרוני כבר נמצא בשימוש.

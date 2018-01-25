@@ -17,9 +17,6 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Repository\ShippingCategoryRepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class ShippingCategoryRepository extends EntityRepository implements ShippingCategoryRepositoryInterface
 {
     /**

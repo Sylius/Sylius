@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\Account;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface LoginPageInterface extends SymfonyPageInterface
 {
     /**

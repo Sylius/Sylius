@@ -16,9 +16,6 @@ namespace Sylius\Component\Order\Modifier;
 use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
 {
     /**

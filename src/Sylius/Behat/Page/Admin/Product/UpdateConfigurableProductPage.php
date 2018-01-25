@@ -20,9 +20,6 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConfigurableProductPageInterface
 {
     use ChecksCodeImmutability;

@@ -20,9 +20,6 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class OrderStateResolver implements StateResolverInterface
 {
     /**

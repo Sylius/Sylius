@@ -16,9 +16,6 @@ namespace Sylius\Bundle\AdminApiBundle\Fixture;
 use Sylius\Bundle\CoreBundle\Fixture\AbstractResourceFixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class ApiClientFixture extends AbstractResourceFixture
 {
     /**

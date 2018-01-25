@@ -201,7 +201,7 @@ sylius:
             timezone: laiko juosta
             timezone_deprecated:
                 header: Pasenusi laiko juosta
-                help: 'Laiko juosta %timezone% yra pasenusi. Pataisykite savo php.ini failą (pasenusių laiko juostų sąrašas http://php.net/manual/en/timezones.others.php).'
+                help: Laiko juosta %timezone% yra pasenusi. Pataisykite savo php.ini failą (pasenusių laiko juostų sąrašas http://php.net/manual/en/timezones.others.php).
             version: PHP versija
             version_recommended: Rekomenduojama PHP versija
     payum_gateway:

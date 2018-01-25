@@ -17,12 +17,8 @@ use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface AttributeInterface extends
     ResourceInterface,
     CodeAwareInterface,
@@ -78,4 +74,11 @@ interface AttributeInterface extends
      * @param int|null $position
      */
     public function setPosition(?int $position): void;
+
+    /**
+     * @param string|null $locale
+     *
+     * @return AttributeTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface;
 }

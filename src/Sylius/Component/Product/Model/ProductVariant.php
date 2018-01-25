@@ -17,15 +17,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class ProductVariant implements ProductVariantInterface
 {
     use TimestampableTrait;
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
+        getTranslation as private doGetTranslation;
     }
 
     /**
@@ -177,6 +176,19 @@ class ProductVariant implements ProductVariantInterface
     public function setPosition(?int $position): void
     {
         $this->position = $position;
+    }
+
+    /**
+     * @param string|null $locale
+     *
+     * @return ProductVariantTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var ProductVariantTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
     }
 
     /**

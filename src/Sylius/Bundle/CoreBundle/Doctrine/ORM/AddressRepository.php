@@ -18,10 +18,6 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class AddressRepository extends EntityRepository implements AddressRepositoryInterface
 {
     /**

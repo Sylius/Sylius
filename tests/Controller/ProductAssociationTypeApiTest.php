@@ -17,9 +17,6 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ProductAssociationTypeApiTest extends JsonApiTestCase
 {
     /**

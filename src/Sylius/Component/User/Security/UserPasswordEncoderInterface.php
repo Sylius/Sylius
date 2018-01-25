@@ -15,9 +15,6 @@ namespace Sylius\Component\User\Security;
 
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 interface UserPasswordEncoderInterface
 {
     /**

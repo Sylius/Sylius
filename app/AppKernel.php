@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 use Sylius\Bundle\CoreBundle\Application\Kernel;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class AppKernel extends Kernel
 {
     /**

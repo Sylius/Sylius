@@ -201,7 +201,7 @@ sylius:
             timezone: timezone
             timezone_deprecated:
                 header: เขตเวลาที่เลิกใช้งาน
-                help: 'Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).'
+                help: Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).
             version: PHP เวอร์ชัน
             version_recommended: PHP เวอร์ชันที่แนะนำ
     payum_gateway:

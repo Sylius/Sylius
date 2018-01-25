@@ -20,9 +20,6 @@ use Sylius\Bundle\CoreBundle\Installer\Requirement\SyliusRequirements;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class SyliusRequirementsChecker implements RequirementsCheckerInterface
 {
     /**

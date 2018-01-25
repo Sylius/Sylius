@@ -18,9 +18,6 @@ use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class CurrencyContext implements Context
 {
     /**

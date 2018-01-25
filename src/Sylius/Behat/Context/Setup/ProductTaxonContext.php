@@ -20,9 +20,6 @@ use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProductTaxonContext implements Context
 {
     /**

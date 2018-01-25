@@ -20,9 +20,6 @@ use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class TranslatableFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory, TranslationLocaleProviderInterface $localeProvider): void

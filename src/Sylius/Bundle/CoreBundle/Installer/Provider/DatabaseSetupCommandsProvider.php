@@ -21,9 +21,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProviderInterface
 {
     /**
@@ -48,12 +45,10 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
             return [
                 'doctrine:database:create',
                 'doctrine:migrations:migrate' => ['--no-interaction' => true],
-                'cache:clear',
             ];
         }
 
         return array_merge($this->getRequiredCommands($input, $output, $questionHelper), [
-            'cache:clear',
             'doctrine:migrations:version' => [
                 '--add' => true,
                 '--all' => true,

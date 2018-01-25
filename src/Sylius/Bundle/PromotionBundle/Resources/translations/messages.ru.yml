@@ -18,6 +18,10 @@ sylius:
             usage_limit: Предел использования
         promotion_action:
             item_fixed_discount: Фиксированная скидка
+            item_percentage_discount: Процентная скидка
+            order_fixed_discount: Фиксированная скидка
+            order_percentage_discount: Процент скидки на заказ
+            shipping_percentage_discount: Процент скидки на доставку
             fixed_discount_configuration:
                 amount: Сумма
             percentage_discount_configuration:
@@ -34,8 +38,15 @@ sylius:
         promotion_filter:
             price_range: Фильтр диапазона цен
         promotion_rule:
+            cart_quantity: Кол-во в корзине
+            contains_product: Содержит продукт
             customer_group: Группа клиента
+            has_at_least_one_from_taxons: Имеет по крайней мере один из таксонов
+            item_total: Товаров всего
+            nth_order: N-й заказ
+            shipping_country: Страна получателя
             taxonomy: Тип товара
+            total_price_of_items_from_taxon: Общая стоимость предметов из категории
             cart_quantity_configuration:
                 count: Кол-во
                 equal: Равно
@@ -50,5 +61,5 @@ sylius:
                 country: Страна
             taxonomy_configuration:
                 exclude: Исключить
-                taxons: Таксоны
+                taxons: Категории
             type: Тип

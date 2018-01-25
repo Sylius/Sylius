@@ -23,9 +23,6 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FakeChannelPersisterSpec extends ObjectBehavior
 {
     function let(FakeChannelCodeProviderInterface $fakeHostnameProvider): void

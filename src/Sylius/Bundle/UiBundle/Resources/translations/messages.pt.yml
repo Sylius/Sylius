@@ -587,6 +587,8 @@ sylius:
         shipping_state: 'Situação do envio'
         shipping_total: 'Valor do envio'
         shop_by: 'Comprar por'
+        show: 'Mostrar'
+        show_all: 'Mostrar todos'
         sign_in_to_the_store_or_create_new_account: 'Cadastre-se na loja <small>ou crie uma nova conta</small>'
         sku: 'SKU'
         starts_at: 'Começa em'

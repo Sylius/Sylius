@@ -17,9 +17,6 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationSourceFactory;
 use Sylius\Bundle\ThemeBundle\DependencyInjection\SyliusThemeExtension;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SyliusThemeExtensionTest extends AbstractExtensionTestCase
 {
     /**

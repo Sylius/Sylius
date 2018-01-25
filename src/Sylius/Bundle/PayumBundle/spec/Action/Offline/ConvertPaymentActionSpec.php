@@ -21,9 +21,6 @@ use Payum\Offline\Constants;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ConvertPaymentActionSpec extends ObjectBehavior
 {
     function it_is_payum_action(): void

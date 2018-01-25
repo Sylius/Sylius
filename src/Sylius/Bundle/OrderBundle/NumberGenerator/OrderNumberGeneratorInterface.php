@@ -15,9 +15,6 @@ namespace Sylius\Bundle\OrderBundle\NumberGenerator;
 
 use Sylius\Component\Order\Model\OrderInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface OrderNumberGeneratorInterface
 {
     /**

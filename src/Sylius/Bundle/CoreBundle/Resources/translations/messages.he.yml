@@ -3,8 +3,65 @@
 
 sylius:
     form:
+        checkout:
+            payment_method: אמצעי תשלום
+            shipping_method: אופן המשלוח
+        promotion_action:
+            add_product_configuration:
+                product: מוצר
+        channel:
+            currencies: מטבעות
+            currency_base: מטבע בסיס
         image:
             type: סוג
+            file: תמונה
+        locale:
+            enabled: הופעל
+        order_filter:
+            number: מספר
+            channel: כל הערוצים
+        product:
+            channels: ערוצים
+            enabled: הופעל
+        shipment_filter:
+            channel: כל הערוצים
+        payment_filter:
+            number: מספר הזמנה
+            billing_address: חשבונית עבור
+            channel: כל הערוצים
+        taxon:
+            file: בחר תמונה
+            images: תמונות
+        taxonomy:
+            file: בחר תמונה
+        user:
+            enabled: הופעל
+            first_name: שם פרטי
+            groups: קבוצות
+            last_name: שם משפחה
+            password: סיסמה
+            shipping_address: כתובת למשלוח
+        variant:
+            depth: עומק
+            height: גובה
+            on_hand: מלאי נוכחי
+            price: מחיר
+            sku: מק''ט
+            weight: משקל
+            width: רוחב
+        product_association_type:
+            name: שם
+        promotion_rule:
+            has_taxon:
+                taxons: קבוצות טקסונומיות
+            product:
+                products: מוצרים
+        payment_method:
+            channels: ערוצים
+        zone:
+            scopes:
+                shipping: משלוח
+                tax: מס
     installer:
         extensions:
             "off": false

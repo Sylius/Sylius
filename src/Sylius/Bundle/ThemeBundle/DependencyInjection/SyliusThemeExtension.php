@@ -23,9 +23,6 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SyliusThemeExtension extends Extension implements PrependExtensionInterface
 {
     /**

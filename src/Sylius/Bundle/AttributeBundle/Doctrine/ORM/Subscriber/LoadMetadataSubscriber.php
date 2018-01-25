@@ -14,14 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class LoadMetadataSubscriber implements EventSubscriber
 {
     /**
@@ -117,7 +113,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
     }
 
     /**
-     * @param ClassMetadataInfo|ClassMetadata $metadata
+     * @param ClassMetadataInfo $metadata
      * @param array $subjectMapping
      */
     private function mapManyToOne(ClassMetadataInfo $metadata, array $subjectMapping): void
