@@ -58,3 +58,13 @@
 
 {% include '@SyliusShop/Product/Show/_associations.html.twig' %}
 {% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script type="text/javascript">
+    lightbox.option({
+        'albumLabel': '{{ 'sylius.lightbox.image_album_label'|trans|escape('js') }}'
+    });
+</script>
+{% endblock %}

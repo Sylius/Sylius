@@ -2,6 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    lightbox:
+        image_album_label: 'Image %1 of %2'
     menu:
         shop:
             account:
