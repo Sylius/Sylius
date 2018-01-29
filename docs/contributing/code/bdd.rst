@@ -57,7 +57,7 @@ Step 2: Install vendors
 Install Selenium2
 ~~~~~~~~~~~~~~~~~
 
-Download Selenium server 2.38 `here`_.
+Download Selenium server 3.4 `here`_.
 
 .. _here: http://docs.seleniumhq.org/download/
 
