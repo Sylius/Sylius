@@ -162,8 +162,8 @@ sylius:
             intl: انتل
             json_encode: JSON
             mbstring: أوتار متعددة
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -192,8 +192,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: عدم إهمالها
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: تسجيل
             session:
                 auto_start: session.auto_start

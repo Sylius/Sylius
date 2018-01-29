@@ -102,11 +102,11 @@ sylius:
         extensions:
             icu: ICU
             json_encode: JSON
-            "off": false
-            "on": true
+            off: false
+            on: true
             session_start: Sеsija
         settings:
             any: bilo koji
-            "off": false
-            "on": true
+            off: false
+            on: true
             timezone: vremenska zona
