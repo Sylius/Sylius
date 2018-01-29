@@ -99,7 +99,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
         Assert::nullOrRange($codeLength, 1, 40, 'Invalid %d code length should be between %d and %d');
 
         do {
-            $hash = sha1((string) microtime(true));
+            $hash = bin2hex(random_bytes(20));
             $code = strtoupper(substr($hash, 0, $codeLength));
         } while ($this->isUsedCode($code, $generatedCoupons));
 
