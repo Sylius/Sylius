@@ -26,7 +26,8 @@ sylius:
                     shipping_methods: Versandarten
                     tax_categories: Steuerkategorien
                     tax_rates: Steuersätze
-                    zones: Gebiete
+                    url_rewrites: URL Umleitungen
+                    zones: Versandgebiete
                 marketing:
                     header: Marketing
                     product_reviews: Produkt-Bewertung

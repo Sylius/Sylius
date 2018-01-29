@@ -95,6 +95,9 @@ sylius_admin_shop_user:
     resource: "@SyliusAdminBundle/Resources/config/routing/shop_user.yml"
     prefix: /shop-user/
 
+sylius_admin_url_redirect:
+    resource: "@SyliusAdminBundle/Resources/config/routing/url_redirect.yml"
+
 sylius_admin_tax_category:
     resource: "@SyliusAdminBundle/Resources/config/routing/tax_category.yml"
 

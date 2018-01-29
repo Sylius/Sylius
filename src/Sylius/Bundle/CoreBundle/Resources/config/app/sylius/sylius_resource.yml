@@ -4,3 +4,10 @@
 sylius_resource:
     translation:
         locale_provider: sylius.translation_locale_provider.admin
+
+    resources:
+      sylius.url_redirect:
+        classes:
+          model: Sylius\Component\Core\Model\URLRedirect
+          interface: Sylius\Component\Core\Model\URLRedirectInterface
+          controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController

@@ -1,0 +1,35 @@
+sylius_grid:
+  grids:
+    sylius_admin_url_redirect:
+      driver:
+        name: doctrine/orm
+        options:
+          class: Sylius\Component\Core\Model\URLRedirect
+
+      filters:
+        name:
+          type: string
+          label: sylius.ui.name
+
+      fields:
+        oldRoute:
+          type: string
+          label: sylius.ui.old_route
+        newRoute:
+          type: string
+          label: sylius.ui.new_route
+        enabled:
+          type: twig
+          label: sylius.ui.enabled
+          options:
+            template: "@SyliusUi/Grid/Field/enabled.html.twig"
+
+      actions:
+        main:
+          create:
+            type: create
+        item:
+          update:
+            type: update
+          delete:
+            type: delete

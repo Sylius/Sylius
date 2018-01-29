@@ -23,6 +23,7 @@ sylius:
                     shipping_methods: Shipping methods
                     tax_categories: Tax categories
                     tax_rates: Tax rates
+                    url_redirects: URL redirects
                     zones: Zones
                 marketing:
                     header: Marketing

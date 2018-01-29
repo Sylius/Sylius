@@ -253,5 +253,11 @@ final class MainMenuBuilder
             ->setLabel('sylius.menu.admin.main.configuration.admin_users')
             ->setLabelAttribute('icon', 'lock')
         ;
+
+        $configuration
+            ->addChild('admin_url_redirects', ['route' => 'sylius_admin_url_redirect_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.url_redirects')
+            ->setLabelAttribute('icon', 'forward')
+        ;
     }
 }

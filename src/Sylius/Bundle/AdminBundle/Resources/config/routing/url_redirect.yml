@@ -1,0 +1,8 @@
+sylius_admin_url_redirect:
+  resource: |
+    alias: sylius.url_redirect
+    section: admin
+    except: ['show']
+    templates: SyliusAdminBundle:Crud
+    grid: sylius_admin_url_redirect
+  type: sylius.resource
