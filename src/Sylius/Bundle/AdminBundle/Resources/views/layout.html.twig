@@ -8,6 +8,10 @@
     {{ sonata_block_render_event('sylius.admin.layout.stylesheets') }}
 {% endblock %}
 
+{% block flash_messages %}
+    {% include '@SyliusAdmin/_flashes.html.twig' %}
+{% endblock %}
+
 {% block topbar %}
     <a class="icon item" id="sidebar-toggle" title="{{ 'sylius.ui.toggle_sidebar'|trans }}">
         <i class="sidebar icon"></i>
@@ -39,8 +43,9 @@
     {{ sonata_block_render_event('sylius.admin.layout.sidebar_down') }}
 {% endblock %}
 
-{% block footer %}
-    {{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.org" target="_blank">Sylius</a>.
+{% block post_content %}
+    <div class="ui divider"></div>
+    {{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.org" target="_blank">Sylius v{{ sylius_meta.version }}</a>
 {% endblock %}
 
 {% block javascripts %}

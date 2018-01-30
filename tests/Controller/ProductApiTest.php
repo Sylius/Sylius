@@ -426,8 +426,8 @@ EOT;
                     "attribute": "mug_color",
                     "localeCode": "en_US",
                     "value": [
-                        "green", 
-                        "yellow"
+                        "7a968ac4-a1e3-4a37-a707-f22a839130c4", 
+                        "ff62a939-d946-4d6b-b742-b7115875ae75"
                     ]
                 }
             ],

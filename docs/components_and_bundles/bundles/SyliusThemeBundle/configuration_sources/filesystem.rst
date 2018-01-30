@@ -16,6 +16,7 @@ Configuration reference
             filesystem:
                 enabled: false
                 filename: composer.json
+                scan_depth: null
                 directories:
                     - "%kernel.root_dir%/themes"
 
@@ -28,3 +29,10 @@ Configuration reference
         sylius_theme:
             sources:
                 filesystem: ~
+
+.. tip::
+
+    Scanning for the configuration file inside themes directories is recursive with unlimited directory depth by default,
+    which can result in slow performance when a lot of files are placed inside themes (e.g. a `node_modules` folder).
+    Define the optional `scan_depth` (integer) setting to the configuration to restrict scanning for the theme configuration
+    file to a specific depth.

@@ -49,7 +49,7 @@
         "sylius/theme-bundle": "^1.0",
         "sylius/user-bundle": "^1.0",
         "sylius-labs/association-hydrator": "^1.0",
-        "symfony/framework-bundle": "^3.2",
+        "symfony/framework-bundle": "^3.4",
         "winzou/state-machine-bundle": "^0.3",
         "liip/imagine-bundle": "^1.9.1"
     },
@@ -59,7 +59,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
-        "symfony/dependency-injection": "^3.2"
+        "symfony/dependency-injection": "^3.4"
     },
     "config": {
         "bin-dir": "bin"
@@ -80,7 +80,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     }
 }

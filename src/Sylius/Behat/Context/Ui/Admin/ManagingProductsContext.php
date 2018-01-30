@@ -250,11 +250,12 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should see the product :productName in the list
      * @Then the product :productName should appear in the store
      * @Then the product :productName should be in the shop
      * @Then this product should still be named :productName
      */
-    public function theProductShouldAppearInTheShop($productName)
+    public function theProductShouldAppearInTheShop(string $productName): void
     {
         $this->iWantToBrowseProducts();
 
@@ -263,6 +264,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Given I am browsing products
+     * @When I browse products
      * @When I want to browse products
      */
     public function iWantToBrowseProducts()
@@ -284,6 +286,22 @@ final class ManagingProductsContext implements Context
     public function iFilterThemByTaxon($taxonName)
     {
         $this->indexPage->filterByTaxon($taxonName);
+    }
+
+    /**
+     * @When I check (also) the :productName product
+     */
+    public function iCheckTheProduct(string $productName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $productName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
     }
 
     /**
@@ -333,9 +351,10 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should see a single product in the list
      * @Then I should see :numberOfProducts products in the list
      */
-    public function iShouldSeeProductsInTheList($numberOfProducts)
+    public function iShouldSeeProductsInTheList(int $numberOfProducts = 1): void
     {
         Assert::same($this->indexPage->countItems(), (int) $numberOfProducts);
     }

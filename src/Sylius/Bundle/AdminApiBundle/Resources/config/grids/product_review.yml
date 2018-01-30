@@ -1,0 +1,44 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_grid:
+    grids:
+        sylius_admin_api_product_review:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_review.class%"
+                    repository:
+                        method: createQueryBuilderByProductCode
+                        arguments: ["%locale%", $productCode]
+            sorting:
+                date: desc
+            fields:
+                date:
+                    type: datetime
+                    label: sylius.ui.date
+                    path: createdAt
+                    sortable: createdAt
+                    options:
+                        format: d-m-Y H:i:s
+                title:
+                    type: string
+                    label: sylius.ui.title
+                    sortable: ~
+                rating:
+                    type: string
+                    label: sylius.ui.rating
+                    sortable: ~
+                status:
+                    type: twig
+                    label: sylius.ui.status
+                reviewSubject:
+                    type: string
+                    label: sylius.ui.product
+                author:
+                    type: string
+                    label: sylius.ui.customer
+            filters:
+                title:
+                    type: string
+                    label: sylius.ui.title

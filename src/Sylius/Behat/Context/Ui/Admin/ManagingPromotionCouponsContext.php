@@ -82,6 +82,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @Given /^I browse coupons of (this promotion)$/
      * @Given /^I want to view all coupons of (this promotion)$/
      * @When /^I browse all coupons of ("[^"]+" promotion)$/
      */
@@ -242,6 +243,22 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When I check (also) the :couponCode coupon
+     */
+    public function iCheckTheCoupon(string $couponCode): void
+    {
+        $this->indexPage->checkResourceOnPage(['code' => $couponCode]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
      * @Then /^there should be (\d+) coupon related to (this promotion)$/
      */
     public function thereShouldBeCouponRelatedTo($number, PromotionInterface $promotion)
@@ -249,6 +266,14 @@ final class ManagingPromotionCouponsContext implements Context
         $this->indexPage->open(['promotionId' => $promotion->getId()]);
 
         Assert::same($this->indexPage->countItems(), (int) $number);
+    }
+
+    /**
+     * @Then I should see a single coupon in the list
+     */
+    public function iShouldSeeASingleCouponInTheList(): void
+    {
+        Assert::same($this->indexPage->countItems(), 1);
     }
 
     /**
@@ -401,5 +426,13 @@ final class ManagingPromotionCouponsContext implements Context
         $message = sprintf('Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length equals %d. Possible generate amount is 8.', $amount, $codeLength);
 
         Assert::true($this->generatePage->checkGenerationValidation($message));
+    }
+
+    /**
+     * @Then I should see the coupon :couponCode in the list
+     */
+    public function iShouldSeeTheCouponInTheList(string $couponCode): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $couponCode]));
     }
 }
