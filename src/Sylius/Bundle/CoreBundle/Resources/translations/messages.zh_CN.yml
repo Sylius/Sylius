@@ -162,8 +162,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: 多字节字符串
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP XML
@@ -192,8 +192,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: 非弃用
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: 注册的全局变量
             session:
                 auto_start: session.auto_start
