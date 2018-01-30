@@ -509,6 +509,7 @@ sylius:
         new_promotion_coupon: 'New promotion coupon'
         new_review: 'New review'
         new_role: 'New role'
+        new_route: 'New route'
         new_shipping_category: 'New shipping category'
         new_shipping_method: 'New shipping method'
         new_tax_category: 'New tax category'
@@ -554,6 +555,7 @@ sylius:
         number: 'Number'
         number_of_orders: 'Number of orders'
         oauth_provider: 'OAuth Provider'
+        old_route: Old route
         oldest_first: 'Oldest first'
         on_hold: 'On hold'
         options: 'Options'
@@ -852,6 +854,7 @@ sylius:
         update_product_association_type: 'Update product association type'
         updating_tax_rate: 'Updating tax rate'
         updating_date: 'Updating date'
+        url_redirects: 'URL redirects'
         usage: 'Usage'
         usage_limit: 'Usage limit'
         use_the_contact_form_below_to_send_us_a_message: 'Use the contact form below to send us a message.'
