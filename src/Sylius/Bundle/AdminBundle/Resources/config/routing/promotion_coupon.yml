@@ -79,6 +79,20 @@ sylius_admin_promotion_coupon_generate:
                 parameters: { promotionId: $promotionId }
             permission: true
 
+sylius_admin_promotion_coupon_bulk_delete:
+    path: /bulk-delete
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:bulkDeleteAction
+        _sylius:
+            section: admin
+            redirect: referer
+            permission: true
+            paginate: false
+            repository:
+                method: findById
+                arguments: [$ids]
+
 sylius_admin_promotion_coupon_delete:
     path: /{id}
     methods: [DELETE]

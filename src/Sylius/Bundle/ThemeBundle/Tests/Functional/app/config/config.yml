@@ -25,5 +25,6 @@ twig:
 sylius_theme:
     sources:
         filesystem:
+            scan_depth: 1
             directories:
                 - "%kernel.root_dir%/../../Fixtures/themes"

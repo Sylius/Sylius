@@ -1,0 +1,20 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 0,
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/products\/MUG_REVIEW_BEST\/reviews\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/v1\/products\/MUG_REVIEW_BEST\/reviews\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/v1\/products\/MUG_REVIEW_BEST\/reviews\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": []
+    }
+}

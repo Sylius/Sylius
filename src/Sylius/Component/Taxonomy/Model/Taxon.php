@@ -336,7 +336,7 @@ class Taxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    protected function createTranslation(): TaxonTranslation
+    protected function createTranslation(): TaxonTranslationInterface
     {
         return new TaxonTranslation();
     }

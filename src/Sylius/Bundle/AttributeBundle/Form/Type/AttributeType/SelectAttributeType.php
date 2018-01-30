@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -22,6 +23,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SelectAttributeType extends AbstractType
 {
+    /**
+     * @var string
+     */
+    private $defaultLocaleCode;
+
+    /**
+     * @param TranslationLocaleProviderInterface $localeProvider
+     */
+    public function __construct(TranslationLocaleProviderInterface $localeProvider)
+    {
+        $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -65,11 +79,25 @@ final class SelectAttributeType extends AbstractType
         $resolver
             ->setRequired('configuration')
             ->setDefault('placeholder', 'sylius.form.attribute_type_configuration.select.choose')
+            ->setDefault('locale_code', $this->defaultLocaleCode)
             ->setNormalizer('choices', function (Options $options) {
                 if (is_array($options['configuration'])
                     && isset($options['configuration']['choices'])
                     && is_array($options['configuration']['choices'])) {
-                    $choices = array_flip($options['configuration']['choices']);
+                    $choices = [];
+                    $localeCode = $options['locale_code'] ?? $this->defaultLocaleCode;
+
+                    foreach ($options['configuration']['choices'] as $key => $choice) {
+                        if (isset($options[$localeCode]) && '' !== $choice[$localeCode] && null !== $choice[$localeCode]) {
+                            $choices[$key] = $choice[$localeCode];
+
+                            continue;
+                        }
+
+                        $choices[$key] = $choice[$this->defaultLocaleCode];
+                    }
+
+                    $choices = array_flip($choices);
                     ksort($choices);
 
                     return $choices;

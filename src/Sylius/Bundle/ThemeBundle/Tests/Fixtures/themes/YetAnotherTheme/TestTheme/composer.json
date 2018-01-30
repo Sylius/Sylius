@@ -1,0 +1,11 @@
+{
+    "name": "sylius/third-test-theme",
+    "extra": {
+        "sylius-theme": {
+            "title": "Sylius Third Theme",
+            "parents": [
+                "sylius/first-test-theme"
+            ]
+        }
+    }
+}

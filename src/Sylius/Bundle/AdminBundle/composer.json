@@ -25,12 +25,12 @@
         "sonata-project/intl-bundle": "^2.2",
         "sylius/core-bundle": "^1.0",
         "sylius/ui-bundle": "^1.0",
-        "symfony/framework-bundle": "^3.2"
+        "symfony/framework-bundle": "^3.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.6",
         "phpspec/phpspec": "^4.0",
-        "symfony/dependency-injection": "^3.2"
+        "symfony/dependency-injection": "^3.4"
     },
     "config": {
         "bin-dir": "bin"
@@ -48,7 +48,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     }
 }
