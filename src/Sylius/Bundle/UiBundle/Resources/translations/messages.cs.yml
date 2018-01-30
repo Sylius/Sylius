@@ -677,7 +677,7 @@ sylius:
         start_date: 'Datum zahájení'
         starts_at: 'Začíná'
         starts_with: 'Začíná na'
-        state: 'Stát'
+        state: 'Stav'
         status: 'Status'
         street: 'Ulice'
         string_blocks: 'Řetězcové bloky'
