@@ -7,9 +7,9 @@ sylius_grid:
           class: Sylius\Component\Core\Model\URLRedirect
 
       filters:
-        name:
+        oldRoute:
           type: string
-          label: sylius.ui.name
+          label: sylius.ui.old_route
 
       fields:
         oldRoute:

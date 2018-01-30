@@ -25,8 +25,9 @@
         </service>
 
         <service id="sylius.event_subscriber.router" class="Sylius\Bundle\AdminBundle\EventListener\RouterListener">
-            <tag name="kernel.event_subscriber" event="kernel.request" />
+            <tag name="kernel.event_subscriber" event="kernel.request" method="onKernelRequest" />
             <tag name="monolog.logger" channel="request" />
+            <argument type="service" id="sylius.service.urlredirect"/>
         </service>
     </services>
 </container>

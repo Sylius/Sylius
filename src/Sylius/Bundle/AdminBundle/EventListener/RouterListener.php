@@ -11,15 +11,36 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\EventListener;
 
 
+use Sylius\Component\Core\URLRedirect\URLRedirectServiceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class RouterListener implements EventSubscriberInterface
 {
 
-    public function onKernelRequest(GetResponseEvent $event){
-        throw new \Exception('It works');
+    /**
+     * @var URLRedirectServiceInterface
+     */
+    private $redirectService;
+
+    public function __construct(URLRedirectServiceInterface $redirectService)
+    {
+        $this->redirectService = $redirectService;
+    }
+
+    public function onKernelRequest(GetResponseEvent $event)
+    {
+        $request = $event->getRequest();
+        $uri     = $request->getRequestUri();
+        $path    = parse_url($uri)['path'];
+
+        if ($this->redirectService->hasActiveRedirect($path)) {
+            $newURL = $this->redirectService->getRedirect();
+            $event->setResponse(new RedirectResponse($newURL));
+        }
+
     }
 
     /**
@@ -43,7 +64,7 @@ final class RouterListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => ['onKernelRequest', 100000]
+            KernelEvents::REQUEST => ['onKernelRequest']
         ];
     }
 }
