@@ -30,6 +30,10 @@ Go to the ``http://localhost:8000/admin/payment-methods/new/stripe_checkout`` ur
 
     If your are not sure how to do it check how we do it :doc:`for Paypal in this cookbook </cookbook/payments/paypal>`.
 
+.. warning::
+
+    When your project is behind a loadbalancer and uses https you probably need to configure `trusted proxies <http://symfony.com/doc/current/deployment/proxies.html>`_. Otherwise the payment will not succeed and the user will endlessly loopback to the payment page without any notice.
+
 Choosing Stripe Credit Card method in Checkout
 ----------------------------------------------
 
