@@ -43,13 +43,15 @@ class ProvinceController extends ResourceController
             throw new AccessDeniedException();
         }
 
+        $addressType = $request->query->get('type');
+
         /** @var CountryInterface $country */
         if (!$country = $this->get('sylius.repository.country')->findOneBy(['code' => $countryCode])) {
             throw new NotFoundHttpException('Requested country does not exist.');
         }
 
         if (!$country->hasProvinces()) {
-            $form = $this->createProvinceTextForm();
+            $form = $this->createProvinceTextForm($addressType);
 
             $view = View::create()
                 ->setData([
@@ -64,7 +66,7 @@ class ProvinceController extends ResourceController
             ]);
         }
 
-        $form = $this->createProvinceChoiceForm($country);
+        $form = $this->createProvinceChoiceForm($country, $addressType);
 
         $view = View::create()
             ->setData([
@@ -86,7 +88,10 @@ class ProvinceController extends ResourceController
      */
     protected function createProvinceChoiceForm(CountryInterface $country): FormInterface
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', ProvinceCodeChoiceType::class, null, [
+        $type= $this->getAddressNameFromType($addressType);
+        $fieldname = 'sylius_address_'.$type.'_province';
+
+        return $this->get('form.factory')->createNamed($fieldname, ProvinceCodeChoiceType::class, null, [
             'country' => $country,
             'label' => 'sylius.form.address.province',
             'placeholder' => 'sylius.form.province.select',
@@ -94,13 +99,34 @@ class ProvinceController extends ResourceController
     }
 
     /**
+     * @param string $addressType
+     *
      * @return FormInterface
      */
-    protected function createProvinceTextForm(): FormInterface
+    protected function createProvinceTextForm(?string $addressType): FormInterface
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', TextType::class, null, [
+        $type= $this->getAddressNameFromType($addressType);
+        $fieldname = 'sylius_address_'.$type.'_province';
+
+        return $this->get('form.factory')->createNamed($fieldname, TextType::class, null, [
             'required' => false,
             'label' => 'sylius.form.address.province',
         ]);
+    }
+
+    /**
+    * @param string $addressName
+    *
+    * @return string
+    */
+    private function getAddressNameFromType(?string $addressName)
+    {
+        if ($addressName) {
+            preg_match('/sylius-(.*?)-address/', $addressName, $m);
+            if (count($m>0)) {
+                return  $m[1];
+            }
+        }
+        return '';
     }
 }

@@ -29,7 +29,12 @@
                     return;
                 }
 
-                $.get(provinceContainer.attr('data-url'), {countryCode: $(this).val()}, function (response) {
+                var addressType= $(this).closest('div[id$="-address"]').attr('id');
+        
+                $.get(provinceContainer.attr('data-url'), {
+                    countryCode: $(this).val(),
+                    type: addressType
+                }, function (response) {
                     if (!response.content) {
                         provinceContainer.fadeOut('slow', function () {
                             provinceContainer.html('');

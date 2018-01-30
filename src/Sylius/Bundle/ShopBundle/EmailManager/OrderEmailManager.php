@@ -37,6 +37,13 @@ final class OrderEmailManager implements OrderEmailManagerInterface
      */
     public function sendConfirmationEmail(OrderInterface $order): void
     {
+        // send copy to contact email
+        $channel = $order->getChannel();
+        $contact_email = $channel->getContactEmail();
+        if (!empty($contact_email)) {
+            $this->emailSender->send(Emails::ORDER_CONFIRMATION, [$contact_email], ['order' => $order]);
+        }
+
         $this->emailSender->send(Emails::ORDER_CONFIRMATION, [$order->getCustomer()->getEmail()], ['order' => $order]);
     }
 }

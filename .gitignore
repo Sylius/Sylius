@@ -1,4 +1,9 @@
 /.php_cs.cache
+/.phpintel
+*.sublime-project
+*.sublime-workspace
+
+
 
 /app/config/parameters.yml
 /app/config/*.local.yml
