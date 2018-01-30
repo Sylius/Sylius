@@ -8,6 +8,8 @@ sylius:
             invalid: This email is invalid.
             max: Email must not be longer than {{ limit }} characters.
             min: Email must be at least {{ limit }} characters long.
+        shippable_countries:
+            unique: Chosen countries must be unique.
     channel_pricing:
         price:
             min: Price must be at least {{ limit }}.

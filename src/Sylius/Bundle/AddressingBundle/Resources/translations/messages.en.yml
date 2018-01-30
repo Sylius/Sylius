@@ -11,6 +11,7 @@ sylius:
             street: Street address
             province: Province
             zone: Zone
+            select: Select
         country:
             add_province: Add province
             name: Name

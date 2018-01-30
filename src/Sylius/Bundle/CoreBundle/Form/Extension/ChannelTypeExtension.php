@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
+use Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
@@ -23,8 +24,10 @@ use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class ChannelTypeExtension extends AbstractTypeExtension
 {
@@ -78,6 +81,23 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ])
             ->add('accountVerificationRequired', CheckboxType::class, [
                 'label' => 'sylius.form.channel.account_verification_required',
+                'required' => false,
+            ])
+            ->add('shippableCountries', CollectionType::class, [
+                'label' => 'sylius.form.channel.shippableCountries',
+                'entry_type' => CountryChoiceType::class,
+                'entry_options' => [
+                    'constraints' => [
+                        new NotBlank([
+                            'groups' => ['sylius'],
+                        ]),
+                    ],
+                ],
+                'allow_add' => true,
+                'button_add_label' => 'sylius.form.channel.add_country',
+                'allow_delete' => true,
+                'by_reference' => false,
+                'delete_empty' => false,
                 'required' => false,
             ])
             ->addEventSubscriber(new AddBaseCurrencySubscriber())

@@ -50,5 +50,12 @@
                 </option>
             </constraint>
         </property>
+        <property name="shippableCountries">
+            <constraint name="Sylius\Bundle\ResourceBundle\Validator\Constraints\UniqueWithinCollectionConstraint">
+                <option name="message">sylius.channel.shippable_countries.unique</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Valid" />
+        </property>
     </class>
 </constraint-mapping>

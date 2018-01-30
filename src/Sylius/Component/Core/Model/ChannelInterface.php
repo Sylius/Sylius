@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Currency\Model\CurrenciesAwareInterface;
@@ -114,4 +116,24 @@ interface ChannelInterface extends
      * @param bool $accountVerificationRequired
      */
     public function setAccountVerificationRequired(bool $accountVerificationRequired): void;
+
+    /**
+     * @return Collection
+     */
+    public function getShippableCountries(): Collection;
+
+    /**
+     * @return bool
+     */
+    public function hasShippableCountries(): bool;
+
+    /**
+     * @param CountryInterface $country
+     */
+    public function addShippableCountry(CountryInterface $country): void;
+
+    /**
+     * @param CountryInterface $country
+     */
+    public function removeShippableCountry(CountryInterface $country): void;
 }

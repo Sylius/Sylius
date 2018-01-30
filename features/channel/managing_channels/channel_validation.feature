@@ -51,3 +51,34 @@ Feature: Channel validation
         And I try to save my changes
         Then I should be notified that name is required
         And this channel should still be named "Web Channel"
+
+    @ui @javascript
+    Scenario: Trying to add a channel with duplicate shipping countries
+        Given the store operates in "United States"
+        And the store has locale "English (United States)"
+        And the store has currency "US Dollar"
+        And I want to create a new channel
+        When I specify its code as "MOBILE"
+        And I name it "Web Channel"
+        And I choose "English (United States)" as a default locale
+        And I choose "US Dollar" as the base currency
+        And I add a shippable country "United States"
+        And I add a shippable country "United States"
+        And I try to add it
+        Then I should be notified that shippable countries must be unique
+        And channel with code "MOBILE" should not be added
+
+    @ui @javascript
+    Scenario: Trying to add a channel with empty shipping countries
+        Given the store operates in "United States"
+        And the store has locale "English (United States)"
+        And the store has currency "US Dollar"
+        And I want to create a new channel
+        When I specify its code as "MOBILE"
+        And I name it "Web Channel"
+        And I choose "English (United States)" as a default locale
+        And I choose "US Dollar" as the base currency
+        And I add a shippable country but I don't select one
+        And I try to add it
+        Then I should be notified that shippable countries cannot be blank
+        And channel with code "MOBILE" should not be added

@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -77,12 +78,18 @@ class Channel extends BaseChannel implements ChannelInterface
      */
     protected $accountVerificationRequired = true;
 
+    /**
+     * @var Collection
+     */
+    protected $shippableCountries;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->currencies = new ArrayCollection();
         $this->locales = new ArrayCollection();
+        $this->shippableCountries = new ArrayCollection();
     }
 
     /**
@@ -299,5 +306,37 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setAccountVerificationRequired(bool $accountVerificationRequired): void
     {
         $this->accountVerificationRequired = $accountVerificationRequired;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippableCountries(): Collection
+    {
+        return $this->shippableCountries;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasShippableCountries(): bool
+    {
+        return !$this->shippableCountries->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addShippableCountry(CountryInterface $country): void
+    {
+        $this->shippableCountries->add($country);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeShippableCountry(CountryInterface $country): void
+    {
+        $this->shippableCountries->removeElement($country);
     }
 }

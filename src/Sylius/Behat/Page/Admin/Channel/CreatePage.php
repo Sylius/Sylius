@@ -135,6 +135,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
             'name' => '#sylius_channel_name',
+            'shippableCountries' => "*[id^='sylius_channel_shippableCountries']",
         ]);
     }
 }

@@ -24,6 +24,14 @@
                 {{ form_row(form.color) }}
                 {{ form_row(form.themeName) }}
             </div>
+            <div class="field">
+                {{ form_label(form.shippableCountries) }}
+                {{ form_widget(form.shippableCountries) }}
+                {% for country in form.shippableCountries %}
+                    {{ form_widget(country) }}
+                    {{ form_errors(country) }}
+                {% endfor %}
+            </div>
         </div>
     </div>
     <div class="column">

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
@@ -89,6 +90,11 @@ interface AddressPageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getShippingAddressCountry();
+
+    /**
+     * @return NodeElement[]
+     */
+    public function getSelectableShippingAddressCountries();
 
     public function nextStep();
 

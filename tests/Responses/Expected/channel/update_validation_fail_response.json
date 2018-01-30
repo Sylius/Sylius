@@ -27,7 +27,8 @@
             "skippingPaymentStepAllowed": {},
             "accountVerificationRequired": {},
             "code": {},
-            "baseCurrency": {}
+            "baseCurrency": {},
+            "shippableCountries": {}
         }
     }
 }

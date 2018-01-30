@@ -15,6 +15,7 @@ namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -113,6 +114,25 @@ final class ChannelSpec extends ObjectBehavior
         $this->addLocale($locale);
         $this->removeLocale($locale);
         $this->hasLocale($locale)->shouldReturn(false);
+    }
+
+    function it_has_an_empty_collection_of_shippable_countries_by_default(): void
+    {
+        $this->getShippableCountries()->shouldHaveType(Collection::class);
+        $this->getShippableCountries()->count()->shouldReturn(0);
+    }
+
+    function it_adds_shippable_country(CountryInterface $country): void
+    {
+        $this->addShippableCountry($country);
+        $this->hasShippableCountries()->shouldReturn(true);
+    }
+
+    function it_removes_shippable_country(CountryInterface $country): void
+    {
+        $this->addShippableCountry($country);
+        $this->removeShippableCountry($country);
+        $this->hasShippableCountries()->shouldReturn(false);
     }
 
     function it_has_no_theme_name_by_default(): void
