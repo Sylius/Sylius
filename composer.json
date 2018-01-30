@@ -59,6 +59,7 @@
         "symfony/polyfill-mbstring": "^1.3",
         "symfony/swiftmailer-bundle": "^3.0",
         "symfony/symfony": "^3.4",
+        "symfony/thanks": "^1.0",
         "twig/extensions": "^1.4",
         "twig/twig": "^2.0",
         "webmozart/assert": "^1.1",
