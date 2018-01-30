@@ -485,9 +485,9 @@ final class OrderContext implements Context
         $total = $this->getPriceFromString($total);
 
         for ($i = 0; $i < $numberOfCustomers; ++$i) {
-            $order = $this->createCart($customers[rand(0, $numberOfCustomers - 1)]);
+            $order = $this->createCart($customers[random_int(0, $numberOfCustomers - 1)]);
 
-            $price = $i === ($numberOfCustomers - 1) ? $total : rand(1, $total);
+            $price = $i === ($numberOfCustomers - 1) ? $total : random_int(1, $total);
             $total -= $price;
 
             $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
@@ -873,11 +873,11 @@ final class OrderContext implements Context
         $total = $this->getPriceFromString($total);
 
         for ($i = 0; $i < $numberOfOrders; ++$i) {
-            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#' . uniqid());
+            $order = $this->createOrder($customers[random_int(0, $numberOfCustomers - 1)], '#' . uniqid());
             $order->setState(OrderInterface::STATE_NEW); // Temporary, we should use checkout to place these orders.
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
-            $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
+            $price = $i === ($numberOfOrders - 1) ? $total : random_int(1, $total);
             $total -= $price;
 
             $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
@@ -912,11 +912,11 @@ final class OrderContext implements Context
         $total = $this->getPriceFromString($total);
 
         for ($i = 0; $i < $numberOfOrders; ++$i) {
-            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#' . uniqid(), $product->getChannels()->first());
+            $order = $this->createOrder($customers[random_int(0, $numberOfCustomers - 1)], '#' . uniqid(), $product->getChannels()->first());
             $order->setState(OrderInterface::STATE_NEW);
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
-            $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
+            $price = $i === ($numberOfOrders - 1) ? $total : random_int(1, $total);
             $total -= $price;
 
             $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);

@@ -130,7 +130,7 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
     {
         $statuses = [ReviewInterface::STATUS_NEW, ReviewInterface::STATUS_ACCEPTED, ReviewInterface::STATUS_REJECTED];
 
-        return $statuses[(rand(0, 2))];
+        return $statuses[random_int(0, 2)];
     }
 
     /**

@@ -220,7 +220,7 @@ class OrderFixture extends AbstractFixture
      */
     private function generateItems(OrderInterface $order): void
     {
-        $numberOfItems = rand(1, 5);
+        $numberOfItems = random_int(1, 5);
         $products = $this->productRepository->findAll();
 
         for ($i = 0; $i < $numberOfItems; ++$i) {
@@ -230,7 +230,7 @@ class OrderFixture extends AbstractFixture
             $variant = $this->faker->randomElement($product->getVariants()->toArray());
 
             $item->setVariant($variant);
-            $this->orderItemQuantityModifier->modify($item, rand(1, 5));
+            $this->orderItemQuantityModifier->modify($item, random_int(1, 5));
 
             $order->addItem($item);
         }

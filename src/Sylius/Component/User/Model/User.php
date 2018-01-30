@@ -128,7 +128,7 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->salt = base_convert(sha1(uniqid((string) mt_rand(), true)), 16, 36);
+        $this->salt = base_convert(bin2hex(random_bytes(20)), 16, 36);
         $this->oauthAccounts = new ArrayCollection();
         $this->createdAt = new \DateTime();
 

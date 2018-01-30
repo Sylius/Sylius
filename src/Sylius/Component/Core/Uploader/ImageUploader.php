@@ -45,7 +45,7 @@ class ImageUploader implements ImageUploaderInterface
         }
 
         do {
-            $hash = md5(uniqid((string) mt_rand(), true));
+            $hash = bin2hex(random_bytes(16));
             $path = $this->expandPath($hash . '.' . $image->getFile()->guessExtension());
         } while ($this->filesystem->has($path));
 

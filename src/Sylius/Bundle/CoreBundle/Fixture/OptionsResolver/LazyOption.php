@@ -65,7 +65,7 @@ final class LazyOption
     public static function randomOneOrNull(RepositoryInterface $repository, int $chanceOfRandomOne): \Closure
     {
         return function (Options $options) use ($repository, $chanceOfRandomOne) {
-            if (mt_rand(1, 100) > $chanceOfRandomOne) {
+            if (random_int(1, 100) > $chanceOfRandomOne) {
                 return null;
             }
 

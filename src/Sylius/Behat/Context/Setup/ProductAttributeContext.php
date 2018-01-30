@@ -277,7 +277,7 @@ final class ProductAttributeContext implements Context
     ) {
         $attribute = $this->provideProductAttribute('percent', $productAttributeName);
         $attribute->setPosition((int) $position);
-        $attributeValue = $this->createProductAttributeValue(rand(1, 100) / 100, $attribute);
+        $attributeValue = $this->createProductAttributeValue(random_int(1, 100) / 100, $attribute);
 
         $product->addAttribute($attributeValue);
 
