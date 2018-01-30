@@ -225,6 +225,18 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $this->getElement('shipping_country')->find('css', 'option:selected')->getText();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getSelectableShippingAddressCountries()
+    {
+        $selectItems = $this->getElement('shipping_country')->waitFor(2, function () {
+            return $this->getElement('shipping_country')->findAll('css', 'option');
+        });
+
+        return $selectItems;
+    }
+
     public function nextStep()
     {
         $this->getElement('next_step')->press();

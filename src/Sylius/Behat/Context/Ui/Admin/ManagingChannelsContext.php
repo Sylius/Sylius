@@ -20,6 +20,7 @@ use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
@@ -508,5 +509,49 @@ final class ManagingChannelsContext implements Context
             'nameAndDescription' => $channel->getName(),
             'enabled' => $state ? 'Enabled' : 'Disabled',
         ]));
+    }
+
+    /**
+     * @When I add a shippable country :country
+     */
+    public function iAddAShippableCountry($country)
+    {
+        $this->updatePage->addShippingCountry();
+        $this->updatePage->chooseShippingCountry($country);
+    }
+
+    /**
+     * @When I add a shippable country but I don't select one
+     */
+    public function iAddAnEmptyShippableCountry()
+    {
+        $this->updatePage->addShippingCountry();
+    }
+
+    /**
+     * @Then the channel :channel should have a shippable country :country
+     * @Then /^(this channel) should have "([^"]+)" as shipping country$/
+     */
+    public function theChannelShouldHaveAShippableCountry(ChannelInterface $channel, CountryInterface $country)
+    {
+        $countries = $channel->getShippableCountries();
+
+        Assert::true($countries->contains($country));
+    }
+
+    /**
+     * @Then I should be notified that shippable countries must be unique
+     */
+    public function iShouldBeNotifiedThatShippableCountriesMustBeUnique()
+    {
+        Assert::same($this->createPage->getValidationMessage('shippableCountries'), 'Chosen countries must be unique.');
+    }
+
+    /**
+     * @Then I should be notified that shippable countries cannot be blank
+     */
+    public function iShouldBeNotifiedThatShippableCountriesCannotBeBlank()
+    {
+        Assert::same($this->createPage->getValidationMessage('shippableCountries'), 'This value should not be blank.');
     }
 }

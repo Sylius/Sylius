@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -393,6 +394,34 @@ final class CheckoutAddressingContext implements Context
     {
         $this->assertElementValidationMessage($type, $firstElement, sprintf('Please enter %s.', $firstElement));
         $this->assertElementValidationMessage($type, $secondElement, sprintf('Please enter %s.', $secondElement));
+    }
+
+    /**
+     * @Then I should be able to select :country as country
+     */
+    public function iShouldBeAbleToSelectAsCountry(CountryInterface $country)
+    {
+        $selectableCountries = $this->addressPage->getSelectableShippingAddressCountries();
+
+        $countryCodes = array_map(function (NodeElement $countryOption) {
+            return $countryOption->getValue();
+        }, $selectableCountries);
+
+        Assert::true(in_array($country->getCode(), $countryCodes));
+    }
+
+    /**
+     * @Then I should not be able to select :country as country
+     */
+    public function iShouldNotBeAbleToSelectAsCountry(CountryInterface $country)
+    {
+        $selectableCountries = $this->addressPage->getSelectableShippingAddressCountries();
+
+        $countryCodes = array_map(function (NodeElement $countryOption) {
+            return $countryOption->getValue();
+        }, $selectableCountries);
+
+        Assert::false(in_array($country->getCode(), $countryCodes));
     }
 
     /**

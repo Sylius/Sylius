@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -199,6 +200,16 @@ final class ChannelContext implements Context
     public function onThisChannelAccountVerificationIsNotRequired(ChannelInterface $channel)
     {
         $channel->setAccountVerificationRequired(false);
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given the channel :channel has a shipping country :country
+     */
+    public function theChannelHasAShippingCountry(ChannelInterface $channel, CountryInterface $country)
+    {
+        $channel->addShippableCountry($country);
 
         $this->channelManager->flush();
     }

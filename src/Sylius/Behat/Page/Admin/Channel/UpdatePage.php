@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Channel;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
@@ -120,6 +121,31 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function isBaseCurrencyDisabled()
     {
         return $this->getElement('base_currency')->hasAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addShippingCountry(): void
+    {
+        $this->getDocument()->clickLink('Add Country');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function chooseShippingCountry(string $country): void
+    {
+        $selectItems = $this->getDocument()->waitFor(2, function () {
+            return $this->getDocument()->findAll('css', 'div[data-form-type="collection"] select');
+        });
+        $lastSelectItem = end($selectItems);
+
+        if (false === $lastSelectItem) {
+            throw new ElementNotFoundException($this->getSession(), 'select', 'css', 'div[data-form-type="collection"] select');
+        }
+
+        $lastSelectItem->selectOption($country);
     }
 
     /**

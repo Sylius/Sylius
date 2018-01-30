@@ -7,6 +7,7 @@ Feature: Adding a new channel
     Background:
         Given the store has currency "Euro"
         And the store has locale "English (United States)"
+        And the store operates in "Germany" and "France"
         And I am logged in as an administrator
 
     @ui
@@ -36,3 +37,16 @@ Feature: Adding a new channel
         And I add it
         Then I should be notified that it has been successfully created
         And the channel "Mobile channel" should appear in the registry
+
+    @ui @javascript
+    Scenario: Adding a new channel with shippable countries
+        Given I want to create a new channel
+        When I specify its code as "MOBILE"
+        And I name it "Mobile channel"
+        And I choose "Euro" as the base currency
+        And I choose "English (United States)" as a default locale
+        And I add a shippable country "France"
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the channel "Mobile channel" should appear in the registry
+        And the channel "Mobile channel" should have a shippable country "France"

@@ -94,4 +94,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isBaseCurrencyDisabled();
+
+    public function addShippingCountry(): void;
+
+    /**
+     * @param string $country
+     */
+    public function chooseShippingCountry(string $country): void;
 }

@@ -43,7 +43,8 @@
         "errors": [
           "Please enter channel base currency."
         ]
-      }
+      },
+      "shippableCountries": {}
     }
   }
 }

@@ -6,6 +6,7 @@ Feature: Editing channel
 
     Background:
         Given the store operates on a channel named "Web Channel"
+        And the store operates in "Germany" and "France"
         And I am logged in as an administrator
 
     @todo
@@ -33,3 +34,11 @@ Feature: Editing channel
     Scenario: Seeing disabled base currency field during channel edition
         When I want to modify a channel "Web Channel"
         Then the base currency field should be disabled
+
+    @ui @javascript
+    Scenario: Adding shippable countries to an existing channel
+        Given I want to modify a channel "Web Channel"
+        When I add a shippable country "France"
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And the channel "Web Channel" should have a shippable country "France"
