@@ -11,17 +11,26 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd"
+>
 
     <entity name="Sylius\Component\Core\Model\URLRedirect" table="sylius_url_redirects">
         <id name="id" type="integer">
-            <generator strategy="AUTO" />
+            <generator strategy="AUTO"/>
         </id>
 
-        <field name="oldRoute" type="string" length="255" unique="true"/>
+        <field name="oldRoute" type="string" length="255"/>
         <field name="newRoute" type="string" length="255"/>
 
-        <field name="enabled" type="boolean" />
+        <field name="enabled" type="boolean"/>
+
+        <unique-constraints>
+            <unique-constraint columns="oldRoute,enabled" name="one_enabled_route"/>
+        </unique-constraints>
+
     </entity>
 
 </doctrine-mapping>

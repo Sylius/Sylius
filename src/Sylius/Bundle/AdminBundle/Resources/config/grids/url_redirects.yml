@@ -10,6 +10,9 @@ sylius_grid:
         oldRoute:
           type: string
           label: sylius.ui.old_route
+        enabled:
+          type: boolean
+          label: sylius.ui.enabled
 
       fields:
         oldRoute:

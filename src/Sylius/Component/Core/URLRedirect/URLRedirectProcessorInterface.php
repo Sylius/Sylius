@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Application;
+namespace Sylius\Component\Core\URLRedirect;
 
 interface URLRedirectProcessorInterface
 {

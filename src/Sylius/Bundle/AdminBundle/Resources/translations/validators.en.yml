@@ -1,0 +1,5 @@
+sylius:
+  url_redirects:
+    uri_validation: Enter a valid URI
+    redirect_loop: You can't do that. There is a redirect loop.
+    self_reroute: The route can't route to itself.

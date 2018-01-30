@@ -8,13 +8,13 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Application;
+namespace spec\Sylius\Component\Core\URLRedirect;
 
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Application\URLRedirectProcessorInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\URLRedirect;
+use Sylius\Component\Core\URLRedirect\URLRedirectProcessorInterface;
 
 class URLRedirectProcessorSpec extends ObjectBehavior
 {

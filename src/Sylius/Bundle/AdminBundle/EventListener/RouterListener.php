@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\EventListener;
 
 
-use Sylius\Component\Core\URLRedirect\URLRedirectServiceInterface;
+use Sylius\Component\Core\URLRedirect\URLRedirectProcessorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -25,7 +25,7 @@ final class RouterListener implements EventSubscriberInterface
      */
     private $redirectService;
 
-    public function __construct(URLRedirectServiceInterface $redirectService)
+    public function __construct(URLRedirectProcessorInterface $redirectService)
     {
         $this->redirectService = $redirectService;
     }
@@ -36,9 +36,9 @@ final class RouterListener implements EventSubscriberInterface
         $uri     = $request->getRequestUri();
         $path    = parse_url($uri)['path'];
 
-        if ($this->redirectService->hasActiveRedirect($path)) {
-            $newURL = $this->redirectService->getRedirect();
-            $event->setResponse(new RedirectResponse($newURL));
+        $newRoute = $this->redirectService->redirectRoute($path);
+        if ($newRoute !== $path) {
+            $event->setResponse(new RedirectResponse($newRoute));
         }
 
     }

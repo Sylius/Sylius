@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping
+        xmlns="http://symfony.com/schema/dic/constraint-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd"
+>
+
+    <class name="Sylius\Component\Core\Model\URLRedirect">
+
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>oldRoute</value>
+                <value>enabled</value>
+            </option>
+            <option name="message">sylius.url_redirects.old_route.unique</option>
+        </constraint>
+
+        <constraint name="Sylius\Bundle\AdminBundle\Validator\Constraints\URLRedirectConstraint">
+            <option name="message">sylius.url_redirects.redirect_loop</option>
+        </constraint>
+
+        <property name="oldRoute">
+            <constraint name="NotBlank" />
+            <constraint name="Regex">
+                <option name="pattern">/^\/[\w\d-_\/\.]+$/</option>
+                <option name="message">sylius.url_redirects.uri_validation</option>
+            </constraint>
+        </property>
+
+        <property name="newRoute">
+            <constraint name="NotBlank" />
+            <constraint name="Regex">
+                <option name="pattern">/^\/[\w\d-_\/\.]+$/</option>
+                <option name="message">sylius.url_redirects.uri_validation</option>
+            </constraint>
+        </property>
+
+    </class>
+
+</constraint-mapping>

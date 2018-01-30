@@ -37,7 +37,7 @@ class URLRedirect implements URLRedirectInterface, ResourceInterface
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -53,9 +53,9 @@ class URLRedirect implements URLRedirectInterface, ResourceInterface
     /**
      * @param string $oldRoute
      */
-    public function setOldRoute(string $oldRoute): void
+    public function setOldRoute(?string $oldRoute): void
     {
-        $this->oldRoute = $oldRoute;
+        $this->oldRoute = $oldRoute ?: '';
     }
 
     /**
@@ -69,9 +69,9 @@ class URLRedirect implements URLRedirectInterface, ResourceInterface
     /**
      * @param string $newRoute
      */
-    public function setNewRoute(string $newRoute): void
+    public function setNewRoute(?string $newRoute): void
     {
-        $this->newRoute = $newRoute;
+        $this->newRoute = $newRoute ?: '';
     }
 
     /**

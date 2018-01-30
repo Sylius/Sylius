@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service class="Sylius\Component\Core\URLRedirect\URLRedirectProcessor"
+                 id="sylius_bundle_core.application.urlredirect_processor">
+            <argument id="sylius.repository.url_redirect" type="service"/>
+        </service>
+
+        <service class="Sylius\Bundle\AdminBundle\Validator\Constraints\URLRedirectValidator"
+                 id="sylius_bundle_admin.validator_constraints.urlredirect_validator">
+            <argument id="sylius.component.core.urlredirect.urlredirect_loop_detector" type="service"/>
+            <tag name="validator.constraint_validator" alias="sylius_url_redirect_validator"/>
+        </service>
+
+        <service class="Sylius\Component\Core\URLRedirect\URLRedirectLoopDetector"
+                 id="sylius.component.core.urlredirect.urlredirect_loop_detector">
+            <argument id="sylius.repository.url_redirect" type="service"/>
+        </service>
+
+
+    </services>
+</container>

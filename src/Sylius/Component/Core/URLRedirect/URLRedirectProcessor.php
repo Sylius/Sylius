@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Application;
+namespace Sylius\Component\Core\URLRedirect;
 
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -29,10 +29,10 @@ class URLRedirectProcessor implements URLRedirectProcessorInterface
     public function redirectRoute(string $oldRoute): string
     {
         /** @var URLRedirectInterface|null $route */
-        $route = $this->urlRedirectRepository->findOneBy(['oldRoute' => $oldRoute]);
+        $route = $this->urlRedirectRepository->findOneBy(['oldRoute' => $oldRoute, 'enabled' => true]);
 
         if ($route !== null) {
-            return $route->getNewRoute();
+            return $this->redirectRoute($route->getNewRoute());
         }
 
         return $oldRoute;
