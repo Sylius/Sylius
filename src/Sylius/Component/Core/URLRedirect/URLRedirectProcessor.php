@@ -13,15 +13,16 @@ namespace Sylius\Component\Core\URLRedirect;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\URLRedirectInterface;
+use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
 
 class URLRedirectProcessor implements URLRedirectProcessorInterface
 {
     /**
-     * @var EntityRepository
+     * @var URLRedirectRepositoryInterface
      */
     private $urlRedirectRepository;
 
-    public function __construct(EntityRepository $urlRedirectRepository)
+    public function __construct(URLRedirectRepositoryInterface $urlRedirectRepository)
     {
         $this->urlRedirectRepository = $urlRedirectRepository;
     }
@@ -29,7 +30,7 @@ class URLRedirectProcessor implements URLRedirectProcessorInterface
     public function redirectRoute(string $oldRoute): string
     {
         /** @var URLRedirectInterface|null $route */
-        $route = $this->urlRedirectRepository->findOneBy(['oldRoute' => $oldRoute, 'enabled' => true]);
+        $route = $this->urlRedirectRepository->getActiveRedirectForRoute($oldRoute);
 
         if ($route !== null) {
             return $this->redirectRoute($route->getNewRoute());

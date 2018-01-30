@@ -9,5 +9,6 @@ sylius_resource:
       sylius.url_redirect:
         classes:
           model: Sylius\Component\Core\Model\URLRedirect
+          repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\URLRedirectRepository
           interface: Sylius\Component\Core\Model\URLRedirectInterface
           controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController

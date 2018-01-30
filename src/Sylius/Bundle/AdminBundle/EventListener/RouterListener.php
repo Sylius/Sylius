@@ -21,7 +21,7 @@ final class RouterListener implements EventSubscriberInterface
 {
 
     /**
-     * @var URLRedirectServiceInterface
+     * @var URLRedirectProcessorInterface
      */
     private $redirectService;
 

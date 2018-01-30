@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Validator\Constraints;
+namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 
 use Sylius\Component\Core\Model\URLRedirect;
@@ -25,7 +25,7 @@ use TypeError;
  * @package Sylius\Bundle\AdminBundle\Validator\Constraints
  * @see URLRedirectLoopDetector
  */
-class URLRedirectValidator extends ConstraintValidator
+final class URLRedirectValidator extends ConstraintValidator
 {
     /**
      * @var URLRedirectLoopDetectorInterface

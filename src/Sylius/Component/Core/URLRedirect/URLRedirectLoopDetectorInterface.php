@@ -16,6 +16,8 @@ use Sylius\Component\Core\Model\URLRedirectInterface;
 /**
  * Interface URLRedirectLoopDetectorInterface
  *
+ * Classes that detect loops in URL redirects can implement that.
+ *
  * @package Sylius\Component\Core\URLRedirect
  */
 interface URLRedirectLoopDetectorInterface

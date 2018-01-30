@@ -1,0 +1,5 @@
+sylius:
+  url_redirects:
+    uri_validation: Geben Sie eine gültige URI ein
+    redirect_loop: Sie können das nicht machen. Es entsteht eine Weiterleitungsschleife.
+    self_reroute: Die Route kann nicht auf sich selber zeigen.

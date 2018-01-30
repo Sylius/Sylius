@@ -15,7 +15,7 @@
             <option name="message">sylius.url_redirects.old_route.unique</option>
         </constraint>
 
-        <constraint name="Sylius\Bundle\AdminBundle\Validator\Constraints\URLRedirectConstraint">
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\URLRedirect">
             <option name="message">sylius.url_redirects.redirect_loop</option>
         </constraint>
 

@@ -12,8 +12,8 @@ namespace Sylius\Component\Core\URLRedirect;
 
 
 use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\URLRedirect;
 use Sylius\Component\Core\Model\URLRedirectInterface;
+use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
 
 /**
  * Class URLRedirectLoopDetector
@@ -29,7 +29,7 @@ class URLRedirectLoopDetector implements URLRedirectLoopDetectorInterface
      */
     private $repository;
 
-    public function __construct(EntityRepository $repository)
+    public function __construct(URLRedirectRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
@@ -42,14 +42,15 @@ class URLRedirectLoopDetector implements URLRedirectLoopDetectorInterface
         $currentNode = $newNode;
 
         while (!is_null($currentNode)) {
-            //If the current node was already redirected to, it's a loop
             $currentURL = $currentNode->getNewRoute();
+
+            //If the current node was already redirected to, it's a loop
             if (in_array($currentURL, $visitedNodes)) {
                 return true;
             }
 
             $visitedNodes[] = $currentURL;
-            $currentNode = $this->repository->findOneBy(['oldRoute' => $currentURL, 'enabled' => true]);
+            $currentNode = $this->repository->getActiveRedirectForRoute($currentURL);
         }
 
         return false;

@@ -17,7 +17,6 @@
         <import resource="services/email.xml" />
         <import resource="services/listener.xml" />
         <import resource="services/menu.xml" />
-        <import resource="services/url_redirects.xml" />
     </imports>
 
     <services>
