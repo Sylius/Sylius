@@ -32,6 +32,9 @@
         "phpspec/phpspec": "^4.0",
         "symfony/dependency-injection": "^3.2"
     },
+    "conflict": {
+        "twig/twig": "^1.0"
+    },
     "config": {
         "bin-dir": "bin"
     },
