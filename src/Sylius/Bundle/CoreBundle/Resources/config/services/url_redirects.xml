@@ -26,6 +26,13 @@
             <tag name="validator.constraint_validator" alias="sylius_url_redirect_validator"/>
         </service>
 
+        <service class="Sylius\Bundle\CoreBundle\Validator\Constraints\ActiveRedirectRoutesValidator"
+                 id="sylius_bundle_admin.validator_constraints.active_redirect_route_validator">
+            <argument id="sylius.repository.url_redirect" type="service"/>
+            <tag name="validator.constraint_validator" alias="sylius_url_active_route_validator" />
+        </service>
+
+
         <service class="Sylius\Component\Core\URLRedirect\URLRedirectLoopDetector"
                  id="sylius.component.core.urlredirect.urlredirect_loop_detector">
             <argument id="sylius.repository.url_redirect" type="service"/>

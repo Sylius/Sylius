@@ -18,7 +18,7 @@ class Version20180130155207 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE sylius_url_redirects (id INT AUTO_INCREMENT NOT NULL, oldRoute VARCHAR(255) NOT NULL, newRoute VARCHAR(255) NOT NULL, enabled TINYINT(1) NOT NULL, UNIQUE INDEX one_enabled_route (oldRoute, enabled), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE sylius_url_redirects (id INT AUTO_INCREMENT NOT NULL, oldRoute VARCHAR(255) NOT NULL, newRoute VARCHAR(255) NOT NULL, enabled TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
     }
 
     /**

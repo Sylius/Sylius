@@ -31,4 +31,14 @@ interface URLRedirectInterface
      * @param string $newRoute
      */
     public function setNewRoute(string $newRoute): void;
+
+    /**
+     * @return bool
+     */
+    public function isEnabled(): bool;
+
+    /**
+     * @param bool $enabled
+     */
+    public function setEnabled(bool $enabled):void;
 }

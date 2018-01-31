@@ -93,6 +93,7 @@ sylius:
         locale_code:
             not_blank: Bitte ein Gebietsschema auswählen.
     url_redirects:
-        uri_validation: Geben Sie eine gültige URI ein
+        uri_validation: Geben Sie eine gültige URI ein.
         redirect_loop: Sie können das nicht machen. Es entsteht eine Weiterleitungsschleife.
         self_reroute: Die Route kann nicht auf sich selber zeigen.
+        multiple_active_routes: Diese Route hat schon eine aktive Weiterleitung.

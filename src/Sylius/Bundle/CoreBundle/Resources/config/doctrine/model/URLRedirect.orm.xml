@@ -27,10 +27,6 @@
 
         <field name="enabled" type="boolean"/>
 
-        <unique-constraints>
-            <unique-constraint columns="oldRoute,enabled" name="one_enabled_route"/>
-        </unique-constraints>
-
     </entity>
 
 </doctrine-mapping>

@@ -7,16 +7,12 @@
 
     <class name="Sylius\Component\Core\Model\URLRedirect">
 
-        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">
-                <value>oldRoute</value>
-                <value>enabled</value>
-            </option>
-            <option name="message">sylius.url_redirects.old_route.unique</option>
-        </constraint>
-
         <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\URLRedirect">
             <option name="message">sylius.url_redirects.redirect_loop</option>
+        </constraint>
+
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ActiveRedirectRoutes">
+            <option name="message">sylius.url_redirects.multiple_active_routes</option>
         </constraint>
 
         <property name="oldRoute">
