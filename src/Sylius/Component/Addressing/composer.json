@@ -24,7 +24,7 @@
 
         "sylius/registry": "^1.0",
         "sylius/resource": "^1.0",
-        "symfony/intl": "^3.2"
+        "symfony/intl": "^3.4"
     },
     "require-dev": {
         "phpspec/phpspec": "^4.0"
@@ -48,7 +48,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     }
 }

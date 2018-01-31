@@ -23,8 +23,8 @@
         "php": "^7.1",
 
         "sylius/resource": "^1.0",
-        "symfony/form": "^3.2",
-        "symfony/http-foundation": "^3.2",
+        "symfony/form": "^3.4",
+        "symfony/http-foundation": "^3.4",
         "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
@@ -50,7 +50,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     }
 }

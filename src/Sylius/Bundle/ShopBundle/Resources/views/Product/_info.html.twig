@@ -3,7 +3,7 @@
 <div class="ui header">
     {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product, 'filter': 'sylius_shop_product_tiny_thumbnail'} %}
     <div class="content">
-        <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="sylius-product-name">{{ product.name }}</a>
+        <div class="sylius-product-name">{{ item.productName }}</div>
         <span class="sub header sylius-product-variant-code">
             {{ variant.code }}
         </span>
@@ -17,10 +17,10 @@
             </div>
         {% endfor %}
     </div>
-{% elseif variant.name is not null %}
+{% elseif item.variantName is not null %}
     <div class="ui horizontal divided list">
         <div class="item sylius-product-variant-name">
-            {{ variant.name }}
+            {{ item.variantName }}
         </div>
     </div>
 {% endif %}

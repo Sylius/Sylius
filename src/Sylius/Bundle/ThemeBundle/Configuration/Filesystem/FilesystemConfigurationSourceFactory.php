@@ -31,6 +31,7 @@ final class FilesystemConfigurationSourceFactory implements ConfigurationSourceF
             ->fixXmlConfig('directory', 'directories')
                 ->children()
                     ->scalarNode('filename')->defaultValue('composer.json')->cannotBeEmpty()->end()
+                    ->integerNode('scan_depth')->info('Restrict depth to scan for configuration file inside theme folder')->defaultNull()->end()
                     ->arrayNode('directories')
                         ->defaultValue(['%kernel.root_dir%/themes'])
                         ->requiresAtLeastOneElement()
@@ -48,6 +49,7 @@ final class FilesystemConfigurationSourceFactory implements ConfigurationSourceF
         $recursiveFileLocator = new Definition(RecursiveFileLocator::class, [
             new Reference('sylius.theme.finder_factory'),
             $config['directories'],
+            $config['scan_depth'],
         ]);
 
         $configurationLoader = new Definition(ProcessingConfigurationLoader::class, [

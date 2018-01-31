@@ -62,6 +62,17 @@ final class CustomerGroupContext implements Context
     }
 
     /**
+     * @Given the store has customer groups :firstName and :secondName
+     * @Given the store has customer groups :firstName, :secondName and :thirdName
+     */
+    public function theStoreHasCustomerGroups(string ...$names): void
+    {
+        foreach ($names as $name) {
+            $this->theStoreHasACustomerGroup($name);
+        }
+    }
+
+    /**
      * @param string $name
      * @param string $code
      */

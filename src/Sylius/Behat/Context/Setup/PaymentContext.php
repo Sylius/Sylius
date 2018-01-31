@@ -101,7 +101,7 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Given the store has a payment method :paymentMethodName with a code :paymentMethodCode
+     * @Given the store has (also) a payment method :paymentMethodName with a code :paymentMethodCode
      */
     public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
     {
@@ -109,7 +109,7 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Given the store has a payment method :paymentMethodName with a code :paymentMethodCode and Paypal Express Checkout gateway
+     * @Given the store has (also) a payment method :paymentMethodName with a code :paymentMethodCode and Paypal Express Checkout gateway
      */
     public function theStoreHasPaymentMethodWithCodeAndPaypalExpressCheckoutGateway(
         $paymentMethodName,

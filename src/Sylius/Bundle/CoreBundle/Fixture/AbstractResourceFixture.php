@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 abstract class AbstractResourceFixture implements FixtureInterface
 {
     /**
-     * @var ObjectManager
+     * @var ObjectManage
      */
     private $objectManager;
 

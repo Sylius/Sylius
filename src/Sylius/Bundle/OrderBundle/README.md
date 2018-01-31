@@ -16,7 +16,7 @@ Sylius is an Open Source eCommerce solution built from decoupled components with
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusOrderBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components_and_bundles/bundles/SyliusOrderBundle/index.html).
 
 Contributing
 ------------
