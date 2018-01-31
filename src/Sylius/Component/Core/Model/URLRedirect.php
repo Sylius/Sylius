@@ -13,6 +13,13 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
+/**
+ * Class URLRedirect
+ *
+ * The entity to store URL redirects in Sylius
+ *
+ * @package Sylius\Component\Core\Model
+ */
 class URLRedirect implements URLRedirectInterface, ResourceInterface
 {
     /** @var int */

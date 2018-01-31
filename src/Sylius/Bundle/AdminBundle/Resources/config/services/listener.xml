@@ -24,10 +24,10 @@
             <tag name="kernel.event_subscriber" event="kernel.exception" />
         </service>
 
-        <service id="sylius.event_subscriber.router" class="Sylius\Bundle\AdminBundle\EventListener\RouterListener">
-            <tag name="kernel.event_subscriber" event="kernel.request" method="onKernelRequest" />
+        <service id="sylius.event_subscriber.router" class="Sylius\Bundle\AdminBundle\EventListener\URLRedirectListener">
+            <tag name="kernel.event_subscriber" event="kernel.request" method="onKernelRequest" priority="34"/>
             <tag name="monolog.logger" channel="request" />
-            <argument type="service" id="sylius_bundle_core.application.urlredirect_processor"/>
+            <argument type="service" id="sylius_bundle_core.application.recursive_urlredirect_processor"/>
         </service>
     </services>
 </container>

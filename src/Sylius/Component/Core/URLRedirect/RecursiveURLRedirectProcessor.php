@@ -16,13 +16,13 @@ use Sylius\Component\Core\Model\URLRedirectInterface;
 use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
 
 /**
- * Gets the new URL after redirect
+ * Class RecursiveURLRedirectProcessor
  *
- * Class URLRedirectProcessor
+ * Gets the new URL after redirect
  *
  * @package Sylius\Component\Core\URLRedirect
  */
-class URLRedirectProcessor implements URLRedirectProcessorInterface
+final class RecursiveURLRedirectProcessor implements URLRedirectProcessorInterface
 {
     /**
      * @var URLRedirectRepositoryInterface

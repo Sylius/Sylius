@@ -11,13 +11,22 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\EventListener;
 
 
+use Sylius\Component\Core\Model\URLRedirect;
 use Sylius\Component\Core\URLRedirect\URLRedirectProcessorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class RouterListener implements EventSubscriberInterface
+/**
+ * Class URLRedirectListener
+ *
+ * This class processes the URLRedirects from the database
+ *
+ * @package Sylius\Bundle\AdminBundle\EventListener
+ * @see URLRedirect
+ */
+final class URLRedirectListener implements EventSubscriberInterface
 {
 
     /**
@@ -30,6 +39,11 @@ final class RouterListener implements EventSubscriberInterface
         $this->redirectService = $redirectService;
     }
 
+    /**
+     * Method that gets triggered on a new event
+     *
+     * @param GetResponseEvent $event
+     */
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
