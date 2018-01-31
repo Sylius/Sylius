@@ -10,10 +10,9 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\URLRedirect;
 
-use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\URLRedirect;
+use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
 use Sylius\Component\Core\URLRedirect\URLRedirectProcessorInterface;
 
 class URLRedirectProcessorSpec extends ObjectBehavior
@@ -24,22 +23,24 @@ class URLRedirectProcessorSpec extends ObjectBehavior
         $this->shouldImplement(URLRedirectProcessorInterface::class);
     }
 
-    public function let(EntityRepository $repository)
+    public function let(URLRedirectRepositoryInterface $repository)
     {
         $this->beConstructedWith($repository);
     }
 
-    public function it_keeps_url_that_dont_have_a_redirect(EntityRepository $repository)
+    public function it_keeps_url_that_does_not_have_a_redirect(URLRedirectRepositoryInterface $repository)
     {
-        $repository->findOneBy(Argument::type('array'))->willReturn(null);
+        $repository->getActiveRedirectForRoute('/route')->shouldBeCalled()->willReturn(null);
 
-        $this->redirectRoute('route')->shouldBeEqualTo('route');
+        $this->redirectRoute('/route')->shouldBeEqualTo('/route');
     }
 
-    public function it_redirects_urls(EntityRepository $repository)
+    public function it_redirects_urls(URLRedirectRepositoryInterface $repository)
     {
-        $repository->findOneBy(Argument::type('array'))->willReturn(new URLRedirect('abc', 'new_abc'));
+        $activeRedirect = new URLRedirect('/route', '/new_route');
+        $repository->getActiveRedirectForRoute('/route')->shouldBeCalled()->willReturn($activeRedirect);
+        $repository->getActiveRedirectForRoute('/new_route')->shouldBeCalled()->willReturn(null);
 
-        $this->redirectRoute('abc')->shouldBeEqualTo('new_abc');
+        $this->redirectRoute('/route')->shouldBeEqualTo('/new_route');
     }
 }

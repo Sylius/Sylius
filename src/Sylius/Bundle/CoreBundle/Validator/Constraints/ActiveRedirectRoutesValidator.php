@@ -12,6 +12,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 
 use Sylius\Component\Core\Model\URLRedirect;
+use Sylius\Component\Core\Model\URLRedirectInterface;
 use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
 use Sylius\Component\Core\URLRedirect\URLRedirectLoopDetectorInterface;
 use Symfony\Component\Validator\Constraint;
@@ -47,7 +48,7 @@ final class ActiveRedirectRoutesValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        if (!($value instanceof URLRedirect)) {
+        if (!($value instanceof URLRedirectInterface)) {
             throw new TypeError('The validator can only validate URLRoutes');
         }
 
@@ -57,7 +58,6 @@ final class ActiveRedirectRoutesValidator extends ConstraintValidator
         }
 
         $activeRoute = $this->urlRedirectRepository->getActiveRedirectForRoute($value->getOldRoute());
-        var_dump($activeRoute === null);
 
         if ($activeRoute !== null) {
             $this->context->addViolation($constraint->message);

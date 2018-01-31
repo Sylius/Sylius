@@ -10,14 +10,13 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\URLRedirect;
 
-use Doctrine\ORM\EntityRepository;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\URLRedirect;
 use Sylius\Component\Core\Model\URLRedirectInterface;
+use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
 use Sylius\Component\Core\URLRedirect\URLRedirectLoopDetectorInterface;
 
-class URLRedirectLoopDetectorSpec extends ObjectBehavior
+final class URLRedirectLoopDetectorSpec extends ObjectBehavior
 {
 
     public function it_implements_url_redirect_processor_interface()
@@ -25,14 +24,16 @@ class URLRedirectLoopDetectorSpec extends ObjectBehavior
         $this->shouldImplement(URLRedirectLoopDetectorInterface::class);
     }
 
-    public function let(EntityRepository $repository)
+    public function let(URLRedirectRepositoryInterface $repository)
     {
         $this->beConstructedWith($repository);
     }
 
-    public function it_finds_no_loop_with_empty_repository(EntityRepository $repository, URLRedirectInterface $newNode)
-    {
-        $repository->findOneBy(Argument::type('array'))->willReturn();
+    public function it_finds_no_loop_with_empty_repository(
+        URLRedirectRepositoryInterface $repository,
+        URLRedirectInterface $newNode
+    ) {
+        $repository->getActiveRedirectForRoute('/efg')->shouldBeCalled()->willReturn(null);
 
         $newNode->getOldRoute()->willReturn('/abc');
         $newNode->getNewRoute()->willReturn('/efg');
@@ -40,21 +41,11 @@ class URLRedirectLoopDetectorSpec extends ObjectBehavior
         $this->containsLoop($newNode)->shouldBe(false);
     }
 
-    public function it_finds_a_linear_route(EntityRepository $repository, URLRedirectInterface $newNode)
+    public function it_finds_a_linear_route(URLRedirectRepositoryInterface $repository, URLRedirectInterface $newNode)
     {
-        $repository->findOneBy(Argument::type('array'))->will(function ($array){
-            $oldRoute = $array[0]['oldRoute'];
-            switch($oldRoute){
-                case '/a':
-                    return new URLRedirect('/a', '/b');
-                case '/c':
-                    return new URLRedirect('/c', '/d');
-                case '/d':
-                    return null;
-                default:
-                    throw new \Exception('Invalid Method call with route '. $oldRoute);
-            }
-        });
+        $repository->getActiveRedirectForRoute('/c')->shouldBeCalled()->willReturn(new URLRedirect('/c', '/d'));
+        $repository->getActiveRedirectForRoute('/d')->shouldBeCalled()->willReturn(null);
+        $repository->getActiveRedirectForRoute('/a')->shouldNotBeCalled();
 
         $newNode->getOldRoute()->willReturn('/b');
         $newNode->getNewRoute()->willReturn('/c');
@@ -62,21 +53,11 @@ class URLRedirectLoopDetectorSpec extends ObjectBehavior
         $this->containsLoop($newNode)->shouldBe(false);
     }
 
-    public function it_finds_a_whole_loop(EntityRepository $repository, URLRedirectInterface $newNode)
+    public function it_finds_a_whole_loop(URLRedirectRepositoryInterface $repository, URLRedirectInterface $newNode)
     {
-        $repository->findOneBy(Argument::type('array'))->will(function ($array){
-            $oldRoute = $array[0]['oldRoute'];
-            switch($oldRoute){
-                case '/a':
-                    return new URLRedirect('/a', '/b');
-                case '/b':
-                    return new URLRedirect('/b', '/d');
-                case '/d':
-                    return null;
-                default:
-                    throw new \Exception('Invalid Method call with route '. $oldRoute);
-            }
-        });
+        $repository->getActiveRedirectForRoute('/a')->shouldBeCalled()->willReturn(new URLRedirect('/a', '/b'));
+        $repository->getActiveRedirectForRoute('/b')->shouldBeCalled()->willReturn(new URLRedirect('/b', '/d'));
+        $repository->getActiveRedirectForRoute('/d')->shouldNotBeCalled();
 
         $newNode->getOldRoute()->willReturn('/d');
         $newNode->getNewRoute()->willReturn('/a');
@@ -84,21 +65,10 @@ class URLRedirectLoopDetectorSpec extends ObjectBehavior
         $this->containsLoop($newNode)->shouldBe(true);
     }
 
-    public function it_finds_a_partial_loop(EntityRepository $repository, URLRedirectInterface $newNode)
+    public function it_finds_a_partial_loop(URLRedirectRepositoryInterface $repository, URLRedirectInterface $newNode)
     {
-        $repository->findOneBy(Argument::type('array'))->will(function ($array){
-            $oldRoute = $array[0]['oldRoute'];
-            switch($oldRoute){
-                case '/a':
-                    return new URLRedirect('/a', '/b');
-                case '/b':
-                    return new URLRedirect('/b', '/d');
-                case '/d':
-                    return null;
-                default:
-                    throw new \Exception('Invalid Method call with route '. $oldRoute);
-            }
-        });
+        $repository->getActiveRedirectForRoute('/a')->shouldBeCalled()->willReturn(new URLRedirect('/a', '/b'));
+        $repository->getActiveRedirectForRoute('/b')->shouldNotBeCalled();
 
         $newNode->getOldRoute()->willReturn('/b');
         $newNode->getNewRoute()->willReturn('/a');
