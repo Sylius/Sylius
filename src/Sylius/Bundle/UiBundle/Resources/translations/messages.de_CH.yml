@@ -273,6 +273,7 @@ sylius:
         edit_tax_category: 'Steuerkategorien bearbeiten'
         edit_tax_rate: 'Steuersatz bearbeiten'
         edit_taxon: 'Klassifizierung bearbeiten'
+        edit_url_redirect: 'URL Umleitung bearbeiten'
         edit_your_items_apply_coupon_or_proceed_to_the_checkout: 'Bearbeiten Sie Ihre Artikel, geben Sie Ihren Gutscheincode ein und senden Sie Ihre Bestellung ab'
         edit_your_personal_information: 'Persönliche Informationen bearbeiten'
         edit_zone: 'Zone bearbeiten'

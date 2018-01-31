@@ -15,6 +15,13 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\URLRedirectInterface;
 use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
 
+/**
+ * Gets the new URL after redirect
+ *
+ * Class URLRedirectProcessor
+ *
+ * @package Sylius\Component\Core\URLRedirect
+ */
 class URLRedirectProcessor implements URLRedirectProcessorInterface
 {
     /**

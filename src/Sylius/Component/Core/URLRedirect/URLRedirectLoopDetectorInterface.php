@@ -22,5 +22,12 @@ use Sylius\Component\Core\Model\URLRedirectInterface;
  */
 interface URLRedirectLoopDetectorInterface
 {
+    /**
+     * Checks if adding the new node creates a redirect loop
+     *
+     * @param URLRedirectInterface $newNode
+     *
+     * @return bool
+     */
     public function containsLoop(URLRedirectInterface $newNode): bool;
 }

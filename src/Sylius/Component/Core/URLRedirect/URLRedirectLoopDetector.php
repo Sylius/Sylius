@@ -34,7 +34,7 @@ class URLRedirectLoopDetector implements URLRedirectLoopDetectorInterface
         $this->repository = $repository;
     }
 
-
+    /** @inheritdoc */
     public function containsLoop(URLRedirectInterface $newNode): bool
     {
         $visitedNodes = [$newNode->getOldRoute()];

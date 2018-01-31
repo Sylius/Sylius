@@ -270,6 +270,7 @@ sylius:
         edit_tax_category: 'Edit tax category'
         edit_tax_rate: 'Edit tax rate'
         edit_taxon: 'Edit taxon'
+        edit_url_redirect: 'Edit URL redirect'
         edit_your_items_apply_coupon_or_proceed_to_the_checkout: 'Edit your items, apply coupon or proceed to the checkout'
         edit_your_personal_information: 'Edit your personal information'
         edit_zone: 'Edit zone'
