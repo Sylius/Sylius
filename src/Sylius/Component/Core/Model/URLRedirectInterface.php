@@ -13,6 +13,11 @@ namespace Sylius\Component\Core\Model;
 interface URLRedirectInterface
 {
     /**
+     * @return int
+     */
+    public function getId(): ?int;
+
+    /**
      * @return string
      */
     public function getOldRoute(): string;
@@ -40,5 +45,5 @@ interface URLRedirectInterface
     /**
      * @param bool $enabled
      */
-    public function setEnabled(bool $enabled):void;
+    public function setEnabled(bool $enabled): void;
 }

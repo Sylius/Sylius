@@ -22,6 +22,10 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 class URLRedirect implements URLRedirectInterface, ResourceInterface
 {
+    const PERMANENT = 'PERMANENT';
+    const TEMPORARY = 'TEMPORARY';
+    const INVISIBLE = 'INVISIBLE';
+
     /** @var int */
     private $id;
 
@@ -34,11 +38,14 @@ class URLRedirect implements URLRedirectInterface, ResourceInterface
     /** @var bool */
     private $enabled;
 
-    public function __construct(string $oldRoute='', string $newRoute='')
+    /** @var string */
+    private $type;
+
+    public function __construct(string $oldRoute = '', string $newRoute = '')
     {
         $this->oldRoute = $oldRoute;
         $this->newRoute = $newRoute;
-        $this->enabled = true;
+        $this->enabled  = true;
     }
 
     /**
@@ -95,5 +102,28 @@ class URLRedirect implements URLRedirectInterface, ResourceInterface
     public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType(?string $type): void
+    {
+        $type     = is_null($type) ? URLRedirect::PERMANENT : strtoupper($type);
+        $allTypes = [URLRedirect::PERMANENT, URLRedirect::TEMPORARY, URLRedirect::INVISIBLE];
+
+        if (!in_array($type, $allTypes)) {
+            $type = URLRedirect::PERMANENT;
+        }
+
+        $this->type = $type;
     }
 }

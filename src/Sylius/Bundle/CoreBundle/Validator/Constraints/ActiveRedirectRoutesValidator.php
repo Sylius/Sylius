@@ -59,7 +59,7 @@ final class ActiveRedirectRoutesValidator extends ConstraintValidator
 
         $activeRoute = $this->urlRedirectRepository->getActiveRedirectForRoute($value->getOldRoute());
 
-        if ($activeRoute !== null) {
+        if ($activeRoute !== null && $activeRoute->getId() !== $value->getId()) {
             $this->context->addViolation($constraint->message);
         }
     }
