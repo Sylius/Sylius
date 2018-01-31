@@ -15,7 +15,7 @@ use Sylius\Component\Core\Model\URLRedirect;
 use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
 use Sylius\Component\Core\URLRedirect\URLRedirectProcessorInterface;
 
-class URLRedirectProcessorSpec extends ObjectBehavior
+final class RecursiveURLRedirectProcessorSpec extends ObjectBehavior
 {
 
     public function it_implements_url_redirect_processor_interface()

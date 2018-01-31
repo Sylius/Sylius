@@ -48,13 +48,12 @@ final class URLRedirectListener implements EventSubscriberInterface
     {
         $request = $event->getRequest();
         $uri     = $request->getRequestUri();
-        $path    = parse_url($uri)['path'];
+        $path    = rtrim(parse_url($uri)['path'], '/');
 
         $newRoute = $this->redirectService->redirectRoute($path);
         if ($newRoute !== $path) {
             $event->setResponse(new RedirectResponse($newRoute));
         }
-
     }
 
     /**
@@ -78,7 +77,7 @@ final class URLRedirectListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => ['onKernelRequest']
+            KernelEvents::REQUEST => ['onKernelRequest', 64]
         ];
     }
 }

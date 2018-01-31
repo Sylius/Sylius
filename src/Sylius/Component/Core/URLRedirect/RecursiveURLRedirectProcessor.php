@@ -10,8 +10,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\URLRedirect;
 
-
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\URLRedirectInterface;
 use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
 

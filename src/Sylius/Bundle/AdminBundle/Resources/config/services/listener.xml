@@ -11,23 +11,28 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.listener.shipment_ship" class="Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener">
-            <argument type="service" id="sylius.email_manager.shipment" />
-            <tag name="kernel.event_listener" event="sylius.shipment.post_ship" method="sendConfirmationEmail" />
+        <service id="sylius.listener.shipment_ship"
+                 class="Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener">
+            <argument type="service" id="sylius.email_manager.shipment"/>
+            <tag name="kernel.event_listener" event="sylius.shipment.post_ship" method="sendConfirmationEmail"/>
         </service>
 
-        <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber">
-            <argument type="service" id="router" />
-            <argument type="service" id="session" />
-            <tag name="kernel.event_subscriber" event="kernel.exception" />
+        <service id="sylius.event_subscriber.resource_delete"
+                 class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber">
+            <argument type="service" id="router"/>
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_subscriber" event="kernel.exception"/>
         </service>
 
-        <service id="sylius.event_subscriber.router" class="Sylius\Bundle\AdminBundle\EventListener\URLRedirectListener">
-            <tag name="kernel.event_subscriber" event="kernel.request" method="onKernelRequest" priority="34"/>
-            <tag name="monolog.logger" channel="request" />
+        <service id="sylius.event_subscriber.router"
+                 class="Sylius\Bundle\AdminBundle\EventListener\URLRedirectListener">
             <argument type="service" id="sylius_bundle_core.application.recursive_urlredirect_processor"/>
+
+            <tag name="kernel.event_subscriber" event="kernel.request" method="onKernelRequest" />
+            <tag name="monolog.logger" channel="request"/>
         </service>
     </services>
 </container>
