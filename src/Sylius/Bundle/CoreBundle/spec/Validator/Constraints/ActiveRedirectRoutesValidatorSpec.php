@@ -95,6 +95,8 @@ final class ActiveRedirectRoutesValidatorSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn(new URLRedirect('/abc', '/cde'));
 
+        $URLRedirect->getId()->shouldBeCalled()->willReturn(1);
+
         $this->context->addViolation($this->constraint->message)->shouldBeCalled();
 
         $this->validate($URLRedirect, $this->constraint);
