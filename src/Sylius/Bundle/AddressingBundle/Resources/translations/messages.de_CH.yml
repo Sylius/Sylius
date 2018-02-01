@@ -16,6 +16,7 @@ sylius:
             zone: Zone
         country:
             add_province: Bundesland/Kanton hinzufügen
+            add_postal_code: Postleitzahl hinzufügen
             name: Name
             provinces: Kantone
             select: Auswählen
@@ -23,6 +24,8 @@ sylius:
         province:
             name: Name
             abbreviation: Abkürzung
+            select: Auswählen
+        postal_code:
             select: Auswählen
         zone:
             add_member: Mitglied hinzufügen
@@ -32,6 +35,7 @@ sylius:
             types:
                 country: Land
                 province: Kanton
+                post_code: Postleitzahl
                 zone: Zone
             scope: Umfang
             scopes:

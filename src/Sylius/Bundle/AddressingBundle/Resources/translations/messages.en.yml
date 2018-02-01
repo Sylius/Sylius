@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     form:
         address:
@@ -13,6 +16,7 @@ sylius:
             zone: Zone
         country:
             add_province: Add province
+            add_postal_code: Add postalcode
             name: Name
             provinces: Provinces
             select: Select
@@ -20,6 +24,8 @@ sylius:
         province:
             name: Name
             abbreviation: Abbreviation
+            select: Select
+        postal_code:
             select: Select
         zone:
             add_member: Add member
@@ -29,6 +35,7 @@ sylius:
             types:
                 country: Country
                 province: Province
+                post_code: Postcode
                 zone: Zone
             scope: Scope
             scopes:

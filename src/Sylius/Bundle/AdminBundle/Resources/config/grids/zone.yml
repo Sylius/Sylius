@@ -49,11 +49,11 @@ sylius_grid:
                                     parameters:
                                         type: province
                                 postal_code:
-                                    label: sylius.ui.zone_consisting_of_postal_codes
+                                    label: sylius.ui.zone_consisting_of_postcodes
                                     icon: plus
                                     route: sylius_admin_zone_create
                                     parameters:
-                                        type: postal
+                                        type: postcode
                                 zone:
                                     label: sylius.ui.zone_consisting_of_other_zones
                                     icon: plus

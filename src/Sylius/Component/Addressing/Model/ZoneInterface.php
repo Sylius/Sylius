@@ -21,7 +21,7 @@ interface ZoneInterface extends ResourceInterface, CodeAwareInterface
 {
     public const TYPE_COUNTRY   = 'country';
     public const TYPE_PROVINCE  = 'province';
-    public const TYPE_POST_CODE = 'postal';
+    public const TYPE_POST_CODE = 'postcode';
     public const TYPE_ZONE      = 'zone';
 
     /**

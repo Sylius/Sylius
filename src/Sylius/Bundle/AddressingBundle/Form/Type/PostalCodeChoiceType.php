@@ -41,7 +41,6 @@ final class PostalCodeChoiceType extends AbstractType
         $resolver->setDefaults(
             [
                 'choices'                   => function (Options $options): iterable {
-                    dump($options);
                     /** @var CountryInterface $options['country'] */
                     if (null === $options['country']) {
                         return $this->postalCodeRepository->findAll();
