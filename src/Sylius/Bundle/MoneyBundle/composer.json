@@ -40,6 +40,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
+    "conflict": {
+        "twig/twig": "^1.0"
+    },
     "config": {
         "bin-dir": "bin"
     },
