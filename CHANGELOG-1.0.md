@@ -10,6 +10,7 @@
 - [#9084](https://github.com/Sylius/Sylius/pull/9084) Minor enhancements to product review API pull request (@pamil)
 - [#9085](https://github.com/Sylius/Sylius/pull/9085) Fix referenced state machine configuration path (@pamil)
 - [#9079](https://github.com/Sylius/Sylius/pull/9079) [Travis] Run a full build for tags (@pamil)
+- [#9119](https://github.com/Sylius/Sylius/pull/9119) Allow nullable product variants in Twig helper (@bitbager) 
 
 ### v1.0.7 2017-12-30
 
