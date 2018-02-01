@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
+use function Clue\StreamFilter\fun;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
@@ -256,6 +257,8 @@ class GeographicalFixture extends AbstractFixture
                 return ZoneInterface::TYPE_PROVINCE;
             case count($zoneOptions['zones']) > 0:
                 return ZoneInterface::TYPE_ZONE;
+            case count($zoneOptions['zip']) > 0:
+                return ZoneInterface::TYPE_POST_CODE;
             default:
                 throw new \InvalidArgumentException('Cannot resolve zone type!');
         }
@@ -277,6 +280,8 @@ class GeographicalFixture extends AbstractFixture
                 return $zoneOptions['provinces'];
             case ZoneInterface::TYPE_ZONE:
                 return $zoneOptions['zones'];
+            case ZoneInterface::TYPE_POST_CODE:
+                return $zoneOptions['zip'];
             default:
                 throw new \InvalidArgumentException('Cannot resolve zone members!');
         }
@@ -290,7 +295,7 @@ class GeographicalFixture extends AbstractFixture
     private function provideZoneValidator(array $options): \Closure
     {
         $memberValidators = [
-            ZoneInterface::TYPE_COUNTRY => function ($countryCode) use ($options) {
+            ZoneInterface::TYPE_COUNTRY   => function ($countryCode) use ($options) {
                 if (in_array($countryCode, $options['countries'], true)) {
                     return;
                 }
@@ -301,7 +306,7 @@ class GeographicalFixture extends AbstractFixture
                     implode(', ', $options['countries'])
                 ));
             },
-            ZoneInterface::TYPE_PROVINCE => function ($provinceCode) use ($options) {
+            ZoneInterface::TYPE_PROVINCE  => function ($provinceCode) use ($options) {
                 $foundProvinces = [];
                 foreach ($options['provinces'] as $provinces) {
                     if (isset($provinces[$provinceCode])) {
@@ -317,7 +322,7 @@ class GeographicalFixture extends AbstractFixture
                     implode(', ', $options['countries'])
                 ));
             },
-            ZoneInterface::TYPE_ZONE => function ($zoneCode) use ($options) {
+            ZoneInterface::TYPE_ZONE      => function ($zoneCode) use ($options) {
                 if (isset($options['zones'][$zoneCode])) {
                     return;
                 }
@@ -328,6 +333,19 @@ class GeographicalFixture extends AbstractFixture
                     implode(', ', array_keys($options['zones']))
                 ));
             },
+            ZoneInterface::TYPE_POST_CODE => function ($postalCode) use ($options) {
+                if (isset($options['zip'])) {
+                    return;
+                }
+
+                throw new \InvalidArgumentException(
+                    sprintf(
+                        'Could not find postal code "%s", defined ones are: %s!',
+                        $postalCode,
+                        implode(', ', array_keys($options['zip']))
+                    )
+                );
+            }
         ];
 
         return function (array $zoneOptions) use ($memberValidators) {

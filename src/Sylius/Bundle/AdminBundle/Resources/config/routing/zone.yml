@@ -38,4 +38,4 @@ sylius_admin_zone_create:
                     parameters:
                         type: $type
     requirements:
-        type: country|province|zone
+        type: country|province|zone|postal

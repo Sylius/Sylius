@@ -53,4 +53,36 @@ interface CountryInterface extends ToggleableInterface, ResourceInterface, CodeA
      * @return bool
      */
     public function hasProvince(ProvinceInterface $province): bool;
+
+    /**
+     * @return bool
+     */
+    public function hasPostalCodes(): bool;
+
+    /**
+     * @return Collection|ProvinceInterface[]
+     */
+    public function getPostalCodes(): Collection;
+
+    /**
+     * @param PostalCodeInterface $postalCode
+     *
+     * @return bool
+     */
+    public function hasPostalCode(PostalCodeInterface $postalCode): bool;
+
+    /**
+     * @param $postalCodes
+     */
+    public function setPostalCodes($postalCodes): void;
+
+    /**
+     * @param PostalCodeInterface $postalCode
+     */
+    public function addPostalCode(PostalCodeInterface $postalCode): void;
+
+    /**
+     * @param PostalCodeInterface $postalCode
+     */
+    public function removePostalCode(PostalCodeInterface $postalCode): void;
 }

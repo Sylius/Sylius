@@ -1,17 +1,15 @@
 <?php
-
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * Created by PhpStorm.
+ * User: mamazu
+ * Date: 01/02/18
+ * Time: 11:06
  */
 
 declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
+
 
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -19,19 +17,19 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\ReversedTransformer;
 
-final class ProvinceCodeChoiceType extends AbstractType
+final class PostalCodeCodeChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface
      */
-    private $provinceRepository;
+    private $postalCodeRepository;
 
     /**
      * @param RepositoryInterface $provinceRepository
      */
     public function __construct(RepositoryInterface $provinceRepository)
     {
-        $this->provinceRepository = $provinceRepository;
+        $this->postalCodeRepository = $provinceRepository;
     }
 
     /**
@@ -39,8 +37,11 @@ final class ProvinceCodeChoiceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addModelTransformer(new ReversedTransformer(new ResourceToIdentifierTransformer($this->provinceRepository,
-                                                                                                  'code')));
+        $builder->addModelTransformer(
+            new ReversedTransformer(
+                new ResourceToIdentifierTransformer($this->postalCodeRepository, 'code')
+            )
+        );
     }
 
     /**
@@ -48,7 +49,7 @@ final class ProvinceCodeChoiceType extends AbstractType
      */
     public function getParent(): string
     {
-        return ProvinceChoiceType::class;
+        return PostalCodeChoiceType::class;
     }
 
     /**
@@ -56,6 +57,6 @@ final class ProvinceCodeChoiceType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'sylius_province_code_choice';
+        return 'sylius_postal_code_code_choice';
     }
 }

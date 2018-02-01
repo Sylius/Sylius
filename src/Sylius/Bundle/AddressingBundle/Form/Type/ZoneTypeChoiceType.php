@@ -31,6 +31,7 @@ final class ZoneTypeChoiceType extends AbstractType
                     'sylius.form.zone.types.country' => ZoneInterface::TYPE_COUNTRY,
                     'sylius.form.zone.types.province' => ZoneInterface::TYPE_PROVINCE,
                     'sylius.form.zone.types.zone' => ZoneInterface::TYPE_ZONE,
+                    'sylius.form.zone.type.post_code' => ZoneInterface::TYPE_POST_CODE
                 ],
                 'label' => 'sylius.form.zone.type',
             ])

@@ -75,6 +75,19 @@
             <tag name="form.type" />
         </service>
 
+        <service class="Sylius\Bundle\AddressingBundle\Form\Type\PostalCodeChoiceType"
+                 id="sylius_bundle_addressing.form_type.postal_code_choice_type">
+            <argument id="sylius.repository.postal_code" type="service"/>
+            <tag alias="Sylius\Bundle\AddressingBundle\Form\Type\PostalCodeChoiceType" name="form.type"/>
+        </service>
+
+        <service class="Sylius\Bundle\AddressingBundle\Form\Type\PostalCodeCodeChoiceType"
+                 id="sylius_bundle_addressing.form_type.postal_code_code_choice_type">
+            <argument id="sylius.repository.postal_code" type="service"/>
+            <tag alias="Sylius\Bundle\AddressingBundle\Form\Type\PostalCodeCodeChoiceType" name="form.type"/>
+        </service>
+
+
         <service id="sylius.form.type.zone" class="Sylius\Bundle\AddressingBundle\Form\Type\ZoneType">
             <argument>%sylius.model.zone.class%</argument>
             <argument>%sylius.form.type.zone.validation_groups%</argument>

@@ -39,9 +39,15 @@ class Country implements CountryInterface
      */
     protected $provinces;
 
+    /**
+     * @var Collection|PostalCodeInterface[]
+     */
+    protected $postal_codes;
+
     public function __construct()
     {
-        $this->provinces = new ArrayCollection();
+        $this->provinces    = new ArrayCollection();
+        $this->postal_codes = new ArrayCollection();
     }
 
     /**
@@ -49,7 +55,7 @@ class Country implements CountryInterface
      */
     public function __toString(): string
     {
-        return (string) ($this->getName() ?? $this->getCode());
+        return (string)($this->getName() ?? $this->getCode());
     }
 
     /**
@@ -129,4 +135,58 @@ class Country implements CountryInterface
     {
         return $this->provinces->contains($province);
     }
+
+    /** {@inheritdoc} */
+    public function hasPostalCodes(): bool
+    {
+        return $this->postal_codes->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPostalCodes(): Collection
+    {
+        return $this->postal_codes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPostalCode(PostalCodeInterface $postalCode): bool
+    {
+        return $this->postal_codes->contains($postalCode);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPostalCodes($postal_codes): void
+    {
+        $this->postal_codes = $postal_codes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPostalCode(PostalCodeInterface $postalCode): void
+    {
+        if (!$this->hasPostalCode($postalCode)) {
+            $this->postal_codes->add($postalCode);
+            $postalCode->setCountry($this);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removePostalCode(PostalCodeInterface $postalCode): void
+    {
+        if ($this->hasPostalCode($postalCode)) {
+            $this->postal_codes->removeElement($postalCode);
+            $postalCode->setCountry(null);
+        }
+    }
+
+
 }

@@ -34,6 +34,13 @@ final class CountryType extends AbstractResourceType
                 'by_reference' => false,
                 'button_add_label' => 'sylius.form.country.add_province',
             ])
+            ->add('postal_codes', CollectionType::class, [
+                'entry_type' => PostalCodeType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'button_add_label' => 'sylius.form.country.add_postal_code',
+            ])
         ;
     }
 

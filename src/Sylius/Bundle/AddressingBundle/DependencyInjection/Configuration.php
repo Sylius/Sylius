@@ -16,6 +16,7 @@ namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 use Sylius\Bundle\AddressingBundle\Controller\ProvinceController;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
+use Sylius\Bundle\AddressingBundle\Form\Type\PostalCodeType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneType;
@@ -27,6 +28,8 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\AddressLogEntry;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\PostalCode;
+use Sylius\Component\Addressing\Model\PostalCodeInterface;
 use Sylius\Component\Addressing\Model\Province;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\Zone;
@@ -134,6 +137,20 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(ProvinceType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('postal_code')
+                            ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->variableNode('options')->end()
+                                    ->arrayNode('classes')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                        ->scalarNode('model')->defaultValue(PostalCode::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(PostalCodeInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('form')->defaultValue(PostalCodeType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()
