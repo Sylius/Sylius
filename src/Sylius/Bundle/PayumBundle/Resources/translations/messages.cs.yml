@@ -8,6 +8,16 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Heslo
+                signature: Podpis
                 username: Uživatelské jméno
+                sandbox: Testovací prostředí
+            stripe:
+                publishable_key: Veřejný klíč
+                secret_key: Tajný klíč
     payum_gateway_factory:
         offline: Offline
+        paypal_express_checkout: Expresní platba PayPal
+        stripe_checkout: Platba Stripe
+    payum_action:
+        payment:
+            description: Platba obsahuje %items% položku za celkem %total% | Platba obsahuje %items% položek za celkem %total%

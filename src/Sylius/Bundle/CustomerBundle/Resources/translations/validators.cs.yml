@@ -20,3 +20,11 @@ sylius:
             invalid: Tento email je neplatný.
             unique: Tento e-mail je již používán.
             registered: Tento e-mail je již registrován, prosím přihlašte se nebo obnovte své heslo.
+    customer_group:
+        code:
+            regex: Kód skupin zákazníků může být tvořen pouze z písmen bez diakritiky, číslic, pomlček a podtržítek.
+            unique: Kód skupiny zákazníků musí být unikátní.
+        name:
+            max: Název skupiny zákazníků nesmí být delší než {{ limit }} znaků.
+            min: Název skupiny zákazníků musí být dlouhý alespoň {{ limit }} znaků.
+            not_blank: Zadejte prosím název skupiny zákazníků.
