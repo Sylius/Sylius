@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Webmozart\Assert\Assert;
 
 final class LoadMetadataSubscriber implements EventSubscriber
 {
@@ -48,6 +49,10 @@ final class LoadMetadataSubscriber implements EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArguments): void
     {
         $metadata = $eventArguments->getClassMetadata();
+
+        /** @var ClassMetadata $metadata */
+        Assert::isInstanceOf($metadata, ClassMetadata::class);
+
         $metadataFactory = $eventArguments->getEntityManager()->getMetadataFactory();
 
         foreach ($this->subjects as $subject => $class) {

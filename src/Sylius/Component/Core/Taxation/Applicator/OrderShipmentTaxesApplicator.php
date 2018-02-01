@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Webmozart\Assert\Assert;
 
 class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
 {
@@ -83,7 +84,7 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
      * @param string $label
      * @param bool $included
      */
-    private function addAdjustment(OrderInterface $order, int $taxAmount, string $label, bool $included)
+    private function addAdjustment(OrderInterface $order, int $taxAmount, string $label, bool $included): void
     {
         /** @var AdjustmentInterface $shippingTaxAdjustment */
         $shippingTaxAdjustment = $this->adjustmentFactory
@@ -101,12 +102,17 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
      */
     private function getShippingMethod(OrderInterface $order): ShippingMethodInterface
     {
-        /** @var ShipmentInterface $shipment */
+        /** @var ShipmentInterface|bool $shipment */
         $shipment = $order->getShipments()->first();
         if (false === $shipment) {
             throw new \LogicException('Order should have at least one shipment.');
         }
 
-        return $shipment->getMethod();
+        $method = $shipment->getMethod();
+
+        /** @var ShippingMethodInterface $method */
+        Assert::isInstanceOf($method, ShippingMethodInterface::class);
+
+        return $method;
     }
 }

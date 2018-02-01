@@ -146,9 +146,9 @@ EOT
      * @param InputInterface $input
      * @param OutputInterface $output
      *
-     * @return mixed
+     * @return string
      */
-    private function getAdministratorPassword(InputInterface $input, OutputInterface $output)
+    private function getAdministratorPassword(InputInterface $input, OutputInterface $output): string
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');

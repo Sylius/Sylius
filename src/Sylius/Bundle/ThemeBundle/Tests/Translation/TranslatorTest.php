@@ -358,7 +358,7 @@ final class TranslatorTest extends \PHPUnit_Framework_TestCase
      *
      * @return Translator
      */
-    private function createTranslator($locale = 'en', $options = [])
+    private function createTranslator($locale = 'en', $options = []): Translator
     {
         $loaderProvider = new TranslatorLoaderProvider();
         $resourceProvider = new TranslatorResourceProvider();

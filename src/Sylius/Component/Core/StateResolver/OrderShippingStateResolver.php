@@ -15,10 +15,11 @@ namespace Sylius\Component\Core\StateResolver;
 
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\OrderShippingTransitions;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 final class OrderShippingStateResolver implements StateResolverInterface
@@ -39,7 +40,7 @@ final class OrderShippingStateResolver implements StateResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(OrderInterface $order): void
+    public function resolve(BaseOrderInterface $order): void
     {
         if (OrderShippingStates::STATE_SHIPPED === $order->getShippingState()) {
             return;
