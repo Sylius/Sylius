@@ -13,3 +13,5 @@ sylius:
         enable: '%resource% byl úspěšně povolen.'
         disable: '%resource% byl úspěšně zakázán.'
         delete_error: 'Nelze odstranit, %resource% je používán.'
+        race_condition_error: 'Nelze aktualizovat, %resource% byl změněn.'
+        something_went_wrong_error: 'Něco se pokazilo. Zkuste to prosím znovu.'
