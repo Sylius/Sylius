@@ -1,5 +1,21 @@
 ## CHANGELOG
 
+### v1.0.9 2018-02-02
+
+- [#9144](https://github.com/Sylius/Sylius/pull/9144) Remove RFC label from stalebot's whitelist (@pamil)
+- [#9143](https://github.com/Sylius/Sylius/pull/9143) Allow nullable product variants (@pamil, @bitbager)
+- [#9136](https://github.com/Sylius/Sylius/pull/9136) Make packages providing Twig extensions conflict with Twig 1.x (@pamil)
+- [#9068](https://github.com/Sylius/Sylius/pull/9068) Random codebase fixes (@pamil)
+- [#9139](https://github.com/Sylius/Sylius/pull/9139) [Documentation] Fix URL to docs in Bundles README (@RadnoK)
+- [#9137](https://github.com/Sylius/Sylius/pull/9137) [Documentation] Fix typo (@willy-ahva)
+- [#9130](https://github.com/Sylius/Sylius/pull/9130) [Documentation] Add warning about trusted proxies when using stripe behind lb with https (@reyostallenberg)
+- [#9131](https://github.com/Sylius/Sylius/pull/9131) [Admin] Fix wrong source currency translation (@Zales0123)
+- [#9133](https://github.com/Sylius/Sylius/pull/9133) Fix return typehint for TaxonTranslation (@diimpp)
+- [#9110](https://github.com/Sylius/Sylius/pull/9110) [Documentation] Fixed Docblock in Taxon document (@thekonz)
+- [#9127](https://github.com/Sylius/Sylius/pull/9127) Use random_*() instead of rand(), mt_rand() and microtime() (@pamil)
+- [#9125](https://github.com/Sylius/Sylius/pull/9125) Make lightbox label translatable (fixes #9099) (@stefandoorn)
+- [#9108](https://github.com/Sylius/Sylius/pull/9108) [Documentation] Update required selenium version (@lchrusciel)
+
 ### v1.0.8 2018-01-12
 
 - [#9101](https://github.com/Sylius/Sylius/pull/9101) Fix wrong target-entity in exchange-rate entity (@alcaeus)
