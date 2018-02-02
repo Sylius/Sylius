@@ -3,7 +3,6 @@ daysUntilClose: 7
 exemptLabels:
   - Bug
   - Critical
-  - RFC
 staleLabel: Stale
 markComment: >
   This issue has been automatically marked as stale because it has not had any
