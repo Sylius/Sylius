@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Matcher;
 
+use Sylius\Component\Addressing\Generator\PostCodeCodeGenerator;
 use Sylius\Component\Addressing\Generator\PostCodeCodeGeneratorInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\Scope;
@@ -27,10 +28,8 @@ final class ZoneMatcher implements ZoneMatcherInterface
      */
     private $zoneRepository;
 
-    /**
-     * @var PostCodeCodeGeneratorInterface
-     */
-    private $postCodeCodeGenerator;
+    /** @var PostCodeCodeGenerator */
+    private $postalCodeGenerator;
 
     /**
      * @var array
@@ -43,15 +42,13 @@ final class ZoneMatcher implements ZoneMatcherInterface
     ];
 
     /**
-     * @param RepositoryInterface            $zoneRepository
-     * @param PostCodeCodeGeneratorInterface $postCodeCodeGenerator
+     * @param RepositoryInterface $zoneRepository
      */
     public function __construct(
         RepositoryInterface $zoneRepository,
         PostCodeCodeGeneratorInterface $postCodeCodeGenerator
     ) {
-        $this->zoneRepository        = $zoneRepository;
-        $this->postCodeCodeGenerator = $postCodeCodeGenerator;
+        $this->zoneRepository = $zoneRepository;
     }
 
     /**
@@ -110,7 +107,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * @param AddressInterface    $address
+     * @param AddressInterface $address
      * @param ZoneMemberInterface $member
      *
      * @return bool
@@ -121,7 +118,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
     {
         switch ($type = $member->getBelongsTo()->getType()) {
             case ZoneInterface::TYPE_POST_CODE:
-                $addressCode = $this->postCodeCodeGenerator->generateFromAddress($address);
+                $addressCode = $this->postalCodeGenerator->generateFromAddress($address);
                 return $addressCode === $member->getCode();
 
             case ZoneInterface::TYPE_PROVINCE:

@@ -12,6 +12,7 @@ namespace Sylius\Component\Addressing\Generator;
 
 
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\PostalCodeInterface;
 
 interface PostCodeCodeGeneratorInterface
 {
@@ -24,6 +25,15 @@ interface PostCodeCodeGeneratorInterface
      * @return string
      */
     public function generate(string $countryCode, string $postCode): string;
+
+    /**
+     * Generates the postcode-code from a postcode entity
+     *
+     * @param PostalCodeInterface $postalCode
+     *
+     * @return string
+     */
+    public function generateFromPostCode(PostalCodeInterface $postalCode): string;
 
     /**
      * Generates the postcode-code

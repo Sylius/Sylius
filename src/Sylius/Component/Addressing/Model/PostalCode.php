@@ -25,65 +25,49 @@ class PostalCode implements PostalCodeInterface
     /** @var CountryInterface */
     protected $country;
 
-    /**
-     * @return int|null
-     */
+    /** {@inheritdoc} */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param int|null $id
-     */
+    /** {@inheritdoc} */
     public function setId(?int $id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
+    /** {@inheritdoc} */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string $code
-     */
+    /** {@inheritdoc} */
     public function setCode(?string $code): void
     {
         $this->code = $code ?: '';
     }
 
-    /**
-     * @return string
-     */
+    /** {@inheritdoc} */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
+    /** {@inheritdoc} */
     public function setName(?string $name): void
     {
         $this->name = $name ?: '';
     }
 
-    /**
-     * @return CountryInterface
-     */
+    /** {@inheritdoc} */
     public function getCountry(): ?CountryInterface
     {
         return $this->country;
     }
 
-    /**
-     * @param CountryInterface $country
-     */
+    /** {@inheritdoc} */
     public function setCountry(?CountryInterface $country): void
     {
         $this->country = $country;

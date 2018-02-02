@@ -13,6 +13,7 @@ namespace Sylius\Component\Addressing\Generator;
 
 use InvalidArgumentException;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\PostalCodeInterface;
 
 class PostCodeCodeGenerator implements PostCodeCodeGeneratorInterface
 {
@@ -26,6 +27,11 @@ class PostCodeCodeGenerator implements PostCodeCodeGeneratorInterface
         }
 
         return sprintf('%s-%s', $countryCode, $postCode);
+    }
+
+    public function generateFromPostCode(PostalCodeInterface $postalCode): string
+    {
+        return $this->generate($postalCode->getCountry()->getCode(), $postalCode->getCode());
     }
 
     /**
