@@ -38,7 +38,7 @@ final class ChannelApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_channels_list_when_access_is_denied()
+    public function it_does_not_allow_to_show_channels_list_when_access_is_denied(): void
     {
         $this->loadFixturesFromFile('resources/channels.yml');
 
@@ -51,7 +51,7 @@ final class ChannelApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_creating_channels_for_non_authenticated_user()
+    public function it_denies_creating_channels_for_non_authenticated_user(): void
     {
         $this->client->request('POST', '/api/v1/channels/');
 
@@ -62,7 +62,7 @@ final class ChannelApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_channel_without_specifying_required_data()
+    public function it_does_not_allow_to_create_channel_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -75,7 +75,7 @@ final class ChannelApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_indexing_channels()
+    public function it_allows_indexing_channels(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/channels.yml');
@@ -89,7 +89,7 @@ final class ChannelApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_getting_channel_for_non_authenticated_user()
+    public function it_denies_getting_channel_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/channels/none');
 
@@ -100,7 +100,7 @@ final class ChannelApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_channel_when_it_does_not_exist()
+    public function it_does_not_allow_to_show_channel_when_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -113,7 +113,7 @@ final class ChannelApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_channel_with_required_data()
+    public function it_allows_to_create_channel_with_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -140,7 +140,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_channel_with_extra_data()
+    public function it_allows_to_create_channel_with_extra_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -179,7 +179,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_updating_channel_for_non_authenticated_user()
+    public function it_denies_updating_channel_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', '/api/v1/channels/1');
 
@@ -190,7 +190,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_update_channel_without_specifying_required_data()
+    public function it_does_not_allow_to_update_channel_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $channels = $this->loadFixturesFromFile('resources/channels.yml');
@@ -207,7 +207,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_channel()
+    public function it_allows_to_update_channel(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $channels = $this->loadFixturesFromFile('resources/channels.yml');
@@ -241,7 +241,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_showing_channel()
+    public function it_allows_showing_channel(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $channels = $this->loadFixturesFromFile('resources/channels.yml');
@@ -257,7 +257,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_partially_updating_channel_which_does_not_exist()
+    public function it_returns_not_found_response_when_partially_updating_channel_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -270,7 +270,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_partially_update_channel()
+    public function it_allows_to_partially_update_channel(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $channels = $this->loadFixturesFromFile('resources/channels.yml');
@@ -300,7 +300,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_delete_non_existing_channel()
+    public function it_does_not_allow_to_delete_non_existing_channel(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -313,7 +313,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_channel()
+    public function it_allows_to_delete_channel(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $channels = $this->loadFixturesFromFile('resources/channels.yml');
@@ -335,7 +335,7 @@ EOT;
      *
      * @return string
      */
-    private function getChannelUrl(ChannelInterface $channel)
+    private function getChannelUrl(ChannelInterface $channel): string
     {
         return '/api/v1/channels/' . $channel->getCode();
     }
