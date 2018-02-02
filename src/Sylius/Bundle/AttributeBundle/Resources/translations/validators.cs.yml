@@ -11,6 +11,11 @@ sylius:
             not_blank: Prosím zadejte kód vlastnosti.
             regex: Kód země může tvořit pouze písmena, číslice, pomlčky a podtržítka.
             unique: Tento kód je již používán.
+        configuration:
+            max_entries: Konfigurace maximálně možných vybraných hodnot musí být větší nebo rovna konfiguraci minimálně možných vybraných hodnot.
+            max_length: Konfigurace maximální délky hodnoty musí být větší nebo rovna konfiguraci minimální délky hodnoty.
+            min_entries: Konfigurace minimálně možných vybraných hodnot musí být menší nebo rovna konfiguraci maximálně možných vybraných hodnot.
+            multiple: Konfigurace násobku musí být pravdivá, pokud jsou zadány hodnoty minimálních nebo maximálních hodnot.
         presentation:
             not_blank: Prosím zadejte vlastnost prezentace.
             min_length: Atribut musí být nejméně 1 znak. |Atribut musí mít alespoň {{ limit }} znaků.

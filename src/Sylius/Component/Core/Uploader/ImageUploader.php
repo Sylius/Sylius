@@ -15,6 +15,8 @@ namespace Sylius\Component\Core\Uploader;
 
 use Gaufrette\Filesystem;
 use Sylius\Component\Core\Model\ImageInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Webmozart\Assert\Assert;
 
 class ImageUploader implements ImageUploaderInterface
 {
@@ -40,13 +42,18 @@ class ImageUploader implements ImageUploaderInterface
             return;
         }
 
+        $file = $image->getFile();
+
+        /** @var File $file */
+        Assert::isInstanceOf($file, File::class);
+
         if (null !== $image->getPath() && $this->has($image->getPath())) {
             $this->remove($image->getPath());
         }
 
         do {
             $hash = bin2hex(random_bytes(16));
-            $path = $this->expandPath($hash . '.' . $image->getFile()->guessExtension());
+            $path = $this->expandPath($hash . '.' . $file->guessExtension());
         } while ($this->filesystem->has($path));
 
         $image->setPath($path);

@@ -220,6 +220,7 @@ class Product implements ProductInterface
      */
     public function addAttribute(?AttributeValueInterface $attribute): void
     {
+        /** @var ProductAttributeValueInterface $attribute */
         Assert::isInstanceOf(
             $attribute,
             ProductAttributeValueInterface::class,
@@ -237,6 +238,7 @@ class Product implements ProductInterface
      */
     public function removeAttribute(?AttributeValueInterface $attribute): void
     {
+        /** @var ProductAttributeValueInterface $attribute */
         Assert::isInstanceOf(
             $attribute,
             ProductAttributeValueInterface::class,

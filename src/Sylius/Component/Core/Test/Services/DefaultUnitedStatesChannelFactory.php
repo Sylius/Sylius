@@ -141,11 +141,13 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         $channel->setDefaultLocale($locale);
         $channel->setTaxCalculationStrategy('order_items_based');
 
-        $defaultData['channel'] = $channel;
-        $defaultData['country'] = $this->createCountry();
-        $defaultData['currency'] = $currency;
-        $defaultData['locale'] = $locale;
-        $defaultData['zone'] = $this->createZone();
+        $defaultData = [
+            'channel' => $channel,
+            'country' => $this->createCountry(),
+            'currency' => $currency,
+            'locale' => $locale,
+            'zone' => $this->createZone(),
+        ];
 
         $this->channelRepository->add($channel);
         $this->countryRepository->add($defaultData['country']);

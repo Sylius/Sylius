@@ -79,12 +79,10 @@ final class ProductOptionValueCollectionType extends AbstractType
      *
      * @throws \InvalidArgumentException
      */
-    private function assertOptionsAreValid($options)
+    private function assertOptionsAreValid($options): void
     {
-        Assert::false((
-            !isset($options['options']) ||
-            !is_array($options['options']) &&
-            !($options['options'] instanceof \Traversable && $options['options'] instanceof \ArrayAccess)),
+        Assert::true(
+            isset($options['options']) && is_iterable($options['options']),
             'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Variation\Model\OptionInterface" must be passed to collection'
         );
     }

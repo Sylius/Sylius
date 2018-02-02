@@ -17,6 +17,7 @@ use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolver;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
 use Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
@@ -26,6 +27,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 use Symfony\Component\HttpKernel\Kernel as HttpKernel;
+use Webmozart\Assert\Assert;
 
 class Kernel extends HttpKernel
 {
@@ -123,6 +125,9 @@ class Kernel extends HttpKernel
      */
     protected function getContainerLoader(ContainerInterface $container): LoaderInterface
     {
+        /** @var ContainerBuilder $container */
+        Assert::isInstanceOf($container, ContainerBuilder::class);
+
         $locator = new FileLocator($this, $this->getRootDir() . '/Resources');
         $resolver = new LoaderResolver([
             new XmlFileLoader($container, $locator),
