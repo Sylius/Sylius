@@ -15,18 +15,19 @@
 
     <mapped-superclass name="Sylius\Component\Addressing\Model\PostalCode" table="sylius_postcodes">
         <unique-constraints>
-            <unique-constraint columns="country_id,code" />
+            <unique-constraint columns="country_id,code"/>
         </unique-constraints>
 
         <id name="id" column="id" type="integer">
-            <generator strategy="AUTO" />
+            <generator strategy="AUTO"/>
         </id>
 
-        <field name="code" column="code" type="string" unique="true" />
-        <field name="name" column="name" type="string" />
+        <field name="code" column="code" type="string" />
+        <field name="name" column="name" type="string"/>
 
-        <many-to-one field="country" target-entity="Sylius\Component\Addressing\Model\CountryInterface" inversed-by="postCodes">
-            <join-column name="country_id" referenced-column-name="id" nullable="false" />
+        <many-to-one field="country"
+                     target-entity="Sylius\Component\Addressing\Model\CountryInterface" inversed-by="postCodes">
+            <join-column name="country_id" referenced-column-name="id" nullable="false"/>
         </many-to-one>
     </mapped-superclass>
 

@@ -10,27 +10,15 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Model;
 
-interface PostalCodeInterface
-{
-    /**
-     * @return int|null
-     */
-    public function getId(): ?int;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
+interface PostalCodeInterface extends ResourceInterface, CodeAwareInterface
+{
     /**
      * @param int|null $id
      */
     public function setId(?int $id): void;
-
-    /**
-     * @return string
-     */
-    public function getCode(): ?string;
-
-    /**
-     * @param string $code
-     */
-    public function setCode(?string $code): void;
 
     /**
      * @return string

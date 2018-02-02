@@ -11,9 +11,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Addressing\Model;
 
 
-use Sylius\Component\Resource\Model\ResourceInterface;
-
-class PostalCode implements PostalCodeInterface, ResourceInterface
+class PostalCode implements PostalCodeInterface
 {
     /** @var int|null */
     protected $id;

@@ -96,7 +96,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
                 return true;
             }
         }
-
         return false;
     }
 
@@ -113,10 +112,13 @@ final class ZoneMatcher implements ZoneMatcherInterface
         switch ($type = $member->getBelongsTo()->getType()) {
             case ZoneInterface::TYPE_POST_CODE:
                 return null !== $address->getPostcode() && $address->getPostcode() === $member->getCode();
+
             case ZoneInterface::TYPE_PROVINCE:
                 return null !== $address->getProvinceCode() && $address->getProvinceCode() === $member->getCode();
+
             case ZoneInterface::TYPE_COUNTRY:
-                return null !== $address->getCountryCode() && $address->getCountryCode() === $member->getCode();
+                return null !== $address->getPostcode() && $address->getPostcode() === $member->getCode();
+
             case ZoneInterface::TYPE_ZONE:
                 $zone = $this->getZoneByCode($member->getCode());
 
