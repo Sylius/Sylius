@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Attribute\Model\AttributeValue as BaseAttributeValue;
+use Webmozart\Assert\Assert;
 
 class ProductAttributeValue extends BaseAttributeValue implements ProductAttributeValueInterface
 {
@@ -22,7 +23,12 @@ class ProductAttributeValue extends BaseAttributeValue implements ProductAttribu
      */
     public function getProduct(): ?ProductInterface
     {
-        return parent::getSubject();
+        $subject = parent::getSubject();
+
+        /** @var ProductInterface|null $subject */
+        Assert::nullOrIsInstanceOf($subject, ProductInterface::class);
+
+        return $subject;
     }
 
     /**

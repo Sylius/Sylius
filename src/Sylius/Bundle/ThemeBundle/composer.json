@@ -37,6 +37,9 @@
         "symfony/dependency-injection": "^3.4",
         "symfony/twig-bundle": "^3.4"
     },
+    "conflict": {
+        "twig/twig": "^1.0"
+    },
     "config": {
         "bin-dir": "bin"
     },

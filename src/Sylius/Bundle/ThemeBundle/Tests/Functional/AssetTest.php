@@ -104,7 +104,7 @@ final class AssetTest extends WebTestCase
         return $webDirectory;
     }
 
-    private function assertFileContent($lines, $webDirectory)
+    private function assertFileContent($lines, $webDirectory): void
     {
         foreach ($lines as $line) {
             if (empty($line)) {

@@ -49,6 +49,9 @@
         "symfony/validator": "^3.4",
         "twig/twig": "^2.0"
     },
+    "conflict": {
+        "twig/twig": "^1.0"
+    },
     "config": {
         "bin-dir": "bin"
     },

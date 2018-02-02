@@ -214,7 +214,7 @@ final class SuiteFactorySpec extends ObjectBehavior
      *
      * @return \Generator
      */
-    private function createGenerator(Collaborator ...$collaborators)
+    private function createGenerator(Collaborator ...$collaborators): \Generator
     {
         foreach ($collaborators as $collaborator) {
             yield $collaborator->getWrappedObject() => [];

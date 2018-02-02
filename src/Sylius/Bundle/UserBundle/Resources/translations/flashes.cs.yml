@@ -10,4 +10,5 @@ sylius:
         verify_email: 'Vaše e-mailová adresa byla úspěšně ověřena.'
         verify_email_by_invalid_token: 'Ověřovací token není platný.'
         verify_email_request: 'E-mail s potvrzujícím odkazem byl odeslán na vaši e-mailovou adresu.'
+        verify_no_user: 'Žádný uživatel není přihlášen.'
         verify_verified_email: 'Váš e-mail byl již ověřen.'

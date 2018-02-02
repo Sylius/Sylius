@@ -126,7 +126,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
      *
      * @throws FailedGenerationException
      */
-    private function assertGenerationIsPossible(PromotionCouponGeneratorInstructionInterface $instruction)
+    private function assertGenerationIsPossible(PromotionCouponGeneratorInstructionInterface $instruction): void
     {
         if (!$this->generationPolicy->isGenerationPossible($instruction)) {
             throw new FailedGenerationException($instruction);

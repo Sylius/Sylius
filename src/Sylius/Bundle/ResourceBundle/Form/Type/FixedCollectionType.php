@@ -68,9 +68,9 @@ final class FixedCollectionType extends AbstractType
     }
 
     /**
-     * @return callable
+     * @return \Closure
      */
-    private function optionalCallableNormalizer(): callable
+    private function optionalCallableNormalizer(): \Closure
     {
         return function (Options $options, $value) {
             if (is_callable($value)) {

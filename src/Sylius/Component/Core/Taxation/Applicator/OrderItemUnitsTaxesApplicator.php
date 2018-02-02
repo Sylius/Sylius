@@ -81,7 +81,7 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
      * @param string $label
      * @param bool $included
      */
-    private function addTaxAdjustment(OrderItemUnitInterface $unit, int $taxAmount, string $label, bool $included)
+    private function addTaxAdjustment(OrderItemUnitInterface $unit, int $taxAmount, string $label, bool $included): void
     {
         $unitTaxAdjustment = $this->adjustmentFactory
             ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included)

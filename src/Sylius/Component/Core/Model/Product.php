@@ -264,7 +264,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     public function removeReview(ReviewInterface $review): void
     {
-        $this->reviews->remove($review);
+        $this->reviews->removeElement($review);
     }
 
     /**
