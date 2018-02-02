@@ -15,9 +15,11 @@ namespace spec\Sylius\Component\Addressing\Matcher;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Generator\PostCodeCodeGeneratorInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\PostalCodeInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
@@ -25,9 +27,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ZoneMatcherSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository): void
+
+    function let(RepositoryInterface $repository, PostCodeCodeGeneratorInterface $postCodeCodeGenerator): void
     {
-        $this->beConstructedWith($repository);
+        $this->beConstructedWith($repository, $postCodeCodeGenerator);
     }
 
     function it_implements_zone_matcher_interface(): void
@@ -71,11 +74,33 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $province->getCode()->willReturn('TX');
         $address->getProvinceCode()->willReturn('TX');
         $memberProvince->getCode()->willReturn('TX');
+
         $zone->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
         $zone->getMembers()->willReturn(new ArrayCollection([$memberProvince->getWrappedObject()]));
         $memberProvince->getBelongsTo()->willReturn($zone);
 
         $this->match($address, 'shipping')->shouldReturn($zone);
+    }
+
+    function it_should_match_address_by_postal_code_region(
+        RepositoryInterface $repository,
+        PostalCodeInterface $postCode,
+        AddressInterface $address,
+        ZoneMemberInterface $memberPostCode,
+        ZoneInterface $zone,
+        PostCodeCodeGeneratorInterface $postCodeCodeGenerator
+    ) {
+        $repository->findAll()->shouldBeCalled()->willReturn([$zone]);
+
+        $zone->getType()->willReturn(ZoneInterface::TYPE_POST_CODE);
+        $zone->getMembers()->willReturn(new ArrayCollection([$memberPostCode->getWrappedObject()]));
+        $memberPostCode->getCode()->willReturn('de-12345');
+        $memberPostCode->getBelongsTo()->willReturn($zone);
+
+        $postCode->getCode()->willReturn('de-12345');
+        $postCodeCodeGenerator->generateFromAddress($address)->willReturn('de-12345');
+
+        $this->match($address)->shouldReturn($zone);
     }
 
     function it_should_match_address_by_country(
@@ -89,6 +114,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');
         $memberCountry->getCode()->willReturn('IE');
+
         $zone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
         $zone->getMembers()->willReturn(new ArrayCollection([$memberCountry->getWrappedObject()]));
         $memberCountry->getBelongsTo()->willReturn($zone);
@@ -107,6 +133,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');
         $memberCountry->getCode()->willReturn('IE');
+
         $zone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
         $zone->getMembers()->willReturn(new ArrayCollection([$memberCountry->getWrappedObject()]));
         $memberCountry->getBelongsTo()->willReturn($zone);
@@ -127,10 +154,12 @@ final class ZoneMatcherSpec extends ObjectBehavior
 
         $address->getCountryCode()->willReturn('IE');
         $memberCountry->getCode()->willReturn('IE');
+
         $subZone->getMembers()->willReturn(new ArrayCollection([$memberCountry->getWrappedObject()]));
         $subZone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
         $subZone->getCode()->willReturn('Ireland');
         $memberZone->getCode()->willReturn('Ireland');
+
         $rootZone->getMembers()->willReturn(new ArrayCollection([$memberZone->getWrappedObject()]));
         $rootZone->getType()->willReturn(ZoneInterface::TYPE_ZONE);
 

@@ -25,9 +25,15 @@
         <service id="sylius.province_naming_provider" class="Sylius\Component\Addressing\Provider\ProvinceNamingProvider" lazy="true">
             <argument type="service" id="sylius.repository.province" />
         </service>
+
         <service id="sylius.zone_matcher" class="Sylius\Component\Addressing\Matcher\ZoneMatcher">
             <argument type="service" id="sylius.repository.zone" />
+            <argument type="service" id="sylius.component.addressing.generator.post_code_code_generator"/>
         </service>
+
+        <service class="Sylius\Component\Addressing\Generator\PostCodeCodeGenerator"
+                 id="sylius.component.addressing.generator.post_code_code_generator"/>
+
         <service id="sylius.converter.country_name" class="Sylius\Component\Addressing\Converter\CountryNameConverter" />
 
         <service id="sylius.address_comparator" class="Sylius\Component\Addressing\Comparator\AddressComparator"/>

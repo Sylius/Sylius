@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Matcher;
 
+use Sylius\Component\Addressing\Generator\PostCodeCodeGeneratorInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -27,6 +28,11 @@ final class ZoneMatcher implements ZoneMatcherInterface
     private $zoneRepository;
 
     /**
+     * @var PostCodeCodeGeneratorInterface
+     */
+    private $postCodeCodeGenerator;
+
+    /**
      * @var array
      */
     private const PRIORITIES = [
@@ -37,11 +43,15 @@ final class ZoneMatcher implements ZoneMatcherInterface
     ];
 
     /**
-     * @param RepositoryInterface $zoneRepository
+     * @param RepositoryInterface            $zoneRepository
+     * @param PostCodeCodeGeneratorInterface $postCodeCodeGenerator
      */
-    public function __construct(RepositoryInterface $zoneRepository)
-    {
-        $this->zoneRepository = $zoneRepository;
+    public function __construct(
+        RepositoryInterface $zoneRepository,
+        PostCodeCodeGeneratorInterface $postCodeCodeGenerator
+    ) {
+        $this->zoneRepository        = $zoneRepository;
+        $this->postCodeCodeGenerator = $postCodeCodeGenerator;
     }
 
     /**
@@ -111,13 +121,14 @@ final class ZoneMatcher implements ZoneMatcherInterface
     {
         switch ($type = $member->getBelongsTo()->getType()) {
             case ZoneInterface::TYPE_POST_CODE:
-                return null !== $address->getPostcode() && $address->getPostcode() === $member->getCode();
+                $addressCode = $this->postCodeCodeGenerator->generateFromAddress($address);
+                return $addressCode === $member->getCode();
 
             case ZoneInterface::TYPE_PROVINCE:
                 return null !== $address->getProvinceCode() && $address->getProvinceCode() === $member->getCode();
 
             case ZoneInterface::TYPE_COUNTRY:
-                return null !== $address->getPostcode() && $address->getPostcode() === $member->getCode();
+                return null !== $address->getCountryCode() && $address->getCountryCode() === $member->getCode();
 
             case ZoneInterface::TYPE_ZONE:
                 $zone = $this->getZoneByCode($member->getCode());
