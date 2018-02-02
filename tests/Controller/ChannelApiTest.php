@@ -340,4 +340,3 @@ EOT;
         return '/api/v1/channels/' . $channel->getCode();
     }
 }
-
