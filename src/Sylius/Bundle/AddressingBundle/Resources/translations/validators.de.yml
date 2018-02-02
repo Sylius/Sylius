@@ -45,6 +45,13 @@ sylius:
             min_length: Der Name des Bundeslandes muss mindestens 2 Zeichen lang sein|Der Name des Bundeslandes muss mindestens 2 Zeichen lang sein.
             not_blank: Bitte geben Sie Ihr Bundesland an.
             unique: Bundesland-Name muss eindeutig sein.
+    postcode:
+        unique: Postleitzahlen müssen eindeutig sein.
+        code:
+            not_negative: Postleitzahlen können nicht negativ sein.
+        name:
+            not_blank: Bitte den Postleitzahl Namen eingeben.
+            max_length: Postleitzahl Name kann nicht länger sein als 255 Zeichen.
     zone:
         scope:
             not_blank: Bitte den Bereich angeben.

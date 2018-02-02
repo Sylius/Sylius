@@ -38,10 +38,17 @@ sylius:
             regex: Province code should have the following format XX-XX (e.g. US-FL).
             unique: Province code must be unique.
         name:
-            max_length: Province name must not be longer than 255 characters|Province name must not be longer than 255 characters.
-            min_length: Province name must be at least 2 characters long|Province name must be at least 2 characters long.
+            max_length: Province name must not be longer than 255 characters|Province names must not be longer than 255 characters.
+            min_length: Province name must be at least 2 characters long|Province names must be at least 2 characters long.
             not_blank: Please enter province name.
             unique: Province name must be unique.
+    postcode:
+        unique: Postalcode must be unique
+        code:
+            not_negative: Postcode can not be negative
+        name:
+            not_blank: Please enter postcode name.
+            max_length: Postcode name can not be longer than 255 characters.|Postcode names can not be longer than 255 characters.
     zone:
         scope:
             not_blank: Please enter the scope.

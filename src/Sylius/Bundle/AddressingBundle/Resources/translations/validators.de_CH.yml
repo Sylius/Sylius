@@ -44,7 +44,14 @@ sylius:
             max_length: Der Name des Kantons darf nicht länger als 255 Zeichen sein|Der Name des Kantons darf nicht länger als 255 Zeichen sein.
             min_length: Der Name des Kantons muss mindestens 2 Zeichen lang sein|Der Name des Kantons muss mindestens 2 Zeichen lang sein.
             not_blank: Bitte geben Sie einen Kanton an.
-            unique: Bundesland-Name/Kanton-Name muss eindeutig sein.
+            unique: Bundesland-Name muss eindeutig sein.
+    postcode:
+        unique: Postleitzahlen müssen eindeutig sein.
+        code:
+            not_negative: Postleitzahlen können nicht negativ sein.
+        name:
+            not_blank: Bitte den Postleitzahl Namen eingeben.
+            max_length: Postleitzahl Name kann nicht länger sein als 255 Zeichen.
     zone:
         scope:
             not_blank: Bitte den Bereich angeben.

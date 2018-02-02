@@ -30,7 +30,7 @@ interface PostalCodeInterface
     /**
      * @param string $code
      */
-    public function setCode(string $code): void;
+    public function setCode(?string $code): void;
 
     /**
      * @return string
@@ -40,15 +40,15 @@ interface PostalCodeInterface
     /**
      * @param string $name
      */
-    public function setName(string $name): void;
+    public function setName(?string $name): void;
 
     /**
      * @return CountryInterface
      */
-    public function getCountry(): CountryInterface;
+    public function getCountry(): ?CountryInterface;
 
     /**
      * @param CountryInterface $country
      */
-    public function setCountry(CountryInterface $country): void;
+    public function setCountry(?CountryInterface $country): void;
 }

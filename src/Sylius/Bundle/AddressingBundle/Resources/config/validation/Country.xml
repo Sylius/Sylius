@@ -13,11 +13,13 @@
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sylius\Component\Addressing\Model\Country">
+
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">code</option>
             <option name="message">sylius.country.code.unique</option>
             <option name="groups">sylius</option>
         </constraint>
+
         <property name="code">
             <constraint name="NotBlank">
                 <option name="message">sylius.country.code.not_blank</option>
@@ -35,7 +37,12 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+
         <property name="provinces">
+            <constraint name="Valid" />
+        </property>
+
+        <property name="postCodes">
             <constraint name="Valid" />
         </property>
     </class>

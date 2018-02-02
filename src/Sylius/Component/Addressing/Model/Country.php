@@ -42,12 +42,12 @@ class Country implements CountryInterface
     /**
      * @var Collection|PostalCodeInterface[]
      */
-    protected $postal_codes;
+    protected $postCodes;
 
     public function __construct()
     {
-        $this->provinces    = new ArrayCollection();
-        $this->postal_codes = new ArrayCollection();
+        $this->provinces = new ArrayCollection();
+        $this->postCodes = new ArrayCollection();
     }
 
     /**
@@ -137,42 +137,42 @@ class Country implements CountryInterface
     }
 
     /** {@inheritdoc} */
-    public function hasPostalCodes(): bool
+    public function hasPostCodes(): bool
     {
-        return $this->postal_codes->isEmpty();
+        return $this->postCodes->isEmpty();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPostalCodes(): Collection
+    public function getPostCodes(): Collection
     {
-        return $this->postal_codes;
+        return $this->postCodes;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasPostalCode(PostalCodeInterface $postalCode): bool
+    public function hasPostCode(PostalCodeInterface $postalCode): bool
     {
-        return $this->postal_codes->contains($postalCode);
+        return $this->postCodes->contains($postalCode);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setPostalCodes($postal_codes): void
+    public function setPostCodes($postCodes): void
     {
-        $this->postal_codes = $postal_codes;
+        $this->postCodes = $postCodes;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addPostalCode(PostalCodeInterface $postalCode): void
+    public function addPostCode(PostalCodeInterface $postalCode): void
     {
-        if (!$this->hasPostalCode($postalCode)) {
-            $this->postal_codes->add($postalCode);
+        if (!$this->hasPostCode($postalCode)) {
+            $this->postCodes->add($postalCode);
             $postalCode->setCountry($this);
         }
     }
@@ -180,10 +180,10 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function removePostalCode(PostalCodeInterface $postalCode): void
+    public function removePostCode(PostalCodeInterface $postalCode): void
     {
-        if ($this->hasPostalCode($postalCode)) {
-            $this->postal_codes->removeElement($postalCode);
+        if ($this->hasPostCode($postalCode)) {
+            $this->postCodes->removeElement($postalCode);
             $postalCode->setCountry(null);
         }
     }

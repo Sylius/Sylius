@@ -22,6 +22,9 @@
         <parameter key="sylius.form.type.province.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.form.type.postal_code.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
         <parameter key="sylius.form.type.zone.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
@@ -85,6 +88,13 @@
                  id="sylius_bundle_addressing.form_type.postal_code_code_choice_type">
             <argument id="sylius.repository.postal_code" type="service"/>
             <tag alias="Sylius\Bundle\AddressingBundle\Form\Type\PostalCodeCodeChoiceType" name="form.type"/>
+        </service>
+
+        <service class="Sylius\Bundle\AddressingBundle\Form\Type\PostalCodeType"
+                 id="sylius_bundle_addressing.form_type.postal_code_type">
+            <argument>%sylius.model.postal_code.class%</argument>
+            <argument>%sylius.form.type.postal_code.validation_groups%</argument>
+            <tag alias="Sylius\Bundle\AddressingBundle\Form\Type\PostalCodeType" name="form.type"/>
         </service>
 
 

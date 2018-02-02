@@ -54,9 +54,9 @@ class PostalCode implements PostalCodeInterface, ResourceInterface
     /**
      * @param string $code
      */
-    public function setCode(string $code): void
+    public function setCode(?string $code): void
     {
-        $this->code = $code;
+        $this->code = $code ?: '';
     }
 
     /**
@@ -70,15 +70,15 @@ class PostalCode implements PostalCodeInterface, ResourceInterface
     /**
      * @param string $name
      */
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
-        $this->name = $name;
+        $this->name = $name ?: '';
     }
 
     /**
      * @return CountryInterface
      */
-    public function getCountry(): CountryInterface
+    public function getCountry(): ?CountryInterface
     {
         return $this->country;
     }
@@ -86,7 +86,7 @@ class PostalCode implements PostalCodeInterface, ResourceInterface
     /**
      * @param CountryInterface $country
      */
-    public function setCountry(CountryInterface $country): void
+    public function setCountry(?CountryInterface $country): void
     {
         $this->country = $country;
     }

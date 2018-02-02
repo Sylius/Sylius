@@ -34,7 +34,7 @@
             </order-by>
         </one-to-many>
 
-        <one-to-many field="postal_codes" target-entity="Sylius\Component\Addressing\Model\PostalCodeInterface" mapped-by="country" orphan-removal="true">
+        <one-to-many field="postCodes" target-entity="Sylius\Component\Addressing\Model\PostalCodeInterface" mapped-by="country" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>
