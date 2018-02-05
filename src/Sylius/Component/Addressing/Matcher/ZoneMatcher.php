@@ -107,7 +107,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * @param AddressInterface $address
+     * @param AddressInterface    $address
      * @param ZoneMemberInterface $member
      *
      * @return bool
@@ -118,7 +118,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
     {
         switch ($type = $member->getBelongsTo()->getType()) {
             case ZoneInterface::TYPE_POST_CODE:
-                $addressCode = $this->postalCodeGenerator->generateFromAddress($address);
+                $addressCode = "{$address->getCountryCode()}-{$address->getPostcode()}";
                 return $addressCode === $member->getCode();
 
             case ZoneInterface::TYPE_PROVINCE:

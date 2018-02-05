@@ -39,7 +39,7 @@
                 <cascade-all/>
             </cascade>
             <order-by>
-                <order-by-field name="code" direction="ASC" />
+                <order-by-field name="postCode" direction="ASC" />
             </order-by>
         </one-to-many>
     </mapped-superclass>

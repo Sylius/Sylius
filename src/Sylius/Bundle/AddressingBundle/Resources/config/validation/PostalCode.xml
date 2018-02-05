@@ -6,14 +6,14 @@
     <class name="Sylius\Component\Addressing\Model\PostalCode">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">
-                <value>code</value>
+                <value>postCode</value>
                 <value>country</value>
             </option>
             <option name="errorPath">name</option>
             <option name="message">sylius.postcode.unique</option>
         </constraint>
 
-        <property name="code">
+        <property name="postCode">
             <constraint name="NotBlank" />
             <constraint name="Range">
                 <option name="min">0</option>

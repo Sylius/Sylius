@@ -13,12 +13,17 @@ namespace Sylius\Component\Addressing\Model;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface PostalCodeInterface extends ResourceInterface, CodeAwareInterface
+interface PostalCodeInterface extends ResourceInterface
 {
     /**
      * @param int|null $id
      */
     public function setId(?int $id): void;
+
+    /**
+     * @return string
+     */
+    public function getCode(): string;
 
     /**
      * @return string
@@ -29,6 +34,16 @@ interface PostalCodeInterface extends ResourceInterface, CodeAwareInterface
      * @param string $name
      */
     public function setName(?string $name): void;
+
+    /**
+     * @return string
+     */
+    public function getPostCode(): string;
+
+    /**
+     * @param null|string $postCode
+     */
+    public function setPostCode(?string $postCode): void;
 
     /**
      * @return CountryInterface

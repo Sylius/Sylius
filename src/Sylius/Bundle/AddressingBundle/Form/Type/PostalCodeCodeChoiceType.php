@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\ReversedTransformer;
 
@@ -22,14 +23,14 @@ final class PostalCodeCodeChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    private $postalCodeRepository;
+    private $postCodeRepository;
 
     /**
-     * @param RepositoryInterface $provinceRepository
+     * @param RepositoryInterface $postCodeRepository
      */
-    public function __construct(RepositoryInterface $provinceRepository)
+    public function __construct(RepositoryInterface $postCodeRepository)
     {
-        $this->postalCodeRepository = $provinceRepository;
+        $this->postCodeRepository = $postCodeRepository;
     }
 
     /**
@@ -39,7 +40,7 @@ final class PostalCodeCodeChoiceType extends AbstractType
     {
         $builder->addModelTransformer(
             new ReversedTransformer(
-                new ResourceToIdentifierTransformer($this->postalCodeRepository, 'code')
+                new ResourceToIdentifierTransformer($this->postCodeRepository, 'code')
             )
         );
     }

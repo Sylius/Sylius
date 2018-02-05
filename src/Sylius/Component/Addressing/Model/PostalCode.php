@@ -17,10 +17,10 @@ class PostalCode implements PostalCodeInterface
     protected $id;
 
     /** @var string */
-    protected $code;
+    protected $name;
 
     /** @var string */
-    protected $name;
+    protected $postCode;
 
     /** @var CountryInterface */
     protected $country;
@@ -38,27 +38,22 @@ class PostalCode implements PostalCodeInterface
     }
 
     /** {@inheritdoc} */
-    public function getCode(): ?string
+    public function getCode(): string
     {
-        return $this->code;
-    }
-
-    /** {@inheritdoc} */
-    public function setCode(?string $code): void
-    {
-        $this->code = $code ?: '';
+        $countryCode = $this->country === null ? '  ' : $this->country->getCode();
+        return "{$countryCode}-{$this->postCode}";
     }
 
     /** {@inheritdoc} */
     public function getName(): ?string
     {
-        return $this->name;
+        return $this->name ?? '';
     }
 
     /** {@inheritdoc} */
     public function setName(?string $name): void
     {
-        $this->name = $name ?: '';
+        $this->name = $name;
     }
 
     /** {@inheritdoc} */
@@ -73,4 +68,17 @@ class PostalCode implements PostalCodeInterface
         $this->country = $country;
     }
 
+    /** {@inheritdoc} */
+    public function getPostCode(): string
+    {
+        return $this->postCode ?? '';
+    }
+
+    /**
+     * @param null|string $postCode
+     */
+    public function setPostCode(?string $postCode): void
+    {
+        $this->postCode = $postCode;
+    }
 }

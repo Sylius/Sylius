@@ -38,11 +38,8 @@ class PostCodeRepository extends EntityRepository implements PostCodeRepositoryI
             return count($possibleResults) > 0 ? reset($possibleResults) : null;
         }
 
-        if(count($result) === 0){
-            return null;
-        }
-
-        return reset($result);
+        // Else proceed as normal but just return one
+        return count($result) === 0 ? null : reset($result);
     }
 
     /**

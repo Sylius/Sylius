@@ -12,6 +12,7 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\PostalCodeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -41,14 +42,19 @@ final class PostalCodeChoiceType extends AbstractType
         $resolver->setDefaults(
             [
                 'choices'                   => function (Options $options): iterable {
-                    /** @var CountryInterface $options['country'] */
+                    /** @var CountryInterface $options ['country'] */
                     if (null === $options['country']) {
                         return $this->postalCodeRepository->findAll();
                     }
 
                     return $options['country']->getPostalCodes();
                 },
-                'choice_value'              => 'code',
+                'choice_value'              => function (?PostalCodeInterface $postCode) {
+                    if ($postCode === null) {
+                        return '';
+                    }
+                    return $postCode->getCode();
+                },
                 'choice_label'              => 'name',
                 'choice_translation_domain' => false,
                 'country'                   => null,
