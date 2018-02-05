@@ -15,11 +15,9 @@ namespace spec\Sylius\Component\Addressing\Matcher;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Generator\PostCodeCodeGeneratorInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\PostCodeInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
@@ -84,7 +82,6 @@ final class ZoneMatcherSpec extends ObjectBehavior
 
     function it_should_match_address_by_postal_code_region(
         RepositoryInterface $repository,
-        PostCodeInterface $postCode,
         AddressInterface $address,
         ZoneMemberInterface $memberPostCode,
         ZoneInterface $zone
@@ -97,11 +94,30 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $memberPostCode->getCode()->willReturn('DE-12345');
         $memberPostCode->getBelongsTo()->willReturn($zone);
 
-        $postCode->getCode()->willReturn('DE-12345');
         $address->getCountryCode()->shouldBeCalled()->willReturn('DE');
         $address->getPostcode()->shouldBeCalled()->willReturn('12345');
 
         $this->match($address)->shouldReturn($zone);
+    }
+
+    function it_should_not_match_address_with_different_postal_code_region(
+        RepositoryInterface $repository,
+        AddressInterface $address,
+        ZoneMemberInterface $memberPostCode,
+        ZoneInterface $zone
+    ) {
+        $repository->findAll()->shouldBeCalled()->willReturn([$zone]);
+
+        $zone->getType()->willReturn(ZoneInterface::TYPE_POST_CODE);
+        $zone->getMembers()->willReturn(new ArrayCollection([$memberPostCode->getWrappedObject()]));
+
+        $memberPostCode->getCode()->willReturn('CH-12345');
+        $memberPostCode->getBelongsTo()->willReturn($zone);
+
+        $address->getCountryCode()->shouldBeCalled()->willReturn('DE');
+        $address->getPostcode()->shouldBeCalled()->willReturn('12345');
+
+        $this->match($address)->shouldReturn(null);
     }
 
     function it_should_match_address_by_country(
