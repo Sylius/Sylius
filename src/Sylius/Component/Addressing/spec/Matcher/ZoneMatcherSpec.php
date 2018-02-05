@@ -28,9 +28,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class ZoneMatcherSpec extends ObjectBehavior
 {
 
-    function let(RepositoryInterface $repository, PostCodeCodeGeneratorInterface $postCodeCodeGenerator): void
+    function let(RepositoryInterface $repository): void
     {
-        $this->beConstructedWith($repository, $postCodeCodeGenerator);
+        $this->beConstructedWith($repository);
     }
 
     function it_implements_zone_matcher_interface(): void
@@ -87,18 +87,19 @@ final class ZoneMatcherSpec extends ObjectBehavior
         PostalCodeInterface $postCode,
         AddressInterface $address,
         ZoneMemberInterface $memberPostCode,
-        ZoneInterface $zone,
-        PostCodeCodeGeneratorInterface $postCodeCodeGenerator
+        ZoneInterface $zone
     ) {
         $repository->findAll()->shouldBeCalled()->willReturn([$zone]);
 
         $zone->getType()->willReturn(ZoneInterface::TYPE_POST_CODE);
         $zone->getMembers()->willReturn(new ArrayCollection([$memberPostCode->getWrappedObject()]));
-        $memberPostCode->getCode()->willReturn('de-12345');
+
+        $memberPostCode->getCode()->willReturn('DE-12345');
         $memberPostCode->getBelongsTo()->willReturn($zone);
 
-        $postCode->getCode()->willReturn('de-12345');
-        $postCodeCodeGenerator->generateFromAddress($address)->willReturn('de-12345');
+        $postCode->getCode()->willReturn('DE-12345');
+        $address->getCountryCode()->shouldBeCalled()->willReturn('DE');
+        $address->getPostcode()->shouldBeCalled()->willReturn('12345');
 
         $this->match($address)->shouldReturn($zone);
     }

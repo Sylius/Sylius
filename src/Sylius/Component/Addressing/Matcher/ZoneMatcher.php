@@ -44,10 +44,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
     /**
      * @param RepositoryInterface $zoneRepository
      */
-    public function __construct(
-        RepositoryInterface $zoneRepository,
-        PostCodeCodeGeneratorInterface $postCodeCodeGenerator
-    ) {
+    public function __construct(RepositoryInterface $zoneRepository) {
         $this->zoneRepository = $zoneRepository;
     }
 
