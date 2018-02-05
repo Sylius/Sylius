@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Matcher;
 
-use Sylius\Component\Addressing\Generator\PostCodeCodeGenerator;
-use Sylius\Component\Addressing\Generator\PostCodeCodeGeneratorInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -27,9 +25,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
      * @var RepositoryInterface
      */
     private $zoneRepository;
-
-    /** @var PostCodeCodeGenerator */
-    private $postalCodeGenerator;
 
     /**
      * @var array

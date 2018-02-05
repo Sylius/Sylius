@@ -11,13 +11,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 
-use Sylius\Component\Addressing\Model\PostalCode;
+use Sylius\Component\Addressing\Model\PostCode;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class PostalCodeType extends AbstractType
+final class PostCodeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -27,6 +27,6 @@ final class PostalCodeType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => PostalCode::class]);
+        $resolver->setDefaults(['data_class' => PostCode::class]);
     }
 }

@@ -16,7 +16,7 @@ sylius:
             zone: Zone
         country:
             add_province: Add province
-            add_postal_code: Add postalcode
+            add_postal_code: Add postcode
             name: Name
             provinces: Provinces
             select: Select

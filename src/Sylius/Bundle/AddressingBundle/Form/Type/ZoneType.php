@@ -113,7 +113,7 @@ final class ZoneType extends AbstractResourceType
         $zoneMemberEntryTypes = [
             ZoneInterface::TYPE_COUNTRY   => CountryCodeChoiceType::class,
             ZoneInterface::TYPE_PROVINCE  => ProvinceCodeChoiceType::class,
-            ZoneInterface::TYPE_POST_CODE => PostalCodeCodeChoiceType::class,
+            ZoneInterface::TYPE_POST_CODE => PostCodeCodeChoiceType::class,
             ZoneInterface::TYPE_ZONE      => ZoneCodeChoiceType::class,
         ];
 

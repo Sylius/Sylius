@@ -12,26 +12,26 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\PostalCodeInterface;
+use Sylius\Component\Addressing\Model\PostCodeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class PostalCodeChoiceType extends AbstractType
+final class PostCodeChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface
      */
-    private $postalCodeRepository;
+    private $postCodeRepository;
 
     /**
-     * @param RepositoryInterface $postalCodeRepository
+     * @param RepositoryInterface $postCodeRepository
      */
-    public function __construct(RepositoryInterface $postalCodeRepository)
+    public function __construct(RepositoryInterface $postCodeRepository)
     {
-        $this->postalCodeRepository = $postalCodeRepository;
+        $this->postCodeRepository = $postCodeRepository;
     }
 
     /**
@@ -44,12 +44,12 @@ final class PostalCodeChoiceType extends AbstractType
                 'choices'                   => function (Options $options): iterable {
                     /** @var CountryInterface $options ['country'] */
                     if (null === $options['country']) {
-                        return $this->postalCodeRepository->findAll();
+                        return $this->postCodeRepository->findAll();
                     }
 
-                    return $options['country']->getPostalCodes();
+                    return $options['country']->getPostCodes();
                 },
-                'choice_value'              => function (?PostalCodeInterface $postCode) {
+                'choice_value'              => function (?PostCodeInterface $postCode) {
                     if ($postCode === null) {
                         return '';
                     }

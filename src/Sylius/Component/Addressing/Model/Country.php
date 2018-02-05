@@ -40,7 +40,7 @@ class Country implements CountryInterface
     protected $provinces;
 
     /**
-     * @var Collection|PostalCodeInterface[]
+     * @var Collection|PostCodeInterface[]
      */
     protected $postCodes;
 
@@ -153,9 +153,9 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPostCode(PostalCodeInterface $postalCode): bool
+    public function hasPostCode(PostCodeInterface $postCode): bool
     {
-        return $this->postCodes->contains($postalCode);
+        return $this->postCodes->contains($postCode);
     }
 
     /**
@@ -169,22 +169,22 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function addPostCode(PostalCodeInterface $postalCode): void
+    public function addPostCode(PostCodeInterface $postCode): void
     {
-        if (!$this->hasPostCode($postalCode)) {
-            $this->postCodes->add($postalCode);
-            $postalCode->setCountry($this);
+        if (!$this->hasPostCode($postCode)) {
+            $this->postCodes->add($postCode);
+            $postCode->setCountry($this);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removePostCode(PostalCodeInterface $postalCode): void
+    public function removePostCode(PostCodeInterface $postCode): void
     {
-        if ($this->hasPostCode($postalCode)) {
-            $this->postCodes->removeElement($postalCode);
-            $postalCode->setCountry(null);
+        if ($this->hasPostCode($postCode)) {
+            $this->postCodes->removeElement($postCode);
+            $postCode->setCountry(null);
         }
     }
 

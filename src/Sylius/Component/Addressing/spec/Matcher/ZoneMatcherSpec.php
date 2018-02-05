@@ -19,7 +19,7 @@ use Sylius\Component\Addressing\Generator\PostCodeCodeGeneratorInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\PostalCodeInterface;
+use Sylius\Component\Addressing\Model\PostCodeInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
@@ -84,7 +84,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
 
     function it_should_match_address_by_postal_code_region(
         RepositoryInterface $repository,
-        PostalCodeInterface $postCode,
+        PostCodeInterface $postCode,
         AddressInterface $address,
         ZoneMemberInterface $memberPostCode,
         ZoneInterface $zone

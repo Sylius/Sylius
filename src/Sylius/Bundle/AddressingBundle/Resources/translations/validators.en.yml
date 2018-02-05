@@ -43,7 +43,7 @@ sylius:
             not_blank: Please enter province name.
             unique: Province name must be unique.
     postcode:
-        unique: Postalcode must be unique
+        unique: Postcode must be unique
         code:
             not_negative: Postcode can not be negative
         name:

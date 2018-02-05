@@ -18,7 +18,7 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\ReversedTransformer;
 
-final class PostalCodeCodeChoiceType extends AbstractType
+final class PostCodeCodeChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface
@@ -50,7 +50,7 @@ final class PostalCodeCodeChoiceType extends AbstractType
      */
     public function getParent(): string
     {
-        return PostalCodeChoiceType::class;
+        return PostCodeChoiceType::class;
     }
 
     /**

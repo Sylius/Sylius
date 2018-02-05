@@ -333,7 +333,7 @@ class GeographicalFixture extends AbstractFixture
                     implode(', ', array_keys($options['zones']))
                 ));
             },
-            ZoneInterface::TYPE_POST_CODE => function ($postalCode) use ($options) {
+            ZoneInterface::TYPE_POST_CODE => function ($postCode) use ($options) {
                 if (isset($options['zip'])) {
                     return;
                 }
@@ -341,7 +341,7 @@ class GeographicalFixture extends AbstractFixture
                 throw new \InvalidArgumentException(
                     sprintf(
                         'Could not find postal code "%s", defined ones are: %s!',
-                        $postalCode,
+                        $postCode,
                         implode(', ', array_keys($options['zip']))
                     )
                 );

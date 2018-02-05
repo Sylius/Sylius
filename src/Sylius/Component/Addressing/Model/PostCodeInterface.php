@@ -13,7 +13,7 @@ namespace Sylius\Component\Addressing\Model;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface PostalCodeInterface extends ResourceInterface
+interface PostCodeInterface extends ResourceInterface
 {
     /**
      * @param int|null $id

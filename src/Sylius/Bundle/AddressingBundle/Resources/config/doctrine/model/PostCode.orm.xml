@@ -13,7 +13,7 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Component\Addressing\Model\PostalCode" table="sylius_postcodes">
+    <mapped-superclass name="Sylius\Component\Addressing\Model\PostCode" table="sylius_postcodes">
         <unique-constraints>
             <unique-constraint columns="country_id,postCode"/>
         </unique-constraints>

@@ -17,7 +17,7 @@ use Sylius\Bundle\AddressingBundle\Controller\ProvinceController;
 use Sylius\Bundle\AddressingBundle\Doctrine\ORM\PostCodeRepository;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
-use Sylius\Bundle\AddressingBundle\Form\Type\PostalCodeType;
+use Sylius\Bundle\AddressingBundle\Form\Type\PostCodeType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneType;
@@ -29,8 +29,8 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\AddressLogEntry;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\PostalCode;
-use Sylius\Component\Addressing\Model\PostalCodeInterface;
+use Sylius\Component\Addressing\Model\PostCode;
+use Sylius\Component\Addressing\Model\PostCodeInterface;
 use Sylius\Component\Addressing\Model\Province;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\Zone;
@@ -149,10 +149,10 @@ final class Configuration implements ConfigurationInterface
                                     ->arrayNode('classes')
                                         ->addDefaultsIfNotSet()
                                         ->children()
-                                        ->scalarNode('model')->defaultValue(PostalCode::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(PostalCodeInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(PostCode::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(PostCodeInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->defaultValue(PostCodeRepository::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('form')->defaultValue(PostalCodeType::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('form')->defaultValue(PostCodeType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

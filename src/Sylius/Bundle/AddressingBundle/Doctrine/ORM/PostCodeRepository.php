@@ -12,13 +12,13 @@ namespace Sylius\Bundle\AddressingBundle\Doctrine\ORM;
 
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Addressing\Model\PostalCodeInterface;
+use Sylius\Component\Addressing\Model\PostCodeInterface;
 use Sylius\Component\Addressing\Repository\PostCodeRepositoryInterface;
 
 class PostCodeRepository extends EntityRepository implements PostCodeRepositoryInterface
 {
 
-    public function findOneBy(array $criteria, array $orderBy = null): ?PostalCodeInterface
+    public function findOneBy(array $criteria, array $orderBy = null): ?PostCodeInterface
     {
         $code = 0;
 
@@ -32,7 +32,7 @@ class PostCodeRepository extends EntityRepository implements PostCodeRepositoryI
 
         // If the code is a string, filter through the results with the code
         if (is_string($code)) {
-            $possibleResults = array_filter($result, function (PostalCodeInterface $resultElement) use ($code) {
+            $possibleResults = array_filter($result, function (PostCodeInterface $resultElement) use ($code) {
                 return $resultElement->getCode() === $code;
             });
             return count($possibleResults) > 0 ? reset($possibleResults) : null;
@@ -46,9 +46,9 @@ class PostCodeRepository extends EntityRepository implements PostCodeRepositoryI
      *
      * @param string $code
      *
-     * @return null|PostalCodeInterface
+     * @return null|PostCodeInterface
      */
-    public function findOneByCode(string $code): ?PostalCodeInterface
+    public function findOneByCode(string $code): ?PostCodeInterface
     {
         return $this->findOneBy(['code' => $code]);
     }
