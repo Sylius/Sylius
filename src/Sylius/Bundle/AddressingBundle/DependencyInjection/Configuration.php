@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
 use Sylius\Bundle\AddressingBundle\Controller\ProvinceController;
+use Sylius\Bundle\AddressingBundle\Doctrine\ORM\PostCodeRepository;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
 use Sylius\Bundle\AddressingBundle\Form\Type\PostalCodeType;
@@ -150,6 +151,7 @@ final class Configuration implements ConfigurationInterface
                                         ->children()
                                         ->scalarNode('model')->defaultValue(PostalCode::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(PostalCodeInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(PostCodeRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(PostalCodeType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
