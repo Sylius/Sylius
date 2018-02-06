@@ -15,9 +15,12 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
+use Sylius\Component\Addressing\Model\PostCodeInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMember;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
+use Sylius\Component\Addressing\Repository\PostCodeRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -44,14 +47,21 @@ final class ZoneMemberContext implements Context
     private $zoneMemberRepository;
 
     /**
+     * @var PostCodeRepositoryInterface
+     */
+    private $postCodeRepository;
+
+    /**
      * @param CountryNameConverterInterface $countryNameConverter
-     * @param RepositoryInterface $provinceRepository
-     * @param RepositoryInterface $zoneRepository
-     * @param RepositoryInterface $zoneMemberRepository
+     * @param RepositoryInterface           $provinceRepository
+     * @param PostCodeRepositoryInterface   $postCodeRepository
+     * @param RepositoryInterface           $zoneRepository
+     * @param RepositoryInterface           $zoneMemberRepository
      */
     public function __construct(
         CountryNameConverterInterface $countryNameConverter,
         RepositoryInterface $provinceRepository,
+        PostCodeRepositoryInterface $postCodeRepository,
         RepositoryInterface $zoneRepository,
         RepositoryInterface $zoneMemberRepository
     ) {
@@ -59,12 +69,13 @@ final class ZoneMemberContext implements Context
         $this->provinceRepository = $provinceRepository;
         $this->zoneRepository = $zoneRepository;
         $this->zoneMemberRepository = $zoneMemberRepository;
+        $this->postCodeRepository = $postCodeRepository;
     }
 
     /**
      * @Transform the :name country member
      */
-    public function getCountryTypeZoneMemberByName($name)
+    public function getCountryTypeZoneMemberByName($name): ZoneMemberInterface
     {
         $countryCode = $this->countryNameConverter->convertToCode($name);
 
@@ -74,7 +85,7 @@ final class ZoneMemberContext implements Context
     /**
      * @Transform the :name province member
      */
-    public function getProvinceTypeZoneMemberByName($name)
+    public function getProvinceTypeZoneMemberByName($name): ZoneMemberInterface
     {
         $provinceCode = $this->getProvinceByName($name)->getCode();
 
@@ -84,11 +95,21 @@ final class ZoneMemberContext implements Context
     /**
      * @Transform the :name zone member
      */
-    public function getZoneTypeZoneMemberByName($name)
+    public function getZoneTypeZoneMemberByName($name): ZoneMemberInterface
     {
         $zoneCode = $this->getZoneByName($name)->getCode();
 
         return $this->getZoneMemberByCode($zoneCode);
+    }
+
+    /**
+     * @Transform the :postCode post code member
+     */
+    public function getPostCodeTypeZoneMemberByPostalCode($postCode): ZoneMemberInterface
+    {
+        $postCode = $this->getPostCodeByCode($postCode)->getCode();
+
+        return $this->getZoneMemberByCode($postCode);
     }
 
     /**
@@ -98,7 +119,7 @@ final class ZoneMemberContext implements Context
      *
      * @throws \InvalidArgumentException
      */
-    private function getZoneMemberByCode($code)
+    private function getZoneMemberByCode($code) : ZoneMemberInterface
     {
         $zoneMember = $this->zoneMemberRepository->findOneBy(['code' => $code]);
         Assert::notNull(
@@ -116,7 +137,7 @@ final class ZoneMemberContext implements Context
      *
      * @throws \InvalidArgumentException
      */
-    private function getProvinceByName($name)
+    private function getProvinceByName($name): ProvinceInterface
     {
         $province = $this->provinceRepository->findOneBy(['name' => $name]);
         Assert::notNull(
@@ -128,13 +149,26 @@ final class ZoneMemberContext implements Context
     }
 
     /**
+     * @param $postCode
+     *
+     * @return PostCodeInterface
+     */
+    private function getPostCodeByCode($postCode): PostCodeInterface
+    {
+        $postCodeObject = $this->postCodeRepository->findOneBy(['postCode' => $postCode]);
+        Assert::notNull($postCodeObject, 'Postcode does not exist');
+
+        return $postCodeObject;
+    }
+
+    /**
      * @param string $name
      *
      * @return ZoneInterface
      *
      * @throws \InvalidArgumentException
      */
-    private function getZoneByName($name)
+    private function getZoneByName($name): ZoneInterface
     {
         $zone = $this->zoneRepository->findOneBy(['name' => $name]);
         Assert::notNull(

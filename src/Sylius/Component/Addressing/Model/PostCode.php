@@ -44,6 +44,11 @@ class PostCode implements PostCodeInterface
         return "{$countryCode}-{$this->postCode}";
     }
 
+    public function setCode(?string $code): void
+    {
+        //do not call this method as it does not have any effect
+    }
+
     /** {@inheritdoc} */
     public function getName(): ?string
     {
@@ -80,5 +85,13 @@ class PostCode implements PostCodeInterface
     public function setPostCode(?string $postCode): void
     {
         $this->postCode = $postCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return (string) $this->getName();
     }
 }

@@ -1,4 +1,4 @@
-@managing_countries @testing_now
+@managing_countries
 Feature: Post code validation
     In order to avoid making mistakes when managing a post code
     As an Administrator

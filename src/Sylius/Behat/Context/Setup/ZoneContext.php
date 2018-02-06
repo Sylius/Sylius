@@ -18,6 +18,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\PostCodeInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -169,6 +170,20 @@ final class ZoneContext implements Context
     ) {
         $zone->setType(ZoneInterface::TYPE_PROVINCE);
         $zone->addMember($this->createZoneMember($province));
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(it) has the ("[^"]+" post code) member$/
+     * @Given /^(it) also has the ("[^"]+" post code) member$/
+     */
+    public function itHasThePostCodeMemberAndThePostCodeMember(
+        ZoneInterface $zone,
+        PostCodeInterface $postCode
+    ) {
+        $zone->setType(ZoneInterface::TYPE_POST_CODE);
+        $zone->addMember($this->createZoneMember($postCode));
 
         $this->objectManager->flush();
     }
