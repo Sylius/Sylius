@@ -174,16 +174,16 @@ sylius:
             header: system plików
             cache:
                 header: cache
-                help: 'Aby ustawić uprawnienia uruchom: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Aby ustawić uprawnienia uruchom: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: istnieje
             logs:
                 header: logi
-                help: 'Aby ustawić uprawnienia uruchom: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Aby ustawić uprawnienia uruchom: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: nie istnieje
             not_writable: niezapisywalny
             parameters:
                 header: parameters.yml
-                help: 'Aby ustawić uprawnienia uruchom: sudo chmod a+w %path%'
+                help: "Aby ustawić uprawnienia uruchom: sudo chmod a+w %path%"
             vendors: dostawcy
             writable: zapisywalny
         settings:

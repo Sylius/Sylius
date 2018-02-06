@@ -174,16 +174,16 @@ sylius:
             header: filsystem
             cache:
                 header: cache
-                help: 'For at indstille tilladelser, afvikl: sudo setfacl -R -m u:www-data: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-data: rwx -m u: ''whoami'': rwx %path%'
+                help: "For at indstille tilladelser, afvikl: sudo setfacl -R -m u:www-data: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-data: rwx -m u: 'whoami': rwx %path%"
             exists: eksisterer
             logs:
                 header: logger
-                help: 'For at indstille tilladelser, afvikl: sudo setfacl -R -m u:www-data: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-data: rwx -m u: ''whoami'': rwx %path%'
+                help: "For at indstille tilladelser, afvikl: sudo setfacl -R -m u:www-data: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-data: rwx -m u: 'whoami': rwx %path%"
             not_exists: Findes ikke
             not_writable: ikke skrivebar
             parameters:
                 header: parameters.yml
-                help: 'For at indstille tilladelser, afvikl: sudo chmod a + w %path%'
+                help: "For at indstille tilladelser, afvikl: sudo chmod a + w %path%"
             vendors: forhandler
             writable: skrivbar
         settings:

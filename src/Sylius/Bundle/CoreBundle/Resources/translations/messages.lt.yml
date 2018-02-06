@@ -174,16 +174,16 @@ sylius:
             header: failų sistema
             cache:
                 header: podėlis
-                help: 'Jei norite nustatyti teises, įvykdykite komandą: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Jei norite nustatyti teises, įvykdykite komandą: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: egzistuoja
             logs:
                 header: audito įrašai
-                help: 'Jei norite nustatyti teises, įvykdykite komandą: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Jei norite nustatyti teises, įvykdykite komandą: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: neegzistuoja
             not_writable: be galimybės įrašyti
             parameters:
                 header: parameters.yml
-                help: 'Jei norite nustatyti teises, įvykdykite komandą: sudo chmod a+w %path%'
+                help: "Jei norite nustatyti teises, įvykdykite komandą: sudo chmod a+w %path%"
             vendors: vendors
             writable: galimas įrašyti
         settings:

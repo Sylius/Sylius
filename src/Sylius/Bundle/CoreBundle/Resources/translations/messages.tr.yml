@@ -174,16 +174,16 @@ sylius:
             header: dosya sistemi
             cache:
                 header: önbellek
-                help: 'Çalıştırma izinlerini ayarlamak için: sudo setfacl -R -m u:www-veri: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-veri: rwx -m u: ''whoami'': rwx %path%'
+                help: "Çalıştırma izinlerini ayarlamak için: sudo setfacl -R -m u:www-veri: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-veri: rwx -m u: 'whoami': rwx %path%"
             exists: mevcut
             logs:
                 header: loglar
-                help: 'Çalıştırma izinlerini ayarlamak için: sudo setfacl -R -m u:www-veri: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-veri: rwx -m u: ''whoami'': rwx %path%'
+                help: "Çalıştırma izinlerini ayarlamak için: sudo setfacl -R -m u:www-veri: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-veri: rwx -m u: 'whoami': rwx %path%"
             not_exists: mevcut değil
             not_writable: yazılabilir değil
             parameters:
                 header: parameters.yml
-                help: 'Çalıştırma izinlerini ayarlamak için: sudo chmod a + w %path%'
+                help: "Çalıştırma izinlerini ayarlamak için: sudo chmod a + w %path%"
             vendors: vendors
             writable: yazılabilir
         settings:

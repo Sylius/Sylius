@@ -174,16 +174,16 @@ sylius:
             header: souborový systém
             cache:
                 header: mezipaměť
-                help: 'To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: Existuje
             logs:
                 header: logy
-                help: 'To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: neexistuje
             not_writable: nelze zapisovat
             parameters:
                 header: parameters.yml
-                help: 'Chcete-li nastavit oprávnění spustit: sudo chmod a + w %path%'
+                help: "Chcete-li nastavit oprávnění spustit: sudo chmod a + w %path%"
             vendors: vendors
             writable: zapisovatelný
         settings:
