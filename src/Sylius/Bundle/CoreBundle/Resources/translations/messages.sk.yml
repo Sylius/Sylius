@@ -173,16 +173,16 @@ sylius:
             header: súborový systém
             cache:
                 header: cache
-                help: 'Pre nastavenie oprávnení spusti: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Pre nastavenie oprávnení spusti: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: existuje
             logs:
                 header: záznamy
-                help: 'Pre nastavenie oprávnení spusti: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Pre nastavenie oprávnení spusti: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: neexistuje
             not_writable: nie je zapisovateľný
             parameters:
                 header: parameters.yml
-                help: 'Pre nastavenie oprávnení spusti: sudo chmod a+w %path%'
+                help: "Pre nastavenie oprávnení spusti: sudo chmod a+w %path%"
             vendors: vendors
             writable: zapisovateľné
         settings:

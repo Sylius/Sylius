@@ -1,4 +1,4 @@
-SyliusTaxonomiesBundle
+SyliusTaxonomyBundle
 ======================
 
 Flexible categorization system for Symfony applications.
