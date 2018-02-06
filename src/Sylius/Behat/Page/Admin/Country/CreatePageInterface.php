@@ -28,4 +28,10 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string|null $abbreviation
      */
     public function addProvince($name, $code, $abbreviation = null);
+
+    /**
+     * @param string $postCode
+     * @param string $name
+     */
+    public function addPostCode($postCode, $name);
 }

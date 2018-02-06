@@ -18,6 +18,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\PostCode;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -53,6 +54,9 @@ final class GeographicalContext implements Context
      * @var ObjectManager
      */
     private $countryManager;
+
+    /** @var FactoryInterface */
+    private $postCodeFactory;
 
     /**
      * @param SharedStorageInterface $sharedStorage
@@ -131,6 +135,21 @@ final class GeographicalContext implements Context
         $country->addProvince($province);
 
         $this->sharedStorage->set('province', $province);
+        $this->countryManager->flush();
+    }
+
+    /**
+     * @Given /^(this country)(?:| also) has the post code "([^"]+)" named "([^"]+)"$/
+     */
+    public function theCountryHasPostalCode(CountryInterface $country, $postCodeValue, $name)
+    {
+        $postCode = new PostCode();
+
+        $postCode->setPostCode($postCodeValue);
+        $postCode->setName($name);
+        $country->addPostCode($postCode);
+
+        $this->sharedStorage->set('postCode', $postCode);
         $this->countryManager->flush();
     }
 

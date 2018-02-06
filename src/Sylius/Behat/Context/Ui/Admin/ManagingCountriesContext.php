@@ -99,6 +99,17 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @When I add the post code :postCode named :postCodeName
+     */
+    public function iAddPostCode($postCode, $postCodeName)
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->addPostCode($postCode, $postCodeName);
+    }
+
+    /**
      * @When I add it
      */
     public function iAddIt()
@@ -195,6 +206,16 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @Then /^(this country) should have the "([^"]*)" post code zone/
+     * @Then /^the (country "[^"]*") should have the "([^"]*)" post code zone$/
+     */
+    public function countryShouldHavePostCode(CountryInterface $country, $postCodeName){
+        $this->iWantToEditThisCountry($country);
+
+        Assert::true($this->updatePage->isTherePostCode($postCodeName));
+    }
+
+    /**
      * @Then /^(this country) should not have the "([^"]*)" province$/
      */
     public function thisCountryShouldNotHaveTheProvince(CountryInterface $country, $provinceName)
@@ -202,6 +223,16 @@ final class ManagingCountriesContext implements Context
         $this->iWantToEditThisCountry($country);
 
         Assert::false($this->updatePage->isThereProvince($provinceName));
+    }
+
+    /**
+     * @Then /^(this country) should not have the "([^"]*)" post code zone/
+     * @Then /^the (country "[^"]*") should not have the "([^"]*)" post code zone$/
+     */
+    public function countryShouldNotHavePostCode(CountryInterface $country, $postCodeName){
+        $this->iWantToEditThisCountry($country);
+
+        Assert::false($this->updatePage->isTherePostCode($postCodeName));
     }
 
     /**
@@ -222,6 +253,16 @@ final class ManagingCountriesContext implements Context
         $this->updatePage->open(['id' => $country->getId()]);
 
         Assert::false($this->updatePage->isThereProvince($provinceName));
+    }
+
+    /**
+     * @Then /^post code with name "([^"]*)" should not be added in (this country)$/
+     */
+    public function postCodeWithNameShouldNotBeAdded($provinceName, CountryInterface $country)
+    {
+        $this->updatePage->open(['id' => $country->getId()]);
+
+        Assert::false($this->updatePage->isTherePostCode($provinceName));
     }
 
     /**
@@ -253,12 +294,31 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @When /^I want to create a new post code in (country "([^"]*)")$/
+     */
+    public function iWantToCreateANewPostCodeInCountry(CountryInterface $country)
+    {
+        $this->updatePage->open(['id' => $country->getId()]);
+
+        $this->updatePage->clickAddPostCodeButton();
+    }
+
+    /**
      * @When I name the province :provinceName
      * @When I do not name the province
      */
     public function iNameTheProvince($provinceName = null)
     {
         $this->updatePage->nameProvince($provinceName);
+    }
+
+    /**
+     * @When I name the post code :postCodeName
+     * @When I do not name the post code
+     */
+    public function iNameThePostCode($postCodeName = null)
+    {
+        $this->updatePage->namePostCode($postCodeName);
     }
 
     /**
@@ -271,11 +331,36 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @When I do not specify the post code value
+     * @When I specify the post code value as :postCodeValue
+     */
+    public function iSpecifyThePostCodeValue($postCodeValue = null)
+    {
+        $this->updatePage->specifyPostCodeValue($postCodeValue);
+    }
+
+    /**
      * @Then I should be notified that :element is required
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
         Assert::same($this->updatePage->getValidationMessage($element), sprintf('Please enter province %s.', $element));
+    }
+
+    /**
+     * @Then I should be notified that :element should not be blank
+     */
+    public function iShouldBeNotifiedThatPostCodeValueCouldNotBeBlank($element)
+    {
+        Assert::same($this->updatePage->getValidationMessage($element), sprintf('This value should not be blank.', $element));
+    }
+
+    /**
+     * @Then I should be notified that :element should have a name
+     */
+    public function iShouldBeNotifiedThatPostCodeNameShouldNotBeEmpty($element)
+    {
+        Assert::same($this->updatePage->getValidationMessage($element), sprintf('Please enter postcode name.', $element));
     }
 
     /**
@@ -292,5 +377,21 @@ final class ManagingCountriesContext implements Context
     public function iShouldBeNotifiedThatProvinceCodeMustBeUnique()
     {
         Assert::same($this->updatePage->getValidationMessage('code'), 'Province code must be unique.');
+    }
+
+    /**
+     * @Then /^I should be notified that the post code must be unique$/
+     */
+    public function iShouldBeNotifiedThatPostCodeMustBeUnique()
+    {
+        Assert::same($this->updatePage->getValidationMessage('postCode'), 'Postcode must be unique');
+    }
+
+    /**
+     * @Then /^I should be notified that "([^"]*)" has to be numerical$/
+     */
+    public function iShouldBeNotifiedThatHasToBeNumerical($element)
+    {
+        Assert::same($this->updatePage->getValidationMessage($element), 'This value should be a valid number.');
     }
 }

@@ -9,12 +9,14 @@
                 <value>postCode</value>
                 <value>country</value>
             </option>
-            <option name="errorPath">name</option>
             <option name="message">sylius.postcode.unique</option>
+            <option name="groups">sylius</option>
         </constraint>
 
         <property name="postCode">
-            <constraint name="NotBlank" />
+            <constraint name="NotBlank">
+                <option name="groups">sylius</option>
+            </constraint>
             <constraint name="Range">
                 <option name="min">0</option>
                 <option name="minMessage">sylius.postcode.code.not_negative</option>

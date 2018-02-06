@@ -41,8 +41,15 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isThereProvinceWithCode($provinceCode);
 
     /**
-     * @param string $name
-     * @param string $code
+     * @param $postCodeName
+     *
+     * @return bool
+     */
+    public function isTherePostCode($postCodeName): bool;
+
+    /**
+     * @param string      $name
+     * @param string      $code
      * @param string|null $abbreviation
      */
     public function addProvince($name, $code, $abbreviation = null);
@@ -52,12 +59,31 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      */
     public function removeProvince($provinceName);
 
+    /**
+     * @param string      $name
+     * @param string      $code
+     * @param string|null $abbreviation
+     */
+    public function addPostCode($postCode, $postCodeName);
+
+    /**
+     * @param string $provinceName
+     */
+    public function removePostCode($postCodeName);
+
     public function clickAddProvinceButton();
+
+    public function clickAddPostCodeButton();
 
     /**
      * @param string $provinceName
      */
     public function nameProvince($provinceName);
+
+    /**
+     * @param $postCodeName
+     */
+    public function namePostCode($postCodeName);
 
     /**
      * @param string $provinceName
@@ -68,4 +94,10 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param string $provinceCode
      */
     public function specifyProvinceCode($provinceCode);
+
+    /**
+     * @param $postCodeValue
+     */
+    public function specifyPostCodeValue($postCodeValue);
+
 }

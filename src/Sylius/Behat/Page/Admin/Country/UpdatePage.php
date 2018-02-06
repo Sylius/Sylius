@@ -53,6 +53,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $provinces->has('css', '[value = "' . $provinceCode . '"]');
     }
 
+    /** {@inheritdoc} */
+    public function isTherePostCode($postCodeName): bool
+    {
+        $postCodes = $this->getElement('postCode');
+
+        return $postCodes->has('xpath', '//input[@value="' . $postCodeName . '" and contains(@id, "name")]');
+    }
+
     /**
      * @param string $provinceName
      */
@@ -91,6 +99,17 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
     }
 
+    /** {@inheritdoc} */
+    public function addPostCode($postCode, $postCodeName)
+    {
+        $this->clickAddPostCodeButton();
+
+        $postCodeForm = $this->getLastPostCodeElement();
+        $postCodeForm->fillField('Post code', $postCode);
+        $postCodeForm->fillField('Name', $postCodeName);
+
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -99,12 +118,28 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->clickLink('Add province');
     }
 
+    /** {@inheritdoc} */
+    public function clickAddPostCodeButton()
+    {
+        $this->getDocument()->clickLink('Add postcode');
+    }
+
     /**
      * {@inheritdoc}
      */
     public function nameProvince($name)
     {
         $provinceForm = $this->getLastProvinceElement();
+
+        $provinceForm->fillField('Name', $name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function namePostCode($name)
+    {
+        $provinceForm = $this->getLastPostCodeElement();
 
         $provinceForm->fillField('Name', $name);
     }
@@ -122,6 +157,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
     }
 
+    public function removePostCode($postCodeName)
+    {
+        if ($this->isTherePostCode($postCodeName)) {
+            $provinces = $this->getElement('postCode');
+
+            $item = $provinces->find('css', 'div[data-form-collection="item"] input[value="' . $postCodeName . '"]')->getParent();
+            $item->fillField('Name', '');
+        }
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -132,14 +177,27 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $provinceForm->fillField('Code', $code);
     }
 
+    /** {@inheritdoc} */
+    public function specifyPostCodeValue($postCodeValue)
+    {
+        $postCodeForm = $this->getLastPostCodeElement();
+        $postCodeForm->fillField('Post code', $postCodeValue);
+    }
+
     /**
      * {@inheritdoc}
      */
     public function getValidationMessage($element)
     {
-        $provinceForm = $this->getLastProvinceElement();
+        if($element === 'provinces'){
+            $lastElement = $this->getLastProvinceElement();
+        }else if($element === 'postCode'){
+            $lastElement = $this->getLastPostCodeElement();
+        }else{
+            throw new ElementNotFoundException($this->getSession());
+        }
 
-        $foundElement = $provinceForm->find('css', '.sylius-validation-error');
+        $foundElement = $lastElement->find('css', '.sylius-validation-error');
         if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
         }
@@ -164,6 +222,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '#sylius_country_code',
             'enabled' => '#sylius_country_enabled',
             'provinces' => '#sylius_country_provinces',
+            'postCode' => '#sylius_country_postCodes',
         ]);
     }
 
@@ -174,6 +233,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $provinces = $this->getElement('provinces');
         $items = $provinces->findAll('css', 'div[data-form-collection="item"]');
+
+        Assert::notEmpty($items);
+
+        return end($items);
+    }
+
+    private function getLastPostCodeElement(): NodeElement
+    {
+        $postCodes = $this->getElement('postCode');
+        $items = $postCodes->findAll('css', 'div[data-form-collection="item"]');
 
         Assert::notEmpty($items);
 
