@@ -174,16 +174,16 @@ sylius:
             header: файлавая сістэма
             cache:
                 header: кэш
-                help: 'Каб вызначыць дазволы, выканайце: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Каб вызначыць дазволы, выканайце: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: існуе
             logs:
                 header: журналы
-                help: 'Каб вызначыць дазволы, выканайце: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Каб вызначыць дазволы, выканайце: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: не існуе
             not_writable: адсутнасць мажлівасці запісу
             parameters:
                 header: parameters.yml
-                help: 'Каб вызначыць дазволы, выканайце: sudo chmod a+w %path%'
+                help: "Каб вызначыць дазволы, выканайце: sudo chmod a+w %path%"
             vendors: пастаўшчыкі
             writable: мае мажлівасць запісу
         settings:
