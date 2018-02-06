@@ -1,4 +1,4 @@
-@managing_zones @testing_now
+@managing_zones
 Feature: Editing a zone
     In order to change my my tax and shipping configuration
     As an Administrator
