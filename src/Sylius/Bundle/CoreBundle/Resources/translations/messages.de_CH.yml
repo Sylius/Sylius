@@ -174,16 +174,16 @@ sylius:
             header: Dateisystem
             cache:
                 header: Cache
-                help: 'Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: Existiert
             logs:
                 header: Protokoll/Logs
-                help: 'Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: Existiert nicht
             not_writable: Schreibgeschützt
             parameters:
                 header: parameters.yml
-                help: 'Ausführen um Zugriffsrechte zu setzen: sudo chmod a+w %path%'
+                help: "Ausführen um Zugriffsrechte zu setzen: sudo chmod a+w %path%"
             vendors: Verkäufer
             writable: Beschreibbar
         settings:

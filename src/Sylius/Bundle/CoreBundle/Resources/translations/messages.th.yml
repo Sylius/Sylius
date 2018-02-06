@@ -174,16 +174,16 @@ sylius:
             header: ระบบแฟ้ม
             cache:
                 header: แคช
-                help: 'ตั้งค่า permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "ตั้งค่า permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: exists
             logs:
                 header: บันทึก
-                help: 'ตั้งค่า permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "ตั้งค่า permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: not exists
             not_writable: not writable
             parameters:
                 header: parameters.yml
-                help: 'ตั้งค่า permissions run: sudo chmod a+w %path%'
+                help: "ตั้งค่า permissions run: sudo chmod a+w %path%"
             vendors: vendors
             writable: writable
         settings:

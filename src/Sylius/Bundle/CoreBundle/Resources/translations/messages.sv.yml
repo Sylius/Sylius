@@ -71,7 +71,6 @@ sylius:
             code: Kod
         product_variant:
             tax_category: Momskategori
-            shipping_category: Kategori
         shipment_filter:
             created_at_from: Från
             created_at_to: Till
@@ -174,16 +173,16 @@ sylius:
             header: filsystem
             cache:
                 header: cache
-                help: 'För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: tillgängligt
             logs:
                 header: loggar
-                help: 'För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: ej tillgängligt
             not_writable: ej skrivbart
             parameters:
                 header: parameters.yml
-                help: 'För att ställa in rättigheter kör: sudo chmod a+w %path%'
+                help: "För att ställa in rättigheter kör: sudo chmod a+w %path%"
             vendors: vendors
             writable: skrivbar
         settings:

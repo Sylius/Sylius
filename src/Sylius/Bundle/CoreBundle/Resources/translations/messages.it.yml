@@ -174,16 +174,16 @@ sylius:
             header: file system
             cache:
                 header: cache
-                help: 'Per impostare le autorizzazioni eseguire: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Per impostare le autorizzazioni eseguire: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: esiste
             logs:
                 header: logs
-                help: 'Per impostare le autorizzazioni eseguire: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Per impostare le autorizzazioni eseguire: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: non esiste
             not_writable: non scrivibile
             parameters:
                 header: parameters.yml
-                help: 'Per impostare le autorizzazioni eseguire: sudo chmod a+w %path%'
+                help: "Per impostare le autorizzazioni eseguire: sudo chmod a+w %path%"
             vendors: fornitori
             writable: scrivibile
         settings:

@@ -174,16 +174,16 @@ sylius:
             header: bestandssysteem
             cache:
                 header: cache
-                help: 'Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: ''whoami'': rwx %path%'
+                help: "Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: 'whoami': rwx %path%"
             exists: bestaat
             logs:
                 header: logs
-                help: 'Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: ''whoami'': rwx %path%'
+                help: "Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: 'whoami': rwx %path%"
             not_exists: niet bestaand
             not_writable: niet schrijfbaar
             parameters:
                 header: parameters.yml
-                help: 'Machtigingen uitvoeren instellen: sudo chmod a + w %path%'
+                help: "Machtigingen uitvoeren instellen: sudo chmod a + w %path%"
             vendors: vendors
             writable: schrijfbaar
         settings:

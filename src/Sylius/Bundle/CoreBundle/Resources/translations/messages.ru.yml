@@ -174,16 +174,16 @@ sylius:
             header: файловая система
             cache:
                 header: кеш
-                help: 'Чтобы выставить разрешения запустите: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Чтобы выставить разрешения запустите: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: существует
             logs:
                 header: журналы
-                help: 'Чтобы выставить разрешения запустите: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Чтобы выставить разрешения запустите: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: не существует
             not_writable: не доступно для записи
             parameters:
                 header: parameters.yml
-                help: 'Чтобы задать права доступа запустите команду: sudo chmod + w %path%'
+                help: "Чтобы задать права доступа запустите команду: sudo chmod + w %path%"
             vendors: поставщики
             writable: доступно для записи
         settings:
