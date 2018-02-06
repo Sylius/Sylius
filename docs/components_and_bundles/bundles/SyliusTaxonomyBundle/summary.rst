@@ -6,7 +6,7 @@ Configuration Reference
 
 .. code-block:: yaml
 
-    sylius_taxonomies:
+    sylius_taxonomy:
         # The driver used for persistence layer.
         driver: ~
         resources:
@@ -17,7 +17,7 @@ Configuration Reference
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\TranslatableFactory
-                    form: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonType
+                    form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType
                 translation:
                     classes:
                         model:      Sylius\Component\Taxonomy\Model\TaxonTranslation
@@ -25,7 +25,7 @@ Configuration Reference
                         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                         repository: ~
                         factory:    Sylius\Component\Resource\Factory\Factory
-                        form: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonTranslationType
+                        form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType
 
 Tests
 -----
