@@ -1,4 +1,4 @@
-# UPGRAE FROM 1.0.8 to 1.0.9
+# UPGRADE FROM 1.0.8 to 1.0.9
 
 * `Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper`'s `resolveVariant(ProductInterface $product): ProductVariantInterface`
   signature was changed to `resolveVariant(ProductInterface $product): ?ProductVariantInterface` in order to reflect 
