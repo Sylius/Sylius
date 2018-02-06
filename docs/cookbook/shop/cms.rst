@@ -1,0 +1,45 @@
+How to manage content in Sylius?
+=================================
+
+Why do you need content management system?
+--------------------------------------------
+
+Content management is one of the most important business aspects of modern eCommerce apps.
+Providing store updates like new blog pages, banners and promotion images is responsible for building the conversion rate
+either for new and existing clients.
+
+Content management in Sylius
+-----------------------------------
+
+Default Sylius standard app does not come with a content management system. Don’t worry - our community has taken care of it. As Sylius does have an awesome dev oriented plugin environment,
+our friends from `BitBag <https://bitbag.shop>`_ decided to develop their flexible CMS module. You can find it on `their GitHub <https://github.com/BitBagCommerce/SyliusCmsPlugin>`_.
+
+.. tip::
+
+    Check their `GitHub <https://github.com/BitBagCommerce>`_ for more awesome plugins like payment gateways integrations, shipment management and many more. Don't forget to leave a star if you liked their work!
+
+.. tip::
+
+    The whole plugin has its own `demo page <https://github.com/BitBagCommerce>`_ with specific use cases. You can access the `admin panel <https://github.com/BitBagCommerce>`_
+    with ``login: sylius, password: sylius`` credentials.
+
+Inside the plugin, you will find:
+
+* HTML, image and text blocks you can place in each Twig template
+* Page resources
+* Sections which you can use to create a blog, customer information, etc.
+* FAQ module
+
+What is the most awesome thing about this plugin is that you can customize it for your specific needs like you do with each * :doc:`Sylius model </customization/model>`.
+
+Installation & usage
+-----------------------------------
+
+Find out more about how to use the plugin on `GitHub <https://github.com/BitBagCommerce>`_.
+
+Learn more
+----------
+
+* :doc:`How to create a plugin for Sylius? </plugins/creating-plugin>`
+* `BitBag plugins <https://github.com/BitBagCommerce>`_
+* `FriendsOfSylius plugins <https://github.com/FriendsOfSylius/SyliusGoose>`_
