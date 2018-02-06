@@ -75,8 +75,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
                 ->getParent()
                 ->getParent()
                 ->getParent()
-                ->getParent()
-            ;
+                ->getParent();
 
             $item->clickLink('Delete');
         }
@@ -139,9 +138,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function namePostCode($name)
     {
-        $provinceForm = $this->getLastPostCodeElement();
+        $postCodeForm = $this->getLastPostCodeElement();
 
-        $provinceForm->fillField('Name', $name);
+        $postCodeForm->fillField('Name', $name);
     }
 
     /**
@@ -152,7 +151,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         if ($this->isThereProvince($provinceName)) {
             $provinces = $this->getElement('provinces');
 
-            $item = $provinces->find('css', 'div[data-form-collection="item"] input[value="' . $provinceName . '"]')->getParent();
+            $item = $provinces->find('css', '[value="' . $provinceName . '"]')->getParent();
             $item->fillField('Name', '');
         }
     }
@@ -162,7 +161,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         if ($this->isTherePostCode($postCodeName)) {
             $provinces = $this->getElement('postCode');
 
-            $item = $provinces->find('css', 'div[data-form-collection="item"] input[value="' . $postCodeName . '"]')->getParent();
+            $item = $provinces->find('css', '[value="' . $postCodeName . '"]')->getParent();
             $item->fillField('Name', '');
         }
     }
@@ -189,15 +188,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function getValidationMessage($element)
     {
-        if($element === 'provinces'){
-            $lastElement = $this->getLastProvinceElement();
-        }else if($element === 'postCode'){
-            $lastElement = $this->getLastPostCodeElement();
-        }else{
-            throw new ElementNotFoundException($this->getSession());
-        }
+        $page = $this->getSession()->getPage();
 
-        $foundElement = $lastElement->find('css', '.sylius-validation-error');
+        $foundElement = $page->find('css', '.sylius-validation-error');
         if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
         }
@@ -219,10 +212,10 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_country_code',
-            'enabled' => '#sylius_country_enabled',
+            'code'      => '#sylius_country_code',
+            'enabled'   => '#sylius_country_enabled',
             'provinces' => '#sylius_country_provinces',
-            'postCode' => '#sylius_country_postCodes',
+            'postCode'  => '#sylius_country_postCodes',
         ]);
     }
 
@@ -232,7 +225,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     private function getLastProvinceElement(): NodeElement
     {
         $provinces = $this->getElement('provinces');
-        $items = $provinces->findAll('css', 'div[data-form-collection="item"]');
+        $items     = $provinces->findAll('css', 'div[data-form-collection="item"]');
 
         Assert::notEmpty($items);
 
@@ -242,7 +235,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     private function getLastPostCodeElement(): NodeElement
     {
         $postCodes = $this->getElement('postCode');
-        $items = $postCodes->findAll('css', 'div[data-form-collection="item"]');
+        $items     = $postCodes->findAll('css', 'div[data-form-collection="item"]');
 
         Assert::notEmpty($items);
 

@@ -14,7 +14,7 @@ Feature: Post code validation
         And I name the post code "Scotland"
         But I do not specify the post code value
         And I try to save changes
-        Then I should be notified that "postCode" should not be blank
+        Then I should be notified that code should not be blank
         And post code with name "Scotland" should not be added in this country
 
     @ui @javascript
@@ -23,5 +23,5 @@ Feature: Post code validation
         And I specify the post code value as "123"
         But I do not name the post code
         And I try to save changes
-        Then I should be notified that "postCode" should have a name
+        Then I should be notified that post code should have a name
         And province with code "123" should not be added in this country

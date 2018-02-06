@@ -356,11 +356,11 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then I should be notified that :element should have a name
+     * @Then I should be notified that post code should have a :element
      */
     public function iShouldBeNotifiedThatPostCodeNameShouldNotBeEmpty($element)
     {
-        Assert::same($this->updatePage->getValidationMessage($element), sprintf('Please enter postcode name.', $element));
+        Assert::same($this->updatePage->getValidationMessage($element), sprintf('Please enter postcode %s.', $element));
     }
 
     /**
@@ -385,13 +385,5 @@ final class ManagingCountriesContext implements Context
     public function iShouldBeNotifiedThatPostCodeMustBeUnique()
     {
         Assert::same($this->updatePage->getValidationMessage('postCode'), 'Postcode must be unique');
-    }
-
-    /**
-     * @Then /^I should be notified that "([^"]*)" has to be numerical$/
-     */
-    public function iShouldBeNotifiedThatHasToBeNumerical($element)
-    {
-        Assert::same($this->updatePage->getValidationMessage($element), 'This value should be a valid number.');
     }
 }
