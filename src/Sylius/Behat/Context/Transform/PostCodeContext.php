@@ -27,31 +27,14 @@ class PostCodeContext implements Context
     }
 
     /**
-     *
-     * @Transform /^post code "([A-z\s]+)"$/
-     * @Transform /^"([A-z\s]+)" post code$/
-     *
-     * @param string $name
-     *
-     * @return PostCodeInterface
-     */
-    public function getPostCodeByName(string $name): PostCodeInterface
-    {
-        $postCode = $this->postCodeRepository->findOneBy(['name' => $name]);
-        Assert::notNull($postCode, "Post code '$name' was not found by name");
-
-        return $postCode;
-    }
-
-    /**
-     * @Transform /^post code "(\d+)"$/
-     * @Transform /^"(\d+)" post code$/
+     * @Transform /^post code "([^"]+)"$/
+     * @Transform /^"([^"]+)" post code$/
      *
      * @param string $code
      *
      * @return PostCodeInterface
      */
-    public function getPostCodeByCode(int $code): PostCodeInterface
+    public function getPostCodeByCode(string $code): PostCodeInterface
     {
         $postCode = $this->postCodeRepository->findOneBy(['postCode' => $code]);
         Assert::notNull($postCode, "Post code '$code' was not found by code");

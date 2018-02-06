@@ -25,12 +25,3 @@ Feature: Post code validation
         And I try to save changes
         Then I should be notified that "postCode" should have a name
         And province with code "123" should not be added in this country
-
-    @ui @javascript
-    Scenario: Trying to insert a non-numeric post code
-        When I want to create a new post code in country "United Kingdom"
-        And I specify the post code value as "123a"
-        But I name the post code "hello"
-        And I try to save changes
-        Then I should be notified that "postCode" has to be numerical
-        And province with code "123" should not be added in this country

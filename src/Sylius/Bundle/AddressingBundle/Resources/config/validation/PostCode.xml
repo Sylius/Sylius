@@ -17,11 +17,6 @@
             <constraint name="NotBlank">
                 <option name="groups">sylius</option>
             </constraint>
-            <constraint name="Range">
-                <option name="min">0</option>
-                <option name="minMessage">sylius.postcode.code.not_negative</option>
-                <option name="groups">sylius</option>
-            </constraint>
         </property>
 
         <property name="name">
