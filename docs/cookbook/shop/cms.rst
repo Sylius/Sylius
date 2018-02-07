@@ -2,25 +2,23 @@ How to manage content in Sylius?
 =================================
 
 Why do you need content management system?
---------------------------------------------
+------------------------------------------
 
 Content management is one of the most important business aspects of modern eCommerce apps.
 Providing store updates like new blog pages, banners and promotion images is responsible for building the conversion rate
 either for new and existing clients.
 
 Content management in Sylius
------------------------------------
+----------------------------
 
-Default Sylius standard app does not come with a content management system. Don’t worry - our community has taken care of it. As Sylius does have an awesome dev oriented plugin environment,
-our friends from `BitBag <https://bitbag.shop>`_ decided to develop their flexible CMS module. You can find it on `their GitHub <https://github.com/BitBagCommerce/SyliusCmsPlugin>`_.
-
-.. tip::
-
-    Check their `GitHub <https://github.com/BitBagCommerce>`_ for more awesome plugins like payment gateways integrations, shipment management and many more. Don't forget to leave a star if you liked their work!
+Default Sylius standard app does not come with a content management system. Don’t worry - our community has taken care of it.
+As Sylius does have an awesome dev oriented plugin environment, our friends from `BitBag <https://bitbag.shop>`_ decided to develop
+their flexible CMS module. You can find it on `their GitHub <https://github.com/BitBagCommerce/SyliusCmsPlugin>`_.
 
 .. tip::
 
-    The whole plugin has its own `demo page <https://github.com/BitBagCommerce>`_ with specific use cases. You can access the `admin panel <https://github.com/BitBagCommerce>`_
+    The whole plugin has its own `demo page <https://cms.bitbag.shop/>`_ with specific use cases. You can access
+    the `admin panel <https://cms.bitbag.shop/admin/>`_
     with ``login: sylius, password: sylius`` credentials.
 
 Inside the plugin, you will find:
@@ -33,9 +31,9 @@ Inside the plugin, you will find:
 What is the most awesome thing about this plugin is that you can customize it for your specific needs like you do with each * :doc:`Sylius model </customization/model>`.
 
 Installation & usage
------------------------------------
+--------------------
 
-Find out more about how to use the plugin on `GitHub <https://github.com/BitBagCommerce>`_.
+Find out more about how to install the plugin on `GitHub <https://github.com/BitBagCommerce>`_.
 
 Learn more
 ----------
