@@ -29,6 +29,7 @@ default:
                             browserName: chrome
                             browser: chrome
                             version: ""
+                            marionette: null # https://github.com/Behat/MinkExtension/pull/311
                             chrome:
                                 switches:
                                     - "start-fullscreen"
