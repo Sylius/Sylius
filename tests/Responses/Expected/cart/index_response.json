@@ -37,6 +37,8 @@
                 "channel": {
                     "id": @integer@,
                     "code": "WEB",
+                    "name": "Web Channel",
+                    "enabled": true,
                     "_links": {
                         "self": {
                             "href": "@string@"
