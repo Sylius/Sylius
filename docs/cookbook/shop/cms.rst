@@ -28,7 +28,7 @@ Inside the plugin, you will find:
 * Sections which you can use to create a blog, customer information, etc.
 * FAQ module
 
-What is the most awesome thing about this plugin is that you can customize it for your specific needs like you do with each * :doc:`Sylius model </customization/model>`.
+What is the most awesome thing about this plugin is that you can customize it for your specific needs like you do with each :doc:`Sylius model </customization/model>`.
 
 Installation & usage
 --------------------
