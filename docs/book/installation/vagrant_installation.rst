@@ -38,14 +38,14 @@ How to install Sylius using Vagrant?
     $ cd sylius
     $ vagrant up
 
-4. Add an entry for sylius.dev to the ``etc/hosts`` file:
+4. Add an entry for sylius.test to the ``etc/hosts`` file:
 
 .. code-block:: bash
 
     # etc/hosts
-    10.0.0.200      sylius.dev www.sylius.dev
+    10.0.0.200      sylius.test www.sylius.test
 
-From now on you will be able to access running Sylius application at ``http://sylius.dev/app_dev.php``.
+From now on you will be able to access running Sylius application at ``http://sylius.test/app_dev.php``.
 
 .. _Composer: http://packagist.org
 .. _`Composer installed globally`: http://getcomposer.org/doc/00-intro.md#globally
