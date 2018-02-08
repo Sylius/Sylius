@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "checkboxes.js": "^1.0.7",
     "jquery": "^3.2.0",
     "lightbox2": "^2.9.0",
     "semantic-ui-css": "^2.2.0"

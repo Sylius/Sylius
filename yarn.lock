@@ -255,6 +255,10 @@ chalk@^1.0.0, chalk@^1.1.1:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
+checkboxes.js@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/checkboxes.js/-/checkboxes.js-1.0.7.tgz#d91b0394c16303e5c029a39ae795c4110e049d55"
+
 cliui@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/cliui/-/cliui-2.1.0.tgz#4b475760ff80264c762c3a1719032e91c7fea0d1"
