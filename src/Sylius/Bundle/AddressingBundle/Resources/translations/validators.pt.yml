@@ -4,57 +4,62 @@
 sylius:
     address:
         city:
-            max_length: A cidade não deve ter mais que 255 caracteres.
-            min_length: A cidade deve conter pelo menos 2 caracteres.
-            not_blank: Por favor, insira a cidade.
+            max_length: O campo cidade não deve ser maior que 255 caracteres.
+            min_length: A cidade deve ter no mínimo 2 caracteres| A cidade deve ter no mínimo 2 caracteres.
+            not_blank: Por favor, digite a cidade.
         country:
-            not_blank: Por favor, selecione o país.
-            disabled: O país escolhido está desativado. Por favor, escolha um diferente.
+            not_blank: Por favor, selecione um país.
+            disabled: O país selecionado está desabilitado. Por favor, selecione um diferente.
         first_name:
-            max_length: O primeiro nome não deve ter mais que 255 caracteres|O primeiro nome não deve ter mais que 255 caracteres.
-            min_length: O primeiro nome deve ter pelo menos 2 caracteres|O primeiro nome deve ter pelo menos 2 caracteres.
-            not_blank: Por favor introduza o primeiro nome.
+            max_length: O nome não deve ter mais de 255 caracteres | O nome não deve ter mais que 255 caracteres.
+            min_length: O nome deve ter no mínimo 2 caracteres| O nome deve ter no mínimo 2 caracteres.
+            not_blank: Por favor, digite o nome.
         last_name:
-            max_length: O último nome não deve ser maior que 255 caracteres|O último nome não deve ser maior que 255 caracteres.
-            min_length: O primeiro nome deve ter pelo menos 2 caracteres|O primeiro nome deve ter pelo menos 2 caracteres.
-            not_blank: Por favor insira o último nome.
+            max_length: O nome não pode ter mais que 255 caracteres|O nome não pode ter mais que 255 caracteres.
+            min_length: O sobrenome deve ter no mínimo 2 caracteres|O sobrenome deve ter no mínimo 2 caracteres.
+            not_blank: Por favor, digite seu sobrenome.
         postcode:
-            max_length: O código postal não deve ter mais que 255 caracteres|O código postal não deve ter mais que 255 caracteres.
-            min_length: O código postal deve ter pelo menos 2 caracteres|O código postal deve ter pelo menos 2 caracteres.
-            not_blank: Por favor introduza o código postal.
+            max_length: O CEP não pode ter mais que 255 caracteres|O CEP não pode ter mais que 255 caracteres.
+            min_length: O CEP deve ter pelo menos 2 caracteres|O CEP deve ter pelo menos 2 caracteres.
+            not_blank: Por favor, digite o CEP.
         province:
-            valid: Por favor selecione a província adequada.
+            valid: Por favor, selecione o estado.
         street:
-            max_length: A rua não deve ter mais que 255 caracteres|A rua não deve ter mais que 255 caracteres.
-            min_length: A morada deve ter pelo menos 2 caracteres|A morada deve ter pelo menos 2 caracteres.
-            not_blank: Por favor introduza a morada.
-        not_shippable: Este endereço de entrega não é válido.
+            max_length: O campo rua não pode ter mais que 255 caracteres|O campo rua não pode ter mais que 255 caracteres.
+            min_length: O campo rua deve ter pelo menos 2 caracteres|O campo rua deve ter pelo menos 2 caracteres.
+            not_blank: Por favor, digite a rua.
+        not_shippable: Este endereço não é um endereço válido para envio.
     country:
         code:
-            not_blank: Por favor introduza o código ISO do país.
-            unique: O código ISO do país deve ser único.
+            not_blank: Por favor, insira o código ISO do país.
+            regex: Código do país somente pode ser composto por letras, números, hifens e traços.
+            unique: O código ISO deve ser único.
     province:
         code:
-            min_length: O código da província deve ter pelo menos 5 caracteres|O código da província deve ter pelo menos 5 caracteres.
-            not_blank: Por favor introduza o código da província.
+            min_length: O campo estado deve ter pelo menos 2 caracteres|O campo estado deve ter pelo menos 2 caracteres.
+            not_blank: Por favor, insira o código do estado.
             regex: O código de província deve ter o seguinte formato XX-XX (por exemplo, U.S.-FL).
             unique: O código da província deve ser único.
         name:
-            max_length: O nome da província não deve ter mais que 255 caracteres|O nome da província não deve ter mais que 255 caracteres.
-            min_length: O código da província deve ter pelo menos 5 caracteres|O código da província deve ter pelo menos 5 caracteres.
-            not_blank: Por favor introduza o nome de província.
-            unique: O nome da província deve ser único.
+            max_length: O campo estado deve ter no máximo 255 caracteres|O campo estado deve ter no máximo 255 caracteres.
+            min_length: O campo estado deve ter pelo menos 2 caracteres|O campo estado deve ter pelo menos 2 caracteres.
+            not_blank: Por favor, digite o nome do estado.
+            unique: Nome da província deve ser único.
     zone:
+        scope:
+            not_blank: Por favor, introduza o escopo.
         code:
-            not_blank: Por favor introduza o código de zona.
-            unique: O código de zona deve ser único.
+            not_blank: Por favor digite o código de zona.
+            regex: Código da zona somente pode ser composto por letras, números, hifens e traços.
+            unique: Código de zona deve ser exclusivo.
         members:
-            min_count: Por favor adicione pelo menos {{ limit }} membro(s) de zona.
+            min_count: Por favor, adicione pelo menos {{ limit }} membro da região.
         name:
-            max_length: O nome da zona não deve ter mais que 255 caracteres|O nome da zona não deve ter mais que 255 caracteres.
-            min_length: O nome da zona deve ter pelo menos 2 caracteres|O nome da zona deve ter pelo menos 2 caracteres.
-            not_blank: Por favor introduza o nome de zona.
+            max_length: O nome da região não pode ter mais que 255 caracteres|O nome da região não pode ter mais que 255 caracteres.
+            min_length: O sobrenome deve ter no mínimo 2 caracteres|O sobrenome deve ter no mínimo 2 caracteres.
+            not_blank: Por favor, digite o nome da região.
     zone_member:
         code:
-            not_blank: Por favor escolha um membro de zona.
-        unique: Membro de zona escolhido já está nesta zona.
+            not_blank: Por favor, escolha um membro de zona.
+            regex: Código da zona do membro somente pode ser composto por letras, números, hifens e traços.
+        unique: Membro de zona escolhida já está nesta zona.

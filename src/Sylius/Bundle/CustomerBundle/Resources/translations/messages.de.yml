@@ -8,16 +8,12 @@ sylius:
             group: Gruppe
             last_name: Nachname
             email: E-Mail
-            phone_number: Telefonnummer
             gender: Geschlecht
             birthday: Geburtstag
             billing_address: Rechnungsadresse
             different_billing_address: Eine abweichende Rechnungsadresse benutzen?
             only_customer_registration: Account erstellen?
             subscribed_to_newsletter: Newsletter abonnieren
-        customer_group:
-            name: Name
-            roles: Rollen
     gender:
         unknown: Unbekannt
         male: Männlich

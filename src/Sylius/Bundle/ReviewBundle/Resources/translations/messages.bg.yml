@@ -11,7 +11,5 @@ sylius:
             status:
                 approved: Одобрен
                 label: Статус
-                new: Ново
                 rejected: Отхвърлен
             submit: Изпрати
-            title: Заглавие

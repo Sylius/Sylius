@@ -5,7 +5,4 @@ sylius:
     form:
         channel:
             color: Szín
-            description: Leírás
-            enabled: Engedélyezve
-            name: Név
             url: Webcím

@@ -11,12 +11,9 @@ sylius:
         shipment:
             state: Състояние
             states:
-                checkout: Плащане
-                pending: Изчакване
                 ready: Готов
                 shipped: Изпратено
                 returned: Върната
-                cancelled: Отказано
             tracking_code: Проследяващ код
         shipping_calculator:
             flat_rate_configuration:
@@ -24,22 +21,12 @@ sylius:
                 amount: Сума
             per_unit_rate_configuration:
                 label: Фиксирана сума за единица
-                amount: Сума
-        shipping_category:
-            description: Описание
-            name: Име
         shipping_method:
             calculator: Калкулатор
             category: Категория
             category_requirement: Категория изискване
-            channels: Канали
             configuration: Конфигурация
-            description: Описание
-            enabled: Активирано
             match_all_category_requirement: Всички единици трябва да съответстват на категорията за доставка
             match_any_category_requirement: Поне една единица трябва да съответстват на категорията за доставка
             match_none_category_requirement: Нито една единица не трябва да съответстват на категорията за доставка
-            name: Име
             position: Позиция
-            tax_category: Данъчна категория
-            translations: Преводи

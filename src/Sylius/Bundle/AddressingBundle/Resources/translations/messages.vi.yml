@@ -28,9 +28,5 @@ sylius:
             type: Phân loại
             types:
                 country: Quốc gia
-                province: Tỉnh
                 zone: Khu vực
             scope: Phạm vi
-            select: Chọn
-        zone_member:
-            select: Chọn

@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: '已將商品添加到購物車'
+        cannot_modify: '意欲修改的購物車已經提交訂單。'
+        remove_item: '已將商品從購物車刪除'
+        save: '已成功更新購物車'

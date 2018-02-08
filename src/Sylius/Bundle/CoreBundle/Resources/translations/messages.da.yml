@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Brug anden faktureringsadresse?
             payment_method: Betalingsmåde
             shipping_method: Fragtmetoder
-        promotion:
-            channels: Kanaler
-        promotion_action:
-            add_product_configuration:
-                product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Brugsgrænse pr. bruger
         group:
@@ -41,7 +36,6 @@ sylius:
             taxonomies: Taksonomier
             theme: Tema
         image:
-            type: Type
             file: Billede
         locale:
             code: Kode
@@ -59,37 +53,25 @@ sylius:
             id: ID
             title: Titel
         product:
-            images: Billeder
             restricted_zone: Begrænset zone
             short_description: Kort beskrivelse
             variant_selection_method: Variant udvælgelsesmetode
             main_taxon: Hovedtaksonomi
-            channels: Kanaler
-            enabled: Aktiveret
         product_filter:
             name: Navn
-            code: Kode
         product_variant:
             tax_category: Momskategori
-            shipping_category: Fragt kategori
         shipment_filter:
             created_at_from: Fra
             created_at_to: Til
             number: Ordrenummer
             shipping_address: Levering til navn
-            channel: Alle kanaler
         payment_filter:
-            created_at_from: Fra
-            created_at_to: Til
-            number: Ordrenummer
             billing_address: Faktureringsnavn
-            channel: Alle kanaler
         shipping_method:
             zone: Zone
         taxon:
-            code: Kode
             file: Vælg billede
-            images: Billeder
         taxonomy:
             file: Vælg billede
         user:
@@ -98,7 +80,6 @@ sylius:
             enabled: Aktiveret
             first_name: Fornavn
             groups: Grupper
-            roles: Roller
             last_name: Efternavn
             password: Adgangskode
             shipping_address: Leveringsadresse
@@ -122,23 +103,15 @@ sylius:
         product_association:
             product: Associeret produkt
             type: Associeringstype
-        product_association_type:
-            name: Navn
         promotion_filter:
             products: Produktfilter
             taxons: Taksonomifilter
         promotion_rule:
             customer_group:
                 group: Kundegruppe
-            has_taxon:
-                taxons: Kategorier
-            product:
-                products: Produkter
             total_of_items_from_taxon:
                 taxon: Taksonomi
                 amount: Beløb
-        payment_method:
-            channels: Kanaler
         product_attribute:
             position: Placering
         zone:
@@ -178,7 +151,6 @@ sylius:
             exists: eksisterer
             logs:
                 header: logger
-                help: "For at indstille tilladelser, afvikl: sudo setfacl -R -m u:www-data: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-data: rwx -m u: 'whoami': rwx %path%"
             not_exists: Findes ikke
             not_writable: ikke skrivebar
             parameters:

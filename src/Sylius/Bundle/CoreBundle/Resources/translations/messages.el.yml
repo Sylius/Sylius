@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;
             payment_method: Τρόπος Πληρωμής
             shipping_method: Τρόπος Αποστολης
-        promotion:
-            channels: Κανάλια
-        promotion_action:
-            add_product_configuration:
-                product: Προϊόν
         promotion_coupon:
             per_customer_usage_limit: Όριο χρήσης ανά πελάτη
         group:
@@ -41,7 +36,6 @@ sylius:
             taxonomies: Ταξινομία
             theme: Θέμα
         image:
-            type: Τύπος
             file: Εικόνα
         locale:
             code: Κώδικος
@@ -54,51 +48,30 @@ sylius:
             total_to: Προς
             payment_state: Κατάσταση πληρωμής
             channel: Όλα τα κανάλια
-        page:
-            body: Κυρίως άρθρο
-            id: ID
-            title: Τίτλος
         product:
-            images: Εικόνες
             restricted_zone: Απαγορευμένη ζώνη
             short_description: Σύντομη περιγραφή
             variant_selection_method: Μέθοδος επιλογής παραλλαγής
             main_taxon: Κύρια ταξινομική μονάδα
-            channels: Κανάλια
-            enabled: Ενεργοποιημένο
         product_filter:
             name: Ονομασία
             code: Κωδικός
         product_variant:
             tax_category: Φορολογική κατηγορία
-            shipping_category: Κατηγορία αποστολής
         shipment_filter:
             created_at_from: Από
-            created_at_to: Προς
             number: Αριθμός Παραγγελίας
             shipping_address: Αποστολή στο όνομα
-            channel: Όλα τα κανάλια
         payment_filter:
-            created_at_from: Από
-            created_at_to: Προς
-            number: Αριθμός Παραγγελίας
             billing_address: Όνομα χρέωσης
-            channel: Όλα τα κανάλια
         shipping_method:
             zone: Ζώνη
         taxon:
-            code: Κώδικος
-            file: Επιλέξτε εικόνα
-            images: Εικόνες
-        taxonomy:
             file: Επιλέξτε εικόνα
         user:
             billing_address: Διεύθυνση τιμολόγησης
-            different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;
-            enabled: Ενεργοποιημένο
             first_name: Όνομα
             groups: Ομάδες
-            roles: Ρόλοι
             last_name: Επώνυμο
             password: Κωδικός πρόσβασης
             shipping_address: Διεύθυνση αποστολής
@@ -122,8 +95,6 @@ sylius:
         product_association:
             product: Συσχετισμένο προϊόν
             type: Τύπος συσχετισμού
-        product_association_type:
-            name: Ονομασία
         promotion_filter:
             products: Φίλτρο προϊόντων
             taxons: Φίλτρο ταξινομικής μονάδας
@@ -132,13 +103,9 @@ sylius:
                 group: Ομάδα πελατών
             has_taxon:
                 taxons: Ταξινομικές μονάδες
-            product:
-                products: Προϊόντα
             total_of_items_from_taxon:
                 taxon: Ταξινομική μονάδα
                 amount: Ποσό
-        payment_method:
-            channels: Κανάλια
         product_attribute:
             position: Θέση
         zone:
@@ -178,7 +145,6 @@ sylius:
             exists: υπάρχει
             logs:
                 header: αρχεία καταγραφής
-                help: "Για να ορίσεις τα δικαιώματα εκτέλεσε το παρακάτω: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: δεν υπάρχει
             not_writable: χωρίς δυνατότητα εγγραφής
             parameters:

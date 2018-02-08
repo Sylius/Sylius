@@ -7,10 +7,7 @@ sylius:
             add: Tilføj
             add_attributes: Tilføj egenskaber
             choices: Valg
-            code: Kode
-            name: Navn
             translations: Oversættelser
-            type: Type
         attribute_type:
             checkbox: Markeringsfelt
             configuration: Opsætning
@@ -18,15 +15,12 @@ sylius:
             datetime: Datotid
             integer: Heltal
             percent: Procent
-            select: Vælg
             text: Tekst
             textarea: Tekstområde
             title: Attributtype
             validation: Validering
         attribute_type_configuration:
             datetime:
-                format: Format
-            date:
                 format: Format
             select:
                 multiple: Flere

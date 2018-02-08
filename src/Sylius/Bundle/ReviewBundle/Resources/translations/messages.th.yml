@@ -11,7 +11,5 @@ sylius:
             status:
                 approved: อนุมัติแล้ว
                 label: สถานะ
-                new: รายการใหม่
                 rejected: ปฏิเสธ
             submit: ส่ง
-            title: หัวข้อ

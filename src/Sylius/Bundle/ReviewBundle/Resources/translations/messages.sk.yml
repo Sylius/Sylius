@@ -11,7 +11,5 @@ sylius:
             status:
                 approved: Schválené
                 label: Stav
-                new: Nová
                 rejected: Zamietnuté
             submit: Odoslať
-            title: Názov

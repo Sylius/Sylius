@@ -2,16 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    channel:
-        contact_email:
-            invalid: Ez az e-mail cím érvénytelen.
     checkout:
         shipping_method:
             not_blank: Kérjük, válassza ki a szállítási formát.
-    contact:
-        email:
-            invalid: Ez az e-mail cím érvénytelen.
-            not_blank: Kérjük adja meg e-mail címét!
     customer:
         currency_code:
             not_valid: A megadott pénznem érvénytelen.
@@ -34,7 +27,6 @@ sylius:
     user:
         email:
             unique: Ez az e-mail cím már használatban van.
-            invalid: Ez az e-mail cím érvénytelen.
         username:
             unique: Ez a felhasználónév már használatban van.
             not_blank: Kérjük, add meg a neved.

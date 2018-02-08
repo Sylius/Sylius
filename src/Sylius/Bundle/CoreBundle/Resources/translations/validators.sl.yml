@@ -2,16 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    channel:
-        contact_email:
-            invalid: Ta e-pošta ni veljavna.
     checkout:
         shipping_method:
             not_blank: Prosimo, izberite način dostave.
-    contact:
-        email:
-            invalid: Ta e-pošta ni veljavna.
-            not_blank: Prosimo, vnesite vaš elektronski naslov.
     locale:
         code:
             not_blank: Prosimo, vnesite kodo območnih nastavitev.
@@ -25,6 +18,3 @@ sylius:
     product_translation:
         short_description:
             max: Kratek opis ne sme biti daljši kot {{ limit }} znakov.
-    user:
-        email:
-            invalid: Ta e-pošta ni veljavna.

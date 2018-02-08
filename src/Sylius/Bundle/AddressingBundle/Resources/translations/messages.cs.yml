@@ -13,13 +13,11 @@ sylius:
             postcode: PSČ
             street: Ulice
             province: Provincie
-            zone: Oblast
         country:
             add_province: Přidat provincii
             name: Jméno
             provinces: Provincie
             select: Vybrat
-            enabled: Povoleno
         province:
             name: Jméno
             abbreviation: Zkratka
@@ -34,9 +32,4 @@ sylius:
                 province: Provincie
                 zone: Oblast
             scope: Rozsah
-            scopes:
-                all: Všechno
-            select: Vybrat
             select_scope: Zvolte rozsah
-        zone_member:
-            select: Vybrat

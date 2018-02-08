@@ -7,26 +7,19 @@ sylius:
             add: Ekle
             add_attributes: Özellik ekle
             choices: Seçimler
-            code: Kod
-            name: Ad
             translations: Çeviriler
-            type: Türü
         attribute_type:
             checkbox: Onay Kutusu
-            configuration: Ayarlar
             date: Tarih
             datetime: Tarih/Saat
             integer: Tamsayı
             percent: Yüzde
-            select: Ülke seçin
             text: Metin
             textarea: Metin Alanı
             title: Özellik türü
             validation: Doğrulama
         attribute_type_configuration:
             datetime:
-                format: Biçim
-            date:
                 format: Biçim
             select:
                 multiple: Birden Fazla

@@ -13,13 +13,11 @@ sylius:
             postcode: Kode pos
             street: Alamat
             province: Provinsi
-            zone: Zona
         country:
             add_province: Tambah Provinsi
             name: Nama
             provinces: Provinsi
             select: Pilih
-            enabled: Diaktifkan
         province:
             name: Nama
             abbreviation: Singkatan

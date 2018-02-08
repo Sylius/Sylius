@@ -4,5 +4,4 @@
 sylius:
     form:
         collection:
-            add: Legg til
             delete: Slett

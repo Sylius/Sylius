@@ -1,0 +1,27 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    attribute:
+        name:
+            not_blank: 请输入属性名称。
+            min_length: 属性名称必须是至少 1 个字符长。 |属性名称必须至少 {{limit}} 个字符长。
+            max_length: 属性名称必须不能超过 1 个字符。 |属性名称不能长于 {{limit}} 字符。
+        code:
+            not_blank: 请输入属性的编码。
+            regex: 货币代码仅由字母、数字、破折号和下划线组成
+            unique: 此编码已被使用。
+        configuration:
+            max_entries: 配置最大条目值必须大于或等于最小的项值。
+            max_length: 配置最大长度值必须大于或等于最小的项值。
+            min_entries: 配置最大条目值必须大于或等于最小的项值。
+            multiple: 多配置必须如果指定 min 或 max 条目的值为 true。
+        presentation:
+            not_blank: 请输入属性介绍。
+            min_length: 属性介绍必须是至少 1 个字符长。 |属性介绍必须至少 {{limit}} 个字符长。
+            max_length: 属性介绍必须不能超过 1 个字符。 |属性介绍不能长于 {{limit}} 字符。
+    attribute_value:
+        attribute:
+            not_blank: 请选择属性。
+        value:
+            not_blank: 请输入属性值。

@@ -11,7 +11,5 @@ sylius:
             status:
                 approved: Goedgekeurd
                 label: Status
-                new: Nieuw
                 rejected: Afgewezen
             submit: Verzend
-            title: Titel

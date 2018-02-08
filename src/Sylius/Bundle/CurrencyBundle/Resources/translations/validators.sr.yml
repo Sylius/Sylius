@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    currency:
+        code:
+            exact_length: Kod valute mora biti dugačak tačno 3 karaktera.
+            not_blank: Izaberite kod valute.

@@ -13,13 +13,11 @@ sylius:
             postcode: Поштовий індекс
             street: Вулиця
             province: Регіон
-            zone: Зона
         country:
             add_province: Додати регіон
             name: Назва країни
             provinces: Регіони
             select: Виберіть
-            enabled: Увімкнено
         province:
             name: Назва регіону
             abbreviation: Абревіатура
@@ -34,9 +32,4 @@ sylius:
                 province: Регіон
                 zone: Зона
             scope: Покриття
-            scopes:
-                all: Всі(-е)
-            select: Виберіть
             select_scope: Виберіть покриття
-        zone_member:
-            select: Виберіть

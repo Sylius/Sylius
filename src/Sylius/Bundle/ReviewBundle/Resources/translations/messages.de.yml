@@ -11,7 +11,5 @@ sylius:
             status:
                 approved: Genehmigt
                 label: Status
-                new: Neu
                 rejected: Zurückgewiesen
             submit: Senden
-            title: Titel

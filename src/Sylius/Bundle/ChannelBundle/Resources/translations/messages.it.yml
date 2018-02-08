@@ -5,7 +5,4 @@ sylius:
     form:
         channel:
             color: Colore
-            description: Descrizione
-            enabled: Abilitato
-            name: Nome
             url: URL

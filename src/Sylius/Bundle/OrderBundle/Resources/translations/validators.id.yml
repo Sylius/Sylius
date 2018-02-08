@@ -1,7 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    order_item:
-        quantity:
-            min: Jumlah item pesanan tidak boleh lebih rendah dari 1.
+        order_item:
+                quantity:
+                        min: Jumlah item pesanan tidak boleh lebih rendah dari 1.

@@ -10,27 +10,15 @@ sylius:
         shipment:
             state: Stanje
             states:
-                checkout: Plačilo
-                pending: Na čakanju
                 ready: Pripravljen
                 shipped: Poslano
                 returned: Vrnjeno
-                cancelled: Preklicano
             tracking_code: Koda za sledenje
         shipping_calculator:
             flat_rate_configuration:
                 label: Pavšalno na pošiljko
-        shipping_category:
-            description: Opis
-            name: Ime
         shipping_method:
             calculator: Kalkulator
             category: Kategorija
             category_requirement: Zahteva kategorije
-            channels: Kanali
             configuration: Konfiguracija
-            description: Opis
-            enabled: Omogočeno
-            name: Ime
-            tax_category: Kategorija davka
-            translations: Prevodi

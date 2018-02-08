@@ -4,7 +4,6 @@
 sylius:
     form:
         user:
-            email: Е-пошта
             enabled: Овозможено
             password:
                 label: Лозинка
@@ -17,7 +16,4 @@ sylius:
         user_change_password:
             confirmation: Потврда
             current: Тековна лозинка
-            new: Нова лозинка
-        user_reset_password:
-            confirmation: Потврда
             new: Нова лозинка

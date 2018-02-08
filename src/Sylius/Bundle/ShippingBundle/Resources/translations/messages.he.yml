@@ -11,4 +11,3 @@ sylius:
             name: שם
         shipping_method:
             calculator: מחשבון
-            enabled: הופעל

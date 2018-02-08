@@ -8,7 +8,6 @@ sylius:
         default_locale:
             not_blank: Παρακαλώ εισάγετε τις προεπιλεγμένες τοπικές ρυθμίσεις του καναλιού.
         contact_email:
-            invalid: Αυτό το email δεν είναι έγκυρο.
             max: Το email δεν μπορεί να έχει μεγαλύτερο μήκος από {{ limit }} χαρακτήρες.
             min: Το email πρέπει να έχει μήκος τουλάχιστον {{ limit }} χαρακτήρες.
     channel_pricing:
@@ -19,9 +18,6 @@ sylius:
         shipping_method:
             not_blank: Παρακαλώ επιλέξτε μέθοδο αποστολής.
     contact:
-        email:
-            invalid: Αυτό το email δεν είναι έγκυρο.
-            not_blank: Παρακαλώ εισάγετε το email σας.
         message:
             not_blank: Παρακαλώ εισάγετε το μήνυμά σας.
     currency:
@@ -77,16 +73,11 @@ sylius:
     product_translation:
         short_description:
             max: Η σύντομη περιγραφή δεν πρέπει να είναι μεγαλύτερη από {{ limit }} χαρακτήρες.
-    taxon_image:
-        file:
-            max_size: Η εικόνα είναι πολύ μεγάλη - {{ size }}{{ suffix }}. Το μέγιστο επιτρεπόμενο μέγεθος είναι {{ limit }}{{ suffix }}.
-            upload_ini_size: Η εικόνα είναι πολύ μεγάλη. Το μέγιστο επιτρεπόμενο μέγεθος είναι {{ limit }}{{ suffix }}.
     user:
         email:
             unique: Αυτό το email χρησιμοποιείται ήδη.
             min: Το email πρέπει να έχει μήκος τουλάχιστον {{ min }} χαρακτήρες.
             max: Το email πρέπει να έχει μήκος το μεγαλύτερο {{ max }} χαρακτήρες.
-            invalid: Αυτό το email δεν είναι έγκυρο.
         username:
             unique: Αυτό το όνομα χρήστη χρησιμοποιείται ήδη.
             not_blank: Παρακαλώ εισάγετε το όνομά σας.

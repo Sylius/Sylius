@@ -12,7 +12,6 @@ sylius:
             phone_number: Kontakt telefon
             postcode: Poštanski broj
             province: Pokrajina
-            zone: Regija
         country:
             add_province: Dodaj pokrajinu
             name: Naziv Države
@@ -30,12 +29,5 @@ sylius:
             type: Vrsta
             types:
                 country: Država
-                province: Pokrajina
-                zone: Regija
             scope: Djelokrug
-            scopes:
-                all: Sve
-            select: Odaberite
             select_scope: Odaberite doseg
-        zone_member:
-            select: Odaberite

@@ -32,7 +32,6 @@ sylius:
                     promotions: Promocions
                 customers:
                     customers: Clients
-                    groups: Grups
                     header: Client
                 sales:
                     header: Vendes

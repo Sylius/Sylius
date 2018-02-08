@@ -21,6 +21,6 @@ sylius:
         gateway:
             not_blank: Seleccioneu la passarel·la de pagament.
         name:
-            max_length: Nom de mètode de pagament ha de ser {{ limit }}  caràcters o menys llarg.
+            max_length: Nom de mètode de pagament ha de ser {{ limit }}    caràcters o menys llarg.
             min_length: Nom de mètode de pagament ha de ser de almenys {{ limit }} caràcters.
             not_blank: Introduïu el nom de mètode de pagament.

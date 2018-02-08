@@ -2,16 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    channel:
-        contact_email:
-            invalid: Ky email nuk është i vlefshëm.
     checkout:
         shipping_method:
             not_blank: Zgjidh mënyrën e dërgesës.
-    contact:
-        email:
-            invalid: Ky email nuk është i vlefshëm.
-            not_blank: Shkruaj adresën e email-it.
     locale:
         code:
             not_blank: Shkruaj kodin lokal.
@@ -25,6 +18,3 @@ sylius:
     product_translation:
         short_description:
             max: Përshkrimi i shkurtër nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
-    user:
-        email:
-            invalid: Ky email nuk është i vlefshëm.

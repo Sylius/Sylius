@@ -5,7 +5,4 @@ sylius:
     form:
         channel:
             color: Farve
-            description: Beskrivelse
-            enabled: Aktiveret
-            name: Navn
             url: URL

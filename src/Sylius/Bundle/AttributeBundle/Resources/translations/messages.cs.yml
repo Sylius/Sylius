@@ -7,18 +7,13 @@ sylius:
             add: Přidat
             add_attributes: Přidat atribut
             choices: Volby
-            code: Kód
-            name: Jméno
             translations: Překlady
-            type: Typ
         attribute_type:
             checkbox: Zaškrt. pole
-            configuration: Konfigurace
             date: Datum
             datetime: Datum a čas
             integer: Číslo
             percent: Procent
-            select: Vybrat
             text: Text
             textarea: Textové pole
             title: Typ atributu

@@ -1,0 +1,56 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    product:
+        sku:
+            not_blank: 请输入产品的 SKU。
+            unique: 产品的 SKU 必须是唯一的。
+        slug:
+            not_blank: 请输入产品标识。
+            unique: 产品名必须是唯一的。
+        code:
+            not_blank: 请输入产品代码。
+            regex: 产品代码仅可以由字母、 数字、 破折号和下划线组成。
+            unique: 产品代码必须是唯一的。
+        name:
+            not_blank: 请输入产品名称。
+            min_length: 产品名称必须是至少 1 个字符长。 |产品名称必须至少 {{ limit }} 个字符长。
+            max_length: 产品名称必须不能超过 1 个字符。 |产品名称不能超过 {{ limit }} 字符。
+    product_variant:
+        combination: 使用此选项的规格已经存在。
+        code:
+            not_blank: 请输入代码。
+            regex: 产品规格代码仅可以由字母、 数字、 破折号和下划线组成。
+            unique: 产品规格代码必须是唯一的。
+            within_product_unique: 此代码必须在本商品内唯一。
+    simple_product:
+        code:
+            unique: 简单产品的代码在所有的产品和产品规格中都必须是唯一的。
+    option:
+        code:
+            not_blank: 请输入选项编号。
+            regex: 选项代码仅可以由字母、 数字、 破折号和下划线组成。
+            unique: 给定代码的选项已存在。
+        name:
+            not_blank: 请输入选项名称。
+            min_length: 选项名称必须是至少 1 个字符长。 |选项名称必须至少 {{ limit }} 个字符长。
+            max_length: 选项名称必须不能超过 1 个字符。 |选项名称不能超过 {{ limit }} 字符。
+        values:
+            min_count: 请至少添加 {{ limit }} 选项限值。 |请至少添加 {{ limit }} 选项的限值。
+    option_value:
+        code:
+            not_blank: 请输入选项值的代码。
+            regex: 选项值的代码仅可以由字母、 数字、 破折号和下划线组成。
+            unique: 给定代码选项的值已存在。
+        value:
+            not_blank: 请输入选项的值。
+    association_type:
+        name:
+            not_blank: 请输入关联类型名称。
+            min_length: 关联类型必须至少 1个字符长。|关联名称必须至少 {{ limit }} 个字符长。
+            max_length: 关联类型名称必须不能超过 1 个字符。 |关联名称不能超过 {{ limit }} 个字符。
+        code:
+            not_blank: 请输入关联类型代码。
+            regex: 关联类型代码仅可以由字母、 数字、 破折号和下划线组成。
+            unique: 该关联类型代码已经存在。

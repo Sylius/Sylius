@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: '¿Usar una dirección diferente para la facturación?'
             payment_method: Método de pago
             shipping_method: Método de envío
-        promotion:
-            channels: Canales
-        promotion_action:
-            add_product_configuration:
-                product: Producto
         promotion_coupon:
             per_customer_usage_limit: Límite de uso por cliente
         group:
@@ -27,7 +22,6 @@ sylius:
         channel:
             contact_email: Email de contacto
             currencies: Monedas
-            currency_base: Moneda base
             account_verification_required: '¿Se requiere verificación de cuenta?'
             hostname: Nombre del host
             locale_default: Idioma predeterminado
@@ -41,7 +35,6 @@ sylius:
             taxonomies: Taxonomías
             theme: Tema
         image:
-            type: Tipo
             file: Imagen
         locale:
             code: Código
@@ -54,42 +47,24 @@ sylius:
             total_to: Hasta
             payment_state: Estado del pago
             channel: Todos los canales
-        page:
-            body: Cuerpo
-            id: ID
-            title: Título
         product:
-            images: Imágenes
             restricted_zone: Zona restringida
             short_description: Descripción corta
             variant_selection_method: Método de selección variante
             main_taxon: Taxón principal
-            channels: Canales
-            enabled: Activado
         product_filter:
             name: Nombre
-            code: Código
         product_variant:
             tax_category: Categoría de impuestos
-            shipping_category: Categoría de envío
         shipment_filter:
-            created_at_from: Desde
-            created_at_to: Hasta
             number: Número de pedido
             shipping_address: Enviar a nombre de
-            channel: Todos los canales
         payment_filter:
-            created_at_from: Desde
-            created_at_to: Hasta
-            number: Número de pedido
             billing_address: Factura a nombre de
-            channel: Todos los canales
         shipping_method:
             zone: Zona
         taxon:
-            code: Código
             file: Seleccione una imagen
-            images: Imágenes
         taxonomy:
             file: Seleccione una imagen
         user:
@@ -98,7 +73,6 @@ sylius:
             enabled: Activado
             first_name: Nombre
             groups: Grupos
-            roles: Roles
             last_name: Apellidos
             password: Contraseña
             shipping_address: Dirección de envío
@@ -122,29 +96,14 @@ sylius:
         product_association:
             product: Producto asociado
             type: Tipos de asociación
-        product_association_type:
-            name: Nombre
         promotion_filter:
             products: Filtro de productos
             taxons: Filtro de taxones
         promotion_rule:
             customer_group:
                 group: Grupo de clientes
-            has_taxon:
-                taxons: Taxones
-            product:
-                products: Productos
             total_of_items_from_taxon:
                 taxon: Taxón
-                amount: Cantidad
-        payment_method:
-            channels: Canales
-        product_attribute:
-            position: Posición
-        zone:
-            scopes:
-                shipping: Gastos de envío
-                tax: Impuestos
     installer:
         extensions:
             header: extensiones

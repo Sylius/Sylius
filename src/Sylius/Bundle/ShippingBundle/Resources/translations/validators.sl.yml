@@ -22,6 +22,3 @@ sylius:
         code:
             not_blank: 'Prosimo, vnesite kodo načina pošiljanja.'
             unique: 'Način pošiljanja z dano kodo že obstaja.'
-    shipment:
-        shipping_method:
-            not_blank: 'Prosimo, izberite način dostave.'

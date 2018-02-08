@@ -73,23 +73,14 @@ sylius:
             tax_category: Categoria fiscale
             shipping_category: Categoria di spedizione
         shipment_filter:
-            created_at_from: Da
-            created_at_to: A
             number: Numero d'ordine
             shipping_address: Spedisci a
-            channel: Tutti i canali
         payment_filter:
-            created_at_from: Da
-            created_at_to: A
-            number: Numero d'ordine
             billing_address: Fattura a nome di
-            channel: Tutti i canali
         shipping_method:
             zone: Zona
         taxon:
-            code: Codice
             file: Seleziona un'immagine
-            images: Immagini
         taxonomy:
             file: Seleziona un'immagine
         user:
@@ -98,7 +89,6 @@ sylius:
             enabled: Abilitato
             first_name: Nome
             groups: Gruppi
-            roles: Regole
             last_name: Cognome
             password: Password
             shipping_address: Indirizzo di spedizione
@@ -122,8 +112,6 @@ sylius:
         product_association:
             product: Prodotto associato
             type: Tipi di associazione
-        product_association_type:
-            name: Nome
         promotion_filter:
             products: Filtro prodotti
             taxons: Filtro Taxons
@@ -132,19 +120,10 @@ sylius:
                 group: Gruppo clienti
             has_taxon:
                 taxons: Taxons
-            product:
-                products: Prodotti
             total_of_items_from_taxon:
                 taxon: Tipologia
-                amount: Importo
-        payment_method:
-            channels: Canali
         product_attribute:
             position: Posizione
-        zone:
-            scopes:
-                shipping: Spese di spedizione
-                tax: Tasse
     installer:
         extensions:
             header: estensioni
@@ -178,7 +157,6 @@ sylius:
             exists: esiste
             logs:
                 header: logs
-                help: "Per impostare le autorizzazioni eseguire: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: non esiste
             not_writable: non scrivibile
             parameters:

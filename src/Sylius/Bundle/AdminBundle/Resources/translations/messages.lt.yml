@@ -6,21 +6,13 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: Sąryšių tipai
-                    attributes: Atributai
                     header: Katalogas
-                    inventory: Atsargos
-                    options: Parinktys
                     products: Prekės
                     taxons: Taksonai
                 configuration:
                     admin_users: Administratoriai
                     channels: Kanalai
-                    countries: Šalys
-                    currencies: Valiutos
                     exchange_rates: Valiutų kursai
-                    header: Konfigūracija
-                    locales: Lokalės
                     payment_methods: Apmokėjimo būdai
                     shipping_categories: Pristatymo kategorijos
                     shipping_methods: Pristatymo būdai
@@ -33,7 +25,6 @@ sylius:
                     promotions: Akcijos
                 customers:
                     customers: Klientai
-                    groups: Grupės
                     header: Klientai
                 sales:
                     header: Pardavimai

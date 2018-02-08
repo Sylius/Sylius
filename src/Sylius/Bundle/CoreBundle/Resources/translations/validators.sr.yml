@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        base_currency:
+            not_blank: Unesite osnovnu valutu za kanal.
+    checkout:
+        shipping_method:
+            not_blank: Molimo odaberide metod dostave.
+    user:
+        email:
+            unique: Ova e-mail adresa je već iskorišćena.
+        username:
+            unique: Ovo korisničko ime je već iskorišćeno.
+            not_blank: Molimo unesite Vaše ime.

@@ -10,16 +10,13 @@ sylius:
                     attributes: Γνωρίσματα
                     header: Κατάλογος
                     inventory: Αποθέματα
-                    options: Επιλογές
                     products: Προϊόντα
                     taxons: Ταξινομική μονάδα
                 configuration:
                     admin_users: Διαχειριστές
                     channels: Κανάλια
-                    countries: Χώρες
                     currencies: Νομίσματα
                     exchange_rates: Συναλλαγματικές ισοτιμίες
-                    header: Παραμετροποίηση
                     locales: Τοπικές ρυθμίσεις
                     payment_methods: Τρόποι πληρωμής
                     shipping_categories: Κατηγορίες αποστολής
@@ -33,7 +30,6 @@ sylius:
                     promotions: Προσφορές
                 customers:
                     customers: Πελάτες
-                    groups: Ομάδες
                     header: Πελάτης
                 sales:
                     header: Πωλήσεις

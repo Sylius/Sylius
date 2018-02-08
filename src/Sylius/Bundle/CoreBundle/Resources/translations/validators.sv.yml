@@ -21,7 +21,6 @@ sylius:
     contact:
         email:
             invalid: E-postadressen är ogiltig.
-            not_blank: Skriv din e-postadress.
         message:
             not_blank: Vänligen ange ditt meddelande.
     currency:
@@ -76,13 +75,10 @@ sylius:
     taxon_image:
         file:
             max_size: Bilden är för stor - {{ size }}{{ suffix }}. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
-            upload_ini_size: Bilden är för stor. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
     user:
         email:
-            unique: Den här e-posten används redan.
             min: E-posten måste ha minst {{ min }} tecken.
             max: E-posten måste ha som mest {{ max }} tecken.
-            invalid: E-postadressen är ogiltig.
         username:
             unique: Detta användarnamn används redan.
             not_blank: Vänligen uppge ett namn.

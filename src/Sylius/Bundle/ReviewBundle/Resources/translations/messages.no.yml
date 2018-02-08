@@ -11,7 +11,5 @@ sylius:
             status:
                 approved: Godkjent
                 label: Status
-                new: Ny
                 rejected: Avvist
             submit: Send inn
-            title: Tittel

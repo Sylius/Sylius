@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Uporabimo drug naslov za dostavo?
             payment_method: Način plačila
             shipping_method: Način pošiljanja
-        promotion:
-            channels: Kanali
-        promotion_action:
-            add_product_configuration:
-                product: Izdelek
         group:
             name: Ime
             roles: Vloge
@@ -33,7 +28,6 @@ sylius:
             taxonomies: Taksonomije
             theme: Tema
         image:
-            type: Vrsta
             file: Slika
         locale:
             code: Koda
@@ -46,42 +40,24 @@ sylius:
             total_to: Za
             payment_state: Stanje plačila
             channel: Vsi kanali
-        page:
-            body: Telo
-            id: ID
-            title: Naslov
         product:
-            images: Slike
             restricted_zone: Območje z omejitvami
             short_description: Kratek opis
             variant_selection_method: Način izbora variante
             main_taxon: Glavni takson
-            channels: Kanali
-            enabled: Omogočeno
         product_filter:
             name: Ime
-            code: Koda
         product_variant:
             tax_category: Kategorija davka
-            shipping_category: Kategorija dostave
         shipment_filter:
-            created_at_from: Od
-            created_at_to: Za
             number: Številka naročila
             shipping_address: Dostava na ime
-            channel: Vsi kanali
         payment_filter:
-            created_at_from: Od
-            created_at_to: Za
-            number: Številka naročila
             billing_address: Račun na ime
-            channel: Vsi kanali
         shipping_method:
             zone: Cona
         taxon:
-            code: Koda
             file: Izberite sliko
-            images: Slike
         taxonomy:
             file: Izberite sliko
         user:
@@ -90,7 +66,6 @@ sylius:
             enabled: Omogočeno
             first_name: Ime
             groups: Skupine
-            roles: Vloge
             last_name: Priimek
             password: Geslo
             shipping_address: Naslov za dostavo
@@ -113,13 +88,9 @@ sylius:
         product_association:
             product: Povezani izdelek
             type: Vrsta združenja
-        product_association_type:
-            name: Ime
         promotion_rule:
             total_of_items_from_taxon:
                 taxon: Sistematske skupine
-        payment_method:
-            channels: Kanali
     installer:
         extensions:
             header: razširitve

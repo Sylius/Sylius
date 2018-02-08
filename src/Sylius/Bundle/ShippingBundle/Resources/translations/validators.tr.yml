@@ -26,6 +26,3 @@ sylius:
             unique: 'Girilen nakliye yöntem kodu zaten var.'
         zone:
             not_blank: 'Lütfen teslimat yöntemi bölgesini seçiniz.'
-    shipment:
-        shipping_method:
-            not_blank: 'Lütfen kargoyu seçiniz.'

@@ -9,7 +9,6 @@ sylius:
             not_blank: لطفا زبان پایه برای کانال را وارد کنید.
         contact_email:
             invalid: این ایمیل نامعتبر است.
-            max: ایمیل نباید بیش از {{ limit }} حرف باشد.
             min: ایمیل باید حداقل {{ limit }} حرف داشته باشد.
     channel_pricing:
         price:
@@ -19,9 +18,6 @@ sylius:
         shipping_method:
             not_blank: لطفا شیوه ارسال را انتخاب کنید.
     contact:
-        email:
-            invalid: ایمیل وارد شده نامعتبر است.
-            not_blank: لطفا ایمیل خود را وارد کنید.
         message:
             not_blank: لطفا پیام خود را وارد کنید.
     currency:
@@ -73,14 +69,12 @@ sylius:
             max: معرفی کوتاه نباید بیش از {{ limit }} حرف باشد.
     taxon_image:
         file:
-            max_size: تصویر بسیار بزرگ است -{{ size }}{{ suffix }}. حداکثر اندازه مجاز {{ limit }}{{ suffix }} می باشد.
             upload_ini_size: این تصویر بسیار بزرگ است. حداکثر اندازی مجاز {{ suffix }}{{ limit }} است.
     user:
         email:
             unique: این ایمیل قبلا استفاده گردیده.
             min: ایمیل باید حداقل شامل {{ min }} کاراکتر باشد.
             max: ایمیل می تواند حداکثر شامل {{ max }} کاراکتر باشد.
-            invalid: ایمیل وارد شده نامعتبر است.
         username:
             unique: این نام کاربری قبلا استفاده شده است.
             not_blank: لطفاً نام خود را وارد کنید.

@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
             payment_method: Ödeme Şekli
             shipping_method: Gönderim şekli
-        promotion:
-            channels: Kanallar
-        promotion_action:
-            add_product_configuration:
-                product: Ürün
         promotion_coupon:
             per_customer_usage_limit: Müşteri Başına Kullanım Limiti
         group:
@@ -27,7 +22,6 @@ sylius:
         channel:
             contact_email: İletişim e-maili
             currencies: Para birimi
-            currency_base: Ana Para Birimi
             account_verification_required: Hesap doğrulaması gerekli mi?
             hostname: Sunucu
             locale_default: Varsayılan yer
@@ -41,7 +35,6 @@ sylius:
             taxonomies: Kategoriler
             theme: Tema
         image:
-            type: Türü
             file: Resim
         locale:
             code: Kod
@@ -54,51 +47,27 @@ sylius:
             total_to: Hedef
             payment_state: Ödeme durumu
             channel: Tüm kanallar
-        page:
-            body: İçerik
-            id: ID
-            title: Başlık
         product:
-            images: Resimleri
             restricted_zone: Kısıtlı bölge
             short_description: Kısa açıklama
             variant_selection_method: Varyant seçme yöntemi
             main_taxon: Ana takson
-            channels: Kanallar
-            enabled: Etkin
-        product_filter:
-            name: Ad
-            code: Kod
         product_variant:
             tax_category: Vergi kategorisi
-            shipping_category: Teslimat kategorisi
         shipment_filter:
-            created_at_from: Kaynak
-            created_at_to: Hedef
             number: Sipariş numarası
             shipping_address: Gönderi adı
-            channel: Tüm kanallar
         payment_filter:
-            created_at_from: Kaynak
-            created_at_to: Hedef
-            number: Sipariş numarası
             billing_address: Fatura adı
-            channel: Tüm kanallar
         shipping_method:
             zone: Bölge
         taxon:
-            code: Kod
-            file: Resim seç
-            images: Resimleri
-        taxonomy:
             file: Resim seç
         user:
             billing_address: Fatura adresi
-            different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
             enabled: Etkin
             first_name: Ad
             groups: Gruplar
-            roles: Roller
             last_name: Soyad
             password: Şifre
             shipping_address: Teslimat adresi
@@ -122,8 +91,6 @@ sylius:
         product_association:
             product: İlişkili ürün
             type: İlişki türü
-        product_association_type:
-            name: Ad
         promotion_filter:
             products: Ürün filtresi
             taxons: Sınıf filtresi
@@ -132,13 +99,8 @@ sylius:
                 group: Müşteri Grubu
             has_taxon:
                 taxons: Kategoriler
-            product:
-                products: Ürünler
             total_of_items_from_taxon:
                 taxon: Katagori
-                amount: Miktar
-        payment_method:
-            channels: Kanallar
         product_attribute:
             position: Konum
         zone:
@@ -178,7 +140,6 @@ sylius:
             exists: mevcut
             logs:
                 header: loglar
-                help: "Çalıştırma izinlerini ayarlamak için: sudo setfacl -R -m u:www-veri: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-veri: rwx -m u: 'whoami': rwx %path%"
             not_exists: mevcut değil
             not_writable: yazılabilir değil
             parameters:

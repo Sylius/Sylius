@@ -5,25 +5,15 @@ sylius:
     form:
         product:
             name: Nome
-            description: Descrição
             attributes: Atributos
             options: Opções
-            meta_keywords: Palavras-chave meta
-            meta_description: Descrição meta
-        product_variant:
-            name: Nome
-        association_type:
-            name: Nome
-            translations: Traduções
+            meta_keywords: Meta palavra-chaves
+            meta_description: Meta descrição
+            slug: Slug
+            taxons: Categorias
         association:
             type: Tipo de associação
             product: Produto associado
-        variant:
-            name: Nome
         option:
-            name: Nome
             position: Posição
             values: Valores possíveis
-        option_value:
-            add_value: Adicionar valor
-            value: Valor

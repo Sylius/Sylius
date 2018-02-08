@@ -41,7 +41,6 @@ sylius:
             taxonomies: تصنيف
             theme: السمة
         image:
-            type: نوع
             file: صورة
         locale:
             code: رمز
@@ -54,17 +53,12 @@ sylius:
             total_to: إلى
             payment_state: حالة الدفع
             channel: جميع القنوات
-        page:
-            body: المحتوى
-            id: معرف
-            title: عنوان
         product:
             images: الصّور
             restricted_zone: منطقة محظورة
             short_description: وصف مختصر
             variant_selection_method: أسلوب اختيار البديل
             main_taxon: الأصناف الرئيسية
-            channels: قنوات
             enabled: تفعيل
         product_filter:
             name: الاسم
@@ -94,11 +88,9 @@ sylius:
             file: قم بإختيارالصورة
         user:
             billing_address: عنوان الفاتورة
-            different_billing_address: استخدام عنوان مختلف للفوترة؟
             enabled: تمكين
             first_name: الاسم الأول
             groups: المجموعات
-            roles: الأدوار
             last_name: اسم العائلة
             password: كلمة السر
             shipping_address: عنوان الشحن
@@ -122,23 +114,15 @@ sylius:
         product_association:
             product: المنتجات المرتبط بها
             type: أنواع الرابطة
-        product_association_type:
-            name: الاسم
         promotion_filter:
             products: فلتر المنتج
             taxons: فلتر تاكسون
         promotion_rule:
             customer_group:
                 group: مجموعة العميل
-            has_taxon:
-                taxons: تاكسونس
-            product:
-                products: المنتجات
             total_of_items_from_taxon:
                 taxon: تاكسون
                 amount: القيمة
-        payment_method:
-            channels: قنوات
         product_attribute:
             position: المهنة
         zone:

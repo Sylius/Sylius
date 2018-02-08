@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        code:
+            not_blank: 请输入频道编码。
+            regex: 销售渠道代码仅可以由字母、 数字、 破折号和下划线组成。
+            unique: 频道编码必须唯一。
+        name:
+            not_blank: 请输入频道名称。

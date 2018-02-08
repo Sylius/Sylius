@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Bruk annen adresse for fakturering?
             payment_method: Betalingsmetode
             shipping_method: Fraktalternativ
-        promotion:
-            channels: Kanaler
-        promotion_action:
-            add_product_configuration:
-                product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Bruksgrense for hver kunde
         group:
@@ -41,7 +36,6 @@ sylius:
             taxonomies: Kategorisering
             theme: Tema
         image:
-            type: Type
             file: Bilde
         locale:
             code: Kode
@@ -54,51 +48,26 @@ sylius:
             total_to: Til
             payment_state: Betalingsstatus
             channel: Alle kanaler
-        page:
-            body: Kropp
-            id: ID
-            title: Tittel
         product:
-            images: Bilder
             restricted_zone: Begrenset sone
             short_description: Kort beskrivelse
             variant_selection_method: Metode for valg av variant
             main_taxon: Hoved taksonomi
-            channels: Kanaler
-            enabled: Aktivert
-        product_filter:
-            name: Navn
-            code: Kode
         product_variant:
             tax_category: Skattekategori
-            shipping_category: Fraktkategori
         shipment_filter:
-            created_at_from: Fra
-            created_at_to: Til
             number: Ordrenummer
             shipping_address: Leveringsadresse
-            channel: Alle kanaler
         payment_filter:
-            created_at_from: Fra
-            created_at_to: Til
-            number: Ordrenummer
             billing_address: Faktura adresse
-            channel: Alle kanaler
         shipping_method:
             zone: Sone
         taxon:
-            code: Kode
-            file: Velg bilde
-            images: Bilder
-        taxonomy:
             file: Velg bilde
         user:
             billing_address: Fakturaadresse
-            different_billing_address: Bruk annen adresse for fakturering?
-            enabled: Aktivert
             first_name: Fornavn
             groups: Grupper
-            roles: Roller
             last_name: Etternavn
             password: Passord
             shipping_address: Leveringsadresse
@@ -122,25 +91,14 @@ sylius:
         product_association:
             product: Relatert produkt
             type: Relasjonstype
-        product_association_type:
-            name: Navn
         promotion_filter:
             products: Produktfilter
             taxons: Taksonomi filter
         promotion_rule:
             customer_group:
                 group: Kundegruppe
-            has_taxon:
-                taxons: Taksonomier
-            product:
-                products: Produkter
             total_of_items_from_taxon:
                 taxon: Taksonomi
-                amount: Antall
-        payment_method:
-            channels: Kanaler
-        product_attribute:
-            position: Plassering
         zone:
             scopes:
                 shipping: Frakt

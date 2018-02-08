@@ -6,7 +6,6 @@ sylius:
         currency:
             base: Standardvaluta
             code: Navn
-            enabled: Aktivert
             exchange_rate: Valutakurs
         exchange_rate:
             source_currency: Fra valuta

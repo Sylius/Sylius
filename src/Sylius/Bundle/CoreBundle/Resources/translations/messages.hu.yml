@@ -14,17 +14,11 @@ sylius:
                 different_billing_address: A számlázási címe különbözik a megadott címtől?
             payment_method: Fizetési mód
             shipping_method: Szállítási mód
-        promotion:
-            channels: Csatornák
-        promotion_action:
-            add_product_configuration:
-                product: Termék
         group:
             name: Név
             roles: Szerepek
         channel:
             currencies: Pénznemek
-            currency_base: Alapértelmezett pénznem
             hostname: Hoszt neve
             locale_default: Alapértelmezett nyelv
             locales: Területi beállítások
@@ -35,7 +29,6 @@ sylius:
             taxonomies: Taxonómiák
             theme: Téma
         image:
-            type: Típus
             file: Kép
         locale:
             code: Kód
@@ -53,19 +46,14 @@ sylius:
             id: Azonosító
             title: Cím
         product:
-            images: Képek
             restricted_zone: Tiltott zóna
             short_description: Rövid leírás
             variant_selection_method: Változat kiválasztási módszer
             main_taxon: Fő taxonómia
-            channels: Csatornák
-            enabled: Engedélyezve
         product_filter:
             name: Név
-            code: Kód
         product_variant:
             tax_category: ÁFA-kategória
-            shipping_category: Szállítási kategória
         shipment_filter:
             created_at_from: '-tól'
             created_at_to: '-ig'
@@ -73,17 +61,11 @@ sylius:
             shipping_address: Szállítás erre a névre
             channel: Minden csatorna
         payment_filter:
-            created_at_from: '-tól'
-            created_at_to: '-ig'
-            number: Rendelés azonosítója
             billing_address: Számlázási név
-            channel: Minden csatorna
         shipping_method:
             zone: Zóna
         taxon:
-            code: Kód
             file: Kép kiválasztása
-            images: Képek
         taxonomy:
             file: Kép kiválasztása
         user:
@@ -92,7 +74,6 @@ sylius:
             enabled: Engedélyezve
             first_name: Keresztnév
             groups: Csoportok
-            roles: Szerepek
             last_name: Vezetéknév
             password: Jelszó
             shipping_address: Szállítási cím
@@ -115,19 +96,9 @@ sylius:
         product_association:
             product: Kapcsolódó termék
             type: Kapcsolódó típus
-        product_association_type:
-            name: Név
         promotion_rule:
-            product:
-                products: Termékek
             total_of_items_from_taxon:
                 taxon: Taxonómia
-        payment_method:
-            channels: Csatornák
-        zone:
-            scopes:
-                shipping: Szállítás
-                tax: Adó
     installer:
         extensions:
             header: kiegészítők

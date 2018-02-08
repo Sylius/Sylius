@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    menu:
+        shop:
+            account:
+                address_book: '通訊錄'
+                change_password: '更改密碼'
+                dashboard: '後台管理'
+                header: '您的帳戸'
+                order_history: '訂單記錄'
+                personal_information: '個人資訊'

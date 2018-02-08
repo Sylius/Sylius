@@ -27,7 +27,6 @@ sylius:
         channel:
             contact_email: Kontakt e-post
             currencies: Valutor
-            currency_base: Basvaluta
             account_verification_required: Krävs kontoverifiering?
             hostname: Värdnamn
             locale_default: Standardspråk
@@ -41,7 +40,6 @@ sylius:
             taxonomies: Taxonomier
             theme: Tema
         image:
-            type: Typ
             file: Bild
         locale:
             code: Kod
@@ -54,21 +52,14 @@ sylius:
             total_to: Till
             payment_state: Betalningsstatus
             channel: Alla kanaler
-        page:
-            body: Brödtext
-            id: ID
-            title: Titel
         product:
-            images: Bilder
             restricted_zone: Begränsat område
             short_description: Kort beskrivning
             variant_selection_method: Metod för val av variant
             main_taxon: Huvudsaklig taxon
             channels: Kanaler
-            enabled: Aktiverad
         product_filter:
             name: Namn
-            code: Kod
         product_variant:
             tax_category: Momskategori
         shipment_filter:
@@ -76,19 +67,12 @@ sylius:
             created_at_to: Till
             number: Beställningsnummer
             shipping_address: Skickas till
-            channel: Alla kanaler
         payment_filter:
-            created_at_from: Från
-            created_at_to: Till
-            number: Beställningsnummer
             billing_address: Namn på faktura
-            channel: Alla kanaler
         shipping_method:
             zone: Zon
         taxon:
-            code: Kod
             file: Välj bild
-            images: Bilder
         taxonomy:
             file: Välj bild
         user:
@@ -97,7 +81,6 @@ sylius:
             enabled: Aktiverad
             first_name: Förnamn
             groups: Grupper
-            roles: Roller
             last_name: Efternamn
             password: Lösenord
             shipping_address: Leveransadress
@@ -121,29 +104,17 @@ sylius:
         product_association:
             product: Tillhörande produkt
             type: Associationstyp
-        product_association_type:
-            name: Namn
         promotion_filter:
             products: Produktfilter
             taxons: Taxons filter
         promotion_rule:
             customer_group:
                 group: Kundgrupp
-            has_taxon:
-                taxons: Taxa
-            product:
-                products: Produkter
             total_of_items_from_taxon:
                 taxon: Taxon
                 amount: Antal
-        payment_method:
-            channels: Kanaler
         product_attribute:
             position: Position
-        zone:
-            scopes:
-                shipping: Leverans
-                tax: Skatt
     installer:
         extensions:
             header: tillägg
@@ -177,7 +148,6 @@ sylius:
             exists: tillgängligt
             logs:
                 header: loggar
-                help: "För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: ej tillgängligt
             not_writable: ej skrivbart
             parameters:
