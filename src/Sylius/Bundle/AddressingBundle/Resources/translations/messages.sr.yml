@@ -21,7 +21,6 @@ sylius:
         province:
             name: Име
             abbreviation: Скраћеница
-            select: Изаберите
         zone:
             add_member: Додајте члана
             members: Чланови
@@ -29,10 +28,6 @@ sylius:
             type: Тип
             types:
                 country: Земља
-                province: Провинција
                 zone: Зона
             scope: Обухват
-            select: Изаберите
             select_scope: Изабери обухват
-        zone_member:
-            select: Изаберите

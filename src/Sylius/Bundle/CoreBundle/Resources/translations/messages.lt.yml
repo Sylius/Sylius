@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Naudoti kitą adresą apmokėjimui?
             payment_method: Apmokėjimo būdas
             shipping_method: Pristatymo būdas
-        promotion:
-            channels: Kanalai
-        promotion_action:
-            add_product_configuration:
-                product: Produktas
         promotion_coupon:
             per_customer_usage_limit: Kliento naudojimosi ribos
         group:
@@ -41,7 +36,6 @@ sylius:
             taxonomies: Taksonomijos
             theme: Tema
         image:
-            type: Tipas
             file: Paveikslėlis
         locale:
             code: Kodas
@@ -54,51 +48,28 @@ sylius:
             total_to: Iki
             payment_state: Apmokėjimo būsena
             channel: Visi kanalai
-        page:
-            body: Turinys
-            id: ID
-            title: Pavadinimas
         product:
-            images: Paveikslėliai
             restricted_zone: Apribota zona
             short_description: Trumpas aprašymas
             variant_selection_method: Varianto pasirinkimo būdas
             main_taxon: Pagrindinis taksonas
-            channels: Kanalai
-            enabled: Įjungta
-        product_filter:
-            name: Pavadinimas
-            code: Kodas
         product_variant:
             tax_category: Mokesčių kategorija
-            shipping_category: Pristatymo kategorija
         shipment_filter:
-            created_at_from: Nuo
-            created_at_to: Iki
             number: Užsakymo numeris
             shipping_address: Pristatyti vardu
-            channel: Visi kanalai
         payment_filter:
-            created_at_from: Nuo
-            created_at_to: Iki
-            number: Užsakymo numeris
             billing_address: Mokėtojo pavadinimas
-            channel: Visi kanalai
         shipping_method:
             zone: Zona
         taxon:
-            code: Kodas
             file: Pasirinkite paveikslėlį
-            images: Paveikslėliai
         taxonomy:
             file: Pasirinkite paveikslėlį
         user:
             billing_address: Mokėtojo adresas
-            different_billing_address: Naudoti kitą adresą apmokėjimui?
-            enabled: Įjungta
             first_name: Vardas
             groups: Grupės
-            roles: Rolės
             last_name: Pavardė
             password: Slaptažodis
             shipping_address: Pristatymo adresas
@@ -122,23 +93,14 @@ sylius:
         product_association:
             product: Susijusi prekė
             type: Sąryšio tipas
-        product_association_type:
-            name: Pavadinimas
         promotion_filter:
             products: Produktų filtras
             taxons: Taksonų filtras
         promotion_rule:
             customer_group:
                 group: Klientų grupė
-            has_taxon:
-                taxons: Taksonai
-            product:
-                products: Prekės
             total_of_items_from_taxon:
                 taxon: Taksonas
-                amount: Suma
-        payment_method:
-            channels: Kanalai
         product_attribute:
             position: Pozicija
         zone:

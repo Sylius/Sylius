@@ -14,4 +14,3 @@ sylius:
                 new: Nueva
                 rejected: Rechazada
             submit: Guardar
-            title: Título

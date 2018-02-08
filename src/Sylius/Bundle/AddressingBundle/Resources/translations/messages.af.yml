@@ -27,6 +27,3 @@ sylius:
                 province: Provinsie
                 zone: Area
             scope: Gebied
-            select: Kies
-        zone_member:
-            select: Kies

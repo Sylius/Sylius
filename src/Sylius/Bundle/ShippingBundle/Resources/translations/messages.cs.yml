@@ -11,12 +11,9 @@ sylius:
         shipment:
             state: Stát
             states:
-                checkout: Objednat
-                pending: Čekající
                 ready: Připraven
                 shipped: Dodáno
                 returned: Vráceno
-                cancelled: Zrušeno
             tracking_code: Sledovací kód
         shipping_calculator:
             flat_rate_configuration:
@@ -24,22 +21,12 @@ sylius:
                 amount: Množství
             per_unit_rate_configuration:
                 label: Paušální sazba za položku
-                amount: Množství
-        shipping_category:
-            description: Popis
-            name: Jméno
         shipping_method:
             calculator: Kalkulačka
             category: Kategorie
             category_requirement: Požadavek kategorie
-            channels: Kanály
             configuration: Konfigurace
-            description: Popis
-            enabled: Povoleno
             match_all_category_requirement: Všechny položky musí odpovídat zvolené kategorii
             match_any_category_requirement: Alespoň 1 položka musí odpovídat zvolené kategorii
             match_none_category_requirement: Žádná položka nemusí odpovídat zvolené kategorii
-            name: Jméno
             position: Pozice
-            tax_category: Typ daně
-            translations: Překlady

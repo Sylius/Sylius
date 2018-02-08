@@ -7,7 +7,6 @@ sylius:
             account:
                 address_book: 'Adressebog'
                 change_password: 'Skift adgangskode'
-                dashboard: 'Kontrolpanel'
                 header: 'Din konto'
                 order_history: 'Ordrehistorik'
                 personal_information: 'Personlige oplysninger'

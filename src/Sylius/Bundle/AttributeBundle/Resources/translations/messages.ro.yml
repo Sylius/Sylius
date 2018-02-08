@@ -7,18 +7,13 @@ sylius:
             add: Adăugați
             add_attributes: Adaugă atribut
             choices: Opțiuni
-            code: Cod
-            name: Nume
             translations: Traduceri
-            type: Tip
         attribute_type:
             checkbox: Bifă
-            configuration: Configurare
             date: Dată
             datetime: Dată și Oră
             integer: Număr întreg
             percent: Procentaj
-            select: Selectaţi
             text: Text
             textarea: Text lung
             title: Tipuri de atribut
@@ -30,7 +25,6 @@ sylius:
                 format: Format
             select:
                 multiple: Multiple
-                values: Valori
                 choose: Alege o opțiune
                 min: Intrări minime
                 max: Intrări maxime

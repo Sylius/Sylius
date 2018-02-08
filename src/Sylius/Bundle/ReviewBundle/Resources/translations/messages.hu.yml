@@ -11,7 +11,5 @@ sylius:
             status:
                 approved: Jóváhagyott
                 label: Állapot
-                new: Új
                 rejected: Elutasított
             submit: Elküld
-            title: Cím

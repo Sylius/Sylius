@@ -7,18 +7,13 @@ sylius:
             add: Legg til
             add_attributes: Legg til produktegenskaper
             choices: Valg
-            code: Kode
-            name: Navn
             translations: Oversettelser
-            type: Type
         attribute_type:
             checkbox: Avkrysningsboks
-            configuration: Konfigurasjon
             date: Dato
             datetime: Dato og tid
             integer: Heltall
             percent: Prosent
-            select: Velg
             text: Tekst
             textarea: Tekstboks
             title: Egenskapstyper

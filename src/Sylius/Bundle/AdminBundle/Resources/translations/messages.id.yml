@@ -33,7 +33,6 @@ sylius:
                     promotions: Promosi
                 customers:
                     customers: Pelanggan
-                    groups: Kelompok
                     header: Pelanggan
                 sales:
                     header: Penjualan

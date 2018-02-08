@@ -8,7 +8,6 @@ sylius:
             group: קבוצה
             last_name: שם משפחה
             email: דואר אלקטרוני
-            phone_number: מספר טלפון
             gender: מין
             birthday: תאריך לידה
             billing_address: כתובת לחשבונית

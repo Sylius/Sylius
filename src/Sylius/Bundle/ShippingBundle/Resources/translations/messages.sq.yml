@@ -11,29 +11,17 @@ sylius:
         shipment:
             state: Shteti
             states:
-                checkout: Kontrolli
-                pending: Në pritje
                 ready: Gati
                 shipped: Dërguar
                 returned: I kthyer
-                cancelled: E fshirë
             tracking_code: Kodi i gjurmimit
         shipping_calculator:
             flat_rate_configuration:
                 label: Taksa fikse për dërgimin
             per_unit_rate_configuration:
                 label: Tarife fikse per njesi
-        shipping_category:
-            description: Përshkrimi
-            name: Emri
         shipping_method:
             calculator: Llogaritësi
             category: Kategorija
             category_requirement: Kërkesa e kategorisë
-            channels: Kanalet
             configuration: Konfigurimi
-            description: Përshkrimi
-            enabled: E aktivizuar
-            name: Emri
-            tax_category: Kategoria e taksimit
-            translations: Përkthime

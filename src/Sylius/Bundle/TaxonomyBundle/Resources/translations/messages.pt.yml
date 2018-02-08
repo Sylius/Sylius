@@ -7,5 +7,3 @@ sylius:
             description: Descrição
             name: Nome
             parent: Pai
-        taxonomy:
-            name: Nome

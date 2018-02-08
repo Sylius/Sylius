@@ -20,7 +20,6 @@ sylius:
         province:
             name: 이름
             abbreviation: 약어
-            select: 선택하기
         zone:
             add_member: 회원 추가
             members: 회원
@@ -32,7 +31,4 @@ sylius:
             scope: 범위
             scopes:
                 all: 전체
-            select: 선택하기
             select_scope: 범위를 선택하세요
-        zone_member:
-            select: 선택하기

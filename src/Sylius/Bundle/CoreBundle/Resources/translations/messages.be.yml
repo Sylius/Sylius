@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Выкарыстоўваць іншы адрас для аплаты?
             payment_method: Метад аплаты
             shipping_method: Метад дастаўкі
-        promotion:
-            channels: Каналы
-        promotion_action:
-            add_product_configuration:
-                product: Тавар
         promotion_coupon:
             per_customer_usage_limit: Ліміт карыстання на кліента
         group:
@@ -41,7 +36,6 @@ sylius:
             taxonomies: Катэгорыі
             theme: Тэма
         image:
-            type: Тып
             file: малюнак
         locale:
             code: Код
@@ -59,19 +53,14 @@ sylius:
             id: ID
             title: Назва
         product:
-            images: Малюнкі
             restricted_zone: Забароненая зона
             short_description: Кароткае апісанне
             variant_selection_method: Метад выбару варыянта
             main_taxon: Галоўная катэгорыя
-            channels: Каналы
-            enabled: Уключана
         product_filter:
             name: Імя
-            code: Код
         product_variant:
             tax_category: Катэгорыя падатку
-            shipping_category: Катэгорыя дастаўкі
         shipment_filter:
             created_at_from: З
             created_at_to: Да
@@ -79,17 +68,12 @@ sylius:
             shipping_address: Даставіць на імя
             channel: Усе каналы
         payment_filter:
-            created_at_from: З
-            created_at_to: Да
-            number: Нумар замовы
             billing_address: Рахунак на імя
             channel: Усе каналы
         shipping_method:
             zone: Зона
         taxon:
-            code: Код
             file: Выберыце малюнак
-            images: Малюнкі
         taxonomy:
             file: Выберыце малюнак
         user:
@@ -98,7 +82,6 @@ sylius:
             enabled: Уключана
             first_name: Імя
             groups: Групы
-            roles: Ролі
             last_name: Прозвішча
             password: Пароль
             shipping_address: Адрас дастаўкі
@@ -122,8 +105,6 @@ sylius:
         product_association:
             product: Звязаны прадукт
             type: Тып узаемасувязі
-        product_association_type:
-            name: Імя
         promotion_filter:
             products: Фільтр прадуктаў
             taxons: Фільтр катэгорый
@@ -132,13 +113,8 @@ sylius:
                 group: Група кліентаў
             has_taxon:
                 taxons: Катэгорыі
-            product:
-                products: Прадукты
             total_of_items_from_taxon:
                 taxon: Катэгорыя
-                amount: Сума
-        payment_method:
-            channels: Каналы
         product_attribute:
             position: Пазіцыя
         zone:

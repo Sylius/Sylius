@@ -3,8 +3,6 @@
 
 sylius:
     form:
-        gateway_config:
-            type: Tipo
         gateway_configuration:
             paypal:
                 password: Contraseña de API
@@ -15,7 +13,6 @@ sylius:
                 publishable_key: Llave pública
                 secret_key: Llave secreta
     payum_gateway_factory:
-        offline: Desconectado
         paypal_express_checkout: Pago con Paypal Express
         stripe_checkout: Pago con Stripe
     payum_action:

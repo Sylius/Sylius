@@ -4,8 +4,4 @@
 sylius:
     form:
         taxon:
-            description: Përshkrimi
-            name: Emri
             parent: Prind
-        taxonomy:
-            name: Emri

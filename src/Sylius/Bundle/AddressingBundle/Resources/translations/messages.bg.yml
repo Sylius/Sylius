@@ -36,7 +36,4 @@ sylius:
             scope: Oбсег
             scopes:
                 all: Всички
-            select: Изберете
             select_scope: Изберете обхват
-        zone_member:
-            select: Изберете

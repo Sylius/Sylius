@@ -8,18 +8,7 @@ sylius:
             add_action: Dodajte dejanje
             add_rule: Dodajte pravilo
             coupon_based: Kupon, ki temelji
-            description: Opis
             ends_at: Konča se na
             exclusive: Izključno
-            name: Ime
-            priority: Prednost
             rules: Pravila
             starts_at: Se začne pri
-        promotion_action:
-            type: Vrsta
-        promotion_rule:
-            cart_quantity_configuration:
-                count: Število
-            shipping_country_configuration:
-                country: Država
-            type: Vrsta

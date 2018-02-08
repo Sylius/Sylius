@@ -23,7 +23,6 @@ sylius:
         province:
             name: Nimi
             abbreviation: Lyhenne
-            select: Valitse
         zone:
             add_member: Lisää jäsen
             members: Jäsenet
@@ -31,12 +30,6 @@ sylius:
             type: Tyyppi
             types:
                 country: Maa
-                province: Lääni
                 zone: Alue
             scope: Alue
-            scopes:
-                all: Kaikki
-            select: Valitse
             select_scope: Valitse alue
-        zone_member:
-            select: Valitse

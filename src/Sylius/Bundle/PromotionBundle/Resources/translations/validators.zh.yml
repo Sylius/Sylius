@@ -1,0 +1,43 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    promotion:
+        code:
+            unique: 促销编号已存在。
+            regex: 促销代码仅可以由字母、 数字、 破折号和下划线组成。
+            not_blank: 请输入促销代码。
+        description:
+            max_length: 促销描述必须不会超过 1 个字符。 |促销描述不能超过 {{ limit }} 个字符。
+            min_length: 产品描述必须是至少 1 个字符长。 |产品描述必须至少 {{ limit }} 个字符长。
+            not_blank: 请输入促销的描述。
+        end_date_cannot_be_set_prior_start_date: 结束日期不能超过开始日期。
+        name:
+            max_length: 选项名称的长度必须超过 1 个字符。 |选项名称的长度不能超过 {{ limit }} 字符。
+            min_length: 促销名称必须是至少 1 个字符长。 |促销名称必须至少 {{ limit }} 个字符长。
+            not_blank: 请输入促销名称。
+    promotion_action:
+        percentage_discount_configuration:
+            min: 百分比折扣值必须至少为 0%。
+            max: 百分比折扣的最大值是 100%。
+    promotion_coupon:
+        code:
+            max_length: 优惠券代码必须不能超过 1 个字符。 |优惠券代码必须不能超过 {{ limit }} 个字符。
+            min_length: 优惠券代码必须至少 1 个字符长。 |优惠券代码必须至少 {{ limit }} 个字符长。
+            not_blank: 请输入优惠券代码。
+            regex: 优惠券代码仅可以由字母、 数字、 破折号和下划线组成。
+            unique: 此优惠券已存在。
+        is_invalid: 优惠券代码是无效的。
+        usage_limit:
+            min: 优惠券使用限制必须至少 {{ limit }}。
+    promotion_coupon_generator_instruction:
+        amount:
+            min: 待生成的优惠券数量必须至少为 {{ limit }}。
+            not_blank: 请输入想要生成的优惠券的数量。
+        code_length:
+            min: 优惠券代码必须至少 {{ limit }} 个字符长。
+            max: 优惠券代码必须不能超过 {{ limit }} 个字符。
+            not_blank: 优惠券代码不能为空。
+        possible_generation_amount: 无效的优惠券代码长度或优惠券金额。无法生成代码长度等于 %codeLength% 数量为%expectedAmount% 的优惠券。建议的数量是 %possibleAmount%。
+        usage_limit:
+            min: 生成的优惠券必须至少使用 {{ limit }} 次。

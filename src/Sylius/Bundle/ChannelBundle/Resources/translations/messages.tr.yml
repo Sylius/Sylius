@@ -5,7 +5,4 @@ sylius:
     form:
         channel:
             color: Renk
-            description: Açıklama
-            enabled: Etkin
-            name: Ad
             url: Url

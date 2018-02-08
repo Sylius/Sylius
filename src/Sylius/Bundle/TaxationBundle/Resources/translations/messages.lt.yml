@@ -4,11 +4,9 @@
 sylius:
     form:
         tax_category:
-            name: Pavadinimas
             description: Aprašymas
         tax_rate:
             category: Kategorija
-            name: Pavadinimas
             amount: Suma
             included_in_price: Įeina į kainą?
             calculator: Skaičiuoklė

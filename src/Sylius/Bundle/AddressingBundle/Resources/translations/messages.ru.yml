@@ -19,7 +19,6 @@ sylius:
             name: Страна
             provinces: Области
             select: Выбрать
-            enabled: Активен
         province:
             name: Округ
             abbreviation: Аббревиатура
@@ -34,9 +33,4 @@ sylius:
                 province: Область
                 zone: Зона
             scope: Область
-            scopes:
-                all: Все
-            select: Выбрать
             select_scope: Выберите область
-        zone_member:
-            select: Выбрать

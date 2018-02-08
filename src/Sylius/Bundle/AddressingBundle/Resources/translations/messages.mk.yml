@@ -29,7 +29,4 @@ sylius:
                 province: Регион
                 zone: Зона
             scope: Опсег
-            select: Изберете
             select_scope: Изберете опсег
-        zone_member:
-            select: Изберете

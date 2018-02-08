@@ -23,7 +23,6 @@ sylius:
         province:
             name: Nimi
             abbreviation: Lühend
-            select: Vali
         zone:
             add_member: Lisa liige
             members: Liikmed
@@ -31,12 +30,8 @@ sylius:
             type: Tüüp
             types:
                 country: Riik
-                province: Provints
                 zone: Tsoon
             scope: Ulatus
             scopes:
                 all: Kõik
-            select: Vali
             select_scope: Valige
-        zone_member:
-            select: Vali

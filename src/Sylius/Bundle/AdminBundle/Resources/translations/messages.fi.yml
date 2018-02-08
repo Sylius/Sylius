@@ -6,16 +6,13 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: Yhteystyypit
                     attributes: Ominaisuudet
                     header: Luettelo
                     options: Asetukset
                     products: Tuotteet
                     taxons: Veroryhmät
                 configuration:
-                    admin_users: Ylläpitäjät
                     channels: Kanavat
-                    countries: Maat
                     currencies: Valuutat
                     header: Asetukset
                     locales: Alueet

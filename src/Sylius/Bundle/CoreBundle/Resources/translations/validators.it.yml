@@ -8,8 +8,6 @@ sylius:
         default_locale:
             not_blank: Inserisci le impostazioni internazionali predefinite del canale.
         contact_email:
-            invalid: Questa e-mail non è valida.
-            max: L'e-mail non dovrebbe contenere più di {{ limit }} caratteri.
             min: L'e-mail dovrebbe contenere almeno {{ limit }} caratteri.
     channel_pricing:
         price:
@@ -19,9 +17,6 @@ sylius:
         shipping_method:
             not_blank: Si prega di scegliere un metodo di spedizione.
     contact:
-        email:
-            invalid: Questa e-mail non è valida.
-            not_blank: Inserisci la tua email.
         message:
             not_blank: Inserisci il tuo messaggio.
     currency:
@@ -77,16 +72,10 @@ sylius:
     product_translation:
         short_description:
             max: La descrizione breve non deve superare i {{ limit }} caratteri.
-    taxon_image:
-        file:
-            max_size: L'immagine è troppo grande - {{ size }}{{ suffix }}. La dimensione massima consentita è {{ limit }}{{ suffix }}.
-            upload_ini_size: L'immagine è troppo grande. La dimensione massima consentita è {{ limit }}{{ suffix }}.
     user:
         email:
-            unique: Questa e-mail è già in uso.
             min: L'indirizzo email deve essere di almeno {{ min }} caratteri.
             max: L'indirizzo email deve essere al massimo {{ max }} caratteri.
-            invalid: Questa e-mail non è valida.
         username:
             unique: Questo nome utente è già utilizzato.
             not_blank: Inserisci il tuo nome.

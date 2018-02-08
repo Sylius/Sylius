@@ -4,9 +4,4 @@
 sylius:
     form:
         taxon:
-            description: Keterangan
-            name: Nama
             parent: Induk
-            slug: Slug
-        taxonomy:
-            name: Nama

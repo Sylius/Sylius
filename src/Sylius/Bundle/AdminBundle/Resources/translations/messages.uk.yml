@@ -6,11 +6,8 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: Типи асоціювання
                     attributes: Атрибути
                     header: Каталог
-                    inventory: Інвентаризація
-                    options: Опції
                     products: Продукція
                     taxons: Таксони
                 configuration:
@@ -18,7 +15,6 @@ sylius:
                     channels: Канали
                     countries: Країни
                     currencies: Валюти
-                    exchange_rates: Обмінний курс
                     header: Конфігурація
                     locales: Локалі
                     payment_methods: Методи оплати
@@ -33,7 +29,6 @@ sylius:
                     promotions: Промоції
                 customers:
                     customers: Клієнти
-                    groups: Групи
                     header: Клієнт
                 sales:
                     header: Продажі

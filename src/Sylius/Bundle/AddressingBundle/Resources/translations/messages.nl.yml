@@ -13,13 +13,11 @@ sylius:
             postcode: Postcode
             street: Straat
             province: Provincie
-            zone: Zone
         country:
             add_province: Provincie toevoegen
             name: Naam
             provinces: Provincies
             select: Selecteer
-            enabled: Toegestaan
         province:
             name: Naam
             abbreviation: Afkorting
@@ -34,9 +32,4 @@ sylius:
                 province: Provincie
                 zone: Zone
             scope: Bereik
-            scopes:
-                all: Alles
-            select: Selecteer
             select_scope: Selecteer bereik
-        zone_member:
-            select: Selecteer

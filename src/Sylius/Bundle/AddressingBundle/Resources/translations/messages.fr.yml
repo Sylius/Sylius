@@ -13,13 +13,11 @@ sylius:
             postcode: Code postal
             street: Voie
             province: Région
-            zone: Zone
         country:
             add_province: Ajouter une région
             name: Nom
             provinces: Etat
             select: Sélectionner
-            enabled: Activé
         province:
             name: Nom
             abbreviation: Abréviation
@@ -34,9 +32,4 @@ sylius:
                 province: Région
                 zone: Zone
             scope: Champ d'application
-            scopes:
-                all: Tous
-            select: Sélectionner
             select_scope: Sélectionnez le champ d'application
-        zone_member:
-            select: Sélectionner

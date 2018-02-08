@@ -16,7 +16,6 @@ sylius:
             configuration: Asetukset
             date: Päivämäärä
             datetime: Päivämäärä ja aika
-            select: Valitse
         attribute_type_configuration:
             text:
                 min: Minimipituus

@@ -3,12 +3,8 @@
 
 sylius:
     form:
-        tax_category:
-            name: Jméno
-            description: Popis
         tax_rate:
             category: Kategorie
-            name: Jméno
             amount: Částka
             included_in_price: Zahrnuto v ceně?
             calculator: Kalkulačka

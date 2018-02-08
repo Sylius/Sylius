@@ -8,7 +8,6 @@ sylius:
         default_locale:
             not_blank: Molimo unesite osnovni jezik za ovaj kanal.
         contact_email:
-            invalid: Ovaj e-mail nije valjan.
             max: Email adresa se ne može sastojati s više od {{ limit }} znakova.
             min: Email adresa mora imati barem {{ limit }} znakova.
     channel_pricing:
@@ -19,9 +18,6 @@ sylius:
         shipping_method:
             not_blank: Molimo odaberite metodu dostave.
     contact:
-        email:
-            invalid: Ovaj e-mail nije valjan.
-            not_blank: Molimo unesite vašu email adresu.
         message:
             not_blank: Molimo unesite svoju poruku.
     currency:
@@ -74,16 +70,11 @@ sylius:
     product_translation:
         short_description:
             max: Kratki opis ne smije biti duži od {{ limit }} znakova.
-    taxon_image:
-        file:
-            max_size: Slika je previše velika -{{ size }}{{ suffix }}. Maksimalna dozvoljena veličina je {{ limit }}{{ suffix }}.
-            upload_ini_size: Slika je previše velika. Maksimalna dozvoljena veličina je {{ limit }}{{ suffix }}.
     user:
         email:
             unique: Ova email adresa je trenutno zauzeta.
             min: Email adresa mora imati barem {{ min }} znakova.
             max: Email adresa ne smije imati više od {{ max }} znakova.
-            invalid: Ovaj e-mail nije valjan.
         username:
             unique: Ovo korisničko ime je zauzeto.
             not_blank: Molimo unesite vaše korisničko ime.

@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
             payment_method: วิธีการชำระเงิน
             shipping_method: วิธีการจัดส่ง
-        promotion:
-            channels: ช่องทางจำหน่าย
-        promotion_action:
-            add_product_configuration:
-                product: สินค้า
         promotion_coupon:
             per_customer_usage_limit: จำกัดการใช้งานสำหรับลูกค้าแต่ละคน
         group:
@@ -27,7 +22,6 @@ sylius:
         channel:
             contact_email: ติดต่ออีเมล์
             currencies: สกุลเงิน
-            currency_base: ฐานสกุลเงิน
             account_verification_required: จำเป็นต้องยืนยันบัญชีหรือไม่?
             hostname: Hostname
             locale_default: ตำแหน่งที่ตั้งเริ่มต้น
@@ -41,7 +35,6 @@ sylius:
             taxonomies: การจัดประเภท
             theme: ธีม
         image:
-            type: ชนิด
             file: รูปภาพ
         locale:
             code: รหัส
@@ -54,24 +47,15 @@ sylius:
             total_to: ถึง
             payment_state: สถานะการชำระเงิน
             channel: ทุกช่องทาง
-        page:
-            body: Body
-            id: ID
-            title: หัวข้อ
         product:
-            images: ภาพ
             restricted_zone: จำกัดโซน
             short_description: คำอธิบายโดยย่อ
             variant_selection_method: วิธีการเลือกตัวแปร
             main_taxon: หมวดหมู่หลัก
-            channels: ช่องทางจำหน่าย
-            enabled: เปิดใช้งานแล้ว
         product_filter:
             name: ชื่อ
-            code: รหัส
         product_variant:
             tax_category: ประเภทภาษี
-            shipping_category: ประเภทการจัดส่ง
         shipment_filter:
             created_at_from: จาก
             created_at_to: ถึง
@@ -79,17 +63,11 @@ sylius:
             shipping_address: ส่งให้กับ
             channel: ทุกช่องทาง
         payment_filter:
-            created_at_from: จาก
-            created_at_to: ถึง
-            number: หมายเลขคำสั่งซื้อ
             billing_address: ใบกำกับภาษี ถึง
-            channel: ทุกช่องทาง
         shipping_method:
             zone: โซน
         taxon:
-            code: รหัส
             file: เลือกรูปภาพ
-            images: ภาพ
         taxonomy:
             file: เลือกรูปภาพ
         user:
@@ -98,7 +76,6 @@ sylius:
             enabled: เปิดใช้งานแล้ว
             first_name: ชื่อ
             groups: กลุ่ม
-            roles: Roles
             last_name: นามสกุล
             password: รหัสผ่าน
             shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
@@ -122,29 +99,14 @@ sylius:
         product_association:
             product: สินค้าที่เกี่ยวข้อง
             type: ชนิดสินค้าที่เกี่ยวข้อง
-        product_association_type:
-            name: ชื่อ
         promotion_filter:
             products: ตัวกรองสินค้า
             taxons: ตัวกรอง taxons
         promotion_rule:
             customer_group:
                 group: กลุ่มลูกค้า
-            has_taxon:
-                taxons: การจัดหมวดหมู่
-            product:
-                products: สินค้า
             total_of_items_from_taxon:
                 taxon: หมวดหมู่
-                amount: ยอดเงิน
-        payment_method:
-            channels: ช่องทางจำหน่าย
-        product_attribute:
-            position: ตำแหน่ง
-        zone:
-            scopes:
-                shipping: จัดส่ง
-                tax: ภาษี
     installer:
         extensions:
             header: ส่วนขยาย
@@ -178,7 +140,6 @@ sylius:
             exists: exists
             logs:
                 header: บันทึก
-                help: "ตั้งค่า permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: not exists
             not_writable: not writable
             parameters:

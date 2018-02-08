@@ -5,7 +5,4 @@ sylius:
     form:
         channel:
             color: Kleur
-            description: Omschrijving
-            enabled: Toegestaan
-            name: Naam
             url: URL

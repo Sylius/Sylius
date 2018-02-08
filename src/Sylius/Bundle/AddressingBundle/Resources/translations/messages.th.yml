@@ -13,7 +13,6 @@ sylius:
             postcode: รหัสไปรษณีย์
             street: ถนน
             province: จังหวัด
-            zone: โซน
         country:
             add_province: เพิ่มจังหวัด
             name: ชื่อ
@@ -34,9 +33,4 @@ sylius:
                 province: จังหวัด
                 zone: โซน
             scope: Scope
-            scopes:
-                all: ทั้งหมด
-            select: เลือก
             select_scope: เลือกขอบเขต
-        zone_member:
-            select: เลือก

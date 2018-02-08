@@ -6,20 +6,14 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: Tipovi poveznica
                     attributes: Značajke proizvoda
                     header: Katalog
-                    inventory: Skladište
-                    options: Opcije
                     products: Proizvodi
                 configuration:
                     admin_users: Administratori
                     channels: Kanali
-                    countries: Države
                     currencies: Valute
                     exchange_rates: Tečajne liste
-                    header: Postavke
-                    locales: Lokaliteti
                     payment_methods: Načini plaćanja
                     shipping_categories: Kategorije pošiljki
                     shipping_methods: Načini slanja
@@ -28,11 +22,9 @@ sylius:
                     zones: Regije
                 marketing:
                     header: Marketing
-                    product_reviews: Recenzije proizvoda
                     promotions: Promocije
                 customers:
                     customers: Kupci
-                    groups: Grupe
                     header: Kupac
                 sales:
                     header: Prodaja

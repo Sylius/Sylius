@@ -1,0 +1,65 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    address:
+        city:
+            max_length: 城市名称不能超过 255 个字符。
+            min_length: 城市必须至少 2 个字符长。
+            not_blank: 请输入城市。
+        country:
+            not_blank: 请选择国家。
+            disabled: 该国家已被禁用，请重新选择。
+        first_name:
+            max_length: 名字不能超过 255 个字符。
+            min_length: 名字必须是至少 2 个字符长。
+            not_blank: 请输入名字。
+        last_name:
+            max_length: 姓氏不能超过 255 个字符。
+            min_length: 姓氏必须是至少 2 个字符长。
+            not_blank: 请输入姓氏。
+        postcode:
+            max_length: 邮政编码不能超过 255 个字符。
+            min_length: 邮政编码必须是至少 2 个字符长。
+            not_blank: 请输入邮政编码。
+        province:
+            valid: 请选择正确的省。
+        street:
+            max_length: 街道名不能超过 255 个字符。
+            min_length: 街道名必须至少 2 个字符长。
+            not_blank: 请输入街道。
+        not_shippable: 此地址不是一个有效的送货目的地。
+    country:
+        code:
+            not_blank: 请输入国家的 ISO 代码。
+            regex: Code仅可以由字母、 数字、 破折号和下划线。
+            unique: 国家 ISO 代码必须是唯一的。
+    province:
+        code:
+            min_length: 省代码必须至少 5 个字符长|省代码必须至少 5 个字符长。
+            not_blank: 请输入省代码。
+            regex: 省代码应具有以下格式 XX-XX （例如US-FL）。
+            unique: 省代码必须是唯一的。
+        name:
+            max_length: 省名不能超过 255 个字符。
+            min_length: 省名必须是至少 2 个字符长。
+            not_blank: 请输入省名。
+            unique: 省名称必须是唯一的。
+    zone:
+        scope:
+            not_blank: 请输入范围。
+        code:
+            not_blank: 请输入区号。
+            regex: 区域代码仅可以由字母、数字、破折号和下划线组成
+            unique: 区域编码必须是唯一的。
+        members:
+            min_count: 请至少添加 {{limit}} 区成员。
+        name:
+            max_length: 区域名称不能超过 255 个字符。
+            min_length: 区域名称必须是至少 2 个字符长
+            not_blank: 请输入区域名称。
+    zone_member:
+        code:
+            not_blank: 请选择一个区成员。
+            regex: 区域成员代码只能由字母、数字、破折号和下面组成。
+        unique: 该区成员已被使用。

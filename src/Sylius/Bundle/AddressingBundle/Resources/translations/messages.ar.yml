@@ -36,7 +36,4 @@ sylius:
             scope: نطاق
             scopes:
                 all: الكل
-            select: اختر
             select_scope: اختر النطاق
-        zone_member:
-            select: اختر

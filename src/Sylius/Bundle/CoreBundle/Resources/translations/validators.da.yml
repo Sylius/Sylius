@@ -21,7 +21,6 @@ sylius:
     contact:
         email:
             invalid: Denne email er ugyldig.
-            not_blank: Indtast venligst din email.
         message:
             not_blank: Indtast venligst din besked.
     currency:
@@ -77,10 +76,6 @@ sylius:
     product_translation:
         short_description:
             max: Den korte beskrivelse må ikke være længere end {{ limit }} tegn.
-    taxon_image:
-        file:
-            max_size: Billedet er for stort - {{ size }}{{ suffix }}. Maksimalt tilladte størrelse er {{ limit }}{{ suffix }}.
-            upload_ini_size: Billedet er for stort. Maksimalt tilladte størrelse er {{ limit }}{{ suffix }}.
     user:
         email:
             unique: Denne e-mail er allerede i brug.

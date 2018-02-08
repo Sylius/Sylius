@@ -13,7 +13,6 @@ sylius:
             postcode: Cod poștal
             street: Stradă
             province: Județ
-            zone: Zonă
         country:
             add_province: Adăugare județ
             name: Nume
@@ -34,8 +33,6 @@ sylius:
                 province: Județ
                 zone: Zonă
             scope: Domeniul de aplicare
-            scopes:
-                all: Tot
             select: Selectaţi
             select_scope: Selectaţi domeniul de aplicare
         zone_member:
