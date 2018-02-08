@@ -14,7 +14,6 @@ sylius:
             amount: Jumlah pembayaran
             method: Metode pembayaran
             state:
-                header: Tahap pembayaran
                 checkout: Checkout
                 completed: Selesai
                 authorized: Terotrisasi
@@ -30,5 +29,4 @@ sylius:
             description: Keterangan
             enabled: Aktifkan?
             instructions: Petunjuk
-            name: Nama
             position: Posisi

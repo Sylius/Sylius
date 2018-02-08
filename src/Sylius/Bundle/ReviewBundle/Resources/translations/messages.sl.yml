@@ -6,6 +6,3 @@ sylius:
         review:
             author: Avtor
             comment: Komentar
-            status:
-                new: Novo
-            title: Naslov

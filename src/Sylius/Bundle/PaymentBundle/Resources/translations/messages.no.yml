@@ -14,7 +14,6 @@ sylius:
             amount: Beløp
             method: Betalingsmetode
             state:
-                header: Betalingsstatus
                 checkout: Gå til kassen
                 completed: Fullført
                 failed: Mislyktes
@@ -28,5 +27,3 @@ sylius:
         payment_method:
             description: Beskrivelse
             enabled: Aktivert?
-            name: Navn
-            position: Plassering

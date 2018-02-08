@@ -8,8 +8,6 @@ sylius:
         default_locale:
             not_blank: Voer a.u.b. een standaard taal in.
         contact_email:
-            invalid: Deze e-mail is ongeldig.
-            max: E-mail mag niet meer dan {{ limit }} karakters zijn.
             min: E-mail moet ten minste {{ limit }} karakters lang zijn.
     channel_pricing:
         price:
@@ -19,9 +17,6 @@ sylius:
         shipping_method:
             not_blank: Gelieve een verzendmethode te kiezen.
     contact:
-        email:
-            invalid: Deze e-mail is ongeldig.
-            not_blank: Vul uw e-mailadres in.
         message:
             not_blank: Voer uw bericht in.
     currency:
@@ -77,16 +72,10 @@ sylius:
     product_translation:
         short_description:
             max: Korte omschrijving mag niet meer dan {{ limit }} tekens bevatten.
-    taxon_image:
-        file:
-            max_size: De afbeelding is te groot - {{ size }}{{ suffix }}. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
-            upload_ini_size: Het beeld is te groot. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
     user:
         email:
-            unique: Dit e-mailadres is al in gebruik.
             min: E-mail moet ten minste {{ min }} tekens.
             max: E moet bij de meeste {{ max }} tekens bestaan.
-            invalid: Deze e-mail is ongeldig.
         username:
             unique: Deze gebruikersnaam is al in gebruik.
             not_blank: Voer je naam in.

@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Използвайте различен адрес за фактуриране?
             payment_method: Начин на плащане
             shipping_method: Начин на доставка
-        promotion:
-            channels: Канали
-        promotion_action:
-            add_product_configuration:
-                product: Продукт
         promotion_coupon:
             per_customer_usage_limit: Лимит за потребление на потребител
         group:
@@ -27,7 +22,6 @@ sylius:
         channel:
             contact_email: Имейл за контакт
             currencies: Валути
-            currency_base: Основна валута
             account_verification_required: Изисква се проверка на профила?
             hostname: Име на хост
             locale_default: Място по подразбиране
@@ -41,7 +35,6 @@ sylius:
             taxonomies: Категоризация
             theme: Тема
         image:
-            type: Тип
             file: Изображение
         locale:
             code: Код
@@ -54,51 +47,29 @@ sylius:
             total_to: До
             payment_state: Състояние на плащане
             channel: Всички канали
-        page:
-            body: Тяло
-            id: ИД
-            title: Заглавие
         product:
             images: Изображения
             restricted_zone: Ограничена зона
             short_description: Кратко описание
             variant_selection_method: Метод на избор на вариант
             main_taxon: Основна категория
-            channels: Канали
-            enabled: Активирано
-        product_filter:
-            name: Име
-            code: Код
         product_variant:
             tax_category: Данъчна категория
             shipping_category: Категория за доставки
         shipment_filter:
-            created_at_from: Oт
-            created_at_to: До
             number: Номер на поръчка
             shipping_address: Достави до
-            channel: Всички канали
         payment_filter:
-            created_at_from: Oт
-            created_at_to: До
-            number: Номер на поръчка
             billing_address: Адрес за фактуриране
-            channel: Всички канали
         shipping_method:
             zone: Зона
         taxon:
-            code: Код
             file: Избери изображение
             images: Изображения
-        taxonomy:
-            file: Избери изображение
         user:
             billing_address: Адрес на плащане
-            different_billing_address: Използвайте различен адрес за фактуриране?
-            enabled: Активирано
             first_name: Собствено име
             groups: Групи
-            roles: Роли
             last_name: Фамилно име
             password: Парола
             shipping_address: Адрес за доставка
@@ -122,8 +93,6 @@ sylius:
         product_association:
             product: Свързан продукт
             type: Свързан тип
-        product_association_type:
-            name: Име
         promotion_filter:
             products: Филтър по продукти
             taxons: Филтър по категории
@@ -132,13 +101,9 @@ sylius:
                 group: Клиентска група
             has_taxon:
                 taxons: Категории
-            product:
-                products: Продукти
             total_of_items_from_taxon:
                 taxon: Категория
                 amount: Сума
-        payment_method:
-            channels: Канали
         product_attribute:
             position: Позиция
         zone:
@@ -178,7 +143,6 @@ sylius:
             exists: съществува
             logs:
                 header: логове
-                help: "За да зададете разрешения стартирайте: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: не съществува
             not_writable: не е записваемо
             parameters:

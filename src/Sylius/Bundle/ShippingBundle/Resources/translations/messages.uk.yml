@@ -12,7 +12,6 @@ sylius:
             state: Стан
             states:
                 checkout: Підрахунок
-                pending: В очікуванні
                 ready: Готове
                 shipped: Доставлене
                 returned: Повернене
@@ -26,17 +25,11 @@ sylius:
                 label: Фіксована ставка за одиницю
                 amount: Сума
         shipping_category:
-            description: Опис
             name: Назва
         shipping_method:
             calculator: Калькулятор
             category: Категорія
             category_requirement: Вимоги категорії
-            channels: Канали
             configuration: Конфігурація
-            description: Опис
-            enabled: Увімкнено
             name: Назва
             position: Позиція
-            tax_category: Категорія податку
-            translations: Переклади

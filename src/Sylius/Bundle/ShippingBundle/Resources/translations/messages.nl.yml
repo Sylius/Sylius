@@ -11,12 +11,10 @@ sylius:
         shipment:
             state: Status
             states:
-                checkout: Afrekenen
                 pending: Wachtende
                 ready: Klaar
                 shipped: Verzonden
                 returned: Geretourneerd
-                cancelled: Geannuleerd
             tracking_code: Tracking Code
         shipping_calculator:
             flat_rate_configuration:
@@ -24,7 +22,6 @@ sylius:
                 amount: Hoeveelheid
             per_unit_rate_configuration:
                 label: Forfaitair bedrag per eenheid
-                amount: Hoeveelheid
         shipping_category:
             description: Omschrijving
             name: Naam
@@ -32,14 +29,9 @@ sylius:
             calculator: Calculator
             category: Categorie
             category_requirement: Categorie vereisten
-            channels: Kanalen
             configuration: Configuratie
-            description: Omschrijving
-            enabled: Toegestaan
             match_all_category_requirement: Alle eenheden moeten overeenkomen met de methodecategorie
             match_any_category_requirement: Minstens 1 eenheid moet overeenkomen met de methodecategorie
             match_none_category_requirement: Geen van de eenheden hoeven overeen te komen met de methodecategorie
             name: Naam
             position: Positie
-            tax_category: Belasting categorie
-            translations: Vertalingen

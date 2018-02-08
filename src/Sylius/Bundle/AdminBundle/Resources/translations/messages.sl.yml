@@ -6,17 +6,9 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: Vrste združenj
-                    attributes: Atributi
                     header: Katalog
-                    inventory: Inventar
-                    options: Možnosti
                 configuration:
                     channels: Kanali
-                    countries: Države
-                    currencies: Valute
-                    header: Konfiguracija
-                    locales: Področne nastavitve
                     payment_methods: Načini plačila
                     shipping_methods: Načini dostave
                     tax_categories: Davčne stopnje
@@ -27,7 +19,6 @@ sylius:
                     promotions: Promocije
                 customers:
                     customers: Kupci
-                    groups: Skupine
                     header: Kupec
                 sales:
                     header: Prodaja

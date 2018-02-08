@@ -10,16 +10,13 @@ sylius:
                     attributes: Атрыбуты
                     header: Каталог
                     inventory: Склад
-                    options: Опцыі
                     products: Прадукты
                     taxons: Катэгорыі
                 configuration:
                     admin_users: Адміністратары
                     channels: Каналы
-                    countries: Краіны
                     currencies: Валюты
                     exchange_rates: Курсы валют
-                    header: Канфігурацыя
                     locales: Мовы
                     payment_methods: Метады аплаты
                     shipping_categories: Катэгорыі дастаўкі
@@ -33,7 +30,6 @@ sylius:
                     promotions: Прасоўванні
                 customers:
                     customers: Кліенты
-                    groups: Групы
                     header: Кліент
                 sales:
                     header: Продажы

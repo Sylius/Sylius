@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    locale:
+        code:
+            not_blank: 请选择区域设置代码。
+            regex: 地区代码仅可以由字母、 数字、 破折号和下划线组成。
+            unique: 区域编码必须是唯一的。

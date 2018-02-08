@@ -7,8 +7,6 @@ sylius:
             first_name: Etunimi
             group: Ryhmä
             last_name: Sukunimi
-            email: Sähköpostiosoite
-            phone_number: Puhelinnumero
             gender: Sukupuoli
             birthday: Syntymäaika
             billing_address: Laskutusosoite

@@ -7,20 +7,14 @@ sylius:
             main:
                 catalog:
                     association_types: Tipuri de asociere
-                    attributes: Atribute
                     header: Catalog
-                    inventory: Inventar
-                    options: Opţiuni
                     products: Produse
                     taxons: Taxoni
                 configuration:
                     admin_users: Administratori
                     channels: Canale
-                    countries: Țări
                     currencies: Monede
                     exchange_rates: Cursuri de schimb
-                    header: Configurare
-                    locales: Setări regionale
                     payment_methods: Metode de plată
                     shipping_categories: Categorii de livrare
                     shipping_methods: Metode de livrare
@@ -33,7 +27,6 @@ sylius:
                     promotions: Promoţii
                 customers:
                     customers: Clienți
-                    groups: Grupuri
                     header: Client
                 sales:
                     header: Vânzări

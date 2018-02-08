@@ -9,12 +9,10 @@ sylius:
                     association_types: Associationstyper
                     attributes: Attribut
                     header: Katalog
-                    inventory: Lager
                     options: Alternativ
                     products: Produkter
                     taxons: Taxa
                 configuration:
-                    admin_users: Administratörer
                     channels: Kanaler
                     countries: Länder
                     currencies: Valutor
@@ -29,11 +27,9 @@ sylius:
                     zones: Zoner
                 marketing:
                     header: Marknadsföring
-                    product_reviews: Produktrecensioner
                     promotions: Kampanjer
                 customers:
                     customers: Kunder
-                    groups: Grupper
                     header: Kunder
                 sales:
                     header: Försäljning

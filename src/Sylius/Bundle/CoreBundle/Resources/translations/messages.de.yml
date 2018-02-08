@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Eine andere Rechnungsadresse benutzen?
             payment_method: Zahlungsmethode
             shipping_method: Versandarten
-        promotion:
-            channels: Ausgabekanäle
-        promotion_action:
-            add_product_configuration:
-                product: Verkäuflich
         promotion_coupon:
             per_customer_usage_limit: Nutzungsbeschränkung pro Kunde
         group:
@@ -27,7 +22,6 @@ sylius:
         channel:
             contact_email: Kontakt E-Mail
             currencies: Währungen
-            currency_base: Basis-Währung
             account_verification_required: Ist eine Konto Bestätigung erforderlich?
             hostname: Server-Name
             locale_default: Standard Lokalisierung
@@ -41,7 +35,6 @@ sylius:
             taxonomies: Klassifizierungen
             theme: Theme
         image:
-            type: Typ
             file: Foto
         locale:
             code: Code
@@ -59,37 +52,30 @@ sylius:
             id: ID
             title: Titel
         product:
-            images: Fotos
             restricted_zone: Beschränktes Versandgebiet
             short_description: Kurzbeschreibung
             variant_selection_method: Variantenauswahlmethode
             main_taxon: Haupt-Produktgruppe
-            channels: Ausgabekanäle
             enabled: Aktiviert
         product_filter:
             name: Name
             code: Code
         product_variant:
             tax_category: Steuerkategorie
-            shipping_category: Versandkategorie
         shipment_filter:
             created_at_from: Von
             created_at_to: Bis
             number: Bestellnummer
             shipping_address: Liefern an
-            channel: Alle Kanäle
         payment_filter:
             created_at_from: Von
             created_at_to: Bis
             number: Bestellnummer
             billing_address: Rechnungsadresse
-            channel: Alle Kanäle
         shipping_method:
             zone: Versandgebiet
         taxon:
-            code: Code
             file: Foto auswählen
-            images: Fotos
         taxonomy:
             file: Foto auswählen
         user:
@@ -130,21 +116,8 @@ sylius:
         promotion_rule:
             customer_group:
                 group: Kundengruppe
-            has_taxon:
-                taxons: Produktgruppen
-            product:
-                products: Produkte
             total_of_items_from_taxon:
                 taxon: Produktgruppe
-                amount: Anzahl
-        payment_method:
-            channels: Ausgabekanäle
-        product_attribute:
-            position: Position
-        zone:
-            scopes:
-                shipping: Versandart
-                tax: Steuer
     installer:
         extensions:
             header: Erweiterungen
@@ -178,7 +151,6 @@ sylius:
             exists: Existiert
             logs:
                 header: Protokoll/Logs
-                help: "Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: Existiert nicht
             not_writable: Schreibgeschützt
             parameters:

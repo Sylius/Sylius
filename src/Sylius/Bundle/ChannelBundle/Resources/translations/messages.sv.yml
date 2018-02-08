@@ -6,6 +6,4 @@ sylius:
         channel:
             color: Färg
             description: Beskrivning
-            enabled: Aktiverad
-            name: Namn
             url: URL

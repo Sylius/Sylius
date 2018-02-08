@@ -8,7 +8,6 @@ sylius:
         default_locale:
             not_blank: Lütfen kanal için varsayılan dili girin.
         contact_email:
-            invalid: Bu e-posta geçerli değil.
             max: E-posta {{ limit }} karakterden uzun olmaması gerekir.
             min: E-posta {{ limit }} karakter uzunluğunda olmalıdır.
     channel_pricing:
@@ -19,9 +18,6 @@ sylius:
         shipping_method:
             not_blank: Lütfen kargoyu seçiniz.
     contact:
-        email:
-            invalid: Bu e-posta geçerli değil.
-            not_blank: Lütfen e-posta adresinizi girin.
         message:
             not_blank: Lütfen mesajınızı girin.
     currency:
@@ -86,7 +82,6 @@ sylius:
             unique: Bu e-posta adresi zaten kullanılmakta.
             min: E-posta en az {{ min }} karakterden oluşmalıdır.
             max: E-posta en fazla {{ max }} karakterden oluşmalıdır.
-            invalid: Bu e-posta geçerli değil.
         username:
             unique: Bu kullanıcı adı zaten kullanılıyor.
             not_blank: Lütfen adınızı girin.

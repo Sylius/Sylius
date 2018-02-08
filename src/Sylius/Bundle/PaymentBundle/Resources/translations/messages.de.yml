@@ -14,7 +14,6 @@ sylius:
             amount: Zahlungsbetrag
             method: Zahlungsweise
             state:
-                header: Zahlungsstatus
                 checkout: Zur Kasse
                 completed: Abgeschlossen
                 authorized: Autorisiert
@@ -30,5 +29,3 @@ sylius:
             description: Beschreibung
             enabled: Aktiviert?
             instructions: Anweisungen
-            name: Name
-            position: Position

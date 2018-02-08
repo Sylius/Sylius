@@ -3,62 +3,83 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Por favor insira a moeda base do canal.
         default_locale:
-            not_blank: Por favor, insira a localidade predefinida do canal.
+            not_blank: Introduza a localidade padrão do canal.
         contact_email:
-            invalid: Este endereço de e-mail é inválido.
             max: O e-mail não deve ter mais que {{ limit }} carateres.
-            min: O endereço de e-mail deve pelo menos {{ limit }} caracteres.
+            min: Email deve ter ao menos {{ limit }} caracteres.
+    channel_pricing:
+        price:
+            min: Preço deve ser pelo menos {{ limit }}.
+            not_blank: Por favor, digite o preço.
     checkout:
         shipping_method:
-            not_blank: Selecione o método de envio.
+            not_blank: Por favor selecione um método de envio.
     contact:
-        email:
-            invalid: Este endereço de e-mail é inválido.
-            not_blank: Por favor insira o seu e-mail.
         message:
-            not_blank: Por favor, insira a sua mensagem.
+            not_blank: Por favor, digite a sua mensagem.
+    currency:
+        enabled:
+            cannot_disable_base: Moeda-base não pode ser desativada.
     customer:
         currency_code:
-            not_valid: O código de moeda introduzido é inválido.
+            not_valid: O usuário digitado está incorreto.
+    cart_item:
+        not_available: '%itemName% não tem estoque suficiente.'
     order:
         currency_code:
-            not_valid: O código de moeda inserido é inválido.
+            not_valid: O código de moeda que você inseriu é inválido.
+        payment_method_eligibility: 'O meio de pagamento %paymentMethodName% foi desabilitado. Por favor selecione novamente sua forma de pagamento.'
+        product_eligibility: 'O produto %productName% foi desabilitado.'
+        shipping_method_eligibility: 'O produto não satizfaz os requisitos do meio de pagamento %shippingMethodName%. Por favor selecione novamente seu meio de pagamento.'
     locale:
         code:
-            not_blank: Introduza o código de localidade.
-            unique: Esta localidade já existe.
+            not_blank: Por favor, digite o código do locale.
+            unique: Este locale já existe.
+        enabled:
+            cannot_disable_base: A localidade base não pode ser desativada.
+    product:
+        variants:
+            all_prices_defined: Primeiro, você precisa definir os preços das variantes do produto para canais recém atribuídos.
     product_attribute:
         invalid: Posição deve ser um número inteiro.
+    product_image:
+        file:
+            max_size: A imagem é muito grande - {{ size }}{{ suffix }}. Máximo permitido tamanho é {{ limit }}{{ suffix }}.
+            upload_ini_size: A imagem é muito grande. Máximo permitido tamanho é {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
-            min: A disponibilidade deve ser maior que {{ limit }}.
-            not_blank: Introduza a disponibilidade.
+            min: O campo em mãos deve ser maior que {{limit}}.
+            not_blank: Por favor digite o campo em mãos.
+            reserved: Na mão deve ser maior que o número de unidades reservadas
         original_price:
-            min: O preço original não deve ser negativo.
+            min: Preço original não deve ser negativo.
         weight:
-            min: O peso não pode ser negativo.
-            invalid: O peso deve ser um número.
+            min: Peso não pode ser negativo.
+            invalid: Peso deve ser um número.
         width:
             min: A largura não pode ser negativa.
             invalid: A largura deve ser um número.
         height:
-            min: A altura não pode ser negativa.
-            invalid: A altura deve ser um número.
+            min: Altura não pode ser negativa.
+            invalid: Altura deve ser um número.
         depth:
-            min: A profundidade não pode ser negativa.
-            invalid: A profundidade deve ser um número.
+            min: Profundidade não pode ser negativa.
+            invalid: Profundidade deve ser um número.
         channel_pricing:
-            all_defined: 'Deve definir o preço para cada canal.'
+            all_defined: 'Você deve definir o preço para cada canal.'
     product_translation:
         short_description:
-            max: A descrição curta não pode ter mais que {{ limit }} caracteres.
+            max: Breve descrição não pode ser maior que {{ limit }} caracteres.
     user:
         email:
-            unique: Este endereço de e-mail já está registado.
-            invalid: Este endereço de e-mail é inválido.
+            unique: Este e-mail já está sendo usado.
+            min: O e-mail deve conter no mínimo {{ min }} caractéres.
+            max: O e-mail deve conter no máximo {{ max }} caratéres.
         username:
             unique: Este nome de utilizador já foi utilizado.
-            not_blank: Introduza o seu nome.
+            not_blank: Por favor, digite seu nome.
         locale_code:
             not_blank: Por favor, escolha uma localidade.

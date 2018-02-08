@@ -13,13 +13,11 @@ sylius:
             postcode: Postnummer
             street: Gade-/vejnavn
             province: Provins
-            zone: Zone
         country:
             add_province: Tilføj provins
             name: Navn
             provinces: Provinser
             select: Vælg
-            enabled: Aktiveret
         province:
             name: Navn
             abbreviation: Forkortelse
@@ -29,14 +27,7 @@ sylius:
             members: Medlemmer
             name: Navn
             type: Type
-            types:
-                country: Land
-                province: Provins
-                zone: Zone
             scope: Omfang
             scopes:
                 all: Alle
-            select: Vælg
             select_scope: Vælg omfang
-        zone_member:
-            select: Vælg

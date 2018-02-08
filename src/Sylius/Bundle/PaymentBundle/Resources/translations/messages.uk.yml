@@ -14,7 +14,6 @@ sylius:
             amount: Сума платежу
             method: Спосіб оплати
             state:
-                header: Статус платежу
                 checkout: Підрахунок
                 completed: Завершено
                 authorized: Авторизований

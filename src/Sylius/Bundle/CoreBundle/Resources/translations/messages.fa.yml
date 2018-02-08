@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
             payment_method: روش پرداخت
             shipping_method: روش ارسال
-        promotion:
-            channels: کانال های فروش
-        promotion_action:
-            add_product_configuration:
-                product: محصول
         promotion_coupon:
             per_customer_usage_limit: محدودیت استفاده به ازای هر مشتری
         group:
@@ -27,7 +22,6 @@ sylius:
         channel:
             contact_email: ایمیل مخاطب
             currencies: واحدهای پول
-            currency_base: ارز پایه
             account_verification_required: تأیید صحت حساب، ضروری است؟
             hostname: نام میزبان
             locale_default: زبان پیش فرض
@@ -41,7 +35,6 @@ sylius:
             taxonomies: رده بندی
             theme: قالب
         image:
-            type: نوع
             file: عکس
         locale:
             code: نام انگلیسی
@@ -54,51 +47,26 @@ sylius:
             total_to: تا تاریخ
             payment_state: وضعیت پرداخت
             channel: تمام کانال های فروش
-        page:
-            body: بدنه
-            id: شناسه
-            title: عنوان
         product:
-            images: عکس ها
             restricted_zone: مناطق ممنوع
             short_description: شرح کوتاه
             variant_selection_method: انتخاب نوع ترکیب بندی
             main_taxon: طبقه بندی اصلی
-            channels: کانال های فروش
-            enabled: فعال
-        product_filter:
-            name: نام
-            code: نام انگلیسی
         product_variant:
             tax_category: نوع مالیات
-            shipping_category: نوع ارسال
         shipment_filter:
-            created_at_from: از تاریخ
-            created_at_to: تا تاریخ
             number: شناسه سفارش
             shipping_address: نام دریافت کننده سفارش
-            channel: تمام کانال های فروش
         payment_filter:
-            created_at_from: از تاریخ
-            created_at_to: تا تاریخ
-            number: شناسه سفارش
             billing_address: نام پرداخت کننده
-            channel: تمام کانال های فروش
         shipping_method:
             zone: منطقه
         taxon:
-            code: نام انگلیسی
-            file: انتخاب تصویر
-            images: عکس ها
-        taxonomy:
             file: انتخاب تصویر
         user:
             billing_address: مشخصات پرداخت کننده
-            different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
-            enabled: فعال
             first_name: نام
             groups: گروه‌ها
-            roles: نقش ها
             last_name: نام خانوادگی
             password: کلمه عبور
             shipping_address: آدرس تحویل سفارش
@@ -122,23 +90,15 @@ sylius:
         product_association:
             product: محصول مرتبط
             type: نوع ارتباط
-        product_association_type:
-            name: نام
         promotion_filter:
             products: فیلتر محصول‌ها
             taxons: فیلتر دسته‌بندی‌ها
         promotion_rule:
             customer_group:
                 group: گروه مشتری
-            has_taxon:
-                taxons: دسته بندی ها
-            product:
-                products: محصولات
             total_of_items_from_taxon:
                 taxon: تاکسون
                 amount: مقدار
-        payment_method:
-            channels: کانال های فروش
         product_attribute:
             position: جایگاه
         zone:
@@ -178,7 +138,6 @@ sylius:
             exists: وجود دارد
             logs:
                 header: پیام های سیستم
-                help: "برای افزودن اعتبار کد زیر را اجرا کنید:\nsudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: وجود ندارد
             not_writable: غیرقابل رایت
             parameters:

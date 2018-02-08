@@ -5,7 +5,4 @@ sylius:
     form:
         channel:
             color: Barva
-            description: Opis
-            enabled: Omogočeno
-            name: Ime
             url: URL

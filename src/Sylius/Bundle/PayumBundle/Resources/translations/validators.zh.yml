@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: 请输入贝宝密码。
+            signature:
+                not_blank: 请输入贝宝签名。
+            username:
+                not_blank: 请输入贝宝用户名。
+        stripe:
+            secret_key:
+                not_blank: 请输入条纹秘密密钥。
+            publishable_key:
+                not_blank: 请输入Stripe支付的公钥。

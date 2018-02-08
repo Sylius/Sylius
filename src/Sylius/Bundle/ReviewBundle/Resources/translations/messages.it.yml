@@ -11,7 +11,5 @@ sylius:
             status:
                 approved: Approvato
                 label: Stato
-                new: Nuovo
                 rejected: Respinto
             submit: Invia
-            title: Titolo

@@ -9,7 +9,6 @@ sylius:
             not_blank: Моля въведете език по подразбиране за този канал.
         contact_email:
             invalid: Невалиден имайл адрес.
-            max: Имейлът не трябва да надвишава {{ limit }} знака.
             min: Имейлът трябва да бъде поне {{ limit }} знака.
     channel_pricing:
         price:
@@ -77,10 +76,6 @@ sylius:
     product_translation:
         short_description:
             max: Кратко описание трябва да бъде по-дълго от {{ limit }} знака.
-    taxon_image:
-        file:
-            max_size: Изображението е твърде голям - {{ size }}{{ suffix }}. Максимално допустима размер е {{ limit }}{{ suffix }}.
-            upload_ini_size: Изображението е твърде голям. Максимално допустима размер е {{ limit }}{{ suffix }}.
     user:
         email:
             unique: Този имейл е вече използван.

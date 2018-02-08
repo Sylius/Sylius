@@ -1,0 +1,40 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    menu:
+        admin:
+            main:
+                catalog:
+                    association_types: 關聯類型
+                    attributes: 屬性
+                    header: 目錄
+                    inventory: 庫存
+                    options: 選項
+                    products: 産品
+                    taxons: 附加税值
+                configuration:
+                    admin_users: 管理員
+                    channels: 頻道
+                    countries: 國家
+                    currencies: 貨幣
+                    exchange_rates: 匯率
+                    header: 設定
+                    locales: 地區設定
+                    payment_methods: 付款方式
+                    shipping_categories: 配送類別
+                    shipping_methods: 配送方式
+                    tax_categories: 稅種
+                    tax_rates: 稅率
+                    zones: 區域
+                marketing:
+                    header: 市場行銷
+                    product_reviews: 産品評論
+                    promotions: 促銷推廣
+                customers:
+                    customers: 客戸
+                    groups: 群組
+                    header: 客戸
+                sales:
+                    header: 銷售
+                    orders: 訂單

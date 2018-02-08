@@ -5,6 +5,3 @@ sylius:
     form:
         review:
             author: Autor
-            status:
-                new: Novo
-            title: Naslov

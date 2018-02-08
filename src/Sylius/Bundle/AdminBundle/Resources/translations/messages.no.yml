@@ -7,20 +7,12 @@ sylius:
             main:
                 catalog:
                     association_types: Relasjonstyper
-                    attributes: Egenskaper
                     header: Katalog
-                    inventory: Lager
-                    options: Instillinger
                     products: Produkter
-                    taxons: Taksonomier
                 configuration:
-                    admin_users: Administratorer
                     channels: Kanaler
-                    countries: Land
                     currencies: Valutaer
                     exchange_rates: Valutakurser
-                    header: Konfigurasjon
-                    locales: Nasjonale innstillinger
                     payment_methods: Betalingsmetoder
                     shipping_categories: Fraktkategorier
                     shipping_methods: Leveringsmetoder
@@ -33,7 +25,6 @@ sylius:
                     promotions: Kampanjer
                 customers:
                     customers: Kunder
-                    groups: Grupper
                     header: Kunde
                 sales:
                     header: Salg

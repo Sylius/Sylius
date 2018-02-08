@@ -9,12 +9,10 @@ sylius:
                     association_types: Типове асоциации
                     attributes: Атрибути
                     header: Каталог
-                    inventory: Инвентар
                     options: Опцйи
                     products: Продукти
                     taxons: Категории
                 configuration:
-                    admin_users: Администратори
                     channels: Канали
                     countries: Държави
                     currencies: Валути

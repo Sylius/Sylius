@@ -4,7 +4,6 @@
 sylius:
     form:
         taxon:
-            description: Omschrijving
             name: Naam
             parent: Ouder
             slug: Korte naam

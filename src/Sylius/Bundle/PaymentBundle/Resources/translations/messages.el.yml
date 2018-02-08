@@ -14,7 +14,6 @@ sylius:
             amount: Ποσό πληρωμής
             method: Τρόπος πληρωμής
             state:
-                header: Κατάσταση πληρωμής
                 checkout: Ολοκλήρωση αγορών
                 completed: Ολοκληρωμένο
                 authorized: Εξουσιοδοτημένο
@@ -30,5 +29,4 @@ sylius:
             description: Περιγραφή
             enabled: Ενεργή;
             instructions: Οδηγίες
-            name: Ονομασία
             position: Θέση

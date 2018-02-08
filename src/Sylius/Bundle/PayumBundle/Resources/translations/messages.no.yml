@@ -3,13 +3,9 @@
 
 sylius:
     form:
-        gateway_config:
-            type: Type
         gateway_configuration:
             paypal:
-                password: Passord
                 signature: Signatur
-                username: Brukernavn
                 sandbox: Sandkasse
             stripe:
                 publishable_key: Offentlig nøkkel

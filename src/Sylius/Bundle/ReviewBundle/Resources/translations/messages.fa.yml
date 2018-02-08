@@ -11,7 +11,5 @@ sylius:
             status:
                 approved: تایید شده
                 label: وضعیت
-                new: پرداخت ثبت شده
                 rejected: رد شده
             submit: ثبت
-            title: عنوان

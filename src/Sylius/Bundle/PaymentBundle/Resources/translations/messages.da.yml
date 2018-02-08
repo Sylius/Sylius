@@ -14,7 +14,6 @@ sylius:
             amount: Beløb til betaling
             method: Betalingsmåde
             state:
-                header: Betalingsstatus
                 checkout: Til kassen
                 completed: Gennemført
                 authorized: Autoriseret
@@ -30,5 +29,4 @@ sylius:
             description: Beskrivelse
             enabled: Aktiveret?
             instructions: Instruktioner
-            name: Navn
             position: Placering

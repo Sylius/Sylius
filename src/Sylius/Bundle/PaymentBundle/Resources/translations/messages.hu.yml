@@ -14,7 +14,6 @@ sylius:
             amount: Fizetendő összeg
             method: Fizetési mód
             state:
-                header: Fizetés állapota
                 checkout: Fizetés
                 completed: Befejezve
                 authorized: Engedélyezve 
@@ -30,4 +29,3 @@ sylius:
             description: Leírás
             enabled: Engedélyezve?
             instructions: Utasítások
-            name: Név

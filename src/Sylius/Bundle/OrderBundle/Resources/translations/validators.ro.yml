@@ -1,7 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    order_item:
-        quantity:
-            min: Nu poți comanda mai puțin de 1 produs.
+        order_item:
+                quantity:
+                        min: Nu poți comanda mai puțin de 1 produs.

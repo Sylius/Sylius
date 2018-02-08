@@ -10,23 +10,18 @@ sylius:
             code: Κώδικος
             name: Ονομασία
             translations: Μεταφράσεις
-            type: Τύπος
         attribute_type:
             checkbox: Κουτί επιλογής
-            configuration: Παραμετροποίηση
             date: Ημερομηνία
             datetime: Ημερομηνία και ώρα
             integer: Ακέραιος αριθμός
             percent: Ποσοστό
-            select: Επιλέξτε
             text: Κείμενο
             textarea: Περιοχή κειμένου
             title: Τύποι χαρακτηριστικών
             validation: Επικύρωση
         attribute_type_configuration:
             datetime:
-                format: Μορφή
-            date:
                 format: Μορφή
             select:
                 multiple: Πολλαπλό

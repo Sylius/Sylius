@@ -3,19 +3,7 @@
 
 sylius:
     form:
-        user:
-            email: E-post
-            enabled: Aktivert
-            password:
-                label: Passord
-            shipping_address: Leveringsadresse
-            username: Brukernavn
-        user_filter:
-            query: Søk
         user_change_password:
             confirmation: Bekreft
             current: Gjeldende passord
-            new: Nytt Passord
-        user_reset_password:
-            confirmation: Bekreft
             new: Nytt Passord

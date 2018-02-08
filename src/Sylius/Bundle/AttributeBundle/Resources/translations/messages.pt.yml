@@ -6,21 +6,20 @@ sylius:
         attribute:
             add: Adicionar
             add_attributes: Adicionar atributos
-            choices: Escolhas
+            choices: Opções
             code: Código
             name: Nome
             translations: Traduções
             type: Tipo
         attribute_type:
-            checkbox: Caixa de verificação
+            checkbox: Caixa de seleção
             configuration: Configuração
             date: Data
-            datetime: DateTime
+            datetime: Data e Hora
             integer: Número inteiro
-            percent: Percentagem
-            select: Seleccionar
+            percent: Porcentagem
             text: Texto
-            textarea: Área de texto
+            textarea: Área de Texto
             title: Tipo de atributo
             validation: Validação
         attribute_type_configuration:
@@ -29,8 +28,11 @@ sylius:
             date:
                 format: Formato
             select:
+                multiple: Multiplo
                 values: Valores
                 choose: Escolha uma opção
+                min: Mínimo de entradas
+                max: Máximo de entradas
             text:
-                min: Comprimento mínimo
-                max: Comprimento máximo
+                min: Tamanho mínimo
+                max: Tamanho máximo

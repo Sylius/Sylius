@@ -11,7 +11,5 @@ sylius:
             status:
                 approved: Disetujui
                 label: Status
-                new: Baru
                 rejected: Ditolak
             submit: Menyerahkan
-            title: Judul

@@ -14,7 +14,6 @@ sylius:
             amount: Suma platby
             method: Spôsob platby
             state:
-                header: Stav platby
                 checkout: Košík
                 completed: Dokončená
                 authorized: Autorizovaná
@@ -30,5 +29,4 @@ sylius:
             description: Popis
             enabled: Zapnuté?
             instructions: Inštrukcie
-            name: Názov
             position: Pozícia

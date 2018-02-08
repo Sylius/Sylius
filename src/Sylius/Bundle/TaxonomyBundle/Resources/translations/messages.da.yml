@@ -4,9 +4,4 @@
 sylius:
     form:
         taxon:
-            description: Beskrivelse
-            name: Navn
             parent: Overordnede
-            slug: Slug
-        taxonomy:
-            name: Navn

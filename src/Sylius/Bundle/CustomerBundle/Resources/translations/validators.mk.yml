@@ -7,5 +7,3 @@ sylius:
             not_blank: Внесете го вашето име.
         last_name:
             not_blank: Внесете го вашето презиме.
-        email:
-            not_blank: Внесете ја вашата адреса за е-пошта.

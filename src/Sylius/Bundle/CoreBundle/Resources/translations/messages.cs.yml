@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Použít jinou adresu pro fakturaci?
             payment_method: Způsob platby
             shipping_method: Způsoby dopravy
-        promotion:
-            channels: Kanály
-        promotion_action:
-            add_product_configuration:
-                product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Omezení použití na zákazníka
         group:
@@ -41,7 +36,6 @@ sylius:
             taxonomies: Taxonomie
             theme: Vzhled
         image:
-            type: Typ
             file: Obrázek
         locale:
             code: Kód
@@ -59,37 +53,25 @@ sylius:
             id: ID
             title: Název
         product:
-            images: Obrázky
             restricted_zone: Zóna s omezeným přístupem
             short_description: Stručný popis
             variant_selection_method: Metoda výběru varianty
             main_taxon: Hlavní taxon
-            channels: Kanály
-            enabled: Povoleno
         product_filter:
             name: Název
-            code: Kód
         product_variant:
             tax_category: Typ daně
-            shipping_category: Typ dopravy
         shipment_filter:
             created_at_from: Od
             created_at_to: Do
             number: Číslo objednávky
             shipping_address: Jméno příjemce
-            channel: Všechny kanály
         payment_filter:
-            created_at_from: Od
-            created_at_to: Do
-            number: Číslo objednávky
             billing_address: Fakturační adresa – jméno
-            channel: Všechny kanály
         shipping_method:
             zone: Oblast
         taxon:
-            code: Kód
             file: Vybrat obrázek
-            images: Obrázky
         taxonomy:
             file: Vybrat obrázek
         user:
@@ -98,7 +80,6 @@ sylius:
             enabled: Povoleno
             first_name: Křestní Jméno
             groups: Skupiny
-            roles: Role
             last_name: Příjmení
             password: Heslo
             shipping_address: Doručovací adresa
@@ -122,8 +103,6 @@ sylius:
         product_association:
             product: Související produkt
             type: Typy asociace
-        product_association_type:
-            name: Jméno
         promotion_filter:
             products: Filtr produktů
             taxons: Taxonů filtr
@@ -132,19 +111,11 @@ sylius:
                 group: Skupina zákazníků
             has_taxon:
                 taxons: Taxony
-            product:
-                products: Produkty
             total_of_items_from_taxon:
                 taxon: Taxonu
                 amount: Částka
-        payment_method:
-            channels: Kanály
         product_attribute:
             position: Pozice
-        zone:
-            scopes:
-                shipping: Přeprava
-                tax: Daň
     installer:
         extensions:
             header: rozšíření
@@ -178,7 +149,6 @@ sylius:
             exists: Existuje
             logs:
                 header: logy
-                help: "To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: neexistuje
             not_writable: nelze zapisovat
             parameters:

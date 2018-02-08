@@ -26,6 +26,3 @@ sylius:
             unique: 'Způsob dopravy s tímto kódem již existuje.'
         zone:
             not_blank: 'Prosím vyberte zónu pro způsob dopravy.'
-    shipment:
-        shipping_method:
-            not_blank: 'Vyberte prosím způsob dopravy.'

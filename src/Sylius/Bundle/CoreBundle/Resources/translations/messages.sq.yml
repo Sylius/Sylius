@@ -14,17 +14,11 @@ sylius:
                 different_billing_address: Përdor adresë tjetër për faturën?
             payment_method: Mënyra e pagesës
             shipping_method: Mënyra e dërgesës
-        promotion:
-            channels: Kanalet
-        promotion_action:
-            add_product_configuration:
-                product: Produkti
         group:
             name: Emri
             roles: Funksionet
         channel:
             currencies: Monedhat
-            currency_base: Valuta baze
             hostname: Emri i hostit
             locale_default: Lokalizimi i parazgjedhur
             locales: Rajonet
@@ -46,51 +40,26 @@ sylius:
             total_to: Për (marrësi)
             payment_state: Gjendja e pagesës
             channel: Të gjitha kanalet
-        page:
-            body: Përmbajtja e porosisë
-            id: ID
-            title: Titulli
         product:
-            images: Imazhet
             restricted_zone: Zonë e kufizuar
             short_description: Përshkrim i shkurtër
             variant_selection_method: Metoda rezervë e përzgjedhjes
             main_taxon: Tipologjia kryesore
-            channels: Kanalet
-            enabled: E aktivizuar
-        product_filter:
-            name: Emri
-            code: Kodi
         product_variant:
             tax_category: Kategoria e taksimit
-            shipping_category: Kategoria e dërgesës
         shipment_filter:
-            created_at_from: Nga (dërguesi)
-            created_at_to: Për (marrësi)
             number: Numri i porosisë
             shipping_address: Dërgoje në emrin
-            channel: Të gjitha kanalet
         payment_filter:
-            created_at_from: Nga (dërguesi)
-            created_at_to: Për (marrësi)
-            number: Numri i porosisë
             billing_address: Faturoje në emrin
-            channel: Të gjitha kanalet
         shipping_method:
             zone: Zona
         taxon:
-            code: Kodi
-            file: Zgjidh imazhin
-            images: Imazhet
-        taxonomy:
             file: Zgjidh imazhin
         user:
             billing_address: Adresa e faturimit
-            different_billing_address: Përdor adresë tjetër për faturën?
-            enabled: E aktivizuar
             first_name: Emri
             groups: Grupet
-            roles: Funksionet
             last_name: Mbiemri
             password: Fjalëkalimi
             shipping_address: Adresa e dërgimit
@@ -113,15 +82,9 @@ sylius:
         product_association:
             product: Produkt i lidhur
             type: Tipi i lidhjes
-        product_association_type:
-            name: Emri
         promotion_rule:
-            has_taxon:
-                taxons: Tipologjite
             total_of_items_from_taxon:
                 taxon: Fushe
-        payment_method:
-            channels: Kanalet
     installer:
         extensions:
             header: Shtesa

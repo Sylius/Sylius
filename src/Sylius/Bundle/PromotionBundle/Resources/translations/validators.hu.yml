@@ -18,7 +18,7 @@ sylius:
     promotion_coupon:
         code:
             max_length: A kupon kód nem lehet hosszabb, mint 1 karakter. |A kupon kód nem lehet hosszabb, mint {{ limit }} karakterek.
-            min_length: A kupon kódnak legalább 1 karakter hosszúnak kell lennie. |A kupon kódmak  legalább {{ limit }} karakter hosszú kell legyen.
+            min_length: A kupon kódnak legalább 1 karakter hosszúnak kell lennie. |A kupon kódmak    legalább {{ limit }} karakter hosszú kell legyen.
             not_blank: Kérjük, írja be a kupon kódot.
             unique: Ez a kupon már létezik.
         usage_limit:

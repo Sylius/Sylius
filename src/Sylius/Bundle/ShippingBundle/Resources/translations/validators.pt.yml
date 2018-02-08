@@ -4,25 +4,25 @@
 sylius:
     shipping_category:
         name:
-            max_length: 'O nome da categoria não deve ter mais que {{ limit }} caracteres.'
-            min_length: 'O nome da categoria deve ter pelo menos {{ limit }} carateres.'
-            not_blank: 'Por favor, insira o nome da categoria de expedição.'
+            max_length: 'Nome da categoria não deve ter mais de {{limit}} caracteres.'
+            min_length: 'Nome da categoria deve ter pelo menos {{limit}} caracteres.'
+            not_blank: 'Por favor, digite o nome de categoria transporte.'
         code:
-            not_blank: 'Por favor, insira o código da categoria de expedição.'
-            unique: 'Já existe uma categoria de transporte com o código introduzido.'
+            not_blank: 'Por favor digite o código de categoria de transporte.'
+            regex: 'Código da Categoria de Postagem somente pode ser composto por letras, números, hifens e traços.'
+            unique: 'A categoria de envio com esse código já existe.'
     shipping_method:
         calculator:
-            max_length: Tamanho máximo
-            min_length: Tamanho mínimo
+            max_length: sylius.shipping_method.calculator.max_length
+            min_length: sylius.shipping_method.calculator.min_length
+            not_blank: sylius.shipping_method.calculator.not_blank
         name:
-            max_length: 'O nome do método de envio não deve ter mais que {{ limit }} caracteres.'
-            min_length: 'O nome do método de envio deve ter pelo menos {{ limit }} caracteres.'
-            not_blank: 'Introduza o nome do método de envio.'
+            max_length: 'Nome do método de envio não deve ter mais de {{limit}} caracteres.'
+            min_length: 'Nome do método de envio deve ter pelo menos {{limit}} caracteres de comprimento.'
+            not_blank: 'Por favor, digite o método de expedição.'
         code:
-            not_blank: 'Introduza o código do método de envio.'
-            unique: 'Já existe um método de envio com o código introduzido.'
+            not_blank: 'Digite o código do método de envio.'
+            regex: 'Código do Método de Postagem somente pode ser composto por letras, números, hifens e traços.'
+            unique: 'O método de envio com determinado código já existe.'
         zone:
-            not_blank: 'Por favor selecione a zona de método de envio.'
-    shipment:
-        shipping_method:
-            not_blank: 'Selecione o método de envio.'
+            not_blank: 'Por favor, selecione a zona de método de envio.'

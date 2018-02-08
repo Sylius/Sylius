@@ -8,8 +8,6 @@ sylius:
         default_locale:
             not_blank: กรุณาระบุภาษาเริ่มต้น
         contact_email:
-            invalid: อีเมลนี้ไม่ถูกต้อง
-            max: อีเมลต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร
             min: อีเมลล์จะต้องมีความยาวไม่น้อยกว่า {{ limit }} ตัวอักษร
     channel_pricing:
         price:
@@ -19,22 +17,14 @@ sylius:
         shipping_method:
             not_blank: กรุณาเลือกวิธีการจัดส่ง
     contact:
-        email:
-            invalid: อีเมลนี้ไม่ถูกต้อง
-            not_blank: กรุณาระบุอีเมลของคุณ
         message:
             not_blank: โปรดป้อนข้อความของคุณ
     currency:
         enabled:
             cannot_disable_base: ไม่สามารถปิดใช้งานสกุลเงินฐาน
-    customer:
-        currency_code:
-            not_valid: รหัสสกุลเงินที่คุณป้อนไม่ถูกต้อง
     cart_item:
         not_available: '%itemName% ไม่มีสต็อกเพียงพอ'
     order:
-        currency_code:
-            not_valid: รหัสสกุลเงินที่คุณป้อนไม่ถูกต้อง
         payment_method_eligibility: '%paymentMethodName% วิธีการชำระเงินนี้ถูกปิดใช้งาน กรุณาเลือกวิธีการชำระเงินใหม่'
         product_eligibility: '%productName% สินค้านี้ถูกปิดใช้งาน'
         shipping_method_eligibility: 'สินค้าไม่สามารถจัดส่งด้วยวิธีจัดส่ง %shippingMethodName% กรุณาเลือกวิธีการจัดส่งใหม่'
@@ -77,16 +67,10 @@ sylius:
     product_translation:
         short_description:
             max: คำอธิบายสั้น ต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร
-    taxon_image:
-        file:
-            max_size: ภาพใหญ่เกินไป - {{ size }}{{ suffix }} ขนาดสูงสุดคือ {{ limit }}{{ suffix }}
-            upload_ini_size: ภาพใหญ่เกินไป ขนาดสูงสุดคือ {{ limit }}{{ suffix }}
     user:
         email:
-            unique: อีเมลนี้ถูกใช้งานแล้ว
             min: อีเมลต้องมีความยาวไม่น้อยกว่า {{ min }} ตัวอักษร.
             max: อีเมลต้องมีความยาวไม่เกิน {{ max }} ตัวอักษร.
-            invalid: อีเมลนี้ไม่ถูกต้อง
         username:
             unique: ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว
             not_blank: กรุณาระบุชื่อของคุณ

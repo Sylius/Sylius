@@ -14,8 +14,6 @@ sylius:
                 different_billing_address: Utilitzar diferent adreça de facturació?
             payment_method: Mètode de pagament
             shipping_method: Mètode d'enviament
-        promotion:
-            channels: Canals
         promotion_action:
             add_product_configuration:
                 product: Producte
@@ -41,7 +39,6 @@ sylius:
             taxonomies: Taxonomies
             theme: Tema
         image:
-            type: Tipus
             file: Imatge
         locale:
             code: Codi
@@ -59,35 +56,22 @@ sylius:
             id: ID
             title: Títol
         product:
-            images: Imatges
             restricted_zone: Àrea restringida
             short_description: Descripció breu
             variant_selection_method: Mètode de selecció de variant
-            channels: Canals
-            enabled: Activat
         product_filter:
             name: Nom
-            code: Codi
         product_variant:
             tax_category: Categoria d'impost
-            shipping_category: Categoria d'enviament
         shipment_filter:
             created_at_from: Des de
             created_at_to: A
             number: Número de comanda
             shipping_address: Enviar al nom
-            channel: Tots els canals
-        payment_filter:
-            created_at_from: Des de
-            created_at_to: A
-            number: Número de comanda
-            channel: Tots els canals
         shipping_method:
             zone: Zona
         taxon:
-            code: Codi
             file: Seleccioneu la imatge
-            images: Imatges
         taxonomy:
             file: Seleccioneu la imatge
         user:
@@ -96,7 +80,6 @@ sylius:
             enabled: Activat
             first_name: Nom
             groups: Grups
-            roles: Rols
             last_name: Cognoms
             password: Contrasenya
             shipping_address: Adreça d'enviament
@@ -119,17 +102,11 @@ sylius:
         product_association:
             product: Producte associat
             type: Tipus d'Associació
-        product_association_type:
-            name: Nom
         promotion_filter:
             products: Filtre de producte
         promotion_rule:
-            product:
-                products: Productes
             total_of_items_from_taxon:
                 amount: Total
-        payment_method:
-            channels: Canals
         product_attribute:
             position: Posició
         zone:
