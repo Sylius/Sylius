@@ -212,7 +212,7 @@ EOT;
         $productReview = $productReviewsData['productReview1'];
 
         $data =
-            <<<EOT
+<<<EOT
         {
             "title": "NEW_REVIEW_TITLE",
             "rating": "1",
@@ -241,7 +241,7 @@ EOT;
         $productReview = $productReviewsData['productReview1'];
 
         $data =
-            <<<EOT
+<<<EOT
         {
             "comment": "A_NEW_REVIEW_COMMENT"
         }
@@ -345,7 +345,7 @@ EOT;
 
     /**
      * @param ProductInterface $product
-     * @param ReviewInterface  $productReview
+     * @param ReviewInterface $productReview
      *
      * @return string
      */
