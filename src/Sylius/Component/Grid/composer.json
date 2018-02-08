@@ -3,7 +3,7 @@
     "type": "library",
     "description": "PHP library to handle building grid of objects with fields and filters support.",
     "keywords": ["shop", "ecommerce", "resource", "api", "sylius", "doctrine", "grid", "admin"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",

@@ -51,7 +51,7 @@ To see the details of the shipment method with ``id = 20`` use the below method:
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/shipments/20 \
+     $ curl http://demo.sylius.com/api/v1/shipments/20 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -130,7 +130,7 @@ To see first page of paginated list of shipments with two shipments on each page
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/shipments/\?limit\=2 \
+     $ curl http://demo.sylius.com/api/v1/shipments/\?limit\=2 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 

@@ -105,7 +105,7 @@ To create new product variant for the product with ``code = MUG-TH`` use the bel
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/variants/ \
+    $ curl http://demo.sylius.com/api/v1/products/MUG-TH/variants/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -154,7 +154,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/variants/ \
+    $ curl http://demo.sylius.com/api/v1/products/MUG-TH/variants/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -230,7 +230,7 @@ Here is an example of creating a product variant with additional data for the pr
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/variants/ \
+    $ curl http://demo.sylius.com/api/v1/products/MUG-TH/variants/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -364,7 +364,7 @@ To see the details of the product variant with ``code = medium-theme-mug``, whic
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/variants/medium-theme-mug \
+    $ curl http://demo.sylius.com/api/v1/products/MUG-TH/variants/medium-theme-mug \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -431,7 +431,7 @@ To see the first page of all product variants for the product with ``code = MUG-
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/variants/ \
+    $ curl http://demo.sylius.com/api/v1/products/MUG-TH/variants/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -586,7 +586,7 @@ To fully update the product variant with ``code = double-theme-mug`` for the pro
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/variants/double-theme-mug \
+    $ curl http://demo.sylius.com/api/v1/products/MUG-TH/variants/double-theme-mug \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -656,7 +656,7 @@ To partially update the product variant with ``code = double-theme-mug`` for the
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/variants/double-theme-mug \
+    $ curl http://demo.sylius.com/api/v1/products/MUG-TH/variants/double-theme-mug \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -706,7 +706,7 @@ To delete the product variant with ``code = double-theme-mug`` from the product 
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/variants/double-theme-mug \
+    $ curl http://demo.sylius.com/api/v1/products/MUG-TH/variants/double-theme-mug \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

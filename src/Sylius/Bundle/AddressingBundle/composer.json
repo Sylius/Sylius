@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Addressing and zone management for Symfony2 applications.",
     "keywords": ["shop", "ecommerce", "address", "addressing", "zones"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",
@@ -28,7 +28,7 @@
         "symfony/framework-bundle": "^3.4"
     },
     "require-dev": {
-        "doctrine/orm": "~2.5.0",
+        "doctrine/orm": "^2.5",
         "phpspec/phpspec": "^4.0",
         "symfony/dependency-injection": "^3.4",
         "symfony/form": "^3.4",

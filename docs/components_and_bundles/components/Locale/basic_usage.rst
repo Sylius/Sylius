@@ -37,4 +37,4 @@ The **LocaleProvider** allows you to get all available locales.
 
     For more detailed information go to `Sylius API LocaleProvider`_.
 
-.. _Sylius API LocaleProvider: http://api.sylius.org/Sylius/Component/Locale/Provider/LocaleProvider.html
+.. _Sylius API LocaleProvider: http://api.sylius.com/Sylius/Component/Locale/Provider/LocaleProvider.html

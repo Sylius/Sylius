@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Currencies and channel formatting engine bundle for Symfony2.",
     "keywords": ["cash", "currency", "channel", "currencies"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",
@@ -31,7 +31,7 @@
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
         "twig/twig": "^2.0",
-        "doctrine/orm": "~2.5.0",
+        "doctrine/orm": "^2.5",
         "symfony/dependency-injection": "^3.4",
         "symfony/form": "^3.4",
         "symfony/browser-kit": "^3.4",

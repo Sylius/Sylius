@@ -41,7 +41,7 @@ Orders have the following properties:
     This model implements the :ref:`component_order_model_order-interface`
     For more detailed information go to `Sylius API Order`_.
 
-.. _Sylius API Order: http://api.sylius.org/Sylius/Component/Order/Model/Order.html
+.. _Sylius API Order: http://api.sylius.com/Sylius/Component/Order/Model/Order.html
 
 .. _component_order_model_order-item:
 
@@ -75,7 +75,7 @@ OrderItems have the following properties:
     This model implements the :ref:`component_order_model_order-item-interface`
     For more detailed information go to `Sylius API OrderItem`_.
 
-.. _Sylius API OrderItem: http://api.sylius.org/Sylius/Component/Order/Model/OrderItem.html
+.. _Sylius API OrderItem: http://api.sylius.com/Sylius/Component/Order/Model/OrderItem.html
 
 .. _component_order_model_order-item-unit:
 
@@ -103,7 +103,7 @@ OrderItemUnits have the following properties:
     This model implements the :ref:`component_order_model_order-item-unit-interface`
     For more detailed information go to `Sylius API OrderItemUnit`_.
 
-.. _Sylius API OrderItemUnit: http://api.sylius.org/Sylius/Component/Order/Model/OrderItem.html
+.. _Sylius API OrderItemUnit: http://api.sylius.com/Sylius/Component/Order/Model/OrderItem.html
 
 .. _component_order_model_adjustment:
 
@@ -148,5 +148,5 @@ Adjustments have the following properties:
     This model implements the :ref:`component_order_model_adjustment-interface`
     For more detailed information go to `Sylius API Adjustment`_.
 
-.. _Sylius API Adjustment: http://api.sylius.org/Sylius/Component/Order/Model/Adjustment.html
+.. _Sylius API Adjustment: http://api.sylius.com/Sylius/Component/Order/Model/Adjustment.html
 

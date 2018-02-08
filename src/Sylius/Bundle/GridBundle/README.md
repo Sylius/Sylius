@@ -6,26 +6,26 @@ Advanced grids for your Symfony2 project.
 Sylius
 ------
 
-![Sylius](http://sylius.org/assets/img/logo.png)
+![Sylius](https://demo.sylius.com/assets/shop/img/logo.png)
 
-Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.org](http://sylius.org).
+Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.com](http://sylius.com).
 
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components_and_bundles/bundles/SyliusGridBundle/index.html).
+Documentation is available on [**docs.sylius.com**](http://docs.sylius.com/en/latest/components_and_bundles/bundles/SyliusGridBundle/index.html).
 
 Contributing
 ------------
 
-[This page](http://docs.sylius.org/en/latest/contributing/index.html) contains all the information about contributing to Sylius.
+[This page](http://docs.sylius.com/en/latest/contributing/index.html) contains all the information about contributing to Sylius.
 
 Follow Sylius' Development
 --------------------------
 
 If you want to keep up with the updates and latest features, follow us on the following channels:
 
-* [Official Blog](https://sylius.org/blog)
+* [Official Blog](https://sylius.com/blog)
 * [Sylius on Twitter](https://twitter.com/Sylius)
 * [Sylius on Facebook](https://facebook.com/SyliusEcommerce)
 

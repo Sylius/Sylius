@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Component for handling object attributes in PHP projects.",
     "keywords": ["shop", "ecommerce", "attribute", "feature"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",

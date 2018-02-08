@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Customers management for Symfony2 projects.",
     "keywords": ["customer", "groups"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -24,7 +24,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",
@@ -34,7 +34,7 @@
     "require": {
         "php": "^7.1",
 
-        "doctrine/orm": "~2.5.0",
+        "doctrine/orm": "^2.5",
         "sylius/customer": "^1.0",
         "sylius/resource-bundle": "^1.0",
         "symfony/framework-bundle": "^3.4",

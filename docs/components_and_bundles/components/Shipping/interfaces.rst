@@ -14,7 +14,7 @@ This interface should be implemented by class which will provide additional rest
 .. note::
     For more detailed information go to `Sylius API RuleInterface`_.
 
-.. _Sylius API RuleInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/RuleInterface.html
+.. _Sylius API RuleInterface: http://api.sylius.com/Sylius/Component/Shipping/Model/RuleInterface.html
 
 .. _component_shipping_model_shipment-interface:
 
@@ -29,7 +29,7 @@ and so on. It also has a method for shipment tracking.
 
     For more detailed information go to `Sylius API ShipmentInterface`_.
 
-.. _Sylius API ShipmentInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShipmentInterface.html
+.. _Sylius API ShipmentInterface: http://api.sylius.com/Sylius/Component/Shipping/Model/ShipmentInterface.html
 
 .. _component_shipping_model_shipment-item-interface:
 
@@ -44,7 +44,7 @@ provides information about shipment state.
 
     For more detailed information go to `Sylius API ShipmentItemInterface`_.
 
-.. _Sylius API ShipmentItemInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShipmentItemInterface.html
+.. _Sylius API ShipmentItemInterface: http://api.sylius.com/Sylius/Component/Shipping/Model/ShipmentItemInterface.html
 
 ShippableInterface
 ~~~~~~~~~~~~~~~~~~
@@ -54,7 +54,7 @@ This interface should be implemented by model representing physical object which
 .. note::
     For more detailed information go to `Sylius API ShippableInterface`_.
 
-.. _Sylius API ShippableInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippableInterface.html
+.. _Sylius API ShippableInterface: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippableInterface.html
 
 .. _component_shipping_model_shipping-category-interface:
 
@@ -69,7 +69,7 @@ shipments and connect it with right shipment method.
 
     For more detailed information go to `Sylius API ShippingCategoryInterface`_.
 
-.. _Sylius API ShippingCategoryInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingCategoryInterface.html
+.. _Sylius API ShippingCategoryInterface: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingCategoryInterface.html
 
 .. _component_shipping_model_shipping-method-interface:
 
@@ -85,7 +85,7 @@ and allows to add a new restriction to a basic shipping method.
 
     For more detailed information go to `Sylius API ShippingMethodInterface`_.
 
-.. _Sylius API ShippingMethodInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingMethodInterface.html
+.. _Sylius API ShippingMethodInterface: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingMethodInterface.html
 
 .. _component_shipping_model_shipping-method-translation-interface:
 
@@ -97,7 +97,7 @@ This interface should be implemented by model responsible for keeping translatio
 .. note::
     For more detailed information go to `Sylius API ShippingMethodTranslationInterface`_.
 
-.. _Sylius API ShippingMethodTranslationInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingMethodTranslationInterface.html
+.. _Sylius API ShippingMethodTranslationInterface: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingMethodTranslationInterface.html
 
 .. _component_shipping_model_shipping-subject-interface:
 
@@ -109,7 +109,7 @@ This interface should be implemented by any object, which needs to be evaluated 
 .. note::
     For more detailed information go to `Sylius API ShippingSubjectInterface`_.
 
-.. _Sylius API ShippingSubjectInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingSubjectInterface.html
+.. _Sylius API ShippingSubjectInterface: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingSubjectInterface.html
 
 
 Calculator interfaces
@@ -124,7 +124,7 @@ class **Calculator**, which has a basic implementation of methods from this inte
 .. note::
     For more detailed information go to `Sylius API CalculatorInterface`_.
 
-.. _Sylius API CalculatorInterface: http://api.sylius.org/Sylius/Component/Shipping/Calculator/CalculatorInterface.html
+.. _Sylius API CalculatorInterface: http://api.sylius.com/Sylius/Component/Shipping/Calculator/CalculatorInterface.html
 
 DelegatingCalculatorInterface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -134,7 +134,7 @@ This interface should be implemented by any object, which will be responsible fo
 .. note::
     For more detailed information go to `Sylius API DelegatingCalculatorInterface`_.
 
-.. _Sylius API DelegatingCalculatorInterface: http://api.sylius.org/Sylius/Component/Shipping/Calculator/DelegatingCalculatorInterface.html
+.. _Sylius API DelegatingCalculatorInterface: http://api.sylius.com/Sylius/Component/Shipping/Calculator/DelegatingCalculatorInterface.html
 
 .. _component_shipping_calculator_registry-shipping-method-eligibility-checker-interface:
 
@@ -146,7 +146,7 @@ This interface should be implemented by an object, which will keep all calculato
 .. note::
     For more detailed information go to `Sylius API CalculatorRegistryInterface`_.
 
-.. _Sylius API CalculatorRegistryInterface: http://api.sylius.org/Sylius/Component/Shipping/Calculator/Registry/CalculatorRegistryInterface.html
+.. _Sylius API CalculatorRegistryInterface: http://api.sylius.com/Sylius/Component/Shipping/Calculator/Registry/CalculatorRegistryInterface.html
 
 Checker Interfaces
 ------------------
@@ -161,7 +161,7 @@ This interface should be implemented by an service responsible for providing an 
 .. note::
     For more detailed information go to `Sylius API RuleCheckerRegistryInterface`_.
 
-.. _Sylius API RuleCheckerRegistryInterface: http://api.sylius.org/Sylius/Component/Shipping/Checker/Registry/RuleCheckerRegistryInterface.html
+.. _Sylius API RuleCheckerRegistryInterface: http://api.sylius.com/Sylius/Component/Shipping/Checker/Registry/RuleCheckerRegistryInterface.html
 
 .. _component_shipping_checker_rule-checker-interface:
 
@@ -173,7 +173,7 @@ This interface should be implemented by an object, which checks if a shipping su
 .. note::
     For more detailed information go to `Sylius API RuleCheckerInterface`_.
 
-.. _Sylius API RuleCheckerInterface: http://api.sylius.org/Sylius/Component/Shipping/Checker/RuleCheckerInterface.html
+.. _Sylius API RuleCheckerInterface: http://api.sylius.com/Sylius/Component/Shipping/Checker/RuleCheckerInterface.html
 
 
 .. _component_shipping_checker_shipping-method-eligibility-checker-interface:
@@ -186,7 +186,7 @@ This interface should be implemented by an object, which checks if the given shi
 .. note::
     For more detailed information go to `Sylius API ShippingMethodEligibilityCheckerInterface`_.
 
-.. _Sylius API ShippingMethodEligibilityCheckerInterface: http://api.sylius.org/Sylius/Component/Shipping/Checker/ShippingMethodEligibilityCheckerInterface.html
+.. _Sylius API ShippingMethodEligibilityCheckerInterface: http://api.sylius.com/Sylius/Component/Shipping/Checker/ShippingMethodEligibilityCheckerInterface.html
 
 
 Processor Interfaces
@@ -200,7 +200,7 @@ This interface should be implemented by an object, which updates shipments and s
 .. note::
     For more detailed information go to `Sylius API ShipmentProcessorInterface`_.
 
-.. _Sylius API ShipmentProcessorInterface: http://api.sylius.org/Sylius/Component/Shipping/Processor/ShipmentProcessorInterface.html
+.. _Sylius API ShipmentProcessorInterface: http://api.sylius.com/Sylius/Component/Shipping/Processor/ShipmentProcessorInterface.html
 
 Resolver Interfaces
 -------------------
@@ -214,4 +214,4 @@ for given shipping subject.
 .. note::
     For more detailed information go to `Sylius API ShippingMethodsResolverInterface`_.
 
-.. _Sylius API ShippingMethodsResolverInterface: http://api.sylius.org/Sylius/Component/Shipping/Resolver/ShippingMethodsResolverInterface.html
+.. _Sylius API ShippingMethodsResolverInterface: http://api.sylius.com/Sylius/Component/Shipping/Resolver/ShippingMethodsResolverInterface.html

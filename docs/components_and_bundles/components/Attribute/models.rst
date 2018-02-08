@@ -36,7 +36,7 @@ Every attribute is represented by the **Attribute** model which by default has t
 
    For more detailed information go to `Sylius API Attribute`_.
 
-.. _Sylius API Attribute: http://api.sylius.org/Sylius/Component/Attribute/Model/Attribute.html
+.. _Sylius API Attribute: http://api.sylius.com/Sylius/Component/Attribute/Model/Attribute.html
 
 .. attention::
    Attribute's type is an alias of AttributeType service.
@@ -82,7 +82,7 @@ It has the following properties:
 
    For more detailed information go to `Sylius API AttributeValue`_.
 
-.. _Sylius API AttributeValue: http://api.sylius.org/Sylius/Component/Attribute/Model/AttributeValue.html
+.. _Sylius API AttributeValue: http://api.sylius.com/Sylius/Component/Attribute/Model/AttributeValue.html
 
 .. _component_attribute_model_attribute-translation:
 
@@ -106,4 +106,4 @@ model which has the following properties:
 
    For more detailed information go to `Sylius API AttributeTranslation`_.
 
-.. _Sylius API AttributeTranslation: http://api.sylius.org/Sylius/Component/Attribute/Model/AttributeTranslation.html
+.. _Sylius API AttributeTranslation: http://api.sylius.com/Sylius/Component/Attribute/Model/AttributeTranslation.html

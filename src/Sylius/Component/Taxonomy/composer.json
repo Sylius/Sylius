@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Taxonomies - categorization of domain models in PHP projects.",
     "keywords": ["taxonomy", "ecommerce", "categorization", "taxon", "classification"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",

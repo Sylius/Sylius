@@ -11,4 +11,4 @@ This interface should be implemented by a service responsible for managing vario
 .. note::
    For more detailed information go to `Sylius API ServiceRegistryInterface`_.
 
-.. _Sylius API ServiceRegistryInterface: http://api.sylius.org/Sylius/Component/Registry/ServiceRegistryInterface.html
+.. _Sylius API ServiceRegistryInterface: http://api.sylius.com/Sylius/Component/Registry/ServiceRegistryInterface.html

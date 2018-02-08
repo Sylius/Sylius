@@ -73,7 +73,7 @@ To see the details of the channel with ``code = US_WEB`` use the below method:
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/channels/US_WEB \
+     $ curl http://demo.sylius.com/api/v1/channels/US_WEB \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 

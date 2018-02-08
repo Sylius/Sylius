@@ -43,4 +43,4 @@ Learn More
 ----------
 
 * :doc:`Emails Concept </book/architecture/emails>`
-* `Sending configurable e-mails in Symfony Blogpost <http://sylius.org/blog/sending-configurable-e-mails-in-symfony>`_
+* `Sending configurable e-mails in Symfony Blogpost <http://sylius.com/blog/sending-configurable-e-mails-in-symfony>`_
