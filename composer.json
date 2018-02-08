@@ -31,7 +31,7 @@
         "doctrine/doctrine-cache-bundle": "^1.3",
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^1.2",
-        "doctrine/orm": "~2.5.0",
+        "doctrine/orm": "^2.5",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "friendsofsymfony/rest-bundle": "^2.1",
         "fzaninotto/faker": "^1.6",
