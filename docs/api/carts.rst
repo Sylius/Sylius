@@ -146,7 +146,7 @@ To create a new cart for the ``shop@example.com`` user in the ``US_WEB`` channel
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/ \
+    $ curl http://demo.sylius.com/api/v1/carts/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -220,7 +220,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/ \
+    $ curl http://demo.sylius.com/api/v1/carts/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -287,7 +287,7 @@ To see the first page of the paginated carts collection use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/ \
+    $ curl http://demo.sylius.com/api/v1/carts/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -389,7 +389,7 @@ To see details of the cart with ``id = 21`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/21 \
+    $ curl http://demo.sylius.com/api/v1/carts/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -474,7 +474,7 @@ To delete the cart with ``id = 21`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/21 \
+    $ curl http://demo.sylius.com/api/v1/carts/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
@@ -522,7 +522,7 @@ to the cart with id = 21 (assuming, that we didn't remove it in the previous exa
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/21/items/ \
+    $ curl http://demo.sylius.com/api/v1/carts/21/items/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -639,7 +639,7 @@ To change the quantity of the cart item with ``id = 57`` in the cart of ``id = 2
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/21/items/57 \
+    $ curl http://demo.sylius.com/api/v1/carts/21/items/57 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -661,7 +661,7 @@ Now we can check how does the cart look like after changing the quantity of a ca
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/21 \
+    $ curl http://demo.sylius.com/api/v1/carts/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -825,7 +825,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/carts/21/items/58 \
+    $ curl http://demo.sylius.com/api/v1/carts/21/items/58 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

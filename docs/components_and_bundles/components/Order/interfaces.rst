@@ -20,7 +20,7 @@ This interface should be implemented by model representing a single Order.
 
     For more detailed information go to `Sylius API OrderInterface`_.
 
-.. _Sylius API OrderInterface: http://api.sylius.org/Sylius/Component/Order/Model/OrderInterface.html
+.. _Sylius API OrderInterface: http://api.sylius.com/Sylius/Component/Order/Model/OrderInterface.html
 
 .. _component_order_model_order-aware-interface:
 
@@ -33,7 +33,7 @@ If you want to have orders in your model just implement this interface.
 .. note::
     For more detailed information go to `Sylius API OrderAwareInterface`_.
 
-.. _Sylius API OrderAwareInterface: http://api.sylius.org/Sylius/Component/Order/Model/OrderAwareInterface.html
+.. _Sylius API OrderAwareInterface: http://api.sylius.com/Sylius/Component/Order/Model/OrderAwareInterface.html
 
 .. _component_order_model_order-item-interface:
 
@@ -47,7 +47,7 @@ This interface should be implemented by model representing a single OrderItem.
 
     For more detailed information go to `Sylius API OrderItemInterface`_.
 
-.. _Sylius API OrderItemInterface: http://api.sylius.org/Sylius/Component/Order/Model/OrderItemInterface.html
+.. _Sylius API OrderItemInterface: http://api.sylius.com/Sylius/Component/Order/Model/OrderItemInterface.html
 
 
 .. _component_order_model_order-item-unit-interface:
@@ -62,7 +62,7 @@ This interface should be implemented by model representing a single OrderItemUni
 
     For more detailed information go to `Sylius API OrderItemUnitInterface`_.
 
-.. _Sylius API OrderItemUnitInterface: http://api.sylius.org/Sylius/Component/Order/Model/OrderItemUnitInterface.html
+.. _Sylius API OrderItemUnitInterface: http://api.sylius.com/Sylius/Component/Order/Model/OrderItemUnitInterface.html
 
 
 .. _component_order_model_adjustment-interface:
@@ -77,7 +77,7 @@ This interface should be implemented by model representing a single Adjustment.
 
     For more detailed information go to `Sylius API AdjustmentInterface`_.
 
-.. _Sylius API AdjustmentInterface: http://api.sylius.org/Sylius/Component/Order/Model/AdjustmentInterface.html
+.. _Sylius API AdjustmentInterface: http://api.sylius.com/Sylius/Component/Order/Model/AdjustmentInterface.html
 
 .. _component_order_model_adjustable-interface:
 
@@ -94,7 +94,7 @@ For example following models implement this interface:
 .. note::
     For more detailed information go to `Sylius API AdjustableInterface`_.
 
-.. _Sylius API AdjustableInterface: http://api.sylius.org/Sylius/Component/Order/Model/AdjustableInterface.html
+.. _Sylius API AdjustableInterface: http://api.sylius.com/Sylius/Component/Order/Model/AdjustableInterface.html
 
 .. _component_order_model_comment-interface:
 
@@ -108,7 +108,7 @@ This interface should be implemented by model representing a single Comment.
 
     For more detailed information go to `Sylius API CommentInterface`_.
 
-.. _Sylius API CommentInterface: http://api.sylius.org/Sylius/Component/Order/Model/CommentInterface.html
+.. _Sylius API CommentInterface: http://api.sylius.com/Sylius/Component/Order/Model/CommentInterface.html
 
 .. _component_order_model_comment-aware-interface:
 
@@ -121,7 +121,7 @@ If you want to have comments in your model just implement this interface.
 .. note::
     For more detailed information go to `Sylius API CommentAwareInterface`_.
 
-.. _Sylius API CommentAwareInterface: http://api.sylius.org/Sylius/Component/Order/Model/CommentAwareInterface.html
+.. _Sylius API CommentAwareInterface: http://api.sylius.com/Sylius/Component/Order/Model/CommentAwareInterface.html
 
 .. _component_order_model_identity-interface:
 
@@ -133,7 +133,7 @@ This interface should be implemented by model representing a single Identity. It
 .. note::
     For more detailed information go to `Sylius API IdentityInterface`_.
 
-.. _Sylius API IdentityInterface: http://api.sylius.org/Sylius/Component/Order/Model/IdentityInterface.html
+.. _Sylius API IdentityInterface: http://api.sylius.com/Sylius/Component/Order/Model/IdentityInterface.html
 
 Services Interfaces
 -------------------
@@ -151,4 +151,4 @@ you should create repository class which implements this interface.
 
     For more detailed information about the interface go to `Sylius API OrderRepositoryInterface`_.
 
-.. _Sylius API OrderRepositoryInterface: http://api.sylius.org/Sylius/Component/Order/Repository/OrderRepositoryInterface.html
+.. _Sylius API OrderRepositoryInterface: http://api.sylius.com/Sylius/Component/Order/Repository/OrderRepositoryInterface.html

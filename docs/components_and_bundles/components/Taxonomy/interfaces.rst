@@ -19,7 +19,7 @@ The **TaxonInterface** gives an object an ability to have Taxons assigned as chi
 
     You will find more information about that interface in `Sylius API TaxonInterface`_.
 
-.. _Sylius API TaxonInterface: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonInterface.html
+.. _Sylius API TaxonInterface: http://api.sylius.com/Sylius/Component/Taxonomy/Model/TaxonInterface.html
 
 .. _component_taxonomy_model_taxons-aware-interface:
 
@@ -32,7 +32,7 @@ The **TaxonsAwareInterface** should be implemented by models that can be classif
 
     You will find more information about that interface in `Sylius API TaxonsAwareInterface`_.
 
-.. _Sylius API TaxonsAwareInterface: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonsAwareInterface.html
+.. _Sylius API TaxonsAwareInterface: http://api.sylius.com/Sylius/Component/Taxonomy/Model/TaxonsAwareInterface.html
 
 .. _component_taxonomy_model_taxon-translation-interface:
 
@@ -45,7 +45,7 @@ This interface should be implemented by models that will store the **Taxon** tra
 
     You will find more information about that interface in `Sylius API TaxonTranslationInterface`_.
 
-.. _Sylius API TaxonTranslationInterface: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonTranslationInterface.html
+.. _Sylius API TaxonTranslationInterface: http://api.sylius.com/Sylius/Component/Taxonomy/Model/TaxonTranslationInterface.html
 
 Services Interfaces
 -------------------
@@ -61,4 +61,4 @@ In order to have a possibility to get Taxons as a list you should create a repos
 
     You will find more information about that interface in `Sylius API TaxonRepositoryInterface`_.
 
-.. _Sylius API TaxonRepositoryInterface: http://api.sylius.org/Sylius/Component/Taxonomy/Repository/TaxonRepositoryInterface.html
+.. _Sylius API TaxonRepositoryInterface: http://api.sylius.com/Sylius/Component/Taxonomy/Repository/TaxonRepositoryInterface.html

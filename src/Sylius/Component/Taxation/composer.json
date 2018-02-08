@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Flexible taxation system for PHP ecommerce applications.",
     "keywords": ["shop", "ecommerce", "tax", "taxes", "taxation", "vat", "sylius"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",

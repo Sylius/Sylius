@@ -7,9 +7,9 @@ core team.
 Reporting a Security Issue
 --------------------------
 
-If you think that you have found a security issue in Sylius, don't use the 
+If you think that you have found a security issue in Sylius, don't use the
 bug tracker and do not post it publicly. Instead, all
-security issues must be sent to **security [at] sylius.org**. Emails sent to
+security issues must be sent to **security [at] sylius.com**. Emails sent to
 this address are forwarded to the Sylius core team members.
 
 Resolving Process
@@ -44,4 +44,4 @@ confirmed, the team works on a solution following these steps:
     While we are working on a patch, please do not reveal the issue publicly.
 
 .. _Git repository:      https://github.com/Sylius/Sylius
-.. _blog:                http://sylius.org/blog
+.. _blog:                http://sylius.com/blog

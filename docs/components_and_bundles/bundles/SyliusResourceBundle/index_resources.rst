@@ -67,7 +67,7 @@ Using a Custom Repository Method
 --------------------------------
 
 You can define your own repository method too, you can use the same way explained
-in `show_resource  <http://docs.sylius.org/en/latest/components_and_bundles/bundles/SyliusResourceBundle/show_resource.html#using-custom-repository-methods>`_.
+in `show_resource  <http://docs.sylius.com/en/latest/components_and_bundles/bundles/SyliusResourceBundle/show_resource.html#using-custom-repository-methods>`_.
 
 .. note::
 

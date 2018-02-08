@@ -87,7 +87,7 @@ To create a new product use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/ \
+    $ curl http://demo.sylius.com/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -136,7 +136,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/ \
+    $ curl http://demo.sylius.com/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
        -X POST
@@ -204,7 +204,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/ \
+    $ curl http://demo.sylius.com/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -683,7 +683,7 @@ To see the details for the product with ``code = BMM`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/BMM \
+    $ curl http://demo.sylius.com/api/v1/products/BMM \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -762,7 +762,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/ \
+    $ curl http://demo.sylius.com/api/v1/products/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -1092,7 +1092,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/BMM \
+    $ curl http://demo.sylius.com/api/v1/products/BMM \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -1138,7 +1138,7 @@ To partially update the product with ``code = BMM`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/BMM \
+    $ curl http://demo.sylius.com/api/v1/products/BMM \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -1186,7 +1186,7 @@ To delete the product with ``code = MUG_TH`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG_TH \
+    $ curl http://demo.sylius.com/api/v1/products/MUG_TH \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

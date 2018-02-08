@@ -36,4 +36,4 @@ concerning channel's data and as default has the following properties:
 
    For more detailed information go to `Sylius API Channel`_.
 
-.. _Sylius API Channel: http://api.sylius.org/Sylius/Component/Channel/Model/Channel.html
+.. _Sylius API Channel: http://api.sylius.com/Sylius/Component/Channel/Model/Channel.html

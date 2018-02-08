@@ -16,7 +16,7 @@ the **PromotionSubjectInterface**.
 
     You will find more information about this interface in `Sylius API PromotionSubjectInterface`_.
 
-.. _Sylius API PromotionSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionSubjectInterface.html
+.. _Sylius API PromotionSubjectInterface: http://api.sylius.com/Sylius/Component/Promotion/Model/PromotionSubjectInterface.html
 
 .. _component_promotion_model_promotion-interface:
 
@@ -31,7 +31,7 @@ This interface should be implemented by models representing a **Promotion**.
 
     You will find more information about this interface in `Sylius API PromotionInterface`_.
 
-.. _Sylius API PromotionInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionInterface.html
+.. _Sylius API PromotionInterface: http://api.sylius.com/Sylius/Component/Promotion/Model/PromotionInterface.html
 
 .. _component_promotion_model_action-interface:
 
@@ -54,7 +54,7 @@ An **PromotionActionInterface** has two defined types by default:
 
     You will find more information about this interface in `Sylius API PromotionActionInterface`_.
 
-.. _Sylius API PromotionActionInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionActionInterface.html
+.. _Sylius API PromotionActionInterface: http://api.sylius.com/Sylius/Component/Promotion/Model/PromotionActionInterface.html
 
 .. _component_promotion_model_coupon-interface:
 
@@ -70,7 +70,7 @@ This interface should be implemented by models representing a **Coupon**.
 
     You will find more information about this interface in `Sylius API CouponInterface`_.
 
-.. _Sylius API CouponInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/CouponInterface.html
+.. _Sylius API CouponInterface: http://api.sylius.com/Sylius/Component/Promotion/Model/CouponInterface.html
 
 .. _component_promotion_model_rule-interface:
 
@@ -93,7 +93,7 @@ A **PromotionRuleInterface** has two defined types by default:
 
     You will find more information about this interface in `Sylius API PromotionRuleInterface`_.
 
-.. _Sylius API PromotionRuleInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionRuleInterface.html
+.. _Sylius API PromotionRuleInterface: http://api.sylius.com/Sylius/Component/Promotion/Model/PromotionRuleInterface.html
 
 .. _component_promotion_model_promotion-countable-subject-interface:
 
@@ -109,7 +109,7 @@ the ``CountablePromotionSubjectInterface``.
 
     You will find more information about this interface in `Sylius API CountablePromotionSubjectInterface`_.
 
-.. _Sylius API CountablePromotionSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/CountablePromotionSubjectInterface.html
+.. _Sylius API CountablePromotionSubjectInterface: http://api.sylius.com/Sylius/Component/Promotion/Model/CountablePromotionSubjectInterface.html
 
 .. _component_promotion_model_promotion-coupon-aware-subject-interface:
 
@@ -125,7 +125,7 @@ the ``PromotionCouponAwarePromotionSubjectInterface``.
 
     You will find more information about this interface in `Sylius API PromotionCouponAwarePromotionSubjectInterface`_.
 
-.. _Sylius API PromotionCouponAwarePromotionSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionCouponAwarePromotionSubjectInterface.html
+.. _Sylius API PromotionCouponAwarePromotionSubjectInterface: http://api.sylius.com/Sylius/Component/Promotion/Model/PromotionCouponAwarePromotionSubjectInterface.html
 
 .. _component_promotion_model_promotion-coupons-aware-subject-interface:
 
@@ -141,7 +141,7 @@ the ``PromotionCouponsAwareSubjectInterface``.
 
     You will find more information about this interface in `Sylius API PromotionCouponsAwareSubjectInterface`_.
 
-.. _Sylius API PromotionCouponsAwareSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionCouponsAwareSubjectInterface.html
+.. _Sylius API PromotionCouponsAwareSubjectInterface: http://api.sylius.com/Sylius/Component/Promotion/Model/PromotionCouponsAwareSubjectInterface.html
 
 
 Services Interfaces
@@ -158,7 +158,7 @@ Services responsible for checking the promotions eligibility on the promotion su
 
     You will find more information about this interface in `Sylius API PromotionEligibilityCheckerInterface`_.
 
-.. _Sylius API PromotionEligibilityCheckerInterface: http://api.sylius.org/Sylius/Component/Promotion/Checker/PromotionEligibilityCheckerInterface.html
+.. _Sylius API PromotionEligibilityCheckerInterface: http://api.sylius.com/Sylius/Component/Promotion/Checker/PromotionEligibilityCheckerInterface.html
 
 .. _component_promotion_checker_promotion-rule-checker-interface:
 
@@ -171,7 +171,7 @@ Services responsible for checking the rules eligibility should implement this in
 
     You will find more information about this interface in `Sylius API RuleCheckerInterface`_.
 
-.. _Sylius API RuleCheckerInterface: http://api.sylius.org/Sylius/Component/Promotion/Checker/RuleCheckerInterface.html
+.. _Sylius API RuleCheckerInterface: http://api.sylius.com/Sylius/Component/Promotion/Checker/RuleCheckerInterface.html
 
 .. _component_promotion_action_promotion-applicator-interface:
 
@@ -184,7 +184,7 @@ Service responsible for applying promotions in your system should implement this
 
     You will find more information about this interface in `Sylius API PromotionApplicatorInterface`_.
 
-.. _Sylius API PromotionApplicatorInterface: http://api.sylius.org/Sylius/Component/Promotion/Action/PromotionApplicatorInterface.html
+.. _Sylius API PromotionApplicatorInterface: http://api.sylius.com/Sylius/Component/Promotion/Action/PromotionApplicatorInterface.html
 
 .. _component_promotion_processor_promotion-processor-interface:
 
@@ -197,7 +197,7 @@ Service responsible for checking all rules and applying configured actions if ru
 
     You will find more information about this interface in `Sylius API PromotionProcessorInterface`_.
 
-.. _Sylius API PromotionProcessorInterface: http://api.sylius.org/Sylius/Component/Promotion/Processor/PromotionProcessorInterface.html
+.. _Sylius API PromotionProcessorInterface: http://api.sylius.com/Sylius/Component/Promotion/Processor/PromotionProcessorInterface.html
 
 .. _component_promotion_repository_promotion-repository-interface:
 
@@ -211,7 +211,7 @@ In order to be able to find active promotions in your system you should create a
 
     For more detailed information about this interface go to `Sylius API PromotionRepositoryInterface`_.
 
-.. _Sylius API PromotionRepositoryInterface: http://api.sylius.org/Sylius/Component/Promotion/Repository/PromotionRepositoryInterface.html
+.. _Sylius API PromotionRepositoryInterface: http://api.sylius.com/Sylius/Component/Promotion/Repository/PromotionRepositoryInterface.html
 
 .. _component_promotion_generator_coupon-generator-interface:
 
@@ -224,7 +224,7 @@ In order to automate the process of coupon generation your system needs to have 
 
     For more detailed information about this interface go to `Sylius API PromotionCouponGeneratorInterface`_.
 
-.. _Sylius API PromotionCouponGeneratorInterface: http://api.sylius.org/Sylius/Component/Promotion/Generator/PromotionCouponGeneratorInterface.html
+.. _Sylius API PromotionCouponGeneratorInterface: http://api.sylius.com/Sylius/Component/Promotion/Generator/PromotionCouponGeneratorInterface.html
 
 .. _component_promotion_model_action-action-interface:
 
@@ -237,4 +237,4 @@ This interface should be implemented by services that execute actions on the pro
 
     You will find more information about this interface in `Sylius API PromotionActionCommandInterface`_.
 
-.. _Sylius API PromotionActionCommandInterface: http://api.sylius.org/Sylius/Component/Promotion/Action/PromotionActionCommandInterface.html
+.. _Sylius API PromotionActionCommandInterface: http://api.sylius.com/Sylius/Component/Promotion/Action/PromotionActionCommandInterface.html

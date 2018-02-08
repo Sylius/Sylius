@@ -33,12 +33,12 @@ It also makes testing much simpler because you can mock the Factory and use it a
 
 What is more, thanks to usage of Factory pattern, Sylius is able to easily swap default Product (or any other resource) model with your custom implementation, without changing code.
 
-.. _FactoryInterface: http://api.sylius.org/Sylius/Component/Resource/Factory/FactoryInterface.html
+.. _FactoryInterface: http://api.sylius.com/Sylius/Component/Resource/Factory/FactoryInterface.html
 
 .. note::
     For more detailed information go to `Sylius API Factory`_.
 
-.. _Sylius API Factory: http://api.sylius.org/Sylius/Component/Resource/Factory/Factory.html
+.. _Sylius API Factory: http://api.sylius.com/Sylius/Component/Resource/Factory/Factory.html
 
 .. caution::
     In concrete Component's documentation we will use ``new`` keyword to create resources - just to keep things simpler to read.

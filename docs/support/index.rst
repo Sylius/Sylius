@@ -20,7 +20,7 @@ We have created following rooms so far:
 
 If you have any suggestions, please let us know on Slack!
 
-Slack requires inviting new members, but this can be done automatically, just go to `sylius.org/slack <http://sylius.org/slack>`_,
+Slack requires inviting new members, but this can be done automatically, just go to `sylius.com/slack <http://sylius.com/slack>`_,
 enter your email and you will get an invitation.
 If possible, please use GitHub username - it will help us to recognize each other easily!
 

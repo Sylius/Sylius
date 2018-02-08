@@ -69,7 +69,7 @@ To see the details of the province with ``code = PL-MZ`` which belongs to the co
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/countries/PL/provinces/PL-MZ \
+     $ curl http://demo.sylius.com/api/v1/countries/PL/provinces/PL-MZ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 

@@ -58,8 +58,8 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $this->send(
-            ['pawel@sylius.org'],
-            'arnaud@sylius.org',
+            ['pawel@sylius.com'],
+            'arnaud@sylius.com',
             'arnaud',
             $renderedEmail,
             $email,

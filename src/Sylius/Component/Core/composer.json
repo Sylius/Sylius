@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Sylius e-commerce core. It integrates all components.",
     "keywords": ["shop", "ecommerce", "core", "store", "sylius"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",

@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Orders management library for PHP.",
     "keywords": ["order", "sales", "shop", "webshop", "ecommerce"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",

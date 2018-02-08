@@ -37,4 +37,4 @@ Email has the following properties:
     This model implements the :ref:`component_mailer_model_email-interface`
     For more detailed information go to `Sylius API Email`_.
 
-.. _Sylius API Email: http://api.sylius.org/Sylius/Component/Mailer/Model/Email.html
+.. _Sylius API Email: http://api.sylius.com/Sylius/Component/Mailer/Model/Email.html
