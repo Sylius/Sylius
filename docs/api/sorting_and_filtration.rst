@@ -39,7 +39,7 @@ Example
 
 .. code-block:: bash
 
-    $  curl 'http://demo.sylius.org/api/v1/products/?sorting\[code\]=desc&limit=4' \
+    $  curl 'http://demo.sylius.com/api/v1/products/?sorting\[code\]=desc&limit=4' \
           -H "Authorization: Bearer SampleToken"
 
 Exemplary response
@@ -290,7 +290,7 @@ Example
 
 .. code-block:: bash
 
-    $  curl 'http://demo.sylius.org/api/v1/products/?criteria\[search\]\[type\]=contains&criteria\[search\]\[value\]=sticker&limit=4' \
+    $  curl 'http://demo.sylius.com/api/v1/products/?criteria\[search\]\[type\]=contains&criteria\[search\]\[value\]=sticker&limit=4' \
           -H "Authorization: Bearer SampleToken"
 
 Exemplary response

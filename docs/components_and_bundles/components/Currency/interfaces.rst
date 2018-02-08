@@ -17,7 +17,7 @@ name, exchange rate and whether the currency should be enabled or not.
 
    For more detailed information go to `Sylius API CurrencyInterface`_.
 
-.. _Sylius API CurrencyInterface: http://api.sylius.org/Sylius/Component/Currency/Model/CurrencyInterface.html
+.. _Sylius API CurrencyInterface: http://api.sylius.com/Sylius/Component/Currency/Model/CurrencyInterface.html
 
 Service Interfaces
 ------------------
@@ -32,7 +32,7 @@ Any container used to store, and manage currencies should implement this interfa
 .. note::
    For more detailed information go to `Sylius API CurrenciesAwareInterface`_.
 
-.. _Sylius API CurrenciesAwareInterface: http://api.sylius.org/Sylius/Component/Currency/Model/CurrenciesAwareInterface.html
+.. _Sylius API CurrenciesAwareInterface: http://api.sylius.com/Sylius/Component/Currency/Model/CurrenciesAwareInterface.html
 
 .. _component_currency_context_currency-context-interface:
 
@@ -51,7 +51,7 @@ It also contains the default storage key:
 .. note::
    For more detailed information go to `Sylius API CurrencyContextInterface`_.
 
-.. _Sylius API CurrencyContextInterface: http://api.sylius.org/Sylius/Component/Currency/Context/CurrencyContextInterface.html
+.. _Sylius API CurrencyContextInterface: http://api.sylius.com/Sylius/Component/Currency/Context/CurrencyContextInterface.html
 
 .. _component_currency_converter_currency-converter-interface:
 
@@ -64,7 +64,7 @@ the amount of money from one currency to another, according to their exchange ra
 .. note::
    For more detailed information go to `Sylius API CurrencyConverterInterface`_.
 
-.. _Sylius API CurrencyConverterInterface: http://api.sylius.org/Sylius/Component/Currency/Converter/CurrencyConverterInterface.html
+.. _Sylius API CurrencyConverterInterface: http://api.sylius.com/Sylius/Component/Currency/Converter/CurrencyConverterInterface.html
 
 .. _component_currency_provider_currency-provider-interface:
 
@@ -77,4 +77,4 @@ all available currencies from any container you would like.
 .. note::
    For more detailed information go to `Sylius API CurrencyProviderInterface`_.
 
-.. _Sylius API CurrencyProviderInterface: http://api.sylius.org/Sylius/Component/Currency/Provider/CurrencyProviderInterface.html
+.. _Sylius API CurrencyProviderInterface: http://api.sylius.com/Sylius/Component/Currency/Provider/CurrencyProviderInterface.html

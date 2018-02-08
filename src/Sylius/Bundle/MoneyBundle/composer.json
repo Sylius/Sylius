@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Currencies and money formatting engine bundle for Symfony2.",
     "keywords": ["cash", "currency", "money", "currencies"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",
@@ -29,7 +29,7 @@
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
-        "doctrine/orm": "~2.5.0",
+        "doctrine/orm": "^2.5",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^5.6",
         "twig/twig": "^2.0",

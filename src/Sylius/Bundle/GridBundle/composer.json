@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Amazing grids with support of filters and custom fields integrated into Symfony.",
     "keywords": ["shop", "ecommerce", "store", "webshop", "sylius", "grid", "admin", "crud"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name":     "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name":     "Community contributions",
@@ -30,7 +30,7 @@
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "^3.0@alpha",
         "doctrine/doctrine-bundle": "~1.3",
-        "doctrine/orm": "~2.5.0",
+        "doctrine/orm": "^2.5",
         "doctrine/phpcr-odm": "^1.3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "jackalope/jackalope-doctrine-dbal": "^1.2",

@@ -50,4 +50,4 @@ enhancement or the bug fix will be scheduled for the next major version.
 
 .. _Git repository: https://github.com/Sylius/Sylius
 .. _Semantic Versioning: http://semver.org/
-.. _Backward Compatibility Promise: http://docs.sylius.org/en/latest/contributing/code/bc.html
+.. _Backward Compatibility Promise: http://docs.sylius.com/en/latest/contributing/code/bc.html

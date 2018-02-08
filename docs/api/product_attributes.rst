@@ -75,7 +75,7 @@ To create a new text product attribute use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-attributes/text \
+    $ curl http://demo.sylius.com/api/v1/product-attributes/text \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -114,7 +114,7 @@ Exemplary Response
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-attributes/text \
+    $ curl http://demo.sylius.com/api/v1/product-attributes/text \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -185,7 +185,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-attributes/text/ \
+    $ curl http://demo.sylius.com/api/v1/product-attributes/text/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -266,7 +266,7 @@ To see the details of the product attribute with ``code = sticker_paper`` use th
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/product-attributes/sticker_paper \
+     $ curl http://demo.sylius.com/api/v1/product-attributes/sticker_paper \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -334,7 +334,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-attributes/ \
+    $ curl http://demo.sylius.com/api/v1/product-attributes/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -576,7 +576,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-attributes/mug_material \
+    $ curl http://demo.sylius.com/api/v1/product-attributes/mug_material \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -621,7 +621,7 @@ To partially update the product attribute with ``code = mug_material`` use the b
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-attributes/mug_material \
+    $ curl http://demo.sylius.com/api/v1/product-attributes/mug_material \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -669,7 +669,7 @@ To delete the product attribute with ``code = mug_material`` use the below metho
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-attributes/mug_material \
+    $ curl http://demo.sylius.com/api/v1/product-attributes/mug_material \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

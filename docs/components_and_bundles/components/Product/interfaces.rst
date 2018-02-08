@@ -18,7 +18,7 @@ This interface should be implemented by models characterizing a product.
 
    For more information go to `Sylius API ProductInterface`_.
 
-.. _Sylius API ProductInterface: http://api.sylius.org/Sylius/Component/Product/Model/ProductInterface.html
+.. _Sylius API ProductInterface: http://api.sylius.com/Sylius/Component/Product/Model/ProductInterface.html
 
 .. _component_product_model_product-translation-interface:
 
@@ -32,7 +32,7 @@ This interface should be implemented by models used for storing a single transla
 
    For more information go to `Sylius API ProductTranslationInterface`_.
 
-.. _Sylius API ProductTranslationInterface: http://api.sylius.org/Sylius/Component/Product/Model/ProductTranslationInterface.html
+.. _Sylius API ProductTranslationInterface: http://api.sylius.com/Sylius/Component/Product/Model/ProductTranslationInterface.html
 
 .. _component_product_model_attribute-value-interface:
 
@@ -47,7 +47,7 @@ to bind an attribute and a value to a specific product.
 
    For more information go to `Sylius API AttributeValueInterface`_.
 
-.. _Sylius API AttributeValueInterface: http://api.sylius.org/Sylius/Component/Product/Model/AttributeValueInterface.html
+.. _Sylius API AttributeValueInterface: http://api.sylius.com/Sylius/Component/Product/Model/AttributeValueInterface.html
 
 .. _component_product_model_variant-interface:
 

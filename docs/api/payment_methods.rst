@@ -53,7 +53,7 @@ To see the details of the payment method with ``code = cash_on_delivery`` use th
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/payment-methods/cash_on_delivery \
+     $ curl http://demo.sylius.com/api/v1/payment-methods/cash_on_delivery \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 

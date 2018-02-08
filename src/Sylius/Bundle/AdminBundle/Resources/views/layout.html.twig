@@ -43,9 +43,8 @@
     {{ sonata_block_render_event('sylius.admin.layout.sidebar_down') }}
 {% endblock %}
 
-{% block post_content %}
-    <div class="ui divider"></div>
-    {{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.org" target="_blank">Sylius v{{ sylius_meta.version }}</a>
+{% block footer %}
+    {{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.com" target="_blank">Sylius v{{ sylius_meta.version }}</a>
 {% endblock %}
 
 {% block javascripts %}

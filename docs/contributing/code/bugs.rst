@@ -30,7 +30,7 @@ If your problem definitely looks like a bug, report it using the official bug
 
 * *(optional)* Attach a :doc:`patch <patches>`.
 
-.. _documentation: http://docs.sylius.org
+.. _documentation: http://docs.sylius.com
 .. _stackoverflow.com: http://stackoverflow.com
 .. _IRC channel: irc://irc.freenode.net/sylius
 .. _tracker: https://github.com/Sylius/Sylius/issues

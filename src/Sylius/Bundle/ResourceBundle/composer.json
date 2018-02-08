@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Resource component for Sylius.",
     "keywords": ["resource", "storage", "persistence", "sylius"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",
@@ -44,7 +44,7 @@
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "^3.0@alpha",
         "doctrine/mongodb-odm": "^1.0",
-        "doctrine/orm": "~2.5.0",
+        "doctrine/orm": "^2.5",
         "doctrine/phpcr-odm": "^1.4",
         "incenteev/composer-parameter-handler": "^2.1",
         "jackalope/jackalope-doctrine-dbal": "^1.2",
@@ -59,7 +59,7 @@
         "twig/twig": "^2.0"
     },
     "suggest": {
-        "doctrine/orm": "~2.5.0",
+        "doctrine/orm": "^2.5",
         "sylius/locale": "^1.0"
     },
     "scripts": {

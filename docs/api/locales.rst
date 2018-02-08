@@ -59,7 +59,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/locales/ \
+    $ curl http://demo.sylius.com/api/v1/locales/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -97,7 +97,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/locales/ \
+    $ curl http://demo.sylius.com/api/v1/locales/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -152,7 +152,7 @@ To see the details of the locale with ``code = pl`` use the below method:
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/locales/pl \
+     $ curl http://demo.sylius.com/api/v1/locales/pl \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -210,7 +210,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/locales/ \
+    $ curl http://demo.sylius.com/api/v1/locales/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -297,7 +297,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/locales/pl \
+    $ curl http://demo.sylius.com/api/v1/locales/pl \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

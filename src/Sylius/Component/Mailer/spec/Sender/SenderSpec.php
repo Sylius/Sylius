@@ -62,7 +62,7 @@ final class SenderSpec extends ObjectBehavior
         $email->isEnabled()->willReturn(false);
 
         $rendererAdapter->render($email, ['foo' => 2])->shouldNotBeCalled();
-        $senderAdapter->send(['john@example.com'], 'mail@sylius.org', 'Sylius Mailer', null, $email, [], [], [])->shouldNotBeCalled();
+        $senderAdapter->send(['john@example.com'], 'mail@sylius.com', 'Sylius Mailer', null, $email, [], [], [])->shouldNotBeCalled();
 
         $this->send('bar', ['john@example.com'], ['foo' => 2], []);
     }

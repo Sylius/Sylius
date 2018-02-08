@@ -217,7 +217,7 @@ If you want to use a custom form:
 
     Remember, that if your form type has some dependencies you have to declare it as a service and tag with **name: form.type**. You can read more about it `here`__
 
-__ http://docs.sylius.org/en/latest/components_and_bundles/bundles/SyliusResourceBundle/forms.html#custom-resource-form
+__ http://docs.sylius.com/en/latest/components_and_bundles/bundles/SyliusResourceBundle/forms.html#custom-resource-form
 
 Using a Custom Redirect
 -----------------------

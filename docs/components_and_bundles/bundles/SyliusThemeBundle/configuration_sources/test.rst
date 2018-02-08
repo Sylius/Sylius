@@ -25,4 +25,4 @@ In order to use tests, have a look at ``sylius.theme.test_theme_configuration_ma
  - remove a theme: ``void remove(string $themeName)``
  - remove all themes: ``void clear()``
 
-.. _TestThemeConfigurationManagerInterface: http://api.sylius.org/Sylius/Bundle/ThemeBundle/Configuration/Test/TestThemeConfigurationManagerInterface.html
+.. _TestThemeConfigurationManagerInterface: http://api.sylius.com/Sylius/Bundle/ThemeBundle/Configuration/Test/TestThemeConfigurationManagerInterface.html

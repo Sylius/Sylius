@@ -29,6 +29,6 @@ Locale has the following properties:
     This model implements the :ref:`component_locale_model_locale-interface`
     For more detailed information go to `Sylius API Locale`_.
 
-.. _Sylius API Locale: http://api.sylius.org/Sylius/Component/Locale/Model/Locale.html
+.. _Sylius API Locale: http://api.sylius.com/Sylius/Component/Locale/Model/Locale.html
 
 .. _Symfony Intl component: http://symfony.com/doc/current/components/intl.html

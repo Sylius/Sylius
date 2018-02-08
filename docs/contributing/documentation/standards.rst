@@ -43,7 +43,7 @@ Example
 
         echo 'You cannot use the :: shortcut here';
 
-    .. _`Sylius Documentation`: http://docs.sylius.org/en/latest/contributing/documentation/standards.html
+    .. _`Sylius Documentation`: http://docs.sylius.com/en/latest/contributing/documentation/standards.html
 
 Code Examples
 -------------
