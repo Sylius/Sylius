@@ -1,11 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    currency:
-        code:
-            exact_length: A pénznem kódjának pontosan 3 karakter hosszúnak kell lennie.
-            not_blank: Kérjük adja meg a pénznem kódját!
-            unique: A pénznem kódja már meg lett adva.
-        exchange_rate:
-            not_blank: Kérjük adja meg az árfolyamot!
+  currency:
+    code:
+      exact_length: A pénznem kódjának pontosan 3 karakter hosszúnak kell lennie.
+      not_blank: Kérjük adja meg a pénznem kódját!
+      unique: A pénznem kódja már meg lett adva.
+    exchange_rate:
+      not_blank: Kérjük adja meg az árfolyamot!

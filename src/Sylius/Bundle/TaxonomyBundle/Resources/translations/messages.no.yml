@@ -2,11 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        taxon:
-            description: Beskrivelse
-            name: Navn
-            parent: Forelder
-            slug: Slug
-        taxonomy:
-            name: Navn
+  form:
+    taxon:
+      parent: Forelder

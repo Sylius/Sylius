@@ -2,8 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        currency:
-            code: Naziv grupe
-            enabled: Omogući
-            exchange_rate: Tečaj
+  form:
+    currency:
+      exchange_rate: Tečaj

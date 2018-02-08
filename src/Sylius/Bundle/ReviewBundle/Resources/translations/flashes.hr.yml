@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    review:
-        accept: 'Recenzija je uspješno prihvaćena.'
-        reject: 'Recenzija je uspješno odbijena.'
-        wait_for_the_acceptation: 'Vaša recenzija je trenutno u procesu odobrenja.'
+  review:
+    accept: 'Recenzija je uspješno prihvaćena.'
+    reject: 'Recenzija je uspješno odbijena.'
+    wait_for_the_acceptation: 'Vaša recenzija je trenutno u procesu odobrenja.'

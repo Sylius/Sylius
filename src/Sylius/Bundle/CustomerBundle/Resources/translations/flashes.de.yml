@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    customer:
-        register: 'Vielen Dank für Ihre Registrierung. Überprüfen Sie Ihre E-Mails und bestätigen Sie Ihren Account.'
+  customer:
+    register: 'Vielen Dank für Ihre Registrierung. Überprüfen Sie Ihre E-Mails und bestätigen Sie Ihren Account.'

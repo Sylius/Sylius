@@ -1,14 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    form:
-        promotion:
-            add_action: Додајте акцију
-            add_rule: Додајте правило
-        promotion_action:
-            type: Тип
-        promotion_rule:
-            shipping_country_configuration:
-                country: Земља
-            type: Тип
+  form:
+    promotion:
+      add_action: Додајте акцију
+      add_rule: Додајте правило

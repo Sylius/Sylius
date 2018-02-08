@@ -2,27 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        product:
-            name: Ime
-            description: Opis
-            attributes: Atributi
-            options: Možnosti
-            meta_keywords: Meta ključne besede
-            meta_description: Meta opis
-        product_variant:
-            name: Ime
-        association_type:
-            name: Ime
-            translations: Prevodi
-        association:
-            type: Vrsta združenja
-            product: Povezani izdelek
-        variant:
-            name: Ime
-        option:
-            name: Ime
-            values: Možne vrednosti
-        option_value:
-            add_value: Dodajte vrednost
-            value: Vrednost
+  form:
+    product:
+      attributes: Atributi
+      options: Možnosti
+      meta_keywords: Meta ključne besede
+      meta_description: Meta opis
+    association:
+      type: Vrsta združenja
+      product: Povezani izdelek
+    option:
+      values: Možne vrednosti

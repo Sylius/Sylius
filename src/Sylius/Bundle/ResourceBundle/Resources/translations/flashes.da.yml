@@ -1,8 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    resource:
-        create: '%resource% er blevet oprettet.'
-        update: '%resource% er blevet opdateret.'
-        delete: '%resource% er blevet slettet.'
+  resource:
+    create: '%resource% er blevet oprettet.'
+    update: '%resource% er blevet opdateret.'
+    delete: '%resource% er blevet slettet.'

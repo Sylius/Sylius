@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    payment:
-        cancelled: 'Platba byla zrušena.'
-        completed: 'Platba byla dokončena.'
-        failed: 'Platba se nezdařila.'
-        processing: 'Platba se zpracovává.'
-        refunded: 'Platba byla úspěšně vrácena.'
-        unknown: 'Došlo k neznámým potížím s platbou.'
+  payment:
+    cancelled: 'Platba byla zrušena.'
+    completed: 'Platba byla dokončena.'
+    failed: 'Platba se nezdařila.'
+    processing: 'Platba se zpracovává.'
+    refunded: 'Platba byla úspěšně vrácena.'
+    unknown: 'Došlo k neznámým potížím s platbou.'

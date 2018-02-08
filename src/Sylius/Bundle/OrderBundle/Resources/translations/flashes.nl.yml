@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    cart:
-        add_item: 'Product werd toegevoegd aan de winkelwagen'
-        cannot_modify: 'De bestelling werd reeds doorgestuurd voor de winkelmand die U tracht te wijzigen.'
-        remove_item: 'Product werd verwijderd uit de winkelwagen'
-        save: 'De winkelwagen werd bijgewerkt'
+  cart:
+    add_item: 'Product werd toegevoegd aan de winkelwagen'
+    cannot_modify: 'De bestelling werd reeds doorgestuurd voor de winkelmand die U tracht te wijzigen.'
+    remove_item: 'Product werd verwijderd uit de winkelwagen'
+    save: 'De winkelwagen werd bijgewerkt'

@@ -2,33 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        promotion:
-            actions: Handlinger
-            add_action: Tilføj handling
-            add_rule: Tilføj regel
-            coupon_based: Kupon baseret
-            description: Beskrivelse
-            ends_at: Slutter den
-            name: Navn
-            rules: Regler
-            starts_at: Starter ved
-        promotion_action:
-            fixed_discount_configuration:
-                amount: Beløb
-            type: Type
-        promotion_coupon_generator_instruction:
-            amount: Beløb
-        promotion_rule:
-            customer_group: Kundegruppe
-            cart_quantity_configuration:
-                count: Antal
-            contains_product_configuration:
-                variants: Produkter
-            item_total_configuration:
-                amount: Beløb
-            shipping_country_configuration:
-                country: Land
-            taxonomy_configuration:
-                taxons: Kategorier
-            type: Type
+  form:
+    promotion:
+      actions: Handlinger
+      add_action: Tilføj handling
+      add_rule: Tilføj regel
+      coupon_based: Kupon baseret
+      ends_at: Slutter den
+      rules: Regler
+      starts_at: Starter ved

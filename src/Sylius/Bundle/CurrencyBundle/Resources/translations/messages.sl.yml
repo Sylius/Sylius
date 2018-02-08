@@ -2,8 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        currency:
-            code: Ime
-            enabled: Omogočeno
-            exchange_rate: Menjalni tečaj
+  form:
+    currency:
+      exchange_rate: Menjalni tečaj

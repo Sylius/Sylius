@@ -1,11 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    form:
-        channel:
-            color: رنگ
-            description: شرح
-            enabled: فعال
-            name: نام
-            url: آدرس اینترنتی
+  form:
+    channel:
+      color: رنگ
+      url: آدرس اینترنتی

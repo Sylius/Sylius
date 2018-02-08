@@ -2,44 +2,36 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        rule:
-            unit_count_configuration:
-                count: Aantal
-                equal: Gelijk aan
-            type: Regeltype
-        shipment:
-            state: Status
-            states:
-                checkout: Afrekenen
-                pending: Wachtende
-                ready: Klaar
-                shipped: Verzonden
-                returned: Geretourneerd
-                cancelled: Geannuleerd
-            tracking_code: Tracking Code
-        shipping_calculator:
-            flat_rate_configuration:
-                label: Vast tarief per zending
-                amount: Hoeveelheid
-            per_unit_rate_configuration:
-                label: Forfaitair bedrag per eenheid
-                amount: Hoeveelheid
-        shipping_category:
-            description: Omschrijving
-            name: Naam
-        shipping_method:
-            calculator: Calculator
-            category: Categorie
-            category_requirement: Categorie vereisten
-            channels: Kanalen
-            configuration: Configuratie
-            description: Omschrijving
-            enabled: Toegestaan
-            match_all_category_requirement: Alle eenheden moeten overeenkomen met de methodecategorie
-            match_any_category_requirement: Minstens 1 eenheid moet overeenkomen met de methodecategorie
-            match_none_category_requirement: Geen van de eenheden hoeven overeen te komen met de methodecategorie
-            name: Naam
-            position: Positie
-            tax_category: Belasting categorie
-            translations: Vertalingen
+  form:
+    rule:
+      unit_count_configuration:
+        count: Aantal
+        equal: Gelijk aan
+      type: Regeltype
+    shipment:
+      state: Status
+      states:
+        pending: Wachtende
+        ready: Klaar
+        shipped: Verzonden
+        returned: Geretourneerd
+      tracking_code: Tracking Code
+    shipping_calculator:
+      flat_rate_configuration:
+        label: Vast tarief per zending
+        amount: Hoeveelheid
+      per_unit_rate_configuration:
+        label: Forfaitair bedrag per eenheid
+    shipping_category:
+      description: Omschrijving
+      name: Naam
+    shipping_method:
+      calculator: Calculator
+      category: Categorie
+      category_requirement: Categorie vereisten
+      configuration: Configuratie
+      match_all_category_requirement: Alle eenheden moeten overeenkomen met de methodecategorie
+      match_any_category_requirement: Minstens 1 eenheid moet overeenkomen met de methodecategorie
+      match_none_category_requirement: Geen van de eenheden hoeven overeen te komen met de methodecategorie
+      name: Naam
+      position: Positie

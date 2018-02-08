@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    taxon:
-        code:
-            not_blank: Prosimo, vnesite kodo taksona.
-            unique: Takson z dano šifro že obstaja.
-        name:
-            max_length: Ime taksona ne sme biti daljše od 255 znakov.
-            not_blank: Prosimo, vnesite ime taksona.
-    taxonomy:
-        name:
-            max_length: Ime taksonomije ne sme biti daljše od 255 znakov.
-            not_blank: Prosimo, vnesite ime taksonomije.
+  taxon:
+    code:
+      not_blank: Prosimo, vnesite kodo taksona.
+      unique: Takson z dano šifro že obstaja.
+    name:
+      max_length: Ime taksona ne sme biti daljše od 255 znakov.
+      not_blank: Prosimo, vnesite ime taksona.
+  taxonomy:
+    name:
+      max_length: Ime taksonomije ne sme biti daljše od 255 znakov.
+      not_blank: Prosimo, vnesite ime taksonomije.

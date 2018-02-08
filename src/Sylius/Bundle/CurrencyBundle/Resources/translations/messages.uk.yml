@@ -2,13 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        currency:
-            base: Основна валюта
-            code: Назва
-            enabled: Увімкнено
-            exchange_rate: Курс валют
-        exchange_rate:
-            source_currency: Джерело валюти
-            target_currency: Цільова валюта
-            ratio: Рейтинг
+  form:
+    currency:
+      base: Основна валюта
+      code: Назва
+      exchange_rate: Курс валют
+    exchange_rate:
+      source_currency: Джерело валюти
+      target_currency: Цільова валюта
+      ratio: Рейтинг

@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    order_item:
-        quantity:
-            min: Antallet kan ikke være lavere enn 1.
+  order_item:
+    quantity:
+      min: Antallet kan ikke være lavere enn 1.

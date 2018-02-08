@@ -2,16 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        review:
-            author: Autor
-            comment: Comentariu
-            header: Adăugă o recenzie
-            rating: Rating
-            status:
-                approved: Aprobat
-                label: Stare
-                new: Nouă
-                rejected: Respins
-            submit: Trimite
-            title: Titlu
+  form:
+    review:
+      author: Autor
+      comment: Comentariu
+      header: Adăugă o recenzie
+      rating: Rating
+      status:
+        approved: Aprobat
+        label: Stare
+        rejected: Respins
+      submit: Trimite

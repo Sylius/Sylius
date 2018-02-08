@@ -2,13 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        tax_category:
-            name: Namn
-            description: Beskrivning
-        tax_rate:
-            category: Kategori
-            name: Namn
-            amount: Antal
-            included_in_price: Ingår i priset?
-            calculator: Kalkylator
+  form:
+    tax_rate:
+      included_in_price: Ingår i priset?
+      calculator: Kalkylator

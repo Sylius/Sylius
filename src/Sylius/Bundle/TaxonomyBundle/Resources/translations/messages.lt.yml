@@ -2,11 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        taxon:
-            description: Aprašymas
-            name: Pavadinimas
-            parent: Motininis elementas
-            slug: Šliužas (nuorodos dalis)
-        taxonomy:
-            name: Pavadinimas
+  form:
+    taxon:
+      description: Aprašymas
+      parent: Motininis elementas
+      slug: Šliužas (nuorodos dalis)

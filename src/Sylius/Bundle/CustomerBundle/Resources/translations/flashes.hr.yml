@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    customer:
-        register: 'Hvala vam na registraciji, molimo provjerite svoj email pretinac da potvrdite svoj račun.'
+  customer:
+    register: 'Hvala vam na registraciji, molimo provjerite svoj email pretinac da potvrdite svoj račun.'

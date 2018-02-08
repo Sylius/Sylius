@@ -2,10 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        taxon:
-            description: Opis
-            name: Ime
-            parent: Nadrejeni
-        taxonomy:
-            name: Ime
+  form:
+    taxon:
+      parent: Nadrejeni

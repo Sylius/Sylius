@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    review:
-        accept: 'Recensionen har accepterats.'
-        reject: 'Recensionen har avslagits.'
-        wait_for_the_acceptation: 'Din recension väntar på godkännande.'
+  review:
+    accept: 'Recensionen har accepterats.'
+    reject: 'Recensionen har avslagits.'
+    wait_for_the_acceptation: 'Din recension väntar på godkännande.'

@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    user:
-        email:
-            not_blank: Skriv inn din e-post.
+  user:
+    email:
+      not_blank: Skriv inn din e-post.

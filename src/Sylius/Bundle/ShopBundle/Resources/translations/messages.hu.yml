@@ -2,11 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    menu:
-        shop:
-            account:
-                change_password: 'Jelszó változtatás'
-                dashboard: 'Vezérlőpult'
-                header: 'Fiókod'
-                order_history: 'Rendelési előzmények'
-                personal_information: 'Személyes információk'
+  menu:
+    shop:
+      account:
+        header: 'Fiókod'

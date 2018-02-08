@@ -2,39 +2,32 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: Tipuri de asociere
-                    attributes: Atribute
-                    header: Catalog
-                    inventory: Inventar
-                    options: Opţiuni
-                    products: Produse
-                    taxons: Taxoni
-                configuration:
-                    admin_users: Administratori
-                    channels: Canale
-                    countries: Țări
-                    currencies: Monede
-                    exchange_rates: Cursuri de schimb
-                    header: Configurare
-                    locales: Setări regionale
-                    payment_methods: Metode de plată
-                    shipping_categories: Categorii de livrare
-                    shipping_methods: Metode de livrare
-                    tax_categories: Categorii de taxe
-                    tax_rates: Taxe
-                    zones: Zone
-                marketing:
-                    header: Marketing
-                    product_reviews: Recenzii despre produse
-                    promotions: Promoţii
-                customers:
-                    customers: Clienți
-                    groups: Grupuri
-                    header: Client
-                sales:
-                    header: Vânzări
-                    orders: Comenzi
+  menu:
+    admin:
+      main:
+        catalog:
+          association_types: Tipuri de asociere
+          header: Catalog
+          products: Produse
+          taxons: Taxoni
+        configuration:
+          admin_users: Administratori
+          channels: Canale
+          currencies: Monede
+          exchange_rates: Cursuri de schimb
+          payment_methods: Metode de plată
+          shipping_categories: Categorii de livrare
+          shipping_methods: Metode de livrare
+          tax_categories: Categorii de taxe
+          tax_rates: Taxe
+          zones: Zone
+        marketing:
+          header: Marketing
+          product_reviews: Recenzii despre produse
+          promotions: Promoţii
+        customers:
+          customers: Clienți
+          header: Client
+        sales:
+          header: Vânzări
+          orders: Comenzi

@@ -1,23 +1,19 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    form:
-        user:
-            email: Имейл
-            enabled: Активно
-            password:
-                label: Парола
-                confirmation: Проверка
-            remember_me: Запомни ме
-            shipping_address: Адрес за доставка
-            username: Потребителско име
-        user_filter:
-            query: Търсене
-        user_change_password:
-            confirmation: Потвърждение
-            current: Текуща парола
-            new: Нова парола
-        user_reset_password:
-            confirmation: Потвърждение
-            new: Нова парола
+  form:
+    user:
+      enabled: Активно
+      password:
+        confirmation: Проверка
+      remember_me: Запомни ме
+    user_filter:
+      query: Търсене
+    user_change_password:
+      confirmation: Потвърждение
+      current: Текуща парола
+      new: Нова парола

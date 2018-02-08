@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    menu:
-        shop:
-            account:
-                address_book: 'Adrešu grāmata'
-                change_password: 'Mainīt paroli'
-                dashboard: 'Informācijas panelis'
-                header: 'Jūsu konts'
-                order_history: 'Pasūtījumu vēsture'
-                personal_information: 'Personīgā informācija'
+  menu:
+    shop:
+      account:
+        address_book: 'Adrešu grāmata'
+        change_password: 'Mainīt paroli'
+        dashboard: 'Informācijas panelis'
+        header: 'Jūsu konts'
+        order_history: 'Pasūtījumu vēsture'
+        personal_information: 'Personīgā informācija'

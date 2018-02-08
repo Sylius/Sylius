@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    payment:
-        cancelled: 'O pagamento foi cancelado.'
-        completed: 'O pagamento foi concluído.'
-        failed: 'O pagamento falhou.'
+  payment:
+    cancelled: 'O pagamento foi cancelado.'
+    completed: 'O pagamento foi concluído.'
+    failed: 'O pagamento falhou.'

@@ -2,64 +2,46 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        promotion:
-            actions: Acties
-            add_action: Actie toevoegen
-            add_rule: Regel toevoegen
-            coupon_based: Coupon gebaseerd
-            description: Omschrijving
-            ends_at: Eindigt op
-            exclusive: Exclusief
-            name: Naam
-            priority: Prioriteit
-            rules: Regels
-            starts_at: Start op
-            usage_limit: Gebruikslimiet
-        promotion_action:
-            item_fixed_discount: Vaste korting per item
-            item_percentage_discount: Percentage per item
-            order_fixed_discount: Vaste kortingsbedrag per bestelling
-            order_percentage_discount: Vaste percentage per bestelling
-            shipping_percentage_discount: Percentage op verzending
-            fixed_discount_configuration:
-                amount: Hoeveelheid
-            percentage_discount_configuration:
-                percentage: Percentage
-            type: Type
-        promotion_coupon:
-            expires_at: Verloopt op
-            usage_limit: Gebruikslimiet
-        promotion_coupon_generator_instruction:
-            amount: Hoeveelheid
-            code_length: Lengte van de code
-            expires_at: Verloopt op
-            usage_limit: Gebruikslimiet
-        promotion_filter:
-            price_range: Prijs bereik filter
-        promotion_rule:
-            cart_quantity: Aantal items in winkelmand
-            contains_product: Bevat product
-            customer_group: Klantengroep
-            has_at_least_one_from_taxons: Heeft minstens een van volgende taxons
-            item_total: Item totaal
-            nth_order: N-de bestelling
-            shipping_country: Land van bestemming
-            taxonomy: Taxonomie
-            total_price_of_items_from_taxon: Totaalprijs voor alle items van dezelfde taxon
-            cart_quantity_configuration:
-                count: Aantal
-                equal: Gelijk
-            contains_product_configuration:
-                exclude: Uitsluiten
-                variants: Producten
-            item_total_configuration:
-                amount: Hoeveelheid
-            nth_order_configuration:
-                nth: N-de
-            shipping_country_configuration:
-                country: Land
-            taxonomy_configuration:
-                exclude: Uitsluiten
-                taxons: Taxons
-            type: Type
+  form:
+    promotion:
+      actions: Acties
+      add_action: Actie toevoegen
+      add_rule: Regel toevoegen
+      coupon_based: Coupon gebaseerd
+      description: Omschrijving
+      ends_at: Eindigt op
+      exclusive: Exclusief
+      name: Naam
+      rules: Regels
+      starts_at: Start op
+      usage_limit: Gebruikslimiet
+    promotion_action:
+      item_fixed_discount: Vaste korting per item
+      item_percentage_discount: Percentage per item
+      order_fixed_discount: Vaste kortingsbedrag per bestelling
+      order_percentage_discount: Vaste percentage per bestelling
+      shipping_percentage_discount: Percentage op verzending
+      percentage_discount_configuration:
+        percentage: Percentage
+    promotion_coupon:
+      expires_at: Verloopt op
+    promotion_coupon_generator_instruction:
+      code_length: Lengte van de code
+      expires_at: Verloopt op
+    promotion_filter:
+      price_range: Prijs bereik filter
+    promotion_rule:
+      cart_quantity: Aantal items in winkelmand
+      contains_product: Bevat product
+      has_at_least_one_from_taxons: Heeft minstens een van volgende taxons
+      item_total: Item totaal
+      nth_order: N-de bestelling
+      shipping_country: Land van bestemming
+      total_price_of_items_from_taxon: Totaalprijs voor alle items van dezelfde taxon
+      contains_product_configuration:
+        exclude: Uitsluiten
+        variants: Producten
+      nth_order_configuration:
+        nth: N-de
+      taxonomy_configuration:
+        taxons: Taxons

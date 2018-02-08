@@ -2,191 +2,162 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        block:
-            body: Törzs
-            id: Azonosító
-            title: Cím
-        cart:
-            coupon: Kupon
-        checkout:
-            addressing:
-                different_billing_address: A számlázási címe különbözik a megadott címtől?
-            payment_method: Fizetési mód
-            shipping_method: Szállítási mód
-        promotion:
-            channels: Csatornák
-        promotion_action:
-            add_product_configuration:
-                product: Termék
-        group:
-            name: Név
-            roles: Szerepek
-        channel:
-            currencies: Pénznemek
-            currency_base: Alapértelmezett pénznem
-            hostname: Hoszt neve
-            locale_default: Alapértelmezett nyelv
-            locales: Területi beállítások
-            payment_methods: Fizetési módok
-            shipping_methods: Szállítási módok
-            tax_calculation_strategy: Adó számítási stratégia
-            tax_zone_default: Alapértelmezett adósáv
-            taxonomies: Taxonómiák
-            theme: Téma
-        image:
-            type: Típus
-            file: Kép
-        locale:
-            code: Kód
-            enabled: Engedélyezve
-        order_filter:
-            created_at_from: Ez után készítve
-            created_at_to: Ez előtt készítve
-            number: Szám
-            total_from: '-tól'
-            total_to: '-ig'
-            payment_state: Fizetés állapota
-            channel: Minden csatorna
-        page:
-            body: Törzs
-            id: Azonosító
-            title: Cím
-        product:
-            images: Képek
-            restricted_zone: Tiltott zóna
-            short_description: Rövid leírás
-            variant_selection_method: Változat kiválasztási módszer
-            main_taxon: Fő taxonómia
-            channels: Csatornák
-            enabled: Engedélyezve
-        product_filter:
-            name: Név
-            code: Kód
-        product_variant:
-            tax_category: ÁFA-kategória
-            shipping_category: Szállítási kategória
-        shipment_filter:
-            created_at_from: '-tól'
-            created_at_to: '-ig'
-            number: Rendelés azonosítója
-            shipping_address: Szállítás erre a névre
-            channel: Minden csatorna
-        payment_filter:
-            created_at_from: '-tól'
-            created_at_to: '-ig'
-            number: Rendelés azonosítója
-            billing_address: Számlázási név
-            channel: Minden csatorna
-        shipping_method:
-            zone: Zóna
-        taxon:
-            code: Kód
-            file: Kép kiválasztása
-            images: Képek
-        taxonomy:
-            file: Kép kiválasztása
-        user:
-            billing_address: Számlázási cím
-            different_billing_address: A számlázási címe különbözik a megadott címtől?
-            enabled: Engedélyezve
-            first_name: Keresztnév
-            groups: Csoportok
-            roles: Szerepek
-            last_name: Vezetéknév
-            password: Jelszó
-            shipping_address: Szállítási cím
-        user_filter:
-            query: Keresés
-        variant:
-            depth: Mélység
-            height: Magasság
-            on_hand: Aktuális készlet
-            price: Ár
-            sku: SKU
-            weight: Súly
-            width: Szélesség
-        attribute:
-            product_attribute_value:
-                attribute: Tulajdonság
-                value: Érték
-        guest:
-            email: E-mail
-        product_association:
-            product: Kapcsolódó termék
-            type: Kapcsolódó típus
-        product_association_type:
-            name: Név
-        promotion_rule:
-            product:
-                products: Termékek
-            total_of_items_from_taxon:
-                taxon: Taxonómia
-        payment_method:
-            channels: Csatornák
-        zone:
-            scopes:
-                shipping: Szállítás
-                tax: Adó
-    installer:
-        extensions:
-            header: kiegészítők
-            accelerator:
-                header: Gyorsító
-                help: Zend OpCache Engedélyezése (erősen ajánlott).
-            apc: APC
-            ctype: Ctype
-            gd: GD
-            help: Telepítsd és engedélyezd a(z) %extension% kiegészítőt.
-            iconv: Iconv
-            exif: Exif
-            fileinfo: Fájl infó
-            icu: ICU
-            intl: Intl
-            json_encode: JSON
-            mbstring: Multibyte String
-            off: false
-            on: true
-            pcre: PCRE
-            pdo: PDO
-            php_xml: PHP-XML
-            session_start: Munkamenet
-            simplexml_import_dom: SimpleXML
-            token_get_all: Tokenizer
-        filesystem:
-            header: fájlrendszer
-            cache:
-                header: gyorsítótár
-            exists: létezik
-            logs:
-                header: naplók
-            not_exists: nem létezik
-            not_writable: nem írható
-            parameters:
-                header: parameters.yml
-            vendors: vendors
-            writable: írható
-        settings:
-            header: PHP verzió és beállítások
-            any: bármely
-            detect_unicode: detect_unicode
-            magic_quotes_gpc: magic_quotes_gpc
-            non_deprecated: nem elavult
-            off: false
-            on: true
-            register_globals: register_globals
-            session:
-                auto_start: session.auto_start
-            short_open_tag: short_open_tag
-            timezone: időzóna
-            timezone_deprecated:
-                header: Elavult időzóna
-                help: 'Ez az időzóna %timezone% elavult. Javítsd ki a php.ini fájlban (a támogatott időzónákat itt találod a PHP súgójában: http://php.net/manual/en/timezones.others.php).'
-            version: PHP verzió
-            version_recommended: Ajánlott PHP-verzió
-    payum_gateway:
-        cash_on_delivery: Utánvétel
-        offline: Nem elérhető
-        paypal_express_checkout: PayPal Express Checkout
-    shipping_method_resolver:
-        by_zones_and_channel: Zóna és csatorna szerint
+  form:
+    block:
+      body: Törzs
+      id: Azonosító
+      title: Cím
+    cart:
+      coupon: Kupon
+    checkout:
+      addressing:
+        different_billing_address: A számlázási címe különbözik a megadott címtől?
+      payment_method: Fizetési mód
+      shipping_method: Szállítási mód
+    group:
+      name: Név
+      roles: Szerepek
+    channel:
+      currencies: Pénznemek
+      hostname: Hoszt neve
+      locale_default: Alapértelmezett nyelv
+      locales: Területi beállítások
+      payment_methods: Fizetési módok
+      shipping_methods: Szállítási módok
+      tax_calculation_strategy: Adó számítási stratégia
+      tax_zone_default: Alapértelmezett adósáv
+      taxonomies: Taxonómiák
+      theme: Téma
+    image:
+      file: Kép
+    locale:
+      code: Kód
+      enabled: Engedélyezve
+    order_filter:
+      created_at_from: Ez után készítve
+      created_at_to: Ez előtt készítve
+      number: Szám
+      total_from: '-tól'
+      total_to: '-ig'
+      payment_state: Fizetés állapota
+      channel: Minden csatorna
+    page:
+      body: Törzs
+      id: Azonosító
+      title: Cím
+    product:
+      restricted_zone: Tiltott zóna
+      short_description: Rövid leírás
+      variant_selection_method: Változat kiválasztási módszer
+      main_taxon: Fő taxonómia
+    product_filter:
+      name: Név
+    product_variant:
+      tax_category: ÁFA-kategória
+    shipment_filter:
+      created_at_from: '-tól'
+      created_at_to: '-ig'
+      number: Rendelés azonosítója
+      shipping_address: Szállítás erre a névre
+      channel: Minden csatorna
+    payment_filter:
+      billing_address: Számlázási név
+    shipping_method:
+      zone: Zóna
+    taxon:
+      file: Kép kiválasztása
+    taxonomy:
+      file: Kép kiválasztása
+    user:
+      billing_address: Számlázási cím
+      different_billing_address: A számlázási címe különbözik a megadott címtől?
+      enabled: Engedélyezve
+      first_name: Keresztnév
+      groups: Csoportok
+      last_name: Vezetéknév
+      password: Jelszó
+      shipping_address: Szállítási cím
+    user_filter:
+      query: Keresés
+    variant:
+      depth: Mélység
+      height: Magasság
+      on_hand: Aktuális készlet
+      price: Ár
+      sku: SKU
+      weight: Súly
+      width: Szélesség
+    attribute:
+      product_attribute_value:
+        attribute: Tulajdonság
+        value: Érték
+    guest:
+      email: E-mail
+    product_association:
+      product: Kapcsolódó termék
+      type: Kapcsolódó típus
+    promotion_rule:
+      total_of_items_from_taxon:
+        taxon: Taxonómia
+  installer:
+    extensions:
+      header: kiegészítők
+      accelerator:
+        header: Gyorsító
+        help: Zend OpCache Engedélyezése (erősen ajánlott).
+      apc: APC
+      ctype: Ctype
+      gd: GD
+      help: Telepítsd és engedélyezd a(z) %extension% kiegészítőt.
+      iconv: Iconv
+      exif: Exif
+      fileinfo: Fájl infó
+      icu: ICU
+      intl: Intl
+      json_encode: JSON
+      mbstring: Multibyte String
+      off: false
+      on: true
+      pcre: PCRE
+      pdo: PDO
+      php_xml: PHP-XML
+      session_start: Munkamenet
+      simplexml_import_dom: SimpleXML
+      token_get_all: Tokenizer
+    filesystem:
+      header: fájlrendszer
+      cache:
+        header: gyorsítótár
+      exists: létezik
+      logs:
+        header: naplók
+      not_exists: nem létezik
+      not_writable: nem írható
+      parameters:
+        header: parameters.yml
+      vendors: vendors
+      writable: írható
+    settings:
+      header: PHP verzió és beállítások
+      any: bármely
+      detect_unicode: detect_unicode
+      magic_quotes_gpc: magic_quotes_gpc
+      non_deprecated: nem elavult
+      off: false
+      on: true
+      register_globals: register_globals
+      session:
+        auto_start: session.auto_start
+      short_open_tag: short_open_tag
+      timezone: időzóna
+      timezone_deprecated:
+        header: Elavult időzóna
+        help: 'Ez az időzóna %timezone% elavult. Javítsd ki a php.ini fájlban (a támogatott időzónákat itt találod a PHP súgójában: http://php.net/manual/en/timezones.others.php).'
+      version: PHP verzió
+      version_recommended: Ajánlott PHP-verzió
+  payum_gateway:
+    cash_on_delivery: Utánvétel
+    offline: Nem elérhető
+    paypal_express_checkout: PayPal Express Checkout
+  shipping_method_resolver:
+    by_zones_and_channel: Zóna és csatorna szerint

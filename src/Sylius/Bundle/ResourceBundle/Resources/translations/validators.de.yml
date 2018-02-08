@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    resource:
-        not_enabled: "Gewählte Ressource ist deaktiviert"
-        not_disabled: "Gewählte Ressource ist aktiviert"
+  resource:
+    not_enabled: "Gewählte Ressource ist deaktiviert"
+    not_disabled: "Gewählte Ressource ist aktiviert"

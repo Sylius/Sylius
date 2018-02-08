@@ -2,7 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        collection:
-            add: Dodaj
-            delete: sylius.account.address.action.delete
+  form:
+    collection:
+      delete: sylius.account.address.action.delete

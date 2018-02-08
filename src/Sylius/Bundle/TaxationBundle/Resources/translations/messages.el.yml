@@ -2,13 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        tax_category:
-            name: Ονομασία
-            description: Περιγραφή
-        tax_rate:
-            category: Κατηγορία
-            name: Ονομασία
-            amount: Ποσό
-            included_in_price: Συμπεριλαμβάνεται στην τιμή;
-            calculator: Τρόπος υπολογισμού
+  form:
+    tax_rate:
+      amount: Ποσό
+      included_in_price: Συμπεριλαμβάνεται στην τιμή;
+      calculator: Τρόπος υπολογισμού

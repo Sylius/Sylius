@@ -2,38 +2,22 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    channel:
-        contact_email:
-            invalid: Šis adresas yra neteisingas.
-            max: El. paštas turi būti ilgesnis nei {{ limit }} simbolių.
-            min: El. paštas turi būti ilgesnis nei {{ limit }} simboliai.
-    checkout:
-        shipping_method:
-            not_blank: Pasirinkite pristatymo būdą.
-    contact:
-        email:
-            invalid: Šis adresas yra neteisingas.
-            not_blank: Įveskite savo elektroninio pašto adresą.
-    customer:
-        currency_code:
-            not_valid: Valiutos kodas yra neteisingas.
-    order:
-        currency_code:
-            not_valid: Valiutos kodas yra neteisingas.
-    locale:
-        code:
-            not_blank: Įveskite lokalės kodą.
-            unique: Šią lokalė jau egzistuoja.
-    product_variant:
-        onHand:
-            min: Atsargos turi būti didesnės nei {{ limit }}.
-            not_blank: Įveskite atsargas.
-        original_price:
-            min: Pradinė kaina negali būti neigiama.
-    product_translation:
-        short_description:
-            max: Trumpas aprašymas negali būti ilgesnis nei {{ limit }} simbolių.
-    user:
-        email:
-            unique: Šis el. paštas jau naudojamas.
-            invalid: Šis adresas yra neteisingas.
+  channel:
+    contact_email:
+      min: El. paštas turi būti ilgesnis nei {{ limit }} simboliai.
+  checkout:
+    shipping_method:
+      not_blank: Pasirinkite pristatymo būdą.
+  locale:
+    code:
+      not_blank: Įveskite lokalės kodą.
+      unique: Šią lokalė jau egzistuoja.
+  product_variant:
+    onHand:
+      min: Atsargos turi būti didesnės nei {{ limit }}.
+      not_blank: Įveskite atsargas.
+    original_price:
+      min: Pradinė kaina negali būti neigiama.
+  product_translation:
+    short_description:
+      max: Trumpas aprašymas negali būti ilgesnis nei {{ limit }} simbolių.

@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    cart:
-        add_item: 'O item foi adicionado ao carrinho'
+  cart:
+    add_item: 'O item foi adicionado ao carrinho'

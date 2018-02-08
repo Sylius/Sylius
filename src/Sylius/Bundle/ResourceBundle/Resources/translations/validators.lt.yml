@@ -1,7 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    resource:
-        not_enabled: "Resursas yra išjungtas"
-        not_disabled: "Resursas yra įjungtas"
+  resource:
+    not_enabled: "Resursas yra išjungtas"
+    not_disabled: "Resursas yra įjungtas"

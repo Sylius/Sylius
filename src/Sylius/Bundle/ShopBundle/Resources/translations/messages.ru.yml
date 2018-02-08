@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    menu:
-        shop:
-            account:
-                address_book: 'Адресная книга'
-                change_password: 'Сменить пароль'
-                dashboard: 'Панель инструментов'
-                header: 'Ваша учетная запись'
-                order_history: 'История заказов'
-                personal_information: 'Персональные данные'
+  menu:
+    shop:
+      account:
+        address_book: 'Адресная книга'
+        change_password: 'Сменить пароль'
+        dashboard: 'Панель инструментов'
+        header: 'Ваша учетная запись'
+        order_history: 'История заказов'
+        personal_information: 'Персональные данные'

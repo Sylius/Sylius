@@ -2,14 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    lightbox:
-        image_album_label: 'Obrázek %1 z %2'
-    menu:
-        shop:
-            account:
-                address_book: 'Adresář'
-                change_password: 'Změnit heslo'
-                dashboard: 'Nástěnka'
-                header: 'Váš účet'
-                order_history: 'Historie objednávek'
-                personal_information: 'Osobní údaje'
+  lightbox:
+    image_album_label: 'Obrázek %1 z %2'
+  menu:
+    shop:
+      account:
+        address_book: 'Adresář'
+        change_password: 'Změnit heslo'
+        header: 'Váš účet'
+        order_history: 'Historie objednávek'
+        personal_information: 'Osobní údaje'

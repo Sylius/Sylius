@@ -1,6 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    customer:
-        register: 'Dziękujemy za rejestrację. Proszę sprawdzić swoją skrzynkę email aby zweryfikować konto.'
+  customer:
+    register: 'Dziękujemy za rejestrację. Proszę sprawdzić swoją skrzynkę email aby zweryfikować konto.'

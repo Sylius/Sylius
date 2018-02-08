@@ -2,7 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        collection:
-            add: Tambah
-            delete: Menghapus
+  form:
+    collection:
+      delete: Menghapus

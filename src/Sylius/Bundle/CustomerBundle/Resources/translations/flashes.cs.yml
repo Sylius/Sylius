@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    customer:
-        register: 'Děkujeme za registraci, zkontrolujte svůj e-mail pro ověření účtu.'
+  customer:
+    register: 'Děkujeme za registraci, zkontrolujte svůj e-mail pro ověření účtu.'

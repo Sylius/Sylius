@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    product_variant:
-        generate: 'انواع محصولات با موفقیت تولید شد.'
+  product_variant:
+    generate: 'انواع محصولات با موفقیت تولید شد.'

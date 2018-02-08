@@ -2,17 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    customer:
-        first_name:
-            max: İsim {{ limit }} karakterden uzun olamaz.
-            min: Soyadı en az {{ limit }} karakter olmalıdır.
-            not_blank: Lütfen adınızı giriniz.
-        last_name:
-            not_blank: Lütfen soyadınızı giriniz.
-        gender:
-            not_blank: Lütfen cinsiyetinizi seçiniz.
-        email:
-            not_blank: Lütfen e-posta adresinizi girin.
-            invalid: Bu e-posta geçerli değil.
-            unique: Bu email zaten kullanımda.
-            registered: Bu e-posta zaten kullanılıyor, lütfen giriş yapın veya unutulan parolayı kullanın.
+  customer:
+    first_name:
+      max: İsim {{ limit }} karakterden uzun olamaz.
+      min: Soyadı en az {{ limit }} karakter olmalıdır.
+      not_blank: Lütfen adınızı giriniz.
+    last_name:
+      not_blank: Lütfen soyadınızı giriniz.
+    gender:
+      not_blank: Lütfen cinsiyetinizi seçiniz.
+    email:
+      unique: Bu email zaten kullanımda.

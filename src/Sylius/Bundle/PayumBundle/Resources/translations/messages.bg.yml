@@ -1,23 +1,21 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    form:
-        gateway_config:
-            type: Тип
-        gateway_configuration:
-            paypal:
-                password: Парола
-                signature: Подпис
-                username: Потребителско име
-                sandbox: Тестовата среда
-            stripe:
-                publishable_key: Ключ за публикуване
-                secret_key: Таен ключ
-    payum_gateway_factory:
-        offline: Офлайн
-        paypal_express_checkout: PayPal експресно плащане
-        stripe_checkout: Stripe плащане
-    payum_action:
-        payment:
-            description: Плащането съдържа %items% продукта за общо %total%|Плащането съдържа %items% продукта за общо %total%
+  form:
+    gateway_configuration:
+      paypal:
+        signature: Подпис
+        sandbox: Тестовата среда
+      stripe:
+        publishable_key: Ключ за публикуване
+        secret_key: Таен ключ
+  payum_gateway_factory:
+    paypal_express_checkout: PayPal експресно плащане
+    stripe_checkout: Stripe плащане
+  payum_action:
+    payment:
+      description: Плащането съдържа %items% продукта за общо %total%|Плащането съдържа %items% продукта за общо %total%

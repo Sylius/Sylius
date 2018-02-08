@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    cart:
-        add_item: 'Položka bola pridaná do košíka'
-        remove_item: 'Položka bola odstránená z košíka'
-        save: 'Košík bol úspešne aktualizovaný'
+  cart:
+    add_item: 'Položka bola pridaná do košíka'
+    remove_item: 'Položka bola odstránená z košíka'
+    save: 'Košík bol úspešne aktualizovaný'

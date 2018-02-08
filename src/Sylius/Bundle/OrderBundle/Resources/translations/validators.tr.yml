@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    order_item:
-        quantity:
-            min: Ürün miktarı 1'den daha düşük olamaz.
+  order_item:
+    quantity:
+      min: Ürün miktarı 1'den daha düşük olamaz.

@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    locale:
-        code:
-            not_blank: Калі ласка, увядзіце код лакалі.
-            unique: Такая лакаль ўжо ёсць.
-    product_variant:
-        onHand:
-            min: На руках павінна быць больш за {{ limit }}.
-            not_blank: Калі ласка, увядзіце колькасць на руках.
+  locale:
+    code:
+      not_blank: Калі ласка, увядзіце код лакалі.
+      unique: Такая лакаль ўжо ёсць.
+  product_variant:
+    onHand:
+      min: На руках павінна быць больш за {{ limit }}.
+      not_blank: Калі ласка, увядзіце колькасць на руках.

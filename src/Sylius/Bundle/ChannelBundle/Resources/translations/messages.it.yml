@@ -2,10 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        channel:
-            color: Colore
-            description: Descrizione
-            enabled: Abilitato
-            name: Nome
-            url: URL
+  form:
+    channel:
+      color: Colore
+      url: URL

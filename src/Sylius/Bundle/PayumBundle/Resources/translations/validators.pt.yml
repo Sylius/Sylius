@@ -2,9 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    gateway_config:
-        paypal:
-            password:
-                not_blank: Por favor, insira a palavra-passe do Paypal.
-            signature:
-                not_blank: Por favor, insira a assinatura do Paypal.
+  gateway_config:
+    paypal:
+      password:
+        not_blank: Por favor, insira a senha do Paypal.
+      signature:
+        not_blank: Por favor, insira a assinatura do Paypal.
+      username:
+        not_blank: Por favor, insira um nome de usuário válido para Paypal.
+    stripe:
+      secret_key:
+        not_blank: Por favor insira a chave secreta do Stripe.
+      publishable_key:
+        not_blank: Por favor insira a chave pública do Stripe.

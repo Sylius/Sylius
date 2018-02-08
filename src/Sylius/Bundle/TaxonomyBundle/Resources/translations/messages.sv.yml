@@ -2,11 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        taxon:
-            description: Beskrivning
-            name: Namn
-            parent: Förälder
-            slug: Permalänk
-        taxonomy:
-            name: Namn
+  form:
+    taxon:
+      parent: Förälder

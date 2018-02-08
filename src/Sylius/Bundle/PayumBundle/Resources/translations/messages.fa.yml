@@ -1,18 +1,16 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    form:
-        gateway_config:
-            type: نوع
-        gateway_configuration:
-            paypal:
-                password: کلمه عبور
-                signature: امضا
-                username: نام کاربری
-            stripe:
-                publishable_key: کلید قابل انتشار
-                secret_key: کلید رمز
-    payum_gateway_factory:
-        offline: آفلاین
-        paypal_express_checkout: پرداخت با پی‌پال
+  form:
+    gateway_configuration:
+      paypal:
+        signature: امضا
+      stripe:
+        publishable_key: کلید قابل انتشار
+        secret_key: کلید رمز
+  payum_gateway_factory:
+    paypal_express_checkout: پرداخت با پی‌پال

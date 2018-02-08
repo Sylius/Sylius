@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    promotion_coupon:
-        generate: 'Cupões promocionais criados com sucesso.'
+  promotion_coupon:
+    generate: 'Cupões promocionais criados com sucesso.'

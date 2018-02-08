@@ -1,40 +1,39 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: Типы взаимосвязей
-                    attributes: Атрибуты
-                    header: Каталог
-                    inventory: Остатки
-                    options: Список опций
-                    products: Товары
-                    taxons: Таксоны
-                configuration:
-                    admin_users: Администраторы
-                    channels: Каналы
-                    countries: Страны
-                    currencies: Валюты
-                    exchange_rates: Курсы валют
-                    header: Конфигурация
-                    locales: Языки
-                    payment_methods: Способы оплаты
-                    shipping_categories: Категории доставки
-                    shipping_methods: Способы доставки
-                    tax_categories: Список налоговых категорий
-                    tax_rates: Налоговые ставки
-                    zones: Зоны
-                marketing:
-                    header: Маркетинг
-                    product_reviews: Обзоры товара
-                    promotions: Рекламные акции
-                customers:
-                    customers: Клиенты
-                    groups: Группы
-                    header: Клиент
-                sales:
-                    header: Продажи
-                    orders: Заказы
+  menu:
+    admin:
+      main:
+        catalog:
+          association_types: Типы взаимосвязей
+          attributes: Атрибуты
+          header: Каталог
+          products: Товары
+          taxons: Таксоны
+        configuration:
+          admin_users: Администраторы
+          channels: Каналы
+          countries: Страны
+          exchange_rates: Курсы валют
+          header: Конфигурация
+          locales: Языки
+          payment_methods: Способы оплаты
+          shipping_categories: Категории доставки
+          shipping_methods: Способы доставки
+          tax_categories: Список налоговых категорий
+          tax_rates: Налоговые ставки
+          zones: Зоны
+        marketing:
+          header: Маркетинг
+          product_reviews: Обзоры товара
+          promotions: Рекламные акции
+        customers:
+          customers: Клиенты
+          header: Клиент
+        sales:
+          header: Продажи
+          orders: Заказы

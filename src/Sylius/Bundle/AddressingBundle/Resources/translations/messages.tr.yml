@@ -1,42 +1,40 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    form:
-        address:
-            city: Şehir
-            company: Şirket
-            country: Ülke
-            first_name: Ad
-            last_name: Soyad
-            phone_number: Telefon numarası
-            postcode: Posta kodu
-            street: Adres
-            province: Eyalet
-            zone: Bölge
-        country:
-            add_province: Bölge ekle
-            name: Ülke adı
-            provinces: İller
-            select: Ülke seçin
-            enabled: Etkin
-        province:
-            name: Ad
-            abbreviation: Kısaltma
-            select: Seçiniz
-        zone:
-            add_member: Üye ekle
-            members: Üyeler
-            name: Bölge adı
-            type: Türü
-            types:
-                country: Ülke
-                province: Eyalet
-                zone: Bölge
-            scope: Kapsam
-            scopes:
-                all: Tümü
-            select: Ülke seçin
-            select_scope: Ölçek seçiniz
-        zone_member:
-            select: Ülke seçin
+  form:
+    address:
+      city: Şehir
+      company: Şirket
+      country: Ülke
+      first_name: Ad
+      last_name: Soyad
+      phone_number: Telefon numarası
+      postcode: Posta kodu
+      street: Adres
+      province: Eyalet
+    country:
+      add_province: Bölge ekle
+      name: Ülke adı
+      provinces: İller
+      select: Ülke seçin
+    province:
+      name: Ad
+      abbreviation: Kısaltma
+      select: Seçiniz
+    zone:
+      add_member: Üye ekle
+      members: Üyeler
+      name: Bölge adı
+      type: Türü
+      types:
+        country: Ülke
+        province: Eyalet
+        zone: Bölge
+      scope: Kapsam
+      scopes:
+        all: Tümü
+      select_scope: Ölçek seçiniz

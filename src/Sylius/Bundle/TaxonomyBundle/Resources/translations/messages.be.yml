@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        taxon:
-            description: Апісанне
-            name: Назва
-            parent: Бацькоўскі аб'ект
-        taxonomy:
-            name: Назва
+  form:
+    taxon:
+      description: Апісанне
+      name: Назва
+      parent: Бацькоўскі аб'ект
+    taxonomy:
+      name: Назва

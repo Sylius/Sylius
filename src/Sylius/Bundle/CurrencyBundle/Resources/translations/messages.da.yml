@@ -2,13 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        currency:
-            base: Standardvaluta
-            code: Navn
-            enabled: Aktiveret
-            exchange_rate: Vekselkurs
-        exchange_rate:
-            source_currency: Fra valuta
-            target_currency: Til valuta
-            ratio: Kurs
+  form:
+    currency:
+      base: Standardvaluta
+      exchange_rate: Vekselkurs
+    exchange_rate:
+      source_currency: Fra valuta
+      target_currency: Til valuta
+      ratio: Kurs

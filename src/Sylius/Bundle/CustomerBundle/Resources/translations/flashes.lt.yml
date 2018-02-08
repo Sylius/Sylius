@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    customer:
-        register: 'Ačiū už registraciją, pasitikrinkite savo el. paštą ir patvirtinkite savo paskyrą.'
+  customer:
+    register: 'Ačiū už registraciją, pasitikrinkite savo el. paštą ir patvirtinkite savo paskyrą.'

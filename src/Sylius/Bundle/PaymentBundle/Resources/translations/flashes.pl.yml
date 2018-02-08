@@ -1,11 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    payment:
-        cancelled: 'Płatność została anulowana.'
-        completed: 'Płatność została zakończona.'
-        failed: 'Płatność nie powiodła się.'
-        processing: 'Płatność jest w trakcie przetwarzania.'
-        refunded: 'Płatność została zwrócona.'
-        unknown: 'Wystąpił nieznany problem z płatnością.'
+  payment:
+    cancelled: 'Płatność została anulowana.'
+    completed: 'Płatność została zakończona.'
+    failed: 'Płatność nie powiodła się.'
+    processing: 'Płatność jest w trakcie przetwarzania.'
+    refunded: 'Płatność została zwrócona.'
+    unknown: 'Wystąpił nieznany problem z płatnością.'

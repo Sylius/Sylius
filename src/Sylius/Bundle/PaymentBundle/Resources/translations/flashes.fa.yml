@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    payment:
-        cancelled: 'پرداخت لغو شده است.'
-        completed: 'پرداخت با موفقیت انجام شده است.'
-        failed: 'پرداخت انجام نشد.'
-        processing: 'پرداخت در حال انجام است.'
+  payment:
+    cancelled: 'پرداخت لغو شده است.'
+    completed: 'پرداخت با موفقیت انجام شده است.'
+    failed: 'پرداخت انجام نشد.'
+    processing: 'پرداخت در حال انجام است.'
