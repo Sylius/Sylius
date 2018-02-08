@@ -1,8 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius:
-    form:
-        payment:
-            state:
-                header: Стање плаћања
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+

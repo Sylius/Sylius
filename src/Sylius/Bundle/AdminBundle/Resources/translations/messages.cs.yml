@@ -6,21 +6,12 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: Typy asociace
-                    attributes: Atributy
                     header: Katalog
-                    inventory: Sklad
-                    options: Možnosti
                     products: Produkty
                     taxons: Taxony
                 configuration:
                     admin_users: Administrátoři
                     channels: Kanály
-                    countries: Země
-                    currencies: Měny
-                    exchange_rates: Směnný kurz
-                    header: Konfigurace
-                    locales: Lokalizace
                     payment_methods: Způsoby plateb
                     shipping_categories: Přepravní kategorie
                     shipping_methods: Způsoby dopravy
@@ -33,7 +24,6 @@ sylius:
                     promotions: Akce
                 customers:
                     customers: Zákazníci
-                    groups: Skupiny
                     header: Zákazník
                 sales:
                     header: Prodeje

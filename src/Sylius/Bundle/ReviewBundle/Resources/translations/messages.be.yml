@@ -5,6 +5,3 @@ sylius:
     form:
         review:
             author: Аўтар
-            status:
-                new: Новы
-            title: Назва

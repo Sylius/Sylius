@@ -8,17 +8,13 @@ sylius:
             add_attributes: Дадаць атрыбуты
             choices: Вырыянты выбару
             code: Код
-            name: Імя
             translations: Пераклады
-            type: Тып
         attribute_type:
             checkbox: Сцяжок
-            configuration: Канфігурацыя
             date: Дата
             datetime: Дата і час
             integer: Цэлы лік
             percent: Адсотак
-            select: Выбярыце
             text: Тэкст
             textarea: Тэкставая вобласць
             title: Тыпы атрыбутаў

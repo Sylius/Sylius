@@ -23,7 +23,6 @@ sylius:
         province:
             name: Nama
             abbreviation: Singkatan
-            select: Pilih
         zone:
             add_member: Tambah ahli
             members: Ahli
@@ -36,7 +35,4 @@ sylius:
             scope: Skop
             scopes:
                 all: Semua
-            select: Pilih
             select_scope: Pilih skop
-        zone_member:
-            select: Pilih

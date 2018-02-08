@@ -7,22 +7,23 @@ sylius:
             city: Cidade
             company: Empresa
             country: País
-            first_name: Primeiro nome
-            last_name: Apelido
-            phone_number: Número de telefone
-            postcode: Código postal
-            province: Distrito
-            zone: Zona
+            first_name: Nome
+            last_name: Sobrenome
+            phone_number: Número de Telefone
+            postcode: CEP
+            street: Endereço
+            province: Estado
+            zone: Região
         country:
             add_province: Adicionar estado
             name: Nome
-            provinces: Distritos
-            select: Seleccionar
-            enabled: Ativado
+            provinces: Estados
+            select: Selecione
+            enabled: Habilitado
         province:
             name: Nome
-            abbreviation: Abreviatura
-            select: Seleccionar
+            abbreviation: Abreviação
+            select: Selecione
         zone:
             add_member: Adicionar membro
             members: Membros
@@ -31,11 +32,8 @@ sylius:
             types:
                 country: País
                 province: Distrito
-                zone: Zona
-            scope: Âmbito
+                zone: Região
+            scope: Escopo
             scopes:
-                all: Tudo
-            select: Seleccionar
-            select_scope: Selecione o âmbito
-        zone_member:
-            select: Seleccionar
+                all: Todas
+            select_scope: Selecione o escopo

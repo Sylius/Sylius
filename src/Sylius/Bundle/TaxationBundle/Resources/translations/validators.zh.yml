@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    tax_category:
+        name:
+            not_blank: 请填写税目名称。
+        code:
+            not_blank: 请输入税类别代码。
+            regex: 税类别代码仅可以由字母、 数字、 破折号和下划线组成。
+            unique: 给定代码的税收类别已存在。
+    tax_rate:
+        category:
+            not_blank: 请选择税目。
+        name:
+            not_blank: 请填写税率名称。
+        amount:
+            not_blank: 请填写税率值。
+        calculator:
+            not_blank: 请选择税费计算器。
+        zone:
+            not_blank: 请选择税区。
+        code:
+            not_blank: 请输入税率代码。
+            regex: 税收率代码仅可以由字母、 数字、 破折号和下划线。
+            unique: 给定代码的税率已存在。

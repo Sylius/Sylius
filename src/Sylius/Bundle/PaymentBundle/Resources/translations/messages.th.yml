@@ -14,7 +14,6 @@ sylius:
             amount: ยอดการชำระเงิน
             method: วิธีการชำระเงิน
             state:
-                header: สถานะการชำระเงิน
                 checkout: ชำระเงิน
                 completed: เสร็จสมบูรณ์
                 authorized: อำนาจ
@@ -30,5 +29,3 @@ sylius:
             description: คำอธิบาย
             enabled: เปิดใช้งานแล้ว?
             instructions: คำแนะนำ
-            name: ชื่อ
-            position: ตำแหน่ง

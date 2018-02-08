@@ -7,13 +7,9 @@ sylius:
             add: Añadir
             add_attributes: Agregar atributos
             choices: Opciones
-            code: Código
-            name: Nombre
             translations: Traducciones
-            type: Tipo
         attribute_type:
             checkbox: Casilla de verificación
-            configuration: Configuración
             date: Fecha
             datetime: Fecha y hora
             integer: Número entero
@@ -30,7 +26,6 @@ sylius:
                 format: Formato
             select:
                 multiple: Múltiple
-                values: Valores
                 choose: Elige una opción
                 min: Mínima
                 max: Máx. entradas

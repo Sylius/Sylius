@@ -9,17 +9,12 @@ sylius:
         shipment:
             state: Stanje
             states:
-                checkout: Blagajna
-                pending: Na čekanju
                 ready: Spremno
                 shipped: Poslano
                 returned: Vraćeno
-                cancelled: Otkazano
             tracking_code: Kod za praćenje
         shipping_calculator:
             flat_rate_configuration:
-                amount: Iznos
-            per_unit_rate_configuration:
                 amount: Iznos
         shipping_category:
             description: Opis
@@ -28,9 +23,5 @@ sylius:
             calculator: Kalkulator
             category: Kategorija
             category_requirement: Zahtjevi kategorije
-            channels: Kanali
             configuration: Postavke
-            description: Opis
-            enabled: Omogući
             name: Naziv
-            tax_category: Kategorija artikla

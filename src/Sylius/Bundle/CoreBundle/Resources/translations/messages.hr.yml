@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Želim koristiti drugu adresu za račun.
             payment_method: Način plaćanja
             shipping_method: Vrsta dostave
-        promotion:
-            channels: Kanali
-        promotion_action:
-            add_product_configuration:
-                product: Artikal
         promotion_coupon:
             per_customer_usage_limit: Ograničenje korištenja po kupcu
         group:
@@ -35,7 +30,6 @@ sylius:
             tax_zone_default: Zadana porezna zona
             taxonomies: Glavne kategorije
         image:
-            type: Vrsta
             file: Fotografija
         locale:
             code: ISO kod
@@ -52,33 +46,21 @@ sylius:
             id: ID
             title: Naslov
         product:
-            images: Slike
             restricted_zone: Ograničena zona pristupa
             short_description: Kratak opis
             variant_selection_method: Način odabira varijante
-            channels: Kanali
-            enabled: Omogući
         product_filter:
             name: Naziv
-            code: ISO kod
         product_variant:
             tax_category: Kategorija artikla
-            shipping_category: Kategorija pošiljke
         shipment_filter:
             created_at_from: Od
-            created_at_to: Do
             number: Broj narudžbe
             shipping_address: Pošalji na ime
-        payment_filter:
-            created_at_from: Od
-            created_at_to: Do
-            number: Broj narudžbe
         shipping_method:
             zone: Regija
         taxon:
-            code: ISO kod
             file: Odaberite sliku
-            images: Slike
         taxonomy:
             file: Odaberite sliku
         user:
@@ -87,7 +69,6 @@ sylius:
             enabled: Aktivan
             first_name: Ime
             groups: Grupe
-            roles: Role (korisnička prava)
             last_name: Prezime
             password: Lozinka
             shipping_address: Adresa za dostavu
@@ -106,15 +87,6 @@ sylius:
                 value: Vrijednost
         guest:
             email: E-mail
-        product_association_type:
-            name: Naziv grupe
-        promotion_rule:
-            product:
-                products: Proizvodi
-            total_of_items_from_taxon:
-                amount: Iznos
-        payment_method:
-            channels: Kanali
     installer:
         extensions:
             header: Ekstenzije

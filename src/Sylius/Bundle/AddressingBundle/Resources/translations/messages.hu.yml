@@ -13,7 +13,6 @@ sylius:
             postcode: Irányítószám
             street: Utca, házszám
             province: Tartomány/állam
-            zone: Zóna
         country:
             add_province: Tartomány/megye hozzáadása
             name: Név
@@ -29,14 +28,5 @@ sylius:
             members: Tagok
             name: Név
             type: Típus
-            types:
-                country: Ország
-                province: Tartomány/állam
-                zone: Zóna
             scope: Hatókör
-            scopes:
-                all: Mind
-            select: Válassza ki
             select_scope: Hatókör kiválasztása
-        zone_member:
-            select: Válassza ki

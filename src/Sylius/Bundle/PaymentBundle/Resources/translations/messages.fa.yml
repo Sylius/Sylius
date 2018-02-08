@@ -14,7 +14,6 @@ sylius:
             amount: مبلغ پرداختی
             method: روش پرداخت
             state:
-                header: وضعیت پرداخت
                 checkout: پرداخت نشده
                 completed: پرداخت کامل شده
                 authorized: پرداخت تایید شده
@@ -30,4 +29,3 @@ sylius:
             description: شرح
             enabled: فعال?
             instructions: دستورعمل ها
-            name: نام

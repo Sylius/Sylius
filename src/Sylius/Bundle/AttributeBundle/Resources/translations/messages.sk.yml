@@ -7,18 +7,13 @@ sylius:
             add: Pridať
             add_attributes: Pridať vlastnosť
             choices: Voľby
-            code: Kód
-            name: Názov
             translations: Preklady
-            type: Typ
         attribute_type:
             checkbox: Checkbox
-            configuration: Konfigurácia
             date: Dátum
             datetime: Dátum a čas
             integer: Číslo
             percent: Percento
-            select: Vyberte
             text: Text
             textarea: Textové pole
             title: Typy vlastností
@@ -26,11 +21,8 @@ sylius:
         attribute_type_configuration:
             datetime:
                 format: Formát
-            date:
-                format: Formát
             select:
                 multiple: Viacero
-                values: Hodnoty
                 choose: Vyberte možnosť
                 min: Min položky
                 max: Max položky

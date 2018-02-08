@@ -14,7 +14,6 @@ sylius:
             amount: Suma de plată
             method: Modul de plată
             state:
-                header: Status plată
                 checkout: Trimite comanda
                 completed: Finalizată
                 authorized: Autorizată
@@ -30,5 +29,4 @@ sylius:
             description: Descriere
             enabled: Activată?
             instructions: Instrucțiuni
-            name: Nume
             position: Poziție

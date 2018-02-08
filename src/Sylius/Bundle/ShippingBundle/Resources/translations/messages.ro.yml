@@ -16,7 +16,6 @@ sylius:
                 ready: Gata
                 shipped: Expediată
                 returned: Returnată
-                cancelled: Anulată
             tracking_code: Codul de urmărire
         shipping_calculator:
             flat_rate_configuration:
@@ -24,22 +23,15 @@ sylius:
                 amount: Sumă
             per_unit_rate_configuration:
                 label: Sumă forfetară pe unitate
-                amount: Sumă
         shipping_category:
             description: Descriere
-            name: Nume
         shipping_method:
             calculator: Calculator
             category: Categorie
             category_requirement: Cerința categoriei
-            channels: Canale
             configuration: Configurare
-            description: Descriere
-            enabled: Activat
             match_all_category_requirement: Toate categoriile unităților trebuie să coincidă cu categoria metodei
             match_any_category_requirement: Cel puțin o unitate trebuie să aibă aceeași categorie cu metoda
             match_none_category_requirement: Nicio unitate nu trebuie să aibă aceeași categorie cu metoda
             name: Nume
             position: Poziţie
-            tax_category: Categoria de taxă
-            translations: Traduceri

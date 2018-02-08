@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        email:
+            not_blank: 请输入您的电子邮件。
+            invalid: 电子邮件地址无效。
+            not_registered: 使用此电子邮件的用户不存在，请先注册。
+        plainPassword:
+            not_blank: 请输入您的密码。
+            mismatch: 输入的密码不匹配
+            wrong_current: 提供的密码与当前登录密码不匹配。
+        password:
+            min: 密码必须至少 {{ limit }} 个字符长。
+            max: 密码不能超过 {{ limit }} 个字符。

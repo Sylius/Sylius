@@ -20,4 +20,3 @@ sylius:
             new: סיסמה חדשה
         user_reset_password:
             confirmation: אימות
-            new: סיסמה חדשה

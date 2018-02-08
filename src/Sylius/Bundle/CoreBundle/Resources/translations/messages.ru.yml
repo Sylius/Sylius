@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Использовать другой адрес для выставления счета?
             payment_method: Способ оплаты
             shipping_method: Способ доставки
-        promotion:
-            channels: Каналы
-        promotion_action:
-            add_product_configuration:
-                product: Товар
         promotion_coupon:
             per_customer_usage_limit: Лимит использования на клиента
         group:
@@ -27,7 +22,6 @@ sylius:
         channel:
             contact_email: Контактный email
             currencies: Валюты
-            currency_base: Базовая валюта
             account_verification_required: Требуется ли подтверждение аккаунта?
             hostname: Хост
             locale_default: Локаль по умолчанию
@@ -41,7 +35,6 @@ sylius:
             taxonomies: Список каталогов
             theme: Тема оформления
         image:
-            type: Тип
             file: Изображение
         locale:
             code: Код
@@ -59,37 +52,23 @@ sylius:
             id: ID
             title: Название
         product:
-            images: Изображения
             restricted_zone: Зона ограничений
             short_description: Короткое описание
             variant_selection_method: Метод выбора вариантов
             main_taxon: Основной таксон
-            channels: Каналы
-            enabled: Активен
         product_filter:
             name: Название
-            code: Код
         product_variant:
             tax_category: Категория налогов
-            shipping_category: Категория доставки
         shipment_filter:
-            created_at_from: От
-            created_at_to: До
             number: Номер заказа
             shipping_address: Имя получателя
-            channel: Все каналы
         payment_filter:
-            created_at_from: От
-            created_at_to: До
-            number: Номер заказа
             billing_address: Счет на имя
-            channel: Все каналы
         shipping_method:
             zone: Зона
         taxon:
-            code: Код
             file: Выберите изображение
-            images: Изображения
         taxonomy:
             file: Выберите изображение
         user:
@@ -98,7 +77,6 @@ sylius:
             enabled: Активен
             first_name: Имя
             groups: Группы
-            roles: Роли
             last_name: Фамилия
             password: Пароль
             shipping_address: Адрес доставки
@@ -122,8 +100,6 @@ sylius:
         product_association:
             product: Связанные продукты
             type: Типы взаимосвязи
-        product_association_type:
-            name: Название
         promotion_filter:
             products: Фильтр товаров
             taxons: Фильтр таксонов
@@ -132,19 +108,8 @@ sylius:
                 group: Группа клиента
             has_taxon:
                 taxons: Категории
-            product:
-                products: Товары
             total_of_items_from_taxon:
                 taxon: Налог
-                amount: Сумма
-        payment_method:
-            channels: Каналы
-        product_attribute:
-            position: Позиция
-        zone:
-            scopes:
-                shipping: Способ доставки
-                tax: Налог
     installer:
         extensions:
             header: расширения
@@ -178,7 +143,6 @@ sylius:
             exists: существует
             logs:
                 header: журналы
-                help: "Чтобы выставить разрешения запустите: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: не существует
             not_writable: не доступно для записи
             parameters:

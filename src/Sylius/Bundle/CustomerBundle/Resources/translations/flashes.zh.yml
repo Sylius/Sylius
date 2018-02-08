@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        register: '感謝您的註冊，請檢查您的電子信箱以驗證您的帳戸。'

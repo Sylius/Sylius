@@ -6,7 +6,6 @@ sylius:
         admin:
             main:
                 configuration:
-                    countries: Земље
                     header: Подешавања
                     locales: Локални
                     payment_methods: Опције плаћања

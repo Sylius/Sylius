@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    taxon:
+        code:
+            not_blank: 请输入分类代码。
+            regex: 分类代码仅可以由字母、 数字、 破折号和下划线组成。
+            unique: 输入的分类编码已经存在
+        name:
+            max_length: 分类名称不能超过 255 个字符。
+            not_blank: 请输入分类名称。
+        slug:
+            not_blank: 请输入分类标识。
+            unique: 分类标识必须是唯一的。
+    taxonomy:
+        name:
+            max_length: 分类名称不能超过 255 个字符。
+            not_blank: 请输入分类名称。

@@ -14,7 +14,6 @@ sylius:
             amount: Importe del pago
             method: Modo de pago
             state:
-                header: Estado del pago
                 checkout: Completar pedido
                 completed: Completado
                 authorized: Autorizado
@@ -30,5 +29,3 @@ sylius:
             description: Descripción
             enabled: '¿Activado?'
             instructions: Instrucciones
-            name: Nombre
-            position: Posición

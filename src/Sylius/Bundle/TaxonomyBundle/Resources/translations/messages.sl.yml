@@ -4,8 +4,4 @@
 sylius:
     form:
         taxon:
-            description: Opis
-            name: Ime
             parent: Nadrejeni
-        taxonomy:
-            name: Ime

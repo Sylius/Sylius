@@ -7,7 +7,6 @@ sylius:
             account:
                 address_book: 'Adresboek'
                 change_password: 'Wachtwoord wijzigen'
-                dashboard: 'Dashboard'
                 header: 'Uw account'
                 order_history: 'Bestelgeschiedenis'
                 personal_information: 'Persoonlijke gegevens'

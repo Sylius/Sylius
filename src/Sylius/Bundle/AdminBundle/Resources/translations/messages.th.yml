@@ -6,18 +6,14 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: ชนิดความสัมพันธ์
                     attributes: คุณสมบัติ
                     header: แค็ตตาล็อก
-                    inventory: คลังสินค้า
                     options: ตัวเลือกสินค้า
                     products: สินค้า
                     taxons: การจัดหมวดหมู่
                 configuration:
                     admin_users: ผู้ดูแลระบบ
                     channels: ช่องทางจำหน่าย
-                    countries: ประเทศ
-                    currencies: สกุลเงิน
                     exchange_rates: อัตราแลกเปลี่ยน
                     header: การกำหนดค่า
                     locales: ภาษา
@@ -29,7 +25,6 @@ sylius:
                     zones: โซน
                 marketing:
                     header: การตลาด
-                    product_reviews: รีวิวสินค้า
                     promotions: โปรโมชั่น
                 customers:
                     customers: ลูกค้า

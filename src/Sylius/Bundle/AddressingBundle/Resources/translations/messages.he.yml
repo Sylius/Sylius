@@ -36,7 +36,4 @@ sylius:
             scope: תחום
             scopes:
                 all: כל התחומים
-            select: בחירה
             select_scope: בחרו תחום
-        zone_member:
-            select: בחירה

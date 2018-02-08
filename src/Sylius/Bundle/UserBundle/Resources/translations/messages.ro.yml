@@ -18,6 +18,3 @@ sylius:
             confirmation: Confirmare
             current: Parola actuală
             new: Parolă nouă
-        user_reset_password:
-            confirmation: Confirmare
-            new: Parolă nouă

@@ -13,7 +13,6 @@ sylius:
             postcode: Código postal
             street: Nombre de la calle
             province: Provincia
-            zone: Zona
         country:
             add_province: Añadir provincia
             name: Nombre
@@ -34,8 +33,6 @@ sylius:
                 province: Provincia
                 zone: Zona
             scope: Alcance
-            scopes:
-                all: Todos
             select: Seleccionar
             select_scope: Seleccione ámbito
         zone_member:

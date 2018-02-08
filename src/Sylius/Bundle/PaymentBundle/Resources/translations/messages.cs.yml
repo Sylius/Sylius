@@ -14,7 +14,6 @@ sylius:
             amount: Platební částka
             method: Způsob platby
             state:
-                header: Stav platby
                 checkout: Objednat
                 completed: Dokončeno
                 authorized: Autorizováno

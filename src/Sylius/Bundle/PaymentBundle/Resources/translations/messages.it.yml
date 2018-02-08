@@ -14,7 +14,6 @@ sylius:
             amount: Ammontare del pagamento
             method: Metodo di pagamento
             state:
-                header: Stato pagamento
                 checkout: Checkout
                 completed: Completato
                 authorized: Autorizzato
@@ -31,4 +30,3 @@ sylius:
             enabled: Abilitato?
             instructions: Istruzioni
             name: Nome
-            position: Posizione

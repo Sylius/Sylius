@@ -8,7 +8,6 @@ sylius:
             not_blank: Prosimo, vnesite ime imetnika kartice.
         expiry_month:
             max_range: Mesec poteka kreditne kartice mora biti med {{ min }} in {{ max }}.
-            min_range: Mesec poteka kreditne kartice mora biti med {{ min }} in {{ max }}.
             not_blank: Prosimo, izberite mesec poteka.
         number:
             not_blank: Prosimo, vnesite številko kartice.

@@ -13,13 +13,11 @@ sylius:
             postcode: Індэкс
             street: Вуліца і нумар дома
             province: Вобласць (рэгіён)
-            zone: Зона
         country:
             add_province: Дадаць вобласць
             name: Назва
             provinces: Вобласці
             select: Выбярыце
-            enabled: Уключана
         province:
             name: Імя
             abbreviation: Абрэвіятура вобласці (рэгіёну)
@@ -36,7 +34,4 @@ sylius:
             scope: Сфера ўжывання
             scopes:
                 all: Усе
-            select: Выбярыце
             select_scope: Выбярыце сферу ўжывання
-        zone_member:
-            select: Выбярыце

@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Folosiți o adresă de facturare diferită?
             payment_method: Metoda de plată
             shipping_method: Metoda de livrare
-        promotion:
-            channels: Canale
-        promotion_action:
-            add_product_configuration:
-                product: Produs
         promotion_coupon:
             per_customer_usage_limit: Limita de utilizare per client
         group:
@@ -41,7 +36,6 @@ sylius:
             taxonomies: Categorizări
             theme: Temă
         image:
-            type: Tip
             file: Imagine
         locale:
             code: Cod
@@ -55,50 +49,29 @@ sylius:
             payment_state: Status plată
             channel: Toate canalele
         page:
-            body: Corp
             id: Id
-            title: Titlu
         product:
-            images: Imagini
             restricted_zone: Zonă cu restricție
             short_description: Descriere scurtă
             variant_selection_method: Metoda de selectare a variantei
             main_taxon: Taxonul principal
-            channels: Canale
-            enabled: Activat
-        product_filter:
-            name: Nume
-            code: Cod
         product_variant:
             tax_category: Categoria de taxă
-            shipping_category: Categoria de livrare
         shipment_filter:
-            created_at_from: De la
-            created_at_to: Până la
             number: Număr comandă
             shipping_address: Livrează la
-            channel: Toate canalele
         payment_filter:
-            created_at_from: De la
-            created_at_to: Până la
-            number: Număr comandă
             billing_address: Facturat către
-            channel: Toate canalele
         shipping_method:
             zone: Zonă
         taxon:
-            code: Cod
             file: Alege imagine
-            images: Imagini
         taxonomy:
             file: Alege imagine
         user:
             billing_address: Adresa de facturare
-            different_billing_address: Folosiți o adresă de facturare diferită?
-            enabled: Activat
             first_name: Prenume
             groups: Grupuri
-            roles: Roluri
             last_name: Nume
             password: Parolă
             shipping_address: Adresa de livrare
@@ -122,8 +95,6 @@ sylius:
         product_association:
             product: Produs asociat
             type: Tipul de asociere
-        product_association_type:
-            name: Nume
         promotion_filter:
             products: Filtru produse
             taxons: Filtru de taxoni
@@ -132,13 +103,8 @@ sylius:
                 group: Grup de clienți
             has_taxon:
                 taxons: Taxoni
-            product:
-                products: Produse
             total_of_items_from_taxon:
                 taxon: Taxon
-                amount: Sumă
-        payment_method:
-            channels: Canale
         product_attribute:
             position: Poziţie
         zone:

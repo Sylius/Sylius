@@ -14,7 +14,6 @@ sylius:
             amount: Kwota płatności
             method: Metoda płatności
             state:
-                header: Status płatności
                 checkout: Koszyk
                 completed: Zakończone
                 authorized: Upoważniony

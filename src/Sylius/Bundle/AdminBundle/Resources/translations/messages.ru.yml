@@ -9,15 +9,12 @@ sylius:
                     association_types: Типы взаимосвязей
                     attributes: Атрибуты
                     header: Каталог
-                    inventory: Остатки
-                    options: Список опций
                     products: Товары
                     taxons: Таксоны
                 configuration:
                     admin_users: Администраторы
                     channels: Каналы
                     countries: Страны
-                    currencies: Валюты
                     exchange_rates: Курсы валют
                     header: Конфигурация
                     locales: Языки
@@ -33,7 +30,6 @@ sylius:
                     promotions: Рекламные акции
                 customers:
                     customers: Клиенты
-                    groups: Группы
                     header: Клиент
                 sales:
                     header: Продажи

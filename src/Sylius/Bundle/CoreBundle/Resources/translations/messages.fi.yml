@@ -3,19 +3,8 @@
 
 sylius:
     form:
-        promotion:
-            channels: Kanavat
-        image:
-            type: Tyyppi
-        product:
-            channels: Kanavat
         guest:
             email: Sähköpostiosoite
-        promotion_rule:
-            product:
-                products: Tuotteet
-        payment_method:
-            channels: Kanavat
     installer:
         extensions:
             off: false

@@ -7,12 +7,12 @@ sylius:
             cardholder_name: Titular do cartão
             expiry_month: Mês de validade
             expiry_year: Ano de validade
-            number: Número do cartão
+            number: Número do cartão de crédito
             security_code: Código de segurança (CVV)
-            type: Tipo de cartão
+            type: Tipo de Cartão
         payment:
-            amount: Valor do pagamento
-            method: Método de pagamento
+            amount: Valor total de
+            method: Meio de pagamento
             state:
                 header: Estado do pagamento
                 checkout: Finalizar compra
@@ -21,14 +21,14 @@ sylius:
                 failed: Falhou
                 new: Novo
                 pending: Pendente
-                processing: A processar
-                unknown: Desconhecido
+                processing: Processando
+                unknown: DESCONHECIDO
                 void: Vazio
                 cancelled: Cancelado
                 refunded: Reembolsado
         payment_method:
             description: Descrição
-            enabled: Ativado?
+            enabled: Habilitado?
             instructions: Instruções
             name: Nome
-            position: Posição
+            position: Função

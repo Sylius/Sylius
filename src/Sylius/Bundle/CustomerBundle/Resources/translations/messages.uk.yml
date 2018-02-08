@@ -15,9 +15,6 @@ sylius:
             different_billing_address: Використати іншу адресу для рахунків?
             only_customer_registration: Створити обліковку?
             subscribed_to_newsletter: Підписатись на інформаційний бюлетень
-        customer_group:
-            name: Назва
-            roles: Ролі
     gender:
         unknown: Не вказана
         male: Чоловіча

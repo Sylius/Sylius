@@ -6,10 +6,8 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: انواع ارتباط ها
                     attributes: ویژگی‌ها
                     header: فهرست
-                    inventory: موجودی کالا
                     options: گزینه‎ها
                     products: محصولات
                     taxons: دسته بندی ها
@@ -29,11 +27,9 @@ sylius:
                     zones: منطقه‌ها
                 marketing:
                     header: بازاریابی
-                    product_reviews: نقد و بررسی محصول
                     promotions: فروش های ویژه
                 customers:
                     customers: مشتریان
-                    groups: گروه‌ها
                     header: مشتری
                 sales:
                     header: فروش‌ها

@@ -13,13 +13,11 @@ sylius:
             postcode: Posta kodu
             street: Adres
             province: Eyalet
-            zone: Bölge
         country:
             add_province: Bölge ekle
             name: Ülke adı
             provinces: İller
             select: Ülke seçin
-            enabled: Etkin
         province:
             name: Ad
             abbreviation: Kısaltma
@@ -36,7 +34,4 @@ sylius:
             scope: Kapsam
             scopes:
                 all: Tümü
-            select: Ülke seçin
             select_scope: Ölçek seçiniz
-        zone_member:
-            select: Ülke seçin

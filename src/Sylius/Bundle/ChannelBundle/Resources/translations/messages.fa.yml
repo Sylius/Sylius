@@ -5,7 +5,4 @@ sylius:
     form:
         channel:
             color: رنگ
-            description: شرح
-            enabled: فعال
-            name: نام
             url: آدرس اینترنتی

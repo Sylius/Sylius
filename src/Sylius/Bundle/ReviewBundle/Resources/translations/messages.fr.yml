@@ -11,7 +11,5 @@ sylius:
             status:
                 approved: Approuvé
                 label: Statut
-                new: Nouveau
                 rejected: Rejeté
             submit: Valider
-            title: Titre

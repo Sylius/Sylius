@@ -7,7 +7,4 @@ sylius:
             account:
                 address_book: 'Adres Defteri'
                 change_password: 'Şifre değiştir'
-                dashboard: 'Kontrol Paneli'
                 header: 'Hesabınız'
-                order_history: 'Sipariş geçmişi'
-                personal_information: 'Kişisel bilgiler'

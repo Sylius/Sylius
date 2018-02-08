@@ -7,18 +7,13 @@ sylius:
             add: Добавить
             add_attributes: Добавить атрибуты
             choices: Выбор
-            code: Код
-            name: Название
             translations: '﻿Переводы'
-            type: Тип
         attribute_type:
             checkbox: Флажок
-            configuration: Конфигурация
             date: Дата
             datetime: Дата и время
             integer: Целое число
             percent: Процент
-            select: Выбрать
             text: Текст
             textarea: Текстовая область
             title: Тип атрибута
@@ -26,11 +21,8 @@ sylius:
         attribute_type_configuration:
             datetime:
                 format: Формат
-            date:
-                format: Формат
             select:
                 multiple: Несколько
-                values: Значения
                 choose: Выберите настройку
                 min: Минимальное количество
                 max: Максимальное количество

@@ -11,7 +11,5 @@ sylius:
             status:
                 approved: Patvirtintas
                 label: Būsena
-                new: Naujas
                 rejected: Atmestas
             submit: Pateikti
-            title: Pavadinimas

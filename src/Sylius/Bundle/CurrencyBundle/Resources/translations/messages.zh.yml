@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        currency:
+            base: 基準幣別
+            code: 名稱
+            enabled: 啓用
+            exchange_rate: 匯率
+        exchange_rate:
+            source_currency: 來源幣別
+            target_currency: 目標幣別
+            ratio: 比率

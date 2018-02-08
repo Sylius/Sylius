@@ -6,21 +6,15 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: Relatietypes
-                    attributes: Attributen
                     header: Catalogus
                     inventory: Voorraad
-                    options: Opties
                     products: Producten
                     taxons: Taxa
                 configuration:
                     admin_users: Beheerders
                     channels: Kanalen
-                    countries: Landen
                     currencies: Valuta
                     exchange_rates: Wisselkoersen
-                    header: Configuratie
-                    locales: Talen/Regio's
                     payment_methods: Betaalmethoden
                     shipping_categories: Verzendcategorieën
                     shipping_methods: Verzendmethoden
@@ -29,11 +23,9 @@ sylius:
                     zones: Zones
                 marketing:
                     header: Marketing
-                    product_reviews: Productbeoordelingen
                     promotions: Promoties
                 customers:
                     customers: Klanten
-                    groups: Groepen
                     header: Klant
                 sales:
                     header: Verkoop

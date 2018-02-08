@@ -12,13 +12,11 @@ sylius:
             phone_number: Telefonska številka
             postcode: Poštna številka
             province: Regija
-            zone: Cona
         country:
             add_province: Dodaj provinco
             name: Ime
             provinces: Province
             select: Izberite
-            enabled: Omogočeno
         province:
             name: Ime
             abbreviation: Kratica
@@ -33,7 +31,4 @@ sylius:
                 province: Provinca
                 zone: Območje
             scope: Področje
-            select: Izberite
             select_scope: Izberite področje
-        zone_member:
-            select: Izberite

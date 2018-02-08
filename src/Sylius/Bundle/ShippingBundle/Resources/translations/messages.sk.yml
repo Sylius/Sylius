@@ -11,8 +11,6 @@ sylius:
         shipment:
             state: Stav
             states:
-                checkout: Košík
-                pending: Čakajúca
                 ready: Pripravená
                 shipped: Odoslané
                 returned: Vrátená
@@ -24,19 +22,9 @@ sylius:
                 amount: Suma
             per_unit_rate_configuration:
                 label: Paušálna suma za položku
-                amount: Suma
-        shipping_category:
-            description: Popis
-            name: Názov
         shipping_method:
             calculator: Spôsob vypočtu
             category: Kategória
             category_requirement: Podmienka pre kategóriu doručenia
-            channels: Kanály
             configuration: Konfigurácia
-            description: Popis
-            enabled: Zapnuté
-            name: Názov
             position: Pozícia
-            tax_category: Daňová kategória
-            translations: Preklady

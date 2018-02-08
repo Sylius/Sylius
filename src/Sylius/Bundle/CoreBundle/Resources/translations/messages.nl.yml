@@ -14,11 +14,6 @@ sylius:
                 different_billing_address: Gebruik een ander factuuradres?
             payment_method: Betalingsmethode
             shipping_method: Verzendmethode
-        promotion:
-            channels: Kanalen
-        promotion_action:
-            add_product_configuration:
-                product: Product
         promotion_coupon:
             per_customer_usage_limit: Gebruikslimiet per klant
         group:
@@ -27,7 +22,6 @@ sylius:
         channel:
             contact_email: Contact e-mail
             currencies: Valuta's
-            currency_base: Standaardvaluta
             account_verification_required: Is account verificatie vereist?
             hostname: Hostnaam
             locale_default: Standaardlandinstelling
@@ -41,7 +35,6 @@ sylius:
             taxonomies: Taxonomieën
             theme: Thema
         image:
-            type: Type
             file: Afbeelding
         locale:
             code: Code
@@ -54,43 +47,23 @@ sylius:
             total_to: Tot
             payment_state: Betaalstatus
             channel: Alle kanalen
-        page:
-            body: Inhoud
-            id: ID
-            title: Titel
         product:
-            images: Afbeeldingen
             restricted_zone: Beperkte zone
             short_description: Korte omschrijving
             variant_selection_method: Variant selectie methode
             main_taxon: Hoofdcategorie
-            channels: Kanalen
-            enabled: Toegestaan
         product_filter:
             name: Naam
-            code: Code
         product_variant:
             tax_category: Belasting categorie
-            shipping_category: Verzend categorie
         shipment_filter:
-            created_at_from: Van
-            created_at_to: Tot
             number: Ordernummer
             shipping_address: Verzend naar naam
-            channel: Alle kanalen
         payment_filter:
-            created_at_from: Van
-            created_at_to: Tot
-            number: Ordernummer
             billing_address: Facturatie aan gebruiker
-            channel: Alle kanalen
         shipping_method:
             zone: Zone
         taxon:
-            code: Code
-            file: Selecteer afbeelding
-            images: Afbeeldingen
-        taxonomy:
             file: Selecteer afbeelding
         user:
             billing_address: Factuuradres
@@ -98,7 +71,6 @@ sylius:
             enabled: Actief
             first_name: Voornaam
             groups: Groepen
-            roles: Rollen
             last_name: Achternaam
             password: Wachtwoord
             shipping_address: Bezorgadres
@@ -122,8 +94,6 @@ sylius:
         product_association:
             product: Gerelateerd product
             type: Relatietype
-        product_association_type:
-            name: Naam
         promotion_filter:
             products: Producten filteren
             taxons: Taxa filter
@@ -132,19 +102,10 @@ sylius:
                 group: Klantengroep
             has_taxon:
                 taxons: Taxa
-            product:
-                products: Producten
             total_of_items_from_taxon:
                 taxon: Taxon
-                amount: Hoeveelheid
-        payment_method:
-            channels: Kanalen
         product_attribute:
             position: Positie
-        zone:
-            scopes:
-                shipping: Verzending
-                tax: BTW
     installer:
         extensions:
             header: extensies
@@ -178,7 +139,6 @@ sylius:
             exists: bestaat
             logs:
                 header: logs
-                help: "Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: 'whoami': rwx %path%"
             not_exists: niet bestaand
             not_writable: niet schrijfbaar
             parameters:

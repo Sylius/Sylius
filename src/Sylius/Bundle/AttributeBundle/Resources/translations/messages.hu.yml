@@ -7,18 +7,13 @@ sylius:
             add: Hozzáadás
             add_attributes: Attribútum hozzáadása
             choices: Választási lehetőségek
-            code: Kód
-            name: Név
             translations: Fordítások
-            type: Típus
         attribute_type:
             checkbox: Jelölőnégyzet
-            configuration: Konfiguráció
             date: Dátum
             datetime: Dátum/idő
             integer: Egész szám
             percent: Százalék
-            select: Válassza ki
             text: Szöveg
             textarea: Szövegmező
             title: Attribútum típusok
@@ -29,7 +24,6 @@ sylius:
             date:
                 format: Formátum
             select:
-                values: Értékek
                 choose: Válassz egy lehetőséget
             text:
                 min: Minimális hossz

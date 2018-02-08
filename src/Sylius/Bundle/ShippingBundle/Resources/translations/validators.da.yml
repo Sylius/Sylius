@@ -26,6 +26,3 @@ sylius:
             unique: 'Forsendelsesmetoden med den angivne kode eksisterer i forvejen.'
         zone:
             not_blank: 'Vælg venligst zonen for forsendelsesmetoden.'
-    shipment:
-        shipping_method:
-            not_blank: 'Vælg venligst forsendelsesmetode.'
