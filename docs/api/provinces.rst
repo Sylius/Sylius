@@ -127,7 +127,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://sylius.dev/api/v1/countries/PL/provinces/PL-MZ \
+    $ curl http://sylius.test/api/v1/countries/PL/provinces/PL-MZ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

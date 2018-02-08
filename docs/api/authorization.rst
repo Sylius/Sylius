@@ -5,7 +5,7 @@ Authorization
 =============
 
 This part of documentation is about authorization to Sylius platform through API. In order to check this configuration,
-please set up your local copy of Sylius platform and change *sylius.dev*  to your address.
+please set up your local copy of Sylius platform and change *sylius.test*  to your address.
 
 OAuth2
 ------
@@ -76,7 +76,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/oauth/v2/token \
+    curl http://sylius.test/api/oauth/v2/token \
         -d "client_id"=demo_client \
         -d "client_secret"=secret_demo_client \
         -d "grant_type"=password \
@@ -117,7 +117,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/v1/users/
+    curl http://sylius.test/api/v1/users/
         -H "Authorization: Bearer NzFiYTM4ZTEwMjcwZTcyZWIzZTA0NmY3NjE3MTIyMjM1Y2NlMmNlNWEyMTAzY2UzYmY0YWIxYmUzNTkyMDcyNQ"
 
 .. note::
@@ -153,7 +153,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/api/oauth/v2/token \
+    curl http://sylius.test/api/oauth/v2/token \
         -d "client_id"=demo_client \
         -d "client_secret"=secret_demo_client \
         -d "grant_type"=refresh_token \
