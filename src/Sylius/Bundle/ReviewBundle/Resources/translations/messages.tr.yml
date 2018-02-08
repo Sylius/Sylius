@@ -1,16 +1,11 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        review:
-            author: Hazırlayan
-            comment: Yorum
-            header: Bir gözden ekle
-            status:
-                approved: Onaylandı
-                label: Durum
-                new: Yeni
-                rejected: Reddedildi
-            submit: Gönder
-            title: Başlık
+  form:
+    review:
+      author: Hazırlayan
+      comment: Yorum
+      header: Bir gözden ekle
+      status:
+        approved: Onaylandı
+        label: Durum
+        rejected: Reddedildi
+      submit: Gönder

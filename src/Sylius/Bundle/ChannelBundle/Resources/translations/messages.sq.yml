@@ -1,11 +1,5 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        channel:
-            color: Ngjyra
-            description: Përshkrimi
-            enabled: E aktivizuar
-            name: Emri
-            url: URL
+  form:
+    channel:
+      color: Ngjyra
+      url: URL

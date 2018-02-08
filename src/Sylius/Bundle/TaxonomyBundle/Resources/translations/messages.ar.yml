@@ -1,12 +1,6 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        taxon:
-            description: الوصف
-            name: الاسم
-            parent: الجذر
-            slug: سبيكة
-        taxonomy:
-            name: الاسم
+  form:
+    taxon:
+      parent: الجذر
+    taxonomy:
+      name: الاسم

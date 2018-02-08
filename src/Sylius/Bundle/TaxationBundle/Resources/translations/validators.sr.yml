@@ -1,0 +1,6 @@
+sylius:
+  tax_category:
+    name:
+      not_blank: Unesite ime kategorije proizvoda.
+    code:
+      not_blank: Unesite kod za kategoriju proizvoda.

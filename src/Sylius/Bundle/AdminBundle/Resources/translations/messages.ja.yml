@@ -1,24 +1,14 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    inventory: sylius.breadcrumb.inventory.index
-                    options: sylius.breadcrumb.option.index
-                configuration:
-                    countries: 国の設定
-                    currencies: 通貨
-                    payment_methods: 支払い方法の管理
-                    shipping_methods: 配送方法管理
-                    tax_rates: 税管理
-                    zones: 地域
-                marketing:
-                    promotions: プロモーション管理
-                customers:
-                    groups: グループ
-                sales:
-                    header: sylius.breadcrumb.sales
-                    orders: 注文管理
+  menu:
+    admin:
+      main:
+        configuration:
+          payment_methods: 支払い方法の管理
+          shipping_methods: 配送方法管理
+          tax_rates: 税管理
+          zones: 地域
+        marketing:
+          promotions: プロモーション管理
+        sales:
+          header: sylius.breadcrumb.sales
+          orders: 注文管理

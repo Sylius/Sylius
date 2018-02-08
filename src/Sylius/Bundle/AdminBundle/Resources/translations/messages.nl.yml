@@ -1,40 +1,29 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: Relatietypes
-                    attributes: Attributen
-                    header: Catalogus
-                    inventory: Voorraad
-                    options: Opties
-                    products: Producten
-                    taxons: Taxa
-                configuration:
-                    admin_users: Beheerders
-                    channels: Kanalen
-                    countries: Landen
-                    currencies: Valuta
-                    exchange_rates: Wisselkoersen
-                    header: Configuratie
-                    locales: Talen/Regio's
-                    payment_methods: Betaalmethoden
-                    shipping_categories: Verzendcategorieën
-                    shipping_methods: Verzendmethoden
-                    tax_categories: Belastingcategorieën
-                    tax_rates: BTW-tarieven
-                    zones: Zones
-                marketing:
-                    header: Marketing
-                    product_reviews: Productbeoordelingen
-                    promotions: Promoties
-                customers:
-                    customers: Klanten
-                    groups: Groepen
-                    header: Klant
-                sales:
-                    header: Verkoop
-                    orders: Bestellingen
+  menu:
+    admin:
+      main:
+        catalog:
+          header: Catalogus
+          inventory: Voorraad
+          products: Producten
+          taxons: Taxa
+        configuration:
+          admin_users: Beheerders
+          channels: Kanalen
+          currencies: Valuta
+          exchange_rates: Wisselkoersen
+          payment_methods: Betaalmethoden
+          shipping_categories: Verzendcategorieën
+          shipping_methods: Verzendmethoden
+          tax_categories: Belastingcategorieën
+          tax_rates: BTW-tarieven
+          zones: Zones
+        marketing:
+          header: Marketing
+          promotions: Promoties
+        customers:
+          customers: Klanten
+          header: Klant
+        sales:
+          header: Verkoop
+          orders: Bestellingen

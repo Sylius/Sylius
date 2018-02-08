@@ -1,39 +1,28 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        attribute:
-            add: Hinzufügen
-            add_attributes: Attribute hinzufügen
-            choices: Auswahlmöglichkeiten
-            code: Code
-            name: Name
-            translations: Übersetzungen
-            type: Typ
-        attribute_type:
-            checkbox: Kontrollkästchen
-            configuration: Einstellung
-            date: Datum
-            datetime: Datum / Zeit
-            integer: Integer
-            percent: Prozent
-            select: Bundesland auswählen
-            text: Text
-            textarea: Textfeld
-            title: Attributtyp
-            validation: Überprüfung
-        attribute_type_configuration:
-            datetime:
-                format: Format
-            date:
-                format: Format
-            select:
-                multiple: Mehrere
-                values: Werte
-                choose: Wählen Sie eine Option
-                min: Min-Einträge
-                max: Max-Einträge
-            text:
-                min: Mindestlänge
-                max: Maximale Länge
+  form:
+    attribute:
+      add: Hinzufügen
+      add_attributes: Attribute hinzufügen
+      choices: Auswahlmöglichkeiten
+      translations: Übersetzungen
+    attribute_type:
+      checkbox: Kontrollkästchen
+      date: Datum
+      datetime: Datum / Zeit
+      integer: Integer
+      percent: Prozent
+      text: Text
+      textarea: Textfeld
+      title: Attributtyp
+      validation: Überprüfung
+    attribute_type_configuration:
+      datetime:
+        format: Format
+      select:
+        multiple: Mehrere
+        choose: Wählen Sie eine Option
+        min: Min-Einträge
+        max: Max-Einträge
+      text:
+        min: Mindestlänge
+        max: Maximale Länge

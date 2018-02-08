@@ -1,14 +1,5 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        currency:
-            base: Базовая валюта
-            code: Название
-            enabled: Активен
-            exchange_rate: Обменный курс
-        exchange_rate:
-            source_currency: Исходная валюта
-            target_currency: Целевая валюта
-            ratio: По рейтингу
+  form:
+    currency:
+      base: Базовая валюта
+      exchange_rate: Обменный курс

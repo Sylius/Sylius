@@ -1,0 +1,4 @@
+sylius:
+  locale:
+    code:
+      not_blank: Izaberite kod lokalizacije.

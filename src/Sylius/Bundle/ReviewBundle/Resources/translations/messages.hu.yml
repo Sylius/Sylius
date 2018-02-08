@@ -1,17 +1,12 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        review:
-            author: Szerző
-            comment: Hozzászólás
-            header: Vélemény hozzáadása
-            rating: Értékelés
-            status:
-                approved: Jóváhagyott
-                label: Állapot
-                new: Új
-                rejected: Elutasított
-            submit: Elküld
-            title: Cím
+  form:
+    review:
+      author: Szerző
+      comment: Hozzászólás
+      header: Vélemény hozzáadása
+      rating: Értékelés
+      status:
+        approved: Jóváhagyott
+        label: Állapot
+        rejected: Elutasított
+      submit: Elküld

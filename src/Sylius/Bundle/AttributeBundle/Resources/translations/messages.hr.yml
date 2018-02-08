@@ -1,16 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        attribute:
-            add: Dodaj
-            code: ISO kod
-            name: Naziv grupe
-            type: Vrsta
-        attribute_type:
-            configuration: Postavke
-            select: Odaberite
-        attribute_type_configuration:
-            select:
-                values: Vrijednosti
+  form:
+    attribute:
+      add: Dodaj

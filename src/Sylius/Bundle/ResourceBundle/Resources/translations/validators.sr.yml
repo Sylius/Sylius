@@ -1,0 +1,4 @@
+sylius:
+  resource:
+    not_enabled: "Traženi resurs je isključen"
+    not_disabled: "Resurs je omogućen"

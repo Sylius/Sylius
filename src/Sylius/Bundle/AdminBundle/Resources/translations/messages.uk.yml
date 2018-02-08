@@ -1,40 +1,32 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: Типи асоціювання
-                    attributes: Атрибути
-                    header: Каталог
-                    inventory: Інвентаризація
-                    options: Опції
-                    products: Продукція
-                    taxons: Таксони
-                configuration:
-                    admin_users: Адміністратори
-                    channels: Канали
-                    countries: Країни
-                    currencies: Валюти
-                    exchange_rates: Обмінний курс
-                    header: Конфігурація
-                    locales: Локалі
-                    payment_methods: Методи оплати
-                    shipping_categories: Категорії доставки
-                    shipping_methods: Методи доставки
-                    tax_categories: Категорії оподаткування
-                    tax_rates: Податкові ставки
-                    zones: Зони
-                marketing:
-                    header: Маркетинг
-                    product_reviews: Відгуки про товари
-                    promotions: Промоції
-                customers:
-                    customers: Клієнти
-                    groups: Групи
-                    header: Клієнт
-                sales:
-                    header: Продажі
-                    orders: Замовлення
+  menu:
+    admin:
+      main:
+        catalog:
+          attributes: Атрибути
+          header: Каталог
+          products: Продукція
+          taxons: Таксони
+        configuration:
+          admin_users: Адміністратори
+          channels: Канали
+          countries: Країни
+          currencies: Валюти
+          header: Конфігурація
+          locales: Локалі
+          payment_methods: Методи оплати
+          shipping_categories: Категорії доставки
+          shipping_methods: Методи доставки
+          tax_categories: Категорії оподаткування
+          tax_rates: Податкові ставки
+          zones: Зони
+        marketing:
+          header: Маркетинг
+          product_reviews: Відгуки про товари
+          promotions: Промоції
+        customers:
+          customers: Клієнти
+          header: Клієнт
+        sales:
+          header: Продажі
+          orders: Замовлення

@@ -1,31 +1,19 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        product:
-            name: Navn
-            description: Beskrivelse
-            attributes: Egenskaber
-            options: Indstillinger
-            meta_keywords: Meta søgeord
-            meta_description: Meta beskrivelse
-            slug: Slug
-            taxons: Kategorier
-        product_variant:
-            name: Navn
-        association_type:
-            name: Navn
-            translations: Oversættelser
-        association:
-            type: Associeret type
-            product: Associeret produkt
-        variant:
-            name: Navn
-        option:
-            name: Navn
-            position: Placering
-            values: Mulige værdier
-        option_value:
-            add_value: Tilføj værdi
-            value: Værdi
+  form:
+    product:
+      attributes: Egenskaber
+      options: Indstillinger
+      meta_keywords: Meta søgeord
+      meta_description: Meta beskrivelse
+      slug: Slug
+      taxons: Kategorier
+    association_type:
+      translations: Oversættelser
+    association:
+      type: Associeret type
+      product: Associeret produkt
+    option:
+      position: Placering
+      values: Mulige værdier
+    option_value:
+      value: Værdi

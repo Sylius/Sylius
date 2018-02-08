@@ -1,34 +1,23 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        attribute:
-            add: Shto
-            add_attributes: Shto atribut
-            choices: Zgjedhjet
-            code: Kodi
-            name: Emri
-            translations: Përkthime
-        attribute_type:
-            checkbox: Checkbox
-            configuration: Konfigurimi
-            date: Data
-            datetime: Data dhe koha
-            integer: Numër i plotë
-            percent: Përqind
-            select: Zgjidh
-            text: Teksti
-            textarea: Hapsira e tekstit
-            title: Lloji i atributit
-            validation: Miratim
-        attribute_type_configuration:
-            datetime:
-                format: Formati
-            date:
-                format: Formati
-            select:
-                values: Vlerat
-            text:
-                min: Gjatësia min
-                max: Gjatësia max
+  form:
+    attribute:
+      add: Shto
+      add_attributes: Shto atribut
+      choices: Zgjedhjet
+      translations: Përkthime
+    attribute_type:
+      checkbox: Checkbox
+      date: Data
+      datetime: Data dhe koha
+      integer: Numër i plotë
+      percent: Përqind
+      text: Teksti
+      textarea: Hapsira e tekstit
+      title: Lloji i atributit
+      validation: Miratim
+    attribute_type_configuration:
+      datetime:
+        format: Formati
+      text:
+        min: Gjatësia min
+        max: Gjatësia max

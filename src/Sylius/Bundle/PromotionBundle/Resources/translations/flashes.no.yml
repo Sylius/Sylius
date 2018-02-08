@@ -1,6 +1,3 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    promotion_coupon:
-        generate: 'Kampanjekuponger ble generert uten feil.'
+  promotion_coupon:
+    generate: 'Kampanjekuponger ble generert uten feil.'

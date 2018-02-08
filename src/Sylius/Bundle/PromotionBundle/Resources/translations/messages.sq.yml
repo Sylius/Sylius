@@ -1,25 +1,11 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        promotion:
-            actions: Veprimet
-            add_action: Shto veprim
-            add_rule: Shto rregull
-            coupon_based: Bazuar në kupon
-            description: Përshkrimi
-            ends_at: Përfundon më
-            exclusive: Ekskluziv
-            name: Emri
-            priority: Përparësia
-            rules: Rregullat
-            starts_at: Fillon më
-        promotion_rule:
-            cart_quantity_configuration:
-                count: Numëro
-                equal: E njëjtë
-            shipping_country_configuration:
-                country: Shteti
-            taxonomy_configuration:
-                taxons: Tipologjite
+  form:
+    promotion:
+      actions: Veprimet
+      add_action: Shto veprim
+      add_rule: Shto rregull
+      coupon_based: Bazuar në kupon
+      ends_at: Përfundon më
+      exclusive: Ekskluziv
+      rules: Rregullat
+      starts_at: Fillon më

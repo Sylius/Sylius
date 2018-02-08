@@ -1,24 +1,11 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        customer:
-            first_name: Prénom
-            group: Groupe
-            last_name: Nom
-            email: E-mail
-            phone_number: Téléphone
-            gender: Sexe
-            birthday: Date de naissance
-            billing_address: Adresse de facturation
-            different_billing_address: Utiliser une adresse différente pour la facturation ?
-            only_customer_registration: Créer un compte ?
-            subscribed_to_newsletter: S'abonner à la newsletter
-        customer_group:
-            name: Nom
-            roles: Rôles
-    gender:
-        unknown: Inconnu
-        male: Homme
-        female: Femme
+  form:
+    customer:
+      group: Groupe
+      gender: Sexe
+      birthday: Date de naissance
+      only_customer_registration: Créer un compte ?
+      subscribed_to_newsletter: S'abonner à la newsletter
+  gender:
+    male: Homme
+    female: Femme

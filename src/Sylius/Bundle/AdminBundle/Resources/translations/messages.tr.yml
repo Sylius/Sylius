@@ -1,40 +1,28 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: İlişki türleri
-                    attributes: Nitelikler
-                    header: Katalog
-                    inventory: Stok
-                    options: Ayarlar
-                    products: Ürünler
-                    taxons: Kategoriler
-                configuration:
-                    admin_users: Yöneticiler
-                    channels: Kanallar
-                    countries: Ülkeler
-                    currencies: Para birimi
-                    exchange_rates: Döviz Kurları
-                    header: Ayarlar
-                    locales: Diller
-                    payment_methods: Ödeme Yöntemleri
-                    shipping_categories: Kargo Kategorileri
-                    shipping_methods: Gönderim metodları
-                    tax_categories: Vergi Kategorileri
-                    tax_rates: Vergi oranları
-                    zones: Bölgeler
-                marketing:
-                    header: Pazarlama
-                    product_reviews: Ürün Yorumları
-                    promotions: Promosyonlar
-                customers:
-                    customers: Müşteriler
-                    groups: Gruplar
-                    header: Müşteri
-                sales:
-                    header: Satışlar
-                    orders: Siparişler
+  menu:
+    admin:
+      main:
+        catalog:
+          association_types: İlişki türleri
+          header: Katalog
+          products: Ürünler
+          taxons: Kategoriler
+        configuration:
+          admin_users: Yöneticiler
+          channels: Kanallar
+          exchange_rates: Döviz Kurları
+          payment_methods: Ödeme Yöntemleri
+          shipping_categories: Kargo Kategorileri
+          shipping_methods: Gönderim metodları
+          tax_categories: Vergi Kategorileri
+          tax_rates: Vergi oranları
+          zones: Bölgeler
+        marketing:
+          header: Pazarlama
+          promotions: Promosyonlar
+        customers:
+          customers: Müşteriler
+          header: Müşteri
+        sales:
+          header: Satışlar
+          orders: Siparişler

@@ -1,39 +1,27 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        rule:
-            unit_count_configuration:
-                count: Antall
-                equal: Lik
-        shipment:
-            state: Tilstand
-            states:
-                checkout: Sjekk ut
-                pending: Venter
-                ready: Klar
-                shipped: Sendt
-                returned: Returnert
-                cancelled: Avbrutt
-            tracking_code: Sporingskode
-        shipping_calculator:
-            flat_rate_configuration:
-                amount: Antall
-            per_unit_rate_configuration:
-                amount: Antall
-        shipping_category:
-            description: Beskrivelse
-            name: Navn
-        shipping_method:
-            calculator: Kalkulator
-            category: Kategori
-            category_requirement: Kategorikrav
-            channels: Kanaler
-            configuration: Konfigurasjon
-            description: Beskrivelse
-            enabled: Aktivert
-            name: Navn
-            position: Plassering
-            tax_category: Skattekategori
-            translations: Oversettelser
+  form:
+    rule:
+      unit_count_configuration:
+        count: Antall
+        equal: Lik
+    shipment:
+      state: Tilstand
+      states:
+        checkout: Sjekk ut
+        ready: Klar
+        shipped: Sendt
+        returned: Returnert
+      tracking_code: Sporingskode
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Antall
+      per_unit_rate_configuration:
+        amount: Antall
+    shipping_method:
+      calculator: Kalkulator
+      category: Kategori
+      category_requirement: Kategorikrav
+      channels: Kanaler
+      configuration: Konfigurasjon
+      position: Plassering
+      translations: Oversettelser

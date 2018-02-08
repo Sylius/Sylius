@@ -1,7 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    contact:
-        email:
-            not_blank: Внесете ја вашата адреса за е-пошта.

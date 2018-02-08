@@ -1,7 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    review:
-        author:
-            already_exists: Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.
+  review:
+    author:
+      already_exists: Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.

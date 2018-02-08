@@ -1,6 +1,3 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    customer:
-        register: 'Terima kasih telah melakukan pendaftaran, periksa email Anda untuk melakukan verifikasi akun.'
+  customer:
+    register: 'Terima kasih telah melakukan pendaftaran, periksa email Anda untuk melakukan verifikasi akun.'

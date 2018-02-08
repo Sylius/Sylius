@@ -1,14 +1,9 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        tax_category:
-            name: ชื่อ
-            description: รายละเอียด
-        tax_rate:
-            category: หมวดหมู่
-            name: ชื่อ
-            amount: รวม
-            included_in_price: รวมในราคาสินค้า?
-            calculator: การคำนวณ
+  form:
+    tax_category:
+      description: รายละเอียด
+    tax_rate:
+      category: หมวดหมู่
+      amount: รวม
+      included_in_price: รวมในราคาสินค้า?
+      calculator: การคำนวณ

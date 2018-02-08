@@ -1,12 +1,9 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        taxon:
-            description: Beschreibung
-            name: Name
-            parent: Übergeordnet
-            slug: Kategorie SEO-URL
-        taxonomy:
-            name: Name
+  form:
+    taxon:
+      description: Beschreibung
+      name: Name
+      parent: Übergeordnet
+      slug: Kategorie SEO-URL
+    taxonomy:
+      name: Name

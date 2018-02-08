@@ -1,0 +1,4 @@
+sylius:
+  taxon:
+    code:
+      not_blank: Unesite taxon kod.

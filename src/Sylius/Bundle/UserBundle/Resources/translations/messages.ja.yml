@@ -1,18 +1,5 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        user:
-            email: メールアドレス
-            password:
-                label: パスワード
-            shipping_address: 配送先住所
-            username: ユーザー名
-        user_filter:
-            query: 検索
-        user_change_password:
-            current: 現在のパスワード
-            new: 新しいパスワード
-        user_reset_password:
-            new: 新しいパスワード
+  form:
+    user_change_password:
+      current: 現在のパスワード
+      new: 新しいパスワード

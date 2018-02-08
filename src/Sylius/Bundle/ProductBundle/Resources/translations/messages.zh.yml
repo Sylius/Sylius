@@ -1,0 +1,18 @@
+sylius:
+  form:
+    product:
+      description: 説明
+      attributes: 屬性
+      options: 選項
+      meta_keywords: Meta 關鍵字
+      meta_description: Meta 描述
+      slug: Slug
+      taxons: 分類
+    association:
+      type: 關聯類型
+      product: 關連產品
+    option:
+      values: 可能值
+    option_value:
+      add_value: 添加值
+      value: 數值

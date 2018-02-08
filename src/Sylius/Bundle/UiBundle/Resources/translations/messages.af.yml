@@ -1,16 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    ui:
-        city: 'Stad'
-        company: 'Maatskappy'
-        country: 'Land'
-        members: 'Lede'
-        postcode: 'Poskode'
-        presentation: 'Weergawe'
-        province: 'Provinsie'
-        provinces: 'Provinsies'
-        scope: 'Gebied'
-        street: 'Straat'
-        type: 'Tipe'
+  ui:
+    presentation: 'Weergawe'
+    street: 'Straat'

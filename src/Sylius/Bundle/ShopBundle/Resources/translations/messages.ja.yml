@@ -1,13 +1,9 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    menu:
-        shop:
-            account:
-                address_book: 'アドレス帳'
-                change_password: 'パスワードの変更'
-                dashboard: 'ダッシュボード'
-                header: 'あなたのアカウント'
-                order_history: '注文履歴'
-                personal_information: '個人情報'
+  menu:
+    shop:
+      account:
+        address_book: 'アドレス帳'
+        change_password: 'パスワードの変更'
+        header: 'あなたのアカウント'
+        order_history: '注文履歴'
+        personal_information: '個人情報'

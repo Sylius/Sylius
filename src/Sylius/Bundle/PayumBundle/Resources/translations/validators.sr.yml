@@ -1,0 +1,5 @@
+sylius:
+  gateway_config:
+    paypal:
+      password:
+        not_blank: Uneisite vašu paypal lozinku.

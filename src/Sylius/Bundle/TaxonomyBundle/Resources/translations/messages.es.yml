@@ -1,12 +1,8 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        taxon:
-            description: Descripción
-            name: Nombre
-            parent: Padre
-            slug: Slug
-        taxonomy:
-            name: Nombre
+  form:
+    taxon:
+      description: Descripción
+      name: Nombre
+      parent: Padre
+    taxonomy:
+      name: Nombre

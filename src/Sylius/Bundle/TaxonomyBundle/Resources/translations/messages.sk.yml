@@ -1,12 +1,5 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        taxon:
-            description: Popis
-            name: Názov
-            parent: Nadradená kategória
-            slug: Slug
-        taxonomy:
-            name: Názov
+  form:
+    taxon:
+      parent: Nadradená kategória
+      slug: Slug

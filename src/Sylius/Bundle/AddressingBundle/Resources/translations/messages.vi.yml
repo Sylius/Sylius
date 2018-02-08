@@ -1,36 +1,29 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        address:
-            city: Thành phố
-            company: Công ty
-            country: Quốc gia
-            first_name: Tên
-            last_name: Họ
-            phone_number: Số điện thoại
-            postcode: Mã bưu chính
-            province: Tỉnh
-        country:
-            add_province: Thêm tỉnh
-            name: Tên
-            provinces: Tỉnh
-            select: Chọn
-            enabled: Đã kích hoạt
-        province:
-            name: Tên
-            select: Chọn
-        zone:
-            add_member: Thêm thành viên
-            members: Thành viên
-            name: Tên
-            type: Phân loại
-            types:
-                country: Quốc gia
-                province: Tỉnh
-                zone: Khu vực
-            scope: Phạm vi
-            select: Chọn
-        zone_member:
-            select: Chọn
+  form:
+    address:
+      city: Thành phố
+      company: Công ty
+      country: Quốc gia
+      first_name: Tên
+      last_name: Họ
+      phone_number: Số điện thoại
+      postcode: Mã bưu chính
+      province: Tỉnh
+    country:
+      add_province: Thêm tỉnh
+      name: Tên
+      provinces: Tỉnh
+      select: Chọn
+      enabled: Đã kích hoạt
+    province:
+      name: Tên
+      select: Chọn
+    zone:
+      add_member: Thêm thành viên
+      members: Thành viên
+      name: Tên
+      type: Phân loại
+      types:
+        country: Quốc gia
+        zone: Khu vực
+      scope: Phạm vi

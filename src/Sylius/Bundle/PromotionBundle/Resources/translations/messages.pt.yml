@@ -1,48 +1,45 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        promotion:
-            actions: Ações
-            add_action: Adicionar ação
-            add_rule: Adicionar regra
-            coupon_based: Baseada em cupão
-            description: Descrição
-            ends_at: Termina em
-            exclusive: Exclusivo
-            name: Nome
-            priority: Prioridade
-            rules: Regras
-            starts_at: Começa em
-            usage_limit: Limite de utilização
-        promotion_action:
-            fixed_discount_configuration:
-                amount: Quantia
-            percentage_discount_configuration:
-                percentage: Percentagem
-            type: Tipo
-        promotion_coupon:
-            expires_at: Expira às
-            usage_limit: Limite de utilização
-        promotion_coupon_generator_instruction:
-            amount: Quantia
-            code_length: Comprimento do código
-            expires_at: Expira às
-            usage_limit: Limite de utilização
-        promotion_rule:
-            customer_group: Grupo de clientes
-            taxonomy: Taxonomia
-            cart_quantity_configuration:
-                count: Quantidade
-                equal: Igual
-            contains_product_configuration:
-                exclude: Excluir
-                variants: Produtos
-            item_total_configuration:
-                amount: Quantia
-            shipping_country_configuration:
-                country: País
-            taxonomy_configuration:
-                exclude: Excluir
-            type: Tipo
+  form:
+    promotion:
+      actions: Ações
+      add_action: Adicionar ação
+      add_rule: Adicionar regra
+      coupon_based: Cupom com base
+      ends_at: Termina em
+      exclusive: Exclusivo
+      priority: Prioridade
+      rules: Regras
+      starts_at: Começa em
+      usage_limit: Limite de utilização
+    promotion_action:
+      item_fixed_discount: Desconto fixo
+      item_percentage_discount: Desconto de porcentagem de item
+      order_fixed_discount: Desconto fixo do pedido
+      order_percentage_discount: Percentual de desconto do pedido
+      shipping_percentage_discount: Porcentagem de desconto do envio
+      fixed_discount_configuration:
+        amount: Total
+      percentage_discount_configuration:
+        percentage: Porcentagem
+    promotion_coupon:
+      expires_at: Expira às
+    promotion_coupon_generator_instruction:
+      amount: Total
+      code_length: Comprimento do código
+      usage_limit: Limite de utilização
+    promotion_filter:
+      price_range: Filtro de intervalo de preço
+    promotion_rule:
+      cart_quantity: Quantidade no carrinho
+      contains_product: Contém o produto
+      has_at_least_one_from_taxons: Possui pelo menos um dos táxons
+      item_total: Total do item
+      nth_order: Enésima ordem
+      shipping_country: País de Envio
+      total_price_of_items_from_taxon: Preço total dos itens do táxon
+      contains_product_configuration:
+        exclude: Excluir
+      item_total_configuration:
+        amount: Total
+      nth_order_configuration:
+        nth: N-ésimo

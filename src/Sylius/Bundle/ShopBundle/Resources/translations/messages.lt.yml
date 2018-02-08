@@ -1,13 +1,10 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    menu:
-        shop:
-            account:
-                address_book: 'Adresų knyga'
-                change_password: 'Keisti slaptažodį'
-                dashboard: 'Prietaisų skydelis'
-                header: 'Jūsų paskyra'
-                order_history: 'Užsakymų istorija'
-                personal_information: 'Asmeninė informacija'
+  menu:
+    shop:
+      account:
+        address_book: 'Adresų knyga'
+        change_password: 'Keisti slaptažodį'
+        dashboard: 'Prietaisų skydelis'
+        header: 'Jūsų paskyra'
+        order_history: 'Užsakymų istorija'
+        personal_information: 'Asmeninė informacija'

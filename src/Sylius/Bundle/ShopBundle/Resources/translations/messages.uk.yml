@@ -1,13 +1,10 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    menu:
-        shop:
-            account:
-                address_book: 'Адресна книга'
-                change_password: 'Змінити пароль'
-                dashboard: 'Приладова дошка'
-                header: 'Ваша обліковка'
-                order_history: 'Історія замовлень'
-                personal_information: 'Особисті відомості'
+  menu:
+    shop:
+      account:
+        address_book: 'Адресна книга'
+        change_password: 'Змінити пароль'
+        dashboard: 'Приладова дошка'
+        header: 'Ваша обліковка'
+        order_history: 'Історія замовлень'
+        personal_information: 'Особисті відомості'

@@ -1,7 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    resource:
-        not_enabled: "منبع تعریف شده، غیر فعال گردیده"
-        not_disabled: "منبع تعریف شده فعال گردید"
+  resource:
+    not_enabled: "منبع تعریف شده، غیر فعال گردیده"
+    not_disabled: "منبع تعریف شده فعال گردید"

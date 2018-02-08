@@ -1,11 +1,8 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    installer:
-        extensions:
-            off: false
-            on: true
-        settings:
-            off: false
-            on: true
+  installer:
+    extensions:
+      off: false
+      on: true
+    settings:
+      off: false
+      on: true

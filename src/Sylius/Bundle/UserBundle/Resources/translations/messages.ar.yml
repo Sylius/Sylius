@@ -1,23 +1,15 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        user:
-            email: البريد الإلكتروني
-            enabled: تفعيل
-            password:
-                label: كلمة السر
-                confirmation: تأكد
-            remember_me: تذكرني
-            shipping_address: عنوان الشحن
-            username: اسم المستخدم
-        user_filter:
-            query: بحث
-        user_change_password:
-            confirmation: تأكيد
-            current: كلمة المرور الحالية
-            new: كلمة سرّ جديدة
-        user_reset_password:
-            confirmation: تأكيد
-            new: كلمة سرّ جديدة
+  form:
+    user:
+      password:
+        confirmation: تأكد
+      remember_me: تذكرني
+    user_filter:
+      query: بحث
+    user_change_password:
+      confirmation: تأكيد
+      current: كلمة المرور الحالية
+      new: كلمة سرّ جديدة
+    user_reset_password:
+      confirmation: تأكيد
+      new: كلمة سرّ جديدة
