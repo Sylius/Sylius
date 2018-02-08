@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Review system, for commenting and rating shop components.",
     "keywords": ["shop", "ecommerce", "review", "rating"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -24,7 +24,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",

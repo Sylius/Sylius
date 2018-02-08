@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Basic resource interfaces for PHP applications.",
     "keywords": ["shop", "ecommerce", "resource", "api", "sylius", "doctrine"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",

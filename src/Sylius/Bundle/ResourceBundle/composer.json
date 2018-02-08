@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Resource component for Sylius.",
     "keywords": ["resource", "storage", "persistence", "sylius"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",

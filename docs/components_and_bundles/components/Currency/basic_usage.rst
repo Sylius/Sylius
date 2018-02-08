@@ -38,7 +38,7 @@ This behaviour is used just for displaying the *approximate* value in another cu
 
    For more detailed information go to `Sylius API CurrencyConverter`_.
 
-.. _Sylius API CurrencyConverter: http://api.sylius.org/Sylius/Component/Currency/Converter/CurrencyConverter.html
+.. _Sylius API CurrencyConverter: http://api.sylius.com/Sylius/Component/Currency/Converter/CurrencyConverter.html
 
 .. caution::
 
@@ -71,4 +71,4 @@ property is set to true and have been inserted in the given repository.
 
    For more detailed information go to `Sylius API CurrencyProvider`_.
 
-.. _Sylius API CurrencyProvider: http://api.sylius.org/Sylius/Component/Currency/Provider/CurrencyProvider.html
+.. _Sylius API CurrencyProvider: http://api.sylius.com/Sylius/Component/Currency/Provider/CurrencyProvider.html

@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Review system for Symfony2 ecommerce applications.",
     "keywords": ["review", "shop", "webshop", "ecommerce", "sylius"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -24,7 +24,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",

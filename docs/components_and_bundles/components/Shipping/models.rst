@@ -30,7 +30,7 @@ Shipment has the following properties:
 
     For more detailed information go to `Sylius API Shipment`_.
 
-.. _Sylius API Shipment: http://api.sylius.org/Sylius/Component/Shipping/Model/Shipment.html
+.. _Sylius API Shipment: http://api.sylius.com/Sylius/Component/Shipping/Model/Shipment.html
 
 ShipmentItem
 ------------
@@ -59,7 +59,7 @@ ShipmentItems have the following properties:
 
     For more detailed information go to `Sylius API ShipmentItem`_.
 
-.. _Sylius API ShipmentItem: http://api.sylius.org/Sylius/Component/Shipping/Model/ShipmentItem.html
+.. _Sylius API ShipmentItem: http://api.sylius.com/Sylius/Component/Shipping/Model/ShipmentItem.html
 
 
 ShippingCategory
@@ -94,7 +94,7 @@ ShippingCategory has the following properties:
 
     For more detailed information go to `Sylius API ShippingCategory`_.
 
-.. _Sylius API ShippingCategory: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingCategory.html
+.. _Sylius API ShippingCategory: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingCategory.html
 
 
 ShippingMethod
@@ -141,7 +141,7 @@ It has the following properties:
 
     For more detailed information go to `Sylius API ShippingMethod`_.
 
-.. _Sylius API ShippingMethod: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingMethod.html
+.. _Sylius API ShippingMethod: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingMethod.html
 
 ShippingMethodTranslation
 -------------------------
@@ -167,7 +167,7 @@ It has the following properties:
 
     Form more information go to `Sylius API ShippingMethodTranslation`_.
 
-.. _Sylius API ShippingMethodTranslation: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingMethodTranslation.html
+.. _Sylius API ShippingMethodTranslation: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingMethodTranslation.html
 
 Rule
 ----
@@ -193,4 +193,4 @@ Rule has the following properties:
 
     For more detailed information go to `Sylius API Rule`_.
 
-.. _Sylius API Rule: http://api.sylius.org/Sylius/Component/Shipping/Model/Rule.html
+.. _Sylius API Rule: http://api.sylius.com/Sylius/Component/Shipping/Model/Rule.html

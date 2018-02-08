@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Flexible shipping component for PHP e-commerce projects.",
     "keywords": ["shipping", "delivery", "shipments", "shop", "webshop", "ecommerce", "sylius"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",

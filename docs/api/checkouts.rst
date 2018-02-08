@@ -90,7 +90,7 @@ To address the cart for a user that lives in ``Los Angeles`` in the United State
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/checkouts/addressing/21 \
+    $ curl http://demo.sylius.com/api/v1/checkouts/addressing/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -124,7 +124,7 @@ To check the checkout process state for the cart with `id = 21`, we need to exec
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/checkouts/21 \
+    $ curl http://demo.sylius.com/api/v1/checkouts/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -286,7 +286,7 @@ Of course, you can specify different shipping and billing addresses. If our user
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/checkouts/addressing/21 \
+    $ curl http://demo.sylius.com/api/v1/checkouts/addressing/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -347,7 +347,7 @@ To check available shipping methods for the previously addressed cart, you can u
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/checkouts/select-shipping/21 \
+    $ curl http://demo.sylius.com/api/v1/checkouts/select-shipping/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json"
 
@@ -421,7 +421,7 @@ To choose the `DHL Express` method for our shipment (the cheapest one), we can u
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/checkouts/select-shipping/21 \
+    $ curl http://demo.sylius.com/api/v1/checkouts/select-shipping/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -627,7 +627,7 @@ To check available payment methods for the cart that has a shipping methods assi
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/checkouts/select-payment/21 \
+    $ curl http://demo.sylius.com/api/v1/checkouts/select-payment/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json"
 
@@ -685,7 +685,7 @@ To choose the ``Bank transfer`` method for our shipment, simply use the followin
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/checkouts/select-payment/21 \
+    $ curl http://demo.sylius.com/api/v1/checkouts/select-payment/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -737,7 +737,7 @@ To check the fully constructed cart with `id = 21`, use the following command:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/checkouts/21 \
+    $ curl http://demo.sylius.com/api/v1/checkouts/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json"
 
@@ -918,7 +918,7 @@ To finalize the previously built order, execute the following command:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/checkouts/complete/21 \
+    $ curl http://demo.sylius.com/api/v1/checkouts/complete/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT
@@ -941,7 +941,7 @@ To finalize  the previously built order (assuming that, the previous example has
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/checkouts/complete/21 \
+    $ curl http://demo.sylius.com/api/v1/checkouts/complete/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \

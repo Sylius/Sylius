@@ -32,12 +32,12 @@ Enjoy being an eCommerce Developer again!
 Documentation
 -------------
 
-Documentation is available at [docs.sylius.org](http://docs.sylius.org).
+Documentation is available at [docs.sylius.com](http://docs.sylius.com).
 
 Requirements
 ------------
 
-Read about the Sylius system requirements in detail [here](http://docs.sylius.org/en/latest/book/installation/requirements.html).
+Read about the Sylius system requirements in detail [here](http://docs.sylius.com/en/latest/book/installation/requirements.html).
 
 Installation
 ------------
@@ -55,7 +55,7 @@ $ php bin/console server:start
 
 Then open `http://localhost:8000/` in your web browser to enjoy your Sylius shop in a development environment.
 
-Alternatively, you can use [Vagrant](http://docs.sylius.org/en/latest/book/installation/vagrant_installation.html) for your initial setup.
+Alternatively, you can use [Vagrant](http://docs.sylius.com/en/latest/book/installation/vagrant_installation.html) for your initial setup.
 
 **Production**
 
@@ -85,7 +85,7 @@ If you are using the supplied Vagrant development environment, please see the re
 Contributing
 ------------
 
-Would like to help us and build the most developer-friendly eCommerce platform? Start from reading our [Contributing Guide](http://docs.sylius.org/en/latest/contributing/index.html)!
+Would like to help us and build the most developer-friendly eCommerce platform? Start from reading our [Contributing Guide](http://docs.sylius.com/en/latest/contributing/index.html)!
 
 Stay Updated
 ------------
@@ -100,7 +100,7 @@ If you want to report a bug or suggest an idea, please use [GitHub issues](https
 Community Support
 -----------------
 
-Have a question? Join our [Slack](http://sylius.org/slack) or post it on [StackOverflow](http://stackoverflow.com) tagged with ["sylius"](https://stackoverflow.com/questions/tagged/sylius).
+Have a question? Join our [Slack](http://sylius.com/slack) or post it on [StackOverflow](http://stackoverflow.com) tagged with ["sylius"](https://stackoverflow.com/questions/tagged/sylius).
 
 MIT License
 -----------

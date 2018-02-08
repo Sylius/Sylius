@@ -62,7 +62,7 @@ Taxon
     This model implements the :ref:`component_taxonomy_model_taxon-interface`.
     You will find more information about this model in `Sylius API Taxon`_.
 
-.. _Sylius API Taxon: http://api.sylius.org/Sylius/Component/Taxonomy/Model/Taxon.html
+.. _Sylius API Taxon: http://api.sylius.com/Sylius/Component/Taxonomy/Model/Taxon.html
 
 .. _component_taxonomy_model_taxon-translation:
 
@@ -90,4 +90,4 @@ This model stores translations for the **Taxon** instances.
     This model implements the :ref:`component_taxonomy_model_taxon-translation-interface`.
     You will find more information about this model in `Sylius API TaxonTranslation`_.
 
-.. _Sylius API TaxonTranslation: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonTranslation.html
+.. _Sylius API TaxonTranslation: http://api.sylius.com/Sylius/Component/Taxonomy/Model/TaxonTranslation.html

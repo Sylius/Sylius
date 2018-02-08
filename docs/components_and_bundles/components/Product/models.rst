@@ -41,7 +41,7 @@ By default it contains the following properties:
 
    For more detailed information go to `Sylius API Product`_.
 
-.. _Sylius API Product: http://api.sylius.org/Sylius/Component/Product/Model/Product.html
+.. _Sylius API Product: http://api.sylius.com/Sylius/Component/Product/Model/Product.html
 
 .. _component_product_model_product-translation:
 
@@ -64,7 +64,7 @@ By default it has the following properties:
 
    For more detailed information go to `Sylius API ProductTranslation`_.
 
-.. _Sylius API ProductTranslation: http://api.sylius.org/Sylius/Component/Product/Model/ProductTranslation.html
+.. _Sylius API ProductTranslation: http://api.sylius.com/Sylius/Component/Product/Model/ProductTranslation.html
 
 .. _component_product_model_attribute-value:
 
@@ -80,7 +80,7 @@ is an instance of the :ref:`component_product_model_product-interface`.
 
    For more detailed information go to `Sylius API AttributeValue`_.
 
-.. _Sylius API AttributeValue: http://api.sylius.org/Sylius/Component/Product/Model/AttributeValue.html
+.. _Sylius API AttributeValue: http://api.sylius.com/Sylius/Component/Product/Model/AttributeValue.html
 
 .. _component_product_model_variant:
 
@@ -102,4 +102,4 @@ and provides an additional property:
 
    For more detailed information go to `Sylius API Variant`_.
 
-.. _Sylius API Variant: http://api.sylius.org/Sylius/Component/Product/Model/Variant.html
+.. _Sylius API Variant: http://api.sylius.com/Sylius/Component/Product/Model/Variant.html

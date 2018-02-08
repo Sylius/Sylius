@@ -25,4 +25,4 @@ Every currency is represented by a **Currency** model which by default has the f
 
    For more detailed information go to `Sylius API Currency`_.
 
-.. _Sylius API Currency: http://api.sylius.org/Sylius/Component/Currency/Model/Currency.html
+.. _Sylius API Currency: http://api.sylius.com/Sylius/Component/Currency/Model/Currency.html

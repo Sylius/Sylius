@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Flexible payments system for PHP e-commerce applications.",
     "keywords": ["payments", "payment", "shop", "webshop", "ecommerce"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",

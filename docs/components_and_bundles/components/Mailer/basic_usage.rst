@@ -125,7 +125,7 @@ This is an abstraction layer that allows you to create your own logic of renderi
 
     Renderer should return `RenderedEmail`_
 
-.. _RenderedEmail: http://api.sylius.org/Sylius/Component/Mailer/Renderer/RenderedEmail.html
+.. _RenderedEmail: http://api.sylius.com/Sylius/Component/Mailer/Renderer/RenderedEmail.html
 
 .. _component_mailer_provider_default-settings-provider:
 
