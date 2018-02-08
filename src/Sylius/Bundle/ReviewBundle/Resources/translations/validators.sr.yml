@@ -1,0 +1,4 @@
+sylius:
+  review:
+    author:
+      already_exists: E-Mail je već registrovan, ulogujete se ili izaberite opciju `zaboravljena lozinka`.

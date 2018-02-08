@@ -1,40 +1,27 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: Tipos de asociación
-                    attributes: Atributos
-                    header: Catálogo
-                    inventory: Inventario
-                    options: Opciones de producto
-                    products: Productos
-                    taxons: Taxones
-                configuration:
-                    admin_users: Administradores
-                    channels: Canales
-                    countries: Países
-                    currencies: Monedas
-                    exchange_rates: Tasas de cambio
-                    header: Configuración
-                    locales: Idiomas
-                    payment_methods: Métodos de pago
-                    shipping_categories: Categorías de envío
-                    shipping_methods: Métodos de envío
-                    tax_categories: Categorías de impuestos
-                    tax_rates: Tasas de impuestos
-                    zones: Zonas
-                marketing:
-                    header: Marketing
-                    product_reviews: Reseñas de producto
-                    promotions: Promociones
-                customers:
-                    customers: Clientes
-                    groups: Grupos
-                    header: Cliente
-                sales:
-                    header: Ventas
-                    orders: Pedidos
+  menu:
+    admin:
+      main:
+        catalog:
+          header: Catálogo
+          products: Productos
+          taxons: Taxones
+        configuration:
+          admin_users: Administradores
+          channels: Canales
+          exchange_rates: Tasas de cambio
+          payment_methods: Métodos de pago
+          shipping_categories: Categorías de envío
+          shipping_methods: Métodos de envío
+          tax_categories: Categorías de impuestos
+          tax_rates: Tasas de impuestos
+          zones: Zonas
+        marketing:
+          header: Marketing
+          promotions: Promociones
+        customers:
+          customers: Clientes
+          header: Cliente
+        sales:
+          header: Ventas
+          orders: Pedidos

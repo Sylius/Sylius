@@ -1,25 +1,11 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        promotion:
-            channels: Kanavat
-        image:
-            type: Tyyppi
-        product:
-            channels: Kanavat
-        guest:
-            email: Sähköpostiosoite
-        promotion_rule:
-            product:
-                products: Tuotteet
-        payment_method:
-            channels: Kanavat
-    installer:
-        extensions:
-            off: false
-            on: true
-        settings:
-            off: false
-            on: true
+  form:
+    guest:
+      email: Sähköpostiosoite
+  installer:
+    extensions:
+      off: false
+      on: true
+    settings:
+      off: false
+      on: true

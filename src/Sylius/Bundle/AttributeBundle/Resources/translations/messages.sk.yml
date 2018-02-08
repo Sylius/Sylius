@@ -1,39 +1,28 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        attribute:
-            add: Pridať
-            add_attributes: Pridať vlastnosť
-            choices: Voľby
-            code: Kód
-            name: Názov
-            translations: Preklady
-            type: Typ
-        attribute_type:
-            checkbox: Checkbox
-            configuration: Konfigurácia
-            date: Dátum
-            datetime: Dátum a čas
-            integer: Číslo
-            percent: Percento
-            select: Vyberte
-            text: Text
-            textarea: Textové pole
-            title: Typy vlastností
-            validation: Validácia
-        attribute_type_configuration:
-            datetime:
-                format: Formát
-            date:
-                format: Formát
-            select:
-                multiple: Viacero
-                values: Hodnoty
-                choose: Vyberte možnosť
-                min: Min položky
-                max: Max položky
-            text:
-                min: Min. dĺžka
-                max: Max dĺžka
+  form:
+    attribute:
+      add: Pridať
+      add_attributes: Pridať vlastnosť
+      choices: Voľby
+      translations: Preklady
+    attribute_type:
+      checkbox: Checkbox
+      date: Dátum
+      datetime: Dátum a čas
+      integer: Číslo
+      percent: Percento
+      text: Text
+      textarea: Textové pole
+      title: Typy vlastností
+      validation: Validácia
+    attribute_type_configuration:
+      datetime:
+        format: Formát
+      select:
+        multiple: Viacero
+        choose: Vyberte možnosť
+        min: Min položky
+        max: Max položky
+      text:
+        min: Min. dĺžka
+        max: Max dĺžka

@@ -1,11 +1,5 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        channel:
-            color: สี
-            description: คำอธิบาย
-            enabled: เปิดใช้งานแล้ว
-            name: ชื่อ
-            url: URL
+  form:
+    channel:
+      color: สี
+      url: URL

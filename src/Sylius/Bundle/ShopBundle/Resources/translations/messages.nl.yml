@@ -1,13 +1,9 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    menu:
-        shop:
-            account:
-                address_book: 'Adresboek'
-                change_password: 'Wachtwoord wijzigen'
-                dashboard: 'Dashboard'
-                header: 'Uw account'
-                order_history: 'Bestelgeschiedenis'
-                personal_information: 'Persoonlijke gegevens'
+  menu:
+    shop:
+      account:
+        address_book: 'Adresboek'
+        change_password: 'Wachtwoord wijzigen'
+        header: 'Uw account'
+        order_history: 'Bestelgeschiedenis'
+        personal_information: 'Persoonlijke gegevens'

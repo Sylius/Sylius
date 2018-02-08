@@ -1,24 +1,12 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        customer:
-            first_name: Meno
-            group: Skupina
-            last_name: Priezvisko
-            email: E-mail
-            phone_number: Telefónne číslo
-            gender: Pohlavie
-            birthday: Dátum narodenia
-            billing_address: Fakturačná adresa
-            different_billing_address: Použiť inú fakturačnú adresu?
-            only_customer_registration: Vytvoriť účet?
-            subscribed_to_newsletter: Prihlásiť sa k odberu noviniek
-        customer_group:
-            name: Názov
-            roles: Role
-    gender:
-        unknown: Neznáme
-        male: Muž
-        female: Žena
+  form:
+    customer:
+      first_name: Meno
+      group: Skupina
+      gender: Pohlavie
+      birthday: Dátum narodenia
+      only_customer_registration: Vytvoriť účet?
+      subscribed_to_newsletter: Prihlásiť sa k odberu noviniek
+  gender:
+    male: Muž
+    female: Žena

@@ -1,23 +1,19 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        attribute:
-            add: Lisää
-            add_attributes: Lisää määritteitä
-            choices: Vaihtoehdot
-            code: Koodi
-            name: Nimi
-            translations: Käännökset
-            type: Tyyppi
-        attribute_type:
-            checkbox: Valintalaatikko
-            configuration: Asetukset
-            date: Päivämäärä
-            datetime: Päivämäärä ja aika
-            select: Valitse
-        attribute_type_configuration:
-            text:
-                min: Minimipituus
-                max: Maksimipituus
+  form:
+    attribute:
+      add: Lisää
+      add_attributes: Lisää määritteitä
+      choices: Vaihtoehdot
+      code: Koodi
+      name: Nimi
+      translations: Käännökset
+      type: Tyyppi
+    attribute_type:
+      checkbox: Valintalaatikko
+      configuration: Asetukset
+      date: Päivämäärä
+      datetime: Päivämäärä ja aika
+    attribute_type_configuration:
+      text:
+        min: Minimipituus
+        max: Maksimipituus

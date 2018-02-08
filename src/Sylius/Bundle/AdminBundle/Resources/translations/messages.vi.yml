@@ -1,27 +1,19 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    attributes: Thuộc tính
-                    inventory: Hàng tồn kho
-                    options: Tùy chọn
-                    taxons: Phân loại
-                configuration:
-                    channels: Kênh
-                    countries: Quốc gia
-                    locales: Miền địa phương
-                    payment_methods: Phương thức thanh toán
-                    shipping_methods: Phương thức vận chuyển
-                marketing:
-                    header: Tiếp thị
-                    promotions: Chương trình khuyến mãi
-                customers:
-                    customers: Khách hàng
-                    groups: Nhóm
-                    header: Khách hàng
-                sales:
-                    orders: Đơn đặt hàng
+  menu:
+    admin:
+      main:
+        catalog:
+          attributes: Thuộc tính
+          taxons: Phân loại
+        configuration:
+          channels: Kênh
+          payment_methods: Phương thức thanh toán
+          shipping_methods: Phương thức vận chuyển
+        marketing:
+          header: Tiếp thị
+          promotions: Chương trình khuyến mãi
+        customers:
+          customers: Khách hàng
+          header: Khách hàng
+        sales:
+          orders: Đơn đặt hàng

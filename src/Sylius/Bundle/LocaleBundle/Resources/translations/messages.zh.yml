@@ -1,0 +1,4 @@
+sylius:
+  form:
+    locale:
+      name: 名稱

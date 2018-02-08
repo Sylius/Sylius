@@ -1,36 +1,22 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: Tipi i lidhjes
-                    attributes: Atributet
-                    header: Katalogu
-                    inventory: Gjendja e magazinës
-                    options: Opsionet
-                    taxons: Tipologjite
-                configuration:
-                    channels: Kanalet
-                    countries: Vendet
-                    currencies: Monedhat
-                    header: Konfigurimi
-                    locales: Rajonet
-                    payment_methods: Mënyrat e pagesës
-                    shipping_methods: Mënyrat e dërgesave
-                    tax_categories: Kategoritë e taksimit
-                    tax_rates: Normat e taksimit
-                    zones: Zonat
-                marketing:
-                    header: Marketingu
-                    product_reviews: Recensionet e produktit
-                    promotions: Reklamat
-                customers:
-                    customers: Blerësit
-                    groups: Grupet
-                    header: Blerësi
-                sales:
-                    header: Shitjet
-                    orders: Porositë
+  menu:
+    admin:
+      main:
+        catalog:
+          header: Katalogu
+        configuration:
+          channels: Kanalet
+          payment_methods: Mënyrat e pagesës
+          shipping_methods: Mënyrat e dërgesave
+          tax_categories: Kategoritë e taksimit
+          tax_rates: Normat e taksimit
+          zones: Zonat
+        marketing:
+          header: Marketingu
+          promotions: Reklamat
+        customers:
+          customers: Blerësit
+          header: Blerësi
+        sales:
+          header: Shitjet
+          orders: Porositë

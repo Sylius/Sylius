@@ -1,12 +1,6 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        taxon:
-            description: Popis
-            name: Jméno
-            parent: Rodič
-            slug: Unikátní identifikátor URL (slug)
-        taxonomy:
-            name: Jméno
+  form:
+    taxon:
+      parent: Rodič
+    taxonomy:
+      name: Jméno

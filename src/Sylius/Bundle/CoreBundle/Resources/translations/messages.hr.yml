@@ -1,169 +1,138 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        block:
-            body: Poruka
-            id: ID
-            title: Naslov
-        cart:
-            coupon: Kupon
-        checkout:
-            addressing:
-                different_billing_address: Želim koristiti drugu adresu za račun.
-            payment_method: Način plaćanja
-            shipping_method: Vrsta dostave
-        promotion:
-            channels: Kanali
-        promotion_action:
-            add_product_configuration:
-                product: Artikal
-        promotion_coupon:
-            per_customer_usage_limit: Ograničenje korištenja po kupcu
-        group:
-            name: Naziv grupe
-            roles: Role (korisnička prava)
-        channel:
-            contact_email: Kontaktna email adresa
-            currencies: Valute
-            currency_base: Osnovna valuta
-            account_verification_required: Je li potrebna potvrda računa?
-            locales: Lokaliteti
-            payment_methods: Načini plaćanja
-            shipping_methods: Načini slanja
-            tax_zone_default: Zadana porezna zona
-            taxonomies: Glavne kategorije
-        image:
-            type: Vrsta
-            file: Fotografija
-        locale:
-            code: ISO kod
-            enabled: Omogući
-        order_filter:
-            created_at_from: Kreirano nakon
-            created_at_to: Kreirano prije
-            number: Broj
-            total_from: Od
-            total_to: Do
-            payment_state: Stanje plaćanja
-        page:
-            body: Sadržaj stranice
-            id: ID
-            title: Naslov
-        product:
-            images: Slike
-            restricted_zone: Ograničena zona pristupa
-            short_description: Kratak opis
-            variant_selection_method: Način odabira varijante
-            channels: Kanali
-            enabled: Omogući
-        product_filter:
-            name: Naziv
-            code: ISO kod
-        product_variant:
-            tax_category: Kategorija artikla
-            shipping_category: Kategorija pošiljke
-        shipment_filter:
-            created_at_from: Od
-            created_at_to: Do
-            number: Broj narudžbe
-            shipping_address: Pošalji na ime
-        payment_filter:
-            created_at_from: Od
-            created_at_to: Do
-            number: Broj narudžbe
-        shipping_method:
-            zone: Regija
-        taxon:
-            code: ISO kod
-            file: Odaberite sliku
-            images: Slike
-        taxonomy:
-            file: Odaberite sliku
-        user:
-            billing_address: Adresa za dostavu
-            different_billing_address: Koristio bi drugu adresu za dostavu.
-            enabled: Aktivan
-            first_name: Ime
-            groups: Grupe
-            roles: Role (korisnička prava)
-            last_name: Prezime
-            password: Lozinka
-            shipping_address: Adresa za dostavu
-        user_filter:
-            query: Pretraga
-        variant:
-            depth: Dubina
-            height: Visina
-            on_hand: Treutno dostupno
-            price: Cijena
-            sku: KOD (SKU)
-            weight: Težina
-            width: Širina
-        attribute:
-            product_attribute_value:
-                value: Vrijednost
-        guest:
-            email: E-mail
-        product_association_type:
-            name: Naziv grupe
-        promotion_rule:
-            product:
-                products: Proizvodi
-            total_of_items_from_taxon:
-                amount: Iznos
-        payment_method:
-            channels: Kanali
-    installer:
-        extensions:
-            header: Ekstenzije
-            accelerator:
-                header: Akcelerator
-            apc: APC
-            ctype: Ctype
-            gd: sylius.extensions.gd
-            help: Instaliraj i omoguči %extension% ekstenziju.
-            iconv: Iconv
-            icu: ICU
-            intl: Intl
-            json_encode: JSON
-            mbstring: Multibyte String
-            off: false
-            on: true
-            pcre: PCRE
-            pdo: PDO
-            php_xml: PHP-XML
-            session_start: Sesija
-            simplexml_import_dom: SimpleXML
-            token_get_all: Tokenizer
-        filesystem:
-            header: File system 
-            cache:
-                header: cache
-            exists: Postoji
-            logs:
-                header: Logovi
-            not_exists: Ne postoji
-            not_writable: Nije moguće pisati
-            parameters:
-                header: parameters.yml
-            vendors: vendors
-            writable: moguće pisati
-        settings:
-            header: PHP verzija i postavke
-            any: Bilo koje
-            detect_unicode: detect_unicode
-            magic_quotes_gpc: magic_quotes_gpc
-            non_deprecated: non deprecated
-            off: false
-            on: true
-            register_globals: register_globals
-            session:
-                auto_start: session.auto_start
-            short_open_tag: short_open_tag
-            timezone: Vremenska zona
-            timezone_deprecated:
-                header: Zastarjela vremenska zona
-                help: Vremenska zona %timezone% je zastarjela. Ispravite vaš php.ini dokument (popis zastarjelih zona http://php.net/manual/en/timezones.others.php).
-            version: Verzija PHP-a
+  form:
+    block:
+      body: Poruka
+      id: ID
+      title: Naslov
+    cart:
+      coupon: Kupon
+    checkout:
+      addressing:
+        different_billing_address: Želim koristiti drugu adresu za račun.
+      payment_method: Način plaćanja
+      shipping_method: Vrsta dostave
+    promotion_coupon:
+      per_customer_usage_limit: Ograničenje korištenja po kupcu
+    group:
+      name: Naziv grupe
+      roles: Role (korisnička prava)
+    channel:
+      contact_email: Kontaktna email adresa
+      currencies: Valute
+      currency_base: Osnovna valuta
+      account_verification_required: Je li potrebna potvrda računa?
+      locales: Lokaliteti
+      payment_methods: Načini plaćanja
+      shipping_methods: Načini slanja
+      tax_zone_default: Zadana porezna zona
+      taxonomies: Glavne kategorije
+    image:
+      file: Fotografija
+    locale:
+      code: ISO kod
+      enabled: Omogući
+    order_filter:
+      created_at_from: Kreirano nakon
+      created_at_to: Kreirano prije
+      number: Broj
+      total_from: Od
+      total_to: Do
+      payment_state: Stanje plaćanja
+    page:
+      body: Sadržaj stranice
+      id: ID
+      title: Naslov
+    product:
+      restricted_zone: Ograničena zona pristupa
+      short_description: Kratak opis
+      variant_selection_method: Način odabira varijante
+    product_filter:
+      name: Naziv
+    product_variant:
+      tax_category: Kategorija artikla
+    shipment_filter:
+      created_at_from: Od
+      number: Broj narudžbe
+      shipping_address: Pošalji na ime
+    shipping_method:
+      zone: Regija
+    taxon:
+      file: Odaberite sliku
+    taxonomy:
+      file: Odaberite sliku
+    user:
+      billing_address: Adresa za dostavu
+      different_billing_address: Koristio bi drugu adresu za dostavu.
+      enabled: Aktivan
+      first_name: Ime
+      groups: Grupe
+      last_name: Prezime
+      password: Lozinka
+      shipping_address: Adresa za dostavu
+    user_filter:
+      query: Pretraga
+    variant:
+      depth: Dubina
+      height: Visina
+      on_hand: Treutno dostupno
+      price: Cijena
+      sku: KOD (SKU)
+      weight: Težina
+      width: Širina
+    attribute:
+      product_attribute_value:
+        value: Vrijednost
+    guest:
+      email: E-mail
+  installer:
+    extensions:
+      header: Ekstenzije
+      accelerator:
+        header: Akcelerator
+      apc: APC
+      ctype: Ctype
+      gd: sylius.extensions.gd
+      help: Instaliraj i omoguči %extension% ekstenziju.
+      iconv: Iconv
+      icu: ICU
+      intl: Intl
+      json_encode: JSON
+      mbstring: Multibyte String
+      off: false
+      on: true
+      pcre: PCRE
+      pdo: PDO
+      php_xml: PHP-XML
+      session_start: Sesija
+      simplexml_import_dom: SimpleXML
+      token_get_all: Tokenizer
+    filesystem:
+      header: File system 
+      cache:
+        header: cache
+      exists: Postoji
+      logs:
+        header: Logovi
+      not_exists: Ne postoji
+      not_writable: Nije moguće pisati
+      parameters:
+        header: parameters.yml
+      vendors: vendors
+      writable: moguće pisati
+    settings:
+      header: PHP verzija i postavke
+      any: Bilo koje
+      detect_unicode: detect_unicode
+      magic_quotes_gpc: magic_quotes_gpc
+      non_deprecated: non deprecated
+      off: false
+      on: true
+      register_globals: register_globals
+      session:
+        auto_start: session.auto_start
+      short_open_tag: short_open_tag
+      timezone: Vremenska zona
+      timezone_deprecated:
+        header: Zastarjela vremenska zona
+        help: Vremenska zona %timezone% je zastarjela. Ispravite vaš php.ini dokument (popis zastarjelih zona http://php.net/manual/en/timezones.others.php).
+      version: Verzija PHP-a

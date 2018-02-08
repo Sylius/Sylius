@@ -1,42 +1,26 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        address:
-            city: شهر
-            company: شرکت
-            country: کشور
-            first_name: نام
-            last_name: نام خانوادگی
-            phone_number: شماره تلفن
-            postcode: کد پستی
-            street: آدرس خیابان
-            province: استان
-            zone: منطقه
-        country:
-            add_province: افزودن استان
-            name: نام
-            provinces: استان ها
-            select: انتخاب
-            enabled: فعال
-        province:
-            name: نام
-            abbreviation: مخفف
-            select: انتخاب
-        zone:
-            add_member: افزودن عضو
-            members: اعضا
-            name: نام
-            type: نوع
-            types:
-                country: کشور
-                province: استان
-                zone: منطقه
-            scope: محدوده
-            scopes:
-                all: همه
-            select: انتخاب
-            select_scope: انتخاب محدوده
-        zone_member:
-            select: انتخاب
+  form:
+    address:
+      city: شهر
+      company: شرکت
+      country: کشور
+      last_name: نام خانوادگی
+      phone_number: شماره تلفن
+      postcode: کد پستی
+      street: آدرس خیابان
+      province: استان
+    country:
+      add_province: افزودن استان
+      name: نام
+      provinces: استان ها
+      select: انتخاب
+    province:
+      abbreviation: مخفف
+    zone:
+      add_member: افزودن عضو
+      members: اعضا
+      type: نوع
+      types:
+        country: کشور
+      scope: محدوده
+      select_scope: انتخاب محدوده

@@ -1,6 +1,3 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    promotion_coupon:
-        generate: 'Codurile promoționale au fost generate cu succes.'
+  promotion_coupon:
+    generate: 'Codurile promoționale au fost generate cu succes.'

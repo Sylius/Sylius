@@ -1,11 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        taxon:
-            description: Leírás
-            name: Név
-            parent: Szülő
-        taxonomy:
-            name: Név
+  form:
+    taxon:
+      parent: Szülő

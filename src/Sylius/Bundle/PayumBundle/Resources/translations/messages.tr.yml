@@ -1,18 +1,10 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        gateway_config:
-            type: Türü
-        gateway_configuration:
-            paypal:
-                password: Şifre
-                signature: İmza
-                username: Kullanıcı adı
-            stripe:
-                secret_key: Gizli tuş
-    payum_gateway_factory:
-        offline: Çevirim dışı
-        paypal_express_checkout: Paypal Express ödemesi
-        stripe_checkout: Stripe ödemesi
+  form:
+    gateway_configuration:
+      paypal:
+        signature: İmza
+      stripe:
+        secret_key: Gizli tuş
+  payum_gateway_factory:
+    paypal_express_checkout: Paypal Express ödemesi
+    stripe_checkout: Stripe ödemesi

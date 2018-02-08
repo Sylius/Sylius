@@ -1,23 +1,10 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        user:
-            email: Email
-            enabled: Aktywne
-            password:
-                label: Hasło
-                confirmation: Weryfikacja
-            remember_me: Zapamiętaj mnie
-            shipping_address: Adres dostawy
-            username: Nazwa użytkownika
-        user_filter:
-            query: Szukaj
-        user_change_password:
-            confirmation: Potwierdzenie
-            current: Obecne hasło
-            new: Nowe hasło
-        user_reset_password:
-            confirmation: Potwierdzenie
-            new: Nowe hasło
+  form:
+    user:
+      password:
+        confirmation: Weryfikacja
+      remember_me: Zapamiętaj mnie
+    user_change_password:
+      confirmation: Potwierdzenie
+      current: Obecne hasło
+      new: Nowe hasło

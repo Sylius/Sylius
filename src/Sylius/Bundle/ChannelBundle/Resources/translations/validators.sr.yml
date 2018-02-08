@@ -1,0 +1,4 @@
+sylius:
+  channel:
+    code:
+      not_blank: Unesite kod kanala.

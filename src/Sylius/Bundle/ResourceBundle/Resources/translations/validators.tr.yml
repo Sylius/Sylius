@@ -1,7 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    resource:
-        not_enabled: "Verilen kaynak devre dışı"
-        not_disabled: "Verilen kaynak etkin"
+  resource:
+    not_enabled: "Verilen kaynak devre dışı"
+    not_disabled: "Verilen kaynak etkin"

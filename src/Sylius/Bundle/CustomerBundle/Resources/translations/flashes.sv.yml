@@ -1,6 +1,3 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    customer:
-        register: 'Tack för din registrering, kolla din e-post för att verifiera ditt konto.'
+  customer:
+    register: 'Tack för din registrering, kolla din e-post för att verifiera ditt konto.'

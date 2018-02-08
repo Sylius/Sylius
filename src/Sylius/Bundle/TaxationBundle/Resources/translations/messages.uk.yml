@@ -1,14 +1,11 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        tax_category:
-            name: Назва
-            description: Опис
-        tax_rate:
-            category: Категорія
-            name: Назва
-            amount: Кількість
-            included_in_price: Включено в ціну?
-            calculator: Калькулятор
+  form:
+    tax_category:
+      name: Назва
+      description: Опис
+    tax_rate:
+      category: Категорія
+      name: Назва
+      amount: Кількість
+      included_in_price: Включено в ціну?
+      calculator: Калькулятор

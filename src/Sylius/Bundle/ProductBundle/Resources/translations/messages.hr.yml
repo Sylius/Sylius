@@ -1,23 +1,8 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        product:
-            name: Naziv grupe
-            description: Opis
-            options: Opcije
-            meta_keywords: Ključne riječi (Meta Keywords)
-            meta_description: Opis (Meta Description)
-        product_variant:
-            name: Naziv grupe
-        association_type:
-            name: Naziv grupe
-        variant:
-            name: Naziv grupe
-        option:
-            name: Naziv grupe
-            values: Moguće vrijednosti
-        option_value:
-            add_value: Dodaj vrijednost
-            value: Vrijednost
+  form:
+    product:
+      options: Opcije
+      meta_keywords: Ključne riječi (Meta Keywords)
+      meta_description: Opis (Meta Description)
+    option:
+      values: Moguće vrijednosti

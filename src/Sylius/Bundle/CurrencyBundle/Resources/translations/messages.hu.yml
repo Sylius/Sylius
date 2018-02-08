@@ -1,10 +1,5 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        currency:
-            base: Alapértelmezett pénznem
-            code: Név
-            enabled: Engedélyezve
-            exchange_rate: Árfolyam
+  form:
+    currency:
+      base: Alapértelmezett pénznem
+      exchange_rate: Árfolyam

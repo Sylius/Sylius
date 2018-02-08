@@ -1,11 +1,7 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        channel:
-            color: Cor
-            description: Descrição
-            enabled: Ativado
-            name: Nome
-            url: URL
+  form:
+    channel:
+      color: Cor
+      enabled: Ativado
+      name: Nome
+      url: URL

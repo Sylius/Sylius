@@ -1,23 +1,10 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        user:
-            email: อีเมล
-            enabled: เปิดใช้งานแล้ว
-            password:
-                label: รหัสผ่าน
-                confirmation: ยืนยันรหัสผ่าน
-            remember_me: จำฉันไว้
-            shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
-            username: ชื่อผู้ใช้
-        user_filter:
-            query: ค้นหา
-        user_change_password:
-            confirmation: การยืนยัน
-            current: รหัสผ่านปัจจุบัน
-            new: รหัสผ่านใหม่
-        user_reset_password:
-            confirmation: การยืนยัน
-            new: รหัสผ่านใหม่
+  form:
+    user:
+      password:
+        confirmation: ยืนยันรหัสผ่าน
+      remember_me: จำฉันไว้
+    user_change_password:
+      confirmation: การยืนยัน
+      current: รหัสผ่านปัจจุบัน
+      new: รหัสผ่านใหม่

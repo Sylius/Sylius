@@ -1,30 +1,17 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    channel:
-        contact_email:
-            invalid: Ky email nuk është i vlefshëm.
-    checkout:
-        shipping_method:
-            not_blank: Zgjidh mënyrën e dërgesës.
-    contact:
-        email:
-            invalid: Ky email nuk është i vlefshëm.
-            not_blank: Shkruaj adresën e email-it.
-    locale:
-        code:
-            not_blank: Shkruaj kodin lokal.
-            unique: Ky kod lokal ekziston tashmë.
-    product_variant:
-        onHand:
-            min: Drejtimi duhet të jetë më i madh se {{ limit }}.
-            not_blank: Shkruaj drejtimin.
-        original_price:
-            min: çmimi fillestar nuk mund të jetë negativ.
-    product_translation:
-        short_description:
-            max: Përshkrimi i shkurtër nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
-    user:
-        email:
-            invalid: Ky email nuk është i vlefshëm.
+  checkout:
+    shipping_method:
+      not_blank: Zgjidh mënyrën e dërgesës.
+  locale:
+    code:
+      not_blank: Shkruaj kodin lokal.
+      unique: Ky kod lokal ekziston tashmë.
+  product_variant:
+    onHand:
+      min: Drejtimi duhet të jetë më i madh se {{ limit }}.
+      not_blank: Shkruaj drejtimin.
+    original_price:
+      min: çmimi fillestar nuk mund të jetë negativ.
+  product_translation:
+    short_description:
+      max: Përshkrimi i shkurtër nuk duhet të përmbajë më shumë se {{ limit }} karaktere.

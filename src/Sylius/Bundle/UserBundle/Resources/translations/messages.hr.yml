@@ -1,23 +1,10 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        user:
-            email: E-mail
-            enabled: Omogući
-            password:
-                label: Lozinka
-                confirmation: Verifikacija
-            remember_me: Zapamti me
-            shipping_address: Adresa za dostavu
-            username: Korisničko ime
-        user_filter:
-            query: Pretraga
-        user_change_password:
-            confirmation: Potvrda
-            current: Trenutna lozinka
-            new: Nova lozinka
-        user_reset_password:
-            confirmation: Potvrda
-            new: Nova lozinka
+  form:
+    user:
+      password:
+        confirmation: Verifikacija
+      remember_me: Zapamti me
+    user_change_password:
+      confirmation: Potvrda
+      current: Trenutna lozinka
+      new: Nova lozinka

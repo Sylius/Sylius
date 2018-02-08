@@ -1,0 +1,3 @@
+sylius:
+  product_variant:
+    generate: '已成功生成産品變型。'

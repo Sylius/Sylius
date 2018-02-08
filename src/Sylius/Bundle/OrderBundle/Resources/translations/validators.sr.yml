@@ -1,0 +1,4 @@
+sylius:
+  order_item:
+    quantity:
+      min: Količina proizvoda za poručivanje ne može biti manja od 1.

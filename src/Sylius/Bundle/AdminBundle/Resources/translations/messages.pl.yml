@@ -1,40 +1,28 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: Typy powiązań
-                    attributes: Atrybuty
-                    header: Katalog
-                    inventory: Zapasy
-                    options: Opcje
-                    products: Produkty
-                    taxons: Taksonomie
-                configuration:
-                    admin_users: Administratorzy
-                    channels: Kanały
-                    countries: Kraje
-                    currencies: Waluty
-                    exchange_rates: Kursy walut
-                    header: Konfiguracja
-                    locales: Ustawienia regionalne
-                    payment_methods: Metody płatności
-                    shipping_categories: Kategorie wysyłki
-                    shipping_methods: Metody wysyłki
-                    tax_categories: Kategorie podatkowe
-                    tax_rates: Stawki podatkowe
-                    zones: Strefy
-                marketing:
-                    header: Marketing
-                    product_reviews: Recenzje produktu
-                    promotions: Promocje
-                customers:
-                    customers: Klienci
-                    groups: Grupy
-                    header: Klient
-                sales:
-                    header: Sprzedaż
-                    orders: Zamówienia
+  menu:
+    admin:
+      main:
+        catalog:
+          attributes: Atrybuty
+          header: Katalog
+          options: Opcje
+          products: Produkty
+          taxons: Taksonomie
+        configuration:
+          channels: Kanały
+          exchange_rates: Kursy walut
+          payment_methods: Metody płatności
+          shipping_categories: Kategorie wysyłki
+          shipping_methods: Metody wysyłki
+          tax_categories: Kategorie podatkowe
+          tax_rates: Stawki podatkowe
+          zones: Strefy
+        marketing:
+          header: Marketing
+          promotions: Promocje
+        customers:
+          customers: Klienci
+          header: Klient
+        sales:
+          header: Sprzedaż
+          orders: Zamówienia

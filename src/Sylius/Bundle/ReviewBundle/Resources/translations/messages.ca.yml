@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    form:
-        review:
-            status:
-                new: Nou
-            title: Títol

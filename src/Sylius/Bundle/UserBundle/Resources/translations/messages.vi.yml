@@ -1,14 +1,4 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        user:
-            password:
-                label: Mật khẩu
-        user_filter:
-            query: Tìm kiếm
-        user_change_password:
-            confirmation: Xác nhận
-        user_reset_password:
-            confirmation: Xác nhận
+  form:
+    user_change_password:
+      confirmation: Xác nhận

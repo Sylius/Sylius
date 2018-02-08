@@ -1,6 +1,3 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    promotion_coupon:
-        generate: 'Promotie coupons zijn succesvol gegenereerd.'
+  promotion_coupon:
+    generate: 'Promotie coupons zijn succesvol gegenereerd.'

@@ -1,0 +1,5 @@
+sylius:
+  shipping_category:
+    name:
+      max_length: 'Ima kategorije mora biti duže od {{ limit }} characters.'
+      min_length: 'Ime kategorije mora imati najmanje {{ limit }} karaktera.'

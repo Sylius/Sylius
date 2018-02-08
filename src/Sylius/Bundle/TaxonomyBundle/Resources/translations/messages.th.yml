@@ -1,12 +1,5 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        taxon:
-            description: คำอธิบาย
-            name: ชื่อ
-            parent: หมวดแม่
-            slug: Slug
-        taxonomy:
-            name: ชื่อ
+  form:
+    taxon:
+      description: คำอธิบาย
+      parent: หมวดแม่

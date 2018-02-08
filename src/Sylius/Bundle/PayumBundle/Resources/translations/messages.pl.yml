@@ -1,23 +1,15 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-    form:
-        gateway_config:
-            type: Typ
-        gateway_configuration:
-            paypal:
-                password: Hasło
-                signature: Podpis
-                username: Nazwa użytkownika
-                sandbox: Sandbox
-            stripe:
-                publishable_key: Klucz jawny
-                secret_key: Klucz tajny
-    payum_gateway_factory:
-        offline: Tryb offline
-        paypal_express_checkout: Ekspresowa realizacja transakcji PayPal
-        stripe_checkout: Kasa Stripe
-    payum_action:
-        payment:
-            description: Płatność zawiera %items% pozycji łącznie z %total% | Płatność zawiera %items% pozycji łącznie z %total%
+  form:
+    gateway_configuration:
+      paypal:
+        signature: Podpis
+        sandbox: Sandbox
+      stripe:
+        publishable_key: Klucz jawny
+        secret_key: Klucz tajny
+  payum_gateway_factory:
+    paypal_express_checkout: Ekspresowa realizacja transakcji PayPal
+    stripe_checkout: Kasa Stripe
+  payum_action:
+    payment:
+      description: Płatność zawiera %items% pozycji łącznie z %total% | Płatność zawiera %items% pozycji łącznie z %total%
