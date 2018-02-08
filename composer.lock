@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c1a9050dd9aed3a52dda86a84aae8d0",
+    "content-hash": "122caeb8a13bd1c4c67a2890282c3c47",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1175,38 +1175,40 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "v2.5.14",
+            "version": "v2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "810a7baf81462a5ddf10e8baa8cb94b6eec02754"
+                "reference": "374e7ace49d864dad8cddbc55346447c8a6a2083"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/810a7baf81462a5ddf10e8baa8cb94b6eec02754",
-                "reference": "810a7baf81462a5ddf10e8baa8cb94b6eec02754",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/374e7ace49d864dad8cddbc55346447c8a6a2083",
+                "reference": "374e7ace49d864dad8cddbc55346447c8a6a2083",
                 "shasum": ""
             },
             "require": {
-                "doctrine/cache": "~1.4",
-                "doctrine/collections": "~1.2",
-                "doctrine/common": ">=2.5-dev,<2.9-dev",
-                "doctrine/dbal": ">=2.5-dev,<2.7-dev",
-                "doctrine/instantiator": "^1.0.1",
+                "doctrine/annotations": "~1.5",
+                "doctrine/cache": "~1.6",
+                "doctrine/collections": "^1.4",
+                "doctrine/common": "^2.7.1",
+                "doctrine/dbal": "^2.6",
+                "doctrine/instantiator": "~1.1",
                 "ext-pdo": "*",
-                "php": ">=5.4",
-                "symfony/console": "~2.5|~3.0|~4.0"
+                "php": "^7.1",
+                "symfony/console": "~3.0|~4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0",
-                "symfony/yaml": "~2.3|~3.0|~4.0"
+                "doctrine/coding-standard": "^1.0",
+                "phpunit/phpunit": "^6.5",
+                "squizlabs/php_codesniffer": "^3.2",
+                "symfony/yaml": "~3.4|~4.0"
             },
             "suggest": {
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
             },
             "bin": [
-                "bin/doctrine",
-                "bin/doctrine.php"
+                "bin/doctrine"
             ],
             "type": "library",
             "extra": {
@@ -1215,8 +1217,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\ORM\\": "lib/"
+                "psr-4": {
+                    "Doctrine\\ORM\\": "lib/Doctrine/ORM"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1239,6 +1241,10 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Marco Pivetta",
+                    "email": "ocramius@gmail.com"
                 }
             ],
             "description": "Object-Relational-Mapper for PHP",
@@ -1247,7 +1253,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2017-12-17T02:57:51+00:00"
+            "time": "2017-12-20T00:38:15+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -2192,16 +2198,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "1.10.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "62c7ff6d61f8692eac8be024c542b3d9d0ab8c8a"
+                "reference": "e7c53477ff55c21d1b1db7d062edc050a24f465f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/62c7ff6d61f8692eac8be024c542b3d9d0ab8c8a",
-                "reference": "62c7ff6d61f8692eac8be024c542b3d9d0ab8c8a",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/e7c53477ff55c21d1b1db7d062edc050a24f465f",
+                "reference": "e7c53477ff55c21d1b1db7d062edc050a24f465f",
                 "shasum": ""
             },
             "require": {
@@ -2209,12 +2215,11 @@
                 "doctrine/instantiator": "^1.0.3",
                 "jms/metadata": "~1.1",
                 "jms/parser-lib": "1.*",
-                "php": ">=5.5.0",
+                "php": "^5.5|^7.0",
                 "phpcollection/phpcollection": "~0.1",
                 "phpoption/phpoption": "^1.1"
             },
             "conflict": {
-                "jms/serializer-bundle": "<1.2.1",
                 "twig/twig": "<1.12"
             },
             "require-dev": {
@@ -2242,7 +2247,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.10-dev"
+                    "dev-master": "1.11-dev"
                 }
             },
             "autoload": {
@@ -2273,7 +2278,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2017-11-30T18:23:40+00:00"
+            "time": "2018-02-04T17:48:54+00:00"
         },
         {
             "name": "jms/serializer-bundle",
@@ -2880,20 +2885,20 @@
         },
         {
             "name": "league/uri-manipulations",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri-manipulations.git",
-                "reference": "e8ad43a956234a78763cc44fa16ddebeb1f4fbf4"
+                "reference": "7b1344490a293e2bd2a313afc6a95927cec4c2b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri-manipulations/zipball/e8ad43a956234a78763cc44fa16ddebeb1f4fbf4",
-                "reference": "e8ad43a956234a78763cc44fa16ddebeb1f4fbf4",
+                "url": "https://api.github.com/repos/thephpleague/uri-manipulations/zipball/7b1344490a293e2bd2a313afc6a95927cec4c2b3",
+                "reference": "7b1344490a293e2bd2a313afc6a95927cec4c2b3",
                 "shasum": ""
             },
             "require": {
-                "league/uri-components": "^1.4.1",
+                "league/uri-components": "^1.7.0",
                 "league/uri-interfaces": "^1.0",
                 "php": ">=7.0",
                 "psr/http-message": "^1.0"
@@ -2948,7 +2953,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-11-24T08:17:41+00:00"
+            "time": "2018-02-06T11:37:57+00:00"
         },
         {
             "name": "league/uri-parser",
@@ -3330,27 +3335,27 @@
         },
         {
             "name": "ocramius/package-versions",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/PackageVersions.git",
-                "reference": "ad8a245decad4897cc6b432743913dad0d69753c"
+                "reference": "4489d5002c49d55576fa0ba786f42dbb009be46f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/ad8a245decad4897cc6b432743913dad0d69753c",
-                "reference": "ad8a245decad4897cc6b432743913dad0d69753c",
+                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/4489d5002c49d55576fa0ba786f42dbb009be46f",
+                "reference": "4489d5002c49d55576fa0ba786f42dbb009be46f",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0",
-                "php": "~7.0"
+                "composer-plugin-api": "^1.0.0",
+                "php": "^7.1.0"
             },
             "require-dev": {
-                "composer/composer": "^1.3",
+                "composer/composer": "^1.6.3",
                 "ext-zip": "*",
-                "humbug/humbug": "dev-master",
-                "phpunit/phpunit": "^6.4"
+                "infection/infection": "^0.7.1",
+                "phpunit/phpunit": "^7.0.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -3375,7 +3380,7 @@
                 }
             ],
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
-            "time": "2017-11-24T11:07:03+00:00"
+            "time": "2018-02-05T13:05:30+00:00"
         },
         {
             "name": "ocramius/proxy-manager",
@@ -4752,16 +4757,16 @@
         },
         {
             "name": "sonata-project/block-bundle",
-            "version": "3.11.0",
+            "version": "3.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "c58b58fb3c784200eaf9e08be6a22fabf4f17f80"
+                "reference": "e88bf24dcf1c89db9b7ad68d164f339465f15b7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/c58b58fb3c784200eaf9e08be6a22fabf4f17f80",
-                "reference": "c58b58fb3c784200eaf9e08be6a22fabf4f17f80",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/e88bf24dcf1c89db9b7ad68d164f339465f15b7a",
+                "reference": "e88bf24dcf1c89db9b7ad68d164f339465f15b7a",
                 "shasum": ""
             },
             "require": {
@@ -4783,7 +4788,8 @@
                 "jms/di-extra-bundle": "^1.7",
                 "knplabs/knp-menu-bundle": "^2.0",
                 "sonata-project/admin-bundle": "^3.22",
-                "symfony/phpunit-bridge": "^3.3 || ^4.0"
+                "symfony/phpunit-bridge": "^4.0",
+                "symfony/stopwatch": "^2.8 || ^3.2 || ^4.0"
             },
             "suggest": {
                 "jms/di-extra-bundle": "Annotations for Block definition",
@@ -4825,7 +4831,7 @@
                 "block",
                 "sonata"
             ],
-            "time": "2018-01-23T15:18:58+00:00"
+            "time": "2018-02-08T09:59:45+00:00"
         },
         {
             "name": "sonata-project/cache",
@@ -7393,16 +7399,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.10.0",
+            "version": "v2.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "513a3765b56dd029175f9f32995566657ee89dda"
+                "reference": "74e4682a4073bc8bc2d4ff2b30a4873ac76cc1f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/513a3765b56dd029175f9f32995566657ee89dda",
-                "reference": "513a3765b56dd029175f9f32995566657ee89dda",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/74e4682a4073bc8bc2d4ff2b30a4873ac76cc1f1",
+                "reference": "74e4682a4073bc8bc2d4ff2b30a4873ac76cc1f1",
                 "shasum": ""
             },
             "require": {
@@ -7445,21 +7451,19 @@
                 "php-cs-fixer"
             ],
             "type": "application",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.10-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "PhpCsFixer\\": "src/"
                 },
                 "classmap": [
                     "tests/Test/AbstractFixerTestCase.php",
+                    "tests/Test/AbstractIntegrationCaseFactory.php",
                     "tests/Test/AbstractIntegrationTestCase.php",
                     "tests/Test/Assert/AssertTokensTrait.php",
                     "tests/Test/IntegrationCase.php",
                     "tests/Test/IntegrationCaseFactory.php",
+                    "tests/Test/IntegrationCaseFactoryInterface.php",
+                    "tests/Test/InternalIntegrationCaseFactory.php",
                     "tests/TestCase.php"
                 ]
             },
@@ -7478,7 +7482,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2018-01-10T17:16:15+00:00"
+            "time": "2018-02-03T08:30:06+00:00"
         },
         {
             "name": "gecko-packages/gecko-php-unit",
@@ -7740,23 +7744,25 @@
         },
         {
             "name": "kriswallsmith/buzz",
-            "version": "v0.15.2",
+            "version": "v0.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/Buzz.git",
-                "reference": "d0b82d8a6169276f91f445c26792ff4a2b11e831"
+                "reference": "bd3299b7b6be3eeeb7a2842e677685031b93aa26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/d0b82d8a6169276f91f445c26792ff4a2b11e831",
-                "reference": "d0b82d8a6169276f91f445c26792ff4a2b11e831",
+                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/bd3299b7b6be3eeeb7a2842e677685031b93aa26",
+                "reference": "bd3299b7b6be3eeeb7a2842e677685031b93aa26",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3 || ^7.0"
+                "guzzlehttp/psr7": "^1.4",
+                "php": "^5.4 || ^7.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "^3.3"
+                "php-http/client-integration-tests": "^0.6.2",
+                "symfony/phpunit-bridge": "^3.4 || ^4.0"
             },
             "suggest": {
                 "ext-curl": "*"
@@ -7784,7 +7790,7 @@
                 "curl",
                 "http client"
             ],
-            "time": "2017-11-24T19:18:50+00:00"
+            "time": "2018-02-03T19:40:45+00:00"
         },
         {
             "name": "lakion/api-test-case",
@@ -8549,16 +8555,16 @@
         },
         {
             "name": "nette/php-generator",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/php-generator.git",
-                "reference": "eb2dbc9c3409e9db40568109ca4994d51373b60c"
+                "reference": "1652635d312a8db4291b16f3ebf87cb1a15a6257"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/php-generator/zipball/eb2dbc9c3409e9db40568109ca4994d51373b60c",
-                "reference": "eb2dbc9c3409e9db40568109ca4994d51373b60c",
+                "url": "https://api.github.com/repos/nette/php-generator/zipball/1652635d312a8db4291b16f3ebf87cb1a15a6257",
+                "reference": "1652635d312a8db4291b16f3ebf87cb1a15a6257",
                 "shasum": ""
             },
             "require": {
@@ -8599,7 +8605,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.1 features.",
+            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.2 features.",
             "homepage": "https://nette.org",
             "keywords": [
                 "code",
@@ -8607,20 +8613,20 @@
                 "php",
                 "scaffolding"
             ],
-            "time": "2017-07-11T19:07:13+00:00"
+            "time": "2017-09-26T11:19:32+00:00"
         },
         {
             "name": "nette/robot-loader",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/robot-loader.git",
-                "reference": "b703b4f5955831b0bcaacbd2f6af76021b056826"
+                "reference": "92d4b40b49d5e2d9e37fc736bbcebe6da55fa44a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/robot-loader/zipball/b703b4f5955831b0bcaacbd2f6af76021b056826",
-                "reference": "b703b4f5955831b0bcaacbd2f6af76021b056826",
+                "url": "https://api.github.com/repos/nette/robot-loader/zipball/92d4b40b49d5e2d9e37fc736bbcebe6da55fa44a",
+                "reference": "92d4b40b49d5e2d9e37fc736bbcebe6da55fa44a",
                 "shasum": ""
             },
             "require": {
@@ -8672,20 +8678,20 @@
                 "nette",
                 "trait"
             ],
-            "time": "2017-07-18T00:09:56+00:00"
+            "time": "2017-09-26T13:42:21+00:00"
         },
         {
             "name": "nette/utils",
-            "version": "v2.4.8",
+            "version": "v2.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "f1584033b5af945b470533b466b81a789d532034"
+                "reference": "1e08eb4c9d26ae5aedced8260e8b4ed951ee4aa6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/f1584033b5af945b470533b466b81a789d532034",
-                "reference": "f1584033b5af945b470533b466b81a789d532034",
+                "url": "https://api.github.com/repos/nette/utils/zipball/1e08eb4c9d26ae5aedced8260e8b4ed951ee4aa6",
+                "reference": "1e08eb4c9d26ae5aedced8260e8b4ed951ee4aa6",
                 "shasum": ""
             },
             "require": {
@@ -8751,7 +8757,7 @@
                 "utility",
                 "validation"
             ],
-            "time": "2017-08-20T17:32:29+00:00"
+            "time": "2018-02-06T15:40:36+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -10183,16 +10189,16 @@
         },
         {
             "name": "slevomat/coding-standard",
-            "version": "4.3.2",
+            "version": "4.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slevomat/coding-standard.git",
-                "reference": "872ecd4782be157706a97d72a0a763675c303dd8"
+                "reference": "ea5fe6759e6a63d2b2a252535a9cf0ee5ec44ee2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/872ecd4782be157706a97d72a0a763675c303dd8",
-                "reference": "872ecd4782be157706a97d72a0a763675c303dd8",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/ea5fe6759e6a63d2b2a252535a9cf0ee5ec44ee2",
+                "reference": "ea5fe6759e6a63d2b2a252535a9cf0ee5ec44ee2",
                 "shasum": ""
             },
             "require": {
@@ -10202,8 +10208,11 @@
             "require-dev": {
                 "jakub-onderka/php-parallel-lint": "0.9.2",
                 "phing/phing": "2.16",
-                "phpstan/phpstan": "0.9.1",
-                "phpunit/phpunit": "6.5.5"
+                "phpstan/phpstan": "0.9.2",
+                "phpstan/phpstan-phpunit": "0.9.4",
+                "phpstan/phpstan-strict-rules": "0.9",
+                "phpunit/php-code-coverage": "6.0.1",
+                "phpunit/phpunit": "7.0.0"
             },
             "type": "phpcodesniffer-standard",
             "autoload": {
@@ -10216,7 +10225,7 @@
                 "MIT"
             ],
             "description": "Slevomat Coding Standard for PHP_CodeSniffer complements Consistence Coding Standard by providing sniffs with additional checks.",
-            "time": "2018-01-28T21:06:07+00:00"
+            "time": "2018-02-07T10:52:36+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",

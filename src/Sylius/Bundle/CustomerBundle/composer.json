@@ -34,7 +34,7 @@
     "require": {
         "php": "^7.1",
 
-        "doctrine/orm": "~2.5.0",
+        "doctrine/orm": "^2.5",
         "sylius/customer": "^1.0",
         "sylius/resource-bundle": "^1.0",
         "symfony/framework-bundle": "^3.2",
