@@ -1,11 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    form:
-        channel:
-            color: Renk
-            description: Açıklama
-            enabled: Etkin
-            name: Ad
-            url: Url
+  form:
+    channel:
+      color: Renk
+      url: Url

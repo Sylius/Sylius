@@ -1,40 +1,39 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: Types d'associations
-                    attributes: Attributs
-                    header: Catalogue
-                    inventory: Inventaire
-                    options: Options
-                    products: Produits
-                    taxons: Taxons
-                configuration:
-                    admin_users: Administrateurs
-                    channels: Canaux
-                    countries: Pays
-                    currencies: Devises
-                    exchange_rates: Taux de change
-                    header: Configuration
-                    locales: Paramètres régionaux
-                    payment_methods: Moyens de paiement
-                    shipping_categories: Catégories d'expédition
-                    shipping_methods: Modes de livraison
-                    tax_categories: Catégories de taxe
-                    tax_rates: Taux de taxe
-                    zones: Zones
-                marketing:
-                    header: Marketing
-                    product_reviews: Avis produit
-                    promotions: Promotions
-                customers:
-                    customers: Clients
-                    groups: Groupes
-                    header: Client
-                sales:
-                    header: Ventes
-                    orders: Commandes
+  menu:
+    admin:
+      main:
+        catalog:
+          attributes: Attributs
+          header: Catalogue
+          inventory: Inventaire
+          products: Produits
+          taxons: Taxons
+        configuration:
+          admin_users: Administrateurs
+          channels: Canaux
+          countries: Pays
+          currencies: Devises
+          exchange_rates: Taux de change
+          header: Configuration
+          locales: Paramètres régionaux
+          payment_methods: Moyens de paiement
+          shipping_categories: Catégories d'expédition
+          shipping_methods: Modes de livraison
+          tax_categories: Catégories de taxe
+          tax_rates: Taux de taxe
+          zones: Zones
+        marketing:
+          header: Marketing
+          promotions: Promotions
+        customers:
+          customers: Clients
+          header: Client
+        sales:
+          header: Ventes
+          orders: Commandes

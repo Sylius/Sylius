@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    product:
-        name:
-            not_blank: Ange produktnamn.
+  product:
+    name:
+      not_blank: Ange produktnamn.

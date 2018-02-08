@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    product_variant:
-        generate: 'Варіанти продукта були успішно створено.'
+  product_variant:
+    generate: 'Варіанти продукта були успішно створено.'

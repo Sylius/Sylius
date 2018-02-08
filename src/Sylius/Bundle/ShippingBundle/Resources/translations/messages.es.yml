@@ -2,44 +2,36 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        rule:
-            unit_count_configuration:
-                count: Contador
-                equal: Igual a
-            type: Tipo de regla
-        shipment:
-            state: Estado
-            states:
-                checkout: Completar pedido
-                pending: Pendiente
-                ready: Listo
-                shipped: Enviado
-                returned: Devuelto
-                cancelled: Cancelado
-            tracking_code: Código de seguimiento
-        shipping_calculator:
-            flat_rate_configuration:
-                label: Tarifa plana por envío
-                amount: Cantidad
-            per_unit_rate_configuration:
-                label: Tarifa plana por artículo
-                amount: Cantidad
-        shipping_category:
-            description: Descripción
-            name: Nombre
-        shipping_method:
-            calculator: Calculadora
-            category: Categoría
-            category_requirement: Requisito de la categoría
-            channels: Canales
-            configuration: Configuración
-            description: Descripción
-            enabled: Activado
-            match_all_category_requirement: Todas las unidades deben coincidir con la categoría del método de envío
-            match_any_category_requirement: Al menos 1 unidad debe coincidir con la categoría del método de envío
-            match_none_category_requirement: Ninguna de las unidades debe coincidir con la categoría del método de envío
-            name: Nombre
-            position: Posición
-            tax_category: Categoría de impuestos
-            translations: Traducciones
+  form:
+    rule:
+      unit_count_configuration:
+        count: Contador
+        equal: Igual a
+      type: Tipo de regla
+    shipment:
+      state: Estado
+      states:
+        pending: Pendiente
+        ready: Listo
+        shipped: Enviado
+        returned: Devuelto
+      tracking_code: Código de seguimiento
+    shipping_calculator:
+      flat_rate_configuration:
+        label: Tarifa plana por envío
+        amount: Cantidad
+      per_unit_rate_configuration:
+        label: Tarifa plana por artículo
+    shipping_category:
+      description: Descripción
+      name: Nombre
+    shipping_method:
+      calculator: Calculadora
+      category: Categoría
+      category_requirement: Requisito de la categoría
+      configuration: Configuración
+      match_all_category_requirement: Todas las unidades deben coincidir con la categoría del método de envío
+      match_any_category_requirement: Al menos 1 unidad debe coincidir con la categoría del método de envío
+      match_none_category_requirement: Ninguna de las unidades debe coincidir con la categoría del método de envío
+      name: Nombre
+      position: Posición

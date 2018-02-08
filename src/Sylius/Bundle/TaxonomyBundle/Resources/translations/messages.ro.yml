@@ -2,11 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        taxon:
-            description: Descriere
-            name: Nume
-            parent: Părinte
-            slug: Slug
-        taxonomy:
-            name: Nume
+  form:
+    taxon:
+      name: Nume
+      parent: Părinte
+    taxonomy:
+      name: Nume

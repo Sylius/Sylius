@@ -2,10 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        channel:
-            color: Spalva
-            description: Aprašymas
-            enabled: Įjungta
-            name: Pavadinimas
-            url: URL
+  form:
+    channel:
+      color: Spalva
+      enabled: Įjungta
+      url: URL

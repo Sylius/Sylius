@@ -2,16 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        review:
-            author: Autor
-            comment: Anmerkung
-            header: Rezension hinzufügen
-            rating: Bewertung
-            status:
-                approved: Genehmigt
-                label: Status
-                new: Neu
-                rejected: Zurückgewiesen
-            submit: Senden
-            title: Titel
+  form:
+    review:
+      author: Autor
+      comment: Anmerkung
+      header: Rezension hinzufügen
+      rating: Bewertung
+      status:
+        approved: Genehmigt
+        label: Status
+        rejected: Zurückgewiesen
+      submit: Senden

@@ -2,11 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        taxon:
-            description: Omschrijving
-            name: Naam
-            parent: Ouder
-            slug: Korte naam
-        taxonomy:
-            name: Naam
+  form:
+    taxon:
+      name: Naam
+      parent: Ouder
+      slug: Korte naam
+    taxonomy:
+      name: Naam

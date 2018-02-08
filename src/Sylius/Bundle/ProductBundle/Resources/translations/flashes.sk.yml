@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    product_variant:
-        generate: 'Varianty produktu boli úspešne vytvorené.'
+  product_variant:
+    generate: 'Varianty produktu boli úspešne vytvorené.'

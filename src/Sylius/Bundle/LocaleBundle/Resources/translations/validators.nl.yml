@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    locale:
-        code:
-            not_blank: Kies land-/taalcode.
-            regex: Afbeeldingscode kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Land-/taalcode moet uniek zijn.
+  locale:
+    code:
+      not_blank: Kies land-/taalcode.
+      regex: Afbeeldingscode kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
+      unique: Land-/taalcode moet uniek zijn.

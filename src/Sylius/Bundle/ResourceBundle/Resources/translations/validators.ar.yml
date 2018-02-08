@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    resource:
-        not_enabled: "الموارد المقدمة معطلة"
-        not_disabled: "الموارد المقدمة مفعلة"
+  resource:
+    not_enabled: "الموارد المقدمة معطلة"
+    not_disabled: "الموارد المقدمة مفعلة"

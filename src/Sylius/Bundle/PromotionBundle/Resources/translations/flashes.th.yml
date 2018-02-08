@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    promotion_coupon:
-        generate: 'คูปองโปรโมชั่นถูกสร้างเรียบร้อยแล้ว'
+  promotion_coupon:
+    generate: 'คูปองโปรโมชั่นถูกสร้างเรียบร้อยแล้ว'

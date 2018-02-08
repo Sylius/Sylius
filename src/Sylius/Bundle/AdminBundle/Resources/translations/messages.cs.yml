@@ -2,39 +2,29 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: Typy asociace
-                    attributes: Atributy
-                    header: Katalog
-                    inventory: Sklad
-                    options: Možnosti
-                    products: Produkty
-                    taxons: Taxony
-                configuration:
-                    admin_users: Administrátoři
-                    channels: Kanály
-                    countries: Země
-                    currencies: Měny
-                    exchange_rates: Směnný kurz
-                    header: Konfigurace
-                    locales: Lokalizace
-                    payment_methods: Způsoby plateb
-                    shipping_categories: Přepravní kategorie
-                    shipping_methods: Způsoby dopravy
-                    tax_categories: Daňové kategorie
-                    tax_rates: Daňové sazby
-                    zones: Oblasti
-                marketing:
-                    header: Marketing
-                    product_reviews: Hodnocení produktu
-                    promotions: Akce
-                customers:
-                    customers: Zákazníci
-                    groups: Skupiny
-                    header: Zákazník
-                sales:
-                    header: Prodeje
-                    orders: Objednávky
+  menu:
+    admin:
+      main:
+        catalog:
+          header: Katalog
+          products: Produkty
+          taxons: Taxony
+        configuration:
+          admin_users: Administrátoři
+          channels: Kanály
+          payment_methods: Způsoby plateb
+          shipping_categories: Přepravní kategorie
+          shipping_methods: Způsoby dopravy
+          tax_categories: Daňové kategorie
+          tax_rates: Daňové sazby
+          zones: Oblasti
+        marketing:
+          header: Marketing
+          product_reviews: Hodnocení produktu
+          promotions: Akce
+        customers:
+          customers: Zákazníci
+          header: Zákazník
+        sales:
+          header: Prodeje
+          orders: Objednávky

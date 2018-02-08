@@ -2,41 +2,41 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        rule:
-            unit_count_configuration:
-                count: Quantità
-                equal: Uguale a
-            type: Tipo di regola
-        shipment:
-            state: Stato
-            states:
-                checkout: Vai alla cassa
-                pending: In attesa
-                ready: Pronto
-                shipped: Spedito
-                returned: Restituito
-                cancelled: Annullato
-            tracking_code: Codice di monitoraggio della spedizione
-        shipping_calculator:
-            flat_rate_configuration:
-                label: Tariffa fissa per spedizione
-                amount: Importo
-            per_unit_rate_configuration:
-                label: Tariffa fissa per unità
-                amount: Importo
-        shipping_category:
-            description: Descrizione
-            name: Nome
-        shipping_method:
-            calculator: Calcolatore
-            category: Categoria
-            category_requirement: Requisito della categoria
-            channels: Canali
-            configuration: Configurazione
-            description: Descrizione
-            enabled: Abilitato
-            name: Nome
-            position: Posizione
-            tax_category: Categoria fiscale
-            translations: Traduzioni
+  form:
+    rule:
+      unit_count_configuration:
+        count: Quantità
+        equal: Uguale a
+      type: Tipo di regola
+    shipment:
+      state: Stato
+      states:
+        checkout: Vai alla cassa
+        pending: In attesa
+        ready: Pronto
+        shipped: Spedito
+        returned: Restituito
+        cancelled: Annullato
+      tracking_code: Codice di monitoraggio della spedizione
+    shipping_calculator:
+      flat_rate_configuration:
+        label: Tariffa fissa per spedizione
+        amount: Importo
+      per_unit_rate_configuration:
+        label: Tariffa fissa per unità
+        amount: Importo
+    shipping_category:
+      description: Descrizione
+      name: Nome
+    shipping_method:
+      calculator: Calcolatore
+      category: Categoria
+      category_requirement: Requisito della categoria
+      channels: Canali
+      configuration: Configurazione
+      description: Descrizione
+      enabled: Abilitato
+      name: Nome
+      position: Posizione
+      tax_category: Categoria fiscale
+      translations: Traduzioni

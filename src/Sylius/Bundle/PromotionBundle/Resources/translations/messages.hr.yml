@@ -2,35 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        promotion:
-            actions: Akcije
-            add_action: Dodajte akciju
-            add_rule: Dodajte pravilo
-            coupon_based: Promocija bazirana na kuponima za popust
-            description: Opis
-            ends_at: Završava
-            name: Naziv promocije
-            priority: Prioritet
-            rules: Pravila
-            starts_at: Počinje
-            usage_limit: Ograničenje
-        promotion_action:
-            fixed_discount_configuration:
-                amount: Iznos
-            type: Vrsta
-        promotion_coupon:
-            usage_limit: Ograničenje
-        promotion_coupon_generator_instruction:
-            amount: Iznos
-            usage_limit: Ograničenje
-        promotion_rule:
-            cart_quantity_configuration:
-                count: Brojač
-            contains_product_configuration:
-                variants: Proizvodi
-            item_total_configuration:
-                amount: Iznos
-            shipping_country_configuration:
-                country: Država
-            type: Vrsta
+  form:
+    promotion:
+      actions: Akcije
+      add_action: Dodajte akciju
+      add_rule: Dodajte pravilo
+      coupon_based: Promocija bazirana na kuponima za popust
+      description: Opis
+      ends_at: Završava
+      name: Naziv promocije
+      rules: Pravila
+      starts_at: Počinje
+      usage_limit: Ograničenje

@@ -2,38 +2,30 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: Tipovi poveznica
-                    attributes: Značajke proizvoda
-                    header: Katalog
-                    inventory: Skladište
-                    options: Opcije
-                    products: Proizvodi
-                configuration:
-                    admin_users: Administratori
-                    channels: Kanali
-                    countries: Države
-                    currencies: Valute
-                    exchange_rates: Tečajne liste
-                    header: Postavke
-                    locales: Lokaliteti
-                    payment_methods: Načini plaćanja
-                    shipping_categories: Kategorije pošiljki
-                    shipping_methods: Načini slanja
-                    tax_categories: Kategorije poreza
-                    tax_rates: Stope poreza
-                    zones: Regije
-                marketing:
-                    header: Marketing
-                    product_reviews: Recenzije proizvoda
-                    promotions: Promocije
-                customers:
-                    customers: Kupci
-                    groups: Grupe
-                    header: Kupac
-                sales:
-                    header: Prodaja
-                    orders: Narudžbe
+  menu:
+    admin:
+      main:
+        catalog:
+          attributes: Značajke proizvoda
+          header: Katalog
+          products: Proizvodi
+        configuration:
+          admin_users: Administratori
+          channels: Kanali
+          currencies: Valute
+          exchange_rates: Tečajne liste
+          payment_methods: Načini plaćanja
+          shipping_categories: Kategorije pošiljki
+          shipping_methods: Načini slanja
+          tax_categories: Kategorije poreza
+          tax_rates: Stope poreza
+          zones: Regije
+        marketing:
+          header: Marketing
+          promotions: Promocije
+        customers:
+          customers: Kupci
+          header: Kupac
+        sales:
+          header: Prodaja
+          orders: Narudžbe

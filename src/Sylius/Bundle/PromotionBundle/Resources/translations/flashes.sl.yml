@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    promotion_coupon:
-        generate: 'Promocijski kuponi so bili uspešno ustvarjeni.'
+  promotion_coupon:
+    generate: 'Promocijski kuponi so bili uspešno ustvarjeni.'

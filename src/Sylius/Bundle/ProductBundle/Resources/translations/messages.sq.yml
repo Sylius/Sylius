@@ -2,28 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        product:
-            name: Emri
-            description: Përshkrimi
-            attributes: Atributet
-            options: Opsionet
-            meta_keywords: Meta fjalë kyçe
-            meta_description: Meta përshkrim
-            taxons: Tipologjite
-        product_variant:
-            name: Emri
-        association_type:
-            name: Emri
-            translations: Përkthime
-        association:
-            type: Tipi i lidhjes
-            product: Produkti i lidhur
-        variant:
-            name: Emri
-        option:
-            name: Emri
-            values: Vlera të mundshme
-        option_value:
-            add_value: Shto vlerën
-            value: Vlera
+  form:
+    product:
+      attributes: Atributet
+      options: Opsionet
+      meta_keywords: Meta fjalë kyçe
+      meta_description: Meta përshkrim
+      taxons: Tipologjite
+    association:
+      type: Tipi i lidhjes
+      product: Produkti i lidhur
+    option:
+      values: Vlera të mundshme

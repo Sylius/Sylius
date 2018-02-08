@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    product_variant:
-        generate: 'Produktvarianter er blevet genereret.'
+  product_variant:
+    generate: 'Produktvarianter er blevet genereret.'

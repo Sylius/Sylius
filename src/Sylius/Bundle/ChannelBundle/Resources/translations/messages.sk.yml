@@ -2,10 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        channel:
-            color: Farba
-            description: Popis
-            enabled: Zapnuté
-            name: Názov
-            url: URL adresa
+  form:
+    channel:
+      color: Farba
+      url: URL adresa

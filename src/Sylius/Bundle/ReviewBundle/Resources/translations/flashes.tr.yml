@@ -1,7 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    review:
-        accept: 'Gözden geçirme başarıyla kabul edildi.'
-        reject: 'Gözden geçirme başarıyla reddetti.'
+  review:
+    accept: 'Gözden geçirme başarıyla kabul edildi.'
+    reject: 'Gözden geçirme başarıyla reddetti.'

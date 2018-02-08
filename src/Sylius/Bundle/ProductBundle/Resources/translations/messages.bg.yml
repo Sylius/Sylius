@@ -2,30 +2,19 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        product:
-            name: Име
-            description: Описание
-            attributes: Атрибути
-            options: Опцйи
-            meta_keywords: Мета ключови думи
-            meta_description: Мета описание
-            slug: Слъг
-            taxons: Категории
-        product_variant:
-            name: Име
-        association_type:
-            name: Име
-            translations: Преводи
-        association:
-            type: Свързан тип
-            product: Свързан продукт
-        variant:
-            name: Име
-        option:
-            name: Име
-            position: Позиция
-            values: Възможни стойности
-        option_value:
-            add_value: Добави стойност
-            value: Стойност
+  form:
+    product:
+      attributes: Атрибути
+      options: Опцйи
+      meta_keywords: Мета ключови думи
+      meta_description: Мета описание
+      slug: Слъг
+      taxons: Категории
+    association:
+      type: Свързан тип
+      product: Свързан продукт
+    option:
+      position: Позиция
+      values: Възможни стойности
+    option_value:
+      add_value: Добави стойност

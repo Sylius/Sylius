@@ -1,40 +1,39 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: Associationstyper
-                    attributes: Attribut
-                    header: Katalog
-                    inventory: Lager
-                    options: Alternativ
-                    products: Produkter
-                    taxons: Taxa
-                configuration:
-                    admin_users: Administratörer
-                    channels: Kanaler
-                    countries: Länder
-                    currencies: Valutor
-                    exchange_rates: Växelkurser
-                    header: Konfiguration
-                    locales: Språk
-                    payment_methods: Betalningsmetoder
-                    shipping_categories: Fraktkategorier
-                    shipping_methods: Leveransmetoder
-                    tax_categories: Skattekategorier
-                    tax_rates: Skattesatser
-                    zones: Zoner
-                marketing:
-                    header: Marknadsföring
-                    product_reviews: Produktrecensioner
-                    promotions: Kampanjer
-                customers:
-                    customers: Kunder
-                    groups: Grupper
-                    header: Kunder
-                sales:
-                    header: Försäljning
-                    orders: Beställningar
+  menu:
+    admin:
+      main:
+        catalog:
+          association_types: Associationstyper
+          attributes: Attribut
+          header: Katalog
+          options: Alternativ
+          products: Produkter
+          taxons: Taxa
+        configuration:
+          channels: Kanaler
+          countries: Länder
+          currencies: Valutor
+          exchange_rates: Växelkurser
+          header: Konfiguration
+          locales: Språk
+          payment_methods: Betalningsmetoder
+          shipping_categories: Fraktkategorier
+          shipping_methods: Leveransmetoder
+          tax_categories: Skattekategorier
+          tax_rates: Skattesatser
+          zones: Zoner
+        marketing:
+          header: Marknadsföring
+          promotions: Kampanjer
+        customers:
+          customers: Kunder
+          header: Kunder
+        sales:
+          header: Försäljning
+          orders: Beställningar

@@ -2,23 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        product:
-            name: Імя
-            description: Апісанне
-            options: Опцыі
-            meta_keywords: Meta keywords
-            meta_description: Meta description
-        product_variant:
-            name: Імя
-        association_type:
-            name: Імя
-            translations: Пераклады
-        variant:
-            name: Імя
-        option:
-            name: Імя
-            values: Магчымыя значэнні
-        option_value:
-            add_value: Дадаць значэнне
-            value: Значэнне
+  form:
+    product:
+      options: Опцыі
+      meta_keywords: Meta keywords
+      meta_description: Meta description
+    option:
+      values: Магчымыя значэнні

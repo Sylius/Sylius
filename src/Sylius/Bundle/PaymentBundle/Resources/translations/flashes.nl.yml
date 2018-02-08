@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    payment:
-        cancelled: 'Betaling werd geannuleerd.'
-        completed: 'Betaling is voltooid.'
-        failed: 'Betaling is mislukt.'
-        processing: 'Betaling wordt momenteel verwerkt.'
-        refunded: 'Betaling werd succesvol terugbetaald.'
-        unknown: 'Er is een onbekende fout met de betaling opgetreden.'
+  payment:
+    cancelled: 'Betaling werd geannuleerd.'
+    completed: 'Betaling is voltooid.'
+    failed: 'Betaling is mislukt.'
+    processing: 'Betaling wordt momenteel verwerkt.'
+    refunded: 'Betaling werd succesvol terugbetaald.'
+    unknown: 'Er is een onbekende fout met de betaling opgetreden.'

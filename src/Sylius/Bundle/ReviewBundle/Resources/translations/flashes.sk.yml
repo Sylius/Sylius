@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    review:
-        accept: 'Recenzia bola schválená.'
-        reject: 'Recenzia bola zamietnutá.'
-        wait_for_the_acceptation: 'Vaša recenzia čaká na scvhálenie.'
+  review:
+    accept: 'Recenzia bola schválená.'
+    reject: 'Recenzia bola zamietnutá.'
+    wait_for_the_acceptation: 'Vaša recenzia čaká na scvhálenie.'

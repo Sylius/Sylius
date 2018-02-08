@@ -2,13 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        image:
-            type: Jenis
-    installer:
-        extensions:
-            off: false
-            on: true
-        settings:
-            off: false
-            on: true
+  installer:
+    extensions:
+      off: false
+      on: true
+    settings:
+      off: false
+      on: true

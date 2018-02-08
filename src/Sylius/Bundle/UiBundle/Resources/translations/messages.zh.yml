@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    login:
+      username: '使用者名稱'
+      password: '密碼'
+      remember_me: '記住我'
+    option:
+      name: '名稱'
+    notes: '附註'
+    variant:
+      tracked: '追蹤'
+  ui:
+    abandoned: '已放棄'
+    about: '關於'
+    accept: '同意'
+    accepted: '已同意'
+    access_token: '存取權杖'
+    account_credentials: '帳戸資訊'
+    street: '街道'

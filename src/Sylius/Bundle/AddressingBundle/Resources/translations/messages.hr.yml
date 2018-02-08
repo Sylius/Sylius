@@ -2,40 +2,32 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        address:
-            city: Grad
-            company: Tvrtka
-            country: Država
-            first_name: Ime
-            last_name: Prezime
-            phone_number: Kontakt telefon
-            postcode: Poštanski broj
-            province: Pokrajina
-            zone: Regija
-        country:
-            add_province: Dodaj pokrajinu
-            name: Naziv Države
-            provinces: Pokrajine
-            select: Odaberite
-            enabled: Omogućeno
-        province:
-            name: Naziv pokrajine
-            abbreviation: Skraćeno
-            select: Odaberite
-        zone:
-            add_member: Dodaj
-            members: Članovi
-            name: Naziv regije
-            type: Vrsta
-            types:
-                country: Država
-                province: Pokrajina
-                zone: Regija
-            scope: Djelokrug
-            scopes:
-                all: Sve
-            select: Odaberite
-            select_scope: Odaberite doseg
-        zone_member:
-            select: Odaberite
+  form:
+    address:
+      city: Grad
+      company: Tvrtka
+      country: Država
+      first_name: Ime
+      last_name: Prezime
+      phone_number: Kontakt telefon
+      postcode: Poštanski broj
+      province: Pokrajina
+    country:
+      add_province: Dodaj pokrajinu
+      name: Naziv Države
+      provinces: Pokrajine
+      select: Odaberite
+      enabled: Omogućeno
+    province:
+      name: Naziv pokrajine
+      abbreviation: Skraćeno
+      select: Odaberite
+    zone:
+      add_member: Dodaj
+      members: Članovi
+      name: Naziv regije
+      type: Vrsta
+      types:
+        country: Država
+      scope: Djelokrug
+      select_scope: Odaberite doseg

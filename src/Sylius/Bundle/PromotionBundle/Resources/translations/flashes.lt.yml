@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    promotion_coupon:
-        generate: 'Nuolaidų kuponai sėkmingai sugeneruoti.'
+  promotion_coupon:
+    generate: 'Nuolaidų kuponai sėkmingai sugeneruoti.'

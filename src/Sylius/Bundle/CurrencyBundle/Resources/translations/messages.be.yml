@@ -2,8 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        currency:
-            code: Імя
-            enabled: Уключана
-            exchange_rate: Абменны курс
+  form:
+    currency:
+      enabled: Уключана
+      exchange_rate: Абменны курс

@@ -1,14 +1,15 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    form:
-        currency:
-            base: Basvaluta
-            code: Namn
-            enabled: Aktiverad
-            exchange_rate: Växlingskurs
-        exchange_rate:
-            source_currency: Ursprungsvaluta
-            target_currency: Målvaluta
-            ratio: Kurs
+  form:
+    currency:
+      base: Basvaluta
+      exchange_rate: Växlingskurs
+    exchange_rate:
+      source_currency: Ursprungsvaluta
+      target_currency: Målvaluta
+      ratio: Kurs

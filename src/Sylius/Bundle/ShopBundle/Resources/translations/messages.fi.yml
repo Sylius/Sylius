@@ -2,12 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    menu:
-        shop:
-            account:
-                address_book: 'Osoitekirja'
-                change_password: 'Vaihda salasana'
-                dashboard: 'Hallintapaneeli'
-                header: 'Oma tili'
-                order_history: 'Tilaushistoria'
-                personal_information: 'Omat tiedot'
+  menu:
+    shop:
+      account:
+        address_book: 'Osoitekirja'
+        change_password: 'Vaihda salasana'
+        header: 'Oma tili'
+        order_history: 'Tilaushistoria'
+        personal_information: 'Omat tiedot'

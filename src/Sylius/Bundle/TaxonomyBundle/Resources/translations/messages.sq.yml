@@ -2,10 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        taxon:
-            description: Përshkrimi
-            name: Emri
-            parent: Prind
-        taxonomy:
-            name: Emri
+  form:
+    taxon:
+      parent: Prind

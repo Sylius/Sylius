@@ -2,22 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        user:
-            email: El. paštas
-            enabled: Įjungta
-            password:
-                label: Slaptažodis
-                confirmation: Patikrinimas
-            remember_me: Prisiminti mane
-            shipping_address: Pristatymo adresas
-            username: Vartotojo vardas
-        user_filter:
-            query: Ieškoti
-        user_change_password:
-            confirmation: Patvirtinimas
-            current: Dabartinis slaptažodis
-            new: Naujas slaptažodis
-        user_reset_password:
-            confirmation: Patvirtinimas
-            new: Naujas slaptažodis
+  form:
+    user:
+      password:
+        confirmation: Patikrinimas
+      remember_me: Prisiminti mane
+    user_change_password:
+      confirmation: Patvirtinimas
+      current: Dabartinis slaptažodis
+      new: Naujas slaptažodis

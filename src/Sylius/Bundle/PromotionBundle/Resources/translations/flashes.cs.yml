@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    promotion_coupon:
-        generate: 'Propagační kupóny byly úspěšně vytvořeny.'
+  promotion_coupon:
+    generate: 'Propagační kupóny byly úspěšně vytvořeny.'

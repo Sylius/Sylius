@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    promotion_coupon:
-        generate: 'Akciové kupóny boli úspešne vygenerované.'
+  promotion_coupon:
+    generate: 'Akciové kupóny boli úspešne vygenerované.'

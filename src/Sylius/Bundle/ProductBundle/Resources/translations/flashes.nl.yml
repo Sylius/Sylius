@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    product_variant:
-        generate: 'Product varianten werden succesvol gegenereerd.'
+  product_variant:
+    generate: 'Product varianten werden succesvol gegenereerd.'

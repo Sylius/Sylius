@@ -2,30 +2,30 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    product:
-        sku:
-            not_blank: Angiv produkt SKU.
-            unique: Produkt SKU skal være unik.
-        slug:
-            not_blank: Venligst angiv produkt slug.
-        code:
-            not_blank: Venligst angiv varenummer.
-            regex: Varenummeret kan kun bestå af bogstaver, tal, bindestreger og understregninger.
-        name:
-            not_blank: Indtast produktnavn.
-            min_length: Produktnavnet skal være mindst ét tegn langt. |Produktnavnet skal være mindst {{ limit }} tegn langt.
-            max_length: Produktnavnet må ikke være længere end 1 tegn. |Produktnavn må ikke være længere end {{ limit }} tegn.
-    product_variant:
-        code:
-            not_blank: Angiv venligst koden.
-            within_product_unique: Denne kode skal være unik i dette produkt.
-    option:
-        name:
-            not_blank: Indtast egenskabens systemnavn.
-            min_length: Egenskabens systemnavn skal være mindst ét tegn langt.|Egenskabens systemnavn skal være mindst {{ limit }} tegn langt.
-            max_length: Egenskabens system navn må ikke være længere end 1 tegn.|Egenskabens system navn må ikke være længere end {{ limit }} tegn.
-        values:
-            min_count: Tilføj venligst mindst {{ limit }} egenskabsværdi. |Tilføj venligst mindst {{ limit }} egenskabsværdier.
-    option_value:
-        value:
-            not_blank: Angiv egenskabens værdi.
+  product:
+    sku:
+      not_blank: Angiv produkt SKU.
+      unique: Produkt SKU skal være unik.
+    slug:
+      not_blank: Venligst angiv produkt slug.
+    code:
+      not_blank: Venligst angiv varenummer.
+      regex: Varenummeret kan kun bestå af bogstaver, tal, bindestreger og understregninger.
+    name:
+      not_blank: Indtast produktnavn.
+      min_length: Produktnavnet skal være mindst ét tegn langt. |Produktnavnet skal være mindst {{ limit }} tegn langt.
+      max_length: Produktnavnet må ikke være længere end 1 tegn. |Produktnavn må ikke være længere end {{ limit }} tegn.
+  product_variant:
+    code:
+      not_blank: Angiv venligst koden.
+      within_product_unique: Denne kode skal være unik i dette produkt.
+  option:
+    name:
+      not_blank: Indtast egenskabens systemnavn.
+      min_length: Egenskabens systemnavn skal være mindst ét tegn langt.|Egenskabens systemnavn skal være mindst {{ limit }} tegn langt.
+      max_length: Egenskabens system navn må ikke være længere end 1 tegn.|Egenskabens system navn må ikke være længere end {{ limit }} tegn.
+    values:
+      min_count: Tilføj venligst mindst {{ limit }} egenskabsværdi. |Tilføj venligst mindst {{ limit }} egenskabsværdier.
+  option_value:
+    value:
+      not_blank: Angiv egenskabens værdi.

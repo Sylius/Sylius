@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        option:
-            values: Можни вредности
-        option_value:
-            add_value: Додај вредност
-            value: Вредност
+  form:
+    option:
+      values: Можни вредности

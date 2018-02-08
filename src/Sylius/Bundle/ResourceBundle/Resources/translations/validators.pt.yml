@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    resource:
-        not_enabled: "O recurso está desactivado"
-        not_disabled: "O recurso está desativado"
+  resource:
+    not_enabled: "O recurso fornecido está desativado"
+    not_disabled: "O recurso fornecido está ativado"

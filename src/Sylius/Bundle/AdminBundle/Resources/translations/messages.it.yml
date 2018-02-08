@@ -2,39 +2,29 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    menu:
-        admin:
-            main:
-                catalog:
-                    association_types: "Tipi di relazione\n"
-                    attributes: Attributi
-                    header: Catalogo
-                    inventory: Magazzino
-                    options: Opzioni
-                    products: Prodotti
-                    taxons: Generi
-                configuration:
-                    admin_users: Amministratori
-                    channels: Canali
-                    countries: Paesi
-                    currencies: Valute
-                    exchange_rates: Tassi di cambio
-                    header: Configurazione
-                    locales: Localizzazioni
-                    payment_methods: Metodi di pagamento
-                    shipping_categories: Categorie di spedizione
-                    shipping_methods: Metodi di spedizione
-                    tax_categories: Categorie di tassazione
-                    tax_rates: Aliquote fiscali
-                    zones: Zone
-                marketing:
-                    header: Marketing
-                    product_reviews: Recensioni del prodotto
-                    promotions: Promozioni
-                customers:
-                    customers: Clienti
-                    groups: Gruppi
-                    header: Cliente
-                sales:
-                    header: Vendite
-                    orders: Ordini
+  menu:
+    admin:
+      main:
+        catalog:
+          header: Catalogo
+          products: Prodotti
+          taxons: Generi
+        configuration:
+          admin_users: Amministratori
+          channels: Canali
+          exchange_rates: Tassi di cambio
+          payment_methods: Metodi di pagamento
+          shipping_categories: Categorie di spedizione
+          shipping_methods: Metodi di spedizione
+          tax_categories: Categorie di tassazione
+          tax_rates: Aliquote fiscali
+          zones: Zone
+        marketing:
+          header: Marketing
+          promotions: Promozioni
+        customers:
+          customers: Clienti
+          header: Cliente
+        sales:
+          header: Vendite
+          orders: Ordini

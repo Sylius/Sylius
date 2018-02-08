@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    review:
-        reject: 'O comentário foi rejeitado com sucesso.'
+  review:
+    reject: 'O comentário foi rejeitado com sucesso.'

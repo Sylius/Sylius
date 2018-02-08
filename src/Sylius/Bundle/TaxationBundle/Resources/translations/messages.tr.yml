@@ -2,13 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        tax_category:
-            name: Ad
-            description: Açıklama
-        tax_rate:
-            category: Kategori
-            name: Ad
-            amount: Miktar
-            included_in_price: Fiyata dahil edilsin mi?
-            calculator: Hesaplayıcı
+  form:
+    tax_rate:
+      included_in_price: Fiyata dahil edilsin mi?
+      calculator: Hesaplayıcı

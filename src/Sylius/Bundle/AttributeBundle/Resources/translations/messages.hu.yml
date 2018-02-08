@@ -2,35 +2,29 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        attribute:
-            add: Hozzáadás
-            add_attributes: Attribútum hozzáadása
-            choices: Választási lehetőségek
-            code: Kód
-            name: Név
-            translations: Fordítások
-            type: Típus
-        attribute_type:
-            checkbox: Jelölőnégyzet
-            configuration: Konfiguráció
-            date: Dátum
-            datetime: Dátum/idő
-            integer: Egész szám
-            percent: Százalék
-            select: Válassza ki
-            text: Szöveg
-            textarea: Szövegmező
-            title: Attribútum típusok
-            validation: Validálás
-        attribute_type_configuration:
-            datetime:
-                format: Formátum
-            date:
-                format: Formátum
-            select:
-                values: Értékek
-                choose: Válassz egy lehetőséget
-            text:
-                min: Minimális hossz
-                max: Maximális hossz
+  form:
+    attribute:
+      add: Hozzáadás
+      add_attributes: Attribútum hozzáadása
+      choices: Választási lehetőségek
+      translations: Fordítások
+    attribute_type:
+      checkbox: Jelölőnégyzet
+      date: Dátum
+      datetime: Dátum/idő
+      integer: Egész szám
+      percent: Százalék
+      text: Szöveg
+      textarea: Szövegmező
+      title: Attribútum típusok
+      validation: Validálás
+    attribute_type_configuration:
+      datetime:
+        format: Formátum
+      date:
+        format: Formátum
+      select:
+        choose: Válassz egy lehetőséget
+      text:
+        min: Minimális hossz
+        max: Maximális hossz

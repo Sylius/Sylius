@@ -2,11 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        taxon:
-            description: شرح
-            name: نام
-            parent: رده پدر
-            slug: حلزون
-        taxonomy:
-            name: نام
+  form:
+    taxon:
+      parent: رده پدر

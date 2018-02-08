@@ -2,22 +2,19 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        gateway_config:
-            type: Tipo
-        gateway_configuration:
-            paypal:
-                password: Contraseña de API
-                signature: Firma
-                username: Nombre de usuario de API
-                sandbox: Sandbox
-            stripe:
-                publishable_key: Llave pública
-                secret_key: Llave secreta
-    payum_gateway_factory:
-        offline: Desconectado
-        paypal_express_checkout: Pago con Paypal Express
-        stripe_checkout: Pago con Stripe
-    payum_action:
-        payment:
-            description: El pago contiene el artículo %items% para un total de %total% | El pago contiene los artículos %items% para un total de %total%
+  form:
+    gateway_configuration:
+      paypal:
+        password: Contraseña de API
+        signature: Firma
+        username: Nombre de usuario de API
+        sandbox: Sandbox
+      stripe:
+        publishable_key: Llave pública
+        secret_key: Llave secreta
+  payum_gateway_factory:
+    paypal_express_checkout: Pago con Paypal Express
+    stripe_checkout: Pago con Stripe
+  payum_action:
+    payment:
+      description: El pago contiene el artículo %items% para un total de %total% | El pago contiene los artículos %items% para un total de %total%

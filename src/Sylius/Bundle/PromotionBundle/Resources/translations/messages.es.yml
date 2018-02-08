@@ -2,64 +2,43 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        promotion:
-            actions: Acciones
-            add_action: Añadir acción
-            add_rule: Añadir regla
-            coupon_based: Basado en cupones
-            description: Descripción
-            ends_at: Termina el
-            exclusive: Exclusivo
-            name: Nombre
-            priority: Prioridad
-            rules: Reglas
-            starts_at: Empieza el
-            usage_limit: Límite de uso
-        promotion_action:
-            item_fixed_discount: Descuento fijo en producto
-            item_percentage_discount: Porcentaje descuento en producto
-            order_fixed_discount: Descuento fijo en pedido
-            order_percentage_discount: Porcentaje descuento en pedido
-            shipping_percentage_discount: Porcentaje descuento en gastos de envío
-            fixed_discount_configuration:
-                amount: Cantidad
-            percentage_discount_configuration:
-                percentage: Porcentaje
-            type: Tipo
-        promotion_coupon:
-            expires_at: Caduca el
-            usage_limit: Límite de uso
-        promotion_coupon_generator_instruction:
-            amount: Cantidad
-            code_length: Longitud del código
-            expires_at: Caduca el
-            usage_limit: Límite de uso
-        promotion_filter:
-            price_range: Filtro de rango de precio
-        promotion_rule:
-            cart_quantity: Cantidad productos en carrito
-            contains_product: Contiene el producto
-            customer_group: Grupo de clientes
-            has_at_least_one_from_taxons: Tiene al menos uno de los taxones
-            item_total: Total productos
-            nth_order: Pedido Nº
-            shipping_country: País origen
-            taxonomy: Taxonomía
-            total_price_of_items_from_taxon: Precio total en productos del taxón
-            cart_quantity_configuration:
-                count: Contador
-                equal: Igual
-            contains_product_configuration:
-                exclude: Excluir
-                variants: Productos
-            item_total_configuration:
-                amount: Cantidad
-            nth_order_configuration:
-                nth: Enésimo
-            shipping_country_configuration:
-                country: País
-            taxonomy_configuration:
-                exclude: Excluir
-                taxons: Taxones
-            type: Tipo
+  form:
+    promotion:
+      actions: Acciones
+      add_action: Añadir acción
+      add_rule: Añadir regla
+      coupon_based: Basado en cupones
+      description: Descripción
+      ends_at: Termina el
+      exclusive: Exclusivo
+      name: Nombre
+      rules: Reglas
+      starts_at: Empieza el
+      usage_limit: Límite de uso
+    promotion_action:
+      item_fixed_discount: Descuento fijo en producto
+      item_percentage_discount: Porcentaje descuento en producto
+      order_fixed_discount: Descuento fijo en pedido
+      order_percentage_discount: Porcentaje descuento en pedido
+      shipping_percentage_discount: Porcentaje descuento en gastos de envío
+      percentage_discount_configuration:
+        percentage: Porcentaje
+    promotion_coupon:
+      expires_at: Caduca el
+    promotion_coupon_generator_instruction:
+      code_length: Longitud del código
+      expires_at: Caduca el
+    promotion_filter:
+      price_range: Filtro de rango de precio
+    promotion_rule:
+      cart_quantity: Cantidad productos en carrito
+      contains_product: Contiene el producto
+      has_at_least_one_from_taxons: Tiene al menos uno de los taxones
+      item_total: Total productos
+      nth_order: Pedido Nº
+      shipping_country: País origen
+      total_price_of_items_from_taxon: Precio total en productos del taxón
+      contains_product_configuration:
+        exclude: Excluir
+      nth_order_configuration:
+        nth: Enésimo
