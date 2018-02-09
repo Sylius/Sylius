@@ -1,5 +1,17 @@
 ## CHANGELOG
 
+### v1.0.10 2018-02-09
+
+- [#9166](https://github.com/Sylius/Sylius/pull/9166) Add required parameters to the Route generation (@GitProdEnv)
+- [#9164](https://github.com/Sylius/Sylius/pull/9164) Sylius.org becomes sylius.com (@pamil)
+- [#9169](https://github.com/Sylius/Sylius/pull/9169) Allow for using Doctrine ORM >=2.6 (@pamil)
+- [#9162](https://github.com/Sylius/Sylius/pull/9162) Update all occurrences of .dev to .test (@jackbentley)
+- [#9161](https://github.com/Sylius/Sylius/pull/9161) Make images removal tests great again (@pamil)
+- [#9157](https://github.com/Sylius/Sylius/pull/9157) Make Travis tests more reliable (@pamil)
+- [#9153](https://github.com/Sylius/Sylius/pull/9153) Semantic fixes in SyliusTaxonomyBundle docs (@Zales0123)
+- [#9149](https://github.com/Sylius/Sylius/pull/9149) Fix typo in UPGRADE file (@alcaeus)
+- [#9147](https://github.com/Sylius/Sylius/pull/9147) Remove pre-1.0 changelog entries (@pamil)
+
 ### v1.0.9 2018-02-02
 
 - [#9144](https://github.com/Sylius/Sylius/pull/9144) Remove RFC label from stalebot's whitelist (@pamil)
