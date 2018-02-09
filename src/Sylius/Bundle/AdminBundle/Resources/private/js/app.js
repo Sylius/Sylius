@@ -73,5 +73,11 @@
 
         $(document).previewUploadedImage('#sylius_product_images');
         $(document).previewUploadedImage('#sylius_taxon_images');
+
+        $('body').on('DOMNodeInserted', '[data-form-collection="item"]', function() {
+            if ($(this).find('.accordion').length > 0) {
+                $(this).find('.accordion').accordion();
+            }
+        });
     });
 })(jQuery);
