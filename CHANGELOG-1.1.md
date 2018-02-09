@@ -1,5 +1,11 @@
 ## CHANGELOG
 
+### v1.1.0 2018-02-09
+
+- [#9165](https://github.com/Sylius/Sylius/pull/9165) Make accordion in select attribute values great again (@Zales0123)
+- [#9163](https://github.com/Sylius/Sylius/pull/9163) Product reviews API semantic fix (@Zales0123)
+- [#9158](https://github.com/Sylius/Sylius/pull/9158) Update KnpGaufretteBundle to ^0.5 (@pamil)
+
 ### v1.1.0-RC 2018-02-02
 
 - [#9129](https://github.com/Sylius/Sylius/pull/9129) Add symfony/thanks Composer plugin (@pamil)
