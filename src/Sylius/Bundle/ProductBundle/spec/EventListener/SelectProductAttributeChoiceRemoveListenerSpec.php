@@ -17,8 +17,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\UnitOfWork;
 use Mockery;
-use Mockery\Generator\Generator;
-use Mockery\Generator\MockConfiguration;
 use Mockery\Mock;
 use Mockery\MockInterface;
 use PhpSpec\ObjectBehavior;

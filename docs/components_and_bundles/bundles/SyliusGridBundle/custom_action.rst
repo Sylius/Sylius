@@ -11,7 +11,7 @@ In the template we will specify the button's icon to be ``mail`` and its colour 
 
     {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
 
-    {% set path = options.link.url|default(path(options.link.route)) %}
+    {% set path = options.link.url|default(path(options.link.route, options.link.parameters)) %}
 
     {{ buttons.default(path, action.label, null, 'mail', 'purple') }}
 
