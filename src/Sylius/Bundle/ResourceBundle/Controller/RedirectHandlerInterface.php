@@ -36,12 +36,13 @@ interface RedirectHandlerInterface
 
     /**
      * @param RequestConfiguration $configuration
-     * @param string               $route
-     * @param array                $parameters
+     * @param string $route
+     * @param array $parameters
+     * @param ResourceInterface|null $resource
      *
      * @return Response
      */
-    public function redirectToRoute(RequestConfiguration $configuration, string $route, array $parameters = []): Response;
+    public function redirectToRoute(RequestConfiguration $configuration, string $route, array $parameters = [], ?ResourceInterface $resource = null): Response;
 
     /**
      * @param RequestConfiguration $configuration

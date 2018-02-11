@@ -125,4 +125,36 @@ final class RedirectHandlerSpec extends ObjectBehavior
 
         $this->redirect($configuration, 'http://myurl.com')->shouldHaveType(Response::class);
     }
+
+    function it_redirects_from_resource_field(RequestConfiguration $configuration): void
+    {
+        $this
+            ->redirectToRoute($configuration, 'resource.returnUrl', [], $this->getResourceWithReturnUrl())
+            ->shouldHaveType(RedirectResponse::class)
+        ;
+    }
+
+    function it_will_throw_when_resource_field_is_empty(RequestConfiguration $configuration): void
+    {
+        $this
+            ->shouldThrow(RouteNotFoundException::class)
+            ->duringRedirectToRoute($configuration, 'resource.returnUrl', [], $this->getResourceWithEmptyReturnUrl())
+        ;
+    }
+
+    private function getResourceWithReturnUrl()
+    {
+        return new class implements ResourceInterface {
+            public function getId() { return 1; }
+            public function getReturnUrl() { return 'http://myurl.com'; }
+        };
+    }
+
+    private function getResourceWithEmptyReturnUrl()
+    {
+        return new class implements ResourceInterface {
+            public function getId() { return 1; }
+            public function getReturnUrl() { return null; }
+        };
+    }
 }

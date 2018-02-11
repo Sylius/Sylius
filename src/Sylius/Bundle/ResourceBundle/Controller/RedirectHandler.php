@@ -17,6 +17,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -44,7 +45,8 @@ final class RedirectHandler implements RedirectHandlerInterface
             return $this->redirectToRoute(
                 $configuration,
                 $configuration->getRedirectRoute(ResourceActions::SHOW),
-                $configuration->getRedirectParameters($resource)
+                $configuration->getRedirectParameters($resource),
+                $resource
             );
         } catch (RouteNotFoundException $exception) {
             return $this->redirectToRoute(
@@ -63,20 +65,32 @@ final class RedirectHandler implements RedirectHandlerInterface
         return $this->redirectToRoute(
             $configuration,
             $configuration->getRedirectRoute('index'),
-            $configuration->getRedirectParameters($resource)
+            $configuration->getRedirectParameters($resource),
+            $resource
         );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function redirectToRoute(RequestConfiguration $configuration, string $route, array $parameters = []): Response
+    public function redirectToRoute(RequestConfiguration $configuration, string $route, array $parameters = [], ?ResourceInterface $resource = null): Response
     {
         if ('referer' === $route) {
             return $this->redirectToReferer($configuration);
         }
 
-        return $this->redirect($configuration, $this->router->generate($route, $parameters));
+        if (null !== $resource && 0 === strpos($route, 'resource.')) {
+            $accessor = PropertyAccess::createPropertyAccessor();
+            $url = $accessor->getValue($resource, substr($route, 9));
+
+            if (!$url) {
+                throw new RouteNotFoundException("Not found route named '$route'.");
+            }
+        } else {
+            $url = $this->router->generate($route, $parameters);
+        }
+
+        return $this->redirect($configuration, $url);
     }
 
     /**
