@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "70ec0a929f8849f71fc0ce3ba00d831d",
+    "content-hash": "a450b9aa540188ee7edeaba23c0c39ca",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -7219,28 +7219,27 @@
         },
         {
             "name": "friends-of-behat/context-service-extension",
-            "version": "v1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfBehat/ContextServiceExtension.git",
-                "reference": "0506143eca6c24010ce92f97e1d643f8bfbbc0c0"
+                "reference": "52a19fae67cc1ada4f4b566830bf03431d7fa01e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfBehat/ContextServiceExtension/zipball/0506143eca6c24010ce92f97e1d643f8bfbbc0c0",
-                "reference": "0506143eca6c24010ce92f97e1d643f8bfbbc0c0",
+                "url": "https://api.github.com/repos/FriendsOfBehat/ContextServiceExtension/zipball/52a19fae67cc1ada4f4b566830bf03431d7fa01e",
+                "reference": "52a19fae67cc1ada4f4b566830bf03431d7fa01e",
                 "shasum": ""
             },
             "require": {
                 "behat/behat": "^3.1",
                 "php": "^7.1",
-                "symfony/dependency-injection": "^3.0"
+                "symfony/dependency-injection": "^3.3|^4.0"
             },
             "require-dev": {
                 "friends-of-behat/cross-container-extension": "^1.0",
                 "friends-of-behat/test-context": "^1.0",
-                "phpspec/phpspec": "^4.0",
-                "sylius-labs/coding-standard": "^1.0"
+                "phpspec/phpspec": "^4.0"
             },
             "suggest": {
                 "friends-of-behat/cross-container-extension": "^1.0",
@@ -7265,35 +7264,35 @@
                 }
             ],
             "description": "Allows to declare and use contexts services in scenario scoped container.",
-            "time": "2017-12-22T18:26:08+00:00"
+            "time": "2018-02-13T18:49:22+00:00"
         },
         {
             "name": "friends-of-behat/cross-container-extension",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfBehat/CrossContainerExtension.git",
-                "reference": "67ec9bc2eab613c56ac1a97f80fafbdcc5cac152"
+                "reference": "97c376c450c46d2af7d440464f490b914da0dc89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfBehat/CrossContainerExtension/zipball/67ec9bc2eab613c56ac1a97f80fafbdcc5cac152",
-                "reference": "67ec9bc2eab613c56ac1a97f80fafbdcc5cac152",
+                "url": "https://api.github.com/repos/FriendsOfBehat/CrossContainerExtension/zipball/97c376c450c46d2af7d440464f490b914da0dc89",
+                "reference": "97c376c450c46d2af7d440464f490b914da0dc89",
                 "shasum": ""
             },
             "require": {
                 "behat/behat": "^3.1",
                 "php": "^7.1",
-                "symfony/dependency-injection": "^2.8|^3.0"
+                "symfony/dependency-injection": "^3.3|^4.0"
             },
             "require-dev": {
                 "friends-of-behat/test-context": "^1.0",
-                "phpspec/phpspec": "^4.0@alpha",
-                "phpunit/phpunit": "^5.7.13|^6.0",
-                "symfony/http-kernel": "^2.8|^3.0"
+                "phpspec/phpspec": "^4.0",
+                "phpunit/phpunit": "^6.0",
+                "symfony/http-kernel": "^3.3|^4.0"
             },
             "suggest": {
-                "symfony/http-kernel": "^2.8|^3.0"
+                "symfony/http-kernel": "^3.3|^4.0"
             },
             "type": "library",
             "autoload": {
@@ -7313,20 +7312,20 @@
                 }
             ],
             "description": "Makes possible to inject services and parameters from other containers.",
-            "time": "2017-12-04T17:23:54+00:00"
+            "time": "2018-02-13T17:55:39+00:00"
         },
         {
             "name": "friends-of-behat/service-container-extension",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfBehat/ServiceContainerExtension.git",
-                "reference": "016d600fc99f1fc237503aa05e3b22ccad032b31"
+                "reference": "5c8ab1bc3e45a37e01da8601aa2aa3a547981586"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfBehat/ServiceContainerExtension/zipball/016d600fc99f1fc237503aa05e3b22ccad032b31",
-                "reference": "016d600fc99f1fc237503aa05e3b22ccad032b31",
+                "url": "https://api.github.com/repos/FriendsOfBehat/ServiceContainerExtension/zipball/5c8ab1bc3e45a37e01da8601aa2aa3a547981586",
+                "reference": "5c8ab1bc3e45a37e01da8601aa2aa3a547981586",
                 "shasum": ""
             },
             "require": {
@@ -7335,8 +7334,7 @@
             },
             "require-dev": {
                 "friends-of-behat/cross-container-extension": "^1.0",
-                "friends-of-behat/test-context": "^1.0",
-                "symfony/process": "^2.7|^3.0"
+                "friends-of-behat/test-context": "^1.0"
             },
             "suggest": {
                 "friends-of-behat/cross-container-extension": "^1.0"
@@ -7359,26 +7357,26 @@
                 }
             ],
             "description": "Allows to declare own services inside Behat container without writing an extension.",
-            "time": "2017-07-10T21:46:01+00:00"
+            "time": "2018-02-13T17:50:03+00:00"
         },
         {
             "name": "friends-of-behat/symfony-extension",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfBehat/SymfonyExtension.git",
-                "reference": "5e05e35c20204353e05680b8694d29d3ed637d33"
+                "reference": "61b77f09ba4d8c684f4432c8b2e278b980f3f06b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfBehat/SymfonyExtension/zipball/5e05e35c20204353e05680b8694d29d3ed637d33",
-                "reference": "5e05e35c20204353e05680b8694d29d3ed637d33",
+                "url": "https://api.github.com/repos/FriendsOfBehat/SymfonyExtension/zipball/61b77f09ba4d8c684f4432c8b2e278b980f3f06b",
+                "reference": "61b77f09ba4d8c684f4432c8b2e278b980f3f06b",
                 "shasum": ""
             },
             "require": {
                 "behat/behat": "^3.1",
                 "php": "^7.1",
-                "symfony/http-kernel": "^2.7|^3.0"
+                "symfony/http-kernel": "^3.3|^4.0"
             },
             "require-dev": {
                 "behat/mink": "^1.7",
@@ -7386,7 +7384,7 @@
                 "behat/mink-extension": "^2.2",
                 "friends-of-behat/cross-container-extension": "^1.0",
                 "friends-of-behat/test-context": "^1.0",
-                "symfony/framework-bundle": "^2.7|^3.0"
+                "symfony/framework-bundle": "^3.3|^4.0"
             },
             "suggest": {
                 "behat/mink-browserkit-driver": "^1.3",
@@ -7409,27 +7407,27 @@
                     "homepage": "http://kamil.kokot.me"
                 }
             ],
-            "description": "Integrates Behat with Symfony (both 2 and 3).",
-            "time": "2017-07-10T21:45:28+00:00"
+            "description": "Integrates Behat with Symfony.",
+            "time": "2018-02-13T18:08:15+00:00"
         },
         {
             "name": "friends-of-behat/variadic-extension",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfBehat/VariadicExtension.git",
-                "reference": "ba3964027fef9a4c77c57693ac22bd67eb6b22e2"
+                "reference": "6513d8f61c3483c65ec3292d7c80027946b4708c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfBehat/VariadicExtension/zipball/ba3964027fef9a4c77c57693ac22bd67eb6b22e2",
-                "reference": "ba3964027fef9a4c77c57693ac22bd67eb6b22e2",
+                "url": "https://api.github.com/repos/FriendsOfBehat/VariadicExtension/zipball/6513d8f61c3483c65ec3292d7c80027946b4708c",
+                "reference": "6513d8f61c3483c65ec3292d7c80027946b4708c",
                 "shasum": ""
             },
             "require": {
                 "behat/behat": "^3.1",
                 "php": "^7.1",
-                "symfony/dependency-injection": "^2.8|^3.0"
+                "symfony/dependency-injection": "^3.2|^4.0"
             },
             "require-dev": {
                 "friends-of-behat/test-context": "^1.0"
@@ -7451,7 +7449,7 @@
                 }
             ],
             "description": "Variadic support for behat context arguments",
-            "time": "2017-07-10T20:43:33+00:00"
+            "time": "2018-02-13T17:40:06+00:00"
         },
         {
             "name": "friendsofphp/php-cs-fixer",
