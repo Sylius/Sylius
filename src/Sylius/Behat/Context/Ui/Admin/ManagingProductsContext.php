@@ -41,7 +41,7 @@ final class ManagingProductsContext implements Context
      */
     private $sharedStorage;
 
-    /**x
+    /**
      * @var CreateSimpleProductPageInterface
      */
     private $createSimpleProductPage;
