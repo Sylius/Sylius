@@ -18,11 +18,11 @@ sylius:
             channels: Каналы
         promotion_action:
             add_product_configuration:
-                product: Товар
+                product: Продукт
         promotion_coupon:
             per_customer_usage_limit: Лимит использования на клиента
         group:
-            name: Название
+            name: Округ
             roles: Роли
         channel:
             contact_email: Контактный email
@@ -67,7 +67,7 @@ sylius:
             channels: Каналы
             enabled: Активен
         product_filter:
-            name: Название
+            name: Округ
             code: Код
         product_variant:
             tax_category: Категория налогов
@@ -123,7 +123,7 @@ sylius:
             product: Связанные продукты
             type: Типы взаимосвязи
         product_association_type:
-            name: Название
+            name: Округ
         promotion_filter:
             products: Фильтр товаров
             taxons: Фильтр таксонов
@@ -136,7 +136,7 @@ sylius:
                 products: Товары
             total_of_items_from_taxon:
                 taxon: Налог
-                amount: Сумма
+                amount: Количество
         payment_method:
             channels: Каналы
         product_attribute:

@@ -19,6 +19,9 @@ sylius:
             min_length: CVV kod kreditne kartice ne može imati više od {{ limit }} znamenke.
         expiry_year:
             not_blank: Odaberite godinu isteka valjanosti kartice.
+    payment:
+        currency_code:
+            not_valid: Kod valute koji ste unjeli nije ispravan.
     payment_method:
         gateway:
             not_blank: Odaberite način plaćanja.

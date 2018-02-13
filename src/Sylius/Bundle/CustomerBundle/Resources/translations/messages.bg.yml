@@ -11,7 +11,7 @@ sylius:
             phone_number: Телефонен номер
             gender: Пол
             birthday: Рожден ден
-            billing_address: Адрес за фактуриране
+            billing_address: Адрес на плащане
             different_billing_address: Използвайте различен адрес за фактуриране?
             only_customer_registration: Създаване на профил?
             subscribed_to_newsletter: Абонирайте се за бюлетин
@@ -19,6 +19,6 @@ sylius:
             name: Име
             roles: Роли
     gender:
-        unknown: Неизвестен
+        unknown: Неизвестно
         male: Мъжки
         female: Женски

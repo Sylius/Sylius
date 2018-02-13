@@ -29,3 +29,4 @@ sylius:
             description: Апісанне
             enabled: Уключана?
             name: Назва
+            position: Пазіцыя

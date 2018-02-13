@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        currency_code:
+            not_valid: Valutakoden du angav är ogiltig.

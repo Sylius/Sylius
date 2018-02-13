@@ -12,7 +12,7 @@ sylius:
                     inventory: Magazzino
                     options: Opzioni
                     products: Prodotti
-                    taxons: Generi
+                    taxons: Taxons
                 configuration:
                     admin_users: Amministratori
                     channels: Canali
@@ -22,8 +22,8 @@ sylius:
                     header: Configurazione
                     locales: Localizzazioni
                     payment_methods: Metodi di pagamento
-                    shipping_categories: Categorie di spedizione
-                    shipping_methods: Metodi di spedizione
+                    shipping_categories: Categorie spedizioni
+                    shipping_methods: Metodo di spedizione
                     tax_categories: Categorie di tassazione
                     tax_rates: Aliquote fiscali
                     zones: Zone

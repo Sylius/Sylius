@@ -17,7 +17,7 @@ sylius:
             not_blank: Bitte Preis eingeben.
     checkout:
         shipping_method:
-            not_blank: Bitte wählen Sie eine Versandart aus.
+            not_blank: Bitte wählen Sie die Versandart.
     contact:
         email:
             invalid: Diese E-Mail Adresse ist ungültig.

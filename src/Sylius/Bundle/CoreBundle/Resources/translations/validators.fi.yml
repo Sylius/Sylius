@@ -10,6 +10,8 @@ sylius:
         email:
             invalid: Sähköpostiosoite ei kelpaa.
             not_blank: Kirjoita sähköpostiosoitteesi.
+        message:
+            not_blank: Kirjoita viesti.
     customer:
         currency_code:
             not_valid: Ilmoittamasi valuuttakoodi ei kelpaa.

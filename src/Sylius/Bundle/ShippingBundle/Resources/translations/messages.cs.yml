@@ -21,10 +21,10 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Paušální sazba za zásilku
-                amount: Množství
+                amount: Částka
             per_unit_rate_configuration:
                 label: Paušální sazba za položku
-                amount: Množství
+                amount: Částka
         shipping_category:
             description: Popis
             name: Jméno

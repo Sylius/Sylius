@@ -4,6 +4,7 @@
 sylius:
     form:
         attribute:
+            name: 이름
             type: 타입
         attribute_type:
             select: 선택하기

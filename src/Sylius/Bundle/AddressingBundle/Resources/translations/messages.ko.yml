@@ -11,6 +11,7 @@ sylius:
             last_name: 성
             phone_number: 전화번호
             postcode: 우편번호
+            zone: 영역
         country:
             add_province: 시 또는 구 또는 군 추가
             name: 이름

@@ -45,7 +45,7 @@ sylius:
             file: Imagen
         locale:
             code: Código
-            enabled: Activado
+            enabled: '¿Activado?'
         order_filter:
             created_at_from: Creado después de
             created_at_to: Creado antes de
@@ -65,7 +65,7 @@ sylius:
             variant_selection_method: Método de selección variante
             main_taxon: Taxón principal
             channels: Canales
-            enabled: Activado
+            enabled: '¿Activado?'
         product_filter:
             name: Nombre
             code: Código
@@ -95,12 +95,12 @@ sylius:
         user:
             billing_address: Dirección de facturación
             different_billing_address: '¿Usar una dirección diferente para la facturación?'
-            enabled: Activado
+            enabled: '¿Activado?'
             first_name: Nombre
             groups: Grupos
             roles: Roles
             last_name: Apellidos
-            password: Contraseña
+            password: Contraseña de API
             shipping_address: Dirección de envío
         user_filter:
             query: Búsqueda

@@ -16,7 +16,7 @@ sylius:
             only_customer_registration: Creez cont?
             subscribed_to_newsletter: Abonează-te la newsletter
         customer_group:
-            name: Nume
+            name: Nume produs
             roles: Roluri
     gender:
         unknown: Necunoscută

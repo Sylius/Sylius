@@ -10,7 +10,7 @@ sylius:
             first_name: Імя
             last_name: Прозвішча
             phone_number: Нумар тэлефону
-            postcode: Індэкс
+            postcode: Паштовы код
             street: Вуліца і нумар дома
             province: Вобласць (рэгіён)
             zone: Зона
@@ -21,13 +21,13 @@ sylius:
             select: Выбярыце
             enabled: Уключана
         province:
-            name: Імя
+            name: Назва
             abbreviation: Абрэвіятура вобласці (рэгіёну)
-            select: Выберыце
+            select: Выбярыце
         zone:
             add_member: Дадаць удзельніка
             members: Удзельнікі
-            name: Імя
+            name: Назва
             type: Тып
             types:
                 country: Краіна

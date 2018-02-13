@@ -4,6 +4,7 @@
 sylius:
     form:
         promotion:
+            description: 説明
             name: 名稱
         promotion_action:
             fixed_discount_configuration:

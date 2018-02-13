@@ -12,11 +12,11 @@ sylius:
             phone_number: Контактный телефон
             postcode: Индекс
             street: Улица
-            province: Район
+            province: Область
             zone: Зона
         country:
             add_province: Добавить регион
-            name: Страна
+            name: Округ
             provinces: Области
             select: Выбрать
             enabled: Активен
@@ -27,7 +27,7 @@ sylius:
         zone:
             add_member: Добавить
             members: Области
-            name: Название
+            name: Округ
             type: Тип
             types:
                 country: Страна

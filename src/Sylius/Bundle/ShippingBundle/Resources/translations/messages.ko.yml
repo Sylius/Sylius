@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        shipping_category:
+            name: 이름
+        shipping_method:
+            enabled: 사용
+            name: 이름

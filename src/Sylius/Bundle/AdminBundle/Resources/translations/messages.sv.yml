@@ -6,7 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: Associationstyper
+                    association_types: Associationstyp
                     attributes: Attribut
                     header: Katalog
                     inventory: Lager
@@ -34,7 +34,7 @@ sylius:
                 customers:
                     customers: Kunder
                     groups: Grupper
-                    header: Kunder
+                    header: Kund
                 sales:
                     header: Försäljning
                     orders: Beställningar

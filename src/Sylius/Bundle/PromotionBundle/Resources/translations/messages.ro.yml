@@ -11,7 +11,7 @@ sylius:
             description: Descriere
             ends_at: Se termină la
             exclusive: Exclusiv
-            name: Nume
+            name: Nume produs
             priority: Prioritate
             rules: Reguli
             starts_at: Începe la
@@ -23,7 +23,7 @@ sylius:
             order_percentage_discount: Discount procentual pe comandă
             shipping_percentage_discount: Discount procentual pe costul de livrare
             fixed_discount_configuration:
-                amount: Sumă
+                amount: Valoare
             percentage_discount_configuration:
                 percentage: Procent
             type: Tip
@@ -31,7 +31,7 @@ sylius:
             expires_at: Expiră la
             usage_limit: Limita de utilizare
         promotion_coupon_generator_instruction:
-            amount: Sumă
+            amount: Valoare
             code_length: Lungimea codului
             expires_at: Expiră la
             usage_limit: Limita de utilizare
@@ -54,7 +54,7 @@ sylius:
                 exclude: Exclude
                 variants: Produse
             item_total_configuration:
-                amount: Sumă
+                amount: Valoare
             nth_order_configuration:
                 nth: Al n-lea
             shipping_country_configuration:

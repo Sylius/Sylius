@@ -6,7 +6,7 @@ sylius:
         taxon:
             description: Описание
             name: Име
-            parent: Родител
+            parent: Източник
             slug: Слъг
         taxonomy:
             name: Име

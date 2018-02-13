@@ -18,7 +18,7 @@ sylius:
             usage_limit: Обмеження використання
         promotion_action:
             fixed_discount_configuration:
-                amount: Сума
+                amount: Обсяг
             percentage_discount_configuration:
                 percentage: Відсоток
             type: Тип
@@ -26,7 +26,7 @@ sylius:
             expires_at: Дійсний до
             usage_limit: Обмеження використання
         promotion_coupon_generator_instruction:
-            amount: Сума
+            amount: Обсяг
             code_length: Довжина коду
             expires_at: Дійсний до
             usage_limit: Обмеження використання
@@ -42,7 +42,7 @@ sylius:
                 exclude: Виключити
                 variants: Продукція
             item_total_configuration:
-                amount: Сума
+                amount: Обсяг
             nth_order_configuration:
                 nth: Кількість
             shipping_country_configuration:

@@ -5,6 +5,9 @@ sylius:
     form:
         review:
             author: Autor
+            comment: Komentar
+            rating: Ocjena
             status:
+                label: Status
                 new: Novo
             title: Naslov

@@ -6,7 +6,7 @@ sylius:
         currency:
             base: Waluta podstawowa
             code: Nazwa
-            enabled: Aktywne
+            enabled: Dostępny
             exchange_rate: Kurs wymiany
         exchange_rate:
             source_currency: Waluta źródłowa

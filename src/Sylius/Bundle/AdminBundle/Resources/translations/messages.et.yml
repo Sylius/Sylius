@@ -6,5 +6,6 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: Kanalid
                     currencies: Valuutad
                     locales: Keeled

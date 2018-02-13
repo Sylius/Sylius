@@ -11,7 +11,7 @@ sylius:
         shipment:
             state: Stato
             states:
-                checkout: Vai alla cassa
+                checkout: Checkout
                 pending: In attesa
                 ready: Pronto
                 shipped: Spedito
@@ -27,7 +27,7 @@ sylius:
                 amount: Importo
         shipping_category:
             description: Descrizione
-            name: Nome
+            name: "Nome\n"
         shipping_method:
             calculator: Calcolatore
             category: Categoria
@@ -36,7 +36,7 @@ sylius:
             configuration: Configurazione
             description: Descrizione
             enabled: Abilitato
-            name: Nome
+            name: "Nome\n"
             position: Posizione
             tax_category: Categoria fiscale
             translations: Traduzioni

@@ -5,4 +5,7 @@ sylius:
     form:
         user:
             enabled: 啓用
+            password:
+                label: 密碼
+            remember_me: 記住我
             username: 使用者名稱

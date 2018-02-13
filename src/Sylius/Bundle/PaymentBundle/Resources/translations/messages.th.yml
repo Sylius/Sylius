@@ -30,5 +30,5 @@ sylius:
             description: คำอธิบาย
             enabled: เปิดใช้งานแล้ว?
             instructions: คำแนะนำ
-            name: ชื่อ
+            name: ชื่อภาษา
             position: ตำแหน่ง
