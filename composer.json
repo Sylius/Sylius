@@ -92,7 +92,6 @@
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.0",
         "stripe/stripe-php": "^4.1",
-        "symplify/easy-coding-standard": "^2.4",
         "sylius-labs/coding-standard": "^1.0"
     },
     "replace": {

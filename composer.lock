@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "35e094f7a23d584e14e9579e18fc764e",
+    "content-hash": "e4a9776142bac01a8f7efec407bf8405",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -10440,21 +10440,21 @@
         },
         {
             "name": "sylius-labs/coding-standard",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SyliusLabs/CodingStandard.git",
-                "reference": "e50212b2be8f1e5984c69b9bdf205b32daa06688"
+                "reference": "3458f1267eb7420bf55a20a17da342308d028711"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SyliusLabs/CodingStandard/zipball/e50212b2be8f1e5984c69b9bdf205b32daa06688",
-                "reference": "e50212b2be8f1e5984c69b9bdf205b32daa06688",
+                "url": "https://api.github.com/repos/SyliusLabs/CodingStandard/zipball/3458f1267eb7420bf55a20a17da342308d028711",
+                "reference": "3458f1267eb7420bf55a20a17da342308d028711",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1",
-                "symplify/easy-coding-standard": "^2.4"
+                "symplify/easy-coding-standard": "^2.5|^3.2"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -10469,7 +10469,7 @@
                 }
             ],
             "description": "Battle-tested coding standard configuration used in Sylius.",
-            "time": "2017-09-27T14:33:43+00:00"
+            "time": "2018-02-13T19:17:05+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
