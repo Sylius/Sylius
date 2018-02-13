@@ -8,8 +8,10 @@ sylius:
                 catalog:
                     attributes: מאפיינים
                     options: אפשרויות
+                    products: מוצרים
                     taxons: קבוצות טקסונומיות
                 configuration:
+                    channels: ערוצים
                     currencies: מטבעות
                 customers:
                     groups: קבוצות

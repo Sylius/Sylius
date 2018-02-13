@@ -45,7 +45,7 @@ sylius:
             file: Зображення
         locale:
             code: Код
-            enabled: Увімкнено
+            enabled: Ввімкнено
         order_filter:
             created_at_from: Створені після
             created_at_to: Створений перед
@@ -57,7 +57,7 @@ sylius:
         page:
             body: Тіло
             id: ID
-            title: Назва
+            title: Заголовок
         product:
             images: Зображення
             restricted_zone: Заборонена зона
@@ -65,9 +65,9 @@ sylius:
             variant_selection_method: Метод вибору варіанту
             main_taxon: Основний таксон
             channels: Канали
-            enabled: Увімкнено
+            enabled: Ввімкнено
         product_filter:
-            name: Ім’я
+            name: Назва
             code: Код
         product_variant:
             tax_category: Категорія податку
@@ -94,8 +94,8 @@ sylius:
             file: Вибрати зображення
         user:
             billing_address: Адреса для рахунків
-            different_billing_address: Використати іншу адресу для рахунків?
-            enabled: Увімкнено
+            different_billing_address: Використати іншу адресу для виставлення рахунків?
+            enabled: Ввімкнено
             first_name: Iм'я
             groups: Групи
             roles: Ролі

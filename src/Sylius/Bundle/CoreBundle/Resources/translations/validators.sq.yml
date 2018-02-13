@@ -5,6 +5,11 @@ sylius:
     channel:
         contact_email:
             invalid: Ky email nuk është i vlefshëm.
+            max: Email nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
+            min: Email duhet të përmbajë të paktën {{ limit }} karaktere.
+    channel_pricing:
+        price:
+            not_blank: Shkruaj çmimin.
     checkout:
         shipping_method:
             not_blank: Zgjidh mënyrën e dërgesës.
@@ -12,6 +17,8 @@ sylius:
         email:
             invalid: Ky email nuk është i vlefshëm.
             not_blank: Shkruaj adresën e email-it.
+        message:
+            not_blank: Shkruaj mesazhin tënd.
     locale:
         code:
             not_blank: Shkruaj kodin lokal.
@@ -27,4 +34,5 @@ sylius:
             max: Përshkrimi i shkurtër nuk duhet të përmbajë më shumë se {{ limit }} karaktere.
     user:
         email:
+            unique: Ky email është përdorur tashmë.
             invalid: Ky email nuk është i vlefshëm.

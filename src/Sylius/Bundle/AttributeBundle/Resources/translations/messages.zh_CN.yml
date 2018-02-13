@@ -13,7 +13,7 @@ sylius:
             type: 类型
         attribute_type:
             checkbox: 复选框
-            configuration: 设置
+            configuration: 配置：
             date: 日期
             datetime: 日期
             integer: 整数

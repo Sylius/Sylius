@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payment:
+        cancelled: 'Plačilo je bilo preklicano.'
+        completed: 'Plačilo je zaključeno.'

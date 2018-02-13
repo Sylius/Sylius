@@ -4,19 +4,22 @@
 sylius:
     form:
         product:
-            name: Naziv grupe
+            name: Naziv regije
             description: Opis
+            attributes: Značajke proizvoda
             options: Opcije
             meta_keywords: Ključne riječi (Meta Keywords)
             meta_description: Opis (Meta Description)
+            taxons: Taksoni
         product_variant:
-            name: Naziv grupe
+            name: Naziv regije
         association_type:
-            name: Naziv grupe
+            name: Naziv regije
+            translations: Prijevodi
         variant:
-            name: Naziv grupe
+            name: Naziv regije
         option:
-            name: Naziv grupe
+            name: Naziv regije
             values: Moguće vrijednosti
         option_value:
             add_value: Dodaj vrijednost

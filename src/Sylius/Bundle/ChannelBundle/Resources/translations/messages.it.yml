@@ -7,5 +7,5 @@ sylius:
             color: Colore
             description: Descrizione
             enabled: Abilitato
-            name: Nome
+            name: "Nome\n"
             url: URL

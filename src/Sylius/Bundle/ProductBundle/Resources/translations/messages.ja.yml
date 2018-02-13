@@ -4,6 +4,16 @@
 sylius:
     form:
         product:
+            name: ゾーン名
+            description: 説明
             options: sylius.breadcrumb.option.index
             meta_keywords: Metaタグ(keywords)
             meta_description: metaタグ(description)
+        product_variant:
+            name: ゾーン名
+        association_type:
+            name: ゾーン名
+        variant:
+            name: ゾーン名
+        option:
+            name: ゾーン名

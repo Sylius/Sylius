@@ -10,6 +10,7 @@ sylius:
             options: Beállítások
             meta_keywords: Meta kulcsszavak
             meta_description: Meta leírás
+            taxons: Taxonok
         product_variant:
             name: Név
         association_type:

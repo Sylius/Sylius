@@ -9,6 +9,6 @@ sylius:
         tax_rate:
             category: Categorie
             name: Naam
-            amount: Hoeveelheid
+            amount: Bedrag
             included_in_price: Inbegrepen in de prijs?
             calculator: Calculator

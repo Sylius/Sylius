@@ -8,7 +8,7 @@ sylius:
             company: الشركة
             country: البلد
             first_name: الاسم الأول
-            last_name: إسم العائلة
+            last_name: اسم العائلة
             phone_number: رقم الهاتف
             postcode: الرقم البريدي
             street: عنوان الشارع
@@ -35,7 +35,7 @@ sylius:
                 zone: المنطقة
             scope: نطاق
             scopes:
-                all: الكل
+                all: الجميع
             select: اختر
             select_scope: اختر النطاق
         zone_member:

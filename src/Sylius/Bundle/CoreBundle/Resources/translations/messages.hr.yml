@@ -22,24 +22,27 @@ sylius:
         promotion_coupon:
             per_customer_usage_limit: Ograničenje korištenja po kupcu
         group:
-            name: Naziv grupe
+            name: Naziv regije
             roles: Role (korisnička prava)
         channel:
             contact_email: Kontaktna email adresa
             currencies: Valute
             currency_base: Osnovna valuta
             account_verification_required: Je li potrebna potvrda računa?
+            hostname: Naziv hosta
+            locale_default: Zadani lockalitet
             locales: Lokaliteti
             payment_methods: Načini plaćanja
             shipping_methods: Načini slanja
             tax_zone_default: Zadana porezna zona
             taxonomies: Glavne kategorije
+            theme: Tema
         image:
             type: Vrsta
             file: Fotografija
         locale:
             code: ISO kod
-            enabled: Omogući
+            enabled: Omogućeno
         order_filter:
             created_at_from: Kreirano nakon
             created_at_to: Kreirano prije
@@ -48,7 +51,7 @@ sylius:
             total_to: Do
             payment_state: Stanje plaćanja
         page:
-            body: Sadržaj stranice
+            body: Poruka
             id: ID
             title: Naslov
         product:
@@ -56,10 +59,11 @@ sylius:
             restricted_zone: Ograničena zona pristupa
             short_description: Kratak opis
             variant_selection_method: Način odabira varijante
+            main_taxon: Glavna taksonomija
             channels: Kanali
-            enabled: Omogući
+            enabled: Omogućeno
         product_filter:
-            name: Naziv
+            name: Naziv regije
             code: ISO kod
         product_variant:
             tax_category: Kategorija artikla
@@ -83,8 +87,8 @@ sylius:
             file: Odaberite sliku
         user:
             billing_address: Adresa za dostavu
-            different_billing_address: Koristio bi drugu adresu za dostavu.
-            enabled: Aktivan
+            different_billing_address: Želim koristiti drugu adresu za račun.
+            enabled: Omogućeno
             first_name: Ime
             groups: Grupe
             roles: Role (korisnička prava)
@@ -106,9 +110,13 @@ sylius:
                 value: Vrijednost
         guest:
             email: E-mail
+        product_association:
+            type: Poveznice proizvoda
         product_association_type:
-            name: Naziv grupe
+            name: Naziv regije
         promotion_rule:
+            has_taxon:
+                taxons: Taksoni
             product:
                 products: Proizvodi
             total_of_items_from_taxon:
@@ -167,3 +175,4 @@ sylius:
                 header: Zastarjela vremenska zona
                 help: Vremenska zona %timezone% je zastarjela. Ispravite vaš php.ini dokument (popis zastarjelih zona http://php.net/manual/en/timezones.others.php).
             version: Verzija PHP-a
+            version_recommended: Preporučena PHP verzija

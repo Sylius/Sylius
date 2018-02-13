@@ -8,4 +8,5 @@ sylius:
             name: Tên
             type: Phân loại
         attribute_type:
+            configuration: Cấu hình
             select: Chọn

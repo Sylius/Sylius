@@ -9,7 +9,7 @@ sylius:
                     association_types: Тыпы ўзаемасувязей
                     attributes: Атрыбуты
                     header: Каталог
-                    inventory: Склад
+                    inventory: Інвентар
                     options: Опцыі
                     products: Прадукты
                     taxons: Катэгорыі
@@ -20,7 +20,7 @@ sylius:
                     currencies: Валюты
                     exchange_rates: Курсы валют
                     header: Канфігурацыя
-                    locales: Мовы
+                    locales: Месцы размяшчэння
                     payment_methods: Метады аплаты
                     shipping_categories: Катэгорыі дастаўкі
                     shipping_methods: Метады дастаўкі

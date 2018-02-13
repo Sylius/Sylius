@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        change_password: 'Vaše geslo je bilo uspešno spremenjeno!'
+        reset_password: 'Vaše geslo je bilo uspešno ponastavljeno!'
+        reset_password_request: 'Če e-pošta, ki ste jo določili v našem sistemu, obstaja, smo nanjo poslali navodila, kako ponastaviti vaše geslo.'

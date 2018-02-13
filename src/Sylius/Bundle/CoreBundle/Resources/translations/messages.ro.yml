@@ -22,7 +22,7 @@ sylius:
         promotion_coupon:
             per_customer_usage_limit: Limita de utilizare per client
         group:
-            name: Nume
+            name: Nume produs
             roles: Roluri
         channel:
             contact_email: E-mail de contact
@@ -67,7 +67,7 @@ sylius:
             channels: Canale
             enabled: Activat
         product_filter:
-            name: Nume
+            name: Nume produs
             code: Cod
         product_variant:
             tax_category: Categoria de taxă
@@ -123,7 +123,7 @@ sylius:
             product: Produs asociat
             type: Tipul de asociere
         product_association_type:
-            name: Nume
+            name: Nume produs
         promotion_filter:
             products: Filtru produse
             taxons: Filtru de taxoni
@@ -136,7 +136,7 @@ sylius:
                 products: Produse
             total_of_items_from_taxon:
                 taxon: Taxon
-                amount: Sumă
+                amount: Valoare
         payment_method:
             channels: Canale
         product_attribute:

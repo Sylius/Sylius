@@ -16,19 +16,19 @@ sylius:
             zone: Bölge
         country:
             add_province: Bölge ekle
-            name: Ülke adı
+            name: Ad
             provinces: İller
             select: Ülke seçin
             enabled: Etkin
         province:
             name: Ad
             abbreviation: Kısaltma
-            select: Seçiniz
+            select: Ülke seçin
         zone:
             add_member: Üye ekle
             members: Üyeler
-            name: Bölge adı
-            type: Türü
+            name: Ad
+            type: Tür
             types:
                 country: Ülke
                 province: Eyalet

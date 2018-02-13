@@ -21,7 +21,7 @@ sylius:
             not_blank: Моля, изберете годината на изтичане.
     payment:
         currency_code:
-            not_valid: Въведеният от вас валутен код е невалиден.
+            not_valid: Кода на валутата, която въведохте е невалиден.
         method:
             not_blank: 'Моля, изберете начин на плащане.'
     payment_method:

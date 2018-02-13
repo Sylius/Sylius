@@ -7,7 +7,7 @@ sylius:
             main:
                 catalog:
                     association_types: Yhteystyypit
-                    attributes: Ominaisuudet
+                    attributes: Määritteet
                     header: Luettelo
                     options: Asetukset
                     products: Tuotteet
@@ -29,6 +29,7 @@ sylius:
                     promotions: Kampanjat
                 customers:
                     customers: Asiakkaat
+                    groups: Ryhmät
                     header: Asiakas
                 sales:
                     header: Myynnit

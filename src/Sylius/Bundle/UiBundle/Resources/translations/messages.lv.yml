@@ -2,5 +2,17 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    form:
+        option:
+            name: 'Nosaukums'
     ui:
         address_book: 'Adrešu grāmata'
+        amount: 'Summa'
+        calculator: '- Kalkulators'
+        category: 'Kategorija'
+        change_password: 'Mainīt paroli'
+        dashboard: 'Informācijas panelis'
+        description: 'Apraksts'
+        name: 'Nosaukums'
+        order_history: 'Pasūtījumu vēsture'
+        personal_information: 'Personīgā informācija'

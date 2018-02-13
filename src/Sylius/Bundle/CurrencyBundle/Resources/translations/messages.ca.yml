@@ -4,5 +4,6 @@
 sylius:
     form:
         currency:
+            base: Moneda base
             code: Nom
             enabled: Activat

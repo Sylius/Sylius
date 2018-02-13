@@ -8,14 +8,14 @@ sylius:
             add_attributes: Aggiungi attributi
             choices: Scelte
             code: Codice
-            name: Nome
+            name: "Nome\n"
             translations: Traduzioni
             type: Tipo
         attribute_type:
-            checkbox: Casella di scelta
+            checkbox: Checkbox
             configuration: Configurazione
             date: Data
-            datetime: DateTime
+            datetime: Data / ora
             integer: Numero intero
             percent: Percento
             select: Scegli

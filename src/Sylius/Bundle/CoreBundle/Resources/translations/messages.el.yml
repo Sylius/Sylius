@@ -68,7 +68,7 @@ sylius:
             enabled: Ενεργοποιημένο
         product_filter:
             name: Ονομασία
-            code: Κωδικός
+            code: Κώδικος
         product_variant:
             tax_category: Φορολογική κατηγορία
             shipping_category: Κατηγορία αποστολής

@@ -5,13 +5,14 @@ sylius:
     form:
         address:
             city: Град
-            company: Компанија
+            company: Предузеће
             country: Земља
             first_name: Име
             last_name: Презиме
             phone_number: Број телефона
             postcode: Поштански број
             province: Провинција
+            zone: Зона
         country:
             add_province: Додај провинцију
             name: Име

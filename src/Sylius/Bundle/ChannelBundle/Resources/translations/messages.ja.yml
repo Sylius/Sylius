@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        channel:
+            description: 説明
+            enabled: 有効
+            name: ゾーン名

@@ -126,6 +126,8 @@ sylius:
         promotion_rule:
             customer_group:
                 group: Grupo de clientes
+            has_taxon:
+                taxons: Táxons
             product:
                 products: Produtos
             total_of_items_from_taxon:

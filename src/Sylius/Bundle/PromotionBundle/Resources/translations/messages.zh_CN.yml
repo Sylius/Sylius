@@ -23,7 +23,7 @@ sylius:
             order_percentage_discount: 订单百分比折扣
             shipping_percentage_discount: 货运百分比折扣
             fixed_discount_configuration:
-                amount: 折扣金额
+                amount: 金额
             percentage_discount_configuration:
                 percentage: 折扣比例
             type: 类型
@@ -31,7 +31,7 @@ sylius:
             expires_at: 到期时间
             usage_limit: 使用次数
         promotion_coupon_generator_instruction:
-            amount: 优惠金额
+            amount: 金额
             code_length: 优惠码长度
             expires_at: 到期时间
             usage_limit: 使用次数
@@ -58,7 +58,7 @@ sylius:
             nth_order_configuration:
                 nth: 订单数
             shipping_country_configuration:
-                country: 国家
+                country: test
             taxonomy_configuration:
                 exclude: 不包括：
                 taxons: 分类
