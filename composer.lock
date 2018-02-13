@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9969572cae00c189dff5392f9b2f93a",
+    "content-hash": "35e094f7a23d584e14e9579e18fc764e",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -6057,33 +6057,33 @@
         },
         {
             "name": "willdurand/hateoas",
-            "version": "2.10.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/Hateoas.git",
-                "reference": "ada89d867e47040f8c4be3be2c8e7930a3d01189"
+                "reference": "448e100ee147a55504e6813b3e3043f928a3745b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/ada89d867e47040f8c4be3be2c8e7930a3d01189",
-                "reference": "ada89d867e47040f8c4be3be2c8e7930a3d01189",
+                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/448e100ee147a55504e6813b3e3043f928a3745b",
+                "reference": "448e100ee147a55504e6813b3e3043f928a3745b",
                 "shasum": ""
             },
             "require": {
                 "doctrine/annotations": "~1.0",
                 "doctrine/common": "~2.0",
                 "jms/metadata": "~1.1",
-                "jms/serializer": "~1.0",
-                "php": ">=5.4",
+                "jms/serializer": "^1.7",
+                "php": "^5.5|^7.0",
                 "phpoption/phpoption": ">=1.1.0,<2.0-dev",
-                "symfony/expression-language": "~2.4 || ~3.0"
+                "symfony/expression-language": "~2.4 || ~3.0 || ~4.0"
             },
             "require-dev": {
                 "pagerfanta/pagerfanta": "~1.0",
-                "phpunit/phpunit": "~4.5",
-                "symfony/dependency-injection": "~2.4 || ~3.0",
-                "symfony/routing": "~2.4 || ~3.0",
-                "symfony/yaml": "~2.4 || ~3.0",
+                "phpunit/phpunit": "~5",
+                "symfony/dependency-injection": "~2.4 || ~3.0 || ~4.0",
+                "symfony/routing": "~2.4 || ~3.0 || ~4.0",
+                "symfony/yaml": "~2.4 || ~3.0 || ~4.0",
                 "twig/twig": "~1.12"
             },
             "suggest": {
@@ -6094,7 +6094,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.10-dev"
+                    "dev-master": "2.11-dev"
                 }
             },
             "autoload": {
@@ -6117,7 +6117,7 @@
                 }
             ],
             "description": "A PHP library to support implementing representations for HATEOAS REST web services",
-            "time": "2016-05-19T11:30:35+00:00"
+            "time": "2018-01-11T11:38:07+00:00"
         },
         {
             "name": "willdurand/hateoas-bundle",
@@ -10792,6 +10792,7 @@
     "stability-flags": {
         "friendsofsymfony/oauth-server-bundle": 20,
         "liip/imagine-bundle": 20,
+        "willdurand/hateoas": 20,
         "behat/mink-browserkit-driver": 20,
         "lakion/api-test-case": 5
     },
