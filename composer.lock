@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3b8299004920b69a9c091549e582897",
+    "content-hash": "7353b3af86d63f18307eaa429a2638e7",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -7987,58 +7987,6 @@
                 "logging"
             ],
             "time": "2016-10-27T15:30:36+00:00"
-        },
-        {
-            "name": "malukenho/kawaii-gherkin",
-            "version": "0.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/malukenho/kawaii-gherkin.git",
-                "reference": "eb70f7bf017e597b611cb85e2238d7dc94315eb6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/malukenho/kawaii-gherkin/zipball/eb70f7bf017e597b611cb85e2238d7dc94315eb6",
-                "reference": "eb70f7bf017e597b611cb85e2238d7dc94315eb6",
-                "shasum": ""
-            },
-            "require": {
-                "behat/gherkin": "^4.4",
-                "php": "~5.5|^7.0",
-                "sebastian/diff": "~1.2",
-                "symfony/console": "~2.0|^3.0",
-                "symfony/finder": "~2.0|^3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.0"
-            },
-            "bin": [
-                "bin/kawaii"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "KawaiiGherkin\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jefersson Nathan",
-                    "email": "malukenho@phpse.net"
-                }
-            ],
-            "description": "A small library to check and fix annoying gherkin code style",
-            "homepage": "https://github.com/malukenho/kawaii-gherkin",
-            "keywords": [
-                "Code style",
-                "code standard",
-                "gherkin"
-            ],
-            "time": "2016-03-31T11:32:46+00:00"
         },
         {
             "name": "matthiasnoback/symfony-config-test",
