@@ -37,6 +37,7 @@ Shop
     shop/taxons-menu
     shop/embedding-products
     shop/facebook-login
+    shop/cms
 
 .. include:: /cookbook/shop/map.rst.inc
 
