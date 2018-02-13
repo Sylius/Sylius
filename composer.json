@@ -32,7 +32,7 @@
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "doctrine/orm": "^2.5",
-        "friendsofsymfony/oauth-server-bundle": "^1.5",
+        "friendsofsymfony/oauth-server-bundle": "^1.6@dev",
         "friendsofsymfony/rest-bundle": "^2.1",
         "fzaninotto/faker": "^1.6",
         "gedmo/doctrine-extensions": "^2.4.12",
