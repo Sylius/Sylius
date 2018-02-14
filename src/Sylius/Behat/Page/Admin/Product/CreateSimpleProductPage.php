@@ -205,21 +205,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function specifyPriceForChannelAndCurrency($price, ChannelInterface $channel, CurrencyInterface $currency)
-    {
-        $calculatorElement = $this->getElement('calculator');
-        $calculatorElement
-            ->waitFor(5, function () use ($channel, $currency) {
-                return $this->getElement('calculator')->hasField(sprintf('%s %s', $channel->getName(), $currency->getCode()));
-            })
-        ;
-
-        $calculatorElement->fillField(sprintf('%s %s', $channel->getName(), $currency->getCode()), $price);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function activateLanguageTab($locale)
     {
         if (!$this->getDriver() instanceof Selenium2Driver) {
@@ -279,7 +264,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'attribute_delete_button' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ button',
             'attribute_value' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ input',
             'attributes_choice' => '#sylius_product_attribute_choice',
-            'calculator' => '#sylius_calculator_container',
             'channel_checkbox' => '.checkbox:contains("%channelName%") input',
             'channel_pricings' => '#sylius_product_variant_channelPricings',
             'code' => '#sylius_product_code',
