@@ -43,13 +43,6 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
     public function checkChannel($channelName);
 
     /**
-     * @param int $price
-     * @param ChannelInterface $channel
-     * @param CurrencyInterface $currency
-     */
-    public function specifyPriceForChannelAndCurrency($price, ChannelInterface $channel, CurrencyInterface $currency);
-
-    /**
      * @param string $code
      */
     public function specifyCode($code);

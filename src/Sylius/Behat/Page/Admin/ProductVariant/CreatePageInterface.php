@@ -67,13 +67,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function choosePricingCalculator($name);
 
     /**
-     * @param int $price
-     * @param ChannelInterface $channel
-     * @param CurrencyInterface $currency
-     */
-    public function specifyPriceForChannelAndCurrency($price, ChannelInterface $channel, CurrencyInterface $currency);
-
-    /**
      * @return string
      */
     public function getValidationMessageForForm();
