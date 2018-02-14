@@ -395,6 +395,41 @@ and render the ``{{ form_row(form.images) }}`` field.
 
     Learn more about customizing templates :doc:`here </customization/template>`.
 
+13. Validation
+^^^^^^^^^^^^^^
+
+Your form so far is working fine, but don't forget about validation.
+The easiest way is using validation config files under the ``AppBundle/Resources/config/validation`` folder.
+
+This could look like this f.i.:
+
+.. code-block:: yaml
+
+    # ShippingMethodImage.yml
+    AppBundle\Entity\ShippingMethodImage:
+      properties:
+        file:
+          - Image:
+              groups: [sylius]
+              maxHeight: 1000
+              maxSize: 10240000
+              maxWidth: 1000
+              mimeTypes: 
+                - "image/png"
+                - "image/jpg"
+                - "image/jpeg"
+                - "image/gif"
+              mimeTypesMessage: 'This mime is not allowed. Pls. use PNG, JPG or GIF files.'
+              minHeight: 200
+              minWidth: 200
+              
+This defines the validation constraints for each image entity. Now connecting the validation of the ShippingMethod to the validation of each single Image Entity is left:
+
+.. code-block:: yaml
+
+    images:
+      - Valid: ~    
+
 Learn more
 ----------
 
