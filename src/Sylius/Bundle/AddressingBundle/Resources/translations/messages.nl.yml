@@ -19,7 +19,7 @@ sylius:
             name: Naam
             provinces: Provincies
             select: Selecteer
-            enabled: Toegestaan
+            enabled: Ingeschakeld
         province:
             name: Naam
             abbreviation: Afkorting

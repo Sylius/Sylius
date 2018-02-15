@@ -28,4 +28,4 @@ sylius:
             not_blank: 'يرجى تحديد أسلوب الشحن.'
     shipment:
         shipping_method:
-            not_blank: 'يرجى تحديد طريقة الشحن.'
+            not_blank: 'يرجى تحديد أسلوب الشحن.'

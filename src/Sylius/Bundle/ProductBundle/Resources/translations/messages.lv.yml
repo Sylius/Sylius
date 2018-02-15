@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        product:
+            name: Nosaukums
+            description: Apraksts
+        product_variant:
+            name: Nosaukums
+        association_type:
+            name: Nosaukums
+        variant:
+            name: Nosaukums
+        option:
+            name: Nosaukums

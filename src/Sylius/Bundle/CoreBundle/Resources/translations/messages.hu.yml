@@ -19,6 +19,8 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Termék
+        promotion_coupon:
+            per_customer_usage_limit: Felhasználókénti felhasználási korlát
         group:
             name: Név
             roles: Szerepek
@@ -118,10 +120,15 @@ sylius:
         product_association_type:
             name: Név
         promotion_rule:
+            customer_group:
+                group: Felhasználói csoport
+            has_taxon:
+                taxons: Taxonok
             product:
                 products: Termékek
             total_of_items_from_taxon:
                 taxon: Taxonómia
+                amount: Összeg
         payment_method:
             channels: Csatornák
         zone:

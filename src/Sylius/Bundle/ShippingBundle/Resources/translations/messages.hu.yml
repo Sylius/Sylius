@@ -21,8 +21,10 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Átalánydíj szállítmányonként
+                amount: Összeg
             per_unit_rate_configuration:
                 label: Átalánydíj per elem
+                amount: Összeg
         shipping_category:
             description: Leírás
             name: Név

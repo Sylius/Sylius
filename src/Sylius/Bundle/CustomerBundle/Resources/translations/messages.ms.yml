@@ -4,4 +4,8 @@
 sylius:
     form:
         customer:
+            first_name: Nama Pertama
+            last_name: Nama Akhir
             phone_number: Nombor Telefon
+        customer_group:
+            name: Nama

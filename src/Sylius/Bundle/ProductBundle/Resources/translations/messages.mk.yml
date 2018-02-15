@@ -3,7 +3,17 @@
 
 sylius:
     form:
+        product:
+            name: Име
+            description: Опис
+        product_variant:
+            name: Име
+        association_type:
+            name: Име
+        variant:
+            name: Име
         option:
+            name: Име
             values: Можни вредности
         option_value:
             add_value: Додај вредност

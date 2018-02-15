@@ -3,5 +3,24 @@
 
 sylius:
     form:
+        shipment:
+            state: стање
+            states:
+                checkout: Завршите куповину
+                pending: Обрада у току
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Количина
+            per_unit_rate_configuration:
+                amount: Количина
+        shipping_category:
+            description: Опис
+            name: Име
         shipping_method:
+            calculator: Калкулатор
+            category: Категорија пореске стопе
+            configuration: Подешавања
+            description: Опис
+            enabled: Омогућено
+            name: Име
             tax_category: Категорија производа

@@ -12,7 +12,7 @@ sylius:
             state: Status
             states:
                 checkout: Afrekenen
-                pending: Wachtende
+                pending: In behandeling
                 ready: Klaar
                 shipped: Verzonden
                 returned: Geretourneerd
@@ -21,10 +21,10 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Vast tarief per zending
-                amount: Hoeveelheid
+                amount: Bedrag
             per_unit_rate_configuration:
                 label: Forfaitair bedrag per eenheid
-                amount: Hoeveelheid
+                amount: Bedrag
         shipping_category:
             description: Omschrijving
             name: Naam
@@ -35,7 +35,7 @@ sylius:
             channels: Kanalen
             configuration: Configuratie
             description: Omschrijving
-            enabled: Toegestaan
+            enabled: Ingeschakeld
             match_all_category_requirement: Alle eenheden moeten overeenkomen met de methodecategorie
             match_any_category_requirement: Minstens 1 eenheid moet overeenkomen met de methodecategorie
             match_none_category_requirement: Geen van de eenheden hoeven overeen te komen met de methodecategorie

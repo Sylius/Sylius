@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        product:
+            name: Naam
+        product_variant:
+            name: Naam
+        association_type:
+            name: Naam
+        variant:
+            name: Naam
+        option:
+            name: Naam

@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'A csatornát nem lehet törölni. Legalább egy engedélyezett csatornának lennie kell.'

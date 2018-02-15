@@ -5,11 +5,14 @@ sylius:
     form:
         attribute:
             add: Dodaj
+            add_attributes: Dodajte atribute
             code: ISO kod
-            name: Naziv grupe
+            name: Naziv regije
+            translations: Prijevodi
             type: Vrsta
         attribute_type:
             configuration: Postavke
+            date: Datum
             select: Odaberite
         attribute_type_configuration:
             select:

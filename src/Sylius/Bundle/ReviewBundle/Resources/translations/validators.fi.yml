@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        author:
+            already_exists: Tämä sähköpostiosoite on jo rekisteröity. Kirjaudu sisään tai käytä unohtunut salasana -toimintoa.

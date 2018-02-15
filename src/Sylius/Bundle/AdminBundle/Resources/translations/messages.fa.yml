@@ -7,10 +7,10 @@ sylius:
             main:
                 catalog:
                     association_types: انواع ارتباط ها
-                    attributes: ویژگی‌ها
+                    attributes: قابلیت ها
                     header: فهرست
                     inventory: موجودی کالا
-                    options: گزینه‎ها
+                    options: آپشن ها
                     products: محصولات
                     taxons: دسته بندی ها
                 configuration:

@@ -20,5 +20,5 @@ sylius:
             roles: Roller
     gender:
         unknown: Bilinmiyor
-        male: Erkek
+        male: Bay
         female: Bayan

@@ -4,4 +4,8 @@
 sylius:
     form:
         taxon:
+            description: תיאור
+            name: שם
             slug: שם מקוצר לשימוש בקישורים
+        taxonomy:
+            name: שם

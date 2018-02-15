@@ -4,4 +4,4 @@
 sylius:
     form:
         locale:
-            name: Название
+            name: Округ

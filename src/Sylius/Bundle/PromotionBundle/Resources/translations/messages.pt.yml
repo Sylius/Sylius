@@ -41,8 +41,11 @@ sylius:
                 variants: Produtos
             item_total_configuration:
                 amount: Quantia
+            nth_order_configuration:
+                nth: N-ésimo
             shipping_country_configuration:
                 country: País
             taxonomy_configuration:
                 exclude: Excluir
+                taxons: Táxons
             type: Tipo

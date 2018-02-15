@@ -8,6 +8,8 @@ sylius:
             last_name: Priimek
             email: E-pošta
             phone_number: Telefonska številka
+            gender: Spol
+            birthday: Rojstni dan
             billing_address: Naslov za račun
             different_billing_address: Uporabimo drug naslov za dostavo?
         customer_group:
@@ -15,3 +17,5 @@ sylius:
             roles: Vloge
     gender:
         unknown: Ni znano
+        male: Moški
+        female: Ženska

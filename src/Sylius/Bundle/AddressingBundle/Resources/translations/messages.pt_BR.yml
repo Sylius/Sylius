@@ -13,7 +13,7 @@ sylius:
             postcode: CEP
             street: Endereço
             province: Estado
-            zone: Região
+            zone: Zona
         country:
             add_province: Adicionar estado
             name: Nome
@@ -32,10 +32,10 @@ sylius:
             types:
                 country: País
                 province: Estado
-                zone: Região
+                zone: Zona
             scope: Escopo
             scopes:
-                all: Todas
+                all: Todos(as)
             select: Selecione
             select_scope: Selecione o escopo
         zone_member:

@@ -8,3 +8,4 @@ sylius:
         gateway_configuration:
             paypal:
                 password: סיסמה
+                username: שם משתמש

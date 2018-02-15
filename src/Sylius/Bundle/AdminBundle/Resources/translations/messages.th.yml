@@ -7,10 +7,10 @@ sylius:
             main:
                 catalog:
                     association_types: ชนิดความสัมพันธ์
-                    attributes: คุณสมบัติ
+                    attributes: คุณลักษณะ (Attribute)
                     header: แค็ตตาล็อก
                     inventory: คลังสินค้า
-                    options: ตัวเลือกสินค้า
+                    options: ตัวเลือก
                     products: สินค้า
                     taxons: การจัดหมวดหมู่
                 configuration:
@@ -19,9 +19,9 @@ sylius:
                     countries: ประเทศ
                     currencies: สกุลเงิน
                     exchange_rates: อัตราแลกเปลี่ยน
-                    header: การกำหนดค่า
-                    locales: ภาษา
-                    payment_methods: วิธีการชำระเงิน
+                    header: การกำหนดค่า (Configuration)
+                    locales: ภาษาที่ใช้
+                    payment_methods: วิธีชำระเงิน
                     shipping_categories: ประเภทการจัดส่ง
                     shipping_methods: วิธีการจัดส่ง
                     tax_categories: ประเภทภาษี

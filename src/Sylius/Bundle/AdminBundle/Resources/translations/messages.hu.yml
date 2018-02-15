@@ -12,6 +12,7 @@ sylius:
                     inventory: Leltár
                     options: Beállítások
                     products: Termékek
+                    taxons: Taxonok
                 configuration:
                     admin_users: Adminisztrátorok
                     channels: Csatornák
@@ -31,7 +32,7 @@ sylius:
                     product_reviews: Termék értékelések
                     promotions: Promóciók
                 customers:
-                    customers: Ügyfelek
+                    customers: Vásárlók
                     groups: Csoportok
                     header: Ügyfél
                 sales:

@@ -12,14 +12,14 @@ sylius:
                     inventory: 庫存
                     options: 選項
                     products: 産品
-                    taxons: 附加税值
+                    taxons: 分類
                 configuration:
                     admin_users: 管理員
                     channels: 頻道
                     countries: 國家
                     currencies: 貨幣
                     exchange_rates: 匯率
-                    header: 設定
+                    header: 配置
                     locales: 地區設定
                     payment_methods: 付款方式
                     shipping_categories: 配送類別

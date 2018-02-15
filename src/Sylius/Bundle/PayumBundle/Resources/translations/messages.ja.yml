@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        gateway_config:
+            type: タイプ
         gateway_configuration:
             paypal:
                 password: パスワード
