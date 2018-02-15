@@ -5,7 +5,7 @@ sylius:
     form:
         attribute:
             add: Pridėti
-            add_attributes: Pridėti atributus
+            add_attributes: Pridėti atributą
             choices: Pasirinkimai
             code: Kodas
             name: Pavadinimas

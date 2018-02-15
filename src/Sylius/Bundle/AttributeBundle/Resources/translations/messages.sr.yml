@@ -4,6 +4,9 @@
 sylius:
     form:
         attribute:
+            code: Кôд
+            name: Име
             type: Тип
         attribute_type:
+            configuration: Подешавања
             select: Изаберите

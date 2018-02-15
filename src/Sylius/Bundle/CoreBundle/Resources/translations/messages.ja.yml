@@ -15,7 +15,9 @@ sylius:
             shipping_method: 発送方法
         promotion_action:
             add_product_configuration:
-                product: 商品名
+                product: 商品情報
+        group:
+            name: ゾーン名
         channel:
             currencies: 通貨
             hostname: ホスト名
@@ -25,9 +27,11 @@ sylius:
             taxonomies: sylius.breadcrumb.taxonomy.index
             theme: テーマ
         image:
+            type: タイプ
             file: 画像
         locale:
             code: コード
+            enabled: 有効
         order_filter:
             number: 注文番号
             total_from: 合計金額(下限)
@@ -37,17 +41,19 @@ sylius:
             id: ID
             title: タイトル
         product:
-            images: 画像
+            images: 商品画像
             short_description: 商品概要
             variant_selection_method: バリエーション指定方法
+            enabled: 有効
         product_filter:
-            name: 商品名
+            name: ゾーン名
             code: コード
         product_variant:
             tax_category: 税区分
         shipment_filter:
             created_at_from: 合計金額(下限)
             created_at_to: 合計金額(上限)
+            number: 注文番号
         payment_filter:
             created_at_from: 合計金額(下限)
             created_at_to: 合計金額(上限)
@@ -57,7 +63,7 @@ sylius:
         taxon:
             code: コード
             file: 画像を選択
-            images: 画像
+            images: 商品画像
         taxonomy:
             file: 画像を選択
         user:
@@ -78,6 +84,13 @@ sylius:
             width: 幅
         guest:
             email: メールアドレス
+        product_association_type:
+            name: ゾーン名
+        promotion_rule:
+            product:
+                products: sylius.breadcrumb.product.index
+            total_of_items_from_taxon:
+                amount: 税率
     installer:
         extensions:
             off: false

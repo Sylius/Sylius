@@ -3,5 +3,24 @@
 
 sylius:
     form:
+        shipment:
+            state: 出荷ステータス
+            states:
+                checkout: 注文に進む
+                pending: 未発送
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: 税率
+            per_unit_rate_configuration:
+                amount: 税率
+        shipping_category:
+            description: 説明
+            name: ゾーン名
         shipping_method:
+            calculator: 計算方法
+            category: 税区分
+            configuration: 条件設定
+            description: 説明
+            enabled: 有効
+            name: ゾーン名
             tax_category: 税区分

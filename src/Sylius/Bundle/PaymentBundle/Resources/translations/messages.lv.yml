@@ -3,5 +3,6 @@
 
 sylius:
     form:
-        locale:
-            name: Nom
+        payment_method:
+            description: Apraksts
+            name: Nosaukums

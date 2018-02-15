@@ -23,3 +23,14 @@ sylius:
             unique: Ez a kupon már létezik.
         usage_limit:
             min: A kupon használati korlátozás legalább {{ limit }} kell legyen.
+    promotion_coupon_generator_instruction:
+        amount:
+            min: A létrehozandó kuponok mennyisége legalább {{ limit }} kell legyen.
+            not_blank: Kérjük, adja meg a létrehozandó kuponok mennyiségét.
+        code_length:
+            min: A kupon kódjának legalább {{ limit }} karakter hosszúnak kell lennie.
+            max: A kupon kódja nem lehet {{ limit }} karakternél hosszabb.
+            not_blank: Kérjük, adja meg a kupon kód hosszát.
+        possible_generation_amount: 'Érvénytelen kuponkód hossz vagy kupon mennyiség. Nem lehet %expectedAmount% egyedi kupont generálni ezzel a kód hosszúsággal ( %codeLength%). A maximális mennyiség ami generálható: %possibleAmount%.'
+        usage_limit:
+            min: A létrehozott kuponok használati korlátozása legalább {{ limit }} kell legyen.

@@ -4,7 +4,7 @@
 sylius:
     form:
         product:
-            name: Название
+            name: Округ
             description: Описание
             attributes: Атрибуты
             options: Список опций
@@ -13,17 +13,17 @@ sylius:
             slug: Псевдоним
             taxons: Категории
         product_variant:
-            name: Название
+            name: Округ
         association_type:
-            name: Название
+            name: Округ
             translations: '﻿Переводы'
         association:
             type: Тип взаимосвязи
             product: Связанные продукты
         variant:
-            name: Название
+            name: Округ
         option:
-            name: Название
+            name: Округ
             position: Позиция
             values: Возможные значения
         option_value:

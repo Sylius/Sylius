@@ -12,7 +12,7 @@ sylius:
                     inventory: Inventário
                     options: Opções
                     products: Produtos
-                    taxons: Taxas
+                    taxons: Táxons
                 configuration:
                     admin_users: Administradores
                     channels: Canais

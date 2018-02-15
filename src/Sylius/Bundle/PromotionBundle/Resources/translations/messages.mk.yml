@@ -3,9 +3,18 @@
 
 sylius:
     form:
+        promotion:
+            description: Опис
+            name: Име
         promotion_action:
+            fixed_discount_configuration:
+                amount: Износ
             type: Вид
+        promotion_coupon_generator_instruction:
+            amount: Износ
         promotion_rule:
+            item_total_configuration:
+                amount: Износ
             shipping_country_configuration:
                 country: Држава
             type: Вид

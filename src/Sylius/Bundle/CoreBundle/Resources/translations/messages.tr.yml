@@ -41,7 +41,7 @@ sylius:
             taxonomies: Kategoriler
             theme: Tema
         image:
-            type: Türü
+            type: Tür
             file: Resim
         locale:
             code: Kod

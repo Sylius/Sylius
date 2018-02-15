@@ -29,7 +29,7 @@ sylius:
                     zones: Oblasti
                 marketing:
                     header: Marketing
-                    product_reviews: Hodnocení produktu
+                    product_reviews: Hodnocení produktů
                     promotions: Akce
                 customers:
                     customers: Zákazníci

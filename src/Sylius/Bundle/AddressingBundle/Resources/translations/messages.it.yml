@@ -6,7 +6,7 @@ sylius:
         address:
             city: Città
             company: Azienda
-            country: Nazione
+            country: Paese
             first_name: Nome
             last_name: Cognome
             phone_number: Numero di telefono
@@ -16,18 +16,18 @@ sylius:
             zone: Zona
         country:
             add_province: Aggiungi provincia
-            name: Nome
+            name: "Nome\n"
             provinces: Provincia
             select: Scegli
             enabled: Abilitato
         province:
-            name: Nome
+            name: "Nome\n"
             abbreviation: Abbreviazione
-            select: Seleziona
+            select: Scegli
         zone:
             add_member: Aggiungi membro
             members: Membri
-            name: Nome
+            name: "Nome\n"
             type: Tipo
             types:
                 country: Paese

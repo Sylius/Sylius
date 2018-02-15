@@ -16,18 +16,18 @@ sylius:
             zone: Zonă
         country:
             add_province: Adăugare județ
-            name: Nume
+            name: Nume produs
             provinces: Județe
             select: Selectaţi
             enabled: Activat
         province:
-            name: Nume
+            name: Nume produs
             abbreviation: Abreviere
             select: Selectaţi
         zone:
             add_member: Adaugă membru
             members: Membri
-            name: Nume
+            name: Nume produs
             type: Tip
             types:
                 country: Țară

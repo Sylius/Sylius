@@ -3,8 +3,24 @@
 
 sylius:
     form:
+        group:
+            name: Nama
         image:
             type: Jenis
+        locale:
+            enabled: Dibenarkan
+        product:
+            enabled: Dibenarkan
+        product_filter:
+            name: Nama
+        shipping_method:
+            zone: Zon
+        user:
+            enabled: Dibenarkan
+            first_name: Nama Pertama
+            last_name: Nama Akhir
+        product_association_type:
+            name: Nama
     installer:
         extensions:
             off: false

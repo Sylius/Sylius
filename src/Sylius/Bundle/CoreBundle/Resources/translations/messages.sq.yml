@@ -19,6 +19,8 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Produkti
+        promotion_coupon:
+            per_customer_usage_limit: Limiti i përdorimit për blerës
         group:
             name: Emri
             roles: Funksionet
@@ -34,6 +36,7 @@ sylius:
             taxonomies: Kategorizimet
             theme: Tema
         image:
+            type: Lloji
             file: Imazhi
         locale:
             code: Kodi
@@ -116,10 +119,15 @@ sylius:
         product_association_type:
             name: Emri
         promotion_rule:
+            customer_group:
+                group: Grupi i blerësve
             has_taxon:
                 taxons: Tipologjite
+            product:
+                products: Produktet
             total_of_items_from_taxon:
                 taxon: Fushe
+                amount: Shuma
         payment_method:
             channels: Kanalet
     installer:
@@ -176,3 +184,4 @@ sylius:
                 header: Zonë orare e papranueshme
                 help: Zona orare %timezone% nuk pranohet. is deprecated. Korrigjo php.ini file (lista e zonave orare të kundërshtuara http://php.net/manual/en/timezones.others.php).
             version: Versioni PHP
+            version_recommended: Versioni PHP i rekomanduar

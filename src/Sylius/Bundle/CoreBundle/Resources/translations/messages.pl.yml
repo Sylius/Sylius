@@ -45,7 +45,7 @@ sylius:
             file: Zdjęcie
         locale:
             code: Kod
-            enabled: Aktywne
+            enabled: Dostępny
         order_filter:
             created_at_from: Stworzony po
             created_at_to: Stworzony przed
@@ -65,7 +65,7 @@ sylius:
             variant_selection_method: Metody wyboru wariantu
             main_taxon: Główne grupy
             channels: Kanały
-            enabled: Aktywne
+            enabled: Dostępny
         product_filter:
             name: Nazwa
             code: Kod
@@ -95,7 +95,7 @@ sylius:
         user:
             billing_address: Adres do rachunku
             different_billing_address: Użyć innego adresu do rozliczeń?
-            enabled: Aktywne
+            enabled: Dostępny
             first_name: Imię
             groups: Grupy
             roles: Role
@@ -136,7 +136,7 @@ sylius:
                 products: Produkty
             total_of_items_from_taxon:
                 taxon: Takson
-                amount: Kwota
+                amount: Wartość
         payment_method:
             channels: Kanały
         product_attribute:

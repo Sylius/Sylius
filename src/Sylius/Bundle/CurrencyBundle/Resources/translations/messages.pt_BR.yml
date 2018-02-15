@@ -6,7 +6,7 @@ sylius:
         currency:
             base: Moeda base
             code: Nome
-            enabled: Ativado
+            enabled: Habilitado
             exchange_rate: Taxa de câmbio
         exchange_rate:
             source_currency: Moeda de origem

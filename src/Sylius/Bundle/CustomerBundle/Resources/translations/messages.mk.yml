@@ -4,5 +4,9 @@
 sylius:
     form:
         customer:
+            first_name: Име
+            last_name: Презиме
             email: Е-пошта
             phone_number: Телефонски Број
+        customer_group:
+            name: Име

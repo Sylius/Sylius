@@ -12,8 +12,8 @@ Content management in Sylius
 ----------------------------
 
 Sylius standard app does not come with a content management system. Our community has taken care of it.
-As Sylius does have an awesome dev oriented plugin environment, developers from `BitBag <https://bitbag.shop>`_ decided to develop
-their flexible CMS module. You can find it on `their GitHub <https://github.com/BitBagCommerce/SyliusCmsPlugin>`_.
+As Sylius does have a convenient dev oriented plugin environment, the developers from `BitBag <https://bitbag.shop>`_ decided to develop
+their flexible CMS module. You can find it `here <https://github.com/BitBagCommerce/SyliusCmsPlugin>`_.
 
 .. tip::
 
@@ -28,12 +28,12 @@ Inside the plugin, you will find:
 * Sections which you can use to create a blog, customer information, etc.
 * FAQ module
 
-What is the most awesome thing about this plugin is that you can customize it for your specific needs like you do with each :doc:`Sylius model </customization/model>`.
+A very handy feature of this plugin is that you can customize it for your specific needs like you do with each :doc:`Sylius model </customization/model>`.
 
 Installation & usage
 --------------------
 
-Find out more about how to install the plugin on `GitHub <https://github.com/BitBagCommerce/SyliusCmsPlugin>`_.
+Find out more about how to install the plugin on `GitHub <https://github.com/BitBagCommerce/SyliusCmsPlugin>`_ in the README file.
 
 Learn more
 ----------

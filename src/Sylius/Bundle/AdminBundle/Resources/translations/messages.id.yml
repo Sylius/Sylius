@@ -6,7 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: Tipe Kategory
+                    association_types: Tipe asosiasi
                     attributes: Atribut
                     header: Katalog
                     inventory: Persediaan
@@ -20,7 +20,7 @@ sylius:
                     currencies: Mata Uang
                     exchange_rates: Kurs
                     header: Konfigurasi
-                    locales: Lokal
+                    locales: Pilihan Bahasa
                     payment_methods: Metode Pembayaran
                     shipping_categories: Kategori Pengiriman
                     shipping_methods: Metode Pengiriman
@@ -29,7 +29,7 @@ sylius:
                     zones: Wilayah
                 marketing:
                     header: Pemasaran
-                    product_reviews: Review produk
+                    product_reviews: Ulasan produk
                     promotions: Promosi
                 customers:
                     customers: Pelanggan

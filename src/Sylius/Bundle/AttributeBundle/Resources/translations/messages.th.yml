@@ -8,7 +8,7 @@ sylius:
             add_attributes: เพิ่มคุณลักษณะ
             choices: ตัวเลือก
             code: รหัส
-            name: ชื่อ
+            name: ชื่อภาษา
             translations: การแปลภาษา
             type: ชนิด
         attribute_type:

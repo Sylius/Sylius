@@ -4,14 +4,14 @@
 sylius:
     form:
         user:
-            email: Correo electrónico
-            enabled: Activado
+            email: Dirección de correo electrónico
+            enabled: '¿Activado?'
             password:
-                label: Contraseña
+                label: Contraseña de API
                 confirmation: Confirmar contraseña
             remember_me: Recordarme
             shipping_address: Dirección de envío
-            username: Nombre de usuario
+            username: Nombre de usuario de API
         user_filter:
             query: Búsqueda
         user_change_password:

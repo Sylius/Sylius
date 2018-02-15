@@ -66,14 +66,21 @@ sylius:
             created_at_from: Alates
             created_at_to: Kellele
             channel: Kõik kanalid
+        shipping_method:
+            zone: Piirkond
         taxon:
             code: Kood
+            images: Pildid
         user:
             different_billing_address: Kasutada arvel erinevat aadressi?
             enabled: Lubatud
+            first_name: Eesnimi
             roles: Rollid
+            last_name: Perekonnanimi
         product_association_type:
             name: Nimi
+        payment_method:
+            channels: Kanalid
     installer:
         extensions:
             off: false

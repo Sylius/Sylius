@@ -11,20 +11,29 @@ sylius:
             description: Beskrivelse
             ends_at: Slutter den
             name: Navn
+            priority: Prioritet
             rules: Regler
             starts_at: Starter ved
+            usage_limit: Brugsgrænse
         promotion_action:
             fixed_discount_configuration:
                 amount: Beløb
             type: Type
+        promotion_coupon:
+            expires_at: Udløber
+            usage_limit: Brugsgrænse
         promotion_coupon_generator_instruction:
             amount: Beløb
+            expires_at: Udløber
+            usage_limit: Brugsgrænse
         promotion_rule:
             customer_group: Kundegruppe
+            taxonomy: Taksonomi
             cart_quantity_configuration:
                 count: Antal
+                equal: Lige
             contains_product_configuration:
-                variants: Produkter
+                variants: Varer
             item_total_configuration:
                 amount: Beløb
             shipping_country_configuration:

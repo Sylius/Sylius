@@ -11,6 +11,8 @@ sylius:
                     header: Katalog
                     inventory: Inventar
                     options: Možnosti
+                    products: Izdelki
+                    taxons: Taksoni
                 configuration:
                     channels: Kanali
                     countries: Države
@@ -18,6 +20,7 @@ sylius:
                     header: Konfiguracija
                     locales: Področne nastavitve
                     payment_methods: Načini plačila
+                    shipping_categories: Kategorije dostave
                     shipping_methods: Načini dostave
                     tax_categories: Davčne stopnje
                     tax_rates: Davčne stopnje

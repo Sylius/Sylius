@@ -19,7 +19,7 @@ sylius:
             not_blank: Vul uw e-mailadres in.
             invalid: Deze e-mail is ongeldig.
             unique: Dit e-mailadres is al in gebruik.
-            registered: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten functionaliteit te gebruiken.
+            registered: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten gebruiken.
     customer_group:
         code:
             regex: Klantgroep code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.

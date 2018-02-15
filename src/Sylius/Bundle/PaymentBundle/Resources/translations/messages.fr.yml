@@ -30,5 +30,3 @@ sylius:
             description: Description
             enabled: Activé ?
             instructions: Instructions
-            name: Nom
-            position: Emplacement
