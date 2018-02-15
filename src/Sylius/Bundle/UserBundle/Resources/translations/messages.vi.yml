@@ -4,6 +4,7 @@
 sylius:
     form:
         user:
+            enabled: Đã kích hoạt
             password:
                 label: Mật khẩu
         user_filter:

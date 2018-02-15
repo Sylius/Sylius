@@ -78,12 +78,22 @@ sylius:
             created_at_from: 從
             created_at_to: 至
             channel: 所有頻道
+        shipping_method:
+            zone: 區域
         taxon:
             code: 代碼
+            images: 圖像
         user:
             different_billing_address: 使用其他地址作為賬單地址嗎？
             enabled: 啓用
+            first_name: 名
+            groups: 群組
             roles: 角色
+            last_name: 姓
+            password: 密碼
+        attribute:
+            product_attribute_value:
+                value: 數值
         product_association_type:
             name: 名稱
         promotion_rule:
@@ -104,3 +114,5 @@ sylius:
         settings:
             off: false
             on: true
+    payum_gateway:
+        offline: 離線

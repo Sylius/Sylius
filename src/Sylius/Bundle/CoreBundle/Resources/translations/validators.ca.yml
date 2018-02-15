@@ -28,6 +28,7 @@ sylius:
         invalid: Posició ha de ser un nombre sencer.
     product_variant:
         onHand:
+            min: La disponibilitat ha de ser mes gran de {{ limit }}.
             not_blank: Si us plau introdueix la disponibilitat.
         width:
             min: L'amplada no pot ser negativa.

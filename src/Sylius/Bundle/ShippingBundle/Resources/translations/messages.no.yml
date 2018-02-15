@@ -10,7 +10,7 @@ sylius:
         shipment:
             state: Tilstand
             states:
-                checkout: Sjekk ut
+                checkout: Gå til kassen
                 pending: Venter
                 ready: Klar
                 shipped: Sendt

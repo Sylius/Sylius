@@ -7,4 +7,5 @@ sylius:
             type: Тип
         gateway_configuration:
             paypal:
+                password: Лозинка
                 username: Кросницко име

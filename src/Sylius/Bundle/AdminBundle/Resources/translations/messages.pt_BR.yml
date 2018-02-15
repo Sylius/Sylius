@@ -12,13 +12,13 @@ sylius:
                     inventory: Estoque
                     options: Opções
                     products: Produtos
-                    taxons: Categorias
+                    taxons: Taxas
                 configuration:
                     admin_users: Administradores
                     channels: Canais
                     countries: Países
                     currencies: Moedas
-                    exchange_rates: Taxas de câmbio
+                    exchange_rates: Taxa de câmbio
                     header: Configuração
                     locales: Localidades
                     payment_methods: Meios de pagamentos

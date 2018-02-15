@@ -9,7 +9,7 @@ sylius:
                 equal: Ist gleich
             type: Regeltyp
         shipment:
-            state: Versandstatus
+            state: Bundesland
             states:
                 checkout: Zur Kasse
                 pending: Ausstehend
@@ -21,15 +21,15 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Pauschale pro Sendung
-                amount: Anzahl
+                amount: Steuersatz
             per_unit_rate_configuration:
                 label: Pauschale pro Artikel
-                amount: Anzahl
+                amount: Steuersatz
         shipping_category:
             description: Beschreibung
             name: Name
         shipping_method:
-            calculator: Rechner
+            calculator: Steuersatzrechner
             category: Kategorie
             category_requirement: Kategorievoraussetzungen
             channels: Ausgabekanäle

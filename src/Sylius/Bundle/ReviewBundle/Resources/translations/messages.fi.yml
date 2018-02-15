@@ -4,5 +4,8 @@
 sylius:
     form:
         review:
+            author: Tekijä
+            comment: Kommentti
             status:
                 new: Uusi
+            title: Otsikko

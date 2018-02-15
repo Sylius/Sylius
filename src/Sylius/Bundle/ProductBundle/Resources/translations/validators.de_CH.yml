@@ -34,7 +34,7 @@ sylius:
             unique: Eine Option mit diesem Kürzel existiert bereits.
         name:
             not_blank: Bitte Optionsnamen eingeben.
-            min_length: Der Optionsname muss mindestens 1 Zeichen lang sein.|Der Optionsname muss mindestens {{ limit }} Zeichen lang sein.
+            min_length: Der Name der Option muss mindestens 1 Zeichen lang sein.|Der Name der Option muss mindestens {{ limit }} Zeichen lang sein.
             max_length: Der Optionsname darf nicht länger als 1 Zeichen sein.|Der Optionsname darf nicht länger als {{ limit }} Zeichen sein.
         values:
             min_count: Bitte geben Sie mindestens {{ limit }} Wert für diese Option ein.|Bitte geben Sie mindestens {{ limit }} Werte für diese Option ein.

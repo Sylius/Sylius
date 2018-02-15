@@ -55,7 +55,7 @@ sylius:
             payment_state: Betalingsstatus
             channel: Alle kanaler
         page:
-            body: Krop
+            body: Indhold
             id: ID
             title: Titel
         product:
@@ -133,7 +133,7 @@ sylius:
             has_taxon:
                 taxons: Kategorier
             product:
-                products: Produkter
+                products: Varer
             total_of_items_from_taxon:
                 taxon: Taksonomi
                 amount: Beløb

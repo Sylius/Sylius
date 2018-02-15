@@ -4,6 +4,8 @@
 sylius:
     form:
         customer:
+            first_name: Tên
+            last_name: Họ
             phone_number: Số điện thoại
         customer_group:
             name: Tên

@@ -67,7 +67,7 @@ sylius:
             channels: Kanály
             enabled: Povoleno
         product_filter:
-            name: Název
+            name: Jméno
             code: Kód
         product_variant:
             tax_category: Typ daně

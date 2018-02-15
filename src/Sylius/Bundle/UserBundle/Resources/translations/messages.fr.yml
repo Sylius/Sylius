@@ -4,14 +4,11 @@
 sylius:
     form:
         user:
-            email: Courriel
-            enabled: Activé
+            email: E-mail
             password:
-                label: Mot de passe
                 confirmation: Vérification
             remember_me: Rester connecté
             shipping_address: Adresse de livraison
-            username: Identifiant
         user_filter:
             query: Rechercher
         user_change_password:

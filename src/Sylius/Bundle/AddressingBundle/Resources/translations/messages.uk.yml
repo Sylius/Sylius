@@ -16,12 +16,12 @@ sylius:
             zone: Зона
         country:
             add_province: Додати регіон
-            name: Назва країни
+            name: Назва
             provinces: Регіони
             select: Виберіть
-            enabled: Увімкнено
+            enabled: Ввімкнено
         province:
-            name: Назва регіону
+            name: Назва
             abbreviation: Абревіатура
             select: Виберіть
         zone:

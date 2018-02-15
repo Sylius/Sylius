@@ -3,5 +3,10 @@
 
 sylius:
     form:
+        payment:
+            method: Phương thức thanh toán
+            state:
+                new: Mới
         payment_method:
+            description: Mô tả
             name: Tên

@@ -22,3 +22,9 @@ sylius:
             unique: Ta kupon že obstaja.
         usage_limit:
             min: Omejitev uporabe kupona mora biti vsaj {{ limit }}.
+    promotion_coupon_generator_instruction:
+        amount:
+            min: Znesek kuponov za generiranje mora biti vsaj {{ limit }}.
+            not_blank: Prosimo, vnesite znesek kuponov za generiranje.
+        usage_limit:
+            min: Omejitev uporabe generiranih kuponov mora biti vsaj {{ limit }}.

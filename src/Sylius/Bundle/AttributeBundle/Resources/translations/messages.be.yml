@@ -8,7 +8,7 @@ sylius:
             add_attributes: Дадаць атрыбуты
             choices: Вырыянты выбару
             code: Код
-            name: Імя
+            name: Назва
             translations: Пераклады
             type: Тып
         attribute_type:

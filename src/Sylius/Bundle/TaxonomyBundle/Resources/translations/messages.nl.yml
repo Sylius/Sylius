@@ -7,6 +7,6 @@ sylius:
             description: Omschrijving
             name: Naam
             parent: Ouder
-            slug: Korte naam
+            slug: Slug
         taxonomy:
             name: Naam

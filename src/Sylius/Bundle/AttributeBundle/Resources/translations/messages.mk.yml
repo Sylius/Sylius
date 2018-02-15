@@ -4,6 +4,8 @@
 sylius:
     form:
         attribute:
+            code: Код
+            name: Име
             type: Вид
         attribute_type:
             select: Изберете

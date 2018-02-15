@@ -21,7 +21,7 @@ sylius:
             not_blank: Lütfen son kullanım tarihi yılını seçin.
     payment:
         currency_code:
-            not_valid: Girdiğiniz para birimi kodu geçersiz.
+            not_valid: Girmiş olduğunuz döviz numarası geçersiz.
         method:
             not_blank: 'Lütfen bir ödeme şekli seçin.'
     payment_method:

@@ -8,7 +8,7 @@ sylius:
             not_blank: Por favor introduza o nome do titular do cartão.
         expiry_month:
             max_range: O mês de validade do cartão de crédito deve estar entre {{ min }} e {{ max }}.
-            min_range: O mês de validade do cartão de crédito deve estar compreendido entre {{ min }} e {{ max }}.
+            min_range: O mês de validade do cartão de crédito deve estar entre {{ min }} e {{ max }}.
             not_blank: Selecione o mês de validade.
         number:
             not_blank: Por favor, insira o número do cartão.

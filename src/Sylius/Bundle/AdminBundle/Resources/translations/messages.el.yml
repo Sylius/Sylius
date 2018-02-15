@@ -7,12 +7,12 @@ sylius:
             main:
                 catalog:
                     association_types: Τύποι συσχετισμών
-                    attributes: Γνωρίσματα
+                    attributes: Χαρακτηριστικά
                     header: Κατάλογος
-                    inventory: Αποθέματα
+                    inventory: Απόθεμα
                     options: Επιλογές
                     products: Προϊόντα
-                    taxons: Ταξινομική μονάδα
+                    taxons: Ταξινομικές μονάδες
                 configuration:
                     admin_users: Διαχειριστές
                     channels: Κανάλια

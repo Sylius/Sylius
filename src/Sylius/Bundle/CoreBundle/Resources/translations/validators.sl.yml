@@ -5,6 +5,11 @@ sylius:
     channel:
         contact_email:
             invalid: Ta e-pošta ni veljavna.
+            max: E-pošta ne sme biti daljša od {{ limit }} znakov.
+            min: Email mora biti dolga vsaj {{ limit }} znakov.
+    channel_pricing:
+        price:
+            not_blank: Prosimo, vnesite ceno.
     checkout:
         shipping_method:
             not_blank: Prosimo, izberite način dostave.
@@ -12,6 +17,8 @@ sylius:
         email:
             invalid: Ta e-pošta ni veljavna.
             not_blank: Prosimo, vnesite vaš elektronski naslov.
+        message:
+            not_blank: Prosimo, vnesite vaše sporočilo.
     locale:
         code:
             not_blank: Prosimo, vnesite kodo območnih nastavitev.
@@ -27,4 +34,5 @@ sylius:
             max: Kratek opis ne sme biti daljši kot {{ limit }} znakov.
     user:
         email:
+            unique: Ta e-pošta je že v uporabi.
             invalid: Ta e-pošta ni veljavna.

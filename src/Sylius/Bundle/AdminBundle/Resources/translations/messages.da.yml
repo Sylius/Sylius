@@ -6,15 +6,15 @@ sylius:
         admin:
             main:
                 catalog:
-                    association_types: Associerede typer
+                    association_types: Tilknytningstyper
                     attributes: Egenskaber
                     header: Katalog
                     inventory: Lager
                     options: Indstillinger
-                    products: Produkter
+                    products: Varer
                     taxons: Kategorier
                 configuration:
-                    admin_users: Administrator
+                    admin_users: Administratorer
                     channels: Kanaler
                     countries: Lande
                     currencies: Valutaer

@@ -4,6 +4,8 @@
 sylius:
     form:
         review:
+            author: Συντάκτης
+            comment: Σχόλιο
             status:
                 new: Νέα
             title: Τίτλος

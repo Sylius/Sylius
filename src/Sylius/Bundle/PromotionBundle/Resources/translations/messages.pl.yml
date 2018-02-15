@@ -23,7 +23,7 @@ sylius:
             order_percentage_discount: Procentowa kwota zniżki na zamówienie
             shipping_percentage_discount: Procentowa kwota zniżki na koszty wysyłki
             fixed_discount_configuration:
-                amount: Kwota
+                amount: Wartość
             percentage_discount_configuration:
                 percentage: Procentowa
             type: Typ
@@ -31,7 +31,7 @@ sylius:
             expires_at: Wygasa
             usage_limit: Limit użycia
         promotion_coupon_generator_instruction:
-            amount: Kwota
+            amount: Wartość
             code_length: Długość kodu
             expires_at: Wygasa
             usage_limit: Limit użycia
@@ -54,12 +54,12 @@ sylius:
                 exclude: Nie zawiera
                 variants: Produkty
             item_total_configuration:
-                amount: Kwota
+                amount: Wartość
             nth_order_configuration:
                 nth: N-ty
             shipping_country_configuration:
                 country: Kraj
             taxonomy_configuration:
                 exclude: Nie zawiera
-                taxons: Kategorie
+                taxons: Taksonomie
             type: Typ

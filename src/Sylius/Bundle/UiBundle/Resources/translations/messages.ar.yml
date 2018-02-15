@@ -115,7 +115,7 @@ sylius:
         change_your_password: 'تغير كلمة المرور الخاصة بك'
         changes: 'التغييرات'
         channel: 'قناة'
-        channels: 'قنوات'
+        channels: 'القنوات'
         charges_and_taxes: 'الرسوم والضرائب'
         cheapest_first: 'الأحدث أولاً'
         checkbox: 'خانة الاختيار'

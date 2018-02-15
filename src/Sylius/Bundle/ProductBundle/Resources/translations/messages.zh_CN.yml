@@ -24,8 +24,8 @@ sylius:
             name: 名称
         option:
             name: 名称
-            position: 位置
+            position: 优先级
             values: 可能的值
         option_value:
-            add_value: 添加值
+            add_value: 增加
             value: 值

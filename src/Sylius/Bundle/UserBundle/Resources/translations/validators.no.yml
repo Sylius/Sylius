@@ -5,3 +5,4 @@ sylius:
     user:
         email:
             not_blank: Skriv inn din e-post.
+            invalid: Ugyldig epostadresse.

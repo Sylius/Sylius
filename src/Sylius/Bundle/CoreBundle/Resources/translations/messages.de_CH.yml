@@ -18,7 +18,7 @@ sylius:
             channels: Ausgabekanäle
         promotion_action:
             add_product_configuration:
-                product: Verkäuflich
+                product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Nutzungsbeschränkung pro Kunde
         group:
@@ -59,7 +59,7 @@ sylius:
             id: ID
             title: Titel
         product:
-            images: Fotos
+            images: Bilder
             restricted_zone: Beschränktes Versandgebiet
             short_description: Kurzbeschreibung
             variant_selection_method: Varianten
@@ -89,7 +89,7 @@ sylius:
         taxon:
             code: Code
             file: Foto auswählen
-            images: Fotos
+            images: Bilder
         taxonomy:
             file: Foto auswählen
         user:
@@ -103,11 +103,11 @@ sylius:
             password: Passwort
             shipping_address: Lieferadresse
         user_filter:
-            query: Suche
+            query: Suchen
         variant:
             depth: Tiefe
             height: Höhe
-            on_hand: Auf Lager
+            on_hand: Aktueller Lagerbestand
             price: Preis
             sku: Bestandseinheit
             shipping_required: Ist ein Versand erforderlich?
@@ -136,7 +136,7 @@ sylius:
                 products: Produkte
             total_of_items_from_taxon:
                 taxon: Produktgruppe
-                amount: Anzahl
+                amount: Steuersatz
         payment_method:
             channels: Ausgabekanäle
         product_attribute:

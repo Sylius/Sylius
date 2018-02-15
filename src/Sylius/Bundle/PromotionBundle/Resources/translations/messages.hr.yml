@@ -10,27 +10,38 @@ sylius:
             coupon_based: Promocija bazirana na kuponima za popust
             description: Opis
             ends_at: Završava
-            name: Naziv promocije
+            name: Naziv regije
             priority: Prioritet
             rules: Pravila
-            starts_at: Počinje
+            starts_at: Početak
             usage_limit: Ograničenje
         promotion_action:
             fixed_discount_configuration:
                 amount: Iznos
+            percentage_discount_configuration:
+                percentage: Postotak
             type: Vrsta
         promotion_coupon:
+            expires_at: Istječe
             usage_limit: Ograničenje
         promotion_coupon_generator_instruction:
             amount: Iznos
+            expires_at: Istječe
             usage_limit: Ograničenje
         promotion_rule:
             cart_quantity_configuration:
                 count: Brojač
+                equal: Jednak
             contains_product_configuration:
+                exclude: Ne uključuje
                 variants: Proizvodi
             item_total_configuration:
                 amount: Iznos
+            nth_order_configuration:
+                nth: N-ti
             shipping_country_configuration:
                 country: Država
+            taxonomy_configuration:
+                exclude: Ne uključuje
+                taxons: Taksoni
             type: Vrsta

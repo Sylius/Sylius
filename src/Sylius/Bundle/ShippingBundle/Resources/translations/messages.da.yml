@@ -40,6 +40,6 @@ sylius:
             match_any_category_requirement: Mindst en enhed skal matche med forsendelseskategorien
             match_none_category_requirement: Ingen af enhederne behøves at matche med forsendelseskategorien
             name: Navn
-            position: Position
+            position: Placering
             tax_category: Momskategori
             translations: Oversættelser
