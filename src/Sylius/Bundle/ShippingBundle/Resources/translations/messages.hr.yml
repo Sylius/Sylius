@@ -23,7 +23,7 @@ sylius:
                 amount: Iznos
         shipping_category:
             description: Opis
-            name: Naziv
+            name: Naziv regije
         shipping_method:
             calculator: Kalkulator
             category: Kategorija
@@ -31,6 +31,7 @@ sylius:
             channels: Kanali
             configuration: Postavke
             description: Opis
-            enabled: Omogući
-            name: Naziv
+            enabled: Omogućeno
+            name: Naziv regije
             tax_category: Kategorija artikla
+            translations: Prijevodi

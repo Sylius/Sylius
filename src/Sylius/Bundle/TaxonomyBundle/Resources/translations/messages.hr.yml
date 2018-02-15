@@ -5,7 +5,7 @@ sylius:
     form:
         taxon:
             description: Opis
-            name: Naziv
+            name: Naziv regije
             parent: Nadređena kategorija
         taxonomy:
-            name: Naziv
+            name: Naziv regije

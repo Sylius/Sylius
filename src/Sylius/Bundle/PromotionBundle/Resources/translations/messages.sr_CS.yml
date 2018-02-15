@@ -7,13 +7,17 @@ sylius:
             actions: Akcije
             add_action: Dodajte akciju
             add_rule: Dodajte pravilo
+            coupon_based: Bazirano na kuponu
             description: Opis
             ends_at: Završava se
+            exclusive: Ekskluzivno
             name: Ime
             rules: Pravila
             starts_at: Počinje
             usage_limit: Ograničenje korišćenja
         promotion_action:
+            fixed_discount_configuration:
+                amount: Iznos
             percentage_discount_configuration:
                 percentage: Procenat
             type: Tip

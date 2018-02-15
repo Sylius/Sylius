@@ -11,11 +11,11 @@ sylius:
             description: Описание
             ends_at: Конец
             exclusive: Эксклюзив
-            name: Название
+            name: Округ
             priority: Приоритет
             rules: Правила
-            starts_at: Старт
-            usage_limit: Предел использования
+            starts_at: Начало
+            usage_limit: Предел
         promotion_action:
             item_fixed_discount: Фиксированная скидка
             item_percentage_discount: Процентная скидка
@@ -23,18 +23,18 @@ sylius:
             order_percentage_discount: Процент скидки на заказ
             shipping_percentage_discount: Процент скидки на доставку
             fixed_discount_configuration:
-                amount: Сумма
+                amount: Количество
             percentage_discount_configuration:
                 percentage: Процент
             type: Тип
         promotion_coupon:
             expires_at: Истекает
-            usage_limit: Предел использования
+            usage_limit: Предел
         promotion_coupon_generator_instruction:
-            amount: Сумма
+            amount: Количество
             code_length: Длина кода
             expires_at: Истекает
-            usage_limit: Предел использования
+            usage_limit: Предел
         promotion_filter:
             price_range: Фильтр диапазона цен
         promotion_rule:
@@ -54,7 +54,7 @@ sylius:
                 exclude: Исключить
                 variants: Товары
             item_total_configuration:
-                amount: Сумма
+                amount: Количество
             nth_order_configuration:
                 nth: Количество
             shipping_country_configuration:

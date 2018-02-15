@@ -23,7 +23,7 @@ sylius:
             order_percentage_discount: Vaste percentage per bestelling
             shipping_percentage_discount: Percentage op verzending
             fixed_discount_configuration:
-                amount: Hoeveelheid
+                amount: Bedrag
             percentage_discount_configuration:
                 percentage: Percentage
             type: Type
@@ -31,7 +31,7 @@ sylius:
             expires_at: Verloopt op
             usage_limit: Gebruikslimiet
         promotion_coupon_generator_instruction:
-            amount: Hoeveelheid
+            amount: Bedrag
             code_length: Lengte van de code
             expires_at: Verloopt op
             usage_limit: Gebruikslimiet
@@ -54,12 +54,12 @@ sylius:
                 exclude: Uitsluiten
                 variants: Producten
             item_total_configuration:
-                amount: Hoeveelheid
+                amount: Bedrag
             nth_order_configuration:
                 nth: N-de
             shipping_country_configuration:
                 country: Land
             taxonomy_configuration:
                 exclude: Uitsluiten
-                taxons: Taxons
+                taxons: Taxa
             type: Type

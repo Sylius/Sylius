@@ -6,7 +6,7 @@ sylius:
         currency:
             base: Основна валюта
             code: Назва
-            enabled: Увімкнено
+            enabled: Ввімкнено
             exchange_rate: Курс валют
         exchange_rate:
             source_currency: Джерело валюти

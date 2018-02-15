@@ -9,13 +9,16 @@ sylius:
             invalid: Este endereço de e-mail é inválido.
             max: O e-mail não deve ter mais que {{ limit }} carateres.
             min: O endereço de e-mail deve pelo menos {{ limit }} caracteres.
+    channel_pricing:
+        price:
+            not_blank: Introduza o preço.
     checkout:
         shipping_method:
             not_blank: Selecione o método de envio.
     contact:
         email:
             invalid: Este endereço de e-mail é inválido.
-            not_blank: Por favor insira o seu e-mail.
+            not_blank: Por favor introduza o seu endereço de e-mail.
         message:
             not_blank: Por favor, insira a sua mensagem.
     customer:
@@ -23,7 +26,7 @@ sylius:
             not_valid: O código de moeda introduzido é inválido.
     order:
         currency_code:
-            not_valid: O código de moeda inserido é inválido.
+            not_valid: O código de moeda introduzido é inválido.
     locale:
         code:
             not_blank: Introduza o código de localidade.

@@ -10,7 +10,7 @@ sylius:
             code: Kod
             name: Ad
             translations: Çeviriler
-            type: Türü
+            type: Tür
         attribute_type:
             checkbox: Onay Kutusu
             configuration: Ayarlar

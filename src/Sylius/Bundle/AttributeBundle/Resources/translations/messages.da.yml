@@ -13,7 +13,7 @@ sylius:
             type: Type
         attribute_type:
             checkbox: Markeringsfelt
-            configuration: Opsætning
+            configuration: Konfiguration
             date: Dato
             datetime: Datotid
             integer: Heltal

@@ -6,6 +6,7 @@ sylius:
         shipping_category:
             name: Nimi
         shipping_method:
+            channels: Kanalid
             enabled: Lubatud
             name: Nimi
             tax_category: Maksu kategooria

@@ -20,14 +20,22 @@ sylius:
             name: Ime
             roles: Uloge
         channel:
+            currencies: Valute
             currency_base: Osnovna valuta
             hostname: Hostname
             locale_default: Podrazumevana vrednost
+            locales: Lokalizacije
+            payment_methods: Metod plaćanja
+            shipping_methods: Načini dostave
             tax_zone_default: Podrazumevana poreska zona
             taxonomies: Kategorizacija
             theme: Tema
         image:
             type: Tip
+            file: Slika
+        locale:
+            code: Kod
+            enabled: Omogućeno
         order_filter:
             number: Broj
             total_from: Od
@@ -41,10 +49,12 @@ sylius:
             images: Slike
             short_description: Kratak opis
             variant_selection_method: Metod izbora varijante proizvoda
+            main_taxon: Glavna kategorizacija
             channels: Kanali
             enabled: Omogućeno
         product_filter:
             name: Ime
+            code: Kod
         product_variant:
             tax_category: Kategorija proizvoda
         shipment_filter:
@@ -94,6 +104,8 @@ sylius:
         promotion_rule:
             product:
                 products: Proizvodi
+            total_of_items_from_taxon:
+                amount: Iznos
         payment_method:
             channels: Kanali
         product_attribute:
@@ -110,3 +122,5 @@ sylius:
             off: false
             on: true
             timezone: vremenska zona
+    payum_gateway:
+        offline: Van mreže

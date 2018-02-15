@@ -23,7 +23,7 @@ sylius:
             order_percentage_discount: Procentuální sleva objednávky
             shipping_percentage_discount: Procentuální sleva dopravy
             fixed_discount_configuration:
-                amount: Množství
+                amount: Částka
             percentage_discount_configuration:
                 percentage: Procentuální
             type: Typ
@@ -31,7 +31,7 @@ sylius:
             expires_at: Vyprší za
             usage_limit: Omezení použití
         promotion_coupon_generator_instruction:
-            amount: Množství
+            amount: Částka
             code_length: Délka kódu
             expires_at: Vyprší za
             usage_limit: Omezení použití
@@ -43,7 +43,7 @@ sylius:
             customer_group: Skupina zákazníků
             has_at_least_one_from_taxons: Má alespoň jeden z taxonů
             item_total: Položka celkem
-            nth_order: Nth pořadí
+            nth_order: V pořadí objednávka
             shipping_country: Dodací adresa – země
             taxonomy: Taxy DPH
             total_price_of_items_from_taxon: Celková cena položek z taxonu
@@ -54,9 +54,9 @@ sylius:
                 exclude: Výjma
                 variants: Produkty
             item_total_configuration:
-                amount: Množství
+                amount: Částka
             nth_order_configuration:
-                nth: N-tý
+                nth: N-tá
             shipping_country_configuration:
                 country: Země
             taxonomy_configuration:

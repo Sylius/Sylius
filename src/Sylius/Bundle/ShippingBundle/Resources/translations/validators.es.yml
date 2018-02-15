@@ -28,4 +28,4 @@ sylius:
             not_blank: 'Por favor, introduzca la zona del método de envío.'
     shipment:
         shipping_method:
-            not_blank: 'Por favor, seleccione el método de envío.'
+            not_blank: 'Por favor seleccione el método de envío.'

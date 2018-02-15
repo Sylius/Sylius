@@ -46,7 +46,7 @@ sylius:
             nth_order_configuration:
                 nth: N-tý
             shipping_country_configuration:
-                country: Štát
+                country: Krajina
             taxonomy_configuration:
                 exclude: Vylúčiť
                 taxons: Kategórie

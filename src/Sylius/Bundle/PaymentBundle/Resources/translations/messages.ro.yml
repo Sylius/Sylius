@@ -30,5 +30,5 @@ sylius:
             description: Descriere
             enabled: Activată?
             instructions: Instrucțiuni
-            name: Nume
-            position: Poziție
+            name: Nume produs
+            position: Poziţie

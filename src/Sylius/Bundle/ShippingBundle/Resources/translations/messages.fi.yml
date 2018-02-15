@@ -8,9 +8,21 @@ sylius:
                 checkout: Kassa
                 pending: Odottaa
                 cancelled: Peruutettu
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Summa
+            per_unit_rate_configuration:
+                amount: Summa
         shipping_category:
             description: Kuvaus
+            name: Nimi
         shipping_method:
+            calculator: Laskin
+            category: Kategoria
             channels: Kanavat
+            configuration: Asetukset
             description: Kuvaus
+            enabled: Aktiivinen
+            name: Nimi
+            position: Asema
             translations: Käännökset

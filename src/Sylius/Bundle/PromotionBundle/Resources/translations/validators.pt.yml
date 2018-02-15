@@ -24,3 +24,14 @@ sylius:
         is_invalid: O código do cupão é inválido.
         usage_limit:
             min: O limite de uso do cupão deve ser de pelo menos {{ limit }}.
+    promotion_coupon_generator_instruction:
+        amount:
+            min: A quantidade de cupões a criar deve ser de pelo menos {{ limit }}.
+            not_blank: Por favor introduza a quantidade de cupões a criar.
+        code_length:
+            min: O código do cupão deve ter pelo menos {{ limit }} caracteres.
+            max: O código do cupão não deve ter mais que {{ limit }} caracteres.
+            not_blank: Por favor introduza o comprimento do código do cupão.
+        possible_generation_amount: Tamanho dos códigos de cupão ou quantia inválidos. Não é possível criar %expectedAmount% cupões únicos com um código de %codeLength% caracteres. É apenas possível criar %possibleAmount%.
+        usage_limit:
+            min: O limite de uso dos cupões criados deve ser de pelo menos {{ limit }}.

@@ -64,7 +64,7 @@ sylius:
             short_description: وصف مختصر
             variant_selection_method: أسلوب اختيار البديل
             main_taxon: الأصناف الرئيسية
-            channels: قنوات
+            channels: القنوات
             enabled: تفعيل
         product_filter:
             name: الاسم
@@ -95,7 +95,7 @@ sylius:
         user:
             billing_address: عنوان الفاتورة
             different_billing_address: استخدام عنوان مختلف للفوترة؟
-            enabled: تمكين
+            enabled: تفعيل
             first_name: الاسم الأول
             groups: المجموعات
             roles: الأدوار
@@ -138,7 +138,7 @@ sylius:
                 taxon: تاكسون
                 amount: القيمة
         payment_method:
-            channels: قنوات
+            channels: القنوات
         product_attribute:
             position: المهنة
         zone:

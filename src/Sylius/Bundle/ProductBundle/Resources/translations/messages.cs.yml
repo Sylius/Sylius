@@ -27,5 +27,5 @@ sylius:
             position: Pozice
             values: Možné hodnoty
         option_value:
-            add_value: Přidání hodnoty
+            add_value: Přidat hodnotu
             value: Hodnota

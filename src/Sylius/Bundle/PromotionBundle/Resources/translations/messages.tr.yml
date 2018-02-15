@@ -14,7 +14,7 @@ sylius:
             name: Ad
             priority: Öncelik
             rules: Kurallar
-            starts_at: ''' Dan başlar'
+            starts_at: ''' Dan başlar (start at)'
             usage_limit: Kullanım sınırı
         promotion_action:
             item_fixed_discount: Eşya sabit indirim
@@ -26,7 +26,7 @@ sylius:
                 amount: Miktar
             percentage_discount_configuration:
                 percentage: Yüzde
-            type: Türü
+            type: Tür
         promotion_coupon:
             expires_at: Süre sonu
             usage_limit: Kullanım sınırı
@@ -62,4 +62,4 @@ sylius:
             taxonomy_configuration:
                 exclude: Hariç
                 taxons: Kategoriler
-            type: Türü
+            type: Tür

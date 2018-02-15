@@ -4,4 +4,4 @@
 sylius:
     form:
         locale:
-            name: Nome
+            name: "Nome\n"

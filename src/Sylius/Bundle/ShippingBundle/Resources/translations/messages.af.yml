@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        shipping_category:
+            name: Naam
+        shipping_method:
+            name: Naam

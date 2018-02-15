@@ -6,6 +6,6 @@ sylius:
         channel:
             color: Kleur
             description: Omschrijving
-            enabled: Toegestaan
+            enabled: Ingeschakeld
             name: Naam
             url: URL

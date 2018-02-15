@@ -16,7 +16,7 @@ sylius:
             only_customer_registration: Создать учетную запись?
             subscribed_to_newsletter: Подписаться на рассылку новостей
         customer_group:
-            name: Название
+            name: Округ
             roles: Роли
     gender:
         unknown: Неизвестен

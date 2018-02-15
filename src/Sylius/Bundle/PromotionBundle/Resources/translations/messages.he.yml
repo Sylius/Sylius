@@ -3,9 +3,20 @@
 
 sylius:
     form:
+        promotion:
+            description: תיאור
+            name: שם
         promotion_action:
+            fixed_discount_configuration:
+                amount: כמות
             type: סוג
+        promotion_coupon_generator_instruction:
+            amount: כמות
         promotion_rule:
+            contains_product_configuration:
+                variants: מוצרים
+            item_total_configuration:
+                amount: כמות
             shipping_country_configuration:
                 country: מדינה
             taxonomy_configuration:

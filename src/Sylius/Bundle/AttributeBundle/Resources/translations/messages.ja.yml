@@ -5,3 +5,7 @@ sylius:
     form:
         attribute:
             code: コード
+            name: ゾーン名
+            type: タイプ
+        attribute_type:
+            configuration: 条件設定

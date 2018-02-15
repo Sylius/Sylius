@@ -22,7 +22,7 @@ sylius:
         promotion_coupon:
             per_customer_usage_limit: Ліміт карыстання на кліента
         group:
-            name: Імя
+            name: Назва
             roles: Ролі
         channel:
             contact_email: Кантактны емейл
@@ -55,7 +55,7 @@ sylius:
             payment_state: Статус аплаты
             channel: Усе каналы
         page:
-            body: Цела
+            body: Змест
             id: ID
             title: Назва
         product:
@@ -67,7 +67,7 @@ sylius:
             channels: Каналы
             enabled: Уключана
         product_filter:
-            name: Імя
+            name: Назва
             code: Код
         product_variant:
             tax_category: Катэгорыя падатку
@@ -123,7 +123,7 @@ sylius:
             product: Звязаны прадукт
             type: Тып узаемасувязі
         product_association_type:
-            name: Імя
+            name: Назва
         promotion_filter:
             products: Фільтр прадуктаў
             taxons: Фільтр катэгорый
@@ -136,7 +136,7 @@ sylius:
                 products: Прадукты
             total_of_items_from_taxon:
                 taxon: Катэгорыя
-                amount: Сума
+                amount: Колькасць
         payment_method:
             channels: Каналы
         product_attribute:

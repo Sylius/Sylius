@@ -8,7 +8,6 @@ sylius:
             group: Groupe
             last_name: Nom
             email: E-mail
-            phone_number: Téléphone
             gender: Sexe
             birthday: Date de naissance
             billing_address: Adresse de facturation
@@ -16,7 +15,6 @@ sylius:
             only_customer_registration: Créer un compte ?
             subscribed_to_newsletter: S'abonner à la newsletter
         customer_group:
-            name: Nom
             roles: Rôles
     gender:
         unknown: Inconnu

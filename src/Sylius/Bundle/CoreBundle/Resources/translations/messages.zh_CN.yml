@@ -64,7 +64,7 @@ sylius:
             short_description: 简短说明：
             variant_selection_method: 变量选择方法
             main_taxon: 主分类
-            channels: 频道
+            channels: 门店
             enabled: 已启用
         product_filter:
             name: 名称
@@ -138,7 +138,7 @@ sylius:
                 taxon: 分类
                 amount: 金额
         payment_method:
-            channels: 频道
+            channels: 门店
         product_attribute:
             position: 优先级
         zone:
