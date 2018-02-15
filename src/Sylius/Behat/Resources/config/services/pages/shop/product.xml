@@ -15,6 +15,7 @@
     <parameters>
         <parameter key="sylius.behat.page.shop.product.show.class">Sylius\Behat\Page\Shop\Product\ShowPage</parameter>
         <parameter key="sylius.behat.page.shop.product.index.class">Sylius\Behat\Page\Shop\Product\IndexPage</parameter>
+        <parameter key="sylius.behat.page.shop.product_compare.index.class">Sylius\Behat\Page\Shop\ProductCompare\IndexPage</parameter>
         <parameter key="sylius.behat.page.shop.product_reviews.create.class">Sylius\Behat\Page\Shop\ProductReview\CreatePage</parameter>
         <parameter key="sylius.behat.page.shop.product_reviews.index.class">Sylius\Behat\Page\Shop\ProductReview\IndexPage</parameter>
     </parameters>
@@ -22,6 +23,7 @@
     <services>
         <service id="sylius.behat.page.shop.product.show" class="%sylius.behat.page.shop.product.show.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.product.index" class="%sylius.behat.page.shop.product.index.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.product_compare.index" class="%sylius.behat.page.shop.product_compare.index.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.product_reviews.create" class="%sylius.behat.page.shop.product_reviews.create.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.product_reviews.index" class="%sylius.behat.page.shop.product_reviews.index.class%" parent="sylius.behat.symfony_page" public="false" />
     </services>

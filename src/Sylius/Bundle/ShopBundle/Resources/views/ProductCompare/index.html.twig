@@ -1,0 +1,46 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <div class="ui hidden divider"></div>
+    <div class="ui two column stackable grid">
+        <div class="column">
+            <h1 class="ui header">
+                <i class="circular table icon"></i>
+                <div class="content">
+                    Product comparison
+                    <div class="sub header">Comparing <strong>Product 1</strong>, <strong>Product 2</strong></div>
+                </div>
+            </h1>
+        </div>
+    </div>
+    <div class="ui padded segment" id="reviews">
+        <div class="sixteen wide column">
+            <div id="sylius-product-compared-attributes">
+                {% if products is not empty %}
+                    <table class="ui definition table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Product 1</th>
+                                <th>Product 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Colour</td>
+                            <td>Blue</td>
+                            <td>Blue</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="alert">
+                        <div class="ui icon error message">
+                            No products
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

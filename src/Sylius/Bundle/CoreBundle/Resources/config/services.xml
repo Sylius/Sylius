@@ -123,6 +123,12 @@
             <argument>9999</argument>
         </service>
 
+        <service id="sylius.product_compare_controller" class="Sylius\Bundle\CoreBundle\Controller\ProductCompareController">
+            <argument type="service" id="templating" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.product_attribute_comparator" />
+        </service>
+
         <service id="sylius.customer_ip_assigner" class="Sylius\Bundle\CoreBundle\Assigner\CustomerIpAssigner" />
 
         <service id="sylius.calculator.product_variant_price" class="Sylius\Component\Core\Calculator\ProductVariantPriceCalculator" />

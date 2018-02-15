@@ -1,0 +1,9 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_product_compare_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.product_compare_controller:indexAction
+
