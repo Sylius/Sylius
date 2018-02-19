@@ -54,7 +54,7 @@ final class SelectAttributeType extends AbstractType
             && !$options['configuration']['multiple']) {
             $builder->addModelTransformer(new CallbackTransformer(
                 function ($array) {
-                    if (count($array) > 0) {
+                    if (is_array($array) && count($array) > 0) {
                         return $array[0];
                     }
 
