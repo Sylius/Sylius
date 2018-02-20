@@ -419,11 +419,12 @@ This could look like this f.i.:
                 - "image/jpg"
                 - "image/jpeg"
                 - "image/gif"
-              mimeTypesMessage: 'This mime is not allowed. Pls. use PNG, JPG or GIF files.'
+              mimeTypesMessage: 'This file format is not allowed. Please use PNG, JPG or GIF files.'
               minHeight: 200
               minWidth: 200
               
-This defines the validation constraints for each image entity. Now connecting the validation of the ShippingMethod to the validation of each single Image Entity is left:
+This defines the validation constraints for each image entity.
+Now connecting the validation of the ``ShippingMethod`` to the validation of each single ``Image Entity`` is left:
 
 .. code-block:: yaml
 
