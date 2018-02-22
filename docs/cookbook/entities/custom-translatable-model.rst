@@ -448,7 +448,20 @@ Remember to import your grid in the ``app/config/grids/grids.yml`` file which ha
     imports:
         - { resource: "grids/grids.yml" }
 
-10. Define routing for entity administration
+
+10. Create template
+-------------------
+
+.. code-block:: php
+
+    # AppBundle/Resources/views/Supplier/_form.yml
+    {% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
+
+    {{ form_errors(form) }}
+    {{ translationForm(form.translations) }}
+    {{ form_row(form.enabled) }}
+
+11. Define routing for entity administration
 --------------------------------------------
 
 Having a grid prepared we can configure routing for the entity administration:
@@ -469,6 +482,8 @@ should be also included in the ``app/config/routing.yml``.
             vars:
                 all:
                     subheader: app.ui.supplier
+                    templates:
+                        form: AppBundle:Supplier:_form.html.twig
                 index:
                     icon: 'file image outline'
         type: sylius.resource
@@ -486,15 +501,15 @@ should be also included in the ``app/config/routing.yml``.
         resource: 'routing/admin.yml'
         prefix: /admin
 
-9. Add entity administration to the admin menu
-----------------------------------------------
+12. Add entity administration to the admin menu
+-----------------------------------------------
 
 .. tip::
 
     See :doc:`how to add links to your new entity administration in the administration menu </customization/menu>`.
 
-9. Check the admin panel for your changes
------------------------------------------
+13. Check the admin panel for your changes
+------------------------------------------
 
 .. tip::
 
