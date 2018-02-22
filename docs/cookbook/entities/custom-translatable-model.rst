@@ -502,14 +502,14 @@ should be also included in the ``app/config/routing.yml``.
         prefix: /admin
 
 12. Add entity administration to the admin menu
-----------------------------------------------
+-----------------------------------------------
 
 .. tip::
 
     See :doc:`how to add links to your new entity administration in the administration menu </customization/menu>`.
 
 13. Check the admin panel for your changes
------------------------------------------
+------------------------------------------
 
 .. tip::
 
