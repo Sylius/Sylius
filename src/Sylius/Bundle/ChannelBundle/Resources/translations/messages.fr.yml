@@ -4,4 +4,6 @@
 sylius:
     form:
         channel:
+            color: Couleur
+            description: Description
             url: URL
