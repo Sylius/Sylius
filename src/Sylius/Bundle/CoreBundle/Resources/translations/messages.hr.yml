@@ -146,7 +146,7 @@ sylius:
             simplexml_import_dom: SimpleXML
             token_get_all: Tokenizer
         filesystem:
-            header: File system 
+            header: File system
             cache:
                 header: cache
             exists: Postoji
