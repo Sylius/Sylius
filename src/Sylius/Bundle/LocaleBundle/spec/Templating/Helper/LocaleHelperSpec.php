@@ -22,7 +22,7 @@ final class LocaleHelperSpec extends ObjectBehavior
 {
     function let(LocaleConverterInterface $localeConverter): void
     {
-        $this->beConstructedWith($localeConverter);
+        $this->beConstructedWith($localeConverter, 'en');
     }
 
     function it_is_a_helper(): void
@@ -35,11 +35,18 @@ final class LocaleHelperSpec extends ObjectBehavior
         $this->shouldImplement(LocaleHelperInterface::class);
     }
 
-    function it_converts_locales_code_to_name(LocaleConverterInterface $localeConverter): void
+    function it_converts_locales_code_to_name_with_default_locale(LocaleConverterInterface $localeConverter): void
     {
-        $localeConverter->convertCodeToName('fr_FR')->willReturn('French (France)');
+        $localeConverter->convertCodeToName('fr_FR', 'en')->willReturn('French (France)');
 
         $this->convertCodeToName('fr_FR')->shouldReturn('French (France)');
+    }
+
+    function it_converts_locales_code_to_name_with_provided_locale(LocaleConverterInterface $localeConverter): void
+    {
+        $localeConverter->convertCodeToName('fr_FR', 'en')->willReturn('French (France)');
+
+        $this->convertCodeToName('fr_FR', 'en')->shouldReturn('French (France)');
     }
 
     function it_has_a_name(): void
