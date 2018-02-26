@@ -171,7 +171,7 @@ How will it look like in the admin panel?
 
 .. image:: ../../../_images/grid_filters.png
     :align: center
-    
+
 What about filtering by fields of related entities? For instance if you would like to filter your suppliers by their country of origin, which is a property of the associated address entity.
 
 This first requires a :doc:`custom repository method </customization/repository>` for your grid query:
@@ -188,12 +188,12 @@ This first requires a :doc:`custom repository method </customization/repository>
                         class: AppBundle\Entity\Supplier
                         repository:
                             method: mySupplierGridQuery
-                            
+
 .. note::
 
     The repository method has to return a queryBuilder object, since the query has to adjustable depending on the filters and sorting the user later applies.
-    Furthermore, all sub entities you wish to use later for filtering have to be ``JOIN``ed explicitely in the query.
-    
+    Furthermore, all sub entities you wish to use later for filtering have to be joined explicitely in the query.
+
 Then you can set up your filter to accordingly:
 
 .. code-block:: yaml
