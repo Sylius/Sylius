@@ -2690,16 +2690,16 @@
         },
         {
             "name": "league/uri-components",
-            "version": "1.7.0",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri-components.git",
-                "reference": "0a82a42327555f47929f56c7a2c89981ebe27e74"
+                "reference": "fc7058401f356b8cf51ed75bad37c55c0dd960e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri-components/zipball/0a82a42327555f47929f56c7a2c89981ebe27e74",
-                "reference": "0a82a42327555f47929f56c7a2c89981ebe27e74",
+                "url": "https://api.github.com/repos/thephpleague/uri-components/zipball/fc7058401f356b8cf51ed75bad37c55c0dd960e2",
+                "reference": "fc7058401f356b8cf51ed75bad37c55c0dd960e2",
                 "shasum": ""
             },
             "require": {
@@ -2756,20 +2756,20 @@
                 "url",
                 "userinfo"
             ],
-            "time": "2018-01-31T12:09:52+00:00"
+            "time": "2018-02-16T07:44:04+00:00"
         },
         {
             "name": "league/uri-hostname-parser",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri-hostname-parser.git",
-                "reference": "33cdfd185e775efb0b87b7fb6485604a6da43128"
+                "reference": "7a6be3d06d0ed08dcb51f666aa60f3b66cd51325"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri-hostname-parser/zipball/33cdfd185e775efb0b87b7fb6485604a6da43128",
-                "reference": "33cdfd185e775efb0b87b7fb6485604a6da43128",
+                "url": "https://api.github.com/repos/thephpleague/uri-hostname-parser/zipball/7a6be3d06d0ed08dcb51f666aa60f3b66cd51325",
+                "reference": "7a6be3d06d0ed08dcb51f666aa60f3b66cd51325",
                 "shasum": ""
             },
             "require": {
@@ -2825,7 +2825,7 @@
                 "domain parsing",
                 "icann"
             ],
-            "time": "2018-01-30T09:22:45+00:00"
+            "time": "2018-02-16T07:29:26+00:00"
         },
         {
             "name": "league/uri-interfaces",
