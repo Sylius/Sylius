@@ -1,5 +1,15 @@
 ## CHANGELOG
 
+### v1.0.11 2018-02-26
+
+- [#9195](https://github.com/Sylius/Sylius/pull/9195) [Documentation][GridBundle]Wrong definition of sortable attribute (@Mipme)
+- [#9145](https://github.com/Sylius/Sylius/pull/9145) Run Travis with readonly project directories (@pamil)
+- [#9206](https://github.com/Sylius/Sylius/pull/9206) [Documentation] Translatable model - Fix titles and add template support (@shadypierre)
+- [#9204](https://github.com/Sylius/Sylius/pull/9204) Fix invalid use of count by checking for an array (@venyii)
+- [#9189](https://github.com/Sylius/Sylius/pull/9189) [Documentation] Add more rules to the contribution guide + Fix CMS cookbook (@CoderMaggie)
+- [#9188](https://github.com/Sylius/Sylius/pull/9188) [Behat] Remove some unused methods in Behat pages (@Zales0123)
+- [#9155](https://github.com/Sylius/Sylius/pull/9155) [Documentation] Add CMS integration cookbook (@bitbager)
+
 ### v1.0.10 2018-02-09
 
 - [#9166](https://github.com/Sylius/Sylius/pull/9166) Add required parameters to the Route generation (@GitProdEnv)
