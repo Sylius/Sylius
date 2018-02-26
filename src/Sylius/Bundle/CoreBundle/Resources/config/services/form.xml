@@ -15,6 +15,7 @@
     <parameters>
         <parameter key="sylius.form.type.product_review.validation_groups" type="collection">
             <parameter>sylius</parameter>
+            <parameter>sylius_review</parameter>
         </parameter>
         <parameter key="sylius.form.type.admin_user.validation_groups" type="collection">
             <parameter>sylius</parameter>
