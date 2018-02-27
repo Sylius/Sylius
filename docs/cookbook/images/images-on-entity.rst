@@ -401,11 +401,11 @@ and render the ``{{ form_row(form.images) }}`` field.
 Your form so far is working fine, but don't forget about validation.
 The easiest way is using validation config files under the ``AppBundle/Resources/config/validation`` folder.
 
-This could look like this f.i.:
+This could look like this e.g.:
 
 .. code-block:: yaml
 
-    # ShippingMethodImage.yml
+    # AppBundle\Resources\config\validation\ShippingMethodImage.yml
     AppBundle\Entity\ShippingMethodImage:
       properties:
         file:
@@ -428,8 +428,12 @@ Now connecting the validation of the ``ShippingMethod`` to the validation of eac
 
 .. code-block:: yaml
 
-    images:
-      - Valid: ~    
+    # AppBundle\Resources\config\validation\ShippingMethod.yml
+    AppBundle\Entity\ShippingMethod:
+      properties:
+        ...
+        images:
+          - Valid: ~    
 
 Learn more
 ----------
