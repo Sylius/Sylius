@@ -668,6 +668,7 @@ sylius:
         shipping_address: 'Leveransadress'
         shipping_and_payment_methods: 'Leverans- och betalningsmetoder'
         shipping_categories: 'Fraktkategorier'
+        shipping_category: 'Fraktkategori'
         shipping_address_changes_history: 'Leveransadress ändrar historiken'
         shipping_charges: 'Fraktkostnader'
         shipping_method: 'Leveransmetod'

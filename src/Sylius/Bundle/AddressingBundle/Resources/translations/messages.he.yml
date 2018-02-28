@@ -34,6 +34,8 @@ sylius:
                 province: מחוז
                 zone: איזור
             scope: תחום
+            scopes:
+                all: הכל
             select: בחירה
             select_scope: בחרו תחום
         zone_member:

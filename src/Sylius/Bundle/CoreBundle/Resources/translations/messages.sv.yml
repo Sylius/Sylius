@@ -71,6 +71,7 @@ sylius:
             code: Kod
         product_variant:
             tax_category: Momskategori
+            shipping_category: Fraktkategori
         shipment_filter:
             created_at_from: Från
             created_at_to: Till

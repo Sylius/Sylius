@@ -11,6 +11,7 @@ sylius:
             last_name: Презиме
             phone_number: Телефонски Број
             postcode: Поштенски Број
+            street: Адреса
             province: Регион
             zone: Зона
         country:
@@ -21,6 +22,7 @@ sylius:
             enabled: Овозможено
         province:
             name: Име
+            abbreviation: Кратенка
             select: Изберете
         zone:
             add_member: Додади член
