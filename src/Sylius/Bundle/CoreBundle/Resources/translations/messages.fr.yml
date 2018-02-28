@@ -14,9 +14,15 @@ sylius:
                 different_billing_address: Utiliser une adresse différente pour la facturation ?
             payment_method: Moyen de paiement
             shipping_method: Mode de livraison
+        promotion:
+            channels: Canaux
+        promotion_action:
+            add_product_configuration:
+                product: Produit
         promotion_coupon:
             per_customer_usage_limit: Limite d'utilisation par client
         group:
+            name: Nom
             roles: Rôles
         channel:
             contact_email: Email de contact
@@ -35,9 +41,11 @@ sylius:
             taxonomies: Taxonomies
             theme: Thème
         image:
+            type: Type
             file: Image
         locale:
             code: Code
+            enabled: Activé
         order_filter:
             created_at_from: Créé après le
             created_at_to: Créé avant le
@@ -51,14 +59,19 @@ sylius:
             id: ID
             title: Titre
         product:
+            images: Images
             restricted_zone: Restriction de zone
             short_description: Brève description
             variant_selection_method: Méthode de sélection de variante
             main_taxon: Taxinomie principale
+            channels: Canaux
+            enabled: Activé
         product_filter:
+            name: Nom
             code: Code
         product_variant:
             tax_category: Catégorie de taxe
+            shipping_category: Catégorie de livraison
         shipment_filter:
             created_at_from: De
             created_at_to: À
@@ -76,15 +89,18 @@ sylius:
         taxon:
             code: Code
             file: Sélectionnez une image
+            images: Images
         taxonomy:
             file: Sélectionnez une image
         user:
             billing_address: Adresse de facturation
             different_billing_address: Utiliser une adresse différente pour la facturation ?
+            enabled: Activé
             first_name: Prénom
             groups: Groupes
             roles: Rôles
             last_name: Nom
+            password: Mot de passe
             shipping_address: Adresse de livraison
         user_filter:
             query: Rechercher
@@ -106,14 +122,29 @@ sylius:
         product_association:
             product: Produits associés
             type: Type d'association
+        product_association_type:
+            name: Nom
         promotion_filter:
             products: Filtre de produits
             taxons: Filtre de taxons
         promotion_rule:
             customer_group:
                 group: Groupe de clients
+            has_taxon:
+                taxons: Taxons
+            product:
+                products: Produits
             total_of_items_from_taxon:
                 taxon: Taxon
+                amount: Montant
+        payment_method:
+            channels: Canaux
+        product_attribute:
+            position: Emplacement
+        zone:
+            scopes:
+                shipping: Expédition
+                tax: Tva
     installer:
         extensions:
             header: Extensions
@@ -175,6 +206,7 @@ sylius:
             version_recommended: Version de PHP recommandée
     payum_gateway:
         cash_on_delivery: Paiement à la livraison
+        offline: Hors-ligne
         paypal_express_checkout: Paiement via PayPal Express
     shipping_method_resolver:
         by_zones_and_channel: Par zones et canal

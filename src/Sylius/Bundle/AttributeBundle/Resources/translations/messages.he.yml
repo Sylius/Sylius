@@ -9,4 +9,6 @@ sylius:
             translations: תרגומים
             type: סוג
         attribute_type:
+            date: תאריך
             select: בחירה
+            text: טקסט

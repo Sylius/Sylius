@@ -11,7 +11,13 @@ sylius:
                     products: מוצרים
                     taxons: קבוצות טקסונומיות
                 configuration:
+                    admin_users: מנהלי מערכת
                     channels: ערוצים
                     currencies: מטבעות
+                marketing:
+                    promotions: מבצעים
                 customers:
+                    customers: לקוחות
                     groups: קבוצות
+                sales:
+                    header: מכירות
