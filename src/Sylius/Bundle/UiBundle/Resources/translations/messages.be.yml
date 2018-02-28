@@ -6,6 +6,7 @@ sylius:
         login:
             username: 'Юзернэйм'
             password: 'Пароль'
+            remember_me: 'Запомніць мяне'
         option:
             name: 'Назва'
     ui:
@@ -300,6 +301,7 @@ sylius:
         register_button: 'Зарэгістравацца'
         registration_date: 'Рэгістрацыйныя звесткі'
         release_inventory: 'Правесці інвентарызацыю'
+        remember_me: 'Запомніць мяне'
         retail_price: 'Рознічная цана'
         return: 'Вярнуць'
         returned: 'Вернута'
