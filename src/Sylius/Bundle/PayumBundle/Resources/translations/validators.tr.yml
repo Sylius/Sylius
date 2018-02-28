@@ -10,3 +10,8 @@ sylius:
                 not_blank: Lütfen paypal imzanızı girin.
             username:
                 not_blank: Lütfen paypal kullanıcı adınızı girin.
+        stripe:
+            secret_key:
+                not_blank: Lütfen stripe gizli anahtarını girin.
+            publishable_key:
+                not_blank: Lütfen stripe yayınlanabilir anahtarını girin.
