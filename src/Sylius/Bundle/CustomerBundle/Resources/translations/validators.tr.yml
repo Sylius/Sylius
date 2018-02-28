@@ -20,3 +20,11 @@ sylius:
             invalid: Bu e-posta geçerli değil.
             unique: Bu e-posta adresi zaten kullanılmakta.
             registered: Bu e-posta zaten kullanılıyor, lütfen giriş yapın veya unutulan parolayı kullanın.
+    customer_group:
+        code:
+            regex: Müşteri grup kodu sadece harflerden, sayılardan, tire ve alt çizgi karakterlerinden oluşur.
+            unique: Müşteri grup kodu benzersiz olmalıdır.
+        name:
+            max: Müşteri grup adı {{ limit }} karakterden uzun olamaz.
+            min: Müşteri grup adı en az {{ limit }} karakter uzunluğunda olmalıdır.
+            not_blank: Lütfen müşteri grup adı yazın.

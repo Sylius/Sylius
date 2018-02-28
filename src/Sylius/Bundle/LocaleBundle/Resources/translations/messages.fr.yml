@@ -3,6 +3,5 @@
 
 sylius:
     form:
-        collection:
-            add: Ajouter
-            delete: Supprimer
+        locale:
+            name: Nom

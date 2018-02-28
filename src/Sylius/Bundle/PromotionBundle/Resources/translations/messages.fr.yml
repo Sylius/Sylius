@@ -4,21 +4,37 @@
 sylius:
     form:
         promotion:
+            actions: Actions
+            add_action: Ajouter une action
+            add_rule: Ajouter une règle
+            coupon_based: Comprend des coupons
             description: Description
+            ends_at: Se termine le
+            exclusive: Exclusif
+            name: Nom
             priority: Priorité
+            rules: Règles
+            starts_at: Commence le
+            usage_limit: Limite d'utilisation
         promotion_action:
             item_fixed_discount: Remise fixe produit
             item_percentage_discount: Rabais en pourcentage produit
             order_fixed_discount: Remise sur la commande
             order_percentage_discount: Rabais en pourcentage commande
             shipping_percentage_discount: Rabais en pourcentage expédition
+            fixed_discount_configuration:
+                amount: Montant
             percentage_discount_configuration:
                 percentage: Pourcentage
+            type: Type
         promotion_coupon:
             expires_at: Expire le
+            usage_limit: Limite d'utilisation
         promotion_coupon_generator_instruction:
+            amount: Montant
             code_length: Longueur du code
             expires_at: Expire le
+            usage_limit: Limite d'utilisation
         promotion_filter:
             price_range: Filtre de gamme de prix
         promotion_rule:
@@ -36,7 +52,14 @@ sylius:
                 equal: Égal
             contains_product_configuration:
                 exclude: Exclure
+                variants: Produits
+            item_total_configuration:
+                amount: Montant
             nth_order_configuration:
                 nth: Nième
+            shipping_country_configuration:
+                country: Pays
             taxonomy_configuration:
                 exclude: Exclure
+                taxons: Taxons
+            type: Type
