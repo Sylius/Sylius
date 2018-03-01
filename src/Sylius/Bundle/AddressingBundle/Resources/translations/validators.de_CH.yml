@@ -36,15 +36,15 @@ sylius:
             unique: ISO-Ländercode muss eindeutig sein.
     province:
         code:
-            min_length: Der Name des Bundeslandes muss mindestens 5 Zeichen lang sein|Der Name des Bundeslandes muss mindestens 5 Zeichen lang sein.
-            not_blank: Bitte geben Sie den Code des Bundeslandes ein.
-            regex: Der Code des Bundeslands sollte das Format XX-XX haben (z.B. DE-BY).
-            unique: Bundesland-Code muss eindeutig sein.
+            min_length: Der Name des Bundeslandes/Kantons muss mindestens 5 Zeichen lang sein|Der Name des Bundeslandes/Kantons muss mindestens 5 Zeichen lang sein.
+            not_blank: Bitte geben Sie den Code des Bundeslandes/Kantons ein.
+            regex: Der Code des Bundeslands sollte das Format XX-XX haben (z.B. CH-ZH).
+            unique: Bundesland\Kanton-Code muss eindeutig sein.
         name:
             max_length: Der Name des Kantons darf nicht länger als 255 Zeichen sein|Der Name des Kantons darf nicht länger als 255 Zeichen sein.
             min_length: Der Name des Kantons muss mindestens 2 Zeichen lang sein|Der Name des Kantons muss mindestens 2 Zeichen lang sein.
             not_blank: Bitte geben Sie einen Kanton an.
-            unique: Bundesland-Name muss eindeutig sein.
+            unique: Bundesland-Name/Kanton-Name muss eindeutig sein.
     zone:
         scope:
             not_blank: Bitte den Bereich angeben.

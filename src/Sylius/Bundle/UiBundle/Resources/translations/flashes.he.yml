@@ -22,3 +22,5 @@ sylius:
         apply_state_machine_transition_error: 'אירעה בעיה לא צפויה עם עדכון תשלום. אנא, נסה לעדכן את התשלום שוב.'
     product:
         out_of_stock: 'נשארו רק %quantity% יחידות של מוצר זה במלאי.'
+    product_variant:
+        update_error: 'אירעה בעיה לא צפויה עם עדכון מאפיין מוצר. אנא, נסה לעדכן את מאפיין שוב.'
