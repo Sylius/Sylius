@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -48,6 +49,7 @@ final class ProductOptionValueCollectionType extends AbstractType
             $builder->add((string) $option->getCode(), ProductOptionValueChoiceType::class, [
                 'label' => $option->getName() ?: $option->getCode(),
                 'option' => $option,
+                'data' => $this->getDefaultDataOption($option, $options['data']),
                 'property_path' => '[' . $i . ']',
                 'block_name' => 'entry',
             ]);
@@ -83,5 +85,21 @@ final class ProductOptionValueCollectionType extends AbstractType
             isset($options['options']) && is_iterable($options['options']),
             'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Product\Model\ProductOptionInterface" must be passed to collection'
         );
+    }
+
+    /**
+     * @param ProductOptionInterface $option
+     * @param ProductOptionValueInterface[] $data
+     * @return ProductOptionValueInterface|null
+     */
+    private function getDefaultDataOption(ProductOptionInterface $option, $data) : ?ProductOptionValueInterface
+    {
+        foreach ($data as $defaultOption){
+            if($defaultOption->getOption()->getCode() === $option->getCode()){
+                return $defaultOption;
+            }
+        }
+        return null;
+
     }
 }
