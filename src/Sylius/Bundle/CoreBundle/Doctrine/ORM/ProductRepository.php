@@ -135,7 +135,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         ;
 
         $this->associationHydrator->hydrateAssociations($product, [
-            'images',
+            'files',
             'options',
             'options.translations',
             'variants',

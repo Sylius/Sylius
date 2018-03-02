@@ -44,7 +44,7 @@
         <parameter key="sylius.form.type.channel_pricing.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
-        <parameter key="sylius.form.type.product_image.validation_groups" type="collection">
+        <parameter key="sylius.form.type.product_file.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
     </parameters>
@@ -129,13 +129,13 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.product_image" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType">
-            <argument>%sylius.model.product_image.class%</argument>
-            <argument>%sylius.form.type.product_image.validation_groups%</argument>
+        <service id="sylius.form.type.product_file" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductFileType">
+            <argument>%sylius.model.product_file.class%</argument>
+            <argument>%sylius.form.type.product_file.validation_groups%</argument>
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.taxon_image" class="Sylius\Bundle\CoreBundle\Form\Type\Taxon\TaxonImageType">
-            <argument>%sylius.model.taxon_image.class%</argument>
+        <service id="sylius.form.type.taxon_file" class="Sylius\Bundle\CoreBundle\Form\Type\Taxon\TaxonFileType">
+            <argument>%sylius.model.taxon_file.class%</argument>
             <tag name="form.type" />
         </service>
 

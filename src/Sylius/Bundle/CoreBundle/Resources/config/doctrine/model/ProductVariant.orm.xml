@@ -44,8 +44,8 @@
             </cascade>
         </one-to-many>
         <many-to-many
-            field="images"
-            target-entity="Sylius\Component\Core\Model\ProductImageInterface"
+            field="files"
+            target-entity="Sylius\Component\Core\Model\ProductFileInterface"
             mapped-by="productVariants"
         >
             <cascade>

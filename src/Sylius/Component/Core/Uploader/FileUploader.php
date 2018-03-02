@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Uploader;
 
 use Gaufrette\Filesystem;
-use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\FileInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Webmozart\Assert\Assert;
 
-class ImageUploader implements ImageUploaderInterface
+class FileUploader implements FileUploaderInterface
 {
     /**
      * @var Filesystem
@@ -36,31 +36,31 @@ class ImageUploader implements ImageUploaderInterface
     /**
      * {@inheritdoc}
      */
-    public function upload(ImageInterface $image): void
+    public function upload(FileInterface $file): void
     {
-        if (!$image->hasFile()) {
+        if (!$file->hasFile()) {
             return;
         }
 
-        $file = $image->getFile();
+        $uploadedFile = $file->getFile();
 
         /** @var File $file */
-        Assert::isInstanceOf($file, File::class);
+        Assert::isInstanceOf($uploadedFile, File::class);
 
-        if (null !== $image->getPath() && $this->has($image->getPath())) {
-            $this->remove($image->getPath());
+        if (null !== $file->getPath() && $this->has($file->getPath())) {
+            $this->remove($file->getPath());
         }
 
         do {
             $hash = bin2hex(random_bytes(16));
-            $path = $this->expandPath($hash . '.' . $file->guessExtension());
+            $path = $this->expandPath($hash . '.' . $uploadedFile->guessExtension());
         } while ($this->filesystem->has($path));
 
-        $image->setPath($path);
+        $file->setPath($path);
 
         $this->filesystem->write(
-            $image->getPath(),
-            file_get_contents($image->getFile()->getPathname())
+            $file->getPath(),
+            file_get_contents($file->getFile()->getPathname())
         );
     }
 

@@ -17,11 +17,11 @@ use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\FileInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Uploader\ImageUploaderInterface;
+use Sylius\Component\Core\Uploader\FileUploaderInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -69,10 +69,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     /**
      * @var FactoryInterface
      */
-    private $productImageFactory;
+    private $productFileFactory;
 
     /**
-     * @var ImageUploaderInterface
+     * @var FileUploaderInterface
      */
     private $imageUploader;
 
@@ -122,9 +122,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param FactoryInterface $channelPricing
      * @param ProductVariantGeneratorInterface $variantGenerator
      * @param FactoryInterface $productAttributeValueFactory
-     * @param FactoryInterface $productImageFactory
+     * @param FactoryInterface $productFileFactory
      * @param FactoryInterface $productTaxonFactory
-     * @param ImageUploaderInterface $imageUploader
+     * @param FileUploaderInterface $imageUploader
      * @param SlugGeneratorInterface $slugGenerator
      * @param RepositoryInterface $taxonRepository
      * @param RepositoryInterface $productAttributeRepository
@@ -138,9 +138,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         FactoryInterface $channelPricing,
         ProductVariantGeneratorInterface $variantGenerator,
         FactoryInterface $productAttributeValueFactory,
-        FactoryInterface $productImageFactory,
+        FactoryInterface $productFileFactory,
         FactoryInterface $productTaxonFactory,
-        ImageUploaderInterface $imageUploader,
+        FileUploaderInterface $imageUploader,
         SlugGeneratorInterface $slugGenerator,
         RepositoryInterface $taxonRepository,
         RepositoryInterface $productAttributeRepository,
@@ -153,7 +153,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $this->channelPricingFactory = $channelPricing;
         $this->variantGenerator = $variantGenerator;
         $this->productAttributeValueFactory = $productAttributeValueFactory;
-        $this->productImageFactory = $productImageFactory;
+        $this->productFileFactory = $productFileFactory;
         $this->productTaxonFactory = $productTaxonFactory;
         $this->imageUploader = $imageUploader;
         $this->slugGenerator = $slugGenerator;
@@ -187,7 +187,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $this->createTranslations($product, $options);
         $this->createRelations($product, $options);
         $this->createVariants($product, $options);
-        $this->createImages($product, $options);
+        $this->createFiles($product, $options);
         $this->createProductTaxons($product, $options);
 
         return $product;
@@ -355,20 +355,20 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param ProductInterface $product
      * @param array $options
      */
-    private function createImages(ProductInterface $product, array $options): void
+    private function createFiles(ProductInterface $product, array $options): void
     {
         foreach ($options['images'] as $image) {
             $imagePath = array_shift($image);
-            $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
+            $uploadedFile = new UploadedFile($imagePath, basename($imagePath));
 
-            /** @var ImageInterface $productImage */
-            $productImage = $this->productImageFactory->createNew();
-            $productImage->setFile($uploadedImage);
-            $productImage->setType(end($image) ?: null);
+            /** @var FileInterface $productFile */
+            $productFile = $this->productFileFactory->createNew();
+            $productFile->setFile($uploadedFile);
+            $productFile->setType(end($image) ?: null);
 
-            $this->imageUploader->upload($productImage);
+            $this->imageUploader->upload($productFile);
 
-            $product->addImage($productImage);
+            $product->addFile($productFile);
         }
     }
 

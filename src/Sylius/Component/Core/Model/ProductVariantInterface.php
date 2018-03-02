@@ -28,7 +28,7 @@ interface ProductVariantInterface extends
     StockableInterface,
     TaxableInterface,
     VersionedInterface,
-    ProductImagesAwareInterface
+    ProductFilesAwareInterface
 {
     /**
      * @return float|null

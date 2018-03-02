@@ -17,9 +17,9 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\FileInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Uploader\ImageUploaderInterface;
+use Sylius\Component\Core\Uploader\FileUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -47,7 +47,7 @@ final class TaxonomyContext implements Context
     /**
      * @var FactoryInterface
      */
-    private $taxonImageFactory;
+    private $taxonFileFactory;
 
     /**
      * @var ObjectManager
@@ -55,9 +55,9 @@ final class TaxonomyContext implements Context
     private $objectManager;
 
     /**
-     * @var ImageUploaderInterface
+     * @var FileUploaderInterface
      */
-    private $imageUploader;
+    private $fileUploader;
 
     /**
      * @var TaxonSlugGeneratorInterface
@@ -73,9 +73,9 @@ final class TaxonomyContext implements Context
      * @param RepositoryInterface $taxonRepository
      * @param FactoryInterface $taxonFactory
      * @param FactoryInterface $taxonTranslationFactory
-     * @param FactoryInterface $taxonImageFactory
+     * @param FactoryInterface $taxonFileFactory
      * @param ObjectManager $objectManager
-     * @param ImageUploaderInterface $imageUploader
+     * @param FileUploaderInterface $fileUploader
      * @param TaxonSlugGeneratorInterface $taxonSlugGenerator
      * @param array $minkParameters
      */
@@ -83,18 +83,18 @@ final class TaxonomyContext implements Context
         RepositoryInterface $taxonRepository,
         FactoryInterface $taxonFactory,
         FactoryInterface $taxonTranslationFactory,
-        FactoryInterface $taxonImageFactory,
+        FactoryInterface $taxonFileFactory,
         ObjectManager $objectManager,
-        ImageUploaderInterface $imageUploader,
+        FileUploaderInterface $fileUploader,
         TaxonSlugGeneratorInterface $taxonSlugGenerator,
         array $minkParameters
     ) {
         $this->taxonRepository = $taxonRepository;
         $this->taxonFactory = $taxonFactory;
         $this->taxonTranslationFactory = $taxonTranslationFactory;
-        $this->taxonImageFactory = $taxonImageFactory;
+        $this->taxonFileFactory = $taxonFileFactory;
         $this->objectManager = $objectManager;
-        $this->imageUploader = $imageUploader;
+        $this->fileUploader = $fileUploader;
         $this->taxonSlugGenerator = $taxonSlugGenerator;
         $this->minkParameters = $minkParameters;
     }
@@ -133,13 +133,13 @@ final class TaxonomyContext implements Context
     {
         $filesPath = $this->getParameter('files_path');
 
-        /** @var ImageInterface $taxonImage */
+        /** @var FileInterface $taxonFile */
         $taxonImage = $this->taxonImageFactory->createNew();
         $taxonImage->setFile(new UploadedFile($filesPath . $imagePath, basename($imagePath)));
         $taxonImage->setType($imageType);
-        $this->imageUploader->upload($taxonImage);
+        $this->fileUploader->upload($taxonImage);
 
-        $taxon->addImage($taxonImage);
+        $taxon->addFile($taxonImage);
 
         $this->objectManager->persist($taxon);
         $this->objectManager->flush();

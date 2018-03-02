@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\CoreBundle\Form\Type\Taxon\TaxonImageType;
+use Sylius\Bundle\CoreBundle\Form\Type\Taxon\TaxonFileType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -27,12 +27,12 @@ final class TaxonTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('images', CollectionType::class, [
-                'entry_type' => TaxonImageType::class,
+            ->add('files', CollectionType::class, [
+                'entry_type' => TaxonFileType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label' => 'sylius.form.taxon.images',
+                'label' => 'sylius.form.taxon.files',
             ])
         ;
     }

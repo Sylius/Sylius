@@ -25,7 +25,7 @@
                 "code": "MUG_BB",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/MUG_BB"
@@ -38,7 +38,7 @@
                 "code": "MUG_LOTR",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/MUG_LOTR"
@@ -51,11 +51,12 @@
                 "code": "MUG_SW",
                 "options": [],
                 "averageRating": 0,
-                "images": [
+                "files": [
                     {
                         "id": @integer@,
                         "type": "thumbnail",
-                        "path": "\/uo\/product.jpg"
+                        "path": "\/uo\/product.jpg",
+                        "mimeType": "image\/jpg"
                     }
                 ],
                 "_links": {
@@ -70,7 +71,7 @@
                 "code": "PRODUCT_10",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_10"
@@ -83,7 +84,7 @@
                 "code": "PRODUCT_11",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_11"
@@ -96,7 +97,7 @@
                 "code": "PRODUCT_12",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_12"
@@ -109,7 +110,7 @@
                 "code": "PRODUCT_13",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_13"
@@ -122,7 +123,7 @@
                 "code": "PRODUCT_14",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_14"
@@ -135,7 +136,7 @@
                 "code": "PRODUCT_15",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_15"
@@ -148,7 +149,7 @@
                 "code": "PRODUCT_16",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_16"

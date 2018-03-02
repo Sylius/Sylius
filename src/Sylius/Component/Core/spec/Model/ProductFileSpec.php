@@ -15,20 +15,20 @@ namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\Image;
-use Sylius\Component\Core\Model\ProductImageInterface;
+use Sylius\Component\Core\Model\File;
+use Sylius\Component\Core\Model\ProductFileInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-final class ProductImageSpec extends ObjectBehavior
+final class ProductFileSpec extends ObjectBehavior
 {
-    function it_implements_product_image_interface(): void
+    function it_implements_product_file_interface(): void
     {
-        $this->shouldImplement(ProductImageInterface::class);
+        $this->shouldImplement(ProductFileInterface::class);
     }
 
-    function it_extends_an_image(): void
+    function it_extends_an_file(): void
     {
-        $this->shouldHaveType(Image::class);
+        $this->shouldHaveType(File::class);
     }
 
     function it_does_not_have_id_by_default(): void
@@ -36,7 +36,7 @@ final class ProductImageSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_does_not_have_file_by_default(): void
+    function it_does_not_have_uploaded_file_by_default(): void
     {
         $this->hasFile()->shouldReturn(false);
         $this->getFile()->shouldReturn(null);

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
-use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
+use Sylius\Bundle\CoreBundle\Form\Type\FileType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class ProductImageType extends ImageType
+final class ProductFileType extends FileType
 {
     /**
      * {@inheritdoc}
@@ -67,6 +67,6 @@ final class ProductImageType extends ImageType
      */
     public function getBlockPrefix(): string
     {
-        return 'sylius_product_image';
+        return 'sylius_product_file';
     }
 }

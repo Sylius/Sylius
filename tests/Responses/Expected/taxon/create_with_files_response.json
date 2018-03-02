@@ -11,16 +11,18 @@
             "locale": "en_US"
         }
     },
-    "images": [
+    "files": [
         {
             "id": @integer@,
             "type": "ford",
-            "path": "@string@"
+            "path": "@string@",
+            "mimeType": "@string@"
         },
         {
             "id": @integer@,
             "type": "mugs",
-            "path": "@string@"
+            "path": "@string@",
+            "mimeType": "@string@"
         }
     ],
     "_links": {

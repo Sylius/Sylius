@@ -25,7 +25,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -40,7 +40,7 @@
                     "code": "category",
                     "position": 0,
                     "translations": [],
-                    "images": [],
+                    "files": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -52,7 +52,7 @@
                     "code": "category",
                     "position": 0,
                     "translations": [],
-                    "images": [],
+                    "files": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -65,7 +65,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -80,7 +80,7 @@
                     "code": "category",
                     "position": 0,
                     "translations": [],
-                    "images": [],
+                    "files": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -92,7 +92,7 @@
                     "code": "category",
                     "position": 0,
                     "translations": [],
-                    "images": [],
+                    "files": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -105,7 +105,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -120,7 +120,7 @@
                     "code": "category",
                     "position": 0,
                     "translations": [],
-                    "images": [],
+                    "files": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -132,7 +132,7 @@
                     "code": "category",
                     "position": 0,
                     "translations": [],
-                    "images": [],
+                    "files": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -145,7 +145,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -160,7 +160,7 @@
                     "code": "category",
                     "position": 0,
                     "translations": [],
-                    "images": [],
+                    "files": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -172,7 +172,7 @@
                     "code": "category",
                     "position": 0,
                     "translations": [],
-                    "images": [],
+                    "files": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -185,7 +185,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -200,7 +200,7 @@
                     "code": "category",
                     "position": 0,
                     "translations": [],
-                    "images": [],
+                    "files": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -212,7 +212,7 @@
                     "code": "t-shirts",
                     "position": 3,
                     "translations": [],
-                    "images": [],
+                    "files": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -225,7 +225,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -240,7 +240,7 @@
                     "code": "category",
                     "position": 0,
                     "translations": [],
-                    "images": [],
+                    "files": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -252,7 +252,7 @@
                     "code": "t-shirts",
                     "position": 3,
                     "translations": [],
-                    "images": [],
+                    "files": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -265,7 +265,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"

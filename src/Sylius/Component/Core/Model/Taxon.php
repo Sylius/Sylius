@@ -22,74 +22,17 @@ use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 class Taxon extends BaseTaxon implements TaxonInterface
 {
     use TimestampableTrait;
-
-    /**
-     * @var Collection|ImageInterface[]
-     */
-    protected $images;
-
+    
+    use FilesAwareTrait;
+    
     public function __construct()
     {
         parent::__construct();
 
         $this->createdAt = new \DateTime();
-        $this->images = new ArrayCollection();
+        $this->files = new ArrayCollection();
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImagesByType(string $type): Collection
-    {
-        return $this->images->filter(function (ImageInterface $image) use ($type): bool {
-            return $type === $image->getType();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasImages(): bool
-    {
-        return !$this->images->isEmpty();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasImage(ImageInterface $image): bool
-    {
-        return $this->images->contains($image);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addImage(ImageInterface $image): void
-    {
-        $image->setOwner($this);
-        $this->images->add($image);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeImage(ImageInterface $image): void
-    {
-        if ($this->hasImage($image)) {
-            $image->setOwner(null);
-            $this->images->removeElement($image);
-        }
-    }
-
+    
     /**
      * {@inheritdoc}
      */

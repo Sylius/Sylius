@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Uploader;
 
-use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\FileInterface;
 
-interface ImageUploaderInterface
+interface FileUploaderInterface
 {
     /**
-     * @param ImageInterface $image
+     * @param FileInterface $image
      */
-    public function upload(ImageInterface $image): void;
+    public function upload(FileInterface $file): void;
 
     /**
      * @param string $path

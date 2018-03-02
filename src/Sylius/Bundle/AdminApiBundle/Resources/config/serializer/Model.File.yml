@@ -1,6 +1,6 @@
-Sylius\Component\Core\Model\Image:
+Sylius\Component\Core\Model\File:
     exclusion_policy: ALL
-    xml_root_name: image
+    xml_root_name: file
     properties:
         id:
             expose: true
@@ -8,6 +8,10 @@ Sylius\Component\Core\Model\Image:
             xml_attribute: true
             groups: [Default, Detailed]
         type:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        mimeType:
             expose: true
             type: string
             groups: [Default, Detailed]

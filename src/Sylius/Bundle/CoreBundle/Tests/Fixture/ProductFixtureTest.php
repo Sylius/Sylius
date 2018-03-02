@@ -114,9 +114,9 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_images_are_optional(): void
+    public function product_files_are_optional(): void
     {
-        $this->assertConfigurationIsValid([['custom' => [['images' => ['../image/path1.jpg', '../image/path2.jpg']]]]], 'custom.*.images');
+        $this->assertConfigurationIsValid([['custom' => [['files' => ['../image/path1.jpg', '../image/path2.jpg']]]]], 'custom.*.images');
     }
 
     /**

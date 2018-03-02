@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
-use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
+use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductFileType;
 use Sylius\Bundle\CoreBundle\Form\Type\Taxon\ProductTaxonAutocompleteChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
@@ -56,8 +56,8 @@ final class ProductTypeExtension extends AbstractTypeExtension
                 'choices' => array_flip(Product::getVariantSelectionMethodLabels()),
                 'label' => 'sylius.form.product.variant_selection_method',
             ])
-            ->add('images', CollectionType::class, [
-                'entry_type' => ProductImageType::class,
+            ->add('files', CollectionType::class, [
+                'entry_type' => ProductFileType::class,
                 'entry_options' => ['product' => $options['data']],
                 'allow_add' => true,
                 'allow_delete' => true,

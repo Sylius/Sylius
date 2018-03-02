@@ -23,15 +23,15 @@
             <argument type="service" id="sylius.repository.channel" />
             <tag name="kernel.event_listener" event="sylius.channel.pre_delete" method="onChannelPreDelete" />
         </service>
-        <service id="sylius.listener.images_upload" class="Sylius\Bundle\CoreBundle\EventListener\ImagesUploadListener">
-            <argument type="service" id="sylius.image_uploader" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadImages" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadImages" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadImages" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadImages" />
+        <service id="sylius.listener.files_upload" class="Sylius\Bundle\CoreBundle\EventListener\FilesUploadListener">
+            <argument type="service" id="sylius.file_uploader" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadFiles" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadFiles" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadFiles" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadFiles" />
         </service>
-        <service id="sylius.listener.images_remove" class="Sylius\Bundle\CoreBundle\EventListener\ImagesRemoveListener">
-            <argument type="service" id="sylius.image_uploader" />
+        <service id="sylius.listener.files_remove" class="Sylius\Bundle\CoreBundle\EventListener\FilesRemoveListener">
+            <argument type="service" id="sylius.file_uploader" />
             <argument type="service" id="liip_imagine.cache.manager" />
             <argument type="service" id="liip_imagine.filter.manager" />
             <tag name="doctrine.event_listener" event="postRemove" />

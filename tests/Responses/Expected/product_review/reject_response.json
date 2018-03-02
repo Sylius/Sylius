@@ -77,7 +77,7 @@
             }
         },
         "averageRating": 0,
-        "images": [],
+        "files": [],
         "_links": {
             "self": {
                 "href": "/api/v1/products/MUG_REVIEW_BEST"

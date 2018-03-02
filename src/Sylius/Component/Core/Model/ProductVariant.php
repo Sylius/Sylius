@@ -25,95 +25,95 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      * @var int
      */
     protected $version = 1;
-
+    
     /**
      * @var int
      */
     protected $onHold = 0;
-
+    
     /**
      * @var int
      */
     protected $onHand = 0;
-
+    
     /**
      * @var bool
      */
     protected $tracked = false;
-
+    
     /**
      * @var float
      */
     protected $weight;
-
+    
     /**
      * @var float
      */
     protected $width;
-
+    
     /**
      * @var float
      */
     protected $height;
-
+    
     /**
      * @var float
      */
     protected $depth;
-
+    
     /**
      * @var TaxCategoryInterface
      */
     protected $taxCategory;
-
+    
     /**
      * @var ShippingCategoryInterface
      */
     protected $shippingCategory;
-
+    
     /**
      * @var Collection
      */
     protected $channelPricings;
-
+    
     /**
      * @var bool
      */
     protected $shippingRequired = true;
-
+    
     /**
-     * @var Collection|ProductImageInterface[]
+     * @var Collection|ProductFileInterface[]
      */
-    protected $images;
-
+    protected $files;
+    
     public function __construct()
     {
         parent::__construct();
-
+        
         $this->channelPricings = new ArrayCollection();
-        $this->images = new ArrayCollection();
+        $this->files = new ArrayCollection();
     }
-
+    
     /**
      * @return string
      */
     public function __toString(): string
     {
         $string = (string) $this->getProduct()->getName();
-
+        
         if (!$this->getOptionValues()->isEmpty()) {
             $string .= '(';
-
+            
             foreach ($this->getOptionValues() as $option) {
                 $string .= $option->getOption()->getName() . ': ' . $option->getValue() . ', ';
             }
-
+            
             $string = substr($string, 0, -2) . ')';
         }
-
+        
         return $string;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -121,7 +121,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->version;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -129,7 +129,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $this->version = $version;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -137,7 +137,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return 0 < $this->onHand;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -145,7 +145,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->onHold;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -153,7 +153,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $this->onHold = $onHold;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -161,7 +161,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->onHand;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -169,7 +169,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $this->onHand = (0 > $onHand) ? 0 : $onHand;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -177,7 +177,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->tracked;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -185,7 +185,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $this->tracked = $tracked;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -193,7 +193,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->getProduct()->getName();
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -201,7 +201,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->shippingCategory;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -209,7 +209,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $this->shippingCategory = $category;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -217,7 +217,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->weight;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -225,7 +225,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $this->weight = $weight;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -233,7 +233,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->width;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -241,7 +241,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $this->width = $width;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -249,7 +249,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->height;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -257,7 +257,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $this->height = $height;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -265,7 +265,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->depth;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -273,7 +273,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $this->depth = $depth;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -281,7 +281,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->getWeight();
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -289,7 +289,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->getWidth();
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -297,7 +297,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->getHeight();
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -305,7 +305,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->getDepth();
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -313,7 +313,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->depth * $this->height * $this->width;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -321,7 +321,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->taxCategory;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -329,7 +329,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $this->taxCategory = $category;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -337,7 +337,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->channelPricings;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -346,10 +346,10 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         if ($this->channelPricings->containsKey($channel->getCode())) {
             return $this->channelPricings->get($channel->getCode());
         }
-
+        
         return null;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -357,7 +357,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return null !== $this->getChannelPricingForChannel($channel);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -365,7 +365,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->channelPricings->contains($channelPricing);
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -376,7 +376,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
             $this->channelPricings->set($channelPricing->getChannelCode(), $channelPricing);
         }
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -387,7 +387,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
             $this->channelPricings->remove($channelPricing->getChannelCode());
         }
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -395,7 +395,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->shippingRequired;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -403,61 +403,120 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $this->shippingRequired = $shippingRequired;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function getImages(): Collection
     {
-        return $this->images;
+        return $this->files;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function getImagesByType(string $type): Collection
     {
-        return $this->images->filter(function (ProductImageInterface $image) use ($type): bool {
+        return $this->files->filter(function (ProductFileInterface $image) use ($type): bool {
             return $type === $image->getType();
         });
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function hasImages(): bool
     {
-        return !$this->images->isEmpty();
+        return !$this->files->isEmpty();
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function hasImage(ProductImageInterface $image): bool
+    public function hasImage(ProductFileInterface $file): bool
     {
-        return $this->images->contains($image);
+        $images = $this->files->filter(function (ProductFileInterface $file): bool {
+            return strpos($file->getMimeType(), 'image');
+        });
+        
+        return $images->contains($file);
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function addImage(ProductImageInterface $image): void
+    public function getFiles(): Collection
     {
-        if ($this->hasImage($image)) {
+        return $this->files;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilesByType(string $type): Collection
+    {
+        return $this->files->filter(function (ProductFileInterface $file) use ($type): bool {
+            return $type === $file->getType();
+        });
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilesByMimeType(string $type): Collection
+    {
+        return $this->files->filter(function (ProductFileInterface $file) use ($type): bool {
+            return $type === $file->getMimeType();
+        });
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilesByTypeAndMimeType(string $type, string $mimeType): Collection
+    {
+        return $this->files->filter(function (ProductFileInterface $file) use ($type): bool {
+            return ($type === $file->getType() && strpos($file->getMimeType(), 'image'));
+        });
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function hasFiles(): bool
+    {
+        return !$this->files->isEmpty();
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function hasFile(ProductFileInterface $file): bool
+    {
+        return $this->files->contains($file);
+    }
+    
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function addFile(ProductFileInterface $file): void
+    {
+        if ($this->hasImage($file)) {
             return;
         }
-        $image->setOwner($this->getProduct());
-        $image->addProductVariant($this);
-        $this->images->add($image);
+        $file->setOwner($this->getProduct());
+        $file->addProductVariant($this);
+        $this->files->add($file);
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function removeImage(ProductImageInterface $image): void
+    public function removeFile(ProductFileInterface $file): void
     {
-        if ($this->hasImage($image)) {
-            $this->images->removeElement($image);
+        if ($this->hasFile($file)) {
+            $this->files->removeElement($file);
         }
     }
 }

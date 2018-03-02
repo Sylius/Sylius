@@ -17,16 +17,18 @@
     "channels": [],
     "reviews": [],
     "averageRating": 0,
-    "images": [
+    "files": [
         {
             "id": @integer@,
             "type": "FORD_MUG",
-            "path": "@string@"
+            "path": "@string@",
+            "mimeType": "@string@"
         },
         {
             "id": @integer@,
             "type": "MUGS",
-            "path": "@string@"
+            "path": "@string@",
+            "mimeType": "@string@"
         }
     ],
     "_links": {

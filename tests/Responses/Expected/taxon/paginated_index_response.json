@@ -28,7 +28,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -44,7 +44,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -60,7 +60,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -76,7 +76,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -92,7 +92,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -108,7 +108,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -124,7 +124,7 @@
                         "locale": "en"
                     }
                 },
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"

@@ -9,7 +9,7 @@ Sylius\Component\Core\Model\Product:
             expose: true
             type: float
             groups: [Default, Detailed]
-        images:
+        files:
             expose: true
             type: array
             groups: [Default, Detailed]
