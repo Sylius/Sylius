@@ -16,8 +16,10 @@ namespace Sylius\Bundle\CoreBundle\Installer\Setup;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Intl\Intl;
 
 final class LocaleSetup implements LocaleSetupInterface
@@ -52,9 +54,10 @@ final class LocaleSetup implements LocaleSetupInterface
     /**
      * {@inheritdoc}
      */
-    public function setup(InputInterface $input, OutputInterface $output): LocaleInterface
+    public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): LocaleInterface
     {
-        $name = $this->getLanguageName($this->locale);
+        $code = $this->getLocaleCodeFromUser($input, $output, $questionHelper);
+        $name = $this->getLanguageName($code);
 
         $output->writeln(sprintf('Adding <info>%s</info> locale.', $name));
 
@@ -66,8 +69,7 @@ final class LocaleSetup implements LocaleSetupInterface
 
         /** @var LocaleInterface $locale */
         $locale = $this->localeFactory->createNew();
-        $locale->setCode($this->locale);
-
+        $locale->setCode($code);
         $this->localeRepository->add($locale);
 
         return $locale;
@@ -81,5 +83,43 @@ final class LocaleSetup implements LocaleSetupInterface
     private function getLanguageName(string $code): ?string
     {
         return Intl::getLanguageBundle()->getLanguageName($code);
+    }
+
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @param QuestionHelper $questionHelper
+     *
+     * @return string
+     */
+    private function getLocaleCodeFromUser(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): string
+    {
+        $code = $this->getNewLocaleCode($input, $output, $questionHelper);
+        $name = $this->getLanguageName($code);
+
+        while (null === $name) {
+            $output->writeln(
+                sprintf('<comment>Locale with code <info>%s</info> could not be resolved.</comment>', $code)
+            );
+
+            $code = $this->getNewLocaleCode($input, $output, $questionHelper);
+            $name = $this->getLanguageName($code);
+        }
+
+        return $code;
+    }
+
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @param QuestionHelper $questionHelper
+     *
+     * @return string
+     */
+    private function getNewLocaleCode(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): string
+    {
+        $question = new Question("Locale (press enter to use {$this->locale}): ", $this->locale);
+
+        return trim($questionHelper->ask($input, $output, $question));
     }
 }

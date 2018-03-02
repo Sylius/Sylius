@@ -48,7 +48,7 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $currency = $this->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
-        $locale = $this->get('sylius.setup.locale')->setup($input, $output);
+        $locale = $this->get('sylius.setup.locale')->setup($input, $output,$this->getHelper('question'));
         $this->get('sylius.setup.channel')->setup($locale, $currency);
         $this->setupAdministratorUser($input, $output, $locale->getCode());
     }
