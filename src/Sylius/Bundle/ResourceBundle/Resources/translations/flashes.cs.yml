@@ -6,6 +6,7 @@ sylius:
         create: '%resource% byl úspěšně vytvořen.'
         update: '%resource% byl úspěšně aktualizován.'
         delete: '%resource% byl úspěšně smazán.'
+        bulk_delete: '%resources% byly úspěšně smazány.'
         move: '%resource% byl úspěšně přesunut.'
         generate: '% resource%s byly úspěšně vytvořeny.'
         revert: '%resource% byl úspěšně obnoven.'
