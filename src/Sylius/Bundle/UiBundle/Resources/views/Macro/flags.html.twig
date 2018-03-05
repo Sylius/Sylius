@@ -4,6 +4,5 @@
 
 {% macro fromLocaleCode(locale_code) %}
     {% import _self as flags %}
-    {{ flags.fromCountryCode(locale_code|slice(3, 2)) }}
+    {{ flags.fromCountryCode(locale_code|slice(-2)) }}
 {% endmacro %}
-
