@@ -6,6 +6,7 @@ sylius:
         create: '%resource% is succesvol aangemaakt.'
         update: '%resource% is succesvol bijgewerkt.'
         delete: '%resource% is succesvol verwijderd.'
+        bulk_delete: '%resources% zijn succesvol verwijderd.'
         move: '%resource% is verplaatst.'
         generate: '% resource%s zijn aangemaakt.'
         revert: '%resource% is met succes hersteld.'
