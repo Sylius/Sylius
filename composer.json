@@ -32,39 +32,39 @@
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "doctrine/orm": "^2.5",
-        "friendsofsymfony/oauth-server-bundle": "^1.5",
+        "friendsofsymfony/oauth-server-bundle": "^1.6@dev",
         "friendsofsymfony/rest-bundle": "^2.1",
         "fzaninotto/faker": "^1.6",
         "gedmo/doctrine-extensions": "^2.4.12",
-        "incenteev/composer-parameter-handler": "^2.1",
+        "incenteev/composer-parameter-handler": "^2.1.3",
         "jms/serializer-bundle": "^2.0",
         "knplabs/knp-gaufrette-bundle": "^0.5",
         "knplabs/knp-menu-bundle": "^2.1",
-        "liip/imagine-bundle": "^1.9.1",
+        "liip/imagine-bundle": "^2.0@dev",
         "ocramius/proxy-manager": "^2.1",
         "payum/payum": "^1.4",
         "payum/payum-bundle": "^2.2",
         "php-http/guzzle6-adapter": "^1.1",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "ramsey/uuid": "^3.7",
-        "sensio/distribution-bundle": "^5.0.21",
         "sonata-project/block-bundle": "^3.3",
         "sonata-project/intl-bundle": "^2.2",
         "stof/doctrine-extensions-bundle": "^1.2",
         "swiftmailer/swiftmailer": "^6.0",
-        "sylius-labs/association-hydrator": "^1.0",
+        "sylius-labs/association-hydrator": "^1.1",
+        "sylius-labs/sensio-distribution-bundle": "^6.0",
         "symfony/monolog-bundle": "^3.0",
         "symfony/polyfill-iconv": "^1.3",
         "symfony/polyfill-intl-icu": "^1.3",
         "symfony/polyfill-mbstring": "^1.3",
         "symfony/swiftmailer-bundle": "^3.0",
-        "symfony/symfony": "^3.4",
+        "symfony/symfony": "^4.0",
         "symfony/thanks": "^1.0",
         "twig/extensions": "^1.4",
         "twig/twig": "^2.0",
         "webmozart/assert": "^1.1",
         "white-october/pagerfanta-bundle": "^1.0.8",
-        "willdurand/hateoas": "~2.10.0",
+        "willdurand/hateoas": "^2.11@dev",
         "willdurand/hateoas-bundle": "^1.2",
         "winzou/state-machine-bundle": "^0.3",
         "zendframework/zend-hydrator": "^2.2",
@@ -73,28 +73,26 @@
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "^3.0",
         "behat/behat": "^3.2",
-        "behat/mink": "^1.7",
-        "behat/mink-browserkit-driver": "^1.3",
+        "behat/mink": "^1.7@dev",
+        "behat/mink-browserkit-driver": "^1.3@dev",
         "behat/mink-extension": "^2.2",
         "behat/mink-selenium2-driver": "^1.3",
-        "friends-of-behat/context-service-extension": "^1.0",
-        "friends-of-behat/cross-container-extension": "^1.0",
+        "friends-of-behat/context-service-extension": "^1.2",
+        "friends-of-behat/cross-container-extension": "^1.1",
         "friends-of-behat/service-container-extension": "^1.0",
-        "friends-of-behat/symfony-extension": "^1.0",
-        "friends-of-behat/variadic-extension": "^1.0",
-        "hwi/oauth-bundle": "^0.5",
-        "lakion/api-test-case": "^1.0",
+        "friends-of-behat/symfony-extension": "^1.1",
+        "friends-of-behat/variadic-extension": "^1.1",
+        "hwi/oauth-bundle": "^0.6",
+        "lakion/api-test-case": "dev-test-matrix-coduo",
         "lakion/mink-debug-extension": "^1.2.3",
-        "malukenho/kawaii-gherkin": "^0.1",
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "mikey179/vfsStream": "^1.6",
         "pamil/prophecy-common": "^0.1",
         "phpspec/phpspec": "^4.0",
-        "phpunit/phpunit": "^5.6",
+        "phpunit/phpunit": "^6.0",
         "stripe/stripe-php": "^4.1",
-        "symplify/easy-coding-standard": "^2.4",
-        "sylius-labs/coding-standard": "^1.0"
+        "sylius-labs/coding-standard": "^1.0.1"
     },
     "replace": {
         "sylius/addressing": "self.version",
@@ -150,22 +148,19 @@
     },
     "scripts": {
         "travis-build": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
         ],
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ]
     },
     "autoload": {
@@ -200,5 +195,11 @@
         "branch-alias": {
             "dev-master": "1.1-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/pamil/ApiTestCase"
+        }
+    ]
 }
