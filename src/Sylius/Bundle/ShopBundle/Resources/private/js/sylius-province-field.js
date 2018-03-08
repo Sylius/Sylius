@@ -29,10 +29,14 @@
                     return;
                 }
 
+                provinceContainer.attr('data-loading', true);
+
                 $.get(provinceContainer.attr('data-url'), {countryCode: $(this).val()}, function (response) {
                     if (!response.content) {
                         provinceContainer.fadeOut('slow', function () {
                             provinceContainer.html('');
+
+                            provinceContainer.removeAttr('data-loading');
                         });
                     } else if (-1 !== response.content.indexOf('select')) {
                         provinceContainer.fadeOut('slow', function () {
@@ -54,6 +58,8 @@
                                 'option ' + provinceSelectValue + '" selected="selected"'
                             ));
 
+                            provinceContainer.removeAttr('data-loading');
+
                             provinceContainer.fadeIn();
                         });
                     } else {
@@ -65,6 +71,8 @@
                                 'name="sylius_address_province"',
                                 'name="' + provinceInputFieldName + '"' + provinceInputValue
                             ));
+
+                            provinceContainer.removeAttr('data-loading');
 
                             provinceContainer.fadeIn();
                         });
