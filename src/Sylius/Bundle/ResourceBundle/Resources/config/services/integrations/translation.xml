@@ -31,7 +31,7 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.translatable_entity_locale_assigner" class="Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssigner">
+        <service id="sylius.translatable_entity_locale_assigner" class="Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssigner" public="true">
             <argument type="service" id="sylius.translation_locale_provider" />
         </service>
     </services>
