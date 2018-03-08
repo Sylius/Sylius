@@ -7,7 +7,7 @@ sylius:
             actions: Akce
             add_action: Přidat akci
             add_rule: Přidat pravidlo
-            coupon_based: Kupón na bázi
+            coupon_based: Na bázi kupónů
             description: Popis
             ends_at: Končí
             exclusive: Exkluzivní
@@ -31,7 +31,7 @@ sylius:
             expires_at: Vyprší za
             usage_limit: Omezení použití
         promotion_coupon_generator_instruction:
-            amount: Částka
+            amount: Množství
             code_length: Délka kódu
             expires_at: Vyprší za
             usage_limit: Omezení použití
