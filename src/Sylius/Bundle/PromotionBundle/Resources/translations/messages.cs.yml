@@ -7,7 +7,7 @@ sylius:
             actions: Akce
             add_action: Přidat akci
             add_rule: Přidat pravidlo
-            coupon_based: Kupón na bázi
+            coupon_based: Na bázi kupónů
             description: Popis
             ends_at: Končí
             exclusive: Exkluzivní
