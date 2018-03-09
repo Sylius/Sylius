@@ -53,7 +53,7 @@ If you request for a more detailed data, you will receive an object with followi
 +-------------------------+-------------------------------------------+
 | birthday                | Customers birthday                        |
 +-------------------------+-------------------------------------------+
-| groups                  | Array of groups customer belongs to       |
+| group                   | Customer group code                       |
 +-------------------------+-------------------------------------------+
 
 .. note::
@@ -81,7 +81,7 @@ Definition
 +--------------------------+----------------+------------------------------------------------------------------------------------------------------+
 | lastName                 | request        | Customer's last name                                                                                 |
 +--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-| groups                   | request        | *(optional)* Array of groups customer belongs to                                                     |
+| group                   | request        | *(optional)* Customer group code                                                                      |
 +--------------------------+----------------+------------------------------------------------------------------------------------------------------+
 | gender                   | request        | Customer's gender                                                                                    |
 +--------------------------+----------------+------------------------------------------------------------------------------------------------------+
@@ -139,9 +139,7 @@ Exemplary Response
         "firstName":"John",
         "lastName":"Diggle",
         "gender":"m",
-        "group":[
-
-        ]
+        "group":{}
     }
 
 If you try to create a customer without email or gender, you will receive a ``400 Bad Request`` error.
@@ -244,9 +242,7 @@ Exemplary Response
         "firstName":"Levi",
         "lastName":"Friesen",
         "gender":"u",
-        "group":[
-
-        ]
+        "group":{}
     }
 
 Collection of Customers
@@ -428,7 +424,7 @@ Definition
 +--------------------------+----------------+------------------------------------------------------------------------------+
 | lastName                 | request        | Customers last name                                                          |
 +--------------------------+----------------+------------------------------------------------------------------------------+
-| groups                   | request        | *(optional)* Array of groups customer belongs to                             |
+| group                    | request        | *(optional)* Customer group code                                             |
 +--------------------------+----------------+------------------------------------------------------------------------------+
 | gender                   | request        | Customers gender                                                             |
 +--------------------------+----------------+------------------------------------------------------------------------------+
@@ -534,7 +530,7 @@ Definition
 +--------------------------+----------------+--------------------------------------------------+
 | lastName                 | request        | *(optional)* Customers last name                 |
 +--------------------------+----------------+--------------------------------------------------+
-| groups                   | request        | *(optional)* Array of groups customer belongs to |
+| group                    | request        | *(optional)* Customer group code                 |
 +--------------------------+----------------+--------------------------------------------------+
 | gender                   | request        | *(optional)* Customers gender                    |
 +--------------------------+----------------+--------------------------------------------------+
