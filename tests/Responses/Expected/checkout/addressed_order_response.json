@@ -23,11 +23,13 @@
     "channel": {
         "id": @integer@,
         "code": "CHANNEL",
+        "name": "Channel",
         "description": "Lorem ipsum",
         "hostname": "localhost",
         "color": "black",
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
+        "enabled": true,
         "taxCalculationStrategy": "order_items_based",
         "_links": {
             "self": {
