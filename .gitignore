@@ -26,6 +26,7 @@
 !/bin/validate-package
 !/bin/validate-packages
 
+/composer.lock
 /vendor
 /node_modules
 
