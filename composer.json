@@ -82,7 +82,7 @@
         "friends-of-behat/symfony-extension": "^1.0",
         "friends-of-behat/variadic-extension": "^1.0",
         "hwi/oauth-bundle": "^0.5",
-        "lakion/api-test-case": "^1.0",
+        "lakion/api-test-case": "^2.0",
         "lakion/mink-debug-extension": "^1.2.3",
         "malukenho/kawaii-gherkin": "^0.1",
         "matthiasnoback/symfony-config-test": "^2.0",
@@ -90,7 +90,7 @@
         "mikey179/vfsStream": "^1.6",
         "pamil/prophecy-common": "^0.1",
         "phpspec/phpspec": "^4.0",
-        "phpunit/phpunit": "^5.6",
+        "phpunit/phpunit": "^6.0",
         "stripe/stripe-php": "^4.1",
         "symplify/easy-coding-standard": "^2.4",
         "sylius-labs/coding-standard": "^1.0"
