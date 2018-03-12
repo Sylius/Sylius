@@ -6,6 +6,15 @@ Sylius\Component\Core\Model\Channel:
             expose: true
             type: string
             groups: [Detailed]
+    virtual_properties:
+        enabled:
+            exp: object.isEnabled()
+            serialized_name: enabled
+            type: boolean
+        name:
+            exp: object.getName()
+            serialized_name: name
+            type: string
     relations:
         - rel: self
           href:

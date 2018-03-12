@@ -73,7 +73,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         },
         "incenteev-parameters": {
             "file": "Tests/Functional/app/config/parameters.yml"
