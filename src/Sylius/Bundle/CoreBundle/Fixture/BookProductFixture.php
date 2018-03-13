@@ -93,10 +93,6 @@ class BookProductFixture extends AbstractFixture
                     'name' => 'Books',
                 ],
             ],
-            'images' => [
-                [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'), 'main'],
-                [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'), 'thumbnail'],
-            ]
         ]]]);
 
         $bookGenres = [

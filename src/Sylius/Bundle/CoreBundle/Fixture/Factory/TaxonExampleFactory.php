@@ -14,15 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\TaxonImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,11 +29,6 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
      * @var FactoryInterface
      */
     private $taxonFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $taxonImageFactory;
 
     /**
      * @var TaxonRepositoryInterface
@@ -64,32 +56,21 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
     private $optionsResolver;
 
     /**
-     * @var ImageUploaderInterface
-     */
-    private $imageUploader;
-
-    /**
      * @param FactoryInterface $taxonFactory
-     * @param FactoryInterface $taxonImageFactory
      * @param TaxonRepositoryInterface $taxonRepository
      * @param RepositoryInterface $localeRepository
      * @param TaxonSlugGeneratorInterface $taxonSlugGenerator
-     * @param ImageUploaderInterface $imageUploader
      */
     public function __construct(
         FactoryInterface $taxonFactory,
-        FactoryInterface $taxonImageFactory,
         TaxonRepositoryInterface $taxonRepository,
         RepositoryInterface $localeRepository,
-        TaxonSlugGeneratorInterface $taxonSlugGenerator,
-        ImageUploaderInterface $imageUploader
+        TaxonSlugGeneratorInterface $taxonSlugGenerator
     ) {
         $this->taxonFactory = $taxonFactory;
-        $this->taxonImageFactory = $taxonImageFactory;
         $this->taxonRepository = $taxonRepository;
         $this->localeRepository = $localeRepository;
         $this->taxonSlugGenerator = $taxonSlugGenerator;
-        $this->imageUploader = $imageUploader;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -126,10 +107,6 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             $taxon->addChild($this->create($childOptions));
         }
 
-        foreach ($options['images'] as $imageOptions) {
-            $taxon->addImage($this->createImages($imageOptions));
-        }
-
         return $taxon;
     }
 
@@ -151,28 +128,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             })
             ->setDefault('children', [])
             ->setAllowedTypes('children', ['array'])
-            ->setDefault('images', [])
-            ->setAllowedTypes('images', ['array'])
         ;
-    }
-
-    /**
-     * @param array $image
-     * @return TaxonImageInterface
-     */
-    private function createImages(array $image): TaxonImageInterface
-    {
-        $imagePath = array_shift($image);
-        $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
-
-        /** @var TaxonImageInterface $taxonImage */
-        $taxonImage = $this->taxonImageFactory->createNew();
-        $taxonImage->setFile($uploadedImage);
-        $taxonImage->setType(end($image) ?: null);
-
-        $this->imageUploader->upload($taxonImage);
-
-        return $taxonImage;
     }
 
     /**

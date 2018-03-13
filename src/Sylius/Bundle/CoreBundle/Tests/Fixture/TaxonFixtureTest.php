@@ -58,17 +58,6 @@ final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function taxon_images_is_optional(): void
-    {
-        $this->assertConfigurationIsValid(
-            [['custom' => [['images' => ['../image/path1.jpg', '../image/path2.jpg']]]]],
-            'custom.*.images'
-        );
-    }
-
-    /**
-     * @test
-     */
     public function taxon_children_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['children' => [['name' => 'foo']]]]]], 'custom.*.children');
