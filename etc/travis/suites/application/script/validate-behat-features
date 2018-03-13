@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.lib.sh"
-
-print_header "Validating (Behat features)" "Sylius"
-run_command "bin/kawaii gherkin:check --align=left features/"
