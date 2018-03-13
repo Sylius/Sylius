@@ -6,7 +6,6 @@ code=0
 commands=(
     validate-composer
     validate-composer-security
-    validate-behat-features
     validate-doctrine-schema
     validate-twig
     validate-yarn-packages
