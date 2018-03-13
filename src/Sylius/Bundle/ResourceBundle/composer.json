@@ -48,7 +48,7 @@
         "doctrine/phpcr-odm": "^1.4",
         "incenteev/composer-parameter-handler": "^2.1",
         "jackalope/jackalope-doctrine-dbal": "^1.2",
-        "lakion/api-test-case": "^1.0",
+        "lakion/api-test-case": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
