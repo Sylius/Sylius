@@ -110,11 +110,9 @@
 
         <service id="sylius.fixture.example_factory.taxon" class="Sylius\Bundle\CoreBundle\Fixture\Factory\TaxonExampleFactory">
             <argument type="service" id="sylius.factory.taxon" />
-            <argument type="service" id="sylius.factory.taxon_image" />
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.generator.taxon_slug" />
-            <argument type="service" id="sylius.image_uploader" />
         </service>
 
         <service id="sylius.fixture.example_factory.product" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory">
