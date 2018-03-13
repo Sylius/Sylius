@@ -48,7 +48,7 @@
         "symfony/dependency-injection": "^3.2",
         "symfony/security-bundle": "^3.2",
         "symfony/swiftmailer-bundle": "^3.0",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "^2.0"
     },
     "suggest": {
         "hwi/oauth-bundle": "For OAuth integration"

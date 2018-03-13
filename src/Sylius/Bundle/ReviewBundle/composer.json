@@ -50,7 +50,7 @@
         "symfony/dependency-injection": "^3.2",
         "symfony/security-bundle": "^3.2",
         "symfony/swiftmailer-bundle": "^3.0",
-        "incenteev/composer-parameter-handler": "~2.0",
+        "incenteev/composer-parameter-handler": "^2.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "config": {
