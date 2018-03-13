@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ChannelBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
+use PHPUnit\Framework\Constraint\LogicalNot;
 use Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler\CompositeChannelContextPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -128,7 +129,7 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
 
         self::assertThat(
             $definition,
-            new \PHPUnit_Framework_Constraint_Not(new DefinitionHasMethodCallConstraint($method, $arguments))
+            new LogicalNot(new DefinitionHasMethodCallConstraint($method, $arguments))
         );
     }
 }

@@ -15,10 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\LocaleFixture;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class LocaleFixtureTest extends \PHPUnit_Framework_TestCase
+final class LocaleFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 

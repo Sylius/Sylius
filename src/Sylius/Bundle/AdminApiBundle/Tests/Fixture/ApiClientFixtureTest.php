@@ -15,10 +15,11 @@ namespace Sylius\Bundle\AdminApiBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminApiBundle\Fixture\ApiClientFixture;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 
-class OAuthCredentialsFixtureTest extends \PHPUnit_Framework_TestCase
+final class ApiClientFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
