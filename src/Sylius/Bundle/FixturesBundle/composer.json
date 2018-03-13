@@ -35,7 +35,7 @@
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "phpspec/phpspec": "^4.0",
-        "phpunit/phpunit": "^5.6",
+        "phpunit/phpunit": "^6.5",
         "twig/twig": "^2.0",
         "symfony/browser-kit": "^3.2",
         "symfony/dependency-injection": "^3.2",

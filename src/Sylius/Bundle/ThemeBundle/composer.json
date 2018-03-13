@@ -31,7 +31,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "mikey179/vfsStream": "^1.6",
         "phpspec/phpspec": "^4.0",
-        "phpunit/phpunit": "^5.6",
+        "phpunit/phpunit": "^6.5",
         "sylius/registry": "^1.0",
         "twig/twig": "^2.0",
         "symfony/dependency-injection": "^3.2",

@@ -51,7 +51,7 @@
         "lakion/api-test-case": "^1.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "phpspec/phpspec": "^4.0",
-        "phpunit/phpunit": "^5.6",
+        "phpunit/phpunit": "^6.5",
         "sensio/generator-bundle": "^3.1",
         "sylius/grid-bundle": "^1.0",
         "sylius/locale": "^1.0",
