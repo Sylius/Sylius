@@ -15,10 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\CurrencyFixture;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class CurrencyFixtureTest extends \PHPUnit_Framework_TestCase
+final class CurrencyFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 

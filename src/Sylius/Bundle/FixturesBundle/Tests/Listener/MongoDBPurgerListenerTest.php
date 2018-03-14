@@ -15,10 +15,11 @@ namespace Sylius\Bundle\FixturesBundle\Tests\Listener;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\FixturesBundle\Listener\MongoDBPurgerListener;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-final class MongoDBPurgerListenerTest extends \PHPUnit_Framework_TestCase
+final class MongoDBPurgerListenerTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 

@@ -15,12 +15,13 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\GeographicalFixture;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Intl\Intl;
 
-final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
+final class GeographicalFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 

@@ -14,10 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ThemeBundle\Tests\Configuration;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ThemeBundle\Configuration\ThemeConfiguration;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
+final class ThemeConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
