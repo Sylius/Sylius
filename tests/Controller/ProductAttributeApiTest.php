@@ -176,7 +176,7 @@ EOT;
         $this->client->request('POST', '/api/v1/product-attributes', [], [], static::$authorizedHeaderWithContentType, []);
 
         $response = $this->client->getResponse();
-        $this->assertResponseCode($response, Response::HTTP_METHOD_NOT_ALLOWED);
+        $this->assertResponseCodeOneOf($response, [Response::HTTP_NOT_FOUND, Response::HTTP_METHOD_NOT_ALLOWED]);
     }
 
     /**
@@ -356,5 +356,10 @@ EOT;
         foreach ($choices as $choiceKey => $choiceValue) {
             Assert::assertRegExp('/^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i', $choiceKey);
         }
+    }
+
+    private function assertResponseCodeOneOf(Response $response, array $statusCodes): void
+    {
+        self::assertContains($response->getStatusCode(), $statusCodes, $response->getContent());
     }
 }

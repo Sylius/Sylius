@@ -81,7 +81,7 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
         public function createDisabled(): ProductInterface
         {
             /** @var ProductInterface $product */
-            $product = $this->decoratedFactory->createNew();
+            $product = $this->decoratedFactory->createWithVariant();
 
             $product->setEnabled(false);
 
@@ -104,10 +104,11 @@ as a decorating service in the ``app/Resources/config/services.yml``.
 **3.** You can use the new method of the factory in routing.
 
 After the ``sylius.factory.product`` has been decorated it has got the new ``createDisabled()`` method.
-You can for example override ``sylius_admin_product_create_simple`` route like below:
+To actually use it overwrite ``sylius_admin_product_create_simple`` route like below in ``app/config/routing/admin/product.yml``:
 
 .. code-block:: yaml
 
+    # app/config/routing/admin/product.yml
     sylius_admin_product_create_simple:
         path: /products/new/simple
         methods: [GET, POST]
@@ -125,6 +126,23 @@ You can for example override ``sylius_admin_product_create_simple`` route like b
                         form: SyliusAdminBundle:Product:_form.html.twig
                     route:
                         name: sylius_admin_product_create_simple
+
+Create a new yaml file located at ``app/config/routing/admin.yml``, if it does not exist yet.
+
+.. code-block:: yaml
+
+    # app/config/routing/admin.yml
+    app_admin_product:
+        resource: 'admin/product.yml'
+                        
+Remember to import the ``app/config/routing/admin.yml`` into the ``app/config/routing.yml``.
+
+.. code-block:: yaml
+
+    # app/config/routing.yml
+    app_admin:
+        resource: 'routing/admin.yml'
+        prefix: /admin
 
 .. include:: /customization/plugins.rst.inc
 

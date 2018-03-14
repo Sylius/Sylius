@@ -8,3 +8,8 @@
 * Methods `createQueryBuilderByProductCode` and `findOneByIdAndProductCode` were added to
   `Sylius\Component\Core\Repository\ProductReviewRepositoryInterface` (no manual action needed if your implementation
   extends `Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductReviewRepository`).
+
+* Copy the following migrations from `vendor/sylius/sylius/app/migrations` to your own application, review them and apply them afterwards.
+    * `Version20170913125128.php`
+    * `Version20171003103916.php`
+    * `Version20180102140039.php`

@@ -19,14 +19,12 @@
                 forceSelection: false,
 
                 onChange: function (name, text, choice) {
-                    var provinceCode = choice.data()['provinceCode'];
-                    var provinceName = choice.data()['provinceName'];
+                    var provinceCode = choice.data()['provinceCode'],
+                        provinceName = choice.data()['provinceName'],
+                        provinceContainer = $(this).parent().find(".province-container").get(0);
 
-                    $.each(element.find('input'), function (key, input) {
+                    $.each(element.find('input, select'), function (key, input) {
                         $(input).val('');
-                    });
-                    $.each(element.find('select'), function (key, select) {
-                        $(select).val('');
                     });
 
                     $.each(choice.data(), function (property, value) {
@@ -39,14 +37,16 @@
                                 var provinceCodeField = findByName('provinceCode');
                                 var provinceNameField = findByName('provinceName');
 
-                                if (0 !== provinceCodeField.length && ('' !== provinceCode || undefined != provinceCode)) {
-                                    provinceCodeField.val(provinceCode);
+                                if (!provinceContainer.hasAttribute("data-loading")) {
+                                    if (0 !== provinceCodeField.length && ('' !== provinceCode || undefined != provinceCode)) {
+                                        provinceCodeField.val(provinceCode);
 
-                                    clearInterval(exists);
-                                } else if (0 !== provinceNameField.length && ('' !== provinceName || undefined != provinceName)) {
-                                    provinceNameField.val(provinceName);
+                                        clearInterval(exists);
+                                    } else if (0 !== provinceNameField.length && ('' !== provinceName || undefined != provinceName)) {
+                                        provinceNameField.val(provinceName);
 
-                                    clearInterval(exists);
+                                        clearInterval(exists);
+                                    }
                                 }
                             }, 100);
                         } else {

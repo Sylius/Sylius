@@ -16,8 +16,6 @@ namespace Sylius\Behat\Page\Admin\ProductVariant;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
