@@ -47,8 +47,7 @@
         "phpunit/phpunit": "^6.5",
         "symfony/dependency-injection": "^3.4",
         "symfony/security-bundle": "^3.4",
-        "symfony/swiftmailer-bundle": "^3.1",
-        "incenteev/composer-parameter-handler": "^2.0"
+        "symfony/swiftmailer-bundle": "^3.1"
     },
     "suggest": {
         "hwi/oauth-bundle": "For OAuth integration"
@@ -75,12 +74,6 @@
         }
     ],
     "scripts": {
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ],
         "test": [
             "@composer validate --strict",
             "Tests/Functional/bin/console cache:clear --no-warmup --ansi --no-interaction",
@@ -93,9 +86,6 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.2-dev"
-        },
-        "incenteev-parameters": {
-            "file": "Tests/Functional/app/config/parameters.yml"
         }
     }
 }

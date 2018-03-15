@@ -50,7 +50,6 @@
         "symfony/dependency-injection": "^3.4",
         "symfony/security-bundle": "^3.4",
         "symfony/swiftmailer-bundle": "^3.1",
-        "incenteev/composer-parameter-handler": "^2.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "config": {
@@ -76,9 +75,6 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.2-dev"
-        },
-        "incenteev-parameters": {
-            "file": "test/app/config/parameters.yml"
         }
     }
 }

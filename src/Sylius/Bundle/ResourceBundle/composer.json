@@ -46,7 +46,6 @@
         "doctrine/mongodb-odm": "^1.0",
         "doctrine/orm": "^2.5",
         "doctrine/phpcr-odm": "^1.4",
-        "incenteev/composer-parameter-handler": "^2.1",
         "jackalope/jackalope-doctrine-dbal": "^1.2",
         "lakion/api-test-case": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
@@ -61,14 +60,6 @@
     "suggest": {
         "doctrine/orm": "^2.5",
         "sylius/locale": "^1.0"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ]
     },
     "config": {
         "bin-dir": "bin"
@@ -93,10 +84,6 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.2-dev"
-        },
-        "incenteev-parameters": {
-            "file": "test/app/config/parameters.yml",
-            "dist-file": "test/app/config/parameters.yml.dist"
         }
     }
 }

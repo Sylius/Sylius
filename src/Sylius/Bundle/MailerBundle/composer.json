@@ -58,9 +58,6 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.2-dev"
-        },
-        "incenteev-parameters": {
-            "file": "test/app/config/parameters.yml"
         }
     }
 }
