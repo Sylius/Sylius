@@ -89,6 +89,7 @@
         "mikey179/vfsStream": "^1.6",
         "pamil/prophecy-common": "^0.1",
         "phpspec/phpspec": "^4.0",
+        "phpstan/phpstan-shim": "^0.9",
         "phpunit/phpunit": "^6.5",
         "stripe/stripe-php": "^4.1",
         "symplify/easy-coding-standard": "^2.4",
