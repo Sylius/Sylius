@@ -42,7 +42,7 @@
         "winzou/state-machine-bundle": "^0.3"
     },
     "require-dev": {
-        "akeneo/phpspec-skip-example-extension": "^3.0@alpha",
+        "akeneo/phpspec-skip-example-extension": "^3.0",
         "doctrine/mongodb-odm": "^1.0",
         "doctrine/orm": "^2.5",
         "doctrine/phpcr-odm": "^1.4",
