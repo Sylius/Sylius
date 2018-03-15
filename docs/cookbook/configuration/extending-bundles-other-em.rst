@@ -16,15 +16,15 @@ Installing the SyliusBundles
 
 .. tip::
     
-    Read more about how to install SyliusCustomerBundle :doc:`here </bundles/SyliusCustomerBundle/installation>`.
+    Read more about how to install SyliusCustomerBundle :doc:`here </components_and_bundles/bundles/SyliusCustomerBundle/installation>`.
 
 .. tip::
     
-    Read more about how to install SyliusUserBundle :doc:`here </bundles/SyliusUserBundle/installation>`.
+    Read more about how to install SyliusUserBundle :doc:`here </components_and_bundles/bundles/SyliusUserBundle/installation>`.
 
 .. tip::
     
-    Read more about how to install SyliusAddressingBundle :doc:`here </bundles/SyliusAddressingBundle/installation>`.
+    Read more about how to install SyliusAddressingBundle :doc:`here </components_and_bundles/bundles/SyliusAddressingBundle/installation>`.
 
 Extending the SyliusBundles
 ---------------------------
