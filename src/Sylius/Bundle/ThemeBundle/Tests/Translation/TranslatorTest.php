@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ThemeBundle\Tests\Translation;
 
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProvider;
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProvider;
 use Sylius\Bundle\ThemeBundle\Translation\Translator;
@@ -23,7 +24,7 @@ use Symfony\Component\Translation\MessageSelector;
 /**
  * @see \Symfony\Component\Translation\Tests\TranslatorTest
  */
-final class TranslatorTest extends \PHPUnit_Framework_TestCase
+final class TranslatorTest extends TestCase
 {
     /**
      * @test

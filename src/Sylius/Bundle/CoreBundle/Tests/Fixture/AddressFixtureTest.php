@@ -15,10 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\AddressFixture;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 
-final class AddressFixtureTest extends \PHPUnit_Framework_TestCase
+final class AddressFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 

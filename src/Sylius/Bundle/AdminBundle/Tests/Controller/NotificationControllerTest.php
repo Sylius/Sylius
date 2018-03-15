@@ -16,6 +16,7 @@ namespace Sylius\Bundle\AdminBundle\Tests\Controller;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use Http\Message\MessageFactory;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -24,7 +25,7 @@ use Sylius\Bundle\AdminBundle\Controller\NotificationController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-final class NotificationControllerTest extends \PHPUnit_Framework_TestCase
+final class NotificationControllerTest extends TestCase
 {
     /**
      * @var ClientInterface

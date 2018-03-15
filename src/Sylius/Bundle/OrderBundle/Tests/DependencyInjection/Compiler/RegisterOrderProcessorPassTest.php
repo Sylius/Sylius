@@ -15,6 +15,7 @@ namespace Sylius\Bundle\OrderBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
+use PHPUnit\Framework\Constraint\LogicalNot;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
 use Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer;
 use Sylius\Component\Order\Processor\CompositeOrderProcessor;
@@ -96,7 +97,7 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
 
         self::assertThat(
             $definition,
-            new \PHPUnit_Framework_Constraint_Not(new DefinitionHasMethodCallConstraint($method))
+            new LogicalNot(new DefinitionHasMethodCallConstraint($method))
         );
     }
 
