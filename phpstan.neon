@@ -1,4 +1,6 @@
 parameters:
+    reportUnmatchedIgnoredErrors: false
+
     excludes_analyse:
         # Makes PHPStan crash
         - '**/DependencyInjection/Configuration.php'
