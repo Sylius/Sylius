@@ -31,8 +31,7 @@
         "doctrine/orm": "^2.5",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
-        "symfony/dependency-injection": "^3.2",
-        "incenteev/composer-parameter-handler": "^2.1"
+        "symfony/dependency-injection": "^3.2"
     },
     "config": {
         "bin-dir": "bin"
@@ -56,12 +55,6 @@
         }
     ],
     "scripts": {
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ],
         "test": [
             "@composer validate --strict",
             "Tests/Functional/bin/console cache:clear --no-warmup --ansi --no-interaction",
@@ -74,9 +67,6 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
-        },
-        "incenteev-parameters": {
-            "file": "Tests/Functional/app/config/parameters.yml"
         }
     }
 }

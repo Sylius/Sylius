@@ -46,7 +46,6 @@
         "symfony/dependency-injection": "^3.2",
         "symfony/form": "^3.2",
         "symfony/browser-kit": "^3.2",
-        "incenteev/composer-parameter-handler": "^2.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "config": {
@@ -72,9 +71,6 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
-        },
-        "incenteev-parameters": {
-            "file": "test/app/config/parameters.yml"
         }
     }
 }
