@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ResourceBundle\Tests\Command;
 
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ResourceBundle\Command\DebugResourceCommand;
 use Sylius\Component\Resource\Metadata\Metadata;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
-final class DebugResourceCommandTest extends \PHPUnit_Framework_TestCase
+final class DebugResourceCommandTest extends TestCase
 {
     /**
      * @var RegistryInterface

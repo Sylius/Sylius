@@ -31,13 +31,13 @@
     "require-dev": {
         "doctrine/orm": "^2.5",
         "phpspec/phpspec": "^4.0",
-        "phpunit/phpunit": "^5.6",
+        "phpunit/phpunit": "^6.5",
         "twig/twig": "^2.0",
         "sylius/currency-bundle": "^1.0",
         "symfony/form": "^3.4",
         "symfony/browser-kit": "^3.4",
         "symfony/dependency-injection": "^3.4",
-        "incenteev/composer-parameter-handler": "~2.0",
+        "incenteev/composer-parameter-handler": "^2.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "conflict": {

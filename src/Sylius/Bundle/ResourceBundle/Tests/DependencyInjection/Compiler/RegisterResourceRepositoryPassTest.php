@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ResourceBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
+use PHPUnit\Framework\Constraint\LogicalNot;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterResourceRepositoryPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -119,7 +120,7 @@ final class RegisterResourceRepositoryPassTest extends AbstractCompilerPassTestC
 
         self::assertThat(
             $definition,
-            new \PHPUnit_Framework_Constraint_Not(new DefinitionHasMethodCallConstraint($method, $arguments))
+            new LogicalNot(new DefinitionHasMethodCallConstraint($method, $arguments))
         );
     }
 }

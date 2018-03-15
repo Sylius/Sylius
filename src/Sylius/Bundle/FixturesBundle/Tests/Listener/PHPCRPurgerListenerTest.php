@@ -15,10 +15,11 @@ namespace Sylius\Bundle\FixturesBundle\Tests\Listener;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\FixturesBundle\Listener\PHPCRPurgerListener;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-final class PHPCRPurgerListenerTest extends \PHPUnit_Framework_TestCase
+final class PHPCRPurgerListenerTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
