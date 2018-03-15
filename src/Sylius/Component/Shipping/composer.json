@@ -24,7 +24,7 @@
 
         "sylius/resource": "^1.0",
         "sylius/registry": "^1.0",
-        "symfony/options-resolver": "^3.4"
+        "symfony/options-resolver": "^3.4|^4.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^4.0"
