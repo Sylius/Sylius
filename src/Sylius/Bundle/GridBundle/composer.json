@@ -28,7 +28,7 @@
         "symfony/templating": "^3.2"
     },
     "require-dev": {
-        "akeneo/phpspec-skip-example-extension": "^3.0@alpha",
+        "akeneo/phpspec-skip-example-extension": "^3.0",
         "doctrine/doctrine-bundle": "^1.3",
         "doctrine/orm": "^2.5",
         "doctrine/phpcr-odm": "^1.3.0",
