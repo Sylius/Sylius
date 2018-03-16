@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
@@ -110,9 +111,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      */
     protected function runCommands(array $commands, OutputInterface $output, bool $displayProgress = true): void
     {
-        if ($displayProgress) {
-            $progress = $this->createProgressBar($output, count($commands));
-        }
+        $progress = $this->createProgressBar($displayProgress ? $output : new NullOutput(), count($commands));
 
         foreach ($commands as $key => $value) {
             if (is_string($key)) {
@@ -129,14 +128,10 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
             // See https://github.com/symfony/symfony/issues/11750.
             $this->get('doctrine')->getManager()->getConnection()->close();
 
-            if ($displayProgress) {
-                $progress->advance();
-            }
+            $progress->advance();
         }
 
-        if ($displayProgress) {
-            $progress->finish();
-        }
+        $progress->finish();
     }
 
     /**

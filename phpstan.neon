@@ -1,9 +1,12 @@
 parameters:
+    reportUnmatchedIgnoredErrors: false
+
     excludes_analyse:
         # Makes PHPStan crash
         - '**/DependencyInjection/Configuration.php'
 
         # Test dependencies
+        - '**/spec/**.php'
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
 
@@ -12,9 +15,6 @@ parameters:
         - '**ODM**'
 
     ignoreErrors:
-        # Specs autoloading - needs a project-wide change to Sylius\Foo\Bar\spec\...
-        - '/Class spec\\Sylius\\[^ ]++ was not found while trying to analyse it - autoloading is not probably configured properly./'
-
         # Magic calls
         - '/Call to an undefined static method Webmozart\\Assert\\Assert::all/'
         - '/Call to an undefined static method Webmozart\\Assert\\Assert::nullOr/'
