@@ -1,5 +1,26 @@
 ## CHANGELOG
 
+### v1.0.12 2018-03-16
+
+- [#9265](https://github.com/Sylius/Sylius/pull/9265) Run PHPStan in Travis CI (@pamil)
+- [#9260](https://github.com/Sylius/Sylius/pull/9260) Remove "incenteev/composer-parameter-handler" from packages dependencies (@pamil)
+- [#9259](https://github.com/Sylius/Sylius/pull/9259) Various composer.json enhancements (@pamil)
+- [#9256](https://github.com/Sylius/Sylius/pull/9256) PHPUnit ^6.5 for packages (@pamil)
+- [#9248](https://github.com/Sylius/Sylius/pull/9248) Update to PHPUnit ^6.5 (@pamil)
+- [#9247](https://github.com/Sylius/Sylius/pull/9247) Update to ApiTestCase ^2.0 and PHPUnit ^6.0 (@pamil)
+- [#9244](https://github.com/Sylius/Sylius/pull/9244) Remove composer.lock (@pamil)
+- [#9135](https://github.com/Sylius/Sylius/pull/9135) Fixed Customer API docs with invalid "groups" parameter (@gorkalaucirica)
+- [#9176](https://github.com/Sylius/Sylius/pull/9176) [Documentation] Customizing Factory (@GitProdEnv)
+- [#9237](https://github.com/Sylius/Sylius/pull/9237) Fix select province in checkout address (@serieznyi)
+- [#9233](https://github.com/Sylius/Sylius/pull/9233) [AttributeBundle] Fixing composer.json for ramsey/uuid (@David-Crty)
+- [#9235](https://github.com/Sylius/Sylius/pull/9235) [ResourceBundle] make controller public by default (@bendavies)
+- [#9236](https://github.com/Sylius/Sylius/pull/9236) [ResourceBundle] make sylius.translatable_entity_locale_assigner public (@bendavies)
+- [#9238](https://github.com/Sylius/Sylius/pull/9238) Make tests green again (@pamil)
+- [#9219](https://github.com/Sylius/Sylius/pull/9219) Improve flags support (@shadypierre)
+- [#9194](https://github.com/Sylius/Sylius/pull/9194) [Documentation][Cookbook]Adding validation for image uploads (@Mipme)
+- [#9211](https://github.com/Sylius/Sylius/pull/9211) Bring extra care for the documentation! (@pamil)
+- [#9181](https://github.com/Sylius/Sylius/pull/9181) Remove surprising redundant x sign from docblock (@damonsson)
+
 ### v1.0.11 2018-02-26
 
 - [#9195](https://github.com/Sylius/Sylius/pull/9195) [Documentation][GridBundle]Wrong definition of sortable attribute (@Mipme)
