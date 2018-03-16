@@ -1,7 +1,7 @@
 {
     "id": @integer@,
-    "username": "Barlog",
-    "usernameCanonical": "barlog",
+    "username": "Balrog",
+    "usernameCanonical": "balrog",
     "roles": [
         "ROLE_ADMINISTRATION_ACCESS"
     ],
