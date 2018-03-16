@@ -109,7 +109,7 @@ Exemplary Response
     {
         "id": 7,
         "username": "Balrog",
-        "usernameCanonical": "barlog",
+        "usernameCanonical": "balrog",
         "roles": [
             "ROLE_ADMINISTRATION_ACCESS"
         ],
@@ -219,7 +219,7 @@ Exemplary Response
     {
         "id": 9,
         "username": "Balrog",
-        "usernameCanonical": "barlog",
+        "usernameCanonical": "balrog",
         "roles": [
             "ROLE_ADMINISTRATION_ACCESS"
         ],
@@ -278,7 +278,7 @@ Exemplary Response
     {
         "id": 9,
         "username": "Balrog",
-        "usernameCanonical": "barlog",
+        "usernameCanonical": "balrog",
         "roles": [
             "ROLE_ADMINISTRATION_ACCESS"
         ],
