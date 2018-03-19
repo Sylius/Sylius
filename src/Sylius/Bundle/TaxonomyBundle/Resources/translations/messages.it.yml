@@ -7,6 +7,5 @@ sylius:
             description: Descrizione
             name: "Nome\n"
             parent: Genitore
-            slug: Slug
         taxonomy:
             name: "Nome\n"
