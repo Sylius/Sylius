@@ -70,7 +70,7 @@ class AdminUserApiTest extends JsonApiTestCase
         $data =
 <<<EOT
         {
-            "username": "Barlog",
+            "username": "Balrog",
             "email": "teamEvil@middleearth.com",
             "plainPassword": "youShallNotPass",
             "localeCode": "en_US"
