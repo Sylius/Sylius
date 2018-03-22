@@ -93,6 +93,7 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
 
             $paymentMethod->setName($options['name']);
             $paymentMethod->setDescription($options['description']);
+            $paymentMethod->setInstructions($options['instructions']);
         }
 
         foreach ($options['channels'] as $channel) {
@@ -117,6 +118,8 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
             ->setDefault('description', function (Options $options): string {
                 return $this->faker->sentence();
             })
+            ->setDefault('instructions', null)
+            ->setAllowedTypes('instructions', ['null', 'string'])
             ->setDefault('gatewayName', 'Offline')
             ->setDefault('gatewayFactory', 'offline')
             ->setDefault('gatewayConfig', [])
