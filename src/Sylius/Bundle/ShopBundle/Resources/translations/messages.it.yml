@@ -5,6 +5,7 @@ sylius:
     menu:
         shop:
             account:
+                address_book: 'Rubrica degli indirizzi'
                 change_password: 'Modifica la password'
                 dashboard: 'Pannello di amministrazione'
                 header: 'Il tuo conto cliente'
