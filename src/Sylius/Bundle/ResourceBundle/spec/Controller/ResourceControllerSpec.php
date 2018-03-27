@@ -2166,6 +2166,8 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
+        $event->hasResponse()->willReturn(false);
+        $event->getResponse()->shouldNotBeCalled();
         $event->getMessage()->willReturn('Cannot approve this product.');
         $event->getErrorCode()->willReturn(500);
 
