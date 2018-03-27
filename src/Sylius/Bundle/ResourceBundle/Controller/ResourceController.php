@@ -471,14 +471,21 @@ class ResourceController extends Controller
 
         $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
 
-        if ($event->isStopped() && !$configuration->isHtmlRequest()) {
-            throw new HttpException($event->getErrorCode(), $event->getMessage());
-        }
         if ($event->isStopped()) {
-            $this->flashHelper->addFlashFromEvent($configuration, $event);
-
             if ($event->hasResponse()) {
-                return $event->getResponse();
+                $response = $event->getResponse();
+            }
+
+            if(!$configuration->isHtmlRequest() && !isset($response)) {
+                throw new HttpException($event->getErrorCode(), $event->getMessage());
+            }
+
+            if ($configuration->isHtmlRequest()) {
+                $this->flashHelper->addFlashFromEvent($configuration, $event);
+            }
+
+            if(isset($response)) {
+                return $response;
             }
 
             return $this->redirectHandler->redirectToResource($configuration, $resource);
