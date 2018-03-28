@@ -83,7 +83,7 @@
         "friends-of-behat/symfony-extension": "^1.0",
         "friends-of-behat/variadic-extension": "^1.0",
         "hwi/oauth-bundle": "^0.5",
-        "lakion/api-test-case": "^2.0",
+        "lakion/api-test-case": "^3.0",
         "lakion/mink-debug-extension": "^1.2.3",
         "matthiasnoback/symfony-config-test": "^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
@@ -182,7 +182,7 @@
         "psr-4": {
             "Sylius\\Tests\\": "tests/"
         },
-        "classmap": ["app/AppKernel.php", "app/AppCache.php"]
+        "classmap": ["app/AppKernel.php", "app/AppCache.php", "app/TestAppKernel.php"]
     },
     "config": {
         "bin-dir": "bin"

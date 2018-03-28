@@ -3,7 +3,8 @@ Sylius\Component\Core\Model\Product:
         code: "MUG"
         channels: ["@channel_web"]
         currentLocale: "en_US"
-        currentTranslation: "@mug_translation"
+        translations:
+            en_US: "@mug_translation"
 
 Sylius\Component\Core\Model\ProductTranslation:
     mug_translation:
@@ -18,7 +19,8 @@ Sylius\Component\Core\Model\ProductVariant:
         code: "MUG_SW"
         product: "@mug"
         currentLocale: "en_US"
-        currentTranslation: "@sw_mug_translation"
+        translations:
+            en_US: "@sw_mug_translation"
         updatedAt: "<(new \\DateTime('2015-10-10'))>"
         channelPricings:
             WEB: "@sw_mug_web_channel_pricing"
@@ -26,7 +28,8 @@ Sylius\Component\Core\Model\ProductVariant:
         code: "MUG_LOTR"
         product: "@mug"
         currentLocale: "en_US"
-        currentTranslation: "@lotr_mug_translation"
+        translations:
+            en_US: "@lotr_mug_translation"
         updatedAt: "<(new \\DateTime('2015-10-04'))>"
         channelPricings:
             WEB: "@lotr_mug_web_channel_pricing"
@@ -34,7 +37,8 @@ Sylius\Component\Core\Model\ProductVariant:
         code: "MUG_BB"
         product: "@mug"
         currentLocale: "en_US"
-        currentTranslation: "@bb_mug_translation"
+        translations:
+            en_US: "@bb_mug_translation"
         updatedAt: "<(new \\DateTime('2015-10-05'))>"
         channelPricings:
             WEB: "@bb_mug_web_channel_pricing"
@@ -42,7 +46,8 @@ Sylius\Component\Core\Model\ProductVariant:
         code: "HARD_AVAILABLE_MUG"
         product: "@mug"
         currentLocale: "en_US"
-        currentTranslation: "@hard_available_mug_translation"
+        translations:
+            en_US: "@hard_available_mug_translation"
         updatedAt: "<(new \\DateTime('2015-10-05'))>"
         channelPricings:
             WEB: "@hard_available_mug_web_channel_pricing"
@@ -71,7 +76,7 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
 Sylius\Component\Core\Model\Order:
     cart_with_items:
         channel: "@channel_web"
-        addItem: ["@sw_mug_item", "@hard_available_mug_item"]
+        items: ["@sw_mug_item", "@hard_available_mug_item"]
         currencyCode: "USD"
         localeCode: "en_US"
         customer: "@customer_oliver"
@@ -79,13 +84,11 @@ Sylius\Component\Core\Model\Order:
 
 Sylius\Component\Core\Model\OrderItem:
     sw_mug_item:
-        quantity: 2
-        addUnit: ["@sw_mug_item_unit1", "@sw_mug_item_unit2"]
+        units: ["@sw_mug_item_unit1", "@sw_mug_item_unit2"]
         variant: "@mug_sw"
         order: "@cart_with_items"
     hard_available_mug_item:
-        quantity: 1
-        addUnit: ["@hard_available_mug_item_unit"]
+        units: ["@hard_available_mug_item_unit"]
         variant: "@hard_available_mug"
         order: "@cart_with_items"
 

@@ -57,8 +57,8 @@ final class ProductVariantApiTest extends JsonApiTestCase
      */
     public function it_does_not_allow_to_show_product_variant_when_it_does_not_exist()
     {
-        $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
 
         /** @var ProductInterface $product */
         $product = $productVariantsData['product1'];
@@ -187,8 +187,10 @@ EOT;
     public function it_allows_create_product_variant_with_multiple_translations()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
-        $this->loadFixturesFromFile('resources/locales.yml');
+        $productVariantsData = $this->loadFixturesFromFiles([
+            'resources/locales.yml',
+            'resources/product_variants.yml',
+        ]);
 
         /** @var ProductInterface $product */
         $product = $productVariantsData['product1'];
@@ -220,8 +222,10 @@ EOT;
     public function it_allows_create_product_variant_with_channel_pricings()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
-        $this->loadFixturesFromFile('resources/channels.yml');
+        $productVariantsData = $this->loadFixturesFromFiles([
+            'resources/channels.yml',
+            'resources/product_variants.yml',
+        ]);
 
         /** @var ProductInterface $product */
         $product = $productVariantsData['product1'];
@@ -278,8 +282,10 @@ EOT;
     public function it_allows_create_product_variant_with_tax_category()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
-        $this->loadFixturesFromFile('resources/tax_categories.yml');
+        $productVariantsData = $this->loadFixturesFromFiles([
+            'resources/product_variants.yml',
+            'resources/tax_categories.yml',
+        ]);
 
         /** @var ProductInterface $product */
         $product = $productVariantsData['product1'];
@@ -304,8 +310,10 @@ EOT;
     public function it_allows_create_product_variant_with_shipping_category()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
-        $this->loadFixturesFromFile('resources/shipping_categories.yml');
+        $productVariantsData = $this->loadFixturesFromFiles([
+            'resources/product_variants.yml',
+            'resources/shipping_categories.yml',
+        ]);
 
         /** @var ProductInterface $product */
         $product = $productVariantsData['product1'];
@@ -330,8 +338,10 @@ EOT;
     public function it_allows_create_product_variant_with_product_option()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/locales.yml');
-        $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
+        $productVariantsData = $this->loadFixturesFromFiles([
+            'resources/locales.yml',
+            'resources/product_variants.yml',
+        ]);
 
         /** @var ProductInterface $product */
         $product = $productVariantsData['product1'];
@@ -432,8 +442,10 @@ EOT;
     public function it_allows_updating_partial_information_about_product_variant()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
-        $this->loadFixturesFromFile('resources/locales.yml');
+        $productVariantsData = $this->loadFixturesFromFiles([
+            'resources/locales.yml',
+            'resources/product_variants.yml',
+        ]);
 
         /** @var ProductInterface $product */
         $product = $productVariantsData['product1'];
@@ -465,8 +477,10 @@ EOT;
     public function it_not_change_on_hand_after_updating_product_variant()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $productVariantsData = $this->loadFixturesFromFile('resources/product_variants.yml');
-        $this->loadFixturesFromFile('resources/locales.yml');
+        $productVariantsData = $this->loadFixturesFromFiles([
+            'resources/locales.yml',
+            'resources/product_variants.yml',
+        ]);
 
         /** @var ProductInterface $product */
         $product = $productVariantsData['product2'];
