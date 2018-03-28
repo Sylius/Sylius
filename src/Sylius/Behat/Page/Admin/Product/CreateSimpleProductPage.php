@@ -282,7 +282,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     }
 
     /**
-     * @param int $id
+     * @param mixed $id
      */
     private function selectElementFromAttributesDropdown($id)
     {

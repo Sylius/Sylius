@@ -29,7 +29,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     private $id;
 
@@ -41,7 +41,7 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
     /**
      * {@inheritdoc}
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }

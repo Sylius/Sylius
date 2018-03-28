@@ -26,7 +26,7 @@ class ProductAssociationType implements ProductAssociationTypeInterface
     }
 
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 

@@ -21,7 +21,7 @@ class Locale implements LocaleInterface
     use TimestampableTrait;
 
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 

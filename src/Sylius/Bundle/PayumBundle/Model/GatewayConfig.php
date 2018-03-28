@@ -19,14 +19,14 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 class GatewayConfig extends BaseGatewayConfig implements ResourceInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }

@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\Collection;
 class OrderItemUnit implements OrderItemUnitInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 

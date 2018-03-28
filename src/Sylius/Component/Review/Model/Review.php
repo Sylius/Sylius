@@ -20,7 +20,7 @@ class Review implements ReviewInterface
     use TimestampableTrait;
 
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 

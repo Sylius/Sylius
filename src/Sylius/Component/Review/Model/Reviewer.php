@@ -16,7 +16,7 @@ namespace Sylius\Component\Review\Model;
 class Reviewer implements ReviewerInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 
@@ -36,7 +36,7 @@ class Reviewer implements ReviewerInterface
     protected $lastName;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {

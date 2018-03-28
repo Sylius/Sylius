@@ -41,7 +41,7 @@ abstract class Image implements ImageInterface
     protected $owner;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {

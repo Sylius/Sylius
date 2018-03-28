@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Model;
 class ChannelPricing implements ChannelPricingInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 

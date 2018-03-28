@@ -26,7 +26,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class DocumentRepository extends BaseDocumentRepository implements RepositoryInterface
 {
     /**
-     * @param int $id
+     * @param mixed $id
      *
      * @return object
      */
