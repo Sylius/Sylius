@@ -2220,7 +2220,6 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldNotBeCalled();
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldNotBeCalled();
-
         $flashHelper->addFlashFromEvent($configuration, $event)->shouldNotBeCalled();
 
         $event->hasResponse()->willReturn(true);

@@ -472,11 +472,7 @@ class ResourceController extends Controller
         $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
 
         if ($event->isStopped()) {
-            if ($event->hasResponse()) {
-                $response = $event->getResponse();
-            }
-
-            if(!$configuration->isHtmlRequest() && !isset($response)) {
+            if (!$configuration->isHtmlRequest() && !$event->hasResponse()) {
                 throw new HttpException($event->getErrorCode(), $event->getMessage());
             }
 
@@ -484,8 +480,8 @@ class ResourceController extends Controller
                 $this->flashHelper->addFlashFromEvent($configuration, $event);
             }
 
-            if(isset($response)) {
-                return $response;
+            if ($event->hasResponse()) {
+                return $event->getResponse();
             }
 
             return $this->redirectHandler->redirectToResource($configuration, $resource);
