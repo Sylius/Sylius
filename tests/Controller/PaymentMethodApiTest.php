@@ -56,9 +56,12 @@ final class PaymentMethodApiTest extends JsonApiTestCase
      */
     public function it_allows_showing_payment_method()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/channels.yml');
-        $paymentMethods = $this->loadFixturesFromFile('resources/payment_methods.yml');
+        $paymentMethods = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/channels.yml',
+            'resources/payment_methods.yml',
+        ]);
+
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $paymentMethods['cash_on_delivery'];
 
