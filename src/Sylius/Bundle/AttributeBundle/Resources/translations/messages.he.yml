@@ -12,3 +12,6 @@ sylius:
             date: תאריך
             select: בחירה
             text: טקסט
+        attribute_type_configuration:
+            text:
+                max: אורך מירבי
