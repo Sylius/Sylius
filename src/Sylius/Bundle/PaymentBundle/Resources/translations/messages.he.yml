@@ -5,6 +5,7 @@ sylius:
     form:
         payment:
             state:
+                completed: הושלם
                 failed: נכשל
                 new: חדש
                 unknown: לא ידוע
