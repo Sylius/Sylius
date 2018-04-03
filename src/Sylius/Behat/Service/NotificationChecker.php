@@ -16,7 +16,6 @@ namespace Sylius\Behat\Service;
 use Sylius\Behat\Exception\NotificationExpectationMismatchException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
-use Webmozart\Assert\Assert;
 
 final class NotificationChecker implements NotificationCheckerInterface
 {
