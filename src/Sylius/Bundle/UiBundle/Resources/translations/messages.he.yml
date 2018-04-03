@@ -74,6 +74,7 @@ sylius:
         company: 'חברה'
         complete: 'השלם'
         completed: 'הושלם'
+        configuration: 'הגדרות'
         confirmation: 'אישור'
         confirmation_title: 'אישור'
         countries: 'ארצות'
@@ -113,6 +114,13 @@ sylius:
         equal: 'שווה'
         error: 'שגיאה'
         exchange_rates: 'שערי החליפין'
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        expires_at: 'תאריך תפוגה'
+>>>>>>> 1.0
+>>>>>>> 1.1
         extra_information: 'מידע נוסף'
         extra_notes: 'הערות נוספות'
         failed: 'נכשל'
