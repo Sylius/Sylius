@@ -17,6 +17,8 @@ sylius:
             type: סוג
         promotion_coupon_generator_instruction:
             amount: כמות
+            expires_at: תאריך תפוגה
+            usage_limit: מגבלת שימוש
         promotion_filter:
             price_range: מסנן טווח מחיר
         promotion_rule:
