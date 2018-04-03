@@ -61,7 +61,7 @@ final class PromotionCouponApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFiles([
             'resources/promotions.yml',
-            'resources/promotion_coupons.yml'
+            'resources/promotion_coupons.yml',
         ]);
 
         $promotion = $promotions['promotion2'];
@@ -185,7 +185,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFiles([
             'resources/promotions.yml',
-            'resources/promotion_coupons.yml'
+            'resources/promotion_coupons.yml',
         ]);
 
         $promotion = $promotions['promotion2'];
@@ -234,7 +234,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $promotions = $this->loadFixturesFromFiles([
             'resources/promotions.yml',
-            'resources/promotion_coupons.yml'
+            'resources/promotion_coupons.yml',
         ]);
 
         $promotion = $promotions['promotion2'];

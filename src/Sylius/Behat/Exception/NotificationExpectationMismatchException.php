@@ -24,7 +24,7 @@ final class NotificationExpectationMismatchException extends \RuntimeException
         \Exception $previous = null
     ) {
         $message = sprintf(
-            "Expected *%s* notification with a \"%s\" message was not found",
+            'Expected *%s* notification with a "%s" message was not found',
             $expectedType,
             $expectedMessage
         );
