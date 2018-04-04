@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v1.1.4 2018-04-04
+
+- [#9301](https://github.com/Sylius/Sylius/pull/9301) HOTFIX: Do not require FidryAliceDataFixturesBundle in shared kernel (@pamil)
+
 ### v1.1.3 2018-04-04
 
 - [#9298](https://github.com/Sylius/Sylius/pull/9298) Define conflicts with incompatible dependencies versions (@pamil)
