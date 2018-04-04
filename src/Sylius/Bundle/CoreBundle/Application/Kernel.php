@@ -31,11 +31,11 @@ use Webmozart\Assert\Assert;
 
 class Kernel extends HttpKernel
 {
-    public const VERSION = '1.0.13-DEV';
-    public const VERSION_ID = '10013';
+    public const VERSION = '1.2.0-DEV';
+    public const VERSION_ID = '10200';
     public const MAJOR_VERSION = '1';
-    public const MINOR_VERSION = '0';
-    public const RELEASE_VERSION = '13';
+    public const MINOR_VERSION = '2';
+    public const RELEASE_VERSION = '0';
     public const EXTRA_VERSION = 'DEV';
 
     /**
@@ -100,9 +100,11 @@ class Kernel extends HttpKernel
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test', 'test_cached'], true)) {
+            $bundles[] = new \Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle();
+            $bundles[] = new \Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle();
+            $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
         }
 
         return $bundles;

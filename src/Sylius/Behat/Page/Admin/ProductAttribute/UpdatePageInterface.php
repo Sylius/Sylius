@@ -48,8 +48,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     /**
      * @param string $value
+     * @param string $localeCode
      */
-    public function addAttributeValue(string $value): void;
+    public function addAttributeValue(string $value, string $localeCode): void;
 
     /**
      * @param string $value

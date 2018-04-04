@@ -70,6 +70,19 @@ sylius_admin_product_variant_update:
                     form: "@SyliusAdmin/ProductVariant/_form.html.twig"
                     breadcrumb: "@SyliusAdmin/ProductVariant/Update/_breadcrumb.html.twig"
 
+sylius_admin_product_variant_bulk_delete:
+    path: /bulk-delete
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product_variant:bulkDeleteAction
+        _sylius:
+            section: admin
+            redirect: referer
+            permission: true
+            repository:
+                method: findById
+                arguments: [$ids]
+
 sylius_admin_product_variant_delete:
     path: /{id}
     methods: [DELETE]

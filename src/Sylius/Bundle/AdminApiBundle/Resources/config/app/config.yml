@@ -7,6 +7,7 @@ imports:
     - { resource: "@SyliusAdminApiBundle/Resources/config/grids/cart.yml" }
     - { resource: "@SyliusAdminApiBundle/Resources/config/grids/payments.yml" }
     - { resource: "@SyliusAdminApiBundle/Resources/config/grids/product.yml" }
+    - { resource: "@SyliusAdminApiBundle/Resources/config/grids/product_review.yml" }
     - { resource: "@SyliusAdminApiBundle/Resources/config/grids/product_variant.yml" }
     - { resource: "@SyliusAdminApiBundle/Resources/config/grids/promotion.yml" }
     - { resource: "@SyliusAdminApiBundle/Resources/config/grids/shipments.yml" }

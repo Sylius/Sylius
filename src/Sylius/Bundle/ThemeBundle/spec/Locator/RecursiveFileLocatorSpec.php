@@ -76,6 +76,33 @@ final class RecursiveFileLocatorSpec extends ObjectBehavior
         ]);
     }
 
+    function it_searches_for_files_at_a_maximum_depth(
+        FinderFactoryInterface $finderFactory,
+        Finder $finder,
+        SplFileInfo $firstSplFileInfo,
+        SplFileInfo $secondSplFileInfo
+    ): void {
+        $this->beConstructedWith($finderFactory, ['/search/path/'], 1);
+        $finderFactory->create()->willReturn($finder);
+
+        $finder->depth('<= 1')->shouldBeCalled()->willReturn($finder);
+        $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
+        $finder->in('/search/path/')->shouldBeCalled()->willReturn($finder);
+        $finder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($finder);
+        $finder->files()->shouldBeCalled()->willReturn($finder);
+
+        $finder->getIterator()->willReturn(new \ArrayIterator([
+            $secondSplFileInfo->getWrappedObject(),
+        ]));
+
+        $firstSplFileInfo->getPathname()->willReturn('/search/path/nested1/leveldeeper/readme.md');
+        $secondSplFileInfo->getPathname()->willReturn('/search/path/nested2/readme.md');
+
+        $this->locateFilesNamed('readme.md')->shouldReturn([
+            '/search/path/nested2/readme.md',
+        ]);
+    }
+
     function it_throws_an_exception_if_searching_for_file_with_empty_name(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('locateFileNamed', ['']);

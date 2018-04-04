@@ -112,6 +112,14 @@ Here you will find all configuration options of ``sylius_grid``.
                             position: 100
                             options:
                                 restore_label: sylius.ui.restore
+                    bulk:
+                        delete:
+                            type: delete
+                            label: sylius.ui.delete
+                            enabled: true
+                            icon: ~
+                            position: 100
+                            options: { }
                     subitem:
                         addresses:
                             type: links

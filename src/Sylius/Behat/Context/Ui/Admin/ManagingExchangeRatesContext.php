@@ -71,7 +71,8 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @When I am browsing exchange rates of the store
+     * @Given I am browsing exchange rates of the store
+     * @When I browse exchange rates
      * @When I browse exchange rates of the store
      */
     public function iWantToBrowseExchangeRatesOfTheStore()
@@ -158,6 +159,25 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
+     * @When I check (also) the exchange rate between :sourceCurrencyName and :targetCurrencyName
+     */
+    public function iCheckTheExchangeRateBetweenAnd(string $sourceCurrencyName, string $targetCurrencyName): void
+    {
+        $this->indexPage->checkResourceOnPage([
+            'sourceCurrency' => $sourceCurrencyName,
+            'targetCurrency' => $targetCurrencyName,
+        ]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
      * @Then I should see :count exchange rates on the list
      */
     public function iShouldSeeExchangeRatesOnTheList($count = 0)
@@ -166,6 +186,7 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
+     * @Then I should see a single exchange rate in the list
      * @Then I should( still) see one exchange rate on the list
      */
     public function iShouldSeeOneExchangeRateOnTheList()
@@ -186,10 +207,13 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
+     * @Then I should see the exchange rate between :sourceCurrencyName and :targetCurrencyName in the list
      * @Then I should (also) see an exchange rate between :sourceCurrencyName and :targetCurrencyName on the list
      */
-    public function iShouldSeeAnExchangeRateBetweenAndOnTheList($sourceCurrencyName, $targetCurrencyName)
-    {
+    public function iShouldSeeAnExchangeRateBetweenAndOnTheList(
+        string $sourceCurrencyName,
+        string $targetCurrencyName
+    ): void {
         Assert::true($this->indexPage->isSingleResourceOnPage([
             'sourceCurrency' => $sourceCurrencyName,
             'targetCurrency' => $targetCurrencyName,

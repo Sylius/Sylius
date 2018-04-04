@@ -470,6 +470,7 @@ sylius:
         manage_your_saved_addresses: 'Správa Vašich uložených adres'
         manage_zones: 'Správa zón'
         marketing: 'Marketing'
+        bulk_actions: 'Hromadné akce'
         media: 'Media'
         members: 'Členové'
         menu_nodes: 'Nabídka uzlů'

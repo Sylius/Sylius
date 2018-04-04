@@ -38,7 +38,7 @@
             </button>
         {% else %}
             <div class="ui right fluid labeled input" style="margin-top: 15px; margin-bottom: 15px;">
-                <div class="ui label">{{ form.vars.value.attribute.name }}</div>
+                <div class="ui label">{{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}</div>
                 {{ form_widget(form.value) }}
                 <button class="ui red right labeled icon button">
                     <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}

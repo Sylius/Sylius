@@ -53,6 +53,8 @@ sylius_grid:
             entity: "@SyliusUi/Grid/Filter/entity.html.twig"
             money: "@SyliusUi/Grid/Filter/money.html.twig"
             exists: "@SyliusUi/Grid/Filter/exists.html.twig"
+        bulk_action:
+            delete: "@SyliusUi/Grid/BulkAction/delete.html.twig"
 
 liip_imagine:
     filter_sets:

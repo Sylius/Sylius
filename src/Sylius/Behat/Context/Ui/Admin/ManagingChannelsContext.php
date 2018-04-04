@@ -144,10 +144,11 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @Then I should see the channel :channelName in the list
      * @Then the channel :channelName should appear in the registry
      * @Then the channel :channelName should be in the registry
      */
-    public function theChannelShouldAppearInTheRegistry($channelName)
+    public function theChannelShouldAppearInTheRegistry(string $channelName): void
     {
         $this->iWantToBrowseChannels();
 
@@ -299,19 +300,37 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When /^I want to browse channels$/
+     * @When I browse channels
+     * @When I want to browse channels
      */
-    public function iWantToBrowseChannels()
+    public function iWantToBrowseChannels(): void
     {
         $this->indexPage->open();
     }
 
     /**
+     * @When I check (also) the :channelName channel
+     */
+    public function iCheckTheChannel(string $channelName): void
+    {
+        $this->indexPage->checkResourceOnPage(['nameAndDescription' => $channelName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @Then I should see a single channel in the list
      * @Then I should see :numberOfChannels channels in the list
      */
-    public function iShouldSeeChannelsInTheList($numberOfChannels)
+    public function iShouldSeeChannelsInTheList(int $numberOfChannels = 1): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $numberOfChannels);
+        Assert::same($this->indexPage->countItems(), $numberOfChannels);
     }
 
     /**

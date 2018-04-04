@@ -292,9 +292,9 @@ EOT;
             "code": "mug_color",
             "configuration": {
                 "choices": [
-                    "yellow",
-                    "green",
-                    "black"
+                    {"en_US": "yellow", "fr_FR": "jaune"},
+                    {"en_US": "green"},
+                    {"en_US": "black"}
                 ],
                 "multiple": true,
                 "min": 1,
@@ -315,7 +315,13 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product_attribute/create_select_response', Response::HTTP_CREATED);
-        $this->assertSelectChoicesInResponse($response, ['yellow', 'green', 'black']);
+
+        $expectedChoiceValues = [
+            ['en_US' => 'yellow', 'fr_FR' => 'jaune'],
+            ['en_US' => 'green'],
+            ['en_US' => 'black'],
+        ];
+        $this->assertSelectChoicesInResponse($response, $expectedChoiceValues);
     }
 
     /**
