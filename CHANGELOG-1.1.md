@@ -1,5 +1,15 @@
 ## CHANGELOG
 
+### v1.1.3 2018-04-04
+
+- [#9298](https://github.com/Sylius/Sylius/pull/9298) Define conflicts with incompatible dependencies versions (@pamil)
+- [#9287](https://github.com/Sylius/Sylius/pull/9287) Fix wrong CustomerInterface type in PHPDoc (@teohhanhui)
+- [#9266](https://github.com/Sylius/Sylius/pull/9266) Update ApiTestCase to ^3.0 (@Zales0123)
+- [#9281](https://github.com/Sylius/Sylius/pull/9281) [Behat] Handle multiple notifications in NotificationChecker (@Zales0123)
+- [#9264](https://github.com/Sylius/Sylius/pull/9264) [Documentation][CookBook] Specific SyliusBundles extension (@Zales0123, @Adraesh)
+- [#9267](https://github.com/Sylius/Sylius/pull/9267) Add PaymentMethod::instructions option to fixtures (@stefandoorn)
+- [#9269](https://github.com/Sylius/Sylius/pull/9269) Fix wrong Balrog of Morgoth name (@Zales0123)
+
 ### v1.1.2 2018-03-16
 
 - [#9265](https://github.com/Sylius/Sylius/pull/9265) Run PHPStan in Travis CI (@pamil)
