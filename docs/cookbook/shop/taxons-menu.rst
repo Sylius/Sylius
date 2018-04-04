@@ -16,8 +16,9 @@ How to do it?
 
 You can render such a menu wherever you have access to a ``category`` variable in the view, but also anywhere else.
 
-The ``findChildrenAsTreeByRootCode`` method of **TaxonRepository** takes either a ``code`` or null. If the code is null it returns the whole
-tree of taxons configured in the database.
+The ``findChildren`` method of **TaxonRepository** takes a ``parentCode`` and nullable ``locale``.
+
+If ``locale`` parameter is not null the method returns also taxon's translation based on given ``locale``.
 
 To render a simple menu of categories in any twig template use:
 
