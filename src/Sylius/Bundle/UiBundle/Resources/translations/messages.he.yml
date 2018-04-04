@@ -114,10 +114,7 @@ sylius:
         equal: 'שווה'
         error: 'שגיאה'
         exchange_rates: 'שערי החליפין'
-<<<<<<< HEAD
-=======
         expires_at: 'תאריך תפוגה'
->>>>>>> 1.0
         extra_information: 'מידע נוסף'
         extra_notes: 'הערות נוספות'
         failed: 'נכשל'
