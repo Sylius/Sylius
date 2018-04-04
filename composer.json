@@ -142,6 +142,9 @@
         "symfony/polyfill-php70": "*",
         "symfony/polyfill-php56": "*"
     },
+    "conflict": {
+        "symfony/symfony": "3.4.7 || 4.0.7"
+    },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
         "ext-intl": "For better performance than using Symfony Polyfill Component",
