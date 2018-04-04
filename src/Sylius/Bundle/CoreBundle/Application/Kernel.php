@@ -100,7 +100,6 @@ class Kernel extends HttpKernel
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test', 'test_cached'], true)) {
-            $bundles[] = new \Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle();
             $bundles[] = new \Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle();
             $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
