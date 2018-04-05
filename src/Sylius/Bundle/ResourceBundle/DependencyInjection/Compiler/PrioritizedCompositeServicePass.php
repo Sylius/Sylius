@@ -72,11 +72,11 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
      */
     private function injectTaggedServicesIntoComposite(ContainerBuilder $container): void
     {
-        $channelContextDefinition = $container->findDefinition($this->compositeId);
+        $contextDefinition = $container->findDefinition($this->compositeId);
 
         $taggedServices = $container->findTaggedServiceIds($this->tagName);
         foreach ($taggedServices as $id => $tags) {
-            $this->addMethodCalls($channelContextDefinition, $id, $tags);
+            $this->addMethodCalls($contextDefinition, $id, $tags);
         }
     }
 
@@ -93,23 +93,23 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
     }
 
     /**
-     * @param Definition $channelContextDefinition
+     * @param Definition $contextDefinition
      * @param string $id
      * @param array $tags
      */
-    private function addMethodCalls(Definition $channelContextDefinition, string $id, array $tags): void
+    private function addMethodCalls(Definition $contextDefinition, string $id, array $tags): void
     {
         foreach ($tags as $attributes) {
-            $this->addMethodCall($channelContextDefinition, $id, $attributes);
+            $this->addMethodCall($contextDefinition, $id, $attributes);
         }
     }
 
     /**
-     * @param Definition $channelContextDefinition
+     * @param Definition $contextDefinition
      * @param string $id
      * @param array $attributes
      */
-    private function addMethodCall(Definition $channelContextDefinition, string $id, array $attributes): void
+    private function addMethodCall(Definition $contextDefinition, string $id, array $attributes): void
     {
         $arguments = [new Reference($id)];
 
@@ -117,6 +117,6 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
             $arguments[] = $attributes['priority'];
         }
 
-        $channelContextDefinition->addMethodCall($this->methodName, $arguments);
+        $contextDefinition->addMethodCall($this->methodName, $arguments);
     }
 }
