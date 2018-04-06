@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Tests\Resource;
+namespace Sylius\Bundle\ResourceBundle\Tests\Resource;
 
 use Doctrine\ORM\EntityManager;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -28,16 +28,16 @@ final class ResourceServicesTest extends WebTestCase
     {
         $client = parent::createClient();
 
-        $productRepository = $client->getContainer()->get('sylius.repository.product');
+        $productRepository = $client->getContainer()->get('app.repository.book');
         $this->assertTrue($productRepository instanceof RepositoryInterface);
 
-        $productRepository = $client->getContainer()->get('sylius.manager.customer');
+        $productRepository = $client->getContainer()->get('app.manager.book');
         $this->assertTrue($productRepository instanceof EntityManager);
 
-        $productRepository = $client->getContainer()->get('sylius.controller.shipping_method');
+        $productRepository = $client->getContainer()->get('app.controller.book');
         $this->assertTrue($productRepository instanceof ResourceController);
 
-        $productRepository = $client->getContainer()->get('sylius.factory.promotion');
+        $productRepository = $client->getContainer()->get('app.factory.book');
         $this->assertTrue($productRepository instanceof FactoryInterface);
     }
 }
