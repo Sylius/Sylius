@@ -22,20 +22,19 @@ final class OrderAdjustmentsClearer implements OrderProcessorInterface
     /**
      * @var array
      */
-    private static $adjustmentsToRemove = [
-        AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT,
-        AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
-        AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT,
-        AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT,
-        AdjustmentInterface::TAX_ADJUSTMENT,
-    ];
+    private $adjustmentsToRemove;
+
+    public function __construct(array $adjustmentsToRemove = [])
+    {
+        $this->adjustmentsToRemove = $adjustmentsToRemove;
+    }
 
     /**
      * {@inheritdoc}
      */
     public function process(OrderInterface $order): void
     {
-        foreach (self::$adjustmentsToRemove as $type) {
+        foreach ($this->adjustmentsToRemove as $type) {
             $order->removeAdjustmentsRecursively($type);
         }
     }

@@ -20,6 +20,17 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 final class OrderAdjustmentsClearerSpec extends ObjectBehavior
 {
+    function let()
+    {
+        $this->beConstructedWith([
+            AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT,
+            AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
+            AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT,
+            AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT,
+            AdjustmentInterface::TAX_ADJUSTMENT,
+        ]);
+    }
+    
     function it_is_an_order_processor(): void
     {
         $this->shouldImplement(OrderProcessorInterface::class);

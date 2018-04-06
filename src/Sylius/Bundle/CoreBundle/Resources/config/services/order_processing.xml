@@ -14,6 +14,14 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sylius.order_processing.order_adjustments_clearer" class="Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer">
+            <argument type="collection">
+                <argument type="constant">Sylius\Component\Core\Model\AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT</argument>
+                <argument type="constant">Sylius\Component\Core\Model\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT</argument>
+                <argument type="constant">Sylius\Component\Core\Model\AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT</argument>
+                <argument type="constant">Sylius\Component\Core\Model\AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT</argument>
+                <argument type="constant">Sylius\Component\Core\Model\AdjustmentInterface::SHIPPING_ADJUSTMENT</argument>
+                <argument type="constant">Sylius\Component\Core\Model\AdjustmentInterface::TAX_ADJUSTMENT</argument>
+            </argument>
             <tag name="sylius.order_processor" priority="60"/>
         </service>
 
