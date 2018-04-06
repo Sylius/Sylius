@@ -20,29 +20,31 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 final class OrderAdjustmentsClearerSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith([
-            AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT,
-            AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
-            AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT,
-            AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT,
-            AdjustmentInterface::TAX_ADJUSTMENT,
-        ]);
-    }
-    
     function it_is_an_order_processor(): void
     {
         $this->shouldImplement(OrderProcessorInterface::class);
     }
 
-    function it_removes_adjustments_from_order_recursively(OrderInterface $order): void
+    function it_removes_adjustments_with_default_types_from_order_recursively(OrderInterface $order): void
     {
         $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $order->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
+
+        $this->process($order);
+    }
+
+    function it_removes_adjustments_with_specified_types_from_order_recursively(OrderInterface $order): void
+    {
+        $this->beConstructedWith([
+            AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT,
+            AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
+        ]);
+
+        $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
 
         $this->process($order);
     }

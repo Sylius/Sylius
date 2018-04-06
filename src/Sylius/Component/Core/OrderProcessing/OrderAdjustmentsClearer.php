@@ -26,6 +26,21 @@ final class OrderAdjustmentsClearer implements OrderProcessorInterface
 
     public function __construct(array $adjustmentsToRemove = [])
     {
+        if (0 === func_num_args()) {
+            @trigger_error(
+                'Not passing adjustments types explicitly is deprecated since 1.2 and will be prohibited in 2.0',
+                E_USER_DEPRECATED
+            );
+
+            $adjustmentsToRemove = [
+                AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT,
+                AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
+                AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT,
+                AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT,
+                AdjustmentInterface::TAX_ADJUSTMENT,
+            ];
+        }
+
         $this->adjustmentsToRemove = $adjustmentsToRemove;
     }
 
