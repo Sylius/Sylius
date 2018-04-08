@@ -9,7 +9,7 @@ Sylius is a game-changing e-commerce solution for PHP, based on the Symfony fram
 Philosophy
 ----------
 
-Sylius is completely open source (MIT license) and free, maintained by diverse and creative community of developers and companies.
+Sylius is completely open source (MIT license) and free, maintained by a diverse and creative community of developers and companies.
 
 What are our core values and what makes us different from other solutions?
 
