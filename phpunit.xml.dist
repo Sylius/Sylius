@@ -13,6 +13,7 @@
 
     <php>
         <server name="KERNEL_CLASS_PATH" value="/app/TestAppKernel.php" />
+        <server name="KERNEL_DIR" value="app" />
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
     </php>
 </phpunit>
