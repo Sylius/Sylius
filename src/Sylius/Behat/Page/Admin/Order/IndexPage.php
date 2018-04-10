@@ -20,23 +20,23 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyFilterDateFrom(\DateTimeInterface $dateTime)
+    public function specifyFilterDateFrom(string $dateTime)
     {
-        $timestamp = $dateTime->getTimestamp();
+        $dateAndTime = explode(' ', $dateTime);
 
-        $this->getDocument()->fillField('criteria_date_from_date', date('Y-m-d', $timestamp));
-        $this->getDocument()->fillField('criteria_date_from_time', date('H:i', $timestamp));
+        $this->getDocument()->fillField('criteria_date_from_date', $dateAndTime[0]);
+        $this->getDocument()->fillField('criteria_date_from_time', $dateAndTime[1] ?? '');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function specifyFilterDateTo(\DateTimeInterface $dateTime)
+    public function specifyFilterDateTo(string $dateTime)
     {
-        $timestamp = $dateTime->getTimestamp();
+        $dateAndTime = explode(' ', $dateTime);
 
-        $this->getDocument()->fillField('criteria_date_to_date', date('Y-m-d', $timestamp));
-        $this->getDocument()->fillField('criteria_date_to_time', date('H:i', $timestamp));
+        $this->getDocument()->fillField('criteria_date_to_date', $dateAndTime[0]);
+        $this->getDocument()->fillField('criteria_date_to_time', $dateAndTime[1] ?? '');
     }
 
     /**
