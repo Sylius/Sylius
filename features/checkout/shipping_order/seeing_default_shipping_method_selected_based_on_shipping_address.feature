@@ -1,5 +1,5 @@
 @checkout
-Feature: Seeing shipping methods which category is same as category of all my units
+Feature: Seeing default shipping method selected based on shipping address
     In order to select correct shipping method for my order
     As a Customer
     I want to be able to choose only shipping methods that match shipping category of all my items

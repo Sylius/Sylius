@@ -31,10 +31,10 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 {
     function let(
         DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
-        ShippingMethodsResolverInterface $shippingMethodsResolver,
-        FactoryInterface $shipmentFactory
+        FactoryInterface $shipmentFactory,
+        ShippingMethodsResolverInterface $shippingMethodsResolver
     ): void {
-        $this->beConstructedWith($defaultShippingMethodResolver, $shippingMethodsResolver, $shipmentFactory);
+        $this->beConstructedWith($defaultShippingMethodResolver, $shipmentFactory, $shippingMethodsResolver);
     }
 
     function it_is_an_order_processor(): void
@@ -116,6 +116,41 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $shipment->getMethod()->willReturn($shippingMethod);
         $shippingMethodsResolver->getSupportedMethods($shipment)->willReturn([$shippingMethod]);
+
+        $orderItem->getVariant()->willReturn($productVariant);
+
+        $order->isShippingRequired()->willReturn(true);
+
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
+
+        $order->isEmpty()->willReturn(false);
+        $order->hasShipments()->willReturn(true);
+        $order->getItemUnits()->willReturn(new ArrayCollection([$itemUnit->getWrappedObject(), $itemUnitWithoutShipment->getWrappedObject()]));
+        $order->getShipments()->willReturn($shipments);
+
+        $itemUnit->getShipment()->willReturn($shipment);
+
+        $shipment->getUnits()->willReturn(new ArrayCollection([]));
+        $shipment->addUnit($itemUnitWithoutShipment)->shouldBeCalled();
+        $shipment->addUnit($itemUnit)->shouldNotBeCalled();
+
+        $this->process($order);
+    }
+
+    function it_adds_new_item_units_to_existing_shipment_without_checking_methods_if_shipping_methods_resolver_is_not_used(
+        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
+        FactoryInterface $shipmentFactory,
+        OrderInterface $order,
+        ShipmentInterface $shipment,
+        Collection $shipments,
+        OrderItemUnitInterface $itemUnit,
+        OrderItemUnitInterface $itemUnitWithoutShipment,
+        OrderItemInterface $orderItem,
+        ProductVariantInterface $productVariant
+    ): void {
+        $this->beConstructedWith($defaultShippingMethodResolver, $shipmentFactory);
+
+        $shipments->first()->willReturn($shipment);
 
         $orderItem->getVariant()->willReturn($productVariant);
 

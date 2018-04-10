@@ -33,20 +33,27 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
     private $shippingMethodRepository;
 
     /**
-     * @var ZoneMatcherInterface
+     * @var ZoneMatcherInterface|null
      */
     private $zoneMatcher;
 
     /**
      * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-     * @param ZoneMatcherInterface $zoneMatcher
+     * @param ZoneMatcherInterface|null $zoneMatcher
      */
     public function __construct(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ZoneMatcherInterface $zoneMatcher
+        ?ZoneMatcherInterface $zoneMatcher = null
     ) {
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->zoneMatcher = $zoneMatcher;
+
+        if (1 === func_num_args() || null === $zoneMatcher) {
+            @trigger_error(
+                'Not passing ZoneMatcherInterface explicitly is deprecated since 1.2 and will be prohibited in 2.0',
+                E_USER_DEPRECATED
+            );
+        }
     }
 
     /**
@@ -76,11 +83,11 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
      * @param ChannelInterface $channel
      * @param AddressInterface|null $address
      *
-     * @return array
+     * @return array|ShippingMethodInterface[]
      */
     private function getShippingMethods(ChannelInterface $channel, ?AddressInterface $address): array
     {
-        if (null === $address) {
+        if (null === $address || null === $this->zoneMatcher) {
             return $this->shippingMethodRepository->findEnabledForChannel($channel);
         }
 
