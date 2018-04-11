@@ -28,31 +28,20 @@ final class ShippableCountriesResolver implements ShippableCountriesResolverInte
     private $countryRepository;
 
     /**
-     * @var ChannelContextInterface
-     */
-    private $channelContext;
-
-    /**
      * @param RepositoryInterface $countryRepository
-     * @param ChannelContextInterface $channelContext
      */
-    public function __construct(RepositoryInterface $countryRepository, ChannelContextInterface $channelContext)
+    public function __construct(RepositoryInterface $countryRepository)
     {
         $this->countryRepository = $countryRepository;
-        $this->channelContext = $channelContext;
     }
 
     /**
-     * @param ChannelInterface|null $channel
+     * @param ChannelInterface $channel
      *
      * @return array
      */
-    public function getShippableCountries(ChannelInterface $channel = null): array
+    public function getShippableCountries(ChannelInterface $channel): array
     {
-        if ($channel === null) {
-            $channel = $this->channelContext->getChannel();
-        }
-
         $countries = $channel->getShippableCountries();
 
         if ($countries->isEmpty()) {

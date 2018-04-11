@@ -45,10 +45,10 @@ final class ShippableCountriesResolverSpec extends ObjectBehavior
         $secondCountry->getName()->willReturn('France');
         $secondCountry->getCode()->willReturn('FR');
 
-        $countries = new ArrayCollection([
+        $countries = [
             $firstCountry->getWrappedObject(),
             $secondCountry->getWrappedObject(),
-        ]);
+        ];
 
         $countryRepository->findAll()->willReturn($countries);
 
@@ -73,10 +73,10 @@ final class ShippableCountriesResolverSpec extends ObjectBehavior
         $secondCountry->getName()->willReturn('France');
         $secondCountry->getCode()->willReturn('FR');
 
-        $countries = new ArrayCollection([
+        $countries = [
             $firstCountry->getWrappedObject(),
             $secondCountry->getWrappedObject(),
-        ]);
+        ];
 
         $countryRepository->findAll()->willReturn($countries);
 
@@ -85,37 +85,6 @@ final class ShippableCountriesResolverSpec extends ObjectBehavior
         $this->getShippableCountries($channel)->shouldReturn([
             'Germany' => 'DE',
             'France' => 'FR',
-        ]);
-    }
-
-    function it_returns_the_shipping_countries_of_the_current_channel_if_no_channel_is_provided(
-        ChannelContextInterface $channelContext,
-        ChannelInterface $channel,
-        RepositoryInterface $countryRepository,
-        CountryInterface $firstCountry,
-        CountryInterface $secondCountry
-    ): void {
-        $channelContext->getChannel()->willReturn($channel);
-
-        $firstCountry->getName()->willReturn('Germany');
-        $firstCountry->getCode()->willReturn('DE');
-
-        $secondCountry->getName()->willReturn('France');
-        $secondCountry->getCode()->willReturn('FR');
-
-        $countries = new ArrayCollection([
-            $firstCountry->getWrappedObject(),
-            $secondCountry->getWrappedObject(),
-        ]);
-
-        $countryRepository->findAll()->willReturn($countries);
-
-        $channel->getShippableCountries()->willReturn(new ArrayCollection([
-            $firstCountry->getWrappedObject(),
-        ]));
-
-        $this->getShippableCountries()->shouldReturn([
-            'Germany' => 'DE',
         ]);
     }
 }

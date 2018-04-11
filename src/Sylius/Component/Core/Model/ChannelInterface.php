@@ -118,7 +118,7 @@ interface ChannelInterface extends
     public function setAccountVerificationRequired(bool $accountVerificationRequired): void;
 
     /**
-     * @return Collection
+     * @return Collection|CountryInterface[]
      */
     public function getShippableCountries(): Collection;
 

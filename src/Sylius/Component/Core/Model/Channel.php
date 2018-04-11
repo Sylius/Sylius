@@ -79,7 +79,7 @@ class Channel extends BaseChannel implements ChannelInterface
     protected $accountVerificationRequired = true;
 
     /**
-     * @var Collection
+     * @var Collection|CountryInterface[]
      */
     protected $shippableCountries;
 
