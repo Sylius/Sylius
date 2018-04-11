@@ -15,7 +15,7 @@ namespace Sylius\Component\Channel\Context;
 
 class ChannelNotFoundException extends \RuntimeException
 {
-    private static const EXCEPTION_MESSAGE = 'Channel could not be found! Tip: You can use the Web Debug Toolbar to switch between channels in development.';
+    private const EXCEPTION_MESSAGE = 'Channel could not be found! Tip: You can use the Web Debug Toolbar to switch between channels in development.';
 
     /**
      * {@inheritdoc}
