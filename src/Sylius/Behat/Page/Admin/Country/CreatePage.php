@@ -41,14 +41,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /** {@inheritdoc} */
-    public function addPostCode(string $postCode, string $name): void
+    public function addPostCode(string $postcode, string $name): void
     {
         $this->getDocument()->clickLink('Add postcode');
 
-        $postCodeForm = $this->getLastPostCodeElement();
+        $postcodeForm = $this->getLastPostCodeElement();
 
-        $postCodeForm->fillField('Post code', $postCode);
-        $postCodeForm->fillField('Name', $name);
+        $postcodeForm->fillField('Post code', $postcode);
+        $postcodeForm->fillField('Name', $name);
     }
 
     /**
@@ -58,7 +58,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'provinces' => '#sylius_country_provinces',
-            'postCodes' => '#sylius_country_postCodes',
+            'postcodes' => '#sylius_country_postcodes',
         ]);
     }
 
@@ -80,8 +80,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     private function getLastPostCodeElement(): NodeElement
     {
-        $postCodes = $this->getElement('postCodes');
-        $items = $postCodes->findAll('css', 'div[data-form-collection="item"]');
+        $postcodes = $this->getElement('postcodes');
+        $items = $postcodes->findAll('css', 'div[data-form-collection="item"]');
 
         Assert::notEmpty($items);
 

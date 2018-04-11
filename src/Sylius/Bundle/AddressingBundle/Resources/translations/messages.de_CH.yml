@@ -35,7 +35,7 @@ sylius:
             types:
                 country: Land
                 province: Kanton
-                post_code: Postleitzahl
+                postcode: Postleitzahl
                 zone: Zone
             scope: Umfang
             scopes:

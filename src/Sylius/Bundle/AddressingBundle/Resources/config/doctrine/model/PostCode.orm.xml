@@ -15,7 +15,7 @@
 
     <mapped-superclass name="Sylius\Component\Addressing\Model\PostCode" table="sylius_postcodes">
         <unique-constraints>
-            <unique-constraint columns="country_id,postCode"/>
+            <unique-constraint columns="country_id,postcode"/>
         </unique-constraints>
 
         <id name="id" column="id" type="integer">
@@ -23,10 +23,10 @@
         </id>
 
         <field name="name" type="string"/>
-        <field name="postCode" type="string" />
+        <field name="postcode" type="string" />
 
         <many-to-one field="country"
-                     target-entity="Sylius\Component\Addressing\Model\CountryInterface" inversed-by="postCodes">
+                     target-entity="Sylius\Component\Addressing\Model\CountryInterface" inversed-by="postcodes">
             <join-column name="country_id" referenced-column-name="id" nullable="false"/>
         </many-to-one>
     </mapped-superclass>

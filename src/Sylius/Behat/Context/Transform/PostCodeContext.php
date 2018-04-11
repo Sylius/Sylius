@@ -11,22 +11,22 @@ use Webmozart\Assert\Assert;
 class PostCodeContext implements Context
 {
     /** @var PostCodeRepositoryInterface */
-    private $postCodeRepository;
+    private $postcodeRepository;
 
     public function __construct(PostCodeRepositoryInterface $repository)
     {
-        $this->postCodeRepository = $repository;
+        $this->postcodeRepository = $repository;
     }
 
     /**
-     * @Transform /^post code "([^"]+)"$/
-     * @Transform /^"([^"]+)" post code$/
+     * @Transform /^postcode "([^"]+)"$/
+     * @Transform /^"([^"]+)" postcode$/
      */
-    public function getPostCodeByCode(string $code): PostCodeInterface
+    public function getPostcodeByCode(string $code): PostCodeInterface
     {
-        $postCode = $this->postCodeRepository->findOneBy(['postCode' => $code]);
-        Assert::notNull($postCode, sprintf("Post code '%s' was not found by code", $code));
+        $postcode = $this->postcodeRepository->findOneBy(['postcode' => $code]);
+        Assert::notNull($postcode, sprintf("Post code '%s' was not found by code", $code));
 
-        return $postCode;
+        return $postcode;
     }
 }

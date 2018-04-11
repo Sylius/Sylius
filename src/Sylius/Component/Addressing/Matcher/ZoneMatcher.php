@@ -30,7 +30,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
      * @var array
      */
     private const PRIORITIES = [
-        ZoneInterface::TYPE_POST_CODE,
+        ZoneInterface::TYPE_POSTCODE,
         ZoneInterface::TYPE_PROVINCE,
         ZoneInterface::TYPE_COUNTRY,
         ZoneInterface::TYPE_ZONE,
@@ -109,7 +109,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
     private function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member): bool
     {
         switch ($type = $member->getBelongsTo()->getType()) {
-            case ZoneInterface::TYPE_POST_CODE:
+            case ZoneInterface::TYPE_POSTCODE:
                 $addressCode = "{$address->getCountryCode()}-{$address->getPostcode()}";
                 return $addressCode === $member->getCode();
 

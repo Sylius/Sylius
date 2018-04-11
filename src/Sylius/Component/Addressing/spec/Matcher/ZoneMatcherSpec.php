@@ -280,7 +280,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
     ) {
         $repository->findAll()->shouldBeCalled()->willReturn([$zone]);
 
-        $zone->getType()->willReturn(ZoneInterface::TYPE_POST_CODE);
+        $zone->getType()->willReturn(ZoneInterface::TYPE_POSTCODE);
         $zone->getMembers()->willReturn(new ArrayCollection([$memberPostCode->getWrappedObject()]));
 
         $memberPostCode->getCode()->willReturn('DE-12345');
@@ -300,7 +300,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
     ) {
         $repository->findAll()->shouldBeCalled()->willReturn([$zone]);
 
-        $zone->getType()->willReturn(ZoneInterface::TYPE_POST_CODE);
+        $zone->getType()->willReturn(ZoneInterface::TYPE_POSTCODE);
         $zone->getMembers()->willReturn(new ArrayCollection([$memberPostCode->getWrappedObject()]));
 
         $memberPostCode->getCode()->willReturn('CH-12345');
@@ -316,36 +316,36 @@ final class ZoneMatcherSpec extends ObjectBehavior
         RepositoryInterface $repository,
         ZoneInterface $countryZone,
         ZoneInterface $provinceZone,
-        ZoneInterface $postCodeZone,
+        ZoneInterface $postcodeZone,
         ZoneMemberInterface $countryMember,
         ZoneMemberInterface $provinceMember,
-        ZoneMemberInterface $postCodeMember,
+        ZoneMemberInterface $postcodeMember,
         AddressInterface $address
     )
     {
-        $repository->findAll()->shouldBeCalled()->willReturn([$countryZone, $provinceZone, $postCodeZone]);
+        $repository->findAll()->shouldBeCalled()->willReturn([$countryZone, $provinceZone, $postcodeZone]);
 
         $countryZone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
         $provinceZone->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
-        $postCodeZone->getType()->willReturn(ZoneInterface::TYPE_POST_CODE);
+        $postcodeZone->getType()->willReturn(ZoneInterface::TYPE_POSTCODE);
 
         $countryZone->getMembers()->willReturn(new ArrayCollection([$countryMember->getWrappedObject()]));
         $provinceZone->getMembers()->willReturn(new ArrayCollection([$provinceMember->getWrappedObject()]));
-        $postCodeZone->getMembers()->willReturn(new ArrayCollection([$postCodeMember->getWrappedObject()]));
+        $postcodeZone->getMembers()->willReturn(new ArrayCollection([$postcodeMember->getWrappedObject()]));
 
         $countryMember->getBelongsTo()->shouldBeCalled()->willReturn($countryZone);
         $provinceMember->getBelongsTo()->shouldBeCalled()->willReturn($provinceZone);
-        $postCodeMember->getBelongsTo()->shouldBeCalled()->willReturn($postCodeZone);
+        $postcodeMember->getBelongsTo()->shouldBeCalled()->willReturn($postcodeZone);
 
         $countryMember->getCode()->shouldBeCalled()->willReturn('DE');
         $provinceMember->getCode()->shouldBeCalled()->willReturn('DE-ND');
-        $postCodeMember->getCode()->shouldBeCalled()->willReturn('DE-1233');
+        $postcodeMember->getCode()->shouldBeCalled()->willReturn('DE-1233');
 
         $address->getCountryCode()->shouldBeCalled()->willReturn('DE');
         $address->getProvinceCode()->shouldBeCalled()->willReturn('DE-ND');
         $address->getPostcode()->shouldBeCalled()->willReturn('1233');
 
-        $this->match($address)->shouldReturn($postCodeZone);
+        $this->match($address)->shouldReturn($postcodeZone);
     }
 
     function it_matches_all_zones_by_scope_when_one_zone_for_address_is_defined(

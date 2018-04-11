@@ -175,15 +175,15 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @Given /^(it) has the ("[^"]+" post code) member$/
-     * @Given /^(it) also has the ("[^"]+" post code) member$/
+     * @Given /^(it) has the ("[^"]+" postcode) member$/
+     * @Given /^(it) also has the ("[^"]+" postcode) member$/
      */
     public function itHasThePostCodeMemberAndThePostCodeMember(
         ZoneInterface $zone,
-        PostCodeInterface $postCode
+        PostCodeInterface $postcode
     ) {
-        $zone->setType(ZoneInterface::TYPE_POST_CODE);
-        $zone->addMember($this->createZoneMember($postCode));
+        $zone->setType(ZoneInterface::TYPE_POSTCODE);
+        $zone->addMember($this->createZoneMember($postcode));
 
         $this->objectManager->flush();
     }

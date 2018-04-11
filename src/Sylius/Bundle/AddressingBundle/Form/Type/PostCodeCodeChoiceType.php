@@ -23,14 +23,14 @@ final class PostCodeCodeChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    private $postCodeRepository;
+    private $postcodeRepository;
 
     /**
-     * @param RepositoryInterface $postCodeRepository
+     * @param RepositoryInterface $postcodeRepository
      */
-    public function __construct(RepositoryInterface $postCodeRepository)
+    public function __construct(RepositoryInterface $postcodeRepository)
     {
-        $this->postCodeRepository = $postCodeRepository;
+        $this->postcodeRepository = $postcodeRepository;
     }
 
     /**
@@ -40,7 +40,7 @@ final class PostCodeCodeChoiceType extends AbstractType
     {
         $builder->addModelTransformer(
             new ReversedTransformer(
-                new ResourceToIdentifierTransformer($this->postCodeRepository, 'code')
+                new ResourceToIdentifierTransformer($this->postcodeRepository, 'code')
             )
         );
     }
@@ -58,6 +58,6 @@ final class PostCodeCodeChoiceType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'sylius_postal_code_code_choice';
+        return 'sylius_postalcode_code_choice';
     }
 }

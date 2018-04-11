@@ -9,8 +9,8 @@ Feature: Editing a zone
         And the store also has country "United States"
         And this country has the "Alabama" province with "AL" code
         And this country has the "Arizona" province with "AZ" code
-        And this country has the post code "1232" named "hello"
-        And this country has the post code "2222" named "testing"
+        And this country has the postcode "1232" named "hello"
+        And this country has the postcode "2222" named "testing"
         And the store has a zone "North America" with code "NA"
         And the store has a zone "South America" with code "SA"
         And I am logged in as an administrator
@@ -38,15 +38,15 @@ Feature: Editing a zone
         And this zone should have only the "Alabama" province member
 
     @ui @javascript
-    Scenario: Removing a post code from a zone
+    Scenario: Removing a postcode from a zone
         Given the store has a zone "United States" with code "USA"
-        And it has the "1232" post code member
-        And it also has the "2222" post code member
+        And it has the "1232" postcode member
+        And it also has the "2222" postcode member
         When I want to modify the zone named "United States"
-        And I remove the "2222" post code member
+        And I remove the "2222" postcode member
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this zone should have only the "1232" post code member
+        And this zone should have only the "1232" postcode member
 
     @ui @javascript
     Scenario: Removing a zone from a zone

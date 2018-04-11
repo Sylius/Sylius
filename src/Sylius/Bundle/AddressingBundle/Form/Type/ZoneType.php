@@ -111,10 +111,10 @@ final class ZoneType extends AbstractResourceType
     private function getZoneMemberEntryType(string $zoneMemberType): string
     {
         $zoneMemberEntryTypes = [
-            ZoneInterface::TYPE_COUNTRY   => CountryCodeChoiceType::class,
-            ZoneInterface::TYPE_PROVINCE  => ProvinceCodeChoiceType::class,
-            ZoneInterface::TYPE_POST_CODE => PostCodeCodeChoiceType::class,
-            ZoneInterface::TYPE_ZONE      => ZoneCodeChoiceType::class,
+            ZoneInterface::TYPE_COUNTRY  => CountryCodeChoiceType::class,
+            ZoneInterface::TYPE_PROVINCE => ProvinceCodeChoiceType::class,
+            ZoneInterface::TYPE_POSTCODE => PostCodeCodeChoiceType::class,
+            ZoneInterface::TYPE_ZONE     => ZoneCodeChoiceType::class,
         ];
 
         return $zoneMemberEntryTypes[$zoneMemberType];
@@ -128,10 +128,10 @@ final class ZoneType extends AbstractResourceType
     private function getZoneMemberEntryOptions(string $zoneMemberType): array
     {
         $zoneMemberEntryOptions = [
-            ZoneInterface::TYPE_COUNTRY   => ['label' => 'sylius.form.zone.types.country'],
-            ZoneInterface::TYPE_PROVINCE  => ['label' => 'sylius.form.zone.types.province'],
-            ZoneInterface::TYPE_ZONE      => ['label' => 'sylius.form.zone.types.zone'],
-            ZoneInterface::TYPE_POST_CODE => ['label' => 'sylius.form.zone.types.post_code']
+            ZoneInterface::TYPE_COUNTRY  => ['label' => 'sylius.form.zone.types.country'],
+            ZoneInterface::TYPE_PROVINCE => ['label' => 'sylius.form.zone.types.province'],
+            ZoneInterface::TYPE_ZONE     => ['label' => 'sylius.form.zone.types.zone'],
+            ZoneInterface::TYPE_POSTCODE => ['label' => 'sylius.form.zone.types.postcode']
         ];
 
         return $zoneMemberEntryOptions[$zoneMemberType];

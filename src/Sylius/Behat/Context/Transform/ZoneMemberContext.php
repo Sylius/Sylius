@@ -49,19 +49,19 @@ final class ZoneMemberContext implements Context
     /**
      * @var PostCodeRepositoryInterface
      */
-    private $postCodeRepository;
+    private $postcodeRepository;
 
     /**
      * @param CountryNameConverterInterface $countryNameConverter
      * @param RepositoryInterface           $provinceRepository
-     * @param PostCodeRepositoryInterface   $postCodeRepository
+     * @param PostCodeRepositoryInterface   $postcodeRepository
      * @param RepositoryInterface           $zoneRepository
      * @param RepositoryInterface           $zoneMemberRepository
      */
     public function __construct(
         CountryNameConverterInterface $countryNameConverter,
         RepositoryInterface $provinceRepository,
-        PostCodeRepositoryInterface $postCodeRepository,
+        PostCodeRepositoryInterface $postcodeRepository,
         RepositoryInterface $zoneRepository,
         RepositoryInterface $zoneMemberRepository
     ) {
@@ -69,7 +69,7 @@ final class ZoneMemberContext implements Context
         $this->provinceRepository = $provinceRepository;
         $this->zoneRepository = $zoneRepository;
         $this->zoneMemberRepository = $zoneMemberRepository;
-        $this->postCodeRepository = $postCodeRepository;
+        $this->postcodeRepository = $postcodeRepository;
     }
 
     /**
@@ -103,13 +103,13 @@ final class ZoneMemberContext implements Context
     }
 
     /**
-     * @Transform the :postCode post code member
+     * @Transform the :postcode postcode member
      */
-    public function getPostCodeTypeZoneMemberByPostalCode(string $postCode): ZoneMemberInterface
+    public function getPostCodeTypeZoneMemberByPostalCode(string $postcode): ZoneMemberInterface
     {
-        $postCode = $this->getPostCodeByCode($postCode)->getCode();
+        $postcode = $this->getPostCodeByCode($postcode)->getCode();
 
-        return $this->getZoneMemberByCode($postCode);
+        return $this->getZoneMemberByCode($postcode);
     }
 
     /**
@@ -148,17 +148,12 @@ final class ZoneMemberContext implements Context
         return $province;
     }
 
-    /**
-     * @param $postCode
-     *
-     * @return PostCodeInterface
-     */
-    private function getPostCodeByCode(string $postCode): PostCodeInterface
+    private function getPostCodeByCode(string $postcode): PostCodeInterface
     {
-        $postCodeObject = $this->postCodeRepository->findOneBy(['postCode' => $postCode]);
-        Assert::notNull($postCodeObject, 'Postcode does not exist');
+        $postcodeObject = $this->postcodeRepository->findOneBy(['postcode' => $postcode]);
+        Assert::notNull($postcodeObject, 'Postcode does not exist');
 
-        return $postCodeObject;
+        return $postcodeObject;
     }
 
     /**

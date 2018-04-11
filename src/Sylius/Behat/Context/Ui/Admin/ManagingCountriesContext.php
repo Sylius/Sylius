@@ -99,14 +99,14 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When I add the post code :postCode named :postCodeName
+     * @When I add the postcode :postcode named :postcodeName
      */
-    public function iAddPostCode($postCode, $postCodeName)
+    public function iAddPostCode($postcode, $postcodeName)
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->addPostCode($postCode, $postCodeName);
+        $currentPage->addPostCode($postcode, $postcodeName);
     }
 
     /**
@@ -206,14 +206,14 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^(this country) should have the "([^"]*)" post code zone/
-     * @Then /^the (country "[^"]*") should have the "([^"]*)" post code zone$/
+     * @Then /^(this country) should have the "([^"]*)" postcode zone/
+     * @Then /^the (country "[^"]*") should have the "([^"]*)" postcode zone$/
      */
-    public function countryShouldHavePostCode(CountryInterface $country, $postCodeName)
+    public function countryShouldHavePostCode(CountryInterface $country, $postcodeName)
     {
         $this->iWantToEditThisCountry($country);
 
-        Assert::true($this->updatePage->hasPostCode($postCodeName));
+        Assert::true($this->updatePage->hasPostCode($postcodeName));
     }
 
     /**
@@ -227,13 +227,13 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^(this country) should not have the "([^"]*)" post code zone/
-     * @Then /^the (country "[^"]*") should not have the "([^"]*)" post code zone$/
+     * @Then /^(this country) should not have the "([^"]*)" postcode zone/
+     * @Then /^the (country "[^"]*") should not have the "([^"]*)" postcode zone$/
      */
-    public function countryShouldNotHavePostCode(CountryInterface $country, $postCodeName){
+    public function countryShouldNotHavePostCode(CountryInterface $country, $postcodeName){
         $this->iWantToEditThisCountry($country);
 
-        Assert::false($this->updatePage->hasPostCode($postCodeName));
+        Assert::false($this->updatePage->hasPostCode($postcodeName));
     }
 
     /**
@@ -257,9 +257,9 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^post code with name "([^"]*)" should not be added in (this country)$/
+     * @Then /^postcode with name "([^"]*)" should not be added in (this country)$/
      */
-    public function postCodeWithNameShouldNotBeAdded($provinceName, CountryInterface $country)
+    public function postcodeWithNameShouldNotBeAdded($provinceName, CountryInterface $country)
     {
         $this->updatePage->open(['id' => $country->getId()]);
 
@@ -295,7 +295,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When /^I want to create a new post code in (country "([^"]*)")$/
+     * @When /^I want to create a new postcode in (country "([^"]*)")$/
      */
     public function iWantToCreateANewPostCodeInCountry(CountryInterface $country)
     {
@@ -314,12 +314,12 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When I name the post code :postCodeName
-     * @When I do not name the post code
+     * @When I name the postcode :postcodeName
+     * @When I do not name the postcode
      */
-    public function iNameThePostCode($postCodeName = null)
+    public function iNameThePostCode($postcodeName = null)
     {
-        $this->updatePage->namePostCode($postCodeName);
+        $this->updatePage->namePostCode($postcodeName);
     }
 
     /**
@@ -332,12 +332,12 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When I do not specify the post code value
-     * @When I specify the post code value as :postCodeValue
+     * @When I do not specify the postcode value
+     * @When I specify the postcode value as :postcodeValue
      */
-    public function iSpecifyThePostCodeValue($postCodeValue = null)
+    public function iSpecifyThePostCodeValue($postcodeValue = null)
     {
-        $this->updatePage->specifyPostCodeValue($postCodeValue);
+        $this->updatePage->specifyPostCodeValue($postcodeValue);
     }
 
     /**
@@ -357,7 +357,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then I should be notified that post code should have a :element
+     * @Then I should be notified that postcode should have a :element
      */
     public function iShouldBeNotifiedThatPostCodeNameShouldNotBeEmpty($element)
     {
@@ -381,10 +381,10 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then I should be notified that the post code must be unique
+     * @Then I should be notified that the postcode must be unique
      */
     public function iShouldBeNotifiedThatPostCodeMustBeUnique()
     {
-        Assert::same($this->updatePage->getValidationMessage('postCode'), 'Postcode must be unique');
+        Assert::same($this->updatePage->getValidationMessage('postcode'), 'Postcode must be unique');
     }
 }

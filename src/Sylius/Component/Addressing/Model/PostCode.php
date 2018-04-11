@@ -20,7 +20,7 @@ class PostCode implements PostCodeInterface
     protected $name;
 
     /** @var string */
-    protected $postCode;
+    protected $postcode;
 
     /** @var CountryInterface */
     protected $country;
@@ -41,7 +41,7 @@ class PostCode implements PostCodeInterface
     public function getCode(): string
     {
         $countryCode = $this->country === null ? '  ' : $this->country->getCode();
-        return "{$countryCode}-{$this->postCode}";
+        return "{$countryCode}-{$this->postcode}";
     }
 
     public function setCode(?string $code): void
@@ -74,17 +74,17 @@ class PostCode implements PostCodeInterface
     }
 
     /** {@inheritdoc} */
-    public function getPostCode(): string
+    public function getPostcode(): string
     {
-        return $this->postCode ?? '';
+        return $this->postcode ?? '';
     }
 
     /**
-     * @param null|string $postCode
+     * @param null|string $postcode
      */
-    public function setPostCode(?string $postCode): void
+    public function setPostcode(?string $postcode): void
     {
-        $this->postCode = $postCode;
+        $this->postcode = $postcode;
     }
 
     /**

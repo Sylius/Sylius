@@ -42,7 +42,7 @@
             <constraint name="Valid" />
         </property>
 
-        <property name="postCodes">
+        <property name="postcodes">
             <constraint name="Valid" />
         </property>
     </class>

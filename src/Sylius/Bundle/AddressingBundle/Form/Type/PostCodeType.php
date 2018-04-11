@@ -21,7 +21,7 @@ final class PostCodeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('postCode', TextType::class)
+        $builder->add('postcode', TextType::class)
                 ->add('name', TextType::class);
     }
 

@@ -38,12 +38,12 @@ interface PostCodeInterface extends ResourceInterface, CodeAwareInterface
     /**
      * @return string
      */
-    public function getPostCode(): string;
+    public function getPostcode(): string;
 
     /**
-     * @param null|string $postCode
+     * @param null|string $postcode
      */
-    public function setPostCode(?string $postCode): void;
+    public function setPostcode(?string $postcode): void;
 
     /**
      * @return CountryInterface

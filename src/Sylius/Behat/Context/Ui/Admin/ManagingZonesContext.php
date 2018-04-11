@@ -108,7 +108,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When /^I remove (the "([^"]*)" (?:country|province|zone|post code) member)$/
+     * @When /^I remove (the "([^"]*)" (?:country|province|zone|postcode) member)$/
      */
     public function iRemoveTheMember(ZoneMemberInterface $zoneMember)
     {
@@ -230,7 +230,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then /^(this zone) should have only (the "([^"]*)" (?:country|province|zone|post code) member)$/
+     * @Then /^(this zone) should have only (the "([^"]*)" (?:country|province|zone|postcode) member)$/
      */
     public function thisZoneShouldHaveOnlyTheProvinceMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
     {

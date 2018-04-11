@@ -116,7 +116,7 @@
             <tag name="fob.context_service" />
         </service>
 
-        <service class="Sylius\Behat\Context\Transform\PostCodeContext" id="sylius.behat.context.transform.post_code">
+        <service id="sylius.behat.context.transform.post_code" class="Sylius\Behat\Context\Transform\PostCodeContext">
             <argument id="__symfony__.sylius.repository.postal_code" type="service"/>
             <tag name="fob.context_service"/>
         </service>

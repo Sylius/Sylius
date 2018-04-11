@@ -19,10 +19,10 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ZoneInterface extends ResourceInterface, CodeAwareInterface
 {
-    public const TYPE_COUNTRY   = 'country';
-    public const TYPE_PROVINCE  = 'province';
-    public const TYPE_POST_CODE = 'postcode';
-    public const TYPE_ZONE      = 'zone';
+    public const TYPE_COUNTRY  = 'country';
+    public const TYPE_PROVINCE = 'province';
+    public const TYPE_POSTCODE = 'postcode';
+    public const TYPE_ZONE     = 'zone';
 
     /**
      * @return string[]

@@ -66,7 +66,7 @@ class Zone implements ZoneInterface
      */
     public static function getTypes(): array
     {
-        return [self::TYPE_COUNTRY, self::TYPE_PROVINCE, self::TYPE_ZONE, self::TYPE_POST_CODE];
+        return [self::TYPE_COUNTRY, self::TYPE_PROVINCE, self::TYPE_ZONE, self::TYPE_POSTCODE];
     }
 
     /**

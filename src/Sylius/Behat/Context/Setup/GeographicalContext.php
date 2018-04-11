@@ -56,7 +56,7 @@ final class GeographicalContext implements Context
     private $countryManager;
 
     /** @var FactoryInterface */
-    private $postCodeFactory;
+    private $postcodeFactory;
 
     /**
      * @param SharedStorageInterface $sharedStorage
@@ -139,18 +139,18 @@ final class GeographicalContext implements Context
     }
 
     /**
-     * @Given /^(this country)(?:| also) has the post code "([^"]+)" named "([^"]+)"$/
+     * @Given /^(this country)(?:| also) has the postcode "([^"]+)" named "([^"]+)"$/
      */
-    public function theCountryHasPostalCode(CountryInterface $country, string $postCodeValue, string $name)
+    public function theCountryHasPostalCode(CountryInterface $country, string $postcodeValue, string $name)
     {
-        /** @var PostCode $postCode */
-        $postCode = $this->postCodeFactory->createNew();
+        /** @var PostCode $postcode */
+        $postcode = $this->postcodeFactory->createNew();
 
-        $postCode->setPostCode($postCodeValue);
-        $postCode->setName($name);
-        $country->addPostCode($postCode);
+        $postcode->setPostcode($postcodeValue);
+        $postcode->setName($name);
+        $country->addPostcode($postcode);
 
-        $this->sharedStorage->set('postCode', $postCode);
+        $this->sharedStorage->set('postcode', $postcode);
         $this->countryManager->flush();
     }
 

@@ -142,7 +142,7 @@ final class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
-                        ->arrayNode('postal_code')
+                        ->arrayNode('postcode')
                             ->addDefaultsIfNotSet()
                                 ->children()
                                     ->variableNode('options')->end()

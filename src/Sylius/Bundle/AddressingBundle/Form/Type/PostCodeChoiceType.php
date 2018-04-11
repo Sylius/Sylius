@@ -24,14 +24,14 @@ final class PostCodeChoiceType extends AbstractType
     /**
      * @var RepositoryInterface
      */
-    private $postCodeRepository;
+    private $postcodeRepository;
 
     /**
-     * @param RepositoryInterface $postCodeRepository
+     * @param RepositoryInterface $postcodeRepository
      */
-    public function __construct(RepositoryInterface $postCodeRepository)
+    public function __construct(RepositoryInterface $postcodeRepository)
     {
-        $this->postCodeRepository = $postCodeRepository;
+        $this->postcodeRepository = $postcodeRepository;
     }
 
     /**
@@ -44,16 +44,16 @@ final class PostCodeChoiceType extends AbstractType
                 'choices' => function (Options $options): iterable {
                     /** @var CountryInterface $options ['country'] */
                     if (null === $options['country']) {
-                        return $this->postCodeRepository->findAll();
+                        return $this->postcodeRepository->findAll();
                     }
 
                     return $options['country']->getPostCodes();
                 },
-                'choice_value' => function (?PostCodeInterface $postCode) {
-                    if ($postCode === null) {
+                'choice_value' => function (?PostCodeInterface $postcode) {
+                    if ($postcode === null) {
                         return '';
                     }
-                    return $postCode->getCode();
+                    return $postcode->getCode();
                 },
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,

@@ -4,7 +4,7 @@
   "errors": {
     "children": {
       "provinces": {},
-      "postCodes": {},
+      "postcodes": {},
       "enabled": {},
       "code": {
         "errors": [
