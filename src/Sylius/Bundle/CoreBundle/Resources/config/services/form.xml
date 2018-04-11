@@ -53,6 +53,7 @@
     <services>
         <service id="sylius.form.extension.type.address" class="Sylius\Bundle\CoreBundle\Form\Extension\AddressTypeExtension">
             <argument type="service" id="sylius.shippable_countries_resolver.default" />
+            <argument type="service" id="sylius.context.channel" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\AddressType" />
         </service>
         <service id="sylius.form.extension.type.country" class="Sylius\Bundle\CoreBundle\Form\Extension\CountryTypeExtension">

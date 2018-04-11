@@ -37,7 +37,7 @@ sylius:
             tax_zone_default: Default tax zone
             taxonomies: Taxonomies
             theme: Theme
-            shippableCountries: Shippable Countries
+            shippable_countries: Shippable Countries
             add_country: Add Country
         image:
             type: Type

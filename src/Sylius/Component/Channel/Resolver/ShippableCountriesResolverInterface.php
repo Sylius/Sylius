@@ -18,9 +18,9 @@ use Sylius\Component\Core\Model\ChannelInterface;
 interface ShippableCountriesResolverInterface
 {
     /**
-     * @param ChannelInterface|null $channel
+     * @param ChannelInterface $channel
      *
      * @return array
      */
-    public function getShippableCountries(ChannelInterface $channel = null): array;
+    public function getShippableCountries(ChannelInterface $channel): array;
 }

@@ -84,7 +84,7 @@ final class ChannelTypeExtension extends AbstractTypeExtension
                 'required' => false,
             ])
             ->add('shippableCountries', CollectionType::class, [
-                'label' => 'sylius.form.channel.shippableCountries',
+                'label' => 'sylius.form.channel.shippable_countries',
                 'entry_type' => CountryChoiceType::class,
                 'entry_options' => [
                     'constraints' => [

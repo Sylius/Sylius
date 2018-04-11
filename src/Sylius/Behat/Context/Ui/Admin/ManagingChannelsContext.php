@@ -514,10 +514,10 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I add a shippable country :country
      */
-    public function iAddAShippableCountry($country)
+    public function iAddAShippableCountry(CountryInterface $country)
     {
         $this->updatePage->addShippingCountry();
-        $this->updatePage->chooseShippingCountry($country);
+        $this->updatePage->chooseShippingCountry($country->getName());
     }
 
     /**
