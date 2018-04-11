@@ -15,23 +15,22 @@ namespace Sylius\Component\Channel\Context;
 
 class ChannelNotFoundException extends \RuntimeException
 {
-    private const EXCEPTION_MESSAGE = 'Channel could not be found! Tip: You can use the Web Debug Toolbar to switch between channels in development.';
-
     /**
      * {@inheritdoc}
      */
     public function __construct($messageOrPreviousException = null, ?\Throwable $previousException = null)
     {
+        $message = 'Channel could not be found! Tip: You can use the Web Debug Toolbar to switch between channels in development.';
+
         if ($messageOrPreviousException instanceof \Throwable) {
-            parent::__construct(self::EXCEPTION_MESSAGE, 0, $messageOrPreviousException);
+            @trigger_error('Passing previous exception as the first argument is deprecated since 1.2 and will be prohibited since 2.0.', E_USER_DEPRECATED);
+            $previousException = $messageOrPreviousException;
         }
 
-        else if (is_string($messageOrPreviousException)) {
-            parent::__construct($messageOrPreviousException, 0, $previousException);
+        if (is_string($messageOrPreviousException)) {
+            $message = $messageOrPreviousException;
         }
 
-        else {
-            parent::__construct(self::EXCEPTION_MESSAGE, 0, $previousException);
-        }
+        parent::__construct($message, 0, $previousException);
     }
 }
