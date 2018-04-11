@@ -45,7 +45,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      *
      * @return bool
      */
-    public function isTherePostCode($postCodeName): bool;
+    public function hasPostCode($postCodeName): bool;
 
     /**
      * @param string      $name
@@ -59,17 +59,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      */
     public function removeProvince($provinceName);
 
-    /**
-     * @param string      $name
-     * @param string      $code
-     * @param string|null $abbreviation
-     */
-    public function addPostCode($postCode, $postCodeName);
+    public function addPostCode(string $postCode, string $postCodeName): void;
 
-    /**
-     * @param string $provinceName
-     */
-    public function removePostCode($postCodeName);
+    public function removePostCode(string $postCodeName): void;
 
     public function clickAddProvinceButton();
 

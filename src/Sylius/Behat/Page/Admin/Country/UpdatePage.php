@@ -54,7 +54,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /** {@inheritdoc} */
-    public function isTherePostCode($postCodeName): bool
+    public function hasPostCode(string $postCodeName): bool
     {
         $postCodes = $this->getElement('postCode');
 
@@ -75,7 +75,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
                 ->getParent()
                 ->getParent()
                 ->getParent()
-                ->getParent();
+                ->getParent()
+            ;
 
             $item->clickLink('Delete');
         }
@@ -99,14 +100,13 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /** {@inheritdoc} */
-    public function addPostCode($postCode, $postCodeName)
+    public function addPostCode(string $postCode, string $postCodeName): void
     {
         $this->clickAddPostCodeButton();
 
         $postCodeForm = $this->getLastPostCodeElement();
         $postCodeForm->fillField('Post code', $postCode);
         $postCodeForm->fillField('Name', $postCodeName);
-
     }
 
     /**
@@ -156,14 +156,19 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
     }
 
-    public function removePostCode($postCodeName)
+    /**
+     * @throws ElementNotFoundException
+     */
+    public function removePostCode(string $postCodeName)
     {
-        if ($this->isTherePostCode($postCodeName)) {
-            $provinces = $this->getElement('postCode');
-
-            $item = $provinces->find('css', '[value="' . $postCodeName . '"]')->getParent();
-            $item->fillField('Name', '');
+        if (!$this->hasPostCode($postCodeName)) {
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '[value="' . $postCodeName . '"]');
         }
+
+        $provinces = $this->getElement('postCode');
+
+        $item = $provinces->find('css', '[value="' . $postCodeName . '"]')->getParent();
+        $item->fillField('Name', '');
     }
 
     /**
@@ -212,20 +217,20 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'code'      => '#sylius_country_code',
-            'enabled'   => '#sylius_country_enabled',
+            'code' => '#sylius_country_code',
+            'enabled' => '#sylius_country_enabled',
+            'postCode' => '#sylius_country_postCodes',
             'provinces' => '#sylius_country_provinces',
-            'postCode'  => '#sylius_country_postCodes',
         ]);
     }
 
     /**
-     * @return NodeElement
+     * @throws ElementNotFoundException
      */
     private function getLastProvinceElement(): NodeElement
     {
         $provinces = $this->getElement('provinces');
-        $items     = $provinces->findAll('css', 'div[data-form-collection="item"]');
+        $items = $provinces->findAll('css', 'div[data-form-collection="item"]');
 
         Assert::notEmpty($items);
 

@@ -26,7 +26,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addProvince($name, $code, $abbreviation = null)
+    public function addProvince(string $name, string $code, ?string $abbreviation = null): void
     {
         $this->getDocument()->clickLink('Add province');
 
@@ -41,7 +41,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /** {@inheritdoc} */
-    public function addPostCode($postCode, $name)
+    public function addPostCode(string $postCode, string $name): void
     {
         $this->getDocument()->clickLink('Add postcode');
 
@@ -63,7 +63,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @return NodeElement
+     * @throws ElementNotFoundException
      */
     private function getLastProvinceElement(): NodeElement
     {
@@ -76,9 +76,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * Gets the last post code element
-     * @return NodeElement
-     *
      * @throws ElementNotFoundException
      */
     private function getLastPostCodeElement(): NodeElement

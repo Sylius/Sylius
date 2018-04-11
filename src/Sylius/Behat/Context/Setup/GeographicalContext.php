@@ -141,9 +141,10 @@ final class GeographicalContext implements Context
     /**
      * @Given /^(this country)(?:| also) has the post code "([^"]+)" named "([^"]+)"$/
      */
-    public function theCountryHasPostalCode(CountryInterface $country, $postCodeValue, $name)
+    public function theCountryHasPostalCode(CountryInterface $country, string $postCodeValue, string $name)
     {
-        $postCode = new PostCode();
+        /** @var PostCode $postCode */
+        $postCode = $this->postCodeFactory->createNew();
 
         $postCode->setPostCode($postCodeValue);
         $postCode->setName($name);

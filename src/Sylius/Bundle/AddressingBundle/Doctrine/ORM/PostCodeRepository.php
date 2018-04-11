@@ -1,23 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 05/02/18
- * Time: 11:01
- */
 
 declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Doctrine\ORM;
 
-
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\PostCodeInterface;
 use Sylius\Component\Addressing\Repository\PostCodeRepositoryInterface;
 
-class PostCodeRepository extends EntityRepository implements PostCodeRepositoryInterface
+final class PostCodeRepository extends EntityRepository implements PostCodeRepositoryInterface
 {
-
     public function findOneBy(array $criteria, array $orderBy = null): ?PostCodeInterface
     {
         $code = 0;

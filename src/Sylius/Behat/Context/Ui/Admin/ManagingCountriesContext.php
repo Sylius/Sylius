@@ -209,10 +209,11 @@ final class ManagingCountriesContext implements Context
      * @Then /^(this country) should have the "([^"]*)" post code zone/
      * @Then /^the (country "[^"]*") should have the "([^"]*)" post code zone$/
      */
-    public function countryShouldHavePostCode(CountryInterface $country, $postCodeName){
+    public function countryShouldHavePostCode(CountryInterface $country, $postCodeName)
+    {
         $this->iWantToEditThisCountry($country);
 
-        Assert::true($this->updatePage->isTherePostCode($postCodeName));
+        Assert::true($this->updatePage->hasPostCode($postCodeName));
     }
 
     /**
@@ -232,7 +233,7 @@ final class ManagingCountriesContext implements Context
     public function countryShouldNotHavePostCode(CountryInterface $country, $postCodeName){
         $this->iWantToEditThisCountry($country);
 
-        Assert::false($this->updatePage->isTherePostCode($postCodeName));
+        Assert::false($this->updatePage->hasPostCode($postCodeName));
     }
 
     /**
@@ -262,7 +263,7 @@ final class ManagingCountriesContext implements Context
     {
         $this->updatePage->open(['id' => $country->getId()]);
 
-        Assert::false($this->updatePage->isTherePostCode($provinceName));
+        Assert::false($this->updatePage->hasPostCode($provinceName));
     }
 
     /**
@@ -380,7 +381,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the post code must be unique$/
+     * @Then I should be notified that the post code must be unique
      */
     public function iShouldBeNotifiedThatPostCodeMustBeUnique()
     {

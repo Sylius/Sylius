@@ -39,8 +39,9 @@ final class ProvinceCodeChoiceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addModelTransformer(new ReversedTransformer(new ResourceToIdentifierTransformer($this->provinceRepository,
-                                                                                                  'code')));
+        $resourceTransformer = new ResourceToIdentifierTransformer($this->provinceRepository, 'code');
+
+        $builder->addModelTransformer(new ReversedTransformer($resourceTransformer));
     }
 
     /**

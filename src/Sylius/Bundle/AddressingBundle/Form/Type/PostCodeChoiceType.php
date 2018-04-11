@@ -41,7 +41,7 @@ final class PostCodeChoiceType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'choices'                   => function (Options $options): iterable {
+                'choices' => function (Options $options): iterable {
                     /** @var CountryInterface $options ['country'] */
                     if (null === $options['country']) {
                         return $this->postCodeRepository->findAll();
@@ -49,17 +49,17 @@ final class PostCodeChoiceType extends AbstractType
 
                     return $options['country']->getPostCodes();
                 },
-                'choice_value'              => function (?PostCodeInterface $postCode) {
+                'choice_value' => function (?PostCodeInterface $postCode) {
                     if ($postCode === null) {
                         return '';
                     }
                     return $postCode->getCode();
                 },
-                'choice_label'              => 'name',
+                'choice_label' => 'name',
                 'choice_translation_domain' => false,
-                'country'                   => null,
-                'label'                     => 'sylius.form.address.postal_code',
-                'placeholder'               => 'sylius.form.postal_code.select',
+                'country' => null,
+                'label' => 'sylius.form.address.postal_code',
+                'placeholder' => 'sylius.form.postal_code.select',
             ]
         );
         $resolver->addAllowedTypes('country', ['null', CountryInterface::class]);

@@ -23,15 +23,15 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function chooseName($name);
 
     /**
-     * @param string $name
-     * @param string $code
+     * @param string      $name
+     * @param string      $code
      * @param string|null $abbreviation
      */
-    public function addProvince($name, $code, $abbreviation = null);
+    public function addProvince(string $name, string $code, ?string $abbreviation = null): void;
 
     /**
      * @param string $postCode
      * @param string $name
      */
-    public function addPostCode($postCode, $name);
+    public function addPostCode(string $postCode, string $name): void;
 }
