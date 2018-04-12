@@ -93,12 +93,12 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
 
         $referrer = $eventRequest->headers->get('referer');
 
-        $url = null === $referrer ?
+        $response = (null === $referrer) ?
             $this->createRedirectResponse($originalRoute, ResourceActions::INDEX) :
             new RedirectResponse($referrer)
         ;
 
-        $event->setResponse($url);
+        $event->setResponse($response);
         $event->stopPropagation();
     }
 
