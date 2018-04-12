@@ -1,5 +1,21 @@
 ## CHANGELOG
 
+### v1.1.5 2018-04-13
+
+- [#9323](https://github.com/Sylius/Sylius/pull/9323) formatting content in a email message (@axzx)
+- [#9322](https://github.com/Sylius/Sylius/pull/9322) Make build passing again (@pamil)
+- [#9316](https://github.com/Sylius/Sylius/pull/9316) Correct minor typo in docs (@cedricziel)
+- [#9315](https://github.com/Sylius/Sylius/pull/9315) [DOC] Minor documentation changes for product reviews (@cedricziel)
+- [#9314](https://github.com/Sylius/Sylius/pull/9314) Minor doc fix (@cedricziel)
+- [#9312](https://github.com/Sylius/Sylius/pull/9312) Fix JS error when autocomplete field is empty (@teohhanhui)
+- [#9308](https://github.com/Sylius/Sylius/pull/9308) [Adjustment] Inject adjustment types that shall be cleared (@Zales0123)
+- [#9303](https://github.com/Sylius/Sylius/pull/9303) HOTFIX: Do not require NelmioAliceBundle in shared kernel (@pamil)
+- [#9302](https://github.com/Sylius/Sylius/pull/9302) willdurand/hateoas 2.12 version update (#9302) (@bartoszpietrzak1994)
+- [#9300](https://github.com/Sylius/Sylius/pull/9300) Outdated method reference removed from docs (@bartoszpietrzak1994)
+- [#9295](https://github.com/Sylius/Sylius/pull/9295) Cleanup PrioritizedCompositeServicePass definition name (@diimpp)
+- [#9284](https://github.com/Sylius/Sylius/pull/9284) [Grid] Filtering orders bug (@Zales0123)
+- [#9268](https://github.com/Sylius/Sylius/pull/9268) Documentation - Use nullable return type (@Holicz)
+
 ### v1.1.4 2018-04-04
 
 - [#9301](https://github.com/Sylius/Sylius/pull/9301) HOTFIX: Do not require FidryAliceDataFixturesBundle in shared kernel (@pamil)
