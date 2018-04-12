@@ -59,9 +59,9 @@ Assuming that you would want to add another field on the model - for instance a 
         private $flag;
 
         /**
-         * @return bool
+         * @return bool|null
          */
-        public function getFlag(): bool
+        public function getFlag(): ?bool
         {
             return $this->flag;
         }
