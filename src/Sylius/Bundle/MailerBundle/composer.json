@@ -23,7 +23,7 @@
         "php": "^7.1",
 
         "sylius/mailer": "^1.0",
-        "symfony/framework-bundle": "^3.2"
+        "symfony/framework-bundle": "^3.2 || ^4.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^4.0",
