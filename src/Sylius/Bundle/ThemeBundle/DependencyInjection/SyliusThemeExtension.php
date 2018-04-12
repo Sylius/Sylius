@@ -19,11 +19,10 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
-final class SyliusThemeExtension extends Extension implements PrependExtensionInterface
+final class SyliusThemeExtension extends Extension
 {
     /**
      * @var ConfigurationSourceFactoryInterface[]
@@ -59,18 +58,6 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
     }
 
     /**
-     * @internal
-     *
-     * {@inheritdoc}
-     */
-    public function prepend(ContainerBuilder $container): void
-    {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-
-        $this->prependTwig($container, $loader);
-    }
-
-    /**
      * @api
      *
      * @param ConfigurationSourceFactoryInterface $configurationSourceFactory
@@ -90,19 +77,6 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
         $container->addObjectResource($configuration);
 
         return $configuration;
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     * @param LoaderInterface $loader
-     */
-    private function prependTwig(ContainerBuilder $container, LoaderInterface $loader): void
-    {
-        if (!$container->hasExtension('twig')) {
-            return;
-        }
-
-        $loader->load('services/integrations/twig.xml');
     }
 
     /**
