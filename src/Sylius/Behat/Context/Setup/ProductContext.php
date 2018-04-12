@@ -21,12 +21,12 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\FileInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Core\Uploader\ImageUploaderInterface;
+use Sylius\Component\Core\Uploader\FileUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -91,7 +91,7 @@ final class ProductContext implements Context
     /**
      * @var FactoryInterface
      */
-    private $productImageFactory;
+    private $productFileFactory;
 
     /**
      * @var ObjectManager
@@ -109,9 +109,9 @@ final class ProductContext implements Context
     private $defaultVariantResolver;
 
     /**
-     * @var ImageUploaderInterface
+     * @var FileUploaderInterface
      */
-    private $imageUploader;
+    private $fileUploader;
 
     /**
      * @var SlugGeneratorInterface
@@ -133,11 +133,11 @@ final class ProductContext implements Context
      * @param FactoryInterface $channelPricingFactory
      * @param FactoryInterface $productOptionFactory
      * @param FactoryInterface $productOptionValueFactory
-     * @param FactoryInterface $productImageFactory
+     * @param FactoryInterface $productFileFactory
      * @param ObjectManager $objectManager
      * @param ProductVariantGeneratorInterface $productVariantGenerator
      * @param ProductVariantResolverInterface $defaultVariantResolver
-     * @param ImageUploaderInterface $imageUploader
+     * @param FileUploaderInterface $fileUploader
      * @param SlugGeneratorInterface $slugGenerator
      * @param array $minkParameters
      */
@@ -151,11 +151,11 @@ final class ProductContext implements Context
         FactoryInterface $channelPricingFactory,
         FactoryInterface $productOptionFactory,
         FactoryInterface $productOptionValueFactory,
-        FactoryInterface $productImageFactory,
+        FactoryInterface $productFileFactory,
         ObjectManager $objectManager,
         ProductVariantGeneratorInterface $productVariantGenerator,
         ProductVariantResolverInterface $defaultVariantResolver,
-        ImageUploaderInterface $imageUploader,
+        FileUploaderInterface $fileUploader,
         SlugGeneratorInterface $slugGenerator,
         array $minkParameters
     ) {
@@ -168,11 +168,11 @@ final class ProductContext implements Context
         $this->channelPricingFactory = $channelPricingFactory;
         $this->productOptionFactory = $productOptionFactory;
         $this->productOptionValueFactory = $productOptionValueFactory;
-        $this->productImageFactory = $productImageFactory;
+        $this->productFileFactory = $productFileFactory;
         $this->objectManager = $objectManager;
         $this->productVariantGenerator = $productVariantGenerator;
         $this->defaultVariantResolver = $defaultVariantResolver;
-        $this->imageUploader = $imageUploader;
+        $this->fileUploader = $fileUploader;
         $this->slugGenerator = $slugGenerator;
         $this->minkParameters = $minkParameters;
     }
@@ -751,13 +751,13 @@ final class ProductContext implements Context
     {
         $filesPath = $this->getParameter('files_path');
 
-        /** @var ImageInterface $productImage */
-        $productImage = $this->productImageFactory->createNew();
+        /** @var FileInterface $productFile */
+        $productImage = $this->productFileFactory->createNew();
         $productImage->setFile(new UploadedFile($filesPath . $imagePath, basename($imagePath)));
         $productImage->setType($imageType);
-        $this->imageUploader->upload($productImage);
+        $this->fileUploader->upload($productImage);
 
-        $product->addImage($productImage);
+        $product->addFile($productImage);
 
         $this->objectManager->persist($product);
         $this->objectManager->flush();

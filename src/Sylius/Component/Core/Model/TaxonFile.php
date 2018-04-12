@@ -13,6 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-class TaxonImage extends Image implements TaxonImageInterface
+class TaxonFile extends File implements TaxonFileInterface
 {
 }

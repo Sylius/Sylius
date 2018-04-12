@@ -295,7 +295,7 @@ EOT;
 <<<EOT
         {
             "code": "MUG_TH",
-            "mainTaxon": "MUGS",
+            "mainTaxon": "mugs",
             "translations": {
                 "en_US": {
                     "name": "Theme Mug",
@@ -449,7 +449,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_creating_product_with_images()
+    public function it_allows_creating_product_with_files()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -458,7 +458,7 @@ EOT;
 <<<EOT
         {
             "code": "MUG_TH",
-            "images": [
+            "files": [
                 {
                     "type": "FORD_MUG"
                 },
@@ -479,7 +479,7 @@ EOT;
             'POST',
             '/api/v1/products/',
             [],
-            ['images' => [
+            ['files' => [
                 ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/ford.jpg', __DIR__), 'ford')],
                 ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/mugs.jpg', __DIR__), 'mugs')],
             ]],
@@ -488,7 +488,7 @@ EOT;
         );
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'product/create_with_images_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'product/create_with_files_response', Response::HTTP_CREATED);
     }
 
     /**

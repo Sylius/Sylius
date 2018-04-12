@@ -15,6 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
-interface TaxonInterface extends BaseTaxonInterface, ImagesAwareInterface
+interface TaxonInterface extends BaseTaxonInterface, FilesAwareInterface
 {
 }

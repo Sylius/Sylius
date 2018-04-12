@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\Image;
+use Sylius\Component\Core\Model\File;
 
-final class TaxonImageSpec extends ObjectBehavior
+final class TaxonFileSpec extends ObjectBehavior
 {
-    function it_extends_an_image(): void
+    function it_extends_an_file(): void
     {
-        $this->shouldHaveType(Image::class);
+        $this->shouldHaveType(File::class);
     }
 
     function it_does_not_have_id_by_default(): void
@@ -28,7 +28,7 @@ final class TaxonImageSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_does_not_have_file_by_default(): void
+    function it_does_not_have_uploaded_file_by_default(): void
     {
         $this->hasFile()->shouldReturn(false);
         $this->getFile()->shouldReturn(null);

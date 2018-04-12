@@ -11,7 +11,7 @@
             "locale": "en_US"
         }
     },
-    "images": [],
+    "files": [],
     "_links": {
         "self": {
             "href": "@string@"

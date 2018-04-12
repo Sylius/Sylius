@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class ProductImage extends Image implements ProductImageInterface
+class ProductFile extends File implements ProductFileInterface
 {
     /**
      * @var Collection|ProductVariantInterface[]

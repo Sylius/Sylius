@@ -15,7 +15,7 @@
                 "level": 1,
                 "position": 0,
                 "translations": [],
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -31,7 +31,7 @@
                 "level": 1,
                 "position": 1,
                 "translations": [],
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -47,7 +47,7 @@
                 "level": 1,
                 "position": 2,
                 "translations": [],
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -63,7 +63,7 @@
                 "level": 1,
                 "position": 3,
                 "translations": [],
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -80,7 +80,7 @@
                 "locale": "en"
             }
         },
-        "images": [],
+        "files": [],
         "_links": {
             "self": {
                 "href": "@string@"
@@ -100,7 +100,7 @@
                 "level": 1,
                 "position": 0,
                 "translations": [],
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -116,7 +116,7 @@
                 "level": 1,
                 "position": 1,
                 "translations": [],
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -132,7 +132,7 @@
                 "level": 1,
                 "position": 2,
                 "translations": [],
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -148,7 +148,7 @@
                 "level": 1,
                 "position": 3,
                 "translations": [],
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -165,7 +165,7 @@
                 "locale": "en"
             }
         },
-        "images": [],
+        "files": [],
         "_links": {
             "self": {
                 "href": "@string@"
@@ -191,7 +191,7 @@
             "slug": "pluizige-huisdieren"
         }
     },
-    "images": [],
+    "files": [],
     "_links": {
         "self": {
             "href": "@string@"

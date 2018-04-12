@@ -19,8 +19,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\Product;
-use Sylius\Component\Core\Model\ProductImageInterface;
-use Sylius\Component\Core\Model\ProductImagesAwareInterface;
+use Sylius\Component\Core\Model\ProductFileInterface;
+use Sylius\Component\Core\Model\ProductFilesAwareInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
 use Sylius\Component\Resource\Model\VersionedInterface;
@@ -56,9 +56,9 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->shouldImplement(VersionedInterface::class);
     }
 
-    function it_implements_a_product_image_aware_interface(): void
+    function it_implements_a_product_file_aware_interface(): void
     {
-        $this->shouldImplement(ProductImagesAwareInterface::class);
+        $this->shouldImplement(ProductFilesAwareInterface::class);
     }
 
     function it_has_version_1_by_default(): void
@@ -243,34 +243,34 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->isShippingRequired()->shouldReturn(false);
     }
 
-    function it_initializes_image_collection_by_default(): void
+    function it_initializes_file_collection_by_default(): void
     {
-        $this->getImages()->shouldHaveType(Collection::class);
+        $this->getFiles()->shouldHaveType(Collection::class);
     }
 
-    function it_adds_an_image(ProductImageInterface $image): void
+    function it_adds_an_file(ProductFileInterface $file): void
     {
-        $this->addImage($image);
-        $this->hasImages()->shouldReturn(true);
-        $this->hasImage($image)->shouldReturn(true);
+        $this->addFile($file);
+        $this->hasFiles()->shouldReturn(true);
+        $this->hasFile($file)->shouldReturn(true);
     }
 
-    function it_removes_an_image(ProductImageInterface $image): void
+    function it_removes_an_file(ProductFileInterface $file): void
     {
-        $this->addImage($image);
-        $this->removeImage($image);
-        $this->hasImage($image)->shouldReturn(false);
+        $this->addFile($file);
+        $this->removeFile($file);
+        $this->hasFile($file)->shouldReturn(false);
     }
 
-    function it_returns_images_by_type(ProductImageInterface $image, Product $product): void
+    function it_returns_files_by_type(ProductFileInterface $file, Product $product): void
     {
-        $image->getType()->willReturn('thumbnail');
+        $file->getType()->willReturn('thumbnail');
 
-        $image->setOwner($product)->shouldBeCalled();
-        $image->addProductVariant($this)->shouldBeCalled();
+        $file->setOwner($product)->shouldBeCalled();
+        $file->addProductVariant($this)->shouldBeCalled();
 
         $this->setProduct($product);
-        $this->addImage($image);
-        $this->getImagesByType('thumbnail')->shouldBeLike(new ArrayCollection([$image->getWrappedObject()]));
+        $this->addFile($file);
+        $this->getFilesByType('thumbnail')->shouldBeLike(new ArrayCollection([$file->getWrappedObject()]));
     }
 }

@@ -28,7 +28,7 @@
                 "code": "PRODUCT_17",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_17"
@@ -41,7 +41,7 @@
                 "code": "PRODUCT_18",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_18"
@@ -54,7 +54,7 @@
                 "code": "PRODUCT_19",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_19"
@@ -67,7 +67,7 @@
                 "code": "PRODUCT_20",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_20"
@@ -80,7 +80,7 @@
                 "code": "PRODUCT_21",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_21"
@@ -93,7 +93,7 @@
                 "code": "PRODUCT_22",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_22"
@@ -106,7 +106,7 @@
                 "code": "PRODUCT_4",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_4"
@@ -119,7 +119,7 @@
                 "code": "PRODUCT_5",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_5"
@@ -132,7 +132,7 @@
                 "code": "PRODUCT_6",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_6"
@@ -145,7 +145,7 @@
                 "code": "PRODUCT_7",
                 "options": [],
                 "averageRating": 0,
-                "images": [],
+                "files": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/products\/PRODUCT_7"

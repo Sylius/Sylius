@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-abstract class Image implements ImageInterface
+abstract class File implements FileInterface
 {
     /**
      * @var mixed
@@ -24,6 +24,11 @@ abstract class Image implements ImageInterface
      * @var string
      */
     protected $type;
+    
+    /**
+     * @var string
+     */
+    protected $mimeType = 'application/octet-stream';
 
     /**
      * @var \SplFileInfo
@@ -63,6 +68,22 @@ abstract class Image implements ImageInterface
     {
         $this->type = $type;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getMimeType(): ?string
+    {
+        return $this->mimeType;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setMimeType(?string $mimeType): void
+    {
+        $this->mimeType = $mimeType;
+    }
 
     /**
      * {@inheritdoc}
@@ -78,8 +99,9 @@ abstract class Image implements ImageInterface
     public function setFile(?\SplFileInfo $file): void
     {
         $this->file = $file;
+//         $this->mimeType = $file->getMimeType();
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -87,7 +109,7 @@ abstract class Image implements ImageInterface
     {
         return null !== $this->file;
     }
-
+    
     /**
      * {@inheritdoc}
      */

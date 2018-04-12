@@ -25,7 +25,7 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <one-to-many field="images" target-entity="Sylius\Component\Core\Model\TaxonImageInterface" mapped-by="owner" orphan-removal="true">
+        <one-to-many field="files" target-entity="Sylius\Component\Core\Model\TaxonFileInterface" mapped-by="owner" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>

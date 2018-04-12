@@ -127,11 +127,11 @@
             <argument type="service" id="__symfony__.sylius.factory.channel_pricing" />
             <argument type="service" id="__symfony__.sylius.factory.product_option" />
             <argument type="service" id="__symfony__.sylius.factory.product_option_value" />
-            <argument type="service" id="__symfony__.sylius.factory.product_image" />
+            <argument type="service" id="__symfony__.sylius.factory.product_file" />
             <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
             <argument type="service" id="__symfony__.sylius.generator.product_variant" />
             <argument type="service" id="__symfony__.sylius.product_variant_resolver.default" />
-            <argument type="service" id="__symfony__.sylius.image_uploader" />
+            <argument type="service" id="__symfony__.sylius.file_uploader" />
             <argument type="service" id="__symfony__.sylius.generator.slug" />
             <argument>%__behat__.mink.parameters%</argument>
             <tag name="fob.context_service" />
@@ -238,9 +238,9 @@
             <argument type="service" id="__symfony__.sylius.repository.taxon" />
             <argument type="service" id="__symfony__.sylius.factory.taxon" />
             <argument type="service" id="__symfony__.sylius.factory.taxon_translation" />
-            <argument type="service" id="__symfony__.sylius.factory.taxon_image" />
+            <argument type="service" id="__symfony__.sylius.factory.taxon_file" />
             <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <argument type="service" id="__symfony__.sylius.image_uploader" />
+            <argument type="service" id="__symfony__.sylius.file_uploader" />
             <argument type="service" id="__symfony__.sylius.generator.taxon_slug" />
             <argument>%__behat__.mink.parameters%</argument>
             <tag name="fob.context_service" />

@@ -12,12 +12,18 @@
 -->
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-    <class name="Sylius\Component\Core\Model\ProductImage">
+    <class name="Sylius\Component\Core\Model\TaxonFile">
         <property name="file">
-            <constraint name="Image">
+           <constraint name="File">
                 <option name="maxSize">10M</option>
-                <option name="maxSizeMessage">sylius.product_image.file.max_size</option>
-                <option name="uploadIniSizeErrorMessage">sylius.product_image.file.upload_ini_size</option>
+                <option name="maxSizeMessage">sylius.taxon_image.file.max_size</option>
+                <option name="uploadIniSizeErrorMessage">sylius.taxon_image.file.upload_ini_size</option>
+                <option name="mimeTypes">
+                	<value>image/gif</value>
+                	<value>image/jpeg</value>
+                	<value>image/png</value>
+                	<value>application/octet-stream</value>
+                </option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

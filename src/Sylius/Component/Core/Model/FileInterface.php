@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface ImageInterface extends ResourceInterface
+interface FileInterface extends ResourceInterface
 {
     /**
      * @return string
@@ -26,6 +26,17 @@ interface ImageInterface extends ResourceInterface
      * @param string|null $type
      */
     public function setType(?string $type): void;
+    
+    /**
+     * @return string
+     */
+    public function getMimeType(): ?string;
+    
+    /**
+     * @param string|null $type
+     */
+    public function setMimeType(?string $type): void;
+    
 
     /**
      * @return \SplFileInfo|null

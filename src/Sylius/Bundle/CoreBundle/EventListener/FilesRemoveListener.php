@@ -16,13 +16,13 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
-use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Core\Uploader\ImageUploaderInterface;
+use Sylius\Component\Core\Model\FileInterface;
+use Sylius\Component\Core\Uploader\FileUploaderInterface;
 
-final class ImagesRemoveListener
+final class FilesRemoveListener
 {
-    /** @var ImageUploaderInterface */
-    private $imageUploader;
+    /** @var FileUploaderInterface */
+    private $fileUploader;
 
     /** @var CacheManager */
     private $cacheManager;
@@ -30,20 +30,20 @@ final class ImagesRemoveListener
     /** @var FilterManager */
     private $filterManager;
 
-    public function __construct(ImageUploaderInterface $imageUploader, CacheManager $cacheManager, FilterManager $filterManager)
+    public function __construct(FileUploaderInterface $fileUploader, CacheManager $cacheManager, FilterManager $filterManager)
     {
-        $this->imageUploader = $imageUploader;
+        $this->fileUploader = $fileUploader;
         $this->cacheManager = $cacheManager;
         $this->filterManager = $filterManager;
     }
 
     public function postRemove(LifecycleEventArgs $event): void
     {
-        $image = $event->getEntity();
+        $file = $event->getEntity();
 
-        if ($image instanceof ImageInterface) {
-            $this->imageUploader->remove($image->getPath());
-            $this->cacheManager->remove($image->getPath(), array_keys($this->filterManager->getFilterConfiguration()->all()));
+        if ($file instanceof FileInterface) {
+            $this->fileUploader->remove($file->getPath());
+            $this->cacheManager->remove($file->getPath(), array_keys($this->filterManager->getFilterConfiguration()->all()));
         }
     }
 }

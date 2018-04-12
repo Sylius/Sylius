@@ -280,7 +280,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_creating_taxon_with_images()
+    public function it_allows_creating_taxon_with_files()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -288,7 +288,7 @@ EOT;
 <<<EOT
         {
             "code": "toys",
-            "images": [
+            "files": [
                 {
                     "type": "ford"                
                 },
@@ -300,14 +300,14 @@ EOT;
 EOT;
 
         $this->client->request('POST', '/api/v1/taxons/', [], [
-            'images' => [
+            'files' => [
                 ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/ford.jpg', __DIR__), 'ford')],
                 ['file' => new UploadedFile(sprintf('%s/../Resources/fixtures/mugs.jpg', __DIR__), 'mugs')],
             ],
         ], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'taxon/create_with_images_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'taxon/create_with_files_response', Response::HTTP_CREATED);
     }
 
     /**

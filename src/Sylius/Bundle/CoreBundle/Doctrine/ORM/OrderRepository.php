@@ -308,7 +308,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             'items.variant.optionValues.translations',
             'items.variant.product',
             'items.variant.product.translations',
-            'items.variant.product.images',
+            'items.variant.product.files',
             'items.variant.product.options',
             'items.variant.product.options.translations',
         ]);

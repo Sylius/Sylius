@@ -10,7 +10,7 @@
           "channels":{},
           "mainTaxon":{},
           "productTaxons":{},
-          "images":{},
+          "files":{},
           "code":{
             "errors":["Please enter product code."]
           },

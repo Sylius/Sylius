@@ -1,0 +1,3 @@
+Sylius\Component\Core\Model\ProductFile:
+    exclusion_policy: ALL
+    xml_root_name: product-file

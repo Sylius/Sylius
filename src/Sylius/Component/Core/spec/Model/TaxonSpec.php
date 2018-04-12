@@ -16,8 +16,8 @@ namespace spec\Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Core\Model\ImagesAwareInterface;
+use Sylius\Component\Core\Model\FileInterface;
+use Sylius\Component\Core\Model\FilesAwareInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
 final class TaxonSpec extends ObjectBehavior
@@ -27,37 +27,37 @@ final class TaxonSpec extends ObjectBehavior
         $this->shouldImplement(TaxonInterface::class);
     }
 
-    function it_implements_an_image_aware_interface(): void
+    function it_implements_an_file_aware_interface(): void
     {
-        $this->shouldImplement(ImagesAwareInterface::class);
+        $this->shouldImplement(FilesAwareInterface::class);
     }
 
-    function it_initializes_an_image_collection_by_default(): void
+    function it_initializes_a_file_collection_by_default(): void
     {
-        $this->getImages()->shouldHaveType(Collection::class);
+        $this->getFiles()->shouldHaveType(Collection::class);
     }
 
-    function it_adds_an_image(ImageInterface $image): void
+    function it_adds_a_file(FileInterface $file): void
     {
-        $this->addImage($image);
-        $this->hasImages()->shouldReturn(true);
-        $this->hasImage($image)->shouldReturn(true);
+        $this->addFile($file);
+        $this->hasFiles()->shouldReturn(true);
+        $this->hasFile($file)->shouldReturn(true);
     }
 
-    function it_removes_an_image(ImageInterface $image): void
+    function it_removes_a_file(FileInterface $file): void
     {
-        $this->addImage($image);
-        $this->removeImage($image);
-        $this->hasImage($image)->shouldReturn(false);
+        $this->addFile($file);
+        $this->removeFile($file);
+        $this->hasFile($file)->shouldReturn(false);
     }
 
-    function it_returns_images_by_type(ImageInterface $image): void
+    function it_returns_files_by_type(FileInterface $file): void
     {
-        $image->getType()->willReturn('thumbnail');
-        $image->setOwner($this)->shouldBeCalled();
+        $file->getType()->willReturn('thumbnail');
+        $file->setOwner($this)->shouldBeCalled();
 
-        $this->addImage($image);
+        $this->addFile($file);
 
-        $this->getImagesByType('thumbnail')->shouldBeLike(new ArrayCollection([$image->getWrappedObject()]));
+        $this->getFilesByType('thumbnail')->shouldBeLike(new ArrayCollection([$file->getWrappedObject()]));
     }
 }

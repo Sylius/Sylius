@@ -19,50 +19,50 @@ use Liip\ImagineBundle\Imagine\Filter\FilterConfiguration;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\EventListener\ImagesRemoveListener;
-use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Core\Uploader\ImageUploaderInterface;
+use Sylius\Bundle\CoreBundle\EventListener\FilesRemoveListener;
+use Sylius\Component\Core\Model\FileInterface;
+use Sylius\Component\Core\Uploader\FileUploaderInterface;
 
-final class ImagesRemoveListenerSpec extends ObjectBehavior
+final class FilesRemoveListenerSpec extends ObjectBehavior
 {
-    function let(ImageUploaderInterface $imageUploader, CacheManager $cacheManager, FilterManager $filterManager): void
+    function let(FileUploaderInterface $fileUploader, CacheManager $cacheManager, FilterManager $filterManager): void
     {
-        $this->beConstructedWith($imageUploader, $cacheManager, $filterManager);
+        $this->beConstructedWith($fileUploader, $cacheManager, $filterManager);
     }
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(ImagesRemoveListener::class);
+        $this->shouldHaveType(FilesRemoveListener::class);
     }
 
     function it_removes_file_on_post_remove_event(
-        ImageUploaderInterface $imageUploader,
+        FileUploaderInterface $fileUploader,
         CacheManager $cacheManager,
         FilterManager $filterManager,
         LifecycleEventArgs $event,
-        ImageInterface $image,
+        FileInterface $file,
         FilterConfiguration $filterConfiguration
     ): void {
-        $event->getEntity()->willReturn($image);
-        $image->getPath()->willReturn('image/path');
+        $event->getEntity()->willReturn($file);
+        $file->getPath()->willReturn('image/path');
 
         $filterManager->getFilterConfiguration()->willReturn($filterConfiguration);
         $filterConfiguration->all()->willReturn(['sylius_small' => 'thumbnalis']);
-        $imageUploader->remove('image/path')->shouldBeCalled();
+        $fileUploader->remove('image/path')->shouldBeCalled();
         $cacheManager->remove('image/path', ['sylius_small'])->shouldBeCalled();
 
         $this->postRemove($event);
     }
 
-    function it_does_nothing_if_entity_is_not_image(
-        ImageUploaderInterface $imageUploader,
+    function it_does_nothing_if_entity_is_not_file(
+        fileUploaderInterface $fileUploader,
         CacheManager $cacheManager,
         FilterManager $filterManager,
         LifecycleEventArgs $event
     ): void {
         $event->getEntity()->willReturn(new \stdClass());
         $filterManager->getFilterConfiguration()->shouldNotBeCalled();
-        $imageUploader->remove(Argument::any())->shouldNotBeCalled();
+        $fileUploader->remove(Argument::any())->shouldNotBeCalled();
         $cacheManager->remove(Argument::any(), Argument::any())->shouldNotBeCalled();
 
         $this->postRemove($event);

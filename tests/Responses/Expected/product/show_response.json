@@ -25,11 +25,12 @@
     "channels": [],
     "reviews": [],
     "averageRating": 0,
-    "images": [
+    "files": [
         {
             "id": @integer@,
             "type": "thumbnail",
-            "path": "\/uo\/product.jpg"
+            "path": "\/uo\/product.jpg",
+            "mimeType": "image\/jpg"
         }
     ],
     "_links": {
