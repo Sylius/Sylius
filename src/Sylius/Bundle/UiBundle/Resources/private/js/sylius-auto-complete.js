@@ -52,7 +52,7 @@
                         }
                     });
 
-                    if (0 < autocompleteValue.split(',').length) {
+                    if (0 < autocompleteValue.split(',').filter(String).length) {
                         var menuElement = element.find('div.menu');
 
                         menuElement.api({
@@ -60,7 +60,7 @@
                             method: 'GET',
                             url: loadForEditUrl,
                             beforeSend: function (settings) {
-                                settings.data[choiceValue] = autocompleteValue.split(',');
+                                settings.data[choiceValue] = autocompleteValue.split(',').filter(String);
 
                                 return settings;
                             },
@@ -75,7 +75,7 @@
                     }
 
                     window.setTimeout(function () {
-                        element.dropdown('set selected', element.find('input.autocomplete').val().split(','));
+                        element.dropdown('set selected', element.find('input.autocomplete').val().split(',').filter(String));
                     }, 5000);
                 });
             }

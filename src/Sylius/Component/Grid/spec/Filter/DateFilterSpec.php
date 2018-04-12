@@ -77,14 +77,14 @@ final class DateFilterSpec extends ObjectBehavior
         );
     }
 
-    function it_filters_date_from_without_time(
+    function it_filters_date_from_with_default_time(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder
-            ->greaterThanOrEqual('checkoutCompletedAt', '2016-12-05')
+            ->greaterThanOrEqual('checkoutCompletedAt', '2016-12-05 00:00')
             ->shouldBeCalled()
         ;
 
@@ -157,14 +157,14 @@ final class DateFilterSpec extends ObjectBehavior
         );
     }
 
-    function it_filters_date_to_without_time(
+    function it_filters_date_to_with_default_time(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder
-            ->lessThan('checkoutCompletedAt', '2016-12-06')
+            ->lessThan('checkoutCompletedAt', '2016-12-06 23:59')
             ->shouldBeCalled()
         ;
 

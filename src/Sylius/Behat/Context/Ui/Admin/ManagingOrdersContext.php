@@ -164,7 +164,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyFilterDateFromAs($dateTime)
     {
-        $this->indexPage->specifyFilterDateFrom(new \DateTime($dateTime));
+        $this->indexPage->specifyFilterDateFrom($dateTime);
     }
 
     /**
@@ -172,7 +172,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyFilterDateToAs($dateTime)
     {
-        $this->indexPage->specifyFilterDateTo(new \DateTime($dateTime));
+        $this->indexPage->specifyFilterDateTo($dateTime);
     }
 
     /**

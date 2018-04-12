@@ -13,7 +13,7 @@
     $.fn.extend({
         productAutoComplete: function () {
             $(this).each(function() {
-                $(this).dropdown('set selected', $(this).find('input[name*="[associations]"]').val().split(','));
+                $(this).dropdown('set selected', $(this).find('input[name*="[associations]"]').val().split(',').filter(String));
             });
 
             $(this).dropdown({
@@ -49,7 +49,7 @@
                 },
                 onAdd: function(addedValue, addedText, $addedChoice) {
                     var inputAssociation = $addedChoice.parents('.product-select').find('input[name*="[associations]"]');
-                    var associatedProductCodes = 0 < inputAssociation.val().length ? inputAssociation.val().split(',') : [];
+                    var associatedProductCodes = 0 < inputAssociation.val().length ? inputAssociation.val().split(',').filter(String) : [];
 
                     associatedProductCodes.push(addedValue);
                     $.unique(associatedProductCodes.sort());
@@ -58,7 +58,7 @@
                 },
                 onRemove: function(removedValue, removedText, $removedChoice) {
                     var inputAssociation = $removedChoice.parents('.product-select').find('input[name*="[associations]"]');
-                    var associatedProductCodes = 0 < inputAssociation.val().length ? inputAssociation.val().split(',') : [];
+                    var associatedProductCodes = 0 < inputAssociation.val().length ? inputAssociation.val().split(',').filter(String) : [];
 
                     associatedProductCodes.splice($.inArray(removedValue, associatedProductCodes), 1);
 

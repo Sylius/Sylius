@@ -4,7 +4,7 @@
 Product Reviews
 ===============
 
-Product Reviews are a marketing tool that let your customers to give opinions about the products they buy in your shop.
+Product Reviews are a marketing tool that let your customers give opinions about the products they buy in your shop.
 They have a ``rating`` and ``comment``.
 
 Rating
@@ -36,7 +36,7 @@ How is the average rating calculated?
 The average rating is updated by
 the `AverageRatingUpdater <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ReviewBundle/Updater/AverageRatingUpdater.php>`_ service.
 
-It has inside the `AverageRatingCalculator <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Review/Calculator/AverageRatingCalculator.php>`_,
+It wraps the `AverageRatingCalculator <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Review/Calculator/AverageRatingCalculator.php>`_,
 and uses it inside the ``updateFromReview`` method.
 
 How to add a ProductReview programmatically?
