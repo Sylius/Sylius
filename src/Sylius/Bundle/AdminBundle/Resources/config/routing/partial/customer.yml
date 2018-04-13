@@ -10,7 +10,7 @@ sylius_admin_partial_customer_latest:
             repository:
                 method: findLatest
                 arguments:
-                    - !!int $count
+                    - '!!int $count'
             template: $template
             permission: true
 
