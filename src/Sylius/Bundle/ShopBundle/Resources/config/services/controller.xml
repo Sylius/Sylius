@@ -13,7 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.controller.shop.contact" class="Sylius\Bundle\ShopBundle\Controller\ContactController">
+        <service id="sylius.controller.shop.contact" class="Sylius\Bundle\ShopBundle\Controller\ContactController" public="true">
             <argument type="service" id="router" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="templating" />
@@ -22,25 +22,25 @@
             <argument type="service" id="sylius.email_manager.contact" />
         </service>
 
-        <service id="sylius.controller.shop.homepage" class="Sylius\Bundle\ShopBundle\Controller\HomepageController">
+        <service id="sylius.controller.shop.homepage" class="Sylius\Bundle\ShopBundle\Controller\HomepageController" public="true">
             <argument type="service" id="templating" />
         </service>
 
-        <service id="sylius.controller.shop.currency_switch" class="Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController">
+        <service id="sylius.controller.shop.currency_switch" class="Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController" public="true">
             <argument type="service" id="templating" />
             <argument type="service" id="sylius.context.currency" />
             <argument type="service" id="sylius.storage.currency" />
             <argument type="service" id="sylius.context.channel" />
         </service>
 
-        <service id="sylius.controller.shop.locale_switch" class="Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController">
+        <service id="sylius.controller.shop.locale_switch" class="Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController" public="true">
             <argument type="service" id="templating" />
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.locale_provider" />
             <argument type="service" id="sylius.shop.locale_switcher" />
         </service>
 
-        <service id="sylius.controller.shop.security_widget" class="Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController">
+        <service id="sylius.controller.shop.security_widget" class="Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController" public="true">
             <argument type="service" id="templating" />
         </service>
     </services>
