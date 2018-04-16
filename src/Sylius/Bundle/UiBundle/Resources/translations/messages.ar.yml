@@ -19,7 +19,6 @@ sylius:
         accepted: 'مقبولة'
         access_token: 'رمزالوصول المميز'
         access_your_store_account_or_create_a_new_one: 'الوصول إلى حسابك في المتجر أو إنشاء واحدة جديدة'
-        account_credentials: 'Your credentials'
         account_panel_outline: 'التمتع بجميع المزايا التي تتوفر في الفضاء الشخصي الخاص بك لعرض وتتبع وإدارة جميع البيانات الخاصة بك'
         action: 'عمل'
         actions: 'الاجراءت'
