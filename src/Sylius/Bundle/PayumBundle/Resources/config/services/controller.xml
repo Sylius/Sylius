@@ -4,7 +4,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.controller.payum" class="Sylius\Bundle\PayumBundle\Controller\PayumController">
+        <service id="sylius.controller.payum" class="Sylius\Bundle\PayumBundle\Controller\PayumController" public="true">
             <argument type="service" id="payum" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="expression">service('sylius.resource_registry').get('sylius.order')</argument>
