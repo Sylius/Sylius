@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Resolver;
 
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 interface ShippableCountriesResolverInterface
@@ -20,7 +21,7 @@ interface ShippableCountriesResolverInterface
     /**
      * @param ChannelInterface $channel
      *
-     * @return array
+     * @return CountryInterface[]
      */
-    public function getShippableCountries(ChannelInterface $channel): array;
+    public function __invoke(ChannelInterface $channel): array;
 }

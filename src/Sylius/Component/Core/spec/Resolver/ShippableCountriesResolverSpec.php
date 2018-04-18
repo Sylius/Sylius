@@ -39,11 +39,8 @@ final class ShippableCountriesResolverSpec extends ObjectBehavior
         CountryInterface $firstCountry,
         CountryInterface $secondCountry
     ): void {
-        $firstCountry->getName()->willReturn('Germany');
-        $firstCountry->getCode()->willReturn('DE');
-
-        $secondCountry->getName()->willReturn('France');
-        $secondCountry->getCode()->willReturn('FR');
+        $firstCountry->isEnabled()->willReturn(true);
+        $secondCountry->isEnabled()->willReturn(true);
 
         $countries = [
             $firstCountry->getWrappedObject(),
@@ -56,35 +53,29 @@ final class ShippableCountriesResolverSpec extends ObjectBehavior
             $firstCountry->getWrappedObject(),
         ]));
 
-        $this->getShippableCountries($channel)->shouldReturn([
-            'Germany' => 'DE',
+        $this($channel)->shouldReturn([
+            $firstCountry->getWrappedObject(),
         ]);
     }
 
-    function it_returns_all_countries_if_the_channel_has_no_shipping_countries_defined(
+    function it_returns_all_enabled_countries_if_the_channel_has_no_shipping_countries_defined(
         ChannelInterface $channel,
         RepositoryInterface $countryRepository,
         CountryInterface $firstCountry,
         CountryInterface $secondCountry
     ): void {
-        $firstCountry->getName()->willReturn('Germany');
-        $firstCountry->getCode()->willReturn('DE');
-
-        $secondCountry->getName()->willReturn('France');
-        $secondCountry->getCode()->willReturn('FR');
+        $firstCountry->isEnabled()->willReturn(true);
+        $secondCountry->isEnabled()->willReturn(true);
 
         $countries = [
             $firstCountry->getWrappedObject(),
             $secondCountry->getWrappedObject(),
         ];
 
-        $countryRepository->findAll()->willReturn($countries);
+        $countryRepository->findBy(['enabled' => true])->willReturn($countries);
 
         $channel->getShippableCountries()->willReturn(new ArrayCollection());
 
-        $this->getShippableCountries($channel)->shouldReturn([
-            'Germany' => 'DE',
-            'France' => 'FR',
-        ]);
+        $this($channel)->shouldReturn($countries);
     }
 }

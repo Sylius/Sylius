@@ -38,26 +38,20 @@ final class ShippableCountriesResolver implements ShippableCountriesResolverInte
     /**
      * @param ChannelInterface $channel
      *
-     * @return array
+     * @return CountryInterface[]
      */
-    public function getShippableCountries(ChannelInterface $channel): array
+    public function __invoke(ChannelInterface $channel): array
     {
         $countries = $channel->getShippableCountries();
 
+        $countries->filter(function(CountryInterface $country){
+            return $country->isEnabled();
+        });
+
         if ($countries->isEmpty()) {
-            $countries = new ArrayCollection($this->countryRepository->findAll());
+            $countries = new ArrayCollection($this->countryRepository->findBy(['enabled' => true]));
         }
 
-        $countries = $countries->getValues();
-
-        $keys = array_map(function (CountryInterface $country) {
-            return $country->getName();
-        }, $countries);
-
-        $values = array_map(function (CountryInterface $country) {
-            return $country->getCode();
-        }, $countries);
-
-        return array_combine($keys, $values);
+        return $countries->getValues();
     }
 }
