@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Resolver\ShippableCountriesResolverInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -40,12 +41,25 @@ final class AddressTypeExtension extends AbstractTypeExtension
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $shippingCountries = ($this->shippableCountriesResolver)($this->channelContext->getChannel());
+
+        $keys = array_map(function (CountryInterface $country) {
+            return $country->getName();
+        }, $shippingCountries);
+
+        $values = array_map(function (CountryInterface $country) {
+            return $country->getCode();
+        }, $shippingCountries);
+
+        $shippingCountries = array_combine($keys, $values);
+
         $builder
             ->add('countryCode', ChoiceType::class, [
                 'label' => 'sylius.form.address.country',
-                'choices' => $this->shippableCountriesResolver->getShippableCountries($this->channelContext->getChannel()),
+                'choices' => $shippingCountries,
                 'placeholder' => 'sylius.form.address.select',
-            ]);
+            ])
+        ;
     }
 
     public function getExtendedType(): string
