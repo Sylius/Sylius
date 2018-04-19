@@ -313,25 +313,24 @@ Register the form extension as a service:
             tags:
                 - { name: form.type_extension, extended_type: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType }
 
-11. Override the definition of the ImageUploader service
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+11. Declare the ImagesUploadListener service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In order to handle the image upload you need to attach the image upload listener to the ``ShippingMethod`` entity events:
+In order to handle the image upload you need to attach the ``ImagesUploadListener`` to the ``ShippingMethod`` entity events:
 
 .. code-block:: yaml
 
     # services.yml
     services:
-        sylius.listener.image_upload:
+        app.listener.images_upload:
             class: Sylius\Bundle\CoreBundle\EventListener\ImagesUploadListener
-            arguments: ['@sylius.image_uploader']
+            parent: sylius.listener.images_upload
+            autowire: true
+            autoconfigure: false
+            public: false
             tags:
-                - { name: kernel.event_listener, event: "sylius.product.pre_create", method: "uploadImages" }
-                - { name: kernel.event_listener, event: "sylius.product.pre_update", method: "uploadImages" }
-                - { name: kernel.event_listener, event: "sylius.taxon.pre_create", method: "uploadImages" }
-                - { name: kernel.event_listener, event: "sylius.taxon.pre_update", method: "uploadImages" }
-                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_create", method: "uploadImages" }
-                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_update", method: "uploadImages" }
+                - { name: kernel.event_listener, event: sylius.shipping_method.pre_create, method: uploadImages }
+                - { name: kernel.event_listener, event: sylius.shipping_method.pre_update, method: uploadImages }
 
 12. Render the images field in the form view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
