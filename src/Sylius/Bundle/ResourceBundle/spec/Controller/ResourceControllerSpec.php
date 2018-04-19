@@ -1810,7 +1810,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_apply_state_machine_transition_on_resource_if_not_applicable_and_returns_400_bad_request(
+    function it_does_not_apply_state_machine_transition_on_resource_if_not_applicable(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1848,11 +1848,6 @@ final class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPostEvent(Argument::any())->shouldNotBeCalled();
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
         $flashHelper->addFlashFromEvent(Argument::any())->shouldNotBeCalled();
-
-        $this
-            ->shouldThrow(new BadRequestHttpException())
-            ->during('applyStateMachineTransitionAction', [$request])
-        ;
     }
 
     function it_applies_state_machine_transition_to_resource_and_redirects_for_html_request(

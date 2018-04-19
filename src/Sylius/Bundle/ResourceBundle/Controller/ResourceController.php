@@ -485,7 +485,9 @@ class ResourceController extends Controller
         }
 
         if (!$this->stateMachine->can($configuration, $resource)) {
-            throw new BadRequestHttpException();
+            $this->flashHelper->addErrorFlash($configuration, 'apply_state_machine_transition_error', $resource);
+
+            return $this->redirectHandler->redirectToReferer($configuration);
         }
 
         try {
