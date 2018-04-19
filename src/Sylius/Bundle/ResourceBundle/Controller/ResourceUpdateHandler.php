@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
@@ -39,8 +40,8 @@ final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
         RequestConfiguration $configuration,
         ObjectManager $manager
     ): void {
-        if ($configuration->hasStateMachine()) {
-            $this->stateMachine->apply($configuration, $resource);
+        if ($configuration->hasStateMachine() && !$this->stateMachine->apply($configuration, $resource)) {
+            throw new UpdateHandlingException();
         }
 
         $manager->flush();

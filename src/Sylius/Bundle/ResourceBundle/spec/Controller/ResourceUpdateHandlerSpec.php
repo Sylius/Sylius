@@ -39,7 +39,7 @@ final class ResourceUpdateHandlerSpec extends ObjectBehavior
         ObjectManager $manager
     ): void {
         $configuration->hasStateMachine()->willReturn(true);
-        $stateMachine->apply($configuration, $resource)->shouldBeCalled();
+        $stateMachine->apply($configuration, $resource)->willReturn(true);
 
         $manager->flush()->shouldBeCalled();
 

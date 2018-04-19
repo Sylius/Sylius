@@ -79,7 +79,7 @@ final class StateMachineSpec extends ObjectBehavior
         $requestConfiguration->getStateMachineTransition()->willReturn('reject');
 
         $stateMachineFactory->get($resource, 'sylius_product_review_state')->willReturn($stateMachine);
-        $stateMachine->apply('reject')->shouldBeCalled();
+        $stateMachine->apply('reject')->willReturn(true);
 
         $this->apply($requestConfiguration, $resource);
     }

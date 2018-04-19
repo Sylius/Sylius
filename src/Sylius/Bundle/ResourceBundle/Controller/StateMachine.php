@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use SM\Factory\FactoryInterface;
+use SM\SMException;
+use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class StateMachine implements StateMachineInterface
@@ -46,12 +48,20 @@ final class StateMachine implements StateMachineInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(RequestConfiguration $configuration, ResourceInterface $resource): void
+    public function apply(RequestConfiguration $configuration, ResourceInterface $resource): bool
     {
         if (!$configuration->hasStateMachine()) {
             throw new \InvalidArgumentException('State machine must be configured to apply transition, check your routing.');
         }
 
-        $this->stateMachineFactory->get($resource, $configuration->getStateMachineGraph())->apply($configuration->getStateMachineTransition());
+        try {
+            if (!$this->stateMachineFactory->get($resource, $configuration->getStateMachineGraph())->apply($configuration->getStateMachineTransition())) {
+                throw new UpdateHandlingException();
+            };
+        } catch (SMException $e) {
+            return false;
+        }
+
+        return true;
     }
 }

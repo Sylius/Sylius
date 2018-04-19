@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
+use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface StateMachineInterface
@@ -28,6 +29,10 @@ interface StateMachineInterface
     /**
      * @param RequestConfiguration $configuration
      * @param ResourceInterface $resource
+     *
+     * @return bool
+     *
+     * @throws UpdateHandlingException
      */
-    public function apply(RequestConfiguration $configuration, ResourceInterface $resource): void;
+    public function apply(RequestConfiguration $configuration, ResourceInterface $resource): bool;
 }
