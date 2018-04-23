@@ -7,6 +7,7 @@ sylius:
             email: Dirección de correo electrónico
             enabled: '¿Activado?'
             password:
+                label: Contraseña de API
                 confirmation: Confirmar contraseña
             remember_me: Recordarme
             shipping_address: Dirección de envío
