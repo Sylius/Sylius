@@ -51,8 +51,6 @@ final class GetResponseForExceptionEventPropagationTest extends KernelTestCase
 
         $this->container = new ContainerBuilder();
 
-        $this->container->setParameter('resource', null);
-
         $this->container->autowire('file_locator', FileLocator::class);
         $this->container->autowire('xml_file_loader', XmlFileLoader::class);
         $this->container->autowire('event_dispatcher', EventDispatcher::class);
@@ -65,7 +63,7 @@ final class GetResponseForExceptionEventPropagationTest extends KernelTestCase
         $this->container
             ->autowire('app.test_exception_listener', TestResourceDeleteSubscriber::class)
             ->addTag('kernel.event_subscriber', array('event' => 'kernel.exception'))
-            ->addTag('priority', array(244));
+            ->addTag('priority', array(0));
         ;
 
         $this->container->compile();

@@ -99,7 +99,6 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
         ;
 
         $event->setResponse($response);
-        $event->stopPropagation();
     }
 
     /**
