@@ -65,7 +65,7 @@ final class GetResponseForExceptionEventPropagationTest extends KernelTestCase
         $this->container
             ->autowire('app.test_exception_listener', TestResourceDeleteSubscriber::class)
             ->addTag('kernel.event_subscriber', array('event' => 'kernel.exception'))
-            ->addTag('priority', array(-255));
+            ->addTag('priority', array(244));
         ;
 
         $this->container->compile();
@@ -79,25 +79,40 @@ final class GetResponseForExceptionEventPropagationTest extends KernelTestCase
      */
     public function get_response_for_exception_event_propagation_stopped_test(): void
     {
-        $request = new Request();
-        $request->setFormat('html', '');
-        $request->setMethod(Request::METHOD_DELETE);
-        $request->attributes = new ParameterBag(['_route' => 'sylius', '_controller' => '', '_sylius' => ['section' => 'admin']]);
-
         $event = new GetResponseForExceptionEvent(
             new \AppKernel("test", 0),
-            $request,
+            $this->prepareTestRequest(),
             HttpKernelInterface::MASTER_REQUEST,
-            new ForeignKeyConstraintViolationException(
-                "",
-                new PDOException(new \PDOException())))
+            $this->prepareTestException())
         ;
-        $request->headers->set('referer', 'localhost');
 
         $this->eventDispatcher->dispatch('kernel.exception', $event);
 
         $testEventListener = $this->container->get('app.test_exception_listener');
         self::assertEquals(0, $testEventListener->getEventsCaught());
+    }
+
+    private function prepareTestException(): ForeignKeyConstraintViolationException
+    {
+        return new ForeignKeyConstraintViolationException(
+            "",
+            new PDOException(new \PDOException()))
+        ;
+    }
+
+    private function prepareTestRequest(): Request
+    {
+        $request = new Request();
+        $request->setFormat('html', '');
+        $request->setMethod(Request::METHOD_DELETE);
+        $request->attributes = new ParameterBag([
+            '_route' => 'sylius',
+            '_controller' => '',
+            '_sylius' => ['section' => 'admin']])
+        ;
+        $request->headers->set('referer', 'localhost');
+
+        return $request;
     }
 }
 
