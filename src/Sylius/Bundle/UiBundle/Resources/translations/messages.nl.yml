@@ -18,7 +18,7 @@ sylius:
         accept: 'Aanvaard'
         accepted: 'Aanvaard'
         access_token: 'Toegangstoken'
-        access_your_store_account_or_create_a_new_one: 'Ga naar je store-account of maak een nieuwe account'
+        access_your_store_account_or_create_a_new_one: 'Ga naar je store-account of maak een nieuw account'
         account_credentials: 'Logingegevens'
         account_panel_outline: 'Geniet van alle functies die beschikbaar zijn in uw persoonlijke ruimte om al uw gegevens te bekijken, bij te houden en te beheren'
         action: 'Actie'
