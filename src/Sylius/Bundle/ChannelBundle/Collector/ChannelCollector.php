@@ -85,6 +85,14 @@ final class ChannelCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
+    public function reset(): void
+    {
+        $this->data['channel'] = null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return 'sylius.channel_collector';

@@ -133,6 +133,16 @@ final class SyliusCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
+    public function reset(): void
+    {
+        $this->data['base_currency_code'] = null;
+        $this->data['currency_code'] = null;
+        $this->data['locale_code'] = null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return 'sylius_core';

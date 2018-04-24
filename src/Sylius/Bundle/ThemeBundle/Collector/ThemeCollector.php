@@ -98,6 +98,16 @@ final class ThemeCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
+    public function reset(): void
+    {
+        $this->data['used_theme'] = null;
+        $this->data['used_themes'] = [];
+        $this->data['themes'] = [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return 'sylius_theme';
