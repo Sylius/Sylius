@@ -23,7 +23,7 @@
         "php": "^7.1",
 
         "doctrine/common": "^2.5",
-        "symfony/symfony": "^3.4",
+        "symfony/symfony": "^3.4|^4.0",
         "zendframework/zend-hydrator": "^2.2"
     },
     "require-dev": {
@@ -34,8 +34,8 @@
         "phpunit/phpunit": "^6.5",
         "sylius/registry": "^1.0",
         "twig/twig": "^2.0",
-        "symfony/dependency-injection": "^3.4",
-        "symfony/twig-bundle": "^3.4"
+        "symfony/dependency-injection": "^3.4|^4.0",
+        "symfony/twig-bundle": "^3.4|^4.0"
     },
     "conflict": {
         "twig/twig": "^1.0"
