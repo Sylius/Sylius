@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ThemeBundle\Translation;
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProviderInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProviderInterface;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
-use Symfony\Component\Translation\MessageSelector;
+use Symfony\Component\Translation\Formatter\MessageFormatterInterface;
 use Symfony\Component\Translation\Translator as BaseTranslator;
 
 final class Translator extends BaseTranslator implements WarmableInterface
@@ -47,14 +47,14 @@ final class Translator extends BaseTranslator implements WarmableInterface
     /**
      * @param TranslatorLoaderProviderInterface $loaderProvider
      * @param TranslatorResourceProviderInterface $resourceProvider
-     * @param MessageSelector $messageSelector
+     * @param MessageFormatterInterface $messageFormatter
      * @param string $locale
      * @param array $options
      */
     public function __construct(
         TranslatorLoaderProviderInterface $loaderProvider,
         TranslatorResourceProviderInterface $resourceProvider,
-        MessageSelector $messageSelector,
+        MessageFormatterInterface $messageFormatter,
         string $locale,
         array $options = []
     ) {
@@ -68,7 +68,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
             $this->addResources();
         }
 
-        parent::__construct($locale, $messageSelector, $this->options['cache_dir'], $this->options['debug']);
+        parent::__construct($locale, $messageFormatter, $this->options['cache_dir'], $this->options['debug']);
     }
 
     /**
