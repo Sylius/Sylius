@@ -18,7 +18,7 @@
         <service id="sylius.theme.translation.translator" class="Sylius\Bundle\ThemeBundle\Translation\Translator" decorates="translator.default" decoration-priority="256" public="false">
             <argument type="service" id="sylius.theme.translation.loader_provider" />
             <argument type="service" id="sylius.theme.translation.resource_provider" />
-            <argument type="service" id="translator.selector" />
+            <argument type="service" id="translator.formatter" />
             <argument>%kernel.default_locale%</argument>
             <argument type="collection">
                 <argument key="cache_dir">%kernel.cache_dir%/translations</argument>
