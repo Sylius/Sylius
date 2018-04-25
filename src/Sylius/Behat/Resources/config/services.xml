@@ -18,6 +18,8 @@
     </imports>
 
     <services>
+        <defaults public="true" />
+
         <service id="mink.default_session" class="Behat\Mink\Session" lazy="true" public="false">
             <factory service="__behat__.mink" method="getSession" />
         </service>

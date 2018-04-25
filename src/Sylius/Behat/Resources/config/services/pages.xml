@@ -18,6 +18,8 @@
     </imports>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.behat.page" class="Sylius\Behat\Page\Page" abstract="true" public="false">
             <argument type="service" id="mink.default_session" />
             <argument>%__behat__.mink.parameters%</argument>

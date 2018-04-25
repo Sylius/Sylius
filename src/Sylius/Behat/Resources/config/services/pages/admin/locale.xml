@@ -18,6 +18,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.behat.page.admin.locale.create" class="%sylius.behat.page.admin.locale.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_locale_create</argument>
         </service>

@@ -20,6 +20,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.behat.page.shop.checkout.address" class="%sylius.behat.page.shop.checkout.address.class%" parent="sylius.behat.symfony_page" public="false" >
             <argument type="service" id="__symfony__.sylius.factory.address" />
         </service>

@@ -25,6 +25,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.form.type.payment" class="Sylius\Bundle\PaymentBundle\Form\Type\PaymentType">
             <argument>%sylius.model.payment.class%</argument>
             <argument>%sylius.form.type.payment.validation_groups%</argument>

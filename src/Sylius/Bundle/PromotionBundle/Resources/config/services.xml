@@ -18,6 +18,8 @@
     </imports>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.custom_factory.promotion_coupon" class="Sylius\Component\Promotion\Factory\PromotionCouponFactory" decorates="sylius.factory.promotion_coupon" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.promotion_coupon.inner" />
         </service>

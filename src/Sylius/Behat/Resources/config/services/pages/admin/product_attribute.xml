@@ -19,6 +19,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.behat.page.admin.product_attribute.create" class="%sylius.behat.page.admin.product_attribute.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_product_attribute_create</argument>
         </service>
