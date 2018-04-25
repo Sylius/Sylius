@@ -26,9 +26,9 @@ use Sylius\Component\User\Security\Checker\TokenUniquenessChecker;
 use Sylius\Component\User\Security\Generator\UniquePinGenerator;
 use Sylius\Component\User\Security\Generator\UniqueTokenGenerator;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -258,15 +258,15 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $abstractProviderDefinition->addArgument(new Reference('sylius.canonicalizer'));
         $container->setDefinition($abstractProviderServiceId, $abstractProviderDefinition);
 
-        $emailBasedProviderDefinition = new DefinitionDecorator($abstractProviderServiceId);
+        $emailBasedProviderDefinition = new ChildDefinition($abstractProviderServiceId);
         $emailBasedProviderDefinition->setClass(EmailProvider::class);
         $container->setDefinition($providerEmailBasedServiceId, $emailBasedProviderDefinition);
 
-        $nameBasedProviderDefinition = new DefinitionDecorator($abstractProviderServiceId);
+        $nameBasedProviderDefinition = new ChildDefinition($abstractProviderServiceId);
         $nameBasedProviderDefinition->setClass(UsernameProvider::class);
         $container->setDefinition($providerNameBasedServiceId, $nameBasedProviderDefinition);
 
-        $emailOrNameBasedProviderDefinition = new DefinitionDecorator($abstractProviderServiceId);
+        $emailOrNameBasedProviderDefinition = new ChildDefinition($abstractProviderServiceId);
         $emailOrNameBasedProviderDefinition->setClass(UsernameOrEmailProvider::class);
         $container->setDefinition($providerEmailOrNameBasedServiceId, $emailOrNameBasedProviderDefinition);
     }
