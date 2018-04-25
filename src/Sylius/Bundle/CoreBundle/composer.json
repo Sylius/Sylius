@@ -22,9 +22,9 @@
     "require": {
         "php": "^7.1",
 
-        "fzaninotto/faker": "^1.0",
+        "fzaninotto/faker": "^1.6",
         "jms/serializer-bundle": "^2.0",
-        "knplabs/knp-gaufrette-bundle": "^0.3",
+        "knplabs/knp-gaufrette-bundle": "^0.5",
         "sonata-project/intl-bundle": "^2.2",
         "swiftmailer/swiftmailer": "^6.0",
         "sylius/addressing-bundle": "^1.0",
@@ -48,13 +48,13 @@
         "sylius/taxonomy-bundle": "^1.0",
         "sylius/theme-bundle": "^1.0",
         "sylius/user-bundle": "^1.0",
-        "sylius-labs/association-hydrator": "^1.0",
+        "sylius-labs/association-hydrator": "^1.1",
         "symfony/framework-bundle": "^3.4|^4.0",
         "winzou/state-machine-bundle": "^0.3",
-        "liip/imagine-bundle": "^1.9.1"
+        "liip/imagine-bundle": "^2.0@dev"
     },
     "require-dev": {
-        "hwi/oauth-bundle": "^0.5",
+        "hwi/oauth-bundle": "^0.6",
         "matthiasnoback/symfony-config-test": "^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
         "phpspec/phpspec": "^4.0",
