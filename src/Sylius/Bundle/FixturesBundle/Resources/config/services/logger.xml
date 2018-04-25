@@ -36,7 +36,9 @@
         </service>
 
         <service id="sylius_fixtures.logger.formatter.console" class="Symfony\Bridge\Monolog\Formatter\ConsoleFormatter">
-            <argument>%%message%% %%context%% %%extra%%&#10;</argument>
+            <argument type="collection">
+                <argument key="format">%%message%% %%context%% %%extra%%&#10;</argument>
+            </argument>
         </service>
     </services>
 </container>
