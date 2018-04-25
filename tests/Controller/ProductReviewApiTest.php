@@ -146,7 +146,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-        $this->client->request('POST', $this->getReviewListUrl($product), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', $this->getReviewListUrl($product), [], [], static::$authorizedHeaderWithContentType);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'product_review/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -183,7 +183,7 @@ EOT;
         /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview1'];
 
-        $this->client->request('DELETE', $this->getReviewUrl($product, $productReview), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getReviewUrl($product, $productReview), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
