@@ -90,7 +90,6 @@ stof_doctrine_extensions:
 twig:
     debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    exception_controller: "FOS\\RestBundle\\Controller\\ExceptionController::showAction"
     globals:
         sylius: "@sylius.context.shopper"
         sylius_base_locale: "%locale%"
