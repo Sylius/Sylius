@@ -25,3 +25,7 @@ parameters:
         # These packages aren't in require-dev of the global package
         - '/Class Doctrine\\Bundle\\MongoDBBundle/'
         - '/Class Doctrine\\Bundle\\PHPCRBundle/'
+
+        # Symfony 4.0 BC layer
+        - '/Symfony\\Component\\ExpressionLanguage\\ParserCache\\ParserCacheInterface/'
+        - '/Symfony\\Component\\ExpressionLanguage\\ParserCache\\ParserCacheAdapter/'
