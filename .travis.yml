@@ -83,9 +83,6 @@ matrix:
         - env:
             - SYLIUS_SUITE="application"
             - SYMFONY_VERSION="4.0.*"
-        - env:
-            - SYLIUS_SUITE="packages"
-            - SYMFONY_VERSION="4.0.*"
     fast_finish: true
 
 cache:
