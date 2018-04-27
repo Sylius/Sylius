@@ -19,6 +19,7 @@ security:
             switch_user: true
             context: admin
             pattern: "%sylius.security.admin_regex%"
+            provider: sylius_admin_user_provider
             form_login:
                 provider: sylius_admin_user_provider
                 login_path: sylius_admin_login
@@ -47,14 +48,16 @@ security:
 
         api:
             pattern: "%sylius.security.api_regex%/.*"
-            fos_oauth:  true
-            stateless:  true
-            anonymous:  true
+            provider: sylius_admin_user_provider
+            fos_oauth: true
+            stateless: true
+            anonymous: true
 
         shop:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
             context: shop
             pattern: "%sylius.security.shop_regex%"
+            provider: sylius_shop_user_provider
             form_login:
                 success_handler: sylius.authentication.success_handler
                 failure_handler: sylius.authentication.failure_handler

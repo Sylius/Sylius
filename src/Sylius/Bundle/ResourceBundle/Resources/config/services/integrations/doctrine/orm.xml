@@ -18,6 +18,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.event_subscriber.orm_mapped_super_class" class="Sylius\Bundle\ResourceBundle\EventListener\ORMMappedSuperClassSubscriber">
             <argument type="service" id="sylius.resource_registry" />
             <tag name="doctrine.event_subscriber" priority="8192" />

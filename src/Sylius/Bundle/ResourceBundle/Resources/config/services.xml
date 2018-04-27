@@ -25,6 +25,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.random_generator" class="Sylius\Component\Resource\Generator\RandomnessGenerator" />
         <service id="sylius.form.type_extension.form.request_handler"
                  class="Sylius\Bundle\ResourceBundle\Form\Extension\HttpFoundation\HttpFoundationRequestHandler"

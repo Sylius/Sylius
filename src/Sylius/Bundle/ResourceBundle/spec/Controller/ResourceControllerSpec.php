@@ -1608,7 +1608,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1659,7 +1659,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1710,7 +1710,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1761,7 +1761,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1814,7 +1814,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1864,7 +1864,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1912,7 +1912,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1964,7 +1964,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(false);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(false);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);

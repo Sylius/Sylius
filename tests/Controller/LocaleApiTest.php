@@ -154,7 +154,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $locales = $this->loadFixturesFromFile('resources/locales.yml');
 
-        $this->client->request('DELETE', '/api/v1/locales/' . $locales['locale_en_US']->getCode(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', '/api/v1/locales/' . $locales['locale_en_US']->getCode(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);

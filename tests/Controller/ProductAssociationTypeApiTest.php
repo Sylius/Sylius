@@ -300,7 +300,7 @@ EOT;
         $this->client->request('DELETE', $this->getAssociationTypeUrl($productAssociationType), [], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
             'CONTENT_TYPE' => 'application/json',
-        ], []);
+        ]);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);

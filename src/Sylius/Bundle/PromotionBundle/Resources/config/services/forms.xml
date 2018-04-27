@@ -28,6 +28,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.form.type.promotion" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionType">
             <argument>%sylius.model.promotion.class%</argument>
             <argument>%sylius.form.type.promotion.validation_groups%</argument>

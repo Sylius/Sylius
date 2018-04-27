@@ -21,6 +21,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.shipping_eligibility_checker" class="Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker" />
 
         <service id="sylius.registry.shipping_rule_checker" class="Sylius\Component\Registry\ServiceRegistry" >

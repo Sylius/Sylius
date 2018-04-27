@@ -319,7 +319,7 @@ EOT;
         $channels = $this->loadFixturesFromFile('resources/channels.yml');
         $channel = $channels['channel-mob'];
 
-        $this->client->request('DELETE', $this->getChannelUrl($channel), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getChannelUrl($channel), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);

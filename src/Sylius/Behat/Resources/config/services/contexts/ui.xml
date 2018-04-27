@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.behat.context.ui.admin.dashboard" class="Sylius\Behat\Context\Ui\Admin\DashboardContext">
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
             <tag name="fob.context_service" />

@@ -38,15 +38,16 @@
         "sylius/mailer-bundle": "^1.0",
         "sylius/resource-bundle": "^1.0",
         "sylius/user": "^1.0",
-        "symfony/framework-bundle": "^3.4",
+        "symfony/framework-bundle": "^3.4|^4.0",
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
-        "hwi/oauth-bundle": "^0.5",
+        "hwi/oauth-bundle": "^0.6",
+        "php-http/guzzle6-adapter": "^1.1",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
-        "symfony/dependency-injection": "^3.4",
-        "symfony/security-bundle": "^3.4",
+        "symfony/dependency-injection": "^3.4|^4.0",
+        "symfony/security-bundle": "^3.4|^4.0",
         "symfony/swiftmailer-bundle": "^3.1"
     },
     "suggest": {

@@ -17,6 +17,8 @@
     </imports>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.controller.product_slug" class="Sylius\Bundle\ProductBundle\Controller\ProductSlugController">
             <call method="setContainer">
                 <argument type="service" id="service_container" />

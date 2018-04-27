@@ -19,6 +19,8 @@
     </imports>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.context.cart.new" class="Sylius\Component\Order\Context\CartContext">
             <argument type="service" id="sylius.factory.order" />
             <tag name="sylius.context.cart" priority="-999" />

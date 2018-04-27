@@ -40,6 +40,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
+            new Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle(),
+            new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle(),
             new AppBundle\AppBundle(),
         ];
     }

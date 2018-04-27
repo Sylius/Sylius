@@ -160,7 +160,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/product-attributes/text', [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', '/api/v1/product-attributes/text', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product_attribute/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -173,7 +173,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/product-attributes', [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', '/api/v1/product-attributes', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCodeOneOf($response, [Response::HTTP_NOT_FOUND, Response::HTTP_METHOD_NOT_ALLOWED]);

@@ -25,13 +25,13 @@
         "stof/doctrine-extensions-bundle": "^1.2",
         "sylius/resource-bundle": "^1.0",
         "sylius/taxonomy": "^1.0",
-        "symfony/framework-bundle": "^3.4"
+        "symfony/framework-bundle": "^3.4|^4.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.5",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
-        "symfony/dependency-injection": "^3.4"
+        "symfony/dependency-injection": "^3.4|^4.0"
     },
     "config": {
         "bin-dir": "bin"

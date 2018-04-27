@@ -157,7 +157,7 @@ class UserController extends ResourceController
                 return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_BAD_REQUEST));
             }
 
-            $this->addFlash('error', 'sylius.user.verify_email_by_invalid_token');
+            $this->addTranslatedFlash('error', 'sylius.user.verify_email_by_invalid_token');
 
             return $this->redirectToRoute($redirectRoute);
         }
@@ -178,7 +178,7 @@ class UserController extends ResourceController
         }
 
         $flashMessage = $this->getSyliusAttribute($request, 'flash', 'sylius.user.verify_email');
-        $this->addFlash('success', $flashMessage);
+        $this->addTranslatedFlash('success', $flashMessage);
 
         return $response;
     }
@@ -199,7 +199,7 @@ class UserController extends ResourceController
                 return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_UNAUTHORIZED));
             }
 
-            $this->addFlash('notice', 'sylius.user.verify_no_user');
+            $this->addTranslatedFlash('notice', 'sylius.user.verify_no_user');
 
             return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
         }
@@ -209,7 +209,7 @@ class UserController extends ResourceController
                 return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_BAD_REQUEST));
             }
 
-            $this->addFlash('notice', 'sylius.user.verify_verified_email');
+            $this->addTranslatedFlash('notice', 'sylius.user.verify_verified_email');
 
             return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
         }
@@ -226,7 +226,7 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
-        $this->addFlash('success', 'sylius.user.verify_email_request');
+        $this->addTranslatedFlash('success', 'sylius.user.verify_email_request');
 
         return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
     }
@@ -260,7 +260,7 @@ class UserController extends ResourceController
                 return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
             }
 
-            $this->addFlash('success', 'sylius.user.reset_password_request');
+            $this->addTranslatedFlash('success', 'sylius.user.reset_password_request');
             $redirectRoute = $this->getSyliusAttribute($request, 'redirect', null);
             Assert::notNull($redirectRoute, 'Redirect is not configured.');
 
@@ -290,7 +290,7 @@ class UserController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    protected function addFlash($type, $message): void
+    protected function addTranslatedFlash(string $type, string $message): void
     {
         $translator = $this->container->get('translator');
         $this->container->get('session')->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
@@ -333,7 +333,7 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($user, Response::HTTP_BAD_REQUEST));
         }
 
-        $this->addFlash('error', 'sylius.user.expire_password_reset_token');
+        $this->addTranslatedFlash('error', 'sylius.user.expire_password_reset_token');
 
         $redirectRouteName = $this->getSyliusAttribute($request, 'redirect', null);
         Assert::notNull($redirectRouteName, 'Redirect is not configured.');
@@ -385,7 +385,7 @@ class UserController extends ResourceController
         $dispatcher->dispatch(UserEvents::PRE_PASSWORD_RESET, new GenericEvent($user));
 
         $this->manager->flush();
-        $this->addFlash('success', 'sylius.user.reset_password');
+        $this->addTranslatedFlash('success', 'sylius.user.reset_password');
 
         $dispatcher->dispatch(UserEvents::POST_PASSWORD_RESET, new GenericEvent($user));
 
@@ -419,7 +419,7 @@ class UserController extends ResourceController
         $dispatcher->dispatch(UserEvents::PRE_PASSWORD_CHANGE, new GenericEvent($user));
 
         $this->manager->flush();
-        $this->addFlash('success', 'sylius.user.change_password');
+        $this->addTranslatedFlash('success', 'sylius.user.change_password');
 
         $dispatcher->dispatch(UserEvents::POST_PASSWORD_CHANGE, new GenericEvent($user));
 
