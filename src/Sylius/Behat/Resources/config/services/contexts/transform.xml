@@ -25,6 +25,7 @@
 
         <service id="sylius.behat.context.transform.channel" class="Sylius\Behat\Context\Transform\ChannelContext">
             <argument type="service" id="__symfony__.sylius.repository.channel" />
+            <argument type="service" id="__symfony__.doctrine.orm.default_entity_manager" />
             <tag name="fob.context_service" />
         </service>
 
