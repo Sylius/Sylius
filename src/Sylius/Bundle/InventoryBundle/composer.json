@@ -48,9 +48,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\InventoryBundle\\spec\\": "spec/",
-            "AppBundle\\": "test/src/AppBundle/"
-        }
+            "Sylius\\Bundle\\InventoryBundle\\spec\\": "spec/"
+        },
+        "classmap": ["test/app/AppKernel.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

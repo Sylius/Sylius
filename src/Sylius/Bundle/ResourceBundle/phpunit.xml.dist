@@ -2,14 +2,13 @@
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.5/phpunit.xsd"
-         backupGlobals="false"
          colors="true"
-         bootstrap="test/app/autoload.php"
 >
     <php>
-        <server name="KERNEL_DIR" value="test/app/" />
+        <server name="KERNEL_CLASS" value="AppKernel" />
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
     </php>
+
     <testsuites>
         <testsuite name="SyliusResourceBundle Test Suite">
             <directory>./test/</directory>

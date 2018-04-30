@@ -70,7 +70,8 @@
         "psr-4": {
             "Sylius\\Bundle\\ResourceBundle\\spec\\": "spec/",
             "AppBundle\\": "test/src/AppBundle/"
-        }
+        },
+        "classmap": ["test/app/AppKernel.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

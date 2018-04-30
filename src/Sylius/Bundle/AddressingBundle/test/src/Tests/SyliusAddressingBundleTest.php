@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Tests;
 
+use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class SyliusAddressingBundleTest extends WebTestCase
+final class SyliusAddressingBundleTest extends WebTestCase
 {
     /**
      * @test
@@ -33,7 +35,7 @@ class SyliusAddressingBundleTest extends WebTestCase
         });
 
         foreach ($services as $id) {
-            $container->get($id);
+            Assert::assertNotNull($container->get($id, ContainerInterface::NULL_ON_INVALID_REFERENCE));
         }
     }
 }

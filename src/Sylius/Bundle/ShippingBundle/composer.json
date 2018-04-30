@@ -45,10 +45,7 @@
         "psr-4": { "Sylius\\Bundle\\ShippingBundle\\": "" }
     },
     "autoload-dev": {
-        "psr-4": {
-            "Sylius\\Bundle\\ShippingBundle\\spec\\": "spec/",
-            "AppBundle\\": "test/src/AppBundle/"
-        }
+        "classmap": ["test/app/AppKernel.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
