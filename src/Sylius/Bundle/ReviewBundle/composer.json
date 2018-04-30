@@ -60,9 +60,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\ReviewBundle\\spec\\": "spec/",
-            "AppBundle\\": "test/src/AppBundle/"
-        }
+            "Sylius\\Bundle\\ReviewBundle\\spec\\": "spec/"
+        },
+        "classmap": ["test/app/AppKernel.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

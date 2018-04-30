@@ -22,7 +22,7 @@
     "require": {
         "php": "^7.1",
 
-        "knplabs/gaufrette": "^0.2",
+        "knplabs/gaufrette": "^0.5",
         "payum/payum": "^1.3",
         "php-http/guzzle6-adapter": "^1.1",
         "sylius/addressing": "^1.0",

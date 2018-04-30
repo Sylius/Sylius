@@ -59,7 +59,7 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition($this->compositeId)) {
+        if (!$container->has($this->compositeId)) {
             return;
         }
 
@@ -111,12 +111,6 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
      */
     private function addMethodCall(Definition $contextDefinition, string $id, array $attributes): void
     {
-        $arguments = [new Reference($id)];
-
-        if (isset($attributes['priority'])) {
-            $arguments[] = $attributes['priority'];
-        }
-
-        $contextDefinition->addMethodCall($this->methodName, $arguments);
+        $contextDefinition->addMethodCall($this->methodName, [new Reference($id), $attributes['priority'] ?? 0]);
     }
 }
