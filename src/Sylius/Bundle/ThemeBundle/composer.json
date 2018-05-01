@@ -32,7 +32,7 @@
         "mikey179/vfsStream": "^1.6",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
-        "sylius/registry": "^1.0",
+        "sylius/registry": "^1.1",
         "twig/twig": "^2.0",
         "symfony/dependency-injection": "^3.4",
         "symfony/twig-bundle": "^3.4"
