@@ -1,7 +1,7 @@
 {
     "name": "sylius/addressing-bundle",
     "type": "symfony-bundle",
-    "description": "Addressing and zone management for Symfony2 applications.",
+    "description": "Addressing and zone management for Symfony applications.",
     "keywords": ["shop", "ecommerce", "address", "addressing", "zones"],
     "homepage": "http://sylius.com",
     "license": "MIT",

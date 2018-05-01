@@ -1,7 +1,7 @@
 {
     "name": "sylius/theme-bundle",
     "type": "symfony-bundle",
-    "description": "Themes management for Symfony2 projects.",
+    "description": "Themes management for Symfony projects.",
     "keywords": ["themes", "theming"],
     "homepage": "http://sylius.com",
     "license": "MIT",

@@ -1,7 +1,7 @@
 {
     "name": "sylius/money-bundle",
     "type": "symfony-bundle",
-    "description": "Currencies and money formatting engine bundle for Symfony2.",
+    "description": "Currencies and money formatting engine bundle for Symfony.",
     "keywords": ["cash", "currency", "money", "currencies"],
     "homepage": "http://sylius.com",
     "license": "MIT",
