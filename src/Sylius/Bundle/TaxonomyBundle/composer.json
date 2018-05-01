@@ -1,7 +1,7 @@
 {
     "name": "sylius/taxonomy-bundle",
     "type": "symfony-bundle",
-    "description": "Flexible categorization system for Symfony2.",
+    "description": "Flexible categorization system for Symfony.",
     "keywords": ["shop", "ecommerce", "taxonomies", "taxonomy", "category", "categorization", "sylius"],
     "homepage": "http://sylius.com",
     "license": "MIT",

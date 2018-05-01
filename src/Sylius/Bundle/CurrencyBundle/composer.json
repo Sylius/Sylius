@@ -1,7 +1,7 @@
 {
     "name": "sylius/currency-bundle",
     "type": "symfony-bundle",
-    "description": "Currencies processing for Symfony2.",
+    "description": "Currencies processing for Symfony.",
     "keywords": ["cash", "currency", "money", "currencies"],
     "homepage": "http://sylius.com",
     "license": "MIT",

@@ -1,7 +1,7 @@
 {
     "name": "sylius/product-bundle",
     "type": "symfony-bundle",
-    "description": "Product catalog for your Symfony2 applications.",
+    "description": "Product catalog for your Symfony applications.",
     "keywords": ["shop", "ecommerce", "products", "product", "assortment"],
     "homepage": "http://sylius.com",
     "license": "MIT",

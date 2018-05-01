@@ -1,7 +1,7 @@
 {
     "name": "sylius/core-bundle",
     "type": "symfony-bundle",
-    "description": "Sylius core bundle. It integrates all other bundles into full stack Symfony2 ecommerce solution.",
+    "description": "Sylius core bundle. It integrates all other bundles into full stack Symfony ecommerce solution.",
     "keywords": ["shop", "ecommerce", "store", "webshop", "sylius"],
     "homepage": "http://sylius.com",
     "license": "MIT",
