@@ -1,7 +1,7 @@
 {
     "name": "sylius/fixtures-bundle",
     "type": "symfony-bundle",
-    "description": "Configurable fixtures for Symfony2 applications.",
+    "description": "Configurable fixtures for Symfony applications.",
     "keywords": ["sylius", "fixtures", "symfony"],
     "homepage": "http://sylius.com",
     "license": "MIT",

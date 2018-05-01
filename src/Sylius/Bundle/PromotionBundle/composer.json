@@ -1,7 +1,7 @@
 {
     "name": "sylius/promotion-bundle",
     "type": "symfony-bundle",
-    "description": "Manage ecommerce promotions system in your Symfony2 application.",
+    "description": "Manage ecommerce promotions system in your Symfony application.",
     "keywords": ["shop", "ecommerce", "promotions", "coupons", "discounts", "sylius"],
     "homepage": "http://sylius.com",
     "license": "MIT",

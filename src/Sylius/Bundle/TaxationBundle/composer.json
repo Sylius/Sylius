@@ -1,7 +1,7 @@
 {
     "name": "sylius/taxation-bundle",
     "type": "symfony-bundle",
-    "description": "Flexible taxation system for Symfony2 ecommerce applications.",
+    "description": "Flexible taxation system for Symfony ecommerce applications.",
     "keywords": ["tax", "taxes", "taxation", "shop", "webshop", "ecommerce"],
     "homepage": "http://sylius.com",
     "license": "MIT",

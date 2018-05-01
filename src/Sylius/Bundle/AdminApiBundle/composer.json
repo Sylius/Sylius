@@ -1,7 +1,7 @@
 {
     "name": "sylius/api-bundle",
     "type": "symfony-bundle",
-    "description": "APIs management for Symfony2 projects.",
+    "description": "APIs management for Symfony projects.",
     "keywords": ["api", "rest"],
     "homepage": "http://sylius.com",
     "license": "MIT",

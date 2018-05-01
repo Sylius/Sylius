@@ -1,7 +1,7 @@
 {
     "name": "sylius/mailer-bundle",
     "type": "symfony-bundle",
-    "description": "Mailers and e-mail template management for Symfony2 projects.",
+    "description": "Mailers and e-mail template management for Symfony projects.",
     "keywords": ["mailer", "email", "swiftmailer"],
     "homepage": "http://sylius.com",
     "license": "MIT",
