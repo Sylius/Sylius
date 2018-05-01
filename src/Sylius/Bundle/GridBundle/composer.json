@@ -22,7 +22,7 @@
     "require": {
         "php": "^7.1",
 
-        "sylius/grid": "^1.0",
+        "sylius/grid": "^1.1",
         "symfony/form": "^3.4",
         "symfony/framework-bundle": "^3.4",
         "symfony/templating": "^3.4"
