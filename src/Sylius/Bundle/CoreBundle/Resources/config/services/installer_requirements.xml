@@ -30,7 +30,6 @@
                 <argument type="service">
                     <service class="Sylius\Bundle\CoreBundle\Installer\Requirement\FilesystemRequirements">
                         <argument type="service" id="translator" />
-                        <argument>%kernel.root_dir%</argument>
                         <argument>%kernel.cache_dir%</argument>
                         <argument>%kernel.logs_dir%</argument>
                     </service>

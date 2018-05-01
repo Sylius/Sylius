@@ -33,7 +33,7 @@ final class FilesystemConfigurationSourceFactory implements ConfigurationSourceF
                     ->scalarNode('filename')->defaultValue('composer.json')->cannotBeEmpty()->end()
                     ->integerNode('scan_depth')->info('Restrict depth to scan for configuration file inside theme folder')->defaultNull()->end()
                     ->arrayNode('directories')
-                        ->defaultValue(['%kernel.root_dir%/themes'])
+                        ->defaultValue(['%kernel.project_dir%/app/themes'])
                         ->requiresAtLeastOneElement()
                         ->performNoDeepMerging()
                         ->prototype('scalar')

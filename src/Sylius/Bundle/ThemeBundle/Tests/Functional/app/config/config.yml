@@ -6,7 +6,7 @@ framework:
     translator: { fallbacks: ["%locale%"] }
     secret: "%secret%"
     router:
-        resource: "%kernel.root_dir%/config/routing.yml"
+        resource: "%kernel.project_dir%/app/config/routing.yml"
     form: ~
     csrf_protection: true
     templating:
@@ -27,4 +27,4 @@ sylius_theme:
         filesystem:
             scan_depth: 1
             directories:
-                - "%kernel.root_dir%/../../Fixtures/themes"
+                - "%kernel.project_dir%/../Fixtures/themes"
