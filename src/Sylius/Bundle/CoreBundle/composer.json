@@ -51,7 +51,7 @@
         "sylius-labs/association-hydrator": "^1.1",
         "symfony/framework-bundle": "^3.4|^4.0",
         "winzou/state-machine-bundle": "^0.3",
-        "liip/imagine-bundle": "^2.0@dev"
+        "liip/imagine-bundle": "^2.0"
     },
     "require-dev": {
         "hwi/oauth-bundle": "^0.6",
