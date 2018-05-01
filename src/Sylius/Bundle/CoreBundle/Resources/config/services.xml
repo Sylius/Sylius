@@ -15,6 +15,7 @@
     <imports>
         <import resource="services/checkers.xml" />
         <import resource="services/checkout.xml" />
+        <import resource="services/commands.xml" />
         <import resource="services/context.xml" />
         <import resource="services/dashboard.xml" />
         <import resource="services/fixtures.xml" />

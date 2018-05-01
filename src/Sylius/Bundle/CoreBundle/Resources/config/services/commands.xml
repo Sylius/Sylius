@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="Sylius\Bundle\CoreBundle\Command\CancelUnpaidOrdersCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\CheckRequirementsCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\InstallAssetsCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\InstallCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\InstallDatabaseCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\SetupCommand">
+            <tag name="console.command" />
+        </service>
+    </services>
+</container>
