@@ -35,9 +35,9 @@
         "php": "^7.1",
 
         "doctrine/orm": "^2.5",
-        "sylius/mailer-bundle": "^1.0",
-        "sylius/resource-bundle": "^1.0",
-        "sylius/user": "^1.0",
+        "sylius/mailer-bundle": "^1.2",
+        "sylius/resource-bundle": "^1.2",
+        "sylius/user": "^1.2",
         "symfony/framework-bundle": "^3.4|^4.0",
         "webmozart/assert": "^1.0"
     },

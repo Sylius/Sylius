@@ -23,10 +23,10 @@
         "php": "^7.1",
 
         "stof/doctrine-extensions-bundle": "^1.2",
-        "sylius/attribute-bundle": "^1.0",
-        "sylius/product": "^1.0",
-        "sylius/locale-bundle": "^1.0",
-        "sylius/resource-bundle": "^1.0",
+        "sylius/attribute-bundle": "^1.2",
+        "sylius/product": "^1.2",
+        "sylius/locale-bundle": "^1.2",
+        "sylius/resource-bundle": "^1.2",
         "symfony/framework-bundle": "^3.4|^4.0"
     },
     "require-dev": {

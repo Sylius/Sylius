@@ -27,10 +27,10 @@
     ],
     "require": {
         "php": "^7.1",
-        
+
         "sonata-project/intl-bundle": "^2.2",
-        "sylius/core-bundle": "^1.0",
-        "sylius/ui-bundle": "^1.0",
+        "sylius/core-bundle": "^1.2",
+        "sylius/ui-bundle": "^1.2",
         "symfony/framework-bundle": "^3.4|^4.0"
     },
     "require-dev": {
