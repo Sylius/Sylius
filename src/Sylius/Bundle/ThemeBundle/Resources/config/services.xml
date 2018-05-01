@@ -15,6 +15,13 @@
     <services>
         <defaults public="true" />
 
+        <service id="Sylius\Bundle\ThemeBundle\Command\AssetsInstallCommand">
+            <tag name="console.command" />
+        </service>
+        <service id="Sylius\Bundle\ThemeBundle\Command\ListCommand">
+            <tag name="console.command" />
+        </service>
+
         <service id="sylius.theme.context.settable" class="Sylius\Bundle\ThemeBundle\Context\SettableThemeContext" public="false">
             <argument type="service" id="sylius.theme.hierarchy_provider" />
         </service>
