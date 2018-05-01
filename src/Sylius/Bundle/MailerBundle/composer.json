@@ -22,7 +22,7 @@
     "require": {
         "php": "^7.1",
 
-        "sylius/mailer": "^1.0",
+        "sylius/mailer": "^1.2",
         "symfony/framework-bundle": "^3.4|^4.0"
     },
     "require-dev": {
