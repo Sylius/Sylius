@@ -1,7 +1,7 @@
 {
     "name": "sylius/review-bundle",
     "type": "symfony-bundle",
-    "description": "Review system for Symfony2 ecommerce applications.",
+    "description": "Review system for Symfony ecommerce applications.",
     "keywords": ["review", "shop", "webshop", "ecommerce", "sylius"],
     "homepage": "http://sylius.com",
     "license": "MIT",

@@ -1,7 +1,7 @@
 {
     "name": "sylius/customer-bundle",
     "type": "symfony-bundle",
-    "description": "Customers management for Symfony2 projects.",
+    "description": "Customers management for Symfony projects.",
     "keywords": ["customer", "groups"],
     "homepage": "http://sylius.com",
     "license": "MIT",

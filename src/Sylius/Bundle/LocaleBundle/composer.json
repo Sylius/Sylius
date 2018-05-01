@@ -1,7 +1,7 @@
 {
     "name": "sylius/locale-bundle",
     "type": "symfony-bundle",
-    "description": "Locales management for Symfony2 projects.",
+    "description": "Locales management for Symfony projects.",
     "keywords": ["language", "localization", "locale", "i18n", "internationalization"],
     "homepage": "http://sylius.com",
     "license": "MIT",

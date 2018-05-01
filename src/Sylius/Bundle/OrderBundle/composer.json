@@ -1,7 +1,7 @@
 {
     "name": "sylius/order-bundle",
     "type": "symfony-bundle",
-    "description": "Sales order management for Symfony2 applications.",
+    "description": "Sales order management for Symfony applications.",
     "keywords": ["shop", "ecommerce", "sales", "orders", "order", "sylius"],
     "homepage": "http://sylius.com",
     "license": "MIT",

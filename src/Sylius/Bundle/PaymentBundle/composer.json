@@ -1,7 +1,7 @@
 {
     "name": "sylius/payment-bundle",
     "type": "symfony-bundle",
-    "description": "Flexible payments system for Symfony2 e-commerce applications.",
+    "description": "Flexible payments system for Symfony e-commerce applications.",
     "keywords": ["payments", "payment", "shop", "webshop", "ecommerce"],
     "homepage": "http://sylius.com",
     "license": "MIT",

@@ -1,7 +1,7 @@
 {
     "name": "sylius/attribute-bundle",
     "type": "symfony-bundle",
-    "description": "Managing object attributes for Symfony2 applications.",
+    "description": "Managing object attributes for Symfony applications.",
     "keywords": ["shop", "ecommerce", "products", "product", "assortment"],
     "homepage": "http://sylius.com",
     "license": "MIT",

@@ -1,7 +1,7 @@
 {
     "name": "sylius/user-bundle",
     "type": "symfony-bundle",
-    "description": "Users management for Symfony2 projects.",
+    "description": "Users management for Symfony projects.",
     "keywords": ["user", "registration", "login", "groups"],
     "homepage": "http://sylius.com",
     "license": "MIT",
