@@ -548,6 +548,24 @@ class User implements UserInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function isEqualTo(\Symfony\Component\Security\Core\User\UserInterface $user): bool
+    {
+        if (!$user instanceof UserInterface) {
+            return false;
+        }
+
+        return $this->getPassword() === $user->getPassword()
+            && $this->getUsername() === $user->getUsername()
+            && $this->getEmail() === $user->getEmail()
+            && $this->isEnabled() === $user->isEnabled()
+            && $this->getId() === $user->getId()
+        ;
+
+    }
+
+    /**
      * @param \DateTimeInterface|null $date
      *
      * @return bool
