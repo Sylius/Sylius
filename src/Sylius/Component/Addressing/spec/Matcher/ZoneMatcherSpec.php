@@ -272,7 +272,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->matchAll($address)->shouldReturn([$zoneProvince, $zoneCountry, $zoneZone]);
     }
 
-    function it_should_match_address_by_postal_code_region(
+    function it_should_match_address_by_postcode_region(
         RepositoryInterface $repository,
         AddressInterface $address,
         ZoneMemberInterface $memberPostCode,
@@ -292,7 +292,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address)->shouldReturn($zone);
     }
 
-    function it_should_not_match_address_with_different_postal_code_region(
+    function it_should_not_match_address_with_different_postcode_region(
         RepositoryInterface $repository,
         AddressInterface $address,
         ZoneMemberInterface $memberPostCode,

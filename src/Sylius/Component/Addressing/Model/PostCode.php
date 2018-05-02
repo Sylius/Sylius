@@ -50,7 +50,7 @@ class PostCode implements PostCodeInterface
     }
 
     /** {@inheritdoc} */
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name ?? '';
     }

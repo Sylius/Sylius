@@ -58,8 +58,8 @@ final class PostCodeChoiceType extends AbstractType
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,
                 'country' => null,
-                'label' => 'sylius.form.address.postal_code',
-                'placeholder' => 'sylius.form.postal_code.select',
+                'label' => 'sylius.form.address.postcode',
+                'placeholder' => 'sylius.form.postcode.select',
             ]
         );
         $resolver->addAllowedTypes('country', ['null', CountryInterface::class]);
@@ -78,6 +78,6 @@ final class PostCodeChoiceType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'sylius_postal_code_choice';
+        return 'sylius_postcode_choice';
     }
 }

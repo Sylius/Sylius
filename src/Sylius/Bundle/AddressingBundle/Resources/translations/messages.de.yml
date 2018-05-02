@@ -16,7 +16,7 @@ sylius:
             zone: Versandgebiet
         country:
             add_province: Bundesland hinzufügen
-            add_postal_code: Postleitzahl hinzufügen
+            add_postcode: Postleitzahl hinzufügen
             name: Name
             provinces: Bundesländer
             select: Bundesland auswählen
@@ -25,7 +25,7 @@ sylius:
             name: Name
             abbreviation: Abkürzung
             select: Bundesland auswählen
-        postal_code:
+        postcode:
             select: Auswählen
         zone:
             add_member: Mitglied hinzufügen

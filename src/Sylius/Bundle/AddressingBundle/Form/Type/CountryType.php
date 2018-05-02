@@ -39,7 +39,7 @@ final class CountryType extends AbstractResourceType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'button_add_label' => 'sylius.form.country.add_postal_code',
+                'button_add_label' => 'sylius.form.country.add_postcode',
             ])
         ;
     }

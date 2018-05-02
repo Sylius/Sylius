@@ -22,7 +22,7 @@
         <parameter key="sylius.form.type.province.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
-        <parameter key="sylius.form.type.postal_code.validation_groups" type="collection">
+        <parameter key="sylius.form.type.postcode.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
         <parameter key="sylius.form.type.zone.validation_groups" type="collection">
@@ -79,24 +79,23 @@
         </service>
 
         <service class="Sylius\Bundle\AddressingBundle\Form\Type\PostCodeChoiceType"
-                 id="sylius_bundle_addressing.form_type.postal_code_choice_type">
-            <argument id="sylius.repository.postal_code" type="service"/>
+                 id="sylius_bundle_addressing.form_type.postcode_choice_type">
+            <argument id="sylius.repository.postcode" type="service"/>
             <tag alias="Sylius\Bundle\AddressingBundle\Form\Type\PostCodeChoiceType" name="form.type"/>
         </service>
 
         <service class="Sylius\Bundle\AddressingBundle\Form\Type\PostCodeCodeChoiceType"
-                 id="sylius_bundle_addressing.form_type.postal_code_code_choice_type">
-            <argument id="sylius.repository.postal_code" type="service"/>
+                 id="sylius_bundle_addressing.form_type.postcode_code_choice_type">
+            <argument id="sylius.repository.postcode" type="service"/>
             <tag alias="Sylius\Bundle\AddressingBundle\Form\Type\PostCodeCodeChoiceType" name="form.type"/>
         </service>
 
         <service class="Sylius\Bundle\AddressingBundle\Form\Type\PostCodeType"
-                 id="sylius_bundle_addressing.form_type.postal_code_type">
-            <argument>%sylius.model.postal_code.class%</argument>
-            <argument>%sylius.form.type.postal_code.validation_groups%</argument>
+                 id="sylius_bundle_addressing.form_type.postcode_type">
+            <argument>%sylius.model.postcode.class%</argument>
+            <argument>%sylius.form.type.postcode.validation_groups%</argument>
             <tag alias="Sylius\Bundle\AddressingBundle\Form\Type\PostCodeType" name="form.type"/>
         </service>
-
 
         <service id="sylius.form.type.zone" class="Sylius\Bundle\AddressingBundle\Form\Type\ZoneType">
             <argument>%sylius.model.zone.class%</argument>

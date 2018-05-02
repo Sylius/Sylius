@@ -353,7 +353,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iShouldBeNotifiedThatPostCodeValueCouldNotBeBlank($element)
     {
-        Assert::same($this->updatePage->getValidationMessage($element), sprintf('This value should not be blank.', $element));
+        Assert::same($this->updatePage->getValidationMessage($element), 'This value should not be blank for element %s.');
     }
 
     /**

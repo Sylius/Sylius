@@ -116,8 +116,8 @@
             <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.transform.post_code" class="Sylius\Behat\Context\Transform\PostCodeContext">
-            <argument id="__symfony__.sylius.repository.postal_code" type="service"/>
+        <service id="sylius.behat.context.transform.postcode" class="Sylius\Behat\Context\Transform\PostCodeContext">
+            <argument id="__symfony__.sylius.repository.postcode" type="service"/>
             <tag name="fob.context_service"/>
         </service>
 
@@ -174,7 +174,7 @@
         <service id="sylius.behat.context.transform.zone_member" class="Sylius\Behat\Context\Transform\ZoneMemberContext">
             <argument type="service" id="__symfony__.sylius.converter.country_name" />
             <argument type="service" id="__symfony__.sylius.repository.province" />
-            <argument type="service" id="__symfony__.sylius.repository.postal_code" />
+            <argument type="service" id="__symfony__.sylius.repository.postcode" />
             <argument type="service" id="__symfony__.sylius.repository.zone" />
             <argument type="service" id="__symfony__.sylius.repository.zone_member" />
             <tag name="fob.context_service" />

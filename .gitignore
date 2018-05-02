@@ -37,3 +37,4 @@
 /phpunit.xml
 /phpspec.yml
 /.web-server-pid
+!/src/Sylius/Component/Payment/
