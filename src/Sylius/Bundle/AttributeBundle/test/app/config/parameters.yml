@@ -1,6 +1,6 @@
 parameters:
     database_driver: pdo_sqlite
-    database_path: "%kernel.root_dir%/db.sql"
+    database_path: "%kernel.project_dir%/app/db.sql"
 
     locale: en_US
     secret: "Three can keep a secret, if two of them are dead."

@@ -6,7 +6,7 @@ parameters:
     database_user: "%env(SYLIUS_DATABASE_USER)%"
     database_password: "%env(SYLIUS_DATABASE_PASSWORD)%"
     # You should uncomment this if you want use pdo_sqlite.
-    # database_path: "%kernel.root_dir%/data.db3"
+    # database_path: "%kernel.project_dir%/data.db3"
 
     mailer_transport: "%env(SYLIUS_MAILER_TRANSPORT)%"
     mailer_host: "%env(SYLIUS_MAILER_HOST)%"

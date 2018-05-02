@@ -15,15 +15,15 @@ Installing the SyliusBundles
 - Install SyliusAddressingBundle
 
 .. tip::
-    
+
     Read more about how to install SyliusCustomerBundle :doc:`here </components_and_bundles/bundles/SyliusCustomerBundle/installation>`.
 
 .. tip::
-    
+
     Read more about how to install SyliusUserBundle :doc:`here </components_and_bundles/bundles/SyliusUserBundle/installation>`.
 
 .. tip::
-    
+
     Read more about how to install SyliusAddressingBundle :doc:`here </components_and_bundles/bundles/SyliusAddressingBundle/installation>`.
 
 Extending the SyliusBundles
@@ -36,7 +36,7 @@ Extending the SyliusBundles
 - Generate AddressingBundle
 
 .. tip::
-    
+
     Read more about how to generate your own Symfony's bundle `here <https://symfony.com/doc/current/bundles/SensioGeneratorBundle/commands/generate_bundle.html>`_.
 
 2. Extending the Sylius's bundles:
@@ -135,7 +135,7 @@ Extending the SyliusBundles
     }
 
 .. code-block:: yaml
-    
+
     # src/CustomerBundle/Resources/config/config.yml
 
     sylius_customer:
@@ -202,7 +202,7 @@ Extending the SyliusBundles
     }
 
 .. code-block:: yaml
-    
+
     # src/UserBundle/Resources/config/config.yml
 
     sylius_user:
@@ -299,7 +299,7 @@ Extending the SyliusBundles
     }
 
 .. code-block:: yaml
-    
+
     # src/AddressingBundle/Resources/config/config.yml
 
     sylius_addressing:
@@ -354,7 +354,7 @@ Extending the SyliusBundles
 4. Import our new config files to the global config
 
 .. code-block:: yaml
-    
+
     # app/config/config.yml
 
     imports:
@@ -365,7 +365,7 @@ Extending the SyliusBundles
 5. Add the proper ORM mapping in the global config
 
 .. code-block:: yaml
-    
+
     # app/config/config.yml
 
     # Doctrine Configuration
@@ -388,19 +388,19 @@ Extending the SyliusBundles
                     mappings:
                         SyliusCustomerBundle:
                             type: xml
-                            dir: "%kernel.root_dir%/../vendor/sylius/customer-bundle/Resources/config/doctrine/model"
+                            dir: "%kernel.project_dir%/vendor/sylius/customer-bundle/Resources/config/doctrine/model"
                             prefix: Sylius\Component\Customer\Model
                             is_bundle: false
                         CustomerBundle: ~
                         SyliusUserBundle:
                             type: xml
-                            dir: "%kernel.root_dir%/../vendor/sylius/user-bundle/Resources/config/doctrine/model"
+                            dir: "%kernel.project_dir%/vendor/sylius/user-bundle/Resources/config/doctrine/model"
                             prefix: Sylius\Component\User\Model
                             is_bundle: false
                         UserBundle: ~
                         SyliusAddressingBundle:
                             type: xml
-                            dir: "%kernel.root_dir%/../vendor/sylius/addressing-bundle/Resources/config/doctrine/model"
+                            dir: "%kernel.project_dir%/vendor/sylius/addressing-bundle/Resources/config/doctrine/model"
                             prefix: Sylius\Component\Addressing\Model
                             is_bundle: false
                         AddressingBundle: ~
@@ -546,13 +546,13 @@ As the Sylius's models which hold the declaration and the mapping of the relatio
 
         /**
         * Get customer
-        * @return  
+        * @return
         */
         public function getCustomer()
         {
             return $this->customer;
         }
-        
+
         /**
         * Set customer
         * @return $this
@@ -629,7 +629,7 @@ As the Sylius's models which hold the declaration and the mapping of the relatio
                 cascade: ["all"]
 
 .. code-block:: yaml
-    
+
     # src/UserBundle/Resources/config/doctrine/ShopUser.orm.yml
 
     UserBundle\Entity\ShopUser:
@@ -646,7 +646,7 @@ As the Sylius's models which hold the declaration and the mapping of the relatio
                 cascade: ["persist"]
 
 .. code-block:: yaml
-    
+
     # src/AddressingBundle/Resources/config/doctrine/Address.orm.yml
 
     AddressingBundle\Entity\Address:
@@ -690,8 +690,8 @@ It should returns:
 
 .. code-block:: bash
 
-    [Doctrine\Common\Persistence\Mapping\MappingException]                                                     
-    The class 'UserBundle\Entity\ShopUser' was not found in the chain configured namespaces AppBundle\Entity, Sylius\Component\Customer\Model, Sylius\Component\User\Model, Sylius\Component\Ad  
+    [Doctrine\Common\Persistence\Mapping\MappingException]
+    The class 'UserBundle\Entity\ShopUser' was not found in the chain configured namespaces AppBundle\Entity, Sylius\Component\Customer\Model, Sylius\Component\User\Model, Sylius\Component\Ad
     dressing\Model
 
 This seems to be a "known issue" related to the shema-tool CLI command, as obviously this command uses all the metadata collected across all mapping drivers.
