@@ -202,6 +202,9 @@ sylius:
                 help: Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).
             version: PHP version
             version_recommended: Recommended PHP version
+            memory_limit:
+                header: low memory_limit
+                help: Consider using php -d memory_limit=-1 to prevent issues with memory while installing.
 
     payum_gateway:
         cash_on_delivery: Cash on delivery
