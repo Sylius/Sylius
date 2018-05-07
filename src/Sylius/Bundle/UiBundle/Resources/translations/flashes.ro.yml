@@ -17,7 +17,7 @@ sylius:
         apply_state_machine_transition_error: 'A apărut o problemă la actualizarea comenzii. Te rugăm, mai încearcă o dată.'
         promotion_integrity: 'Coșul tău nu mai este eligibil pentru promoția %promotionName%.'
         total_integrity: 'Valoarea comenzii s-a schimbat, verifică informațiile și confirmă încă o dată.'
-        update_error: 'A apărut o problemă la actualizarea produsului. Te rugăm, mai încearcă o dată.'
+        update_error: 'A apărut o problemă la actualizarea comenzii. Te rugăm, mai încearcă o dată.'
     payment:
         apply_state_machine_transition_error: 'A apărut o problemă la actualizarea plății. Te rugăm, mai încearcă o dată.'
     product:

@@ -17,7 +17,7 @@ sylius:
         apply_state_machine_transition_error: 'Ada masalah tak terduga dengan memperbarui pesanan. Tolong, coba perbarui pesanan lagi.'
         promotion_integrity: 'Anda tidak lagi memenuhi syarat untuk promosi ini %promotionName%.'
         total_integrity: 'Total pesanan Anda telah berubah, periksa informasi pesanan Anda dan konfirmasikan lagi.'
-        update_error: 'Ada masalah tak terduga dengan memperbarui produk. Tolong, coba perbarui produk lagi.'
+        update_error: 'Ada masalah tak terduga dengan memperbarui pesanan. Tolong, coba perbarui pesanan lagi.'
     payment:
         apply_state_machine_transition_error: 'Ada masalah tak terduga dengan memperbarui pembayaran. Tolong, coba perbarui pembayaran lagi.'
     product:
