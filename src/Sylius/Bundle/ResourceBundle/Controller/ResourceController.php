@@ -258,15 +258,16 @@ class ResourceController extends Controller
 
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
 
-            if ($event->isStopped() && !$configuration->isHtmlRequest()) {
-                throw new HttpException($event->getErrorCode(), $event->getMessage());
-            }
             if ($event->isStopped()) {
-                $this->flashHelper->addFlashFromEvent($configuration, $event);
-
                 if ($event->hasResponse()) {
                     return $event->getResponse();
                 }
+
+                if (!$configuration->isHtmlRequest()) {
+                    throw new HttpException($event->getErrorCode(), $event->getMessage());
+                }
+
+                $this->flashHelper->addFlashFromEvent($configuration, $event);
 
                 return $this->redirectHandler->redirectToIndex($configuration, $newResource);
             }
@@ -278,15 +279,15 @@ class ResourceController extends Controller
             $this->repository->add($newResource);
             $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
 
+            if ($postEvent->hasResponse()) {
+                return $postEvent->getResponse();
+            }
+
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
-
-            if ($postEvent->hasResponse()) {
-                return $postEvent->getResponse();
-            }
 
             return $this->redirectHandler->redirectToResource($configuration, $newResource);
         }
