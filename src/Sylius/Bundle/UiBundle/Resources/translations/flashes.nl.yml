@@ -17,7 +17,7 @@ sylius:
         apply_state_machine_transition_error: 'Er was een onverwacht probleem met het bijwerken van de bestelling. Probeer alstublieft de bestelling opnieuw te bewerken.'
         promotion_integrity: 'U komt helaas niet langer in aanmerking voor deze aanbieding %promotionName%.'
         total_integrity: 'Uw order totaal is gewijzigd, controleer uw bestelling en bevestig het opnieuw.'
-        update_error: 'Er was een onverwacht probleem met het bijwerken van het product. Probeer het product opnieuw bijwerken.'
+        update_error: 'Er was een onverwacht probleem met het bijwerken van de bestelling. Probeer alstublieft de bestelling opnieuw te bewerken.'
     payment:
         apply_state_machine_transition_error: 'Er was een onverwacht probleem met het bijwerken van een betaling. Probeer de betaling opnieuw bij te werken.'
     product:
