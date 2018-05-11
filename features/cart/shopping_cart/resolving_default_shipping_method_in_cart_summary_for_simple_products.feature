@@ -31,12 +31,5 @@ Feature: Viewing a cart summary with correct default shipping method based on va
     @ui
     Scenario:
         Given I have product "T-shirt banana" in the cart
-        And I added product "Star Trek Ship" to the cart
-        When I see the summary of my cart
-        Then my cart shipping total should be "$35.00"
-
-    @ui
-    Scenario:
-        Given I have product "T-shirt banana" in the cart
         When I see the summary of my cart
         Then my cart shipping total should be "$0.00"
