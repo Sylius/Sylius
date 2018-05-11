@@ -9,3 +9,5 @@
 * The deprecated form mapping feature in SonataCoreBundle has been disabled in the app configuration included from SyliusCoreBundle.
   If you depend on the feature in your application, you will need to make the necessary changes. Refer to
   https://github.com/sonata-project/SonataCoreBundle/pull/462 for more information. 
+
+* Service with id `sylius.shipping_method_resolver.default` has been deprecated and will be removed in 2.0. `sylius.shipping_method_resolver.category_based` should be used instead.

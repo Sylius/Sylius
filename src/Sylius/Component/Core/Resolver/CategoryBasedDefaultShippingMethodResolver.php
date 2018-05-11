@@ -12,14 +12,13 @@
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface as CoreShipmentInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
-use Sylius\Component\Core\Model\ShipmentInterface as CoreShipmentInterface;
 use Webmozart\Assert\Assert;
 
 final class CategoryBasedDefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
