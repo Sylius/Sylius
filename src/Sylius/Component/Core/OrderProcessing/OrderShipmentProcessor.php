@@ -76,29 +76,19 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             return;
         }
 
-        $shipment = $this->getOrderShipment($order);
+        if ($order->hasShipments()) {
+            $this->processShipmentUnits($order, $order->getShipments()->first());
 
-        if (null === $shipment) {
             return;
         }
 
-        foreach ($shipment->getUnits() as $unit) {
-            $shipment->removeUnit($unit);
-        }
-
-        foreach ($order->getItemUnits() as $itemUnit) {
-            if (null === $itemUnit->getShipment()) {
-                $shipment->addUnit($itemUnit);
-            }
-        }
+        $this->createNewOrderShipment($order);
     }
 
     /**
      * @param OrderInterface $order
-     *
-     * @return ShipmentInterface|null
      */
-    private function getOrderShipment(OrderInterface $order): ?ShipmentInterface
+    private function createNewOrderShipment(OrderInterface $order): void
     {
         if ($order->hasShipments()) {
             return $this->getExistingShipmentWithProperMethod($order);
@@ -108,13 +98,33 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             /** @var ShipmentInterface $shipment */
             $shipment = $this->shipmentFactory->createNew();
             $shipment->setOrder($order);
+
+            $this->processShipmentUnits($order, $shipment);
+
             $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
 
             $order->addShipment($shipment);
-
-            return $shipment;
         } catch (UnresolvedDefaultShippingMethodException $exception) {
-            return null;
+            foreach ($shipment->getUnits() as $unit) {
+                $shipment->removeUnit($unit);
+            }
+        }
+    }
+
+    /**
+     * @param BaseOrderInterface $order
+     * @param ShipmentInterface $shipment
+     */
+    private function processShipmentUnits(BaseOrderInterface $order, ShipmentInterface $shipment): void
+    {
+        foreach ($shipment->getUnits() as $unit) {
+            $shipment->removeUnit($unit);
+        }
+
+        foreach ($order->getItemUnits() as $itemUnit) {
+            if (null === $itemUnit->getShipment()) {
+                $shipment->addUnit($itemUnit);
+            }
         }
     }
 
