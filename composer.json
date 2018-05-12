@@ -93,7 +93,7 @@
         "phpstan/phpstan-shim": "^0.9",
         "phpunit/phpunit": "^6.5",
         "stripe/stripe-php": "^4.1",
-        "sylius-labs/coding-standard": "dev-master#7b3a569"
+        "sylius-labs/coding-standard": "dev-ecs-4#7b3a569"
     },
     "replace": {
         "sylius/addressing": "self.version",
@@ -149,6 +149,9 @@
         "symfony/polyfill-php70": "*",
         "symfony/polyfill-php56": "*"
     },
+    "repositories": [
+        { "type": "vcs", "url": "https://github.com/TomasVotruba/CodingStandard.git" }
+    ],
     "conflict": {
         "symfony/symfony": "3.4.7 || 4.0.7"
     },
