@@ -14,6 +14,10 @@ matrix:
         -
             php: 7.1
             env:
+                - CODING_STANDARD=true
+        -
+            php: 7.1
+            env:
                 - SYLIUS_SUITE="application"
                 - SYMFONY_VERSION="3.4.*"
             services:
@@ -79,6 +83,7 @@ before_script:
     - etc/travis/run-suite before_script "${SYLIUS_SUITE}"
 
 script:
+    - if [[ $CODING_STANDARD != "" ]]; then bin/ecs check src tests; fi
     - etc/travis/run-suite script "${SYLIUS_SUITE}"
 
 before_cache:
