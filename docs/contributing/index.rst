@@ -49,7 +49,7 @@ This package contains our main Sylius development repository, with all the compo
 
 In order to see a fully functional frontend you will need to install its assets.
 
-**Sylius** already has a ``gulpfile.js``, therefore you just need to get `Gulp`_ using `Node.js`_.
+**Sylius** already has a ``gulpfile.babel.js``, therefore you just need to get `Gulp`_ using `Node.js`_.
 
 Having Node.js installed go to your project directory and run:
 
@@ -61,7 +61,7 @@ And now you can use gulp for installing views, by just running a simple command:
 
 .. code-block:: bash
 
-    $ yarn run gulp
+    $ yarn build
 
 For the contributing process questions, please refer to the `Contributing Guide <http://docs.sylius.com/en/latest/contributing/index.html>`_ that comes up in the following chapters:
 

@@ -57,7 +57,7 @@ Installing assets
 
 In order to see a fully functional frontend you will need to install its assets.
 
-**Sylius** already has a ``Gulpfile.js``, therefore you just need to get `Gulp`_ using `Yarn`_.
+**Sylius** already has a ``gulpfile.babel.js``, therefore you just need to get `Gulp`_ using `Yarn`_.
 
 .. note::
 
@@ -73,13 +73,7 @@ And now you can use gulp for installing views, by just running a simple command:
 
 .. code-block:: bash
 
-    $ yarn run gulp
-
-Although if you have Gulp installed globally then run just:
-
-.. code-block:: bash
-
-    $ gulp
+    $ yarn build
 
 Accessing the Shop
 ------------------
