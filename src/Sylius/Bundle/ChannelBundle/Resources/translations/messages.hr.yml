@@ -8,3 +8,4 @@ sylius:
             description: Opis
             enabled: Omogućeno
             name: Naziv regije
+            url: URL
