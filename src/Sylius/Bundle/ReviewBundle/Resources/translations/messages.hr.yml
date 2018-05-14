@@ -6,8 +6,11 @@ sylius:
         review:
             author: Autor
             comment: Komentar
+            header: Dodaj osvrt
             rating: Ocjena
             status:
+                approved: Odobreno
                 label: Status
                 new: Novo
+            submit: Potvrdi
             title: Naslov

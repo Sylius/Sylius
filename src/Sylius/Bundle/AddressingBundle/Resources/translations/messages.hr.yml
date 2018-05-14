@@ -11,6 +11,7 @@ sylius:
             last_name: Prezime
             phone_number: Kontakt telefon
             postcode: Poštanski broj
+            street: Adresa
             province: Županija
             zone: Regija
         country:
