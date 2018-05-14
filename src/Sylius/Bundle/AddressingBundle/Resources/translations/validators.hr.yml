@@ -50,6 +50,7 @@ sylius:
             not_blank: Molimo unesite sve što je obuhvaćeno.
         code:
             not_blank: Unesite kod područja (zone).
+            regex: Kod zone se može sastojati samo od slova, brojeva, povlaka i podvlaka.
             unique: Kod područja (zone) mora biti jedinstven.
         members:
             min_count: Dodajte barem {{ limit }} člana u područje (zonu).
@@ -60,4 +61,5 @@ sylius:
     zone_member:
         code:
             not_blank: Odaberite člana područja (zone).
+            regex: Kod člana zone se može sastojati samo od slova, brojeva, povlaka i podvlaka.
         unique: Odabrani član već postoji u području (zoni).

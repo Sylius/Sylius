@@ -13,3 +13,5 @@ sylius:
         stripe:
             secret_key:
                 not_blank: Molimo unesite svoj Stripe tajni ključ.
+            publishable_key:
+                not_blank: Molimo unesite Stripe javni ključ.

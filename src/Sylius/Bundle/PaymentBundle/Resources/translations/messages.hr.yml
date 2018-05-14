@@ -29,4 +29,6 @@ sylius:
         payment_method:
             description: Opis
             enabled: Omogući?
+            instructions: Upute
             name: Naziv regije
+            position: Pozicija

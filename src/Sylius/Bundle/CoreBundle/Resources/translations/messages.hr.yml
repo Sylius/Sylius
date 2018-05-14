@@ -34,6 +34,9 @@ sylius:
             locales: Lokaliteti
             payment_methods: Načini plaćanja
             shipping_methods: Načini slanja
+            skipping_shipping_step_allowed: Preskoči korak plaćanja ako je samo jedna metoda plaćanja dostupna?
+            skipping_payment_step_allowed: Preskoči korak plaćanja ako je samo jedna metoda plaćanja dostupna?
+            tax_calculation_strategy: Način izračuna poreza
             tax_zone_default: Zadana porezna zona
             taxonomies: Glavne kategorije
             theme: Tema
@@ -50,6 +53,7 @@ sylius:
             total_from: Od
             total_to: Do
             payment_state: Stanje plaćanja
+            channel: Svi kanali
         page:
             body: Poruka
             id: ID
@@ -73,10 +77,13 @@ sylius:
             created_at_to: Do
             number: Broj narudžbe
             shipping_address: Pošalji na ime
+            channel: Svi kanali
         payment_filter:
             created_at_from: Od
             created_at_to: Do
             number: Broj narudžbe
+            billing_address: Naplati na ime
+            channel: Svi kanali
         shipping_method:
             zone: Regija
         taxon:
@@ -103,36 +110,54 @@ sylius:
             on_hand: Treutno dostupno
             price: Cijena
             sku: KOD (SKU)
+            shipping_required: Je li potrebna dostava?
             weight: Težina
             width: Širina
         attribute:
             product_attribute_value:
+                attribute: Atribut
                 value: Vrijednost
         guest:
             email: E-mail
         product_association:
+            product: Povezani proizvodi
             type: Poveznice proizvoda
         product_association_type:
             name: Naziv regije
+        promotion_filter:
+            products: Filter proizvoda
+            taxons: Filter taksona
         promotion_rule:
+            customer_group:
+                group: Grupa kupaca
             has_taxon:
                 taxons: Taksoni
             product:
                 products: Proizvodi
             total_of_items_from_taxon:
+                taxon: Takson
                 amount: Iznos
         payment_method:
             channels: Kanali
+        product_attribute:
+            position: Pozicija
+        zone:
+            scopes:
+                shipping: Isporuka
+                tax: Porez
     installer:
         extensions:
             header: Ekstenzije
             accelerator:
                 header: Akcelerator
+                help: Omogući Zend OpCache (jako preporučljivo).
             apc: APC
             ctype: Ctype
             gd: sylius.extensions.gd
             help: Instaliraj i omoguči %extension% ekstenziju.
             iconv: Iconv
+            exif: Exif
+            fileinfo: Informacije o dokumentu
             icu: ICU
             intl: Intl
             json_encode: JSON
@@ -149,13 +174,16 @@ sylius:
             header: File system
             cache:
                 header: cache
+                help: "Za postavljanje dozvola pokrenuti: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: Postoji
             logs:
                 header: Logovi
+                help: "Za postavljanje dozvola pokrenuti: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: Ne postoji
             not_writable: Nije moguće pisati
             parameters:
                 header: parameters.yml
+                help: "Za postavljanje dozvola pokrenuti: sudo chmod a+w %path%"
             vendors: vendors
             writable: moguće pisati
         settings:
@@ -176,3 +204,9 @@ sylius:
                 help: Vremenska zona %timezone% je zastarjela. Ispravite vaš php.ini dokument (popis zastarjelih zona http://php.net/manual/en/timezones.others.php).
             version: Verzija PHP-a
             version_recommended: Preporučena PHP verzija
+    payum_gateway:
+        cash_on_delivery: Pouzećem (COD)
+        offline: Izvan mreže
+        paypal_express_checkout: PayPal ekspresna naplata
+    shipping_method_resolver:
+        by_zones_and_channel: Po zonama i kanalima

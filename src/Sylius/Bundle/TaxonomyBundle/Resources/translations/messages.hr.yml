@@ -7,5 +7,6 @@ sylius:
             description: Opis
             name: Naziv regije
             parent: Nadređena kategorija
+            slug: Slug
         taxonomy:
             name: Naziv regije
