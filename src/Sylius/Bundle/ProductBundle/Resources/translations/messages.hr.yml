@@ -10,12 +10,16 @@ sylius:
             options: Opcije
             meta_keywords: Ključne riječi (Meta Keywords)
             meta_description: Opis (Meta Description)
+            slug: Slug
             taxons: Taksoni
         product_variant:
             name: Naziv regije
         association_type:
             name: Naziv regije
             translations: Prijevodi
+        association:
+            type: Tip poveznice
+            product: Povezan proizvod
         variant:
             name: Naziv regije
         option:

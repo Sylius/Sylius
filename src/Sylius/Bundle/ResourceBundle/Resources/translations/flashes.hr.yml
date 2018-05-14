@@ -6,3 +6,4 @@ sylius:
         create: '%resource% je uspješno izvršen.'
         update: '%resource% je uspješno ažuriran.'
         delete: '%resource% je uspješno obrisan.'
+        revert: '%resource% je uspješno vraćen.'
