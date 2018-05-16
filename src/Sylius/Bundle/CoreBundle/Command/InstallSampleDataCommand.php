@@ -61,8 +61,8 @@ EOT
 
         try {
             $projectDir = $this->getContainer()->getParameter('kernel.project_dir');
-            $this->ensureDirectoryExistsAndIsWritable($projectDir . '/' .  self::WEB_MEDIA_DIRECTORY, $output);
-            $this->ensureDirectoryExistsAndIsWritable($projectDir . '/' .  self::WEB_MEDIA_IMAGE_DIRECTORY, $output);
+            $this->ensureDirectoryExistsAndIsWritable($projectDir . '/' . self::WEB_MEDIA_DIRECTORY, $output);
+            $this->ensureDirectoryExistsAndIsWritable($projectDir . '/' . self::WEB_MEDIA_IMAGE_DIRECTORY, $output);
         } catch (\RuntimeException $exception) {
             $outputStyle->writeln($exception->getMessage());
 
