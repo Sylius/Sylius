@@ -139,6 +139,12 @@ sylius:
                 amount: Iznos
         payment_method:
             channels: Kanali
+        product_attribute:
+            position: Pozicija
+        zone:
+            scopes:
+                shipping: Isporuka
+                tax: Porez
     installer:
         extensions:
             header: Ekstenzije
