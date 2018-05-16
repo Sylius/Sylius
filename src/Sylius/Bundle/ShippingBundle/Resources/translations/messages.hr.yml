@@ -40,5 +40,6 @@ sylius:
             match_any_category_requirement: Najmanje jedna jedinica mora odgovarati kategoriji metode
             match_none_category_requirement: Nijedna jedinica ne mora odgovarati kategoriji metode
             name: Naziv regije
+            position: Pozicija
             tax_category: Kategorija artikla
             translations: Prijevodi

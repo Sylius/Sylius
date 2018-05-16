@@ -31,3 +31,4 @@ sylius:
             enabled: Omogući?
             instructions: Upute
             name: Naziv regije
+            position: Pozicija

@@ -24,6 +24,7 @@ sylius:
             name: Naziv regije
         option:
             name: Naziv regije
+            position: Pozicija
             values: Moguće vrijednosti
         option_value:
             add_value: Dodaj vrijednost
