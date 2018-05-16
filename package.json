@@ -12,12 +12,11 @@
     "gulp-if": "^2.0.0",
     "gulp-livereload": "^3.8.1",
     "gulp-order": "^1.1.1",
-    "gulp-sass": "^2.3.0",
+    "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.1",
     "gulp-uglifycss": "^1.0.5",
     "merge-stream": "^1.0.0",
-    "node-sass": "^4.5.3",
     "yargs": "^6.4.0"
   },
   "scripts": {
