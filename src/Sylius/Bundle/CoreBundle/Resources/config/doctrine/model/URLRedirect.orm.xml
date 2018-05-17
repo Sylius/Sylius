@@ -17,7 +17,7 @@
                           http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd"
 >
 
-    <entity name="Sylius\Component\Core\Model\URLRedirect" table="sylius_url_redirects">
+    <mapped-superclass name="Sylius\Component\Core\Model\URLRedirect" table="sylius_url_redirects">
         <id name="id" type="integer">
             <generator strategy="AUTO"/>
         </id>
@@ -27,6 +27,6 @@
 
         <field name="enabled" type="boolean"/>
 
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>

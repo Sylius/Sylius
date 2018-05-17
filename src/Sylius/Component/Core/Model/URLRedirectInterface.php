@@ -46,4 +46,15 @@ interface URLRedirectInterface
      * @param bool $enabled
      */
     public function setEnabled(bool $enabled): void;
+
+    /**
+     * @return string
+     */
+    public function getType(): string;
+
+    /**
+     * Sets the type of the redirect (see class constants for values)
+     * @param null|string $type
+     */
+    public function setType(?string $type): void;
 }

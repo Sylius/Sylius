@@ -1,15 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 29/01/18
- * Time: 18:28
- */
-
 declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\EventListener;
-
 
 use Sylius\Component\Core\Model\URLRedirect;
 use Sylius\Component\Core\URLRedirect\URLRedirectProcessorInterface;
@@ -24,19 +16,18 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * This class processes the URLRedirects from the database
  *
  * @package Sylius\Bundle\AdminBundle\EventListener
- * @see URLRedirect
+ * @see     URLRedirect
  */
 final class URLRedirectListener implements EventSubscriberInterface
 {
-
     /**
      * @var URLRedirectProcessorInterface
      */
-    private $redirectService;
+    private $redirectProcessor;
 
-    public function __construct(URLRedirectProcessorInterface $redirectService)
+    public function __construct(URLRedirectProcessorInterface $redirectProcessor)
     {
-        $this->redirectService = $redirectService;
+        $this->redirectProcessor = $redirectProcessor;
     }
 
     /**
@@ -50,7 +41,7 @@ final class URLRedirectListener implements EventSubscriberInterface
         $uri     = $request->getRequestUri();
         $path    = rtrim(parse_url($uri)['path'], '/');
 
-        $newRoute = $this->redirectService->redirectRoute($path);
+        $newRoute = $this->redirectProcessor->redirectRoute($path);
         if ($newRoute !== $path) {
             $event->setResponse(new RedirectResponse($newRoute));
         }
@@ -77,7 +68,7 @@ final class URLRedirectListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => ['onKernelRequest', 64]
+            KernelEvents::REQUEST => ['onKernelRequest', 64],
         ];
     }
 }

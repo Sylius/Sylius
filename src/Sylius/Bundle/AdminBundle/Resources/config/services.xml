@@ -38,6 +38,5 @@
         <service id="sylius.http_client" class="GuzzleHttp\Client" public="false" />
         <service id="sylius.http_message_factory" class="Http\Message\MessageFactory\GuzzleMessageFactory" public="false" />
 
-
     </services>
 </container>

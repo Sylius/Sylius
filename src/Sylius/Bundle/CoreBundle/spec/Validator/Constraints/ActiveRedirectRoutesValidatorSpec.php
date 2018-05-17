@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: mamazu
@@ -6,7 +7,7 @@
  * Time: 16:24
  */
 
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
@@ -31,7 +32,7 @@ final class ActiveRedirectRoutesValidatorSpec extends ObjectBehavior
 
     public function __construct()
     {
-        $this->constraint          = new ActiveRedirectRoutes();
+        $this->constraint = new ActiveRedirectRoutes();
         $this->constraint->message = 'Invalid route';
     }
 
@@ -42,7 +43,7 @@ final class ActiveRedirectRoutesValidatorSpec extends ObjectBehavior
         $this->context = $executionContext;
     }
 
-    function it_is_constraint_validator(): void
+    function it_is_constraint_validator() : void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
@@ -94,8 +95,6 @@ final class ActiveRedirectRoutesValidatorSpec extends ObjectBehavior
         $repository->getActiveRedirectForRoute('/abc')
             ->shouldBeCalled()
             ->willReturn(new URLRedirect('/abc', '/cde'));
-
-        $URLRedirect->getId()->shouldBeCalled()->willReturn(1);
 
         $this->context->addViolation($this->constraint->message)->shouldBeCalled();
 

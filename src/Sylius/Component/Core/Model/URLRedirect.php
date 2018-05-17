@@ -112,16 +112,14 @@ class URLRedirect implements URLRedirectInterface, ResourceInterface
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     */
+    /** {@inheritdoc} */
     public function setType(?string $type): void
     {
-        $type     = is_null($type) ? URLRedirect::PERMANENT : strtoupper($type);
-        $allTypes = [URLRedirect::PERMANENT, URLRedirect::TEMPORARY, URLRedirect::INVISIBLE];
+        $type     = is_null($type) ? self::PERMANENT : strtoupper($type);
+        $allTypes = [self::PERMANENT, self::TEMPORARY, self::INVISIBLE];
 
         if (!in_array($type, $allTypes)) {
-            $type = URLRedirect::PERMANENT;
+            $type = self::PERMANENT;
         }
 
         $this->type = $type;

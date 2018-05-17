@@ -11,4 +11,3 @@ sylius_resource:
           model: Sylius\Component\Core\Model\URLRedirect
           repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\URLRedirectRepository
           interface: Sylius\Component\Core\Model\URLRedirectInterface
-          controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
