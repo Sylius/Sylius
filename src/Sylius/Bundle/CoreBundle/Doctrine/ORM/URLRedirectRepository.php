@@ -1,15 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 30/01/18
- * Time: 16:07
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
-
 
 use Doctrine\ORM\NonUniqueResultException;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -18,18 +20,15 @@ use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
 
 /**
  * Class URLRedirectRepository
- *
- * @package Sylius\Bundle\CoreBundle\Doctrine\ORM
  */
 class URLRedirectRepository extends EntityRepository implements URLRedirectRepositoryInterface
 {
-
     /**
      * Gets the redirect for a route
      *
      * @param string $route
      *
-     * @return null|URLRedirect
+     * @return URLRedirect|null
      *
      * @throws    NonUniqueResultException
      */

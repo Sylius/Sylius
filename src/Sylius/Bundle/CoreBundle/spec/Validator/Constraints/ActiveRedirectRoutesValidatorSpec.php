@@ -1,24 +1,24 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 31/01/18
- * Time: 16:24
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
-use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\ActiveRedirectRoutes;
 use Sylius\Component\Core\Model\URLRedirect;
 use Sylius\Component\Core\Model\URLRedirectInterface;
 use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -43,7 +43,7 @@ final class ActiveRedirectRoutesValidatorSpec extends ObjectBehavior
         $this->context = $executionContext;
     }
 
-    function it_is_constraint_validator() : void
+    function it_is_constraint_validator(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
@@ -99,6 +99,5 @@ final class ActiveRedirectRoutesValidatorSpec extends ObjectBehavior
         $this->context->addViolation($this->constraint->message)->shouldBeCalled();
 
         $this->validate($URLRedirect, $this->constraint);
-
     }
 }

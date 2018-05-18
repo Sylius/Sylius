@@ -1,15 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 29/01/18
- * Time: 10:54
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
-
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -17,8 +19,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  * Class URLRedirect
  *
  * The entity to store URL redirects in Sylius
- *
- * @package Sylius\Component\Core\Model
  */
 class URLRedirect implements URLRedirectInterface, ResourceInterface
 {
@@ -45,7 +45,7 @@ class URLRedirect implements URLRedirectInterface, ResourceInterface
     {
         $this->oldRoute = $oldRoute;
         $this->newRoute = $newRoute;
-        $this->enabled  = true;
+        $this->enabled = true;
     }
 
     /**
@@ -115,7 +115,7 @@ class URLRedirect implements URLRedirectInterface, ResourceInterface
     /** {@inheritdoc} */
     public function setType(?string $type): void
     {
-        $type     = is_null($type) ? self::PERMANENT : strtoupper($type);
+        $type = null === $type ? self::PERMANENT : strtoupper($type);
         $allTypes = [self::PERMANENT, self::TEMPORARY, self::INVISIBLE];
 
         if (!in_array($type, $allTypes)) {

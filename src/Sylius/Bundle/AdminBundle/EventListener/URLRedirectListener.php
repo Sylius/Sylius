@@ -1,4 +1,14 @@
 <?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\EventListener;
@@ -15,7 +25,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
  *
  * This class processes the URLRedirects from the database
  *
- * @package Sylius\Bundle\AdminBundle\EventListener
  * @see     URLRedirect
  */
 final class URLRedirectListener implements EventSubscriberInterface
@@ -38,8 +47,8 @@ final class URLRedirectListener implements EventSubscriberInterface
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
-        $uri     = $request->getRequestUri();
-        $path    = rtrim(parse_url($uri)['path'], '/');
+        $uri = $request->getRequestUri();
+        $path = rtrim(parse_url($uri)['path'], '/');
 
         $newRoute = $this->redirectProcessor->redirectRoute($path);
         if ($newRoute !== $path) {

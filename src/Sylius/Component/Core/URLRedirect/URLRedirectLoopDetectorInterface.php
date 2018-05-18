@@ -1,15 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 30/01/18
- * Time: 13:15
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 declare(strict_types=1);
 
 namespace Sylius\Component\Core\URLRedirect;
-
 
 use Sylius\Component\Core\Model\URLRedirectInterface;
 
@@ -17,8 +19,6 @@ use Sylius\Component\Core\Model\URLRedirectInterface;
  * Interface URLRedirectLoopDetectorInterface
  *
  * Classes that detect loops in URL redirects can implement that.
- *
- * @package Sylius\Component\Core\URLRedirect
  */
 interface URLRedirectLoopDetectorInterface
 {

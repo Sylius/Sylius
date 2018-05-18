@@ -1,15 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 30/01/18
- * Time: 13:13
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 declare(strict_types=1);
 
 namespace Sylius\Component\Core\URLRedirect;
-
 
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\URLRedirectInterface;
@@ -19,8 +21,6 @@ use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
  * Class URLRedirectLoopDetector
  *
  * This checks if there are any redirect loops that would result in an infinite set of redirects
- *
- * @package Sylius\Component\Core\URLRedirect
  */
 class URLRedirectLoopDetector implements URLRedirectLoopDetectorInterface
 {
@@ -34,14 +34,14 @@ class URLRedirectLoopDetector implements URLRedirectLoopDetectorInterface
         $this->repository = $repository;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function containsLoop(URLRedirectInterface $newNode): bool
     {
         $visitedNodes = [$newNode->getOldRoute()];
 
         $currentNode = $newNode;
 
-        while (!is_null($currentNode)) {
+        while (null !== $currentNode) {
             $currentURL = $currentNode->getNewRoute();
 
             //If the current node was already redirected to, it's a loop

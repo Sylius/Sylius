@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 29/01/18
- * Time: 11:09
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 declare(strict_types=1);
@@ -18,7 +21,6 @@ use Sylius\Component\Core\URLRedirect\URLRedirectLoopDetectorInterface;
 
 final class URLRedirectLoopDetectorSpec extends ObjectBehavior
 {
-
     public function it_implements_url_redirect_processor_interface()
     {
         $this->shouldImplement(URLRedirectLoopDetectorInterface::class);
@@ -75,5 +77,4 @@ final class URLRedirectLoopDetectorSpec extends ObjectBehavior
 
         $this->containsLoop($newNode)->shouldBe(true);
     }
-
 }

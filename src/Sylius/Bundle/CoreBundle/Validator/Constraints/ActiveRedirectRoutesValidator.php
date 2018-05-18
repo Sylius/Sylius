@@ -1,20 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 30/01/18
- * Time: 12:43
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
-
-use Sylius\Component\Core\Model\URLRedirect;
 use Sylius\Component\Core\Model\URLRedirectInterface;
 use Sylius\Component\Core\Repository\URLRedirectRepositoryInterface;
-use Sylius\Component\Core\URLRedirect\URLRedirectLoopDetectorInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use TypeError;
@@ -23,8 +23,6 @@ use TypeError;
  * Class ActiveRedirectRoutesValidator
  *
  * Validates that there is only one active redirect
- *
- * @package Sylius\Bundle\AdminBundle\Validator\Constraints
  */
 final class ActiveRedirectRoutesValidator extends ConstraintValidator
 {
