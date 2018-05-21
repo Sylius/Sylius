@@ -143,7 +143,7 @@ sylius:
             position: Pozicija
         zone:
             scopes:
-                shipping: Isporuka
+                shipping: Dostava
                 tax: Porez
     installer:
         extensions:
