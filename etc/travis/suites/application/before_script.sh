@@ -10,7 +10,7 @@ run_command "bin/console doctrine:migrations:migrate --no-interaction --env=test
 
 print_header "Setting the web assets up" "Sylius"
 run_command "bin/console assets:install web --env=test_cached --no-debug -vvv" || exit $?
-run_command "yarn run gulp" || exit $?
+run_command "yarn build" || exit $?
 
 print_header "Making filesystem readonly" "Sylius"
 run_command "chmod -R 555 app bin docs features src tests vendor"

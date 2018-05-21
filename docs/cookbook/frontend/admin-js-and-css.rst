@@ -45,7 +45,7 @@ As an example we will use a popup window script, it is easy for manual testing.
 
 .. code-block:: bash
 
-    $ yarn run gulp
+    $ yarn build
 
 **5. Go to Sylius Admin and check the results!**
 
@@ -91,7 +91,7 @@ As an example we will change the sidebar menu background color, what is clearly 
 
 .. code-block:: bash
 
-    $ yarn run gulp
+    $ yarn build
 
 **5. Go to Sylius Admin and check the results!**
 
