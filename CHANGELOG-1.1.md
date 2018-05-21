@@ -1,5 +1,24 @@
 ## CHANGELOG
 
+### v1.1.6 2018-05-21
+
+- [#9310](https://github.com/Sylius/Sylius/pull/9310) Declare a separate ImagesUploadListener service (@teohhanhui)
+- [#9328](https://github.com/Sylius/Sylius/pull/9328) Fix invalid YAML tag syntax (@teohhanhui)
+- [#9334](https://github.com/Sylius/Sylius/pull/9334) Quote usage of !!int  to remove deprecation warning (@stefandoorn)
+- [#9335](https://github.com/Sylius/Sylius/pull/9335) Make sure controller services are public (@teohhanhui)
+- [#9339](https://github.com/Sylius/Sylius/pull/9339) Fix product repository's service id in docs (@hectorj)
+- [#9344](https://github.com/Sylius/Sylius/pull/9344) Fix exception controller config (@teohhanhui)
+- [#9349](https://github.com/Sylius/Sylius/pull/9349) [Grid] Default parameters for "default" grid action (@Zales0123)
+- [#9350](https://github.com/Sylius/Sylius/pull/9350) Readme enhancements (@pamil)
+- [#9354](https://github.com/Sylius/Sylius/pull/9354) Order update error flash message typo (@czende)
+- [#9356](https://github.com/Sylius/Sylius/pull/9356) [Components] Fix links for documentation in readme (@Jibbarth)
+- [#9362](https://github.com/Sylius/Sylius/pull/9362) Add reset method to DataCollectors, needed for SF4 compat (@jordisala1991)
+- [#9371](https://github.com/Sylius/Sylius/pull/9371) Fix sourcemaps (@teohhanhui)
+- [#9378](https://github.com/Sylius/Sylius/pull/9378) Make Sylius 1.1 packages require other Sylius packages in at least that version (@pamil)
+- [#9379](https://github.com/Sylius/Sylius/pull/9379) Replace outdated "Symfony2" with "Symfony" in package descriptions (@pamil)
+- [#9397](https://github.com/Sylius/Sylius/pull/9397) Add missing replacements to composer.json (@jordisala1991)
+- [#9404](https://github.com/Sylius/Sylius/pull/9404) Update node-sass for compatibility with Node.js 10 (@teohhanhui)
+
 ### v1.1.5 2018-04-13
 
 - [#9323](https://github.com/Sylius/Sylius/pull/9323) formatting content in a email message (@axzx)
