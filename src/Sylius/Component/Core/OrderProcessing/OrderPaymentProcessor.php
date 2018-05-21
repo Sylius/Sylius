@@ -59,7 +59,11 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         }
 
         if (0 === $order->getTotal()) {
-            foreach ($order->getPayments(OrderPaymentStates::STATE_CART) as $payment) {
+            $removablePayments = $order->getPayments()->filter(function (PaymentInterface $payment): bool {
+                return $payment->getState() === OrderPaymentStates::STATE_CART;
+            });
+
+            foreach ($removablePayments as $payment) {
                 $order->removePayment($payment);
             }
 
