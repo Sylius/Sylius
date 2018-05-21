@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
