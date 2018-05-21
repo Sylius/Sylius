@@ -6,6 +6,7 @@ sylius:
         create: '%resource% je uspješno izvršen.'
         update: '%resource% je uspješno ažuriran.'
         delete: '%resource% je uspješno obrisan.'
+        bulk_delete: '%resources% je uspješno obrisan.'
         move: '%resource% je uspješno pomaknut.'
         generate: '%resource% je uspješno generiran.'
         revert: '%resource% je uspješno vraćen.'
