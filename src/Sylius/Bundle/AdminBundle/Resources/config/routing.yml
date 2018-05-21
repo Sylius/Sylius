@@ -5,8 +5,6 @@ sylius_admin_partial:
 sylius_admin_ajax:
     resource: "@SyliusAdminBundle/Resources/config/routing/ajax.yml"
     prefix: /ajax
-    defaults:
-        _format: json
 
 sylius_admin_dashboard:
     path: /

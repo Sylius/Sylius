@@ -3,12 +3,14 @@ sylius_admin_ajax_generate_product_slug:
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_slug:generateAction
+        _format: json
 
 sylius_admin_ajax_product_by_name_phrase:
     path: /search
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:indexAction
+        _format: json
         _sylius:
             serialization_groups: [Autocomplete]
             permission: true
@@ -23,6 +25,7 @@ sylius_admin_ajax_product_by_code:
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:indexAction
+        _format: json
         _sylius:
             serialization_groups: [Autocomplete]
             permission: true
@@ -35,6 +38,7 @@ sylius_admin_ajax_product_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:indexAction
+        _format: json
         _sylius:
             permission: true
             grid: sylius_admin_product

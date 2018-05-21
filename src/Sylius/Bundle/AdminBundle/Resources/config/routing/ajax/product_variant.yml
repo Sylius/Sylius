@@ -3,6 +3,7 @@ sylius_admin_ajax_product_variants_update_position:
     methods: [PUT]
     defaults:
         _controller: sylius.controller.product_variant:updatePositionsAction
+        _format: json
         _sylius:
             permission: true
 
@@ -11,6 +12,7 @@ sylius_admin_ajax_product_variants_by_phrase:
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_variant:indexAction
+        _format: json
         _sylius:
             serialization_groups: [Autocomplete]
             permission: true
@@ -26,6 +28,7 @@ sylius_admin_ajax_product_variants_by_codes:
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_variant:indexAction
+        _format: json
         _sylius:
             serialization_groups: [Autocomplete]
             permission: true
