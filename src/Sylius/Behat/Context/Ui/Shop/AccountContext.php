@@ -454,6 +454,14 @@ final class AccountContext implements Context
     }
 
     /**
+     * @Then I should see Cancel button next to the order :orderNumber
+     */
+    public function iShouldSeeCancelButtonNextToTheOrder(string $orderNumber)
+    {
+        Assert::true($this->orderIndexPage->isCancelButtonVisibleForOrderWithNumber($orderNumber));
+    }
+
+    /**
      * @param PageInterface $page
      * @param string $element
      * @param string $expectedMessage

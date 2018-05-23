@@ -66,3 +66,11 @@ sylius_grid:
                                 route: sylius_shop_order_show
                                 parameters:
                                     tokenValue: resource.tokenValue
+                    cancel:
+                        type: cancel
+                        label: sylius.ui.cancel
+                        options:
+                            link:
+                                route: sylius_shop_order_cancel
+                                parameters:
+                                    number: resource.number

@@ -19,6 +19,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Order\SyliusCartEvents;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -183,6 +184,14 @@ class OrderController extends ResourceController
         $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
 
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
+    }
+
+    public function cancelAction(Request $request): Response
+    {
+        /** @var OrderInterface $order */
+        $order = $this->getOrderRepository()->findOneByNumber($request->attributes->get('orderNumber'));
+
+        $this->stateMachine->apply(OrderTransitions::TRANSITION_CANCEL, $order);
     }
 
     /**

@@ -38,5 +38,9 @@
             <argument>_sylius.cart</argument>
             <argument type="service" id="sylius.repository.order" />
         </service>
+
+        <service id="sylius.order.customer_cancel_order_extension" class="Sylius\Bundle\OrderBundle\Twig\CustomerCancelOrderExtension" >
+            <tag name="twig.extension" />
+        </service>
     </services>
 </container>

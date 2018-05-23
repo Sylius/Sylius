@@ -38,4 +38,6 @@ interface IndexPageInterface extends SymfonyPageInterface
     public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order);
 
     public function openLastOrderPage();
+
+    public function isCancelButtonVisibleForOrderWithNumber($number);
 }

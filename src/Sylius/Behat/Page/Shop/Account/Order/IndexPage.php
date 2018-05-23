@@ -104,4 +104,24 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             'last_order' => 'table tbody tr:last-child a:contains("Show")',
         ]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isCancelButtonVisibleForOrderWithNumber($number)
+    {
+        $orderData = $this->getSession()->getPage()->find('css', sprintf('tr:contains("%s")', $number));
+
+        if (null === $orderData) {
+            return false;
+        }
+
+        $actionButtonsText = $orderData->find('css', 'td:last-child')->getText();
+
+        if (!strpos($actionButtonsText, 'Cancel')) {
+            return false;
+        }
+
+        return true;
+    }
 }
