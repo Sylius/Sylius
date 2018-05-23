@@ -205,4 +205,26 @@ EOT;
 
         $this->assertResponseCode($response, Response::HTTP_OK);
     }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_a_book_via_custom_factory()
+    {
+        $data =
+            <<<EOT
+                    {
+            "translations": {
+                "en_US": {
+                    "title": "Star Wars: Dark Disciple"
+                }
+            },
+            "author": "Christie Golden"
+        }
+EOT;
+
+        $this->client->request('POST', '/books/create-custom', [], [], ['CONTENT_TYPE' => 'application/json'], $data);
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'books/create_response', Response::HTTP_CREATED);
+    }
 }

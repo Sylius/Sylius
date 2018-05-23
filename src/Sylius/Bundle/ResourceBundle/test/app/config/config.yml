@@ -48,3 +48,8 @@ services:
         arguments:
             - ["pl_PL", "en_US", "de_DE"]
             - "en_US"
+
+    test.custom_book_factory:
+        class: Sylius\Component\Resource\Factory\Factory
+        arguments:
+            - "%app.model.book.class%"

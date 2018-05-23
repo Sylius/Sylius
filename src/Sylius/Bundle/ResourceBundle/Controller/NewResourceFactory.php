@@ -27,6 +27,11 @@ final class NewResourceFactory implements NewResourceFactoryInterface
             return $factory->createNew();
         }
 
+        if (is_array($method) && 2 === count($method)) {
+            $factory = $method[0];
+            $method = $method[1];
+        }
+
         $arguments = array_values($requestConfiguration->getFactoryArguments());
 
         return $factory->$method(...$arguments);

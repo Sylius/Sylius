@@ -50,4 +50,19 @@ final class NewResourceFactorySpec extends ObjectBehavior
 
         $this->create($requestConfiguration, $factory)->shouldReturn($resource);
     }
+
+    function it_calls_proper_service_based_on_configuration(
+        RequestConfiguration $requestConfiguration,
+        FactoryInterface $factory,
+        FactoryInterface $customFactory,
+        ResourceInterface $resource
+    ): void {
+        $requestConfiguration->getFactoryMethod()->willReturn([$customFactory, 'createNew']);
+        $requestConfiguration->getFactoryArguments()->willReturn(['foo', 'bar']);
+
+        $customFactory->createNew('foo', 'bar')->willReturn($resource);
+        $factory->createNew()->shouldNotBeCalled();
+
+        $this->create($requestConfiguration, $factory)->shouldReturn($resource);
+    }
 }

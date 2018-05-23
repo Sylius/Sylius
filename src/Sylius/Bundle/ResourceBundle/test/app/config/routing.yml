@@ -22,3 +22,12 @@ app_book_filterable_index:
 app_versioned_book:
     resource: "versioned_routing.yml"
     prefix: /v{version}
+
+app_create_book_with_custom_factory:
+    path: /books/create-custom
+    method: [POST]
+    defaults:
+        _controller: app.controller.book:createAction
+        _sylius:
+            factory:
+                method: ["@test.custom_book_factory", "createNew"]
