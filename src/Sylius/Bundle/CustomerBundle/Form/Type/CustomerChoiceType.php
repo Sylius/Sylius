@@ -56,7 +56,9 @@ final class CustomerChoiceType extends AbstractType
                 return $this->customerRepository->findAll();
             },
             'choice_value' => 'email',
-            'choice_label' => 'name',
+            'choice_label' => function (Customer $customer) {
+                return sprintf('%s (%s)', $customer->getFullName(), $customer->getEmail());
+            },
             'choice_translation_domain' => false,
         ]);
     }
