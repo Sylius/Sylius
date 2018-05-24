@@ -165,5 +165,18 @@
         </service>
 
         <service id="sylius.order_item_names_setter" class="Sylius\Component\Core\Order\OrderItemNamesSetter" />
+
+        <service id="sylius.customer_order_cancellation_checker" class="Sylius\Bundle\CoreBundle\Checker\CustomerOrderCancellationChecker" />
+
+        <service id="sylius.twig.extension.customer_cancel_order" class="Sylius\Bundle\CoreBundle\Twig\CustomerCancelOrderExtension">
+            <argument type="service" id="sylius.customer_order_cancellation_checker" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius.controller.customer_order_cancellation" class="Sylius\Bundle\CoreBundle\Controller\OrderCancellationController">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type='service' id="sylius.customer_order_cancellation_checker" />
+            <argument type="service" id="sm.factory" />
+        </service>
     </services>
 </container>

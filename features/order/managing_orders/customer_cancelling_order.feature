@@ -1,4 +1,4 @@
-@managing_orders
+@customer_account
 Feature: Customer cancelling unpaid and unshipped order
     In order to mark order state as cancelled
     As a Customer
@@ -14,8 +14,8 @@ Feature: Customer cancelling unpaid and unshipped order
         And I bought a single "Angel T-Shirt"
         And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States"
         And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "United States"
-        And I chose "Free" shipping method with "Cash on Delivery" payment
 
+    @ui
     Scenario: Being able to see Cancel button when an order is unpaid and unshipped
         When I browse my orders
         Then I should see Cancel button next to the order "#00000666"

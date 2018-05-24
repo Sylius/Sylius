@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\Twig;
+namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
