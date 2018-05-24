@@ -54,7 +54,7 @@ EOT
         }
 
         $commands = [
-            'assets:install' => ['web'],
+            'assets:install' => ['target' => 'web'],
         ];
 
         $this->runCommands($commands, $output);
