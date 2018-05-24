@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use SM\SMException;
 use Sylius\Bundle\CoreBundle\Checker\CustomerOrderCancellationCheckerInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -36,21 +37,27 @@ final class OrderCancellationController
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         CustomerOrderCancellationCheckerInterface $customerOrderCancellationChecker,
         StateMachineFactoryInterface $stateMachineFactory,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
+        EntityManagerInterface $entityManager
     ) {
         $this->orderRepository = $orderRepository;
         $this->customerOrderCancellationChecker = $customerOrderCancellationChecker;
         $this->stateMachineFactory = $stateMachineFactory;
         $this->urlGenerator = $urlGenerator;
+        $this->entityManager = $entityManager;
     }
 
     public function cancelAction(Request $request): Response
     {
-        $order = $this->orderRepository->findOneByNumber($request->attributes->get('orderNumber'));
+        $orderNumber = $request->attributes->get('orderNumber');
+        $order = $this->orderRepository->findOneByNumber($orderNumber);
 
         if (!$this->customerOrderCancellationChecker->check($order)) {
             return null;
@@ -59,12 +66,15 @@ final class OrderCancellationController
         try {
             $this->stateMachineFactory
                 ->get($order, OrderTransitions::GRAPH)
-                ->apply(OrderTransitions::TRANSITION_CANCEL);
+                ->apply(OrderTransitions::TRANSITION_CANCEL)
+            ;
         } catch (SMException $e) {
             return null;
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('sylius_shop_order_show'));
+        $this->entityManager->flush();
+
+        return new RedirectResponse($this->urlGenerator->generate('sylius_shop_account_order_index'));
     }
 
 }
