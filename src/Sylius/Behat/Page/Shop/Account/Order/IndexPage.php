@@ -124,4 +124,34 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
         return true;
     }
+
+    public function clickCancelButtonNextToTheOrder($number)
+    {
+        $orderData = $this->getSession()->getPage()->find('css', sprintf('tr:contains("%s")', $number));
+
+        if (null === $orderData) {
+            throw new \Exception(sprintf('There is no order %s on the orders list', $number));
+        }
+
+        $cancelButton = $orderData->find('css', 'td:last-child')->find('css', 'button');
+
+        if (null === $cancelButton || $cancelButton->getText() != 'Cancel') {
+            throw new \Exception(sprintf('There is no cancel button next to order %s', $number));
+        }
+
+        $cancelButton->click();
+    }
+
+    public function theOrderShouldBeCancelled($number)
+    {
+        $orderData = $this->getSession()->getPage()->find('css', sprintf('tr:contains("%s")', $number));
+
+        if (null === $orderData) {
+            throw new \Exception(sprintf('There is no order %s on the orders list', $number));
+        }
+
+        if ($orderData->find('css', 'td:nth-child(5)')->getText() !== 'Cancelled') {
+            throw new \Exception(sprintf('There order %s is not cancelled', $number));
+        }
+    }
 }

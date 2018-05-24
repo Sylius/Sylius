@@ -40,4 +40,8 @@ interface IndexPageInterface extends SymfonyPageInterface
     public function openLastOrderPage();
 
     public function isCancelButtonVisibleForOrderWithNumber($number);
+
+    public function clickCancelButtonNextToTheOrder($number);
+
+    public function theOrderShouldBeCancelled($number);
 }

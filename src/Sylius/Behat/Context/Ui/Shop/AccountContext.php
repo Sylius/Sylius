@@ -462,6 +462,30 @@ final class AccountContext implements Context
     }
 
     /**
+     * @When I click Cancel button next to the order :orderNumber
+     */
+    public function iClickCancelButtonNextToTheOrder(string $orderNumber)
+    {
+        $this->orderIndexPage->clickCancelButtonNextToTheOrder($orderNumber);
+    }
+
+    /**
+     * @Then the order :orderNumber should be cancelled
+     */
+    public function orderShouldBeCancelled(string $orderNumber)
+    {
+        $this->orderIndexPage->theOrderShouldBeCancelled($orderNumber);
+    }
+
+    /**
+     * @Then the Cancel button next to the order :orderNumber should not be visible
+     */
+    public function theCancelButtonNextToTheOrderShouldNotBeVisible(string $orderNumber)
+    {
+        Assert::false($this->orderIndexPage->isCancelButtonVisibleForOrderWithNumber($orderNumber));
+    }
+
+    /**
      * @param PageInterface $page
      * @param string $element
      * @param string $expectedMessage
