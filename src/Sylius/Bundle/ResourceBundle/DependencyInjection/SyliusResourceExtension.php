@@ -42,7 +42,7 @@ final class SyliusResourceExtension extends Extension
         if ($config['translation']['enabled']) {
             $loader->load('services/integrations/translation.xml');
 
-            $container->setAlias('sylius.translation_locale_provider', $config['translation']['locale_provider']);
+            $container->setAlias('sylius.translation_locale_provider', $config['translation']['locale_provider'])->setPublic(true);
         }
 
         $container->setParameter('sylius.resource.settings', $config['settings']);
