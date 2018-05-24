@@ -34,7 +34,7 @@
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="liip_imagine.cache.manager" />
             <argument type="service" id="liip_imagine.filter.manager" />
-            <tag name="doctrine.event_listener" event="postRemove" />
+            <tag name="doctrine.event_listener" event="postRemove" lazy="true" />
         </service>
         <service id="sylius.listener.order_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener">
             <argument type="service" id="sylius.order_processing.order_processor" />
@@ -47,12 +47,12 @@
             <tag name="kernel.event_listener" event="security.interactive_login" method="recalculateCartWhileLogin" />
         </service>
         <service id="sylius.listener.default_username" class="Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener">
-            <tag name="doctrine.event_listener" event="onFlush" />
+            <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
         </service>
         <service id="sylius.listener.canonicalizer" class="Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener">
             <argument type="service" id="sylius.canonicalizer" />
-            <tag name="doctrine.event_listener" event="prePersist" />
-            <tag name="doctrine.event_listener" event="preUpdate" />
+            <tag name="doctrine.event_listener" event="prePersist" lazy="true" />
+            <tag name="doctrine.event_listener" event="preUpdate" lazy="true" />
         </service>
         <service id="sylius.listener.password_updater" class="Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener">
             <argument type="service" id="sylius.security.password_updater" />
@@ -60,8 +60,8 @@
             <tag name="kernel.event_listener" event="sylius.user.pre_password_change" method="genericEventUpdater" />
             <tag name="kernel.event_listener" event="sylius.admin_user.pre_update" method="genericEventUpdater" />
             <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="customerUpdateEvent" />
-            <tag name="doctrine.event_listener" event="prePersist" />
-            <tag name="doctrine.event_listener" event="preUpdate" />
+            <tag name="doctrine.event_listener" event="prePersist" lazy="true" />
+            <tag name="doctrine.event_listener" event="preUpdate" lazy="true" />
         </service>
         <service id="sylius.translator.listener" class="Symfony\Component\HttpKernel\EventListener\TranslatorListener">
             <argument type="service" id="translator" />

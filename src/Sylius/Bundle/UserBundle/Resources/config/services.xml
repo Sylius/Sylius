@@ -55,8 +55,8 @@
             <argument type="service" id="sylius.security.password_updater" />
             <tag name="kernel.event_listener" event="sylius.user.pre_password_reset" method="genericEventUpdater" />
             <tag name="kernel.event_listener" event="sylius.user.pre_password_change" method="genericEventUpdater" />
-            <tag name="doctrine.event_listener" event="prePersist" />
-            <tag name="doctrine.event_listener" event="preUpdate" />
+            <tag name="doctrine.event_listener" event="prePersist" lazy="true" />
+            <tag name="doctrine.event_listener" event="preUpdate" lazy="true" />
         </service>
         <service id="sylius.listener.user_mailer_listener" class="Sylius\Bundle\UserBundle\EventListener\MailerListener">
             <argument type="service" id="sylius.email_sender" />
