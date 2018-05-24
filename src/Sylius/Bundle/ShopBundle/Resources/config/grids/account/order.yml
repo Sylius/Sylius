@@ -68,7 +68,7 @@ sylius_grid:
                                     tokenValue: resource.tokenValue
                     cancel:
                         type: cancel
-                        label: Cancel
+                        label: sylius.ui.cancel
                         options:
                             link:
                                 route: sylius_shop_order_cancel

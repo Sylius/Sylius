@@ -125,6 +125,9 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function clickCancelButtonNextToTheOrder($number)
     {
         $orderData = $this->getSession()->getPage()->find('css', sprintf('tr:contains("%s")', $number));
@@ -142,6 +145,9 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $cancelButton->click();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function theOrderShouldBeCancelled($number)
     {
         $orderData = $this->getSession()->getPage()->find('css', sprintf('tr:contains("%s")', $number));

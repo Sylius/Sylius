@@ -179,6 +179,7 @@
             <argument type="service" id="sm.factory" />
             <argument type="service" id="router" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="session" />
         </service>
     </services>
 </container>

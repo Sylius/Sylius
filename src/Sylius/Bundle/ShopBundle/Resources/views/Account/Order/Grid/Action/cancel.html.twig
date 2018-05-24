@@ -4,7 +4,7 @@
     <form action="{{ path }}" method="POST">
         <button class="button ui labeled icon red" id="cancel">
             <i class="icon {{ action.options.icon|default('credit card alternative') }}" ></i>
-            {{ action.label }}
+            {{ action.label|trans }}
         </button>
     </form>
 {% endif %}

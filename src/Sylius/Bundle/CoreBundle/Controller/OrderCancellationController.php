@@ -21,6 +21,7 @@ use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class OrderCancellationController
@@ -40,18 +41,23 @@ final class OrderCancellationController
     /** @var EntityManagerInterface */
     private $entityManager;
 
+    /** @var Session */
+    private $session;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         CustomerOrderCancellationCheckerInterface $customerOrderCancellationChecker,
         StateMachineFactoryInterface $stateMachineFactory,
         UrlGeneratorInterface $urlGenerator,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        Session $session
     ) {
         $this->orderRepository = $orderRepository;
         $this->customerOrderCancellationChecker = $customerOrderCancellationChecker;
         $this->stateMachineFactory = $stateMachineFactory;
         $this->urlGenerator = $urlGenerator;
         $this->entityManager = $entityManager;
+        $this->session = $session;
     }
 
     public function cancelAction(Request $request): Response
@@ -60,7 +66,8 @@ final class OrderCancellationController
         $order = $this->orderRepository->findOneByNumber($orderNumber);
 
         if (!$this->customerOrderCancellationChecker->check($order)) {
-            return null;
+            $this->session->getFlashBag()->add('error', 'sylius.order.cancel_error');
+            return new RedirectResponse($this->urlGenerator->generate('sylius_shop_account_order_index'));
         }
 
         try {
@@ -69,12 +76,12 @@ final class OrderCancellationController
                 ->apply(OrderTransitions::TRANSITION_CANCEL)
             ;
         } catch (SMException $e) {
-            return null;
+            $this->session->getFlashBag()->add('error', 'sylius.order.cancel_error');
+            return new RedirectResponse($this->urlGenerator->generate('sylius_shop_account_order_index'));
         }
 
         $this->entityManager->flush();
 
         return new RedirectResponse($this->urlGenerator->generate('sylius_shop_account_order_index'));
     }
-
 }
