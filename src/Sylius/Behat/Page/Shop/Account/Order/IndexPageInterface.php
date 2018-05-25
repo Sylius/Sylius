@@ -39,9 +39,9 @@ interface IndexPageInterface extends SymfonyPageInterface
 
     public function openLastOrderPage();
 
-    public function isCancelButtonVisibleForOrderWithNumber($number);
+    public function isCancelButtonVisibleForOrderWithNumber(string $number): bool;
 
-    public function clickCancelButtonNextToTheOrder($number);
+    public function clickCancelButtonNextToTheOrder(string $number): void;
 
-    public function theOrderShouldBeCancelled($number);
+    public function isOrderCancelled(string $number): bool;
 }

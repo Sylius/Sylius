@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\Order;
 
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
@@ -105,59 +107,39 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isCancelButtonVisibleForOrderWithNumber($number)
+    public function isCancelButtonVisibleForOrderWithNumber(string $number): bool
     {
-        $orderData = $this->getSession()->getPage()->find('css', sprintf('tr:contains("%s")', $number));
-
-        if (null === $orderData) {
-            return false;
-        }
+        $orderData = $this->getOrderData($number);
 
         $actionButtonsText = $orderData->find('css', 'td:last-child')->getText();
 
-        if (!strpos($actionButtonsText, 'Cancel')) {
-            return false;
-        }
-
-        return true;
+        return strpos($actionButtonsText, 'Cancel');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function clickCancelButtonNextToTheOrder($number)
+    public function clickCancelButtonNextToTheOrder(string $number): void
     {
-        $orderData = $this->getSession()->getPage()->find('css', sprintf('tr:contains("%s")', $number));
+        $orderData = $this->getOrderData($number);
 
-        if (null === $orderData) {
-            throw new \Exception(sprintf('There is no order %s on the orders list', $number));
-        }
+        $cancelButton = $orderData->find('css', 'td:last-child button:contains("Cancel")');
 
-        $cancelButton = $orderData->find('css', 'td:last-child')->find('css', 'button');
-
-        if (null === $cancelButton || $cancelButton->getText() != 'Cancel') {
-            throw new \Exception(sprintf('There is no cancel button next to order %s', $number));
-        }
+        Assert::notNull($cancelButton, sprintf('There is no cancel button next to order %s', $number));
 
         $cancelButton->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function theOrderShouldBeCancelled($number)
+    public function isOrderCancelled(string $number): bool
     {
-        $orderData = $this->getSession()->getPage()->find('css', sprintf('tr:contains("%s")', $number));
+        $orderData = $this->getOrderData($number);
 
-        if (null === $orderData) {
-            throw new \Exception(sprintf('There is no order %s on the orders list', $number));
-        }
+        return $orderData->find('css', 'td:nth-child(5)')->getText() === 'Cancelled';
+    }
 
-        if ($orderData->find('css', 'td:nth-child(5)')->getText() !== 'Cancelled') {
-            throw new \Exception(sprintf('There order %s is not cancelled', $number));
-        }
+    private function getOrderData(string $orderNumber): NodeElement
+    {
+        $orderData = $this->getSession()->getPage()->find('css', sprintf('tr:contains("%s")', $orderNumber));
+
+        Assert::notNull($orderData);
+
+        return $orderData;
     }
 }

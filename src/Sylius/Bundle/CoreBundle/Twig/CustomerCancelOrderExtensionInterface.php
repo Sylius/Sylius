@@ -15,5 +15,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface CustomerCancelOrderExtensionInterface
 {
-    public function canOrderBeCancelled(OrderInterface $order);
+    public function canOrderBeCancelled(OrderInterface $order): bool;
 }

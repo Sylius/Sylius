@@ -15,10 +15,10 @@ sylius:
         set_address_as_default: 'Address has been set as default.'
     order:
         apply_state_machine_transition_error: 'There was an unexpected problem with updating an order. Please, try to update order again.'
+        cancel_error: 'There was an unexpected error when trying to cancel an order.'
         promotion_integrity: 'You are no longer eligible for this promotion %promotionName%.'
         total_integrity: 'Your order total has been changed, check your order information and confirm it again.'
         update_error: 'There was an unexpected problem with updating an order. Please, try to update order again.'
-        cancel_error: 'There was an unexpected error when trying to cancel an order.'
     payment:
         apply_state_machine_transition_error: 'There was an unexpected problem with updating a payment. Please, try to update payment again.'
     product:

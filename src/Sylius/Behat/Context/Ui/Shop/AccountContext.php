@@ -454,17 +454,9 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then I should see Cancel button next to the order :orderNumber
+     * @When I cancel the order :orderNumber
      */
-    public function iShouldSeeCancelButtonNextToTheOrder(string $orderNumber)
-    {
-        Assert::true($this->orderIndexPage->isCancelButtonVisibleForOrderWithNumber($orderNumber));
-    }
-
-    /**
-     * @When I click Cancel button next to the order :orderNumber
-     */
-    public function iClickCancelButtonNextToTheOrder(string $orderNumber)
+    public function iCancelTheOrder(string $orderNumber): void
     {
         $this->orderIndexPage->clickCancelButtonNextToTheOrder($orderNumber);
     }
@@ -472,15 +464,15 @@ final class AccountContext implements Context
     /**
      * @Then the order :orderNumber should be cancelled
      */
-    public function orderShouldBeCancelled(string $orderNumber)
+    public function orderShouldBeCancelled(string $orderNumber): void
     {
-        $this->orderIndexPage->theOrderShouldBeCancelled($orderNumber);
+        Assert::true($this->orderIndexPage->isOrderCancelled($orderNumber));
     }
 
     /**
-     * @Then the Cancel button next to the order :orderNumber should not be visible
+     * @Then it should not be possible to cancel the order :orderNumber
      */
-    public function theCancelButtonNextToTheOrderShouldNotBeVisible(string $orderNumber)
+    public function itShouldNotBePossibleToCancelTheOrder(string $orderNumber): void
     {
         Assert::false($this->orderIndexPage->isCancelButtonVisibleForOrderWithNumber($orderNumber));
     }

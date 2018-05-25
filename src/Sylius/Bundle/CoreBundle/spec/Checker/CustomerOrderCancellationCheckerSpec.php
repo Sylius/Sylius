@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -7,6 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\Checker;
 
@@ -29,31 +32,31 @@ final class CustomerOrderCancellationCheckerSpec extends ObjectBehavior
         $this->shouldImplement(CustomerOrderCancellationCheckerInterface::class);
     }
 
-    function it_checks_and_returns_true_when_order_is_unpaid_and_unshipped(OrderInterface $order): void
+    function it_returns_true_when_order_is_unpaid_and_unshipped(OrderInterface $order): void
     {
-        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_CART);
-        $order->getShippingState()->willReturn(OrderShippingStates::STATE_CART);
+        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_AWAITING_PAYMENT);
+        $order->getShippingState()->willReturn(OrderShippingStates::STATE_READY);
 
         $this->check($order)->shouldReturn(true);
     }
 
-    function it_checks_and_returns_false_when_order_is_paid_and_unshipped(OrderInterface $order): void
+    function it_returns_false_when_order_is_paid_and_unshipped(OrderInterface $order): void
     {
         $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_PAID);
-        $order->getShippingState()->willReturn(OrderShippingStates::STATE_CART);
+        $order->getShippingState()->willReturn(OrderShippingStates::STATE_READY);
 
         $this->check($order)->shouldReturn(false);
     }
 
-    function it_checks_and_returns_false_when_order_is_unpaid_and_shipped(OrderInterface $order): void
+    function it_returns_false_when_order_is_unpaid_and_shipped(OrderInterface $order): void
     {
-        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_CART);
+        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_AWAITING_PAYMENT);
         $order->getShippingState()->willReturn(OrderShippingStates::STATE_SHIPPED);
 
         $this->check($order)->shouldReturn(false);
     }
 
-    function it_checks_and_returns_false_when_order_is_paid_and_shipped(OrderInterface $order): void
+    function it_returns_false_when_order_is_paid_and_shipped(OrderInterface $order): void
     {
         $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_PAID);
         $order->getShippingState()->willReturn(OrderShippingStates::STATE_SHIPPED);

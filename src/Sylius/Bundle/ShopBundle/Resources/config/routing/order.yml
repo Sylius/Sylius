@@ -48,4 +48,4 @@ sylius_shop_order_cancel:
     path: /{orderNumber}/cancel
     methods: [POST]
     defaults:
-        _controller: sylius.controller.customer_order_cancellation:cancelAction
+        _controller: sylius.controller.customer_order_cancellation

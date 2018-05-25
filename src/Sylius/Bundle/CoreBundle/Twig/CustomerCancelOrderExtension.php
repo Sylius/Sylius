@@ -31,7 +31,7 @@ final class CustomerCancelOrderExtension extends \Twig_Extension implements Cust
         return [new \Twig_SimpleFunction('can_customer_cancel_order', [$this, 'canOrderBeCancelled'])];
     }
 
-    public function canOrderBeCancelled(OrderInterface $order)
+    public function canOrderBeCancelled(OrderInterface $order): bool
     {
         return $this->customerOrderCancellationChecker->check($order);
     }

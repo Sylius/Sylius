@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -14,9 +15,9 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use SM\SMException;
+use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\CoreBundle\Checker\CustomerOrderCancellationCheckerInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final class OrderCancellationController
+final class CustomerOrderCancellationAction
 {
     /** @var OrderRepositoryInterface */
     private $orderRepository;
@@ -60,7 +61,7 @@ final class OrderCancellationController
         $this->session = $session;
     }
 
-    public function cancelAction(Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $orderNumber = $request->attributes->get('orderNumber');
         $order = $this->orderRepository->findOneByNumber($orderNumber);

@@ -1,6 +1,6 @@
 @customer_account
-Feature: Customer cancelling unpaid and unshipped order
-    In order to mark order state as cancelled
+Feature: Cancelling unpaid and unshipped order
+    In order to resign from buying merchandise I don't want to buy
     As a Customer
     I want to be able to cancel my order when it is unpaid and unshipped
 
@@ -17,37 +17,32 @@ Feature: Customer cancelling unpaid and unshipped order
         And I chose "Free" shipping method with "Cash on Delivery" payment
 
     @ui
-    Scenario: Being able to see Cancel button when an order is unpaid and unshipped
+    Scenario: Cancelling unpaid and unshipped order
         When I browse my orders
-        Then I should see Cancel button next to the order "#00000666"
-
-    @ui
-    Scenario: Cancelling an order when it's unpaid and unshipped
-        Given I browse my orders
-        When I click Cancel button next to the order "#00000666"
+        And I cancel the order "#00000666"
         Then the order "#00000666" should be cancelled
 
     @ui
-    Scenario: Being unable to cancel an order when it's paid and unshipped
+    Scenario: Being unable to cancel paid but unshipped order
         Given the order "#00000666" is already paid
         When I browse my orders
-        Then the Cancel button next to the order "#00000666" should not be visible
+        Then it should not be possible to cancel the order "#00000666"
 
     @ui
-    Scenario: Being unable to cancel an order when it's unpaid and shipped
+    Scenario: Being unable to cancel shipped but unpaid order
         Given the order "#00000666" is already shipped
         When I browse my orders
-        Then the Cancel button next to the order "#00000666" should not be visible
+        Then it should not be possible to cancel the order "#00000666"
 
     @ui
-    Scenario: Being unable to cancel an order when it's paid and shipped
+    Scenario: Being unable to cancel paid and shipped order
         Given the order "#00000666" is already paid
         And this order has already been shipped
         When I browse my orders
-        Then the Cancel button next to the order "#00000666" should not be visible
+        Then it should not be possible to cancel the order "#00000666"
 
     @ui
     Scenario: Being unable to cancel an order when it has already been cancelled
         Given the order "#00000666" was cancelled
         When I browse my orders
-        Then the Cancel button next to the order "#00000666" should not be visible
+        Then it should not be possible to cancel the order "#00000666"

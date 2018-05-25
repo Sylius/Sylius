@@ -173,7 +173,7 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="sylius.controller.customer_order_cancellation" class="Sylius\Bundle\CoreBundle\Controller\OrderCancellationController">
+        <service id="sylius.controller.customer_order_cancellation" class="Sylius\Bundle\CoreBundle\Controller\CustomerOrderCancellationAction">
             <argument type="service" id="sylius.repository.order" />
             <argument type='service' id="sylius.customer_order_cancellation_checker" />
             <argument type="service" id="sm.factory" />

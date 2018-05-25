@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -20,12 +21,9 @@ final class CustomerOrderCancellationChecker implements CustomerOrderCancellatio
 {
     public function check(OrderInterface $order): bool
     {
-        $shippingState = $order->getShippingState();
-        $paymentState = $order->getPaymentState();
-
-        $isNotShipped = $shippingState === OrderShippingStates::STATE_CART || $shippingState === OrderShippingStates::STATE_READY;
-        $isNotPaid = $paymentState === OrderPaymentStates::STATE_CART || $paymentState === OrderPaymentStates::STATE_AWAITING_PAYMENT;
-
-        return $isNotShipped && $isNotPaid;
+        return
+            OrderPaymentStates::STATE_AWAITING_PAYMENT === $order->getPaymentState() &&
+            OrderShippingStates::STATE_READY === $order->getShippingState()
+        ;
     }
 }
