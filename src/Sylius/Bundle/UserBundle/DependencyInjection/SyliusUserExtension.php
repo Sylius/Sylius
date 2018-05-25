@@ -109,7 +109,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
                     $config['resetting']['token']['length'],
                 ]
             )
-        );
+        )->setPublic(true);
 
         $container->setDefinition(
             sprintf('sylius.%s_user.pin_generator.password_reset', $userType),
