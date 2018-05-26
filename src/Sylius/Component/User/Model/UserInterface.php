@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 
 interface UserInterface extends
     AdvancedUserInterface,
@@ -25,7 +26,8 @@ interface UserInterface extends
     ResourceInterface,
     \Serializable,
     TimestampableInterface,
-    ToggleableInterface
+    ToggleableInterface,
+    EquatableInterface
 {
     public const DEFAULT_ROLE = 'ROLE_USER';
 

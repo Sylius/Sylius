@@ -82,4 +82,30 @@ final class UserSpec extends ObjectBehavior
         $this->getEmail()->shouldReturn('admin@example.com');
         $this->getEmailCanonical()->shouldReturn('user@example.com');
     }
+
+    function it_compares_two_users(): void
+    {
+        $this->setEmail('admin@example.com');
+        $this->setPassword('ADMIN1337');
+
+        $user = new \Symfony\Component\Security\Core\User\User('admin@example.com', 'ADMIN1337');
+        $this->isEqualTo($user)->shouldReturn(false);
+
+        $user = new User();
+        $user->setEmail('admin@example.com');
+        $user->setPassword('ADMIN1337');
+        $this->isEqualTo($user)->shouldReturn(true);
+
+        $user->setEnabled(true);
+        $this->isEqualTo($user)->shouldReturn(false);
+
+        $this->setEnabled(true);
+        $this->isEqualTo($user)->shouldReturn(true);
+
+        $user->setUsername('admin-example');
+        $this->isEqualTo($user)->shouldReturn(false);
+
+        $this->setUsername('admin-example');
+        $this->isEqualTo($user)->shouldReturn(true);
+    }
 }
