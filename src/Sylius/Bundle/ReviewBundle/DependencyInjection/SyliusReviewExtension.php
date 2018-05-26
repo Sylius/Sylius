@@ -78,12 +78,15 @@ final class SyliusReviewExtension extends AbstractResourceExtension
                 ->setPublic(true)
                 ->addTag('doctrine.event_listener', [
                     'event' => 'postPersist',
+                    'lazy' => true,
                 ])
                 ->addTag('doctrine.event_listener', [
                     'event' => 'postUpdate',
+                    'lazy' => true,
                 ])
                 ->addTag('doctrine.event_listener', [
                     'event' => 'postRemove',
+                    'lazy' => true,
                 ])
             ;
 
