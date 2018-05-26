@@ -109,7 +109,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
                     $config['resetting']['token']['length'],
                 ]
             )
-        );
+        )->setPublic(true);
 
         $container->setDefinition(
             sprintf('sylius.%s_user.pin_generator.password_reset', $userType),
@@ -121,7 +121,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
                     $config['resetting']['pin']['length'],
                 ]
             )
-        );
+        )->setPublic(true);
 
         $container->setDefinition(
             sprintf('sylius.%s_user.token_generator.email_verification', $userType),
@@ -133,7 +133,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
                     $config['verification']['token']['length'],
                 ]
             )
-        );
+        )->setPublic(true);
     }
 
     /**
