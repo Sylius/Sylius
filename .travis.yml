@@ -79,11 +79,6 @@ matrix:
                 apt:
                     packages:
                         - parallel
-    allow_failures:
-        - env:
-            - SYLIUS_SUITE="application"
-            - SYMFONY_VERSION="4.0.*"
-    fast_finish: true
 
 cache:
     yarn: true
