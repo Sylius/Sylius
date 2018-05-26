@@ -53,7 +53,7 @@
 
         <service id="sylius.listener.select_product_attribute_choice_remove" class="Sylius\Bundle\ProductBundle\EventListener\SelectProductAttributeChoiceRemoveListener">
             <argument>%sylius.model.product_attribute_value.class%</argument>
-            <tag name="doctrine.event_listener" event="postUpdate" />
+            <tag name="doctrine.event_listener" event="postUpdate" lazy="true" />
         </service>
     </services>
 </container>
