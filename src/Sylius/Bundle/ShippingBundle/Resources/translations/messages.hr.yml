@@ -20,10 +20,10 @@ sylius:
             tracking_code: Kod za praćenje
         shipping_calculator:
             flat_rate_configuration:
-                label: Porez po pošiljci
+                label: Paušal po pošiljci
                 amount: Iznos
             per_unit_rate_configuration:
-                label: Porez po jedinici
+                label: Paušal po jedinici
                 amount: Iznos
         shipping_category:
             description: Opis
