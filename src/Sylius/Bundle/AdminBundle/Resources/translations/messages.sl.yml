@@ -22,7 +22,6 @@ sylius:
                     payment_methods: Načini plačila
                     shipping_categories: Kategorije dostave
                     shipping_methods: Načini dostave
-                    tax_categories: Davčne stopnje
                     tax_rates: Davčne stopnje
                     zones: Cone
                 marketing:
