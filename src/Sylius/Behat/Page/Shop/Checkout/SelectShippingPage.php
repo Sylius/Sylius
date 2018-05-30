@@ -75,7 +75,6 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return null;
     }
 
-
     /**
      * {@inheritdoc}
      */

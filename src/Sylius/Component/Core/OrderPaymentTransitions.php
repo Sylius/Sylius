@@ -18,6 +18,8 @@ final class OrderPaymentTransitions
     public const GRAPH = 'sylius_order_payment';
 
     public const TRANSITION_REQUEST_PAYMENT = 'request_payment';
+    public const TRANSITION_PARTIALLY_AUTHORIZE_PAYMENT = 'partially_authorize_payment';
+    public const TRANSITION_AUTHORIZE_PAYMENT = 'authorize_payment';
     public const TRANSITION_PARTIALLY_PAY = 'partially_pay';
     public const TRANSITION_CANCEL = 'cancel';
     public const TRANSITION_PAY = 'pay';

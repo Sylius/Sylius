@@ -17,6 +17,8 @@ final class OrderPaymentStates
 {
     public const STATE_CART = 'cart';
     public const STATE_AWAITING_PAYMENT = 'awaiting_payment';
+    public const STATE_PARTIALLY_AUTHORIZED_PAYMENT = 'partially_authorized_payment';
+    public const STATE_AUTHORIZED_PAYMENT = 'authorized_payment';
     public const STATE_PARTIALLY_PAID = 'partially_paid';
     public const STATE_CANCELLED = 'cancelled';
     public const STATE_PAID = 'paid';
