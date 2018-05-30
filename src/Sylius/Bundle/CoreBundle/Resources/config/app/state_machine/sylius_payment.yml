@@ -42,6 +42,6 @@ winzou_state_machine:
                     do: ["@sylius.order_processing.order_payment_processor.after_checkout", "process"]
                     args: ["object.getOrder()"]
                 sylius_resolve_state:
-                    on: ["complete", "refund"]
+                    on: ["complete", "refund", "authorize"]
                     do: ["@sylius.state_resolver.order_payment", "resolve"]
                     args: ["object.getOrder()"]
