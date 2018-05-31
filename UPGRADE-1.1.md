@@ -1,4 +1,4 @@
-# UPGRADE FROM 1.0 to 1.1
+# UPGRADE FROM `1.0` TO `1.1`
 
 * Scanning for `composer.json` file inside themes directories is recursive by default, which can result in slow performance
   when e.g. a `node_modules` folder is present inside a theme folder. Supply the optional `scan_depth` (integer) setting
