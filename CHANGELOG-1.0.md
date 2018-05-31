@@ -1,6 +1,6 @@
-## CHANGELOG
+# CHANGELOG
 
-### v1.0.15 2018-05-21
+## v1.0.15 (2018-05-21)
 
 - [#9334](https://github.com/Sylius/Sylius/pull/9334) Quote usage of !!int  to remove deprecation warning (@stefandoorn)
 - [#9335](https://github.com/Sylius/Sylius/pull/9335) Make sure controller services are public (@teohhanhui)
@@ -15,7 +15,7 @@
 - [#9397](https://github.com/Sylius/Sylius/pull/9397) Add missing replacements to composer.json (@jordisala1991)
 - [#9404](https://github.com/Sylius/Sylius/pull/9404) Update node-sass for compatibility with Node.js 10 (@teohhanhui)
 
-### v1.0.14 2018-04-13
+## v1.0.14 (2018-04-13)
 
 - [#9323](https://github.com/Sylius/Sylius/pull/9323) formatting content in a email message (@axzx)
 - [#9322](https://github.com/Sylius/Sylius/pull/9322) Make build passing again (@pamil)
@@ -30,7 +30,7 @@
 - [#9284](https://github.com/Sylius/Sylius/pull/9284) [Grid] Filtering orders bug (@Zales0123)
 - [#9268](https://github.com/Sylius/Sylius/pull/9268) Documentation - Use nullable return type (@Holicz)
 
-### v1.0.13 2018-04-04
+## v1.0.13 (2018-04-04)
 
 - [#9298](https://github.com/Sylius/Sylius/pull/9298) Define conflicts with incompatible dependencies versions (@pamil)
 - [#9287](https://github.com/Sylius/Sylius/pull/9287) Fix wrong CustomerInterface type in PHPDoc (@teohhanhui)
@@ -39,7 +39,7 @@
 - [#9267](https://github.com/Sylius/Sylius/pull/9267) Add PaymentMethod::instructions option to fixtures (@stefandoorn)
 - [#9269](https://github.com/Sylius/Sylius/pull/9269) Fix wrong Balrog of Morgoth name (@Zales0123)
 
-### v1.0.12 2018-03-16
+## v1.0.12 (2018-03-16)
 
 - [#9265](https://github.com/Sylius/Sylius/pull/9265) Run PHPStan in Travis CI (@pamil)
 - [#9260](https://github.com/Sylius/Sylius/pull/9260) Remove "incenteev/composer-parameter-handler" from packages dependencies (@pamil)
@@ -60,7 +60,7 @@
 - [#9211](https://github.com/Sylius/Sylius/pull/9211) Bring extra care for the documentation! (@pamil)
 - [#9181](https://github.com/Sylius/Sylius/pull/9181) Remove surprising redundant x sign from docblock (@damonsson)
 
-### v1.0.11 2018-02-26
+## v1.0.11 (2018-02-26)
 
 - [#9195](https://github.com/Sylius/Sylius/pull/9195) [Documentation][GridBundle]Wrong definition of sortable attribute (@Mipme)
 - [#9145](https://github.com/Sylius/Sylius/pull/9145) Run Travis with readonly project directories (@pamil)
@@ -70,7 +70,7 @@
 - [#9188](https://github.com/Sylius/Sylius/pull/9188) [Behat] Remove some unused methods in Behat pages (@Zales0123)
 - [#9155](https://github.com/Sylius/Sylius/pull/9155) [Documentation] Add CMS integration cookbook (@bitbager)
 
-### v1.0.10 2018-02-09
+## v1.0.10 (2018-02-09)
 
 - [#9166](https://github.com/Sylius/Sylius/pull/9166) Add required parameters to the Route generation (@GitProdEnv)
 - [#9164](https://github.com/Sylius/Sylius/pull/9164) Sylius.org becomes sylius.com (@pamil)
@@ -82,7 +82,7 @@
 - [#9149](https://github.com/Sylius/Sylius/pull/9149) Fix typo in UPGRADE file (@alcaeus)
 - [#9147](https://github.com/Sylius/Sylius/pull/9147) Remove pre-1.0 changelog entries (@pamil)
 
-### v1.0.9 2018-02-02
+## v1.0.9 (2018-02-02)
 
 - [#9144](https://github.com/Sylius/Sylius/pull/9144) Remove RFC label from stalebot's whitelist (@pamil)
 - [#9143](https://github.com/Sylius/Sylius/pull/9143) Allow nullable product variants (@pamil, @bitbager)
@@ -98,7 +98,7 @@
 - [#9125](https://github.com/Sylius/Sylius/pull/9125) Make lightbox label translatable (fixes #9099) (@stefandoorn)
 - [#9108](https://github.com/Sylius/Sylius/pull/9108) [Documentation] Update required selenium version (@lchrusciel)
 
-### v1.0.8 2018-01-12
+## v1.0.8 (2018-01-12)
 
 - [#9101](https://github.com/Sylius/Sylius/pull/9101) Fix wrong target-entity in exchange-rate entity (@alcaeus)
 - [#9097](https://github.com/Sylius/Sylius/pull/9097) Fix UI form add button issue collection in a collection (@wadjeroudi)
@@ -109,7 +109,7 @@
 - [#9085](https://github.com/Sylius/Sylius/pull/9085) Fix referenced state machine configuration path (@pamil)
 - [#9079](https://github.com/Sylius/Sylius/pull/9079) [Travis] Run a full build for tags (@pamil)
 
-### v1.0.7 2017-12-30
+## v1.0.7 (2017-12-30)
 
 - [#9075](https://github.com/Sylius/Sylius/pull/9075) Test sylius:install command on Travis (@pamil)
 - [#9071](https://github.com/Sylius/Sylius/pull/9071) Update composer.json (1.0) (@pamil)
@@ -123,7 +123,7 @@
 - [#9060](https://github.com/Sylius/Sylius/pull/9060) Remove the need for using sudo on Travis (@pamil)
 - [#9059](https://github.com/Sylius/Sylius/pull/9059) Make Travis use the most recent Chromedriver (@pamil)
 
-### v1.0.6 2017-12-22
+## v1.0.6 (2017-12-22)
 
 - [#9023](https://github.com/Sylius/Sylius/pull/9023) [Documenation] Turn off bundles fixes (@lchrusciel)
 - [#9045](https://github.com/Sylius/Sylius/pull/9045) [Grid] Fixes broken table when all item actions are disabled (@Tetragramat)
@@ -140,7 +140,7 @@
 - [#9015](https://github.com/Sylius/Sylius/pull/9015) Removing gender from documentation (@mbklnd)
 - [#9000](https://github.com/Sylius/Sylius/pull/9000) Fixed: Breadcrumbs links for Taxon and Product views (@igormukhingmailcom)
 
-### v1.0.5 2017-12-04
+## v1.0.5 (2017-12-04)
 
 - [#8996](https://github.com/Sylius/Sylius/pull/8996) Setup "Stale" probot (@pamil)
 - [#8998](https://github.com/Sylius/Sylius/pull/8998) Syntax error fix in doc code snippet (@t-geindre)
@@ -151,11 +151,11 @@
 - [#8979](https://github.com/Sylius/Sylius/pull/8979) ensure we return null rather than void in SyliusPluginTrait::getContainerExtension (@lsmith77)
 - [#8951](https://github.com/Sylius/Sylius/pull/8951) Community organization (@pamil)
 
-### v1.0.4 2017-11-17
+## v1.0.4 (2017-11-17)
 
 - [#8968](https://github.com/Sylius/Sylius/pull/8968) Security release 1.0.4 - allowing to update to Symfony 3.3.13 (@pamil)
 
-### v1.0.3 2017-11-10
+## v1.0.3 (2017-11-10)
 
 - [#8954](https://github.com/Sylius/Sylius/pull/8954) Add more accurate select jQuery selector (@PapsOu)
 - [#8952](https://github.com/Sylius/Sylius/pull/8952) Suspend PHP 7.2 support (@pamil)
@@ -163,42 +163,32 @@
 - [#8878](https://github.com/Sylius/Sylius/pull/8878) Add more accurate select jQuery selector (@PapsOu)
 - [#8924](https://github.com/Sylius/Sylius/pull/8924) Improved parse alias exception message (@william-nedbase)
 - [#8903](https://github.com/Sylius/Sylius/pull/8903) Plugin naming convention RFC implementation (closes #8848) (@stefandoorn)
-- [#8949](https://github.com/Sylius/Sylius/pull/8949) [AUTO] Updated translations from Crowdin (@SyliusBot)
 - [#8945](https://github.com/Sylius/Sylius/pull/8945) [Travis] Use Ubuntu Trusty (@castler, @pamil)
 - [#8941](https://github.com/Sylius/Sylius/pull/8941) [Documentation] Rework Cookbook organization (@CoderMaggie)
-- [#8943](https://github.com/Sylius/Sylius/pull/8943) Apply coding standard fixes (@pamil)
 - [#8933](https://github.com/Sylius/Sylius/pull/8933) [Documentation] Theme assets installing tip (@CoderMaggie)
 - [#8934](https://github.com/Sylius/Sylius/pull/8934) [Documentation] Branching strategy (@CoderMaggie)
 - [#8940](https://github.com/Sylius/Sylius/pull/8940) Change bulk action implementation and remove the need for a BC break (@pamil)
 - [#8937](https://github.com/Sylius/Sylius/pull/8937) Fix wrong use statement for ProductInterface (@stefandoorn)
-- [#8938](https://github.com/Sylius/Sylius/pull/8938) [AUTO] Updated translations from Crowdin (@SyliusBot)
 - [#8915](https://github.com/Sylius/Sylius/pull/8915) [Travis] Update Yarn to stable 1.2.1, use Node v6 (@venyii)
 - [#8931](https://github.com/Sylius/Sylius/pull/8931) [Behat] fix typo in contact context (@loic425)
 - [#8926](https://github.com/Sylius/Sylius/pull/8926) Fix: Old interface names used in product documentation (@nbjohan)
-- [#8927](https://github.com/Sylius/Sylius/pull/8927) [AUTO] Updated translations from Crowdin (@SyliusBot)
 - [#8912](https://github.com/Sylius/Sylius/pull/8912) Update UPGRADE file mentioning risky changes made between v1.0.1 and v1.0.2 releases (@pamil)
-- [#8919](https://github.com/Sylius/Sylius/pull/8919) [AUTO] Updated translations from Crowdin (@SyliusBot)
 - [#8491](https://github.com/Sylius/Sylius/pull/8491) [Admin] Mass deletion on admin grid (fixes #93) (@GSadee, @stefandoorn)
 - [#8874](https://github.com/Sylius/Sylius/pull/8874) [Order][OrderItem] Immutable product/variant names (@GSadee, @johnrisby)
 - [#8901](https://github.com/Sylius/Sylius/pull/8901) Backwards compatibility promise (@pamil)
 - [#8911](https://github.com/Sylius/Sylius/pull/8911) Change 1.0 version to 1.0.3-DEV (@pamil)
 
-### v1.0.2 2017-10-27
+## v1.0.2 (2017-10-27)
 
 - [#8908](https://github.com/Sylius/Sylius/pull/8908) Support for PHP 7.2 (@pamil)
 - [#8905](https://github.com/Sylius/Sylius/pull/8905) [Documentation] Fix form extension link (@Snake-Tn)
 - [#8876](https://github.com/Sylius/Sylius/pull/8876) Narrow typehints for models - part 1 (@pamil)
 - [#8906](https://github.com/Sylius/Sylius/pull/8906) [Documentation] Fix channel assignment example on a payment method (@GSadee, @PapsOu)
-- [#8904](https://github.com/Sylius/Sylius/pull/8904) [AUTO] Updated translations from Crowdin (@SyliusBot)
-- [#8896](https://github.com/Sylius/Sylius/pull/8896) Apply coding standard fixes (@pamil)
 - [#8895](https://github.com/Sylius/Sylius/pull/8895) Remove the remaining author docblocks (@pamil)
 - [#8766](https://github.com/Sylius/Sylius/pull/8766) [ProductAttribute] Make select attribute translatable (@GSadee, @Lowlo)
 - [#8882](https://github.com/Sylius/Sylius/pull/8882) Remove all author docblocks (@Zales0123)
-- [#8894](https://github.com/Sylius/Sylius/pull/8894) [AUTO] Updated translations from Crowdin (@SyliusBot)
 - [#8887](https://github.com/Sylius/Sylius/pull/8887) [Docs] Mention hostname configuration for multiple channels (@Zales0123)
 - [#8879](https://github.com/Sylius/Sylius/pull/8879) Change Symfony2 to Symfony (@edamov)
-- [#8872](https://github.com/Sylius/Sylius/pull/8872) [AUTO] Updated translations from Crowdin (@SyliusBot)
-- [#8871](https://github.com/Sylius/Sylius/pull/8871) Apply coding standard fixes (@pamil)
 - [#8775](https://github.com/Sylius/Sylius/pull/8775) [ProductAttribute] Fix displaying attributes depending on locales and channels (@GSadee)
 - [#8869](https://github.com/Sylius/Sylius/pull/8869) [AdminApi] Fix nullable ClientInterface return type in admin api (@venyii)
 - [#8856](https://github.com/Sylius/Sylius/pull/8856) remove send on different moment and add section links (@kochen)
@@ -208,7 +198,6 @@
 - [#8860](https://github.com/Sylius/Sylius/pull/8860) [Customer] Fix typo in serializer file (@igormukhingmailcom)
 - [#8851](https://github.com/Sylius/Sylius/pull/8851) Optimise Travis builds (@pamil)
 - [#8855](https://github.com/Sylius/Sylius/pull/8855) Do not check links while building documentation (@pamil)
-- [#8854](https://github.com/Sylius/Sylius/pull/8854) [AUTO] Updated translations from Crowdin (@SyliusBot)
 - [#8840](https://github.com/Sylius/Sylius/pull/8840) Clean the not Fulfilled Table before each collection (@nstapelbroek)
 - [#8829](https://github.com/Sylius/Sylius/pull/8829) Add missing event response. (@liverbool)
 - [#8715](https://github.com/Sylius/Sylius/pull/8715) [Documentation] Explain how to contribute using vagrant (@loicmobizel)
@@ -224,7 +213,7 @@
 - [#8825](https://github.com/Sylius/Sylius/pull/8825) [BUGFIX][Documentation] Restrict Sphinx version contraints (@CoderMaggie)
 - [#8820](https://github.com/Sylius/Sylius/pull/8820) Change 1.0 branch version to v1.0.2-DEV (@pamil)
 
-### v1.0.1 2017-10-11
+## v1.0.1 (2017-10-11)
 
 - [#8815](https://github.com/Sylius/Sylius/pull/8815) Revert "Changed CustomerChoiceType for a ResourceToIdentifierTransformer in OrderType of SyliusAdminApiBundle"
 - [#8814](https://github.com/Sylius/Sylius/pull/8814) [Documentation] Updated platform sh guide (1.0 branch backport) (@lchrusciel, @Crell)
@@ -232,14 +221,12 @@
 - [#8751](https://github.com/Sylius/Sylius/pull/8751) [ProductAttribute] Fix select product attribute choice value delete (@GSadee)
 - [#8809](https://github.com/Sylius/Sylius/pull/8809) PHPStan: initial config & first fixes (@pamil)
 - [#8812](https://github.com/Sylius/Sylius/pull/8812) [Installation] Add setting an email as username during installation (@GSadee)
-- [#8808](https://github.com/Sylius/Sylius/pull/8808) Apply coding standard fixes (@pamil)
 - [#8755](https://github.com/Sylius/Sylius/pull/8755) [Attribute] Configuration validation of text and select attributes (@GSadee)
 - [#8807](https://github.com/Sylius/Sylius/pull/8807) [Documentation] Remove outdated exchange rate info from Order docs (@venyii)
 - [#8800](https://github.com/Sylius/Sylius/pull/8800) Mention ^PHP7.1 requirement when installing Sylius (closes 8765) (@stefandoorn)
 - [#8777](https://github.com/Sylius/Sylius/pull/8777) Move user impersonated listener to shop bundle (@GSadee)
 - [#8770](https://github.com/Sylius/Sylius/pull/8770) Run security:check to actively check issues in Composer dependencies (@stefandoorn)
 - [#8804](https://github.com/Sylius/Sylius/pull/8804) [tests] Remove duplicate scenario (@juukie)
-- [#8802](https://github.com/Sylius/Sylius/pull/8802) [AUTO] Updated translations from Crowdin (@SyliusBot)
 - [#8796](https://github.com/Sylius/Sylius/pull/8796) [Documentation] Quick typo fix (@GSadee)
 - [#8790](https://github.com/Sylius/Sylius/pull/8790) [Documentation] Update docs about creating custom tax calculators (@GSadee)
 - [#8786](https://github.com/Sylius/Sylius/pull/8786) [Documentation] Update docs about creating custom shipping calculators (@GSadee)
@@ -253,7 +240,6 @@
 - [#8762](https://github.com/Sylius/Sylius/pull/8762) [Bug][Admin] Avoid deleting Product Variant when removing the associa… (@ylastapis)
 - [#8678](https://github.com/Sylius/Sylius/pull/8678) [ReviewBundle] Recalculate subject rating on review post create event (@loicmobizel)
 - [#8756](https://github.com/Sylius/Sylius/pull/8756) [Documentation] Updated platform sh guide (@lchrusciel, @Crell)
-- [#8760](https://github.com/Sylius/Sylius/pull/8760) [AUTO] Updated translations from Crowdin (@SyliusBot)
 - [#8737](https://github.com/Sylius/Sylius/pull/8737) [ProductAttribute] Fix select product attribute choice value rename (@GSadee)
 - [#8750](https://github.com/Sylius/Sylius/pull/8750) Fixed a typo in docs (@dborsatto)
 - [#8743](https://github.com/Sylius/Sylius/pull/8743) Load lazy taxon tree using a single click (@pamil)
@@ -263,7 +249,6 @@
 - [#8738](https://github.com/Sylius/Sylius/pull/8738) Make contributing easier - issues & pull requests templates (@pamil)
 - [#8741](https://github.com/Sylius/Sylius/pull/8741) Do not close sidebar when clicking outside of it (@pamil)
 - [#8740](https://github.com/Sylius/Sylius/pull/8740) Add missing license headers (@pamil)
-- [#8736](https://github.com/Sylius/Sylius/pull/8736) [AUTO] Updated translations from Crowdin (@SyliusBot)
 - [#8733](https://github.com/Sylius/Sylius/pull/8733) Adjust coding standard settings (@pamil)
 - [#8723](https://github.com/Sylius/Sylius/pull/8723) Add even more coding standard fixers (@pamil)
 - [#8729](https://github.com/Sylius/Sylius/pull/8729) [Docs] Typos in SyliusTaxationBundle (@juukie)
@@ -274,8 +259,6 @@
 - [#8713](https://github.com/Sylius/Sylius/pull/8713) Update contributing guide (@pamil)
 - [#8712](https://github.com/Sylius/Sylius/pull/8712) Partition changelog & upgrade files (@pamil)
 - [#8716](https://github.com/Sylius/Sylius/pull/8716) [Behat] Minor typo fix (@GSadee)
-- [#8710](https://github.com/Sylius/Sylius/pull/8710) [AUTO] Updated translations from Crowdin (@SyliusBot)
-- [#8709](https://github.com/Sylius/Sylius/pull/8709) [AUTO] Updated translations from Crowdin (@SyliusBot)
 - [#8664](https://github.com/Sylius/Sylius/pull/8664) [Documentation / README] Simplified installation guide (@bpolaszek)
 - [#8705](https://github.com/Sylius/Sylius/pull/8705) Fix coding standard (@pamil)
 - [#8706](https://github.com/Sylius/Sylius/pull/8706) Enhance README (@pamil)
@@ -285,7 +268,6 @@
 - [#8686](https://github.com/Sylius/Sylius/pull/8686) gitignore webserver pid files (@gabiudrescu)
 - [#8696](https://github.com/Sylius/Sylius/pull/8696) [Documentation] Syntax typo fix (@kate-kate)
 - [#8685](https://github.com/Sylius/Sylius/pull/8685) [Fixtures] Docs & tests about disabling listeners / fixtures in a suite (@pamil)
-- [#8690](https://github.com/Sylius/Sylius/pull/8690) [AUTO] Updated translations from Crowdin (@SyliusBot)
 - [#8682](https://github.com/Sylius/Sylius/pull/8682) Gitignore webserver pid files (@gabiudrescu)
 - [#8677](https://github.com/Sylius/Sylius/pull/8677) [Docs] Corrections on OrderItemQuantityModifier (@juukie)
 - [#8675](https://github.com/Sylius/Sylius/pull/8675) Treat `dev-master` as 1.1 (@pamil)
@@ -293,5 +275,4 @@
 - [#8646](https://github.com/Sylius/Sylius/pull/8646) [ResourceBundle] Fix variable name (@plozmun)
 - [#8662](https://github.com/Sylius/Sylius/pull/8662) fix link to BitBager PayUPlugin (@kochen)
 - [#8668](https://github.com/Sylius/Sylius/pull/8668) Typo's (@juukie)
-- [#8669](https://github.com/Sylius/Sylius/pull/8669) [AUTO] Updated translations from Crowdin (@SyliusBot)
 - [#8660](https://github.com/Sylius/Sylius/pull/8660) Make README great again (@pamil)
