@@ -13,7 +13,7 @@ parameters:
     mailer_user: "%env(SYLIUS_MAILER_USER)%"
     mailer_password: "%env(SYLIUS_MAILER_PASSWORD)%"
 
-    secret: "%env(SYLIUS_SECRET)"
+    secret: "%env(SYLIUS_SECRET)%"
 
     # Fallback values (used if environmental variables are not set)
     env(SYLIUS_DATABASE_DRIVER): pdo_mysql
