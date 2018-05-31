@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand;
 use Sylius\Bundle\CoreBundle\Command\SetupCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
@@ -38,7 +37,7 @@ final class InstallerContext implements Context
      * @var CommandTester
      */
     private $tester;
-    
+
     /**
      * @var SetupCommand
      */
