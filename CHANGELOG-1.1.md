@@ -1,6 +1,6 @@
-## CHANGELOG
+# CHANGELOG FOR `1.1.X`
 
-### v1.1.6 2018-05-21
+## v1.1.6 (2018-05-21)
 
 - [#9310](https://github.com/Sylius/Sylius/pull/9310) Declare a separate ImagesUploadListener service (@teohhanhui)
 - [#9328](https://github.com/Sylius/Sylius/pull/9328) Fix invalid YAML tag syntax (@teohhanhui)
@@ -19,7 +19,7 @@
 - [#9397](https://github.com/Sylius/Sylius/pull/9397) Add missing replacements to composer.json (@jordisala1991)
 - [#9404](https://github.com/Sylius/Sylius/pull/9404) Update node-sass for compatibility with Node.js 10 (@teohhanhui)
 
-### v1.1.5 2018-04-13
+## v1.1.5 (2018-04-13)
 
 - [#9323](https://github.com/Sylius/Sylius/pull/9323) formatting content in a email message (@axzx)
 - [#9322](https://github.com/Sylius/Sylius/pull/9322) Make build passing again (@pamil)
@@ -35,11 +35,11 @@
 - [#9284](https://github.com/Sylius/Sylius/pull/9284) [Grid] Filtering orders bug (@Zales0123)
 - [#9268](https://github.com/Sylius/Sylius/pull/9268) Documentation - Use nullable return type (@Holicz)
 
-### v1.1.4 2018-04-04
+## v1.1.4 (2018-04-04)
 
 - [#9301](https://github.com/Sylius/Sylius/pull/9301) HOTFIX: Do not require FidryAliceDataFixturesBundle in shared kernel (@pamil)
 
-### v1.1.3 2018-04-04
+## v1.1.3 (2018-04-04)
 
 - [#9298](https://github.com/Sylius/Sylius/pull/9298) Define conflicts with incompatible dependencies versions (@pamil)
 - [#9287](https://github.com/Sylius/Sylius/pull/9287) Fix wrong CustomerInterface type in PHPDoc (@teohhanhui)
@@ -49,7 +49,7 @@
 - [#9267](https://github.com/Sylius/Sylius/pull/9267) Add PaymentMethod::instructions option to fixtures (@stefandoorn)
 - [#9269](https://github.com/Sylius/Sylius/pull/9269) Fix wrong Balrog of Morgoth name (@Zales0123)
 
-### v1.1.2 2018-03-16
+## v1.1.2 (2018-03-16)
 
 - [#9265](https://github.com/Sylius/Sylius/pull/9265) Run PHPStan in Travis CI (@pamil)
 - [#9260](https://github.com/Sylius/Sylius/pull/9260) Remove "incenteev/composer-parameter-handler" from packages dependencies (@pamil)
@@ -71,7 +71,7 @@
 - [#9211](https://github.com/Sylius/Sylius/pull/9211) Bring extra care for the documentation! (@pamil)
 - [#9181](https://github.com/Sylius/Sylius/pull/9181) Remove surprising redundant x sign from docblock (@damonsson)
 
-### v1.1.1 2018-02-26
+## v1.1.1 (2018-02-26)
 
 - [#9195](https://github.com/Sylius/Sylius/pull/9195) [Documentation][GridBundle]Wrong definition of sortable attribute (@Mipme)
 - [#9145](https://github.com/Sylius/Sylius/pull/9145) Run Travis with readonly project directories (@pamil)
@@ -82,13 +82,13 @@
 - [#9188](https://github.com/Sylius/Sylius/pull/9188) [Behat] Remove some unused methods in Behat pages (@Zales0123)
 - [#9155](https://github.com/Sylius/Sylius/pull/9155) [Documentation] Add CMS integration cookbook (@bitbager)
 
-### v1.1.0 2018-02-09
+## v1.1.0 (2018-02-09)
 
 - [#9165](https://github.com/Sylius/Sylius/pull/9165) Make accordion in select attribute values great again (@Zales0123)
 - [#9163](https://github.com/Sylius/Sylius/pull/9163) Product reviews API semantic fix (@Zales0123)
 - [#9158](https://github.com/Sylius/Sylius/pull/9158) Update KnpGaufretteBundle to ^0.5 (@pamil)
 
-### v1.1.0-RC 2018-02-02
+## v1.1.0-RC (2018-02-02)
 
 - [#9129](https://github.com/Sylius/Sylius/pull/9129) Add symfony/thanks Composer plugin (@pamil)
 - [#9084](https://github.com/Sylius/Sylius/pull/9084) Minor enhancements to product review API pull request (@pamil)

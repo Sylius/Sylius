@@ -1,15 +1,15 @@
-# UPGRADE FROM 1.0.8 to 1.0.9
+# UPGRADE FROM `v1.0.8` TO `v1.0.9`
 
 * `Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper`'s `resolveVariant(ProductInterface $product): ProductVariantInterface`
   signature was changed to `resolveVariant(ProductInterface $product): ?ProductVariantInterface` in order to reflect 
   the real behaviour.
 
-# UPGRADE FROM 1.0.1 to 1.0.2
+# UPGRADE FROM `v1.0.1` TO `v1.0.2`
 
 * `Sylius\Bundle\AdminApiBundle\Model\ClientManager`'s `findClientByPublicId($publicId): ClientInterface` signature
   was changed to `findClientByPublicId($publicId): ?ClientInterface` in order to reflect the real behaviour.
 
-# UPGRADE FROM 1.0.0-beta.3 to 1.0.0
+# UPGRADE FROM `v1.0.0-beta.3` TO `v1.0.0`
 
 ## Application:
 
@@ -321,7 +321,7 @@
   * `UserInterface::setExpiresAt`
   * `UserInterface::setLastLogin`
 
-# UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
+# UPGRADE FROM `v1.0.0-beta.2` TO `v1.0.0-beta.3`
 
 ## Packages:
 
@@ -403,7 +403,7 @@
   * from `SyliusCoreBundle/Resources/config/serializer/Model.TaxRate.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.TaxRate.yml`
   * from `SyliusCoreBundle/Resources/config/serializer/Model.Taxon.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Taxon.yml`
 
-# UPGRADE FROM 1.0.0-beta.1 to 1.0.0-beta.2
+# UPGRADE FROM `v1.0.0-beta.1` TO `v1.0.0-beta.2`
 
 * Bundles, container extensions and bundles configurations were made final and can't be extended anymore, follow Symfony
   best practices and do not extend them.
