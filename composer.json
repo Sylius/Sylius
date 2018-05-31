@@ -204,7 +204,7 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": {
-            "dev-master": "1.2-dev"
+            "dev-master": "1.3-dev"
         }
     }
 }
