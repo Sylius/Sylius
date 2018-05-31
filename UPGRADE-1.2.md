@@ -1,4 +1,4 @@
-# UPGRADE FROM 1.1 to 1.2
+# UPGRADE FROM `v1.1.X` TO `v1.2.0`
 
 * __BC BREAK:__ `Sylius\Bundle\UserBundle\Controller\UserController`'s method `addFlash` has been renamed to
   `addTranslatedFlash` with added scalar typehints for compatibility with both Symfony 3.4 and Symfony 4.0.

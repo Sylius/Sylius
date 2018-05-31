@@ -1,6 +1,6 @@
-## Change Log
+# CHANGELOG FOR `1.2.X`
 
-### v1.2.0-BETA 2018-05-28
+## v1.2.0-BETA (2018-05-28)
 
 *TL;DR:* Symfony 4 support.
 
