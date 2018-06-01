@@ -13,20 +13,31 @@ declare(strict_types=1);
 
 namespace AppBundle\Factory;
 
+use AppBundle\Entity\Book;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+
 final class CustomBookFactory
 {
+    /** @var string */
     private $className;
 
-    /**
-     * @param $className
-     */
-    public function __construct($className)
+    /** @var TranslationLocaleProviderInterface */
+    private $localeProvider;
+
+    public function __construct(string $className, TranslationLocaleProviderInterface $localeProvider)
     {
         $this->className = $className;
+        $this->localeProvider = $localeProvider;
     }
 
-    public function createCustom()
+    public function createCustom(): Book
     {
-        return new $this->className;
+        /** @var Book $book */
+        $book = new $this->className;
+
+        $book->setCurrentLocale($this->localeProvider->getDefaultLocaleCode());
+        $book->setFallbackLocale($this->localeProvider->getDefaultLocaleCode());
+
+        return $book;
     }
 }

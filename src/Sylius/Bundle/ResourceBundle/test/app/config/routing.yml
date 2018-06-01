@@ -30,4 +30,4 @@ app_create_book_with_custom_factory:
         _controller: app.controller.book:createAction
         _sylius:
             factory:
-                method: ["expr:service('test.custom_book_factory')", "createNew"]
+                method: ["expr:service('test.custom_book_factory')", "createCustom"]
