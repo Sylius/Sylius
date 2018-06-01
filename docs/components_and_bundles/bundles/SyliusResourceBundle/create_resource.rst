@@ -128,7 +128,7 @@ Additionally, if you want to provide your custom method with arguments from the 
 With this configuration, ``$factory->createNewWithAuthor($request->get('author'))`` will be called to create new resource within the ``createAction``.
 
 Using Custom Factory Service
----------------------------
+----------------------------
 
 If you would like to use your own service to create the resource, then try the following configuration:
 
