@@ -1,18 +1,11 @@
 import chug from 'gulp-chug';
 import gulp from 'gulp';
-import upath from 'path';
 import yargs from 'yargs';
 
 const { argv } = yargs
   .options({
     rootPath: {
       description: '<path> path to web assets directory',
-      type: 'string',
-      requiresArg: true,
-      required: false,
-    },
-    vendorPath: {
-      description: '<path> path to vendor directory',
       type: 'string',
       requiresArg: true,
       required: false,
@@ -28,10 +21,6 @@ const { argv } = yargs
 const config = [
   '--rootPath',
   argv.rootPath || '../../../../web/assets',
-  ...(argv.vendorPath ? [
-    '--vendorPath',
-    upath.joinSafe(argv.vendorPath, 'sylius/sylius/src/Sylius/Bundle'),
-  ] : []),
   '--nodeModulesPath',
   argv.nodeModulesPath || '../../../../node_modules',
 ];
