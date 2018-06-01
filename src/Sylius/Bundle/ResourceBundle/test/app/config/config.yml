@@ -48,3 +48,10 @@ services:
         arguments:
             - ["pl_PL", "en_US", "de_DE"]
             - "en_US"
+
+    test.custom_book_factory:
+        class: AppBundle\Factory\CustomBookFactory
+        public: true
+        arguments:
+            - "%app.model.book.class%"
+            - "@test.translation_locale_provider"
