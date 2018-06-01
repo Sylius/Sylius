@@ -143,7 +143,7 @@ If you would like to use your own service to create the resource, then try the f
             _controller: app.controller.book:createAction
             _sylius:
                 factory:
-                    method: ["@app.factory.custom_book_factory", "createNewByAuthorId"]
+                    method: ["expr:service('app.factory.custom_book_factory')", "createNewByAuthorId"]
                     arguments: $authorId
 
 

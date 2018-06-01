@@ -25,9 +25,9 @@ app_versioned_book:
 
 app_create_book_with_custom_factory:
     path: /books/create-custom
-    method: [POST]
+    methods: [POST]
     defaults:
         _controller: app.controller.book:createAction
         _sylius:
             factory:
-                method: ["@test.custom_book_factory", "createNew"]
+                method: ["expr:service('test.custom_book_factory')", "createNew"]

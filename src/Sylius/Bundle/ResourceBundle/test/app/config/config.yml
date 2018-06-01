@@ -50,6 +50,7 @@ services:
             - "en_US"
 
     test.custom_book_factory:
-        class: Sylius\Component\Resource\Factory\Factory
+        class: AppBundle\Factory\CustomBookFactory
+        public: true
         arguments:
             - "%app.model.book.class%"
