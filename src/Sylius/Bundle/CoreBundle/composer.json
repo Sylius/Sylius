@@ -49,7 +49,7 @@
         "sylius/theme-bundle": "^1.2",
         "sylius/user-bundle": "^1.2",
         "sylius-labs/association-hydrator": "^1.1",
-        "symfony/framework-bundle": "^3.4|^4.0",
+        "symfony/framework-bundle": "^3.4|^4.1",
         "winzou/state-machine-bundle": "^0.3",
         "liip/imagine-bundle": "^2.0"
     },
@@ -59,7 +59,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
-        "symfony/dependency-injection": "^3.4|^4.0"
+        "symfony/dependency-injection": "^3.4|^4.1"
     },
     "conflict": {
         "twig/twig": "^1.0"
