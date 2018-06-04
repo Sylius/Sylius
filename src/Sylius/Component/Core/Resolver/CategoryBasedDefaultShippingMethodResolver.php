@@ -11,7 +11,11 @@
 
 namespace Sylius\Component\Core\Resolver;
 
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface as CoreShipmentInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
@@ -34,15 +38,23 @@ final class CategoryBasedDefaultShippingMethodResolver implements DefaultShippin
     private $shippingMethodEligibilityChecker;
 
     /**
+     * @var ZoneMatcherInterface
+     */
+    private $zoneMatcher;
+
+    /**
      * @param ShippingMethodRepositoryInterface $shippingMethodRepository
      * @param ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker
+     * @param ZoneMatcherInterface $zoneMatcher
      */
     public function __construct(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker
+        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
+        ?ZoneMatcherInterface $zoneMatcher
     ) {
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->shippingMethodEligibilityChecker = $shippingMethodEligibilityChecker;
+        $this->zoneMatcher = $zoneMatcher;
     }
 
     /**
@@ -53,10 +65,12 @@ final class CategoryBasedDefaultShippingMethodResolver implements DefaultShippin
         /** @var CoreShipmentInterface $shipment */
         Assert::isInstanceOf($shipment, CoreShipmentInterface::class);
 
+        /** @var OrderInterface $order */
+        $order = $shipment->getOrder();
         /** @var ChannelInterface $channel */
-        $channel = $shipment->getOrder()->getChannel();
+        $channel = $order->getChannel();
 
-        $shippingMethods = $this->shippingMethodRepository->findEnabledForChannel($channel);
+        $shippingMethods = $this->getShippingMethods($channel, $order->getShippingAddress());
 
         foreach ($shippingMethods as $key => $shippingMethod) {
             if ($this->shippingMethodEligibilityChecker->isEligible($shipment, $shippingMethod)) {
@@ -65,5 +79,23 @@ final class CategoryBasedDefaultShippingMethodResolver implements DefaultShippin
         }
 
         throw new UnresolvedDefaultShippingMethodException();
+    }
+
+    /**
+     * @param ChannelInterface $channel
+     * @param AddressInterface|null $address
+     *
+     * @return array|ShippingMethodInterface[]
+     */
+    private function getShippingMethods(ChannelInterface $channel, ?AddressInterface $address): array
+    {
+        if (null === $address) {
+            return $this->shippingMethodRepository->findEnabledForChannel($channel);
+        }
+
+        /** @var ZoneInterface[] $zones */
+        $zones = $this->zoneMatcher->matchAll($address);
+
+        return $this->shippingMethodRepository->findEnabledForZonesAndChannel($zones, $channel);
     }
 }

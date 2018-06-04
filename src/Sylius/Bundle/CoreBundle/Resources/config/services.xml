@@ -76,6 +76,7 @@
         <service id="sylius.shipping_method_resolver.category_based" class="Sylius\Component\Core\Resolver\CategoryBasedDefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.shipping_eligibility_checker" />
+            <argument type="service" id="sylius.zone_matcher" />
         </service>
         <service id="sylius.updater.order.exchange_rate" class="Sylius\Component\Core\Updater\OrderExchangeRateUpdater">
             <argument type="service" id="sylius.repository.currency" />
