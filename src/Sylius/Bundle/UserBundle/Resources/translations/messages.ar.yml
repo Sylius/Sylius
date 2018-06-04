@@ -7,7 +7,6 @@ sylius:
             email: البريد الإلكتروني
             enabled: تفعيل
             password:
-                label: كلمة السر
                 confirmation: تأكد
             remember_me: تذكرني
             shipping_address: عنوان الشحن

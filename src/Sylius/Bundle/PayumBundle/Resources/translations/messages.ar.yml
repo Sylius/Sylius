@@ -7,7 +7,6 @@ sylius:
             type: نوع
         gateway_configuration:
             paypal:
-                password: كلمة السر
                 signature: التوقيع
                 username: اسم المستخدم
                 sandbox: ساند بوكس

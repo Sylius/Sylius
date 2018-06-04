@@ -87,7 +87,7 @@ final class AddressType extends AbstractResourceType
             ->setDefaults([
                 'validation_groups' => function (Options $options) {
                     if ($options['shippable']) {
-                        $this->validationGroups[] = 'shippable';
+                        return array_merge($this->validationGroups, ['shippable']);
                     }
 
                     return $this->validationGroups;

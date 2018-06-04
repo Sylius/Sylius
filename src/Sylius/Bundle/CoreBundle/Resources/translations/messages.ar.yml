@@ -100,7 +100,6 @@ sylius:
             groups: المجموعات
             roles: الأدوار
             last_name: اسم العائلة
-            password: كلمة السر
             shipping_address: عنوان الشحن
         user_filter:
             query: بحث
