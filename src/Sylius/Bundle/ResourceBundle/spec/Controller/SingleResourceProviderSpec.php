@@ -157,4 +157,18 @@ final class SingleResourceProviderSpec extends ObjectBehavior
 
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
+
+    function it_uses_a_custom_repository_if_configured(
+        RequestConfiguration $requestConfiguration,
+        RepositoryInterface $repository,
+        RepositoryInterface $customRepository,
+        ResourceInterface $resource
+    ): void {
+        $requestConfiguration->getRepositoryMethod()->willReturn([$customRepository, 'findAll']);
+        $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
+
+        $customRepository->findAll('foo')->willReturn($resource);
+
+        $this->get($requestConfiguration, $repository)->shouldReturn($resource);
+    }
 }

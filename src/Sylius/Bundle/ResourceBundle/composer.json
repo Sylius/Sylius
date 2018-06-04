@@ -47,7 +47,7 @@
         "doctrine/orm": "^2.5",
         "doctrine/phpcr-odm": "^1.4",
         "jackalope/jackalope-doctrine-dbal": "^1.2",
-        "lakion/api-test-case": "^3.0",
+        "lakion/api-test-case": "^3.1.1",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
