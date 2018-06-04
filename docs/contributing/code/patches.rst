@@ -332,7 +332,7 @@ or
 
 .. note::
 
-    When doing a ``push --force-wth-lease``, always specify the branch name explicitly
+    When doing a ``push --force-with-lease``, always specify the branch name explicitly
     to avoid messing other branches in the repo (``--force-with-lease`` tells Git that
     you really want to mess with things so do it carefully).
 
