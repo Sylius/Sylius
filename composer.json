@@ -83,7 +83,7 @@
         "friends-of-behat/symfony-extension": "^1.2.1",
         "friends-of-behat/variadic-extension": "^1.1",
         "hwi/oauth-bundle": "^0.6",
-        "lakion/api-test-case": "^3.1.1",
+        "lakion/api-test-case": "^3.1.0",
         "lakion/mink-debug-extension": "^1.2.3",
         "matthiasnoback/symfony-config-test": "^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
