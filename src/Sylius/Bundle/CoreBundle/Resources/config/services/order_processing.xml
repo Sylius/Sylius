@@ -28,7 +28,7 @@
         </service>
 
         <service id="sylius.order_processing.order_shipment_processor" class="Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor">
-            <argument type="service" id="sylius.shipping_method_resolver.category_based" />
+            <argument type="service" id="sylius.shipping_method_resolver.default" />
             <argument type="service" id="sylius.factory.shipment" />
             <argument type="service" id="sylius.shipping_methods_resolver" />
             <tag name="sylius.order_processor" priority="50"/>

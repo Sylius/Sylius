@@ -25,6 +25,8 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
+@trigger_error('This class is deprecated since Sylius 1.2 and will be removed in 2.0. "Sylius\Component\Core\Resolver\CategoryBasedDefaultShippingMethodResolver" should be used instead.', E_USER_DEPRECATED);
+
 class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
 {
     /**
@@ -33,27 +35,20 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
     private $shippingMethodRepository;
 
     /**
-     * @var ZoneMatcherInterface|null
+     * @var ZoneMatcherInterface
      */
     private $zoneMatcher;
 
     /**
      * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-     * @param ZoneMatcherInterface|null $zoneMatcher
+     * @param ZoneMatcherInterface $zoneMatcher
      */
     public function __construct(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ?ZoneMatcherInterface $zoneMatcher = null
+        ZoneMatcherInterface $zoneMatcher
     ) {
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->zoneMatcher = $zoneMatcher;
-
-        if (1 === func_num_args() || null === $zoneMatcher) {
-            @trigger_error(
-                'Not passing ZoneMatcherInterface explicitly is deprecated since 1.2 and will be prohibited in 2.0',
-                E_USER_DEPRECATED
-            );
-        }
     }
 
     /**
@@ -87,7 +82,7 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
      */
     private function getShippingMethods(ChannelInterface $channel, ?AddressInterface $address): array
     {
-        if (null === $address || null === $this->zoneMatcher) {
+        if (null === $address) {
             return $this->shippingMethodRepository->findEnabledForChannel($channel);
         }
 

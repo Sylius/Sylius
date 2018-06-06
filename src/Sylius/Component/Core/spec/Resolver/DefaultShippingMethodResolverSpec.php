@@ -65,30 +65,6 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         $this->getDefaultShippingMethod($shipment)->shouldReturn($firstShippingMethod);
     }
 
-    function it_returns_first_enabled_shipping_method_from_shipment_order_channel_if_zone_matcher_is_not_used(
-        AddressInterface $shippingAddress,
-        ChannelInterface $channel,
-        OrderInterface $order,
-        ShipmentInterface $shipment,
-        ShippingMethodInterface $firstShippingMethod,
-        ShippingMethodInterface $secondShippingMethod,
-        ShippingMethodRepositoryInterface $shippingMethodRepository
-    ): void {
-        $this->beConstructedWith($shippingMethodRepository);
-
-        $shipment->getOrder()->willReturn($order);
-
-        $order->getChannel()->willReturn($channel);
-        $order->getShippingAddress()->willReturn($shippingAddress);
-
-        $shippingMethodRepository
-            ->findEnabledForChannel($channel)
-            ->willReturn([$firstShippingMethod, $secondShippingMethod])
-        ;
-
-        $this->getDefaultShippingMethod($shipment)->shouldReturn($firstShippingMethod);
-    }
-
     function it_returns_first_enabled_shipping_method_matched_by_order_channel_and_shipping_address_zone(
         AddressInterface $shippingAddress,
         ChannelInterface $channel,

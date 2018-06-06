@@ -10,4 +10,4 @@
   If you depend on the feature in your application, you will need to make the necessary changes. Refer to
   https://github.com/sonata-project/SonataCoreBundle/pull/462 for more information. 
 
-* Service with id `sylius.shipping_method_resolver.default` has been deprecated and will be removed in 2.0. `sylius.shipping_method_resolver.category_based` should be used instead.
+* Class `Sylius\Component\Core\Resolver\DefaultShippingMethodResolver` has been deprecated and will be removed in 2.0. `Sylius\Component\Core\Resolver\CategoryBasedDefaultShippingMethodResolver` should be used instead.
