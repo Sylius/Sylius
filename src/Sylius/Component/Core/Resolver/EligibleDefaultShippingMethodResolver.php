@@ -25,7 +25,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
-final class CategoryBasedDefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
+final class EligibleDefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
 {
     /**
      * @var ShippingMethodRepositoryInterface
@@ -50,7 +50,7 @@ final class CategoryBasedDefaultShippingMethodResolver implements DefaultShippin
     public function __construct(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
-        ?ZoneMatcherInterface $zoneMatcher
+        ZoneMatcherInterface $zoneMatcher
     ) {
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->shippingMethodEligibilityChecker = $shippingMethodEligibilityChecker;

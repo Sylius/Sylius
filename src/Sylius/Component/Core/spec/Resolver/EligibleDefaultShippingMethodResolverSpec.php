@@ -25,7 +25,7 @@ use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
-final class CategoryBasedDefaultShippingMethodResolverSpec extends ObjectBehavior
+final class EligibleDefaultShippingMethodResolverSpec extends ObjectBehavior
 {
     function let(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
