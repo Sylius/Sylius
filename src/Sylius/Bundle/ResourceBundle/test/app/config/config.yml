@@ -55,3 +55,9 @@ services:
         arguments:
             - "%app.model.book.class%"
             - "@test.translation_locale_provider"
+
+    test.custom_book_repository:
+        class: AppBundle\Repository\CustomBookRepository
+        public: true
+        arguments:
+            - "@app.repository.book"

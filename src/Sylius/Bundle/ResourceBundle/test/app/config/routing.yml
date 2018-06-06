@@ -31,3 +31,22 @@ app_create_book_with_custom_factory:
         _sylius:
             factory:
                 method: ["expr:service('test.custom_book_factory')", "createCustom"]
+
+app_index_books_with_custom_repository:
+    path: /find-custom-books
+    methods: [GET]
+    defaults:
+        _controller: app.controller.book:indexAction
+        _sylius:
+            repository:
+                method: ["expr:service('test.custom_book_repository')", "findCustomBooks"]
+
+app_show_book_with_custom_repository:
+    path: /find-custom-book
+    methods: [GET]
+    defaults:
+        _controller: app.controller.book:showAction
+        _sylius:
+            repository:
+                method: ["expr:service('test.custom_book_repository')", "findCustomBook"]
+                arguments: ["J.R.R. Tolkien"]
