@@ -102,3 +102,5 @@ sylius_admin_promotion_coupon_delete:
             section: admin
             redirect: referer
             permission: true
+    requirements:
+        id: '\d+'
