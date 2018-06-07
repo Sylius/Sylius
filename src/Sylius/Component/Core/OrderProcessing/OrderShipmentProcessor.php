@@ -129,6 +129,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             }
         }
     }
+
     /**
      * @param OrderInterface $order
      *

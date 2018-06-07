@@ -14,10 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
-use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;

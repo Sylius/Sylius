@@ -33,7 +33,7 @@ final class CustomBookFactory
     public function createCustom(): Book
     {
         /** @var Book $book */
-        $book = new $this->className;
+        $book = new $this->className();
 
         $book->setCurrentLocale($this->localeProvider->getDefaultLocaleCode());
         $book->setFallbackLocale($this->localeProvider->getDefaultLocaleCode());
