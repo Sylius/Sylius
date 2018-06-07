@@ -146,6 +146,9 @@ in mind the following:
 * Never fix coding standards in some existing code as it makes the code review
   more difficult (submit CS fixes as a separate patch);
 
+* In addition to this "code" pull request, you must also update the documentation when appropriate.
+  See more in :doc:`contributing documentation </contributing/documentation/overview>` section.
+
 * Write good commit messages (see the tip below).
 
 .. tip::
@@ -308,9 +311,6 @@ changes (don't hesitate to give code examples to illustrate your points). If
 your pull request is about adding a new feature or modifying an existing one,
 explain the rationale for the changes. The pull request description helps the
 code review.
-
-In addition to this "code" pull request, you must also send a pull request to
-the `documentation repository`_ to update the documentation when appropriate.
 
 Rework your Patch
 ~~~~~~~~~~~~~~~~~
