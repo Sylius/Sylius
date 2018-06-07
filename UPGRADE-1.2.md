@@ -8,4 +8,5 @@
 
 * The deprecated form mapping feature in SonataCoreBundle has been disabled in the app configuration included from SyliusCoreBundle.
   If you depend on the feature in your application, you will need to make the necessary changes. Refer to
-  https://github.com/sonata-project/SonataCoreBundle/pull/462 for more information. 
+  https://github.com/sonata-project/SonataCoreBundle/pull/462 for more information.
+* liip/imagine-bundle has been upgraded to ^2.0, which contains BCs from previous ^1.9.1 version. Please read their upgrade guide https://github.com/liip/LiipImagineBundle/blob/2.0/UPGRADE.md.
