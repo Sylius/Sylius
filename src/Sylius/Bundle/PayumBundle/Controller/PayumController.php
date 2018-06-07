@@ -69,7 +69,7 @@ final class PayumController
     private $getStatusRequestFactory;
 
     /** @var ResolveNextRouteFactoryInterface */
-    private $resolveNextRouteRequestFacotry;
+    private $resolveNextRouteRequestFactory;
 
     public function __construct(
         Payum $payum,
@@ -88,7 +88,7 @@ final class PayumController
         $this->viewHandler = $viewHandler;
         $this->router = $router;
         $this->getStatusRequestFactory = $getStatusFactory;
-        $this->resolveNextRouteRequestFacotry = $resolveNextRouteFactory;
+        $this->resolveNextRouteRequestFactory = $resolveNextRouteFactory;
     }
 
     public function prepareCaptureAction(Request $request, $tokenValue): Response
@@ -126,7 +126,7 @@ final class PayumController
 
         $status = $this->getStatusRequestFactory->createNewWithModel($token);
         $this->payum->getGateway($token->getGatewayName())->execute($status);
-        $resolveNextRoute = $this->resolveNextRouteRequestFacotry->createNewWithModel($status->getFirstModel());
+        $resolveNextRoute = $this->resolveNextRouteRequestFactory->createNewWithModel($status->getFirstModel());
         $this->payum->getGateway($token->getGatewayName())->execute($resolveNextRoute);
 
         $this->getHttpRequestVerifier()->invalidate($token);
