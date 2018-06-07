@@ -68,15 +68,9 @@
         <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\DefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
         </service>
-        <service id="sylius.updater.order.exchange_rate" class="Sylius\Component\Core\Updater\OrderExchangeRateUpdater">
-            <argument type="service" id="sylius.repository.currency" />
-        </service>
         <service id="sylius.context.customer" class="Sylius\Bundle\CoreBundle\Context\CustomerContext">
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.authorization_checker" />
-        </service>
-        <service id="sylius.form.event_subscriber.set_customer" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\SetCustomerFormSubscriber">
-            <argument type="service" id="sylius.repository.customer" />
         </service>
         <service id="sylius.inventory.order_inventory_operator" class="Sylius\Component\Core\Inventory\Operator\OrderInventoryOperator"/>
         <service id="sylius.custom_inventory.order_inventory_operator" class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator\OrderInventoryOperator" decorates="sylius.inventory.order_inventory_operator" public="false">
