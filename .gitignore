@@ -20,6 +20,7 @@
 !/bin/fix-coding-standards
 !/bin/install-package
 !/bin/install-packages
+!/bin/require-symfony-version
 !/bin/symfony_requirements
 !/bin/test-package
 !/bin/test-packages

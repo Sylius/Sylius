@@ -470,6 +470,7 @@ sylius:
         manage_your_saved_addresses: 'Gérer vos adresses enregistrées'
         manage_zones: 'Gérer les zones'
         marketing: 'Marketing'
+        bulk_actions: 'Actions groupées'
         media: 'Media'
         members: 'Membres'
         menu_nodes: 'Nœuds de menu'

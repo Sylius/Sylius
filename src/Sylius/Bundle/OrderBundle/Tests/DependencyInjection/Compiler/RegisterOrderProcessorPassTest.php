@@ -31,7 +31,7 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
     public function it_adds_method_call_to_composite_order_processor_if_exist(): void
     {
         $compositeOrderProcessorDefinition = new Definition(CompositeOrderProcessor::class);
-        $this->setDefinition('sylius.order_processing.order_processor', $compositeOrderProcessorDefinition);
+        $this->setDefinition('sylius.order_processing.order_processor.composite', $compositeOrderProcessorDefinition);
 
         $orderAdjustmentClearerDefinition = new Definition(OrderAdjustmentsClearer::class);
         $orderAdjustmentClearerDefinition->addTag('sylius.order_processor');
@@ -55,7 +55,7 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
     public function it_adds_method_call_to_composite_order_processor_with_custom_priority(): void
     {
         $compositeOrderProcessorDefinition = new Definition(CompositeOrderProcessor::class);
-        $this->setDefinition('sylius.order_processing.order_processor', $compositeOrderProcessorDefinition);
+        $this->setDefinition('sylius.order_processing.order_processor.composite', $compositeOrderProcessorDefinition);
 
         $orderAdjustmentClearerDefinition = new Definition(OrderAdjustmentsClearer::class);
         $orderAdjustmentClearerDefinition->addTag('sylius.order_processor', ['priority' => 10]);

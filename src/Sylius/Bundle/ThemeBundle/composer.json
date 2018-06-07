@@ -23,7 +23,7 @@
         "php": "^7.1",
 
         "doctrine/common": "^2.5",
-        "symfony/symfony": "^3.2",
+        "symfony/symfony": "^3.4|^4.1",
         "zendframework/zend-hydrator": "^2.2"
     },
     "require-dev": {
@@ -32,10 +32,10 @@
         "mikey179/vfsStream": "^1.6",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
-        "sylius/registry": "^1.0",
+        "sylius/registry": "^1.2",
         "twig/twig": "^2.0",
-        "symfony/dependency-injection": "^3.2",
-        "symfony/twig-bundle": "^3.2"
+        "symfony/dependency-injection": "^3.4|^4.1",
+        "symfony/twig-bundle": "^3.4|^4.1"
     },
     "conflict": {
         "twig/twig": "^1.0"
@@ -71,7 +71,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
@@ -55,6 +56,23 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         }
 
         return $shippingMethods;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSelectedShippingMethodName(): ?string
+    {
+        $shippingMethods = $this->getSession()->getPage()->findAll('css', '#sylius-shipping-methods .item');
+
+        /** @var NodeElement $shippingMethod */
+        foreach ($shippingMethods as $shippingMethod) {
+            if (null !== $shippingMethod->find('css', 'input:checked')) {
+                return $shippingMethod->find('css', '.content label')->getText();
+            }
+        }
+
+        return null;
     }
 
     /**

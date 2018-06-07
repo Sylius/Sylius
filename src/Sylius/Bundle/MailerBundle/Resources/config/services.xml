@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.factory.email" class="Sylius\Component\Mailer\Factory\EmailFactory" />
 
         <service id="sylius.email_provider" class="Sylius\Component\Mailer\Provider\EmailProvider">
@@ -36,7 +38,8 @@
                 <argument type="service" id="event_dispatcher" />
             </call>
         </service>
-        <service id="sylius.email_renderer.adapter.twig" class="Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailTwigAdapter" parent="sylius.email_renderer.adapter.abstract">
+        <service id="sylius.email_renderer.adapter.twig" class="Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailTwigAdapter"
+                 parent="sylius.email_renderer.adapter.abstract" public="true">
             <argument type="service" id="twig" />
         </service>
 
@@ -45,7 +48,8 @@
                 <argument type="service" id="event_dispatcher" />
             </call>
         </service>
-        <service id="sylius.email_sender.adapter.swiftmailer" class="Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter" parent="sylius.email_sender.adapter.abstract">
+        <service id="sylius.email_sender.adapter.swiftmailer" class="Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter"
+                 parent="sylius.email_sender.adapter.abstract" public="true">
             <argument type="service" id="mailer" />
         </service>
     </services>

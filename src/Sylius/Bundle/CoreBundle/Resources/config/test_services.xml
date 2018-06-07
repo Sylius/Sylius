@@ -16,6 +16,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <!--Paypal-->
         <service id="sylius.invoice_number_generator" class="Sylius\Component\Core\Payment\RandomInvoiceNumberGenerator" />
 

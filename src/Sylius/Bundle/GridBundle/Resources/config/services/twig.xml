@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.grid.renderer.twig" class="Sylius\Bundle\GridBundle\Renderer\TwigGridRenderer">
             <argument type="service" id="twig" />
             <argument type="service" id="sylius.registry.grid_field" />
@@ -22,8 +24,22 @@
             <argument>%sylius.grid.templates.action%</argument>
             <argument>%sylius.grid.templates.filter%</argument>
         </service>
+
+        <service id="sylius.grid.bulk_action_renderer.twig" class="Sylius\Bundle\GridBundle\Renderer\TwigBulkActionGridRenderer">
+            <argument type="service" id="twig" />
+            <argument>%sylius.grid.templates.bulk_action%</argument>
+        </service>
+
         <service id="sylius.twig.extension.grid" class="Sylius\Bundle\GridBundle\Twig\GridExtension" public="false">
             <argument type="service" id="sylius.templating.helper.grid" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius.twig.extension.bulk_action_grid"
+                 class="Sylius\Bundle\GridBundle\Twig\BulkActionGridExtension"
+                 public="false"
+        >
+            <argument type="service" id="sylius.templating.helper.bulk_action_grid" />
             <tag name="twig.extension" />
         </service>
     </services>

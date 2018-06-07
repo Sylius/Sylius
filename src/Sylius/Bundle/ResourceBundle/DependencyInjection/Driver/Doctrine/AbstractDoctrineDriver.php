@@ -46,7 +46,7 @@ abstract class AbstractDoctrineDriver extends AbstractDriver
     {
         $container->setAlias(
             $metadata->getServiceId('manager'),
-            new Alias($this->getManagerServiceId($metadata))
+            new Alias($this->getManagerServiceId($metadata), true)
         );
     }
 

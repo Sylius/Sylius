@@ -15,9 +15,11 @@ require_once __DIR__.'/AppKernel.php';
 
 use ProxyManager\Proxy\VirtualProxyInterface;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class TestAppKernel extends AppKernel
+class TestAppKernel extends AppKernel implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -37,6 +39,20 @@ class TestAppKernel extends AppKernel
         $container = $this->getContainer();
         parent::shutdown();
         $this->cleanupContainer($container);
+    }
+
+    /**
+     * Hotfix for https://github.com/symfony/symfony/issues/27494
+     *
+     * @internal
+     */
+    public function process(ContainerBuilder $container): void
+    {
+        $clientDefinition = $container->findDefinition('test.client');
+
+        if (count($clientDefinition->getArguments()) >= 5) {
+            $clientDefinition->replaceArgument(4, null);
+        }
     }
 
     /**

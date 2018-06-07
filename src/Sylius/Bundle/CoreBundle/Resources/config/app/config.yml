@@ -38,7 +38,7 @@ knp_gaufrette:
     adapters:
         sylius_image:
             local:
-                directory: "%kernel.root_dir%/../web/media/image"
+                directory: "%kernel.project_dir%/web/media/image"
                 create: true
     filesystems:
         sylius_image:
@@ -48,7 +48,7 @@ liip_imagine:
     loaders:
         default:
             filesystem:
-                data_root: "%kernel.root_dir%/../web/media/image"
+                data_root: "%kernel.project_dir%/web/media/image"
     filter_sets:
         sylius_small:
             filters:
@@ -93,6 +93,8 @@ twig:
     globals:
         sylius: "@sylius.context.shopper"
         sylius_base_locale: "%locale%"
+        sylius_meta:
+            version: !php/const Sylius\Bundle\CoreBundle\Application\Kernel::VERSION
 
 sonata_block:
     blocks:
@@ -114,3 +116,8 @@ sonata_block:
                 resources: ~
                 statistics: ~
                 taxon: ~
+
+sonata_core:
+    form:
+        mapping:
+            enabled: false # https://github.com/sonata-project/SonataCoreBundle/pull/462

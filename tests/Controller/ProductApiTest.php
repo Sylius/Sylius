@@ -114,7 +114,7 @@ final class ProductApiTest extends JsonApiTestCase
         $products = $this->loadFixturesFromFile('resources/products.yml');
         $product = $products['product1'];
 
-        $this->client->request('DELETE', $this->getProductUrl($product), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getProductUrl($product), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -164,7 +164,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -426,8 +426,8 @@ EOT;
                     "attribute": "mug_color",
                     "localeCode": "en_US",
                     "value": [
-                        "green", 
-                        "yellow"
+                        "7a968ac4-a1e3-4a37-a707-f22a839130c4", 
+                        "ff62a939-d946-4d6b-b742-b7115875ae75"
                     ]
                 }
             ],

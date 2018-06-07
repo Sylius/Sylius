@@ -91,6 +91,7 @@ abstract class AbstractDriver implements DriverInterface
                 new Reference('sylius.resource_controller.resource_delete_handler'),
             ])
             ->addMethodCall('setContainer', [new Reference('service_container')])
+            ->addTag('controller.service_arguments')
         ;
 
         $container->setDefinition($metadata->getServiceId('controller'), $definition);
@@ -106,6 +107,7 @@ abstract class AbstractDriver implements DriverInterface
         $modelClass = $metadata->getClass('model');
 
         $definition = new Definition($factoryClass);
+        $definition->setPublic(true);
 
         $definitionArgs = [$modelClass];
         if (in_array(TranslatableFactoryInterface::class, class_implements($factoryClass), true)) {

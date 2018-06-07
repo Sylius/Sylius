@@ -341,6 +341,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
         $eventDispatcher->dispatchInitializeEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+        $event->hasResponse()->willReturn(false);
 
         $request->isMethod('POST')->willReturn(false);
         $form->createView()->willReturn($formView);
@@ -394,6 +396,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
         $eventDispatcher->dispatchInitializeEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+        $event->hasResponse()->willReturn(false);
 
         $request->isMethod('POST')->willReturn(true);
         $form->handleRequest($request)->willReturn($form);
@@ -860,6 +864,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
         $eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+        $event->hasResponse()->willReturn(false);
 
         $request->isMethod('PATCH')->willReturn(false);
         $request->getMethod()->willReturn('GET');
@@ -916,6 +922,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
         $eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+        $event->hasResponse()->willReturn(false);
 
         $request->isMethod('PATCH')->willReturn(false);
         $request->getMethod()->willReturn('PUT');
@@ -1154,6 +1162,119 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($redirectResponse);
     }
 
+    function it_uses_response_from_initialize_create_event_if_defined(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        ViewHandlerInterface $viewHandler,
+        RedirectHandlerInterface $redirectHandler,
+        FactoryInterface $factory,
+        NewResourceFactoryInterface $newResourceFactory,
+        ResourceInterface $newResource,
+        ResourceFormFactoryInterface $resourceFormFactory,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $initializeEvent,
+        Form $form,
+        FormView $formView,
+        Request $request,
+        Response $response
+    ): void {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->getTemplate(ResourceActions::CREATE . '.html')->willReturn('SyliusShopBundle:Product:create.html.twig');
+
+        $newResourceFactory->create($configuration, $factory)->willReturn($newResource);
+        $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
+
+        $request->isMethod('POST')->willReturn(false);
+        $form->createView()->shouldNotBeCalled();
+
+        $eventDispatcher->dispatchInitializeEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($initializeEvent);
+        $initializeEvent->hasResponse()->willReturn(true);
+        $initializeEvent->getResponse()->willReturn($response);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldNotBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldNotBeCalled();
+        $redirectHandler->redirectToResource($configuration, $newResource)->shouldNotBeCalled();
+
+        $expectedView = View::create()
+            ->setData([
+                'configuration' => $configuration,
+                'metadata' => $metadata,
+                'resource' => $newResource,
+                'product' => $newResource,
+                'form' => $formView,
+            ])
+            ->setTemplate('SyliusShopBundle:Product:create.html.twig')
+        ;
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->shouldNotBeCalled();
+
+        $this->createAction($request)->shouldReturn($response);
+    }
+
+    function it_uses_response_from_initialize_update_event_if_defined(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RepositoryInterface $repository,
+        ObjectManager $manager,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceFormFactoryInterface $resourceFormFactory,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        AuthorizationCheckerInterface $authorizationChecker,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        RequestConfiguration $configuration,
+        ResourceInterface $resource,
+        Form $form,
+        ResourceControllerEvent $initializeEvent,
+        Request $request,
+        Response $response
+    ): void {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->hasStateMachine()->willReturn(false);
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->getTemplate(ResourceActions::UPDATE . '.html')->willReturn('SyliusShopBundle:Product:update.html.twig');
+
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+        $resourceFormFactory->create($configuration, $resource)->willReturn($form);
+
+        $request->getMethod()->willReturn('GET');
+
+        $form->handleRequest($request)->willReturn($form);
+        $form->isSubmitted()->willReturn(false);
+        $form->isValid()->willReturn(false);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldNotBeCalled();
+        $resourceUpdateHandler->handle($resource, $configuration, $manager)->shouldNotBeCalled();
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldNotBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldNotBeCalled();
+        $redirectHandler->redirectToResource($configuration, $resource)->shouldNotBeCalled();
+
+        $eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($initializeEvent);
+        $initializeEvent->hasResponse()->willReturn(true);
+        $initializeEvent->getResponse()->willReturn($response);
+
+        $this->updateAction($request)->shouldReturn($response);
+    }
+
     function it_returns_a_non_html_response_for_correctly_updated_resource(
         MetadataInterface $metadata,
         ParameterBagInterface $parameterBag,
@@ -1317,6 +1438,105 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->updateAction($request)->shouldReturn($redirectResponse);
     }
 
+    function it_throws_a_403_exception_if_user_is_unauthorized_to_delete_multiple_resources(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        Request $request,
+        AuthorizationCheckerInterface $authorizationChecker
+    ): void {
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::BULK_DELETE)->willReturn('sylius.product.bulk_delete');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.bulk_delete')->willReturn(false);
+
+        $this
+            ->shouldThrow(new AccessDeniedException())
+            ->during('bulkDeleteAction', [$request])
+        ;
+    }
+
+    function it_deletes_multiple_resources_and_redirects_to_index_for_html_request(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        RepositoryInterface $repository,
+        ResourcesCollectionProviderInterface $resourcesCollectionProvider,
+        ResourceInterface $firstResource,
+        ResourceInterface $secondResource,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        ContainerInterface $container,
+        ResourceControllerEvent $firstPreEvent,
+        ResourceControllerEvent $secondPreEvent,
+        ResourceControllerEvent $firstPostEvent,
+        ResourceControllerEvent $secondPostEvent,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
+        Request $request,
+        Response $redirectResponse
+    ): void {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::BULK_DELETE)->willReturn('sylius.product.bulk_delete');
+        $request->request = new ParameterBag(['_csrf_token' => 'xyz']);
+
+        $container->has('security.csrf.token_manager')->willReturn(true);
+        $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
+        $csrfTokenManager->isTokenValid(new CsrfToken('bulk_delete', 'xyz'))->willReturn(true);
+
+        $eventDispatcher
+            ->dispatchMultiple(ResourceActions::BULK_DELETE, $configuration, [$firstResource, $secondResource])
+            ->shouldBeCalled()
+        ;
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.bulk_delete')->willReturn(true);
+        $resourcesCollectionProvider->get($configuration, $repository)->willReturn([$firstResource, $secondResource]);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
+
+        $eventDispatcher
+            ->dispatchPreEvent(ResourceActions::DELETE, $configuration, $firstResource)
+            ->willReturn($firstPreEvent)
+        ;
+        $firstPreEvent->isStopped()->willReturn(false);
+
+        $resourceDeleteHandler->handle($firstResource, $repository)->shouldBeCalled();
+
+        $eventDispatcher
+            ->dispatchPostEvent(ResourceActions::DELETE, $configuration, $firstResource)
+            ->willReturn($firstPostEvent)
+        ;
+        $firstPostEvent->hasResponse()->willReturn(false);
+
+        $eventDispatcher
+            ->dispatchPreEvent(ResourceActions::DELETE, $configuration, $secondResource)
+            ->willReturn($secondPreEvent)
+        ;
+        $secondPreEvent->isStopped()->willReturn(false);
+
+        $resourceDeleteHandler->handle($secondResource, $repository)->shouldBeCalled();
+
+        $eventDispatcher
+            ->dispatchPostEvent(ResourceActions::DELETE, $configuration, $secondResource)
+            ->willReturn($secondPostEvent)
+        ;
+        $secondPostEvent->hasResponse()->willReturn(false);
+
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::BULK_DELETE)->shouldBeCalled();
+
+        $redirectHandler->redirectToIndex($configuration)->willReturn($redirectResponse);
+
+        $this->bulkDeleteAction($request)->shouldReturn($redirectResponse);
+    }
+
     function it_throws_a_403_exception_if_user_is_unauthorized_to_delete_a_single_resource(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
@@ -1388,7 +1608,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1439,7 +1659,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1490,7 +1710,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1541,7 +1761,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1594,7 +1814,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1644,7 +1864,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1692,7 +1912,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(true);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
@@ -1744,7 +1964,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $container->has('security.csrf.token_manager')->willReturn(true);
         $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
-        $csrfTokenManager->isTokenValid(new CsrfToken(1, 'xyz'))->willReturn(false);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(false);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.delete')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);

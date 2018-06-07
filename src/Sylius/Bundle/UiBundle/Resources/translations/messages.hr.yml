@@ -470,6 +470,7 @@ sylius:
         manage_your_saved_addresses: 'Upravljanje spremljenim adresama'
         manage_zones: 'Upravljanje regijama'
         marketing: 'Marketing'
+        bulk_actions: 'Grupne radnje'
         media: 'Medij'
         members: 'Članovi'
         menu_nodes: 'Čvor izbornika'

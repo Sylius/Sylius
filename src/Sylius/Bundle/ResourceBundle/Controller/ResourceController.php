@@ -295,7 +295,10 @@ class ResourceController extends Controller
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::CREATE, $configuration, $newResource);
+        $initializeEvent = $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::CREATE, $configuration, $newResource);
+        if ($initializeEvent->hasResponse()) {
+            return $initializeEvent->getResponse();
+        }
 
         $view = View::create()
             ->setData([
@@ -380,7 +383,10 @@ class ResourceController extends Controller
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource);
+        $initializeEvent = $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource);
+        if ($initializeEvent->hasResponse()) {
+            return $initializeEvent->getResponse();
+        }
 
         $view = View::create()
             ->setData([
@@ -408,7 +414,7 @@ class ResourceController extends Controller
         $this->isGrantedOr403($configuration, ResourceActions::DELETE);
         $resource = $this->findOr404($configuration);
 
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid($resource->getId(), $request->request->get('_csrf_token'))) {
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $resource->getId(), $request->request->get('_csrf_token'))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
@@ -455,6 +461,74 @@ class ResourceController extends Controller
         }
 
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function bulkDeleteAction(Request $request): Response
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::BULK_DELETE);
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
+
+        if (
+            $configuration->isCsrfProtectionEnabled() &&
+            !$this->isCsrfTokenValid(ResourceActions::BULK_DELETE, $request->request->get('_csrf_token'))
+        ) {
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
+        }
+
+        $this->eventDispatcher->dispatchMultiple(ResourceActions::BULK_DELETE, $configuration, $resources);
+
+        foreach ($resources as $resource) {
+            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
+
+            if ($event->isStopped() && !$configuration->isHtmlRequest()) {
+                throw new HttpException($event->getErrorCode(), $event->getMessage());
+            }
+            if ($event->isStopped()) {
+                $this->flashHelper->addFlashFromEvent($configuration, $event);
+
+                if ($event->hasResponse()) {
+                    return $event->getResponse();
+                }
+
+                return $this->redirectHandler->redirectToIndex($configuration, $resource);
+            }
+
+            try {
+                $this->resourceDeleteHandler->handle($resource, $this->repository);
+            } catch (DeleteHandlingException $exception) {
+                if (!$configuration->isHtmlRequest()) {
+                    return $this->viewHandler->handle(
+                        $configuration,
+                        View::create(null, $exception->getApiResponseCode())
+                    );
+                }
+
+                $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());
+
+                return $this->redirectHandler->redirectToReferer($configuration);
+            }
+
+            $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
+        }
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+        }
+
+        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::BULK_DELETE);
+
+        if (isset($postEvent) && $postEvent->hasResponse()) {
+            return $postEvent->getResponse();
+        }
+
+        return $this->redirectHandler->redirectToIndex($configuration);
     }
 
     /**

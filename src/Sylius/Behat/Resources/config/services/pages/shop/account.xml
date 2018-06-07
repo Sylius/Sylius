@@ -28,6 +28,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.behat.page.shop.account.address_book.create" class="%sylius.behat.page.shop.account.address_book.create.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.account.address_book.index" class="%sylius.behat.page.shop.account.address_book.index.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.account.address_book.update" class="%sylius.behat.page.shop.account.address_book.update.class%" parent="sylius.behat.symfony_page" public="false" />

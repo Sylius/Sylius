@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
@@ -55,6 +56,37 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
             ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.reviewSubject', 'product')
+            ->innerJoin('product.translations', 'translation')
+            ->andWhere('translation.locale = :locale')
+            ->andWhere('product.code = :productCode')
+            ->setParameter('locale', $locale)
+            ->setParameter('productCode', $productCode)
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByIdAndProductCode($id, string $productCode): ?ReviewInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.reviewSubject', 'product')
+            ->andWhere('product.code = :productCode')
+            ->andWhere('o.id = :id')
+            ->setParameter('productCode', $productCode)
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 }

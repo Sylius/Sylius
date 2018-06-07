@@ -25,6 +25,15 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
+        <service id="Sylius\Bundle\UserBundle\Command\DemoteUserCommand">
+            <tag name="console.command" />
+        </service>
+        <service id="Sylius\Bundle\UserBundle\Command\PromoteUserCommand">
+            <tag name="console.command" />
+        </service>
+
         <service id="sylius.authentication.success_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler" parent="security.authentication.success_handler" public="false" />
         <service id="sylius.authentication.failure_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler" parent="security.authentication.failure_handler" public="false" />
 

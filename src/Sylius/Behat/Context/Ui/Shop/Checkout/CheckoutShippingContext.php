@@ -192,6 +192,14 @@ final class CheckoutShippingContext implements Context
     }
 
     /**
+     * @Then I should see selected :shippingMethodName shipping method
+     */
+    public function iShouldSeeSelectedShippingMethod($shippingMethodName)
+    {
+        Assert::same($this->selectShippingPage->getSelectedShippingMethodName(), $shippingMethodName);
+    }
+
+    /**
      * @Then I should not see :shippingMethodName shipping method
      */
     public function iShouldNotSeeShippingMethod($shippingMethodName)

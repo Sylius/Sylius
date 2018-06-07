@@ -75,6 +75,7 @@ final class ConfigurationTest extends TestCase
                 'templates' => [
                     'action' => [],
                     'filter' => [],
+                    'bulk_action' => [],
                 ],
             ],
             'templates'

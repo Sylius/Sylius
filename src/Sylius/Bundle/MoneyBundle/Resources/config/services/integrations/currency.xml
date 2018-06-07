@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.templating.helper.convert_money" class="Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper" lazy="true">
             <argument type="service" id="sylius.currency_converter" />
             <tag name="templating.helper" alias="sylius_convert_money" />

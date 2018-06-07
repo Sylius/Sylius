@@ -26,6 +26,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.form.type.api_client" class="Sylius\Bundle\AdminApiBundle\Form\Type\ClientType">
             <argument>%sylius.model.api_client.class%</argument>
             <argument>%sylius.form.type.api_client.validation_groups%</argument>

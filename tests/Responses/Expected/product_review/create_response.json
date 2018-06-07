@@ -1,0 +1,112 @@
+{
+    "id": @integer@,
+    "title": "A good product",
+    "rating": 3,
+    "comment": "This is a good product.",
+    "author": {
+        "id": @integer@,
+        "email": "my_review@example.com",
+        "emailCanonical": "my_review@example.com",
+        "gender": "u",
+        "_links": {
+            "self": {
+                "href": "@string@"
+            }
+        }
+    },
+    "status": "new",
+    "reviewSubject": {
+        "id": @integer@,
+        "code": "MUG_REVIEW_BEST",
+        "attributes": [],
+        "options": [],
+        "associations": [],
+        "translations": {
+            "en": {
+                "locale": "en"
+            }
+        },
+        "productTaxons": [],
+        "channels": [],
+        "reviews": [
+            {
+                "id": @integer@,
+                "title": "mug_review_best",
+                "rating": 4,
+                "comment": "mug_review_best_comment",
+                "author": {
+                    "id": @integer@,
+                    "email": "example.queen@example.com",
+                    "emailCanonical": "example.queen@example.com",
+                    "firstName": "Example",
+                    "lastName": "Queen",
+                    "gender": "u",
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "status": "new",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()"
+            },
+            {
+                "id": @integer@,
+                "title": "mug_review_good",
+                "rating": 3,
+                "comment": "mug_review_good_comment",
+                "author": {
+                    "id": @integer@,
+                    "email": "example.queen@example.com",
+                    "emailCanonical": "example.queen@example.com",
+                    "firstName": "Example",
+                    "lastName": "Queen",
+                    "gender": "u",
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "status": "new",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()"
+            },
+            {
+                "id": @integer@,
+                "title": "mug_review_bad",
+                "rating": 1,
+                "comment": "mug_review_bad_comment",
+                "author": {
+                    "id": @integer@,
+                    "email": "example.queen@example.com",
+                    "emailCanonical": "example.queen@example.com",
+                    "firstName": "Example",
+                    "lastName": "Queen",
+                    "gender": "u",
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "status": "rejected",
+                "createdAt": "@string@.isDateTime()",
+                "updatedAt": "@string@.isDateTime()"
+            }
+        ],
+        "averageRating": 0,
+        "images": [],
+        "_links": {
+            "self": {
+                "href": "\/api\/v1\/products\/MUG_REVIEW_BEST"
+            },
+            "variants": {
+                "href": "\/api\/v1\/products\/MUG_REVIEW_BEST\/variants\/"
+            }
+        }
+    },
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()"
+}

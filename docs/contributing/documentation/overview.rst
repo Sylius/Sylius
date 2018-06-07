@@ -39,12 +39,12 @@ Choose the right Base Branch
 
 Before starting to work on a patch, you must determine on which branch you need to work. It will be:
 
-* ``1.0``, if you are fixing or adding docs for an existing feature
-* ``master``, if you are documenting a new feature, that was not in ``1.0``
+* ``1.0`` or ``1.1``, if you are fixing or adding docs for features that exist in one of those versions,
+* ``master``, if you are documenting a new feature, that was not in ``1.0`` nor in ``1.1``
 
 .. note::
 
-    All bug fixes merged into the ``1.0`` maintenance branch are also merged into ``master`` on a regular basis.
+    All bug fixes merged into the ``1.0`` and ``1.1`` maintenance branches are also merged into ``master`` on a regular basis.
 
 Create a dedicated branch for your changes (for organization):
 

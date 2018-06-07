@@ -31,7 +31,7 @@ sylius:
             expires_at: Vyprší za
             usage_limit: Omezení použití
         promotion_coupon_generator_instruction:
-            amount: Množství
+            amount: Částka
             code_length: Délka kódu
             expires_at: Vyprší za
             usage_limit: Omezení použití

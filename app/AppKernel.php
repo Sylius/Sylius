@@ -28,6 +28,11 @@ class AppKernel extends Kernel
             new \Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle(),
         ];
 
+        if (in_array($this->getEnvironment(), ['dev', 'test', 'test_cached'], true)) {
+            $bundles[] = new \Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle();
+            $bundles[] = new \Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle();
+        }
+
         return array_merge(parent::registerBundles(), $bundles);
     }
 }

@@ -100,12 +100,12 @@ Choose the right Base Branch
 
 Before starting to work on a patch, you must determine on which branch you need to work. It will be:
 
-* ``1.0``, if you are fixing a bug for an existing feature or want to make a change that falls into the list of acceptable changes in patch versions
+* ``1.0`` or ``1.1``, if you are fixing a bug for an existing feature or want to make a change that falls into the list of acceptable changes in patch versions
 * ``master``, if you are adding a new feature.
 
 .. note::
 
-    All bug fixes merged into the ``1.0`` maintenance branch are also merged into ``master`` on a regular basis.
+    All bug fixes merged into the ``1.0`` and ``1.1`` maintenance branches are also merged into ``master`` on a regular basis.
 
 Create a Topic Branch
 ~~~~~~~~~~~~~~~~~~~~~
@@ -244,7 +244,7 @@ possible:
 
     | Q               | A
     | --------------- | -----
-    | Branch?         | 1.0 or master
+    | Branch?         | 1.0, 1.1 or master
     | Bug fix?        | no/yes
     | New feature?    | no/yes
     | BC breaks?      | no/yes

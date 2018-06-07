@@ -129,7 +129,7 @@ class OrderItemController extends ResourceController
 
         $event = $this->eventDispatcher->dispatchPreEvent(CartActions::REMOVE, $configuration, $orderItem);
 
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid($orderItem->getId(), $request->request->get('_csrf_token'))) {
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $orderItem->getId(), $request->request->get('_csrf_token'))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 

@@ -20,6 +20,7 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderShipmentProcessor implements OrderProcessorInterface
@@ -35,15 +36,30 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     private $shipmentFactory;
 
     /**
+     * @var ShippingMethodsResolverInterface|null
+     */
+    private $shippingMethodsResolver;
+
+    /**
      * @param DefaultShippingMethodResolverInterface $defaultShippingMethodResolver
      * @param FactoryInterface $shipmentFactory
+     * @param ShippingMethodsResolverInterface|null $shippingMethodsResolver
      */
     public function __construct(
         DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
-        FactoryInterface $shipmentFactory
+        FactoryInterface $shipmentFactory,
+        ?ShippingMethodsResolverInterface $shippingMethodsResolver = null
     ) {
         $this->defaultShippingMethodResolver = $defaultShippingMethodResolver;
         $this->shipmentFactory = $shipmentFactory;
+        $this->shippingMethodsResolver = $shippingMethodsResolver;
+
+        if (2 === func_num_args() || null === $shippingMethodsResolver) {
+            @trigger_error(
+                'Not passing ShippingMethodsResolverInterface explicitly is deprecated since 1.2 and will be prohibited in 2.0',
+                E_USER_DEPRECATED
+            );
+        }
     }
 
     /**
@@ -85,7 +101,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     private function getOrderShipment(OrderInterface $order): ?ShipmentInterface
     {
         if ($order->hasShipments()) {
-            return $order->getShipments()->first();
+            return $this->getExistingShipmentWithProperMethod($order);
         }
 
         try {
@@ -100,5 +116,30 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         } catch (UnresolvedDefaultShippingMethodException $exception) {
             return null;
         }
+    }
+
+    /**
+     * @param OrderInterface $order
+     *
+     * @return ShipmentInterface|null
+     */
+    private function getExistingShipmentWithProperMethod(OrderInterface $order): ?ShipmentInterface
+    {
+        /** @var ShipmentInterface $shipment */
+        $shipment = $order->getShipments()->first();
+
+        if (null === $this->shippingMethodsResolver) {
+            return $shipment;
+        }
+
+        if (!in_array($shipment->getMethod(), $this->shippingMethodsResolver->getSupportedMethods($shipment), true)) {
+            try {
+                $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
+            } catch (UnresolvedDefaultShippingMethodException $exception) {
+                return null;
+            }
+        }
+
+        return $shipment;
     }
 }

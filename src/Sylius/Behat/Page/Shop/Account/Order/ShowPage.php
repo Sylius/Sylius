@@ -122,15 +122,24 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isProductInTheList($name)
+    public function isProductInTheList(string $productName): bool
     {
         try {
+            $table = $this->getElement('order_items');
             $rows = $this->tableAccessor->getRowsWithFields(
-                $this->getElement('order_items'),
-                ['item' => $name]
+                $table,
+                ['item' => $productName]
             );
 
-            return 1 === count($rows);
+            foreach ($rows as $row) {
+                $field = $this->tableAccessor->getFieldFromRow($table, $row, 'item');
+                $name = $field->find('css', '.sylius-product-name');
+                if (null !== $name && $name->getText() === $productName) {
+                    return true;
+                }
+            }
+
+            return false;
         } catch (\InvalidArgumentException $exception) {
             return false;
         }

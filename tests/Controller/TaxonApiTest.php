@@ -437,8 +437,10 @@ EOT;
     public function it_allows_to_update_position_of_product_in_a_taxon()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/products.yml');
-        $productTaxons = $this->loadFixturesFromFile('resources/product_taxons.yml');
+        $productTaxons = $this->loadFixturesFromFiles([
+            'resources/products.yml',
+            'resources/product_taxons.yml',
+        ]);
 
         /** @var TaxonInterface $taxon */
         $taxon = $productTaxons['mugs'];
@@ -471,8 +473,10 @@ EOT;
     public function it_does_not_allow_to_update_position_of_product_in_a_taxon_with_incorrect_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/products.yml');
-        $productTaxons = $this->loadFixturesFromFile('resources/product_taxons.yml');
+        $productTaxons = $this->loadFixturesFromFiles([
+            'resources/products.yml',
+            'resources/product_taxons.yml',
+        ]);
 
         /** @var TaxonInterface $taxon */
         $taxon = $productTaxons['mugs'];
