@@ -7,6 +7,6 @@
   `string $rootDir` as a second argument, remove it from your calls to be compatible with 2.0 release.
 
 * The deprecated form mapping feature in SonataCoreBundle has been disabled in the app configuration included from SyliusCoreBundle.
-  If you depend on the feature in your application, you will need to make the necessary changes. Refer to
-  https://github.com/sonata-project/SonataCoreBundle/pull/462 for more information.
+  If you depend on the feature in your application, you will need to make the necessary changes. Refer to https://github.com/sonata-project/SonataCoreBundle/pull/462 for more information.
 * liip/imagine-bundle has been upgraded to ^2.0, which contains BCs from previous ^1.9.1 version. Please read their upgrade guide https://github.com/liip/LiipImagineBundle/blob/2.0/UPGRADE.md.
+* Class `Sylius\Component\Core\Resolver\DefaultShippingMethodResolver` has been deprecated and will be removed in 2.0. `Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver` should be used instead.

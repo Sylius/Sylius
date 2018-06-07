@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Customer\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Customer\Model\Customer;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 
