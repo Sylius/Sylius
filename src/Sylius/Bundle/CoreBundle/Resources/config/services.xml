@@ -68,8 +68,9 @@
         <service id="sylius.payment_method_resolver.default" class="Sylius\Component\Core\Resolver\DefaultPaymentMethodResolver">
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
-        <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\DefaultShippingMethodResolver">
+        <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="sylius.shipping_eligibility_checker" />
             <argument type="service" id="sylius.zone_matcher" />
         </service>
         <service id="sylius.updater.order.exchange_rate" class="Sylius\Component\Core\Updater\OrderExchangeRateUpdater">
