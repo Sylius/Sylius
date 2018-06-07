@@ -1,8 +1,38 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.0-RC (2018-06-07)
+
+#### TL;DR
+
+- Added support for Symfony ^4.1 ([#9454](https://github.com/Sylius/Sylius/pull/9454))
+- Dropped support for Symfony 4.0 ([#9454](https://github.com/Sylius/Sylius/pull/9454))
+- Added ability to use custom services as factories / repositories in ResourceBundle ([#9422](https://github.com/Sylius/Sylius/pull/9422), [#9442](https://github.com/Sylius/Sylius/pull/9442))
+- Improved default shipping method resolving ([#9398](https://github.com/Sylius/Sylius/pull/9398))
+
+#### Details
+
+- [#9398](https://github.com/Sylius/Sylius/pull/9398) [Core] Default shipping method basing on category fix (@Zales0123, @pamil, @stefandoorn)
+- [#9422](https://github.com/Sylius/Sylius/pull/9422) Add ability to use a custom service as factory (@pamil, @pjedrzejewski)
+- [#9436](https://github.com/Sylius/Sylius/pull/9436) [Addressing]  Fix default validation groups of AddressType (@vvasiloi)
+- [#9440](https://github.com/Sylius/Sylius/pull/9440) Fix secret parameter resolving (@pamil)
+- [#9441](https://github.com/Sylius/Sylius/pull/9441) Remove vendorPath command-line argument from root gulpfile (@teohhanhui)
+- [#9442](https://github.com/Sylius/Sylius/pull/9442) Add an ability to use custom resource repositories (@pamil)
+- [#9444](https://github.com/Sylius/Sylius/pull/9444) [Documentation] Fixed typo in note about --force-with-lease flag (@pmikolajek)
+- [#9454](https://github.com/Sylius/Sylius/pull/9454) Symfony 4.1 support (together with dropping Symfony 4.0 support) (@pamil, @Zales0123)
+- [#9456](https://github.com/Sylius/Sylius/pull/9456) Add documentation for using custom repository service in ResourceBundle (@pamil)
+- [#9458](https://github.com/Sylius/Sylius/pull/9458) [docs] fix server:start command (@hiousi)
+- [#9462](https://github.com/Sylius/Sylius/pull/9462) Remove two redundant services from CoreBundle (@jafaronly)
+- [#9463](https://github.com/Sylius/Sylius/pull/9463) Update platform-sh.rst (@antonioperic)
+
 ## v1.2.0-BETA (2018-05-28)
 
-*TL;DR:* Symfony 4 support.
+#### TL;DR 
+
+- Symfony 4 support ([#9062](https://github.com/Sylius/Sylius/issues/9062))
+- Liip/ImagineBundle requirement changed from `^1.9` to `^2.0` ([#9380](https://github.com/Sylius/Sylius/pull/9380))
+- Introduced Babel and Gulp 4 in our frontend toolset ([#9405](https://github.com/Sylius/Sylius/pull/9405))
+
+#### Details
 
 - [#8629](https://github.com/Sylius/Sylius/pull/8629) [Shipping][OrderProcessing] Default shipping method fixes (@Zales0123)
 - [#9019](https://github.com/Sylius/Sylius/pull/9019) Return event response for initialize update event (@dannyvw)
