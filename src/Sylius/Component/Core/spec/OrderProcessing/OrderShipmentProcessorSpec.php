@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
@@ -71,6 +73,43 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $shipment->addUnit($itemUnit2)->shouldBeCalled();
 
         $order->addShipment($shipment)->shouldBeCalled();
+
+        $this->process($order);
+    }
+
+    function it_does_not_add_new_shipment_if_shipping_method_cannot_be_resolved(
+        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
+        FactoryInterface $shipmentFactory,
+        OrderInterface $order,
+        OrderItemUnitInterface $itemUnit1,
+        OrderItemUnitInterface $itemUnit2,
+        ShipmentInterface $shipment,
+        OrderItemInterface $orderItem
+    ): void {
+        $defaultShippingMethodResolver->getDefaultShippingMethod($shipment)->willThrow(UnresolvedDefaultShippingMethodException::class);
+
+        $shipmentFactory->createNew()->willReturn($shipment);
+
+        $order->isShippingRequired()->willReturn(true);
+
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
+        $order->isEmpty()->willReturn(false);
+        $order->hasShipments()->willReturn(false);
+        $order->getItemUnits()->willReturn(new ArrayCollection([$itemUnit1->getWrappedObject(), $itemUnit2->getWrappedObject()]));
+
+        $shipment->setOrder($order)->shouldBeCalled();
+        $shipment->setMethod(Argument::any())->shouldNotBeCalled();
+
+        $shipment->getUnits()->willReturn(
+            new ArrayCollection([]),
+            new ArrayCollection([$itemUnit1->getWrappedObject(), $itemUnit2->getWrappedObject()])
+        );
+        $shipment->addUnit($itemUnit1)->shouldBeCalled();
+        $shipment->addUnit($itemUnit2)->shouldBeCalled();
+        $shipment->removeUnit($itemUnit1)->shouldBeCalled();
+        $shipment->removeUnit($itemUnit2)->shouldBeCalled();
+
+        $order->addShipment($shipment)->shouldNotBeCalled();
 
         $this->process($order);
     }

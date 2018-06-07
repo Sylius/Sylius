@@ -76,12 +76,49 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             return;
         }
 
-        $shipment = $this->getOrderShipment($order);
+        if ($order->hasShipments()) {
+            $shipment = $this->getExistingShipmentWithProperMethod($order);
 
-        if (null === $shipment) {
+            if (null === $shipment) {
+                return;
+            }
+
+            $this->processShipmentUnits($order, $shipment);
+
             return;
         }
 
+        $this->createNewOrderShipment($order);
+    }
+
+    /**
+     * @param OrderInterface $order
+     */
+    private function createNewOrderShipment(OrderInterface $order): void
+    {
+        try {
+            /** @var ShipmentInterface $shipment */
+            $shipment = $this->shipmentFactory->createNew();
+            $shipment->setOrder($order);
+
+            $this->processShipmentUnits($order, $shipment);
+
+            $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
+
+            $order->addShipment($shipment);
+        } catch (UnresolvedDefaultShippingMethodException $exception) {
+            foreach ($shipment->getUnits() as $unit) {
+                $shipment->removeUnit($unit);
+            }
+        }
+    }
+
+    /**
+     * @param BaseOrderInterface $order
+     * @param ShipmentInterface $shipment
+     */
+    private function processShipmentUnits(BaseOrderInterface $order, ShipmentInterface $shipment): void
+    {
         foreach ($shipment->getUnits() as $unit) {
             $shipment->removeUnit($unit);
         }
@@ -92,32 +129,6 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             }
         }
     }
-
-    /**
-     * @param OrderInterface $order
-     *
-     * @return ShipmentInterface|null
-     */
-    private function getOrderShipment(OrderInterface $order): ?ShipmentInterface
-    {
-        if ($order->hasShipments()) {
-            return $this->getExistingShipmentWithProperMethod($order);
-        }
-
-        try {
-            /** @var ShipmentInterface $shipment */
-            $shipment = $this->shipmentFactory->createNew();
-            $shipment->setOrder($order);
-            $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
-
-            $order->addShipment($shipment);
-
-            return $shipment;
-        } catch (UnresolvedDefaultShippingMethodException $exception) {
-            return null;
-        }
-    }
-
     /**
      * @param OrderInterface $order
      *

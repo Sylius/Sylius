@@ -9,12 +9,9 @@
  * file that was distributed with this source code.
  */
 
-declare(strict_types=1);
-
 namespace spec\Sylius\Component\Core\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -23,120 +20,107 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
-final class DefaultShippingMethodResolverSpec extends ObjectBehavior
+final class EligibleDefaultShippingMethodResolverSpec extends ObjectBehavior
 {
     function let(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
         ZoneMatcherInterface $zoneMatcher
     ): void {
-        $this->beConstructedWith($shippingMethodRepository, $zoneMatcher);
+        $this->beConstructedWith(
+            $shippingMethodRepository,
+            $shippingMethodEligibilityChecker,
+            $zoneMatcher
+        );
     }
 
-    function it_implements_a_default_shipping_method_resolver_interface(): void
+    function it_implements_default_shipping_method_resolver_interface()
     {
         $this->shouldImplement(DefaultShippingMethodResolverInterface::class);
     }
 
-    function it_returns_first_enabled_shipping_method_from_shipment_order_channel_if_there_is_not_shipping_address(
+    function it_returns_first_enabled_and_eligible_shipping_method_from_shipment_order_channel_as_default(
         ChannelInterface $channel,
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
+        ShippingMethodInterface $thirdShippingMethod,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ZoneMatcherInterface $zoneMatcher
+        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker
     ): void {
         $shipment->getOrder()->willReturn($order);
-
         $order->getChannel()->willReturn($channel);
         $order->getShippingAddress()->willReturn(null);
 
-        $zoneMatcher->matchAll(Argument::any())->shouldNotBeCalled();
-
         $shippingMethodRepository
             ->findEnabledForChannel($channel)
             ->willReturn([$firstShippingMethod, $secondShippingMethod])
         ;
 
-        $this->getDefaultShippingMethod($shipment)->shouldReturn($firstShippingMethod);
+        $shippingMethodEligibilityChecker->isEligible($shipment, $firstShippingMethod)->willReturn(false);
+        $shippingMethodEligibilityChecker->isEligible($shipment, $secondShippingMethod)->willReturn(true);
+        $shippingMethodEligibilityChecker->isEligible($shipment, $thirdShippingMethod)->willReturn(true);
+
+        $this->getDefaultShippingMethod($shipment)->shouldReturn($secondShippingMethod);
     }
 
-    function it_returns_first_enabled_shipping_method_from_shipment_order_channel_if_zone_matcher_is_not_used(
-        AddressInterface $shippingAddress,
+    function it_returns_enabled_and_eligible_shipping_method_from_shipment_order_channel_and_shipping_zone_as_default(
         ChannelInterface $channel,
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
-        ShippingMethodRepositoryInterface $shippingMethodRepository
+        ShippingMethodInterface $thirdShippingMethod,
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
+        AddressInterface $shippingAddress,
+        ZoneMatcherInterface $zoneMatcher,
+        ZoneInterface $zone
     ): void {
-        $this->beConstructedWith($shippingMethodRepository);
-
         $shipment->getOrder()->willReturn($order);
-
         $order->getChannel()->willReturn($channel);
         $order->getShippingAddress()->willReturn($shippingAddress);
 
+        $zoneMatcher->matchAll($shippingAddress)->willReturn([$zone]);
+
         $shippingMethodRepository
-            ->findEnabledForChannel($channel)
+            ->findEnabledForZonesAndChannel([$zone], $channel)
             ->willReturn([$firstShippingMethod, $secondShippingMethod])
         ;
 
-        $this->getDefaultShippingMethod($shipment)->shouldReturn($firstShippingMethod);
+        $shippingMethodEligibilityChecker->isEligible($shipment, $firstShippingMethod)->willReturn(false);
+        $shippingMethodEligibilityChecker->isEligible($shipment, $secondShippingMethod)->willReturn(true);
+        $shippingMethodEligibilityChecker->isEligible($shipment, $thirdShippingMethod)->willReturn(true);
+
+        $this->getDefaultShippingMethod($shipment)->shouldReturn($secondShippingMethod);
     }
 
-    function it_returns_first_enabled_shipping_method_matched_by_order_channel_and_shipping_address_zone(
-        AddressInterface $shippingAddress,
+    function it_throws_an_exception_if_there_is_shipping_method_cannot_be_resolved(
         ChannelInterface $channel,
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ZoneInterface $firstZone,
-        ZoneInterface $secondZone,
-        ZoneMatcherInterface $zoneMatcher
+        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker
     ): void {
         $shipment->getOrder()->willReturn($order);
-
         $order->getChannel()->willReturn($channel);
-        $order->getShippingAddress()->willReturn($shippingAddress);
-
-        $zoneMatcher->matchAll($shippingAddress)->willReturn([$firstZone, $secondZone]);
+        $order->getShippingAddress()->willReturn(null);
 
         $shippingMethodRepository
-            ->findEnabledForZonesAndChannel([$firstZone, $secondZone], $channel)
+            ->findEnabledForChannel($channel)
             ->willReturn([$firstShippingMethod, $secondShippingMethod])
         ;
 
-        $this->getDefaultShippingMethod($shipment)->shouldReturn($firstShippingMethod);
-    }
-
-    function it_throws_an_exception_if_there_is_no_enabled_shipping_methods_for_order_channel_and_zones(
-        AddressInterface $shippingAddress,
-        ChannelInterface $channel,
-        OrderInterface $order,
-        ShipmentInterface $shipment,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ZoneInterface $firstZone,
-        ZoneInterface $secondZone,
-        ZoneMatcherInterface $zoneMatcher
-    ): void {
-        $shipment->getOrder()->willReturn($order);
-
-        $order->getChannel()->willReturn($channel);
-        $order->getShippingAddress()->willReturn($shippingAddress);
-
-        $zoneMatcher->matchAll($shippingAddress)->willReturn([$firstZone, $secondZone]);
-
-        $shippingMethodRepository
-            ->findEnabledForZonesAndChannel([$firstZone, $secondZone], $channel)
-            ->willReturn([])
-        ;
+        $shippingMethodEligibilityChecker->isEligible($shipment, $firstShippingMethod)->willReturn(false);
+        $shippingMethodEligibilityChecker->isEligible($shipment, $secondShippingMethod)->willReturn(false);
 
         $this
             ->shouldThrow(UnresolvedDefaultShippingMethodException::class)
