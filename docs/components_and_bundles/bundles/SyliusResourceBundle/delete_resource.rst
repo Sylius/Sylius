@@ -72,6 +72,30 @@ By default the controller will redirect to the "index" route after successful ac
                     route: app_genre_show
                     parameters: { id: $genreId }
 
+
+Custom Event Name
+-----------------
+
+By default, there are two events dispatched during resource deletion, one before removing, the other after successful removal.
+The pattern is always the same - ``{applicationName}.{resourceName}.pre/post_delete``.
+However, you can customize the last part of the event, to provide your own action name.
+
+.. code-block:: yaml
+
+    # app/config/routing.yml
+
+    app_book_customer_delete:
+        path: /customer/book-delete/{id}
+        methods: [DELETE]
+        defaults:
+            _controller: app.controller.book:deleteAction
+            _sylius:
+                event: customer_delete
+
+This way, you can listen to ``app.book.pre_customer_delete`` and ``app.book.post_customer_delete`` events. It's especially useful, when you use
+``ResourceController:deleteAction`` in more than one route.
+
+
 Configuration Reference
 -----------------------
 
@@ -85,6 +109,7 @@ Configuration Reference
         defaults:
             _controller: app.controller.book:deleteAction
             _sylius:
+                event: book_delete
                 repository:
                     method: findByGenreNameAndId
                     arguments: [$genreName, $id]
