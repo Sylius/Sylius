@@ -34,6 +34,21 @@
     </div>
 {% endif %}
 
+{% if data|length > 0 and definition.actionGroups.bulk is defined %}
+    <div class="ui hidden divider"></div>
+    <div class="ui styled fluid accordion">
+        <div class="title active">
+            <i class="dropdown icon"></i>
+            {{ 'sylius.ui.bulk_actions'|trans }}
+        </div>
+        <div class="content active">
+            {% for action in definition.getEnabledActions('bulk') %}
+                {{ sylius_grid_render_bulk_action(grid, action, null) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
 <div class="ui segment overflow-x-auto">
     {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
     <div class="ui two column fluid stackable grid">
@@ -49,6 +64,7 @@
     {% else %}
         {{ pagination.simple(data) }}
     {% endif %}
+
     {% if data|length > 0 %}
         <table class="ui sortable stackable celled table">
             <thead>

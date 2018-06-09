@@ -35,6 +35,10 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
+
+        <indexes>
+            <index columns="hostname"/>
+        </indexes>
     </mapped-superclass>
 
 </doctrine-mapping>

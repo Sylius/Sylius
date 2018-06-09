@@ -56,5 +56,20 @@
                  form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType"
                  configuration-form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeConfigurationType" />
         </service>
+
+        <service id="sylius.form.type.attribute_type.select" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType">
+            <argument id="sylius.translation_locale_provider" type="service"/>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.attribute_type.select.choices_collection" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType">
+            <argument id="sylius.translation_locale_provider" type="service"/>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.attribute_type.select.value.translations" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeValueTranslationsType">
+            <argument id="sylius.translation_locale_provider" type="service"/>
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

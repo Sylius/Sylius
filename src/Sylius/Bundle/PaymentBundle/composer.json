@@ -22,17 +22,17 @@
     "require": {
         "php": "^7.1",
 
-        "sylius/payment": "^1.0",
-        "sylius/resource-bundle": "^1.0",
-        "symfony/framework-bundle": "^3.2"
+        "sylius/payment": "^1.1",
+        "sylius/resource-bundle": "^1.1",
+        "symfony/framework-bundle": "^3.4"
     },
     "require-dev": {
         "doctrine/orm": "^2.5",
         "phpspec/phpspec": "^4.0",
-        "sylius/locale-bundle": "^1.0",
+        "sylius/locale-bundle": "^1.1",
         "phpunit/phpunit": "^6.5",
-        "symfony/browser-kit": "^3.2",
-        "symfony/dependency-injection": "^3.2",
+        "symfony/browser-kit": "^3.4",
+        "symfony/dependency-injection": "^3.4",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "config": {
@@ -57,7 +57,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     }
 }

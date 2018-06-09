@@ -36,6 +36,26 @@ final class ConfigurationTest extends TestCase
                 'directories' => ['%kernel.root_dir%/themes'],
                 'filename' => 'composer.json',
                 'enabled' => true,
+                'scan_depth' => null,
+            ]]],
+            'sources'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_an_integer_for_scan_depth(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['sources' => ['filesystem' => ['scan_depth' => 1]]],
+            ],
+            ['sources' => ['filesystem' => [
+                'directories' => ['%kernel.root_dir%/themes'],
+                'filename' => 'composer.json',
+                'enabled' => true,
+                'scan_depth' => 1,
             ]]],
             'sources'
         );
@@ -54,6 +74,7 @@ final class ConfigurationTest extends TestCase
                 'directories' => ['/custom/path', '/custom/path2'],
                 'filename' => 'composer.json',
                 'enabled' => true,
+                'scan_depth' => null,
             ]]],
             'sources.filesystem'
         );
@@ -73,6 +94,7 @@ final class ConfigurationTest extends TestCase
                 'directories' => ['/last/custom/path'],
                 'filename' => 'composer.json',
                 'enabled' => true,
+                'scan_depth' => null,
             ]]],
             'sources.filesystem'
         );
@@ -86,6 +108,19 @@ final class ConfigurationTest extends TestCase
         $this->assertPartialConfigurationIsInvalid(
             [
                 ['directories' => '/string/not/array'],
+            ],
+            'sources.filesystem'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_invalid_to_pass_a_string_as_scan_depth(): void
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [
+                ['sources' => ['filesystem' => ['directories' => ['/custom/path', '/custom/path2'], 'scan_depth' => 'test']]],
             ],
             'sources.filesystem'
         );

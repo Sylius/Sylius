@@ -92,7 +92,9 @@ abstract class AttributeValueType extends AbstractResourceType
                     return;
                 }
 
-                $this->addValueField($event->getForm(), $attribute);
+                $localeCode = $attributeValue->getLocaleCode();
+
+                $this->addValueField($event->getForm(), $attribute, $localeCode);
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
                 $attributeValue = $event->getData();
@@ -118,13 +120,18 @@ abstract class AttributeValueType extends AbstractResourceType
     /**
      * @param FormInterface $form
      * @param AttributeInterface $attribute
+     * @param string|null $localeCode
      */
-    protected function addValueField(FormInterface $form, AttributeInterface $attribute): void
-    {
+    protected function addValueField(
+        FormInterface $form,
+        AttributeInterface $attribute,
+        ?string $localeCode = null
+    ): void {
         $form->add('value', $this->formTypeRegistry->get($attribute->getType(), 'default'), [
             'auto_initialize' => false,
             'configuration' => $attribute->getConfiguration(),
             'label' => $attribute->getName(),
+            'locale_code' => $localeCode,
         ]);
     }
 }

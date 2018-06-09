@@ -1,15 +1,13 @@
-includes:
-    - vendor/sylius-labs/coding-standard/easy-coding-standard.neon
+imports:
+    - { resource: 'vendor/sylius-labs/coding-standard/easy-coding-standard.yml' }
 
-checkers:
+services:
     PhpCsFixer\Fixer\Comment\HeaderCommentFixer:
-        header:
-            """
+        header: |
             This file is part of the Sylius package.
 
             (c) Paweł Jędrzejewski
 
             For the full copyright and license information, please view the LICENSE
             file that was distributed with this source code.
-            """
-        location: after_open
+        location: 'after_open'

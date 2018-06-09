@@ -60,6 +60,10 @@ sylius_api_product_association_type:
 sylius_api_product_option:
     resource: "@SyliusAdminApiBundle/Resources/config/routing/product_option.yml"
 
+sylius_api_product_review:
+    resource: "@SyliusAdminApiBundle/Resources/config/routing/product_review.yml"
+    prefix: /products/{productCode}
+
 sylius_api_product_taxon_position:
     resource: "@SyliusAdminApiBundle/Resources/config/routing/product_taxon_position.yml"
 

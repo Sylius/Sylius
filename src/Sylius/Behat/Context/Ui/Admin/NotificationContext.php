@@ -55,4 +55,12 @@ final class NotificationContext implements Context
     {
         $this->notificationChecker->checkNotification('has been successfully deleted.', NotificationType::success());
     }
+
+    /**
+     * @Then I should be notified that they have been successfully deleted
+     */
+    public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted()
+    {
+        $this->notificationChecker->checkNotification('have been successfully deleted.', NotificationType::success());
+    }
 }
