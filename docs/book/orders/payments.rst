@@ -167,4 +167,4 @@ Learn more
 ----------
 
 * :doc:`Payment - Component Documentation </components_and_bundles/components/Payment/index>`
-* `Payum - Project Documentation <https://github.com/Payum/Payum/blob/master/src/Payum/Core/Resources/docs/index.md>`_
+* `Payum - Project Documentation <https://github.com/Payum/Payum/blob/master/docs/index.md>`_
