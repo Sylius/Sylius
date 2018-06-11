@@ -56,7 +56,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('resources')
                     ->useAttributeAsKey('name')
-                    ->prototype('array')
+                    ->arrayPrototype()
                         ->children()
                             ->scalarNode('subject')->isRequired()->end()
                             ->arrayNode('attribute')
