@@ -194,7 +194,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     private function getFieldName(string $field): string
     {
         if (false === strpos($field, '.')) {
-            return $this->queryBuilder->getRootAliases()[0] . '.' . $field;
+            return $this->queryBuilder->getRootAlias() . '.' . $field;
         }
 
         return $field;
