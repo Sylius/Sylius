@@ -4,6 +4,10 @@
 sylius:
     gateway_config:
         paypal:
+            password:
+                not_blank: الرجاء إدخال كلمة المرور بأي بال.
+            signature:
+                not_blank: الرجاء إدخال التوقيع بأي بال.
             username:
                 not_blank: الرجاء إدخال اسم المستخدم الخاص بك.
         stripe:
