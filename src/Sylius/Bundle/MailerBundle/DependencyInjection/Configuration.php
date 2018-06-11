@@ -55,7 +55,7 @@ final class Configuration implements ConfigurationInterface
                 ->end()
                 ->arrayNode('emails')
                     ->useAttributeAsKey('code')
-                    ->prototype('array')
+                    ->arrayPrototype()
                         ->children()
                             ->scalarNode('subject')->cannotBeEmpty()->end()
                             ->scalarNode('template')->cannotBeEmpty()->end()

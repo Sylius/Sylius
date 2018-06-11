@@ -98,7 +98,7 @@ sylius_admin_product_variant_delete:
                     id: $id
                     productId: $productId
     requirements:
-        id: '\d+'
+        id: '\d+' # Hotfix for https://github.com/symfony/symfony/issues/27512, will be removed after Symfony ^4.1.1 is required.
 
 sylius_admin_product_variant_generate:
     path: /generate

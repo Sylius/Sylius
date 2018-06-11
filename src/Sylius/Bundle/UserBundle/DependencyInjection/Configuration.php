@@ -53,7 +53,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('resources')
                     ->useAttributeAsKey('name')
-                    ->prototype('array')
+                    ->arrayPrototype()
                         ->children()
                             ->arrayNode('user')
                                 ->addDefaultsIfNotSet()
