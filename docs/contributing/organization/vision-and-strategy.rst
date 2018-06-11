@@ -22,30 +22,6 @@ For example, if a bug report is marked with 1.0 milestone, the related bugfix PR
 
 Learn more about the :doc:`/contributing/organization/release-process`.
 
-Labels (Issue Types)
-~~~~~~~~~~~~~~~~~~~~
-
-* **Admin** - AdminBundle related issues and PRs.
-* **API** - AdminApiBundle related issues and PRs.
-* **BC Break** - PRs introducing BC breaks (do not even try to merge).
-* **Behat** - Issues and PRs aimed at improving Behat usage.
-* **Bug** - Confirmed bugs or bugfixes.
-* **Critical** - Issues and PRs, which are critical and should be fixed ASAP.
-* **Documentation** - Documentation related issues and PRs - requests, fixes, proposals.
-* **DX** - Issues and PRs aimed at improving Developer eXperience.
-* **Easy Pick** - Bugs and feature proposals, which are relatively simple to implement for newcomers.
-* **Enhancement** - Minor issues and PRs improving the current solutions (optimizations, typo fixes, etc.).
-* **Environment** - Environment (OS, databases, libraries, etc.) specific issues.
-* **Feature** - New feature proposals.
-* **Help Wanted** - Issues needing help and clarification.
-* **Maintenance** - Travis configurations, READMEs, releases, etc.
-* **Potential Bug** - Bug reports, should become a *Bug* after confirming it.
-* **RFC** - Discussions about potential changes or new features.
-* **Shop** - ShopBundle related issues and PRs.
-* **Symfony 4.0** - Symfony 4.0 related issues and PRs.
-* **Stale** - Issues and PRs with no recent activity, about to be closed soon.
-* **UX** - Issues and PRs aimed at improving User eXperience.
-
 Pull Request Checklist
 ~~~~~~~~~~~~~~~~~~~~~~
 
