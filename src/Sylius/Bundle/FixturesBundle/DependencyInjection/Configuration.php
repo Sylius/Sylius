@@ -42,7 +42,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('suites')
                     ->useAttributeAsKey('name')
-                    ->prototype('array')
+                    ->arrayPrototype()
         ;
 
         $suitesNode
@@ -77,7 +77,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('fixtures')
                     ->useAttributeAsKey('alias')
-                    ->prototype('array')
+                    ->arrayPrototype()
         ;
 
         $fixturesNode->children()->scalarNode('name')->cannotBeEmpty();
@@ -95,7 +95,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('listeners')
                     ->useAttributeAsKey('name')
-                    ->prototype('array')
+                    ->arrayPrototype()
         ;
 
         $this->buildAttributesNode($listenersNode);
