@@ -30,6 +30,7 @@ sylius:
             name: الاسم
             type: نوع
             types:
+                country: البلد
                 province: مقاطعة
                 zone: المنطقة
             scope: نطاق
