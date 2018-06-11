@@ -137,6 +137,30 @@ You can also perform more complex redirects, with parameters. For example:
                     route: app_genre_show
                     parameters: { id: $genreId }
 
+
+Custom Event Name
+-----------------
+
+By default, there are two events dispatched during resource update, one before setting new data, the other after successful update.
+The pattern is always the same - ``{applicationName}.{resourceName}.pre/post_update``. However, you can customize the last part of the event, to provide your
+own action name.
+
+.. code-block:: yaml
+
+    # app/config/routing.yml
+
+    app_book_customer_update:
+        path: /customer/book-update/{id}
+        methods: [GET, PUT]
+        defaults:
+            _controller: app.controller.book:updateAction
+            _sylius:
+                event: customer_update
+
+This way, you can listen to ``app.book.pre_customer_update`` and ``app.book.post_customer_update`` events. It's especially useful, when you use
+``ResourceController:updateAction`` in more than one route.
+
+
 [API] Returning resource or no content
 --------------------------------------
 
@@ -176,6 +200,7 @@ Configuration Reference
             _sylius:
                 template: Book/editInGenre.html.twig
                 form: app_book_custom
+                event: book_update
                 repository:
                     method: findBookByTitle
                     arguments: [$title, expr:service('app.context.book')]
