@@ -47,7 +47,7 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                         ->arrayNode('route_map')
                             ->useAttributeAsKey('name')
-                            ->prototype('array')
+                            ->arrayPrototype()
                                 ->children()
                                     ->scalarNode('route')
                                         ->cannotBeEmpty()
