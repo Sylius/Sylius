@@ -2,6 +2,12 @@
 
 ## v1.1.7 (2018-06-12)
 
+#### TL;DR
+
+- Lots of bugfixes
+
+#### Details
+
 - [#9418](https://github.com/Sylius/Sylius/pull/9418) Update Model.ProductOption.yml (@severino32)
 - [#9419](https://github.com/Sylius/Sylius/pull/9419) Moved IE css polyfills (@czende)
 - [#9424](https://github.com/Sylius/Sylius/pull/9424) Lazy load Doctrine event listeners (@teohhanhui)
