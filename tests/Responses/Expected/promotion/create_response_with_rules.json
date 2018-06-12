@@ -23,6 +23,9 @@
                 },
                 "MOB": {
                     "amount": 1500
+                },
+                "SHIPPING": {
+                    "amount": 1000
                 }
             }
         }

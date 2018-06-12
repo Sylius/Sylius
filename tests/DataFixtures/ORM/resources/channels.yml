@@ -21,6 +21,18 @@ Sylius\Component\Core\Model\Channel:
         color: "yellow"
         enabled: true
         taxCalculationStrategy: "order_items_based"
+    channel_with_shippable_countries:
+        code: "SHIPPING"
+        name: "Shipping Channel"
+        hostname: "localhost"
+        description: "Lorem ipsum"
+        baseCurrency: "@currency1"
+        defaultLocale: "@locale"
+        locales: ["@locale"]
+        color: "red"
+        enabled: true
+        taxCalculationStrategy: "order_items_based"
+        shippableCountries: ["@country_BE", "@country_PL"]
 
 Sylius\Component\Currency\Model\Currency:
     currency1:
@@ -31,3 +43,18 @@ Sylius\Component\Currency\Model\Currency:
 Sylius\Component\Locale\Model\Locale:
     locale:
         code: "en_US"
+
+Sylius\Component\Addressing\Model\Country:
+    country_NL:
+        code: "NL"
+    country_BE:
+        code: "BE"
+    country_PL:
+        code: "PL"
+
+Sylius\Component\Addressing\Model\Province:
+    province_BE_limburg:
+        name: "Limburg"
+        abbreviation: "lim"
+        code: "be_lim"
+        country: "@country_BE"

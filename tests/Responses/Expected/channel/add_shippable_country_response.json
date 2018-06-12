@@ -1,0 +1,30 @@
+{
+    "id": @integer@,
+    "code": "WEB",
+    "name": "Web Channel",
+    "description": "Lorem ipsum",
+    "hostname": "localhost",
+    "color": "black",
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "enabled": true,
+    "taxCalculationStrategy": "order_items_based",
+    "shippableCountries": [
+        {
+            "id": @integer@,
+            "code": "@string@",
+            "provinces": @array@,
+            "enabled": @boolean@,
+            "_links": {
+                "self": {
+                    "href": "@string@"
+                }
+            }
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/channels\/WEB"
+        }
+    }
+}

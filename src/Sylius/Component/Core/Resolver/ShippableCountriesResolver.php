@@ -15,7 +15,6 @@ namespace Sylius\Component\Core\Resolver;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Resolver\ShippableCountriesResolverInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -44,7 +43,7 @@ final class ShippableCountriesResolver implements ShippableCountriesResolverInte
     {
         $countries = $channel->getShippableCountries();
 
-        $countries->filter(function(CountryInterface $country){
+        $countries->filter(function (CountryInterface $country) {
             return $country->isEnabled();
         });
 

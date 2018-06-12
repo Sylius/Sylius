@@ -45,6 +45,18 @@
                             ]
                         }
                     }
+                },
+                "SHIPPING": {
+                    "percentage": 0.2,
+                    "filters": {
+                        "price_range_filter": [],
+                        "taxons_filter": {
+                            "taxons": []
+                        },
+                        "products_filter": {
+                            "products": []
+                        }
+                    }
                 }
             }
         },
@@ -57,6 +69,9 @@
                 },
                 "MOB": {
                     "amount": 1500
+                },
+                "SHIPPING": {
+                    "amount": 1000
                 }
             }
         }

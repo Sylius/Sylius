@@ -1,0 +1,18 @@
+{
+    "id": @integer@,
+    "code": "SHIPPING",
+    "name": "Shipping Channel",
+    "description": "Lorem ipsum",
+    "hostname": "localhost",
+    "color": "red",
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "enabled": true,
+    "taxCalculationStrategy": "order_items_based",
+    "shippableCountries": [],
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/channels\/SHIPPING"
+        }
+    }
+}

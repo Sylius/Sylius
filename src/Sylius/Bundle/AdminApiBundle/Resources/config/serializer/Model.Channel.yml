@@ -9,6 +9,7 @@ Sylius\Component\Core\Model\Channel:
         shippableCountries:
             expose: true
             type: array
+            groups: [Default, Detailed]
     relations:
         - rel: self
           href:

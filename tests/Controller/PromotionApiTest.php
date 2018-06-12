@@ -317,6 +317,9 @@ EOT;
                         },
                         "MOB": {
                             "amount": 15
+                        },
+                        "SHIPPING": {
+                            "amount": 10
                         }
                     }
                 }
@@ -372,6 +375,10 @@ EOT;
                                     "products": "MUG_SW"
                                 }
                             }
+                        },
+                        "SHIPPING": {
+                            "percentage": 20,
+                            "filters": {}
                         }
                     }
                 },
@@ -383,6 +390,9 @@ EOT;
                         },
                         "MOB": {
                             "amount": 15
+                        },
+                        "SHIPPING": {
+                            "amount": 10
                         }
                     }
                 }
