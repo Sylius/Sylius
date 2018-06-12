@@ -33,12 +33,12 @@ use Webmozart\Assert\Assert;
 
 class Kernel extends HttpKernel implements CompilerPassInterface
 {
-    public const VERSION = '1.2.0';
-    public const VERSION_ID = '10200';
+    public const VERSION = '1.2.1-DEV';
+    public const VERSION_ID = '10201';
     public const MAJOR_VERSION = '1';
     public const MINOR_VERSION = '2';
-    public const RELEASE_VERSION = '0';
-    public const EXTRA_VERSION = '';
+    public const RELEASE_VERSION = '1';
+    public const EXTRA_VERSION = 'DEV';
 
     /**
      * {@inheritdoc}
