@@ -2,7 +2,7 @@
     "page": 1,
     "limit": 10,
     "pages": 1,
-    "total": 2,
+    "total": 3,
     "_links": {
         "self": {
             "href": "\/api\/v1\/channels\/?page=1&limit=10"
@@ -19,7 +19,7 @@
             {
                 "id": @integer@,
                 "code": "WEB",
-                "shippableCountries": [],
+                "shippableCountries": @array@,
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/channels\/WEB"
@@ -29,10 +29,20 @@
             {
                 "id": @integer@,
                 "code": "MOB",
-                "shippableCountries": [],
+                "shippableCountries": @array@,
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/channels\/MOB"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "SHIPPING",
+                "shippableCountries": @array@,
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/channels\/SHIPPING"
                     }
                 }
             }

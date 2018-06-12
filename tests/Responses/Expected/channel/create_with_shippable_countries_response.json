@@ -1,0 +1,38 @@
+{
+    "id": @integer@,
+    "code": "mob",
+    "name": "Channel for mobile",
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "enabled": true,
+    "taxCalculationStrategy": "order_items_based",
+    "shippableCountries": [
+      {
+        "id": @integer@,
+        "code": "@string@",
+        "provinces": @array@,
+        "enabled": @boolean@,
+        "_links": {
+          "self": {
+            "href": "@string@"
+          }
+        }
+      },
+      {
+        "id": @integer@,
+        "code": "@string@",
+        "provinces": @array@,
+        "enabled": @boolean@,
+        "_links": {
+          "self": {
+            "href": "@string@"
+          }
+        }
+      }
+    ],
+    "_links": {
+        "self": {
+            "href": @string@
+        }
+    }
+}
