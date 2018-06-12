@@ -1,5 +1,16 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.0 (2018-06-12)
+
+## TL;DR
+
+- Added hotfixes for Symfony 4.1.0 ([#9476](https://github.com/Sylius/Sylius/pull/9476))
+
+#### Details
+
+- [#9461](https://github.com/Sylius/Sylius/pull/9461) Added note about LiipImagineBundle upgrade (@sweoggy)
+- [#9476](https://github.com/Sylius/Sylius/pull/9476) Enhance workarounds while waiting for Symfony 4.1.1 (@pamil)
+
 ## v1.2.0-RC (2018-06-07)
 
 #### TL;DR
@@ -59,4 +70,3 @@
 - [#9426](https://github.com/Sylius/Sylius/pull/9426) Random Symfony 4 related fixes (@pamil)
 - [#9428](https://github.com/Sylius/Sylius/pull/9428) Symfony 4: Behat scenarios isolation + random fixes (@pamil)
 - [#9429](https://github.com/Sylius/Sylius/pull/9429) Require passing build for Symfony 4 on Travis (@pamil)
--
