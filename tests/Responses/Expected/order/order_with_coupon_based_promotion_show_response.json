@@ -124,6 +124,7 @@
         "updatedAt": "@string@.isDateTime()",
         "enabled": true,
         "taxCalculationStrategy": "order_items_based",
+        "shippableCountries": [],
         "_links": {
             "self": {
                 "href": "\/api\/v1\/channels\/CHANNEL"
@@ -178,6 +179,7 @@
                         "updatedAt": "@string@.isDateTime()",
                         "enabled": true,
                         "taxCalculationStrategy": "order_items_based",
+                        "shippableCountries": [],
                         "_links": {
                             "self": {
                                 "href": "\/api\/v1\/channels\/CHANNEL"

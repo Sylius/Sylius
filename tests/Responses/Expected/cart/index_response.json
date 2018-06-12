@@ -37,6 +37,7 @@
                 "channel": {
                     "id": @integer@,
                     "code": "WEB",
+                    "shippableCountries": [],
                     "_links": {
                         "self": {
                             "href": "@string@"
