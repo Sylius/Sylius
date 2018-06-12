@@ -1,5 +1,29 @@
 # CHANGELOG FOR `1.1.X`
 
+## v1.1.7 (2018-06-12)
+
+#### TL;DR
+
+- Lots of bugfixes
+
+#### Details
+
+- [#9418](https://github.com/Sylius/Sylius/pull/9418) Update Model.ProductOption.yml (@severino32)
+- [#9419](https://github.com/Sylius/Sylius/pull/9419) Moved IE css polyfills (@czende)
+- [#9424](https://github.com/Sylius/Sylius/pull/9424) Lazy load Doctrine event listeners (@teohhanhui)
+- [#9436](https://github.com/Sylius/Sylius/pull/9436) [Addressing]  Fix default validation groups of AddressType (@vvasiloi)
+- [#9440](https://github.com/Sylius/Sylius/pull/9440) Fix secret parameter resolving (@pamil)
+- [#9444](https://github.com/Sylius/Sylius/pull/9444) [Documentation] Fixed typo in note about --force-with-lease flag (@pmikolajek)
+- [#9462](https://github.com/Sylius/Sylius/pull/9462) Remove two redundant services from CoreBundle (@jafaronly)
+- [#9463](https://github.com/Sylius/Sylius/pull/9463) Update platform-sh.rst (@antonioperic)
+- [#9464](https://github.com/Sylius/Sylius/pull/9464) Fixed typo in PayumController (@qkdreyer)
+- [#9465](https://github.com/Sylius/Sylius/pull/9465) [Documentation] Fix deprecated link to repository (@CoderMaggie)
+- [#9466](https://github.com/Sylius/Sylius/pull/9466) Document "event" option in resource routing (@Zales0123)
+- [#9467](https://github.com/Sylius/Sylius/pull/9467) Update outdated method prototype('array') with arrayPrototype() (@jafaronly)
+- [#9470](https://github.com/Sylius/Sylius/pull/9470) [Documentation] Updated link to Payum docs (@pogorivan)
+- [#9477](https://github.com/Sylius/Sylius/pull/9477) Remove labels descriptions in docs (@pamil)
+- [#9480](https://github.com/Sylius/Sylius/pull/9480) [docs] Use `app/config/routing/admin.yml` everywhere (@gido)
+
 ## v1.1.6 (2018-05-21)
 
 - [#9310](https://github.com/Sylius/Sylius/pull/9310) Declare a separate ImagesUploadListener service (@teohhanhui)

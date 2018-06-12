@@ -1,5 +1,26 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.0 (2018-06-12)
+
+## TL;DR
+
+- Added hotfixes for Symfony 4.1.0 ([#9476](https://github.com/Sylius/Sylius/pull/9476))
+
+#### Details
+
+- [#9418](https://github.com/Sylius/Sylius/pull/9418) Update Model.ProductOption.yml (@severino32)
+- [#9419](https://github.com/Sylius/Sylius/pull/9419) Moved IE css polyfills (@czende)
+- [#9424](https://github.com/Sylius/Sylius/pull/9424) Lazy load Doctrine event listeners (@teohhanhui)
+- [#9461](https://github.com/Sylius/Sylius/pull/9461) Added note about LiipImagineBundle upgrade (@sweoggy)
+- [#9464](https://github.com/Sylius/Sylius/pull/9464) Fixed typo in PayumController (@qkdreyer)
+- [#9465](https://github.com/Sylius/Sylius/pull/9465) [Documentation] Fix deprecated link to repository (@CoderMaggie)
+- [#9466](https://github.com/Sylius/Sylius/pull/9466) Document "event" option in resource routing (@Zales0123)
+- [#9467](https://github.com/Sylius/Sylius/pull/9467) Update outdated method prototype('array') with arrayPrototype() (@jafaronly)
+- [#9470](https://github.com/Sylius/Sylius/pull/9470) [Documentation] Updated link to Payum docs (@pogorivan)
+- [#9476](https://github.com/Sylius/Sylius/pull/9476) Enhance workarounds while waiting for Symfony 4.1.1 (@pamil)
+- [#9477](https://github.com/Sylius/Sylius/pull/9477) Remove labels descriptions in docs (@pamil)
+- [#9480](https://github.com/Sylius/Sylius/pull/9480) [docs] Use `app/config/routing/admin.yml` everywhere (@gido)
+
 ## v1.2.0-RC (2018-06-07)
 
 #### TL;DR
@@ -59,4 +80,3 @@
 - [#9426](https://github.com/Sylius/Sylius/pull/9426) Random Symfony 4 related fixes (@pamil)
 - [#9428](https://github.com/Sylius/Sylius/pull/9428) Symfony 4: Behat scenarios isolation + random fixes (@pamil)
 - [#9429](https://github.com/Sylius/Sylius/pull/9429) Require passing build for Symfony 4 on Travis (@pamil)
--
