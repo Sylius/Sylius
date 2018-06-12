@@ -32,6 +32,7 @@ sylius:
     country:
         code:
             not_blank: Prosimo, vnesite ISO kodo države.
+            regex: Šifra država lahko vsebuje le črke, številke, pomišljaje in podčrtaje.
             unique: ISO koda države mora biti edinstvena.
     province:
         code:
@@ -47,6 +48,7 @@ sylius:
     zone:
         code:
             not_blank: Prosimo, vnesite kodo cone.
+            regex: Šifra cone lahko vsebuje le črke, številke, pomišljaje in podčrtaje.
             unique: Koda cone mora biti edinstvena.
         members:
             min_count: Prosimo, dodajte vsaj {{ limit }} člane cone.
