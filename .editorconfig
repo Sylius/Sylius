@@ -1,0 +1,82 @@
+# EditorConfig helps developers define and maintain consistent
+# coding styles between different editors and IDEs
+# editorconfig.org
+
+root = true
+
+[*]
+# Change these settings to your own preference
+indent_style = space
+indent_size = 4
+
+# We recommend you to keep these unchanged
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.feature]
+indent_style = space
+indent_size = 4
+
+[*.js]
+indent_style = space
+indent_size = 2
+
+[*.json]
+indent_style = space
+indent_size = 2
+
+[*.md]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = false
+
+[*.neon]
+indent_style = space
+indent_size = 4
+
+[*.php]
+indent_style = space
+indent_size = 4
+
+[*.sh]
+indent_style = space
+indent_size = 4
+
+[*.{yaml,yml}]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = false
+
+[.babelrc]
+indent_style = space
+indent_size = 2
+
+[.gitmodules]
+indent_style = tab
+indent_size = 4
+
+[.php_cs{,.dist}]
+indent_style = space
+indent_size = 4
+
+[composer.json]
+indent_style = space
+indent_size = 4
+
+[package.json]
+indent_style = space
+indent_size = 2
+
+[phpspec.yml{,.dist}]
+indent_style = space
+indent_size = 4
+
+[phpstan.neon]
+indent_style = space
+indent_size = 4
+
+[phpunit.xml{,.dist}]
+indent_style = space
+indent_size = 4

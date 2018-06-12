@@ -1,59 +1,68 @@
-(function ($) {
-    'use strict';
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-    var methods = {
-        init: function(options) {
-            var settings = $.extend({
-              'prototypePrefix': false,
-              'containerSelector': false
-            }, options);
+import $ from 'jquery';
 
-            return this.each(function() {
-                show($(this), false);
-                $(this).change(function() {
-                    show($(this), true);
-                });
+const methods = {
+  init(options) {
+    const settings = $.extend({
+      prototypePrefix: false,
+      containerSelector: false,
+    }, options);
 
-                function show(element, replace) {
-                    var selectedValue = element.val();
-                    var prototypePrefix = element.attr('id');
-                    if (false != settings.prototypePrefix) {
-                        prototypePrefix = settings.prototypePrefix;
-                    }
+    const show = function show(element, replace) {
+      const selectedValue = element.val();
+      let prototypePrefix = element.attr('id');
+      if (settings.prototypePrefix != false) {
+        ({ prototypePrefix } = settings);
+      }
 
-                    var prototypeElement = $('#' + prototypePrefix + '_' + selectedValue);
-                    var container;
+      const prototypeElement = $(`#${prototypePrefix}_${selectedValue}`);
+      let container;
 
-                    if (settings.containerSelector) {
-                        container = $(settings.containerSelector);
-                    } else {
-                        container = $(prototypeElement.data('container'));
-                    }
+      if (settings.containerSelector) {
+        container = $(settings.containerSelector);
+      } else {
+        container = $(prototypeElement.data('container'));
+      }
 
-                    if (!container.length) {
-                        return;
-                    }
+      if (!container.length) {
+        return;
+      }
 
-                    if (!prototypeElement.length) {
-                        container.empty();
-                        return;
-                    }
+      if (!prototypeElement.length) {
+        container.empty();
+        return;
+      }
 
-                    if (replace || !container.html().trim()) {
-                        container.html(prototypeElement.data('prototype'));
-                    }
-                }
-            });
-        }
+      if (replace || !container.html().trim()) {
+        container.html(prototypeElement.data('prototype'));
+      }
     };
 
-    $.fn.handlePrototypes = function(method) {
-        if (methods[method]) {
-            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-        } else if (typeof method === 'object' || !method) {
-            return methods.init.apply(this, arguments);
-        } else {
-            $.error( 'Method ' +  method + ' does not exist on jQuery.handlePrototypes' );
-        }
-    };
-})(jQuery);
+    return this.each((index, element) => {
+      show($(element), false);
+      $(element).change((event) => {
+        show($(event.currentTarget), true);
+      });
+    });
+  },
+};
+
+$.fn.handlePrototypes = function handlePrototypes(method, ...args) {
+  if (methods[method]) {
+    return methods[method].apply(this, args);
+  } else if (typeof method === 'object' || !method) {
+    return methods.init.apply(this, [method, ...args]);
+  }
+
+  $.error(`Method ${method} does not exist on jQuery.handlePrototypes`);
+
+  return undefined;
+};

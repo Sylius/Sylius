@@ -7,73 +7,81 @@
  * file that was distributed with this source code.
  */
 
-(function ($) {
-    'use strict';
+import $ from 'jquery';
 
-    $.fn.extend({
-        taxonSlugGenerator: function () {
-            var timeout;
+const updateSlug = function updateSlug(element) {
+  const slugInput = element.parents('.content').find('[name*="[slug]"]');
+  const loadableParent = slugInput.parents('.field.loadable');
 
-            $('[name*="sylius_taxon[translations]"][name*="[name]"]').on('input', function() {
-                clearTimeout(timeout);
-                var element = $(this);
+  if (slugInput.attr('readonly') === 'readonly') {
+    return;
+  }
 
-                timeout = setTimeout(function() {
-                    updateSlug(element);
-                }, 1000);
-            });
+  loadableParent.addClass('loading');
 
-            $('.toggle-taxon-slug-modification').on('click', function(e) {
-                e.preventDefault();
-                toggleSlugModification($(this), $(this).siblings('input'));
-            });
+  let data;
+  if (slugInput.attr('data-parent') != '' && slugInput.attr('data-parent') != undefined) {
+    data = {
+      name: element.val(),
+      locale: element.closest('[data-locale]').data('locale'),
+      parentId: slugInput.attr('data-parent'),
+    };
+  } else if ($('#sylius_taxon_parent').length > 0 && $('#sylius_taxon_parent').is(':visible') && $('#sylius_taxon_parent').val() != '') {
+    data = {
+      name: element.val(),
+      locale: element.closest('[data-locale]').data('locale'),
+      parentId: $('#sylius_taxon_parent').val(),
+    };
+  } else {
+    data = {
+      name: element.val(),
+      locale: element.closest('[data-locale]').data('locale'),
+    };
+  }
 
-            function updateSlug(element) {
-                var slugInput = element.parents('.content').find('[name*="[slug]"]');
-                var loadableParent = slugInput.parents('.field.loadable');
+  $.ajax({
+    type: 'GET',
+    url: slugInput.attr('data-url'),
+    data,
+    dataType: 'json',
+    accept: 'application/json',
+    success(response) {
+      slugInput.val(response.slug);
+      if (slugInput.parents('.field').hasClass('error')) {
+        slugInput.parents('.field').removeClass('error');
+        slugInput.parents('.field').find('.sylius-validation-error').remove();
+      }
+      loadableParent.removeClass('loading');
+    },
+  });
+};
 
-                if ('readonly' == slugInput.attr('readonly')) {
-                    return;
-                }
+const toggleSlugModification = function toggleSlugModification(button, slugInput) {
+  if (slugInput.attr('readonly')) {
+    slugInput.removeAttr('readonly');
+    button.html('<i class="unlock icon"></i>');
+  } else {
+    slugInput.attr('readonly', 'readonly');
+    button.html('<i class="lock icon"></i>');
+  }
+};
 
-                loadableParent.addClass('loading');
+$.fn.extend({
+  taxonSlugGenerator() {
+    let timeout;
 
-                var data;
-                if ('' != slugInput.attr('data-parent') && undefined != slugInput.attr('data-parent')) {
-                    data = { name: element.val(), locale: element.closest('[data-locale]').data('locale'), parentId: slugInput.attr('data-parent') };
-                } else if ($('#sylius_taxon_parent').length > 0 && $('#sylius_taxon_parent').is(':visible') && '' != $('#sylius_taxon_parent').val()) {
-                    data = { name: element.val(), locale: element.closest('[data-locale]').data('locale'), parentId: $('#sylius_taxon_parent').val() };
-                } else {
-                    data = { name: element.val(), locale: element.closest('[data-locale]').data('locale') };
-                }
+    $('[name*="sylius_taxon[translations]"][name*="[name]"]').on('input', (event) => {
+      clearTimeout(timeout);
+      const element = $(event.currentTarget);
 
-                $.ajax({
-                    type: "GET",
-                    url: slugInput.attr('data-url'),
-                    data: data,
-                    dataType: "json",
-                    accept: "application/json",
-                    success: function(data) {
-                        slugInput.val(data.slug);
-                        if (slugInput.parents('.field').hasClass('error')) {
-                            slugInput.parents('.field').removeClass('error');
-                            slugInput.parents('.field').find('.sylius-validation-error').remove();
-                        }
-                        loadableParent.removeClass('loading');
-                    }
-                });
-            }
-
-            function toggleSlugModification(button, slugInput) {
-                if (slugInput.attr('readonly')) {
-                    slugInput.removeAttr('readonly');
-                    button.html('<i class="unlock icon"></i>');
-                } else {
-                    slugInput.attr('readonly', 'readonly');
-                    button.html('<i class="lock icon"></i>');
-                }
-            }
-        }
+      timeout = setTimeout(() => {
+        updateSlug(element);
+      }, 1000);
     });
 
-})(jQuery);
+    $('.toggle-taxon-slug-modification').on('click', (event) => {
+      event.preventDefault();
+      toggleSlugModification($(event.currentTarget), $(event.currentTarget).siblings('input'));
+    });
+  },
+});

@@ -7,83 +7,79 @@
  * file that was distributed with this source code.
  */
 
-(function ( $ ) {
-    'use strict';
+import $ from 'jquery';
 
-    $.fn.extend({
-        variantImages: function () {
-            if ($('[data-variant-options]').length > 0) {
-                handleProductOptionImages();
-                handleProductOptionChange();
-            } else if ($('[data-variant-code]').length > 0) {
-                handleProductVariantImages($('[name="sylius_add_to_cart[cartItem][variant]"]'));
-                handleProductVariantChange();
-            }
-        }
-    });
-})( jQuery );
+const changeMainImage = function changeMainImage(newImageDiv) {
+  const mainImageLink = $('a.ui.fluid.image');
+  const mainImage = $('a.ui.fluid.image > img');
 
-function handleProductOptionChange() {
-    $('[name*="sylius_add_to_cart[cartItem][variant]"]').on('change', function () {
-        handleProductOptionImages();
-    });
-}
+  const newImage = $(newImageDiv).find('img');
+  const newImageLink = $(newImageDiv).find('a');
 
-function handleProductVariantChange() {
-    $('[name="sylius_add_to_cart[cartItem][variant]"]').on('change', function () {
-        handleProductVariantImages($(this))
-    });
-}
+  if (newImage.length === 0 && newImageLink.length === 0) {
+    mainImage.attr('src', $('div[data-product-image]').attr('data-product-image'));
+    newImageLink.attr('href', $('div[data-product-link]').attr('data-product-link'));
 
-function handleProductOptionImages() {
-    var options = '';
+    return;
+  }
 
-    $('#sylius-product-adding-to-cart select').each(function() {
-        options += $(this).find('option:selected').val() + ' ';
-    });
+  mainImageLink.attr('href', newImageLink.attr('href'));
+  mainImage.attr('src', newImage.attr('data-large-thumbnail'));
+};
 
-    var imagesWithOptions = [];
-    var optionsArray = options.trim().split(' ');
+const handleProductOptionImages = function handleProductOptionImages() {
+  let options = '';
 
-    $('[data-variant-options]').each(function () {
-        var imageOptions = $(this).attr('data-variant-options');
-        var imageHasOptions = optionsArray.every(function(option) {
-            return imageOptions.indexOf(option) > -1;
-        });
+  $('#sylius-product-adding-to-cart select').each((index, select) => {
+    options += `${$(select).find('option:selected').val()} `;
+  });
 
-        if (imageHasOptions) {
-            imagesWithOptions.push($(this).closest('div.ui.image'));
-        }
-    });
+  const imagesWithOptions = [];
+  const optionsArray = options.trim().split(' ');
 
-    changeMainImage(imagesWithOptions.shift());
-}
+  $('[data-variant-options]').each((index, element) => {
+    const imageOptions = $(element).attr('data-variant-options');
+    const imageHasOptions = optionsArray.every(option => imageOptions.indexOf(option) > -1);
 
-function handleProductVariantImages(element) {
-    var variantCode = $(element).attr('value');
-    var imagesWithVariantCode = [];
-
-    $('[data-variant-code*="'+ variantCode +'"]').each(function () {
-        imagesWithVariantCode.push($(this).closest('div.ui.image'));
-    });
-
-    changeMainImage(imagesWithVariantCode.shift());
-}
-
-function changeMainImage(newImageDiv) {
-    var mainImageLink = $('a.ui.fluid.image');
-    var mainImage = $('a.ui.fluid.image > img');
-
-    var newImage = $(newImageDiv).find('img');
-    var newImageLink = $(newImageDiv).find('a');
-
-    if (newImage.length == 0 && newImageLink.length == 0) {
-        mainImage.attr('src', $('div[data-product-image]').attr('data-product-image'));
-        newImageLink.attr('href', $('div[data-product-link]').attr('data-product-link'));
-
-        return;
+    if (imageHasOptions) {
+      imagesWithOptions.push($(element).closest('div.ui.image'));
     }
+  });
 
-    mainImageLink.attr('href', newImageLink.attr('href'));
-    mainImage.attr('src', newImage.attr('data-large-thumbnail'));
-}
+  changeMainImage(imagesWithOptions.shift());
+};
+
+const handleProductOptionChange = function handleProductOptionChange() {
+  $('[name*="sylius_add_to_cart[cartItem][variant]"]').on('change', () => {
+    handleProductOptionImages();
+  });
+};
+
+const handleProductVariantImages = function handleProductVariantImages(variantElement) {
+  const variantCode = $(variantElement).attr('value');
+  const imagesWithVariantCode = [];
+
+  $(`[data-variant-code*="${variantCode}"]`).each((index, element) => {
+    imagesWithVariantCode.push($(element).closest('div.ui.image'));
+  });
+
+  changeMainImage(imagesWithVariantCode.shift());
+};
+
+const handleProductVariantChange = function handleProductVariantChange() {
+  $('[name="sylius_add_to_cart[cartItem][variant]"]').on('change', (event) => {
+    handleProductVariantImages($(event.currentTarget));
+  });
+};
+
+$.fn.extend({
+  variantImages() {
+    if ($('[data-variant-options]').length > 0) {
+      handleProductOptionImages();
+      handleProductOptionChange();
+    } else if ($('[data-variant-code]').length > 0) {
+      handleProductVariantImages($('[name="sylius_add_to_cart[cartItem][variant]"]'));
+      handleProductVariantChange();
+    }
+  },
+});

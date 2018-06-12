@@ -1,12 +1,18 @@
+import { rollup } from 'rollup';
+import { uglify } from 'rollup-plugin-uglify';
+import babel from 'rollup-plugin-babel';
+import commonjs from 'rollup-plugin-commonjs';
 import concat from 'gulp-concat';
+import dedent from 'dedent';
 import gulp from 'gulp';
 import gulpif from 'gulp-if';
+import inject from 'rollup-plugin-inject';
 import livereload from 'gulp-livereload';
 import merge from 'merge-stream';
 import order from 'gulp-order';
+import resolve from 'rollup-plugin-node-resolve';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
-import uglify from 'gulp-uglify';
 import uglifycss from 'gulp-uglifycss';
 import upath from 'upath';
 import yargs from 'yargs';
@@ -34,6 +40,11 @@ const { argv } = yargs
   });
 
 const env = process.env.GULP_ENV;
+const options = {
+  minify: env === 'prod',
+  sourcemaps: env !== 'prod',
+};
+
 const rootPath = upath.normalizeSafe(argv.rootPath);
 const adminRootPath = upath.joinSafe(rootPath, 'admin');
 const vendorPath = upath.normalizeSafe(argv.vendorPath || '.');
@@ -44,8 +55,6 @@ const nodeModulesPath = upath.normalizeSafe(argv.nodeModulesPath);
 const paths = {
   admin: {
     js: [
-      upath.joinSafe(nodeModulesPath, 'jquery/dist/jquery.min.js'),
-      upath.joinSafe(nodeModulesPath, 'semantic-ui-css/semantic.min.js'),
       upath.joinSafe(vendorUiPath, 'Resources/private/js/**'),
       upath.joinSafe(vendorAdminPath, 'Resources/private/js/**'),
     ],
@@ -80,7 +89,7 @@ const sourcePathMap = [
   },
 ];
 
-const mapSourcePath = function mapSourcePath(sourcePath /* , file */) {
+const mapSourcePath = function mapSourcePath(sourcePath) {
   const match = sourcePathMap.find(({ sourceDir }) => (
     sourcePath.substring(0, sourceDir.length) === sourceDir
   ));
@@ -94,15 +103,88 @@ const mapSourcePath = function mapSourcePath(sourcePath /* , file */) {
   return upath.joinSafe(destPath, sourcePath.substring(sourceDir.length));
 };
 
-export const buildAdminJs = function buildAdminJs() {
-  return gulp.src(paths.admin.js, { base: './' })
-    .pipe(gulpif(env !== 'prod', sourcemaps.init()))
-    .pipe(concat('app.js'))
-    .pipe(gulpif(env === 'prod', uglify()))
-    .pipe(gulpif(env !== 'prod', sourcemaps.mapSources(mapSourcePath)))
-    .pipe(gulpif(env !== 'prod', sourcemaps.write('./')))
-    .pipe(gulp.dest(upath.joinSafe(adminRootPath, 'js')))
-    .pipe(livereload());
+export const buildAdminJs = async function buildAdminJs() {
+  const bundle = await rollup({
+    input: upath.joinSafe(vendorAdminPath, 'Resources/private/js/app.js'),
+    plugins: [
+      {
+        name: 'shim-app',
+
+        transform(code, id) {
+          if (upath.relative('', id) === upath.relative('', upath.joinSafe(vendorAdminPath, 'Resources/private/js/app.js'))) {
+            return {
+              code: dedent`
+                import './shim/shim-polyfill';
+                import './shim/shim-jquery';
+                import './shim/shim-semantic-ui';
+
+                ${code}
+              `,
+              map: null,
+            };
+          }
+
+          return undefined;
+        },
+      },
+      inject({
+        include: `${nodeModulesPath}/**`,
+        modules: {
+          $: 'jquery',
+          jQuery: 'jquery',
+        },
+      }),
+      resolve({
+        jail: upath.resolve(nodeModulesPath),
+      }),
+      commonjs({
+        include: `${nodeModulesPath}/**`,
+      }),
+      babel({
+        babelrc: false,
+        exclude: `${nodeModulesPath}/**`,
+        presets: [
+          ['env', {
+            targets: {
+              browsers: [
+                'last 2 versions',
+                'Firefox ESR',
+                'IE >= 9',
+                'Android >= 4.0',
+                'iOS >= 7',
+              ],
+            },
+            modules: false,
+            exclude: [
+              'transform-async-to-generator',
+              'transform-regenerator',
+            ],
+            useBuiltIns: true,
+          }],
+        ],
+        plugins: [
+          ['external-helpers'],
+          ['fast-async'],
+          ['module-resolver', {
+            alias: {
+              'sylius/ui': upath.relative('', upath.joinSafe(vendorUiPath, 'Resources/private/js')),
+            },
+          }],
+          ['transform-object-rest-spread', {
+            useBuiltIns: false,
+          }],
+        ],
+      }),
+      options.minify && uglify(),
+    ],
+    treeshake: false,
+  });
+
+  await bundle.write({
+    file: upath.joinSafe(adminRootPath, 'js/app.js'),
+    format: 'iife',
+    sourcemap: options.sourcemaps,
+  });
 };
 buildAdminJs.description = 'Build admin js assets.';
 
@@ -113,11 +195,11 @@ export const buildAdminCss = function buildAdminCss() {
   );
 
   const cssStream = gulp.src(paths.admin.css, { base: './' })
-    .pipe(gulpif(env !== 'prod', sourcemaps.init()))
+    .pipe(gulpif(options.sourcemaps, sourcemaps.init()))
     .pipe(concat('css-files.css'));
 
   const sassStream = gulp.src(paths.admin.sass, { base: './' })
-    .pipe(gulpif(env !== 'prod', sourcemaps.init()))
+    .pipe(gulpif(options.sourcemaps, sourcemaps.init()))
     .pipe(sass())
     .pipe(concat('sass-files.scss'));
 
@@ -126,9 +208,9 @@ export const buildAdminCss = function buildAdminCss() {
     merge(cssStream, sassStream)
       .pipe(order(['css-files.css', 'sass-files.scss']))
       .pipe(concat('style.css'))
-      .pipe(gulpif(env === 'prod', uglifycss()))
-      .pipe(gulpif(env !== 'prod', sourcemaps.mapSources(mapSourcePath)))
-      .pipe(gulpif(env !== 'prod', sourcemaps.write('./')))
+      .pipe(gulpif(options.minify, uglifycss()))
+      .pipe(gulpif(options.sourcemaps, sourcemaps.mapSources(mapSourcePath)))
+      .pipe(gulpif(options.sourcemaps, sourcemaps.write('./')))
       .pipe(gulp.dest(upath.joinSafe(adminRootPath, 'css')))
       .pipe(livereload()),
   );
