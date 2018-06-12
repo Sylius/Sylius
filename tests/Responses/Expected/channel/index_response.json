@@ -19,6 +19,7 @@
             {
                 "id": @integer@,
                 "code": "WEB",
+                "shippableCountries": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/channels\/WEB"
@@ -28,6 +29,7 @@
             {
                 "id": @integer@,
                 "code": "MOB",
+                "shippableCountries": [],
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/channels\/MOB"

@@ -26,6 +26,7 @@
             "updatedAt": "@string@.isDateTime()",
             "enabled": true,
             "taxCalculationStrategy": "order_items_based",
+            "shippableCountries": [],
             "_links": {
                 "self": {
                     "href": "\/api\/v1\/channels\/WEB"
@@ -43,6 +44,7 @@
             "updatedAt": "@string@.isDateTime()",
             "enabled": true,
             "taxCalculationStrategy": "order_items_based",
+            "shippableCountries": [],
             "_links": {
                 "self": {
                     "href": "\/api\/v1\/channels\/MOB"
