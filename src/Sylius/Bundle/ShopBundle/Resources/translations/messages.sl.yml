@@ -2,7 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    lightbox:
+        image_album_label: 'Slika %1 od %2'
     menu:
         shop:
             account:
+                address_book: 'Naslovi'
+                change_password: 'Spremenite geslo'
                 dashboard: 'Nadzorna plošča'
+                header: 'Vaš račun'
+                order_history: 'Zgodovina naročil'
+                personal_information: 'Osebne informacije'

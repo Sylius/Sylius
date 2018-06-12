@@ -19,6 +19,8 @@ sylius:
             not_blank: Prosimo, vnesite vaš elektronski naslov.
         message:
             not_blank: Prosimo, vnesite vaše sporočilo.
+    cart_item:
+        not_available: '%itemName% ni na zalogi.'
     locale:
         code:
             not_blank: Prosimo, vnesite kodo območnih nastavitev.
