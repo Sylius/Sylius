@@ -32,7 +32,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         $productsList = $this->getDocument()->find('css', '#products');
 
-        $products = $productsList->findAll('css', '.column > .card');
+        $products = $productsList->findAll('css', '.card');
 
         return count($products);
     }
@@ -44,7 +44,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         $productsList = $this->getDocument()->find('css', '#products');
 
-        return $productsList->find('css', '.column:first-child .content > a')->getText();
+        return $productsList->find('css', '.card:first-child .content > a')->getText();
     }
 
     /**
@@ -54,7 +54,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         $productsList = $this->getDocument()->find('css', '#products');
 
-        return $productsList->find('css', '.column:last-child .content > a')->getText();
+        return $productsList->find('css', '.card:last-child .content > a')->getText();
     }
 
     /**
@@ -119,7 +119,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function hasProductsInOrder(array $productNames)
     {
         $productsList = $this->getDocument()->find('css', '#products');
-        $products = $productsList->findAll('css', '.column  .content > .sylius-product-name');
+        $products = $productsList->findAll('css', '.card  .content > .sylius-product-name');
 
         foreach ($productNames as $key => $value) {
             if ($products[$key]->getText() !== $value) {
