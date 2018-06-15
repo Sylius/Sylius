@@ -16,9 +16,9 @@ Enjoy being an eCommerce Developer again!
 Installation
 ------------
 
-[Install Sylius](http://docs.sylius.com/en/1.0/book/installation/installation.html) with Composer (see [requirements details](http://docs.sylius.com/en/1.0/book/installation/requirements.html)).
+[Install Sylius](http://docs.sylius.com/en/1.1/book/installation/installation.html) with Composer (see [requirements details](http://docs.sylius.com/en/1.1/book/installation/requirements.html)).
 
-Alternatively, you can [use our Vagrant setup](http://docs.sylius.com/en/1.0/book/installation/vagrant_installation.html).
+Alternatively, you can [use our Vagrant setup](http://docs.sylius.com/en/1.1/book/installation/vagrant_installation.html).
 
 Documentation
 -------------
@@ -28,7 +28,7 @@ Documentation is available at [docs.sylius.com](http://docs.sylius.com).
 Community
 ---------
 
-[Get Sylius support](http://docs.sylius.com/en/1.0/support/index.html) on [Slack](https://sylius.com/slack), [Forum](https://forum.sylius.com/) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
+[Get Sylius support](http://docs.sylius.com/en/1.1/support/index.html) on [Slack](https://sylius.com/slack), [Forum](https://forum.sylius.com/) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
 
 Stay updated by following our [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
 
