@@ -15,11 +15,9 @@
 {{ sonata_block_render_event('sylius.shop.product.index.before_list', {'products': resources.data}) }}
 
 {% if resources.data|length > 0 %}
-    <div class="ui three column stackable grid" id="products">
+    <div class="ui three cards" id="products">
         {% for product in resources.data %}
-            <div class="column">
-                {% include '@SyliusShop/Product/_box.html.twig' %}
-            </div>
+            {% include '@SyliusShop/Product/_box.html.twig' %}
         {% endfor %}
     </div>
     <div class="ui hidden divider"></div>
