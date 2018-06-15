@@ -1,13 +1,5 @@
-<div class="ui four column stackable grid">
-    <div class="row">
-        {% for product in products %}
-            <div class="column">
-                {% include '@SyliusShop/Product/_box.html.twig' %}
-            </div>
-    {% if 0 == loop.index % 4 %}
-    </div>
-    <div class="row">
-    {% endif %}
-        {% endfor %}
-    </div>
+<div class="ui four doubling cards">
+    {% for product in products %}
+        {% include '@SyliusShop/Product/_box.html.twig' %}
+    {% endfor %}
 </div>
