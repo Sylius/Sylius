@@ -14,7 +14,6 @@ sylius:
             billing_address: Naslov za račun
             different_billing_address: Uporabimo drug naslov za dostavo?
             only_customer_registration: Ustvari račun
-            subscribed_to_newsletter: Prijava na prejemanje novic
         customer_group:
             name: Ime
             roles: Vloge
