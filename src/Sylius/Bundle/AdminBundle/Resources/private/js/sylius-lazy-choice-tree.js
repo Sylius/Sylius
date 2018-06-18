@@ -154,14 +154,15 @@
             var bindCheckboxAction = function (checkboxElement) {
                 checkboxElement.checkbox({
                     onChange: function () {
-                        var $checkboxes = tree.find('.checkbox');
-                        var checkedValues = [];
+                        var $checkbox = $(this);
+                        var checkedValues = $input.val().split(',');
+                        var checkboxValue = $checkbox.parent().data('value');
 
-                        $checkboxes.each(function () {
-                            if ($(this).checkbox('is checked')) {
-                                checkedValues.push($(this).data('value'));
-                            }
-                        });
+                        if ($checkbox.is(':checked')) {
+                            checkedValues.push(checkboxValue);
+                        } else if (-1 !== checkedValues.indexOf(checkboxValue)) {
+                            checkedValues.splice(checkedValues.indexOf(checkboxValue), 1);
+                        }
 
                         $input.val(checkedValues.join());
                     }
