@@ -775,7 +775,6 @@ sylius:
         taxation_categories: 'Catégories de taxes'
         taxation_settings: 'Configuration des taxes'
         taxes: 'Taxes'
-        taxonomy: 'Taxinomie'
         taxons: 'Taxons'
         terms_and_conditions: 'Conditions générales de vente'
         text: 'Texte'
