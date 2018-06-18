@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "sylius/registry": "^1.2",
         "webmozart/assert": "^1.1"

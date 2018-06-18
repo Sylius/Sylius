@@ -24,7 +24,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "payum/payum": "^1.4",
         "payum/payum-bundle": "^2.2",
