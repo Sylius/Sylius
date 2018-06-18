@@ -106,7 +106,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         ]);
 
         if ($oauth instanceof UserOAuthInterface) {
-            return $oauth->getUser();
+            return $this->updateUserByOAuthUserResponse($oauth->getUser(), $response);
         }
 
         if (null !== $response->getEmail()) {
@@ -187,9 +187,12 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     private function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response): UserInterface
     {
-        $oauth = $this->oauthFactory->createNew();
-        $oauth->setIdentifier($response->getUsername());
-        $oauth->setProvider($response->getResourceOwner()->getName());
+        if (null == $oauth = $user->getOAuthAccount($response->getResourceOwner()->getName())) {
+            $oauth = $this->oauthFactory->createNew();
+            $oauth->setIdentifier($response->getUsername());
+            $oauth->setProvider($response->getResourceOwner()->getName());
+        }
+
         $oauth->setAccessToken($response->getAccessToken());
         $oauth->setRefreshToken($response->getRefreshToken());
 

@@ -197,4 +197,31 @@ final class UserProviderSpec extends ObjectBehavior
 
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
     }
+
+    function it_should_update_token_when_oauth_succeed(
+        $oauthRepository,
+        ShopUserInterface $user,
+        UserOAuthInterface $oauth,
+        UserResponseInterface $response,
+        ResourceOwnerInterface $resourceOwner
+    ) {
+        $resourceOwner->getName()->willReturn('google');
+
+        $response->getUsername()->willReturn('username');
+        $response->getAccessToken()->willReturn('new_access_token');
+        $response->getRefreshToken()->willReturn('new_refresh_token');
+        $response->getResourceOwner()->willReturn($resourceOwner);
+
+        $oauthRepository->findOneBy(['provider' => 'google', 'identifier' => 'username'])->willReturn($oauth);
+
+        $user->getOAuthAccount('google')->willReturn($oauth);
+
+        $oauth->getUser()->willReturn($user);
+        
+        $oauth->setAccessToken('new_access_token')->shouldBeCalled();
+        $oauth->setRefreshToken('new_refresh_token')->shouldBeCalled();
+
+        $this->loadUserByOAuthUserResponse($response);
+    }
+
 }
