@@ -5,7 +5,6 @@ sylius:
     form:
         customer:
             first_name: Ime
-            group: Skupina
             last_name: Priimek
             email: E-pošta
             phone_number: Telefonska številka

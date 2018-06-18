@@ -14,11 +14,9 @@ sylius:
                     products: Izdelki
                     taxons: Taksoni
                 configuration:
-                    admin_users: Administratorji
                     channels: Kanali
                     countries: Države
                     currencies: Valute
-                    exchange_rates: Menjalni tečaji
                     header: Konfiguracija
                     locales: Področne nastavitve
                     payment_methods: Načini plačila
@@ -29,7 +27,6 @@ sylius:
                     zones: Cone
                 marketing:
                     header: Oglaševanje
-                    product_reviews: Ocene izdelkov
                     promotions: Promocije
                 customers:
                     customers: Kupci
