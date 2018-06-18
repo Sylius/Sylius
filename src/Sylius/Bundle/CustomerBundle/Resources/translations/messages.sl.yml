@@ -5,7 +5,6 @@ sylius:
     form:
         customer:
             first_name: Ime
-            group: Skupina
             last_name: Priimek
             email: E-pošta
             phone_number: Telefonska številka
@@ -13,8 +12,6 @@ sylius:
             birthday: Rojstni dan
             billing_address: Naslov za račun
             different_billing_address: Uporabimo drug naslov za dostavo?
-            only_customer_registration: Ustvari račun
-            subscribed_to_newsletter: Prijava na prejemanje novic
         customer_group:
             name: Ime
             roles: Vloge
