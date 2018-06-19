@@ -7,63 +7,61 @@
  * file that was distributed with this source code.
  */
 
-(function ($) {
-    'use strict';
+import $ from 'jquery';
 
-    $.fn.extend({
-        productSlugGenerator: function () {
-            var timeout;
+const updateSlug = function updateSlug(element) {
+  const slugInput = element.parents('.content').find('[name*="[slug]"]');
+  const loadableParent = slugInput.parents('.field.loadable');
 
-            $('[name*="sylius_product[translations]"][name*="[name]"]').on('input', function() {
-                clearTimeout(timeout);
-                var element = $(this);
+  if (slugInput.attr('readonly') === 'readonly') {
+    return;
+  }
 
-                timeout = setTimeout(function() {
-                    updateSlug(element);
-                }, 1000);
-            });
+  loadableParent.addClass('loading');
 
-            $('.toggle-product-slug-modification').on('click', function(e) {
-                e.preventDefault();
-                toggleSlugModification($(this), $(this).siblings('input'));
-            });
+  $.ajax({
+    type: 'GET',
+    url: slugInput.attr('data-url'),
+    data: { name: element.val() },
+    dataType: 'json',
+    accept: 'application/json',
+    success(response) {
+      slugInput.val(response.slug);
+      if (slugInput.parents('.field').hasClass('error')) {
+        slugInput.parents('.field').removeClass('error');
+        slugInput.parents('.field').find('.sylius-validation-error').remove();
+      }
+      loadableParent.removeClass('loading');
+    },
+  });
+};
 
-            function updateSlug(element) {
-                var slugInput = element.parents('.content').find('[name*="[slug]"]');
-                var loadableParent = slugInput.parents('.field.loadable');
+const toggleSlugModification = function toggleSlugModification(button, slugInput) {
+  if (slugInput.attr('readonly')) {
+    slugInput.removeAttr('readonly');
+    button.html('<i class="unlock icon"></i>');
+  } else {
+    slugInput.attr('readonly', 'readonly');
+    button.html('<i class="lock icon"></i>');
+  }
+};
 
-                if ('readonly' == slugInput.attr('readonly')) {
-                    return;
-                }
+$.fn.extend({
+  productSlugGenerator() {
+    let timeout;
 
-                loadableParent.addClass('loading');
+    $('[name*="sylius_product[translations]"][name*="[name]"]').on('input', (event) => {
+      clearTimeout(timeout);
+      const element = $(event.currentTarget);
 
-                $.ajax({
-                    type: "GET",
-                    url: slugInput.attr('data-url'),
-                    data: { name: element.val() },
-                    dataType: "json",
-                    accept: "application/json",
-                    success: function(data) {
-                        slugInput.val(data.slug);
-                        if (slugInput.parents('.field').hasClass('error')) {
-                            slugInput.parents('.field').removeClass('error');
-                            slugInput.parents('.field').find('.sylius-validation-error').remove();
-                        }
-                        loadableParent.removeClass('loading');
-                    }
-                });
-            }
-
-            function toggleSlugModification(button, slugInput) {
-                if (slugInput.attr('readonly')) {
-                    slugInput.removeAttr('readonly');
-                    button.html('<i class="unlock icon"></i>');
-                } else {
-                    slugInput.attr('readonly', 'readonly');
-                    button.html('<i class="lock icon"></i>');
-                }
-            }
-        }
+      timeout = setTimeout(() => {
+        updateSlug(element);
+      }, 1000);
     });
-})(jQuery);
+
+    $('.toggle-product-slug-modification').on('click', (event) => {
+      event.preventDefault();
+      toggleSlugModification($(event.currentTarget), $(event.currentTarget).siblings('input'));
+    });
+  },
+});

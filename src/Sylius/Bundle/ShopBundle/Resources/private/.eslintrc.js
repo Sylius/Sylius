@@ -1,7 +1,7 @@
 module.exports = {
   extends: 'airbnb-base',
   env: {
-    node: true,
+    browser: true,
   },
   rules: {
     'object-shorthand': ['error', 'always', {
@@ -16,5 +16,14 @@ module.exports = {
       ignoreStrings: true,
       ignoreTemplateLiterals: true,
     }],
+  },
+  settings: {
+    'import/resolver': {
+      'babel-module': {
+        alias: {
+          'sylius/ui': './src/Sylius/Bundle/UiBundle/Resources/private/js',
+        },
+      },
+    },
   },
 };

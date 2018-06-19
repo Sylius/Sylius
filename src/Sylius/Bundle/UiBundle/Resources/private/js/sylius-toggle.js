@@ -7,27 +7,25 @@
  * file that was distributed with this source code.
  */
 
-(function ( $ ) {
-    'use strict';
+import $ from 'jquery';
 
-    $.fn.extend({
-        toggleElement: function() {
-            return this.each(function() {
-                $(this).on('change', function(event) {
-                    event.preventDefault();
+$.fn.extend({
+  toggleElement() {
+    this.each((idx, el) => {
+      $(el).on('change', (event) => {
+        event.preventDefault();
 
-                    var toggleElement = $(this);
-                    var targetElement = $('#' + toggleElement.data('toggles'));
+        const toggle = $(event.currentTarget);
+        const targetElement = $(`#${toggle.data('toggles')}`);
 
-                    if (toggleElement.is(':checked')) {
-                        targetElement.show();
-                    } else {
-                        targetElement.hide();
-                    }
-                });
-
-                return $(this).trigger('change');
-            });
+        if (toggle.is(':checked')) {
+          targetElement.show();
+        } else {
+          targetElement.hide();
         }
+      });
+
+      $(el).trigger('change');
     });
-})( jQuery );
+  },
+});

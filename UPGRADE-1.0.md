@@ -26,7 +26,7 @@
   {
         // Other registrered bundles
     
-	    if (in_array($this->getEnvironment(), ['prod']))
+        if (in_array($this->getEnvironment(), ['prod']))
         {
             $bundles[] = new \Symfony\Bundle\WebServerBundle\WebServerBundle();
         }

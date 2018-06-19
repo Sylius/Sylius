@@ -1,12 +1,18 @@
+import { rollup } from 'rollup';
+import { uglify } from 'rollup-plugin-uglify';
+import babel from 'rollup-plugin-babel';
+import commonjs from 'rollup-plugin-commonjs';
 import concat from 'gulp-concat';
+import dedent from 'dedent';
 import gulp from 'gulp';
 import gulpif from 'gulp-if';
+import inject from 'rollup-plugin-inject';
 import livereload from 'gulp-livereload';
 import merge from 'merge-stream';
 import order from 'gulp-order';
+import resolve from 'rollup-plugin-node-resolve';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
-import uglify from 'gulp-uglify';
 import uglifycss from 'gulp-uglifycss';
 import upath from 'upath';
 import yargs from 'yargs';
@@ -34,6 +40,11 @@ const { argv } = yargs
   });
 
 const env = process.env.GULP_ENV;
+const options = {
+  minify: env === 'prod',
+  sourcemaps: env !== 'prod',
+};
+
 const rootPath = upath.normalizeSafe(argv.rootPath);
 const shopRootPath = upath.joinSafe(rootPath, 'shop');
 const vendorPath = upath.normalizeSafe(argv.vendorPath || '.');
@@ -44,9 +55,6 @@ const nodeModulesPath = upath.normalizeSafe(argv.nodeModulesPath);
 const paths = {
   shop: {
     js: [
-      upath.joinSafe(nodeModulesPath, 'jquery/dist/jquery.min.js'),
-      upath.joinSafe(nodeModulesPath, 'semantic-ui-css/semantic.min.js'),
-      upath.joinSafe(nodeModulesPath, 'lightbox2/dist/js/lightbox.js'),
       upath.joinSafe(vendorUiPath, 'Resources/private/js/**'),
       upath.joinSafe(vendorShopPath, 'Resources/private/js/**'),
     ],
@@ -83,7 +91,7 @@ const sourcePathMap = [
   },
 ];
 
-const mapSourcePath = function mapSourcePath(sourcePath /* , file */) {
+const mapSourcePath = function mapSourcePath(sourcePath) {
   const match = sourcePathMap.find(({ sourceDir }) => (
     sourcePath.substring(0, sourceDir.length) === sourceDir
   ));
@@ -97,15 +105,89 @@ const mapSourcePath = function mapSourcePath(sourcePath /* , file */) {
   return upath.joinSafe(destPath, sourcePath.substring(sourceDir.length));
 };
 
-export const buildShopJs = function buildShopJs() {
-  return gulp.src(paths.shop.js, { base: './' })
-    .pipe(gulpif(env !== 'prod', sourcemaps.init()))
-    .pipe(concat('app.js'))
-    .pipe(gulpif(env === 'prod', uglify()))
-    .pipe(gulpif(env !== 'prod', sourcemaps.mapSources(mapSourcePath)))
-    .pipe(gulpif(env !== 'prod', sourcemaps.write('./')))
-    .pipe(gulp.dest(upath.joinSafe(shopRootPath, 'js')))
-    .pipe(livereload());
+export const buildShopJs = async function buildShopJs() {
+  const bundle = await rollup({
+    input: upath.joinSafe(vendorShopPath, 'Resources/private/js/app.js'),
+    plugins: [
+      {
+        name: 'shim-app',
+
+        transform(code, id) {
+          if (upath.relative('', id) === upath.relative('', upath.joinSafe(vendorShopPath, 'Resources/private/js/app.js'))) {
+            return {
+              code: dedent`
+                import './shim/shim-polyfill';
+                import './shim/shim-jquery';
+                import './shim/shim-semantic-ui';
+                import './shim/shim-lightbox';
+
+                ${code}
+              `,
+              map: null,
+            };
+          }
+
+          return undefined;
+        },
+      },
+      inject({
+        include: `${nodeModulesPath}/**`,
+        modules: {
+          $: 'jquery',
+          jQuery: 'jquery',
+        },
+      }),
+      resolve({
+        jail: upath.resolve(nodeModulesPath),
+      }),
+      commonjs({
+        include: `${nodeModulesPath}/**`,
+      }),
+      babel({
+        babelrc: false,
+        exclude: `${nodeModulesPath}/**`,
+        presets: [
+          ['env', {
+            targets: {
+              browsers: [
+                'last 2 versions',
+                'Firefox ESR',
+                'IE >= 9',
+                'Android >= 4.0',
+                'iOS >= 7',
+              ],
+            },
+            modules: false,
+            exclude: [
+              'transform-async-to-generator',
+              'transform-regenerator',
+            ],
+            useBuiltIns: true,
+          }],
+        ],
+        plugins: [
+          ['external-helpers'],
+          ['fast-async'],
+          ['module-resolver', {
+            alias: {
+              'sylius/ui': upath.relative('', upath.joinSafe(vendorUiPath, 'Resources/private/js')),
+            },
+          }],
+          ['transform-object-rest-spread', {
+            useBuiltIns: false,
+          }],
+        ],
+      }),
+      options.minify && uglify(),
+    ],
+    treeshake: false,
+  });
+
+  await bundle.write({
+    file: upath.joinSafe(shopRootPath, 'js/app.js'),
+    format: 'iife',
+    sourcemap: options.sourcemaps,
+  });
 };
 buildShopJs.description = 'Build shop js assets.';
 
@@ -116,11 +198,11 @@ export const buildShopCss = function buildShopCss() {
   );
 
   const cssStream = gulp.src(paths.shop.css, { base: './' })
-    .pipe(gulpif(env !== 'prod', sourcemaps.init()))
+    .pipe(gulpif(options.sourcemaps, sourcemaps.init()))
     .pipe(concat('css-files.css'));
 
   const sassStream = gulp.src(paths.shop.sass, { base: './' })
-    .pipe(gulpif(env !== 'prod', sourcemaps.init()))
+    .pipe(gulpif(options.sourcemaps, sourcemaps.init()))
     .pipe(sass())
     .pipe(concat('sass-files.scss'));
 
@@ -129,9 +211,9 @@ export const buildShopCss = function buildShopCss() {
     merge(cssStream, sassStream)
       .pipe(order(['css-files.css', 'sass-files.scss']))
       .pipe(concat('style.css'))
-      .pipe(gulpif(env === 'prod', uglifycss()))
-      .pipe(gulpif(env !== 'prod', sourcemaps.mapSources(mapSourcePath)))
-      .pipe(gulpif(env !== 'prod', sourcemaps.write('./')))
+      .pipe(gulpif(options.minify, uglifycss()))
+      .pipe(gulpif(options.sourcemaps, sourcemaps.mapSources(mapSourcePath)))
+      .pipe(gulpif(options.sourcemaps, sourcemaps.write('./')))
       .pipe(gulp.dest(upath.joinSafe(shopRootPath, 'css')))
       .pipe(livereload()),
   );

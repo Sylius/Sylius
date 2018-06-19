@@ -1,43 +1,50 @@
-(function ( $ ) {
-    'use strict';
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-    $.fn.extend({
-        previewUploadedImage: function (root) {
-            $(root + ' input[type="file"]').each(function() {
-                $(this).change(function() {
-                    displayUploadedImage(this);
-                });
-            });
+import $ from 'jquery';
 
-            $(root + ' [data-form-collection="add"]').on('click', function() {
-                var self = $(this);
+const displayUploadedImage = function displayUploadedImage(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
 
-                setTimeout(function() {
-                    self.parent().find('.column:last-child input[type="file"]').on('change', function() {
-                        displayUploadedImage(this);
-                    });
-                }, 500);
-            });
-        }
+    reader.onload = (event) => {
+      const image = $(input).parent().siblings('.image');
+
+      if (image.length > 0) {
+        image.attr('src', event.target.result);
+      } else {
+        const img = $('<img class="ui small bordered image"/>');
+        img.attr('src', event.target.result);
+        $(input).parent().before(img);
+      }
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
+};
+
+$.fn.extend({
+  previewUploadedImage(root) {
+    $(`${root} input[type="file"]`).each((idx, el) => {
+      $(el).change((event) => {
+        displayUploadedImage(event.currentTarget);
+      });
     });
-})( jQuery );
 
-function displayUploadedImage(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+    $(`${root} [data-form-collection="add"]`).on('click', (evt) => {
+      const self = $(evt.currentTarget);
 
-        reader.onload = function (e) {
-            var image = $(input).parent().siblings('.image');
-
-            if (image.length > 0) {
-                image.attr('src', e.target.result);
-            } else {
-                var img = $('<img class="ui small bordered image"/>');
-                img.attr('src', e.target.result);
-                $(input).parent().before(img);
-            }
-        };
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+      setTimeout(() => {
+        self.parent().find('.column:last-child input[type="file"]').on('change', (event) => {
+          displayUploadedImage(event.currentTarget);
+        });
+      }, 500);
+    });
+  },
+});
