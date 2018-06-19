@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "sylius/grid": "^1.2",
         "symfony/form": "^3.4|^4.1",

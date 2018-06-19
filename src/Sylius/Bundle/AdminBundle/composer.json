@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "sonata-project/intl-bundle": "^2.2",
         "sylius/core-bundle": "^1.2",

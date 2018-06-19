@@ -32,7 +32,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "stof/doctrine-extensions-bundle": "^1.2",
         "sylius/mailer-bundle": "^1.2",
