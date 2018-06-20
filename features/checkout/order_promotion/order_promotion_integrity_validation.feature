@@ -10,13 +10,13 @@ Feature: Order promotions integrity
         And the store ships everywhere for free
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And there is a promotion "Christmas sale"
-        And this promotion gives "$10.00" discount to every order
-        And this promotion expires tomorrow
         And I am a logged in customer
 
     @ui
     Scenario: Preventing customer from completing checkout with already expired promotion
-        Given I added product "PHP T-Shirt" to the cart
+        Given this promotion gives "$10.00" discount to every order
+        And this promotion expires tomorrow
+        And I added product "PHP T-Shirt" to the cart
         And I have proceeded selecting "Offline" payment method
         And this promotion has already expired
         When I confirm my order
@@ -25,6 +25,13 @@ Feature: Order promotions integrity
 
     @ui
     Scenario: Receiving percentage discount when buying items for the required total value
+        Given the promotion gives "50%" discount to every order with items total at least "$80.00"
+        And I added product "PHP T-Shirt" to the cart
+        When I proceed selecting "Offline" payment method
+        Then my order total should be "$50.00"
+
+    @ui
+    Scenario: Successfully placing an order with percentage discount when buying items for the required total value
         Given the promotion gives "50%" discount to every order with items total at least "$80.00"
         And I added product "PHP T-Shirt" to the cart
         And I have proceeded selecting "Offline" payment method
