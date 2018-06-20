@@ -38,3 +38,12 @@ Feature: Receiving discount based on items total
         And I add product "Symfony T-Shirt" to the cart
         Then my cart total should be "$210.00"
         And my discount should be "-$10.00"
+        
+    @ui
+    Scenario: Receiving discount on order complete when buying items for the required total value
+        Given the promotion gives "$10.00" discount to every order with items total at least "$80.00"
+        When I add product "PHP T-Shirt" to the cart
+        Then my cart total should be "$70.00"
+        And my discount should be "-$10.00"
+        And when I complete my order
+        Then I should have the order completed with a subtotal of "$70.00"
