@@ -18,7 +18,7 @@ sylius:
             datetime: Datum / Zeit
             integer: Integer
             percent: Prozent
-            select: Bundesland auswählen
+            select: Auswahl
             text: Text
             textarea: Textfeld
             title: Attributtyp
