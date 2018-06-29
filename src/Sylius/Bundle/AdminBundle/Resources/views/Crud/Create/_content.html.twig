@@ -6,7 +6,7 @@
         {{ form_widget(form) }}
     {% endif %}
 
-    {{ sonata_block_render_event(event_prefix ~ '.form', {'resource': resource}) }}
+    {{ sonata_block_render_event(event_prefix ~ '.form', {'resource': resource, 'form': form}) }}
 
     {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({}))}} %}
 
