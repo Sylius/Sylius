@@ -4,13 +4,13 @@
 Search
 ======
 
-Having a products search functionality in an eCommerce system is a very popular usecase.
+Having a products search functionality in an eCommerce system is a very popular use case.
 Sylius provides a products search functionality that is a grid filter.
 
 Grid filters
 ------------
 
-For simple usecases of products search use the **filters of grids**.
+For simple use cases of products search use the **filters of grids**.
 For example, the shop's categories each have a ``search`` filter in the products grid:
 
 .. code-block:: yaml
@@ -25,7 +25,7 @@ For example, the shop's categories each have a ``search`` filter in the products
             form_options:
                 type: contains
 
-It searches by product names that contain a string that the user typed in the search bar.
+It searches by product names that contains a string that the user typed in the search bar.
 
 The search bar looks like below:
 
