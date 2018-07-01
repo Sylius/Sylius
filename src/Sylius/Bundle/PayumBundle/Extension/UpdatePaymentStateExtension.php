@@ -106,7 +106,7 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
         $stateMachine = $this->factory->get($payment, PaymentTransitions::GRAPH);
 
         Assert::isInstanceOf($stateMachine, StateMachineInterface::class);
-        
+
         if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {
             $stateMachine->apply($transition);
         }
