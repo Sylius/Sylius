@@ -85,9 +85,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iShouldSeeTheProductVariantLabeledAs($label)
     {
-        $itemsLabels = array_map(function ($item) {
-            return $item['descriptor'];
-        }, $this->getJSONResponse());
+        $itemsLabels = array_column($this->getJSONResponse(), 'descriptor');
 
         Assert::oneOf($label, $itemsLabels, 'Expected "%s" to be on the list, found: %s.');
     }

@@ -97,9 +97,7 @@ final class ManagingTaxonsContext implements Context
     public function iShouldSeeTheTaxonNamedAnd(...$expectedTaxonNames)
     {
         $response = json_decode($this->client->getResponse()->getContent(), true);
-        $taxonNames = array_map(function ($item) {
-            return $item['name'];
-        }, $response);
+        $taxonNames = array_column($response, 'name');
 
         Assert::allOneOf($taxonNames, $expectedTaxonNames);
     }

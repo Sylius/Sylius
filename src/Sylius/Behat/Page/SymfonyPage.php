@@ -60,7 +60,7 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
             $replace[sprintf('?%s=%s', $key, $value)] = '';
         }
 
-        $path = str_replace(array_keys($replace), array_values($replace), $path);
+        $path = str_replace(array_keys($replace), $replace, $path);
 
         return $this->makePathAbsolute($path);
     }
