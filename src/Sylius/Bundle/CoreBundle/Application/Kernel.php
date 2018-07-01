@@ -17,10 +17,8 @@ use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolver;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
 use Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
 use Symfony\Component\DependencyInjection\Loader\IniFileLoader;
@@ -31,7 +29,7 @@ use Symfony\Component\HttpKernel\Config\FileLocator;
 use Symfony\Component\HttpKernel\Kernel as HttpKernel;
 use Webmozart\Assert\Assert;
 
-class Kernel extends HttpKernel implements CompilerPassInterface
+class Kernel extends HttpKernel
 {
     public const VERSION = '1.2.1-DEV';
     public const VERSION_ID = '10201';
@@ -108,27 +106,6 @@ class Kernel extends HttpKernel implements CompilerPassInterface
         }
 
         return $bundles;
-    }
-
-    /**
-     * Hotfix for https://github.com/symfony/symfony/issues/27494, will be removed after Symfony ^4.1.1 is required.
-     *
-     * @internal
-     */
-    public function process(ContainerBuilder $container): void
-    {
-        if (HttpKernel::VERSION_ID !== 40100) {
-            return;
-        }
-
-        try {
-            $clientDefinition = $container->findDefinition('test.client');
-
-            if (count($clientDefinition->getArguments()) >= 5) {
-                $clientDefinition->replaceArgument(4, null);
-            }
-        } catch (ServiceNotFoundException $exception) {
-        }
     }
 
     /**
