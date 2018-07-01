@@ -115,8 +115,10 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
         }
 
         $template = $this->templateNameParser->parse($logicalName);
+
+        /** @var string $file */
         $file = $this->templateLocator->locate($template);
 
-        return (string) $this->cache[$logicalName] = $file;
+        return $this->cache[$logicalName] = $file;
     }
 }

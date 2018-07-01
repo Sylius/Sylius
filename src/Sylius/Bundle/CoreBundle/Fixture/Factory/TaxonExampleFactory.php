@@ -89,6 +89,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $taxon = $this->taxonRepository->findOneBy(['code' => $options['code']]);
 
         if (null === $taxon) {
+            /** @var TaxonInterface $taxon */
             $taxon = $this->taxonFactory->createNew();
         }
 

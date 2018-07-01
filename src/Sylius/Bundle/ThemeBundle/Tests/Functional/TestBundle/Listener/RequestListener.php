@@ -18,6 +18,7 @@ use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Webmozart\Assert\Assert;
 
 final class RequestListener
 {
@@ -27,7 +28,7 @@ final class RequestListener
     private $themeRepository;
 
     /**
-     * @var ThemeContextInterface
+     * @var SettableThemeContext
      */
     private $themeContext;
 

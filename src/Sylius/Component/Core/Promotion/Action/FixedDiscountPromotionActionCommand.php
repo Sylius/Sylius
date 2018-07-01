@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -50,6 +51,9 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
+        /** @var OrderInterface $subject */
+        Assert::isInstanceOf($subject, OrderInterface::class);
+
         if (!$this->isSubjectValid($subject)) {
             return false;
         }

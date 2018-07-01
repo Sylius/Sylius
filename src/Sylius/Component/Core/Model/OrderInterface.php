@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelAwareInterface;
+use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
@@ -198,4 +199,14 @@ interface OrderInterface extends
      * @param string|null $customerIp
      */
     public function setCustomerIp(?string $customerIp): void;
+
+    /**
+     * @return Collection|OrderItemInterface[]
+     */
+    public function getItems(): Collection;
+
+    /**
+     * @return ChannelInterface|null
+     */
+    public function getChannel(): ?BaseChannelInterface;
 }

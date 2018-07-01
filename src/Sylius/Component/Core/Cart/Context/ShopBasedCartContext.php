@@ -17,11 +17,13 @@ use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
+use Webmozart\Assert\Assert;
 
 final class ShopBasedCartContext implements CartContextInterface
 {
@@ -53,7 +55,7 @@ final class ShopBasedCartContext implements CartContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCart(): OrderInterface
+    public function getCart(): BaseOrderInterface
     {
         if (null !== $this->cart) {
             return $this->cart;
@@ -61,6 +63,7 @@ final class ShopBasedCartContext implements CartContextInterface
 
         /** @var OrderInterface $cart */
         $cart = $this->cartContext->getCart();
+        Assert::isInstanceOf($cart, OrderInterface::class);
 
         try {
             /** @var ChannelInterface $channel */

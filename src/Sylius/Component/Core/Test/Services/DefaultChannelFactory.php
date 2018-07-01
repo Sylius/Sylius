@@ -129,6 +129,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
 
         if (null === $currency) {
+            /** @var CurrencyInterface $currency */
             $currency = $this->currencyFactory->createNew();
             $currency->setCode($currencyCode);
 
@@ -147,6 +148,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         $locale = $this->localeRepository->findOneBy(['code' => $this->defaultLocaleCode]);
 
         if (null === $locale) {
+            /** @var LocaleInterface $locale */
             $locale = $this->localeFactory->createNew();
             $locale->setCode($this->defaultLocaleCode);
 

@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -44,7 +45,7 @@ final class ChannelPricingType extends AbstractResourceType
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($options): void {
             $channelPricing = $event->getData();
 
-            if (!$channelPricing instanceof $this->dataClass) {
+            if (!$channelPricing instanceof $this->dataClass || !$channelPricing instanceof ChannelPricingInterface) {
                 $event->setData(null);
 
                 return;

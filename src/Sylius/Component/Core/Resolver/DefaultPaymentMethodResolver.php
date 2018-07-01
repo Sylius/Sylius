@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\PaymentInterface as CorePaymentInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 use Webmozart\Assert\Assert;
@@ -42,10 +42,10 @@ class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterf
      *
      * @throws UnresolvedDefaultPaymentMethodException
      */
-    public function getDefaultPaymentMethod(PaymentInterface $subject): PaymentMethodInterface
+    public function getDefaultPaymentMethod(BasePaymentInterface $subject): PaymentMethodInterface
     {
-        /** @var CorePaymentInterface $subject */
-        Assert::isInstanceOf($subject, CorePaymentInterface::class);
+        /** @var PaymentInterface $subject */
+        Assert::isInstanceOf($subject, PaymentInterface::class);
 
         /** @var ChannelInterface $channel */
         $channel = $subject->getOrder()->getChannel();
