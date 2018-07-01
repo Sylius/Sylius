@@ -26,7 +26,7 @@ How to create an Adjustment programmatically?
 
 The Adjustments alone are a bit useless. They should be created alongside Orders.
 
-As usually get a factory and create an adjustment.
+As usual, get a factory and create an adjustment.
 Then give it a ``type`` - you can find all the available types on the `AdjustmentInterface <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/Model/AdjustmentInterface.php>`_.
 The adjustment needs also the ``amount`` - which is the amount of money that will be **added to the orders total**.
 

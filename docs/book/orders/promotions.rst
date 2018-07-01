@@ -18,7 +18,7 @@ and **priority** that is useful for them, because the exclusive promotion should
 How to create a Promotion programmatically?
 -------------------------------------------
 
-Just as usually, use a factory. The promotion needs a ``code`` and a ``name``.
+Just as usual, use a factory. The promotion needs a ``code`` and a ``name``.
 
 .. code-block:: php
 

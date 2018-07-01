@@ -4,7 +4,7 @@
 Shipments
 =========
 
-A **Shipment** is a representation of a shipping request for an Order. Sylius supports multiple shipments per one Order.
+A **Shipment** is a representation of a shipping request for an Order. Sylius can attach multiple shipments to each single Order.
 
 How is a Shipment created for an Order?
 '''''''''''''''''''''''''''''''''''''''
@@ -16,7 +16,7 @@ How is a Shipment created for an Order?
 The Shipment State Machine
 --------------------------
 
-A Shipment that is attached to an Order will have its own state machine with such states available:
+A Shipment that is attached to an Order will have its own state machine with the following states available:
 ``cart``, ``ready``, ``cancelled``, ``shipped``.
 
 The allowed transitions between these states are:
@@ -46,8 +46,8 @@ Shipping Methods
 How to create a ShippingMethod programmatically?
 ''''''''''''''''''''''''''''''''''''''''''''''''
 
-As usually use a factory to create a new ShippingMethod. Give it a ``code``, set a desired shipping calculator and set a ``zone``.
-It need also a configuration, for instance of the amount (cost).
+As usual use a factory to create a new ShippingMethod. Give it a ``code``, set a desired shipping calculator and set a ``zone``.
+It also need a configuration, for instance of the amount (cost).
 At the end add it to the system using a repository.
 
 .. code-block:: php
@@ -110,7 +110,7 @@ The already defined calculators in Sylius are described as constants in the
 ProductVariant Configuration
 ----------------------------
 
-In order to be able to calculate shipping costs basing on the volume and weight of products in an order
+In order to be able to calculate shipping costs based on the volume and weight of products in an order
 the ProductVariant has the ``depth``, ``width``, ``height`` and ``weight`` fields.
 
 Shipment complete events
