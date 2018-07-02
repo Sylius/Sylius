@@ -408,7 +408,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      */
     private function getPriceFromString($price): int
     {
-        return (int) round((int) str_replace(['€', '£', '$'], '', $price) * 100, 2);
+        return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
     /**
