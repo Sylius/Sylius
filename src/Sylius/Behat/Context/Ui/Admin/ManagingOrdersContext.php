@@ -848,7 +848,7 @@ final class ManagingOrdersContext implements Context
      */
     private function assertElementValidationMessage($type, $element, $expectedMessage)
     {
-        $element = sprintf('%s_%s', $type, implode('_', explode(' ', $element)));
+        $element = sprintf('%s_%s', $type, str_replace(' ', '_', $element));
         Assert::true($this->updatePage->checkValidationMessageFor($element, $expectedMessage));
     }
 }

@@ -75,7 +75,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function chooseDefaultTaxZone($taxZone)
     {
-        $this->getDocument()->selectFieldOption('Default tax zone', (null === $taxZone) ? '' : $taxZone);
+        $this->getDocument()->selectFieldOption('Default tax zone', $taxZone ?? '');
     }
 
     /**

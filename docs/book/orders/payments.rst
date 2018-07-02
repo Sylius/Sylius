@@ -81,7 +81,7 @@ Gateway is configured for each payment method separately using the payment metho
 How to create a PaymentMethod programmatically?
 '''''''''''''''''''''''''''''''''''''''''''''''
 
-As usually, use a factory to create a new PaymentMethod and give it a unique code.
+As usual, use a factory to create a new PaymentMethod and give it a unique code.
 
 .. code-block:: php
 

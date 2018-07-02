@@ -12,7 +12,7 @@ InventoryUnit
 InventoryUnit has a relation to a `Stockable <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Inventory/Model/StockableInterface.php>`_ on it,
 in case of Sylius Core it will be a relation to the **ProductVariant** that implements the StockableInterface on the **OrderItemUnit** that implements the InventoryUnitInterface.
 
-It represents a physical unit of the product variant that is in the magazine.
+It represents a physical unit of the product variant that is in the shop.
 
 Inventory On Hold
 -----------------
@@ -27,7 +27,7 @@ Putting inventory items ``onHold`` is a way of reserving them before the custome
 Availability Checker
 --------------------
 
-There is a service that will help you checking the availability of items in the inventory
+There is a service that will help you check the availability of items in the inventory
 - `AvailabilityChecker <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Inventory/Checker/AvailabilityChecker.php>`_.
 
 It has two methods ``isStockAvailable`` (is there at least one item available)  and ``isStockSufficient`` (is there a given amount of items available).

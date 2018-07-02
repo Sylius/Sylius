@@ -5,7 +5,7 @@ Taxons
 ======
 
 We understand Taxons in Sylius as you would normally define categories.
-Sylius gives you a possibility to categorize your products in a very flexible way, which is one of the most vital funtionalities
+Sylius gives you a possibility to categorize your products in a very flexible way, which is one of the most vital functionalities
 of the modern e-commerce systems.
 The Taxons system in Sylius works in a hierarchical way.
 Let's see exemplary categories trees:
@@ -107,10 +107,10 @@ In order to categorize products you will need to assign your taxons to them - vi
 What is the mainTaxon of a Product?
 -----------------------------------
 
-The product entity in Sylius core has a field ``mainTaxon``. On its basis for instance the breadcrumbs are generated.
-But also you can use it for your own logic, like for instance links generation.
+The product entity in Sylius core has a field ``mainTaxon``. This field is used, for instance, for breadcrumbs generation.
+But you can also use it for your own logic, like for instance links generation.
 
-To have it on your product you need to use the ``setMainTaxon()`` method.
+To set it on your product you need to use the ``setMainTaxon()`` method.
 
 Learn more
 ----------

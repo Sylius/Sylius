@@ -23,8 +23,8 @@
         "php": "^7.2",
 
         "sylius/resource": "^1.2",
-        "symfony/form": "^3.4|^4.1",
-        "symfony/http-foundation": "^3.4|^4.1",
+        "symfony/form": "^3.4|^4.1.1",
+        "symfony/http-foundation": "^3.4|^4.1.1",
         "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {

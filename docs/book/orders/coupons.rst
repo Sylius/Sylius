@@ -61,12 +61,12 @@ Now create an PromotionAction that will take place after applying this promotion
 
    $this->container->get('sylius.repository.promotion')->add($promotion);
 
-Finally to see the effects of your promotion with couponyou need to **apply a coupon on the Order**.
+Finally to see the effects of your promotion with coupon you need to **apply a coupon on the Order**.
 
 How to apply a coupon to an Order?
 ----------------------------------
 
-To apply you promotion with coupon that gives 100% discount on the shipping costs
+To apply your promotion with coupon that gives 100% discount on the shipping costs
 you need an order that has shipments. Set your promotion coupon on that order -
 this is what happens when a customer provides a coupon code during checkout.
 
@@ -83,7 +83,7 @@ Promotion Coupon Generator
 
 Making up new codes might become difficult if you would like to prepare a lot of coupons at once. That is why Sylius
 provides a service that generates random codes for you - `CouponGenerator <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Promotion/Generator/PromotionCouponGenerator.php>`_.
-In its **PromotionCouponGeneratorInstruction** you can define the amount of coupons that will be generated, length of their codes, expiration date and usage limit.
+In its **PromotionCouponGeneratorInstruction** you can define the amount of coupons that will be generated, the length of their codes, expiration date and usage limit.
 
 .. code-block:: php
 
