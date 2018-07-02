@@ -32,8 +32,8 @@ class AppKernel extends Kernel
     {
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
         ];
     }
