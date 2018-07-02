@@ -113,7 +113,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     private function chooseCountry($country, $addressType)
     {
-        $this->getElement($addressType . '_country')->selectOption((null !== $country) ? $country : 'Select');
+        $this->getElement($addressType . '_country')->selectOption($country ?? 'Select');
     }
 
     /**

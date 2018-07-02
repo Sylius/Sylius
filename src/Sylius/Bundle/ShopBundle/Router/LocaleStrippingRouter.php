@@ -113,6 +113,6 @@ final class LocaleStrippingRouter implements RouterInterface, WarmableInterface
             sprintf('?%s=%s', $key, $value) => '',
         ];
 
-        return str_replace(array_keys($replace), array_values($replace), $url);
+        return str_replace(array_keys($replace), $replace, $url);
     }
 }

@@ -342,7 +342,7 @@ final class ProductContext implements Context
             $productVariantName,
             $price,
             StringInflector::nameToUppercaseCode($productVariantName),
-            (null !== $channel) ? $channel : $this->sharedStorage->get('channel')
+            $channel ?? $this->sharedStorage->get('channel')
         );
     }
 
