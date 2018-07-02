@@ -120,7 +120,7 @@ sylius:
         cheapest_first: 'Pierwszy najtańszy'
         checkbox: 'Pole wyboru'
         checking_out_as: 'Sprawdzanie jako'
-        checkout: 'Koszyk'
+        checkout: 'Finalizuj zamówienie'
         choose_channel: 'Wybierz kanał'
         choose_file: 'Wybierz plik'
         choose_how_your_goods_will_be_delivered: 'Wybierz, jak Twoje towary zostaną dostarczone'
