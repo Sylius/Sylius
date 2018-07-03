@@ -11,6 +11,7 @@ sylius_grid:
         action:
             show: "@SyliusUi/Grid/Action/show.html.twig"
             pay: "@SyliusShop/Account/Order/Grid/Action/pay.html.twig"
+            cancel: "@SyliusShop/Account/Order/Grid/Action/cancel.html.twig"
         filter:
             string: "@SyliusUi/Grid/Filter/string.html.twig"
 

@@ -1,0 +1,10 @@
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('cancel')), options.link.parameters|default({'orderNumber': data.number}))) %}
+
+{% if can_customer_cancel_order(data) %}
+    <form action="{{ path }}" method="POST">
+        <button class="button ui labeled icon yellow" id="cancel">
+            <i class="icon {{ action.options.icon|default('undo alternative') }}" ></i>
+            {{ action.label|trans }}
+        </button>
+    </form>
+{% endif %}

@@ -43,3 +43,9 @@ sylius_shop_order_show:
                 parameters:
                     tokenValue: resource.tokenValue
             flash: false
+
+sylius_shop_order_cancel:
+    path: /{orderNumber}/cancel
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.customer_order_cancellation

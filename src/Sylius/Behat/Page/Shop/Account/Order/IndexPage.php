@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\Order;
 
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
@@ -103,5 +105,41 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             'customer_orders' => 'table',
             'last_order' => 'table tbody tr:last-child a:contains("Show")',
         ]);
+    }
+
+    public function isCancelButtonVisibleForOrderWithNumber(string $number): bool
+    {
+        $orderData = $this->getOrderData($number);
+
+        $actionButtonsText = $orderData->find('css', 'td:last-child')->getText();
+
+        return strpos($actionButtonsText, 'Cancel');
+    }
+
+    public function clickCancelButtonNextToTheOrder(string $number): void
+    {
+        $orderData = $this->getOrderData($number);
+
+        $cancelButton = $orderData->find('css', 'td:last-child button:contains("Cancel")');
+
+        Assert::notNull($cancelButton, sprintf('There is no cancel button next to order %s', $number));
+
+        $cancelButton->click();
+    }
+
+    public function isOrderCancelled(string $number): bool
+    {
+        $orderData = $this->getOrderData($number);
+
+        return $orderData->find('css', 'td:nth-child(5)')->getText() === 'Cancelled';
+    }
+
+    private function getOrderData(string $orderNumber): NodeElement
+    {
+        $orderData = $this->getSession()->getPage()->find('css', sprintf('tr:contains("%s")', $orderNumber));
+
+        Assert::notNull($orderData);
+
+        return $orderData;
     }
 }
