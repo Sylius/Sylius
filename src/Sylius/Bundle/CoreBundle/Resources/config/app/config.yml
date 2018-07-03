@@ -103,6 +103,7 @@ sonata_block:
                 address: ~
                 addresses: ~
                 cart: ~
+                channel: ~
                 customer: ~
                 form: ~
                 order: ~
