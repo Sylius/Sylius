@@ -152,8 +152,14 @@ class MugProductFixture extends AbstractFixture
                 ],
                 'product_options' => ['mug_type'],
                 'images' => [
-                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg'), 'main'],
-                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg'), 'thumbnail'],
+                    [
+                        'path' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg'),
+                        'type' => 'main',
+                    ],
+                    [
+                        'path' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg'),
+                        'type' => 'thumbnail',
+                    ],
                 ],
             ];
         }

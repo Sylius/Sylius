@@ -42,7 +42,7 @@ class ProductFixture extends AbstractResourceFixture
                 ->arrayNode('channels')->scalarPrototype()->end()->end()
                 ->arrayNode('product_attributes')->scalarPrototype()->end()->end()
                 ->arrayNode('product_options')->scalarPrototype()->end()->end()
-                ->arrayNode('images')->scalarPrototype()->end()->end()
+                ->arrayNode('images')->variablePrototype()->end()->end()
                 ->booleanNode('shipping_required')->end()
         ;
     }
