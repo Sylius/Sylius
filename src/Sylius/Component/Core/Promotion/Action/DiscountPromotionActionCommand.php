@@ -35,6 +35,9 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void
     {
+        /** @var OrderInterface $subject */
+        Assert::isInstanceOf($subject, OrderInterface::class);
+
         if (!$this->isSubjectValid($subject)) {
             return;
         }
@@ -55,7 +58,8 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
      */
     protected function isSubjectValid(PromotionSubjectInterface $subject): bool
     {
-        Assert::implementsInterface($subject, OrderInterface::class);
+        /** @var OrderInterface $subject */
+        Assert::isInstanceOf($subject, OrderInterface::class);
 
         return 0 !== $subject->countItems();
     }

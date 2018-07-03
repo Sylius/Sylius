@@ -39,11 +39,11 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sylius\Bundle\UserBundle\SyliusUserBundle(),
             new Sylius\Bundle\MailerBundle\SyliusMailerBundle(),
             new Sylius\Bundle\ReviewBundle\SyliusReviewBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
         ];
     }

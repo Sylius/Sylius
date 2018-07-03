@@ -61,6 +61,7 @@ final class ChannelSetup implements ChannelSetupInterface
         $channel = $this->channelRepository->findOneBy([]);
 
         if (null === $channel) {
+            /** @var ChannelInterface $channel */
             $channel = $this->channelFactory->createNew();
             $channel->setCode('default');
             $channel->setName('Default');

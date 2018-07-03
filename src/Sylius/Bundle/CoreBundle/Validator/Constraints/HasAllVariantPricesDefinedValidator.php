@@ -28,7 +28,11 @@ final class HasAllVariantPricesDefinedValidator extends ConstraintValidator
      */
     public function validate($product, Constraint $constraint): void
     {
+        /** @var ProductInterface $product */
         Assert::isInstanceOf($product, ProductInterface::class);
+
+        /** @var HasAllVariantPricesDefined $constraint */
+        Assert::isInstanceOf($constraint, HasAllVariantPricesDefined::class);
 
         if ($product->isSimple()) {
             return;

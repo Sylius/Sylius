@@ -61,6 +61,7 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
             try {
                 $shippingCharge = $this->shippingChargesCalculator->calculate($shipment);
 
+                /** @var AdjustmentInterface $adjustment */
                 $adjustment = $this->adjustmentFactory->createNew();
                 $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT);
                 $adjustment->setAmount($shippingCharge);

@@ -15,6 +15,7 @@ namespace Sylius\Component\Promotion\Generator;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Promotion\Exception\FailedGenerationException;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -70,6 +71,8 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
         $this->assertGenerationIsPossible($instruction);
         for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; ++$i) {
             $code = $this->generateUniqueCode($instruction->getCodeLength(), $generatedCoupons);
+
+            /** @var PromotionCouponInterface $coupon */
             $coupon = $this->couponFactory->createNew();
             $coupon->setPromotion($promotion);
             $coupon->setCode($code);

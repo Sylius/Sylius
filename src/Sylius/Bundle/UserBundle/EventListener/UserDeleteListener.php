@@ -16,6 +16,7 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Webmozart\Assert\Assert;
@@ -60,7 +61,9 @@ final class UserDeleteListener
             $event->setErrorCode(Response::HTTP_UNPROCESSABLE_ENTITY);
             $event->setMessage('Cannot remove currently logged in user.');
 
-            $this->session->getBag('flashes')->add('error', 'Cannot remove currently logged in user.');
+            /** @var FlashBagInterface $flashBag */
+            $flashBag = $this->session->getBag('flashes');
+            $flashBag->add('error', 'Cannot remove currently logged in user.');
         }
     }
 }

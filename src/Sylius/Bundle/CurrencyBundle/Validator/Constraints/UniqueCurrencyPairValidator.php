@@ -19,6 +19,7 @@ use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Webmozart\Assert\Assert;
 
 class UniqueCurrencyPairValidator extends ConstraintValidator
 {
@@ -40,6 +41,9 @@ class UniqueCurrencyPairValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
+        /** @var UniqueCurrencyPair $constraint */
+        Assert::isInstanceOf($constraint, UniqueCurrencyPair::class);
+
         if (!$value instanceof ExchangeRateInterface) {
             throw new UnexpectedTypeException($value, ExchangeRateInterface::class);
         }

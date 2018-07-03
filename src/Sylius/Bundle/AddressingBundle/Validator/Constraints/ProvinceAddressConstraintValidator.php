@@ -17,6 +17,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Webmozart\Assert\Assert;
 
 class ProvinceAddressConstraintValidator extends ConstraintValidator
 {
@@ -50,6 +51,9 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
                 'ProvinceAddressConstraintValidator can only validate instances of "Sylius\Component\Addressing\Model\AddressInterface"'
             );
         }
+
+        /** @var ProvinceAddressConstraint $constraint */
+        Assert::isInstanceOf($constraint, ProvinceAddressConstraint::class);
 
         $propertyPath = $this->context->getPropertyPath();
 

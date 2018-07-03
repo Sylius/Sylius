@@ -28,7 +28,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my tax total should be "$1.60"
-        And my order total should be "$21.6"
+        And my order total should be "$21.60"
 
     @ui @javascript
     Scenario: Placing an order with in the same tax and shipping zone
@@ -44,7 +44,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my tax total should be "$1.60"
-        And my order total should be "$21.6"
+        And my order total should be "$21.60"
 
     @ui @javascript
     Scenario: Placing an order within shipping zone

@@ -16,6 +16,7 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\UserEvents;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
@@ -70,9 +71,9 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param object $user
+     * @param UserInterface $user
      */
-    private function updateUserLastLogin($user): void
+    private function updateUserLastLogin(UserInterface $user): void
     {
         if (!$user instanceof $this->userClass) {
             return;

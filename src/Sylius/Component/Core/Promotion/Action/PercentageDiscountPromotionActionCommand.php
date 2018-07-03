@@ -19,6 +19,7 @@ use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicat
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Webmozart\Assert\Assert;
 
 final class PercentageDiscountPromotionActionCommand extends DiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
@@ -52,6 +53,8 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         /** @var OrderInterface $subject */
+        Assert::isInstanceOf($subject, OrderInterface::class);
+
         if (!$this->isSubjectValid($subject)) {
             return false;
         }
