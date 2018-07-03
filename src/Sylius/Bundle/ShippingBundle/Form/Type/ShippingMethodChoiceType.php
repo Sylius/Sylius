@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
@@ -114,6 +115,7 @@ final class ShippingMethodChoiceType extends AbstractType
                 throw new UnexpectedTypeException($method, ShippingMethodInterface::class);
             }
 
+            /** @var CalculatorInterface $calculator */
             $calculator = $this->calculators->get($method->getCalculator());
             $shippingCosts[$choiceView->value] = $calculator->calculate($subject, $method->getConfiguration());
         }

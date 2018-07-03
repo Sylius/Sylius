@@ -45,7 +45,7 @@ final class ThemeChoiceType extends AbstractType
                 return $this->themeRepository->findAll();
             },
             'choice_label' => function (ThemeInterface $theme): string {
-                return (string) $theme;
+                return $theme->getTitle() ?: $theme->getName();
             },
         ]);
     }

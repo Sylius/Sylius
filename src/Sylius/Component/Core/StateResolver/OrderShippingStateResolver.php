@@ -21,6 +21,7 @@ use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\OrderShippingTransitions;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
+use Webmozart\Assert\Assert;
 
 final class OrderShippingStateResolver implements StateResolverInterface
 {
@@ -42,6 +43,9 @@ final class OrderShippingStateResolver implements StateResolverInterface
      */
     public function resolve(BaseOrderInterface $order): void
     {
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
+
         if (OrderShippingStates::STATE_SHIPPED === $order->getShippingState()) {
             return;
         }

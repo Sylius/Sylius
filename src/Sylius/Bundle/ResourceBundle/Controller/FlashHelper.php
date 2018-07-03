@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Doctrine\Common\Inflector\Inflector;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -122,7 +123,9 @@ final class FlashHelper implements FlashHelperInterface
             $message = $this->prepareMessage($message, $parameters);
         }
 
-        $this->session->getBag('flashes')->add($type, $message);
+        /** @var FlashBagInterface $flashBag */
+        $flashBag = $this->session->getBag('flashes');
+        $flashBag->add($type, $message);
     }
 
     /**

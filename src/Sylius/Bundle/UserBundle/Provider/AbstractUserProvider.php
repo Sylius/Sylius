@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\Provider;
 
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
+use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Webmozart\Assert\Assert;
 
 abstract class AbstractUserProvider implements UserProviderInterface
 {
@@ -73,6 +75,9 @@ abstract class AbstractUserProvider implements UserProviderInterface
      */
     public function refreshUser(UserInterface $user): UserInterface
     {
+        /** @var SyliusUserInterface $user */
+        Assert::isInstanceOf($user, SyliusUserInterface::class);
+
         if (!$this->supportsClass(get_class($user))) {
             throw new UnsupportedUserException(
                 sprintf('Instances of "%s" are not supported.', get_class($user))

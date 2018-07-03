@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -164,9 +165,9 @@ class AddressExampleFactory extends AbstractExampleFactory
      */
     private function assertProvinceCodeIsValid(string $provinceCode, string $countryCode): void
     {
+        /** @var CountryInterface $country */
         $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
 
-        /** @var ProvinceInterface $province */
         foreach ($country->getProvinces() as $province) {
             if ($province->getCode() === $provinceCode) {
                 return;
@@ -182,7 +183,7 @@ class AddressExampleFactory extends AbstractExampleFactory
      */
     private function provideProvince(array $options, AddressInterface $address): void
     {
-        /** @var Country $country */
+        /** @var CountryInterface $country */
         $country = $this->countryRepository->findOneBy(['code' => $options['country_code']]);
 
         if ($country->hasProvinces()) {

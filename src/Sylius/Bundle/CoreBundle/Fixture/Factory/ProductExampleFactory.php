@@ -19,6 +19,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -379,6 +380,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     private function createProductTaxons(ProductInterface $product, array $options): void
     {
         foreach ($options['taxons'] as $taxon) {
+            /** @var ProductTaxonInterface $productTaxon */
             $productTaxon = $this->productTaxonFactory->createNew();
             $productTaxon->setProduct($product);
             $productTaxon->setTaxon($taxon);

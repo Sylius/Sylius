@@ -145,6 +145,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         $customer = $this->customerRepository->findOneBy(['emailCanonical' => $canonicalEmail]);
 
         if (null === $customer) {
+            /** @var CustomerInterface $customer */
             $customer = $this->customerFactory->createNew();
         }
 

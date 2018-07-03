@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -142,6 +143,7 @@ final class ShowAvailableShippingMethodsController
         $rawShippingMethods = [];
 
         foreach ($shippingMethods as $shippingMethod) {
+            /** @var CalculatorInterface $calculator */
             $calculator = $this->calculators->get($shippingMethod->getCalculator());
 
             $rawShippingMethods[] = [
