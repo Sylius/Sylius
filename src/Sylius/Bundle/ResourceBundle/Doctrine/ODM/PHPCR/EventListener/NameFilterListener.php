@@ -16,6 +16,8 @@ namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', NameFilterListener::class), E_USER_DEPRECATED);
+
 /**
  * Filter the node name field, replacing invalid characters with a substitute
  * characters.
