@@ -95,11 +95,7 @@ final class ContactContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
-        $this->assertFieldValidationMessage(
-            $this->contactPage,
-            $element,
-            sprintf('Please enter your %s.', $element)
-        );
+        Assert::same($this->contactPage->getValidationMessageFor($element), sprintf('Please enter your %s.', $element));
     }
 
     /**
@@ -107,11 +103,7 @@ final class ContactContext implements Context
      */
     public function iShouldBeNotifiedThatEmailIsInvalid()
     {
-        $this->assertFieldValidationMessage(
-            $this->contactPage,
-            'email',
-            'This email is invalid.'
-        );
+        Assert::same($this->contactPage->getValidationMessageFor('email'), 'This email is invalid.');
     }
 
     /**
@@ -123,15 +115,5 @@ final class ContactContext implements Context
             'A problem occurred while sending the contact request. Please try again later.',
             NotificationType::failure()
         );
-    }
-
-    /**
-     * @param PageInterface $page
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage(PageInterface $page, $element, $expectedMessage)
-    {
-        Assert::same($page->getValidationMessageFor($element), $expectedMessage);
     }
 }

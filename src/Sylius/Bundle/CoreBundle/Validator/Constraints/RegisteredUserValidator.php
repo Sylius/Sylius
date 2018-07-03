@@ -45,6 +45,7 @@ final class RegisteredUserValidator extends ConstraintValidator
         /** @var RegisteredUser $constraint */
         Assert::isInstanceOf($constraint, RegisteredUser::class);
 
+        /** @var CustomerInterface|null $existingCustomer */
         $existingCustomer = $this->customerRepository->findOneBy(['email' => $customer->getEmail()]);
         if (null !== $existingCustomer && null !== $existingCustomer->getUser()) {
             $this->context->buildViolation($constraint->message)->atPath('email')->addViolation();

@@ -14,11 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ResourceBundle\Grid\Renderer;
 
 use Sylius\Bundle\ResourceBundle\Grid\Parser\OptionsParserInterface;
+use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Sylius\Component\Grid\View\GridViewInterface;
+use Webmozart\Assert\Assert;
 
 final class TwigGridRenderer implements GridRendererInterface
 {
@@ -81,6 +83,9 @@ final class TwigGridRenderer implements GridRendererInterface
      */
     public function renderAction(GridViewInterface $gridView, Action $action, $data = null): string
     {
+        /** @var ResourceGridView $gridView */
+        Assert::isInstanceOf($gridView, ResourceGridView::class);
+
         $type = $action->getType();
         if (!isset($this->actionTemplates[$type])) {
             throw new \InvalidArgumentException(sprintf('Missing template for action type "%s".', $type));

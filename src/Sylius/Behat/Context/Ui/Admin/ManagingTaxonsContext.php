@@ -408,7 +408,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @return SymfonyPageInterface|CreatePageInterface|CreateForParentPageInterface|UpdatePageInterface
+     * @return CreatePageInterface|CreateForParentPageInterface|UpdatePageInterface
      */
     private function resolveCurrentPage()
     {

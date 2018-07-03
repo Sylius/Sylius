@@ -152,17 +152,6 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @When I choose :gatewayName gateway
-     */
-    public function iChooseGateway($gatewayName)
-    {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->chooseGateway($gatewayName);
-    }
-
-    /**
      * @Then this payment method :element should be :value
      */
     public function thisPaymentMethodElementShouldBe($element, $value)

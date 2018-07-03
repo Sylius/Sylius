@@ -67,5 +67,10 @@ interface CreatePageInterface extends BaseCreatePageInterface
     /**
      * @return bool
      */
+    public function hasCreateOption();
+
+    /**
+     * @return bool
+     */
     public function isUserFormHidden();
 }

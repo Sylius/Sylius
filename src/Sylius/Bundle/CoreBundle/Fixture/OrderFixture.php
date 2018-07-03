@@ -20,6 +20,7 @@ use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerI
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
@@ -225,6 +226,7 @@ class OrderFixture extends AbstractFixture
         $products = $this->productRepository->findAll();
 
         for ($i = 0; $i < $numberOfItems; ++$i) {
+            /** @var OrderItemInterface $item */
             $item = $this->orderItemFactory->createNew();
 
             $product = $this->faker->randomElement($products);

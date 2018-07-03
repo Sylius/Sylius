@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-interface IndexPageInterface
+use Sylius\Behat\Page\PageInterface;
+
+interface IndexPageInterface extends PageInterface
 {
     /**
      * @return int

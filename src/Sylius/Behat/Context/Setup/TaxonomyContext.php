@@ -184,7 +184,7 @@ final class TaxonomyContext implements Context
         $taxon = $this->taxonFactory->createNew();
         $taxon->setCode(StringInflector::nameToCode($names['en_US']));
         foreach ($names as $locale => $name) {
-            /** @var TranslationInterface|TaxonTranslationInterface $taxonTranslation */
+            /** @var TaxonTranslationInterface $taxonTranslation */
             $taxonTranslation = $this->taxonTranslationFactory->createNew();
             $taxonTranslation->setLocale($locale);
             $taxonTranslation->setName($name);

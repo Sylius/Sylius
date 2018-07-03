@@ -46,13 +46,17 @@ final class CountryChoiceTypeTest extends TypeTestCase
     {
         $this->countryRepository = $this->prophesize(RepositoryInterface::class);
 
-        $this->france = $this->prophesize(CountryInterface::class);
-        $this->france->getCode()->willReturn('FR');
-        $this->france->getName()->willReturn('France');
+        /** @var ProphecyInterface|CountryInterface $france */
+        $france = $this->prophesize(CountryInterface::class);
+        $france->getCode()->willReturn('FR');
+        $france->getName()->willReturn('France');
+        $this->france = $france;
 
-        $this->poland = $this->prophesize(CountryInterface::class);
-        $this->poland->getCode()->willReturn('PL');
-        $this->poland->getName()->willReturn('Poland');
+        /** @var ProphecyInterface|CountryInterface $poland */
+        $poland = $this->prophesize(CountryInterface::class);
+        $poland->getCode()->willReturn('PL');
+        $poland->getName()->willReturn('Poland');
+        $this->poland = $poland;
 
         parent::setUp();
     }

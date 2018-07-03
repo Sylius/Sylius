@@ -16,8 +16,8 @@ namespace Sylius\Bundle\CoreBundle\Order\NumberGenerator;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
+use Sylius\Component\Core\Model\OrderSequenceInterface;
 use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Order\Model\OrderSequenceInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -108,6 +108,7 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
             return $sequence;
         }
 
+        /** @var OrderSequenceInterface $sequence */
         $sequence = $this->sequenceFactory->createNew();
         $this->sequenceManager->persist($sequence);
 
