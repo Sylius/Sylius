@@ -72,11 +72,7 @@ final class ShopBasedCartContext implements CartContextInterface
             $cart->setChannel($channel);
             $cart->setCurrencyCode($channel->getBaseCurrency()->getCode());
             $cart->setLocaleCode($this->shopperContext->getLocaleCode());
-        } catch (ChannelNotFoundException $exception) {
-            throw new CartNotFoundException('Sylius was not able to prepare the cart.', $exception);
-        } catch (CurrencyNotFoundException $exception) {
-            throw new CartNotFoundException('Sylius was not able to prepare the cart.', $exception);
-        } catch (LocaleNotFoundException $exception) {
+        } catch (ChannelNotFoundException | CurrencyNotFoundException | LocaleNotFoundException $exception) {
             throw new CartNotFoundException('Sylius was not able to prepare the cart.', $exception);
         }
 
