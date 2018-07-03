@@ -25,6 +25,12 @@ Documentation
  
 Documentation is available at [docs.sylius.com](http://docs.sylius.com).
 
+Roadmap
+-------
+
+Our roadmap is available to browse, vote and comment as a [Github project](https://github.com/orgs/Sylius/projects/2). 
+You can also see all roadmap related issues by filtering [those labeled with "Roadmap"](https://github.com/Sylius/Sylius/labels/Roadmap).
+
 Community
 ---------
 
