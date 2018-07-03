@@ -23,7 +23,7 @@ interface BulkActionGridRendererInterface
      * @param Action $bulkAction
      * @param mixed|null $data
      *
-     * @return mixed
+     * @return string
      */
     public function renderBulkAction(GridViewInterface $gridView, Action $bulkAction, $data = null): string;
 }

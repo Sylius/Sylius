@@ -28,6 +28,8 @@ final class ValidTextAttributeConfigurationValidator extends ConstraintValidator
     {
         /** @var AttributeInterface $attribute */
         Assert::isInstanceOf($attribute, AttributeInterface::class);
+
+        /** @var ValidTextAttributeConfiguration $constraint */
         Assert::isInstanceOf($constraint, ValidTextAttributeConfiguration::class);
 
         if (TextAttributeType::TYPE !== $attribute->getType()) {

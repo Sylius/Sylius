@@ -28,6 +28,7 @@ final class PerUnitRateCalculator implements CalculatorInterface
      */
     public function calculate(BaseShipmentInterface $subject, array $configuration): int
     {
+        /** @var ShipmentInterface $subject */
         Assert::isInstanceOf($subject, ShipmentInterface::class);
 
         $channelCode = $subject->getOrder()->getChannel()->getCode();

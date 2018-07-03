@@ -18,6 +18,7 @@ use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -86,7 +87,9 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $this->session->getBag('flashes')->add('error', [
+        /** @var FlashBagInterface $flashBag */
+        $flashBag = $this->session->getBag('flashes');
+        $flashBag->add('error', [
             'message' => 'sylius.resource.delete_error',
             'parameters' => ['%resource%' => $resourceName],
         ]);

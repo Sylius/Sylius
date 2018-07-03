@@ -24,6 +24,7 @@ use Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType;
 use Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormInterface;
@@ -214,6 +215,7 @@ class UserController extends ResourceController
             return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
         }
 
+        /** @var GeneratorInterface $tokenGenerator */
         $tokenGenerator = $this->container->get(sprintf('sylius.%s.token_generator.email_verification', $this->metadata->getName()));
         $user->setEmailVerificationToken($tokenGenerator->generate());
 
@@ -251,7 +253,11 @@ class UserController extends ResourceController
         }
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
-            $user = $this->repository->findOneByEmail($passwordReset->getEmail());
+            /** @var UserRepositoryInterface $userRepository */
+            $userRepository = $this->repository;
+            Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);
+
+            $user = $userRepository->findOneByEmail($passwordReset->getEmail());
             if (null !== $user) {
                 $this->handleResetPasswordRequest($generator, $user, $senderEvent);
             }

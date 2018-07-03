@@ -27,7 +27,11 @@ final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
      */
     public function validate($order, Constraint $constraint): void
     {
+        /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
+
+        /** @var OrderPaymentMethodEligibility $constraint */
+        Assert::isInstanceOf($constraint, OrderPaymentMethodEligibility::class);
 
         $payments = $order->getPayments();
 

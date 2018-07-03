@@ -41,7 +41,11 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
      */
     public function validate($order, Constraint $constraint): void
     {
+        /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
+
+        /** @var OrderShippingMethodEligibility $constraint */
+        Assert::isInstanceOf($constraint, OrderShippingMethodEligibility::class);
 
         $shipments = $order->getShipments();
         if ($shipments->isEmpty()) {

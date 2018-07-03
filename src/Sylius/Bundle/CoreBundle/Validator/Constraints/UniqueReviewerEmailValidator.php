@@ -22,6 +22,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Webmozart\Assert\Assert;
 
 class UniqueReviewerEmailValidator extends ConstraintValidator
 {
@@ -60,6 +61,9 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
      */
     public function validate($review, Constraint $constraint): void
     {
+        /** @var UniqueReviewerEmail $constraint */
+        Assert::isInstanceOf($constraint, UniqueReviewerEmail::class);
+
         /** @var ReviewerInterface|null $customer */
         $customer = $review->getAuthor();
 

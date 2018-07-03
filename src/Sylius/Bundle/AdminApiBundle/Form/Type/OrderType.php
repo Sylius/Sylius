@@ -72,7 +72,9 @@ final class OrderType extends AbstractResourceType
                 $order = $event->getData();
 
                 /** @var ChannelInterface $channel */
-                if (null !== $channel = $order->getChannel()) {
+                $channel = $order->getChannel();
+
+                if (null !== $channel) {
                     $order->setCurrencyCode($channel->getBaseCurrency()->getCode());
                 }
             })

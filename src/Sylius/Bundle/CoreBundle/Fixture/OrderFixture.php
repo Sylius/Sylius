@@ -173,6 +173,7 @@ class OrderFixture extends AbstractFixture
             $currencyCode = $channel->getBaseCurrency()->getCode();
             $localeCode = $this->faker->randomElement($channel->getLocales()->toArray())->getCode();
 
+            /** @var OrderInterface $order */
             $order = $this->orderFactory->createNew();
             $order->setChannel($channel);
             $order->setCustomer($customer);

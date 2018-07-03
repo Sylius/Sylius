@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Addressing\Factory;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ZoneFactory implements ZoneFactoryInterface
@@ -66,6 +67,7 @@ final class ZoneFactory implements ZoneFactoryInterface
         /** @var ZoneInterface $zone */
         $zone = $this->createNew();
         foreach ($membersCodes as $memberCode) {
+            /** @var ZoneMemberInterface $zoneMember */
             $zoneMember = $this->zoneMemberFactory->createNew();
             $zoneMember->setCode($memberCode);
 

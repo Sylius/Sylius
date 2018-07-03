@@ -109,7 +109,7 @@ final class EmailChecker implements EmailCheckerInterface
     /**
      * @param string $recipient
      *
-     * @throws /InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     private function assertRecipientIsValid(string $recipient): void
     {

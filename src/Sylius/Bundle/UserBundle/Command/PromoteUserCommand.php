@@ -52,14 +52,14 @@ EOT
 
         foreach ($securityRoles as $securityRole) {
             if ($user->hasRole($securityRole)) {
-                $output->writeln(sprintf('<error>User "%s" did already have "%s" security role.</error>', (string) $user, $securityRole));
+                $output->writeln(sprintf('<error>User "%s" did already have "%s" security role.</error>', $user->getEmail(), $securityRole));
                 $error = true;
 
                 continue;
             }
 
             $user->addRole($securityRole);
-            $output->writeln(sprintf('Security role <comment>%s</comment> has been added to user <comment>%s</comment>', $securityRole, (string) $user));
+            $output->writeln(sprintf('Security role <comment>%s</comment> has been added to user <comment>%s</comment>', $securityRole, $user->getEmail()));
         }
 
         if (!$error) {

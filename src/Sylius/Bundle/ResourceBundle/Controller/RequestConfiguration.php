@@ -154,7 +154,7 @@ class RequestConfiguration
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return string
      */
