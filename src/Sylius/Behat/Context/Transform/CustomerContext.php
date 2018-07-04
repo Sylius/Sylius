@@ -60,6 +60,7 @@ final class CustomerContext implements Context
         /** @var CustomerInterface $customer */
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
         if (null === $customer) {
+            /** @var CustomerInterface $customer */
             $customer = $this->customerFactory->createNew();
             $customer->setEmail($email);
 

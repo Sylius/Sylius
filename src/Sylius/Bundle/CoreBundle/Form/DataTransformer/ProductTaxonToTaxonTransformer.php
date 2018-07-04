@@ -82,6 +82,7 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
         $productTaxon = $this->productTaxonRepository->findOneBy(['taxon' => $taxon, 'product' => $this->product]);
 
         if (null === $productTaxon) {
+            /** @var ProductTaxonInterface $productTaxon */
             $productTaxon = $this->productTaxonFactory->createNew();
             $productTaxon->setProduct($this->product);
             $productTaxon->setTaxon($taxon);

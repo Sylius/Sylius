@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Installer\Provider;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -152,7 +153,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
      */
     private function getDatabaseName(): string
     {
-        return $this->doctrineRegistry->getManager()->getConnection()->getDatabase();
+        return $this->getEntityManager()->getConnection()->getDatabase();
     }
 
     /**
@@ -160,6 +161,11 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
      */
     private function getSchemaManager(): AbstractSchemaManager
     {
-        return $this->doctrineRegistry->getManager()->getConnection()->getSchemaManager();
+        return $this->getEntityManager()->getConnection()->getSchemaManager();
+    }
+
+    private function getEntityManager(): EntityManagerInterface
+    {
+        return $this->doctrineRegistry->getManager();
     }
 }
