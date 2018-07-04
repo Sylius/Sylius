@@ -778,6 +778,7 @@ final class OrderContext implements Context
         $customers = [];
 
         for ($i = 0; $i < $count; ++$i) {
+            /** @var CustomerInterface $customer */
             $customer = $this->customerFactory->createNew();
             $customer->setEmail(sprintf('john%s@doe.com', uniqid()));
             $customer->setFirstname('John');
@@ -791,14 +792,9 @@ final class OrderContext implements Context
         return $customers;
     }
 
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
-    private function getPriceFromString($price)
+    private function getPriceFromString(string $price): int
     {
-        return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
+        return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
     /**
@@ -847,6 +843,7 @@ final class OrderContext implements Context
      */
     private function addVariantWithPriceToOrder(OrderInterface $order, ProductVariantInterface $variant, $price)
     {
+        /** @var OrderItemInterface $item */
         $item = $this->orderItemFactory->createNew();
         $item->setVariant($variant);
         $item->setUnitPrice($price);

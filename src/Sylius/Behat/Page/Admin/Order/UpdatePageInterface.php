@@ -27,4 +27,12 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param AddressInterface $address
      */
     public function specifyBillingAddress(AddressInterface $address);
+
+    /**
+     * @param string $element
+     * @param string $message
+     *
+     * @return bool
+     */
+    public function checkValidationMessageFor($element, $message);
 }

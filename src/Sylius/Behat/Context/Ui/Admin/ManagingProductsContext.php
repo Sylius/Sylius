@@ -144,6 +144,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
+
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->specifyCode($code);
@@ -987,7 +988,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @return SymfonyPageInterface|IndexPageInterface|IndexPerTaxonPageInterface|CreateSimpleProductPageInterface|CreateConfigurableProductPageInterface|UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface
+     * @return IndexPageInterface|IndexPerTaxonPageInterface|CreateSimpleProductPageInterface|CreateConfigurableProductPageInterface|UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface
      */
     private function resolveCurrentPage()
     {

@@ -30,7 +30,7 @@ use Webmozart\Assert\Assert;
 class Order extends BaseOrder implements OrderInterface
 {
     /**
-     * @var BaseCustomerInterface
+     * @var CustomerInterface
      */
     protected $customer;
 
@@ -126,6 +126,8 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function setCustomer(?BaseCustomerInterface $customer): void
     {
+        Assert::isInstanceOf($customer, CustomerInterface::class);
+
         $this->customer = $customer;
     }
 
@@ -270,6 +272,8 @@ class Order extends BaseOrder implements OrderInterface
     public function addPayment(BasePaymentInterface $payment): void
     {
         /** @var PaymentInterface $payment */
+        Assert::isInstanceOf($payment, PaymentInterface::class);
+
         if (!$this->hasPayment($payment)) {
             $this->payments->add($payment);
             $payment->setOrder($this);
@@ -282,6 +286,8 @@ class Order extends BaseOrder implements OrderInterface
     public function removePayment(BasePaymentInterface $payment): void
     {
         /** @var PaymentInterface $payment */
+        Assert::isInstanceOf($payment, PaymentInterface::class);
+
         if ($this->hasPayment($payment)) {
             $this->payments->removeElement($payment);
             $payment->setOrder(null);

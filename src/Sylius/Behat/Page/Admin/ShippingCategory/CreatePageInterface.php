@@ -18,6 +18,16 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInteface;
 interface CreatePageInterface extends BaseCreatePageInteface
 {
     /**
+     * @param string $code
+     */
+    public function specifyCode($code);
+
+    /**
+     * @param string $name
+     */
+    public function nameIt($name);
+
+    /**
      * @param string $description
      */
     public function specifyDescription($description);

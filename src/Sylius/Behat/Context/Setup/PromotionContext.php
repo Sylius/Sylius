@@ -677,6 +677,7 @@ final class PromotionContext implements Context
         $discount,
         CustomerGroupInterface $customerGroup
     ) {
+        /** @var PromotionRuleInterface $rule */
         $rule = $this->ruleFactory->createNew();
         $rule->setType(CustomerGroupRuleChecker::TYPE);
         $rule->setConfiguration(['group_code' => $customerGroup->getCode()]);

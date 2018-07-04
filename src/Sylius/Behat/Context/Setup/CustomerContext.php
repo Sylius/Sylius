@@ -17,7 +17,9 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -190,6 +192,8 @@ final class CustomerContext implements Context
     public function thereIsUserIdentifiedByWithAsShippingCountry($email, CountryInterface $country)
     {
         $customer = $this->createCustomerWithUserAccount($email, 'password123', true, 'John', 'Doe');
+
+        /** @var AddressInterface $address */
         $address = $this->addressFactory->createNew();
         $address->setCountryCode($country->getCode());
         $address->setCity('Berlin');
@@ -252,7 +256,9 @@ final class CustomerContext implements Context
         $lastName = null,
         $role = null
     ) {
+        /** @var ShopUserInterface $user */
         $user = $this->userFactory->createNew();
+
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
 

@@ -198,10 +198,10 @@ final class ProductAssociationContext implements Context
      */
     private function addProductAssociationTypeTranslation(
         ProductAssociationTypeInterface $productAssociationType,
-        $name,
-        $locale
+        string $name,
+        string $locale
     ) {
-        /** @var ProductAssociationTypeTranslationInterface|TranslationInterface $translation */
+        /** @var ProductAssociationTypeTranslationInterface $translation */
         $translation = $this->productAssociationTypeTranslationFactory->createNew();
         $translation->setLocale($locale);
         $translation->setName($name);

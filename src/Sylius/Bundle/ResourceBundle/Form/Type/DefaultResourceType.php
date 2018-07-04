@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Builder\DefaultFormBuilderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Symfony\Component\Form\AbstractType;
@@ -46,6 +47,8 @@ final class DefaultResourceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $metadata = $this->metadataRegistry->getByClass($options['data_class']);
+
+        /** @var DefaultFormBuilderInterface $formBuilder */
         $formBuilder = $this->formBuilderRegistry->get($metadata->getDriver());
 
         $formBuilder->build($metadata, $builder, $options);

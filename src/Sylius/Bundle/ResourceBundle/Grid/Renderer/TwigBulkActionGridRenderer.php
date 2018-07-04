@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ResourceBundle\Grid\Renderer;
 
 use Sylius\Bundle\ResourceBundle\Grid\Parser\OptionsParserInterface;
+use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Renderer\BulkActionGridRendererInterface;
 use Sylius\Component\Grid\View\GridViewInterface;
+use Webmozart\Assert\Assert;
 
 final class TwigBulkActionGridRenderer implements BulkActionGridRendererInterface
 {
@@ -55,6 +57,9 @@ final class TwigBulkActionGridRenderer implements BulkActionGridRendererInterfac
      */
     public function renderBulkAction(GridViewInterface $gridView, Action $bulkAction, $data = null): string
     {
+        /** @var ResourceGridView $gridView */
+        Assert::isInstanceOf($gridView, ResourceGridView::class);
+
         $type = $bulkAction->getType();
         if (!isset($this->bulkActionTemplates[$type])) {
             throw new \InvalidArgumentException(sprintf('Missing template for bulk action type "%s".', $type));

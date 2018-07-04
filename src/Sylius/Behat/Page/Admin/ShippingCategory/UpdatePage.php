@@ -15,7 +15,6 @@ namespace Sylius\Behat\Page\Admin\ShippingCategory;
 
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
