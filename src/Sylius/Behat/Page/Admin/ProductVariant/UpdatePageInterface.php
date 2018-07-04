@@ -29,7 +29,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      */
     public function specifyPrice($price);
 
-
     public function disableTracking();
 
     public function enableTracking();
