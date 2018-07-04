@@ -67,7 +67,7 @@ $.fn.extend({
       if (!isLeafLoaded(parentCode)) {
         expandButton.api({
           on: 'now',
-          url: tree.data('taxon-leafs-url'),
+          url: tree.data('tree-leafs-url') || tree.data('taxon-leafs-url'),
           method: 'GET',
           cache: false,
           data: {
@@ -153,7 +153,7 @@ $.fn.extend({
     tree.api({
       on: 'now',
       method: 'GET',
-      url: tree.data('taxon-root-nodes-url'),
+      url: tree.data('tree-root-nodes-url') || tree.data('taxon-root-nodes-url'),
       cache: false,
       beforeSend(settings) {
         loader.addClass('active');
