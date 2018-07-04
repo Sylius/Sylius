@@ -63,7 +63,7 @@ Would like to help us and build the most developer-friendly eCommerce platform? 
 License
 -------
 
-Sylius is completely free and released under the [MIT License](https://github.com/Sylius/Sylius/blob/1.2/LICENSE).
+Sylius is completely free and released under the [MIT License](https://github.com/Sylius/Sylius/blob/master/LICENSE).
 
 Authors
 -------
