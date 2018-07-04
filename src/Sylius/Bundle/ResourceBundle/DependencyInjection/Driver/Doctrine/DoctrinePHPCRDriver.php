@@ -24,6 +24,8 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', DoctrinePHPCRDriver::class), E_USER_DEPRECATED);
+
 final class DoctrinePHPCRDriver extends AbstractDoctrineDriver
 {
     /**
