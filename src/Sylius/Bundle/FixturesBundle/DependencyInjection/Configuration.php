@@ -134,6 +134,6 @@ final class Configuration implements ConfigurationInterface
                 })
         ;
 
-        $optionsNode->prototype('variable')->cannotBeEmpty()->defaultValue([]);
+        $optionsNode->variablePrototype()->cannotBeEmpty()->defaultValue([]);
     }
 }

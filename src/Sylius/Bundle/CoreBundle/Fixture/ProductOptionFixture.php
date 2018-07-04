@@ -37,7 +37,7 @@ class ProductOptionFixture extends AbstractResourceFixture
                 ->arrayNode('values')
                     ->requiresAtLeastOneElement()
                     ->useAttributeAsKey('code')
-                    ->prototype('scalar')
+                    ->scalarPrototype()
                 ->end()
         ;
     }

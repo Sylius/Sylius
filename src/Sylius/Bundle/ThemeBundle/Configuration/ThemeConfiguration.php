@@ -82,7 +82,7 @@ final class ThemeConfiguration implements ConfigurationInterface
         $parentsNodeDefinition
             ->requiresAtLeastOneElement()
             ->performNoDeepMerging()
-                ->prototype('scalar')
+                ->scalarPrototype()
                 ->cannotBeEmpty()
         ;
     }
@@ -99,7 +99,7 @@ final class ThemeConfiguration implements ConfigurationInterface
         ;
 
         /** @var ArrayNodeDefinition $screenshotNodeDefinition */
-        $screenshotNodeDefinition = $screenshotsNodeDefinition->prototype('array');
+        $screenshotNodeDefinition = $screenshotsNodeDefinition->arrayPrototype();
 
         $screenshotNodeDefinition
             ->validate()
@@ -134,7 +134,7 @@ final class ThemeConfiguration implements ConfigurationInterface
         ;
 
         /** @var ArrayNodeDefinition $authorNodeDefinition */
-        $authorNodeDefinition = $authorsNodeDefinition->prototype('array');
+        $authorNodeDefinition = $authorsNodeDefinition->arrayPrototype();
         $authorNodeDefinition
             ->validate()
                 ->ifTrue(function ($author) {

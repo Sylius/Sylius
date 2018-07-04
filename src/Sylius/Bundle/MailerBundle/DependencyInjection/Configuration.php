@@ -71,7 +71,7 @@ final class Configuration implements ConfigurationInterface
                 ->end()
                 ->arrayNode('templates')
                     ->useAttributeAsKey('name')
-                    ->prototype('scalar')->end()
+                    ->scalarPrototype()->end()
                 ->end()
             ->end()
         ;

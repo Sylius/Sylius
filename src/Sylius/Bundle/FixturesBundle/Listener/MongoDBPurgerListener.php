@@ -64,7 +64,7 @@ final class MongoDBPurgerListener extends AbstractListener implements BeforeSuit
             ->children()
                 ->arrayNode('managers')
                     ->defaultValue([null])
-                    ->prototype('scalar')
+                    ->scalarPrototype()
         ;
     }
 }
