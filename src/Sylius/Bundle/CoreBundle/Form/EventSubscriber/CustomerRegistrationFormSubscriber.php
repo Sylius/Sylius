@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
-use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -62,6 +62,8 @@ final class CustomerRegistrationFormSubscriber implements EventSubscriberInterfa
         if (!isset($rawData['email']) || empty($rawData['email'])) {
             return;
         }
+
+        /** @var CustomerInterface|null $existingCustomer */
         $existingCustomer = $this->customerRepository->findOneBy(['email' => $rawData['email']]);
         if (null === $existingCustomer || null !== $existingCustomer->getUser()) {
             return;

@@ -133,7 +133,7 @@ abstract class Page implements PageInterface
     /**
      * @param string $name
      *
-     * @return NodeElement
+     * @return string
      */
     protected function getParameter($name)
     {

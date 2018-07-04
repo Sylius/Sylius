@@ -71,6 +71,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ClassMetadataInfo $metadata,
         ClassMetadataFactory $metadataFactory
     ): void {
+        /** @var ClassMetadataInfo $targetEntityMetadata */
         $targetEntityMetadata = $metadataFactory->getMetadataFor($subjectClass);
         $subjectMapping = [
             'fieldName' => 'subject',
@@ -97,6 +98,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ClassMetadataInfo $metadata,
         ClassMetadataFactory $metadataFactory
     ): void {
+        /** @var ClassMetadataInfo $attributeMetadata */
         $attributeMetadata = $metadataFactory->getMetadataFor($attributeClass);
         $attributeMapping = [
             'fieldName' => 'attribute',

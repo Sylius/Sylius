@@ -38,6 +38,23 @@ Community
 
 Stay updated by following our [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
 
+Official plugins
+----------------
+
+This is the list of oficially supported Sylius plugins:
+
+ - [Shop API Plugin](https://github.com/Sylius/SyliusShopApiPlugin) - 
+   provides customer-level API for the shop functionalities
+ - [Admin Order Creation Plugin](https://github.com/Sylius/AdminOrderCreationPlugin) - 
+   allows to create orders directly from the administrator panel
+ - [Customer Reorder Plugin](https://github.com/Sylius/CustomerReorderPlugin) - 
+   allows customer to copy items from the already placed order to the current cart
+ - [Customer Order Cancellation Plugin](https://github.com/Sylius/CustomerOrderCancellationPlugin) -
+   allows customer to cancel a placed order which has not been processed yet
+   
+You can find other plugins on [our ecosystem website](https://sylius.com/plugins/) or by looking for 
+[packages marked as *sylius-plugin*](https://packagist.org/explore/?type=sylius-plugin).
+
 Contributing
 ------------
 
@@ -46,7 +63,7 @@ Would like to help us and build the most developer-friendly eCommerce platform? 
 License
 -------
 
-Sylius is completely free and released under the [MIT License](https://github.com/Sylius/Sylius/blob/master/LICENSE).
+Sylius is completely free and released under the [MIT License](https://github.com/Sylius/Sylius/blob/1.2/LICENSE).
 
 Authors
 -------

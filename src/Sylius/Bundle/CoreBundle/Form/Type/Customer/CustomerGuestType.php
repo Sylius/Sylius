@@ -79,6 +79,7 @@ final class CustomerGuestType extends AbstractResourceType
                     return;
                 }
 
+                /** @var CustomerInterface $customer */
                 $customer = $this->customerFactory->createNew();
                 $customer->setEmail($data['email']);
 

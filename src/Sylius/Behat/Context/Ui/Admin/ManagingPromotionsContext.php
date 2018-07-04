@@ -350,6 +350,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSetItsUsageLimitTo($usageLimit)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->fillUsageLimit($usageLimit);

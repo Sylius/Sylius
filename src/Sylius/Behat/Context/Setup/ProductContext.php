@@ -35,7 +35,6 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -792,14 +791,9 @@ final class ProductContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
-    private function getPriceFromString($price)
+    private function getPriceFromString(string $price): int
     {
-        return (int) round($price * 100, 2);
+        return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
     /**
@@ -934,9 +928,10 @@ final class ProductContext implements Context
      */
     private function addProductTranslation(ProductInterface $product, $name, $locale)
     {
-        /** @var ProductTranslationInterface|TranslationInterface $translation */
+        /** @var ProductTranslationInterface $translation */
         $translation = $product->getTranslation($locale);
         if ($translation->getLocale() !== $locale) {
+            /** @var ProductTranslationInterface $translation */
             $translation = $this->productTranslationFactory->createNew();
         }
 
@@ -954,7 +949,7 @@ final class ProductContext implements Context
      */
     private function addProductVariantTranslation(ProductVariantInterface $productVariant, $name, $locale)
     {
-        /** @var ProductVariantTranslationInterface|TranslationInterface $translation */
+        /** @var ProductVariantTranslationInterface $translation */
         $translation = $this->productVariantTranslationFactory->createNew();
         $translation->setLocale($locale);
         $translation->setName($name);

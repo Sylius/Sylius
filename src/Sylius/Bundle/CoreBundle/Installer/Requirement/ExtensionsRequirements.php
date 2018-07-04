@@ -61,7 +61,7 @@ final class ExtensionsRequirements extends RequirementCollection
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.installer.extensions.pcre', []),
-                defined('PCRE_VERSION') ? ((float) PCRE_VERSION) > 8.0 : false,
+                defined('PCRE_VERSION') ? ((float) substr(PCRE_VERSION, 0, strpos(PCRE_VERSION, ' '))) > 8.0 : false,
                 true,
                 $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'PCRE (>=8.0)'])
             ))

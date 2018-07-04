@@ -401,12 +401,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return strtoupper(Intl::getRegionBundle()->getCountryName($countryCode, 'en'));
     }
 
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
-    private function getPriceFromString($price): int
+    private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }

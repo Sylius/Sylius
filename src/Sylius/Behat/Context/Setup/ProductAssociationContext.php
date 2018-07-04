@@ -22,7 +22,6 @@ use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeTranslationInterface;
 use Sylius\Component\Product\Repository\ProductAssociationTypeRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductAssociationContext implements Context
@@ -198,10 +197,10 @@ final class ProductAssociationContext implements Context
      */
     private function addProductAssociationTypeTranslation(
         ProductAssociationTypeInterface $productAssociationType,
-        $name,
-        $locale
+        string $name,
+        string $locale
     ) {
-        /** @var ProductAssociationTypeTranslationInterface|TranslationInterface $translation */
+        /** @var ProductAssociationTypeTranslationInterface $translation */
         $translation = $this->productAssociationTypeTranslationFactory->createNew();
         $translation->setLocale($locale);
         $translation->setName($name);

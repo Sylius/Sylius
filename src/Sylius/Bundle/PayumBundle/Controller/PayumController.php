@@ -16,6 +16,8 @@ namespace Sylius\Bundle\PayumBundle\Controller;
 use FOS\RestBundle\View\View;
 use Payum\Core\Model\GatewayConfigInterface;
 use Payum\Core\Payum;
+use Payum\Core\Request\Generic;
+use Payum\Core\Request\GetStatusInterface;
 use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
 use Payum\Core\Security\TokenInterface;
@@ -24,12 +26,14 @@ use Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -124,15 +128,19 @@ final class PayumController
 
         $token = $this->getHttpRequestVerifier()->verify($request);
 
+        /** @var Generic|GetStatusInterface $status */
         $status = $this->getStatusRequestFactory->createNewWithModel($token);
         $this->payum->getGateway($token->getGatewayName())->execute($status);
+
         $resolveNextRoute = $this->resolveNextRouteRequestFactory->createNewWithModel($status->getFirstModel());
         $this->payum->getGateway($token->getGatewayName())->execute($resolveNextRoute);
 
         $this->getHttpRequestVerifier()->invalidate($token);
 
         if (PaymentInterface::STATE_NEW !== $status->getValue()) {
-            $request->getSession()->getBag('flashes')->add('info', sprintf('sylius.payment.%s', $status->getValue()));
+            /** @var FlashBagInterface $flashBag */
+            $flashBag = $request->getSession()->getBag('flashes');
+            $flashBag->add('info', sprintf('sylius.payment.%s', $status->getValue()));
         }
 
         return $this->viewHandler->handle(
@@ -153,8 +161,11 @@ final class PayumController
 
     private function provideTokenBasedOnPayment(PaymentInterface $payment, array $redirectOptions): TokenInterface
     {
+        /** @var PaymentMethodInterface $paymentMethod */
+        $paymentMethod = $payment->getMethod();
+
         /** @var GatewayConfigInterface $gatewayConfig */
-        $gatewayConfig = $payment->getMethod()->getGatewayConfig();
+        $gatewayConfig = $paymentMethod->getGatewayConfig();
 
         if (isset($gatewayConfig->getConfig()['use_authorize']) && $gatewayConfig->getConfig()['use_authorize'] == true) {
             $token = $this->getTokenFactory()->createAuthorizeToken(

@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -73,6 +74,7 @@ final class UserContext implements Context
      */
     public function iDeleteAccount($email)
     {
+        /** @var ShopUserInterface $user */
         $user = $this->userRepository->findOneByEmail($email);
 
         $this->sharedStorage->set('deleted_user', $user);

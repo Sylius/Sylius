@@ -116,14 +116,6 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I rename it to :name
-     */
-    public function iRenameItTo($name)
-    {
-        $this->updatePage->nameIt($name);
-    }
-
-    /**
      * @When I add it
      * @When I try to add it
      */
@@ -416,14 +408,6 @@ final class ManagingProductVariantsContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @When I remove its name
-     */
-    public function iRemoveItsNameFromTranslation()
-    {
-        $this->updatePage->nameIt('');
     }
 
     /**

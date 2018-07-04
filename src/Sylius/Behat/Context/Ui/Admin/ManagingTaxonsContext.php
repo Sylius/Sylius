@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
-use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -408,7 +407,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @return SymfonyPageInterface|CreatePageInterface|CreateForParentPageInterface|UpdatePageInterface
+     * @return CreatePageInterface|CreateForParentPageInterface|UpdatePageInterface
      */
     private function resolveCurrentPage()
     {
