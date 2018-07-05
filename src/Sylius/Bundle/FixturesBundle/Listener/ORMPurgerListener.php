@@ -80,13 +80,13 @@ final class ORMPurgerListener extends AbstractListener implements BeforeSuiteLis
         $optionsNodeBuilder
             ->arrayNode('managers')
                 ->defaultValue([null])
-                ->prototype('scalar')
+                ->scalarPrototype()
         ;
 
         $optionsNodeBuilder
             ->arrayNode('exclude')
                 ->defaultValue([])
-                ->prototype('scalar')
+                ->scalarPrototype()
         ;
     }
 }

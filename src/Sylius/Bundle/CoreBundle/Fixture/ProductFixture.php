@@ -38,11 +38,11 @@ class ProductFixture extends AbstractResourceFixture
                 ->scalarNode('short_description')->cannotBeEmpty()->end()
                 ->scalarNode('description')->cannotBeEmpty()->end()
                 ->scalarNode('main_taxon')->cannotBeEmpty()->end()
-                ->arrayNode('taxons')->prototype('scalar')->end()->end()
-                ->arrayNode('channels')->prototype('scalar')->end()->end()
-                ->arrayNode('product_attributes')->prototype('scalar')->end()->end()
-                ->arrayNode('product_options')->prototype('scalar')->end()->end()
-                ->arrayNode('images')->prototype('scalar')->end()->end()
+                ->arrayNode('taxons')->scalarPrototype()->end()->end()
+                ->arrayNode('channels')->scalarPrototype()->end()->end()
+                ->arrayNode('product_attributes')->scalarPrototype()->end()->end()
+                ->arrayNode('product_options')->scalarPrototype()->end()->end()
+                ->arrayNode('images')->scalarPrototype()->end()->end()
                 ->booleanNode('shipping_required')->end()
         ;
     }

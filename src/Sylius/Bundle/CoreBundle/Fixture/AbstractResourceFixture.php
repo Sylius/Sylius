@@ -105,7 +105,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
         $resourcesNode = $optionsNode->children()->arrayNode('custom');
 
         /** @var ArrayNodeDefinition $resourceNode */
-        $resourceNode = $resourcesNode->requiresAtLeastOneElement()->prototype('array');
+        $resourceNode = $resourcesNode->requiresAtLeastOneElement()->arrayPrototype();
         $this->configureResourceNode($resourceNode);
 
         return $treeBuilder;
