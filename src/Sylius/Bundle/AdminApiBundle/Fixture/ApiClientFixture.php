@@ -35,7 +35,7 @@ class ApiClientFixture extends AbstractResourceFixture
             ->children()
                 ->scalarNode('random_id')->cannotBeEmpty()->end()
                 ->scalarNode('secret')->cannotBeEmpty()->end()
-                ->arrayNode('allowed_grant_types')->prototype('scalar')->cannotBeEmpty()->defaultValue([])->end()
+                ->arrayNode('allowed_grant_types')->scalarPrototype()->cannotBeEmpty()->defaultValue([])->end()
         ;
     }
 }

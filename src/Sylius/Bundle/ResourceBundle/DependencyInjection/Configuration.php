@@ -111,7 +111,7 @@ final class Configuration implements ConfigurationInterface
                         ->variableNode('paginate')->defaultNull()->end()
                         ->variableNode('limit')->defaultNull()->end()
                         ->arrayNode('allowed_paginate')
-                            ->prototype('integer')->end()
+                            ->integerPrototype()->end()
                             ->defaultValue([10, 20, 30])
                         ->end()
                         ->integerNode('default_page_size')->defaultValue(10)->end()
@@ -150,7 +150,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('drivers')
                     ->defaultValue([SyliusResourceBundle::DRIVER_DOCTRINE_ORM])
-                    ->prototype('enum')->values(SyliusResourceBundle::getAvailableDrivers())->end()
+                    ->enumPrototype()->values(SyliusResourceBundle::getAvailableDrivers())->end()
                 ->end()
             ->end()
         ;

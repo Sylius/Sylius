@@ -46,7 +46,7 @@ final class Configuration implements ConfigurationInterface
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->arrayNode('gateways')
                     ->useAttributeAsKey('name')
-                    ->prototype('scalar')
+                    ->scalarPrototype()
                 ->end()
             ->end()
         ;

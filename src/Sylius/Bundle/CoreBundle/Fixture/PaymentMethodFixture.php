@@ -38,8 +38,8 @@ class PaymentMethodFixture extends AbstractResourceFixture
                 ->scalarNode('instructions')->end()
                 ->scalarNode('gatewayName')->cannotBeEmpty()->end()
                 ->scalarNode('gatewayFactory')->cannotBeEmpty()->end()
-                ->arrayNode('gatewayConfig')->prototype('variable')->end()->end()
-                ->arrayNode('channels')->prototype('scalar')->end()->end()
+                ->arrayNode('gatewayConfig')->variablePrototype()->end()->end()
+                ->arrayNode('channels')->scalarPrototype()->end()->end()
                 ->booleanNode('enabled')->end()
         ;
     }

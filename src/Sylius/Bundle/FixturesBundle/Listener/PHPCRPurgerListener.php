@@ -64,7 +64,7 @@ final class PHPCRPurgerListener extends AbstractListener implements BeforeSuiteL
             ->children()
                 ->arrayNode('managers')
                     ->defaultValue([null])
-                    ->prototype('scalar')
+                    ->scalarPrototype()
         ;
     }
 }

@@ -187,7 +187,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('scopes')
                     ->useAttributeAsKey('name')
-                    ->prototype('scalar')->end()
+                    ->scalarPrototype()->end()
                 ->end()
             ->end()
         ;
