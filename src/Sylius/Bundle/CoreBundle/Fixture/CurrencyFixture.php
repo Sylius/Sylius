@@ -74,7 +74,7 @@ class CurrencyFixture extends AbstractFixture
         $optionsNode
             ->children()
                 ->arrayNode('currencies')
-                    ->prototype('scalar')
+                    ->scalarPrototype()
         ;
     }
 }

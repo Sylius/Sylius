@@ -83,7 +83,7 @@ class LocaleFixture extends AbstractFixture
         $optionsNode
             ->children()
                 ->arrayNode('locales')
-                    ->prototype('scalar')
+                    ->scalarPrototype()
         ;
     }
 }

@@ -112,7 +112,7 @@ class GeographicalFixture extends AbstractFixture
             ->arrayNode('countries')
                 ->performNoDeepMerging()
                 ->defaultValue(array_keys(Intl::getRegionBundle()->getCountryNames()))
-                ->prototype('scalar')
+                ->scalarPrototype()
         ;
 
         /** @var ArrayNodeDefinition $provinceNode */
@@ -120,14 +120,14 @@ class GeographicalFixture extends AbstractFixture
             ->arrayNode('provinces')
                 ->normalizeKeys(false)
                 ->useAttributeAsKey('code')
-                ->prototype('array')
+                ->arrayPrototype()
         ;
 
         $provinceNode
             ->performNoDeepMerging()
             ->normalizeKeys(false)
             ->useAttributeAsKey('code')
-            ->prototype('scalar')
+            ->scalarPrototype()
         ;
 
         /** @var ArrayNodeDefinition $zoneNode */
@@ -135,16 +135,16 @@ class GeographicalFixture extends AbstractFixture
             ->arrayNode('zones')
                 ->normalizeKeys(false)
                 ->useAttributeAsKey('code')
-                ->prototype('array')
+                ->arrayPrototype()
         ;
 
         $zoneNode
             ->performNoDeepMerging()
             ->children()
                 ->scalarNode('name')->cannotBeEmpty()->end()
-                ->arrayNode('countries')->prototype('scalar')->end()->end()
-                ->arrayNode('zones')->prototype('scalar')->end()->end()
-                ->arrayNode('provinces')->prototype('scalar')->end()->end()
+                ->arrayNode('countries')->scalarPrototype()->end()->end()
+                ->arrayNode('zones')->scalarPrototype()->end()->end()
+                ->arrayNode('provinces')->scalarPrototype()->end()->end()
                 ->scalarNode('scope')->end()
         ;
 

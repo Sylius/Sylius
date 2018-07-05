@@ -1,5 +1,28 @@
 # CHANGELOG FOR `1.1.X`
 
+## v1.1.8 (2018-07-05)
+
+#### TL;DR
+
+- It's no longer required to put Sylius bundles before Doctrine Bundle ([#9527](https://github.com/Sylius/Sylius/pull/9527))
+- There's an official plugins list in README ([#9493](https://github.com/Sylius/Sylius/pull/9493))
+
+#### Details
+
+- [#9340](https://github.com/Sylius/Sylius/pull/9340) the name of file was wrong in docu (@amirkoklan)
+- [#9345](https://github.com/Sylius/Sylius/pull/9345) [HOTFIX] Missing configuration for channel in sonata (@lchrusciel)
+- [#9487](https://github.com/Sylius/Sylius/pull/9487) Improve use of Semantic's cards in frontend (@mbabker)
+- [#9493](https://github.com/Sylius/Sylius/pull/9493) Document officially supported plugins in the README (@pamil)
+- [#9527](https://github.com/Sylius/Sylius/pull/9527) [ResourceBundle] Fix DoctrineTargetEntitiesResolverPass priority to avoid mapping issues. (@adrienlucas)
+- [#9537](https://github.com/Sylius/Sylius/pull/9537) [Admin] Add missing form parameter to sonata form events (@GSadee)
+- [#9539](https://github.com/Sylius/Sylius/pull/9539) [minor] SCA (@kalessil)
+- [#9540](https://github.com/Sylius/Sylius/pull/9540) PHPStan 0.10 upgrade & road to level 2 checks (@pamil)
+- [#9546](https://github.com/Sylius/Sylius/pull/9546) Added title to product reviews, fixes #9425 (@richardjohn, @adrienlucas, @Zales0123)
+- [#9548](https://github.com/Sylius/Sylius/pull/9548) Unify catch block in ShopBasedCartContext (@pamil)
+- [#9550](https://github.com/Sylius/Sylius/pull/9550) Mention roadmap in README (@pamil)
+- [#9552](https://github.com/Sylius/Sylius/pull/9552) Lower PHPStan level 2 errors from 222 to 9 (@pamil)
+- [#9555](https://github.com/Sylius/Sylius/pull/9555) Add Sylius/CustomerOrderCancellationPlugin to the list of official plugins (@pamil)
+
 ## v1.1.7 (2018-06-12)
 
 #### TL;DR
