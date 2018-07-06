@@ -72,7 +72,7 @@
                     url: notificationMenu.attr('data-url'),
                     accept: "application/json",
                     success: function (data) {
-                        if (undefined !== data && data.version !== retrieve(LAST_SYLIUS_VERSION)) {
+                        if (undefined !== data && undefined !== data.version && data.version !== retrieve(LAST_SYLIUS_VERSION)) {
                             store(LAST_SYLIUS_VERSION, data.version.toString());
                         }
                     },
