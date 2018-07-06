@@ -440,6 +440,18 @@ final class AccountContext implements Context
     }
 
     /**
+     * @Then my last order total should be :total
+     */
+    public function myLastOrderTotalShouldBe(string $total): void
+    {
+        $this->orderIndexPage->open();
+
+        $this->orderIndexPage->openLastOrderPage();
+
+        Assert::same($this->orderShowPage->getTotal(), $total);
+    }
+
+    /**
      * @When I want to log in
      */
     public function iWantToLogIn()
