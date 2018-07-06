@@ -31,6 +31,7 @@ imports:
     - suites/ui/channel/products_accessibility_in_multiple_channels.yml
     - suites/ui/channel/theming.yml
     - suites/ui/checkout/checkout.yml
+    - suites/ui/checkout/checkout_order_promotion.yml
     - suites/ui/checkout/paying_for_order.yml
     - suites/ui/contact/requesting_contact.yml
     - suites/ui/currency/currencies.yml

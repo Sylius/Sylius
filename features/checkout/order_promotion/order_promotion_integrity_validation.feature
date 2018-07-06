@@ -1,4 +1,4 @@
-@checkout
+@checkout_order_promotion
 Feature: Order promotions integrity
     In order to have valid promotions applied on my order
     As a Customer
@@ -30,4 +30,4 @@ Feature: Order promotions integrity
         And I have proceeded selecting "Offline" payment method
         When I confirm my order
         Then I should see the thank you page
-        And my order total should be "$40.00"
+        And my last order total should be "$50.00"

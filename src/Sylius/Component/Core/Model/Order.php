@@ -404,7 +404,7 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function getPromotionSubjectTotal(): int
     {
-        return $this->getItemsTotal();
+        return $this->getTotal() - $this->getAdjustmentsTotalRecursively();
     }
 
     /**

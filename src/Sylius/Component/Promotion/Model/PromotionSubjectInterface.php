@@ -18,6 +18,8 @@ use Doctrine\Common\Collections\Collection;
 interface PromotionSubjectInterface
 {
     /**
+     * This should be the promotion subject total BEFORE applying adjustments.
+     *
      * @return int
      */
     public function getPromotionSubjectTotal(): int;
