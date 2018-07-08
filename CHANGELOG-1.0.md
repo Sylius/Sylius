@@ -1,5 +1,22 @@
 # CHANGELOG FOR `1.0.X`
 
+## v1.0.17 (2018-07-08)
+
+#### TL;DR
+
+- **SECURITY FIX:** Added CSRF protection for the following action:
+  
+    - marking order's payment as completed
+    - marking order's payment as refunded
+    - marking product review as accepted
+    - marking product review as rejected
+
+#### Details
+
+- [#9475](https://github.com/Sylius/Sylius/pull/9475) Make Stalebot less annoying (@Zales0123)
+- [#9515](https://github.com/Sylius/Sylius/pull/9515) [Documentation] Fix typos (@adrienlucas)
+- [#9491](https://github.com/Sylius/Sylius/pull/9491) [Documentation] Document Forum in the support section (@CoderMaggie)
+
 ## v1.0.16 (2018-06-12)
 
 #### TL;DR
