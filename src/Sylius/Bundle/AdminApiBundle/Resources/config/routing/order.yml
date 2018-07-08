@@ -56,4 +56,5 @@ sylius_admin_api_order_payment_complete:
                 graph: sylius_payment
                 transition: complete
             section: admin_api
+            csrf_protection: false
             return_content: false
