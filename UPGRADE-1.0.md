@@ -1,3 +1,9 @@
+# UPGRADE FROM `v1.0.16` TO `v1.0.17`
+
+* `Sylius\Bundle\ResourceBundle\Controller::applyStateMachineTransitionAction` method now includes CSRF token checks due 
+  to security reasons. If you used it for REST API, these checks can be disabled by adding 
+  `csrf_protection: false` to your routing configuration. 
+
 # UPGRADE FROM `v1.0.8` TO `v1.0.9`
 
 * `Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper`'s `resolveVariant(ProductInterface $product): ProductVariantInterface`
