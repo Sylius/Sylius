@@ -49,7 +49,7 @@ $.fn.extend({
         url: notificationMenu.attr('data-url'),
         accept: 'application/json',
         success(response) {
-          if (undefined !== response && response.version !== retrieve(LAST_SYLIUS_VERSION)) {
+          if (undefined !== response && undefined !== response.version && response.version !== retrieve(LAST_SYLIUS_VERSION)) {
             store(LAST_SYLIUS_VERSION, response.version.toString());
           }
         },
