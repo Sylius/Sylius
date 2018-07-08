@@ -1,5 +1,24 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.2 (2018-07-08)
+
+#### TL;DR
+
+- **SECURITY FIX:** Added CSRF protection for the following action:
+  
+    - marking order's payment as completed
+    - marking order's payment as refunded
+    - marking product review as accepted
+    - marking product review as rejected
+
+#### Details
+
+- [#9475](https://github.com/Sylius/Sylius/pull/9475) Make Stalebot less annoying (@Zales0123)
+- [#9491](https://github.com/Sylius/Sylius/pull/9491) [Documentation] Document Forum in the support section (@CoderMaggie)
+- [#9515](https://github.com/Sylius/Sylius/pull/9515) [Documentation] Fix typos (@adrienlucas)
+- [#9558](https://github.com/Sylius/Sylius/pull/9558) Use ...Prototype() instead of prototype('...') in Symfony configuration (@pamil)
+
+
 ## v1.2.1 (2018-07-05)
 
 #### TL;DR
