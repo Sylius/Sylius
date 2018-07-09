@@ -60,6 +60,12 @@ Contributing
 
 Would like to help us and build the most developer-friendly eCommerce platform? Start from reading our [Contributing Guide](http://docs.sylius.com/en/latest/contributing/index.html)!
 
+Security issues
+---------------
+
+If you think that you have found a security issue in Sylius, please do not use the issue tracker and do not post it publicly. 
+Instead, all security issues must be sent to `security@sylius.com`.
+
 License
 -------
 
