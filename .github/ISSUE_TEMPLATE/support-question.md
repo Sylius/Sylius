@@ -1,5 +1,5 @@
 ---
-name: "Support Question \U0001F6AB"
+name: "Support Question 🚫"
 about: See http://docs.sylius.com/en/latest/support/index.html for questions about
   using Sylius
 
