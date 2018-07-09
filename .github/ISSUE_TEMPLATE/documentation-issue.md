@@ -1,5 +1,5 @@
 ---
-name: "Documentation Issue \U0001F4D6"
+name: "Documentation Issue 📖"
 about: Report missing or bugged documentation
 
 ---
