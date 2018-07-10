@@ -1,3 +1,14 @@
+# UPGRADE FROM `v1.2.2` TO `v1.2.3`
+
+* **BC BREAK**: `OrderShowMenuBuilder` constructor now requires the fourth argument being 
+  `Symfony\Component\Security\Csrf\CsrfTokenManagerInterface` instance due to security reasons.
+
+# UPGRADE FROM `v1.2.0` TO `v1.2.2`
+
+* **BC BREAK**: `Sylius\Bundle\ResourceBundle\Controller::applyStateMachineTransitionAction` method now includes CSRF token checks due 
+  to security reasons. If you used it for REST API, these checks can be disabled by adding 
+  `csrf_protection: false` to your routing configuration.
+
 # UPGRADE FROM `v1.1.X` TO `v1.2.0`
 
 ## Codebase
