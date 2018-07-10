@@ -1921,6 +1921,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceInterface $resource,
         FlashHelperInterface $flashHelper,
         EventDispatcherInterface $eventDispatcher,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        ContainerInterface $container,
         ResourceControllerEvent $event,
         Request $request
     ): void {
@@ -1930,9 +1932,17 @@ final class ResourceControllerSpec extends ObjectBehavior
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
+        $request->get('_csrf_token')->willReturn('xyz');
+
+        $container->has('security.csrf.token_manager')->willReturn(true);
+        $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $resource->getId()->willReturn('1');
 
         $configuration->isHtmlRequest()->willReturn(true);
 
@@ -1964,6 +1974,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         FlashHelperInterface $flashHelper,
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        ContainerInterface $container,
         StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
         RequestConfiguration $configuration,
@@ -1979,9 +1991,17 @@ final class ResourceControllerSpec extends ObjectBehavior
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
+        $request->get('_csrf_token')->willReturn('xyz');
+
+        $container->has('security.csrf.token_manager')->willReturn(true);
+        $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $resource->getId()->willReturn('1');
 
         $configuration->isHtmlRequest()->willReturn(true);
 
@@ -2008,10 +2028,11 @@ final class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         ObjectManager $manager,
         SingleResourceProviderInterface $singleResourceProvider,
-        RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        ContainerInterface $container,
         StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
         RequestConfiguration $configuration,
@@ -2027,9 +2048,17 @@ final class ResourceControllerSpec extends ObjectBehavior
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
+        $request->get('_csrf_token')->willReturn('xyz');
+
+        $container->has('security.csrf.token_manager')->willReturn(true);
+        $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $resource->getId()->willReturn('1');
 
         $configuration->isHtmlRequest()->willReturn(true);
 
@@ -2062,6 +2091,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
         EventDispatcherInterface $eventDispatcher,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        ContainerInterface $container,
         ResourceControllerEvent $event,
         Request $request,
         Response $redirectResponse
@@ -2072,9 +2103,17 @@ final class ResourceControllerSpec extends ObjectBehavior
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
+        $request->get('_csrf_token')->willReturn('xyz');
+
+        $container->has('security.csrf.token_manager')->willReturn(true);
+        $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $resource->getId()->willReturn('1');
 
         $configuration->isHtmlRequest()->willReturn(true);
 
@@ -2107,6 +2146,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         ResourceInterface $resource,
         FlashHelperInterface $flashHelper,
         EventDispatcherInterface $eventDispatcher,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        ContainerInterface $container,
         ResourceControllerEvent $event,
         Request $request,
         Response $response
@@ -2117,9 +2158,17 @@ final class ResourceControllerSpec extends ObjectBehavior
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
+        $request->get('_csrf_token')->willReturn('xyz');
+
+        $container->has('security.csrf.token_manager')->willReturn(true);
+        $container->get('security.csrf.token_manager')->willReturn($csrfTokenManager);
+        $csrfTokenManager->isTokenValid(new CsrfToken('1', 'xyz'))->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $resource->getId()->willReturn('1');
 
         $configuration->isHtmlRequest()->willReturn(true);
 
@@ -2165,6 +2214,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $configuration->getParameters()->willReturn($parameterBag);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->isCsrfProtectionEnabled()->willReturn(false);
 
         $parameterBag->get('return_content', true)->willReturn(true);
 
@@ -2213,6 +2263,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $configuration->getParameters()->willReturn($parameterBag);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->isCsrfProtectionEnabled()->willReturn(false);
 
         $parameterBag->get('return_content', true)->willReturn(false);
 
@@ -2257,6 +2308,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->isCsrfProtectionEnabled()->willReturn(false);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
         $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
