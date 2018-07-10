@@ -19,6 +19,7 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\AdminBundle\Event\OrderShowMenuBuilderEvent;
 use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class OrderShowMenuBuilder
 {
@@ -40,18 +41,20 @@ final class OrderShowMenuBuilder
     private $stateMachineFactory;
 
     /**
-     * @param FactoryInterface $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param StateMachineFactoryInterface $stateMachineFactory,
+     * @var CsrfTokenManagerInterface
      */
+    private $csrfTokenManager;
+
     public function __construct(
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher,
-        StateMachineFactoryInterface $stateMachineFactory
+        StateMachineFactoryInterface $stateMachineFactory,
+        CsrfTokenManagerInterface $csrfTokenManager
     ) {
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
         $this->stateMachineFactory = $stateMachineFactory;
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
     /**
@@ -84,7 +87,10 @@ final class OrderShowMenuBuilder
             $menu
                 ->addChild('cancel', [
                     'route' => 'sylius_admin_order_cancel',
-                    'routeParameters' => ['id' => $order->getId()],
+                    'routeParameters' => [
+                        'id' => $order->getId(),
+                        '_csrf_token' => $this->csrfTokenManager->getToken((string) $order->getId())->getValue(),
+                    ],
                 ])
                 ->setAttribute('type', 'transition')
                 ->setLabel('sylius.ui.cancel')
