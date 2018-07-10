@@ -52,6 +52,12 @@ final class OrderSpec extends ObjectBehavior
         $this->getCustomer()->shouldReturn($customer);
     }
 
+    function its_customer_can_be_nullable(): void
+    {
+        $this->setCustomer(null);
+        $this->getCustomer()->shouldReturn(null);
+    }
+
     function its_channel_is_mutable(ChannelInterface $channel): void
     {
         $this->setChannel($channel);
