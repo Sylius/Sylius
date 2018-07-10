@@ -1,3 +1,14 @@
+# UPGRADE FROM `v1.1.9` TO `v1.1.10`
+
+* **BC BREAK**: `OrderShowMenuBuilder` constructor now requires the fourth argument being 
+  `Symfony\Component\Security\Csrf\CsrfTokenManagerInterface` instance due to security reasons.
+
+# UPGRADE FROM `v1.1.0` TO `v1.1.9`
+
+* **BC BREAK**: `Sylius\Bundle\ResourceBundle\Controller::applyStateMachineTransitionAction` method now includes CSRF token checks due 
+  to security reasons. If you used it for REST API, these checks can be disabled by adding 
+  `csrf_protection: false` to your routing configuration. 
+
 # UPGRADE FROM `v1.0.X` TO `v1.1.0`
 
 * Scanning for `composer.json` file inside themes directories is recursive by default, which can result in slow performance
