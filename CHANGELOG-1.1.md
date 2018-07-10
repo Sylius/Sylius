@@ -1,5 +1,15 @@
 # CHANGELOG FOR `1.1.X`
 
+## v1.1.10 (2018-07-10)
+
+#### TL;DR
+
+- Fixing the application after not-so-perfect security issue fix in the last release
+
+#### Details
+
+- [See the diff since the last patch release](https://github.com/Sylius/Sylius/compare/v1.1.9...v1.1.10)
+
 ## v1.1.9 (2018-07-08)
 
 #### TL;DR
