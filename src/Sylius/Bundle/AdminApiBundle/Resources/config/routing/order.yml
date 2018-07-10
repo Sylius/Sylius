@@ -20,6 +20,7 @@ sylius_admin_api_order_cancel:
             state_machine:
                 graph: sylius_order
                 transition: cancel
+            csrf_protection: false
             return_content: false
 
 sylius_admin_api_order_shipment_ship:
