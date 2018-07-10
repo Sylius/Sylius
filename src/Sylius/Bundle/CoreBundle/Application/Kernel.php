@@ -31,12 +31,12 @@ use Webmozart\Assert\Assert;
 
 class Kernel extends HttpKernel
 {
-    public const VERSION = '1.2.3';
-    public const VERSION_ID = '10203';
+    public const VERSION = '1.2.4-DEV';
+    public const VERSION_ID = '10204';
     public const MAJOR_VERSION = '1';
     public const MINOR_VERSION = '2';
-    public const RELEASE_VERSION = '3';
-    public const EXTRA_VERSION = '';
+    public const RELEASE_VERSION = '4';
+    public const EXTRA_VERSION = 'DEV';
 
     /**
      * {@inheritdoc}
