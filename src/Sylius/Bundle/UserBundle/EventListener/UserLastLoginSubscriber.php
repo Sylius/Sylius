@@ -70,13 +70,14 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         $this->updateUserLastLogin($event->getUser());
     }
 
-    /**
-     * @param UserInterface $user
-     */
-    private function updateUserLastLogin(UserInterface $user): void
+    private function updateUserLastLogin($user): void
     {
         if (!$user instanceof $this->userClass) {
             return;
+        }
+
+        if (!$user instanceof UserInterface) {
+            throw new \UnexpectedValueException('In order to use this subscriber, your class has to implement UserInterface');
         }
 
         $user->setLastLogin(new \DateTime());

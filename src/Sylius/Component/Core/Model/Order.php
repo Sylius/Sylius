@@ -126,7 +126,7 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function setCustomer(?BaseCustomerInterface $customer): void
     {
-        Assert::isInstanceOf($customer, CustomerInterface::class);
+        Assert::nullOrisInstanceOf($customer, CustomerInterface::class);
 
         $this->customer = $customer;
     }
