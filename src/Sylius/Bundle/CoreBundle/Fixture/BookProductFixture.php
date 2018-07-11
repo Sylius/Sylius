@@ -141,8 +141,14 @@ class BookProductFixture extends AbstractFixture
                     'book_genre' => $this->faker->randomElements(array_keys($bookGenres), $this->faker->numberBetween(1, count($bookGenres))),
                 ],
                 'images' => [
-                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'), 'main'],
-                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'), 'thumbnail'],
+                    [
+                        'path' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'),
+                        'type' => 'main',
+                    ],
+                    [
+                        'path' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'),
+                        'type' => 'thumbnail',
+                    ],
                 ],
             ];
         }

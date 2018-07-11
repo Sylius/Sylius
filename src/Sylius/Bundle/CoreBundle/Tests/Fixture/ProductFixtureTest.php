@@ -117,7 +117,7 @@ final class ProductFixtureTest extends TestCase
      */
     public function product_images_are_optional(): void
     {
-        $this->assertConfigurationIsValid([['custom' => [['images' => ['../image/path1.jpg', '../image/path2.jpg']]]]], 'custom.*.images');
+        $this->assertConfigurationIsValid([['custom' => [['images' => [['path' => '../image/path1.jpg', 'type' => 'main'], ['path' => '../image/path2.jpg', 'type' => 'thumbnail']]]]]], 'custom.*.images');
     }
 
     /**
