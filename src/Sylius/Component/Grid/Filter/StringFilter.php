@@ -50,7 +50,7 @@ final class StringFilter implements FilterInterface
         $fields = array_key_exists('fields', $options) ? $options['fields'] : [$name];
 
         $type = $data['type'];
-        $value = array_key_exists('value', $data) ? $data['value'] : null;
+        $value = array_key_exists('value', $data) ? $data['value'] : '';
 
         if (!in_array($type, [self::TYPE_NOT_EMPTY, self::TYPE_EMPTY], true) && '' === trim($value)) {
             return;
