@@ -47,12 +47,11 @@ final class StringFilter implements FilterInterface
             $data = ['type' => self::TYPE_CONTAINS, 'value' => $data];
         }
 
-        $fields = array_key_exists('fields', $options) ? $options['fields'] : [$name];
-
+        $fields = $options['fields'] ?? [$name];
         $type = $data['type'];
-        $value = array_key_exists('value', $data) ? $data['value'] : '';
+        $value = $data['value'] ?? '';
 
-        if (!in_array($type, [self::TYPE_NOT_EMPTY, self::TYPE_EMPTY], true) && '' === trim($value)) {
+        if (!in_array($type, [self::TYPE_NOT_EMPTY, self::TYPE_EMPTY], true) && '' === trim((string)$value)) {
             return;
         }
 
