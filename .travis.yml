@@ -75,6 +75,7 @@ after_failure:
 
 after_script:
     - etc/travis/run-suite after_script "${SYLIUS_SUITE}"
+    - vendor/lakion/mink-debug-extension/travis/tools/upload-textfiles "${SYLIUS_BUILD_DIR}/*.csv"
 
 notifications:
     email: false
