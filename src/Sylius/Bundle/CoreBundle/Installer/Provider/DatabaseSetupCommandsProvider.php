@@ -153,7 +153,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
      */
     private function getDatabaseName(): string
     {
-        return $this->getEntityManager()->getConnection()->getDatabase();
+        return (string) $this->getEntityManager()->getConnection()->getDatabase();
     }
 
     /**
