@@ -16,6 +16,8 @@ you have to create your own ShippingMethod class that will extend it:
 .. code-block:: php
 
     <?php
+    
+    declare(strict_types=1);
 
     namespace AppBundle\Entity;
 
@@ -42,7 +44,7 @@ you have to create your own ShippingMethod class that will extend it:
         /**
          * {@inheritdoc}
          */
-        public function getImages()
+        public function getImages(): Collection
         {
             return $this->images;
         }
@@ -50,7 +52,7 @@ you have to create your own ShippingMethod class that will extend it:
         /**
          * {@inheritdoc}
          */
-        public function getImagesByType($type)
+        public function getImagesByType(string $type): Collection
         {
             return $this->images->filter(function (ImageInterface $image) use ($type) {
                 return $type === $image->getType();
@@ -60,7 +62,7 @@ you have to create your own ShippingMethod class that will extend it:
         /**
          * {@inheritdoc}
          */
-        public function hasImages()
+        public function hasImages(): bool
         {
             return !$this->images->isEmpty();
         }
@@ -68,7 +70,7 @@ you have to create your own ShippingMethod class that will extend it:
         /**
          * {@inheritdoc}
          */
-        public function hasImage(ImageInterface $image)
+        public function hasImage(ImageInterface $image): bool
         {
             return $this->images->contains($image);
         }
@@ -76,7 +78,7 @@ you have to create your own ShippingMethod class that will extend it:
         /**
          * {@inheritdoc}
          */
-        public function addImage(ImageInterface $image)
+        public function addImage(ImageInterface $image): void
         {
             $image->setOwner($this);
             $this->images->add($image);
@@ -85,7 +87,7 @@ you have to create your own ShippingMethod class that will extend it:
         /**
          * {@inheritdoc}
          */
-        public function removeImage(ImageInterface $image)
+        public function removeImage(ImageInterface $image): void
         {
             if ($this->hasImage($image)) {
                 $image->setOwner(null);
@@ -120,6 +122,8 @@ In the ``AppBundle\Entity`` namespace place the ``ShippingMethodImage`` class wh
 .. code-block:: php
 
     <?php
+    
+    declare(strict_types=1);
 
     namespace AppBundle\Entity;
 
@@ -192,6 +196,8 @@ This is how the class for ``ShippingMethodImageType`` should look like. Place it
 .. code-block:: php
 
     <?php
+    
+    declare(strict_types=1);
 
     namespace AppBundle\Form\Type;
 
@@ -202,7 +208,7 @@ This is how the class for ``ShippingMethodImageType`` should look like. Place it
         /**
          * {@inheritdoc}
          */
-        public function getBlockPrefix()
+        public function getBlockPrefix(): string
         {
             return 'app_shipping_method_image';
         }
@@ -251,6 +257,8 @@ It needs to have the images field as a CollectionType.
 .. code-block:: php
 
     <?php
+    
+    declare(strict_types=1);
 
     namespace AppBundle\Form\Extension;
 
@@ -265,7 +273,7 @@ It needs to have the images field as a CollectionType.
         /**
          * {@inheritdoc}
          */
-        public function buildForm(FormBuilderInterface $builder, array $options)
+        public function buildForm(FormBuilderInterface $builder, array $options): void
         {
             $builder->add('images', CollectionType::class, [
                 'entry_type' => ShippingMethodImageType::class,
@@ -279,7 +287,7 @@ It needs to have the images field as a CollectionType.
         /**
          * {@inheritdoc}
          */
-        public function getExtendedType()
+        public function getExtendedType(): string
         {
             return ShippingMethodType::class;
         }

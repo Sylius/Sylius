@@ -23,6 +23,8 @@
         <defaults public="true" />
 
         <service id="Sylius\Bundle\AdminApiBundle\Command\CreateClientCommand">
+            <argument>null</argument>
+            <argument type="service" id="fos_oauth_server.client_manager.default" />
             <tag name="console.command" />
         </service>
 
