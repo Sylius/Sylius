@@ -36,5 +36,6 @@ Since Sylius is an open-source platform, there is a certain flow in order for th
     :hidden:
 
     creating-plugin
+    plugin-development-guide
 
 .. include:: /plugins/map.rst.inc
