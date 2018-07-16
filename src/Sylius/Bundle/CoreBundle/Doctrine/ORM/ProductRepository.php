@@ -86,12 +86,12 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         // Grid hack, we do not need to join these if we don't sort by price
         if (isset($sorting['price'])) {
             // Another hack, the subquery to get the first position variant
-             $subQuery = $this->createQueryBuilder('m')
+            $subQuery = $this->createQueryBuilder('m')
                  ->select('min(v.position)')
                  ->innerJoin('m.variants', 'v')
                  ->andWhere('m.id = :product_id')
              ;
-            
+
             $queryBuilder
                 ->innerJoin('o.variants', 'variant')
                 ->innerJoin('variant.channelPricings', 'channelPricing')
