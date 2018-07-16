@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CustomerBundle\Form\Type;
 
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -56,7 +57,9 @@ final class CustomerChoiceType extends AbstractType
                 return $this->customerRepository->findAll();
             },
             'choice_value' => 'email',
-            'choice_label' => 'name',
+            'choice_label' => function (CustomerInterface $customer): string {
+                return sprintf('%s (%s)', $customer->getFullName(), $customer->getEmail());
+            },
             'choice_translation_domain' => false,
         ]);
     }
