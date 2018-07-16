@@ -144,7 +144,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_partially_refunded_if_one_of_the_payment_is_completed(
+    function it_marks_an_order_as_partially_refunded_if_one_of_the_payment_is_refunded(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
@@ -215,6 +215,56 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can(OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY)->willReturn(true);
         $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY)->shouldBeCalled();
+
+        $this->resolve($order);
+    }
+
+    function it_marks_an_order_as_authorized_if_all_its_payments_are_authorized(
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $firstPayment,
+        PaymentInterface $secondPayment
+    ): void {
+        $firstPayment->getAmount()->willReturn(6000);
+        $firstPayment->getState()->willReturn(PaymentInterface::STATE_AUTHORIZED);
+        $secondPayment->getAmount()->willReturn(4000);
+        $secondPayment->getState()->willReturn(PaymentInterface::STATE_AUTHORIZED);
+
+        $order
+            ->getPayments()
+            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
+        ;
+        $order->getTotal()->willReturn(10000);
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_AUTHORIZE_PAYMENT)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_AUTHORIZE_PAYMENT)->shouldBeCalled();
+
+        $this->resolve($order);
+    }
+
+    function it_marks_an_order_as_partially_authorized_if_one_of_the_payments_is_processing_and_one_of_the_payments_is_authorized(
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $firstPayment,
+        PaymentInterface $secondPayment
+    ): void {
+        $firstPayment->getAmount()->willReturn(6000);
+        $firstPayment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
+        $secondPayment->getAmount()->willReturn(4000);
+        $secondPayment->getState()->willReturn(PaymentInterface::STATE_AUTHORIZED);
+
+        $order
+            ->getPayments()
+            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
+        ;
+        $order->getTotal()->willReturn(10000);
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PARTIALLY_AUTHORIZE_PAYMENT)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PARTIALLY_AUTHORIZE_PAYMENT)->shouldBeCalled();
 
         $this->resolve($order);
     }
