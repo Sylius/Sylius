@@ -16,3 +16,4 @@ With respect to that rule, let's create some simple first plugin together!
    naming
    specification
    implementation
+   summary
