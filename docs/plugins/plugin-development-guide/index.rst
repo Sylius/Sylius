@@ -15,3 +15,4 @@ With respect to that rule, let's create some simple first plugin together!
    installation
    naming
    specification
+   implementation

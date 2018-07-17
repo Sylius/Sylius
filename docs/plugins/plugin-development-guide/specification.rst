@@ -2,7 +2,7 @@ Specification
 -------------
 
 We strongly encourage you to follow our BDD path in implementing Sylius plugins. In fact, proper tests are one of the requirements to
-(:doc:`have your plugin officially accepted</plugins/index>`).
+:doc:`have your plugin officially accepted</plugins/index>`.
 
 .. attention::
 
@@ -24,8 +24,9 @@ Let's start with describing how **marking a product variant available on demand*
         I want to be able to mark product variant as available on demand
 
         Background:
-            Given the store has a "Iron Man Suite" configurable product
-            And this product has "Mark XLVI" variant
+            Given the store operates on a single channel in "United States"
+            And the store has a "Iron Man Suite" configurable product
+            And the product "Iron Man Suite" has a "Mark XLVI" variant priced at "$400000"
             And I am logged in as an administrator
 
         @ui
@@ -34,7 +35,7 @@ Let's start with describing how **marking a product variant available on demand*
             And I mark it as available on demand
             And I save my changes
             Then I should be notified that it has been successfully edited
-            And this product variant should be available on demand
+            And this variant should be available on demand
 
 What is really important, usually you don't need to write the whole Behat scenario on your own! In the example above only 2 steps
 would need a custom implementation. Rest of them can be easily reused from **Sylius** Behat system.
@@ -53,28 +54,44 @@ Behavior implementation
 
     <?php
 
+    declare(strict_types=1);
+
     namespace Tests\IronMan\SyliusProductOnDemandPlugin\Behat\Context\Ui\Admin;
 
     use Behat\Behat\Context\Context;
+    use IronMan\SyliusProductOnDemandPlugin\Entity\ProductVariantInterface;
+    use Tests\IronMan\SyliusProductOnDemandPlugin\Behat\Page\Ui\Admin\ProductVariantUpdatePageInterface;
     use Webmozart\Assert\Assert;
-    //...
 
     final class ManagingProductVariantsContext implements Context
     {
+        /** @var ProductVariantUpdatePageInterface */
+        private $productVariantUpdatePage;
+
+        public function __construct(ProductVariantUpdatePageInterface $productVariantUpdatePage)
+        {
+            $this->productVariantUpdatePage = $productVariantUpdatePage;
+        }
+
         /**
          * @When I mark it as available on demand
          */
         public function markVariantAsAvailableOnDemand(): void
         {
-            $this->productVariantEditPage->markAsAvailableOnDemand();
+            $this->productVariantUpdatePage->markAsAvailableOnDemand();
         }
 
         /**
-         * @Then this product variant should be available on demand
+         * @Then /^(this variant) should be available on demand$/
          */
-        public function thisProductVariantShouldBeAvailableOnDemand(): void
+        public function thisVariantShouldBeAvailableOnDemand(ProductVariantInterface $productVariant): void
         {
-            Assert::true($this->productVariantEditPage->isAvailableOnDemand());
+            $this->productVariantUpdatePage->open([
+                'id' => $productVariant->getId(),
+                'productId' => $productVariant->getProduct()->getId(),
+            ]);
+
+            Assert::true($this->productVariantUpdatePage->isAvailableOnDemand());
         }
     }
 
