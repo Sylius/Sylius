@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\SyliusCartEvents;
+use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -31,6 +33,11 @@ final class OrderPromotionIntegrityChecker
     private $promotionEligibilityChecker;
 
     /**
+     * @var PromotionApplicatorInterface
+     */
+    private $promotionApplicator;
+
+    /**
      * @var EventDispatcherInterface
      */
     private $eventDispatcher;
@@ -42,15 +49,18 @@ final class OrderPromotionIntegrityChecker
 
     /**
      * @param PromotionEligibilityCheckerInterface $promotionEligibilityChecker
+     * @param PromotionApplicatorInterface $promotionApplicator
      * @param EventDispatcherInterface $eventDispatcher
      * @param RouterInterface $router
      */
     public function __construct(
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
+        PromotionApplicatorInterface $promotionApplicator,
         EventDispatcherInterface $eventDispatcher,
         RouterInterface $router
     ) {
         $this->promotionEligibilityChecker = $promotionEligibilityChecker;
+        $this->promotionApplicator = $promotionApplicator;
         $this->eventDispatcher = $eventDispatcher;
         $this->router = $router;
     }
@@ -65,7 +75,17 @@ final class OrderPromotionIntegrityChecker
 
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $promotions = $order->getPromotions();
+        // we creae a new promotion collection and remove them from cart
+        // so we can verify with original conditions (without the price beeng applied befor check)
+
+        $promotions = new ArrayCollection($order->getPromotions()->toArray());
+
+
+        foreach($promotions as $promotion){
+            $this->promotionApplicator->revert($order, $promotion);
+            $order->removePromotion($promotion);
+        }
+
         foreach ($promotions as $promotion) {
             if (!$this->promotionEligibilityChecker->isEligible($order, $promotion)) {
                 $event->stop(
@@ -80,6 +100,8 @@ final class OrderPromotionIntegrityChecker
 
                 break;
             }
+
+            $this->promotionApplicator->apply($order, $promotion);
         }
     }
 }
