@@ -13,5 +13,5 @@ Feature: Resetting a password
         When I want to reset password
         And I specify the email as "goodman@example.com"
         And I reset it
-        Then I should be notified that email with reset instruction has been send
+        Then I should be notified that email with reset instruction has been sent
         And the email with reset token should be sent to "goodman@example.com"
