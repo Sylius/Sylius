@@ -14,4 +14,6 @@ then you should definitely consider the creation of a plugin. On the other hand,
 
 then don't be afraid to make a regular Sylius customization.
 
-For needs of this tutorial, we would implement a simple plugin, making possible to mark product variant **available on demand**.
+.. tip::
+
+    For needs of this tutorial, we will implement a simple plugin, making possible to mark product variant **available on demand**.

@@ -37,13 +37,13 @@ Let's start with describing how **marking a product variant available on demand*
             Then I should be notified that it has been successfully edited
             And this variant should be available on demand
 
-What is really important, usually you don't need to write the whole Behat scenario on your own! In the example above only 2 steps
+What is really important, usually you don't need to implement the whole Behat scenario on your own! In the example above only 2 steps
 would need a custom implementation. Rest of them can be easily reused from **Sylius** Behat system.
 
 .. important::
 
    If you're not familiar with our BDD workflow, with Behat, take a look at
-   :doc:`our BDD guide</bdd/index>`. All Behat configuration (contexts, pages, services, suites etc.) are explained
+   :doc:`our BDD guide</bdd/index>`. All Behat configurations (contexts, pages, services, suites etc.) are explained
    there in details.
 
 
@@ -95,4 +95,4 @@ Behavior implementation
         }
     }
 
-First step is done - we have a failing test, that would be green when we implement a desired functionality.
+First step is done - we have a failing test, that that is going to go green when we implement a desired functionality.

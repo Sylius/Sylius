@@ -55,5 +55,5 @@ You should also delete Behat suite named ``greeting_customer`` from ``tests/Beha
 .. important::
 
     You **don't** have to remove all these files mentioned above. They can be adapted to suit your plugin functionality. However, as
-    they provide a default, dummy features only for the presentation reasons, it's just easier to delete them and implement new ones by
+    they provide a default, dummy features only for the presentation reasons, it's just easier to delete them and implement new ones on
     your own.

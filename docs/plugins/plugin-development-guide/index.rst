@@ -1,7 +1,7 @@
 Plugin Development Guide
 ========================
 
-Sylius plugins are one of the most powerful ways to extend Sylius functionality. They're not bounded by Sylius release cycle and can be
+Sylius plugins are one of the most powerful ways to extend Sylius functionalities. They're not bounded by Sylius release cycle and can be
 developed quicker and more effectively. They also allow sharing our (developers) work in an open-source community, which is not possible with
 regular application customizations.
 

@@ -2,19 +2,21 @@ Implementation
 --------------
 
 The goal of our plugin is simple - we need to extend ``ProductVariant`` entity and provide new flag, that could be set
-on product variant form. Following customizations uses information provided in **Sylius Customization Guide**, especially
+on product variant form. Following customizations use information provided in **Sylius Customization Guide**, especially
 from :doc:`customizing models</customization/model>`, :doc:`form</customization/form>` and :doc:`template</customization/template>`
 pages.
 
 Model
 *****
 
-The only field we need to add is additional ``$availableOnDemand`` boolean. Of course we should start with the unit tests (written with
+The only field we need to add is an additional ``$availableOnDemand`` boolean. Of course we should start with the unit tests (written with
 PHPSpec/PHPUnit/any other unit testing tool):
 
 .. code-block:: php
 
     <?php
+
+    // spec/Entity/ProductVariantSpec.php
 
     declare(strict_types=1);
 
@@ -47,6 +49,8 @@ PHPSpec/PHPUnit/any other unit testing tool):
 
     <?php
 
+    // src/Entity/ProductVariant.php
+
     declare(strict_types=1);
 
     namespace IronMan\SyliusProductOnDemandPlugin\Entity;
@@ -69,13 +73,25 @@ PHPSpec/PHPUnit/any other unit testing tool):
         }
     }
 
-.. important::
+Of course you need to remember about entity mapping customization as well:
 
-    Of course you need to remember about entity mapping customization as well.
+.. code-block:: yaml
+
+    # src/Resources/config/doctrine/ProductVariant.orm.yml
+
+    IronMan\SyliusProductOnDemandPlugin\Entity\ProductVariant:
+        type: entity
+        table: sylius_product_variant
+        fields:
+            availableOnDemand:
+                type: boolean
+                nullable: true
 
 Then our new entity should be configured as sylius product variant resource model:
 
 .. code-block:: yaml
+
+    # src/Resources/config/config.yml
 
     sylius_product:
         resources:
@@ -90,16 +106,18 @@ to make it work in Behat tests. And at the end importing this file should be one
 .. warning::
 
     Remember that if you modify or add some mapping, you should either provide a migration for the plugin user (that could be
-    copied to their migration folder) or mention in installation process requirement of migration generation!
+    copied to their migration folder) or mention the requirement of migration generation in the installation process!
 
 Form
 ****
 
-To make our new field available in Admin panel, form extension is required:
+To make our new field available in Admin panel, a form extension is required:
 
 .. code-block:: php
 
     <?php
+
+    // src/Form/Extension/ProductVariantTypeExtension.php
 
     declare(strict_types=1);
 
@@ -127,9 +145,19 @@ To make our new field available in Admin panel, form extension is required:
 
 Translation keys placed in ``src/Resources/translations/message.{locale}.yml`` will be resolved automatically.
 
-And in your ``app/Resources/config/services.yml``:
+.. code-block:: yaml
+
+    # src/Resources/translations/message.en.yml
+
+    iron_man_sylius_product_on_demand_plugin:
+        ui:
+            available_on_demand: Available on demand
+
+And in your ``services.yml`` file:
 
 .. code-block:: yaml
+
+    # src/Resources/config/services.yml
 
     services:
         iron_man_sylius_product_on_demand_plugin.form.extension.type.product_variant:
@@ -137,7 +165,7 @@ And in your ``app/Resources/config/services.yml``:
             tags:
                 - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType }
 
-Again, you must remember about importing ``app/Resources/config/services.yml`` in ``app/Resources/config/config.yml``.
+Again, you must remember about importing ``src/Resources/config/services.yml`` in ``tests/Application/app/Resources/config/config.yml``.
 
 Template
 ********
@@ -148,12 +176,14 @@ The last step is extending the template of a product variant form. It can be don
 * by using sonata block events
 * by writing a theme
 
-For the needs of this tutorial, we would go the first way. What's crucial, we need to determine which template should be overwritten.
-Naming for twig files in Sylius, both in **Shop** and **AdminBundle** are pretty clear and straightforward. In this specific case,
+For the needs of this tutorial, we will go the first way. What's crucial, we need to determine which template should be overwritten.
+Naming for twig files in Sylius, both in **ShopBundle** and **AdminBundle** are pretty clear and straightforward. In this specific case,
 the template to override is ``src/Sylius/Bundle/AdminBundle/Resources/views/ProductVariant/Tab/_details.html.twig``. It should be copied
 to ``src/Resources/views/SyliusAdminBundle/ProductVariant/Tab/`` directory, and additional field should be placed somewhere in the template.
 
 .. code-block:: twig
+
+    {# src/Resources/views/SyliusAdminBundle/ProductVariant/Tab/_details.html.twig #}
 
     {#...#}
 
