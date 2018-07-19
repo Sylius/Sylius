@@ -1,7 +1,7 @@
 Naming changes
 --------------
 
-``PluginSkeleton`` provides some default classes and configurations. However, they must have some default values and names that should be changed,
+``PluginSkeleton`` provides some default classes and configurations. However, they must have some default values and names that should be changed
 to reflect your plugin functionality. Basing on the vendor and plugin names established above, these are the changes that should be made:
 
 * In ``composer.json``:
@@ -54,6 +54,6 @@ You should also delete Behat suite named ``greeting_customer`` from ``tests/Beha
 
 .. important::
 
-    You **don't** have to remove all these files mentioned above. They can be adapted to suit your plugin functionality. However, as
-    they provide a default, dummy features only for the presentation reasons, it's just easier to delete them and implement new ones on
+    You **don't have to** remove all these files mentioned above. They can be adapted to suit your plugin functionality. However, as
+    they provide default, dummy features only for the presentation reasons, it's just easier to delete them and implement new ones on
     your own.

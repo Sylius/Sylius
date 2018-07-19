@@ -2,9 +2,16 @@ Implementation
 --------------
 
 The goal of our plugin is simple - we need to extend ``ProductVariant`` entity and provide new flag, that could be set
-on product variant form. Following customizations use information provided in **Sylius Customization Guide**, especially
-from :doc:`customizing models</customization/model>`, :doc:`form</customization/form>` and :doc:`template</customization/template>`
-pages.
+on product variant form. Following customizations are done just like in the **Sylius Customization Guide**,
+take a look at :doc:`customizing models</customization/model>`, :doc:`form</customization/form>` and :doc:`template</customization/template>`.
+
+.. attention::
+
+    ``PluginSkeleton`` is focused on delivering the most friendly and testable environment. That's why in ``tests/Application`` directory,
+    there is a **tiny Sylius application** placed, with your plugin already used. Thanks to that, you can test your plugin with Behat scenarios
+    **within** Sylius application without installing it to any test app manually! There is, however, one important consequence of such an architecture.
+    **Everything** that should be done by a plugin user (configuration import, templates copying etc.) should also be done in ``tests/Application``
+    to simulate the real developer behavior - and therefore make your new features testable.
 
 Model
 *****
@@ -87,7 +94,7 @@ Of course you need to remember about entity mapping customization as well:
                 type: boolean
                 nullable: true
 
-Then our new entity should be configured as sylius product variant resource model:
+Then our new entity should be configured as a resource model:
 
 .. code-block:: yaml
 
@@ -106,7 +113,7 @@ to make it work in Behat tests. And at the end importing this file should be one
 .. warning::
 
     Remember that if you modify or add some mapping, you should either provide a migration for the plugin user (that could be
-    copied to their migration folder) or mention the requirement of migration generation in the installation process!
+    copied to their migration folder) or mention the requirement of migration generation in the installation instructions!
 
 Form
 ****

@@ -2,13 +2,14 @@ Summary
 -------
 
 Congratulations! You've created your first, fully tested and documented, customization to Sylius inside a Sylius plugin!
-As you can see, there are some things to do at the beginning of development, but know, when you are already familiar with
-the whole structure, each next feature can be provided faster than the previous one.
 
 As a result, you should see a new field in product variant form:
 
 .. image:: ../../_images/product_variant_available_on_demand.png
     :align: center
+
+As you can see, there are some things to do at the beginning of development, but now, when you are already familiar with
+the whole structure, each next feature can be provided faster than the previous ones.
 
 What's next?
 ************
@@ -21,7 +22,7 @@ field. What could be the next step?
 * allowing to order **not available yet, but available on demand** variants and therefore
   customizing the whole :doc:`order processing</components_and_bundles/bundles/SyliusOrderBundle/processors>` and :doc:`inventory operations</components_and_bundles/bundles/SyliusInventoryBundle/services>`
 
-and even more. The limit is only your imagination (and business value, of course!), for more inspiration, we strongly recommend
+and even more. The limit is only your imagination (and business value, of course!). For more inspiration, we strongly recommend
 our :doc:`customizing guide</customization/index>`.
 
 At the end, do not hesitate to contact us on contact@sylius.com when you manage to implement a new plugin. We would be happy to check it out

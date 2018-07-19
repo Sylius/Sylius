@@ -38,11 +38,11 @@ Let's start with describing how **marking a product variant available on demand*
             And this variant should be available on demand
 
 What is really important, usually you don't need to implement the whole Behat scenario on your own! In the example above only 2 steps
-would need a custom implementation. Rest of them can be easily reused from **Sylius** Behat system.
+would need a custom implementation. Rest of them can be easily reused from **Sylius** Behat suite.
 
 .. important::
 
-   If you're not familiar with our BDD workflow, with Behat, take a look at
+   If you're not familiar with our BDD workflow with Behat, take a look at
    :doc:`our BDD guide</bdd/index>`. All Behat configurations (contexts, pages, services, suites etc.) are explained
    there in details.
 
