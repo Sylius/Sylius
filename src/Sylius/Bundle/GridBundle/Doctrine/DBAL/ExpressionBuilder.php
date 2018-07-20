@@ -78,6 +78,22 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
+    public function fieldsEquals(string $field, string $secondField)
+    {
+        return $this->queryBuilder->expr()->eq($field, $secondField);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fieldsNotEquals(string $field, string $secondField)
+    {
+        return $this->queryBuilder->expr()->neq($field, $secondField);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function lessThan(string $field, $value)
     {
         $this->queryBuilder->andWhere($field . ' < :' . $field)->setParameter($field, $value);
