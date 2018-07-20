@@ -56,6 +56,22 @@ interface ExpressionBuilderInterface
 
     /**
      * @param string $field
+     * @param string $secondField
+     *
+     * @return mixed
+     */
+    public function fieldsEquals(string $field, string $secondField);
+
+    /**
+     * @param string $field
+     * @param string $secondField
+     *
+     * @return mixed
+     */
+    public function fieldsNotEquals(string $field, string $secondField);
+
+    /**
+     * @param string $field
      * @param mixed $value
      *
      * @return mixed
