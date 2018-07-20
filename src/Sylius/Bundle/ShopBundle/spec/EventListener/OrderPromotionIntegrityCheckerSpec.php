@@ -29,11 +29,11 @@ final class OrderPromotionIntegrityCheckerSpec extends ObjectBehavior
 {
     function let(
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
-        PromotionApplicatorInterface $promotionApplicator,
         EventDispatcherInterface $dispatcher,
-        RouterInterface $router
+        RouterInterface $router,
+        PromotionApplicatorInterface $promotionApplicator
     ): void {
-        $this->beConstructedWith($promotionEligibilityChecker, $promotionApplicator, $dispatcher, $router);
+        $this->beConstructedWith($promotionEligibilityChecker, $dispatcher, $router, $promotionApplicator);
     }
 
     function it_does_nothing_if_given_order_has_valid_promotion_applied(

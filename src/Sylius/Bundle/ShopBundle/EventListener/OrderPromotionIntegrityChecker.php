@@ -49,20 +49,24 @@ final class OrderPromotionIntegrityChecker
 
     /**
      * @param PromotionEligibilityCheckerInterface $promotionEligibilityChecker
-     * @param PromotionApplicatorInterface $promotionApplicator
      * @param EventDispatcherInterface $eventDispatcher
      * @param RouterInterface $router
+     * @param PromotionApplicatorInterface $promotionApplicator
      */
     public function __construct(
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
-        PromotionApplicatorInterface $promotionApplicator,
         EventDispatcherInterface $eventDispatcher,
-        RouterInterface $router
+        RouterInterface $router,
+        PromotionApplicatorInterface $promotionApplicator = null
     ) {
+        if($promotionApplicator == null){
+            @trigger_error("You need to supply an promotion applicator in order to work properly. In case you don't provide it, there will be valid cases that will fail due an incorrect recalculation.", \E_USER_DEPRECATED);
+        }
+
         $this->promotionEligibilityChecker = $promotionEligibilityChecker;
-        $this->promotionApplicator = $promotionApplicator;
         $this->eventDispatcher = $eventDispatcher;
         $this->router = $router;
+        $this->promotionApplicator = $promotionApplicator;
     }
 
     /**
@@ -80,10 +84,11 @@ final class OrderPromotionIntegrityChecker
 
         $promotions = new ArrayCollection($order->getPromotions()->toArray());
 
-
-        foreach($promotions as $promotion){
-            $this->promotionApplicator->revert($order, $promotion);
-            $order->removePromotion($promotion);
+        if($this->promotionApplicator !== null){
+            foreach($promotions as $promotion){
+                $this->promotionApplicator->revert($order, $promotion);
+                $order->removePromotion($promotion);
+            }
         }
 
         foreach ($promotions as $promotion) {
@@ -101,7 +106,9 @@ final class OrderPromotionIntegrityChecker
                 break;
             }
 
-            $this->promotionApplicator->apply($order, $promotion);
+            if($this->promotionApplicator !== null){
+                $this->promotionApplicator->apply($order, $promotion);
+            }
         }
     }
 }
