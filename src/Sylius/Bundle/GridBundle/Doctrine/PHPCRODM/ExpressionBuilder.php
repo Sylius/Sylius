@@ -85,6 +85,24 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
+    public function fieldsEquals(string $field, string $secondField)
+    {
+        //TODO: I don't know PHPCRODM, so not sure if simply doing this will work.
+        return $this->expressionBuilder->eq($field, $secondField);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fieldsNotEquals(string $field, string $secondField)
+    {
+        //TODO: I don't know PHPCRODM, so not sure if simply doing this will work.
+        return $this->expressionBuilder->neq($field, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function lessThan(string $field, $value)
     {
         return $this->expressionBuilder->lt($field, $value);
