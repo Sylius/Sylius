@@ -97,7 +97,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     public function fieldsNotEquals(string $field, string $secondField)
     {
         //TODO: I don't know PHPCRODM, so not sure if simply doing this will work.
-        return $this->expressionBuilder->neq($field, $value);
+        return $this->expressionBuilder->neq($field, $secondField);
     }
 
     /**
