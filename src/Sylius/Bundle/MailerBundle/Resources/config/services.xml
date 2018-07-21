@@ -21,6 +21,8 @@
             <argument type="service" id="sylius.factory.email" />
             <argument>%sylius.mailer.emails%</argument>
         </service>
+
+        <service id="Sylius\Component\Mailer\Sender\SenderInterface" alias="sylius.email_sender" />
         <service id="sylius.email_sender" class="Sylius\Component\Mailer\Sender\Sender">
             <argument type="service" id="sylius.email_renderer.adapter" />
             <argument type="service" id="sylius.email_sender.adapter" />
