@@ -56,7 +56,7 @@ final class OrderPromotionIntegrityChecker
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
         EventDispatcherInterface $eventDispatcher,
         RouterInterface $router,
-        PromotionApplicatorInterface $promotionApplicator = null
+        ?PromotionApplicatorInterface $promotionApplicator
     ) {
         if($promotionApplicator == null){
             @trigger_error("You need to supply an promotion applicator in order to work properly. In case you don't provide it, there will be valid cases that will fail due an incorrect recalculation.", \E_USER_DEPRECATED);
