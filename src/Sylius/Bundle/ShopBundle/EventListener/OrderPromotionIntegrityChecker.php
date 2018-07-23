@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\SyliusCartEvents;
@@ -82,7 +81,7 @@ final class OrderPromotionIntegrityChecker
         // we creae a new promotion collection and remove them from cart
         // so we can verify with original conditions (without the price beeng applied befor check)
 
-        $promotions = new ArrayCollection($order->getPromotions()->toArray());
+        $promotions = $order->getPromotions()->toArray();
 
         if($this->promotionApplicator !== null){
             foreach($promotions as $promotion){
