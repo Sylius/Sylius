@@ -32,7 +32,7 @@ All tax calculators implement the ``CalculatorInterface``. In our example we'll 
         }
     }
 
-Now, you need to register your new service in container and tag it with ``sylius.shipping_calculator``.
+Now, you need to register your new service in container and tag it with ``sylius.tax_calculator``.
 
 .. code-block:: yaml
 
