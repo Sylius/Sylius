@@ -5,7 +5,7 @@ sylius_admin_api_cart_item_create:
     path: /items/
     methods: [POST]
     defaults:
-        _controller: sylius.controller.order_item:createAction
+        _controller: sylius.controller.order_item::createAction
         _sylius:
             serialization_version: $version
             form: Sylius\Bundle\AdminApiBundle\Form\Type\OrderItemType

@@ -87,7 +87,7 @@ alias: sylius.product
 EOT;
 
         $showDefaults = [
-            '_controller' => 'sylius.controller.product:showAction',
+            '_controller' => 'sylius.controller.product::showAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -99,7 +99,7 @@ EOT;
         $routeCollection->add('sylius_product_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -111,7 +111,7 @@ EOT;
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -123,7 +123,7 @@ EOT;
         $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product:updateAction',
+            '_controller' => 'sylius.controller.product::updateAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -135,7 +135,7 @@ EOT;
         $routeCollection->add('sylius_product_update', $updateRoute)->shouldBeCalled();
 
         $bulkDeleteDefaults = [
-            '_controller' => 'sylius.controller.product:bulkDeleteAction',
+            '_controller' => 'sylius.controller.product::bulkDeleteAction',
             '_sylius' => [
                 'permission' => false,
                 'paginate' => false,
@@ -152,7 +152,7 @@ EOT;
         $routeCollection->add('sylius_product_bulk_delete', $bulkDeleteRoute)->shouldBeCalled();
 
         $deleteDefaults = [
-            '_controller' => 'sylius.controller.product:deleteAction',
+            '_controller' => 'sylius.controller.product::deleteAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -192,7 +192,7 @@ alias: sylius.product_option
 EOT;
 
         $showDefaults = [
-            '_controller' => 'sylius.controller.product_option:showAction',
+            '_controller' => 'sylius.controller.product_option::showAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -204,7 +204,7 @@ EOT;
         $routeCollection->add('sylius_product_option_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product_option:indexAction',
+            '_controller' => 'sylius.controller.product_option::indexAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -216,7 +216,7 @@ EOT;
         $routeCollection->add('sylius_product_option_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product_option:createAction',
+            '_controller' => 'sylius.controller.product_option::createAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -228,7 +228,7 @@ EOT;
         $routeCollection->add('sylius_product_option_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product_option:updateAction',
+            '_controller' => 'sylius.controller.product_option::updateAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -240,7 +240,7 @@ EOT;
         $routeCollection->add('sylius_product_option_update', $updateRoute)->shouldBeCalled();
 
         $bulkDeleteDefaults = [
-            '_controller' => 'sylius.controller.product_option:bulkDeleteAction',
+            '_controller' => 'sylius.controller.product_option::bulkDeleteAction',
             '_sylius' => [
                 'permission' => false,
                 'paginate' => false,
@@ -257,7 +257,7 @@ EOT;
         $routeCollection->add('sylius_product_option_bulk_delete', $bulkDeleteRoute)->shouldBeCalled();
 
         $deleteDefaults = [
-            '_controller' => 'sylius.controller.product_option:deleteAction',
+            '_controller' => 'sylius.controller.product_option::deleteAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -301,7 +301,7 @@ filterable: true
 EOT;
 
         $showDefaults = [
-            '_controller' => 'sylius.controller.product_option:showAction',
+            '_controller' => 'sylius.controller.product_option::showAction',
             '_sylius' => [
                 'permission' => false,
                 'criteria' => [
@@ -317,7 +317,7 @@ EOT;
         $routeCollection->add('sylius_product_option_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product_option:indexAction',
+            '_controller' => 'sylius.controller.product_option::indexAction',
             '_sylius' => [
                 'permission' => false,
                 'criteria' => [
@@ -333,7 +333,7 @@ EOT;
         $routeCollection->add('sylius_product_option_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product_option:createAction',
+            '_controller' => 'sylius.controller.product_option::createAction',
             '_sylius' => [
                 'permission' => false,
                 'criteria' => [
@@ -349,7 +349,7 @@ EOT;
         $routeCollection->add('sylius_product_option_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product_option:updateAction',
+            '_controller' => 'sylius.controller.product_option::updateAction',
             '_sylius' => [
                 'permission' => false,
                 'criteria' => [
@@ -365,7 +365,7 @@ EOT;
         $routeCollection->add('sylius_product_option_update', $updateRoute)->shouldBeCalled();
 
         $bulkDeleteDefaults = [
-            '_controller' => 'sylius.controller.product_option:bulkDeleteAction',
+            '_controller' => 'sylius.controller.product_option::bulkDeleteAction',
             '_sylius' => [
                 'permission' => false,
                 'paginate' => false,
@@ -386,7 +386,7 @@ EOT;
         $routeCollection->add('sylius_product_option_bulk_delete', $bulkDeleteRoute)->shouldBeCalled();
 
         $deleteDefaults = [
-            '_controller' => 'sylius.controller.product_option:deleteAction',
+            '_controller' => 'sylius.controller.product_option::deleteAction',
             '_sylius' => [
                 'permission' => false,
                 'criteria' => [
@@ -431,7 +431,7 @@ path: super-duper-products
 EOT;
 
         $showDefaults = [
-            '_controller' => 'sylius.controller.product:showAction',
+            '_controller' => 'sylius.controller.product::showAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -443,7 +443,7 @@ EOT;
         $routeCollection->add('sylius_product_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -455,7 +455,7 @@ EOT;
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -467,7 +467,7 @@ EOT;
         $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product:updateAction',
+            '_controller' => 'sylius.controller.product::updateAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -479,7 +479,7 @@ EOT;
         $routeCollection->add('sylius_product_update', $updateRoute)->shouldBeCalled();
 
         $bulkDeleteDefaults = [
-            '_controller' => 'sylius.controller.product:bulkDeleteAction',
+            '_controller' => 'sylius.controller.product::bulkDeleteAction',
             '_sylius' => [
                 'permission' => false,
                 'paginate' => false,
@@ -496,7 +496,7 @@ EOT;
         $routeCollection->add('sylius_product_bulk_delete', $bulkDeleteRoute)->shouldBeCalled();
 
         $deleteDefaults = [
-            '_controller' => 'sylius.controller.product:deleteAction',
+            '_controller' => 'sylius.controller.product::deleteAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -537,7 +537,7 @@ form: sylius_product_custom
 EOT;
 
         $showDefaults = [
-            '_controller' => 'sylius.controller.product:showAction',
+            '_controller' => 'sylius.controller.product::showAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -549,7 +549,7 @@ EOT;
         $routeCollection->add('sylius_product_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -561,7 +561,7 @@ EOT;
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'form' => 'sylius_product_custom',
                 'permission' => false,
@@ -574,7 +574,7 @@ EOT;
         $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product:updateAction',
+            '_controller' => 'sylius.controller.product::updateAction',
             '_sylius' => [
                 'form' => 'sylius_product_custom',
                 'permission' => false,
@@ -587,7 +587,7 @@ EOT;
         $routeCollection->add('sylius_product_update', $updateRoute)->shouldBeCalled();
 
         $bulkDeleteDefaults = [
-            '_controller' => 'sylius.controller.product:bulkDeleteAction',
+            '_controller' => 'sylius.controller.product::bulkDeleteAction',
             '_sylius' => [
                 'permission' => false,
                 'paginate' => false,
@@ -604,7 +604,7 @@ EOT;
         $routeCollection->add('sylius_product_bulk_delete', $bulkDeleteRoute)->shouldBeCalled();
 
         $deleteDefaults = [
-            '_controller' => 'sylius.controller.product:deleteAction',
+            '_controller' => 'sylius.controller.product::deleteAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -645,7 +645,7 @@ section: admin
 EOT;
 
         $showDefaults = [
-            '_controller' => 'sylius.controller.product:showAction',
+            '_controller' => 'sylius.controller.product::showAction',
             '_sylius' => [
                 'section' => 'admin',
                 'permission' => false,
@@ -658,7 +658,7 @@ EOT;
         $routeCollection->add('sylius_admin_product_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'section' => 'admin',
                 'permission' => false,
@@ -671,7 +671,7 @@ EOT;
         $routeCollection->add('sylius_admin_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'section' => 'admin',
                 'permission' => false,
@@ -684,7 +684,7 @@ EOT;
         $routeCollection->add('sylius_admin_product_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product:updateAction',
+            '_controller' => 'sylius.controller.product::updateAction',
             '_sylius' => [
                 'section' => 'admin',
                 'permission' => false,
@@ -697,7 +697,7 @@ EOT;
         $routeCollection->add('sylius_admin_product_update', $updateRoute)->shouldBeCalled();
 
         $bulkDeleteDefaults = [
-            '_controller' => 'sylius.controller.product:bulkDeleteAction',
+            '_controller' => 'sylius.controller.product::bulkDeleteAction',
             '_sylius' => [
                 'section' => 'admin',
                 'permission' => false,
@@ -715,7 +715,7 @@ EOT;
         $routeCollection->add('sylius_admin_product_bulk_delete', $bulkDeleteRoute)->shouldBeCalled();
 
         $deleteDefaults = [
-            '_controller' => 'sylius.controller.product:deleteAction',
+            '_controller' => 'sylius.controller.product::deleteAction',
             '_sylius' => [
                 'section' => 'admin',
                 'permission' => false,
@@ -757,7 +757,7 @@ templates: SyliusAdminBundle:Product
 EOT;
 
         $showDefaults = [
-            '_controller' => 'sylius.controller.product:showAction',
+            '_controller' => 'sylius.controller.product::showAction',
             '_sylius' => [
                 'template' => 'SyliusAdminBundle:Product:show.html.twig',
                 'permission' => false,
@@ -770,7 +770,7 @@ EOT;
         $routeCollection->add('sylius_product_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'template' => 'SyliusAdminBundle:Product:index.html.twig',
                 'permission' => false,
@@ -783,7 +783,7 @@ EOT;
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'template' => 'SyliusAdminBundle:Product:create.html.twig',
                 'permission' => false,
@@ -796,7 +796,7 @@ EOT;
         $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product:updateAction',
+            '_controller' => 'sylius.controller.product::updateAction',
             '_sylius' => [
                 'template' => 'SyliusAdminBundle:Product:update.html.twig',
                 'permission' => false,
@@ -809,7 +809,7 @@ EOT;
         $routeCollection->add('sylius_product_update', $updateRoute)->shouldBeCalled();
 
         $bulkDeleteDefaults = [
-            '_controller' => 'sylius.controller.product:bulkDeleteAction',
+            '_controller' => 'sylius.controller.product::bulkDeleteAction',
             '_sylius' => [
                 'permission' => false,
                 'paginate' => false,
@@ -826,7 +826,7 @@ EOT;
         $routeCollection->add('sylius_product_bulk_delete', $bulkDeleteRoute)->shouldBeCalled();
 
         $deleteDefaults = [
-            '_controller' => 'sylius.controller.product:deleteAction',
+            '_controller' => 'sylius.controller.product::deleteAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -867,7 +867,7 @@ templates: admin/product
 EOT;
 
         $showDefaults = [
-            '_controller' => 'sylius.controller.product:showAction',
+            '_controller' => 'sylius.controller.product::showAction',
             '_sylius' => [
                 'template' => 'admin/product/show.html.twig',
                 'permission' => false,
@@ -880,7 +880,7 @@ EOT;
         $routeCollection->add('sylius_product_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'template' => 'admin/product/index.html.twig',
                 'permission' => false,
@@ -893,7 +893,7 @@ EOT;
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'template' => 'admin/product/create.html.twig',
                 'permission' => false,
@@ -906,7 +906,7 @@ EOT;
         $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product:updateAction',
+            '_controller' => 'sylius.controller.product::updateAction',
             '_sylius' => [
                 'template' => 'admin/product/update.html.twig',
                 'permission' => false,
@@ -919,7 +919,7 @@ EOT;
         $routeCollection->add('sylius_product_update', $updateRoute)->shouldBeCalled();
 
         $bulkDeleteDefaults = [
-            '_controller' => 'sylius.controller.product:bulkDeleteAction',
+            '_controller' => 'sylius.controller.product::bulkDeleteAction',
             '_sylius' => [
                 'permission' => false,
                 'paginate' => false,
@@ -936,7 +936,7 @@ EOT;
         $routeCollection->add('sylius_product_bulk_delete', $bulkDeleteRoute)->shouldBeCalled();
 
         $deleteDefaults = [
-            '_controller' => 'sylius.controller.product:deleteAction',
+            '_controller' => 'sylius.controller.product::deleteAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -974,7 +974,7 @@ except: ['show', 'delete', 'bulkDelete']
 EOT;
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -986,7 +986,7 @@ EOT;
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -998,7 +998,7 @@ EOT;
         $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product:updateAction',
+            '_controller' => 'sylius.controller.product::updateAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -1035,7 +1035,7 @@ only: ['create', 'index']
 EOT;
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -1047,7 +1047,7 @@ EOT;
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -1102,7 +1102,7 @@ redirect: update
 EOT;
 
         $showDefaults = [
-            '_controller' => 'sylius.controller.product:showAction',
+            '_controller' => 'sylius.controller.product::showAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -1114,7 +1114,7 @@ EOT;
         $routeCollection->add('sylius_product_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -1126,7 +1126,7 @@ EOT;
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'redirect' => 'sylius_product_update',
                 'permission' => false,
@@ -1139,7 +1139,7 @@ EOT;
         $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product:updateAction',
+            '_controller' => 'sylius.controller.product::updateAction',
             '_sylius' => [
                 'redirect' => 'sylius_product_update',
                 'permission' => false,
@@ -1152,7 +1152,7 @@ EOT;
         $routeCollection->add('sylius_product_update', $updateRoute)->shouldBeCalled();
 
         $bulkDeleteDefaults = [
-            '_controller' => 'sylius.controller.product:bulkDeleteAction',
+            '_controller' => 'sylius.controller.product::bulkDeleteAction',
             '_sylius' => [
                 'permission' => false,
                 'paginate' => false,
@@ -1169,7 +1169,7 @@ EOT;
         $routeCollection->add('sylius_product_bulk_delete', $bulkDeleteRoute)->shouldBeCalled();
 
         $deleteDefaults = [
-            '_controller' => 'sylius.controller.product:deleteAction',
+            '_controller' => 'sylius.controller.product::deleteAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -1208,7 +1208,7 @@ alias: sylius.product
 EOT;
 
         $showDefaults = [
-            '_controller' => 'sylius.controller.product:showAction',
+            '_controller' => 'sylius.controller.product::showAction',
             '_sylius' => [
                 'serialization_groups' => ['Default', 'Detailed'],
                 'permission' => false,
@@ -1221,7 +1221,7 @@ EOT;
         $routeCollection->add('sylius_product_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'serialization_groups' => ['Default'],
                 'permission' => false,
@@ -1234,7 +1234,7 @@ EOT;
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'serialization_groups' => ['Default', 'Detailed'],
                 'permission' => false,
@@ -1247,7 +1247,7 @@ EOT;
         $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product:updateAction',
+            '_controller' => 'sylius.controller.product::updateAction',
             '_sylius' => [
                 'serialization_groups' => ['Default', 'Detailed'],
                 'permission' => false,
@@ -1260,7 +1260,7 @@ EOT;
         $routeCollection->add('sylius_product_update', $updateRoute)->shouldBeCalled();
 
         $deleteDefaults = [
-            '_controller' => 'sylius.controller.product:deleteAction',
+            '_controller' => 'sylius.controller.product::deleteAction',
             '_sylius' => [
                 'permission' => false,
                 'csrf_protection' => false,
@@ -1299,7 +1299,7 @@ grid: sylius_admin_product
 EOT;
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'grid' => 'sylius_admin_product',
                 'permission' => false,
@@ -1312,7 +1312,7 @@ EOT;
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'permission' => false,
             ],
@@ -1359,7 +1359,7 @@ vars:
 EOT;
 
         $showDefaults = [
-            '_controller' => 'sylius.controller.product:showAction',
+            '_controller' => 'sylius.controller.product::showAction',
             '_sylius' => [
                 'permission' => false,
                 'vars' => [
@@ -1374,7 +1374,7 @@ EOT;
         $routeCollection->add('sylius_product_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'permission' => false,
                 'vars' => [
@@ -1389,7 +1389,7 @@ EOT;
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'permission' => false,
                 'vars' => [
@@ -1405,7 +1405,7 @@ EOT;
         $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product:updateAction',
+            '_controller' => 'sylius.controller.product::updateAction',
             '_sylius' => [
                 'permission' => false,
                 'vars' => [
@@ -1421,7 +1421,7 @@ EOT;
         $routeCollection->add('sylius_product_update', $updateRoute)->shouldBeCalled();
 
         $bulkDeleteDefaults = [
-            '_controller' => 'sylius.controller.product:bulkDeleteAction',
+            '_controller' => 'sylius.controller.product::bulkDeleteAction',
             '_sylius' => [
                 'permission' => false,
                 'paginate' => false,
@@ -1441,7 +1441,7 @@ EOT;
         $routeCollection->add('sylius_product_bulk_delete', $bulkDeleteRoute)->shouldBeCalled();
 
         $deleteDefaults = [
-            '_controller' => 'sylius.controller.product:deleteAction',
+            '_controller' => 'sylius.controller.product::deleteAction',
             '_sylius' => [
                 'permission' => false,
                 'vars' => [
@@ -1485,7 +1485,7 @@ permission: true
 EOT;
 
         $showDefaults = [
-            '_controller' => 'sylius.controller.product:showAction',
+            '_controller' => 'sylius.controller.product::showAction',
             '_sylius' => [
                 'permission' => true,
             ],
@@ -1497,7 +1497,7 @@ EOT;
         $routeCollection->add('sylius_product_show', $showRoute)->shouldBeCalled();
 
         $indexDefaults = [
-            '_controller' => 'sylius.controller.product:indexAction',
+            '_controller' => 'sylius.controller.product::indexAction',
             '_sylius' => [
                 'permission' => true,
             ],
@@ -1509,7 +1509,7 @@ EOT;
         $routeCollection->add('sylius_product_index', $indexRoute)->shouldBeCalled();
 
         $createDefaults = [
-            '_controller' => 'sylius.controller.product:createAction',
+            '_controller' => 'sylius.controller.product::createAction',
             '_sylius' => [
                 'permission' => true,
             ],
@@ -1521,7 +1521,7 @@ EOT;
         $routeCollection->add('sylius_product_create', $createRoute)->shouldBeCalled();
 
         $updateDefaults = [
-            '_controller' => 'sylius.controller.product:updateAction',
+            '_controller' => 'sylius.controller.product::updateAction',
             '_sylius' => [
                 'permission' => true,
             ],
@@ -1533,7 +1533,7 @@ EOT;
         $routeCollection->add('sylius_product_update', $updateRoute)->shouldBeCalled();
 
         $bulkDeleteDefaults = [
-            '_controller' => 'sylius.controller.product:bulkDeleteAction',
+            '_controller' => 'sylius.controller.product::bulkDeleteAction',
             '_sylius' => [
                 'permission' => true,
                 'paginate' => false,
@@ -1550,7 +1550,7 @@ EOT;
         $routeCollection->add('sylius_product_bulk_delete', $bulkDeleteRoute)->shouldBeCalled();
 
         $deleteDefaults = [
-            '_controller' => 'sylius.controller.product:deleteAction',
+            '_controller' => 'sylius.controller.product::deleteAction',
             '_sylius' => [
                 'permission' => true,
             ],

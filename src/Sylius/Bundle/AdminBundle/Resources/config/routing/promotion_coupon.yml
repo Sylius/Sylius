@@ -2,7 +2,7 @@ sylius_admin_promotion_coupon_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.promotion_coupon:indexAction
+        _controller: sylius.controller.promotion_coupon::indexAction
         _sylius:
             template: "@SyliusAdmin/PromotionCoupon/index.html.twig"
             grid: sylius_admin_promotion_coupon
@@ -21,7 +21,7 @@ sylius_admin_promotion_coupon_create:
     path: /new
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.promotion_coupon:createAction
+        _controller: sylius.controller.promotion_coupon::createAction
         _sylius:
             factory:
                 method: createForPromotion
@@ -47,7 +47,7 @@ sylius_admin_promotion_coupon_update:
     path: /{id}/edit
     methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.promotion_coupon:updateAction
+        _controller: sylius.controller.promotion_coupon::updateAction
         _sylius:
             template: "@SyliusAdmin/Crud/update.html.twig"
             grid: sylius_admin_promotion_coupon
@@ -70,7 +70,7 @@ sylius_admin_promotion_coupon_generate:
     path: /generate
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.promotion_coupon:generateAction
+        _controller: sylius.controller.promotion_coupon::generateAction
         _sylius:
             template: "@SyliusAdmin/PromotionCoupon/generate.html.twig"
             section: admin
@@ -83,7 +83,7 @@ sylius_admin_promotion_coupon_bulk_delete:
     path: /bulk-delete
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.promotion_coupon:bulkDeleteAction
+        _controller: sylius.controller.promotion_coupon::bulkDeleteAction
         _sylius:
             section: admin
             redirect: referer
@@ -97,7 +97,7 @@ sylius_admin_promotion_coupon_delete:
     path: /{id}
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.promotion_coupon:deleteAction
+        _controller: sylius.controller.promotion_coupon::deleteAction
         _sylius:
             section: admin
             redirect: referer

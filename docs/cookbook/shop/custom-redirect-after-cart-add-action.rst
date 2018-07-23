@@ -9,7 +9,7 @@ Currently **Sylius** by default is using route definition and **sylius-add-to-ca
         path: /add-item
         methods: [GET]
         defaults:
-            _controller: sylius.controller.order_item:addAction
+            _controller: sylius.controller.order_item::addAction
             _sylius:
                 template: $template
                 factory:

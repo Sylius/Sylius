@@ -33,7 +33,7 @@ final class RouteFactorySpec extends ObjectBehavior
     function it_creates_a_new_route(): void
     {
         $defaults = [
-            '_controller' => 'sylius.controller.product:showAction',
+            '_controller' => 'sylius.controller.product::showAction',
         ];
 
         $requirements = [

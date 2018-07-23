@@ -19,7 +19,7 @@ sylius_admin_api_product_variant_create:
     path: /variants/
     methods: [POST]
     defaults:
-        _controller: sylius.controller.product_variant:createAction
+        _controller: sylius.controller.product_variant::createAction
         _sylius:
             serialization_groups: [Default, Detailed]
             serialization_version: $version
@@ -34,7 +34,7 @@ sylius_admin_api_product_variant_update:
     path: /variants/{code}
     methods: [PUT, PATCH]
     defaults:
-        _controller: sylius.controller.product_variant:updateAction
+        _controller: sylius.controller.product_variant::updateAction
         _sylius:
             serialization_version: $version
             section: admin_api
@@ -47,7 +47,7 @@ sylius_admin_api_product_variant_delete:
     path: /variants/{code}
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.product_variant:deleteAction
+        _controller: sylius.controller.product_variant::deleteAction
         _sylius:
             serialization_version: $version
             section: admin_api
@@ -60,7 +60,7 @@ sylius_admin_api_product_variant_show:
     path: /variants/{code}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_variant:showAction
+        _controller: sylius.controller.product_variant::showAction
         _sylius:
             serialization_version: $version
             section: admin_api

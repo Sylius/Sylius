@@ -15,7 +15,7 @@ Let's assume that you have a ``app.book`` resource registered. To display a sing
         path: /books/{id}
         methods: [GET]
         defaults:
-            _controller: app.controller.book:showAction
+            _controller: app.controller.book::showAction
 
 Done! Now when you go to ``/books/3``, ResourceController will use the repository (``app.repository.book``) to find a Book with the given id (``3``).
 If the requested book resource does not exist, it will throw a ``404 Not Found`` exception.
@@ -36,7 +36,7 @@ Okay, but what if you want to display the same Book resource, but with a differe
         path: /admin/books/{id}
         methods: [GET]
         defaults:
-            _controller: app.controller.book:showAction
+            _controller: app.controller.book::showAction
             _sylius:
                 template: Admin/Book/show.html.twig
 
@@ -56,7 +56,7 @@ Displaying books by id can be boring... and let's say we do not want to allow vi
         path: /books/{title}
         methods: [GET]
         defaults:
-            _controller: app.controller.book:showAction
+            _controller: app.controller.book::showAction
             _sylius:
                 criteria:
                     title: $title
@@ -79,7 +79,7 @@ Creating yet another action to change the method called could be a solution but 
         path: /books/{author}
         methods: [GET]
         defaults:
-            _controller: app.controller.book:showAction
+            _controller: app.controller.book::showAction
             _sylius:
                 repository:
                     method: findOneNewestByAuthor
@@ -100,7 +100,7 @@ If you would like to use your own service to get the resource, then try the foll
         path: /books/{author}
         methods: [GET]
         defaults:
-            _controller: app.controller.book:showAction
+            _controller: app.controller.book::showAction
             _sylius:
                 repository:
                     method: ["expr:service('app.repository.custom_book_repository')", "findOneNewestByAuthor"]
@@ -120,7 +120,7 @@ Configuration Reference
         path: /books/{author}
         methods: [GET]
         defaults:
-            _controller: app.controller.book:showAction
+            _controller: app.controller.book::showAction
             _sylius:
                 template: Book/show.html.twig
                 repository:
