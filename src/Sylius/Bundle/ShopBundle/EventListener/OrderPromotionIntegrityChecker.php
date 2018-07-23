@@ -78,8 +78,8 @@ final class OrderPromotionIntegrityChecker
 
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        // we creae a new promotion collection and remove them from cart
-        // so we can verify with original conditions (without the price beeng applied befor check)
+        // we create a new promotion collection and remove them from cart
+        // so we can verify with original conditions (without the price being applied before check)
 
         $promotions = $order->getPromotions()->toArray();
 
