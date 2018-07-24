@@ -28,6 +28,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 final class UserProviderSpec extends ObjectBehavior
 {
@@ -163,7 +164,7 @@ final class UserProviderSpec extends ObjectBehavior
     ): void {
         $resourceOwner->getName()->willReturn('google');
 
-        $response->getEmail()->willReturn(null);
+        $response->getEmail()->willReturn('username@emaildoesntexist');
         $response->getUsername()->willReturn('username');
         $response->getNickname()->willReturn('user');
         $response->getRealName()->willReturn('Name');
@@ -179,6 +180,7 @@ final class UserProviderSpec extends ObjectBehavior
         $userFactory->createNew()->willReturn($user);
         $customerFactory->createNew()->willReturn($customer);
         $customer->setFirstName('Name')->shouldBeCalled();
+        $customer->setEmail('username@emaildoesntexist')->shouldBeCalled();
 
         $oauth->setIdentifier('username');
         $oauth->setProvider('google');
@@ -187,7 +189,7 @@ final class UserProviderSpec extends ObjectBehavior
 
         $user->setCustomer($customer)->shouldBeCalled();
         $user->getUsername()->willReturn(null);
-        $user->setUsername('user')->shouldBeCalled();
+        $user->setUsername('username@emaildoesntexist')->shouldBeCalled();
         $user->setPlainPassword('2ff2dfe363')->shouldBeCalled();
         $user->setEnabled(true)->shouldBeCalled();
         $user->addOAuthAccount($oauth)->shouldBeCalled();
@@ -196,5 +198,54 @@ final class UserProviderSpec extends ObjectBehavior
         $userManager->flush()->shouldBeCalled();
 
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
+    }
+
+    function it_should_throw_exception_when_no_email_was_provided(
+        $userManager,
+        FactoryInterface $customerFactory,
+        FactoryInterface $userFactory,
+        FactoryInterface $oauthFactory,
+        RepositoryInterface $oauthRepository,
+        CustomerInterface $customer,
+        ShopUserInterface $user,
+        UserResponseInterface $response,
+        ResourceOwnerInterface $resourceOwner,
+        UserOAuthInterface $oauth
+    ): void {
+        $resourceOwner->getName()->willReturn('google');
+
+        $response->getEmail()->willReturn(null);
+        $response->getUsername()->willReturn('username');
+        $response->getNickname()->willReturn('user');
+        $response->getRealName()->willReturn('Name');
+        $response->getResourceOwner()->willReturn($resourceOwner);
+        $response->getAccessToken()->willReturn('access_token');
+        $response->getRefreshToken()->willReturn('refresh_token');
+        $response->getFirstName()->willReturn(null);
+        $response->getLastName()->willReturn(null);
+
+        $oauthRepository->findOneBy(['provider' => 'google', 'identifier' => 'username'])->willReturn(null);
+        $oauthFactory->createNew()->willReturn($oauth);
+
+        $userFactory->createNew()->willReturn($user);
+        $customerFactory->createNew()->willReturn($customer);
+        $customer->setFirstName('Name')->shouldNotBeCalled();
+
+        $oauth->setIdentifier('username');
+        $oauth->setProvider('google');
+        $oauth->setAccessToken('access_token');
+        $oauth->setRefreshToken('refresh_token');
+
+        $user->setCustomer($customer)->shouldNotBeCalled();
+        $user->getUsername()->willReturn(null);
+        $user->setUsername('username@emaildoesntexist')->shouldNotBeCalled();
+        $user->setPlainPassword('2ff2dfe363')->shouldNotBeCalled();
+        $user->setEnabled(true)->shouldNotBeCalled();
+        $user->addOAuthAccount($oauth)->shouldNotBeCalled();
+
+        $userManager->persist($user)->shouldNotBeCalled();
+        $userManager->flush()->shouldNotBeCalled();
+
+        $this->shouldThrow(UsernameNotFoundException::class)->during('loadUserByOAuthUserResponse', [$response]);
     }
 }
