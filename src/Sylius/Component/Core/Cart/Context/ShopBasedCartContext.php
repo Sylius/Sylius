@@ -102,4 +102,8 @@ final class ShopBasedCartContext implements CartContextInterface
             $cart->setShippingAddress($clonedAddress);
         }
     }
+
+    public function reset() {
+        $this->cart = null;
+    }
 }
