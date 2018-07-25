@@ -98,6 +98,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $channel->setContactEmail($options['contact_email']);
         $channel->setSkippingShippingStepAllowed($options['skipping_shipping_step_allowed']);
         $channel->setSkippingPaymentStepAllowed($options['skipping_payment_step_allowed']);
+        $channel->setAccountVerificationRequired($options['account_verification_required']);
 
         $channel->setDefaultLocale($options['default_locale']);
         foreach ($options['locales'] as $locale) {
