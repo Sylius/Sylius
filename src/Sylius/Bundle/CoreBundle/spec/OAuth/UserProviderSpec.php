@@ -19,6 +19,7 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -202,49 +203,23 @@ final class UserProviderSpec extends ObjectBehavior
 
     function it_should_throw_exception_when_no_email_was_provided(
         $userManager,
-        FactoryInterface $customerFactory,
-        FactoryInterface $userFactory,
+        UserRepositoryInterface $userRepository,
         FactoryInterface $oauthFactory,
         RepositoryInterface $oauthRepository,
-        CustomerInterface $customer,
         ShopUserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
         UserOAuthInterface $oauth
     ): void {
+        $response->getResourceOwner()->willReturn($resourceOwner);
         $resourceOwner->getName()->willReturn('google');
 
-        $response->getEmail()->willReturn(null);
         $response->getUsername()->willReturn('username');
-        $response->getNickname()->willReturn('user');
-        $response->getRealName()->willReturn('Name');
-        $response->getResourceOwner()->willReturn($resourceOwner);
-        $response->getAccessToken()->willReturn('access_token');
-        $response->getRefreshToken()->willReturn('refresh_token');
-        $response->getFirstName()->willReturn(null);
-        $response->getLastName()->willReturn(null);
 
         $oauthRepository->findOneBy(['provider' => 'google', 'identifier' => 'username'])->willReturn(null);
-        $oauthFactory->createNew()->willReturn($oauth);
 
-        $userFactory->createNew()->willReturn($user);
-        $customerFactory->createNew()->willReturn($customer);
-        $customer->setFirstName('Name')->shouldNotBeCalled();
-
-        $oauth->setIdentifier('username');
-        $oauth->setProvider('google');
-        $oauth->setAccessToken('access_token');
-        $oauth->setRefreshToken('refresh_token');
-
-        $user->setCustomer($customer)->shouldNotBeCalled();
-        $user->getUsername()->willReturn(null);
-        $user->setUsername('username@emaildoesntexist')->shouldNotBeCalled();
-        $user->setPlainPassword('2ff2dfe363')->shouldNotBeCalled();
-        $user->setEnabled(true)->shouldNotBeCalled();
-        $user->addOAuthAccount($oauth)->shouldNotBeCalled();
-
-        $userManager->persist($user)->shouldNotBeCalled();
-        $userManager->flush()->shouldNotBeCalled();
+        $response->getEmail()->willReturn(null);
+        $userRepository->findOneByEmail(Argument::any())->shouldNotBeCalled();
 
         $this->shouldThrow(UsernameNotFoundException::class)->during('loadUserByOAuthUserResponse', [$response]);
     }
