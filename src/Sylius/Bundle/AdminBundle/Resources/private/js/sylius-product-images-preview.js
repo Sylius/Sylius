@@ -31,20 +31,8 @@ const displayUploadedImage = function displayUploadedImage(input) {
 
 $.fn.extend({
   previewUploadedImage(root) {
-    $(`${root} input[type="file"]`).each((idx, el) => {
-      $(el).change((event) => {
-        displayUploadedImage(event.currentTarget);
-      });
-    });
-
-    $(`${root} [data-form-collection="add"]`).on('click', (evt) => {
-      const self = $(evt.currentTarget);
-
-      setTimeout(() => {
-        self.parent().find('.column:last-child input[type="file"]').on('change', (event) => {
-          displayUploadedImage(event.currentTarget);
-        });
-      }, 500);
+    $(root).on('change', 'input[type="file"]', function() {
+      displayUploadedImage(this);
     });
   },
 });
