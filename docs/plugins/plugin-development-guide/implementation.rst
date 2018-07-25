@@ -1,8 +1,8 @@
 Implementation
 --------------
 
-The goal of our plugin is simple - we need to extend ``ProductVariant`` entity and provide new flag, that could be set
-on product variant form. Following customizations are done just like in the **Sylius Customization Guide**,
+The goal of our plugin is simple - we need to extend the ``ProductVariant`` entity and provide a new flag, that could be set
+on the product variant form. Following customizations are done just like in the **Sylius Customization Guide**,
 take a look at :doc:`customizing models</customization/model>`, :doc:`form</customization/form>` and :doc:`template</customization/template>`.
 
 .. attention::
@@ -16,8 +16,8 @@ take a look at :doc:`customizing models</customization/model>`, :doc:`form</cust
 Model
 *****
 
-The only field we need to add is an additional ``$availableOnDemand`` boolean. Of course we should start with the unit tests (written with
-PHPSpec/PHPUnit/any other unit testing tool):
+The only field we need to add is an additional ``$availableOnDemand`` boolean. We should start with the unit tests (written with
+PHPSpec, PHPUnit, or any other unit testing tool):
 
 .. code-block:: php
 
@@ -47,6 +47,8 @@ PHPSpec/PHPUnit/any other unit testing tool):
 
         function it_can_be_available_on_demand(): void
         {
+            $this->isAvailableOnDemand()->shouldReturn(false);
+
             $this->setAvailableOnDemand(true);
             $this->isAvailableOnDemand()->shouldReturn(true);
         }
@@ -67,17 +69,36 @@ PHPSpec/PHPUnit/any other unit testing tool):
     class ProductVariant extends BaseProductVariant implements ProductVariantInterface
     {
         /** @var bool */
-        private $availableOnDemand;
+        private $availableOnDemand = false;
 
-        public function setAvailableOnDemand(?bool $availableOnDemand): void
+        public function setAvailableOnDemand(bool $availableOnDemand): void
         {
             $this->availableOnDemand = $availableOnDemand;
         }
 
-        public function isAvailableOnDemand(): ?bool
+        public function isAvailableOnDemand(): bool
         {
             return $this->availableOnDemand;
         }
+    }
+
+.. code-block:: php
+
+    <?php
+
+    // src/Entity/ProductVariantInterface.php
+
+    declare(strict_types=1);
+
+    namespace IronMan\SyliusProductOnDemandPlugin\Entity;
+
+    use Sylius\Component\Core\Model\ProductVariantInterface as BaseProductVariantInterface;
+
+    interface ProductVariant extends BaseProductVariantInterface
+    {
+        public function setAvailableOnDemand(bool $availableOnDemand): void;
+
+        public function isAvailableOnDemand(): bool;
     }
 
 Of course you need to remember about entity mapping customization as well:
@@ -92,7 +113,6 @@ Of course you need to remember about entity mapping customization as well:
         fields:
             availableOnDemand:
                 type: boolean
-                nullable: true
 
 Then our new entity should be configured as a resource model:
 

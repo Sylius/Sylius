@@ -25,8 +25,13 @@ field. What could be the next step?
 and even more. The limit is only your imagination (and business value, of course!). For more inspiration, we strongly recommend
 our :doc:`customizing guide</customization/index>`.
 
-At the end, do not hesitate to contact us on contact@sylius.com when you manage to implement a new plugin. We would be happy to check it out
-and add it to our `official plugins list`_!
+At the end, do not hesitate to contact us at contact@sylius.com when you manage to implement a new plugin.
+We would be happy to check it out and add it to our `official plugins list`_!
+
+.. note::
+
+    Beware, that to have your plugin **officially** accepted, it needs to be created with respect to clean-code principles
+    and properly tested!
 
 Future
 ******
