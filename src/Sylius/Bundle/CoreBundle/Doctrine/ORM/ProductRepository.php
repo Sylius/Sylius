@@ -74,12 +74,28 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->innerJoin('o.productTaxons', 'productTaxon')
-            ->andWhere('productTaxon.taxon = :taxon')
+            ->innerJoin('o.productTaxons', 'productTaxon');
+
+        if ($taxon->hasChildren()) {
+
+            /** @var TaxonInterface $taxonChild */
+            foreach ($taxon->getChildren()->getValues() as $taxonChild) {
+                $parameter = 'taxonChild' . $taxonChild->getCode();
+
+                $queryBuilder->orWhere('productTaxon.taxon = :' . $parameter);
+                $queryBuilder->setParameter($parameter, $taxonChild);
+            }
+        }
+
+        else {
+            $queryBuilder->andWhere('productTaxon.taxon = :taxon');
+            $queryBuilder->setParameter('taxon', $taxon);
+        }
+
+        $queryBuilder
             ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
             ->setParameter('locale', $locale)
-            ->setParameter('taxon', $taxon)
             ->setParameter('channel', $channel)
         ;
 
