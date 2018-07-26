@@ -103,7 +103,8 @@ final class ShopBasedCartContext implements CartContextInterface
         }
     }
 
-    public function reset() {
+    public function reset(): void
+    {
         $this->cart = null;
     }
 }
