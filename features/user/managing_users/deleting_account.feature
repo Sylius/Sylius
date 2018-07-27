@@ -5,7 +5,8 @@ Feature: Deleting the customer account
     I want to be able to remove customer account details from the system
 
     Background:
-        Given there is a user "theodore@example.com" identified by "pswd"
+        Given the store has customer "customer@example.com"
+        And there is a user "theodore@example.com" identified by "pswd"
         And I am logged in as an administrator
 
     @ui

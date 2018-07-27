@@ -101,7 +101,7 @@ final class CustomerShowMenuBuilder
                     'routeParameters' => ['id' => $customer->getUser()->getId()],
                 ])
                 ->setAttribute('type', 'delete')
-                ->setAttribute('resource_id', $customer->getId())
+                ->setAttribute('resource_id', $customer->getUser()->getId())
                 ->setLabel('sylius.ui.delete')
             ;
 
