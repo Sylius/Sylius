@@ -35,6 +35,7 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      * @param string $locale
      * @param array $sorting
      * @param bool $reproduceTaxonomyTree
+     *
      * @return QueryBuilder
      */
     public function createShopListQueryBuilder(
@@ -42,7 +43,7 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
         TaxonInterface $taxon,
         string $locale,
         array $sorting = [],
-        bool $reproduceTaxonomyTree
+        bool $reproduceTaxonomyTree = false
     ): QueryBuilder;
 
     /**

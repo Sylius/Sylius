@@ -70,7 +70,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         TaxonInterface $taxon,
         string $locale,
         array $sorting = [],
-        bool $reproduceTaxonomyTree
+        bool $reproduceTaxonomyTree = false
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
@@ -80,9 +80,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         if ($reproduceTaxonomyTree) {
             $queryBuilder->orWhere('productTaxon.taxon = :taxon');
             $this->reproduceTaxonomyTree($taxon, $queryBuilder);
-        }
-
-        else {
+        } else {
             $queryBuilder->andWhere('productTaxon.taxon = :taxon');
         }
 
