@@ -38,8 +38,6 @@ Taxon
 +-----------------+--------------------------------------------------------------------+
 | slug            | Urlized name taken from the ``TaxonTranslation``                   |
 +-----------------+--------------------------------------------------------------------+
-| permalink       | Full permalink for given taxon taken form the ``TaxonTranslation`` |
-+-----------------+--------------------------------------------------------------------+
 | description     | Description of taxon taken from the ``TaxonTranslation``           |
 +-----------------+--------------------------------------------------------------------+
 | parent          | Parent taxon                                                       |
@@ -52,9 +50,7 @@ Taxon
 +-----------------+--------------------------------------------------------------------+
 | level           | How deep it is in the tree                                         |
 +-----------------+--------------------------------------------------------------------+
-| createdAt       | Date when taxon was created                                        |
-+-----------------+--------------------------------------------------------------------+
-| updatedAt       | Date of last update                                                |
+| position        | Position of the taxon on its taxonomy                              |
 +-----------------+--------------------------------------------------------------------+
 
 .. note::
@@ -79,8 +75,6 @@ This model stores translations for the **Taxon** instances.
 | name            | Name of the taxon                  |
 +-----------------+------------------------------------+
 | slug            | Urlized name                       |
-+-----------------+------------------------------------+
-| permalink       | Full permalink for given taxon     |
 +-----------------+------------------------------------+
 | description     | Description of taxon               |
 +-----------------+------------------------------------+

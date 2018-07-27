@@ -3,9 +3,9 @@
     <div class="ui fluid stackable items">
         {{ form_errors(form.method) }}
 
-        {% for choice_form in form.method %}
+        {% for key, choice_form in form.method %}
             {% set fee = form.method.vars.shipping_costs[choice_form.vars.value] %}
-            {% set method = form.method.vars.choices[loop.index0].data %}
+            {% set method = form.method.vars.choices[key].data %}
             {% include '@SyliusShop/Checkout/SelectShipping/_choice.html.twig' with {'form': choice_form, 'method': method, 'fee': fee} %}
         {% else %}
             {% include '@SyliusShop/Checkout/SelectShipping/_unavailable.html.twig' %}

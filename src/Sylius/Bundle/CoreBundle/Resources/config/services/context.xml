@@ -35,6 +35,7 @@
         <service id="sylius.context.cart.new_shop_based" class="Sylius\Component\Core\Cart\Context\ShopBasedCartContext" decorates="sylius.context.cart.new" decoration-priority="256" public="false">
             <argument type="service" id="sylius.context.cart.new_shop_based.inner" />
             <argument type="service" id="sylius.context.shopper" />
+            <tag name="kernel.reset" method="reset" />
         </service>
         <service id="sylius.context.cart.customer_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\CustomerAndChannelBasedCartContext">
             <argument type="service" id="sylius.context.customer" />
