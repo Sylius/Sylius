@@ -1,5 +1,36 @@
 # CHANGELOG FOR `1.1.X`
 
+## v1.1.11 (2018-07-27)
+
+#### TL;DR
+
+- There's a new [plugin development guide](http://docs.sylius.com/en/1.1/plugins/plugin-development-guide/index.html) ([#9592](https://github.com/Sylius/Sylius/pull/9592))
+- Fixed compatibility with PHP-PM ([#9613](https://github.com/Sylius/Sylius/pull/9613), [#9608](https://github.com/Sylius/Sylius/pull/9608))
+- Fixed buggy shop user removal in the admin panel ([#9618](https://github.com/Sylius/Sylius/pull/9618))
+
+#### Details
+
+- [#9193](https://github.com/Sylius/Sylius/pull/9193) [Documentation][GridBundle]Describes sorting, filtering by sub entity properties (@Mipme)
+- [#9289](https://github.com/Sylius/Sylius/pull/9289) Check if customer is set before get/set email (@pamil, @teohhanhui)
+- [#9352](https://github.com/Sylius/Sylius/pull/9352) Minor fixes to grammar (@gregsomers)
+- [#9421](https://github.com/Sylius/Sylius/pull/9421) Field used for label does not exist (@pamil, @psihius)
+- [#9553](https://github.com/Sylius/Sylius/pull/9553) Fix wrong type for "images" option in ProductFixture (@teohhanhui)
+- [#9578](https://github.com/Sylius/Sylius/pull/9578) [Core] Nullable customer on order (@lchrusciel)
+- [#9580](https://github.com/Sylius/Sylius/pull/9580) [User] Fix bc-break in UserLastLoginSubscriber (@lchrusciel)
+- [#9587](https://github.com/Sylius/Sylius/pull/9587) Adding strict typing for PHP classes in images doc (@Roshyo)
+- [#9590](https://github.com/Sylius/Sylius/pull/9590) Ensure that DatabaseSetupCommandsProvider::getDatabaseName() returns a string. (@azjezz)
+- [#9592](https://github.com/Sylius/Sylius/pull/9592) Plugin development guide v1.0 (@Zales0123)
+- [#9599](https://github.com/Sylius/Sylius/pull/9599) [Behat] Grammar fix (@lchrusciel)
+- [#9600](https://github.com/Sylius/Sylius/pull/9600) Pull request template fix (@lchrusciel)
+- [#9603](https://github.com/Sylius/Sylius/pull/9603) [Maintenance] Move github templates (@lchrusciel)
+- [#9608](https://github.com/Sylius/Sylius/pull/9608) Remove instances of loop.index0 (@dnna)
+- [#9611](https://github.com/Sylius/Sylius/pull/9611) [Doc] Fix service name for custom taxation calculator (@dannyvw)
+- [#9612](https://github.com/Sylius/Sylius/pull/9612) Handle null email in oauth login (@dnna)
+- [#9613](https://github.com/Sylius/Sylius/pull/9613) Fix ShopBasedCartContext resetting (@dnna)
+- [#9617](https://github.com/Sylius/Sylius/pull/9617) Fix CS and add tests for ShopBasedCartContext (@pamil)
+- [#9618](https://github.com/Sylius/Sylius/pull/9618) Reproduce CSRF token validation failure when deleting an user in admin panel (@pamil)
+- [#9620](https://github.com/Sylius/Sylius/pull/9620) [docs] updating taxon models documentation (@loic425)
+
 ## v1.1.10 (2018-07-10)
 
 #### TL;DR
