@@ -69,15 +69,22 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         ChannelInterface $channel,
         TaxonInterface $taxon,
         string $locale,
-        array $sorting = []
+        array $sorting = [],
+        bool $reproduceTaxonomyTree
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->innerJoin('o.productTaxons', 'productTaxon')
-            ->orWhere('productTaxon.taxon = :taxon');
+            ->innerJoin('o.productTaxons', 'productTaxon');
 
-        $this->reproduceTaxonomyTree($taxon, $queryBuilder);
+        if ($reproduceTaxonomyTree) {
+            $queryBuilder->orWhere('productTaxon.taxon = :taxon');
+            $this->reproduceTaxonomyTree($taxon, $queryBuilder);
+        }
+
+        else {
+            $queryBuilder->andWhere('productTaxon.taxon = :taxon');
+        }
 
         $queryBuilder
             ->andWhere(':channel MEMBER OF o.channels')
