@@ -189,9 +189,9 @@ final class LoginContext implements Context
     }
 
     /**
-     * @Then I should be notified that email with reset instruction has been send
+     * @Then I should be notified that email with reset instruction has been sent
      */
-    public function iShouldBeNotifiedThatEmailWithResetInstructionWasSend()
+    public function iShouldBeNotifiedThatEmailWithResetInstructionWasSent()
     {
         $this->notificationChecker->checkNotification('If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.', NotificationType::success());
     }
