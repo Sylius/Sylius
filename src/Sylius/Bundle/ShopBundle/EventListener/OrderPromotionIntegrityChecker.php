@@ -58,7 +58,7 @@ final class OrderPromotionIntegrityChecker
         RouterInterface $router,
         ?PromotionApplicatorInterface $promotionApplicator = null
     ) {
-        if($promotionApplicator == null){
+        if ($promotionApplicator === null) {
             @trigger_error("You need to supply an promotion applicator in order to work properly. In case you don't provide it, there will be valid cases that will fail due an incorrect recalculation.", \E_USER_DEPRECATED);
         }
 
@@ -83,8 +83,8 @@ final class OrderPromotionIntegrityChecker
 
         $promotions = $order->getPromotions()->toArray();
 
-        if($this->promotionApplicator !== null){
-            foreach($promotions as $promotion){
+        if ($this->promotionApplicator !== null) {
+            foreach ($promotions as $promotion) {
                 $this->promotionApplicator->revert($order, $promotion);
                 $order->removePromotion($promotion);
             }
@@ -105,7 +105,7 @@ final class OrderPromotionIntegrityChecker
                 break;
             }
 
-            if($this->promotionApplicator !== null){
+            if ($this->promotionApplicator !== null) {
                 $this->promotionApplicator->apply($order, $promotion);
             }
         }
