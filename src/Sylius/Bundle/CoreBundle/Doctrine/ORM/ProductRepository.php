@@ -74,28 +74,16 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->innerJoin('o.productTaxons', 'productTaxon');
+            ->innerJoin('o.productTaxons', 'productTaxon')
+            ->orWhere('productTaxon.taxon = :taxon');
 
-        if ($taxon->hasChildren()) {
-
-            /** @var TaxonInterface $taxonChild */
-            foreach ($taxon->getChildren()->getValues() as $taxonChild) {
-                $parameter = 'taxonChild' . $taxonChild->getCode();
-
-                $queryBuilder->orWhere('productTaxon.taxon = :' . $parameter);
-                $queryBuilder->setParameter($parameter, $taxonChild);
-            }
-        }
-
-        else {
-            $queryBuilder->andWhere('productTaxon.taxon = :taxon');
-            $queryBuilder->setParameter('taxon', $taxon);
-        }
+        $this->reproduceTaxonomyTree($taxon, $queryBuilder);
 
         $queryBuilder
             ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
             ->setParameter('locale', $locale)
+            ->setParameter('taxon', $taxon)
             ->setParameter('channel', $channel)
         ;
 
@@ -186,5 +174,21 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    private function reproduceTaxonomyTree(TaxonInterface $taxon, QueryBuilder $queryBuilder): void
+    {
+        if (!$taxon->hasChildren()) {
+            $parameter = 'taxonChild' . $taxon->getCode();
+
+            $queryBuilder->orWhere('productTaxon.taxon = :' . $parameter);
+            $queryBuilder->setParameter($parameter, $taxon);
+
+            return;
+        }
+
+        foreach ($taxon->getChildren() as $taxonChild) {
+            $this->reproduceTaxonomyTree($taxonChild, $queryBuilder);
+        }
     }
 }
