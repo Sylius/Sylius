@@ -8,10 +8,6 @@ framework:
     router: { resource: "%kernel.project_dir%/app/config/routing_dev.yml" }
     profiler: { only_exceptions: false }
 
-doctrine:
-    dbal:
-        dbname: "%database_name%_dev"
-
 monolog:
     handlers:
         main:
