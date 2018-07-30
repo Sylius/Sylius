@@ -8,7 +8,7 @@ sylius:
             enabled: Omogočeno
             password:
                 label: Geslo
-                confirmation: Preverjanje
+                confirmation: Potrditev gesla
             remember_me: Zapomni si me
             shipping_address: Naslov za dostavo
             username: Uporabniško ime
