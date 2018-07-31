@@ -15,7 +15,7 @@ sylius_grid:
                             taxon: "expr:notFoundOnNull(service('sylius.repository.taxon').findOneBySlug($slug, service('sylius.context.locale').getLocaleCode()))"
                             locale: "expr:service('sylius.context.locale').getLocaleCode()"
                             sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
-                            reproduceTaxonomyTree: true
+                            includeAllDescendants: true
             sorting:
                 position: asc
             limits: [9, 18, 27]

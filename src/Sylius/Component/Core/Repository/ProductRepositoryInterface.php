@@ -34,7 +34,7 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      * @param TaxonInterface $taxon
      * @param string $locale
      * @param array $sorting
-     * @param bool $reproduceTaxonomyTree
+     * @param bool $includeAllDescendants
      *
      * @return QueryBuilder
      */
@@ -43,7 +43,7 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
         TaxonInterface $taxon,
         string $locale,
         array $sorting = [],
-        bool $reproduceTaxonomyTree = false
+        bool $includeAllDescendants = false
     ): QueryBuilder;
 
     /**

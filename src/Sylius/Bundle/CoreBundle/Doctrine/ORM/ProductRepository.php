@@ -70,16 +70,17 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         TaxonInterface $taxon,
         string $locale,
         array $sorting = [],
-        bool $reproduceTaxonomyTree = false
+        bool $includeAllDescendants = false
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->innerJoin('o.productTaxons', 'productTaxon');
+            ->innerJoin('o.productTaxons', 'productTaxon')
+            ->innerJoin('productTaxon.taxon', 'taxon');
 
-        if ($reproduceTaxonomyTree) {
-            $queryBuilder->orWhere('productTaxon.taxon = :taxon');
-            $this->reproduceTaxonomyTree($taxon, $queryBuilder);
+        if ($includeAllDescendants) {
+            $queryBuilder->andWhere('taxon.left >= :taxonLeft');
+            $queryBuilder->andWhere('taxon.right <= :taxonRight');
         } else {
             $queryBuilder->andWhere('productTaxon.taxon = :taxon');
         }
@@ -88,7 +89,8 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
             ->setParameter('locale', $locale)
-            ->setParameter('taxon', $taxon)
+            ->setParameter('taxonLeft', $taxon->getLeft())
+            ->setParameter('taxonRight', $taxon->getRight())
             ->setParameter('channel', $channel)
         ;
 
@@ -179,21 +181,5 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->getQuery()
             ->getOneOrNullResult()
         ;
-    }
-
-    private function reproduceTaxonomyTree(TaxonInterface $taxon, QueryBuilder $queryBuilder): void
-    {
-        if (!$taxon->hasChildren()) {
-            $parameter = 'taxonChild' . $taxon->getCode();
-
-            $queryBuilder->orWhere('productTaxon.taxon = :' . $parameter);
-            $queryBuilder->setParameter($parameter, $taxon);
-
-            return;
-        }
-
-        foreach ($taxon->getChildren() as $taxonChild) {
-            $this->reproduceTaxonomyTree($taxonChild, $queryBuilder);
-        }
     }
 }
