@@ -108,11 +108,11 @@ final class OrderPaymentStateResolver implements StateResolverInterface
         }
 
         if (0 < $authorizedPayments->count() && $authorizedPaymentTotal >= $order->getTotal()) {
-            return OrderPaymentTransitions::TRANSITION_AUTHORIZE_PAYMENT;
+            return OrderPaymentTransitions::TRANSITION_AUTHORIZE;
         }
 
         if ($authorizedPaymentTotal < $order->getTotal() && 0 < $authorizedPaymentTotal) {
-            return OrderPaymentTransitions::TRANSITION_PARTIALLY_AUTHORIZE_PAYMENT;
+            return OrderPaymentTransitions::TRANSITION_PARTIALLY_AUTHORIZE;
         }
 
         return null;

@@ -238,8 +238,8 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $order->getTotal()->willReturn(10000);
 
         $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderPaymentTransitions::TRANSITION_AUTHORIZE_PAYMENT)->willReturn(true);
-        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_AUTHORIZE_PAYMENT)->shouldBeCalled();
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_AUTHORIZE)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_AUTHORIZE)->shouldBeCalled();
 
         $this->resolve($order);
     }
@@ -263,8 +263,8 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $order->getTotal()->willReturn(10000);
 
         $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PARTIALLY_AUTHORIZE_PAYMENT)->willReturn(true);
-        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PARTIALLY_AUTHORIZE_PAYMENT)->shouldBeCalled();
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PARTIALLY_AUTHORIZE)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PARTIALLY_AUTHORIZE)->shouldBeCalled();
 
         $this->resolve($order);
     }
