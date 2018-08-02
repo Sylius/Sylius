@@ -75,22 +75,29 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->innerJoin('o.productTaxons', 'productTaxon')
-            ->innerJoin('productTaxon.taxon', 'taxon');
+            ->innerJoin('o.productTaxons', 'productTaxon');
 
         if ($includeAllDescendants) {
-            $queryBuilder->andWhere('taxon.left >= :taxonLeft');
-            $queryBuilder->andWhere('taxon.right <= :taxonRight');
+            $queryBuilder
+                ->innerJoin('productTaxon.taxon', 'taxon')
+                ->andWhere('taxon.left >= :taxonLeft')
+                ->andWhere('taxon.right <= :taxonRight')
+                ->andWhere('taxon.root = :taxonRoot')
+                ->setParameter('taxonLeft', $taxon->getLeft())
+                ->setParameter('taxonRight', $taxon->getRight())
+                ->setParameter('taxonRoot', $taxon->getRoot())
+            ;
         } else {
-            $queryBuilder->andWhere('productTaxon.taxon = :taxon');
+            $queryBuilder
+                ->andWhere('productTaxon.taxon = :taxon')
+                ->setParameter('taxon', $taxon)
+            ;
         }
 
         $queryBuilder
             ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
             ->setParameter('locale', $locale)
-            ->setParameter('taxonLeft', $taxon->getLeft())
-            ->setParameter('taxonRight', $taxon->getRight())
             ->setParameter('channel', $channel)
         ;
 

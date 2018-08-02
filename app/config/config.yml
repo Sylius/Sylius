@@ -68,3 +68,7 @@ liip_imagine:
             web_path:
                 web_root: "%kernel.project_dir%/web"
                 cache_prefix: "media/cache"
+
+sylius_shop:
+    product_grid:
+        include_all_descendants: true
