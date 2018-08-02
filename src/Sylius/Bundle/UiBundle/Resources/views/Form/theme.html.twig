@@ -19,7 +19,7 @@
 {%- endblock form_errors -%}
 
 {% block checkbox_row -%}
-    <div class="field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
         <div class="ui toggle checkbox">
             {{- form_widget(form) -}}
             {{- form_label(form) -}}
@@ -56,7 +56,7 @@
 
 {%- block choice_widget_expanded -%}
     <div {{ block('widget_container_attributes') }}>
-        <div class="grouped fields">
+        <div class="{% if required %}required {% endif %}grouped fields">
             {%- for child in form %}
                 <div class="field">
                     <div class="ui toggle checkbox">

@@ -17,7 +17,7 @@ class Version20161223091334 extends AbstractMigration
         $this->addSql('ALTER TABLE sylius_product_variant ADD position INT NOT NULL');
         $this->addSql('SET @row_number = -1');
         $this->addSql('CREATE TEMPORARY TABLE IF NOT EXISTS variants_count
-                        SELECT sylius_product.id AS product_id, COUNT(sylius_product_variant.id) AS row_number FROM sylius_product
+                        SELECT sylius_product.id AS product_id, COUNT(sylius_product_variant.id) AS `row_number` FROM sylius_product
                         INNER JOIN sylius_product_variant ON sylius_product.id = sylius_product_variant.product_id
                         GROUP BY sylius_product.id'
         );
