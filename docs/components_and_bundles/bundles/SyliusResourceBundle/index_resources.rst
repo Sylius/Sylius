@@ -12,7 +12,7 @@ In the default scenario, it will return an instance of paginator, with a list of
         path: /books
         methods: [GET]
         defaults:
-            _controller: app.controller.book:indexAction
+            _controller: app.controller.book::indexAction
 
 When you go to ``/books``, the ResourceController will use the repository (``app.repository.book``) to create a paginator.
 The default template will be rendered - ``App:Book:index.html.twig`` with the paginator as the ``books`` variable.
@@ -33,7 +33,7 @@ Just like for the **showAction**, you can override the default template and crit
         path: /books/disabled
         methods: [GET]
         defaults:
-            _controller: app.controller.book:indexAction
+            _controller: app.controller.book::indexAction
             _sylius:
                 criteria:
                     enabled: false
@@ -54,7 +54,7 @@ Except filtering, you can also sort Books.
         path: /books/top
         methods: [GET]
         defaults:
-            _controller: app.controller.book:indexAction
+            _controller: app.controller.book::indexAction
             _sylius:
                 sortable: true
                 sorting:
@@ -87,7 +87,7 @@ You can also control the "max per page" for paginator, using ``paginate`` parame
         path: /books/top
         methods: [GET]
         defaults:
-            _controller: app.controller.book:indexAction
+            _controller: app.controller.book::indexAction
             _sylius:
                 paginate: 5
                 sortable: true
@@ -110,7 +110,7 @@ Pagination is handy, but you do not always want to do it, you can disable pagina
         path: /books/top
         methods: [GET]
         defaults:
-            _controller: app.controller.book:indexAction
+            _controller: app.controller.book::indexAction
             _sylius:
                 paginate: false
                 limit: 3
@@ -132,7 +132,7 @@ Configuration Reference
         path: /{author}/books
         methods: [GET]
         defaults:
-            _controller: app.controller.book:indexAction
+            _controller: app.controller.book::indexAction
             _sylius:
                 template: Author/books.html.twig
                 repository:

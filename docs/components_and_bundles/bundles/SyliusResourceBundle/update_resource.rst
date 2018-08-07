@@ -11,7 +11,7 @@ To display an edit form of a particular resource, change it or update it via API
         path: /books/{id}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.book:updateAction
+            _controller: app.controller.book::updateAction
 
 Done! Now when you go to ``/books/5/edit``, ResourceController will use the repository (``app.repository.book``) to find the book with id == **5**.
 If found it will create the ``app_book`` form, and set the existing book as data.
@@ -44,7 +44,7 @@ Just like for other actions, you can customize the template.
         path: /books/{id}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.book:updateAction
+            _controller: app.controller.book::updateAction
             _sylius:
                 template: Admin/Book/update.html.twig
 
@@ -61,7 +61,7 @@ Same way like for **createAction** you can override the default form.
         path: /books/{id}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.book:updateAction
+            _controller: app.controller.book::updateAction
             _sylius:
                 form: AppBundle\Form\BookType
 
@@ -80,7 +80,7 @@ Below you can see how to specify custom options, in this case, ``validation_grou
         path: /books/{id}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.book:updateAction
+            _controller: app.controller.book::updateAction
             _sylius:
                 form:
                     type: app_book_custom
@@ -100,7 +100,7 @@ By default, the **updateAction** will look for the resource by id. You can easil
         path: /books/{title}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.book:updateAction
+            _controller: app.controller.book::updateAction
             _sylius:
                 criteria: { title: $title }
 
@@ -117,7 +117,7 @@ By default the controller will try to get the id of resource and redirect to the
         path: /books/{id}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.book:updateAction
+            _controller: app.controller.book::updateAction
             _sylius:
                 redirect: app_book_index
 
@@ -131,7 +131,7 @@ You can also perform more complex redirects, with parameters. For example:
         path: /genre/{genreId}/books/{id}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.book:updateAction
+            _controller: app.controller.book::updateAction
             _sylius:
                 redirect:
                     route: app_genre_show
@@ -153,7 +153,7 @@ own action name.
         path: /customer/book-update/{id}
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.book:updateAction
+            _controller: app.controller.book::updateAction
             _sylius:
                 event: customer_update
 
@@ -175,7 +175,7 @@ Sylius, by default is returning the ``204 HTTP Code``, which indicates an empty 
         path: /books/{title}/edit
         methods: [GET, PUT]
         defaults:
-            _controller: app.controller.book:updateAction
+            _controller: app.controller.book::updateAction
             _sylius:
                 criteria: { title: $title }
                 return_content: true
@@ -196,7 +196,7 @@ Configuration Reference
         path: /genre/{genreId}/books/{title}/edit
         methods: [GET, PUT, PATCH]
         defaults:
-            _controller: app.controller.book:updateAction
+            _controller: app.controller.book::updateAction
             _sylius:
                 template: Book/editInGenre.html.twig
                 form: app_book_custom

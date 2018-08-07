@@ -204,7 +204,7 @@ to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file.
         path: /address
         methods: [GET, PUT]
         defaults:
-            _controller: sylius.controller.order:updateAction
+            _controller: sylius.controller.order::updateAction
             _sylius:
                 event: address
                 flash: false
@@ -225,7 +225,7 @@ to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file.
         path: /select-payment
         methods: [GET, PUT]
         defaults:
-            _controller: sylius.controller.order:updateAction
+            _controller: sylius.controller.order::updateAction
             _sylius:
                 event: payment
                 flash: false
@@ -243,7 +243,7 @@ to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file.
         path: /complete
         methods: [GET, PUT]
         defaults:
-            _controller: sylius.controller.order:updateAction
+            _controller: sylius.controller.order::updateAction
             _sylius:
                 event: complete
                 flash: false

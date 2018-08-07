@@ -5,7 +5,7 @@ sylius_admin_api_province_delete:
     path: /{code}
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.province:deleteAction
+        _controller: sylius.controller.province::deleteAction
         _sylius:
             serialization_version: $version
             criteria:
@@ -16,7 +16,7 @@ sylius_admin_api_province_show:
     path: /{code}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.province:showAction
+        _controller: sylius.controller.province::showAction
         _sylius:
             serialization_version: $version
             serialization_groups: [Detailed]

@@ -11,7 +11,7 @@ Deleting a resource is simple.
         path: /books/{id}
         methods: [DELETE]
         defaults:
-            _controller: app.controller.book:deleteAction
+            _controller: app.controller.book::deleteAction
 
 Calling an Action with DELETE method
 ------------------------------------
@@ -45,7 +45,7 @@ For example, if you want to delete a book that belongs to a particular genre, no
         path: /genre/{genreId}/books/{id}
         methods: [DELETE]
         defaults:
-            _controller: app.controller.book:deleteAction
+            _controller: app.controller.book::deleteAction
             _sylius:
                 criteria:
                     id: $id
@@ -66,7 +66,7 @@ By default the controller will redirect to the "index" route after successful ac
         path: /genre/{genreId}/books/{id}
         methods: [DELETE]
         defaults:
-            _controller: app.controller.book:deleteAction
+            _controller: app.controller.book::deleteAction
             _sylius:
                 redirect:
                     route: app_genre_show
@@ -88,7 +88,7 @@ However, you can customize the last part of the event, to provide your own actio
         path: /customer/book-delete/{id}
         methods: [DELETE]
         defaults:
-            _controller: app.controller.book:deleteAction
+            _controller: app.controller.book::deleteAction
             _sylius:
                 event: customer_delete
 
@@ -107,7 +107,7 @@ Configuration Reference
         path: /{genreName}/books/{id}/remove
         methods: [DELETE]
         defaults:
-            _controller: app.controller.book:deleteAction
+            _controller: app.controller.book::deleteAction
             _sylius:
                 event: book_delete
                 repository:

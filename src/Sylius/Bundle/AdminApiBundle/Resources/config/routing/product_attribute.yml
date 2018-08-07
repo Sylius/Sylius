@@ -16,7 +16,7 @@ sylius_admin_api_product_attribute_create:
     path: /product-attributes/{type}
     methods: [POST]
     defaults:
-        _controller: sylius.controller.product_attribute:createAction
+        _controller: sylius.controller.product_attribute::createAction
         _sylius:
             serialization_version: $version
             factory:
