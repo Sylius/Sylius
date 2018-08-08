@@ -41,6 +41,8 @@ final class OrderItemNamesSetterSpec extends ObjectBehavior
         $order->getLocaleCode()->willReturn('en_US');
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
 
+        $orderItem->getVariant()->willReturn($variant);
+
         $variant->getProduct()->willReturn($product);
         $variant->getTranslation('en_US')->willReturn($variantTranslation);
         $variantTranslation->getName()->willReturn('Variant name');
@@ -48,8 +50,8 @@ final class OrderItemNamesSetterSpec extends ObjectBehavior
         $product->getTranslation('en_US')->willReturn($productTranslation);
         $productTranslation->getName()->willReturn('Product name');
 
-        $orderItem->setVariantName('Variant name');
-        $orderItem->setProductName('Product name');
+        $orderItem->setVariantName('Variant name')->shouldBeCalled();
+        $orderItem->setProductName('Product name')->shouldBeCalled();
 
         $this->__invoke($order);
     }
