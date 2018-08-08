@@ -126,6 +126,46 @@ final class AccountContext implements Context
     }
 
     /**
+     * @When I set the customer address name to :firstName :lastName
+     */
+    public function iSpecifyCustomersDefaultAddressTheEmail(string $firstName, string $lastName)
+    {
+        $this->profileUpdatePage->specifyCustomerAddressName($firstName, $lastName);
+    }
+
+    /**
+     * @When I set the customer address phone number to :phoneNumber
+     */
+    public function iSpecifyCustomersDefaultAddressPhoneNumber(string $phoneNumber)
+    {
+        $this->profileUpdatePage->specifyCustomerAddressPhone($phoneNumber);
+    }
+
+    /**
+     * @When I set the customer address company to :company
+     */
+    public function iSpecifyCustomersDefaultAddressCompany(string $company)
+    {
+        $this->profileUpdatePage->specifyCustomerAddressCompany($company);
+    }
+
+    /**
+     * @When I set the customer address country to :country
+     */
+    public function iSpecifyCustomersDefaultAddressCountry(string $country)
+    {
+        $this->profileUpdatePage->specifyCustomerAddressCountry($country);
+    }
+
+    /**
+     * @When I set the customer address to :street :city :postCode :province
+     */
+    public function iSpecifyCustomersDefaultAddressStreets(string $street, string $city, string $postCode, string $province)
+    {
+        $this->profileUpdatePage->specifyCustomerAddressStreets($street, $city, $postCode, $province);
+    }
+
+    /**
      * @When I save my changes
      * @When I try to save my changes
      */

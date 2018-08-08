@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CustomerBundle\Form\Type;
 
+use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -52,6 +53,10 @@ final class CustomerProfileType extends AbstractResourceType
             ->add('subscribedToNewsletter', CheckboxType::class, [
                 'required' => false,
                 'label' => 'sylius.form.customer.subscribed_to_newsletter',
+            ])
+            ->add('defaultAddress', AddressType::class, [
+                'required' => false,
+                'label' => 'sylius.ui.default_address'
             ])
         ;
     }

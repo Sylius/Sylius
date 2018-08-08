@@ -33,6 +33,35 @@ interface ProfileUpdatePageInterface extends PageInterface
      */
     public function specifyEmail($email);
 
+    /**
+     * @param string $firstName
+     * @param string $lastName
+     */
+    public function specifyCustomerAddressName(string $firstName, string $lastName): void;
+
+    /**
+     * @param string $phoneNumber
+     */
+    public function specifyCustomerAddressPhone(string $phoneNumber): void;
+
+    /**
+     * @param string $company
+     */
+    public function specifyCustomerAddressCompany(string $company): void;
+
+    /**
+     * @param string $country
+     */
+    public function specifyCustomerAddressCountry(string $country): void;
+
+    /**
+     * @param string $street
+     * @param string $city
+     * @param string $postCode
+     * @param string $province
+     */
+    public function specifyCustomerAddressStreets(string $street, string $city, string $postCode, string $province): void;
+
     public function saveChanges();
 
     /**
