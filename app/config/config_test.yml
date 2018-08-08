@@ -15,10 +15,6 @@ framework:
     session:
         storage_id: session.storage.mock_file
 
-doctrine:
-    dbal:
-        dbname: "%database_name%_test"
-
 monolog:
     handlers:
         main:

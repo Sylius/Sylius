@@ -15,9 +15,5 @@ monolog:
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
 
-doctrine:
-    dbal:
-        dbname: "%database_name%_staging"
-
 swiftmailer:
     disable_delivery: true
