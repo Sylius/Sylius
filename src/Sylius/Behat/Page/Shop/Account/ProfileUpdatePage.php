@@ -138,7 +138,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
             'email' => '#sylius_customer_profile_email',
             'first_name' => '#sylius_customer_profile_firstName',
             'last_name' => '#sylius_customer_profile_lastName',
-            'default_address' => '#sylius_customer_defaultAddress'
+            'default_address' => '#sylius_customer_profile_defaultAddress'
         ]);
     }
 }
