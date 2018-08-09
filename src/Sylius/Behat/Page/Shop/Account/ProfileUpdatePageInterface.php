@@ -74,6 +74,9 @@ interface ProfileUpdatePageInterface extends PageInterface
      */
     public function checkValidationMessageFor($element, $message);
 
+    /**
+     * @return void
+     */
     public function subscribeToTheNewsletter();
 
     /**

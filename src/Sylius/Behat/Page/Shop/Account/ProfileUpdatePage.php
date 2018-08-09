@@ -98,7 +98,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     }
 
     /**
-     * {@inheritdocs}
+     * {@inheritdoc}
      */
     public function specifyCustomerAddressStreets(string $street, string $city, string $postCode, string $province): void
     {
@@ -116,6 +116,9 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
         $this->getDocument()->pressButton('Save changes');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function subscribeToTheNewsletter()
     {
         $this->getDocument()->checkField('Subscribe to the newsletter');
