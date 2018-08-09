@@ -7,7 +7,7 @@ parameters:
     reportUnmatchedIgnoredErrors: false
 
     symfony:
-        container_xml_path: var/cache/dev/appDevDebugProjectContainer.xml
+        container_xml_path: var/cache/dev/srcDevDebugProjectContainer.php
 
     excludes_analyse:
         # Makes PHPStan crash
