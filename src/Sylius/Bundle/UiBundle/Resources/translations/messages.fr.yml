@@ -731,7 +731,7 @@ sylius:
         shipping_total: 'Total des frais de port'
         shop_by: 'Accès par'
         shop_by_brand: 'Parcourir les produits par marque'
-        show: 'Lister'
+        show: 'Afficher'
         show_all: 'Afficher tout'
         show_deleted: 'Voir les supprimés'
         show_in_store: 'Afficher dans le magasin'
