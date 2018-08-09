@@ -25,3 +25,12 @@ Feature: Editing a customer profile
         And I save my changes
         Then I should be notified that it has been successfully edited
         And my email should be "frank@underwood.com"
+
+    @ui
+    Scenario: Changing the default address
+        When I want to modify my profile
+        And I set the customer address name to "Frank" "Underwood"
+        And I set the customer address phone number to "00000"
+        And I set the customer address company to "Sylius Inc"
+        And I set the customer address country to "United States"
+        And I set the customer address to "Somestreet" "Some City" "Some Postcode" "Province"

@@ -18,6 +18,18 @@
             },
             "phoneNumber": {},
             "subscribedToNewsletter": {},
+            "defaultAddress": {
+                "children": {
+                    "firstName": {},
+                    "lastName": {},
+                    "phoneNumber": {},
+                    "company": {},
+                    "countryCode": {},
+                    "street": {},
+                    "city": {},
+                    "postcode": {}
+                }
+            },
             "group": {}
         }
     }

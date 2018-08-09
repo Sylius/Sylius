@@ -67,11 +67,58 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     /**
      * {@inheritdoc}
      */
+    public function specifyCustomerAddressName(string $firstName, string $lastName): void
+    {
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_firstName', $firstName);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_lastName', $lastName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyCustomerAddressPhone(string $phoneNumber): void
+    {
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_phoneNumber', $phoneNumber);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyCustomerAddressCompany(string $company): void
+    {
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_company', $company);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyCustomerAddressCountry(string $country): void
+    {
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_countryCode', $country);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyCustomerAddressStreets(string $street, string $city, string $postCode, string $province): void
+    {
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_street', $street);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_city', $city);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_postcode', $postCode);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_provinceName', $province);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function saveChanges()
     {
         $this->getDocument()->pressButton('Save changes');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function subscribeToTheNewsletter()
     {
         $this->getDocument()->checkField('Subscribe to the newsletter');
