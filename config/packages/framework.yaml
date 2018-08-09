@@ -1,9 +1,9 @@
 framework:
     translator: { fallbacks: ["%locale%", "en"] }
-    secret: "%secret%"
+    secret: '%env(APP_SECRET)%'
     router:
         resource: "%kernel.project_dir%/app/config/routing.yml"
-        strict_requirements: "%kernel.debug%"
+        strict_requirements: '%kernel.debug%'
     form: true
     csrf_protection: true
     validation: { enable_annotations: true }
