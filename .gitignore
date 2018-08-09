@@ -35,3 +35,9 @@
 /phpunit.xml
 /phpspec.yml
 /.web-server-pid
+
+/.env
+/.env.prod
+/.env.staging
+/.env.test
+/.env.test_cached
