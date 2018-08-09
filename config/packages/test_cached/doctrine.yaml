@@ -1,9 +1,3 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-imports:
-    - { resource: "config_test.yml" }
-
 doctrine:
     orm:
         entity_managers:
@@ -20,13 +14,3 @@ doctrine:
                     type: memcached
                     host: localhost
                     port: 11211
-
-twig:
-    strict_variables: true
-
-sylius_channel:
-    debug: true
-
-fos_rest:
-    exception:
-        debug: true
