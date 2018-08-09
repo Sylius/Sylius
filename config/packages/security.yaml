@@ -29,7 +29,7 @@ security:
                 csrf_parameter: _csrf_admin_security_token
                 csrf_token_id: admin_authenticate
             remember_me:
-                secret: "%secret%"
+                secret: "%env(APP_SECRET)%"
                 path: /admin
                 name: APP_ADMIN_REMEMBER_ME
                 lifetime: 31536000
@@ -69,7 +69,7 @@ security:
                 csrf_parameter: _csrf_shop_security_token
                 csrf_token_id: shop_authenticate
             remember_me:
-                secret: "%secret%"
+                secret: "%env(APP_SECRET)%"
                 name: APP_SHOP_REMEMBER_ME
                 lifetime: 31536000
                 remember_me_parameter: _remember_me
