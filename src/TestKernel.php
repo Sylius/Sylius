@@ -11,13 +11,12 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/AppKernel.php';
-
 use ProxyManager\Proxy\VirtualProxyInterface;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class TestAppKernel extends AppKernel
+/** @final */
+class TestKernel extends Kernel
 {
     /**
      * {@inheritdoc}
