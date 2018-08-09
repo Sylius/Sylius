@@ -1,0 +1,6 @@
+knp_gaufrette:
+    adapters:
+        sylius_image:
+            local:
+                directory: "%kernel.project_dir%/public/media/image"
+                create: true
