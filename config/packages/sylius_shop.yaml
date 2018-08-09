@@ -1,0 +1,6 @@
+imports:
+    - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
+
+sylius_shop:
+    product_grid:
+        include_all_descendants: true

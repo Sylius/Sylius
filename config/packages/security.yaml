@@ -1,6 +1,3 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 parameters:
     sylius.security.admin_regex: "^/admin"
     sylius.security.api_regex: "^/api"
