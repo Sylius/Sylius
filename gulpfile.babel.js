@@ -5,7 +5,7 @@ import yargs from 'yargs';
 const { argv } = yargs
   .options({
     rootPath: {
-      description: '<path> path to web assets directory',
+      description: '<path> path to public assets directory',
       type: 'string',
       requiresArg: true,
       required: false,
@@ -20,7 +20,7 @@ const { argv } = yargs
 
 const config = [
   '--rootPath',
-  argv.rootPath || '../../../../web/assets',
+  argv.rootPath || '../../../../public/assets',
   '--nodeModulesPath',
   argv.nodeModulesPath || '../../../../node_modules',
 ];
