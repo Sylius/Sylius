@@ -185,7 +185,7 @@
         "psr-4": {
             "Sylius\\Tests\\": "tests/"
         },
-        "classmap": ["src/Kernel.php", "src/TestKernel.php"]
+        "classmap": ["src/Kernel.php"]
     },
     "config": {
         "bin-dir": "bin"
