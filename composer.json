@@ -191,7 +191,7 @@
         "psr-4": {
             "Sylius\\Tests\\": "tests/"
         },
-        "classmap": ["app/AppKernel.php", "app/AppCache.php", "app/TestAppKernel.php"]
+        "classmap": ["src/AppKernel.php", "src/TestAppKernel.php"]
     },
     "config": {
         "bin-dir": "bin"
