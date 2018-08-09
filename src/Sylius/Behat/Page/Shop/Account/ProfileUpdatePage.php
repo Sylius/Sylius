@@ -69,8 +69,8 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
      */
     public function specifyCustomerAddressName(string $firstName, string $lastName): void
     {
-        $this->getElement('default_address')->fillField('First name', $firstName);
-        $this->getElement('default_address')->fillField('Last name', $lastName);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_firstName', $firstName);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_lastName', $lastName);
     }
 
     /**
@@ -78,7 +78,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
      */
     public function specifyCustomerAddressPhone(string $phoneNumber): void
     {
-        $this->getElement('default_address')->fillField('Phone number', $phoneNumber);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_phoneNumber', $phoneNumber);
     }
 
     /**
@@ -86,7 +86,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
      */
     public function specifyCustomerAddressCompany(string $company): void
     {
-        $this->getElement('default_address')->fillField('Company', $company);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_company', $company);
     }
 
     /**
@@ -94,7 +94,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
      */
     public function specifyCustomerAddressCountry(string $country): void
     {
-        $this->getElement('default_address')->fillField('Country', $country);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_countryCode', $country);
     }
 
     /**
@@ -102,10 +102,10 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
      */
     public function specifyCustomerAddressStreets(string $street, string $city, string $postCode, string $province): void
     {
-        $this->getElement('default_address')->fillField('Street address', $street);
-        $this->getElement('default_address')->fillField('City', $city);
-        $this->getElement('default_address')->fillField('Postcode', $postCode);
-        $this->getElement('default_address')->fillField('Province', $province);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_street', $street);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_city', $city);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_postcode', $postCode);
+        $this->getDocument()->fillField('sylius_customer_defaultAddress_provinceName', $province);
     }
 
     /**
@@ -138,7 +138,6 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
             'email' => '#sylius_customer_profile_email',
             'first_name' => '#sylius_customer_profile_firstName',
             'last_name' => '#sylius_customer_profile_lastName',
-            'default_address' => '#sylius_customer_profile_defaultAddress'
         ]);
     }
 }
