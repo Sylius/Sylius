@@ -7,7 +7,7 @@ parameters:
     reportUnmatchedIgnoredErrors: false
 
     symfony:
-        container_xml_path: var/cache/dev/srcDevDebugProjectContainer.php
+        container_xml_path: var/cache/dev/srcDevDebugProjectContainer.xml
 
     excludes_analyse:
         # Makes PHPStan crash
@@ -17,6 +17,7 @@ parameters:
         - '**/spec/**.php'
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
+        - '**/Bundle/*/Tests/Functional/app/**.php'
 
         # These packages aren't in require-dev of the global package
         - '**MongoDB**'
