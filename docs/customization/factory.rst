@@ -113,7 +113,7 @@ To actually use it overwrite ``sylius_admin_product_create_simple`` route like b
         path: /products/new/simple
         methods: [GET, POST]
         defaults:
-            _controller: sylius.controller.product:createAction
+            _controller: sylius.controller.product::createAction
             _sylius:
                 section: admin
                 factory:

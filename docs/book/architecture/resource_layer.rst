@@ -161,7 +161,7 @@ Displaying a resource with a custom template and repository methods:
         path: /products/{slug}
         methods: [GET]
         defaults:
-            _controller: sylius.controller.product:showAction
+            _controller: sylius.controller.product::showAction
             _sylius:
                 template: AppStoreBundle:Product:show.html.twig # Use a custom template.
                 repository:
@@ -177,7 +177,7 @@ Creating a product using custom form and a redirection method:
         path: /my-stores/{store}/products/new
         methods: [GET, POST]
         defaults:
-            _controller: sylius.controller.product:createAction
+            _controller: sylius.controller.product::createAction
             _sylius:
                 form: AppStoreBundle/Form/Type/CustomFormType # Use this form type!
                 template: AppStoreBundle:Product:create.html.twig # Use a custom template.

@@ -2,7 +2,7 @@ sylius_admin_partial_shipment_ship:
     path: /{id}/ship
     methods: [GET]
     defaults:
-        _controller: sylius.controller.shipment:updateAction
+        _controller: sylius.controller.shipment::updateAction
         _sylius:
             event: ship
             repository:

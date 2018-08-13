@@ -25,7 +25,7 @@ Replace:
         path: /
         methods: [GET]
         defaults:
-            _controller: sylius.controller.shop.locale_switch:switchAction
+            _controller: sylius.controller.shop.locale_switch::switchAction
 
 With:
 

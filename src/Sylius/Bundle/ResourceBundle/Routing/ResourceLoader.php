@@ -154,7 +154,7 @@ final class ResourceLoader implements LoaderInterface
         bool $isApi = false
     ): Route {
         $defaults = [
-            '_controller' => $metadata->getServiceId('controller') . sprintf(':%sAction', $actionName),
+            '_controller' => $metadata->getServiceId('controller') . sprintf('::%sAction', $actionName),
         ];
 
         if ($isApi && 'index' === $actionName) {

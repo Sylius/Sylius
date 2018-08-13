@@ -14,7 +14,7 @@ sylius_admin_api_order_cancel:
     path: /orders/{id}/cancel
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _controller: sylius.controller.order::applyStateMachineTransitionAction
         _sylius:
             section: admin_api
             state_machine:
@@ -27,7 +27,7 @@ sylius_admin_api_order_shipment_ship:
     path: /orders/{orderId}/shipments/{id}/ship
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.shipment:updateAction
+        _controller: sylius.controller.shipment::updateAction
         _sylius:
             event: ship
             repository:
@@ -45,7 +45,7 @@ sylius_admin_api_order_payment_complete:
     path: /orders/{orderId}/payments/{id}/complete
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.payment:applyStateMachineTransitionAction
+        _controller: sylius.controller.payment::applyStateMachineTransitionAction
         _sylius:
             event: complete
             repository:

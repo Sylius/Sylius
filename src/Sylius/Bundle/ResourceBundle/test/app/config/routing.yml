@@ -7,7 +7,7 @@ app_book_sortable_index:
     path: /books/sortable/
     methods: [GET]
     defaults:
-        _controller: app.controller.book:indexAction
+        _controller: app.controller.book::indexAction
         _sylius:
             sortable: true
 
@@ -15,7 +15,7 @@ app_book_filterable_index:
     path: /books/filterable/
     methods: [GET]
     defaults:
-        _controller: app.controller.book:indexAction
+        _controller: app.controller.book::indexAction
         _sylius:
             filterable: true
 
@@ -27,7 +27,7 @@ app_create_book_with_custom_factory:
     path: /books/create-custom
     methods: [POST]
     defaults:
-        _controller: app.controller.book:createAction
+        _controller: app.controller.book::createAction
         _sylius:
             factory:
                 method: ["expr:service('test.custom_book_factory')", "createCustom"]
@@ -36,7 +36,7 @@ app_index_books_with_custom_repository:
     path: /find-custom-books
     methods: [GET]
     defaults:
-        _controller: app.controller.book:indexAction
+        _controller: app.controller.book::indexAction
         _sylius:
             repository:
                 method: ["expr:service('test.custom_book_repository')", "findCustomBooks"]
@@ -45,7 +45,7 @@ app_show_book_with_custom_repository:
     path: /find-custom-book
     methods: [GET]
     defaults:
-        _controller: app.controller.book:showAction
+        _controller: app.controller.book::showAction
         _sylius:
             repository:
                 method: ["expr:service('test.custom_book_repository')", "findCustomBook"]

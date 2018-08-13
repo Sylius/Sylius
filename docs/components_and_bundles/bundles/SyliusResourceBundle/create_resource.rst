@@ -12,7 +12,7 @@ you should use the **createAction** of your **app.controller.book** service.
         path: /books/new
         methods: [GET, POST]
         defaults:
-            _controller: app.controller.book:createAction
+            _controller: app.controller.book::createAction
 
 Done! Now when you go to ``/books/new``, the ResourceController will use the factory (``app.factory.book``) to create a new book instance.
 Then it will try to create an ``app_book`` form, and set the newly created book as its data.
@@ -44,7 +44,7 @@ Just like for the **show** and **index** actions, you can customize the template
         path: /books/new
         methods: [GET, POST]
         defaults:
-            _controller: app.controller.book:createAction
+            _controller: app.controller.book::createAction
             _sylius:
                 template: Book/create.html.twig
 
@@ -64,7 +64,7 @@ __ http://symfony.com/doc/current/forms.html#building-the-form
         path: /books/new
         methods: [GET, POST]
         defaults:
-            _controller: app.controller.book:createAction
+            _controller: app.controller.book::createAction
             _sylius:
                 form: AppBundle\Form\BookType
 
@@ -84,7 +84,7 @@ Below you can see the usage for specifying custom options, in this case, ``valid
         path: /books/new
         methods: [GET, POST]
         defaults:
-            _controller: app.controller.book:createAction
+            _controller: app.controller.book::createAction
             _sylius:
                 form:
                     type: app_book_custom
@@ -105,7 +105,7 @@ To use a different method of your factory, you can simply configure the ``factor
         path: /books/new
         methods: [GET, POST]
         defaults:
-            _controller: app.controller.book:createAction
+            _controller: app.controller.book::createAction
             _sylius:
                 factory: createNewWithAuthor
 
@@ -119,7 +119,7 @@ Additionally, if you want to provide your custom method with arguments from the 
         path: /books/{author}/new
         methods: [GET, POST]
         defaults:
-            _controller: app.controller.book:createAction
+            _controller: app.controller.book::createAction
             _sylius:
                 factory:
                     method: createNewWithAuthor
@@ -140,7 +140,7 @@ If you would like to use your own service to create the resource, then try the f
         path: /{authorId}/books/new
         methods: [GET, POST]
         defaults:
-            _controller: app.controller.book:createAction
+            _controller: app.controller.book::createAction
             _sylius:
                 factory:
                     method: ["expr:service('app.factory.custom_book_factory')", "createNewByAuthorId"]
@@ -164,7 +164,7 @@ For example, to redirect to the index list after successfully creating a new res
         path: /books/new
         methods: [GET, POST]
         defaults:
-            _controller: app.controller.book:createAction
+            _controller: app.controller.book::createAction
             _sylius:
                 redirect: app_book_index
 
@@ -178,7 +178,7 @@ You can also perform more complex redirects, with parameters. For example:
         path: /genre/{genreId}/books/new
         methods: [GET, POST]
         defaults:
-            _controller: app.controller.book:createAction
+            _controller: app.controller.book::createAction
             _sylius:
                 redirect:
                     route: app_genre_show
@@ -194,7 +194,7 @@ In addition to the request parameters, you can access some of the newly created 
         path: /books/new
         methods: [GET, POST]
         defaults:
-            _controller: app.controller.book:createAction
+            _controller: app.controller.book::createAction
             _sylius:
                 redirect:
                     route: app_book_show
@@ -217,7 +217,7 @@ own action name.
         path: /customer/books/new
         methods: [GET, POST]
         defaults:
-            _controller: app.controller.book:createAction
+            _controller: app.controller.book::createAction
             _sylius:
                 event: customer_create
 
@@ -235,7 +235,7 @@ Configuration Reference
         path: /{genreName}/books/add
         methods: [GET, POST]
         defaults:
-            _controller: app.controller.book:createAction
+            _controller: app.controller.book::createAction
             _sylius:
                 template: Book/addToGenre.html.twig
                 form: app_new_book

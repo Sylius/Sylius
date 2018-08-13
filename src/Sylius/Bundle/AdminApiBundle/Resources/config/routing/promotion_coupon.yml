@@ -5,7 +5,7 @@ sylius_admin_api_promotion_coupon_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.promotion_coupon:indexAction
+        _controller: sylius.controller.promotion_coupon::indexAction
         _sylius:
             serialization_version: $version
             serialization_groups: [Default]
@@ -18,7 +18,7 @@ sylius_admin_api_promotion_coupon_create:
     path: /
     methods: [POST]
     defaults:
-        _controller: sylius.controller.promotion_coupon:createAction
+        _controller: sylius.controller.promotion_coupon::createAction
         _sylius:
             serialization_version: $version
             section: admin_api
@@ -33,7 +33,7 @@ sylius_admin_api_promotion_coupon_update:
     path: /{code}
     methods: [PUT, PATCH]
     defaults:
-        _controller: sylius.controller.promotion_coupon:updateAction
+        _controller: sylius.controller.promotion_coupon::updateAction
         _sylius:
             serialization_version: $version
             section: admin_api
@@ -45,7 +45,7 @@ sylius_admin_api_promotion_coupon_show:
     path: /{code}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.promotion_coupon:showAction
+        _controller: sylius.controller.promotion_coupon::showAction
         _sylius:
             serialization_version: $version
             serialization_groups: [Default, Detailed]
@@ -58,7 +58,7 @@ sylius_admin_api_promotion_coupon_delete:
     path: /{code}
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.promotion_coupon:deleteAction
+        _controller: sylius.controller.promotion_coupon::deleteAction
         _sylius:
             serialization_version: $version
             section: admin_api

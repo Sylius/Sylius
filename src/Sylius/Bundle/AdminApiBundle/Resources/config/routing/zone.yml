@@ -16,7 +16,7 @@ sylius_admin_api_zone_create:
     path: /zones/{type}
     methods: [POST]
     defaults:
-        _controller: sylius.controller.zone:createAction
+        _controller: sylius.controller.zone::createAction
         _sylius:
             serialization_version: $version
             factory:
