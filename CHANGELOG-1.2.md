@@ -1,5 +1,18 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.5 (2018-08-13)
+
+#### TL;DR
+
+- Database migrations support MySQL 8 ([#9622](https://github.com/Sylius/Sylius/pull/9622))
+
+#### Details
+
+- [#9622](https://github.com/Sylius/Sylius/pull/9622) Quote row_number identifier for MySQL queries (@alcaeus)
+- [#9624](https://github.com/Sylius/Sylius/pull/9624) Fix missing "required" class on some form fields (@teohhanhui)
+- [#9634](https://github.com/Sylius/Sylius/pull/9634) [Core] Fix OrderItemNamesSetter specification (@Zales0123)
+- [#9642](https://github.com/Sylius/Sylius/pull/9642) [Currency] Improve currency specs (@loic425)
+
 ## v1.2.4 (2018-07-27)
 
 #### TL;DR
