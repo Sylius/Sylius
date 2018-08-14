@@ -14,4 +14,3 @@ sylius:
         disable: '%resource% wurde erfolgreich deaktiviert.'
         delete_error: 'Löschen fehlgeschlagen, %resource% wird benutzt.'
         race_condition_error: 'Kann nicht aktualisiert werden, die %resource% wurde zuvor geändert.'
-        something_went_wrong_error: 'Etwas ist schief gelaufen, bitte versuchen Sie es erneut.'

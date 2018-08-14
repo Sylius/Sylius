@@ -4,7 +4,6 @@
 sylius:
     form:
         product:
-            name: Név
             description: Leírás
             attributes: Tulajdonságok
             options: Beállítások

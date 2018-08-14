@@ -11,14 +11,7 @@ sylius:
     tax_rate:
         category:
             not_blank: Kérjük, válasszon adókategóriát.
-        name:
-            not_blank: Kérjük, adja meg az adó mértékének nevét.
-        amount:
-            not_blank: Kérjük, adja meg az adó mértékét.
         calculator:
             not_blank: Válasszon adó kalkulátort.
         zone:
             not_blank: Kérjük válasszon adózási területet.
-        code:
-            not_blank: Kérjük, írja be az adó mértékét.
-            unique: Ez az adóegység ezzel a kóddal már létezik.
