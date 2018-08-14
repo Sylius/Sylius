@@ -71,6 +71,7 @@ sylius:
         assortment: 'Sortiment'
         attributes: 'Atributy'
         author: 'Autor'
+        authorized: 'Autorizováno'
         availability: 'Dostupnost'
         available_for_channels: 'K dispozici pro kanály'
         available_on: 'Dostupný od'

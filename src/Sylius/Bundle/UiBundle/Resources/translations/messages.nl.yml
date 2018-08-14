@@ -71,6 +71,7 @@ sylius:
         assortment: 'Assortiment'
         attributes: 'Attributen'
         author: 'Auteur'
+        authorized: 'Gemachtigd'
         availability: 'Beschikbaarheid'
         available_for_channels: 'Beschikbaar voor kanalen'
         available_on: 'Beschikbaar vanaf'

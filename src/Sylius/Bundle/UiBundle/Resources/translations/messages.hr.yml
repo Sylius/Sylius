@@ -71,6 +71,7 @@ sylius:
         assortment: 'Ponuda'
         attributes: 'Značajke proizvoda'
         author: 'Autor'
+        authorized: 'Autorizirano'
         availability: 'Dostupnost'
         available_for_channels: 'Dostupno za kanale'
         available_on: 'Dostupno'

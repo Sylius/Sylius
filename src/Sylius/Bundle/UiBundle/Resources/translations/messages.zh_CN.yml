@@ -71,6 +71,7 @@ sylius:
         assortment: '分类'
         attributes: '属性'
         author: '作者'
+        authorized: '已授权'
         availability: '可用'
         available_for_channels: '可用于频道'
         available_on: '可用'
