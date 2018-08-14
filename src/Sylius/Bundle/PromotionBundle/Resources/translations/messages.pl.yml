@@ -10,7 +10,7 @@ sylius:
             coupon_based: Z wykorzystaniem kuponów
             description: Opis
             ends_at: Data zakończenia
-            exclusive: Ekskluzywny
+            exclusive: Wyłączna
             name: Nazwa
             priority: Priorytet
             rules: Reguły

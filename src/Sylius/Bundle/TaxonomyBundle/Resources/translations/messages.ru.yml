@@ -5,8 +5,5 @@ sylius:
     form:
         taxon:
             description: Описание
-            name: Округ
             parent: Родитель
             slug: Псевдоним
-        taxonomy:
-            name: Округ
