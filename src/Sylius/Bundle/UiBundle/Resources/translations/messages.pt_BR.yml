@@ -775,7 +775,7 @@ sylius:
         taxation_settings: 'Configurações de taxas'
         taxes: 'Taxas'
         taxonomy: 'Categorias'
-        taxons: 'Taxas'
+        taxons: 'Táxons'
         terms_and_conditions: 'Termos e condições'
         text: 'Texto'
         textarea: 'Área de Texto'
