@@ -131,7 +131,7 @@ sylius:
             customer_group:
                 group: Grupo de Cliente
             has_taxon:
-                taxons: Taxas
+                taxons: Táxons
             product:
                 products: Produtos
             total_of_items_from_taxon:
