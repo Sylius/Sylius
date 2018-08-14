@@ -71,6 +71,7 @@ sylius:
         assortment: 'Çeşitlilik'
         attributes: 'Nitelikler'
         author: 'Hazırlayan'
+        authorized: 'Yetkili'
         availability: 'Uygunluk'
         available_for_channels: 'Kanallar için kullanılabilir'
         available_on: 'Mevcut üzerine'

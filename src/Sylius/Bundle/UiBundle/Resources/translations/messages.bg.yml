@@ -71,6 +71,7 @@ sylius:
         assortment: 'Асортимент'
         attributes: 'Атрибути'
         author: 'Автор'
+        authorized: 'Оторизирано'
         availability: 'Наличност'
         available_for_channels: 'На разположение за каналите'
         available_on: 'На разположение на'

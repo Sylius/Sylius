@@ -69,6 +69,7 @@ sylius:
         assortment: 'Ταξινόμηση'
         attributes: 'Χαρακτηριστικά'
         author: 'Συντάκτης'
+        authorized: 'Εξουσιοδοτημένο'
         availability: 'Διαθεσιμότητα'
         available_on: 'Διαθέσιμο την'
         available_on_hand: 'Άμεσα διαθέσιμο'

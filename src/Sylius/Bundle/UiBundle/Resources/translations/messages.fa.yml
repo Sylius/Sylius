@@ -66,6 +66,7 @@ sylius:
         assortment: 'طبقه بندی'
         attributes: 'قابلیت ها'
         author: 'نويسنده'
+        authorized: 'پرداخت تایید شده'
         availability: 'موارد موجود'
         available_for_channels: 'قابل دسترسی برای کانال ها'
         available_on: 'تاریخ فعال شدن'

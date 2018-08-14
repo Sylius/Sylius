@@ -19,6 +19,7 @@ sylius:
         amount: 'Total'
         association_types: 'Tipus d''Associació'
         attributes: 'Atributs'
+        authorized: 'Autoritzat'
         back: 'Enrera'
         base_currency: 'Moneda base'
         billing_address: 'Adreça de facturació'

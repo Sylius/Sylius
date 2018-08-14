@@ -4,7 +4,6 @@
 sylius:
     form:
         customer:
-            first_name: Křestní Jméno
             group: Skupina
             last_name: Příjmení
             email: Email
