@@ -9,20 +9,7 @@
 /public/js
 /public/media
 
-/bin/*
-!/bin/build-package
-!/bin/build-packages
-!/bin/clean-package
-!/bin/clean-packages
-!/bin/console
-!/bin/fix-coding-standards
-!/bin/install-package
-!/bin/install-packages
-!/bin/require-symfony-version
-!/bin/test-package
-!/bin/test-packages
-!/bin/validate-package
-!/bin/validate-packages
+/bin/symfony_requirements
 
 /composer.lock
 /vendor
