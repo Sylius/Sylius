@@ -69,17 +69,35 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         ChannelInterface $channel,
         TaxonInterface $taxon,
         string $locale,
-        array $sorting = []
+        array $sorting = [],
+        bool $includeAllDescendants = false
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->innerJoin('o.productTaxons', 'productTaxon')
-            ->andWhere('productTaxon.taxon = :taxon')
+            ->innerJoin('o.productTaxons', 'productTaxon');
+
+        if ($includeAllDescendants) {
+            $queryBuilder
+                ->innerJoin('productTaxon.taxon', 'taxon')
+                ->andWhere('taxon.left >= :taxonLeft')
+                ->andWhere('taxon.right <= :taxonRight')
+                ->andWhere('taxon.root = :taxonRoot')
+                ->setParameter('taxonLeft', $taxon->getLeft())
+                ->setParameter('taxonRight', $taxon->getRight())
+                ->setParameter('taxonRoot', $taxon->getRoot())
+            ;
+        } else {
+            $queryBuilder
+                ->andWhere('productTaxon.taxon = :taxon')
+                ->setParameter('taxon', $taxon)
+            ;
+        }
+
+        $queryBuilder
             ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
             ->setParameter('locale', $locale)
-            ->setParameter('taxon', $taxon)
             ->setParameter('channel', $channel)
         ;
 
