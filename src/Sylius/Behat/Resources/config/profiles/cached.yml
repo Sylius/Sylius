@@ -4,6 +4,7 @@
 cached:
     extensions:
         FriendsOfBehat\SymfonyExtension:
+            env_file: .env.test_cached
             kernel:
                 env: test_cached
                 debug: false
