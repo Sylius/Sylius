@@ -60,6 +60,11 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
         $this->getDocument()->fillField('Email', $email);
     }
 
+    public function getEmail(): string
+    {
+        return $this->getElement('email')->getValue();
+    }
+
     /**
      * {@inheritdoc}
      */

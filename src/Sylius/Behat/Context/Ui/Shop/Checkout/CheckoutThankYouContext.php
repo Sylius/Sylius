@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
@@ -39,6 +40,14 @@ final class CheckoutThankYouContext implements Context
     public function iGoToOrderDetails()
     {
         $this->thankYouPage->goToOrderDetails();
+    }
+
+    /**
+     * @When I click the register button
+     */
+    public function iClickTheRegisterButton(): void
+    {
+        $this->thankYouPage->createAccount();
     }
 
     /**
@@ -87,5 +96,13 @@ final class CheckoutThankYouContext implements Context
     public function iShouldNotBeAbleToChangeMyPaymentMethod()
     {
         Assert::false($this->thankYouPage->hasChangePaymentMethodButton());
+    }
+
+    /**
+     * @Then I should see a registration button
+     */
+    public function iShouldSeeARegistrationButton(): void
+    {
+        Assert::true($this->thankYouPage->hasRegistrationButton());
     }
 }

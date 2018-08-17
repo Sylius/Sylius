@@ -38,4 +38,8 @@ interface ThankYouPageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function hasChangePaymentMethodButton();
+
+    public function hasRegistrationButton(): bool;
+
+    public function createAccount(): void;
 }

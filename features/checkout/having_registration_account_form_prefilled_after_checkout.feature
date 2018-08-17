@@ -1,8 +1,8 @@
 @checkout
-Feature: Having prefilled registration form after checkout
+Feature: Having registration form prefilled after checkout
     In order to make future purchases with ease
     As an Visitor
-    I want to have prefilled account registration form after placing an order
+    I want to have account registration form prefilled after placing an order
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -10,7 +10,7 @@ Feature: Having prefilled registration form after checkout
         And the store ships everywhere for free
         And the store allows paying offline
 
-    @ui @todo
+    @ui
     Scenario: Having prefilled registration form after checkout
         Given I have product "PHP T-Shirt" in the cart
         And I complete addressing step with email "john@example.com" and "United States" based shipping address
@@ -18,5 +18,5 @@ Feature: Having prefilled registration form after checkout
         And I confirm my order
         Then I should see the thank you page
         And I should see a registration button
-        And this button should redirect to prefilled registration form
+        And this button should redirect to registration form prefilled with "john@example.com" email
 

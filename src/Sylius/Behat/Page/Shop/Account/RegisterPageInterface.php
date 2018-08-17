@@ -32,6 +32,8 @@ interface RegisterPageInterface extends SymfonyPageInterface
      */
     public function specifyEmail($email);
 
+    public function getEmail(): string;
+
     /**
      * @param string $firstName
      */

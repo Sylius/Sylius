@@ -334,6 +334,16 @@
             <tag name="fob.context_service" />
         </service>
 
+        <service id="sylius.behat.context.ui.shop.checkout.registration_after_checkout" class="Sylius\Behat\Context\Ui\Shop\Checkout\RegistrationAfterCheckoutContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.page.shop.account.register" />
+            <argument type="service" id="sylius.behat.page.shop.order.thank_you" />
+            <argument type="service" id="sylius.behat.page.shop.account.dashboard" />
+            <argument type="service" id="sylius.behat.page.shop.home" />
+            <argument type="service" id="sylius.behat.notification_checker" />
+            <tag name="fob.context_service" />
+        </service>
+
         <service id="sylius.behat.context.ui.customer" class="Sylius\Behat\Context\Ui\CustomerContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.customer.show" />
