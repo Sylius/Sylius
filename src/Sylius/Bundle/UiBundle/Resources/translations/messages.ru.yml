@@ -119,7 +119,6 @@ sylius:
         cheapest_first: 'Дешёвые первыми'
         checkbox: 'Флажок'
         checking_out_as: 'Проверить как'
-        checkout: 'Сверка'
         choose_channel: 'Выберите канал'
         choose_file: 'Выбрать файл'
         choose_how_your_goods_will_be_delivered: 'Выберите, как ваш товар будет доставлен'
