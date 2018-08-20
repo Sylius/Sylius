@@ -33,7 +33,7 @@
         <service id="sylius.payum_action.offline.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Offline\ConvertPaymentAction">
             <tag name="payum.action" factory="offline" alias="sylius.offline.convert_payment" />
         </service>
-        <service id="sylus.payum_action.offline.status" class="Sylius\Bundle\PayumBundle\Action\Offline\StatusAction">
+        <service id="sylius.payum_action.offline.status" class="Sylius\Bundle\PayumBundle\Action\Offline\StatusAction">
             <tag name="payum.action" factory="offline" alias="sylius.offline.status"/>
         </service>
         <service id="sylius.payum_action.offline.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\Offline\ResolveNextRouteAction">
