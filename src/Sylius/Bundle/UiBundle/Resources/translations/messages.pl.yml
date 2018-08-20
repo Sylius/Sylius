@@ -324,7 +324,7 @@ sylius:
         error: 'Błąd'
         exchange_rate: 'Kurs wymiany'
         exchange_rates: 'Kursy wymiany walut'
-        exclusive: 'Ekskluzywny'
+        exclusive: 'Wyłączna'
         existing_customer: 'Istniejący Klient'
         expiration_and_usage_limits: 'Data wygaśnięcia i limit użyć'
         expires_at: 'Wygasa'
