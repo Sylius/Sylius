@@ -1,0 +1,12 @@
+framework:
+    translator: { fallbacks: ["%locale%", "en"] }
+    secret: '%env(APP_SECRET)%'
+    router:
+        strict_requirements: '%kernel.debug%'
+    form: true
+    csrf_protection: true
+    validation: { enable_annotations: true }
+    templating: { engines: ["twig"] }
+    default_locale: "%locale%"
+    session:
+        handler_id: ~

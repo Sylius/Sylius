@@ -11,7 +11,13 @@
     </testsuites>
 
     <php>
-        <server name="KERNEL_CLASS" value="TestAppKernel" />
+        <ini name="error_reporting" value="-1" />
+
+        <server name="KERNEL_CLASS" value="Kernel" />
+        <server name="APP_ENV" value="test" />
+        <server name="APP_DEBUG" value="1" />
+        <server name="APP_SECRET" value="SyLiUsIsAwEsOmE" />
+        <server name="SHELL_VERBOSITY" value="-1" />
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
         <server name="ESCAPE_JSON" value="true" />
     </php>

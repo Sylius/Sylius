@@ -38,6 +38,14 @@ class Kernel extends HttpKernel
     public const RELEASE_VERSION = '0';
     public const EXTRA_VERSION = 'DEV';
 
+    public function __construct(string $environment, bool $debug)
+    {
+        // TODO: Better deprecation message!
+        @trigger_error(sprintf('Using "%s" as Symfony kernel is deprecated since Sylius 1.3. Please migrate to Symfony 4 directory structure.', self::class), \E_USER_DEPRECATED);
+
+        parent::__construct($environment, $debug);
+    }
+
     /**
      * {@inheritdoc}
      */
