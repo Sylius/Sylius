@@ -17,6 +17,15 @@ Feature: Having registration form prefilled after checkout
         And I proceed with "Free" shipping method and "Offline" payment
         And I confirm my order
         Then I should see the thank you page
-        And I should see a registration button
-        And this button should redirect to registration form prefilled with "john@example.com" email
+        And I should be able to proceed to the registration
+        And the registration form should be prefilled with "john@example.com" email
 
+    @ui
+    Scenario: Not being able to create an account if customer is logged in
+        Given I am a logged in customer
+        And I have product "PHP T-Shirt" in the cart
+        And I complete addressing step with "United States" based shipping address
+        And I proceed with "Free" shipping method and "Offline" payment
+        And I confirm my order
+        Then I should see the thank you page
+        And I should not be able to proceed to the registration

@@ -92,7 +92,7 @@
             <argument type="service" id="sylius.custom_factory.address.inner" />
         </service>
 
-        <service id="sylius.custom_factory.customer" class="Sylius\Component\Core\Factory\CustomerFactory">
+        <service id="sylius.factory.customer_after_checkout" class="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactory">
             <argument type="service" id="sylius.factory.customer" />
         </service>
 

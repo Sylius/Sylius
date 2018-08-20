@@ -43,9 +43,9 @@ final class CheckoutThankYouContext implements Context
     }
 
     /**
-     * @When I click the register button
+     * @When I proceed to the registration
      */
-    public function iClickTheRegisterButton(): void
+    public function iProceedToTheRegistration(): void
     {
         $this->thankYouPage->createAccount();
     }
@@ -99,10 +99,18 @@ final class CheckoutThankYouContext implements Context
     }
 
     /**
-     * @Then I should see a registration button
+     * @Then I should be able to proceed to the registration
      */
-    public function iShouldSeeARegistrationButton(): void
+    public function iShouldBeAbleToProceedToTheRegistration(): void
     {
         Assert::true($this->thankYouPage->hasRegistrationButton());
+    }
+
+    /**
+     * @Then I should not be able to proceed to the registration
+     */
+    public function iShouldNotBeAbleToProceedToTheRegistration(): void
+    {
+        Assert::false($this->thankYouPage->hasRegistrationButton());
     }
 }

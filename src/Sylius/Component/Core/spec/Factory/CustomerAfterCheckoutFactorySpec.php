@@ -14,21 +14,21 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Factory\CustomerFactoryInterface;
+use Sylius\Component\Core\Factory\CustomerAfterCheckoutFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class CustomerFactorySpec extends ObjectBehavior
+final class CustomerAfterCheckoutFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $baseCustomerFactory): void
     {
         $this->beConstructedWith($baseCustomerFactory);
     }
 
-    function it_implements_customer_factory_interface(): void
+    function it_implements_customer_ater_checkout_factory_interface(): void
     {
-        $this->shouldImplement(CustomerFactoryInterface::class);
+        $this->shouldImplement(CustomerAfterCheckoutFactoryInterface::class);
     }
 
     function it_is_a_resource_factory(): void

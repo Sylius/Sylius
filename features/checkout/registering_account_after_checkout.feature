@@ -17,7 +17,7 @@ Feature: Registering a new account after checkout
         And I have completed addressing step with email "john@example.com" and "United States" based shipping address
         And I have proceeded order with "Free" shipping method and "Offline" payment
         And I have confirmed order
-        When I click the register button
+        When I proceed to the registration
         And I specify a password as "sylius"
         And I confirm this password
         And I register this account

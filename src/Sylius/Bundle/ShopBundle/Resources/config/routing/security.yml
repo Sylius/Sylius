@@ -41,7 +41,7 @@ sylius_shop_register_after_checkout:
         _sylius:
             form: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType
             factory:
-                method: ['expr:service("sylius.custom_factory.customer")', 'createAfterCheckout']
+                method: ['expr:service("sylius.factory.customer_after_checkout")', 'createAfterCheckout']
                 arguments:
                     - 'expr:service("sylius.repository.customer").find($customerId)'
                     - 'expr:service("sylius.repository.address").find($addressId)'

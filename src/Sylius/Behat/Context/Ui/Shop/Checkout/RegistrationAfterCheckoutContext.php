@@ -96,9 +96,9 @@ class RegistrationAfterCheckoutContext implements Context
     }
 
     /**
-     * @Then this button should redirect to registration form prefilled with :email email
+     * @Then the registration form should be prefilled with :email email
      */
-    public function thisButtonShouldRedirectToPrefilledRegistrationForm(string $email): void
+    public function theRegistrationFormShouldBePrefilledWithEmail(string $email): void
     {
         $this->thankYouPage->createAccount();
 

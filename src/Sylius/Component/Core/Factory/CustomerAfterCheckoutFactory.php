@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class CustomerFactory implements CustomerFactoryInterface
+final class CustomerAfterCheckoutFactory implements CustomerAfterCheckoutFactoryInterface
 {
     /** @var FactoryInterface */
     private $baseCustomerFactory;
