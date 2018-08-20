@@ -34,7 +34,7 @@ sylius_shop_register:
             flash: sylius.customer.register
 
 sylius_shop_register_after_checkout:
-    path: /register-after-checkout
+    path: /register-after-checkout/{tokenValue}
     methods: [GET]
     defaults:
         _controller: sylius.controller.customer:createAction
@@ -43,8 +43,7 @@ sylius_shop_register_after_checkout:
             factory:
                 method: ['expr:service("sylius.factory.customer_after_checkout")', 'createAfterCheckout']
                 arguments:
-                    - 'expr:service("sylius.repository.customer").find($customerId)'
-                    - 'expr:service("sylius.repository.address").find($addressId)'
+                    - 'expr:service("sylius.repository.order").findOneByTokenValue($tokenValue)'
             template: "@SyliusShop/register.html.twig"
             event: register
             redirect:

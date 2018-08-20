@@ -6,7 +6,6 @@ Feature: Registering a new account after checkout
 
     Background:
         Given the store operates on a single channel in "United States"
-        And on this channel account verification is not required
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for free
         And the store allows paying offline
@@ -21,6 +20,5 @@ Feature: Registering a new account after checkout
         And I specify a password as "sylius"
         And I confirm this password
         And I register this account
-        Then I should be notified that new account has been successfully created
-        And my email should be "john@example.com"
-        And I should be logged in
+        And I verify my account using link sent to "john@example.com"
+        Then I should be able to log in as "john@example.com" with "sylius" password

@@ -14,19 +14,24 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
+use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
+use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
-class RegistrationAfterCheckoutContext implements Context
+final class RegistrationAfterCheckoutContext implements Context
 {
     /** @var SharedStorageInterface */
     private $sharedStorage;
+
+    /** @var LoginPageInterface */
+    private $loginPage;
 
     /** @var RegisterPageInterface */
     private $registerPage;
@@ -40,22 +45,29 @@ class RegistrationAfterCheckoutContext implements Context
     /** @var HomePageInterface */
     private $homePage;
 
+    /** @var VerificationPageInterface */
+    private $verificationPage;
+
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
+        LoginPageInterface $loginPage,
         RegisterPageInterface $registerPage,
         ThankYouPageInterface $thankYouPage,
         DashboardPageInterface $dashboardPage,
         HomePageInterface $homePage,
+        VerificationPageInterface $verificationPage,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
+        $this->loginPage = $loginPage;
         $this->registerPage = $registerPage;
         $this->thankYouPage = $thankYouPage;
         $this->dashboardPage = $dashboardPage;
         $this->homePage = $homePage;
+        $this->verificationPage = $verificationPage;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -85,14 +97,14 @@ class RegistrationAfterCheckoutContext implements Context
     }
 
     /**
-     * @Then I should be notified that new account has been successfully created
+     * @When I verify my account using link sent to :customer
      */
-    public function iShouldBeNotifiedThatNewAccountHasBeenSuccessfullyCreated(): void
+    public function iVerifyMyAccountUsingLink(CustomerInterface $customer): void
     {
-        $this->notificationChecker->checkNotification(
-            'Thank you for registering, check your email to verify your account.',
-            NotificationType::success()
-        );
+        $user = $customer->getUser();
+        Assert::notNull($user, 'No account for given customer');
+
+        $this->verificationPage->verifyAccount($user->getEmailVerificationToken());
     }
 
     /**
@@ -106,20 +118,15 @@ class RegistrationAfterCheckoutContext implements Context
     }
 
     /**
-     * @Then my email should be :email
+     * @Then I should be able to log in as :email with :password password
      */
-    public function myEmailShouldBe(string $email): void
+    public function iShouldBeAbleToLogInAsWithPassword(string $email, string $password): void
     {
-        $this->dashboardPage->open();
+        $this->loginPage->open();
+        $this->loginPage->specifyUsername($email);
+        $this->loginPage->specifyPassword($password);
+        $this->loginPage->logIn();
 
-        Assert::true($this->dashboardPage->hasCustomerEmail($email));
-    }
-
-    /**
-     * @Then I should be logged in
-     */
-    public function iShouldBeLoggedIn(): void
-    {
         Assert::true($this->homePage->hasLogoutButton());
     }
 }

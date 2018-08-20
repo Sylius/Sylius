@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Factory;
 
-use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CustomerAfterCheckoutFactory implements CustomerAfterCheckoutFactoryInterface
@@ -35,8 +35,11 @@ final class CustomerAfterCheckoutFactory implements CustomerAfterCheckoutFactory
         return $customer;
     }
 
-    public function createAfterCheckout(CustomerInterface $guest, AddressInterface $address): CustomerInterface
+    public function createAfterCheckout(OrderInterface $order): CustomerInterface
     {
+        $guest = $order->getCustomer();
+        $address = $order->getBillingAddress();
+
         $customer = $this->createNew();
         $customer->setEmail($guest->getEmail());
         $customer->setFirstName($address->getFirstName());

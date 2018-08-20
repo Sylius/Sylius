@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Factory;
 
-use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface CustomerAfterCheckoutFactoryInterface extends FactoryInterface
 {
-    public function createAfterCheckout(CustomerInterface $guest, AddressInterface $address): CustomerInterface;
+    public function createAfterCheckout(OrderInterface $order): CustomerInterface;
 }
