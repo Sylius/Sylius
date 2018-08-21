@@ -22,7 +22,6 @@ sylius:
         promotion_coupon:
             per_customer_usage_limit: Лимит использования на клиента
         group:
-            name: Округ
             roles: Роли
         channel:
             contact_email: Контактный email
@@ -67,7 +66,6 @@ sylius:
             channels: Каналы
             enabled: Активен
         product_filter:
-            name: Округ
             code: Код
         product_variant:
             tax_category: Категория налогов
