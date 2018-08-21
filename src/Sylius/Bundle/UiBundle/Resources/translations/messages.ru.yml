@@ -341,8 +341,6 @@ sylius:
         from_the_newest: 'От новых к старым'
         from_the_oldest: 'От старых к новым'
         from_z_to_a: 'От Я до А'
-        fulfill: 'Завершён'
-        fulfilled: 'Заполненные'
         fulfilled_orders: 'Выполненные заказы'
         gateway: 'Терминал'
         gateway_configuration: 'Конфигурация шлюза'

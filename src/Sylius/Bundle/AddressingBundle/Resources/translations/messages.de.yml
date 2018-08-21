@@ -18,7 +18,6 @@ sylius:
             add_province: Bundesland hinzufügen
             name: Name
             provinces: Bundesländer
-            select: Bundesland auswählen
             enabled: Aktiviert
         province:
             name: Name
@@ -36,7 +35,4 @@ sylius:
             scope: Umfang
             scopes:
                 all: Alle
-            select: Bundesland auswählen
             select_scope: Bereich wählen
-        zone_member:
-            select: Bundesland auswählen
