@@ -49,7 +49,7 @@ In order to override it you need to create your own: ``app/Resources/SyliusShopB
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
-.. code-block:: php
+.. code-block:: twig
 
     {% extends '@SyliusShop/layout.html.twig' %}
 
@@ -94,7 +94,7 @@ In order to override it you need to create your own: ``app/Resources/SyliusAdmin
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
-.. code-block:: php
+.. code-block:: twig
 
     <div class="ui segment">
         {{ form_errors(form) }}
@@ -115,6 +115,30 @@ Done! If you do not see any changes on the ``/admin/countries/new`` url, clear y
 .. code-block:: bash
 
     $ php bin/console cache:clear
+
+* **UI** templates: Customization of the percent widget.
+
+You may need to modify the behavior of some parts of the UI without creating your own theme.
+
+The template block of the percent widget is in: ``SyliusUiBundle:Form:theme.html.twig``.
+In order to override it you need to create your own: ``app/Resources/SyliusUiBundle/views/Form/theme.html.twig``.
+
+To only override the widget block, you need to extend the template and copy the content of the block to your file.
+And then modify it to your needs.
+When extending the template, do not forget to add a ``!`` before the bundle name in order to avoid an infinite loop.
+
+.. code-block:: twig
+
+    {% extends '@!SyliusUi/Form/theme.html.twig' %}
+
+    {% block percent_widget -%}
+        {# We are placing the percent to the left of the input instead of the right. #}
+        <div class="ui {#right#} labeled input">
+            <div class="ui basic label">%</div>
+            {{- form_widget(form) -}}
+            {#<div class="ui basic label">%</div>#}
+        </div>
+    {%- endblock percent_widget %}
 
 How to customize templates via events?
 --------------------------------------

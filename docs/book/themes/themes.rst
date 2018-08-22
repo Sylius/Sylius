@@ -81,18 +81,15 @@ When you create a new asset or delete an existing one, it is required to rerun t
 
 4. Customize a template:
 
-In order to customize the login view you should take the content of ``@SyliusShopBundle/views/login.html.twig`` file
-and paste it to your theme directory: ``app/themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``
+In order to customize the login view you should extend the ``@SyliusShopBundle/views/login.html.twig`` template file
+in your theme directory: ``app/themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``.
+When extending the template, do not forget to add a ``!`` before the bundle name in order to avoid an infinite loop.
 
 Let's remove the registration column in this example:
 
 .. code-block:: twig
 
-   {% extends '@SyliusShop/layout.html.twig' %}
-
-   {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
-
-   {% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+   {% extends '@!SyliusShop/login.html.twig' %}
 
    {% block content %}
        {% include '@SyliusShop/Login/_header.html.twig' %}
