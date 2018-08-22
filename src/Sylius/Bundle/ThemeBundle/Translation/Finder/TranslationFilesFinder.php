@@ -76,7 +76,7 @@ final class TranslationFilesFinder implements TranslationFilesFinderInterface
      */
     private function isTranslationFile(string $file): bool
     {
-        return false !== strpos($file, 'translations/')
+        return false !== strpos($file, 'translations' . DIRECTORY_SEPARATOR)
             && (bool) preg_match('/^[^\.]+?\.[a-zA-Z_]{2,}?\.[a-z0-9]{2,}?$/', basename($file));
     }
 }
