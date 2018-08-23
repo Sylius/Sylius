@@ -36,6 +36,7 @@
         "friendsofsymfony/rest-bundle": "^2.1",
         "fzaninotto/faker": "^1.6",
         "gedmo/doctrine-extensions": "^2.4.12",
+        "incenteev/composer-parameter-handler": "^2.1",
         "jms/serializer-bundle": "^2.0",
         "knplabs/knp-gaufrette-bundle": "^0.5",
         "knplabs/knp-menu-bundle": "^2.1",
@@ -161,11 +162,13 @@
     },
     "scripts": {
         "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
         "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
@@ -194,6 +197,9 @@
         "symfony-web-dir": "public",
         "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        },
         "branch-alias": {
             "dev-master": "1.3-dev"
         }

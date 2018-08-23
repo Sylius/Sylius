@@ -9,6 +9,8 @@
 /public/js
 /public/media
 
+/app/config/parameters.yml
+
 /bin/symfony_requirements
 
 /composer.lock
