@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
-use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
@@ -33,9 +33,6 @@ final class RegistrationAfterCheckoutContext implements Context
     /** @var LoginPageInterface */
     private $loginPage;
 
-    /** @var RegisterPageInterface */
-    private $registerPage;
-
     /** @var ThankYouPageInterface */
     private $thankYouPage;
 
@@ -48,26 +45,29 @@ final class RegistrationAfterCheckoutContext implements Context
     /** @var VerificationPageInterface */
     private $verificationPage;
 
+    /** @var RegisterElementInterface */
+    private $registerElement;
+
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
         LoginPageInterface $loginPage,
-        RegisterPageInterface $registerPage,
         ThankYouPageInterface $thankYouPage,
         DashboardPageInterface $dashboardPage,
         HomePageInterface $homePage,
         VerificationPageInterface $verificationPage,
+        RegisterElementInterface $registerElement,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->loginPage = $loginPage;
-        $this->registerPage = $registerPage;
         $this->thankYouPage = $thankYouPage;
         $this->dashboardPage = $dashboardPage;
         $this->homePage = $homePage;
         $this->verificationPage = $verificationPage;
+        $this->registerElement = $registerElement;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -76,7 +76,7 @@ final class RegistrationAfterCheckoutContext implements Context
      */
     public function iSpecifyThePasswordAs(string $password): void
     {
-        $this->registerPage->specifyPassword($password);
+        $this->registerElement->specifyPassword($password);
         $this->sharedStorage->set('password', $password);
     }
 
@@ -85,7 +85,7 @@ final class RegistrationAfterCheckoutContext implements Context
      */
     public function iConfirmThisPassword(string $password): void
     {
-        $this->registerPage->verifyPassword($password);
+        $this->registerElement->verifyPassword($password);
     }
 
     /**
@@ -93,7 +93,7 @@ final class RegistrationAfterCheckoutContext implements Context
      */
     public function iRegisterThisAccount(): void
     {
-        $this->registerPage->register();
+        $this->registerElement->register();
     }
 
     /**
@@ -114,7 +114,7 @@ final class RegistrationAfterCheckoutContext implements Context
     {
         $this->thankYouPage->createAccount();
 
-        Assert::same($this->registerPage->getEmail(), $email);
+        Assert::same($this->registerElement->getEmail(), $email);
     }
 
     /**
