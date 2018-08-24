@@ -92,6 +92,10 @@
             <argument type="service" id="sylius.custom_factory.address.inner" />
         </service>
 
+        <service id="sylius.factory.customer_after_checkout" class="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactory">
+            <argument type="service" id="sylius.factory.customer" />
+        </service>
+
         <service id="sylius.provider.product_variants_prices" class="Sylius\Component\Core\Provider\ProductVariantsPricesProvider">
             <argument type="service" id="sylius.calculator.product_variant_price" />
         </service>
