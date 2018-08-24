@@ -15,6 +15,8 @@
 
 declare(strict_types=1);
 
-@trigger_error('The "AppKernel" class located at "app/AppKernel.php" is deprecated since Sylius 1.3. Use "Kernel" class located at "src/Kernel.php" instead.', E_USER_DEPRECATED);
+use Symfony\Component\Routing\RouteCollection;
 
-class_alias(Kernel::class, AppKernel::class);
+@trigger_error('Importing files from Sylius/Sylius\'s "app/config" directory is deprecated since Sylius 1.3.', \E_USER_DEPRECATED);
+
+return new RouteCollection();
