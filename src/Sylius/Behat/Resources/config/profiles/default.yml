@@ -43,8 +43,8 @@ default:
         FriendsOfBehat\SymfonyExtension:
             env_file: .env.test
             kernel:
-                class: Kernel
-                path: src/Kernel.php
+                class: TestAppKernel
+                path: app/TestAppKernel.php
                 bootstrap: ~
 
         FriendsOfBehat\ContextServiceExtension:

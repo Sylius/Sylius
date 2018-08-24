@@ -188,7 +188,7 @@
         "psr-4": {
             "Sylius\\Tests\\": "tests/"
         },
-        "classmap": ["src/Kernel.php"]
+        "classmap": ["app/AppKernel.php", "app/TestAppKernel.php", "src/Kernel.php"]
     },
     "extra": {
         "symfony-app-dir": "app",
