@@ -1,5 +1,13 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.6 (2018-08-27)
+
+#### Details
+
+- [#9635](https://github.com/Sylius/Sylius/pull/9635) Updated a word in documentation to read better (@mbklnd)
+- [#9662](https://github.com/Sylius/Sylius/pull/9662) Fix Grids archive ability to work on multi-param urls (@diimpp)
+- [#9667](https://github.com/Sylius/Sylius/pull/9667) [UI] Fix icons on checkout (@lchrusciel)
+
 ## v1.2.5 (2018-08-13)
 
 #### TL;DR
