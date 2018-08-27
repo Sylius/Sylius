@@ -5,13 +5,9 @@ _routing_deprecation:
     resource: '_routing_deprecation.php' # Triggers a deprecation error
 
 _routing_directory:
-    resource: '../../config/{routes}/*.{php,xml,yaml,yml}'
-    type: glob
-
-_routing_environment_directory:
-    resource: '../../config/{routes}/%kernel.environment%/**/*.{php,xml,yaml,yml}'
+    resource: '../../config/routes/*.{php,xml,yaml,yml}'
     type: glob
 
 _routing_file:
-    resource: '../../config/{routes}.{php,xml,yaml,yml}'
+    resource: '../../config/routes.{php,xml,yaml,yml}'
     type: glob
