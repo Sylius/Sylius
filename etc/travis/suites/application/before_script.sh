@@ -14,4 +14,4 @@ run_command "bin/console assets:install public --env=test_cached --no-debug -vvv
 run_command "yarn build" || exit $?
 
 print_header "Making filesystem readonly" "Sylius"
-run_command "chmod -R 555 app bin config docs features src templates tests vendor"
+run_command "chmod -R 555 app bin config docs features src templates tests translations vendor"
