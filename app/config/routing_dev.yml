@@ -6,12 +6,9 @@ _routing_deprecation:
 
 _routing_directory:
     resource: '../../config/routes/*.{php,xml,yaml,yml}'
-    type: glob
 
 _routing_dev_directory:
     resource: '../../config/routes/dev/**/*.{php,xml,yaml,yml}'
-    type: glob
 
 _routing_file:
     resource: '../../config/routes.{php,xml,yaml,yml}'
-    type: glob
