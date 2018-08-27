@@ -1,5 +1,3 @@
-/.php_cs.cache
-
 /var/*
 !/var/.gitkeep
 
@@ -21,12 +19,23 @@
 !/etc/build/.gitkeep
 
 /behat.yml
-/phpunit.xml
 /phpspec.yml
-/.web-server-pid
 
 /.env
 /.env.prod
 /.env.staging
 /.env.test
 /.env.test_cached
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php_cs
+/.php_cs.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###
