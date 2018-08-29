@@ -144,6 +144,11 @@ class Review implements ReviewInterface
      */
     public function setStatus(?string $status): void
     {
+        @trigger_error(
+            'Setting entity state is deprecated since Sylius 1.3 and will be removed in Sylius 2.0. Use state machine to manage review status.',
+            E_USER_DEPRECATED
+        );
+
         $this->status = $status;
     }
 
