@@ -69,6 +69,7 @@ interface ReviewInterface extends TimestampableInterface, ResourceInterface
 
     /**
      * @param string|null $status
+     * @deprecated this method is deprecated since Sylius 1.3 and will be removed in Sylius 2.0, use state machine to manage review status
      */
     public function setStatus(?string $status): void;
 

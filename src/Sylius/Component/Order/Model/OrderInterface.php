@@ -114,6 +114,7 @@ interface OrderInterface extends AdjustableInterface, ResourceInterface, Timesta
 
     /**
      * @param string $state
+     * @deprecated this method is deprecated since Sylius 1.3 and will be removed in Sylius 2.0, use state machine to manage order state
      */
     public function setState(string $state): void;
 

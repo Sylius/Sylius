@@ -35,3 +35,11 @@
     
         * `sylius.mongodb_odm.repository.class`
         * `sylius.phpcr_odm.repository.class`
+
+* All methods for setting entity states (associated with state machine) has been removed.
+Only state machine should be used to manage entity state:
+
+    * `Sylius\Component\Order\Model\OrderInterface::setState`
+    * `Sylius\Component\Payment\Model\PaymentInterface::setState`
+    * `Sylius\Component\Shipping\Model\ShipmentInterface::setState`
+    * `Sylius\Component\Review\Model\ReviewInterface::setStatus`
