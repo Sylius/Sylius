@@ -59,16 +59,19 @@ sylius_fixtures:
                                 code: "ups"
                                 name: "UPS"
                                 enabled: true
+                                tax_category: shipping
                                 channels:
                                     - "US_WEB"
                             dhl_express:
                                 code: "dhl_express"
                                 name: "DHL Express"
+                                tax_category: shipping
                                 channels:
                                     - "US_WEB"
                             fedex:
                                 code: "fedex"
                                 name: "FedEx"
+                                tax_category: shipping
                                 channels:
                                     - "US_WEB"
 
@@ -127,6 +130,9 @@ sylius_fixtures:
                             other:
                                 code: "other"
                                 name: "Other"
+                            shipping:
+                                code: "shipping"
+                                name: "Shipping"
 
                 tax_rate:
                     options:
@@ -148,6 +154,12 @@ sylius_fixtures:
                                 name: "Sales Tax 20%"
                                 zone: "US"
                                 category: "other"
+                                amount: 0.2
+                            shipping_tax:
+                                code: "shipping_tax_20"
+                                name: "Shipping Tax 20%"
+                                zone: "US"
+                                category: "shipping"
                                 amount: 0.2
 
                 promotion:
