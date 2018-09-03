@@ -16,6 +16,8 @@ namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Collections\ExpressionBuilder as CollectionsExpressionBuilder;
 
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', ExpressionBuilder::class), E_USER_DEPRECATED);
+
 /**
  * Creates an object graph (using Doctrine\Commons\Collections\Expr\*) which we
  * can then walk in order to build up the PHPCR-ODM query builder.

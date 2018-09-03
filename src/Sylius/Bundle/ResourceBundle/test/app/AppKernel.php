@@ -40,6 +40,8 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
+            new Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle(),
+            new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle(),
             new AppBundle\AppBundle(),
         ];
     }
@@ -57,7 +59,7 @@ class AppKernel extends Kernel
      */
     protected function getContainerBaseClass()
     {
-        if ('test' === $this->environment) {
+        if (0 === strpos($this->environment, 'test')) {
             return MockerContainer::class;
         }
 

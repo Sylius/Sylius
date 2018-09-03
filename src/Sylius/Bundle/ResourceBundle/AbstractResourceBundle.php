@@ -115,6 +115,11 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     {
         switch ($driverType) {
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
+                @trigger_error(sprintf(
+                    'The "%s" driver is deprecated in Sylius 1.3. Doctrine MongoDB and PHPCR will no longer be supported in Sylius 2.0.',
+                    $driverType
+                ), E_USER_DEPRECATED);
+
                 $mappingsPassClassname = DoctrineMongoDBMappingsPass::class;
 
                 break;
@@ -123,6 +128,11 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
 
                 break;
             case SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM:
+                @trigger_error(sprintf(
+                    'The "%s" driver is deprecated in Sylius 1.3. Doctrine MongoDB and PHPCR will no longer be supported in Sylius 2.0.',
+                    $driverType
+                ), E_USER_DEPRECATED);
+
                 $mappingsPassClassname = DoctrinePhpcrMappingsPass::class;
 
                 break;

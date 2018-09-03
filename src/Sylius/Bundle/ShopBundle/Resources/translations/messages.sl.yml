@@ -8,8 +8,8 @@ sylius:
         shop:
             account:
                 address_book: 'Naslovi'
-                change_password: 'Spremenite geslo'
+                change_password: 'Spremeni geslo'
                 dashboard: 'Nadzorna plošča'
-                header: 'Vaš račun'
+                header: 'Moj račun'
                 order_history: 'Zgodovina naročil'
-                personal_information: 'Osebne informacije'
+                personal_information: 'Osebni podatki'

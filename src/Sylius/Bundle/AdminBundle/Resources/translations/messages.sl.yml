@@ -7,7 +7,7 @@ sylius:
             main:
                 catalog:
                     association_types: Vrste združenj
-                    attributes: Atributi
+                    attributes: Lastnosti
                     header: Katalog
                     inventory: Inventar
                     options: Možnosti

@@ -71,6 +71,7 @@ sylius:
         assortment: 'Sortiment'
         attributes: 'Attribut'
         author: 'Författare'
+        authorized: 'Auktoriserad'
         availability: 'Tillgänglighet'
         available_for_channels: 'Tillgänglig för kanaler'
         available_on: 'Tillgänglig på'

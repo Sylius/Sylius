@@ -21,6 +21,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.doctrine.orm.event_subscriber.load_metadata.attribute" class="Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber">
             <argument>%sylius.attribute.subjects%</argument>
             <tag name="doctrine.event_subscriber" />

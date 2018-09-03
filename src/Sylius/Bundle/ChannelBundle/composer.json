@@ -20,11 +20,11 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
-        "sylius/channel": "^1.1",
-        "sylius/resource-bundle": "^1.1",
-        "symfony/framework-bundle": "^3.4"
+        "sylius/channel": "^1.2",
+        "sylius/resource-bundle": "^1.2",
+        "symfony/framework-bundle": "^3.4|^4.1.1"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
@@ -32,9 +32,9 @@
         "phpunit/phpunit": "^6.5",
         "twig/twig": "^2.0",
         "doctrine/orm": "^2.5",
-        "symfony/dependency-injection": "^3.4",
-        "symfony/form": "^3.4",
-        "symfony/browser-kit": "^3.4",
+        "symfony/dependency-injection": "^3.4|^4.1.1",
+        "symfony/form": "^3.4|^4.1.1",
+        "symfony/browser-kit": "^3.4|^4.1.1",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "config": {
@@ -45,9 +45,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\ChannelBundle\\spec\\": "spec/",
-            "AppBundle\\": "test/src/AppBundle/"
-        }
+            "Sylius\\Bundle\\ChannelBundle\\spec\\": "spec/"
+        },
+        "classmap": ["test/app/AppKernel.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -59,7 +59,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

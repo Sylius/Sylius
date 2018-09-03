@@ -20,20 +20,20 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
-        "sylius/mailer": "^1.1",
-        "symfony/framework-bundle": "^3.4"
+        "sylius/mailer": "^1.2",
+        "symfony/framework-bundle": "^3.4|^4.1.1"
     },
     "require-dev": {
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^3.4",
-        "symfony/dependency-injection": "^3.4",
+        "symfony/browser-kit": "^3.4|^4.1.1",
+        "symfony/dependency-injection": "^3.4|^4.1.1",
         "symfony/swiftmailer-bundle": "^3.1",
-        "symfony/templating": "^3.4",
-        "symfony/twig-bundle": "^3.4"
+        "symfony/templating": "^3.4|^4.1.1",
+        "symfony/twig-bundle": "^3.4|^4.1.1"
     },
     "config": {
         "bin-dir": "bin"
@@ -43,9 +43,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\MailerBundle\\spec\\": "spec/",
-            "AppBundle\\": "test/src/AppBundle/"
-        }
+            "Sylius\\Bundle\\MailerBundle\\spec\\": "spec/"
+        },
+        "classmap": ["test/app/AppKernel.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -57,7 +57,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

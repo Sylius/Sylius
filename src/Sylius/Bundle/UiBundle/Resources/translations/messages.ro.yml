@@ -71,6 +71,7 @@ sylius:
         assortment: 'Sortiment'
         attributes: 'Atribute'
         author: 'Autor'
+        authorized: 'Autorizată'
         availability: 'Disponibilitate'
         available_for_channels: 'Disponibil pentru'
         available_on: 'Disponibil din'

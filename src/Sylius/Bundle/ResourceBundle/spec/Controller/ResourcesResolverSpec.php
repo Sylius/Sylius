@@ -88,6 +88,25 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $this->getResources($requestConfiguration, $repository)->shouldReturn([$firstResource]);
     }
 
+    function it_uses_custom_repository_if_specified(
+        RequestConfiguration $requestConfiguration,
+        RepositoryInterface $repository,
+        RepositoryInterface $customRepository,
+        ResourceInterface $firstResource
+    ): void {
+        $requestConfiguration->isHtmlRequest()->willReturn(true);
+        $requestConfiguration->getRepositoryMethod()->willReturn([$customRepository, 'findBy']);
+        $requestConfiguration->getRepositoryArguments()->willReturn([['foo' => true]]);
+
+        $requestConfiguration->isPaginated()->willReturn(false);
+        $requestConfiguration->isLimited()->willReturn(true);
+        $requestConfiguration->getLimit()->willReturn(15);
+
+        $customRepository->findBy(['foo' => true])->willReturn([$firstResource]);
+
+        $this->getResources($requestConfiguration, $repository)->shouldReturn([$firstResource]);
+    }
+
     function it_creates_paginator_by_default(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,

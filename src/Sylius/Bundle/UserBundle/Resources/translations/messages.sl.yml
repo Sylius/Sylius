@@ -15,9 +15,9 @@ sylius:
         user_filter:
             query: Iskanje
         user_change_password:
-            confirmation: Potrditev
+            confirmation: Potrditev gesla
             current: Trenutno geslo
             new: Novo geslo
         user_reset_password:
-            confirmation: Potrditev
+            confirmation: Potrditev gesla
             new: Novo geslo

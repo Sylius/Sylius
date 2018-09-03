@@ -41,10 +41,11 @@ default:
             show_auto: false
 
         FriendsOfBehat\SymfonyExtension:
+            env_file: .env.test
             kernel:
                 class: TestAppKernel
                 path: app/TestAppKernel.php
-                bootstrap: vendor/autoload.php
+                bootstrap: ~
 
         FriendsOfBehat\ContextServiceExtension:
             imports:

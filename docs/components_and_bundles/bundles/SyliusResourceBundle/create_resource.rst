@@ -127,6 +127,28 @@ Additionally, if you want to provide your custom method with arguments from the 
 
 With this configuration, ``$factory->createNewWithAuthor($request->get('author'))`` will be called to create new resource within the ``createAction``.
 
+Using Custom Factory Service
+----------------------------
+
+If you would like to use your own service to create the resource, then try the following configuration:
+
+.. code-block:: yaml
+
+    # app/config/routing.yml
+
+    app_book_create:
+        path: /{authorId}/books/new
+        methods: [GET, POST]
+        defaults:
+            _controller: app.controller.book:createAction
+            _sylius:
+                factory:
+                    method: ["expr:service('app.factory.custom_book_factory')", "createNewByAuthorId"]
+                    arguments: $authorId
+
+
+With this configuration, service with id "app.factory.custom_book_factory" will be called to create new resource within the ``createNewByAuthorId`` method and the author id from the url as argument.
+
 Custom Redirect After Success
 -----------------------------
 

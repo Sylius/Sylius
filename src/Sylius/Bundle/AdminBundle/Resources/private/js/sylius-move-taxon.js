@@ -7,41 +7,47 @@
  * file that was distributed with this source code.
  */
 
-(function ($) {
-    'use strict';
+import 'semantic-ui-css/components/api';
+import $ from 'jquery';
 
-    $.fn.extend({
-        taxonMoveUp: function () {
-            $(this).api({
-                method: 'PUT',
-                on: 'click',
-                beforeSend: function (settings) {
-                    settings.data = {
-                        position: $(this).data('position') - 1
-                    };
+$.fn.extend({
+  taxonMoveUp() {
+    const element = this;
 
-                    return settings;
-                },
-                onSuccess: function (response) {
-                    location.reload();
-                }
-            });
-        },
-        taxonMoveDown: function () {
-            $(this).api({
-                method: 'PUT',
-                on: 'click',
-                beforeSend: function (settings) {
-                    settings.data = {
-                        position: $(this).data('position') + 1
-                    };
+    element.api({
+      method: 'PUT',
+      on: 'click',
+      beforeSend(settings) {
+        /* eslint-disable-next-line no-param-reassign */
+        settings.data = {
+          position: element.data('position') - 1,
+        };
 
-                    return settings;
-                },
-                onSuccess: function (response) {
-                    location.reload();
-                }
-            });
-        }
+        return settings;
+      },
+      onSuccess() {
+        window.location.reload();
+      },
     });
-})(jQuery);
+  },
+
+  taxonMoveDown() {
+    const element = this;
+
+    element.api({
+      method: 'PUT',
+      on: 'click',
+      beforeSend(settings) {
+        /* eslint-disable-next-line no-param-reassign */
+        settings.data = {
+          position: element.data('position') + 1,
+        };
+
+        return settings;
+      },
+      onSuccess() {
+        window.location.reload();
+      },
+    });
+  },
+});

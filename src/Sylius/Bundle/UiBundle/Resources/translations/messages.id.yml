@@ -71,6 +71,7 @@ sylius:
         assortment: 'Assortment'
         attributes: 'Atribut'
         author: 'Penulis'
+        authorized: 'Terotrisasi'
         availability: 'Ketersediaan'
         available_for_channels: 'Tersedia untuk saluran'
         available_on: 'Tersedia di'

@@ -7,50 +7,53 @@
  * file that was distributed with this source code.
  */
 
-(function ( $ ) {
-    'use strict';
+import 'semantic-ui-css/components/api';
+import $ from 'jquery';
 
-    $.fn.extend({
-        apiLogin: function (apiSettings) {
-            var element = $(this);
-            var apiSettings = apiSettings;
-            var passwordField = element.find('input[type=\'password\']');
-            var emailField = element.find('input[type=\'email\']');
-            var csrfTokenField = element.find('input[type=\'hidden\']');
-            var signInButton = element.find('.button');
-            var validationField = element.find('.red.label');
+$.fn.extend({
+  apiLogin({
+    method,
+    dataType = 'json',
+    throttle = 0,
+    debug = false,
+  }) {
+    const element = this;
+    const passwordField = element.find('input[type="password"]');
+    const emailField = element.find('input[type="email"]');
+    const csrfTokenField = element.find('input[type="hidden"]');
+    const signInButton = element.find('.button');
+    const validationField = element.find('.red.label');
 
-            signInButton.api({
-                method: apiSettings.method,
-                dataType: apiSettings.dataType || 'json',
-                throttle: apiSettings.throttle || 0,
-                debug: apiSettings.debug || false,
+    signInButton.api({
+      method,
+      dataType,
+      throttle,
+      debug,
 
-                beforeSend: function (settings) {
-                    settings.data = {
-                        _username: emailField.val(),
-                        _password: passwordField.val()
-                    };
-                    settings.data[csrfTokenField.attr('name')] = csrfTokenField.val();
+      beforeSend(settings) {
+        /* eslint-disable-next-line no-param-reassign */
+        settings.data = {
+          _username: emailField.val(),
+          _password: passwordField.val(),
+          [csrfTokenField.attr('name')]: csrfTokenField.val(),
+        };
 
-                    return settings;
-                },
+        return settings;
+      },
 
-                successTest: function (response) {
-                    return response.success;
-                },
+      successTest(response) {
+        return response.success;
+      },
 
-                onSuccess: function (response) {
-                    element.remove();
-                    location.reload();
-                },
+      onSuccess() {
+        element.remove();
+        window.location.reload();
+      },
 
-                onFailure: function (response) {
-                    validationField.removeClass('hidden');
-                    validationField.html(response.message);
-                }
-            });
-
-        }
+      onFailure(response) {
+        validationField.removeClass('hidden');
+        validationField.html(response.message);
+      },
     });
-})( jQuery );
+  },
+});

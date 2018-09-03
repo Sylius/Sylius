@@ -15,6 +15,7 @@
     <imports>
         <import resource="services/checkers.xml" />
         <import resource="services/checkout.xml" />
+        <import resource="services/commands.xml" />
         <import resource="services/context.xml" />
         <import resource="services/dashboard.xml" />
         <import resource="services/fixtures.xml" />
@@ -34,6 +35,8 @@
     </imports>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.provider.channel_based_default_zone_provider" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
         <service id="sylius.integer_distributor" class="Sylius\Component\Core\Distributor\IntegerDistributor" />
         <service id="sylius.proportional_integer_distributor" class="Sylius\Component\Core\Distributor\ProportionalIntegerDistributor" />
@@ -65,8 +68,10 @@
         <service id="sylius.payment_method_resolver.default" class="Sylius\Component\Core\Resolver\DefaultPaymentMethodResolver">
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
-        <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\DefaultShippingMethodResolver">
+        <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="sylius.shipping_eligibility_checker" />
+            <argument type="service" id="sylius.zone_matcher" />
         </service>
         <service id="sylius.context.customer" class="Sylius\Bundle\CoreBundle\Context\CustomerContext">
             <argument type="service" id="security.token_storage" />
@@ -85,6 +90,10 @@
         <service id="sylius.factory.cart_item" alias="sylius.custom_factory.order_item" />
         <service id="sylius.custom_factory.address" class="Sylius\Component\Core\Factory\AddressFactory" decorates="sylius.factory.address" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.address.inner" />
+        </service>
+
+        <service id="sylius.factory.customer_after_checkout" class="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactory">
+            <argument type="service" id="sylius.factory.customer" />
         </service>
 
         <service id="sylius.provider.product_variants_prices" class="Sylius\Component\Core\Provider\ProductVariantsPricesProvider">

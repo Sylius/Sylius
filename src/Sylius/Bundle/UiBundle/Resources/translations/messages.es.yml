@@ -71,6 +71,7 @@ sylius:
         assortment: 'Varios'
         attributes: 'Atributos'
         author: 'Autor'
+        authorized: 'Autorizado'
         availability: 'Disponibilidad'
         available_for_channels: 'Disponible para canales'
         available_on: 'Disponible el'

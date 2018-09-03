@@ -16,6 +16,7 @@ namespace Sylius\Bundle\UserBundle\Tests\Functional;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class SyliusUserBundleTest extends KernelTestCase
 {
@@ -29,12 +30,12 @@ final class SyliusUserBundleTest extends KernelTestCase
         /** @var Container $container */
         $container = self::$kernel->getContainer();
 
-        $serviceIds = array_filter($container->getServiceIds(), function ($serviceId) {
+        $serviceIds = array_filter($container->getServiceIds(), function (string $serviceId): bool {
             return 0 === strpos($serviceId, 'sylius.');
         });
 
-        foreach ($serviceIds as $serviceId) {
-            Assert::assertNotNull($container->get($serviceId));
+        foreach ($serviceIds as $id) {
+            Assert::assertNotNull($container->get($id, ContainerInterface::NULL_ON_INVALID_REFERENCE));
         }
     }
 }

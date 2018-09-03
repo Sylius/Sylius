@@ -54,6 +54,7 @@ sylius:
         assortment: 'Asortimenti'
         attributes: 'Atributet'
         author: 'Autori'
+        authorized: 'Autorizuar'
         availability: 'Disponueshmëria'
         available_for_channels: 'Ne dispozicion per kanale'
         available_on: 'Gati më'

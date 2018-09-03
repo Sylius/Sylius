@@ -17,7 +17,7 @@
             <constraint name="NotBlank">
                 <option name="message">sylius.review.title.not_blank</option>
                 <option name="groups">
-                    <value>sylius</value>
+                    <value>sylius_review</value>
                 </option>
             </constraint>
             <constraint name="Length">

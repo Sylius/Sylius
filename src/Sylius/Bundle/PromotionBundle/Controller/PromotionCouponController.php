@@ -43,8 +43,9 @@ class PromotionCouponController extends ResourceController
         }
 
         $form = $this->container->get('form.factory')->create(PromotionCouponGeneratorInstructionType::class);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->getGenerator()->generate($promotion, $form->getData());
             $this->flashHelper->addSuccessFlash($configuration, 'generate');
 

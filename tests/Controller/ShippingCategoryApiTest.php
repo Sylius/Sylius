@@ -285,7 +285,7 @@ EOT;
         /** @var ShippingCategoryInterface $shippingCategory */
         $shippingCategory = $shippingCategories['shipping_category_2'];
 
-        $this->client->request('DELETE', $this->getShippingCategoryUrl($shippingCategory), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getShippingCategoryUrl($shippingCategory), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);

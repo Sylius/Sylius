@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ShopBundle\EventListener;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\SyliusCartEvents;
+use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -31,6 +32,11 @@ final class OrderPromotionIntegrityChecker
     private $promotionEligibilityChecker;
 
     /**
+     * @var PromotionApplicatorInterface
+     */
+    private $promotionApplicator;
+
+    /**
      * @var EventDispatcherInterface
      */
     private $eventDispatcher;
@@ -44,15 +50,22 @@ final class OrderPromotionIntegrityChecker
      * @param PromotionEligibilityCheckerInterface $promotionEligibilityChecker
      * @param EventDispatcherInterface $eventDispatcher
      * @param RouterInterface $router
+     * @param PromotionApplicatorInterface $promotionApplicator
      */
     public function __construct(
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
         EventDispatcherInterface $eventDispatcher,
-        RouterInterface $router
+        RouterInterface $router,
+        ?PromotionApplicatorInterface $promotionApplicator = null
     ) {
+        if ($promotionApplicator === null) {
+            @trigger_error("You need to supply an promotion applicator in order to work properly. In case you don't provide it, there will be valid cases that will fail due an incorrect recalculation.", \E_USER_DEPRECATED);
+        }
+
         $this->promotionEligibilityChecker = $promotionEligibilityChecker;
         $this->eventDispatcher = $eventDispatcher;
         $this->router = $router;
+        $this->promotionApplicator = $promotionApplicator;
     }
 
     /**
@@ -65,7 +78,18 @@ final class OrderPromotionIntegrityChecker
 
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $promotions = $order->getPromotions();
+        // we create a new promotion collection and remove them from cart
+        // so we can verify with original conditions (without the price being applied before check)
+
+        $promotions = $order->getPromotions()->toArray();
+
+        if ($this->promotionApplicator !== null) {
+            foreach ($promotions as $promotion) {
+                $this->promotionApplicator->revert($order, $promotion);
+                $order->removePromotion($promotion);
+            }
+        }
+
         foreach ($promotions as $promotion) {
             if (!$this->promotionEligibilityChecker->isEligible($order, $promotion)) {
                 $event->stop(
@@ -79,6 +103,10 @@ final class OrderPromotionIntegrityChecker
                 $this->eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
 
                 break;
+            }
+
+            if ($this->promotionApplicator !== null) {
+                $this->promotionApplicator->apply($order, $promotion);
             }
         }
     }

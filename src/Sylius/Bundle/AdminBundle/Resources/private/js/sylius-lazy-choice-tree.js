@@ -7,166 +7,169 @@
  * file that was distributed with this source code.
  */
 
-(function ($) {
-    'use strict';
+import 'semantic-ui-css/components/api';
+import 'semantic-ui-css/components/checkbox';
+import $ from 'jquery';
 
-    $.fn.extend({
-        choiceTree: function (type, multiple, defaultLevel) {
-            var tree = $(this);
-            var loader = $(this).find('.dimmer');
-            var loadedLeafs = [];
-            var $input = $(this).find('input[type="hidden"]');
+const createRootContainer = function createRootContainer() {
+  return $('<div class="ui list"></div>');
+};
 
-            tree.api({
-                on: 'now',
-                method: 'GET',
-                url: tree.data('taxon-root-nodes-url'),
-                cache: false,
-                beforeSend: function(settings) {
-                    loader.addClass('active');
+const createLeafContainerElement = function createLeafContainerElement() {
+  return $('<div class="list"></div>');
+};
 
-                    return settings;
-                },
-                onSuccess: function (response) {
-                    var rootContainer = createRootContainer();
-                    $.each(response, function (rootNodeIndex, rootNode) {
-                        rootContainer.append(createLeaf(rootNode.name, rootNode.code, rootNode.hasChildren, multiple, rootNode.level));
-                    });
-                    tree.append(rootContainer);
-                    loader.removeClass('active');
-                }
+const createLeafIconElement = function createLeafIconElement() {
+  return $('<i class="folder icon"></i>');
+};
+
+const createLeafTitleElement = function createLeafTitleElement() {
+  return $('<div class="header"></div>');
+};
+
+const createLeafTitleSpan = function createLeafTitleSpan(displayName) {
+  return $(`<span style="margin-right: 5px; cursor: pointer;">${displayName}</span>`);
+};
+
+const createLeafContentElement = function createLeafContentElement() {
+  return $('<div class="content"></div>');
+};
+
+$.fn.extend({
+  choiceTree(type, multiple, defaultLevel) {
+    const tree = this;
+    const loader = tree.find('.dimmer');
+    const loadedLeafs = [];
+    const $input = tree.find('input[type="hidden"]');
+
+    const createCheckboxElement = function createCheckboxElement(name, code, multi) {
+      const chosenNodes = $input.val().split(',');
+      let checked = '';
+      if (chosenNodes.some(chosenCode => chosenCode === code)) {
+        checked = 'checked="checked"';
+      }
+      if (multi) {
+        return $(`<div class="ui checkbox" data-value="${code}"><input ${checked} type="checkbox" name="${type}"></div>`);
+      }
+
+      return $(`<div class="ui radio checkbox" data-value="${code}"><input ${checked} type="radio" name="${type}"></div>`);
+    };
+
+    const isLeafLoaded = function isLeafLoaded(code) {
+      return loadedLeafs.some(leafCode => leafCode === code);
+    };
+
+    let createLeafFunc;
+
+    const loadLeafAction = function loadLeafAction(parentCode, expandButton, content, icon, leafContainerElement) {
+      icon.toggleClass('open');
+
+      if (!isLeafLoaded(parentCode)) {
+        expandButton.api({
+          on: 'now',
+          url: tree.data('tree-leafs-url') || tree.data('taxon-leafs-url'),
+          method: 'GET',
+          cache: false,
+          data: {
+            parentCode,
+          },
+          beforeSend(settings) {
+            loader.addClass('active');
+
+            return settings;
+          },
+          onSuccess(response) {
+            response.forEach((leafNode) => {
+              leafContainerElement.append((
+                createLeafFunc(leafNode.name, leafNode.code, leafNode.hasChildren, multiple, leafNode.level)
+              ));
             });
+            content.append(leafContainerElement);
+            loader.removeClass('active');
+            loadedLeafs.push(parentCode);
+          },
+        });
+      }
 
-            var createLeaf = function (name, code, hasChildren, multipleChoice, level) {
-                var displayNameElement = createLeafTitleSpan(name);
-                var titleElement = createLeafTitleElement();
-                var iconElement = createLeafIconElement();
-                var checkboxElement = createCheckboxElement(name, code, multipleChoice);
+      leafContainerElement.toggle();
+    };
 
-                bindCheckboxAction(checkboxElement);
+    const bindExpandLeafAction = function bindExpandLeafAction(parentCode, expandButton, content, icon, level) {
+      const leafContainerElement = createLeafContainerElement();
+      if (defaultLevel > level) {
+        loadLeafAction(parentCode, expandButton, content, icon, leafContainerElement);
+      }
 
-                var leafElement = $('<div class="item"></div>');
-                var leafContentElement = createLeafContentElement();
+      expandButton.click(() => {
+        loadLeafAction(parentCode, expandButton, content, icon, leafContainerElement);
+      });
+    };
 
-                leafElement.append(iconElement);
-                titleElement.append(displayNameElement);
-                titleElement.append(checkboxElement);
-                leafContentElement.append(titleElement);
+    const bindCheckboxAction = function bindCheckboxAction(checkboxElement) {
+      checkboxElement.checkbox({
+        onChange() {
+          const $checkboxes = tree.find('.checkbox');
+          const checkedValues = [];
 
-                if (!hasChildren) {
-                    iconElement.addClass('outline');
-                }
-                if (hasChildren) {
-                    bindExpandLeafAction(code, displayNameElement, leafContentElement, iconElement, level);
-                }
-                leafElement.append(leafContentElement);
+          $checkboxes.each((index, element) => {
+            if ($(element).checkbox('is checked')) {
+              checkedValues.push($(element).data('value'));
+            }
+          });
 
-                return leafElement;
-            };
+          $input.val(checkedValues.join());
+        },
+      });
+    };
 
-            var createRootContainer = function () {
-                return $('<div class="ui list"></div>');
-            };
+    const createLeaf = function createLeaf(name, code, hasChildren, multipleChoice, level) {
+      const displayNameElement = createLeafTitleSpan(name);
+      const titleElement = createLeafTitleElement();
+      const iconElement = createLeafIconElement();
+      const checkboxElement = createCheckboxElement(name, code, multipleChoice);
 
-            var createLeafContainerElement = function () {
-                return $('<div class="list"></div>');
-            };
+      bindCheckboxAction(checkboxElement);
 
-            var createLeafIconElement = function () {
-                return $('<i class="folder icon"></i>');
-            };
+      const leafElement = $('<div class="item"></div>');
+      const leafContentElement = createLeafContentElement();
 
-            var createLeafTitleElement = function () {
-                return $('<div class="header"></div>');
-            };
+      leafElement.append(iconElement);
+      titleElement.append(displayNameElement);
+      titleElement.append(checkboxElement);
+      leafContentElement.append(titleElement);
 
-            var createLeafTitleSpan = function (displayName) {
-                return $('<span style="margin-right: 5px; cursor: pointer;">'+displayName+'</span>')
-            };
+      if (!hasChildren) {
+        iconElement.addClass('outline');
+      }
+      if (hasChildren) {
+        bindExpandLeafAction(code, displayNameElement, leafContentElement, iconElement, level);
+      }
+      leafElement.append(leafContentElement);
 
-            var createLeafContentElement = function () {
-                return $('<div class="content"></div>');
-            };
+      return leafElement;
+    };
+    createLeafFunc = createLeaf;
 
-            var createCheckboxElement = function (name, code, multiple) {
-                var chosenNodes = $input.val().split(',');
-                var checked = '';
-                if (chosenNodes.some(function (chosenCode) {return chosenCode === code})) {
-                    checked = 'checked="checked"';
-                }
-                if (multiple) {
-                    return $('<div class="ui checkbox" data-value="'+code+'"><input '+checked+' type="checkbox" name="'+type+'"></div>');
-                }
+    tree.api({
+      on: 'now',
+      method: 'GET',
+      url: tree.data('tree-root-nodes-url') || tree.data('taxon-root-nodes-url'),
+      cache: false,
+      beforeSend(settings) {
+        loader.addClass('active');
 
-                return $('<div class="ui radio checkbox" data-value="'+code+'"><input '+checked+' type="radio" name="'+type+'"></div>');
-            };
-
-            var isLeafLoaded = function (code) {
-                return loadedLeafs.some(function (leafCode) {
-                    return leafCode === code;
-                })
-            };
-
-            var bindExpandLeafAction = function (parentCode, expandButton, content, icon, level) {
-                var leafContainerElement = createLeafContainerElement();
-                if (defaultLevel > level) {
-                    loadLeafAction(parentCode, expandButton, content, icon, leafContainerElement);
-                }
-
-                expandButton.click(function () {
-                    loadLeafAction(parentCode, expandButton, content, icon, leafContainerElement);
-                });
-            };
-
-            var loadLeafAction = function (parentCode, expandButton, content, icon, leafContainerElement) {
-                icon.toggleClass('open');
-
-                if (!isLeafLoaded(parentCode)) {
-                    expandButton.api({
-                        on: 'now',
-                        url: tree.data('taxon-leafs-url'),
-                        method: 'GET',
-                        cache: false,
-                        data: {
-                            parentCode: parentCode
-                        },
-                        beforeSend: function(settings) {
-                            loader.addClass('active');
-
-                            return settings;
-                        },
-                        onSuccess: function (response) {
-                            $.each(response, function (leafIndex, leafNode) {
-                                leafContainerElement.append(createLeaf(leafNode.name, leafNode.code, leafNode.hasChildren, multiple, leafNode.level));
-                            });
-                            content.append(leafContainerElement);
-                            loader.removeClass('active');
-                            loadedLeafs.push(parentCode);
-                        }
-                    });
-
-                    return;
-                }
-
-                leafContainerElement.toggle();
-            };
-
-            var bindCheckboxAction = function (checkboxElement) {
-                checkboxElement.checkbox({
-                    onChange: function () {
-                        var $checkboxes = tree.find('.checkbox');
-                        var checkedValues = [];
-
-                        $checkboxes.each(function () {
-                            if ($(this).checkbox('is checked')) {
-                                checkedValues.push($(this).data('value'));
-                            }
-                        });
-
-                        $input.val(checkedValues.join());
-                    }
-                });
-            };
-        }
+        return settings;
+      },
+      onSuccess(response) {
+        const rootContainer = createRootContainer();
+        response.forEach((rootNode) => {
+          rootContainer.append((
+            createLeaf(rootNode.name, rootNode.code, rootNode.hasChildren, multiple, rootNode.level)
+          ));
+        });
+        tree.append(rootContainer);
+        loader.removeClass('active');
+      },
     });
-})(jQuery);
+  },
+});

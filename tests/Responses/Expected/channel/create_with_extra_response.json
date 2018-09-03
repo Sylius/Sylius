@@ -1,0 +1,17 @@
+{
+    "id": @integer@,
+    "code": "android",
+    "name": "Channel for Android client",
+    "description": "For now not required, for future development stages.",
+    "hostname": "quickmart.eu",
+    "color": "ClassicBlue",
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "enabled": true,
+    "taxCalculationStrategy": "order_items_based",
+    "_links": {
+        "self": {
+            "href": @string@
+        }
+    }
+}

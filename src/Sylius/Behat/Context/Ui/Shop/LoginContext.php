@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
@@ -24,49 +25,37 @@ use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
-    /**
-     * @var HomePageInterface
-     */
+    /** @var HomePageInterface */
     private $homePage;
 
-    /**
-     * @var LoginPageInterface
-     */
+    /** @var LoginPageInterface */
     private $loginPage;
 
-    /**
-     * @var RegisterPageInterface
-     */
+    /** @var RegisterPageInterface */
     private $registerPage;
 
-    /**
-     * @var ResetPasswordPageInterface
-     */
+    /** @var ResetPasswordPageInterface */
     private $resetPasswordPage;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var RegisterElementInterface */
+    private $registerElement;
+
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param HomePageInterface $homePage
-     * @param LoginPageInterface $loginPage
-     * @param RegisterPageInterface $registerPage
-     * @param ResetPasswordPageInterface $resetPasswordPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         HomePageInterface $homePage,
         LoginPageInterface $loginPage,
         RegisterPageInterface $registerPage,
         ResetPasswordPageInterface $resetPasswordPage,
+        RegisterElementInterface $registerElement,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->homePage = $homePage;
         $this->loginPage = $loginPage;
         $this->registerPage = $registerPage;
         $this->resetPasswordPage = $resetPasswordPage;
+        $this->registerElement = $registerElement;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -144,15 +133,15 @@ final class LoginContext implements Context
     /**
      * @When I register with email :email and password :password
      */
-    public function iRegisterWithEmailAndPassword($email, $password)
+    public function iRegisterWithEmailAndPassword(string $email, string $password): void
     {
         $this->registerPage->open();
-        $this->registerPage->specifyEmail($email);
-        $this->registerPage->specifyPassword($password);
-        $this->registerPage->verifyPassword($password);
-        $this->registerPage->specifyFirstName('Carrot');
-        $this->registerPage->specifyLastName('Ironfoundersson');
-        $this->registerPage->register();
+        $this->registerElement->specifyEmail($email);
+        $this->registerElement->specifyPassword($password);
+        $this->registerElement->verifyPassword($password);
+        $this->registerElement->specifyFirstName('Carrot');
+        $this->registerElement->specifyLastName('Ironfoundersson');
+        $this->registerElement->register();
     }
 
     /**

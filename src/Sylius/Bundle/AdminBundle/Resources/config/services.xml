@@ -20,6 +20,8 @@
     </imports>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.context.locale.admin_based" class="Sylius\Bundle\AdminBundle\Context\AdminBasedLocaleContext">
             <argument type="service" id="security.token_storage" />
             <tag name="sylius.context.locale" priority="128" />

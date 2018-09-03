@@ -7,44 +7,43 @@
  * file that was distributed with this source code.
  */
 
-(function ( $ ) {
-    'use strict';
+import 'semantic-ui-css/components/api';
+import $ from 'jquery';
 
-    $.fn.extend({
-        moveProduct: function (positionInput) {
-            var productIds = [];
-            var element = $(this);
+$.fn.extend({
+  moveProduct(positionInput) {
+    const productIds = [];
+    const element = this;
 
-            element.api({
-                method: 'PUT',
-                beforeSend: function (settings) {
-                    settings.data = {
-                        productTaxons: productIds,
-                        _csrf_token: element.data('csrf-token')
-                    };
+    element.api({
+      method: 'PUT',
+      beforeSend(settings) {
+        /* eslint-disable-next-line no-param-reassign */
+        settings.data = {
+          productTaxons: productIds,
+          _csrf_token: element.data('csrf-token'),
+        };
 
-                    return settings;
-                },
-                onSuccess: function (response) {
-                    location.reload();
-                }
-            });
-
-            positionInput.on('input', function () {
-                var id = $(this).data('id');
-                var rowToEdit = productIds.filter(function (productTaxon){
-                    return productTaxon.id == id;
-                });
-
-                if(rowToEdit.length == 0) {
-                    productIds.push({
-                        id: $(this).data('id'),
-                        position: $(this).val()
-                    });
-                } else {
-                    rowToEdit[0].position = $(this).val();
-                }
-            });
-        }
+        return settings;
+      },
+      onSuccess() {
+        window.location.reload();
+      },
     });
-})(jQuery);
+
+    positionInput.on('input', (event) => {
+      const input = $(event.currentTarget);
+      const id = input.data('id');
+      const rowToEdit = productIds.filter(productTaxon => productTaxon.id == id);
+
+      if (rowToEdit.length === 0) {
+        productIds.push({
+          id: input.data('id'),
+          position: input.val(),
+        });
+      } else {
+        rowToEdit[0].position = input.val();
+      }
+    });
+  },
+});

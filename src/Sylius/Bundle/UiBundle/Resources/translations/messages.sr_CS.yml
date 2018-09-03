@@ -41,6 +41,7 @@ sylius:
         assortment: 'Asortiman'
         attributes: 'Atributi'
         author: 'Autor'
+        authorized: 'Autorizovano'
         availability: 'Dostupnost'
         available_for_channels: 'Dostupni kanali'
         available_on: 'Dostupno'

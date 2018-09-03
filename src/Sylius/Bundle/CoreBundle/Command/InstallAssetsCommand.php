@@ -44,9 +44,10 @@ EOT
         ));
 
         try {
-            $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/../';
-            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_ASSETS_DIRECTORY, $output);
-            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_BUNDLES_DIRECTORY, $output);
+            $publicDir = $this->getContainer()->getParameter('sylius_core.public_dir');
+
+            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/assets/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/bundles/', $output);
         } catch (\RuntimeException $exception) {
             $output->writeln($exception->getMessage());
 
@@ -54,7 +55,7 @@ EOT
         }
 
         $commands = [
-            'assets:install',
+            'assets:install' => ['target' => $publicDir],
         ];
 
         $this->runCommands($commands, $output);

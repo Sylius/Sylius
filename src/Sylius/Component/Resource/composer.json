@@ -20,12 +20,12 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "doctrine/common": "^2.6",
         "gedmo/doctrine-extensions": "^2.4",
-        "symfony/event-dispatcher": "^3.4",
-        "symfony/property-access": "^3.4",
+        "symfony/event-dispatcher": "^3.4|^4.1.1",
+        "symfony/property-access": "^3.4|^4.1.1",
         "winzou/state-machine": "^0.3",
         "pagerfanta/pagerfanta": "^1.0"
     },
@@ -55,7 +55,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

@@ -28,16 +28,16 @@ prepare_for_behat_with_js() {
     run_command "java -Dwebdriver.chrome.driver=$SYLIUS_CACHE_DIR/chromedriver -jar $SYLIUS_CACHE_DIR/selenium.jar > /dev/null 2>&1 &"
 
     # Run webserver
-    run_command "bin/console server:run 127.0.0.1:8080 --env=test_cached --router=app/config/router_test_cached.php --no-debug --quiet > /dev/null 2>&1 &"
+    run_command "bin/console server:run 127.0.0.1:8080 -d public --env=test_cached --no-debug --quiet > /dev/null 2>&1 &"
 }
 
 run_behat() {
     local code=0
 
     print_header "Testing (Behat - brand new, javascript scenarios; @javascript && ~@todo && ~@cli)" "Sylius"
-    run_command "bin/behat --strict --no-interaction -vvv -f progress -p cached --tags=\"@javascript && ~@todo && ~@cli\"" || code=$?
+    run_command "vendor/bin/behat --strict --no-interaction -vvv -f progress -p cached --tags=\"@javascript && ~@todo && ~@cli\"" || code=$?
     if [[ ${code} = 1 ]]; then
-        run_command "bin/behat --strict --no-interaction -vvv -f progress -p cached --tags=\"@javascript && ~@todo && ~@cli\" --rerun" ; code=$?
+        run_command "vendor/bin/behat --strict --no-interaction -vvv -f progress -p cached --tags=\"@javascript && ~@todo && ~@cli\" --rerun" ; code=$?
     fi
 
     return ${code}

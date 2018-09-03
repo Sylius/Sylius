@@ -93,6 +93,16 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @When /^I complete addressing step with ("[^"]+" based shipping address)$/
+     */
+    public function iCompleteAddressingStepWithBasedShippingAddress(AddressInterface $address): void
+    {
+        $this->addressPage->open();
+        $this->iSpecifyTheShippingAddressAs($address);
+        $this->iCompleteTheAddressingStep();
+    }
+
+    /**
      * @When I specify the province name manually as :provinceName for shipping address
      */
     public function iSpecifyTheProvinceNameManuallyAsForShippingAddress($provinceName)

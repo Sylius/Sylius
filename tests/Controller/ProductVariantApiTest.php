@@ -175,7 +175,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productVariantsData['product1'];
 
-        $this->client->request('POST', $this->getVariantListUrl($product), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', $this->getVariantListUrl($product), [], [], static::$authorizedHeaderWithContentType);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'product_variant/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -393,7 +393,7 @@ EOT;
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $productVariantsData['productVariant1'];
 
-        $this->client->request('DELETE', $this->getVariantUrl($product, $productVariant), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getVariantUrl($product, $productVariant), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);

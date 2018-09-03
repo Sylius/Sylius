@@ -16,9 +16,9 @@ Enjoy being an eCommerce Developer again!
 Installation
 ------------
 
-[Install Sylius](http://docs.sylius.com/en/1.1/book/installation/installation.html) with Composer (see [requirements details](http://docs.sylius.com/en/1.1/book/installation/requirements.html)).
+[Install Sylius](http://docs.sylius.com/en/latest/book/installation/installation.html) with Composer (see [requirements details](http://docs.sylius.com/en/latest/book/installation/requirements.html)).
 
-Alternatively, you can [use our Vagrant setup](http://docs.sylius.com/en/1.1/book/installation/vagrant_installation.html).
+Alternatively, you can [use our Vagrant setup](http://docs.sylius.com/en/latest/book/installation/vagrant_installation.html).
 
 Documentation
 -------------
@@ -34,7 +34,7 @@ You can also see all roadmap related issues by filtering [those labeled with "Ro
 Community
 ---------
 
-[Get Sylius support](http://docs.sylius.com/en/1.1/support/index.html) on [Slack](https://sylius.com/slack), [Forum](https://forum.sylius.com/) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
+[Get Sylius support](http://docs.sylius.com/en/latest/support/index.html) on [Slack](https://sylius.com/slack), [Forum](https://forum.sylius.com/) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
 
 Stay updated by following our [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
 
@@ -69,7 +69,7 @@ Instead, all security issues must be sent to `security@sylius.com`.
 License
 -------
 
-Sylius is completely free and released under the [MIT License](https://github.com/Sylius/Sylius/blob/1.1/LICENSE).
+Sylius is completely free and released under the [MIT License](https://github.com/Sylius/Sylius/blob/master/LICENSE).
 
 Authors
 -------

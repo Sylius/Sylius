@@ -20,23 +20,23 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "doctrine/doctrine-bundle": "^1.6",
         "friendsofsymfony/rest-bundle": "^2.1",
         "jms/serializer-bundle": "^2.0",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "sylius/registry": "^1.1",
-        "sylius/resource": "^1.1",
-        "symfony/config": "^3.4",
-        "symfony/expression-language": "^3.4",
-        "symfony/form": "^3.4",
-        "symfony/framework-bundle": "^3.4",
-        "symfony/security-csrf": "^3.4",
-        "symfony/templating": "^3.4",
-        "symfony/twig-bundle": "^3.4",
-        "symfony/validator": "^3.4",
-        "symfony/yaml": "^3.4",
+        "sylius/registry": "^1.2",
+        "sylius/resource": "^1.2",
+        "symfony/config": "^3.4|^4.1.1",
+        "symfony/expression-language": "^3.4|^4.1.1",
+        "symfony/form": "^3.4|^4.1.1",
+        "symfony/framework-bundle": "^3.4|^4.1.1",
+        "symfony/security-csrf": "^3.4|^4.1.1",
+        "symfony/templating": "^3.4|^4.1.1",
+        "symfony/twig-bundle": "^3.4|^4.1.1",
+        "symfony/validator": "^3.4|^4.1.1",
+        "symfony/yaml": "^3.4|^4.1.1",
         "white-october/pagerfanta-bundle": "^1.0",
         "willdurand/hateoas-bundle": "^1.2",
         "winzou/state-machine-bundle": "^0.3"
@@ -47,14 +47,13 @@
         "doctrine/orm": "^2.5",
         "doctrine/phpcr-odm": "^1.4",
         "jackalope/jackalope-doctrine-dbal": "^1.2",
-        "lakion/api-test-case": "^2.0",
+        "lakion/api-test-case": "^3.1.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
-        "sensio/generator-bundle": "^3.1",
-        "sylius/grid-bundle": "^1.1",
-        "sylius/locale": "^1.1",
-        "symfony/dependency-injection": "^3.4",
+        "sylius/grid-bundle": "^1.2",
+        "sylius/locale": "^1.2",
+        "symfony/dependency-injection": "^3.4|^4.1.1",
         "twig/twig": "^2.0"
     },
     "suggest": {
@@ -71,7 +70,8 @@
         "psr-4": {
             "Sylius\\Bundle\\ResourceBundle\\spec\\": "spec/",
             "AppBundle\\": "test/src/AppBundle/"
-        }
+        },
+        "classmap": ["test/app/AppKernel.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -83,7 +83,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }
