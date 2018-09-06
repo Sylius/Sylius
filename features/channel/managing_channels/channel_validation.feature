@@ -53,7 +53,7 @@ Feature: Channel validation
         And this channel should still be named "Web Channel"
 
     @ui @javascript
-    Scenario: Trying to add a channel with duplicate shipping countries
+    Scenario: Trying to add a channel with duplicated shipping countries
         Given the store operates in "United States"
         And the store has locale "English (United States)"
         And the store has currency "US Dollar"

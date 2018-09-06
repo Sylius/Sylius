@@ -8,10 +8,10 @@ sylius:
             last_name: Last name
             phone_number: Phone number
             postcode: Postcode
-            street: Street address
             province: Province
-            zone: Zone
             select: Select
+            street: Street address
+            zone: Zone
         country:
             add_province: Add province
             name: Name

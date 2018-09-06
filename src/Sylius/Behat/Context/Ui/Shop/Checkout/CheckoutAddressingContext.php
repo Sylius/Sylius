@@ -397,31 +397,26 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
-     * @Then I should be able to select :country as country
+     * @Then I should be able to select :firstCountryName or :secondCountryName as shipping country
+     * @Then I should be able to select :firstCountryName, :secondCountryName or :thirdCountryName as shipping country
      */
-    public function iShouldBeAbleToSelectAsCountry(CountryInterface $country)
+    public function shouldBeAbleToSelectShippingCountries(string ...$countries): void
     {
-        $selectableCountries = $this->addressPage->getSelectableShippingAddressCountries();
+        $shippableCountries = $this->addressPage->getSelectableShippingAddressCountries();
 
-        $countryCodes = array_map(function (NodeElement $countryOption) {
-            return $countryOption->getValue();
-        }, $selectableCountries);
-
-        Assert::true(in_array($country->getCode(), $countryCodes));
+        foreach ($countries as $country) {
+            Assert::oneOf($country, $shippableCountries);
+        }
     }
 
     /**
-     * @Then I should not be able to select :country as country
+     * @Then I should not be able to select :countryName as shipping country
      */
-    public function iShouldNotBeAbleToSelectAsCountry(CountryInterface $country)
+    public function shouldNotBeAbleToSelectShippingCountry(string $countryName): void
     {
-        $selectableCountries = $this->addressPage->getSelectableShippingAddressCountries();
+        $shippableCountries = $this->addressPage->getSelectableShippingAddressCountries();
 
-        $countryCodes = array_map(function (NodeElement $countryOption) {
-            return $countryOption->getValue();
-        }, $selectableCountries);
-
-        Assert::false(in_array($country->getCode(), $countryCodes));
+        Assert::false(in_array($countryName, $shippableCountries));
     }
 
     /**

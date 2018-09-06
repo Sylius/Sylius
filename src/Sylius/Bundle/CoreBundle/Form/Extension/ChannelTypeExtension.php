@@ -87,17 +87,12 @@ final class ChannelTypeExtension extends AbstractTypeExtension
                 'label' => 'sylius.form.channel.shippable_countries',
                 'entry_type' => CountryChoiceType::class,
                 'entry_options' => [
-                    'constraints' => [
-                        new NotBlank([
-                            'groups' => ['sylius'],
-                        ]),
-                    ],
+                    'constraints' => [new NotBlank(['groups' => ['sylius']])],
                 ],
                 'allow_add' => true,
                 'button_add_label' => 'sylius.form.channel.add_country',
                 'allow_delete' => true,
                 'by_reference' => false,
-                'delete_empty' => false,
                 'required' => false,
             ])
             ->addEventSubscriber(new AddBaseCurrencySubscriber())

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -26,17 +25,11 @@ final class ChannelContext implements Context
     private $channelRepository;
 
     /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    /**
      * @param ChannelRepositoryInterface $channelRepository
      */
-    public function __construct(ChannelRepositoryInterface $channelRepository, EntityManagerInterface $entityManager)
+    public function __construct(ChannelRepositoryInterface $channelRepository)
     {
         $this->channelRepository = $channelRepository;
-        $this->entityManager = $entityManager;
     }
 
     /**
@@ -54,8 +47,6 @@ final class ChannelContext implements Context
             1,
             sprintf('%d channels has been found with name "%s".', count($channels), $channelName)
         );
-
-        $this->entityManager->refresh($channels[0]);
 
         return $channels[0];
     }

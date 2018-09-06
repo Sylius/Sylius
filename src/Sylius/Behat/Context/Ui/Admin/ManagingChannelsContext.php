@@ -512,37 +512,36 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I add a shippable country :country
+     * @When I add a shippable country :countryName
      */
-    public function iAddAShippableCountry(CountryInterface $country)
+    public function addShippableCountry(string $countryName): void
     {
         $this->updatePage->addShippingCountry();
-        $this->updatePage->chooseShippingCountry($country->getName());
+        $this->updatePage->chooseShippingCountry($countryName);
     }
 
     /**
      * @When I add a shippable country but I don't select one
      */
-    public function iAddAnEmptyShippableCountry()
+    public function addEmptyShippableCountry(): void
     {
         $this->updatePage->addShippingCountry();
     }
 
     /**
-     * @Then the channel :channel should have a shippable country :country
-     * @Then /^(this channel) should have "([^"]+)" as shipping country$/
+     * @Then the channel :channel should have a shippable country :countryName
      */
-    public function theChannelShouldHaveAShippableCountry(ChannelInterface $channel, CountryInterface $country)
+    public function channelShouldHaveShippableCountry(ChannelInterface $channel, string $countryName): void
     {
-        $countries = $channel->getShippableCountries();
+        $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::true($countries->contains($country));
+        Assert::true($this->updatePage->hasShippableCountry($countryName));
     }
 
     /**
      * @Then I should be notified that shippable countries must be unique
      */
-    public function iShouldBeNotifiedThatShippableCountriesMustBeUnique()
+    public function shouldBeNotifiedThatShippableCountriesMustBeUnique(): void
     {
         Assert::same($this->createPage->getValidationMessage('shippableCountries'), 'Chosen countries must be unique.');
     }
@@ -550,7 +549,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then I should be notified that shippable countries cannot be blank
      */
-    public function iShouldBeNotifiedThatShippableCountriesCannotBeBlank()
+    public function shouldBeNotifiedThatShippableCountriesCannotBeBlank(): void
     {
         Assert::same($this->createPage->getValidationMessage('shippableCountries'), 'This value should not be blank.');
     }

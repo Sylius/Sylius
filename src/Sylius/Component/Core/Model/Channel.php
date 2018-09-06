@@ -319,14 +319,6 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippableCountries(): bool
-    {
-        return !$this->shippableCountries->isEmpty();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function addShippableCountry(CountryInterface $country): void
     {
         $this->shippableCountries->add($country);

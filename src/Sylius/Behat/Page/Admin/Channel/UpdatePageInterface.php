@@ -97,8 +97,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function addShippingCountry(): void;
 
-    /**
-     * @param string $country
-     */
     public function chooseShippingCountry(string $country): void;
+
+    public function hasShippableCountry(string $countryName): bool;
 }

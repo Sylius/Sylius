@@ -207,7 +207,7 @@ final class ChannelContext implements Context
     /**
      * @Given the channel :channel has a shipping country :country
      */
-    public function theChannelHasAShippingCountry(ChannelInterface $channel, CountryInterface $country)
+    public function channelHasShippingCountry(ChannelInterface $channel, CountryInterface $country): void
     {
         $channel->addShippableCountry($country);
 

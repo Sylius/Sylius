@@ -92,9 +92,9 @@ interface AddressPageInterface extends SymfonyPageInterface
     public function getShippingAddressCountry();
 
     /**
-     * @return NodeElement[]
+     * @return string[]
      */
-    public function getSelectableShippingAddressCountries();
+    public function getSelectableShippingAddressCountries(): array;
 
     public function nextStep();
 

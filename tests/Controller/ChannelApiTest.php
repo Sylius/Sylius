@@ -179,6 +179,38 @@ EOT;
     /**
      * @test
      */
+    public function it_allows_to_create_channel_with_shippable_countries(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+        $this->loadFixturesFromFile('resources/currencies.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
+
+        $data =
+            <<<EOT
+        {
+            "code": "mob",
+            "name": "Channel for mobile",
+            "taxCalculationStrategy": "order_items_based",
+            "baseCurrency": "USD",
+            "defaultLocale": "en_US",
+            "enabled": true,
+            "shippableCountries": [
+                "NL",
+                "PL"
+            ]
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/channels/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'channel/create_with_shippable_countries_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
     public function it_denies_updating_channel_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', '/api/v1/channels/1');
@@ -252,6 +284,23 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'channel/show_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_showing_channel_with_shippable_countries(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $channels = $this->loadFixturesFromFile('resources/channels.yml');
+
+        /** @var ChannelInterface $channel */
+        $channel = $channels['channel_with_shippable_countries'];
+
+        $this->client->request('GET', $this->getChannelUrl($channel), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'channel/show_with_shippable_countries_response', Response::HTTP_OK);
     }
 
     /**
@@ -333,23 +382,6 @@ EOT;
     /**
      * @test
      */
-    public function it_shows_shippable_countries(): void
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $channels = $this->loadFixturesFromFile('resources/channels.yml');
-
-        /** @var ChannelInterface $channel */
-        $channel = $channels['channel_with_shippable_countries'];
-
-        $this->client->request('GET', $this->getChannelUrl($channel), [], [], static::$authorizedHeaderWithAccept);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'channel/show_with_shipping_countries_response', Response::HTTP_OK);
-    }
-
-    /**
-     * @test
-     */
     public function it_allows_to_add_shippable_countries_of_channel(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
@@ -403,38 +435,6 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'channel/remove_shippable_country_response', Response::HTTP_OK);
-    }
-
-    /**
-     * @test
-     */
-    public function it_allows_to_create_channel_with_shippable_countries(): void
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/locales.yml');
-        $this->loadFixturesFromFile('resources/currencies.yml');
-        $this->loadFixturesFromFile('resources/countries.yml');
-
-        $data =
-            <<<EOT
-        {
-            "code": "mob",
-            "name": "Channel for mobile",
-            "taxCalculationStrategy": "order_items_based",
-            "baseCurrency": "USD",
-            "defaultLocale": "en_US",
-            "enabled": true,
-            "shippableCountries": [
-                "NL",
-                "PL"
-            ]
-        }
-EOT;
-
-        $this->client->request('POST', '/api/v1/channels/', [], [], static::$authorizedHeaderWithContentType, $data);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'channel/create_with_shippable_countries_response', Response::HTTP_CREATED);
     }
 
     /**

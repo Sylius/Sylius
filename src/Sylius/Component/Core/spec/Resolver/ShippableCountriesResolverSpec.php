@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Resolver;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -33,49 +35,46 @@ final class ShippableCountriesResolverSpec extends ObjectBehavior
         $this->beConstructedWith($countryRepository, $channelContext);
     }
 
-    function it_returns_the_channels_shipping_countries(
+    function it_returns_the_channels_shippable_countries(
         ChannelInterface $channel,
-        RepositoryInterface $countryRepository,
         CountryInterface $firstCountry,
         CountryInterface $secondCountry
     ): void {
         $firstCountry->isEnabled()->willReturn(true);
         $secondCountry->isEnabled()->willReturn(true);
 
-        $countries = [
-            $firstCountry->getWrappedObject(),
-            $secondCountry->getWrappedObject(),
-        ];
-
-        $countryRepository->findAll()->willReturn($countries);
-
         $channel->getShippableCountries()->willReturn(new ArrayCollection([
             $firstCountry->getWrappedObject(),
+            $secondCountry->getWrappedObject(),
         ]));
 
         $this($channel)->shouldReturn([
             $firstCountry->getWrappedObject(),
+            $secondCountry->getWrappedObject(),
         ]);
     }
 
-    function it_returns_all_enabled_countries_if_the_channel_has_no_shipping_countries_defined(
+    function it_returns_all_enabled_countries_if_the_channel_has_no_enabled_shipping_countries_defined(
         ChannelInterface $channel,
         RepositoryInterface $countryRepository,
         CountryInterface $firstCountry,
-        CountryInterface $secondCountry
+        CountryInterface $secondCountry,
+        CountryInterface $disabledCountry
     ): void {
-        $firstCountry->isEnabled()->willReturn(true);
-        $secondCountry->isEnabled()->willReturn(true);
+        $disabledCountry->isEnabled()->willReturn(false);
 
-        $countries = [
+        $channel->getShippableCountries()->willReturn(new ArrayCollection([
+            $disabledCountry->getWrappedObject(),
+        ]));
+
+        $countryRepository->findBy(['enabled' => true])->willReturn([
             $firstCountry->getWrappedObject(),
             $secondCountry->getWrappedObject(),
-        ];
+        ]);
 
-        $countryRepository->findBy(['enabled' => true])->willReturn($countries);
-
-        $channel->getShippableCountries()->willReturn(new ArrayCollection());
-
-        $this($channel)->shouldReturn($countries);
+        $this($channel)->shouldReturn([
+            $firstCountry->getWrappedObject(),
+            $secondCountry->getWrappedObject(),
+        ]);
     }
 }

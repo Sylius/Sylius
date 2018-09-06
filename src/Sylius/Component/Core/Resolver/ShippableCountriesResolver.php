@@ -41,9 +41,7 @@ final class ShippableCountriesResolver implements ShippableCountriesResolverInte
      */
     public function __invoke(ChannelInterface $channel): array
     {
-        $countries = $channel->getShippableCountries();
-
-        $countries->filter(function (CountryInterface $country) {
+        $countries = $channel->getShippableCountries()->filter(function (CountryInterface $country): bool {
             return $country->isEnabled();
         });
 

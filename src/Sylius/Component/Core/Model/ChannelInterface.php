@@ -123,11 +123,6 @@ interface ChannelInterface extends
     public function getShippableCountries(): Collection;
 
     /**
-     * @return bool
-     */
-    public function hasShippableCountries(): bool;
-
-    /**
      * @param CountryInterface $country
      */
     public function addShippableCountry(CountryInterface $country): void;

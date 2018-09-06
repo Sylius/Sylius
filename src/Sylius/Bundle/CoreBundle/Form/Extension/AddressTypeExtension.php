@@ -43,20 +43,16 @@ final class AddressTypeExtension extends AbstractTypeExtension
     {
         $shippingCountries = ($this->shippableCountriesResolver)($this->channelContext->getChannel());
 
-        $keys = array_map(function (CountryInterface $country) {
-            return $country->getName();
-        }, $shippingCountries);
-
-        $values = array_map(function (CountryInterface $country) {
-            return $country->getCode();
-        }, $shippingCountries);
-
-        $shippingCountries = array_combine($keys, $values);
+        $choices = [];
+        /** @var CountryInterface $shippingCountry */
+        foreach ($shippingCountries as $shippingCountry) {
+            $choices[$shippingCountry->getName()] = $shippingCountry->getCode();
+        }
 
         $builder
             ->add('countryCode', ChoiceType::class, [
                 'label' => 'sylius.form.address.country',
-                'choices' => $shippingCountries,
+                'choices' => $choices,
                 'placeholder' => 'sylius.form.address.select',
             ])
         ;

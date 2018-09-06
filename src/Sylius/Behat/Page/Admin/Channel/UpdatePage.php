@@ -123,17 +123,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('base_currency')->hasAttribute('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addShippingCountry(): void
     {
         $this->getDocument()->clickLink('Add Country');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function chooseShippingCountry(string $country): void
     {
         $selectItems = $this->getDocument()->waitFor(2, function () {
@@ -146,6 +140,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
 
         $lastSelectItem->selectOption($country);
+    }
+
+    public function hasShippableCountry(string $countryName): bool
+    {
+        return null !== $this
+            ->getDocument()
+            ->find('css', sprintf('#sylius_channel_shippableCountries option:contains("%s")', $countryName))
+        ;
     }
 
     /**

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -125,14 +126,14 @@ final class ChannelSpec extends ObjectBehavior
     function it_adds_shippable_country(CountryInterface $country): void
     {
         $this->addShippableCountry($country);
-        $this->hasShippableCountries()->shouldReturn(true);
+        $this->getShippableCountries()->shouldBeLike(new ArrayCollection([$country->getWrappedObject()]));
     }
 
     function it_removes_shippable_country(CountryInterface $country): void
     {
         $this->addShippableCountry($country);
         $this->removeShippableCountry($country);
-        $this->hasShippableCountries()->shouldReturn(false);
+        $this->getShippableCountries()->shouldBeLike(new ArrayCollection([]));
     }
 
     function it_has_no_theme_name_by_default(): void
