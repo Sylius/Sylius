@@ -48,6 +48,7 @@ final class CheckoutShippingApiTest extends CheckoutApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
 
         $cartId = $this->createCart();
         $this->addItemToCart($cartId);

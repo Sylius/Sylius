@@ -21,5 +21,11 @@
         <service id="sylius.checker.order_payment_method_selection_requirement" class="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementChecker" >
             <argument type="service" id="sylius.payment_methods_resolver"/>
         </service>
+
+        <service id="sylius.checker.shipping_method_eligibility" class="Sylius\Component\Core\Checker\ShippingMethodEligibilityChecker" decorates="sylius.shipping_eligibility_checker" public="false">
+            <argument type="service" id="sylius.checker.shipping_method_eligibility.inner" />
+            <argument type="service" id="sylius.shippable_countries_resolver.default" />
+            <argument type="service" id="sylius.provider.zone_countries" />
+        </service>
     </services>
 </container>

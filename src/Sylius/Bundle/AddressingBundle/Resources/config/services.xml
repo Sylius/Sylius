@@ -49,5 +49,11 @@
             <argument type="service" id="sylius.repository.province" />
             <tag name="validator.constraint_validator" alias="sylius_province_address_validator" />
         </service>
+
+        <service id="sylius.provider.zone_countries" class="Sylius\Component\Addressing\Provider\ZoneCountriesProvider">
+            <argument type="service" id="sylius.repository.zone" />
+            <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="sylius.repository.province" />
+        </service>
     </services>
 </container>

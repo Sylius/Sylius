@@ -21,4 +21,4 @@ Feature: Seeing shipping methods resolved basing on shipping address and shippab
         When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I see the summary of my cart
-        Then my cart shipping total should be free
+        Then my cart shipping total should be "$0.00"
