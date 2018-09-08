@@ -20,6 +20,16 @@ use Sylius\Component\Grid\Exception\UndefinedGridException;
 final class ArrayGridProvider implements GridProviderInterface
 {
     /**
+     * @var ArrayToDefinitionConverterInterface
+     */
+    private $converter;
+
+    /**
+     * @var array
+     */
+    private $gridConfigurations;
+
+    /**
      * @var Grid[]
      */
     private $grids = [];
@@ -30,13 +40,24 @@ final class ArrayGridProvider implements GridProviderInterface
      */
     public function __construct(ArrayToDefinitionConverterInterface $converter, array $gridConfigurations)
     {
-        foreach ($gridConfigurations as $code => $gridConfiguration) {
-            if (isset($gridConfiguration['extends'], $gridConfigurations[$gridConfiguration['extends']])) {
-                $gridConfiguration = $this->extend($gridConfiguration, $gridConfigurations[$gridConfiguration['extends']]);
+        $this->converter = $converter;
+        $this->gridConfigurations = $gridConfigurations;
+    }
+
+    private function convertGrids()
+    {
+        foreach ($this->gridConfigurations as $code => $gridConfiguration) {
+            if (isset($gridConfiguration['extends'], $this->gridConfigurations[$gridConfiguration['extends']])) {
+                $gridConfiguration = $this->extend($gridConfiguration, $this->gridConfigurations[$gridConfiguration['extends']]);
             }
 
-            $this->grids[$code] = $converter->convert($code, $gridConfiguration);
+            $this->grids[$code] = $this->converter->convert($code, $gridConfiguration);
         }
+    }
+
+    public function reset()
+    {
+        $this->grids = [];
     }
 
     /**
@@ -44,6 +65,10 @@ final class ArrayGridProvider implements GridProviderInterface
      */
     public function get(string $code): Grid
     {
+        if (empty($this->grids)) {
+            $this->convertGrids();
+        }
+
         if (!array_key_exists($code, $this->grids)) {
             throw new UndefinedGridException($code);
         }
