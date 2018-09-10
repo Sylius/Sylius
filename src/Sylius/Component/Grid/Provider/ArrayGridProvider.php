@@ -44,22 +44,6 @@ final class ArrayGridProvider implements GridProviderInterface
         $this->gridConfigurations = $gridConfigurations;
     }
 
-    private function convertGrids()
-    {
-        foreach ($this->gridConfigurations as $code => $gridConfiguration) {
-            if (isset($gridConfiguration['extends'], $this->gridConfigurations[$gridConfiguration['extends']])) {
-                $gridConfiguration = $this->extend($gridConfiguration, $this->gridConfigurations[$gridConfiguration['extends']]);
-            }
-
-            $this->grids[$code] = $this->converter->convert($code, $gridConfiguration);
-        }
-    }
-
-    public function reset()
-    {
-        $this->grids = [];
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -75,6 +59,22 @@ final class ArrayGridProvider implements GridProviderInterface
 
         // Need to clone grid definition in case of displaying on one page two grids using the same grid definition
         return clone $this->grids[$code];
+    }
+
+    public function reset(): void
+    {
+        $this->grids = [];
+    }
+
+    private function convertGrids(): void
+    {
+        foreach ($this->gridConfigurations as $code => $gridConfiguration) {
+            if (isset($gridConfiguration['extends'], $this->gridConfigurations[$gridConfiguration['extends']])) {
+                $gridConfiguration = $this->extend($gridConfiguration, $this->gridConfigurations[$gridConfiguration['extends']]);
+            }
+
+            $this->grids[$code] = $this->converter->convert($code, $gridConfiguration);
+        }
     }
 
     /**
