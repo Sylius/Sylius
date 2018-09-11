@@ -1,6 +1,9 @@
 # This file is a part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_shop_payum_authorize:
+    resource: "@PayumBundle/Resources/config/routing/authorize.xml"
+
 sylius_shop_payum_capture:
     resource: "@PayumBundle/Resources/config/routing/capture.xml"
 
