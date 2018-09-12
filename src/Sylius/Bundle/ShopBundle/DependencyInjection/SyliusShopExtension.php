@@ -56,7 +56,7 @@ final class SyliusShopExtension extends Extension
                 new Reference('sylius.context.cart'),
                 new Reference('sylius.router.checkout_state'),
                 new Definition(RequestMatcher::class, [$config['pattern']]),
-                new Reference('sm.factory'),
+                new Reference('SM\Factory\FactoryInterface'),
             ]
         );
         $checkoutResolverDefinition->addTag('kernel.event_subscriber');

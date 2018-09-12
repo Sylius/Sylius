@@ -39,7 +39,7 @@
         "symfony/yaml": "^3.4|^4.1.1",
         "white-october/pagerfanta-bundle": "^1.0",
         "willdurand/hateoas-bundle": "^1.2",
-        "winzou/state-machine-bundle": "^0.3"
+        "winzou/state-machine-bundle": "^0.4.1"
     },
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "^3.0",

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Updater;
 
-use SM\Factory\Factory;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -26,7 +26,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
     private $orderRepository;
 
     /**
-     * @var Factory
+     * @var FactoryInterface
      */
     private $stateMachineFactory;
 
@@ -37,12 +37,12 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
 
     /**
      * @param OrderRepositoryInterface $orderRepository
-     * @param Factory $stateMachineFactory
+     * @param FactoryInterface $stateMachineFactory
      * @param string $expirationPeriod
      */
     public function __construct(
         OrderRepositoryInterface $orderRepository,
-        Factory $stateMachineFactory,
+        FactoryInterface $stateMachineFactory,
         $expirationPeriod
     ) {
         $this->orderRepository = $orderRepository;

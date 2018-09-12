@@ -107,7 +107,7 @@ and of course flush your order after that via the manager.
 
 .. code-block:: php
 
-    $stateMachineFactory = $this->container->get('sm.factory');
+    $stateMachineFactory = $this->container->get('SM\Factory\FactoryInterface');
 
     $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
     $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
@@ -154,7 +154,7 @@ and apply a proper transition and flush the order via the manager.
 
 .. code-block:: php
 
-    $stateMachineFactory = $this->container->get('sm.factory');
+    $stateMachineFactory = $this->container->get('SM\Factory\FactoryInterface');
 
     $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)
     $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
@@ -214,7 +214,7 @@ and apply a proper transition and flush the order via the manager.
 
 .. code-block:: php
 
-    $stateMachineFactory = $this->container->get('sm.factory');
+    $stateMachineFactory = $this->container->get('SM\Factory\FactoryInterface');
 
     $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)
     $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
@@ -252,7 +252,7 @@ and apply a proper transition and flush the order via the manager.
 
 .. code-block:: php
 
-    $stateMachineFactory = $this->container->get('sm.factory');
+    $stateMachineFactory = $this->container->get('SM\Factory\FactoryInterface');
 
     $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
     $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);

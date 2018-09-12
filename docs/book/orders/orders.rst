@@ -169,7 +169,7 @@ two transitions ``request_shipping`` and ``ship``.
 
 .. code-block:: php
 
-    $stateMachineFactory = $this->container->get('sm.factory');
+    $stateMachineFactory = $this->container->get('SM\Factory\FactoryInterface');
 
     $stateMachine = $stateMachineFactory->get($order, OrderShippingTransitions::GRAPH);
     $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
@@ -221,7 +221,7 @@ two transitions ``request_payment`` and ``pay``.
 
 .. code-block:: php
 
-    $stateMachineFactory = $this->container->get('sm.factory');
+    $stateMachineFactory = $this->container->get('SM\Factory\FactoryInterface');
 
     $stateMachine = $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
     $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);

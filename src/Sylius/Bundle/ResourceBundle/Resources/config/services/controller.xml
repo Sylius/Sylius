@@ -51,7 +51,7 @@
             <argument type="service" id="fos_rest.view_handler" />
         </service>
         <service id="sylius.resource_controller.state_machine" class="Sylius\Bundle\ResourceBundle\Controller\StateMachine" public="false">
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="SM\Factory\FactoryInterface" />
         </service>
         <service id="sylius.resource_controller.resource_update_handler" class="Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandler" public="false">
             <argument type="service" id="sylius.resource_controller.state_machine" />

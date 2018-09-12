@@ -66,7 +66,7 @@ Remove the ``select_shipping`` and ``skip_shipping`` transition from the ``syliu
                         args: ["object"]
                     sylius_create_order:
                         on: ["complete"]
-                        do: ["@sm.callback.cascade_transition", "apply"]
+                        do: ["@SM\\Callback\\CascadeTransitionCallback", "apply"]
                         args: ["object", "event", "'create'", "'sylius_order'"]
                     sylius_save_checkout_completion_date:
                         on: ["complete"]

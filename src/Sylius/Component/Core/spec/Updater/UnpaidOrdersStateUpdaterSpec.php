@@ -15,7 +15,7 @@ namespace spec\Sylius\Component\Core\Updater;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use SM\Factory\Factory;
+use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface;
@@ -24,7 +24,7 @@ use Sylius\Component\Order\OrderTransitions;
 
 final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, Factory $stateMachineFactory): void
+    function let(OrderRepositoryInterface $orderRepository, FactoryInterface $stateMachineFactory): void
     {
         $this->beConstructedWith($orderRepository, $stateMachineFactory, '10 months');
     }
@@ -35,7 +35,7 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
     }
 
     function it_cancels_unpaid_orders(
-        Factory $stateMachineFactory,
+        FactoryInterface $stateMachineFactory,
         OrderInterface $firstOrder,
         OrderInterface $secondOrder,
         OrderRepositoryInterface $orderRepository,

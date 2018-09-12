@@ -45,7 +45,7 @@ Having states configured we can have a transition between the ``cart`` state to 
        sylius_order_checkout:
            transitions:
                address:
-                   from: [cart, addressed, shipping_selected, payment_selected]  # here you specify which state is the initial 
+                   from: [cart, addressed, shipping_selected, payment_selected]  # here you specify which state is the initial
                    to: addressed                                                 # there you specify which state is final for that transition
 
 Callbacks
@@ -121,7 +121,7 @@ would become ``shipping_selected``.
                        args: ["object"]
                    sylius_create_order:
                        on: ["complete"]
-                       do: ["@sm.callback.cascade_transition", "apply"]
+                       do: ["@SM\\Callback\\CascadeTransitionCallback", "apply"]
                        args: ["object", "event", "'create'", "'sylius_order'"]
                    sylius_hold_inventory:
                        on: ["complete"]
