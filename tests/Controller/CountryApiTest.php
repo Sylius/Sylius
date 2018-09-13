@@ -181,7 +181,7 @@ EOT;
         $countries = $this->loadFixturesFromFile('resources/countries.yml');
         $country = $countries['country_NL'];
 
-        $this->client->request('DELETE', $this->getCountryUrl($country), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getCountryUrl($country), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);

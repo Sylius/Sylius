@@ -32,21 +32,22 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "doctrine/orm": "^2.5",
-        "sylius/mailer-bundle": "^1.1",
-        "sylius/resource-bundle": "^1.1",
-        "sylius/user": "^1.1",
-        "symfony/framework-bundle": "^3.4",
+        "sylius/mailer-bundle": "^1.2",
+        "sylius/resource-bundle": "^1.2",
+        "sylius/user": "^1.2",
+        "symfony/framework-bundle": "^3.4|^4.1.1",
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
-        "hwi/oauth-bundle": "^0.5",
+        "hwi/oauth-bundle": "^0.6",
+        "php-http/guzzle6-adapter": "^1.1",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
-        "symfony/dependency-injection": "^3.4",
-        "symfony/security-bundle": "^3.4",
+        "symfony/dependency-injection": "^3.4|^4.1.1",
+        "symfony/security-bundle": "^3.4|^4.1.1",
         "symfony/swiftmailer-bundle": "^3.1"
     },
     "suggest": {
@@ -85,7 +86,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

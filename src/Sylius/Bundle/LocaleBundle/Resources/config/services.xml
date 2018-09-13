@@ -19,6 +19,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.form.type.locale" class="Sylius\Bundle\LocaleBundle\Form\Type\LocaleType">
             <argument>%sylius.model.locale.class%</argument>
             <argument>%sylius.form.type.locale.validation_groups%</argument>

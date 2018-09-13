@@ -49,6 +49,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.behat.page.admin.crud.index" class="%sylius.behat.page.admin.crud.index.class%" parent="sylius.behat.symfony_page" abstract="true" public="false">
             <argument type="service" id="sylius.behat.table_accessor" />
         </service>

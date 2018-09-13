@@ -24,20 +24,20 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "payum/payum": "^1.4",
         "payum/payum-bundle": "^2.2",
         "php-http/guzzle6-adapter": "^1.1",
-        "sylius/core": "^1.1",
-        "sylius/currency": "^1.1",
-        "sylius/order-bundle": "^1.1",
-        "sylius/payment-bundle": "^1.1",
+        "sylius/core": "^1.2",
+        "sylius/currency": "^1.2",
+        "sylius/order-bundle": "^1.2",
+        "sylius/payment-bundle": "^1.2",
         "sylius/resource-bundle": "^1.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^4.0",
-        "symfony/dependency-injection": "^3.4"
+        "symfony/dependency-injection": "^3.4|^4.1.1"
     },
     "config": {
         "bin-dir": "bin"
@@ -58,7 +58,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

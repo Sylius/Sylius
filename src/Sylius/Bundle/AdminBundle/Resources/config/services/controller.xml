@@ -17,6 +17,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.controller.admin.dashboard" class="Sylius\Bundle\AdminBundle\Controller\DashboardController" public="true">
             <argument type="service" id="sylius.dashboard.statistics_provider" />
             <argument type="service" id="sylius.repository.channel" />

@@ -32,20 +32,20 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "doctrine/orm": "^2.5",
-        "sylius/customer": "^1.1",
-        "sylius/resource-bundle": "^1.1",
-        "symfony/framework-bundle": "^3.4",
+        "sylius/customer": "^1.2",
+        "sylius/resource-bundle": "^1.2",
+        "symfony/framework-bundle": "^3.4|^4.1.1",
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
-        "symfony/dependency-injection": "^3.4",
-        "symfony/form": "^3.4",
-        "symfony/browser-kit": "^3.4",
+        "symfony/dependency-injection": "^3.4|^4.1.1",
+        "symfony/form": "^3.4|^4.1.1",
+        "symfony/browser-kit": "^3.4|^4.1.1",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "config": {
@@ -56,9 +56,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\CustomerBundle\\spec\\": "spec/",
-            "AppBundle\\": "test/src/AppBundle/"
-        }
+            "Sylius\\Bundle\\CustomerBundle\\spec\\": "spec/"
+        },
+        "classmap": ["test/app/AppKernel.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -70,7 +70,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

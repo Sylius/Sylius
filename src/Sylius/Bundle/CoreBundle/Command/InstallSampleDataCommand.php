@@ -59,9 +59,10 @@ EOT
         }
 
         try {
-            $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/../';
-            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_MEDIA_DIRECTORY, $output);
-            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_MEDIA_IMAGE_DIRECTORY, $output);
+            $publicDir = $this->getContainer()->getParameter('sylius_core.public_dir');
+
+            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/media/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/media/image/', $output);
         } catch (\RuntimeException $exception) {
             $outputStyle->writeln($exception->getMessage());
 

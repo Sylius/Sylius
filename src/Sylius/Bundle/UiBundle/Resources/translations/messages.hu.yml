@@ -62,6 +62,7 @@ sylius:
         assortment: 'Választék'
         attributes: 'Tulajdonságok'
         author: 'Szerző'
+        authorized: 'Engedélyezve '
         availability: 'Elérhető'
         available_for_channels: 'Minden csatornán elérhető'
         available_on: 'A rendelkezésre álló'

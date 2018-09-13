@@ -17,6 +17,8 @@
     </imports>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.context.currency.composite" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency" decoration-priority="256" public="false" />
 
         <service id="sylius.currency_converter" class="Sylius\Component\Currency\Converter\CurrencyConverter">

@@ -75,6 +75,7 @@ final class SyliusReviewExtension extends AbstractResourceExtension
             ]);
 
             $reviewChangeListener
+                ->setPublic(true)
                 ->addTag('doctrine.event_listener', [
                     'event' => 'postPersist',
                     'lazy' => true,
@@ -90,10 +91,10 @@ final class SyliusReviewExtension extends AbstractResourceExtension
             ;
 
             $container->addDefinitions([
-                sprintf('sylius.%s_review.average_rating_updater', $reviewSubject) => new Definition(AverageRatingUpdater::class, [
+                sprintf('sylius.%s_review.average_rating_updater', $reviewSubject) => (new Definition(AverageRatingUpdater::class, [
                     new Reference('sylius.average_rating_calculator'),
                     new Reference(sprintf('sylius.manager.%s_review', $reviewSubject)),
-                ]),
+                ]))->setPublic(true),
                 sprintf('sylius.listener.%s_review_change', $reviewSubject) => $reviewChangeListener,
             ]);
         }

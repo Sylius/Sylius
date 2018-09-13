@@ -9,91 +9,12 @@
  * file that was distributed with this source code.
  */
 
+/**
+ * @internal
+ */
+
 declare(strict_types=1);
 
-require_once __DIR__.'/AppKernel.php';
+@trigger_error('The "TestAppKernel" class located at "app/TestAppKernel.php" is deprecated since Sylius 1.3. Use "Kernel" class located at "src/Kernel.php" instead.', E_USER_DEPRECATED);
 
-use ProxyManager\Proxy\VirtualProxyInterface;
-use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
-class TestAppKernel extends AppKernel
-{
-    /**
-     * {@inheritdoc}
-     */
-    public function shutdown(): void
-    {
-        if (false === $this->booted) {
-            return;
-        }
-
-        if (!in_array($this->getEnvironment(), ['test', 'test_cached'], true)) {
-            parent::shutdown();
-
-            return;
-        }
-
-        $container = $this->getContainer();
-        parent::shutdown();
-        $this->cleanupContainer($container);
-    }
-
-    /**
-     * Remove all container references from all loaded services
-     *
-     * @param ContainerInterface $container
-     */
-    protected function cleanupContainer(ContainerInterface $container): void
-    {
-        $containerReflection = new \ReflectionObject($container);
-        $containerServicesPropertyReflection = $containerReflection->getProperty('services');
-        $containerServicesPropertyReflection->setAccessible(true);
-
-        $services = $containerServicesPropertyReflection->getValue($container) ?: [];
-        foreach ($services as $serviceId => $service) {
-            if (null === $service) {
-                continue;
-            }
-
-            if (in_array($serviceId, $this->getServicesToIgnoreDuringContainerCleanup(), true)) {
-                continue;
-            }
-
-            $serviceReflection = new \ReflectionObject($service);
-
-            if ($serviceReflection->implementsInterface(VirtualProxyInterface::class)) {
-                continue;
-            }
-
-            $servicePropertiesReflections = $serviceReflection->getProperties();
-            $servicePropertiesDefaultValues = $serviceReflection->getDefaultProperties();
-            foreach ($servicePropertiesReflections as $servicePropertyReflection) {
-                $defaultPropertyValue = null;
-                if (isset($servicePropertiesDefaultValues[$servicePropertyReflection->getName()])) {
-                    $defaultPropertyValue = $servicePropertiesDefaultValues[$servicePropertyReflection->getName()];
-                }
-
-                $servicePropertyReflection->setAccessible(true);
-                $servicePropertyReflection->setValue($service, $defaultPropertyValue);
-            }
-        }
-
-        $containerServicesPropertyReflection->setValue($container, null);
-    }
-
-    protected function getContainerBaseClass(): string
-    {
-        return MockerContainer::class;
-    }
-
-    protected function getServicesToIgnoreDuringContainerCleanup(): array
-    {
-        return [
-            'kernel',
-            'http_kernel',
-            'liip_imagine.mime_type_guesser',
-            'liip_imagine.extension_guesser',
-        ];
-    }
-}
+class_alias(Kernel::class, TestAppKernel::class);

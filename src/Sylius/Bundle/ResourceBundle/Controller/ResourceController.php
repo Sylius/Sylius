@@ -295,7 +295,10 @@ class ResourceController extends Controller
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::CREATE, $configuration, $newResource);
+        $initializeEvent = $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::CREATE, $configuration, $newResource);
+        if ($initializeEvent->hasResponse()) {
+            return $initializeEvent->getResponse();
+        }
 
         $view = View::create()
             ->setData([
@@ -380,7 +383,10 @@ class ResourceController extends Controller
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource);
+        $initializeEvent = $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource);
+        if ($initializeEvent->hasResponse()) {
+            return $initializeEvent->getResponse();
+        }
 
         $view = View::create()
             ->setData([
@@ -408,7 +414,7 @@ class ResourceController extends Controller
         $this->isGrantedOr403($configuration, ResourceActions::DELETE);
         $resource = $this->findOr404($configuration);
 
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid($resource->getId(), $request->request->get('_csrf_token'))) {
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $resource->getId(), $request->request->get('_csrf_token'))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 

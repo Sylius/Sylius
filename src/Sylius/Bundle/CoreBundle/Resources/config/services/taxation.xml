@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.taxation.order_shipment_taxes_applicator" class="Sylius\Component\Core\Taxation\Applicator\OrderShipmentTaxesApplicator">
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />

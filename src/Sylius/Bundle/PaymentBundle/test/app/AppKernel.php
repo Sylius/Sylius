@@ -58,7 +58,7 @@ class AppKernel extends Kernel
      */
     protected function getContainerBaseClass(): string
     {
-        if ('test' === $this->environment) {
+        if (0 === strpos($this->environment, 'test')) {
             return MockerContainer::class;
         }
 

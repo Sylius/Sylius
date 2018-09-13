@@ -19,6 +19,8 @@ use Doctrine\Common\Collections\Expr\Expression;
 use Doctrine\ODM\PHPCR\Query\Builder\AbstractNode;
 use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
 
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', ExpressionVisitor::class), E_USER_DEPRECATED);
+
 /**
  * Walks a Doctrine\Commons\Expr object graph and builds up a PHPCR-ODM
  * query using the (fluent) PHPCR-ODM query builder.

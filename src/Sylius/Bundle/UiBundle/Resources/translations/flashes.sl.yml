@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    contact:
+        request_success: 'Sporočilo je bilo uspešno oddano.'
+    customer:
+        add_address: 'Naslov je bil uspešno dodan.'
+        set_address_as_default: 'Naslov je bil nastavljen kot privzet.'
+    order:
+        promotion_integrity: 'Promocije %promotionName% ne morete več uveljavljati.'

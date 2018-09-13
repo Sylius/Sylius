@@ -173,7 +173,7 @@ EOT;
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
         $currency = $currencies['currency_1'];
 
-        $this->client->request('DELETE', $this->getCurrencyUrl($currency), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getCurrencyUrl($currency), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);

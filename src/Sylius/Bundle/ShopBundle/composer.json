@@ -2,43 +2,51 @@
     "name": "sylius/shop-bundle",
     "type": "symfony-bundle",
     "description": "Sylius eCommerce storefront.",
-    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius"],
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "store",
+        "webshop",
+        "sylius"
+    ],
     "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
-            "name":     "Paweł Jędrzejewski",
+            "name": "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Sylius project",
+            "name": "Sylius project",
             "homepage": "http://sylius.com"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "sonata-project/intl-bundle": "^2.2",
-        "sylius/core-bundle": "^1.1",
-        "sylius/ui-bundle": "^1.1",
-        "symfony/framework-bundle": "^3.4"
+        "sylius/core-bundle": "^1.2",
+        "sylius/ui-bundle": "^1.2",
+        "symfony/framework-bundle": "^3.4|^4.1.1"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
-        "phpunit/phpunit": "^6.5",
         "phpspec/phpspec": "^4.0",
-        "symfony/dependency-injection": "^3.4"
+        "phpunit/phpunit": "^6.5",
+        "symfony/dependency-injection": "^3.4|^4.1.1"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\ShopBundle\\": "" }
+        "psr-4": {
+            "Sylius\\Bundle\\ShopBundle\\": ""
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -50,7 +58,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

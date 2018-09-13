@@ -13,6 +13,8 @@
 
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.grid.resource_view_factory" class="Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactory">
             <argument type="service" id="sylius.grid.data_provider" />
             <argument type="service" id="sylius.resource_controller.parameters_parser" />

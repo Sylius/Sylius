@@ -5,6 +5,7 @@ sylius:
     form:
         login:
             username: 'اسم المستخدم'
+            password: 'كلمة السر'
             remember_me: 'تذكرني'
         option:
             name: 'الاسم'
@@ -69,6 +70,7 @@ sylius:
         assortment: 'تشكيلة'
         attributes: 'سمات'
         author: 'المؤلف'
+        authorized: 'تم الإذن'
         availability: 'التوفر'
         available_for_channels: 'تمكين للقنوات'
         available_on: 'متاح'
@@ -584,6 +586,7 @@ sylius:
         parent: 'الجذر'
         partially_paid: 'دفعت جزئيا'
         partially_shipped: 'دفعت جزئيا'
+        password: 'كلمة السر'
         payment: 'الدفع'
         payment_details: 'تفاصيل الدفع'
         payment_method: 'طريقة الدفع'
@@ -681,6 +684,7 @@ sylius:
         returned: 'معاد'
         returns_policy: 'سياسة الإسترجاع'
         revert: 'إرجاع'
+        review_and_confirm_your_order: 'مراجعة والتأكد من النظام الخاص بك'
         review_details: 'تفاصيل التقرير'
         reviews: 'تعليقات'
         roles: 'الأدوار'

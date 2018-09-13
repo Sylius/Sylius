@@ -59,6 +59,16 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
         return null !== $this->getDocument()->find('css', '#sylius-show-order');
     }
 
+    public function hasRegistrationButton(): bool
+    {
+        return $this->getDocument()->hasLink('Create an account');
+    }
+
+    public function createAccount(): void
+    {
+        $this->getDocument()->clickLink('Create an account');
+    }
+
     /**
      * @return string
      */

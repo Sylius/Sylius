@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\GridBundle\DependencyInjection;
 
+use Sylius\Bundle\GridBundle\SyliusGridBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -40,6 +41,13 @@ final class SyliusGridExtension extends Extension
         $container->setAlias('sylius.grid.data_extractor', 'sylius.grid.data_extractor.property_access');
 
         foreach ($config['drivers'] as $enabledDriver) {
+            if ($enabledDriver === SyliusGridBundle::DRIVER_DOCTRINE_PHPCR_ODM) {
+                @trigger_error(sprintf(
+                    'The "%s" driver is deprecated in Sylius 1.3. Doctrine PHPCR will no longer be supported in Sylius 2.0.',
+                    SyliusGridBundle::DRIVER_DOCTRINE_PHPCR_ODM
+                ), E_USER_DEPRECATED);
+            }
+
             $loader->load(sprintf('services/integrations/%s.xml', $enabledDriver));
         }
     }

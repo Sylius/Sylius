@@ -1,7 +1,7 @@
 SyliusThemeBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusThemeBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusThemeBundle)
 ==================
 
-Theme management for [**Symfony2**](http://symfony.com).
+Theme management for [**Symfony**](http://symfony.com).
 
 Sylius
 ------

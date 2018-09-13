@@ -13,6 +13,15 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
+        <service id="Sylius\Bundle\ThemeBundle\Command\AssetsInstallCommand">
+            <tag name="console.command" />
+        </service>
+        <service id="Sylius\Bundle\ThemeBundle\Command\ListCommand">
+            <tag name="console.command" />
+        </service>
+
         <service id="sylius.theme.context.settable" class="Sylius\Bundle\ThemeBundle\Context\SettableThemeContext" public="false">
             <argument type="service" id="sylius.theme.hierarchy_provider" />
         </service>

@@ -20,46 +20,46 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
-        "fzaninotto/faker": "^1.0",
+        "fzaninotto/faker": "^1.6",
         "jms/serializer-bundle": "^2.0",
-        "knplabs/knp-gaufrette-bundle": "^0.3",
+        "knplabs/knp-gaufrette-bundle": "^0.5",
         "sonata-project/intl-bundle": "^2.2",
         "swiftmailer/swiftmailer": "^6.0",
-        "sylius/addressing-bundle": "^1.1",
-        "sylius/attribute-bundle": "^1.1",
-        "sylius/core": "^1.1",
-        "sylius/currency-bundle": "^1.1",
-        "sylius/customer-bundle": "^1.1",
-        "sylius/fixtures-bundle": "^1.1",
-        "sylius/inventory-bundle": "^1.1",
-        "sylius/locale-bundle": "^1.1",
-        "sylius/money-bundle": "^1.1",
-        "sylius/order-bundle": "^1.1",
-        "sylius/payment-bundle": "^1.1",
-        "sylius/payum-bundle": "^1.1",
-        "sylius/product-bundle": "^1.1",
-        "sylius/promotion-bundle": "^1.1",
-        "sylius/resource-bundle": "^1.1",
-        "sylius/review-bundle": "^1.1",
-        "sylius/shipping-bundle": "^1.1",
-        "sylius/taxation-bundle": "^1.1",
-        "sylius/taxonomy-bundle": "^1.1",
-        "sylius/theme-bundle": "^1.1",
-        "sylius/user-bundle": "^1.1",
-        "sylius-labs/association-hydrator": "^1.0",
-        "symfony/framework-bundle": "^3.4",
+        "sylius/addressing-bundle": "^1.2",
+        "sylius/attribute-bundle": "^1.2",
+        "sylius/core": "^1.2",
+        "sylius/currency-bundle": "^1.2",
+        "sylius/customer-bundle": "^1.2",
+        "sylius/fixtures-bundle": "^1.2",
+        "sylius/inventory-bundle": "^1.2",
+        "sylius/locale-bundle": "^1.2",
+        "sylius/money-bundle": "^1.2",
+        "sylius/order-bundle": "^1.2",
+        "sylius/payment-bundle": "^1.2",
+        "sylius/payum-bundle": "^1.2",
+        "sylius/product-bundle": "^1.2",
+        "sylius/promotion-bundle": "^1.2",
+        "sylius/resource-bundle": "^1.2",
+        "sylius/review-bundle": "^1.2",
+        "sylius/shipping-bundle": "^1.2",
+        "sylius/taxation-bundle": "^1.2",
+        "sylius/taxonomy-bundle": "^1.2",
+        "sylius/theme-bundle": "^1.2",
+        "sylius/user-bundle": "^1.2",
+        "sylius-labs/association-hydrator": "^1.1",
+        "symfony/framework-bundle": "^3.4|^4.1.1",
         "winzou/state-machine-bundle": "^0.3",
-        "liip/imagine-bundle": "^1.9.1"
+        "liip/imagine-bundle": "^2.0"
     },
     "require-dev": {
-        "hwi/oauth-bundle": "^0.5",
+        "hwi/oauth-bundle": "^0.6",
         "matthiasnoback/symfony-config-test": "^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
-        "symfony/dependency-injection": "^3.4"
+        "symfony/dependency-injection": "^3.4|^4.1.1"
     },
     "conflict": {
         "twig/twig": "^1.0"
@@ -83,7 +83,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

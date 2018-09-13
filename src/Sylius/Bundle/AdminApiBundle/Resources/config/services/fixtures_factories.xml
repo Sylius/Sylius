@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.fixture.example_factory.api_client" class="Sylius\Bundle\AdminApiBundle\Fixture\Factory\ApiClientExampleFactory">
             <argument type="service" id="fos_oauth_server.client_manager.default" />
         </service>

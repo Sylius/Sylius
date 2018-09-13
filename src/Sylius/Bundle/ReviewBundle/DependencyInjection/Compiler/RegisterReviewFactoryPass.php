@@ -27,10 +27,11 @@ final class RegisterReviewFactoryPass implements CompilerPassInterface
     {
         foreach ($container->getParameter('sylius.review.subjects') as $subject => $configuration) {
             $factory = $container->findDefinition('sylius.factory.' . $subject . '_review');
-            $reviewFactoryDefinition = new Definition(ReviewFactory::class);
 
-            $reviewFactory = $container->setDefinition(sprintf('sylius.factory.' . $subject . '_review'), $reviewFactoryDefinition);
-            $reviewFactory->addArgument($factory);
+            $reviewFactoryDefinition = new Definition(ReviewFactory::class, [$factory]);
+            $reviewFactoryDefinition->setPublic(true);
+
+            $container->setDefinition(sprintf('sylius.factory.' . $subject . '_review'), $reviewFactoryDefinition);
         }
     }
 }

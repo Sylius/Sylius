@@ -51,7 +51,14 @@ final class BundleResourceLocator implements ResourceLocatorInterface
         $bundleName = $this->getBundleNameFromResourcePath($resourcePath);
         $resourceName = $this->getResourceNameFromResourcePath($resourcePath);
 
+        // Symfony 4.0+ always returns a single bundle
         $bundles = $this->kernel->getBundle($bundleName, false);
+
+        // So we need to hack it to support both Symfony 3.4 and Symfony 4.0+
+        if (!is_array($bundles)) {
+            $bundles = [$bundles];
+        }
+
         foreach ($bundles as $bundle) {
             $path = sprintf('%s/%s/%s', $theme->getPath(), $bundle->getName(), $resourceName);
 

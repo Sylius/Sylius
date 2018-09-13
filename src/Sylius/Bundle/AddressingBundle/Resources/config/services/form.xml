@@ -31,6 +31,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.form.type.address" class="Sylius\Bundle\AddressingBundle\Form\Type\AddressType">
             <argument>%sylius.model.address.class%</argument>
             <argument>%sylius.form.type.address.validation_groups%</argument>

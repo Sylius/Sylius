@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand;
 use Sylius\Bundle\CoreBundle\Command\SetupCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
@@ -38,11 +37,6 @@ final class InstallerContext implements Context
      * @var CommandTester
      */
     private $tester;
-
-    /**
-     * @var QuestionHelper
-     */
-    private $questionHelper;
 
     /**
      * @var SetupCommand
@@ -71,7 +65,7 @@ final class InstallerContext implements Context
     /**
      * @When I run Sylius CLI installer
      */
-    public function iRunSyliusCommandLineInstaller()
+    public function iRunSyliusCommandLineInstaller(): void
     {
         $this->application = new Application($this->kernel);
         $this->application->add(new SetupCommand());
@@ -85,7 +79,7 @@ final class InstallerContext implements Context
     /**
      * @Given I run Sylius Install Load Sample Data command
      */
-    public function iRunSyliusInstallSampleDataCommand()
+    public function iRunSyliusInstallSampleDataCommand(): void
     {
         $this->application = new Application($this->kernel);
         $this->application->add(new InstallSampleDataCommand());
@@ -96,7 +90,7 @@ final class InstallerContext implements Context
     /**
      * @Given I confirm loading sample data
      */
-    public function iConfirmLoadingData()
+    public function iConfirmLoadingData(): void
     {
         $this->iExecuteCommandAndConfirm('sylius:install:sample-data');
     }
@@ -104,7 +98,7 @@ final class InstallerContext implements Context
     /**
      * @Then the command should finish successfully
      */
-    public function commandSuccess()
+    public function commandSuccess(): void
     {
         Assert::same($this->tester->getStatusCode(), 0);
     }
@@ -112,7 +106,7 @@ final class InstallerContext implements Context
     /**
      * @Then I should see output :text
      */
-    public function iShouldSeeOutput($text)
+    public function iShouldSeeOutput(string $text): void
     {
         Assert::contains($this->tester->getDisplay(), $text);
     }
@@ -120,7 +114,7 @@ final class InstallerContext implements Context
     /**
      * @Given I do not provide an email
      */
-    public function iDoNotProvideEmail()
+    public function iDoNotProvideEmail(): void
     {
         $this->inputChoices['e-mail'] = '';
     }
@@ -128,7 +122,7 @@ final class InstallerContext implements Context
     /**
      * @Given I do not provide a correct email
      */
-    public function iDoNotProvideCorrectEmail()
+    public function iDoNotProvideCorrectEmail(): void
     {
         $this->inputChoices['e-mail'] = 'janusz';
     }
@@ -136,7 +130,7 @@ final class InstallerContext implements Context
     /**
      * @Given I provide full administrator data
      */
-    public function iProvideFullAdministratorData()
+    public function iProvideFullAdministratorData(): void
     {
         $this->inputChoices['e-mail'] = 'test@admin.com';
         $this->inputChoices['username'] = 'test';
@@ -145,29 +139,12 @@ final class InstallerContext implements Context
     }
 
     /**
-     * @param string $input
-     *
-     * @return resource
-     */
-    private function getInputStream($input)
-    {
-        $stream = fopen('php://memory', 'rb+', false);
-        fwrite($stream, $input);
-        rewind($stream);
-
-        return $stream;
-    }
-
-    /**
      * @param string $name
      */
-    private function iExecuteCommandWithInputChoices($name)
+    private function iExecuteCommandWithInputChoices(string $name): void
     {
-        $this->questionHelper = $this->command->getHelper('question');
-        $inputString = implode(PHP_EOL, $this->inputChoices);
-        $this->questionHelper->setInputStream($this->getInputStream($inputString . PHP_EOL));
-
         try {
+            $this->tester->setInputs($this->inputChoices);
             $this->tester->execute(['command' => $name]);
         } catch (\Exception $e) {
         }
@@ -176,13 +153,10 @@ final class InstallerContext implements Context
     /**
      * @param string $name
      */
-    private function iExecuteCommandAndConfirm($name)
+    private function iExecuteCommandAndConfirm(string $name): void
     {
-        $this->questionHelper = $this->command->getHelper('question');
-        $inputString = 'y' . PHP_EOL;
-        $this->questionHelper->setInputStream($this->getInputStream($inputString));
-
         try {
+            $this->tester->setInputs(['y']);
             $this->tester->execute(['command' => $name]);
         } catch (\Exception $e) {
         }

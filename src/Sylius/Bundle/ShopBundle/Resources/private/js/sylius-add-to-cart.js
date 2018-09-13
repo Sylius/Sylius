@@ -7,41 +7,41 @@
  * file that was distributed with this source code.
  */
 
-(function ( $ ) {
-    'use strict';
+import 'semantic-ui-css/components/api';
+import $ from 'jquery';
 
-    $.fn.extend({
-        addToCart: function () {
-            var element = $(this);
-            var href = $(element).attr('action');
-            var redirectUrl = $(element).data('redirect');
-            var validationElement = $('#sylius-cart-validation-error');
+$.fn.extend({
+  addToCart() {
+    const element = this;
+    const url = $(element).attr('action');
+    const redirectUrl = $(element).data('redirect');
+    const validationElement = $('#sylius-cart-validation-error');
 
-            $(element).api({
-                method: 'POST',
-                on: 'submit',
-                cache: false,
-                url: href,
-                beforeSend: function (settings) {
-                    settings.data = $(this).serialize();
+    element.api({
+      method: 'POST',
+      on: 'submit',
+      cache: false,
+      url,
+      beforeSend(settings) {
+        /* eslint-disable-next-line no-param-reassign */
+        settings.data = element.serialize();
 
-                    return settings;
-                },
-                onSuccess: function (response) {
-                    validationElement.addClass('hidden');
-                    window.location.href = redirectUrl;
-                },
-                onFailure: function (response) {
-                    validationElement.removeClass('hidden');
-                    var validationMessage = '';
+        return settings;
+      },
+      onSuccess() {
+        validationElement.addClass('hidden');
+        window.location.href = redirectUrl;
+      },
+      onFailure(response) {
+        validationElement.removeClass('hidden');
+        let validationMessage = '';
 
-                    $.each(response.errors.errors, function (key, message) {
-                        validationMessage += message;
-                    });
-                    validationElement.html(validationMessage);
-                    $(element).removeClass('loading');
-                },
-            });
-        }
+        Object.entries(response.errors.errors).forEach(([, message]) => {
+          validationMessage += message;
+        });
+        validationElement.html(validationMessage);
+        $(element).removeClass('loading');
+      },
     });
-})( jQuery );
+  },
+});

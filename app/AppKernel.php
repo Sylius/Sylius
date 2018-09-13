@@ -9,30 +9,12 @@
  * file that was distributed with this source code.
  */
 
+/**
+ * @internal
+ */
+
 declare(strict_types=1);
 
-use Sylius\Bundle\CoreBundle\Application\Kernel;
+@trigger_error('The "AppKernel" class located at "app/AppKernel.php" is deprecated since Sylius 1.3. Use "Kernel" class located at "src/Kernel.php" instead.', E_USER_DEPRECATED);
 
-class AppKernel extends Kernel
-{
-    /**
-     * {@inheritdoc}
-     */
-    public function registerBundles(): array
-    {
-        $bundles = [
-            new \Sylius\Bundle\AdminBundle\SyliusAdminBundle(),
-            new \Sylius\Bundle\ShopBundle\SyliusShopBundle(),
-
-            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(), // Required by SyliusAdminApiBundle.
-            new \Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle(),
-        ];
-
-        if (in_array($this->getEnvironment(), ['dev', 'test', 'test_cached'], true)) {
-            $bundles[] = new \Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle();
-            $bundles[] = new \Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle();
-        }
-
-        return array_merge(parent::registerBundles(), $bundles);
-    }
-}
+class_alias(Kernel::class, AppKernel::class);

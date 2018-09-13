@@ -7,31 +7,30 @@
  * file that was distributed with this source code.
  */
 
-(function ( $ ) {
-    'use strict';
+import 'semantic-ui-css/components/api';
+import $ from 'jquery';
 
-    $.fn.extend({
-        removeFromCart: function () {
-            $.each($(this), function (index, element) {
-                var redirectUrl = $(element).data('redirect');
-                var csrfToken = $(element).data('csrf-token');
+$.fn.extend({
+  removeFromCart() {
+    this.each((index, element) => {
+      const redirectUrl = $(element).data('redirect');
+      const csrfToken = $(element).data('csrf-token');
 
-                $(element).api({
-                    method: 'DELETE',
-                    on: 'click',
-                    beforeSend: function (settings) {
-                        settings.data = {
-                            _csrf_token: csrfToken
-                        };
+      $(element).api({
+        method: 'DELETE',
+        on: 'click',
+        beforeSend(settings) {
+          /* eslint-disable-next-line no-param-reassign */
+          settings.data = {
+            _csrf_token: csrfToken,
+          };
 
-                        return settings;
-                    },
-                    onSuccess: function (response) {
-                        window.location.replace(redirectUrl);
-                    }
-                });
-            });
-        }
+          return settings;
+        },
+        onSuccess() {
+          window.location.replace(redirectUrl);
+        },
+      });
     });
-
-})( jQuery );
+  },
+});

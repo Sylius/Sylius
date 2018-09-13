@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.console.command.resource_debug" class="Sylius\Bundle\ResourceBundle\Command\DebugResourceCommand">
             <argument type="service" id="sylius.resource_registry" />
             <tag name="console.command" />

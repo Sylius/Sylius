@@ -185,7 +185,11 @@ final class ResourceLoader implements LoaderInterface
             $defaults['_sylius']['filterable'] = $configuration['filterable'];
         }
         if (isset($configuration['templates']) && in_array($actionName, ['show', 'index', 'create', 'update'], true)) {
-            $defaults['_sylius']['template'] = sprintf('%s:%s.html.twig', $configuration['templates'], $actionName);
+            $defaults['_sylius']['template'] = sprintf(
+                false === strpos($configuration['templates'], ':') ? '%s/%s.html.twig' : '%s:%s.html.twig',
+                $configuration['templates'],
+                $actionName
+            );
         }
         if (isset($configuration['redirect']) && in_array($actionName, ['create', 'update'], true)) {
             $defaults['_sylius']['redirect'] = $this->getRouteName($metadata, $configuration, $configuration['redirect']);
