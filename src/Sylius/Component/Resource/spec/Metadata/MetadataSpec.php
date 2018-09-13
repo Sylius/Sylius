@@ -24,7 +24,7 @@ final class MetadataSpec extends ObjectBehavior
             'app.product',
             [
                 'driver' => 'doctrine/orm',
-                'templates' => 'AppBundle:Resource',
+                'templates' => '@App/Resource',
                 'classes' => [
                     'model' => 'AppBundle\Model\Resource',
                     'form' => [
@@ -81,7 +81,7 @@ final class MetadataSpec extends ObjectBehavior
 
     function it_has_templates_namespace(): void
     {
-        $this->getTemplatesNamespace()->shouldReturn('AppBundle:Resource');
+        $this->getTemplatesNamespace()->shouldReturn('@App/Resource');
     }
 
     function it_has_access_to_specific_config_parameter(): void

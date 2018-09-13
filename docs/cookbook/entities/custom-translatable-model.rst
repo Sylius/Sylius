@@ -483,7 +483,7 @@ should be also included in the ``app/config/routing.yml``.
                 all:
                     subheader: app.ui.supplier
                     templates:
-                        form: AppBundle:Supplier:_form.html.twig
+                        form: '@App/Supplier/_form.html.twig'
                 index:
                     icon: 'file image outline'
         type: sylius.resource

@@ -46,11 +46,10 @@ Routing Generator Configuration Reference
             criteria:
                 code: $code
             section: admin
-            templates: :Book
+            templates: Admin/Book
             form: AppBundle/Form/Type/SimpleBookType
             redirect: create
             except: ['show']
             only: ['create', 'index']
             serialization_version: 1
         type: sylius.resource
-

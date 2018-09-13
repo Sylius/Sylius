@@ -64,11 +64,11 @@ Addressing
 
 This is a step where the customer provides both **shipping and billing addresses**.
 
-+--------------------------+----------------------------------------------------+
-| Transition after step    | Template                                           |
-+--------------------------+----------------------------------------------------+
-| ``cart``-> ``addressed`` | ``SyliusShopBundle:Checkout:addressing.html.twig`` |
-+--------------------------+----------------------------------------------------+
++--------------------------+-----------------------------------------------+
+| Transition after step    | Template                                      |
++--------------------------+-----------------------------------------------+
+| ``cart``-> ``addressed`` | ``@SyliusShop/Checkout/addressing.html.twig`` |
++--------------------------+-----------------------------------------------+
 
 How to perform the Addressing Step programmatically?
 ''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -124,11 +124,11 @@ Selecting shipping
 It is a step where the customer selects the way their order will be shipped to them.
 Basing on the ShippingMethods configured in the system the options for the Customer are provided together with their prices.
 
-+---------------------------------------+--------------------------------------------------+
-| Transition after step                 | Template                                         |
-+---------------------------------------+--------------------------------------------------+
-| ``addressed``-> ``shipping_selected`` | ``SyliusShopBundle:Checkout:shipping.html.twig`` |
-+---------------------------------------+--------------------------------------------------+
++---------------------------------------+---------------------------------------------+
+| Transition after step                 | Template                                    |
++---------------------------------------+---------------------------------------------+
+| ``addressed``-> ``shipping_selected`` | ``@SyliusShop/Checkout/shipping.html.twig`` |
++---------------------------------------+---------------------------------------------+
 
 How to perform the Selecting shipping Step programmatically?
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -184,11 +184,11 @@ Selecting payment
 This is a step where the customer chooses how are they willing to pay for their order.
 Basing on the PaymentMethods configured in the system the possibilities for the Customer are provided.
 
-+----------------------------------------------+-------------------------------------------------+
-| Transition after step                        | Template                                        |
-+----------------------------------------------+-------------------------------------------------+
-| ``shipping_selected``-> ``payment_selected`` | ``SyliusShopBundle:Checkout:payment.html.twig`` |
-+----------------------------------------------+-------------------------------------------------+
++----------------------------------------------+--------------------------------------------+
+| Transition after step                        | Template                                   |
++----------------------------------------------+--------------------------------------------+
+| ``shipping_selected``-> ``payment_selected`` | ``@SyliusShop/Checkout/payment.html.twig`` |
++----------------------------------------------+--------------------------------------------+
 
 How to perform the Selecting payment step programmatically?
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -232,11 +232,11 @@ Finalizing
 
 In this step the customer gets an order summary and is redirected to complete the payment they have selected.
 
-+--------------------------------------+-------------------------------------------------+
-| Transition after step                | Template                                        |
-+--------------------------------------+-------------------------------------------------+
-| ``payment_selected``-> ``completed`` | ``SyliusShopBundle:Checkout:summary.html.twig`` |
-+--------------------------------------+-------------------------------------------------+
++--------------------------------------+--------------------------------------------+
+| Transition after step                | Template                                   |
++--------------------------------------+--------------------------------------------+
+| ``payment_selected``-> ``completed`` | ``@SyliusShop/Checkout/summary.html.twig`` |
++--------------------------------------+--------------------------------------------+
 
 How to complete Checkout programmatically?
 ''''''''''''''''''''''''''''''''''''''''''

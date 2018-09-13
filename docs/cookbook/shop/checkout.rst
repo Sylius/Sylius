@@ -208,7 +208,7 @@ to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file.
             _sylius:
                 event: address
                 flash: false
-                template: SyliusShopBundle:Checkout:address.html.twig
+                template: '@SyliusShop/Checkout/address.html.twig'
                 form:
                     type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType
                     options:
@@ -229,7 +229,7 @@ to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file.
             _sylius:
                 event: payment
                 flash: false
-                template: SyliusShopBundle:Checkout:selectPayment.html.twig
+                template: '@SyliusShop/Checkout/selectPayment.html.twig'
                 form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType
                 repository:
                     method: find
@@ -247,7 +247,7 @@ to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file.
             _sylius:
                 event: complete
                 flash: false
-                template: SyliusShopBundle:Checkout:complete.html.twig
+                template: '@SyliusShop/Checkout/complete.html.twig'
                 repository:
                     method: find
                     arguments:

@@ -65,7 +65,7 @@ Create a template for the filter, similar to the existing ones:
 .. code-block:: html
 
     # app/Resources/views/Grid/Filter/suppliers_statistics.html.twig
-    {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+    {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
     {{ form_row(form) }}
 
@@ -100,4 +100,4 @@ Now you can use your new filter type in the grid configuration!
                             range: [0, 100]
         templates:
             filter:
-                suppliers_statistics: 'AppBundle:Grid/Filter:suppliers_statistics.html.twig'
+                suppliers_statistics: '@App/Grid/Filter/suppliers_statistics.html.twig'

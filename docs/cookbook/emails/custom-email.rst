@@ -53,7 +53,7 @@ To achieve that you will need to:
         emails:
             out_of_stock:
                 subject: "A product has become out of stock!"
-                template: "AppBundle:Email:out_of_stock.html.twig"
+                template: '@App/Email/out_of_stock.html.twig'
 
 .. code-block:: yaml
 

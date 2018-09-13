@@ -41,7 +41,7 @@ final class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('layout')->defaultValue('SyliusPayumBundle::layout.html.twig')->end()
-                        ->scalarNode('obtain_credit_card')->defaultValue('SyliusPayumBundle:Action:obtainCreditCard.html.twig')->end()
+                        ->scalarNode('obtain_credit_card')->defaultValue('@SyliusPayum/Action/obtainCreditCard.html.twig')->end()
                     ->end()
                 ->end()
             ->end()

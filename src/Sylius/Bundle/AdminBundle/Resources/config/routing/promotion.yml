@@ -16,5 +16,5 @@ sylius_admin_promotion:
                 icon: in cart
             update:
                 templates:
-                    form: "@SyliusAdmin/Promotion/_form.html.twig"
+                    form: '@SyliusAdmin/Promotion/_form.html.twig'
     type: sylius.resource

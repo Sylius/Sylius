@@ -1,12 +1,12 @@
 {% extends '@SyliusAdmin/layout.html.twig' %}
 
-{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+{% import '@SyliusUi/Macro/headers.html.twig' as headers %}
 
 {% set header = 'sylius.ui.generate_coupons' %}
 
 {% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
 
-{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
 {% block content %}
 {{ sonata_block_render_event('sylius.admin.promotion_coupon.generate.before_header', {'resource': promotion}) }}

@@ -22,7 +22,7 @@ Configuration reference
                         interface: Sylius\Component\User\Model\UserInterface
                         controller: Sylius\Bundle\UserBundle\Controller\UserController
                         factory: Sylius\Component\Resource\Factory\Factory
-                    templates: 'SyliusUserBundle:User'
+                    templates: SyliusUserBundle:User
                     resetting:
                         token:
                             ttl: P1D
@@ -44,7 +44,7 @@ Configuration reference
                         interface: Sylius\Component\User\Model\UserInterface
                         controller: Sylius\Bundle\UserBundle\Controller\UserController
                         factory: Sylius\Component\Resource\Factory\Factory
-                    templates: 'SyliusUserBundle:User'
+                    templates: SyliusUserBundle:User
                     resetting:
                         token:
                             ttl: P1D
@@ -65,7 +65,7 @@ Configuration reference
                         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                         factory: Sylius\Component\Resource\Factory\Factory
                         form: Sylius\Bundle\UserBundle\Form\Type\UserType
-                    templates: 'SyliusUserBundle:User'
+                    templates: SyliusUserBundle:User
                     resetting:
                         token:
                             ttl: P1D
