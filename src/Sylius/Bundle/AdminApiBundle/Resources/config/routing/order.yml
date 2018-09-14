@@ -10,6 +10,15 @@ sylius_admin_api_order:
         serialization_version: $version
     type: sylius.resource_api
 
+sylius_admin_api_orders:
+    resource: |
+        alias: sylius.order
+        section: admin_api
+        only: [index]
+        grid: sylius_admin_order
+        serialization_version: $version
+    type: sylius.resource_api
+
 sylius_admin_api_order_cancel:
     path: /orders/{id}/cancel
     methods: [PUT]
