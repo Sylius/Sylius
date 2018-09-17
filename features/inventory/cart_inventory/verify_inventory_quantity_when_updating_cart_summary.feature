@@ -2,7 +2,7 @@
 Feature: Verifying inventory quantity on cart summary
     In order to not be able to add more items than available
     As a Customer
-    I want to be notified that requested item quantity cannot be handle
+    I want to be notified that requested item quantity cannot be handled
 
     Background:
         Given the store operates on a single channel in "United States"
