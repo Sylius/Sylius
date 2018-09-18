@@ -208,6 +208,10 @@ class GeographicalFixture extends AbstractFixture
                 $zone->setName($zoneName);
                 $zone->setType($zoneType);
 
+                if (isset($zoneOptions['scope'])) {
+                    $zone->setScope($zoneOptions['scope']);
+                }
+
                 $this->zoneManager->persist($zone);
             } catch (\InvalidArgumentException $exception) {
                 throw new \InvalidArgumentException(sprintf(

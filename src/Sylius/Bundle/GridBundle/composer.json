@@ -36,7 +36,7 @@
         "matthiasnoback/symfony-config-test": "^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
         "ocramius/proxy-manager": "^2.1",
-        "pagerfanta/pagerfanta": "^1.0",
+        "pagerfanta/pagerfanta": "^1.0|^2.0",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",

@@ -68,7 +68,7 @@ As an example we will change the sidebar menu background color, what is clearly 
 .. code-block:: twig
 
     {# src/AppBundle/Resources/views/Admin/_stylesheets.html.twig #}
-    {% include 'SyliusUiBundle::stylesheets.html.twig' with {'path': 'assets/admin/css/custom.css'} %}
+    {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/admin/css/custom.css'} %}
 
 **3. Use the Sonata block event to insert your stylesheets:**
 

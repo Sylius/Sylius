@@ -11,6 +11,8 @@
 
 /bin/symfony_requirements
 
+/docs/.doctrees
+
 /composer.lock
 /vendor
 /node_modules

@@ -37,8 +37,10 @@ matrix:
         -
             php: 7.2
             env:
-                - SYLIUS_SUITE="packages"
+                - SYLIUS_SUITE="docs packages"
                 - SYMFONY_VERSION="4.1.*"
+            services:
+                - docker
             addons:
                 apt:
                     packages:
