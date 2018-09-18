@@ -5,6 +5,8 @@
 /var/*
 !/var/.gitkeep
 
+/docs/.doctrees
+
 /web/assets
 /web/bundles
 /web/css

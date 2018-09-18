@@ -31,6 +31,8 @@ matrix:
             env:
                 - SYLIUS_SUITE="docs packages"
                 - SYMFONY_VERSION="3.4.*"
+            services:
+                - docker
             addons:
                 apt:
                     packages:
