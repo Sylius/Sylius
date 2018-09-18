@@ -14,6 +14,8 @@ matrix:
         -
             php: 7.1
             env: SYLIUS_SUITE="docs packages"
+            services:
+                - docker
             addons:
                 apt:
                     packages:
