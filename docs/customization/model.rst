@@ -389,6 +389,36 @@ Which we strongly recommend over updating the schema.
     $ php bin/console doctrine:migrations:diff
     $ php bin/console doctrine:migrations:migrate
 
+List of all core models and how to override them :
+--------------------------------------------------
+
+Here is the list of Code models and the yml index corresponding to their override :
+
+.. code-block:: yaml
+    
+    sylius_addressing:
+        resources:
+            address:
+            
+    
+    sylius_core:
+        resources:
+            channel_pricings:
+    
+    sylius_product:
+        resources:
+            product:
+            product_variant:
+    
+    sylius_customer:
+        resources:
+            customer:
+    
+    sylius_user:
+        resources:
+            shop:
+                user:
+
 .. tip::
 
     Read more about the database modifications and migrations in the `Symfony documentation here <http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
