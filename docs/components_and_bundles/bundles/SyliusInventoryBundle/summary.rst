@@ -30,7 +30,7 @@ Configuration reference
                     model: ~ # The stockable model class.
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
 
-`phpspec2 <http://phpspec.net>`_ examples
+`phpspec <http://phpspec.net>`_ examples
 -----------------------------------------
 
 .. code-block:: bash
