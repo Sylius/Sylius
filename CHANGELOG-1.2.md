@@ -1,5 +1,17 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.7 (2018-09-24)
+
+#### Details
+
+- [#9683](https://github.com/Sylius/Sylius/pull/9683) Do not run tests if not needed (@pamil)
+- [#9687](https://github.com/Sylius/Sylius/pull/9687) [Core][Fixture] Fix for ignored geographical zone scope (@SebLours)
+- [#9691](https://github.com/Sylius/Sylius/pull/9691) Fixing Typo in Documentation (@bhargavmehta)
+- [#9700](https://github.com/Sylius/Sylius/pull/9700) Allow to use Pagerfanta in both ^1.0 and ^2.0 (@pamil)
+- [#9708](https://github.com/Sylius/Sylius/pull/9708) Fix typo in Behat feature (@stefandoorn)
+- [#9709](https://github.com/Sylius/Sylius/pull/9709) Fix typo in filename (@stefandoorn)
+- [#9714](https://github.com/Sylius/Sylius/pull/9714) Fix docs build (@pamil)
+
 ## v1.2.6 (2018-08-27)
 
 #### Details
