@@ -50,7 +50,7 @@ Configuration reference
             order: '5 days'
 
 
-`phpspec2 <http://phpspec.net>`_ examples
+`phpspec <http://phpspec.net>`_ examples
 -----------------------------------------
 
 .. code-block:: bash
