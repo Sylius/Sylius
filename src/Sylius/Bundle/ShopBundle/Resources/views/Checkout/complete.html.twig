@@ -20,7 +20,7 @@
 
             {{ sonata_block_render_event('sylius.shop.checkout.complete.before_summary', {'order': order, 'form': form}) }}
 
-            {% include 'SyliusShopBundle:Common/Order:_summary.html.twig' %}
+            {% include '@SyliusShop/Common/Order/' %}
 
             {{ sonata_block_render_event('sylius.shop.checkout.complete.after_summary', {'order': order}) }}
 

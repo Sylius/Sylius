@@ -1,6 +1,6 @@
 {% set product = order_item.variant.product %}
 
-{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
 <div class="ui segment" id="sylius-product-selecting-variant">
     {{ sonata_block_render_event('sylius.shop.product.show.before_add_to_cart', {'product': product, 'order_item': order_item}) }}
