@@ -4,6 +4,7 @@ exemptLabels:
   - Bug
   - Critical
   - Do not stale
+  - Roadmap
 staleLabel: Stale
 markComment: >
   This issue has been automatically marked as stale because it has not had any
