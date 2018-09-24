@@ -1,7 +1,7 @@
 Summary
 =======
 
-`phpspec2 <http://phpspec.net>`_ examples
+`phpspec <http://phpspec.net>`_ examples
 -----------------------------------------
 
 .. code-block:: bash
