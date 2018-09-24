@@ -81,7 +81,7 @@ final class DashboardController
         $statistics = $this->statisticsProvider->getStatisticsForChannel($channel);
 
         return $this->templatingEngine->renderResponse(
-            'SyliusAdminBundle:Dashboard:index.html.twig',
+            '@SyliusAdmin/Dashboard/index.html.twig',
             ['statistics' => $statistics, 'channel' => $channel]
         );
     }

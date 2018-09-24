@@ -4,7 +4,7 @@ sylius_admin_login:
     defaults:
         _controller: sylius.controller.security:loginAction
         _sylius:
-            template: SyliusAdminBundle:Security:login.html.twig
+            template: "@SyliusAdmin/Security/login.html.twig"
             permission: true
             logged_in_route: sylius_admin_dashboard
 

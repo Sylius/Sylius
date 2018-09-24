@@ -12,7 +12,7 @@ sylius_admin_customer_group:
                 header: sylius.ui.customer_groups
                 subheader: sylius.ui.manage_customer_groups
                 templates:
-                    form: SyliusAdminBundle:CustomerGroup:_form.html.twig
+                    form: "@SyliusAdmin/CustomerGroup/_form.html.twig"
             index:
                 icon: archive
     type: sylius.resource
