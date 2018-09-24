@@ -11,7 +11,7 @@ sylius_admin_product_association_type:
             all:
                 subheader: sylius.ui.manage_association_types_of_your_products
                 templates:
-                    form: SyliusAdminBundle:ProductAssociationType:_form.html.twig
+                    form: "@SyliusAdmin/ProductAssociationType/_form.html.twig"
             index:
                 icon: tasks
     type: sylius.resource

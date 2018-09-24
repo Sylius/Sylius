@@ -11,7 +11,7 @@ sylius_admin_product_option:
           all:
               subheader: sylius.ui.manage_configuration_options_of_your_products
               templates:
-                  form: SyliusAdminBundle:ProductOption:_form.html.twig
+                  form: "@SyliusAdmin/ProductOption/_form.html.twig"
           index:
               icon: options
     type: sylius.resource

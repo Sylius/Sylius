@@ -29,8 +29,8 @@ final class TwigGridRendererSpec extends ObjectBehavior
         OptionsParserInterface $optionsParser
     ): void {
         $actionTemplates = [
-            'link' => 'SyliusGridBundle:Action:_link.html.twig',
-            'form' => 'SyliusGridBundle:Action:_form.html.twig',
+            'link' => '@SyliusGrid/Action/_link.html.twig',
+            'form' => '@SyliusGrid/Action/_form.html.twig',
         ];
 
         $this->beConstructedWith(
@@ -63,7 +63,7 @@ final class TwigGridRendererSpec extends ObjectBehavior
         $optionsParser->parseOptions([], $request, null)->shouldBeCalled();
 
         $twig
-            ->render('SyliusGridBundle:Action:_link.html.twig', [
+            ->render('@SyliusGrid/Action/_link.html.twig', [
                 'grid' => $gridView,
                 'action' => $action,
                 'data' => null,
