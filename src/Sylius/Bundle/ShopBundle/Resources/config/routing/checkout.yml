@@ -5,7 +5,7 @@ sylius_shop_checkout_start:
     path: /
     methods: [GET]
     defaults:
-        _controller: FrameworkBundle:Redirect:redirect
+        _controller: "@Framework/Redirect:redirect"
         route: sylius_shop_checkout_address
 
 sylius_shop_checkout_address:

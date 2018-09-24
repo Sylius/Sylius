@@ -2,7 +2,7 @@ sylius_admin_country:
     resource: |
         alias: sylius.country
         section: admin
-        templates: SyliusAdminBundle:Crud
+        templates: "@SyliusAdmin\\Crud"
         except: ['show', 'delete']
         redirect: update
         grid: sylius_admin_country

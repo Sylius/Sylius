@@ -13,7 +13,7 @@ sylius_shop_account_root:
     path: /
     methods: [GET]
     defaults:
-        _controller: FrameworkBundle:Redirect:redirect
+        _controller: "@Framework/Redirect:redirect"
         route: sylius_shop_account_dashboard
         permanent: true
 

@@ -2,7 +2,7 @@ sylius_admin_zone:
     resource: |
         alias: sylius.zone
         section: admin
-        templates: SyliusAdminBundle:Crud
+        templates: "@SyliusAdmin\\Crud"
         except: ['show', 'create']
         redirect: update
         grid: sylius_admin_zone

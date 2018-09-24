@@ -2,7 +2,7 @@ sylius_admin_taxon:
     resource: |
         alias: sylius.taxon
         section: admin
-        templates: SyliusAdminBundle:Taxon
+        templates: "@SyliusAdmin/Taxon"
         except: ['show', 'index']
         redirect: update
         permission: true
@@ -17,7 +17,7 @@ sylius_admin_taxon_index:
     path: /taxons/
     methods: [GET]
     defaults:
-        _controller: FrameworkBundle:Redirect:redirect
+        _controller: "@Framework/Redirect:redirect"
         route: sylius_admin_taxon_create
         permanent: true
 

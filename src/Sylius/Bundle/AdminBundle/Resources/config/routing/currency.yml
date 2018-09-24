@@ -2,7 +2,7 @@ sylius_admin_currency:
     resource: |
         alias: sylius.currency
         section: admin
-        templates: SyliusAdminBundle:Crud
+        templates: "@SyliusAdmin\\Crud"
         except: ['show', 'delete']
         redirect: update
         grid: sylius_admin_currency
