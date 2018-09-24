@@ -36,11 +36,11 @@ final class TwigGridRendererSpec extends ObjectBehavior
         FormTypeRegistryInterface $formTypeRegistry
     ): void {
         $actionTemplates = [
-            'link' => 'SyliusGridBundle:Action:_link.html.twig',
-            'form' => 'SyliusGridBundle:Action:_form.html.twig',
+            'link' => '@SyliusGrid/Action/_link.html.twig',
+            'form' => '@SyliusGrid/Action/_form.html.twig',
         ];
         $filterTemplates = [
-            StringFilter::NAME => 'SyliusGridBundle:Filter:_string.html.twig',
+            StringFilter::NAME => '@SyliusGrid/Filter/_string.html.twig',
         ];
 
         $this->beConstructedWith(
@@ -77,7 +77,7 @@ final class TwigGridRendererSpec extends ObjectBehavior
         $action->getOptions()->willReturn([]);
 
         $twig
-            ->render('SyliusGridBundle:Action:_link.html.twig', [
+            ->render('@SyliusGrid/Action/_link.html.twig', [
                 'grid' => $gridView,
                 'action' => $action,
                 'data' => null,

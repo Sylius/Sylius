@@ -11,7 +11,7 @@ sylius_admin_shipping_method:
           all:
               subheader: sylius.ui.manage_shipping_methods_for_your_store
               templates:
-                  form: SyliusAdminBundle:ShippingMethod:_form.html.twig
+                  form: "@SyliusAdmin/ShippingMethod/_form.html.twig"
           index:
               icon: shipping
     type: sylius.resource

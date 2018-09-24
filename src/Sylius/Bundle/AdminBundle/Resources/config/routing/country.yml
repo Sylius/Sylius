@@ -11,7 +11,7 @@ sylius_admin_country:
             all:
                 subheader: sylius.ui.manage_shipping_destinations
                 templates:
-                    form: SyliusAdminBundle:Country:_form.html.twig
+                    form: "@SyliusAdmin/Country/_form.html.twig"
             index:
                 icon: flag
     type: sylius.resource

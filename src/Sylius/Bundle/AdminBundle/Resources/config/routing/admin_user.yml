@@ -12,7 +12,7 @@ sylius_admin_admin_user:
             all:
                 subheader: sylius.ui.manage_users_able_to_access_administration_panel
                 templates:
-                    form: SyliusAdminBundle:AdminUser:_form.html.twig
+                    form: "@SyliusAdmin/AdminUser/_form.html.twig"
             index:
                 icon: lock
     type: sylius.resource
