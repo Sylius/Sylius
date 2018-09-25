@@ -93,7 +93,7 @@ This is how this file should look like for Sylius (tuned version of the default 
 
     mounts:
         "/var/cache": "shared:files/cache"
-        "/var/logs": "shared:files/logs"
+        "/var/log": "shared:files/logs"
         "/web/uploads": "shared:files/uploads"
         "/web/media": "shared:files/media"
 

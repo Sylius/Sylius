@@ -110,7 +110,7 @@ After you have successfully gone through the installation process of **Sylius-St
 In the root directory of your project you will find these important subdirectories:
 
 * ``app/config/`` - here you will be adding the yaml configuration files including routing, security, state machines configurations etc.
-* ``var/logs/`` - these are the logs of your application
+* ``var/log/`` - these are the logs of your application
 * ``var/cache/`` - this is the cache of you project
 * ``src/`` - this is where you will be adding all you custom logic in the ``AppBundle``
 * ``web/`` - there you will be placing assets of your project
