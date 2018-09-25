@@ -41,7 +41,7 @@ matrix:
             if: type IN (cron, api) OR tag IS present
             php: 7.1
             env:
-                - SYLIUS_SUITE="docs packages"
+                - SYLIUS_SUITE="packages"
                 - SYMFONY_VERSION="4.1.*"
             addons:
                 apt:
