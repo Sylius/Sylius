@@ -17,7 +17,7 @@ sylius_admin_taxon_index:
     path: /taxons/
     methods: [GET]
     defaults:
-        _controller: "@Framework/Redirect:redirect"
+        _controller: FrameworkBundle:Redirect:redirect
         route: sylius_admin_taxon_create
         permanent: true
 
