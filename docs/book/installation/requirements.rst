@@ -76,7 +76,7 @@ Most of the application folders and files require only read access, but a few fo
 
 * var/cache
 * var/log
-* web/media
+* public/media
 
 You can read how to set these permissions in the `Symfony - setting up permissions <http://symfony.com/doc/current/setup/file_permissions.html>`_ section.
 

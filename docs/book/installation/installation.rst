@@ -113,7 +113,7 @@ In the root directory of your project you will find these important subdirectori
 * ``var/log/`` - these are the logs of your application
 * ``var/cache/`` - this is the cache of you project
 * ``src/`` - this is where you will be adding all you custom logic in the ``AppBundle``
-* ``web/`` - there you will be placing assets of your project
+* ``public/`` - there you will be placing assets of your project
 
 .. tip::
 

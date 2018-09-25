@@ -94,14 +94,14 @@ This is how this file should look like for Sylius (tuned version of the default 
     mounts:
         "/var/cache": "shared:files/cache"
         "/var/log": "shared:files/logs"
-        "/web/uploads": "shared:files/uploads"
-        "/web/media": "shared:files/media"
+        "/public/uploads": "shared:files/uploads"
+        "/public/media": "shared:files/media"
 
     hooks:
         build: |
-            rm web/app_dev.php
-            rm web/app_test.php
-            rm web/app_test_cached.php
+            rm public/app_dev.php
+            rm public/app_test.php
+            rm public/app_test_cached.php
             rm -rf var/cache/*
             php bin/console --env=prod --no-debug --ansi cache:clear --no-warmup
             php bin/console --env=prod --no-debug --ansi cache:warmup
