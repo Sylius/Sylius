@@ -21,7 +21,7 @@
 
 **Sylius 1.3** uses new directory structure, introduced in **Symfony 4**. Even though it's not required,
 we strongly encourage you to follow this convention. Take a look at
-[official Symfony upgrade documentation](symfony.com/doc/current/setup/flex.html#upgrading-existing-applications-to-flex),
+[official Symfony upgrade documentation](https://symfony.com/doc/current/setup/flex.html#upgrading-existing-applications-to-flex),
 to know what exactly should be done.
 
 #### Remember!
