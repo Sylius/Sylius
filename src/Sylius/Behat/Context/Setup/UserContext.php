@@ -139,6 +139,14 @@ final class UserContext implements Context
     }
 
     /**
+     * @Given /^(?:(I) have|(this user) has) already received a resetting password email$/
+     */
+    public function iHaveReceivedResettingPasswordEmail(UserInterface $user)
+    {
+        $this->prepareUserPasswordResetToken($user);
+    }
+
+    /**
      * @param UserInterface $user
      */
     private function prepareUserVerification(UserInterface $user)
@@ -147,6 +155,20 @@ final class UserContext implements Context
         $this->sharedStorage->set('verification_token', $token);
 
         $user->setEmailVerificationToken($token);
+
+        $this->userManager->flush();
+    }
+
+    /**
+     * @param UserInterface $user
+     */
+    private function prepareUserPasswordResetToken(UserInterface $user)
+    {
+        $token = 'itotallyforgotmypassword';
+        $this->sharedStorage->set('password_reset_token', $token);
+
+        $user->setPasswordResetToken($token);
+        $user->setPasswordRequestedAt(new \DateTime());
 
         $this->userManager->flush();
     }

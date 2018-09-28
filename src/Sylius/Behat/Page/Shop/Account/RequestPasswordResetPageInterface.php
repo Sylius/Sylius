@@ -15,17 +15,20 @@ namespace Sylius\Behat\Page\Shop\Account;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
-interface ResetPasswordPageInterface extends SymfonyPageInterface
+interface RequestPasswordResetPageInterface extends SymfonyPageInterface
 {
-    public function reset(): void;
+    /**
+     * @param string $element
+     * @param string $message
+     *
+     * @return bool
+     */
+    public function checkValidationMessageFor($element, $message);
+
+    public function reset();
 
     /**
-     * @param string $password
+     * @param string $email
      */
-    public function specifyNewPassword(string $password): void;
-
-    /**
-     * @param string $password
-     */
-    public function specifyConfirmPassword(string $password): void;
+    public function specifyEmail($email);
 }
