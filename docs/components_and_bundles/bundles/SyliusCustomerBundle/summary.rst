@@ -38,7 +38,7 @@ Configuration reference
 .. code-block:: bash
 
     $ composer install
-    $ bin/phpspec run -fpretty --verbose
+    $ vendor/bin/phpspec run -fpretty --verbose
 
 Bug tracking
 ------------

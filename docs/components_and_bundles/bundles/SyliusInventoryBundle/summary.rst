@@ -36,7 +36,7 @@ Configuration reference
 .. code-block:: bash
 
     $ composer install
-    $ bin/phpspec run -f pretty
+    $ vendor/bin/phpspec run -f pretty
 
 Bug tracking
 ------------
