@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.lib.sh"
+
+print_header "Validating (Yaml files)" "Sylius"
+run_command "bin/console lint:yaml src --env=test_cached --no-debug"
