@@ -8,7 +8,7 @@
 
 * Run `composer config config.platform.php 7.2.4`
 
-* Run `composer require sylius/sylius:~1.3.0 --no-update`
+* Run `composer require sylius/sylius:~1.3.0 sylius-labs/sensio-distribution-bundle:^6.0 incenteev/composer-parameter-handler:^2.1 --no-update`
 
 * Add the following code in your `behat.yml(.dist)` file:
 
