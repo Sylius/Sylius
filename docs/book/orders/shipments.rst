@@ -102,16 +102,7 @@ The already defined calculators in Sylius are described as constants in the
 `Sylius\Component\Shipping\Calculator\DefaultCalculators <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Shipping/Calculator/DefaultCalculators.php>`_
 
 * **FlatRateCalculator** - just returns the ``amount`` from the ShippingMethod's configuration.
-* **FlexibleRateCalculator** - on the ShippingMethod's configuration it should have the ``first_unit_cost``, ``additional_unit_cost`` and ``additional_unit_limit`` configured - it is useful if you want to have different cost for the first item than for the rest.
 * **PerUnitRateCalculator** - returns the ``amount`` from the ShippingMethod's configuration multiplied by the ``units`` count.
-* **VolumeRateCalculator** - returns the ``amount`` from the ShippingMethod's configuration multiplied by the ``units`` count divided by the configured ``division``.
-* **WeightRateCalculator** - returns the ``fixed`` from the ShippingMethod's configuration multiplied plus the ``variable`` multiplied by the ``weight`` of the shipment and divided by the ``division`` from the configuration.
-
-ProductVariant Configuration
-----------------------------
-
-In order to be able to calculate shipping costs based on the volume and weight of products in an order
-the ProductVariant has the ``depth``, ``width``, ``height`` and ``weight`` fields.
 
 Shipment complete events
 ------------------------
