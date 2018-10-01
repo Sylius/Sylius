@@ -44,7 +44,7 @@ That is all. Now register your new field type as a service.
 
 .. code-block:: yaml
 
-    # app/config/services.yml
+    # config/services.yaml
     app.grid_field.custom:
         class: AppBundle\Grid\FieldType\CustomType
         tags:
