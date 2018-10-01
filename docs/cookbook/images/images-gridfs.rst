@@ -15,7 +15,7 @@ To make GridFS files easily reusable, we introduce a mapped superclass which wil
 
     <?php
 
-    namespace AppBundle\Document;
+    namespace App\Document;
 
     use Doctrine\MongoDB\GridFSFile;
 
@@ -194,7 +194,7 @@ To make GridFS files easily reusable, we introduce a mapped superclass which wil
                     xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                     http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-        <mapped-superclass name="AppBundle\Document\File">
+        <mapped-superclass name="App\Document\File">
             <field fieldName="id" id="true" />
             <field fieldName="file" type="file" />
             <field fieldName="length" type="int" />
@@ -214,9 +214,9 @@ cached images. They will be stored in the same collection, but can be differenti
 
     <?php
 
-    namespace AppBundle\Document\Product;
+    namespace App\Document\Product;
 
-    use AppBundle\Document;
+    use App\Document;
 
     class Image extends Document\File
     {
@@ -231,11 +231,11 @@ cached images. They will be stored in the same collection, but can be differenti
                             xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-        <document name="AppBundle\Document\Product\Image" collection="product_image" inheritance-type="SINGLE_COLLECTION">
+        <document name="App\Document\Product\Image" collection="product_image" inheritance-type="SINGLE_COLLECTION">
             <discriminator-field name="type" />
             <discriminator-map>
-                <discriminator-mapping value="image" class="AppBundle\Document\Product\Image" />
-                <discriminator-mapping value="cache" class="AppBundle\Document\Product\Image\Cache" />
+                <discriminator-mapping value="image" class="App\Document\Product\Image" />
+                <discriminator-mapping value="cache" class="App\Document\Product\Image\Cache" />
             </discriminator-map>
             <default-discriminator-value value="image" />
         </document>
@@ -249,9 +249,9 @@ cached images. They will be stored in the same collection, but can be differenti
 
     <?php
 
-    namespace AppBundle\Document\Product\Image;
+    namespace App\Document\Product\Image;
 
-    use AppBundle\Document;
+    use App\Document;
 
     final class Cache extends Document\Product\Image
     {
@@ -295,8 +295,8 @@ cached images. They will be stored in the same collection, but can be differenti
                             xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                             http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-        <document name="AppBundle\Document\Product\Image\Cache">
-            <embed-one field="metadata" target-document="AppBundle\Document\Product\Image\Cache\Metadata" />
+        <document name="App\Document\Product\Image\Cache">
+            <embed-one field="metadata" target-document="App\Document\Product\Image\Cache\Metadata" />
         </document>
     </doctrine-mongo-mapping>
 
@@ -304,7 +304,7 @@ cached images. They will be stored in the same collection, but can be differenti
 
     <?php
 
-    namespace AppBundle\Document\Product\Image\Cache;
+    namespace App\Document\Product\Image\Cache;
 
     final class Metadata
     {
@@ -339,7 +339,7 @@ cached images. They will be stored in the same collection, but can be differenti
                             xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                             http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-        <embedded-document name="AppBundle\Document\Product\Image\Cache\Metadata">
+        <embedded-document name="App\Document\Product\Image\Cache\Metadata">
             <field fieldName="filter" type="string" index="true" order="asc" />
         </embedded-document>
     </doctrine-mongo-mapping>
@@ -365,7 +365,7 @@ First of all a new service is configured.
         <services>
             <service id="app.gaufrette_loader.doctrine_grid_fs" class="Doctrine\MongoDB\GridFS" public="false">
                 <factory service="doctrine.odm.mongodb.document_manager" method="getDocumentCollection" />
-                <argument>AppBundle\Document\Product\Image</argument>
+                <argument>App\Document\Product\Image</argument>
             </service>
 
             <service id="app.gaufrette_loader.grid_fs" class="MongoGridFS">
@@ -400,7 +400,7 @@ First of all we have to create a new ``data_loader`` for the ``LiipImagineBundle
 
     <?php
 
-    namespace AppBundle\Imagine\Binary\Loader;
+    namespace App\Imagine\Binary\Loader;
 
     use Doctrine\ODM\MongoDB\DocumentManager;
     use Liip\ImagineBundle\Binary\Loader\LoaderInterface ;
@@ -457,9 +457,9 @@ Now we can create the service definition for the data loader:
             http://symfony.com/schema/dic/services/services-1.0.xsd">
 
         <services>
-            <service id="app.imagine_loader.grid_fs" class="AppBundle\Imagine\Binary\Loader\GridFSLoader">
+            <service id="app.imagine_loader.grid_fs" class="App\Imagine\Binary\Loader\GridFSLoader">
                 <argument type="service" id="doctrine.odm.mongodb.document_manager" />
-                <argument>AppBundle\Document\Product\Image</argument>
+                <argument>App\Document\Product\Image</argument>
                 <tag name="liip_imagine.binary.loader" loader="app.imagine_loader.grid_fs" />
             </service>
 
@@ -478,9 +478,9 @@ custom resolver class that can find an image for a given filename and store new 
 
     <?php
 
-    namespace AppBundle\Imagine\Cache\Resolver;
+    namespace App\Imagine\Cache\Resolver;
 
-    use AppBundle\Document\Product\Image\Cache;
+    use App\Document\Product\Image\Cache;
     use Doctrine\ODM\MongoDB\DocumentManager;
     use Doctrine\ODM\MongoDB\DocumentRepository;
     use Liip\ImagineBundle\Binary\BinaryInterface;
@@ -610,7 +610,7 @@ custom resolver class that can find an image for a given filename and store new 
 
     <?php
 
-    namespace AppBundle\Imagine\Cache\Resolver;
+    namespace App\Imagine\Cache\Resolver;
 
     class GridFSException extends \RuntimeException
     {
@@ -628,9 +628,9 @@ Create the service definition for the resolver:
             http://symfony.com/schema/dic/services/services-1.0.xsd">
 
         <services>
-            <service id="app.imagine_resolver.grid_fs" class="AppBundle\Imagine\Cache\Resolver\GridFSResolver">
+            <service id="app.imagine_resolver.grid_fs" class="App\Imagine\Cache\Resolver\GridFSResolver">
                 <argument type="service" id="doctrine.odm.mongodb.document_manage" />
-                <argument>AppBundle\Document\Product\Image\Cache</argument>
+                <argument>App\Document\Product\Image\Cache</argument>
                 <argument type="service" id="router" />
                 <tag name="liip_imagine.cache.resolver" resolver="app.imagine_resolver.grid_fs" />
             </service>
@@ -672,9 +672,9 @@ Now we're going to add a new controller action which can resolve a cached produc
 
     <?php
 
-    namespace AppBundle\Controller;
+    namespace App\Controller;
 
-    use AppBundle\Document\Product\Image\Cache;
+    use App\Document\Product\Image\Cache;
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;

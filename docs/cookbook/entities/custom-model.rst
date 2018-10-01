@@ -57,7 +57,7 @@ Go to the generated class file and make it implement the ``ResourceInterface``:
 
     <?php
 
-    namespace AppBundle\Entity;
+    namespace App\Entity;
 
     use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -87,7 +87,7 @@ And add these few lines in the ``resources.yml`` file:
             app.supplier:
                 driver: doctrine/orm # You can use also different driver here
                 classes:
-                    model: AppBundle\Entity\Supplier
+                    model: App\Entity\Supplier
 
 To check if the process was run correctly run such a command:
 
@@ -123,7 +123,7 @@ To have templates for your Entity administration out of the box you can use Grid
                 driver:
                     name: doctrine/orm
                     options:
-                        class: AppBundle\Entity\Supplier
+                        class: App\Entity\Supplier
                 fields:
                     name:
                         type: string
@@ -166,7 +166,7 @@ Remember to import your grid in the ``app/config/grids/grids.yml`` file which ha
 Having a grid prepared we can configure routing for the entity administration:
 
 Create the ``app/config/routing/admin/supplier.yml`` file. Include it in the ``app/config/routing/admin.yml``, which
-should be also included in the ``app/config/routing.yml``.
+should be also included in the ``config/packages/routing.yaml``.
 
 .. code-block:: yaml
 
@@ -193,7 +193,7 @@ should be also included in the ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/packages/routing.yaml
     app_admin:
         resource: 'routing/admin.yml'
         prefix: /admin

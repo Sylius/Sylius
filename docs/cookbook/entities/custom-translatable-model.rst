@@ -41,7 +41,7 @@ Below the final ``SupplierTranslation`` class is presented, it implements the ``
 
     <?php
 
-    namespace AppBundle\Entity;
+    namespace App\Entity;
 
     use Sylius\Component\Resource\Model\AbstractTranslation;
     use Sylius\Component\Resource\Model\ResourceInterface;
@@ -128,7 +128,7 @@ As a result you should get such a ``Supplier`` class:
 
     <?php
 
-    namespace AppBundle\Entity;
+    namespace App\Entity;
 
     use Sylius\Component\Resource\Model\ResourceInterface;
     use Sylius\Component\Resource\Model\TranslatableInterface;
@@ -257,10 +257,10 @@ And add these few lines in the ``resources.yml`` file:
             app.supplier:
                 driver: doctrine/orm # You can use also different driver here
                 classes:
-                    model: AppBundle\Entity\Supplier
+                    model: App\Entity\Supplier
                 translation:
                     classes:
-                        model: AppBundle\Entity\SupplierTranslation
+                        model: App\Entity\SupplierTranslation
 
 To check if the process was run correctly run such a command:
 
@@ -284,7 +284,7 @@ Let's start with the translation type, as it will be included into the entity ty
 
     <?php
 
-    namespace AppBundle\Form\Type;
+    namespace App\Form\Type;
 
     use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
     use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -323,7 +323,7 @@ Then let's prepare the entity type, that will include the translation type.
 
     <?php
 
-    namespace AppBundle\Form\Type;
+    namespace App\Form\Type;
 
     use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
     use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
@@ -369,12 +369,12 @@ Before the newly created forms will be ready to use them, they need to be regist
     # AppBundle/Resources/config/services.yml
     services:
         app.supplier.form.type:
-            class: AppBundle\Form\Type\SupplierType
+            class: App\Form\Type\SupplierType
             tags:
                 - { name: form.type }
             arguments: ['%app.model.supplier.class%', ['sylius']]
         app.supplier_translation.form.type:
-            class: AppBundle\Form\Type\SupplierTranslationType
+            class: App\Form\Type\SupplierTranslationType
             tags:
                 - { name: form.type }
             arguments: ['%app.model.supplier_translation.class%', ['sylius']]
@@ -392,12 +392,12 @@ Extend the resource configuration of the ``app.supplier`` with forms:
             app.supplier:
                 driver: doctrine/orm # You can use also different driver here
                 classes:
-                    model: AppBundle\Entity\Supplier
-                    form: AppBundle\Form\Type\SupplierType
+                    model: App\Entity\Supplier
+                    form: App\Form\Type\SupplierType
                 translation:
                     classes:
-                        model: AppBundle\Entity\SupplierTranslation
-                        form: AppBundle\Form\Type\SupplierTranslationType
+                        model: App\Entity\SupplierTranslation
+                        form: App\Form\Type\SupplierTranslationType
 
 9. Define grid structure for the new entity
 -------------------------------------------
@@ -413,7 +413,7 @@ To have templates for your Entity administration out of the box you can use Grid
                 driver:
                     name: doctrine/orm
                     options:
-                        class: AppBundle\Entity\Supplier
+                        class: App\Entity\Supplier
                 fields:
                     name:
                         type: string
@@ -467,7 +467,7 @@ Remember to import your grid in the ``app/config/grids/grids.yml`` file which ha
 Having a grid prepared we can configure routing for the entity administration:
 
 Create the ``app/config/routing/admin/supplier.yml`` file. Include it in the ``app/config/routing/admin/admin.yml``, which
-should be also included in the ``app/config/routing.yml``.
+should be also included in the ``config/packages/routing.yaml``.
 
 .. code-block:: yaml
 
@@ -483,7 +483,7 @@ should be also included in the ``app/config/routing.yml``.
                 all:
                     subheader: app.ui.supplier
                     templates:
-                        form: AppBundle:Supplier:_form.html.twig
+                        form: App:Supplier:_form.html.twig
                 index:
                     icon: 'file image outline'
         type: sylius.resource
@@ -496,7 +496,7 @@ should be also included in the ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/packages/routing.yaml
     app_admin:
         resource: 'routing/admin.yml'
         prefix: /admin
