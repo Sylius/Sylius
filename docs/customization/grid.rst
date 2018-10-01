@@ -22,14 +22,7 @@ How to customize grids?
 
 .. tip::
 
-    One way to change anything in any grid in **Sylius** is to create a special file in the ``app/config/`` directory:
-    ``app/config/grids.yml`` which has to be imported in the ``app/config/config.yml``.
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        - { resource: "grids.yml" }
+    One way to change anything in any grid in **Sylius** is to create a special file in the ``config/`` directory: ``config/_sylius.yaml``.
 
 How to customize fields of a grid?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -37,13 +30,13 @@ How to customize fields of a grid?
 How to remove a field from a grid?
 ''''''''''''''''''''''''''''''''''
 
-If you would like to remove a field from an existing Sylius grid, you will need to disable it in the ``app/config/grids.yml``.
+If you would like to remove a field from an existing Sylius grid, you will need to disable it in the ``config/_sylius.yaml``.
 
 Let's imagine that we would like to hide the **title of product review** field on the ``sylius_admin_product_review`` grid.
 
 .. code-block:: yaml
 
-    # app/config/grids.yml
+    # config/_sylius.yaml
     sylius_grid:
         grids:
             sylius_admin_product_review:
@@ -60,7 +53,7 @@ If you would like to modify for instance a label of any field from a grid, that'
 
 .. code-block:: yaml
 
-    # app/config/grids.yml
+    # config/_sylius.yaml
     sylius_grid:
         grids:
             sylius_admin_product_review:
@@ -80,7 +73,7 @@ Let's imagine that we would like to hide the **titles filter of product reviews*
 
 .. code-block:: yaml
 
-    # app/config/grids.yml
+    # config/_sylius.yaml
     sylius_grid:
         grids:
             sylius_admin_product_review:
@@ -100,7 +93,7 @@ If you would like to disable some actions in any grid, you just need to set its 
 
 .. code-block:: yaml
 
-    # app/config/grids.yml
+    # config/_sylius.yaml
     sylius_grid:
         grids:
             sylius_admin_product_review:
@@ -122,7 +115,7 @@ If you would like to change the link to which an action button is redirecting, t
 
 .. code-block:: yaml
 
-    # app/config/grids.yml
+    # config/_sylius.yaml
     sylius_grid:
         grids:
             sylius_admin_product:
@@ -149,7 +142,7 @@ See an example of fields order modification on the ``sylius_admin_product_review
 
 .. code-block:: yaml
 
-    # app/config/grids.yml
+    # config/_sylius.yaml
     sylius_grid:
         grids:
             sylius_admin_product_review:
@@ -190,7 +183,7 @@ In the example below we are removing the ``images`` field from the ``sylius_admi
 
     <?php
 
-    namespace AppBundle\Grid;
+    namespace App\Grid;
 
     use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
 
@@ -208,80 +201,19 @@ In the example below we are removing the ``images`` field from the ``sylius_admi
     }
 
 **2.** After creating your class with a proper method for the grid customizations you need, subscribe your
-listener to the ``sylius.grid.admin_product`` event in the ``AppBundle/Resources/config/services.yml``.
+listener to the ``sylius.grid.admin_product`` event in the ``App/Resources/config/services.yml``.
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/services.yml
+    # config/services.yaml
     services:
-        app.listener.admin.products_grid:
-            class: AppBundle\Grid\AdminProductsGridListener
+        App\Grid\AdminProductsGridListener:
             tags:
                 - { name: kernel.event_listener, event: sylius.grid.admin_product, method: removeImageField }
 
 **3.** Result:
 
 After these two steps your admin product grid should not have the image field.
-
-How to override an entire grid?
--------------------------------
-
-.. tip::
-
-    This is the other way to customize grids. If you need to change more, than just slight adjustments we do recommend
-    to override an entire grid file in the ``app/Resources/`` directory.
-
-Let's assume that you would like to modify the ``shipping_categories`` grid by removing filters and the delete action from it.
-
-* To achieve that you need to create the ``app/Resources/SyliusAdminBundle/config/grids/shipping_category.yml`` file.
-
-* Then into the created file copy the content of ``Sylius/Bundle/AdminBundle/Resources/config/grids/shipping_category.yml``.
-
-* And modify it to your needs:
-
-.. code-block:: yaml
-
-    # app/Resources/SyliusAdminBundle/config/grids/shipping_category.yml
-    sylius_grid:
-        grids:
-            sylius_admin_shipping_category:
-                driver:
-                    name: doctrine/orm
-                    options:
-                        class: "%sylius.model.shipping_category.class%"
-                        repository:
-                            method: createListQueryBuilder
-                fields:
-                    code:
-                        type: string
-                        label: sylius.ui.code
-                    name:
-                        type: string
-                        label: sylius.ui.name
-                    createdAt:
-                        type: datetime
-                        label: sylius.ui.creation_date
-                        options:
-                            format: d-m-Y H:i
-                    updatedAt:
-                        type: datetime
-                        label: sylius.ui.updating_date
-                        options:
-                            format: d-m-Y H:i
-                actions:
-                    main:
-                        create:
-                            type: create
-                    item:
-                        update:
-                            type: update
-
-In the above example the ``delete`` action and the filters section have been removed.
-
-* That's it! The grid has been modified and it will look like that:
-
-.. image:: ../_images/overriding_grids.png
-    :align: center
 
 .. include:: /customization/plugins.rst.inc
 

@@ -37,16 +37,16 @@ Give it a new, custom validation group - ``[app_product]``.
 
     When using custom validation messages see `here how to add them <http://symfony.com/doc/current/validation/translations.html>`_.
 
-**2.** Configure the new validation group in the ``app/config/services.yml``.
+**2.** Configure the new validation group in the ``config/services.yaml``.
 
 .. code-block:: yaml
 
-    # app/config/services.yml
+    # config/services.yaml
     parameters:
         sylius.form.type.product_translation.validation_groups: [app_product]
         sylius.form.type.product.validation_groups: [app_product] # the product class also needs to be aware of the translation'a validation
 
-Remember to import the ``app/config/services.yml`` into the ``app/config/config.yml``.
+Remember to import the ``config/services.yaml`` into the ``app/config/config.yml``.
 
 .. code-block:: yaml
 

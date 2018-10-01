@@ -39,7 +39,7 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
 
     <?php
 
-    namespace AppBundle\Factory;
+    namespace App\Factory;
 
     use Sylius\Component\Product\Model\ProductInterface;
     use Sylius\Component\Product\Factory\ProductFactoryInterface;
@@ -90,13 +90,13 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
     }
 
 **2.** In order to decorate the base ProductFactory with your implementation you need to configure it
-as a decorating service in the ``app/Resources/config/services.yml``.
+as a decorating service in the ``config/services.yaml``.
 
 .. code-block:: yaml
 
     services:
         app.factory.product:
-            class: AppBundle\Factory\ProductFactory
+            class: App\Factory\ProductFactory
             decorates: sylius.factory.product
             arguments: ['@app.factory.product.inner']
             public: false
@@ -104,11 +104,11 @@ as a decorating service in the ``app/Resources/config/services.yml``.
 **3.** You can use the new method of the factory in routing.
 
 After the ``sylius.factory.product`` has been decorated it has got the new ``createDisabled()`` method.
-To actually use it overwrite ``sylius_admin_product_create_simple`` route like below in ``app/config/routing/admin/product.yml``:
+To actually use it overwrite ``sylius_admin_product_create_simple`` route like below in ``config/routes.yaml``:
 
 .. code-block:: yaml
 
-    # app/config/routing/admin/product.yml
+    # config/routes.yaml
     sylius_admin_product_create_simple:
         path: /products/new/simple
         methods: [GET, POST]
@@ -126,23 +126,6 @@ To actually use it overwrite ``sylius_admin_product_create_simple`` route like b
                         form: SyliusAdminBundle:Product:_form.html.twig
                     route:
                         name: sylius_admin_product_create_simple
-
-Create a new yaml file located at ``app/config/routing/admin.yml``, if it does not exist yet.
-
-.. code-block:: yaml
-
-    # app/config/routing/admin.yml
-    app_admin_product:
-        resource: 'admin/product.yml'
-                        
-Remember to import the ``app/config/routing/admin.yml`` into the ``app/config/routing.yml``.
-
-.. code-block:: yaml
-
-    # app/config/routing.yml
-    app_admin:
-        resource: 'routing/admin.yml'
-        prefix: /admin
 
 .. include:: /customization/plugins.rst.inc
 
