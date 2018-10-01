@@ -176,11 +176,7 @@
         "sylius/theme-bundle": "self.version",
         "sylius/ui-bundle": "self.version",
         "sylius/user": "self.version",
-        "sylius/user-bundle": "self.version",
-        "symfony/polyfill-php72": "*",
-        "symfony/polyfill-php71": "*",
-        "symfony/polyfill-php70": "*",
-        "symfony/polyfill-php56": "*"
+        "sylius/user-bundle": "self.version"
     },
     "conflict": {
         "symfony/symfony": "3.4.7 || 4.0.7"
