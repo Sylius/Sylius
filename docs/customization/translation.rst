@@ -3,7 +3,7 @@ Customizing Translations
 
 .. note::
 
-    We've adopted a convention of overriding translations in the ``app\Resources\translations`` directory.
+    We've adopted a convention of overriding translations in the ``translations`` directory.
 
 Why would you customize a translation?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -22,7 +22,7 @@ How to customize a translation?
 
 In order to customize a translation in your project:
 
-**1.** If you don't have it yet, create ``app\Resources\translations\messages.en.yml`` for English translations.
+**1.** If you don't have it yet, create ``translations\messages.en.yml`` for English translations.
 
 .. note::
 

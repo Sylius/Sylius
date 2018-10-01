@@ -47,7 +47,7 @@ Assuming that you would want to add another field on the model - for instance a 
 
     <?php
 
-    namespace AppBundle\Entity;
+    namespace App\Entity;
 
     use Sylius\Component\Addressing\Model\Country as BaseCountry;
 
@@ -81,7 +81,7 @@ The file should be placed in ``AppBundle/Resources/config/doctrine/Country.orm.y
 
 .. code-block:: yaml
 
-    AppBundle\Entity\Country:
+    App\Entity\Country:
         type: entity
         table: sylius_country
         fields:
@@ -89,7 +89,7 @@ The file should be placed in ``AppBundle/Resources/config/doctrine/Country.orm.y
                 type: boolean
                 nullable: true
 
-**3.** Finally you'll need to override the model's class in the ``app/config/config.yml``.
+**3.** Finally you'll need to override the model's class in the ``config/_sylius.yaml``.
 
 Under the ``sylius_*`` where ``*`` is the name of the bundle of the model you are customizing, in our case it will be the ``SyliusAddressingBundle`` -> ``sylius_addressing``.
 
@@ -99,7 +99,7 @@ Under the ``sylius_*`` where ``*`` is the name of the bundle of the model you ar
         resources:
             country:
                 classes:
-                    model: AppBundle\Entity\Country
+                    model: App\Entity\Country
 
 **4.** Update the database. There are two ways to do it.
 
@@ -128,7 +128,7 @@ you'll need to update its form type. Check how to do it :doc:`here </customizati
 What happens while overriding Models?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Parameter ``sylius.model.country.class`` contains ``AppBundle\Entity\Country``.
+* Parameter ``sylius.model.country.class`` contains ``App\Entity\Country``.
 * ``sylius.repository.country`` represents Doctrine repository for your new class.
 * ``sylius.manager.country`` represents Doctrine object manager for your new class.
 * ``sylius.controller.country`` represents the controller for your new class.
@@ -154,7 +154,7 @@ Just like for regular models you can also check the class of translatable models
 
     <?php
 
-    namespace AppBundle\Entity;
+    namespace App\Entity;
 
     use Sylius\Component\Core\Model\ShippingMethod as BaseShippingMethod;
     use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
@@ -201,7 +201,7 @@ The file should be placed in ``AppBundle/Resources/config/doctrine/ShippingMetho
 
 .. code-block:: yaml
 
-    AppBundle\Entity\ShippingMethod:
+    App\Entity\ShippingMethod:
         type: entity
         table: sylius_shipping_method
         fields:
@@ -209,7 +209,7 @@ The file should be placed in ``AppBundle/Resources/config/doctrine/ShippingMetho
                 type: string
                 nullable: true
 
-**3.** Finally you'll need to override the model's class in the ``app/config/config.yml``.
+**3.** Finally you'll need to override the model's class in the ``config/_sylius.yaml``.
 
 Under the ``sylius_*`` where ``*`` is the name of the bundle of the model you are customizing,
 in our case it will be the ``SyliusShippingBundle`` -> ``sylius_shipping``.
@@ -220,7 +220,7 @@ in our case it will be the ``SyliusShippingBundle`` -> ``sylius_shipping``.
         resources:
             shipping_method:
                 classes:
-                    model: AppBundle\Entity\ShippingMethod
+                    model: App\Entity\ShippingMethod
 
 **4.** Update the database. There are two ways to do it.
 
@@ -264,13 +264,13 @@ Just like for regular models you can also check the class of translatable models
 
     $ php bin/console debug:container --parameter=sylius.model.shipping_method_translation.class
 
-**1.** In order to add a translatable property to your entity you need to define it on the ``AppBundle\Entity\ShippingMethodTranslation`` class of your bundle, that will extend the base ``Sylius\Component\Shipping\Model\ShippingMethodTranslation``.
+**1.** In order to add a translatable property to your entity you need to define it on the ``App\Entity\ShippingMethodTranslation`` class of your bundle, that will extend the base ``Sylius\Component\Shipping\Model\ShippingMethodTranslation``.
 
 .. code-block:: php
 
     <?php
 
-    namespace AppBundle\Entity;
+    namespace App\Entity;
 
     use Sylius\Component\Shipping\Model\ShippingMethodTranslation as BaseShippingMethodTranslation;
 
@@ -304,7 +304,7 @@ The translation's entity file should be placed in ``AppBundle/Resources/config/d
 
 .. code-block:: yaml
 
-    AppBundle\Entity\ShippingMethodTranslation:
+    App\Entity\ShippingMethodTranslation:
         type: entity
         table: sylius_shipping_method_translation
         fields:
@@ -318,7 +318,7 @@ The translation's entity file should be placed in ``AppBundle/Resources/config/d
 
     <?php
 
-    namespace AppBundle\Entity;
+    namespace App\Entity;
 
     use Sylius\Component\Core\Model\ShippingMethod as BaseShippingMethod;
 
@@ -352,11 +352,11 @@ The mapping file should be placed in ``AppBundle/Resources/config/doctrine/Shipp
 
 .. code-block:: yaml
 
-    AppBundle\Entity\ShippingMethod:
+    App\Entity\ShippingMethod:
         type: entity
         table: sylius_shipping_method
 
-**5.** Finally you'll need to override the model's classes in the ``app/config/config.yml``.
+**5.** Finally you'll need to override the model's classes in the ``config/_sylius.yaml``.
 
 Under the ``sylius_*`` where ``*`` is the name of the bundle of the model you are customizing,
 in our case it will be the ``SyliusShippingBundle`` -> ``sylius_shipping``.
@@ -367,10 +367,10 @@ in our case it will be the ``SyliusShippingBundle`` -> ``sylius_shipping``.
         resources:
             shipping_method:
                 classes:
-                    model: AppBundle\Entity\ShippingMethod
+                    model: App\Entity\ShippingMethod
                 translation:
                     classes:
-                        model: AppBundle\Entity\ShippingMethodTranslation
+                        model: App\Entity\ShippingMethodTranslation
 
 **6.** Update the database. There are two ways to do it.
 
