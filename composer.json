@@ -34,7 +34,6 @@
         "friendsofsymfony/rest-bundle": "^2.1",
         "fzaninotto/faker": "^1.6",
         "gedmo/doctrine-extensions": "^2.4.12",
-        "incenteev/composer-parameter-handler": "^2.1",
         "jms/serializer-bundle": "^2.0",
         "knplabs/knp-gaufrette-bundle": "^0.5",
         "knplabs/knp-menu-bundle": "^2.1",
@@ -50,7 +49,6 @@
         "stof/doctrine-extensions-bundle": "^1.2",
         "swiftmailer/swiftmailer": "^6.0",
         "sylius-labs/association-hydrator": "^1.1",
-        "sylius-labs/sensio-distribution-bundle": "^6.0",
         "symfony/asset": "^3.4|^4.1",
         "symfony/config": "^3.4|^4.1",
         "symfony/console": "^3.4|^4.1",
@@ -118,6 +116,7 @@
         "phpstan/phpstan-symfony": "^0.10",
         "phpstan/phpstan-webmozart-assert": "^0.10",
         "phpunit/phpunit": "^6.5",
+        "sensiolabs/security-checker": "^4.1",
         "stripe/stripe-php": "^4.1",
         "sylius-labs/coding-standard": "^2.0",
         "symfony/browser-kit": "^3.4|^4.1",
@@ -177,11 +176,7 @@
         "sylius/theme-bundle": "self.version",
         "sylius/ui-bundle": "self.version",
         "sylius/user": "self.version",
-        "sylius/user-bundle": "self.version",
-        "symfony/polyfill-php72": "*",
-        "symfony/polyfill-php71": "*",
-        "symfony/polyfill-php70": "*",
-        "symfony/polyfill-php56": "*"
+        "sylius/user-bundle": "self.version"
     },
     "conflict": {
         "symfony/symfony": "3.4.7 || 4.0.7"
