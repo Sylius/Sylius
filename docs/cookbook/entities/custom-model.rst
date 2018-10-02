@@ -73,15 +73,15 @@ If you don't have it yet create a file ``app/config/resources.yml``, import it i
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # config/services.yaml
     imports:
-        - { resource: "resources.yml" }
+        - { resource: "resources.yaml" }
 
-And add these few lines in the ``resources.yml`` file:
+And add these few lines in the ``resources.yaml`` file:
 
 .. code-block:: yaml
 
-    # app/config/resources.yml
+    # config/resources.yaml
     sylius_resource:
         resources:
             app.supplier:
@@ -116,7 +116,7 @@ To have templates for your Entity administration out of the box you can use Grid
 
 .. code-block:: yaml
 
-    # app/config/grids/admin/supplier.yml
+    # config/packages/_sylius.yaml
     sylius_grid:
         grids:
             app_admin_supplier:
@@ -145,20 +145,6 @@ To have templates for your Entity administration out of the box you can use Grid
                             type: update
                         delete:
                             type: delete
-
-Remember to import your grid in the ``app/config/grids/grids.yml`` file which has to be imported in the ``app/config/config.yml``.
-
-.. code-block:: yaml
-
-    # app/config/grids/grids.yml
-    imports:
-        - { resource: 'admin/supplier.yml' }
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        - { resource: "grids/grids.yml" }
 
 8. Define routing for entity administration
 -------------------------------------------
