@@ -53,7 +53,7 @@
             <argument type="service" id="sylius.context.shopper" />
             <argument>%kernel.bundles%</argument>
             <argument>%locale%</argument>
-            <tag name="data_collector" template="SyliusCoreBundle:Collector:sylius.html.twig" id="sylius_core" priority="-512" />
+            <tag name="data_collector" template="@SyliusCore/Collector/sylius.html.twig" id="sylius_core" priority="-512" />
         </service>
         <service id="sylius.shipping_methods_resolver.zones_and_channel_based" class="Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver">
             <argument type="service" id="sylius.repository.shipping_method" />

@@ -51,7 +51,7 @@
             <argument type="service" id="sylius.repository.theme" />
             <argument type="service" id="sylius.context.theme" />
             <argument type="service" id="sylius.theme.hierarchy_provider" />
-            <tag name="data_collector" template="SyliusThemeBundle:Collector:theme" id="sylius_theme" />
+            <tag name="data_collector" template="@SyliusTheme/Collector/theme" id="sylius_theme" />
         </service>
 
         <service id="sylius.theme.hierarchy_provider" class="Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProvider" public="false" />

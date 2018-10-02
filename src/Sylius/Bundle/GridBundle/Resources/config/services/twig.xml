@@ -20,7 +20,7 @@
             <argument type="service" id="sylius.registry.grid_field" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.form_registry.grid_filter" />
-            <argument>SyliusGridBundle::_grid.html.twig</argument>
+            <argument>@SyliusGrid/_grid.html.twig</argument>
             <argument>%sylius.grid.templates.action%</argument>
             <argument>%sylius.grid.templates.filter%</argument>
         </service>

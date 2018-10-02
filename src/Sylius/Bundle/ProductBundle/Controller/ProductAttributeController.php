@@ -51,7 +51,7 @@ class ProductAttributeController extends ResourceController
      */
     public function renderAttributesAction(Request $request): Response
     {
-        $template = $request->attributes->get('template', 'SyliusAttributeBundle::attributeChoice.html.twig');
+        $template = $request->attributes->get('template', '@SyliusAttribute/attributeChoice.html.twig');
 
         $form = $this->get('form.factory')->create(ProductAttributeChoiceType::class, null, [
             'multiple' => true,
@@ -67,7 +67,7 @@ class ProductAttributeController extends ResourceController
      */
     public function renderAttributeValueFormsAction(Request $request): Response
     {
-        $template = $request->attributes->get('template', 'SyliusAttributeBundle::attributeValueForms.html.twig');
+        $template = $request->attributes->get('template', '@SyliusAttribute/attributeValueForms.html.twig');
 
         $form = $this->get('form.factory')->create(ProductAttributeChoiceType::class, null, [
             'multiple' => true,

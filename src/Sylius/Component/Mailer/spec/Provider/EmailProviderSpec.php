@@ -26,7 +26,7 @@ final class EmailProviderSpec extends ObjectBehavior
             'user_confirmation' => [
                 'enabled' => false,
                 'subject' => 'Hello test!',
-                'template' => 'SyliusMailerBundle::default.html.twig',
+                'template' => '@SyliusMailer/default.html.twig',
                 'sender' => [
                     'name' => 'John Doe',
                     'address' => 'john@doe.com',
@@ -35,7 +35,7 @@ final class EmailProviderSpec extends ObjectBehavior
             'order_cancelled' => [
                 'enabled' => false,
                 'subject' => 'Hi test!',
-                'template' => 'SyliusMailerBundle::default.html.twig',
+                'template' => '@SyliusMailer/default.html.twig',
                 'sender' => [
                     'name' => 'Rick Doe',
                     'address' => 'john@doe.com',
@@ -59,7 +59,7 @@ final class EmailProviderSpec extends ObjectBehavior
 
         $email->setCode('user_confirmation')->shouldBeCalled();
         $email->setSubject('Hello test!')->shouldBeCalled();
-        $email->setTemplate('SyliusMailerBundle::default.html.twig')->shouldBeCalled();
+        $email->setTemplate('@SyliusMailer/default.html.twig')->shouldBeCalled();
         $email->setSenderName('John Doe')->shouldBeCalled();
         $email->setSenderAddress('john@doe.com')->shouldBeCalled();
         $email->setEnabled(false)->shouldBeCalled();

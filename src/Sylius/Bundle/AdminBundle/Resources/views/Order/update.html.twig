@@ -1,11 +1,11 @@
-{% extends 'SyliusAdminBundle::layout.html.twig' %}
+{% extends '@SyliusAdmin/layout.html.twig' %}
 
-{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
-{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+{% import '@SyliusUi/Macro/headers.html.twig' as headers %}
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
 
 {% block title %}{{ 'sylius.ui.edit_order'|trans ~' #'~ order.number }} {{ parent() }}{% endblock %}
 
-{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
 {% block content %}
 {{ sonata_block_render_event('sylius.admin.order.update.before_header', {'resource': resource}) }}
