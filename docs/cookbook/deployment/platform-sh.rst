@@ -31,13 +31,19 @@ This is how this file should look like for Sylius (tuned version of the default 
     # .platform.app.yaml
     name: app
 
-    type: "php:7.1"
+    type: "php:7.2"
+
     build:
         flavor: composer
 
     relationships:
         database: "mysql:mysql"
         redis: "redis:redis"
+
+    variables:
+    env:
+        APP_ENV: 'prod'
+        APP_DEBUG: 0
 
     runtime:
         extensions:
@@ -54,8 +60,8 @@ This is how this file should look like for Sylius (tuned version of the default 
     web:
         locations:
             '/':
-                root: "web"
-                passthru: "/app.php"
+                root: "public"
+                passthru: "/index.php"
                 allow: true
                 expires: -1
                 scripts: true
@@ -76,7 +82,7 @@ This is how this file should look like for Sylius (tuned version of the default 
                     '\.(jpe?g|png|gif|svgz?)$':
                         allow: true
             '/media/cache/resolve':
-                passthru: "/app.php"
+                passthru: "/index.php"
                 expires: -1
                 allow: true
                 scripts: true
@@ -99,9 +105,7 @@ This is how this file should look like for Sylius (tuned version of the default 
 
     hooks:
         build: |
-            rm public/app_dev.php
-            rm public/app_test.php
-            rm public/app_test_cached.php
+            rm public/index.php
             rm -rf var/cache/*
             php bin/console --env=prod --no-debug --ansi cache:clear --no-warmup
             php bin/console --env=prod --no-debug --ansi cache:warmup
