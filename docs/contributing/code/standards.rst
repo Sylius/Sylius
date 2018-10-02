@@ -145,13 +145,13 @@ You can check your code for Sylius coding standard by running the following comm
 
 .. code-block:: bash
 
-    $ bin/ecs check src tests
+    $ vendor/bin/ecs check src tests
 
 Some of the violations can be automatically fixed by running the same command with ``--fix`` suffix like:
 
 .. code-block:: bash
 
-    $ bin/ecs check src tests --fix
+    $ vendor/bin/ecs check src tests --fix
 
 .. note::
 
