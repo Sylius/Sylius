@@ -23,6 +23,7 @@ use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
@@ -58,11 +59,6 @@ final class LoginContext implements Context
     private $notificationChecker;
 
     /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-
-    /**
      * @var CurrentPageResolverInterface
      */
     private $currentPageResolver;
@@ -74,7 +70,6 @@ final class LoginContext implements Context
      * @param RequestPasswordResetPageInterface $requestPasswordResetPage
      * @param ResetPasswordPageInterface $resetPasswordPage
      * @param NotificationCheckerInterface $notificationChecker
-     * @param SharedStorageInterface $sharedStorage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
@@ -84,7 +79,6 @@ final class LoginContext implements Context
         RequestPasswordResetPageInterface $requestPasswordResetPage,
         ResetPasswordPageInterface $resetPasswordPage,
         NotificationCheckerInterface $notificationChecker,
-        SharedStorageInterface $sharedStorage,
         CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->homePage = $homePage;
@@ -93,7 +87,6 @@ final class LoginContext implements Context
         $this->requestPasswordResetPage = $requestPasswordResetPage;
         $this->resetPasswordPage = $resetPasswordPage;
         $this->notificationChecker = $notificationChecker;
-        $this->sharedStorage = $sharedStorage;
         $this->currentPageResolver = $currentPageResolver;
     }
 
@@ -114,11 +107,11 @@ final class LoginContext implements Context
     }
 
     /**
-     * @When I follow link on my email to reset my password
+     * @When /^I follow link on (my) email to reset my password$/
      */
-    public function iFollowLinkOnMyEmailToResetPassword()
+    public function iFollowLinkOnMyEmailToResetPassword(UserInterface $user)
     {
-        $this->resetPasswordPage->open(['token' => $this->sharedStorage->get('password_reset_token')]);
+        $this->resetPasswordPage->open(['token' => $user->getPasswordResetToken()]);
     }
 
     /**

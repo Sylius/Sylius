@@ -16,14 +16,14 @@ namespace Sylius\Behat\Page\Shop\Account;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
-class RequestPasswordRequestResetPage extends SymfonyPage implements RequestPasswordResetPageInterface
+class RequestPasswordResetPage extends SymfonyPage implements RequestPasswordResetPageInterface
 {
     /**
      * {@inheritdoc}
      *
      * @throws ElementNotFoundException
      */
-    public function checkValidationMessageFor($element, $message)
+    public function checkValidationMessageFor(string $element, string $message): bool
     {
         $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
 
