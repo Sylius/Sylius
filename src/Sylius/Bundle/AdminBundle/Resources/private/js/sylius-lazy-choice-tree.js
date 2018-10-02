@@ -107,16 +107,19 @@ $.fn.extend({
 
     const bindCheckboxAction = function bindCheckboxAction(checkboxElement) {
       checkboxElement.checkbox({
-        onChange() {
-          const $checkboxes = tree.find('.checkbox');
-          const checkedValues = [];
-
-          $checkboxes.each((index, element) => {
-            if ($(element).checkbox('is checked')) {
-              checkedValues.push($(element).data('value'));
-            }
-          });
-
+        onChecked() {
+          const value = checkboxElement.data('value');
+          const checkedValues = $input.val().split(',').filter(x => x);
+          checkedValues.push(value);
+          $input.val(checkedValues.join());
+        },
+        onUnchecked() {
+          const value = checkboxElement.data('value');
+          const checkedValues = $input.val().split(',').filter(x => x);
+          const i = checkedValues.indexOf(value);
+          if (i !== -1) {
+            checkedValues.splice(i, 1);
+          }
           $input.val(checkedValues.join());
         },
       });
