@@ -50,8 +50,11 @@ final class MoneyFilterSpec extends ObjectBehavior
 
         $expressionBuilder
             ->greaterThan('total', 1200)
-            ->shouldBeCalledTimes(2)
+            ->willReturn('EXPR1', 'EXPR2')
         ;
+
+        $dataSource->restrict('EXPR1')->shouldBeCalled();
+        $dataSource->restrict('EXPR2')->shouldBeCalled();
 
         $this->apply(
             $dataSource,
@@ -84,15 +87,6 @@ final class MoneyFilterSpec extends ObjectBehavior
         $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
-        $expressionBuilder
-            ->greaterThan('total', Argument::any())
-            ->shouldNotBeCalled()
-        ;
-        $expressionBuilder
-            ->lessThan('total', Argument::any())
-            ->shouldNotBeCalled()
-        ;
-
         $this->apply(
             $dataSource,
             'total',
@@ -120,13 +114,11 @@ final class MoneyFilterSpec extends ObjectBehavior
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR');
-        $dataSource->restrict('EXPR')->shouldBeCalled();
+        $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR1');
+        $dataSource->restrict('EXPR1')->shouldBeCalled();
 
-        $expressionBuilder
-            ->greaterThan('total', 1200)
-            ->shouldBeCalled()
-        ;
+        $expressionBuilder->greaterThan('total', 1200)->willReturn('EXPR2');
+        $dataSource->restrict('EXPR2')->shouldBeCalled();
 
         $this->apply(
             $dataSource,
@@ -146,13 +138,11 @@ final class MoneyFilterSpec extends ObjectBehavior
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR');
-        $dataSource->restrict('EXPR')->shouldBeCalled();
+        $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR1');
+        $dataSource->restrict('EXPR1')->shouldBeCalled();
 
-        $expressionBuilder
-            ->lessThan('total', 12000)
-            ->shouldBeCalled()
-        ;
+        $expressionBuilder->lessThan('total', 12000)->willReturn('EXPR2');
+        $dataSource->restrict('EXPR2')->shouldBeCalled();
 
         $this->apply(
             $dataSource,
@@ -172,17 +162,14 @@ final class MoneyFilterSpec extends ObjectBehavior
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR');
-        $dataSource->restrict('EXPR')->shouldBeCalled();
+        $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR1');
+        $dataSource->restrict('EXPR1')->shouldBeCalled();
 
-        $expressionBuilder
-            ->greaterThan('total', 1200)
-            ->shouldBeCalled()
-        ;
-        $expressionBuilder
-            ->lessThan('total', 12000)
-            ->shouldBeCalled()
-        ;
+        $expressionBuilder->greaterThan('total', 1200)->willReturn('EXPR2');
+        $dataSource->restrict('EXPR2')->shouldBeCalled();
+
+        $expressionBuilder->lessThan('total', 12000)->willReturn('EXPR3');
+        $dataSource->restrict('EXPR3')->shouldBeCalled();
 
         $this->apply(
             $dataSource,
@@ -202,17 +189,14 @@ final class MoneyFilterSpec extends ObjectBehavior
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR');
-        $dataSource->restrict('EXPR')->shouldBeCalled();
+        $expressionBuilder->equals('currencyCode', 'GBP')->willReturn('EXPR1');
+        $dataSource->restrict('EXPR1')->shouldBeCalled();
 
-        $expressionBuilder
-            ->greaterThan('total', 1200000)
-            ->shouldBeCalled()
-        ;
-        $expressionBuilder
-            ->lessThan('total', 12000000)
-            ->shouldBeCalled()
-        ;
+        $expressionBuilder->greaterThan('total', 1200000)->willReturn('EXPR2');
+        $dataSource->restrict('EXPR2')->shouldBeCalled();
+
+        $expressionBuilder->lessThan('total', 12000000)->willReturn('EXPR3');
+        $dataSource->restrict('EXPR3')->shouldBeCalled();
 
         $this->apply(
             $dataSource,
