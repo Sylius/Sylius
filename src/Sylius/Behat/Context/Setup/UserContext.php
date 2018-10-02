@@ -165,7 +165,6 @@ final class UserContext implements Context
     private function prepareUserPasswordResetToken(UserInterface $user)
     {
         $token = 'itotallyforgotmypassword';
-        $this->sharedStorage->set('password_reset_token', $token);
 
         $user->setPasswordResetToken($token);
         $user->setPasswordRequestedAt(new \DateTime());
