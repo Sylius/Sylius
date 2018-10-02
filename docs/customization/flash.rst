@@ -18,7 +18,7 @@ How to customize a flash message?
 
 In order to customize a resource flash in your project:
 
-**1.** Create the ``app\Resources\translations\flashes.en.yml`` for english contents of your flashes.
+**1.** Create the ``translations\flashes.en.yml`` for english contents of your flashes.
 
 .. note::
 

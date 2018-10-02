@@ -6,7 +6,7 @@ In the default scenario, it will return an instance of paginator, with a list of
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_index:
         path: /books
@@ -27,7 +27,7 @@ Just like for the **showAction**, you can override the default template and crit
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_index_inactive:
         path: /books/disabled
@@ -48,7 +48,7 @@ Except filtering, you can also sort Books.
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_index_top:
         path: /books/top
@@ -81,7 +81,7 @@ You can also control the "max per page" for paginator, using ``paginate`` parame
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_index_top:
         path: /books/top
@@ -104,7 +104,7 @@ Pagination is handy, but you do not always want to do it, you can disable pagina
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_index_top3:
         path: /books/top
@@ -126,7 +126,7 @@ Configuration Reference
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_index:
         path: /{author}/books

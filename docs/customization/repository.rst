@@ -20,7 +20,7 @@ How to customize a Repository?
 
 Let's assume that you would want to find products that you are running out of in the inventory.
 
-**1.** Create your own repository class under the ``AppBundle\Repository`` namespace.
+**1.** Create your own repository class under the ``App\Repository`` namespace.
 Remember that it has to extend a proper base class. How can you check that?
 
 For the ``ProductRepository`` run:
@@ -35,7 +35,7 @@ As a result you will get the ``Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepo
 
     <?php
 
-    namespace AppBundle\Repository;
+    namespace App\Repository;
 
     use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 
@@ -67,7 +67,7 @@ As we are selecting Products we need to have a join to translations, because the
 We are sorting the results by the count of how many products are still available on hand, which is saved on the ``onHand`` field on the specific ``variant`` of each product.
 Then we are limiting the query to 8 by default, to get only 8 products that are low in stock.
 
-**2.** In order to use your repository you need to configure it in the ``app/config/config.yml``.
+**2.** In order to use your repository you need to configure it in the ``config/_sylius.yaml``.
 
 .. code-block:: yaml
 
@@ -75,7 +75,7 @@ Then we are limiting the query to 8 by default, to get only 8 products that are 
         resources:
             product:
                 classes:
-                    repository: AppBundle\Repository\ProductRepository
+                    repository: App\Repository\ProductRepository
 
 **3.** After configuring the ``sylius.repository.product`` service has your ``findByOnHand()`` method available.
 You can form now on use your method in any **Controller**.
@@ -94,7 +94,7 @@ You can form now on use your method in any **Controller**.
 What happens while overriding Repositories?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* The parameter ``sylius.repository.product.class`` contains ``AppBundle\Repository\ProductRepository``.
+* The parameter ``sylius.repository.product.class`` contains ``App\Repository\ProductRepository``.
 * The repository service ``sylius.repository.product`` is using your new class.
 * Under the ``sylius.repository.product`` service you have got all methods from the base repository available plus the one you have added.
 

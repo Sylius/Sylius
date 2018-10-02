@@ -101,7 +101,7 @@ That's it. SyliusResourceBundle allows to generate a default CRUD interface incl
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
     app_admin:
         resource: 'routing/admin.yml'
         prefix: /admin

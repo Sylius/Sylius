@@ -53,13 +53,13 @@ final class RequestConfigurationSpec extends ObjectBehavior
 
     function it_returns_default_template_names(MetadataInterface $metadata): void
     {
-        $metadata->getTemplatesNamespace()->willReturn('SyliusAdminBundle:Product');
+        $metadata->getTemplatesNamespace()->willReturn('@SyliusAdmin/Product');
 
-        $this->getDefaultTemplate('index.html')->shouldReturn('SyliusAdminBundle:Product:index.html.twig');
-        $this->getDefaultTemplate('show.html')->shouldReturn('SyliusAdminBundle:Product:show.html.twig');
-        $this->getDefaultTemplate('create.html')->shouldReturn('SyliusAdminBundle:Product:create.html.twig');
-        $this->getDefaultTemplate('update.html')->shouldReturn('SyliusAdminBundle:Product:update.html.twig');
-        $this->getDefaultTemplate('custom.html')->shouldReturn('SyliusAdminBundle:Product:custom.html.twig');
+        $this->getDefaultTemplate('index.html')->shouldReturn('@SyliusAdmin/Product/index.html.twig');
+        $this->getDefaultTemplate('show.html')->shouldReturn('@SyliusAdmin/Product/show.html.twig');
+        $this->getDefaultTemplate('create.html')->shouldReturn('@SyliusAdmin/Product/create.html.twig');
+        $this->getDefaultTemplate('update.html')->shouldReturn('@SyliusAdmin/Product/update.html.twig');
+        $this->getDefaultTemplate('custom.html')->shouldReturn('@SyliusAdmin/Product/custom.html.twig');
     }
 
     function it_returns_default_template_names_for_a_directory_based_templates(MetadataInterface $metadata): void
@@ -75,10 +75,10 @@ final class RequestConfigurationSpec extends ObjectBehavior
 
     function it_takes_the_custom_template_if_specified(MetadataInterface $metadata, Parameters $parameters): void
     {
-        $metadata->getTemplatesNamespace()->willReturn('SyliusAdminBundle:Product');
-        $parameters->get('template', 'SyliusAdminBundle:Product:foo.html.twig')->willReturn('AppBundle:Product:show.html.twig');
+        $metadata->getTemplatesNamespace()->willReturn('@SyliusAdmin/Product');
+        $parameters->get('template', '@SyliusAdmin/Product/foo.html.twig')->willReturn('Product/show.html.twig');
 
-        $this->getTemplate('foo.html')->shouldReturn('AppBundle:Product:show.html.twig');
+        $this->getTemplate('foo.html')->shouldReturn('Product/show.html.twig');
     }
 
     function it_gets_form_type_and_its_options(MetadataInterface $metadata, Parameters $parameters): void

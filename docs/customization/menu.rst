@@ -23,7 +23,7 @@ How to customize Admin Menu?
 
     Admin Panel menu is the one in the left expandable sidebar on the ``/admin/`` url.
 
-**1.** In order to add items to the Admin menu in **Sylius** you have to create a ``AppBundle\Menu\AdminMenuListener`` class.
+**1.** In order to add items to the Admin menu in **Sylius** you have to create a ``App\Menu\AdminMenuListener`` class.
 
 In the example below we are adding a one new item and sub-item to the Admin panel menu.
 
@@ -31,7 +31,7 @@ In the example below we are adding a one new item and sub-item to the Admin pane
 
     <?php
 
-    namespace AppBundle\Menu;
+    namespace App\Menu;
 
     use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
@@ -57,14 +57,14 @@ In the example below we are adding a one new item and sub-item to the Admin pane
     }
 
 **2.** After creating your class with a proper method for the menu customizations you need, subscribe your
-listener to the ``sylius.menu.admin.main`` event in the ``AppBundle/Resources/config/services.yml``.
+listener to the ``sylius.menu.admin.main`` event in the ``config/services.yaml``.
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/services.yml
+    # config/services.yaml
     services:
         app.listener.admin.menu_builder:
-            class: AppBundle\Menu\AdminMenuListener
+            class: App\Menu\AdminMenuListener
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addAdminMenuItems }
 
@@ -82,7 +82,7 @@ How to customize Account Menu?
 
     My Account panel menu is the one in the left sidebar on the ``/account/dashboard/`` url.
 
-**1.** In order to add items to the Account menu in **Sylius** you have to create a ``AppBundle\Menu\AccountMenuListener`` class.
+**1.** In order to add items to the Account menu in **Sylius** you have to create a ``App\Menu\AccountMenuListener`` class.
 
 In the example below we are adding a one new item to **the menu in the My Account section of shop**.
 
@@ -90,7 +90,7 @@ In the example below we are adding a one new item to **the menu in the My Accoun
 
     <?php
 
-    namespace AppBundle\Menu;
+    namespace App\Menu;
 
     use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
@@ -114,14 +114,14 @@ In the example below we are adding a one new item to **the menu in the My Accoun
 As you can see above the new item can be given a route, a label and an icon.
 
 **2.** After creating your class with a proper method for the menu customizations you need, subscribe your
-listener to the ``sylius.menu.shop.account`` event in the ``AppBundle/Resources/config/services.yml``.
+listener to the ``sylius.menu.shop.account`` event in the ``config/services.yaml``.
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/services.yml
+    # config/services.yaml
     services:
         app.listener.shop.menu_builder:
-            class: AppBundle\Menu\AccountMenuListener
+            class: App\Menu\AccountMenuListener
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.shop.account, method: addAccountMenuItems }
 
@@ -139,7 +139,7 @@ How to customize Admin Customer Show Menu?
 
     Admin customer menu is the set of buttons in the right top corner on the ``/admin/customers/{id}`` url.
 
-**1.** In order to add buttons to the Admin Customer Show menu in **Sylius** you have to create a ``AppBundle\Menu\AdminCustomerShowMenuListener`` class.
+**1.** In order to add buttons to the Admin Customer Show menu in **Sylius** you have to create a ``App\Menu\AdminCustomerShowMenuListener`` class.
 
 .. note::
 
@@ -159,7 +159,7 @@ type is default to make the example easily customizable.
 
     <?php
 
-    namespace AppBundle\Menu;
+    namespace App\Menu;
 
     use Sylius\Bundle\AdminBundle\Event\CustomerShowMenuBuilderEvent;
 
@@ -189,14 +189,14 @@ type is default to make the example easily customizable.
     }
 
 **2.** After creating your class with a proper method for the menu customizations you need, subscribe your
-listener to the ``sylius.menu.admin.customer.show`` event in the ``AppBundle/Resources/config/services.yml``.
+listener to the ``sylius.menu.admin.customer.show`` event in the ``config/services.yaml``.
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/services.yml
+    # config/services.yaml
     services:
         app.listener.admin.customer.show.menu_builder:
-            class: AppBundle\Menu\AdminCustomerShowMenuListener
+            class: App\Menu\AdminCustomerShowMenuListener
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.admin.customer.show, method: addAdminCustomerShowMenuItems }
 
@@ -207,7 +207,7 @@ How to customize Admin Order Show Menu?
 
     Admin order show menu is the set of buttons in the right top corner on the ``/admin/orders/{id}`` url.
 
-**1.** In order to add buttons to the Admin Order Show menu in **Sylius** you have to create a ``AppBundle\Menu\AdminOrderShowMenuListener`` class.
+**1.** In order to add buttons to the Admin Order Show menu in **Sylius** you have to create a ``App\Menu\AdminOrderShowMenuListener`` class.
 
 .. note::
 
@@ -231,7 +231,7 @@ that will let the admin fulfill the order.
 
     <?php
 
-    namespace AppBundle\Menu;
+    namespace App\Menu;
 
     use Sylius\Bundle\AdminBundle\Event\OrderShowMenuBuilderEvent;
     use Sylius\Component\Order\OrderTransitions;
@@ -263,14 +263,14 @@ that will let the admin fulfill the order.
     }
 
 **2.** After creating your class with a proper method for the menu customizations you need, subscribe your
-listener to the ``sylius.menu.admin.order.show`` event in the ``AppBundle/Resources/config/services.yml``.
+listener to the ``sylius.menu.admin.order.show`` event in the ``config/services.yaml``.
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/services.yml
+    # config/services.yaml
     services:
         app.listener.admin.order.show.menu_builder:
-            class: AppBundle\Menu\AdminOrderShowMenuListener
+            class: App\Menu\AdminOrderShowMenuListener
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.admin.order.show, method: addAdminOrderShowMenuItems }
 
@@ -285,20 +285,21 @@ How to customize Admin Product Form Menu?
 
     This part of the guide assumes you already know how to customize :doc:`models </customization/model>` and :doc:`forms </customization/form>`.
 
-**1.** In order to add a new tab to the Admin Product Form menu in **Sylius** you have to create a ``AppBundle\Menu\AdminProductFormMenuListener`` class.
+**1.** In order to add a new tab to the Admin Product Form menu in **Sylius** you have to create a ``App\Menu\AdminProductFormMenuListener`` class.
 
 .. note::
 
     **This menu is build from tabs, each coupled with their own template containing the necessary part of the form.**
 
 So lets say you want to add the product's manufacturer details to the tabs.
-Provided you have created a new template with all the required form fields and saved it etc. as ``AppBundle\Resources\views\Admin\Product\Tab\_manufacturer.html.twig``, we will use it in the example below.
+Provided you have created a new template with all the required form fields and saved it etc.
+as ``templates\Admin\Product\Tab\_manufacturer.html.twig``, we will use it in the example below.
 
 .. code-block:: php
 
     <?php
 
-    namespace AppBundle\Menu;
+    namespace App\Menu;
 
     use Sylius\Bundle\AdminBundle\Event\ProductMenuBuilderEvent;
 
@@ -313,21 +314,21 @@ Provided you have created a new template with all the required form fields and s
 
             $menu
                 ->addChild('manufacturer')
-                ->setAttribute('template', '@App/Admin/Product/Tab/_manufacturer.html.twig')
+                ->setAttribute('template', 'Admin/Product/Tab/_manufacturer.html.twig')
                 ->setLabel('Manufacturer')
             ;
         }
     }
 
 **2.** After creating your class with a proper method for the menu customizations you need, subscribe your
-listener to the ``sylius.menu.admin.product.form`` event in the ``AppBundle/Resources/config/services.yml``.
+listener to the ``sylius.menu.admin.product.form`` event in the ``config/services.yaml``.
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/services.yml
+    # config/services.yaml
     services:
         app.listener.admin.product.form.menu_builder:
-            class: AppBundle\Menu\AdminProductFormMenuListener
+            class: App\Menu\AdminProductFormMenuListener
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.admin.product.form, method: addItems }
 
@@ -342,20 +343,20 @@ How to customize Admin Product Variant Form Menu?
 
     This part of the guide assumes you already know how to customize :doc:`models </customization/model>` and :doc:`forms </customization/form>`.
 
-**1.** In order to add a new tab to the Admin Product Variant Form menu in **Sylius** you have to create a ``AppBundle\Menu\AdminProductVariantFormMenuListener`` class.
+**1.** In order to add a new tab to the Admin Product Variant Form menu in **Sylius** you have to create a ``App\Menu\AdminProductVariantFormMenuListener`` class.
 
 .. note::
 
     **This menu is build from tabs, each coupled with their own template containing the necessary part of the form.**
 
 So lets say you want to add the product variant's media to the tabs.
-Provided you have created a new template with the required form fields and saved it etc. as ``AppBundle\Resources\views\Admin\ProductVariant\Tab\_media.html.twig``, we will use it in the example below.
+Provided you have created a new template with the required form fields and saved it etc. as ``templates\Admin\ProductVariant\Tab\_media.html.twig``, we will use it in the example below.
 
 .. code-block:: php
 
     <?php
 
-    namespace AppBundle\Menu;
+    namespace App\Menu;
 
     use Sylius\Bundle\AdminBundle\Event\ProductVariantMenuBuilderEvent;
 
@@ -370,21 +371,21 @@ Provided you have created a new template with the required form fields and saved
 
             $menu
                 ->addChild('media')
-                ->setAttribute('template', '@App/Admin/ProductVariant/Tab/_media.html.twig')
+                ->setAttribute('template', 'Admin/ProductVariant/Tab/_media.html.twig')
                 ->setLabel('Media')
             ;
         }
     }
 
 **2.** After creating your class with a proper method for the menu customizations you need, subscribe your
-listener to the ``sylius.menu.admin.product_variant.form`` event in the ``AppBundle/Resources/config/services.yml``.
+listener to the ``sylius.menu.admin.product_variant.form`` event in the ``config/services.yaml``.
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/services.yml
+    # config/services.yaml
     services:
         app.listener.admin.product_variant.form.menu_builder:
-            class: AppBundle\Menu\AdminProductVariantFormMenuListener
+            class: App\Menu\AdminProductVariantFormMenuListener
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.admin.product_variant.form, method: addItems }
 

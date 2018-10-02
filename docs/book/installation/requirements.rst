@@ -75,8 +75,8 @@ Access rights
 Most of the application folders and files require only read access, but a few folders need also the write access for the Apache/Nginx user:
 
 * var/cache
-* var/logs
-* web/media
+* var/log
+* public/media
 
 You can read how to set these permissions in the `Symfony - setting up permissions <http://symfony.com/doc/current/setup/file_permissions.html>`_ section.
 

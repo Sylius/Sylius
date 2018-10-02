@@ -691,7 +691,7 @@ It should returns:
 .. code-block:: bash
 
     [Doctrine\Common\Persistence\Mapping\MappingException]
-    The class 'UserBundle\Entity\ShopUser' was not found in the chain configured namespaces AppBundle\Entity, Sylius\Component\Customer\Model, Sylius\Component\User\Model, Sylius\Component\Ad
+    The class 'UserBundle\Entity\ShopUser' was not found in the chain configured namespaces App\Entity, Sylius\Component\Customer\Model, Sylius\Component\User\Model, Sylius\Component\Ad
     dressing\Model
 
 This seems to be a "known issue" related to the shema-tool CLI command, as obviously this command uses all the metadata collected across all mapping drivers.
@@ -702,7 +702,7 @@ To fix this I overriden the UpdateSchemaDoctrineCommand and excluded all the Syl
 
     <?php
 
-    namespace AppBundle\Command;
+    namespace App\Command;
 
     use Symfony\Component\Console\Input\InputOption;
     use Symfony\Component\Console\Input\InputArgument;

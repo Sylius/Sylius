@@ -18,9 +18,9 @@ This class needs also a ``isConfigurationValid()`` method which was omitted in t
 
     <?php
 
-    namespace AppBundle\Promotion\Action;
+    namespace App\Promotion\Action;
 
-    use AppBundle\Promotion\Action\CheapestProductDiscountPromotionActionCommand;
+    use App\Promotion\Action\CheapestProductDiscountPromotionActionCommand;
 
     class CheapestProductDiscountPromotionActionCommand extends DiscountPromotionActionCommand
     {
@@ -91,7 +91,7 @@ The new action needs a form type to be available in the admin panel, while creat
 
     <?php
 
-    namespace AppBundle\Form\Type\Action;
+    namespace App\Form\Type\Action;
 
     use Symfony\Component\Form\AbstractType;
 
@@ -109,28 +109,28 @@ The new action needs a form type to be available in the admin panel, while creat
 Register the action as a service
 --------------------------------
 
-In the ``app/config/services.yml`` configure:
+In the ``config/services.yaml`` configure:
 
 .. code-block:: yaml
 
-    # app/config/services.yml
+    # config/services.yaml
     app.promotion_action.cheapest_product_discount:
-        class: AppBundle\Promotion\Action\CheapestProductDiscountPromotionActionCommand
+        class: App\Promotion\Action\CheapestProductDiscountPromotionActionCommand
         arguments: ['@sylius.proportional_integer_distributor', '@sylius.promotion.units_promotion_adjustments_applicator']
         tags:
-            - { name: sylius.promotion_action, type: cheapest_product_discount, form_type: AppBundle\Form\Type\Action\CheapestProductDiscountConfigurationType, label: Cheapest product discount }
+            - { name: sylius.promotion_action, type: cheapest_product_discount, form_type: App\Form\Type\Action\CheapestProductDiscountConfigurationType, label: Cheapest product discount }
 
 
 Register the form type as a service
 -----------------------------------
 
-In the ``app/config/services.yml`` configure:
+In the ``config/services.yaml`` configure:
 
 .. code-block:: yaml
 
-    # app/config/services.yml
+    # config/services.yaml
     app.form.type.promotion_action.cheapest_product_discount_configuration:
-        class: AppBundle\Form\Type\Action\CheapestProductDiscountConfigurationType
+        class: App\Form\Type\Action\CheapestProductDiscountConfigurationType
         tags:
             - { name: form.type }
 

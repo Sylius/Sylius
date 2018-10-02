@@ -83,15 +83,15 @@ final class SyliusGridExtensionTest extends AbstractExtensionTestCase
         $this->load([
             'templates' => [
                 'filter' => [
-                    'string' => 'AppBundle:Grid/Filter:string.html.twig',
-                    'date' => 'AppBundle:Grid/Filter:date.html.twig',
+                    'string' => 'Grid/Filter/string.html.twig',
+                    'date' => 'Grid/Filter/date.html.twig',
                 ],
             ],
         ]);
 
         $this->assertContainerBuilderHasParameter('sylius.grid.templates.filter', [
-            'string' => 'AppBundle:Grid/Filter:string.html.twig',
-            'date' => 'AppBundle:Grid/Filter:date.html.twig',
+            'string' => 'Grid/Filter/string.html.twig',
+            'date' => 'Grid/Filter/date.html.twig',
         ]);
     }
 
@@ -103,15 +103,15 @@ final class SyliusGridExtensionTest extends AbstractExtensionTestCase
         $this->load([
             'templates' => [
                 'action' => [
-                    'create' => 'AppBundle:Grid/Filter:create.html.twig',
-                    'update' => 'AppBundle:Grid/Filter:update.html.twig',
+                    'create' => 'Grid/Filter/create.html.twig',
+                    'update' => 'Grid/Filter/update.html.twig',
                 ],
             ],
         ]);
 
         $this->assertContainerBuilderHasParameter('sylius.grid.templates.action', [
-            'create' => 'AppBundle:Grid/Filter:create.html.twig',
-            'update' => 'AppBundle:Grid/Filter:update.html.twig',
+            'create' => 'Grid/Filter/create.html.twig',
+            'update' => 'Grid/Filter/update.html.twig',
         ]);
     }
 

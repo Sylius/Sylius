@@ -5,22 +5,22 @@ sylius_mailer:
     emails:
         contact_request:
             subject: sylius.emails.contact_request.subject
-            template: "SyliusShopBundle:Email:contactRequest.html.twig"
+            template: "@SyliusShop/Email/contactRequest.html.twig"
         order_confirmation:
             subject: sylius.emails.order_confirmation.subject
-            template: "SyliusShopBundle:Email:orderConfirmation.html.twig"
+            template: "@SyliusShop/Email/orderConfirmation.html.twig"
         user_registration:
             subject: sylius.emails.user_registration.subject
-            template: "SyliusShopBundle:Email:userRegistration.html.twig"
+            template: "@SyliusShop/Email/userRegistration.html.twig"
         password_reset:
             subject: sylius.emails.user.password_reset.subject
-            template: "SyliusShopBundle:Email:passwordReset.html.twig"
+            template: "@SyliusShop/Email/passwordReset.html.twig"
         reset_password_token:
             subject: sylius.emails.user.password_reset.subject
-            template: "SyliusShopBundle:Email:passwordReset.html.twig"
+            template: "@SyliusShop/Email/passwordReset.html.twig"
         reset_password_pin:
             subject: sylius.emails.user.password_reset.subject
-            template: "SyliusShopBundle:Email:passwordReset.html.twig"
+            template: "@SyliusShop/Email/passwordReset.html.twig"
         verification_token:
             subject: sylius.emails.user.verification_token.subject
-            template: "SyliusShopBundle:Email:verification.html.twig"
+            template: "@SyliusShop/Email/verification.html.twig"
