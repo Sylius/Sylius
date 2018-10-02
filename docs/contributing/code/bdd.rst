@@ -10,8 +10,8 @@ Sylius adopted the full-stack BDD methodology for its development processes.
 According to `Wikipedia`_:
 
     "BDD is a software development process based on test-driven development (TDD).
-    Behavior-driven development combines the general techniques and principles of TDD with ideas from domain-driven design and object-oriented 
-    analysis and design to provide software developers and business analysts with shared tools and a shared process 
+    Behavior-driven development combines the general techniques and principles of TDD with ideas from domain-driven design and object-oriented
+    analysis and design to provide software developers and business analysts with shared tools and a shared process
     to collaborate on software development, with the aim of delivering software that matters."
 
 Setting up Behat & PHPSpec
@@ -125,7 +125,7 @@ You can launch Selenium by issuing the following command:
 .. code-block:: bash
 
   $ java -jar selenium-server-standalone-2.38.0.jar
-  
+
 Configure behat for Selenium:
 
 .. code-block:: yaml
@@ -137,14 +137,14 @@ Configure behat for Selenium:
                 default_session: selenium2
                 browser_name: firefox
                 base_url: http://sylius-test.local/app_test.php
-                selenium2:                    
+                selenium2:
                     capabilities: { "browser": "firefox", "version": "28"}
 
 Run your scenario using the ``behat`` console:
 
 .. code-block:: bash
 
-  $ bin/behat
+  $ vendor/bin/behat
 
 PHPSpec
 -------
@@ -162,7 +162,7 @@ the `PriceUpdater` class.
 
 .. code-block:: bash
 
-    $ bin/phpspec desc "Sylius\Bundle\CoreBundle\Pricing\PriceUpdater"
+    $ vendor/bin/phpspec desc "Sylius\Bundle\CoreBundle\Pricing\PriceUpdater"
     Specification for PriceUpdater created in spec.
 
 What have we just done? **PHPSpec** has created the spec for us. You can
@@ -229,7 +229,7 @@ Try running the example by using the following command:
 
 .. code-block:: bash
 
-    $ bin/phpspec run 
+    $ vendor/bin/phpspec run
 
     > spec\Sylius\Bundle\CoreBundle\Pricing\PriceUpdater
 
@@ -270,12 +270,12 @@ Done! If you run PHPSpec again, you should see the following output:
 
 .. code-block:: bash
 
-    $ bin/phpspec run 
-    
+    $ vendor/bin/phpspec run
+
     > spec\Sylius\Bundle\CoreBundle\Pricing\PriceUpdater
-    
+
       ✔ it updates product price through api
-    
+
     1 examples (1 passed)
     223ms
 
