@@ -53,7 +53,7 @@ To achieve that you will need to:
         emails:
             out_of_stock:
                 subject: "A product has become out of stock!"
-                template: "App:Email:out_of_stock.html.twig"
+                template: "Email/out_of_stock.html.twig"
 
 2. Create an Email Manager class:
 ---------------------------------

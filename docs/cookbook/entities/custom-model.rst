@@ -166,7 +166,7 @@ Remember to import your grid in the ``app/config/grids/grids.yml`` file which ha
 Having a grid prepared we can configure routing for the entity administration:
 
 Create the ``app/config/routing/admin/supplier.yml`` file. Include it in the ``app/config/routing/admin.yml``, which
-should be also included in the ``config/packages/routing.yaml``.
+should be also included in the ``config/routes.yaml``.
 
 .. code-block:: yaml
 
@@ -193,7 +193,7 @@ should be also included in the ``config/packages/routing.yaml``.
 
 .. code-block:: yaml
 
-    # config/packages/routing.yaml
+    # config/routes.yaml
     app_admin:
         resource: 'routing/admin.yml'
         prefix: /admin

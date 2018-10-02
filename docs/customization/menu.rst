@@ -23,7 +23,7 @@ How to customize Admin Menu?
 
     Admin Panel menu is the one in the left expandable sidebar on the ``/admin/`` url.
 
-**1.** In order to add items to the Admin menu in **Sylius** you have to create a ``Menu\AdminMenuListener`` class.
+**1.** In order to add items to the Admin menu in **Sylius** you have to create a ``App\Menu\AdminMenuListener`` class.
 
 In the example below we are adding a one new item and sub-item to the Admin panel menu.
 
@@ -82,7 +82,7 @@ How to customize Account Menu?
 
     My Account panel menu is the one in the left sidebar on the ``/account/dashboard/`` url.
 
-**1.** In order to add items to the Account menu in **Sylius** you have to create a ``Menu\AccountMenuListener`` class.
+**1.** In order to add items to the Account menu in **Sylius** you have to create a ``App\Menu\AccountMenuListener`` class.
 
 In the example below we are adding a one new item to **the menu in the My Account section of shop**.
 
@@ -139,7 +139,7 @@ How to customize Admin Customer Show Menu?
 
     Admin customer menu is the set of buttons in the right top corner on the ``/admin/customers/{id}`` url.
 
-**1.** In order to add buttons to the Admin Customer Show menu in **Sylius** you have to create a ``Menu\AdminCustomerShowMenuListener`` class.
+**1.** In order to add buttons to the Admin Customer Show menu in **Sylius** you have to create a ``App\Menu\AdminCustomerShowMenuListener`` class.
 
 .. note::
 
@@ -207,7 +207,7 @@ How to customize Admin Order Show Menu?
 
     Admin order show menu is the set of buttons in the right top corner on the ``/admin/orders/{id}`` url.
 
-**1.** In order to add buttons to the Admin Order Show menu in **Sylius** you have to create a ``Menu\AdminOrderShowMenuListener`` class.
+**1.** In order to add buttons to the Admin Order Show menu in **Sylius** you have to create a ``App\Menu\AdminOrderShowMenuListener`` class.
 
 .. note::
 
@@ -285,7 +285,7 @@ How to customize Admin Product Form Menu?
 
     This part of the guide assumes you already know how to customize :doc:`models </customization/model>` and :doc:`forms </customization/form>`.
 
-**1.** In order to add a new tab to the Admin Product Form menu in **Sylius** you have to create a ``Menu\AdminProductFormMenuListener`` class.
+**1.** In order to add a new tab to the Admin Product Form menu in **Sylius** you have to create a ``App\Menu\AdminProductFormMenuListener`` class.
 
 .. note::
 
@@ -343,7 +343,7 @@ How to customize Admin Product Variant Form Menu?
 
     This part of the guide assumes you already know how to customize :doc:`models </customization/model>` and :doc:`forms </customization/form>`.
 
-**1.** In order to add a new tab to the Admin Product Variant Form menu in **Sylius** you have to create a ``Menu\AdminProductVariantFormMenuListener`` class.
+**1.** In order to add a new tab to the Admin Product Variant Form menu in **Sylius** you have to create a ``App\Menu\AdminProductVariantFormMenuListener`` class.
 
 .. note::
 

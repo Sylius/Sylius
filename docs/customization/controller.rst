@@ -32,7 +32,7 @@ Having this method you may be rendering its result in a new action of the ``Prod
 
 See example below:
 
-**1.** Create a new Controller class under the ``Controller`` namespace.
+**1.** Create a new Controller class under the ``App\Controller`` namespace.
 
 Remember that it has to extend a proper base class. How can you check that?
 
