@@ -34,10 +34,8 @@ To create a new project using Sylius Standard Edition, run this command:
 
     Make sure to use PHP ^7.1. Using an older PHP version will result in installing an older version of Sylius.
 
-This will create a new Symfony project in ``acme`` directory. When all the
-dependencies are installed, you'll be asked to fill the ``parameters.yml``
-file via interactive script. Please follow the steps. After everything is in
-place, run the following commands:
+This will create a new Symfony project in ``acme`` directory.
+After everything is in place, run the following commands:
 
 .. code-block:: bash
 
@@ -49,7 +47,8 @@ This package has the whole ``sylius/sylius`` package in vendors, so you can easi
 .. warning::
 
     During the ``sylius:install`` command you will be asked to provide important information, but also its execution ensures
-    that the default **currency** (USD) and the default **locale** (English - US) are set they can be later on changed in the ``parameters.yml`` file.
+    that the default **currency** (USD) and the default **locale** (English - US) are set.
+    They can be changed later, respespectively in the "Configuration > Channels" section of the admin and in the ``app/config/services.yaml`` file.
     From now on all the prices will be stored in the database in USD as integers, and all the products will have to be added with a base american english name translation.
 
 Installing assets
@@ -81,14 +80,14 @@ Accessing the Shop
 .. tip::
 
     We strongly recommend using the Symfony built-in web server by running the
-    ``php bin/console server:start --docroot=web 127.0.0.1:8000``
+    ``php bin/console server:start``
     command and then accessing ``http://127.0.0.1:8000`` in your web browser to see the shop.
 
 .. note::
 
     The localhost's 8000 port may be already occupied by some other process.
     If so you should try other ports, like for instance:
-    ``php bin/console server:start --docroot=web 127.0.0.1:8081``
+    ``php bin/console server:start 127.0.0.1:8081``
     Want to know more about using a built-in server, see `here <http://symfony.com/doc/current/cookbook/web_server/built_in.html>`_.
 
 You can log in as an administrator, with the credentials you have provided during the installation process.
