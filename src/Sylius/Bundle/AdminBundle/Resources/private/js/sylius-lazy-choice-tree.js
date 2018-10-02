@@ -153,16 +153,19 @@
 
             var bindCheckboxAction = function (checkboxElement) {
                 checkboxElement.checkbox({
-                    onChange: function () {
-                        var $checkboxes = tree.find('.checkbox');
-                        var checkedValues = [];
-
-                        $checkboxes.each(function () {
-                            if ($(this).checkbox('is checked')) {
-                                checkedValues.push($(this).data('value'));
-                            }
-                        });
-
+                    onChecked: function() {
+                        var value = checkboxElement.data('value');
+                        var checkedValues = $input.val().split(",").filter(x => x);
+                        checkedValues.push(value);
+                        $input.val(checkedValues.join());
+                    },
+                    onUnchecked: function() {
+                        var value = checkboxElement.data('value');
+                        var checkedValues = $input.val().split(",").filter(x => x);
+                        var i = checkedValues.indexOf(value);
+                        if(i != -1) {
+                            checkedValues.splice(i, 1);
+                        }
                         $input.val(checkedValues.join());
                     }
                 });
