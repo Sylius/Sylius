@@ -70,7 +70,7 @@ Configure doctrine extensions which are used by this bundle.
 Routing configuration
 ---------------------
 
-Add the following to your ``app/config/routing.yml``.
+Add the following to your ``config/routes.yaml``.
 
 .. code-block:: yaml
 

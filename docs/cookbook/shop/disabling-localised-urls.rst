@@ -7,13 +7,13 @@ look like that ``localhost:8000/en_US/``.
 
 If you do not need localised URLs, this guide will help you to disable this feature.
 
-**1.** Customise the application routing in the ``app/config/routing.yml``.
+**1.** Customise the application routing in the ``config/routes.yaml``.
 
 Replace:
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     sylius_shop:
         resource: "@SyliusShopBundle/Resources/config/routing.yml"
@@ -31,7 +31,7 @@ With:
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     sylius_shop:
         resource: "@SyliusShopBundle/Resources/config/routing.yml"

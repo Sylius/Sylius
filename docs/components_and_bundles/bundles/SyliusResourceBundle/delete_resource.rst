@@ -5,7 +5,7 @@ Deleting a resource is simple.
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_delete:
         path: /books/{id}
@@ -39,7 +39,7 @@ For example, if you want to delete a book that belongs to a particular genre, no
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_delete:
         path: /genre/{genreId}/books/{id}
@@ -60,7 +60,7 @@ By default the controller will redirect to the "index" route after successful ac
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_delete:
         path: /genre/{genreId}/books/{id}
@@ -82,7 +82,7 @@ However, you can customize the last part of the event, to provide your own actio
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_customer_delete:
         path: /customer/book-delete/{id}
@@ -101,7 +101,7 @@ Configuration Reference
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_genre_book_remove:
         path: /{genreName}/books/{id}/remove

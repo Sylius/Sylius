@@ -45,7 +45,7 @@ How to install Sylius using Vagrant?
     # etc/hosts
     10.0.0.200      sylius.test www.sylius.test
 
-From now on you will be able to access running Sylius application at ``http://sylius.test/app_dev.php``.
+From now on you will be able to access running Sylius application at ``http://sylius.test/index.php``.
 
 .. _Composer: http://packagist.org
 .. _`Composer installed globally`: http://getcomposer.org/doc/00-intro.md#globally

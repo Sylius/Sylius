@@ -9,7 +9,7 @@ Let's assume that you have a ``app.book`` resource registered. To display a sing
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_show:
         path: /books/{id}
@@ -94,7 +94,7 @@ If you would like to use your own service to get the resource, then try the foll
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_show:
         path: /books/{author}

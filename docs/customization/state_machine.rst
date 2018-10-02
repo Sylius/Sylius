@@ -17,26 +17,15 @@ Customizing State Machines
 How to customize a State Machine?
 ---------------------------------
 
-.. tip::
-
-    First of all if you are attempting to change anything in any state machine in **Sylius** you will need a special file:
-    ``app/config/state_machine.yml`` which has to be imported in the ``app/config/config.yml``.
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        - { resource: "state_machine.yml" }
-
 How to add a new state?
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Let's assume that you would like to add a new **state** to :doc:`the Order state machine </book/orders/orders>`.
-You will need to add these few lines to the ``state_machine.yml``:
+You will need to add these few lines to the ``config/_sylius.yaml``:
 
 .. code-block:: yaml
 
-    # app/config/state_machine.yml
+    # config/_sylius.yaml
     winzou_state_machine:
         sylius_order:
             states:
@@ -55,11 +44,11 @@ How to add a new transition?
 Let's assume that you would like to add a new **transition** to :doc:`the Order state machine </book/orders/orders>`,
 that will allow moving from the ``cancelled`` state backwards to ``new``. Let's call it "restoring".
 
-You will need to add these few lines to the ``state_machine.yml``:
+You will need to add these few lines to the ``config/_sylius.yaml``:
 
 .. code-block:: yaml
 
-    # app/config/state_machine.yml
+    # config/_sylius.yaml
     winzou_state_machine:
         sylius_order:
             transitions:
@@ -88,11 +77,11 @@ How to add a new callback?
 Let's assume that you would like to add a new **callback** to :doc:`the Order state machine </book/orders/orders>`,
 that will do something on an already defined transition.
 
-You will need to add these few lines to the ``state_machine.yml``:
+You will need to add these few lines to the ``config/_sylius.yaml``:
 
 .. code-block:: yaml
 
-    # app/config/state_machine.yml
+    # config/_sylius.yaml
     winzou_state_machine:
         sylius_order:
             callbacks:
@@ -112,11 +101,11 @@ How to modify a callback?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you would like to modify an existent callback of for example the state machine of ProductReviews,
-so that it does not count the average rating but does something else - you need to add these few lines to the ``state_machine.yml``:
+so that it does not count the average rating but does something else - you need to add these few lines to the ``config/_sylius.yaml``:
 
 .. code-block:: yaml
 
-    # app/config/state_machine.yml
+    # config/_sylius.yaml
     winzou_state_machine:
         sylius_review:
             callbacks:
@@ -135,7 +124,7 @@ On the example of the state machine of ProductReview, we can turn off the ``upda
 
 .. code-block:: yaml
 
-    # app/config/state_machine.yml
+    # config/_sylius.yaml
     winzou_state_machine:
         sylius_review:
             callbacks:

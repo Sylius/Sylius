@@ -26,11 +26,11 @@ To achieve that you will need to:
 1. Create a new e-mail that will be sent:
 -----------------------------------------
 
-* prepare a template for your email in the ``app/Resources/views/Email``.
+* prepare a template for your email in the ``templates/Email``.
 
 .. code-block:: twig
 
-    {# app/Resources/views/Email/out_of_stock.html.twig #}
+    {# templates/Email/out_of_stock.html.twig #}
     {% block subject %}
         One of your products has become out of stock.
     {% endblock %}
@@ -41,11 +41,11 @@ To achieve that you will need to:
         {% endautoescape %}
     {% endblock %}
 
-* configure the email under ``sylius_mailer:`` in the ``app/config/emails.yml`` included in ``app/config/yml``.
+* configure the email under ``sylius_mailer:`` in the ``config/packages/_sylius.yaml``.
 
 .. code-block:: yaml
 
-    # app/config/emails.yml
+    # config/packages/_sylius.yaml
     sylius_mailer:
         sender:
             name: Example.com
@@ -53,13 +53,7 @@ To achieve that you will need to:
         emails:
             out_of_stock:
                 subject: "A product has become out of stock!"
-                template: "AppBundle:Email:out_of_stock.html.twig"
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        - { resource: "emails.yml" }
+                template: "Email/out_of_stock.html.twig"
 
 2. Create an Email Manager class:
 ---------------------------------
@@ -71,7 +65,7 @@ To achieve that you will need to:
 
     <?php
 
-    namespace AppBundle\EmailManager;
+    namespace App\EmailManager;
 
     use Sylius\Component\Core\Model\OrderInterface;
     use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
@@ -138,10 +132,10 @@ To achieve that you will need to:
 
 .. code-block:: yaml
 
-    # app/config/services.yml
+    # config/services.yaml
     services:
         app.email_manager.out_of_stock:
-        class: AppBundle\EmailManager\OutOfStockEmailManager
+        class: App\EmailManager\OutOfStockEmailManager
         arguments: ['@sylius.email_sender', '@sylius.availability_checker', '@sylius.repository.admin_user']
 
 4. Customize the state machine callback of Order's Payment:
@@ -149,7 +143,7 @@ To achieve that you will need to:
 
 .. code-block:: yaml
 
-    # app/config/state_machine.yml
+    # config/packages/_sylius.yml
     winzou_state_machine:
         sylius_order_payment:
             callbacks:
@@ -158,12 +152,6 @@ To achieve that you will need to:
                         on: ["pay"]
                         do: ["@app.email_manager.out_of_stock", "sendOutOfStockEmail"]
                         args: ["object"]
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        - { resource: "state_machine.yml" }
 
 **Done!**
 

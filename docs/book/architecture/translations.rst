@@ -100,7 +100,7 @@ The ``getTranslation()`` method gets a translation for the current locale, while
 impose the locale - ``getTranslation('pl_PL')`` will return a polish translation **if there is a translation in this locale**.
 
 But when the translation for the chosen locale is unavailable, instead the translation for the **fallback locale**
-(the one that was either set in ``config.yml`` or using the ``setFallbackLocale()`` method from the TranslatableTrait on the entity) is used.
+(the one that was either set in ``config/services.yaml`` or using the ``setFallbackLocale()`` method from the TranslatableTrait on the entity) is used.
 
 How to add a new translation programmatically?
 ----------------------------------------------

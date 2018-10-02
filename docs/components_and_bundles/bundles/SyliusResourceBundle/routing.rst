@@ -6,7 +6,7 @@ SyliusResourceBundle ships with a custom route loader that can save you some tim
 Generating Generic CRUD Routing
 -------------------------------
 
-To generate a full CRUD routing, simply configure it in your ``app/config/routing.yml``:
+To generate a full CRUD routing, simply configure it in your ``config/routes.yaml``:
 
 .. code-block:: yaml
 
@@ -61,7 +61,7 @@ Results in the following routes:
 Generating API CRUD Routing
 ---------------------------
 
-To generate a full API-friendly CRUD routing, add these YAML lines to your ``app/config/routing.yml``:
+To generate a full API-friendly CRUD routing, add these YAML lines to your ``config/routes.yaml``:
 
 .. code-block:: yaml
 

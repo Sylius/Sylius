@@ -5,7 +5,7 @@ To display an edit form of a particular resource, change it or update it via API
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{id}/edit
@@ -38,7 +38,7 @@ Just like for other actions, you can customize the template.
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{id}/edit
@@ -55,7 +55,7 @@ Same way like for **createAction** you can override the default form.
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{id}/edit
@@ -74,7 +74,7 @@ Below you can see how to specify custom options, in this case, ``validation_grou
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{id}/edit
@@ -94,7 +94,7 @@ By default, the **updateAction** will look for the resource by id. You can easil
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{title}/edit
@@ -111,7 +111,7 @@ By default the controller will try to get the id of resource and redirect to the
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{id}/edit
@@ -125,7 +125,7 @@ You can also perform more complex redirects, with parameters. For example:
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /genre/{genreId}/books/{id}/edit
@@ -147,7 +147,7 @@ own action name.
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_customer_update:
         path: /customer/book-update/{id}
@@ -169,7 +169,7 @@ Sylius, by default is returning the ``204 HTTP Code``, which indicates an empty 
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{title}/edit
@@ -190,7 +190,7 @@ Configuration Reference
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /genre/{genreId}/books/{title}/edit
