@@ -359,8 +359,13 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     private function createImages(ProductInterface $product, array $options): void
     {
         foreach ($options['images'] as $image) {
-            // BC, to be deprecated in 1.3 and removed in 2.0
             if (!array_key_exists('path', $image)) {
+                @trigger_error(
+                    'It is deprecated since Sylius 1.3 to pass indexed array as an image definition. ' .
+                    'Please use associative array with "path" and "type" keys instead.',
+                    \E_USER_DEPRECATED
+                );
+
                 $imagePath = array_shift($image);
                 $imageType = array_pop($image);
             } else {
