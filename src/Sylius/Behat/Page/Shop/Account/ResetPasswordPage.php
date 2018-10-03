@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
 class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterface
