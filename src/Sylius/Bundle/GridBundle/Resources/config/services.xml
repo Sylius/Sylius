@@ -29,6 +29,7 @@
         <service id="sylius.grid.provider" class="Sylius\Component\Grid\Provider\ArrayGridProvider">
             <argument type="service" id="sylius.grid.array_to_definition_converter" />
             <argument>%sylius.grids_definitions%</argument>
+            <tag name="kernel.reset" method="reset" />
         </service>
 
         <service id="sylius.grid.view_factory" class="Sylius\Component\Grid\View\GridViewFactory">
