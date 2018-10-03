@@ -86,7 +86,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        $this->queryBuilder->andWhere($this->getFieldName($field) . ' < :' . $parameterName);
+        return $this->queryBuilder->expr()->lt($this->getFieldName($field), ':' . $parameterName);
     }
 
     /**
@@ -97,7 +97,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        $this->queryBuilder->andWhere($this->getFieldName($field) . ' <= :' . $parameterName);
+        return $this->queryBuilder->expr()->lte($this->getFieldName($field), ':' . $parameterName);
     }
 
     /**
@@ -108,7 +108,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        $this->queryBuilder->andWhere($this->getFieldName($field) . ' > :' . $parameterName);
+        return $this->queryBuilder->expr()->gt($this->getFieldName($field), ':' . $parameterName);
     }
 
     /**
@@ -119,7 +119,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        $this->queryBuilder->andWhere($this->getFieldName($field) . ' >= :' . $parameterName);
+        return $this->queryBuilder->expr()->gte($this->getFieldName($field), ':' . $parameterName);
     }
 
     /**

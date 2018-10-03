@@ -23,7 +23,19 @@
         "php": "^7.2",
 
         "doctrine/common": "^2.5",
-        "symfony/symfony": "^3.4|^4.1.1",
+        "symfony/asset": "^3.4|^4.1.1",
+        "symfony/config": "^3.4|^4.1.1",
+        "symfony/console": "^3.4|^4.1.1",
+        "symfony/dependency-injection": "^3.4|^4.1.1",
+        "symfony/filesystem": "^3.4|^4.1.1",
+        "symfony/finder": "^3.4|^4.1.1",
+        "symfony/form": "^3.4|^4.1.1",
+        "symfony/framework-bundle": "^3.4|^4.1.1",
+        "symfony/http-foundation": "^3.4|^4.1.1",
+        "symfony/http-kernel": "^3.4|^4.1.1",
+        "symfony/options-resolver": "^3.4|^4.1.1",
+        "symfony/templating": "^3.4|^4.1.1",
+        "symfony/translation": "^3.4|^4.1.1",
         "zendframework/zend-hydrator": "^2.2"
     },
     "require-dev": {
@@ -32,10 +44,11 @@
         "mikey179/vfsStream": "^1.6",
         "phpspec/phpspec": "^4.0",
         "phpunit/phpunit": "^6.5",
-        "sylius/registry": "^1.2",
-        "twig/twig": "^2.0",
-        "symfony/dependency-injection": "^3.4|^4.1.1",
-        "symfony/twig-bundle": "^3.4|^4.1.1"
+        "sylius/registry": "^1.1",
+        "symfony/browser-kit": "^3.4|^4.1.1",
+        "symfony/security-csrf": "^3.4|^4.1.1",
+        "symfony/twig-bundle": "^3.4|^4.1.1",
+        "twig/twig": "^2.0"
     },
     "conflict": {
         "twig/twig": "^1.0"
