@@ -11,11 +11,7 @@
                 ]
             },
             "birthday": {},
-            "gender": {
-                "errors": [
-                    "Please choose your gender."
-                ]
-            },
+            "gender": {},
             "phoneNumber": {},
             "subscribedToNewsletter": {},
             "group": {}
