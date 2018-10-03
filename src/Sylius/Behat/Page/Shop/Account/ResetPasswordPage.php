@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
 class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterface
@@ -47,6 +48,20 @@ class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterfac
     public function specifyConfirmPassword(string $password): void
     {
         $this->getElement('confirm_password')->setValue($password);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function checkValidationMessageFor(string $element, string $message): bool
+    {
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
+
+        if (null === $errorLabel) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+        }
+
+        return $message === $errorLabel->getText();
     }
 
     /**
