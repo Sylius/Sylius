@@ -46,7 +46,7 @@
 
     <form action="{{ item.uri }}" method="post" style="float: right;">
         <input type="hidden" name="_method" value="PUT">
-        <button class="ui {% if color %}{{ color }} {% endif %}labeled icon loadable button" type="submit">
+        <button class="ui {% if color %}{{ color }} {% endif %}labeled icon {% if not item.attribute('confirmation')|default(false) %}loadable{% endif %} button" type="submit" {% if item.attribute('confirmation')|default(false) %}data-requires-confirmation{% endif %}>
             {{ block('icon') }}
             {{ item.label|trans }}
         </button>
