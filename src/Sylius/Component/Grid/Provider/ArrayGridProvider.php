@@ -19,24 +19,16 @@ use Sylius\Component\Grid\Exception\UndefinedGridException;
 
 final class ArrayGridProvider implements GridProviderInterface
 {
-    /**
-     * @var Grid[]
-     */
-    private $grids = [];
+    /** @var ArrayToDefinitionConverterInterface */
+    private $converter;
 
-    /**
-     * @param ArrayToDefinitionConverterInterface $converter
-     * @param array $gridConfigurations
-     */
+    /** @var array[] */
+    private $gridConfigurations;
+
     public function __construct(ArrayToDefinitionConverterInterface $converter, array $gridConfigurations)
     {
-        foreach ($gridConfigurations as $code => $gridConfiguration) {
-            if (isset($gridConfiguration['extends'], $gridConfigurations[$gridConfiguration['extends']])) {
-                $gridConfiguration = $this->extend($gridConfiguration, $gridConfigurations[$gridConfiguration['extends']]);
-            }
-
-            $this->grids[$code] = $converter->convert($code, $gridConfiguration);
-        }
+        $this->converter = $converter;
+        $this->gridConfigurations = $gridConfigurations;
     }
 
     /**
@@ -44,20 +36,19 @@ final class ArrayGridProvider implements GridProviderInterface
      */
     public function get(string $code): Grid
     {
-        if (!array_key_exists($code, $this->grids)) {
+        if (!array_key_exists($code, $this->gridConfigurations)) {
             throw new UndefinedGridException($code);
         }
 
-        // Need to clone grid definition in case of displaying on one page two grids using the same grid definition
-        return clone $this->grids[$code];
+        $gridConfiguration = $this->gridConfigurations[$code];
+
+        if (isset($gridConfiguration['extends'], $this->gridConfigurations[$gridConfiguration['extends']])) {
+            $gridConfiguration = $this->extend($gridConfiguration, $this->gridConfigurations[$gridConfiguration['extends']]);
+        }
+
+        return $this->converter->convert($code, $gridConfiguration);
     }
 
-    /**
-     * @param array $gridConfiguration
-     * @param array $parentGridConfiguration
-     *
-     * @return array
-     */
     private function extend(array $gridConfiguration, array $parentGridConfiguration): array
     {
         unset($parentGridConfiguration['sorting']); // Do not inherit sorting.
