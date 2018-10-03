@@ -25,7 +25,8 @@
         "sonata-project/intl-bundle": "^2.2",
         "sylius/core-bundle": "^1.1",
         "sylius/ui-bundle": "^1.1",
-        "symfony/framework-bundle": "^3.4"
+        "symfony/framework-bundle": "^3.4",
+        "symfony/security-bundle": "^3.4"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^3.0",
