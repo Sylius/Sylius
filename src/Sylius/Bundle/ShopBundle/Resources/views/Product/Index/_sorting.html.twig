@@ -3,7 +3,7 @@
 {% set definition = resources.definition %}
 
 {% set route = app.request.attributes.get('_route') %}
-{% set route_parameters = app.request.attributes.get('_route_params') %}
+{% set route_parameters = app.request.attributes.get('_route_params')|merge(app.request.query.all) %}
 
 {% set criteria = app.request.query.get('criteria', {}) %}
 

@@ -77,6 +77,10 @@ Definition
 +------------------------------------+----------------+--------------------------------------+
 | code                               | request        | **(unique)** Taxon identifier        |
 +------------------------------------+----------------+--------------------------------------+
+| translations['localeCode']['name'] | request        | Taxon name                           |
++------------------------------------+----------------+--------------------------------------+
+| translations['localeCode']['slug'] | request        | **(unique)** Taxon slug              |
++------------------------------------+----------------+--------------------------------------+
 
 Example
 ^^^^^^^
@@ -91,7 +95,13 @@ To create new taxon use the below method:
         -X POST \
         --data '
             {
-                "code": "toys"
+                "code": "toys",
+                "translations": {
+                    "en_US": {
+                        "name": "Toys",
+                        "slug": "category/toys"
+                    }
+                }
             }
         '
 
@@ -170,10 +180,6 @@ You can also create a taxon with additional (not required) fields:
 +-------------------------------------------+----------------+------------------------------------+
 | Parameter                                 | Parameter type | Description                        |
 +===========================================+================+====================================+
-| translations['localeCode']['name']        | request        | Name of the taxon                  |
-+-------------------------------------------+----------------+------------------------------------+
-| translations['localeCode']['slug']        | request        | **(unique)** Slug                  |
-+-------------------------------------------+----------------+------------------------------------+
 | translations['localeCode']['description'] | request        | Description of the taxon           |
 +-------------------------------------------+----------------+------------------------------------+
 | parent                                    | request        | The parent taxon's code            |

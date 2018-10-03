@@ -146,7 +146,7 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return array|Field[]
      */
     public function getFields(): array
     {
@@ -154,11 +154,13 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return array|Field[]
      */
     public function getEnabledFields(): array
     {
-        return $this->getEnabledItems($this->getFields());
+        return array_filter($this->getFields(), function (Field $field): bool {
+            return $field->isEnabled();
+        });
     }
 
     /**
@@ -220,7 +222,7 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return array|ActionGroup[]
      */
     public function getActionGroups(): array
     {
@@ -228,11 +230,14 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return array|ActionGroup[]
      */
     public function getEnabledActionGroups(): array
     {
-        return $this->getEnabledItems($this->getActionGroups());
+        return array_filter($this->getActionGroups(), function (ActionGroup $actionGroup): bool {
+            // TODO: There's no `isEnabled` method on ActionGroup, so we assume all of them are enabled
+            return true;
+        });
     }
 
     /**
@@ -284,7 +289,7 @@ class Grid
     /**
      * @param string $groupName
      *
-     * @return Action[]
+     * @return array|Action[]
      */
     public function getActions(string $groupName): array
     {
@@ -292,11 +297,13 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return array|Action[]
      */
     public function getEnabledActions($groupName): array
     {
-        return $this->getEnabledItems($this->getActions($groupName));
+        return array_filter($this->getActions($groupName), function (Action $action): bool {
+            return $action->isEnabled();
+        });
     }
 
     /**
@@ -310,7 +317,7 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return array|Filter[]
      */
     public function getFilters(): array
     {
@@ -318,11 +325,13 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return array|Filter[]
      */
     public function getEnabledFilters(): array
     {
-        return $this->getEnabledItems($this->getFilters());
+        return array_filter($this->getFilters(), function (Filter $filter): bool {
+            return $filter->isEnabled();
+        });
     }
 
     /**
@@ -379,22 +388,5 @@ class Grid
     public function hasFilter(string $name): bool
     {
         return array_key_exists($name, $this->filters);
-    }
-
-    /**
-     * @param array $items
-     *
-     * @return array
-     */
-    private function getEnabledItems(array $items): array
-    {
-        $filteredItems = [];
-        foreach ($items as $item) {
-            if ($item->isEnabled()) {
-                $filteredItems[] = $item;
-            }
-        }
-
-        return $filteredItems;
     }
 }

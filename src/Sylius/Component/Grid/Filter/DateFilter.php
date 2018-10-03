@@ -35,9 +35,9 @@ final class DateFilter implements FilterInterface
         if (null !== $from) {
             $inclusive = (bool) $this->getOption($options, 'inclusive_from', self::DEFAULT_INCLUSIVE_FROM);
             if (true === $inclusive) {
-                $expressionBuilder->greaterThanOrEqual($field, $from);
+                $dataSource->restrict($expressionBuilder->greaterThanOrEqual($field, $from));
             } else {
-                $expressionBuilder->greaterThan($field, $from);
+                $dataSource->restrict($expressionBuilder->greaterThan($field, $from));
             }
         }
 
@@ -45,9 +45,9 @@ final class DateFilter implements FilterInterface
         if (null !== $to) {
             $inclusive = (bool) $this->getOption($options, 'inclusive_to', self::DEFAULT_INCLUSIVE_TO);
             if (true === $inclusive) {
-                $expressionBuilder->lessThanOrEqual($field, $to);
+                $dataSource->restrict($expressionBuilder->lessThanOrEqual($field, $to));
             } else {
-                $expressionBuilder->lessThan($field, $to);
+                $dataSource->restrict($expressionBuilder->lessThan($field, $to));
             }
         }
     }
