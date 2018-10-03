@@ -52,6 +52,20 @@ class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterfac
     /**
      * {@inheritdoc}
      */
+    public function checkValidationMessageFor(string $element, string $message): bool
+    {
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
+
+        if (null === $errorLabel) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+        }
+
+        return $message === $errorLabel->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
