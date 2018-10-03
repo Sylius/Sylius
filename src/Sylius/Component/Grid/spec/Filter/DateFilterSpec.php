@@ -31,10 +31,8 @@ final class DateFilterSpec extends ObjectBehavior
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder
-            ->greaterThanOrEqual('checkoutCompletedAt', '2016-12-05 08:00')
-            ->shouldBeCalled()
-        ;
+        $expressionBuilder->greaterThanOrEqual('checkoutCompletedAt', '2016-12-05 08:00')->willReturn('EXPR');
+        $dataSource->restrict('EXPR')->shouldBeCalled();
 
         $this->apply(
             $dataSource,
@@ -55,10 +53,8 @@ final class DateFilterSpec extends ObjectBehavior
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder
-            ->greaterThan('checkoutCompletedAt', '2016-12-05 08:00')
-            ->shouldBeCalled()
-        ;
+        $expressionBuilder->greaterThan('checkoutCompletedAt', '2016-12-05 08:00')->willReturn('EXPR');
+        $dataSource->restrict('EXPR')->shouldBeCalled();
 
         $this->apply(
             $dataSource,
@@ -83,10 +79,8 @@ final class DateFilterSpec extends ObjectBehavior
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder
-            ->greaterThanOrEqual('checkoutCompletedAt', '2016-12-05 00:00')
-            ->shouldBeCalled()
-        ;
+        $expressionBuilder->greaterThanOrEqual('checkoutCompletedAt', '2016-12-05 00:00')->willReturn('EXPR');
+        $dataSource->restrict('EXPR')->shouldBeCalled();
 
         $this->apply(
             $dataSource,
@@ -111,10 +105,8 @@ final class DateFilterSpec extends ObjectBehavior
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder
-            ->lessThan('checkoutCompletedAt', '2016-12-06 08:00')
-            ->shouldBeCalled()
-        ;
+        $expressionBuilder->lessThan('checkoutCompletedAt', '2016-12-06 08:00')->willReturn('EXPR');
+        $dataSource->restrict('EXPR')->shouldBeCalled();
 
         $this->apply(
             $dataSource,
@@ -135,10 +127,8 @@ final class DateFilterSpec extends ObjectBehavior
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder
-            ->lessThanOrEqual('checkoutCompletedAt', '2016-12-06 08:00')
-            ->shouldBeCalled()
-        ;
+        $expressionBuilder->lessThanOrEqual('checkoutCompletedAt', '2016-12-06 08:00')->willReturn('EXPR');
+        $dataSource->restrict('EXPR')->shouldBeCalled();
 
         $this->apply(
             $dataSource,
@@ -163,10 +153,8 @@ final class DateFilterSpec extends ObjectBehavior
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder
-            ->lessThan('checkoutCompletedAt', '2016-12-06 23:59')
-            ->shouldBeCalled()
-        ;
+        $expressionBuilder->lessThan('checkoutCompletedAt', '2016-12-06 23:59')->willReturn('EXPR');
+        $dataSource->restrict('EXPR')->shouldBeCalled();
 
         $this->apply(
             $dataSource,
@@ -187,15 +175,11 @@ final class DateFilterSpec extends ObjectBehavior
     ): void {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder
-            ->greaterThanOrEqual('checkoutCompletedAt', '2016-12-05 08:00')
-            ->shouldBeCalled()
-        ;
+        $expressionBuilder->greaterThanOrEqual('checkoutCompletedAt', '2016-12-05 08:00')->willReturn('EXPR1');
+        $dataSource->restrict('EXPR1')->shouldBeCalled();
 
-        $expressionBuilder
-            ->lessThan('checkoutCompletedAt', '2016-12-06 08:00')
-            ->shouldBeCalled()
-        ;
+        $expressionBuilder->lessThan('checkoutCompletedAt', '2016-12-06 08:00')->willReturn('EXPR2');
+        $dataSource->restrict('EXPR2')->shouldBeCalled();
 
         $this->apply(
             $dataSource,

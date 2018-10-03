@@ -78,7 +78,7 @@ class PromotionRuleExampleFactory extends AbstractExampleFactory implements Exam
             ->setNormalizer('configuration', function (Options $options, $configuration): array {
                 foreach ($configuration as $channelCode => $channelConfiguration) {
                     if (isset($channelConfiguration['amount'])) {
-                        $configuration[$channelCode]['amount'] *= 100;
+                        $configuration[$channelCode]['amount'] = (int) ($configuration[$channelCode]['amount'] * 100);
                     }
                 }
 
