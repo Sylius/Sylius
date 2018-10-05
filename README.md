@@ -46,7 +46,7 @@ This is the list of oficially supported Sylius plugins:
  - [Shop API Plugin](https://github.com/Sylius/SyliusShopApiPlugin) - 
    provides customer-level API for the shop functionalities
  - [Admin Order Creation Plugin](https://github.com/Sylius/AdminOrderCreationPlugin) - 
-   allows to create orders directly from the administrator panel
+   allows creating orders directly from the administrator panel
  - [Customer Reorder Plugin](https://github.com/Sylius/CustomerReorderPlugin) - 
    allows customer to copy items from the already placed order to the current cart
  - [Customer Order Cancellation Plugin](https://github.com/Sylius/CustomerOrderCancellationPlugin) -
