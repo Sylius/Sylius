@@ -32,6 +32,19 @@ The search bar looks like below:
 .. image:: ../../_images/search.png
     :align: center
 
+
+Disable search filter
+^^^^^^^^^^^^^^^^^^^^^^^^^
+To remove completely the search feature from the filter panel
+
+.. code-block:: yaml
+
+    # Sylius/Bundle/ShopBundle/Resources/config/grids/product.yml
+    filters:
+        search:
+            enabled: false
+
+
 Customizing search filter
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
