@@ -24,6 +24,9 @@ $.fn.extend({
       const provinceSelectFieldName = select.attr('name').replace('country', 'province');
       const provinceInputFieldName = select.attr('name').replace('countryCode', 'provinceName');
 
+      const provinceSelectFieldId = select.attr('id').replace('country', 'province');
+      const provinceInputFieldId = select.attr('id').replace('countryCode', 'provinceName');
+
       if (select.val() === '' || select.val() == undefined) {
         provinceContainer.fadeOut('slow', () => {
           provinceContainer.html('');
@@ -50,6 +53,7 @@ $.fn.extend({
             provinceContainer.html((
               response.content
                 .replace('name="sylius_address_province"', `name="${provinceSelectFieldName}"${provinceSelectValue}`)
+                .replace('id="sylius_address_province"', `id="${provinceSelectFieldId}"`)
                 .replace('option value="" selected="selected"', 'option value=""')
                 .replace(`option ${provinceSelectValue}`, `option ${provinceSelectValue}" selected="selected"`)
             ));
@@ -65,6 +69,7 @@ $.fn.extend({
             provinceContainer.html((
               response.content
                 .replace('name="sylius_address_province"', `name="${provinceInputFieldName}"${provinceInputValue}`)
+                .replace('id="sylius_address_province"', `id="${provinceInputFieldId}"`)
             ));
 
             provinceContainer.removeAttr('data-loading');

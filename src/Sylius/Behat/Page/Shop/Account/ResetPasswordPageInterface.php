@@ -28,4 +28,12 @@ interface ResetPasswordPageInterface extends SymfonyPageInterface
      * @param string $password
      */
     public function specifyConfirmPassword(string $password): void;
+
+    /**
+     * @param string $element
+     * @param string $message
+     *
+     * @return bool
+     */
+    public function checkValidationMessageFor(string $element, string $message): bool;
 }

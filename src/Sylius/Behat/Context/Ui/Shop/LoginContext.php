@@ -256,4 +256,26 @@ final class LoginContext implements Context
 
         $this->iShouldBeLoggedIn();
     }
+
+    /**
+     * @Then I should be notified that the entered passwords do not match
+     */
+    public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch()
+    {
+        Assert::true($this->resetPasswordPage->checkValidationMessageFor(
+            'password',
+            'The entered passwords don\'t match'
+        ));
+    }
+
+    /**
+     * @Then I should be notified that the password should be at least 4 characters long
+     */
+    public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong()
+    {
+        Assert::true($this->resetPasswordPage->checkValidationMessageFor(
+            'password',
+            'Password must be at least 4 characters long.'
+        ));
+    }
 }
