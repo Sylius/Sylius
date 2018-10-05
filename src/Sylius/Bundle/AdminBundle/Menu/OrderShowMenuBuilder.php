@@ -93,6 +93,7 @@ final class OrderShowMenuBuilder
                     ],
                 ])
                 ->setAttribute('type', 'transition')
+                ->setAttribute('confirmation', true)
                 ->setLabel('sylius.ui.cancel')
                 ->setLabelAttribute('icon', 'ban')
                 ->setLabelAttribute('color', 'yellow')
