@@ -3,7 +3,7 @@ sylius_admin_product:
         alias: sylius.product
         section: admin
         templates: "@SyliusAdmin\\Crud"
-        except: ['show', 'index']
+        except: ['show', 'index', 'update']
         redirect: update
         grid: sylius_admin_product
         permission: true
@@ -79,3 +79,43 @@ sylius_admin_product_create_simple:
                     form: "@SyliusAdmin/Product/_form.html.twig"
                 route:
                     name: sylius_admin_product_create_simple
+
+sylius_admin_product_update:
+    path: /products/{id}/edit
+    methods: [GET, PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product:updateAction
+        _sylius:
+            section: admin
+            template: "@SyliusAdmin/Crud/update.html.twig"
+            redirect: sylius_admin_product_update
+            permission: true
+            vars:
+                subheader: sylius.ui.manage_your_product_catalog
+                templates:
+                    form: SyliusAdminBundle:Product:_form.html.twig
+                    toolbar:
+                        name: SyliusAdminBundle:Product/Update:_toolbar.html.twig
+                        vars:
+                            icon: cubes
+                            label: sylius.ui.manage_variants
+                            links:
+                                index:
+                                    label: sylius.ui.list_variants
+                                    icon: list
+                                    route: sylius_admin_product_variant_index
+                                    parameters:
+                                        productId: resource.id
+                                create:
+                                    label: sylius.ui.create
+                                    icon: plus
+                                    route: sylius_admin_product_variant_create
+                                    parameters:
+                                        productId: resource.id
+                                generate:
+                                    label: sylius.ui.generate
+                                    icon: random
+                                    route: sylius_admin_product_variant_generate
+                                    visible: resource.hasOptions
+                                    parameters:
+                                        productId: resource.id

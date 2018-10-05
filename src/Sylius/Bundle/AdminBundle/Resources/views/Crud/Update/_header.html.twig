@@ -6,6 +6,10 @@
         {{ sonata_block_render_event(event_prefix ~ '.header', {'resource': resource}) }}
     </div>
     <div class="middle aligned column">
-        {% include configuration.vars.templates.toolbar|default('@SyliusAdmin/Crud/_toolbar.html.twig') ignore missing %}
+        {% if configuration.vars.templates.toolbar.name|default %}
+            {% include configuration.vars.templates.toolbar.name with {options: sylius_options_parse(configuration.vars.templates.toolbar.vars, app.request, resource)} %}
+        {% else %}
+            {% include configuration.vars.templates.toolbar|default('@SyliusAdmin/Crud/_toolbar.html.twig') ignore missing %}
+        {% endif %}
     </div>
 </div>
