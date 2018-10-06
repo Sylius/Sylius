@@ -24,7 +24,7 @@
 
         <service id="sylius.translation.translatable_listener.doctrine.orm" class="Sylius\Bundle\ResourceBundle\EventListener\ORMTranslatableListener">
             <argument type="service" id="sylius.resource_registry" />
-            <argument type="service" id="service_container" />
+            <argument type="service" id="sylius.translatable_entity_locale_assigner" />
             <tag name="doctrine.event_subscriber" connection="default" priority="99" />
         </service>
 

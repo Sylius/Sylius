@@ -40,14 +40,14 @@ final class ORMTranslatableListener implements EventSubscriber
 
     /**
      * @param RegistryInterface $resourceMetadataRegistry
-     * @param ContainerInterface $container
+     * @param object $translatableEntityLocaleAssigner
      */
     public function __construct(
         RegistryInterface $resourceMetadataRegistry,
-        ContainerInterface $container
+        object $translatableEntityLocaleAssigner
     ) {
         $this->resourceMetadataRegistry = $resourceMetadataRegistry;
-        $this->translatableEntityLocaleAssigner = $container->get('sylius.translatable_entity_locale_assigner');
+        $this->translatableEntityLocaleAssigner = $this->processTranslatableEntityLocaleAssigner($translatableEntityLocaleAssigner);
     }
 
     /**
@@ -213,5 +213,31 @@ final class ORMTranslatableListener implements EventSubscriber
         }
 
         return false;
+    }
+
+    /**
+     * @param object $translatableEntityLocaleAssigner
+     * @return TranslatableEntityLocaleAssignerInterface
+     */
+    private function processTranslatableEntityLocaleAssigner(object $translatableEntityLocaleAssigner): TranslatableEntityLocaleAssignerInterface
+    {
+        if ($translatableEntityLocaleAssigner instanceof ContainerInterface) {
+            @trigger_error(
+                sprintf('Passing an instance of "%s" is deprecated since 1.4. Use "%s" instead.',
+                    ContainerInterface::class, TranslatableEntityLocaleAssignerInterface::class), E_USER_DEPRECATED
+            );
+            $translatableEntityLocaleAssigner = $translatableEntityLocaleAssigner->get('sylius.translatable_entity_locale_assigner');
+        }
+
+        if(!$translatableEntityLocaleAssigner instanceof TranslatableEntityLocaleAssignerInterface)
+        {
+            throw new \InvalidArgumentException(sprintf(
+                '`$translatableEntityLocaleAssigner` was expected to return an instance of "%s" , "%s" found',
+                TranslatableEntityLocaleAssignerInterface::class,
+                get_class($translatableEntityLocaleAssigner)
+            ));
+        }
+
+        return $translatableEntityLocaleAssigner;
     }
 }
