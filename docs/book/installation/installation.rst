@@ -32,7 +32,7 @@ To create a new project using Sylius Standard Edition, run this command:
 
 .. note::
 
-    Make sure to use PHP ^7.1. Using an older PHP version will result in installing an older version of Sylius.
+    Make sure to use PHP ^7.2. Using an older PHP version will result in installing an older version of Sylius.
 
 This will create a new Symfony project in ``acme`` directory. When all the dependencies are installed,
 you should create `.env` file basing on provides `.env.dist` files. The most important parameter that need to be set,
