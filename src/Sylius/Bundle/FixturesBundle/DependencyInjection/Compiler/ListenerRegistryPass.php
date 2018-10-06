@@ -19,6 +19,8 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class ListenerRegistryPass implements CompilerPassInterface
 {
+    public const LISTENER_SERVICE_TAG = 'sylius_fixtures.listener';
+
     /**
      * {@inheritdoc}
      */
@@ -30,7 +32,7 @@ final class ListenerRegistryPass implements CompilerPassInterface
 
         $listenerRegistry = $container->findDefinition('sylius_fixtures.listener_registry');
 
-        $taggedServices = $container->findTaggedServiceIds('sylius_fixtures.listener');
+        $taggedServices = $container->findTaggedServiceIds(self::LISTENER_SERVICE_TAG);
         foreach (array_keys($taggedServices) as $id) {
             $listenerRegistry->addMethodCall('addListener', [new Reference($id)]);
         }

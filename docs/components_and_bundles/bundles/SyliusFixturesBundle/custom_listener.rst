@@ -28,7 +28,7 @@ Let's create a listener that removes the directory before loading the fixtures.
         }
     }
 
-The next step is to register this listener:
+The next step is to register this listener (if the autowiring and auto-configuration are not enabled) :
 
 .. code-block:: xml
 
