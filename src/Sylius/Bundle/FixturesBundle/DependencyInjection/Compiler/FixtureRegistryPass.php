@@ -19,6 +19,8 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class FixtureRegistryPass implements CompilerPassInterface
 {
+    public const FIXTURE_SERVICE_TAG = 'sylius_fixtures.fixture';
+
     /**
      * {@inheritdoc}
      */
@@ -30,7 +32,7 @@ final class FixtureRegistryPass implements CompilerPassInterface
 
         $fixtureRegistry = $container->findDefinition('sylius_fixtures.fixture_registry');
 
-        $taggedServices = $container->findTaggedServiceIds('sylius_fixtures.fixture');
+        $taggedServices = $container->findTaggedServiceIds(self::FIXTURE_SERVICE_TAG);
         foreach (array_keys($taggedServices) as $id) {
             $fixtureRegistry->addMethodCall('addFixture', [new Reference($id)]);
         }

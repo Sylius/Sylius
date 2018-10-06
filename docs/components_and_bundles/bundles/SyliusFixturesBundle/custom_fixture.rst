@@ -42,7 +42,7 @@ to skip the configuration part for now:
         }
     }
 
-The next step is to register this fixture:
+The next step is to register this fixture (if the autowiring and auto-configuration are not enabled) :
 
 .. code-block:: xml
 
