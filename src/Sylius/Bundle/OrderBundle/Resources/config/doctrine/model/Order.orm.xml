@@ -41,9 +41,9 @@
             </cascade>
         </one-to-many>
 
-        <field name="itemsTotal" column="items_total" type="integer" />
-        <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
-        <field name="total" column="total" type="integer" />
+        <field name="itemsTotal" column="items_total" type="bigint" />
+        <field name="adjustmentsTotal" column="adjustments_total" type="bigint" />
+        <field name="total" column="total" type="bigint" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
