@@ -53,7 +53,7 @@ sylius:
         association_types: 'Vrste združenj'
         associations: 'Povezave'
         assortment: 'Izbor'
-        attributes: 'Atributi'
+        attributes: 'Lastnosti'
         author: 'Avtor'
         authorized: 'Pooblaščeno'
         availability: 'Razpoložljivost'
