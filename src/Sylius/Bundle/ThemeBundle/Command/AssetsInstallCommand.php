@@ -34,7 +34,7 @@ final class AssetsInstallCommand extends ContainerAwareCommand
         $this
             ->setName('sylius:theme:assets:install')
             ->setDefinition([
-                new InputArgument('target', InputArgument::OPTIONAL, 'The target directory', 'web'),
+                new InputArgument('target', InputArgument::OPTIONAL, 'The target directory', 'public'),
             ])
             ->addOption('symlink', null, InputOption::VALUE_NONE, 'Symlinks the assets instead of copying it')
             ->addOption('relative', null, InputOption::VALUE_NONE, 'Make relative symlinks')
@@ -75,20 +75,20 @@ final class AssetsInstallCommand extends ContainerAwareCommand
     {
         return <<<EOT
 The <info>%command.name%</info> command installs theme assets into a given
-directory (e.g. the <comment>web</comment> directory).
+directory (e.g. the <comment>public</comment> directory).
 
-  <info>php %command.full_name% web</info>
+  <info>php %command.full_name% public</info>
 
 A "themes" directory will be created inside the target directory.
 
 To create a symlink to each theme instead of copying its assets, use the
 <info>--symlink</info> option (will fall back to hard copies when symbolic links aren't possible):
 
-  <info>php %command.full_name% web --symlink</info>
+  <info>php %command.full_name% public --symlink</info>
 
 To make symlink relative, add the <info>--relative</info> option:
 
-  <info>php %command.full_name% web --symlink --relative</info>
+  <info>php %command.full_name% public --symlink --relative</info>
 
 EOT;
     }

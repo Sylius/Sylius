@@ -84,14 +84,9 @@ EOT
             }
         }
 
-        $frontControllerPath = 'prod' === $this->getEnvironment() ? '/' : sprintf('/app_%s.php', $this->getEnvironment());
-
         $outputStyle->newLine(2);
         $outputStyle->success($this->getProperFinalMessage($errored));
-        $outputStyle->writeln(sprintf(
-            'You can now open your store at the following path under the website root: <info>%s.</info>',
-            $frontControllerPath
-        ));
+        $outputStyle->writeln('You can now open your store at the following path under the website root: /');
     }
 
     /**
