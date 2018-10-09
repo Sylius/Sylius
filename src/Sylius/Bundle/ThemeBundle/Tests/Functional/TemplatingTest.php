@@ -72,6 +72,11 @@ final class TemplatingTest extends WebTestCase
             ['@Test/Templating/vanillaOverriddenThemeTemplate.txt.twig', 'TestBundle:Templating:vanillaOverriddenThemeTemplate.txt.twig|sylius/first-test-theme'],
             ['@Test/Templating/bothThemesTemplate.txt.twig', 'TestBundle:Templating:bothThemesTemplate.txt.twig|sylius/first-test-theme'],
             ['@Test/Templating/lastThemeTemplate.txt.twig', 'TestBundle:Templating:lastThemeTemplate.txt.twig|sylius/second-test-theme'],
+            ['@Test/Templating/twigNamespacedVanillaTemplate.txt.twig', '@Test/Templating/twigNamespacedVanillaTemplate.txt.twig'],
+            ['@Test/Templating/twigNamespacedVanillaOverriddenTemplate.txt.twig', '@Test/Templating/twigNamespacedVanillaOverriddenTemplate.txt.twig (templates overridden)'],
+            ['@Test/Templating/twigNamespacedVanillaOverriddenThemeTemplate.txt.twig', '@Test/Templating/twigNamespacedVanillaOverriddenThemeTemplate.txt.twig|sylius/first-test-theme'],
+            ['@Test/Templating/twigNamespacedBothThemesTemplate.txt.twig', '@Test/Templating/twigNamespacedBothThemesTemplate.txt.twig|sylius/first-test-theme'],
+            ['@Test/Templating/twigNamespacedLastThemeTemplate.txt.twig', '@Test/Templating/twigNamespacedLastThemeTemplate.txt.twig|sylius/second-test-theme'],
         ];
     }
 
@@ -123,9 +128,12 @@ final class TemplatingTest extends WebTestCase
     public function getAppTemplatesUsingNamespacedPaths()
     {
         return [
-            ['/Templating/vanillaTemplate.txt.twig', ':Templating:vanillaTemplate.txt.twig'],
-            ['/Templating/bothThemesTemplate.txt.twig', ':Templating:bothThemesTemplate.txt.twig|sylius/first-test-theme'],
-            ['/Templating/lastThemeTemplate.txt.twig', ':Templating:lastThemeTemplate.txt.twig|sylius/second-test-theme'],
+            ['Templating/vanillaTemplate.txt.twig', ':Templating:vanillaTemplate.txt.twig'],
+            ['Templating/bothThemesTemplate.txt.twig', ':Templating:bothThemesTemplate.txt.twig|sylius/first-test-theme'],
+            ['Templating/lastThemeTemplate.txt.twig', ':Templating:lastThemeTemplate.txt.twig|sylius/second-test-theme'],
+            ['Templating/twigNamespacedVanillaTemplate.txt.twig', 'Templating/twigNamespacedVanillaTemplate.txt.twig'],
+            ['Templating/twigNamespacedBothThemesTemplate.txt.twig', 'Templating/twigNamespacedBothThemesTemplate.txt.twig|sylius/first-test-theme'],
+            ['Templating/twigNamespacedLastThemeTemplate.txt.twig', 'Templating/twigNamespacedLastThemeTemplate.txt.twig|sylius/second-test-theme'],
         ];
     }
 }
