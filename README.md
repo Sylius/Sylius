@@ -44,7 +44,7 @@ Official plugins
 This is the list of officially supported Sylius plugins:
 
  - [Admin Order Creation Plugin](https://github.com/Sylius/AdminOrderCreationPlugin) - 
-   allows to create orders directly from the administrator panel
+   allows creating orders directly from the administrator panel
  - [Customer Order Cancellation Plugin](https://github.com/Sylius/CustomerOrderCancellationPlugin) -
    allows customer to cancel a placed order which has not been processed yet
  - [Customer Reorder Plugin](https://github.com/Sylius/CustomerReorderPlugin) - 
