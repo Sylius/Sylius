@@ -20,7 +20,7 @@ Methods of templates customizing
 
     There are three ways of customizing templates of Sylius:
 
-    The first one is simple **templates overriding** inside of the ``templates/bundle`` directory of your project. Using
+    The first one is simple **templates overriding** inside of the ``templates/bundles`` directory of your project. Using
     this method you can completely change the content of templates.
 
     The second method is **templates customization via events**. You are able to listen on these template events,
