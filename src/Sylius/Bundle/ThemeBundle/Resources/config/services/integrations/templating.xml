@@ -29,11 +29,6 @@
             <argument type="service" id="kernel" />
         </service>
 
-        <service id="sylius.theme.templating.name_parser" class="Sylius\Bundle\ThemeBundle\Templating\TemplateNameParser" decorates="templating.name_parser" decoration-priority="256" public="false">
-            <argument type="service" id="sylius.theme.templating.name_parser.inner" />
-            <argument type="service" id="kernel" />
-        </service>
-
         <service id="sylius.theme.templating.cache" class="Doctrine\Common\Cache\ArrayCache" />
 
         <service id="sylius.theme.templating.locator" class="Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator" public="false">
