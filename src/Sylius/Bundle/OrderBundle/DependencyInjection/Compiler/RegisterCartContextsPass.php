@@ -17,12 +17,14 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\PrioritizedComposi
 
 final class RegisterCartContextsPass extends PrioritizedCompositeServicePass
 {
+    public const CART_CONTEXT_SERVICE_TAG = 'sylius.context.cart';
+
     public function __construct()
     {
         parent::__construct(
             'sylius.context.cart',
             'sylius.context.cart.composite',
-            'sylius.context.cart',
+            self::CART_CONTEXT_SERVICE_TAG,
             'addContext'
         );
     }

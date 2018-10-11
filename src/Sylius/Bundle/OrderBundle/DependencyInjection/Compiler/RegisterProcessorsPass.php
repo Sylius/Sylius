@@ -17,12 +17,14 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\PrioritizedComposi
 
 final class RegisterProcessorsPass extends PrioritizedCompositeServicePass
 {
+    public const PROCESSOR_SERVICE_TAG = 'sylius.order_processor';
+
     public function __construct()
     {
         parent::__construct(
             'sylius.order_processing.order_processor',
             'sylius.order_processing.order_processor.composite',
-            'sylius.order_processor',
+            self::PROCESSOR_SERVICE_TAG,
             'addProcessor'
         );
     }
