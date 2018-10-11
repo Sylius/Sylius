@@ -18,6 +18,8 @@ sylius_admin_customer:
 
 sylius_admin_customer_show:
     path: /customers/{id}
+    requirements:
+        id: '\d+'
     defaults:
         _controller: sylius.controller.customer:showAction
         _sylius:
@@ -28,6 +30,8 @@ sylius_admin_customer_show:
 sylius_admin_customer_order_index:
     path: /customers/{id}/orders
     methods: [GET]
+    requirements:
+        id: '\d+'
     defaults:
         _controller: sylius.controller.order:indexAction
         _sylius:
