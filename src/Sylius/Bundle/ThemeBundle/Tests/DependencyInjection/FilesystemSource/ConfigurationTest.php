@@ -33,7 +33,7 @@ final class ConfigurationTest extends TestCase
                 ['sources' => ['filesystem' => null]],
             ],
             ['sources' => ['filesystem' => [
-                'directories' => ['%kernel.project_dir%/templates/themes'],
+                'directories' => ['%kernel.project_dir%/themes'],
                 'filename' => 'composer.json',
                 'enabled' => true,
                 'scan_depth' => null,
@@ -52,7 +52,7 @@ final class ConfigurationTest extends TestCase
                 ['sources' => ['filesystem' => ['scan_depth' => 1]]],
             ],
             ['sources' => ['filesystem' => [
-                'directories' => ['%kernel.project_dir%/templates/themes'],
+                'directories' => ['%kernel.project_dir%/themes'],
                 'filename' => 'composer.json',
                 'enabled' => true,
                 'scan_depth' => 1,
