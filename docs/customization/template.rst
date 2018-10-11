@@ -20,12 +20,12 @@ Methods of templates customizing
 
     There are three ways of customizing templates of Sylius:
 
-    The first one is simple **templates overriding** inside of the ``app/Resources`` directory of your project. Using
+    The first one is simple **templates overriding** inside of the ``templates/bundle`` directory of your project. Using
     this method you can completely change the content of templates.
 
     The second method is **templates customization via events**. You are able to listen on these template events,
     and by that add your own blocks without copying and pasting the whole templates. This feature is really useful
-    when :doc:`creating Sylius Extensions </plugins/creating-plugin>`.
+    when :doc:`creating Sylius Plugins </plugins/creating-plugin>`.
 
     The third method is **using Sylius themes**. Creating a Sylius theme requires a few more steps than basic template overriding,
     but allows you to have a different design on multiple channels of the same Sylius instance. :doc:`Learn more about themes here </book/themes/themes>`.
@@ -45,7 +45,7 @@ How to customize templates by overriding?
 * **Shop** templates: customizing Login Page template:
 
 The default login template is: ``SyliusShopBundle:login.html.twig``.
-In order to override it you need to create your own: ``app/Resources/SyliusShopBundle/views/login.html.twig``.
+In order to override it you need to create your own: ``templates/bundle/SyliusShopBundle/login.html.twig``.
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
@@ -90,7 +90,7 @@ Done! If you do not see any changes on the ``/shop/login`` url, clear your cache
 * **Admin** templates: Customization of the Country form view.
 
 The default template for the Country form is: ``SyliusAdminBundle:Country:_form.html.twig``.
-In order to override it you need to create your own: ``app/Resources/SyliusAdminBundle/views/Country/_form.html.twig``.
+In order to override it you need to create your own: ``templates/bundle/SyliusAdminBundle/Country/_form.html.twig``.
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
@@ -168,7 +168,7 @@ For the space below the header it will be ``sylius.shop.layout.after_header``.
 
 .. code-block:: twig
 
-    {# AppBundle/Resources/views/block.html.twig #}
+    {# templates/block.html.twig #}
 
     <h1> Test Block Title </h1>
 

@@ -69,6 +69,7 @@ sylius:
         assortment: 'จัดประเภท'
         attributes: 'คุณลักษณะ (Attribute)'
         author: 'ผู้เขียน'
+        authorized: 'อำนาจ'
         availability: 'สินค้าเข้าแล้ว'
         available_for_channels: 'มีใน channels'
         available_on: 'พร้อมจำหน่ายเมื่อ'

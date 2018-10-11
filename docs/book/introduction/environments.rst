@@ -12,7 +12,7 @@ Development
 Development environment or ``dev``, as the name suggests, should be used for development purposes. It is much slower than production, because it uses much less aggressive caching and does a lot of processing on every request.
 However, it allows you to add new features or fix bugs quickly, without worrying about clearing the cache after every change.
 
-Sylius console runs in ``dev`` environment by default. You can access the website in dev mode via the ``/app_dev.php`` file in the ``web/`` directory. (under your website root)
+Sylius console runs in ``dev`` environment by default. You can access the website in dev mode via the ``/index.php`` file in the ``public/`` directory. (under your website root)
 
 Production
 ----------
@@ -25,7 +25,7 @@ To run Sylius console in ``prod`` environment, add the following parameters to e
 
    $ bin/console --env=prod --no-debug cache:clear
 
-You can access the website in production mode via the ``/app.php`` file in your website root (``web/``) or just ``/`` path. (on Apache)
+You can access the website in production mode via the ``/index.php`` file in your website root (``public/``) or just ``/`` path. (on Apache)
 
 Staging
 -------
@@ -39,7 +39,7 @@ To run Sylius console in ``staging`` environment, add the following parameters t
 
    $ bin/console --env=staging --no-debug cache:clear
 
-You can access the website in staging mode via the ``/app_staging.php`` file in your website root (``web/``) or just ``/`` path. (on Apache)
+You can access the website in staging mode via the ``/index.php`` file in your website root (``public/``) or just ``/`` path. (on Apache)
 
 Test
 ----

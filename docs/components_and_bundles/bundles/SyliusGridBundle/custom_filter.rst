@@ -73,7 +73,7 @@ That is all. Now let's register your new filter type as service.
 
 .. code-block:: yaml
 
-    # app/config/services.yml
+    # config/services.yaml
 
     services:
         app.grid.filter.suppliers_statistics:

@@ -7,40 +7,39 @@
  * file that was distributed with this source code.
  */
 
-(function ($) {
-    'use strict';
+import $ from 'jquery';
 
-    $.fn.extend({
-        addTabErrors: function () {
-            var element = $(this);
+$.fn.extend({
+  addTabErrors() {
+    const element = this;
 
-            $('.ui.segment > .ui.tab').each(function () {
-                var errors = $(this).find('.sylius-validation-error');
+    $('.ui.segment > .ui.tab').each((idx, el) => {
+      const errors = $(el).find('.sylius-validation-error');
 
-                if(0 !== errors.length) {
-                    var tabName = $(this).attr('data-tab');
-                    var tabWithErrors = $(element).find('a.item[data-tab="' + tabName + '"]');
+      if (errors.length !== 0) {
+        const tabName = $(el).attr('data-tab');
+        const tabWithErrors = $(element).find(`a.item[data-tab="${tabName}"]`);
 
-                    var label = tabWithErrors.html();
-                    var newLabel = label + '<span class="ui small horizontal circular label" style="background-color: #DB2828">' + errors.length + '</span>';
+        const label = tabWithErrors.html();
+        const newLabel = `${label}<span class="ui small horizontal circular label" style="background-color: #DB2828">${errors.length}</span>`;
 
-                    tabWithErrors.html(newLabel);
-                }
-            });
-        },
-        addAccordionErrors: function () {
-            var element = $(this);
-            var accordionElements = element.find('.ui.content');
+        tabWithErrors.html(newLabel);
+      }
+    });
+  },
 
-            $(accordionElements).each(function () {
-                var errors = $(this).find('.sylius-validation-error');
+  addAccordionErrors() {
+    const element = this;
+    const accordionElements = element.find('.ui.content');
 
-                if(0 !== errors.length) {
-                    var ribWithErrors = $(this).closest('[data-locale]').find('.title');
+    $(accordionElements).each((idx, el) => {
+      const errors = $(el).find('.sylius-validation-error');
 
-                    ribWithErrors.css('color', '#DB2828');
-                }
-            });
-        }
-    })
-})( jQuery );
+      if (errors.length !== 0) {
+        const ribWithErrors = $(el).closest('[data-locale]').find('.title');
+
+        ribWithErrors.css('color', '#DB2828');
+      }
+    });
+  },
+});

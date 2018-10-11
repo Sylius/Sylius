@@ -77,7 +77,7 @@
 {%- endblock percent_widget %}
 
 {% block collection_widget -%}
-    {% from 'SyliusResourceBundle:Macros:notification.html.twig' import error %}
+    {% from '@SyliusResource/Macros/notification.html.twig' import error %}
     {% import _self as self %}
     {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
 

@@ -7,38 +7,40 @@
  * file that was distributed with this source code.
  */
 
-(function ( $ ) {
-    'use strict';
+import 'semantic-ui-css/components/api';
+import $ from 'jquery';
 
-    $.fn.extend({
-        apiToggle: function (apiSettings, toggleableElement, isHidden) {
-            var element = $(this);
-            var apiSettings = apiSettings;
-            var toggleableElement = toggleableElement;
-            var isHidden = isHidden || true;
+$.fn.extend({
+  apiToggle({
+    method,
+    dataType = 'json',
+    throttle = 0,
+    debug = false,
+    beforeSend,
+    successTest,
+  }, toggleableElement, isHidden = true) {
+    const element = this;
 
-            if (isHidden) {
-                toggleableElement.hide();
-            }
+    if (isHidden) {
+      toggleableElement.hide();
+    }
 
-            element.api({
-                method: apiSettings.method,
-                dataType: apiSettings.dataType || 'json',
-                throttle: apiSettings.throttle || 0,
-                debug: apiSettings.debug || false,
+    element.api({
+      method,
+      dataType,
+      throttle,
+      debug,
 
-                beforeSend: apiSettings.beforeSend,
-                successTest: apiSettings.successTest,
+      beforeSend,
+      successTest,
 
-                onSuccess: function (response) {
-                    toggleableElement.show();
-                },
+      onSuccess() {
+        toggleableElement.show();
+      },
 
-                onFailure: function (response) {
-                    toggleableElement.hide();
-                }
-            });
-
-        }
+      onFailure() {
+        toggleableElement.hide();
+      },
     });
-})( jQuery );
+  },
+});

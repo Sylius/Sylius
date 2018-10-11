@@ -42,6 +42,14 @@ final class CheckoutThankYouContext implements Context
     }
 
     /**
+     * @When I proceed to the registration
+     */
+    public function iProceedToTheRegistration(): void
+    {
+        $this->thankYouPage->createAccount();
+    }
+
+    /**
      * @Then I should see the thank you page
      */
     public function iShouldSeeTheThankYouPage()
@@ -87,5 +95,21 @@ final class CheckoutThankYouContext implements Context
     public function iShouldNotBeAbleToChangeMyPaymentMethod()
     {
         Assert::false($this->thankYouPage->hasChangePaymentMethodButton());
+    }
+
+    /**
+     * @Then I should be able to proceed to the registration
+     */
+    public function iShouldBeAbleToProceedToTheRegistration(): void
+    {
+        Assert::true($this->thankYouPage->hasRegistrationButton());
+    }
+
+    /**
+     * @Then I should not be able to proceed to the registration
+     */
+    public function iShouldNotBeAbleToProceedToTheRegistration(): void
+    {
+        Assert::false($this->thankYouPage->hasRegistrationButton());
     }
 }

@@ -80,7 +80,7 @@ Generate API routing.
     Learn more about using Sylius REST API in these articles:
     :doc:`REST API Reference </api/index>`, :doc:`How to use Sylius API? - Cookbook </cookbook/api/api>`.
 
-Add the following lines to ``app/config/routing.yml``:
+Add the following lines to ``config/routes.yaml``:
 
 .. code-block:: yaml
 

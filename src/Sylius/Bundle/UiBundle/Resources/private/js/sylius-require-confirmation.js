@@ -7,32 +7,31 @@
  * file that was distributed with this source code.
  */
 
-(function ( $ ) {
-    'use strict';
+import 'semantic-ui-css/components/modal';
+import $ from 'jquery';
 
-    $.fn.extend({
-        requireConfirmation: function() {
-            return this.each(function() {
-                return $(this).on('click', function(event) {
-                    event.preventDefault();
+$.fn.extend({
+  requireConfirmation() {
+    this.each((idx, el) => {
+      $(el).on('click', (evt) => {
+        evt.preventDefault();
 
-                    var actionButton = $(this);
+        const actionButton = $(evt.currentTarget);
 
-                    if (actionButton.is('a')) {
-                        $('#confirmation-button').attr('href', actionButton.attr('href'));
-                    }
-
-                    if (actionButton.is('button')) {
-                        $('#confirmation-button').on('click', function(event) {
-                            event.preventDefault();
-
-                            return actionButton.closest('form').submit();
-                        });
-                    }
-
-                    return $('#confirmation-modal').modal('show');
-                });
-            });
+        if (actionButton.is('a')) {
+          $('#confirmation-button').attr('href', actionButton.attr('href'));
         }
+
+        if (actionButton.is('button')) {
+          $('#confirmation-button').on('click', (event) => {
+            event.preventDefault();
+
+            actionButton.closest('form').submit();
+          });
+        }
+
+        $('#confirmation-modal').modal('show');
+      });
     });
-})( jQuery );
+  },
+});

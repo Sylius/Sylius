@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "doctrine/common": "^2.5",
         "symfony/asset": "^3.4|^4.1.1",
@@ -84,7 +84,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.2-dev"
+            "dev-master": "1.4-dev"
         }
     }
 }

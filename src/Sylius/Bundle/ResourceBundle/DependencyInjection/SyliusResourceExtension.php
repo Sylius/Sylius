@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DriverProvider;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Metadata\Metadata;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -65,6 +66,13 @@ final class SyliusResourceExtension extends Extension
         }
 
         foreach ($drivers as $driver) {
+            if (in_array($driver, [SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM, SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM], true)) {
+                @trigger_error(sprintf(
+                    'The "%s" driver is deprecated in Sylius 1.3. Doctrine MongoDB and PHPCR will no longer be supported in Sylius 2.0.',
+                    $driver
+                ), E_USER_DEPRECATED);
+            }
+
             $loader->load(sprintf('services/integrations/%s.xml', $driver));
         }
     }

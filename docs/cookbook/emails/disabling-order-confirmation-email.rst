@@ -35,7 +35,7 @@ This can be done via a CompilerPass.
 
     <?php
 
-    namespace AppBundle\DependencyInjection\Compiler;
+    namespace App\DependencyInjection\Compiler;
 
     use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
     use Symfony\Component\DependencyInjection\ContainerBuilder;

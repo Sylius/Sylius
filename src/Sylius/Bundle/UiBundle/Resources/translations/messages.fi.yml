@@ -71,6 +71,7 @@ sylius:
         assortment: 'Valikoima'
         attributes: 'Määritteet'
         author: 'Tekijä'
+        authorized: 'Hyväksytty'
         availability: 'Saatavuus'
         available_for_channels: 'Saatavuus kanaville'
         available_on: 'Saatavana'

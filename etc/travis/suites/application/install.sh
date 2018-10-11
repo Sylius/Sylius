@@ -8,5 +8,4 @@ run_command "if [ ! -z \"${SYMFONY_VERSION}\" ]; then bin/require-symfony-versio
 run_command "composer install --no-interaction --prefer-dist" || exit $?
 
 print_header "Warming up dependencies" "Sylius"
-run_command "composer run-script travis-build --no-interaction" || exit $?
 run_command "yarn install" || exit $?

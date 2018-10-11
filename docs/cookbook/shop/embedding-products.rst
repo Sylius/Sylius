@@ -21,7 +21,7 @@ Your extending repository class should look like that:
 
     <?php
 
-    namespace AppBundle\Repository;
+    namespace App\Repository;
 
     use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
     use Sylius\Component\Core\Model\ChannelInterface;
@@ -57,16 +57,16 @@ And should be registered in the ``app/config/config.yml`` just like that:
         resources:
             product:
                 classes:
-                    repository: AppBundle\Repository\ProductRepository
+                    repository: App\Repository\ProductRepository
 
 Configure routing for the action of products rendering
 ------------------------------------------------------
 
-To be able to render a partial with the retrieved products configure routing for it in the ``app/config/routing.yml``:
+To be able to render a partial with the retrieved products configure routing for it in the ``config/routes.yaml``:
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
     app_shop_partial_product_index_latest_by_taxon_code:
         path: /latest/{code}/{count} # configure a new path that has all the needed variables
         methods: [GET]

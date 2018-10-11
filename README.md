@@ -16,9 +16,9 @@ Enjoy being an eCommerce Developer again!
 Installation
 ------------
 
-[Install Sylius](http://docs.sylius.com/en/1.2/book/installation/installation.html) with Composer (see [requirements details](http://docs.sylius.com/en/1.2/book/installation/requirements.html)).
+[Install Sylius](http://docs.sylius.com/en/latest/book/installation/installation.html) with Composer (see [requirements details](http://docs.sylius.com/en/latest/book/installation/requirements.html)).
 
-Alternatively, you can [use our Vagrant setup](http://docs.sylius.com/en/1.2/book/installation/vagrant_installation.html).
+Alternatively, you can [use our Vagrant setup](http://docs.sylius.com/en/latest/book/installation/vagrant_installation.html).
 
 Documentation
 -------------
@@ -34,23 +34,27 @@ You can also see all roadmap related issues by filtering [those labeled with "Ro
 Community
 ---------
 
-[Get Sylius support](http://docs.sylius.com/en/1.2/support/index.html) on [Slack](https://sylius.com/slack), [Forum](https://forum.sylius.com/) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
+[Get Sylius support](http://docs.sylius.com/en/latest/support/index.html) on [Slack](https://sylius.com/slack), [Forum](https://forum.sylius.com/) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
 
 Stay updated by following our [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
 
 Official plugins
 ----------------
 
-This is the list of oficially supported Sylius plugins:
+This is the list of officially supported Sylius plugins:
 
- - [Shop API Plugin](https://github.com/Sylius/SyliusShopApiPlugin) - 
-   provides customer-level API for the shop functionalities
  - [Admin Order Creation Plugin](https://github.com/Sylius/AdminOrderCreationPlugin) - 
-   allows creating orders directly from the administrator panel
- - [Customer Reorder Plugin](https://github.com/Sylius/CustomerReorderPlugin) - 
-   allows customer to copy items from the already placed order to the current cart
+   allows to create orders directly from the administrator panel
  - [Customer Order Cancellation Plugin](https://github.com/Sylius/CustomerOrderCancellationPlugin) -
    allows customer to cancel a placed order which has not been processed yet
+ - [Customer Reorder Plugin](https://github.com/Sylius/CustomerReorderPlugin) - 
+   allows customer to copy items from the already placed order to the current cart
+ - [Invoicing Plugin](https://github.com/Sylius/InvoicingPlugin) -
+   generates an invoice for every placed order
+ - [Refund Plugin](https://github.com/Sylius/RefundPlugin) -
+   allows administrator to refund items from paid order
+ - [Shop API Plugin](https://github.com/Sylius/SyliusShopApiPlugin) - 
+   provides customer-level API for the shop functionalities
    
 You can find other plugins on [our ecosystem website](https://sylius.com/plugins/) or by looking for 
 [packages marked as *sylius-plugin*](https://packagist.org/explore/?type=sylius-plugin).
@@ -69,7 +73,7 @@ Instead, all security issues must be sent to `security@sylius.com`.
 License
 -------
 
-Sylius is completely free and released under the [MIT License](https://github.com/Sylius/Sylius/blob/1.2/LICENSE).
+Sylius is completely free and released under the [MIT License](https://github.com/Sylius/Sylius/blob/master/LICENSE).
 
 Authors
 -------

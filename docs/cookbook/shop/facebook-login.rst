@@ -31,7 +31,7 @@ Set up the HWIOAuthBundle
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
     hwi_oauth_redirect:
         resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
         prefix:   /connect

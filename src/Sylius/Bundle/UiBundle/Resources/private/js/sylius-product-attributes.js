@@ -7,118 +7,117 @@
  * file that was distributed with this source code.
  */
 
-(function ($) {
-    'use strict';
+import 'semantic-ui-css/components/dropdown';
+import $ from 'jquery';
 
-    $.fn.extend({
-        productAttributes: function () {
-            setAttributeChoiceListener();
+const getNextIndex = function getNextIndex() {
+  return $('#attributesContainer').attr('data-count');
+};
 
-            $(this).dropdown({
-                onRemove: function(removedValue, removedText, $removedChoice) {
-                    modifyAttributesListOnSelectorElementDelete(removedValue);
-                },
-                forceSelection: false
-            });
+const addAttributesNumber = function addAttributesNumber(number) {
+  const currentIndex = parseInt(getNextIndex(), 10);
+  $('#attributesContainer').attr('data-count', currentIndex + number);
+};
 
-            controlAttributesList();
-            modifySelectorOnAttributesListElementDelete();
+const controlAttributesList = function controlAttributesList() {
+  $('#attributesContainer .attribute').each((index, element) => {
+    const value = $(element).attr('data-id');
+    $('#sylius_product_attribute_choice').dropdown('set selected', value);
+  });
+};
+
+const modifyAttributesListOnSelectorElementDelete = function modifyAttributesListOnSelectorElementDelete(removedValue) {
+  $(`#attributesContainer .attribute[data-id="${removedValue}"]`).remove();
+};
+
+const modifySelectorOnAttributesListElementDelete = function modifySelectorOnAttributesListElementDelete() {
+  $('.attribute button').off('click').on('click', (event) => {
+    const attributeId = $(event.currentTarget).parents('.attribute').attr('data-id');
+
+    $('div#attributeChoice > .ui.dropdown.search').dropdown('remove selected', attributeId);
+    modifyAttributesListOnSelectorElementDelete(attributeId);
+  });
+};
+
+const modifyAttributeFormElements = function modifyAttributeFormElements($response) {
+  $response.find('input,select,textarea').each((index, element) => {
+    if ($(element).attr('data-name') != null) {
+      $(element).attr('name', $(element).attr('data-name'));
+    }
+  });
+
+  return $response;
+};
+
+const isInTheAttributesContainer = function isInTheAttributesContainer(attributeId) {
+  let result = false;
+  $('#attributesContainer .attribute').each((index, element) => {
+    const dataId = $(element).attr('data-id');
+    if (dataId === attributeId) {
+      result = true;
+    }
+  });
+
+  return result;
+};
+
+const setAttributeChoiceListener = function setAttributeChoiceListener() {
+  const $attributeChoice = $('#attributeChoice');
+  $attributeChoice.find('button').on('click', (event) => {
+    event.preventDefault();
+
+    const $attributeChoiceSelect = $attributeChoice.find('select');
+    let queryData = '';
+    const $newAttributes = $attributeChoiceSelect.val();
+
+    if ($newAttributes != null) {
+      $attributeChoiceSelect.val().forEach((item) => {
+        if (!isInTheAttributesContainer(item)) {
+          queryData += `${$attributeChoiceSelect.prop('name')}=${item}&`;
         }
+      });
+    }
+    queryData += `count=${getNextIndex()}`;
+
+    $.ajax({
+      type: 'GET',
+      url: $(event.currentTarget).parent().attr('data-action'),
+      data: queryData,
+      dataType: 'html',
+      error() {
+        $('form').removeClass('loading');
+      },
+      success(response) {
+        const attributeFormElements = modifyAttributeFormElements($(response));
+
+        attributeFormElements.each((index, element) => {
+          const localeCode = $(element).find('input[type="hidden"]').last().val();
+          $(`#attributesContainer > div[data-tab="${localeCode}"]`).append(element);
+        });
+
+        $('#sylius_product_attribute_choice').val('');
+
+        addAttributesNumber($.grep(attributeFormElements, a => $(a).hasClass('attribute')).length);
+        modifySelectorOnAttributesListElementDelete();
+
+        $('form').removeClass('loading');
+      },
+    });
+  });
+};
+
+$.fn.extend({
+  productAttributes() {
+    setAttributeChoiceListener();
+
+    this.dropdown({
+      onRemove(removedValue) {
+        modifyAttributesListOnSelectorElementDelete(removedValue);
+      },
+      forceSelection: false,
     });
 
-    function addAttributesNumber(number) {
-        var currentIndex = parseInt(getNextIndex());
-        $('#attributesContainer').attr('data-count', currentIndex+number);
-    }
-
-    function getNextIndex() {
-        return $('#attributesContainer').attr('data-count');
-    }
-
-    function controlAttributesList() {
-        $('#attributesContainer .attribute').each(function() {
-            var value = $(this).attr('data-id');
-            $('#sylius_product_attribute_choice').dropdown('set selected', value);
-        });
-    }
-
-    function modifyAttributesListOnSelectorElementDelete(removedValue) {
-        $('#attributesContainer .attribute[data-id="'+removedValue+'"]').remove();
-    }
-
-    function modifySelectorOnAttributesListElementDelete() {
-        $('.attribute button').off('click').on('click', function() {
-            var attributeId = $(this).parents('.attribute').attr('data-id');
-
-            $('div#attributeChoice > .ui.dropdown.search').dropdown('remove selected', attributeId);
-            modifyAttributesListOnSelectorElementDelete(attributeId)
-        });
-    }
-
-    function modifyAttributeForms(data) {
-        $.each($(data).find('input,select,textarea'), function() {
-            if ($(this).attr('data-name') != null) {
-                $(this).attr('name', $(this).attr('data-name'));
-            }
-        });
-
-        return data;
-    }
-
-    function setAttributeChoiceListener() {
-        var $attributeChoice = $('#attributeChoice');
-        $attributeChoice.find('button').on('click', function(event) {
-            event.preventDefault();
-
-            var $attributeChoiceSelect = $attributeChoice.find('select');
-            var data = '';
-            var $newAttributes = $attributeChoiceSelect.val();
-
-            if (null != $newAttributes) {
-                $attributeChoiceSelect.val().forEach(function(item) {
-                    if (!isInTheAttributesContainer(item)) {
-                        data += $attributeChoiceSelect.prop('name') + '=' + item + "&";
-                    }
-                });
-            }
-            data += "count=" + getNextIndex();
-
-            $.ajax({
-                type: 'GET',
-                url: $(this).parent().attr('data-action'),
-                data: data,
-                dataType: 'html',
-                error: function() {
-                    $('form').removeClass('loading');
-                },
-                success: function(data) {
-                    var finalData = modifyAttributeForms($(data));
-
-                    $(finalData).each(function() {
-                        var localeCode = $(this).find('input[type="hidden"]').last().val();
-                        $('#attributesContainer > div[data-tab="'+localeCode+'"]').append(this);
-                    });
-
-                    $('#sylius_product_attribute_choice').val('');
-
-                    addAttributesNumber($.grep($(finalData), function (a) { return $(a).hasClass('attribute'); }).length);
-                    modifySelectorOnAttributesListElementDelete();
-
-                    $('form').removeClass('loading');
-                }
-            });
-        });
-    }
-
-    function isInTheAttributesContainer(attributeId) {
-        var result = false;
-        $('#attributesContainer .attribute').each(function() {
-            var dataId = $(this).attr('data-id');
-            if (dataId === attributeId) {
-                result = true;
-            }
-        });
-
-        return result;
-    }
-})( jQuery );
+    controlAttributesList();
+    modifySelectorOnAttributesListElementDelete();
+  },
+});

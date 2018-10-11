@@ -129,6 +129,9 @@ sylius:
                 amount: Znesek
         payment_method:
             channels: Kanali
+        zone:
+            scopes:
+                shipping: Dostava
     installer:
         extensions:
             header: razširitve

@@ -32,7 +32,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "doctrine/orm": "^2.5",
         "sylius/customer": "^1.2",
@@ -70,7 +70,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.2-dev"
+            "dev-master": "1.4-dev"
         }
     }
 }

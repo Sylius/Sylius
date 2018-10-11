@@ -40,6 +40,7 @@
             <argument type="service" id="sylius.promotion_eligibility_checker" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="router" />
+            <argument type="service" id="sylius.promotion_applicator" />
             <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
         </service>
 

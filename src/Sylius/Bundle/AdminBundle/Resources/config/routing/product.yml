@@ -2,7 +2,7 @@ sylius_admin_product:
     resource: |
         alias: sylius.product
         section: admin
-        templates: SyliusAdminBundle:Crud
+        templates: "@SyliusAdmin\\Crud"
         except: ['show', 'index']
         redirect: update
         grid: sylius_admin_product
@@ -11,7 +11,7 @@ sylius_admin_product:
             all:
                 subheader: sylius.ui.manage_your_product_catalog
                 templates:
-                    form: SyliusAdminBundle:Product:_form.html.twig
+                    form: "@SyliusAdmin/Product/_form.html.twig"
             index:
                 icon: cube
     type: sylius.resource
@@ -25,7 +25,7 @@ sylius_admin_product_index:
             section: admin
             permission: true
             grid: sylius_admin_product
-            template: SyliusAdminBundle:Product:index.html.twig
+            template: "@SyliusAdmin/Product/index.html.twig"
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 icon: cube
@@ -39,7 +39,7 @@ sylius_admin_product_per_taxon_index:
             section: admin
             permission: true
             grid: sylius_admin_product_from_taxon
-            template: SyliusAdminBundle:Product:index.html.twig
+            template: "@SyliusAdmin/Product/index.html.twig"
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 icon: cube
@@ -52,12 +52,12 @@ sylius_admin_product_create:
         _sylius:
             section: admin
             permission: true
-            template: SyliusAdminBundle:Crud:create.html.twig
+            template: "@SyliusAdmin/Crud/create.html.twig"
             redirect: sylius_admin_product_update
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 templates:
-                    form: SyliusAdminBundle:Product:_form.html.twig
+                    form: "@SyliusAdmin/Product/_form.html.twig"
                 route:
                     name: sylius_admin_product_create
 
@@ -71,11 +71,11 @@ sylius_admin_product_create_simple:
             permission: true
             factory:
                 method: createWithVariant
-            template: SyliusAdminBundle:Crud:create.html.twig
+            template: "@SyliusAdmin/Crud/create.html.twig"
             redirect: sylius_admin_product_update
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 templates:
-                    form: SyliusAdminBundle:Product:_form.html.twig
+                    form: "@SyliusAdmin/Product/_form.html.twig"
                 route:
                     name: sylius_admin_product_create_simple

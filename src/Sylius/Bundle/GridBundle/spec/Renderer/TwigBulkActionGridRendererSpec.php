@@ -22,7 +22,7 @@ final class TwigBulkActionGridRendererSpec extends ObjectBehavior
 {
     function let(\Twig_Environment $twig): void
     {
-        $this->beConstructedWith($twig, ['delete' => 'SyliusGridBundle:BulkAction:_delete.html.twig']);
+        $this->beConstructedWith($twig, ['delete' => '@SyliusGrid/BulkAction/_delete.html.twig']);
     }
 
     function it_is_a_bulk_action_grid_renderer(): void
@@ -39,7 +39,7 @@ final class TwigBulkActionGridRendererSpec extends ObjectBehavior
         $bulkAction->getOptions()->willReturn([]);
 
         $twig
-            ->render('SyliusGridBundle:BulkAction:_delete.html.twig', [
+            ->render('@SyliusGrid/BulkAction/_delete.html.twig', [
                 'grid' => $gridView,
                 'action' => $bulkAction,
                 'data' => null,

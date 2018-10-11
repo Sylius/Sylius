@@ -7,44 +7,43 @@
  * file that was distributed with this source code.
  */
 
-(function ( $ ) {
-    'use strict';
+import 'semantic-ui-css/components/api';
+import $ from 'jquery';
 
-    $.fn.extend({
-        moveProductVariant: function (positionInput) {
-            var productVariantIds = [];
-            var element = $(this);
+$.fn.extend({
+  moveProductVariant(positionInput) {
+    const productVariantRows = [];
+    const element = this;
 
-            element.api({
-                method: 'PUT',
-                beforeSend: function (settings) {
-                    settings.data = {
-                        productVariants: productVariantIds,
-                        _csrf_token: element.data('csrf-token')
-                    };
+    element.api({
+      method: 'PUT',
+      beforeSend(settings) {
+        /* eslint-disable-next-line no-param-reassign */
+        settings.data = {
+          productVariants: productVariantRows,
+          _csrf_token: element.data('csrf-token'),
+        };
 
-                    return settings;
-                },
-                onSuccess: function (response) {
-                    location.reload();
-                }
-            });
-
-            positionInput.on('input', function () {
-                var id = $(this).data('id');
-                var rowToEdit = productVariantIds.filter(function (productVariant){
-                    return productVariant.id == id;
-                });
-
-                if(rowToEdit.length == 0) {
-                    productVariantIds.push({
-                        id: $(this).data('id'),
-                        position: $(this).val()
-                    });
-                } else {
-                    rowToEdit[0].position = $(this).val();
-                }
-            });
-        }
+        return settings;
+      },
+      onSuccess() {
+        window.location.reload();
+      },
     });
-})(jQuery);
+
+    positionInput.on('input', (event) => {
+      const input = $(event.currentTarget);
+      const productVariantId = input.data('id');
+      const row = productVariantRows.find(({ id }) => id === productVariantId);
+
+      if (!row) {
+        productVariantRows.push({
+          id: productVariantId,
+          position: input.val(),
+        });
+      } else {
+        row.position = input.val();
+      }
+    });
+  },
+});

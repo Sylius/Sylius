@@ -31,12 +31,20 @@ use Webmozart\Assert\Assert;
 
 class Kernel extends HttpKernel
 {
-    public const VERSION = '1.2.8-DEV';
-    public const VERSION_ID = '10208';
+    public const VERSION = '1.4.0-DEV';
+    public const VERSION_ID = '10400';
     public const MAJOR_VERSION = '1';
-    public const MINOR_VERSION = '2';
-    public const RELEASE_VERSION = '8';
+    public const MINOR_VERSION = '4';
+    public const RELEASE_VERSION = '0';
     public const EXTRA_VERSION = 'DEV';
+
+    public function __construct(string $environment, bool $debug)
+    {
+        // TODO: Better deprecation message!
+        @trigger_error(sprintf('Using "%s" as Symfony kernel is deprecated since Sylius 1.3. Please migrate to Symfony 4 directory structure.', self::class), \E_USER_DEPRECATED);
+
+        parent::__construct($environment, $debug);
+    }
 
     /**
      * {@inheritdoc}
@@ -100,7 +108,6 @@ class Kernel extends HttpKernel
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test', 'test_cached'], true)) {
-            $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
         }

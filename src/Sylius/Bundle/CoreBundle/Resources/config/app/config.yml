@@ -23,6 +23,9 @@ imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/fixtures.yml" }
 
+parameters:
+    sylius_core.public_dir: "%kernel.project_dir%/web"
+
 doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -38,7 +41,7 @@ knp_gaufrette:
     adapters:
         sylius_image:
             local:
-                directory: "%kernel.project_dir%/web/media/image"
+                directory: "%sylius_core.public_dir%/media/image"
                 create: true
     filesystems:
         sylius_image:
@@ -48,7 +51,12 @@ liip_imagine:
     loaders:
         default:
             filesystem:
-                data_root: "%kernel.project_dir%/web/media/image"
+                data_root: "%sylius_core.public_dir%/media/image"
+    resolvers:
+        default:
+            web_path:
+                web_root: "%sylius_core.public_dir%"
+                cache_prefix: "media/cache"
     filter_sets:
         sylius_small:
             filters:

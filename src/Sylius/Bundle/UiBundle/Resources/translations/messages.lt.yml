@@ -71,6 +71,7 @@ sylius:
         assortment: 'Asortimentas'
         attributes: 'Atributai'
         author: 'Autorius'
+        authorized: 'Patvirtintas'
         availability: 'Prieinamumas'
         available_for_channels: 'Prieinama kanaluose'
         available_on: 'Prieinamas nuo'

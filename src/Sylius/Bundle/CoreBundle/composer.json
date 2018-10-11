@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
         "fzaninotto/faker": "^1.6",
         "jms/serializer-bundle": "^2.0",
@@ -83,7 +83,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.2-dev"
+            "dev-master": "1.4-dev"
         }
     }
 }

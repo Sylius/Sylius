@@ -27,7 +27,7 @@ final class FixtureRegistryPassTest extends AbstractCompilerPassTestCase
     public function it_registers_fixtures(): void
     {
         $this->setDefinition('sylius_fixtures.fixture_registry', new Definition());
-        $this->setDefinition('acme.fixture', (new Definition())->addTag('sylius_fixtures.fixture'));
+        $this->setDefinition('acme.fixture', (new Definition())->addTag(FixtureRegistryPass::FIXTURE_SERVICE_TAG));
 
         $this->compile();
 

@@ -58,6 +58,14 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('product_grid')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('include_all_descendants')
+                            ->defaultFalse()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

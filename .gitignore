@@ -1,42 +1,43 @@
-/.php_cs.cache
-
-/app/config/parameters.yml
-/app/config/*.local.yml
 /var/*
 !/var/.gitkeep
 
+/public/assets
+/public/bundles
+/public/css
+/public/js
+/public/media
+
+/app/config/parameters.yml
+
+/bin/symfony_requirements
+
 /docs/.doctrees
-
-/web/assets
-/web/bundles
-/web/css
-/web/js
-/web/media
-
-/bin/*
-!/bin/build-package
-!/bin/build-packages
-!/bin/clean-package
-!/bin/clean-packages
-!/bin/console
-!/bin/fix-coding-standards
-!/bin/install-package
-!/bin/install-packages
-!/bin/require-symfony-version
-!/bin/symfony_requirements
-!/bin/test-package
-!/bin/test-packages
-!/bin/validate-package
-!/bin/validate-packages
 
 /composer.lock
 /vendor
 /node_modules
 
 /etc/build/*
-!/etc/build/.gitkeep
+!/etc/build/.gitignore
 
 /behat.yml
-/phpunit.xml
 /phpspec.yml
+
+/.env
+/.env.prod
+/.env.staging
+/.env.test
+/.env.test_cached
+
+###> symfony/web-server-bundle ###
 /.web-server-pid
+###< symfony/web-server-bundle ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php_cs
+/.php_cs.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###

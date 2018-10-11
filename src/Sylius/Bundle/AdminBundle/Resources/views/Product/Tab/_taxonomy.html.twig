@@ -4,8 +4,8 @@
 
     <h4>{{ 'sylius.ui.product_taxon'|trans }}</h4>
     <div id="sylius-product-taxonomy-tree"
-         data-taxon-root-nodes-url="{{ path('sylius_admin_ajax_taxon_root_nodes') }}"
-         data-taxon-leafs-url="{{ path('sylius_admin_ajax_taxon_leafs') }}"
+         data-tree-root-nodes-url="{{ path('sylius_admin_ajax_taxon_root_nodes') }}"
+         data-tree-leafs-url="{{ path('sylius_admin_ajax_taxon_leafs') }}"
     >
         {{ form_widget(form.productTaxons) }}
         <div class="ui inverted dimmer">

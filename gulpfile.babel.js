@@ -5,7 +5,7 @@ import yargs from 'yargs';
 const { argv } = yargs
   .options({
     rootPath: {
-      description: '<path> path to web assets directory',
+      description: '<path> path to public assets directory',
       type: 'string',
       requiresArg: true,
       required: false,
@@ -20,14 +20,14 @@ const { argv } = yargs
 
 const config = [
   '--rootPath',
-  argv.rootPath || '../../../../web/assets',
+  argv.rootPath || '../../../../public/assets',
   '--nodeModulesPath',
   argv.nodeModulesPath || '../../../../node_modules',
 ];
 
 export const buildAdmin = function buildAdmin() {
   return gulp.src('src/Sylius/Bundle/AdminBundle/gulpfile.babel.js', { read: false })
-    .pipe(chug({ args: config }));
+    .pipe(chug({ args: config, tasks: 'build' }));
 };
 buildAdmin.description = 'Build admin assets.';
 
@@ -39,7 +39,7 @@ watchAdmin.description = 'Watch admin asset sources and rebuild on changes.';
 
 export const buildShop = function buildShop() {
   return gulp.src('src/Sylius/Bundle/ShopBundle/gulpfile.babel.js', { read: false })
-    .pipe(chug({ args: config }));
+    .pipe(chug({ args: config, tasks: 'build' }));
 };
 buildShop.description = 'Build shop assets.';
 

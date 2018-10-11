@@ -1,6 +1,6 @@
 {% extends '@SyliusShop/Checkout/layout.html.twig' %}
 
-{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
 {% block content %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete', 'orderTotal': order.total} %}
@@ -20,7 +20,7 @@
 
             {{ sonata_block_render_event('sylius.shop.checkout.complete.before_summary', {'order': order, 'form': form}) }}
 
-            {% include 'SyliusShopBundle:Common/Order:_summary.html.twig' %}
+            {% include '@SyliusShop/Common/Order/_summary.html.twig' %}
 
             {{ sonata_block_render_event('sylius.shop.checkout.complete.after_summary', {'order': order}) }}
 

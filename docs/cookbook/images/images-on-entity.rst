@@ -19,7 +19,7 @@ you have to create your own ShippingMethod class that will extend it:
     
     declare(strict_types=1);
 
-    namespace AppBundle\Entity;
+    namespace App\Entity;
 
     use Doctrine\Common\Collections\ArrayCollection;
     use Doctrine\Common\Collections\Collection;
@@ -112,12 +112,12 @@ With such a configuration in the ``config.yml`` you will register your ShippingM
         resources:
             shipping_method:
                 classes:
-                    model: AppBundle\Entity\ShippingMethod
+                    model: App\Entity\ShippingMethod
 
 3. Create the ShippingMethodImage class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the ``AppBundle\Entity`` namespace place the ``ShippingMethodImage`` class which should look like this:
+In the ``App\Entity`` namespace place the ``ShippingMethodImage`` class which should look like this:
 
 .. code-block:: php
 
@@ -125,7 +125,7 @@ In the ``AppBundle\Entity`` namespace place the ``ShippingMethodImage`` class wh
     
     declare(strict_types=1);
 
-    namespace AppBundle\Entity;
+    namespace App\Entity;
 
     use Sylius\Component\Core\Model\Image;
 
@@ -142,12 +142,12 @@ of the ``ShippingMethodImage``.
 .. code-block:: yaml
 
     # AppBundle/Resources/config/doctrine/ShippingMethodImage.orm.yml
-    AppBundle\Entity\ShippingMethodImage:
+    App\Entity\ShippingMethodImage:
         type: entity
         table: app_shipping_method_image
         manyToOne:
             owner:
-                targetEntity: AppBundle\Entity\ShippingMethod
+                targetEntity: App\Entity\ShippingMethod
                 inversedBy: images
                 joinColumn:
                     name: owner_id
@@ -163,12 +163,12 @@ The newly added ``images`` field has to be added to the mapping, with a relation
 .. code-block:: yaml
 
     # AppBundle/Resources/config/doctrine/ShippingMethod.orm.yml
-    AppBundle\Entity\ShippingMethod:
+    App\Entity\ShippingMethod:
         type: entity
         table: sylius_shipping_method
         oneToMany:
             images:
-                targetEntity: AppBundle\Entity\ShippingMethodImage
+                targetEntity: App\Entity\ShippingMethodImage
                 mappedBy: owner
                 orphanRemoval: true
                 cascade:
@@ -186,12 +186,12 @@ The ``ShippingMethodImage`` class needs to be registered as a Sylius resource:
         resources:
             app.shipping_method_image:
                 classes:
-                    model: AppBundle\Entity\ShippingMethodImage
+                    model: App\Entity\ShippingMethodImage
 
 7. Create the ShippingMethodImageType class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is how the class for ``ShippingMethodImageType`` should look like. Place it in the ``AppBundle\Form\Type\`` directory.
+This is how the class for ``ShippingMethodImageType`` should look like. Place it in the ``App\Form\Type\`` directory.
 
 .. code-block:: php
 
@@ -199,7 +199,7 @@ This is how the class for ``ShippingMethodImageType`` should look like. Place it
     
     declare(strict_types=1);
 
-    namespace AppBundle\Form\Type;
+    namespace App\Form\Type;
 
     use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
 
@@ -224,7 +224,7 @@ After creating the form type class, you need to register it as a ``form.type`` s
     # services.yml
     services:
         app.form.type.shipping_method_image:
-            class: AppBundle\Form\Type\ShippingMethodImageType
+            class: App\Form\Type\ShippingMethodImageType
             tags:
                 - { name: form.type }
             arguments: ['%app.model.shipping_method_image.class%']
@@ -241,7 +241,7 @@ What is more the new form type needs to be configured as the resource form of th
         resources:
             app.shipping_method_image:
                 classes:
-                    form: AppBundle\Form\Type\ShippingMethodImageType
+                    form: App\Form\Type\ShippingMethodImageType
 
 10. Extend the ShippingMethodType with the images field
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -260,9 +260,9 @@ It needs to have the images field as a CollectionType.
     
     declare(strict_types=1);
 
-    namespace AppBundle\Form\Extension;
+    namespace App\Form\Extension;
 
-    use AppBundle\Form\Type\ShippingMethodImageType;
+    use App\Form\Type\ShippingMethodImageType;
     use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
     use Symfony\Component\Form\AbstractTypeExtension;
     use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -317,7 +317,7 @@ Register the form extension as a service:
     # services.yml
     services:
         app.form.extension.type.shipping_method:
-            class: AppBundle\Form\Extension\ShippingMethodTypeExtension
+            class: App\Form\Extension\ShippingMethodTypeExtension
             tags:
                 - { name: form.type_extension, extended_type: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType }
 
@@ -413,7 +413,7 @@ This could look like this e.g.:
 .. code-block:: yaml
 
     # AppBundle\Resources\config\validation\ShippingMethodImage.yml
-    AppBundle\Entity\ShippingMethodImage:
+    App\Entity\ShippingMethodImage:
       properties:
         file:
           - Image:
@@ -436,7 +436,7 @@ Now connecting the validation of the ``ShippingMethod`` to the validation of eac
 .. code-block:: yaml
 
     # AppBundle\Resources\config\validation\ShippingMethod.yml
-    AppBundle\Entity\ShippingMethod:
+    App\Entity\ShippingMethod:
       properties:
         ...
         images:

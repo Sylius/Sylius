@@ -2,7 +2,7 @@ Customizing Forms
 =================
 
 The forms in Sylius are placed in the ``Sylius\Bundle\*BundleName*\Form\Type`` namespaces and the extensions
-will be placed in `AppBundle\Form\Extension`.
+will be placed in `App\Form\Extension`.
 
 Why would you customize a Form?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -49,7 +49,7 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
 
     <?php
 
-    namespace AppBundle\Form\Extension;
+    namespace App\Form\Extension;
 
     use Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType;
     use Symfony\Component\Form\AbstractTypeExtension;
@@ -89,15 +89,15 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
 
 .. note::
     Of course remember that you need to define new labels for your fields
-    in the ``app\Resources\translations\messages.en.yml`` for english contents of your messages.
+    in the ``translations\messages.en.yml`` for english contents of your messages.
 
-**3.** After creating your class, register this extension as a service in the ``app/config/services.yml``:
+**3.** After creating your class, register this extension as a service in the ``config/services.yaml``:
 
 .. code-block:: yaml
 
     services:
         app.form.extension.type.customer_profile:
-            class: AppBundle\Form\Extension\CustomerProfileTypeExtension
+            class: App\Form\Extension\CustomerProfileTypeExtension
             tags:
                 - { name: form.type_extension, extended_type: Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType }
 
@@ -105,7 +105,7 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
     Of course remember that you need to render the new fields you have created,
     and remove the rendering of the fields that you have removed **in your views**.
 
-In our case you will need a new template: `app/Resources/SyliusShopBundle/views/Account/profileUpdate.html.twig`.
+In our case you will need a new template: `templates/bundle/SyliusShopBundle/views/Account/profileUpdate.html.twig`.
 
 In **Twig** for example you can render your modified form in such a way:
 
@@ -130,7 +130,7 @@ For instance the ``ProductVariant`` admin form is defined under ``Sylius/Bundle/
 
     services:
         app.form.extension.type.product_variant:
-            class: AppBundle\Form\Extension\ProductVariantTypeMyExtension
+            class: App\Form\Extension\ProductVariantTypeMyExtension
             tags:
                 - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType, priority: -5 }
 

@@ -9,28 +9,21 @@ Therefore you have this guide that will help you when wanting to disable shop, a
 How to disable Sylius shop?
 ---------------------------
 
-**1.** Remove SyliusShopBundle from ``app/AppKernel``.
+**1.** Remove SyliusShopBundle from ``config/bundles.php``.
 
 .. code-block:: php
 
-    // # app/AppKernel.php
+    // # config/bundles.php
 
-    public function registerBundles()
-    {
-        $bundles = [
-            new \Sylius\Bundle\AdminBundle\SyliusAdminBundle(),
-            // new \Sylius\Bundle\ShopBundle\SyliusShopBundle(), // - remove or leave this line commented
+    return [
+        ...
 
-            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
-            new \Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle(),
+        // Sylius\Bundle\ShopBundle\SyliusShopBundle::class => ['all' => true], // - remove or leave this line commented
 
-            new \AppBundle\AppBundle(),
-        ];
+        ...
+    ];
 
-        return array_merge(parent::registerBundles(), $bundles);
-    }
-
-**2.** Remove SyliusShopBundle's config import from ``app/config/config.yml``.
+**2.** Remove SyliusShopBundle's config import from ``config/packages/_sylius.yaml``.
 
 Here you've got the line that should disappear from imports:
 
@@ -39,14 +32,9 @@ Here you've got the line that should disappear from imports:
     imports:
     #    - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" } # remove or leave this line commented
 
-**3.** Remove SyliusShopBundle routing configuration from ``app/config/routing.yml``.
+**3.** Remove SyliusShopBundle routing configuration file ``config/routes/sylius_shop.yaml``.
 
-.. code-block:: yaml
-
-    # sylius_shop:
-    #    resource: "@SyliusShopBundle/Resources/config/routing.yml" # remove or leave these lines commented
-
-**4.** Remove security configuration from ``app/config/security.yml``.
+**4.** Remove security configuration from ``config/packages/security.yaml``.
 
 The part that has to be removed from this file is shown below:
 
@@ -104,28 +92,21 @@ The part that has to be removed from this file is shown below:
 How to disable Sylius Admin?
 ----------------------------
 
-**1.** Remove SyliusAdminBundle from ``app/AppKernel``.
+**1.** Remove SyliusAdminBundle from ``config/bundles.php``.
 
 .. code-block:: php
 
-    // # app/AppKernel.php
+    // # config/bundles.php
 
-    public function registerBundles()
-    {
-        $bundles = [
-            // new \Sylius\Bundle\AdminBundle\SyliusAdminBundle(), // - remove or leave this line commented
-            new \Sylius\Bundle\ShopBundle\SyliusShopBundle(),
+    return [
+        ...
 
-            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
-            new \Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle(),
+        // Sylius\Bundle\AdminBundle\SyliusAdminBundle::class => ['all' => true], // - remove or leave this line commented
 
-            new \AppBundle\AppBundle(),
-        ];
+        ...
+    ];
 
-        return array_merge(parent::registerBundles(), $bundles);
-    }
-
-**2.** Remove SyliusAdminBundle's config import from ``app/config/config.yml``.
+**2.** Remove SyliusAdminBundle's config import from ``config/packages/_sylius.yaml``.
 
 Here you've got the line that should disappear from imports:
 
@@ -134,14 +115,9 @@ Here you've got the line that should disappear from imports:
     imports:
     #    - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" } # remove or leave this line commented
 
-**3.** Remove SyliusAdminBundle routing configuration from ``app/config/routing.yml``.
+**3.** Remove SyliusAdminBundle routing configuration from ``config/routes/sylius_admin.yaml``.
 
-.. code-block:: yaml
-
-    #    sylius_admin:
-    #        resource: "@SyliusAdminBundle/Resources/config/routing.yml"
-
-**4.** Remove security configuration from ``app/config/security.yml``.
+**4.** Remove security configuration from ``config/packages/security.yaml``.
 
 The part that has to be removed from this file is shown below:
 
@@ -195,28 +171,22 @@ The part that has to be removed from this file is shown below:
 How to disable Sylius API?
 --------------------------
 
-**1.** Remove SyliusAdminApiBundle & FOSOAuthServerBundle from ``app/AppKernel``.
+**1.** Remove SyliusAdminApiBundle & FOSOAuthServerBundle from ``config/bundles.php``.
 
 .. code-block:: php
 
-    // # app/AppKernel.php
+    // # config/bundles.php
 
-    public function registerBundles()
-    {
-        $bundles = [
-            new \Sylius\Bundle\AdminBundle\SyliusAdminBundle(),
-            new \Sylius\Bundle\ShopBundle\SyliusShopBundle(),
+    return [
+        ...
 
-            // new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
-            // new \Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle(), // - remove or leave this line commented
+        // FOS\OAuthServerBundle\FOSOAuthServerBundle::class => ['all' => true],
+        // Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle::class => ['all' => true], // - remove or leave this line commented
 
-            new \AppBundle\AppBundle(),
-        ];
+        ...
+    ];
 
-        return array_merge(parent::registerBundles(), $bundles);
-    }
-
-**2.** Remove SyliusAdminApiBundle's config import from ``app/config/config.yml``.
+**2.** Remove SyliusAdminApiBundle's config import from ``config/packages/_sylius.yaml``.
 
 Here you've got the line that should disappear from imports:
 
@@ -225,14 +195,9 @@ Here you've got the line that should disappear from imports:
     imports:
     #    - { resource: "@SyliusAdminApiBundle/Resources/config/app/config.yml" } # remove or leave this line commented
 
-**3.** Remove SyliusAdminApiBundle routing configuration from ``app/config/routing.yml``.
+**3.** Remove SyliusAdminApiBundle routing configuration from ``config/routes/sylius_admin_api.yaml``.
 
-.. code-block:: yaml
-
-    # sylius_api:
-    #    resource: "@SyliusAdminApiBundle/Resources/config/routing.yml" # remove or leave these lines commented
-
-**4.** Remove security configuration from ``app/config/security.yml``.
+**4.** Remove security configuration from ``config/packages/security.yaml``.
 
 The part that has to be removed from this file is shown below:
 
