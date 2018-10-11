@@ -3,8 +3,8 @@ Filesystem configuration source
 
 **Filesystem** configuration source loads theme definitions from files placed under specified directories.
 
-By default it seeks for ``composer.json`` files that exists under ``%kernel.project_dir%/app/themes`` directory, which
-usually is resolved to ``app/themes``.
+By default it seeks for ``composer.json`` files that exists under ``%kernel.project_dir%/themes`` directory, which
+usually is resolved to ``themes``.
 
 Configuration reference
 -----------------------
@@ -18,7 +18,7 @@ Configuration reference
                 filename: composer.json
                 scan_depth: null
                 directories:
-                    - "%kernel.project_dir%/app/themes"
+                    - "%kernel.project_dir%/themes"
 
 .. note::
     Like every other source, ``filesystem`` is disabled if not specified otherwise. To enable it and use
