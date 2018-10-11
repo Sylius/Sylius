@@ -1,5 +1,35 @@
 # CHANGELOG FOR `1.1.X`
 
+## v1.1.15 (2018-10-11)
+
+#### TL;DR
+
+- This is the last bugfix release of the `1.1` branch
+
+#### Details
+
+- [#8093](https://github.com/Sylius/Sylius/pull/8093) [Order] Fixed sylius:remove-expired-carts help (@sweoggy)
+- [#8494](https://github.com/Sylius/Sylius/pull/8494) set gender `u` as default value - resolves #8493 (@pamil, @kochen)
+- [#9627](https://github.com/Sylius/Sylius/pull/9627) Narrow down selectors to prevent unexpected bugs (@teohhanhui)
+- [#9646](https://github.com/Sylius/Sylius/pull/9646) [Admin][Product edit] Change the value of the taxons individually when checked/unchecked. (@sbarbat)
+- [#9727](https://github.com/Sylius/Sylius/pull/9727) Do not stale issues selected to Roadmap (@Zales0123)
+- [#9743](https://github.com/Sylius/Sylius/pull/9743) Update shipments.rst (@hmonglee)
+- [#9755](https://github.com/Sylius/Sylius/pull/9755) [Documentation] Fix API example for creating a taxon (@pamil)
+- [#9756](https://github.com/Sylius/Sylius/pull/9756) Allow for null hostname in ChannelFixture (@pamil)
+- [#9757](https://github.com/Sylius/Sylius/pull/9757) Make ArrayGridProvider more performant & suitable for PHP-PM (@pamil)
+- [#9759](https://github.com/Sylius/Sylius/pull/9759) [GridBundle] Do not put unnecessary "andWhere" in ExpressionBuilder (@pamil)
+- [#9760](https://github.com/Sylius/Sylius/pull/9760) [CoreBundle] Make sure promotion action/rule amount is an integer (@pamil)
+- [#9761](https://github.com/Sylius/Sylius/pull/9761) [ThemeBundle] Replace "symfony/symfony" dependency with specific Symfony packages (@pamil)
+- [#9762](https://github.com/Sylius/Sylius/pull/9762) [Grid] Fix getting enabled grid items (@pamil)
+- [#9763](https://github.com/Sylius/Sylius/pull/9763) Update "Configuring taxation" docs (@pamil)
+- [#9764](https://github.com/Sylius/Sylius/pull/9764) [ShippingBundle] Add validation for ShippingMethod calculator (@pamil)
+- [#9765](https://github.com/Sylius/Sylius/pull/9765) Keep the existing pagination when changing sorting on product list page (@pamil)
+- [#9772](https://github.com/Sylius/Sylius/pull/9772) Fix doubled province id on checkout addressing page (@pamil)
+- [#9774](https://github.com/Sylius/Sylius/pull/9774) Ask for confirmation when cancelling an order (@pamil)
+- [#9775](https://github.com/Sylius/Sylius/pull/9775) Limit products shown in associated products autocomplete field (@pamil)
+- [#9776](https://github.com/Sylius/Sylius/pull/9776) [Core] Make implicit dependency explicit (@pamil)
+- [#9803](https://github.com/Sylius/Sylius/pull/9803) `purge_mode` has been rename to `mode` (@Prometee)
+
 ## v1.1.14 (2018-09-24)
 
 #### Details
