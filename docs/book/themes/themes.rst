@@ -71,8 +71,8 @@ Theme assets are installed by running the ``sylius:theme:assets:install`` comman
    bin/console sylius:theme:assets:install
 
 The command run with ``--symlink`` or ``--relative`` parameters creates symlinks for every installed asset file,
-not for entire asset directory (eg. if ``AcmeBundle/Resources/public/asset.js`` exists, it creates symlink ``web/bundles/acme/asset.js``
-leading to ``AcmeBundle/Resources/public/asset.js`` instead of symlink ``web/bundles/acme/`` leading to ``AcmeBundle/Resources/public/``).
+not for entire asset directory (eg. if ``AcmeBundle/Resources/public/asset.js`` exists, it creates symlink ``public/bundles/acme/asset.js``
+leading to ``AcmeBundle/Resources/public/asset.js`` instead of symlink ``public/bundles/acme/`` leading to ``AcmeBundle/Resources/public/``).
 When you create a new asset or delete an existing one, it is required to rerun this command to apply changes (just as the hard copy option works).
 
 .. note::
@@ -82,7 +82,7 @@ When you create a new asset or delete an existing one, it is required to rerun t
 4. Customize a template:
 
 In order to customize the login view you should take the content of ``@SyliusShopBundle/views/login.html.twig`` file
-and paste it to your theme directory: ``app/themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``
+and paste it to your theme directory: ``templates/themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``
 
 Let's remove the registration column in this example:
 
