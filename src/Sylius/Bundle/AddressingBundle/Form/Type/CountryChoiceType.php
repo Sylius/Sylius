@@ -35,10 +35,11 @@ final class CountryChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
+        $defaultValue = null;
         $resolver
             ->setDefaults([
                 'choice_filter' => null,
-                'choices' => function (Options $options): iterable {
+                'choices' => function (Options $options) use (&$defaultValue): iterable {
                     if (null === $options['enabled']) {
                         $countries = $this->countryRepository->findAll();
                     } else {
@@ -53,6 +54,10 @@ final class CountryChoiceType extends AbstractType
                         return $a->getName() <=> $b->getName();
                     });
 
+                    if(count($countries) === 1){
+                        $defaultValue = reset($countries);
+                    }
+
                     return $countries;
                 },
                 'choice_value' => 'code',
@@ -61,6 +66,7 @@ final class CountryChoiceType extends AbstractType
                 'enabled' => true,
                 'label' => 'sylius.form.address.country',
                 'placeholder' => 'sylius.form.country.select',
+                'data' => $defaultValue
             ])
             ->setAllowedTypes('choice_filter', ['null', 'callable'])
         ;
