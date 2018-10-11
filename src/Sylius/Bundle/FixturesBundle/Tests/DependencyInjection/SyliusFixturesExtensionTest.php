@@ -17,6 +17,8 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\FixturesBundle\DependencyInjection\Compiler\FixtureRegistryPass;
 use Sylius\Bundle\FixturesBundle\DependencyInjection\Compiler\ListenerRegistryPass;
 use Sylius\Bundle\FixturesBundle\DependencyInjection\SyliusFixturesExtension;
+use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
+use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusFixturesExtensionTest extends AbstractExtensionTestCase
@@ -53,14 +55,14 @@ final class SyliusFixturesExtensionTest extends AbstractExtensionTestCase
         $this->container->setDefinition(
             'acme.fixture_autoconfigured',
             (new Definition())
-                ->setClass(DummyFixture::class)
+                ->setClass(self::getMockClass(FixtureInterface::class))
                 ->setAutoconfigured(true)
         );
 
         $this->container->setDefinition(
             'acme.listener_autoconfigured',
             (new Definition())
-                ->setClass(DummyListener::class)
+                ->setClass(self::getMockClass(ListenerInterface::class))
                 ->setAutoconfigured(true)
         );
 
