@@ -26,13 +26,15 @@ There are some criteria that you have to analyze before choosing either :doc:`st
 How to enable themes in a project?
 ----------------------------------
 
-To use themes inside of your project you need to add these few lines to your ``app/config/config.yml``.
+To use themes inside of your project you need to add these few lines to your ``config/packages/sylius_theme.yaml``.
 
 .. code-block:: yaml
 
    sylius_theme:
        sources:
-           filesystem: ~
+           filesystem:
+               directories:
+                    - "%kernel.project_dir%/themes"
 
 How to create themes?
 ---------------------
