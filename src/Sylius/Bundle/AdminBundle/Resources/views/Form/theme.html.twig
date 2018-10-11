@@ -1,5 +1,12 @@
 {% extends '@SyliusUi/Form/theme.html.twig' %}
 
+{% block money_widget -%}
+    <div class="ui labeled input">
+        <div class="ui label">{{ currency|sylius_currency_symbol }}</div>
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock money_widget %}
+
 {% block _sylius_product_attribute_configuration_choices_entry_widget %}
     {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
 

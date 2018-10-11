@@ -38,13 +38,6 @@
     </div>
 {%- endblock radio_row %}
 
-{% block money_widget -%}
-    <div class="ui labeled input">
-        <div class="ui label">{{ currency|sylius_currency_symbol }}</div>
-        {{- form_widget(form) -}}
-    </div>
-{%- endblock money_widget %}
-
 {% block choice_row -%}
     <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
         {{- form_label(form) -}}
