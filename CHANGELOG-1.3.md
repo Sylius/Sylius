@@ -1,5 +1,56 @@
 # CHANGELOG FOR `1.3.X`
 
+## v1.3.1 (2018-10-11)
+
+#### TL;DR
+
+- Fixed templates overriding ([#9726](https://github.com/Sylius/Sylius/pull/9726), [#9804](https://github.com/Sylius/Sylius/pull/9803))
+
+#### Details
+
+- [#8093](https://github.com/Sylius/Sylius/pull/8093) [Order] Fixed sylius:remove-expired-carts help (@sweoggy)
+- [#8494](https://github.com/Sylius/Sylius/pull/8494) set gender `u` as default value - resolves #8493 (@pamil, @kochen)
+- [#9627](https://github.com/Sylius/Sylius/pull/9627) Narrow down selectors to prevent unexpected bugs (@teohhanhui)
+- [#9646](https://github.com/Sylius/Sylius/pull/9646) [Admin][Product edit] Change the value of the taxons individually when checked/unchecked. (@sbarbat)
+- [#9685](https://github.com/Sylius/Sylius/pull/9685) Update gulpfile.babel.js (@mihaimitrut)
+- [#9726](https://github.com/Sylius/Sylius/pull/9726) Use native Twig references for templates (@wadjeroudi)
+- [#9739](https://github.com/Sylius/Sylius/pull/9739) [Documentation] Change parameters to env variables (@Zales0123)
+- [#9740](https://github.com/Sylius/Sylius/pull/9740) Change command examples according to new Symfony recommendations (@Zales0123)
+- [#9742](https://github.com/Sylius/Sylius/pull/9742) [Behat] Changing my account password with token I received scenario (@loic425)
+- [#9743](https://github.com/Sylius/Sylius/pull/9743) Update shipments.rst (@hmonglee)
+- [#9746](https://github.com/Sylius/Sylius/pull/9746) [Documentation] v1.3 Update (@CoderMaggie)
+- [#9751](https://github.com/Sylius/Sylius/pull/9751) Update PR template (@CoderMaggie)
+- [#9752](https://github.com/Sylius/Sylius/pull/9752) Update installation.rst for Flex (@dunglas)
+- [#9754](https://github.com/Sylius/Sylius/pull/9754) Fix the "REST APIs" link in the documentation (@dunglas)
+- [#9755](https://github.com/Sylius/Sylius/pull/9755) [Documentation] Fix API example for creating a taxon (@pamil)
+- [#9756](https://github.com/Sylius/Sylius/pull/9756) Allow for null hostname in ChannelFixture (@pamil)
+- [#9757](https://github.com/Sylius/Sylius/pull/9757) Make ArrayGridProvider more performant & suitable for PHP-PM (@pamil)
+- [#9758](https://github.com/Sylius/Sylius/pull/9758) [ThemeBundle] Fix risky tests (@pamil)
+- [#9759](https://github.com/Sylius/Sylius/pull/9759) [GridBundle] Do not put unnecessary "andWhere" in ExpressionBuilder (@pamil)
+- [#9760](https://github.com/Sylius/Sylius/pull/9760) [CoreBundle] Make sure promotion action/rule amount is an integer (@pamil)
+- [#9761](https://github.com/Sylius/Sylius/pull/9761) [ThemeBundle] Replace "symfony/symfony" dependency with specific Symfony packages (@pamil)
+- [#9762](https://github.com/Sylius/Sylius/pull/9762) [Grid] Fix getting enabled grid items (@pamil)
+- [#9763](https://github.com/Sylius/Sylius/pull/9763) Update "Configuring taxation" docs (@pamil)
+- [#9764](https://github.com/Sylius/Sylius/pull/9764) [ShippingBundle] Add validation for ShippingMethod calculator (@pamil)
+- [#9765](https://github.com/Sylius/Sylius/pull/9765) Keep the existing pagination when changing sorting on product list page (@pamil)
+- [#9766](https://github.com/Sylius/Sylius/pull/9766) Update Composer's branch-alias for 1.3 (@pamil)
+- [#9769](https://github.com/Sylius/Sylius/pull/9769) [Behat] Add scenarios on resetting password validation feature (@loic425)
+- [#9771](https://github.com/Sylius/Sylius/pull/9771) Trigger deprecation when deprecated image fixture definition is used (@pamil)
+- [#9772](https://github.com/Sylius/Sylius/pull/9772) Fix doubled province id on checkout addressing page (@pamil)
+- [#9774](https://github.com/Sylius/Sylius/pull/9774) Ask for confirmation when cancelling an order (@pamil)
+- [#9775](https://github.com/Sylius/Sylius/pull/9775) Limit products shown in associated products autocomplete field (@pamil)
+- [#9776](https://github.com/Sylius/Sylius/pull/9776) [Core] Make implicit dependency explicit (@pamil)
+- [#9779](https://github.com/Sylius/Sylius/pull/9779) Fix error templates path (@pamil)
+- [#9783](https://github.com/Sylius/Sylius/pull/9783) Correct grammar mistake in README (@pamil)
+- [#9788](https://github.com/Sylius/Sylius/pull/9788) Update installation.rst (@hmonglee)
+- [#9790](https://github.com/Sylius/Sylius/pull/9790) Update disabling-localised-urls.rst (@hmonglee)
+- [#9791](https://github.com/Sylius/Sylius/pull/9791) [Docs] Update year in copyright (@CoderMaggie)
+- [#9800](https://github.com/Sylius/Sylius/pull/9800) Removed leftover Symfony3 references (@ping-localhost)
+- [#9801](https://github.com/Sylius/Sylius/pull/9801) Update template.rst (@bitbager)
+- [#9803](https://github.com/Sylius/Sylius/pull/9803) `purge_mode` has been rename to `mode` (@Prometee)
+- [#9804](https://github.com/Sylius/Sylius/pull/9804) [ThemeBundle] Add support for Twig namespaced paths and "templates/" top-level directory (@pamil)
+- [#9805](https://github.com/Sylius/Sylius/pull/9805) [Shop] Fix password request & contact pages with a mobile view. (@versgui)
+
 ## v1.3.0, v1.3.0-BETA (2018-09-27, 2018-09-24)
 
 #### TL;DR

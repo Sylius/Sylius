@@ -37,9 +37,9 @@ final class TemplateLocatorSpec extends ObjectBehavior
         TemplateReferenceInterface $template,
         ThemeInterface $theme
     ): void {
-        $template->getPath()->willReturn('@AcmeBundle/Resources/views/index.html.twig');
+        $template->getPath()->willReturn('@AcmeBundle/Resources/views/Directory/index.html.twig');
 
-        $resourceLocator->locateResource('@AcmeBundle/Resources/views/index.html.twig', $theme)->willReturn('/acme/index.html.twig');
+        $resourceLocator->locateResource('@AcmeBundle/Resources/views/Directory/index.html.twig', $theme)->willReturn('/acme/index.html.twig');
 
         $this->locateTemplate($template, $theme)->shouldReturn('/acme/index.html.twig');
     }
@@ -49,9 +49,9 @@ final class TemplateLocatorSpec extends ObjectBehavior
         TemplateReferenceInterface $template,
         ThemeInterface $theme
     ): void {
-        $template->getPath()->willReturn('@AcmeBundle/Resources/views/index.html.twig');
+        $template->getPath()->willReturn('@AcmeBundle/Resources/views/Directory/index.html.twig');
 
-        $resourceLocator->locateResource('@AcmeBundle/Resources/views/index.html.twig', $theme)->willThrow(ResourceNotFoundException::class);
+        $resourceLocator->locateResource('@AcmeBundle/Resources/views/Directory/index.html.twig', $theme)->willThrow(ResourceNotFoundException::class);
 
         $this->shouldThrow(ResourceNotFoundException::class)->during('locateTemplate', [$template, $theme]);
     }
