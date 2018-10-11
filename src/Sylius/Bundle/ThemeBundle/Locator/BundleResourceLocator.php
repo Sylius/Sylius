@@ -19,20 +19,12 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 final class BundleResourceLocator implements ResourceLocatorInterface
 {
-    /**
-     * @var Filesystem
-     */
+    /** @var Filesystem */
     private $filesystem;
 
-    /**
-     * @var KernelInterface
-     */
+    /** @var KernelInterface */
     private $kernel;
 
-    /**
-     * @param Filesystem $filesystem
-     * @param KernelInterface $kernel
-     */
     public function __construct(Filesystem $filesystem, KernelInterface $kernel)
     {
         $this->filesystem = $filesystem;
@@ -41,15 +33,35 @@ final class BundleResourceLocator implements ResourceLocatorInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @param string $resourcePath Eg. "@AcmeBundle/Resources/views/template.html.twig"
      */
     public function locateResource(string $resourcePath, ThemeInterface $theme): string
     {
         $this->assertResourcePathIsValid($resourcePath);
 
-        $bundleName = $this->getBundleNameFromResourcePath($resourcePath);
-        $resourceName = $this->getResourceNameFromResourcePath($resourcePath);
+        if (false !== strpos($resourcePath, 'Bundle/Resources/views/')) {
+            // When using bundle notation, we get a path like @AcmeBundle/Resources/views/template.html.twig
+            return $this->locateResourceBasedOnBundleNotation($resourcePath, $theme);
+        }
+
+        // When using namespaced Twig paths, we get a path like @Acme/template.html.twig
+        return $this->locateResourceBasedOnTwigNamespace($resourcePath, $theme);
+    }
+
+    private function assertResourcePathIsValid(string $resourcePath): void
+    {
+        if (0 !== strpos($resourcePath, '@')) {
+            throw new \InvalidArgumentException(sprintf('Bundle resource path (given "%s") should start with an "@".', $resourcePath));
+        }
+
+        if (false !== strpos($resourcePath, '..')) {
+            throw new \InvalidArgumentException(sprintf('File name "%s" contains invalid characters (..).', $resourcePath));
+        }
+    }
+
+    private function locateResourceBasedOnBundleNotation(string $resourcePath, ThemeInterface $theme): string
+    {
+        $bundleName = substr($resourcePath, 1, strpos($resourcePath, '/') - 1);
+        $resourceName = substr($resourcePath, strpos($resourcePath, 'Resources/') + strlen('Resources/'));
 
         // Symfony 4.0+ always returns a single bundle
         $bundles = $this->kernel->getBundle($bundleName, false);
@@ -70,41 +82,18 @@ final class BundleResourceLocator implements ResourceLocatorInterface
         throw new ResourceNotFoundException($resourcePath, $theme);
     }
 
-    /**
-     * @param string $resourcePath
-     */
-    private function assertResourcePathIsValid(string $resourcePath): void
+    private function locateResourceBasedOnTwigNamespace(string $resourcePath, ThemeInterface $theme): string
     {
-        if (0 !== strpos($resourcePath, '@')) {
-            throw new \InvalidArgumentException(sprintf('Bundle resource path (given "%s") should start with an "@".', $resourcePath));
+        $twigNamespace = substr($resourcePath, 1, strpos($resourcePath, '/') - 1);
+        $bundleName = $twigNamespace . 'Bundle';
+        $resourceName = substr($resourcePath, strpos($resourcePath, '/') + 1);
+
+        $path = sprintf('%s/%s/views/%s', $theme->getPath(), $bundleName, $resourceName);
+
+        if ($this->filesystem->exists($path)) {
+            return $path;
         }
 
-        if (false !== strpos($resourcePath, '..')) {
-            throw new \InvalidArgumentException(sprintf('File name "%s" contains invalid characters (..).', $resourcePath));
-        }
-
-        if (false === strpos($resourcePath, 'Resources/')) {
-            throw new \InvalidArgumentException(sprintf('Resource path "%s" should be in bundles\' "Resources/" directory.', $resourcePath));
-        }
-    }
-
-    /**
-     * @param string $resourcePath
-     *
-     * @return string
-     */
-    private function getBundleNameFromResourcePath(string $resourcePath): string
-    {
-        return substr($resourcePath, 1, strpos($resourcePath, '/') - 1);
-    }
-
-    /**
-     * @param string $resourcePath
-     *
-     * @return string
-     */
-    private function getResourceNameFromResourcePath(string $resourcePath): string
-    {
-        return substr($resourcePath, strpos($resourcePath, 'Resources/') + strlen('Resources/'));
+        throw new ResourceNotFoundException($resourcePath, $theme);
     }
 }
