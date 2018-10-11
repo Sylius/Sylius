@@ -26,7 +26,7 @@ There are some criteria that you have to analyze before choosing either :doc:`st
 How to enable themes in a project?
 ----------------------------------
 
-To use themes inside of your project you need to add these few lines to your ``app/config/config.yml``.
+To use themes inside of your project you need to add these few lines to your ``config/bundles/sylius_theme.yaml``.
 
 .. code-block:: yaml
 
@@ -39,7 +39,7 @@ How to create themes?
 
 Let's see how to customize the login view inside of your custom theme.
 
-1. Inside of the ``app/themes/`` directory create a new directory for your theme:
+1. Inside of the ``templates/themes/`` directory create a new directory for your theme:
 
 Let it be ``CrimsonTheme/`` for instance.
 
