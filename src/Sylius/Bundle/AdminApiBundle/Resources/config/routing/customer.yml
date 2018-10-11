@@ -16,6 +16,8 @@ sylius_admin_api_customer_index:
 
 sylius_admin_api_customer_show:
     path: /{id}
+    requirements:
+        id: '\d+'
     methods: [GET]
     defaults:
         _controller: sylius.controller.customer:showAction
@@ -36,6 +38,8 @@ sylius_admin_api_customer_create:
 
 sylius_admin_api_customer_update:
     path: /{id}
+    requirements:
+        id: '\d+'
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.customer:updateAction
@@ -46,6 +50,8 @@ sylius_admin_api_customer_update:
 
 sylius_admin_api_customer_delete:
     path: /{id}
+    requirements:
+        id: '\d+'
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.customer:deleteAction
@@ -55,6 +61,8 @@ sylius_admin_api_customer_delete:
 
 sylius_admin_api_customer_order_index:
     path: /{id}/orders/
+    requirements:
+        id: '\d+'
     methods: [GET]
     defaults:
         _controller: sylius.controller.order:indexAction
