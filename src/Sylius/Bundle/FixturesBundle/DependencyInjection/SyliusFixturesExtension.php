@@ -37,10 +37,14 @@ final class SyliusFixturesExtension extends Extension implements PrependExtensio
 
         $this->registerSuites($config, $container);
 
-        $container->registerForAutoconfiguration(FixtureInterface::class)
-            ->addTag(FixtureRegistryPass::FIXTURE_SERVICE_TAG);
-        $container->registerForAutoconfiguration(ListenerInterface::class)
-            ->addTag(ListenerRegistryPass::LISTENER_SERVICE_TAG);
+        $container
+            ->registerForAutoconfiguration(FixtureInterface::class)
+            ->addTag(FixtureRegistryPass::FIXTURE_SERVICE_TAG)
+        ;
+        $container
+            ->registerForAutoconfiguration(ListenerInterface::class)
+            ->addTag(ListenerRegistryPass::LISTENER_SERVICE_TAG)
+        ;
     }
 
     /**
