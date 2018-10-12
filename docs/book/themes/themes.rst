@@ -26,20 +26,22 @@ There are some criteria that you have to analyze before choosing either :doc:`st
 How to enable themes in a project?
 ----------------------------------
 
-To use themes inside of your project you need to add these few lines to your ``app/config/config.yml``.
+To use themes inside of your project you need to add these few lines to your ``config/packages/sylius_theme.yaml``.
 
 .. code-block:: yaml
 
    sylius_theme:
        sources:
-           filesystem: ~
+           filesystem:
+               directories:
+                    - "%kernel.project_dir%/themes"
 
 How to create themes?
 ---------------------
 
 Let's see how to customize the login view inside of your custom theme.
 
-1. Inside of the ``app/themes/`` directory create a new directory for your theme:
+1. Inside of the ``themes/`` directory create a new directory for your theme:
 
 Let it be ``CrimsonTheme/`` for instance.
 
@@ -82,7 +84,7 @@ When you create a new asset or delete an existing one, it is required to rerun t
 4. Customize a template:
 
 In order to customize the login view you should take the content of ``@SyliusShopBundle/views/login.html.twig`` file
-and paste it to your theme directory: ``app/themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``
+and paste it to your theme directory: ``themes/CrimsonTheme/SyliusShopBundle/views/login.html.twig``
 
 Let's remove the registration column in this example:
 
