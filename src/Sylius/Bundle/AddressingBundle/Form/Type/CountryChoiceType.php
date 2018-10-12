@@ -54,7 +54,7 @@ final class CountryChoiceType extends AbstractType
                         return $a->getName() <=> $b->getName();
                     });
 
-                    if(count($countries) === 1){
+                    if (count($countries) === 1) {
                         $defaultValue = reset($countries);
                     }
 
@@ -66,7 +66,7 @@ final class CountryChoiceType extends AbstractType
                 'enabled' => true,
                 'label' => 'sylius.form.address.country',
                 'placeholder' => 'sylius.form.country.select',
-                'data' => $defaultValue
+                'data' => $defaultValue,
             ])
             ->setAllowedTypes('choice_filter', ['null', 'callable'])
         ;
