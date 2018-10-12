@@ -5,7 +5,7 @@
 
 {% block title %}{{ 'sylius.ui.edit_order'|trans ~' #'~ order.number }} {{ parent() }}{% endblock %}
 
-{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
+{% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 
 {% block content %}
 {{ sonata_block_render_event('sylius.admin.order.update.before_header', {'resource': resource}) }}
