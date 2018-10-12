@@ -70,8 +70,7 @@ final class CountryChoiceType extends AbstractType
             ->setAllowedTypes('choice_filter', ['null', 'callable'])
         ;
 
-        // Only if the default value is null, there are more than one countries then we don't want to set the default value
-
+        // Don't set the value if there is more than one country because that would override the value that is loadded from the enity
         if ($defaultValue !== null) {
             $resolver->setDefault('data', $defaultValue);
         }
