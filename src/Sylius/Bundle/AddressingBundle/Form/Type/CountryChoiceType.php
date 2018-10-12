@@ -66,10 +66,15 @@ final class CountryChoiceType extends AbstractType
                 'enabled' => true,
                 'label' => 'sylius.form.address.country',
                 'placeholder' => 'sylius.form.country.select',
-                'data' => $defaultValue,
             ])
             ->setAllowedTypes('choice_filter', ['null', 'callable'])
         ;
+
+        // Only if the default value is null, there are more than one countries then we don't want to set the default value
+
+        if ($defaultValue !== null) {
+            $resolver->setDefault('data', $defaultValue);
+        }
     }
 
     /**
