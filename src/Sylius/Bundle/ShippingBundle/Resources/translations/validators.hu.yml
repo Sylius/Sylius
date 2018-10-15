@@ -11,10 +11,6 @@ sylius:
             not_blank: 'Kérjük, írja be a szállítási kategória kódját.'
             unique: 'A szállítási kategória az adott kóddal már létezik.'
     shipping_method:
-        calculator:
-            max_length: sylius.shipping_method.calculator.max_length
-            min_length: sylius.shipping_method.calculator.min_length
-            not_blank: sylius.shipping_method.calculator.not_blank
         name:
             max_length: 'Szállítási mód neve nem lehet hosszabb, mint {{ limit }} karakter.'
             min_length: 'Szállítás mód neve legalább {{ limit }} karakter hosszú kell legyen.'
