@@ -6,7 +6,7 @@
 
 {% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
 
-{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
+{% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 
 {% block content %}
 {{ sonata_block_render_event('sylius.admin.product_variant.generate.before_header', {'resource': resource}) }}
