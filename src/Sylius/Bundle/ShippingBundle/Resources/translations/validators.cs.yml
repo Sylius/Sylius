@@ -12,10 +12,6 @@ sylius:
             regex: 'Kód přepravní kategorie může být složen pouze z písmen bez diakritiky, čísel, pomlček a podtržítek.'
             unique: 'Přepravní kategorie s tímto kódem již existuje.'
     shipping_method:
-        calculator:
-            max_length: sylius.shipping_method.calculator.max_length
-            min_length: sylius.shipping_method.calculator.min_length
-            not_blank: sylius.shipping_method.calculator.not_blank
         name:
             max_length: 'Název expediční metody nesmí být delší než {{ limit }} znaků.'
             min_length: 'Název expediční metody musí mít alespoň {{ limit }} znaků.'
