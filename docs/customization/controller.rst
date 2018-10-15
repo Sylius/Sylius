@@ -188,4 +188,8 @@ Remember to import the ``app/config/services.yml`` into the ``app/config/config.
 
 From now on your ``customAction`` of the ``HomepageController`` will be available alongside the ``indexAction`` from the base class.
 
+.. use services::
+
+If you need to access the container inside your action, your customized Standard Controller needs to extends ``Symfony\Bundle\FrameworkBundle\Controller\Controller``
+
 .. include:: /customization/plugins.rst.inc
