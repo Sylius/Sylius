@@ -23,9 +23,17 @@ that simplifies the process of adding a model, or the `SymfonyMakerBundle <https
 
 You need to use such a command in your project directory.
 
+With the Generator Bundle
+
 .. code-block:: bash
 
     $ php bin/console generate:doctrine:entity
+
+With the Maker Bundle
+
+.. code-block:: bash
+
+    $ php bin/console make:entity
 
 The generator will ask you for the entity name and fields. See how it should look like to match our assumptions.
 
