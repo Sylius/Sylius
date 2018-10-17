@@ -9,7 +9,7 @@
 
     {{ sonata_block_render_event('sylius.shop.account.order.index.after_content_header', {'orders': orders}) }}
 
-    {{ sylius_grid_render(resources, '@SyliusUi/Grid/_default.html.twig') }}
+    {{ sylius_grid_render(resources, '@SyliusShop/Grid/_default.html.twig') }}
 
     {{ sonata_block_render_event('sylius.shop.account.order.index.after_grid', {'orders': orders}) }}
 {% endblock %}
