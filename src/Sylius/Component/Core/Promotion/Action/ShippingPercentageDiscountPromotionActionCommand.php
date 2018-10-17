@@ -80,7 +80,7 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
             );
         }
 
-        foreach ($subject->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
+        foreach ($subject->getAdjustments(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT) as $adjustment) {
             if ($promotion->getCode() === $adjustment->getOriginCode()) {
                 $subject->removeAdjustment($adjustment);
             }
