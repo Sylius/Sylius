@@ -45,7 +45,7 @@ How to customize templates by overriding?
 * **Shop** templates: customizing Login Page template:
 
 The default login template is: ``SyliusShopBundle:login.html.twig``.
-In order to override it you need to create your own: ``templates/bundle/SyliusShopBundle/login.html.twig``.
+In order to override it you need to create your own: ``templates/bundles/SyliusShopBundle/login.html.twig``.
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
@@ -90,7 +90,7 @@ Done! If you do not see any changes on the ``/shop/login`` url, clear your cache
 * **Admin** templates: Customization of the Country form view.
 
 The default template for the Country form is: ``SyliusAdminBundle:Country:_form.html.twig``.
-In order to override it you need to create your own: ``templates/bundle/SyliusAdminBundle/Country/_form.html.twig``.
+In order to override it you need to create your own: ``templates/bundles/SyliusAdminBundle/Country/_form.html.twig``.
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
