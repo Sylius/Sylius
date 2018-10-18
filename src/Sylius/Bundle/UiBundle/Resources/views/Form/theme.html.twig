@@ -114,6 +114,11 @@
 {% macro collection_item(form, allow_delete, button_delete_label, index) %}
     {% spaceless %}
         <div data-form-collection="item" data-form-collection-index="{{ index }}">
+            {% if form.vars.value.path|default(null) is not null %}
+                {% if form.vars.value.path|split('.')|last in ['jpg', 'jpeg', 'png', 'pdf', 'gif'] %}
+                    <img class="ui small bordered image" src="{{ form.vars.value.path|imagine_filter('sylius_small') }}" alt="{{ form.vars.value.type }}" />
+                {% endif %}
+            {% endif %}
             {{ form_widget(form) }}
             {% if allow_delete %}
                 <a href="#" data-form-collection="delete" class="ui red labeled icon button" style="margin-bottom: 1em;">
