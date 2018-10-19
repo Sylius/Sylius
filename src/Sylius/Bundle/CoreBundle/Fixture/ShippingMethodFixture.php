@@ -37,7 +37,7 @@ class ShippingMethodFixture extends AbstractResourceFixture
                 ->scalarNode('description')->cannotBeEmpty()->end()
                 ->scalarNode('zone')->cannotBeEmpty()->end()
                 ->booleanNode('enabled')->end()
-                ->scalarNode('shipping_category')->end()
+                ->scalarNode('category')->end()
                 ->arrayNode('channels')->scalarPrototype()->end()->end()
                 ->arrayNode('calculator')
                     ->children()
