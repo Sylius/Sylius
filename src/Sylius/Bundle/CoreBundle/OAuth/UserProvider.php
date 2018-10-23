@@ -40,37 +40,37 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     /**
      * @var FactoryInterface
      */
-    private $oauthFactory;
+    protected $oauthFactory;
 
     /**
      * @var RepositoryInterface
      */
-    private $oauthRepository;
+    protected $oauthRepository;
 
     /**
      * @var FactoryInterface
      */
-    private $customerFactory;
+    protected $customerFactory;
 
     /**
      * @var FactoryInterface
      */
-    private $userFactory;
+    protected $userFactory;
 
     /**
      * @var ObjectManager
      */
-    private $userManager;
+    protected $userManager;
 
     /**
      * @var CustomerRepositoryInterface
      */
-    private $customerRepository;
+    protected $customerRepository;
 
     /**
      * @var EventDispatcherInterface
      */
-    private $eventDispatcher;
+    protected $eventDispatcher;
 
     /**
      * @param string $supportedUserClass
