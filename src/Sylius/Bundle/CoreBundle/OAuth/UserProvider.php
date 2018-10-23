@@ -151,7 +151,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      *
      * @return SyliusUserInterface
      */
-    private function createUserByOAuthUserResponse(UserResponseInterface $response): SyliusUserInterface
+    protected function createUserByOAuthUserResponse(UserResponseInterface $response): SyliusUserInterface
     {
         /** @var SyliusUserInterface $user */
         $user = $this->userFactory->createNew();
@@ -203,7 +203,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      *
      * @return SyliusUserInterface
      */
-    private function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response): SyliusUserInterface
+    protected function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response): SyliusUserInterface
     {
         /** @var SyliusUserInterface $user */
         Assert::isInstanceOf($user, SyliusUserInterface::class);
