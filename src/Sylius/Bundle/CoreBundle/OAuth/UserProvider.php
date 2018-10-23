@@ -26,6 +26,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Webmozart\Assert\Assert;
@@ -66,6 +68,11 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     private $customerRepository;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
      * @param string $supportedUserClass
      * @param FactoryInterface $customerFactory
      * @param FactoryInterface $userFactory
@@ -75,6 +82,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      * @param ObjectManager $userManager
      * @param CanonicalizerInterface $canonicalizer
      * @param CustomerRepositoryInterface $customerRepository
+     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         string $supportedUserClass,
@@ -85,7 +93,8 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         RepositoryInterface $oauthRepository,
         ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
+        EventDispatcherInterface $eventDispatcher
     ) {
         parent::__construct($supportedUserClass, $userRepository, $canonicalizer);
 
@@ -95,6 +104,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         $this->userFactory = $userFactory;
         $this->userManager = $userManager;
         $this->customerRepository = $customerRepository;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -116,8 +126,11 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
             if (null !== $user) {
                 return $this->updateUserByOAuthUserResponse($user, $response);
             }
+            $user = $this->createUserByOAuthUserResponse($response);
 
-            return $this->createUserByOAuthUserResponse($response);
+            $this->eventDispatcher->dispatch('sylius.customer.post_register', new GenericEvent($user->getCustomer()));
+
+            return $user;
         }
 
         throw new UsernameNotFoundException('Email is null or not provided');
