@@ -1,5 +1,15 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.9 (2018-10-24)
+
+#### Details
+
+- [#9796](https://github.com/Sylius/Sylius/pull/9796) Improve product attributes JS (@Zales0123)
+- [#9827](https://github.com/Sylius/Sylius/pull/9827) Custom homepage controller as public service (@davidroberto)
+- [#9829](https://github.com/Sylius/Sylius/pull/9829) Wrong usage of returned data (@Prometee)
+- [#9832](https://github.com/Sylius/Sylius/pull/9832) Fix gulp uglify error with arrow functions (@magentix)
+- [#9839](https://github.com/Sylius/Sylius/pull/9839) [Docs] How to disable admin notifications (@stefandoorn)
+
 ## v1.2.8 (2018-10-11)
 
 #### Details
@@ -46,6 +56,7 @@
 - [#9708](https://github.com/Sylius/Sylius/pull/9708) Fix typo in Behat feature (@stefandoorn)
 - [#9709](https://github.com/Sylius/Sylius/pull/9709) Fix typo in filename (@stefandoorn)
 - [#9714](https://github.com/Sylius/Sylius/pull/9714) Fix docs build (@pamil)
+- [#9724](https://github.com/Sylius/Sylius/pull/9724) PHPSpec version not specified in docs (@Zales0123)
 
 ## v1.2.6 (2018-08-27)
 
