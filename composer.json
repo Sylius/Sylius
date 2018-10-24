@@ -116,7 +116,7 @@
         "phpstan/phpstan-symfony": "^0.10",
         "phpstan/phpstan-webmozart-assert": "^0.10",
         "phpunit/phpunit": "^6.5",
-        "sensiolabs/security-checker": "^4.1",
+        "sensiolabs/security-checker": "^5.0",
         "stripe/stripe-php": "^4.1",
         "sylius-labs/coding-standard": "^2.0",
         "symfony/browser-kit": "^3.4|^4.1",

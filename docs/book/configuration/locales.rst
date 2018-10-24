@@ -54,7 +54,7 @@ You can easily modify this logic by overriding this service.
         $locales = $this->get('sylius.locale_provider')->getAvailableLocalesCodes();
 
         foreach ($locales as $locale) {
-            echo $locale->getCode();
+            echo $locale;
         }
     }
 

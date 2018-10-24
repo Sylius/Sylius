@@ -2,5 +2,5 @@
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.lib.sh"
 
-print_header "Validating (Composer package security)" "Sylius"
-run_command "bin/console security:check --end-point=http://security.sensiolabs.org/check_lock"
+print_header "Validating (Symfony security checker)" "Sylius"
+run_command "vendor/bin/security-checker security:check"

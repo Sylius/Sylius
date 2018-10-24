@@ -15,17 +15,25 @@ A Supplier needs three essential fields: ``name``, ``description`` and ``enabled
 ----------------------
 
 Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <http://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
-that simplifies the process of adding a model.
+that simplifies the process of adding a model, or the `SymfonyMakerBundle <https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html>`_ for Symfony 4.
 
 .. warning::
 
-    Remember to have the ``SensioGeneratorBundle`` imported in the AppKernel, as it is not there by default.
+    Remember to have the ``SensioGeneratorBundle`` (or SymfonyMakerBundle depending on your Symfony version) imported in the AppKernel, as it is not there by default.
 
 You need to use such a command in your project directory.
+
+With the Generator Bundle
 
 .. code-block:: bash
 
     $ php bin/console generate:doctrine:entity
+
+With the Maker Bundle
+
+.. code-block:: bash
+
+    $ php bin/console make:entity
 
 The generator will ask you for the entity name and fields. See how it should look like to match our assumptions.
 
