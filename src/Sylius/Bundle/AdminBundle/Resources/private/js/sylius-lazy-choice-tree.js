@@ -109,13 +109,13 @@ $.fn.extend({
       checkboxElement.checkbox({
         onChecked() {
           const value = checkboxElement.data('value');
-          const checkedValues = $input.val().split(',').filter(x => x);
+          const checkedValues = $input.val().split(',').filter(Boolean);
           checkedValues.push(value);
           $input.val(checkedValues.join());
         },
         onUnchecked() {
           const value = checkboxElement.data('value');
-          const checkedValues = $input.val().split(',').filter(x => x);
+          const checkedValues = $input.val().split(',').filter(Boolean);
           const i = checkedValues.indexOf(value);
           if (i !== -1) {
             checkedValues.splice(i, 1);

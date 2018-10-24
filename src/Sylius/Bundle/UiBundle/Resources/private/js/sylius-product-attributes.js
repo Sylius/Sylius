@@ -79,6 +79,8 @@ const setAttributeChoiceListener = function setAttributeChoiceListener() {
     }
     queryData += `count=${getNextIndex()}`;
 
+    $('form').addClass('loading');
+
     $.ajax({
       type: 'GET',
       url: $(event.currentTarget).parent().attr('data-action'),

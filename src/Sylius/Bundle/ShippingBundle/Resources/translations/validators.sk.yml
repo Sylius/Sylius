@@ -12,10 +12,6 @@ sylius:
             regex: 'Kód kategórie doručenia môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.'
             unique: 'Kategória doručenia s daným kódom už existuje.'
     shipping_method:
-        calculator:
-            max_length: Hodnota nemôže byť dlhšia ako { { limit } } znakov.
-            min_length: Hodnota musí byť aspoň { { limit } } znakov
-            not_blank: Hodnota nemôže byť prázdna.
         name:
             max_length: 'Názov spôsobu doručenia nesmie byť dlhší ako {{ limit }} znakov.'
             min_length: 'Názov spôsobu doručenia musí byť aspoň {{ limit }} znakov.'
