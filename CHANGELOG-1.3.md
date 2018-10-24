@@ -1,5 +1,19 @@
 # CHANGELOG FOR `1.3.X`
 
+## v1.3.2 (2018-10-24)
+
+#### Details
+
+- [#9796](https://github.com/Sylius/Sylius/pull/9796) Improve product attributes JS (@Zales0123)
+- [#9815](https://github.com/Sylius/Sylius/pull/9815) remove web server bundle on prod environment (@loic425)
+- [#9817](https://github.com/Sylius/Sylius/pull/9817) Upgrade security checker (@pamil)
+- [#9827](https://github.com/Sylius/Sylius/pull/9827) Custom homepage controller as public service (@davidroberto)
+- [#9829](https://github.com/Sylius/Sylius/pull/9829) Wrong usage of returned data (@Prometee)
+- [#9830](https://github.com/Sylius/Sylius/pull/9830) SensioGeneratorBundle vs SymfonyMakerBundle (@davidroberto)
+- [#9832](https://github.com/Sylius/Sylius/pull/9832) Fix gulp uglify error with arrow functions (@magentix)
+- [#9839](https://github.com/Sylius/Sylius/pull/9839) [Docs] How to disable admin notifications (@stefandoorn)
+- [#9841](https://github.com/Sylius/Sylius/pull/9841) [Documentation] Make bundle templates extension part correct (@pamil)
+
 ## v1.3.1 (2018-10-11)
 
 #### TL;DR
