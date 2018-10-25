@@ -1,0 +1,11 @@
+default:
+    suites:
+        ui_viewing_errors:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.setup.channel
+
+                - sylius.behat.context.ui.shop.error
+            filters:
+                tags: "@viewing_errors && @ui"

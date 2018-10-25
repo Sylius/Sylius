@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+_errors:
+    resource: '@TwigBundle/Resources/config/routing/errors.xml'
+    prefix: /_error
+
+_main:
+    resource: routing.yml
