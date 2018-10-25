@@ -13,7 +13,7 @@ namespace Sylius\Behat\Page\Shop\Error;
 
 use Sylius\Behat\Page\SymfonyPage;
 
-class ErrorPage extends SymfonyPage
+class ErrorPage extends SymfonyPage implements ErrorPageInterface
 {
     /**
      * {@inheritdoc}
@@ -24,9 +24,7 @@ class ErrorPage extends SymfonyPage
     }
 
     /**
-     * @return string
-     *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * {@inheritdoc}
      */
     public function getTitle(): string
     {
