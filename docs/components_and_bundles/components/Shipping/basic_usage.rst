@@ -150,54 +150,12 @@ Every shipping method can have shipping category. You can simply set or unset it
     $shippingMethod->getCategory(); // Output will be ShippingCategory object
     $shippingMethod->setCategory(null);
 
-Setting Rule
-~~~~~~~~~~~~
-
-Every shipping method can have many rules, which define its additional requirements. If a **Shipment** does not fulfill
-these requirements (e.g. a rule states that the expected quantity of shipment items should be 2, but the Shipment has
-only one **ShippingItem**), then the **ShippingMethod** having this rule cannot be used on this **Shipment**.
-
-.. code-block:: php
-
-    <?php
-
-    use Sylius\Component\Shipping\Model\Rule;
-    use Sylius\Component\Shipping\Model\ShippingMethod;
-
-    $shippingMethod = new ShippingMethod();
-    $rule = new Rule();
-
-    $shippingMethod->addRule($rule);
-    $shippingMethod->hasRule($rule); // returns true
-    $shippingMethod->getRules(); // collection of rules with count equals 1
-    $shippingMethod->removeRule($rule);
-    $shippingMethod->hasRule($rule); // returns false
 
 Shipping Method Translation
 ---------------------------
 
 **ShippingMethodTranslation** allows shipping method's name translation according to given locales. To see how to use translation
 please go to :ref:`component_resource_translations_usage`.
-
-Rule
-----
-
-A **Rule** defines additional requirements for a **ShippingMethod**, which have to be fulfilled by the **Shipment**,
-if it has to be delivered in a way described by this **ShippingMethod**.
-
-.. code-block:: php
-
-    <?php
-
-    use Sylius\Component\Shipping\Model\Rule;
-    use Sylius\Component\Shipping\Model\ShippingMethod;
-    use Sylius\Component\Shipping\Model\RuleInterface;
-
-    $shippingMethod = new ShippingMethod();
-    $rule = new Rule();
-    $rule->setConfiguration(array('count' => 1, 'equal' => true));
-    $rule->setType(RuleInterface::TYPE_ITEM_COUNT);
-    $shippingMethod->addRule($rule);
 
 
 Shipment Item

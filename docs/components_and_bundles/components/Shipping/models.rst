@@ -169,28 +169,4 @@ It has the following properties:
 
 .. _Sylius API ShippingMethodTranslation: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingMethodTranslation.html
 
-Rule
-----
 
-A **Rule** object represents additional restrictions which have to be fulfilled by a shippable object in order to be
-supported by a given **ShippingMethod**.
-Rule has the following properties:
-
-+---------------+------------------------------------------------+
-| Property      | Description                                    |
-+===============+================================================+
-| id            | Unique id of the rule                          |
-+---------------+------------------------------------------------+
-| type          | Reference to constant from RuleInterface       |
-+---------------+------------------------------------------------+
-| configuration | Additional restriction which have to be fulfil |
-+---------------+------------------------------------------------+
-| method        | Reference to ShippingMethod                    |
-+---------------+------------------------------------------------+
-
-.. note::
-    This model implements the :ref:`component_shipping_model_rule-interface`.
-
-    For more detailed information go to `Sylius API Rule`_.
-
-.. _Sylius API Rule: http://api.sylius.com/Sylius/Component/Shipping/Model/Rule.html
