@@ -10,4 +10,4 @@ Feature: Viewing forbidden page
     @ui
     Scenario: Viewing forbidden page
         When I am on forbidden page
-        Then I should see the title "Unexpected error occurred."
+        Then I should be informed that the page is forbidden

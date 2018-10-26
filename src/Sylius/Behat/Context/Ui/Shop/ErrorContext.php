@@ -54,4 +54,20 @@ class ErrorContext implements Context
     {
         Assert::eq($title, $this->errorPage->getTitle());
     }
+
+    /**
+     * @Then I should be informed that the page does not exist
+     */
+    public function iShouldBeInformedThatThePageDoesNotExist()
+    {
+        Assert::eq("The page you are looking for does not exist.", $this->errorPage->getTitle());
+    }
+
+    /**
+     * @Then I should be informed that the page is forbidden
+     */
+    public function iShouldBeInformedThatThePageIsForbidden()
+    {
+        Assert::eq("The page you are looking for is forbidden.", $this->errorPage->getTitle());
+    }
 }

@@ -10,4 +10,4 @@ Feature: Viewing 404 page
     @ui
     Scenario: Viewing not found page
         When I am on not found page
-        Then I should see the title "The page you are looking for does not exist."
+        Then I should be informed that the page does not exist
