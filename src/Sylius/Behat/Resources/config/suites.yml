@@ -36,7 +36,6 @@ imports:
     - suites/ui/currency/currencies.yml
     - suites/ui/currency/managing_currencies.yml
     - suites/ui/currency/managing_exchange_rates.yml
-    - suites/ui/error/viewing_errors.yml
     - suites/ui/homepage/viewing_products.yml
     - suites/ui/inventory/cart_inventory.yml
     - suites/ui/inventory/checkout_inventory.yml

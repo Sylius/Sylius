@@ -11,7 +11,6 @@ fidry_alice_data_fixtures:
     default_purge_mode: no_purge
 
 framework:
-    router: { resource: "%kernel.project_dir%/app/config/routing_test.yml" }
     test: ~
     session:
         storage_id: session.storage.mock_file

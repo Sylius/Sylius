@@ -11,16 +11,17 @@
 
 namespace Sylius\Behat\Page\Shop\Error;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\Page;
 
-class ErrorPage extends SymfonyPage implements ErrorPageInterface
+class ErrorPage extends Page implements ErrorPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getUrl(array $urlParameters = [])
     {
-        return '_twig_error_test';
+        // This page does not have any url
+        return '';
     }
 
     /**
@@ -37,7 +38,7 @@ class ErrorPage extends SymfonyPage implements ErrorPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'title' => 'h2',
+            'title' => 'h1.exception-message',
         ]);
     }
 }

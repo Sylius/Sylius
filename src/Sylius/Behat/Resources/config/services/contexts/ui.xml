@@ -431,6 +431,7 @@
             <argument type="service" id="sylius.behat.page.shop.product.show" />
             <argument type="service" id="sylius.behat.page.shop.product.index" />
             <argument type="service" id="sylius.behat.page.shop.product_reviews.index" />
+            <argument type="service" id="sylius.behat.page.shop.error" />
             <tag name="fob.context_service" />
         </service>
 
@@ -450,11 +451,6 @@
             <argument type="service" id="sylius.behat.page.shop.account.profile_update" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <tag name="fob.context_service" />
-        </service>
-
-        <service id="sylius.behat.context.ui.shop.error" class="Sylius\Behat\Context\Ui\Shop\ErrorContext">
-            <argument type="service" id="sylius.behat.page.shop.error" />
             <tag name="fob.context_service" />
         </service>
 
