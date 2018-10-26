@@ -83,6 +83,14 @@ final class LoginContext implements Context
     }
 
     /**
+     * @Given I should be on login page
+     */
+    public function iShouldBeOnLoginPage()
+    {
+        Assert::true($this->loginPage->isOpen());
+    }
+
+    /**
      * @Then I should be notified about bad credentials
      */
     public function iShouldBeNotifiedAboutBadCredentials()

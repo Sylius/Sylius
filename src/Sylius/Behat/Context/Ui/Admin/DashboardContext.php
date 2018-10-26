@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
+use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
@@ -29,11 +30,14 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @When I open administration dashboard
+     * @When I (try to )open administration dashboard
      */
     public function iOpenAdministrationDashboard()
     {
-        $this->dashboardPage->open();
+        try {
+            $this->dashboardPage->open();
+        } catch (UnexpectedPageException $e) {
+        }
     }
 
     /**

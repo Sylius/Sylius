@@ -10,9 +10,11 @@ default:
                 - sylius.behat.context.transform.user
 
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.admin_user
                 - sylius.behat.context.setup.user
 
+                - sylius.behat.context.ui.admin.dashboard
                 - sylius.behat.context.ui.admin.login
             filters:
                 tags: "@administrator_login && @ui"
