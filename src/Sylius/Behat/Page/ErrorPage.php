@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop\Error;
+declare(strict_types=1);
 
-use Sylius\Behat\Page\Page;
+namespace Sylius\Behat\Page;
 
 class ErrorPage extends Page implements ErrorPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getUrl(array $urlParameters = [])
+    protected function getUrl(array $urlParameters = [])
     {
         // This page does not have any url
         return '';

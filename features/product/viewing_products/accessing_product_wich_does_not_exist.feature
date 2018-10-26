@@ -9,6 +9,5 @@ Feature: Accessing a product which does not exist
 
     @ui
     Scenario: Accessing a product which does not exist
-        Given the store has a product "T-shirt banana"
-        When I open page "en_US/products/44 Magnum"
+        When When I try to reach unexistent product
         Then I should be informed that the product does not exist

@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
-use Sylius\Behat\Page\Shop\Error\ErrorPageInterface;
+use Sylius\Behat\Page\ErrorPageInterface;
 use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
@@ -87,6 +87,17 @@ final class ProductContext implements Context
     {
         $this->showPage->tryToOpen([
             'slug' => $product->getTranslation($localeCode)->getSlug(),
+            '_locale' => $localeCode,
+        ]);
+    }
+
+    /**
+     * @When When I try to reach unexistent product
+     */
+    public function iTryToReachUnexistentProductPage($localeCode = 'en_US')
+    {
+        $this->showPage->tryToOpen([
+            'slug' => 'unexisten_product',
             '_locale' => $localeCode,
         ]);
     }

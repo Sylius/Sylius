@@ -9,7 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop\Error;
+declare(strict_types=1);
+
+namespace Sylius\Behat\Page;
 
 interface ErrorPageInterface
 {

@@ -431,7 +431,7 @@
             <argument type="service" id="sylius.behat.page.shop.product.show" />
             <argument type="service" id="sylius.behat.page.shop.product.index" />
             <argument type="service" id="sylius.behat.page.shop.product_reviews.index" />
-            <argument type="service" id="sylius.behat.page.shop.error" />
+            <argument type="service" id="sylius.behat.page.error" />
             <tag name="fob.context_service" />
         </service>
 
