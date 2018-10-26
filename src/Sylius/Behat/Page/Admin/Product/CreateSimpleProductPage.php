@@ -88,6 +88,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
         $this->getDocument()->pressButton('Add attributes');
         $this->waitForFormElement();
+        usleep(500000);
 
         $this->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->setValue($value);
     }

@@ -63,6 +63,7 @@ final class CookieSetter implements CookieSetterInterface
     private function prepareMinkSessionIfNeeded(Session $session): void
     {
         if ($this->shouldMinkSessionBePrepared($session)) {
+            usleep(100000);
             $session->visit(rtrim($this->minkParameters['base_url'], '/') . '/');
         }
     }
