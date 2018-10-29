@@ -110,6 +110,7 @@ sylius:
             on_hand: Položiek na sklade
             price: Cena
             sku: Skladový kód (SKU)
+            shipping_required: Je doprava povinná?
             weight: Hmotnosť
             width: Šírka
         attribute:
