@@ -7,6 +7,8 @@ sylius:
             username: 'Имя пользователя'
             password: 'Пароль'
             remember_me: 'Запомнить меня'
+        option:
+            name: 'Округ'
         notes: 'Дополнительные заметки'
         variant:
             tracked: 'Отслеживаемая'
@@ -119,6 +121,7 @@ sylius:
         cheapest_first: 'Дешёвые первыми'
         checkbox: 'Флажок'
         checking_out_as: 'Проверить как'
+        checkout: 'Сверка'
         choose_channel: 'Выберите канал'
         choose_file: 'Выбрать файл'
         choose_how_your_goods_will_be_delivered: 'Выберите, как ваш товар будет доставлен'
@@ -468,6 +471,7 @@ sylius:
         manage_your_saved_addresses: 'Управление вашими сохраненными адресами'
         manage_zones: 'Редактирование зон'
         marketing: 'Маркетинг'
+        media: 'Медия'
         members: 'Области'
         menu_nodes: 'Узлы меню'
         menus: 'Элементы меню'
@@ -480,6 +484,7 @@ sylius:
         move_up: 'Переместить выше'
         my_account: 'Моя учетная запись'
         n_a: 'Н/Д'
+        name: 'Округ'
         need_assistance: 'Нужна помощь?'
         new: 'Новый'
         new_admin_user: 'Новый администратор'

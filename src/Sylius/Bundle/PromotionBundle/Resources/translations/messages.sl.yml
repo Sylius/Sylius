@@ -31,7 +31,6 @@ sylius:
             usage_limit: Omejitev uporabe
         promotion_rule:
             customer_group: Skupina kupcev
-            taxonomy: Kategorizacija
             cart_quantity_configuration:
                 count: Število
                 equal: Enako

@@ -20,7 +20,6 @@ sylius:
             min_length: Koda kupona mora biti dolga vsaj 1 znak.|Kodo kupona mora biti dolga vsaj {{ limit }} znakov.
             not_blank: Prosimo, vnesite kodo kupona.
             unique: Ta kupon že obstaja.
-        is_invalid: Promocijska koda ni veljavna.
         usage_limit:
             min: Omejitev uporabe kupona mora biti vsaj {{ limit }}.
     promotion_coupon_generator_instruction:
