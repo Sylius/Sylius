@@ -8,7 +8,6 @@ sylius:
         default_locale:
             not_blank: Zadajte predvolený jazyk pre kanál.
         contact_email:
-            invalid: Tento e-mail je neplatný.
             max: E-mail nesmie byť dlhší ako {{ limit }} znakov.
             min: E-mail musí byť aspoň {{ limit }} znakov.
     channel_pricing:

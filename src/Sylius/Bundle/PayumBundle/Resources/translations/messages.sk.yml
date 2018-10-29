@@ -3,11 +3,8 @@
 
 sylius:
     form:
-        gateway_config:
-            type: Typ
         gateway_configuration:
             paypal:
-                password: Heslo
                 signature: Podpis
                 username: Používateľské meno
             stripe:

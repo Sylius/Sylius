@@ -47,7 +47,7 @@ sylius:
         association_types: 'Vrste združenj'
         associations: 'Povezave'
         assortment: 'Izbor'
-        attributes: 'Atributi'
+        attributes: 'Lastnosti'
         author: 'Avtor'
         availability: 'Razpoložljivost'
         available_on: 'Na voljo na'
