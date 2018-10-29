@@ -11,6 +11,7 @@ sylius:
             description: Описание
             ends_at: Конец
             exclusive: Эксклюзив
+            name: Округ
             priority: Приоритет
             rules: Правила
             starts_at: Начало

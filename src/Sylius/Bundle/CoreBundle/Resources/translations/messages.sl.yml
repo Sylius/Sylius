@@ -11,7 +11,7 @@ sylius:
             coupon: Kupon
         checkout:
             addressing:
-                different_billing_address: Uporabimo drug naslov za račun?
+                different_billing_address: Uporabimo drug naslov za dostavo?
             payment_method: Način plačila
             shipping_method: Način pošiljanja
         promotion:
@@ -88,7 +88,7 @@ sylius:
             file: Izberite sliko
         user:
             billing_address: Naslov za račun
-            different_billing_address: Uporabimo drug naslov za račun?
+            different_billing_address: Uporabimo drug naslov za dostavo?
             enabled: Omogočeno
             first_name: Ime
             groups: Skupine
@@ -129,9 +129,6 @@ sylius:
                 amount: Znesek
         payment_method:
             channels: Kanali
-        zone:
-            scopes:
-                shipping: Dostava
     installer:
         extensions:
             header: razširitve

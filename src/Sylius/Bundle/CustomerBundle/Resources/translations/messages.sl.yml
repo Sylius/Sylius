@@ -5,16 +5,13 @@ sylius:
     form:
         customer:
             first_name: Ime
-            group: Skupina
             last_name: Priimek
             email: E-pošta
             phone_number: Telefonska številka
             gender: Spol
             birthday: Rojstni dan
             billing_address: Naslov za račun
-            different_billing_address: Uporabimo drug naslov za račun?
-            only_customer_registration: Ustvari račun
-            subscribed_to_newsletter: Prijava na prejemanje novic
+            different_billing_address: Uporabimo drug naslov za dostavo?
         customer_group:
             name: Ime
             roles: Vloge
