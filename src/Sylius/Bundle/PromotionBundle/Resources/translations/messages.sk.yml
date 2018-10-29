@@ -17,6 +17,11 @@ sylius:
             starts_at: Začiatok
             usage_limit: Limit použitia
         promotion_action:
+            item_fixed_discount: Fixná zľava z položky
+            item_percentage_discount: Percentuálna zľava z položky
+            order_fixed_discount: Fixná zľava z objednávky
+            order_percentage_discount: Percentuálna zľava z objednávky
+            shipping_percentage_discount: Percentuálna zľava z dopravy
             fixed_discount_configuration:
                 amount: Suma
             percentage_discount_configuration:
@@ -33,8 +38,15 @@ sylius:
         promotion_filter:
             price_range: Filter cenového rozsahu
         promotion_rule:
+            cart_quantity: Počet položiek v košíku
+            contains_product: Obsahuje produkt
             customer_group: Skupina zákazníkov
+            has_at_least_one_from_taxons: Má aspoň jednu z kategórií
+            item_total: Celkom za položku
+            nth_order: N-tá obejdnávka
+            shipping_country: Krajina dodacej adresy
             taxonomy: Kategorizácia
+            total_price_of_items_from_taxon: Celková cena položiek v kategórii
             cart_quantity_configuration:
                 count: Počet
                 equal: Rovná sa
