@@ -8,6 +8,7 @@ sylius:
             unique: Skladový kód produktu (SKU) musí byť unikátny.
         slug:
             not_blank: Prosím, zadajte "slug" produktu.
+            unique: URL slug produktu musí byť unikátny.
         code:
             not_blank: Prosím, zadajte kód produktu.
             regex: Kód produktu môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
