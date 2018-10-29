@@ -10,4 +10,5 @@ sylius:
         verify_email: 'Váš e-mail bol úspešne overený.'
         verify_email_by_invalid_token: 'Verifikačný kód je neplatný.'
         verify_email_request: 'E-mail s potvrdzujúcim odkazom bol odoslaný na vašu e-mailovú adresu.'
+        verify_no_user: 'Nikto nie je prihlásený.'
         verify_verified_email: 'Váš e-mail je už overený.'

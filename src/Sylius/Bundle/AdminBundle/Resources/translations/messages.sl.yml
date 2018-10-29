@@ -7,29 +7,26 @@ sylius:
             main:
                 catalog:
                     association_types: Vrste združenj
-                    attributes: Lastnosti
+                    attributes: Atributi
                     header: Katalog
                     inventory: Inventar
                     options: Možnosti
                     products: Izdelki
                     taxons: Taksoni
                 configuration:
-                    admin_users: Administratorji
                     channels: Kanali
                     countries: Države
                     currencies: Valute
-                    exchange_rates: Menjalni tečaji
                     header: Konfiguracija
                     locales: Področne nastavitve
                     payment_methods: Načini plačila
                     shipping_categories: Kategorije dostave
                     shipping_methods: Načini dostave
-                    tax_categories: Kategorije obdavčitev
+                    tax_categories: Davčne stopnje
                     tax_rates: Davčne stopnje
                     zones: Cone
                 marketing:
                     header: Oglaševanje
-                    product_reviews: Ocene izdelkov
                     promotions: Promocije
                 customers:
                     customers: Kupci

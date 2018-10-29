@@ -8,16 +8,16 @@ sylius:
             enabled: Omogočeno
             password:
                 label: Geslo
-                confirmation: Potrditev gesla
+                confirmation: Preverjanje
             remember_me: Zapomni si me
             shipping_address: Naslov za dostavo
             username: Uporabniško ime
         user_filter:
             query: Iskanje
         user_change_password:
-            confirmation: Potrditev gesla
+            confirmation: Potrditev
             current: Trenutno geslo
             new: Novo geslo
         user_reset_password:
-            confirmation: Potrditev gesla
+            confirmation: Potrditev
             new: Novo geslo
