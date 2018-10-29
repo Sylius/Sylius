@@ -92,7 +92,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When When I try to reach unexistent product
+     * @When I try to reach unexistent product
      */
     public function iTryToReachUnexistentProductPage($localeCode = 'en_US')
     {
