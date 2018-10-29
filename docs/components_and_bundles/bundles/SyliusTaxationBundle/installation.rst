@@ -67,16 +67,6 @@ And configure doctrine extensions which are used by this bundle:
             default:
                 timestampable: true
 
-Routing configuration
----------------------
-
-Add the following to your ``config/routes.yaml``.
-
-.. code-block:: yaml
-
-    sylius_taxation:
-        resource: "@SyliusTaxationBundle/Resources/config/routing.yml"
-
 Updating database schema
 ------------------------
 
