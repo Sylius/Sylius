@@ -93,8 +93,8 @@ $(document).ready(() => {
   $(document).previewUploadedImage('#sylius_taxon_images');
 
   $('body').on('DOMNodeInserted', '[data-form-collection="item"]', (event) => {
-    if ($(event.relatedNode).find('.accordion').length > 0) {
-      $(event.relatedNode).find('.accordion').accordion();
+    if ($(event.target).find('.accordion').length > 0) {
+      $(event.target).find('.accordion').accordion();
     }
   });
 });
