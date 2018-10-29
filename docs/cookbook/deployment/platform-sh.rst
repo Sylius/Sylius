@@ -41,9 +41,9 @@ This is how this file should look like for Sylius (tuned version of the default 
         redis: "redis:redis"
 
     variables:
-    env:
-        APP_ENV: 'prod'
-        APP_DEBUG: 0
+        env:
+            APP_ENV: 'prod'
+            APP_DEBUG: 0
 
     runtime:
         extensions:

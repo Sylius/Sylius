@@ -34,7 +34,7 @@
     </div>
 {% endif %}
 
-{% if data|length > 0 and definition.actionGroups.bulk is defined %}
+{% if data|length > 0 and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
     <div class="ui hidden divider"></div>
     <div class="ui styled fluid accordion">
         <div class="title active">
