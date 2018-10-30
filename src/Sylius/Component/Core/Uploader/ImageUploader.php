@@ -54,7 +54,7 @@ class ImageUploader implements ImageUploaderInterface
         do {
             $hash = bin2hex(random_bytes(16));
             $path = $this->expandPath($hash . '.' . $file->guessExtension());
-        } while ($this->filesystem->has($path) || $this->isAdBlockingProne($path));
+        } while ($this->isAdBlockingProne($path) || $this->filesystem->has($path));
 
         $image->setPath($path);
 
