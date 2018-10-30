@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class GeneratePage extends SymfonyPage implements GeneratePageInterface
 {
