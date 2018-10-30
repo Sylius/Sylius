@@ -110,6 +110,6 @@ class ImageUploader implements ImageUploaderInterface
      */
     private function isAdBlockingProne(string $path): bool
     {
-        return stripos($path, 'ad') !== false;
+        return strpos($path, 'ad') !== false;
     }
 }
