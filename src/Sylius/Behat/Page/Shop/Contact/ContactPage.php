@@ -21,7 +21,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_contact_request';
     }
@@ -69,7 +69,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#sylius_contact_email',

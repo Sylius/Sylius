@@ -28,7 +28,7 @@ class VerificationPage extends SymfonyPage implements VerificationPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_user_verification';
     }

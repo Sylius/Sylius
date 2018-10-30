@@ -53,7 +53,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_admin_product_variant_generate';
     }
@@ -85,7 +85,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_generate_variants_variants_%position%_code',

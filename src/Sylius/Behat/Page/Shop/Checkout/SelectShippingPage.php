@@ -23,7 +23,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_checkout_select_shipping';
     }
@@ -186,7 +186,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'address' => '.steps a:contains("Address")',

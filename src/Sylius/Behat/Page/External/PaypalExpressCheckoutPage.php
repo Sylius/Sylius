@@ -57,7 +57,7 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     /**
      * {@inheritdoc}
      */
-    protected function getUrl(array $urlParameters = [])
+    protected function getUrl(array $urlParameters = []): string
     {
         return 'https://www.sandbox.paypal.com';
     }
@@ -65,7 +65,7 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     /**
      * {@inheritdoc}
      */
-    protected function verifyUrl(array $urlParameters = [])
+    protected function verifyUrl(array $urlParameters = []): void
     {
         $position = strpos($this->getSession()->getCurrentUrl(), $this->getUrl($urlParameters));
         if (0 !== $position) {

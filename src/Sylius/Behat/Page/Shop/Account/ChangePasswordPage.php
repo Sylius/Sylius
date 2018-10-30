@@ -21,7 +21,7 @@ class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterf
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_account_change_password';
     }
@@ -67,7 +67,7 @@ class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterf
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'confirmation' => '#sylius_user_change_password_newPassword_second',

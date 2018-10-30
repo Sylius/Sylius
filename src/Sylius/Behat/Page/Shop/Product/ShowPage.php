@@ -27,7 +27,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_product_show';
     }
@@ -293,7 +293,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function open(array $urlParameters = [])
+    public function open(array $urlParameters = []): void
     {
         $start = microtime(true);
         $end = $start + 5;
@@ -315,7 +315,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'association' => '#sylius-product-association-%association-name%',

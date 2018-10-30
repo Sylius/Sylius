@@ -20,7 +20,7 @@ class HistoryPage extends SymfonyPage implements HistoryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_admin_order_history';
     }

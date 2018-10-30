@@ -28,7 +28,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return parent::getRouteName() . '_simple';
     }
@@ -240,7 +240,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    protected function getElement($name, array $parameters = [])
+    protected function getElement($name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%locale%'])) {
             $parameters['%locale%'] = 'en_US';
@@ -252,7 +252,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',

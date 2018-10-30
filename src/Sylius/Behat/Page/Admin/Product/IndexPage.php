@@ -28,7 +28,7 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'taxon_filter' => '.item a:contains("%taxon%")',

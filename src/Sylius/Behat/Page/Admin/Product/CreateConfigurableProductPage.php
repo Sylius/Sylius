@@ -68,7 +68,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_code',

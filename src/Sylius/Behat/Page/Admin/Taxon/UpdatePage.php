@@ -258,7 +258,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getElement($name, array $parameters = [])
+    protected function getElement($name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%language%'])) {
             $parameters['%language%'] = 'en_US';
@@ -278,7 +278,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_taxon_code',

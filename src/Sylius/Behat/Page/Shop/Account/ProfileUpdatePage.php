@@ -21,7 +21,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_account_profile_update';
     }
@@ -88,7 +88,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#sylius_customer_profile_email',

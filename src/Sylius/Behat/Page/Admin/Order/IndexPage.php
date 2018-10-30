@@ -74,7 +74,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'filter_channel' => '#criteria_channel',

@@ -429,7 +429,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    protected function getElement($name, array $parameters = [])
+    protected function getElement($name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%locale%'])) {
             $parameters['%locale%'] = 'en_US';
@@ -441,7 +441,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',

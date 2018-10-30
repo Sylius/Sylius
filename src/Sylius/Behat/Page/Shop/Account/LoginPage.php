@@ -49,7 +49,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_login';
     }
@@ -57,7 +57,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'validation_error' => '.message.negative',
