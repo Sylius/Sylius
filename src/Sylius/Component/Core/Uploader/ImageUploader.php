@@ -54,7 +54,7 @@ class ImageUploader implements ImageUploaderInterface
         do {
             $hash = bin2hex(random_bytes(16));
             $path = $this->expandPath($hash . '.' . $file->guessExtension());
-        } while ($this->filesystem->has($path));
+        } while ($this->filesystem->has($path) || $this->isAdBlockingProne($path));
 
         $image->setPath($path);
 
@@ -99,5 +99,17 @@ class ImageUploader implements ImageUploaderInterface
     private function has(string $path): bool
     {
         return $this->filesystem->has($path);
+    }
+
+    /**
+     * Will return true if the path is prone to be blocked by ad blockers
+     *
+     * @param string $path
+     *
+     * @return bool
+     */
+    private function isAdBlockingProne(string $path): bool
+    {
+        return stripos($path, 'ad') !== false;
     }
 }
