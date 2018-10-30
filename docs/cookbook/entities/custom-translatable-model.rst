@@ -454,7 +454,7 @@ Remember to import your grid in the ``app/config/grids/grids.yml`` file which ha
 
 .. code-block:: php
 
-    # AppBundle/Resources/views/Supplier/_form.yml
+    # AppBundle/Resources/views/Supplier/_form.html.twig
     {% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
 
     {{ form_errors(form) }}
