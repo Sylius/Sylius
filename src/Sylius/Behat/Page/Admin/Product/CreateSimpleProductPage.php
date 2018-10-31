@@ -240,7 +240,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    protected function getElement($name, array $parameters = []): NodeElement
+    protected function getElement(string $name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%locale%'])) {
             $parameters['%locale%'] = 'en_US';

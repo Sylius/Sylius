@@ -22,7 +22,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_register';
     }
@@ -108,7 +108,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#sylius_customer_registration_email',

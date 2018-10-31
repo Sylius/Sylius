@@ -162,7 +162,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getElement($name, array $parameters = []): NodeElement
+    protected function getElement(string $name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%language%'])) {
             $parameters['%language%'] = 'en_US';
