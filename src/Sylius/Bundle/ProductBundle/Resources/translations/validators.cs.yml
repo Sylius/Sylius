@@ -15,8 +15,8 @@ sylius:
             unique: Produktový kód musí být unikátní.
         name:
             not_blank: Zadejte název produktu.
-            min_length: Vyplňte název produktu.|Název musí obsahovat alespoň {{ limit }} znaků.
-            max_length: Název produktu nesmí být delší než 1 znak. |Název produktu nesmí být delší než {{ limit }} znaků.
+            min_length: 'Název musí být dlouhý nejméně {{ limit }} znak.|Název musí být dlouhý nejméně {{ limit }} znaky.|Název musí být dlouhý nejméně {{ limit }} znaků.'
+            max_length: 'Název produktu nesmí být delší než {{ limit }} znak.|Název produktu nesmí být delší než {{ limit }} znaky.|Název produktu nesmí být delší než {{ limit }} znaků.'
     product_variant:
         combination: Varianta s touto sadou možností již existuje.
         code:
@@ -34,10 +34,10 @@ sylius:
             unique: Možnost se zadaným kódem již existuje.
         name:
             not_blank: Prosím zadejte název možnosti.
-            min_length: Název možnosti musí být nejméně 1 znak. |Název možnosti musí být alespoň {{ limit }} znaků.
-            max_length: Název možnosti nesmí být delší než 1 znak. | Název možnosti nesmí být delší než {{ limit }} znaků.
+            min_length: 'Název možnosti musí být dlouhý nejméně {{ limit }} znak.|Název možnosti musí být dlouhý nejméně {{ limit }} znaky.|Název možnosti musí být dlouhý nejméně {{ limit }} znaků.'
+            max_length: 'Název možnosti nesmí být delší než 1 znak.|Název možnosti nesmí být delší než {{ limit }} znaky.|Název možnosti nesmí být delší než {{ limit }} znaků.'
         values:
-            min_count: Prosím přidejte alespoň {{ limit }} hodnotu možnosti.|Prosím vložte alespoň {{ limit }} hodnoty možností.
+            min_count: 'Prosím přidejte alespoň {{ limit }} hodnotu možnosti.|Prosím vložte alespoň {{ limit }} hodnoty možností.|Prosím vložte alespoň {{ limit }} hodnot možností.'
     option_value:
         code:
             not_blank: Zadejte prosím kód pro hodnotu volby.
@@ -48,8 +48,8 @@ sylius:
     association_type:
         name:
             not_blank: Prosím vložte název typu asociace.
-            min_length: Název typu asociace musí být dlouhý nejméně 1 znak. | Název typu asociace musí být dlouhý alespoň {{ limit }} znaků.
-            max_length: Název typu asociace nesmí být delší než 1 znak. | Název typu asociace nesmí být delší než {{ limit }} znaků.
+            min_length: 'Název typu asociace musí být dlouhý nejméně 1 znak.|Název typu asociace musí být dlouhý minimálně {{ limit }} znaky.|Název typu asociace musí být dlouhý minimálně {{ limit }} znaků.'
+            max_length: 'Název typu asociace nesmí být delší než 1 znak.|Název typu asociace nesmí být delší než {{ limit }} znaky.|Název typu asociace nesmí být delší než {{ limit }} znaků.'
         code:
             not_blank: Zadejte kód typu asociace.
             regex: Kód typu asociace může být tvořen pouze z písmen bez diakritiky, číslic, pomlček a podtržítek.

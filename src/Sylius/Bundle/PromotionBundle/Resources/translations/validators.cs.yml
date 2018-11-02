@@ -8,13 +8,13 @@ sylius:
             regex: Kód akce může být složen pouze z písmen bez diakritiky, číslic, pomlček a podtržítek.
             not_blank: Zadejte prosím kód akce.
         description:
-            max_length: Popis propagace nesmí být delší než 1 znak. |Popis propagace nesmí být delší než {{ limit }} znaků.
-            min_length: Popis propagace musí mít nejméně 1 znak. |Popis propagace musí být alespoň {{ limit }} znaků dlouhý.
+            max_length: 'Popis propagace nesmí být delší než 1 znak. |Popis propagace nesmí být delší než {{ limit }} znaky. |Popis propagace nesmí být delší než {{ limit }} znaků.'
+            min_length: 'Popis propagace musí mít nejméně 1 znak. |Popis propagace musí být alespoň {{ limit }} znaky dlouhý. |Popis propagace musí být alespoň {{ limit }} znaků dlouhý.'
             not_blank: Zadejte popis propagace.
         end_date_cannot_be_set_prior_start_date: Datu konce akce nemůže být před datem začátku akce.
         name:
-            max_length: Název akce nesmí být delší než 1 znak. |Název akce nesmí být delší než {{ limit }} znaků.
-            min_length: Název akce musí mít nejméně 1 znak. |Název akce musí mít alespoň {{ limit }} znaků.
+            max_length: 'Název akce nesmí být delší než 1 znak. |Název akce nesmí být delší než {{ limit }} znaky. |Název akce nesmí být delší než {{ limit }} znaků.'
+            min_length: 'Název akce musí mít nejméně 1 znak. |Název akce musí mít alespoň {{ limit }} znaky. |Název akce musí mít alespoň {{ limit }} znaků.'
             not_blank: Vyplňte prosím název akce.
     promotion_action:
         percentage_discount_configuration:
@@ -22,8 +22,8 @@ sylius:
             max: Maximální hodnota procentuální slevy je 100%.
     promotion_coupon:
         code:
-            max_length: Kód kupónu nesmí být delší než 1 znak. |Kód kupónu nesmí být delší než {{ limit }} znaků.
-            min_length: Kód kupónu musí mít alespoň 1 znak. |Kód kupónu musí mít alespoň {{ limit }} znaků.
+            max_length: 'Kód kupónu nesmí být delší než 1 znak. |Kód kupónu nesmí být delší než {{ limit }} znaky. |Kód kupónu nesmí být delší než {{ limit }} znaků.'
+            min_length: 'Kód kupónu musí mít alespoň 1 znak. |Kód kupónu musí mít alespoň {{ limit }} znaky. |Kód kupónu musí mít alespoň {{ limit }} znaků.'
             not_blank: Zadejte kód kupónu.
             regex: Kód kupónu může být složen pouze z písmen bez diakritiky, číslic, pomlček a podtržítek.
             unique: Tento kupón již existuje.
