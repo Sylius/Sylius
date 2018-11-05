@@ -110,7 +110,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
      *
      * @return QueryBuilder
      */
-    private function createTranslationBasedQueryBuilder(?string $locale): QueryBuilder
+    protected function createTranslationBasedQueryBuilder(?string $locale): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
