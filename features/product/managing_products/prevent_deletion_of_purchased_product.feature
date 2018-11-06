@@ -30,4 +30,4 @@ Feature: Prevent deletion of purchased product
         When I try to delete the "Lamborghini Gallardo Model" product
         Then I should be notified that this product is in use and cannot be deleted
         And this product should still exist in the product catalog
-        And the product "Lamborghini Gallardo Model" should have an image with "thumbnail" type
+        And the product "Lamborghini Gallardo Model" should still have an accessible image

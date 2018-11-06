@@ -676,21 +676,21 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^(this product) should(?:| also) have an image with "([^"]*)" type$/
-     * @Then /^the (product "[^"]+") should(?:| also) have an image with "([^"]*)" type$/
-     * @Then /^(it) should(?:| also) have an image with "([^"]*)" type$/
+     * @Then /^(?:this product|the product "[^"]+"|it) should(?:| also) have an image with "([^"]*)" type$/
      */
-    public function thisProductShouldHaveAnImageWithType(ProductInterface $product, $type)
+    public function thisProductShouldHaveAnImageWithType($type)
     {
-        if ($product->isSimple()) {
-            $currentPage = $this->updateSimpleProductPage;
-        } else {
-            $currentPage = $this->updateConfigurableProductPage;
-        }
-
-        $currentPage->open(['id' => $product->getId()]);
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::true($currentPage->isImageWithTypeDisplayed($type));
+    }
+
+    /**
+     * @Then /^the (product "[^"]+") should still have an accessible image$/
+     */
+    public function productShouldStillHaveAnAccessibleImage(ProductInterface $product): void
+    {
+        Assert::true($this->indexPage->hasProductAccessibleImage($product->getCode()));
     }
 
     /**
