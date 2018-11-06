@@ -40,6 +40,28 @@ final class LocaleFixtureTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function default_locale_is_always_added() : void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['locales' => ['en_US' => true, 'pl_PL' => false, 'es_ES' => true]]],
+            ['locales' => ['en_US' => true, 'pl_PL' => false, 'es_ES' => true, 'default_LOCALE' => true]]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function default_locale_is_always_enabled() : void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['locales' => ['en_US' => true, 'pl_PL' => false, 'es_ES' => true, 'default_LOCALE' => false]]],
+            ['locales' => ['en_US' => true, 'pl_PL' => false, 'es_ES' => true, 'default_LOCALE' => true]]
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getConfiguration(): LocaleFixture
