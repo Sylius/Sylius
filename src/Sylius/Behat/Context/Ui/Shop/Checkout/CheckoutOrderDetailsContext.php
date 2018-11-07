@@ -65,4 +65,12 @@ final class CheckoutOrderDetailsContext implements Context
     {
         Assert::false($this->orderDetails->hasPayAction());
     }
+
+    /**
+     * @Then I should see :quantity as number of items
+     */
+    public function iShouldSeeAsNumberOfItems(int $quantity): void
+    {
+        Assert::same($this->orderDetails->getNumberOfItems(), $quantity);
+    }
 }
