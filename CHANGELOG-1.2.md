@@ -1,5 +1,16 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.10 (2018-11-07)
+
+#### Details
+
+- [#9854](https://github.com/Sylius/Sylius/issues/9854) Update installation.rst ([@zghosts](https://github.com/zghosts))
+- [#9856](https://github.com/Sylius/Sylius/issues/9856) #9694 Do not show bulk sections and checkboxes if bulk actions are di… ([@laurent35240](https://github.com/laurent35240))
+- [#9866](https://github.com/Sylius/Sylius/issues/9866) [Order] Changing function typing ([@Roshyo](https://github.com/Roshyo))
+- [#9883](https://github.com/Sylius/Sylius/issues/9883) Hydrate promotion_rules directly on loading active promotions for a channel (1n) ([@stefandoorn](https://github.com/stefandoorn))
+- [#9892](https://github.com/Sylius/Sylius/issues/9892) [Order] Removing after SM callback ([@Roshyo](https://github.com/Roshyo))
+- [#9900](https://github.com/Sylius/Sylius/issues/9900) Fix typos in BDD Transformers docs ([@sarjon](https://github.com/sarjon))
+
 ## v1.2.9 (2018-10-24)
 
 #### Details
