@@ -1,7 +1,7 @@
 How to use transformers?
 ========================
 
-Behat provides many awesome features, and one of them are definitely **transformers**. They can be used to transform (usually widely used) parts of steps and return some values from them,
+Behat provides many awesome features, and one of them is definitely **transformers**. They can be used to transform (usually widely used) parts of steps and return some values from them,
 to prevent unnecessary duplication in many steps' definitions.
 
 Basic transformer
@@ -78,7 +78,7 @@ Transformers implemented in Sylius
 Specified
 #########
 
-There are plenty of transformers already implemented in *Sylius*. Most of them, are returns specific resources from theirs repository, for example:
+There are plenty of transformers already implemented in *Sylius*. Most of them return specific resources from their repository, for example:
 
 - ``tax category "Fruits"`` -> find tax category in their repository with name "Fruits"
 - ``"Chinese banana" variant of product "Banana"`` -> find variant of specific product
@@ -97,7 +97,7 @@ Generic
 #######
 
 Moreover, there are also some more generic transformers, that could be useful in many different cases. They are now placed in two contexts: ``LexicalContext`` and ``SharedStorageContext``.
-What are they so awesome? Let's describe them one by one:
+Why are they so awesome? Let's describe them one by one:
 
 **LexicalContext**
 
