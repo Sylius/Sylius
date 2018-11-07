@@ -1,5 +1,26 @@
 # CHANGELOG FOR `1.3.X`
 
+## v1.3.3 (2018-11-07)
+
+#### TL;DR
+
+- Fixed configuration files overriding in `app/Resources/` ([#9889](https://github.com/Sylius/Sylius/issues/9889))
+
+  **You need to update your application by following [UPGRADE instructions](https://github.com/Sylius/Sylius/blob/1.3/UPGRADE-1.3.md) in order to make use of it.**
+
+#### Details
+
+- [#9836](https://github.com/Sylius/Sylius/issues/9836) [Core] Bad reverting of ShippingPercentageDiscount promotion ([@fendrychl](https://github.com/fendrychl))
+- [#9854](https://github.com/Sylius/Sylius/issues/9854) Update installation.rst ([@zghosts](https://github.com/zghosts))
+- [#9856](https://github.com/Sylius/Sylius/issues/9856) #9694 Do not show bulk sections and checkboxes if bulk actions are di… ([@laurent35240](https://github.com/laurent35240))
+- [#9866](https://github.com/Sylius/Sylius/issues/9866) [Order] Changing function typing ([@Roshyo](https://github.com/Roshyo))
+- [#9868](https://github.com/Sylius/Sylius/issues/9868) [Fix] Indentation error .platform.app.yml in docs ([@jatempa](https://github.com/jatempa))
+- [#9878](https://github.com/Sylius/Sylius/issues/9878) Fix select attribute values accordion ([@Zales0123](https://github.com/Zales0123))
+- [#9883](https://github.com/Sylius/Sylius/issues/9883) Hydrate promotion_rules directly on loading active promotions for a channel (1n) ([@stefandoorn](https://github.com/stefandoorn))
+- [#9889](https://github.com/Sylius/Sylius/issues/9889) Allow to overwrite a specific config file ([@pamil](https://github.com/pamil))
+- [#9892](https://github.com/Sylius/Sylius/issues/9892) [Order] Removing after SM callback ([@Roshyo](https://github.com/Roshyo))
+- [#9900](https://github.com/Sylius/Sylius/issues/9900) Fix typos in BDD Transformers docs ([@sarjon](https://github.com/sarjon))
+
 ## v1.3.2 (2018-10-24)
 
 #### Details
