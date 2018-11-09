@@ -1,0 +1,33 @@
+---------------------------------------------------------------------------
+
+by loevgaard at 2018-10-30T08:44:34Z
+
+Well, basically the `random_bytes` function should be preseeded with a value, just like you can do with i.e. the [Carbon library](https://carbon.nesbot.com/docs/#api-testing). But this means that you either need to create a lib to do that or find one that does.
+
+Or you could do what @Zales0123 says ;)
+
+Do you want to do any of this in this PR? If so I probably need some pointers as to where you want the `PathGenerator` class or if you have a lib in mind, which one.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-10-30T08:49:37Z
+
+We've just had a little discussion about this with @lchrusciel in the office 😄 We both think that service extraction would be the best choice, but on the other hand, it would be a BC break and lead to many extra things to do (deprecations, fallback to old function etc.)... I don't know is the value of such a test worth so many actions 😄 cc @Sylius/core-team
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2018-10-30T08:57:14Z
+
+Well, personally I probably wouldn't, but on the other hand it lowers the quality of this exact class ;) I don't know if you any system in place where you put issues like this for future implementation? :)
+
+---------------------------------------------------------------------------
+
+by pamil at 2018-10-30T09:54:16Z
+
+The idea of extracting the path generation logic reminds me of a PR I made some time ago, #3703.
+
+---------------------------------------------------------------------------
+
+by pamil at 2018-11-09T15:28:03Z
+
+Thanks, Joachim! :1st_place_medal:
