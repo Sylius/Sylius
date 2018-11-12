@@ -29,7 +29,9 @@
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.0"
+        "phpspec/phpspec": "^4.0",
+        "infection/infection": "^0.10.6",
+        "leanphp/phpspec-code-coverage": "^4.2"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component"
@@ -41,7 +43,7 @@
         "psr-4": { "Sylius\\Component\\Product\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Product\\spec\\": "spec/" }
+        "psr-4": { "spec\\Sylius\\Component\\Product\\": "spec/" }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

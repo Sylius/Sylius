@@ -3,3 +3,11 @@ suites:
         namespace: Sylius\Component\Product
         psr4_prefix: Sylius\Component\Product
         src_path: .
+
+extensions:
+    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+        whitelist:
+            - "."
+        blacklist:
+            - "bin"
+            - "vendor"

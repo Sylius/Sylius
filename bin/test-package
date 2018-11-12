@@ -14,6 +14,7 @@ test_package() {
     if [[ "$(composer run-script --list 2> /dev/null | awk '{ print $1 }' | grep -c ^test$)" = "0" ]]; then
         run_phpspec "$1" || exit_code=$?
         run_phpunit "$1" || exit_code=$?
+        run_infection "$1" || exit_code=$?
     else
         run_command "composer test" || exit_code=$?
     fi
@@ -34,7 +35,7 @@ run_phpspec() {
         return 1
     fi
 
-    retry_run_command "${phpspec} run --ansi --no-interaction --format=dot"
+    retry_run_command "phpdbg -qrr ${phpspec} run --ansi --no-interaction --format=dot"
 }
 
 # Argument 1: Package path
@@ -55,6 +56,22 @@ run_phpunit() {
     fi
 
     retry_run_command "${phpunit} --colors=always"
+}
+
+# Argument 1: Package path
+run_infection() {
+    local infection
+    if [[ ! -e "infection.json.dist" && ! -e "infection.json" ]]; then
+        return 0
+    fi
+
+    infection="$(get_binary infection)"
+    if [ "$?" != "0" ]; then
+        print_error "Infection binary not found, make sure you included it in require-dev"
+        return 1
+    fi
+
+    retry_run_command "phpdbg -qrr ${infection} --no-interaction --threads=4 --min-msi=60 --min-covered-msi=80"
 }
 
 display_help_message() {

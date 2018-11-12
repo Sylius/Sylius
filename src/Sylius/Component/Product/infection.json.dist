@@ -1,0 +1,22 @@
+{
+    "timeout": 10,
+    "source": {
+        "directories": [
+            "Factory",
+            "Generator",
+            "Model",
+            "Resolver"
+        ]
+    },
+    "logs": {
+        "text": "infection/infection-log.txt",
+        "summary": "infection/summary-log.txt",
+        "debug": "infection/debug-log.txt"
+    },
+    "mutators": {
+        "@default": true,
+        "IdenticalEqual": false,
+        "NotIdenticalNotEqual": false
+    },
+    "testFramework":"phpspec"
+}

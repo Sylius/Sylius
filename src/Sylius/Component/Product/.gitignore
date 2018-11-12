@@ -3,3 +3,9 @@ bin/
 
 composer.phar
 composer.lock
+
+coverage/*
+!coverage/.gitkeep
+
+infection/*
+!infection/.gitkeep
