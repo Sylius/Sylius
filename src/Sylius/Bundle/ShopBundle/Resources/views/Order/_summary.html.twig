@@ -13,7 +13,7 @@
                     {{ money.convertAndFormat(order.total) }}
                 </div>
                 <div class="item">
-                    {{ order.items|length }} {{ 'sylius.ui.items'|trans|lower }}
+                    {{ order.totalQuantity }} {{ 'sylius.ui.items'|trans|lower }}
                 </div>
             </div>
         </div>

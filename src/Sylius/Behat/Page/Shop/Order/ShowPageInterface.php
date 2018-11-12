@@ -33,4 +33,6 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @return string[]
      */
     public function getNotifications();
+
+    public function getNumberOfItems(): int;
 }
