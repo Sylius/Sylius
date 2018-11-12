@@ -52,6 +52,11 @@
 
         <service id="sylius.behat.table_accessor" class="Sylius\Behat\Service\Accessor\TableAccessor" public="false" />
 
+        <service id="sylius.behat.checker.image_existence" class="Sylius\Behat\Service\Checker\ImageExistenceChecker">
+            <argument type="service" id="__symfony__.sylius.liip.filter_service" />
+            <argument type="string">%__symfony__.sylius_core.public_dir%</argument>
+        </service>
+
         <service id="sylius.behat.paypal_api_mocker" class="Sylius\Behat\Service\Mocker\PaypalApiMocker" public="false">
             <argument type="service" id="sylius.behat.mocker" />
             <argument type="service" id="sylius.behat.response_loader" />
