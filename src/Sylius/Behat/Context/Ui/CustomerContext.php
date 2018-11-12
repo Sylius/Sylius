@@ -31,10 +31,6 @@ final class CustomerContext implements Context
      */
     private $customerShowPage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ShowPageInterface $customerShowPage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ShowPageInterface $customerShowPage
@@ -46,7 +42,7 @@ final class CustomerContext implements Context
     /**
      * @Then I should not be able to delete it again
      */
-    public function iShouldNotBeAbleToDeleteCustomerAgain()
+    public function iShouldNotBeAbleToDeleteCustomerAgain(): void
     {
         $customer = $this->sharedStorage->get('customer');
 
@@ -64,7 +60,7 @@ final class CustomerContext implements Context
     /**
      * @Then the customer with this email should still exist
      */
-    public function customerShouldStillExist()
+    public function customerShouldStillExist(): void
     {
         $deletedUser = $this->sharedStorage->get('deleted_user');
 

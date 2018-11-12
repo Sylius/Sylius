@@ -27,10 +27,6 @@ final class ResourceLocator implements ResourceLocatorInterface
      */
     private $bundleResourceLocator;
 
-    /**
-     * @param ResourceLocatorInterface $applicationResourceLocator
-     * @param ResourceLocatorInterface $bundleResourceLocator
-     */
     public function __construct(
         ResourceLocatorInterface $applicationResourceLocator,
         ResourceLocatorInterface $bundleResourceLocator

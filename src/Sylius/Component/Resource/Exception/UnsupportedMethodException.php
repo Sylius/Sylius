@@ -15,9 +15,6 @@ namespace Sylius\Component\Resource\Exception;
 
 class UnsupportedMethodException extends \Exception
 {
-    /**
-     * @param string $methodName
-     */
     public function __construct(string $methodName)
     {
         parent::__construct(sprintf(

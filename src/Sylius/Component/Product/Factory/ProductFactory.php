@@ -28,10 +28,6 @@ class ProductFactory implements ProductFactoryInterface
      */
     private $variantFactory;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param FactoryInterface $variantFactory
-     */
     public function __construct(
         FactoryInterface $factory,
         FactoryInterface $variantFactory

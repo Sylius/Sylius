@@ -26,7 +26,7 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 
 final class ProductSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->setCurrentLocale('en_US');
         $this->setFallbackLocale('en_US');

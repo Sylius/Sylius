@@ -25,7 +25,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_denies_order_checkout_complete_for_non_authenticated_user()
+    public function it_denies_order_checkout_complete_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', '/api/v1/checkouts/complete/1');
 
@@ -36,7 +36,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_complete_unexisting_order()
+    public function it_does_not_allow_to_complete_unexisting_order(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -49,7 +49,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_complete_order_that_is_not_addressed_and_has_no_shipping_and_payment_method_selected()
+    public function it_does_not_allow_to_complete_order_that_is_not_addressed_and_has_no_shipping_and_payment_method_selected(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -68,7 +68,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_complete_order_with_disabled_product()
+    public function it_does_not_allow_to_complete_order_with_disabled_product(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -100,7 +100,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_complete_order_with_insufficient_stock()
+    public function it_does_not_allow_to_complete_order_with_insufficient_stock(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -134,7 +134,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_complete_order_that_is_addressed_and_has_shipping_and_payment_method_selected()
+    public function it_allows_to_complete_order_that_is_addressed_and_has_shipping_and_payment_method_selected(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -159,7 +159,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_add_a_note_to_order_when_completing()
+    public function it_allows_to_add_a_note_to_order_when_completing(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -188,12 +188,7 @@ EOT;
         $this->assertResponse($response, 'checkout/completed_order_response');
     }
 
-    /**
-     * @param mixed $cartId
-     *
-     * @return string
-     */
-    private function getCheckoutCompleteUrl($cartId)
+    private function getCheckoutCompleteUrl($cartId): string
     {
         return sprintf('/api/v1/checkouts/complete/%d', $cartId);
     }

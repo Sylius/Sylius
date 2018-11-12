@@ -17,25 +17,11 @@ use Mockery\MockInterface;
 
 interface MockerInterface
 {
-    /**
-     * @param string $className
-     *
-     * @return MockInterface
-     */
-    public function mockCollaborator($className);
+    public function mockCollaborator(string $className): MockInterface;
 
-    /**
-     * @param string $serviceId
-     * @param string $className
-     *
-     * @return MockInterface
-     */
-    public function mockService($serviceId, $className);
+    public function mockService(string $serviceId, string $className): MockInterface;
 
-    /**
-     * @param string $serviceId
-     */
-    public function unmockService($serviceId);
+    public function unmockService(string $serviceId);
 
     public function unmockAll();
 }

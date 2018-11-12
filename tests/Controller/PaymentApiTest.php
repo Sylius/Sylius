@@ -20,7 +20,7 @@ final class PaymentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_denies_getting_a_payment_for_non_authenticated_user()
+    public function it_denies_getting_a_payment_for_non_authenticated_user(): void
     {
         $this->client->request('GET', $this->getPaymentUrl(-1));
 
@@ -31,7 +31,7 @@ final class PaymentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_a_payment_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_a_payment_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -44,7 +44,7 @@ final class PaymentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_payment()
+    public function it_allows_to_get_payment(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -65,7 +65,7 @@ final class PaymentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_denies_getting_a_collection_of_payments_for_non_authenticated_user()
+    public function it_denies_getting_a_collection_of_payments_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/payments/');
 
@@ -76,7 +76,7 @@ final class PaymentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_a_collection_of_payments()
+    public function it_allows_to_get_a_collection_of_payments(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -89,22 +89,12 @@ final class PaymentApiTest extends CheckoutApiTestCase
         $this->assertResponse($response, 'payment/payment_index_response', Response::HTTP_OK);
     }
 
-    /**
-     * @param mixed $orderId
-     *
-     * @return string
-     */
-    private function getOrderUrl($orderId)
+    private function getOrderUrl($orderId): string
     {
         return '/api/v1/orders/' . $orderId;
     }
 
-    /**
-     * @param mixed $paymentId
-     *
-     * @return string
-     */
-    private function getPaymentUrl($paymentId)
+    private function getPaymentUrl($paymentId): string
     {
         return '/api/v1/payments/' . $paymentId;
     }

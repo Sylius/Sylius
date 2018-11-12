@@ -36,9 +36,6 @@ class PromotionRuleExampleFactory extends AbstractExampleFactory implements Exam
      */
     private $optionsResolver;
 
-    /**
-     * @param PromotionRuleFactoryInterface $promotionRuleFactory
-     */
     public function __construct(PromotionRuleFactoryInterface $promotionRuleFactory)
     {
         $this->promotionRuleFactory = $promotionRuleFactory;

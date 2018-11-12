@@ -17,10 +17,5 @@ use Sylius\Component\Mailer\Model\EmailInterface;
 
 interface EmailProviderInterface
 {
-    /**
-     * @param string $code
-     *
-     * @return EmailInterface
-     */
     public function getEmail(string $code): EmailInterface;
 }

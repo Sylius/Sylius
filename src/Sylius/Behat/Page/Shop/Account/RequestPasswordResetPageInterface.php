@@ -17,18 +17,9 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 
 interface RequestPasswordResetPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
-     */
     public function checkValidationMessageFor(string $element, string $message): bool;
 
     public function reset();
 
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
+    public function specifyEmail(string $email);
 }

@@ -20,7 +20,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_denies_getting_an_order_for_non_authenticated_user()
+    public function it_denies_getting_an_order_for_non_authenticated_user(): void
     {
         $this->client->request('GET', $this->getOrderUrl(-1));
 
@@ -31,7 +31,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_an_order_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_an_order_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -44,7 +44,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_cart()
+    public function it_allows_to_get_cart(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -61,7 +61,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_an_order()
+    public function it_allows_to_get_an_order(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -77,7 +77,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_an_order_with_promotion()
+    public function it_allows_to_get_an_order_with_promotion(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yml',
@@ -96,7 +96,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_an_order_with_coupon_based_promotion()
+    public function it_allows_to_get_an_order_with_coupon_based_promotion(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yml',
@@ -124,7 +124,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_denies_canceling_an_order_for_non_authenticated_user()
+    public function it_denies_canceling_an_order_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', $this->getCancelUrl(-1));
 
@@ -135,7 +135,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_canceling_an_order_which_does_not_exist()
+    public function it_returns_not_found_response_when_canceling_an_order_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -148,7 +148,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_cancel_an_order()
+    public function it_allows_to_cancel_an_order(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yml',
@@ -171,7 +171,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_denies_shipping_an_order_for_non_authenticated_user()
+    public function it_denies_shipping_an_order_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', $this->getShipOrderShipmentUrl(-1, -1));
 
@@ -182,7 +182,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_ship_an_order_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_ship_an_order_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -195,7 +195,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_shipping_does_not_exist_for_the_order()
+    public function it_returns_not_found_response_when_shipping_does_not_exist_for_the_order(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yml',
@@ -213,7 +213,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_ship_an_order()
+    public function it_allows_to_ship_an_order(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yml',
@@ -241,7 +241,7 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_ship_an_order_with_shipment_code()
+    public function it_allows_to_ship_an_order_with_shipment_code(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yml',
@@ -276,7 +276,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_completing_the_payment_for_the_order_for_non_authenticated_user()
+    public function it_denies_completing_the_payment_for_the_order_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', $this->getCompleteOrderPaymentUrl(-1, -1));
 
@@ -287,7 +287,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_completing_the_payment_for_the_order_which_does_not_exist()
+    public function it_returns_not_found_response_when_completing_the_payment_for_the_order_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -300,7 +300,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_completing_payment_does_not_exist_for_the_order()
+    public function it_returns_not_found_response_when_completing_payment_does_not_exist_for_the_order(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yml',
@@ -318,7 +318,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_complete_the_payment_for_the_order()
+    public function it_allows_to_complete_the_payment_for_the_order(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yml',
@@ -346,7 +346,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_complete_the_payment_and_ship_the_order()
+    public function it_allows_to_complete_the_payment_and_ship_the_order(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yml',
@@ -376,44 +376,22 @@ EOT;
         $this->assertResponse($response, 'order/order_fulfilled_show_response', Response::HTTP_OK);
     }
 
-    /**
-     * @param mixed $orderId
-     *
-     * @return string
-     */
-    private function getOrderUrl($orderId)
+    private function getOrderUrl($orderId): string
     {
         return '/api/v1/orders/' . $orderId;
     }
 
-    /**
-     * @param mixed $orderId
-     * @param mixed $shipmentId
-     *
-     * @return string
-     */
-    private function getShipOrderShipmentUrl($orderId, $shipmentId)
+    private function getShipOrderShipmentUrl($orderId, $shipmentId): string
     {
         return sprintf('%s/shipments/%s/ship', $this->getOrderUrl($orderId), $shipmentId);
     }
 
-    /**
-     * @param mixed $orderId
-     * @param mixed $paymentId
-     *
-     * @return string
-     */
-    private function getCompleteOrderPaymentUrl($orderId, $paymentId)
+    private function getCompleteOrderPaymentUrl($orderId, $paymentId): string
     {
         return sprintf('%s/payments/%s/complete', $this->getOrderUrl($orderId), $paymentId);
     }
 
-    /**
-     * @param mixed $orderId
-     *
-     * @return string
-     */
-    private function getCancelUrl($orderId)
+    private function getCancelUrl($orderId): string
     {
         return $this->getOrderUrl($orderId) . '/cancel';
     }

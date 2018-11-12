@@ -20,9 +20,6 @@ final class ShopExtension extends \Twig_Extension
      */
     private $isShopEnabled;
 
-    /**
-     * @param bool $isShopEnabled
-     */
     public function __construct(bool $isShopEnabled)
     {
         $this->isShopEnabled = $isShopEnabled;

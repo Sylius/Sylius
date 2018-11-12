@@ -19,23 +19,11 @@ interface CreatePageInterface extends BaseCreatePageInterface
 {
     public function enable();
 
-    /**
-     * @param string $username
-     */
-    public function specifyUsername($username);
+    public function specifyUsername(string $username);
 
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
+    public function specifyEmail(string $email);
 
-    /**
-     * @param string $password
-     */
-    public function specifyPassword($password);
+    public function specifyPassword(string $password);
 
-    /**
-     * @param string $localeCode
-     */
-    public function specifyLocale($localeCode);
+    public function specifyLocale(string $localeCode);
 }

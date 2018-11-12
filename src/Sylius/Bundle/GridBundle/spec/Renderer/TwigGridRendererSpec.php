@@ -97,7 +97,7 @@ final class TwigGridRendererSpec extends ObjectBehavior
         $field->getType()->willReturn('string');
         $fieldsRegistry->get('string')->willReturn($fieldType);
         $fieldType->configureOptions(Argument::type(OptionsResolver::class))
-            ->will(function ($args) {
+            ->will(function ($args): void {
                 $args[0]->setRequired('foo');
             })
         ;

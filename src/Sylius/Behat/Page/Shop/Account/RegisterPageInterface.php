@@ -17,45 +17,21 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 
 interface RegisterPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function checkValidationMessageFor($element, $message);
+    public function checkValidationMessageFor(string $element, string $message): bool;
 
     public function register();
 
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
+    public function specifyEmail(string $email);
 
-    /**
-     * @param string $firstName
-     */
-    public function specifyFirstName($firstName);
+    public function specifyFirstName(string $firstName);
 
-    /**
-     * @param string $lastName
-     */
-    public function specifyLastName($lastName);
+    public function specifyLastName(string $lastName);
 
-    /**
-     * @param string $password
-     */
-    public function specifyPassword($password);
+    public function specifyPassword(string $password);
 
-    /**
-     * @param string $phoneNumber
-     */
-    public function specifyPhoneNumber($phoneNumber);
+    public function specifyPhoneNumber(string $phoneNumber);
 
-    /**
-     * @param string $password
-     */
-    public function verifyPassword($password);
+    public function verifyPassword(string $password);
 
     public function subscribeToTheNewsletter();
 }

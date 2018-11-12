@@ -28,9 +28,6 @@ final class ConvertPaymentAction implements ActionInterface
      */
     private $invoiceNumberGenerator;
 
-    /**
-     * @param InvoiceNumberGeneratorInterface $invoiceNumberGenerator
-     */
     public function __construct(InvoiceNumberGeneratorInterface $invoiceNumberGenerator)
     {
         $this->invoiceNumberGenerator = $invoiceNumberGenerator;
@@ -102,11 +99,6 @@ final class ConvertPaymentAction implements ActionInterface
         ;
     }
 
-    /**
-     * @param int $price
-     *
-     * @return float
-     */
     private function formatPrice(int $price): float
     {
         return round($price / 100, 2);

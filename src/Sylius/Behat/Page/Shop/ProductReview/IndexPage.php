@@ -20,7 +20,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_product_review_index';
     }
@@ -28,7 +28,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function countReviews()
+    public function countReviews(): int
     {
         return count($this->getElement('reviews')->findAll('css', '.comment'));
     }
@@ -36,7 +36,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasReviewTitled($title)
+    public function hasReviewTitled(string $title): bool
     {
         return null !== $this->getElement('reviews')->find('css', sprintf('.comment:contains("%s")', $title));
     }
@@ -44,7 +44,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasNoReviewsMessage()
+    public function hasNoReviewsMessage(): bool
     {
         $reviewsContainerText = $this->getElement('reviews')->getText();
 
@@ -54,7 +54,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'reviews' => '#sylius-product-reviews',

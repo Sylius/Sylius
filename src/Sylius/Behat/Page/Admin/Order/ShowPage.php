@@ -28,12 +28,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     private $tableAccessor;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -48,7 +42,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCustomer($customerName)
+    public function hasCustomer(string $customerName)
     {
         $customerText = $this->getElement('customer')->getText();
 
@@ -58,7 +52,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingAddress($customerName, $street, $postcode, $city, $countryName)
+    public function hasShippingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         $shippingAddressText = $this->getElement('shipping_address')->getText();
 
@@ -68,7 +62,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasBillingAddress($customerName, $street, $postcode, $city, $countryName)
+    public function hasBillingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         $billingAddressText = $this->getElement('billing_address')->getText();
 
@@ -78,24 +72,24 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShipment($shippingDetails)
+    public function hasShipment(string $shippingDetails): bool
     {
         $shipmentsText = $this->getElement('shipments')->getText();
 
         return stripos($shipmentsText, $shippingDetails) !== false;
     }
 
-    public function specifyTrackingCode($code)
+    public function specifyTrackingCode(string $code): void
     {
         $this->getDocument()->fillField('sylius_shipment_ship_tracking', $code);
     }
 
-    public function canShipOrder(OrderInterface $order)
+    public function canShipOrder(OrderInterface $order): bool
     {
         return $this->getLastOrderShipmentElement($order)->hasButton('Ship');
     }
 
-    public function shipOrder(OrderInterface $order)
+    public function shipOrder(OrderInterface $order): void
     {
         $this->getLastOrderShipmentElement($order)->pressButton('Ship');
     }
@@ -103,7 +97,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPayment($paymentDetails)
+    public function hasPayment(string $paymentDetails): bool
     {
         $paymentsText = $this->getElement('payments')->getText();
 
@@ -113,7 +107,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function canCompleteOrderLastPayment(OrderInterface $order)
+    public function canCompleteOrderLastPayment(OrderInterface $order): bool
     {
         return $this->getLastOrderPaymentElement($order)->hasButton('Complete');
     }
@@ -121,7 +115,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function completeOrderLastPayment(OrderInterface $order)
+    public function completeOrderLastPayment(OrderInterface $order): void
     {
         $this->getLastOrderPaymentElement($order)->pressButton('Complete');
     }
@@ -129,7 +123,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function refundOrderLastPayment(OrderInterface $order)
+    public function refundOrderLastPayment(OrderInterface $order): void
     {
         $this->getLastOrderPaymentElement($order)->pressButton('Refund');
     }
@@ -137,7 +131,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function countItems()
+    public function countItems(): int
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('table'));
     }
@@ -171,7 +165,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemsTotal()
+    public function getItemsTotal(): string
     {
         $itemsTotalElement = $this->getElement('items_total');
 
@@ -181,7 +175,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotal()
+    public function getTotal(): string
     {
         $totalElement = $this->getElement('total');
 
@@ -191,7 +185,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingTotal()
+    public function getShippingTotal(): string
     {
         $shippingTotalElement = $this->getElement('shipping_total');
 
@@ -201,7 +195,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getTaxTotal()
+    public function getTaxTotal(): string
     {
         $taxTotalElement = $this->getElement('tax_total');
 
@@ -211,7 +205,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingCharge($shippingCharge)
+    public function hasShippingCharge(string $shippingCharge): bool
     {
         $shippingChargesText = $this->getElement('shipping_charges')->getText();
 
@@ -221,7 +215,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionTotal()
+    public function getPromotionTotal(): string
     {
         $promotionTotalElement = $this->getElement('promotion_total');
 
@@ -231,7 +225,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPromotionDiscount($promotionDiscount)
+    public function hasPromotionDiscount(string $promotionDiscount): bool
     {
         $promotionDiscountsText = $this->getElement('promotion_discounts')->getText();
 
@@ -241,7 +235,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingPromotion($promotionName)
+    public function hasShippingPromotion(string $promotionName): bool
     {
         return $this->getElement('promotion_shipping_discounts')->getText();
     }
@@ -249,7 +243,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasTax($tax)
+    public function hasTax(string $tax): bool
     {
         $taxesText = $this->getElement('taxes')->getText();
 
@@ -259,7 +253,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemCode($itemName)
+    public function getItemCode(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'sylius-product-variant-code');
     }
@@ -267,7 +261,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemUnitPrice($itemName)
+    public function getItemUnitPrice(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'unit-price');
     }
@@ -275,7 +269,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemDiscountedUnitPrice($itemName)
+    public function getItemDiscountedUnitPrice(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'discounted-unit-price');
     }
@@ -283,7 +277,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemQuantity($itemName)
+    public function getItemQuantity(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'quantity');
     }
@@ -291,7 +285,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemSubtotal($itemName)
+    public function getItemSubtotal(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'subtotal');
     }
@@ -299,7 +293,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemDiscount($itemName)
+    public function getItemDiscount(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'discount');
     }
@@ -307,7 +301,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemTax($itemName)
+    public function getItemTax(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'tax');
     }
@@ -315,7 +309,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemTotal($itemName)
+    public function getItemTotal(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'total');
     }
@@ -323,7 +317,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPaymentAmount()
+    public function getPaymentAmount(): string
     {
         $paymentsPrice = $this->getElement('payments')->find('css', '.description');
 
@@ -333,7 +327,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPaymentsCount()
+    public function getPaymentsCount(): int
     {
         try {
             $payments = $this->getElement('payments')->findAll('css', '.item');
@@ -361,7 +355,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCancelButton()
+    public function hasCancelButton(): bool
     {
         return $this->getDocument()->hasButton('Cancel');
     }
@@ -369,7 +363,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getOrderState()
+    public function getOrderState(): string
     {
         return $this->getElement('order_state')->getText();
     }
@@ -377,7 +371,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPaymentState()
+    public function getPaymentState(): string
     {
         return $this->getElement('order_payment_state')->getText();
     }
@@ -385,17 +379,17 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingState()
+    public function getShippingState(): string
     {
         return $this->getElement('order_shipping_state')->getText();
     }
 
-    public function cancelOrder()
+    public function cancelOrder(): void
     {
         $this->getDocument()->pressButton('Cancel');
     }
 
-    public function deleteOrder()
+    public function deleteOrder(): void
     {
         $this->getDocument()->pressButton('Delete');
     }
@@ -403,7 +397,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasNote($note)
+    public function hasNote(string $note): bool
     {
         $orderNotesElement = $this->getElement('order_notes');
 
@@ -413,7 +407,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingProvinceName($provinceName)
+    public function hasShippingProvinceName(string $provinceName): bool
     {
         $shippingAddressText = $this->getElement('shipping_address')->getText();
 
@@ -423,7 +417,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasBillingProvinceName($provinceName)
+    public function hasBillingProvinceName(string $provinceName): bool
     {
         $billingAddressText = $this->getElement('billing_address')->getText();
 
@@ -433,7 +427,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getIpAddressAssigned()
+    public function getIpAddressAssigned(): string
     {
         return $this->getElement('ip_address')->getText();
     }
@@ -441,7 +435,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getOrderCurrency()
+    public function getOrderCurrency(): string
     {
         return $this->getElement('currency')->getText();
     }
@@ -449,7 +443,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasRefundButton()
+    public function hasRefundButton(): bool
     {
         return $this->getDocument()->hasButton('Refund');
     }
@@ -457,7 +451,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingPromotionData()
+    public function getShippingPromotionData(): string
     {
         return $this->getElement('promotion_shipping_discounts')->getText();
     }
@@ -465,7 +459,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_admin_order_show';
     }
@@ -473,7 +467,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '#billing-address',
@@ -500,25 +494,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ]);
     }
 
-    /**
-     * @return TableAccessorInterface
-     */
-    protected function getTableAccessor()
+    protected function getTableAccessor(): TableAccessorInterface
     {
         return $this->tableAccessor;
     }
 
-    /**
-     * @param string $elementText
-     * @param string $customerName
-     * @param string $street
-     * @param string $postcode
-     * @param string $city
-     * @param string $countryName
-     *
-     * @return bool
-     */
-    private function hasAddress($elementText, $customerName, $street, $postcode, $city, $countryName)
+    private function hasAddress(string $elementText, string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         return
             (stripos($elementText, $customerName) !== false) &&
@@ -528,13 +509,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ;
     }
 
-    /**
-     * @param string $itemName
-     * @param string $property
-     *
-     * @return string
-     */
-    private function getItemProperty($itemName, $property)
+    private function getItemProperty(string $itemName, string $property): string
     {
         $rows = $this->tableAccessor->getRowsWithFields(
             $this->getElement('table'),
@@ -544,12 +519,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $rows[0]->find('css', '.' . $property)->getText();
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return NodeElement|null
-     */
-    private function getLastOrderPaymentElement(OrderInterface $order)
+    private function getLastOrderPaymentElement(OrderInterface $order): ?NodeElement
     {
         $payment = $order->getPayments()->last();
 
@@ -559,12 +529,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $paymentStateElement->getParent()->getParent();
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return NodeElement|null
-     */
-    private function getLastOrderShipmentElement(OrderInterface $order)
+    private function getLastOrderShipmentElement(OrderInterface $order): ?NodeElement
     {
         $shipment = $order->getShipments()->last();
 

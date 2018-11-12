@@ -17,46 +17,19 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 
 interface GeneratePageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function checkAmountValidation($message);
+    public function checkAmountValidation(string $message): bool;
 
-    /**
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function checkCodeLengthValidation($message);
+    public function checkCodeLengthValidation(string $message): bool;
 
-    /**
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function checkGenerationValidation($message);
+    public function checkGenerationValidation(string $message): bool;
 
     public function generate();
 
-    /**
-     * @param int $amount
-     */
-    public function specifyAmount($amount);
+    public function specifyAmount(int $amount);
 
-    /**
-     * @param int $codeLength
-     */
-    public function specifyCodeLength($codeLength);
+    public function specifyCodeLength(int $codeLength);
 
-    /**
-     * @param \DateTimeInterface $date
-     */
     public function setExpiresAt(\DateTimeInterface $date);
 
-    /**
-     * @param int $limit
-     */
-    public function setUsageLimit($limit);
+    public function setUsageLimit(int $limit);
 }

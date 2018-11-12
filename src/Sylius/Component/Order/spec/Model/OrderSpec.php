@@ -184,10 +184,10 @@ final class OrderSpec extends ObjectBehavior
         $orderAdjustment->getAmount()->willReturn(420);
         $orderAdjustment->isNeutral()->willReturn(true);
         $orderAdjustment->isLocked()->willReturn(false);
-        $orderAdjustment->setAdjustable(Argument::any())->will(function () {});
+        $orderAdjustment->setAdjustable(Argument::any())->will(function (): void {});
 
         $item->getTotal()->willReturn(666);
-        $item->setOrder($this)->will(function () {});
+        $item->setOrder($this)->will(function (): void {});
 
         $this->addAdjustment($orderAdjustment);
         $this->addItem($item);
@@ -209,17 +209,17 @@ final class OrderSpec extends ObjectBehavior
         $orderPromotionAdjustment->isLocked()->willReturn(false);
         $orderPromotionAdjustment->setAdjustable($this)->shouldBeCalled();
         $orderPromotionAdjustment->getAmount()->willReturn(420);
-        $orderPromotionAdjustment->setAdjustable(Argument::any())->will(function () {});
+        $orderPromotionAdjustment->setAdjustable(Argument::any())->will(function (): void {});
 
         $orderTaxAdjustment->getType()->willReturn('tax');
         $orderTaxAdjustment->isNeutral()->willReturn(true);
         $orderTaxAdjustment->isLocked()->willReturn(false);
         $orderTaxAdjustment->setAdjustable($this)->shouldBeCalled();
         $orderTaxAdjustment->getAmount()->willReturn(420);
-        $orderTaxAdjustment->setAdjustable(Argument::any())->will(function () {});
+        $orderTaxAdjustment->setAdjustable(Argument::any())->will(function (): void {});
 
         $item->getTotal()->willReturn(666);
-        $item->setOrder($this)->will(function () {});
+        $item->setOrder($this)->will(function (): void {});
 
         $this->addAdjustment($orderPromotionAdjustment);
         $this->addAdjustment($orderTaxAdjustment);
@@ -485,7 +485,7 @@ final class OrderSpec extends ObjectBehavior
     function it_clears_items(OrderItemInterface $item): void
     {
         $item->getTotal()->willReturn(420);
-        $item->setOrder($this)->will(function () {});
+        $item->setOrder($this)->will(function (): void {});
 
         $this->addItem($item);
         $this->clearItems();

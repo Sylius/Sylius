@@ -36,9 +36,6 @@ class PromotionActionExampleFactory extends AbstractExampleFactory implements Ex
      */
     private $optionsResolver;
 
-    /**
-     * @param PromotionActionFactoryInterface $promotionActionFactory
-     */
     public function __construct(PromotionActionFactoryInterface $promotionActionFactory)
     {
         $this->promotionActionFactory = $promotionActionFactory;

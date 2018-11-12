@@ -70,7 +70,7 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         if (null === $this->clientManager) {
-            @trigger_error('Fetching services directly from the container is deprecated since Sylius 1.2 and will be removed in 2.0.', E_USER_DEPRECATED);
+            @trigger_error('Fetching services directly from the container is deprecated since Sylius 1.2 and will be removed in 2.0.', \E_USER_DEPRECATED);
             $this->clientManager = $this->getContainer()->get('fos_oauth_server.client_manager.default');
         }
 

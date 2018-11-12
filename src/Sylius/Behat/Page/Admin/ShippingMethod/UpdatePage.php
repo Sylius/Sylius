@@ -26,12 +26,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isAvailableInChannel($channelName)
+    public function isAvailableInChannel(string $channelName): bool
     {
         return $this->getElement('channel', ['%channel%' => $channelName])->hasAttribute('checked');
     }
 
-    public function removeZone()
+    public function removeZone(): void
     {
         $this->getDocument()->selectFieldOption('Zone', 'Select');
     }
@@ -39,7 +39,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getValidationMessageForAmount($channelCode)
+    public function getValidationMessageForAmount(string $channelCode): string
     {
         $foundElement = $this->getElement('amount', ['%channelCode%' => $channelCode]);
         if (null === $foundElement) {
@@ -73,7 +73,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',

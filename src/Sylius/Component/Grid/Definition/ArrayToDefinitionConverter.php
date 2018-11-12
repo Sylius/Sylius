@@ -25,9 +25,6 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
      */
     private $eventDispatcher;
 
-    /**
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(EventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
@@ -69,12 +66,6 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
         return $grid;
     }
 
-    /**
-     * @param string $name
-     * @param array $configuration
-     *
-     * @return Field
-     */
     private function convertField(string $name, array $configuration): Field
     {
         $field = Field::fromNameAndType($name, $configuration['type']);
@@ -111,12 +102,6 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
         return $field;
     }
 
-    /**
-     * @param string $name
-     * @param array $configuration
-     *
-     * @return Filter
-     */
     private function convertFilter(string $name, array $configuration): Filter
     {
         $filter = Filter::fromNameAndType($name, $configuration['type']);
@@ -146,12 +131,6 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
         return $filter;
     }
 
-    /**
-     * @param string $name
-     * @param array $configuration
-     *
-     * @return ActionGroup
-     */
     private function convertActionGroup(string $name, array $configuration): ActionGroup
     {
         $actionGroup = ActionGroup::named($name);
@@ -163,12 +142,6 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
         return $actionGroup;
     }
 
-    /**
-     * @param string $name
-     * @param array $configuration
-     *
-     * @return Action
-     */
     private function convertAction(string $name, array $configuration): Action
     {
         $action = Action::fromNameAndType($name, $configuration['type']);
@@ -192,11 +165,6 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
         return $action;
     }
 
-    /**
-     * @param string $code
-     *
-     * @return string
-     */
     private function getEventName(string $code): string
     {
         return sprintf(self::EVENT_NAME, str_replace('sylius_', '', $code));

@@ -30,10 +30,6 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
      */
     private $urlMatcher;
 
-    /**
-     * @param Session $session
-     * @param UrlMatcherInterface $urlMatcher
-     */
     public function __construct(Session $session, UrlMatcherInterface $urlMatcher)
     {
         $this->session = $session;
@@ -45,9 +41,9 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
      *
      * @throws \LogicException
      */
-    public function getCurrentPageWithForm(array $pages)
+    public function getCurrentPageWithForm(array $pages): SymfonyPageInterface
     {
-        $routeParameters = $this->urlMatcher->match(parse_url($this->session->getCurrentUrl(), PHP_URL_PATH));
+        $routeParameters = $this->urlMatcher->match(parse_url($this->session->getCurrentUrl(), \PHP_URL_PATH));
 
         Assert::allIsInstanceOf($pages, SymfonyPageInterface::class);
 

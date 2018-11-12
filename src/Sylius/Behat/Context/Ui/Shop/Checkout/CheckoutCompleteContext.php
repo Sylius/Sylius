@@ -42,11 +42,6 @@ final class CheckoutCompleteContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param CompletePageInterface $completePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CompletePageInterface $completePage,
@@ -61,7 +56,7 @@ final class CheckoutCompleteContext implements Context
      * @When I try to open checkout complete page
      * @When I want to complete checkout
      */
-    public function iTryToOpenCheckoutCompletePage()
+    public function iTryToOpenCheckoutCompletePage(): void
     {
         $this->completePage->tryToOpen();
     }
@@ -69,7 +64,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @When I decide to change the payment method
      */
-    public function iGoToThePaymentStep()
+    public function iGoToThePaymentStep(): void
     {
         $this->completePage->changePaymentMethod();
     }
@@ -77,7 +72,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @When /^I provide additional note like "([^"]+)"$/
      */
-    public function iProvideAdditionalNotesLike($notes)
+    public function iProvideAdditionalNotesLike($notes): void
     {
         $this->sharedStorage->set('additional_note', $notes);
         $this->completePage->addNotes($notes);
@@ -86,7 +81,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @When I return to the checkout summary step
      */
-    public function iReturnToTheCheckoutSummaryStep()
+    public function iReturnToTheCheckoutSummaryStep(): void
     {
         $this->completePage->open();
     }
@@ -95,7 +90,7 @@ final class CheckoutCompleteContext implements Context
      * @Given I have confirmed order
      * @When I confirm my order
      */
-    public function iConfirmMyOrder()
+    public function iConfirmMyOrder(): void
     {
         $this->completePage->confirmOrder();
     }
@@ -104,7 +99,7 @@ final class CheckoutCompleteContext implements Context
      * @Then I should be on the checkout complete step
      * @Then I should be on the checkout summary step
      */
-    public function iShouldBeOnTheCheckoutCompleteStep()
+    public function iShouldBeOnTheCheckoutCompleteStep(): void
     {
         $this->completePage->verify();
     }
@@ -112,7 +107,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then my order's shipping address should be to :fullName
      */
-    public function iShouldSeeThisShippingAddressAsShippingAddress($fullName)
+    public function iShouldSeeThisShippingAddressAsShippingAddress($fullName): void
     {
         $address = $this->sharedStorage->get('shipping_address_' . StringInflector::nameToLowercaseCode($fullName));
 
@@ -122,7 +117,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then my order's billing address should be to :fullName
      */
-    public function iShouldSeeThisBillingAddressAsBillingAddress($fullName)
+    public function iShouldSeeThisBillingAddressAsBillingAddress($fullName): void
     {
         $address = $this->sharedStorage->get('billing_address_' . StringInflector::nameToLowercaseCode($fullName));
 
@@ -132,7 +127,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then address to :fullName should be used for both shipping and billing of my order
      */
-    public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress($fullName)
+    public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress($fullName): void
     {
         $this->iShouldSeeThisShippingAddressAsShippingAddress($fullName);
         $this->iShouldSeeThisBillingAddressAsBillingAddress($fullName);
@@ -141,7 +136,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then I should have :quantity :productName products in the cart
      */
-    public function iShouldHaveProductsInTheCart($quantity, $productName)
+    public function iShouldHaveProductsInTheCart($quantity, $productName): void
     {
         Assert::true($this->completePage->hasItemWithProductAndQuantity($productName, $quantity));
     }
@@ -149,7 +144,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then my order shipping should be :price
      */
-    public function myOrderShippingShouldBe($price)
+    public function myOrderShippingShouldBe($price): void
     {
         Assert::true($this->completePage->hasShippingTotal($price));
     }
@@ -157,7 +152,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then /^the ("[^"]+" product) should have unit price discounted by ("\$\d+")$/
      */
-    public function theShouldHaveUnitPriceDiscountedFor(ProductInterface $product, $amount)
+    public function theShouldHaveUnitPriceDiscountedFor(ProductInterface $product, $amount): void
     {
         Assert::true($this->completePage->hasProductDiscountedUnitPriceBy($product, $amount));
     }
@@ -165,7 +160,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then /^my order total should be ("(?:\£|\$)\d+(?:\.\d+)?")$/
      */
-    public function myOrderTotalShouldBe($total)
+    public function myOrderTotalShouldBe($total): void
     {
         Assert::true($this->completePage->hasOrderTotal($total));
     }
@@ -173,7 +168,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then my order promotion total should be :promotionTotal
      */
-    public function myOrderPromotionTotalShouldBe($promotionTotal)
+    public function myOrderPromotionTotalShouldBe($promotionTotal): void
     {
         Assert::true($this->completePage->hasPromotionTotal($promotionTotal));
     }
@@ -181,7 +176,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then :promotionName should be applied to my order
      */
-    public function shouldBeAppliedToMyOrder($promotionName)
+    public function shouldBeAppliedToMyOrder($promotionName): void
     {
         Assert::true($this->completePage->hasPromotion($promotionName));
     }
@@ -189,7 +184,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then :promotionName should be applied to my order shipping
      */
-    public function shouldBeAppliedToMyOrderShipping($promotionName)
+    public function shouldBeAppliedToMyOrderShipping($promotionName): void
     {
         Assert::true($this->completePage->hasShippingPromotion($promotionName));
     }
@@ -197,7 +192,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Given my tax total should be :taxTotal
      */
-    public function myTaxTotalShouldBe($taxTotal)
+    public function myTaxTotalShouldBe($taxTotal): void
     {
         Assert::true($this->completePage->hasTaxTotal($taxTotal));
     }
@@ -205,7 +200,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then my order's shipping method should be :shippingMethod
      */
-    public function myOrdersShippingMethodShouldBe(ShippingMethodInterface $shippingMethod)
+    public function myOrdersShippingMethodShouldBe(ShippingMethodInterface $shippingMethod): void
     {
         Assert::true($this->completePage->hasShippingMethod($shippingMethod));
     }
@@ -213,7 +208,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then my order's payment method should be :paymentMethod
      */
-    public function myOrdersPaymentMethodShouldBe(PaymentMethodInterface $paymentMethod)
+    public function myOrdersPaymentMethodShouldBe(PaymentMethodInterface $paymentMethod): void
     {
         Assert::same($this->completePage->getPaymentMethodName(), $paymentMethod->getName());
     }
@@ -221,7 +216,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then the :product product should have unit price :price
      */
-    public function theProductShouldHaveUnitPrice(ProductInterface $product, $price)
+    public function theProductShouldHaveUnitPrice(ProductInterface $product, $price): void
     {
         Assert::true($this->completePage->hasProductUnitPrice($product, $price));
     }
@@ -229,7 +224,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then /^I should be notified that (this product) does not have sufficient stock$/
      */
-    public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
+    public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
         Assert::true($this->completePage->hasProductOutOfStockValidationMessage($product));
     }
@@ -237,7 +232,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then /^I should not be notified that (this product) does not have sufficient stock$/
      */
-    public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
+    public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
         Assert::false($this->completePage->hasProductOutOfStockValidationMessage($product));
     }
@@ -245,7 +240,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then my order's locale should be :locale
      */
-    public function myOrderLocaleShouldBe($locale)
+    public function myOrderLocaleShouldBe($locale): void
     {
         Assert::true($this->completePage->hasLocale($locale));
     }
@@ -253,7 +248,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then I should see :provinceName in the shipping address
      */
-    public function iShouldSeeInTheShippingAddress($provinceName)
+    public function iShouldSeeInTheShippingAddress($provinceName): void
     {
         Assert::true($this->completePage->hasShippingProvinceName($provinceName));
     }
@@ -261,7 +256,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then I should see :provinceName in the billing address
      */
-    public function iShouldSeeInTheBillingAddress($provinceName)
+    public function iShouldSeeInTheBillingAddress($provinceName): void
     {
         Assert::true($this->completePage->hasBillingProvinceName($provinceName));
     }
@@ -269,7 +264,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then I should not see any information about payment method
      */
-    public function iShouldNotSeeAnyInformationAboutPaymentMethod()
+    public function iShouldNotSeeAnyInformationAboutPaymentMethod(): void
     {
         Assert::false($this->completePage->hasPaymentMethod());
     }
@@ -277,7 +272,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then /^(this promotion) should give "([^"]+)" discount$/
      */
-    public function thisPromotionShouldGiveDiscount(PromotionInterface $promotion, $discount)
+    public function thisPromotionShouldGiveDiscount(PromotionInterface $promotion, $discount): void
     {
         Assert::same($this->completePage->getShippingPromotionDiscount($promotion->getName()), $discount);
     }
@@ -285,7 +280,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then I should not be able to confirm order because products does not fit :shippingMethod requirements
      */
-    public function iShouldNotBeAbleToConfirmOrderBecauseDoesNotBelongsToShippingCategory(ShippingMethodInterface $shippingMethod)
+    public function iShouldNotBeAbleToConfirmOrderBecauseDoesNotBelongsToShippingCategory(ShippingMethodInterface $shippingMethod): void
     {
         $this->completePage->confirmOrder();
 
@@ -301,7 +296,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then /^I should be informed that (this promotion) is no longer applied$/
      */
-    public function iShouldBeInformedThatMyPromotionIsNoLongerApplied(PromotionInterface $promotion)
+    public function iShouldBeInformedThatMyPromotionIsNoLongerApplied(PromotionInterface $promotion): void
     {
         $this->notificationChecker->checkNotification(
             sprintf('You are no longer eligible for this promotion %s.', $promotion->getName()),
@@ -312,7 +307,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then /^I should be informed that (this payment method) has been disabled$/
      */
-    public function iShouldBeInformedThatThisPaymentMethodHasBeenDisabled(PaymentMethodInterface $paymentMethod)
+    public function iShouldBeInformedThatThisPaymentMethodHasBeenDisabled(PaymentMethodInterface $paymentMethod): void
     {
         Assert::same(
             $this->completePage->getValidationErrors(),
@@ -326,7 +321,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then /^I should be informed that (this product) has been disabled$/
      */
-    public function iShouldBeInformedThatThisProductHasBeenDisabled(ProductInterface $product)
+    public function iShouldBeInformedThatThisProductHasBeenDisabled(ProductInterface $product): void
     {
         Assert::same(
             $this->completePage->getValidationErrors(),
@@ -340,7 +335,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then I should be informed that order total has been changed
      */
-    public function iShouldBeInformedThatOrderTotalHasBeenChanged()
+    public function iShouldBeInformedThatOrderTotalHasBeenChanged(): void
     {
         $this->notificationChecker->checkNotification(
             'Your order total has been changed, check your order information and confirm it again.',

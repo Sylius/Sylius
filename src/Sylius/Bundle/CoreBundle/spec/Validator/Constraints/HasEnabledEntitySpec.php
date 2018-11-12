@@ -18,17 +18,17 @@ use Symfony\Component\Validator\Constraint;
 
 final class HasEnabledEntitySpec extends ObjectBehavior
 {
-    public function it_is_a_constraint()
+    public function it_is_a_constraint(): void
     {
         $this->shouldHaveType(Constraint::class);
     }
 
-    public function it_has_validator()
+    public function it_has_validator(): void
     {
         $this->validatedBy()->shouldReturn('sylius_has_enabled_entity');
     }
 
-    public function it_has_a_target()
+    public function it_has_a_target(): void
     {
         $this->getTargets()->shouldReturn('class');
     }

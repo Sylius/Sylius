@@ -19,7 +19,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 final class TaxonSpec extends ObjectBehavior
 {
-    public function let()
+    public function let(): void
     {
         $this->setCurrentLocale('en_US');
         $this->setFallbackLocale('en_US');

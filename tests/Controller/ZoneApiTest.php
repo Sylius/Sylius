@@ -37,7 +37,7 @@ final class ZoneApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_zone_creation_for_non_authenticated_user()
+    public function it_denies_zone_creation_for_non_authenticated_user(): void
     {
         $this->client->request('POST', '/api/v1/zones/country');
 
@@ -48,7 +48,7 @@ final class ZoneApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_zone_without_specifying_required_data()
+    public function it_does_not_allow_to_create_zone_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -61,7 +61,7 @@ final class ZoneApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_zone_with_members()
+    public function it_allows_to_create_zone_with_members(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -92,7 +92,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_access_to_zones_list_for_not_authenticated_users()
+    public function it_denies_access_to_zones_list_for_not_authenticated_users(): void
     {
         $this->client->request('GET', '/api/v1/zones/');
 
@@ -103,7 +103,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_zones_list()
+    public function it_allows_to_get_zones_list(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/zones.yml');
@@ -117,7 +117,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_access_to_zone_details_for_not_authenticated_users()
+    public function it_denies_access_to_zone_details_for_not_authenticated_users(): void
     {
         $this->client->request('GET', '/api/v1/zones/azone');
 
@@ -128,7 +128,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_a_zone_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_a_zone_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -141,7 +141,7 @@ EOT;
     /**
      * @test
      */
-    public function it_shows_zone_details()
+    public function it_shows_zone_details(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $zones = $this->loadFixturesFromFile('resources/zones.yml');
@@ -155,7 +155,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_zone_full_update_for_not_authenticated_users()
+    public function it_denies_zone_full_update_for_not_authenticated_users(): void
     {
         $this->client->request('PUT', '/api/v1/zones/azone');
 
@@ -166,7 +166,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_full_update_of_a_zone_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_full_update_of_a_zone_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -179,7 +179,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_update_zone_fully_without_specifying_required_data()
+    public function it_does_not_allow_to_update_zone_fully_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -194,7 +194,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_zone_fully()
+    public function it_allows_to_update_zone_fully(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -227,7 +227,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_zone_partial_update_for_not_authenticated_users()
+    public function it_denies_zone_partial_update_for_not_authenticated_users(): void
     {
         $this->client->request('PATCH', '/api/v1/zones/azone');
 
@@ -238,7 +238,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_partial_update_of_a_zone_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_partial_update_of_a_zone_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -251,7 +251,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_zone_partially()
+    public function it_allows_to_update_zone_partially(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -278,7 +278,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_zone_delete_for_not_authenticated_users()
+    public function it_denies_zone_delete_for_not_authenticated_users(): void
     {
         $this->client->request('DELETE', '/api/v1/zones/azone');
 
@@ -289,7 +289,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_delete_of_a_zone_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_delete_of_a_zone_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -302,7 +302,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_zone()
+    public function it_allows_to_delete_zone(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $zones = $this->loadFixturesFromFile('resources/zones.yml');

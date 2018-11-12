@@ -22,7 +22,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_cart_summary';
     }
@@ -30,7 +30,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getGrandTotal()
+    public function getGrandTotal(): string
     {
         $totalElement = $this->getElement('grand_total');
 
@@ -40,7 +40,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getBaseGrandTotal()
+    public function getBaseGrandTotal(): string
     {
         $totalElement = $this->getElement('base_grand_total');
 
@@ -50,7 +50,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getTaxTotal()
+    public function getTaxTotal(): string
     {
         $taxTotalElement = $this->getElement('tax_total');
 
@@ -60,7 +60,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingTotal()
+    public function getShippingTotal(): string
     {
         $shippingTotalElement = $this->getElement('shipping_total');
 
@@ -70,7 +70,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionTotal()
+    public function getPromotionTotal(): string
     {
         $shippingTotalElement = $this->getElement('promotion_total');
 
@@ -80,7 +80,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemTotal($productName)
+    public function getItemTotal(string $productName): string
     {
         $itemTotalElement = $this->getElement('product_total', ['%name%' => $productName]);
 
@@ -90,7 +90,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemUnitRegularPrice($productName)
+    public function getItemUnitRegularPrice(string $productName): string
     {
         $regularUnitPrice = $this->getElement('product_unit_regular_price', ['%name%' => $productName]);
 
@@ -100,7 +100,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemUnitPrice($productName)
+    public function getItemUnitPrice(string $productName): string
     {
         $unitPrice = $this->getElement('product_unit_price', ['%name%' => $productName]);
 
@@ -110,7 +110,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isItemDiscounted($productName)
+    public function isItemDiscounted(string $productName): bool
     {
         return $this->hasElement('product_unit_regular_price', ['%name%' => $productName]);
     }
@@ -118,7 +118,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function removeProduct($productName)
+    public function removeProduct(string $productName): void
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
         $itemElement->find('css', 'button.sylius-cart-remove-button')->press();
@@ -127,7 +127,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function applyCoupon($couponCode)
+    public function applyCoupon(string $couponCode): void
     {
         $this->getElement('coupon_field')->setValue($couponCode);
         $this->getElement('apply_coupon_button')->press();
@@ -136,7 +136,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeQuantity($productName, $quantity)
+    public function changeQuantity(string $productName, int $quantity): void
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
         $itemElement->find('css', 'input[type=number]')->setValue($quantity);
@@ -147,7 +147,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isSingleItemOnPage()
+    public function isSingleItemOnPage(): bool
     {
         $items = $this->getElement('cart_items')->findAll('css', 'tbody > tr');
 
@@ -157,7 +157,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasItemNamed($name)
+    public function hasItemNamed(string $name): bool
     {
         return $this->hasItemWith($name, '.sylius-product-name');
     }
@@ -165,7 +165,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasItemWithVariantNamed($variantName)
+    public function hasItemWithVariantNamed(string $variantName): bool
     {
         return $this->hasItemWith($variantName, '.sylius-product-variant-name');
     }
@@ -173,7 +173,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasItemWithOptionValue($productName, $optionName, $optionValue)
+    public function hasItemWithOptionValue(string $productName, string $optionName, string $optionValue): string
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
 
@@ -190,7 +190,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasItemWithCode($code)
+    public function hasItemWithCode(string $code): bool
     {
         return $this->hasItemWith($code, '.sylius-product-variant-code');
     }
@@ -198,7 +198,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product)
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool
     {
         $message = sprintf('%s does not have sufficient stock.', $product->getName());
 
@@ -212,7 +212,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return false !== strpos($this->getDocument()->find('css', '.message')->getText(), 'Your cart is empty');
     }
@@ -220,7 +220,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getQuantity($productName)
+    public function getQuantity(string $productName): int
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
 
@@ -230,7 +230,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getCartTotal()
+    public function getCartTotal(): string
     {
         $cartTotalText = $this->getElement('cart_total')->getText();
 
@@ -241,12 +241,12 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return trim($cartTotalText);
     }
 
-    public function clearCart()
+    public function clearCart(): void
     {
         $this->getElement('clear_button')->click();
     }
 
-    public function updateCart()
+    public function updateCart(): void
     {
         $this->getElement('update_button')->click();
     }
@@ -254,7 +254,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function waitForRedirect($timeout)
+    public function waitForRedirect(int $timeout): void
     {
         $this->getDocument()->waitFor($timeout, function () {
             return $this->isOpen();
@@ -264,7 +264,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionCouponValidationMessage()
+    public function getPromotionCouponValidationMessage(): string
     {
         return $this->getElement('promotion_coupon_validation_message')->getText();
     }
@@ -272,7 +272,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'apply_coupon_button' => 'button:contains("Apply coupon")',
@@ -298,14 +298,11 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     }
 
     /**
-     * @param string $attributeName
      * @param string|array $selector
-     *
-     * @return bool
      *
      * @throws ElementNotFoundException
      */
-    private function hasItemWith($attributeName, $selector)
+    private function hasItemWith(string $attributeName, $selector): bool
     {
         $itemsAttributes = $this->getElement('cart_items')->findAll('css', $selector);
 

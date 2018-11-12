@@ -25,12 +25,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     private $tableAccessor;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -45,7 +39,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_account_order_show';
     }
@@ -53,7 +47,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getNumber()
+    public function getNumber(): string
     {
         $numberText = $this->getElement('number')->getText();
         $numberText = str_replace('#', '', $numberText);
@@ -64,7 +58,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingAddress($customerName, $street, $postcode, $city, $countryName)
+    public function hasShippingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         $shippingAddressText = $this->getElement('shipping_address')->getText();
 
@@ -74,7 +68,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasBillingAddress($customerName, $street, $postcode, $city, $countryName)
+    public function hasBillingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         $billingAddressText = $this->getElement('billing_address')->getText();
 
@@ -84,7 +78,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotal()
+    public function getTotal(): string
     {
         $totalElement = $this->getElement('total');
 
@@ -94,7 +88,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getSubtotal()
+    public function getSubtotal(): string
     {
         $totalElement = $this->getElement('subtotal');
 
@@ -104,7 +98,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function countItems()
+    public function countItems(): int
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('order_items'));
     }
@@ -112,7 +106,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPaymentPrice()
+    public function getPaymentPrice(): string
     {
         $paymentsPrice = $this->getElement('payments')->find('css', 'p');
 
@@ -148,7 +142,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemPrice()
+    public function getItemPrice(): string
     {
         return $this->getElement('product_price')->getText();
     }
@@ -156,7 +150,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingProvinceName($provinceName)
+    public function hasShippingProvinceName(string $provinceName): bool
     {
         $shippingAddressText = $this->getElement('shipping_address')->getText();
 
@@ -166,7 +160,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasBillingProvinceName($provinceName)
+    public function hasBillingProvinceName(string $provinceName): bool
     {
         $billingAddressText = $this->getElement('billing_address')->getText();
 
@@ -176,7 +170,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '#sylius-billing-address',
@@ -190,17 +184,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ]);
     }
 
-    /**
-     * @param string $elementText
-     * @param string $customerName
-     * @param string $street
-     * @param string $postcode
-     * @param string $city
-     * @param string $countryName
-     *
-     * @return bool
-     */
-    private function hasAddress($elementText, $customerName, $street, $postcode, $city, $countryName)
+    private function hasAddress(string $elementText, string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         return
             (stripos($elementText, $customerName) !== false) &&

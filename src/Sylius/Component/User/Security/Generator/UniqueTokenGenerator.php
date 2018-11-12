@@ -35,10 +35,6 @@ final class UniqueTokenGenerator implements GeneratorInterface
     private $tokenLength;
 
     /**
-     * @param RandomnessGeneratorInterface $generator
-     * @param UniquenessCheckerInterface $uniquenessChecker
-     * @param int $tokenLength
-     *
      * @throws \InvalidArgumentException
      */
     public function __construct(

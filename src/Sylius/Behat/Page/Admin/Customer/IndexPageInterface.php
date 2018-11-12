@@ -18,10 +18,5 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    /**
-     * @param CustomerInterface $customer
-     *
-     * @return string
-     */
-    public function getCustomerAccountStatus($customer);
+    public function getCustomerAccountStatus(CustomerInterface $customer): string;
 }

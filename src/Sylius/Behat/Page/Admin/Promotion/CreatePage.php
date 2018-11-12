@@ -29,7 +29,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addRule($ruleName)
+    public function addRule(string $ruleName): void
     {
         $count = count($this->getCollectionItems('rules'));
 
@@ -45,7 +45,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectRuleOption($option, $value, $multiple = false)
+    public function selectRuleOption(string $option, string $value, bool $multiple = false): void
     {
         $this->getLastCollectionItem('rules')->find('named', ['select', $option])->selectOption($value, $multiple);
     }
@@ -53,7 +53,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectAutocompleteRuleOption($option, $value, $multiple = false)
+    public function selectAutocompleteRuleOption(string $option, $value, bool $multiple = false): void
     {
         $option = strtolower(str_replace(' ', '_', $option));
 
@@ -75,7 +75,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillRuleOption($option, $value)
+    public function fillRuleOption(string $option, string $value): void
     {
         $this->getLastCollectionItem('rules')->fillField($option, $value);
     }
@@ -83,7 +83,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillRuleOptionForChannel($channelName, $option, $value)
+    public function fillRuleOptionForChannel(string $channelName, string $option, string $value): void
     {
         $lastAction = $this->getChannelConfigurationOfLastRule($channelName);
         $lastAction->fillField($option, $value);
@@ -92,7 +92,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addAction($actionName)
+    public function addAction(string $actionName): void
     {
         $count = count($this->getCollectionItems('actions'));
 
@@ -108,7 +108,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectActionOption($option, $value, $multiple = false)
+    public function selectActionOption(string $option, string $value, bool $multiple = false): void
     {
         $this->getLastCollectionItem('actions')->find('named', ['select', $option])->selectOption($value, $multiple);
     }
@@ -116,7 +116,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillActionOption($option, $value)
+    public function fillActionOption(string $option, string $value): void
     {
         $this->getLastCollectionItem('actions')->fillField($option, $value);
     }
@@ -124,7 +124,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillActionOptionForChannel($channelName, $option, $value)
+    public function fillActionOptionForChannel(string $channelName, string $option, string $value): void
     {
         $lastAction = $this->getChannelConfigurationOfLastAction($channelName);
         $lastAction->fillField($option, $value);
@@ -133,22 +133,22 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillUsageLimit($limit)
+    public function fillUsageLimit(string $limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);
     }
 
-    public function makeExclusive()
+    public function makeExclusive(): void
     {
         $this->getDocument()->checkField('Exclusive');
     }
 
-    public function checkCouponBased()
+    public function checkCouponBased(): void
     {
         $this->getDocument()->checkField('Coupon based');
     }
 
-    public function checkChannel($name)
+    public function checkChannel(string $name): void
     {
         $this->getDocument()->checkField($name);
     }
@@ -156,7 +156,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setStartsAt(\DateTimeInterface $dateTime)
+    public function setStartsAt(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -167,7 +167,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setEndsAt(\DateTimeInterface $dateTime)
+    public function setEndsAt(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -178,7 +178,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getValidationMessageForAction()
+    public function getValidationMessageForAction(): string
     {
         $actionForm = $this->getLastCollectionItem('actions');
 
@@ -193,7 +193,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectAutoCompleteFilterOption($option, $value, $multiple = false)
+    public function selectAutoCompleteFilterOption(string $option, $value, bool $multiple = false): void
     {
         $option = strtolower(str_replace(' ', '_', $option));
 
@@ -215,7 +215,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return [
             'actions' => '#sylius_promotion_actions',
@@ -229,12 +229,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         ];
     }
 
-    /**
-     * @param string $channelName
-     *
-     * @return NodeElement
-     */
-    private function getChannelConfigurationOfLastAction($channelName)
+    private function getChannelConfigurationOfLastAction(string $channelName): NodeElement
     {
         return $this
             ->getLastCollectionItem('actions')
@@ -242,12 +237,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         ;
     }
 
-    /**
-     * @param string $channelName
-     *
-     * @return NodeElement
-     */
-    private function getChannelConfigurationOfLastRule($channelName)
+    private function getChannelConfigurationOfLastRule(string $channelName): NodeElement
     {
         return $this
             ->getLastCollectionItem('rules')
@@ -255,12 +245,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         ;
     }
 
-    /**
-     * @param string $collection
-     *
-     * @return NodeElement
-     */
-    private function getLastCollectionItem($collection)
+    private function getLastCollectionItem(string $collection): NodeElement
     {
         $items = $this->getCollectionItems($collection);
 
@@ -270,11 +255,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @param string $collection
-     *
      * @return NodeElement[]
      */
-    private function getCollectionItems($collection)
+    private function getCollectionItems(string $collection): array
     {
         $items = $this->getElement($collection)->findAll('css', 'div[data-form-collection="item"]');
 

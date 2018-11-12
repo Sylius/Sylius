@@ -34,10 +34,6 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
      */
     private $shippingChargesCalculator;
 
-    /**
-     * @param FactoryInterface $adjustmentFactory
-     * @param DelegatingCalculatorInterface $shippingChargesCalculator
-     */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         DelegatingCalculatorInterface $shippingChargesCalculator

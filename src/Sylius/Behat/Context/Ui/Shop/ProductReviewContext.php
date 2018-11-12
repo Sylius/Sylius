@@ -32,10 +32,6 @@ final class ProductReviewContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         CreatePageInterface $createPage,
         NotificationCheckerInterface $notificationChecker
@@ -47,7 +43,7 @@ final class ProductReviewContext implements Context
     /**
      * @Given I want to review product :product
      */
-    public function iWantToReviewProduct(ProductInterface $product)
+    public function iWantToReviewProduct(ProductInterface $product): void
     {
         $this->createPage->open(['slug' => $product->getSlug()]);
     }
@@ -58,7 +54,7 @@ final class ProductReviewContext implements Context
      * @When I leave a comment :comment, titled :title as :author
      * @When I leave a review titled :title as :author
      */
-    public function iLeaveACommentTitled($comment = null, $title = null, $author = null)
+    public function iLeaveACommentTitled($comment = null, $title = null, $author = null): void
     {
         $this->createPage->titleReview($title);
         $this->createPage->setComment($comment);
@@ -71,7 +67,7 @@ final class ProductReviewContext implements Context
     /**
      * @When I title it with very long title
      */
-    public function iTitleItWithVeryLongTitle()
+    public function iTitleItWithVeryLongTitle(): void
     {
         $this->createPage->titleReview($this->getVeryLongTitle());
     }
@@ -79,7 +75,7 @@ final class ProductReviewContext implements Context
     /**
      * @When I rate it with :rate point(s)
      */
-    public function iRateItWithPoints($rate)
+    public function iRateItWithPoints($rate): void
     {
         $this->createPage->rateReview($rate);
     }
@@ -87,7 +83,7 @@ final class ProductReviewContext implements Context
     /**
      * @When I do not rate it
      */
-    public function iDoNotRateIt()
+    public function iDoNotRateIt(): void
     {
         // intentionally left blank, as review rate is not selected by default
     }
@@ -95,7 +91,7 @@ final class ProductReviewContext implements Context
     /**
      * @When I add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->submitReview();
     }
@@ -103,7 +99,7 @@ final class ProductReviewContext implements Context
     /**
      * @Then I should be notified that my review is waiting for the acceptation
      */
-    public function iShouldBeNotifiedThatMyReviewIsWaitingForTheAcceptation()
+    public function iShouldBeNotifiedThatMyReviewIsWaitingForTheAcceptation(): void
     {
         $this->notificationChecker->checkNotification(
             'Your review is waiting for the acceptation.',
@@ -114,7 +110,7 @@ final class ProductReviewContext implements Context
     /**
      * @Then I should be notified that I must check review rating
      */
-    public function iShouldBeNotifiedThatIMustCheckReviewRating()
+    public function iShouldBeNotifiedThatIMustCheckReviewRating(): void
     {
         Assert::same($this->createPage->getRateValidationMessage(), 'You must check review rating.');
     }
@@ -122,7 +118,7 @@ final class ProductReviewContext implements Context
     /**
      * @Then I should be notified that title is required
      */
-    public function iShouldBeNotifiedThatTitleIsRequired()
+    public function iShouldBeNotifiedThatTitleIsRequired(): void
     {
         Assert::same($this->createPage->getTitleValidationMessage(), 'Review title should not be blank.');
     }
@@ -130,7 +126,7 @@ final class ProductReviewContext implements Context
     /**
      * @Then I should be notified that title must have at least 2 characters
      */
-    public function iShouldBeNotifiedThatTitleMustHaveAtLeast2Characters()
+    public function iShouldBeNotifiedThatTitleMustHaveAtLeast2Characters(): void
     {
         Assert::same($this->createPage->getTitleValidationMessage(), 'Review title must have at least 2 characters.');
     }
@@ -138,7 +134,7 @@ final class ProductReviewContext implements Context
     /**
      * @Then I should be notified that title must have at most 255 characters
      */
-    public function iShouldBeNotifiedThatTitleMustHaveAtMost255Characters()
+    public function iShouldBeNotifiedThatTitleMustHaveAtMost255Characters(): void
     {
         Assert::same($this->createPage->getTitleValidationMessage(), 'Review title must have at most 255 characters.');
     }
@@ -146,7 +142,7 @@ final class ProductReviewContext implements Context
     /**
      * @Then I should be notified that comment is required
      */
-    public function iShouldBeNotifiedThatCommentIsRequired()
+    public function iShouldBeNotifiedThatCommentIsRequired(): void
     {
         Assert::same($this->createPage->getCommentValidationMessage(), 'Review comment should not be blank.');
     }
@@ -154,7 +150,7 @@ final class ProductReviewContext implements Context
     /**
      * @Then I should be notified that I must enter my email
      */
-    public function iShouldBeNotifiedThatIMustEnterMyEmail()
+    public function iShouldBeNotifiedThatIMustEnterMyEmail(): void
     {
         Assert::same($this->createPage->getAuthorValidationMessage(), 'Please enter your email.');
     }
@@ -162,7 +158,7 @@ final class ProductReviewContext implements Context
     /**
      * @Then I should be notified that this email is already registered
      */
-    public function iShouldBeNotifiedThatThisEmailIsAlreadyRegistered()
+    public function iShouldBeNotifiedThatThisEmailIsAlreadyRegistered(): void
     {
         Assert::same(
             $this->createPage->getAuthorValidationMessage(),
@@ -170,10 +166,7 @@ final class ProductReviewContext implements Context
         );
     }
 
-    /**
-     * @return string
-     */
-    private function getVeryLongTitle()
+    private function getVeryLongTitle(): string
     {
         return 'Exegi monumentum aere perennius regalique situ pyramidum altius, quod non imber edax, non Aquilo inpotens possit diruere aut innumerabilis annorum series et fuga temporum. Non omnis moriar multaque pars mei vitabit Libitinam; usque ego postera crescam laude recens, dum Capitoliumscandet cum tacita virgine pontifex.Dicar, qua violens obstrepit Aufiduset qua pauper aquae Daunus agrestiumregnavit populorum, ex humili potensprinceps Aeolium carmen ad Italosdeduxisse modos. Sume superbiamquaesitam meritis et mihi Delphicalauro cinge volens, Melpomene, comam.';
     }

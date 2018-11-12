@@ -35,12 +35,6 @@ final class Requirement
      */
     private $help;
 
-    /**
-     * @param string $label
-     * @param bool $fulfilled
-     * @param bool $required
-     * @param string|null $help
-     */
     public function __construct(string $label, bool $fulfilled, bool $required = true, ?string $help = null)
     {
         $this->label = $label;
@@ -49,33 +43,21 @@ final class Requirement
         $this->help = $help;
     }
 
-    /**
-     * @return string
-     */
     public function getLabel(): string
     {
         return $this->label;
     }
 
-    /**
-     * @return bool
-     */
     public function isFulfilled(): bool
     {
         return $this->fulfilled;
     }
 
-    /**
-     * @return bool
-     */
     public function isRequired(): bool
     {
         return $this->required;
     }
 
-    /**
-     * @return string|null
-     */
     public function getHelp(): ?string
     {
         return $this->help;

@@ -79,9 +79,6 @@ class ShipmentUnit implements ShipmentUnitInterface
         return $this->shippable;
     }
 
-    /**
-     * @param ShippableInterface|null $shippable
-     */
     public function setShippable(?ShippableInterface $shippable): void
     {
         $this->shippable = $shippable;

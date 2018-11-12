@@ -46,12 +46,6 @@ final class CartContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param SummaryPageInterface $summaryPage
-     * @param ShowPageInterface $productShowPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SummaryPageInterface $summaryPage,
@@ -67,7 +61,7 @@ final class CartContext implements Context
     /**
      * @When I see the summary of my cart
      */
-    public function iOpenCartSummaryPage()
+    public function iOpenCartSummaryPage(): void
     {
         $this->summaryPage->open();
     }
@@ -75,7 +69,7 @@ final class CartContext implements Context
     /**
      * @When I update my cart
      */
-    public function iUpdateMyCart()
+    public function iUpdateMyCart(): void
     {
         $this->summaryPage->updateCart();
     }
@@ -84,7 +78,7 @@ final class CartContext implements Context
      * @Then my cart should be empty
      * @Then cart should be empty with no value
      */
-    public function iShouldBeNotifiedThatMyCartIsEmpty()
+    public function iShouldBeNotifiedThatMyCartIsEmpty(): void
     {
         $this->summaryPage->open();
 
@@ -104,7 +98,7 @@ final class CartContext implements Context
     /**
      * @Given I change :productName quantity to :quantity
      */
-    public function iChangeQuantityTo($productName, $quantity)
+    public function iChangeQuantityTo($productName, $quantity): void
     {
         $this->summaryPage->open();
         $this->summaryPage->changeQuantity($productName, $quantity);
@@ -114,7 +108,7 @@ final class CartContext implements Context
      * @Then the grand total value should be :total
      * @Then my cart total should be :total
      */
-    public function myCartTotalShouldBe($total)
+    public function myCartTotalShouldBe($total): void
     {
         $this->summaryPage->open();
 
@@ -124,7 +118,7 @@ final class CartContext implements Context
     /**
      * @Then the grand total value in base currency should be :total
      */
-    public function myBaseCartTotalShouldBe($total)
+    public function myBaseCartTotalShouldBe($total): void
     {
         $this->summaryPage->open();
 
@@ -134,7 +128,7 @@ final class CartContext implements Context
     /**
      * @Then my cart taxes should be :taxTotal
      */
-    public function myCartTaxesShouldBe($taxTotal)
+    public function myCartTaxesShouldBe($taxTotal): void
     {
         $this->summaryPage->open();
 
@@ -145,7 +139,7 @@ final class CartContext implements Context
      * @Then my cart shipping total should be :shippingTotal
      * @Then my cart shipping should be for free
      */
-    public function myCartShippingFeeShouldBe($shippingTotal = '$0.00')
+    public function myCartShippingFeeShouldBe($shippingTotal = '$0.00'): void
     {
         $this->summaryPage->open();
 
@@ -155,7 +149,7 @@ final class CartContext implements Context
     /**
      * @Then my discount should be :promotionsTotal
      */
-    public function myDiscountShouldBe($promotionsTotal)
+    public function myDiscountShouldBe($promotionsTotal): void
     {
         $this->summaryPage->open();
 
@@ -165,7 +159,7 @@ final class CartContext implements Context
     /**
      * @Given /^there should be no shipping fee$/
      */
-    public function thereShouldBeNoShippingFee()
+    public function thereShouldBeNoShippingFee(): void
     {
         $this->summaryPage->open();
 
@@ -181,7 +175,7 @@ final class CartContext implements Context
     /**
      * @Given /^there should be no discount$/
      */
-    public function thereShouldBeNoDiscount()
+    public function thereShouldBeNoDiscount(): void
     {
         $this->summaryPage->open();
 
@@ -198,7 +192,7 @@ final class CartContext implements Context
      * @Then /^(its|theirs) price should be decreased by ("[^"]+")$/
      * @Then /^(product "[^"]+") price should be decreased by ("[^"]+")$/
      */
-    public function itsPriceShouldBeDecreasedBy(ProductInterface $product, $amount)
+    public function itsPriceShouldBeDecreasedBy(ProductInterface $product, $amount): void
     {
         $this->summaryPage->open();
 
@@ -212,7 +206,7 @@ final class CartContext implements Context
     /**
      * @Then /^(product "[^"]+") price should not be decreased$/
      */
-    public function productPriceShouldNotBeDecreased(ProductInterface $product)
+    public function productPriceShouldNotBeDecreased(ProductInterface $product): void
     {
         $this->summaryPage->open();
 
@@ -225,7 +219,7 @@ final class CartContext implements Context
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
      * @When I add product :product to the cart
      */
-    public function iAddProductToTheCart(ProductInterface $product)
+    public function iAddProductToTheCart(ProductInterface $product): void
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
         $this->productShowPage->addToCart();
@@ -237,7 +231,7 @@ final class CartContext implements Context
      * @When /^I add (products "([^"]+)" and "([^"]+)") to the cart$/
      * @When /^I add (products "([^"]+)", "([^"]+)" and "([^"]+)") to the cart$/
      */
-    public function iAddMultipleProductsToTheCart(array $products)
+    public function iAddMultipleProductsToTheCart(array $products): void
     {
         foreach ($products as $product) {
             $this->iAddProductToTheCart($product);
@@ -249,7 +243,7 @@ final class CartContext implements Context
      * @When /^I add "([^"]+)" variant of (this product) to the cart$/
      * @Given I have :variantName variant of product :product in the cart
      */
-    public function iAddProductToTheCartSelectingVariant($variantName, ProductInterface $product)
+    public function iAddProductToTheCartSelectingVariant($variantName, ProductInterface $product): void
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
         $this->productShowPage->addToCartWithVariant($variantName);
@@ -260,7 +254,7 @@ final class CartContext implements Context
     /**
      * @When /^I add (\d+) of (them) to (?:the|my) cart$/
      */
-    public function iAddQuantityOfProductsToTheCart($quantity, ProductInterface $product)
+    public function iAddQuantityOfProductsToTheCart($quantity, ProductInterface $product): void
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
         $this->productShowPage->addToCartWithQuantity($quantity);
@@ -270,7 +264,7 @@ final class CartContext implements Context
      * @Given /^I have(?:| added) (\d+) (products "([^"]+)") (?:to|in) the cart$/
      * @When /^I add(?:|ed)(?:| again) (\d+) (products "([^"]+)") to the cart$/
      */
-    public function iAddProductsToTheCart($quantity, ProductInterface $product)
+    public function iAddProductsToTheCart($quantity, ProductInterface $product): void
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
         $this->productShowPage->addToCartWithQuantity($quantity);
@@ -281,7 +275,7 @@ final class CartContext implements Context
     /**
      * @Then /^I should be(?: on| redirected to) my cart summary page$/
      */
-    public function shouldBeOnMyCartSummaryPage()
+    public function shouldBeOnMyCartSummaryPage(): void
     {
         $this->summaryPage->waitForRedirect(3);
 
@@ -291,7 +285,7 @@ final class CartContext implements Context
     /**
      * @Then I should be notified that the product has been successfully added
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyAdded()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyAdded(): void
     {
         $this->notificationChecker->checkNotification('Item has been added to cart', NotificationType::success());
     }
@@ -299,7 +293,7 @@ final class CartContext implements Context
     /**
      * @Then there should be one item in my cart
      */
-    public function thereShouldBeOneItemInMyCart()
+    public function thereShouldBeOneItemInMyCart(): void
     {
         Assert::true($this->summaryPage->isSingleItemOnPage());
     }
@@ -307,7 +301,7 @@ final class CartContext implements Context
     /**
      * @Then this item should have name :itemName
      */
-    public function thisProductShouldHaveName($itemName)
+    public function thisProductShouldHaveName($itemName): void
     {
         Assert::true($this->summaryPage->hasItemNamed($itemName));
     }
@@ -315,7 +309,7 @@ final class CartContext implements Context
     /**
      * @Then this item should have variant :variantName
      */
-    public function thisItemShouldHaveVariant($variantName)
+    public function thisItemShouldHaveVariant($variantName): void
     {
         Assert::true($this->summaryPage->hasItemWithVariantNamed($variantName));
     }
@@ -323,7 +317,7 @@ final class CartContext implements Context
     /**
      * @Then this item should have code :variantCode
      */
-    public function thisItemShouldHaveCode($variantCode)
+    public function thisItemShouldHaveCode($variantCode): void
     {
         Assert::true($this->summaryPage->hasItemWithCode($variantCode));
     }
@@ -332,7 +326,7 @@ final class CartContext implements Context
      * @Given I have :product with :productOption :productOptionValue in the cart
      * @When I add :product with :productOption :productOptionValue to the cart
      */
-    public function iAddThisProductWithToTheCart(ProductInterface $product, ProductOptionInterface $productOption, $productOptionValue)
+    public function iAddThisProductWithToTheCart(ProductInterface $product, ProductOptionInterface $productOption, $productOptionValue): void
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
 
@@ -342,7 +336,7 @@ final class CartContext implements Context
     /**
      * @Given /^(this product) should have ([^"]+) "([^"]+)"$/
      */
-    public function thisItemShouldHaveOptionValue(ProductInterface $product, $optionName, $optionValue)
+    public function thisItemShouldHaveOptionValue(ProductInterface $product, $optionName, $optionValue): void
     {
         Assert::true($this->summaryPage->hasItemWithOptionValue($product->getName(), $optionName, $optionValue));
     }
@@ -350,7 +344,7 @@ final class CartContext implements Context
     /**
      * @When I clear my cart
      */
-    public function iClearMyCart()
+    public function iClearMyCart(): void
     {
         $this->summaryPage->clearCart();
     }
@@ -358,7 +352,7 @@ final class CartContext implements Context
     /**
      * @Then /^I should see "([^"]+)" with quantity (\d+) in my cart$/
      */
-    public function iShouldSeeWithQuantityInMyCart($productName, $quantity)
+    public function iShouldSeeWithQuantityInMyCart($productName, $quantity): void
     {
         Assert::same($this->summaryPage->getQuantity($productName), (int) $quantity);
     }
@@ -366,7 +360,7 @@ final class CartContext implements Context
     /**
      * @Then /^I should see "([^"]+)" with unit price ("[^"]+") in my cart$/
      */
-    public function iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice)
+    public function iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice): void
     {
         Assert::same($this->summaryPage->getItemUnitPrice($productName), $unitPrice);
     }
@@ -374,7 +368,7 @@ final class CartContext implements Context
     /**
      * @Given I use coupon with code :couponCode
      */
-    public function iUseCouponWithCode($couponCode)
+    public function iUseCouponWithCode($couponCode): void
     {
         $this->summaryPage->applyCoupon($couponCode);
     }
@@ -382,7 +376,7 @@ final class CartContext implements Context
     /**
      * @Then I should be notified that the coupon is invalid
      */
-    public function iShouldBeNotifiedThatCouponIsInvalid()
+    public function iShouldBeNotifiedThatCouponIsInvalid(): void
     {
         Assert::same($this->summaryPage->getPromotionCouponValidationMessage(), 'Coupon code is invalid.');
     }
@@ -390,7 +384,7 @@ final class CartContext implements Context
     /**
      * @Then total price of :productName item should be :productPrice
      */
-    public function thisItemPriceShouldBe($productName, $productPrice)
+    public function thisItemPriceShouldBe($productName, $productPrice): void
     {
         $this->summaryPage->open();
 
@@ -400,7 +394,7 @@ final class CartContext implements Context
     /**
      * @Then /^I should be notified that (this product) cannot be updated$/
      */
-    public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
+    public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
         Assert::true($this->summaryPage->hasProductOutOfStockValidationMessage($product));
     }
@@ -408,7 +402,7 @@ final class CartContext implements Context
     /**
      * @Then /^I should not be notified that (this product) cannot be updated$/
      */
-    public function iShouldNotBeNotifiedThatThisProductCannotBeUpdated(ProductInterface $product)
+    public function iShouldNotBeNotifiedThatThisProductCannotBeUpdated(ProductInterface $product): void
     {
         Assert::false($this->summaryPage->hasProductOutOfStockValidationMessage($product));
     }
@@ -416,7 +410,7 @@ final class CartContext implements Context
     /**
      * @Then my cart's total should be :total
      */
-    public function myCartSTotalShouldBe($total)
+    public function myCartSTotalShouldBe($total): void
     {
         $this->summaryPage->open();
 

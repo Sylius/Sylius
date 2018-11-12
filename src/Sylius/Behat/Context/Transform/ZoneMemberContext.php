@@ -43,12 +43,6 @@ final class ZoneMemberContext implements Context
      */
     private $zoneMemberRepository;
 
-    /**
-     * @param CountryNameConverterInterface $countryNameConverter
-     * @param RepositoryInterface $provinceRepository
-     * @param RepositoryInterface $zoneRepository
-     * @param RepositoryInterface $zoneMemberRepository
-     */
     public function __construct(
         CountryNameConverterInterface $countryNameConverter,
         RepositoryInterface $provinceRepository,
@@ -92,13 +86,9 @@ final class ZoneMemberContext implements Context
     }
 
     /**
-     * @param string $code
-     *
-     * @return ZoneMemberInterface
-     *
      * @throws \InvalidArgumentException
      */
-    private function getZoneMemberByCode($code)
+    private function getZoneMemberByCode(string $code): ZoneMemberInterface
     {
         $zoneMember = $this->zoneMemberRepository->findOneBy(['code' => $code]);
         Assert::notNull(
@@ -110,13 +100,9 @@ final class ZoneMemberContext implements Context
     }
 
     /**
-     * @param string $name
-     *
-     * @return ProvinceInterface
-     *
      * @throws \InvalidArgumentException
      */
-    private function getProvinceByName($name)
+    private function getProvinceByName(string $name): ProvinceInterface
     {
         $province = $this->provinceRepository->findOneBy(['name' => $name]);
         Assert::notNull(
@@ -128,13 +114,9 @@ final class ZoneMemberContext implements Context
     }
 
     /**
-     * @param string $name
-     *
-     * @return ZoneInterface
-     *
      * @throws \InvalidArgumentException
      */
-    private function getZoneByName($name)
+    private function getZoneByName(string $name): ZoneInterface
     {
         $zone = $this->zoneRepository->findOneBy(['name' => $name]);
         Assert::notNull(

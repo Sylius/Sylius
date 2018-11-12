@@ -17,70 +17,27 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @param int $price
-     * @param string $channelName
-     */
-    public function specifyPrice($price, $channelName);
+    public function specifyPrice(int $price, string $channelName);
 
-    /**
-     * @param int $originalPrice
-     * @param string $channelName
-     */
-    public function specifyOriginalPrice($originalPrice, $channelName);
+    public function specifyOriginalPrice(int $originalPrice, string $channelName);
 
-    /**
-     * @param int $height
-     * @param int $width
-     * @param int $depth
-     * @param int $weight
-     */
-    public function specifyHeightWidthDepthAndWeight($height, $width, $depth, $weight);
+    public function specifyHeightWidthDepthAndWeight(int $height, int $width, int $depth, int $weight);
 
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
+    public function specifyCode(string $code);
 
-    /**
-     * @param int $currentStock
-     */
-    public function specifyCurrentStock($currentStock);
+    public function specifyCurrentStock(int $currentStock);
 
-    /**
-     * @param string $name
-     * @param string $language
-     */
-    public function nameItIn($name, $language);
+    public function nameItIn(string $name, string $language);
 
-    /**
-     * @param string $optionName
-     * @param string $optionValue
-     */
-    public function selectOption($optionName, $optionValue);
+    public function selectOption(string $optionName, string $optionValue);
 
-    /**
-     * @param string $name
-     */
-    public function choosePricingCalculator($name);
+    public function choosePricingCalculator(string $name);
 
-    /**
-     * @return string
-     */
-    public function getValidationMessageForForm();
+    public function getValidationMessageForForm(): string;
 
-    /**
-     * @param string $shippingCategoryName
-     */
-    public function selectShippingCategory($shippingCategoryName);
+    public function selectShippingCategory(string $shippingCategoryName);
 
-    /**
-     * @return string
-     */
-    public function getPricesValidationMessage();
+    public function getPricesValidationMessage(): string;
 
-    /**
-     * @param bool $isShippingRequired
-     */
-    public function setShippingRequired($isShippingRequired);
+    public function setShippingRequired(bool $isShippingRequired);
 }

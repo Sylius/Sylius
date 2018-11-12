@@ -30,7 +30,7 @@ final class ShippingMethodApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_shipping_method_when_it_does_not_exist()
+    public function it_does_not_allow_to_show_shipping_method_when_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -43,7 +43,7 @@ final class ShippingMethodApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_shipping_method()
+    public function it_allows_showing_shipping_method(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingMethods = $this->loadFixturesFromFiles([
@@ -58,12 +58,7 @@ final class ShippingMethodApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'shipping_method/show_response', Response::HTTP_OK);
     }
 
-    /**
-     * @param ShippingMethodInterface $shippingMethod
-     *
-     * @return string
-     */
-    private function getShippingMethodUrl(ShippingMethodInterface $shippingMethod)
+    private function getShippingMethodUrl(ShippingMethodInterface $shippingMethod): string
     {
         return '/api/v1/shipping-methods/' . $shippingMethod->getCode();
     }

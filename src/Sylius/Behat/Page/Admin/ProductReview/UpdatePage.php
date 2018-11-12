@@ -20,7 +20,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyTitle($title)
+    public function specifyTitle(string $title): void
     {
         $this->getElement('title')->setValue($title);
     }
@@ -28,7 +28,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyComment($comment)
+    public function specifyComment(string $comment): void
     {
         $this->getElement('comment')->setValue($comment);
     }
@@ -36,7 +36,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseRating($rating)
+    public function chooseRating(string $rating): void
     {
         $position = (int) $rating - 1;
 
@@ -46,7 +46,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRating()
+    public function getRating(): string
     {
         return $this->getElement('checked_rating')->getValue();
     }
@@ -54,7 +54,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getProductName()
+    public function getProductName(): string
     {
         return $this->getElement('product_name')->getHtml();
     }
@@ -62,7 +62,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getCustomerName()
+    public function getCustomerName(): string
     {
         return $this->getElement('customer_name')->getHtml();
     }
@@ -70,7 +70,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'checked_rating' => 'input[checked="checked"]',

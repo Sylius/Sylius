@@ -31,12 +31,6 @@ class OrderShowMenuBuilderEvent extends MenuBuilderEvent
      */
     private $stateMachine;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param ItemInterface $menu
-     * @param OrderInterface $order
-     * @param StateMachineInterface $stateMachine
-     */
     public function __construct(
         FactoryInterface $factory,
         ItemInterface $menu,
@@ -49,17 +43,11 @@ class OrderShowMenuBuilderEvent extends MenuBuilderEvent
         $this->stateMachine = $stateMachine;
     }
 
-    /**
-     * @return OrderInterface
-     */
     public function getOrder(): OrderInterface
     {
         return $this->order;
     }
 
-    /**
-     * @return StateMachineInterface
-     */
     public function getStateMachine(): StateMachineInterface
     {
         return $this->stateMachine;

@@ -87,19 +87,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
      */
     private $defaultLocaleCode;
 
-    /**
-     * @param RepositoryInterface $channelRepository
-     * @param RepositoryInterface $countryRepository
-     * @param RepositoryInterface $currencyRepository
-     * @param RepositoryInterface $localeRepository
-     * @param RepositoryInterface $zoneRepository
-     * @param ChannelFactoryInterface $channelFactory
-     * @param FactoryInterface $countryFactory
-     * @param FactoryInterface $currencyFactory
-     * @param FactoryInterface $localeFactory
-     * @param ZoneFactoryInterface $zoneFactory
-     * @param string $defaultLocaleCode
-     */
     public function __construct(
         RepositoryInterface $channelRepository,
         RepositoryInterface $countryRepository,
@@ -156,9 +143,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         return $defaultData;
     }
 
-    /**
-     * @return ChannelInterface
-     */
     private function createChannel(string $code, string $name): ChannelInterface
     {
         /** @var ChannelInterface $channel */
@@ -168,9 +152,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         return $channel;
     }
 
-    /**
-     * @return CountryInterface
-     */
     private function createCountry(): CountryInterface
     {
         /** @var CountryInterface $country */
@@ -180,11 +161,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         return $country;
     }
 
-    /**
-     * @param string|null $currencyCode
-     *
-     * @return CurrencyInterface
-     */
     private function provideCurrency(?string $currencyCode = null): CurrencyInterface
     {
         $currencyCode = $currencyCode ?? self::DEFAULT_CURRENCY_CODE;
@@ -203,9 +179,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         return $currency;
     }
 
-    /**
-     * @return LocaleInterface
-     */
     private function provideLocale(): LocaleInterface
     {
         /** @var LocaleInterface $locale */
@@ -222,9 +195,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         return $locale;
     }
 
-    /**
-     * @return ZoneInterface
-     */
     private function createZone(): ZoneInterface
     {
         /** @var ZoneInterface $zone */

@@ -17,22 +17,11 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 
 interface LoginPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function hasValidationErrorWith($message);
+    public function hasValidationErrorWith(string $message): bool;
 
     public function logIn();
 
-    /**
-     * @param string $password
-     */
-    public function specifyPassword($password);
+    public function specifyPassword(string $password);
 
-    /**
-     * @param string $username
-     */
-    public function specifyUsername($username);
+    public function specifyUsername(string $username);
 }

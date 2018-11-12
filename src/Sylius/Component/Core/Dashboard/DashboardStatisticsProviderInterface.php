@@ -17,10 +17,5 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 interface DashboardStatisticsProviderInterface
 {
-    /**
-     * @param ChannelInterface $channel
-     *
-     * @return DashboardStatistics
-     */
     public function getStatisticsForChannel(ChannelInterface $channel): DashboardStatistics;
 }

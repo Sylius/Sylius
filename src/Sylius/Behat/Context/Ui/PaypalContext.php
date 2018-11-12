@@ -41,12 +41,6 @@ final class PaypalContext implements Context
      */
     private $paypalApiMocker;
 
-    /**
-     * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
-     * @param ShowPageInterface $orderDetails
-     * @param CompletePageInterface $summaryPage
-     * @param PaypalApiMocker $paypalApiMocker
-     */
     public function __construct(
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
         ShowPageInterface $orderDetails,
@@ -63,9 +57,9 @@ final class PaypalContext implements Context
      * @When /^I confirm my order with paypal payment$/
      * @Given /^I have confirmed my order with paypal payment$/
      */
-    public function iConfirmMyOrderWithPaypalPayment()
+    public function iConfirmMyOrderWithPaypalPayment(): void
     {
-        $this->paypalApiMocker->performActionInApiInitializeScope(function () {
+        $this->paypalApiMocker->performActionInApiInitializeScope(function (): void {
             $this->summaryPage->confirmOrder();
         });
     }
@@ -73,9 +67,9 @@ final class PaypalContext implements Context
     /**
      * @When I sign in to PayPal and pay successfully
      */
-    public function iSignInToPaypalAndPaySuccessfully()
+    public function iSignInToPaypalAndPaySuccessfully(): void
     {
-        $this->paypalApiMocker->performActionInApiSuccessfulScope(function () {
+        $this->paypalApiMocker->performActionInApiSuccessfulScope(function (): void {
             $this->paypalExpressCheckoutPage->pay();
         });
     }
@@ -84,7 +78,7 @@ final class PaypalContext implements Context
      * @Given /^I have cancelled (?:|my )PayPal payment$/
      * @When /^I cancel (?:|my )PayPal payment$/
      */
-    public function iCancelMyPaypalPayment()
+    public function iCancelMyPaypalPayment(): void
     {
         $this->paypalExpressCheckoutPage->cancel();
     }
@@ -92,9 +86,9 @@ final class PaypalContext implements Context
     /**
      * @When /^I try to pay(?:| again)$/
      */
-    public function iTryToPayAgain()
+    public function iTryToPayAgain(): void
     {
-        $this->paypalApiMocker->performActionInApiInitializeScope(function () {
+        $this->paypalApiMocker->performActionInApiInitializeScope(function (): void {
             $this->orderDetails->pay();
         });
     }
@@ -102,7 +96,7 @@ final class PaypalContext implements Context
     /**
      * @Then I should be notified that my payment has been cancelled
      */
-    public function iShouldBeNotifiedThatMyPaymentHasBeenCancelled()
+    public function iShouldBeNotifiedThatMyPaymentHasBeenCancelled(): void
     {
         $this->assertNotification('Payment has been cancelled.');
     }
@@ -110,15 +104,12 @@ final class PaypalContext implements Context
     /**
      * @Then I should be notified that my payment has been completed
      */
-    public function iShouldBeNotifiedThatMyPaymentHasBeenCompleted()
+    public function iShouldBeNotifiedThatMyPaymentHasBeenCompleted(): void
     {
         $this->assertNotification('Payment has been completed.');
     }
 
-    /**
-     * @param string $expectedNotification
-     */
-    private function assertNotification($expectedNotification)
+    private function assertNotification(string $expectedNotification): void
     {
         $notifications = $this->orderDetails->getNotifications();
         $hasNotifications = '';

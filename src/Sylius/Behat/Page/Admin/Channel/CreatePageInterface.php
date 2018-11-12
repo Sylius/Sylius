@@ -21,65 +21,29 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function disable();
 
-    /**
-     * @param string $name
-     */
-    public function nameIt($name);
+    public function nameIt(string $name);
 
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
+    public function specifyCode(string $code);
 
-    /**
-     * @param string $description
-     */
-    public function describeItAs($description);
+    public function describeItAs(string $description);
 
-    /**
-     * @param string $hostname
-     */
-    public function setHostname($hostname);
+    public function setHostname(string $hostname);
 
-    /**
-     * @param string $contactEmail
-     */
-    public function setContactEmail($contactEmail);
+    public function setContactEmail(string $contactEmail);
 
-    /**
-     * @param string $color
-     */
-    public function defineColor($color);
+    public function defineColor(string $color);
 
-    /**
-     * @param string $language
-     */
-    public function chooseLocale($language);
+    public function chooseLocale(string $language);
 
-    /**
-     * @param string $currencyCode
-     */
-    public function chooseCurrency($currencyCode);
+    public function chooseCurrency(string $currencyCode);
 
-    /**
-     * @param string $taxZone
-     */
-    public function chooseDefaultTaxZone($taxZone);
+    public function chooseDefaultTaxZone(string $taxZone);
 
-    /**
-     * @param string $locale
-     */
-    public function chooseDefaultLocale($locale);
+    public function chooseDefaultLocale(string $locale);
 
-    /**
-     * @param string $currency
-     */
-    public function chooseBaseCurrency($currency);
+    public function chooseBaseCurrency(string $currency);
 
-    /**
-     * @param string $taxCalculationStrategy
-     */
-    public function chooseTaxCalculationStrategy($taxCalculationStrategy);
+    public function chooseTaxCalculationStrategy(string $taxCalculationStrategy);
 
     public function allowToSkipShippingStep();
 

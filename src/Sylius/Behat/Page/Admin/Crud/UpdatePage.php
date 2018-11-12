@@ -26,13 +26,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
      */
     private $routeName;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param string $routeName
-     */
-    public function __construct(Session $session, array $parameters, RouterInterface $router, $routeName)
+    public function __construct(Session $session, array $parameters, RouterInterface $router, string $routeName)
     {
         parent::__construct($session, $parameters, $router);
 
@@ -42,7 +36,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function saveChanges()
+    public function saveChanges(): void
     {
         $this->getDocument()->pressButton('sylius_save_changes_button');
     }
@@ -50,7 +44,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getValidationMessage($element)
+    public function getValidationMessage(string $element): string
     {
         $foundElement = $this->getFieldElement($element);
         if (null === $foundElement) {
@@ -68,7 +62,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasResourceValues(array $parameters)
+    public function hasResourceValues(array $parameters): bool
     {
         foreach ($parameters as $element => $value) {
             if ($this->getElement($element)->getValue() !== (string) $value) {
@@ -82,19 +76,15 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return $this->routeName;
     }
 
     /**
-     * @param string $element
-     *
-     * @return \Behat\Mink\Element\NodeElement|null
-     *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement($element)
+    private function getFieldElement(string $element): ?\Behat\Mink\Element\NodeElement
     {
         $element = $this->getElement(StringInflector::nameToCode($element));
         while (null !== $element && !$element->hasClass('field')) {

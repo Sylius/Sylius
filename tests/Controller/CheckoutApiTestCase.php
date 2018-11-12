@@ -34,9 +34,6 @@ class CheckoutApiTestCase extends JsonApiTestCase
         'ACCEPT' => 'application/json',
     ];
 
-    /**
-     * @return mixed
-     */
     protected function createCart()
     {
         $data =
@@ -57,10 +54,7 @@ EOT;
         return $rawResponse['id'];
     }
 
-    /**
-     * @param mixed $cartId
-     */
-    protected function addItemToCart($cartId)
+    protected function addItemToCart($cartId): void
     {
         $url = sprintf('/api/v1/carts/%d/items/', $cartId);
 
@@ -76,10 +70,7 @@ EOT;
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_CREATED);
     }
 
-    /**
-     * @param mixed $cartId
-     */
-    protected function addressOrder($cartId)
+    protected function addressOrder($cartId): void
     {
         $this->loadFixturesFromFile('resources/countries.yml');
 
@@ -111,10 +102,7 @@ EOT;
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /**
-     * @param mixed $cartId
-     */
-    protected function selectOrderShippingMethod($cartId)
+    protected function selectOrderShippingMethod($cartId): void
     {
         $url = sprintf('/api/v1/checkouts/select-shipping/%d', $cartId);
 
@@ -138,10 +126,7 @@ EOT;
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /**
-     * @param mixed $cartId
-     */
-    protected function selectOrderPaymentMethod($cartId)
+    protected function selectOrderPaymentMethod($cartId): void
     {
         $url = sprintf('/api/v1/checkouts/select-payment/%d', $cartId);
 
@@ -165,18 +150,12 @@ EOT;
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /**
-     * @param mixed $cartId
-     */
-    protected function completeOrder($cartId)
+    protected function completeOrder($cartId): void
     {
         $this->client->request('PUT', sprintf('/api/v1/checkouts/complete/%d', $cartId), [], [], static::$authorizedHeaderWithContentType);
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /**
-     * @return mixed
-     */
     protected function prepareOrder()
     {
         $cartId = $this->createCart();
@@ -190,12 +169,7 @@ EOT;
         return $cartId;
     }
 
-    /**
-     * @param mixed $cartId
-     *
-     * @return string
-     */
-    protected function getCheckoutSummaryUrl($cartId)
+    protected function getCheckoutSummaryUrl($cartId): string
     {
         return sprintf('/api/v1/checkouts/%d', $cartId);
     }

@@ -15,23 +15,11 @@ namespace Sylius\Bundle\UiBundle\spec\Fixtures;
 
 interface SampleInterface
 {
-    /**
-     * @return int
-     */
-    public function getInt();
+    public function getInt(): int;
 
-    /**
-     * @return string
-     */
-    public function getString();
+    public function getString(): string;
 
-    /**
-     * @return mixed
-     */
     public function getBizarrelyNamedProperty();
 
-    /**
-     * @return SampleInterface
-     */
-    public function getInnerSample();
+    public function getInnerSample(): self;
 }

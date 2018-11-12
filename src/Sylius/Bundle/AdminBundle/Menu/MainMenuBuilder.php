@@ -32,21 +32,12 @@ final class MainMenuBuilder
      */
     private $eventDispatcher;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
     {
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return ItemInterface
-     */
     public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
@@ -62,9 +53,6 @@ final class MainMenuBuilder
         return $menu;
     }
 
-    /**
-     * @param ItemInterface $menu
-     */
     private function addCatalogSubMenu(ItemInterface $menu): void
     {
         $catalog = $menu
@@ -109,9 +97,6 @@ final class MainMenuBuilder
         ;
     }
 
-    /**
-     * @param ItemInterface $menu
-     */
     private function addCustomersSubMenu(ItemInterface $menu): void
     {
         $customers = $menu
@@ -132,9 +117,6 @@ final class MainMenuBuilder
         ;
     }
 
-    /**
-     * @param ItemInterface $menu
-     */
     private function addMarketingSubMenu(ItemInterface $menu): void
     {
         $marketing = $menu
@@ -155,9 +137,6 @@ final class MainMenuBuilder
         ;
     }
 
-    /**
-     * @param ItemInterface $menu
-     */
     private function addSalesSubMenu(ItemInterface $menu): void
     {
         $sales = $menu
@@ -172,9 +151,6 @@ final class MainMenuBuilder
         ;
     }
 
-    /**
-     * @param ItemInterface $menu
-     */
     private function addConfigurationSubMenu(ItemInterface $menu): void
     {
         $configuration = $menu

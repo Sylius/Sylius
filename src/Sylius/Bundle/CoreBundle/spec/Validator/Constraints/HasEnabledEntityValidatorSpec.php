@@ -19,12 +19,12 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 final class HasEnabledEntityValidatorSpec extends ObjectBehavior
 {
-    public function let(ManagerRegistry $registry)
+    public function let(ManagerRegistry $registry): void
     {
         $this->beConstructedWith($registry);
     }
 
-    public function it_is_a_constraint_validator()
+    public function it_is_a_constraint_validator(): void
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }

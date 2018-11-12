@@ -56,13 +56,6 @@ final class ZoneContext implements Context
      */
     private $zoneMemberFactory;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $zoneRepository
-     * @param ObjectManager $objectManager
-     * @param ZoneFactoryInterface $zoneFactory
-     * @param FactoryInterface $zoneMemberFactory
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $zoneRepository,
@@ -80,7 +73,7 @@ final class ZoneContext implements Context
     /**
      * @Given /^there is a zone "The Rest of the World" containing all other countries$/
      */
-    public function thereIsAZoneTheRestOfTheWorldContainingAllOtherCountries()
+    public function thereIsAZoneTheRestOfTheWorldContainingAllOtherCountries(): void
     {
         $restOfWorldCountries = Intl::getRegionBundle()->getCountryNames('en');
         unset($restOfWorldCountries['US']);
@@ -96,7 +89,7 @@ final class ZoneContext implements Context
     /**
      * @Given default tax zone is :zone
      */
-    public function defaultTaxZoneIs(ZoneInterface $zone)
+    public function defaultTaxZoneIs(ZoneInterface $zone): void
     {
         /** @var ChannelInterface $channel */
         $channel = $this->sharedStorage->get('channel');
@@ -108,7 +101,7 @@ final class ZoneContext implements Context
     /**
      * @Given the store does not have any zones defined
      */
-    public function theStoreDoesNotHaveAnyZonesDefined()
+    public function theStoreDoesNotHaveAnyZonesDefined(): void
     {
         $zones = $this->zoneRepository->findAll();
 
@@ -140,7 +133,7 @@ final class ZoneContext implements Context
     /**
      * @Given the store has a :scope zone :zoneName with code :code
      */
-    public function theStoreHasAScopedZoneWithCode($scope, $zoneName, $code)
+    public function theStoreHasAScopedZoneWithCode($scope, $zoneName, $code): void
     {
         $this->saveZone($this->createZone($zoneName, $code, $scope), $scope . '_zone');
     }
@@ -152,7 +145,7 @@ final class ZoneContext implements Context
     public function itHasTheCountryMemberAndTheCountryMember(
         ZoneInterface $zone,
         CountryInterface $country
-    ) {
+    ): void {
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
         $zone->addMember($this->createZoneMember($country));
 
@@ -166,7 +159,7 @@ final class ZoneContext implements Context
     public function itHasTheProvinceMemberAndTheProvinceMember(
         ZoneInterface $zone,
         ProvinceInterface $province
-    ) {
+    ): void {
         $zone->setType(ZoneInterface::TYPE_PROVINCE);
         $zone->addMember($this->createZoneMember($province));
 
@@ -180,19 +173,14 @@ final class ZoneContext implements Context
     public function itHasTheZoneMemberAndTheZoneMember(
         ZoneInterface $parentZone,
         ZoneInterface $childZone
-    ) {
+    ): void {
         $parentZone->setType(ZoneInterface::TYPE_ZONE);
         $parentZone->addMember($this->createZoneMember($childZone));
 
         $this->objectManager->flush();
     }
 
-    /**
-     * @param CodeAwareInterface $zoneMember
-     *
-     * @return ZoneMemberInterface
-     */
-    private function createZoneMember(CodeAwareInterface $zoneMember)
+    private function createZoneMember(CodeAwareInterface $zoneMember): ZoneMemberInterface
     {
         $code = $zoneMember->getCode();
         /** @var ZoneMemberInterface $zoneMember */
@@ -203,11 +191,7 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @param string $name
-     * @param string|null $code
      * @param string $scope
-     *
-     * @return ZoneInterface
      */
     private function createZone(string $name, ?string $code = null, ?string $scope = Scope::ALL): ZoneInterface
     {
@@ -219,11 +203,7 @@ final class ZoneContext implements Context
         return $zone;
     }
 
-    /**
-     * @param ZoneInterface $zone
-     * @param string $key
-     */
-    private function saveZone($zone, $key)
+    private function saveZone(ZoneInterface $zone, string $key): void
     {
         $this->sharedStorage->set($key, $zone);
         $this->zoneRepository->add($zone);

@@ -39,7 +39,7 @@ final class ProductReviewApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allows_showing_product_review_list_when_access_is_denied()
+    public function it_does_not_allows_showing_product_review_list_when_access_is_denied(): void
     {
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
 
@@ -55,7 +55,7 @@ final class ProductReviewApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allows_showing_product_review_when_it_does_not_exist()
+    public function it_does_not_allows_showing_product_review_when_it_does_not_exist(): void
     {
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
@@ -72,7 +72,7 @@ final class ProductReviewApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_product_review()
+    public function it_allows_showing_product_review(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -92,7 +92,7 @@ final class ProductReviewApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_indexing_product_reviews()
+    public function it_allows_indexing_product_reviews(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -109,7 +109,7 @@ final class ProductReviewApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_creating_product_review()
+    public function it_allows_creating_product_review(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -138,7 +138,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allows_creating_product_review_without_required_fields()
+    public function it_does_not_allows_creating_product_review_without_required_fields(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -155,7 +155,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allows_deleting_product_review_if_it_does_not_exist()
+    public function it_does_not_allows_deleting_product_review_if_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -172,7 +172,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_deleting_product_review()
+    public function it_allows_deleting_product_review(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -200,7 +200,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_information_about_product_review()
+    public function it_allows_updating_information_about_product_review(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -228,7 +228,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_partial_information_about_product_review()
+    public function it_allows_updating_partial_information_about_product_review(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -256,7 +256,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_accepting_product_review()
+    public function it_allows_accepting_product_review(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -276,7 +276,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allows_accepting_product_review_if_it_has_not_new_status()
+    public function it_does_not_allows_accepting_product_review_if_it_has_not_new_status(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -296,7 +296,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_rejecting_product_review()
+    public function it_allows_rejecting_product_review(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -316,7 +316,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allows_rejecting_product_review_if_it_has_not_new_status()
+    public function it_does_not_allows_rejecting_product_review_if_it_has_not_new_status(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productReviewsData = $this->loadFixturesFromFile('resources/product_reviews.yml');
@@ -333,22 +333,11 @@ EOT;
         $this->assertResponse($response, 'product_review/change_status_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    /**
-     * @param ProductInterface $product
-     *
-     * @return string
-     */
     private function getReviewListUrl(ProductInterface $product): string
     {
         return sprintf('/api/v1/products/%s/reviews/', $product->getCode());
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param ReviewInterface $productReview
-     *
-     * @return string
-     */
     private function getReviewUrl(ProductInterface $product, ReviewInterface $productReview): string
     {
         return sprintf('%s%s', $this->getReviewListUrl($product), $productReview->getId());

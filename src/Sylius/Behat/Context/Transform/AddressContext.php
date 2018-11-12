@@ -42,12 +42,6 @@ final class AddressContext implements Context
      */
     private $exampleAddressFactory;
 
-    /**
-     * @param FactoryInterface $addressFactory
-     * @param CountryNameConverterInterface $countryNameConverter
-     * @param AddressRepositoryInterface $addressRepository
-     * @param ExampleFactoryInterface $exampleAddressFactory
-     */
     public function __construct(
         FactoryInterface $addressFactory,
         CountryNameConverterInterface $countryNameConverter,

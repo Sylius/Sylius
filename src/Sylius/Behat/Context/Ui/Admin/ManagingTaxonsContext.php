@@ -49,13 +49,6 @@ final class ManagingTaxonsContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param CreatePageInterface $createPage
-     * @param CreateForParentPageInterface $createForParentPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreatePageInterface $createPage,
@@ -74,7 +67,7 @@ final class ManagingTaxonsContext implements Context
      * @Given I want to create a new taxon
      * @Given I want to see all taxons in store
      */
-    public function iWantToCreateANewTaxon()
+    public function iWantToCreateANewTaxon(): void
     {
         $this->createPage->open();
     }
@@ -82,7 +75,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Given I want to create a new taxon for :taxon
      */
-    public function iWantToCreateANewTaxonForParent(TaxonInterface $taxon)
+    public function iWantToCreateANewTaxonForParent(TaxonInterface $taxon): void
     {
         $this->createForParentPage->open(['id' => $taxon->getId()]);
     }
@@ -90,7 +83,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Given /^I want to modify the ("[^"]+" taxon)$/
      */
-    public function iWantToModifyATaxon(TaxonInterface $taxon)
+    public function iWantToModifyATaxon(TaxonInterface $taxon): void
     {
         $this->sharedStorage->set('taxon', $taxon);
 
@@ -101,7 +94,7 @@ final class ManagingTaxonsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs($code = null): void
     {
         $this->createPage->specifyCode($code);
     }
@@ -111,7 +104,7 @@ final class ManagingTaxonsContext implements Context
      * @When I rename it to :name in :language
      * @When I do not specify its name
      */
-    public function iNameItIn($name = null, $language = 'en_US')
+    public function iNameItIn($name = null, $language = 'en_US'): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -123,7 +116,7 @@ final class ManagingTaxonsContext implements Context
      * @When I do not specify its slug
      * @When I set its slug to :slug in :language
      */
-    public function iSetItsSlugToIn($slug = null, $language = 'en_US')
+    public function iSetItsSlugToIn($slug = null, $language = 'en_US'): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -134,7 +127,7 @@ final class ManagingTaxonsContext implements Context
      * @Then the slug field should not be editable
      * @Then the slug field should (also )not be editable in :language
      */
-    public function theSlugFieldShouldNotBeEditable($language = 'en_US')
+    public function theSlugFieldShouldNotBeEditable($language = 'en_US'): void
     {
         Assert::true($this->updatePage->isSlugReadonly($language));
     }
@@ -143,7 +136,7 @@ final class ManagingTaxonsContext implements Context
      * @When I enable slug modification
      * @When I enable slug modification in :language
      */
-    public function iEnableSlugModification($language = 'en_US')
+    public function iEnableSlugModification($language = 'en_US'): void
     {
         $this->updatePage->activateLanguageTab($language);
         $this->updatePage->enableSlugModification($language);
@@ -152,7 +145,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I change its description to :description in :language
      */
-    public function iChangeItsDescriptionToIn($description, $language)
+    public function iChangeItsDescriptionToIn($description, $language): void
     {
         $this->updatePage->describeItAs($description, $language);
     }
@@ -160,7 +153,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I describe it as :description in :language
      */
-    public function iDescribeItAs($description, $language)
+    public function iDescribeItAs($description, $language): void
     {
         $this->createPage->describeItAs($description, $language);
     }
@@ -168,7 +161,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Given /^I change its (parent taxon to "[^"]+")$/
      */
-    public function iChangeItsParentTaxonTo(TaxonInterface $taxon)
+    public function iChangeItsParentTaxonTo(TaxonInterface $taxon): void
     {
         $this->updatePage->chooseParent($taxon);
     }
@@ -176,7 +169,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I delete taxon named :name
      */
-    public function iDeleteTaxonNamed($name)
+    public function iDeleteTaxonNamed($name): void
     {
         $this->createPage->open();
         $this->createPage->deleteTaxonOnPageByName($name);
@@ -186,7 +179,7 @@ final class ManagingTaxonsContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -195,7 +188,7 @@ final class ManagingTaxonsContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -203,7 +196,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then /^the ("[^"]+" taxon) should appear in the registry$/
      */
-    public function theTaxonShouldAppearInTheRegistry(TaxonInterface $taxon)
+    public function theTaxonShouldAppearInTheRegistry(TaxonInterface $taxon): void
     {
         $this->updatePage->open(['id' => $taxon->getId()]);
         Assert::true($this->updatePage->hasResourceValues(['code' => $taxon->getCode()]));
@@ -212,7 +205,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then this taxon :element should be :value
      */
-    public function thisTaxonElementShouldBe($element, $value)
+    public function thisTaxonElementShouldBe($element, $value): void
     {
         Assert::true($this->updatePage->hasResourceValues([$element => $value]));
     }
@@ -220,7 +213,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then this taxon should have slug :value in :language
      */
-    public function thisTaxonElementShouldHaveSlugIn($value, $language = null)
+    public function thisTaxonElementShouldHaveSlugIn($value, $language = null): void
     {
         if (null !== $language) {
             $this->updatePage->activateLanguageTab($language);
@@ -232,7 +225,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then the code field should be disabled
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function theCodeFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -240,7 +233,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then /^the slug of the ("[^"]+" taxon) should(?:| still) be "([^"]+)"$/
      */
-    public function productSlugShouldBe(TaxonInterface $taxon, $slug)
+    public function productSlugShouldBe(TaxonInterface $taxon, $slug): void
     {
         $this->updatePage->open(['id' => $taxon->getId()]);
 
@@ -250,7 +243,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then /^this taxon should (belongs to "[^"]+")$/
      */
-    public function thisTaxonShouldBelongsTo(TaxonInterface $taxon)
+    public function thisTaxonShouldBelongsTo(TaxonInterface $taxon): void
     {
         Assert::true($this->updatePage->hasResourceValues(['parent' => $taxon->getCode()]));
     }
@@ -258,7 +251,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Given it should not belong to any other taxon
      */
-    public function itShouldNotBelongToAnyOtherTaxon()
+    public function itShouldNotBelongToAnyOtherTaxon(): void
     {
         Assert::isEmpty($this->updatePage->getParent());
     }
@@ -266,7 +259,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then I should be notified that taxon with this code already exists
      */
-    public function iShouldBeNotifiedThatTaxonWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatTaxonWithThisCodeAlreadyExists(): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -276,7 +269,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then I should be notified that taxon slug must be unique
      */
-    public function iShouldBeNotifiedThatTaxonSlugMustBeUnique()
+    public function iShouldBeNotifiedThatTaxonSlugMustBeUnique(): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -286,7 +279,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired($element): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -296,7 +289,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then /^there should(?:| still) be only one taxon with code "([^"]+)"$/
      */
-    public function thereShouldStillBeOnlyOneTaxonWithCode($code)
+    public function thereShouldStillBeOnlyOneTaxonWithCode($code): void
     {
         Assert::true($this->updatePage->hasResourceValues(['code' => $code]));
     }
@@ -305,7 +298,7 @@ final class ManagingTaxonsContext implements Context
      * @Then /^taxon named "([^"]+)" should not be added$/
      * @Then the taxon named :name should no longer exist in the registry
      */
-    public function taxonNamedShouldNotBeAdded($name)
+    public function taxonNamedShouldNotBeAdded($name): void
     {
         Assert::same($this->createPage->countTaxonsByName($name), 0);
     }
@@ -313,7 +306,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then /^I should see (\d+) taxons on the list$/
      */
-    public function iShouldSeeTaxonsInTheList($number)
+    public function iShouldSeeTaxonsInTheList($number): void
     {
         Assert::same($this->createPage->countTaxons(), (int) $number);
     }
@@ -321,7 +314,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then I should see the taxon named :name in the list
      */
-    public function iShouldSeeTheTaxonNamedInTheList($name)
+    public function iShouldSeeTheTaxonNamedInTheList($name): void
     {
         Assert::same($this->createPage->countTaxonsByName($name), 1);
     }
@@ -330,7 +323,7 @@ final class ManagingTaxonsContext implements Context
      * @When I attach the :path image with :type type
      * @When I attach the :path image
      */
-    public function iAttachImageWithType($path, $type = null)
+    public function iAttachImageWithType($path, $type = null): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -340,7 +333,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then /^(?:it|this taxon) should(?:| also) have an image with "([^"]*)" type$/
      */
-    public function thisTaxonShouldHaveAnImageWithType($type)
+    public function thisTaxonShouldHaveAnImageWithType($type): void
     {
         Assert::true($this->updatePage->isImageWithTypeDisplayed($type));
     }
@@ -348,7 +341,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then /^(?:this taxon|it) should not have(?:| also) any images with "([^"]*)" type$/
      */
-    public function thisTaxonShouldNotHaveAnImageWithType($code)
+    public function thisTaxonShouldNotHaveAnImageWithType($code): void
     {
         Assert::false($this->updatePage->isImageWithTypeDisplayed($code));
     }
@@ -356,7 +349,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When /^I(?:| also) remove an image with "([^"]*)" type$/
      */
-    public function iRemoveAnImageWithType($code)
+    public function iRemoveAnImageWithType($code): void
     {
         $this->updatePage->removeImageWithType($code);
     }
@@ -364,7 +357,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I remove the first image
      */
-    public function iRemoveTheFirstImage()
+    public function iRemoveTheFirstImage(): void
     {
         $this->updatePage->removeFirstImage();
     }
@@ -372,7 +365,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then /^(this taxon) should not have any images$/
      */
-    public function thisTaxonShouldNotHaveAnyImages(TaxonInterface $taxon)
+    public function thisTaxonShouldNotHaveAnyImages(TaxonInterface $taxon): void
     {
         $this->iWantToModifyATaxon($taxon);
 
@@ -382,7 +375,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I change the image with the :type type to :path
      */
-    public function iChangeItsImageToPathForTheType($path, $type)
+    public function iChangeItsImageToPathForTheType($path, $type): void
     {
         $this->updatePage->changeImageWithType($type, $path);
     }
@@ -390,7 +383,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I change the first image type to :type
      */
-    public function iChangeTheFirstImageTypeTo($type)
+    public function iChangeTheFirstImageTypeTo($type): void
     {
         $this->updatePage->modifyFirstImageType($type);
     }
@@ -399,7 +392,7 @@ final class ManagingTaxonsContext implements Context
      * @Then /^(this taxon) should have only one image$/
      * @Then /^(this taxon) should(?:| still) have (\d+) images?$/
      */
-    public function thereShouldStillBeOnlyOneImageInThisTaxon(TaxonInterface $taxon, $count = 1)
+    public function thereShouldStillBeOnlyOneImageInThisTaxon(TaxonInterface $taxon, $count = 1): void
     {
         $this->iWantToModifyATaxon($taxon);
 

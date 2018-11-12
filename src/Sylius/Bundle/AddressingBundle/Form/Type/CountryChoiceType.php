@@ -27,9 +27,6 @@ final class CountryChoiceType extends AbstractType
      */
     private $countryRepository;
 
-    /**
-     * @param RepositoryInterface $countryRepository
-     */
     public function __construct(RepositoryInterface $countryRepository)
     {
         $this->countryRepository = $countryRepository;

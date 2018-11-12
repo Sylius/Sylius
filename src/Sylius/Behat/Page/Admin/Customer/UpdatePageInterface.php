@@ -21,55 +21,25 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function disable();
 
-    /**
-     * @return string
-     */
-    public function getFullName();
+    public function getFullName(): string;
 
-    /**
-     * @param string $firstName
-     */
-    public function changeFirstName($firstName);
+    public function changeFirstName(string $firstName);
 
-    /**
-     * @return string
-     */
-    public function getFirstName();
+    public function getFirstName(): string;
 
-    /**
-     * @param string $lastName
-     */
-    public function changeLastName($lastName);
+    public function changeLastName(string $lastName);
 
-    /**
-     * @return string
-     */
-    public function getLastName();
+    public function getLastName(): string;
 
-    /**
-     * @param string $email
-     */
-    public function changeEmail($email);
+    public function changeEmail(string $email);
 
-    /**
-     * @param string $password
-     */
-    public function changePassword($password);
+    public function changePassword(string $password);
 
-    /**
-     * @return string
-     */
-    public function getPassword();
+    public function getPassword(): string;
 
     public function subscribeToTheNewsletter();
 
-    /**
-     * @return bool
-     */
-    public function isSubscribedToTheNewsletter();
+    public function isSubscribedToTheNewsletter(): bool;
 
-    /**
-     * @return string
-     */
-    public function getGroupName();
+    public function getGroupName(): string;
 }

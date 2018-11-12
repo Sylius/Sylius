@@ -21,7 +21,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_account_address_book_create';
     }
@@ -29,7 +29,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillAddressData(AddressInterface $address)
+    public function fillAddressData(AddressInterface $address): void
     {
         $this->getElement('first_name')->setValue($address->getFirstName());
         $this->getElement('last_name')->setValue($address->getLastName());
@@ -42,7 +42,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectCountry($name)
+    public function selectCountry(string $name): void
     {
         $this->getElement('country')->selectOption($name);
 
@@ -54,7 +54,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addAddress()
+    public function addAddress(): void
     {
         $this->getElement('add_button')->press();
     }
@@ -62,7 +62,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasProvinceValidationMessage()
+    public function hasProvinceValidationMessage(): bool
     {
         return null !== $this->getDocument()->find('css', '.sylius-validation-error:contains("province")');
     }
@@ -70,7 +70,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function countValidationMessages()
+    public function countValidationMessages(): int
     {
         return count($this->getDocument()->findAll('css', '.sylius-validation-error'));
     }
@@ -78,7 +78,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'add_button' => 'button:contains("Add")',

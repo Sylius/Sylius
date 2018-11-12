@@ -18,11 +18,5 @@ use Sylius\Component\Grid\Parameters;
 
 interface GridViewFactoryInterface
 {
-    /**
-     * @param Grid $grid
-     * @param Parameters $parameters
-     *
-     * @return GridViewInterface
-     */
     public function create(Grid $grid, Parameters $parameters): GridViewInterface;
 }

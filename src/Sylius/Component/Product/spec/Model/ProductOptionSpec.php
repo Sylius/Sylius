@@ -20,7 +20,7 @@ use Sylius\Component\Product\Model\ProductOptionValue;
 
 final class ProductOptionSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->setCurrentLocale('en_US');
         $this->setFallbackLocale('en_US');

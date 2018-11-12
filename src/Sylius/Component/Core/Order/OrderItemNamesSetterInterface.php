@@ -17,8 +17,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface OrderItemNamesSetterInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function __invoke(OrderInterface $order): void;
 }

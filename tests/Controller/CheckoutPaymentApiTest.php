@@ -20,7 +20,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_denies_order_payment_selection_for_non_authenticated_user()
+    public function it_denies_order_payment_selection_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', '/api/v1/checkouts/select-payment/1');
 
@@ -31,7 +31,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_select_payment_for_unexisting_order()
+    public function it_does_not_allow_to_select_payment_for_unexisting_order(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -44,7 +44,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_select_payment_for_order_that_is_not_addressed_and_has_no_shipping_method_selected()
+    public function it_does_not_allow_to_select_payment_for_order_that_is_not_addressed_and_has_no_shipping_method_selected(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -62,7 +62,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_select_unexisting_payment_method()
+    public function it_does_not_allow_to_select_unexisting_payment_method(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -93,7 +93,7 @@ EOT;
     /**
      * @test
      */
-    public function it_provides_details_about_available_payment_methods()
+    public function it_provides_details_about_available_payment_methods(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -112,7 +112,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_provide_details_about_available_payment_methods_before_addressing()
+    public function it_does_not_provide_details_about_available_payment_methods_before_addressing(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -129,7 +129,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_provide_details_about_available_payment_methods_before_choosing_shipping_method()
+    public function it_does_not_provide_details_about_available_payment_methods_before_choosing_shipping_method(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -147,7 +147,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_select_payment_method_for_order()
+    public function it_allows_to_select_payment_method_for_order(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -187,7 +187,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_change_payment_method_after_its_already_been_chosen()
+    public function it_allows_to_change_payment_method_after_its_already_been_chosen(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/checkout.yml');
@@ -221,12 +221,7 @@ EOT;
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
 
-    /**
-     * @param mixed $cartId
-     *
-     * @return string
-     */
-    private function getSelectPaymentUrl($cartId)
+    private function getSelectPaymentUrl($cartId): string
     {
         return sprintf('/api/v1/checkouts/select-payment/%d', $cartId);
     }

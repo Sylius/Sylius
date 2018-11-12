@@ -27,9 +27,6 @@ final class CouponGenerationAmountValidator extends ConstraintValidator
      */
     private $generationPolicy;
 
-    /**
-     * @param GenerationPolicyInterface $generationPolicy
-     */
     public function __construct(GenerationPolicyInterface $generationPolicy)
     {
         $this->generationPolicy = $generationPolicy;

@@ -24,7 +24,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isOptionAvailable($name)
+    public function isOptionAvailable(string $name): bool
     {
         try {
             $this->chooseName($name);

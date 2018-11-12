@@ -109,7 +109,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order
-    ) {
+    ): void {
         $order->getPayments()->willReturn(new ArrayCollection([]));
         $order->getTotal()->willReturn(0);
 

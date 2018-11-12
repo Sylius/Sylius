@@ -27,9 +27,6 @@ final class ShipmentType extends AbstractType
      */
     private $dataClass;
 
-    /**
-     * @param string $dataClass
-     */
     public function __construct(string $dataClass)
     {
         $this->dataClass = $dataClass;

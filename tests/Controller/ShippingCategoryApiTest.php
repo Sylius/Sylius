@@ -38,7 +38,7 @@ final class ShippingCategoryApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_creating_shipping_category_for_non_authenticated_user()
+    public function it_denies_creating_shipping_category_for_non_authenticated_user(): void
     {
         $this->client->request('POST', '/api/v1/shipping-categories/');
 
@@ -49,7 +49,7 @@ final class ShippingCategoryApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_shipping_category_without_specifying_required_data()
+    public function it_does_not_allow_to_create_shipping_category_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -62,7 +62,7 @@ final class ShippingCategoryApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_shipping_category()
+    public function it_allows_to_create_shipping_category(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -84,7 +84,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_shipping_categories_for_non_authenticated_user()
+    public function it_denies_getting_shipping_categories_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/shipping-categories/');
 
@@ -95,7 +95,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_shipping_categories_list()
+    public function it_allows_to_get_shipping_categories_list(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -109,7 +109,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_shipping_category_for_non_authenticated_user()
+    public function it_denies_getting_shipping_category_for_non_authenticated_user(): void
     {
         $this->client->request('GET', '/api/v1/shipping-categories/1');
 
@@ -120,7 +120,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_a_shipping_category_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_a_shipping_category_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -133,7 +133,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_shipping_category()
+    public function it_allows_to_get_shipping_category(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -150,7 +150,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_updating_shipping_category_for_non_authenticated_user()
+    public function it_denies_updating_shipping_category_for_non_authenticated_user(): void
     {
         $this->client->request('PUT', '/api/v1/shipping-categories/1');
 
@@ -161,7 +161,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_updating_shipping_category_which_does_not_exist()
+    public function it_returns_not_found_response_when_updating_shipping_category_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -174,7 +174,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_update_shipping_category_without_specifying_required_data()
+    public function it_does_not_allow_to_update_shipping_category_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -191,7 +191,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_shipping_category()
+    public function it_allows_to_update_shipping_category(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -221,7 +221,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_partially_updating_shipping_category_which_does_not_exist()
+    public function it_returns_not_found_response_when_partially_updating_shipping_category_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -234,7 +234,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_partially_update_shipping_category()
+    public function it_allows_to_partially_update_shipping_category(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -264,7 +264,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_delete_shipping_category_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_delete_shipping_category_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -277,7 +277,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_shipping_category()
+    public function it_allows_to_delete_shipping_category(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
@@ -296,12 +296,7 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    /**
-     * @param ShippingCategoryInterface $shippingCategory
-     *
-     * @return string
-     */
-    private function getShippingCategoryUrl(ShippingCategoryInterface $shippingCategory)
+    private function getShippingCategoryUrl(ShippingCategoryInterface $shippingCategory): string
     {
         return '/api/v1/shipping-categories/' . $shippingCategory->getCode();
     }

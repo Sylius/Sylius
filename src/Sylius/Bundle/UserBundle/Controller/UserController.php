@@ -37,11 +37,6 @@ use Webmozart\Assert\Assert;
 
 class UserController extends ResourceController
 {
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function changePasswordAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -70,11 +65,6 @@ class UserController extends ResourceController
         );
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function requestPasswordResetTokenAction(Request $request): Response
     {
         /** @var GeneratorInterface $generator */
@@ -83,11 +73,6 @@ class UserController extends ResourceController
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function requestPasswordResetPinAction(Request $request): Response
     {
         /** @var GeneratorInterface $generator */
@@ -96,12 +81,6 @@ class UserController extends ResourceController
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
     }
 
-    /**
-     * @param Request $request
-     * @param string $token
-     *
-     * @return Response
-     */
     public function resetPasswordAction(Request $request, string $token): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -138,12 +117,6 @@ class UserController extends ResourceController
         );
     }
 
-    /**
-     * @param Request $request
-     * @param string $token
-     *
-     * @return Response
-     */
     public function verifyAction(Request $request, string $token): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -184,11 +157,6 @@ class UserController extends ResourceController
         return $response;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function requestVerificationTokenAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -233,13 +201,6 @@ class UserController extends ResourceController
         return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
     }
 
-    /**
-     * @param Request $request
-     * @param GeneratorInterface $generator
-     * @param string $senderEvent
-     *
-     * @return Response
-     */
     protected function prepareResetPasswordRequest(Request $request, GeneratorInterface $generator, string $senderEvent): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -303,11 +264,7 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param RequestConfiguration $configuration
-     * @param string $type
      * @param object $object
-     *
-     * @return FormInterface
      */
     protected function createResourceForm(
         RequestConfiguration $configuration,
@@ -321,13 +278,6 @@ class UserController extends ResourceController
         return $this->container->get('form.factory')->create($type, $object);
     }
 
-    /**
-     * @param Request $request
-     * @param RequestConfiguration $configuration
-     * @param UserInterface $user
-     *
-     * @return Response
-     */
     protected function handleExpiredToken(Request $request, RequestConfiguration $configuration, UserInterface $user): Response
     {
         $user->setPasswordResetToken(null);
@@ -347,11 +297,6 @@ class UserController extends ResourceController
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
     }
 
-    /**
-     * @param GeneratorInterface $generator
-     * @param UserInterface $user
-     * @param string $senderEvent
-     */
     protected function handleResetPasswordRequest(
         GeneratorInterface $generator,
         UserInterface $user,
@@ -369,14 +314,6 @@ class UserController extends ResourceController
         $dispatcher->dispatch($senderEvent, new GenericEvent($user));
     }
 
-    /**
-     * @param Request $request
-     * @param RequestConfiguration $configuration
-     * @param UserInterface $user
-     * @param string $newPassword
-     *
-     * @return Response
-     */
     protected function handleResetPassword(
         Request $request,
         RequestConfiguration $configuration,
@@ -405,14 +342,6 @@ class UserController extends ResourceController
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
     }
 
-    /**
-     * @param Request $request
-     * @param RequestConfiguration $configuration
-     * @param UserInterface $user
-     * @param string $newPassword
-     *
-     * @return Response
-     */
     protected function handleChangePassword(
         Request $request,
         RequestConfiguration $configuration,
@@ -439,9 +368,6 @@ class UserController extends ResourceController
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
     }
 
-    /**
-     * @return UserInterface|null
-     */
     protected function getUser(): ?UserInterface
     {
         $user = parent::getUser();
@@ -457,13 +383,6 @@ class UserController extends ResourceController
         return null;
     }
 
-    /**
-     * @param Request $request
-     * @param string $attribute
-     * @param mixed $default
-     *
-     * @return mixed
-     */
     private function getSyliusAttribute(Request $request, string $attribute, $default = null)
     {
         $attributes = $request->attributes->get('_sylius');

@@ -23,9 +23,6 @@ final class SuiteLoader implements SuiteLoaderInterface
      */
     private $fixtureLoader;
 
-    /**
-     * @param FixtureLoaderInterface $fixtureLoader
-     */
     public function __construct(FixtureLoaderInterface $fixtureLoader)
     {
         $this->fixtureLoader = $fixtureLoader;

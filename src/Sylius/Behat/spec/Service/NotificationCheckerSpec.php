@@ -23,17 +23,17 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 
 final class NotificationCheckerSpec extends ObjectBehavior
 {
-    function let(NotificationAccessorInterface $notificationAccessor)
+    function let(NotificationAccessorInterface $notificationAccessor): void
     {
         $this->beConstructedWith($notificationAccessor);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(NotificationChecker::class);
     }
 
-    function it_implements_notification_checker_interface()
+    function it_implements_notification_checker_interface(): void
     {
         $this->shouldImplement(NotificationCheckerInterface::class);
     }
@@ -42,7 +42,7 @@ final class NotificationCheckerSpec extends ObjectBehavior
         NotificationAccessorInterface $notificationAccessor,
         NodeElement $firstMessage,
         NodeElement $secondMessage
-    ) {
+    ): void {
         $notificationAccessor->getMessageElements()->willReturn([$firstMessage, $secondMessage]);
 
         $firstMessage->getText()->willReturn('Some resource has been successfully edited.');
@@ -58,7 +58,7 @@ final class NotificationCheckerSpec extends ObjectBehavior
         NotificationAccessorInterface $notificationAccessor,
         NodeElement $firstMessage,
         NodeElement $secondMessage
-    ) {
+    ): void {
         $notificationAccessor->getMessageElements()->willReturn([$firstMessage, $secondMessage]);
 
         $firstMessage->getText()->willReturn('Some resource has been successfully edited.');
@@ -74,7 +74,7 @@ final class NotificationCheckerSpec extends ObjectBehavior
         NotificationAccessorInterface $notificationAccessor,
         NodeElement $firstMessage,
         NodeElement $secondMessage
-    ) {
+    ): void {
         $notificationAccessor->getMessageElements()->willReturn([$firstMessage, $secondMessage]);
 
         $firstMessage->getText()->willReturn('Some resource has been successfully edited.');

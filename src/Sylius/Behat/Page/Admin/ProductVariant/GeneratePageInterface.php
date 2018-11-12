@@ -19,36 +19,13 @@ interface GeneratePageInterface extends SymfonyPageInterface
 {
     public function generate();
 
-    /**
-     * @param int $nth
-     * @param int $price
-     * @param string $channelName
-     */
-    public function specifyPrice($nth, $price, $channelName);
+    public function specifyPrice(int $nth, int $price, string $channelName);
 
-    /**
-     * @param int $nth
-     * @param string $code
-     */
-    public function specifyCode($nth, $code);
+    public function specifyCode(int $nth, string $code);
 
-    /**
-     * @param int $nth
-     */
-    public function removeVariant($nth);
+    public function removeVariant(int $nth);
 
-    /**
-     * @param string $element
-     * @param int $position
-     *
-     * @return string
-     */
-    public function getValidationMessage($element, $position);
+    public function getValidationMessage(string $element, int $position): string;
 
-    /**
-     * @param string $position
-     *
-     * @return string
-     */
-    public function getPricesValidationMessage($position);
+    public function getPricesValidationMessage(string $position): string;
 }

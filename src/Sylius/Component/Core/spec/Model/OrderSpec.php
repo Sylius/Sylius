@@ -362,11 +362,11 @@ final class OrderSpec extends ObjectBehavior
     {
         $item1->getQuantity()->willReturn(4);
         $item1->getTotal()->willReturn(420);
-        $item1->setOrder($this)->will(function () {});
+        $item1->setOrder($this)->will(function (): void {});
 
         $item2->getQuantity()->willReturn(3);
         $item2->getTotal()->willReturn(666);
-        $item2->setOrder($this)->will(function () {});
+        $item2->setOrder($this)->will(function (): void {});
 
         $this->addItem($item1);
         $this->addItem($item2);

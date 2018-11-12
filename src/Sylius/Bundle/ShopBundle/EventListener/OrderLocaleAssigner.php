@@ -25,17 +25,11 @@ final class OrderLocaleAssigner
      */
     private $localeContext;
 
-    /**
-     * @param LocaleContextInterface $localeContext
-     */
     public function __construct(LocaleContextInterface $localeContext)
     {
         $this->localeContext = $localeContext;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function assignLocale(ResourceControllerEvent $event): void
     {
         /** @var OrderInterface $order */

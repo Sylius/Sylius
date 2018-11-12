@@ -29,7 +29,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setHostname($hostname)
+    public function setHostname(string $hostname): void
     {
         $this->getDocument()->fillField('Hostname', $hostname);
     }
@@ -37,7 +37,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setContactEmail($contactEmail)
+    public function setContactEmail(string $contactEmail): void
     {
         $this->getDocument()->fillField('Contact email', $contactEmail);
     }
@@ -45,7 +45,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function defineColor($color)
+    public function defineColor(string $color): void
     {
         $this->getDocument()->fillField('Color', $color);
     }
@@ -53,7 +53,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseCurrency($currencyCode)
+    public function chooseCurrency(string $currencyCode): void
     {
         $this->getDocument()->selectFieldOption('Currencies', $currencyCode);
     }
@@ -61,7 +61,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseLocale($language)
+    public function chooseLocale(string $language): void
     {
         $this->getDocument()->selectFieldOption('Locales', $language);
     }
@@ -69,7 +69,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseDefaultTaxZone($taxZone)
+    public function chooseDefaultTaxZone(string $taxZone): void
     {
         $this->getDocument()->selectFieldOption('Default tax zone', $taxZone);
     }
@@ -77,7 +77,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseDefaultLocale($locale)
+    public function chooseDefaultLocale(string $locale): void
     {
         if (null !== $locale) {
             $this->getElement('locales')->selectOption($locale);
@@ -88,7 +88,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseBaseCurrency($currency)
+    public function chooseBaseCurrency(string $currency): void
     {
         if (null !== $currency) {
             $this->getElement('currencies')->selectOption($currency);
@@ -99,17 +99,17 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseTaxCalculationStrategy($taxZone)
+    public function chooseTaxCalculationStrategy(string $taxZone): void
     {
         $this->getDocument()->selectFieldOption('Tax calculation strategy', $taxZone);
     }
 
-    public function allowToSkipShippingStep()
+    public function allowToSkipShippingStep(): void
     {
         $this->getDocument()->checkField('Skip shipping step if only one shipping method is available?');
     }
 
-    public function allowToSkipPaymentStep()
+    public function allowToSkipPaymentStep(): void
     {
         $this->getDocument()->checkField('Skip payment step if only one payment method is available?');
     }
@@ -125,7 +125,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_channel_code',

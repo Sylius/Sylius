@@ -18,37 +18,20 @@ use Sylius\Behat\Page\PageInterface;
 
 interface ProfileUpdatePageInterface extends PageInterface
 {
-    /**
-     * @param string $firstName
-     */
-    public function specifyFirstName($firstName);
+    public function specifyFirstName(string $firstName);
 
-    /**
-     * @param string $lastName
-     */
-    public function specifyLastName($lastName);
+    public function specifyLastName(string $lastName);
 
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
+    public function specifyEmail(string $email);
 
     public function saveChanges();
 
     /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
-     *
      * @throws ElementNotFoundException
      */
-    public function checkValidationMessageFor($element, $message);
+    public function checkValidationMessageFor(string $element, string $message): bool;
 
     public function subscribeToTheNewsletter();
 
-    /**
-     * @return bool
-     */
-    public function isSubscribedToTheNewsletter();
+    public function isSubscribedToTheNewsletter(): bool;
 }

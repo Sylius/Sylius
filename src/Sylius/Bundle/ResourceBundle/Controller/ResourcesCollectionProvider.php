@@ -31,10 +31,6 @@ final class ResourcesCollectionProvider implements ResourcesCollectionProviderIn
      */
     private $pagerfantaRepresentationFactory;
 
-    /**
-     * @param ResourcesResolverInterface $resourcesResolver
-     * @param PagerfantaFactory $pagerfantaRepresentationFactory
-     */
     public function __construct(ResourcesResolverInterface $resourcesResolver, PagerfantaFactory $pagerfantaRepresentationFactory)
     {
         $this->resourcesResolver = $resourcesResolver;
@@ -80,11 +76,7 @@ final class ResourcesCollectionProvider implements ResourcesCollectionProviderIn
     }
 
     /**
-     * @param int|null $requestLimit
-     * @param int $configurationLimit
      * @param int[] $gridLimits
-     *
-     * @return int
      */
     private function resolveMaxPerPage(?int $requestLimit, int $configurationLimit, array $gridLimits = []): int
     {

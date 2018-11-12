@@ -17,13 +17,7 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @param string $name
-     */
-    public function chooseName($name);
+    public function chooseName(string $name);
 
-    /**
-     * @param float $exchangeRate
-     */
-    public function specifyExchangeRate($exchangeRate);
+    public function specifyExchangeRate(float $exchangeRate);
 }

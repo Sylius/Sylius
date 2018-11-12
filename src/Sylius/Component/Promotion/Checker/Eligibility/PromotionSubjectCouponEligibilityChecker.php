@@ -24,9 +24,6 @@ final class PromotionSubjectCouponEligibilityChecker implements PromotionEligibi
      */
     private $promotionCouponEligibilityChecker;
 
-    /**
-     * @param PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker
-     */
     public function __construct(PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker)
     {
         $this->promotionCouponEligibilityChecker = $promotionCouponEligibilityChecker;

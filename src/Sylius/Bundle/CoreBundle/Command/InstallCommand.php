@@ -94,11 +94,6 @@ EOT
         ));
     }
 
-    /**
-     * @param bool $errored
-     *
-     * @return string
-     */
     private function getProperFinalMessage(bool $errored): string
     {
         if ($errored) {
@@ -108,9 +103,6 @@ EOT
         return 'Sylius has been successfully installed.';
     }
 
-    /**
-     * @return string
-     */
     private function getSyliusLogo(): string
     {
         return '                                                                  

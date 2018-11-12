@@ -19,40 +19,17 @@ interface CreatePageInterface extends BaseCreatePageInterface
 {
     public function addMember();
 
-    /**
-     * @param string $message
-     */
-    public function checkValidationMessageForMembers($message);
+    public function checkValidationMessageForMembers(string $message);
 
-    /**
-     * @param string $name
-     */
-    public function chooseMember($name);
+    public function chooseMember(string $name);
 
-    /**
-     * @param string $scope
-     */
-    public function selectScope($scope);
+    public function selectScope(string $scope);
 
-    /**
-     * @param string $type
-     *
-     * @return bool
-     */
-    public function hasType($type);
+    public function hasType(string $type): bool;
 
-    /**
-     * @return bool
-     */
-    public function isTypeFieldDisabled();
+    public function isTypeFieldDisabled(): bool;
 
-    /**
-     * @param string $name
-     */
-    public function nameIt($name);
+    public function nameIt(string $name);
 
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
+    public function specifyCode(string $code);
 }

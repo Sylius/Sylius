@@ -23,7 +23,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function canBeDisabled()
+    public function canBeDisabled(): bool
     {
         $toggleableElement = $this->getToggleableElement();
         $this->assertCheckboxState($toggleableElement, true);
@@ -34,7 +34,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function canHaveExchangeRateChanged()
+    public function canHaveExchangeRateChanged(): bool
     {
         return $this->getElement('exchangeRate')->hasAttribute('disabled');
     }
@@ -42,7 +42,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeExchangeRate($exchangeRate)
+    public function changeExchangeRate(string $exchangeRate): void
     {
         $this->getDocument()->fillField('Exchange rate', $exchangeRate);
     }
@@ -50,7 +50,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getExchangeRateValue()
+    public function getExchangeRateValue(): string
     {
         return $this->getElement('exchangeRate')->getValue();
     }
@@ -58,7 +58,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getCodeDisabledAttribute()
+    public function getCodeDisabledAttribute(): string
     {
         return $this->getElement('code')->getAttribute('disabled');
     }
@@ -74,7 +74,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_currency_code',

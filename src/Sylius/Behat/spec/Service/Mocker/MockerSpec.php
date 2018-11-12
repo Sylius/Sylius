@@ -22,29 +22,29 @@ use Sylius\Behat\Service\Mocker\MockerInterface;
 
 final class MockerSpec extends ObjectBehavior
 {
-    function let(MockerContainer $container)
+    function let(MockerContainer $container): void
     {
         $this->beConstructedWith($container);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(Mocker::class);
     }
 
-    function it_implements_behat_mocker_interface()
+    function it_implements_behat_mocker_interface(): void
     {
         $this->shouldImplement(MockerInterface::class);
     }
 
-    function it_mocks_given_service($container)
+    function it_mocks_given_service($container): void
     {
         $container->mock('sylius.payum.http_client', HttpClient::class)->shouldBeCalled();
 
         $this->mockService('sylius.payum.http_client', HttpClient::class);
     }
 
-    function it_mocks_collaborator()
+    function it_mocks_collaborator(): void
     {
         $this->mockCollaborator(HttpClient::class)->shouldHaveType(MockInterface::class);
     }

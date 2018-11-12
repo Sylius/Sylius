@@ -27,10 +27,6 @@ final class CompositeCurrencyContext implements CurrencyContextInterface
         $this->currencyContexts = new PriorityQueue();
     }
 
-    /**
-     * @param CurrencyContextInterface $currencyContext
-     * @param int $priority
-     */
     public function addContext(CurrencyContextInterface $currencyContext, int $priority = 0): void
     {
         $this->currencyContexts->insert($currencyContext, $priority);

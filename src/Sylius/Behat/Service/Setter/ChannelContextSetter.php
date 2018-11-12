@@ -22,9 +22,6 @@ final class ChannelContextSetter implements ChannelContextSetterInterface
      */
     private $cookieSetter;
 
-    /**
-     * @param CookieSetterInterface $cookieSetter
-     */
     public function __construct(CookieSetterInterface $cookieSetter)
     {
         $this->cookieSetter = $cookieSetter;
@@ -33,7 +30,7 @@ final class ChannelContextSetter implements ChannelContextSetterInterface
     /**
      * {@inheritdoc}
      */
-    public function setChannel(ChannelInterface $channel)
+    public function setChannel(ChannelInterface $channel): void
     {
         $this->cookieSetter->setCookie('_channel_code', $channel->getCode());
     }

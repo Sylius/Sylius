@@ -55,12 +55,6 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $taxonFactory
-     * @param TaxonRepositoryInterface $taxonRepository
-     * @param RepositoryInterface $localeRepository
-     * @param TaxonSlugGeneratorInterface $taxonSlugGenerator
-     */
     public function __construct(
         FactoryInterface $taxonFactory,
         TaxonRepositoryInterface $taxonRepository,
@@ -132,9 +126,6 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

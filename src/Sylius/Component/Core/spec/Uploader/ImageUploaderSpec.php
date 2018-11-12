@@ -46,7 +46,7 @@ final class ImageUploaderSpec extends ObjectBehavior
 
         $filesystem->delete(Argument::any())->shouldNotBeCalled();
 
-        $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem) {
+        $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem): void {
             $image->getPath()->willReturn($args[0]);
 
             $filesystem->write($args[0], Argument::any())->shouldBeCalled();
@@ -64,7 +64,7 @@ final class ImageUploaderSpec extends ObjectBehavior
 
         $filesystem->delete('foo.jpg')->willReturn(true);
 
-        $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem) {
+        $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem): void {
             $image->getPath()->willReturn($args[0]);
 
             $filesystem->write($args[0], Argument::any())->shouldBeCalled();

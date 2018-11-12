@@ -18,55 +18,28 @@ use Behat\Mink\Element\NodeElement;
 interface TableAccessorInterface
 {
     /**
-     * @param NodeElement $table
-     * @param array $fields
-     *
-     * @return NodeElement
-     *
      * @throws \InvalidArgumentException If row cannot be found
      */
-    public function getRowWithFields(NodeElement $table, array $fields);
+    public function getRowWithFields(NodeElement $table, array $fields): NodeElement;
 
     /**
-     * @param NodeElement $table
-     * @param array $fields
-     *
      * @return NodeElement[]
      *
      * @throws \InvalidArgumentException If there is no rows fulfilling given conditions
      */
-    public function getRowsWithFields(NodeElement $table, array $fields);
+    public function getRowsWithFields(NodeElement $table, array $fields): array;
 
     /**
-     * @param NodeElement $table
-     * @param string $fieldName
-     *
-     * @return array
-     *
      * @throws \InvalidArgumentException
      */
-    public function getIndexedColumn(NodeElement $table, $fieldName);
+    public function getIndexedColumn(NodeElement $table, string $fieldName): array;
 
     /**
-     * @param NodeElement $table
-     *
      * @return NodeElement[]
      */
-    public function getSortableHeaders(NodeElement $table);
+    public function getSortableHeaders(NodeElement $table): array;
 
-    /**
-     * @param NodeElement $table
-     * @param NodeElement $row
-     * @param string $field
-     *
-     * @return NodeElement
-     */
-    public function getFieldFromRow(NodeElement $table, NodeElement $row, $field);
+    public function getFieldFromRow(NodeElement $table, NodeElement $row, string $field): NodeElement;
 
-    /**
-     * @param NodeElement $table
-     *
-     * @return int
-     */
-    public function countTableBodyRows(NodeElement $table);
+    public function countTableBodyRows(NodeElement $table): int;
 }

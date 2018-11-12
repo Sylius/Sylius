@@ -45,11 +45,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
      */
     private $productAssociations;
 
-    /**
-     * @param FactoryInterface $productAssociationFactory
-     * @param ProductRepositoryInterface $productRepository
-     * @param RepositoryInterface $productAssociationTypeRepository
-     */
     public function __construct(
         FactoryInterface $productAssociationFactory,
         ProductRepositoryInterface $productRepository,
@@ -109,11 +104,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         return $productAssociations;
     }
 
-    /**
-     * @param Collection $products
-     *
-     * @return string|null
-     */
     private function getCodesAsStringFromProducts(Collection $products): ?string
     {
         if ($products->isEmpty()) {
@@ -130,11 +120,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         return implode(',', $codes);
     }
 
-    /**
-     * @param string $productAssociationTypeCode
-     *
-     * @return ProductAssociationInterface
-     */
     private function getProductAssociationByTypeCode(string $productAssociationTypeCode): ProductAssociationInterface
     {
         foreach ($this->productAssociations as $productAssociation) {
@@ -155,10 +140,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         return $productAssociation;
     }
 
-    /**
-     * @param ProductAssociationInterface $productAssociation
-     * @param string $productCodes
-     */
     private function setAssociatedProductsByProductCodes(
         ProductAssociationInterface $productAssociation,
         string $productCodes
@@ -171,9 +152,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         }
     }
 
-    /**
-     * @param Collection|null $productAssociations
-     */
     private function setProductAssociations(?Collection $productAssociations): void
     {
         $this->productAssociations = $productAssociations;

@@ -25,7 +25,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setTheme($themeName)
+    public function setTheme(string $themeName): void
     {
         $this->getDocument()->selectFieldOption('Theme', $themeName);
     }
@@ -33,7 +33,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function unsetTheme()
+    public function unsetTheme(): void
     {
         $this->getDocument()->selectFieldOption('Theme', '');
     }
@@ -41,7 +41,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseLocale($language)
+    public function chooseLocale(string $language): void
     {
         $this->getDocument()->selectFieldOption('Locales', $language);
     }
@@ -49,7 +49,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isLocaleChosen($language)
+    public function isLocaleChosen(string $language): bool
     {
         return $this->getElement('locales')->find('named', ['option', $language])->hasAttribute('selected');
     }
@@ -57,7 +57,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseCurrency($currencyCode)
+    public function chooseCurrency(string $currencyCode): void
     {
         $this->getDocument()->selectFieldOption('Currencies', $currencyCode);
     }
@@ -65,7 +65,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isCurrencyChosen($currencyCode)
+    public function isCurrencyChosen(string $currencyCode): bool
     {
         return $this->getElement('currencies')->find('named', ['option', $currencyCode])->hasAttribute('selected');
     }
@@ -73,7 +73,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseDefaultTaxZone($taxZone)
+    public function chooseDefaultTaxZone(string $taxZone): void
     {
         $this->getDocument()->selectFieldOption('Default tax zone', $taxZone ?? '');
     }
@@ -81,7 +81,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseTaxCalculationStrategy($taxZone)
+    public function chooseTaxCalculationStrategy(string $taxZone): void
     {
         $this->getDocument()->selectFieldOption('Tax calculation strategy', $taxZone);
     }
@@ -89,7 +89,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isDefaultTaxZoneChosen($taxZone)
+    public function isDefaultTaxZoneChosen(string $taxZone): bool
     {
         return $this->getElement('default_tax_zone')->find('named', ['option', $taxZone])->hasAttribute('selected');
     }
@@ -97,7 +97,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isAnyDefaultTaxZoneChosen()
+    public function isAnyDefaultTaxZoneChosen(): bool
     {
         return null !== $this->getElement('default_tax_zone')->find('css', '[selected]');
     }
@@ -105,7 +105,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isTaxCalculationStrategyChosen($taxCalculationStrategy)
+    public function isTaxCalculationStrategyChosen(string $taxCalculationStrategy): bool
     {
         return $this
             ->getElement('tax_calculation_strategy')
@@ -117,7 +117,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isBaseCurrencyDisabled()
+    public function isBaseCurrencyDisabled(): bool
     {
         return $this->getElement('base_currency')->hasAttribute('disabled');
     }
@@ -141,7 +141,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'base_currency' => '#sylius_channel_baseCurrency',

@@ -18,11 +18,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ResourceUpdateHandlerInterface
 {
-    /**
-     * @param ResourceInterface $resource
-     * @param RequestConfiguration $requestConfiguration
-     * @param ObjectManager $manager
-     */
     public function handle(
         ResourceInterface $resource,
         RequestConfiguration $requestConfiguration,

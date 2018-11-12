@@ -21,7 +21,7 @@ final class OauthTokenApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_provides_an_access_token()
+    public function it_provides_an_access_token(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -45,7 +45,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_refresh_an_access_token()
+    public function it_allows_to_refresh_an_access_token(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 

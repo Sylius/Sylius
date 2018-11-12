@@ -20,7 +20,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeUsername($username)
+    public function changeUsername(string $username): void
     {
         $this->getElement('username')->setValue($username);
     }
@@ -28,7 +28,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeEmail($email)
+    public function changeEmail(string $email): void
     {
         $this->getElement('email')->setValue($email);
     }
@@ -36,7 +36,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changePassword($password)
+    public function changePassword(string $password): void
     {
         $this->getElement('password')->setValue($password);
     }
@@ -44,7 +44,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeLocale($localeCode)
+    public function changeLocale(string $localeCode): void
     {
         $this->getElement('locale_code')->selectOption($localeCode);
     }
@@ -52,7 +52,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#sylius_admin_user_email',

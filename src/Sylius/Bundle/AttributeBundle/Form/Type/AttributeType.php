@@ -36,9 +36,6 @@ abstract class AttributeType extends AbstractResourceType
 
     /**
      * {@inheritdoc}
-     *
-     * @param string $attributeTranslationType
-     * @param FormTypeRegistryInterface $formTypeRegistry
      */
     public function __construct(
         string $dataClass,

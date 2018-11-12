@@ -21,66 +21,27 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function disable();
 
-    /**
-     * @param string $name
-     * @param string $languageCode
-     */
-    public function nameIt($name, $languageCode);
+    public function nameIt(string $name, string $languageCode);
 
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
+    public function specifyCode(string $code);
 
-    /**
-     * @param string $channelName
-     */
-    public function checkChannel($channelName);
+    public function checkChannel(string $channelName);
 
-    /**
-     * @param string $description
-     * @param string $languageCode
-     */
-    public function describeIt($description, $languageCode);
+    public function describeIt(string $description, string $languageCode);
 
-    /**
-     * @param string $instructions
-     * @param string $languageCode
-     */
-    public function setInstructions($instructions, $languageCode);
+    public function setInstructions(string $instructions, string $languageCode);
 
-    /**
-     * @param string $username
-     */
-    public function setPaypalGatewayUsername($username);
+    public function setPaypalGatewayUsername(string $username);
 
-    /**
-     * @param string $password
-     */
-    public function setPaypalGatewayPassword($password);
+    public function setPaypalGatewayPassword(string $password);
 
-    /**
-     * @param string $signature
-     */
-    public function setPaypalGatewaySignature($signature);
+    public function setPaypalGatewaySignature(string $signature);
 
-    /**
-     * @param string $secretKey
-     */
-    public function setStripeSecretKey($secretKey);
+    public function setStripeSecretKey(string $secretKey);
 
-    /**
-     * @param string $publishableKey
-     */
-    public function setStripePublishableKey($publishableKey);
+    public function setStripePublishableKey(string $publishableKey);
 
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @return bool
-     */
-    public function isPaymentMethodEnabled();
+    public function isPaymentMethodEnabled(): bool;
 }

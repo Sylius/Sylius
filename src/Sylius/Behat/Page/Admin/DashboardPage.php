@@ -25,9 +25,6 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
      */
     private $tableAccessor;
 
-    /**
-     * @param TableAccessorInterface $tableAccessor
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -42,7 +39,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotalSales()
+    public function getTotalSales(): int
     {
         return $this->getElement('total_sales')->getText();
     }
@@ -50,7 +47,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getNumberOfNewOrders()
+    public function getNumberOfNewOrders(): int
     {
         return (int) $this->getElement('new_orders')->getText();
     }
@@ -58,7 +55,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getNumberOfNewOrdersInTheList()
+    public function getNumberOfNewOrdersInTheList(): int
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('order_list'));
     }
@@ -66,7 +63,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getNumberOfNewCustomers()
+    public function getNumberOfNewCustomers(): int
     {
         return (int) $this->getElement('new_customers')->getText();
     }
@@ -74,7 +71,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getNumberOfNewCustomersInTheList()
+    public function getNumberOfNewCustomersInTheList(): int
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('customer_list'));
     }
@@ -82,7 +79,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getAverageOrderValue()
+    public function getAverageOrderValue(): int
     {
         return $this->getElement('average_order_value')->getText();
     }
@@ -90,7 +87,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getSubHeader()
+    public function getSubHeader(): string
     {
         return trim($this->getElement('sub_header')->getText());
     }
@@ -98,7 +95,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function logOut()
+    public function logOut(): void
     {
         $this->getElement('logout')->click();
     }
@@ -106,7 +103,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseChannel($channelName)
+    public function chooseChannel(string $channelName): void
     {
         $this->getElement('channel_choosing_link', ['%channelName%' => $channelName])->click();
     }
@@ -114,7 +111,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_admin_dashboard';
     }
@@ -122,7 +119,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'average_order_value' => '#average-order-value',

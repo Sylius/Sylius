@@ -37,7 +37,7 @@ final class CustomerApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_customer_creation_for_not_authenticated_users()
+    public function it_denies_customer_creation_for_not_authenticated_users(): void
     {
         $this->client->request('POST', '/api/v1/customers/');
 
@@ -48,7 +48,7 @@ final class CustomerApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_customer_without_specifying_required_data()
+    public function it_does_not_allow_to_create_customer_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -61,7 +61,7 @@ final class CustomerApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_customer_with_user_without_specifying_required_data()
+    public function it_does_not_allow_to_create_customer_with_user_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -83,7 +83,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_customer_without_user_account()
+    public function it_allows_to_create_customer_without_user_account(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -106,7 +106,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_customer_with_user_account()
+    public function it_allows_to_create_customer_with_user_account(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -132,7 +132,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_access_to_customers_list_for_not_authenticated_users()
+    public function it_denies_access_to_customers_list_for_not_authenticated_users(): void
     {
         $this->client->request('GET', '/api/v1/customers/');
 
@@ -143,7 +143,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_customers_list()
+    public function it_allows_to_get_customers_list(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/customers.yml');
@@ -157,7 +157,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_page_not_found_if_limit_is_set_to_0()
+    public function it_returns_page_not_found_if_limit_is_set_to_0(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/customers.yml');
@@ -171,7 +171,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_access_to_customer_details_for_not_authenticated_users()
+    public function it_denies_access_to_customer_details_for_not_authenticated_users(): void
     {
         $this->client->request('GET', '/api/v1/customers/1');
 
@@ -182,7 +182,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_a_customer_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_a_customer_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -195,7 +195,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_only_customer_details_if_no_user_account_is_connected()
+    public function it_returns_only_customer_details_if_no_user_account_is_connected(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
@@ -209,7 +209,7 @@ EOT;
     /**
      * @test
      */
-    public function it_shows_customer_and_user_details()
+    public function it_shows_customer_and_user_details(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
@@ -223,7 +223,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_full_customer_update_for_not_authenticated_users()
+    public function it_denies_full_customer_update_for_not_authenticated_users(): void
     {
         $this->client->request('PUT', '/api/v1/customers/1');
 
@@ -234,7 +234,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_full_update_of_a_customer_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_full_update_of_a_customer_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -247,7 +247,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_update_customer_fully_without_specifying_required_data()
+    public function it_does_not_allow_to_update_customer_fully_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
@@ -261,7 +261,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_customer_fully()
+    public function it_allows_to_update_customer_fully(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
@@ -290,7 +290,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_partial_update_of_a_customer_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_partial_update_of_a_customer_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -303,7 +303,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_customer_partially()
+    public function it_allows_to_update_customer_partially(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
@@ -330,7 +330,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_customer_deletion_for_not_authenticated_users()
+    public function it_denies_customer_deletion_for_not_authenticated_users(): void
     {
         $this->client->request('DELETE', '/api/v1/customers/1');
 
@@ -341,7 +341,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_deletion_of_a_customer_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_deletion_of_a_customer_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -354,7 +354,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_customer()
+    public function it_allows_to_delete_customer(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');

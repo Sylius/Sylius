@@ -29,10 +29,6 @@ final class BundleResourceLocator implements ResourceLocatorInterface
      */
     private $kernel;
 
-    /**
-     * @param Filesystem $filesystem
-     * @param KernelInterface $kernel
-     */
     public function __construct(Filesystem $filesystem, KernelInterface $kernel)
     {
         $this->filesystem = $filesystem;
@@ -70,9 +66,6 @@ final class BundleResourceLocator implements ResourceLocatorInterface
         throw new ResourceNotFoundException($resourcePath, $theme);
     }
 
-    /**
-     * @param string $resourcePath
-     */
     private function assertResourcePathIsValid(string $resourcePath): void
     {
         if (0 !== strpos($resourcePath, '@')) {
@@ -88,21 +81,11 @@ final class BundleResourceLocator implements ResourceLocatorInterface
         }
     }
 
-    /**
-     * @param string $resourcePath
-     *
-     * @return string
-     */
     private function getBundleNameFromResourcePath(string $resourcePath): string
     {
         return substr($resourcePath, 1, strpos($resourcePath, '/') - 1);
     }
 
-    /**
-     * @param string $resourcePath
-     *
-     * @return string
-     */
     private function getResourceNameFromResourcePath(string $resourcePath): string
     {
         return substr($resourcePath, strpos($resourcePath, 'Resources/') + strlen('Resources/'));

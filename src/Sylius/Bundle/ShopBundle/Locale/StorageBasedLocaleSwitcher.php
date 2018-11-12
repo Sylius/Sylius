@@ -30,10 +30,6 @@ final class StorageBasedLocaleSwitcher implements LocaleSwitcherInterface
      */
     private $channelContext;
 
-    /**
-     * @param LocaleStorageInterface $localeStorage
-     * @param ChannelContextInterface $channelContext
-     */
     public function __construct(LocaleStorageInterface $localeStorage, ChannelContextInterface $channelContext)
     {
         $this->localeStorage = $localeStorage;

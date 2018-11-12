@@ -24,9 +24,6 @@ final class EventDispatcher implements EventDispatcherInterface
      */
     private $eventDispatcher;
 
-    /**
-     * @param SymfonyEventDispatcherInterface $eventDispatcher
-     */
     public function __construct(SymfonyEventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;

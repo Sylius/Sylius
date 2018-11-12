@@ -22,7 +22,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_account_address_book_index';
     }
@@ -30,7 +30,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getAddressesCount()
+    public function getAddressesCount(): int
     {
         $addressesCount = count($this->getElement('addresses')->findAll('css', 'address'));
 
@@ -44,7 +44,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAddressOf($fullName)
+    public function hasAddressOf(string $fullName): bool
     {
         return null !== $this->getAddressOf($fullName);
     }
@@ -52,7 +52,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasNoAddresses()
+    public function hasNoAddresses(): bool
     {
         return $this->getDocument()->hasContent('You have no addresses defined');
     }
@@ -60,7 +60,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function addressOfContains($fullName, $value)
+    public function addressOfContains(string $fullName, string $value): bool
     {
         $address = $this->getAddressOf($fullName);
 
@@ -70,7 +70,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function editAddress($fullName)
+    public function editAddress(string $fullName): void
     {
         $addressToEdit = $this->getAddressOf($fullName);
         $addressToEdit->findLink('Edit')->press();
@@ -79,7 +79,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteAddress($fullName)
+    public function deleteAddress(string $fullName): void
     {
         $addressToDelete = $this->getAddressOf($fullName);
         $addressToDelete->pressButton('Delete');
@@ -88,7 +88,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function setAsDefault($fullName)
+    public function setAsDefault(string $fullName): void
     {
         $addressToSetAsDefault = $this->getAddressOf($fullName);
         $addressToSetAsDefault->pressButton('Set as default');
@@ -97,7 +97,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasNoDefaultAddress()
+    public function hasNoDefaultAddress(): bool
     {
         return !$this->hasElement('default_address');
     }
@@ -105,7 +105,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getFullNameOfDefaultAddress()
+    public function getFullNameOfDefaultAddress(): string
     {
         $fullNameElement = $this->getElement('default_address')->find('css', 'address > strong');
 
@@ -114,12 +114,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $fullNameElement->getText();
     }
 
-    /**
-     * @param string $fullName
-     *
-     * @return NodeElement|null
-     */
-    private function getAddressOf($fullName)
+    private function getAddressOf(string $fullName): ?NodeElement
     {
         return $this->getElement('addresses')->find('css', sprintf('div.address:contains("%s")', $fullName));
     }
@@ -127,7 +122,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'addresses' => '#sylius-addresses',

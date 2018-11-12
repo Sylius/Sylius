@@ -26,7 +26,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isCodeFieldDisabled()
+    public function isCodeFieldDisabled(): bool
     {
         $codeField = $this->getElement('code');
 
@@ -36,7 +36,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isThereProvince($provinceName)
+    public function isThereProvince(string $provinceName): bool
     {
         $provinces = $this->getElement('provinces');
 
@@ -46,17 +46,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isThereProvinceWithCode($provinceCode)
+    public function isThereProvinceWithCode(string $provinceCode): bool
     {
         $provinces = $this->getElement('provinces');
 
         return $provinces->has('css', '[value = "' . $provinceCode . '"]');
     }
 
-    /**
-     * @param string $provinceName
-     */
-    public function removeProvince($provinceName)
+    public function removeProvince(string $provinceName): void
     {
         if ($this->isThereProvince($provinceName)) {
             $provinces = $this->getElement('provinces');
@@ -77,7 +74,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addProvince($name, $code, $abbreviation = null)
+    public function addProvince(string $name, string $code, string $abbreviation = null): void
     {
         $this->clickAddProvinceButton();
 
@@ -94,7 +91,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function clickAddProvinceButton()
+    public function clickAddProvinceButton(): void
     {
         $this->getDocument()->clickLink('Add province');
     }
@@ -102,17 +99,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameProvince($name)
+    public function nameProvince(string $name): void
     {
         $provinceForm = $this->getLastProvinceElement();
 
         $provinceForm->fillField('Name', $name);
     }
 
-    /**
-     * @param string $provinceName
-     */
-    public function removeProvinceName($provinceName)
+    public function removeProvinceName(string $provinceName): void
     {
         if ($this->isThereProvince($provinceName)) {
             $provinces = $this->getElement('provinces');
@@ -125,7 +119,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyProvinceCode($code)
+    public function specifyProvinceCode(string $code): void
     {
         $provinceForm = $this->getLastProvinceElement();
 
@@ -135,7 +129,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getValidationMessage($element)
+    public function getValidationMessage(string $element): string
     {
         $provinceForm = $this->getLastProvinceElement();
 
@@ -158,7 +152,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_country_code',
@@ -167,9 +161,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         ]);
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastProvinceElement(): NodeElement
     {
         $provinces = $this->getElement('provinces');

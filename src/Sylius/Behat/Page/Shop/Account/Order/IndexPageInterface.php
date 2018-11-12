@@ -18,24 +18,11 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface IndexPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @return int
-     */
-    public function countOrders();
+    public function countOrders(): int;
 
-    /**
-     * @param string $number
-     *
-     * @return bool
-     */
-    public function isOrderWithNumberInTheList($number);
+    public function isOrderWithNumberInTheList(string $number): bool;
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
-    public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order);
+    public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order): bool;
 
     public function openLastOrderPage();
 }

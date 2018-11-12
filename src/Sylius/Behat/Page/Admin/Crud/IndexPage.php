@@ -32,19 +32,12 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     private $routeName;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     * @param string $routeName
-     */
     public function __construct(
         Session $session,
         array $parameters,
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
-        $routeName
+        string $routeName
     ) {
         parent::__construct($session, $parameters, $router);
 
@@ -55,7 +48,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isSingleResourceOnPage(array $parameters)
+    public function isSingleResourceOnPage(array $parameters): bool
     {
         try {
             $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);
@@ -71,7 +64,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getColumnFields($columnName)
+    public function getColumnFields(string $columnName): array
     {
         return $this->tableAccessor->getIndexedColumn($this->getElement('table'), $columnName);
     }
@@ -79,7 +72,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function sortBy($fieldName)
+    public function sortBy(string $fieldName): void
     {
         $sortableHeaders = $this->tableAccessor->getSortableHeaders($this->getElement('table'));
         Assert::keyExists($sortableHeaders, $fieldName, sprintf('Column "%s" is not sortable.', $fieldName));
@@ -90,7 +83,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isSingleResourceWithSpecificElementOnPage(array $parameters, $element)
+    public function isSingleResourceWithSpecificElementOnPage(array $parameters, string $element): bool
     {
         try {
             $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);
@@ -107,10 +100,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         }
     }
 
-    /**
-     * @return int
-     */
-    public function countItems()
+    public function countItems(): int
     {
         try {
             return $this->getTableAccessor()->countTableBodyRows($this->getElement('table'));
@@ -122,7 +112,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteResourceOnPage(array $parameters)
+    public function deleteResourceOnPage(array $parameters): bool
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
@@ -136,7 +126,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getActionsForResource(array $parameters)
+    public function getActionsForResource(array $parameters): \Behat\Mink\Element\NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
@@ -162,7 +152,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $bulkCheckbox->check();
     }
 
-    public function filter()
+    public function filter(): void
     {
         $this->getElement('filter')->press();
     }
@@ -176,15 +166,12 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return $this->routeName;
     }
 
-    /**
-     * @return TableAccessorInterface
-     */
-    protected function getTableAccessor()
+    protected function getTableAccessor(): TableAccessorInterface
     {
         return $this->tableAccessor;
     }
@@ -192,7 +179,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'bulk_actions' => '.accordion:contains("%text%")',

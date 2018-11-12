@@ -37,20 +37,17 @@ class RequestPasswordResetPage extends SymfonyPage implements RequestPasswordRes
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_request_password_reset_token';
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->getDocument()->pressButton('Reset');
     }
 
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email)
+    public function specifyEmail(string $email): void
     {
         $this->getDocument()->fillField('Email', $email);
     }
@@ -58,7 +55,7 @@ class RequestPasswordResetPage extends SymfonyPage implements RequestPasswordRes
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#sylius_user_request_password_reset_email',

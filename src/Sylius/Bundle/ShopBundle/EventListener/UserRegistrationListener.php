@@ -58,11 +58,6 @@ final class UserRegistrationListener
     private $firewallContextName;
 
     /**
-     * @param ObjectManager $userManager
-     * @param GeneratorInterface $tokenGenerator
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param ChannelContextInterface $channelContext
-     * @param UserLoginInterface $userLogin
      * @param string $firewallContextName
      */
     public function __construct(
@@ -81,9 +76,6 @@ final class UserRegistrationListener
         $this->firewallContextName = $firewallContextName;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function handleUserVerification(GenericEvent $event): void
     {
         $customer = $event->getSubject();
@@ -103,9 +95,6 @@ final class UserRegistrationListener
         $this->sendVerificationEmail($user);
     }
 
-    /**
-     * @param ShopUserInterface $user
-     */
     private function sendVerificationEmail(ShopUserInterface $user): void
     {
         $token = $this->tokenGenerator->generate();
@@ -117,9 +106,6 @@ final class UserRegistrationListener
         $this->eventDispatcher->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, new GenericEvent($user));
     }
 
-    /**
-     * @param ShopUserInterface $user
-     */
     private function enableAndLogin(ShopUserInterface $user): void
     {
         $user->setEnabled(true);

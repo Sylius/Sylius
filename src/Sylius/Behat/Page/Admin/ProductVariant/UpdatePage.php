@@ -33,17 +33,17 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($price)
+    public function specifyPrice(int $price): void
     {
         $this->getDocument()->fillField('Price', $price);
     }
 
-    public function disableTracking()
+    public function disableTracking(): void
     {
         $this->getElement('tracked')->uncheck();
     }
 
-    public function enableTracking()
+    public function enableTracking(): void
     {
         $this->getElement('tracked')->check();
     }
@@ -51,7 +51,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isTracked()
+    public function isTracked(): bool
     {
         return $this->getElement('tracked')->isChecked();
     }
@@ -59,7 +59,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency)
+    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency): string
     {
         $priceElement = $this->getElement('pricing_configuration')->find('css', sprintf('label:contains("%s %s")', $channel->getCode(), $currency->getCode()))->getParent();
 
@@ -69,7 +69,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPriceForChannel($channelName)
+    public function getPriceForChannel(string $channelName): string
     {
         return $this->getElement('price', ['%channelName%' => $channelName])->getValue();
     }
@@ -77,7 +77,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getOriginalPriceForChannel($channelName)
+    public function getOriginalPriceForChannel(string $channelName): string
     {
         return $this->getElement('original_price', ['%channelName%' => $channelName])->getValue();
     }
@@ -85,7 +85,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getNameInLanguage($language)
+    public function getNameInLanguage(string $language): string
     {
         return $this->getElement('name', ['%language%' => $language])->getValue();
     }
@@ -93,7 +93,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyCurrentStock($amount)
+    public function specifyCurrentStock(int $amount): void
     {
         $this->getElement('on_hand')->setValue($amount);
     }
@@ -101,7 +101,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isShippingRequired()
+    public function isShippingRequired(): bool
     {
         return $this->getElement('shipping_required')->isChecked();
     }
@@ -109,7 +109,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_variant_code',

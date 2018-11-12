@@ -24,7 +24,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($price, $channelName)
+    public function specifyPrice(int $price, string $channelName): void
     {
         $this->getElement('price', ['%channelName%' => $channelName])->setValue($price);
     }
@@ -32,7 +32,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyOriginalPrice($originalPrice, $channelName)
+    public function specifyOriginalPrice(int $originalPrice, string $channelName): void
     {
         $this->getElement('original_price', ['%channelName%' => $channelName])->setValue($originalPrice);
     }
@@ -40,7 +40,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyCurrentStock($currentStock)
+    public function specifyCurrentStock(int $currentStock): void
     {
         $this->getDocument()->fillField('Current stock', $currentStock);
     }
@@ -48,7 +48,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyHeightWidthDepthAndWeight($height, $width, $depth, $weight)
+    public function specifyHeightWidthDepthAndWeight(int $height, int $width, int $depth, int $weight): void
     {
         $this->getDocument()->fillField('Height', $height);
         $this->getDocument()->fillField('Width', $width);
@@ -59,7 +59,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameItIn($name, $language)
+    public function nameItIn(string $name, string $language): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_variant_translations_%s_name', $language), $name
@@ -69,7 +69,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectOption($optionName, $optionValue)
+    public function selectOption(string $optionName, string $optionValue): void
     {
         $optionName = strtoupper($optionName);
         $this->getElement('option_select', ['%option-name%' => $optionName])->selectOption($optionValue);
@@ -78,7 +78,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function choosePricingCalculator($name)
+    public function choosePricingCalculator(string $name): void
     {
         $this->getElement('price_calculator')->selectOption($name);
     }
@@ -86,7 +86,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getValidationMessageForForm()
+    public function getValidationMessageForForm(): string
     {
         $formElement = $this->getDocument()->find('css', 'form[name="sylius_product_variant"]');
         if (null === $formElement) {
@@ -104,7 +104,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectShippingCategory($shippingCategoryName)
+    public function selectShippingCategory(string $shippingCategoryName): void
     {
         $this->getElement('shipping_category')->selectOption($shippingCategoryName);
     }
@@ -112,7 +112,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPricesValidationMessage()
+    public function getPricesValidationMessage(): string
     {
         return $this->getElement('prices_validation_message')->getText();
     }
@@ -120,7 +120,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingRequired($isShippingRequired)
+    public function setShippingRequired(bool $isShippingRequired): void
     {
         if ($isShippingRequired) {
             $this->getElement('shipping_required')->check();
@@ -134,7 +134,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_variant_code',

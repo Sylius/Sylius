@@ -22,17 +22,17 @@ use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
 final class CurrentPageResolverSpec extends ObjectBehavior
 {
-    function let(Session $session, UrlMatcherInterface $urlMatcher)
+    function let(Session $session, UrlMatcherInterface $urlMatcher): void
     {
         $this->beConstructedWith($session, $urlMatcher);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(CurrentPageResolver::class);
     }
 
-    function it_implements_current_page_resolver_interface()
+    function it_implements_current_page_resolver_interface(): void
     {
         $this->shouldImplement(CurrentPageResolverInterface::class);
     }
@@ -42,7 +42,7 @@ final class CurrentPageResolverSpec extends ObjectBehavior
         SymfonyPageInterface $createPage,
         SymfonyPageInterface $updatePage,
         UrlMatcherInterface $urlMatcher
-    ) {
+    ): void {
         $session->getCurrentUrl()->willReturn('https://sylius.com/resource/new');
         $urlMatcher->match('/resource/new')->willReturn(['_route' => 'sylius_resource_create']);
 
@@ -57,7 +57,7 @@ final class CurrentPageResolverSpec extends ObjectBehavior
         SymfonyPageInterface $createPage,
         SymfonyPageInterface $updatePage,
         UrlMatcherInterface $urlMatcher
-    ) {
+    ): void {
         $session->getCurrentUrl()->willReturn('https://sylius.com/resource/show');
         $urlMatcher->match('/resource/show')->willReturn(['_route' => 'sylius_resource_show']);
 

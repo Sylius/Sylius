@@ -38,7 +38,7 @@ final class CountryApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_creating_country_for_non_authenticated_user()
+    public function it_denies_creating_country_for_non_authenticated_user(): void
     {
         $this->client->request('POST', '/api/v1/countries/');
 
@@ -49,7 +49,7 @@ final class CountryApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_country_without_specifying_required_data()
+    public function it_does_not_allow_to_create_country_without_specifying_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -62,7 +62,7 @@ final class CountryApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_country_with_given_code()
+    public function it_allows_to_create_country_with_given_code(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -82,7 +82,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_country_with_provinces()
+    public function it_allows_to_create_country_with_provinces(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -108,7 +108,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_requesting_details_of_a_country_which_does_not_exist()
+    public function it_returns_not_found_response_when_requesting_details_of_a_country_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -121,7 +121,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_countries_list()
+    public function it_allows_to_get_countries_list(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -135,7 +135,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_get_country()
+    public function it_allows_to_get_country(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countries = $this->loadFixturesFromFile('resources/countries.yml');
@@ -150,7 +150,7 @@ EOT;
     /**
      * @test
      */
-    public function it_denies_getting_country_for_non_authenticated_user()
+    public function it_denies_getting_country_for_non_authenticated_user(): void
     {
         $this->loadFixturesFromFile('resources/countries.yml');
         $this->client->request('GET', '/api/v1/countries/1');
@@ -162,7 +162,7 @@ EOT;
     /**
      * @test
      */
-    public function it_returns_not_found_response_when_trying_to_delete_country_which_does_not_exist()
+    public function it_returns_not_found_response_when_trying_to_delete_country_which_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -175,7 +175,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_delete_country()
+    public function it_allows_to_delete_country(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countries = $this->loadFixturesFromFile('resources/countries.yml');
@@ -192,12 +192,7 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    /**
-     * @param CountryInterface $country
-     *
-     * @return string
-     */
-    private function getCountryUrl(CountryInterface $country)
+    private function getCountryUrl(CountryInterface $country): string
     {
         return '/api/v1/countries/' . $country->getCode();
     }

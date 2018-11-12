@@ -30,10 +30,6 @@ final class LocaleContext implements Context
      */
     private $translator;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     * @param TranslatorInterface $translator
-     */
     public function __construct(DashboardPageInterface $dashboardPage, TranslatorInterface $translator)
     {
         $this->dashboardPage = $dashboardPage;
@@ -45,20 +41,14 @@ final class LocaleContext implements Context
      * @Then I should still be viewing the administration panel in :localeCode
      * @Then they should be viewing the administration panel in :localeCode
      */
-    public function iShouldBeViewingTheAdministrationPanelIn($localeCode)
+    public function iShouldBeViewingTheAdministrationPanelIn($localeCode): void
     {
         $this->dashboardPage->open();
 
         Assert::same($this->dashboardPage->getSubHeader(), $this->translate('sylius.ui.overview_of_your_store', $localeCode));
     }
 
-    /**
-     * @param string $text
-     * @param string $localeCode
-     *
-     * @return string
-     */
-    private function translate($text, $localeCode)
+    private function translate(string $text, string $localeCode): string
     {
         $this->translator->setLocale($localeCode);
 

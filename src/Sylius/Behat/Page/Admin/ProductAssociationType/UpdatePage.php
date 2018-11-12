@@ -23,7 +23,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameItIn($name, $language)
+    public function nameItIn(string $name, string $language): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_association_type_translations_%s_name', $language), $name
@@ -33,7 +33,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameIt($name)
+    public function nameIt($name): void
     {
         $this->getElement('name')->setValue($name);
     }
@@ -49,7 +49,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_association_type_code',

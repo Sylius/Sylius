@@ -38,11 +38,6 @@ final class FlashHelper implements FlashHelperInterface
      */
     private $defaultLocale;
 
-    /**
-     * @param SessionInterface $session
-     * @param TranslatorInterface $translator
-     * @param string $defaultLocale
-     */
     public function __construct(SessionInterface $session, TranslatorInterface $translator, string $defaultLocale)
     {
         $this->session = $session;
@@ -77,11 +72,6 @@ final class FlashHelper implements FlashHelperInterface
         $this->addFlash($event->getMessageType(), $event->getMessage(), $event->getMessageParameters());
     }
 
-    /**
-     * @param RequestConfiguration $requestConfiguration
-     * @param string $actionName
-     * @param string $type
-     */
     private function addFlashWithType(RequestConfiguration $requestConfiguration, string $actionName, string $type): void
     {
         $metadata = $requestConfiguration->getMetadata();
@@ -112,11 +102,6 @@ final class FlashHelper implements FlashHelperInterface
         );
     }
 
-    /**
-     * @param string $type
-     * @param string $message
-     * @param array $parameters
-     */
     private function addFlash(string $type, string $message, array $parameters = []): void
     {
         if (!empty($parameters)) {
@@ -128,12 +113,6 @@ final class FlashHelper implements FlashHelperInterface
         $flashBag->add($type, $message);
     }
 
-    /**
-     * @param string $message
-     * @param array $parameters
-     *
-     * @return array
-     */
     private function prepareMessage(string $message, array $parameters): array
     {
         return [
@@ -142,23 +121,11 @@ final class FlashHelper implements FlashHelperInterface
         ];
     }
 
-    /**
-     * @param string $actionName
-     *
-     * @return string
-     */
     private function getResourceMessage(string $actionName): string
     {
         return sprintf('sylius.resource.%s', $actionName);
     }
 
-    /**
-     * @param string $message
-     * @param string $locale
-     * @param array $parameters
-     *
-     * @return bool
-     */
     private function isTranslationDefined(string $message, string $locale, array $parameters): bool
     {
         if ($this->translator instanceof TranslatorBagInterface) {
@@ -170,12 +137,6 @@ final class FlashHelper implements FlashHelperInterface
         return $message !== $this->translator->trans($message, $parameters, 'flashes');
     }
 
-    /**
-     * @param string $metadataName
-     * @param string $actionName
-     *
-     * @return array
-     */
     private function getParametersWithName(string $metadataName, string $actionName): array
     {
         if (stripos($actionName, 'bulk') !== false) {

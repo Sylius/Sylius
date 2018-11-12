@@ -38,7 +38,7 @@ final class ProductOptionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_product_options_list_when_access_is_denied()
+    public function it_does_not_allow_to_show_product_options_list_when_access_is_denied(): void
     {
         $this->loadFixturesFromFile('resources/product_options.yml');
 
@@ -51,7 +51,7 @@ final class ProductOptionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_indexing_product_options()
+    public function it_allows_indexing_product_options(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/product_options.yml');
@@ -65,7 +65,7 @@ final class ProductOptionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_product_option_when_it_does_not_exist()
+    public function it_does_not_allow_to_show_product_option_when_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -78,7 +78,7 @@ final class ProductOptionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_product_option()
+    public function it_allows_showing_product_option(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productOptions = $this->loadFixturesFromFile('resources/product_options.yml');
@@ -93,7 +93,7 @@ final class ProductOptionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_delete_product_option_if_it_does_not_exist()
+    public function it_does_not_allow_to_delete_product_option_if_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -107,7 +107,7 @@ final class ProductOptionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_delete_product_option()
+    public function it_allows_to_delete_product_option(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productOptions = $this->loadFixturesFromFile('resources/product_options.yml');
@@ -127,7 +127,7 @@ final class ProductOptionApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_create_product_option_with_multiple_translations()
+    public function it_allows_to_create_product_option_with_multiple_translations(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -180,7 +180,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_product_option_without_required_fields()
+    public function it_does_not_allow_to_create_product_option_without_required_fields(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -193,7 +193,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_product_option_with_multiple_translations()
+    public function it_allows_to_update_product_option_with_multiple_translations(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -265,7 +265,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_partially_update_product_option_with_multiple_translations()
+    public function it_allows_to_partially_update_product_option_with_multiple_translations(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -333,12 +333,7 @@ EOT;
         $this->assertResponse($response, 'product_option/show_response_after_partial_update', Response::HTTP_OK);
     }
 
-    /**
-     * @param ProductOptionInterface $productOption
-     *
-     * @return string
-     */
-    private function getProductOptionUrl(ProductOptionInterface $productOption)
+    private function getProductOptionUrl(ProductOptionInterface $productOption): string
     {
         return '/api/v1/product-options/' . $productOption->getCode();
     }

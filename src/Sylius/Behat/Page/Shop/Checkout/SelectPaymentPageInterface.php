@@ -17,24 +17,11 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 
 interface SelectPaymentPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $paymentMethod
-     */
-    public function selectPaymentMethod($paymentMethod);
+    public function selectPaymentMethod(string $paymentMethod);
 
-    /**
-     * @param string $paymentMethodName
-     *
-     * @return bool
-     */
-    public function hasPaymentMethod($paymentMethodName);
+    public function hasPaymentMethod(string $paymentMethodName): bool;
 
-    /**
-     * @param string $itemName
-     *
-     * @return string
-     */
-    public function getItemSubtotal($itemName);
+    public function getItemSubtotal(string $itemName): string;
 
     public function nextStep();
 
@@ -44,18 +31,12 @@ interface SelectPaymentPageInterface extends SymfonyPageInterface
 
     public function changeAddressByStepLabel();
 
-    /**
-     * @return bool
-     */
-    public function hasNoAvailablePaymentMethodsWarning();
+    public function hasNoAvailablePaymentMethodsWarning(): bool;
 
-    /**
-     * @return bool
-     */
-    public function isNextStepButtonUnavailable();
+    public function isNextStepButtonUnavailable(): bool;
 
     /**
      * @return string[]
      */
-    public function getPaymentMethods();
+    public function getPaymentMethods(): array;
 }

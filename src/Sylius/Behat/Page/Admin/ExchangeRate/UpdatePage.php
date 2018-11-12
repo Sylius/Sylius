@@ -20,7 +20,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRatio()
+    public function getRatio(): string
     {
         return $this->getElement('ratio')->getValue();
     }
@@ -28,7 +28,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function changeRatio($ratio)
+    public function changeRatio(string $ratio): void
     {
         $this->getElement('ratio')->setValue($ratio);
     }
@@ -36,7 +36,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isSourceCurrencyDisabled()
+    public function isSourceCurrencyDisabled(): bool
     {
         return null !== $this->getElement('sourceCurrency')->getAttribute('disabled');
     }
@@ -44,7 +44,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isTargetCurrencyDisabled()
+    public function isTargetCurrencyDisabled(): bool
     {
         return null !== $this->getElement('targetCurrency')->getAttribute('disabled');
     }
@@ -52,7 +52,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'ratio' => '#sylius_exchange_rate_ratio',

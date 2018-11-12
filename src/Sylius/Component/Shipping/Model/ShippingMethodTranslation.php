@@ -32,9 +32,6 @@ class ShippingMethodTranslation extends AbstractTranslation implements ShippingM
      */
     protected $description;
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();

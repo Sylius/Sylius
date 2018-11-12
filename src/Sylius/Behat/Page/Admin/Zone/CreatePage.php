@@ -23,7 +23,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use NamesIt;
     use SpecifiesItsCode;
 
-    public function addMember()
+    public function addMember(): void
     {
         $this->getDocument()->clickLink('Add member');
     }
@@ -31,7 +31,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function checkValidationMessageForMembers($message)
+    public function checkValidationMessageForMembers(string $message)
     {
         $membersValidationElement = $this->getElement('ui_segment')->find('css', '.sylius-validation-error');
         if (null === $membersValidationElement) {
@@ -44,7 +44,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseMember($name)
+    public function chooseMember(string $name): void
     {
         $selectItems = $this->getDocument()->waitFor(2, function () {
             return $this->getDocument()->findAll('css', 'div[data-form-type="collection"] select');
@@ -61,7 +61,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectScope($scope)
+    public function selectScope(string $scope): void
     {
         $this->getDocument()->selectFieldOption('Scope', $scope);
     }
@@ -69,7 +69,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasType($type)
+    public function hasType(string $type): bool
     {
         $typeField = $this->getElement('type');
         $selectedOption = $typeField->find('css', 'option[selected]');
@@ -80,7 +80,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isTypeFieldDisabled()
+    public function isTypeFieldDisabled(): bool
     {
         return $this->getElement('type')->hasAttribute('disabled');
     }
@@ -88,7 +88,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_zone_code',

@@ -23,9 +23,6 @@ final class Factory implements FactoryInterface
      */
     private $className;
 
-    /**
-     * @param string $className
-     */
     public function __construct(string $className)
     {
         $this->className = $className;

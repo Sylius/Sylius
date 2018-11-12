@@ -21,35 +21,16 @@ use Sylius\Component\Review\Model\ReviewInterface;
 interface ProductReviewRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param mixed $productId
-     * @param int $count
-     *
      * @return array|ReviewInterface[]
      */
     public function findLatestByProductId($productId, int $count): array;
 
     /**
-     * @param string $slug
-     * @param string $locale
-     * @param ChannelInterface $channel
-     *
      * @return array|ReviewInterface[]
      */
     public function findAcceptedByProductSlugAndChannel(string $slug, string $locale, ChannelInterface $channel): array;
 
-    /**
-     * @param string $locale
-     * @param string $productCode
-     *
-     * @return QueryBuilder
-     */
     public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder;
 
-    /**
-     * @param mixed $id
-     * @param string $productCode
-     *
-     * @return ReviewInterface|null
-     */
     public function findOneByIdAndProductCode($id, string $productCode): ?ReviewInterface;
 }

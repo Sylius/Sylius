@@ -22,9 +22,6 @@ final class ProductVariantsPricesExtension extends \Twig_Extension
      */
     private $productVariantsPricesHelper;
 
-    /**
-     * @param ProductVariantsPricesHelper $productVariantsPricesHelper
-     */
     public function __construct(ProductVariantsPricesHelper $productVariantsPricesHelper)
     {
         $this->productVariantsPricesHelper = $productVariantsPricesHelper;

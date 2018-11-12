@@ -21,7 +21,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPayAction()
+    public function hasPayAction(): bool
     {
         return $this->hasElement('pay_link');
     }
@@ -29,7 +29,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function pay()
+    public function pay(): void
     {
         $this->getElement('pay_link')->click();
     }
@@ -37,7 +37,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getNotifications()
+    public function getNotifications(): array
     {
         /** @var NodeElement[] $notificationElements */
         $notificationElements = $this->getDocument()->findAll('css', '.message > .content > p');
@@ -53,7 +53,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function choosePaymentMethod($paymentMethodName)
+    public function choosePaymentMethod(string $paymentMethodName): void
     {
         $paymentMethodElement = $this->getElement('payment_method', ['%name%' => $paymentMethodName]);
         $paymentMethodElement->selectOption($paymentMethodElement->getAttribute('value'));
@@ -62,13 +62,13 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_order_show';
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getNumberOfItems(): int
     {
@@ -81,7 +81,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'instructions' => '#sylius-payment-method-instructions',

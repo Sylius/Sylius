@@ -21,196 +21,77 @@ use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @param string $locale
-     *
-     * @return bool
-     */
-    public function isSlugReadonlyIn($locale);
+    public function isSlugReadonlyIn(string $locale): bool;
 
-    /**
-     * @param string $channelName
-     * @param int $price
-     */
-    public function specifyPrice($channelName, $price);
+    public function specifyPrice(string $channelName, int $price);
 
-    /**
-     * @param string $channelName
-     * @param int $originalPrice
-     */
-    public function specifyOriginalPrice($channelName, $originalPrice);
+    public function specifyOriginalPrice(string $channelName, int $originalPrice);
 
-    /**
-     * @param string $name
-     * @param string $localeCode
-     */
-    public function nameItIn($name, $localeCode);
+    public function nameItIn(string $name, string $localeCode);
 
     public function addSelectedAttributes();
 
-    /**
-     * @param string $attributeName
-     * @param string $localeCode
-     */
-    public function removeAttribute($attributeName, $localeCode);
+    public function removeAttribute(string $attributeName, string $localeCode);
 
-    /**
-     * @param string $attributeName
-     * @param string $localeCode
-     *
-     * @return string
-     */
-    public function getAttributeValue($attributeName, $localeCode);
+    public function getAttributeValue(string $attributeName, string $localeCode): string;
 
-    /**
-     * @param string $attributeName
-     * @param string $localeCode
-     *
-     * @return string
-     */
-    public function getAttributeValidationErrors($attributeName, $localeCode);
+    public function getAttributeValidationErrors(string $attributeName, string $localeCode): string;
 
-    /**
-     * @return int
-     */
-    public function getNumberOfAttributes();
+    public function getNumberOfAttributes(): int;
 
-    /**
-     * @param string $attributeName
-     *
-     * @return bool
-     */
-    public function hasAttribute($attributeName);
+    public function hasAttribute(string $attributeName): bool;
 
-    /**
-     * @param string $taxonName
-     *
-     * @return bool
-     */
-    public function isMainTaxonChosen($taxonName);
+    public function isMainTaxonChosen(string $taxonName): bool;
 
-    /**
-     * @param TaxonInterface $taxon
-     */
     public function selectMainTaxon(TaxonInterface $taxon);
 
     public function disableTracking();
 
     public function enableTracking();
 
-    /**
-     * @return bool
-     */
-    public function isTracked();
+    public function isTracked(): bool;
 
-    /**
-     * @param string $locale
-     */
-    public function enableSlugModification($locale);
+    public function enableSlugModification(string $locale);
 
-    /**
-     * @param string $type
-     *
-     * @return bool
-     */
-    public function isImageWithTypeDisplayed($type);
-
-    /**
-     * @param string $path
-     * @param string $type
-     */
-    public function attachImage($path, $type = null);
-
-    /**
-     * @param string $type
-     * @param string $path
-     */
-    public function changeImageWithType($type, $path);
+    public function isImageWithTypeDisplayed(string $type): bool;
 
     /**
      * @param string $type
      */
-    public function removeImageWithType($type);
+    public function attachImage(string $path, string $type = null);
+
+    public function changeImageWithType(string $type, string $path);
+
+    public function removeImageWithType(string $type);
 
     public function removeFirstImage();
 
-    /**
-     * @param string $type
-     */
-    public function modifyFirstImageType($type);
+    public function modifyFirstImageType(string $type);
+
+    public function countImages(): int;
 
     /**
-     * @return int
-     */
-    public function countImages();
-
-    /**
-     * @param ProductAssociationTypeInterface $productAssociationType
      * @param string[] $productsNames
      */
     public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames);
 
-    /**
-     * @param string $productName
-     * @param ProductAssociationTypeInterface $productAssociationType
-     *
-     * @return bool
-     */
-    public function hasAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType);
+    public function hasAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): bool;
 
-    /**
-     * @param string $productName
-     * @param ProductAssociationTypeInterface $productAssociationType
-     */
-    public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType);
+    public function removeAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType);
 
-    /**
-     * @param ChannelInterface $channel
-     * @param CurrencyInterface $currency
-     *
-     * @return string
-     */
-    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency);
+    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency): string;
 
-    /**
-     * @param string $locale
-     */
-    public function activateLanguageTab($locale);
+    public function activateLanguageTab(string $locale);
 
-    /**
-     * @param string $locale
-     *
-     * @return string
-     */
-    public function getSlug($locale);
+    public function getSlug(string $locale): string;
 
-    /**
-     * @param string $slug
-     * @param string $locale
-     */
-    public function specifySlugIn($slug, $locale);
+    public function specifySlugIn(string $slug, string $locale);
 
-    /**
-     * @param string $channelName
-     *
-     * @return string
-     */
-    public function getPriceForChannel($channelName);
+    public function getPriceForChannel(string $channelName): string;
 
-    /**
-     * @param string $channelName
-     *
-     * @return string
-     */
-    public function getOriginalPriceForChannel($channelName);
+    public function getOriginalPriceForChannel(string $channelName): string;
 
-    /**
-     * @return bool
-     */
-    public function isShippingRequired();
+    public function isShippingRequired(): bool;
 }

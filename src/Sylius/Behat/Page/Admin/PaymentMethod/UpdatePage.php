@@ -25,7 +25,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaypalGatewayUsername($username)
+    public function setPaypalGatewayUsername(string $username): void
     {
         $this->getDocument()->fillField('Username', $username);
     }
@@ -33,7 +33,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaypalGatewayPassword($password)
+    public function setPaypalGatewayPassword(string $password): void
     {
         $this->getDocument()->fillField('Password', $password);
     }
@@ -41,7 +41,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaypalGatewaySignature($signature)
+    public function setPaypalGatewaySignature(string $signature): void
     {
         $this->getDocument()->fillField('Signature', $signature);
     }
@@ -49,7 +49,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameIt($name, $languageCode)
+    public function nameIt(string $name, string $languageCode): void
     {
         $this->getDocument()->fillField(sprintf('sylius_payment_method_translations_%s_name', $languageCode), $name);
     }
@@ -57,7 +57,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isPaymentMethodEnabled()
+    public function isPaymentMethodEnabled(): bool
     {
         return (bool) $this->getToggleableElement()->getValue();
     }
@@ -65,7 +65,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isFactoryNameFieldDisabled()
+    public function isFactoryNameFieldDisabled(): bool
     {
         return 'disabled' === $this->getElement('factory_name')->getAttribute('disabled');
     }
@@ -73,7 +73,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isAvailableInChannel($channelName)
+    public function isAvailableInChannel(string $channelName): bool
     {
         return $this->getElement('channel', ['%channel%' => $channelName])->hasAttribute('checked');
     }
@@ -81,7 +81,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPaymentMethodInstructions($language)
+    public function getPaymentMethodInstructions(string $language): string
     {
         return $this->getElement('instructions', ['%language%' => $language])->getText();
     }
@@ -105,7 +105,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'channel' => '.checkbox:contains("%channel%") input',

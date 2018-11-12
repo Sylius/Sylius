@@ -30,7 +30,7 @@ final class TaxRateApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_tax_rates_list_when_access_is_denied()
+    public function it_does_not_allow_to_show_tax_rates_list_when_access_is_denied(): void
     {
         $this->loadFixturesFromFiles([
             'resources/tax_categories.yml',
@@ -47,7 +47,7 @@ final class TaxRateApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_indexing_tax_rates()
+    public function it_allows_indexing_tax_rates(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFiles([
@@ -65,7 +65,7 @@ final class TaxRateApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_tax_rate_when_it_does_not_exist()
+    public function it_does_not_allow_to_show_tax_rate_when_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -78,7 +78,7 @@ final class TaxRateApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_tax_rate()
+    public function it_allows_showing_tax_rate(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxRates = $this->loadFixturesFromFiles([
@@ -94,12 +94,7 @@ final class TaxRateApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'tax_rate/show_response', Response::HTTP_OK);
     }
 
-    /**
-     * @param TaxRateInterface $taxRate
-     *
-     * @return string
-     */
-    private function getTaxRateUrl(TaxRateInterface $taxRate)
+    private function getTaxRateUrl(TaxRateInterface $taxRate): string
     {
         return '/api/v1/tax-rates/' . $taxRate->getCode();
     }

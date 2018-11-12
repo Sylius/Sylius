@@ -33,9 +33,6 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
         ];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArgs
-     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $metadata = $eventArgs->getClassMetadata();
@@ -49,9 +46,6 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
         }
     }
 
-    /**
-     * @param ClassMetadataInfo $metadata
-     */
     private function convertToDocumentIfNeeded(ClassMetadataInfo $metadata)
     {
         if (false === $metadata->isMappedSuperclass) {
@@ -70,7 +64,6 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     }
 
     /**
-     * @param ClassMetadataInfo $metadata
      * @param $configuration
      */
     private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration)
@@ -105,9 +98,6 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
         }
     }
 
-    /**
-     * @param ClassMetadataInfo $metadata
-     */
     private function unsetAssociationMappings(ClassMetadataInfo $metadata)
     {
         if (false === $this->isResource($metadata)) {

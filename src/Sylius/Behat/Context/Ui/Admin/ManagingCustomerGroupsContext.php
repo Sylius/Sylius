@@ -37,11 +37,6 @@ final class ManagingCustomerGroupsContext implements Context
      */
     private $updatePage;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -55,7 +50,7 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @Given I want to create a new customer group
      */
-    public function iWantToCreateANewCustomerGroup()
+    public function iWantToCreateANewCustomerGroup(): void
     {
         $this->createPage->open();
     }
@@ -64,7 +59,7 @@ final class ManagingCustomerGroupsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs($code = null): void
     {
         $this->createPage->specifyCode($code);
     }
@@ -73,7 +68,7 @@ final class ManagingCustomerGroupsContext implements Context
      * @When I specify its name as :name
      * @When I remove its name
      */
-    public function iSpecifyItsNameAs($name = null)
+    public function iSpecifyItsNameAs($name = null): void
     {
         $this->createPage->nameIt($name);
     }
@@ -82,7 +77,7 @@ final class ManagingCustomerGroupsContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -90,7 +85,7 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @Then the customer group :customerGroup should appear in the store
      */
-    public function theCustomerGroupShouldAppearInTheStore(CustomerGroupInterface $customerGroup)
+    public function theCustomerGroupShouldAppearInTheStore(CustomerGroupInterface $customerGroup): void
     {
         $this->indexPage->open();
 
@@ -100,7 +95,7 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @When /^I want to edit (this customer group)$/
      */
-    public function iWantToEditThisCustomerGroup(CustomerGroupInterface $customerGroup)
+    public function iWantToEditThisCustomerGroup(CustomerGroupInterface $customerGroup): void
     {
         $this->updatePage->open(['id' => $customerGroup->getId()]);
     }
@@ -109,7 +104,7 @@ final class ManagingCustomerGroupsContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -134,7 +129,7 @@ final class ManagingCustomerGroupsContext implements Context
      * @Then this customer group with name :name should appear in the store
      * @Then I should see the customer group :name in the list
      */
-    public function thisCustomerGroupWithNameShouldAppearInTheStore($name)
+    public function thisCustomerGroupWithNameShouldAppearInTheStore($name): void
     {
         $this->indexPage->open();
 
@@ -145,7 +140,7 @@ final class ManagingCustomerGroupsContext implements Context
      * @When I browse customer groups
      * @When I want to browse customer groups
      */
-    public function iWantToBrowseCustomerGroups()
+    public function iWantToBrowseCustomerGroups(): void
     {
         $this->indexPage->open();
     }
@@ -164,7 +159,7 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @Then /^(this customer group) should still be named "([^"]+)"$/
      */
-    public function thisCustomerGroupShouldStillBeNamed(CustomerGroupInterface $customerGroup, $customerGroupName)
+    public function thisCustomerGroupShouldStillBeNamed(CustomerGroupInterface $customerGroup, $customerGroupName): void
     {
         $this->iWantToBrowseCustomerGroups();
 
@@ -174,7 +169,7 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @Then I should be notified that name is required
      */
-    public function iShouldBeNotifiedThatNameIsRequired()
+    public function iShouldBeNotifiedThatNameIsRequired(): void
     {
         Assert::same(
             $this->updatePage->getValidationMessage('name'),
@@ -185,7 +180,7 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @Then I should be notified that customer group with this code already exists
      */
-    public function iShouldBeNotifiedThatCustomerGroupWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatCustomerGroupWithThisCodeAlreadyExists(): void
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'Customer group code has to be unique.');
     }
@@ -193,7 +188,7 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @Then the code field should be disabled
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function theCodeFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -201,7 +196,7 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @When I delete the :customerGroup customer group
      */
-    public function iDeleteTheCustomerGroup(CustomerGroupInterface $customerGroup)
+    public function iDeleteTheCustomerGroup(CustomerGroupInterface $customerGroup): void
     {
         $this->iWantToBrowseCustomerGroups();
 
@@ -211,7 +206,7 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @Then /^(this customer group) should no longer exist in the registry$/
      */
-    public function thisCustomerGroupShouldNoLongerExistInTheRegistry(CustomerGroupInterface $customerGroup)
+    public function thisCustomerGroupShouldNoLongerExistInTheRegistry(CustomerGroupInterface $customerGroup): void
     {
         Assert::false(
             $this->indexPage->isSingleResourceOnPage(['name' => $customerGroup->getName()]),

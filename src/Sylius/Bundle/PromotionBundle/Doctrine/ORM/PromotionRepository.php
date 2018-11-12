@@ -39,12 +39,6 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
         return $this->findBy(['name' => $name]);
     }
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param \DateTimeInterface|null $date
-     *
-     * @return QueryBuilder
-     */
     protected function filterByActive(QueryBuilder $queryBuilder, ?\DateTimeInterface $date = null): QueryBuilder
     {
         return $queryBuilder

@@ -72,8 +72,6 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
 
     /**
      * @api
-     *
-     * @param ConfigurationSourceFactoryInterface $configurationSourceFactory
      */
     public function addConfigurationSourceFactory(ConfigurationSourceFactoryInterface $configurationSourceFactory): void
     {
@@ -92,10 +90,6 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
         return $configuration;
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param LoaderInterface $loader
-     */
     private function prependTwig(ContainerBuilder $container, LoaderInterface $loader): void
     {
         if (!$container->hasExtension('twig')) {
@@ -105,10 +99,6 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
         $loader->load('services/integrations/twig.xml');
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array $config
-     */
     private function resolveConfigurationSources(ContainerBuilder $container, array $config): void
     {
         $configurationProviders = [];

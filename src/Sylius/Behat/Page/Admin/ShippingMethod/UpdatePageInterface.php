@@ -18,17 +18,9 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @param string $channelName
-     *
-     * @return bool
-     */
-    public function isAvailableInChannel($channelName);
+    public function isAvailableInChannel(string $channelName): bool;
 
     public function enable();
 
@@ -37,11 +29,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function removeZone();
 
     /**
-     * @param string $channelCode
-     *
-     * @return string
-     *
      * @throws ElementNotFoundException
      */
-    public function getValidationMessageForAmount($channelCode);
+    public function getValidationMessageForAmount(string $channelCode): string;
 }

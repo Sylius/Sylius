@@ -25,9 +25,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
      */
     private $subjects;
 
-    /**
-     * @param array $subjects
-     */
     public function __construct(array $subjects)
     {
         $this->subjects = $subjects;
@@ -43,9 +40,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArguments
-     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArguments): void
     {
         $metadata = $eventArguments->getClassMetadata();
@@ -74,13 +68,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         }
     }
 
-    /**
-     * @param string $reviewableEntity
-     * @param string $subject
-     * @param ClassMetadata $reviewableEntityMetadata
-     *
-     * @return array
-     */
     private function createSubjectMapping(
         string $reviewableEntity,
         string $subject,
@@ -99,12 +86,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param string $reviewerEntity
-     * @param ClassMetadata $reviewerEntityMetadata
-     *
-     * @return array
-     */
     private function createReviewerMapping(string $reviewerEntity, ClassMetadata $reviewerEntityMetadata): array
     {
         return [
@@ -120,11 +101,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param string $reviewEntity
-     *
-     * @return array
-     */
     private function createReviewsMapping(string $reviewEntity): array
     {
         return [

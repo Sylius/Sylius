@@ -41,7 +41,7 @@ final class EligibleDefaultShippingMethodResolverSpec extends ObjectBehavior
         );
     }
 
-    function it_implements_default_shipping_method_resolver_interface()
+    function it_implements_default_shipping_method_resolver_interface(): void
     {
         $this->shouldImplement(DefaultShippingMethodResolverInterface::class);
     }

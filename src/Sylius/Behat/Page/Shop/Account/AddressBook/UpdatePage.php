@@ -20,7 +20,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_account_address_book_update';
     }
@@ -28,7 +28,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillField($field, $value)
+    public function fillField(string $field, string $value): void
     {
         $field = $this->getElement(str_replace(' ', '_', strtolower($field)));
         $field->setValue($value);
@@ -37,7 +37,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getSpecifiedProvince()
+    public function getSpecifiedProvince(): string
     {
         $this->waitForElement(5, 'province_name');
 
@@ -47,7 +47,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getSelectedProvince()
+    public function getSelectedProvince(): string
     {
         $this->waitForElement(5, 'province_code');
 
@@ -57,7 +57,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyProvince($name)
+    public function specifyProvince(string $name): void
     {
         $this->waitForElement(5, 'province_name');
 
@@ -68,7 +68,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectProvince($name)
+    public function selectProvince(string $name): void
     {
         $this->waitForElement(5, 'province_code');
 
@@ -79,13 +79,13 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectCountry($name)
+    public function selectCountry(string $name): void
     {
         $country = $this->getElement('country');
         $country->selectOption($name);
     }
 
-    public function saveChanges()
+    public function saveChanges(): void
     {
         $this->getElement('save_button')->press();
     }
@@ -93,7 +93,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'city' => '#sylius_address_city',
@@ -109,11 +109,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         ]);
     }
 
-    /**
-     * @param int $timeout
-     * @param string $elementName
-     */
-    private function waitForElement($timeout, $elementName)
+    private function waitForElement(int $timeout, string $elementName): void
     {
         $this->getDocument()->waitFor($timeout, function () use ($elementName) {
             return $this->hasElement($elementName);

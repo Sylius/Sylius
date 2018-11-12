@@ -23,9 +23,6 @@ final class ManagingTranslatableEntitiesContext implements Context
      */
     private $taxonCreatePage;
 
-    /**
-     * @param CreatePage $taxonCreatePage
-     */
     public function __construct(CreatePage $taxonCreatePage)
     {
         $this->taxonCreatePage = $taxonCreatePage;
@@ -34,7 +31,7 @@ final class ManagingTranslatableEntitiesContext implements Context
     /**
      * @When I want to create a new translatable entity
      */
-    public function iWantToCreateANewTranslatableEntity()
+    public function iWantToCreateANewTranslatableEntity(): void
     {
         $this->taxonCreatePage->open();
     }
@@ -42,7 +39,7 @@ final class ManagingTranslatableEntitiesContext implements Context
     /**
      * @Then I should be able to translate it in :localeCode
      */
-    public function iShouldBeAbleToTranslateItIn($localeCode)
+    public function iShouldBeAbleToTranslateItIn($localeCode): void
     {
         $this->taxonCreatePage->describeItAs('Foo bar', $localeCode);
     }

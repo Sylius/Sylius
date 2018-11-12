@@ -23,7 +23,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomerUsageLimit($limit)
+    public function setCustomerUsageLimit(int $limit): void
     {
         $this->getDocument()->fillField('Per-Customer Usage Limit', $limit);
     }
@@ -31,7 +31,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTimeInterface $date)
+    public function setExpiresAt(\DateTimeInterface $date): void
     {
         $timestamp = $date->getTimestamp();
 
@@ -41,7 +41,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setUsageLimit($limit)
+    public function setUsageLimit(int $limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);
     }
@@ -49,7 +49,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_promotion_coupon_code',

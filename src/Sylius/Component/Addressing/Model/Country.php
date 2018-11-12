@@ -44,9 +44,6 @@ class Country implements CountryInterface
         $this->provinces = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) ($this->getName() ?? $this->getCode());

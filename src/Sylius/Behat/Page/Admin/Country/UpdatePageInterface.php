@@ -21,51 +21,21 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function disable();
 
-    /**
-     * @return bool
-     */
-    public function isCodeFieldDisabled();
+    public function isCodeFieldDisabled(): bool;
 
-    /**
-     * @param string $provinceName
-     *
-     * @return bool
-     */
-    public function isThereProvince($provinceName);
+    public function isThereProvince(string $provinceName): bool;
 
-    /**
-     * @param string $provinceCode
-     *
-     * @return bool
-     */
-    public function isThereProvinceWithCode($provinceCode);
+    public function isThereProvinceWithCode(string $provinceCode): bool;
 
-    /**
-     * @param string $name
-     * @param string $code
-     * @param string|null $abbreviation
-     */
-    public function addProvince($name, $code, $abbreviation = null);
+    public function addProvince(string $name, string $code, string $abbreviation = null);
 
-    /**
-     * @param string $provinceName
-     */
-    public function removeProvince($provinceName);
+    public function removeProvince(string $provinceName);
 
     public function clickAddProvinceButton();
 
-    /**
-     * @param string $provinceName
-     */
-    public function nameProvince($provinceName);
+    public function nameProvince(string $provinceName);
 
-    /**
-     * @param string $provinceName
-     */
-    public function removeProvinceName($provinceName);
+    public function removeProvinceName(string $provinceName);
 
-    /**
-     * @param string $provinceCode
-     */
-    public function specifyProvinceCode($provinceCode);
+    public function specifyProvinceCode(string $provinceCode);
 }

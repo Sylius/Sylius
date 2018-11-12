@@ -19,16 +19,9 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**
-     * @param string $name
-     *
      * @throws ElementNotFoundException
      */
-    public function chooseName($name);
+    public function chooseName(string $name);
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function isOptionAvailable($name);
+    public function isOptionAvailable(string $name): bool;
 }

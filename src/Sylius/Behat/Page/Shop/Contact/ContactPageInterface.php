@@ -17,22 +17,11 @@ use Sylius\Behat\Page\PageInterface;
 
 interface ContactPageInterface extends PageInterface
 {
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
+    public function specifyEmail(string $email);
 
-    /**
-     * @param string $message
-     */
-    public function specifyMessage($message);
+    public function specifyMessage(string $message);
 
     public function send();
 
-    /**
-     * @param string $element
-     *
-     * @return string
-     */
-    public function getValidationMessageFor($element);
+    public function getValidationMessageFor(string $element): string;
 }

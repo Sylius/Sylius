@@ -30,10 +30,6 @@ final class FiltersApplicator implements FiltersApplicatorInterface
      */
     private $criteriaResolver;
 
-    /**
-     * @param ServiceRegistryInterface $filtersRegistry
-     * @param FiltersCriteriaResolverInterface $criteriaResolver
-     */
     public function __construct(
         ServiceRegistryInterface $filtersRegistry,
         FiltersCriteriaResolverInterface $criteriaResolver

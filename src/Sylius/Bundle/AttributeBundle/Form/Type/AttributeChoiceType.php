@@ -28,9 +28,6 @@ abstract class AttributeChoiceType extends AbstractType
      */
     protected $attributeRepository;
 
-    /**
-     * @param RepositoryInterface $attributeRepository
-     */
     public function __construct(RepositoryInterface $attributeRepository)
     {
         $this->attributeRepository = $attributeRepository;

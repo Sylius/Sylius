@@ -39,7 +39,7 @@ final class CurrencySpec extends ObjectBehavior
         $this->getCode()->shouldReturn('RSD');
     }
 
-    function it_does_not_return_name_when_it_has_no_code()
+    function it_does_not_return_name_when_it_has_no_code(): void
     {
         $this->setCode(null);
         $this->getName()->shouldReturn(null);

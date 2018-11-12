@@ -22,7 +22,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_checkout_select_payment';
     }
@@ -30,7 +30,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
-    public function selectPaymentMethod($paymentMethod)
+    public function selectPaymentMethod(string $paymentMethod): void
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
             $this->getElement('payment_method_select', ['%payment_method%' => $paymentMethod])->click();
@@ -45,7 +45,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
-    public function hasPaymentMethod($paymentMethodName)
+    public function hasPaymentMethod(string $paymentMethodName): bool
     {
         try {
             $this->getElement('payment_method_option', ['%payment_method%' => $paymentMethodName]);
@@ -59,7 +59,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
-    public function getItemSubtotal($itemName)
+    public function getItemSubtotal(string $itemName): string
     {
         $itemSlug = strtolower(str_replace('\"', '', str_replace(' ', '-', $itemName)));
 
@@ -68,22 +68,22 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
         return $subtotalTable->find('css', sprintf('#sylius-item-%s-subtotal', $itemSlug))->getText();
     }
 
-    public function nextStep()
+    public function nextStep(): void
     {
         $this->getElement('next_step')->press();
     }
 
-    public function changeShippingMethod()
+    public function changeShippingMethod(): void
     {
         $this->getDocument()->clickLink('Change shipping method');
     }
 
-    public function changeShippingMethodByStepLabel()
+    public function changeShippingMethodByStepLabel(): void
     {
         $this->getElement('shipping_step_label')->click();
     }
 
-    public function changeAddressByStepLabel()
+    public function changeAddressByStepLabel(): void
     {
         $this->getElement('address_step_label')->click();
     }
@@ -91,7 +91,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
-    public function hasNoAvailablePaymentMethodsWarning()
+    public function hasNoAvailablePaymentMethodsWarning(): bool
     {
         return $this->hasElement('warning_no_payment_methods');
     }
@@ -99,7 +99,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
-    public function isNextStepButtonUnavailable()
+    public function isNextStepButtonUnavailable(): bool
     {
         return $this->getElement('next_step')->hasClass('disabled');
     }
@@ -107,7 +107,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
-    public function getPaymentMethods()
+    public function getPaymentMethods(): array
     {
         $inputs = $this->getSession()->getPage()->findAll('css', '#sylius-payment-methods .item .content label');
 
@@ -122,7 +122,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'address_step_label' => '.steps a:contains("Address")',

@@ -19,17 +19,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface ProductOptionRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @param string $locale
-     *
-     * @return QueryBuilder
-     */
     public function createListQueryBuilder(string $locale): QueryBuilder;
 
     /**
-     * @param string $name
-     * @param string $locale
-     *
      * @return array|ProductOptionInterface[]
      */
     public function findByName(string $name, string $locale): array;

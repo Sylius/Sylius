@@ -61,15 +61,6 @@ final class ProductAssociationContext implements Context
      */
     private $objectManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $productAssociationTypeFactory
-     * @param FactoryInterface $productAssociationTypeTranslationFactory
-     * @param FactoryInterface $productAssociationFactory
-     * @param ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository
-     * @param RepositoryInterface $productAssociationRepository
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $productAssociationTypeFactory,
@@ -92,7 +83,7 @@ final class ProductAssociationContext implements Context
      * @Given the store has (also) a product association type :name
      * @Given the store has (also) a product association type :name with a code :code
      */
-    public function theStoreHasAProductAssociationType($name, $code = null)
+    public function theStoreHasAProductAssociationType($name, $code = null): void
     {
         $this->createProductAssociationType($name, $code);
     }
@@ -100,7 +91,7 @@ final class ProductAssociationContext implements Context
     /**
      * @Given /^the store has(?:| also) a product association type named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
      */
-    public function itHasVariantNamedInAndIn($firstName, $firstLocale, $secondName, $secondLocale)
+    public function itHasVariantNamedInAndIn($firstName, $firstLocale, $secondName, $secondLocale): void
     {
         $productAssociationType = $this->createProductAssociationType($firstName);
 
@@ -115,7 +106,7 @@ final class ProductAssociationContext implements Context
     /**
      * @Given the store has :firstName and :secondName product association types
      */
-    public function theStoreHasProductAssociationTypes(...$names)
+    public function theStoreHasProductAssociationTypes(...$names): void
     {
         foreach ($names as $name) {
             $this->createProductAssociationType($name);
@@ -129,7 +120,7 @@ final class ProductAssociationContext implements Context
         ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
         ProductInterface $associatedProduct
-    ) {
+    ): void {
         $this->createProductAssociation($product, $productAssociationType, [$associatedProduct]);
     }
 
@@ -140,17 +131,11 @@ final class ProductAssociationContext implements Context
         ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
         array $associatedProducts
-    ) {
+    ): void {
         $this->createProductAssociation($product, $productAssociationType, $associatedProducts);
     }
 
-    /**
-     * @param string $name
-     * @param string|null $code
-     *
-     * @return ProductAssociationTypeInterface
-     */
-    private function createProductAssociationType($name, $code = null)
+    private function createProductAssociationType(string $name, string $code = null): ProductAssociationTypeInterface
     {
         if (null === $code) {
             $code = $this->generateCodeFromName($name);
@@ -167,16 +152,11 @@ final class ProductAssociationContext implements Context
         return $productAssociationType;
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param ProductAssociationTypeInterface $productAssociationType
-     * @param array $associatedProducts
-     */
     private function createProductAssociation(
         ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
         array $associatedProducts
-    ) {
+    ): void {
         /** @var ProductAssociationInterface $productAssociation */
         $productAssociation = $this->productAssociationFactory->createNew();
         $productAssociation->setType($productAssociationType);
@@ -190,16 +170,11 @@ final class ProductAssociationContext implements Context
         $this->productAssociationRepository->add($productAssociation);
     }
 
-    /**
-     * @param ProductAssociationTypeInterface $productAssociationType
-     * @param string $name
-     * @param string $locale
-     */
     private function addProductAssociationTypeTranslation(
         ProductAssociationTypeInterface $productAssociationType,
         string $name,
         string $locale
-    ) {
+    ): void {
         /** @var ProductAssociationTypeTranslationInterface $translation */
         $translation = $this->productAssociationTypeTranslationFactory->createNew();
         $translation->setLocale($locale);
@@ -208,12 +183,7 @@ final class ProductAssociationContext implements Context
         $productAssociationType->addTranslation($translation);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
-    private function generateCodeFromName($name)
+    private function generateCodeFromName(string $name): string
     {
         return str_replace([' ', '-'], '_', strtolower($name));
     }

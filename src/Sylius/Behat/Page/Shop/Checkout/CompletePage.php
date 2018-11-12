@@ -31,12 +31,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      */
     private $tableAccessor;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -51,7 +45,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_checkout_complete';
     }
@@ -59,7 +53,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasItemWithProductAndQuantity($productName, $quantity)
+    public function hasItemWithProductAndQuantity(string $productName, string $quantity): bool
     {
         $table = $this->getElement('items_table');
 
@@ -75,7 +69,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingAddress(AddressInterface $address)
+    public function hasShippingAddress(AddressInterface $address): bool
     {
         $shippingAddress = $this->getElement('shipping_address')->getText();
 
@@ -85,7 +79,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasBillingAddress(AddressInterface $address)
+    public function hasBillingAddress(AddressInterface $address): bool
     {
         $billingAddress = $this->getElement('billing_address')->getText();
 
@@ -95,7 +89,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingMethod(ShippingMethodInterface $shippingMethod)
+    public function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool
     {
         if (!$this->hasElement('shipping_method')) {
             return false;
@@ -107,7 +101,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPaymentMethodName()
+    public function getPaymentMethodName(): bool
     {
         return $this->getElement('payment_method')->getText();
     }
@@ -115,7 +109,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPaymentMethod()
+    public function hasPaymentMethod(): bool
     {
         return $this->hasElement('payment_method');
     }
@@ -123,7 +117,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasProductDiscountedUnitPriceBy(ProductInterface $product, $amount)
+    public function hasProductDiscountedUnitPriceBy(ProductInterface $product, float $amount): bool
     {
         $columns = $this->getProductRowElement($product)->findAll('css', 'td');
         $priceWithoutDiscount = $this->getPriceFromString($columns[1]->getText());
@@ -136,7 +130,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasOrderTotal($total)
+    public function hasOrderTotal(float $total): bool
     {
         if (!$this->hasElement('order_total')) {
             return false;
@@ -148,7 +142,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getBaseCurrencyOrderTotal()
+    public function getBaseCurrencyOrderTotal(): string
     {
         return $this->getBaseTotalFromString($this->getElement('base_order_total')->getText());
     }
@@ -156,7 +150,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addNotes($notes)
+    public function addNotes(string $notes): void
     {
         $this->getElement('extra_notes')->setValue($notes);
     }
@@ -164,7 +158,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPromotionTotal($promotionTotal)
+    public function hasPromotionTotal(string $promotionTotal): bool
     {
         return false !== strpos($this->getElement('promotion_total')->getText(), $promotionTotal);
     }
@@ -172,7 +166,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPromotion($promotionName)
+    public function hasPromotion(string $promotionName): bool
     {
         return false !== stripos($this->getElement('promotion_discounts')->getText(), $promotionName);
     }
@@ -180,7 +174,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingPromotion($promotionName)
+    public function hasShippingPromotion(string $promotionName): bool
     {
         return false !== stripos($this->getElement('promotion_shipping_discounts')->getText(), $promotionName);
     }
@@ -188,7 +182,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasTaxTotal($taxTotal)
+    public function hasTaxTotal(string $taxTotal): bool
     {
         return false !== strpos($this->getElement('tax_total')->getText(), $taxTotal);
     }
@@ -196,7 +190,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingTotal($price)
+    public function hasShippingTotal(string $price): bool
     {
         return false !== strpos($this->getElement('shipping_total')->getText(), $price);
     }
@@ -204,7 +198,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasProductUnitPrice(ProductInterface $product, $price)
+    public function hasProductUnitPrice(ProductInterface $product, string $price): bool
     {
         $productRowElement = $this->getProductRowElement($product);
 
@@ -214,7 +208,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product)
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool
     {
         $message = sprintf('%s does not have sufficient stock.', $product->getName());
 
@@ -224,7 +218,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getValidationErrors()
+    public function getValidationErrors(): string
     {
         return $this->getElement('validation_errors')->getText();
     }
@@ -232,7 +226,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasLocale($localeName)
+    public function hasLocale(string $localeName): bool
     {
         return false !== strpos($this->getElement('locale')->getText(), $localeName);
     }
@@ -240,7 +234,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCurrency($currencyCode)
+    public function hasCurrency(string $currencyCode): bool
     {
         return false !== strpos($this->getElement('currency')->getText(), $currencyCode);
     }
@@ -248,22 +242,22 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function confirmOrder()
+    public function confirmOrder(): void
     {
         $this->getElement('confirm_button')->press();
     }
 
-    public function changeAddress()
+    public function changeAddress(): void
     {
         $this->getElement('addressing_step_label')->click();
     }
 
-    public function changeShippingMethod()
+    public function changeShippingMethod(): void
     {
         $this->getElement('shipping_step_label')->click();
     }
 
-    public function changePaymentMethod()
+    public function changePaymentMethod(): void
     {
         $this->getElement('payment_step_label')->click();
     }
@@ -271,7 +265,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingProvinceName($provinceName)
+    public function hasShippingProvinceName(string $provinceName): bool
     {
         $shippingAddressText = $this->getElement('shipping_address')->getText();
 
@@ -281,7 +275,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasBillingProvinceName($provinceName)
+    public function hasBillingProvinceName(string $provinceName): bool
     {
         $billingAddressText = $this->getElement('billing_address')->getText();
 
@@ -291,7 +285,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingPromotionDiscount($promotionName)
+    public function getShippingPromotionDiscount(string $promotionName): string
     {
         return $this->getElement('promotion_shipping_discounts')->find('css', '.description')->getText();
     }
@@ -299,7 +293,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function tryToOpen(array $urlParameters = [])
+    public function tryToOpen(array $urlParameters = []): void
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
             $start = microtime(true);
@@ -318,7 +312,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'addressing_step_label' => '.steps a:contains("Address")',
@@ -345,23 +339,12 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         ]);
     }
 
-    /**
-     * @param ProductInterface $product
-     *
-     * @return NodeElement
-     */
-    private function getProductRowElement(ProductInterface $product)
+    private function getProductRowElement(ProductInterface $product): NodeElement
     {
         return $this->getElement('product_row', ['%name%' => $product->getName()]);
     }
 
-    /**
-     * @param string $displayedAddress
-     * @param AddressInterface $address
-     *
-     * @return bool
-     */
-    private function isAddressValid($displayedAddress, AddressInterface $address)
+    private function isAddressValid(string $displayedAddress, AddressInterface $address): bool
     {
         return
             $this->hasAddressPart($displayedAddress, $address->getCompany(), true) &&
@@ -376,13 +359,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         ;
     }
 
-    /**
-     * @param string $address
-     * @param string $addressPart
-     *
-     * @return bool
-     */
-    private function hasAddressPart($address, $addressPart, $optional = false)
+    private function hasAddressPart(string $address, string $addressPart, $optional = false): bool
     {
         if ($optional && null === $addressPart) {
             return true;
@@ -391,12 +368,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return false !== strpos($address, $addressPart);
     }
 
-    /**
-     * @param string $countryCode
-     *
-     * @return string
-     */
-    private function getCountryName($countryCode)
+    private function getCountryName(string $countryCode): string
     {
         return strtoupper(Intl::getRegionBundle()->getCountryName($countryCode, 'en'));
     }
@@ -406,24 +378,14 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
-    /**
-     * @param string $total
-     *
-     * @return int
-     */
-    private function getTotalFromString($total)
+    private function getTotalFromString(string $total): int
     {
         $total = str_replace('Total:', '', $total);
 
         return $this->getPriceFromString($total);
     }
 
-    /**
-     * @param string $total
-     *
-     * @return int
-     */
-    private function getBaseTotalFromString($total)
+    private function getBaseTotalFromString(string $total): int
     {
         $total = str_replace('Total in base currency:', '', $total);
 

@@ -30,10 +30,6 @@ final class AttributeFactory implements AttributeFactoryInterface
      */
     private $attributeTypesRegistry;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param ServiceRegistryInterface $attributeTypesRegistry
-     */
     public function __construct(FactoryInterface $factory, ServiceRegistryInterface $attributeTypesRegistry)
     {
         $this->factory = $factory;

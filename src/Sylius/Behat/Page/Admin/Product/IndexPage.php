@@ -40,7 +40,7 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function filterByTaxon($taxonName)
+    public function filterByTaxon(string $taxonName): void
     {
         $this->getElement('taxon_filter', ['%taxon%' => $taxonName])->click();
     }
@@ -56,7 +56,7 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'taxon_filter' => '.item a:contains("%taxon%")',

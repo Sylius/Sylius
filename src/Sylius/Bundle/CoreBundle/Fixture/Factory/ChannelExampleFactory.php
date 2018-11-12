@@ -56,12 +56,6 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
      */
     private $optionsResolver;
 
-    /**
-     * @param ChannelFactoryInterface $channelFactory
-     * @param RepositoryInterface $localeRepository
-     * @param RepositoryInterface $currencyRepository
-     * @param RepositoryInterface $zoneRepository
-     */
     public function __construct(
         ChannelFactoryInterface $channelFactory,
         RepositoryInterface $localeRepository,

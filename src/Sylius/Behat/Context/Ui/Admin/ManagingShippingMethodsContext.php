@@ -51,13 +51,6 @@ final class ManagingShippingMethodsContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -75,7 +68,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I want to create a new shipping method
      */
-    public function iWantToCreateANewShippingMethod()
+    public function iWantToCreateANewShippingMethod(): void
     {
         $this->createPage->open();
     }
@@ -84,7 +77,7 @@ final class ManagingShippingMethodsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs($code = null): void
     {
         $this->createPage->specifyCode($code);
     }
@@ -92,7 +85,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I specify its position as :position
      */
-    public function iSpecifyItsPositionAs($position = null)
+    public function iSpecifyItsPositionAs($position = null): void
     {
         $this->createPage->specifyPosition($position);
     }
@@ -101,7 +94,7 @@ final class ManagingShippingMethodsContext implements Context
      * @When I name it :name in :language
      * @When I rename it to :name in :language
      */
-    public function iNameItIn($name, $language)
+    public function iNameItIn($name, $language): void
     {
         $this->createPage->nameIt($name, $language);
     }
@@ -109,7 +102,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I describe it as :description in :language
      */
-    public function iDescribeItAsIn($description, $language)
+    public function iDescribeItAsIn($description, $language): void
     {
         $this->createPage->describeIt($description, $language);
     }
@@ -117,7 +110,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I define it for the :zoneName zone
      */
-    public function iDefineItForTheZone($zoneName)
+    public function iDefineItForTheZone($zoneName): void
     {
         $this->createPage->chooseZone($zoneName);
     }
@@ -125,7 +118,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I specify its amount as :amount for :channel channel
      */
-    public function iSpecifyItsAmountForChannel($amount, ChannelInterface $channel)
+    public function iSpecifyItsAmountForChannel($amount, ChannelInterface $channel): void
     {
         $this->createPage->specifyAmountForChannel($channel->getCode(), $amount);
     }
@@ -133,7 +126,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I make it available in channel :channelName
      */
-    public function iMakeItAvailableInChannel($channelName)
+    public function iMakeItAvailableInChannel($channelName): void
     {
         $this->createPage->checkChannel($channelName);
     }
@@ -142,7 +135,7 @@ final class ManagingShippingMethodsContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -151,7 +144,7 @@ final class ManagingShippingMethodsContext implements Context
      * @When I choose :calculatorName calculator
      * @When I do not specify amount for :calculatorName calculator
      */
-    public function iChooseCalculator($calculatorName)
+    public function iChooseCalculator($calculatorName): void
     {
         $this->createPage->chooseCalculator($calculatorName);
     }
@@ -187,7 +180,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Given /^(this shipping method) should still be in the registry$/
      */
-    public function thisShippingMethodShouldStillBeInTheRegistry(ShippingMethodInterface $shippingMethod)
+    public function thisShippingMethodShouldStillBeInTheRegistry(ShippingMethodInterface $shippingMethod): void
     {
         $this->theShipmentMethodShouldAppearInTheRegistry($shippingMethod->getName());
     }
@@ -198,7 +191,7 @@ final class ManagingShippingMethodsContext implements Context
     public function theShippingMethodShouldBeAvailableInChannel(
         ShippingMethodInterface $shippingMethod,
         $channelName
-    ) {
+    ): void {
         $this->iWantToModifyAShippingMethod($shippingMethod);
 
         Assert::true($this->updatePage->isAvailableInChannel($channelName));
@@ -207,7 +200,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then I should be notified that shipping method with this code already exists
      */
-    public function iShouldBeNotifiedThatShippingMethodWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatShippingMethodWithThisCodeAlreadyExists(): void
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'The shipping method with given code already exists.');
     }
@@ -215,7 +208,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then there should still be only one shipping method with :element :code
      */
-    public function thereShouldStillBeOnlyOneShippingMethodWith($element, $code)
+    public function thereShouldStillBeOnlyOneShippingMethodWith($element, $code): void
     {
         $this->iWantToBrowseShippingMethods();
 
@@ -226,7 +219,7 @@ final class ManagingShippingMethodsContext implements Context
      * @Given I want to modify a shipping method :shippingMethod
      * @Given /^I want to modify (this shipping method)$/
      */
-    public function iWantToModifyAShippingMethod(ShippingMethodInterface $shippingMethod)
+    public function iWantToModifyAShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->updatePage->open(['id' => $shippingMethod->getId()]);
     }
@@ -234,7 +227,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then the code field should be disabled
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function theCodeFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -243,7 +236,7 @@ final class ManagingShippingMethodsContext implements Context
      * @Then /^(this shipping method) name should be "([^"]+)"$/
      * @Then /^(this shipping method) should still be named "([^"]+)"$/
      */
-    public function thisShippingMethodNameShouldBe(ShippingMethodInterface $shippingMethod, $shippingMethodName)
+    public function thisShippingMethodNameShouldBe(ShippingMethodInterface $shippingMethod, $shippingMethodName): void
     {
         $this->iWantToBrowseShippingMethods();
 
@@ -257,7 +250,7 @@ final class ManagingShippingMethodsContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -265,7 +258,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired($element): void
     {
         $this->assertFieldValidationMessage($element, sprintf('Please enter shipping method %s.', $element));
     }
@@ -273,7 +266,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then I should be notified that code needs to contain only specific symbols
      */
-    public function iShouldBeNotifiedThatCodeShouldContain()
+    public function iShouldBeNotifiedThatCodeShouldContain(): void
     {
         $this->assertFieldValidationMessage(
             'code',
@@ -284,7 +277,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I archive the :name shipping method
      */
-    public function iArchiveTheShippingMethod($name)
+    public function iArchiveTheShippingMethod($name): void
     {
         $actions = $this->indexPage->getActionsForResource(['name' => $name]);
         $actions->pressButton('Archive');
@@ -293,7 +286,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I restore the :name shipping method
      */
-    public function iRestoreTheShippingMethod($name)
+    public function iRestoreTheShippingMethod($name): void
     {
         $actions = $this->indexPage->getActionsForResource(['name' => $name]);
         $actions->pressButton('Restore');
@@ -302,7 +295,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then I should be viewing non archival shipping methods
      */
-    public function iShouldBeViewingNonArchivalShippingMethods()
+    public function iShouldBeViewingNonArchivalShippingMethods(): void
     {
         Assert::false($this->indexPage->isArchivalFilterEnabled());
     }
@@ -320,7 +313,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then the only shipping method on the list should be :name
      */
-    public function theOnlyShippingMethodOnTheListShouldBe($name)
+    public function theOnlyShippingMethodOnTheListShouldBe($name): void
     {
         Assert::same((int) $this->indexPage->countItems(), 1);
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name]));
@@ -329,7 +322,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then shipping method with :element :name should not be added
      */
-    public function shippingMethodWithElementValueShouldNotBeAdded($element, $name)
+    public function shippingMethodWithElementValueShouldNotBeAdded($element, $name): void
     {
         $this->iWantToBrowseShippingMethods();
 
@@ -339,7 +332,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I do not name it
      */
-    public function iDoNotNameIt()
+    public function iDoNotNameIt(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -347,7 +340,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I do not specify its zone
      */
-    public function iDoNotSpecifyItsZone()
+    public function iDoNotSpecifyItsZone(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -355,7 +348,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I remove its zone
      */
-    public function iRemoveItsZone()
+    public function iRemoveItsZone(): void
     {
         $this->updatePage->removeZone();
     }
@@ -363,7 +356,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then I should be notified that :element has to be selected
      */
-    public function iShouldBeNotifiedThatElementHasToBeSelected($element)
+    public function iShouldBeNotifiedThatElementHasToBeSelected($element): void
     {
         $this->assertFieldValidationMessage($element, sprintf('Please select shipping method %s.', $element));
     }
@@ -371,7 +364,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I remove its name from :language translation
      */
-    public function iRemoveItsNameFromTranslation($language)
+    public function iRemoveItsNameFromTranslation($language): void
     {
         $this->createPage->nameIt(null, $language);
     }
@@ -381,7 +374,7 @@ final class ManagingShippingMethodsContext implements Context
      * @When I browse shipping methods
      * @When I want to browse shipping methods
      */
-    public function iWantToBrowseShippingMethods()
+    public function iWantToBrowseShippingMethods(): void
     {
         $this->indexPage->open();
     }
@@ -389,7 +382,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Given I am browsing archival shipping methods
      */
-    public function iAmBrowsingArchivalShippingMethods()
+    public function iAmBrowsingArchivalShippingMethods(): void
     {
         $this->indexPage->open();
         $this->indexPage->chooseArchival('Yes');
@@ -399,7 +392,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Given I filter archival shipping methods
      */
-    public function iFilterArchivalShippingMethods()
+    public function iFilterArchivalShippingMethods(): void
     {
         $this->indexPage->chooseArchival('Yes');
         $this->indexPage->filter();
@@ -408,7 +401,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then the first shipping method on the list should have :field :value
      */
-    public function theFirstShippingMethodOnTheListShouldHave($field, $value)
+    public function theFirstShippingMethodOnTheListShouldHave($field, $value): void
     {
         $fields = $this->indexPage->getColumnFields($field);
 
@@ -418,7 +411,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then the last shipping method on the list should have :field :value
      */
-    public function theLastShippingMethodOnTheListShouldHave($field, $value)
+    public function theLastShippingMethodOnTheListShouldHave($field, $value): void
     {
         $fields = $this->indexPage->getColumnFields($field);
 
@@ -430,7 +423,7 @@ final class ManagingShippingMethodsContext implements Context
      * @When I start sorting shipping methods by :field
      * @Given the shipping methods are already sorted by :field
      */
-    public function iSortShippingMethodsBy($field)
+    public function iSortShippingMethodsBy($field): void
     {
         $this->indexPage->sortBy($field);
     }
@@ -438,7 +431,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I enable it
      */
-    public function iEnableIt()
+    public function iEnableIt(): void
     {
         $this->updatePage->enable();
     }
@@ -446,7 +439,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I disable it
      */
-    public function iDisableIt()
+    public function iDisableIt(): void
     {
         $this->updatePage->disable();
     }
@@ -454,7 +447,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then /^(this shipping method) should be disabled$/
      */
-    public function thisShippingMethodShouldBeDisabled(ShippingMethodInterface $shippingMethod)
+    public function thisShippingMethodShouldBeDisabled(ShippingMethodInterface $shippingMethod): void
     {
         $this->assertShippingMethodState($shippingMethod, false);
     }
@@ -462,7 +455,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then /^(this shipping method) should be enabled$/
      */
-    public function thisShippingMethodShouldBeEnabled(ShippingMethodInterface $shippingMethod)
+    public function thisShippingMethodShouldBeEnabled(ShippingMethodInterface $shippingMethod): void
     {
         $this->assertShippingMethodState($shippingMethod, true);
     }
@@ -471,7 +464,7 @@ final class ManagingShippingMethodsContext implements Context
      * @When I delete shipping method :shippingMethod
      * @When I try to delete shipping method :shippingMethod
      */
-    public function iDeleteShippingMethod(ShippingMethodInterface $shippingMethod)
+    public function iDeleteShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['name' => $shippingMethod->getName()]);
@@ -480,7 +473,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then /^(this shipping method) should no longer exist in the registry$/
      */
-    public function thisShippingMethodShouldNoLongerExistInTheRegistry(ShippingMethodInterface $shippingMethod)
+    public function thisShippingMethodShouldNoLongerExistInTheRegistry(ShippingMethodInterface $shippingMethod): void
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $shippingMethod->getCode()]));
     }
@@ -488,7 +481,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then I should be notified that it is in use
      */
-    public function iShouldBeNotifiedThatItIsInUse()
+    public function iShouldBeNotifiedThatItIsInUse(): void
     {
         $this->notificationChecker->checkNotification('Cannot delete, the shipping method is in use.', NotificationType::failure());
     }
@@ -496,7 +489,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then I should be notified that amount for :channel channel should not be blank
      */
-    public function iShouldBeNotifiedThatAmountForChannelShouldNotBeBlank(ChannelInterface $channel)
+    public function iShouldBeNotifiedThatAmountForChannelShouldNotBeBlank(ChannelInterface $channel): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -507,11 +500,7 @@ final class ManagingShippingMethodsContext implements Context
         );
     }
 
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage($element, $expectedMessage)
+    private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -519,11 +508,7 @@ final class ManagingShippingMethodsContext implements Context
         Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
     }
 
-    /**
-     * @param ShippingMethodInterface $shippingMethod
-     * @param bool $state
-     */
-    private function assertShippingMethodState(ShippingMethodInterface $shippingMethod, $state)
+    private function assertShippingMethodState(ShippingMethodInterface $shippingMethod, bool $state): void
     {
         $this->iWantToBrowseShippingMethods();
 

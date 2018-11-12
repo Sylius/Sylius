@@ -20,7 +20,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyFirstName($name)
+    public function specifyFirstName(string $name): void
     {
         $this->getDocument()->fillField('First name', $name);
     }
@@ -28,7 +28,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyLastName($name)
+    public function specifyLastName(string $name): void
     {
         $this->getDocument()->fillField('Last name', $name);
     }
@@ -36,7 +36,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyEmail($email)
+    public function specifyEmail(string $email): void
     {
         $this->getDocument()->fillField('Email', $email);
     }
@@ -44,7 +44,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyBirthday($birthday)
+    public function specifyBirthday(string $birthday): void
     {
         $this->getDocument()->fillField('Birthday', $birthday);
     }
@@ -52,7 +52,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPassword($password)
+    public function specifyPassword(string $password): void
     {
         $this->getDocument()->fillField('Password', $password);
     }
@@ -60,7 +60,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseGender($gender)
+    public function chooseGender(string $gender): void
     {
         $this->getDocument()->selectFieldOption('Gender', $gender);
     }
@@ -68,7 +68,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseGroup($group)
+    public function chooseGroup(string $group): void
     {
         $this->getDocument()->selectFieldOption('Group', $group);
     }
@@ -76,7 +76,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectCreateAccount()
+    public function selectCreateAccount(): void
     {
         $this->getDocument()->find('css', 'label[for=sylius_customer_createUser]')->click();
     }
@@ -84,7 +84,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPasswordField()
+    public function hasPasswordField(): bool
     {
         return null !== $this->getDocument()->find('css', '#sylius_customer_user_plainPassword');
     }
@@ -92,7 +92,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCheckedCreateOption()
+    public function hasCheckedCreateOption(): bool
     {
         return $this->getElement('create_customer_user')->hasAttribute('checked');
     }
@@ -100,7 +100,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCreateOption()
+    public function hasCreateOption(): bool
     {
         return null !== $this->getDocument()->find('css', '#sylius_customer_createUser');
     }
@@ -108,7 +108,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isUserFormHidden()
+    public function isUserFormHidden(): bool
     {
         return false !== strpos($this->getElement('user_form')->getAttribute('style'), 'none');
     }
@@ -116,7 +116,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'create_customer_user' => '#sylius_customer_createUser',

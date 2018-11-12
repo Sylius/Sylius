@@ -27,7 +27,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameIt($name, $languageCode)
+    public function nameIt(string $name, string $languageCode): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_payment_method_translations_%s_name', $languageCode), $name
@@ -37,7 +37,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function checkChannel($channelName)
+    public function checkChannel(string $channelName): void
     {
         $this->getDocument()->checkField($channelName);
     }
@@ -45,7 +45,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function describeIt($description, $languageCode)
+    public function describeIt(string $description, string $languageCode): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_payment_method_translations_%s_description', $languageCode), $description
@@ -55,7 +55,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setInstructions($instructions, $languageCode)
+    public function setInstructions(string $instructions, string $languageCode): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_payment_method_translations_%s_instructions', $languageCode), $instructions
@@ -65,7 +65,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaypalGatewayUsername($username)
+    public function setPaypalGatewayUsername(string $username): void
     {
         $this->getDocument()->fillField('Username', $username);
     }
@@ -73,7 +73,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaypalGatewayPassword($password)
+    public function setPaypalGatewayPassword(string $password): void
     {
         $this->getDocument()->fillField('Password', $password);
     }
@@ -81,7 +81,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaypalGatewaySignature($signature)
+    public function setPaypalGatewaySignature(string $signature): void
     {
         $this->getDocument()->fillField('Signature', $signature);
     }
@@ -89,7 +89,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setStripeSecretKey($secretKey)
+    public function setStripeSecretKey(string $secretKey): void
     {
         $this->getDocument()->fillField('Secret key', $secretKey);
     }
@@ -97,7 +97,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setStripePublishableKey($publishableKey)
+    public function setStripePublishableKey(string $publishableKey): void
     {
         $this->getDocument()->fillField('Publishable key', $publishableKey);
     }
@@ -105,7 +105,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isPaymentMethodEnabled()
+    public function isPaymentMethodEnabled(): bool
     {
         return (bool) $this->getToggleableElement()->getValue();
     }
@@ -129,7 +129,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_payment_method_code',

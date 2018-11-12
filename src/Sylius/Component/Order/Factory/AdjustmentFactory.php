@@ -23,9 +23,6 @@ class AdjustmentFactory implements AdjustmentFactoryInterface
      */
     private $adjustmentFactory;
 
-    /**
-     * @param FactoryInterface $adjustmentFactory
-     */
     public function __construct(FactoryInterface $adjustmentFactory)
     {
         $this->adjustmentFactory = $adjustmentFactory;

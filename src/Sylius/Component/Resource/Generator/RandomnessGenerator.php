@@ -61,12 +61,6 @@ final class RandomnessGenerator implements RandomnessGeneratorInterface
         return random_int($min, $max);
     }
 
-    /**
-     * @param int $length
-     * @param string $alphabet
-     *
-     * @return string
-     */
     private function generateStringOfLength(int $length, string $alphabet): string
     {
         $alphabetMaxIndex = strlen($alphabet) - 1;

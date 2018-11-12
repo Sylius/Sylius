@@ -17,55 +17,26 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @param int|null $priority
-     */
-    public function setPriority($priority);
+    public function setPriority(?int $priority);
 
-    /**
-     * @return int
-     */
-    public function getPriority();
+    public function getPriority(): int;
 
-    /**
-     * @param string $name
-     */
-    public function nameIt($name);
+    public function nameIt(string $name);
 
-    /**
-     * @param string $channelName
-     *
-     * @return bool
-     */
-    public function checkChannelsState($channelName);
+    public function checkChannelsState(string $channelName): bool;
 
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @param string $limit
-     */
-    public function fillUsageLimit($limit);
+    public function fillUsageLimit(string $limit);
 
     public function makeExclusive();
 
     public function checkCouponBased();
 
-    /**
-     * @param string $name
-     */
-    public function checkChannel($name);
+    public function checkChannel(string $name);
 
-    /**
-     * @param \DateTimeInterface $dateTime
-     */
     public function setStartsAt(\DateTimeInterface $dateTime);
 
-    /**
-     * @param \DateTimeInterface $dateTime
-     */
     public function setEndsAt(\DateTimeInterface $dateTime);
 
     /**

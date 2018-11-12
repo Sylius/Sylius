@@ -38,10 +38,6 @@ abstract class Page implements PageInterface
      */
     private $document;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     */
     public function __construct(Session $session, array $parameters = [])
     {
         $this->session = $session;
@@ -51,7 +47,7 @@ abstract class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function open(array $urlParameters = [])
+    public function open(array $urlParameters = []): void
     {
         $this->tryToOpen($urlParameters);
         $this->verify($urlParameters);
@@ -60,7 +56,7 @@ abstract class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function tryToOpen(array $urlParameters = [])
+    public function tryToOpen(array $urlParameters = []): void
     {
         $this->getSession()->visit($this->getUrl($urlParameters));
     }
@@ -68,7 +64,7 @@ abstract class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function verify(array $urlParameters = [])
+    public function verify(array $urlParameters = []): void
     {
         $this->verifyStatusCode();
         $this->verifyUrl($urlParameters);
@@ -77,7 +73,7 @@ abstract class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function isOpen(array $urlParameters = [])
+    public function isOpen(array $urlParameters = []): bool
     {
         try {
             $this->verify($urlParameters);
@@ -88,17 +84,12 @@ abstract class Page implements PageInterface
         return true;
     }
 
-    /**
-     * @param array $urlParameters
-     *
-     * @return string
-     */
-    abstract protected function getUrl(array $urlParameters = []);
+    abstract protected function getUrl(array $urlParameters = []): string;
 
     /**
      * @throws UnexpectedPageException
      */
-    protected function verifyStatusCode()
+    protected function verifyStatusCode(): void
     {
         try {
             $statusCode = $this->getSession()->getStatusCode();
@@ -119,23 +110,17 @@ abstract class Page implements PageInterface
     /**
      * Overload to verify if the current url matches the expected one. Throw an exception otherwise.
      *
-     * @param array $urlParameters
      *
      * @throws UnexpectedPageException
      */
-    protected function verifyUrl(array $urlParameters = [])
+    protected function verifyUrl(array $urlParameters = []): void
     {
         if ($this->getSession()->getCurrentUrl() !== $this->getUrl($urlParameters)) {
             throw new UnexpectedPageException(sprintf('Expected to be on "%s" but found "%s" instead', $this->getUrl($urlParameters), $this->getSession()->getCurrentUrl()));
         }
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
-    protected function getParameter($name)
+    protected function getParameter(string $name): string
     {
         return $this->parameters[$name] ?? null;
     }
@@ -144,23 +129,16 @@ abstract class Page implements PageInterface
      * Defines elements by returning an array with items being:
      *  - :elementName => :cssLocator
      *  - :elementName => [:selectorType => :locator]
-     *
-     * @return array
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return [];
     }
 
     /**
-     * @param string $name
-     * @param array $parameters
-     *
-     * @return NodeElement
-     *
      * @throws ElementNotFoundException
      */
-    protected function getElement($name, array $parameters = [])
+    protected function getElement(string $name, array $parameters = []): NodeElement
     {
         $element = $this->createElement($name, $parameters);
 
@@ -176,37 +154,22 @@ abstract class Page implements PageInterface
         return $element;
     }
 
-    /**
-     * @param string $name
-     * @param array $parameters
-     *
-     * @return bool
-     */
-    protected function hasElement($name, array $parameters = [])
+    protected function hasElement(string $name, array $parameters = []): bool
     {
         return $this->getDocument()->has('xpath', $this->createElement($name, $parameters)->getXpath());
     }
 
-    /**
-     * @return Session
-     */
-    protected function getSession()
+    protected function getSession(): Session
     {
         return $this->session;
     }
 
-    /**
-     * @return DriverInterface
-     */
-    protected function getDriver()
+    protected function getDriver(): DriverInterface
     {
         return $this->session->getDriver();
     }
 
-    /**
-     * @return DocumentElement
-     */
-    protected function getDocument()
+    protected function getDocument(): DocumentElement
     {
         if (null === $this->document) {
             $this->document = new DocumentElement($this->session);
@@ -215,13 +178,7 @@ abstract class Page implements PageInterface
         return $this->document;
     }
 
-    /**
-     * @param string $name
-     * @param array $parameters
-     *
-     * @return NodeElement
-     */
-    private function createElement($name, array $parameters = [])
+    private function createElement(string $name, array $parameters = []): NodeElement
     {
         $definedElements = $this->getDefinedElements();
 
@@ -243,11 +200,8 @@ abstract class Page implements PageInterface
 
     /**
      * @param string|array $selector
-     * @param SelectorsHandler $selectorsHandler
-     *
-     * @return string
      */
-    private function getSelectorAsXpath($selector, SelectorsHandler $selectorsHandler)
+    private function getSelectorAsXpath($selector, SelectorsHandler $selectorsHandler): string
     {
         $selectorType = is_array($selector) ? key($selector) : 'css';
         $locator = is_array($selector) ? $selector[$selectorType] : $selector;
@@ -256,13 +210,9 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param string $name
-     * @param array $parameters
      * @param array$definedElements
-     *
-     * @return string
      */
-    private function resolveParameters($name, array $parameters, array $definedElements)
+    private function resolveParameters(string $name, array $parameters, array $definedElements): string
     {
         if (!is_array($definedElements[$name])) {
             return strtr($definedElements[$name], $parameters);

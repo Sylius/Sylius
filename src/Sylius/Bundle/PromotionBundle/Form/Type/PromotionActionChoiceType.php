@@ -24,9 +24,6 @@ final class PromotionActionChoiceType extends AbstractType
      */
     private $actions;
 
-    /**
-     * @param array $actions
-     */
     public function __construct(array $actions)
     {
         $this->actions = $actions;

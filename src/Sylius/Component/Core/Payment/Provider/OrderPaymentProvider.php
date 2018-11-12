@@ -41,11 +41,6 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
      */
     private $stateMachineFactory;
 
-    /**
-     * @param DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
-     * @param PaymentFactoryInterface $paymentFactory
-     * @param StateMachineFactoryInterface $stateMachineFactory
-     */
     public function __construct(
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         PaymentFactoryInterface $paymentFactory,
@@ -81,11 +76,6 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
         return $payment;
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return PaymentInterface|null
-     */
     private function getLastPayment(OrderInterface $order): ?PaymentInterface
     {
         $lastCancelledPayment = $order->getLastPayment(PaymentInterface::STATE_CANCELLED);
@@ -101,12 +91,6 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
         return null;
     }
 
-    /**
-     * @param PaymentInterface $payment
-     * @param OrderInterface $order
-     *
-     * @return PaymentMethodInterface|null
-     */
     private function getDefaultPaymentMethod(PaymentInterface $payment, OrderInterface $order): ?PaymentMethodInterface
     {
         try {
@@ -119,10 +103,6 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
         }
     }
 
-    /**
-     * @param PaymentInterface $payment
-     * @param string $targetState
-     */
     private function applyRequiredTransition(PaymentInterface $payment, string $targetState): void
     {
         if ($targetState === $payment->getState()) {

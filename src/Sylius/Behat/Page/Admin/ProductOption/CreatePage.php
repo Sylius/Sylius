@@ -26,7 +26,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameItIn($name, $language)
+    public function nameItIn(string $name, string $language): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_option_translations_%s_name', $language), $name
@@ -36,7 +36,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function addOptionValue($code, $value)
+    public function addOptionValue(string $code, string $value): void
     {
         $this->getDocument()->clickLink('Add value');
 
@@ -49,7 +49,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function checkValidationMessageForOptionValues($message)
+    public function checkValidationMessageForOptionValues(string $message)
     {
         $optionValuesValidationElement = $this->getElement('values_validation')->find('css', '.sylius-validation-error');
         if (null === $optionValuesValidationElement) {
@@ -62,7 +62,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_option_code',
@@ -72,9 +72,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         ]);
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastOptionValueElement(): NodeElement
     {
         $optionValues = $this->getElement('values');

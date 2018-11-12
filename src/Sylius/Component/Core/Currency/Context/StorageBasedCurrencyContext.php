@@ -31,10 +31,6 @@ final class StorageBasedCurrencyContext implements CurrencyContextInterface
      */
     private $currencyStorage;
 
-    /**
-     * @param ChannelContextInterface $channelContext
-     * @param CurrencyStorageInterface $currencyStorage
-     */
     public function __construct(ChannelContextInterface $channelContext, CurrencyStorageInterface $currencyStorage)
     {
         $this->channelContext = $channelContext;

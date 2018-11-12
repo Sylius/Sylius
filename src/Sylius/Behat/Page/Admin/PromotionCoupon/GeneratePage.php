@@ -22,7 +22,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function checkAmountValidation($message)
+    public function checkAmountValidation(string $message): bool
     {
         return $this->checkValidationMessageFor('amount', $message);
     }
@@ -30,7 +30,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function checkCodeLengthValidation($message)
+    public function checkCodeLengthValidation(string $message): bool
     {
         return $this->checkValidationMessageFor('code_length', $message);
     }
@@ -38,12 +38,12 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function checkGenerationValidation($message)
+    public function checkGenerationValidation(string $message): bool
     {
         return false !== strpos($this->getElement('form')->find('css', '.ui.red.label')->getText(), $message);
     }
 
-    public function generate()
+    public function generate(): void
     {
         $this->getDocument()->pressButton('Generate');
     }
@@ -51,7 +51,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyAmount($amount)
+    public function specifyAmount(int $amount): void
     {
         $this->getDocument()->fillField('Amount', $amount);
     }
@@ -59,7 +59,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyCodeLength($codeLength)
+    public function specifyCodeLength(int $codeLength): void
     {
         $this->getDocument()->fillField('Code length', $codeLength);
     }
@@ -67,7 +67,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setExpiresAt(\DateTimeInterface $date)
+    public function setExpiresAt(\DateTimeInterface $date): void
     {
         $timestamp = $date->getTimestamp();
 
@@ -77,7 +77,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setUsageLimit($limit)
+    public function setUsageLimit(int $limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);
     }
@@ -85,7 +85,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_admin_promotion_coupon_generate';
     }
@@ -93,7 +93,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'amount' => '#sylius_promotion_coupon_generator_instruction_amount',
@@ -105,14 +105,9 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     }
 
     /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
-     *
      * @throws ElementNotFoundException
      */
-    private function checkValidationMessageFor($element, $message)
+    private function checkValidationMessageFor(string $element, string $message): bool
     {
         $foundElement = $this->getElement($element);
         $validatedField = $this->getValidatedField($foundElement);
@@ -124,13 +119,9 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     }
 
     /**
-     * @param NodeElement $element
-     *
-     * @return NodeElement
-     *
      * @throws ElementNotFoundException
      */
-    private function getValidatedField(NodeElement $element)
+    private function getValidatedField(NodeElement $element): NodeElement
     {
         while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();

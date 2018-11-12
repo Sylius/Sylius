@@ -20,7 +20,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_account_dashboard';
     }
@@ -28,7 +28,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCustomerName($name)
+    public function hasCustomerName(string $name): bool
     {
         return $this->hasValueInCustomerSection($name);
     }
@@ -36,7 +36,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCustomerEmail($email)
+    public function hasCustomerEmail(string $email): bool
     {
         return $this->hasValueInCustomerSection($email);
     }
@@ -44,7 +44,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isVerified()
+    public function isVerified(): bool
     {
         return !$this->hasElement('verification');
     }
@@ -52,7 +52,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasResendVerificationEmailButton()
+    public function hasResendVerificationEmailButton(): bool
     {
         return $this->getDocument()->hasButton('Verify');
     }
@@ -60,7 +60,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function pressResendVerificationEmail()
+    public function pressResendVerificationEmail(): void
     {
         $this->getDocument()->pressButton('Verify');
     }
@@ -68,7 +68,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'customer' => '#customer-information',
@@ -76,12 +76,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         ]);
     }
 
-    /**
-     * @param string $value
-     *
-     * @return bool
-     */
-    private function hasValueInCustomerSection($value)
+    private function hasValueInCustomerSection(string $value): bool
     {
         $customerText = $this->getElement('customer')->getText();
 

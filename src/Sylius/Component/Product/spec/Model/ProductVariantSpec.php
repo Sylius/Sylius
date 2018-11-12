@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class ProductVariantSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->setCurrentLocale('en_US');
         $this->setFallbackLocale('en_US');

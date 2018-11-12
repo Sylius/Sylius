@@ -25,17 +25,17 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SharedSecurityServiceSpec extends ObjectBehavior
 {
-    function let(SecurityServiceInterface $adminSecurityService)
+    function let(SecurityServiceInterface $adminSecurityService): void
     {
         $this->beConstructedWith($adminSecurityService);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(SharedSecurityService::class);
     }
 
-    function it_implements_shared_security_service()
+    function it_implements_shared_security_service(): void
     {
         $this->shouldImplement(SharedSecurityServiceInterface::class);
     }
@@ -45,7 +45,7 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
         TokenInterface $token,
         OrderInterface $order,
         AdminUserInterface $adminUser
-    ) {
+    ): void {
         $adminSecurityService->getCurrentToken()->willReturn($token);
         $adminSecurityService->logIn($adminUser)->shouldBeCalled();
         $order->completeCheckout()->shouldBeCalled();
@@ -55,7 +55,7 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
         $wrappedOrder = $order->getWrappedObject();
         $this->performActionAsAdminUser(
             $adminUser,
-            function () use ($wrappedOrder) {
+            function () use ($wrappedOrder): void {
                 $wrappedOrder->completeCheckout();
             }
         );
@@ -65,7 +65,7 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
         SecurityServiceInterface $adminSecurityService,
         OrderInterface $order,
         AdminUserInterface $adminUser
-    ) {
+    ): void {
         $adminSecurityService->getCurrentToken()->willThrow(TokenNotFoundException::class);
         $adminSecurityService->logIn($adminUser)->shouldBeCalled();
         $order->completeCheckout()->shouldBeCalled();
@@ -75,7 +75,7 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
         $wrappedOrder = $order->getWrappedObject();
         $this->performActionAsAdminUser(
             $adminUser,
-            function () use ($wrappedOrder) {
+            function () use ($wrappedOrder): void {
                 $wrappedOrder->completeCheckout();
             }
         );

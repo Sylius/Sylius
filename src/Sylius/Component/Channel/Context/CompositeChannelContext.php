@@ -28,10 +28,6 @@ final class CompositeChannelContext implements ChannelContextInterface
         $this->channelContexts = new PriorityQueue();
     }
 
-    /**
-     * @param ChannelContextInterface $channelContext
-     * @param int $priority
-     */
     public function addContext(ChannelContextInterface $channelContext, int $priority = 0): void
     {
         $this->channelContexts->insert($channelContext, $priority);

@@ -27,9 +27,6 @@ final class CustomerRegistrationFormSubscriber implements EventSubscriberInterfa
      */
     private $customerRepository;
 
-    /**
-     * @param RepositoryInterface $customerRepository
-     */
     public function __construct(RepositoryInterface $customerRepository)
     {
         $this->customerRepository = $customerRepository;

@@ -55,13 +55,6 @@ final class ShowAvailableShippingMethodsController
      */
     private $calculators;
 
-    /**
-     * @param FactoryInterface $stateMachineFactory
-     * @param OrderRepositoryInterface $orderRepository
-     * @param ShippingMethodsResolverInterface $shippingMethodsResolver
-     * @param ViewHandlerInterface $restViewHandler
-     * @param ServiceRegistryInterface $calculators
-     */
     public function __construct(
         FactoryInterface $stateMachineFactory,
         OrderRepositoryInterface $orderRepository,
@@ -76,11 +69,6 @@ final class ShowAvailableShippingMethodsController
         $this->calculators = $calculators;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function showAction(Request $request): Response
     {
         /** @var OrderInterface $cart */
@@ -102,10 +90,6 @@ final class ShowAvailableShippingMethodsController
     }
 
     /**
-     * @param mixed $cartId
-     *
-     * @return OrderInterface
-     *
      * @throws NotFoundHttpException
      */
     private function getCartOr404($cartId): OrderInterface
@@ -119,23 +103,11 @@ final class ShowAvailableShippingMethodsController
         return $cart;
     }
 
-    /**
-     * @param OrderInterface $cart
-     * @param string $transition
-     *
-     * @return bool
-     */
     private function isCheckoutTransitionPossible(OrderInterface $cart, string $transition): bool
     {
         return $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->can($transition);
     }
 
-    /**
-     * @param ShipmentInterface $shipment
-     * @param string $locale
-     *
-     * @return array
-     */
     private function getCalculatedShippingMethods(ShipmentInterface $shipment, string $locale): array
     {
         $shippingMethods = $this->shippingMethodsResolver->getSupportedMethods($shipment);

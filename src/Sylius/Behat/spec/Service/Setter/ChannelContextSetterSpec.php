@@ -21,17 +21,17 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 
 final class ChannelContextSetterSpec extends ObjectBehavior
 {
-    function let(CookieSetterInterface $cookieSetter)
+    function let(CookieSetterInterface $cookieSetter): void
     {
         $this->beConstructedWith($cookieSetter);
     }
 
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(ChannelContextSetter::class);
     }
 
-    function it_implements_channel_context_setter_interface()
+    function it_implements_channel_context_setter_interface(): void
     {
         $this->shouldImplement(ChannelContextSetterInterface::class);
     }
@@ -39,7 +39,7 @@ final class ChannelContextSetterSpec extends ObjectBehavior
     function it_sets_channel_as_current(
         CookieSetterInterface $cookieSetter,
         ChannelInterface $channel
-    ) {
+    ): void {
         $channel->getCode()->willReturn('CHANNEL_CODE');
 
         $cookieSetter->setCookie('_channel_code', 'CHANNEL_CODE')->shouldBeCalled();

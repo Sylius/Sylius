@@ -25,9 +25,6 @@ final class ProductFilterConfigurationType extends AbstractType
      */
     private $productsToCodesTransformer;
 
-    /**
-     * @param DataTransformerInterface $productsToCodesTransformer
-     */
     public function __construct(DataTransformerInterface $productsToCodesTransformer)
     {
         $this->productsToCodesTransformer = $productsToCodesTransformer;

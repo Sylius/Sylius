@@ -32,10 +32,6 @@ final class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
      */
     private $parametersParser;
 
-    /**
-     * @param DataProviderInterface $dataProvider
-     * @param ParametersParserInterface $parametersParser
-     */
     public function __construct(DataProviderInterface $dataProvider, ParametersParserInterface $parametersParser)
     {
         $this->dataProvider = $dataProvider;

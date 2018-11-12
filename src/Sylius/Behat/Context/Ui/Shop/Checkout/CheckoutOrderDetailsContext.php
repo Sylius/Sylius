@@ -25,9 +25,6 @@ final class CheckoutOrderDetailsContext implements Context
      */
     private $orderDetails;
 
-    /**
-     * @param ShowPageInterface $orderDetails
-     */
     public function __construct(ShowPageInterface $orderDetails)
     {
         $this->orderDetails = $orderDetails;
@@ -36,7 +33,7 @@ final class CheckoutOrderDetailsContext implements Context
     /**
      * @When /^I want to browse order details for (this order)$/
      */
-    public function iWantToBrowseOrderDetailsForThisOrder(OrderInterface $order)
+    public function iWantToBrowseOrderDetailsForThisOrder(OrderInterface $order): void
     {
         $this->orderDetails->open(['tokenValue' => $order->getTokenValue()]);
     }
@@ -44,7 +41,7 @@ final class CheckoutOrderDetailsContext implements Context
     /**
      * @When I try to pay with :paymentMethodName payment method
      */
-    public function iChangePaymentMethodTo($paymentMethodName)
+    public function iChangePaymentMethodTo($paymentMethodName): void
     {
         $this->orderDetails->choosePaymentMethod($paymentMethodName);
         $this->orderDetails->pay();
@@ -53,7 +50,7 @@ final class CheckoutOrderDetailsContext implements Context
     /**
      * @Then I should be able to pay (again)
      */
-    public function iShouldBeAbleToPay()
+    public function iShouldBeAbleToPay(): void
     {
         Assert::true($this->orderDetails->hasPayAction());
     }
@@ -61,7 +58,7 @@ final class CheckoutOrderDetailsContext implements Context
     /**
      * @Then I should not be able to pay (again)
      */
-    public function iShouldNotBeAbleToPay()
+    public function iShouldNotBeAbleToPay(): void
     {
         Assert::false($this->orderDetails->hasPayAction());
     }

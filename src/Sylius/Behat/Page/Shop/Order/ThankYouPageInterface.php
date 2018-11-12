@@ -19,23 +19,11 @@ interface ThankYouPageInterface extends SymfonyPageInterface
 {
     public function goToOrderDetails();
 
-    /**
-     * @return bool
-     */
-    public function hasThankYouMessage();
+    public function hasThankYouMessage(): bool;
 
-    /**
-     * @return string
-     */
-    public function getInstructions();
+    public function getInstructions(): string;
 
-    /**
-     * @return bool
-     */
-    public function hasInstructions();
+    public function hasInstructions(): bool;
 
-    /**
-     * @return bool
-     */
-    public function hasChangePaymentMethodButton();
+    public function hasChangePaymentMethodButton(): bool;
 }

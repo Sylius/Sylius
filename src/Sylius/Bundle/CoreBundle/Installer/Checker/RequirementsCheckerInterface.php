@@ -18,11 +18,5 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 interface RequirementsCheckerInterface
 {
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return bool
-     */
     public function check(InputInterface $input, OutputInterface $output): bool;
 }

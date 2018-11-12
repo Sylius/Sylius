@@ -25,17 +25,12 @@ final class CustomerReviewsDeleteListener
      */
     private $reviewerReviewsRemover;
 
-    /**
-     * @param ReviewerReviewsRemoverInterface $reviewerReviewsRemover
-     */
     public function __construct(ReviewerReviewsRemoverInterface $reviewerReviewsRemover)
     {
         $this->reviewerReviewsRemover = $reviewerReviewsRemover;
     }
 
     /**
-     * @param GenericEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function removeCustomerReviews(GenericEvent $event): void

@@ -48,8 +48,6 @@ class UrlPackage extends BaseUrlPackage
     /**
      * @param string|array $baseUrls Base asset URLs
      * @param VersionStrategyInterface $versionStrategy The version strategy
-     * @param ThemeContextInterface $themeContext
-     * @param PathResolverInterface $pathResolver
      * @param ContextInterface|null $context Context
      */
     public function __construct(
@@ -110,11 +108,6 @@ class UrlPackage extends BaseUrlPackage
         return $this->getBaseUrl($path) . $url;
     }
 
-    /**
-     * @param array $urls
-     *
-     * @return array
-     */
     private function getSslUrls(array $urls): array
     {
         $sslUrls = [];

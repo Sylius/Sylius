@@ -19,7 +19,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 final class ShippingMethodSpec extends ObjectBehavior
 {
-    public function let()
+    public function let(): void
     {
         $this->setCurrentLocale('en_US');
         $this->setFallbackLocale('en_US');

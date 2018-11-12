@@ -25,7 +25,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyDescription($description)
+    public function specifyDescription(string $description): void
     {
         $this->getElement('description')->setValue($description);
     }
@@ -33,7 +33,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_shipping_category_code',

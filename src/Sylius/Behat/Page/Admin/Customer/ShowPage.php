@@ -22,7 +22,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isRegistered()
+    public function isRegistered(): bool
     {
         $username = $this->getDocument()->find('css', '#username');
 
@@ -32,7 +32,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteAccount()
+    public function deleteAccount(): void
     {
         $deleteButton = $this->getElement('delete_account_button');
         $deleteButton->pressButton('Delete');
@@ -41,7 +41,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getCustomerEmail()
+    public function getCustomerEmail(): string
     {
         return $this->getElement('customer_email')->getText();
     }
@@ -49,7 +49,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getCustomerPhoneNumber()
+    public function getCustomerPhoneNumber(): string
     {
         return $this->getElement('customer_phone_number')->getText();
     }
@@ -57,7 +57,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getCustomerName()
+    public function getCustomerName(): string
     {
         return $this->getElement('customer_name')->getText();
     }
@@ -65,7 +65,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRegistrationDate()
+    public function getRegistrationDate(): \DateTimeInterface
     {
         return new \DateTime(str_replace('Customer since ', '', $this->getElement('registration_date')->getText()));
     }
@@ -73,7 +73,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultAddress()
+    public function getDefaultAddress(): string
     {
         return $this->getElement('default_address')->getText();
     }
@@ -81,7 +81,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAccount()
+    public function hasAccount(): bool
     {
         return $this->hasElement('no_account');
     }
@@ -89,7 +89,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isSubscribedToNewsletter()
+    public function isSubscribedToNewsletter(): bool
     {
         $subscribedToNewsletter = $this->getElement('subscribed_to_newsletter');
         if ($subscribedToNewsletter->find('css', 'i.green')) {
@@ -102,7 +102,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasDefaultAddressProvinceName($provinceName)
+    public function hasDefaultAddressProvinceName(string $provinceName): bool
     {
         $defaultAddressProvince = $this->getElement('default_address')->getText();
 
@@ -112,7 +112,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasVerifiedEmail()
+    public function hasVerifiedEmail(): bool
     {
         $verifiedEmail = $this->getElement('verified_email');
         if ($verifiedEmail->find('css', 'i.green')) {
@@ -125,7 +125,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getGroupName()
+    public function getGroupName(): string
     {
         $group = $this->getElement('group');
 
@@ -139,7 +139,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasEmailVerificationInformation()
+    public function hasEmailVerificationInformation(): bool
     {
         return null === $this->getDocument()->find('css', '#verified-email');
     }
@@ -147,7 +147,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasImpersonateButton()
+    public function hasImpersonateButton(): bool
     {
         return $this->hasElement('impersonate_button');
     }
@@ -155,7 +155,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function impersonate()
+    public function impersonate(): void
     {
         $this->getElement('impersonate_button')->click();
     }
@@ -163,7 +163,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCustomerPlacedAnyOrders()
+    public function hasCustomerPlacedAnyOrders(): bool
     {
         return null !== $this->getElement('statistics')->find('css', '.sylius-orders-overall-count');
     }
@@ -171,7 +171,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getOrdersCountInChannel($channelName)
+    public function getOrdersCountInChannel(string $channelName): int
     {
         return (int) $this
             ->getStatisticsForChannel($channelName)
@@ -183,7 +183,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getOrdersTotalInChannel($channelName)
+    public function getOrdersTotalInChannel(string $channelName): string
     {
         return $this
             ->getStatisticsForChannel($channelName)
@@ -195,7 +195,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getAverageTotalInChannel($channelName)
+    public function getAverageTotalInChannel(string $channelName): string
     {
         return $this
             ->getStatisticsForChannel($channelName)
@@ -207,7 +207,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getSuccessFlashMessage()
+    public function getSuccessFlashMessage(): string
     {
         return trim($this->getElement('flash_message')->getText());
     }
@@ -215,7 +215,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_admin_customer_show';
     }
@@ -223,7 +223,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'customer_email' => '#info .content.extra > a',
@@ -243,13 +243,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param string $channelName
-     *
-     * @return NodeElement
-     *
      * @throws \InvalidArgumentException
      */
-    private function getStatisticsForChannel($channelName)
+    private function getStatisticsForChannel(string $channelName): NodeElement
     {
         $statisticsRibs = $this
             ->getElement('statistics')

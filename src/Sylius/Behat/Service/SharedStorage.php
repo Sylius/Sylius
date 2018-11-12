@@ -28,7 +28,7 @@ class SharedStorage implements SharedStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function get($key)
+    public function get(string $key)
     {
         if (!isset($this->clipboard[$key])) {
             throw new \InvalidArgumentException(sprintf('There is no current resource for "%s"!', $key));
@@ -40,7 +40,7 @@ class SharedStorage implements SharedStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function has($key)
+    public function has(string $key): bool
     {
         return isset($this->clipboard[$key]);
     }
@@ -48,7 +48,7 @@ class SharedStorage implements SharedStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function set($key, $resource)
+    public function set(string $key, $resource): void
     {
         $this->clipboard[$key] = $resource;
         $this->latestKey = $key;
@@ -69,7 +69,7 @@ class SharedStorage implements SharedStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function setClipboard(array $clipboard)
+    public function setClipboard(array $clipboard): void
     {
         $this->clipboard = $clipboard;
     }

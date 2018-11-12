@@ -23,9 +23,6 @@ class ConvertMoneyHelper extends Helper implements ConvertMoneyHelperInterface
      */
     private $currencyConverter;
 
-    /**
-     * @param CurrencyConverterInterface $currencyConverter
-     */
     public function __construct(CurrencyConverterInterface $currencyConverter)
     {
         $this->currencyConverter = $currencyConverter;

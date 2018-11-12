@@ -21,7 +21,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_contact_request';
     }
@@ -29,7 +29,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyEmail($email)
+    public function specifyEmail(string $email): void
     {
         $this->getDocument()->fillField('Email', $email);
     }
@@ -37,12 +37,12 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyMessage($message)
+    public function specifyMessage(string $message): void
     {
         $this->getDocument()->fillField('Message', $message);
     }
 
-    public function send()
+    public function send(): void
     {
         $this->getDocument()->pressButton('Send');
     }
@@ -52,7 +52,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
      *
      * @throws ElementNotFoundException
      */
-    public function getValidationMessageFor($element)
+    public function getValidationMessageFor(string $element): string
     {
         $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
 
@@ -69,7 +69,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#sylius_contact_email',

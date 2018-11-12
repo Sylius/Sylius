@@ -43,12 +43,6 @@ final class UserContext implements Context
      */
     private $homePage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param UserRepositoryInterface $userRepository
-     * @param ShowPageInterface $customerShowPage
-     * @param HomePageInterface $homePage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
@@ -64,7 +58,7 @@ final class UserContext implements Context
     /**
      * @When I log out
      */
-    public function iLogOut()
+    public function iLogOut(): void
     {
         $this->homePage->logOut();
     }
@@ -72,7 +66,7 @@ final class UserContext implements Context
     /**
      * @When I delete the account of :email user
      */
-    public function iDeleteAccount($email)
+    public function iDeleteAccount($email): void
     {
         /** @var ShopUserInterface $user */
         $user = $this->userRepository->findOneByEmail($email);
@@ -86,7 +80,7 @@ final class UserContext implements Context
     /**
      * @Then the user account should be deleted
      */
-    public function accountShouldBeDeleted()
+    public function accountShouldBeDeleted(): void
     {
         $deletedUser = $this->sharedStorage->get('deleted_user');
 

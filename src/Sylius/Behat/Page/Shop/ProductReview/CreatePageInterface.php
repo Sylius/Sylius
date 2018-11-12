@@ -17,45 +17,21 @@ use Sylius\Behat\Page\PageInterface;
 
 interface CreatePageInterface extends PageInterface
 {
-    /**
-     * @param string $title
-     */
-    public function titleReview($title);
+    public function titleReview(string $title);
 
-    /**
-     * @param string $comment
-     */
-    public function setComment($comment);
+    public function setComment(string $comment);
 
-    /**
-     * @param string $author
-     */
-    public function setAuthor($author);
+    public function setAuthor(string $author);
 
-    /**
-     * @param int $rate
-     */
-    public function rateReview($rate);
+    public function rateReview(int $rate);
 
     public function submitReview();
 
-    /**
-     * @return string
-     */
-    public function getRateValidationMessage();
+    public function getRateValidationMessage(): string;
 
-    /**
-     * @return string
-     */
-    public function getTitleValidationMessage();
+    public function getTitleValidationMessage(): string;
 
-    /**
-     * @return string
-     */
-    public function getCommentValidationMessage();
+    public function getCommentValidationMessage(): string;
 
-    /**
-     * @return string
-     */
-    public function getAuthorValidationMessage();
+    public function getAuthorValidationMessage(): string;
 }

@@ -39,7 +39,7 @@ final class TaxonApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_taxon_list_when_access_is_denied()
+    public function it_does_not_allow_to_show_taxon_list_when_access_is_denied(): void
     {
         $this->loadFixturesFromFile('resources/taxons.yml');
         $this->client->request('GET', '/api/v1/taxons/');
@@ -51,7 +51,7 @@ final class TaxonApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_taxon_when_it_does_not_exist()
+    public function it_does_not_allow_to_show_taxon_when_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -64,7 +64,7 @@ final class TaxonApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_indexing_taxons()
+    public function it_allows_indexing_taxons(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/taxons.yml');
@@ -78,7 +78,7 @@ final class TaxonApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_taxon()
+    public function it_allows_showing_taxon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
@@ -93,7 +93,7 @@ final class TaxonApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_root_taxon()
+    public function it_allows_showing_root_taxon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
@@ -108,7 +108,7 @@ final class TaxonApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_delete_taxon_if_it_does_not_exist()
+    public function it_does_not_allow_to_delete_taxon_if_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -121,7 +121,7 @@ final class TaxonApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_deleting_taxon()
+    public function it_allows_deleting_taxon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
@@ -141,7 +141,7 @@ final class TaxonApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_deleting_root_taxon()
+    public function it_allows_deleting_root_taxon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $taxons = $this->loadFixturesFromFile('resources/taxons.yml');
@@ -161,7 +161,7 @@ final class TaxonApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_creating_root_taxon_with_multiple_translations()
+    public function it_allows_creating_root_taxon_with_multiple_translations(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -192,7 +192,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_creating_root_taxon()
+    public function it_allows_creating_root_taxon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -212,7 +212,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_creating_taxon_with_multiple_translations()
+    public function it_allows_creating_taxon_with_multiple_translations(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -245,7 +245,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_creating_taxon_with_parent()
+    public function it_allows_creating_taxon_with_parent(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/taxons.yml');
@@ -267,7 +267,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_create_taxon_without_required_fields()
+    public function it_does_not_allow_to_create_taxon_without_required_fields(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -280,7 +280,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_creating_taxon_with_images()
+    public function it_allows_creating_taxon_with_images(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -313,7 +313,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_taxon_with_parent()
+    public function it_allows_updating_taxon_with_parent(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -341,7 +341,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_root_taxon()
+    public function it_allows_updating_root_taxon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -368,7 +368,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_partial_information_about_taxon()
+    public function it_allows_updating_partial_information_about_taxon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -394,7 +394,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_updating_partial_information_about_root_taxon()
+    public function it_allows_updating_partial_information_about_root_taxon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -420,7 +420,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_paginating_the_index_of_taxons()
+    public function it_allows_paginating_the_index_of_taxons(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/taxons.yml');
@@ -434,7 +434,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_update_position_of_product_in_a_taxon()
+    public function it_allows_to_update_position_of_product_in_a_taxon(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productTaxons = $this->loadFixturesFromFiles([
@@ -470,7 +470,7 @@ EOT;
     /**
      * @test
      */
-    public function it_does_not_allow_to_update_position_of_product_in_a_taxon_with_incorrect_data()
+    public function it_does_not_allow_to_update_position_of_product_in_a_taxon_with_incorrect_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $productTaxons = $this->loadFixturesFromFiles([
@@ -499,22 +499,12 @@ EOT;
         $this->assertResponse($response, 'taxon/update_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    /**
-     * @param TaxonInterface $taxon
-     *
-     * @return string
-     */
-    private function getTaxonUrl(TaxonInterface $taxon)
+    private function getTaxonUrl(TaxonInterface $taxon): string
     {
         return '/api/v1/taxons/' . $taxon->getCode();
     }
 
-    /**
-     * @param TaxonInterface $taxon
-     *
-     * @return string
-     */
-    private function getTaxonProductsPositionsChangeUrl(TaxonInterface $taxon)
+    private function getTaxonProductsPositionsChangeUrl(TaxonInterface $taxon): string
     {
         return sprintf('/api/v1/taxons/%s/products', $taxon->getCode());
     }

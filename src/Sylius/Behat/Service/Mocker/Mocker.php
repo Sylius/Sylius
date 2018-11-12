@@ -33,7 +33,7 @@ class Mocker implements MockerInterface
     /**
      * {@inheritdoc}
      */
-    public function mockCollaborator($className)
+    public function mockCollaborator(string $className): \Mockery\MockInterface
     {
         return \Mockery::mock($className);
     }
@@ -41,7 +41,7 @@ class Mocker implements MockerInterface
     /**
      * {@inheritdoc}
      */
-    public function mockService($serviceId, $className)
+    public function mockService(string $serviceId, string $className): \Mockery\MockInterface
     {
         return $this->container->mock($serviceId, $className);
     }
@@ -49,12 +49,12 @@ class Mocker implements MockerInterface
     /**
      * {@inheritdoc}
      */
-    public function unmockService($serviceId)
+    public function unmockService(string $serviceId): void
     {
         $this->container->unmock($serviceId);
     }
 
-    public function unmockAll()
+    public function unmockAll(): void
     {
         $mockedServices = $this->container->getMockedServices();
 

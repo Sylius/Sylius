@@ -48,11 +48,6 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
      */
     private $attributeTypes;
 
-    /**
-     * @param AttributeFactoryInterface $productAttributeFactory
-     * @param RepositoryInterface $localeRepository
-     * @param array $attributeTypes
-     */
     public function __construct(
         AttributeFactoryInterface $productAttributeFactory,
         RepositoryInterface $localeRepository,
@@ -113,9 +108,6 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

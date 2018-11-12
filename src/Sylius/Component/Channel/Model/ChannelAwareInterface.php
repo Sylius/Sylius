@@ -15,13 +15,7 @@ namespace Sylius\Component\Channel\Model;
 
 interface ChannelAwareInterface
 {
-    /**
-     * @return ChannelInterface|null
-     */
     public function getChannel(): ?ChannelInterface;
 
-    /**
-     * @param ChannelInterface|null $channel
-     */
     public function setChannel(?ChannelInterface $channel): void;
 }

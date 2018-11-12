@@ -20,7 +20,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     /**
      * {@inheritdoc}
      */
-    public function goToOrderDetails()
+    public function goToOrderDetails(): void
     {
         $this->getElement('order_details')->click();
     }
@@ -28,7 +28,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasThankYouMessage()
+    public function hasThankYouMessage(): bool
     {
         $thankYouMessage = $this->getElement('thank_you')->getText();
 
@@ -38,7 +38,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getInstructions()
+    public function getInstructions(): string
     {
         return $this->getElement('instructions')->getText();
     }
@@ -46,7 +46,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasInstructions()
+    public function hasInstructions(): bool
     {
         return null !== $this->getDocument()->find('css', '#sylius-payment-method-instructions');
     }
@@ -54,15 +54,12 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasChangePaymentMethodButton()
+    public function hasChangePaymentMethodButton(): bool
     {
         return null !== $this->getDocument()->find('css', '#sylius-show-order');
     }
 
-    /**
-     * @return string
-     */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_thank_you';
     }
@@ -70,7 +67,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'order_details' => '#sylius-show-order',

@@ -29,7 +29,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameIt($name, $language)
+    public function nameIt(string $name, string $language): void
     {
         $this->getDocument()->fillField(sprintf('sylius_product_attribute_translations_%s_name', $language), $name);
     }
@@ -37,7 +37,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isTypeDisabled()
+    public function isTypeDisabled(): bool
     {
         return 'disabled' === $this->getElement('type')->getAttribute('disabled');
     }
@@ -95,7 +95,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'attribute_choice_list' => 'div[data-form-collection="list"]',

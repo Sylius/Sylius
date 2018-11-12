@@ -18,17 +18,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    /**
-     * @param CurrencyInterface $currency
-     *
-     * @return bool
-     */
-    public function isCurrencyDisabled(CurrencyInterface $currency);
+    public function isCurrencyDisabled(CurrencyInterface $currency): bool;
 
-    /**
-     * @param CurrencyInterface $currency
-     *
-     * @return bool
-     */
-    public function isCurrencyEnabled(CurrencyInterface $currency);
+    public function isCurrencyEnabled(CurrencyInterface $currency): bool;
 }

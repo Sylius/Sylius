@@ -23,9 +23,6 @@ final class UserReloader implements UserReloaderInterface
      */
     private $objectManager;
 
-    /**
-     * @param ObjectManager $objectManager
-     */
     public function __construct(ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;

@@ -43,12 +43,6 @@ final class LocaleSwitchController
      */
     private $localeSwitcher;
 
-    /**
-     * @param EngineInterface $templatingEngine
-     * @param LocaleContextInterface $localeContext
-     * @param LocaleProviderInterface $localeProvider
-     * @param LocaleSwitcherInterface $localeSwitcher
-     */
     public function __construct(
         EngineInterface $templatingEngine,
         LocaleContextInterface $localeContext,
@@ -61,9 +55,6 @@ final class LocaleSwitchController
         $this->localeSwitcher = $localeSwitcher;
     }
 
-    /**
-     * @return Response
-     */
     public function renderAction(): Response
     {
         return $this->templatingEngine->renderResponse('@SyliusShop/Menu/_localeSwitch.html.twig', [
@@ -72,12 +63,6 @@ final class LocaleSwitchController
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @param string|null $code
-     *
-     * @return Response
-     */
     public function switchAction(Request $request, ?string $code = null): Response
     {
         if (null === $code) {

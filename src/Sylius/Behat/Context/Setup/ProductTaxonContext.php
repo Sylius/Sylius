@@ -32,10 +32,6 @@ final class ProductTaxonContext implements Context
      */
     private $objectManager;
 
-    /**
-     * @param FactoryInterface $productTaxonFactory
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         FactoryInterface $productTaxonFactory,
         ObjectManager $objectManager
@@ -49,7 +45,7 @@ final class ProductTaxonContext implements Context
      * @Given /^(it|this product) (belongs to "[^"]+")$/
      * @Given /^(this product) is in ("[^"]+" taxon) at (\d)(?:st|nd|rd|th) position$/
      */
-    public function itBelongsTo(ProductInterface $product, TaxonInterface $taxon, $position = null)
+    public function itBelongsTo(ProductInterface $product, TaxonInterface $taxon, $position = null): void
     {
         $productTaxon = $this->createProductTaxon($taxon, $product, (int) $position - 1);
         $product->addProductTaxon($productTaxon);
@@ -58,14 +54,7 @@ final class ProductTaxonContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @param TaxonInterface $taxon
-     * @param ProductInterface $product
-     * @param int|null $position
-     *
-     * @return ProductTaxonInterface
-     */
-    private function createProductTaxon(TaxonInterface $taxon, ProductInterface $product, $position = null)
+    private function createProductTaxon(TaxonInterface $taxon, ProductInterface $product, int $position = null): ProductTaxonInterface
     {
         /** @var ProductTaxonInterface $productTaxon */
         $productTaxon = $this->productTaxonFactory->createNew();

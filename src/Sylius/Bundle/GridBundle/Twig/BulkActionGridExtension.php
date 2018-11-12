@@ -22,9 +22,6 @@ final class BulkActionGridExtension extends \Twig_Extension
      */
     private $bulkActionGridHelper;
 
-    /**
-     * @param BulkActionGridHelper $bulkActionGridHelper
-     */
     public function __construct(BulkActionGridHelper $bulkActionGridHelper)
     {
         $this->bulkActionGridHelper = $bulkActionGridHelper;

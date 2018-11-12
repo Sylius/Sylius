@@ -52,13 +52,6 @@ final class ManagingZonesContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -76,7 +69,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I want to create a new zone consisting of :memberType
      */
-    public function iWantToCreateANewZoneWithMembers($memberType)
+    public function iWantToCreateANewZoneWithMembers($memberType): void
     {
         $this->createPage->open(['type' => $memberType]);
     }
@@ -85,7 +78,7 @@ final class ManagingZonesContext implements Context
      * @When I browse zones
      * @When I want to see all zones in store
      */
-    public function iWantToSeeAllZonesInStore()
+    public function iWantToSeeAllZonesInStore(): void
     {
         $this->indexPage->open();
     }
@@ -93,7 +86,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When /^I want to modify the (zone named "[^"]+")$/
      */
-    public function iWantToModifyAZoneNamed(ZoneInterface $zone)
+    public function iWantToModifyAZoneNamed(ZoneInterface $zone): void
     {
         $this->updatePage->open(['id' => $zone->getId()]);
     }
@@ -101,7 +94,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When /^I delete (zone named "([^"]*)")$/
      */
-    public function iDeleteZoneNamed(ZoneInterface $zone)
+    public function iDeleteZoneNamed(ZoneInterface $zone): void
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['name' => $zone->getName(), 'code' => $zone->getCode()]);
@@ -110,7 +103,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When /^I remove (the "([^"]*)" (?:country|province|zone) member)$/
      */
-    public function iRemoveTheMember(ZoneMemberInterface $zoneMember)
+    public function iRemoveTheMember(ZoneMemberInterface $zoneMember): void
     {
         $this->updatePage->removeMember($zoneMember);
     }
@@ -118,7 +111,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I rename it to :name
      */
-    public function iRenameItTo($name)
+    public function iRenameItTo($name): void
     {
         $this->updatePage->nameIt($name);
     }
@@ -126,7 +119,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I name it :name
      */
-    public function iNameIt($name)
+    public function iNameIt($name): void
     {
         $this->createPage->nameIt($name);
     }
@@ -134,7 +127,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I specify its code as :code
      */
-    public function iSpecifyItsCodeAs($code)
+    public function iSpecifyItsCodeAs($code): void
     {
         $this->createPage->specifyCode($code);
     }
@@ -142,7 +135,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I do not specify its code
      */
-    public function iDoNotSpecifyItsCode()
+    public function iDoNotSpecifyItsCode(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -150,7 +143,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I do not specify its name
      */
-    public function iDoNotSpecifyItsName()
+    public function iDoNotSpecifyItsName(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -158,7 +151,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I do not add a country member
      */
-    public function iDoNotAddACountryMember()
+    public function iDoNotAddACountryMember(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -166,7 +159,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When /^I add a(?: country| province| zone) "([^"]+)"$/
      */
-    public function iAddAZoneMember($name)
+    public function iAddAZoneMember($name): void
     {
         $this->createPage->addMember();
         $this->createPage->chooseMember($name);
@@ -175,7 +168,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I select its scope as :scope
      */
-    public function iSelectItsScopeAs($scope)
+    public function iSelectItsScopeAs($scope): void
     {
         $this->createPage->selectScope($scope);
     }
@@ -184,7 +177,7 @@ final class ManagingZonesContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -192,7 +185,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -216,7 +209,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then /^the (zone named "[^"]+") with (the "[^"]+" (?:country|province|zone) member) should appear in the registry$/
      */
-    public function theZoneWithTheCountryShouldAppearInTheRegistry(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
+    public function theZoneWithTheCountryShouldAppearInTheRegistry(ZoneInterface $zone, ZoneMemberInterface $zoneMember): void
     {
         $this->assertZoneAndItsMember($zone, $zoneMember);
     }
@@ -224,7 +217,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Given its scope should be :scope
      */
-    public function itsScopeShouldBe($scope)
+    public function itsScopeShouldBe($scope): void
     {
         Assert::same($this->updatePage->getScope(), $scope);
     }
@@ -232,7 +225,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then /^(this zone) should have only (the "([^"]*)" (?:country|province|zone) member)$/
      */
-    public function thisZoneShouldHaveOnlyTheProvinceMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
+    public function thisZoneShouldHaveOnlyTheProvinceMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember): void
     {
         $this->assertZoneAndItsMember($zone, $zoneMember);
 
@@ -242,7 +235,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then /^(this zone) name should be "([^"]*)"/
      */
-    public function thisZoneNameShouldBe(ZoneInterface $zone, $name)
+    public function thisZoneNameShouldBe(ZoneInterface $zone, $name): void
     {
         Assert::true($this->updatePage->hasResourceValues(['code' => $zone->getCode(), 'name' => $name]));
     }
@@ -250,7 +243,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then /^the code field should be disabled$/
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function theCodeFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -258,7 +251,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then /^I should be notified that zone with this code already exists$/
      */
-    public function iShouldBeNotifiedThatZoneWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatZoneWithThisCodeAlreadyExists(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -269,7 +262,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then /^there should still be only one zone with code "([^"]*)"$/
      */
-    public function thereShouldStillBeOnlyOneZoneWithCode($code)
+    public function thereShouldStillBeOnlyOneZoneWithCode($code): void
     {
         $this->indexPage->open();
 
@@ -279,7 +272,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired($element): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -290,7 +283,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then zone with :element :value should not be added
      */
-    public function zoneWithNameShouldNotBeAdded($element, $value)
+    public function zoneWithNameShouldNotBeAdded($element, $value): void
     {
         $this->indexPage->open();
 
@@ -300,7 +293,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then /^I should be notified that at least one zone member is required$/
      */
-    public function iShouldBeNotifiedThatAtLeastOneZoneMemberIsRequired()
+    public function iShouldBeNotifiedThatAtLeastOneZoneMemberIsRequired(): void
     {
         Assert::true($this->createPage->checkValidationMessageForMembers('Please add at least 1 zone member.'));
     }
@@ -308,7 +301,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then the type field should be disabled
      */
-    public function theTypeFieldShouldBeDisabled()
+    public function theTypeFieldShouldBeDisabled(): void
     {
         Assert::true($this->createPage->isTypeFieldDisabled());
     }
@@ -316,7 +309,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then it should be of :type type
      */
-    public function itShouldBeOfType($type)
+    public function itShouldBeOfType($type): void
     {
         Assert::true($this->createPage->hasType($type));
     }
@@ -324,7 +317,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then the zone named :zoneName should no longer exist in the registry
      */
-    public function thisZoneShouldNoLongerExistInTheRegistry($zoneName)
+    public function thisZoneShouldNoLongerExistInTheRegistry($zoneName): void
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $zoneName]));
     }
@@ -341,7 +334,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then /^I should(?:| still) see the (zone named "([^"]+)") in the list$/
      */
-    public function iShouldSeeTheZoneNamedInTheList(ZoneInterface $zone)
+    public function iShouldSeeTheZoneNamedInTheList(ZoneInterface $zone): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $zone->getCode(), 'name' => $zone->getName()]));
     }
@@ -357,18 +350,15 @@ final class ManagingZonesContext implements Context
     /**
      * @Then I should be notified that this zone cannot be deleted
      */
-    public function iShouldBeNotifiedThatThisZoneCannotBeDeleted()
+    public function iShouldBeNotifiedThatThisZoneCannotBeDeleted(): void
     {
         $this->notificationChecker->checkNotification('Error Cannot delete, the zone is in use.', NotificationType::failure());
     }
 
     /**
-     * @param ZoneInterface $zone
-     * @param ZoneMemberInterface $zoneMember
-     *
      * @throws \InvalidArgumentException
      */
-    private function assertZoneAndItsMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
+    private function assertZoneAndItsMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember): void
     {
         Assert::true(
             $this->updatePage->hasResourceValues([
@@ -384,7 +374,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then /^I can not add a(?: country| province| zone) "([^"]+)"$/
      */
-    public function iCanNotAddAZoneMember($name)
+    public function iCanNotAddAZoneMember($name): void
     {
         $member = null;
 

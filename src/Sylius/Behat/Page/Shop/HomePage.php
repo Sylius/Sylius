@@ -22,7 +22,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_homepage';
     }
@@ -30,7 +30,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getContents()
+    public function getContents(): string
     {
         return $this->getDocument()->getContent();
     }
@@ -38,7 +38,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function logOut()
+    public function logOut(): void
     {
         $this->getElement('logout_button')->click();
     }
@@ -46,7 +46,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasLogoutButton()
+    public function hasLogoutButton(): bool
     {
         return $this->hasElement('logout_button');
     }
@@ -54,7 +54,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getFullName()
+    public function getFullName(): string
     {
         return $this->getElement('full_name')->getText();
     }
@@ -62,7 +62,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getActiveCurrency()
+    public function getActiveCurrency(): string
     {
         return $this->getElement('currency_selector')->find('css', '.sylius-active-currency')->getText();
     }
@@ -70,7 +70,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getAvailableCurrencies()
+    public function getAvailableCurrencies(): array
     {
         return array_map(
             function (NodeElement $element) {
@@ -83,7 +83,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function switchCurrency($currencyCode)
+    public function switchCurrency(string $currencyCode): void
     {
         try {
             $this->getElement('currency_selector')->click(); // Needed for javascript scenarios
@@ -96,7 +96,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getActiveLocale()
+    public function getActiveLocale(): string
     {
         return $this->getElement('locale_selector')->find('css', '.sylius-active-locale')->getText();
     }
@@ -104,7 +104,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getAvailableLocales()
+    public function getAvailableLocales(): array
     {
         return array_map(
             function (NodeElement $element) {
@@ -117,7 +117,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function switchLocale($localeCode)
+    public function switchLocale(string $localeCode): void
     {
         $this->getElement('locale_selector')->clickLink($localeCode);
     }
@@ -125,7 +125,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getLatestProductsNames()
+    public function getLatestProductsNames(): array
     {
         return array_map(
             function (NodeElement $element) {
@@ -138,7 +138,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'currency_selector' => '#sylius-currency-selector',

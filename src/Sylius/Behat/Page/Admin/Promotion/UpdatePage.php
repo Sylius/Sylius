@@ -25,7 +25,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPriority($priority)
+    public function setPriority(?int $priority): void
     {
         $this->getDocument()->fillField('Priority', $priority);
     }
@@ -33,7 +33,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getPriority()
+    public function getPriority(): int
     {
         return $this->getElement('priority')->getValue();
     }
@@ -41,7 +41,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function checkChannelsState($channelName)
+    public function checkChannelsState(string $channelName): bool
     {
         $field = $this->getDocument()->findField($channelName);
 
@@ -51,22 +51,22 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillUsageLimit($limit)
+    public function fillUsageLimit(string $limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);
     }
 
-    public function makeExclusive()
+    public function makeExclusive(): void
     {
         $this->getDocument()->checkField('Exclusive');
     }
 
-    public function checkCouponBased()
+    public function checkCouponBased(): void
     {
         $this->getDocument()->checkField('Coupon based');
     }
 
-    public function checkChannel($name)
+    public function checkChannel(string $name): void
     {
         $this->getDocument()->checkField($name);
     }
@@ -74,7 +74,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setStartsAt(\DateTimeInterface $dateTime)
+    public function setStartsAt(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -85,7 +85,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setEndsAt(\DateTimeInterface $dateTime)
+    public function setEndsAt(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -126,7 +126,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return [
             'code' => '#sylius_promotion_code',

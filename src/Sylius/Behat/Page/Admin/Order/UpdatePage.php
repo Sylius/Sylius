@@ -26,7 +26,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyBillingAddress(AddressInterface $address)
+    public function specifyBillingAddress(AddressInterface $address): void
     {
         $this->specifyAddress($address, self::TYPE_BILLING);
     }
@@ -34,7 +34,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyShippingAddress(AddressInterface $address)
+    public function specifyShippingAddress(AddressInterface $address): void
     {
         $this->specifyAddress($address, self::TYPE_SHIPPING);
     }
@@ -42,7 +42,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    private function specifyAddress(AddressInterface $address, $addressType)
+    private function specifyAddress(AddressInterface $address, $addressType): void
     {
         $this->specifyElementValue($addressType . '_first_name', $address->getFirstName());
         $this->specifyElementValue($addressType . '_last_name', $address->getLastName());
@@ -58,7 +58,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      *
      * @throws ElementNotFoundException
      */
-    public function checkValidationMessageFor($element, $message)
+    public function checkValidationMessageFor(string $element, string $message): bool
     {
         $foundElement = $this->getFieldElement($element);
         if (null === $foundElement) {
@@ -76,7 +76,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_city' => '#sylius_order_billingAddress_city',
@@ -95,35 +95,25 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @param string $elementName
-     * @param string $value
-     *
      * @throws ElementNotFoundException
      */
-    private function specifyElementValue($elementName, $value)
+    private function specifyElementValue(string $elementName, string $value): void
     {
         $this->getElement($elementName)->setValue($value);
     }
 
     /**
-     * @param string $country
-     * @param string $addressType
-     *
      * @throws ElementNotFoundException
      */
-    private function chooseCountry($country, $addressType)
+    private function chooseCountry(string $country, string $addressType): void
     {
         $this->getElement($addressType . '_country')->selectOption($country ?? 'Select');
     }
 
     /**
-     * @param string $element
-     *
-     * @return NodeElement|null
-     *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement($element)
+    private function getFieldElement(string $element): ?NodeElement
     {
         $element = $this->getElement($element);
         while (null !== $element && !$element->hasClass('field')) {

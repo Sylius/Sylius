@@ -17,10 +17,5 @@ use Doctrine\ORM\QueryBuilder;
 
 interface ResourceLogEntryRepositoryInterface
 {
-    /**
-     * @param string $objectId
-     *
-     * @return QueryBuilder
-     */
     public function createByObjectIdQueryBuilder(string $objectId): QueryBuilder;
 }
