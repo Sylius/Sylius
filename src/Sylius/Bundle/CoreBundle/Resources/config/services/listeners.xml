@@ -36,7 +36,8 @@
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="liip_imagine.cache.manager" />
             <argument type="service" id="liip_imagine.filter.manager" />
-            <tag name="doctrine.event_listener" event="postRemove" lazy="true" />
+            <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
+            <tag name="doctrine.event_listener" event="postFlush" lazy="true" />
         </service>
         <service id="sylius.listener.order_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener">
             <argument type="service" id="sylius.order_processing.order_processor" />
