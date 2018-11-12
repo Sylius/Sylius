@@ -686,6 +686,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then /^the (product "[^"]+") should still have an accessible image$/
+     */
+    public function productShouldStillHaveAnAccessibleImage(ProductInterface $product): void
+    {
+        Assert::true($this->indexPage->hasProductAccessibleImage($product->getCode()));
+    }
+
+    /**
      * @Then /^(?:this product|it)(?:| also) should not have any images with "([^"]*)" type$/
      */
     public function thisProductShouldNotHaveAnyImagesWithType($code)
