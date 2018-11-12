@@ -59,9 +59,10 @@ final class ImagesRemoveListener
 
     public function postFlush(PostFlushEventArgs $event): void
     {
-        foreach ($this->imagesToDelete as $imagePath) {
+        foreach ($this->imagesToDelete as $key => $imagePath) {
             $this->imageUploader->remove($imagePath);
             $this->cacheManager->remove($imagePath, array_keys($this->filterManager->getFilterConfiguration()->all()));
+            unset($this->imagesToDelete[$key]);
         }
     }
 }

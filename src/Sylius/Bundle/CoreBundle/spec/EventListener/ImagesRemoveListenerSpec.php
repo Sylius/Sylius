@@ -83,4 +83,35 @@ final class ImagesRemoveListenerSpec extends ObjectBehavior
 
         $this->postFlush($postFlushEvent);
     }
+
+    function it_removes_saved_images_paths_from_both_filesystem_and_service_property(
+        ImageUploaderInterface $imageUploader,
+        CacheManager $cacheManager,
+        FilterManager $filterManager,
+        OnFlushEventArgs $onFlushEvent,
+        PostFlushEventArgs $postFlushEvent,
+        EntityManagerInterface $entityManager,
+        UnitOfWork $unitOfWork,
+        ImageInterface $image,
+        ProductInterface $product,
+        FilterConfiguration $filterConfiguration
+    ): void {
+        $onFlushEvent->getEntityManager()->willReturn($entityManager);
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+        $unitOfWork->getScheduledEntityDeletions()->willReturn([$image, $product]);
+
+        $image->getPath()->willReturn('image/path');
+
+        $this->onFlush($onFlushEvent);
+
+        $imageUploader->remove('image/path')->shouldBeCalledOnce();
+
+        $filterManager->getFilterConfiguration()->willReturn($filterConfiguration);
+        $filterConfiguration->all()->willReturn(['test' => 'Test']);
+
+        $cacheManager->remove('image/path', ['test'])->shouldBeCalledOnce();
+
+        $this->postFlush($postFlushEvent);
+        $this->postFlush($postFlushEvent);
+    }
 }
