@@ -68,12 +68,24 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function getNumberOfItems(): int
+    {
+        $itemsText = trim($this->getElement('items_text')->getText());
+        $itemsTextWords = explode(' ', $itemsText);
+
+        return (int) $itemsTextWords[0];
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'instructions' => '#sylius-payment-method-instructions',
+            'items_text' => 'div.sub.header div.item:nth-child(3)',
             'pay_link' => '#sylius-pay-link',
             'payment_method' => '.item:contains("%name%") input',
             'thank_you' => '#sylius-thank-you',
