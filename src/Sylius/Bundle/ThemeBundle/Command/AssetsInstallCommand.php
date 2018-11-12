@@ -34,7 +34,7 @@ final class AssetsInstallCommand extends ContainerAwareCommand
         $this
             ->setName('sylius:theme:assets:install')
             ->setDefinition([
-                new InputArgument('target', InputArgument::OPTIONAL, 'The target directory', 'web'),
+                new InputArgument('target', InputArgument::OPTIONAL, 'The target directory'),
             ])
             ->addOption('symlink', null, InputOption::VALUE_NONE, 'Symlinks the assets instead of copying it')
             ->addOption('relative', null, InputOption::VALUE_NONE, 'Make relative symlinks')
@@ -65,7 +65,13 @@ final class AssetsInstallCommand extends ContainerAwareCommand
             $symlinkMask = max($symlinkMask, AssetsInstallerInterface::RELATIVE_SYMLINK);
         }
 
-        $assetsInstaller->installAssets($input->getArgument('target'), $symlinkMask);
+        $targetDir = $this->getContainer()->getParameter('sylius_core.public_dir');
+
+        if ($input->getArgument('target')) {
+            $targetDir = $input->getArgument('target');
+        }
+
+        $assetsInstaller->installAssets($targetDir, $symlinkMask);
     }
 
     private function getHelpMessage(): string
