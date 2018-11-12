@@ -75,7 +75,7 @@ final class DashboardContext implements Context
      */
     public function thereShouldBeTotalSalesOf($total): void
     {
-        Assert::same($this->dashboardPage->getTotalSales(), $total);
+        Assert::same($this->dashboardPage->getTotalSales(), (int) $total);
     }
 
     /**
@@ -83,7 +83,7 @@ final class DashboardContext implements Context
      */
     public function myAverageOrderValueShouldBe($value): void
     {
-        Assert::same($this->dashboardPage->getAverageOrderValue(), $value);
+        Assert::same($this->dashboardPage->getAverageOrderValue(), (int) $value);
     }
 
     /**

@@ -50,19 +50,19 @@ final class CheckoutShippingContext implements Context
      * @Given I have proceeded selecting :shippingMethodName shipping method
      * @When I proceed with :shippingMethodName shipping method
      */
-    public function iHaveProceededSelectingShippingMethod($shippingMethodName): void
+    public function iHaveProceededSelectingShippingMethod(string $shippingMethodName): void
     {
         $this->iSelectShippingMethod($shippingMethodName);
         $this->selectShippingPage->nextStep();
     }
 
     /**
-     * @Given I have selected :shippingMethod shipping method
-     * @When I select :shippingMethod shipping method
+     * @Given I have selected :shippingMethodName shipping method
+     * @When I select :shippingMethodName shipping method
      */
-    public function iSelectShippingMethod($shippingMethod): void
+    public function iSelectShippingMethod(string $shippingMethodName): void
     {
-        $this->selectShippingPage->selectShippingMethod($shippingMethod);
+        $this->selectShippingPage->selectShippingMethod($shippingMethodName);
     }
 
     /**
@@ -100,7 +100,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should not be able to select :shippingMethodName shipping method
      */
-    public function iShouldNotBeAbleToSelectShippingMethod($shippingMethodName): void
+    public function iShouldNotBeAbleToSelectShippingMethod(string $shippingMethodName): void
     {
         Assert::false(in_array($shippingMethodName, $this->selectShippingPage->getShippingMethods(), true));
     }
@@ -108,7 +108,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should have :shippingMethodName shipping method available as the first choice
      */
-    public function iShouldHaveShippingMethodAvailableAsFirstChoice($shippingMethodName): void
+    public function iShouldHaveShippingMethodAvailableAsFirstChoice(string $shippingMethodName): void
     {
         $shippingMethods = $this->selectShippingPage->getShippingMethods();
 
@@ -118,7 +118,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Then I should have :shippingMethodName shipping method available as the last choice
      */
-    public function iShouldHaveShippingMethodAvailableAsLastChoice($shippingMethodName): void
+    public function iShouldHaveShippingMethodAvailableAsLastChoice(string $shippingMethodName): void
     {
         $shippingMethods = $this->selectShippingPage->getShippingMethods();
 

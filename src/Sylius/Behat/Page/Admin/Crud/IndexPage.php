@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
@@ -112,7 +113,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteResourceOnPage(array $parameters): bool
+    public function deleteResourceOnPage(array $parameters): void
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
@@ -126,7 +127,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getActionsForResource(array $parameters): \Behat\Mink\Element\NodeElement
+    public function getActionsForResource(array $parameters): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');

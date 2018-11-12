@@ -97,7 +97,7 @@ final class TaxationContext implements Context
         $taxRate->setName($taxRateName);
         $taxRate->setCode($taxRateCode);
         $taxRate->setZone($zone);
-        $taxRate->setAmount((float) $this->getAmountFromString($taxRateAmount));
+        $taxRate->setAmount($this->getAmountFromString($taxRateAmount));
         $taxRate->setCategory($taxCategory);
         $taxRate->setCalculator('default');
         $taxRate->setIncludedInPrice($includedInPrice);
@@ -154,7 +154,7 @@ final class TaxationContext implements Context
      */
     public function theTaxRateIsOfAmount(TaxRateInterface $taxRate, $amount): void
     {
-        $taxRate->setAmount((float) $this->getAmountFromString($amount));
+        $taxRate->setAmount($this->getAmountFromString($amount));
 
         $this->objectManager->flush();
     }
@@ -191,7 +191,7 @@ final class TaxationContext implements Context
         return $taxCategory;
     }
 
-    private function getAmountFromString(string $taxRateAmount): string
+    private function getAmountFromString(string $taxRateAmount): float
     {
         return ((int) $taxRateAmount) / 100;
     }

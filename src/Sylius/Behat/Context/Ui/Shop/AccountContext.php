@@ -93,27 +93,27 @@ final class AccountContext implements Context
      * @When I specify the first name as :firstName
      * @When I remove the first name
      */
-    public function iSpecifyTheFirstName($firstName = null): void
+    public function iSpecifyTheFirstName(?string $firstName = null): void
     {
-        $this->profileUpdatePage->specifyFirstName($firstName);
+        $this->profileUpdatePage->specifyFirstName((string) $firstName);
     }
 
     /**
      * @When I specify the last name as :lastName
      * @When I remove the last name
      */
-    public function iSpecifyTheLastName($lastName = null): void
+    public function iSpecifyTheLastName(?string $lastName = null): void
     {
-        $this->profileUpdatePage->specifyLastName($lastName);
+        $this->profileUpdatePage->specifyLastName((string) $lastName);
     }
 
     /**
      * @When I specify the customer email as :email
      * @When I remove the customer email
      */
-    public function iSpecifyCustomerTheEmail($email = null): void
+    public function iSpecifyCustomerTheEmail(?string $email = null): void
     {
-        $this->profileUpdatePage->specifyEmail($email);
+        $this->profileUpdatePage->specifyEmail((string) $email);
     }
 
     /**
@@ -137,7 +137,7 @@ final class AccountContext implements Context
      * @Then my name should be :name
      * @Then my name should still be :name
      */
-    public function myNameShouldBe($name): void
+    public function myNameShouldBe(string $name): void
     {
         $this->dashboardPage->open();
 
@@ -148,7 +148,7 @@ final class AccountContext implements Context
      * @Then my email should be :email
      * @Then my email should still be :email
      */
-    public function myEmailShouldBe($email): void
+    public function myEmailShouldBe(string $email): void
     {
         $this->dashboardPage->open();
 

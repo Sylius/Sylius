@@ -41,7 +41,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
      */
     public function getTotalSales(): int
     {
-        return $this->getElement('total_sales')->getText();
+        return (int) $this->getElement('total_sales')->getText();
     }
 
     /**
@@ -81,7 +81,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
      */
     public function getAverageOrderValue(): int
     {
-        return $this->getElement('average_order_value')->getText();
+        return (int) $this->getElement('average_order_value')->getText();
     }
 
     /**

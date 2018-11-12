@@ -26,7 +26,7 @@ interface IndexPageInterface extends SymfonyPageInterface
 
     public function sortBy(string $fieldName);
 
-    public function deleteResourceOnPage(array $parameters): bool;
+    public function deleteResourceOnPage(array $parameters): void;
 
     public function getActionsForResource(array $parameters): NodeElement;
 

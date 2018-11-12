@@ -467,7 +467,7 @@ final class OrderContext implements Context
      */
     public function customersHaveAddedProductsToTheCartForTotalOf($numberOfCustomers, $total): void
     {
-        $customers = $this->generateCustomers($numberOfCustomers);
+        $customers = $this->generateCustomers((int) $numberOfCustomers);
 
         $sampleProductVariant = $this->sharedStorage->get('variant');
         $total = $this->getPriceFromString($total);

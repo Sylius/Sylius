@@ -841,17 +841,13 @@ final class ProductContext implements Context
         return $this->minkParameters[$name] ?? null;
     }
 
-    /**
-     * @param ChannelInterface $channel
-     * @param int $position
-     */
     private function createProductVariant(
         ProductInterface $product,
-        string $productVariantName,
+        ?string $productVariantName,
         int $price,
         string $code,
-        ChannelInterface $channel = null,
-        int $position = null,
+        ?ChannelInterface $channel = null,
+        ?int $position = null,
         bool $shippingRequired = true
     ): ProductVariantInterface {
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);

@@ -116,36 +116,36 @@ final class LoginContext implements Context
      * @When I specify the email as :email
      * @When I do not specify the email
      */
-    public function iSpecifyTheEmail($email = null): void
+    public function iSpecifyTheEmail(?string $email = null): void
     {
-        $this->requestPasswordResetPage->specifyEmail($email);
+        $this->requestPasswordResetPage->specifyEmail((string) $email);
     }
 
     /**
      * @When I specify the password as :password
      * @When I do not specify the password
      */
-    public function iSpecifyThePasswordAs($password = null): void
+    public function iSpecifyThePasswordAs(?string $password = null): void
     {
-        $this->loginPage->specifyPassword($password);
+        $this->loginPage->specifyPassword((string) $password);
     }
 
     /**
      * @When I specify my new password as :password
      * @When I do not specify my new password
      */
-    public function iSpecifyMyNewPassword(string $password = null): void
+    public function iSpecifyMyNewPassword(?string $password = null): void
     {
-        $this->resetPasswordPage->specifyNewPassword($password);
+        $this->resetPasswordPage->specifyNewPassword((string) $password);
     }
 
     /**
      * @When I confirm my new password as :password
      * @When I do not confirm my new password
      */
-    public function iConfirmMyNewPassword(string $password = null): void
+    public function iConfirmMyNewPassword(?string $password = null): void
     {
-        $this->resetPasswordPage->specifyConfirmPassword($password);
+        $this->resetPasswordPage->specifyConfirmPassword((string) $password);
     }
 
     /**

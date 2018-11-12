@@ -101,45 +101,45 @@ class RegistrationContext implements Context
      * @When I specify the first name as :firstName
      * @When I do not specify the first name
      */
-    public function iSpecifyTheFirstName($firstName = null): void
+    public function iSpecifyTheFirstName(?string $firstName = null): void
     {
-        $this->registerPage->specifyFirstName($firstName);
+        $this->registerPage->specifyFirstName((string) $firstName);
     }
 
     /**
      * @When I specify the last name as :lastName
      * @When I do not specify the last name
      */
-    public function iSpecifyTheLastName($lastName = null): void
+    public function iSpecifyTheLastName(?string $lastName = null): void
     {
-        $this->registerPage->specifyLastName($lastName);
+        $this->registerPage->specifyLastName((string) $lastName);
     }
 
     /**
      * @When I specify the email as :email
      * @When I do not specify the email
      */
-    public function iSpecifyTheEmail($email = null): void
+    public function iSpecifyTheEmail(?string $email = null): void
     {
-        $this->registerPage->specifyEmail($email);
+        $this->registerPage->specifyEmail((string) $email);
     }
 
     /**
      * @When I specify the password as :password
      * @When I do not specify the password
      */
-    public function iSpecifyThePasswordAs($password = null): void
+    public function iSpecifyThePasswordAs(?string $password = null): void
     {
-        $this->registerPage->specifyPassword($password);
-        $this->sharedStorage->set('password', $password);
+        $this->registerPage->specifyPassword((string) $password);
+        $this->sharedStorage->set('password', (string) $password);
     }
 
     /**
      * @When /^I confirm (this password)$/
      */
-    public function iConfirmThisPassword($password): void
+    public function iConfirmThisPassword(?string $password): void
     {
-        $this->registerPage->verifyPassword($password);
+        $this->registerPage->verifyPassword((string) $password);
     }
 
     /**
@@ -147,13 +147,13 @@ class RegistrationContext implements Context
      */
     public function iDoNotConfirmPassword(): void
     {
-        $this->registerPage->verifyPassword(null);
+        $this->registerPage->verifyPassword('');
     }
 
     /**
      * @When I specify the phone number as :phoneNumber
      */
-    public function iSpecifyThePhoneNumberAs($phoneNumber): void
+    public function iSpecifyThePhoneNumberAs(string $phoneNumber): void
     {
         $this->registerPage->specifyPhoneNumber($phoneNumber);
     }
@@ -171,7 +171,7 @@ class RegistrationContext implements Context
      * @Then my email should be :email
      * @Then my email should still be :email
      */
-    public function myEmailShouldBe($email): void
+    public function myEmailShouldBe(string $email): void
     {
         $this->dashboardPage->open();
 
@@ -181,7 +181,7 @@ class RegistrationContext implements Context
     /**
      * @Then /^I should be notified that the ([^"]+) is required$/
      */
-    public function iShouldBeNotifiedThatElementIsRequired($element): void
+    public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         $this->assertFieldValidationMessage($element, sprintf('Please enter your %s.', $element));
     }
@@ -233,7 +233,7 @@ class RegistrationContext implements Context
     /**
      * @Then I should be able to log in as :email with :password password
      */
-    public function iShouldBeAbleToLogInAsWithPassword($email, $password): void
+    public function iShouldBeAbleToLogInAsWithPassword(string $email, string $password): void
     {
         $this->iLogInAsWithPassword($email, $password);
         $this->iShouldBeLoggedIn();
@@ -242,7 +242,7 @@ class RegistrationContext implements Context
     /**
      * @Then I should not be able to log in as :email with :password password
      */
-    public function iShouldNotBeAbleToLogInAsWithPassword($email, $password): void
+    public function iShouldNotBeAbleToLogInAsWithPassword(string $email, string $password): void
     {
         $this->iLogInAsWithPassword($email, $password);
 
@@ -252,7 +252,7 @@ class RegistrationContext implements Context
     /**
      * @When I log in as :email with :password password
      */
-    public function iLogInAsWithPassword($email, $password): void
+    public function iLogInAsWithPassword(string $email, string $password): void
     {
         $this->loginPage->open();
         $this->loginPage->specifyUsername($email);
@@ -263,7 +263,7 @@ class RegistrationContext implements Context
     /**
      * @When I register with email :email and password :password
      */
-    public function iRegisterWithEmailAndPassword($email, $password): void
+    public function iRegisterWithEmailAndPassword(string $email, string $password): void
     {
         $this->registerPage->open();
         $this->registerPage->specifyEmail($email);
@@ -323,7 +323,7 @@ class RegistrationContext implements Context
     /**
      * @When I (try to )verify using :token token
      */
-    public function iTryToVerifyUsing($token): void
+    public function iTryToVerifyUsing(string $token): void
     {
         $this->verificationPage->verifyAccount($token);
     }
