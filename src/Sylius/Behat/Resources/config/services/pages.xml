@@ -20,11 +20,11 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.behat.page" class="Sylius\Behat\Page\Page" abstract="true" public="false">
+        <service id="sylius.behat.page" class="FriendsOfBehat\PageObjectExtension\Page\Page" abstract="true" public="false">
             <argument type="service" id="mink.default_session" />
             <argument>%__behat__.mink.parameters%</argument>
         </service>
-        <service id="sylius.behat.symfony_page" class="Sylius\Behat\Page\SymfonyPage" parent="sylius.behat.page" abstract="true" public="false">
+        <service id="sylius.behat.symfony_page" class="FriendsOfBehat\PageObjectExtension\Page\SymfonyPage" parent="sylius.behat.page" abstract="true" public="false">
             <argument type="service" id="__symfony_shared__.router" />
         </service>
 
