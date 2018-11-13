@@ -174,7 +174,6 @@ class InMemoryRepository implements RepositoryInterface
 
     /**
      * @param ResourceInterface[] $resources
-     * @param array               $criteria
      *
      * @return ResourceInterface[]|array
      */
@@ -194,7 +193,6 @@ class InMemoryRepository implements RepositoryInterface
 
     /**
      * @param ResourceInterface[] $resources
-     * @param array               $orderBy
      *
      * @return ResourceInterface[]
      */

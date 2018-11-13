@@ -55,13 +55,6 @@ class MugProductFixture extends AbstractFixture
      */
     private $optionsResolver;
 
-    /**
-     * @param AbstractResourceFixture $taxonFixture
-     * @param AbstractResourceFixture $productAttributeFixture
-     * @param AbstractResourceFixture $productOptionFixture
-     * @param AbstractResourceFixture $productFixture
-     * @param string $baseLocaleCode
-     */
     public function __construct(
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $productAttributeFixture,
@@ -178,11 +171,6 @@ class MugProductFixture extends AbstractFixture
         ;
     }
 
-    /**
-     * @param int $amount
-     *
-     * @return array
-     */
     private function getUniqueNames(int $amount): array
     {
         $productsNames = [];

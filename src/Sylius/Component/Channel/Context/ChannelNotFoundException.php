@@ -23,7 +23,7 @@ class ChannelNotFoundException extends \RuntimeException
         $message = 'Channel could not be found! Tip: You can use the Web Debug Toolbar to switch between channels in development.';
 
         if ($messageOrPreviousException instanceof \Throwable) {
-            @trigger_error('Passing previous exception as the first argument is deprecated since 1.2 and will be prohibited since 2.0.', E_USER_DEPRECATED);
+            @trigger_error('Passing previous exception as the first argument is deprecated since 1.2 and will be prohibited since 2.0.', \E_USER_DEPRECATED);
             $previousException = $messageOrPreviousException;
         }
 

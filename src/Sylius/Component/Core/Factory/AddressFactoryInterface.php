@@ -19,10 +19,5 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface AddressFactoryInterface extends FactoryInterface
 {
-    /**
-     * @param CustomerInterface $customer
-     *
-     * @return AddressInterface
-     */
     public function createForCustomer(CustomerInterface $customer): AddressInterface;
 }

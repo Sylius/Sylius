@@ -23,9 +23,6 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
      */
     private $localeConverter;
 
-    /**
-     * @param LocaleConverterInterface $localeConverter
-     */
     public function __construct(LocaleConverterInterface $localeConverter)
     {
         $this->localeConverter = $localeConverter;

@@ -25,9 +25,6 @@ final class CheckoutThankYouContext implements Context
      */
     private $thankYouPage;
 
-    /**
-     * @param ThankYouPageInterface $thankYouPage
-     */
     public function __construct(ThankYouPageInterface $thankYouPage)
     {
         $this->thankYouPage = $thankYouPage;

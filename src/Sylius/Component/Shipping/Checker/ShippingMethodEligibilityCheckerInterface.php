@@ -18,11 +18,5 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 interface ShippingMethodEligibilityCheckerInterface
 {
-    /**
-     * @param ShippingSubjectInterface $subject
-     * @param ShippingMethodInterface $method
-     *
-     * @return bool
-     */
     public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool;
 }

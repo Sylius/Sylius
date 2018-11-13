@@ -27,9 +27,6 @@ final class LocaleChoiceType extends AbstractType
      */
     private $localeRepository;
 
-    /**
-     * @param RepositoryInterface $repository
-     */
     public function __construct(RepositoryInterface $repository)
     {
         $this->localeRepository = $repository;

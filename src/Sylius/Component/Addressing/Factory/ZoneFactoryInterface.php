@@ -18,17 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface ZoneFactoryInterface extends FactoryInterface
 {
-    /**
-     * @param string $type
-     *
-     * @return ZoneInterface
-     */
     public function createTyped(string $type): ZoneInterface;
 
-    /**
-     * @param array $membersCodes
-     *
-     * @return ZoneInterface
-     */
     public function createWithMembers(array $membersCodes): ZoneInterface;
 }

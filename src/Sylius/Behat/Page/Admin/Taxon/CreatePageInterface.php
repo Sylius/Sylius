@@ -74,8 +74,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function attachImage($path, $type = null);
 
     /**
-     * @param TaxonInterface|null $parentTaxon
-     *
      * @return NodeElement[]
      *
      * @throws ElementNotFoundException

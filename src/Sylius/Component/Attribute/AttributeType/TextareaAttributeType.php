@@ -61,12 +61,6 @@ final class TextareaAttributeType implements AttributeTypeInterface
         }
     }
 
-    /**
-     * @param ExecutionContextInterface $context
-     * @param string|null $value
-     *
-     * @return ConstraintViolationListInterface
-     */
     private function getValidationErrors(
         ExecutionContextInterface $context,
         ?string $value

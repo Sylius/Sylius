@@ -185,9 +185,6 @@ class Kernel extends HttpKernel
         return dirname($this->getRootDir()) . '/var/logs';
     }
 
-    /**
-     * @return bool
-     */
     protected function isVagrantEnvironment(): bool
     {
         return (getenv('HOME') === '/home/vagrant' || getenv('VAGRANT') === 'VAGRANT') && is_dir('/dev/shm');

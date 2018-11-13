@@ -24,9 +24,6 @@ final class CustomerGroupContext implements Context
      */
     private $customerGroupRepository;
 
-    /**
-     * @param RepositoryInterface $customerGroupRepository
-     */
     public function __construct(RepositoryInterface $customerGroupRepository)
     {
         $this->customerGroupRepository = $customerGroupRepository;

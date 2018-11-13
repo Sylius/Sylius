@@ -48,13 +48,6 @@ final class ChannelContext implements Context
      */
     private $homePage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ChannelContextSetterInterface $channelContextSetter
-     * @param ChannelRepositoryInterface $channelRepository
-     * @param CreatePageInterface $channelCreatePage
-     * @param HomePageInterface $homePage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ChannelContextSetterInterface $channelContextSetter,

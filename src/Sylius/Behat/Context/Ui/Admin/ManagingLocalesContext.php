@@ -30,10 +30,6 @@ final class ManagingLocalesContext implements Context
      */
     private $indexPage;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     */
     public function __construct(CreatePageInterface $createPage, IndexPageInterface $indexPage)
     {
         $this->createPage = $createPage;

@@ -30,10 +30,6 @@ final class RequestBasedLocaleContext implements LocaleContextInterface
      */
     private $localeProvider;
 
-    /**
-     * @param RequestStack $requestStack
-     * @param LocaleProviderInterface $localeProvider
-     */
     public function __construct(RequestStack $requestStack, LocaleProviderInterface $localeProvider)
     {
         $this->requestStack = $requestStack;

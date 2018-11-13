@@ -20,11 +20,6 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 
 interface CountryInterface extends ToggleableInterface, ResourceInterface, CodeAwareInterface
 {
-    /**
-     * @param string|null $locale
-     *
-     * @return string|null
-     */
     public function getName(?string $locale = null): ?string;
 
     /**
@@ -32,25 +27,11 @@ interface CountryInterface extends ToggleableInterface, ResourceInterface, CodeA
      */
     public function getProvinces(): Collection;
 
-    /**
-     * @return bool
-     */
     public function hasProvinces(): bool;
 
-    /**
-     * @param ProvinceInterface $province
-     */
     public function addProvince(ProvinceInterface $province): void;
 
-    /**
-     * @param ProvinceInterface $province
-     */
     public function removeProvince(ProvinceInterface $province): void;
 
-    /**
-     * @param ProvinceInterface $province
-     *
-     * @return bool
-     */
     public function hasProvince(ProvinceInterface $province): bool;
 }

@@ -94,9 +94,6 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      */
     public function isMainTaxonChosen($taxonName);
 
-    /**
-     * @param TaxonInterface $taxon
-     */
     public function selectMainTaxon(TaxonInterface $taxon);
 
     public function disableTracking();
@@ -150,14 +147,12 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function countImages();
 
     /**
-     * @param ProductAssociationTypeInterface $productAssociationType
      * @param string[] $productsNames
      */
     public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames);
 
     /**
      * @param string $productName
-     * @param ProductAssociationTypeInterface $productAssociationType
      *
      * @return bool
      */
@@ -165,14 +160,10 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     /**
      * @param string $productName
-     * @param ProductAssociationTypeInterface $productAssociationType
      */
     public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType);
 
     /**
-     * @param ChannelInterface $channel
-     * @param CurrencyInterface $currency
-     *
      * @return string
      */
     public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency);

@@ -46,13 +46,6 @@ final class ShippingMethodType extends AbstractResourceType
      */
     private $formTypeRegistry;
 
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param string $shippingMethodTranslationType
-     * @param ServiceRegistryInterface $calculatorRegistry
-     * @param FormTypeRegistryInterface $formTypeRegistry
-     */
     public function __construct(
         string $dataClass,
         array $validationGroups,
@@ -161,10 +154,6 @@ final class ShippingMethodType extends AbstractResourceType
         return 'sylius_shipping_method';
     }
 
-    /**
-     * @param FormInterface $form
-     * @param string $calculatorName
-     */
     private function addConfigurationField(FormInterface $form, string $calculatorName): void
     {
         /** @var CalculatorInterface $calculator */

@@ -23,9 +23,6 @@ final class DelegatingCalculator implements DelegatingCalculatorInterface
      */
     private $registry;
 
-    /**
-     * @param ServiceRegistryInterface $registry
-     */
     public function __construct(ServiceRegistryInterface $registry)
     {
         $this->registry = $registry;

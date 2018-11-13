@@ -40,12 +40,6 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
      */
     private $productFilter;
 
-    /**
-     * @param FactoryInterface $adjustmentFactory
-     * @param FilterInterface $priceRangeFilter
-     * @param FilterInterface $taxonFilter
-     * @param FilterInterface $productFilter
-     */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
@@ -92,11 +86,6 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
         return true;
     }
 
-    /**
-     * @param OrderItemInterface $item
-     * @param int $promotionAmount
-     * @param PromotionInterface $promotion
-     */
     private function setUnitsAdjustments(
         OrderItemInterface $item,
         int $promotionAmount,

@@ -17,9 +17,5 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 
 interface SharedSecurityServiceInterface
 {
-    /**
-     * @param AdminUserInterface $adminUser
-     * @param callable $action
-     */
     public function performActionAsAdminUser(AdminUserInterface $adminUser, callable $action);
 }

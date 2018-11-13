@@ -24,9 +24,6 @@ final class ShippingMethodContext implements Context
      */
     private $shippingMethodRepository;
 
-    /**
-     * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-     */
     public function __construct(ShippingMethodRepositoryInterface $shippingMethodRepository)
     {
         $this->shippingMethodRepository = $shippingMethodRepository;

@@ -69,9 +69,6 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
         $this->getDocument()->clickLink('Create an account');
     }
 
-    /**
-     * @return string
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_thank_you';

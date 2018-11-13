@@ -39,9 +39,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isTracked();
 
     /**
-     * @param ChannelInterface $channel
-     * @param CurrencyInterface $currency
-     *
      * @return string
      */
     public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency);

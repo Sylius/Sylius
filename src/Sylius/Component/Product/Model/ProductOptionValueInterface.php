@@ -20,39 +20,19 @@ use Sylius\Component\Resource\Model\TranslationInterface;
 
 interface ProductOptionValueInterface extends ResourceInterface, CodeAwareInterface, TranslatableInterface
 {
-    /**
-     * @return ProductOptionInterface|null
-     */
     public function getOption(): ?ProductOptionInterface;
 
-    /**
-     * @param ProductOptionInterface|null $option
-     */
     public function setOption(?ProductOptionInterface $option): void;
 
-    /**
-     * @return string|null
-     */
     public function getValue(): ?string;
 
-    /**
-     * @param string|null $value
-     */
     public function setValue(?string $value): void;
 
-    /**
-     * @return string|null
-     */
     public function getOptionCode(): ?string;
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductOptionValueTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

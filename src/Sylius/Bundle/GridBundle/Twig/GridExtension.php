@@ -22,9 +22,6 @@ final class GridExtension extends \Twig_Extension
      */
     private $gridHelper;
 
-    /**
-     * @param GridHelper $gridHelper
-     */
     public function __construct(GridHelper $gridHelper)
     {
         $this->gridHelper = $gridHelper;

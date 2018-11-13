@@ -49,13 +49,6 @@ final class ChannelContext implements Context
      */
     private $channelManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param DefaultChannelFactoryInterface $unitedStatesChannelFactory
-     * @param DefaultChannelFactoryInterface $defaultChannelFactory
-     * @param ChannelRepositoryInterface $channelRepository
-     * @param ObjectManager $channelManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         DefaultChannelFactoryInterface $unitedStatesChannelFactory,
@@ -204,7 +197,6 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @param ChannelInterface $channel
      * @param bool $state
      */
     private function changeChannelState(ChannelInterface $channel, $state)

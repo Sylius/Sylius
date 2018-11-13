@@ -22,9 +22,6 @@ final class VariantResolverExtension extends \Twig_Extension
      */
     private $helper;
 
-    /**
-     * @param Helper $helper
-     */
     public function __construct(Helper $helper)
     {
         $this->helper = $helper;

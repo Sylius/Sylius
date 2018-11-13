@@ -24,9 +24,6 @@ final class TaxonContext implements Context
      */
     private $taxonRepository;
 
-    /**
-     * @param TaxonRepositoryInterface $taxonRepository
-     */
     public function __construct(TaxonRepositoryInterface $taxonRepository)
     {
         $this->taxonRepository = $taxonRepository;

@@ -30,10 +30,6 @@ final class CountryContext implements Context
      */
     private $countryRepository;
 
-    /**
-     * @param CountryNameConverterInterface $countryNameConverter
-     * @param RepositoryInterface $countryRepository
-     */
     public function __construct(
         CountryNameConverterInterface $countryNameConverter,
         RepositoryInterface $countryRepository

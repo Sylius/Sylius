@@ -23,9 +23,6 @@ final class StateMachine implements StateMachineInterface
      */
     private $stateMachineFactory;
 
-    /**
-     * @param FactoryInterface $stateMachineFactory
-     */
     public function __construct(FactoryInterface $stateMachineFactory)
     {
         $this->stateMachineFactory = $stateMachineFactory;

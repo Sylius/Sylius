@@ -23,9 +23,6 @@ final class CompositeMethodsResolver implements PaymentMethodsResolverInterface
      */
     private $resolversRegistry;
 
-    /**
-     * @param PrioritizedServiceRegistryInterface $resolversRegistry
-     */
     public function __construct(PrioritizedServiceRegistryInterface $resolversRegistry)
     {
         $this->resolversRegistry = $resolversRegistry;

@@ -18,20 +18,13 @@ use Sylius\Component\Core\Model\OrderInterface;
 interface OrderInventoryOperatorInterface
 {
     /**
-     * @param OrderInterface $order
-     *
      * @throws \InvalidArgumentException
      */
     public function cancel(OrderInterface $order): void;
 
-    /**
-     * @param OrderInterface $order
-     */
     public function hold(OrderInterface $order): void;
 
     /**
-     * @param OrderInterface $order
-     *
      * @throws \InvalidArgumentException
      */
     public function sell(OrderInterface $order): void;

@@ -22,9 +22,6 @@ class ProvinceNamingExtension extends \Twig_Extension
      */
     private $provinceNamingProvider;
 
-    /**
-     * @param ProvinceNamingProviderInterface $provinceNamingProvider
-     */
     public function __construct(ProvinceNamingProviderInterface $provinceNamingProvider)
     {
         $this->provinceNamingProvider = $provinceNamingProvider;

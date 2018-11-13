@@ -17,10 +17,5 @@ use Sylius\Component\Core\Model\CustomerInterface;
 
 interface CustomerStatisticsProviderInterface
 {
-    /**
-     * @param CustomerInterface $customer
-     *
-     * @return CustomerStatistics
-     */
     public function getCustomerStatistics(CustomerInterface $customer): CustomerStatistics;
 }

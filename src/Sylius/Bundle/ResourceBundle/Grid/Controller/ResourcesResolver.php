@@ -37,11 +37,6 @@ final class ResourcesResolver implements ResourcesResolverInterface
      */
     private $gridViewFactory;
 
-    /**
-     * @param ResourcesResolverInterface $decoratedResolver
-     * @param GridProviderInterface $gridProvider
-     * @param ResourceGridViewFactoryInterface $gridViewFactory
-     */
     public function __construct(
         ResourcesResolverInterface $decoratedResolver,
         GridProviderInterface $gridProvider,

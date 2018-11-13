@@ -34,8 +34,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function getScope();
 
     /**
-     * @param ZoneMemberInterface $zoneMember
-     *
      * @return bool
      */
     public function hasMember(ZoneMemberInterface $zoneMember);
@@ -45,8 +43,5 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      */
     public function isCodeDisabled();
 
-    /**
-     * @param ZoneMemberInterface $zoneMember
-     */
     public function removeMember(ZoneMemberInterface $zoneMember);
 }

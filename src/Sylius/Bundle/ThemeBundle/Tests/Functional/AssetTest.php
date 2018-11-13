@@ -22,7 +22,7 @@ final class AssetTest extends WebTestCase
     {
         parent::tearDown();
 
-        file_put_contents(__DIR__ . '/../Fixtures/themes/FirstTestTheme/TestBundle/public/theme_asset.txt', 'Theme asset' . PHP_EOL);
+        file_put_contents(__DIR__ . '/../Fixtures/themes/FirstTestTheme/TestBundle/public/theme_asset.txt', 'Theme asset' . \PHP_EOL);
     }
 
     /**

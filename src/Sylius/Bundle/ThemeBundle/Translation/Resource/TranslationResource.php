@@ -35,9 +35,6 @@ final class TranslationResource implements TranslationResourceInterface
      */
     private $domain;
 
-    /**
-     * @param string $filepath
-     */
     public function __construct(string $filepath)
     {
         $this->name = $filepath;

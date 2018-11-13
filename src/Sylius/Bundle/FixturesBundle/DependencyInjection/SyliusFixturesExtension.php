@@ -56,10 +56,6 @@ final class SyliusFixturesExtension extends Extension implements PrependExtensio
         }
     }
 
-    /**
-     * @param array $config
-     * @param ContainerBuilder $container
-     */
     private function registerSuites(array $config, ContainerBuilder $container): void
     {
         $suiteRegistry = $container->findDefinition('sylius_fixtures.suite_registry');

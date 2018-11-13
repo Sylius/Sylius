@@ -61,15 +61,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
      */
     private $defaultLocaleCode;
 
-    /**
-     * @param ChannelFactoryInterface $channelFactory
-     * @param FactoryInterface $currencyFactory
-     * @param FactoryInterface $localeFactory
-     * @param RepositoryInterface $channelRepository
-     * @param RepositoryInterface $currencyRepository
-     * @param RepositoryInterface $localeRepository
-     * @param string $defaultLocaleCode
-     */
     public function __construct(
         ChannelFactoryInterface $channelFactory,
         FactoryInterface $currencyFactory,
@@ -116,11 +107,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         ];
     }
 
-    /**
-     * @param string|null $currencyCode
-     *
-     * @return CurrencyInterface
-     */
     private function provideCurrency(?string $currencyCode): CurrencyInterface
     {
         $currencyCode = $currencyCode ?? self::DEFAULT_CHANNEL_CURRENCY;
@@ -139,9 +125,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         return $currency;
     }
 
-    /**
-     * @return LocaleInterface
-     */
     private function provideLocale(): LocaleInterface
     {
         /** @var LocaleInterface $locale */

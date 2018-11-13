@@ -25,9 +25,6 @@ final class ShipmentEmailManager implements ShipmentEmailManagerInterface
      */
     private $emailSender;
 
-    /**
-     * @param SenderInterface $emailSender
-     */
     public function __construct(SenderInterface $emailSender)
     {
         $this->emailSender = $emailSender;

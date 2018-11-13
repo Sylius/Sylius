@@ -28,10 +28,6 @@ final class LimitingOrderItemQuantityModifier implements OrderItemQuantityModifi
      */
     private $limit;
 
-    /**
-     * @param OrderItemQuantityModifierInterface $decoratedOrderItemQuantityModifier
-     * @param int $limit
-     */
     public function __construct(OrderItemQuantityModifierInterface $decoratedOrderItemQuantityModifier, int $limit)
     {
         $this->decoratedOrderItemQuantityModifier = $decoratedOrderItemQuantityModifier;

@@ -28,9 +28,6 @@ final class SelectAttributeType extends AbstractType
      */
     private $defaultLocaleCode;
 
-    /**
-     * @param TranslationLocaleProviderInterface $localeProvider
-     */
     public function __construct(TranslationLocaleProviderInterface $localeProvider)
     {
         $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();

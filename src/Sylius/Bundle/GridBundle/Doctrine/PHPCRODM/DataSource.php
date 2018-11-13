@@ -34,10 +34,6 @@ final class DataSource implements DataSourceInterface
      */
     private $expressionBuilder;
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param ExpressionBuilderInterface|null $expressionBuilder
-     */
     public function __construct(QueryBuilder $queryBuilder, ?ExpressionBuilderInterface $expressionBuilder = null)
     {
         $this->queryBuilder = $queryBuilder;

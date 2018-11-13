@@ -30,10 +30,6 @@ final class CurrencyContext implements Context
      */
     private $currencyRepository;
 
-    /**
-     * @param CurrencyNameConverterInterface $currencyNameConverter
-     * @param RepositoryInterface $currencyRepository
-     */
     public function __construct(
         CurrencyNameConverterInterface $currencyNameConverter,
         RepositoryInterface $currencyRepository

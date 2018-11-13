@@ -19,10 +19,5 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 
 interface LocaleInterface extends ResourceInterface, CodeAwareInterface, TimestampableInterface
 {
-    /**
-     * @param string|null $locale
-     *
-     * @return string|null
-     */
     public function getName(?string $locale = null): ?string;
 }

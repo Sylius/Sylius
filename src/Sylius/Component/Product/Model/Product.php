@@ -71,9 +71,6 @@ class Product implements ProductInterface
         $this->options = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();
@@ -440,8 +437,6 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface
@@ -460,13 +455,6 @@ class Product implements ProductInterface
         return new ProductTranslation();
     }
 
-    /**
-     * @param ProductAttributeValueInterface $attributeValue
-     * @param string $localeCode
-     * @param string|null $fallbackLocaleCode
-     *
-     * @return AttributeValueInterface
-     */
     private function getAttributeInDifferentLocale(
         ProductAttributeValueInterface $attributeValue,
         string $localeCode,
@@ -486,12 +474,6 @@ class Product implements ProductInterface
         return $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode);
     }
 
-    /**
-     * @param string $attributeCode
-     * @param string $localeCode
-     *
-     * @return bool
-     */
     private function hasNotEmptyAttributeByCodeAndLocale(string $attributeCode, string $localeCode): bool
     {
         $attributeValue = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);

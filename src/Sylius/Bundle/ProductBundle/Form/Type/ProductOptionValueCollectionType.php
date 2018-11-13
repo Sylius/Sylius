@@ -75,8 +75,6 @@ final class ProductOptionValueCollectionType extends AbstractType
     }
 
     /**
-     * @param mixed $options
-     *
      * @throws \InvalidArgumentException
      */
     private function assertOptionsAreValid($options): void

@@ -38,11 +38,6 @@ final class CustomerAndChannelBasedCartContext implements CartContextInterface
      */
     private $orderRepository;
 
-    /**
-     * @param CustomerContextInterface $customerContext
-     * @param ChannelContextInterface $channelContext
-     * @param OrderRepositoryInterface $orderRepository
-     */
     public function __construct(
         CustomerContextInterface $customerContext,
         ChannelContextInterface $channelContext,

@@ -23,9 +23,6 @@ final class OrderNumberAssigner implements OrderNumberAssignerInterface
      */
     private $numberGenerator;
 
-    /**
-     * @param OrderNumberGeneratorInterface $numberGenerator
-     */
     public function __construct(OrderNumberGeneratorInterface $numberGenerator)
     {
         $this->numberGenerator = $numberGenerator;

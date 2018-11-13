@@ -72,9 +72,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         ]);
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastOptionValueElement(): NodeElement
     {
         $optionValues = $this->getElement('values');

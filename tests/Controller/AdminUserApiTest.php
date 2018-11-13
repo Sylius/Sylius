@@ -343,8 +343,6 @@ EOT;
     }
 
     /**
-     * @param AdminUserInterface $user
-     *
      * @return string
      */
     private function getAdminUserUrl(AdminUserInterface $user)

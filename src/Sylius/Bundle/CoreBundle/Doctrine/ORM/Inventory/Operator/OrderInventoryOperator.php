@@ -32,10 +32,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
      */
     private $productVariantManager;
 
-    /**
-     * @param OrderInventoryOperatorInterface $decoratedOperator
-     * @param EntityManagerInterface $productVariantManager
-     */
     public function __construct(
         OrderInventoryOperatorInterface $decoratedOperator,
         EntityManagerInterface $productVariantManager
@@ -81,8 +77,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     }
 
     /**
-     * @param OrderInterface $order
-     *
      * @throws OptimisticLockException
      */
     private function lockProductVariants(OrderInterface $order): void

@@ -113,11 +113,6 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $container->addCompilerPass(new CompositeRequestResolverPass());
     }
 
-    /**
-     * @param string $serviceId
-     * @param string $method
-     * @param array $arguments
-     */
     private function assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
         string $serviceId,
         string $method,

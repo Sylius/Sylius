@@ -27,9 +27,6 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
      */
     private $generator;
 
-    /**
-     * @param ProductVariantGeneratorInterface $generator
-     */
     public function __construct(ProductVariantGeneratorInterface $generator)
     {
         $this->generator = $generator;
@@ -45,9 +42,6 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
         /** @var ProductInterface $product */

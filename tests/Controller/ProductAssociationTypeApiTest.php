@@ -315,8 +315,6 @@ EOT;
     }
 
     /**
-     * @param ProductAssociationTypeInterface $productAssociationType
-     *
      * @return string
      */
     private function getAssociationTypeUrl(ProductAssociationTypeInterface $productAssociationType)

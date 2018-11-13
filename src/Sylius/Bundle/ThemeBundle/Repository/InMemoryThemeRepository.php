@@ -33,9 +33,6 @@ final class InMemoryThemeRepository implements ThemeRepositoryInterface
      */
     private $themesLoaded = false;
 
-    /**
-     * @param ThemeLoaderInterface $themeLoader
-     */
     public function __construct(ThemeLoaderInterface $themeLoader)
     {
         $this->themeLoader = $themeLoader;

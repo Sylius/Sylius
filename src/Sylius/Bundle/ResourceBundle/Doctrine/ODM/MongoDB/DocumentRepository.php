@@ -55,8 +55,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     }
 
     /**
-     * @param array $criteria
-     *
      * @return object
      */
     public function findOneBy(array $criteria)
@@ -72,8 +70,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     }
 
     /**
-     * @param array $criteria
-     * @param array|null $sorting
      * @param int $limit
      * @param int $offset
      *
@@ -134,8 +130,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     *
      * @return Pagerfanta
      */
     public function getPaginator(QueryBuilder $queryBuilder)
@@ -159,10 +153,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return $this->createQueryBuilder();
     }
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param array        $criteria
-     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
         foreach ($criteria as $property => $value) {
@@ -170,10 +160,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         }
     }
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param array        $sorting
-     */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
         foreach ($sorting as $property => $order) {

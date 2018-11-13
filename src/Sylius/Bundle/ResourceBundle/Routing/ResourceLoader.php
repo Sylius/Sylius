@@ -35,10 +35,6 @@ final class ResourceLoader implements LoaderInterface
      */
     private $routeFactory;
 
-    /**
-     * @param RegistryInterface $resourceRegistry
-     * @param RouteFactoryInterface $routeFactory
-     */
     public function __construct(RegistryInterface $resourceRegistry, RouteFactoryInterface $routeFactory)
     {
         $this->resourceRegistry = $resourceRegistry;
@@ -135,16 +131,6 @@ final class ResourceLoader implements LoaderInterface
         // Intentionally left blank.
     }
 
-    /**
-     * @param MetadataInterface $metadata
-     * @param array $configuration
-     * @param string $path
-     * @param string $actionName
-     * @param array $methods
-     * @param bool $isApi
-     *
-     * @return Route
-     */
     private function createRoute(
         MetadataInterface $metadata,
         array $configuration,
@@ -217,13 +203,6 @@ final class ResourceLoader implements LoaderInterface
         return $this->routeFactory->createRoute($path, $defaults, [], [], '', [], $methods);
     }
 
-    /**
-     * @param MetadataInterface $metadata
-     * @param array $configuration
-     * @param string $actionName
-     *
-     * @return string
-     */
     private function getRouteName(MetadataInterface $metadata, array $configuration, string $actionName): string
     {
         $sectionPrefix = isset($configuration['section']) ? $configuration['section'] . '_' : '';

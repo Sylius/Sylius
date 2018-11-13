@@ -30,10 +30,6 @@ final class OrderContext implements Context
      */
     private $orderRepository;
 
-    /**
-     * @param CustomerRepositoryInterface $customerRepository
-     * @param OrderRepositoryInterface $orderRepository
-     */
     public function __construct(
         CustomerRepositoryInterface $customerRepository,
         OrderRepositoryInterface $orderRepository

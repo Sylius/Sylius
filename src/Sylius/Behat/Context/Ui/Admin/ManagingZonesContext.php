@@ -52,13 +52,6 @@ final class ManagingZonesContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -363,9 +356,6 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @param ZoneInterface $zone
-     * @param ZoneMemberInterface $zoneMember
-     *
      * @throws \InvalidArgumentException
      */
     private function assertZoneAndItsMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)

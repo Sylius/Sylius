@@ -25,17 +25,11 @@ final class OrderCompleteListener
      */
     private $orderEmailManager;
 
-    /**
-     * @param OrderEmailManagerInterface $orderEmailManager
-     */
     public function __construct(OrderEmailManagerInterface $orderEmailManager)
     {
         $this->orderEmailManager = $orderEmailManager;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function sendConfirmationEmail(GenericEvent $event): void
     {
         $order = $event->getSubject();

@@ -29,9 +29,6 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
      */
     private $decoratedFactory;
 
-    /**
-     * @param FactoryInterface $decoratedFactory
-     */
     public function __construct(FactoryInterface $decoratedFactory)
     {
         $this->decoratedFactory = $decoratedFactory;
@@ -96,12 +93,6 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
         return $this->createPromotionRule(ContainsProductRuleChecker::TYPE, ['product_code' => $productCode]);
     }
 
-    /**
-     * @param string $type
-     * @param array $configuration
-     *
-     * @return PromotionRuleInterface
-     */
     private function createPromotionRule(string $type, array $configuration): PromotionRuleInterface
     {
         /** @var PromotionRuleInterface $rule */

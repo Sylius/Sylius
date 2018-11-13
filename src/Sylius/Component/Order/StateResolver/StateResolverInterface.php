@@ -17,8 +17,5 @@ use Sylius\Component\Order\Model\OrderInterface;
 
 interface StateResolverInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function resolve(OrderInterface $order): void;
 }

@@ -24,12 +24,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProductAttributeController extends ResourceController
 {
-    /**
-     * @param Request $request
-     * @param string $template
-     *
-     * @return Response
-     */
     public function getAttributeTypesAction(Request $request, string $template): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -46,9 +40,6 @@ class ProductAttributeController extends ResourceController
         return $this->viewHandler->handle($configuration, $view);
     }
 
-    /**
-     * @return Response
-     */
     public function renderAttributesAction(Request $request): Response
     {
         $template = $request->attributes->get('template', '@SyliusAttribute/attributeChoice.html.twig');
@@ -60,11 +51,6 @@ class ProductAttributeController extends ResourceController
         return $this->render($template, ['form' => $form->createView()]);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function renderAttributeValueFormsAction(Request $request): Response
     {
         $template = $request->attributes->get('template', '@SyliusAttribute/attributeValueForms.html.twig');
@@ -94,7 +80,6 @@ class ProductAttributeController extends ResourceController
     }
 
     /**
-     * @param AttributeInterface $attribute
      * @param array|string[] $localeCodes
      *
      * @return array|FormView[]

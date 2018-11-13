@@ -37,9 +37,6 @@ class NameFilterListener
      */
     private $replacementCharacter;
 
-    /**
-     * @param DocumentManagerInterface $documentManager
-     */
     public function __construct(
         DocumentManagerInterface $documentManager,
         $replacementCharacter = ' '
@@ -48,9 +45,6 @@ class NameFilterListener
         $this->replacementCharacter = $replacementCharacter;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function onEvent(ResourceControllerEvent $event)
     {
         $document = $event->getSubject();

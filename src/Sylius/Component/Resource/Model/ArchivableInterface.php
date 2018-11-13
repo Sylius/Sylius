@@ -15,13 +15,7 @@ namespace Sylius\Component\Resource\Model;
 
 interface ArchivableInterface
 {
-    /**
-     * @return \DateTimeInterface|null
-     */
     public function getArchivedAt(): ?\DateTimeInterface;
 
-    /**
-     * @param \DateTimeInterface|null $archivedAt
-     */
     public function setArchivedAt(?\DateTimeInterface $archivedAt): void;
 }

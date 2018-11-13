@@ -37,11 +37,6 @@ final class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
      */
     private $averageRatingUpdater;
 
-    /**
-     * @param EntityRepository $reviewRepository
-     * @param ObjectManager $reviewManager
-     * @param ReviewableRatingUpdaterInterface $averageRatingUpdater
-     */
     public function __construct(
         EntityRepository $reviewRepository,
         ObjectManager $reviewManager,
@@ -70,7 +65,6 @@ final class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
     }
 
     /**
-     * @param ReviewInterface $review
      * @param array|ReviewableInterface[] $reviewSubjectsToRecalculate
      *
      * @return array|ReviewableInterface[]

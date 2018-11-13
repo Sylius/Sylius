@@ -29,9 +29,6 @@ final class UniqueSimpleProductCodeValidator extends ConstraintValidator
      */
     private $productVariantRepository;
 
-    /**
-     * @param ProductVariantRepositoryInterface $productVariantRepository
-     */
     public function __construct(ProductVariantRepositoryInterface $productVariantRepository)
     {
         $this->productVariantRepository = $productVariantRepository;

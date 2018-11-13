@@ -35,11 +35,6 @@ final class DataProvider implements DataProviderInterface
      */
     private $sorter;
 
-    /**
-     * @param DataSourceProviderInterface $dataSourceProvider
-     * @param FiltersApplicatorInterface $filtersApplicator
-     * @param SorterInterface $sorter
-     */
     public function __construct(
         DataSourceProviderInterface $dataSourceProvider,
         FiltersApplicatorInterface $filtersApplicator,

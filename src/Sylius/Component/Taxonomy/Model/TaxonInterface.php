@@ -22,9 +22,6 @@ use Sylius\Component\Resource\Model\TranslationInterface;
 
 interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, ResourceInterface, SlugAwareInterface
 {
-    /**
-     * @return bool
-     */
     public function isRoot(): bool;
 
     /**
@@ -54,14 +51,9 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
 
     /**
      * @param TaxonInterface $taxon
-     *
-     * @return bool
      */
     public function hasChild(self $taxon): bool;
 
-    /**
-     * @return bool
-     */
     public function hasChildren(): bool;
 
     /**
@@ -74,69 +66,31 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
      */
     public function removeChild(self $taxon): void;
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void;
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string;
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void;
 
-    /**
-     * @return int|null
-     */
     public function getLeft(): ?int;
 
-    /**
-     * @param int|null $left
-     */
     public function setLeft(?int $left): void;
 
-    /**
-     * @return int|null
-     */
     public function getRight(): ?int;
 
-    /**
-     * @param int|null $right
-     */
     public function setRight(?int $right): void;
 
-    /**
-     * @return int|null
-     */
     public function getLevel(): ?int;
 
-    /**
-     * @param int|null $level
-     */
     public function setLevel(?int $level): void;
 
-    /**
-     * @return int|null
-     */
     public function getPosition(): ?int;
 
-    /**
-     * @param int|null $position
-     */
     public function setPosition(?int $position): void;
 
     /**
-     * @param string|null $locale
-     *
      * @return TaxonTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

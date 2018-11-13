@@ -84,10 +84,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependHwiOauth($container, $loader);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param LoaderInterface $loader
-     */
     private function prependHwiOauth(ContainerBuilder $container, LoaderInterface $loader): void
     {
         if (!$container->hasExtension('hwi_oauth')) {

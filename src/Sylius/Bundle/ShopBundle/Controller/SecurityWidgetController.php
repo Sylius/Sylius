@@ -23,17 +23,11 @@ final class SecurityWidgetController
      */
     private $templatingEngine;
 
-    /**
-     * @param EngineInterface $templatingEngine
-     */
     public function __construct(EngineInterface $templatingEngine)
     {
         $this->templatingEngine = $templatingEngine;
     }
 
-    /**
-     * @return Response
-     */
     public function renderAction(): Response
     {
         return $this->templatingEngine->renderResponse('@SyliusShop/Menu/_security.html.twig');

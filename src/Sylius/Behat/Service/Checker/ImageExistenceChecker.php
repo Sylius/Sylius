@@ -35,6 +35,6 @@ final class ImageExistenceChecker implements ImageExistenceCheckerInterface
 
         $browserImagePath = $this->filterService->getUrlOfFilteredImage($imageUrl, $liipImagineFilter);
 
-        return file_exists($this->mediaRootPath . parse_url($browserImagePath, PHP_URL_PATH));
+        return file_exists($this->mediaRootPath . parse_url($browserImagePath, \PHP_URL_PATH));
     }
 }

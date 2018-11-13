@@ -54,11 +54,6 @@ trait TranslatableTrait
         $this->translations = new ArrayCollection();
     }
 
-    /**
-     * @param string|null $locale
-     *
-     * @return TranslationInterface
-     */
     public function getTranslation(?string $locale = null): TranslationInterface
     {
         $locale = $locale ?: $this->currentLocale;
@@ -108,19 +103,11 @@ trait TranslatableTrait
         return $this->translations;
     }
 
-    /**
-     * @param TranslationInterface $translation
-     *
-     * @return bool
-     */
     public function hasTranslation(TranslationInterface $translation): bool
     {
         return isset($this->translationsCache[$translation->getLocale()]) || $this->translations->containsKey($translation->getLocale());
     }
 
-    /**
-     * @param TranslationInterface $translation
-     */
     public function addTranslation(TranslationInterface $translation): void
     {
         if (!$this->hasTranslation($translation)) {
@@ -131,9 +118,6 @@ trait TranslatableTrait
         }
     }
 
-    /**
-     * @param TranslationInterface $translation
-     */
     public function removeTranslation(TranslationInterface $translation): void
     {
         if ($this->translations->removeElement($translation)) {
@@ -143,17 +127,11 @@ trait TranslatableTrait
         }
     }
 
-    /**
-     * @param string $currentLocale
-     */
     public function setCurrentLocale(string $currentLocale): void
     {
         $this->currentLocale = $currentLocale;
     }
 
-    /**
-     * @param string $fallbackLocale
-     */
     public function setFallbackLocale(string $fallbackLocale): void
     {
         $this->fallbackLocale = $fallbackLocale;
@@ -161,8 +139,6 @@ trait TranslatableTrait
 
     /**
      * Create resource translation model.
-     *
-     * @return TranslationInterface
      */
     abstract protected function createTranslation(): TranslationInterface;
 }

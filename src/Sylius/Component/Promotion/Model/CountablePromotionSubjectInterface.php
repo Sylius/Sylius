@@ -15,8 +15,5 @@ namespace Sylius\Component\Promotion\Model;
 
 interface CountablePromotionSubjectInterface extends PromotionSubjectInterface
 {
-    /**
-     * @return int
-     */
     public function getPromotionSubjectCount(): int;
 }

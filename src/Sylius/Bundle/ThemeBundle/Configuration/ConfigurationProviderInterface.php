@@ -15,8 +15,5 @@ namespace Sylius\Bundle\ThemeBundle\Configuration;
 
 interface ConfigurationProviderInterface
 {
-    /**
-     * @return array
-     */
     public function getConfigurations(): array;
 }

@@ -32,9 +32,6 @@ final class CustomerStatistics
         $this->perChannelsStatistics = $perChannelStatistics;
     }
 
-    /**
-     * @return int
-     */
     public function getAllOrdersCount(): int
     {
         return array_sum(array_map(function (PerChannelCustomerStatistics $statistics) {

@@ -55,12 +55,6 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $promotionFactory
-     * @param ExampleFactoryInterface $promotionRuleExampleFactory
-     * @param ExampleFactoryInterface $promotionActionExampleFactory
-     * @param ChannelRepositoryInterface $channelRepository
-     */
     public function __construct(
         FactoryInterface $promotionFactory,
         ExampleFactoryInterface $promotionRuleExampleFactory,

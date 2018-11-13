@@ -34,11 +34,6 @@ class RequestConfiguration
      */
     private $parameters;
 
-    /**
-     * @param MetadataInterface $metadata
-     * @param Request $request
-     * @param Parameters $parameters
-     */
     public function __construct(MetadataInterface $metadata, Request $request, Parameters $parameters)
     {
         $this->metadata = $metadata;
@@ -256,8 +251,6 @@ class RequestConfiguration
 
     /**
      * @param array $parameters
-     *
-     * @return array
      */
     private function addExtraRedirectParameters($parameters): array
     {
@@ -324,8 +317,6 @@ class RequestConfiguration
     }
 
     /**
-     * @param array $criteria
-     *
      * @return array
      */
     public function getCriteria(array $criteria = [])
@@ -348,8 +339,6 @@ class RequestConfiguration
     }
 
     /**
-     * @param array $sorting
-     *
      * @return array
      */
     public function getSorting(array $sorting = [])
@@ -449,8 +438,6 @@ class RequestConfiguration
     }
 
     /**
-     * @param null $message
-     *
      * @return mixed|null
      */
     public function getFlashMessage($message)
@@ -544,10 +531,7 @@ class RequestConfiguration
     }
 
     /**
-     * @param array  $parameters
      * @param object $resource
-     *
-     * @return array
      */
     private function parseResourceValues(array $parameters, $resource): array
     {
@@ -628,11 +612,6 @@ class RequestConfiguration
         return $this->parameters->get('csrf_protection', true);
     }
 
-    /**
-     * @param mixed $redirect
-     *
-     * @return bool
-     */
     private function areParametersIntentionallyEmptyArray($redirect): bool
     {
         return isset($redirect['parameters']) && is_array($redirect['parameters']) && empty($redirect['parameters']);

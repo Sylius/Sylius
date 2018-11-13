@@ -34,7 +34,6 @@ final class AddCodeFormSubscriber implements EventSubscriberInterface
 
     /**
      * @param string $type
-     * @param array $options
      */
     public function __construct(?string $type = null, array $options = [])
     {
@@ -52,9 +51,6 @@ final class AddCodeFormSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
         $resource = $event->getData();

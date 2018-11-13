@@ -25,8 +25,6 @@ interface ResourceBundleInterface
      * @see SyliusResourceBundle::DRIVER_DOCTRINE_ORM
      * @see SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM
      * @see SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM
-     *
-     * @return array
      */
     public function getSupportedDrivers(): array;
 }

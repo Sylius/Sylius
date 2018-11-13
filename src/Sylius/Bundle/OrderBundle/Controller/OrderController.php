@@ -29,11 +29,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OrderController extends ResourceController
 {
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function summaryAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -60,11 +55,6 @@ class OrderController extends ResourceController
         return $this->viewHandler->handle($configuration, $view);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function widgetAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -83,11 +73,6 @@ class OrderController extends ResourceController
         return $this->viewHandler->handle($configuration, $view);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function saveAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -146,11 +131,6 @@ class OrderController extends ResourceController
         return $this->viewHandler->handle($configuration, $view);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function clearAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -185,11 +165,6 @@ class OrderController extends ResourceController
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
 
-    /**
-     * @param RequestConfiguration $configuration
-     *
-     * @return Response
-     */
     protected function redirectToCartSummary(RequestConfiguration $configuration): Response
     {
         if (null === $configuration->getParameters()->get('redirect')) {
@@ -199,41 +174,26 @@ class OrderController extends ResourceController
         return $this->redirectHandler->redirectToRoute($configuration, $configuration->getParameters()->get('redirect'));
     }
 
-    /**
-     * @return string
-     */
     protected function getCartSummaryRoute(): string
     {
         return 'sylius_cart_summary';
     }
 
-    /**
-     * @return OrderInterface
-     */
     protected function getCurrentCart(): OrderInterface
     {
         return $this->getContext()->getCart();
     }
 
-    /**
-     * @return CartContextInterface
-     */
     protected function getContext(): CartContextInterface
     {
         return $this->get('sylius.context.cart');
     }
 
-    /**
-     * @return OrderRepositoryInterface
-     */
     protected function getOrderRepository(): OrderRepositoryInterface
     {
         return $this->get('sylius.repository.order');
     }
 
-    /**
-     * @return EventDispatcherInterface
-     */
     protected function getEventDispatcher(): EventDispatcherInterface
     {
         return $this->container->get('event_dispatcher');

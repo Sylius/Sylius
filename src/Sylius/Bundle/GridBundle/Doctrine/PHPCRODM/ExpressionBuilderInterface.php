@@ -19,8 +19,5 @@ use Sylius\Component\Grid\Data\ExpressionBuilderInterface as BaseExpressionBuild
 
 interface ExpressionBuilderInterface extends BaseExpressionBuilderInterface
 {
-    /**
-     * @return array
-     */
     public function getOrderBys(): array;
 }

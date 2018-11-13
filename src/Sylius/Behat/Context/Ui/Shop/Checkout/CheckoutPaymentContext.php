@@ -30,10 +30,6 @@ final class CheckoutPaymentContext implements Context
      */
     private $completePage;
 
-    /**
-     * @param SelectPaymentPageInterface $selectPaymentPage
-     * @param CompletePageInterface $completePage
-     */
     public function __construct(SelectPaymentPageInterface $selectPaymentPage, CompletePageInterface $completePage)
     {
         $this->selectPaymentPage = $selectPaymentPage;

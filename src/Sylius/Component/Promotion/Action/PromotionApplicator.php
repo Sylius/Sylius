@@ -24,9 +24,6 @@ final class PromotionApplicator implements PromotionApplicatorInterface
      */
     private $registry;
 
-    /**
-     * @param ServiceRegistryInterface $registry
-     */
     public function __construct(ServiceRegistryInterface $registry)
     {
         $this->registry = $registry;
@@ -60,11 +57,6 @@ final class PromotionApplicator implements PromotionApplicatorInterface
         $subject->removePromotion($promotion);
     }
 
-    /**
-     * @param string $type
-     *
-     * @return PromotionActionCommandInterface
-     */
     private function getActionCommandByType(string $type): PromotionActionCommandInterface
     {
         return $this->registry->get($type);

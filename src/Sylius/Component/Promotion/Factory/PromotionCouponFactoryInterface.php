@@ -20,10 +20,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 interface PromotionCouponFactoryInterface extends FactoryInterface
 {
     /**
-     * @param PromotionInterface $promotionId
-     *
-     * @return PromotionCouponInterface
-     *
      * @throws \InvalidArgumentException
      */
     public function createForPromotion(PromotionInterface $promotionId): PromotionCouponInterface;

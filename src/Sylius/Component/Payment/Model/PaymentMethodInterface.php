@@ -57,29 +57,15 @@ interface PaymentMethodInterface extends
      */
     public function setInstructions(?string $instructions): void;
 
-    /**
-     * @return string|null
-     */
     public function getEnvironment(): ?string;
 
-    /**
-     * @param string|null $environment
-     */
     public function setEnvironment(?string $environment): void;
 
-    /**
-     * @return int|null
-     */
     public function getPosition(): ?int;
 
-    /**
-     * @param int|null $position
-     */
     public function setPosition(?int $position): void;
 
     /**
-     * @param string|null $locale
-     *
      * @return PaymentMethodTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

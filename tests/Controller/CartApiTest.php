@@ -560,8 +560,6 @@ EOT;
     }
 
     /**
-     * @param OrderInterface $cart
-     *
      * @return string
      */
     private function getCartUrl(OrderInterface $cart)
@@ -570,8 +568,6 @@ EOT;
     }
 
     /**
-     * @param OrderInterface $cart
-     *
      * @return string
      */
     private function getCartItemListUrl(OrderInterface $cart)
@@ -580,9 +576,6 @@ EOT;
     }
 
     /**
-     * @param OrderInterface $cart
-     * @param OrderItemInterface $cartItem
-     *
      * @return string
      */
     private function getCartItemUrl(OrderInterface $cart, OrderItemInterface $cartItem)

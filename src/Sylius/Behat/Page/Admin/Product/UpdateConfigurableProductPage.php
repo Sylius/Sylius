@@ -289,7 +289,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     }
 
     /**
-     * @param NodeElement $imageElement
      * @param string $type
      */
     private function setImageType(NodeElement $imageElement, $type)

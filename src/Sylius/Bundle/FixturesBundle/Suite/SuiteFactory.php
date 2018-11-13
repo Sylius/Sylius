@@ -35,11 +35,6 @@ final class SuiteFactory implements SuiteFactoryInterface
      */
     private $optionsProcessor;
 
-    /**
-     * @param FixtureRegistryInterface $fixtureRegistry
-     * @param ListenerRegistryInterface $listenerRegistry
-     * @param Processor $optionsProcessor
-     */
     public function __construct(
         FixtureRegistryInterface $fixtureRegistry,
         ListenerRegistryInterface $listenerRegistry,
@@ -71,11 +66,6 @@ final class SuiteFactory implements SuiteFactoryInterface
         return $suite;
     }
 
-    /**
-     * @param Suite $suite
-     * @param string $fixtureAlias
-     * @param array $fixtureAttributes
-     */
     private function addFixtureToSuite(Suite $suite, string $fixtureAlias, array $fixtureAttributes): void
     {
         Assert::keyExists($fixtureAttributes, 'name');
@@ -88,11 +78,6 @@ final class SuiteFactory implements SuiteFactoryInterface
         $suite->addFixture($fixture, $fixtureOptions, $fixturePriority);
     }
 
-    /**
-     * @param Suite $suite
-     * @param string $listenerName
-     * @param array $listenerAttributes
-     */
     private function addListenerToSuite(Suite $suite, string $listenerName, array $listenerAttributes): void
     {
         Assert::keyExists($listenerAttributes, 'options');

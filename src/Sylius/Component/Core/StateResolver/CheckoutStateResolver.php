@@ -37,11 +37,6 @@ final class CheckoutStateResolver implements StateResolverInterface
      */
     private $orderShippingMethodSelectionRequirementChecker;
 
-    /**
-     * @param FactoryInterface $stateMachineFactory
-     * @param OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
-     * @param OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
-     */
     public function __construct(
         FactoryInterface $stateMachineFactory,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,

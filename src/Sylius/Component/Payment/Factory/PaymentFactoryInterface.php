@@ -18,11 +18,5 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface PaymentFactoryInterface extends FactoryInterface
 {
-    /**
-     * @param int $amount
-     * @param string $currency
-     *
-     * @return PaymentInterface
-     */
     public function createWithAmountAndCurrencyCode(int $amount, string $currency): PaymentInterface;
 }

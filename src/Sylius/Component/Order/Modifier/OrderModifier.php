@@ -29,10 +29,6 @@ final class OrderModifier implements OrderModifierInterface
      */
     private $orderItemQuantityModifier;
 
-    /**
-     * @param OrderProcessorInterface $orderProcessor
-     * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
-     */
     public function __construct(
         OrderProcessorInterface $orderProcessor,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier
@@ -60,10 +56,6 @@ final class OrderModifier implements OrderModifierInterface
         $this->orderProcessor->process($order);
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param OrderItemInterface $item
-     */
     private function resolveOrderItem(OrderInterface $order, OrderItemInterface $item): void
     {
         foreach ($order->getItems() as $existingItem) {

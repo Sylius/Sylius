@@ -50,13 +50,6 @@ final class CheckoutAddressingContext implements Context
      */
     private $selectShippingPage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param AddressPageInterface $addressPage
-     * @param FactoryInterface $addressFactory
-     * @param AddressComparatorInterface $addressComparator
-     * @param SelectShippingPageInterface $selectShippingPage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         AddressPageInterface $addressPage,

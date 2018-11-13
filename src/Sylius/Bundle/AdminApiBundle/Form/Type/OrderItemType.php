@@ -31,9 +31,6 @@ final class OrderItemType extends AbstractType
      */
     private $variantRepository;
 
-    /**
-     * @param ProductVariantRepositoryInterface $variantRepository
-     */
     public function __construct(ProductVariantRepositoryInterface $variantRepository)
     {
         $this->variantRepository = $variantRepository;
