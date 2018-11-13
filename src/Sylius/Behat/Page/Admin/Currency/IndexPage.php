@@ -35,7 +35,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     }
 
     /**
-     * @param CurrencyInterface $currency
      * @param string $status
      *
      * @return bool

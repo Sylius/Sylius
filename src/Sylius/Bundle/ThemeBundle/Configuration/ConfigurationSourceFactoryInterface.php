@@ -20,23 +20,14 @@ use Symfony\Component\DependencyInjection\Reference;
 
 interface ConfigurationSourceFactoryInterface
 {
-    /**
-     * @param ArrayNodeDefinition $node
-     */
     public function buildConfiguration(ArrayNodeDefinition $node): void;
 
     /**
      * @see ConfigurationProviderInterface
      *
-     * @param ContainerBuilder $container
-     * @param array $config
-     *
      * @return Reference|Definition Configuration provider service
      */
     public function initializeSource(ContainerBuilder $container, array $config);
 
-    /**
-     * @return string
-     */
     public function getName(): string;
 }

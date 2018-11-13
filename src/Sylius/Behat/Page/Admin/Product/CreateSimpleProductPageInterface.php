@@ -85,14 +85,12 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
     public function attachImage($path, $type = null);
 
     /**
-     * @param ProductAssociationTypeInterface $productAssociationType
      * @param string[] $productsNames
      */
     public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames);
 
     /**
      * @param string $productName
-     * @param ProductAssociationTypeInterface $productAssociationType
      */
     public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType);
 

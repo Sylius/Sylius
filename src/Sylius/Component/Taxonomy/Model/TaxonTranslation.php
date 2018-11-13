@@ -37,9 +37,6 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
      */
     protected $description;
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();

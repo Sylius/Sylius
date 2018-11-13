@@ -37,11 +37,6 @@ final class LocaleSetup implements LocaleSetupInterface
      */
     private $locale;
 
-    /**
-     * @param RepositoryInterface $localeRepository
-     * @param FactoryInterface $localeFactory
-     * @param string $locale
-     */
     public function __construct(RepositoryInterface $localeRepository, FactoryInterface $localeFactory, string $locale)
     {
         $this->localeRepository = $localeRepository;
@@ -73,11 +68,6 @@ final class LocaleSetup implements LocaleSetupInterface
         return $locale;
     }
 
-    /**
-     * @param string $code
-     *
-     * @return string|null
-     */
     private function getLanguageName(string $code): ?string
     {
         return Intl::getLanguageBundle()->getLanguageName($code);

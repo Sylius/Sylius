@@ -40,11 +40,6 @@ final class OrderPromotionIntegrityChecker
      */
     private $router;
 
-    /**
-     * @param PromotionEligibilityCheckerInterface $promotionEligibilityChecker
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param RouterInterface $router
-     */
     public function __construct(
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
         EventDispatcherInterface $eventDispatcher,
@@ -55,9 +50,6 @@ final class OrderPromotionIntegrityChecker
         $this->router = $router;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function check(ResourceControllerEvent $event): void
     {
         /** @var OrderInterface $order */

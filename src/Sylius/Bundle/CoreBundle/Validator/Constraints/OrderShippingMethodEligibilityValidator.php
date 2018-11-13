@@ -26,9 +26,6 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
      */
     private $methodEligibilityChecker;
 
-    /**
-     * @param ShippingMethodEligibilityCheckerInterface $methodEligibilityChecker
-     */
     public function __construct(ShippingMethodEligibilityCheckerInterface $methodEligibilityChecker)
     {
         $this->methodEligibilityChecker = $methodEligibilityChecker;

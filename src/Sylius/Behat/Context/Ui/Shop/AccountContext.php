@@ -63,15 +63,6 @@ final class AccountContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     * @param ProfileUpdatePageInterface $profileUpdatePage
-     * @param ChangePasswordPageInterface $changePasswordPage
-     * @param IndexPageInterface $orderIndexPage
-     * @param ShowPageInterface $orderShowPage
-     * @param LoginPageInterface $loginPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         DashboardPageInterface $dashboardPage,
         ProfileUpdatePageInterface $profileUpdatePage,

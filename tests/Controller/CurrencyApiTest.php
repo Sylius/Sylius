@@ -185,8 +185,6 @@ EOT;
     }
 
     /**
-     * @param CurrencyInterface $currency
-     *
      * @return string
      */
     private function getCurrencyUrl(CurrencyInterface $currency)

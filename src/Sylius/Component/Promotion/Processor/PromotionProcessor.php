@@ -35,11 +35,6 @@ final class PromotionProcessor implements PromotionProcessorInterface
      */
     private $promotionApplicator;
 
-    /**
-     * @param PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider
-     * @param PromotionEligibilityCheckerInterface $promotionEligibilityChecker
-     * @param PromotionApplicatorInterface $promotionApplicator
-     */
     public function __construct(
         PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider,
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,

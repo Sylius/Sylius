@@ -330,11 +330,6 @@ EOT;
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
     }
 
-    /**
-     * @param ChannelInterface $channel
-     *
-     * @return string
-     */
     private function getChannelUrl(ChannelInterface $channel): string
     {
         return '/api/v1/channels/' . $channel->getCode();

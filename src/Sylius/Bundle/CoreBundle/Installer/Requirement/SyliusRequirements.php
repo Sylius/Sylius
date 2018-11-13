@@ -30,17 +30,11 @@ final class SyliusRequirements implements \IteratorAggregate
         }
     }
 
-    /**
-     * @return \ArrayIterator
-     */
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->collections);
     }
 
-    /**
-     * @param RequirementCollection $collection
-     */
     public function add(RequirementCollection $collection): void
     {
         $this->collections[] = $collection;

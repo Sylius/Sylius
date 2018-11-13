@@ -28,10 +28,6 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
      */
     private $ratio;
 
-    /**
-     * @param PromotionCouponRepositoryInterface $couponRepository
-     * @param float $ratio
-     */
     public function __construct(PromotionCouponRepositoryInterface $couponRepository, float $ratio = 0.5)
     {
         $this->couponRepository = $couponRepository;
@@ -58,10 +54,6 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
     }
 
     /**
-     * @param PromotionCouponGeneratorInstructionInterface $instruction
-     *
-     * @return int
-     *
      * @throws \InvalidArgumentException
      */
     private function calculatePossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction): int

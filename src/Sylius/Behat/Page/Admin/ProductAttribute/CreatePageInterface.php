@@ -34,27 +34,15 @@ interface CreatePageInterface extends BaseCreatePageInterface
      */
     public function isTypeDisabled();
 
-    /**
-     * @param string $value
-     * @param string $localeCode
-     */
     public function addAttributeValue(string $value, string $localeCode): void;
 
-    /**
-     * @param int $min
-     */
     public function specifyMinValue(int $min): void;
 
-    /**
-     * @param int $max
-     */
     public function specifyMaxValue(int $max): void;
 
     public function checkMultiple(): void;
 
     /**
-     * @return string
-     *
      * @throws ElementNotFoundException
      */
     public function getValidationErrors(): string;

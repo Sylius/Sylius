@@ -15,23 +15,11 @@ namespace Sylius\Bundle\ThemeBundle\Translation\Resource;
 
 interface TranslationResourceInterface
 {
-    /**
-     * @return string
-     */
     public function getName(): string;
 
-    /**
-     * @return string
-     */
     public function getLocale(): string;
 
-    /**
-     * @return string
-     */
     public function getFormat(): string;
 
-    /**
-     * @return string
-     */
     public function getDomain(): string;
 }

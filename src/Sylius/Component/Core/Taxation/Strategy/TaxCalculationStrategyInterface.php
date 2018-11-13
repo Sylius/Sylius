@@ -18,22 +18,9 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface TaxCalculationStrategyInterface
 {
-    /**
-     * @param OrderInterface $order
-     * @param ZoneInterface $zone
-     */
     public function applyTaxes(OrderInterface $order, ZoneInterface $zone): void;
 
-    /**
-     * @return string
-     */
     public function getType(): string;
 
-    /**
-     * @param OrderInterface $order
-     * @param ZoneInterface $zone
-     *
-     * @return bool
-     */
     public function supports(OrderInterface $order, ZoneInterface $zone): bool;
 }

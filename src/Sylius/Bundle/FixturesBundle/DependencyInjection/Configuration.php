@@ -32,9 +32,6 @@ final class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNode
-     */
     private function buildSuitesNode(ArrayNodeDefinition $rootNode): void
     {
         /** @var ArrayNodeDefinition $suitesNode */
@@ -67,9 +64,6 @@ final class Configuration implements ConfigurationInterface
         $this->buildListenersNode($suitesNode);
     }
 
-    /**
-     * @param ArrayNodeDefinition $suitesNode
-     */
     private function buildFixturesNode(ArrayNodeDefinition $suitesNode): void
     {
         /** @var ArrayNodeDefinition $fixturesNode */
@@ -85,9 +79,6 @@ final class Configuration implements ConfigurationInterface
         $this->buildAttributesNode($fixturesNode);
     }
 
-    /**
-     * @param ArrayNodeDefinition $suitesNode
-     */
     private function buildListenersNode(ArrayNodeDefinition $suitesNode): void
     {
         /** @var ArrayNodeDefinition $listenersNode */
@@ -101,9 +92,6 @@ final class Configuration implements ConfigurationInterface
         $this->buildAttributesNode($listenersNode);
     }
 
-    /**
-     * @param ArrayNodeDefinition $node
-     */
     private function buildAttributesNode(ArrayNodeDefinition $node): void
     {
         $attributesNodeBuilder = $node->canBeUnset()->children();

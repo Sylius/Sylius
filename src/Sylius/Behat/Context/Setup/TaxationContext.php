@@ -57,14 +57,6 @@ final class TaxationContext implements Context
      */
     private $objectManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $taxRateFactory
-     * @param FactoryInterface $taxCategoryFactory
-     * @param RepositoryInterface $taxRateRepository
-     * @param TaxCategoryRepositoryInterface $taxCategoryRepository
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $taxRateFactory,

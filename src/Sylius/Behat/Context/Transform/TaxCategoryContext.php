@@ -24,9 +24,6 @@ final class TaxCategoryContext implements Context
      */
     private $taxCategoryRepository;
 
-    /**
-     * @param TaxCategoryRepositoryInterface $taxCategoryRepository
-     */
     public function __construct(TaxCategoryRepositoryInterface $taxCategoryRepository)
     {
         $this->taxCategoryRepository = $taxCategoryRepository;

@@ -40,11 +40,6 @@ final class TranslatorResourceProviderPass implements CompilerPassInterface
         ));
     }
 
-    /**
-     * @param Definition $symfonyTranslator
-     *
-     * @return array
-     */
     private function extractResourcesFilesFromSymfonyTranslator(Definition $symfonyTranslator): array
     {
         try {

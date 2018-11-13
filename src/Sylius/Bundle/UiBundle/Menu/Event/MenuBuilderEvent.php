@@ -29,27 +29,17 @@ class MenuBuilderEvent extends Event
      */
     private $menu;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param ItemInterface $menu
-     */
     public function __construct(FactoryInterface $factory, ItemInterface $menu)
     {
         $this->factory = $factory;
         $this->menu = $menu;
     }
 
-    /**
-     * @return FactoryInterface
-     */
     public function getFactory(): FactoryInterface
     {
         return $this->factory;
     }
 
-    /**
-     * @return ItemInterface
-     */
     public function getMenu(): ItemInterface
     {
         return $this->menu;

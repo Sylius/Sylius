@@ -36,9 +36,6 @@ class CustomerGroupExampleFactory extends AbstractExampleFactory implements Exam
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $customerGroupFactory
-     */
     public function __construct(FactoryInterface $customerGroupFactory)
     {
         $this->customerGroupFactory = $customerGroupFactory;

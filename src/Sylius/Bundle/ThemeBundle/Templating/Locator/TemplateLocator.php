@@ -24,9 +24,6 @@ final class TemplateLocator implements TemplateLocatorInterface
      */
     private $resourceLocator;
 
-    /**
-     * @param ResourceLocatorInterface $resourceLocator
-     */
     public function __construct(ResourceLocatorInterface $resourceLocator)
     {
         $this->resourceLocator = $resourceLocator;

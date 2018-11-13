@@ -193,8 +193,6 @@ EOT;
     }
 
     /**
-     * @param CountryInterface $country
-     *
      * @return string
      */
     private function getCountryUrl(CountryInterface $country)

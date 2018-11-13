@@ -39,11 +39,6 @@ class UserLogin implements UserLoginInterface
      */
     private $eventDispatcher;
 
-    /**
-     * @param TokenStorageInterface $tokenStorage
-     * @param UserCheckerInterface $userChecker
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
@@ -73,12 +68,6 @@ class UserLogin implements UserLoginInterface
         $this->eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, new UserEvent($user));
     }
 
-    /**
-     * @param UserInterface $user
-     * @param string $firewallName
-     *
-     * @return UsernamePasswordToken
-     */
     protected function createToken(UserInterface $user, string $firewallName): UsernamePasswordToken
     {
         return new UsernamePasswordToken($user, null, $firewallName, $user->getRoles());

@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\External;
 
 use Behat\Mink\Session;
-use Payum\Core\Security\TokenInterface;
 use FriendsOfBehat\PageObjectExtension\Page\Page;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Payum\Core\Security\TokenInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPageInterface
@@ -26,11 +26,6 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
      */
     private $securityTokenRepository;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RepositoryInterface $securityTokenRepository
-     */
     public function __construct(Session $session, array $parameters, RepositoryInterface $securityTokenRepository)
     {
         parent::__construct($session, $parameters);

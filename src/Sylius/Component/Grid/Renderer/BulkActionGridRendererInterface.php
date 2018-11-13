@@ -19,11 +19,7 @@ use Sylius\Component\Grid\View\GridViewInterface;
 interface BulkActionGridRendererInterface
 {
     /**
-     * @param GridViewInterface $gridView
-     * @param Action $bulkAction
      * @param mixed|null $data
-     *
-     * @return string
      */
     public function renderBulkAction(GridViewInterface $gridView, Action $bulkAction, $data = null): string;
 }

@@ -17,8 +17,5 @@ use Sylius\Component\Mailer\Model\EmailInterface;
 
 interface EmailFactoryInterface
 {
-    /**
-     * @return EmailInterface
-     */
     public function createNew(): EmailInterface;
 }

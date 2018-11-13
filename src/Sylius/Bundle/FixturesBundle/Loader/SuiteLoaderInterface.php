@@ -17,8 +17,5 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 interface SuiteLoaderInterface
 {
-    /**
-     * @param SuiteInterface $suite
-     */
     public function load(SuiteInterface $suite): void;
 }

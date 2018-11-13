@@ -37,11 +37,6 @@ final class ImpersonatingCustomersContext implements Context
      */
     private $homePage;
 
-    /**
-     * @param ShowPageInterface $customerShowPage
-     * @param DashboardPageInterface $dashboardPage
-     * @param HomePageInterface $homePage
-     */
     public function __construct(
         ShowPageInterface $customerShowPage,
         DashboardPageInterface $dashboardPage,

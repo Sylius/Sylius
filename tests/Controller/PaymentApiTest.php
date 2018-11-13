@@ -90,8 +90,6 @@ final class PaymentApiTest extends CheckoutApiTestCase
     }
 
     /**
-     * @param mixed $orderId
-     *
      * @return string
      */
     private function getOrderUrl($orderId)
@@ -100,8 +98,6 @@ final class PaymentApiTest extends CheckoutApiTestCase
     }
 
     /**
-     * @param mixed $paymentId
-     *
      * @return string
      */
     private function getPaymentUrl($paymentId)

@@ -37,11 +37,6 @@ final class CheckoutRedirectListener
      */
     private $requestMatcher;
 
-    /**
-     * @param RequestStack $requestStack
-     * @param CheckoutStateUrlGeneratorInterface $checkoutStateUrlGenerator
-     * @param RequestMatcherInterface $requestMatcher
-     */
     public function __construct(
         RequestStack $requestStack,
         CheckoutStateUrlGeneratorInterface $checkoutStateUrlGenerator,
@@ -52,9 +47,6 @@ final class CheckoutRedirectListener
         $this->requestMatcher = $requestMatcher;
     }
 
-    /**
-     * @param ResourceControllerEvent $resourceControllerEvent
-     */
     public function handleCheckoutRedirect(ResourceControllerEvent $resourceControllerEvent): void
     {
         $request = $this->requestStack->getCurrentRequest();

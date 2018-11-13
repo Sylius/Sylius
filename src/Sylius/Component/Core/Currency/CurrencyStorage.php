@@ -24,9 +24,6 @@ final class CurrencyStorage implements CurrencyStorageInterface
      */
     private $storage;
 
-    /**
-     * @param StorageInterface $storage
-     */
     public function __construct(StorageInterface $storage)
     {
         $this->storage = $storage;
@@ -62,23 +59,11 @@ final class CurrencyStorage implements CurrencyStorageInterface
         return '_currency_' . $channel->getCode();
     }
 
-    /**
-     * @param string $currencyCode
-     * @param ChannelInterface $channel
-     *
-     * @return bool
-     */
     private function isBaseCurrency(string $currencyCode, ChannelInterface $channel): bool
     {
         return $currencyCode === $channel->getBaseCurrency()->getCode();
     }
 
-    /**
-     * @param string $currencyCode
-     * @param ChannelInterface $channel
-     *
-     * @return bool
-     */
     private function isAvailableCurrency(string $currencyCode, ChannelInterface $channel): bool
     {
         $availableCurrencies = array_map(

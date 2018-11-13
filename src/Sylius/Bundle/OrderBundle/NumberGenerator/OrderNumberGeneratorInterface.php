@@ -17,10 +17,5 @@ use Sylius\Component\Order\Model\OrderInterface;
 
 interface OrderNumberGeneratorInterface
 {
-    /**
-     * @param OrderInterface $order
-     *
-     * @return string
-     */
     public function generate(OrderInterface $order): string;
 }

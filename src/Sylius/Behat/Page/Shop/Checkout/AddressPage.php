@@ -33,12 +33,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     private $addressFactory;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param AddressFactoryInterface $addressFactory
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -389,7 +383,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     }
 
     /**
-     * @param AddressInterface $address
      * @param string $type
      */
     private function specifyAddress(AddressInterface $address, $type)

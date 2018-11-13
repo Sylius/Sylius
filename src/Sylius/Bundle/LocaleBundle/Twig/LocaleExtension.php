@@ -22,9 +22,6 @@ final class LocaleExtension extends \Twig_Extension
      */
     private $localeHelper;
 
-    /**
-     * @param LocaleHelperInterface $localeHelper
-     */
     public function __construct(LocaleHelperInterface $localeHelper)
     {
         $this->localeHelper = $localeHelper;

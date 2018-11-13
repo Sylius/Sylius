@@ -37,10 +37,6 @@ final class PrioritizedServiceRegistry implements PrioritizedServiceRegistryInte
      */
     private $context;
 
-    /**
-     * @param string $interface
-     * @param string $context
-     */
     public function __construct(string $interface, string $context = 'service')
     {
         $this->interface = $interface;

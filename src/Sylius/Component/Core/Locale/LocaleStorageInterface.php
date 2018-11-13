@@ -18,17 +18,9 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 
 interface LocaleStorageInterface
 {
-    /**
-     * @param ChannelInterface $channel
-     * @param string $localeCode
-     */
     public function set(ChannelInterface $channel, string $localeCode): void;
 
     /**
-     * @param ChannelInterface $channel
-     *
-     * @return string
-     *
      * @throws ChannelNotFoundException
      */
     public function get(ChannelInterface $channel): string;

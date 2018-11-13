@@ -18,10 +18,5 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 
 interface ProductVariantResolverInterface
 {
-    /**
-     * @param ProductInterface $subject
-     *
-     * @return ProductVariantInterface|null
-     */
     public function getVariant(ProductInterface $subject): ?ProductVariantInterface;
 }

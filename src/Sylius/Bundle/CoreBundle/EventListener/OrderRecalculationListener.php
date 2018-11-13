@@ -25,17 +25,12 @@ final class OrderRecalculationListener
      */
     private $orderProcessor;
 
-    /**
-     * @param OrderProcessorInterface $orderProcessor
-     */
     public function __construct(OrderProcessorInterface $orderProcessor)
     {
         $this->orderProcessor = $orderProcessor;
     }
 
     /**
-     * @param GenericEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function recalculateOrder(GenericEvent $event): void

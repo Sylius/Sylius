@@ -22,9 +22,6 @@ final class PasswordUpdater implements PasswordUpdaterInterface
      */
     private $userPasswordEncoder;
 
-    /**
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     */
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->userPasswordEncoder = $passwordEncoder;

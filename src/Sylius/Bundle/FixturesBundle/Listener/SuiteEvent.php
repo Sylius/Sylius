@@ -22,17 +22,11 @@ final class SuiteEvent
      */
     private $suite;
 
-    /**
-     * @param SuiteInterface $suite
-     */
     public function __construct(SuiteInterface $suite)
     {
         $this->suite = $suite;
     }
 
-    /**
-     * @return SuiteInterface
-     */
     public function suite(): SuiteInterface
     {
         return $this->suite;

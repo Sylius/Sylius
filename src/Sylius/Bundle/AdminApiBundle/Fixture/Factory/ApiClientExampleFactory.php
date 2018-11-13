@@ -36,9 +36,6 @@ class ApiClientExampleFactory extends AbstractExampleFactory
      */
     private $optionsResolver;
 
-    /**
-     * @param ClientManagerInterface $clientManager
-     */
     public function __construct(ClientManagerInterface $clientManager)
     {
         $this->clientManager = $clientManager;

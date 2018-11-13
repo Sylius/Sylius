@@ -23,9 +23,6 @@ final class CartContext implements CartContextInterface
      */
     private $cartFactory;
 
-    /**
-     * @param FactoryInterface $cartFactory
-     */
     public function __construct(FactoryInterface $cartFactory)
     {
         $this->cartFactory = $cartFactory;

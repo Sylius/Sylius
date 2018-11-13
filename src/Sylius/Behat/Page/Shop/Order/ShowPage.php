@@ -68,7 +68,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getNumberOfItems(): int
     {

@@ -94,9 +94,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         $this->images = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         $string = (string) $this->getProduct()->getName();

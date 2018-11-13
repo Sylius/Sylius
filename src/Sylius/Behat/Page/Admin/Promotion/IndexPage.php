@@ -20,8 +20,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     /**
-     * @param PromotionInterface $promotion
-     *
      * @return int
      */
     public function getUsageNumber(PromotionInterface $promotion)
@@ -52,7 +50,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param string $header
      *
      * @return NodeElement

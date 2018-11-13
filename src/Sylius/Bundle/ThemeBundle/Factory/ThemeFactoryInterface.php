@@ -17,11 +17,5 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 interface ThemeFactoryInterface
 {
-    /**
-     * @param string $name
-     * @param string $path
-     *
-     * @return ThemeInterface
-     */
     public function create(string $name, string $path): ThemeInterface;
 }

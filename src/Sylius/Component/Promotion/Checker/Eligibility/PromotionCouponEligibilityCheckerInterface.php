@@ -18,11 +18,5 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 interface PromotionCouponEligibilityCheckerInterface
 {
-    /**
-     * @param PromotionSubjectInterface $promotionSubject
-     * @param PromotionCouponInterface $promotionCoupon
-     *
-     * @return bool
-     */
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool;
 }

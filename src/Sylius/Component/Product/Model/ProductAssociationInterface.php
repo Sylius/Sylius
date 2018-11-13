@@ -19,24 +19,12 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 
 interface ProductAssociationInterface extends TimestampableInterface, ResourceInterface
 {
-    /**
-     * @return ProductAssociationTypeInterface|null
-     */
     public function getType(): ?ProductAssociationTypeInterface;
 
-    /**
-     * @param ProductAssociationTypeInterface|null $type
-     */
     public function setType(?ProductAssociationTypeInterface $type): void;
 
-    /**
-     * @return ProductInterface|null
-     */
     public function getOwner(): ?ProductInterface;
 
-    /**
-     * @param ProductInterface|null $owner
-     */
     public function setOwner(?ProductInterface $owner): void;
 
     /**
@@ -44,21 +32,10 @@ interface ProductAssociationInterface extends TimestampableInterface, ResourceIn
      */
     public function getAssociatedProducts(): Collection;
 
-    /**
-     * @param ProductInterface $product
-     */
     public function addAssociatedProduct(ProductInterface $product): void;
 
-    /**
-     * @param ProductInterface $product
-     */
     public function removeAssociatedProduct(ProductInterface $product): void;
 
-    /**
-     * @param ProductInterface $product
-     *
-     * @return bool
-     */
     public function hasAssociatedProduct(ProductInterface $product): bool;
 
     public function clearAssociatedProducts(): void;

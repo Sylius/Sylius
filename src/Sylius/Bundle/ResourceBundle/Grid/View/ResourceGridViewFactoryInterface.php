@@ -20,14 +20,6 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 
 interface ResourceGridViewFactoryInterface
 {
-    /**
-     * @param Grid $grid
-     * @param Parameters $parameters
-     * @param MetadataInterface $metadata
-     * @param RequestConfiguration $requestConfiguration
-     *
-     * @return ResourceGridView
-     */
     public function create(
         Grid $grid,
         Parameters $parameters,

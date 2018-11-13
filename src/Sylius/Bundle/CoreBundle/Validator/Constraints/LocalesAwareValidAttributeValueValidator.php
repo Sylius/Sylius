@@ -33,9 +33,6 @@ final class LocalesAwareValidAttributeValueValidator extends ConstraintValidator
      */
     private $localeProvider;
 
-    /**
-     * @param ServiceRegistryInterface $attributeTypeRegistry
-     */
     public function __construct(ServiceRegistryInterface $attributeTypeRegistry, TranslationLocaleProviderInterface $localeProvider)
     {
         $this->attributeTypeRegistry = $attributeTypeRegistry;

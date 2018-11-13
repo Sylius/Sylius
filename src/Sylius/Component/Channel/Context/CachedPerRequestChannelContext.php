@@ -38,10 +38,6 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
      */
     private $requestToExceptionMap;
 
-    /**
-     * @param ChannelContextInterface $decoratedChannelContext
-     * @param RequestStack $requestStack
-     */
     public function __construct(ChannelContextInterface $decoratedChannelContext, RequestStack $requestStack)
     {
         $this->decoratedChannelContext = $decoratedChannelContext;

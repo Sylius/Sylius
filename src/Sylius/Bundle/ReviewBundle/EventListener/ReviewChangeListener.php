@@ -24,41 +24,26 @@ final class ReviewChangeListener
      */
     private $averageRatingUpdater;
 
-    /**
-     * @param ReviewableRatingUpdaterInterface $averageRatingUpdater
-     */
     public function __construct(ReviewableRatingUpdaterInterface $averageRatingUpdater)
     {
         $this->averageRatingUpdater = $averageRatingUpdater;
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     */
     public function postPersist(LifecycleEventArgs $args)
     {
         $this->recalculateSubjectRating($args);
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     */
     public function postUpdate(LifecycleEventArgs $args)
     {
         $this->recalculateSubjectRating($args);
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     */
     public function postRemove(LifecycleEventArgs $args)
     {
         $this->recalculateSubjectRating($args);
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     */
     public function recalculateSubjectRating(LifecycleEventArgs $args): void
     {
         $subject = $args->getObject();

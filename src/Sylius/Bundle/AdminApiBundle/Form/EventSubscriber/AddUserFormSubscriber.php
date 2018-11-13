@@ -27,17 +27,11 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
      */
     private $entryType;
 
-    /**
-     * @param string $entryType
-     */
     public function __construct(string $entryType)
     {
         $this->entryType = $entryType;
     }
 
-    /**
-     * @return array
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -46,18 +40,12 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
         $form = $event->getForm();
         $form->add('user', $this->entryType, ['constraints' => [new Valid()]]);
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSubmit(FormEvent $event): void
     {
         $data = $event->getData();
@@ -76,11 +64,6 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @param array $data
-     *
-     * @return bool
-     */
     private function isUserDataEmpty(array $data): bool
     {
         foreach ($data['user'] as $field) {
@@ -92,9 +75,6 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
         return true;
     }
 
-    /**
-     * @param FormEvent $event
-     */
     private function removeUserField(FormEvent $event): void
     {
         $form = $event->getForm();

@@ -124,8 +124,6 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     }
 
     /**
-     * @param NodeElement $element
-     *
      * @return NodeElement
      *
      * @throws ElementNotFoundException

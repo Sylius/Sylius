@@ -35,10 +35,6 @@ final class UniquePinGenerator implements GeneratorInterface
     private $pinLength;
 
     /**
-     * @param RandomnessGeneratorInterface $generator
-     * @param UniquenessCheckerInterface $uniquenessChecker
-     * @param int $pinLength
-     *
      * @throws \InvalidArgumentException
      */
     public function __construct(

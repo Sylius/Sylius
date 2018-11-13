@@ -25,9 +25,6 @@ final class ZoneContext implements Context
      */
     private $zoneRepository;
 
-    /**
-     * @param RepositoryInterface $zoneRepository
-     */
     public function __construct(RepositoryInterface $zoneRepository)
     {
         $this->zoneRepository = $zoneRepository;
@@ -66,8 +63,6 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @param array $parameters
-     *
      * @return ZoneInterface
      */
     private function getZoneBy(array $parameters)

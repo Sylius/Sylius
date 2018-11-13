@@ -42,9 +42,6 @@ final class DisabledValidator extends ConstraintValidator
         }
     }
 
-    /**
-     * @param mixed $value
-     */
     private function ensureValueImplementsToggleableInterface($value): void
     {
         if (!($value instanceof ToggleableInterface)) {

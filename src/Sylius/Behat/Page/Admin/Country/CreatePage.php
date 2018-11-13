@@ -49,9 +49,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         ]);
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastProvinceElement(): NodeElement
     {
         $provinces = $this->getElement('provinces');

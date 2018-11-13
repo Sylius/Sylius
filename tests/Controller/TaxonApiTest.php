@@ -500,8 +500,6 @@ EOT;
     }
 
     /**
-     * @param TaxonInterface $taxon
-     *
      * @return string
      */
     private function getTaxonUrl(TaxonInterface $taxon)
@@ -510,8 +508,6 @@ EOT;
     }
 
     /**
-     * @param TaxonInterface $taxon
-     *
      * @return string
      */
     private function getTaxonProductsPositionsChangeUrl(TaxonInterface $taxon)

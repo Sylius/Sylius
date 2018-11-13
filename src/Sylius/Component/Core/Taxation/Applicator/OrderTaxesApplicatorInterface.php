@@ -18,9 +18,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface OrderTaxesApplicatorInterface
 {
-    /**
-     * @param OrderInterface $order
-     * @param ZoneInterface $zone
-     */
     public function apply(OrderInterface $order, ZoneInterface $zone): void;
 }

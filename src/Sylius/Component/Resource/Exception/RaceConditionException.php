@@ -15,9 +15,6 @@ namespace Sylius\Component\Resource\Exception;
 
 class RaceConditionException extends UpdateHandlingException
 {
-    /**
-     * @param \Exception|null $previous
-     */
     public function __construct(?\Exception $previous = null)
     {
         parent::__construct(

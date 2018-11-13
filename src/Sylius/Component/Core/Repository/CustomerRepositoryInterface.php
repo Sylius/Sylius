@@ -18,14 +18,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface CustomerRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @return int
-     */
     public function countCustomers(): int;
 
     /**
-     * @param int $count
-     *
      * @return array|CustomerInterface[]
      */
     public function findLatest(int $count): array;

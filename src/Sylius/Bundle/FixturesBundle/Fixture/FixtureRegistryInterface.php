@@ -16,10 +16,6 @@ namespace Sylius\Bundle\FixturesBundle\Fixture;
 interface FixtureRegistryInterface
 {
     /**
-     * @param string $name
-     *
-     * @return FixtureInterface
-     *
      * @throws FixtureNotFoundException
      */
     public function getFixture(string $name): FixtureInterface;

@@ -375,9 +375,6 @@ EOT;
     }
 
     /**
-     * @param PromotionInterface $promotion
-     * @param PromotionCouponInterface|null $coupon
-     *
      * @return string
      */
     private function getPromotionCouponUrl(PromotionInterface $promotion, PromotionCouponInterface $coupon = null)
@@ -386,8 +383,6 @@ EOT;
     }
 
     /**
-     * @param PromotionInterface $promotion
-     *
      * @return string
      */
     private function getPromotionCouponsUrl(PromotionInterface $promotion)

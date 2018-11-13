@@ -18,9 +18,6 @@ use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
 
 interface SuiteInterface
 {
-    /**
-     * @return string
-     */
     public function getName(): string;
 
     /**

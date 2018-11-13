@@ -28,9 +28,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
      */
     protected $shipment;
 
-    /**
-     * @param OrderItemInterface $orderItem
-     */
     public function __construct(OrderItemInterface $orderItem)
     {
         parent::__construct($orderItem);

@@ -27,9 +27,6 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
      */
     public function getShippingMethods();
 
-    /**
-     * @return string|null
-     */
     public function getSelectedShippingMethodName(): ?string;
 
     /**

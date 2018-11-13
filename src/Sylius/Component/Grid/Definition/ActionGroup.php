@@ -25,43 +25,27 @@ class ActionGroup
      */
     private $actions = [];
 
-    /**
-     * @param string $name
-     */
     private function __construct(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return self
-     */
     public static function named(string $name): self
     {
         return new self($name);
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return array
-     */
     public function getActions(): array
     {
         return $this->actions;
     }
 
     /**
-     * @param Action $action
-     *
      * @throws \InvalidArgumentException
      */
     public function addAction(Action $action): void
@@ -73,11 +57,6 @@ class ActionGroup
         $this->actions[$name] = $action;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return Action
-     */
     public function getAction(string $name): Action
     {
         if (!$this->hasAction($name)) {
@@ -87,11 +66,6 @@ class ActionGroup
         return $this->actions[$name];
     }
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
     public function hasAction(string $name): bool
     {
         return isset($this->actions[$name]);

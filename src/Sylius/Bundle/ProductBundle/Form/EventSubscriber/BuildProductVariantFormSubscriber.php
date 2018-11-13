@@ -32,10 +32,6 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
      */
     private $disabled;
 
-    /**
-     * @param FormFactoryInterface $factory
-     * @param bool $disabled
-     */
     public function __construct(FormFactoryInterface $factory, bool $disabled = false)
     {
         $this->factory = $factory;
@@ -52,9 +48,6 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
         /** @var ProductVariantInterface $productVariant */

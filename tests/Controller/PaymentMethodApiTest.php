@@ -72,8 +72,6 @@ final class PaymentMethodApiTest extends JsonApiTestCase
     }
 
     /**
-     * @param PaymentMethodInterface $paymentMethod
-     *
      * @return string
      */
     private function getPaymentMethodUrl(PaymentMethodInterface $paymentMethod)

@@ -556,7 +556,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     }
 
     /**
-     * @param NodeElement $imageElement
      * @param string $type
      */
     private function setImageType(NodeElement $imageElement, $type)

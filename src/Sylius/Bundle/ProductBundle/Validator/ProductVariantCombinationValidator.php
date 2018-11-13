@@ -28,9 +28,6 @@ final class ProductVariantCombinationValidator extends ConstraintValidator
      */
     private $variantsParityChecker;
 
-    /**
-     * @param ProductVariantsParityCheckerInterface $variantsParityChecker
-     */
     public function __construct(ProductVariantsParityCheckerInterface $variantsParityChecker)
     {
         $this->variantsParityChecker = $variantsParityChecker;

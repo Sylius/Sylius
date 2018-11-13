@@ -18,8 +18,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 interface CircularDependencyCheckerInterface
 {
     /**
-     * @param ThemeInterface $theme
-     *
      * @throws CircularDependencyFoundException
      */
     public function check(ThemeInterface $theme): void;

@@ -26,9 +26,6 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     private $routeName;
 
     /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
      * @param string $routeName
      */
     public function __construct(Session $session, array $parameters, RouterInterface $router, $routeName)

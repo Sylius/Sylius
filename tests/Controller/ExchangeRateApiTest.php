@@ -332,8 +332,6 @@ EOT;
     }
 
     /**
-     * @param ExchangeRateInterface $exchangeRate
-     *
      * @return string
      */
     private function getExchangeRateUrl(ExchangeRateInterface $exchangeRate)

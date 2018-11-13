@@ -17,14 +17,8 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    /**
-     * @param string $dateTime
-     */
     public function specifyFilterDateFrom(string $dateTime);
 
-    /**
-     * @param string $dateTime
-     */
     public function specifyFilterDateTo(string $dateTime);
 
     /**

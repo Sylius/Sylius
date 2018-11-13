@@ -44,12 +44,6 @@ final class ThemeContext implements Context
      */
     private $homePage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param IndexPageInterface $channelIndexPage
-     * @param UpdatePageInterface $channelUpdatePage
-     * @param HomePageInterface $homePage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $channelIndexPage,

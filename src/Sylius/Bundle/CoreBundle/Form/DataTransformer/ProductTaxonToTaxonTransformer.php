@@ -38,11 +38,6 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
      */
     private $product;
 
-    /**
-     * @param FactoryInterface $productTaxonFactory
-     * @param RepositoryInterface $productTaxonRepository
-     * @param ProductInterface $product
-     */
     public function __construct(
         FactoryInterface $productTaxonFactory,
         RepositoryInterface $productTaxonRepository,
@@ -92,9 +87,6 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param mixed $value
-     * @param string $expectedType
-     *
      * @throws TransformationFailedException
      */
     private function assertTransformationValueType($value, string $expectedType): void

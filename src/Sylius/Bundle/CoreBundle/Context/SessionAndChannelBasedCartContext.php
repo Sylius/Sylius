@@ -32,10 +32,6 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
      */
     private $channelContext;
 
-    /**
-     * @param CartStorageInterface $cartStorage
-     * @param ChannelContextInterface $channelContext
-     */
     public function __construct(CartStorageInterface $cartStorage, ChannelContextInterface $channelContext)
     {
         $this->cartStorage = $cartStorage;

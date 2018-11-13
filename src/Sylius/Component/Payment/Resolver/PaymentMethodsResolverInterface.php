@@ -19,16 +19,9 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 interface PaymentMethodsResolverInterface
 {
     /**
-     * @param PaymentInterface $subject
-     *
      * @return PaymentMethodInterface[]
      */
     public function getSupportedMethods(PaymentInterface $subject): array;
 
-    /**
-     * @param PaymentInterface $subject
-     *
-     * @return bool
-     */
     public function supports(PaymentInterface $subject): bool;
 }

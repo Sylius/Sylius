@@ -37,11 +37,6 @@ final class ShippingCategoryContext implements Context
      */
     private $shippingCategoryRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $shippingCategoryFactory
-     * @param RepositoryInterface $shippingCategoryRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $shippingCategoryFactory,

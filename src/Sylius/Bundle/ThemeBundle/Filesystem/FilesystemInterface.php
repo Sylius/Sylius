@@ -165,10 +165,5 @@ interface FilesystemInterface
      */
     public function isAbsolutePath($file);
 
-    /**
-     * @param string $file
-     *
-     * @return string
-     */
     public function getFileContents(string $file): string;
 }

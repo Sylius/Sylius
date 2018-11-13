@@ -18,11 +18,5 @@ use Sylius\Component\Grid\Parameters;
 
 interface DataSourceProviderInterface
 {
-    /**
-     * @param Grid $grid
-     * @param Parameters $parameters
-     *
-     * @return DataSourceInterface
-     */
     public function getDataSource(Grid $grid, Parameters $parameters): DataSourceInterface;
 }

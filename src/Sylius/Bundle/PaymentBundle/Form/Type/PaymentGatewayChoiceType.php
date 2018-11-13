@@ -24,9 +24,6 @@ final class PaymentGatewayChoiceType extends AbstractType
      */
     private $gateways;
 
-    /**
-     * @param array $gateways
-     */
     public function __construct(array $gateways)
     {
         $this->gateways = $gateways;

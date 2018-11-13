@@ -42,10 +42,6 @@ final class ShopBasedCartContext implements CartContextInterface
      */
     private $cart;
 
-    /**
-     * @param CartContextInterface $cartContext
-     * @param ShopperContextInterface $shopperContext
-     */
     public function __construct(CartContextInterface $cartContext, ShopperContextInterface $shopperContext)
     {
         $this->cartContext = $cartContext;
@@ -87,10 +83,6 @@ final class ShopBasedCartContext implements CartContextInterface
         return $cart;
     }
 
-    /**
-     * @param OrderInterface $cart
-     * @param CustomerInterface $customer
-     */
     private function setCustomerAndAddressOnCart(OrderInterface $cart, CustomerInterface $customer): void
     {
         $cart->setCustomer($customer);

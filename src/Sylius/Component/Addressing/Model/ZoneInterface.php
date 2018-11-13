@@ -28,34 +28,16 @@ interface ZoneInterface extends ResourceInterface, CodeAwareInterface
      */
     public static function getTypes(): array;
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void;
 
-    /**
-     * @return string|null
-     */
     public function getType(): ?string;
 
-    /**
-     * @param string|null $type
-     */
     public function setType(?string $type): void;
 
-    /**
-     * @return string|null
-     */
     public function getScope(): ?string;
 
-    /**
-     * @param string|null $scope
-     */
     public function setScope(?string $scope): void;
 
     /**
@@ -63,25 +45,11 @@ interface ZoneInterface extends ResourceInterface, CodeAwareInterface
      */
     public function getMembers(): Collection;
 
-    /**
-     * @return bool
-     */
     public function hasMembers(): bool;
 
-    /**
-     * @param ZoneMemberInterface $member
-     */
     public function addMember(ZoneMemberInterface $member): void;
 
-    /**
-     * @param ZoneMemberInterface $member
-     */
     public function removeMember(ZoneMemberInterface $member): void;
 
-    /**
-     * @param ZoneMemberInterface $member
-     *
-     * @return bool
-     */
     public function hasMember(ZoneMemberInterface $member): bool;
 }

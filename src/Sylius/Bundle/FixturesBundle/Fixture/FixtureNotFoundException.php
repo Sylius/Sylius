@@ -15,10 +15,6 @@ namespace Sylius\Bundle\FixturesBundle\Fixture;
 
 final class FixtureNotFoundException extends \InvalidArgumentException
 {
-    /**
-     * @param string $name
-     * @param \Exception|null $previous
-     */
     public function __construct(string $name, ?\Exception $previous = null)
     {
         parent::__construct(sprintf('Fixture with name "%s" could not be found!', $name), 0, $previous);

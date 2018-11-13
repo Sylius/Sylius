@@ -22,20 +22,9 @@ interface LocalesAwareInterface
      */
     public function getLocales(): Collection;
 
-    /**
-     * @param LocaleInterface $locale
-     *
-     * @return bool
-     */
     public function hasLocale(LocaleInterface $locale): bool;
 
-    /**
-     * @param LocaleInterface $locale
-     */
     public function addLocale(LocaleInterface $locale): void;
 
-    /**
-     * @param LocaleInterface $locale
-     */
     public function removeLocale(LocaleInterface $locale): void;
 }

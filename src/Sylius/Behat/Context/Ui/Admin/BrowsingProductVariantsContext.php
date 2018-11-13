@@ -32,10 +32,6 @@ final class BrowsingProductVariantsContext implements Context
      */
     private $defaultProductVariantResolver;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param ProductVariantResolverInterface $defaultProductVariantResolver
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         ProductVariantResolverInterface $defaultProductVariantResolver

@@ -26,9 +26,6 @@ final class ProvinceCodeChoiceType extends AbstractType
      */
     private $provinceRepository;
 
-    /**
-     * @param RepositoryInterface $provinceRepository
-     */
     public function __construct(RepositoryInterface $provinceRepository)
     {
         $this->provinceRepository = $provinceRepository;

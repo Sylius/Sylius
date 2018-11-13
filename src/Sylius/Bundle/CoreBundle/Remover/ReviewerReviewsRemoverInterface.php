@@ -17,8 +17,5 @@ use Sylius\Component\Review\Model\ReviewerInterface;
 
 interface ReviewerReviewsRemoverInterface
 {
-    /**
-     * @param ReviewerInterface $author
-     */
     public function removeReviewerReviews(ReviewerInterface $author): void;
 }

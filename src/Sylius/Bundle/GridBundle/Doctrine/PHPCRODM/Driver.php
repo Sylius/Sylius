@@ -35,9 +35,6 @@ final class Driver implements DriverInterface
      */
     private $documentManager;
 
-    /**
-     * @param DocumentManagerInterface $documentManager
-     */
     public function __construct(DocumentManagerInterface $documentManager)
     {
         $this->documentManager = $documentManager;

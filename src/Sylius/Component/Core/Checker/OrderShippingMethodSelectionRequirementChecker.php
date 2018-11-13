@@ -24,9 +24,6 @@ final class OrderShippingMethodSelectionRequirementChecker implements OrderShipp
      */
     private $shippingMethodsResolver;
 
-    /**
-     * @param ShippingMethodsResolverInterface $shippingMethodsResolver
-     */
     public function __construct(ShippingMethodsResolverInterface $shippingMethodsResolver)
     {
         $this->shippingMethodsResolver = $shippingMethodsResolver;
