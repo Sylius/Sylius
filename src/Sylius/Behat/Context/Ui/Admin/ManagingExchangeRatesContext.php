@@ -38,11 +38,6 @@ final class ManagingExchangeRatesContext implements Context
      */
     private $updatePage;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,

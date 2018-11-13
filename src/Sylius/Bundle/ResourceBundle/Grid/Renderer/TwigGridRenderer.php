@@ -44,12 +44,6 @@ final class TwigGridRenderer implements GridRendererInterface
      */
     private $actionTemplates;
 
-    /**
-     * @param GridRendererInterface $gridRenderer
-     * @param \Twig_Environment $twig
-     * @param OptionsParserInterface $optionsParser
-     * @param array $actionTemplates
-     */
     public function __construct(
         GridRendererInterface $gridRenderer,
         \Twig_Environment $twig,

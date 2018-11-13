@@ -40,11 +40,6 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
      */
     private $eligibilityChecker;
 
-    /**
-     * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-     * @param ZoneMatcherInterface $zoneMatcher
-     * @param ShippingMethodEligibilityCheckerInterface $eligibilityChecker
-     */
     public function __construct(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ZoneMatcherInterface $zoneMatcher,

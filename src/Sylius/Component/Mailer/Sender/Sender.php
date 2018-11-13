@@ -40,12 +40,6 @@ final class Sender implements SenderInterface
      */
     private $defaultSettingsProvider;
 
-    /**
-     * @param RendererAdapterInterface $rendererAdapter
-     * @param SenderAdapterInterface $senderAdapter
-     * @param EmailProviderInterface $provider
-     * @param DefaultSettingsProviderInterface $defaultSettingsProvider
-     */
     public function __construct(
         RendererAdapterInterface $rendererAdapter,
         SenderAdapterInterface $senderAdapter,

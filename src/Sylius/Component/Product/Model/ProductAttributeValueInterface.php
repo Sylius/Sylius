@@ -17,13 +17,7 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeVal
 
 interface ProductAttributeValueInterface extends BaseAttributeValueInterface
 {
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface;
 
-    /**
-     * @param ProductInterface|null $product
-     */
     public function setProduct(?ProductInterface $product): void;
 }

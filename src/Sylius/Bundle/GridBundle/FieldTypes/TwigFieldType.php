@@ -30,10 +30,6 @@ final class TwigFieldType implements FieldTypeInterface
      */
     private $twig;
 
-    /**
-     * @param DataExtractorInterface $dataExtractor
-     * @param \Twig_Environment $twig
-     */
     public function __construct(DataExtractorInterface $dataExtractor, \Twig_Environment $twig)
     {
         $this->dataExtractor = $dataExtractor;

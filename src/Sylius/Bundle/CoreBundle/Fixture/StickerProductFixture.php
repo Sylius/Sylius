@@ -51,12 +51,6 @@ class StickerProductFixture extends AbstractFixture
      */
     private $optionsResolver;
 
-    /**
-     * @param AbstractResourceFixture $taxonFixture
-     * @param AbstractResourceFixture $productAttributeFixture
-     * @param AbstractResourceFixture $productOptionFixture
-     * @param AbstractResourceFixture $productFixture
-     */
     public function __construct(
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $productAttributeFixture,
@@ -160,11 +154,6 @@ class StickerProductFixture extends AbstractFixture
         ;
     }
 
-    /**
-     * @param int $amount
-     *
-     * @return array
-     */
     private function getUniqueNames(int $amount): array
     {
         $productsNames = [];

@@ -25,11 +25,6 @@ class CartItemType extends AbstractResourceType
      */
     private $dataMapper;
 
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param DataMapperInterface $dataMapper
-     */
     public function __construct(
         string $dataClass,
         array $validationGroups = [],

@@ -17,8 +17,5 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
 
 interface TranslatableEntityLocaleAssignerInterface
 {
-    /**
-     * @param TranslatableInterface $translatableEntity
-     */
     public function assignLocale(TranslatableInterface $translatableEntity): void;
 }

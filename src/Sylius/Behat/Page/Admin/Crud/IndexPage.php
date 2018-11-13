@@ -33,10 +33,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     private $routeName;
 
     /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
      * @param string $routeName
      */
     public function __construct(

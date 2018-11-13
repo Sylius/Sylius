@@ -94,9 +94,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         ]);
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastOptionValueElement(): NodeElement
     {
         $optionValues = $this->getElement('values');

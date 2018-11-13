@@ -45,12 +45,6 @@ final class ProductReviewContext implements Context
      */
     private $stateMachineFactory;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $productReviewFactory
-     * @param RepositoryInterface $productReviewRepository
-     * @param StateMachineFactoryInterface $stateMachineFactory
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $productReviewFactory,
@@ -154,11 +148,9 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @param ProductInterface $product
      * @param string $title
      * @param int $rating
      * @param string $comment
-     * @param CustomerInterface|null $customer
      * @param string $transition
      *
      * @return ReviewInterface

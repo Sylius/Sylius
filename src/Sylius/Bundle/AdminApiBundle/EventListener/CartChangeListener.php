@@ -32,19 +32,12 @@ final class CartChangeListener
      */
     private $objectManager;
 
-    /**
-     * @param OrderProcessorInterface $orderProcessor
-     * @param ObjectManager $objectManager
-     */
     public function __construct(OrderProcessorInterface $orderProcessor, ObjectManager $objectManager)
     {
         $this->orderProcessor = $orderProcessor;
         $this->objectManager = $objectManager;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function recalculateOrderOnAdd(GenericEvent $event): void
     {
         $item = $event->getSubject();
@@ -56,9 +49,6 @@ final class CartChangeListener
         $this->objectManager->persist($order);
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function recalculateOrderOnDelete(GenericEvent $event): void
     {
         $item = $event->getSubject();

@@ -24,9 +24,6 @@ final class ProductContext implements Context
      */
     private $productRepository;
 
-    /**
-     * @param ProductRepositoryInterface $productRepository
-     */
     public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;

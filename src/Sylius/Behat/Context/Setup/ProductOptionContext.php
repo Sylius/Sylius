@@ -49,13 +49,6 @@ final class ProductOptionContext implements Context
      */
     private $objectManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ProductOptionRepositoryInterface $productOptionRepository
-     * @param FactoryInterface $productOptionFactory
-     * @param FactoryInterface $productOptionValueFactory
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductOptionRepositoryInterface $productOptionRepository,

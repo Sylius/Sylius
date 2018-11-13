@@ -24,9 +24,6 @@ final class ProductAssociationTypeContext implements Context
      */
     private $productAssociationTypeRepository;
 
-    /**
-     * @param ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository
-     */
     public function __construct(ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository)
     {
         $this->productAssociationTypeRepository = $productAssociationTypeRepository;

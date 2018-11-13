@@ -28,9 +28,6 @@ final class ChannelChoiceType extends AbstractType
      */
     private $channelRepository;
 
-    /**
-     * @param RepositoryInterface $channelRepository
-     */
     public function __construct(RepositoryInterface $channelRepository)
     {
         $this->channelRepository = $channelRepository;

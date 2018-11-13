@@ -43,12 +43,6 @@ final class ZoneMemberContext implements Context
      */
     private $zoneMemberRepository;
 
-    /**
-     * @param CountryNameConverterInterface $countryNameConverter
-     * @param RepositoryInterface $provinceRepository
-     * @param RepositoryInterface $zoneRepository
-     * @param RepositoryInterface $zoneMemberRepository
-     */
     public function __construct(
         CountryNameConverterInterface $countryNameConverter,
         RepositoryInterface $provinceRepository,

@@ -18,13 +18,7 @@ use Sylius\Component\Resource\Model\TranslationInterface;
 
 interface ProductOptionValueTranslationInterface extends ResourceInterface, TranslationInterface
 {
-    /**
-     * @return string|null
-     */
     public function getValue(): ?string;
 
-    /**
-     * @param string|null $value
-     */
     public function setValue(?string $value): void;
 }

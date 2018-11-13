@@ -20,9 +20,6 @@ final class OrderingTranslationFilesFinder implements TranslationFilesFinderInte
      */
     private $translationFilesFinder;
 
-    /**
-     * @param TranslationFilesFinderInterface $translationFilesFinder
-     */
     public function __construct(TranslationFilesFinderInterface $translationFilesFinder)
     {
         $this->translationFilesFinder = $translationFilesFinder;

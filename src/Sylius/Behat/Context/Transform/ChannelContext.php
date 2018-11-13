@@ -24,9 +24,6 @@ final class ChannelContext implements Context
      */
     private $channelRepository;
 
-    /**
-     * @param ChannelRepositoryInterface $channelRepository
-     */
     public function __construct(ChannelRepositoryInterface $channelRepository)
     {
         $this->channelRepository = $channelRepository;

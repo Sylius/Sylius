@@ -95,8 +95,6 @@ final class TaxRateApiTest extends JsonApiTestCase
     }
 
     /**
-     * @param TaxRateInterface $taxRate
-     *
      * @return string
      */
     private function getTaxRateUrl(TaxRateInterface $taxRate)

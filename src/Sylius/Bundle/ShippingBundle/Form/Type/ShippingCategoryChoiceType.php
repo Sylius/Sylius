@@ -28,9 +28,6 @@ final class ShippingCategoryChoiceType extends AbstractType
      */
     private $shippingCategoryRepository;
 
-    /**
-     * @param RepositoryInterface $shippingCategoryRepository
-     */
     public function __construct(RepositoryInterface $shippingCategoryRepository)
     {
         $this->shippingCategoryRepository = $shippingCategoryRepository;

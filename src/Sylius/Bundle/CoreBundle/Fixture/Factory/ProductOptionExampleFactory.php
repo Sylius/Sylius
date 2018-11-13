@@ -49,11 +49,6 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $productOptionFactory
-     * @param FactoryInterface $productOptionValueFactory
-     * @param RepositoryInterface $localeRepository
-     */
     public function __construct(
         FactoryInterface $productOptionFactory,
         FactoryInterface $productOptionValueFactory,
@@ -134,9 +129,6 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

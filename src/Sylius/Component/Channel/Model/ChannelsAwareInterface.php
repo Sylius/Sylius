@@ -22,20 +22,9 @@ interface ChannelsAwareInterface
      */
     public function getChannels(): Collection;
 
-    /**
-     * @param ChannelInterface $channel
-     *
-     * @return bool
-     */
     public function hasChannel(ChannelInterface $channel): bool;
 
-    /**
-     * @param ChannelInterface $channel
-     */
     public function addChannel(ChannelInterface $channel): void;
 
-    /**
-     * @param ChannelInterface $channel
-     */
     public function removeChannel(ChannelInterface $channel): void;
 }

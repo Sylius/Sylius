@@ -24,9 +24,6 @@ final class ResourceFormFactory implements ResourceFormFactoryInterface
      */
     private $formFactory;
 
-    /**
-     * @param FormFactoryInterface $formFactory
-     */
     public function __construct(FormFactoryInterface $formFactory)
     {
         $this->formFactory = $formFactory;

@@ -22,9 +22,6 @@ final class ConvertMoneyExtension extends \Twig_Extension
      */
     private $helper;
 
-    /**
-     * @param ConvertMoneyHelperInterface $helper
-     */
     public function __construct(ConvertMoneyHelperInterface $helper)
     {
         $this->helper = $helper;

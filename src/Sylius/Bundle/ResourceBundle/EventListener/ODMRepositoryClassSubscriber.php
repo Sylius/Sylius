@@ -31,17 +31,11 @@ final class ODMRepositoryClassSubscriber extends AbstractDoctrineSubscriber
         ];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArgs
-     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $this->setCustomRepositoryClass($eventArgs->getClassMetadata());
     }
 
-    /**
-     * @param ClassMetadata $metadata
-     */
     private function setCustomRepositoryClass(ClassMetadata $metadata)
     {
         try {

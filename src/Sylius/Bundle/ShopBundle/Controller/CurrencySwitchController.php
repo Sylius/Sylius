@@ -45,12 +45,6 @@ final class CurrencySwitchController
      */
     private $channelContext;
 
-    /**
-     * @param EngineInterface $templatingEngine
-     * @param CurrencyContextInterface $currencyContext
-     * @param CurrencyStorageInterface $currencyStorage
-     * @param ChannelContextInterface $channelContext
-     */
     public function __construct(
         EngineInterface $templatingEngine,
         CurrencyContextInterface $currencyContext,
@@ -63,9 +57,6 @@ final class CurrencySwitchController
         $this->channelContext = $channelContext;
     }
 
-    /**
-     * @return Response
-     */
     public function renderAction(): Response
     {
         /** @var ChannelInterface $channel */
@@ -84,12 +75,6 @@ final class CurrencySwitchController
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @param string $code
-     *
-     * @return Response
-     */
     public function switchAction(Request $request, string $code): Response
     {
         /** @var ChannelInterface $channel */

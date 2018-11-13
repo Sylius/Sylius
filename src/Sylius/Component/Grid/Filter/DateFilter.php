@@ -52,13 +52,6 @@ final class DateFilter implements FilterInterface
         }
     }
 
-    /**
-     * @param array $options
-     * @param string $name
-     * @param mixed $default
-     *
-     * @return mixed
-     */
     private function getOption(array $options, string $name, $default)
     {
         return $options[$name] ?? $default;
@@ -66,9 +59,6 @@ final class DateFilter implements FilterInterface
 
     /**
      * @param string[] $data
-     * @param string $defaultTime
-     *
-     * @return string|null
      */
     private function getDateTime(array $data, string $defaultTime): ?string
     {

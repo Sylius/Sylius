@@ -16,10 +16,6 @@ namespace Sylius\Bundle\FixturesBundle\Listener;
 interface ListenerRegistryInterface
 {
     /**
-     * @param string $name
-     *
-     * @return ListenerInterface
-     *
      * @throws ListenerNotFoundException
      */
     public function getListener(string $name): ListenerInterface;

@@ -492,8 +492,6 @@ EOT;
     }
 
     /**
-     * @param PromotionInterface $promotion
-     *
      * @return string
      */
     private function getPromotionUrl(PromotionInterface $promotion)

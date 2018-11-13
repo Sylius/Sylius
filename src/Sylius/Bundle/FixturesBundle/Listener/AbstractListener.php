@@ -31,9 +31,6 @@ abstract class AbstractListener implements ListenerInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $optionsNode
-     */
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         // empty

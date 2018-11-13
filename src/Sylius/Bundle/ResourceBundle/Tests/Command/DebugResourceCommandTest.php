@@ -88,11 +88,6 @@ EOT
         , $display);
     }
 
-    /**
-     * @param string $suffix
-     *
-     * @return MetadataInterface
-     */
     private function createMetadata(string $suffix): MetadataInterface
     {
         $metadata = Metadata::fromAliasAndConfiguration(sprintf('sylius.%s', $suffix), [

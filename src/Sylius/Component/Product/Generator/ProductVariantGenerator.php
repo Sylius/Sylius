@@ -36,10 +36,6 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
      */
     private $variantsParityChecker;
 
-    /**
-     * @param ProductVariantFactoryInterface $productVariantFactory
-     * @param ProductVariantsParityCheckerInterface $variantsParityChecker
-     */
     public function __construct(
         ProductVariantFactoryInterface $productVariantFactory,
         ProductVariantsParityCheckerInterface $variantsParityChecker
@@ -77,13 +73,6 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
         }
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param array $optionMap
-     * @param mixed $permutation
-     *
-     * @return ProductVariantInterface
-     */
     private function createVariant(ProductInterface $product, array $optionMap, $permutation): ProductVariantInterface
     {
         /** @var ProductVariantInterface $variant */
@@ -93,11 +82,6 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
         return $variant;
     }
 
-    /**
-     * @param ProductVariantInterface $variant
-     * @param array $optionMap
-     * @param mixed $permutation
-     */
     private function addOptionValue(ProductVariantInterface $variant, array $optionMap, $permutation): void
     {
         if (!is_array($permutation)) {

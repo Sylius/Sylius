@@ -297,8 +297,6 @@ EOT;
     }
 
     /**
-     * @param ShippingCategoryInterface $shippingCategory
-     *
      * @return string
      */
     private function getShippingCategoryUrl(ShippingCategoryInterface $shippingCategory)

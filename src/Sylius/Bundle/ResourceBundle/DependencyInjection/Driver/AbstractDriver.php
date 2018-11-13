@@ -42,10 +42,6 @@ abstract class AbstractDriver implements DriverInterface
         }
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param MetadataInterface $metadata
-     */
     protected function setClassesParameters(ContainerBuilder $container, MetadataInterface $metadata): void
     {
         if ($metadata->hasClass('model')) {
@@ -62,10 +58,6 @@ abstract class AbstractDriver implements DriverInterface
         }
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param MetadataInterface $metadata
-     */
     protected function addController(ContainerBuilder $container, MetadataInterface $metadata): void
     {
         $definition = new Definition($metadata->getClass('controller'));
@@ -97,10 +89,6 @@ abstract class AbstractDriver implements DriverInterface
         $container->setDefinition($metadata->getServiceId('controller'), $definition);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param MetadataInterface $metadata
-     */
     protected function addFactory(ContainerBuilder $container, MetadataInterface $metadata): void
     {
         $factoryClass = $metadata->getClass('factory');
@@ -122,11 +110,6 @@ abstract class AbstractDriver implements DriverInterface
         $container->setDefinition($metadata->getServiceId('factory'), $definition);
     }
 
-    /**
-     * @param MetadataInterface $metadata
-     *
-     * @return Definition
-     */
     protected function getMetadataDefinition(MetadataInterface $metadata): Definition
     {
         $definition = new Definition(Metadata::class);
@@ -138,15 +121,7 @@ abstract class AbstractDriver implements DriverInterface
         return $definition;
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param MetadataInterface $metadata
-     */
     abstract protected function addManager(ContainerBuilder $container, MetadataInterface $metadata): void;
 
-    /**
-     * @param ContainerBuilder $container
-     * @param MetadataInterface $metadata
-     */
     abstract protected function addRepository(ContainerBuilder $container, MetadataInterface $metadata): void;
 }

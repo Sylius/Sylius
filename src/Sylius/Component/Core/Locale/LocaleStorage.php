@@ -24,9 +24,6 @@ final class LocaleStorage implements LocaleStorageInterface
      */
     private $storage;
 
-    /**
-     * @param StorageInterface $storage
-     */
     public function __construct(StorageInterface $storage)
     {
         $this->storage = $storage;

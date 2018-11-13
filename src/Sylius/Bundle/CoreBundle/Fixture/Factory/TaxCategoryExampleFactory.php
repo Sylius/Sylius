@@ -36,9 +36,6 @@ class TaxCategoryExampleFactory extends AbstractExampleFactory implements Exampl
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $taxCategoryFactory
-     */
     public function __construct(FactoryInterface $taxCategoryFactory)
     {
         $this->taxCategoryFactory = $taxCategoryFactory;

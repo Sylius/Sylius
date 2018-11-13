@@ -24,30 +24,16 @@ final class InventoryHelper extends Helper
      */
     private $checker;
 
-    /**
-     * @param AvailabilityCheckerInterface $checker
-     */
     public function __construct(AvailabilityCheckerInterface $checker)
     {
         $this->checker = $checker;
     }
 
-    /**
-     * @param StockableInterface $stockable
-     *
-     * @return bool
-     */
     public function isStockAvailable(StockableInterface $stockable): bool
     {
         return $this->checker->isStockAvailable($stockable);
     }
 
-    /**
-     * @param StockableInterface $stockable
-     * @param int $quantity
-     *
-     * @return bool
-     */
     public function isStockSufficient(StockableInterface $stockable, int $quantity): bool
     {
         return $this->checker->isStockSufficient($stockable, $quantity);

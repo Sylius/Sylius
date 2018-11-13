@@ -33,10 +33,6 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
      */
     private $userClass;
 
-    /**
-     * @param ObjectManager $userManager
-     * @param string $userClass
-     */
     public function __construct(ObjectManager $userManager, string $userClass)
     {
         $this->userManager = $userManager;
@@ -54,17 +50,11 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param InteractiveLoginEvent $event
-     */
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
         $this->updateUserLastLogin($event->getAuthenticationToken()->getUser());
     }
 
-    /**
-     * @param UserEvent $event
-     */
     public function onImplicitLogin(UserEvent $event)
     {
         $this->updateUserLastLogin($event->getUser());

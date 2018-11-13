@@ -31,10 +31,6 @@ final class ContactContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param ContactPageInterface $contactPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         ContactPageInterface $contactPage,
         NotificationCheckerInterface $notificationChecker

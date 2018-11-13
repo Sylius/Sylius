@@ -32,9 +32,6 @@ final class InStockValidator extends ConstraintValidator
      */
     private $accessor;
 
-    /**
-     * @param AvailabilityCheckerInterface $availabilityChecker
-     */
     public function __construct(AvailabilityCheckerInterface $availabilityChecker)
     {
         $this->availabilityChecker = $availabilityChecker;

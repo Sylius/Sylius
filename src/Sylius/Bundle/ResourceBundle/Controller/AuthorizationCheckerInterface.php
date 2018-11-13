@@ -24,11 +24,6 @@ interface AuthorizationCheckerInterface
      * - show
      * - delete
      * - custom_action
-     *
-     * @param RequestConfiguration $configuration
-     * @param string $permission
-     *
-     * @return bool
      */
     public function isGranted(RequestConfiguration $configuration, string $permission): bool;
 }

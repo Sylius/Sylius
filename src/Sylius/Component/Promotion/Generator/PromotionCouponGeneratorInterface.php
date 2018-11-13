@@ -19,9 +19,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 interface PromotionCouponGeneratorInterface
 {
     /**
-     * @param PromotionInterface $promotion
-     * @param PromotionCouponGeneratorInstructionInterface $instruction
-     *
      * @return array|PromotionCouponInterface[]
      */
     public function generate(PromotionInterface $promotion, PromotionCouponGeneratorInstructionInterface $instruction): array;

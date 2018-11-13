@@ -28,9 +28,6 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
      */
     private $cypher;
 
-    /**
-     * @param CypherInterface|null $cypher
-     */
     public function __construct(?CypherInterface $cypher = null)
     {
         $this->cypher = $cypher;

@@ -61,8 +61,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     *
      * @return Pagerfanta
      */
     public function getPaginator(QueryBuilder $queryBuilder)
@@ -78,10 +76,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return $this->createQueryBuilder('o');
     }
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param array        $criteria
-     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
         $metadata = $this->getClassMetadata();
@@ -104,10 +98,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         }
     }
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param array        $sorting
-     */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
         foreach ($sorting as $property => $order) {

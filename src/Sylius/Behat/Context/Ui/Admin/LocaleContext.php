@@ -30,10 +30,6 @@ final class LocaleContext implements Context
      */
     private $translator;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     * @param TranslatorInterface $translator
-     */
     public function __construct(DashboardPageInterface $dashboardPage, TranslatorInterface $translator)
     {
         $this->dashboardPage = $dashboardPage;

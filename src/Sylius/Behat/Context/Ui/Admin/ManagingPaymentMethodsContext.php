@@ -55,14 +55,6 @@ final class ManagingPaymentMethodsContext implements Context
      */
     private $gatewayFactories;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     * @param array $gatewayFactories
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,

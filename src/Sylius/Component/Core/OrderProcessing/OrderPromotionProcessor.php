@@ -26,9 +26,6 @@ final class OrderPromotionProcessor implements OrderProcessorInterface
      */
     private $promotionProcessor;
 
-    /**
-     * @param PromotionProcessorInterface $promotionProcessor
-     */
     public function __construct(PromotionProcessorInterface $promotionProcessor)
     {
         $this->promotionProcessor = $promotionProcessor;

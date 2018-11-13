@@ -22,8 +22,5 @@ interface ProductTranslationInterface extends BaseProductTranslationInterface
      */
     public function getShortDescription(): ?string;
 
-    /**
-     * @param string|null $shortDescription
-     */
     public function setShortDescription(?string $shortDescription): void;
 }

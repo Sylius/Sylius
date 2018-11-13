@@ -36,9 +36,6 @@ class ShippingCategoryExampleFactory extends AbstractExampleFactory implements E
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $shippingCategoryFactory
-     */
     public function __construct(FactoryInterface $shippingCategoryFactory)
     {
         $this->shippingCategoryFactory = $shippingCategoryFactory;

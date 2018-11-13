@@ -15,33 +15,15 @@ namespace Sylius\Component\Shipping\Model;
 
 interface ShippableInterface
 {
-    /**
-     * @return float|null
-     */
     public function getShippingWeight(): ?float;
 
-    /**
-     * @return float|null
-     */
     public function getShippingVolume(): ?float;
 
-    /**
-     * @return float|null
-     */
     public function getShippingWidth(): ?float;
 
-    /**
-     * @return float|null
-     */
     public function getShippingHeight(): ?float;
 
-    /**
-     * @return float|null
-     */
     public function getShippingDepth(): ?float;
 
-    /**
-     * @return ShippingCategoryInterface|null
-     */
     public function getShippingCategory(): ?ShippingCategoryInterface;
 }

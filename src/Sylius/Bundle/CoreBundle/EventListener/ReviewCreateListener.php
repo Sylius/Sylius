@@ -25,17 +25,12 @@ final class ReviewCreateListener
      */
     private $customerContext;
 
-    /**
-     * @param CustomerContextInterface $customerContext
-     */
     public function __construct(CustomerContextInterface $customerContext)
     {
         $this->customerContext = $customerContext;
     }
 
     /**
-     * @param GenericEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function ensureReviewHasAuthor(GenericEvent $event): void

@@ -24,31 +24,16 @@ interface RegistryInterface
     public function getAll(): iterable;
 
     /**
-     * @param string $alias
-     *
-     * @return MetadataInterface
-     *
      * @throws \InvalidArgumentException
      */
     public function get(string $alias): MetadataInterface;
 
     /**
-     * @param string $className
-     *
-     * @return MetadataInterface
-     *
      * @throws \InvalidArgumentException
      */
     public function getByClass(string $className): MetadataInterface;
 
-    /**
-     * @param MetadataInterface $metadata
-     */
     public function add(MetadataInterface $metadata): void;
 
-    /**
-     * @param string $alias
-     * @param array $configuration
-     */
     public function addFromAliasAndConfiguration(string $alias, array $configuration): void;
 }

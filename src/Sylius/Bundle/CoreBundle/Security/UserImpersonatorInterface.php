@@ -17,8 +17,5 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 interface UserImpersonatorInterface
 {
-    /**
-     * @param UserInterface $user
-     */
     public function impersonate(UserInterface $user): void;
 }

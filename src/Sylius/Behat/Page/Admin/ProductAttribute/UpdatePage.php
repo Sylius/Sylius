@@ -111,9 +111,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $attributeChoices->findAll('css', 'div[data-form-collection="item"]');
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastAttributeChoiceElement(): NodeElement
     {
         $elements = $this->getAttributeChoiceElements();

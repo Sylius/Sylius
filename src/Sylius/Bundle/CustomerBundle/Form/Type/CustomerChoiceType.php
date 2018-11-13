@@ -29,9 +29,6 @@ final class CustomerChoiceType extends AbstractType
      */
     private $customerRepository;
 
-    /**
-     * @param RepositoryInterface $customerRepository
-     */
     public function __construct(RepositoryInterface $customerRepository)
     {
         $this->customerRepository = $customerRepository;

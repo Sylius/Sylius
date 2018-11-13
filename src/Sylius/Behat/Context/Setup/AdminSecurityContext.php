@@ -42,12 +42,6 @@ final class AdminSecurityContext implements Context
      */
     private $userRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param SecurityServiceInterface $securityService
-     * @param ExampleFactoryInterface $userFactory
-     * @param UserRepositoryInterface $userRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,

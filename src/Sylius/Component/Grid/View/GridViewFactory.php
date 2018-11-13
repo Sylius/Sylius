@@ -24,9 +24,6 @@ final class GridViewFactory implements GridViewFactoryInterface
      */
     private $dataProvider;
 
-    /**
-     * @param DataProviderInterface $dataProvider
-     */
     public function __construct(DataProviderInterface $dataProvider)
     {
         $this->dataProvider = $dataProvider;

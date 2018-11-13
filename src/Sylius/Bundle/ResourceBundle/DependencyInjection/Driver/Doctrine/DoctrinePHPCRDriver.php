@@ -37,10 +37,6 @@ final class DoctrinePHPCRDriver extends AbstractDoctrineDriver
         $this->addResourceListeners($container, $metadata);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param MetadataInterface $metadata
-     */
     protected function addResourceListeners(ContainerBuilder $container, MetadataInterface $metadata): void
     {
         $defaultOptions = [

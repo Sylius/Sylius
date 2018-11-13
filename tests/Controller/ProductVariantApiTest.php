@@ -506,8 +506,6 @@ EOT;
     }
 
     /**
-     * @param ProductInterface $product
-     *
      * @return string
      */
     private function getVariantListUrl(ProductInterface $product)
@@ -516,9 +514,6 @@ EOT;
     }
 
     /**
-     * @param ProductInterface $product
-     * @param ProductVariantInterface $productVariant
-     *
      * @return string
      */
     private function getVariantUrl(ProductInterface $product, ProductVariantInterface $productVariant)

@@ -21,8 +21,6 @@ use Webmozart\Assert\Assert;
 abstract class AutocompleteHelper
 {
     /**
-     * @param Session $session
-     * @param NodeElement $element
      * @param string $value
      */
     public static function chooseValue(Session $session, NodeElement $element, $value)
@@ -37,8 +35,6 @@ abstract class AutocompleteHelper
     }
 
     /**
-     * @param Session $session
-     * @param NodeElement $element
      * @param string[] $values
      */
     public static function chooseValues(Session $session, NodeElement $element, array $values)
@@ -56,10 +52,6 @@ abstract class AutocompleteHelper
         static::waitForElementToBeVisible($session, $element);
     }
 
-    /**
-     * @param Session $session
-     * @param NodeElement $element
-     */
     private static function activateAutocompleteDropdown(Session $session, NodeElement $element)
     {
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
@@ -70,10 +62,6 @@ abstract class AutocompleteHelper
         static::waitForElementToBeVisible($session, $element);
     }
 
-    /**
-     * @param Session $session
-     * @param NodeElement $element
-     */
     private static function waitForElementToBeVisible(Session $session, NodeElement $element)
     {
         $session->wait(5000, sprintf(

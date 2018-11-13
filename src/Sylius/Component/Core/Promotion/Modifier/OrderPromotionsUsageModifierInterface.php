@@ -17,13 +17,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface OrderPromotionsUsageModifierInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function increment(OrderInterface $order): void;
 
-    /**
-     * @param OrderInterface $order
-     */
     public function decrement(OrderInterface $order): void;
 }

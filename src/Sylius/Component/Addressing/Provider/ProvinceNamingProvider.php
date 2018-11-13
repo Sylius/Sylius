@@ -25,9 +25,6 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
      */
     private $provinceRepository;
 
-    /**
-     * @param RepositoryInterface $provinceRepository
-     */
     public function __construct(RepositoryInterface $provinceRepository)
     {
         $this->provinceRepository = $provinceRepository;

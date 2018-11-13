@@ -53,9 +53,6 @@ class PaymentMethod implements PaymentMethodInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();
@@ -166,8 +163,6 @@ class PaymentMethod implements PaymentMethodInterface
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return PaymentMethodTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

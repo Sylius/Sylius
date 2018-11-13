@@ -19,11 +19,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 interface ProductVariantPriceCalculatorInterface
 {
     /**
-     * @param ProductVariantInterface $productVariant
-     * @param array $context
-     *
-     * @return int
-     *
      * @throws MissingChannelConfigurationException when price for given channel does not exist
      */
     public function calculate(ProductVariantInterface $productVariant, array $context): int;

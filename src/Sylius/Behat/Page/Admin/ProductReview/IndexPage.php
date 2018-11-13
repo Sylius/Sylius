@@ -35,8 +35,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     }
 
     /**
-     * @param array $parameters
-     *
      * @return NodeElement
      */
     private function getActionButtonsField(array $parameters)

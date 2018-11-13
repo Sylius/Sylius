@@ -37,10 +37,6 @@ class ServiceRegistry implements ServiceRegistryInterface
      */
     private $context;
 
-    /**
-     * @param string $className
-     * @param string $context
-     */
     public function __construct(string $className, string $context = 'service')
     {
         $this->className = $className;

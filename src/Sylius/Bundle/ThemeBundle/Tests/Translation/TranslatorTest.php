@@ -362,8 +362,6 @@ final class TranslatorTest extends TestCase
     /**
      * @param string $locale
      * @param string[] $options
-     *
-     * @return Translator
      */
     private function createTranslator($locale = 'en', $options = []): Translator
     {

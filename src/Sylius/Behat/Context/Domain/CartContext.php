@@ -31,10 +31,6 @@ final class CartContext implements Context
      */
     private $expiredCartsRemover;
 
-    /**
-     * @param ObjectManager $orderManager
-     * @param ExpiredCartsRemoverInterface $expiredCartsRemover
-     */
     public function __construct(
         ObjectManager $orderManager,
         ExpiredCartsRemoverInterface $expiredCartsRemover

@@ -58,14 +58,8 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      */
     public function checkChannel($name);
 
-    /**
-     * @param \DateTimeInterface $dateTime
-     */
     public function setStartsAt(\DateTimeInterface $dateTime);
 
-    /**
-     * @param \DateTimeInterface $dateTime
-     */
     public function setEndsAt(\DateTimeInterface $dateTime);
 
     /**

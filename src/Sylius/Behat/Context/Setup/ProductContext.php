@@ -122,24 +122,6 @@ final class ProductContext implements Context
      */
     private $minkParameters;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ProductRepositoryInterface $productRepository
-     * @param ProductFactoryInterface $productFactory
-     * @param FactoryInterface $productTranslationFactory
-     * @param FactoryInterface $productVariantFactory
-     * @param FactoryInterface $productVariantTranslationFactory
-     * @param FactoryInterface $channelPricingFactory
-     * @param FactoryInterface $productOptionFactory
-     * @param FactoryInterface $productOptionValueFactory
-     * @param FactoryInterface $productImageFactory
-     * @param ObjectManager $objectManager
-     * @param ProductVariantGeneratorInterface $productVariantGenerator
-     * @param ProductVariantResolverInterface $defaultVariantResolver
-     * @param ImageUploaderInterface $imageUploader
-     * @param SlugGeneratorInterface $slugGenerator
-     * @param array $minkParameters
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductRepositoryInterface $productRepository,
@@ -799,7 +781,6 @@ final class ProductContext implements Context
     /**
      * @param string $productName
      * @param int $price
-     * @param ChannelInterface|null $channel
      *
      * @return ProductInterface
      */
@@ -842,7 +823,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param ProductOptionInterface $option
      * @param string $value
      * @param string $code
      *
@@ -862,9 +842,6 @@ final class ProductContext implements Context
         return $optionValue;
     }
 
-    /**
-     * @param ProductInterface $product
-     */
     private function saveProduct(ProductInterface $product)
     {
         $this->productRepository->add($product);
@@ -882,7 +859,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param ProductInterface $product
      * @param string $productVariantName
      * @param int $price
      * @param string $code
@@ -922,7 +898,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param ProductInterface $product
      * @param string $name
      * @param string $locale
      */
@@ -943,7 +918,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param ProductVariantInterface $productVariant
      * @param string $name
      * @param string $locale
      */
@@ -959,7 +933,6 @@ final class ProductContext implements Context
 
     /**
      * @param int $price
-     * @param ChannelInterface|null $channel
      *
      * @return ChannelPricingInterface
      */

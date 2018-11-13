@@ -40,11 +40,6 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
      */
     private $shippingMethodsResolver;
 
-    /**
-     * @param DefaultShippingMethodResolverInterface $defaultShippingMethodResolver
-     * @param FactoryInterface $shipmentFactory
-     * @param ShippingMethodsResolverInterface|null $shippingMethodsResolver
-     */
     public function __construct(
         DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         FactoryInterface $shipmentFactory,
@@ -57,7 +52,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         if (2 === func_num_args() || null === $shippingMethodsResolver) {
             @trigger_error(
                 'Not passing ShippingMethodsResolverInterface explicitly is deprecated since 1.2 and will be prohibited in 2.0',
-                E_USER_DEPRECATED
+                \E_USER_DEPRECATED
             );
         }
     }
@@ -91,9 +86,6 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         $this->createNewOrderShipment($order);
     }
 
-    /**
-     * @param OrderInterface $order
-     */
     private function createNewOrderShipment(OrderInterface $order): void
     {
         try {
@@ -113,10 +105,6 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         }
     }
 
-    /**
-     * @param BaseOrderInterface $order
-     * @param ShipmentInterface $shipment
-     */
     private function processShipmentUnits(BaseOrderInterface $order, ShipmentInterface $shipment): void
     {
         foreach ($shipment->getUnits() as $unit) {
@@ -130,11 +118,6 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return ShipmentInterface|null
-     */
     private function getExistingShipmentWithProperMethod(OrderInterface $order): ?ShipmentInterface
     {
         /** @var ShipmentInterface $shipment */

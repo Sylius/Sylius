@@ -33,10 +33,6 @@ final class AddressContext implements Context
      */
     private $customerManager;
 
-    /**
-     * @param AddressRepositoryInterface $addressRepository
-     * @param ObjectManager $customerManager
-     */
     public function __construct(AddressRepositoryInterface $addressRepository, ObjectManager $customerManager)
     {
         $this->addressRepository = $addressRepository;
@@ -89,10 +85,6 @@ final class AddressContext implements Context
         $this->addAddressToCustomer($customer, $address);
     }
 
-    /**
-     * @param CustomerInterface $customer
-     * @param AddressInterface $address
-     */
     private function addAddressToCustomer(CustomerInterface $customer, AddressInterface $address)
     {
         $customer->addAddress($address);
@@ -100,10 +92,6 @@ final class AddressContext implements Context
         $this->customerManager->flush();
     }
 
-    /**
-     * @param CustomerInterface $customer
-     * @param AddressInterface $address
-     */
     private function setDefaultAddressOfCustomer(CustomerInterface $customer, AddressInterface $address)
     {
         $customer->setDefaultAddress($address);

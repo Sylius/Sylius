@@ -15,9 +15,6 @@ namespace Sylius\Component\Grid\Data;
 
 class UnsupportedDriverException extends \InvalidArgumentException
 {
-    /**
-     * @param string $name
-     */
     public function __construct(string $name)
     {
         parent::__construct(sprintf('Grid data driver "%s" is not supported.', $name));

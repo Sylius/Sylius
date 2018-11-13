@@ -27,9 +27,6 @@ final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
      */
     private $decoratedHandler;
 
-    /**
-     * @param ResourceUpdateHandlerInterface $decoratedHandler
-     */
     public function __construct(ResourceUpdateHandlerInterface $decoratedHandler)
     {
         $this->decoratedHandler = $decoratedHandler;

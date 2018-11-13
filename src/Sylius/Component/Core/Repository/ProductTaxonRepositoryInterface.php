@@ -18,11 +18,5 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface ProductTaxonRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @param string $productCode
-     * @param string $taxonCode
-     *
-     * @return ProductTaxonInterface|null
-     */
     public function findOneByProductCodeAndTaxonCode(string $productCode, string $taxonCode): ?ProductTaxonInterface;
 }

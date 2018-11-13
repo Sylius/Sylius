@@ -50,9 +50,6 @@ interface GeneratePageInterface extends SymfonyPageInterface
      */
     public function specifyCodeLength($codeLength);
 
-    /**
-     * @param \DateTimeInterface $date
-     */
     public function setExpiresAt(\DateTimeInterface $date);
 
     /**

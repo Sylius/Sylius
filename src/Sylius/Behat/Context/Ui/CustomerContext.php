@@ -31,10 +31,6 @@ final class CustomerContext implements Context
      */
     private $customerShowPage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ShowPageInterface $customerShowPage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ShowPageInterface $customerShowPage

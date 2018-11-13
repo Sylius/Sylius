@@ -61,15 +61,6 @@ final class ProductAssociationContext implements Context
      */
     private $objectManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $productAssociationTypeFactory
-     * @param FactoryInterface $productAssociationTypeTranslationFactory
-     * @param FactoryInterface $productAssociationFactory
-     * @param ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository
-     * @param RepositoryInterface $productAssociationRepository
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $productAssociationTypeFactory,
@@ -167,11 +158,6 @@ final class ProductAssociationContext implements Context
         return $productAssociationType;
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param ProductAssociationTypeInterface $productAssociationType
-     * @param array $associatedProducts
-     */
     private function createProductAssociation(
         ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
@@ -190,11 +176,6 @@ final class ProductAssociationContext implements Context
         $this->productAssociationRepository->add($productAssociation);
     }
 
-    /**
-     * @param ProductAssociationTypeInterface $productAssociationType
-     * @param string $name
-     * @param string $locale
-     */
     private function addProductAssociationTypeTranslation(
         ProductAssociationTypeInterface $productAssociationType,
         string $name,

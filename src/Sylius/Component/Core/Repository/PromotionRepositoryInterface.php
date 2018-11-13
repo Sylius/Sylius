@@ -20,8 +20,6 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface as BasePr
 interface PromotionRepositoryInterface extends BasePromotionRepositoryInterface
 {
     /**
-     * @param ChannelInterface $channel
-     *
      * @return array|PromotionInterface[]
      */
     public function findActiveByChannel(ChannelInterface $channel): array;

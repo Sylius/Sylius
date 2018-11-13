@@ -24,9 +24,6 @@ final class CustomerUniqueAddressAdder implements CustomerAddressAdderInterface
      */
     private $addressComparator;
 
-    /**
-     * @param AddressComparatorInterface $addressComparator
-     */
     public function __construct(AddressComparatorInterface $addressComparator)
     {
         $this->addressComparator = $addressComparator;

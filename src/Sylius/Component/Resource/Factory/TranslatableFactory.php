@@ -29,10 +29,6 @@ final class TranslatableFactory implements TranslatableFactoryInterface
      */
     private $localeProvider;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param TranslationLocaleProviderInterface $localeProvider
-     */
     public function __construct(FactoryInterface $factory, TranslationLocaleProviderInterface $localeProvider)
     {
         $this->factory = $factory;

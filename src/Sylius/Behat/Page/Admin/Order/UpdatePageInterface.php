@@ -18,14 +18,8 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @param AddressInterface $address
-     */
     public function specifyShippingAddress(AddressInterface $address);
 
-    /**
-     * @param AddressInterface $address
-     */
     public function specifyBillingAddress(AddressInterface $address);
 
     /**

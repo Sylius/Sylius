@@ -30,19 +30,12 @@ final class RequestListener
      */
     private $themeContext;
 
-    /**
-     * @param ThemeRepositoryInterface $themeRepository
-     * @param SettableThemeContext $themeContext
-     */
     public function __construct(ThemeRepositoryInterface $themeRepository, SettableThemeContext $themeContext)
     {
         $this->themeRepository = $themeRepository;
         $this->themeContext = $themeContext;
     }
 
-    /**
-     * @param GetResponseEvent $event
-     */
     public function onKernelRequest(GetResponseEvent $event)
     {
         if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {

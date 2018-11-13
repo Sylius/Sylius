@@ -26,19 +26,10 @@ interface ProductVariantInterface extends
     CodeAwareInterface,
     TranslatableInterface
 {
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void;
 
-    /**
-     * @return string
-     */
     public function getDescriptor(): string;
 
     /**
@@ -46,46 +37,21 @@ interface ProductVariantInterface extends
      */
     public function getOptionValues(): Collection;
 
-    /**
-     * @param ProductOptionValueInterface $optionValue
-     */
     public function addOptionValue(ProductOptionValueInterface $optionValue): void;
 
-    /**
-     * @param ProductOptionValueInterface $optionValue
-     */
     public function removeOptionValue(ProductOptionValueInterface $optionValue): void;
 
-    /**
-     * @param ProductOptionValueInterface $optionValue
-     *
-     * @return bool
-     */
     public function hasOptionValue(ProductOptionValueInterface $optionValue): bool;
 
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface;
 
-    /**
-     * @param ProductInterface|null $product
-     */
     public function setProduct(?ProductInterface $product): void;
 
-    /**
-     * @return int|null
-     */
     public function getPosition(): ?int;
 
-    /**
-     * @param int|null $position
-     */
     public function setPosition(?int $position): void;
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductVariantTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

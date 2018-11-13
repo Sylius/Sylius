@@ -23,17 +23,11 @@ final class BlockEventListener
      */
     private $template;
 
-    /**
-     * @param string $template
-     */
     public function __construct(string $template)
     {
         $this->template = $template;
     }
 
-    /**
-     * @param BlockEvent $event
-     */
     public function onBlockEvent(BlockEvent $event): void
     {
         $block = new Block();

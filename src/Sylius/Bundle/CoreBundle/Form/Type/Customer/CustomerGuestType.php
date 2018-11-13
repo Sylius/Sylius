@@ -34,12 +34,6 @@ final class CustomerGuestType extends AbstractResourceType
      */
     private $customerFactory;
 
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param RepositoryInterface $customerRepository
-     * @param FactoryInterface $customerFactory
-     */
     public function __construct(
         string $dataClass,
         array $validationGroups,

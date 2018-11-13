@@ -71,8 +71,6 @@ interface IndexPageInterface extends PageInterface
     public function isProductOnPageWithName($name);
 
     /**
-     * @param array $productNames
-     *
      * @return bool
      */
     public function hasProductsInOrder(array $productNames);

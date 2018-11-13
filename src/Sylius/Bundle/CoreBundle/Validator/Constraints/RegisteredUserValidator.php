@@ -26,9 +26,6 @@ final class RegisteredUserValidator extends ConstraintValidator
      */
     private $customerRepository;
 
-    /**
-     * @param RepositoryInterface $customerRepository
-     */
     public function __construct(RepositoryInterface $customerRepository)
     {
         $this->customerRepository = $customerRepository;

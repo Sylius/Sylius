@@ -18,13 +18,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface CustomerGroupInterface extends ResourceInterface, CodeAwareInterface
 {
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void;
 }

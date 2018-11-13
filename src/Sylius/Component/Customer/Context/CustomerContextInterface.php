@@ -17,8 +17,5 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 
 interface CustomerContextInterface
 {
-    /**
-     * @return CustomerInterface|null
-     */
     public function getCustomer(): ?CustomerInterface;
 }

@@ -28,10 +28,6 @@ final class SymfonyConfigurationProcessor implements ConfigurationProcessorInter
      */
     private $processor;
 
-    /**
-     * @param ConfigurationInterface $configuration
-     * @param Processor $processor
-     */
     public function __construct(ConfigurationInterface $configuration, Processor $processor)
     {
         $this->configuration = $configuration;

@@ -29,9 +29,6 @@ final class CommandDirectoryChecker
      */
     private $filesystem;
 
-    /**
-     * @param Filesystem $filesystem
-     */
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
@@ -83,9 +80,6 @@ final class CommandDirectoryChecker
         }
     }
 
-    /**
-     * @param string $name
-     */
     public function setCommandName(string $name): void
     {
         $this->name = $name;

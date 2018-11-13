@@ -68,16 +68,6 @@ final class TaxonomyContext implements Context
      */
     private $minkParameters;
 
-    /**
-     * @param RepositoryInterface $taxonRepository
-     * @param FactoryInterface $taxonFactory
-     * @param FactoryInterface $taxonTranslationFactory
-     * @param FactoryInterface $taxonImageFactory
-     * @param ObjectManager $objectManager
-     * @param ImageUploaderInterface $imageUploader
-     * @param TaxonSlugGeneratorInterface $taxonSlugGenerator
-     * @param array $minkParameters
-     */
     public function __construct(
         RepositoryInterface $taxonRepository,
         FactoryInterface $taxonFactory,
@@ -173,8 +163,6 @@ final class TaxonomyContext implements Context
     }
 
     /**
-     * @param array $names
-     *
      * @return TaxonInterface
      */
     private function createTaxonInManyLanguages(array $names)

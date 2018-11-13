@@ -19,10 +19,6 @@ use Sylius\Component\Grid\Exception\UndefinedGridException;
 interface GridProviderInterface
 {
     /**
-     * @param string $code
-     *
-     * @return Grid
-     *
      * @throws UndefinedGridException
      */
     public function get(string $code): Grid;

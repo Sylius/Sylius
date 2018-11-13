@@ -25,9 +25,6 @@ final class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolver
      */
     private $paymentMethodRepository;
 
-    /**
-     * @param PaymentMethodRepositoryInterface $paymentMethodRepository
-     */
     public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
     {
         $this->paymentMethodRepository = $paymentMethodRepository;

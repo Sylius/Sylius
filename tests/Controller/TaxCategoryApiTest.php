@@ -346,8 +346,6 @@ EOT;
     }
 
     /**
-     * @param TaxCategoryInterface $taxCategory
-     *
      * @return string
      */
     private function getTaxCategoryUrl(TaxCategoryInterface $taxCategory)

@@ -24,9 +24,6 @@ final class TemplatePathsCacheClearer implements CacheClearerInterface
      */
     private $cache;
 
-    /**
-     * @param Cache $cache
-     */
     public function __construct(Cache $cache)
     {
         $this->cache = $cache;

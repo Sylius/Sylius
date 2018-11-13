@@ -29,9 +29,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->fillField('Per-Customer Usage Limit', $limit);
     }
 
-    /**
-     * @param \DateTimeInterface $date
-     */
     public function setExpiresAt(\DateTimeInterface $date)
     {
         $timestamp = $date->getTimestamp();
