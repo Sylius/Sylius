@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Contact;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class ContactPage extends SymfonyPage implements ContactPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_contact_request';
     }
@@ -69,7 +69,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#sylius_contact_email',
