@@ -25,9 +25,6 @@ final class ManagingPaymentsContext implements Context
      */
     private $paymentRepository;
 
-    /**
-     * @param PaymentRepositoryInterface $paymentRepository
-     */
     public function __construct(PaymentRepositoryInterface $paymentRepository)
     {
         $this->paymentRepository = $paymentRepository;

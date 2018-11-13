@@ -24,9 +24,6 @@ final class TaxCalculationStrategyChoiceType extends AbstractType
      */
     private $strategies;
 
-    /**
-     * @param array $strategies
-     */
     public function __construct(array $strategies)
     {
         $this->strategies = $strategies;

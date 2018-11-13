@@ -57,11 +57,6 @@ final class OrderShowMenuBuilder
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return ItemInterface
-     */
     public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');

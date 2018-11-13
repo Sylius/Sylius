@@ -31,10 +31,6 @@ final class CartItemFactory implements CartItemFactoryInterface
      */
     private $variantResolver;
 
-    /**
-     * @param FactoryInterface $decoratedFactory
-     * @param ProductVariantResolverInterface $variantResolver
-     */
     public function __construct(FactoryInterface $decoratedFactory, ProductVariantResolverInterface $variantResolver)
     {
         $this->decoratedFactory = $decoratedFactory;

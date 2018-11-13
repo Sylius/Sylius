@@ -31,10 +31,6 @@ final class LoginContext implements Context
      */
     private $loginPage;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     * @param LoginPageInterface $loginPage
-     */
     public function __construct(DashboardPageInterface $dashboardPage, LoginPageInterface $loginPage)
     {
         $this->dashboardPage = $dashboardPage;

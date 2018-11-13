@@ -16,8 +16,6 @@ namespace Sylius\Component\Locale\Context;
 interface LocaleContextInterface
 {
     /**
-     * @return string
-     *
      * @throws LocaleNotFoundException
      */
     public function getLocaleCode(): string;

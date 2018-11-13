@@ -25,9 +25,6 @@ class ImageUploader implements ImageUploaderInterface
      */
     protected $filesystem;
 
-    /**
-     * @param Filesystem $filesystem
-     */
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
@@ -76,11 +73,6 @@ class ImageUploader implements ImageUploaderInterface
         return false;
     }
 
-    /**
-     * @param string $path
-     *
-     * @return string
-     */
     private function expandPath(string $path): string
     {
         return sprintf(
@@ -91,11 +83,6 @@ class ImageUploader implements ImageUploaderInterface
         );
     }
 
-    /**
-     * @param string $path
-     *
-     * @return bool
-     */
     private function has(string $path): bool
     {
         return $this->filesystem->has($path);
@@ -103,10 +90,6 @@ class ImageUploader implements ImageUploaderInterface
 
     /**
      * Will return true if the path is prone to be blocked by ad blockers
-     *
-     * @param string $path
-     *
-     * @return bool
      */
     private function isAdBlockingProne(string $path): bool
     {

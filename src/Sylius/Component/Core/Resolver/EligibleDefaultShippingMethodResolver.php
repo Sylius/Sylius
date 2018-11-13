@@ -44,11 +44,6 @@ final class EligibleDefaultShippingMethodResolver implements DefaultShippingMeth
      */
     private $zoneMatcher;
 
-    /**
-     * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-     * @param ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker
-     * @param ZoneMatcherInterface $zoneMatcher
-     */
     public function __construct(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
@@ -84,9 +79,6 @@ final class EligibleDefaultShippingMethodResolver implements DefaultShippingMeth
     }
 
     /**
-     * @param ChannelInterface $channel
-     * @param AddressInterface|null $address
-     *
      * @return array|ShippingMethodInterface[]
      */
     private function getShippingMethods(ChannelInterface $channel, ?AddressInterface $address): array

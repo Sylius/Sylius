@@ -23,9 +23,6 @@ final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
      */
     private $stateMachine;
 
-    /**
-     * @param StateMachineInterface $stateMachine
-     */
     public function __construct(StateMachineInterface $stateMachine)
     {
         $this->stateMachine = $stateMachine;

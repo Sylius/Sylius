@@ -29,9 +29,6 @@ final class LocaleTypeExtension extends AbstractTypeExtension
      */
     private $localeRepository;
 
-    /**
-     * @param RepositoryInterface $localeRepository
-     */
     public function __construct(RepositoryInterface $localeRepository)
     {
         $this->localeRepository = $localeRepository;
@@ -70,11 +67,6 @@ final class LocaleTypeExtension extends AbstractTypeExtension
         return LocaleType::class;
     }
 
-    /**
-     * @param string $code
-     *
-     * @return string|null
-     */
     private function getLocaleName(string $code): ?string
     {
         return Intl::getLocaleBundle()->getLocaleName($code);

@@ -25,9 +25,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      */
     public function describeItAs($description, $languageCode);
 
-    /**
-     * @param TaxonInterface $taxon
-     */
     public function chooseParent(TaxonInterface $taxon);
 
     /**

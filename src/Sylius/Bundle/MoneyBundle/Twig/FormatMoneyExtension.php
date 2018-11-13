@@ -22,9 +22,6 @@ final class FormatMoneyExtension extends \Twig_Extension
      */
     private $helper;
 
-    /**
-     * @param FormatMoneyHelperInterface $helper
-     */
     public function __construct(FormatMoneyHelperInterface $helper)
     {
         $this->helper = $helper;

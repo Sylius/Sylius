@@ -85,18 +85,6 @@ final class ManagingProductsContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param CreateSimpleProductPageInterface $createSimpleProductPage
-     * @param CreateConfigurableProductPageInterface $createConfigurableProductPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdateSimpleProductPageInterface $updateSimpleProductPage
-     * @param UpdateConfigurableProductPageInterface $updateConfigurableProductPage
-     * @param ProductReviewIndexPageInterface $productReviewIndexPage
-     * @param IndexPerTaxonPageInterface $indexPerTaxonPage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreateSimpleProductPageInterface $createSimpleProductPage,

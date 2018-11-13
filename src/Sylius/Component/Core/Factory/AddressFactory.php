@@ -24,9 +24,6 @@ class AddressFactory implements AddressFactoryInterface
      */
     private $decoratedFactory;
 
-    /**
-     * @param FactoryInterface $decoratedFactory
-     */
     public function __construct(FactoryInterface $decoratedFactory)
     {
         $this->decoratedFactory = $decoratedFactory;

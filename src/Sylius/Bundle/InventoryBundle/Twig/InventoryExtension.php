@@ -22,9 +22,6 @@ final class InventoryExtension extends \Twig_Extension
      */
     private $helper;
 
-    /**
-     * @param InventoryHelper $helper
-     */
     public function __construct(InventoryHelper $helper)
     {
         $this->helper = $helper;

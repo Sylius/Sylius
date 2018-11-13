@@ -386,9 +386,6 @@ class OrderItem implements OrderItemInterface
         }
     }
 
-    /**
-     * @param AdjustmentInterface $adjustment
-     */
     protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {
@@ -397,9 +394,6 @@ class OrderItem implements OrderItemInterface
         }
     }
 
-    /**
-     * @param AdjustmentInterface $adjustment
-     */
     protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {

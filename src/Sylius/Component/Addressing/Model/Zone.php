@@ -53,9 +53,6 @@ class Zone implements ZoneInterface
         $this->members = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();

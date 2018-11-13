@@ -42,8 +42,6 @@ final class LexicalContext implements Context
     }
 
     /**
-     * @param string $price
-     *
      * @throws \InvalidArgumentException
      */
     private function validatePriceString(string $price): void

@@ -325,8 +325,6 @@ EOT;
     }
 
     /**
-     * @param ProductAttributeInterface $productAttribute
-     *
      * @return string
      */
     private function getProductAttributeUrl(ProductAttributeInterface $productAttribute)
@@ -335,7 +333,6 @@ EOT;
     }
 
     /**
-     * @param Response $response
      * @param array|string[] $expectedChoiceValues
      */
     private function assertSelectChoicesInResponse(Response $response, array $expectedChoiceValues): void

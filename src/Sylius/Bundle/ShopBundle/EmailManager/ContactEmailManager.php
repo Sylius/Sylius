@@ -23,9 +23,6 @@ final class ContactEmailManager implements ContactEmailManagerInterface
      */
     private $emailSender;
 
-    /**
-     * @param SenderInterface $emailSender
-     */
     public function __construct(SenderInterface $emailSender)
     {
         $this->emailSender = $emailSender;

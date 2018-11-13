@@ -334,8 +334,6 @@ EOT;
     }
 
     /**
-     * @param ProductOptionInterface $productOption
-     *
      * @return string
      */
     private function getProductOptionUrl(ProductOptionInterface $productOption)

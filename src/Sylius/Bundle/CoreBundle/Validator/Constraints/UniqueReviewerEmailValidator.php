@@ -41,11 +41,6 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
      */
     private $authorizationChecker;
 
-    /**
-     * @param UserRepositoryInterface $userRepository
-     * @param TokenStorageInterface $tokenStorage
-     * @param AuthorizationCheckerInterface $authorizationChecker
-     */
     public function __construct(
         UserRepositoryInterface $userRepository,
         TokenStorageInterface $tokenStorage,
@@ -83,11 +78,6 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
         }
     }
 
-    /**
-     * @param TokenInterface $token
-     *
-     * @return string|null
-     */
     private function getAuthenticatedUserEmail(TokenInterface $token): ?string
     {
         if (null === $token) {

@@ -15,9 +15,5 @@ namespace Sylius\Bundle\ShopBundle\EmailManager;
 
 interface ContactEmailManagerInterface
 {
-    /**
-     * @param array $data
-     * @param array $recipients
-     */
     public function sendContactRequest(array $data, array $recipients): void;
 }

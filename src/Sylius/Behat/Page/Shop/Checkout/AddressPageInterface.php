@@ -36,9 +36,6 @@ interface AddressPageInterface extends SymfonyPageInterface
      */
     public function checkValidationMessageFor($element, $message);
 
-    /**
-     * @param AddressInterface $billingAddress
-     */
     public function specifyBillingAddress(AddressInterface $billingAddress);
 
     /**
@@ -46,9 +43,6 @@ interface AddressPageInterface extends SymfonyPageInterface
      */
     public function selectBillingAddressProvince($province);
 
-    /**
-     * @param AddressInterface $shippingAddress
-     */
     public function specifyShippingAddress(AddressInterface $shippingAddress);
 
     /**
@@ -68,9 +62,6 @@ interface AddressPageInterface extends SymfonyPageInterface
      */
     public function specifyEmail($email);
 
-    /**
-     * @param string $fullName
-     */
     public function specifyShippingAddressFullName(string $fullName);
 
     /**
@@ -114,14 +105,8 @@ interface AddressPageInterface extends SymfonyPageInterface
      */
     public function hasBillingAddressInput();
 
-    /**
-     * @param AddressInterface $address
-     */
     public function selectShippingAddressFromAddressBook(AddressInterface $address);
 
-    /**
-     * @param AddressInterface $address
-     */
     public function selectBillingAddressFromAddressBook(AddressInterface $address);
 
     /**

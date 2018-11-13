@@ -25,9 +25,6 @@ final class DefaultShippingMethodResolver implements DefaultShippingMethodResolv
      */
     private $shippingMethodRepository;
 
-    /**
-     * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-     */
     public function __construct(ShippingMethodRepositoryInterface $shippingMethodRepository)
     {
         $this->shippingMethodRepository = $shippingMethodRepository;

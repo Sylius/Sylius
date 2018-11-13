@@ -34,10 +34,6 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
      */
     private $unitsPromotionAdjustmentsApplicator;
 
-    /**
-     * @param ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
-     * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
-     */
     public function __construct(
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
@@ -98,12 +94,6 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
         Assert::integer($configuration['amount']);
     }
 
-    /**
-     * @param int $promotionSubjectTotal
-     * @param int $targetPromotionAmount
-     *
-     * @return int
-     */
     private function calculateAdjustmentAmount(int $promotionSubjectTotal, int $targetPromotionAmount): int
     {
         return -1 * min($promotionSubjectTotal, $targetPromotionAmount);

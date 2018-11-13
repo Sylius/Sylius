@@ -17,33 +17,15 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ProductTaxonInterface extends ResourceInterface
 {
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface;
 
-    /**
-     * @param ProductInterface|null $product
-     */
     public function setProduct(?ProductInterface $product): void;
 
-    /**
-     * @return TaxonInterface|null
-     */
     public function getTaxon(): ?TaxonInterface;
 
-    /**
-     * @param TaxonInterface|null $taxon
-     */
     public function setTaxon(?TaxonInterface $taxon): void;
 
-    /**
-     * @return int|null
-     */
     public function getPosition(): ?int;
 
-    /**
-     * @param int|null $position
-     */
     public function setPosition(?int $position): void;
 }

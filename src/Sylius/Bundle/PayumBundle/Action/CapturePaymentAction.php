@@ -31,9 +31,6 @@ final class CapturePaymentAction extends GatewayAwareAction
      */
     private $paymentDescriptionProvider;
 
-    /**
-     * @param PaymentDescriptionProviderInterface $paymentDescriptionProvider
-     */
     public function __construct(PaymentDescriptionProviderInterface $paymentDescriptionProvider)
     {
         $this->paymentDescriptionProvider = $paymentDescriptionProvider;

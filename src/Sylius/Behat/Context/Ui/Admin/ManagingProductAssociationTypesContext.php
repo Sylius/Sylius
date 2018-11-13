@@ -43,12 +43,6 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,

@@ -84,7 +84,6 @@ class ResponseLoader implements ResponseLoaderInterface
 
     /**
      * @param string $source
-     * @param mixed $content
      *
      * @throws \RuntimeException
      */
@@ -97,7 +96,6 @@ class ResponseLoader implements ResponseLoaderInterface
 
     /**
      * @param string $source
-     * @param mixed $content
      *
      * @throws \RuntimeException
      */

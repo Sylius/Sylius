@@ -26,9 +26,6 @@ final class AddressChoiceType extends AbstractType
      */
     private $addressRepository;
 
-    /**
-     * @param AddressRepositoryInterface $addressRepository
-     */
     public function __construct(AddressRepositoryInterface $addressRepository)
     {
         $this->addressRepository = $addressRepository;

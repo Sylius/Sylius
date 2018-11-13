@@ -333,22 +333,11 @@ EOT;
         $this->assertResponse($response, 'product_review/change_status_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    /**
-     * @param ProductInterface $product
-     *
-     * @return string
-     */
     private function getReviewListUrl(ProductInterface $product): string
     {
         return sprintf('/api/v1/products/%s/reviews/', $product->getCode());
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param ReviewInterface $productReview
-     *
-     * @return string
-     */
     private function getReviewUrl(ProductInterface $product, ReviewInterface $productReview): string
     {
         return sprintf('%s%s', $this->getReviewListUrl($product), $productReview->getId());

@@ -40,7 +40,6 @@ interface ShowPageInterface extends PageInterface
     public function addToCartWithVariant($variant);
 
     /**
-     * @param ProductOptionInterface $option
      * @param string $optionValue
      *
      * @throws ElementNotFoundException
@@ -62,11 +61,6 @@ interface ShowPageInterface extends PageInterface
      */
     public function visit($url);
 
-    /**
-     * @param string $name
-     *
-     * @return string|null
-     */
     public function getAttributeByName(string $name): ?string;
 
     /**
@@ -75,8 +69,6 @@ interface ShowPageInterface extends PageInterface
     public function getAttributes();
 
     /**
-     * @param ProductInterface $product
-     *
      * @return bool
      */
     public function hasProductOutOfStockValidationMessage(ProductInterface $product);

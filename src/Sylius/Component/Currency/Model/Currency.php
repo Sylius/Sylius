@@ -35,9 +35,6 @@ class Currency implements CurrencyInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getCode();

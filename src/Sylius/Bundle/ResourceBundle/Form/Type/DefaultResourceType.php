@@ -31,10 +31,6 @@ final class DefaultResourceType extends AbstractType
      */
     private $formBuilderRegistry;
 
-    /**
-     * @param RegistryInterface $metadataRegistry
-     * @param ServiceRegistryInterface $formBuilderRegistry
-     */
     public function __construct(RegistryInterface $metadataRegistry, ServiceRegistryInterface $formBuilderRegistry)
     {
         $this->metadataRegistry = $metadataRegistry;

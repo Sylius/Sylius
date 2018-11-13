@@ -28,10 +28,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ProvinceController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
-     * @return Response
-     *
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
      */
@@ -79,11 +75,6 @@ class ProvinceController extends ResourceController
         ]);
     }
 
-    /**
-     * @param CountryInterface $country
-     *
-     * @return FormInterface
-     */
     protected function createProvinceChoiceForm(CountryInterface $country): FormInterface
     {
         return $this->get('form.factory')->createNamed('sylius_address_province', ProvinceCodeChoiceType::class, null, [
@@ -93,9 +84,6 @@ class ProvinceController extends ResourceController
         ]);
     }
 
-    /**
-     * @return FormInterface
-     */
     protected function createProvinceTextForm(): FormInterface
     {
         return $this->get('form.factory')->createNamed('sylius_address_province', TextType::class, null, [

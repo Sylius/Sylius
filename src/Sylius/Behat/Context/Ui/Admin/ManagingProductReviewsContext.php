@@ -38,11 +38,6 @@ final class ManagingProductReviewsContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,

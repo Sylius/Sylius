@@ -45,12 +45,6 @@ final class CheckoutResolver implements EventSubscriberInterface
      */
     private $stateMachineFactory;
 
-    /**
-     * @param CartContextInterface $cartContext
-     * @param CheckoutStateUrlGeneratorInterface $urlGenerator
-     * @param RequestMatcherInterface $requestMatcher
-     * @param FactoryInterface $stateMachineFactory
-     */
     public function __construct(
         CartContextInterface $cartContext,
         CheckoutStateUrlGeneratorInterface $urlGenerator,
@@ -63,9 +57,6 @@ final class CheckoutResolver implements EventSubscriberInterface
         $this->stateMachineFactory = $stateMachineFactory;
     }
 
-    /**
-     * @param GetResponseEvent $event
-     */
     public function onKernelRequest(GetResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
@@ -103,21 +94,11 @@ final class CheckoutResolver implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return string
-     */
     private function getRequestedGraph(Request $request): string
     {
         return $request->attributes->get('_sylius')['state_machine']['graph'];
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return string
-     */
     private function getRequestedTransition(Request $request): string
     {
         return $request->attributes->get('_sylius')['state_machine']['transition'];

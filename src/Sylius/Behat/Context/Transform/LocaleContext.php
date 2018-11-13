@@ -23,9 +23,6 @@ final class LocaleContext implements Context
      */
     private $localeNameConverter;
 
-    /**
-     * @param LocaleConverterInterface $localeNameConverter
-     */
     public function __construct(LocaleConverterInterface $localeNameConverter)
     {
         $this->localeNameConverter = $localeNameConverter;

@@ -15,19 +15,10 @@ namespace Sylius\Bundle\ThemeBundle\Configuration\Test;
 
 interface TestThemeConfigurationManagerInterface
 {
-    /**
-     * @return array
-     */
     public function findAll(): array;
 
-    /**
-     * @param array $configuration
-     */
     public function add(array $configuration): void;
 
-    /**
-     * @param string $themeName
-     */
     public function remove(string $themeName): void;
 
     /**

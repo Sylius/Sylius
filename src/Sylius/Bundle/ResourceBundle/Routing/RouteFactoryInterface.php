@@ -32,8 +32,6 @@ interface RouteFactoryInterface
      * @param array $schemes An array of restricted URI schemes
      * @param array $methods An array of restricted HTTP methods
      * @param string $condition A condition that should evaluate to true for the route to match
-     *
-     * @return Route
      */
     public function createRoute(
         string $path,

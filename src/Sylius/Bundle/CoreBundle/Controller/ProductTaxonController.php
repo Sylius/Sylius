@@ -24,10 +24,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class ProductTaxonController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
-     * @return Response
-     *
      * @throws HttpException
      */
     public function updatePositionsAction(Request $request): Response

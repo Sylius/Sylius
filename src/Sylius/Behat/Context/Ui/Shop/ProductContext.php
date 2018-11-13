@@ -39,11 +39,6 @@ final class ProductContext implements Context
      */
     private $productReviewsIndexPage;
 
-    /**
-     * @param ShowPageInterface $showPage
-     * @param IndexPageInterface $indexPage
-     * @param ProductReviewIndexPageInterface $productReviewsIndexPage
-     */
     public function __construct(
         ShowPageInterface $showPage,
         IndexPageInterface $indexPage,

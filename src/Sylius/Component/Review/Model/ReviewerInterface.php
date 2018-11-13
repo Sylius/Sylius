@@ -17,33 +17,15 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ReviewerInterface extends ResourceInterface
 {
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string;
 
-    /**
-     * @param string|null $email
-     */
     public function setEmail(?string $email): void;
 
-    /**
-     * @return string|null
-     */
     public function getFirstName(): ?string;
 
-    /**
-     * @param string|null $firstName
-     */
     public function setFirstName(?string $firstName): void;
 
-    /**
-     * @return string|null
-     */
     public function getLastName(): ?string;
 
-    /**
-     * @param string|null $lastName
-     */
     public function setLastName(?string $lastName): void;
 }

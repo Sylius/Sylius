@@ -24,9 +24,6 @@ final class DataSourceProvider implements DataSourceProviderInterface
      */
     private $driversRegistry;
 
-    /**
-     * @param ServiceRegistryInterface $driversRegistry
-     */
     public function __construct(ServiceRegistryInterface $driversRegistry)
     {
         $this->driversRegistry = $driversRegistry;

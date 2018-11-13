@@ -19,48 +19,23 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface OrderRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @return int
-     */
     public function countPlacedOrders(): int;
 
     /**
-     * @param int $count
-     *
      * @return array|OrderInterface[]
      */
     public function findLatest(int $count): array;
 
-    /**
-     * @param string $number
-     *
-     * @return OrderInterface|null
-     */
     public function findOneByNumber(string $number): ?OrderInterface;
 
-    /**
-     * @param string $tokenValue
-     *
-     * @return OrderInterface|null
-     */
     public function findOneByTokenValue(string $tokenValue): ?OrderInterface;
 
-    /**
-     * @param mixed $id
-     *
-     * @return OrderInterface|null
-     */
     public function findCartById($id): ?OrderInterface;
 
     /**
-     * @param \DateTimeInterface $terminalDate
-     *
      * @return array|OrderInterface[]
      */
     public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate): array;
 
-    /**
-     * @return QueryBuilder
-     */
     public function createCartQueryBuilder(): QueryBuilder;
 }

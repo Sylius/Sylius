@@ -36,8 +36,6 @@ final class OrderType extends AbstractResourceType
 
     /**
      * {@inheritdoc}
-     *
-     * @param RepositoryInterface $localeRepository
      */
     public function __construct(string $dataClass, array $validationGroups = [], RepositoryInterface $localeRepository)
     {

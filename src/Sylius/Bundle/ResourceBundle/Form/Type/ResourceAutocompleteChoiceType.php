@@ -32,9 +32,6 @@ class ResourceAutocompleteChoiceType extends AbstractType
      */
     protected $resourceRepositoryRegistry;
 
-    /**
-     * @param ServiceRegistryInterface $resourceRepositoryRegistry
-     */
     public function __construct(ServiceRegistryInterface $resourceRepositoryRegistry)
     {
         $this->resourceRepositoryRegistry = $resourceRepositoryRegistry;

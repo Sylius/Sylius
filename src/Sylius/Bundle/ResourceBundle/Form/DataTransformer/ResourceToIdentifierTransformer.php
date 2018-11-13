@@ -32,7 +32,6 @@ final class ResourceToIdentifierTransformer implements DataTransformerInterface
     private $identifier;
 
     /**
-     * @param RepositoryInterface $repository
      * @param string $identifier
      */
     public function __construct(RepositoryInterface $repository, ?string $identifier = null)

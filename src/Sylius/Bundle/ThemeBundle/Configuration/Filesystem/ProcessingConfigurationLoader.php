@@ -27,10 +27,6 @@ final class ProcessingConfigurationLoader implements ConfigurationLoaderInterfac
      */
     private $configurationProcessor;
 
-    /**
-     * @param ConfigurationLoaderInterface $decoratedLoader
-     * @param ConfigurationProcessorInterface $configurationProcessor
-     */
     public function __construct(ConfigurationLoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor)
     {
         $this->decoratedLoader = $decoratedLoader;

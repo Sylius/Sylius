@@ -54,9 +54,6 @@ final class InstallerContext implements Context
         'confirmation' => 'pswd',
     ];
 
-    /**
-     * @param KernelInterface $kernel
-     */
     public function __construct(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
@@ -138,9 +135,6 @@ final class InstallerContext implements Context
         $this->inputChoices['confirmation'] = $this->inputChoices['password'];
     }
 
-    /**
-     * @param string $name
-     */
     private function iExecuteCommandWithInputChoices(string $name): void
     {
         try {
@@ -150,9 +144,6 @@ final class InstallerContext implements Context
         }
     }
 
-    /**
-     * @param string $name
-     */
     private function iExecuteCommandAndConfirm(string $name): void
     {
         try {

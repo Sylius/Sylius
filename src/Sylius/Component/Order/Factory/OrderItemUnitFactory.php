@@ -24,9 +24,6 @@ class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
      */
     private $className;
 
-    /**
-     * @param string $className
-     */
     public function __construct(string $className)
     {
         $this->className = $className;
@@ -42,11 +39,6 @@ class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
         throw new UnsupportedMethodException('createNew');
     }
 
-    /**
-     * @param OrderItemInterface $orderItem
-     *
-     * @return OrderItemUnitInterface
-     */
     public function createForItem(OrderItemInterface $orderItem): OrderItemUnitInterface
     {
         return new $this->className($orderItem);

@@ -28,9 +28,6 @@ final class CurrencyChoiceType extends AbstractType
      */
     private $currencyRepository;
 
-    /**
-     * @param RepositoryInterface $currencyRepository
-     */
     public function __construct(RepositoryInterface $currencyRepository)
     {
         $this->currencyRepository = $currencyRepository;

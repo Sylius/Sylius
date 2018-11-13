@@ -17,10 +17,5 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 interface PaymentDescriptionProviderInterface
 {
-    /**
-     * @param PaymentInterface $payment
-     *
-     * @return string
-     */
     public function getPaymentDescription(PaymentInterface $payment): string;
 }

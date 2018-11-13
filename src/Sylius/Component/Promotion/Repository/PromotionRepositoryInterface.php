@@ -24,8 +24,6 @@ interface PromotionRepositoryInterface extends RepositoryInterface
     public function findActive(): array;
 
     /**
-     * @param string $name
-     *
      * @return PromotionInterface[]
      */
     public function findByName(string $name): array;

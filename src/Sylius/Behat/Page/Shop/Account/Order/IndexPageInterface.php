@@ -31,8 +31,6 @@ interface IndexPageInterface extends SymfonyPageInterface
     public function isOrderWithNumberInTheList($number);
 
     /**
-     * @param OrderInterface $order
-     *
      * @return bool
      */
     public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order);

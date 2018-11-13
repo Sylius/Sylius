@@ -31,9 +31,6 @@ abstract class AbstractFixture implements FixtureInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $optionsNode
-     */
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         // empty

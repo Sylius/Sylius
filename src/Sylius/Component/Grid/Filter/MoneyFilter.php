@@ -48,12 +48,6 @@ final class MoneyFilter implements FilterInterface
         }
     }
 
-    /**
-     * @param float $amount
-     * @param int $scale
-     *
-     * @return int
-     */
     private function normalizeAmount(float $amount, int $scale): int
     {
         return (int) round($amount * (10 ** $scale));
@@ -61,9 +55,6 @@ final class MoneyFilter implements FilterInterface
 
     /**
      * @param string[] $data
-     * @param string $key
-     *
-     * @return string
      */
     private function getDataValue(array $data, string $key): string
     {

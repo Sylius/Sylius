@@ -30,10 +30,6 @@ final class RequestLocaleSetter
      */
     private $localeProvider;
 
-    /**
-     * @param LocaleContextInterface $localeContext
-     * @param LocaleProviderInterface $localeProvider
-     */
     public function __construct(
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider
@@ -43,8 +39,6 @@ final class RequestLocaleSetter
     }
 
     /**
-     * @param GetResponseEvent $event
-     *
      * @throws LocaleNotFoundException
      */
     public function onKernelRequest(GetResponseEvent $event): void

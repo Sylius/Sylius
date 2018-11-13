@@ -37,11 +37,6 @@ final class UserImpersonator implements UserImpersonatorInterface
      */
     private $eventDispatcher;
 
-    /**
-     * @param Session $session
-     * @param string $firewallContextName
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(Session $session, string $firewallContextName, EventDispatcherInterface $eventDispatcher)
     {
         $this->session = $session;

@@ -65,15 +65,6 @@ final class ManagingOrdersContext implements Context
      */
     private $sharedSecurityService;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param IndexPageInterface $indexPage
-     * @param ShowPageInterface $showPage
-     * @param UpdatePageInterface $updatePage
-     * @param HistoryPageInterface $historyPage
-     * @param NotificationCheckerInterface $notificationChecker
-     * @param SharedSecurityServiceInterface $sharedSecurityService
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,

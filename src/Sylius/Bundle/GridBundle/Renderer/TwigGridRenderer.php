@@ -62,15 +62,6 @@ final class TwigGridRenderer implements GridRendererInterface
      */
     private $filterTemplates;
 
-    /**
-     * @param \Twig_Environment $twig
-     * @param ServiceRegistryInterface $fieldsRegistry
-     * @param FormFactoryInterface $formFactory
-     * @param FormTypeRegistryInterface $formTypeRegistry
-     * @param string $defaultTemplate
-     * @param array $actionTemplates
-     * @param array $filterTemplates
-     */
     public function __construct(
         \Twig_Environment $twig,
         ServiceRegistryInterface $fieldsRegistry,
@@ -157,10 +148,6 @@ final class TwigGridRenderer implements GridRendererInterface
     }
 
     /**
-     * @param Filter $filter
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     private function getFilterTemplate(Filter $filter): string

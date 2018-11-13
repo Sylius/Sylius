@@ -43,10 +43,6 @@ class ProductAssociationTypeExampleFactory extends AbstractExampleFactory implem
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $productAssociationTypeFactory
-     * @param RepositoryInterface $localeRepository
-     */
     public function __construct(
         FactoryInterface $productAssociationTypeFactory,
         RepositoryInterface $localeRepository
@@ -96,9 +92,6 @@ class ProductAssociationTypeExampleFactory extends AbstractExampleFactory implem
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

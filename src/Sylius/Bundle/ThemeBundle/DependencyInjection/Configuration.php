@@ -63,9 +63,6 @@ final class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNode
-     */
     private function addSourcesConfiguration(ArrayNodeDefinition $rootNode): void
     {
         $sourcesNodeBuilder = $rootNode

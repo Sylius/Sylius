@@ -43,12 +43,6 @@ final class UserContext implements Context
      */
     private $homePage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param UserRepositoryInterface $userRepository
-     * @param ShowPageInterface $customerShowPage
-     * @param HomePageInterface $homePage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,

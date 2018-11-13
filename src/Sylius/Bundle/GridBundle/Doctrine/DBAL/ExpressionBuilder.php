@@ -23,9 +23,6 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
      */
     private $queryBuilder;
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     */
     public function __construct(QueryBuilder $queryBuilder)
     {
         $this->queryBuilder = $queryBuilder;

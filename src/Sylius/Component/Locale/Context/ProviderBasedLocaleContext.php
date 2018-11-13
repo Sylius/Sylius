@@ -22,9 +22,6 @@ final class ProviderBasedLocaleContext implements LocaleContextInterface
      */
     private $localeProvider;
 
-    /**
-     * @param LocaleProviderInterface $localeProvider
-     */
     public function __construct(LocaleProviderInterface $localeProvider)
     {
         $this->localeProvider = $localeProvider;

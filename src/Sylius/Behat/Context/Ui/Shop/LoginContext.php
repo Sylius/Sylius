@@ -62,15 +62,6 @@ final class LoginContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * @param HomePageInterface $homePage
-     * @param LoginPageInterface $loginPage
-     * @param RegisterPageInterface $registerPage
-     * @param RequestPasswordResetPageInterface $requestPasswordResetPage
-     * @param ResetPasswordPageInterface $resetPasswordPage
-     * @param NotificationCheckerInterface $notificationChecker
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         HomePageInterface $homePage,
         LoginPageInterface $loginPage,

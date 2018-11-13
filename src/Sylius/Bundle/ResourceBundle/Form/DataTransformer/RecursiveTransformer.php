@@ -25,9 +25,6 @@ final class RecursiveTransformer implements DataTransformerInterface
      */
     private $decoratedTransformer;
 
-    /**
-     * @param DataTransformerInterface $decoratedTransformer
-     */
     public function __construct(DataTransformerInterface $decoratedTransformer)
     {
         $this->decoratedTransformer = $decoratedTransformer;
@@ -66,9 +63,6 @@ final class RecursiveTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param mixed $value
-     * @param string $expectedType
-     *
      * @throws TransformationFailedException
      */
     private function assertTransformationValueType($value, string $expectedType): void

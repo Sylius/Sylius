@@ -29,10 +29,6 @@ final class ZoneFactory implements ZoneFactoryInterface
      */
     private $zoneMemberFactory;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param FactoryInterface $zoneMemberFactory
-     */
     public function __construct(FactoryInterface $factory, FactoryInterface $zoneMemberFactory)
     {
         $this->factory = $factory;

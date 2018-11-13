@@ -31,12 +31,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      */
     private $tableAccessor;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -346,8 +340,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     }
 
     /**
-     * @param ProductInterface $product
-     *
      * @return NodeElement
      */
     private function getProductRowElement(ProductInterface $product)
@@ -357,7 +349,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
     /**
      * @param string $displayedAddress
-     * @param AddressInterface $address
      *
      * @return bool
      */

@@ -59,8 +59,6 @@ final class ShippingMethodApiTest extends JsonApiTestCase
     }
 
     /**
-     * @param ShippingMethodInterface $shippingMethod
-     *
      * @return string
      */
     private function getShippingMethodUrl(ShippingMethodInterface $shippingMethod)

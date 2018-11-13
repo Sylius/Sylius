@@ -39,11 +39,6 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
      */
     private $defaultParameters;
 
-    /**
-     * @param ParametersParserInterface $parametersParser
-     * @param string $configurationClass
-     * @param array $defaultParameters
-     */
     public function __construct(ParametersParserInterface $parametersParser, string $configurationClass, array $defaultParameters = [])
     {
         $this->parametersParser = $parametersParser;
@@ -63,10 +58,6 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     }
 
     /**
-     * @param Request $request
-     *
-     * @return array
-     *
      * @throws \InvalidArgumentException
      */
     private function parseApiParameters(Request $request): array

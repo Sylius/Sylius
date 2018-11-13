@@ -525,8 +525,6 @@ EOT;
     }
 
     /**
-     * @param ProductInterface $product
-     *
      * @return string
      */
     private function getProductUrl(ProductInterface $product)

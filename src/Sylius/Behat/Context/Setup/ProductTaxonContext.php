@@ -32,10 +32,6 @@ final class ProductTaxonContext implements Context
      */
     private $objectManager;
 
-    /**
-     * @param FactoryInterface $productTaxonFactory
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         FactoryInterface $productTaxonFactory,
         ObjectManager $objectManager
@@ -59,8 +55,6 @@ final class ProductTaxonContext implements Context
     }
 
     /**
-     * @param TaxonInterface $taxon
-     * @param ProductInterface $product
      * @param int|null $position
      *
      * @return ProductTaxonInterface

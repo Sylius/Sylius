@@ -16,10 +16,6 @@ namespace Sylius\Bundle\FixturesBundle\Suite;
 interface SuiteRegistryInterface
 {
     /**
-     * @param string $name
-     *
-     * @return SuiteInterface
-     *
      * @throws SuiteNotFoundException
      */
     public function getSuite(string $name): SuiteInterface;

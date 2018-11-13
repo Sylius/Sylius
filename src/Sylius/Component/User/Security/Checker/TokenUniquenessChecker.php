@@ -27,10 +27,6 @@ final class TokenUniquenessChecker implements UniquenessCheckerInterface
      */
     private $tokenFieldName;
 
-    /**
-     * @param RepositoryInterface $repository
-     * @param string $tokenFieldName
-     */
     public function __construct(RepositoryInterface $repository, string $tokenFieldName)
     {
         $this->repository = $repository;

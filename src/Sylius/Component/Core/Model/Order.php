@@ -318,9 +318,6 @@ class Order extends BaseOrder implements OrderInterface
         return $payment !== false ? $payment : null;
     }
 
-    /**
-     * @return bool
-     */
     public function isShippingRequired(): bool
     {
         foreach ($this->getItems() as $orderItem) {

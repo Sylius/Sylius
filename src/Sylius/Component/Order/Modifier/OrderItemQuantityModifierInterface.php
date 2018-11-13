@@ -17,9 +17,5 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 
 interface OrderItemQuantityModifierInterface
 {
-    /**
-     * @param OrderItemInterface $orderItem
-     * @param int $targetQuantity
-     */
     public function modify(OrderItemInterface $orderItem, int $targetQuantity): void;
 }

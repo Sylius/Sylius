@@ -31,9 +31,6 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
      */
     protected $adjustmentFactory;
 
-    /**
-     * @param FactoryInterface $adjustmentFactory
-     */
     public function __construct(FactoryInterface $adjustmentFactory)
     {
         $this->adjustmentFactory = $adjustmentFactory;
@@ -55,10 +52,6 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
         }
     }
 
-    /**
-     * @param OrderItemInterface $item
-     * @param PromotionInterface $promotion
-     */
     protected function removeUnitsAdjustment(OrderItemInterface $item, PromotionInterface $promotion): void
     {
         foreach ($item->getUnits() as $unit) {
@@ -66,10 +59,6 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
         }
     }
 
-    /**
-     * @param OrderItemUnitInterface $unit
-     * @param PromotionInterface $promotion
-     */
     protected function removeUnitOrderItemAdjustments(OrderItemUnitInterface $unit, PromotionInterface $promotion): void
     {
         foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) as $adjustment) {
@@ -79,11 +68,6 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
         }
     }
 
-    /**
-     * @param OrderItemUnitInterface $unit
-     * @param int $amount
-     * @param PromotionInterface $promotion
-     */
     protected function addAdjustmentToUnit(OrderItemUnitInterface $unit, int $amount, PromotionInterface $promotion): void
     {
         $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
@@ -92,12 +76,6 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
         $unit->addAdjustment($adjustment);
     }
 
-    /**
-     * @param PromotionInterface $promotion
-     * @param string $type
-     *
-     * @return OrderAdjustmentInterface
-     */
     protected function createAdjustment(
         PromotionInterface $promotion,
         string $type = AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT

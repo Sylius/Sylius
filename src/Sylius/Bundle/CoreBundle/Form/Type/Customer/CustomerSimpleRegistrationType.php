@@ -29,11 +29,6 @@ final class CustomerSimpleRegistrationType extends AbstractResourceType
      */
     private $customerRepository;
 
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param RepositoryInterface $customerRepository
-     */
     public function __construct(string $dataClass, array $validationGroups, RepositoryInterface $customerRepository)
     {
         parent::__construct($dataClass, $validationGroups);

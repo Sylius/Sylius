@@ -105,9 +105,6 @@ final class TableAccessor implements TableAccessorInterface
     }
 
     /**
-     * @param NodeElement $table
-     * @param array $fields
-     *
      * @return NodeElement[]
      *
      * @throws \InvalidArgumentException If rows were not found
@@ -134,9 +131,6 @@ final class TableAccessor implements TableAccessorInterface
     }
 
     /**
-     * @param array $columns
-     * @param array $fields
-     *
      * @return bool
      */
     private function hasRowFields(array $columns, array $fields)
@@ -162,7 +156,6 @@ final class TableAccessor implements TableAccessorInterface
     }
 
     /**
-     * @param NodeElement $table
      * @param string[] $fields
      *
      * @return string[]
@@ -182,7 +175,6 @@ final class TableAccessor implements TableAccessorInterface
     }
 
     /**
-     * @param NodeElement $table
      * @param string $fieldName
      *
      * @return int
@@ -221,8 +213,6 @@ final class TableAccessor implements TableAccessorInterface
     }
 
     /**
-     * @param NodeElement $column
-     *
      * @return string
      */
     private function getColumnFieldName(NodeElement $column)

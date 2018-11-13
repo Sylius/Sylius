@@ -17,11 +17,5 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 
 interface AddressComparatorInterface
 {
-    /**
-     * @param AddressInterface $firstAddress
-     * @param AddressInterface $secondAddress
-     *
-     * @return bool
-     */
     public function equal(AddressInterface $firstAddress, AddressInterface $secondAddress): bool;
 }

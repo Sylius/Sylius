@@ -167,9 +167,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         ]);
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastProvinceElement(): NodeElement
     {
         $provinces = $this->getElement('provinces');

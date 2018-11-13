@@ -41,12 +41,6 @@ final class PaypalContext implements Context
      */
     private $paypalApiMocker;
 
-    /**
-     * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
-     * @param ShowPageInterface $orderDetails
-     * @param CompletePageInterface $summaryPage
-     * @param PaypalApiMocker $paypalApiMocker
-     */
     public function __construct(
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
         ShowPageInterface $orderDetails,

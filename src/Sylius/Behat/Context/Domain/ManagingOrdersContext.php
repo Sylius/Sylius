@@ -66,16 +66,6 @@ final class ManagingOrdersContext implements Context
      */
     private $unpaidOrdersStateUpdater;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param OrderRepositoryInterface $orderRepository
-     * @param RepositoryInterface $orderItemRepository
-     * @param RepositoryInterface $addressRepository
-     * @param RepositoryInterface $adjustmentRepository
-     * @param ObjectManager $orderManager
-     * @param ProductVariantResolverInterface $variantResolver
-     * @param UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         OrderRepositoryInterface $orderRepository,

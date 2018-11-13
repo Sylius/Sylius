@@ -25,9 +25,6 @@ final class PHPCRPurgerListener extends AbstractListener implements BeforeSuiteL
      */
     private $managerRegistry;
 
-    /**
-     * @param ManagerRegistry $managerRegistry
-     */
     public function __construct(ManagerRegistry $managerRegistry)
     {
         $this->managerRegistry = $managerRegistry;

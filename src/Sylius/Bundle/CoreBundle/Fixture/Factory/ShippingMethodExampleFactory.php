@@ -64,13 +64,6 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $shippingMethodFactory
-     * @param RepositoryInterface $zoneRepository
-     * @param RepositoryInterface $shippingCategoryRepository
-     * @param RepositoryInterface $localeRepository
-     * @param ChannelRepositoryInterface $channelRepository
-     */
     public function __construct(
         FactoryInterface $shippingMethodFactory,
         RepositoryInterface $zoneRepository,
@@ -170,9 +163,6 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

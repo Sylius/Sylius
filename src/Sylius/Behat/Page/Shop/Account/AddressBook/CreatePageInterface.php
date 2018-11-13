@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\AddressInterface;
 
 interface CreatePageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param AddressInterface $address
-     */
     public function fillAddressData(AddressInterface $address);
 
     /**
