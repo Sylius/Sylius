@@ -15,7 +15,7 @@ namespace spec\Sylius\Behat\Service\Resolver;
 
 use Behat\Mink\Session;
 use PhpSpec\ObjectBehavior;
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolver;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;

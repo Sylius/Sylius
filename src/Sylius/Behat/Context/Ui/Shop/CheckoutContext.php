@@ -22,7 +22,7 @@ use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
-use Sylius\Behat\Page\UnexpectedPageException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Webmozart\Assert\Assert;

@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class UpdatePage extends SymfonyPage implements UpdatePageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_account_address_book_update';
     }
@@ -93,7 +93,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'city' => '#sylius_address_city',

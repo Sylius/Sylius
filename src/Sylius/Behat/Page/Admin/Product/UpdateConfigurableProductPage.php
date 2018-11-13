@@ -204,7 +204,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'channel_checkbox' => '.checkbox:contains("%channel%") input',

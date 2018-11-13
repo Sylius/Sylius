@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Order;
 
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
 {
@@ -62,7 +62,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     /**
      * @return string
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_thank_you';
     }
@@ -70,7 +70,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'order_details' => '#sylius-show-order',

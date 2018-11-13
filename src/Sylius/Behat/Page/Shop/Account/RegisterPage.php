@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Component\Core\Formatter\StringInflector;
 
 class RegisterPage extends SymfonyPage implements RegisterPageInterface
@@ -22,7 +22,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_register';
     }
@@ -108,7 +108,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#sylius_customer_registration_email',

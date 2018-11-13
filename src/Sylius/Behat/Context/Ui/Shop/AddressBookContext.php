@@ -18,7 +18,7 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\AddressBook\CreatePageInterface;
 use Sylius\Behat\Page\Shop\Account\AddressBook\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\AddressBook\UpdatePageInterface;
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Resolver;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface CurrentPageResolverInterface
 {

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Service\Resolver;
 
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Webmozart\Assert\Assert;
 
