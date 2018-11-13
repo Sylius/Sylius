@@ -21,14 +21,10 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 final class ThemeAwareTranslator implements TranslatorInterface, TranslatorBagInterface, WarmableInterface
 {
-    /**
-     * @var TranslatorInterface|TranslatorBagInterface
-     */
+    /** @var TranslatorInterface|TranslatorBagInterface */
     private $translator;
 
-    /**
-     * @var ThemeContextInterface
-     */
+    /** @var ThemeContextInterface */
     private $themeContext;
 
     /**

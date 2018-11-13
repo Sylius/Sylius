@@ -19,14 +19,10 @@ use Symfony\Component\Filesystem\Filesystem;
 
 final class EmailSpoolContext implements Context
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $spoolDirectory;
 
-    /**
-     * @var Filesystem
-     */
+    /** @var Filesystem */
     private $filesystem;
 
     public function __construct(EmailCheckerInterface $emailChecker, Filesystem $filesystem)

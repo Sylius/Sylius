@@ -20,9 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class DatetimeFieldType implements FieldTypeInterface
 {
-    /**
-     * @var DataExtractorInterface
-     */
+    /** @var DataExtractorInterface */
     private $dataExtractor;
 
     public function __construct(DataExtractorInterface $dataExtractor)

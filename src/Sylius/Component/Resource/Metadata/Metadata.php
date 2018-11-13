@@ -17,29 +17,19 @@ use Doctrine\Common\Inflector\Inflector;
 
 final class Metadata implements MetadataInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $applicationName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $driver;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $templatesNamespace;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $parameters;
 
     private function __construct(string $name, string $applicationName, array $parameters)

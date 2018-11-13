@@ -23,9 +23,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var Collection|ImageInterface[]
-     */
+    /** @var Collection|ImageInterface[] */
     protected $images;
 
     public function __construct()

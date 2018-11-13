@@ -23,9 +23,7 @@ final class NthOrderRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'nth_order';
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
     public function __construct(OrderRepositoryInterface $orderRepository)

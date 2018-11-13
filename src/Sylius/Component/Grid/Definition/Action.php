@@ -15,34 +15,22 @@ namespace Sylius\Component\Grid\Definition;
 
 class Action
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $type;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $label;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $enabled = true;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $icon;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $options = [];
 
     /**

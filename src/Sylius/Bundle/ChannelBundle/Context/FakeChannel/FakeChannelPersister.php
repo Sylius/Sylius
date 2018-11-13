@@ -19,9 +19,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class FakeChannelPersister
 {
-    /**
-     * @var FakeChannelCodeProviderInterface
-     */
+    /** @var FakeChannelCodeProviderInterface */
     private $fakeChannelCodeProvider;
 
     public function __construct(FakeChannelCodeProviderInterface $fakeChannelCodeProvider)

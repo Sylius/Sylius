@@ -21,9 +21,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
 final class ProductVariantsPricesProvider implements ProductVariantsPricesProviderInterface
 {
-    /**
-     * @var ProductVariantPriceCalculatorInterface
-     */
+    /** @var ProductVariantPriceCalculatorInterface */
     private $productVariantPriceCalculator;
 
     public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)

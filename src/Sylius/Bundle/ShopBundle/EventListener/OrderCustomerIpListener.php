@@ -21,14 +21,10 @@ use Webmozart\Assert\Assert;
 
 final class OrderCustomerIpListener
 {
-    /**
-     * @var IpAssignerInterface
-     */
+    /** @var IpAssignerInterface */
     private $ipAssigner;
 
-    /**
-     * @var RequestStack
-     */
+    /** @var RequestStack */
     private $requestStack;
 
     public function __construct(IpAssignerInterface $ipAssigner, RequestStack $requestStack)

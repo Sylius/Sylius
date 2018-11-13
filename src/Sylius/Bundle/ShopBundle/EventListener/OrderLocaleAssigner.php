@@ -20,9 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class OrderLocaleAssigner
 {
-    /**
-     * @var LocaleContextInterface
-     */
+    /** @var LocaleContextInterface */
     private $localeContext;
 
     public function __construct(LocaleContextInterface $localeContext)

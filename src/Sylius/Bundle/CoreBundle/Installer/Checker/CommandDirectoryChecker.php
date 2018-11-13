@@ -19,14 +19,10 @@ use Symfony\Component\Filesystem\Filesystem;
 
 final class CommandDirectoryChecker
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $name;
 
-    /**
-     * @var Filesystem
-     */
+    /** @var Filesystem */
     private $filesystem;
 
     public function __construct(Filesystem $filesystem)

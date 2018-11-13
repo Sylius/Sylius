@@ -15,14 +15,10 @@ namespace Sylius\Bundle\UserBundle\Form\Model;
 
 class ChangePassword
 {
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $currentPassword;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $newPassword;
 
     public function getCurrentPassword(): ?string

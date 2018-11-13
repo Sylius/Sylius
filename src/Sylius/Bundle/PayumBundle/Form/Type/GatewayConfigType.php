@@ -23,9 +23,7 @@ use Symfony\Component\Form\FormEvents;
 
 final class GatewayConfigType extends AbstractResourceType
 {
-    /**
-     * @var FormTypeRegistryInterface
-     */
+    /** @var FormTypeRegistryInterface */
     private $gatewayConfigurationTypeRegistry;
 
     /**

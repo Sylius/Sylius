@@ -26,34 +26,22 @@ class Attribute implements AttributeInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $type = TextAttributeType::TYPE;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $configuration = [];
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $storageType;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
     public function __construct()

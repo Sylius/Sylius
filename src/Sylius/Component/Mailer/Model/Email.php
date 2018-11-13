@@ -15,44 +15,28 @@ namespace Sylius\Component\Mailer\Model;
 
 final class Email implements EmailInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     private $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $code;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $enabled = true;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $subject;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $content;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $template;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $senderName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $senderAddress;
 
     /**

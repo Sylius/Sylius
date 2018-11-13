@@ -17,9 +17,7 @@ use Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper;
 
 final class ProductVariantsPricesExtension extends \Twig_Extension
 {
-    /**
-     * @var ProductVariantsPricesHelper
-     */
+    /** @var ProductVariantsPricesHelper */
     private $productVariantsPricesHelper;
 
     public function __construct(ProductVariantsPricesHelper $productVariantsPricesHelper)

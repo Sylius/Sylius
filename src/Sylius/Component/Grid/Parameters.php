@@ -15,9 +15,7 @@ namespace Sylius\Component\Grid;
 
 final class Parameters
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $parameters;
 
     public function __construct(array $parameters = [])

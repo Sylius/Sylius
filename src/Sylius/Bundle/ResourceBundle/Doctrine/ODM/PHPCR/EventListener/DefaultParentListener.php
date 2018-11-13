@@ -23,24 +23,16 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  */
 class DefaultParentListener
 {
-    /**
-     * @var DocumentManagerInterface
-     */
+    /** @var DocumentManagerInterface */
     private $documentManager;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $parentPath;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $autocreate;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $force;
 
     /**

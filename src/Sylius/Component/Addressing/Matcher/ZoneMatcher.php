@@ -21,9 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ZoneMatcher implements ZoneMatcherInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $zoneRepository;
 
     /**

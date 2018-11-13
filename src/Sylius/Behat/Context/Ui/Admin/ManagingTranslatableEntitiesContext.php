@@ -18,9 +18,7 @@ use Sylius\Behat\Page\Admin\Taxon\CreatePage;
 
 final class ManagingTranslatableEntitiesContext implements Context
 {
-    /**
-     * @var CreatePage
-     */
+    /** @var CreatePage */
     private $taxonCreatePage;
 
     public function __construct(CreatePage $taxonCreatePage)

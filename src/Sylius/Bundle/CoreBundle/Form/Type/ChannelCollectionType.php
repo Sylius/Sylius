@@ -21,9 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ChannelCollectionType extends AbstractType
 {
-    /**
-     * @var ChannelRepositoryInterface
-     */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
     public function __construct(ChannelRepositoryInterface $channelRepository)

@@ -23,14 +23,10 @@ use Webmozart\Assert\Assert;
 
 final class AddressContext implements Context
 {
-    /**
-     * @var AddressRepositoryInterface
-     */
+    /** @var AddressRepositoryInterface */
     private $addressRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $customerManager;
 
     public function __construct(AddressRepositoryInterface $addressRepository, ObjectManager $customerManager)

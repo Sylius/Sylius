@@ -15,14 +15,10 @@ namespace Sylius\Component\Resource\Model;
 
 trait TimestampableTrait
 {
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $createdAt;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $updatedAt;
 
     public function getCreatedAt(): ?\DateTimeInterface

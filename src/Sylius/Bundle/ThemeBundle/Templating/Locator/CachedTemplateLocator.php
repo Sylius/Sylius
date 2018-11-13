@@ -20,14 +20,10 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 
 final class CachedTemplateLocator implements TemplateLocatorInterface
 {
-    /**
-     * @var TemplateLocatorInterface
-     */
+    /** @var TemplateLocatorInterface */
     private $decoratedTemplateLocator;
 
-    /**
-     * @var Cache
-     */
+    /** @var Cache */
     private $cache;
 
     public function __construct(TemplateLocatorInterface $decoratedTemplateLocator, Cache $cache)

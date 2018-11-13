@@ -15,14 +15,10 @@ namespace Sylius\Behat;
 
 final class NotificationType
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $value;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $types = [];
 
     /**

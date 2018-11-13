@@ -15,9 +15,7 @@ namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Resource;
 
 final class CompositeTranslatorResourceProvider implements TranslatorResourceProviderInterface
 {
-    /**
-     * @var array|TranslatorResourceProviderInterface[]
-     */
+    /** @var array|TranslatorResourceProviderInterface[] */
     private $resourceProviders;
 
     /**

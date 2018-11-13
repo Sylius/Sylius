@@ -18,14 +18,10 @@ use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
 final class CurrencyConverter implements CurrencyConverterInterface
 {
-    /**
-     * @var ExchangeRateRepositoryInterface
-     */
+    /** @var ExchangeRateRepositoryInterface */
     private $exchangeRateRepository;
 
-    /**
-     * @var array|ExchangeRateInterface[]
-     */
+    /** @var array|ExchangeRateInterface[] */
     private $cache;
 
     public function __construct(ExchangeRateRepositoryInterface $exchangeRateRepository)

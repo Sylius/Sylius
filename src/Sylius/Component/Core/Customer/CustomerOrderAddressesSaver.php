@@ -19,9 +19,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class CustomerOrderAddressesSaver implements OrderAddressesSaverInterface
 {
-    /**
-     * @var CustomerAddressAdderInterface
-     */
+    /** @var CustomerAddressAdderInterface */
     private $addressAdder;
 
     public function __construct(CustomerAddressAdderInterface $addressAdder)

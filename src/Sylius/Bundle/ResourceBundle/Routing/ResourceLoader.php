@@ -25,14 +25,10 @@ use Symfony\Component\Yaml\Yaml;
 
 final class ResourceLoader implements LoaderInterface
 {
-    /**
-     * @var RegistryInterface
-     */
+    /** @var RegistryInterface */
     private $resourceRegistry;
 
-    /**
-     * @var RouteFactoryInterface
-     */
+    /** @var RouteFactoryInterface */
     private $routeFactory;
 
     public function __construct(RegistryInterface $resourceRegistry, RouteFactoryInterface $routeFactory)

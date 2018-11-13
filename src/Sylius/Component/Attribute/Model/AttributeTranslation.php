@@ -17,14 +17,10 @@ use Sylius\Component\Resource\Model\AbstractTranslation;
 
 class AttributeTranslation extends AbstractTranslation implements AttributeTranslationInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
     /**

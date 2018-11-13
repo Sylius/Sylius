@@ -26,29 +26,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ApiAccessTokenExampleFactory extends AbstractExampleFactory
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $accessTokenFactory;
 
-    /**
-     * @var UserRepositoryInterface
-     */
+    /** @var UserRepositoryInterface */
     private $userRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $clientRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
     public function __construct(

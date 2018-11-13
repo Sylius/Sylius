@@ -20,9 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
 {
-    /**
-     * @var ShipmentRepositoryInterface
-     */
+    /** @var ShipmentRepositoryInterface */
     private $shipmentRepository;
 
     public function __construct(ShipmentRepositoryInterface $shipmentRepository)

@@ -22,19 +22,13 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 final class ShippingCategoryContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $shippingCategoryFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $shippingCategoryRepository;
 
     public function __construct(

@@ -21,14 +21,10 @@ use Webmozart\Assert\Assert;
 
 final class ResourceToIdentifierTransformer implements DataTransformerInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $repository;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $identifier;
 
     /**

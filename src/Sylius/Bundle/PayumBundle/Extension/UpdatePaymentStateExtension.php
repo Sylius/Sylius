@@ -27,9 +27,7 @@ use Webmozart\Assert\Assert;
 
 final class UpdatePaymentStateExtension implements ExtensionInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
     public function __construct(FactoryInterface $factory)

@@ -18,9 +18,7 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class ContactEmailManager implements ContactEmailManagerInterface
 {
-    /**
-     * @var SenderInterface
-     */
+    /** @var SenderInterface */
     private $emailSender;
 
     public function __construct(SenderInterface $emailSender)

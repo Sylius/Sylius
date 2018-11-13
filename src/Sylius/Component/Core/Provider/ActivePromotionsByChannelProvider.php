@@ -21,9 +21,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 final class ActivePromotionsByChannelProvider implements PreQualifiedPromotionsProviderInterface
 {
-    /**
-     * @var PromotionRepositoryInterface
-     */
+    /** @var PromotionRepositoryInterface */
     private $promotionRepository;
 
     public function __construct(PromotionRepositoryInterface $promotionRepository)

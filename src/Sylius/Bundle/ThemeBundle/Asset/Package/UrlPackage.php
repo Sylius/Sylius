@@ -25,24 +25,16 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
  */
 class UrlPackage extends BaseUrlPackage
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $baseUrls = [];
 
-    /**
-     * @var UrlPackage
-     */
+    /** @var UrlPackage */
     private $sslPackage;
 
-    /**
-     * @var ThemeContextInterface
-     */
+    /** @var ThemeContextInterface */
     protected $themeContext;
 
-    /**
-     * @var PathResolverInterface
-     */
+    /** @var PathResolverInterface */
     protected $pathResolver;
 
     /**

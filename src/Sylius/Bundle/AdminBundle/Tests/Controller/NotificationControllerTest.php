@@ -28,24 +28,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class NotificationControllerTest extends TestCase
 {
-    /**
-     * @var ProphecyInterface|ClientInterface
-     */
+    /** @var ProphecyInterface|ClientInterface */
     private $client;
 
-    /**
-     * @var ProphecyInterface|MessageFactory
-     */
+    /** @var ProphecyInterface|MessageFactory */
     private $messageFactory;
 
-    /**
-     * @var NotificationController
-     */
+    /** @var NotificationController */
     private $controller;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private static $hubUri = 'www.doesnotexist.test.com';
 
     /**

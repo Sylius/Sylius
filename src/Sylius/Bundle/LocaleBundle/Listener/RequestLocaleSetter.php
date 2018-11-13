@@ -20,14 +20,10 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 final class RequestLocaleSetter
 {
-    /**
-     * @var LocaleContextInterface
-     */
+    /** @var LocaleContextInterface */
     private $localeContext;
 
-    /**
-     * @var LocaleProviderInterface
-     */
+    /** @var LocaleProviderInterface */
     private $localeProvider;
 
     public function __construct(

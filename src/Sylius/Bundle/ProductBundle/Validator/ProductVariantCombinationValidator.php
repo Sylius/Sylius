@@ -23,9 +23,7 @@ use Webmozart\Assert\Assert;
 
 final class ProductVariantCombinationValidator extends ConstraintValidator
 {
-    /**
-     * @var ProductVariantsParityCheckerInterface
-     */
+    /** @var ProductVariantsParityCheckerInterface */
     private $variantsParityChecker;
 
     public function __construct(ProductVariantsParityCheckerInterface $variantsParityChecker)

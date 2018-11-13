@@ -19,9 +19,7 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class InventoryHelper extends Helper
 {
-    /**
-     * @var AvailabilityCheckerInterface
-     */
+    /** @var AvailabilityCheckerInterface */
     private $checker;
 
     public function __construct(AvailabilityCheckerInterface $checker)

@@ -18,14 +18,10 @@ use Symfony\Component\Config\Definition\Processor;
 
 final class SymfonyConfigurationProcessor implements ConfigurationProcessorInterface
 {
-    /**
-     * @var ConfigurationInterface
-     */
+    /** @var ConfigurationInterface */
     private $configuration;
 
-    /**
-     * @var Processor
-     */
+    /** @var Processor */
     private $processor;
 
     public function __construct(ConfigurationInterface $configuration, Processor $processor)

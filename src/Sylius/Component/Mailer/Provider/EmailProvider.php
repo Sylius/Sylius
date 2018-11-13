@@ -19,14 +19,10 @@ use Webmozart\Assert\Assert;
 
 final class EmailProvider implements EmailProviderInterface
 {
-    /**
-     * @var EmailFactoryInterface
-     */
+    /** @var EmailFactoryInterface */
     private $emailFactory;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $configuration;
 
     public function __construct(

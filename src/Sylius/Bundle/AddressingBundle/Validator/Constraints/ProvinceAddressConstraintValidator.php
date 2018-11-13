@@ -23,14 +23,10 @@ use Webmozart\Assert\Assert;
 
 class ProvinceAddressConstraintValidator extends ConstraintValidator
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $countryRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $provinceRepository;
 
     public function __construct(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository)

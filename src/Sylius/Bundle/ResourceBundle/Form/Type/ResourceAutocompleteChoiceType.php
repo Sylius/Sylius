@@ -27,9 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ResourceAutocompleteChoiceType extends AbstractType
 {
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     protected $resourceRepositoryRegistry;
 
     public function __construct(ServiceRegistryInterface $resourceRepositoryRegistry)

@@ -15,14 +15,10 @@ namespace Sylius\Component\Order\Model;
 
 class OrderSequence implements OrderSequenceInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $index = 0;
 
     /**

@@ -23,29 +23,19 @@ use Webmozart\Assert\Assert;
 
 final class InstallerContext implements Context
 {
-    /**
-     * @var KernelInterface
-     */
+    /** @var KernelInterface */
     private $kernel;
 
-    /**
-     * @var Application
-     */
+    /** @var Application */
     private $application;
 
-    /**
-     * @var CommandTester
-     */
+    /** @var CommandTester */
     private $tester;
 
-    /**
-     * @var SetupCommand
-     */
+    /** @var SetupCommand */
     private $command;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $inputChoices = [
         'currency' => 'USD',
         'e-mail' => 'test@email.com',

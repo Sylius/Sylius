@@ -17,9 +17,7 @@ use Webmozart\Assert\Assert;
 
 final class CustomerStatistics
 {
-    /**
-     * @var array|PerChannelCustomerStatistics[]
-     */
+    /** @var array|PerChannelCustomerStatistics[] */
     private $perChannelsStatistics;
 
     /**

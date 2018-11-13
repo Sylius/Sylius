@@ -21,9 +21,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    /**
-     * @var TableAccessorInterface
-     */
+    /** @var TableAccessorInterface */
     private $tableAccessor;
 
     public function __construct(

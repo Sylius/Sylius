@@ -20,9 +20,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 final class PHPCRPurgerListener extends AbstractListener implements BeforeSuiteListenerInterface
 {
-    /**
-     * @var ManagerRegistry
-     */
+    /** @var ManagerRegistry */
     private $managerRegistry;
 
     public function __construct(ManagerRegistry $managerRegistry)

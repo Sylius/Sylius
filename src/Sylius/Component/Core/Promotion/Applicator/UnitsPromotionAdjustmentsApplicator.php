@@ -25,14 +25,10 @@ use Webmozart\Assert\Assert;
 
 final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsApplicatorInterface
 {
-    /**
-     * @var AdjustmentFactoryInterface
-     */
+    /** @var AdjustmentFactoryInterface */
     private $adjustmentFactory;
 
-    /**
-     * @var IntegerDistributorInterface
-     */
+    /** @var IntegerDistributorInterface */
     private $distributor;
 
     public function __construct(

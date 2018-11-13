@@ -22,14 +22,10 @@ final class AccountMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.shop.account';
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
     public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)

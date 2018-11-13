@@ -19,9 +19,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 
 final class PromotionApplicator implements PromotionApplicatorInterface
 {
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $registry;
 
     public function __construct(ServiceRegistryInterface $registry)

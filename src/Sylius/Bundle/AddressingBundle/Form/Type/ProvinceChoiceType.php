@@ -22,9 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProvinceChoiceType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $provinceRepository;
 
     public function __construct(RepositoryInterface $provinceRepository)

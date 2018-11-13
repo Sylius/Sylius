@@ -15,39 +15,25 @@ namespace Sylius\Bundle\ThemeBundle\Model;
 
 class Theme implements ThemeInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $path;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $title;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $description;
 
-    /**
-     * @var array|ThemeAuthor[]
-     */
+    /** @var array|ThemeAuthor[] */
     protected $authors = [];
 
-    /**
-     * @var array|ThemeInterface[]
-     */
+    /** @var array|ThemeInterface[] */
     protected $parents = [];
 
-    /**
-     * @var array|ThemeScreenshot[]
-     */
+    /** @var array|ThemeScreenshot[] */
     protected $screenshots = [];
 
     public function __construct(string $name, string $path)

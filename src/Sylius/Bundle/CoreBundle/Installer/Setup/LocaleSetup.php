@@ -22,19 +22,13 @@ use Symfony\Component\Intl\Intl;
 
 final class LocaleSetup implements LocaleSetupInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $localeFactory;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $locale;
 
     public function __construct(RepositoryInterface $localeRepository, FactoryInterface $localeFactory, string $locale)

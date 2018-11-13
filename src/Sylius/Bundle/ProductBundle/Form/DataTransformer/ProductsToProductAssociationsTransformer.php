@@ -25,24 +25,16 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 final class ProductsToProductAssociationsTransformer implements DataTransformerInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productAssociationFactory;
 
-    /**
-     * @var ProductRepositoryInterface
-     */
+    /** @var ProductRepositoryInterface */
     private $productRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productAssociationTypeRepository;
 
-    /**
-     * @var Collection
-     */
+    /** @var Collection */
     private $productAssociations;
 
     public function __construct(

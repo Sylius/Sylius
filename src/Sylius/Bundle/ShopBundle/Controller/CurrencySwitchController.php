@@ -25,24 +25,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class CurrencySwitchController
 {
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
-    /**
-     * @var CurrencyContextInterface
-     */
+    /** @var CurrencyContextInterface */
     private $currencyContext;
 
-    /**
-     * @var CurrencyStorageInterface
-     */
+    /** @var CurrencyStorageInterface */
     private $currencyStorage;
 
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
     public function __construct(

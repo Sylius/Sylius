@@ -15,44 +15,28 @@ namespace Sylius\Component\Grid\Definition;
 
 class Filter
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $type;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $label;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $enabled = true;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $template;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $options = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $formOptions = [];
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     private $criteria;
 
     /**

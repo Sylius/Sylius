@@ -22,9 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShipmentType extends AbstractType
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $dataClass;
 
     public function __construct(string $dataClass)

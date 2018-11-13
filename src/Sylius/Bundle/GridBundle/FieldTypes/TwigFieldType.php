@@ -20,14 +20,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TwigFieldType implements FieldTypeInterface
 {
-    /**
-     * @var DataExtractorInterface
-     */
+    /** @var DataExtractorInterface */
     private $dataExtractor;
 
-    /**
-     * @var \Twig_Environment
-     */
+    /** @var \Twig_Environment */
     private $twig;
 
     public function __construct(DataExtractorInterface $dataExtractor, \Twig_Environment $twig)

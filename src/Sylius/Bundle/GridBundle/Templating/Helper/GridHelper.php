@@ -22,9 +22,7 @@ use Symfony\Component\Templating\Helper\Helper;
 
 class GridHelper extends Helper
 {
-    /**
-     * @var GridRendererInterface
-     */
+    /** @var GridRendererInterface */
     private $gridRenderer;
 
     public function __construct(GridRendererInterface $gridRenderer)

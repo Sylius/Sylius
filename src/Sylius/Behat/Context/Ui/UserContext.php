@@ -23,24 +23,16 @@ use Webmozart\Assert\Assert;
 
 final class UserContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var UserRepositoryInterface
-     */
+    /** @var UserRepositoryInterface */
     private $userRepository;
 
-    /**
-     * @var ShowPageInterface
-     */
+    /** @var ShowPageInterface */
     private $customerShowPage;
 
-    /**
-     * @var HomePageInterface
-     */
+    /** @var HomePageInterface */
     private $homePage;
 
     public function __construct(

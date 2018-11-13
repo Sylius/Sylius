@@ -18,9 +18,7 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class LocaleHelper extends Helper implements LocaleHelperInterface
 {
-    /**
-     * @var LocaleConverterInterface
-     */
+    /** @var LocaleConverterInterface */
     private $localeConverter;
 
     public function __construct(LocaleConverterInterface $localeConverter)

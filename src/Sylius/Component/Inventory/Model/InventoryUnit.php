@@ -15,14 +15,10 @@ namespace Sylius\Component\Inventory\Model;
 
 class InventoryUnit implements InventoryUnitInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var StockableInterface
-     */
+    /** @var StockableInterface */
     protected $stockable;
 
     /**

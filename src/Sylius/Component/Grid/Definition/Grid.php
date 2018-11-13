@@ -17,44 +17,28 @@ use Webmozart\Assert\Assert;
 
 class Grid
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $code;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $driver;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $driverConfiguration;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $sorting = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $limits = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $fields = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $filters = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $actionGroups = [];
 
     private function __construct(string $code, string $driver, array $driverConfiguration)

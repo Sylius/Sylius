@@ -17,14 +17,10 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 final class ResourceLocator implements ResourceLocatorInterface
 {
-    /**
-     * @var ResourceLocatorInterface
-     */
+    /** @var ResourceLocatorInterface */
     private $applicationResourceLocator;
 
-    /**
-     * @var ResourceLocatorInterface
-     */
+    /** @var ResourceLocatorInterface */
     private $bundleResourceLocator;
 
     public function __construct(

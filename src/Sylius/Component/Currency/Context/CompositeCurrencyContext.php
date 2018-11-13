@@ -17,9 +17,7 @@ use Zend\Stdlib\PriorityQueue;
 
 final class CompositeCurrencyContext implements CurrencyContextInterface
 {
-    /**
-     * @var PriorityQueue|CurrencyContextInterface[]
-     */
+    /** @var PriorityQueue|CurrencyContextInterface[] */
     private $currencyContexts;
 
     public function __construct()

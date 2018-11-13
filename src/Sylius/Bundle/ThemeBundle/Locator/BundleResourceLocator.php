@@ -19,14 +19,10 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 final class BundleResourceLocator implements ResourceLocatorInterface
 {
-    /**
-     * @var Filesystem
-     */
+    /** @var Filesystem */
     private $filesystem;
 
-    /**
-     * @var KernelInterface
-     */
+    /** @var KernelInterface */
     private $kernel;
 
     public function __construct(Filesystem $filesystem, KernelInterface $kernel)

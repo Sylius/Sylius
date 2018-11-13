@@ -25,19 +25,13 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
 {
     public const TYPE = 'unit_percentage_discount';
 
-    /**
-     * @var FilterInterface
-     */
+    /** @var FilterInterface */
     private $priceRangeFilter;
 
-    /**
-     * @var FilterInterface
-     */
+    /** @var FilterInterface */
     private $taxonFilter;
 
-    /**
-     * @var FilterInterface
-     */
+    /** @var FilterInterface */
     private $productFilter;
 
     public function __construct(

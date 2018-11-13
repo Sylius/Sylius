@@ -25,29 +25,19 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 final class SecurityController
 {
-    /**
-     * @var AuthenticationUtils
-     */
+    /** @var AuthenticationUtils */
     private $authenticationUtils;
 
-    /**
-     * @var FormFactoryInterface
-     */
+    /** @var FormFactoryInterface */
     private $formFactory;
 
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
-    /**
-     * @var AuthorizationCheckerInterface
-     */
+    /** @var AuthorizationCheckerInterface */
     private $authorizationChecker;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
     public function __construct(

@@ -18,14 +18,10 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 
 final class AddToCartCommand implements AddToCartCommandInterface
 {
-    /**
-     * @var OrderInterface
-     */
+    /** @var OrderInterface */
     private $cart;
 
-    /**
-     * @var OrderItemInterface
-     */
+    /** @var OrderItemInterface */
     private $cartItem;
 
     public function __construct(OrderInterface $cart, OrderItemInterface $cartItem)

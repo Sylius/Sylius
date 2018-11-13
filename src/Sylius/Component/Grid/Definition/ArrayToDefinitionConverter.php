@@ -20,9 +20,7 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
 {
     public const EVENT_NAME = 'sylius.grid.%s';
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
     public function __construct(EventDispatcherInterface $eventDispatcher)

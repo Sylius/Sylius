@@ -19,14 +19,10 @@ use Symfony\Component\EventDispatcher\Event;
 
 class MenuBuilderEvent extends Event
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @var ItemInterface
-     */
+    /** @var ItemInterface */
     private $menu;
 
     public function __construct(FactoryInterface $factory, ItemInterface $menu)

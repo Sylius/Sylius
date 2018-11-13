@@ -23,29 +23,19 @@ class ResourceControllerEvent extends GenericEvent
     public const TYPE_INFO = 'info';
     public const TYPE_SUCCESS = 'success';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $messageType = '';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $message = '';
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $messageParameters = [];
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $errorCode = 500;
 
-    /**
-     * @var Response
-     */
+    /** @var Response */
     private $response;
 
     public function stop(string $message, string $type = self::TYPE_ERROR, array $parameters = [], int $errorCode = 500)

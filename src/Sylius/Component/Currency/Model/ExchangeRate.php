@@ -19,24 +19,16 @@ class ExchangeRate implements ExchangeRateInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var float|null
-     */
+    /** @var float|null */
     protected $ratio;
 
-    /**
-     * @var CurrencyInterface|null
-     */
+    /** @var CurrencyInterface|null */
     protected $sourceCurrency;
 
-    /**
-     * @var CurrencyInterface|null
-     */
+    /** @var CurrencyInterface|null */
     protected $targetCurrency;
 
     public function __construct()

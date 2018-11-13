@@ -23,19 +23,13 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 final class FlashHelper implements FlashHelperInterface
 {
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
-    /**
-     * @var TranslatorInterface
-     */
+    /** @var TranslatorInterface */
     private $translator;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $defaultLocale;
 
     public function __construct(SessionInterface $session, TranslatorInterface $translator, string $defaultLocale)

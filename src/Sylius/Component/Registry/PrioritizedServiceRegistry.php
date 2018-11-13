@@ -18,9 +18,7 @@ use Zend\Stdlib\PriorityQueue;
 
 final class PrioritizedServiceRegistry implements PrioritizedServiceRegistryInterface
 {
-    /**
-     * @var PriorityQueue
-     */
+    /** @var PriorityQueue */
     private $services;
 
     /**

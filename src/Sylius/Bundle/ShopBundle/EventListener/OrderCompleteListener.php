@@ -20,9 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class OrderCompleteListener
 {
-    /**
-     * @var OrderEmailManagerInterface
-     */
+    /** @var OrderEmailManagerInterface */
     private $orderEmailManager;
 
     public function __construct(OrderEmailManagerInterface $orderEmailManager)

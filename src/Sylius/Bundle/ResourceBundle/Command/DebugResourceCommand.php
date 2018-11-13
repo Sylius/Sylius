@@ -23,9 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class DebugResourceCommand extends Command
 {
-    /**
-     * @var RegistryInterface
-     */
+    /** @var RegistryInterface */
     private $registry;
 
     public function __construct(RegistryInterface $registry)

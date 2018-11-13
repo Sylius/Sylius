@@ -18,9 +18,7 @@ use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerIn
 
 final class TestThemeContext implements Context
 {
-    /**
-     * @var TestThemeConfigurationManagerInterface
-     */
+    /** @var TestThemeConfigurationManagerInterface */
     private $testThemeConfigurationManager;
 
     public function __construct(TestThemeConfigurationManagerInterface $testThemeConfigurationManager)

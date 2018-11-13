@@ -15,19 +15,13 @@ namespace Sylius\Bundle\ThemeBundle\Model;
 
 final class ThemeScreenshot
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $path;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $title;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $description;
 
     public function __construct(string $path)

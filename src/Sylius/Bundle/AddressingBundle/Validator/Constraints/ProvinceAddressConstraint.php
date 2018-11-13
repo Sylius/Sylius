@@ -20,9 +20,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class ProvinceAddressConstraint extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'sylius.address.province.valid';
 
     /**

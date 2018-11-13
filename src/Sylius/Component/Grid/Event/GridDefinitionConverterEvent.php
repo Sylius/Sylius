@@ -18,9 +18,7 @@ use Symfony\Component\EventDispatcher\Event;
 
 final class GridDefinitionConverterEvent extends Event
 {
-    /**
-     * @var Grid
-     */
+    /** @var Grid */
     private $grid;
 
     public function __construct(Grid $grid)

@@ -17,14 +17,10 @@ use Sylius\Bundle\CoreBundle\Application\Kernel;
 
 final class NotificationWidgetExtension extends \Twig_Extension
 {
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $areNotificationsEnabled;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $checkFrequency;
 
     public function __construct(bool $areNotificationsEnabled, int $checkFrequency)
