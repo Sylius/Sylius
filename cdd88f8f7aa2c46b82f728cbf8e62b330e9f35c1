@@ -1,0 +1,54 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-10-30T11:52:56Z
+
+Can we point it to 1.2?
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-10-30T13:04:31Z
+
+> Can we point it to 1.2?
+
+We can, but @pamil will need to fix conficts cause this extension was added to sylius on 1.3 branch.
+Ok with that?
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-10-31T15:10:44Z
+
+@lchrusciel I rebased this pull request from 1.2 branch. I now need this [pull request](https://github.com/FriendsOfBehat/PageObjectExtension/pull/5t) to be merged on the friends of behat extension.
+
+---------------------------------------------------------------------------
+
+by pamil at 2018-11-12T14:37:42Z
+
+PageObjectExtension v0.2.1 has been released, let's see if the build passes now.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-11-12T14:53:37Z
+
+@pamil I think you have to clear cache of this build no ?
+
+> Installing friends-of-behat/page-object-extension (0.2): Loading from cache
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-11-13T10:02:34Z
+
+@pamil @lchrusciel
+The Symfony 3.4 build is now ok but not on symfony 4.1 build, could you clear travis cache for [this build](https://travis-ci.org/Sylius/Sylius/jobs/453995838), please?
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-11-13T10:42:38Z
+
+@pamil @lchrusciel
+Victory!! thanks a lot ;)
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-11-13T11:01:45Z
+
+Thanks, Loïc! :1st_place_medal:
