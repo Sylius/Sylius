@@ -27,39 +27,25 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TwigGridRenderer implements GridRendererInterface
 {
-    /**
-     * @var \Twig_Environment
-     */
+    /** @var \Twig_Environment */
     private $twig;
 
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $fieldsRegistry;
 
-    /**
-     * @var FormFactoryInterface
-     */
+    /** @var FormFactoryInterface */
     private $formFactory;
 
-    /**
-     * @var FormTypeRegistryInterface
-     */
+    /** @var FormTypeRegistryInterface */
     private $formTypeRegistry;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $defaultTemplate;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $actionTemplates;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $filterTemplates;
 
     public function __construct(

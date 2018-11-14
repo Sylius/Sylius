@@ -39,34 +39,22 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class PayumController
 {
-    /**
-     * @var Payum
-     */
+    /** @var Payum */
     private $payum;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @var MetadataInterface
-     */
+    /** @var MetadataInterface */
     private $orderMetadata;
 
-    /**
-     * @var RequestConfigurationFactoryInterface
-     */
+    /** @var RequestConfigurationFactoryInterface */
     private $requestConfigurationFactory;
 
-    /**
-     * @var ViewHandlerInterface
-     */
+    /** @var ViewHandlerInterface */
     private $viewHandler;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
     /** @var GetStatusFactoryInterface */

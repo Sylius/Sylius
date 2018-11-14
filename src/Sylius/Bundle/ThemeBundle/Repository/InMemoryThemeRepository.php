@@ -18,19 +18,13 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 final class InMemoryThemeRepository implements ThemeRepositoryInterface
 {
-    /**
-     * @var ThemeInterface[]
-     */
+    /** @var ThemeInterface[] */
     private $themes = [];
 
-    /**
-     * @var ThemeLoaderInterface
-     */
+    /** @var ThemeLoaderInterface */
     private $themeLoader;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $themesLoaded = false;
 
     public function __construct(ThemeLoaderInterface $themeLoader)

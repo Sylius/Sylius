@@ -21,69 +21,43 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 class ProductVariant extends BaseVariant implements ProductVariantInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $version = 1;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $onHold = 0;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $onHand = 0;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $tracked = false;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     protected $weight;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     protected $width;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     protected $height;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     protected $depth;
 
-    /**
-     * @var TaxCategoryInterface
-     */
+    /** @var TaxCategoryInterface */
     protected $taxCategory;
 
-    /**
-     * @var ShippingCategoryInterface
-     */
+    /** @var ShippingCategoryInterface */
     protected $shippingCategory;
 
-    /**
-     * @var Collection
-     */
+    /** @var Collection */
     protected $channelPricings;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $shippingRequired = true;
 
-    /**
-     * @var Collection|ProductImageInterface[]
-     */
+    /** @var Collection|ProductImageInterface[] */
     protected $images;
 
     public function __construct()

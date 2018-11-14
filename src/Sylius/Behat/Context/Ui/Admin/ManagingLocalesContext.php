@@ -20,14 +20,10 @@ use Webmozart\Assert\Assert;
 
 final class ManagingLocalesContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
     public function __construct(CreatePageInterface $createPage, IndexPageInterface $indexPage)

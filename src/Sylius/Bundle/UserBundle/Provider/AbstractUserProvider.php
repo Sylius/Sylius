@@ -23,19 +23,13 @@ use Webmozart\Assert\Assert;
 
 abstract class AbstractUserProvider implements UserProviderInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $supportedUserClass = UserInterface::class;
 
-    /**
-     * @var UserRepositoryInterface
-     */
+    /** @var UserRepositoryInterface */
     protected $userRepository;
 
-    /**
-     * @var CanonicalizerInterface
-     */
+    /** @var CanonicalizerInterface */
     protected $canonicalizer;
 
     /**

@@ -21,9 +21,7 @@ use Webmozart\Assert\Assert;
 
 final class LockingListener
 {
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $manager;
 
     public function __construct(EntityManagerInterface $manager)

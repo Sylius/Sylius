@@ -15,9 +15,7 @@ namespace Sylius\Bundle\ThemeBundle\Configuration;
 
 final class CompositeConfigurationProvider implements ConfigurationProviderInterface
 {
-    /**
-     * @var ConfigurationProviderInterface[]
-     */
+    /** @var ConfigurationProviderInterface[] */
     private $configurationProviders;
 
     /**

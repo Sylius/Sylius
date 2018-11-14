@@ -20,9 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutThankYouContext implements Context
 {
-    /**
-     * @var ThankYouPageInterface
-     */
+    /** @var ThankYouPageInterface */
     private $thankYouPage;
 
     public function __construct(ThankYouPageInterface $thankYouPage)

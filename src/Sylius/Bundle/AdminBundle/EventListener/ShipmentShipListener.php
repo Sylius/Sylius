@@ -20,9 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class ShipmentShipListener
 {
-    /**
-     * @var ShipmentEmailManagerInterface
-     */
+    /** @var ShipmentEmailManagerInterface */
     private $shipmentEmailManager;
 
     public function __construct(ShipmentEmailManagerInterface $shipmentEmailManager)

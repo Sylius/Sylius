@@ -22,14 +22,10 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 
 final class OrderInventoryOperator implements OrderInventoryOperatorInterface
 {
-    /**
-     * @var OrderInventoryOperatorInterface
-     */
+    /** @var OrderInventoryOperatorInterface */
     private $decoratedOperator;
 
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $productVariantManager;
 
     public function __construct(

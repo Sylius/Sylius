@@ -21,9 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ResourceDeleteHandler implements ResourceDeleteHandlerInterface
 {
-    /**
-     * @var ResourceDeleteHandlerInterface
-     */
+    /** @var ResourceDeleteHandlerInterface */
     private $decoratedHandler;
 
     public function __construct(ResourceDeleteHandlerInterface $decoratedHandler)

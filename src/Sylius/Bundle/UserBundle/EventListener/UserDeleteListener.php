@@ -23,14 +23,10 @@ use Webmozart\Assert\Assert;
 
 final class UserDeleteListener
 {
-    /**
-     * @var TokenStorageInterface
-     */
+    /** @var TokenStorageInterface */
     private $tokenStorage;
 
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
     public function __construct(TokenStorageInterface $tokenStorage, SessionInterface $session)

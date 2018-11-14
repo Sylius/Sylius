@@ -25,29 +25,19 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class ImpersonateUserController
 {
-    /**
-     * @var UserImpersonatorInterface
-     */
+    /** @var UserImpersonatorInterface */
     private $impersonator;
 
-    /**
-     * @var AuthorizationCheckerInterface
-     */
+    /** @var AuthorizationCheckerInterface */
     private $authorizationChecker;
 
-    /**
-     * @var UserProviderInterface
-     */
+    /** @var UserProviderInterface */
     private $userProvider;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $authorizationRole;
 
     public function __construct(

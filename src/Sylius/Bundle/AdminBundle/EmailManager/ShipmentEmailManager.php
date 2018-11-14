@@ -20,9 +20,7 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class ShipmentEmailManager implements ShipmentEmailManagerInterface
 {
-    /**
-     * @var SenderInterface
-     */
+    /** @var SenderInterface */
     private $emailSender;
 
     public function __construct(SenderInterface $emailSender)

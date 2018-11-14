@@ -15,14 +15,10 @@ namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 
 abstract class RequirementCollection implements \IteratorAggregate
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $label;
 
-    /**
-     * @var Requirement[]
-     */
+    /** @var Requirement[] */
     protected $requirements = [];
 
     public function __construct(string $label)

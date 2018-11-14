@@ -19,9 +19,7 @@ use Webmozart\Assert\Assert;
 
 final class CompositePromotionCouponEligibilityChecker implements PromotionCouponEligibilityCheckerInterface
 {
-    /**
-     * @var PromotionCouponEligibilityCheckerInterface[]
-     */
+    /** @var PromotionCouponEligibilityCheckerInterface[] */
     private $promotionCouponEligibilityCheckers;
 
     /**

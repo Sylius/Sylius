@@ -23,19 +23,13 @@ class ProductOptionValue implements ProductOptionValueInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var ProductOptionInterface
-     */
+    /** @var ProductOptionInterface */
     protected $option;
 
     public function __construct()

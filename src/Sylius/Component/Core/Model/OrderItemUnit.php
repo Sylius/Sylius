@@ -23,9 +23,7 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var ShipmentInterface|null
-     */
+    /** @var ShipmentInterface|null */
     protected $shipment;
 
     public function __construct(OrderItemInterface $orderItem)

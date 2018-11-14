@@ -17,9 +17,7 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 final class ProviderBasedLocaleContext implements LocaleContextInterface
 {
-    /**
-     * @var LocaleProviderInterface
-     */
+    /** @var LocaleProviderInterface */
     private $localeProvider;
 
     public function __construct(LocaleProviderInterface $localeProvider)

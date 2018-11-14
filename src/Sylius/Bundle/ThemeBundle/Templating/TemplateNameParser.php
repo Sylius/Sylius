@@ -24,19 +24,13 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
  */
 final class TemplateNameParser implements TemplateNameParserInterface
 {
-    /**
-     * @var TemplateNameParserInterface
-     */
+    /** @var TemplateNameParserInterface */
     private $decoratedParser;
 
-    /**
-     * @var KernelInterface
-     */
+    /** @var KernelInterface */
     private $kernel;
 
-    /**
-     * @var array|TemplateReferenceInterface[]
-     */
+    /** @var array|TemplateReferenceInterface[] */
     private $cache = [];
 
     public function __construct(TemplateNameParserInterface $decoratedParser, KernelInterface $kernel)

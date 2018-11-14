@@ -31,14 +31,10 @@ class Book implements ResourceInterface, TranslatableInterface
         __construct as private initializeTranslationsCollection;
     }
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $author;
 
     /**

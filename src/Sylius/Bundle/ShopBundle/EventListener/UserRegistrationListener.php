@@ -27,34 +27,22 @@ use Webmozart\Assert\Assert;
 
 final class UserRegistrationListener
 {
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $userManager;
 
-    /**
-     * @var GeneratorInterface
-     */
+    /** @var GeneratorInterface */
     private $tokenGenerator;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var UserLoginInterface
-     */
+    /** @var UserLoginInterface */
     private $userLogin;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $firewallContextName;
 
     /**

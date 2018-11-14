@@ -28,19 +28,13 @@ use Webmozart\Assert\Assert;
 
 final class OrderTaxesProcessor implements OrderProcessorInterface
 {
-    /**
-     * @var ZoneProviderInterface
-     */
+    /** @var ZoneProviderInterface */
     private $defaultTaxZoneProvider;
 
-    /**
-     * @var ZoneMatcherInterface
-     */
+    /** @var ZoneMatcherInterface */
     private $zoneMatcher;
 
-    /**
-     * @var PrioritizedServiceRegistryInterface
-     */
+    /** @var PrioritizedServiceRegistryInterface */
     private $strategyRegistry;
 
     public function __construct(

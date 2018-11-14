@@ -20,9 +20,7 @@ use Sylius\Component\Promotion\Model\Promotion as BasePromotion;
 
 class Promotion extends BasePromotion implements PromotionInterface
 {
-    /**
-     * @var ChannelInterface[]|Collection
-     */
+    /** @var ChannelInterface[]|Collection */
     protected $channels;
 
     public function __construct()

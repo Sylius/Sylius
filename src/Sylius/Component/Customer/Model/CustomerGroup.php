@@ -15,19 +15,13 @@ namespace Sylius\Component\Customer\Model;
 
 class CustomerGroup implements CustomerGroupInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
     public function __toString(): string

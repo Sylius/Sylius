@@ -17,9 +17,7 @@ use Sylius\Component\Promotion\Model\PromotionCoupon as BasePromotionCoupon;
 
 class PromotionCoupon extends BasePromotionCoupon implements PromotionCouponInterface
 {
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $perCustomerUsageLimit;
 
     /**

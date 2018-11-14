@@ -22,14 +22,10 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 abstract class AbstractDoctrineSubscriber implements EventSubscriber
 {
-    /**
-     * @var RegistryInterface
-     */
+    /** @var RegistryInterface */
     protected $resourceRegistry;
 
-    /**
-     * @var RuntimeReflectionService
-     */
+    /** @var RuntimeReflectionService */
     private $reflectionService;
 
     public function __construct(RegistryInterface $resourceRegistry)

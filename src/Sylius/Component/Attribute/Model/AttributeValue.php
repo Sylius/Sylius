@@ -17,59 +17,37 @@ use Webmozart\Assert\Assert;
 
 class AttributeValue implements AttributeValueInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var AttributeSubjectInterface
-     */
+    /** @var AttributeSubjectInterface */
     protected $subject;
 
-    /**
-     * @var AttributeInterface
-     */
+    /** @var AttributeInterface */
     protected $attribute;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $localeCode;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $text;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $boolean;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $integer;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     private $float;
 
-    /**
-     * @var \DateTimeInterface
-     */
+    /** @var \DateTimeInterface */
     private $datetime;
 
-    /**
-     * @var \DateTimeInterface
-     */
+    /** @var \DateTimeInterface */
     private $date;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $json;
 
     /**

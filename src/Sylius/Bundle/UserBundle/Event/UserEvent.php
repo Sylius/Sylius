@@ -18,9 +18,7 @@ use Symfony\Component\EventDispatcher\Event;
 
 class UserEvent extends Event
 {
-    /**
-     * @var UserInterface
-     */
+    /** @var UserInterface */
     private $user;
 
     public function __construct(UserInterface $user)

@@ -18,9 +18,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 final class DelegatingCalculator implements CalculatorInterface
 {
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $calculatorsRegistry;
 
     public function __construct(ServiceRegistryInterface $serviceRegistry)

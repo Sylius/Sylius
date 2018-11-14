@@ -15,39 +15,25 @@ namespace Sylius\Component\Grid\Definition;
 
 class Field
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $type;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $path;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $label;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $enabled = true;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $sortable;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $options = [];
 
     /**

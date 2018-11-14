@@ -15,24 +15,16 @@ namespace Sylius\Bundle\ThemeBundle\Model;
 
 final class ThemeAuthor
 {
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $name;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $email;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $homepage;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $role;
 
     public function getName(): ?string

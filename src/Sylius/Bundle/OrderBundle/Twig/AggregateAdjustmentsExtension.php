@@ -17,9 +17,7 @@ use Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper;
 
 final class AggregateAdjustmentsExtension extends \Twig_Extension
 {
-    /**
-     * @var AdjustmentsHelper
-     */
+    /** @var AdjustmentsHelper */
     private $adjustmentsHelper;
 
     public function __construct(AdjustmentsHelper $adjustmentsHelper)

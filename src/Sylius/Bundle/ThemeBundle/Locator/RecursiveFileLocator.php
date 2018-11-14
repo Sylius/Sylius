@@ -18,19 +18,13 @@ use Symfony\Component\Finder\SplFileInfo;
 
 final class RecursiveFileLocator implements FileLocatorInterface
 {
-    /**
-     * @var FinderFactoryInterface
-     */
+    /** @var FinderFactoryInterface */
     private $finderFactory;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $paths;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $depth;
 
     /**

@@ -18,9 +18,7 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 final class DelegatingCalculator implements DelegatingCalculatorInterface
 {
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $registry;
 
     public function __construct(ServiceRegistryInterface $registry)

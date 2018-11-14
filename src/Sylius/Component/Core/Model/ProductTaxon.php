@@ -15,24 +15,16 @@ namespace Sylius\Component\Core\Model;
 
 class ProductTaxon implements ProductTaxonInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var ProductInterface
-     */
+    /** @var ProductInterface */
     protected $product;
 
-    /**
-     * @var TaxonInterface
-     */
+    /** @var TaxonInterface */
     protected $taxon;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
     /**

@@ -23,24 +23,16 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 final class LocaleSwitchController
 {
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
-    /**
-     * @var LocaleContextInterface
-     */
+    /** @var LocaleContextInterface */
     private $localeContext;
 
-    /**
-     * @var LocaleProviderInterface
-     */
+    /** @var LocaleProviderInterface */
     private $localeProvider;
 
-    /**
-     * @var LocaleSwitcherInterface
-     */
+    /** @var LocaleSwitcherInterface */
     private $localeSwitcher;
 
     public function __construct(

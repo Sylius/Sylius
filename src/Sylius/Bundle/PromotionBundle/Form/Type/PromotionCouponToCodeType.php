@@ -24,9 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PromotionCouponToCodeType extends AbstractType implements DataTransformerInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $promotionCouponRepository;
 
     public function __construct(RepositoryInterface $promotionCouponRepository)

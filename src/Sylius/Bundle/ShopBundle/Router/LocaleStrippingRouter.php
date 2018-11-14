@@ -22,14 +22,10 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class LocaleStrippingRouter implements RouterInterface, WarmableInterface
 {
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * @var LocaleContextInterface
-     */
+    /** @var LocaleContextInterface */
     private $localeContext;
 
     public function __construct(RouterInterface $router, LocaleContextInterface $localeContext)

@@ -18,19 +18,13 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 final class FixtureEvent
 {
-    /**
-     * @var SuiteInterface
-     */
+    /** @var SuiteInterface */
     private $suite;
 
-    /**
-     * @var FixtureInterface
-     */
+    /** @var FixtureInterface */
     private $fixture;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $fixtureOptions;
 
     public function __construct(SuiteInterface $suite, FixtureInterface $fixture, array $fixtureOptions)

@@ -26,24 +26,16 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
  */
 final class TemplateFileLocator implements FileLocatorInterface, \Serializable
 {
-    /**
-     * @var FileLocatorInterface
-     */
+    /** @var FileLocatorInterface */
     private $decoratedFileLocator;
 
-    /**
-     * @var ThemeContextInterface
-     */
+    /** @var ThemeContextInterface */
     private $themeContext;
 
-    /**
-     * @var ThemeHierarchyProviderInterface
-     */
+    /** @var ThemeHierarchyProviderInterface */
     private $themeHierarchyProvider;
 
-    /**
-     * @var TemplateLocatorInterface
-     */
+    /** @var TemplateLocatorInterface */
     private $templateLocator;
 
     public function __construct(

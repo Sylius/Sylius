@@ -22,9 +22,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $bundles = [
         'sylius_addressing',
         'sylius_attribute',

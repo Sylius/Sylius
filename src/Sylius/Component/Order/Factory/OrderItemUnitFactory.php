@@ -19,9 +19,7 @@ use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $className;
 
     public function __construct(string $className)

@@ -20,19 +20,13 @@ use Webmozart\Assert\Assert;
 
 final class SuiteFactory implements SuiteFactoryInterface
 {
-    /**
-     * @var FixtureRegistryInterface
-     */
+    /** @var FixtureRegistryInterface */
     private $fixtureRegistry;
 
-    /**
-     * @var ListenerRegistryInterface
-     */
+    /** @var ListenerRegistryInterface */
     private $listenerRegistry;
 
-    /**
-     * @var Processor
-     */
+    /** @var Processor */
     private $optionsProcessor;
 
     public function __construct(

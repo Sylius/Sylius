@@ -20,19 +20,13 @@ use Sylius\Component\Order\OrderTransitions;
 
 final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterface
 {
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @var Factory
-     */
+    /** @var Factory */
     private $stateMachineFactory;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $expirationPeriod;
 
     /**

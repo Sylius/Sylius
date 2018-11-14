@@ -22,14 +22,10 @@ use Sylius\Component\Payment\Model\PaymentMethodTranslation;
 
 class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
 {
-    /**
-     * @var Collection
-     */
+    /** @var Collection */
     protected $channels;
 
-    /**
-     * @var GatewayConfigInterface
-     */
+    /** @var GatewayConfigInterface */
     protected $gatewayConfig;
 
     public function __construct()

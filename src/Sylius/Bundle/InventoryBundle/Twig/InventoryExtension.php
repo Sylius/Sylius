@@ -17,9 +17,7 @@ use Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper;
 
 final class InventoryExtension extends \Twig_Extension
 {
-    /**
-     * @var InventoryHelper
-     */
+    /** @var InventoryHelper */
     private $helper;
 
     public function __construct(InventoryHelper $helper)

@@ -19,9 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class ProductVariantFactory implements ProductVariantFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
     public function __construct(FactoryInterface $factory)

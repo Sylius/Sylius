@@ -19,9 +19,7 @@ use Sylius\Component\Resource\Storage\StorageInterface;
 
 final class LocaleStorage implements LocaleStorageInterface
 {
-    /**
-     * @var StorageInterface
-     */
+    /** @var StorageInterface */
     private $storage;
 
     public function __construct(StorageInterface $storage)

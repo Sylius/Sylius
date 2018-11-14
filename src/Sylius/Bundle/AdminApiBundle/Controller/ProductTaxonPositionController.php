@@ -24,14 +24,10 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 final class ProductTaxonPositionController
 {
-    /**
-     * @var ProductTaxonRepositoryInterface
-     */
+    /** @var ProductTaxonRepositoryInterface */
     private $productTaxonRepository;
 
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $manager;
 
     public function __construct(

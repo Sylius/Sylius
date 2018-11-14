@@ -19,14 +19,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ZoneFactory implements ZoneFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $zoneMemberFactory;
 
     public function __construct(FactoryInterface $factory, FactoryInterface $zoneMemberFactory)

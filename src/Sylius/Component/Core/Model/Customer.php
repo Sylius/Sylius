@@ -21,24 +21,16 @@ use Webmozart\Assert\Assert;
 
 class Customer extends BaseCustomer implements CustomerInterface
 {
-    /**
-     * @var Collection|OrderInterface[]
-     */
+    /** @var Collection|OrderInterface[] */
     protected $orders;
 
-    /**
-     * @var AddressInterface
-     */
+    /** @var AddressInterface */
     protected $defaultAddress;
 
-    /**
-     * @var Collection|AddressInterface[]
-     */
+    /** @var Collection|AddressInterface[] */
     protected $addresses;
 
-    /**
-     * @var ShopUserInterface
-     */
+    /** @var ShopUserInterface */
     protected $user;
 
     public function __construct()

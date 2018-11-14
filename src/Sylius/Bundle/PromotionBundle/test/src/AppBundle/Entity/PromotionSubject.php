@@ -28,14 +28,10 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $id;
 
-    /**
-     * @var Collection|PromotionInterface[]
-     */
+    /** @var Collection|PromotionInterface[] */
     protected $promotions;
 
     /**

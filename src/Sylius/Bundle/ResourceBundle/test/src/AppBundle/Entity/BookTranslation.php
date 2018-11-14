@@ -26,14 +26,10 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class BookTranslation extends AbstractTranslation implements ResourceInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $title;
 
     /**

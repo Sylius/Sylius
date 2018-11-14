@@ -22,19 +22,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class UserImpersonator implements UserImpersonatorInterface
 {
-    /**
-     * @var Session
-     */
+    /** @var Session */
     private $session;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $sessionTokenParameter;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
     public function __construct(Session $session, string $firewallContextName, EventDispatcherInterface $eventDispatcher)

@@ -22,24 +22,16 @@ use Webmozart\Assert\Assert;
 
 final class AdminSecurityContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var SecurityServiceInterface
-     */
+    /** @var SecurityServiceInterface */
     private $securityService;
 
-    /**
-     * @var ExampleFactoryInterface
-     */
+    /** @var ExampleFactoryInterface */
     private $userFactory;
 
-    /**
-     * @var UserRepositoryInterface
-     */
+    /** @var UserRepositoryInterface */
     private $userRepository;
 
     public function __construct(

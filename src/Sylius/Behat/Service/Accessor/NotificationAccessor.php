@@ -18,9 +18,7 @@ use Behat\Mink\Session;
 
 final class NotificationAccessor implements NotificationAccessorInterface
 {
-    /**
-     * @var Session
-     */
+    /** @var Session */
     private $session;
 
     public function __construct(Session $session)

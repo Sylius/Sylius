@@ -17,9 +17,7 @@ use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
 
 class ProvinceNamingExtension extends \Twig_Extension
 {
-    /**
-     * @var ProvinceNamingProviderInterface
-     */
+    /** @var ProvinceNamingProviderInterface */
     private $provinceNamingProvider;
 
     public function __construct(ProvinceNamingProviderInterface $provinceNamingProvider)

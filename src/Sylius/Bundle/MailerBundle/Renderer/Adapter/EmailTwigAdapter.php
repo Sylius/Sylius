@@ -21,9 +21,7 @@ use Sylius\Component\Mailer\SyliusMailerEvents;
 
 class EmailTwigAdapter extends AbstractAdapter
 {
-    /**
-     * @var \Twig_Environment
-     */
+    /** @var \Twig_Environment */
     protected $twig;
 
     public function __construct(\Twig_Environment $twig)

@@ -20,9 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class OrderItemType extends AbstractResourceType
 {
-    /**
-     * @var DataMapperInterface
-     */
+    /** @var DataMapperInterface */
     private $dataMapper;
 
     public function __construct(

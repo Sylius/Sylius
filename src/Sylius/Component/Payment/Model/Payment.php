@@ -20,34 +20,22 @@ class Payment implements PaymentInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var PaymentMethodInterface
-     */
+    /** @var PaymentMethodInterface */
     protected $method;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $currencyCode;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $amount = 0;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $state = PaymentInterface::STATE_CART;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $details = [];
 
     public function __construct()

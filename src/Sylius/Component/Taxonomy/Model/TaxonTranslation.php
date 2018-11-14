@@ -17,24 +17,16 @@ use Sylius\Component\Resource\Model\AbstractTranslation;
 
 class TaxonTranslation extends AbstractTranslation implements TaxonTranslationInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $name;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $slug;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $description;
 
     public function __toString(): string

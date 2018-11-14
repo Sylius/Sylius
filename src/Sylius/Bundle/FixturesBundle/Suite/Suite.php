@@ -19,19 +19,13 @@ use Zend\Stdlib\SplPriorityQueue;
 
 final class Suite implements SuiteInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $name;
 
-    /**
-     * @var SplPriorityQueue
-     */
+    /** @var SplPriorityQueue */
     private $fixtures;
 
-    /**
-     * @var SplPriorityQueue
-     */
+    /** @var SplPriorityQueue */
     private $listeners;
 
     public function __construct(string $name)
