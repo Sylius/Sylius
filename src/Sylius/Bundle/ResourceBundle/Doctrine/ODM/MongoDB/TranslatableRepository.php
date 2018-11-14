@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
 use Sylius\Component\Resource\Repository\TranslatableRepositoryInterface;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', TranslatableRepository::class), E_USER_DEPRECATED);
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', TranslatableRepository::class), \E_USER_DEPRECATED);
 
 /**
  * Doctrine ORM driver translatable entity repository.

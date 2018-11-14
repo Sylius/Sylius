@@ -70,7 +70,7 @@ final class SyliusResourceExtension extends Extension
                 @trigger_error(sprintf(
                     'The "%s" driver is deprecated in Sylius 1.3. Doctrine MongoDB and PHPCR will no longer be supported in Sylius 2.0.',
                     $driver
-                ), E_USER_DEPRECATED);
+                ), \E_USER_DEPRECATED);
             }
 
             $loader->load(sprintf('services/integrations/%s.xml', $driver));
