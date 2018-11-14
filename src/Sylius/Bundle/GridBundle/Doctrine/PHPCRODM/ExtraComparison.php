@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', ExtraComparison::class), E_USER_DEPRECATED);
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', ExtraComparison::class), \E_USER_DEPRECATED);
 
 /**
  * Contains constants values for comparisons which are not supported

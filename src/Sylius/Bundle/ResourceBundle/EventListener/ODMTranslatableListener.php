@@ -21,7 +21,7 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', ODMTranslatableListener::class), E_USER_DEPRECATED);
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', ODMTranslatableListener::class), \E_USER_DEPRECATED);
 
 final class ODMTranslatableListener implements EventSubscriber
 {

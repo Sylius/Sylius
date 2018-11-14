@@ -17,7 +17,7 @@ use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', NameResolverListener::class), E_USER_DEPRECATED);
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', NameResolverListener::class), \E_USER_DEPRECATED);
 
 /**
  * Handles the resolution of the PHPCR node name field.

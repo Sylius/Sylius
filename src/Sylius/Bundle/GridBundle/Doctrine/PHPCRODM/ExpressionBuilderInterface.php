@@ -15,7 +15,7 @@ namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
 use Sylius\Component\Grid\Data\ExpressionBuilderInterface as BaseExpressionBuilderInterface;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', ExpressionBuilderInterface::class), E_USER_DEPRECATED);
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', ExpressionBuilderInterface::class), \E_USER_DEPRECATED);
 
 interface ExpressionBuilderInterface extends BaseExpressionBuilderInterface
 {
