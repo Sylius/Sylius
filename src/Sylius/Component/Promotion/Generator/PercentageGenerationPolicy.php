@@ -18,14 +18,10 @@ use Webmozart\Assert\Assert;
 
 final class PercentageGenerationPolicy implements GenerationPolicyInterface
 {
-    /**
-     * @var PromotionCouponRepositoryInterface
-     */
+    /** @var PromotionCouponRepositoryInterface */
     private $couponRepository;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     private $ratio;
 
     public function __construct(PromotionCouponRepositoryInterface $couponRepository, float $ratio = 0.5)

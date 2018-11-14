@@ -22,19 +22,13 @@ use Symfony\Component\Process\Exception\RuntimeException;
 
 final class CommandExecutor
 {
-    /**
-     * @var InputInterface
-     */
+    /** @var InputInterface */
     private $input;
 
-    /**
-     * @var OutputInterface
-     */
+    /** @var OutputInterface */
     private $output;
 
-    /**
-     * @var Application
-     */
+    /** @var Application */
     private $application;
 
     public function __construct(InputInterface $input, OutputInterface $output, Application $application)

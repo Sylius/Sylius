@@ -23,9 +23,7 @@ use Symfony\Component\Templating\Helper\Helper;
  */
 class BulkActionGridHelper extends Helper
 {
-    /**
-     * @var BulkActionGridRendererInterface
-     */
+    /** @var BulkActionGridRendererInterface */
     private $bulkActionGridRenderer;
 
     public function __construct(BulkActionGridRendererInterface $bulkActionGridRenderer)

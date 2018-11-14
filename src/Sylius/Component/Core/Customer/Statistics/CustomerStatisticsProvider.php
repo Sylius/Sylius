@@ -21,14 +21,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CustomerStatisticsProvider implements CustomerStatisticsProviderInterface
 {
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $channelRepository;
 
     public function __construct(OrderRepositoryInterface $orderRepository, RepositoryInterface $channelRepository)

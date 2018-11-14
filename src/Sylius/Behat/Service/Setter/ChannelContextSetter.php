@@ -17,9 +17,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 
 final class ChannelContextSetter implements ChannelContextSetterInterface
 {
-    /**
-     * @var CookieSetterInterface
-     */
+    /** @var CookieSetterInterface */
     private $cookieSetter;
 
     public function __construct(CookieSetterInterface $cookieSetter)

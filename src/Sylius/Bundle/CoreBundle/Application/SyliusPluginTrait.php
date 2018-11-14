@@ -26,9 +26,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
  */
 trait SyliusPluginTrait
 {
-    /**
-     * @var ExtensionInterface|bool
-     */
+    /** @var ExtensionInterface|bool */
     private $containerExtension;
 
     /**

@@ -17,9 +17,7 @@ use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 
 class Mocker implements MockerInterface
 {
-    /**
-     * @var MockerContainer
-     */
+    /** @var MockerContainer */
     private $container;
 
     /**

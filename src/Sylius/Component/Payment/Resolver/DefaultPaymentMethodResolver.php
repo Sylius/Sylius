@@ -20,9 +20,7 @@ use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 
 final class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterface
 {
-    /**
-     * @var PaymentMethodRepositoryInterface
-     */
+    /** @var PaymentMethodRepositoryInterface */
     private $paymentMethodRepository;
 
     public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)

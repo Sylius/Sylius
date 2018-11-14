@@ -22,19 +22,13 @@ use Webmozart\Assert\Assert;
 
 final class TwigBulkActionGridRenderer implements BulkActionGridRendererInterface
 {
-    /**
-     * @var \Twig_Environment
-     */
+    /** @var \Twig_Environment */
     private $twig;
 
-    /**
-     * @var OptionsParserInterface
-     */
+    /** @var OptionsParserInterface */
     private $optionsParser;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $bulkActionTemplates;
 
     public function __construct(

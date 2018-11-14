@@ -24,24 +24,16 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class DashboardController
 {
-    /**
-     * @var DashboardStatisticsProviderInterface
-     */
+    /** @var DashboardStatisticsProviderInterface */
     private $statisticsProvider;
 
-    /**
-     * @var ChannelRepositoryInterface
-     */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
     public function __construct(

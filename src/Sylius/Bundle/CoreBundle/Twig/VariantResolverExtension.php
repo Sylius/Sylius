@@ -17,9 +17,7 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class VariantResolverExtension extends \Twig_Extension
 {
-    /**
-     * @var Helper
-     */
+    /** @var Helper */
     private $helper;
 
     public function __construct(Helper $helper)

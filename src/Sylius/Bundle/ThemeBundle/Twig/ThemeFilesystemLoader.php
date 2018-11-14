@@ -18,24 +18,16 @@ use Symfony\Component\Templating\TemplateNameParserInterface;
 
 final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface
 {
-    /**
-     * @var \Twig_LoaderInterface
-     */
+    /** @var \Twig_LoaderInterface */
     private $decoratedLoader;
 
-    /**
-     * @var FileLocatorInterface
-     */
+    /** @var FileLocatorInterface */
     private $templateLocator;
 
-    /**
-     * @var TemplateNameParserInterface
-     */
+    /** @var TemplateNameParserInterface */
     private $templateNameParser;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $cache = [];
 
     public function __construct(

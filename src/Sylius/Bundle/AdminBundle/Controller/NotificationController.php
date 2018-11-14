@@ -24,24 +24,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class NotificationController
 {
-    /**
-     * @var ClientInterface
-     */
+    /** @var ClientInterface */
     private $client;
 
-    /**
-     * @var MessageFactory
-     */
+    /** @var MessageFactory */
     private $messageFactory;
 
-    /**
-     * @var UriInterface
-     */
+    /** @var UriInterface */
     private $hubUri;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $environment;
 
     public function __construct(

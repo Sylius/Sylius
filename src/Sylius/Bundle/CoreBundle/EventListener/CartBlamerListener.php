@@ -24,14 +24,10 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 final class CartBlamerListener
 {
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $cartManager;
 
-    /**
-     * @var CartContextInterface
-     */
+    /** @var CartContextInterface */
     private $cartContext;
 
     public function __construct(ObjectManager $cartManager, CartContextInterface $cartContext)

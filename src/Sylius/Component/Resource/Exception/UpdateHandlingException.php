@@ -15,14 +15,10 @@ namespace Sylius\Component\Resource\Exception;
 
 class UpdateHandlingException extends \Exception
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $flash;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $apiResponseCode;
 
     public function __construct(

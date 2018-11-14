@@ -24,9 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TotalOfItemsFromTaxonConfigurationType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $taxonRepository;
 
     public function __construct(RepositoryInterface $taxonRepository)

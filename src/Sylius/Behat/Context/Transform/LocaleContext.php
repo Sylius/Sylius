@@ -18,9 +18,7 @@ use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 
 final class LocaleContext implements Context
 {
-    /**
-     * @var LocaleConverterInterface
-     */
+    /** @var LocaleConverterInterface */
     private $localeNameConverter;
 
     public function __construct(LocaleConverterInterface $localeNameConverter)

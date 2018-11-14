@@ -22,14 +22,10 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 
 final class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
 {
-    /**
-     * @var DataProviderInterface
-     */
+    /** @var DataProviderInterface */
     private $dataProvider;
 
-    /**
-     * @var ParametersParserInterface
-     */
+    /** @var ParametersParserInterface */
     private $parametersParser;
 
     public function __construct(DataProviderInterface $dataProvider, ParametersParserInterface $parametersParser)

@@ -24,24 +24,16 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 
 final class TemplatePathsCacheWarmer implements CacheWarmerInterface
 {
-    /**
-     * @var TemplateFinderInterface
-     */
+    /** @var TemplateFinderInterface */
     private $templateFinder;
 
-    /**
-     * @var TemplateLocatorInterface
-     */
+    /** @var TemplateLocatorInterface */
     private $templateLocator;
 
-    /**
-     * @var ThemeRepositoryInterface
-     */
+    /** @var ThemeRepositoryInterface */
     private $themeRepository;
 
-    /**
-     * @var Cache
-     */
+    /** @var Cache */
     private $cache;
 
     public function __construct(

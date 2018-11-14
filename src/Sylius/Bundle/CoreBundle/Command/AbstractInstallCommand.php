@@ -36,9 +36,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     /** @deprecated */
     public const WEB_MEDIA_IMAGE_DIRECTORY = 'web/media/image/';
 
-    /**
-     * @var CommandExecutor
-     */
+    /** @var CommandExecutor */
     protected $commandExecutor;
 
     /**

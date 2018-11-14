@@ -19,9 +19,7 @@ use Webmozart\Assert\Assert;
 
 final class CouponContext implements Context
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $couponRepository;
 
     public function __construct(

@@ -20,9 +20,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 final class ChannelDeletionListener
 {
-    /**
-     * @var ChannelRepository
-     */
+    /** @var ChannelRepository */
     private $channelRepository;
 
     public function __construct(ChannelRepository $repository)

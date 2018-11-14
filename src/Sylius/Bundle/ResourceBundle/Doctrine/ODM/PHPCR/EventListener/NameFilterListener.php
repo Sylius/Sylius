@@ -27,14 +27,10 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  */
 class NameFilterListener
 {
-    /**
-     * @var DocumentManagerInterface
-     */
+    /** @var DocumentManagerInterface */
     private $documentManager;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $replacementCharacter;
 
     public function __construct(

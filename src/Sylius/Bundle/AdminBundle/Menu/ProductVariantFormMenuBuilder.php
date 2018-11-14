@@ -23,14 +23,10 @@ final class ProductVariantFormMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.product_variant.form';
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
     public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)

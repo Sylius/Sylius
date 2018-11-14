@@ -17,19 +17,13 @@ use Sylius\Component\Resource\Model\AbstractTranslation;
 
 class ShippingMethodTranslation extends AbstractTranslation implements ShippingMethodTranslationInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $description;
 
     public function __toString(): string

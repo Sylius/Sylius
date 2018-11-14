@@ -26,9 +26,7 @@ use Webmozart\Assert\Assert;
 
 class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
 {
-    /**
-     * @var ShippingMethodRepositoryInterface
-     */
+    /** @var ShippingMethodRepositoryInterface */
     private $shippingMethodRepository;
 
     public function __construct(ShippingMethodRepositoryInterface $shippingMethodRepository)

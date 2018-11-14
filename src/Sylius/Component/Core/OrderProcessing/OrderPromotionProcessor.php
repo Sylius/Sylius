@@ -21,9 +21,7 @@ use Webmozart\Assert\Assert;
 
 final class OrderPromotionProcessor implements OrderProcessorInterface
 {
-    /**
-     * @var PromotionProcessorInterface
-     */
+    /** @var PromotionProcessorInterface */
     private $promotionProcessor;
 
     public function __construct(PromotionProcessorInterface $promotionProcessor)

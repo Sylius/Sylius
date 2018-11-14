@@ -17,9 +17,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 abstract class AbstractAdapter implements AdapterInterface
 {
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     protected $dispatcher;
 
     public function setEventDispatcher(EventDispatcherInterface $dispatcher): void

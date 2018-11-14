@@ -21,14 +21,10 @@ use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterf
 
 final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocaleAssignerInterface
 {
-    /**
-     * @var LocaleContextInterface
-     */
+    /** @var LocaleContextInterface */
     private $localeContext;
 
-    /**
-     * @var TranslationLocaleProviderInterface
-     */
+    /** @var TranslationLocaleProviderInterface */
     private $translationLocaleProvider;
 
     public function __construct(

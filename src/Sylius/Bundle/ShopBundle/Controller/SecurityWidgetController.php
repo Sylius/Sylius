@@ -18,9 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class SecurityWidgetController
 {
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
     public function __construct(EngineInterface $templatingEngine)

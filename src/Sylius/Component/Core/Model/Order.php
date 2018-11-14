@@ -29,79 +29,49 @@ use Webmozart\Assert\Assert;
 
 class Order extends BaseOrder implements OrderInterface
 {
-    /**
-     * @var CustomerInterface
-     */
+    /** @var CustomerInterface */
     protected $customer;
 
-    /**
-     * @var ChannelInterface
-     */
+    /** @var ChannelInterface */
     protected $channel;
 
-    /**
-     * @var AddressInterface
-     */
+    /** @var AddressInterface */
     protected $shippingAddress;
 
-    /**
-     * @var AddressInterface
-     */
+    /** @var AddressInterface */
     protected $billingAddress;
 
-    /**
-     * @var Collection|BasePaymentInterface[]
-     */
+    /** @var Collection|BasePaymentInterface[] */
     protected $payments;
 
-    /**
-     * @var Collection|ShipmentInterface[]
-     */
+    /** @var Collection|ShipmentInterface[] */
     protected $shipments;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $currencyCode;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $localeCode;
 
-    /**
-     * @var BaseCouponInterface
-     */
+    /** @var BaseCouponInterface */
     protected $promotionCoupon;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $checkoutState = OrderCheckoutStates::STATE_CART;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $paymentState = OrderPaymentStates::STATE_CART;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $shippingState = OrderShippingStates::STATE_CART;
 
-    /**
-     * @var Collection|BasePromotionInterface[]
-     */
+    /** @var Collection|BasePromotionInterface[] */
     protected $promotions;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $tokenValue;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $customerIp;
 
     public function __construct()

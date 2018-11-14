@@ -21,14 +21,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CartItemFactory implements CartItemFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $decoratedFactory;
 
-    /**
-     * @var ProductVariantResolverInterface
-     */
+    /** @var ProductVariantResolverInterface */
     private $variantResolver;
 
     public function __construct(FactoryInterface $decoratedFactory, ProductVariantResolverInterface $variantResolver)

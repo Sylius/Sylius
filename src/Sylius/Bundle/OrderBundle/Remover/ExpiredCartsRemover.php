@@ -22,24 +22,16 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
 {
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $orderManager;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $expirationPeriod;
 
     public function __construct(

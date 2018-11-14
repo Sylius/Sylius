@@ -20,24 +20,16 @@ use Symfony\Component\DependencyInjection\Reference;
 
 abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $serviceId;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $compositeId;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $tagName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $methodName;
 
     public function __construct(string $serviceId, string $compositeId, string $tagName, string $methodName)

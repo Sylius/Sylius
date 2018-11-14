@@ -17,9 +17,7 @@ use Sylius\Component\Product\Model\ProductTranslation as BaseProductTranslation;
 
 class ProductTranslation extends BaseProductTranslation implements ProductTranslationInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $shortDescription;
 
     /**

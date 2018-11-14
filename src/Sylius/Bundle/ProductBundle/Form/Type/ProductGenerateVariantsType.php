@@ -20,9 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductGenerateVariantsType extends AbstractResourceType
 {
-    /**
-     * @var EventSubscriberInterface
-     */
+    /** @var EventSubscriberInterface */
     private $generateProductVariantsSubscriber;
 
     /**

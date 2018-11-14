@@ -25,49 +25,31 @@ class Taxon implements TaxonInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var TaxonInterface|null
-     */
+    /** @var TaxonInterface|null */
     protected $root;
 
-    /**
-     * @var TaxonInterface|null
-     */
+    /** @var TaxonInterface|null */
     protected $parent;
 
-    /**
-     * @var Collection|TaxonInterface[]
-     */
+    /** @var Collection|TaxonInterface[] */
     protected $children;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $left;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $right;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $level;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $position;
 
     public function __construct()

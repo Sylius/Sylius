@@ -29,19 +29,13 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
 {
-    /**
-     * @var ObjectProphecy|ServiceRegistryInterface
-     */
+    /** @var ObjectProphecy|ServiceRegistryInterface */
     private $resourceRepositoryRegistry;
 
-    /**
-     * @var ObjectProphecy|FactoryInterface
-     */
+    /** @var ObjectProphecy|FactoryInterface */
     private $productTaxonFactory;
 
-    /**
-     * @var ObjectProphecy|RepositoryInterface
-     */
+    /** @var ObjectProphecy|RepositoryInterface */
     private $productTaxonRepository;
 
     protected function setUp(): void

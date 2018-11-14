@@ -15,9 +15,7 @@ namespace Sylius\Component\Resource\Model;
 
 trait ToggleableTrait
 {
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $enabled = true;
 
     public function isEnabled(): bool

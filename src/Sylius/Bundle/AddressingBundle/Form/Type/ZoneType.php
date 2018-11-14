@@ -25,9 +25,7 @@ use Symfony\Component\Form\FormEvents;
 
 final class ZoneType extends AbstractResourceType
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $scopeChoices;
 
     /**

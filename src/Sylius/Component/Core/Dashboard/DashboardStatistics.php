@@ -15,19 +15,13 @@ namespace Sylius\Component\Core\Dashboard;
 
 class DashboardStatistics
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $totalSales;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $numberOfNewOrders;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $numberOfNewCustomers;
 
     /**

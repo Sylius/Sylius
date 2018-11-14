@@ -25,19 +25,13 @@ use Sylius\Component\Resource\Model\TranslationInterface;
 
 final class ODMTranslatableListener implements EventSubscriber
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $currentLocale;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $fallbackLocale;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $mappings;
 
     /**

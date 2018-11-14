@@ -19,29 +19,19 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class PaymentSecurityToken implements ResourceInterface, TokenInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $hash;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $details;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $afterUrl;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $targetUrl;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $gatewayName;
 
     public function __construct()

@@ -17,9 +17,7 @@ use Webmozart\Assert\Assert;
 
 final class FixtureRegistry implements FixtureRegistryInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $fixtures = [];
 
     public function addFixture(FixtureInterface $fixture): void

@@ -20,9 +20,7 @@ use Webmozart\Assert\Assert;
 
 class ImageUploader implements ImageUploaderInterface
 {
-    /**
-     * @var Filesystem
-     */
+    /** @var Filesystem */
     protected $filesystem;
 
     public function __construct(Filesystem $filesystem)

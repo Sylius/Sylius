@@ -24,9 +24,7 @@ use Symfony\Component\Intl\Intl;
 
 final class LocaleTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
     public function __construct(RepositoryInterface $localeRepository)

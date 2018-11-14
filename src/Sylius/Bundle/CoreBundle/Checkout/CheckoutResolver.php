@@ -25,24 +25,16 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class CheckoutResolver implements EventSubscriberInterface
 {
-    /**
-     * @var CartContextInterface
-     */
+    /** @var CartContextInterface */
     private $cartContext;
 
-    /**
-     * @var CheckoutStateUrlGeneratorInterface
-     */
+    /** @var CheckoutStateUrlGeneratorInterface */
     private $urlGenerator;
 
-    /**
-     * @var RequestMatcherInterface
-     */
+    /** @var RequestMatcherInterface */
     private $requestMatcher;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $stateMachineFactory;
 
     public function __construct(

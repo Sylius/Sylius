@@ -22,19 +22,13 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 final class StorageBasedLocaleContext implements LocaleContextInterface
 {
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var LocaleStorageInterface
-     */
+    /** @var LocaleStorageInterface */
     private $localeStorage;
 
-    /**
-     * @var LocaleProviderInterface
-     */
+    /** @var LocaleProviderInterface */
     private $localeProvider;
 
     public function __construct(

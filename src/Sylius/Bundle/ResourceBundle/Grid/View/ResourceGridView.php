@@ -21,14 +21,10 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 
 class ResourceGridView extends GridView
 {
-    /**
-     * @var MetadataInterface
-     */
+    /** @var MetadataInterface */
     private $metadata;
 
-    /**
-     * @var RequestConfiguration
-     */
+    /** @var RequestConfiguration */
     private $requestConfiguration;
 
     public function __construct(

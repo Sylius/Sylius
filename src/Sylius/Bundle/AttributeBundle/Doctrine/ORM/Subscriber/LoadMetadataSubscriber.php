@@ -20,9 +20,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 final class LoadMetadataSubscriber implements EventSubscriber
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $subjects;
 
     public function __construct(array $subjects)

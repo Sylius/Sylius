@@ -22,9 +22,7 @@ class Country implements CountryInterface
 {
     use ToggleableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
     /**
@@ -34,9 +32,7 @@ class Country implements CountryInterface
      */
     protected $code;
 
-    /**
-     * @var Collection|ProvinceInterface[]
-     */
+    /** @var Collection|ProvinceInterface[] */
     protected $provinces;
 
     public function __construct()

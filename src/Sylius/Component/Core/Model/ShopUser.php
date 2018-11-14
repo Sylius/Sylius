@@ -19,9 +19,7 @@ use Sylius\Component\User\Model\User as BaseUser;
 
 class ShopUser extends BaseUser implements ShopUserInterface
 {
-    /**
-     * @var BaseCustomerInterface|null
-     */
+    /** @var BaseCustomerInterface|null */
     protected $customer;
 
     /**

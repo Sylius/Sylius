@@ -29,9 +29,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class OrderType extends AbstractResourceType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
     /**

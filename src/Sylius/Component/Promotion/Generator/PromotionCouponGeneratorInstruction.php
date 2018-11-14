@@ -15,24 +15,16 @@ namespace Sylius\Component\Promotion\Generator;
 
 final class PromotionCouponGeneratorInstruction implements PromotionCouponGeneratorInstructionInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $amount = 5;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $codeLength = 6;
 
-    /**
-     * @var \DateTimeInterface
-     */
+    /** @var \DateTimeInterface */
     private $expiresAt;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $usageLimit;
 
     /**

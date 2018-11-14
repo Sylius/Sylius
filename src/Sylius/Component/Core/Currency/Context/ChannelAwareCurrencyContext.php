@@ -21,14 +21,10 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 
 final class ChannelAwareCurrencyContext implements CurrencyContextInterface
 {
-    /**
-     * @var CurrencyContextInterface
-     */
+    /** @var CurrencyContextInterface */
     private $currencyContext;
 
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
     public function __construct(CurrencyContextInterface $currencyContext, ChannelContextInterface $channelContext)

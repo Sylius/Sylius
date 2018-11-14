@@ -18,9 +18,7 @@ namespace Sylius\Component\Registry;
  */
 class ServiceRegistry implements ServiceRegistryInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $services = [];
 
     /**

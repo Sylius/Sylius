@@ -28,24 +28,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class ShowAvailablePaymentMethodsController
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @var PaymentMethodsResolverInterface
-     */
+    /** @var PaymentMethodsResolverInterface */
     private $paymentMethodResolver;
 
-    /**
-     * @var ViewHandlerInterface
-     */
+    /** @var ViewHandlerInterface */
     private $restViewHandler;
 
     public function __construct(

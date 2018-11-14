@@ -15,14 +15,10 @@ namespace Sylius\Component\Resource\Model;
 
 class AbstractTranslation implements TranslationInterface
 {
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $locale;
 
-    /**
-     * @var TranslatableInterface|null
-     */
+    /** @var TranslatableInterface|null */
     protected $translatable;
 
     /**

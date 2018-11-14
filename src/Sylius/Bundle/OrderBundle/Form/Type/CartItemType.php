@@ -20,9 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class CartItemType extends AbstractResourceType
 {
-    /**
-     * @var DataMapperInterface
-     */
+    /** @var DataMapperInterface */
     private $dataMapper;
 
     public function __construct(

@@ -26,19 +26,13 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
 final class OrderPaymentProvider implements OrderPaymentProviderInterface
 {
-    /**
-     * @var DefaultPaymentMethodResolverInterface
-     */
+    /** @var DefaultPaymentMethodResolverInterface */
     private $defaultPaymentMethodResolver;
 
-    /**
-     * @var PaymentFactoryInterface
-     */
+    /** @var PaymentFactoryInterface */
     private $paymentFactory;
 
-    /**
-     * @var StateMachineFactoryInterface
-     */
+    /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
     public function __construct(

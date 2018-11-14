@@ -22,19 +22,13 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CustomerGroupContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $customerGroupRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $customerGroupFactory;
 
     public function __construct(

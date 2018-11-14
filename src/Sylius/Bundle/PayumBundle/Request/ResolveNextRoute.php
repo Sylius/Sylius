@@ -17,14 +17,10 @@ use Payum\Core\Request\Generic;
 
 class ResolveNextRoute extends Generic implements ResolveNextRouteInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $routeName;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $routeParameters = [];
 
     public function getRouteName(): ?string

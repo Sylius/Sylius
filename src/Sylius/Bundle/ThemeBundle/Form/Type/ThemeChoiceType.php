@@ -22,9 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ThemeChoiceType extends AbstractType
 {
-    /**
-     * @var ThemeRepositoryInterface
-     */
+    /** @var ThemeRepositoryInterface */
     private $themeRepository;
 
     public function __construct(ThemeRepositoryInterface $themeRepository)

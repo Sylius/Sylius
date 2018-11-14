@@ -20,9 +20,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 final class ItemTotalRuleChecker implements RuleCheckerInterface
 {
-    /**
-     * @var RuleCheckerInterface
-     */
+    /** @var RuleCheckerInterface */
     private $itemTotalRuleChecker;
 
     public function __construct(RuleCheckerInterface $itemTotalRuleChecker)

@@ -15,19 +15,13 @@ namespace Sylius\Component\Addressing\Model;
 
 class ZoneMember implements ZoneMemberInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var ZoneInterface|null
-     */
+    /** @var ZoneInterface|null */
     protected $belongsTo;
 
     /**

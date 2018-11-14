@@ -24,19 +24,13 @@ use Symfony\Component\Security\Core\User\UserCheckerInterface;
 
 class UserLogin implements UserLoginInterface
 {
-    /**
-     * @var TokenStorageInterface
-     */
+    /** @var TokenStorageInterface */
     private $tokenStorage;
 
-    /**
-     * @var UserCheckerInterface
-     */
+    /** @var UserCheckerInterface */
     private $userChecker;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
     public function __construct(
