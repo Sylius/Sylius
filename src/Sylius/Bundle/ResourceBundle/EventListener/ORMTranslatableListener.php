@@ -195,6 +195,7 @@ final class ORMTranslatableListener implements EventSubscriber
 
     /**
      * @param object $translatableEntityLocaleAssigner
+     *
      * @return TranslatableEntityLocaleAssignerInterface
      */
     private function processTranslatableEntityLocaleAssigner(object $translatableEntityLocaleAssigner): TranslatableEntityLocaleAssignerInterface
@@ -207,8 +208,7 @@ final class ORMTranslatableListener implements EventSubscriber
             $translatableEntityLocaleAssigner = $translatableEntityLocaleAssigner->get('sylius.translatable_entity_locale_assigner');
         }
 
-        if(!$translatableEntityLocaleAssigner instanceof TranslatableEntityLocaleAssignerInterface)
-        {
+        if (!$translatableEntityLocaleAssigner instanceof TranslatableEntityLocaleAssignerInterface) {
             throw new \InvalidArgumentException(sprintf(
                 '`$translatableEntityLocaleAssigner` was expected to return an instance of "%s" , "%s" found',
                 TranslatableEntityLocaleAssignerInterface::class,
