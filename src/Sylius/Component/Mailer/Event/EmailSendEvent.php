@@ -18,29 +18,19 @@ use Symfony\Component\EventDispatcher\Event;
 
 final class EmailSendEvent extends Event
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $message;
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     protected $recipients;
 
-    /**
-     * @var EmailInterface
-     */
+    /** @var EmailInterface */
     protected $email;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $data;
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     protected $replyTo;
 
     public function __construct($message, EmailInterface $email, array $data, array $recipients = [], array $replyTo = [])

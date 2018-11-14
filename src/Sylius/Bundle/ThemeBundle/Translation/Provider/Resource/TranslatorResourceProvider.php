@@ -18,19 +18,13 @@ use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 
 final class TranslatorResourceProvider implements TranslatorResourceProviderInterface
 {
-    /**
-     * @var TranslationResourceInterface[]
-     */
+    /** @var TranslationResourceInterface[] */
     private $resources = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $resourcesLocales = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $filepaths;
 
     public function __construct(array $filepaths = [])

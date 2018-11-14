@@ -22,14 +22,10 @@ use Webmozart\Assert\Assert;
 
 final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $type;
 
-    /**
-     * @var array|OrderTaxesApplicatorInterface[]
-     */
+    /** @var array|OrderTaxesApplicatorInterface[] */
     private $applicators;
 
     /**

@@ -22,19 +22,13 @@ use Webmozart\Assert\Assert;
 
 final class NonChannelLocaleListener
 {
-    /**
-     * @var LocaleProviderInterface
-     */
+    /** @var LocaleProviderInterface */
     private $channelBasedLocaleProvider;
 
-    /**
-     * @var FirewallMap
-     */
+    /** @var FirewallMap */
     private $firewallMap;
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $firewallNames;
 
     /**

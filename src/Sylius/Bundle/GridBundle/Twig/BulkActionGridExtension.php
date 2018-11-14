@@ -17,9 +17,7 @@ use Sylius\Bundle\GridBundle\Templating\Helper\BulkActionGridHelper;
 
 final class BulkActionGridExtension extends \Twig_Extension
 {
-    /**
-     * @var BulkActionGridHelper
-     */
+    /** @var BulkActionGridHelper */
     private $bulkActionGridHelper;
 
     public function __construct(BulkActionGridHelper $bulkActionGridHelper)

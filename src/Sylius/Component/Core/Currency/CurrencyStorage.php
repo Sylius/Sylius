@@ -19,9 +19,7 @@ use Sylius\Component\Resource\Storage\StorageInterface;
 
 final class CurrencyStorage implements CurrencyStorageInterface
 {
-    /**
-     * @var StorageInterface
-     */
+    /** @var StorageInterface */
     private $storage;
 
     public function __construct(StorageInterface $storage)

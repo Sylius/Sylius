@@ -19,9 +19,7 @@ use Webmozart\Assert\Assert;
 
 final class ProvinceContext implements Context
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $provinceRepository;
 
     public function __construct(RepositoryInterface $provinceRepository)

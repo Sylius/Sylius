@@ -21,14 +21,10 @@ use Webmozart\Assert\Assert;
 
 final class CustomerContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var ShowPageInterface
-     */
+    /** @var ShowPageInterface */
     private $customerShowPage;
 
     public function __construct(

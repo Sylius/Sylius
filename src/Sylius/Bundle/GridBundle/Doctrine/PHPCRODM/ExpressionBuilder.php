@@ -24,14 +24,10 @@ use Doctrine\Common\Collections\ExpressionBuilder as CollectionsExpressionBuilde
  */
 final class ExpressionBuilder implements ExpressionBuilderInterface
 {
-    /**
-     * @var CollectionsExpressionBuilder
-     */
+    /** @var CollectionsExpressionBuilder */
     private $expressionBuilder;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $orderBys = [];
 
     public function __construct(CollectionsExpressionBuilder $expressionBuilder = null)

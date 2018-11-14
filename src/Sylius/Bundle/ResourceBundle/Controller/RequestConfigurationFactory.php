@@ -24,19 +24,13 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
     private const API_VERSION_REGEXP = '/(v|version)=(?P<version>[0-9\.]+)/i';
     private const API_GROUPS_REGEXP = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
 
-    /**
-     * @var ParametersParserInterface
-     */
+    /** @var ParametersParserInterface */
     private $parametersParser;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $configurationClass;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $defaultParameters;
 
     public function __construct(ParametersParserInterface $parametersParser, string $configurationClass, array $defaultParameters = [])

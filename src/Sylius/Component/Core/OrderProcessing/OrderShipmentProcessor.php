@@ -25,19 +25,13 @@ use Webmozart\Assert\Assert;
 
 final class OrderShipmentProcessor implements OrderProcessorInterface
 {
-    /**
-     * @var DefaultShippingMethodResolverInterface
-     */
+    /** @var DefaultShippingMethodResolverInterface */
     private $defaultShippingMethodResolver;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $shipmentFactory;
 
-    /**
-     * @var ShippingMethodsResolverInterface|null
-     */
+    /** @var ShippingMethodsResolverInterface|null */
     private $shippingMethodsResolver;
 
     public function __construct(

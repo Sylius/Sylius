@@ -15,24 +15,16 @@ namespace Sylius\Component\Promotion\Model;
 
 class PromotionRule implements PromotionRuleInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $type;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $configuration = [];
 
-    /**
-     * @var PromotionInterface
-     */
+    /** @var PromotionInterface */
     protected $promotion;
 
     /**

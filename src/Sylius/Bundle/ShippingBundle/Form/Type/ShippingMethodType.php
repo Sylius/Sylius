@@ -31,19 +31,13 @@ use Symfony\Component\Form\FormView;
 
 final class ShippingMethodType extends AbstractResourceType
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $shippingMethodTranslationType;
 
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $calculatorRegistry;
 
-    /**
-     * @var FormTypeRegistryInterface
-     */
+    /** @var FormTypeRegistryInterface */
     private $formTypeRegistry;
 
     public function __construct(

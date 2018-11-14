@@ -19,9 +19,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 
 final class TemplateLocator implements TemplateLocatorInterface
 {
-    /**
-     * @var ResourceLocatorInterface
-     */
+    /** @var ResourceLocatorInterface */
     private $resourceLocator;
 
     public function __construct(ResourceLocatorInterface $resourceLocator)

@@ -21,29 +21,19 @@ class Shipment implements ShipmentInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $state = ShipmentInterface::STATE_CART;
 
-    /**
-     * @var ShippingMethodInterface
-     */
+    /** @var ShippingMethodInterface */
     protected $method;
 
-    /**
-     * @var Collection|ShipmentUnitInterface[]
-     */
+    /** @var Collection|ShipmentUnitInterface[] */
     protected $units;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $tracking;
 
     public function __construct()

@@ -23,29 +23,19 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 final class ChannelContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var ChannelContextSetterInterface
-     */
+    /** @var ChannelContextSetterInterface */
     private $channelContextSetter;
 
-    /**
-     * @var ChannelRepositoryInterface
-     */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $channelCreatePage;
 
-    /**
-     * @var HomePageInterface
-     */
+    /** @var HomePageInterface */
     private $homePage;
 
     public function __construct(

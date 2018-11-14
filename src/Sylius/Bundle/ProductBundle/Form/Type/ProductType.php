@@ -28,19 +28,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductType extends AbstractResourceType
 {
-    /**
-     * @var ProductVariantResolverInterface
-     */
+    /** @var ProductVariantResolverInterface */
     private $variantResolver;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $attributeValueFactory;
 
-    /**
-     * @var TranslationLocaleProviderInterface
-     */
+    /** @var TranslationLocaleProviderInterface */
     private $localeProvider;
 
     /**

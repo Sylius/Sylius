@@ -18,14 +18,10 @@ use Symfony\Component\EventDispatcher\Event;
 
 class EmailRenderEvent extends Event
 {
-    /**
-     * @var RenderedEmail
-     */
+    /** @var RenderedEmail */
     protected $renderedEmail;
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     protected $recipients;
 
     public function __construct(RenderedEmail $renderedEmail, array $recipients = [])

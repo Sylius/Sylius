@@ -20,9 +20,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class PasswordUpdaterListener
 {
-    /**
-     * @var PasswordUpdaterInterface
-     */
+    /** @var PasswordUpdaterInterface */
     private $passwordUpdater;
 
     public function __construct(PasswordUpdaterInterface $passwordUpdater)

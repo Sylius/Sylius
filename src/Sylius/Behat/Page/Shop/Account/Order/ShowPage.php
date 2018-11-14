@@ -20,9 +20,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    /**
-     * @var TableAccessorInterface
-     */
+    /** @var TableAccessorInterface */
     private $tableAccessor;
 
     public function __construct(

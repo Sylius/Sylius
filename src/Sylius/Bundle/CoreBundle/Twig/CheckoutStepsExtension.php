@@ -17,9 +17,7 @@ use Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper;
 
 final class CheckoutStepsExtension extends \Twig_Extension
 {
-    /**
-     * @var CheckoutStepsHelper
-     */
+    /** @var CheckoutStepsHelper */
     private $checkoutStepsHelper;
 
     public function __construct(CheckoutStepsHelper $checkoutStepsHelper)

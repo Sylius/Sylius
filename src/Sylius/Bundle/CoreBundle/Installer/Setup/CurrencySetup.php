@@ -24,14 +24,10 @@ use Symfony\Component\Intl\Intl;
 
 final class CurrencySetup implements CurrencySetupInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $currencyRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $currencyFactory;
 
     public function __construct(RepositoryInterface $currencyRepository, FactoryInterface $currencyFactory)

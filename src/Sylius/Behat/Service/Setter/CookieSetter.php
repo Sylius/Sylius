@@ -20,14 +20,10 @@ use Symfony\Component\BrowserKit\Cookie;
 
 final class CookieSetter implements CookieSetterInterface
 {
-    /**
-     * @var Session
-     */
+    /** @var Session */
     private $minkSession;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $minkParameters;
 
     public function __construct(Session $minkSession, array $minkParameters)

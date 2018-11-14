@@ -18,14 +18,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class LocaleProvider implements LocaleProviderInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $defaultLocaleCode;
 
     public function __construct(RepositoryInterface $localeRepository, string $defaultLocaleCode)

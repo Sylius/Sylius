@@ -15,14 +15,10 @@ namespace Sylius\Component\Mailer\Renderer;
 
 class RenderedEmail
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $subject;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $body;
 
     public function __construct(string $subject, string $body)

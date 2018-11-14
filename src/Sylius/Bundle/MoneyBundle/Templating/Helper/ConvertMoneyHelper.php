@@ -18,9 +18,7 @@ use Symfony\Component\Templating\Helper\Helper;
 
 class ConvertMoneyHelper extends Helper implements ConvertMoneyHelperInterface
 {
-    /**
-     * @var CurrencyConverterInterface
-     */
+    /** @var CurrencyConverterInterface */
     private $currencyConverter;
 
     public function __construct(CurrencyConverterInterface $currencyConverter)

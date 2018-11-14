@@ -15,9 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Twig;
 
 final class ShopExtension extends \Twig_Extension
 {
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $isShopEnabled;
 
     public function __construct(bool $isShopEnabled)

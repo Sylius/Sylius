@@ -22,9 +22,7 @@ use Webmozart\Assert\Assert;
 
 final class GenerateProductVariantsSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var ProductVariantGeneratorInterface
-     */
+    /** @var ProductVariantGeneratorInterface */
     private $generator;
 
     public function __construct(ProductVariantGeneratorInterface $generator)

@@ -21,14 +21,10 @@ use Symfony\Component\Form\DataMapperInterface;
  */
 class OrderItemQuantityDataMapper implements DataMapperInterface
 {
-    /**
-     * @var OrderItemQuantityModifierInterface
-     */
+    /** @var OrderItemQuantityModifierInterface */
     private $orderItemQuantityModifier;
 
-    /**
-     * @var DataMapperInterface
-     */
+    /** @var DataMapperInterface */
     private $propertyPathDataMapper;
 
     public function __construct(

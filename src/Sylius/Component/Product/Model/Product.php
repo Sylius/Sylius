@@ -30,34 +30,22 @@ class Product implements ProductInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var Collection|AttributeValueInterface[]
-     */
+    /** @var Collection|AttributeValueInterface[] */
     protected $attributes;
 
-    /**
-     * @var Collection|ProductVariantInterface[]
-     */
+    /** @var Collection|ProductVariantInterface[] */
     protected $variants;
 
-    /**
-     * @var Collection|ProductOptionInterface[]
-     */
+    /** @var Collection|ProductOptionInterface[] */
     protected $options;
 
-    /**
-     * @var Collection|ProductAssociationInterface[]
-     */
+    /** @var Collection|ProductAssociationInterface[] */
     protected $associations;
 
     public function __construct()

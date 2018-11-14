@@ -18,9 +18,7 @@ use Sonata\BlockBundle\Model\Block;
 
 final class BlockEventListener
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $template;
 
     public function __construct(string $template)

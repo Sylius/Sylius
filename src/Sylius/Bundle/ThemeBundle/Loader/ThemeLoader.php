@@ -24,34 +24,22 @@ use Zend\Hydrator\HydrationInterface;
 
 final class ThemeLoader implements ThemeLoaderInterface
 {
-    /**
-     * @var ConfigurationProviderInterface
-     */
+    /** @var ConfigurationProviderInterface */
     private $configurationProvider;
 
-    /**
-     * @var ThemeFactoryInterface
-     */
+    /** @var ThemeFactoryInterface */
     private $themeFactory;
 
-    /**
-     * @var ThemeAuthorFactoryInterface
-     */
+    /** @var ThemeAuthorFactoryInterface */
     private $themeAuthorFactory;
 
-    /**
-     * @var ThemeScreenshotFactoryInterface
-     */
+    /** @var ThemeScreenshotFactoryInterface */
     private $themeScreenshotFactory;
 
-    /**
-     * @var HydrationInterface
-     */
+    /** @var HydrationInterface */
     private $themeHydrator;
 
-    /**
-     * @var CircularDependencyCheckerInterface
-     */
+    /** @var CircularDependencyCheckerInterface */
     private $circularDependencyChecker;
 
     public function __construct(

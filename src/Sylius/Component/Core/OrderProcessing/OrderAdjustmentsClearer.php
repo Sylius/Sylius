@@ -19,9 +19,7 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 final class OrderAdjustmentsClearer implements OrderProcessorInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $adjustmentsToRemove;
 
     public function __construct(array $adjustmentsToRemove = [])

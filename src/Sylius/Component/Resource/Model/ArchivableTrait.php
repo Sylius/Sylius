@@ -18,9 +18,7 @@ namespace Sylius\Component\Resource\Model;
  */
 trait ArchivableTrait
 {
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $archivedAt;
 
     public function getArchivedAt(): ?\DateTimeInterface

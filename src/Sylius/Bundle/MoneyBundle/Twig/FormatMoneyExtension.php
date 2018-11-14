@@ -17,9 +17,7 @@ use Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface;
 
 final class FormatMoneyExtension extends \Twig_Extension
 {
-    /**
-     * @var FormatMoneyHelperInterface
-     */
+    /** @var FormatMoneyHelperInterface */
     private $helper;
 
     public function __construct(FormatMoneyHelperInterface $helper)

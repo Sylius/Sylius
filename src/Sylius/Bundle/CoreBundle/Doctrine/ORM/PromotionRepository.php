@@ -22,9 +22,7 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class PromotionRepository extends BasePromotionRepository implements PromotionRepositoryInterface
 {
-    /**
-     * @var AssociationHydrator
-     */
+    /** @var AssociationHydrator */
     private $associationHydrator;
 
     /**

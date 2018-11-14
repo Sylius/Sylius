@@ -23,14 +23,10 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 final class DebugResourceCommandTest extends TestCase
 {
-    /**
-     * @var ObjectProphecy|RegistryInterface
-     */
+    /** @var ObjectProphecy|RegistryInterface */
     private $registry;
 
-    /**
-     * @var CommandTester
-     */
+    /** @var CommandTester */
     private $tester;
 
     public function setUp(): void

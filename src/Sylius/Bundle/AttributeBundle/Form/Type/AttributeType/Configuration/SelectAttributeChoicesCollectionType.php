@@ -23,9 +23,7 @@ use Symfony\Component\Form\FormEvents;
 
 class SelectAttributeChoicesCollectionType extends AbstractType
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $defaultLocaleCode;
 
     public function __construct(TranslationLocaleProviderInterface $localeProvider)

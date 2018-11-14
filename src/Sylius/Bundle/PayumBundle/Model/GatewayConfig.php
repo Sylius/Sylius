@@ -18,9 +18,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class GatewayConfig extends BaseGatewayConfig implements ResourceInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $id;
 
     public function getId(): int

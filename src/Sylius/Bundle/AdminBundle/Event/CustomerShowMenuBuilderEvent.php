@@ -20,9 +20,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 
 class CustomerShowMenuBuilderEvent extends MenuBuilderEvent
 {
-    /**
-     * @var CustomerInterface
-     */
+    /** @var CustomerInterface */
     private $customer;
 
     public function __construct(FactoryInterface $factory, ItemInterface $menu, CustomerInterface $customer)

@@ -24,19 +24,13 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    /**
-     * @var ShowPageInterface
-     */
+    /** @var ShowPageInterface */
     private $showPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var ProductReviewIndexPageInterface
-     */
+    /** @var ProductReviewIndexPageInterface */
     private $productReviewsIndexPage;
 
     public function __construct(

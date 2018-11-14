@@ -20,9 +20,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Configuration implements ConfigurationInterface
 {
-    /**
-     * @var ConfigurationSourceFactoryInterface[]
-     */
+    /** @var ConfigurationSourceFactoryInterface[] */
     private $configurationSourceFactories;
 
     /**

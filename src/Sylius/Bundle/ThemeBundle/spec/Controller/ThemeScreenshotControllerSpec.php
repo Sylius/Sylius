@@ -22,9 +22,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class ThemeScreenshotControllerSpec extends ObjectBehavior
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $fixturesPath;
 
     function let(ThemeRepositoryInterface $themeRepository): void

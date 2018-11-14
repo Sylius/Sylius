@@ -22,19 +22,13 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SecurityService implements SecurityServiceInterface
 {
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
-    /**
-     * @var CookieSetterInterface
-     */
+    /** @var CookieSetterInterface */
     private $cookieSetter;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $sessionTokenVariable;
 
     /**

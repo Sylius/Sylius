@@ -23,9 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AttributeChoiceType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     protected $attributeRepository;
 
     public function __construct(RepositoryInterface $attributeRepository)

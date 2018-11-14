@@ -22,19 +22,13 @@ use Doctrine\ORM\PersistentCollection;
  */
 trait TranslatableTrait
 {
-    /**
-     * @var ArrayCollection|PersistentCollection|TranslationInterface[]
-     */
+    /** @var ArrayCollection|PersistentCollection|TranslationInterface[] */
     protected $translations;
 
-    /**
-     * @var array|TranslationInterface[]
-     */
+    /** @var array|TranslationInterface[] */
     protected $translationsCache = [];
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $currentLocale;
 
     /**
@@ -44,9 +38,7 @@ trait TranslatableTrait
      */
     protected $currentTranslation;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $fallbackLocale;
 
     public function __construct()

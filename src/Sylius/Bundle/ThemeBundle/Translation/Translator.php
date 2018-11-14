@@ -23,27 +23,19 @@ use Symfony\Component\Translation\Translator as BaseTranslator;
 
 final class Translator extends BaseTranslator implements WarmableInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $options = [
         'cache_dir' => null,
         'debug' => false,
     ];
 
-    /**
-     * @var TranslatorLoaderProviderInterface
-     */
+    /** @var TranslatorLoaderProviderInterface */
     private $loaderProvider;
 
-    /**
-     * @var TranslatorResourceProviderInterface
-     */
+    /** @var TranslatorResourceProviderInterface */
     private $resourceProvider;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $resourcesLoaded = false;
 
     /**

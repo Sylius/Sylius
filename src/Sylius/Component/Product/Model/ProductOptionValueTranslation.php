@@ -17,14 +17,10 @@ use Sylius\Component\Resource\Model\AbstractTranslation;
 
 class ProductOptionValueTranslation extends AbstractTranslation implements ProductOptionValueTranslationInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $value;
 
     /**

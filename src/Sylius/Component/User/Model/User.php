@@ -22,14 +22,10 @@ class User implements UserInterface
 {
     use TimestampableTrait, ToggleableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $username;
 
     /**
@@ -60,9 +56,7 @@ class User implements UserInterface
      */
     protected $plainPassword;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $lastLogin;
 
     /**
@@ -79,29 +73,19 @@ class User implements UserInterface
      */
     protected $passwordResetToken;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $passwordRequestedAt;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $verifiedAt;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $locked = false;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $expiresAt;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $credentialsExpireAt;
 
     /**
@@ -111,19 +95,13 @@ class User implements UserInterface
      */
     protected $roles = [UserInterface::DEFAULT_ROLE];
 
-    /**
-     * @var Collection|UserOAuth[]
-     */
+    /** @var Collection|UserOAuth[] */
     protected $oauthAccounts;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $email;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $emailCanonical;
 
     public function __construct()

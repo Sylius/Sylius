@@ -33,89 +33,55 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ResourceController extends Controller
 {
-    /**
-     * @var MetadataInterface
-     */
+    /** @var MetadataInterface */
     protected $metadata;
 
-    /**
-     * @var RequestConfigurationFactoryInterface
-     */
+    /** @var RequestConfigurationFactoryInterface */
     protected $requestConfigurationFactory;
 
-    /**
-     * @var ViewHandlerInterface
-     */
+    /** @var ViewHandlerInterface */
     protected $viewHandler;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     protected $repository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     protected $factory;
 
-    /**
-     * @var NewResourceFactoryInterface
-     */
+    /** @var NewResourceFactoryInterface */
     protected $newResourceFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     protected $manager;
 
-    /**
-     * @var SingleResourceProviderInterface
-     */
+    /** @var SingleResourceProviderInterface */
     protected $singleResourceProvider;
 
-    /**
-     * @var ResourcesCollectionProviderInterface
-     */
+    /** @var ResourcesCollectionProviderInterface */
     protected $resourcesCollectionProvider;
 
-    /**
-     * @var ResourceFormFactoryInterface
-     */
+    /** @var ResourceFormFactoryInterface */
     protected $resourceFormFactory;
 
-    /**
-     * @var RedirectHandlerInterface
-     */
+    /** @var RedirectHandlerInterface */
     protected $redirectHandler;
 
-    /**
-     * @var FlashHelperInterface
-     */
+    /** @var FlashHelperInterface */
     protected $flashHelper;
 
-    /**
-     * @var AuthorizationCheckerInterface
-     */
+    /** @var AuthorizationCheckerInterface */
     protected $authorizationChecker;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     protected $eventDispatcher;
 
-    /**
-     * @var StateMachineInterface
-     */
+    /** @var StateMachineInterface */
     protected $stateMachine;
 
-    /**
-     * @var ResourceUpdateHandlerInterface
-     */
+    /** @var ResourceUpdateHandlerInterface */
     protected $resourceUpdateHandler;
 
-    /**
-     * @var ResourceDeleteHandlerInterface
-     */
+    /** @var ResourceDeleteHandlerInterface */
     protected $resourceDeleteHandler;
 
     public function __construct(

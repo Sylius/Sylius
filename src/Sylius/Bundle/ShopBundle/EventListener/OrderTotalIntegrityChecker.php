@@ -23,19 +23,13 @@ use Webmozart\Assert\Assert;
 
 final class OrderTotalIntegrityChecker
 {
-    /**
-     * @var OrderProcessorInterface
-     */
+    /** @var OrderProcessorInterface */
     private $orderProcessors;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $manager;
 
     public function __construct(

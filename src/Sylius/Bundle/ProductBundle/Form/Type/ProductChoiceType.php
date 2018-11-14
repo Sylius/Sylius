@@ -23,9 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductChoiceType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productRepository;
 
     public function __construct(RepositoryInterface $productRepository)

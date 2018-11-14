@@ -22,14 +22,10 @@ use Webmozart\Assert\Assert;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    /**
-     * @var TableAccessorInterface
-     */
+    /** @var TableAccessorInterface */
     private $tableAccessor;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $routeName;
 
     /**

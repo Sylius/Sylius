@@ -18,9 +18,7 @@ use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 
 class Address extends BaseAddress implements AddressInterface
 {
-    /**
-     * @var CustomerInterface|null
-     */
+    /** @var CustomerInterface|null */
     protected $customer;
 
     /**

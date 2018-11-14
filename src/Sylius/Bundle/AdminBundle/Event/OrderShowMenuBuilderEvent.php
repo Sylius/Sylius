@@ -21,14 +21,10 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 class OrderShowMenuBuilderEvent extends MenuBuilderEvent
 {
-    /**
-     * @var OrderInterface
-     */
+    /** @var OrderInterface */
     private $order;
 
-    /**
-     * @var StateMachineInterface
-     */
+    /** @var StateMachineInterface */
     private $stateMachine;
 
     public function __construct(

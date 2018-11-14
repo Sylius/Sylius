@@ -21,9 +21,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class UpdatePage extends SymfonyPage implements UpdatePageInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $routeName;
 
     /**

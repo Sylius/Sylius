@@ -20,9 +20,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CreatePage extends SymfonyPage implements CreatePageInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $routeName;
 
     /**

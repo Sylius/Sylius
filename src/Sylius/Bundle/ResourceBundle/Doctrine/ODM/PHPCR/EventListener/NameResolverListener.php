@@ -27,9 +27,7 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  */
 class NameResolverListener
 {
-    /**
-     * @var DocumentManagerInterface
-     */
+    /** @var DocumentManagerInterface */
     private $documentManager;
 
     public function __construct(

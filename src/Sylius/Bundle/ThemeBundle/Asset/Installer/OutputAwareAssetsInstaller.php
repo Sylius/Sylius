@@ -19,14 +19,10 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 final class OutputAwareAssetsInstaller implements AssetsInstallerInterface, OutputAwareInterface
 {
-    /**
-     * @var AssetsInstallerInterface
-     */
+    /** @var AssetsInstallerInterface */
     private $assetsInstaller;
 
-    /**
-     * @var OutputInterface
-     */
+    /** @var OutputInterface */
     private $output;
 
     public function __construct(AssetsInstallerInterface $assetsInstaller)

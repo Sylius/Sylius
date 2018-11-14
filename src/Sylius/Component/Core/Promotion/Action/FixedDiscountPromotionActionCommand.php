@@ -24,14 +24,10 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
 {
     public const TYPE = 'order_fixed_discount';
 
-    /**
-     * @var ProportionalIntegerDistributorInterface
-     */
+    /** @var ProportionalIntegerDistributorInterface */
     private $proportionalDistributor;
 
-    /**
-     * @var UnitsPromotionAdjustmentsApplicatorInterface
-     */
+    /** @var UnitsPromotionAdjustmentsApplicatorInterface */
     private $unitsPromotionAdjustmentsApplicator;
 
     public function __construct(

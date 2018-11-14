@@ -31,29 +31,19 @@ use Symfony\Component\Intl\Intl;
 
 final class ZoneContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $zoneRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @var ZoneFactoryInterface
-     */
+    /** @var ZoneFactoryInterface */
     private $zoneFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $zoneMemberFactory;
 
     public function __construct(

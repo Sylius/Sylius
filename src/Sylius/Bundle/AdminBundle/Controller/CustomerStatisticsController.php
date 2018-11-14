@@ -23,19 +23,13 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 final class CustomerStatisticsController
 {
-    /**
-     * @var CustomerStatisticsProviderInterface
-     */
+    /** @var CustomerStatisticsProviderInterface */
     private $statisticsProvider;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
     public function __construct(

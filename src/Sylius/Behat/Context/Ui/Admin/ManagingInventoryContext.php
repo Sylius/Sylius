@@ -19,9 +19,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingInventoryContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
     public function __construct(IndexPageInterface $indexPage)

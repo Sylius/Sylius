@@ -22,59 +22,37 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 
 class Channel extends BaseChannel implements ChannelInterface
 {
-    /**
-     * @var CurrencyInterface
-     */
+    /** @var CurrencyInterface */
     protected $baseCurrency;
 
-    /**
-     * @var LocaleInterface
-     */
+    /** @var LocaleInterface */
     protected $defaultLocale;
 
-    /**
-     * @var ZoneInterface
-     */
+    /** @var ZoneInterface */
     protected $defaultTaxZone;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $taxCalculationStrategy;
 
-    /**
-     * @var CurrencyInterface[]|Collection
-     */
+    /** @var CurrencyInterface[]|Collection */
     protected $currencies;
 
-    /**
-     * @var LocaleInterface[]|Collection
-     */
+    /** @var LocaleInterface[]|Collection */
     protected $locales;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $themeName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $contactEmail;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $skippingShippingStepAllowed = false;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $skippingPaymentStepAllowed = false;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $accountVerificationRequired = true;
 
     public function __construct()

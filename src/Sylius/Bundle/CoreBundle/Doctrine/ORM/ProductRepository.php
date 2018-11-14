@@ -25,9 +25,7 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
-    /**
-     * @var AssociationHydrator
-     */
+    /** @var AssociationHydrator */
     private $associationHydrator;
 
     /**

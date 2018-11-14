@@ -26,19 +26,13 @@ use Webmozart\Assert\Assert;
 
 class UniqueReviewerEmailValidator extends ConstraintValidator
 {
-    /**
-     * @var UserRepository
-     */
+    /** @var UserRepository */
     private $userRepository;
 
-    /**
-     * @var TokenStorageInterface
-     */
+    /** @var TokenStorageInterface */
     private $tokenStorage;
 
-    /**
-     * @var AuthorizationCheckerInterface
-     */
+    /** @var AuthorizationCheckerInterface */
     private $authorizationChecker;
 
     public function __construct(

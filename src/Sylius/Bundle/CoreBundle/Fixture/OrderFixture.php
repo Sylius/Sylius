@@ -32,79 +32,49 @@ use Webmozart\Assert\Assert;
 
 class OrderFixture extends AbstractFixture
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $orderFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $orderItemFactory;
 
-    /**
-     * @var OrderItemQuantityModifierInterface
-     */
+    /** @var OrderItemQuantityModifierInterface */
     private $orderItemQuantityModifier;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $orderManager;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $countryRepository;
 
-    /**
-     * @var PaymentMethodRepositoryInterface
-     */
+    /** @var PaymentMethodRepositoryInterface */
     private $paymentMethodRepository;
 
-    /**
-     * @var ShippingMethodRepositoryInterface
-     */
+    /** @var ShippingMethodRepositoryInterface */
     private $shippingMethodRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $addressFactory;
 
-    /**
-     * @var StateMachineFactoryInterface
-     */
+    /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @var OrderShippingMethodSelectionRequirementCheckerInterface
-     */
+    /** @var OrderShippingMethodSelectionRequirementCheckerInterface */
     private $orderShippingMethodSelectionRequirementChecker;
 
-    /**
-     * @var OrderPaymentMethodSelectionRequirementCheckerInterface
-     */
+    /** @var OrderPaymentMethodSelectionRequirementCheckerInterface */
     private $orderPaymentMethodSelectionRequirementChecker;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
     public function __construct(

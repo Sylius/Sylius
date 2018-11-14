@@ -26,14 +26,10 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class ResourceDeleteSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var UrlGeneratorInterface
-     */
+    /** @var UrlGeneratorInterface */
     private $router;
 
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
     public function __construct(UrlGeneratorInterface $router, SessionInterface $session)

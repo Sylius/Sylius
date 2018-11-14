@@ -24,9 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractConfigurablePromotionElementType extends AbstractResourceType
 {
-    /**
-     * @var FormTypeRegistryInterface
-     */
+    /** @var FormTypeRegistryInterface */
     private $formTypeRegistry;
 
     /**

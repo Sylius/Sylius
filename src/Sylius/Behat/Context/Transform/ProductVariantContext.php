@@ -20,14 +20,10 @@ use Webmozart\Assert\Assert;
 
 final class ProductVariantContext implements Context
 {
-    /**
-     * @var ProductRepositoryInterface
-     */
+    /** @var ProductRepositoryInterface */
     private $productRepository;
 
-    /**
-     * @var ProductVariantRepositoryInterface
-     */
+    /** @var ProductVariantRepositoryInterface */
     private $productVariantRepository;
 
     public function __construct(

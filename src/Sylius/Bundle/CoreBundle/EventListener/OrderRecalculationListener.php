@@ -20,9 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class OrderRecalculationListener
 {
-    /**
-     * @var OrderProcessorInterface
-     */
+    /** @var OrderProcessorInterface */
     private $orderProcessor;
 
     public function __construct(OrderProcessorInterface $orderProcessor)

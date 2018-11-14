@@ -24,14 +24,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductAssociationsType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productAssociationTypeRepository;
 
-    /**
-     * @var DataTransformerInterface
-     */
+    /** @var DataTransformerInterface */
     private $productsToProductAssociationsTransformer;
 
     public function __construct(

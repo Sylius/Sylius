@@ -19,34 +19,22 @@ class PromotionCoupon implements PromotionCouponInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $usageLimit;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $used = 0;
 
-    /**
-     * @var PromotionInterface
-     */
+    /** @var PromotionInterface */
     protected $promotion;
 
-    /**
-     * @var \DateTimeInterface
-     */
+    /** @var \DateTimeInterface */
     protected $expiresAt;
 
     /**

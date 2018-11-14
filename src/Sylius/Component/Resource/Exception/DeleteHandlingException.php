@@ -15,14 +15,10 @@ namespace Sylius\Component\Resource\Exception;
 
 class DeleteHandlingException extends \Exception
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $flash;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $apiResponseCode;
 
     public function __construct(

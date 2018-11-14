@@ -19,9 +19,7 @@ use Sylius\Component\Grid\Parameters;
 
 final class GridViewFactory implements GridViewFactoryInterface
 {
-    /**
-     * @var DataProviderInterface
-     */
+    /** @var DataProviderInterface */
     private $dataProvider;
 
     public function __construct(DataProviderInterface $dataProvider)

@@ -26,24 +26,16 @@ class PaymentMethod implements PaymentMethodInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $environment;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
     public function __construct()

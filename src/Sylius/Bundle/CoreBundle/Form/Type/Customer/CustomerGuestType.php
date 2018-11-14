@@ -24,14 +24,10 @@ use Symfony\Component\Form\FormEvents;
 
 final class CustomerGuestType extends AbstractResourceType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $customerFactory;
 
     public function __construct(

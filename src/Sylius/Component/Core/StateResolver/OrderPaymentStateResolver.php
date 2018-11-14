@@ -25,9 +25,7 @@ use Webmozart\Assert\Assert;
 
 final class OrderPaymentStateResolver implements StateResolverInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $stateMachineFactory;
 
     public function __construct(FactoryInterface $stateMachineFactory)

@@ -20,19 +20,13 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 final class OptionsParser implements OptionsParserInterface
 {
-    /**
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     private $container;
 
-    /**
-     * @var ExpressionLanguage
-     */
+    /** @var ExpressionLanguage */
     private $expression;
 
-    /**
-     * @var PropertyAccessorInterface
-     */
+    /** @var PropertyAccessorInterface */
     private $propertyAccessor;
 
     public function __construct(

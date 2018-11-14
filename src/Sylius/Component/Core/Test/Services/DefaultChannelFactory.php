@@ -26,39 +26,25 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
     public const DEFAULT_CHANNEL_CODE = 'DEFAULT';
     public const DEFAULT_CHANNEL_CURRENCY = 'USD';
 
-    /**
-     * @var ChannelFactoryInterface
-     */
+    /** @var ChannelFactoryInterface */
     private $channelFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $currencyFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $localeFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $currencyRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $defaultLocaleCode;
 
     public function __construct(

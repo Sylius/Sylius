@@ -27,39 +27,25 @@ class ShippingMethod implements ShippingMethodInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
-    /**
-     * @var ShippingCategoryInterface
-     */
+    /** @var ShippingCategoryInterface */
     protected $category;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $calculator;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $configuration = [];
 
     public function __construct()

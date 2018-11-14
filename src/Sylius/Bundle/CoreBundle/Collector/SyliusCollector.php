@@ -25,9 +25,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 final class SyliusCollector extends DataCollector
 {
-    /**
-     * @var ShopperContextInterface
-     */
+    /** @var ShopperContextInterface */
     private $shopperContext;
 
     public function __construct(

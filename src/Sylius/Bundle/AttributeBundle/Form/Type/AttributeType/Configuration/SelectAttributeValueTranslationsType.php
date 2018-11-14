@@ -18,19 +18,12 @@ use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInte
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Laurent Paganin-Gioanni <l.paganin@algo-factory.com>
- */
 final class SelectAttributeValueTranslationsType extends AbstractType
 {
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $definedLocalesCodes;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $defaultLocaleCode;
 
     public function __construct(TranslationLocaleProviderInterface $localeProvider)

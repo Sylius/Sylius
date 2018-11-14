@@ -17,14 +17,10 @@ use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProcessorInterface;
 
 final class ProcessingConfigurationLoader implements ConfigurationLoaderInterface
 {
-    /**
-     * @var ConfigurationLoaderInterface
-     */
+    /** @var ConfigurationLoaderInterface */
     private $decoratedLoader;
 
-    /**
-     * @var ConfigurationProcessorInterface
-     */
+    /** @var ConfigurationProcessorInterface */
     private $configurationProcessor;
 
     public function __construct(ConfigurationLoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor)

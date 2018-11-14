@@ -19,9 +19,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 
 final class DataSourceProvider implements DataSourceProviderInterface
 {
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $driversRegistry;
 
     public function __construct(ServiceRegistryInterface $driversRegistry)

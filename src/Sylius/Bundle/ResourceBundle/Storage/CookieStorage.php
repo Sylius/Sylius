@@ -23,14 +23,10 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class CookieStorage implements StorageInterface, EventSubscriberInterface
 {
-    /**
-     * @var ParameterBag
-     */
+    /** @var ParameterBag */
     private $requestCookies;
 
-    /**
-     * @var ParameterBag
-     */
+    /** @var ParameterBag */
     private $responseCookies;
 
     public function __construct()

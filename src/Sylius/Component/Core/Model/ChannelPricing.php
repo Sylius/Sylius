@@ -15,29 +15,19 @@ namespace Sylius\Component\Core\Model;
 
 class ChannelPricing implements ChannelPricingInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $channelCode;
 
-    /**
-     * @var ProductVariantInterface
-     */
+    /** @var ProductVariantInterface */
     protected $productVariant;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $price;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $originalPrice;
 
     /**
