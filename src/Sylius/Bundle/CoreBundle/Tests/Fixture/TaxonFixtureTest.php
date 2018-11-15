@@ -77,6 +77,26 @@ final class TaxonFixtureTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function taxon_translations_are_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['translations' => [['en_US' => ['name' => ['foo']]]]]]]], 'custom.*.translations');
+    }
+
+    /**
+     * @test
+     */
+    public function taxon_translations_may_contain_nested_array(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['custom' => [['translations' => [['nested' => ['key' => 'value']]]]]]],
+            ['custom' => [['translations' => [['nested' => ['key' => 'value']]]]]],
+            'custom.*.translations'
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getConfiguration(): TaxonFixture
