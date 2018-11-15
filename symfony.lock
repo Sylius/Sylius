@@ -1,7 +1,4 @@
 {
-    "akeneo/phpspec-skip-example-extension": {
-        "version": "v3.0.0"
-    },
     "behat/behat": {
         "version": "v3.5.0"
     },
@@ -319,6 +316,9 @@
     },
     "pagerfanta/pagerfanta": {
         "version": "v2.0.1"
+    },
+    "pamil/phpspec-skip-example-extension": {
+        "version": "v4.0.0"
     },
     "pamil/prophecy-common": {
         "version": "v0.1.0"
