@@ -197,7 +197,7 @@ First you have to create a Service
 
         public function supports($context)
         {
-            /** @var $request Capture */
+            /** @var Capture $request */
             $request = $context->getRequest();
 
             return
