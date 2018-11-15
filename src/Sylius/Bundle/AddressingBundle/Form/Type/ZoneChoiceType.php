@@ -21,14 +21,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ZoneChoiceType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $zoneRepository;
 
-    /**
-     * @param RepositoryInterface $zoneRepository
-     */
     public function __construct(RepositoryInterface $zoneRepository)
     {
         $this->zoneRepository = $zoneRepository;

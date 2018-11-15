@@ -19,16 +19,9 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class ProductAttributeFixture extends AbstractResourceFixture
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $attributeTypes;
 
-    /**
-     * @param ObjectManager $objectManager
-     * @param ExampleFactoryInterface $exampleFactory
-     * @param array $attributeTypes
-     */
     public function __construct(ObjectManager $objectManager, ExampleFactoryInterface $exampleFactory, array $attributeTypes)
     {
         parent::__construct($objectManager, $exampleFactory);

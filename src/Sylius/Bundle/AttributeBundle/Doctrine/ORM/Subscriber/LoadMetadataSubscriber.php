@@ -20,22 +20,14 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 final class LoadMetadataSubscriber implements EventSubscriber
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $subjects;
 
-    /**
-     * @param array $subjects
-     */
     public function __construct(array $subjects)
     {
         $this->subjects = $subjects;
     }
 
-    /**
-     * @return array
-     */
     public function getSubscribedEvents(): array
     {
         return [
@@ -43,9 +35,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArgs
-     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
         $metadata = $eventArgs->getClassMetadata();
@@ -59,12 +48,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         }
     }
 
-    /**
-     * @param string $subject
-     * @param string $subjectClass
-     * @param ClassMetadataInfo $metadata
-     * @param ClassMetadataFactory $metadataFactory
-     */
     private function mapSubjectOnAttributeValue(
         string $subject,
         string $subjectClass,
@@ -88,11 +71,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         $this->mapManyToOne($metadata, $subjectMapping);
     }
 
-    /**
-     * @param string $attributeClass
-     * @param ClassMetadataInfo $metadata
-     * @param ClassMetadataFactory $metadataFactory
-     */
     private function mapAttributeOnAttributeValue(
         string $attributeClass,
         ClassMetadataInfo $metadata,
@@ -114,10 +92,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         $this->mapManyToOne($metadata, $attributeMapping);
     }
 
-    /**
-     * @param ClassMetadataInfo $metadata
-     * @param array $subjectMapping
-     */
     private function mapManyToOne(ClassMetadataInfo $metadata, array $subjectMapping): void
     {
         $metadata->mapManyToOne($subjectMapping);

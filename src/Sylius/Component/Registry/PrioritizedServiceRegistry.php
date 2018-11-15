@@ -18,9 +18,7 @@ use Zend\Stdlib\PriorityQueue;
 
 final class PrioritizedServiceRegistry implements PrioritizedServiceRegistryInterface
 {
-    /**
-     * @var PriorityQueue
-     */
+    /** @var PriorityQueue */
     private $services;
 
     /**
@@ -37,10 +35,6 @@ final class PrioritizedServiceRegistry implements PrioritizedServiceRegistryInte
      */
     private $context;
 
-    /**
-     * @param string $interface
-     * @param string $context
-     */
     public function __construct(string $interface, string $context = 'service')
     {
         $this->interface = $interface;

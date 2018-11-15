@@ -19,14 +19,10 @@ use Sylius\Component\Grid\View\GridViewInterface;
 
 final class TwigBulkActionGridRenderer implements BulkActionGridRendererInterface
 {
-    /**
-     * @var \Twig_Environment
-     */
+    /** @var \Twig_Environment */
     private $twig;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $bulkActionTemplates;
 
     public function __construct(\Twig_Environment $twig, array $bulkActionTemplates)

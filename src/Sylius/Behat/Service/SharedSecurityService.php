@@ -19,9 +19,7 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SharedSecurityService implements SharedSecurityServiceInterface
 {
-    /**
-     * @var SecurityServiceInterface
-     */
+    /** @var SecurityServiceInterface */
     private $adminSecurityService;
 
     /**
@@ -40,11 +38,6 @@ final class SharedSecurityService implements SharedSecurityServiceInterface
         $this->performActionAs($this->adminSecurityService, $adminUser, $action);
     }
 
-    /**
-     * @param SecurityServiceInterface $securityService
-     * @param UserInterface $user
-     * @param callable $action
-     */
     private function performActionAs(SecurityServiceInterface $securityService, UserInterface $user, callable $action)
     {
         try {

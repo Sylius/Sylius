@@ -20,8 +20,6 @@ interface AdjustmentsAggregatorInterface
     /**
      * @param iterable|AdjustmentInterface[] $adjustments
      *
-     * @return array
-     *
      * @throws \InvalidArgumentException
      */
     public function aggregate(iterable $adjustments): array;

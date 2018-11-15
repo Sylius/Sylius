@@ -19,14 +19,9 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 final class OrderShippingMethodSelectionRequirementChecker implements OrderShippingMethodSelectionRequirementCheckerInterface
 {
-    /**
-     * @var ShippingMethodsResolverInterface
-     */
+    /** @var ShippingMethodsResolverInterface */
     private $shippingMethodsResolver;
 
-    /**
-     * @param ShippingMethodsResolverInterface $shippingMethodsResolver
-     */
     public function __construct(ShippingMethodsResolverInterface $shippingMethodsResolver)
     {
         $this->shippingMethodsResolver = $shippingMethodsResolver;

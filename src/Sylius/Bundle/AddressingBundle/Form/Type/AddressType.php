@@ -22,15 +22,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class AddressType extends AbstractResourceType
 {
-    /**
-     * @var EventSubscriberInterface
-     */
+    /** @var EventSubscriberInterface */
     private $buildAddressFormSubscriber;
 
     /**
-     * @param string $dataClass
      * @param string[] $validationGroups
-     * @param EventSubscriberInterface $buildAddressFormSubscriber
      */
     public function __construct(string $dataClass, array $validationGroups, EventSubscriberInterface $buildAddressFormSubscriber)
     {

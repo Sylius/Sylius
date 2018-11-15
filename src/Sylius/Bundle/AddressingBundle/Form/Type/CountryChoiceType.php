@@ -22,14 +22,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CountryChoiceType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $countryRepository;
 
-    /**
-     * @param RepositoryInterface $countryRepository
-     */
     public function __construct(RepositoryInterface $countryRepository)
     {
         $this->countryRepository = $countryRepository;

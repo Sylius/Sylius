@@ -17,14 +17,9 @@ use Sylius\Bundle\GridBundle\Templating\Helper\GridHelper;
 
 final class GridExtension extends \Twig_Extension
 {
-    /**
-     * @var GridHelper
-     */
+    /** @var GridHelper */
     private $gridHelper;
 
-    /**
-     * @param GridHelper $gridHelper
-     */
     public function __construct(GridHelper $gridHelper)
     {
         $this->gridHelper = $gridHelper;

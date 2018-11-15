@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-use Sylius\Behat\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 
 interface IndexPageInterface extends PageInterface
 {
@@ -71,8 +71,6 @@ interface IndexPageInterface extends PageInterface
     public function isProductOnPageWithName($name);
 
     /**
-     * @param array $productNames
-     *
      * @return bool
      */
     public function hasProductsInOrder(array $productNames);

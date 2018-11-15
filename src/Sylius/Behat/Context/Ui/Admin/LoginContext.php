@@ -21,20 +21,12 @@ use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
-    /**
-     * @var DashboardPageInterface
-     */
+    /** @var DashboardPageInterface */
     private $dashboardPage;
 
-    /**
-     * @var LoginPageInterface
-     */
+    /** @var LoginPageInterface */
     private $loginPage;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     * @param LoginPageInterface $loginPage
-     */
     public function __construct(DashboardPageInterface $dashboardPage, LoginPageInterface $loginPage)
     {
         $this->dashboardPage = $dashboardPage;

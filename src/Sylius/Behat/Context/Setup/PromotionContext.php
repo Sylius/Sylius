@@ -33,50 +33,27 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 final class PromotionContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var PromotionActionFactoryInterface
-     */
+    /** @var PromotionActionFactoryInterface */
     private $actionFactory;
 
-    /**
-     * @var PromotionCouponFactoryInterface
-     */
+    /** @var PromotionCouponFactoryInterface */
     private $couponFactory;
 
-    /**
-     * @var PromotionRuleFactoryInterface
-     */
+    /** @var PromotionRuleFactoryInterface */
     private $ruleFactory;
 
-    /**
-     * @var TestPromotionFactoryInterface
-     */
+    /** @var TestPromotionFactoryInterface */
     private $testPromotionFactory;
 
-    /**
-     * @var PromotionRepositoryInterface
-     */
+    /** @var PromotionRepositoryInterface */
     private $promotionRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param PromotionActionFactoryInterface $actionFactory
-     * @param PromotionCouponFactoryInterface $couponFactory
-     * @param PromotionRuleFactoryInterface $ruleFactory
-     * @param TestPromotionFactoryInterface $testPromotionFactory
-     * @param PromotionRepositoryInterface $promotionRepository
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PromotionActionFactoryInterface $actionFactory,
@@ -722,8 +699,6 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param array $taxonCodes
-     *
      * @return array
      */
     private function getTaxonFilterConfiguration(array $taxonCodes)
@@ -732,8 +707,6 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param array $productCodes
-     *
      * @return array
      */
     private function getProductsFilterConfiguration(array $productCodes)
@@ -758,10 +731,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param int $discount
-     * @param array $configuration
-     * @param PromotionRuleInterface|null $rule
      */
     private function createUnitFixedPromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
     {
@@ -776,10 +746,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param int $discount
-     * @param array $configuration
-     * @param PromotionRuleInterface|null $rule
      */
     private function createUnitPercentagePromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
     {
@@ -794,11 +761,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param int $discount
-     * @param array $configuration
-     * @param PromotionRuleInterface|null $rule
-     * @param ChannelInterface|null $channel
      */
     private function createFixedPromotion(
         PromotionInterface $promotion,
@@ -813,9 +776,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param float $discount
-     * @param array $configuration
      * @param PromotionRuleInterface $rule
      */
     private function createPercentagePromotion(
@@ -827,12 +788,6 @@ final class PromotionContext implements Context
         $this->persistPromotion($promotion, $this->actionFactory->createPercentageDiscount($discount), $configuration, $rule);
     }
 
-    /**
-     * @param PromotionInterface $promotion
-     * @param PromotionActionInterface $action
-     * @param array $configuration
-     * @param PromotionRuleInterface|null $rule
-     */
     private function persistPromotion(PromotionInterface $promotion, PromotionActionInterface $action, array $configuration, PromotionRuleInterface $rule = null)
     {
         $configuration = array_merge_recursive($action->getConfiguration(), $configuration);
@@ -846,12 +801,6 @@ final class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @param string $couponCode
-     * @param int|null $usageLimit
-     *
-     * @return PromotionCouponInterface
-     */
     private function createCoupon(string $couponCode, ?int $usageLimit = null): PromotionCouponInterface
     {
         /** @var PromotionCouponInterface $coupon */

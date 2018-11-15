@@ -29,48 +29,27 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ShippingMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $shippingMethodFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $zoneRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $shippingCategoryRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var ChannelRepositoryInterface
-     */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $shippingMethodFactory
-     * @param RepositoryInterface $zoneRepository
-     * @param RepositoryInterface $shippingCategoryRepository
-     * @param RepositoryInterface $localeRepository
-     * @param ChannelRepositoryInterface $channelRepository
-     */
     public function __construct(
         FactoryInterface $shippingMethodFactory,
         RepositoryInterface $zoneRepository,
@@ -170,9 +149,6 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

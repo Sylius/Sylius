@@ -17,14 +17,9 @@ use Webmozart\Assert\Assert;
 
 final class ListenerRegistry implements ListenerRegistryInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $listeners = [];
 
-    /**
-     * @param ListenerInterface $listener
-     */
     public function addListener(ListenerInterface $listener): void
     {
         Assert::keyNotExists($this->listeners, $listener->getName(), 'Listener with name "%s" is already registered.');

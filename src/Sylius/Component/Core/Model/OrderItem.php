@@ -18,19 +18,13 @@ use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
 
 class OrderItem extends BaseOrderItem implements OrderItemInterface
 {
-    /**
-     * @var ProductVariantInterface
-     */
+    /** @var ProductVariantInterface */
     protected $variant;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $productName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $variantName;
 
     /**
@@ -49,9 +43,6 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         $this->variant = $variant;
     }
 
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface
     {
         return $this->variant->getProduct();

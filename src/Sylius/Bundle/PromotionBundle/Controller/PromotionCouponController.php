@@ -24,10 +24,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PromotionCouponController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
-     * @return Response
-     *
      * @throws NotFoundHttpException
      */
     public function generateAction(Request $request): Response
@@ -69,9 +65,6 @@ class PromotionCouponController extends ResourceController
         return $this->viewHandler->handle($configuration, $view);
     }
 
-    /**
-     * @return PromotionCouponGeneratorInterface
-     */
     protected function getGenerator(): PromotionCouponGeneratorInterface
     {
         return $this->container->get('sylius.promotion_coupon_generator');

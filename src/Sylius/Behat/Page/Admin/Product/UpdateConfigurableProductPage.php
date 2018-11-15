@@ -204,7 +204,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'channel_checkbox' => '.checkbox:contains("%channel%") input',
@@ -289,7 +289,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     }
 
     /**
-     * @param NodeElement $imageElement
      * @param string $type
      */
     private function setImageType(NodeElement $imageElement, $type)

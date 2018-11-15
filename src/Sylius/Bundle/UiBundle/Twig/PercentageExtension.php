@@ -25,11 +25,6 @@ class PercentageExtension extends \Twig_Extension
         ];
     }
 
-    /**
-     * @param float $number
-     *
-     * @return string
-     */
     public function getPercentage(float $number): string
     {
         $percentage = $number * 100;

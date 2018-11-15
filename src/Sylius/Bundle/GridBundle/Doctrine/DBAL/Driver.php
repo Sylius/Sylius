@@ -22,14 +22,9 @@ final class Driver implements DriverInterface
 {
     public const NAME = 'doctrine/dbal';
 
-    /**
-     * @var Connection
-     */
+    /** @var Connection */
     private $connection;
 
-    /**
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;

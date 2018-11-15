@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\Expr\Expression;
 use Doctrine\ODM\PHPCR\Query\Builder\AbstractNode;
 use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', ExpressionVisitor::class), E_USER_DEPRECATED);
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', ExpressionVisitor::class), \E_USER_DEPRECATED);
 
 /**
  * Walks a Doctrine\Commons\Expr object graph and builds up a PHPCR-ODM
@@ -29,20 +29,12 @@ final class ExpressionVisitor
 {
     private $queryBuilder;
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     */
     public function __construct(QueryBuilder $queryBuilder)
     {
         $this->queryBuilder = $queryBuilder;
     }
 
     /**
-     * @param Comparison $comparison
-     * @param AbstractNode $parentNode
-     *
-     * @return mixed
-     *
      * @throws \RuntimeException
      */
     public function walkComparison(Comparison $comparison, AbstractNode $parentNode)
@@ -84,11 +76,6 @@ final class ExpressionVisitor
     }
 
     /**
-     * @param CompositeExpression $expr
-     * @param AbstractNode $parentNode
-     *
-     * @return mixed
-     *
      * @throws \RuntimeException
      */
     public function walkCompositeExpression(CompositeExpression $expr, AbstractNode $parentNode)
@@ -139,10 +126,7 @@ final class ExpressionVisitor
     /**
      * Walk the given expression to build up the PHPCR-ODM query builder.
      *
-     * @param Expression $expr
-     * @param AbstractNode|null $parentNode
      *
-     * @return mixed
      *
      * @throws \RuntimeException
      */
@@ -162,21 +146,11 @@ final class ExpressionVisitor
         throw new \RuntimeException('Unknown Expression: ' . get_class($expr));
     }
 
-    /**
-     * @param string $field
-     *
-     * @return string
-     */
     private function getField(string $field): string
     {
         return Driver::QB_SOURCE_ALIAS . '.' . $field;
     }
 
-    /**
-     * @param AbstractNode $parentNode
-     * @param string $field
-     * @param array $values
-     */
     private function getInConstraint(AbstractNode $parentNode, string $field, array $values): void
     {
         $orNode = $parentNode->orx();

@@ -1,3 +1,8 @@
+# UPGRADE FROM `v1.3.2` TO `v1.3.3`
+
+* Incorporate [the following changes in your application](https://github.com/Sylius/Sylius/pull/9889/files) in order to 
+  be able to override external configuration files like specified in our documentation.
+
 # UPGRADE FROM `v1.2.X` TO `v1.3.0`
 
 * MongoDB and PHPCR drivers have been deprecated in `ResourceBundle` and `GridBundle`.

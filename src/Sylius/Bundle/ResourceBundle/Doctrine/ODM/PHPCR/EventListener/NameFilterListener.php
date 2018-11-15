@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', NameFilterListener::class), E_USER_DEPRECATED);
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', NameFilterListener::class), \E_USER_DEPRECATED);
 
 /**
  * Filter the node name field, replacing invalid characters with a substitute
@@ -27,19 +27,12 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  */
 class NameFilterListener
 {
-    /**
-     * @var DocumentManagerInterface
-     */
+    /** @var DocumentManagerInterface */
     private $documentManager;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $replacementCharacter;
 
-    /**
-     * @param DocumentManagerInterface $documentManager
-     */
     public function __construct(
         DocumentManagerInterface $documentManager,
         $replacementCharacter = ' '
@@ -48,9 +41,6 @@ class NameFilterListener
         $this->replacementCharacter = $replacementCharacter;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function onEvent(ResourceControllerEvent $event)
     {
         $document = $event->getSubject();

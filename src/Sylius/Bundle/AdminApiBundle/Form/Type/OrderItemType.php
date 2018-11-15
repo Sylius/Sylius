@@ -26,14 +26,9 @@ use Webmozart\Assert\Assert;
 
 final class OrderItemType extends AbstractType
 {
-    /**
-     * @var ProductVariantRepositoryInterface
-     */
+    /** @var ProductVariantRepositoryInterface */
     private $variantRepository;
 
-    /**
-     * @param ProductVariantRepositoryInterface $variantRepository
-     */
     public function __construct(ProductVariantRepositoryInterface $variantRepository)
     {
         $this->variantRepository = $variantRepository;

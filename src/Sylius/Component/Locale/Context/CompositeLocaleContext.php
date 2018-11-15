@@ -17,9 +17,7 @@ use Zend\Stdlib\PriorityQueue;
 
 final class CompositeLocaleContext implements LocaleContextInterface
 {
-    /**
-     * @var PriorityQueue|LocaleContextInterface[]
-     */
+    /** @var PriorityQueue|LocaleContextInterface[] */
     private $localeContexts;
 
     public function __construct()
@@ -27,10 +25,6 @@ final class CompositeLocaleContext implements LocaleContextInterface
         $this->localeContexts = new PriorityQueue();
     }
 
-    /**
-     * @param LocaleContextInterface $localeContext
-     * @param int $priority
-     */
     public function addContext(LocaleContextInterface $localeContext, int $priority = 0): void
     {
         $this->localeContexts->insert($localeContext, $priority);

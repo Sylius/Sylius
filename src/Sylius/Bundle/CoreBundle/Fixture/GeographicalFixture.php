@@ -26,44 +26,24 @@ use Webmozart\Assert\Assert;
 
 class GeographicalFixture extends AbstractFixture
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $countryFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $countryManager;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $provinceFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $provinceManager;
 
-    /**
-     * @var ZoneFactoryInterface
-     */
+    /** @var ZoneFactoryInterface */
     private $zoneFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $zoneManager;
 
-    /**
-     * @param FactoryInterface $countryFactory
-     * @param ObjectManager $countryManager
-     * @param FactoryInterface $provinceFactory
-     * @param ObjectManager $provinceManager
-     * @param ZoneFactoryInterface $zoneFactory
-     * @param ObjectManager $zoneManager
-     */
     public function __construct(
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
@@ -162,10 +142,6 @@ class GeographicalFixture extends AbstractFixture
         ;
     }
 
-    /**
-     * @param array $countriesCodes
-     * @param array $countriesProvinces
-     */
     private function loadCountriesWithProvinces(array $countriesCodes, array $countriesProvinces): void
     {
         $countries = [];
@@ -187,10 +163,6 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param array $zones
-     * @param \Closure $zoneValidator
-     */
     private function loadZones(array $zones, \Closure $zoneValidator): void
     {
         foreach ($zones as $zoneCode => $zoneOptions) {
@@ -223,10 +195,6 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param array $provinces
-     * @param CountryInterface $country
-     */
     private function loadProvincesForCountry(array $provinces, CountryInterface $country): void
     {
         foreach ($provinces as $provinceCode => $provinceName) {
@@ -245,10 +213,6 @@ class GeographicalFixture extends AbstractFixture
     /**
      * @see ZoneInterface
      *
-     * @param array $zoneOptions
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     private function getZoneType(array $zoneOptions): string
@@ -265,11 +229,6 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param array $zoneOptions
-     *
-     * @return array
-     */
     private function getZoneMembers(array $zoneOptions): array
     {
         $zoneType = $this->getZoneType($zoneOptions);
@@ -286,11 +245,6 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param array $options
-     *
-     * @return \Closure
-     */
     private function provideZoneValidator(array $options): \Closure
     {
         $memberValidators = [

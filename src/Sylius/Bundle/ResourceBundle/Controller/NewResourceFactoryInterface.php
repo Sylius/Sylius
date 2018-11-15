@@ -18,11 +18,5 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface NewResourceFactoryInterface
 {
-    /**
-     * @param RequestConfiguration $requestConfiguration
-     * @param FactoryInterface $factory
-     *
-     * @return ResourceInterface
-     */
     public function create(RequestConfiguration $requestConfiguration, FactoryInterface $factory): ResourceInterface;
 }

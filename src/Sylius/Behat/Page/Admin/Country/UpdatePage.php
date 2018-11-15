@@ -158,7 +158,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_country_code',
@@ -167,9 +167,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         ]);
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastProvinceElement(): NodeElement
     {
         $provinces = $this->getElement('provinces');

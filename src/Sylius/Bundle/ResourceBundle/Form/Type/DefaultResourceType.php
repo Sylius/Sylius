@@ -21,20 +21,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class DefaultResourceType extends AbstractType
 {
-    /**
-     * @var RegistryInterface
-     */
+    /** @var RegistryInterface */
     private $metadataRegistry;
 
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $formBuilderRegistry;
 
-    /**
-     * @param RegistryInterface $metadataRegistry
-     * @param ServiceRegistryInterface $formBuilderRegistry
-     */
     public function __construct(RegistryInterface $metadataRegistry, ServiceRegistryInterface $formBuilderRegistry)
     {
         $this->metadataRegistry = $metadataRegistry;

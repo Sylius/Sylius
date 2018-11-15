@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\Order;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 interface IndexPageInterface extends SymfonyPageInterface
@@ -31,8 +31,6 @@ interface IndexPageInterface extends SymfonyPageInterface
     public function isOrderWithNumberInTheList($number);
 
     /**
-     * @param OrderInterface $order
-     *
      * @return bool
      */
     public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order);

@@ -20,20 +20,12 @@ use Webmozart\Assert\Assert;
 
 final class LocaleContext implements Context
 {
-    /**
-     * @var DashboardPageInterface
-     */
+    /** @var DashboardPageInterface */
     private $dashboardPage;
 
-    /**
-     * @var TranslatorInterface
-     */
+    /** @var TranslatorInterface */
     private $translator;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     * @param TranslatorInterface $translator
-     */
     public function __construct(DashboardPageInterface $dashboardPage, TranslatorInterface $translator)
     {
         $this->dashboardPage = $dashboardPage;

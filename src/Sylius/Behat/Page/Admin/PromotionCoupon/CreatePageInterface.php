@@ -22,9 +22,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
      */
     public function setCustomerUsageLimit($limit);
 
-    /**
-     * @param \DateTimeInterface $date
-     */
     public function setExpiresAt(\DateTimeInterface $date);
 
     /**

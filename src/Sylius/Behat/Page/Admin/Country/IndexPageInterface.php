@@ -19,15 +19,11 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 interface IndexPageInterface extends BaseIndexPageInterface
 {
     /**
-     * @param CountryInterface $country
-     *
      * @return bool
      */
     public function isCountryDisabled(CountryInterface $country);
 
     /**
-     * @param CountryInterface $country
-     *
      * @return bool
      */
     public function isCountryEnabled(CountryInterface $country);

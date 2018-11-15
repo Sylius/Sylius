@@ -26,50 +26,27 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductAssociationContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productAssociationTypeFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productAssociationTypeTranslationFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productAssociationFactory;
 
-    /**
-     * @var ProductAssociationTypeRepositoryInterface
-     */
+    /** @var ProductAssociationTypeRepositoryInterface */
     private $productAssociationTypeRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productAssociationRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $productAssociationTypeFactory
-     * @param FactoryInterface $productAssociationTypeTranslationFactory
-     * @param FactoryInterface $productAssociationFactory
-     * @param ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository
-     * @param RepositoryInterface $productAssociationRepository
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $productAssociationTypeFactory,
@@ -167,11 +144,6 @@ final class ProductAssociationContext implements Context
         return $productAssociationType;
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param ProductAssociationTypeInterface $productAssociationType
-     * @param array $associatedProducts
-     */
     private function createProductAssociation(
         ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
@@ -190,11 +162,6 @@ final class ProductAssociationContext implements Context
         $this->productAssociationRepository->add($productAssociation);
     }
 
-    /**
-     * @param ProductAssociationTypeInterface $productAssociationType
-     * @param string $name
-     * @param string $locale
-     */
     private function addProductAssociationTypeTranslation(
         ProductAssociationTypeInterface $productAssociationType,
         string $name,

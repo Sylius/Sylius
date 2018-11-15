@@ -22,18 +22,13 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
-@trigger_error(sprintf('This class is deprecated since Sylius 1.2 and will be removed in 2.0. "%s" should be used instead.', EligibleDefaultShippingMethodResolver::class), E_USER_DEPRECATED);
+@trigger_error(sprintf('This class is deprecated since Sylius 1.2 and will be removed in 2.0. "%s" should be used instead.', EligibleDefaultShippingMethodResolver::class), \E_USER_DEPRECATED);
 
 class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
 {
-    /**
-     * @var ShippingMethodRepositoryInterface
-     */
+    /** @var ShippingMethodRepositoryInterface */
     private $shippingMethodRepository;
 
-    /**
-     * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-     */
     public function __construct(ShippingMethodRepositoryInterface $shippingMethodRepository)
     {
         $this->shippingMethodRepository = $shippingMethodRepository;

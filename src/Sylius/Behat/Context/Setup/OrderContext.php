@@ -43,68 +43,36 @@ use Sylius\Component\Shipping\ShipmentTransitions;
 
 final class OrderContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $orderFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $orderItemFactory;
 
-    /**
-     * @var OrderItemQuantityModifierInterface
-     */
+    /** @var OrderItemQuantityModifierInterface */
     private $itemQuantityModifier;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $customerFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @var StateMachineFactoryInterface
-     */
+    /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @var ProductVariantResolverInterface
-     */
+    /** @var ProductVariantResolverInterface */
     private $variantResolver;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param OrderRepositoryInterface $orderRepository
-     * @param FactoryInterface $orderFactory
-     * @param FactoryInterface $orderItemFactory
-     * @param OrderItemQuantityModifierInterface $itemQuantityModifier
-     * @param FactoryInterface $customerFactory
-     * @param RepositoryInterface $customerRepository
-     * @param ObjectManager $objectManager
-     * @param StateMachineFactoryInterface $stateMachineFactory
-     * @param ProductVariantResolverInterface $variantResolver
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         OrderRepositoryInterface $orderRepository,
@@ -636,7 +604,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param OrderInterface $order
      * @param string $transition
      */
     private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition)
@@ -647,7 +614,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param OrderInterface $order
      * @param string $transition
      */
     private function applyPaymentTransitionOnOrder(OrderInterface $order, $transition)
@@ -658,7 +624,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param OrderInterface $order
      * @param string $transition
      */
     private function applyTransitionOnOrderCheckout(OrderInterface $order, $transition)
@@ -666,17 +631,12 @@ final class OrderContext implements Context
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param string $transition
-     */
     private function applyTransitionOnOrder(OrderInterface $order, string $transition): void
     {
         $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply($transition);
     }
 
     /**
-     * @param ProductVariantInterface $productVariant
      * @param int $quantity
      *
      * @return OrderInterface
@@ -695,12 +655,6 @@ final class OrderContext implements Context
         return $order;
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param ChannelInterface $channel
-     * @param ProductVariantInterface $productVariant
-     * @param int $quantity
-     */
     private function addProductVariantsToOrderWithChannelPrice(
         OrderInterface $order,
         ChannelInterface $channel,
@@ -721,9 +675,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param CustomerInterface $customer
      * @param string $number
-     * @param ChannelInterface|null $channel
      * @param string|null $localeCode
      *
      * @return OrderInterface
@@ -746,8 +698,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param CustomerInterface $customer
-     * @param ChannelInterface|null $channel
      * @param string|null $localeCode
      *
      * @return OrderInterface
@@ -797,12 +747,6 @@ final class OrderContext implements Context
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param ShippingMethodInterface $shippingMethod
-     * @param AddressInterface $address
-     * @param PaymentMethodInterface $paymentMethod
-     */
     private function checkoutUsing(
         OrderInterface $order,
         ShippingMethodInterface $shippingMethod,
@@ -817,11 +761,6 @@ final class OrderContext implements Context
         $this->proceedSelectingShippingAndPaymentMethod($order, $shippingMethod, $paymentMethod);
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param ShippingMethodInterface $shippingMethod
-     * @param PaymentMethodInterface $paymentMethod
-     */
     private function proceedSelectingShippingAndPaymentMethod(OrderInterface $order, ShippingMethodInterface $shippingMethod, PaymentMethodInterface $paymentMethod)
     {
         foreach ($order->getShipments() as $shipment) {
@@ -837,8 +776,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param OrderInterface $order
-     * @param ProductVariantInterface $variant
      * @param int $price
      */
     private function addVariantWithPriceToOrder(OrderInterface $order, ProductVariantInterface $variant, $price)
@@ -853,12 +790,6 @@ final class OrderContext implements Context
         $order->addItem($item);
     }
 
-    /**
-     * @param int $numberOfCustomers
-     * @param int $numberOfOrders
-     * @param string $total
-     * @param bool $isFulfilled
-     */
     private function createOrders(
         int $numberOfCustomers,
         int $numberOfOrders,
@@ -890,13 +821,6 @@ final class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @param int $numberOfCustomers
-     * @param int $numberOfOrders
-     * @param string $total
-     * @param ProductInterface $product
-     * @param bool $isFulfilled
-     */
     private function createOrdersWithProduct(
         int $numberOfCustomers,
         int $numberOfOrders,
@@ -928,14 +852,6 @@ final class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @param CustomerInterface $customer
-     * @param int $orderCount
-     * @param ChannelInterface $channel
-     * @param int $productCount
-     * @param ProductInterface $product
-     * @param bool $isFulfilled
-     */
     private function createOrdersForCustomer(
         CustomerInterface $customer,
         int $orderCount,
@@ -962,14 +878,6 @@ final class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param ShippingMethodInterface $shippingMethod
-     * @param AddressInterface $address
-     * @param PaymentMethodInterface $paymentMethod
-     * @param CustomerInterface $customer
-     * @param int $number
-     */
     private function placeOrder(
         ProductInterface $product,
         ShippingMethodInterface $shippingMethod,

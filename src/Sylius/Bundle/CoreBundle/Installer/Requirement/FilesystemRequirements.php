@@ -18,9 +18,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 final class FilesystemRequirements extends RequirementCollection
 {
     /**
-     * @param TranslatorInterface $translator
-     * @param string $cacheDir
-     * @param string $logsDir
      * @param string $rootDir Deprecated.
      */
     public function __construct(TranslatorInterface $translator, string $cacheDir, string $logsDir, string $rootDir = null)
@@ -32,7 +29,7 @@ final class FilesystemRequirements extends RequirementCollection
                 'Passing root directory to "%s" constructor as the second argument is deprecated since 1.2 ' .
                 'and this argument will be removed in 2.0.',
                 self::class
-            ), E_USER_DEPRECATED);
+            ), \E_USER_DEPRECATED);
 
             [$rootDir, $cacheDir, $logsDir] = [$cacheDir, $logsDir, $rootDir];
         }

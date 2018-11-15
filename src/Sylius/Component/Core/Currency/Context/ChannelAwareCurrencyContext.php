@@ -21,20 +21,12 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 
 final class ChannelAwareCurrencyContext implements CurrencyContextInterface
 {
-    /**
-     * @var CurrencyContextInterface
-     */
+    /** @var CurrencyContextInterface */
     private $currencyContext;
 
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @param CurrencyContextInterface $currencyContext
-     * @param ChannelContextInterface $channelContext
-     */
     public function __construct(CurrencyContextInterface $currencyContext, ChannelContextInterface $channelContext)
     {
         $this->currencyContext = $currencyContext;
@@ -62,12 +54,6 @@ final class ChannelAwareCurrencyContext implements CurrencyContextInterface
         }
     }
 
-    /**
-     * @param string $currencyCode
-     * @param ChannelInterface $channel
-     *
-     * @return bool
-     */
     private function isAvailableCurrency(string $currencyCode, ChannelInterface $channel): bool
     {
         $availableCurrencies = array_map(

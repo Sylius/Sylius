@@ -37,12 +37,6 @@ final class ProductVariantsParityChecker implements ProductVariantsParityChecker
         return false;
     }
 
-    /**
-     * @param ProductVariantInterface $variant
-     * @param ProductVariantInterface $existingVariant
-     *
-     * @return bool
-     */
     private function matchOptions(ProductVariantInterface $variant, ProductVariantInterface $existingVariant): bool
     {
         foreach ($variant->getOptionValues() as $option) {

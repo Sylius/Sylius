@@ -24,19 +24,13 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class CountryChoiceTypeTest extends TypeTestCase
 {
-    /**
-     * @var ProphecyInterface|RepositoryInterface
-     */
+    /** @var ProphecyInterface|RepositoryInterface */
     private $countryRepository;
 
-    /**
-     * @var ProphecyInterface|CountryInterface
-     */
+    /** @var ProphecyInterface|CountryInterface */
     private $france;
 
-    /**
-     * @var ProphecyInterface|CountryInterface
-     */
+    /** @var ProphecyInterface|CountryInterface */
     private $poland;
 
     /**

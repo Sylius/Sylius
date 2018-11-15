@@ -16,24 +16,16 @@ namespace Sylius\Behat\Page\Admin\Order;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    /**
-     * @var TableAccessorInterface
-     */
+    /** @var TableAccessorInterface */
     private $tableAccessor;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -465,7 +457,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_admin_order_show';
     }
@@ -473,7 +465,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '#billing-address',
@@ -545,8 +537,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param OrderInterface $order
-     *
      * @return NodeElement|null
      */
     private function getLastOrderPaymentElement(OrderInterface $order)
@@ -560,8 +550,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param OrderInterface $order
-     *
      * @return NodeElement|null
      */
     private function getLastOrderShipmentElement(OrderInterface $order)

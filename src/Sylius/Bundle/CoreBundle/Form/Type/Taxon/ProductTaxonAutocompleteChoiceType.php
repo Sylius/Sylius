@@ -25,20 +25,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductTaxonAutocompleteChoiceType extends AbstractType
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productTaxonFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productTaxonRepository;
 
-    /**
-     * @param FactoryInterface $productTaxonFactory
-     * @param RepositoryInterface $productTaxonRepository
-     */
     public function __construct(FactoryInterface $productTaxonFactory, RepositoryInterface $productTaxonRepository)
     {
         $this->productTaxonFactory = $productTaxonFactory;

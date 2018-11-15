@@ -20,34 +20,22 @@ class Channel implements ChannelInterface
 {
     use TimestampableTrait, ToggleableTrait;
 
-    /**
-     * @var mixed|null
-     */
+    /** @var mixed|null */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $name;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $description;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $hostname;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $color;
 
     public function __construct()
@@ -55,9 +43,6 @@ class Channel implements ChannelInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->name;

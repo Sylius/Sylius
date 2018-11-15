@@ -18,35 +18,26 @@ use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
 use PHPCR\Util\NodeHelper;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', DefaultParentListener::class), E_USER_DEPRECATED);
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', DefaultParentListener::class), \E_USER_DEPRECATED);
 
 /**
  * Automatically set the parent brefore the creation.
  */
 class DefaultParentListener
 {
-    /**
-     * @var DocumentManagerInterface
-     */
+    /** @var DocumentManagerInterface */
     private $documentManager;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $parentPath;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $autocreate;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $force;
 
     /**
-     * @param DocumentManagerInterface $documentManager
      * @param string $parentPath
      * @param bool $autocreate
      * @param bool $force
@@ -63,9 +54,6 @@ class DefaultParentListener
         $this->force = $force;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function onPreCreate(ResourceControllerEvent $event)
     {
         $document = $event->getSubject();

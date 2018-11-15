@@ -25,38 +25,21 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class ImpersonateUserController
 {
-    /**
-     * @var UserImpersonatorInterface
-     */
+    /** @var UserImpersonatorInterface */
     private $impersonator;
 
-    /**
-     * @var AuthorizationCheckerInterface
-     */
+    /** @var AuthorizationCheckerInterface */
     private $authorizationChecker;
 
-    /**
-     * @var UserProviderInterface
-     */
+    /** @var UserProviderInterface */
     private $userProvider;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $authorizationRole;
 
-    /**
-     * @param UserImpersonatorInterface $impersonator
-     * @param AuthorizationCheckerInterface $authorizationChecker
-     * @param UserProviderInterface $userProvider
-     * @param RouterInterface $router
-     * @param string $authorizationRole
-     */
     public function __construct(
         UserImpersonatorInterface $impersonator,
         AuthorizationCheckerInterface $authorizationChecker,
@@ -71,12 +54,6 @@ final class ImpersonateUserController
         $this->authorizationRole = $authorizationRole;
     }
 
-    /**
-     * @param Request $request
-     * @param string $username
-     *
-     * @return Response
-     */
     public function impersonateAction(Request $request, string $username): Response
     {
         if (!$this->authorizationChecker->isGranted($this->authorizationRole)) {
@@ -95,10 +72,6 @@ final class ImpersonateUserController
         return new RedirectResponse($request->headers->get('referer'));
     }
 
-    /**
-     * @param Request $request
-     * @param string $username
-     */
     private function addFlash(Request $request, string $username): void
     {
         /** @var Session $session */

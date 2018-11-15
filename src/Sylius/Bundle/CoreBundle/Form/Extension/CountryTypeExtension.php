@@ -27,9 +27,7 @@ use Symfony\Component\Intl\Intl;
 
 final class CountryTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $countryRepository;
 
     /**
@@ -85,11 +83,6 @@ final class CountryTypeExtension extends AbstractTypeExtension
         return CountryType::class;
     }
 
-    /**
-     * @param string $code
-     *
-     * @return string|null
-     */
     private function getCountryName(string $code): ?string
     {
         return Intl::getRegionBundle()->getCountryName($code);

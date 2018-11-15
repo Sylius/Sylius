@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class DashboardPage extends SymfonyPage implements DashboardPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_account_dashboard';
     }
@@ -68,7 +68,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'customer' => '#customer-information',

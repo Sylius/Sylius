@@ -22,20 +22,12 @@ use Webmozart\Assert\Assert;
 
 final class EmailContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var EmailCheckerInterface
-     */
+    /** @var EmailCheckerInterface */
     private $emailChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param EmailCheckerInterface $emailChecker
-     */
     public function __construct(SharedStorageInterface $sharedStorage, EmailCheckerInterface $emailChecker)
     {
         $this->sharedStorage = $sharedStorage;
@@ -104,8 +96,6 @@ final class EmailContext implements Context
     }
 
     /**
-     * @param OrderInterface $order
-     *
      * @return string
      */
     private function getShippingMethodName(OrderInterface $order)

@@ -19,20 +19,12 @@ use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInte
 
 final class TranslationLocaleProvider implements TranslationLocaleProviderInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $defaultLocaleCode;
 
-    /**
-     * @param RepositoryInterface $localeRepository
-     * @param string $defaultLocaleCode
-     */
     public function __construct(RepositoryInterface $localeRepository, string $defaultLocaleCode)
     {
         $this->localeRepository = $localeRepository;

@@ -16,7 +16,7 @@ namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Collections\ExpressionBuilder as CollectionsExpressionBuilder;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', ExpressionBuilder::class), E_USER_DEPRECATED);
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', ExpressionBuilder::class), \E_USER_DEPRECATED);
 
 /**
  * Creates an object graph (using Doctrine\Commons\Collections\Expr\*) which we
@@ -24,19 +24,12 @@ use Doctrine\Common\Collections\ExpressionBuilder as CollectionsExpressionBuilde
  */
 final class ExpressionBuilder implements ExpressionBuilderInterface
 {
-    /**
-     * @var CollectionsExpressionBuilder
-     */
+    /** @var CollectionsExpressionBuilder */
     private $expressionBuilder;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $orderBys = [];
 
-    /**
-     * @param CollectionsExpressionBuilder|null $expressionBuilder
-     */
     public function __construct(CollectionsExpressionBuilder $expressionBuilder = null)
     {
         $this->expressionBuilder = $expressionBuilder ?: new CollectionsExpressionBuilder();
@@ -178,9 +171,6 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $this->orderBys[$field] = $direction;
     }
 
-    /**
-     * @return array
-     */
     public function getOrderBys(): array
     {
         return $this->orderBys;

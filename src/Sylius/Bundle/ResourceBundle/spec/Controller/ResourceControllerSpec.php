@@ -2481,19 +2481,11 @@ final class ResourceControllerSpec extends ObjectBehavior
         };
     }
 
-    /**
-     * @param View $view
-     */
     private function unwrapViewData(View $view)
     {
         $view->setData($this->unwrapIfCollaborator($view->getData()));
     }
 
-    /**
-     * @param mixed $value
-     *
-     * @return mixed
-     */
     private function unwrapIfCollaborator($value)
     {
         if (null === $value) {
@@ -2513,9 +2505,6 @@ final class ResourceControllerSpec extends ObjectBehavior
         return $value;
     }
 
-    /**
-     * @param View $view
-     */
     private function nullifyDates(View $view)
     {
         $headers = $view->getHeaders();

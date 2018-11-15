@@ -46,9 +46,6 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
      */
     public function isMainTaxonChosen($taxonName);
 
-    /**
-     * @param TaxonInterface $taxon
-     */
     public function selectMainTaxon(TaxonInterface $taxon);
 
     /**

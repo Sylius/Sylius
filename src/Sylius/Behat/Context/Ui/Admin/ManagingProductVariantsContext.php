@@ -28,50 +28,27 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var GeneratePageInterface
-     */
+    /** @var GeneratePageInterface */
     private $generatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param GeneratePageInterface $generatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreatePageInterface $createPage,

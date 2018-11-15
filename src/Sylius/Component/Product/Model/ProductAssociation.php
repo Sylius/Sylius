@@ -21,24 +21,16 @@ class ProductAssociation implements ProductAssociationInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var ProductAssociationTypeInterface
-     */
+    /** @var ProductAssociationTypeInterface */
     protected $type;
 
-    /**
-     * @var ProductInterface
-     */
+    /** @var ProductInterface */
     protected $owner;
 
-    /**
-     * @var Collection|ProductInterface[]
-     */
+    /** @var Collection|ProductInterface[] */
     protected $associatedProducts;
 
     public function __construct()

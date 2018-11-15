@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface GeneratePageInterface extends SymfonyPageInterface
 {
@@ -50,9 +50,6 @@ interface GeneratePageInterface extends SymfonyPageInterface
      */
     public function specifyCodeLength($codeLength);
 
-    /**
-     * @param \DateTimeInterface $date
-     */
     public function setExpiresAt(\DateTimeInterface $date);
 
     /**

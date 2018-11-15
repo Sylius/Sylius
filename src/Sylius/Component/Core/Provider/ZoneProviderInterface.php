@@ -18,10 +18,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface ZoneProviderInterface
 {
-    /**
-     * @param OrderInterface $order
-     *
-     * @return ZoneInterface|null
-     */
     public function getZone(OrderInterface $order): ?ZoneInterface;
 }

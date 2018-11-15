@@ -20,20 +20,12 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 
 final class CachedTemplateLocator implements TemplateLocatorInterface
 {
-    /**
-     * @var TemplateLocatorInterface
-     */
+    /** @var TemplateLocatorInterface */
     private $decoratedTemplateLocator;
 
-    /**
-     * @var Cache
-     */
+    /** @var Cache */
     private $cache;
 
-    /**
-     * @param TemplateLocatorInterface $decoratedTemplateLocator
-     * @param Cache $cache
-     */
     public function __construct(TemplateLocatorInterface $decoratedTemplateLocator, Cache $cache)
     {
         $this->decoratedTemplateLocator = $decoratedTemplateLocator;
@@ -59,12 +51,6 @@ final class CachedTemplateLocator implements TemplateLocatorInterface
         return $this->decoratedTemplateLocator->locateTemplate($template, $theme);
     }
 
-    /**
-     * @param TemplateReferenceInterface $template
-     * @param ThemeInterface $theme
-     *
-     * @return string
-     */
     private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme): string
     {
         return $template->getLogicalName() . '|' . $theme->getName();

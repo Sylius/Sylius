@@ -19,9 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ShippingMethodApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -59,8 +57,6 @@ final class ShippingMethodApiTest extends JsonApiTestCase
     }
 
     /**
-     * @param ShippingMethodInterface $shippingMethod
-     *
      * @return string
      */
     private function getShippingMethodUrl(ShippingMethodInterface $shippingMethod)

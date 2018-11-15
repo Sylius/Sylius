@@ -21,20 +21,12 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 final class ChannelBasedLocaleProvider implements LocaleProviderInterface
 {
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $defaultLocaleCode;
 
-    /**
-     * @param ChannelContextInterface $channelContext
-     * @param string $defaultLocaleCode
-     */
     public function __construct(ChannelContextInterface $channelContext, string $defaultLocaleCode)
     {
         $this->channelContext = $channelContext;

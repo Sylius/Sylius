@@ -19,14 +19,9 @@ use Webmozart\Assert\Assert;
 
 final class HomepageContext implements Context
 {
-    /**
-     * @var HomePageInterface
-     */
+    /** @var HomePageInterface */
     private $homePage;
 
-    /**
-     * @param HomePageInterface $homepage
-     */
     public function __construct(HomePageInterface $homepage)
     {
         $this->homePage = $homepage;

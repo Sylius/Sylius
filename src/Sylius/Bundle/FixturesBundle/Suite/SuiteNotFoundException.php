@@ -15,10 +15,6 @@ namespace Sylius\Bundle\FixturesBundle\Suite;
 
 final class SuiteNotFoundException extends \InvalidArgumentException
 {
-    /**
-     * @param string $name
-     * @param \Exception|null $previous
-     */
     public function __construct(string $name, ?\Exception $previous = null)
     {
         parent::__construct(sprintf('Suite with name "%s" could not be found!', $name), 0, $previous);

@@ -11,8 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page;
+namespace Sylius\Behat\Service\Checker;
 
-final class UnexpectedPageException extends \Exception
+interface ImageExistenceCheckerInterface
 {
+    public function doesImageWithUrlExist(string $imageUrl, string $liipImagineImagineFilter): bool;
 }

@@ -26,26 +26,15 @@ use Webmozart\Assert\Assert;
 
 class UniqueReviewerEmailValidator extends ConstraintValidator
 {
-    /**
-     * @var UserRepository
-     */
+    /** @var UserRepository */
     private $userRepository;
 
-    /**
-     * @var TokenStorageInterface
-     */
+    /** @var TokenStorageInterface */
     private $tokenStorage;
 
-    /**
-     * @var AuthorizationCheckerInterface
-     */
+    /** @var AuthorizationCheckerInterface */
     private $authorizationChecker;
 
-    /**
-     * @param UserRepositoryInterface $userRepository
-     * @param TokenStorageInterface $tokenStorage
-     * @param AuthorizationCheckerInterface $authorizationChecker
-     */
     public function __construct(
         UserRepositoryInterface $userRepository,
         TokenStorageInterface $tokenStorage,
@@ -83,11 +72,6 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
         }
     }
 
-    /**
-     * @param TokenInterface $token
-     *
-     * @return string|null
-     */
     private function getAuthenticatedUserEmail(TokenInterface $token): ?string
     {
         if (null === $token) {

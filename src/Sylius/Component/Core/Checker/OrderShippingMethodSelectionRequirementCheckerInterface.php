@@ -17,10 +17,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface OrderShippingMethodSelectionRequirementCheckerInterface
 {
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
     public function isShippingMethodSelectionRequired(OrderInterface $order): bool;
 }

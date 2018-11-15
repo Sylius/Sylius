@@ -27,25 +27,15 @@ use Webmozart\Assert\Assert;
 
 final class ShopBasedCartContext implements CartContextInterface
 {
-    /**
-     * @var CartContextInterface
-     */
+    /** @var CartContextInterface */
     private $cartContext;
 
-    /**
-     * @var ShopperContextInterface
-     */
+    /** @var ShopperContextInterface */
     private $shopperContext;
 
-    /**
-     * @var OrderInterface|null
-     */
+    /** @var OrderInterface|null */
     private $cart;
 
-    /**
-     * @param CartContextInterface $cartContext
-     * @param ShopperContextInterface $shopperContext
-     */
     public function __construct(CartContextInterface $cartContext, ShopperContextInterface $shopperContext)
     {
         $this->cartContext = $cartContext;
@@ -87,10 +77,6 @@ final class ShopBasedCartContext implements CartContextInterface
         return $cart;
     }
 
-    /**
-     * @param OrderInterface $cart
-     * @param CustomerInterface $customer
-     */
     private function setCustomerAndAddressOnCart(OrderInterface $cart, CustomerInterface $customer): void
     {
         $cart->setCustomer($customer);

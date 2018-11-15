@@ -18,11 +18,5 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 
 interface ProductVariantsParityCheckerInterface
 {
-    /**
-     * @param ProductVariantInterface $variant
-     * @param ProductInterface $product
-     *
-     * @return bool
-     */
     public function checkParity(ProductVariantInterface $variant, ProductInterface $product): bool;
 }

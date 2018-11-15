@@ -15,33 +15,20 @@ namespace Sylius\Bundle\FixturesBundle\Suite;
 
 final class LazySuiteRegistry implements SuiteRegistryInterface
 {
-    /**
-     * @var SuiteFactoryInterface
-     */
+    /** @var SuiteFactoryInterface */
     private $suiteFactory;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $suiteDefinitions = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $suites = [];
 
-    /**
-     * @param SuiteFactoryInterface $suiteFactory
-     */
     public function __construct(SuiteFactoryInterface $suiteFactory)
     {
         $this->suiteFactory = $suiteFactory;
     }
 
-    /**
-     * @param string $name
-     * @param array $configuration
-     */
     public function addSuite(string $name, array $configuration): void
     {
         $this->suiteDefinitions[$name] = $configuration;

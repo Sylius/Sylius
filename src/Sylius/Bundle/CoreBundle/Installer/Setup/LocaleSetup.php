@@ -22,26 +22,15 @@ use Symfony\Component\Intl\Intl;
 
 final class LocaleSetup implements LocaleSetupInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $localeFactory;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $locale;
 
-    /**
-     * @param RepositoryInterface $localeRepository
-     * @param FactoryInterface $localeFactory
-     * @param string $locale
-     */
     public function __construct(RepositoryInterface $localeRepository, FactoryInterface $localeFactory, string $locale)
     {
         $this->localeRepository = $localeRepository;
@@ -73,11 +62,6 @@ final class LocaleSetup implements LocaleSetupInterface
         return $locale;
     }
 
-    /**
-     * @param string $code
-     *
-     * @return string|null
-     */
     private function getLanguageName(string $code): ?string
     {
         return Intl::getLanguageBundle()->getLanguageName($code);

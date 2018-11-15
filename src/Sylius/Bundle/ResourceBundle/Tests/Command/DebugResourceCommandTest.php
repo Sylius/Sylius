@@ -23,14 +23,10 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 final class DebugResourceCommandTest extends TestCase
 {
-    /**
-     * @var ObjectProphecy|RegistryInterface
-     */
+    /** @var ObjectProphecy|RegistryInterface */
     private $registry;
 
-    /**
-     * @var CommandTester
-     */
+    /** @var CommandTester */
     private $tester;
 
     public function setUp(): void
@@ -88,11 +84,6 @@ EOT
         , $display);
     }
 
-    /**
-     * @param string $suffix
-     *
-     * @return MetadataInterface
-     */
     private function createMetadata(string $suffix): MetadataInterface
     {
         $metadata = Metadata::fromAliasAndConfiguration(sprintf('sylius.%s', $suffix), [

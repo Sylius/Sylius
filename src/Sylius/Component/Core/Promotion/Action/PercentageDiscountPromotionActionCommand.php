@@ -25,20 +25,12 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
 {
     public const TYPE = 'order_percentage_discount';
 
-    /**
-     * @var ProportionalIntegerDistributorInterface
-     */
+    /** @var ProportionalIntegerDistributorInterface */
     private $distributor;
 
-    /**
-     * @var UnitsPromotionAdjustmentsApplicatorInterface
-     */
+    /** @var UnitsPromotionAdjustmentsApplicatorInterface */
     private $unitsPromotionAdjustmentsApplicator;
 
-    /**
-     * @param ProportionalIntegerDistributorInterface $distributor
-     * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
-     */
     public function __construct(
         ProportionalIntegerDistributorInterface $distributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
@@ -91,12 +83,6 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
         }
     }
 
-    /**
-     * @param int $promotionSubjectTotal
-     * @param float $percentage
-     *
-     * @return int
-     */
     private function calculateAdjustmentAmount(int $promotionSubjectTotal, float $percentage): int
     {
         return -1 * (int) round($promotionSubjectTotal * $percentage);

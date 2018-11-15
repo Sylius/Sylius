@@ -23,25 +23,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractResourceFixture implements FixtureInterface
 {
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @var ExampleFactoryInterface
-     */
+    /** @var ExampleFactoryInterface */
     private $exampleFactory;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param ObjectManager $objectManager
-     * @param ExampleFactoryInterface $exampleFactory
-     */
     public function __construct(ObjectManager $objectManager, ExampleFactoryInterface $exampleFactory)
     {
         $this->objectManager = $objectManager;
@@ -65,9 +55,6 @@ abstract class AbstractResourceFixture implements FixtureInterface
         ;
     }
 
-    /**
-     * @param array $options
-     */
     final public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
@@ -111,9 +98,6 @@ abstract class AbstractResourceFixture implements FixtureInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $resourceNode
-     */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         // empty

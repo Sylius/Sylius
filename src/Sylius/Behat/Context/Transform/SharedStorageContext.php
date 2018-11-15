@@ -19,14 +19,9 @@ use Sylius\Component\Core\Formatter\StringInflector;
 
 final class SharedStorageContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     */
     public function __construct(SharedStorageInterface $sharedStorage)
     {
         $this->sharedStorage = $sharedStorage;

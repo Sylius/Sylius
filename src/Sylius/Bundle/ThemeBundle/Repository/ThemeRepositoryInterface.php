@@ -22,17 +22,7 @@ interface ThemeRepositoryInterface
      */
     public function findAll(): array;
 
-    /**
-     * @param string $name
-     *
-     * @return ThemeInterface|null
-     */
     public function findOneByName(string $name): ?ThemeInterface;
 
-    /**
-     * @param string $title
-     *
-     * @return ThemeInterface|null
-     */
     public function findOneByTitle(string $title): ?ThemeInterface;
 }

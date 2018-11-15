@@ -20,20 +20,12 @@ use Symfony\Component\BrowserKit\Cookie;
 
 final class CookieSetter implements CookieSetterInterface
 {
-    /**
-     * @var Session
-     */
+    /** @var Session */
     private $minkSession;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $minkParameters;
 
-    /**
-     * @param Session $minkSession
-     * @param array $minkParameters
-     */
     public function __construct(Session $minkSession, array $minkParameters)
     {
         $this->minkSession = $minkSession;
@@ -51,7 +43,7 @@ final class CookieSetter implements CookieSetterInterface
 
         if ($driver instanceof SymfonyDriver) {
             $driver->getClient()->getCookieJar()->set(
-                new Cookie($name, $value, null, null, parse_url($this->minkParameters['base_url'], PHP_URL_HOST))
+                new Cookie($name, $value, null, null, parse_url($this->minkParameters['base_url'], \PHP_URL_HOST))
             );
 
             return;

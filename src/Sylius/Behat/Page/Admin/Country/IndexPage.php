@@ -35,7 +35,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     }
 
     /**
-     * @param CountryInterface $country
      * @param string $status
      *
      * @return bool

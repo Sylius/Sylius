@@ -22,20 +22,12 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class LocaleStrippingRouter implements RouterInterface, WarmableInterface
 {
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * @var LocaleContextInterface
-     */
+    /** @var LocaleContextInterface */
     private $localeContext;
 
-    /**
-     * @param RouterInterface $router
-     * @param LocaleContextInterface $localeContext
-     */
     public function __construct(RouterInterface $router, LocaleContextInterface $localeContext)
     {
         $this->router = $router;
@@ -98,13 +90,6 @@ final class LocaleStrippingRouter implements RouterInterface, WarmableInterface
         }
     }
 
-    /**
-     * @param string $url
-     * @param string $key
-     * @param string $value
-     *
-     * @return string
-     */
     private function removeUnusedQueryArgument(string $url, string $key, string $value): string
     {
         $replace = [

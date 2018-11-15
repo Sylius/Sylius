@@ -18,33 +18,15 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ProvinceInterface extends ResourceInterface, CodeAwareInterface
 {
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void;
 
-    /**
-     * @return string|null
-     */
     public function getAbbreviation(): ?string;
 
-    /**
-     * @param string|null $abbreviation
-     */
     public function setAbbreviation(?string $abbreviation): void;
 
-    /**
-     * @return CountryInterface|null
-     */
     public function getCountry(): ?CountryInterface;
 
-    /**
-     * @param CountryInterface|null $country
-     */
     public function setCountry(?CountryInterface $country): void;
 }

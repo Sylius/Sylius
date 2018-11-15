@@ -18,37 +18,21 @@ use Symfony\Component\EventDispatcher\Event;
 
 final class EmailSendEvent extends Event
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $message;
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     protected $recipients;
 
-    /**
-     * @var EmailInterface
-     */
+    /** @var EmailInterface */
     protected $email;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $data;
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     protected $replyTo;
 
-    /**
-     * @param mixed $message
-     * @param array $recipients
-     * @param EmailInterface $email
-     * @param array $data
-     */
     public function __construct($message, EmailInterface $email, array $data, array $recipients = [], array $replyTo = [])
     {
         $this->message = $message;
@@ -58,33 +42,21 @@ final class EmailSendEvent extends Event
         $this->replyTo = $replyTo;
     }
 
-    /**
-     * @return array
-     */
     public function getRecipients(): array
     {
         return $this->recipients;
     }
 
-    /**
-     * @return EmailInterface
-     */
     public function getEmail(): EmailInterface
     {
         return $this->email;
     }
 
-    /**
-     * @return mixed
-     */
     public function getMessage()
     {
         return $this->message;
     }
 
-    /**
-     * @return array
-     */
     public function getData(): array
     {
         return $this->data;

@@ -19,14 +19,9 @@ use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
 
 final class TemplatePathsCacheClearer implements CacheClearerInterface
 {
-    /**
-     * @var Cache
-     */
+    /** @var Cache */
     private $cache;
 
-    /**
-     * @param Cache $cache
-     */
     public function __construct(Cache $cache)
     {
         $this->cache = $cache;

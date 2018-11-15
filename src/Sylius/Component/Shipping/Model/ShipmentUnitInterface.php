@@ -18,18 +18,9 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 
 interface ShipmentUnitInterface extends TimestampableInterface, ResourceInterface
 {
-    /**
-     * @return ShipmentInterface|null
-     */
     public function getShipment(): ?ShipmentInterface;
 
-    /**
-     * @param ShipmentInterface|null $shipment
-     */
     public function setShipment(?ShipmentInterface $shipment): void;
 
-    /**
-     * @return ShippableInterface|null
-     */
     public function getShippable(): ?ShippableInterface;
 }

@@ -20,14 +20,9 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 final class HookableSuiteLoader implements SuiteLoaderInterface
 {
-    /**
-     * @var SuiteLoaderInterface
-     */
+    /** @var SuiteLoaderInterface */
     private $decoratedSuiteLoader;
 
-    /**
-     * @param SuiteLoaderInterface $decoratedSuiteLoader
-     */
     public function __construct(SuiteLoaderInterface $decoratedSuiteLoader)
     {
         $this->decoratedSuiteLoader = $decoratedSuiteLoader;
@@ -47,10 +42,6 @@ final class HookableSuiteLoader implements SuiteLoaderInterface
         $this->executeAfterSuiteListeners($suite, $suiteEvent);
     }
 
-    /**
-     * @param SuiteInterface $suite
-     * @param SuiteEvent $suiteEvent
-     */
     private function executeBeforeSuiteListeners(SuiteInterface $suite, SuiteEvent $suiteEvent): void
     {
         foreach ($suite->getListeners() as $listener => $listenerOptions) {
@@ -62,10 +53,6 @@ final class HookableSuiteLoader implements SuiteLoaderInterface
         }
     }
 
-    /**
-     * @param SuiteInterface $suite
-     * @param SuiteEvent $suiteEvent
-     */
     private function executeAfterSuiteListeners(SuiteInterface $suite, SuiteEvent $suiteEvent): void
     {
         foreach ($suite->getListeners() as $listener => $listenerOptions) {

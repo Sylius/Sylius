@@ -19,39 +19,25 @@ class Review implements ReviewInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $title;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $rating;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $comment;
 
-    /**
-     * @var ReviewerInterface
-     */
+    /** @var ReviewerInterface */
     protected $author;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $status = ReviewInterface::STATUS_NEW;
 
-    /**
-     * @var ReviewableInterface
-     */
+    /** @var ReviewableInterface */
     protected $reviewSubject;
 
     public function __construct()

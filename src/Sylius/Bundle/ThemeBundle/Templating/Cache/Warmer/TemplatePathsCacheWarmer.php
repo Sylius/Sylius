@@ -24,32 +24,18 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 
 final class TemplatePathsCacheWarmer implements CacheWarmerInterface
 {
-    /**
-     * @var TemplateFinderInterface
-     */
+    /** @var TemplateFinderInterface */
     private $templateFinder;
 
-    /**
-     * @var TemplateLocatorInterface
-     */
+    /** @var TemplateLocatorInterface */
     private $templateLocator;
 
-    /**
-     * @var ThemeRepositoryInterface
-     */
+    /** @var ThemeRepositoryInterface */
     private $themeRepository;
 
-    /**
-     * @var Cache
-     */
+    /** @var Cache */
     private $cache;
 
-    /**
-     * @param TemplateFinderInterface $templateFinder
-     * @param TemplateLocatorInterface $templateLocator
-     * @param ThemeRepositoryInterface $themeRepository
-     * @param Cache $cache
-     */
     public function __construct(
         TemplateFinderInterface $templateFinder,
         TemplateLocatorInterface $templateLocator,
@@ -83,9 +69,6 @@ final class TemplatePathsCacheWarmer implements CacheWarmerInterface
         return true;
     }
 
-    /**
-     * @param TemplateReferenceInterface $template
-     */
     private function warmUpTemplate(TemplateReferenceInterface $template): void
     {
         /** @var ThemeInterface $theme */
@@ -94,10 +77,6 @@ final class TemplatePathsCacheWarmer implements CacheWarmerInterface
         }
     }
 
-    /**
-     * @param TemplateReferenceInterface $template
-     * @param ThemeInterface $theme
-     */
     private function warmUpThemeTemplate(TemplateReferenceInterface $template, ThemeInterface $theme): void
     {
         try {
@@ -109,12 +88,6 @@ final class TemplatePathsCacheWarmer implements CacheWarmerInterface
         $this->cache->save($this->getCacheKey($template, $theme), $location);
     }
 
-    /**
-     * @param TemplateReferenceInterface $template
-     * @param ThemeInterface $theme
-     *
-     * @return string
-     */
     private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme): string
     {
         return $template->getLogicalName() . '|' . $theme->getName();

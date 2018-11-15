@@ -24,23 +24,12 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
  */
 class PathPackage extends BasePathPackage
 {
-    /**
-     * @var ThemeContextInterface
-     */
+    /** @var ThemeContextInterface */
     protected $themeContext;
 
-    /**
-     * @var PathResolverInterface
-     */
+    /** @var PathResolverInterface */
     protected $pathResolver;
 
-    /**
-     * @param string $basePath
-     * @param VersionStrategyInterface $versionStrategy
-     * @param ThemeContextInterface $themeContext
-     * @param PathResolverInterface $pathResolver
-     * @param ContextInterface|null $context
-     */
     public function __construct(
         string $basePath,
         VersionStrategyInterface $versionStrategy,

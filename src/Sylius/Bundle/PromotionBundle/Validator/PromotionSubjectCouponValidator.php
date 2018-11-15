@@ -22,14 +22,9 @@ use Webmozart\Assert\Assert;
 
 final class PromotionSubjectCouponValidator extends ConstraintValidator
 {
-    /**
-     * @var PromotionEligibilityCheckerInterface
-     */
+    /** @var PromotionEligibilityCheckerInterface */
     private $promotionEligibilityChecker;
 
-    /**
-     * @param PromotionEligibilityCheckerInterface $promotionEligibilityChecker
-     */
     public function __construct(PromotionEligibilityCheckerInterface $promotionEligibilityChecker)
     {
         $this->promotionEligibilityChecker = $promotionEligibilityChecker;

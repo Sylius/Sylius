@@ -23,32 +23,18 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxRateContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -323,7 +309,6 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @param TaxRateInterface $taxRate
      * @param string $element
      * @param string $taxRateElement
      */

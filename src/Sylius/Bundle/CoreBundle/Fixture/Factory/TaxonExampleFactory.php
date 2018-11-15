@@ -25,42 +25,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $taxonFactory;
 
-    /**
-     * @var TaxonRepositoryInterface
-     */
+    /** @var TaxonRepositoryInterface */
     private $taxonRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var TaxonSlugGeneratorInterface
-     */
+    /** @var TaxonSlugGeneratorInterface */
     private $taxonSlugGenerator;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $taxonFactory
-     * @param TaxonRepositoryInterface $taxonRepository
-     * @param RepositoryInterface $localeRepository
-     * @param TaxonSlugGeneratorInterface $taxonSlugGenerator
-     */
     public function __construct(
         FactoryInterface $taxonFactory,
         TaxonRepositoryInterface $taxonRepository,
@@ -132,9 +114,6 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

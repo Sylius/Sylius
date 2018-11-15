@@ -15,14 +15,14 @@ namespace Sylius\Behat\Page\Shop;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class HomePage extends SymfonyPage implements HomePageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_homepage';
     }
@@ -138,7 +138,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'currency_selector' => '#sylius-currency-selector',

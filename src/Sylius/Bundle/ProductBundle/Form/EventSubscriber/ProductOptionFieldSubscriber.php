@@ -23,14 +23,9 @@ use Webmozart\Assert\Assert;
 
 final class ProductOptionFieldSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var ProductVariantResolverInterface
-     */
+    /** @var ProductVariantResolverInterface */
     private $variantResolver;
 
-    /**
-     * @param ProductVariantResolverInterface $variantResolver
-     */
     public function __construct(ProductVariantResolverInterface $variantResolver)
     {
         $this->variantResolver = $variantResolver;
@@ -46,9 +41,6 @@ final class ProductOptionFieldSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
         /** @var ProductInterface $product */

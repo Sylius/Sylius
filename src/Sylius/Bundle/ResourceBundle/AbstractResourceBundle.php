@@ -74,8 +74,6 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
 
     /**
      * Return the prefix of the bundle.
-     *
-     * @return string
      */
     protected function getBundlePrefix(): string
     {
@@ -84,8 +82,6 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
 
     /**
      * Return the directory where are stored the doctrine mapping.
-     *
-     * @return string
      */
     protected function getDoctrineMappingDirectory(): string
     {
@@ -105,9 +101,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     /**
      * Return mapping compiler pass class depending on driver.
      *
-     * @param string $driverType
      *
-     * @return array
      *
      * @throws UnknownDriverException
      */
@@ -118,7 +112,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
                 @trigger_error(sprintf(
                     'The "%s" driver is deprecated in Sylius 1.3. Doctrine MongoDB and PHPCR will no longer be supported in Sylius 2.0.',
                     $driverType
-                ), E_USER_DEPRECATED);
+                ), \E_USER_DEPRECATED);
 
                 $mappingsPassClassname = DoctrineMongoDBMappingsPass::class;
 
@@ -131,7 +125,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
                 @trigger_error(sprintf(
                     'The "%s" driver is deprecated in Sylius 1.3. Doctrine MongoDB and PHPCR will no longer be supported in Sylius 2.0.',
                     $driverType
-                ), E_USER_DEPRECATED);
+                ), \E_USER_DEPRECATED);
 
                 $mappingsPassClassname = DoctrinePhpcrMappingsPass::class;
 
@@ -147,8 +141,6 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
 
     /**
      * Return the absolute path where are stored the doctrine mapping.
-     *
-     * @return string
      */
     protected function getConfigFilesPath(): string
     {
@@ -159,9 +151,6 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
         );
     }
 
-    /**
-     * @return string
-     */
     protected function getObjectManagerParameter(): string
     {
         return sprintf('%s.object_manager', $this->getBundlePrefix());

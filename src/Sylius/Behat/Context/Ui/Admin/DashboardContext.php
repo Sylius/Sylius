@@ -20,14 +20,9 @@ use Webmozart\Assert\Assert;
 
 final class DashboardContext implements Context
 {
-    /**
-     * @var DashboardPageInterface
-     */
+    /** @var DashboardPageInterface */
     private $dashboardPage;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     */
     public function __construct(DashboardPageInterface $dashboardPage)
     {
         $this->dashboardPage = $dashboardPage;

@@ -25,42 +25,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductReviewExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var ReviewFactoryInterface
-     */
+    /** @var ReviewFactoryInterface */
     private $productReviewFactory;
 
-    /**
-     * @var ProductRepositoryInterface
-     */
+    /** @var ProductRepositoryInterface */
     private $productRepository;
 
-    /**
-     * @var CustomerRepositoryInterface
-     */
+    /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param ReviewFactoryInterface $productReviewFactory
-     * @param ProductRepositoryInterface $productRepository
-     * @param CustomerRepositoryInterface $customerRepository
-     * @param FactoryInterface $stateMachineFactory
-     */
     public function __construct(
         ReviewFactoryInterface $productReviewFactory,
         ProductRepositoryInterface $productRepository,
@@ -123,9 +105,6 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
         ;
     }
 
-    /**
-     * @return string
-     */
     private function getRandomStatus(): string
     {
         $statuses = [ReviewInterface::STATUS_NEW, ReviewInterface::STATUS_ACCEPTED, ReviewInterface::STATUS_REJECTED];
@@ -133,10 +112,6 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
         return $statuses[random_int(0, 2)];
     }
 
-    /**
-     * @param ReviewInterface $productReview
-     * @param string $targetState
-     */
     private function applyReviewTransition(ReviewInterface $productReview, string $targetState): void
     {
         /** @var StateMachineInterface $stateMachine */

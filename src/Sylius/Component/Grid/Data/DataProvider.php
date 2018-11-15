@@ -20,26 +20,15 @@ use Sylius\Component\Grid\Sorting\SorterInterface;
 
 final class DataProvider implements DataProviderInterface
 {
-    /**
-     * @var DataSourceProviderInterface
-     */
+    /** @var DataSourceProviderInterface */
     private $dataSourceProvider;
 
-    /**
-     * @var FiltersApplicatorInterface
-     */
+    /** @var FiltersApplicatorInterface */
     private $filtersApplicator;
 
-    /**
-     * @var SorterInterface
-     */
+    /** @var SorterInterface */
     private $sorter;
 
-    /**
-     * @param DataSourceProviderInterface $dataSourceProvider
-     * @param FiltersApplicatorInterface $filtersApplicator
-     * @param SorterInterface $sorter
-     */
     public function __construct(
         DataSourceProviderInterface $dataSourceProvider,
         FiltersApplicatorInterface $filtersApplicator,

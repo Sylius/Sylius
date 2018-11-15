@@ -42,11 +42,6 @@ final class TaxonSlugController
         $this->taxonFactory = $taxonFactory;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function generateAction(Request $request): Response
     {
         $name = $request->query->get('name');

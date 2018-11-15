@@ -24,36 +24,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductOptionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productOptionFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productOptionValueFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $productOptionFactory
-     * @param FactoryInterface $productOptionValueFactory
-     * @param RepositoryInterface $localeRepository
-     */
     public function __construct(
         FactoryInterface $productOptionFactory,
         FactoryInterface $productOptionValueFactory,
@@ -134,9 +119,6 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

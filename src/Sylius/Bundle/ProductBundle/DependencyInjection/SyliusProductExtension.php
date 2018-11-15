@@ -57,10 +57,6 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
         $this->prependAttribute($container, $config);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array $config
-     */
     private function prependAttribute(ContainerBuilder $container, array $config): void
     {
         if (!$container->hasExtension('sylius_attribute')) {

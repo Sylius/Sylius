@@ -20,14 +20,9 @@ use Webmozart\Assert\Assert;
 
 final class ZoneContext implements Context
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $zoneRepository;
 
-    /**
-     * @param RepositoryInterface $zoneRepository
-     */
     public function __construct(RepositoryInterface $zoneRepository)
     {
         $this->zoneRepository = $zoneRepository;
@@ -66,8 +61,6 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @param array $parameters
-     *
      * @return ZoneInterface
      */
     private function getZoneBy(array $parameters)

@@ -24,32 +24,18 @@ use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,

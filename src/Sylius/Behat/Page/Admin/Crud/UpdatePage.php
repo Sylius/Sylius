@@ -15,21 +15,16 @@ namespace Sylius\Behat\Page\Admin\Crud;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Symfony\Component\Routing\RouterInterface;
 
 class UpdatePage extends SymfonyPage implements UpdatePageInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $routeName;
 
     /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
      * @param string $routeName
      */
     public function __construct(Session $session, array $parameters, RouterInterface $router, $routeName)
@@ -82,7 +77,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return $this->routeName;
     }

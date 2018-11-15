@@ -25,14 +25,9 @@ use Webmozart\Assert\Assert;
 
 final class OrderPaymentStateResolver implements StateResolverInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @param FactoryInterface $stateMachineFactory
-     */
     public function __construct(FactoryInterface $stateMachineFactory)
     {
         $this->stateMachineFactory = $stateMachineFactory;
@@ -54,10 +49,6 @@ final class OrderPaymentStateResolver implements StateResolverInterface
         }
     }
 
-    /**
-     * @param StateMachineInterface $stateMachine
-     * @param string $transition
-     */
     private function applyTransition(StateMachineInterface $stateMachine, string $transition): void
     {
         if ($stateMachine->can($transition)) {
@@ -65,11 +56,6 @@ final class OrderPaymentStateResolver implements StateResolverInterface
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return string|null
-     */
     private function getTargetTransition(OrderInterface $order): ?string
     {
         $refundedPaymentTotal = 0;
@@ -124,9 +110,6 @@ final class OrderPaymentStateResolver implements StateResolverInterface
     }
 
     /**
-     * @param OrderInterface $order
-     * @param string $state
-     *
      * @return Collection|PaymentInterface[]
      */
     private function getPaymentsWithState(OrderInterface $order, string $state): Collection

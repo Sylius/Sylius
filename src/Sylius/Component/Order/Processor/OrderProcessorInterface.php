@@ -17,8 +17,5 @@ use Sylius\Component\Order\Model\OrderInterface;
 
 interface OrderProcessorInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function process(OrderInterface $order): void;
 }

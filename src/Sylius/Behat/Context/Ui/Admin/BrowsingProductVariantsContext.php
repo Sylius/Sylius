@@ -22,20 +22,12 @@ use Webmozart\Assert\Assert;
 
 final class BrowsingProductVariantsContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var ProductVariantResolverInterface
-     */
+    /** @var ProductVariantResolverInterface */
     private $defaultProductVariantResolver;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param ProductVariantResolverInterface $defaultProductVariantResolver
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         ProductVariantResolverInterface $defaultProductVariantResolver

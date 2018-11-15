@@ -19,19 +19,13 @@ class ShipmentUnit implements ShipmentUnitInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var ShipmentInterface
-     */
+    /** @var ShipmentInterface */
     protected $shipment;
 
-    /**
-     * @var ShippableInterface
-     */
+    /** @var ShippableInterface */
     protected $shippable;
 
     public function __construct()
@@ -79,9 +73,6 @@ class ShipmentUnit implements ShipmentUnitInterface
         return $this->shippable;
     }
 
-    /**
-     * @param ShippableInterface|null $shippable
-     */
     public function setShippable(?ShippableInterface $shippable): void
     {
         $this->shippable = $shippable;

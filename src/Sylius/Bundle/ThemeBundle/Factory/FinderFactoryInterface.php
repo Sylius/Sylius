@@ -17,8 +17,5 @@ use Symfony\Component\Finder\Finder;
 
 interface FinderFactoryInterface
 {
-    /**
-     * @return Finder
-     */
     public function create(): Finder;
 }

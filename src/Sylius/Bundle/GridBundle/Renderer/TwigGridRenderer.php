@@ -27,50 +27,27 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TwigGridRenderer implements GridRendererInterface
 {
-    /**
-     * @var \Twig_Environment
-     */
+    /** @var \Twig_Environment */
     private $twig;
 
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $fieldsRegistry;
 
-    /**
-     * @var FormFactoryInterface
-     */
+    /** @var FormFactoryInterface */
     private $formFactory;
 
-    /**
-     * @var FormTypeRegistryInterface
-     */
+    /** @var FormTypeRegistryInterface */
     private $formTypeRegistry;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $defaultTemplate;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $actionTemplates;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $filterTemplates;
 
-    /**
-     * @param \Twig_Environment $twig
-     * @param ServiceRegistryInterface $fieldsRegistry
-     * @param FormFactoryInterface $formFactory
-     * @param FormTypeRegistryInterface $formTypeRegistry
-     * @param string $defaultTemplate
-     * @param array $actionTemplates
-     * @param array $filterTemplates
-     */
     public function __construct(
         \Twig_Environment $twig,
         ServiceRegistryInterface $fieldsRegistry,
@@ -157,10 +134,6 @@ final class TwigGridRenderer implements GridRendererInterface
     }
 
     /**
-     * @param Filter $filter
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     private function getFilterTemplate(Filter $filter): string

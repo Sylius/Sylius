@@ -20,17 +20,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface CartItemFactoryInterface extends FactoryInterface
 {
-    /**
-     * @param ProductInterface $product
-     *
-     * @return OrderItemInterface
-     */
     public function createForProduct(ProductInterface $product): OrderItemInterface;
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return OrderItemInterface
-     */
     public function createForCart(OrderInterface $order): OrderItemInterface;
 }

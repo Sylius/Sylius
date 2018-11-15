@@ -18,24 +18,16 @@ use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
 
 final class FilesystemConfigurationProvider implements ConfigurationProviderInterface
 {
-    /**
-     * @var FileLocatorInterface
-     */
+    /** @var FileLocatorInterface */
     private $fileLocator;
 
-    /**
-     * @var ConfigurationLoaderInterface
-     */
+    /** @var ConfigurationLoaderInterface */
     private $loader;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $configurationFilename;
 
     /**
-     * @param FileLocatorInterface $fileLocator
-     * @param ConfigurationLoaderInterface $loader
      * @param string $configurationFilename
      */
     public function __construct(FileLocatorInterface $fileLocator, ConfigurationLoaderInterface $loader, $configurationFilename)

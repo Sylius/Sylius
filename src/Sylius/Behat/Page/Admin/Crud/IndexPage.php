@@ -15,28 +15,20 @@ namespace Sylius\Behat\Page\Admin\Crud;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    /**
-     * @var TableAccessorInterface
-     */
+    /** @var TableAccessorInterface */
     private $tableAccessor;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $routeName;
 
     /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
      * @param string $routeName
      */
     public function __construct(
@@ -176,7 +168,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return $this->routeName;
     }
@@ -192,7 +184,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'bulk_actions' => '.accordion:contains("%text%")',

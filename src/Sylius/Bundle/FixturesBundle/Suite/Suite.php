@@ -19,24 +19,15 @@ use Zend\Stdlib\SplPriorityQueue;
 
 final class Suite implements SuiteInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $name;
 
-    /**
-     * @var SplPriorityQueue
-     */
+    /** @var SplPriorityQueue */
     private $fixtures;
 
-    /**
-     * @var SplPriorityQueue
-     */
+    /** @var SplPriorityQueue */
     private $listeners;
 
-    /**
-     * @param string $name
-     */
     public function __construct(string $name)
     {
         $this->name = $name;
@@ -44,21 +35,11 @@ final class Suite implements SuiteInterface
         $this->listeners = new SplPriorityQueue();
     }
 
-    /**
-     * @param FixtureInterface $fixture
-     * @param array $options
-     * @param int $priority
-     */
     public function addFixture(FixtureInterface $fixture, array $options, int $priority = 0): void
     {
         $this->fixtures->insert(['fixture' => $fixture, 'options' => $options], $priority);
     }
 
-    /**
-     * @param ListenerInterface $listener
-     * @param array $options
-     * @param int $priority
-     */
     public function addListener(ListenerInterface $listener, array $options, int $priority = 0): void
     {
         $this->listeners->insert(['listener' => $listener, 'options' => $options], $priority);

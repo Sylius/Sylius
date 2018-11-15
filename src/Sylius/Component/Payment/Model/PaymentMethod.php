@@ -26,24 +26,16 @@ class PaymentMethod implements PaymentMethodInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $environment;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
     public function __construct()
@@ -53,9 +45,6 @@ class PaymentMethod implements PaymentMethodInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();
@@ -166,8 +155,6 @@ class PaymentMethod implements PaymentMethodInterface
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return PaymentMethodTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

@@ -20,8 +20,6 @@ interface LocaleHelperInterface extends HelperInterface
     /**
      * @param string $code The code to be converted to a name
      * @param string|null $localeCode The locale that the returned name should be in
-     *
-     * @return string|null
      */
     public function convertCodeToName(string $code, ?string $localeCode = null): ?string;
 }

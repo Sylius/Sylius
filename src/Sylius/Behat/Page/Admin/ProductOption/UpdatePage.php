@@ -85,7 +85,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_option_code',
@@ -94,9 +94,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         ]);
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastOptionValueElement(): NodeElement
     {
         $optionValues = $this->getElement('values');

@@ -19,14 +19,9 @@ use Symfony\Component\Templating\Helper\Helper;
 
 class AdjustmentsHelper extends Helper
 {
-    /**
-     * @var AdjustmentsAggregatorInterface
-     */
+    /** @var AdjustmentsAggregatorInterface */
     private $adjustmentsAggregator;
 
-    /**
-     * @param AdjustmentsAggregatorInterface $adjustmentsAggregator
-     */
     public function __construct(AdjustmentsAggregatorInterface $adjustmentsAggregator)
     {
         $this->adjustmentsAggregator = $adjustmentsAggregator;
@@ -34,8 +29,6 @@ class AdjustmentsHelper extends Helper
 
     /**
      * @param iterable|AdjustmentInterface[] $adjustments
-     *
-     * @return array
      */
     public function getAggregatedAdjustments(iterable $adjustments): array
     {

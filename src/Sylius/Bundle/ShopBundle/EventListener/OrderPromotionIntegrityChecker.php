@@ -26,32 +26,18 @@ use Webmozart\Assert\Assert;
 
 final class OrderPromotionIntegrityChecker
 {
-    /**
-     * @var PromotionEligibilityCheckerInterface
-     */
+    /** @var PromotionEligibilityCheckerInterface */
     private $promotionEligibilityChecker;
 
-    /**
-     * @var PromotionApplicatorInterface
-     */
+    /** @var PromotionApplicatorInterface */
     private $promotionApplicator;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * @param PromotionEligibilityCheckerInterface $promotionEligibilityChecker
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param RouterInterface $router
-     * @param PromotionApplicatorInterface $promotionApplicator
-     */
     public function __construct(
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
         EventDispatcherInterface $eventDispatcher,
@@ -68,9 +54,6 @@ final class OrderPromotionIntegrityChecker
         $this->promotionApplicator = $promotionApplicator;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function check(ResourceControllerEvent $event): void
     {
         /** @var OrderInterface $order */

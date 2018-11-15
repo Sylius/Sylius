@@ -26,15 +26,9 @@ use Webmozart\Assert\Assert;
 
 final class UserMailerListener extends MailerListener
 {
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @param SenderInterface $emailSender
-     * @param ChannelContextInterface $channelContext
-     */
     public function __construct(SenderInterface $emailSender, ChannelContextInterface $channelContext)
     {
         parent::__construct($emailSender);
@@ -43,8 +37,6 @@ final class UserMailerListener extends MailerListener
     }
 
     /**
-     * @param GenericEvent $event
-     *
      * @throws UnexpectedTypeException
      */
     public function sendUserRegistrationEmail(GenericEvent $event): void

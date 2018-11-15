@@ -23,14 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingCategoryChoiceType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $shippingCategoryRepository;
 
-    /**
-     * @param RepositoryInterface $shippingCategoryRepository
-     */
     public function __construct(RepositoryInterface $shippingCategoryRepository)
     {
         $this->shippingCategoryRepository = $shippingCategoryRepository;

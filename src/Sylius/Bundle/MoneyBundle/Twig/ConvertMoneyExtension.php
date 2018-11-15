@@ -17,14 +17,9 @@ use Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface;
 
 final class ConvertMoneyExtension extends \Twig_Extension
 {
-    /**
-     * @var ConvertMoneyHelperInterface
-     */
+    /** @var ConvertMoneyHelperInterface */
     private $helper;
 
-    /**
-     * @param ConvertMoneyHelperInterface $helper
-     */
     public function __construct(ConvertMoneyHelperInterface $helper)
     {
         $this->helper = $helper;

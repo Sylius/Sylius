@@ -21,29 +21,18 @@ use Sylius\Behat\Service\ResponseLoaderInterface;
 
 class PaypalApiMocker
 {
-    /**
-     * @var MockerInterface
-     */
+    /** @var MockerInterface */
     private $mocker;
 
-    /**
-     * @var ResponseLoaderInterface
-     */
+    /** @var ResponseLoaderInterface */
     private $responseLoader;
 
-    /**
-     * @param MockerInterface $mocker
-     * @param ResponseLoaderInterface $responseLoader
-     */
     public function __construct(MockerInterface $mocker, ResponseLoaderInterface $responseLoader)
     {
         $this->mocker = $mocker;
         $this->responseLoader = $responseLoader;
     }
 
-    /**
-     * @param callable $action
-     */
     public function performActionInApiInitializeScope(callable $action)
     {
         $this->mockApiPaymentInitializeResponse();
@@ -51,9 +40,6 @@ class PaypalApiMocker
         $this->mocker->unmockAll();
     }
 
-    /**
-     * @param callable $action
-     */
     public function performActionInApiSuccessfulScope(callable $action)
     {
         $this->mockApiSuccessfulPaymentResponse();
@@ -115,7 +101,6 @@ class PaypalApiMocker
 
     /**
      * @param int $statusCode
-     * @param mixed $streamMock
      *
      * @return Mock
      */

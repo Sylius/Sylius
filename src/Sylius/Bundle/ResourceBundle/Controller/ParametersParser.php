@@ -20,20 +20,12 @@ use Webmozart\Assert\Assert;
 
 final class ParametersParser implements ParametersParserInterface
 {
-    /**
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     private $container;
 
-    /**
-     * @var ExpressionLanguage
-     */
+    /** @var ExpressionLanguage */
     private $expression;
 
-    /**
-     * @param ContainerInterface $container
-     * @param ExpressionLanguage $expression
-     */
     public function __construct(ContainerInterface $container, ExpressionLanguage $expression)
     {
         $this->container = $container;
@@ -54,12 +46,6 @@ final class ParametersParser implements ParametersParserInterface
         }, $parameters);
     }
 
-    /**
-     * @param mixed $parameter
-     * @param Request $request
-     *
-     * @return mixed
-     */
     private function parseRequestValue($parameter, Request $request)
     {
         if (!is_string($parameter)) {
@@ -81,12 +67,6 @@ final class ParametersParser implements ParametersParserInterface
         return $parameter;
     }
 
-    /**
-     * @param string $expression
-     * @param Request $request
-     *
-     * @return mixed
-     */
     private function parseRequestValueExpression(string $expression, Request $request)
     {
         $expression = preg_replace_callback('/(\$\w+)/', function ($matches) use ($request) {
@@ -106,12 +86,6 @@ final class ParametersParser implements ParametersParserInterface
         return $this->expression->evaluate($expression, ['container' => $this->container]);
     }
 
-    /**
-     * @param mixed $parameter
-     * @param Request $request
-     *
-     * @return mixed
-     */
     private function parseRequestValueTypecast($parameter, Request $request)
     {
         [$typecast, $castedValue] = explode(' ', $parameter, 2);

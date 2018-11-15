@@ -20,24 +20,12 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 
 interface TaxCategoryInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void;
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string;
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void;
 
     /**
@@ -45,20 +33,9 @@ interface TaxCategoryInterface extends CodeAwareInterface, TimestampableInterfac
      */
     public function getRates(): Collection;
 
-    /**
-     * @param TaxRateInterface $rate
-     */
     public function addRate(TaxRateInterface $rate): void;
 
-    /**
-     * @param TaxRateInterface $rate
-     */
     public function removeRate(TaxRateInterface $rate): void;
 
-    /**
-     * @param TaxRateInterface $rate
-     *
-     * @return bool
-     */
     public function hasRate(TaxRateInterface $rate): bool;
 }

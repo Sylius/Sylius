@@ -23,35 +23,23 @@ use Symfony\Component\Translation\Translator as BaseTranslator;
 
 final class Translator extends BaseTranslator implements WarmableInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $options = [
         'cache_dir' => null,
         'debug' => false,
     ];
 
-    /**
-     * @var TranslatorLoaderProviderInterface
-     */
+    /** @var TranslatorLoaderProviderInterface */
     private $loaderProvider;
 
-    /**
-     * @var TranslatorResourceProviderInterface
-     */
+    /** @var TranslatorResourceProviderInterface */
     private $resourceProvider;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $resourcesLoaded = false;
 
     /**
-     * @param TranslatorLoaderProviderInterface $loaderProvider
-     * @param TranslatorResourceProviderInterface $resourceProvider
      * @param MessageSelector|MessageFormatterInterface $messageFormatterOrSelector
-     * @param string $locale
-     * @param array $options
      */
     public function __construct(
         TranslatorLoaderProviderInterface $loaderProvider,
@@ -132,11 +120,6 @@ final class Translator extends BaseTranslator implements WarmableInterface
         return array_unique($fallbackLocales);
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return string
-     */
     private function getLocaleModifier(string $locale): string
     {
         $modifier = strrchr($locale, '@');
@@ -144,12 +127,6 @@ final class Translator extends BaseTranslator implements WarmableInterface
         return $modifier ?: '';
     }
 
-    /**
-     * @param string $locale
-     * @param string $modifier
-     *
-     * @return string
-     */
     private function getLocaleWithoutModifier(string $locale, string $modifier): string
     {
         return str_replace($modifier, '', $locale);
@@ -188,9 +165,6 @@ final class Translator extends BaseTranslator implements WarmableInterface
         }
     }
 
-    /**
-     * @param array $options
-     */
     private function assertOptionsAreKnown(array $options): void
     {
         if ($diff = array_diff(array_keys($options), array_keys($this->options))) {
@@ -201,7 +175,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
     private function provideMessageFormatter($messageFormatterOrSelector): MessageFormatterInterface
     {
         if ($messageFormatterOrSelector instanceof MessageSelector) {
-            @trigger_error(sprintf('Passing a "%s" instance into the "%s" as a third argument is deprecated since Sylius 1.2 and will be removed in 2.0. Inject a "%s" implementation instead.', MessageSelector::class, __METHOD__, MessageFormatterInterface::class), E_USER_DEPRECATED);
+            @trigger_error(sprintf('Passing a "%s" instance into the "%s" as a third argument is deprecated since Sylius 1.2 and will be removed in 2.0. Inject a "%s" implementation instead.', MessageSelector::class, __METHOD__, MessageFormatterInterface::class), \E_USER_DEPRECATED);
 
             return new MessageFormatter($messageFormatterOrSelector);
         }

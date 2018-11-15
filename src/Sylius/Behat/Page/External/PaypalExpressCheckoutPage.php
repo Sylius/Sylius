@@ -14,23 +14,16 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\External;
 
 use Behat\Mink\Session;
+use FriendsOfBehat\PageObjectExtension\Page\Page;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Payum\Core\Security\TokenInterface;
-use Sylius\Behat\Page\Page;
-use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPageInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $securityTokenRepository;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RepositoryInterface $securityTokenRepository
-     */
     public function __construct(Session $session, array $parameters, RepositoryInterface $securityTokenRepository)
     {
         parent::__construct($session, $parameters);
@@ -57,7 +50,7 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     /**
      * {@inheritdoc}
      */
-    protected function getUrl(array $urlParameters = [])
+    protected function getUrl(array $urlParameters = []): string
     {
         return 'https://www.sandbox.paypal.com';
     }
@@ -65,7 +58,7 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     /**
      * {@inheritdoc}
      */
-    protected function verifyUrl(array $urlParameters = [])
+    protected function verifyUrl(array $urlParameters = []): void
     {
         $position = strpos($this->getSession()->getCurrentUrl(), $this->getUrl($urlParameters));
         if (0 !== $position) {

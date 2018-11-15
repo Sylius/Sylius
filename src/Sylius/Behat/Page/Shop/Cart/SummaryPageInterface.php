@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Cart;
 
-use Sylius\Behat\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 interface SummaryPageInterface extends PageInterface
@@ -123,8 +123,6 @@ interface SummaryPageInterface extends PageInterface
     public function hasItemWithOptionValue($productName, $optionName, $optionValue);
 
     /**
-     * @param ProductInterface $product
-     *
      * @return bool
      */
     public function hasProductOutOfStockValidationMessage(ProductInterface $product);

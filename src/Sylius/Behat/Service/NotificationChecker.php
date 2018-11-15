@@ -19,14 +19,9 @@ use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 
 final class NotificationChecker implements NotificationCheckerInterface
 {
-    /**
-     * @var NotificationAccessorInterface
-     */
+    /** @var NotificationAccessorInterface */
     private $notificationAccessor;
 
-    /**
-     * @param NotificationAccessorInterface $notificationAccessor
-     */
     public function __construct(NotificationAccessorInterface $notificationAccessor)
     {
         $this->notificationAccessor = $notificationAccessor;

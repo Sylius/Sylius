@@ -20,7 +20,7 @@ use Pagerfanta\Pagerfanta;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', DocumentRepository::class), E_USER_DEPRECATED);
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.', DocumentRepository::class), \E_USER_DEPRECATED);
 
 /**
  * Doctrine PHPCR-ODM driver document repository.
@@ -61,8 +61,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
-     *
      * @return Pagerfanta
      */
     public function getPaginator(QueryBuilder $queryBuilder)
@@ -78,10 +76,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return $this->createQueryBuilder('o');
     }
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param array        $criteria
-     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
         $metadata = $this->getClassMetadata();
@@ -104,10 +98,6 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         }
     }
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param array        $sorting
-     */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
         foreach ($sorting as $property => $order) {

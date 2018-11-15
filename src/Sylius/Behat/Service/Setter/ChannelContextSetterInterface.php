@@ -17,8 +17,5 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 
 interface ChannelContextSetterInterface
 {
-    /**
-     * @param ChannelInterface $channel
-     */
     public function setChannel(ChannelInterface $channel);
 }

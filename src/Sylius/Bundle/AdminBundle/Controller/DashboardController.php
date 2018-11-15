@@ -24,32 +24,18 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class DashboardController
 {
-    /**
-     * @var DashboardStatisticsProviderInterface
-     */
+    /** @var DashboardStatisticsProviderInterface */
     private $statisticsProvider;
 
-    /**
-     * @var ChannelRepositoryInterface
-     */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * @param DashboardStatisticsProviderInterface $statisticsProvider
-     * @param ChannelRepositoryInterface $channelRepository
-     * @param EngineInterface $templatingEngine
-     * @param RouterInterface $router
-     */
     public function __construct(
         DashboardStatisticsProviderInterface $statisticsProvider,
         ChannelRepositoryInterface $channelRepository,
@@ -62,11 +48,6 @@ final class DashboardController
         $this->router = $router;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function indexAction(Request $request): Response
     {
         $channelCode = $request->query->get('channel');
@@ -86,11 +67,6 @@ final class DashboardController
         );
     }
 
-    /**
-     * @param string|null $channelCode
-     *
-     * @return ChannelInterface|null
-     */
     private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface
     {
         $channel = null;

@@ -21,20 +21,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ResourcesCollectionProvider implements ResourcesCollectionProviderInterface
 {
-    /**
-     * @var ResourcesResolverInterface
-     */
+    /** @var ResourcesResolverInterface */
     private $resourcesResolver;
 
-    /**
-     * @var PagerfantaFactory
-     */
+    /** @var PagerfantaFactory */
     private $pagerfantaRepresentationFactory;
 
-    /**
-     * @param ResourcesResolverInterface $resourcesResolver
-     * @param PagerfantaFactory $pagerfantaRepresentationFactory
-     */
     public function __construct(ResourcesResolverInterface $resourcesResolver, PagerfantaFactory $pagerfantaRepresentationFactory)
     {
         $this->resourcesResolver = $resourcesResolver;
@@ -80,11 +72,7 @@ final class ResourcesCollectionProvider implements ResourcesCollectionProviderIn
     }
 
     /**
-     * @param int|null $requestLimit
-     * @param int $configurationLimit
      * @param int[] $gridLimits
-     *
-     * @return int
      */
     private function resolveMaxPerPage(?int $requestLimit, int $configurationLimit, array $gridLimits = []): int
     {

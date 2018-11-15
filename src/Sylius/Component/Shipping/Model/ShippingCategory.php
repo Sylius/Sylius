@@ -19,24 +19,16 @@ class ShippingCategory implements ShippingCategoryInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $description;
 
     public function __construct()
@@ -44,9 +36,6 @@ class ShippingCategory implements ShippingCategoryInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();

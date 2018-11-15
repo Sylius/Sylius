@@ -22,9 +22,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $bundles = [
         'sylius_addressing',
         'sylius_attribute',
@@ -84,10 +82,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependHwiOauth($container, $loader);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param LoaderInterface $loader
-     */
     private function prependHwiOauth(ContainerBuilder $container, LoaderInterface $loader): void
     {
         if (!$container->hasExtension('hwi_oauth')) {

@@ -31,26 +31,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingMethodChoiceType extends AbstractType
 {
-    /**
-     * @var ShippingMethodsResolverInterface
-     */
+    /** @var ShippingMethodsResolverInterface */
     private $shippingMethodsResolver;
 
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $calculators;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $repository;
 
-    /**
-     * @param ShippingMethodsResolverInterface $shippingMethodsResolver
-     * @param ServiceRegistryInterface $calculators
-     * @param RepositoryInterface $repository
-     */
     public function __construct(
         ShippingMethodsResolverInterface $shippingMethodsResolver,
         ServiceRegistryInterface $calculators,

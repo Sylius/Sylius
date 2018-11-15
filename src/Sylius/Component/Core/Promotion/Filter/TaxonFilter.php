@@ -38,10 +38,7 @@ final class TaxonFilter implements FilterInterface
     }
 
     /**
-     * @param ProductInterface $product
      * @param TaxonInterface[] $taxons
-     *
-     * @return bool
      */
     private function hasProductValidTaxon(ProductInterface $product, array $taxons): bool
     {

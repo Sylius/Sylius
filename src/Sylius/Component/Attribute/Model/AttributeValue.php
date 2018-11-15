@@ -17,59 +17,37 @@ use Webmozart\Assert\Assert;
 
 class AttributeValue implements AttributeValueInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var AttributeSubjectInterface
-     */
+    /** @var AttributeSubjectInterface */
     protected $subject;
 
-    /**
-     * @var AttributeInterface
-     */
+    /** @var AttributeInterface */
     protected $attribute;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $localeCode;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $text;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $boolean;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $integer;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     private $float;
 
-    /**
-     * @var \DateTimeInterface
-     */
+    /** @var \DateTimeInterface */
     private $datetime;
 
-    /**
-     * @var \DateTimeInterface
-     */
+    /** @var \DateTimeInterface */
     private $date;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $json;
 
     /**
@@ -186,73 +164,46 @@ class AttributeValue implements AttributeValueInterface
         return $this->attribute->getType();
     }
 
-    /**
-     * @return bool|null
-     */
     protected function getBoolean(): ?bool
     {
         return $this->boolean;
     }
 
-    /**
-     * @param bool|null $boolean
-     */
     protected function setBoolean(?bool $boolean): void
     {
         $this->boolean = $boolean;
     }
 
-    /**
-     * @return string|null
-     */
     protected function getText(): ?string
     {
         return $this->text;
     }
 
-    /**
-     * @param string|null $text
-     */
     protected function setText(?string $text): void
     {
         $this->text = $text;
     }
 
-    /**
-     * @return int|null
-     */
     protected function getInteger(): ?int
     {
         return $this->integer;
     }
 
-    /**
-     * @param int|null $integer
-     */
     protected function setInteger(?int $integer): void
     {
         $this->integer = $integer;
     }
 
-    /**
-     * @return float|null
-     */
     protected function getFloat(): ?float
     {
         return $this->float;
     }
 
-    /**
-     * @param float|null $float
-     */
     protected function setFloat(?float $float): void
     {
         $this->float = $float;
     }
 
-    /**
-     * @return \DateTimeInterface|null
-     */
     protected function getDatetime(): ?\DateTimeInterface
     {
         return $this->datetime;
@@ -266,33 +217,21 @@ class AttributeValue implements AttributeValueInterface
         $this->datetime = $datetime;
     }
 
-    /**
-     * @return \DateTimeInterface|null
-     */
     protected function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
-    /**
-     * @param \DateTimeInterface|null $date
-     */
     protected function setDate(?\DateTimeInterface $date): void
     {
         $this->date = $date;
     }
 
-    /**
-     * @return array|null
-     */
     protected function getJson(): ?array
     {
         return $this->json;
     }
 
-    /**
-     * @param array|null $json
-     */
     protected function setJson(?array $json): void
     {
         $this->json = $json;

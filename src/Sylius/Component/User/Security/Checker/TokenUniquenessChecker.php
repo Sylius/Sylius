@@ -17,20 +17,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class TokenUniquenessChecker implements UniquenessCheckerInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $repository;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $tokenFieldName;
 
-    /**
-     * @param RepositoryInterface $repository
-     * @param string $tokenFieldName
-     */
     public function __construct(RepositoryInterface $repository, string $tokenFieldName)
     {
         $this->repository = $repository;

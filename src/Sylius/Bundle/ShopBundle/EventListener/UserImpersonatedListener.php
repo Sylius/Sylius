@@ -24,26 +24,15 @@ use Webmozart\Assert\Assert;
 
 final class UserImpersonatedListener
 {
-    /**
-     * @var CartStorageInterface
-     */
+    /** @var CartStorageInterface */
     private $cartStorage;
 
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @param CartStorageInterface $cartStorage
-     * @param ChannelContextInterface $channelContext
-     * @param OrderRepositoryInterface $orderRepository
-     */
     public function __construct(
         CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
@@ -54,9 +43,6 @@ final class UserImpersonatedListener
         $this->orderRepository = $orderRepository;
     }
 
-    /**
-     * @param UserEvent $event
-     */
     public function onUserImpersonated(UserEvent $event): void
     {
         /** @var ShopUserInterface $user */

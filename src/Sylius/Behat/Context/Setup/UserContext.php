@@ -23,32 +23,18 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 final class UserContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var UserRepositoryInterface
-     */
+    /** @var UserRepositoryInterface */
     private $userRepository;
 
-    /**
-     * @var ExampleFactoryInterface
-     */
+    /** @var ExampleFactoryInterface */
     private $userFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $userManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param UserRepositoryInterface $userRepository
-     * @param ExampleFactoryInterface $userFactory
-     * @param ObjectManager $userManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
@@ -146,9 +132,6 @@ final class UserContext implements Context
         $this->prepareUserPasswordResetToken($user);
     }
 
-    /**
-     * @param UserInterface $user
-     */
     private function prepareUserVerification(UserInterface $user)
     {
         $token = 'marryhadalittlelamb';
@@ -159,9 +142,6 @@ final class UserContext implements Context
         $this->userManager->flush();
     }
 
-    /**
-     * @param UserInterface $user
-     */
     private function prepareUserPasswordResetToken(UserInterface $user)
     {
         $token = 'itotallyforgotmypassword';

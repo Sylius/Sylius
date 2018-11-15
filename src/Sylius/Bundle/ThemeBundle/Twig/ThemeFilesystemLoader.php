@@ -18,31 +18,18 @@ use Symfony\Component\Templating\TemplateNameParserInterface;
 
 final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface
 {
-    /**
-     * @var \Twig_LoaderInterface
-     */
+    /** @var \Twig_LoaderInterface */
     private $decoratedLoader;
 
-    /**
-     * @var FileLocatorInterface
-     */
+    /** @var FileLocatorInterface */
     private $templateLocator;
 
-    /**
-     * @var TemplateNameParserInterface
-     */
+    /** @var TemplateNameParserInterface */
     private $templateNameParser;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $cache = [];
 
-    /**
-     * @param \Twig_LoaderInterface $decoratedLoader
-     * @param FileLocatorInterface $templateLocator
-     * @param TemplateNameParserInterface $templateNameParser
-     */
     public function __construct(
         \Twig_LoaderInterface $decoratedLoader,
         FileLocatorInterface $templateLocator,
@@ -103,11 +90,6 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
         }
     }
 
-    /**
-     * @param string $logicalName
-     *
-     * @return string
-     */
     private function findTemplate(string $logicalName): string
     {
         if (isset($this->cache[$logicalName])) {

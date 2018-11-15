@@ -36,9 +36,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     /** @deprecated */
     public const WEB_MEDIA_IMAGE_DIRECTORY = 'web/media/image/';
 
-    /**
-     * @var CommandExecutor
-     */
+    /** @var CommandExecutor */
     protected $commandExecutor;
 
     /**
@@ -53,8 +51,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param string $id
-     *
      * @return object
      */
     protected function get(string $id)
@@ -62,27 +58,16 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         return $this->getContainer()->get($id);
     }
 
-    /**
-     * @return string
-     */
     protected function getEnvironment(): string
     {
         return (string) $this->getContainer()->getParameter('kernel.environment');
     }
 
-    /**
-     * @return bool
-     */
     protected function isDebug(): bool
     {
         return (bool) $this->getContainer()->getParameter('kernel.debug');
     }
 
-    /**
-     * @param array $headers
-     * @param array $rows
-     * @param OutputInterface $output
-     */
     protected function renderTable(array $headers, array $rows, OutputInterface $output): void
     {
         $table = new Table($output);
@@ -94,12 +79,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         ;
     }
 
-    /**
-     * @param OutputInterface $output
-     * @param int $length
-     *
-     * @return ProgressBar
-     */
     protected function createProgressBar(OutputInterface $output, int $length = 10): ProgressBar
     {
         $progress = new ProgressBar($output);
@@ -112,11 +91,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         return $progress;
     }
 
-    /**
-     * @param array $commands
-     * @param OutputInterface $output
-     * @param bool $displayProgress
-     */
     protected function runCommands(array $commands, OutputInterface $output, bool $displayProgress = true): void
     {
         $progress = $this->createProgressBar($displayProgress ? $output : new NullOutput(), count($commands));
@@ -144,10 +118,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         $progress->finish();
     }
 
-    /**
-     * @param string $directory
-     * @param OutputInterface $output
-     */
     protected function ensureDirectoryExistsAndIsWritable(string $directory, OutputInterface $output): void
     {
         $checker = $this->getContainer()->get('sylius.installer.checker.command_directory');

@@ -22,14 +22,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class DefaultFormBuilder implements DefaultFormBuilderInterface
 {
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $entityManager;
 
-    /**
-     * @param EntityManagerInterface $entityManager
-     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;

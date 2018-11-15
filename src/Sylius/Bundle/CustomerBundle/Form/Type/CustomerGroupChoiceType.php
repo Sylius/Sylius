@@ -23,14 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CustomerGroupChoiceType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $customerGroupRepository;
 
-    /**
-     * @param RepositoryInterface $customerGroupRepository
-     */
     public function __construct(RepositoryInterface $customerGroupRepository)
     {
         $this->customerGroupRepository = $customerGroupRepository;

@@ -34,9 +34,6 @@ final class SimpleProductSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
         /** @var ProductInterface $product */
@@ -57,9 +54,6 @@ final class SimpleProductSubscriber implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSubmit(FormEvent $event): void
     {
         $data = $event->getData();

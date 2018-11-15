@@ -20,14 +20,9 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 final class ChannelDeletionListener
 {
-    /**
-     * @var ChannelRepository
-     */
+    /** @var ChannelRepository */
     private $channelRepository;
 
-    /**
-     * @param ChannelRepository $repository
-     */
     public function __construct(ChannelRepository $repository)
     {
         $this->channelRepository = $repository;
@@ -35,8 +30,6 @@ final class ChannelDeletionListener
 
     /**
      * Prevent channel deletion if no more channels enabled.
-     *
-     * @param ResourceControllerEvent $event
      */
     public function onChannelPreDelete(ResourceControllerEvent $event): void
     {

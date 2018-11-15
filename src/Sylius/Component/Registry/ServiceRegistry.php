@@ -18,9 +18,7 @@ namespace Sylius\Component\Registry;
  */
 class ServiceRegistry implements ServiceRegistryInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $services = [];
 
     /**
@@ -37,10 +35,6 @@ class ServiceRegistry implements ServiceRegistryInterface
      */
     private $context;
 
-    /**
-     * @param string $className
-     * @param string $context
-     */
     public function __construct(string $className, string $context = 'service')
     {
         $this->className = $className;

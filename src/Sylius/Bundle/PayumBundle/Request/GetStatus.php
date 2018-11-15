@@ -18,9 +18,7 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 
 class GetStatus extends BaseGetStatus
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $status;
 
     /**

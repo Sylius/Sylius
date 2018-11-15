@@ -22,25 +22,11 @@ interface PaymentsSubjectInterface
      */
     public function getPayments(): Collection;
 
-    /**
-     * @return bool
-     */
     public function hasPayments(): bool;
 
-    /**
-     * @param PaymentInterface $payment
-     */
     public function addPayment(PaymentInterface $payment): void;
 
-    /**
-     * @param PaymentInterface $payment
-     */
     public function removePayment(PaymentInterface $payment): void;
 
-    /**
-     * @param PaymentInterface $payment
-     *
-     * @return bool
-     */
     public function hasPayment(PaymentInterface $payment): bool;
 }

@@ -35,68 +35,36 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var CreateSimpleProductPageInterface
-     */
+    /** @var CreateSimpleProductPageInterface */
     private $createSimpleProductPage;
 
-    /**
-     * @var CreateConfigurableProductPageInterface
-     */
+    /** @var CreateConfigurableProductPageInterface */
     private $createConfigurableProductPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdateSimpleProductPageInterface
-     */
+    /** @var UpdateSimpleProductPageInterface */
     private $updateSimpleProductPage;
 
-    /**
-     * @var UpdateConfigurableProductPageInterface
-     */
+    /** @var UpdateConfigurableProductPageInterface */
     private $updateConfigurableProductPage;
 
-    /**
-     * @var ProductReviewIndexPageInterface
-     */
+    /** @var ProductReviewIndexPageInterface */
     private $productReviewIndexPage;
 
-    /**
-     * @var IndexPerTaxonPageInterface
-     */
+    /** @var IndexPerTaxonPageInterface */
     private $indexPerTaxonPage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param CreateSimpleProductPageInterface $createSimpleProductPage
-     * @param CreateConfigurableProductPageInterface $createConfigurableProductPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdateSimpleProductPageInterface $updateSimpleProductPage
-     * @param UpdateConfigurableProductPageInterface $updateConfigurableProductPage
-     * @param ProductReviewIndexPageInterface $productReviewIndexPage
-     * @param IndexPerTaxonPageInterface $indexPerTaxonPage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreateSimpleProductPageInterface $createSimpleProductPage,
@@ -683,6 +651,14 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         Assert::true($currentPage->isImageWithTypeDisplayed($type));
+    }
+
+    /**
+     * @Then /^the (product "[^"]+") should still have an accessible image$/
+     */
+    public function productShouldStillHaveAnAccessibleImage(ProductInterface $product): void
+    {
+        Assert::true($this->indexPage->hasProductAccessibleImage($product->getCode()));
     }
 
     /**

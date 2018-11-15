@@ -22,14 +22,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
 {
-    /**
-     * @var ResourceUpdateHandlerInterface
-     */
+    /** @var ResourceUpdateHandlerInterface */
     private $decoratedHandler;
 
-    /**
-     * @param ResourceUpdateHandlerInterface $decoratedHandler
-     */
     public function __construct(ResourceUpdateHandlerInterface $decoratedHandler)
     {
         $this->decoratedHandler = $decoratedHandler;

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutAddressingContext;
 use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutPaymentContext;
 use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutShippingContext;
@@ -23,7 +24,6 @@ use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
-use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Webmozart\Assert\Assert;

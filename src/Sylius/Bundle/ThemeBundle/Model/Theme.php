@@ -15,45 +15,27 @@ namespace Sylius\Bundle\ThemeBundle\Model;
 
 class Theme implements ThemeInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $path;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $title;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $description;
 
-    /**
-     * @var array|ThemeAuthor[]
-     */
+    /** @var array|ThemeAuthor[] */
     protected $authors = [];
 
-    /**
-     * @var array|ThemeInterface[]
-     */
+    /** @var array|ThemeInterface[] */
     protected $parents = [];
 
-    /**
-     * @var array|ThemeScreenshot[]
-     */
+    /** @var array|ThemeScreenshot[] */
     protected $screenshots = [];
 
-    /**
-     * @param string $name
-     * @param string $path
-     */
     public function __construct(string $name, string $path)
     {
         $this->assertNameIsValid($name);
@@ -62,9 +44,6 @@ class Theme implements ThemeInterface
         $this->path = $path;
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) ($this->title ?: $this->name);
@@ -196,9 +175,6 @@ class Theme implements ThemeInterface
         });
     }
 
-    /**
-     * @param string $name
-     */
     private function assertNameIsValid(string $name): void
     {
         $pattern = '/^[a-zA-Z0-9\-]+\/[a-zA-Z0-9\-]+$/';

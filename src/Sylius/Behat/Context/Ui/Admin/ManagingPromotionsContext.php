@@ -26,44 +26,24 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
@@ -650,7 +630,6 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param string $field
      */
     private function assertIfFieldIsTrue(PromotionInterface $promotion, $field)

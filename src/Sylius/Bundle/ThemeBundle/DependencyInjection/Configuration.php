@@ -20,9 +20,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Configuration implements ConfigurationInterface
 {
-    /**
-     * @var ConfigurationSourceFactoryInterface[]
-     */
+    /** @var ConfigurationSourceFactoryInterface[] */
     private $configurationSourceFactories;
 
     /**
@@ -63,9 +61,6 @@ final class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNode
-     */
     private function addSourcesConfiguration(ArrayNodeDefinition $rootNode): void
     {
         $sourcesNodeBuilder = $rootNode

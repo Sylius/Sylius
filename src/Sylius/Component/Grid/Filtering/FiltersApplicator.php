@@ -20,20 +20,12 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 
 final class FiltersApplicator implements FiltersApplicatorInterface
 {
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $filtersRegistry;
 
-    /**
-     * @var FiltersCriteriaResolverInterface
-     */
+    /** @var FiltersCriteriaResolverInterface */
     private $criteriaResolver;
 
-    /**
-     * @param ServiceRegistryInterface $filtersRegistry
-     * @param FiltersCriteriaResolverInterface $criteriaResolver
-     */
     public function __construct(
         ServiceRegistryInterface $filtersRegistry,
         FiltersCriteriaResolverInterface $criteriaResolver

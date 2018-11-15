@@ -26,38 +26,21 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShippingMethodsContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -520,7 +503,6 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @param ShippingMethodInterface $shippingMethod
      * @param bool $state
      */
     private function assertShippingMethodState(ShippingMethodInterface $shippingMethod, $state)

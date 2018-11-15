@@ -90,7 +90,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'attribute_choice_list_element' => 'input[value="%value%"]',
@@ -111,9 +111,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $attributeChoices->findAll('css', 'div[data-form-collection="item"]');
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastAttributeChoiceElement(): NodeElement
     {
         $elements = $this->getAttributeChoiceElements();

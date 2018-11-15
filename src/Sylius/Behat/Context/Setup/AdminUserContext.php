@@ -21,26 +21,15 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 final class AdminUserContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var ExampleFactoryInterface
-     */
+    /** @var ExampleFactoryInterface */
     private $userFactory;
 
-    /**
-     * @var UserRepositoryInterface
-     */
+    /** @var UserRepositoryInterface */
     private $userRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ExampleFactoryInterface $userFactory
-     * @param UserRepositoryInterface $userRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $userFactory,

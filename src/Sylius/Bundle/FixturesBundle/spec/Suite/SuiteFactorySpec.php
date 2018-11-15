@@ -211,8 +211,6 @@ final class SuiteFactorySpec extends ObjectBehavior
 
     /**
      * @param Collaborator[] ...$collaborators
-     *
-     * @return \Generator
      */
     private function createGenerator(Collaborator ...$collaborators): \Generator
     {

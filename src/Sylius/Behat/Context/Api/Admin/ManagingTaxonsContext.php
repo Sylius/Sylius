@@ -22,20 +22,12 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxonsContext implements Context
 {
-    /**
-     * @var Client
-     */
+    /** @var Client */
     private $client;
 
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
-    /**
-     * @param Client $client
-     * @param SessionInterface $session
-     */
     public function __construct(Client $client, SessionInterface $session)
     {
         $this->client = $client;

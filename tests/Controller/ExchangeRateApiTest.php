@@ -19,17 +19,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ExchangeRateApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'Accept' => 'application/json',
@@ -332,8 +328,6 @@ EOT;
     }
 
     /**
-     * @param ExchangeRateInterface $exchangeRate
-     *
      * @return string
      */
     private function getExchangeRateUrl(ExchangeRateInterface $exchangeRate)

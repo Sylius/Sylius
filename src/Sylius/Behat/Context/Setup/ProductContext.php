@@ -42,104 +42,54 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var ProductRepositoryInterface
-     */
+    /** @var ProductRepositoryInterface */
     private $productRepository;
 
-    /**
-     * @var ProductFactoryInterface
-     */
+    /** @var ProductFactoryInterface */
     private $productFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productTranslationFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productVariantFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productVariantTranslationFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $channelPricingFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productOptionFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productOptionValueFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productImageFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @var ProductVariantGeneratorInterface
-     */
+    /** @var ProductVariantGeneratorInterface */
     private $productVariantGenerator;
 
-    /**
-     * @var ProductVariantResolverInterface
-     */
+    /** @var ProductVariantResolverInterface */
     private $defaultVariantResolver;
 
-    /**
-     * @var ImageUploaderInterface
-     */
+    /** @var ImageUploaderInterface */
     private $imageUploader;
 
-    /**
-     * @var SlugGeneratorInterface
-     */
+    /** @var SlugGeneratorInterface */
     private $slugGenerator;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $minkParameters;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ProductRepositoryInterface $productRepository
-     * @param ProductFactoryInterface $productFactory
-     * @param FactoryInterface $productTranslationFactory
-     * @param FactoryInterface $productVariantFactory
-     * @param FactoryInterface $productVariantTranslationFactory
-     * @param FactoryInterface $channelPricingFactory
-     * @param FactoryInterface $productOptionFactory
-     * @param FactoryInterface $productOptionValueFactory
-     * @param FactoryInterface $productImageFactory
-     * @param ObjectManager $objectManager
-     * @param ProductVariantGeneratorInterface $productVariantGenerator
-     * @param ProductVariantResolverInterface $defaultVariantResolver
-     * @param ImageUploaderInterface $imageUploader
-     * @param SlugGeneratorInterface $slugGenerator
-     * @param array $minkParameters
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductRepositoryInterface $productRepository,
@@ -799,7 +749,6 @@ final class ProductContext implements Context
     /**
      * @param string $productName
      * @param int $price
-     * @param ChannelInterface|null $channel
      *
      * @return ProductInterface
      */
@@ -842,7 +791,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param ProductOptionInterface $option
      * @param string $value
      * @param string $code
      *
@@ -862,9 +810,6 @@ final class ProductContext implements Context
         return $optionValue;
     }
 
-    /**
-     * @param ProductInterface $product
-     */
     private function saveProduct(ProductInterface $product)
     {
         $this->productRepository->add($product);
@@ -882,7 +827,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param ProductInterface $product
      * @param string $productVariantName
      * @param int $price
      * @param string $code
@@ -922,7 +866,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param ProductInterface $product
      * @param string $name
      * @param string $locale
      */
@@ -943,7 +886,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param ProductVariantInterface $productVariant
      * @param string $name
      * @param string $locale
      */
@@ -959,7 +901,6 @@ final class ProductContext implements Context
 
     /**
      * @param int $price
-     * @param ChannelInterface|null $channel
      *
      * @return ChannelPricingInterface
      */

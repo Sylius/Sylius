@@ -27,38 +27,21 @@ use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -363,9 +346,6 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @param ZoneInterface $zone
-     * @param ZoneMemberInterface $zoneMember
-     *
      * @throws \InvalidArgumentException
      */
     private function assertZoneAndItsMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)

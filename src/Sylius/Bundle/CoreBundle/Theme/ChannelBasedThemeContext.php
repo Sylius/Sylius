@@ -22,20 +22,12 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 final class ChannelBasedThemeContext implements ThemeContextInterface
 {
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var ThemeRepositoryInterface
-     */
+    /** @var ThemeRepositoryInterface */
     private $themeRepository;
 
-    /**
-     * @param ChannelContextInterface $channelContext
-     * @param ThemeRepositoryInterface $themeRepository
-     */
     public function __construct(ChannelContextInterface $channelContext, ThemeRepositoryInterface $themeRepository)
     {
         $this->channelContext = $channelContext;
