@@ -23,7 +23,7 @@ Override Payum templates
             "%kernel.root_dir%/../app/Resources/PayumCore/views": PayumCore
             "%kernel.root_dir%/../app/Resources/PayumStripe/views": PayumStripe
 
-Having this configuration defined, you can now create your customuzations in your `app/Ressource/` directory, as usual.
+Having this configuration defined, you can now create your customizations in your `app/Resources/` directory, as usual.
 
 For example, you could define this layout:
 
@@ -87,7 +87,6 @@ For example, you could also pass extra parameters to Stripe:
                     data-email="{{ app.user.email }}"
                     data-locale="auto"
                     data-allow-remember-me="false"
-
             >
             </script>
 
@@ -122,25 +121,18 @@ First you have to create a Service
     use Payum\Core\Extension\Context;
     use Payum\Core\Extension\ExtensionInterface;
     use Payum\Core\Request\Capture;
-
     use Sylius\Bundle\PayumBundle\Request\GetStatus;
     use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
 
     /**
-     *
      * This class handles the addition of metadata to Stripe
      *
      * It is wired using Payum's built in extension system.
      * It is wired to Stripe_checkout only using a factory filter on the service tag.
      * It is additionally filtered to the Capture request using a code check.
-     *
-     * @author Bruno DA SILVA (https://github.com/bruno-ds)
      */
     class StripeAddMetadataOnCaptureExtensions implements ExtensionInterface
     {
-        /**
-         * @var Context $context
-         */
         public function onPreExecute(Context $context)
         {
             if (!$this->supports($context)) {
@@ -150,16 +142,13 @@ First you have to create a Service
             return;
         }
 
-        /**
-         * @var Context $context
-         */
         public function onExecute(Context $context)
         {
             if (!$this->supports($context)) {
                 return;
             }
 
-            /** @var $request Capture */
+            /** @var Capture $request */
             $request = $context->getRequest();
 
             /** @var SyliusPaymentInterface $payment */
@@ -197,9 +186,6 @@ First you have to create a Service
             $payment->setDetails($paymentDetails);
         }
 
-        /**
-         * @var Context $context
-         */
         public function onPostExecute(Context $context)
         {
             if (!$this->supports($context)) {
