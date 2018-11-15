@@ -1,8 +1,11 @@
 Sylius Documentation
 ====================
 
-.. image:: /_images/logo.png
+.. image:: /_images/logo_big.png
    :alt:   Sylius Welcome Page
+   :width: 300px
+
+|
 
 `Sylius`_ is a modern e-commerce solution for PHP, based on
 `Symfony Framework`_.
