@@ -115,13 +115,13 @@ First you have to create a Service
 
     namespace AppBundle\Payment;
 
-    use AppBundle\Entity\Customer;
-    use AppBundle\Entity\Order;
-    use AppBundle\Entity\OrderItem;
     use Payum\Core\Extension\Context;
     use Payum\Core\Extension\ExtensionInterface;
     use Payum\Core\Request\Capture;
     use Sylius\Bundle\PayumBundle\Request\GetStatus;
+    use Sylius\Component\Core\Model\CustomerInterface;
+    use Sylius\Component\Core\Model\OrderInterface;
+    use Sylius\Component\Core\Model\OrderItemInterface;
     use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
 
     /**
@@ -154,10 +154,10 @@ First you have to create a Service
             /** @var SyliusPaymentInterface $payment */
             $payment = $request->getModel();
 
-            /** @var Order $order */
+            /** @var OrderInterface $order */
             $order = $payment->getOrder();
 
-            /** @var Customer $customer */
+            /** @var CustomerInterface $customer */
             $customer = $order->getCustomer();
 
             $context->getGateway()->execute($status = new GetStatus($payment));
@@ -177,7 +177,7 @@ First you have to create a Service
             $paymentDetails['metadata']['sylius_customer_id'] = $customer->getId();
 
             $item_list = [];
-            /** @var OrderItem $item */
+            /** @var OrderItemInterface $item */
             foreach ($order->getItems() as $item) {
                 $item_list[] = $item->getVariantName();
             }
