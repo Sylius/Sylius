@@ -84,6 +84,10 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
             return;
         }
 
+        if (null !== $context->getException()) {
+            return;
+        }
+
         $context->getGateway()->execute($status = new GetStatus($payment));
         $value = $status->getValue();
         if ($payment->getState() !== $value && PaymentInterface::STATE_UNKNOWN !== $value) {
