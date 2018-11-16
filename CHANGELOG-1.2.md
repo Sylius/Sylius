@@ -1,5 +1,21 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.11 (2018-11-16)
+
+#### Details
+
+- [#9885](https://github.com/Sylius/Sylius/issues/9885) fixed ad blocking issue ([@loevgaard](https://github.com/loevgaard))
+- [#9887](https://github.com/Sylius/Sylius/issues/9887) use behat page object extension ([@loic425](https://github.com/loic425))
+- [#9898](https://github.com/Sylius/Sylius/issues/9898) #9862 Number of items in order summary page ([@laurent35240](https://github.com/laurent35240))
+- [#9906](https://github.com/Sylius/Sylius/issues/9906) Product images deletion fix ([@Zales0123](https://github.com/Zales0123))
+- [#9908](https://github.com/Sylius/Sylius/issues/9908) [Documentation] Add new styles ([@kulczy](https://github.com/kulczy))
+- [#9910](https://github.com/Sylius/Sylius/issues/9910) [Composer] Update ApiTestCase ([@lchrusciel](https://github.com/lchrusciel))
+- [#9922](https://github.com/Sylius/Sylius/issues/9922) Apply coding standard fixes from SyliusLabs/CodingStandard ^3.0@dev ([@pamil](https://github.com/pamil))
+- [#9923](https://github.com/Sylius/Sylius/issues/9923) Use oneline phpdocs for property type info ([@pamil](https://github.com/pamil))
+- [#9926](https://github.com/Sylius/Sylius/issues/9926) Fix plugin naming convention documentation ([@Zales0123](https://github.com/Zales0123))
+- [#9927](https://github.com/Sylius/Sylius/issues/9927) Fix version widget and add better quality logo ([@kulczy](https://github.com/kulczy))
+- [#9929](https://github.com/Sylius/Sylius/issues/9929) Update SyliusLabs/CodingStandard to ^3.0 ([@pamil](https://github.com/pamil))
+
 ## v1.2.10 (2018-11-07)
 
 #### Details
