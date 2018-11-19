@@ -38,8 +38,8 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         $localeRepository->findAll()->willReturn([$locale]);
         $locale->getCode()->willReturn('en_US');
 
-        $taxon->setCurrentLocale('en_US');
-        $taxon->setFallbackLocale('en_US');
+        $taxon->setCurrentLocale('en_US')->shouldBeCalled();
+        $taxon->setFallbackLocale('en_US')->shouldBeCalled();
         $taxon->setCode('Category')->shouldBeCalled();
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setSlug('category')->shouldBeCalled();
@@ -61,8 +61,8 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         $localeRepository->findAll()->willReturn([$locale]);
         $locale->getCode()->willReturn('en_US');
 
-        $taxon->setCurrentLocale('en_US');
-        $taxon->setFallbackLocale('en_US');
+        $taxon->setCurrentLocale('en_US')->shouldBeCalled();
+        $taxon->setFallbackLocale('en_US')->shouldBeCalled();
         $taxon->setCode('Category')->shouldBeCalled();
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setSlug('category')->shouldBeCalled();
@@ -96,8 +96,8 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         $localeRepository->findAll()->willReturn([$locale]);
         $locale->getCode()->willReturn('en_US');
 
-        $taxon->setCurrentLocale('en_US');
-        $taxon->setFallbackLocale('en_US');
+        $taxon->setCurrentLocale('en_US')->shouldBeCalled();
+        $taxon->setFallbackLocale('en_US')->shouldBeCalled();
         $taxon->setCode('Category')->shouldBeCalled();
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setSlug('category')->shouldBeCalled();
