@@ -105,7 +105,7 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
     Of course remember that you need to render the new fields you have created,
     and remove the rendering of the fields that you have removed **in your views**.
 
-In our case you will need a new template: `templates/bundle/SyliusShopBundle/views/Account/profileUpdate.html.twig`.
+In our case you will need a new template: `templates/bundle/SyliusShopBundle/Account/profileUpdate.html.twig`.
 
 In **Twig** for example you can render your modified form in such a way:
 
