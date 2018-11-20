@@ -19,6 +19,7 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
+use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -77,13 +78,14 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
         $taxon->setCode($options['code']);
 
+        // add translation for each defined locales
         foreach ($this->getLocales() as $localeCode) {
-            $taxon->setCurrentLocale($localeCode);
-            $taxon->setFallbackLocale($localeCode);
+            $this->createTranslation($taxon, $localeCode, $options);
+        }
 
-            $taxon->setName($options['name']);
-            $taxon->setDescription($options['description']);
-            $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $localeCode));
+        // create or replace with custom translations
+        foreach ($options['translations'] as $localeCode => $translationOptions) {
+            $this->createTranslation($taxon, $localeCode, $translationOptions);
         }
 
         foreach ($options['children'] as $childOptions) {
@@ -91,6 +93,18 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         }
 
         return $taxon;
+    }
+
+    protected function createTranslation(TaxonInterface $taxon, string $localeCode, array $options = []): void
+    {
+        $options = $this->optionsResolver->resolve($options);
+
+        $taxon->setCurrentLocale($localeCode);
+        $taxon->setFallbackLocale($localeCode);
+
+        $taxon->setName($options['name']);
+        $taxon->setDescription($options['description']);
+        $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $localeCode));
     }
 
     /**
@@ -109,6 +123,8 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setDefault('description', function (Options $options): string {
                 return $this->faker->paragraph;
             })
+            ->setDefault('translations', [])
+            ->setAllowedTypes('translations', ['array'])
             ->setDefault('children', [])
             ->setAllowedTypes('children', ['array'])
         ;

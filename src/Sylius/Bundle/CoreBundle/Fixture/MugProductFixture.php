@@ -83,7 +83,15 @@ class MugProductFixture extends AbstractFixture
             'children' => [
                 [
                     'code' => 'mugs',
-                    'name' => 'Mugs',
+                    'translations' => [
+                        'en_US' => [
+                            'name' => 'Mugs',
+                        ],
+                        'fr_FR' => [
+                            'name' => 'Tasses',
+                        ],
+                    ],
+
                 ],
             ],
         ]]]);

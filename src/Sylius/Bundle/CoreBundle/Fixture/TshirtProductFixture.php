@@ -83,13 +83,29 @@ class TshirtProductFixture extends AbstractFixture
                     'children' => [
                         [
                             'code' => 'mens_t_shirts',
-                            'name' => 'Men',
-                            'slug' => 't-shirts/men',
+                            'translations' => [
+                                'en_US' => [
+                                    'name' => 'Men',
+                                    'slug' => 't-shirts/men',
+                                ],
+                                'fr_FR' => [
+                                    'name' => 'Hommes',
+                                    'slug' => 't-shirts/hommes',
+                                ],
+                            ],
                         ],
                         [
                             'code' => 'womens_t_shirts',
-                            'name' => 'Women',
-                            'slug' => 't-shirts/women',
+                            'translations' => [
+                                'en_US' => [
+                                    'name' => 'Women',
+                                    'slug' => 't-shirts/women',
+                                ],
+                                'fr_FR' => [
+                                    'name' => 'Hommes',
+                                    'slug' => 't-shirts/femmes',
+                                ],
+                            ],
                         ],
                     ],
                 ],

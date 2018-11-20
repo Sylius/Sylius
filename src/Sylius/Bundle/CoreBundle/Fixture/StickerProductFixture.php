@@ -79,7 +79,14 @@ class StickerProductFixture extends AbstractFixture
             'children' => [
                 [
                     'code' => 'stickers',
-                    'name' => 'Stickers',
+                    'translations' => [
+                        'en_US' => [
+                            'name' => 'Stickers',
+                        ],
+                        'fr_FR' => [
+                            'name' => 'Étiquettes',
+                        ],
+                    ],
                 ],
             ],
         ]]]);

@@ -80,7 +80,14 @@ class BookProductFixture extends AbstractFixture
             'children' => [
                 [
                     'code' => 'books',
-                    'name' => 'Books',
+                    'translations' => [
+                        'en_US' => [
+                            'name' => 'Books',
+                        ],
+                        'fr_FR' => [
+                            'name' => 'Livres',
+                        ]
+                    ],
                 ],
             ],
         ]]]);
