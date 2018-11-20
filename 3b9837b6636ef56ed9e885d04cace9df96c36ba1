@@ -1,0 +1,52 @@
+---------------------------------------------------------------------------
+
+by loic425 at 2018-11-14T09:18:21Z
+
+@pamil @lchrusciel This is not a big one, tell me what you think about this? :)
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-11-15T11:04:38Z
+
+@pamil yes :) I run them several times with or without specific translations.
+Maybe we can add some tests on data fixtures by executing cli on behat like you do with installer.
+Indeed, I think we have to ensure old methods are still working with other future changes.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-11-15T13:30:56Z
+
+@pamil I just see there are phpunit tests for data fixtures. I'm gonna look that.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-11-15T14:53:17Z
+
+@pamil as I said you on slack, I added some phpunit tests and some phpspec tests to ensure the two configs works and can coexist.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-11-19T08:19:59Z
+
+T-shirts are also an example of usage without translation.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-11-19T08:23:46Z
+
+> T-shirts are also an example of usage without translation.
+
+Yes, cause t-shirts has no translation in french! But you're right, it's an example without translation.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-11-19T14:07:47Z
+
+@pamil @lchrusciel @Zales0123
+I think this is just the beginning. As a next step, I think it could be cool to apply these custom translations with product fixtures and next with other translatable resources.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-11-20T14:09:01Z
+
+Thank you, Loïc! :1st_place_medal:
