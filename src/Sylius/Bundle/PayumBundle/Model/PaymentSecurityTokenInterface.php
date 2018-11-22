@@ -13,15 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\Model;
 
-use Payum\Core\Model\GatewayConfig as BaseGatewayConfig;
+use Payum\Core\Security\TokenInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-class GatewayConfig extends BaseGatewayConfig implements GatewayConfigInterface
+interface PaymentSecurityTokenInterface extends ResourceInterface, TokenInterface
 {
-    /** @var int */
-    protected $id;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
 }
