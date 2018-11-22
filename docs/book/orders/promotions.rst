@@ -15,6 +15,14 @@ and **priority** that is useful for them, because the exclusive promotion should
 
    The ``usageLimit`` of a promotion is the **total number of times this promotion can be used**.
 
+.. tip::
+
+   **Promotion priorities** are numbers that you assign to the promotion. The larger the number, the higher the priority.
+   So a promotion with priority 3 would be applied before a promotion with priority set to 1.
+
+   What can you use the priority for? Well, imagine that you have two different promotions, one's action is to give 10% discount
+   on whole order and the other one gives 5$ discount from the order total. Business (and money) wise, which one should we apply first? ;)
+
 How to create a Promotion programmatically?
 -------------------------------------------
 
