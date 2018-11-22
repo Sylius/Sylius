@@ -17,7 +17,7 @@ use Payum\Core\Security\TokenInterface;
 use Payum\Core\Security\Util\Random;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-class PaymentSecurityToken implements ResourceInterface, TokenInterface
+class PaymentSecurityToken implements PaymentSecurityTokenInterface
 {
     /** @var string */
     protected $hash;
