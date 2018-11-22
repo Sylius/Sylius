@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page;
 
+use FriendsOfBehat\PageObjectExtension\Page\Page;
+
 class ErrorPage extends Page implements ErrorPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    protected function getUrl(array $urlParameters = [])
+    protected function getUrl(array $urlParameters = []): string
     {
         // This page does not have any url
         return '';
@@ -35,7 +37,7 @@ class ErrorPage extends Page implements ErrorPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'title' => 'h1.exception-message',
