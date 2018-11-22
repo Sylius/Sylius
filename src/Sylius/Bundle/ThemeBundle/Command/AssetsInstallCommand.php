@@ -69,18 +69,12 @@ final class AssetsInstallCommand extends ContainerAwareCommand
     }
 
 
-    /**
-     * @return string
-     */
     private function getTargetDir(InputInterface $input): string
     {
-        $targetDir = $this->getContainer()->getParameter('sylius_core.public_dir');
-
-        if ($input->hasArgument('target')) {
-            $targetDir = $input->getArgument('target');
+        if ($input->getArgument('target') === null) {
+          return $this->getContainer()->getParameter('sylius_core.public_dir');
         }
-
-        return $targetDir;
+        return $input->getArgument('target');
     }
 
     private function getHelpMessage(): string
