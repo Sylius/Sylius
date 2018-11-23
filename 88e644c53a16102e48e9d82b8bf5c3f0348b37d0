@@ -1,0 +1,134 @@
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2018-11-21T12:30:39Z
+
+Sorry, I've committed to `master` before noticed this should be on `1.2`.
+
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2018-11-22T11:24:20Z
+
+Guys, current fixture loader implementation actually have some issues with `prototype`.
+And I really not sure how to fix that.
+
+The problem is that `processConfiguration` (at `SuiteFactory::addFixtureToSuite()`) handle only `custom` rules, so all defaults and normalizations will be applied to `custom` options only, but not for `custom` created from `prototype`.
+
+Example:
+```yaml
+sylius_fixtures:
+    suites:
+        default:
+            fixtures:
+                custom_fixture:
+                    options:
+                        random: 2
+                        prototype:
+                            some_parameter: 'rnd'
+                        custom:
+                            custom_1:
+                                some_parameter: '1'
+```
+
+```php
+final class JobFixture extends AbstractResourceFixture
+{
+    protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
+    {
+        $resourceNode
+            ->children()
+                ->scalarNode('bla')->defaultValue('default')->end()
+        // ...
+    }
+```
+
+Desired (for me) result should be like this:
+
+```
+[
+    [ some_parameter: 'rnd', bla: 'default' ],
+    [ some_parameter: 'rnd', bla: 'default' ],
+    [ some_parameter: '1', bla: 'default' ],
+]
+```
+
+Actual result looks like this:
+```
+[
+    [ some_parameter: 'rnd' ],
+    [ some_parameter: 'rnd' ],
+    [ some_parameter: '1', bla: 'default' ],
+]
+```
+
+So this behavior forcing me to make only very simple `custom` configurations (without defaults and normalizations, casts to array) and handle defaults at `optionResolver` side:
+
+```
+class CustomFixtureExampleFactory extends AbstractExampleFactory
+{
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver
+            ->setDefault('bla', function (Options $options): string {
+                // ...
+            })
+    }
+}
+```
+
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2018-11-22T11:45:06Z
+
+@lchrusciel
+
+> create a prototyped resource in fixtures
+
+I guess `prototype` could be used here:
+
+```
+# fixtures.yml
+# ...
+                address:
+                    options:
+                        random: 10
+                        prototype:
+                            country_code: US
+```
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-11-22T14:48:44Z
+
+@igormukhingmailcom can you add it to your PR?
+
+Also, for me, it is totally ok, how the current implementation works. I would even say, that it was desired. But, of course, feel free to open an issue, or even better fix it :) Maybe the rest of community will say something about it :)
+
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2018-11-23T16:14:01Z
+
+> @igormukhingmailcom can you add it to your PR?
+
+Added
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-11-23T18:04:16Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-3"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-11-23T19:32:58Z
+
+Thanks, Igor! :tada:
