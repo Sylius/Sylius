@@ -41,13 +41,13 @@ With:
     sylius_shop_payum:
         resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
 
-**2.** Customise the security settings in the ``config/packages/security.yml``.
+**2.** Customise the security settings in the ``config/packages/security.yaml``.
 
 Replace:
 
 .. code-block:: yaml
 
-    # config/packages/security.yml
+    # config/packages/security.yaml
 
     parameters:
         # ...
@@ -57,19 +57,19 @@ With:
 
 .. code-block:: yaml
 
-    # config/packages/security.yml
+    # config/packages/security.yaml
 
     parameters:
         # ...
         sylius.security.shop_regex: "^"
 
-**3.** Customise SyliusShopBundle to use storage-based locale switching in the ``config/packages/_sylius.yml``.
+**3.** Customise SyliusShopBundle to use storage-based locale switching in the ``config/packages/_sylius.yaml``.
 
 Replace :
 
 .. code-block:: yaml
 
-    # config/packages/_sylius.yml
+    # config/packages/_sylius.yaml
 
     sylius_shop:
         product_grid:
@@ -79,7 +79,7 @@ With:
 
 .. code-block:: yaml
 
-    # config/packages/_sylius.yml
+    # config/packages/_sylius.yaml
 
     sylius_shop:
         product_grid:
