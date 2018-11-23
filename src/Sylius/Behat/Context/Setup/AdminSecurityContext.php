@@ -71,4 +71,14 @@ final class AdminSecurityContext implements Context
 
         $this->sharedStorage->set('administrator', $user);
     }
+
+    /**
+     * @Given I have been logged out from administration
+     */
+    public function iHaveBeenLoggedOutFromAdministration()
+    {
+        $this->securityService->logOut();
+
+        $this->sharedStorage->set('administrator', null);
+    }
 }
