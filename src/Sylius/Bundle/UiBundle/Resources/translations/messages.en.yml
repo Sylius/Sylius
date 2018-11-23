@@ -785,6 +785,7 @@ sylius:
         theme: 'Theme'
         the_instructions_below_will_be_displayed_to_the_customer: 'The instructions below will be displayed to the customer'
         the_page_you_are_looking_for_does_not_exist: 'The page you are looking for does not exist.'
+        the_page_you_are_looking_for_is_forbidden: 'The page you are looking for is forbidden.'
         there_are_no_attributes_configured: 'There are no attributes configured'
         there_are_no_blocks_to_display: 'There are no blocks to display'
         there_are_no_channels_configured: 'There are no channels configured'
