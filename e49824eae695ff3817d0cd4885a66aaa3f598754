@@ -1,0 +1,42 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-10-26T07:14:03Z
+
+Hello Loic!
+
+Thanks a lot for a contribution! I didn't understand it fully, while we were talking about it on slack. But now everything is clear :D
+
+I may be really beneficial for us, to test 4XX errors, but the current approach doesn't provide real business value. Don't get me wrong, it is a great start, but I would prefer to see this behavior in a better context. For example, accessing the admin panel after being log out. Or trying to access product page, while it has been deleted. Of course, don't feel forced to test every possible webpage. We may leave it to rest of the contributors. Nevertheless, these generic contexts may help others test their websites better 👍
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-10-26T12:49:54Z
+
+Anyway, @pamil is testing something on repo, so I will merge it next week probably
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-10-29T21:20:23Z
+
+@lchrusciel I think this pull request name could be improved before merging it.
+It has no sense now imho. What do you think ?
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-11-22T16:14:35Z
+
+@pamil can you restart build on 4.1, it crashed.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2018-11-23T08:52:12Z
+
+@pamil @lchrusciel
+It failed again on symfony 4.1. But on my travis repo it's green
+https://travis-ci.org/loic425/Sylius/jobs/458461014
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-11-23T10:11:08Z
+
+Thank you, Loïc! :tada:
