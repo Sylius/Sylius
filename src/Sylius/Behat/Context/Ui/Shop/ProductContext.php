@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Page\ErrorPageInterface;
 use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
@@ -33,14 +34,19 @@ final class ProductContext implements Context
     /** @var ProductReviewIndexPageInterface */
     private $productReviewsIndexPage;
 
+    /** @var ErrorPageInterface */
+    private $errorPage;
+
     public function __construct(
         ShowPageInterface $showPage,
         IndexPageInterface $indexPage,
-        ProductReviewIndexPageInterface $productReviewsIndexPage
+        ProductReviewIndexPageInterface $productReviewsIndexPage,
+        ErrorPageInterface $errorPage
     ) {
         $this->showPage = $showPage;
         $this->indexPage = $indexPage;
         $this->productReviewsIndexPage = $productReviewsIndexPage;
+        $this->errorPage = $errorPage;
     }
 
     /**
@@ -81,6 +87,17 @@ final class ProductContext implements Context
     {
         $this->showPage->tryToOpen([
             'slug' => $product->getTranslation($localeCode)->getSlug(),
+            '_locale' => $localeCode,
+        ]);
+    }
+
+    /**
+     * @When I try to reach unexistent product
+     */
+    public function iTryToReachUnexistentProductPage($localeCode = 'en_US')
+    {
+        $this->showPage->tryToOpen([
+            'slug' => 'unexisten_product',
             '_locale' => $localeCode,
         ]);
     }
@@ -498,6 +515,14 @@ final class ProductContext implements Context
     public function theyShouldHaveOrderLikeAnd(...$productNames)
     {
         Assert::true($this->indexPage->hasProductsInOrder($productNames));
+    }
+
+    /**
+     * @Then I should be informed that the product does not exist
+     */
+    public function iShouldBeInformedThatTheProductDoesNotExist()
+    {
+        Assert::eq($this->errorPage->getTitle(), 'The "product" has not been found');
     }
 
     /**

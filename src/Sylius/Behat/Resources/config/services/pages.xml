@@ -17,6 +17,10 @@
         <import resource="pages/shop.xml" />
     </imports>
 
+    <parameters>
+        <parameter key="sylius.behat.page.error.class">Sylius\Behat\Page\ErrorPage</parameter>
+    </parameters>
+
     <services>
         <defaults public="true" />
 
@@ -27,6 +31,8 @@
         <service id="sylius.behat.symfony_page" class="FriendsOfBehat\PageObjectExtension\Page\SymfonyPage" parent="sylius.behat.page" abstract="true" public="false">
             <argument type="service" id="__symfony_shared__.router" />
         </service>
+
+        <service id="sylius.behat.page.error" class="%sylius.behat.page.error.class%" parent="sylius.behat.page" public="false" />
 
         <service id="sylius.behat.page.external.paypal_checkout_express" class="Sylius\Behat\Page\External\PaypalExpressCheckoutPage" parent="sylius.behat.page" public="false" >
             <argument type="service" id="__symfony__.sylius.repository.payment_security_token" />
