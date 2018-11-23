@@ -41,7 +41,7 @@ With:
     sylius_shop_payum:
         resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
 
-**2.** Customise the security settings in the ``config/packages/security.yml``.
+**2.** Customise the security settings in the ``config/packages/security.yaml``.
 
 Replace:
 
@@ -63,7 +63,7 @@ With:
         # ...
         sylius.security.shop_regex: "^"
 
-**3.** Customise SyliusShopBundle to use storage-based locale switching in the ``config/packages/_sylius.yml``.
+**3.** Customise SyliusShopBundle to use storage-based locale switching in the ``config/packages/_sylius.yaml``.
 
 Replace :
 
