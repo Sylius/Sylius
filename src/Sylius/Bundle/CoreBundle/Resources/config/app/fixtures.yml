@@ -211,3 +211,5 @@ sylius_fixtures:
                 address:
                     options:
                         random: 10
+                        prototype:
+                            country_code: US
