@@ -47,7 +47,7 @@ Replace:
 
 .. code-block:: yaml
 
-    # config/packages/security.yml
+    # config/packages/security.yaml
 
     parameters:
         # ...
@@ -57,7 +57,7 @@ With:
 
 .. code-block:: yaml
 
-    # config/packages/security.yml
+    # config/packages/security.yaml
 
     parameters:
         # ...
@@ -69,7 +69,7 @@ Replace :
 
 .. code-block:: yaml
 
-    # config/packages/_sylius.yml
+    # config/packages/_sylius.yaml
 
     sylius_shop:
         product_grid:
@@ -79,7 +79,7 @@ With:
 
 .. code-block:: yaml
 
-    # config/packages/_sylius.yml
+    # config/packages/_sylius.yaml
 
     sylius_shop:
         product_grid:
