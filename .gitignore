@@ -6,6 +6,7 @@
 /public/css
 /public/js
 /public/media
+!/public/media/image/.gitkeep
 
 /app/config/parameters.yml
 
