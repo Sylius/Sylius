@@ -29,6 +29,7 @@
             <argument type="service" id="sylius.factory.shipping_method" />
             <argument type="service" id="sylius.repository.zone" />
             <argument type="service" id="sylius.repository.shipping_category" />
+            <argument type="service" id="sylius.repository.tax_category" />
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.repository.channel" />
         </service>
