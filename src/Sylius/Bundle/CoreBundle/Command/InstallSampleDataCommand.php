@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Command;
 
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -33,6 +34,7 @@ final class InstallSampleDataCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command loads the sample data for Sylius.
 EOT
             )
+            ->addOption('fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null)
         ;
     }
 
@@ -43,12 +45,14 @@ EOT
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
+        $suite = $input->getOption('fixture-suite');
 
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->newLine();
         $outputStyle->writeln(sprintf(
-            'Loading sample data for environment <info>%s</info>.',
-            $this->getEnvironment()
+            'Loading sample data for environment <info>%s</info> from suite <info>%s</info>.',
+            $this->getEnvironment(),
+            $suite
         ));
         $outputStyle->writeln('<error>Warning! This action will erase your database.</error>');
 
@@ -68,8 +72,13 @@ EOT
             return 1;
         }
 
+        $parameters = ['--no-interaction' => true];
+        if ($suite) {
+            $parameters['suite'] = $suite;
+        }
+
         $commands = [
-            'sylius:fixtures:load' => ['--no-interaction' => true],
+            'sylius:fixtures:load' => $parameters,
         ];
 
         $this->runCommands($commands, $output);

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -31,6 +32,7 @@ final class InstallDatabaseCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command creates Sylius database.
 EOT
             )
+            ->addOption('fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null)
         ;
     }
 
@@ -39,6 +41,8 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
+        $suite = $input->getOption('fixture-suite');
+
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln(sprintf(
             'Creating Sylius database for environment <info>%s</info>.',
@@ -54,6 +58,10 @@ EOT
         $this->runCommands($commands, $output);
         $outputStyle->newLine();
 
-        $this->commandExecutor->runCommand('sylius:install:sample-data', [], $output);
+        $parameters = [];
+        if ($suite) {
+            $parameters['--fixture-suite'] = $suite;
+        }
+        $this->commandExecutor->runCommand('sylius:install:sample-data', $parameters, $output);
     }
 }
