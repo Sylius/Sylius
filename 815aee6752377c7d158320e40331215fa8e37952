@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-11-26T08:36:42Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-4"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-11-26T08:41:34Z
+
+It was also an issue on `1.2` so I've rebased your PR :) Could you also provide some screenshot to be 100% sure that nothing changed in UI in a wrong way? :)
+
+---------------------------------------------------------------------------
+
+by Prometee at 2018-11-26T11:00:49Z
+
+**Before locale en_US**
+![capture d ecran 2018-11-26 a 11 51 29](https://user-images.githubusercontent.com/861820/49010118-9a2ce780-f172-11e8-86b6-d607dfbbe42c.png)
+**After locale en_US**
+![capture d ecran 2018-11-26 a 11 51 44](https://user-images.githubusercontent.com/861820/49010120-9a2ce780-f172-11e8-917e-2e37f93772a3.png)
+**Before locale fr_FR**
+![capture d ecran 2018-11-26 a 11 53 30](https://user-images.githubusercontent.com/861820/49010122-9a2ce780-f172-11e8-87d0-91f49737ffed.png)
+**After locale fr_FR**
+![capture d ecran 2018-11-26 a 11 53 51](https://user-images.githubusercontent.com/861820/49010124-9ac57e00-f172-11e8-960f-604c4f8857af.png)
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-11-26T11:09:40Z
+
+Thanks, Francis! :1st_place_medal:
