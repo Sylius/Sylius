@@ -24,6 +24,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -37,6 +38,9 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
 
     /** @var RepositoryInterface */
     private $shippingCategoryRepository;
+
+    /** @var RepositoryInterface */
+    private $taxCategoryRepository;
 
     /** @var RepositoryInterface */
     private $localeRepository;
@@ -54,12 +58,14 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         FactoryInterface $shippingMethodFactory,
         RepositoryInterface $zoneRepository,
         RepositoryInterface $shippingCategoryRepository,
+        RepositoryInterface $taxCategoryRepository,
         RepositoryInterface $localeRepository,
         ChannelRepositoryInterface $channelRepository
     ) {
         $this->shippingMethodFactory = $shippingMethodFactory;
         $this->zoneRepository = $zoneRepository;
         $this->shippingCategoryRepository = $shippingCategoryRepository;
+        $this->taxCategoryRepository = $taxCategoryRepository;
         $this->localeRepository = $localeRepository;
         $this->channelRepository = $channelRepository;
 
@@ -87,6 +93,10 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
 
         if (array_key_exists('shipping_category', $options)) {
             $shippingMethod->setCategory($options['shipping_category']);
+        }
+
+        if(array_key_exists('tax_category', $options)){
+            $shippingMethod->setTaxCategory($options['tax_category']);
         }
 
         foreach ($this->getLocales() as $localeCode) {
@@ -129,6 +139,9 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setDefined('shipping_category')
             ->setAllowedTypes('shipping_category', ['null', 'string', ShippingCategoryInterface::class])
             ->setNormalizer('shipping_category', LazyOption::findOneBy($this->shippingCategoryRepository, 'code'))
+            ->setDefined('tax_category')
+            ->setAllowedTypes('tax_category', ['null', 'string', TaxCategoryInterface::class])
+            ->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'))
             ->setDefault('calculator', function (Options $options): array {
                 $configuration = [];
                 /** @var ChannelInterface $channel */

@@ -45,6 +45,7 @@ class ShippingMethodFixture extends AbstractResourceFixture
                         ->variableNode('configuration')->end()
                     ->end()
                 ->end()
+                ->scalarNode('tax_category')->end()
         ;
     }
 }
