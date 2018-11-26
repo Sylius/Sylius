@@ -13,6 +13,12 @@ Feature: Choosing province for country
         And I am a logged in customer
 
     @ui @javascript
+    Scenario: Default country should be set
+        Given I have product "The Dark Knight T-Shirt" in the cart
+        And I am at the checkout addressing step
+        Then I should have "United States" selected as country
+
+    @ui @javascript
     Scenario: Address an order with country and its province
         Given I have product "The Dark Knight T-Shirt" in the cart
         And I am at the checkout addressing step
