@@ -86,7 +86,7 @@ class BookProductFixture extends AbstractFixture
                         ],
                         'fr_FR' => [
                             'name' => 'Livres',
-                        ]
+                        ],
                     ],
                 ],
             ],

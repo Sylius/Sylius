@@ -95,7 +95,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             $shippingMethod->setCategory($options['shipping_category']);
         }
 
-        if(array_key_exists('tax_category', $options)){
+        if (array_key_exists('tax_category', $options)) {
             $shippingMethod->setTaxCategory($options['tax_category']);
         }
 

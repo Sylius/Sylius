@@ -91,7 +91,6 @@ class MugProductFixture extends AbstractFixture
                             'name' => 'Tasses',
                         ],
                     ],
-
                 ],
             ],
         ]]]);
