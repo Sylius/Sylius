@@ -179,7 +179,7 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
-        "symfony/symfony": "3.4.7 || 4.0.7"
+        "symfony/symfony": "3.4.7 || 4.0.7 || 4.1.8"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
