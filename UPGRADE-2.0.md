@@ -36,6 +36,6 @@
         * `sylius.mongodb_odm.repository.class`
         * `sylius.phpcr_odm.repository.class`
 
-    * The follwing configuration options were removed:
+    * The following configuration options were removed:
 
         * `sylius.mailer.templates`
