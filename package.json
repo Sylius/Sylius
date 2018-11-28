@@ -18,7 +18,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-debug": "^2.1.2",
     "gulp-if": "^2.0.0",
-    "gulp-livereload": "^3.8.1",
+    "gulp-livereload": "^4.0.1",
     "gulp-order": "^1.1.1",
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^1.6.0",
