@@ -1,5 +1,24 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.12 (2018-11-28)
+
+#### TL;DR
+
+- Security fixes according to [problems](https://github.com/dominictarr/event-stream/issues/116) with `dominictarr/event-stream` library
+- Hot-fix preventing installation of `symfony/symfony:4.1.8` due to Behat tests problems
+
+#### Details
+
+- [#9860](https://github.com/Sylius/Sylius/issues/9860) [Behat] Viewing errors ([@loic425](https://github.com/loic425))
+- [#9932](https://github.com/Sylius/Sylius/issues/9932) [Phpspec] add a missing scenario on customer context spec ([@loic425](https://github.com/loic425))
+- [#9937](https://github.com/Sylius/Sylius/issues/9937) [Payum] Add missing model interfaces ([@GSadee](https://github.com/GSadee))
+- [#9945](https://github.com/Sylius/Sylius/issues/9945) Fix for 9942 ([@igormukhingmailcom](https://github.com/igormukhingmailcom))
+- [#9950](https://github.com/Sylius/Sylius/issues/9950) [Docs][Book] Promotion priorities ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#9955](https://github.com/Sylius/Sylius/issues/9955) Remove inline css ([@Prometee](https://github.com/Prometee))
+- [#9963](https://github.com/Sylius/Sylius/issues/9963) [Docs][OrderBundle] Remove old, incorrect docs ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#9970](https://github.com/Sylius/Sylius/issues/9970) [Hot-fix] Make build great again ([@Zales0123](https://github.com/Zales0123))
+- [#9972](https://github.com/Sylius/Sylius/issues/9972) Update gulp-livereload ([@kulczy](https://github.com/kulczy))
+
 ## v1.2.11 (2018-11-16)
 
 #### Details
