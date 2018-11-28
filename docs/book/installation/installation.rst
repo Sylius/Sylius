@@ -55,7 +55,7 @@ This package has the whole ``sylius/sylius`` package in vendors, so you can easi
 
     During the ``sylius:install`` command you will be asked to provide important information, but also its execution ensures
     that the default **currency** (USD) and the default **locale** (English - US) are set.
-    They can be changed later, respectively in the "Configuration > Channels" section of the admin and in the ``app/config/services.yaml`` file.
+    They can be changed later, respectively in the "Configuration > Channels" section of the admin and in the ``config/services.yaml`` file.
     From now on all the prices will be stored in the database in USD as integers, and all the products will have to be added with a base american english name translation.
 
 Installing assets
@@ -115,7 +115,7 @@ After you have successfully gone through the installation process of **Sylius-St
 
 In the root directory of your project you will find these important subdirectories:
 
-* ``app/config/`` - here you will be adding the yaml configuration files including routing, security, state machines configurations etc.
+* ``config/`` - here you will be adding the yaml configuration files including routing, security, state machines configurations etc.
 * ``var/log/`` - these are the logs of your application
 * ``var/cache/`` - this is the cache of you project
 * ``src/`` - this is where you will be adding all you custom logic in the ``AppBundle``
