@@ -82,7 +82,7 @@ EOT
                 ));
 
                 $parameters = [];
-                if ('database' === $command['command'] && $suite) {
+                if ('database' === $command['command'] && null !== $suite) {
                     $parameters['--fixture-suite'] = $suite;
                 }
 
