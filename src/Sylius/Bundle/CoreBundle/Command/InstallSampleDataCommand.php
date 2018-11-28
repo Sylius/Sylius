@@ -56,7 +56,7 @@ EOT
         ));
         $outputStyle->writeln('<error>Warning! This action will erase your database.</error>');
 
-        if (!$questionHelper->ask($input, $output, new ConfirmationQuestion('Continue? (y/N) ', false))) {
+        if (!$questionHelper->ask($input, $output, new ConfirmationQuestion('Continue? (y/N) ', null !== $suite))) {
             $outputStyle->writeln('Cancelled loading sample data.');
 
             return 0;
