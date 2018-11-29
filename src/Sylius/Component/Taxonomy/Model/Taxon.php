@@ -206,6 +206,23 @@ class Taxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
+    public function getFullname(string $pathDelimiter = ' / '): ?string
+    {
+        if ($this->isRoot()) {
+            return $this->getName();
+        }
+
+        return sprintf(
+            '%s%s%s',
+            $this->getParent()->getFullname(),
+            $pathDelimiter,
+            $this->getName()
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getSlug(): ?string
     {
         return $this->getTranslation()->getSlug();
