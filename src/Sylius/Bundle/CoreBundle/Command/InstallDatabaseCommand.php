@@ -59,7 +59,7 @@ EOT
         $outputStyle->newLine();
 
         $parameters = [];
-        if ($suite) {
+        if (null !== $suite) {
             $parameters['--fixture-suite'] = $suite;
         }
         $this->commandExecutor->runCommand('sylius:install:sample-data', $parameters, $output);
