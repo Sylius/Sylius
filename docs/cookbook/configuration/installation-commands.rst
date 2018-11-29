@@ -59,6 +59,7 @@ How to load custom fixtures suite?
 If you have your custom fixtures suite, you can load it during install by providing at `fixture-suite` parameter:
 
 .. code-block:: bash
+
     $ php bin/console sylius:install --fixture-suite=your_custom_fixtures_suite
 
 Same option also available at `sylius:install:database`, `sylius:install:sample-data` commands.
