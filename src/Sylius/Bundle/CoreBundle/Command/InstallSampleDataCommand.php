@@ -74,7 +74,7 @@ EOT
         }
 
         $parameters = ['--no-interaction' => true];
-        if ($suite) {
+        if (null !== $suite) {
             $parameters['suite'] = $suite;
         }
 
