@@ -1,0 +1,77 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-11-13T08:54:46Z
+
+It's quite strange that this scenario passes... because it does not seem to work in dev environement 😕
+
+<img width="1152" alt="zrzut ekranu 2018-11-13 o 09 43 52" src="https://user-images.githubusercontent.com/6212718/48401222-d7cc5200-e728-11e8-861c-ba81d736bda3.png">
+<img width="1134" alt="zrzut ekranu 2018-11-13 o 09 44 09" src="https://user-images.githubusercontent.com/6212718/48401226-da2eac00-e728-11e8-9f7f-1e0c20d68c51.png">
+<img width="1178" alt="zrzut ekranu 2018-11-13 o 09 43 28" src="https://user-images.githubusercontent.com/6212718/48401234-dc910600-e728-11e8-9116-92b00cd5e0e3.png">
+<img width="1131" alt="zrzut ekranu 2018-11-13 o 09 44 23" src="https://user-images.githubusercontent.com/6212718/48401239-df8bf680-e728-11e8-96ca-af34ca2d4930.png">
+
+It needs some more investigation, there is totally something wrong happening here 😄 I've also confirmed (by going to website manually) that on `test` env it works 💥
+
+---------------------------------------------------------------------------
+
+by laurent35240 at 2018-11-13T21:13:42Z
+
+@Zales0123 In fact the origin of the problem is the [PercentType field](https://symfony.com/doc/current/reference/forms/types/percent.html) in Symfony that will save a float for any value different than 100 and an int for 100.
+
+If I save value 99% I got this in configuration field of table sylius_promotion_action
+`a:1:{s:10:"percentage";d:0.99;}`
+And with value 100%, I got this
+`a:1:{s:10:"percentage";i:1;}`
+
+I think the BDD test does not see it because it bypass the Symfony form by creating directly promotion action with a percentage set to 1 as a float.
+
+If needed we can chat about a different/better way to fix this issue on slack
+
+---------------------------------------------------------------------------
+
+by laurent35240 at 2018-11-13T21:55:54Z
+
+I found a different way to fix this issue cf https://github.com/laurent35240/Sylius/commit/5ba1a2d1042d7ce470eeae97d3f9b9918f6d499d
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-11-14T08:41:42Z
+
+I've just checked that and it seems to work 💪 Could you please push the changes here so we could iterate over it and, hopefully, merge it? :)
+
+---------------------------------------------------------------------------
+
+by laurent35240 at 2018-11-14T08:55:22Z
+
+Done
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-11-15T12:14:32Z
+
+@laurent35240 the build failed, could you, please, take a look at it?
+
+---------------------------------------------------------------------------
+
+by laurent35240 at 2018-11-15T12:30:52Z
+
+Sure, I will try to take a look at it this evening
+
+---------------------------------------------------------------------------
+
+by laurent35240 at 2018-11-15T23:44:18Z
+
+@Zales0123 Build fixed ;-)
+
+---------------------------------------------------------------------------
+
+by laurent35240 at 2018-11-29T11:17:21Z
+
+HI
+
+@Zales0123 Do you want other corrections on this PR?
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-11-30T12:20:42Z
+
+Thanks, Laurent! :1st_place_medal:
