@@ -27,11 +27,13 @@ interface TaxRateInterface extends CodeAwareInterface, TimestampableInterface, R
 
     public function setName(?string $name): void;
 
-    public function getAmount(): float;
+    public function getCurrentValue(): TaxValueInterface;
 
-    public function getAmountAsPercentage(): float;
+    public function addValue(TaxValueInterface $value): void;
 
-    public function setAmount(?float $amount): void;
+    public function hasValue(TaxValueInterface $value): bool;
+
+    public function removeValue(TaxValueInterface $value): void;
 
     public function isIncludedInPrice(): bool;
 

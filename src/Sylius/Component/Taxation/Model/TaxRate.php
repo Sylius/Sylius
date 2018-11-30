@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Taxation\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 class TaxRate implements TaxRateInterface
@@ -31,6 +33,9 @@ class TaxRate implements TaxRateInterface
     /** @var string */
     protected $name;
 
+    /** @var Collection|TaxValueInterface[] */
+    protected $values;
+
     /** @var float */
     protected $amount = 0.0;
 
@@ -43,6 +48,8 @@ class TaxRate implements TaxRateInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+
+        $this->values = new ArrayCollection();
     }
 
     /**
@@ -100,6 +107,38 @@ class TaxRate implements TaxRateInterface
     {
         $this->name = $name;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentValue(): TaxValueInterface
+    {
+        if ($this->values->count() === 0) {
+            throw new \RuntimeException('This tax rate does not have any set value.');
+        }
+
+        $closestValue = $this->values->first();
+
+        // TODO: Date comparison
+
+        return $closestValue;
+    }
+
+    public function addValue(TaxValueInterface $value): void
+    {
+        // TODO: Implement addValue() method.
+    }
+
+    public function hasValue(TaxValueInterface $value): bool
+    {
+        // TODO: Implement hasValue() method.
+    }
+
+    public function removeValue(TaxValueInterface $value): void
+    {
+        // TODO: Implement removeValue() method.
+    }
+
 
     /**
      * {@inheritdoc}
