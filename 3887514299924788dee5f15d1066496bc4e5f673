@@ -1,0 +1,43 @@
+---------------------------------------------------------------------------
+
+by pamil at 2018-11-15T10:40:32Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-1"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by pamil at 2018-11-15T10:43:34Z
+
+Thanks for contributing to Sylius! If we merge this PR before you could address the comments, feel free to open another one :)
+
+---------------------------------------------------------------------------
+
+by Konafets at 2018-11-28T12:24:33Z
+
+I am a bit lost in your merging policy. At which branch should I open a PR. This one was forced push from one branch to another.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-11-28T12:34:55Z
+
+Hello Stefano. Let me show you our merging policy in a nutshell:
+master - new features
+1.3 / 1.2 - bug/security fixes, to the lowest possible branch. As some features were introduced in 1.3, we cannot fix them in 1.2
+1.1 - security fixes only
+
+We are using force pushes(with lease) to rebase and resolve conflicts for contributors, as this still counts as your contribution, while some of our contributors aren't that fluent in git itself.
+
+Hope, that will help you :)
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-11-30T12:04:11Z
+
+Thank you, Stefano! :tada:
