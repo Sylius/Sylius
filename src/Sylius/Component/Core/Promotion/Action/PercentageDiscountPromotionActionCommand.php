@@ -78,9 +78,9 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
      */
     protected function isConfigurationValid(array $configuration): void
     {
-        if (!isset($configuration['percentage']) || !is_float($configuration['percentage'])) {
-            throw new \InvalidArgumentException('"percentage" must be set and must be a float.');
-        }
+        Assert::keyExists($configuration, 'percentage');
+        Assert::greaterThan($configuration['percentage'], 0);
+        Assert::lessThanEq($configuration['percentage'], 1);
     }
 
     private function calculateAdjustmentAmount(int $promotionSubjectTotal, float $percentage): int
