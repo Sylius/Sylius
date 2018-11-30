@@ -105,16 +105,19 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
     Of course remember that you need to render the new fields you have created,
     and remove the rendering of the fields that you have removed **in your views**.
 
-In our case you will need a new template: `templates/bundle/SyliusShopBundle/Account/profileUpdate.html.twig`.
-
-In **Twig** for example you can render your modified form in such a way:
+In our case you will need to copy the original template from `vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/views/Account/profileUpdate.html.twig`
+to `templates/bundles/SyliusShopBundle/Account/` and add the fields inside the copy
 
 .. code-block:: html
 
-    <div class="two fields">
-        <div class="field">{{ form_row(form.birthday) }}</div>
-        <div class="field">{{ form_row(form.contactHours) }}</div>
-    </div>
+    {{ form_row(form.phoneNumber) }}
+    {{ form_row(form.subscribedToNewsletter) }}
+
+    <!-- your fields -->
+    {{ form_row(form.birthday) }}
+    {{ form_row(form.contactHours) }}
+
+    {{ sonata_block_render_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
 
 Need more information?
 ----------------------
