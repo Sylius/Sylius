@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -44,9 +45,7 @@ final class UserDeleteListener
 
         Assert::isInstanceOf($user, UserInterface::class);
 
-        $token = $this->tokenStorage->getToken();
-
-        if ((null !== $token) && ($loggedUser = $token->getUser()) && ($loggedUser->getId() === $user->getId())) {
+        if ($this->isTryingToDeleteLoggedInAdminUser($user)) {
             $event->stopPropagation();
             $event->setErrorCode(Response::HTTP_UNPROCESSABLE_ENTITY);
             $event->setMessage('Cannot remove currently logged in user.');
@@ -55,5 +54,19 @@ final class UserDeleteListener
             $flashBag = $this->session->getBag('flashes');
             $flashBag->add('error', 'Cannot remove currently logged in user.');
         }
+    }
+
+    private function isTryingToDeleteLoggedInAdminUser(UserInterface $user): bool
+    {
+        $isTryingToDeleteLoggedInUser = false;
+        if ($user instanceof AdminUserInterface) {
+            $token = $this->tokenStorage->getToken();
+            if ($token) {
+                $loggedUser = $token->getUser();
+                $isTryingToDeleteLoggedInUser = ($loggedUser instanceof AdminUserInterface) && ($loggedUser->getId() === $user->getId());
+            }
+        }
+
+        return $isTryingToDeleteLoggedInUser;
     }
 }
