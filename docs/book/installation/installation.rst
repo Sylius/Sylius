@@ -118,7 +118,7 @@ In the root directory of your project you will find these important subdirectori
 * ``config/`` - here you will be adding the yaml configuration files including routing, security, state machines configurations etc.
 * ``var/log/`` - these are the logs of your application
 * ``var/cache/`` - this is the cache of you project
-* ``src/`` - this is where you will be adding all you custom logic in the ``AppBundle``
+* ``src/`` - this is where you will be adding all you custom logic in the ``App``
 * ``public/`` - there you will be placing assets of your project
 
 .. tip::

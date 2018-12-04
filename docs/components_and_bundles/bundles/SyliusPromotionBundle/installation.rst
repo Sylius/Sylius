@@ -67,7 +67,7 @@ Put its configuration inside your ``app/config/config.yml``.
         resources:
             promotion_subject:
                 classes:
-                    model: AppBundle\Entity\CarRentalOrder
+                    model: App\Entity\CarRentalOrder
 
 And configure doctrine extensions which are used by the bundle.
 

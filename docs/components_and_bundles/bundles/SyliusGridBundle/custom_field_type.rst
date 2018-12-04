@@ -9,7 +9,7 @@ All you need to do is create your own class implementing FieldTypeInterface and 
 
     <?php
 
-    namespace AppBundle\Grid\FieldType;
+    namespace App\Grid\FieldType;
 
     use Sylius\Component\Grid\Definition\Field;
     use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
@@ -46,7 +46,7 @@ That is all. Now register your new field type as a service.
 
     # config/services.yaml
     app.grid_field.custom:
-        class: AppBundle\Grid\FieldType\CustomType
+        class: App\Grid\FieldType\CustomType
         tags:
             - { name: sylius.grid_field, type: custom }
 
@@ -60,7 +60,7 @@ Now you can use your new column type in the grid configuration!
                 driver:
                     name: doctrine/orm
                     options:
-                        class: AppBundle\Entity\Supplier
+                        class: App\Entity\Supplier
                 fields:
                     name:
                         type: custom

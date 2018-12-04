@@ -8,7 +8,7 @@ Let's create a listener that removes the directory before loading the fixtures.
 
 .. code-block:: php
 
-    namespace AppBundle\Listener;
+    namespace App\Listener;
 
     use Sylius\Bundle\FixturesBundle\Listener\AbstractListener;
     use Sylius\Bundle\FixturesBundle\Listener\BeforeSuiteListenerInterface;
@@ -32,7 +32,7 @@ The next step is to register this listener:
 
 .. code-block:: xml
 
-    <service id="app.listener.directory_purger" class="AppBundle\Listener\DirectoryPurgerListener">
+    <service id="app.listener.directory_purger" class="App\Listener\DirectoryPurgerListener">
         <tag name="sylius_fixtures.listener" />
     </service>
 
