@@ -9,7 +9,7 @@ To add a new filter, we need to create an appropriate class and form type.
 
     <?php
 
-    namespace AppBundle\Grid\Filter;
+    namespace App\Grid\Filter;
 
     use Sylius\Component\Grid\Data\DataSourceInterface;
     use Sylius\Component\Grid\Filtering\FilterInterface;
@@ -31,7 +31,7 @@ And the form type:
 
     <?php
 
-    namespace AppBundle\Form\Type\Filter;
+    namespace App\Form\Type\Filter;
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -77,12 +77,12 @@ That is all. Now let's register your new filter type as service.
 
     services:
         app.grid.filter.suppliers_statistics:
-            class: AppBundle\Grid\Filter\SuppliersStatisticsFilter
+            class: App\Grid\Filter\SuppliersStatisticsFilter
             tags:
                 -
                     name: sylius.grid_filter
                     type: suppliers_statistics
-                    form_type: AppBundle\Form\Type\Filter\SuppliersStatisticsFilterType
+                    form_type: App\Form\Type\Filter\SuppliersStatisticsFilterType
 
 Now you can use your new filter type in the grid configuration!
 
@@ -100,4 +100,4 @@ Now you can use your new filter type in the grid configuration!
                             range: [0, 100]
         templates:
             filter:
-                suppliers_statistics: 'AppBundle:Grid/Filter:suppliers_statistics.html.twig'
+                suppliers_statistics: 'App:Grid/Filter:suppliers_statistics.html.twig'

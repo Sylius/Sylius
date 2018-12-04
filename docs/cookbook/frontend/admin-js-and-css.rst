@@ -21,7 +21,7 @@ As an example we will use a popup window script, it is easy for manual testing.
 
 .. code-block:: twig
 
-    {# src/AppBundle/Resources/views/Admin/_javascripts.html.twig #}
+    {# src/Resources/views/Admin/_javascripts.html.twig #}
     {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/admin/js/custom.js'} %}
 
 **3. Use the Sonata block event to insert your javascripts:**
@@ -32,7 +32,7 @@ As an example we will use a popup window script, it is easy for manual testing.
 
 .. code-block:: yaml
 
-    # src/AppBundle/Resources/config/services.yml
+    # src/Resources/config/services.yml
     services:
         app.block_event_listener.admin.layout.javascripts:
             class: Sylius\Bundle\UiBundle\Block\BlockEventListener
@@ -67,7 +67,7 @@ As an example we will change the sidebar menu background color, what is clearly 
 
 .. code-block:: twig
 
-    {# src/AppBundle/Resources/views/Admin/_stylesheets.html.twig #}
+    {# src/Resources/views/Admin/_stylesheets.html.twig #}
     {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/admin/css/custom.css'} %}
 
 **3. Use the Sonata block event to insert your stylesheets:**
@@ -78,7 +78,7 @@ As an example we will change the sidebar menu background color, what is clearly 
 
 .. code-block:: yaml
 
-    # src/AppBundle/Resources/config/services.yml
+    # src/Resources/config/services.yml
     services:
         app.block_event_listener.admin.layout.stylesheets:
             class: Sylius\Bundle\UiBundle\Block\BlockEventListener

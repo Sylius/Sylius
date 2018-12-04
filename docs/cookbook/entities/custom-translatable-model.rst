@@ -439,7 +439,7 @@ To have templates for your Entity administration out of the box you can use Grid
 
 .. code-block:: php
 
-    # AppBundle/Resources/views/Supplier/_form.html.twig
+    # App/Resources/views/Supplier/_form.html.twig
     {% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
 
     {{ form_errors(form) }}

@@ -66,7 +66,7 @@ __ http://symfony.com/doc/current/forms.html#building-the-form
         defaults:
             _controller: app.controller.book:createAction
             _sylius:
-                form: AppBundle\Form\BookType
+                form: App\Form\BookType
 
 Passing Custom Options to Form
 ------------------------------

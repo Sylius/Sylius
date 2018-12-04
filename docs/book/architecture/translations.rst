@@ -21,7 +21,7 @@ Assuming that we would like to have a translatable model of a ``Supplier``, we n
 
    <?php
 
-   namespace AppBundle\Entity;
+   namespace App\Entity;
 
    use Sylius\Component\Resource\Model\AbstractTranslation;
 
@@ -60,7 +60,7 @@ The actual entity has access to its translation by using the ``TranslatableTrait
 
    <?php
 
-   namespace AppBundle\Entity;
+   namespace App\Entity;
 
    use Sylius\Component\Resource\Model\TranslatableInterface;
    use Sylius\Component\Resource\Model\TranslatableTrait;

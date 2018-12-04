@@ -48,15 +48,15 @@ This can be done via a CompilerPass.
         }
     }
 
-The above compiler pass needs to be added to your bundle in the ``AppBundle/AppBundle.php`` file:
+The above compiler pass needs to be added to your bundle in the ``App/AppBundle.php`` file:
 
 .. code-block:: php
 
     <?php
 
-    namespace AppBundle;
+    namespace App;
 
-    use AppBundle\DependencyInjection\Compiler\MailPass;
+    use App\DependencyInjection\Compiler\MailPass;
     use Symfony\Component\HttpKernel\Bundle\Bundle;
     use Symfony\Component\DependencyInjection\ContainerBuilder;
 

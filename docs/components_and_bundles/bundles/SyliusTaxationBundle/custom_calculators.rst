@@ -11,12 +11,12 @@ All tax calculators implement the ``CalculatorInterface``. In our example we'll 
 
 .. code-block:: php
 
-    # src/AppBundle/Taxation/Calculator/FeeCalculator.php
+    # src/Taxation/Calculator/FeeCalculator.php
     <?php
 
     declare(strict_types=1);
 
-    namespace AppBundle\Taxation\Calculator;
+    namespace App\Taxation\Calculator;
 
     use Sylius\Component\Taxation\Calculator\CalculatorInterface;
     use Sylius\Component\Taxation\Model\TaxRateInterface;
@@ -38,7 +38,7 @@ Now, you need to register your new service in container and tag it with ``sylius
 
     services:
         app.tax_calculator.fee:
-            class: AppBundle\Taxation\Calculator\FeeCalculator
+            class: App\Taxation\Calculator\FeeCalculator
             tags:
                 - { name: sylius.tax_calculator, calculator: fee, label: "Fee" }
 
