@@ -9,7 +9,7 @@ to skip the configuration part for now:
 
 .. code-block:: php
 
-    namespace AppBundle\Fixture;
+    namespace App\Fixture;
 
     use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
     use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
@@ -46,7 +46,7 @@ The next step is to register this fixture:
 
 .. code-block:: xml
 
-    <service id="app.fixture.country" class="AppBundle\Fixture\CountryFixture">
+    <service id="app.fixture.country" class="App\Fixture\CountryFixture">
         <argument type="service" id="doctrine.orm.entity_manager" />
         <tag name="sylius_fixtures.fixture" />
     </service>

@@ -175,7 +175,7 @@ For example, **sylius_admin_product** grid dispatches such an event:
 To show you an example of a grid customization using events, we will remove a field from a grid using that method.
 Here are the steps, that you need to take:
 
-**1.** In order to remove fields from the product grid in **Sylius** you have to create a ``AppBundle\Grid\AdminProductsGridListener`` class.
+**1.** In order to remove fields from the product grid in **Sylius** you have to create a ``App\Grid\AdminProductsGridListener`` class.
 
 In the example below we are removing the ``images`` field from the ``sylius_admin_product`` grid.
 
