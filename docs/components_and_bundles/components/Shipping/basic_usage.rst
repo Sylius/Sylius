@@ -81,25 +81,50 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
          */
         public function getShippingWidth()
         {
-            // TODO: Implement getShippingWidth() method.
+            return $this->width;
         }
 
+
+        /**
+         * {@inheritdoc}
+         */
+        public function setShippingWidth($width)
+        {
+            $this->width = $width;
+        }
+        
         /**
          * {@inheritdoc}
          */
         public function getShippingHeight()
         {
-            // TODO: Implement getShippingHeight() method.
+            return $this->height;
         }
-
+        
+        /**
+         * {@inheritdoc}
+         */
+        public function setShippingHeight($height)
+        {
+            $this->height = $height;
+        }
+        
         /**
          * {@inheritdoc}
          */
         public function getShippingDepth()
         {
-            // TODO: Implement getShippingDepth() method.
+            return $this->depth;
         }
-
+        
+        /**
+         * {@inheritdoc}
+         */
+        public function setShippingDepth($depth)
+        {
+            $this->depth = $depth;
+        }
+        
         /**
          * {@inheritdoc}
          */
@@ -126,7 +151,7 @@ methods respectively. The name is mutable, so you can change them by calling and
 Shipping Method
 ---------------
 
-Every shipping method has three identifiers, an ID code and name. You can access those by calling ``->getId()``, ``->gerCode()`` and ``->getName()``
+Every shipping method has three identifiers, an ID code and name. You can access those by calling ``->getId()``, ``->getCode()`` and ``->getName()``
 methods respectively. The name is mutable, so you can change them by calling  ``->setName('FedEx')`` on the shipping method instance.
 
 Setting Shipping Category
@@ -154,8 +179,7 @@ Every shipping method can have shipping category. You can simply set or unset it
 Shipping Method Translation
 ---------------------------
 
-**ShippingMethodTranslation** allows shipping method's name translation according to given locales. To see how to use translation
-please go to :ref:`component_resource_translations_usage`.
+**ShippingMethodTranslation** allows shipping method's name translation according to given locales. To see how to use translation please go to :ref:`component_resource_translations_usage`.
 
 
 Shipment Item
