@@ -37,7 +37,7 @@ Let's assume that you already have a route for contacting your suppliers, then y
                 driver:
                     name: doctrine/orm
                     options:
-                        class: AppBundle\Entity\Supplier
+                        class: App\Entity\Supplier
                 actions:
                     item:
                         contactSupplier:

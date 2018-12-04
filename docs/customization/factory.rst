@@ -23,7 +23,7 @@ How to customize a Factory?
 
 Let's assume that you would want to have a possibility to create disabled products.
 
-**1.** Create your own factory class in the ``AppBundle\Factory`` namespace.
+**1.** Create your own factory class in the ``App\Factory`` namespace.
 Remember that it has to implement a proper interface. How can you check that?
 
 For the ``ProductFactory`` run:

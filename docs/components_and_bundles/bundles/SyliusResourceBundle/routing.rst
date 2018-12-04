@@ -208,10 +208,10 @@ If you want to use a custom form:
     app_book:
         resource: |
             alias: app.book
-            form: AppBundle/Form/Type/AdminBookType
+            form: App/Form/Type/AdminBookType
         type: sylius.resource
 
-``create`` and ``update`` actions will use AppBundle/Form/Type/AdminBookType form type.
+``create`` and ``update`` actions will use App/Form/Type/AdminBookType form type.
 
 .. note::
 

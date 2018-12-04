@@ -63,7 +63,7 @@ Same way like for **createAction** you can override the default form.
         defaults:
             _controller: app.controller.book:updateAction
             _sylius:
-                form: AppBundle\Form\BookType
+                form: App\Form\BookType
 
 Passing Custom Options to Form
 ------------------------------
