@@ -70,7 +70,7 @@ The above compiler pass needs to be added to your bundle in the ``AppBundle/AppB
         }
     }
 
-That's it, we have removed the definition of the listner that is responsible for sending the order confirmation email.
+That's it, we have removed the definition of the listener that is responsible for sending the order confirmation email.
 
 Learn more
 ----------
