@@ -9,6 +9,8 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
 
     <?php
 
+    declare(strict_types=1);
+    
     use Sylius\Component\Shipping\Model\ShippableInterface;
     use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
@@ -20,42 +22,42 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         private $category;
 
         /**
-         * @var int
+         * @var float
          */
         private $weight;
 
         /**
-         * @var int
+         * @var float
          */
         private $volume;
 
         /**
-         * @var int
+         * @var float
          */
         private $width;
 
         /**
-         * @var int
+         * @var float
          */
         private $height;
 
         /**
-         * @var int
+         * @var float
          */
         private $depth;
 
         /**
          * {@inheritdoc}
          */
-        public function getShippingWeight()
+        public function getShippingWeight(): float
         {
             return $this->weight;
         }
 
         /**
-         * @param int $weight
+         * {@inheritdoc}
          */
-        public function setShippingWeight($weight)
+        public function setShippingWeight(float $weight): void
         {
             $this->weight = $weight;
         }
@@ -63,7 +65,7 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * {@inheritdoc}
          */
-        public function getShippingVolume()
+        public function getShippingVolume(): float
         {
             return $this->volume;
         }
@@ -71,7 +73,7 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * @param int $volume
          */
-        public function setShippingVolume($volume)
+        public function setShippingVolume(float $volume)
         {
             $this->volume = $volume;
         }
@@ -79,7 +81,7 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * {@inheritdoc}
          */
-        public function getShippingWidth()
+        public function getShippingWidth(): float
         {
             return $this->width;
         }
@@ -88,7 +90,7 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * {@inheritdoc}
          */
-        public function setShippingWidth($width)
+        public function setShippingWidth(float $width)
         {
             $this->width = $width;
         }
@@ -96,7 +98,7 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * {@inheritdoc}
          */
-        public function getShippingHeight()
+        public function getShippingHeight(): float
         {
             return $this->height;
         }
@@ -104,7 +106,7 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * {@inheritdoc}
          */
-        public function setShippingHeight($height)
+        public function setShippingHeight(float $height)
         {
             $this->height = $height;
         }
@@ -112,7 +114,7 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * {@inheritdoc}
          */
-        public function getShippingDepth()
+        public function getShippingDepth(): float
         {
             return $this->depth;
         }
@@ -120,7 +122,7 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * {@inheritdoc}
          */
-        public function setShippingDepth($depth)
+        public function setShippingDepth(float $depth)
         {
             $this->depth = $depth;
         }
@@ -128,13 +130,13 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * {@inheritdoc}
          */
-        public function getShippingCategory()
+        public function getShippingCategory(): ShippingCategoryInterface
         {
             return $this->category;
         }
-
+        
         /**
-         * @param ShippingCategoryInterface $category
+         * {@inheritdoc}
          */
         public function setShippingCategory(ShippingCategoryInterface $category)
         {
