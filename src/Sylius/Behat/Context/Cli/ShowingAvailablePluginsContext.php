@@ -50,10 +50,7 @@ final class ShowingAvailablePluginsContext implements Context
         $this->command = $this->application->find('sylius:show-available-plugins');
         $this->tester = new CommandTester($this->command);
 
-        try {
-            $this->tester->execute(['command' => 'sylius:show-available-plugins']);
-        } catch (\Exception $e) {
-        }
+        $this->tester->execute(['command' => 'sylius:show-available-plugins']);
     }
 
     /**
