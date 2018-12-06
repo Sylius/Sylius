@@ -58,14 +58,17 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         FactoryInterface $shippingMethodFactory,
         RepositoryInterface $zoneRepository,
         RepositoryInterface $shippingCategoryRepository,
-        RepositoryInterface $taxCategoryRepository,
         RepositoryInterface $localeRepository,
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
+        ?RepositoryInterface $taxCategoryRepository = null
     ) {
         $this->shippingMethodFactory = $shippingMethodFactory;
         $this->zoneRepository = $zoneRepository;
         $this->shippingCategoryRepository = $shippingCategoryRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
+        if($this->taxCategoryRepository === null) {
+            trigger_error('Not passing a taxCategory repo is deprcated and will be removed');
+        }
         $this->localeRepository = $localeRepository;
         $this->channelRepository = $channelRepository;
 
