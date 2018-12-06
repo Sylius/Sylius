@@ -50,7 +50,8 @@ security:
                         password:           foo
                         roles:              ROLE_USER
     encoders:
-        Sylius\Component\User\Model\UserInterface: sha512
+        sylius_default_password_encoder:
+            id: 'sylius.security.user_password_encoder'
     firewalls:
         admin:
             switch_user: true
