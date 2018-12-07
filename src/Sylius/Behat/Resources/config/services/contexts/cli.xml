@@ -15,6 +15,11 @@
     <services>
         <defaults public="true" />
 
+        <service id="Sylius\Behat\Context\Cli\ShowingAvailablePluginsContext">
+            <argument type="service" id="__symfony__.kernel" />
+            <tag name="fob.context_service" />
+        </service>
+
         <service id="sylius.behat.context.cli.installer" class="Sylius\Behat\Context\Cli\InstallerContext">
             <argument type="service" id="__symfony__.kernel" />
             <tag name="fob.context_service" />
