@@ -31,6 +31,7 @@ final class DoctrineTargetEntitiesResolverPass implements CompilerPassInterface
         try {
             $resources = $container->getParameter('sylius.resources');
             $resolveTargetEntityListener = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
+            $resolveTargetEntityListener->setPublic(true);
         } catch (InvalidArgumentException $exception) {
             return;
         }
