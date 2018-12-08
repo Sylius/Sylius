@@ -1,0 +1,24 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-12-08T16:11:39Z
+
+Make sense. At least we have it configured that way
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-12-08T16:26:16Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-2"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2018-12-08T22:34:21Z
+
+Thanks, M#3! :tada:
