@@ -18,6 +18,7 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\SlugGenerationHelper;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 class CreateConfigurableProductPage extends BaseCreatePage implements CreateConfigurableProductPageInterface
@@ -35,12 +36,35 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         }
     }
 
-    public function selectOption(string $optionName): void
+    public function isMainTaxonChosen(string $taxonName): bool
+    {
+        $this->openTaxonBookmarks();
+        Assert::notNull($this->getDocument()->find('css', '.search > .text'));
+
+        return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
+    }
+
+    public function selectMainTaxon(TaxonInterface $taxon): void
+    {
+        $this->openTaxonBookmarks();
+
+        Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
+
+        $this->getDriver()->executeScript(sprintf('$(\'input.search\').val(\'%s\')', $taxon->getName()));
+        $this->getElement('search')->click();
+        $this->getElement('search')->waitFor(10, function () {
+            return $this->hasElement('search_item_selected');
+        });
+        $itemSelected = $this->getElement('search_item_selected');
+        $itemSelected->click();
+    }
+
+    public function selectOption($optionName)
     {
         $this->getDocument()->selectFieldOption('Options', $optionName);
     }
 
-    public function attachImage(string $path, string $type = null): void
+    public function attachImage(string $path, ?string $type = null): void
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -63,8 +87,16 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
             'images' => '#sylius_product_images',
             'name' => '#sylius_product_translations_en_US_name',
             'slug' => '#sylius_product_translations_en_US_slug',
+            'search' => '.ui.fluid.search.selection.dropdown',
+            'search_item_selected' => 'div.menu > div.item.selected',
             'tab' => '.menu [data-tab="%name%"]',
+            'taxonomy' => 'a[data-tab="taxonomy"]',
         ]);
+    }
+
+    private function openTaxonBookmarks(): void
+    {
+        $this->getElement('taxonomy')->click();
     }
 
     private function clickTabIfItsNotActive(string $tabName): void

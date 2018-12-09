@@ -1,8 +1,8 @@
 @managing_products
-Feature: Select taxon for a product
+Feature: Select taxon for an existing product
     In order to specify in which taxons a product is available
     As an Administrator
-    I want to be able to select taxons for a product
+    I want to be able to select taxons for an existing product
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -27,3 +27,4 @@ Feature: Select taxon for a product
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product main taxon should be "Sad"
+
