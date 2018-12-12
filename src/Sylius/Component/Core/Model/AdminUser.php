@@ -86,6 +86,6 @@ class AdminUser extends User implements AdminUserInterface
      */
     public function getEncoderName(): string
     {
-        return 'sylius.security.user_password_encoder';
+        return 'sylius_default_password_encoder';
     }
 }
