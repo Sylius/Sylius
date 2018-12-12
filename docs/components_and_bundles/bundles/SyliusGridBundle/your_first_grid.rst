@@ -15,7 +15,7 @@ If you don’t have it yet create a file ``app/config/resources.yml``, import it
             app.supplier:
                 driver: doctrine/orm
                 classes:
-                    model: AppBundle\Entity\Supplier
+                    model: App\Entity\Supplier
 
 .. code-block:: yaml
 
@@ -45,7 +45,7 @@ Now we can configure our first grid:
                 driver:
                     name: doctrine/orm
                     options:
-                        class: AppBundle\Entity\Supplier
+                        class: App\Entity\Supplier
                 fields:
                     name:
                         type: string
@@ -185,7 +185,7 @@ This first requires a :doc:`custom repository method </customization/repository>
                 driver:
                     name: doctrine/orm
                     options:
-                        class: AppBundle\Entity\Supplier
+                        class: App\Entity\Supplier
                         repository:
                             method: mySupplierGridQuery
 
@@ -258,7 +258,7 @@ If your field is not of a "simple" type, f.i. a twig template with a specific pa
                     origin:
                         type: twig
                         options:
-                            template: "@AppBundle/Grid/Fields/myCountryFlags.html.twig"
+                            template: "@App/Grid/Fields/myCountryFlags.html.twig"
                         path: address.country
                         label: app.ui.country
                         sortable: address.country

@@ -141,7 +141,7 @@ of the ``ShippingMethodImage``.
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/doctrine/ShippingMethodImage.orm.yml
+    # App/Resources/config/doctrine/ShippingMethodImage.orm.yml
     App\Entity\ShippingMethodImage:
         type: entity
         table: app_shipping_method_image
@@ -162,7 +162,7 @@ The newly added ``images`` field has to be added to the mapping, with a relation
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/doctrine/ShippingMethod.orm.yml
+    # App/Resources/config/doctrine/ShippingMethod.orm.yml
     App\Entity\ShippingMethod:
         type: entity
         table: sylius_shipping_method
@@ -406,13 +406,13 @@ and render the ``{{ form_row(form.images) }}`` field.
 ^^^^^^^^^^^^^^
 
 Your form so far is working fine, but don't forget about validation.
-The easiest way is using validation config files under the ``AppBundle/Resources/config/validation`` folder.
+The easiest way is using validation config files under the ``App/Resources/config/validation`` folder.
 
 This could look like this e.g.:
 
 .. code-block:: yaml
 
-    # AppBundle\Resources\config\validation\ShippingMethodImage.yml
+    # src\Resources\config\validation\ShippingMethodImage.yml
     App\Entity\ShippingMethodImage:
       properties:
         file:
@@ -435,7 +435,7 @@ Now connecting the validation of the ``ShippingMethod`` to the validation of eac
 
 .. code-block:: yaml
 
-    # AppBundle\Resources\config\validation\ShippingMethod.yml
+    # src\Resources\config\validation\ShippingMethod.yml
     App\Entity\ShippingMethod:
       properties:
         ...

@@ -50,3 +50,6 @@ Sylius\Component\Taxonomy\Model\Taxon:
         hasChildren:
             serialized_name: hasChildren
             groups: [Autocomplete]
+        getFullname:
+            serialized_name: fullname
+            groups: [Autocomplete]

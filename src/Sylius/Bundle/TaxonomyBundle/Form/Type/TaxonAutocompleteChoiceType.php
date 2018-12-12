@@ -28,7 +28,7 @@ final class TaxonAutocompleteChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'resource' => 'sylius.taxon',
-            'choice_name' => 'name',
+            'choice_name' => 'fullname',
             'choice_value' => 'code',
         ]);
     }

@@ -1,5 +1,15 @@
 # CHANGELOG FOR `1.1.X`
 
+## v1.1.16 (2016-11-28)
+
+#### TL;DR
+
+- This is the security release according to problems with `dominictarr/event-stream` library
+
+#### Details
+
+- [#9972](https://github.com/Sylius/Sylius/pull/9972) Update gulp-livereload (@kulczy)
+
 ## v1.1.15 (2018-10-11)
 
 #### TL;DR

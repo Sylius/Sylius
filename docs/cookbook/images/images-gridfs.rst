@@ -187,7 +187,7 @@ To make GridFS files easily reusable, we introduce a mapped superclass which wil
 
 .. code-block:: xml
 
-    <!-- @AppBundle/Resources/doctrine/model/File.odm.xml -->
+    <!-- @App/Resources/doctrine/model/File.odm.xml -->
     <?xml version="1.0" encoding="UTF-8"?>
     <doctrine-mongo-mapping xmlns="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping"
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -224,7 +224,7 @@ cached images. They will be stored in the same collection, but can be differenti
 
 .. code-block:: xml
 
-    <!-- @AppBundle/Resources/doctrine/model/ProductImage.odm.xml -->
+    <!-- @App/Resources/doctrine/model/ProductImage.odm.xml -->
     <?xml version="1.0" encoding="UTF-8"?>
     <doctrine-mongo-mapping xmlns="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping"
                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -288,7 +288,7 @@ cached images. They will be stored in the same collection, but can be differenti
 
 .. code-block:: xml
 
-    <!-- @AppBundle/Resources/doctrine/model/ProductImageCache.odm.xml -->
+    <!-- @App/Resources/doctrine/model/ProductImageCache.odm.xml -->
     <?xml version="1.0" encoding="UTF-8"?>
     <doctrine-mongo-mapping xmlns="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping"
                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -332,7 +332,7 @@ cached images. They will be stored in the same collection, but can be differenti
 
 .. code-block:: xml
 
-    <!-- @AppBundle/Resources/doctrine/model/ProductImageCacheMetadata.odm.xml -->
+    <!-- @App/Resources/doctrine/model/ProductImageCacheMetadata.odm.xml -->
     <?xml version="1.0" encoding="UTF-8"?>
     <doctrine-mongo-mapping xmlns="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping"
                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -355,7 +355,7 @@ First of all a new service is configured.
 
 .. code-block:: xml
 
-    <!-- @AppBundle/Resources/config/services.xml -->
+    <!-- @App/Resources/config/services.xml -->
     <?xml version="1.0" encoding="UTF-8" ?>
     <container xmlns="http://symfony.com/schema/dic/services"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -449,7 +449,7 @@ Now we can create the service definition for the data loader:
 
 .. code-block:: xml
 
-    <!-- @AppBundle/Resources/config/services.xml -->
+    <!-- @App/Resources/config/services.xml -->
     <?xml version="1.0" encoding="UTF-8" ?>
     <container xmlns="http://symfony.com/schema/dic/services"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -620,7 +620,7 @@ Create the service definition for the resolver:
 
 .. code-block:: xml
 
-    <!-- @AppBundle/Resources/config/services.xml -->
+    <!-- @App/Resources/config/services.xml -->
     <?xml version="1.0" encoding="UTF-8" ?>
     <container xmlns="http://symfony.com/schema/dic/services"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
