@@ -5,4 +5,4 @@ sylius:
     form:
         collection:
             add: Dodaj
-            delete: sylius.account.address.action.delete
+            delete: Obriši
