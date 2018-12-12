@@ -67,7 +67,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         $this->shippingCategoryRepository = $shippingCategoryRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
         if($this->taxCategoryRepository === null) {
-            trigger_error('Not passing a taxCategory repo is deprcated and will be removed');
+            @trigger_error(sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.4 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
         }
         $this->localeRepository = $localeRepository;
         $this->channelRepository = $channelRepository;
