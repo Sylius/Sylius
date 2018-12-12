@@ -28,8 +28,7 @@ As usual, use a factory. The only required field for the Customer entity is ``em
 
    $this->container->get('sylius.repository.customer')->add($customer);
 
-The Customer entity can of course hold other information besides an email, it can be for instance
-``billingAddress`` and ``shippingAddress``, ``firstName``, ``lastName`` or ``birthday``.
+The Customer entity can of course hold other information besides an email, it can be for instance ``firstName``, ``lastName`` or ``birthday``.
 
 .. note::
 
