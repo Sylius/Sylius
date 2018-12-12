@@ -77,7 +77,7 @@ Assuming that you would want to add another field on the model - for instance a 
 
 **2.** Next define your entity's mapping.
 
-The file should be placed in ``App/Resources/config/doctrine/Country.orm.yml``
+The file should be placed in ``config/doctrine/Country.orm.yml``
 
 .. code-block:: yaml
 
@@ -197,7 +197,7 @@ Just like for regular models you can also check the class of translatable models
 
 **2.** Next define your entity's mapping.
 
-The file should be placed in ``App/Resources/config/doctrine/ShippingMethod.orm.yml``
+The file should be placed in ``config/doctrine/ShippingMethod.orm.yml``
 
 .. code-block:: yaml
 
@@ -208,6 +208,16 @@ The file should be placed in ``App/Resources/config/doctrine/ShippingMethod.orm.
             estimatedDeliveryTime:
                 type: string
                 nullable: true
+
+If you're using yaml config like in this example make sure you change configuration in ``config/packages/doctrine.yml`` so it reads mappings from yaml files
+
+.. code-block:: yaml
+
+     orm:
+        mappings:
+            App:
+                type: yml
+                dir: '%kernel.project_dir%/config/doctrine'
 
 **3.** Finally you'll need to override the model's class in the ``config/_sylius.yaml``.
 
