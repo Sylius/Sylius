@@ -9,6 +9,8 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
 
     <?php
 
+    declare(strict_types=1);
+    
     use Sylius\Component\Shipping\Model\ShippableInterface;
     use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
@@ -20,42 +22,42 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         private $category;
 
         /**
-         * @var int
+         * @var float
          */
         private $weight;
 
         /**
-         * @var int
+         * @var float
          */
         private $volume;
 
         /**
-         * @var int
+         * @var float
          */
         private $width;
 
         /**
-         * @var int
+         * @var float
          */
         private $height;
 
         /**
-         * @var int
+         * @var float
          */
         private $depth;
 
         /**
          * {@inheritdoc}
          */
-        public function getShippingWeight()
+        public function getShippingWeight(): float
         {
             return $this->weight;
         }
 
         /**
-         * @param int $weight
+         * {@inheritdoc}
          */
-        public function setShippingWeight($weight)
+        public function setShippingWeight(float $weight): void
         {
             $this->weight = $weight;
         }
@@ -63,7 +65,7 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * {@inheritdoc}
          */
-        public function getShippingVolume()
+        public function getShippingVolume(): float
         {
             return $this->volume;
         }
@@ -71,7 +73,7 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * @param int $volume
          */
-        public function setShippingVolume($volume)
+        public function setShippingVolume(float $volume)
         {
             $this->volume = $volume;
         }
@@ -79,37 +81,62 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         /**
          * {@inheritdoc}
          */
-        public function getShippingWidth()
+        public function getShippingWidth(): float
         {
-            // TODO: Implement getShippingWidth() method.
+            return $this->width;
         }
+
 
         /**
          * {@inheritdoc}
          */
-        public function getShippingHeight()
+        public function setShippingWidth(float $width)
         {
-            // TODO: Implement getShippingHeight() method.
+            $this->width = $width;
         }
-
+        
         /**
          * {@inheritdoc}
          */
-        public function getShippingDepth()
+        public function getShippingHeight(): float
         {
-            // TODO: Implement getShippingDepth() method.
+            return $this->height;
         }
-
+        
         /**
          * {@inheritdoc}
          */
-        public function getShippingCategory()
+        public function setShippingHeight(float $height)
+        {
+            $this->height = $height;
+        }
+        
+        /**
+         * {@inheritdoc}
+         */
+        public function getShippingDepth(): float
+        {
+            return $this->depth;
+        }
+        
+        /**
+         * {@inheritdoc}
+         */
+        public function setShippingDepth(float $depth)
+        {
+            $this->depth = $depth;
+        }
+        
+        /**
+         * {@inheritdoc}
+         */
+        public function getShippingCategory(): ShippingCategoryInterface
         {
             return $this->category;
         }
-
+        
         /**
-         * @param ShippingCategoryInterface $category
+         * {@inheritdoc}
          */
         public function setShippingCategory(ShippingCategoryInterface $category)
         {
@@ -126,7 +153,7 @@ methods respectively. The name is mutable, so you can change them by calling and
 Shipping Method
 ---------------
 
-Every shipping method has three identifiers, an ID code and name. You can access those by calling ``->getId()``, ``->gerCode()`` and ``->getName()``
+Every shipping method has three identifiers, an ID code and name. You can access those by calling ``->getId()``, ``->getCode()`` and ``->getName()``
 methods respectively. The name is mutable, so you can change them by calling  ``->setName('FedEx')`` on the shipping method instance.
 
 Setting Shipping Category
@@ -154,8 +181,7 @@ Every shipping method can have shipping category. You can simply set or unset it
 Shipping Method Translation
 ---------------------------
 
-**ShippingMethodTranslation** allows shipping method's name translation according to given locales. To see how to use translation
-please go to :ref:`component_resource_translations_usage`.
+**ShippingMethodTranslation** allows shipping method's name translation according to given locales. To see how to use translation please go to :ref:`component_resource_translations_usage`.
 
 
 Shipment Item
