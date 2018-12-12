@@ -67,6 +67,7 @@ final class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->arrayNode('templates')
+                    ->setDeprecated(true)
                     ->useAttributeAsKey('name')
                     ->scalarPrototype()->end()
                 ->end()
