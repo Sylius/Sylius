@@ -23,6 +23,9 @@ parameters:
         - '**MongoDB**'
         - '**ODM**'
 
+        # Temporary PhpMatcherDumper class
+        - 'src/Sylius/Bundle/CoreBundle/Routing/Matcher/Dumper/PhpMatcherDumper.php'
+
     ignoreErrors:
         # Magic calls
         - '/Call to an undefined static method Webmozart\\Assert\\Assert::all/'
