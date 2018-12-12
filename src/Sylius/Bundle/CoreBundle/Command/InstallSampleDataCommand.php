@@ -52,7 +52,7 @@ EOT
         $outputStyle->writeln(sprintf(
             'Loading sample data for environment <info>%s</info> from suite <info>%s</info>.',
             $this->getEnvironment(),
-            $suite
+            $suite ?? 'default'
         ));
         $outputStyle->writeln('<error>Warning! This action will erase your database.</error>');
 
@@ -72,10 +72,10 @@ EOT
             return 1;
         }
 
-        $parameters = ['--no-interaction' => true];
-        if (null !== $suite) {
-            $parameters['suite'] = $suite;
-        }
+        $parameters = [
+            'suite' => $suite,
+            '--no-interaction' => true,
+        ];
 
         $commands = [
             'sylius:fixtures:load' => $parameters,
