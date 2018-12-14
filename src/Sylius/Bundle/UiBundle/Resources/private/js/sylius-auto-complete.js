@@ -25,6 +25,7 @@
                             search: 250
                         },
                         forceSelection: false,
+                        minCharacters: 1,
                         apiSettings: {
                             dataType: 'JSON',
                             cache: false,
