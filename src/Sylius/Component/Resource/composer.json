@@ -27,7 +27,7 @@
         "symfony/event-dispatcher": "^3.4",
         "symfony/property-access": "^3.4",
         "winzou/state-machine": "^0.3",
-        "pagerfanta/pagerfanta": "^1.0"
+        "pagerfanta/pagerfanta": "^1.0|^2.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^4.0",

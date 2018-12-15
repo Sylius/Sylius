@@ -21,6 +21,9 @@
                 var provinceSelectFieldName = select.attr('name').replace('country', 'province');
                 var provinceInputFieldName = select.attr('name').replace('countryCode', 'provinceName');
 
+                var provinceSelectFieldId = select.attr('id').replace('country', 'province');
+                var provinceInputFieldId = select.attr('id').replace('countryCode', 'provinceName');
+
                 if ('' === select.val() || undefined == select.val()) {
                     provinceContainer.fadeOut('slow', function () {
                         provinceContainer.html('');
@@ -50,6 +53,10 @@
                                 'name="' + provinceSelectFieldName + '"' + provinceSelectValue
                             )
                             .replace(
+                                'id="sylius_address_province"',
+                                'id="' + provinceSelectFieldId + '"'
+                            )
+                            .replace(
                                 'option value="" selected="selected"',
                                 'option value=""'
                             )
@@ -70,6 +77,10 @@
                             provinceContainer.html(response.content.replace(
                                 'name="sylius_address_province"',
                                 'name="' + provinceInputFieldName + '"' + provinceInputValue
+                            )
+                            .replace(
+                                'id="sylius_address_province"',
+                                'id="' + provinceInputFieldId + '"'
                             ));
 
                             provinceContainer.removeAttr('data-loading');

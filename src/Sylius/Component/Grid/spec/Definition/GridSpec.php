@@ -207,6 +207,26 @@ final class GridSpec extends ObjectBehavior
         $this->getActionGroup('row')->shouldReturn($secondActionGroup);
     }
 
+    function it_can_return_action_groups(ActionGroup $firstActionGroup, ActionGroup $secondActionGroup): void
+    {
+        $firstActionGroup->getName()->willReturn('first');
+        $secondActionGroup->getName()->willReturn('second');
+        $this->addActionGroup($firstActionGroup);
+        $this->addActionGroup($secondActionGroup);
+
+        $this->getActionGroups()->shouldHaveCount(2);
+    }
+
+    function it_can_return_only_enabled_action_groups(ActionGroup $firstActionGroup, ActionGroup $secondActionGroup): void
+    {
+        $firstActionGroup->getName()->willReturn('first');
+        $secondActionGroup->getName()->willReturn('second');
+        $this->addActionGroup($firstActionGroup);
+        $this->addActionGroup($secondActionGroup);
+
+        $this->getEnabledActionGroups()->shouldHaveCount(2);
+    }
+
     function it_returns_actions_for_given_group(ActionGroup $actionGroup, Action $action): void
     {
         $actionGroup->getName()->willReturn('row');

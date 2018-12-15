@@ -43,6 +43,7 @@
         "sylius/taxation": "^1.1",
         "sylius/taxonomy": "^1.1",
         "sylius/user": "^1.1",
+        "symfony/http-foundation": "^3.4",
         "webmozart/assert": "^1.0",
         "zendframework/zend-stdlib": "^3.1"
     },
