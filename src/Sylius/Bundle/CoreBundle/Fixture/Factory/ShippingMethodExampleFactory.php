@@ -98,7 +98,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             $shippingMethod->setCategory($options['category']);
         }
 
-        if (array_key_exists('tax_category', $options)) {
+        if (array_key_exists('tax_category', $options) && ($options['tax_category'] instanceof TaxCategoryInterface)) {
             $shippingMethod->setTaxCategory($options['tax_category']);
         }
 
@@ -141,7 +141,6 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setNormalizer('zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
             ->setDefined('tax_category')
             ->setAllowedTypes('tax_category', ['null', 'string', TaxCategoryInterface::class])
-            ->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'))
             ->setDefined('category')
             ->setAllowedTypes('category', ['null', 'string', ShippingCategoryInterface::class])
             ->setNormalizer('category', LazyOption::findOneBy($this->shippingCategoryRepository, 'code'))
@@ -163,6 +162,9 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setDefault('archived_at', null)
             ->setAllowedTypes('archived_at', ['null', \DateTimeInterface::class])
         ;
+        if($this->taxCategoryRepository !== null) {
+            $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
+        }
     }
 
     private function getLocales(): iterable
