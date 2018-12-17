@@ -1,5 +1,33 @@
 # CHANGELOG FOR `1.3.X`
 
+## v1.3.6 (2018-12-17)
+
+#### TL;DR
+
+- Fixed compatibility issues with Symfony 4.1.18 and 4.1.19 ([#10020](https://github.com/Sylius/Sylius/issues/10020), [#10038](https://github.com/Sylius/Sylius/issues/10038))
+
+#### Details
+
+- [#9837](https://github.com/Sylius/Sylius/issues/9837) Repaired shipping method fixture ([@JakobTolkemit](https://github.com/JakobTolkemit))
+- [#9893](https://github.com/Sylius/Sylius/issues/9893) Correcting the documentation about how to customise forms templates ([@Konafets](https://github.com/Konafets))
+- [#9919](https://github.com/Sylius/Sylius/issues/9919) #9858 Fix for promotion of 100 percent with coupon ([@laurent35240](https://github.com/laurent35240))
+- [#9975](https://github.com/Sylius/Sylius/issues/9975) Ignore locale request restriction for profiler and it's toolbar ([@Peteck](https://github.com/Peteck))
+- [#9979](https://github.com/Sylius/Sylius/issues/9979) Update book/installation docs with correct config folder ([@dakorpar](https://github.com/dakorpar))
+- [#9985](https://github.com/Sylius/Sylius/issues/9985) Add missing code and calculator mandatory field on tax rate documenation ([@Soullivaneuh](https://github.com/Soullivaneuh))
+- [#9995](https://github.com/Sylius/Sylius/issues/9995) Remove `AppBundle` from docs. ([@Konafets](https://github.com/Konafets))
+- [#9997](https://github.com/Sylius/Sylius/issues/9997) Fix typo cookbook about emails ([@Konafets](https://github.com/Konafets))
+- [#9998](https://github.com/Sylius/Sylius/issues/9998) Improve the ShippingBundle doc ([@Konafets](https://github.com/Konafets))
+- [#10004](https://github.com/Sylius/Sylius/issues/10004) [Console] Add command for showing available Sylius plugins ([@GSadee](https://github.com/GSadee))
+- [#10011](https://github.com/Sylius/Sylius/issues/10011) [Kernel] Move WebServerBundle to dev/test environment ([@GSadee](https://github.com/GSadee))
+- [#10012](https://github.com/Sylius/Sylius/issues/10012) Fixed incorrect Behat MinkExtension key in the docs ([@jzawadzki](https://github.com/jzawadzki))
+- [#10016](https://github.com/Sylius/Sylius/issues/10016) Column 'position' cannot be null ([@zspine](https://github.com/zspine))
+- [#10018](https://github.com/Sylius/Sylius/issues/10018) [docs] fix config directory path and added info for orm mappings in customization/model ([@dakorpar](https://github.com/dakorpar))
+- [#10020](https://github.com/Sylius/Sylius/issues/10020) [HotFix][BuildFix] Use old PhpMatcherDumper to avoid trailing slash problems ([@Zales0123](https://github.com/Zales0123))
+- [#10023](https://github.com/Sylius/Sylius/issues/10023) Remove billingAddress and shippingAddress ([@Konafets](https://github.com/Konafets))
+- [#10025](https://github.com/Sylius/Sylius/issues/10025) [Console] Fix RBAC url ([@GSadee](https://github.com/GSadee))
+- [#10029](https://github.com/Sylius/Sylius/issues/10029) Fix type annotation for $addToCartCommand ([@daniellienert](https://github.com/daniellienert))
+- [#10038](https://github.com/Sylius/Sylius/issues/10038) Fix the build on 1.3 by more flexible router overriding ([@pamil](https://github.com/pamil))
+
 ## v1.3.5 (2018-11-28)
 
 #### TL;DR
