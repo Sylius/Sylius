@@ -196,7 +196,7 @@ class OrderFixture extends AbstractFixture
         $address = $this->addressFactory->createNew();
         $address->setFirstName($this->faker->firstName);
         $address->setLastName($this->faker->lastName);
-        $address->setStreet($this->faker->streetName);
+        $address->setStreet($this->faker->streetAddress);
         $address->setCountryCode($countryCode);
         $address->setCity($this->faker->city);
         $address->setPostcode($this->faker->postcode);
