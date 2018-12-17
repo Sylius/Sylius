@@ -15,20 +15,15 @@ namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\CoreBundle\Routing\Matcher\Dumper\PhpMatcherDumper;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Symfony\Bundle\FrameworkBundle\Routing\RedirectableUrlMatcher;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\Kernel;
-use Symfony\Component\Routing\Generator\Dumper\PhpGeneratorDumper;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 
-final class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
+final class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface, CompilerPassInterface
 {
     /** @var array */
     private static $bundles = [
@@ -68,11 +63,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         if ('test' === $env || 'test_cached' === $env) {
             $loader->load('test_services.xml');
         }
-
-        // This service is temporarily overwritten, due to problems with PhpMatcherDumper in Symfony 4.1.8 and 4.1.9
-        if (Kernel::VERSION === '4.1.8' || Kernel::VERSION === '4.1.9') {
-            $this->overrideRouterDefinition($container);
-        }
     }
 
     /**
@@ -104,30 +94,17 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $loader->load('services/integrations/hwi_oauth.xml');
     }
 
-    private function overrideRouterDefinition(ContainerBuilder $container): void
+    public function process(ContainerBuilder $container): void
     {
-        $routerDefinition = new Definition(Router::class);
-        $routerDefinition->addTag('monolog.logger', ['channel' => 'router']);
-        $routerDefinition->addTag('container.service_subscriber', ['id' => 'routing.loader']);
-        $routerDefinition->addArgument(new Reference('Psr\Container\ContainerInterface'));
-        $routerDefinition->addArgument($container->getParameter('router.resource'));
-        $routerDefinition->addArgument([
-            'cache_dir' => $container->getParameter('kernel.cache_dir'),
-            'debug' => $container->getParameter('kernel.debug'),
-            'generator_class' => UrlGenerator::class,
-            'generator_base_class' => UrlGenerator::class,
-            'generator_dumper_class' => PhpGeneratorDumper::class,
-            'generator_cache_class' => $container->getParameter('router.cache_class_prefix') . 'UrlGenerator',
-            'matcher_class' => RedirectableUrlMatcher::class,
-            'matcher_base_class' => RedirectableUrlMatcher::class,
-            'matcher_dumper_class' => PhpMatcherDumper::class,
-            'matcher_cache_class' => $container->getParameter('router.cache_class_prefix') . 'UrlMatcher',
-        ]);
-        $routerDefinition->addArgument((new Reference('router.request_context', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE)));
-        $routerDefinition->addArgument((new Reference('parameter_bag', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE)));
-        $routerDefinition->addArgument((new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE)));
-        $routerDefinition->addMethodCall('setConfigCacheFactory', [new Reference('config_cache_factory')]);
+        // Should be removed after PhpMatcherDumper is fixed in an another Symfony patch release
+        if (!in_array(Kernel::VERSION, ['4.1.8', '4.1.9'], true)) {
+            return;
+        }
 
-        $container->setDefinition('router.default', $routerDefinition);
+        $routerDefinition = $container->findDefinition('router.default');
+        $routerDefinition->replaceArgument(2, array_merge(
+            $routerDefinition->getArgument(2),
+            ['matcher_dumper_class' => PhpMatcherDumper::class]
+        ));
     }
 }
