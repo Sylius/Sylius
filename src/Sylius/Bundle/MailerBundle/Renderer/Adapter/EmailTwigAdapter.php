@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MailerBundle\Renderer\Adapter;
 
+use Sylius\Component\Mailer\Event\EmailAssemblyEvent;
 use Sylius\Component\Mailer\Event\EmailRenderEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
@@ -34,11 +35,20 @@ class EmailTwigAdapter extends AbstractAdapter
      */
     public function render(EmailInterface $email, array $data = []): RenderedEmail
     {
-        $renderedEmail = $this->getRenderedEmail($email, $data);
+        /** @var EmailAssemblyEvent $preRenderEvent */
+        $preRenderEvent = $this->dispatcher->dispatch(
+            SyliusMailerEvents::EMAIL_PRE_RENDER,
+            new EmailAssemblyEvent($email, $data)
+        );
+
+        $renderedEmail = $this->getRenderedEmail(
+            $preRenderEvent->getEmail(),
+            $preRenderEvent->getData()
+        );
 
         /** @var EmailRenderEvent $event */
         $event = $this->dispatcher->dispatch(
-            SyliusMailerEvents::EMAIL_PRE_RENDER,
+            SyliusMailerEvents::EMAIL_POST_RENDER,
             new EmailRenderEvent($renderedEmail)
         );
 
