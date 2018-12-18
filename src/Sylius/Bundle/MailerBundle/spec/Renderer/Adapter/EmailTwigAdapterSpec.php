@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\MailerBundle\Renderer\Adapter;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Mailer\Event\EmailAssemblyEvent;
 use Sylius\Component\Mailer\Event\EmailRenderEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
@@ -39,6 +40,7 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
         \Twig_Template $template,
         EmailInterface $email,
         EmailRenderEvent $event,
+        EmailAssemblyEvent $assemblyEvent,
         EventDispatcherInterface $dispatcher,
         RenderedEmail $renderedEmail
     ): void {
@@ -54,6 +56,11 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
 
         $dispatcher->dispatch(
             SyliusMailerEvents::EMAIL_PRE_RENDER,
+            Argument::type(EmailAssemblyEvent::class)
+        )->shouldBeCalled()->willReturn($assemblyEvent);
+
+        $dispatcher->dispatch(
+            SyliusMailerEvents::EMAIL_POST_RENDER,
             Argument::type(EmailRenderEvent::class)
         )->shouldBeCalled()->willReturn($event);
 
@@ -65,6 +72,7 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
     function it_creates_and_renders_an_email(
         EmailInterface $email,
         EmailRenderEvent $event,
+        EmailAssemblyEvent $assemblyEvent,
         EventDispatcherInterface $dispatcher,
         RenderedEmail $renderedEmail
     ): void {
@@ -76,6 +84,11 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
 
         $dispatcher->dispatch(
             SyliusMailerEvents::EMAIL_PRE_RENDER,
+            Argument::type(EmailAssemblyEvent::class)
+        )->shouldBeCalled()->willReturn($assemblyEvent);
+
+        $dispatcher->dispatch(
+            SyliusMailerEvents::EMAIL_POST_RENDER,
             Argument::type(EmailRenderEvent::class)
         )->shouldBeCalled()->willReturn($event);
 
