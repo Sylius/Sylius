@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-12-18T08:21:59Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-3"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by pamil at 2018-12-18T10:04:18Z
+
+Thank you, Stefan! :tada:
