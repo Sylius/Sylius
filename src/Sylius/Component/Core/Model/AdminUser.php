@@ -80,4 +80,12 @@ class AdminUser extends User implements AdminUserInterface
     {
         $this->localeCode = $code;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEncoderName(): string
+    {
+        return 'sylius_password_encoder_sha512';
+    }
 }

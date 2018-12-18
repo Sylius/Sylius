@@ -59,7 +59,8 @@ security:
                         password: foo
                         roles: ROLE_USER
     encoders:
-        Sylius\Component\User\Model\UserInterface: sha512
+        sylius_password_encoder_sha512:
+            id: 'sylius.security.user_password_encoder.sha512'
     firewalls:
         admin:
             switch_user: true

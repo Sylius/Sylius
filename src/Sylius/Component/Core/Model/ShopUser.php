@@ -98,4 +98,12 @@ class ShopUser extends BaseUser implements ShopUserInterface
 
         $this->customer->setEmailCanonical($emailCanonical);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEncoderName(): string
+    {
+        return 'sylius_password_encoder_sha512';
+    }
 }

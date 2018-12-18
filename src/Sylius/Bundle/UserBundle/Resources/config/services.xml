@@ -59,6 +59,12 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
+        <service class="Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder"
+                 id="sylius.security.user_password_encoder.sha512"
+        >
+            <argument type="string">sha512</argument>
+        </service>
+
         <!-- Listeners -->
         <service id="sylius.listener.password_updater" class="Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener">
             <argument type="service" id="sylius.security.password_updater" />
