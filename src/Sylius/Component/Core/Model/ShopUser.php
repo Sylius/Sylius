@@ -104,6 +104,6 @@ class ShopUser extends BaseUser implements ShopUserInterface
      */
     public function getEncoderName(): string
     {
-        return 'sylius_default_password_encoder';
+        return 'sylius_password_encoder_sha512';
     }
 }

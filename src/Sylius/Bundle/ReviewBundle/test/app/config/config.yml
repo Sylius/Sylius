@@ -50,8 +50,10 @@ security:
                         password:           foo
                         roles:              ROLE_USER
     encoders:
-        sylius_default_password_encoder:
-            id: 'sylius.security.user_password_encoder'
+        sylius_password_encoder_sha512:
+            id: 'sylius.security.user_password_encoder.sha512'
+        sylius_password_encoder_argon2i:
+            id: 'sylius.security.user_password_encoder.argon2i'
     firewalls:
         admin:
             switch_user: true

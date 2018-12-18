@@ -60,7 +60,7 @@
         </service>
 
         <service class="Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder"
-                 id="sylius.security.user_password_encoder"
+                 id="sylius.security.user_password_encoder.sha512"
         >
             <argument type="string">sha512</argument>
         </service>
