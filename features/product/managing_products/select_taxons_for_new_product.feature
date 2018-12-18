@@ -14,12 +14,12 @@ Feature: Select taxon for a new product
     Scenario: Specifying main taxon for configurable product
         Given I want to create a new configurable product
         When I choose main taxon "Sad"
-        And I specify its code as "WHISKEY_GENTLEMEN"
         And I name it "Gentleman Jack" in "English (United States)"
+        And I specify its code as "WHISKEY_GENTLEMEN"
         And I set its slug to "whiskey/gentleman-jack" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
-        And this product main taxon should be "Sad"
+        And main taxon of product "Gentleman Jack" should be "Sad"
 
     @ui @javascript
     Scenario: Specifying main taxon for simple product
@@ -31,4 +31,4 @@ Feature: Select taxon for a new product
         And I set its slug to "mom-board-game" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
-        And this product main taxon should be "Sad"
+        And main taxon of product "Mansion of Madness" should be "Sad"

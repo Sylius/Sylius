@@ -34,6 +34,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
     public function nameItIn(string $name, string $localeCode): void
     {
+        $this->clickTabIfItsNotActive('details');
         $this->activateLanguageTab($localeCode);
         $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
 

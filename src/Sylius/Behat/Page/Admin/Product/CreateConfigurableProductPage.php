@@ -17,6 +17,7 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -27,6 +28,8 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
 
     public function nameItIn(string $name, string $localeCode): void
     {
+        $this->clickTabIfItsNotActive('details');
+
         $this->getDocument()->fillField(
             sprintf('sylius_product_translations_%s_name', $localeCode), $name
         );
@@ -48,15 +51,9 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     {
         $this->openTaxonBookmarks();
 
-        Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
+        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
-        $this->getDriver()->executeScript(sprintf('$(\'input.search\').val(\'%s\')', $taxon->getName()));
-        $this->getElement('search')->click();
-        $this->getElement('search')->waitFor(10, function () {
-            return $this->hasElement('search_item_selected');
-        });
-        $itemSelected = $this->getElement('search_item_selected');
-        $itemSelected->click();
+        AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
     }
 
     public function selectOption($optionName)
@@ -85,10 +82,11 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_code',
             'images' => '#sylius_product_images',
+            'main_taxon' => '#sylius_product_mainTaxon',
             'name' => '#sylius_product_translations_en_US_name',
-            'slug' => '#sylius_product_translations_en_US_slug',
             'search' => '.ui.fluid.search.selection.dropdown',
             'search_item_selected' => 'div.menu > div.item.selected',
+            'slug' => '#sylius_product_translations_en_US_slug',
             'tab' => '.menu [data-tab="%name%"]',
             'taxonomy' => 'a[data-tab="taxonomy"]',
         ]);
