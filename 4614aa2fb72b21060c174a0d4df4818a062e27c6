@@ -1,0 +1,25 @@
+---------------------------------------------------------------------------
+
+by kortwotze at 2018-12-06T15:30:10Z
+
+Can someone help me finding out which test-configuration to change to add the new encoder from security.yml to the test-environments?
+
+This has been resolved with b4cbce2
+
+---------------------------------------------------------------------------
+
+by kortwotze at 2018-12-13T09:02:34Z
+
+CC @pamil, because this references his issue.
+
+---------------------------------------------------------------------------
+
+by pamil at 2018-12-18T13:10:23Z
+
+Rebased the PR so that the build should be passing now.
+
+---------------------------------------------------------------------------
+
+by pamil at 2018-12-18T14:42:26Z
+
+Thanks, Peter! :1st_place_medal:
