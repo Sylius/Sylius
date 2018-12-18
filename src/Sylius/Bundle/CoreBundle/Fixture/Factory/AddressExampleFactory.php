@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
-use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\AddressInterface;

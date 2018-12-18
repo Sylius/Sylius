@@ -63,7 +63,7 @@
     "conflict": {
         "symfony/browser-kit": "4.1.8",
         "symfony/dependency-injection": "4.1.8",
-        "symfony/routing": "4.1.8",
+        "symfony/routing": "4.1.8 || 4.1.9",
         "symfony/dom-crawler": "4.1.8"
     },
     "config": {

@@ -52,7 +52,7 @@ class OrderItemController extends ResourceController
         );
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            /** @var AddToCartCommandInterface $addCartItemCommand */
+            /** @var AddToCartCommandInterface $addToCartCommand */
             $addToCartCommand = $form->getData();
 
             $errors = $this->getCartItemErrors($addToCartCommand->getCartItem());

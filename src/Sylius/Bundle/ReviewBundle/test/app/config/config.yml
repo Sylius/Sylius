@@ -52,8 +52,6 @@ security:
     encoders:
         sylius_password_encoder_sha512:
             id: 'sylius.security.user_password_encoder.sha512'
-        sylius_password_encoder_argon2i:
-            id: 'sylius.security.user_password_encoder.argon2i'
     firewalls:
         admin:
             switch_user: true

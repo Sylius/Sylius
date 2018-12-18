@@ -78,12 +78,16 @@ Finally, you have to create appropriate tax rates for each of categories.
         $clothingTaxRate = $taxRateFactory->createNew();
         $clothingTaxRate->setCategory($clothingTaxCategory);
         $clothingTaxRate->setName('Clothing Tax');
+        $clothingTaxRate->setCode('CT');
         $clothingTaxRate->setAmount(0.08);
+        $clothingTaxRate->setCalculator('default');
 
         $foodTaxRate = $taxRateFactory->createNew();
         $foodTaxRate->setCategory($foodTaxCategory);
         $foodTaxRate->setName('Food');
+        $foodTaxRate->setCode('F');
         $foodTaxRate->setAmount(0.12);
+        $foodTaxRate->setCalculator('default');
 
         $taxRateManager->persist($clothingTaxRate);
         $taxRateManager->persist($foodTaxRate);

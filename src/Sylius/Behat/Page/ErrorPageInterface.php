@@ -16,8 +16,6 @@ namespace Sylius\Behat\Page;
 interface ErrorPageInterface
 {
     /**
-     * @return string
-     *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
     public function getTitle(): string;
