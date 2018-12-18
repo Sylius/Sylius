@@ -35,3 +35,7 @@ Sylius\Component\Core\Model\Order:
         promotionCoupon:
             expose: true
             groups: [Default, Detailed, DetailedCart]
+        tokenValue:
+            expose: true
+            type: string
+            groups: [Default, Detailed, DetailedCart]
