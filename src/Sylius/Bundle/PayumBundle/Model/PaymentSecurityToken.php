@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\Model;
 
-use Payum\Core\Security\TokenInterface;
 use Payum\Core\Security\Util\Random;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
 class PaymentSecurityToken implements PaymentSecurityTokenInterface
 {
