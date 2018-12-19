@@ -37,10 +37,7 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
         $this->imageExistenceChecker = $imageExistenceChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function filterByTaxon($taxonName)
+    public function filterByTaxon(string $taxonName): void
     {
         $this->getElement('taxon_filter', ['%taxon%' => $taxonName])->click();
     }
@@ -53,9 +50,6 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
         return $this->imageExistenceChecker->doesImageWithUrlExist($imageUrl, 'sylius_admin_product_thumbnail');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

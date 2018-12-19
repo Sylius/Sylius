@@ -15,9 +15,6 @@ namespace Sylius\Behat\Page\Admin\Taxon;
 
 class CreateForParentPage extends CreatePage implements CreateForParentPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_admin_taxon_create_for_parent';

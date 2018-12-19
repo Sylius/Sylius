@@ -22,49 +22,31 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function changeName($name, $language)
+    public function changeName(string $name, string $language): void
     {
         $this->getDocument()->fillField(sprintf('sylius_product_attribute_translations_%s_name', $language), $name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isTypeDisabled()
+    public function isTypeDisabled(): bool
     {
         return 'disabled' === $this->getElement('type')->getAttribute('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function changeAttributeValue(string $oldValue, string $newValue): void
     {
         $this->getElement('attribute_choice_list_element', ['%value%' => $oldValue])->setValue($newValue);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasAttributeValue(string $value): bool
     {
         return $this->hasElement('attribute_choice_list_element', ['%value%' => $value]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addAttributeValue(string $value, string $localeCode): void
     {
         $this->getDocument()->clickLink('Add');
@@ -75,9 +57,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function deleteAttributeValue(string $value): void
     {
         $attributeChoiceElement = $this
@@ -87,9 +66,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $attributeChoiceElement->clickLink('Delete');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

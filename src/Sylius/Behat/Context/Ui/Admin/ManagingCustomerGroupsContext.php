@@ -55,7 +55,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -64,7 +64,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iSpecifyItsNameAs($name = null)
     {
-        $this->createPage->nameIt($name);
+        $this->createPage->nameIt($name ?? '');
     }
 
     /**

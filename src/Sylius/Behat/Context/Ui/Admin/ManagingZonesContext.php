@@ -103,7 +103,7 @@ final class ManagingZonesContext implements Context
      */
     public function iRenameItTo($name)
     {
-        $this->updatePage->nameIt($name);
+        $this->updatePage->nameIt($name ?? '');
     }
 
     /**
@@ -111,7 +111,7 @@ final class ManagingZonesContext implements Context
      */
     public function iNameIt($name)
     {
-        $this->createPage->nameIt($name);
+        $this->createPage->nameIt($name ?? '');
     }
 
     /**
@@ -119,7 +119,7 @@ final class ManagingZonesContext implements Context
      */
     public function iSpecifyItsCodeAs($code)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**

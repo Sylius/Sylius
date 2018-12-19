@@ -69,13 +69,13 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
      * @When I specify its position as :position
      */
-    public function iSpecifyItsPositionAs($position = null)
+    public function iSpecifyItsPositionAs(int $position = null)
     {
         $this->createPage->specifyPosition($position);
     }
@@ -356,7 +356,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iRemoveItsNameFromTranslation($language)
     {
-        $this->createPage->nameIt(null, $language);
+        $this->createPage->nameIt('', $language);
     }
 
     /**

@@ -100,7 +100,7 @@ class ManagingShippingCategoriesContext implements Context
      */
     public function iSpecifyItsCodeAs($shippingCategoryCode = null)
     {
-        $this->createPage->specifyCode($shippingCategoryCode);
+        $this->createPage->specifyCode($shippingCategoryCode ?? '');
     }
 
     /**
@@ -109,7 +109,7 @@ class ManagingShippingCategoriesContext implements Context
      */
     public function iNameIt($shippingCategoryName = null)
     {
-        $this->createPage->nameIt($shippingCategoryName);
+        $this->createPage->nameIt($shippingCategoryName ?? '');
     }
 
     /**
@@ -170,7 +170,7 @@ class ManagingShippingCategoriesContext implements Context
      */
     public function iNameItIn($name)
     {
-        $this->createPage->nameIt($name);
+        $this->createPage->nameIt($name ?? '');
     }
 
     /**

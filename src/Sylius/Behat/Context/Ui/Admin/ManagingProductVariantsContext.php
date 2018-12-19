@@ -81,7 +81,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -121,9 +121,9 @@ final class ManagingProductVariantsContext implements Context
      * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      * @When I do not set its price
      */
-    public function iSetItsPriceTo($price = null, $channelName = null)
+    public function iSetItsPriceTo(?string $price = null, $channelName = null)
     {
-        $this->createPage->specifyPrice($price, $channelName ?? $this->sharedStorage->get('channel'));
+        $this->createPage->specifyPrice($price ?? '', $channelName ?? (string) $this->sharedStorage->get('channel'));
     }
 
     /**
@@ -169,7 +169,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I set the position of :name to :position
      */
-    public function iSetThePositionOfTo($name, $position)
+    public function iSetThePositionOfTo($name, int $position)
     {
         $this->indexPage->setPosition($name, $position);
     }
@@ -209,7 +209,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^the (variant with code "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
      */
-    public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, $price, $channelName)
+    public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, string $price, $channelName)
     {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
@@ -427,7 +427,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by "([^"]+)" code and costs "(?:€|£|\$)([^"]+)" in ("[^"]+") channel$/
      */
-    public function iSpecifyThereAreVariantsIdentifiedByCodeWithCost($nthVariant, $code, $price, $channelName)
+    public function iSpecifyThereAreVariantsIdentifiedByCodeWithCost($nthVariant, $code, int $price, $channelName)
     {
         $this->generatePage->specifyCode($nthVariant - 1, $code);
         $this->generatePage->specifyPrice($nthVariant - 1, $price, $channelName);
@@ -444,7 +444,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I specify that the (\d)(?:st|nd|rd|th) variant costs "(?:€|£|\$)([^"]+)" in ("[^"]+") channel$/
      */
-    public function iSpecifyThereAreVariantsWithCost($nthVariant, $price, $channelName)
+    public function iSpecifyThereAreVariantsWithCost($nthVariant, int $price, $channelName)
     {
         $this->generatePage->specifyPrice($nthVariant - 1, $price, $channelName);
     }
@@ -484,7 +484,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I change its quantity of inventory to :amount
      */
-    public function iChangeItsQuantityOfInventoryTo($amount)
+    public function iChangeItsQuantityOfInventoryTo(int $amount)
     {
         $this->updatePage->specifyCurrentStock($amount);
     }

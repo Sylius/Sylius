@@ -18,48 +18,23 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface IndexPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @return bool
-     */
-    public function isSingleResourceOnPage(array $parameters);
+    public function isSingleResourceOnPage(array $parameters): bool;
 
-    /**
-     * @param string $element
-     *
-     * @return bool
-     */
-    public function isSingleResourceWithSpecificElementOnPage(array $parameters, $element);
+    public function isSingleResourceWithSpecificElementOnPage(array $parameters, string $element): bool;
 
-    /**
-     * @param string $columnName
-     *
-     * @return array
-     */
-    public function getColumnFields($columnName);
+    public function getColumnFields(string $columnName): array;
 
-    /**
-     * @param string $fieldName
-     */
-    public function sortBy($fieldName);
+    public function sortBy(string $fieldName): void;
 
-    /**
-     * @return bool
-     */
-    public function deleteResourceOnPage(array $parameters);
+    public function deleteResourceOnPage(array $parameters): void;
 
-    /**
-     * @return NodeElement
-     */
-    public function getActionsForResource(array $parameters);
+    public function getActionsForResource(array $parameters): NodeElement;
 
     public function checkResourceOnPage(array $parameters): void;
 
-    /**
-     * @return int
-     */
-    public function countItems();
+    public function countItems(): int;
 
-    public function filter();
+    public function filter(): void;
 
     public function bulkDelete(): void;
 }
