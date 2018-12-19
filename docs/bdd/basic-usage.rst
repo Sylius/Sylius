@@ -122,7 +122,7 @@ Usage example of ``->getElement('your_element')`` and ``->getDefinedElements`` m
     class CreatePage extends SymfonyPage implements CreatePageInterface
     {
         // This method returns a simple associative array, where the key is the name of your element and the value is its locator.
-        protected function getDefinedElements()
+        protected function getDefinedElements(): array
         {
             return array_merge(parent::getDefinedElements(), [
                 'provinces' => '#sylius_country_provinces',
@@ -131,7 +131,7 @@ Usage example of ``->getElement('your_element')`` and ``->getDefinedElements`` m
 
         // By default it will assume that your locator is css.
         // Example with xpath.
-        protected function getDefinedElements()
+        protected function getDefinedElements(): array
         {
             return array_merge(parent::getDefinedElements(), [
                 'provinces' => ['xpath' => '//*[contains(@class, "provinces")]'] // Now your value is an array where key is your locator type.
@@ -223,7 +223,7 @@ And the country "France" should appear in the store".
             return $this->getElement('sidebar')->getText();
         }
 
-        protected function getDefinedElements()
+        protected function getDefinedElements(): array
         {
             return ['sidebar' => ['css' => '.sidebar']]
         }
@@ -242,7 +242,7 @@ And the country "France" should appear in the store".
             return $this->getElement('sidebar')->getText();
         }
 
-        protected function getDefinedElements()
+        protected function getDefinedElements(): array
         {
             return ['sidebar' => ['css' => '.sidebar']]
         }
