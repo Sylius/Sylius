@@ -30,6 +30,7 @@
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "doctrine/orm": "^2.5",
+        "egulias/email-validator": "~2.0",
         "friendsofsymfony/oauth-server-bundle": "^1.6",
         "friendsofsymfony/rest-bundle": "^2.1",
         "fzaninotto/faker": "^1.6",

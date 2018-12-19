@@ -69,6 +69,7 @@
             </constraint>
             <constraint name="Email">
                 <option name="message">sylius.customer.email.invalid</option>
+                <option name="strict">true</option>
                 <option name="groups">
                     <value>sylius</value>
                     <value>sylius_customer_guest</value>

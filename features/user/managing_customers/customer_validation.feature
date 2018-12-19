@@ -49,3 +49,11 @@ Feature: Customer validation
         And I try to add them
         Then I should be notified that email is not valid
         And the customer with email "wrongemail" should not appear in the store
+
+    @ui
+    Scenario: Trying to create customer with wrong email format in strict mode
+        Given I want to create a new customer
+        When I specify their email as "wrongemail@example..com"
+        And I try to add them
+        Then I should be notified that email is not valid
+        And the customer with email "wrongemail@example..com" should not appear in the store
