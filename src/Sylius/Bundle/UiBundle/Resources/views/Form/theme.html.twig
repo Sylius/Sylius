@@ -1,5 +1,12 @@
 {% extends 'form_div_layout.html.twig' %}
 
+{%- block form_start -%}
+    {% if not form.vars.valid %}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' error')|trim}) %}
+    {% endif %}
+    {{ parent() }}
+{%- endblock form_start -%}
+
 {% block form_row -%}
     <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
         {{- form_label(form) -}}
@@ -11,7 +18,10 @@
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         {%- for error in errors -%}
-            <div class="ui red {% if form.parent is not empty %}pointing {% endif %}label sylius-validation-error"{% if form.parent is empty %} style="margin-bottom: 10px;"{% endif %}>
+            <div class="ui red{% if form.parent is not empty %} pointing label{% else %} error message{% endif %} sylius-validation-error"{% if form.parent is empty %} style="margin-bottom: 10px;"{% endif %}>
+                {% if form.parent is empty %}
+                <i class="large circular exclamation triangle icon"></i>
+                {% endif %}
                 {{ error.message }}
             </div>
         {%- endfor -%}
