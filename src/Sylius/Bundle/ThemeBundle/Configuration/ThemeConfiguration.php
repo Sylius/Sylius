@@ -24,10 +24,15 @@ final class ThemeConfiguration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
+        if (method_exists(TreeBuilder::class, 'getRootNode')) {
+            $treeBuilder = new TreeBuilder('sylius_theme');
+            $rootNodeDefinition = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $treeBuilder = new TreeBuilder();
+            $rootNodeDefinition = $treeBuilder->root('sylius_theme');
+        }
 
-        /** @var ArrayNodeDefinition $rootNodeDefinition */
-        $rootNodeDefinition = $treeBuilder->root('sylius_theme');
         $rootNodeDefinition->ignoreExtraKeys();
 
         $this->addRequiredNameField($rootNodeDefinition);
