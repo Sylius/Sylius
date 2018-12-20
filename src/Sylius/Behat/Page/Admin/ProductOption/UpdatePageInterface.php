@@ -17,30 +17,13 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @param string $name
-     * @param string $languageCode
-     */
-    public function nameItIn($name, $languageCode);
+    public function nameItIn(string $name, string $languageCode): void;
 
-    /**
-     * @param string $optionValue
-     */
-    public function isThereOptionValue($optionValue);
+    public function isThereOptionValue(string $optionValue): bool;
 
-    /**
-     * @param string $code
-     * @param string $value
-     */
-    public function addOptionValue($code, $value);
+    public function addOptionValue(string $code, string $value): void;
 
-    /**
-     * @param string $optionValue
-     */
-    public function removeOptionValue($optionValue);
+    public function removeOptionValue(string $optionValue): void;
 }

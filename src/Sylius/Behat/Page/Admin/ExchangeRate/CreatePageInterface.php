@@ -17,25 +17,11 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePage;
 
 interface CreatePageInterface extends BaseCreatePage
 {
-    /**
-     * @param float $ratio
-     */
-    public function specifyRatio($ratio);
+    public function specifyRatio(string $ratio): void;
 
-    /**
-     * @param string $currency
-     */
-    public function chooseSourceCurrency($currency);
+    public function chooseSourceCurrency(string $currency): void;
 
-    /**
-     * @param string $currency
-     */
-    public function chooseTargetCurrency($currency);
+    public function chooseTargetCurrency(string $currency): void;
 
-    /**
-     * @param string $expectedMessage
-     *
-     * @return bool
-     */
-    public function hasFormValidationError($expectedMessage);
+    public function hasFormValidationError(string $expectedMessage): bool;
 }

@@ -133,7 +133,7 @@ final class ProductContext implements Context
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") in ("[^"]+" channel)$/
      */
-    public function storeHasAProductPricedAt($productName, $price = 100, ChannelInterface $channel = null)
+    public function storeHasAProductPricedAt($productName, int $price = 100, ChannelInterface $channel = null)
     {
         $product = $this->createProduct($productName, $price, $channel);
 
@@ -143,7 +143,7 @@ final class ProductContext implements Context
     /**
      * @Given /^(this product) is(?:| also) priced at ("[^"]+") in ("[^"]+" channel)$/
      */
-    public function thisProductIsAlsoPricedAtInChannel(ProductInterface $product, $price, ChannelInterface $channel)
+    public function thisProductIsAlsoPricedAtInChannel(ProductInterface $product, int $price, ChannelInterface $channel)
     {
         $product->addChannel($channel);
 
@@ -178,7 +178,7 @@ final class ProductContext implements Context
     /**
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") available in (channel "[^"]+") and (channel "[^"]+")$/
      */
-    public function storeHasAProductPricedAtAvailableInChannels($productName, $price = 100, ...$channels)
+    public function storeHasAProductPricedAtAvailableInChannels($productName, int $price = 100, ...$channels)
     {
         $product = $this->createProduct($productName, $price);
         /** @var ProductVariantInterface $productVariant */
@@ -381,7 +381,7 @@ final class ProductContext implements Context
     /**
      * @Given /^(this variant) is also priced at ("[^"]+") in ("([^"]+)" channel)$/
      */
-    public function thisVariantIsAlsoPricedAtInChannel(ProductVariantInterface $productVariant, $price, ChannelInterface $channel)
+    public function thisVariantIsAlsoPricedAtInChannel(ProductVariantInterface $productVariant, string $price, ChannelInterface $channel)
     {
         $productVariant->addChannelPricing($this->createChannelPricingForChannel(
             $this->getPriceFromString(str_replace(['$', '€', '£'], '', $price)),
@@ -578,7 +578,7 @@ final class ProductContext implements Context
     /**
      * @Given /^(this product) is available in "([^"]+)" ([^"]+) priced at ("[^"]+")$/
      */
-    public function thisProductIsAvailableInSize(ProductInterface $product, $optionValueName, $optionName, $price)
+    public function thisProductIsAvailableInSize(ProductInterface $product, $optionValueName, $optionName, int $price)
     {
         /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createNew();
@@ -681,7 +681,7 @@ final class ProductContext implements Context
      * @Given /^the (product "[^"]+") changed its price to ("[^"]+")$/
      * @Given /^(this product) price has been changed to ("[^"]+")$/
      */
-    public function theProductChangedItsPriceTo(ProductInterface $product, $price)
+    public function theProductChangedItsPriceTo(ProductInterface $product, int $price)
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
@@ -752,7 +752,7 @@ final class ProductContext implements Context
      *
      * @return ProductInterface
      */
-    private function createProduct($productName, $price = 100, ChannelInterface $channel = null)
+    private function createProduct($productName, int $price = 100, ChannelInterface $channel = null)
     {
         if (null === $channel && $this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');
@@ -904,7 +904,7 @@ final class ProductContext implements Context
      *
      * @return ChannelPricingInterface
      */
-    private function createChannelPricingForChannel($price, ChannelInterface $channel = null)
+    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null)
     {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();

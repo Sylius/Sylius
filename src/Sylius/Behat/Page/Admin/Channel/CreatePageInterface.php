@@ -17,71 +17,35 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    public function enable();
+    public function enable(): void;
 
-    public function disable();
+    public function disable(): void;
 
-    /**
-     * @param string $name
-     */
-    public function nameIt($name);
+    public function nameIt(string $name): void;
 
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
+    public function specifyCode(string $code): void;
 
-    /**
-     * @param string $description
-     */
-    public function describeItAs($description);
+    public function describeItAs(string $description): void;
 
-    /**
-     * @param string $hostname
-     */
-    public function setHostname($hostname);
+    public function setHostname(string $hostname): void;
 
-    /**
-     * @param string $contactEmail
-     */
-    public function setContactEmail($contactEmail);
+    public function setContactEmail(string $contactEmail): void;
 
-    /**
-     * @param string $color
-     */
-    public function defineColor($color);
+    public function defineColor(string $color): void;
 
-    /**
-     * @param string $language
-     */
-    public function chooseLocale($language);
+    public function chooseLocale(string $language): void;
 
-    /**
-     * @param string $currencyCode
-     */
-    public function chooseCurrency($currencyCode);
+    public function chooseCurrency(string $currencyCode): void;
 
-    /**
-     * @param string $taxZone
-     */
-    public function chooseDefaultTaxZone($taxZone);
+    public function chooseDefaultTaxZone(string $taxZone): void;
 
-    /**
-     * @param string $locale
-     */
-    public function chooseDefaultLocale($locale);
+    public function chooseDefaultLocale(?string $locale): void;
 
-    /**
-     * @param string $currency
-     */
-    public function chooseBaseCurrency($currency);
+    public function chooseBaseCurrency(?string $currency): void;
 
-    /**
-     * @param string $taxCalculationStrategy
-     */
-    public function chooseTaxCalculationStrategy($taxCalculationStrategy);
+    public function chooseTaxCalculationStrategy(string $taxCalculationStrategy): void;
 
-    public function allowToSkipShippingStep();
+    public function allowToSkipShippingStep(): void;
 
-    public function allowToSkipPaymentStep();
+    public function allowToSkipPaymentStep(): void;
 }

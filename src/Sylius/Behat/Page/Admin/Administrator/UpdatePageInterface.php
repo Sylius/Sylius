@@ -17,23 +17,11 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @param string $username
-     */
-    public function changeUsername($username);
+    public function changeUsername(string $username): void;
 
-    /**
-     * @param string $email
-     */
-    public function changeEmail($email);
+    public function changeEmail(string $email): void;
 
-    /**
-     * @param string $password
-     */
-    public function changePassword($password);
+    public function changePassword(string $password): void;
 
-    /**
-     * @param string $localeCode
-     */
-    public function changeLocale($localeCode);
+    public function changeLocale(string $localeCode): void;
 }

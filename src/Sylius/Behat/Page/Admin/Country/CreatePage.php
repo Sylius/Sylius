@@ -22,10 +22,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use ChoosesName;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addProvince($name, $code, $abbreviation = null)
+    public function addProvince(string $name, string $code, string $abbreviation = null): void
     {
         $this->getDocument()->clickLink('Add province');
 

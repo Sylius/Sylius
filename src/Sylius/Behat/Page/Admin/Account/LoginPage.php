@@ -17,46 +17,31 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class LoginPage extends SymfonyPage implements LoginPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function hasValidationErrorWith($message)
+    public function hasValidationErrorWith(string $message): bool
     {
         return $this->getElement('validation_error')->getText() === $message;
     }
 
-    public function logIn()
+    public function logIn(): void
     {
         $this->getDocument()->pressButton('Login');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyPassword($password)
+    public function specifyPassword(string $password): void
     {
         $this->getDocument()->fillField('Password', $password);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyUsername($username)
+    public function specifyUsername(string $username): void
     {
         $this->getDocument()->fillField('Username', $username);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_admin_login';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

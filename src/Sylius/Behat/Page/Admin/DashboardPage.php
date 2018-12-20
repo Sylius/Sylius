@@ -34,89 +34,56 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         $this->tableAccessor = $tableAccessor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTotalSales()
+    public function getTotalSales(): string
     {
         return $this->getElement('total_sales')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getNumberOfNewOrders()
+    public function getNumberOfNewOrders(): int
     {
         return (int) $this->getElement('new_orders')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getNumberOfNewOrdersInTheList()
+    public function getNumberOfNewOrdersInTheList(): int
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('order_list'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getNumberOfNewCustomers()
+    public function getNumberOfNewCustomers(): int
     {
         return (int) $this->getElement('new_customers')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getNumberOfNewCustomersInTheList()
+    public function getNumberOfNewCustomersInTheList(): int
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('customer_list'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAverageOrderValue()
+    public function getAverageOrderValue(): string
     {
         return $this->getElement('average_order_value')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSubHeader()
+    public function getSubHeader(): string
     {
         return trim($this->getElement('sub_header')->getText());
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function logOut()
+    public function logOut(): void
     {
         $this->getElement('logout')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseChannel($channelName)
+    public function chooseChannel(string $channelName): void
     {
         $this->getElement('channel_choosing_link', ['%channelName%' => $channelName])->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_admin_dashboard';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

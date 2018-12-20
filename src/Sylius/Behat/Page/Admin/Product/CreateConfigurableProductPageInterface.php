@@ -17,25 +17,14 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreateConfigurableProductPageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @param string $optionName
-     */
-    public function selectOption($optionName);
+    public function selectOption(string $optionName): void;
+
+    public function specifyCode(string $code): void;
+
+    public function nameItIn(string $name, string $localeCode): void;
 
     /**
-     * @param string $code
-     */
-    public function specifyCode($code);
-
-    /**
-     * @param string $name
-     * @param string $localeCode
-     */
-    public function nameItIn($name, $localeCode);
-
-    /**
-     * @param string $path
      * @param string $type
      */
-    public function attachImage($path, $type = null);
+    public function attachImage(string $path, string $type = null): void;
 }

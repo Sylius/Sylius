@@ -94,7 +94,7 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function iRenameItToInLanguage($name = null, $language)
     {
-        $this->updatePage->nameItIn($name, $language);
+        $this->updatePage->nameItIn($name ?? '', $language);
     }
 
     /**
@@ -103,7 +103,7 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**

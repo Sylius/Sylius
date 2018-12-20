@@ -18,80 +18,36 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    public function enable();
+    public function enable(): void;
 
-    public function disable();
+    public function disable(): void;
 
-    /**
-     * @param string $themeName
-     */
-    public function setTheme($themeName);
+    public function setTheme(string $themeName): void;
 
     /**
      * @throws ElementNotFoundException
      */
-    public function unsetTheme();
+    public function unsetTheme(): void;
 
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @param string $language
-     */
-    public function chooseLocale($language);
+    public function chooseLocale(string $language): void;
 
-    /**
-     * @param string $language
-     *
-     * @return bool
-     */
-    public function isLocaleChosen($language);
+    public function isLocaleChosen(string $language): bool;
 
-    /**
-     * @param string $currencyCode
-     */
-    public function chooseCurrency($currencyCode);
+    public function chooseCurrency(string $currencyCode): void;
 
-    /**
-     * @param string $currencyCode
-     *
-     * @return bool
-     */
-    public function isCurrencyChosen($currencyCode);
+    public function isCurrencyChosen(string $currencyCode): bool;
 
-    /**
-     * @param string $taxZone
-     */
-    public function chooseDefaultTaxZone($taxZone);
+    public function chooseDefaultTaxZone(string $taxZone): void;
 
-    /**
-     * @param string $taxCalculationStrategy
-     */
-    public function chooseTaxCalculationStrategy($taxCalculationStrategy);
+    public function chooseTaxCalculationStrategy(string $taxCalculationStrategy): void;
 
-    /**
-     * @param string $taxZone
-     *
-     * @return bool
-     */
-    public function isDefaultTaxZoneChosen($taxZone);
+    public function isDefaultTaxZoneChosen(string $taxZone): bool;
 
-    /**
-     * @return bool
-     */
-    public function isAnyDefaultTaxZoneChosen();
+    public function isAnyDefaultTaxZoneChosen(): bool;
 
-    /**
-     * @param string $taxCalculationStrategy
-     *
-     * @return bool
-     */
-    public function isTaxCalculationStrategyChosen($taxCalculationStrategy);
+    public function isTaxCalculationStrategyChosen(string $taxCalculationStrategy): bool;
 
-    /**
-     * @return bool
-     */
-    public function isBaseCurrencyDisabled();
+    public function isBaseCurrencyDisabled(): bool;
 }

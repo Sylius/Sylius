@@ -28,6 +28,7 @@ use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewInd
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
@@ -113,7 +114,7 @@ final class ManagingProductsContext implements Context
     {
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->specifyCode($code);
+        $currentPage->specifyCode($code ?? '');
     }
 
     /**
@@ -158,7 +159,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
-    public function iSetItsPriceTo($price, $channelName)
+    public function iSetItsPriceTo(string $price, string $channelName)
     {
         $this->createSimpleProductPage->specifyPrice($channelName, $price);
     }
@@ -166,7 +167,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
-    public function iSetItsOriginalPriceTo($originalPrice, $channelName)
+    public function iSetItsOriginalPriceTo(int $originalPrice, $channelName)
     {
         $this->createSimpleProductPage->specifyOriginalPrice($channelName, $originalPrice);
     }
@@ -174,18 +175,18 @@ final class ManagingProductsContext implements Context
     /**
      * @When I make it available in channel :channel
      */
-    public function iMakeItAvailableInChannel($channel)
+    public function iMakeItAvailableInChannel(ChannelInterface $channel)
     {
-        $this->createSimpleProductPage->checkChannel($channel);
+        $this->createSimpleProductPage->checkChannel($channel->getName());
     }
 
     /**
      * @When I assign it to channel :channel
      */
-    public function iAssignItToChannel($channel)
+    public function iAssignItToChannel(ChannelInterface $channel)
     {
         // Temporary solution until we will make current page resolver work with product pages
-        $this->updateConfigurableProductPage->checkChannel($channel);
+        $this->updateConfigurableProductPage->checkChannel($channel->getName());
     }
 
     /**
@@ -201,7 +202,7 @@ final class ManagingProductsContext implements Context
      * @When I set its slug to :slug in :language
      * @When I remove its slug
      */
-    public function iSetItsSlugToIn($slug = null, $language = 'en_US')
+    public function iSetItsSlugToIn(?string $slug = null, $language = 'en_US')
     {
         $this->createSimpleProductPage->specifySlugIn($slug, $language);
     }
@@ -433,7 +434,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I change its price to (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
      */
-    public function iChangeItsPriceTo($price, $channelName)
+    public function iChangeItsPriceTo(string $price, $channelName)
     {
         $this->updateSimpleProductPage->specifyPrice($channelName, $price);
     }
@@ -441,7 +442,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I change its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
-    public function iChangeItsOriginalPriceTo($price, $channelName)
+    public function iChangeItsOriginalPriceTo(string $price, $channelName)
     {
         $this->updateSimpleProductPage->specifyOriginalPrice($channelName, $price);
     }
@@ -461,7 +462,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSetItsAttributeTo($attribute, $value = null, $language = 'en_US')
     {
-        $this->createSimpleProductPage->addAttribute($attribute, $value, $language);
+        $this->createSimpleProductPage->addAttribute($attribute, $value ?? '', $language);
     }
 
     /**
@@ -851,7 +852,7 @@ final class ManagingProductsContext implements Context
      * @Then /^(it|this product) should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
      * @Then /^(product "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
      */
-    public function itShouldBePricedAtForChannel(ProductInterface $product, $price, $channelName)
+    public function itShouldBePricedAtForChannel(ProductInterface $product, string $price, $channelName)
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
