@@ -42,3 +42,4 @@ parameters:
         # Symfony 4.0 BC layer
         - '/Symfony\\Component\\ExpressionLanguage\\ParserCache\\ParserCacheInterface/'
         - '/Symfony\\Component\\ExpressionLanguage\\ParserCache\\ParserCacheAdapter/'
+        - '/Class Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder does not have a constructor and must be instantiated without any parameters/'
