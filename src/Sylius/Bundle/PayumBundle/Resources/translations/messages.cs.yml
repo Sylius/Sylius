@@ -20,4 +20,4 @@ sylius:
         stripe_checkout: Platba Stripe
     payum_action:
         payment:
-            description: Platba obsahuje %items% položku za celkem %total% | Platba obsahuje %items% položek za celkem %total%
+            description: Platba obsahuje %items% položku za celkem %total%|Platba obsahuje %items% položky za celkem %total%|Platba obsahuje %items% položek za celkem %total%
