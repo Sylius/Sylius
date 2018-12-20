@@ -22,6 +22,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingChannelsContext implements Context
@@ -69,7 +70,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -80,16 +81,16 @@ final class ManagingChannelsContext implements Context
      */
     public function iNameIt($name = null)
     {
-        $this->createPage->nameIt($name);
+        $this->createPage->nameIt($name ?? '');
     }
 
     /**
      * @When I choose :currency as the base currency
      * @When I do not choose base currency
      */
-    public function iChooseAsABaseCurrency($currency = null)
+    public function iChooseAsABaseCurrency(?CurrencyInterface $currency = null)
     {
-        $this->createPage->chooseBaseCurrency($currency);
+        $this->createPage->chooseBaseCurrency($currency ? $currency->getName() : null);
     }
 
     /**
@@ -427,7 +428,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iRemoveItsDefaultTaxZone()
     {
-        $this->updatePage->chooseDefaultTaxZone(null);
+        $this->updatePage->chooseDefaultTaxZone('');
     }
 
     /**

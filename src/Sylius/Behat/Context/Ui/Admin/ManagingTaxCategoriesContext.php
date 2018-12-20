@@ -78,7 +78,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -89,7 +89,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iNameIt($name = null)
     {
-        $this->createPage->nameIt($name);
+        $this->createPage->nameIt($name ?? '');
     }
 
     /**

@@ -18,18 +18,9 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    /**
-     * @return int
-     */
-    public function getUsageNumber(PromotionInterface $promotion);
+    public function getUsageNumber(PromotionInterface $promotion): int;
 
-    /**
-     * @return bool
-     */
-    public function isAbleToManageCouponsFor(PromotionInterface $promotion);
+    public function isAbleToManageCouponsFor(PromotionInterface $promotion): bool;
 
-    /**
-     * @return bool
-     */
-    public function isCouponBasedFor(PromotionInterface $promotion);
+    public function isCouponBasedFor(PromotionInterface $promotion): bool;
 }

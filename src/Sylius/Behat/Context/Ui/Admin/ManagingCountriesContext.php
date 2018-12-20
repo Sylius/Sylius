@@ -244,7 +244,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iNameTheProvince($provinceName = null)
     {
-        $this->updatePage->nameProvince($provinceName);
+        $this->updatePage->nameProvince($provinceName ?? '');
     }
 
     /**
@@ -253,7 +253,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iSpecifyTheProvinceCode($provinceCode = null)
     {
-        $this->updatePage->specifyProvinceCode($provinceCode);
+        $this->updatePage->specifyProvinceCode($provinceCode ?? '');
     }
 
     /**

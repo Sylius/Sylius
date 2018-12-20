@@ -98,7 +98,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iChangeItsTitleTo($title = null)
     {
-        $this->updatePage->specifyTitle($title);
+        $this->updatePage->specifyTitle($title ?? '');
     }
 
     /**
@@ -107,7 +107,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iChangeItsCommentTo($comment = null)
     {
-        $this->updatePage->specifyComment($comment);
+        $this->updatePage->specifyComment($comment ?? '');
     }
 
     /**

@@ -17,18 +17,12 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class HistoryPage extends SymfonyPage implements HistoryPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_admin_order_history';
     }
 
-    /**
-     * @return int
-     */
-    public function countShippingAddressChanges()
+    public function countShippingAddressChanges(): int
     {
         return count($this->getDocument()->findAll('css', '#shipping-address-changes tbody tr'));
     }

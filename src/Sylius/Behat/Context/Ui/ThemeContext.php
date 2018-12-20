@@ -54,7 +54,7 @@ final class ThemeContext implements Context
     public function iSetChannelThemeTo(ChannelInterface $channel, ThemeInterface $theme)
     {
         $this->channelUpdatePage->open(['id' => $channel->getId()]);
-        $this->channelUpdatePage->setTheme($theme);
+        $this->channelUpdatePage->setTheme($theme->getName());
         $this->channelUpdatePage->saveChanges();
 
         $this->sharedStorage->set('channel', $channel);

@@ -17,55 +17,25 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    public function enable();
+    public function enable(): void;
 
-    public function disable();
+    public function disable(): void;
 
-    /**
-     * @return bool
-     */
-    public function isCodeFieldDisabled();
+    public function isCodeFieldDisabled(): bool;
 
-    /**
-     * @param string $provinceName
-     *
-     * @return bool
-     */
-    public function isThereProvince($provinceName);
+    public function isThereProvince(string $provinceName): bool;
 
-    /**
-     * @param string $provinceCode
-     *
-     * @return bool
-     */
-    public function isThereProvinceWithCode($provinceCode);
+    public function isThereProvinceWithCode(string $provinceCode): bool;
 
-    /**
-     * @param string $name
-     * @param string $code
-     * @param string|null $abbreviation
-     */
-    public function addProvince($name, $code, $abbreviation = null);
+    public function addProvince(string $name, string $code, string $abbreviation = null): void;
 
-    /**
-     * @param string $provinceName
-     */
-    public function removeProvince($provinceName);
+    public function removeProvince(string $provinceName): void;
 
-    public function clickAddProvinceButton();
+    public function clickAddProvinceButton(): void;
 
-    /**
-     * @param string $provinceName
-     */
-    public function nameProvince($provinceName);
+    public function nameProvince(string $provinceName): void;
 
-    /**
-     * @param string $provinceName
-     */
-    public function removeProvinceName($provinceName);
+    public function removeProvinceName(string $provinceName): void;
 
-    /**
-     * @param string $provinceCode
-     */
-    public function specifyProvinceCode($provinceCode);
+    public function specifyProvinceCode(string $provinceCode): void;
 }

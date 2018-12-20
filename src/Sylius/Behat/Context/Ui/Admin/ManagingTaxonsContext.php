@@ -84,9 +84,9 @@ final class ManagingTaxonsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -94,11 +94,11 @@ final class ManagingTaxonsContext implements Context
      * @When I rename it to :name in :language
      * @When I do not specify its name
      */
-    public function iNameItIn($name = null, $language = 'en_US')
+    public function iNameItIn(?string $name = null, $language = 'en_US')
     {
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->nameIt($name, $language);
+        $currentPage->nameIt($name ?? '', $language);
     }
 
     /**
@@ -106,11 +106,11 @@ final class ManagingTaxonsContext implements Context
      * @When I do not specify its slug
      * @When I set its slug to :slug in :language
      */
-    public function iSetItsSlugToIn($slug = null, $language = 'en_US')
+    public function iSetItsSlugToIn(?string $slug = null, $language = 'en_US')
     {
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->specifySlug($slug, $language);
+        $currentPage->specifySlug($slug ?? '', $language);
     }
 
     /**
@@ -206,10 +206,10 @@ final class ManagingTaxonsContext implements Context
     public function thisTaxonElementShouldHaveSlugIn($value, $language = null)
     {
         if (null !== $language) {
-            $this->updatePage->activateLanguageTab($language);
+            $this->updatePage->activateLanguageTab($language ?? '');
         }
 
-        Assert::same($this->updatePage->getSlug($language), $value);
+        Assert::same($this->updatePage->getSlug($language ?? ''), $value);
     }
 
     /**

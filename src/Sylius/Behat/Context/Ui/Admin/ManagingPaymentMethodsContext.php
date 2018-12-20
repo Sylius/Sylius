@@ -77,7 +77,7 @@ final class ManagingPaymentMethodsContext implements Context
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->nameIt($name, $language);
+        $currentPage->nameIt($name ?? '', $language);
     }
 
     /**
@@ -154,7 +154,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
