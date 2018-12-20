@@ -1,0 +1,64 @@
+---------------------------------------------------------------------------
+
+by odolbeau at 2018-12-06T09:02:19Z
+
+PHPStan is obviously not happy by this change due to non declared arguments in constructor with symfony/config < 4.2.
+
+Should I update this PR to do something like this?
+```php
+if (method_exists($treeBuilder, 'getRootNode')) {
+    $treeBuilder = new TreeBuilder('swarrot');
+    $rootNode = $treeBuilder->getRootNode();
+} else {
+    // BC layer for symfony/config 4.1 and older
+    $treeBuilder = new TreeBuilder();
+    $rootNode = $treeBuilder->root('swarrot');
+}
+```
+
+Same result with more lines but at least PHPStan will be happy. :)
+
+---------------------------------------------------------------------------
+
+by pamil at 2018-12-18T13:19:55Z
+
+@odolbeau I think your proposed solution to make PHPStan happy is a good one and will make deprecation removal easier in the future. Could you update the PR with it? :)
+
+---------------------------------------------------------------------------
+
+by odolbeau at 2018-12-18T16:50:23Z
+
+There's still errors with phpstan... :/
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-12-19T08:05:28Z
+
+:( The only possible solution I see right now is extracting the creation of `TreeBuilder` and getting its root node to a separate class - and then disabling a PHPStan analysis on it 😄 Maybe it even makes sense, as it's the same logic in each class which is changed in this PR... @odolbeau @pamil wdyt?
+
+---------------------------------------------------------------------------
+
+by pamil at 2018-12-19T10:22:04Z
+
+We can use PHPStan config (`phpstan.neon`) to ignore that error:
+
+```
+parameters:
+    ignoreErrors:
+        - '/Class Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder does not have a constructor and must be instantiated without any parameters/'
+```
+
+---------------------------------------------------------------------------
+
+by odolbeau at 2018-12-20T08:53:32Z
+
+> All checks have passed
+
+\o/
+I added an ignore rule in `phpstan.neon` as suggested by @pamil
+
+---------------------------------------------------------------------------
+
+by pamil at 2018-12-20T10:11:28Z
+
+Thanks, Olivier! :tada:
