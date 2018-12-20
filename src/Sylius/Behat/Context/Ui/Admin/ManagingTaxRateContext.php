@@ -61,7 +61,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -71,7 +71,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iSpecifyItsAmountAs($amount = null)
     {
-        $this->createPage->specifyAmount($amount);
+        $this->createPage->specifyAmount($amount ?? '');
     }
 
     /**
@@ -108,7 +108,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iNameIt($name = null)
     {
-        $this->createPage->nameIt($name);
+        $this->createPage->nameIt($name ?? '');
     }
 
     /**

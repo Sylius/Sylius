@@ -93,16 +93,16 @@ final class ManagingCustomersContext implements Context
      */
     public function iSpecifyItsEmailAs($email = null)
     {
-        $this->createPage->specifyEmail($email);
+        $this->createPage->specifyEmail($email ?? '');
     }
 
     /**
      * @When I change their email to :email
      * @When I remove its email
      */
-    public function iChangeTheirEmailTo(?string $email = null): void
+    public function iChangeTheirEmailTo($email = null): void
     {
-        $this->updatePage->changeEmail($email);
+        $this->updatePage->changeEmail($email ?? '');
     }
 
     /**

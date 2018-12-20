@@ -17,27 +17,18 @@ use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseArchival($isArchival)
+    public function chooseArchival(string $isArchival): void
     {
         $this->getElement('filter_archival')->selectOption($isArchival);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isArchivalFilterEnabled()
+    public function isArchivalFilterEnabled(): bool
     {
         $archival = $this->getDocument()->find('css', 'button:contains("Restore")');
 
         return null !== $archival;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

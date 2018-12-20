@@ -17,60 +17,27 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @param string $name
-     */
-    public function specifyFirstName($name);
+    public function specifyFirstName(string $name): void;
 
-    /**
-     * @param string $name
-     */
-    public function specifyLastName($name);
+    public function specifyLastName(string $name): void;
 
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
+    public function specifyEmail(string $email): void;
 
-    /**
-     * @param string $birthday
-     */
-    public function specifyBirthday($birthday);
+    public function specifyBirthday(string $birthday): void;
 
-    /**
-     * @param string $password
-     */
-    public function specifyPassword($password);
+    public function specifyPassword(string $password): void;
 
-    /**
-     * @param string $gender
-     */
-    public function chooseGender($gender);
+    public function chooseGender(string $gender): void;
 
-    /**
-     * @param string $group
-     */
-    public function chooseGroup($group);
+    public function chooseGroup(string $group): void;
 
-    public function selectCreateAccount();
+    public function selectCreateAccount(): void;
 
-    /**
-     * @return bool
-     */
-    public function hasPasswordField();
+    public function hasPasswordField(): bool;
 
-    /**
-     * @return bool
-     */
-    public function hasCheckedCreateOption();
+    public function hasCheckedCreateOption(): bool;
 
-    /**
-     * @return bool
-     */
-    public function hasCreateOption();
+    public function hasCreateOption(): bool;
 
-    /**
-     * @return bool
-     */
-    public function isUserFormHidden();
+    public function isUserFormHidden(): bool;
 }

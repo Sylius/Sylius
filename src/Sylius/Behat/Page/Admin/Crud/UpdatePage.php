@@ -24,28 +24,19 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /** @var string */
     private $routeName;
 
-    /**
-     * @param string $routeName
-     */
-    public function __construct(Session $session, array $parameters, RouterInterface $router, $routeName)
+    public function __construct(Session $session, array $parameters, RouterInterface $router, string $routeName)
     {
         parent::__construct($session, $parameters, $router);
 
         $this->routeName = $routeName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function saveChanges()
+    public function saveChanges(): void
     {
         $this->getDocument()->pressButton('sylius_save_changes_button');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidationMessage($element)
+    public function getValidationMessage(string $element): string
     {
         $foundElement = $this->getFieldElement($element);
         if (null === $foundElement) {
@@ -60,10 +51,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         return $validationMessage->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasResourceValues(array $parameters)
+    public function hasResourceValues(array $parameters): bool
     {
         foreach ($parameters as $element => $value) {
             if ($this->getElement($element)->getValue() !== (string) $value) {
@@ -74,22 +62,15 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return $this->routeName;
     }
 
     /**
-     * @param string $element
-     *
-     * @return \Behat\Mink\Element\NodeElement|null
-     *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement($element)
+    private function getFieldElement(string $element): ?\Behat\Mink\Element\NodeElement
     {
         $element = $this->getElement(StringInflector::nameToCode($element));
         while (null !== $element && !$element->hasClass('field')) {

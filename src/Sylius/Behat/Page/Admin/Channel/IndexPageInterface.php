@@ -17,10 +17,5 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    /**
-     * @param string $channelCode
-     *
-     * @return string|null
-     */
-    public function getUsedThemeName($channelCode);
+    public function getUsedThemeName(string $channelCode): ?string;
 }

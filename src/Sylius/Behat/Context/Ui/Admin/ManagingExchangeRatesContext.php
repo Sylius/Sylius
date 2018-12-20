@@ -75,7 +75,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iSpecifyItsRatioAs($ratio = null)
     {
-        $this->createPage->specifyRatio($ratio);
+        $this->createPage->specifyRatio($ratio ?? '');
     }
 
     /**
@@ -107,7 +107,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChangeRatioTo($ratio)
     {
-        $this->updatePage->changeRatio((float) $ratio);
+        $this->updatePage->changeRatio($ratio);
     }
 
     /**

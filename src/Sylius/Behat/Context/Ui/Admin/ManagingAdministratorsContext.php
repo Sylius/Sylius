@@ -80,7 +80,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iSpecifyItsNameAs($username = null)
     {
-        $this->createPage->specifyUsername($username);
+        $this->createPage->specifyUsername($username ?? '');
     }
 
     /**
@@ -97,7 +97,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iSpecifyItsEmailAs($email = null)
     {
-        $this->createPage->specifyEmail($email);
+        $this->createPage->specifyEmail($email ?? '');
     }
 
     /**
@@ -131,7 +131,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iSpecifyItsPasswordAs($password = null)
     {
-        $this->createPage->specifyPassword($password);
+        $this->createPage->specifyPassword($password ?? '');
     }
 
     /**

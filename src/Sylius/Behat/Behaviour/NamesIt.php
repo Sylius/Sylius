@@ -17,10 +17,7 @@ trait NamesIt
 {
     use DocumentAccessor;
 
-    /**
-     * @param string $name
-     */
-    public function nameIt($name)
+    public function nameIt(string $name): void
     {
         $this->getDocument()->fillField('Name', $name);
     }
