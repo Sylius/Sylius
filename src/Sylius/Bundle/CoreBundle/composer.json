@@ -22,6 +22,7 @@
     "require": {
         "php": "^7.2",
 
+		"egulias/email-validator": "~2.0",
         "fzaninotto/faker": "^1.6",
         "jms/serializer-bundle": "^2.0",
         "knplabs/knp-gaufrette-bundle": "^0.5",
