@@ -14,10 +14,21 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\IndexQueryBuilder;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 
 class ProductRepository extends EntityRepository implements ProductRepositoryInterface
 {
+    public function createQueryBuilder($alias, $indexBy = null)
+    {
+        $queryBuilder = new IndexQueryBuilder($this->_em);
+
+        return $queryBuilder
+            ->select($alias)
+            ->from($this->_entityName, $alias, $indexBy)
+        ;
+    }
+
     /**
      * {@inheritdoc}
      */
