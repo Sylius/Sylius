@@ -4,7 +4,7 @@
 default:
     suites:
         domain_managing_products:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.address

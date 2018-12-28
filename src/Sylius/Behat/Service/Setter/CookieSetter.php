@@ -26,8 +26,16 @@ final class CookieSetter implements CookieSetterInterface
     /** @var array */
     private $minkParameters;
 
-    public function __construct(Session $minkSession, array $minkParameters)
+    public function __construct(Session $minkSession, $minkParameters)
     {
+        if (!is_array($minkParameters) && !$minkParameters instanceof \ArrayAccess) {
+            throw new \InvalidArgumentException(sprintf(
+                '"$minkParameters" passed to "%s" has to be an array or implement "%s".',
+                self::class,
+                \ArrayAccess::class
+            ));
+        }
+
         $this->minkSession = $minkSession;
         $this->minkParameters = $minkParameters;
     }

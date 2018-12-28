@@ -22,7 +22,7 @@
 
         <service id="sylius.behat.context.ui.admin.locale" class="Sylius\Behat\Context\Ui\Admin\LocaleContext">
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
-            <argument type="service" id="__symfony__.translator" />
+            <argument type="service" id="translator" />
             <tag name="fob.context_service" />
         </service>
 
@@ -135,7 +135,7 @@
             <argument type="service" id="sylius.behat.page.admin.product.index_per_taxon" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <argument type="service" id="__symfony__.liip_imagine.cache.manager" />
+            <argument type="service" id="liip_imagine.cache.manager" />
             <tag name="fob.context_service" />
         </service>
 
@@ -184,7 +184,7 @@
 
         <service id="sylius.behat.context.ui.admin.browsing_product_variants" class="Sylius\Behat\Context\Ui\Admin\BrowsingProductVariantsContext">
             <argument type="service" id="sylius.behat.page.admin.product_variant.index" />
-            <argument type="service" id="__symfony__.sylius.product_variant_resolver.default" />
+            <argument type="service" id="sylius.product_variant_resolver.default" />
             <tag name="fob.context_service" />
         </service>
 
@@ -277,7 +277,7 @@
         <service id="sylius.behat.context.ui.channel" class="Sylius\Behat\Context\Ui\ChannelContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.channel_context_setter" />
-            <argument type="service" id="__symfony__.sylius.repository.channel"/>
+            <argument type="service" id="sylius.repository.channel"/>
             <argument type="service" id="sylius.behat.page.admin.channel.create" />
             <argument type="service" id="sylius.behat.page.shop.home" />
             <tag name="fob.context_service" />
@@ -309,8 +309,8 @@
         <service id="sylius.behat.context.ui.shop.checkout.addressing" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutAddressingContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.shop.checkout.address" />
-            <argument type="service" id="__symfony__.sylius.factory.address" />
-            <argument type="service" id="__symfony__.sylius.address_comparator" />
+            <argument type="service" id="sylius.factory.address" />
+            <argument type="service" id="sylius.address_comparator" />
             <argument type="service" id="sylius.behat.page.shop.checkout.select_shipping" />
             <tag name="fob.context_service" />
         </service>
@@ -359,7 +359,7 @@
 
         <service id="sylius.behat.context.ui.user" class="Sylius\Behat\Context\Ui\UserContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.shop_user" />
+            <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.behat.page.admin.customer.show" />
             <argument type="service" id="sylius.behat.page.shop.home" />
             <tag name="fob.context_service" />
@@ -378,7 +378,7 @@
 
         <service id="sylius.behat.context.ui.shop.address_book" class="Sylius\Behat\Context\Ui\Shop\AddressBookContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.address" />
+            <argument type="service" id="sylius.repository.address" />
             <argument type="service" id="sylius.behat.page.shop.account.address_book.index" />
             <argument type="service" id="sylius.behat.page.shop.account.address_book.create" />
             <argument type="service" id="sylius.behat.page.shop.account.address_book.update" />
@@ -456,7 +456,7 @@
 
         <service id="sylius.behat.context.ui.email" class="Sylius\Behat\Context\Ui\EmailContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.behat.email_checker" />
+            <argument type="service" id="sylius.behat.email_checker" />
             <tag name="fob.context_service" />
         </service>
     </services>

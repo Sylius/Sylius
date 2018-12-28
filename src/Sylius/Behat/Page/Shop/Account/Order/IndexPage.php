@@ -26,7 +26,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function __construct(
         Session $session,
-        array $parameters,
+        $parameters,
         RouterInterface $router,
         TableAccessorInterface $tableAccessor
     ) {

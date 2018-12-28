@@ -3,6 +3,7 @@
 
 imports:
     - { resource: "config.yml" }
+    - { resource: "../../src/Sylius/Behat/Resources/config/services.xml"}
 
 parameters:
     locale: en_US

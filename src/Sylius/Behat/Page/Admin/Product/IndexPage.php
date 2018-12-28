@@ -26,7 +26,7 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
 
     public function __construct(
         Session $session,
-        array $parameters,
+        $parameters,
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
         string $routeName,

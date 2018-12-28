@@ -43,14 +43,6 @@ default:
         FriendsOfBehat\SymfonyExtension:
             kernel:
                 class: TestAppKernel
-                path: app/TestAppKernel.php
-                bootstrap: vendor/autoload.php
-
-        FriendsOfBehat\ContextServiceExtension:
-            imports:
-                - "src/Sylius/Behat/Resources/config/services.xml"
-
-        FriendsOfBehat\CrossContainerExtension: ~
 
         FriendsOfBehat\VariadicExtension: ~
 

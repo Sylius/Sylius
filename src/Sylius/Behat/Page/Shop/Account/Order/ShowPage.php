@@ -25,7 +25,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function __construct(
         Session $session,
-        array $parameters,
+        $parameters,
         RouterInterface $router,
         TableAccessorInterface $tableAccessor
     ) {

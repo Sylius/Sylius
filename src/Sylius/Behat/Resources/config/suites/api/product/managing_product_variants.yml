@@ -4,7 +4,7 @@
 default:
     suites:
         api_managing_product_variants:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.product

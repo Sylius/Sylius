@@ -31,7 +31,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
     public function __construct(
         Session $session,
-        array $parameters,
+        $parameters,
         RouterInterface $router,
         TableAccessorInterface $tableAccessor
     ) {

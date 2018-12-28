@@ -16,7 +16,7 @@
         <defaults public="true" />
 
         <service id="sylius.behat.context.cli.installer" class="Sylius\Behat\Context\Cli\InstallerContext">
-            <argument type="service" id="__symfony__.kernel" />
+            <argument type="service" id="kernel" />
             <tag name="fob.context_service" />
         </service>
     </services>
