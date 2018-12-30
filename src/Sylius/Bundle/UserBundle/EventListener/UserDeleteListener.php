@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -58,15 +57,20 @@ final class UserDeleteListener
 
     private function isTryingToDeleteLoggedInAdminUser(UserInterface $user): bool
     {
-        $isTryingToDeleteLoggedInUser = false;
-        if ($user instanceof AdminUserInterface) {
-            $token = $this->tokenStorage->getToken();
-            if ($token) {
-                $loggedUser = $token->getUser();
-                $isTryingToDeleteLoggedInUser = ($loggedUser instanceof AdminUserInterface) && ($loggedUser->getId() === $user->getId());
-            }
+        if (!$user->hasRole('ROLE_ADMINISTRATION_ACCESS')){
+            return false;
         }
 
-        return $isTryingToDeleteLoggedInUser;
+        $token = $this->tokenStorage->getToken();
+        if (!$token) {
+            return false;
+        }
+
+        $loggedUser = $token->getUser();
+        if (!$loggedUser) {
+            return false;
+        }
+
+        return $loggedUser->getId() === $user->getId();
     }
 }

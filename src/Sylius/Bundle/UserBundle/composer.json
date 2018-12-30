@@ -35,7 +35,6 @@
         "php": "^7.1",
 
         "doctrine/orm": "^2.5",
-        "sylius/core": "^1.2",
         "sylius/mailer-bundle": "^1.2",
         "sylius/resource-bundle": "^1.2",
         "sylius/user": "^1.2",

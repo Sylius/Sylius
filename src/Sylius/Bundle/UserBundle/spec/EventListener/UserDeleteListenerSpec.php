@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\UserBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -42,6 +41,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
+        $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(true);
 
         $tokenStorage->getToken()->willReturn($tokenInterface);
         $currentlyLoggedUser->getId()->willReturn(1);
@@ -62,6 +62,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
+        $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(true);
 
         $tokenStorage->getToken()->willReturn($tokenInterface);
         $tokenInterface->getUser()->willReturn(null);
@@ -82,6 +83,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
+        $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(true);
 
         $tokenStorage->getToken()->willReturn(null);
 
@@ -95,13 +97,14 @@ final class UserDeleteListenerSpec extends ObjectBehavior
 
     function it_does_not_allow_to_delete_currently_logged_user(
         ResourceControllerEvent $event,
-        AdminUserInterface $userToBeDeleted,
-        AdminUserInterface $currentlyLoggedInUser,
+        UserInterface $userToBeDeleted,
+        UserInterface $currentlyLoggedInUser,
         $tokenStorage, $flashBag,
         TokenInterface $token
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(1);
+        $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(true);
         $tokenStorage->getToken()->willReturn($token);
         $currentlyLoggedInUser->getId()->willReturn(1);
         $token->getUser()->willReturn($currentlyLoggedInUser);
@@ -117,12 +120,13 @@ final class UserDeleteListenerSpec extends ObjectBehavior
     function it_deletes_shop_user_even_if_admin_user_has_same_id(
         ResourceControllerEvent $event,
         UserInterface $userToBeDeleted,
-        AdminUserInterface $currentlyLoggedInUser,
+        UserInterface $currentlyLoggedInUser,
         $tokenStorage, $flashBag,
         TokenInterface $token
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(1);
+        $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(false);
         $tokenStorage->getToken()->willReturn($token);
         $currentlyLoggedInUser->getId()->willReturn(1);
         $token->getUser()->willReturn($currentlyLoggedInUser);
