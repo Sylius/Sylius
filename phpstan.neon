@@ -7,14 +7,13 @@ parameters:
     reportUnmatchedIgnoredErrors: false
 
     symfony:
-        container_xml_path: var/cache/dev/appDevDebugProjectContainer.xml
+        container_xml_path: var/cache/dev/appAppKernelDevDebugContainer.xml
 
     excludes_analyse:
         # Makes PHPStan crash
         - '**/DependencyInjection/Configuration.php'
 
         # Test dependencies
-        - '**/spec/**.php'
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
 
