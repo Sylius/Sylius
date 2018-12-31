@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ThemeBundle\Translation\Provider;
+namespace spec\Sylius\Bundle\ThemeBundle\Translation\Resource;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
