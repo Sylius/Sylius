@@ -34,6 +34,11 @@ parameters:
         - '/Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface/'
         - '/Call to an undefined method Mockery\\ExpectationInterface|Mockery\\HigherOrderMessage::/'
 
+        # PhpSpec related errors
+        - '/Access to an undefined property spec\\/'
+        - '/Call to an undefined method spec\\/'
+        - '/Call to an undefined static method spec\\/'
+
         # These packages aren't in require-dev of the global package
         - '/Class Doctrine\\Bundle\\MongoDBBundle/'
         - '/Class Doctrine\\Bundle\\PHPCRBundle/'
