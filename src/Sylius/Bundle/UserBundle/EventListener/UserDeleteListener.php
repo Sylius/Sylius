@@ -57,7 +57,7 @@ final class UserDeleteListener
 
     private function isTryingToDeleteLoggedInAdminUser(UserInterface $user): bool
     {
-        if (!$user->hasRole('ROLE_ADMINISTRATION_ACCESS')){
+        if (!$user->hasRole('ROLE_ADMINISTRATION_ACCESS') && !$user->hasRole('ROLE_API_ACCESS')){
             return false;
         }
 

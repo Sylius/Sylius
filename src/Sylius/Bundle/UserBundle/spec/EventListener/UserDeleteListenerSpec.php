@@ -42,6 +42,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
         $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(true);
+        $userToBeDeleted->hasRole('ROLE_API_ACCESS')->willReturn(false);
 
         $tokenStorage->getToken()->willReturn($tokenInterface);
         $currentlyLoggedUser->getId()->willReturn(1);
@@ -63,6 +64,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
         $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(true);
+        $userToBeDeleted->hasRole('ROLE_API_ACCESS')->willReturn(false);
 
         $tokenStorage->getToken()->willReturn($tokenInterface);
         $tokenInterface->getUser()->willReturn(null);
@@ -84,6 +86,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
         $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(true);
+        $userToBeDeleted->hasRole('ROLE_API_ACCESS')->willReturn(false);
 
         $tokenStorage->getToken()->willReturn(null);
 
@@ -105,6 +108,8 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(1);
         $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(true);
+        $userToBeDeleted->hasRole('ROLE_API_ACCESS')->willReturn(false);
+
         $tokenStorage->getToken()->willReturn($token);
         $currentlyLoggedInUser->getId()->willReturn(1);
         $token->getUser()->willReturn($currentlyLoggedInUser);
@@ -127,6 +132,8 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(1);
         $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(false);
+        $userToBeDeleted->hasRole('ROLE_API_ACCESS')->willReturn(false);
+
         $tokenStorage->getToken()->willReturn($token);
         $currentlyLoggedInUser->getId()->willReturn(1);
         $token->getUser()->willReturn($currentlyLoggedInUser);
