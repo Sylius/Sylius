@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\AbstractDriver;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\DependencyInjection\Alias;
@@ -43,6 +44,14 @@ abstract class AbstractDoctrineDriver extends AbstractDriver
             $metadata->getServiceId('manager'),
             new Alias($this->getManagerServiceId($metadata), true)
         );
+
+        if (method_exists($container, 'registerAliasForArgument')) {
+            $container->registerAliasForArgument(
+                $metadata->getServiceId('manager'),
+                ObjectManager::class,
+                $metadata->getHumanizedName() . ' manager'
+            );
+        }
     }
 
     /**

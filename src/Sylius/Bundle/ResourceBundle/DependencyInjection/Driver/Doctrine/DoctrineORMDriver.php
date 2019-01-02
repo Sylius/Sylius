@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -54,6 +56,29 @@ final class DoctrineORMDriver extends AbstractDoctrineDriver
         $definition->setPublic(true);
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
+
+        if (method_exists($container, 'registerAliasForArgument')) {
+            foreach (class_implements($repositoryClass) as $typehintClass) {
+                $container->registerAliasForArgument(
+                    $metadata->getServiceId('repository'),
+                    $typehintClass,
+                    $metadata->getHumanizedName() . ' repository'
+                );
+            }
+        }
+    }
+
+    protected function addManager(ContainerBuilder $container, MetadataInterface $metadata): void
+    {
+        parent::addManager($container, $metadata);
+
+        if (method_exists($container, 'registerAliasForArgument')) {
+            $container->registerAliasForArgument(
+                $metadata->getServiceId('manager'),
+                EntityManagerInterface::class,
+                $metadata->getHumanizedName() . ' manager'
+            );
+        }
     }
 
     /**
@@ -73,6 +98,6 @@ final class DoctrineORMDriver extends AbstractDoctrineDriver
      */
     protected function getClassMetadataClassname(): string
     {
-        return 'Doctrine\\ORM\\Mapping\\ClassMetadata';
+        return ClassMetadata::class;
     }
 }
