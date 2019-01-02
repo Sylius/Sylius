@@ -56,7 +56,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
     }
 
-    public function selectOption($optionName)
+    public function selectOption(string $optionName): void
     {
         $this->getDocument()->selectFieldOption('Options', $optionName);
     }

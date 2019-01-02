@@ -69,7 +69,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->clickLocaleTabIfItsNotActive($localeCode);
 
         $attributeOption = $this->getElement('attributes_choice')->find('css', sprintf('option:contains("%s")', $attributeName));
-        $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
+        $this->selectElementFromAttributesDropdown((int) $attributeOption->getAttribute('value'));
 
         $this->getDocument()->pressButton('Add attributes');
         $this->waitForFormElement();
