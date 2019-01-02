@@ -22,7 +22,7 @@ final class AddToCartCommandSpec extends ObjectBehavior
 {
     function let(OrderInterface $order, OrderItemInterface $orderItem): void
     {
-        $this->beConstructedThrough('createWithCartAndCartItem', [$order, $orderItem]);
+        $this->beConstructedWith($order, $orderItem);
     }
 
     function it_is_add_cart_item_command(): void

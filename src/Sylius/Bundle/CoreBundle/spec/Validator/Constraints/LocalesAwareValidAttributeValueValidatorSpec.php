@@ -54,7 +54,7 @@ class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
         $localeProvider->getDefaultLocaleCode()->willReturn('en_US');
         $attributeValue->getLocaleCode()->willReturn('pl');
 
-        $attributeType->validate($attributeValue, Argument::any(ExecutionContextInterface::class), ['min' => 2, 'max' => 255])->shouldBeCalled();
+        $attributeType->validate($attributeValue, Argument::type(ExecutionContextInterface::class), ['min' => 2, 'max' => 255])->shouldBeCalled();
 
         $this->validate($attributeValue, $attributeValueConstraint);
     }
@@ -75,7 +75,7 @@ class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
         $localeProvider->getDefaultLocaleCode()->willReturn('en_US');
         $attributeValue->getLocaleCode()->willReturn('en_US');
 
-        $attributeType->validate($attributeValue, Argument::any(ExecutionContextInterface::class), ['min' => 2, 'max' => 255, 'required' => true])->shouldBeCalled();
+        $attributeType->validate($attributeValue, Argument::type(ExecutionContextInterface::class), ['min' => 2, 'max' => 255, 'required' => true])->shouldBeCalled();
 
         $this->validate($attributeValue, $attributeValueConstraint);
     }
