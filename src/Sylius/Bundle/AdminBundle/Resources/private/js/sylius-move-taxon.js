@@ -20,7 +20,7 @@ $.fn.extend({
       beforeSend(settings) {
         /* eslint-disable-next-line no-param-reassign */
         settings.data = {
-          position: jquery(this).data('position') - 1,
+          position: $(this).data('position') - 1,
         };
 
         return settings;
@@ -40,7 +40,7 @@ $.fn.extend({
       beforeSend(settings) {
         /* eslint-disable-next-line no-param-reassign */
         settings.data = {
-          position: jquery(this).data('position') + 1,
+          position: $(this).data('position') + 1,
         };
 
         return settings;
