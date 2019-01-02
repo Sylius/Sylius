@@ -17,6 +17,15 @@ for your custom e-commerce application.
     If you downloaded the Composer phar archive, you should use
     ``php composer.phar`` where this guide uses ``composer``.
 
+.. note::
+
+    In order to inform you about newest Sylius releases and be aware of shops based on Sylius,
+    the Core Team uses an internal statistical service called GUS.
+    The only data that is collected and stored in its database are hostname, user agent, locale,
+    environment (test, dev or prod), current Sylius version and the date of last contact.
+    If you do not want your shop to send requests to GUS, please visit :doc:`this guide </cookbook/configuration/disabling-admin-notifications>`
+    for further instructions.
+
 .. tip::
 
     If you prefer to work with **Vagrant** head to :doc:`this guide </book/installation/vagrant_installation>`.
