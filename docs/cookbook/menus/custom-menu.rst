@@ -1,10 +1,10 @@
 How to add a custom menu entry?
-==========================
+===============================
 
 In addition to the six events already provided for `menus`_, you can **add your own**. This will allow you to use the ``KnpMenu`` features in your templates for example.
 
 1. Create a MenuBuilderEvent& a MenuBuilder
---------------------
+-------------------------------------------
 
 Create a new class and make it extends the ``MenuBuilderEvent`` class :
 
@@ -114,7 +114,7 @@ Then, create a new final class :
 
 
 2. Register the menu event
---------------------
+--------------------------
 
 After creating your menu event builder, your should register it in the symfony container via the ``config/services.yaml`` file.
 
@@ -130,7 +130,7 @@ After creating your menu event builder, your should register it in the symfony c
             - { name: knp_menu.menu_builder,  method: createMenu,  alias: sylius.admin.coupon.show }
 
 3. Twig
---------------------
+-------
 
 Here is a simple example of how to use your menu in Twig :
 

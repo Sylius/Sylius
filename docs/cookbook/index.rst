@@ -123,3 +123,13 @@ Frontend
     frontend/admin-js-and-css
 
 .. include:: /cookbook/frontend/map.rst.inc
+
+Menu
+--------
+
+.. toctree::
+    :hidden:
+
+    menus/custom-menu
+
+.. include:: /cookbook/menus/map.rst.inc
