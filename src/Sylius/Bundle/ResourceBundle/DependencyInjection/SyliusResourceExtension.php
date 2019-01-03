@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine\DoctrineODMDriver;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine\DoctrineORMDriver;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine\DoctrinePHPCRDriver;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DriverProvider;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Metadata\Metadata;
@@ -51,6 +54,12 @@ final class SyliusResourceExtension extends Extension
 
         $this->loadPersistence($config['drivers'], $config['resources'], $loader);
         $this->loadResources($config['resources'], $container);
+
+        $container->addObjectResource(Metadata::class);
+        $container->addObjectResource(DriverProvider::class);
+        $container->addObjectResource(DoctrineORMDriver::class);
+        $container->addObjectResource(DoctrineODMDriver::class);
+        $container->addObjectResource(DoctrinePHPCRDriver::class);
     }
 
     private function loadPersistence(array $drivers, array $resources, LoaderInterface $loader): void
