@@ -91,12 +91,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('attribute_delete_button', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->press();
     }
 
-    public function checkAttributeErrors($attributeName, $localeCode): void
-    {
-        $this->clickTabIfItsNotActive('attributes');
-        $this->clickLocaleTabIfItsNotActive($localeCode);
-    }
-
     public function attachImage(string $path, string $type = null): void
     {
         $this->clickTabIfItsNotActive('media');
