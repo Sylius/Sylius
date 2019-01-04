@@ -81,9 +81,9 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
         /**
          * {@inheritdoc}
          */
-        public function getExtendedType(): string
+        public static function getExtendedTypes(): iterable
         {
-            return CustomerProfileType::class;
+            return [CustomerProfileType::class];
         }
     }
 
