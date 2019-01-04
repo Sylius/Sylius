@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class OrderApiTest extends CheckoutApiTestCase
 {
-
     /**
      * @test
      */
