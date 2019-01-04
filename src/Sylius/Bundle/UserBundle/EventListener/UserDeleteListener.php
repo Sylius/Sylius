@@ -44,9 +44,7 @@ final class UserDeleteListener
 
         Assert::isInstanceOf($user, UserInterface::class);
 
-        $token = $this->tokenStorage->getToken();
-
-        if ((null !== $token) && ($loggedUser = $token->getUser()) && ($loggedUser->getId() === $user->getId())) {
+        if ($this->isTryingToDeleteLoggedInAdminUser($user)) {
             $event->stopPropagation();
             $event->setErrorCode(Response::HTTP_UNPROCESSABLE_ENTITY);
             $event->setMessage('Cannot remove currently logged in user.');
@@ -55,5 +53,24 @@ final class UserDeleteListener
             $flashBag = $this->session->getBag('flashes');
             $flashBag->add('error', 'Cannot remove currently logged in user.');
         }
+    }
+
+    private function isTryingToDeleteLoggedInAdminUser(UserInterface $user): bool
+    {
+        if (!$user->hasRole('ROLE_ADMINISTRATION_ACCESS') && !$user->hasRole('ROLE_API_ACCESS')){
+            return false;
+        }
+
+        $token = $this->tokenStorage->getToken();
+        if (!$token) {
+            return false;
+        }
+
+        $loggedUser = $token->getUser();
+        if (!$loggedUser) {
+            return false;
+        }
+
+        return $loggedUser->getId() === $user->getId();
     }
 }
