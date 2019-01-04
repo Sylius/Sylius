@@ -41,6 +41,8 @@ final class UserDeleteListenerSpec extends ObjectBehavior
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
+        $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(true);
+        $userToBeDeleted->hasRole('ROLE_API_ACCESS')->willReturn(false);
 
         $tokenStorage->getToken()->willReturn($tokenInterface);
         $currentlyLoggedUser->getId()->willReturn(1);
@@ -61,6 +63,8 @@ final class UserDeleteListenerSpec extends ObjectBehavior
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
+        $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(true);
+        $userToBeDeleted->hasRole('ROLE_API_ACCESS')->willReturn(false);
 
         $tokenStorage->getToken()->willReturn($tokenInterface);
         $tokenInterface->getUser()->willReturn(null);
@@ -81,6 +85,8 @@ final class UserDeleteListenerSpec extends ObjectBehavior
     ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
+        $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(true);
+        $userToBeDeleted->hasRole('ROLE_API_ACCESS')->willReturn(false);
 
         $tokenStorage->getToken()->willReturn(null);
 
@@ -92,10 +98,18 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         $this->deleteUser($event);
     }
 
-    function it_does_not_allow_to_delete_currently_logged_user(ResourceControllerEvent $event, UserInterface $userToBeDeleted, UserInterface $currentlyLoggedInUser, $tokenStorage, $flashBag, TokenInterface $token): void
-    {
+    function it_does_not_allow_to_delete_currently_logged_user(
+        ResourceControllerEvent $event,
+        UserInterface $userToBeDeleted,
+        UserInterface $currentlyLoggedInUser,
+        $tokenStorage, $flashBag,
+        TokenInterface $token
+    ): void {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(1);
+        $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(true);
+        $userToBeDeleted->hasRole('ROLE_API_ACCESS')->willReturn(false);
+
         $tokenStorage->getToken()->willReturn($token);
         $currentlyLoggedInUser->getId()->willReturn(1);
         $token->getUser()->willReturn($currentlyLoggedInUser);
@@ -104,6 +118,30 @@ final class UserDeleteListenerSpec extends ObjectBehavior
         $event->setErrorCode(Response::HTTP_UNPROCESSABLE_ENTITY)->shouldBeCalled();
         $event->setMessage('Cannot remove currently logged in user.')->shouldBeCalled();
         $flashBag->add('error', 'Cannot remove currently logged in user.')->shouldBeCalled();
+
+        $this->deleteUser($event);
+    }
+
+    function it_deletes_shop_user_even_if_admin_user_has_same_id(
+        ResourceControllerEvent $event,
+        UserInterface $userToBeDeleted,
+        UserInterface $currentlyLoggedInUser,
+        $tokenStorage, $flashBag,
+        TokenInterface $token
+    ): void {
+        $event->getSubject()->willReturn($userToBeDeleted);
+        $userToBeDeleted->getId()->willReturn(1);
+        $userToBeDeleted->hasRole('ROLE_ADMINISTRATION_ACCESS')->willReturn(false);
+        $userToBeDeleted->hasRole('ROLE_API_ACCESS')->willReturn(false);
+
+        $tokenStorage->getToken()->willReturn($token);
+        $currentlyLoggedInUser->getId()->willReturn(1);
+        $token->getUser()->willReturn($currentlyLoggedInUser);
+
+        $event->stopPropagation()->shouldNotBeCalled();
+        $event->setErrorCode(Argument::any())->shouldNotBeCalled();
+        $event->setMessage(Argument::any())->shouldNotBeCalled();
+        $flashBag->add('error', Argument::any())->shouldNotBeCalled();
 
         $this->deleteUser($event);
     }
