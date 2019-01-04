@@ -53,11 +53,6 @@ EOT
         $this->setupAdministratorUser($input, $output, $locale->getCode());
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @param string $localeCode
-     */
     protected function setupAdministratorUser(InputInterface $input, OutputInterface $output, string $localeCode): void
     {
         $outputStyle = new SymfonyStyle($input, $output);
@@ -82,13 +77,6 @@ EOT
         $outputStyle->newLine();
     }
 
-    /**
-     * @param AdminUserInterface $user
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return AdminUserInterface
-     */
     private function configureNewUser(
         AdminUserInterface $user,
         InputInterface $input,
@@ -115,9 +103,6 @@ EOT
         return $user;
     }
 
-    /**
-     * @return Question
-     */
     private function createEmailQuestion(): Question
     {
         return (new Question('E-mail: '))
@@ -134,12 +119,6 @@ EOT
         ;
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return string
-     */
     private function getAdministratorEmail(InputInterface $input, OutputInterface $output): string
     {
         /** @var QuestionHelper $questionHelper */
@@ -160,13 +139,6 @@ EOT
         return $email;
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @param string $email
-     *
-     * @return string
-     */
     private function getAdministratorUsername(InputInterface $input, OutputInterface $output, string $email): string
     {
         /** @var QuestionHelper $questionHelper */
@@ -187,12 +159,6 @@ EOT
         return $username;
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return string
-     */
     private function getAdministratorPassword(InputInterface $input, OutputInterface $output): string
     {
         /** @var QuestionHelper $questionHelper */
@@ -214,9 +180,6 @@ EOT
         return $password;
     }
 
-    /**
-     * @return \Closure
-     */
     private function getPasswordQuestionValidator(): \Closure
     {
         return function ($value) {
@@ -230,12 +193,6 @@ EOT
         };
     }
 
-    /**
-     * @param string $message
-     * @param \Closure $validator
-     *
-     * @return Question
-     */
     private function createPasswordQuestion(string $message, \Closure $validator): Question
     {
         return (new Question($message))
@@ -246,9 +203,6 @@ EOT
         ;
     }
 
-    /**
-     * @return UserRepositoryInterface
-     */
     private function getAdminUserRepository(): UserRepositoryInterface
     {
         return $this->getContainer()->get('sylius.repository.admin_user');

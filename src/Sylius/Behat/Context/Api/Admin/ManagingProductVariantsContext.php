@@ -22,20 +22,12 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
 {
-    /**
-     * @var Client
-     */
+    /** @var Client */
     private $client;
 
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
-    /**
-     * @param Client $client
-     * @param SessionInterface $session
-     */
     public function __construct(Client $client, SessionInterface $session)
     {
         $this->client = $client;
@@ -90,9 +82,6 @@ final class ManagingProductVariantsContext implements Context
         Assert::oneOf($label, $itemsLabels, 'Expected "%s" to be on the list, found: %s.');
     }
 
-    /**
-     * @return mixed
-     */
     private function getJSONResponse()
     {
         return json_decode($this->client->getResponse()->getContent(), true);

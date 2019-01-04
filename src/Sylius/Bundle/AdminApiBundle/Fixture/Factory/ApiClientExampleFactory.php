@@ -21,24 +21,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ApiClientExampleFactory extends AbstractExampleFactory
 {
-    /**
-     * @var ClientManagerInterface
-     */
+    /** @var ClientManagerInterface */
     private $clientManager;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param ClientManagerInterface $clientManager
-     */
     public function __construct(ClientManagerInterface $clientManager)
     {
         $this->clientManager = $clientManager;

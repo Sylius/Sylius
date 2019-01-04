@@ -83,6 +83,8 @@
             }
             data += "count=" + getNextIndex();
 
+            $('form').addClass('loading');
+
             $.ajax({
                 type: 'GET',
                 url: $(this).parent().attr('data-action'),

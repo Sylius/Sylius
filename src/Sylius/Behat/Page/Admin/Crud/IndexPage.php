@@ -13,38 +13,28 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    /**
-     * @var TableAccessorInterface
-     */
+    /** @var TableAccessorInterface */
     private $tableAccessor;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $routeName;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     * @param string $routeName
-     */
     public function __construct(
         Session $session,
         array $parameters,
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
-        $routeName
+        string $routeName
     ) {
         parent::__construct($session, $parameters, $router);
 
@@ -52,10 +42,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $this->routeName = $routeName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isSingleResourceOnPage(array $parameters)
+    public function isSingleResourceOnPage(array $parameters): bool
     {
         try {
             $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);
@@ -68,18 +55,12 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getColumnFields($columnName)
+    public function getColumnFields(string $columnName): array
     {
         return $this->tableAccessor->getIndexedColumn($this->getElement('table'), $columnName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function sortBy($fieldName)
+    public function sortBy(string $fieldName): void
     {
         $sortableHeaders = $this->tableAccessor->getSortableHeaders($this->getElement('table'));
         Assert::keyExists($sortableHeaders, $fieldName, sprintf('Column "%s" is not sortable.', $fieldName));
@@ -87,10 +68,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $sortableHeaders[$fieldName]->find('css', 'a')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isSingleResourceWithSpecificElementOnPage(array $parameters, $element)
+    public function isSingleResourceWithSpecificElementOnPage(array $parameters, string $element): bool
     {
         try {
             $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);
@@ -107,10 +85,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         }
     }
 
-    /**
-     * @return int
-     */
-    public function countItems()
+    public function countItems(): int
     {
         try {
             return $this->getTableAccessor()->countTableBodyRows($this->getElement('table'));
@@ -119,10 +94,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteResourceOnPage(array $parameters)
+    public function deleteResourceOnPage(array $parameters): void
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
@@ -133,10 +105,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $actionButtons->pressButton('Delete');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getActionsForResource(array $parameters)
+    public function getActionsForResource(array $parameters): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
@@ -146,9 +115,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $tableAccessor->getFieldFromRow($table, $resourceRow, 'actions');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function checkResourceOnPage(array $parameters): void
     {
         $tableAccessor = $this->getTableAccessor();
@@ -162,7 +128,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $bulkCheckbox->check();
     }
 
-    public function filter()
+    public function filter(): void
     {
         $this->getElement('filter')->press();
     }
@@ -173,26 +139,17 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $this->getElement('confirmation_button')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return $this->routeName;
     }
 
-    /**
-     * @return TableAccessorInterface
-     */
-    protected function getTableAccessor()
+    protected function getTableAccessor(): TableAccessorInterface
     {
         return $this->tableAccessor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'bulk_actions' => '.accordion:contains("%text%")',

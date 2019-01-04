@@ -25,24 +25,16 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class ComicBook implements ResourceInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $authorFirstName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $authorLastName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $title;
 
     /**

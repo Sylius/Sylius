@@ -17,64 +17,29 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @param int|null $priority
-     */
-    public function setPriority($priority);
+    public function setPriority(?int $priority): void;
 
-    /**
-     * @return int
-     */
-    public function getPriority();
+    public function getPriority(): int;
 
-    /**
-     * @param string $name
-     */
-    public function nameIt($name);
+    public function nameIt(string $name): void;
 
-    /**
-     * @param string $channelName
-     *
-     * @return bool
-     */
-    public function checkChannelsState($channelName);
+    public function checkChannelsState(string $channelName): bool;
 
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @param string $limit
-     */
-    public function fillUsageLimit($limit);
+    public function fillUsageLimit(string $limit): void;
 
-    public function makeExclusive();
+    public function makeExclusive(): void;
 
-    public function checkCouponBased();
+    public function checkCouponBased(): void;
 
-    /**
-     * @param string $name
-     */
-    public function checkChannel($name);
+    public function checkChannel(string $name): void;
 
-    /**
-     * @param \DateTimeInterface $dateTime
-     */
-    public function setStartsAt(\DateTimeInterface $dateTime);
+    public function setStartsAt(\DateTimeInterface $dateTime): void;
 
-    /**
-     * @param \DateTimeInterface $dateTime
-     */
-    public function setEndsAt(\DateTimeInterface $dateTime);
+    public function setEndsAt(\DateTimeInterface $dateTime): void;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasStartsAt(\DateTimeInterface $dateTime);
+    public function hasStartsAt(\DateTimeInterface $dateTime): bool;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasEndsAt(\DateTimeInterface $dateTime);
+    public function hasEndsAt(\DateTimeInterface $dateTime): bool;
 }

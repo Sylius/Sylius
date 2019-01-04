@@ -19,26 +19,16 @@ use Webmozart\Assert\Assert;
 
 final class UniqueTokenGenerator implements GeneratorInterface
 {
-    /**
-     * @var RandomnessGeneratorInterface
-     */
+    /** @var RandomnessGeneratorInterface */
     private $generator;
 
-    /**
-     * @var UniquenessCheckerInterface
-     */
+    /** @var UniquenessCheckerInterface */
     private $uniquenessChecker;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $tokenLength;
 
     /**
-     * @param RandomnessGeneratorInterface $generator
-     * @param UniquenessCheckerInterface $uniquenessChecker
-     * @param int $tokenLength
-     *
      * @throws \InvalidArgumentException
      */
     public function __construct(

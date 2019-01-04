@@ -15,20 +15,12 @@ namespace Sylius\Component\Mailer\Provider;
 
 final class DefaultSettingsProvider implements DefaultSettingsProviderInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $senderName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $senderAddress;
 
-    /**
-     * @param string $senderName
-     * @param string $senderAddress
-     */
     public function __construct(string $senderName, string $senderAddress)
     {
         $this->senderName = $senderName;

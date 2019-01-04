@@ -18,77 +18,34 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
 {
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @param string $name
-     * @param string $localeCode
-     */
-    public function nameItIn($name, $localeCode);
+    public function nameItIn(string $name, string $localeCode): void;
 
-    /**
-     * @param string $option
-     */
-    public function isProductOptionChosen($option);
+    public function isProductOptionChosen(string $option): bool;
 
-    /**
-     * @return bool
-     */
-    public function isProductOptionsDisabled();
+    public function isProductOptionsDisabled(): bool;
 
-    /**
-     * @param string $taxonName
-     *
-     * @return bool
-     */
-    public function isMainTaxonChosen($taxonName);
+    public function isMainTaxonChosen(string $taxonName): bool;
 
-    /**
-     * @param TaxonInterface $taxon
-     */
-    public function selectMainTaxon(TaxonInterface $taxon);
+    public function selectMainTaxon(TaxonInterface $taxon): void;
 
-    /**
-     * @param string $channelName
-     */
-    public function checkChannel($channelName);
+    public function checkChannel(string $channelName): void;
 
-    /**
-     * @param string $type
-     *
-     * @return bool
-     */
-    public function isImageWithTypeDisplayed($type);
-
-    /**
-     * @param string $path
-     * @param string $type
-     */
-    public function attachImage($path, $type = null);
-
-    /**
-     * @param string $type
-     * @param string $path
-     */
-    public function changeImageWithType($type, $path);
+    public function isImageWithTypeDisplayed(string $type): bool;
 
     /**
      * @param string $type
      */
-    public function removeImageWithType($type);
+    public function attachImage(string $path, string $type = null): void;
 
-    public function removeFirstImage();
+    public function changeImageWithType(string $type, string $path): void;
 
-    /**
-     * @param string $type
-     */
-    public function modifyFirstImageType($type);
+    public function removeImageWithType(string $type): void;
 
-    /**
-     * @return int
-     */
-    public function countImages();
+    public function removeFirstImage(): void;
+
+    public function modifyFirstImageType(string $type): void;
+
+    public function countImages(): int;
 }

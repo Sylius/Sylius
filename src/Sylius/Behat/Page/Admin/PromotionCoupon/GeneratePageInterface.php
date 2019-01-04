@@ -13,50 +13,23 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface GeneratePageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function checkAmountValidation($message);
+    public function checkAmountValidation(string $message): bool;
 
-    /**
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function checkCodeLengthValidation($message);
+    public function checkCodeLengthValidation(string $message): bool;
 
-    /**
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function checkGenerationValidation($message);
+    public function checkGenerationValidation(string $message): bool;
 
-    public function generate();
+    public function generate(): void;
 
-    /**
-     * @param int $amount
-     */
-    public function specifyAmount($amount);
+    public function specifyAmount(string $amount): void;
 
-    /**
-     * @param int $codeLength
-     */
-    public function specifyCodeLength($codeLength);
+    public function specifyCodeLength(string $codeLength): void;
 
-    /**
-     * @param \DateTimeInterface $date
-     */
-    public function setExpiresAt(\DateTimeInterface $date);
+    public function setExpiresAt(\DateTimeInterface $date): void;
 
-    /**
-     * @param int $limit
-     */
-    public function setUsageLimit($limit);
+    public function setUsageLimit(int $limit): void;
 }

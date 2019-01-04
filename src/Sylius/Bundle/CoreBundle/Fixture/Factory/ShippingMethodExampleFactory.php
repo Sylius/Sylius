@@ -29,48 +29,27 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ShippingMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $shippingMethodFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $zoneRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $shippingCategoryRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var ChannelRepositoryInterface
-     */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $shippingMethodFactory
-     * @param RepositoryInterface $zoneRepository
-     * @param RepositoryInterface $shippingCategoryRepository
-     * @param RepositoryInterface $localeRepository
-     * @param ChannelRepositoryInterface $channelRepository
-     */
     public function __construct(
         FactoryInterface $shippingMethodFactory,
         RepositoryInterface $zoneRepository,
@@ -106,8 +85,8 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         $shippingMethod->setConfiguration($options['calculator']['configuration']);
         $shippingMethod->setArchivedAt($options['archived_at']);
 
-        if (array_key_exists('shipping_category', $options)) {
-            $shippingMethod->setCategory($options['shipping_category']);
+        if (array_key_exists('category', $options)) {
+            $shippingMethod->setCategory($options['category']);
         }
 
         foreach ($this->getLocales() as $localeCode) {
@@ -147,9 +126,9 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setDefault('zone', LazyOption::randomOne($this->zoneRepository))
             ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
             ->setNormalizer('zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
-            ->setDefined('shipping_category')
-            ->setAllowedTypes('shipping_category', ['null', 'string', ShippingCategoryInterface::class])
-            ->setNormalizer('shipping_category', LazyOption::findOneBy($this->shippingCategoryRepository, 'code'))
+            ->setDefined('category')
+            ->setAllowedTypes('category', ['null', 'string', ShippingCategoryInterface::class])
+            ->setNormalizer('category', LazyOption::findOneBy($this->shippingCategoryRepository, 'code'))
             ->setDefault('calculator', function (Options $options): array {
                 $configuration = [];
                 /** @var ChannelInterface $channel */
@@ -170,9 +149,6 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

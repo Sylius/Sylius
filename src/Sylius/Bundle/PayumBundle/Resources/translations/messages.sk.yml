@@ -10,6 +10,7 @@ sylius:
                 password: Heslo
                 signature: Podpis
                 username: Používateľské meno
+                sandbox: Testovacie prostredie
             stripe:
                 publishable_key: Zverejniteľný kľúč
                 secret_key: Tajný kľúč
@@ -17,3 +18,6 @@ sylius:
         offline: Offline
         paypal_express_checkout: PayPal Express Checkout
         stripe_checkout: Prúžok Pokladňa
+    payum_action:
+        payment:
+            description: Platba obsahuje %items% položku v hodnote %total% | Platba obsahuje %items% položky / položiek v hodnote %total%

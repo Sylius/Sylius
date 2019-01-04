@@ -26,44 +26,24 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
@@ -103,7 +83,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -113,7 +93,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iNameIt($name = null)
     {
-        $this->createPage->nameIt($name);
+        $this->createPage->nameIt($name ?? '');
     }
 
     /**
@@ -248,7 +228,7 @@ final class ManagingPromotionsContext implements Context
     public function iAddTheActionConfiguredWithAPercentageValue($actionType, $percentage = null)
     {
         $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOption('Percentage', $percentage);
+        $this->createPage->fillActionOption('Percentage', $percentage ?? '');
     }
 
     /**
@@ -630,7 +610,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Given the :promotion promotion should have priority :priority
      */
-    public function thePromotionsShouldHavePriority(PromotionInterface $promotion, $priority)
+    public function thePromotionsShouldHavePriority(PromotionInterface $promotion, int $priority)
     {
         $this->iWantToModifyAPromotion($promotion);
 
@@ -650,7 +630,6 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param string $field
      */
     private function assertIfFieldIsTrue(PromotionInterface $promotion, $field)

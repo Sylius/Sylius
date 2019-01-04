@@ -25,38 +25,21 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductAttributesContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var SharedSecurityServiceInterface
-     */
+    /** @var SharedSecurityServiceInterface */
     private $sharedSecurityService;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param SharedSecurityServiceInterface $sharedSecurityService
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -85,7 +68,7 @@ final class ManagingProductAttributesContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -454,9 +437,6 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @param string $element
-     * @param string $expectedMessage
-     *
      * @throws \InvalidArgumentException
      */
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
@@ -468,8 +448,6 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @param string $expectedMessage
-     *
      * @throws \InvalidArgumentException
      */
     private function assertValidationMessage(string $expectedMessage): void

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Promotion;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
@@ -22,59 +23,44 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use NamesIt;
     use ChecksCodeImmutability;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPriority($priority)
+    public function setPriority(?int $priority): void
     {
         $this->getDocument()->fillField('Priority', $priority);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
+    public function getPriority(): int
     {
-        return $this->getElement('priority')->getValue();
+        return (int) $this->getElement('priority')->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function checkChannelsState($channelName)
+    public function checkChannelsState(string $channelName): bool
     {
         $field = $this->getDocument()->findField($channelName);
 
         return (bool) $field->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function fillUsageLimit($limit)
+    public function fillUsageLimit(string $limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);
     }
 
-    public function makeExclusive()
+    public function makeExclusive(): void
     {
         $this->getDocument()->checkField('Exclusive');
     }
 
-    public function checkCouponBased()
+    public function checkCouponBased(): void
     {
         $this->getDocument()->checkField('Coupon based');
     }
 
-    public function checkChannel($name)
+    public function checkChannel(string $name): void
     {
         $this->getDocument()->checkField($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setStartsAt(\DateTimeInterface $dateTime)
+    public function setStartsAt(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -82,10 +68,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->fillField('sylius_promotion_startsAt_time', date('H:i', $timestamp));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setEndsAt(\DateTimeInterface $dateTime)
+    public function setEndsAt(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -93,10 +76,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->fillField('sylius_promotion_endsAt_time', date('H:i', $timestamp));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasStartsAt(\DateTimeInterface $dateTime)
+    public function hasStartsAt(\DateTimeInterface $dateTime): bool
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -104,10 +84,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             && $this->getElement('starts_at_time')->getValue() === date('H:i', $timestamp);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasEndsAt(\DateTimeInterface $dateTime)
+    public function hasEndsAt(\DateTimeInterface $dateTime): bool
     {
         $timestamp = $dateTime->getTimestamp();
 
@@ -115,18 +92,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             && $this->getElement('ends_at_time')->getValue() === date('H:i', $timestamp);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return [
             'code' => '#sylius_promotion_code',

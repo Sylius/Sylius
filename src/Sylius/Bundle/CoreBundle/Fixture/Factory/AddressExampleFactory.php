@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
-use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -28,36 +27,21 @@ use Webmozart\Assert\Assert;
 
 class AddressExampleFactory extends AbstractExampleFactory
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $addressFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $countryRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $addressFactory
-     * @param RepositoryInterface $countryRepository
-     * @param RepositoryInterface $customerRepository
-     */
     public function __construct(
         FactoryInterface $addressFactory,
         RepositoryInterface $countryRepository,
@@ -147,8 +131,6 @@ class AddressExampleFactory extends AbstractExampleFactory
     }
 
     /**
-     * @param string $code
-     *
      * @throws \InvalidArgumentException
      */
     private function assertCountryCodeIsValid(string $code): void
@@ -158,9 +140,6 @@ class AddressExampleFactory extends AbstractExampleFactory
     }
 
     /**
-     * @param string $provinceCode
-     * @param string $countryCode
-     *
      * @throws \InvalidArgumentException
      */
     private function assertProvinceCodeIsValid(string $provinceCode, string $countryCode): void
@@ -177,10 +156,6 @@ class AddressExampleFactory extends AbstractExampleFactory
         throw new \InvalidArgumentException(sprintf('Provided province code is not valid for "%s"', $country->getName()));
     }
 
-    /**
-     * @param array $options
-     * @param AddressInterface $address
-     */
     private function provideProvince(array $options, AddressInterface $address): void
     {
         /** @var CountryInterface $country */
@@ -196,11 +171,6 @@ class AddressExampleFactory extends AbstractExampleFactory
     }
 
     /**
-     * @param Collection $provinces
-     * @param string $provinceName
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     private function getProvinceCode(Collection $provinces, string $provinceName): string
@@ -215,10 +185,6 @@ class AddressExampleFactory extends AbstractExampleFactory
         throw new \InvalidArgumentException(sprintf('Country has defined provinces, but %s is not one of them', $provinceName));
     }
 
-    /**
-     * @param array $options
-     * @param AddressInterface $address
-     */
     private function resolveCountryProvince(array $options, AddressInterface $address): void
     {
         if (null !== $options['province_code']) {

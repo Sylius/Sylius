@@ -22,19 +22,12 @@ use Doctrine\Common\Collections\ExpressionBuilder as CollectionsExpressionBuilde
  */
 final class ExpressionBuilder implements ExpressionBuilderInterface
 {
-    /**
-     * @var CollectionsExpressionBuilder
-     */
+    /** @var CollectionsExpressionBuilder */
     private $expressionBuilder;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $orderBys = [];
 
-    /**
-     * @param CollectionsExpressionBuilder|null $expressionBuilder
-     */
     public function __construct(CollectionsExpressionBuilder $expressionBuilder = null)
     {
         $this->expressionBuilder = $expressionBuilder ?: new CollectionsExpressionBuilder();
@@ -176,9 +169,6 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $this->orderBys[$field] = $direction;
     }
 
-    /**
-     * @return array
-     */
     public function getOrderBys(): array
     {
         return $this->orderBys;

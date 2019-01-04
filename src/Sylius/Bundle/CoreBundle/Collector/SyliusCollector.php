@@ -25,16 +25,9 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 final class SyliusCollector extends DataCollector
 {
-    /**
-     * @var ShopperContextInterface
-     */
+    /** @var ShopperContextInterface */
     private $shopperContext;
 
-    /**
-     * @param ShopperContextInterface $shopperContext
-     * @param array $bundles
-     * @param string $defaultLocaleCode
-     */
     public function __construct(
         ShopperContextInterface $shopperContext,
         array $bundles,
@@ -62,17 +55,11 @@ final class SyliusCollector extends DataCollector
         }
     }
 
-    /**
-     * @return string
-     */
     public function getVersion(): string
     {
         return $this->data['version'];
     }
 
-    /**
-     * @return array
-     */
     public function getExtensions(): array
     {
         return $this->data['extensions'];

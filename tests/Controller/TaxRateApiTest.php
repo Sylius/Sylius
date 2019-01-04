@@ -19,9 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class TaxRateApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -95,8 +93,6 @@ final class TaxRateApiTest extends JsonApiTestCase
     }
 
     /**
-     * @param TaxRateInterface $taxRate
-     *
      * @return string
      */
     private function getTaxRateUrl(TaxRateInterface $taxRate)

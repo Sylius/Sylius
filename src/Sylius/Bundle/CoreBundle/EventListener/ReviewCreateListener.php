@@ -20,22 +20,15 @@ use Webmozart\Assert\Assert;
 
 final class ReviewCreateListener
 {
-    /**
-     * @var CustomerContextInterface
-     */
+    /** @var CustomerContextInterface */
     private $customerContext;
 
-    /**
-     * @param CustomerContextInterface $customerContext
-     */
     public function __construct(CustomerContextInterface $customerContext)
     {
         $this->customerContext = $customerContext;
     }
 
     /**
-     * @param GenericEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function ensureReviewHasAuthor(GenericEvent $event): void

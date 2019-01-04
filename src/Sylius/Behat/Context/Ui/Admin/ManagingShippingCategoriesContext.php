@@ -22,26 +22,15 @@ use Webmozart\Assert\Assert;
 
 class ManagingShippingCategoriesContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -111,7 +100,7 @@ class ManagingShippingCategoriesContext implements Context
      */
     public function iSpecifyItsCodeAs($shippingCategoryCode = null)
     {
-        $this->createPage->specifyCode($shippingCategoryCode);
+        $this->createPage->specifyCode($shippingCategoryCode ?? '');
     }
 
     /**
@@ -120,7 +109,7 @@ class ManagingShippingCategoriesContext implements Context
      */
     public function iNameIt($shippingCategoryName = null)
     {
-        $this->createPage->nameIt($shippingCategoryName);
+        $this->createPage->nameIt($shippingCategoryName ?? '');
     }
 
     /**
@@ -181,7 +170,7 @@ class ManagingShippingCategoriesContext implements Context
      */
     public function iNameItIn($name)
     {
-        $this->createPage->nameIt($name);
+        $this->createPage->nameIt($name ?? '');
     }
 
     /**

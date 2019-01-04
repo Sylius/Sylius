@@ -23,14 +23,9 @@ use Webmozart\Assert\Assert;
 
 class UniqueCurrencyPairValidator extends ConstraintValidator
 {
-    /**
-     * @var ExchangeRateRepositoryInterface
-     */
+    /** @var ExchangeRateRepositoryInterface */
     private $exchangeRateRepository;
 
-    /**
-     * @param ExchangeRateRepositoryInterface $exchangeRateRepository
-     */
     public function __construct(ExchangeRateRepositoryInterface $exchangeRateRepository)
     {
         $this->exchangeRateRepository = $exchangeRateRepository;
@@ -61,12 +56,6 @@ class UniqueCurrencyPairValidator extends ConstraintValidator
         }
     }
 
-    /**
-     * @param CurrencyInterface $baseCurrency
-     * @param CurrencyInterface $targetCurrency
-     *
-     * @return bool
-     */
     private function isCurrencyPairUnique(CurrencyInterface $baseCurrency, CurrencyInterface $targetCurrency): bool
     {
         $exchangeRate = $this->exchangeRateRepository->findOneWithCurrencyPair($baseCurrency->getCode(), $targetCurrency->getCode());

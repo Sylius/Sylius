@@ -21,7 +21,7 @@
             <td id="sylius-cart-promotion-total" class="right aligned">{{ money.convertAndFormat(cart.orderPromotionTotal) }}</td>
         </tr>
         {% endif %}
-        <tr style="font-size: 2em;">
+        <tr class="ui large header">
             <td>{{ 'sylius.ui.order_total'|trans }}:</td>
             <td id="sylius-cart-grand-total" class="right aligned">{{ money.convertAndFormat(cart.total) }}</td>
         </tr>

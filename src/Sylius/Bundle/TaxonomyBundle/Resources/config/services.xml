@@ -17,6 +17,8 @@
     </imports>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.controller.taxon_slug" class="Sylius\Bundle\TaxonomyBundle\Controller\TaxonSlugController">
             <argument type="service" id="sylius.generator.taxon_slug" />
             <argument type="service" id="sylius.repository.taxon" />

@@ -22,14 +22,9 @@ use Webmozart\Assert\Assert;
 
 final class GenerateProductVariantsSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var ProductVariantGeneratorInterface
-     */
+    /** @var ProductVariantGeneratorInterface */
     private $generator;
 
-    /**
-     * @param ProductVariantGeneratorInterface $generator
-     */
     public function __construct(ProductVariantGeneratorInterface $generator)
     {
         $this->generator = $generator;
@@ -45,9 +40,6 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
         /** @var ProductInterface $product */

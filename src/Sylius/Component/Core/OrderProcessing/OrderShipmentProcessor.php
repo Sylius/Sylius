@@ -20,30 +20,35 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderShipmentProcessor implements OrderProcessorInterface
 {
-    /**
-     * @var DefaultShippingMethodResolverInterface
-     */
+    /** @var DefaultShippingMethodResolverInterface */
     private $defaultShippingMethodResolver;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $shipmentFactory;
 
-    /**
-     * @param DefaultShippingMethodResolverInterface $defaultShippingMethodResolver
-     * @param FactoryInterface $shipmentFactory
-     */
+    /** @var ShippingMethodsResolverInterface|null */
+    private $shippingMethodsResolver;
+
     public function __construct(
         DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
-        FactoryInterface $shipmentFactory
+        FactoryInterface $shipmentFactory,
+        ?ShippingMethodsResolverInterface $shippingMethodsResolver = null
     ) {
         $this->defaultShippingMethodResolver = $defaultShippingMethodResolver;
         $this->shipmentFactory = $shipmentFactory;
+        $this->shippingMethodsResolver = $shippingMethodsResolver;
+
+        if (2 === func_num_args() || null === $shippingMethodsResolver) {
+            @trigger_error(
+                'Not passing ShippingMethodsResolverInterface explicitly is deprecated since 1.2 and will be prohibited in 2.0',
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     /**
@@ -60,12 +65,42 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             return;
         }
 
-        $shipment = $this->getOrderShipment($order);
+        if ($order->hasShipments()) {
+            $shipment = $this->getExistingShipmentWithProperMethod($order);
 
-        if (null === $shipment) {
+            if (null === $shipment) {
+                return;
+            }
+
+            $this->processShipmentUnits($order, $shipment);
+
             return;
         }
 
+        $this->createNewOrderShipment($order);
+    }
+
+    private function createNewOrderShipment(OrderInterface $order): void
+    {
+        try {
+            /** @var ShipmentInterface $shipment */
+            $shipment = $this->shipmentFactory->createNew();
+            $shipment->setOrder($order);
+
+            $this->processShipmentUnits($order, $shipment);
+
+            $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
+
+            $order->addShipment($shipment);
+        } catch (UnresolvedDefaultShippingMethodException $exception) {
+            foreach ($shipment->getUnits() as $unit) {
+                $shipment->removeUnit($unit);
+            }
+        }
+    }
+
+    private function processShipmentUnits(BaseOrderInterface $order, ShipmentInterface $shipment): void
+    {
         foreach ($shipment->getUnits() as $unit) {
             $shipment->removeUnit($unit);
         }
@@ -77,28 +112,23 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return ShipmentInterface|null
-     */
-    private function getOrderShipment(OrderInterface $order): ?ShipmentInterface
+    private function getExistingShipmentWithProperMethod(OrderInterface $order): ?ShipmentInterface
     {
-        if ($order->hasShipments()) {
-            return $order->getShipments()->first();
-        }
+        /** @var ShipmentInterface $shipment */
+        $shipment = $order->getShipments()->first();
 
-        try {
-            /** @var ShipmentInterface $shipment */
-            $shipment = $this->shipmentFactory->createNew();
-            $shipment->setOrder($order);
-            $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
-
-            $order->addShipment($shipment);
-
+        if (null === $this->shippingMethodsResolver) {
             return $shipment;
-        } catch (UnresolvedDefaultShippingMethodException $exception) {
-            return null;
         }
+
+        if (!in_array($shipment->getMethod(), $this->shippingMethodsResolver->getSupportedMethods($shipment), true)) {
+            try {
+                $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
+            } catch (UnresolvedDefaultShippingMethodException $exception) {
+                return null;
+            }
+        }
+
+        return $shipment;
     }
 }

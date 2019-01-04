@@ -39,7 +39,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.context.channel.request_based.resolver',
             'addResolver',
-            [new Reference('sylius.context.channel.request_based.resolver.tagged_one')]
+            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 0]
         );
     }
 
@@ -80,7 +80,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
             'sylius.context.channel.request_based.resolver',
             'addResolver',
-            [new Reference('sylius.context.channel.request_based.resolver.tagged_one')]
+            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 0]
         );
     }
 
@@ -101,7 +101,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.context.channel.request_based.resolver.composite',
             'addResolver',
-            [new Reference('sylius.context.channel.request_based.resolver.tagged_one')]
+            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 0]
         );
     }
 
@@ -113,11 +113,6 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $container->addCompilerPass(new CompositeRequestResolverPass());
     }
 
-    /**
-     * @param string $serviceId
-     * @param string $method
-     * @param array $arguments
-     */
     private function assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
         string $serviceId,
         string $method,

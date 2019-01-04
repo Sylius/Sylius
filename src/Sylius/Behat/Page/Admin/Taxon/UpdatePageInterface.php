@@ -19,112 +19,50 @@ use Sylius\Component\Core\Model\TaxonInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @param string $description
-     * @param string $languageCode
-     */
-    public function describeItAs($description, $languageCode);
+    public function describeItAs(string $description, string $languageCode): void;
 
-    /**
-     * @param TaxonInterface $taxon
-     */
-    public function chooseParent(TaxonInterface $taxon);
+    public function chooseParent(TaxonInterface $taxon): void;
 
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @param string $name
-     * @param string $languageCode
-     */
-    public function nameIt($name, $languageCode);
+    public function nameIt(string $name, string $languageCode): void;
 
-    /**
-     * @param string $slug
-     * @param string $languageCode
-     */
-    public function specifySlug($slug, $languageCode);
-
-    /**
-     * @param string $path
-     * @param string $type
-     */
-    public function attachImage($path, $type = null);
-
-    /**
-     * @param string $type
-     *
-     * @return bool
-     */
-    public function isImageWithTypeDisplayed($type);
-
-    /**
-     * @param string $languageCode
-     *
-     * @return bool
-     */
-    public function isSlugReadonly($languageCode = 'en_US');
+    public function specifySlug(string $slug, string $languageCode): void;
 
     /**
      * @param string $type
      */
-    public function removeImageWithType($type);
+    public function attachImage(string $path, string $type = null): void;
 
-    public function removeFirstImage();
+    public function isImageWithTypeDisplayed(string $type): bool;
 
-    /**
-     * @param string $languageCode
-     */
-    public function enableSlugModification($languageCode = 'en_US');
+    public function isSlugReadonly(string $languageCode = 'en_US'): bool;
 
-    /**
-     * @return int
-     */
-    public function countImages();
+    public function removeImageWithType(string $type): void;
 
-    /**
-     * @param string $type
-     * @param string $path
-     */
-    public function changeImageWithType($type, $path);
+    public function removeFirstImage(): void;
 
-    /**
-     * @param string $type
-     */
-    public function modifyFirstImageType($type);
+    public function enableSlugModification(string $languageCode = 'en_US'): void;
+
+    public function countImages(): int;
+
+    public function changeImageWithType(string $type, string $path): void;
+
+    public function modifyFirstImageType(string $type): void;
+
+    public function getParent(): string;
+
+    public function getSlug(string $languageCode = 'en_US'): string;
 
     /**
-     * @return string
-     */
-    public function getParent();
-
-    /**
-     * @param string $languageCode
-     *
-     * @return string
-     */
-    public function getSlug($languageCode = 'en_US');
-
-    /**
-     * @return string
-     *
      * @throws ElementNotFoundException
      */
-    public function getValidationMessageForImage();
+    public function getValidationMessageForImage(): string;
 
     /**
-     * @param int $place
-     *
-     * @return string
-     *
      * @throws ElementNotFoundException
      */
-    public function getValidationMessageForImageAtPlace($place);
+    public function getValidationMessageForImageAtPlace(int $place): string;
 
-    /**
-     * @param string $locale
-     */
-    public function activateLanguageTab($locale);
+    public function activateLanguageTab(string $locale): void;
 }

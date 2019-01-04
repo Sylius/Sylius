@@ -22,42 +22,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookProductFixture extends AbstractFixture
 {
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $taxonFixture;
 
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $productAttributeFixture;
 
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $productFixture;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $baseLocaleCode;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param AbstractResourceFixture $taxonFixture
-     * @param AbstractResourceFixture $productAttributeFixture
-     * @param AbstractResourceFixture $productFixture
-     * @param string $baseLocaleCode
-     */
     public function __construct(
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $productAttributeFixture,
@@ -167,11 +149,6 @@ class BookProductFixture extends AbstractFixture
         ;
     }
 
-    /**
-     * @param int $amount
-     *
-     * @return array
-     */
     private function getUniqueNames(int $amount): array
     {
         $productsNames = [];

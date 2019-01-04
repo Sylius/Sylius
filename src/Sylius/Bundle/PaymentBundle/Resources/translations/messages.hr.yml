@@ -30,5 +30,5 @@ sylius:
             description: Opis
             enabled: Omogući?
             instructions: Upute
-            name: Naziv
+            name: Naziv regije
             position: Pozicija

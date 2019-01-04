@@ -21,14 +21,9 @@ use Sylius\Component\Mailer\SyliusMailerEvents;
 
 class SwiftMailerAdapter extends AbstractAdapter
 {
-    /**
-     * @var \Swift_Mailer
-     */
+    /** @var \Swift_Mailer */
     protected $mailer;
 
-    /**
-     * @param \Swift_Mailer $mailer
-     */
     public function __construct(\Swift_Mailer $mailer)
     {
         $this->mailer = $mailer;

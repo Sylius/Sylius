@@ -28,26 +28,15 @@ use Webmozart\Assert\Assert;
 
 final class OrderTaxesProcessor implements OrderProcessorInterface
 {
-    /**
-     * @var ZoneProviderInterface
-     */
+    /** @var ZoneProviderInterface */
     private $defaultTaxZoneProvider;
 
-    /**
-     * @var ZoneMatcherInterface
-     */
+    /** @var ZoneMatcherInterface */
     private $zoneMatcher;
 
-    /**
-     * @var PrioritizedServiceRegistryInterface
-     */
+    /** @var PrioritizedServiceRegistryInterface */
     private $strategyRegistry;
 
-    /**
-     * @param ZoneProviderInterface $defaultTaxZoneProvider
-     * @param ZoneMatcherInterface $zoneMatcher
-     * @param PrioritizedServiceRegistryInterface $strategyRegistry
-     */
     public function __construct(
         ZoneProviderInterface $defaultTaxZoneProvider,
         ZoneMatcherInterface $zoneMatcher,
@@ -89,11 +78,6 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         throw new UnsupportedTaxCalculationStrategyException();
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return ZoneInterface|null
-     */
     private function getTaxZone(OrderInterface $order): ?ZoneInterface
     {
         $shippingAddress = $order->getShippingAddress();
@@ -106,9 +90,6 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         return $zone ?: $this->defaultTaxZoneProvider->getZone($order);
     }
 
-    /**
-     * @param BaseOrderInterface $order
-     */
     private function clearTaxes(BaseOrderInterface $order): void
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);

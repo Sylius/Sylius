@@ -18,6 +18,7 @@ use Prophecy\Argument;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallConfig;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -124,6 +125,35 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
 
         $localeProvider->getAvailableLocalesCodes()->willReturn(['en', 'ga_IE']);
 
+        $this
+            ->shouldNotThrow(NotFoundHttpException::class)
+            ->during('restrictRequestLocale', [$event])
+        ;
+    }
+
+    function it_does_nothing_if_request_locale_is_not_present_in_provider_and_request_route_is_for_toolbar_or_profiler(
+        LocaleProviderInterface $localeProvider,
+        FirewallMap $firewallMap,
+        Request $request,
+        GetResponseEvent $event
+    ): void {
+        $event->isMasterRequest()->willReturn(true);
+        $event->getRequest()->willReturn($request);
+        $firewallMap->getFirewallConfig($request)->willReturn(
+            new FirewallConfig('shop', 'mock')
+        );
+
+        $request->attributes = new ParameterBag(['_route' => '_wdt']);
+        $request->getLocale()->willReturn('en');
+
+        $localeProvider->getAvailableLocalesCodes()->willReturn(['ga', 'ga_IE']);
+
+        $this
+            ->shouldNotThrow(NotFoundHttpException::class)
+            ->during('restrictRequestLocale', [$event])
+        ;
+
+        $request->attributes = new ParameterBag(['_route' => '_profiler']);
         $this
             ->shouldNotThrow(NotFoundHttpException::class)
             ->during('restrictRequestLocale', [$event])

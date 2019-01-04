@@ -21,9 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ZoneMatcher implements ZoneMatcherInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $zoneRepository;
 
     /**
@@ -35,9 +33,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
         ZoneInterface::TYPE_ZONE,
     ];
 
-    /**
-     * @param RepositoryInterface $zoneRepository
-     */
     public function __construct(RepositoryInterface $zoneRepository)
     {
         $this->zoneRepository = $zoneRepository;
@@ -82,12 +77,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
         return $zones;
     }
 
-    /**
-     * @param AddressInterface $address
-     * @param ZoneInterface    $zone
-     *
-     * @return bool
-     */
     private function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone): bool
     {
         foreach ($zone->getMembers() as $member) {
@@ -100,11 +89,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * @param AddressInterface    $address
-     * @param ZoneMemberInterface $member
-     *
-     * @return bool
-     *
      * @throws \InvalidArgumentException
      */
     private function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member): bool
@@ -123,11 +107,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
         }
     }
 
-    /**
-     * @param string|null $scope
-     *
-     * @return array
-     */
     private function getZones(?string $scope = null): array
     {
         if (null === $scope) {
@@ -137,11 +116,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
         return $this->zoneRepository->findBy(['scope' => [$scope, Scope::ALL]]);
     }
 
-    /**
-     * @param string $code
-     *
-     * @return ZoneInterface|null
-     */
     private function getZoneByCode(string $code): ?ZoneInterface
     {
         return $this->zoneRepository->findOneBy(['code' => $code]);

@@ -20,70 +20,33 @@ use Sylius\Component\Core\Model\TaxonInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @return int
-     */
-    public function countTaxons();
+    public function countTaxons(): int;
+
+    public function countTaxonsByName(string $name): int;
+
+    public function deleteTaxonOnPageByName(string $name): void;
+
+    public function describeItAs(string $description, string $languageCode): void;
+
+    public function hasTaxonWithName(string $name): bool;
+
+    public function nameIt(string $name, string $languageCode): void;
+
+    public function specifyCode(string $code): void;
+
+    public function specifySlug(string $slug, string $languageCode): void;
 
     /**
-     * @param string $name
-     *
-     * @return int
-     */
-    public function countTaxonsByName($name);
-
-    /**
-     * @param string $name
-     */
-    public function deleteTaxonOnPageByName($name);
-
-    /**
-     * @param string $description
-     * @param string $languageCode
-     */
-    public function describeItAs($description, $languageCode);
-
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function hasTaxonWithName($name);
-
-    /**
-     * @param string $name
-     * @param string $languageCode
-     */
-    public function nameIt($name, $languageCode);
-
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
-
-    /**
-     * @param string $slug
-     * @param string $languageCode
-     */
-    public function specifySlug($slug, $languageCode);
-
-    /**
-     * @param string $path
      * @param string $type
      */
-    public function attachImage($path, $type = null);
+    public function attachImage(string $path, string $type = null): void;
 
     /**
-     * @param TaxonInterface|null $parentTaxon
-     *
      * @return NodeElement[]
      *
      * @throws ElementNotFoundException
      */
-    public function getLeaves(TaxonInterface $parentTaxon = null);
+    public function getLeaves(TaxonInterface $parentTaxon = null): array;
 
-    /**
-     * @param string $locale
-     */
-    public function activateLanguageTab($locale);
+    public function activateLanguageTab(string $locale): void;
 }

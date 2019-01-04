@@ -22,14 +22,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class LocaleChoiceType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @param RepositoryInterface $repository
-     */
     public function __construct(RepositoryInterface $repository)
     {
         $this->localeRepository = $repository;

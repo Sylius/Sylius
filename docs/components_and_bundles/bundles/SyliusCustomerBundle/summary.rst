@@ -32,7 +32,7 @@ Configuration reference
                     factory: Sylius\Component\Resource\Factory\Factory
                     form: Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupType
 
-`phpspec2 <http://phpspec.net>`_ examples
+`phpspec <http://phpspec.net>`_ examples
 -----------------------------------------
 
 .. code-block:: bash

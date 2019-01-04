@@ -25,24 +25,16 @@ final class OrderShowMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.order.show';
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    /**
-     * @var StateMachineFactoryInterface
-     */
+    /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @var CsrfTokenManagerInterface
-     */
+    /** @var CsrfTokenManagerInterface */
     private $csrfTokenManager;
 
     public function __construct(
@@ -57,11 +49,6 @@ final class OrderShowMenuBuilder
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return ItemInterface
-     */
     public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
@@ -93,6 +80,7 @@ final class OrderShowMenuBuilder
                     ],
                 ])
                 ->setAttribute('type', 'transition')
+                ->setAttribute('confirmation', true)
                 ->setLabel('sylius.ui.cancel')
                 ->setLabelAttribute('icon', 'ban')
                 ->setLabelAttribute('color', 'yellow')

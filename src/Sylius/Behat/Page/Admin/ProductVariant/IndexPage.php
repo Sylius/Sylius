@@ -21,18 +21,12 @@ use Webmozart\Assert\Assert;
 
 final class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getOnHandQuantityFor(ProductVariantInterface $productVariant)
+    public function getOnHandQuantityFor(ProductVariantInterface $productVariant): int
     {
         return (int) $this->getElement('on_hand_quantity', ['%id%' => $productVariant->getId()])->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOnHoldQuantityFor(ProductVariantInterface $productVariant)
+    public function getOnHoldQuantityFor(ProductVariantInterface $productVariant): int
     {
         try {
             return (int) $this->getElement('on_hold_quantity', ['%id%' => $productVariant->getId()])->getText();
@@ -41,10 +35,7 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPosition($name, $position)
+    public function setPosition(string $name, int $position): void
     {
         /** @var NodeElement $productVariantsRow */
         $productVariantsRow = $this->getElement('table')->find('css', sprintf('tbody > tr:contains("%s")', $name));
@@ -55,7 +46,7 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
         $productVariantPosition->setValue($position);
     }
 
-    public function savePositions()
+    public function savePositions(): void
     {
         $this->getElement('save_configuration_button')->press();
 
@@ -64,10 +55,7 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'on_hand_quantity' => '.onHand[data-product-variant-id="%id%"]',

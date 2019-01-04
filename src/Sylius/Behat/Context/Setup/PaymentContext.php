@@ -25,44 +25,24 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PaymentContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var PaymentMethodRepositoryInterface
-     */
+    /** @var PaymentMethodRepositoryInterface */
     private $paymentMethodRepository;
 
-    /**
-     * @var ExampleFactoryInterface
-     */
+    /** @var ExampleFactoryInterface */
     private $paymentMethodExampleFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $paymentMethodTranslationFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $paymentMethodManager;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $gatewayFactories;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param PaymentMethodRepositoryInterface $paymentMethodRepository
-     * @param ExampleFactoryInterface $paymentMethodExampleFactory
-     * @param FactoryInterface $paymentMethodTranslationFactory
-     * @param ObjectManager $paymentMethodManager
-     * @param array $gatewayFactories
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PaymentMethodRepositoryInterface $paymentMethodRepository,

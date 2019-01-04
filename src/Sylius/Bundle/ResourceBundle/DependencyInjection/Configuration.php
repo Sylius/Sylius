@@ -28,8 +28,14 @@ final class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sylius_resource');
+        if (method_exists(TreeBuilder::class, 'getRootNode')) {
+            $treeBuilder = new TreeBuilder('sylius_resource');
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $treeBuilder = new TreeBuilder();
+            $rootNode = $treeBuilder->root('sylius_resource');
+        }
 
         $this->addResourcesSection($rootNode);
         $this->addSettingsSection($rootNode);
@@ -48,9 +54,6 @@ final class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $node
-     */
     private function addResourcesSection(ArrayNodeDefinition $node): void
     {
         $node
@@ -98,9 +101,6 @@ final class Configuration implements ConfigurationInterface
         ;
     }
 
-    /**
-     * @param ArrayNodeDefinition $node
-     */
     private function addSettingsSection(ArrayNodeDefinition $node): void
     {
         $node
@@ -125,9 +125,6 @@ final class Configuration implements ConfigurationInterface
         ;
     }
 
-    /**
-     * @param ArrayNodeDefinition $node
-     */
     private function addTranslationsSection(ArrayNodeDefinition $node): void
     {
         $node
@@ -141,9 +138,6 @@ final class Configuration implements ConfigurationInterface
         ;
     }
 
-    /**
-     * @param ArrayNodeDefinition $node
-     */
     private function addDriversSection(ArrayNodeDefinition $node): void
     {
         $node

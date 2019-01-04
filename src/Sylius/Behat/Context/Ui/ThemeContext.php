@@ -24,32 +24,18 @@ use Webmozart\Assert\Assert;
 
 final class ThemeContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $channelIndexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $channelUpdatePage;
 
-    /**
-     * @var HomePageInterface
-     */
+    /** @var HomePageInterface */
     private $homePage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param IndexPageInterface $channelIndexPage
-     * @param UpdatePageInterface $channelUpdatePage
-     * @param HomePageInterface $homePage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $channelIndexPage,
@@ -68,7 +54,7 @@ final class ThemeContext implements Context
     public function iSetChannelThemeTo(ChannelInterface $channel, ThemeInterface $theme)
     {
         $this->channelUpdatePage->open(['id' => $channel->getId()]);
-        $this->channelUpdatePage->setTheme($theme);
+        $this->channelUpdatePage->setTheme($theme->getName());
         $this->channelUpdatePage->saveChanges();
 
         $this->sharedStorage->set('channel', $channel);

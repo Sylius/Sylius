@@ -19,9 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class PaymentMethodApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
@@ -72,8 +70,6 @@ final class PaymentMethodApiTest extends JsonApiTestCase
     }
 
     /**
-     * @param PaymentMethodInterface $paymentMethod
-     *
      * @return string
      */
     private function getPaymentMethodUrl(PaymentMethodInterface $paymentMethod)

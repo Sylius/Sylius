@@ -19,61 +19,25 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @param int $price
-     */
-    public function specifyPrice($price);
+    public function specifyPrice(int $price): void;
 
-    public function disableTracking();
+    public function disableTracking(): void;
 
-    public function enableTracking();
+    public function enableTracking(): void;
 
-    /**
-     * @return bool
-     */
-    public function isTracked();
+    public function isTracked(): bool;
 
-    /**
-     * @param ChannelInterface $channel
-     * @param CurrencyInterface $currency
-     *
-     * @return string
-     */
-    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency);
+    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency): string;
 
-    /**
-     * @param string $channelName
-     *
-     * @return string
-     */
-    public function getPriceForChannel($channelName);
+    public function getPriceForChannel(string $channelName): string;
 
-    /**
-     * @param string $channelName
-     *
-     * @return string
-     */
-    public function getOriginalPriceForChannel($channelName);
+    public function getOriginalPriceForChannel(string $channelName): string;
 
-    /**
-     * @param string $language
-     *
-     * @return string
-     */
-    public function getNameInLanguage($language);
+    public function getNameInLanguage(string $language): string;
 
-    /**
-     * @param int $amount
-     */
-    public function specifyCurrentStock($amount);
+    public function specifyCurrentStock(int $amount): void;
 
-    /**
-     * @return bool
-     */
-    public function isShippingRequired();
+    public function isShippingRequired(): bool;
 }

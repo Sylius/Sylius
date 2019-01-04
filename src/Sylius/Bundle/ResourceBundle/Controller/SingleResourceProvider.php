@@ -23,11 +23,16 @@ final class SingleResourceProvider implements SingleResourceProviderInterface
      */
     public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository): ?ResourceInterface
     {
-        $repositoryMethod = $requestConfiguration->getRepositoryMethod();
-        if (null !== $repositoryMethod) {
+        $method = $requestConfiguration->getRepositoryMethod();
+        if (null !== $method) {
+            if (is_array($method) && 2 === count($method)) {
+                $repository = $method[0];
+                $method = $method[1];
+            }
+
             $arguments = array_values($requestConfiguration->getRepositoryArguments());
 
-            return $repository->$repositoryMethod(...$arguments);
+            return $repository->$method(...$arguments);
         }
 
         $criteria = [];

@@ -38,6 +38,7 @@ sylius:
             skipping_payment_step_allowed: Ignorez l’étape paiement si un seul mode de paiement est disponible ?
             tax_calculation_strategy: Stratégie de calcul de la TVA
             tax_zone_default: Zone de taxe par défaut
+            taxonomies: Taxonomies
             theme: Thème
         image:
             type: Type
@@ -62,6 +63,7 @@ sylius:
             restricted_zone: Restriction de zone
             short_description: Brève description
             variant_selection_method: Méthode de sélection de variante
+            main_taxon: Taxinomie principale
             channels: Canaux
             enabled: Activé
         product_filter:

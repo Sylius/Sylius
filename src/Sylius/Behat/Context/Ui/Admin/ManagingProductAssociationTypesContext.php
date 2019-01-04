@@ -23,32 +23,18 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductAssociationTypesContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -108,7 +94,7 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function iRenameItToInLanguage($name = null, $language)
     {
-        $this->updatePage->nameItIn($name, $language);
+        $this->updatePage->nameItIn($name ?? '', $language);
     }
 
     /**
@@ -117,7 +103,7 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**

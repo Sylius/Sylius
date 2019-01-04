@@ -63,6 +63,7 @@ Configure doctrine extensions which are used in the taxonomy bundle:
             default:
                 tree: true
                 sluggable: true
+                sortable: true
 
 Updating database schema
 ------------------------

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface SelectShippingPageInterface extends SymfonyPageInterface
 {
@@ -26,6 +26,8 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
      * @return string[]
      */
     public function getShippingMethods();
+
+    public function getSelectedShippingMethodName(): ?string;
 
     /**
      * @return bool

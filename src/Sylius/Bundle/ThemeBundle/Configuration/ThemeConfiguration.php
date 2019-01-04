@@ -24,10 +24,15 @@ final class ThemeConfiguration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
+        if (method_exists(TreeBuilder::class, 'getRootNode')) {
+            $treeBuilder = new TreeBuilder('sylius_theme');
+            $rootNodeDefinition = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $treeBuilder = new TreeBuilder();
+            $rootNodeDefinition = $treeBuilder->root('sylius_theme');
+        }
 
-        /** @var ArrayNodeDefinition $rootNodeDefinition */
-        $rootNodeDefinition = $treeBuilder->root('sylius_theme');
         $rootNodeDefinition->ignoreExtraKeys();
 
         $this->addRequiredNameField($rootNodeDefinition);
@@ -41,41 +46,26 @@ final class ThemeConfiguration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addRequiredNameField(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $rootNodeDefinition->children()->scalarNode('name')->isRequired()->cannotBeEmpty();
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addOptionalTitleField(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $rootNodeDefinition->children()->scalarNode('title')->cannotBeEmpty();
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addOptionalDescriptionField(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $rootNodeDefinition->children()->scalarNode('description')->cannotBeEmpty();
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addOptionalPathField(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $rootNodeDefinition->children()->scalarNode('path')->cannotBeEmpty();
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addOptionalParentsList(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $parentsNodeDefinition = $rootNodeDefinition->children()->arrayNode('parents');
@@ -87,9 +77,6 @@ final class ThemeConfiguration implements ConfigurationInterface
         ;
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addOptionalScreenshotsList(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $screenshotsNodeDefinition = $rootNodeDefinition->children()->arrayNode('screenshots');
@@ -122,9 +109,6 @@ final class ThemeConfiguration implements ConfigurationInterface
         $screenshotNodeBuilder->scalarNode('description')->cannotBeEmpty();
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNodeDefinition
-     */
     private function addOptionalAuthorsList(ArrayNodeDefinition $rootNodeDefinition): void
     {
         $authorsNodeDefinition = $rootNodeDefinition->children()->arrayNode('authors');

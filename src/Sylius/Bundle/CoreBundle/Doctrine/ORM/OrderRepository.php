@@ -28,9 +28,7 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
 {
-    /**
-     * @var AssociationHydrator
-     */
+    /** @var AssociationHydrator */
     protected $associationHydrator;
 
     /**

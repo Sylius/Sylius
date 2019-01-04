@@ -173,6 +173,7 @@ If you still need the methods of the original HomepageController, then copy its 
         sylius.controller.shop.homepage:
             class: AppBundle\Controller\Shop\HomepageController
             arguments: ['@templating']
+            public: true
 
 Remember to import the ``app/config/services.yml`` into the ``app/config/config.yml``.
 

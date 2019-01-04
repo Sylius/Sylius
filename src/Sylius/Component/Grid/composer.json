@@ -22,12 +22,12 @@
     "require": {
         "php": "^7.1",
 
-        "sylius/registry": "^1.1",
+        "sylius/registry": "^1.2",
         "webmozart/assert": "^1.1"
     },
     "require-dev": {
         "phpspec/phpspec": "^4.0",
-        "symfony/property-access": "^3.4"
+        "symfony/property-access": "^3.4|^4.1.1"
     },
     "config": {
         "bin-dir": "bin"
@@ -48,7 +48,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

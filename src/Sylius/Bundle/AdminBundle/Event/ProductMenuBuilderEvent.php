@@ -20,16 +20,9 @@ use Sylius\Component\Product\Model\ProductInterface;
 
 class ProductMenuBuilderEvent extends MenuBuilderEvent
 {
-    /**
-     * @var ProductInterface
-     */
+    /** @var ProductInterface */
     private $product;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param ItemInterface $menu
-     * @param ProductInterface $product
-     */
     public function __construct(FactoryInterface $factory, ItemInterface $menu, ProductInterface $product)
     {
         parent::__construct($factory, $menu);
@@ -37,9 +30,6 @@ class ProductMenuBuilderEvent extends MenuBuilderEvent
         $this->product = $product;
     }
 
-    /**
-     * @return ProductInterface
-     */
     public function getProduct(): ProductInterface
     {
         return $this->product;

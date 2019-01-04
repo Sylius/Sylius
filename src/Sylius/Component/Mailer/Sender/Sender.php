@@ -20,32 +20,18 @@ use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInte
 
 final class Sender implements SenderInterface
 {
-    /**
-     * @var RendererAdapterInterface
-     */
+    /** @var RendererAdapterInterface */
     private $rendererAdapter;
 
-    /**
-     * @var SenderAdapterInterface
-     */
+    /** @var SenderAdapterInterface */
     private $senderAdapter;
 
-    /**
-     * @var EmailProviderInterface
-     */
+    /** @var EmailProviderInterface */
     private $provider;
 
-    /**
-     * @var DefaultSettingsProviderInterface
-     */
+    /** @var DefaultSettingsProviderInterface */
     private $defaultSettingsProvider;
 
-    /**
-     * @param RendererAdapterInterface $rendererAdapter
-     * @param SenderAdapterInterface $senderAdapter
-     * @param EmailProviderInterface $provider
-     * @param DefaultSettingsProviderInterface $defaultSettingsProvider
-     */
     public function __construct(
         RendererAdapterInterface $rendererAdapter,
         SenderAdapterInterface $senderAdapter,

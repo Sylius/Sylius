@@ -23,20 +23,12 @@ use Webmozart\Assert\Assert;
 
 final class UserDeleteListener
 {
-    /**
-     * @var TokenStorageInterface
-     */
+    /** @var TokenStorageInterface */
     private $tokenStorage;
 
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
-    /**
-     * @param TokenStorageInterface $tokenStorage
-     * @param SessionInterface $session
-     */
     public function __construct(TokenStorageInterface $tokenStorage, SessionInterface $session)
     {
         $this->tokenStorage = $tokenStorage;
@@ -44,8 +36,6 @@ final class UserDeleteListener
     }
 
     /**
-     * @param ResourceControllerEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function deleteUser(ResourceControllerEvent $event): void

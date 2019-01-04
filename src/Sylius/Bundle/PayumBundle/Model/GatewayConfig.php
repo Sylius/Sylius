@@ -14,18 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PayumBundle\Model;
 
 use Payum\Core\Model\GatewayConfig as BaseGatewayConfig;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
-class GatewayConfig extends BaseGatewayConfig implements ResourceInterface
+class GatewayConfig extends BaseGatewayConfig implements GatewayConfigInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $id;
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;

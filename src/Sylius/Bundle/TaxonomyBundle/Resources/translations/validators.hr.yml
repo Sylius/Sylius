@@ -4,9 +4,9 @@
 sylius:
     taxon:
         code:
-            not_blank: Molimo unesite kod taksona.
-            regex: Kod taksona se može sastojati samo od slova, brojeva, povlaka i podvlaka.
-            unique: Takson s unesenim kodom već postoji.
+            not_blank: Molimo unesite kod kategorije.
+            regex: Kod kategorije se može sastojati samo od slova, brojeva, povlaka i podvlaka.
+            unique: Kategorija s unesenim kodom već postoji.
         name:
             max_length: Naziv podkategorije ne smije biti duži od 255 znakova.
             not_blank: Unesite naziv podkategorije.

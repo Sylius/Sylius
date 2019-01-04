@@ -21,44 +21,28 @@ class Order implements OrderInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $checkoutCompletedAt;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $number;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $notes;
 
-    /**
-     * @var Collection|OrderItemInterface[]
-     */
+    /** @var Collection|OrderItemInterface[] */
     protected $items;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $itemsTotal = 0;
 
-    /**
-     * @var Collection|AdjustmentInterface[]
-     */
+    /** @var Collection|AdjustmentInterface[] */
     protected $adjustments;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $adjustmentsTotal = 0;
 
     /**
@@ -68,9 +52,7 @@ class Order implements OrderInterface
      */
     protected $total = 0;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $state = OrderInterface::STATE_CART;
 
     public function __construct()
@@ -430,9 +412,6 @@ class Order implements OrderInterface
         }
     }
 
-    /**
-     * @param AdjustmentInterface $adjustment
-     */
     protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {
@@ -441,9 +420,6 @@ class Order implements OrderInterface
         }
     }
 
-    /**
-     * @param AdjustmentInterface $adjustment
-     */
     protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {

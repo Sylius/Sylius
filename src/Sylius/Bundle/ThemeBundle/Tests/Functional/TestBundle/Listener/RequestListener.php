@@ -20,29 +20,18 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class RequestListener
 {
-    /**
-     * @var ThemeRepositoryInterface
-     */
+    /** @var ThemeRepositoryInterface */
     private $themeRepository;
 
-    /**
-     * @var SettableThemeContext
-     */
+    /** @var SettableThemeContext */
     private $themeContext;
 
-    /**
-     * @param ThemeRepositoryInterface $themeRepository
-     * @param SettableThemeContext $themeContext
-     */
     public function __construct(ThemeRepositoryInterface $themeRepository, SettableThemeContext $themeContext)
     {
         $this->themeRepository = $themeRepository;
         $this->themeContext = $themeContext;
     }
 
-    /**
-     * @param GetResponseEvent $event
-     */
     public function onKernelRequest(GetResponseEvent $event)
     {
         if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {

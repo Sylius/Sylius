@@ -17,18 +17,9 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as CrudIndexPageInterface;
 
 interface IndexPerTaxonPageInterface extends CrudIndexPageInterface
 {
-    /**
-     * @param array $productNames
-     *
-     * @return bool
-     */
-    public function hasProductsInOrder(array $productNames);
+    public function hasProductsInOrder(array $productNames): bool;
 
-    /**
-     * @param string $productName
-     * @param int $position
-     */
-    public function setPositionOfProduct($productName, $position);
+    public function setPositionOfProduct(string $productName, int $position): void;
 
-    public function savePositions();
+    public function savePositions(): void;
 }

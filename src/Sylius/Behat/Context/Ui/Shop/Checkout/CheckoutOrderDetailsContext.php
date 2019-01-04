@@ -20,14 +20,9 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutOrderDetailsContext implements Context
 {
-    /**
-     * @var ShowPageInterface
-     */
+    /** @var ShowPageInterface */
     private $orderDetails;
 
-    /**
-     * @param ShowPageInterface $orderDetails
-     */
     public function __construct(ShowPageInterface $orderDetails)
     {
         $this->orderDetails = $orderDetails;
@@ -64,5 +59,13 @@ final class CheckoutOrderDetailsContext implements Context
     public function iShouldNotBeAbleToPay()
     {
         Assert::false($this->orderDetails->hasPayAction());
+    }
+
+    /**
+     * @Then I should see :quantity as number of items
+     */
+    public function iShouldSeeAsNumberOfItems(int $quantity): void
+    {
+        Assert::same($this->orderDetails->getNumberOfItems(), $quantity);
     }
 }

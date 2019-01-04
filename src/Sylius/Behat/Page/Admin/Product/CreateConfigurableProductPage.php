@@ -24,10 +24,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
 {
     use SpecifiesItsCode;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function nameItIn($name, $localeCode)
+    public function nameItIn(string $name, string $localeCode): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_translations_%s_name', $localeCode), $name
@@ -38,18 +35,12 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectOption($optionName)
+    public function selectOption(string $optionName): void
     {
         $this->getDocument()->selectFieldOption('Options', $optionName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attachImage($path, $type = null)
+    public function attachImage(string $path, string $type = null): void
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -65,10 +56,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_code',
@@ -79,10 +67,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         ]);
     }
 
-    /**
-     * @param string $tabName
-     */
-    private function clickTabIfItsNotActive($tabName)
+    private function clickTabIfItsNotActive(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
         if (!$attributesTab->hasClass('active')) {
@@ -90,10 +75,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         }
     }
 
-    /**
-     * @return NodeElement
-     */
-    private function getLastImageElement()
+    private function getLastImageElement(): NodeElement
     {
         $images = $this->getElement('images');
         $items = $images->findAll('css', 'div[data-form-collection="item"]');

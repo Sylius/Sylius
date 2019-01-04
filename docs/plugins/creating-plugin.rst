@@ -68,7 +68,8 @@ to ensure your plugin's extraordinary quality.
 
 Besides the way you are creating plugins (based on our skeleton or on your own), there are a few naming conventions that should be followed:
 
- * Repository name should use dashes as separator, must have a ``sylius`` prefix and a ``plugin`` suffix, e.g.: ``sylius-invoice-plugin``.
+ * Repository name should use PascalCase, must have a ``Sylius*`` prefix and a ``Plugin`` suffix
+ * Project composer name should use dashes as a separator, must have a ``sylius`` prefix and a ``plugin`` suffix, e.g.: ``sylius-invoice-plugin``.
  * Bundle class name should start with vendor name, followed by ``Sylius`` and suffixed by ``Plugin`` (instead of ``Bundle``), e.g.: ``VendorNameSyliusInvoicePlugin``.
  * Bundle extension should be named similar, but suffixed by the Symfony standard ``Extension``, e.g.: ``VendorNameSyliusInvoiceExtension``.
  * Bundle class must use the ``Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait`` trait.

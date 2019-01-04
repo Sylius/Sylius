@@ -16,24 +16,16 @@ namespace Sylius\Behat\Page\Admin\Order;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    /**
-     * @var TableAccessorInterface
-     */
+    /** @var TableAccessorInterface */
     private $tableAccessor;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     */
     public function __construct(
         Session $session,
         array $parameters,
@@ -45,106 +37,76 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->tableAccessor = $tableAccessor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasCustomer($customerName)
+    public function hasCustomer(string $customerName): bool
     {
         $customerText = $this->getElement('customer')->getText();
 
         return stripos($customerText, $customerName) !== false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingAddress($customerName, $street, $postcode, $city, $countryName)
+    public function hasShippingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         $shippingAddressText = $this->getElement('shipping_address')->getText();
 
         return $this->hasAddress($shippingAddressText, $customerName, $street, $postcode, $city, $countryName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasBillingAddress($customerName, $street, $postcode, $city, $countryName)
+    public function hasBillingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         $billingAddressText = $this->getElement('billing_address')->getText();
 
         return $this->hasAddress($billingAddressText, $customerName, $street, $postcode, $city, $countryName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShipment($shippingDetails)
+    public function hasShipment(string $shippingDetails): bool
     {
         $shipmentsText = $this->getElement('shipments')->getText();
 
         return stripos($shipmentsText, $shippingDetails) !== false;
     }
 
-    public function specifyTrackingCode($code)
+    public function specifyTrackingCode(string $code): void
     {
         $this->getDocument()->fillField('sylius_shipment_ship_tracking', $code);
     }
 
-    public function canShipOrder(OrderInterface $order)
+    public function canShipOrder(OrderInterface $order): bool
     {
         return $this->getLastOrderShipmentElement($order)->hasButton('Ship');
     }
 
-    public function shipOrder(OrderInterface $order)
+    public function shipOrder(OrderInterface $order): void
     {
         $this->getLastOrderShipmentElement($order)->pressButton('Ship');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPayment($paymentDetails)
+    public function hasPayment(string $paymentDetails): bool
     {
         $paymentsText = $this->getElement('payments')->getText();
 
         return stripos($paymentsText, $paymentDetails) !== false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function canCompleteOrderLastPayment(OrderInterface $order)
+    public function canCompleteOrderLastPayment(OrderInterface $order): bool
     {
         return $this->getLastOrderPaymentElement($order)->hasButton('Complete');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function completeOrderLastPayment(OrderInterface $order)
+    public function completeOrderLastPayment(OrderInterface $order): void
     {
         $this->getLastOrderPaymentElement($order)->pressButton('Complete');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function refundOrderLastPayment(OrderInterface $order)
+    public function refundOrderLastPayment(OrderInterface $order): void
     {
         $this->getLastOrderPaymentElement($order)->pressButton('Refund');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function countItems()
+    public function countItems(): int
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('table'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isProductInTheList(string $productName): bool
     {
         try {
@@ -168,172 +130,110 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemsTotal()
+    public function getItemsTotal(): string
     {
         $itemsTotalElement = $this->getElement('items_total');
 
         return trim(str_replace('Subtotal:', '', $itemsTotalElement->getText()));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTotal()
+    public function getTotal(): string
     {
         $totalElement = $this->getElement('total');
 
         return trim(str_replace('Total:', '', $totalElement->getText()));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingTotal()
+    public function getShippingTotal(): string
     {
         $shippingTotalElement = $this->getElement('shipping_total');
 
         return trim(str_replace('Shipping total:', '', $shippingTotalElement->getText()));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxTotal()
+    public function getTaxTotal(): string
     {
         $taxTotalElement = $this->getElement('tax_total');
 
         return trim(str_replace('Tax total:', '', $taxTotalElement->getText()));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingCharge($shippingCharge)
+    public function hasShippingCharge(string $shippingCharge): bool
     {
         $shippingChargesText = $this->getElement('shipping_charges')->getText();
 
         return stripos($shippingChargesText, $shippingCharge) !== false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromotionTotal()
+    public function getPromotionTotal(): string
     {
         $promotionTotalElement = $this->getElement('promotion_total');
 
         return trim(str_replace('Promotion total:', '', $promotionTotalElement->getText()));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPromotionDiscount($promotionDiscount)
+    public function hasPromotionDiscount(string $promotionDiscount): bool
     {
         $promotionDiscountsText = $this->getElement('promotion_discounts')->getText();
 
         return stripos($promotionDiscountsText, $promotionDiscount) !== false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingPromotion($promotionName)
-    {
-        return $this->getElement('promotion_shipping_discounts')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasTax($tax)
+    public function hasTax(string $tax): bool
     {
         $taxesText = $this->getElement('taxes')->getText();
 
         return stripos($taxesText, $tax) !== false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemCode($itemName)
+    public function getItemCode(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'sylius-product-variant-code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemUnitPrice($itemName)
+    public function getItemUnitPrice(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'unit-price');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemDiscountedUnitPrice($itemName)
+    public function getItemDiscountedUnitPrice(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'discounted-unit-price');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemQuantity($itemName)
+    public function getItemQuantity(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'quantity');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemSubtotal($itemName)
+    public function getItemSubtotal(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'subtotal');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemDiscount($itemName)
+    public function getItemDiscount(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'discount');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemTax($itemName)
+    public function getItemTax(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'tax');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemTotal($itemName)
+    public function getItemTotal(string $itemName): string
     {
         return $this->getItemProperty($itemName, 'total');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaymentAmount()
+    public function getPaymentAmount(): string
     {
         $paymentsPrice = $this->getElement('payments')->find('css', '.description');
 
         return $paymentsPrice->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaymentsCount()
+    public function getPaymentsCount(): int
     {
         try {
             $payments = $this->getElement('payments')->findAll('css', '.item');
@@ -344,9 +244,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return count($payments);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShipmentsCount(): int
     {
         try {
@@ -358,122 +255,83 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return count($shipments);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasCancelButton()
+    public function hasCancelButton(): bool
     {
         return $this->getDocument()->hasButton('Cancel');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrderState()
+    public function getOrderState(): string
     {
         return $this->getElement('order_state')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaymentState()
+    public function getPaymentState(): string
     {
         return $this->getElement('order_payment_state')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingState()
+    public function getShippingState(): string
     {
         return $this->getElement('order_shipping_state')->getText();
     }
 
-    public function cancelOrder()
+    public function cancelOrder(): void
     {
         $this->getDocument()->pressButton('Cancel');
     }
 
-    public function deleteOrder()
+    public function deleteOrder(): void
     {
         $this->getDocument()->pressButton('Delete');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasNote($note)
+    public function hasNote(string $note): bool
     {
         $orderNotesElement = $this->getElement('order_notes');
 
         return $orderNotesElement->getText() === $note;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingProvinceName($provinceName)
+    public function hasShippingProvinceName(string $provinceName): bool
     {
         $shippingAddressText = $this->getElement('shipping_address')->getText();
 
         return false !== stripos($shippingAddressText, $provinceName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasBillingProvinceName($provinceName)
+    public function hasBillingProvinceName(string $provinceName): bool
     {
         $billingAddressText = $this->getElement('billing_address')->getText();
 
         return false !== stripos($billingAddressText, $provinceName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getIpAddressAssigned()
+    public function getIpAddressAssigned(): string
     {
         return $this->getElement('ip_address')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrderCurrency()
+    public function getOrderCurrency(): string
     {
         return $this->getElement('currency')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasRefundButton()
+    public function hasRefundButton(): bool
     {
         return $this->getDocument()->hasButton('Refund');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingPromotionData()
+    public function getShippingPromotionData(): string
     {
         return $this->getElement('promotion_shipping_discounts')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_admin_order_show';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '#billing-address',
@@ -500,25 +358,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ]);
     }
 
-    /**
-     * @return TableAccessorInterface
-     */
-    protected function getTableAccessor()
+    protected function getTableAccessor(): TableAccessorInterface
     {
         return $this->tableAccessor;
     }
 
-    /**
-     * @param string $elementText
-     * @param string $customerName
-     * @param string $street
-     * @param string $postcode
-     * @param string $city
-     * @param string $countryName
-     *
-     * @return bool
-     */
-    private function hasAddress($elementText, $customerName, $street, $postcode, $city, $countryName)
+    private function hasAddress(string $elementText, string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         return
             (stripos($elementText, $customerName) !== false) &&
@@ -528,13 +373,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ;
     }
 
-    /**
-     * @param string $itemName
-     * @param string $property
-     *
-     * @return string
-     */
-    private function getItemProperty($itemName, $property)
+    private function getItemProperty(string $itemName, string $property): string
     {
         $rows = $this->tableAccessor->getRowsWithFields(
             $this->getElement('table'),
@@ -544,12 +383,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $rows[0]->find('css', '.' . $property)->getText();
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return NodeElement|null
-     */
-    private function getLastOrderPaymentElement(OrderInterface $order)
+    private function getLastOrderPaymentElement(OrderInterface $order): ?NodeElement
     {
         $payment = $order->getPayments()->last();
 
@@ -559,12 +393,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $paymentStateElement->getParent()->getParent();
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return NodeElement|null
-     */
-    private function getLastOrderShipmentElement(OrderInterface $order)
+    private function getLastOrderShipmentElement(OrderInterface $order): ?NodeElement
     {
         $shipment = $order->getShipments()->last();
 

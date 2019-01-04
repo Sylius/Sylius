@@ -17,10 +17,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 final class ResourceNotFoundException extends \RuntimeException
 {
-    /**
-     * @param string $resourceName
-     * @param ThemeInterface $theme
-     */
     public function __construct(string $resourceName, ThemeInterface $theme)
     {
         parent::__construct(sprintf(

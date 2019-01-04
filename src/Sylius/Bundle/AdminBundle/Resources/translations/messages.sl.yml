@@ -29,7 +29,6 @@ sylius:
                     zones: Cone
                 marketing:
                     header: Oglaševanje
-                    product_reviews: Ocene izdelkov
                     promotions: Promocije
                 customers:
                     customers: Kupci

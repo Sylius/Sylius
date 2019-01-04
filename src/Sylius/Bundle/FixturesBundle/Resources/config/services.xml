@@ -19,4 +19,14 @@
         <import resource="services/logger.xml"/>
         <import resource="services/suite.xml"/>
     </imports>
+
+    <services>
+        <service id="Sylius\Bundle\FixturesBundle\Command\FixturesListCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\FixturesBundle\Command\FixturesLoadCommand">
+            <tag name="console.command" />
+        </service>
+    </services>
 </container>

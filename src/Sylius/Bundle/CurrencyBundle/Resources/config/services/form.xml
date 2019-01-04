@@ -22,6 +22,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.form.type.currency" class="Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType">
             <argument>%sylius.model.currency.class%</argument>
             <argument>%sylius.form.type.currency.validation_groups%</argument>

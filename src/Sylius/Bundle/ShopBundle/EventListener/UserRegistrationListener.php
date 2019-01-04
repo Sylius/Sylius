@@ -27,42 +27,25 @@ use Webmozart\Assert\Assert;
 
 final class UserRegistrationListener
 {
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $userManager;
 
-    /**
-     * @var GeneratorInterface
-     */
+    /** @var GeneratorInterface */
     private $tokenGenerator;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var UserLoginInterface
-     */
+    /** @var UserLoginInterface */
     private $userLogin;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $firewallContextName;
 
     /**
-     * @param ObjectManager $userManager
-     * @param GeneratorInterface $tokenGenerator
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param ChannelContextInterface $channelContext
-     * @param UserLoginInterface $userLogin
      * @param string $firewallContextName
      */
     public function __construct(
@@ -81,9 +64,6 @@ final class UserRegistrationListener
         $this->firewallContextName = $firewallContextName;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function handleUserVerification(GenericEvent $event): void
     {
         $customer = $event->getSubject();
@@ -103,9 +83,6 @@ final class UserRegistrationListener
         $this->sendVerificationEmail($user);
     }
 
-    /**
-     * @param ShopUserInterface $user
-     */
     private function sendVerificationEmail(ShopUserInterface $user): void
     {
         $token = $this->tokenGenerator->generate();
@@ -117,9 +94,6 @@ final class UserRegistrationListener
         $this->eventDispatcher->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, new GenericEvent($user));
     }
 
-    /**
-     * @param ShopUserInterface $user
-     */
     private function enableAndLogin(ShopUserInterface $user): void
     {
         $user->setEnabled(true);

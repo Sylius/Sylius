@@ -18,10 +18,5 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 interface TaxonFactoryInterface extends FactoryInterface
 {
-    /**
-     * @param TaxonInterface $parent
-     *
-     * @return TaxonInterface
-     */
     public function createForParent(TaxonInterface $parent): TaxonInterface;
 }

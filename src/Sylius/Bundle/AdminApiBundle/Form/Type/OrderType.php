@@ -29,15 +29,11 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class OrderType extends AbstractResourceType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
     /**
      * {@inheritdoc}
-     *
-     * @param RepositoryInterface $localeRepository
      */
     public function __construct(string $dataClass, array $validationGroups = [], RepositoryInterface $localeRepository)
     {

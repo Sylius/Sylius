@@ -29,44 +29,24 @@ use Webmozart\Assert\Assert;
 
 final class ContactController
 {
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * @var FormFactoryInterface
-     */
+    /** @var FormFactoryInterface */
     private $formFactory;
 
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var CustomerContextInterface
-     */
+    /** @var CustomerContextInterface */
     private $customerContext;
 
-    /**
-     * @var ContactEmailManagerInterface
-     */
+    /** @var ContactEmailManagerInterface */
     private $contactEmailManager;
 
-    /**
-     * @param RouterInterface $router
-     * @param FormFactoryInterface $formFactory
-     * @param EngineInterface $templatingEngine
-     * @param ChannelContextInterface $channelContext
-     * @param CustomerContextInterface $customerContext
-     * @param ContactEmailManagerInterface $contactEmailManager
-     */
     public function __construct(
         RouterInterface $router,
         FormFactoryInterface $formFactory,
@@ -83,11 +63,6 @@ final class ContactController
         $this->contactEmailManager = $contactEmailManager;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function requestAction(Request $request): Response
     {
         $formType = $this->getSyliusAttribute($request, 'form', ContactType::class);
@@ -138,13 +113,6 @@ final class ContactController
         return $this->templatingEngine->renderResponse($template, ['form' => $form->createView()]);
     }
 
-    /**
-     * @param Request $request
-     * @param string $attributeName
-     * @param string|null $default
-     *
-     * @return string|null
-     */
     private function getSyliusAttribute(Request $request, string $attributeName, ?string $default): ?string
     {
         $attributes = $request->attributes->get('_sylius');
@@ -152,9 +120,6 @@ final class ContactController
         return $attributes[$attributeName] ?? $default;
     }
 
-    /**
-     * @return array
-     */
     private function getFormOptions(): array
     {
         $customer = $this->customerContext->getCustomer();

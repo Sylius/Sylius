@@ -18,24 +18,12 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, ResourceInterface
 {
-    /**
-     * @return int
-     */
     public function getQuantity(): int;
 
-    /**
-     * @return int
-     */
     public function getUnitPrice(): int;
 
-    /**
-     * @param int $unitPrice
-     */
     public function setUnitPrice(int $unitPrice): void;
 
-    /**
-     * @return int
-     */
     public function getTotal(): int;
 
     /**
@@ -46,21 +34,11 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     /**
      * Checks whether the item given as argument corresponds to
      * the same cart item. Can be overwritten to enable merge quantities.
-     *
-     * @param OrderItemInterface $orderItem
-     *
-     * @return bool
      */
     public function equals(self $orderItem): bool;
 
-    /**
-     * @return bool
-     */
     public function isImmutable(): bool;
 
-    /**
-     * @param bool $immutable
-     */
     public function setImmutable(bool $immutable): void;
 
     /**
@@ -68,39 +46,18 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
      */
     public function getUnits(): Collection;
 
-    /**
-     * @param OrderItemUnitInterface $itemUnit
-     *
-     * @return bool
-     */
     public function hasUnit(OrderItemUnitInterface $itemUnit): bool;
 
-    /**
-     * @param OrderItemUnitInterface $itemUnit
-     */
     public function addUnit(OrderItemUnitInterface $itemUnit): void;
 
-    /**
-     * @param OrderItemUnitInterface $itemUnit
-     */
     public function removeUnit(OrderItemUnitInterface $itemUnit): void;
 
     /**
-     * @param string|null $type
-     *
      * @return Collection|AdjustmentInterface[]
      */
     public function getAdjustmentsRecursively(?string $type = null): Collection;
 
-    /**
-     * @param string|null $type
-     */
     public function removeAdjustmentsRecursively(?string $type = null): void;
 
-    /**
-     * @param string|null $type
-     *
-     * @return int
-     */
     public function getAdjustmentsTotalRecursively(?string $type = null): int;
 }

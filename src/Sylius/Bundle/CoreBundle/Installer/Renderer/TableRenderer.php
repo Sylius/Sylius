@@ -18,59 +18,37 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class TableRenderer
 {
-    /**
-     * @var Table
-     */
+    /** @var Table */
     private $table;
 
-    /**
-     * @var OutputInterface
-     */
+    /** @var OutputInterface */
     private $output;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $headers;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $rows = [];
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $label;
 
-    /**
-     * @param OutputInterface $output
-     */
     public function __construct(OutputInterface $output)
     {
         $this->output = $output;
         $this->table = new Table($output);
     }
 
-    /**
-     * @param array $headers
-     */
     public function setHeaders(array $headers): void
     {
         $this->headers = $headers;
     }
 
-    /**
-     * @param array $row
-     */
     public function addRow(array $row): void
     {
         $this->rows[] = $row;
     }
 
-    /**
-     * @param string $label
-     */
     public function setLabel(string $label): void
     {
         $this->label = $label;
@@ -89,9 +67,6 @@ final class TableRenderer
         ;
     }
 
-    /**
-     * @return bool
-     */
     public function isEmpty(): bool
     {
         return empty($this->rows);

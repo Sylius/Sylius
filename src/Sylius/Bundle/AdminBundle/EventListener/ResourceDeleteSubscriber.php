@@ -26,20 +26,12 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class ResourceDeleteSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var UrlGeneratorInterface
-     */
+    /** @var UrlGeneratorInterface */
     private $router;
 
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
-    /**
-     * @param UrlGeneratorInterface $router
-     * @param SessionInterface $session
-     */
     public function __construct(UrlGeneratorInterface $router, SessionInterface $session)
     {
         $this->router = $router;
@@ -56,9 +48,6 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param GetResponseForExceptionEvent $event
-     */
     public function onResourceDelete(GetResponseForExceptionEvent $event): void
     {
         $exception = $event->getException();
@@ -104,11 +93,6 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
         $event->setResponse($this->createRedirectResponse($originalRoute, ResourceActions::INDEX));
     }
 
-    /**
-     * @param string $route
-     *
-     * @return string
-     */
     private function getResourceNameFromRoute(string $route): string
     {
         $route = str_replace('_bulk', '', $route);
@@ -119,12 +103,6 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
         return trim(implode(' ', $routeArrayWithoutPrefixes));
     }
 
-    /**
-     * @param string $originalRoute
-     * @param string $targetAction
-     *
-     * @return RedirectResponse
-     */
     private function createRedirectResponse(string $originalRoute, string $targetAction): RedirectResponse
     {
         $redirectRoute = str_replace(ResourceActions::DELETE, $targetAction, $originalRoute);
@@ -132,31 +110,16 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
         return new RedirectResponse($this->router->generate($redirectRoute));
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
     private function isMethodDelete(Request $request): bool
     {
         return Request::METHOD_DELETE === $request->getMethod();
     }
 
-    /**
-     * @param string $route
-     *
-     * @return bool
-     */
     private function isSyliusRoute(string $route): bool
     {
         return 0 === strpos($route, 'sylius');
     }
 
-    /**
-     * @param array $syliusParameters
-     *
-     * @return bool
-     */
     private function isAdminSection(array $syliusParameters): bool
     {
         return array_key_exists('section', $syliusParameters) && 'admin' === $syliusParameters['section'];

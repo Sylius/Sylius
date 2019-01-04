@@ -27,44 +27,24 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionCouponsContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var GeneratePageInterface
-     */
+    /** @var GeneratePageInterface */
     private $generatePage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param GeneratePageInterface $generatePage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         CreatePageInterface $createPage,
         GeneratePageInterface $generatePage,
@@ -121,13 +101,13 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyItsCodeLengthAs($codeLength = null)
     {
-        $this->generatePage->specifyCodeLength($codeLength);
+        $this->generatePage->specifyCodeLength($codeLength ?? '');
     }
 
     /**
      * @When /^I limit generated coupons usage to (\d+) times$/
      */
-    public function iSetGeneratedCouponsUsageLimitTo($limit)
+    public function iSetGeneratedCouponsUsageLimitTo(int $limit)
     {
         $this->generatePage->setUsageLimit($limit);
     }
@@ -146,13 +126,13 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
      * @When I limit its usage to :limit times
      */
-    public function iLimitItsUsageLimitTo($limit)
+    public function iLimitItsUsageLimitTo(int $limit)
     {
         $this->createPage->setUsageLimit($limit);
     }
@@ -171,13 +151,13 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyItsAmountAs($amount = null)
     {
-        $this->generatePage->specifyAmount($amount);
+        $this->generatePage->specifyAmount($amount ?? '');
     }
 
     /**
      * @When I limit its per customer usage to :limit times
      */
-    public function iLimitItsPerCustomerUsageLimitTo($limit)
+    public function iLimitItsPerCustomerUsageLimitTo(int $limit)
     {
         $this->createPage->setCustomerUsageLimit($limit);
     }
@@ -185,7 +165,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When I change its per customer usage limit to :limit
      */
-    public function iChangeItsPerCustomerUsageLimitTo($limit)
+    public function iChangeItsPerCustomerUsageLimitTo(int $limit)
     {
         $this->updatePage->setCustomerUsageLimit($limit);
     }

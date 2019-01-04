@@ -17,9 +17,7 @@ use Symfony\Component\Translation\Loader\LoaderInterface;
 
 final class TranslatorLoaderProvider implements TranslatorLoaderProviderInterface
 {
-    /**
-     * @var LoaderInterface[]
-     */
+    /** @var LoaderInterface[] */
     private $loaders;
 
     /**

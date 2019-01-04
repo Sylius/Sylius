@@ -18,7 +18,7 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
-        <field name="title" type="string" column="title" />
+        <field name="title" type="string" column="title" nullable="true" />
         <field name="rating" type="integer" column="rating" />
         <field name="comment" type="text" column="comment" nullable="true" />
         <field name="status" type="string" column="status" length="255" />

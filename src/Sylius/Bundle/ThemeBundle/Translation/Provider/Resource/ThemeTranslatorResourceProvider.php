@@ -22,26 +22,15 @@ use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 
 final class ThemeTranslatorResourceProvider implements TranslatorResourceProviderInterface
 {
-    /**
-     * @var TranslationFilesFinderInterface
-     */
+    /** @var TranslationFilesFinderInterface */
     private $translationFilesFinder;
 
-    /**
-     * @var ThemeRepositoryInterface
-     */
+    /** @var ThemeRepositoryInterface */
     private $themeRepository;
 
-    /**
-     * @var ThemeHierarchyProviderInterface
-     */
+    /** @var ThemeHierarchyProviderInterface */
     private $themeHierarchyProvider;
 
-    /**
-     * @param TranslationFilesFinderInterface $translationFilesFinder
-     * @param ThemeRepositoryInterface $themeRepository
-     * @param ThemeHierarchyProviderInterface $themeHierarchyProvider
-     */
     public function __construct(
         TranslationFilesFinderInterface $translationFilesFinder,
         ThemeRepositoryInterface $themeRepository,
@@ -78,11 +67,6 @@ final class ThemeTranslatorResourceProvider implements TranslatorResourceProvide
         }, $this->getResources())));
     }
 
-    /**
-     * @param ThemeInterface $mainTheme
-     *
-     * @return array
-     */
     private function extractResourcesFromTheme(ThemeInterface $mainTheme): array
     {
         /** @var ThemeInterface[] $themes */

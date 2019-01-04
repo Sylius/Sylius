@@ -17,9 +17,7 @@ use Zend\Stdlib\PriorityQueue;
 
 final class CompositeCurrencyContext implements CurrencyContextInterface
 {
-    /**
-     * @var PriorityQueue|CurrencyContextInterface[]
-     */
+    /** @var PriorityQueue|CurrencyContextInterface[] */
     private $currencyContexts;
 
     public function __construct()
@@ -27,10 +25,6 @@ final class CompositeCurrencyContext implements CurrencyContextInterface
         $this->currencyContexts = new PriorityQueue();
     }
 
-    /**
-     * @param CurrencyContextInterface $currencyContext
-     * @param int $priority
-     */
     public function addContext(CurrencyContextInterface $currencyContext, int $priority = 0): void
     {
         $this->currencyContexts->insert($currencyContext, $priority);

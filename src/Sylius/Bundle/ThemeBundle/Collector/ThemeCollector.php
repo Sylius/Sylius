@@ -23,26 +23,15 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 final class ThemeCollector extends DataCollector
 {
-    /**
-     * @var ThemeRepositoryInterface
-     */
+    /** @var ThemeRepositoryInterface */
     private $themeRepository;
 
-    /**
-     * @var ThemeContextInterface
-     */
+    /** @var ThemeContextInterface */
     private $themeContext;
 
-    /**
-     * @var ThemeHierarchyProviderInterface
-     */
+    /** @var ThemeHierarchyProviderInterface */
     private $themeHierarchyProvider;
 
-    /**
-     * @param ThemeRepositoryInterface $themeRepository
-     * @param ThemeContextInterface $themeContext
-     * @param ThemeHierarchyProviderInterface $themeHierarchyProvider
-     */
     public function __construct(
         ThemeRepositoryInterface $themeRepository,
         ThemeContextInterface $themeContext,
@@ -59,9 +48,6 @@ final class ThemeCollector extends DataCollector
         ];
     }
 
-    /**
-     * @return ThemeInterface|null
-     */
     public function getUsedTheme(): ?ThemeInterface
     {
         return $this->data['used_theme'];

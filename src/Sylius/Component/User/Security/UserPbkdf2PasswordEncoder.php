@@ -29,30 +29,19 @@ final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
 {
     private const MAX_PASSWORD_LENGTH = 4096;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $algorithm;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $encodeHashAsBase64;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $iterations;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $length;
 
     /**
-     * @param string|null $algorithm
-     * @param bool|null $encodeHashAsBase64
-     * @param int|null $iterations
      * @param int|null $length of the result of encoding
      */
     public function __construct(
@@ -78,11 +67,6 @@ final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
     }
 
     /**
-     * @param string $plainPassword
-     * @param string $salt
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      * @throws \LogicException when the algorithm is not supported
      */

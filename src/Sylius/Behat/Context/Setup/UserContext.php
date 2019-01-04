@@ -23,32 +23,18 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 final class UserContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var UserRepositoryInterface
-     */
+    /** @var UserRepositoryInterface */
     private $userRepository;
 
-    /**
-     * @var ExampleFactoryInterface
-     */
+    /** @var ExampleFactoryInterface */
     private $userFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $userManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param UserRepositoryInterface $userRepository
-     * @param ExampleFactoryInterface $userFactory
-     * @param ObjectManager $userManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
@@ -139,14 +125,29 @@ final class UserContext implements Context
     }
 
     /**
-     * @param UserInterface $user
+     * @Given /^(?:(I) have|(this user) has) already received a resetting password email$/
      */
+    public function iHaveReceivedResettingPasswordEmail(UserInterface $user)
+    {
+        $this->prepareUserPasswordResetToken($user);
+    }
+
     private function prepareUserVerification(UserInterface $user)
     {
         $token = 'marryhadalittlelamb';
         $this->sharedStorage->set('verification_token', $token);
 
         $user->setEmailVerificationToken($token);
+
+        $this->userManager->flush();
+    }
+
+    private function prepareUserPasswordResetToken(UserInterface $user)
+    {
+        $token = 'itotallyforgotmypassword';
+
+        $user->setPasswordResetToken($token);
+        $user->setPasswordRequestedAt(new \DateTime());
 
         $this->userManager->flush();
     }

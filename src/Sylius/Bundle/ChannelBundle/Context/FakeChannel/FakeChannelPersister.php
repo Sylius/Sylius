@@ -19,22 +19,14 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class FakeChannelPersister
 {
-    /**
-     * @var FakeChannelCodeProviderInterface
-     */
+    /** @var FakeChannelCodeProviderInterface */
     private $fakeChannelCodeProvider;
 
-    /**
-     * @param FakeChannelCodeProviderInterface $fakeChannelCodeProvider
-     */
     public function __construct(FakeChannelCodeProviderInterface $fakeChannelCodeProvider)
     {
         $this->fakeChannelCodeProvider = $fakeChannelCodeProvider;
     }
 
-    /**
-     * @param FilterResponseEvent $filterResponseEvent
-     */
     public function onKernelResponse(FilterResponseEvent $filterResponseEvent): void
     {
         if (HttpKernelInterface::SUB_REQUEST === $filterResponseEvent->getRequestType()) {

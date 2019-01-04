@@ -17,10 +17,6 @@ interface ConfigurationLoaderInterface
 {
     /**
      * Loads configuration for given identifier (can be theme name or path to configuration file)
-     *
-     * @param string $identifier
-     *
-     * @return array
      */
     public function load(string $identifier): array;
 }

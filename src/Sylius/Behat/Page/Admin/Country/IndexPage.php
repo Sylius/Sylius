@@ -18,29 +18,17 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function isCountryDisabled(CountryInterface $country)
+    public function isCountryDisabled(CountryInterface $country): bool
     {
         return $this->checkCountryStatus($country, 'Disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isCountryEnabled(CountryInterface $country)
+    public function isCountryEnabled(CountryInterface $country): bool
     {
         return $this->checkCountryStatus($country, 'Enabled');
     }
 
-    /**
-     * @param CountryInterface $country
-     * @param string $status
-     *
-     * @return bool
-     */
-    private function checkCountryStatus(CountryInterface $country, $status)
+    private function checkCountryStatus(CountryInterface $country, string $status): bool
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');

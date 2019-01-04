@@ -7,7 +7,7 @@ Feature: Create account option availability
     Background:
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui
     Scenario: Being able to create an account for created customer
         Given I want to create a new customer
         And I do not choose create account option

@@ -19,9 +19,6 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 
 final class ORMRepositoryClassSubscriber extends AbstractDoctrineSubscriber
 {
-    /**
-     * @return array
-     */
     public function getSubscribedEvents(): array
     {
         return [
@@ -29,17 +26,11 @@ final class ORMRepositoryClassSubscriber extends AbstractDoctrineSubscriber
         ];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArgs
-     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
         $this->setCustomRepositoryClass($eventArgs->getClassMetadata());
     }
 
-    /**
-     * @param ClassMetadata $metadata
-     */
     private function setCustomRepositoryClass(ClassMetadata $metadata): void
     {
         try {

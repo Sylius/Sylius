@@ -18,14 +18,9 @@ use Symfony\Component\Filesystem\Filesystem;
 
 final class ApplicationResourceLocator implements ResourceLocatorInterface
 {
-    /**
-     * @var Filesystem
-     */
+    /** @var Filesystem */
     private $filesystem;
 
-    /**
-     * @param Filesystem $filesystem
-     */
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;

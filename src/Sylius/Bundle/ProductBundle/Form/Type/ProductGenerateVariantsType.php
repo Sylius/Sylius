@@ -20,15 +20,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductGenerateVariantsType extends AbstractResourceType
 {
-    /**
-     * @var EventSubscriberInterface
-     */
+    /** @var EventSubscriberInterface */
     private $generateProductVariantsSubscriber;
 
     /**
-     * @param string $dataClass
      * @param array|string[] $validationGroups
-     * @param EventSubscriberInterface $generateProductVariants
      */
     public function __construct(string $dataClass, array $validationGroups, EventSubscriberInterface $generateProductVariants)
     {

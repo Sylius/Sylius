@@ -27,36 +27,24 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /** @var array */
     private $imageUrls = [];
 
-    /**
-     * {@inheritdoc}
-     */
-    public function nameItIn($name, $localeCode)
+    public function nameItIn(string $name, string $localeCode): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_translations_%s_name', $localeCode), $name
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isProductOptionChosen($option)
+    public function isProductOptionChosen(string $option): bool
     {
         return $this->getElement('options')->find('named', ['option', $option])->hasAttribute('selected');
     }
 
-    /**
-     * @return bool
-     */
-    public function isProductOptionsDisabled()
+    public function isProductOptionsDisabled(): bool
     {
         return 'disabled' === $this->getElement('options')->getAttribute('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isMainTaxonChosen($taxonName)
+    public function isMainTaxonChosen(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
         Assert::notNull($this->getDocument()->find('css', '.search > .text'));
@@ -64,10 +52,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectMainTaxon(TaxonInterface $taxon)
+    public function selectMainTaxon(TaxonInterface $taxon): void
     {
         $this->openTaxonBookmarks();
 
@@ -82,18 +67,12 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $itemSelected->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function checkChannel($channelName)
+    public function checkChannel(string $channelName): void
     {
         $this->getElement('channel_checkbox', ['%channel%' => $channelName])->check();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isImageWithTypeDisplayed($type)
+    public function isImageWithTypeDisplayed(string $type): bool
     {
         $imageElement = $this->getImageElementByType($type);
 
@@ -109,10 +88,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return false === stripos($pageText, '404 Not Found');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attachImage($path, $type = null)
+    public function attachImage(string $path, string $type = null): void
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -128,10 +104,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function changeImageWithType($type, $path)
+    public function changeImageWithType(string $type, string $path): void
     {
         $filesPath = $this->getParameter('files_path');
 
@@ -139,10 +112,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeImageWithType($type)
+    public function removeImageWithType(string $type): void
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -155,7 +125,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $imageElement->clickLink('Delete');
     }
 
-    public function removeFirstImage()
+    public function removeFirstImage(): void
     {
         $this->clickTabIfItsNotActive('media');
         $imageElement = $this->getFirstImageElement();
@@ -172,10 +142,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $imageElement->clickLink('Delete');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function modifyFirstImageType($type)
+    public function modifyFirstImageType(string $type): void
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -183,28 +150,19 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $this->setImageType($firstImage, $type);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function countImages()
+    public function countImages(): int
     {
         $imageElements = $this->getImageElements();
 
         return count($imageElements);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'channel_checkbox' => '.checkbox:contains("%channel%") input',
@@ -221,15 +179,12 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         ]);
     }
 
-    private function openTaxonBookmarks()
+    private function openTaxonBookmarks(): void
     {
         $this->getElement('taxonomy')->click();
     }
 
-    /**
-     * @param string $tabName
-     */
-    private function clickTabIfItsNotActive($tabName)
+    private function clickTabIfItsNotActive(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
         if (!$attributesTab->hasClass('active')) {
@@ -237,12 +192,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         }
     }
 
-    /**
-     * @param string $type
-     *
-     * @return NodeElement
-     */
-    private function getImageElementByType($type)
+    private function getImageElementByType(string $type): ?NodeElement
     {
         $images = $this->getElement('images');
         $typeInput = $images->find('css', 'input[value="' . $type . '"]');
@@ -257,17 +207,14 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /**
      * @return NodeElement[]
      */
-    private function getImageElements()
+    private function getImageElements(): array
     {
         $images = $this->getElement('images');
 
         return $images->findAll('css', 'div[data-form-collection="item"]');
     }
 
-    /**
-     * @return NodeElement
-     */
-    private function getLastImageElement()
+    private function getLastImageElement(): NodeElement
     {
         $imageElements = $this->getImageElements();
 
@@ -276,10 +223,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return end($imageElements);
     }
 
-    /**
-     * @return NodeElement
-     */
-    private function getFirstImageElement()
+    private function getFirstImageElement(): NodeElement
     {
         $imageElements = $this->getImageElements();
 
@@ -288,11 +232,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return reset($imageElements);
     }
 
-    /**
-     * @param NodeElement $imageElement
-     * @param string $type
-     */
-    private function setImageType(NodeElement $imageElement, $type)
+    private function setImageType(NodeElement $imageElement, string $type): void
     {
         $typeField = $imageElement->findField('Type');
         $typeField->setValue($type);

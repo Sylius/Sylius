@@ -17,43 +17,17 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @param string $name
-     * @param string $language
-     */
-    public function changeName($name, $language);
+    public function changeName(string $name, string $language): void;
 
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @return bool
-     */
-    public function isTypeDisabled();
+    public function isTypeDisabled(): bool;
 
-    /**
-     * @param string $oldValue
-     * @param string $newValue
-     */
     public function changeAttributeValue(string $oldValue, string $newValue): void;
 
-    /**
-     * @param string $value
-     *
-     * @return bool
-     */
     public function hasAttributeValue(string $value): bool;
 
-    /**
-     * @param string $value
-     * @param string $localeCode
-     */
     public function addAttributeValue(string $value, string $localeCode): void;
 
-    /**
-     * @param string $value
-     */
     public function deleteAttributeValue(string $value): void;
 }

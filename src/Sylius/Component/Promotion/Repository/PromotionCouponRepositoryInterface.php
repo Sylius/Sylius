@@ -19,32 +19,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface PromotionCouponRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @param mixed $promotionId
-     *
-     * @return QueryBuilder
-     */
     public function createQueryBuilderByPromotionId($promotionId): QueryBuilder;
 
-    /**
-     * @param int $codeLength
-     *
-     * @return int
-     */
     public function countByCodeLength(int $codeLength): int;
 
-    /**
-     * @param string $code
-     * @param string $promotionCode
-     *
-     * @return PromotionCouponInterface|null
-     */
     public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): ?PromotionCouponInterface;
 
-    /**
-     * @param string $promotionCode
-     *
-     * @return iterable
-     */
     public function createPaginatorForPromotion(string $promotionCode): iterable;
 }

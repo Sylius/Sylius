@@ -20,6 +20,8 @@
     </imports>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.grid.data_extractor.property_access" class="Sylius\Component\Grid\DataExtractor\PropertyAccessDataExtractor">
             <argument type="service" id="property_accessor" />
         </service>

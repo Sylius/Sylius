@@ -22,14 +22,9 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 final class ProductVariantToProductOptionsTransformer implements DataTransformerInterface
 {
-    /**
-     * @var ProductInterface
-     */
+    /** @var ProductInterface */
     private $product;
 
-    /**
-     * @param ProductInterface $product
-     */
     public function __construct(ProductInterface $product)
     {
         $this->product = $product;
@@ -76,8 +71,6 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
 
     /**
      * @param ProductOptionValueInterface[] $optionValues
-     *
-     * @return ProductVariantInterface|null
      *
      * @throws TransformationFailedException
      */

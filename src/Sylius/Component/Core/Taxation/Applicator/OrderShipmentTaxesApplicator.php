@@ -25,26 +25,15 @@ use Webmozart\Assert\Assert;
 
 class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
 {
-    /**
-     * @var CalculatorInterface
-     */
+    /** @var CalculatorInterface */
     private $calculator;
 
-    /**
-     * @var AdjustmentFactoryInterface
-     */
+    /** @var AdjustmentFactoryInterface */
     private $adjustmentFactory;
 
-    /**
-     * @var TaxRateResolverInterface
-     */
+    /** @var TaxRateResolverInterface */
     private $taxRateResolver;
 
-    /**
-     * @param CalculatorInterface $calculator
-     * @param AdjustmentFactoryInterface $adjustmentFactory
-     * @param TaxRateResolverInterface $taxRateResolver
-     */
     public function __construct(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentFactory,
@@ -78,12 +67,6 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
         $this->addAdjustment($order, (int) $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param int $taxAmount
-     * @param string $label
-     * @param bool $included
-     */
     private function addAdjustment(OrderInterface $order, int $taxAmount, string $label, bool $included): void
     {
         /** @var AdjustmentInterface $shippingTaxAdjustment */
@@ -94,10 +77,6 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
     }
 
     /**
-     * @param OrderInterface $order
-     *
-     * @return ShippingMethodInterface
-     *
      * @throws \LogicException
      */
     private function getShippingMethod(OrderInterface $order): ShippingMethodInterface

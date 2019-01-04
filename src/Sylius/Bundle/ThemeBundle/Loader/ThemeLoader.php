@@ -24,44 +24,24 @@ use Zend\Hydrator\HydrationInterface;
 
 final class ThemeLoader implements ThemeLoaderInterface
 {
-    /**
-     * @var ConfigurationProviderInterface
-     */
+    /** @var ConfigurationProviderInterface */
     private $configurationProvider;
 
-    /**
-     * @var ThemeFactoryInterface
-     */
+    /** @var ThemeFactoryInterface */
     private $themeFactory;
 
-    /**
-     * @var ThemeAuthorFactoryInterface
-     */
+    /** @var ThemeAuthorFactoryInterface */
     private $themeAuthorFactory;
 
-    /**
-     * @var ThemeScreenshotFactoryInterface
-     */
+    /** @var ThemeScreenshotFactoryInterface */
     private $themeScreenshotFactory;
 
-    /**
-     * @var HydrationInterface
-     */
+    /** @var HydrationInterface */
     private $themeHydrator;
 
-    /**
-     * @var CircularDependencyCheckerInterface
-     */
+    /** @var CircularDependencyCheckerInterface */
     private $circularDependencyChecker;
 
-    /**
-     * @param ConfigurationProviderInterface $configurationProvider
-     * @param ThemeFactoryInterface $themeFactory
-     * @param ThemeAuthorFactoryInterface $themeAuthorFactory
-     * @param ThemeScreenshotFactoryInterface $themeScreenshotFactory
-     * @param HydrationInterface $themeHydrator
-     * @param CircularDependencyCheckerInterface $circularDependencyChecker
-     */
     public function __construct(
         ConfigurationProviderInterface $configurationProvider,
         ThemeFactoryInterface $themeFactory,
@@ -94,8 +74,6 @@ final class ThemeLoader implements ThemeLoaderInterface
     }
 
     /**
-     * @param array $configurations
-     *
      * @return array|ThemeInterface[]
      */
     private function initializeThemes(array $configurations): array
@@ -110,7 +88,6 @@ final class ThemeLoader implements ThemeLoaderInterface
     }
 
     /**
-     * @param array $configurations
      * @param array|ThemeInterface[] $themes
      *
      * @return array|ThemeInterface[]
@@ -145,10 +122,6 @@ final class ThemeLoader implements ThemeLoaderInterface
     }
 
     /**
-     * @param string $themeName
-     * @param array $parentsNames
-     * @param array $existingThemes
-     *
      * @return array|ThemeInterface[]
      */
     private function convertParentsNamesToParentsObjects(string $themeName, array $parentsNames, array $existingThemes): array
@@ -167,8 +140,6 @@ final class ThemeLoader implements ThemeLoaderInterface
     }
 
     /**
-     * @param array $authorsArrays
-     *
      * @return array|ThemeAuthor[]
      */
     private function convertAuthorsArraysToAuthorsObjects(array $authorsArrays): array
@@ -179,8 +150,6 @@ final class ThemeLoader implements ThemeLoaderInterface
     }
 
     /**
-     * @param array $screenshotsArrays
-     *
      * @return array|ThemeScreenshot[]
      */
     private function convertScreenshotsArraysToScreenshotsObjects(array $screenshotsArrays): array

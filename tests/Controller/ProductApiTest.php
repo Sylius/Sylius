@@ -20,17 +20,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -114,7 +110,7 @@ final class ProductApiTest extends JsonApiTestCase
         $products = $this->loadFixturesFromFile('resources/products.yml');
         $product = $products['product1'];
 
-        $this->client->request('DELETE', $this->getProductUrl($product), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getProductUrl($product), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -164,7 +160,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -525,8 +521,6 @@ EOT;
     }
 
     /**
-     * @param ProductInterface $product
-     *
      * @return string
      */
     private function getProductUrl(ProductInterface $product)

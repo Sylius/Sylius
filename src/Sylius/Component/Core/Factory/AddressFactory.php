@@ -19,14 +19,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class AddressFactory implements AddressFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $decoratedFactory;
 
-    /**
-     * @param FactoryInterface $decoratedFactory
-     */
     public function __construct(FactoryInterface $decoratedFactory)
     {
         $this->decoratedFactory = $decoratedFactory;

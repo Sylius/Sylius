@@ -15,14 +15,9 @@ namespace Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 final class OrderingTranslationFilesFinder implements TranslationFilesFinderInterface
 {
-    /**
-     * @var TranslationFilesFinderInterface
-     */
+    /** @var TranslationFilesFinderInterface */
     private $translationFilesFinder;
 
-    /**
-     * @param TranslationFilesFinderInterface $translationFilesFinder
-     */
     public function __construct(TranslationFilesFinderInterface $translationFilesFinder)
     {
         $this->translationFilesFinder = $translationFilesFinder;

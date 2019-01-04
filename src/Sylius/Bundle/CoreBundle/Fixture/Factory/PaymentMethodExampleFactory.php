@@ -27,36 +27,21 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
 {
     public const DEFAULT_LOCALE = 'en_US';
 
-    /**
-     * @var PaymentMethodFactoryInterface
-     */
+    /** @var PaymentMethodFactoryInterface */
     private $paymentMethodFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var ChannelRepositoryInterface
-     */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param PaymentMethodFactoryInterface $paymentMethodFactory
-     * @param RepositoryInterface $localeRepository
-     * @param ChannelRepositoryInterface $channelRepository
-     */
     public function __construct(
         PaymentMethodFactoryInterface $paymentMethodFactory,
         RepositoryInterface $localeRepository,
@@ -133,9 +118,6 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

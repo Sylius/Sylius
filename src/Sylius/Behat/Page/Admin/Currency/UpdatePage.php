@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Currency;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
@@ -20,10 +21,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use Toggles;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function canBeDisabled()
+    public function canBeDisabled(): bool
     {
         $toggleableElement = $this->getToggleableElement();
         $this->assertCheckboxState($toggleableElement, true);
@@ -31,50 +29,32 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $toggleableElement->hasAttribute('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function canHaveExchangeRateChanged()
+    public function canHaveExchangeRateChanged(): bool
     {
         return $this->getElement('exchangeRate')->hasAttribute('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function changeExchangeRate($exchangeRate)
+    public function changeExchangeRate(string $exchangeRate): void
     {
         $this->getDocument()->fillField('Exchange rate', $exchangeRate);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getExchangeRateValue()
+    public function getExchangeRateValue(): string
     {
         return $this->getElement('exchangeRate')->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCodeDisabledAttribute()
+    public function getCodeDisabledAttribute(): string
     {
         return $this->getElement('code')->getAttribute('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getToggleableElement()
+    protected function getToggleableElement(): NodeElement
     {
         return $this->getElement('enabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_currency_code',

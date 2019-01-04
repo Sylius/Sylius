@@ -13,49 +13,25 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface DashboardPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @return int
-     */
-    public function getTotalSales();
+    public function getTotalSales(): string;
 
-    /**
-     * @return int
-     */
-    public function getNumberOfNewOrders();
+    public function getNumberOfNewOrders(): int;
 
-    /**
-     * @return int
-     */
-    public function getNumberOfNewOrdersInTheList();
+    public function getNumberOfNewOrdersInTheList(): int;
 
-    /**
-     * @return int
-     */
-    public function getNumberOfNewCustomers();
+    public function getNumberOfNewCustomers(): int;
 
-    /**
-     * @return int
-     */
-    public function getNumberOfNewCustomersInTheList();
+    public function getNumberOfNewCustomersInTheList(): int;
 
-    /**
-     * @return int
-     */
-    public function getAverageOrderValue();
+    public function getAverageOrderValue(): string;
 
-    /**
-     * @return string
-     */
-    public function getSubHeader();
+    public function getSubHeader(): string;
 
-    public function logOut();
+    public function logOut(): void;
 
-    /**
-     * @param string $channelName
-     */
-    public function chooseChannel($channelName);
+    public function chooseChannel(string $channelName): void;
 }

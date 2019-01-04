@@ -19,11 +19,5 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 interface LocaleSetupInterface
 {
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return LocaleInterface
-     */
     public function setup(InputInterface $input, OutputInterface $output): LocaleInterface;
 }

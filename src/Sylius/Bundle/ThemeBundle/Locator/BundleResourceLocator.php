@@ -19,20 +19,12 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 final class BundleResourceLocator implements ResourceLocatorInterface
 {
-    /**
-     * @var Filesystem
-     */
+    /** @var Filesystem */
     private $filesystem;
 
-    /**
-     * @var KernelInterface
-     */
+    /** @var KernelInterface */
     private $kernel;
 
-    /**
-     * @param Filesystem $filesystem
-     * @param KernelInterface $kernel
-     */
     public function __construct(Filesystem $filesystem, KernelInterface $kernel)
     {
         $this->filesystem = $filesystem;
@@ -51,7 +43,14 @@ final class BundleResourceLocator implements ResourceLocatorInterface
         $bundleName = $this->getBundleNameFromResourcePath($resourcePath);
         $resourceName = $this->getResourceNameFromResourcePath($resourcePath);
 
+        // Symfony 4.0+ always returns a single bundle
         $bundles = $this->kernel->getBundle($bundleName, false);
+
+        // So we need to hack it to support both Symfony 3.4 and Symfony 4.0+
+        if (!is_array($bundles)) {
+            $bundles = [$bundles];
+        }
+
         foreach ($bundles as $bundle) {
             $path = sprintf('%s/%s/%s', $theme->getPath(), $bundle->getName(), $resourceName);
 
@@ -63,9 +62,6 @@ final class BundleResourceLocator implements ResourceLocatorInterface
         throw new ResourceNotFoundException($resourcePath, $theme);
     }
 
-    /**
-     * @param string $resourcePath
-     */
     private function assertResourcePathIsValid(string $resourcePath): void
     {
         if (0 !== strpos($resourcePath, '@')) {
@@ -81,21 +77,11 @@ final class BundleResourceLocator implements ResourceLocatorInterface
         }
     }
 
-    /**
-     * @param string $resourcePath
-     *
-     * @return string
-     */
     private function getBundleNameFromResourcePath(string $resourcePath): string
     {
         return substr($resourcePath, 1, strpos($resourcePath, '/') - 1);
     }
 
-    /**
-     * @param string $resourcePath
-     *
-     * @return string
-     */
     private function getResourceNameFromResourcePath(string $resourcePath): string
     {
         return substr($resourcePath, strpos($resourcePath, 'Resources/') + strlen('Resources/'));

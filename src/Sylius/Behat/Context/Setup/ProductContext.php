@@ -42,104 +42,54 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var ProductRepositoryInterface
-     */
+    /** @var ProductRepositoryInterface */
     private $productRepository;
 
-    /**
-     * @var ProductFactoryInterface
-     */
+    /** @var ProductFactoryInterface */
     private $productFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productTranslationFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productVariantFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productVariantTranslationFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $channelPricingFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productOptionFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productOptionValueFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productImageFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @var ProductVariantGeneratorInterface
-     */
+    /** @var ProductVariantGeneratorInterface */
     private $productVariantGenerator;
 
-    /**
-     * @var ProductVariantResolverInterface
-     */
+    /** @var ProductVariantResolverInterface */
     private $defaultVariantResolver;
 
-    /**
-     * @var ImageUploaderInterface
-     */
+    /** @var ImageUploaderInterface */
     private $imageUploader;
 
-    /**
-     * @var SlugGeneratorInterface
-     */
+    /** @var SlugGeneratorInterface */
     private $slugGenerator;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $minkParameters;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ProductRepositoryInterface $productRepository
-     * @param ProductFactoryInterface $productFactory
-     * @param FactoryInterface $productTranslationFactory
-     * @param FactoryInterface $productVariantFactory
-     * @param FactoryInterface $productVariantTranslationFactory
-     * @param FactoryInterface $channelPricingFactory
-     * @param FactoryInterface $productOptionFactory
-     * @param FactoryInterface $productOptionValueFactory
-     * @param FactoryInterface $productImageFactory
-     * @param ObjectManager $objectManager
-     * @param ProductVariantGeneratorInterface $productVariantGenerator
-     * @param ProductVariantResolverInterface $defaultVariantResolver
-     * @param ImageUploaderInterface $imageUploader
-     * @param SlugGeneratorInterface $slugGenerator
-     * @param array $minkParameters
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductRepositoryInterface $productRepository,
@@ -183,7 +133,7 @@ final class ProductContext implements Context
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") in ("[^"]+" channel)$/
      */
-    public function storeHasAProductPricedAt($productName, $price = 100, ChannelInterface $channel = null)
+    public function storeHasAProductPricedAt($productName, int $price = 100, ChannelInterface $channel = null)
     {
         $product = $this->createProduct($productName, $price, $channel);
 
@@ -193,7 +143,7 @@ final class ProductContext implements Context
     /**
      * @Given /^(this product) is(?:| also) priced at ("[^"]+") in ("[^"]+" channel)$/
      */
-    public function thisProductIsAlsoPricedAtInChannel(ProductInterface $product, $price, ChannelInterface $channel)
+    public function thisProductIsAlsoPricedAtInChannel(ProductInterface $product, int $price, ChannelInterface $channel)
     {
         $product->addChannel($channel);
 
@@ -228,7 +178,7 @@ final class ProductContext implements Context
     /**
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") available in (channel "[^"]+") and (channel "[^"]+")$/
      */
-    public function storeHasAProductPricedAtAvailableInChannels($productName, $price = 100, ...$channels)
+    public function storeHasAProductPricedAtAvailableInChannels($productName, int $price = 100, ...$channels)
     {
         $product = $this->createProduct($productName, $price);
         /** @var ProductVariantInterface $productVariant */
@@ -431,7 +381,7 @@ final class ProductContext implements Context
     /**
      * @Given /^(this variant) is also priced at ("[^"]+") in ("([^"]+)" channel)$/
      */
-    public function thisVariantIsAlsoPricedAtInChannel(ProductVariantInterface $productVariant, $price, ChannelInterface $channel)
+    public function thisVariantIsAlsoPricedAtInChannel(ProductVariantInterface $productVariant, string $price, ChannelInterface $channel)
     {
         $productVariant->addChannelPricing($this->createChannelPricingForChannel(
             $this->getPriceFromString(str_replace(['$', '€', '£'], '', $price)),
@@ -628,7 +578,7 @@ final class ProductContext implements Context
     /**
      * @Given /^(this product) is available in "([^"]+)" ([^"]+) priced at ("[^"]+")$/
      */
-    public function thisProductIsAvailableInSize(ProductInterface $product, $optionValueName, $optionName, $price)
+    public function thisProductIsAvailableInSize(ProductInterface $product, $optionValueName, $optionName, int $price)
     {
         /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createNew();
@@ -731,7 +681,7 @@ final class ProductContext implements Context
      * @Given /^the (product "[^"]+") changed its price to ("[^"]+")$/
      * @Given /^(this product) price has been changed to ("[^"]+")$/
      */
-    public function theProductChangedItsPriceTo(ProductInterface $product, $price)
+    public function theProductChangedItsPriceTo(ProductInterface $product, int $price)
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
@@ -799,11 +749,10 @@ final class ProductContext implements Context
     /**
      * @param string $productName
      * @param int $price
-     * @param ChannelInterface|null $channel
      *
      * @return ProductInterface
      */
-    private function createProduct($productName, $price = 100, ChannelInterface $channel = null)
+    private function createProduct($productName, int $price = 100, ChannelInterface $channel = null)
     {
         if (null === $channel && $this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');
@@ -842,7 +791,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param ProductOptionInterface $option
      * @param string $value
      * @param string $code
      *
@@ -862,9 +810,6 @@ final class ProductContext implements Context
         return $optionValue;
     }
 
-    /**
-     * @param ProductInterface $product
-     */
     private function saveProduct(ProductInterface $product)
     {
         $this->productRepository->add($product);
@@ -882,7 +827,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param ProductInterface $product
      * @param string $productVariantName
      * @param int $price
      * @param string $code
@@ -922,7 +866,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param ProductInterface $product
      * @param string $name
      * @param string $locale
      */
@@ -943,7 +886,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param ProductVariantInterface $productVariant
      * @param string $name
      * @param string $locale
      */
@@ -959,11 +901,10 @@ final class ProductContext implements Context
 
     /**
      * @param int $price
-     * @param ChannelInterface|null $channel
      *
      * @return ChannelPricingInterface
      */
-    private function createChannelPricingForChannel($price, ChannelInterface $channel = null)
+    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null)
     {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();

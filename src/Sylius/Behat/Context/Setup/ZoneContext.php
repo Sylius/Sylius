@@ -31,38 +31,21 @@ use Symfony\Component\Intl\Intl;
 
 final class ZoneContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $zoneRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @var ZoneFactoryInterface
-     */
+    /** @var ZoneFactoryInterface */
     private $zoneFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $zoneMemberFactory;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $zoneRepository
-     * @param ObjectManager $objectManager
-     * @param ZoneFactoryInterface $zoneFactory
-     * @param FactoryInterface $zoneMemberFactory
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $zoneRepository,
@@ -188,8 +171,6 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @param CodeAwareInterface $zoneMember
-     *
      * @return ZoneMemberInterface
      */
     private function createZoneMember(CodeAwareInterface $zoneMember)
@@ -203,11 +184,7 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @param string $name
-     * @param string|null $code
      * @param string $scope
-     *
-     * @return ZoneInterface
      */
     private function createZone(string $name, ?string $code = null, ?string $scope = Scope::ALL): ZoneInterface
     {

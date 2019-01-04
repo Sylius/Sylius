@@ -19,14 +19,9 @@ use Webmozart\Assert\Assert;
 
 final class EmailChecker implements EmailCheckerInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $spoolDirectory;
 
-    /**
-     * @param string $spoolDirectory
-     */
     public function __construct(string $spoolDirectory)
     {
         $this->spoolDirectory = $spoolDirectory;
@@ -95,20 +90,12 @@ final class EmailChecker implements EmailCheckerInterface
         return $this->spoolDirectory;
     }
 
-    /**
-     * @param \Swift_Message $message
-     * @param string $recipient
-     *
-     * @return bool
-     */
     private function isMessageTo(\Swift_Message $message, string $recipient): bool
     {
         return array_key_exists($recipient, $message->getTo());
     }
 
     /**
-     * @param string $recipient
-     *
      * @throws \InvalidArgumentException
      */
     private function assertRecipientIsValid(string $recipient): void
@@ -117,14 +104,12 @@ final class EmailChecker implements EmailCheckerInterface
         Assert::string($recipient, sprintf('The recipient must be a string, %s given.', gettype($recipient)));
         Assert::notEq(
             false,
-            filter_var($recipient, FILTER_VALIDATE_EMAIL),
+            filter_var($recipient, \FILTER_VALIDATE_EMAIL),
             'Given recipient is not a valid email address.'
         );
     }
 
     /**
-     * @param string $directory
-     *
      * @return array|\Swift_Message[]
      */
     private function getMessages(string $directory): array

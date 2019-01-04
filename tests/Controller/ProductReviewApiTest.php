@@ -20,17 +20,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductReviewApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -146,7 +142,7 @@ EOT;
         /** @var ProductInterface $product */
         $product = $productReviewsData['product1'];
 
-        $this->client->request('POST', $this->getReviewListUrl($product), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', $this->getReviewListUrl($product), [], [], static::$authorizedHeaderWithContentType);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'product_review/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -183,7 +179,7 @@ EOT;
         /** @var ReviewInterface $productReview */
         $productReview = $productReviewsData['productReview1'];
 
-        $this->client->request('DELETE', $this->getReviewUrl($product, $productReview), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getReviewUrl($product, $productReview), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -333,22 +329,11 @@ EOT;
         $this->assertResponse($response, 'product_review/change_status_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    /**
-     * @param ProductInterface $product
-     *
-     * @return string
-     */
     private function getReviewListUrl(ProductInterface $product): string
     {
         return sprintf('/api/v1/products/%s/reviews/', $product->getCode());
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param ReviewInterface $productReview
-     *
-     * @return string
-     */
     private function getReviewUrl(ProductInterface $product, ReviewInterface $productReview): string
     {
         return sprintf('%s%s', $this->getReviewListUrl($product), $productReview->getId());

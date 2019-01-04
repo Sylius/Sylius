@@ -17,51 +17,30 @@ use Webmozart\Assert\Assert;
 
 class Grid
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $code;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $driver;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $driverConfiguration;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $sorting = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $limits = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $fields = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $filters = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $actionGroups = [];
 
-    /**
-     * @param string $code
-     * @param string $driver
-     * @param array $driverConfiguration
-     */
     private function __construct(string $code, string $driver, array $driverConfiguration)
     {
         $this->code = $code;
@@ -69,84 +48,53 @@ class Grid
         $this->driverConfiguration = $driverConfiguration;
     }
 
-    /**
-     * @param string $code
-     * @param string $driver
-     * @param array $driverConfiguration
-     *
-     * @return self
-     */
     public static function fromCodeAndDriverConfiguration(string $code, string $driver, array $driverConfiguration): self
     {
         return new self($code, $driver, $driverConfiguration);
     }
 
-    /**
-     * @return string
-     */
     public function getCode(): string
     {
         return $this->code;
     }
 
-    /**
-     * @return string
-     */
     public function getDriver(): string
     {
         return $this->driver;
     }
 
-    /**
-     * @return array
-     */
     public function getDriverConfiguration(): array
     {
         return $this->driverConfiguration;
     }
 
-    /**
-     * @param array $driverConfiguration
-     */
     public function setDriverConfiguration(array $driverConfiguration): void
     {
         $this->driverConfiguration = $driverConfiguration;
     }
 
-    /**
-     * @return array
-     */
     public function getSorting(): array
     {
         return $this->sorting;
     }
 
-    /**
-     * @param array $sorting
-     */
     public function setSorting(array $sorting): void
     {
         $this->sorting = $sorting;
     }
 
-    /**
-     * @return array
-     */
     public function getLimits(): array
     {
         return $this->limits;
     }
 
-    /**
-     * @param array $limits
-     */
     public function setLimits(array $limits): void
     {
         $this->limits = $limits;
     }
 
     /**
-     * @return array
+     * @return array|Field[]
      */
     public function getFields(): array
     {
@@ -154,16 +102,16 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return array|Field[]
      */
     public function getEnabledFields(): array
     {
-        return $this->getEnabledItems($this->getFields());
+        return array_filter($this->getFields(), function (Field $field): bool {
+            return $field->isEnabled();
+        });
     }
 
     /**
-     * @param Field $field
-     *
      * @throws \InvalidArgumentException
      */
     public function addField(Field $field): void
@@ -175,9 +123,6 @@ class Grid
         $this->fields[$name] = $field;
     }
 
-    /**
-     * @param string $name
-     */
     public function removeField(string $name): void
     {
         if ($this->hasField($name)) {
@@ -186,10 +131,6 @@ class Grid
     }
 
     /**
-     * @param string $name
-     *
-     * @return Field
-     *
      * @throws \InvalidArgumentException
      */
     public function getField(string $name): Field
@@ -199,9 +140,6 @@ class Grid
         return $this->fields[$name];
     }
 
-    /**
-     * @param Field $field
-     */
     public function setField(Field $field): void
     {
         $name = $field->getName();
@@ -209,18 +147,13 @@ class Grid
         $this->fields[$name] = $field;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
     public function hasField(string $name): bool
     {
         return array_key_exists($name, $this->fields);
     }
 
     /**
-     * @return array
+     * @return array|ActionGroup[]
      */
     public function getActionGroups(): array
     {
@@ -228,16 +161,17 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return array|ActionGroup[]
      */
     public function getEnabledActionGroups(): array
     {
-        return $this->getEnabledItems($this->getActionGroups());
+        return array_filter($this->getActionGroups(), function (ActionGroup $actionGroup): bool {
+            // TODO: There's no `isEnabled` method on ActionGroup, so we assume all of them are enabled
+            return true;
+        });
     }
 
     /**
-     * @param ActionGroup $actionGroup
-     *
      * @throws \InvalidArgumentException
      */
     public function addActionGroup(ActionGroup $actionGroup): void
@@ -249,9 +183,6 @@ class Grid
         $this->actionGroups[$name] = $actionGroup;
     }
 
-    /**
-     * @param string $name
-     */
     public function removeActionGroup(string $name): void
     {
         if ($this->hasActionGroup($name)) {
@@ -259,11 +190,6 @@ class Grid
         }
     }
 
-    /**
-     * @param string $name
-     *
-     * @return ActionGroup
-     */
     public function getActionGroup(string $name): ActionGroup
     {
         Assert::true($this->hasActionGroup($name), sprintf('ActionGroup "%s" does not exist.', $name));
@@ -271,9 +197,6 @@ class Grid
         return $this->actionGroups[$name];
     }
 
-    /**
-     * @param ActionGroup $actionGroup
-     */
     public function setActionGroup(ActionGroup $actionGroup): void
     {
         $name = $actionGroup->getName();
@@ -282,9 +205,7 @@ class Grid
     }
 
     /**
-     * @param string $groupName
-     *
-     * @return Action[]
+     * @return array|Action[]
      */
     public function getActions(string $groupName): array
     {
@@ -292,25 +213,22 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return array|Action[]
      */
     public function getEnabledActions($groupName): array
     {
-        return $this->getEnabledItems($this->getActions($groupName));
+        return array_filter($this->getActions($groupName), function (Action $action): bool {
+            return $action->isEnabled();
+        });
     }
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
     public function hasActionGroup(string $name): bool
     {
         return array_key_exists($name, $this->actionGroups);
     }
 
     /**
-     * @return array
+     * @return array|Filter[]
      */
     public function getFilters(): array
     {
@@ -318,16 +236,16 @@ class Grid
     }
 
     /**
-     * @return array
+     * @return array|Filter[]
      */
     public function getEnabledFilters(): array
     {
-        return $this->getEnabledItems($this->getFilters());
+        return array_filter($this->getFilters(), function (Filter $filter): bool {
+            return $filter->isEnabled();
+        });
     }
 
     /**
-     * @param Filter $filter
-     *
      * @throws \InvalidArgumentException
      */
     public function addFilter(Filter $filter): void
@@ -339,9 +257,6 @@ class Grid
         $this->filters[$name] = $filter;
     }
 
-    /**
-     * @param string $name
-     */
     public function removeFilter(string $name): void
     {
         if ($this->hasFilter($name)) {
@@ -349,11 +264,6 @@ class Grid
         }
     }
 
-    /**
-     * @param string $name
-     *
-     * @return Filter
-     */
     public function getFilter(string $name): Filter
     {
         Assert::true($this->hasFilter($name), sprintf('Filter "%s" does not exist.', $name));
@@ -361,9 +271,6 @@ class Grid
         return $this->filters[$name];
     }
 
-    /**
-     * @param Filter $filter
-     */
     public function setFilter(Filter $filter): void
     {
         $name = $filter->getName();
@@ -371,30 +278,8 @@ class Grid
         $this->filters[$name] = $filter;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
     public function hasFilter(string $name): bool
     {
         return array_key_exists($name, $this->filters);
-    }
-
-    /**
-     * @param array $items
-     *
-     * @return array
-     */
-    private function getEnabledItems(array $items): array
-    {
-        $filteredItems = [];
-        foreach ($items as $item) {
-            if ($item->isEnabled()) {
-                $filteredItems[] = $item;
-            }
-        }
-
-        return $filteredItems;
     }
 }

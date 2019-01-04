@@ -18,8 +18,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 interface ThemeHierarchyProviderInterface
 {
     /**
-     * @param ThemeInterface $theme
-     *
      * @return array|ThemeInterface[]
      *
      * @throws \InvalidArgumentException If dependencies could not be resolved.

@@ -25,9 +25,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class SyliusThemeExtension extends Extension implements PrependExtensionInterface
 {
-    /**
-     * @var ConfigurationSourceFactoryInterface[]
-     */
+    /** @var ConfigurationSourceFactoryInterface[] */
     private $configurationSourceFactories = [];
 
     /**
@@ -70,11 +68,6 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
         $this->prependTwig($container, $loader);
     }
 
-    /**
-     * @api
-     *
-     * @param ConfigurationSourceFactoryInterface $configurationSourceFactory
-     */
     public function addConfigurationSourceFactory(ConfigurationSourceFactoryInterface $configurationSourceFactory): void
     {
         $this->configurationSourceFactories[$configurationSourceFactory->getName()] = $configurationSourceFactory;
@@ -92,10 +85,6 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
         return $configuration;
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param LoaderInterface $loader
-     */
     private function prependTwig(ContainerBuilder $container, LoaderInterface $loader): void
     {
         if (!$container->hasExtension('twig')) {
@@ -105,10 +94,6 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
         $loader->load('services/integrations/twig.xml');
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array $config
-     */
     private function resolveConfigurationSources(ContainerBuilder $container, array $config): void
     {
         $configurationProviders = [];

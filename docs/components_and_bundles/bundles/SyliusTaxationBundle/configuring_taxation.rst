@@ -14,24 +14,21 @@ First step is to create a new tax category.
 
     public function configureAction()
     {
-        $factory = $this->container->get('sylius.factory.tax_category');
-        $manager = $this->container->get('sylius.manager.tax_category');
+        $taxCategoryFactory = $this->container->get('sylius.factory.tax_category');
+        $taxCategoryManager = $this->container->get('sylius.manager.tax_category');
 
-        $clothing = $factory
-            ->createNew()
-            ->setName('Clothing')
-            ->setDescription('T-Shirts and this kind of stuff.')
-        ;
-        $food = $factory
-            ->createNew()
-            ->setName('Food')
-            ->setDescription('Yummy!')
-        ;
+        $clothingTaxCategory = $taxCategoryFactory->createNew();
+        $clothingTaxCategory->setName('Clothing');
+        $clothingTaxCategory->setDescription('T-Shirts and this kind of stuff.');
 
-        $manager->persist($clothing);
-        $manager->persist($food);
+        $foodTaxCategory = $taxCategoryFactory->createNew();
+        $foodTaxCategory->setName('Food');
+        $foodTaxCategory->setDescription('Yummy!');
 
-        $manager->flush();
+        $taxCategoryManager->persist($clothingTaxCategory);
+        $taxCategoryManager->persist($foodTaxCategory);
+
+        $taxCategoryManager->flush();
     }
 
 Categorizing the taxables
@@ -45,16 +42,16 @@ Second thing to do is to classify the taxables, in our example we'll get two pro
 
     public function configureAction()
     {
-        $tshirt = // ...
-        $banana = // ... Some logic behind loading entities.
+        $tshirtProduct = // ...
+        $bananaProduct = // ... Some logic behind loading entities.
 
-        $repository = $this->container->get('sylius.repository.tax_category');
+        $taxCategoryRepository = $this->container->get('sylius.repository.tax_category');
 
-        $clothing = $repository->findOneBy(array('name' => 'Clothing'));
-        $food = $repository->findOneBy(array('name' => 'Food'));
+        $clothingTaxCategory = $taxCategoryRepository->findOneBy(['name' => 'Clothing']);
+        $foodTaxCategory = $taxCategoryRepository->findOneBy(['name' => 'Food']);
 
-        $tshirt->setTaxCategory($clothing);
-        $banana->setTaxCategory($food);
+        $tshirtProduct->setTaxCategory($clothingTaxCategory);
+        $bananaProduct->setTaxCategory($foodTaxCategory);
 
         // Save the product entities.
     }
@@ -72,27 +69,30 @@ Finally, you have to create appropriate tax rates for each of categories.
     {
         $taxCategoryRepository = $this->container->get('sylius.repository.tax_category');
 
-        $clothing = $taxCategoryRepository->findOneBy(array('name' => 'Clothing'));
-        $food = $taxCategoryRepository->findOneBy(array('name' => 'Food'));
+        $clothingTaxCategory = $taxCategoryRepository->findOneBy(['name' => 'Clothing']);
+        $foodTaxCategory = $taxCategoryRepository->findOneBy(['name' => 'Food']);
 
-        $factory = $this->container->get('sylius.factory.tax_rate');
-        $manager = $this->container->get('sylius.repository.tax_rate');
+        $taxRateFactory = $this->container->get('sylius.factory.tax_rate');
+        $taxRateManager = $this->container->get('sylius.repository.tax_rate');
 
-        $clothingTax = $factory
-            ->createNew()
-            ->setName('Clothing Tax')
-            ->setAmount(0.08)
-        ;
-        $foodTax = $factory
-            ->createNew()
-            ->setName('Food')
-            ->setAmount(0.12)
-        ;
+        $clothingTaxRate = $taxRateFactory->createNew();
+        $clothingTaxRate->setCategory($clothingTaxCategory);
+        $clothingTaxRate->setName('Clothing Tax');
+        $clothingTaxRate->setCode('CT');
+        $clothingTaxRate->setAmount(0.08);
+        $clothingTaxRate->setCalculator('default');
 
-        $manager->persist($clothingTax);
-        $manager->persist($foodTax);
+        $foodTaxRate = $taxRateFactory->createNew();
+        $foodTaxRate->setCategory($foodTaxCategory);
+        $foodTaxRate->setName('Food');
+        $foodTaxRate->setCode('F');
+        $foodTaxRate->setAmount(0.12);
+        $foodTaxRate->setCalculator('default');
 
-        $manager->flush();
+        $taxRateManager->persist($clothingTaxRate);
+        $taxRateManager->persist($foodTaxRate);
+
+        $taxRateManager->flush();
     }
 
 

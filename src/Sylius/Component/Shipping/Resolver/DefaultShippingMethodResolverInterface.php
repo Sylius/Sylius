@@ -20,10 +20,6 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 interface DefaultShippingMethodResolverInterface
 {
     /**
-     * @param ShipmentInterface $shipment
-     *
-     * @return ShippingMethodInterface
-     *
      * @throws UnresolvedDefaultShippingMethodException
      */
     public function getDefaultShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface;

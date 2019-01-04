@@ -20,6 +20,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.behat.page.admin.order.index" class="%sylius.behat.page.admin.order.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_order_index</argument>
         </service>
@@ -29,6 +31,6 @@
         <service id="sylius.behat.page.admin.order.update" class="%sylius.behat.page.admin.order.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_order_update</argument>
         </service>
-        <service id="sylius.behat.page.admin.order.history" class="%sylius.behat.page.admin.order.history.class%" parent="sylius.behat.symfony_page" />
+        <service id="sylius.behat.page.admin.order.history" class="%sylius.behat.page.admin.order.history.class%" parent="sylius.behat.symfony_page" public="false" />
     </services>
 </container>

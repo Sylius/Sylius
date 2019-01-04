@@ -21,36 +21,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SimilarProductAssociationFixture extends AbstractFixture
 {
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $productAssociationTypeFixture;
 
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $productAssociationFixture;
 
-    /**
-     * @var ProductRepositoryInterface
-     */
+    /** @var ProductRepositoryInterface */
     private $productRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param AbstractResourceFixture $productAssociationTypeFixture
-     * @param AbstractResourceFixture $productAssociationFixture
-     * @param ProductRepositoryInterface $productRepository
-     */
     public function __construct(
         AbstractResourceFixture $productAssociationTypeFixture,
         AbstractResourceFixture $productAssociationFixture,
@@ -116,8 +101,6 @@ class SimilarProductAssociationFixture extends AbstractFixture
     }
 
     /**
-     * @param ProductInterface $owner
-     *
      * @return array|string[]
      */
     private function getAssociatedProductsAsArray(ProductInterface $owner): array

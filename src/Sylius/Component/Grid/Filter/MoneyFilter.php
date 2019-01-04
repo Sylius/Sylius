@@ -41,19 +41,13 @@ final class MoneyFilter implements FilterInterface
             $dataSource->restrict($expressionBuilder->equals($options['currency_field'], $data['currency']));
         }
         if ('' !== $greaterThan) {
-            $expressionBuilder->greaterThan($field, $this->normalizeAmount((float) $greaterThan, $scale));
+            $dataSource->restrict($expressionBuilder->greaterThan($field, $this->normalizeAmount((float) $greaterThan, $scale)));
         }
         if ('' !== $lessThan) {
-            $expressionBuilder->lessThan($field, $this->normalizeAmount((float) $lessThan, $scale));
+            $dataSource->restrict($expressionBuilder->lessThan($field, $this->normalizeAmount((float) $lessThan, $scale)));
         }
     }
 
-    /**
-     * @param float $amount
-     * @param int $scale
-     *
-     * @return int
-     */
     private function normalizeAmount(float $amount, int $scale): int
     {
         return (int) round($amount * (10 ** $scale));
@@ -61,9 +55,6 @@ final class MoneyFilter implements FilterInterface
 
     /**
      * @param string[] $data
-     * @param string $key
-     *
-     * @return string
      */
     private function getDataValue(array $data, string $key): string
     {

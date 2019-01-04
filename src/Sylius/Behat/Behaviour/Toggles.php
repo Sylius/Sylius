@@ -20,12 +20,12 @@ trait Toggles
     /**
      * @return NodeElement
      */
-    abstract protected function getToggleableElement();
+    abstract protected function getToggleableElement(): NodeElement;
 
     /**
      * @throws \RuntimeException If already enabled
      */
-    public function enable()
+    public function enable(): void
     {
         $toggleableElement = $this->getToggleableElement();
         $this->assertCheckboxState($toggleableElement, false);
@@ -36,7 +36,7 @@ trait Toggles
     /**
      * @throws \RuntimeException If already disabled
      */
-    public function disable()
+    public function disable(): void
     {
         $toggleableElement = $this->getToggleableElement();
         $this->assertCheckboxState($toggleableElement, true);
@@ -45,7 +45,6 @@ trait Toggles
     }
 
     /**
-     * @param NodeElement $toggleableElement
      * @param bool $expectedState
      *
      * @throws \RuntimeException

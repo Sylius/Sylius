@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_product_index';
     }

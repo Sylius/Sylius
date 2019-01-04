@@ -27,39 +27,25 @@ class ShippingMethod implements ShippingMethodInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
-    /**
-     * @var ShippingCategoryInterface
-     */
+    /** @var ShippingCategoryInterface */
     protected $category;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $calculator;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $configuration = [];
 
     public function __construct()
@@ -69,9 +55,6 @@ class ShippingMethod implements ShippingMethodInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->getTranslation()->__toString();
@@ -214,8 +197,6 @@ class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return ShippingMethodTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

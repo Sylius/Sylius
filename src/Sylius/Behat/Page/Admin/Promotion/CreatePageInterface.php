@@ -18,108 +18,50 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
+    public function specifyCode(string $code): void;
+
+    public function nameIt(string $name): void;
+
+    public function addRule(string $ruleName): void;
+
+    public function selectRuleOption(string $option, string $value, bool $multiple = false): void;
 
     /**
-     * @param string $name
-     */
-    public function nameIt($name);
-
-    /**
-     * @param string $ruleName
-     */
-    public function addRule($ruleName);
-
-    /**
-     * @param string $option
-     * @param string $value
-     * @param bool $multiple
-     */
-    public function selectRuleOption($option, $value, $multiple = false);
-
-    /**
-     * @param string $option
      * @param string|string[] $value
-     * @param bool $multiple
      */
-    public function selectAutocompleteRuleOption($option, $value, $multiple = false);
+    public function selectAutocompleteRuleOption(string $option, $value, bool $multiple = false): void;
+
+    public function fillRuleOption(string $option, string $value): void;
+
+    public function fillRuleOptionForChannel(string $channelName, string $option, string $value): void;
+
+    public function addAction(string $actionName): void;
+
+    public function selectActionOption(string $option, string $value, bool $multiple = false): void;
+
+    public function fillActionOption(string $option, string $value): void;
+
+    public function fillActionOptionForChannel(string $channelName, string $option, string $value): void;
+
+    public function fillUsageLimit(string $limit): void;
+
+    public function makeExclusive(): void;
+
+    public function checkCouponBased(): void;
+
+    public function checkChannel(string $name): void;
+
+    public function setStartsAt(\DateTimeInterface $dateTime): void;
+
+    public function setEndsAt(\DateTimeInterface $dateTime): void;
 
     /**
-     * @param string $option
-     * @param string $value
-     */
-    public function fillRuleOption($option, $value);
-
-    /**
-     * @param string $channelName
-     * @param string $option
-     * @param string $value
-     */
-    public function fillRuleOptionForChannel($channelName, $option, $value);
-
-    /**
-     * @param string $actionName
-     */
-    public function addAction($actionName);
-
-    /**
-     * @param string $option
-     * @param string $value
-     * @param bool $multiple
-     */
-    public function selectActionOption($option, $value, $multiple = false);
-
-    /**
-     * @param string $option
-     * @param string $value
-     */
-    public function fillActionOption($option, $value);
-
-    /**
-     * @param string $channelName
-     * @param string $option
-     * @param string $value
-     */
-    public function fillActionOptionForChannel($channelName, $option, $value);
-
-    /**
-     * @param string $limit
-     */
-    public function fillUsageLimit($limit);
-
-    public function makeExclusive();
-
-    public function checkCouponBased();
-
-    /**
-     * @param string $name
-     */
-    public function checkChannel($name);
-
-    /**
-     * @param \DateTimeInterface $dateTime
-     */
-    public function setStartsAt(\DateTimeInterface $dateTime);
-
-    /**
-     * @param \DateTimeInterface $dateTime
-     */
-    public function setEndsAt(\DateTimeInterface $dateTime);
-
-    /**
-     * @return string
-     *
      * @throws ElementNotFoundException
      */
-    public function getValidationMessageForAction();
+    public function getValidationMessageForAction(): string;
 
     /**
-     * @param string $option
      * @param string|string[] $value
-     * @param bool $multiple
      */
-    public function selectAutoCompleteFilterOption($option, $value, $multiple = false);
+    public function selectAutoCompleteFilterOption(string $option, $value, bool $multiple = false): void;
 }

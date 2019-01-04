@@ -18,9 +18,7 @@ use Sylius\Component\Payment\Model\Payment as BasePayment;
 
 class Payment extends BasePayment implements PaymentInterface
 {
-    /**
-     * @var BaseOrderInterface
-     */
+    /** @var BaseOrderInterface */
     protected $order;
 
     /**

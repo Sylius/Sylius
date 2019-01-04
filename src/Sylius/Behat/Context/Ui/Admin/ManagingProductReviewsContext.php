@@ -23,26 +23,15 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductReviewsContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
@@ -109,7 +98,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iChangeItsTitleTo($title = null)
     {
-        $this->updatePage->specifyTitle($title);
+        $this->updatePage->specifyTitle($title ?? '');
     }
 
     /**
@@ -118,7 +107,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iChangeItsCommentTo($comment = null)
     {
-        $this->updatePage->specifyComment($comment);
+        $this->updatePage->specifyComment($comment ?? '');
     }
 
     /**

@@ -26,9 +26,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
  */
 trait SyliusPluginTrait
 {
-    /**
-     * @var ExtensionInterface|bool
-     */
+    /** @var ExtensionInterface|bool */
     private $containerExtension;
 
     /**
@@ -91,8 +89,6 @@ trait SyliusPluginTrait
 
     /**
      * Returns the plugin's container extension class.
-     *
-     * @return string
      */
     protected function getContainerExtensionClass(): string
     {

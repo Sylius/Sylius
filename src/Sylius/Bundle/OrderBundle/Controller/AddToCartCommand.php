@@ -18,37 +18,23 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 
 final class AddToCartCommand implements AddToCartCommandInterface
 {
-    /**
-     * @var OrderInterface
-     */
+    /** @var OrderInterface */
     private $cart;
 
-    /**
-     * @var OrderItemInterface
-     */
+    /** @var OrderItemInterface */
     private $cartItem;
 
-    /**
-     * @param OrderInterface $cart
-     * @param OrderItemInterface $cartItem
-     */
     public function __construct(OrderInterface $cart, OrderItemInterface $cartItem)
     {
         $this->cart = $cart;
         $this->cartItem = $cartItem;
     }
 
-    /**
-     * @return OrderInterface
-     */
     public function getCart(): OrderInterface
     {
         return $this->cart;
     }
 
-    /**
-     * @return OrderItemInterface
-     */
     public function getCartItem(): OrderItemInterface
     {
         return $this->cartItem;

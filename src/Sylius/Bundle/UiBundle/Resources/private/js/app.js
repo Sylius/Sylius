@@ -23,11 +23,11 @@
     $('.link.ui.dropdown').dropdown({action: 'hide'});
     $('.button.ui.dropdown').dropdown({action: 'hide'});
     $('.ui.fluid.search.selection.ui.dropdown').dropdown();
-    $('.menu .item').tab();
-    $('.card .image').dimmer({on: 'hover'});
+    $('.ui.tabular.menu .item, .sylius-tabular-form .menu .item').tab();
+    $('.ui.card .dimmable.image, .ui.cards .card .dimmable.image').dimmer({on: 'hover'});
     $('.ui.rating').rating('disable');
 
-    $('form.loadable button').on('click', function() {
+    $('form.loadable button[type=submit]').on('click', function() {
       return $(this).closest('form').addClass('loading');
     });
     $('.loadable.button').on('click', function() {

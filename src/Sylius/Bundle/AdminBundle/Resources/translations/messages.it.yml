@@ -12,6 +12,7 @@ sylius:
                     inventory: Magazzino
                     options: Opzioni
                     products: Prodotti
+                    taxons: Taxons
                 configuration:
                     admin_users: Amministratori
                     channels: Canali

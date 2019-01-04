@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ProductVariant;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -22,94 +23,64 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyPrice($price)
+    public function specifyPrice(int $price): void
     {
         $this->getDocument()->fillField('Price', $price);
     }
 
-    public function disableTracking()
+    public function disableTracking(): void
     {
         $this->getElement('tracked')->uncheck();
     }
 
-    public function enableTracking()
+    public function enableTracking(): void
     {
         $this->getElement('tracked')->check();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isTracked()
+    public function isTracked(): bool
     {
         return $this->getElement('tracked')->isChecked();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency)
+    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency): string
     {
         $priceElement = $this->getElement('pricing_configuration')->find('css', sprintf('label:contains("%s %s")', $channel->getCode(), $currency->getCode()))->getParent();
 
         return $priceElement->find('css', 'input')->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriceForChannel($channelName)
+    public function getPriceForChannel(string $channelName): string
     {
         return $this->getElement('price', ['%channelName%' => $channelName])->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOriginalPriceForChannel($channelName)
+    public function getOriginalPriceForChannel(string $channelName): string
     {
         return $this->getElement('original_price', ['%channelName%' => $channelName])->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getNameInLanguage($language)
+    public function getNameInLanguage(string $language): string
     {
         return $this->getElement('name', ['%language%' => $language])->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyCurrentStock($amount)
+    public function specifyCurrentStock(int $amount): void
     {
         $this->getElement('on_hand')->setValue($amount);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isShippingRequired()
+    public function isShippingRequired(): bool
     {
         return $this->getElement('shipping_required')->isChecked();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_variant_code',

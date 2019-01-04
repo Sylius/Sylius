@@ -19,20 +19,12 @@ use Webmozart\Assert\Assert;
 
 final class EmailProvider implements EmailProviderInterface
 {
-    /**
-     * @var EmailFactoryInterface
-     */
+    /** @var EmailFactoryInterface */
     private $emailFactory;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $configuration;
 
-    /**
-     * @param EmailFactoryInterface $emailFactory
-     * @param array $configuration
-     */
     public function __construct(
         EmailFactoryInterface $emailFactory,
         array $configuration
@@ -49,11 +41,6 @@ final class EmailProvider implements EmailProviderInterface
         return $this->getEmailFromConfiguration($code);
     }
 
-    /**
-     * @param string $code
-     *
-     * @return EmailInterface
-     */
     private function getEmailFromConfiguration(string $code): EmailInterface
     {
         Assert::keyExists($this->configuration, $code, sprintf('Email with code "%s" does not exist!', $code));

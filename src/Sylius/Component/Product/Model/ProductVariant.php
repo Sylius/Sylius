@@ -27,29 +27,19 @@ class ProductVariant implements ProductVariantInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var ProductInterface
-     */
+    /** @var ProductInterface */
     protected $product;
 
-    /**
-     * @var Collection|ProductOptionValueInterface[]
-     */
+    /** @var Collection|ProductOptionValueInterface[] */
     protected $optionValues;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
     public function __construct()
@@ -179,8 +169,6 @@ class ProductVariant implements ProductVariantInterface
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductVariantTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

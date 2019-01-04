@@ -25,39 +25,25 @@ use Webmozart\Assert\Assert;
 
 class Product extends BaseProduct implements ProductInterface, ReviewableProductInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
 
-    /**
-     * @var Collection|ProductTaxonInterface[]
-     */
+    /** @var Collection|ProductTaxonInterface[] */
     protected $productTaxons;
 
-    /**
-     * @var Collection|ChannelInterface[]
-     */
+    /** @var Collection|ChannelInterface[] */
     protected $channels;
 
-    /**
-     * @var BaseTaxonInterface
-     */
+    /** @var BaseTaxonInterface */
     protected $mainTaxon;
 
-    /**
-     * @var Collection|ReviewInterface[]
-     */
+    /** @var Collection|ReviewInterface[] */
     protected $reviews;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     protected $averageRating = 0;
 
-    /**
-     * @var Collection|ImageInterface[]
-     */
+    /** @var Collection|ImageInterface[] */
     protected $images;
 
     public function __construct()
@@ -349,8 +335,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

@@ -17,14 +17,9 @@ use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
 
 final class LocaleExtension extends \Twig_Extension
 {
-    /**
-     * @var LocaleHelperInterface
-     */
+    /** @var LocaleHelperInterface */
     private $localeHelper;
 
-    /**
-     * @param LocaleHelperInterface $localeHelper
-     */
     public function __construct(LocaleHelperInterface $localeHelper)
     {
         $this->localeHelper = $localeHelper;

@@ -25,23 +25,15 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  */
 class NameResolverListener
 {
-    /**
-     * @var DocumentManagerInterface
-     */
+    /** @var DocumentManagerInterface */
     private $documentManager;
 
-    /**
-     * @param DocumentManagerInterface $documentManager
-     */
     public function __construct(
         DocumentManagerInterface $documentManager
     ) {
         $this->documentManager = $documentManager;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function onEvent(ResourceControllerEvent $event)
     {
         $document = $event->getSubject();

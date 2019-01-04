@@ -17,14 +17,9 @@ use Symfony\Component\Templating\Helper\Helper;
 
 final class PriceExtension extends \Twig_Extension
 {
-    /**
-     * @var Helper
-     */
+    /** @var Helper */
     private $helper;
 
-    /**
-     * @param Helper $helper
-     */
     public function __construct(Helper $helper)
     {
         $this->helper = $helper;

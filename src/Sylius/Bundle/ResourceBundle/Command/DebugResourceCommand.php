@@ -23,14 +23,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class DebugResourceCommand extends Command
 {
-    /**
-     * @var RegistryInterface
-     */
+    /** @var RegistryInterface */
     private $registry;
 
-    /**
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct();
@@ -78,9 +73,6 @@ EOT
         $this->debugResource($metadata, $output);
     }
 
-    /**
-     * @param OutputInterface $output
-     */
     private function listResources(OutputInterface $output): void
     {
         $resources = $this->registry->getAll();
@@ -96,10 +88,6 @@ EOT
         $table->render();
     }
 
-    /**
-     * @param MetadataInterface $metadata
-     * @param OutputInterface $output
-     */
     private function debugResource(MetadataInterface $metadata, OutputInterface $output): void
     {
         $table = new Table($output);
@@ -123,11 +111,7 @@ EOT
     }
 
     /**
-     * @param array $parameters
-     * @param array $flattened
      * @param string $prefix
-     *
-     * @return array
      */
     private function flattenParameters(array $parameters, array $flattened = [], $prefix = ''): array
     {

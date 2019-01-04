@@ -25,32 +25,18 @@ use Webmozart\Assert\Assert;
 
 class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
 {
-    /**
-     * @var CalculatorInterface
-     */
+    /** @var CalculatorInterface */
     private $calculator;
 
-    /**
-     * @var AdjustmentFactoryInterface
-     */
+    /** @var AdjustmentFactoryInterface */
     private $adjustmentFactory;
 
-    /**
-     * @var IntegerDistributorInterface
-     */
+    /** @var IntegerDistributorInterface */
     private $distributor;
 
-    /**
-     * @var TaxRateResolverInterface
-     */
+    /** @var TaxRateResolverInterface */
     private $taxRateResolver;
 
-    /**
-     * @param CalculatorInterface $calculator
-     * @param AdjustmentFactoryInterface $adjustmentFactory
-     * @param IntegerDistributorInterface $distributor
-     * @param TaxRateResolverInterface $taxRateResolver
-     */
     public function __construct(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentFactory,
@@ -95,12 +81,6 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         }
     }
 
-    /**
-     * @param OrderItemUnitInterface $unit
-     * @param int $taxAmount
-     * @param string $label
-     * @param bool $included
-     */
     private function addAdjustment(OrderItemUnitInterface $unit, int $taxAmount, string $label, bool $included): void
     {
         $unitTaxAdjustment = $this->adjustmentFactory

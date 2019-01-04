@@ -24,44 +24,24 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class LocaleContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $localeFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $localeManager;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $channelManager;
 
-    /**
-     * @var LocaleConverterInterface
-     */
+    /** @var LocaleConverterInterface */
     private $localeConverter;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param LocaleConverterInterface $localeConverter
-     * @param FactoryInterface $localeFactory
-     * @param RepositoryInterface $localeRepository
-     * @param ObjectManager $localeManager
-     * @param ObjectManager $channelManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         LocaleConverterInterface $localeConverter,
@@ -167,9 +147,6 @@ final class LocaleContext implements Context
         return $locale;
     }
 
-    /**
-     * @param LocaleInterface $locale
-     */
     private function saveLocale(LocaleInterface $locale)
     {
         $this->sharedStorage->set('locale', $locale);

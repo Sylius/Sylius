@@ -14,16 +14,46 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterface
 {
     /**
      * {@inheritdoc}
-     *
-     * @throws ElementNotFoundException
      */
-    public function checkValidationMessageFor($element, $message)
+    public function getRouteName(): string
+    {
+        return 'sylius_shop_password_reset';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reset(): void
+    {
+        $this->getDocument()->pressButton('Reset');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyNewPassword(string $password): void
+    {
+        $this->getElement('password')->setValue($password);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyConfirmPassword(string $password): void
+    {
+        $this->getElement('confirm_password')->setValue($password);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function checkValidationMessageFor(string $element, string $message): bool
     {
         $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
 
@@ -37,31 +67,11 @@ class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterfac
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
-    {
-        return 'sylius_shop_request_password_reset_token';
-    }
-
-    public function reset()
-    {
-        $this->getDocument()->pressButton('Reset');
-    }
-
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email)
-    {
-        $this->getDocument()->fillField('Email', $email);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'email' => '#sylius_user_request_password_reset_email',
+            'password' => '#sylius_user_reset_password_password_first',
+            'confirm_password' => '#sylius_user_reset_password_password_second',
         ]);
     }
 }

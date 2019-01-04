@@ -19,14 +19,9 @@ use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 
 final class ExpressionBuilder implements ExpressionBuilderInterface
 {
-    /**
-     * @var QueryBuilder
-     */
+    /** @var QueryBuilder */
     private $queryBuilder;
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     */
     public function __construct(QueryBuilder $queryBuilder)
     {
         $this->queryBuilder = $queryBuilder;
@@ -86,7 +81,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        $this->queryBuilder->andWhere($this->getFieldName($field) . ' < :' . $parameterName);
+        return $this->queryBuilder->expr()->lt($this->getFieldName($field), ':' . $parameterName);
     }
 
     /**
@@ -97,7 +92,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        $this->queryBuilder->andWhere($this->getFieldName($field) . ' <= :' . $parameterName);
+        return $this->queryBuilder->expr()->lte($this->getFieldName($field), ':' . $parameterName);
     }
 
     /**
@@ -108,7 +103,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        $this->queryBuilder->andWhere($this->getFieldName($field) . ' > :' . $parameterName);
+        return $this->queryBuilder->expr()->gt($this->getFieldName($field), ':' . $parameterName);
     }
 
     /**
@@ -119,7 +114,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        $this->queryBuilder->andWhere($this->getFieldName($field) . ' >= :' . $parameterName);
+        return $this->queryBuilder->expr()->gte($this->getFieldName($field), ':' . $parameterName);
     }
 
     /**
@@ -186,11 +181,6 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         return $this->queryBuilder->addOrderBy($this->getFieldName($field), $direction);
     }
 
-    /**
-     * @param string $field
-     *
-     * @return string
-     */
     private function getFieldName(string $field): string
     {
         if (false === strpos($field, '.')) {
@@ -200,11 +190,6 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         return $field;
     }
 
-    /**
-     * @param string $field
-     *
-     * @return string
-     */
     private function getParameterName(string $field): string
     {
         $parameterName = str_replace('.', '_', $field);
@@ -217,11 +202,6 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         return $parameterName;
     }
 
-    /**
-     * @param string $parameterName
-     *
-     * @return bool
-     */
     private function hasParameterName(string $parameterName): bool
     {
         return null !== $this->queryBuilder->getParameter($parameterName);

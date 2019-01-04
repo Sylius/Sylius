@@ -25,20 +25,12 @@ use Symfony\Component\Yaml\Yaml;
 
 final class ResourceLoader implements LoaderInterface
 {
-    /**
-     * @var RegistryInterface
-     */
+    /** @var RegistryInterface */
     private $resourceRegistry;
 
-    /**
-     * @var RouteFactoryInterface
-     */
+    /** @var RouteFactoryInterface */
     private $routeFactory;
 
-    /**
-     * @param RegistryInterface $resourceRegistry
-     * @param RouteFactoryInterface $routeFactory
-     */
     public function __construct(RegistryInterface $resourceRegistry, RouteFactoryInterface $routeFactory)
     {
         $this->resourceRegistry = $resourceRegistry;
@@ -135,16 +127,6 @@ final class ResourceLoader implements LoaderInterface
         // Intentionally left blank.
     }
 
-    /**
-     * @param MetadataInterface $metadata
-     * @param array $configuration
-     * @param string $path
-     * @param string $actionName
-     * @param array $methods
-     * @param bool $isApi
-     *
-     * @return Route
-     */
     private function createRoute(
         MetadataInterface $metadata,
         array $configuration,
@@ -185,7 +167,11 @@ final class ResourceLoader implements LoaderInterface
             $defaults['_sylius']['filterable'] = $configuration['filterable'];
         }
         if (isset($configuration['templates']) && in_array($actionName, ['show', 'index', 'create', 'update'], true)) {
-            $defaults['_sylius']['template'] = sprintf('%s:%s.html.twig', $configuration['templates'], $actionName);
+            $defaults['_sylius']['template'] = sprintf(
+                false === strpos($configuration['templates'], ':') ? '%s/%s.html.twig' : '%s:%s.html.twig',
+                $configuration['templates'],
+                $actionName
+            );
         }
         if (isset($configuration['redirect']) && in_array($actionName, ['create', 'update'], true)) {
             $defaults['_sylius']['redirect'] = $this->getRouteName($metadata, $configuration, $configuration['redirect']);
@@ -213,13 +199,6 @@ final class ResourceLoader implements LoaderInterface
         return $this->routeFactory->createRoute($path, $defaults, [], [], '', [], $methods);
     }
 
-    /**
-     * @param MetadataInterface $metadata
-     * @param array $configuration
-     * @param string $actionName
-     *
-     * @return string
-     */
     private function getRouteName(MetadataInterface $metadata, array $configuration, string $actionName): string
     {
         $sectionPrefix = isset($configuration['section']) ? $configuration['section'] . '_' : '';

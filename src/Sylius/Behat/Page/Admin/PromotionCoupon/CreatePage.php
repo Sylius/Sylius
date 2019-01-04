@@ -20,36 +20,24 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use SpecifiesItsCode;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setCustomerUsageLimit($limit)
+    public function setCustomerUsageLimit(int $limit): void
     {
         $this->getDocument()->fillField('Per-Customer Usage Limit', $limit);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setExpiresAt(\DateTimeInterface $date)
+    public function setExpiresAt(\DateTimeInterface $date): void
     {
         $timestamp = $date->getTimestamp();
 
         $this->getDocument()->fillField('Expires at', date('Y-m-d', $timestamp));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setUsageLimit($limit)
+    public function setUsageLimit(int $limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_promotion_coupon_code',

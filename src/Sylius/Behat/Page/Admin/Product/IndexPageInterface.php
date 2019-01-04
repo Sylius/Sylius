@@ -17,8 +17,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as CrudIndexPageInterface;
 
 interface IndexPageInterface extends CrudIndexPageInterface
 {
-    /**
-     * @param string $taxonName
-     */
-    public function filterByTaxon($taxonName);
+    public function filterByTaxon(string $taxonName): void;
+
+    public function hasProductAccessibleImage(string $productCode): bool;
 }

@@ -15,29 +15,18 @@ namespace Sylius\Bundle\ThemeBundle\Translation\Resource;
 
 final class TranslationResource implements TranslationResourceInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $locale;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $format;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $domain;
 
-    /**
-     * @param string $filepath
-     */
     public function __construct(string $filepath)
     {
         $this->name = $filepath;

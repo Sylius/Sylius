@@ -17,22 +17,14 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 final class SuiteEvent
 {
-    /**
-     * @var SuiteInterface
-     */
+    /** @var SuiteInterface */
     private $suite;
 
-    /**
-     * @param SuiteInterface $suite
-     */
     public function __construct(SuiteInterface $suite)
     {
         $this->suite = $suite;
     }
 
-    /**
-     * @return SuiteInterface
-     */
     public function suite(): SuiteInterface
     {
         return $this->suite;

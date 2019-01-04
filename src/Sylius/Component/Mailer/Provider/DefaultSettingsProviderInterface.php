@@ -15,13 +15,7 @@ namespace Sylius\Component\Mailer\Provider;
 
 interface DefaultSettingsProviderInterface
 {
-    /**
-     * @return string
-     */
     public function getSenderName(): string;
 
-    /**
-     * @return string
-     */
     public function getSenderAddress(): string;
 }

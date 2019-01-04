@@ -20,26 +20,15 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 final class OptionsParser implements OptionsParserInterface
 {
-    /**
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     private $container;
 
-    /**
-     * @var ExpressionLanguage
-     */
+    /** @var ExpressionLanguage */
     private $expression;
 
-    /**
-     * @var PropertyAccessorInterface
-     */
+    /** @var PropertyAccessorInterface */
     private $propertyAccessor;
 
-    /**
-     * @param ContainerInterface $container
-     * @param ExpressionLanguage $expression
-     * @param PropertyAccessorInterface $propertyAccessor
-     */
     public function __construct(
         ContainerInterface $container,
         ExpressionLanguage $expression,
@@ -64,13 +53,6 @@ final class OptionsParser implements OptionsParserInterface
         }, $parameters);
     }
 
-    /**
-     * @param mixed $parameter
-     * @param Request $request
-     * @param mixed $data
-     *
-     * @return mixed
-     */
     private function parseOption($parameter, Request $request, $data)
     {
         if (!is_string($parameter)) {
@@ -92,12 +74,6 @@ final class OptionsParser implements OptionsParserInterface
         return $parameter;
     }
 
-    /**
-     * @param string $expression
-     * @param Request $request
-     *
-     * @return mixed
-     */
     private function parseOptionExpression(string $expression, Request $request)
     {
         $expression = preg_replace_callback('/\$(\w+)/', function (array $matches) use ($request) {
@@ -109,12 +85,6 @@ final class OptionsParser implements OptionsParserInterface
         return $this->expression->evaluate($expression, ['container' => $this->container]);
     }
 
-    /**
-     * @param string $value
-     * @param mixed $data
-     *
-     * @return mixed
-     */
     private function parseOptionResourceField(string $value, $data)
     {
         return $this->propertyAccessor->getValue($data, $value);

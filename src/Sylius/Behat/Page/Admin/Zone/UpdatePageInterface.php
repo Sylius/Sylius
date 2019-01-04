@@ -18,35 +18,15 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @param string $name
-     */
-    public function nameIt($name);
+    public function nameIt(string $name): void;
 
-    /**
-     * @return int
-     */
-    public function countMembers();
+    public function countMembers(): int;
 
-    /**
-     * @return string
-     */
-    public function getScope();
+    public function getScope(): string;
 
-    /**
-     * @param ZoneMemberInterface $zoneMember
-     *
-     * @return bool
-     */
-    public function hasMember(ZoneMemberInterface $zoneMember);
+    public function hasMember(ZoneMemberInterface $zoneMember): bool;
 
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @param ZoneMemberInterface $zoneMember
-     */
-    public function removeMember(ZoneMemberInterface $zoneMember);
+    public function removeMember(ZoneMemberInterface $zoneMember): void;
 }

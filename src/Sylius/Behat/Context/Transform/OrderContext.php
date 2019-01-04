@@ -20,20 +20,12 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
 {
-    /**
-     * @var CustomerRepositoryInterface
-     */
+    /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @param CustomerRepositoryInterface $customerRepository
-     * @param OrderRepositoryInterface $orderRepository
-     */
     public function __construct(
         CustomerRepositoryInterface $customerRepository,
         OrderRepositoryInterface $orderRepository

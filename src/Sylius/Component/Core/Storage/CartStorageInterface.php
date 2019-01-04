@@ -18,28 +18,11 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface CartStorageInterface
 {
-    /**
-     * @param ChannelInterface $channel
-     *
-     * @return bool
-     */
     public function hasForChannel(ChannelInterface $channel): bool;
 
-    /**
-     * @param ChannelInterface $channel
-     *
-     * @return OrderInterface|null
-     */
     public function getForChannel(ChannelInterface $channel): ?OrderInterface;
 
-    /**
-     * @param ChannelInterface $channel
-     * @param OrderInterface $cart
-     */
     public function setForChannel(ChannelInterface $channel, OrderInterface $cart): void;
 
-    /**
-     * @param ChannelInterface $channel
-     */
     public function removeForChannel(ChannelInterface $channel): void;
 }

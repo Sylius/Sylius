@@ -18,14 +18,9 @@ use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
 final class CompositeMethodsResolver implements PaymentMethodsResolverInterface
 {
-    /**
-     * @var PrioritizedServiceRegistryInterface
-     */
+    /** @var PrioritizedServiceRegistryInterface */
     private $resolversRegistry;
 
-    /**
-     * @param PrioritizedServiceRegistryInterface $resolversRegistry
-     */
     public function __construct(PrioritizedServiceRegistryInterface $resolversRegistry)
     {
         $this->resolversRegistry = $resolversRegistry;

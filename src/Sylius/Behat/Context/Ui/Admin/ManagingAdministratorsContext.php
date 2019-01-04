@@ -24,32 +24,18 @@ use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -94,7 +80,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iSpecifyItsNameAs($username = null)
     {
-        $this->createPage->specifyUsername($username);
+        $this->createPage->specifyUsername($username ?? '');
     }
 
     /**
@@ -111,7 +97,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iSpecifyItsEmailAs($email = null)
     {
-        $this->createPage->specifyEmail($email);
+        $this->createPage->specifyEmail($email ?? '');
     }
 
     /**
@@ -145,7 +131,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iSpecifyItsPasswordAs($password = null)
     {
-        $this->createPage->specifyPassword($password);
+        $this->createPage->specifyPassword($password ?? '');
     }
 
     /**

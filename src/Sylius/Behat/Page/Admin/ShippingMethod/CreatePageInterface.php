@@ -18,55 +18,24 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
+    public function specifyCode(string $code): void;
+
+    public function specifyPosition(?int $position): void;
+
+    public function nameIt(string $name, string $language): void;
+
+    public function describeIt(string $description, string $languageCode): void;
+
+    public function specifyAmountForChannel(string $channelCode, string $amount): void;
+
+    public function chooseZone(string $name): void;
+
+    public function chooseCalculator(string $name): void;
+
+    public function checkChannel($channelName): void;
 
     /**
-     * @param int|null $position
-     */
-    public function specifyPosition($position);
-
-    /**
-     * @param string $name
-     * @param string $language
-     */
-    public function nameIt($name, $language);
-
-    /**
-     * @param string $description
-     * @param string $languageCode
-     */
-    public function describeIt($description, $languageCode);
-
-    /**
-     * @param string $channelCode
-     * @param string $amount
-     */
-    public function specifyAmountForChannel($channelCode, $amount);
-
-    /**
-     * @param string $name
-     */
-    public function chooseZone($name);
-
-    /**
-     * @param string $name
-     */
-    public function chooseCalculator($name);
-
-    /**
-     * @return string $channelName
-     */
-    public function checkChannel($channelName);
-
-    /**
-     * @param string $channelCode
-     *
-     * @return string
-     *
      * @throws ElementNotFoundException
      */
-    public function getValidationMessageForAmount($channelCode);
+    public function getValidationMessageForAmount(string $channelCode): string;
 }

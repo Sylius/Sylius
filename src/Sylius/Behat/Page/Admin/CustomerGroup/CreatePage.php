@@ -22,10 +22,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use SpecifiesItsCode;
     use NamesIt;
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_customer_group_code',

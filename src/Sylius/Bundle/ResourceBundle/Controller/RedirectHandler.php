@@ -22,14 +22,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class RedirectHandler implements RedirectHandlerInterface
 {
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * @param RouterInterface $router
-     */
     public function __construct(RouterInterface $router)
     {
         $this->router = $router;

@@ -26,7 +26,7 @@ final class ImageUploaderSpec extends ObjectBehavior
     {
         $filesystem->has(Argument::any())->willReturn(false);
 
-        $file = new File(__FILE__, 'img.jpg');
+        $file = new File(__FILE__);
         $image->getFile()->willReturn($file);
 
         $this->beConstructedWith($filesystem);

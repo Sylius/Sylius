@@ -98,6 +98,9 @@ final class TranslatorFallbackLocalesPassTest extends AbstractCompilerPassTestCa
         $this->setDefinition('sylius.theme.translation.translator', new Definition());
 
         $this->compile();
+
+        $this->assertContainerBuilderHasService('translator.default');
+        $this->assertContainerBuilderHasService('sylius.theme.translation.translator');
     }
 
     /**

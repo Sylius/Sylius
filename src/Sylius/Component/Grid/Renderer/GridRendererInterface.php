@@ -20,37 +20,14 @@ use Sylius\Component\Grid\View\GridViewInterface;
 
 interface GridRendererInterface
 {
-    /**
-     * @param GridViewInterface $gridView
-     * @param string|null $template
-     *
-     * @return mixed
-     */
     public function render(GridViewInterface $gridView, ?string $template = null);
 
-    /**
-     * @param GridViewInterface $gridView
-     * @param Field $field
-     * @param mixed $data
-     *
-     * @return mixed
-     */
     public function renderField(GridViewInterface $gridView, Field $field, $data);
 
     /**
-     * @param GridViewInterface $gridView
-     * @param Action $action
      * @param mixed|null $data
-     *
-     * @return mixed
      */
     public function renderAction(GridViewInterface $gridView, Action $action, $data = null);
 
-    /**
-     * @param GridViewInterface $gridView
-     * @param Filter $filter
-     *
-     * @return mixed
-     */
     public function renderFilter(GridViewInterface $gridView, Filter $filter);
 }

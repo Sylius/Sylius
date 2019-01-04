@@ -41,9 +41,12 @@ sylius:
             cart_quantity: Quantità carrello
             contains_product: Contenuto prodotto
             customer_group: Gruppo clienti
+            has_at_least_one_from_taxons: Ha almeno uno da taxons
             item_total: Totale articolo
             nth_order: Ennesimo ordine
             shipping_country: Paese di spedizione
+            taxonomy: Tassonomia
+            total_price_of_items_from_taxon: Prezzo totale degli articoli da taxon
             cart_quantity_configuration:
                 count: Quantità
                 equal: Uguale
@@ -56,4 +59,7 @@ sylius:
                 nth: Ennesimo
             shipping_country_configuration:
                 country: Paese
+            taxonomy_configuration:
+                exclude: Escludi
+                taxons: Taxons
             type: Tipo

@@ -24,31 +24,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductAssociationExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productAssociationFactory;
 
-    /**
-     * @var ProductAssociationTypeRepositoryInterface
-     */
+    /** @var ProductAssociationTypeRepositoryInterface */
     private $productAssociationTypeRepository;
 
-    /**
-     * @var ProductRepositoryInterface
-     */
+    /** @var ProductRepositoryInterface */
     private $productRepository;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $productAssociationFactory
-     * @param ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository
-     * @param ProductRepositoryInterface $productRepository
-     */
     public function __construct(
         FactoryInterface $productAssociationFactory,
         ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,

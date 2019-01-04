@@ -22,29 +22,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 abstract class AbstractDoctrineSubscriber implements EventSubscriber
 {
-    /**
-     * @var RegistryInterface
-     */
+    /** @var RegistryInterface */
     protected $resourceRegistry;
 
-    /**
-     * @var RuntimeReflectionService
-     */
+    /** @var RuntimeReflectionService */
     private $reflectionService;
 
-    /**
-     * @param RegistryInterface $resourceRegistry
-     */
     public function __construct(RegistryInterface $resourceRegistry)
     {
         $this->resourceRegistry = $resourceRegistry;
     }
 
-    /**
-     * @param ClassMetadata $metadata
-     *
-     * @return bool
-     */
     protected function isResource(ClassMetadata $metadata): bool
     {
         if (!$reflClass = $metadata->getReflectionClass()) {

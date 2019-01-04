@@ -19,14 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ViewHandler implements ViewHandlerInterface
 {
-    /**
-     * @var RestViewHandler
-     */
+    /** @var RestViewHandler */
     private $restViewHandler;
 
-    /**
-     * @param RestViewHandler $restViewHandler
-     */
     public function __construct(RestViewHandler $restViewHandler)
     {
         $this->restViewHandler = $restViewHandler;

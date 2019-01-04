@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.fixture.api_client" class="Sylius\Bundle\AdminApiBundle\Fixture\ApiClientFixture">
             <argument type="service" id="sylius.manager.api_client" />
             <argument type="service" id="sylius.fixture.example_factory.api_client" />

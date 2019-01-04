@@ -15,77 +15,54 @@ namespace Sylius\Behat\Page\Admin\ProductVariant;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class GeneratePage extends SymfonyPage implements GeneratePageInterface
 {
-    public function generate()
+    public function generate(): void
     {
         $this->getDocument()->pressButton('Generate');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyPrice($nth, $price, $channelName)
+    public function specifyPrice(int $nth, int $price, string $channelName): void
     {
         $this->getElement('price', ['%position%' => $nth, '%channelName%' => $channelName])->setValue($price);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyCode($nth, $code)
+    public function specifyCode(int $nth, string $code): void
     {
         $this->getDocument()->fillField(sprintf('sylius_product_generate_variants_variants_%s_code', $nth), $code);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeVariant($nth)
+    public function removeVariant(int $nth): void
     {
         $item = $this->getDocument()->find('css', sprintf('div[data-form-collection-index="%s"]', $nth));
 
         $item->clickLink('Delete');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_admin_product_variant_generate';
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws ElementNotFoundException
      */
-    public function getValidationMessage($element, $position)
+    public function getValidationMessage(string $element, int $position): string
     {
         $foundElement = $this->getElement($element, ['%position%' => $position]);
         $validatedField = $this->getValidatedField($foundElement);
-        if (null === $validatedField) {
-            throw new ElementNotFoundException($this->getSession(), 'Element', 'css', $foundElement);
-        }
 
         return $validatedField->find('css', '.sylius-validation-error')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPricesValidationMessage($position)
+    public function getPricesValidationMessage(int $position): string
     {
         return $this->getElement('prices_validation_message', ['%position%' => $position])->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_generate_variants_variants_%position%_code',
@@ -95,13 +72,9 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     }
 
     /**
-     * @param NodeElement $element
-     *
-     * @return NodeElement
-     *
      * @throws ElementNotFoundException
      */
-    private function getValidatedField(NodeElement $element)
+    private function getValidatedField(NodeElement $element): NodeElement
     {
         while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();

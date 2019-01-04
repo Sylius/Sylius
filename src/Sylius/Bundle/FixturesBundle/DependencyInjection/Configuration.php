@@ -24,17 +24,20 @@ final class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sylius_fixtures');
+        if (method_exists(TreeBuilder::class, 'getRootNode')) {
+            $treeBuilder = new TreeBuilder('sylius_fixtures');
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $treeBuilder = new TreeBuilder();
+            $rootNode = $treeBuilder->root('sylius_fixtures');
+        }
 
         $this->buildSuitesNode($rootNode);
 
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNode
-     */
     private function buildSuitesNode(ArrayNodeDefinition $rootNode): void
     {
         /** @var ArrayNodeDefinition $suitesNode */
@@ -67,9 +70,6 @@ final class Configuration implements ConfigurationInterface
         $this->buildListenersNode($suitesNode);
     }
 
-    /**
-     * @param ArrayNodeDefinition $suitesNode
-     */
     private function buildFixturesNode(ArrayNodeDefinition $suitesNode): void
     {
         /** @var ArrayNodeDefinition $fixturesNode */
@@ -85,9 +85,6 @@ final class Configuration implements ConfigurationInterface
         $this->buildAttributesNode($fixturesNode);
     }
 
-    /**
-     * @param ArrayNodeDefinition $suitesNode
-     */
     private function buildListenersNode(ArrayNodeDefinition $suitesNode): void
     {
         /** @var ArrayNodeDefinition $listenersNode */
@@ -101,9 +98,6 @@ final class Configuration implements ConfigurationInterface
         $this->buildAttributesNode($listenersNode);
     }
 
-    /**
-     * @param ArrayNodeDefinition $node
-     */
     private function buildAttributesNode(ArrayNodeDefinition $node): void
     {
         $attributesNodeBuilder = $node->canBeUnset()->children();

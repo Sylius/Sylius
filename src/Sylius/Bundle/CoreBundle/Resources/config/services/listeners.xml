@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.listener.cart_blamer" class="Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener">
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.context.cart" />
@@ -34,7 +36,8 @@
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="liip_imagine.cache.manager" />
             <argument type="service" id="liip_imagine.filter.manager" />
-            <tag name="doctrine.event_listener" event="postRemove" lazy="true" />
+            <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
+            <tag name="doctrine.event_listener" event="postFlush" lazy="true" />
         </service>
         <service id="sylius.listener.order_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener">
             <argument type="service" id="sylius.order_processing.order_processor" />

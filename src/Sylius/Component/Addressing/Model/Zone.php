@@ -18,34 +18,22 @@ use Doctrine\Common\Collections\Collection;
 
 class Zone implements ZoneInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $name;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $type;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $scope = Scope::ALL;
 
-    /**
-     * @var Collection|ZoneMemberInterface[]
-     */
+    /** @var Collection|ZoneMemberInterface[] */
     protected $members;
 
     public function __construct()
@@ -53,9 +41,6 @@ class Zone implements ZoneInterface
         $this->members = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();

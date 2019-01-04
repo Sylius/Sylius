@@ -41,10 +41,6 @@ final class SyliusShopExtension extends Extension
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }
 
-    /**
-     * @param array $config
-     * @param ContainerBuilder $container
-     */
     private function configureCheckoutResolverIfNeeded(array $config, ContainerBuilder $container): void
     {
         if (!$config['enabled']) {
@@ -74,11 +70,6 @@ final class SyliusShopExtension extends Extension
         $container->setDefinition('sylius.router.checkout_state', $checkoutStateUrlGeneratorDefinition);
     }
 
-    /**
-     * @param array $config
-     *
-     * @return Definition
-     */
     private function registerCheckoutRedirectListener(array $config): Definition
     {
         $checkoutRedirectListener = new Definition(CheckoutRedirectListener::class, [

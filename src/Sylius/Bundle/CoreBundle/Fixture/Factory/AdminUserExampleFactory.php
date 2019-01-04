@@ -20,30 +20,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $userFactory;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $localeCode;
 
-    /**
-     * @param FactoryInterface $userFactory
-     * @param string $localeCode
-     */
     public function __construct(FactoryInterface $userFactory, string $localeCode)
     {
         $this->userFactory = $userFactory;

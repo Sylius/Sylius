@@ -21,26 +21,15 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class CartSessionStorage implements CartStorageInterface
 {
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $sessionKeyName;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @param SessionInterface $session
-     * @param string $sessionKeyName
-     * @param OrderRepositoryInterface $orderRepository
-     */
     public function __construct(
         SessionInterface $session,
         string $sessionKeyName,
@@ -89,11 +78,6 @@ final class CartSessionStorage implements CartStorageInterface
         $this->session->remove($this->getCartKeyName($channel));
     }
 
-    /**
-     * @param ChannelInterface $channel
-     *
-     * @return string
-     */
     private function getCartKeyName(ChannelInterface $channel): string
     {
         return sprintf('%s.%s', $this->sessionKeyName, $channel->getCode());

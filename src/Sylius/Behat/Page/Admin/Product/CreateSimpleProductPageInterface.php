@@ -18,96 +18,41 @@ use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @param string $channelName
-     * @param int $price
-     */
-    public function specifyPrice($channelName, $price);
+    public function specifyPrice(string $channelName, string $price): void;
+
+    public function specifyOriginalPrice(string $channelName, int $originalPrice): void;
+
+    public function choosePricingCalculator(string $name): void;
+
+    public function checkChannel(string $channelName): void;
+
+    public function specifyCode(string $code): void;
+
+    public function nameItIn(string $name, string $localeCode): void;
+
+    public function specifySlugIn(?string $slug, string $locale): void;
+
+    public function addAttribute(string $attributeName, string $value, string $localeCode): void;
+
+    public function getAttributeValidationErrors(string $attributeName, string $localeCode): string;
+
+    public function removeAttribute(string $attributeName, string $localeCode): void;
 
     /**
-     * @param string $channelName
-     * @param int $originalPrice
-     */
-    public function specifyOriginalPrice($channelName, $originalPrice);
-
-    /**
-     * @param string $name
-     */
-    public function choosePricingCalculator($name);
-
-    /**
-     * @param string $channelName
-     */
-    public function checkChannel($channelName);
-
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
-
-    /**
-     * @param string $name
-     * @param string $localeCode
-     */
-    public function nameItIn($name, $localeCode);
-
-    /**
-     * @param string $slug
-     * @param string $locale
-     */
-    public function specifySlugIn($slug, $locale);
-
-    /**
-     * @param string $attributeName
-     * @param string $value
-     * @param string $localeCode
-     */
-    public function addAttribute($attributeName, $value, $localeCode);
-
-    /**
-     * @param string $attributeName
-     * @param string $localeCode
-     *
-     * @return string
-     */
-    public function getAttributeValidationErrors($attributeName, $localeCode);
-
-    /**
-     * @param string $attributeName
-     * @param string $localeCode
-     */
-    public function removeAttribute($attributeName, $localeCode);
-
-    /**
-     * @param string $path
      * @param string $type
      */
-    public function attachImage($path, $type = null);
+    public function attachImage(string $path, string $type = null): void;
 
     /**
-     * @param ProductAssociationTypeInterface $productAssociationType
      * @param string[] $productsNames
      */
-    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames);
+    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void;
 
-    /**
-     * @param string $productName
-     * @param ProductAssociationTypeInterface $productAssociationType
-     */
-    public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType);
+    public function removeAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): void;
 
-    /**
-     * @param string $locale
-     */
-    public function activateLanguageTab($locale);
+    public function activateLanguageTab(string $locale): void;
 
-    /**
-     * @param string $shippingCategoryName
-     */
-    public function selectShippingCategory($shippingCategoryName);
+    public function selectShippingCategory(string $shippingCategoryName): void;
 
-    /**
-     * @param bool $isShippingRequired
-     */
-    public function setShippingRequired($isShippingRequired);
+    public function setShippingRequired(bool $isShippingRequired): void;
 }

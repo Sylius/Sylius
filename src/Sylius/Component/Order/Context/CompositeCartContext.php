@@ -18,9 +18,7 @@ use Zend\Stdlib\PriorityQueue;
 
 final class CompositeCartContext implements CartContextInterface
 {
-    /**
-     * @var PriorityQueue|CartContextInterface[]
-     */
+    /** @var PriorityQueue|CartContextInterface[] */
     private $cartContexts;
 
     public function __construct()
@@ -28,10 +26,6 @@ final class CompositeCartContext implements CartContextInterface
         $this->cartContexts = new PriorityQueue();
     }
 
-    /**
-     * @param CartContextInterface $cartContext
-     * @param int $priority
-     */
     public function addContext(CartContextInterface $cartContext, int $priority = 0): void
     {
         $this->cartContexts->insert($cartContext, $priority);

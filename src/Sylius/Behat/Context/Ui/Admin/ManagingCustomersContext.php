@@ -25,43 +25,26 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCustomersContext implements Context
 {
-    /**
-     * @var CustomerIndexPageInterface
-     */
+    /** @var CustomerIndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var ShowPageInterface
-     */
+    /** @var ShowPageInterface */
     private $showPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $ordersIndexPage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
     /**
-     * @param CreatePageInterface $createPage
      * @param CustomerIndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param ShowPageInterface $showPage
-     * @param IndexPageInterface $ordersIndexPage
-     * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         CreatePageInterface $createPage,
@@ -110,16 +93,16 @@ final class ManagingCustomersContext implements Context
      */
     public function iSpecifyItsEmailAs($email = null)
     {
-        $this->createPage->specifyEmail($email);
+        $this->createPage->specifyEmail($email ?? '');
     }
 
     /**
      * @When I change their email to :email
      * @When I remove its email
      */
-    public function iChangeTheirEmailTo(?string $email = null): void
+    public function iChangeTheirEmailTo($email = null): void
     {
-        $this->updatePage->changeEmail($email);
+        $this->updatePage->changeEmail($email ?? '');
     }
 
     /**

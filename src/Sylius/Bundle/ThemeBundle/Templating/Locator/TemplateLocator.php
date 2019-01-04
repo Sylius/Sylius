@@ -19,14 +19,9 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 
 final class TemplateLocator implements TemplateLocatorInterface
 {
-    /**
-     * @var ResourceLocatorInterface
-     */
+    /** @var ResourceLocatorInterface */
     private $resourceLocator;
 
-    /**
-     * @param ResourceLocatorInterface $resourceLocator
-     */
     public function __construct(ResourceLocatorInterface $resourceLocator)
     {
         $this->resourceLocator = $resourceLocator;

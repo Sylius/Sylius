@@ -23,23 +23,16 @@ use Sylius\Component\Resource\Model\TranslationInterface;
 
 final class ODMTranslatableListener implements EventSubscriber
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $currentLocale;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $fallbackLocale;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $mappings;
 
     /**
-     * @param array $mappings
      * @param string $fallbackLocale
      */
     public function __construct(array $mappings, $fallbackLocale)
@@ -71,8 +64,6 @@ final class ODMTranslatableListener implements EventSubscriber
 
     /**
      * Add mapping to translatable entities
-     *
-     * @param LoadClassMetadataEventArgs $eventArgs
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
@@ -94,8 +85,6 @@ final class ODMTranslatableListener implements EventSubscriber
 
     /**
      * Add mapping data to a translatable entity
-     *
-     * @param ClassMetadata $metadata
      */
     private function mapTranslatable(ClassMetadata $metadata)
     {
@@ -117,8 +106,6 @@ final class ODMTranslatableListener implements EventSubscriber
 
     /**
      * Add mapping data to a translation entity
-     *
-     * @param ClassMetadata $metadata
      */
     private function mapTranslation(ClassMetadata $metadata)
     {
@@ -158,8 +145,6 @@ final class ODMTranslatableListener implements EventSubscriber
 
     /**
      * Load translations
-     *
-     * @param LifecycleEventArgs $args
      */
     public function postLoad(LifecycleEventArgs $args)
     {

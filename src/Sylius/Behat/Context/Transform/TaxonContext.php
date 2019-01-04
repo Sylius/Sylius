@@ -19,14 +19,9 @@ use Webmozart\Assert\Assert;
 
 final class TaxonContext implements Context
 {
-    /**
-     * @var TaxonRepositoryInterface
-     */
+    /** @var TaxonRepositoryInterface */
     private $taxonRepository;
 
-    /**
-     * @param TaxonRepositoryInterface $taxonRepository
-     */
     public function __construct(TaxonRepositoryInterface $taxonRepository)
     {
         $this->taxonRepository = $taxonRepository;

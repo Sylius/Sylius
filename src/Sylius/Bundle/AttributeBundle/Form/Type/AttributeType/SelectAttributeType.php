@@ -23,14 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SelectAttributeType extends AbstractType
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $defaultLocaleCode;
 
-    /**
-     * @param TranslationLocaleProviderInterface $localeProvider
-     */
     public function __construct(TranslationLocaleProviderInterface $localeProvider)
     {
         $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();

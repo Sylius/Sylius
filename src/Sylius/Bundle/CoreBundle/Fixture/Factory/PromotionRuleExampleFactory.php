@@ -21,24 +21,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PromotionRuleExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var PromotionRuleFactoryInterface
-     */
+    /** @var PromotionRuleFactoryInterface */
     private $promotionRuleFactory;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param PromotionRuleFactoryInterface $promotionRuleFactory
-     */
     public function __construct(PromotionRuleFactoryInterface $promotionRuleFactory)
     {
         $this->promotionRuleFactory = $promotionRuleFactory;
@@ -78,7 +69,7 @@ class PromotionRuleExampleFactory extends AbstractExampleFactory implements Exam
             ->setNormalizer('configuration', function (Options $options, $configuration): array {
                 foreach ($configuration as $channelCode => $channelConfiguration) {
                     if (isset($channelConfiguration['amount'])) {
-                        $configuration[$channelCode]['amount'] *= 100;
+                        $configuration[$channelCode]['amount'] = (int) ($configuration[$channelCode]['amount'] * 100);
                     }
                 }
 

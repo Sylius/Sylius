@@ -19,14 +19,9 @@ use Webmozart\Assert\Assert;
 
 final class CurrencyContext implements Context
 {
-    /**
-     * @var HomePageInterface
-     */
+    /** @var HomePageInterface */
     private $homePage;
 
-    /**
-     * @param HomePageInterface $homePage
-     */
     public function __construct(HomePageInterface $homePage)
     {
         $this->homePage = $homePage;

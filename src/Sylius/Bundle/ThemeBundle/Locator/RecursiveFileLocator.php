@@ -18,23 +18,16 @@ use Symfony\Component\Finder\SplFileInfo;
 
 final class RecursiveFileLocator implements FileLocatorInterface
 {
-    /**
-     * @var FinderFactoryInterface
-     */
+    /** @var FinderFactoryInterface */
     private $finderFactory;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $paths;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $depth;
 
     /**
-     * @param FinderFactoryInterface $finderFactory
      * @param array|string[] $paths An array of paths where to look for resources
      * @param int|null $depth Restrict depth to search for configuration file inside theme folder
      */
@@ -61,11 +54,6 @@ final class RecursiveFileLocator implements FileLocatorInterface
         return iterator_to_array($this->doLocateFilesNamed($name));
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Generator
-     */
     private function doLocateFilesNamed(string $name): \Generator
     {
         $this->assertNameIsNotEmpty($name);
@@ -104,9 +92,6 @@ final class RecursiveFileLocator implements FileLocatorInterface
         }
     }
 
-    /**
-     * @param string $name
-     */
     private function assertNameIsNotEmpty(string $name): void
     {
         if (null === $name || '' === $name) {

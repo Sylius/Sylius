@@ -23,26 +23,15 @@ use Webmozart\Assert\Assert;
 
 final class OrderTotalIntegrityChecker
 {
-    /**
-     * @var OrderProcessorInterface
-     */
+    /** @var OrderProcessorInterface */
     private $orderProcessors;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $manager;
 
-    /**
-     * @param OrderProcessorInterface $orderProcessors
-     * @param RouterInterface $router
-     * @param ObjectManager $manager
-     */
     public function __construct(
         OrderProcessorInterface $orderProcessors,
         RouterInterface $router,
@@ -53,9 +42,6 @@ final class OrderTotalIntegrityChecker
         $this->manager = $manager;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function check(ResourceControllerEvent $event): void
     {
         /** @var OrderInterface $order */

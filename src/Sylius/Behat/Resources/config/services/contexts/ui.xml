@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.behat.context.ui.admin.dashboard" class="Sylius\Behat\Context\Ui\Admin\DashboardContext">
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
             <tag name="fob.context_service" />
@@ -133,6 +135,7 @@
             <argument type="service" id="sylius.behat.page.admin.product.index_per_taxon" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="__symfony__.liip_imagine.cache.manager" />
             <tag name="fob.context_service" />
         </service>
 
@@ -417,8 +420,10 @@
             <argument type="service" id="sylius.behat.page.shop.home" />
             <argument type="service" id="sylius.behat.page.shop.account.login" />
             <argument type="service" id="sylius.behat.page.shop.account.register" />
+            <argument type="service" id="sylius.behat.page.shop.account.request_password_reset" />
             <argument type="service" id="sylius.behat.page.shop.account.reset_password" />
             <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="sylius.behat.current_page_resolver" />
             <tag name="fob.context_service" />
         </service>
 
@@ -426,6 +431,7 @@
             <argument type="service" id="sylius.behat.page.shop.product.show" />
             <argument type="service" id="sylius.behat.page.shop.product.index" />
             <argument type="service" id="sylius.behat.page.shop.product_reviews.index" />
+            <argument type="service" id="sylius.behat.page.error" />
             <tag name="fob.context_service" />
         </service>
 
@@ -444,6 +450,7 @@
             <argument type="service" id="sylius.behat.page.shop.account.verify" />
             <argument type="service" id="sylius.behat.page.shop.account.profile_update" />
             <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="sylius.behat.current_page_resolver" />
             <tag name="fob.context_service" />
         </service>
 

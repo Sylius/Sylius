@@ -205,4 +205,50 @@ EOT;
 
         $this->assertResponseCode($response, Response::HTTP_OK);
     }
+
+    /**
+     * @test
+     */
+    public function it_allows_creating_a_book_via_custom_factory()
+    {
+        $data =
+            <<<EOT
+                    {
+            "translations": {
+                "en_US": {
+                    "title": "Star Wars: Dark Disciple"
+                }
+            },
+            "author": "Christie Golden"
+        }
+EOT;
+
+        $this->client->request('POST', '/books/create-custom', [], [], ['CONTENT_TYPE' => 'application/json'], $data);
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'books/create_response', Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_indexing_books_via_custom_repository(): void
+    {
+        $this->loadFixturesFromFile('books.yml');
+
+        $this->client->request('GET', '/find-custom-books');
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'books/index_response');
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_showing_a_book_via_custom_repository()
+    {
+        $this->loadFixturesFromFile('books.yml');
+
+        $this->client->request('GET', '/find-custom-book');
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'books/show_response');
+    }
 }

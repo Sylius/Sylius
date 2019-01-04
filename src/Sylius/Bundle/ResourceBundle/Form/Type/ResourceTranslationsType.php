@@ -23,19 +23,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ResourceTranslationsType extends AbstractType
 {
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $definedLocalesCodes;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $defaultLocaleCode;
 
-    /**
-     * @param TranslationLocaleProviderInterface $localeProvider
-     */
     public function __construct(TranslationLocaleProviderInterface $localeProvider)
     {
         $this->definedLocalesCodes = $localeProvider->getDefinedLocalesCodes();

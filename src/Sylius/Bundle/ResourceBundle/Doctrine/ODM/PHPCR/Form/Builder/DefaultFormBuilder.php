@@ -20,14 +20,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class DefaultFormBuilder implements DefaultFormBuilderInterface
 {
-    /**
-     * @var DocumentManagerInterface
-     */
+    /** @var DocumentManagerInterface */
     private $documentManager;
 
-    /**
-     * @param DocumentManagerInterface $documentManager
-     */
     public function __construct(
         DocumentManagerInterface $documentManager
     ) {

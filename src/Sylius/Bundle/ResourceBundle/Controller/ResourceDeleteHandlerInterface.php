@@ -18,9 +18,5 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface ResourceDeleteHandlerInterface
 {
-    /**
-     * @param ResourceInterface $resource
-     * @param RepositoryInterface $repository
-     */
     public function handle(ResourceInterface $resource, RepositoryInterface $repository): void;
 }

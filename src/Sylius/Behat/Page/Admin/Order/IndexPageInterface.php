@@ -17,33 +17,15 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    /**
-     * @param string $dateTime
-     */
-    public function specifyFilterDateFrom(string $dateTime);
+    public function specifyFilterDateFrom(string $dateTime): void;
 
-    /**
-     * @param string $dateTime
-     */
-    public function specifyFilterDateTo(string $dateTime);
+    public function specifyFilterDateTo(string $dateTime): void;
 
-    /**
-     * @param string $channelName
-     */
-    public function chooseChannelFilter($channelName);
+    public function chooseChannelFilter(string $channelName): void;
 
-    /**
-     * @param string $currencyName
-     */
-    public function chooseCurrencyFilter($currencyName);
+    public function chooseCurrencyFilter(string $currencyName): void;
 
-    /**
-     * @param string $total
-     */
-    public function specifyFilterTotalGreaterThan($total);
+    public function specifyFilterTotalGreaterThan(string $total): void;
 
-    /**
-     * @param string $total
-     */
-    public function specifyFilterTotalLessThan($total);
+    public function specifyFilterTotalLessThan(string $total): void;
 }

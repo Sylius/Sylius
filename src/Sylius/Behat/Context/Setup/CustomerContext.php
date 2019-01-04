@@ -26,44 +26,24 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class CustomerContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var CustomerRepositoryInterface
-     */
+    /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $customerManager;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $customerFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $userFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $addressFactory;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param CustomerRepositoryInterface $customerRepository
-     * @param ObjectManager $customerManager
-     * @param FactoryInterface $customerFactory
-     * @param FactoryInterface $userFactory
-     * @param FactoryInterface $addressFactory
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CustomerRepositoryInterface $customerRepository,
@@ -210,7 +190,6 @@ final class CustomerContext implements Context
      * @param string $email
      * @param string|null $firstName
      * @param string|null $lastName
-     * @param \DateTimeInterface|null $createdAt
      * @param string|null $phoneNumber
      *
      * @return CustomerInterface

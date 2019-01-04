@@ -23,19 +23,13 @@ class ProductOptionValue implements ProductOptionValueInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var ProductOptionInterface
-     */
+    /** @var ProductOptionInterface */
     protected $option;
 
     public function __construct()
@@ -140,8 +134,6 @@ class ProductOptionValue implements ProductOptionValueInterface
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductOptionValueTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

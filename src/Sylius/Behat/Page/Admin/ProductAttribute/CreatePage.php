@@ -21,30 +21,19 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use SpecifiesItsCode;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $choiceListIndex = 0;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function nameIt($name, $language)
+    public function nameIt(string $name, string $language): void
     {
         $this->getDocument()->fillField(sprintf('sylius_product_attribute_translations_%s_name', $language), $name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isTypeDisabled()
+    public function isTypeDisabled(): bool
     {
         return 'disabled' === $this->getElement('type')->getAttribute('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addAttributeValue(string $value, string $localeCode): void
     {
         $this->getDocument()->clickLink('Add');
@@ -58,17 +47,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         ++$this->choiceListIndex;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function specifyMinValue(int $min): void
     {
         $this->getElement('min')->setValue($min);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function specifyMaxValue(int $max): void
     {
         $this->getElement('max')->setValue($max);
@@ -79,9 +62,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getElement('multiple')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getValidationErrors(): string
     {
         $validationMessage = $this->getDocument()->find('css', '.sylius-validation-error');
@@ -92,10 +72,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $validationMessage->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'attribute_choice_list' => 'div[data-form-collection="list"]',

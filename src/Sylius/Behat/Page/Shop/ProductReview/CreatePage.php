@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\ProductReview;
 
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class CreatePage extends SymfonyPage implements CreatePageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_product_review_create';
     }
@@ -54,7 +54,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function rateReview($rate)
     {
-        $this->getElement('rate', ['%rate%' => $rate])->click();
+        $this->getElement('rate')->selectOption($rate);
     }
 
     public function submitReview()
@@ -97,12 +97,12 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'author' => '#sylius_product_review_author_email',
             'comment' => '#sylius_product_review_comment',
-            'rate' => '.star.rating .icon:nth-child(%rate%)',
+            'rate' => '[name="sylius_product_review[rating]"]',
             'rating' => '#sylius_product_review_rating',
             'title' => '#sylius_product_review_title',
         ]);

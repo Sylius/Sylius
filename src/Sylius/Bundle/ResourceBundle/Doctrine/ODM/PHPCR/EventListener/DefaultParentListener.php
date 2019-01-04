@@ -23,28 +23,19 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  */
 class DefaultParentListener
 {
-    /**
-     * @var DocumentManagerInterface
-     */
+    /** @var DocumentManagerInterface */
     private $documentManager;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $parentPath;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $autocreate;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $force;
 
     /**
-     * @param DocumentManagerInterface $documentManager
      * @param string $parentPath
      * @param bool $autocreate
      * @param bool $force
@@ -61,9 +52,6 @@ class DefaultParentListener
         $this->force = $force;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function onPreCreate(ResourceControllerEvent $event)
     {
         $document = $event->getSubject();

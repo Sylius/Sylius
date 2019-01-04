@@ -17,34 +17,22 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyRatio($ratio)
+    public function specifyRatio(string $ratio): void
     {
         $this->getDocument()->fillField('Ratio', $ratio);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseSourceCurrency($currency)
+    public function chooseSourceCurrency(string $currency): void
     {
         $this->getDocument()->selectFieldOption('Source currency', $currency);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseTargetCurrency($currency)
+    public function chooseTargetCurrency(string $currency): void
     {
         $this->getDocument()->selectFieldOption('Target currency', $currency);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasFormValidationError($expectedMessage)
+    public function hasFormValidationError(string $expectedMessage): bool
     {
         $formValidationErrors = $this->getDocument()->find('css', 'form > div.ui.red.label.sylius-validation-error');
         if (null === $formValidationErrors) {
@@ -54,10 +42,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $expectedMessage === $formValidationErrors->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'source currency' => '#sylius_exchange_rate_sourceCurrency',

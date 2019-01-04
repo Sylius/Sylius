@@ -23,32 +23,18 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CurrencyContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $currencyRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $currencyFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $channelManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $currencyRepository
-     * @param FactoryInterface $currencyFactory
-     * @param ObjectManager $channelManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $currencyRepository,
@@ -110,9 +96,6 @@ final class CurrencyContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @param CurrencyInterface $currency
-     */
     private function saveCurrency(CurrencyInterface $currency)
     {
         $this->sharedStorage->set('currency', $currency);

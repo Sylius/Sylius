@@ -19,20 +19,12 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 class DashboardStatisticsProvider implements DashboardStatisticsProviderInterface
 {
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @var CustomerRepositoryInterface
-     */
+    /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @param OrderRepositoryInterface $orderRepository
-     * @param CustomerRepositoryInterface $customerRepository
-     */
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         CustomerRepositoryInterface $customerRepository

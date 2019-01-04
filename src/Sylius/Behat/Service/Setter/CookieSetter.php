@@ -13,26 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Setter;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Session;
 use FriendsOfBehat\SymfonyExtension\Driver\SymfonyDriver;
 use Symfony\Component\BrowserKit\Cookie;
 
 final class CookieSetter implements CookieSetterInterface
 {
-    /**
-     * @var Session
-     */
+    /** @var Session */
     private $minkSession;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $minkParameters;
 
-    /**
-     * @param Session $minkSession
-     * @param array $minkParameters
-     */
     public function __construct(Session $minkSession, array $minkParameters)
     {
         $this->minkSession = $minkSession;
@@ -44,13 +37,13 @@ final class CookieSetter implements CookieSetterInterface
      */
     public function setCookie($name, $value)
     {
-        $this->prepareMinkSessionIfNeeded();
+        $this->prepareMinkSessionIfNeeded($this->minkSession);
 
         $driver = $this->minkSession->getDriver();
 
         if ($driver instanceof SymfonyDriver) {
             $driver->getClient()->getCookieJar()->set(
-                new Cookie($name, $value, null, null, parse_url($this->minkParameters['base_url'], PHP_URL_HOST))
+                new Cookie($name, $value, null, null, parse_url($this->minkParameters['base_url'], \PHP_URL_HOST))
             );
 
             return;
@@ -59,16 +52,29 @@ final class CookieSetter implements CookieSetterInterface
         $this->minkSession->setCookie($name, $value);
     }
 
-    private function prepareMinkSessionIfNeeded()
+    private function prepareMinkSessionIfNeeded(Session $session): void
     {
-        if ($this->minkSession->getDriver() instanceof SymfonyDriver) {
-            return;
+        if ($this->shouldMinkSessionBePrepared($session)) {
+            $session->visit(rtrim($this->minkParameters['base_url'], '/') . '/');
+        }
+    }
+
+    private function shouldMinkSessionBePrepared(Session $session): bool
+    {
+        $driver = $session->getDriver();
+
+        if ($driver instanceof SymfonyDriver) {
+            return false;
         }
 
-        if (false !== strpos($this->minkSession->getCurrentUrl(), $this->minkParameters['base_url'])) {
-            return;
+        if ($driver instanceof Selenium2Driver && $driver->getWebDriverSession() === null) {
+            return true;
         }
 
-        $this->minkSession->visit(rtrim($this->minkParameters['base_url'], '/') . '/');
+        if (false !== strpos($session->getCurrentUrl(), $this->minkParameters['base_url'])) {
+            return false;
+        }
+
+        return true;
     }
 }

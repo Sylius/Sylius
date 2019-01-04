@@ -18,9 +18,7 @@ use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
 
 class TaxRate extends BaseTaxRate implements TaxRateInterface
 {
-    /**
-     * @var ZoneInterface
-     */
+    /** @var ZoneInterface */
     protected $zone;
 
     /**

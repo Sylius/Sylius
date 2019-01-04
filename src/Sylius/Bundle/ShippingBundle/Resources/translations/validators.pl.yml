@@ -12,10 +12,6 @@ sylius:
             regex: 'Kod kategorii wysyłki może być złożony tylko z liter, cyfr, myślników i podkreśleń.'
             unique: 'Kategoria wysyłki z podanym kodem już istnieje.'
     shipping_method:
-        calculator:
-            max_length: Wartość nie może być dłuższa niż {{ limit }} znaków.
-            min_length: Wartość musi mieć co najmniej {{ limit }} znaków.
-            not_blank: Wartość musi mieć co najmniej {{ limit }} znaków.
         name:
             max_length: 'Nazwa metody wysyłki nie może być dłuższa niż {{ limit }} znaków.'
             min_length: 'Nazwa metody wysyłki musi mieć co najmniej {{ limit }} znaków.'

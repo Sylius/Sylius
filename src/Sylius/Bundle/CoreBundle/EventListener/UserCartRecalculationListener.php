@@ -22,20 +22,12 @@ use Webmozart\Assert\Assert;
 
 final class UserCartRecalculationListener
 {
-    /**
-     * @var CartContextInterface
-     */
+    /** @var CartContextInterface */
     private $cartContext;
 
-    /**
-     * @var OrderProcessorInterface
-     */
+    /** @var OrderProcessorInterface */
     private $orderProcessor;
 
-    /**
-     * @param CartContextInterface $cartContext
-     * @param OrderProcessorInterface $orderProcessor
-     */
     public function __construct(CartContextInterface $cartContext, OrderProcessorInterface $orderProcessor)
     {
         $this->cartContext = $cartContext;
@@ -43,8 +35,6 @@ final class UserCartRecalculationListener
     }
 
     /**
-     * @param Event $event
-     *
      * @throws \InvalidArgumentException
      */
     public function recalculateCartWhileLogin(Event $event): void

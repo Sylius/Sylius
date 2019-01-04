@@ -19,14 +19,9 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 
 final class NotificationContext implements Context
 {
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(NotificationCheckerInterface $notificationChecker)
     {
         $this->notificationChecker = $notificationChecker;

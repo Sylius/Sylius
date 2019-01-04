@@ -19,10 +19,7 @@ use Webmozart\Assert\Assert;
 
 class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProductsInOrder(array $productNames)
+    public function hasProductsInOrder(array $productNames): bool
     {
         $productsOnPage = $this->getColumnFields('name');
 
@@ -35,10 +32,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPositionOfProduct($productName, $position)
+    public function setPositionOfProduct(string $productName, int $position): void
     {
         /** @var NodeElement $productsRow */
         $productsRow = $this->getElement('table')->find('css', sprintf('tbody > tr:contains("%s")', $productName));
@@ -47,7 +41,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         $productsRow->find('css', '.sylius-product-taxon-position')->setValue($position);
     }
 
-    public function savePositions()
+    public function savePositions(): void
     {
         $this->getElement('save_configuration_button')->press();
 
@@ -56,10 +50,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'save_configuration_button' => '.sylius-save-position',

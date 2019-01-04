@@ -19,14 +19,9 @@ use Symfony\Component\Form\FormInterface;
 
 final class ResourceFormFactory implements ResourceFormFactoryInterface
 {
-    /**
-     * @var FormFactoryInterface
-     */
+    /** @var FormFactoryInterface */
     private $formFactory;
 
-    /**
-     * @param FormFactoryInterface $formFactory
-     */
     public function __construct(FormFactoryInterface $formFactory)
     {
         $this->formFactory = $formFactory;

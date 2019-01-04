@@ -23,26 +23,15 @@ use Webmozart\Assert\Assert;
 
 final class ManagingExchangeRatesContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -86,7 +75,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iSpecifyItsRatioAs($ratio = null)
     {
-        $this->createPage->specifyRatio($ratio);
+        $this->createPage->specifyRatio($ratio ?? '');
     }
 
     /**
@@ -118,7 +107,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChangeRatioTo($ratio)
     {
-        $this->updatePage->changeRatio((float) $ratio);
+        $this->updatePage->changeRatio($ratio);
     }
 
     /**

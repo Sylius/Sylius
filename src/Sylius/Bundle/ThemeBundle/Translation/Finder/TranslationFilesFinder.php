@@ -18,14 +18,9 @@ use Symfony\Component\Finder\SplFileInfo;
 
 final class TranslationFilesFinder implements TranslationFilesFinderInterface
 {
-    /**
-     * @var FinderFactoryInterface
-     */
+    /** @var FinderFactoryInterface */
     private $finderFactory;
 
-    /**
-     * @param FinderFactoryInterface $finderFactory
-     */
     public function __construct(FinderFactoryInterface $finderFactory)
     {
         $this->finderFactory = $finderFactory;
@@ -53,8 +48,6 @@ final class TranslationFilesFinder implements TranslationFilesFinderInterface
     }
 
     /**
-     * @param string $path
-     *
      * @return iterable|SplFileInfo[]
      */
     private function getFiles(string $path): iterable
@@ -69,14 +62,9 @@ final class TranslationFilesFinder implements TranslationFilesFinderInterface
         return $finder;
     }
 
-    /**
-     * @param string $file
-     *
-     * @return bool
-     */
     private function isTranslationFile(string $file): bool
     {
-        return false !== strpos($file, 'translations' . DIRECTORY_SEPARATOR)
+        return false !== strpos($file, 'translations' . \DIRECTORY_SEPARATOR)
             && (bool) preg_match('/^[^\.]+?\.[a-zA-Z_]{2,}?\.[a-z0-9]{2,}?$/', basename($file));
     }
 }

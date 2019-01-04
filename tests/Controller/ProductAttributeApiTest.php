@@ -20,17 +20,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductAttributeApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -160,7 +156,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/product-attributes/text', [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', '/api/v1/product-attributes/text', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product_attribute/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -173,7 +169,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/product-attributes', [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', '/api/v1/product-attributes', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCodeOneOf($response, [Response::HTTP_NOT_FOUND, Response::HTTP_METHOD_NOT_ALLOWED]);
@@ -325,8 +321,6 @@ EOT;
     }
 
     /**
-     * @param ProductAttributeInterface $productAttribute
-     *
      * @return string
      */
     private function getProductAttributeUrl(ProductAttributeInterface $productAttribute)
@@ -335,7 +329,6 @@ EOT;
     }
 
     /**
-     * @param Response $response
      * @param array|string[] $expectedChoiceValues
      */
     private function assertSelectChoicesInResponse(Response $response, array $expectedChoiceValues): void

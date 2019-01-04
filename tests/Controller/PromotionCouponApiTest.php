@@ -20,17 +20,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class PromotionCouponApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -375,9 +371,6 @@ EOT;
     }
 
     /**
-     * @param PromotionInterface $promotion
-     * @param PromotionCouponInterface|null $coupon
-     *
      * @return string
      */
     private function getPromotionCouponUrl(PromotionInterface $promotion, PromotionCouponInterface $coupon = null)
@@ -386,8 +379,6 @@ EOT;
     }
 
     /**
-     * @param PromotionInterface $promotion
-     *
      * @return string
      */
     private function getPromotionCouponsUrl(PromotionInterface $promotion)

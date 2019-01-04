@@ -20,42 +20,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TshirtProductFixture extends AbstractFixture
 {
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $taxonFixture;
 
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $productAttributeFixture;
 
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $productOptionFixture;
 
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $productFixture;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param AbstractResourceFixture $taxonFixture
-     * @param AbstractResourceFixture $productAttributeFixture
-     * @param AbstractResourceFixture $productOptionFixture
-     * @param AbstractResourceFixture $productFixture
-     */
     public function __construct(
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $productAttributeFixture,
@@ -186,11 +168,6 @@ class TshirtProductFixture extends AbstractFixture
         ;
     }
 
-    /**
-     * @param int $amount
-     *
-     * @return array
-     */
     private function getUniqueNames(int $amount): array
     {
         $productsNames = [];

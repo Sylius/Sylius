@@ -26,38 +26,21 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShippingMethodsContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -86,13 +69,13 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
      * @When I specify its position as :position
      */
-    public function iSpecifyItsPositionAs($position = null)
+    public function iSpecifyItsPositionAs(int $position = null)
     {
         $this->createPage->specifyPosition($position);
     }
@@ -373,7 +356,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iRemoveItsNameFromTranslation($language)
     {
-        $this->createPage->nameIt(null, $language);
+        $this->createPage->nameIt('', $language);
     }
 
     /**
@@ -520,7 +503,6 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @param ShippingMethodInterface $shippingMethod
      * @param bool $state
      */
     private function assertShippingMethodState(ShippingMethodInterface $shippingMethod, $state)

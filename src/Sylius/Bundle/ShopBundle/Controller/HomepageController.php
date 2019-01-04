@@ -19,24 +19,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class HomepageController
 {
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
-    /**
-     * @param EngineInterface $templatingEngine
-     */
     public function __construct(EngineInterface $templatingEngine)
     {
         $this->templatingEngine = $templatingEngine;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function indexAction(Request $request): Response
     {
         return $this->templatingEngine->renderResponse('@SyliusShop/Homepage/index.html.twig');

@@ -20,32 +20,18 @@ use Symfony\Component\DependencyInjection\Reference;
 
 abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $serviceId;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $compositeId;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $tagName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $methodName;
 
-    /**
-     * @param string $serviceId
-     * @param string $compositeId
-     * @param string $tagName
-     * @param string $methodName
-     */
     public function __construct(string $serviceId, string $compositeId, string $tagName, string $methodName)
     {
         $this->serviceId = $serviceId;
@@ -59,7 +45,7 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition($this->compositeId)) {
+        if (!$container->has($this->compositeId)) {
             return;
         }
 
@@ -67,9 +53,6 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
         $this->addAliasForCompositeIfServiceDoesNotExist($container);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     private function injectTaggedServicesIntoComposite(ContainerBuilder $container): void
     {
         $contextDefinition = $container->findDefinition($this->compositeId);
@@ -80,23 +63,15 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
         }
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     private function addAliasForCompositeIfServiceDoesNotExist(ContainerBuilder $container): void
     {
         if ($container->has($this->serviceId)) {
             return;
         }
 
-        $container->setAlias($this->serviceId, $this->compositeId);
+        $container->setAlias($this->serviceId, $this->compositeId)->setPublic(true);
     }
 
-    /**
-     * @param Definition $contextDefinition
-     * @param string $id
-     * @param array $tags
-     */
     private function addMethodCalls(Definition $contextDefinition, string $id, array $tags): void
     {
         foreach ($tags as $attributes) {
@@ -104,19 +79,8 @@ abstract class PrioritizedCompositeServicePass implements CompilerPassInterface
         }
     }
 
-    /**
-     * @param Definition $contextDefinition
-     * @param string $id
-     * @param array $attributes
-     */
     private function addMethodCall(Definition $contextDefinition, string $id, array $attributes): void
     {
-        $arguments = [new Reference($id)];
-
-        if (isset($attributes['priority'])) {
-            $arguments[] = $attributes['priority'];
-        }
-
-        $contextDefinition->addMethodCall($this->methodName, $arguments);
+        $contextDefinition->addMethodCall($this->methodName, [new Reference($id), $attributes['priority'] ?? 0]);
     }
 }

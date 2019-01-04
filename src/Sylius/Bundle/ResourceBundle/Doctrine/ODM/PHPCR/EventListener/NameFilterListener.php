@@ -25,19 +25,12 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  */
 class NameFilterListener
 {
-    /**
-     * @var DocumentManagerInterface
-     */
+    /** @var DocumentManagerInterface */
     private $documentManager;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $replacementCharacter;
 
-    /**
-     * @param DocumentManagerInterface $documentManager
-     */
     public function __construct(
         DocumentManagerInterface $documentManager,
         $replacementCharacter = ' '
@@ -46,9 +39,6 @@ class NameFilterListener
         $this->replacementCharacter = $replacementCharacter;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function onEvent(ResourceControllerEvent $event)
     {
         $document = $event->getSubject();

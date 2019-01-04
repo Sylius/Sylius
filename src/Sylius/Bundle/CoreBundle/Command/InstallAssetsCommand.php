@@ -44,9 +44,9 @@ EOT
         ));
 
         try {
-            $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/../';
-            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_ASSETS_DIRECTORY, $output);
-            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_BUNDLES_DIRECTORY, $output);
+            $projectDir = $this->getContainer()->getParameter('kernel.project_dir');
+            $this->ensureDirectoryExistsAndIsWritable($projectDir . '/' . self::WEB_ASSETS_DIRECTORY, $output);
+            $this->ensureDirectoryExistsAndIsWritable($projectDir . '/' . self::WEB_BUNDLES_DIRECTORY, $output);
         } catch (\RuntimeException $exception) {
             $output->writeln($exception->getMessage());
 
@@ -54,7 +54,7 @@ EOT
         }
 
         $commands = [
-            'assets:install',
+            'assets:install' => ['target' => 'web'],
         ];
 
         $this->runCommands($commands, $output);

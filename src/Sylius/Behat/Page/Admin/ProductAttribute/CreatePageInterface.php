@@ -18,43 +18,21 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
+    public function specifyCode(string $code): void;
 
-    /**
-     * @param string $name
-     * @param string $language
-     */
-    public function nameIt($name, $language);
+    public function nameIt(string $name, string $language): void;
 
-    /**
-     * @return bool
-     */
-    public function isTypeDisabled();
+    public function isTypeDisabled(): bool;
 
-    /**
-     * @param string $value
-     * @param string $localeCode
-     */
     public function addAttributeValue(string $value, string $localeCode): void;
 
-    /**
-     * @param int $min
-     */
     public function specifyMinValue(int $min): void;
 
-    /**
-     * @param int $max
-     */
     public function specifyMaxValue(int $max): void;
 
     public function checkMultiple(): void;
 
     /**
-     * @return string
-     *
      * @throws ElementNotFoundException
      */
     public function getValidationErrors(): string;

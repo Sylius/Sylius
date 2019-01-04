@@ -17,8 +17,5 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 interface ListenerInterface extends ConfigurationInterface
 {
-    /**
-     * @return string
-     */
     public function getName(): string;
 }

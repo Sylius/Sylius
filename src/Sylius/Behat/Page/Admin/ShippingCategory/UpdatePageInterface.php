@@ -17,8 +17,5 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInteface;
 
 interface UpdatePageInterface extends BaseUpdatePageInteface
 {
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 }

@@ -17,10 +17,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyFilterDateFrom(string $dateTime)
+    public function specifyFilterDateFrom(string $dateTime): void
     {
         $dateAndTime = explode(' ', $dateTime);
 
@@ -28,10 +25,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getDocument()->fillField('criteria_date_from_time', $dateAndTime[1] ?? '');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyFilterDateTo(string $dateTime)
+    public function specifyFilterDateTo(string $dateTime): void
     {
         $dateAndTime = explode(' ', $dateTime);
 
@@ -39,42 +33,27 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getDocument()->fillField('criteria_date_to_time', $dateAndTime[1] ?? '');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseChannelFilter($channelName)
+    public function chooseChannelFilter(string $channelName): void
     {
         $this->getElement('filter_channel')->selectOption($channelName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseCurrencyFilter($currencyName)
+    public function chooseCurrencyFilter(string $currencyName): void
     {
         $this->getElement('filter_currency')->selectOption($currencyName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyFilterTotalGreaterThan($total)
+    public function specifyFilterTotalGreaterThan(string $total): void
     {
         $this->getDocument()->fillField('criteria_total_greaterThan', $total);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyFilterTotalLessThan($total)
+    public function specifyFilterTotalLessThan(string $total): void
     {
         $this->getDocument()->fillField('criteria_total_lessThan', $total);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'filter_channel' => '#criteria_channel',

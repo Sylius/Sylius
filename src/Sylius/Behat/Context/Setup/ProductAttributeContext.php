@@ -27,43 +27,24 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductAttributeContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productAttributeRepository;
 
-    /**
-     * @var AttributeFactoryInterface
-     */
+    /** @var AttributeFactoryInterface */
     private $productAttributeFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productAttributeValueFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $productAttributeRepository
-     * @param AttributeFactoryInterface $productAttributeFactory
-     * @param FactoryInterface $productAttributeValueFactory
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productAttributeRepository,
@@ -343,13 +324,6 @@ final class ProductAttributeContext implements Context
         return $productAttribute;
     }
 
-    /**
-     * @param mixed $value
-     * @param ProductAttributeInterface $attribute
-     * @param string $localeCode
-     *
-     * @return ProductAttributeValueInterface
-     */
     private function createProductAttributeValue(
         $value,
         ProductAttributeInterface $attribute,
@@ -366,21 +340,12 @@ final class ProductAttributeContext implements Context
         return $attributeValue;
     }
 
-    /**
-     * @param ProductAttributeInterface $productAttribute
-     */
     private function saveProductAttribute(ProductAttributeInterface $productAttribute)
     {
         $this->productAttributeRepository->add($productAttribute);
         $this->sharedStorage->set('product_attribute', $productAttribute);
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param string $productAttributeName
-     * @param array $values
-     * @param string $localeCode
-     */
     private function createSelectProductAttributeValue(
         ProductInterface $product,
         string $productAttributeName,

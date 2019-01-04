@@ -19,14 +19,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class UrlBasedLocaleSwitcher implements LocaleSwitcherInterface
 {
-    /**
-     * @var UrlGeneratorInterface
-     */
+    /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
-    /**
-     * @param UrlGeneratorInterface $urlGenerator
-     */
     public function __construct(UrlGeneratorInterface $urlGenerator)
     {
         $this->urlGenerator = $urlGenerator;

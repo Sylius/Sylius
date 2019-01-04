@@ -19,14 +19,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class DoctrineORMContext implements Context
 {
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $entityManager;
 
-    /**
-     * @param EntityManagerInterface $entityManager
-     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;

@@ -20,8 +20,5 @@ interface LocaleProviderInterface
      */
     public function getAvailableLocalesCodes(): array;
 
-    /**
-     * @return string
-     */
     public function getDefaultLocaleCode(): string;
 }

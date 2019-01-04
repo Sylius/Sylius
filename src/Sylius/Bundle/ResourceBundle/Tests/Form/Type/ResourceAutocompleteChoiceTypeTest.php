@@ -26,9 +26,7 @@ use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 final class ResourceAutocompleteChoiceTypeTest extends TypeTestCase
 {
-    /**
-     * @var ObjectProphecy|ServiceRegistryInterface
-     */
+    /** @var ObjectProphecy|ServiceRegistryInterface */
     private $resourceRepositoryRegistry;
 
     protected function setUp(): void
