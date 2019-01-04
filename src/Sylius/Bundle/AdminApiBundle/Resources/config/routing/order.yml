@@ -10,7 +10,7 @@ sylius_admin_api_order:
         serialization_version: $version
     type: sylius.resource_api
 
-tests/Controller/OrderApiTest.phpsylius_admin_api_order_cancel:
+sylius_admin_api_order_cancel:
     path: /orders/{id}/cancel
     methods: [PUT]
     defaults:
