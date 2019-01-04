@@ -96,6 +96,13 @@ final class ShippingMethodFixtureTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shipping_method_tax_category(): void {
+        $this->assertConfigurationIsValid([['custom' => [['tax_category' => 'BOOKS']]]], 'custom.*.tax_category');
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getConfiguration(): ShippingMethodFixture

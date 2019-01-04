@@ -31,6 +31,7 @@
             <argument type="service" id="sylius.repository.shipping_category" />
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.repository.tax_category" />
         </service>
 
         <service id="sylius.fixture.example_factory.channel" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ChannelExampleFactory">
