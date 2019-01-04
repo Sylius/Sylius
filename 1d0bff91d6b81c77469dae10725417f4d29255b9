@@ -1,0 +1,46 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-12-03T20:09:19Z
+
+It would be also good to have a scenario for that, would you be able to provide it, @laurent35240?
+
+---------------------------------------------------------------------------
+
+by laurent35240 at 2018-12-04T22:12:05Z
+
+@lchrusciel @Zales0123 I feel that class `UserDeleteListener` should then be moved to `AdminBundle` since this delete protection concerns only admin users.
+
+What do you think?
+
+---------------------------------------------------------------------------
+
+by laurent35240 at 2019-01-02T13:10:31Z
+
+@lchrusciel @Zales0123 I removed dependency to `sylius/core` and refacto the part checking if Admin User is trying to delete himself.
+
+Let me know if it is good for you
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-01-03T09:42:16Z
+
+Nice 👌 Do you think you would be able to test this feature with some Behat scenario?
+
+---------------------------------------------------------------------------
+
+by laurent35240 at 2019-01-03T23:17:03Z
+
+@Zales0123 I do not think I can easily write Behat scenario for this bugfix because I would have to find a way of manipulating IDs for entries in `sylius_admin_user` and `sylius_customer` tables.
+That is why I wrote phpspec test for it.
+
+Rest of normal behaviour for deleting admin user or customer through back office was already covered by other behat tests.
+
+There was just this case of deleting a customer with same ID than logged in admin that should be fixed.
+
+BTW, another idea for fixing this issue would be to use UUID instead of ID (by using this doctrine library for example https://github.com/ramsey/uuid-doctrine) but I prefer leave that for another PR or issue ;-)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-01-04T13:34:25Z
+
+Thanks, Laurent! :1st_place_medal:
