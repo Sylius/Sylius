@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-01-04T13:35:36Z
+
+I think it solves https://github.com/Sylius/Sylius/issues/10015 ;)
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-01-04T13:37:13Z
+
+Adding `[WIP]` as it might lower tests performance significantly.
