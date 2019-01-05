@@ -39,13 +39,6 @@ class Kernel extends BaseKernel
 
     private const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
-    private const IGNORED_SERVICES_DURING_CLEANUP = [
-        'kernel',
-        'http_kernel',
-        'liip_imagine.mime_type_guesser',
-        'liip_imagine.extension_guesser',
-    ];
-
     public function getCacheDir(): string
     {
         return $this->getProjectDir() . '/var/cache/' . $this->environment;
@@ -64,25 +57,6 @@ class Kernel extends BaseKernel
                 yield new $class();
             }
         }
-    }
-
-    public function shutdown(): void
-    {
-        if (!$this->isTestEnvironment()) {
-            parent::shutdown();
-
-            return;
-        }
-
-        if (false === $this->booted) {
-            return;
-        }
-
-        $container = $this->getContainer();
-
-        parent::shutdown();
-
-        $this->cleanupContainer($container);
     }
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
@@ -137,46 +111,5 @@ class Kernel extends BaseKernel
     private function isTestEnvironment(): bool
     {
         return 0 === strpos($this->getEnvironment(), 'test');
-    }
-
-    /**
-     * Remove all container references from all loaded services
-     */
-    private function cleanupContainer(ContainerInterface $container): void
-    {
-        $containerReflection = new \ReflectionObject($container);
-        $containerServicesPropertyReflection = $containerReflection->getProperty('services');
-        $containerServicesPropertyReflection->setAccessible(true);
-
-        $services = $containerServicesPropertyReflection->getValue($container) ?: [];
-        foreach ($services as $serviceId => $service) {
-            if (null === $service) {
-                continue;
-            }
-
-            if (in_array($serviceId, self::IGNORED_SERVICES_DURING_CLEANUP, true)) {
-                continue;
-            }
-
-            $serviceReflection = new \ReflectionObject($service);
-
-            if ($serviceReflection->implementsInterface(VirtualProxyInterface::class)) {
-                continue;
-            }
-
-            $servicePropertiesReflections = $serviceReflection->getProperties();
-            $servicePropertiesDefaultValues = $serviceReflection->getDefaultProperties();
-            foreach ($servicePropertiesReflections as $servicePropertyReflection) {
-                $defaultPropertyValue = null;
-                if (isset($servicePropertiesDefaultValues[$servicePropertyReflection->getName()])) {
-                    $defaultPropertyValue = $servicePropertiesDefaultValues[$servicePropertyReflection->getName()];
-                }
-
-                $servicePropertyReflection->setAccessible(true);
-                $servicePropertyReflection->setValue($service, $defaultPropertyValue);
-            }
-        }
-
-        $containerServicesPropertyReflection->setValue($container, []);
     }
 }
