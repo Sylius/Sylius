@@ -54,10 +54,6 @@ If you request for more detailed data, you will receive an object with the follo
 | children     | Descendants of the taxon                                                                         |
 +--------------+--------------------------------------------------------------------------------------------------+
 
-.. note::
-
-    Read more about :doc:`Taxons </components_and_bundles/components/Taxonomy/models>`.
-
 Creating a Taxon
 ----------------
 

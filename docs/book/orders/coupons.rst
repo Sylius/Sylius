@@ -111,5 +111,4 @@ Learn more
 ----------
 
 * :doc:`Promotions Concept Documentation </book/orders/promotions>`
-* :doc:`promotion - Component Documentation </components_and_bundles/components/Promotion/index>`
-* :doc:`promotion - Bundle Documentation </components_and_bundles/bundles/SyliusPromotionBundle/index>`
+* :doc:`promotion - Bundle Documentation </bundles/bundles/SyliusPromotionBundle/index>`

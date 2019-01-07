@@ -151,17 +151,17 @@ Support
 
    support/index
 
-Components & Bundles
---------------------
+Bundles
+-------
 
-:doc:`Documentation of all Sylius components and bundles </components_and_bundles/index>` useful when using them standalone.
+:doc:`Documentation of Sylius bundles </bundles/index>` useful when using them standalone.
 
 .. toctree::
    :hidden:
 
-   components_and_bundles/index
+   bundles/index
 
-.. include:: /components_and_bundles/map.rst.inc
+.. include:: /bundles/map.rst.inc
 
 .. _Sylius: http://sylius.com
 .. _`Symfony Framework`: http://symfony.com

@@ -1,0 +1,16 @@
+* :doc:`/bundles/bundles/SyliusAddressingBundle/index`
+* :doc:`/bundles/bundles/SyliusAttributeBundle/index`
+* :doc:`/bundles/bundles/SyliusCustomerBundle/index`
+* :doc:`/bundles/bundles/SyliusFixturesBundle/index`
+* :doc:`/bundles/bundles/SyliusGridBundle/index`
+* :doc:`/bundles/bundles/SyliusInventoryBundle/index`
+* :doc:`/bundles/bundles/SyliusMailerBundle/index`
+* :doc:`/bundles/bundles/SyliusOrderBundle/index`
+* :doc:`/bundles/bundles/SyliusProductBundle/index`
+* :doc:`/bundles/bundles/SyliusPromotionBundle/index`
+* :doc:`/bundles/bundles/SyliusResourceBundle/index`
+* :doc:`/bundles/bundles/SyliusShippingBundle/index`
+* :doc:`/bundles/bundles/SyliusTaxationBundle/index`
+* :doc:`/bundles/bundles/SyliusTaxonomyBundle/index`
+* :doc:`/bundles/bundles/SyliusThemeBundle/index`
+* :doc:`/bundles/bundles/SyliusUserBundle/index`

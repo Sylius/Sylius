@@ -227,7 +227,6 @@ to have a better understanding of them.
 Learn more
 ----------
 
-* :doc:`Promotion - Component Documentation </components_and_bundles/components/Promotion/index>`
-* :doc:`Promotion - Bundle Documentation </components_and_bundles/bundles/SyliusPromotionBundle/index>`
+* :doc:`Promotion - Bundle Documentation </bundles/bundles/SyliusPromotionBundle/index>`
 * :doc:`How to create a custom promotion rule? </cookbook/promotions/custom-promotion-rule>`
 * :doc:`How to create a custom promotion action? </cookbook/promotions/custom-promotion-action>`

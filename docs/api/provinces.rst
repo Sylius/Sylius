@@ -36,10 +36,6 @@ If you request for more detailed data, you will receive an object with the follo
 | updatedAt    | The province's last updating date |
 +--------------+-----------------------------------+
 
-.. note::
-
-    Read more about :doc:`Provinces in the component docs</components_and_bundles/components/Addressing/models>`.
-
 Getting a Single Province
 -------------------------
 

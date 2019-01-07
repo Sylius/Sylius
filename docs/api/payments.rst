@@ -26,10 +26,6 @@ If you request a payment via API, you will receive an object with the following 
 | _links[order]          | Link to the related order                                                       |
 +------------------------+---------------------------------------------------------------------------------+
 
-.. note::
-
-    Read more about :doc:`Payments in the component docs</components_and_bundles/components/Payment/models>`.
-
 Getting a Single Payment
 ------------------------
 

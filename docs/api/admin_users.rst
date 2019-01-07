@@ -46,10 +46,6 @@ If you request for more detailed data, you will receive an object with the follo
 | localeCode        | Code of the language, which is used by the admin user |
 +-------------------+-------------------------------------------------------+
 
-.. note::
-
-    Read more about :doc:`User model in the component docs</components_and_bundles/components/User/models>`.
-
 Creating an Admin User
 ----------------------
 

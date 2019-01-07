@@ -109,8 +109,3 @@ Customer related events
 +---------------------------------------------+-----------------------------------------------------------------------------------------+
 |``security.interactive_login``               | dispatched when an interactive login is done                                            |
 +---------------------------------------------+-----------------------------------------------------------------------------------------+
-
-Learn more
-----------
-
-* :doc:`User - Component Documentation </components_and_bundles/components/User/index>`

@@ -65,8 +65,3 @@ To get all languages configured in the store, regardless of your availability lo
     <?php
 
     $locales = $this->get('sylius.repository.locale')->findAll();
-
-Learn more
-----------
-
-* :doc:`Locale - Component Documentation </components_and_bundles/components/Locale/index>`.

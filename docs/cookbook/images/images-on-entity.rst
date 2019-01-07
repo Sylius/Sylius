@@ -445,6 +445,6 @@ Now connecting the validation of the ``ShippingMethod`` to the validation of eac
 Learn more
 ----------
 
-* :doc:`GridBundle documentation </components_and_bundles/bundles/SyliusGridBundle/index>`
-* :doc:`ResourceBundle documentation </components_and_bundles/bundles/SyliusResourceBundle/index>`
+* :doc:`GridBundle documentation </bundles/bundles/SyliusGridBundle/index>`
+* :doc:`ResourceBundle documentation </bundles/bundles/SyliusResourceBundle/index>`
 * :doc:`Customization Guide </customization/index>`

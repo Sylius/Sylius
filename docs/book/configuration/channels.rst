@@ -59,8 +59,3 @@ You can get the current channel from the channel context.
 
    Moreover if the channel depends mainly on the request you can implement the ``Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface``
    with its ``findChannel(Request $request)`` method and register it under the ``sylius.context.channel.request_based.resolver`` tag.
-
-Learn more
-----------
-
-* :doc:`Channel - Component Documentation </components_and_bundles/components/Channel/index>`.

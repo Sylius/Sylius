@@ -30,10 +30,6 @@ If you request for more detailed data, you will receive an object with the follo
 | createdAt | Creation date of the locale    |
 +-----------+--------------------------------+
 
-.. note::
-
-    Read more about :doc:`Locales in the component docs</components_and_bundles/components/Locale/models>`.
-
 Creating a Locale
 -----------------
 

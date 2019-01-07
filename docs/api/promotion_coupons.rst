@@ -44,10 +44,6 @@ If you request for more detailed data, you will receive an object with the follo
 | perCustomerUsageLimit | Limit of the coupon usage by single customer     |
 +-----------------------+--------------------------------------------------+
 
-.. note::
-
-    Read more about :doc:`Promotion Coupons in the component docs</components_and_bundles/components/Promotion/models>`.
-
 Creating a Promotion Coupon
 ---------------------------
 

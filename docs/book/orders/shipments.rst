@@ -116,9 +116,3 @@ There are two events that are triggered on the shipment ``ship`` action:
 +-------------------------------------+
 | ``sylius.shipment.post_ship``       |
 +-------------------------------------+
-
-
-Learn more
-----------
-
-* :doc:`Shipping - Component Documentation </components_and_bundles/components/Shipping/index>`

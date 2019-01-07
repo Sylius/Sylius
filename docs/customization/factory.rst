@@ -149,4 +149,4 @@ Remember to import the ``app/config/routing/admin.yml`` into the ``app/config/ro
 Learn more
 ----------
 
-* :doc:`SyliusResourceBundle creating resources </components_and_bundles/bundles/SyliusResourceBundle/create_resource>`
+* :doc:`SyliusResourceBundle creating resources </bundles/bundles/SyliusResourceBundle/create_resource>`

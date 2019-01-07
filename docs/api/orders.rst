@@ -28,7 +28,7 @@ If you request an order via API, you will receive an object with the following f
 +-----------------------+-------------------------------------------------------------------------------------+
 | checkoutState         | :doc:`State of the checkout process </book/orders/checkout>`                        |
 +-----------------------+-------------------------------------------------------------------------------------+
-| state                 | :doc:`State of the order </components_and_bundles/components/Order/state_machine>`  |
+| state                 | State of the order                                                                  |
 +-----------------------+-------------------------------------------------------------------------------------+
 | checkoutCompletedAt   | Date when the checkout has been completed                                           |
 +-----------------------+-------------------------------------------------------------------------------------+

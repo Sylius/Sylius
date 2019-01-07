@@ -56,10 +56,6 @@ If you request for a more detailed data, you will receive an object with followi
 | group                   | Customer group code                       |
 +-------------------------+-------------------------------------------+
 
-.. note::
-
-    Read more about :doc:`Customers and Users </components_and_bundles/components/User/models>`.
-
 Creating a Customer
 -------------------
 

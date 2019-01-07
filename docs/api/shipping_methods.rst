@@ -30,10 +30,6 @@ If you request a shipping method via API, you will receive an object with the fo
 | updatedAt           | Date of last update                                |
 +---------------------+----------------------------------------------------+
 
-.. note::
-
-    Read more about :doc:`Shipping Methods in the component docs</components_and_bundles/components/Shipping/models>`.
-
 Getting a Single Shipping Method
 --------------------------------
 

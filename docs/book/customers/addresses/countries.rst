@@ -66,5 +66,4 @@ From now on the country will be available to use in your system.
 Learn more
 ----------
 
-* :doc:`Addressing - Bundle Documentation </components_and_bundles/bundles/SyliusAddressingBundle/index>`
-* :doc:`Addressing - Component Documentation </components_and_bundles/components/Addressing/index>`
+* :doc:`Addressing - Bundle Documentation </bundles/bundles/SyliusAddressingBundle/index>`

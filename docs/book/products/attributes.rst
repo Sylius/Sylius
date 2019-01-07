@@ -107,8 +107,3 @@ After adding attributes remember to **flush the product manager**.
    $this->container->get('sylius.manager.product')->flush();
 
 Your Product will now have two Attributes.
-
-Learn more
-----------
-
-* :doc:`Attribute - Component Documentation </components_and_bundles/components/Attribute/index>`

@@ -30,10 +30,6 @@ If you request for more detailed data, you will receive an object with the follo
 | createdAt | Creation date of the currency    |
 +-----------+----------------------------------+
 
-.. note::
-
-    Read more about :doc:`Currencies in the component docs</components_and_bundles/components/Currency/models>`.
-
 Creating a Currency
 -------------------
 

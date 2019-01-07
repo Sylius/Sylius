@@ -133,14 +133,14 @@ Using the path and filename of the page without the extension, for example:
 
     :doc:`/book/architecture`
 
-    :doc:`/components_and_bundles/bundles/SyliusAddressingBundle/installation`
+    :doc:`/bundles/bundles/SyliusAddressingBundle/installation`
 
 The link's text will be the main heading of the document linked to. You can
 also specify an alternative text for the link:
 
 .. code-block:: rst
 
-    :doc:`Simple CRUD </components_and_bundles/bundles/SyliusResourceBundle/installation>`
+    :doc:`Simple CRUD </bundles/bundles/SyliusResourceBundle/installation>`
 
 You can also link to pages outside of the documentation, for instance to the `Github`_.
 

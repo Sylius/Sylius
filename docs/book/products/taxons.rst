@@ -115,5 +115,4 @@ To set it on your product you need to use the ``setMainTaxon()`` method.
 Learn more
 ----------
 
-* :doc:`Taxonomy - Bundle Documentation </components_and_bundles/bundles/SyliusTaxonomyBundle/index>`
-* :doc:`taxonomy - Component Documentation </components_and_bundles/components/Taxonomy/index>`
+* :doc:`Taxonomy - Bundle Documentation </bundles/bundles/SyliusTaxonomyBundle/index>`

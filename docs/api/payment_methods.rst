@@ -22,10 +22,6 @@ If you request a payment method via API, you will receive an object with the fol
 | updatedAt | Date of the last update           |
 +-----------+-----------------------------------+
 
-.. note::
-
-    Read more about :doc:`Payment Methods in the component docs</components_and_bundles/components/Payment/models>`.
-
 Getting a Single Payment Method
 -------------------------------
 

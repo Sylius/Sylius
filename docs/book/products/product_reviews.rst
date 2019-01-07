@@ -76,5 +76,4 @@ Remember to set the object that is the subject of your review and then add the r
 Learn more
 ----------
 
-* :doc:`Product - Bundle Documentation </components_and_bundles/bundles/SyliusProductBundle/index>`
-* :doc:`Product - Component Documentation </components_and_bundles/components/Product/index>`
+* :doc:`Product - Bundle Documentation </bundles/bundles/SyliusProductBundle/index>`

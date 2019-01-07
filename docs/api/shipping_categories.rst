@@ -29,10 +29,6 @@ If you request for a more detailed data, you will receive an object with followi
 | description | Description of shipping category    |
 +-------------+-------------------------------------+
 
-.. note::
-
-    Read more about :doc:`Shipping Categories in the component docs</components_and_bundles/components/Shipping/models>`.
-
 Creating Shipping Category
 --------------------------
 

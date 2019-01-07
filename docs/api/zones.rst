@@ -45,10 +45,6 @@ If you request for more detailed data, you will receive an object with the follo
 | updatedAt | Date of last update    |
 +-----------+------------------------+
 
-.. note::
-
-    Read more about :doc:`the Zone model in the component docs</components_and_bundles/components/Addressing/models>`.
-
 Creating a Zone
 ---------------
 
@@ -76,10 +72,6 @@ Definition
 +---------------+----------------+--------------------------------------+
 | members       | request        | Members of the zone                  |
 +---------------+----------------+--------------------------------------+
-
-.. note::
-
-    Read more about :doc:`Zone types in the component docs</components_and_bundles/components/Addressing/zone_types>`.
 
 Example
 ^^^^^^^
