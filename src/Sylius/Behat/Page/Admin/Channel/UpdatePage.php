@@ -38,19 +38,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->selectFieldOption('Locales', $language);
     }
 
-    public function isLocaleChosen(string $language): bool
-    {
-        return $this->getElement('locales')->find('named', ['option', $language])->hasAttribute('selected');
-    }
-
     public function chooseCurrency(string $currencyCode): void
     {
         $this->getDocument()->selectFieldOption('Currencies', $currencyCode);
-    }
-
-    public function isCurrencyChosen(string $currencyCode): bool
-    {
-        return $this->getElement('currencies')->find('named', ['option', $currencyCode])->hasAttribute('selected');
     }
 
     public function chooseDefaultTaxZone(string $taxZone): void
@@ -61,6 +51,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function chooseTaxCalculationStrategy(string $taxZone): void
     {
         $this->getDocument()->selectFieldOption('Tax calculation strategy', $taxZone);
+    }
+
+    public function isLocaleChosen(string $language): bool
+    {
+        return $this->getElement('locales')->find('named', ['option', $language])->hasAttribute('selected');
+    }
+
+    public function isCurrencyChosen(string $currencyCode): bool
+    {
+        return $this->getElement('currencies')->find('named', ['option', $currencyCode])->hasAttribute('selected');
     }
 
     public function isDefaultTaxZoneChosen(string $taxZone): bool

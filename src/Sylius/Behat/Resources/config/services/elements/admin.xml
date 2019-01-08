@@ -15,13 +15,9 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
-    <parameters>
-        <parameter key="sylius.behat.element.shop.account.register.class">Sylius\Behat\Element\Shop\Account\RegisterElement</parameter>
-    </parameters>
-
     <services>
         <defaults public="true" />
 
-        <service id="sylius.behat.element.shop.account.register" class="%sylius.behat.element.shop.account.register.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.element.admin.channel.shop_billing_data" class="Sylius\Behat\Element\Admin\Channel\ShopBillingDataElement" parent="sylius.behat.element" public="false" />
     </services>
 </container>
