@@ -19,8 +19,7 @@ field. What could be the next step?
 
 * :doc:`customizing a product variant grid</customization/grid>`, to see new field on the index page
 * customizing template of product details page, to show information to customer if product is not available, but can be ordered on demand
-* allowing to order **not available yet, but available on demand** variants and therefore
-  customizing the whole :doc:`order processing</components_and_bundles/bundles/SyliusOrderBundle/processors>` and :doc:`inventory operations</components_and_bundles/bundles/SyliusInventoryBundle/services>`
+* allowing to order **not available yet, but available on demand** variants and therefore customizing the whole order processing and inventory operations.
 
 and even more. The limit is only your imagination (and business value, of course!). For more inspiration, we strongly recommend
 our :doc:`customizing guide</customization/index>`.

@@ -47,4 +47,3 @@ Learn more
 ----------
 
 * :doc:`Addressing - Component Documentation </components_and_bundles/components/Addressing/index>`
-* :doc:`Addressing - Bundle Documentation </components_and_bundles/bundles/SyliusAddressingBundle/index>`

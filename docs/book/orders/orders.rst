@@ -235,4 +235,3 @@ Learn more
 ----------
 
 * :doc:`Order - Component Documentation </components_and_bundles/components/Order/index>`
-* :doc:`Order - Bundle Documentation </components_and_bundles/bundles/SyliusOrderBundle/index>`

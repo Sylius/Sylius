@@ -85,10 +85,6 @@ ShippingCategory has the following properties:
 | updatedAt     | Last update time                    |
 +---------------+-------------------------------------+
 
-.. hint::
-    To understand relationship between **ShippingMethod** and shippable object base on **ShippingCategory** go to
-    :doc:`/components_and_bundles/bundles/SyliusShippingBundle/shipping_requirements`.
-
 .. note::
     This model implements the :ref:`component_shipping_model_shipping-category-interface`.
 

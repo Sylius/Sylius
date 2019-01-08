@@ -24,8 +24,8 @@ The following states are defined:
 +-------------------+-------------+-----------------------------------------------+
 
 .. tip::
+
     Please keep in mind that these states are just default, you can define and use your own.
-    If you use this component with :doc:`/components_and_bundles/bundles/SyliusOrderBundle/index` and Symfony, you will have full state machine configuration at your disposal.
 
 .. _component_order_order-transitions:
 

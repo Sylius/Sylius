@@ -471,4 +471,3 @@ There are a few possibilities:
 
 .. note::
     The categoryRequirement property in  **ShippingMethod** is set default to CATEGORY_REQUIREMENT_MATCH_ANY.
-    For more detailed information about requirements please go to :doc:`/components_and_bundles/bundles/SyliusShippingBundle/shipping_requirements`.
