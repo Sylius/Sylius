@@ -4,7 +4,7 @@ app_book:
     type: sylius.resource_api
 
 app_book_sortable_index:
-    path: /books/sortable/
+    path: /sortable-books/
     methods: [GET]
     defaults:
         _controller: app.controller.book:indexAction
@@ -12,7 +12,7 @@ app_book_sortable_index:
             sortable: true
 
 app_book_filterable_index:
-    path: /books/filterable/
+    path: /filterable-books/
     methods: [GET]
     defaults:
         _controller: app.controller.book:indexAction
@@ -24,7 +24,7 @@ app_versioned_book:
     prefix: /v{version}
 
 app_create_book_with_custom_factory:
-    path: /books/create-custom
+    path: /create-custom-book
     methods: [POST]
     defaults:
         _controller: app.controller.book:createAction
