@@ -18,8 +18,6 @@ Installation
 
 [Install Sylius](http://docs.sylius.com/en/latest/book/installation/installation.html) with Composer (see [requirements details](http://docs.sylius.com/en/latest/book/installation/requirements.html)).
 
-Alternatively, you can [use our Vagrant setup](http://docs.sylius.com/en/latest/book/installation/vagrant_installation.html).
-
 Documentation
 -------------
  
