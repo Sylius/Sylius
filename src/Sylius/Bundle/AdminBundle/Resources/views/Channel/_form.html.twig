@@ -25,6 +25,21 @@
                 {{ form_row(form.themeName) }}
             </div>
         </div>
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ form_label(form.shopBillingData) }}</h4>
+            <div class="two fields">
+                {{ form_row(form.shopBillingData.company) }}
+                {{ form_row(form.shopBillingData.taxId) }}
+            </div>
+            <div class="two fields">
+                {{ form_row(form.shopBillingData.countryCode) }}
+                {{ form_row(form.shopBillingData.street) }}
+            </div>
+            <div class="two fields">
+                {{ form_row(form.shopBillingData.city) }}
+                {{ form_row(form.shopBillingData.postcode) }}
+            </div>
+        </div>
     </div>
     <div class="column">
         <div class="ui segment">
