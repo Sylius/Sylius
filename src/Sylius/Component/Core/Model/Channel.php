@@ -55,6 +55,9 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var bool */
     protected $accountVerificationRequired = true;
 
+    /** @var ShopBillingDataInterface|null */
+    protected $shopBillingData;
+
     public function __construct()
     {
         parent::__construct();
@@ -277,5 +280,15 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setAccountVerificationRequired(bool $accountVerificationRequired): void
     {
         $this->accountVerificationRequired = $accountVerificationRequired;
+    }
+
+    public function getShopBillingData(): ?ShopBillingDataInterface
+    {
+        return $this->shopBillingData;
+    }
+
+    public function setShopBillingData(?ShopBillingDataInterface $shopBillingData): void
+    {
+        $this->shopBillingData = $shopBillingData;
     }
 }
