@@ -81,4 +81,12 @@ final class UserSpec extends ObjectBehavior
         $this->getEmail()->shouldReturn('admin@example.com');
         $this->getEmailCanonical()->shouldReturn('user@example.com');
     }
+
+    function it_has_encoder_name()
+    {
+        $this->getEncoderName()->shouldReturn(null);
+
+        $this->setEncoderName('argon2i');
+        $this->getEncoderName()->shouldReturn('argon2i');
+    }
 }
