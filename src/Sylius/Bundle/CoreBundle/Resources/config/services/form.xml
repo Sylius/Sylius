@@ -48,6 +48,7 @@
         <parameter key="sylius.form.type.product_image.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.model.shop_billing_data.class">Sylius\Component\Core\Model\ShopBillingData</parameter>
     </parameters>
 
     <services>
@@ -242,6 +243,7 @@
         </service>
 
         <service id="sylius.form.type.shop_billing_data" class="Sylius\Bundle\CoreBundle\Form\Type\ShopBillingDataType">
+            <argument>%sylius.model.shop_billing_data.class%</argument>
             <tag name="form.type" />
         </service>
 

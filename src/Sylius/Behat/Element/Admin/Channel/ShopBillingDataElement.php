@@ -49,12 +49,12 @@ final class ShopBillingDataElement extends Element implements ShopBillingDataEle
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'city' => '#sylius_channel_billingData_city',
-            'company' => '#sylius_channel_billingData_company',
-            'country_code' => '#sylius_channel_billingData_countryCode',
-            'postcode' => '#sylius_channel_billingData_postcode',
-            'street' => '#sylius_channel_billingData_street',
-            'tax_id' => '#sylius_channel_billingData_taxId',
+            'city' => '#sylius_channel_shopBillingData_city',
+            'company' => '#sylius_channel_shopBillingData_company',
+            'country_code' => '#sylius_channel_shopBillingData_countryCode',
+            'postcode' => '#sylius_channel_shopBillingData_postcode',
+            'street' => '#sylius_channel_shopBillingData_street',
+            'tax_id' => '#sylius_channel_shopBillingData_taxId',
         ]);
     }
 }

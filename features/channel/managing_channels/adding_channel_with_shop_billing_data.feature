@@ -7,6 +7,7 @@ Feature: Adding a new channel with shop billing data
     Background:
         Given the store has currency "Euro"
         And the store has locale "English (United States)"
+        And the store operates in "United States"
         And I am logged in as an administrator
 
     @ui

@@ -13,6 +13,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShopBillingDataType extends AbstractType
 {
+    /** @var string */
+    private $dataClass;
+
+    public function __construct(string $dataClass)
+    {
+        $this->dataClass = $dataClass;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -27,21 +35,25 @@ final class ShopBillingDataType extends AbstractType
             ->add('countryCode', CountryCodeChoiceType::class, [
                 'label' => 'sylius.form.channel.billing_data.country',
                 'enabled' => true,
+                'required' => false,
             ])
             ->add('street', TextType::class, [
                 'label' => 'sylius.form.channel.billing_data.street',
+                'required' => false,
             ])
             ->add('city', TextType::class, [
                 'label' => 'sylius.form.channel.billing_data.city',
+                'required' => false,
             ])
             ->add('postcode', TextType::class, [
                 'label' => 'sylius.form.channel.billing_data.postcode',
+                'required' => false,
             ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('data_class', ShopBillingData::class);
+        $resolver->setDefault('data_class', $this->dataClass);
     }
 }

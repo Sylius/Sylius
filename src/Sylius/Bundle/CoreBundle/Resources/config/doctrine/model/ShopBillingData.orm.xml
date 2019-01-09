@@ -21,11 +21,11 @@
             <generator/>
         </id>
 
-        <field name="company" />
-        <field name="taxId" />
-        <field name="countryCode" />
-        <field name="street" />
-        <field name="city" />
-        <field name="postcode" />
+        <field name="company" nullable="true" />
+        <field name="taxId" nullable="true" />
+        <field name="countryCode" nullable="true" />
+        <field name="street" nullable="true" />
+        <field name="city" nullable="true" />
+        <field name="postcode" nullable="true" />
     </entity>
 </doctrine-mapping>
