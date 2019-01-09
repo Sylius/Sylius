@@ -17,9 +17,6 @@ use Behat\Mink\Element\NodeElement;
 
 trait Toggles
 {
-    /**
-     * @return NodeElement
-     */
     abstract protected function getToggleableElement(): NodeElement;
 
     /**
