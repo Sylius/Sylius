@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace AppBundle\Factory;
 
-use AppBundle\Entity\Book;
 use Sylius\Bundle\ResourceBundle\test\src\AppBundle\Factory\BookFactoryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;

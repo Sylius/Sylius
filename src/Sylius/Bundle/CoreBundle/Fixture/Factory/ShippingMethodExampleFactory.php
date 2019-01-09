@@ -66,7 +66,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         $this->zoneRepository = $zoneRepository;
         $this->shippingCategoryRepository = $shippingCategoryRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
-        if($this->taxCategoryRepository === null) {
+        if ($this->taxCategoryRepository === null) {
             @trigger_error(sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.4 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
         }
         $this->localeRepository = $localeRepository;
@@ -162,7 +162,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setDefault('archived_at', null)
             ->setAllowedTypes('archived_at', ['null', \DateTimeInterface::class])
         ;
-        if($this->taxCategoryRepository !== null) {
+        if ($this->taxCategoryRepository !== null) {
             $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
         }
     }

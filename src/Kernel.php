@@ -11,7 +11,6 @@
 
 declare(strict_types=1);
 
-use ProxyManager\Proxy\VirtualProxyInterface;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\DelegatingLoader;

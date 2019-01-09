@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Book;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\test\src\AppBundle\Repository\BookRepositoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class BookRepository extends EntityRepository implements BookRepositoryInterface
 {
