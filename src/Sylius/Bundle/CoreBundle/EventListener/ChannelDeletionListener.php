@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\ChannelBundle\Doctrine\ORM\ChannelRepository;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 final class ChannelDeletionListener
 {
-    /** @var ChannelRepository */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    public function __construct(ChannelRepository $repository)
+    public function __construct(ChannelRepositoryInterface $repository)
     {
         $this->channelRepository = $repository;
     }
