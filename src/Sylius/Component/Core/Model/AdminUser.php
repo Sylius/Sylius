@@ -84,8 +84,8 @@ class AdminUser extends User implements AdminUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getEncoderName(): string
+    public function getEncoderName(): ?string
     {
-        return 'sylius_password_encoder_sha512';
+        return null;
     }
 }
