@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Sylius\Bundle\UserBundle\EventListener\UserDeleteListener;
 use Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber;
 use Sylius\Bundle\UserBundle\EventListener\UserReloaderListener;
+use Sylius\Bundle\UserBundle\Factory\UserWithEncoderFactory;
 use Sylius\Bundle\UserBundle\Provider\AbstractUserProvider;
 use Sylius\Bundle\UserBundle\Provider\EmailProvider;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider;
@@ -49,6 +50,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $loader->load('services.xml');
 
         $this->createServices($config['resources'], $container);
+        $this->createFactories($config['encoder'], $config['resources'], $container);
     }
 
     private function resolveResources(array $resources, ContainerBuilder $container): array
@@ -77,6 +79,30 @@ final class SyliusUserExtension extends AbstractResourceExtension
             $this->createLastLoginListeners($userType, $userClass, $container);
             $this->createProviders($userType, $userClass, $container);
             $this->createUserDeleteListeners($userType, $container);
+        }
+    }
+
+    private function createFactories(?string $globalEncoder, array $resources, ContainerBuilder $container): void
+    {
+        foreach ($resources as $userType => $config) {
+            $encoder = $config['user']['encoder'] ?? $globalEncoder;
+
+            if (null === $encoder) {
+                continue;
+            }
+
+            $factoryServiceId = sprintf('sylius.factory.%s_user', $userType);
+
+            $factoryDefinition = new Definition(
+                UserWithEncoderFactory::class,
+                [
+                    $container->getDefinition($factoryServiceId),
+                    $encoder,
+                ]
+            );
+            $factoryDefinition->setPublic(true);
+
+            $container->setDefinition($factoryServiceId, $factoryDefinition);
         }
     }
 
