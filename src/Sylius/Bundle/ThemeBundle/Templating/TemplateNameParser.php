@@ -57,7 +57,7 @@ final class TemplateNameParser implements TemplateNameParserInterface
         }
 
         $template = new TemplateReference(
-            $matches[1] ? $matches[1] . 'Bundle' : '',
+            $this->getBundleOrPluginName($matches[1]),
             $matches[2],
             $matches[3],
             $matches[4],
@@ -73,5 +73,14 @@ final class TemplateNameParser implements TemplateNameParserInterface
         }
 
         return $this->cache[$name] = $template;
+    }
+
+    private function getBundleOrPluginName(string $name): string
+    {
+        if (preg_match('/^.+Plugin$/', $name)) {
+            return $name;
+        }
+
+        return $name ? $name . 'Bundle' : '';
     }
 }

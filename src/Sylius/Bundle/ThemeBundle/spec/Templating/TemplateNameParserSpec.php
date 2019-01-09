@@ -65,6 +65,17 @@ final class TemplateNameParserSpec extends ObjectBehavior
         $this->parse('@Acme/Nested/Directory/app.html.twig')->shouldBeLike(new TemplateReference('AcmeBundle', 'Nested/Directory', 'app', 'html', 'twig'));
     }
 
+    function it_generates_plugin_template_references_from_namespaced_paths(KernelInterface $kernel): void
+    {
+        $kernel->getBundle('AcmePlugin')->willReturn(null); // just do not throw an exception
+
+        $this->parse('@AcmePlugin/app.html.twig')->shouldBeLike(new TemplateReference('AcmePlugin', '', 'app', 'html', 'twig'));
+        $this->parse('@AcmePlugin/Directory/app.html.twig')->shouldBeLike(new TemplateReference('AcmePlugin', 'Directory', 'app', 'html', 'twig'));
+        $this->parse('@AcmePlugin/Directory.WithDot/app.html.twig')->shouldBeLike(new TemplateReference('AcmePlugin', 'Directory.WithDot', 'app', 'html', 'twig'));
+        $this->parse('@AcmePlugin/Directory/app.with.dots.html.twig')->shouldBeLike(new TemplateReference('AcmePlugin', 'Directory', 'app.with.dots', 'html', 'twig'));
+        $this->parse('@AcmePlugin/Nested/Directory/app.html.twig')->shouldBeLike(new TemplateReference('AcmePlugin', 'Nested/Directory', 'app', 'html', 'twig'));
+    }
+
     function it_delegates_custom_namespace_to_decorated_parser(
         KernelInterface $kernel,
         TemplateNameParserInterface $decoratedParser,
