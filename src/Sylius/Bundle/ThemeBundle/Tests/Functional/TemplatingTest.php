@@ -82,6 +82,29 @@ final class TemplatingTest extends WebTestCase
 
     /**
      * @test
+     * @dataProvider getPluginTemplatesUsingNamespacedPaths
+     */
+    public function it_renders_sylius_plugin_templates_using_namespaced_paths(string $templateName, string $contents): void
+    {
+        $client = self::createClient();
+
+        $crawler = $client->request('GET', '/template/' . $templateName);
+        $this->assertEquals($contents, trim($crawler->text()));
+    }
+
+    /**
+     * @return array
+     */
+    public function getPluginTemplatesUsingNamespacedPaths(): array
+    {
+        return [
+            ['@TestPlugin/Templating/twigNamespacedVanillaOverriddenThemeTemplate.txt.twig', '@TestPlugin/Templating/twigNamespacedVanillaOverriddenThemeTemplate.txt.twig|sylius/first-test-theme'],
+            ['@TestPlugin/Templating/twigNamespacedBothThemesTemplate.txt.twig', '@TestPlugin/Templating/twigNamespacedBothThemesTemplate.txt.twig|sylius/first-test-theme'],
+        ];
+    }
+
+    /**
+     * @test
      * @dataProvider getAppTemplates
      *
      * @param string $templateName
