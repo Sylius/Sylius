@@ -748,7 +748,6 @@ final class ProductContext implements Context
 
     /**
      * @param string $productName
-     * @param int $price
      *
      * @return ProductInterface
      */
@@ -900,8 +899,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @param int $price
-     *
      * @return ChannelPricingInterface
      */
     private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null)

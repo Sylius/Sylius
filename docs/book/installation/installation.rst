@@ -26,10 +26,6 @@ for your custom e-commerce application.
     If you do not want your shop to send requests to GUS, please visit :doc:`this guide </cookbook/configuration/disabling-admin-notifications>`
     for further instructions.
 
-.. tip::
-
-    If you prefer to work with **Vagrant** head to :doc:`this guide </book/installation/vagrant_installation>`.
-
 Initiating A New Sylius Project
 -------------------------------
 
