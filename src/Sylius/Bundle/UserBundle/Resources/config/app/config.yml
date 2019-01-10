@@ -1,6 +1,13 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+security:
+    encoders:
+        argon2i: argon2i
+
+sylius_user:
+    encoder: argon2i
+
 jms_serializer:
     metadata:
         directories:

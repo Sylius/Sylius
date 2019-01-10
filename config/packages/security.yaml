@@ -11,7 +11,6 @@ security:
             id: sylius.shop_user_provider.email_or_name_based
     encoders:
         Sylius\Component\User\Model\UserInterface: argon2i
-        argon2i: argon2i
     firewalls:
         admin:
             switch_user: true
