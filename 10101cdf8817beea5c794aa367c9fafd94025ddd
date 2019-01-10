@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-10-17T05:48:52Z
+
+@kayneth there are also some failing tests, could you take a look at them? Thanks :)
+
+---------------------------------------------------------------------------
+
+by kayneth at 2018-10-21T14:15:12Z
+
+@Zales0123 Sorry for that !
+There were a test that didn't pass due to a missing class in admin (nothing related to this PR).
+I really want to thank you for you patience and your time :bowing_man:
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-01-10T13:17:56Z
+
+Thank you, Dylan! :tada:
