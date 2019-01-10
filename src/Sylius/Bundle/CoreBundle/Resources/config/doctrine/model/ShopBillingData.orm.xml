@@ -22,8 +22,8 @@
         </id>
 
         <field name="company" nullable="true" />
-        <field name="taxId" nullable="true" />
-        <field name="countryCode" nullable="true" />
+        <field name="taxId" column="tax_id" nullable="true" />
+        <field name="countryCode" column="country_code" nullable="true" />
         <field name="street" nullable="true" />
         <field name="city" nullable="true" />
         <field name="postcode" nullable="true" />
