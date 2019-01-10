@@ -15,8 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 
-interface ShopUserInterface extends BaseUserInterface, CustomerAwareInterface, EncoderAwareInterface
+interface ShopUserInterface extends BaseUserInterface, CustomerAwareInterface
 {
 }

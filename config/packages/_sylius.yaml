@@ -12,3 +12,6 @@ parameters:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+sylius_user:
+    encoder: argon2i

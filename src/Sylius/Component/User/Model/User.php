@@ -104,6 +104,9 @@ class User implements UserInterface
     /** @var string|null */
     protected $emailCanonical;
 
+    /** @var string|null */
+    protected $encoderName;
+
     public function __construct()
     {
         $this->salt = base_convert(bin2hex(random_bytes(20)), 16, 36);
@@ -481,6 +484,22 @@ class User implements UserInterface
             $this->oauthAccounts->add($oauth);
             $oauth->setUser($this);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEncoderName(): ?string
+    {
+        return $this->encoderName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEncoderName(?string $encoderName): void
+    {
+        $this->encoderName = $encoderName;
     }
 
     /**

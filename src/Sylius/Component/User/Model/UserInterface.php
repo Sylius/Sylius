@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
+use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 interface UserInterface extends
@@ -25,7 +26,8 @@ interface UserInterface extends
     ResourceInterface,
     \Serializable,
     TimestampableInterface,
-    ToggleableInterface
+    ToggleableInterface,
+    EncoderAwareInterface
 {
     public const DEFAULT_ROLE = 'ROLE_USER';
 
@@ -105,4 +107,6 @@ interface UserInterface extends
     public function getOAuthAccount(string $provider): ?UserOAuthInterface;
 
     public function addOAuthAccount(UserOAuthInterface $oauth): void;
+
+    public function setEncoderName(?string $encoderName): void;
 }

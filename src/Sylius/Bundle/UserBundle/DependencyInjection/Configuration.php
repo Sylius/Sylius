@@ -42,6 +42,7 @@ final class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->scalarNode('encoder')->defaultNull()->end()
             ->end()
         ;
 
@@ -62,6 +63,7 @@ final class Configuration implements ConfigurationInterface
                                 ->addDefaultsIfNotSet()
                                 ->children()
                                     ->scalarNode('templates')->defaultValue('SyliusUserBundle:User')->end()
+                                    ->scalarNode('encoder')->defaultNull()->end()
                                     ->variableNode('options')->end()
                                     ->arrayNode('resetting')
                                         ->addDefaultsIfNotSet()
