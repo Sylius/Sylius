@@ -77,7 +77,7 @@ final class TemplateNameParser implements TemplateNameParserInterface
 
     private function getBundleOrPluginName(string $name): string
     {
-        if (preg_match('/^.+Plugin$/', $name)) {
+        if (substr($name, -6) === 'Plugin') {
             return $name;
         }
 
