@@ -98,7 +98,7 @@ final class BundleResourceLocator implements ResourceLocatorInterface
 
     private function getBundleOrPluginName(string $twigNamespace): string
     {
-        if (preg_match('/Plugin$/', $twigNamespace)) {
+        if (substr($twigNamespace, -6) === 'Plugin') {
             return $twigNamespace;
         }
 
