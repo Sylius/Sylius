@@ -515,6 +515,7 @@ class User implements UserInterface
             $this->locked,
             $this->enabled,
             $this->id,
+            $this->encoderName,
         ]);
     }
 
@@ -535,7 +536,8 @@ class User implements UserInterface
             $this->username,
             $this->locked,
             $this->enabled,
-            $this->id
+            $this->id,
+            $this->encoderName,
         ] = $data;
     }
 
