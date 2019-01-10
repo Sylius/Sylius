@@ -85,15 +85,23 @@ final class BundleResourceLocator implements ResourceLocatorInterface
     private function locateResourceBasedOnTwigNamespace(string $resourcePath, ThemeInterface $theme): string
     {
         $twigNamespace = substr($resourcePath, 1, strpos($resourcePath, '/') - 1);
-        $bundleName = $twigNamespace . 'Bundle';
         $resourceName = substr($resourcePath, strpos($resourcePath, '/') + 1);
 
-        $path = sprintf('%s/%s/views/%s', $theme->getPath(), $bundleName, $resourceName);
+        $path = sprintf('%s/%s/views/%s', $theme->getPath(), $this->getBundleOrPluginName($twigNamespace), $resourceName);
 
         if ($this->filesystem->exists($path)) {
             return $path;
         }
 
         throw new ResourceNotFoundException($resourcePath, $theme);
+    }
+
+    private function getBundleOrPluginName(string $twigNamespace): string
+    {
+        if (substr($twigNamespace, -6) === 'Plugin') {
+            return $twigNamespace;
+        }
+
+        return $twigNamespace . 'Bundle';
     }
 }
