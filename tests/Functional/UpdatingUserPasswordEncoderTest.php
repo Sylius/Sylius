@@ -10,15 +10,20 @@ use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use PHPUnit\Framework\Assert;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\BrowserKit\Client;
 
 final class UpdatingUserPasswordEncoderTest extends WebTestCase
 {
+    /** @var Client */
+    private $client;
+
     protected function setUp(): void
     {
-        static::bootKernel();
+        $this->client = static::createClient();
+        $this->client->followRedirects(true);
 
         /** @var LoaderInterface $fixtureLoader */
-        $fixtureLoader = static::$container->get('fidry_alice_data_fixtures.loader.doctrine');
+        $fixtureLoader = $this->client->getContainer()->get('fidry_alice_data_fixtures.loader.doctrine');
 
         $fixtureLoader->load(
             [
@@ -35,14 +40,11 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
     /** @test */
     public function it_updates_the_encoder_when_the_shop_user_logs_in(): void
     {
-        $client = static::createClient();
-        $client->followRedirects(true);
-
         /** @var UserRepositoryInterface $shopUserRepository */
-        $shopUserRepository = static::$container->get('sylius.repository.shop_user');
+        $shopUserRepository = $this->client->getContainer()->get('sylius.repository.shop_user');
 
         /** @var ObjectManager $shopUserManager */
-        $shopUserManager = static::$container->get('sylius.manager.shop_user');
+        $shopUserManager = $this->client->getContainer()->get('sylius.manager.shop_user');
 
         $shopUser = $shopUserRepository->findOneByEmail('Oliver@doe.com');
         $shopUser->setPlainPassword('testpassword');
@@ -51,29 +53,26 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
         $shopUserManager->persist($shopUser);
         $shopUserManager->flush();
 
-        $client->request('GET', '/en_US/login');
+        $this->client->request('GET', '/en_US/login');
 
-        $client->submitForm('Login', [
+        $this->submitForm('Login', [
             '_username' => 'Oliver@doe.com',
             '_password' => 'testpassword'
         ]);
 
-        Assert::assertSame(200, $client->getResponse()->getStatusCode());
-        Assert::assertSame('/en_US/', parse_url($client->getCrawler()->getUri(), \PHP_URL_PATH));
+        Assert::assertSame(200, $this->client->getResponse()->getStatusCode());
+        Assert::assertSame('/en_US/', parse_url($this->client->getCrawler()->getUri(), \PHP_URL_PATH));
         Assert::assertSame('argon2i', $shopUserRepository->findOneByEmail('Oliver@doe.com')->getEncoderName());
     }
 
     /** @test */
     public function it_updates_the_encoder_when_the_admin_user_logs_in(): void
     {
-        $client = static::createClient();
-        $client->followRedirects(true);
-
         /** @var UserRepositoryInterface $adminUserRepository */
-        $adminUserRepository = static::$container->get('sylius.repository.admin_user');
+        $adminUserRepository = $this->client->getContainer()->get('sylius.repository.admin_user');
 
         /** @var ObjectManager $adminUserManager */
-        $adminUserManager = static::$container->get('sylius.manager.admin_user');
+        $adminUserManager = $this->client->getContainer()->get('sylius.manager.admin_user');
 
         $adminUser = $adminUserRepository->findOneByEmail('user@example.com');
         $adminUser->setPlainPassword('testpassword');
@@ -82,15 +81,24 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
         $adminUserManager->persist($adminUser);
         $adminUserManager->flush();
 
-        $client->request('GET', '/admin/login');
+        $this->client->request('GET', '/admin/login');
 
-        $client->submitForm('Login', [
+        $this->submitForm('Login', [
             '_username' => 'user@example.com',
             '_password' => 'testpassword'
         ]);
 
-        Assert::assertSame(200, $client->getResponse()->getStatusCode());
-        Assert::assertSame('/admin/', parse_url($client->getCrawler()->getUri(), \PHP_URL_PATH));
+        Assert::assertSame(200, $this->client->getResponse()->getStatusCode());
+        Assert::assertSame('/admin/', parse_url($this->client->getCrawler()->getUri(), \PHP_URL_PATH));
         Assert::assertSame('argon2i', $adminUserRepository->findOneByEmail('user@example.com')->getEncoderName());
+    }
+
+    private function submitForm(string $button, array $fieldValues = []): void
+    {
+        $buttonNode = $this->client->getCrawler()->selectButton($button);
+
+        $form = $buttonNode->form($fieldValues);
+
+        $this->client->submit($form);
     }
 }
