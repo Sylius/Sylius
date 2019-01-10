@@ -86,5 +86,9 @@
             <argument type="service" id="sylius.product_variant_resolver.default" />
             <tag name="kernel.event_listener" event="sylius.product.initialize_update" method="lock" />
         </service>
+
+        <service id="sylius.listener.customer_default_address" class="Sylius\Bundle\CoreBundle\EventListener\CustomerDefaultAddressListener">
+            <tag name="kernel.event_listener" event="sylius.address.pre_create" method="preCreate" />
+        </service>
     </services>
 </container>

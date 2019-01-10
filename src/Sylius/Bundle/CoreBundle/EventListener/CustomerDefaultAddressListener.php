@@ -1,0 +1,52 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\CoreBundle\EventListener;
+
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\Customer;
+use Webmozart\Assert\Assert;
+
+final class CustomerDefaultAddressListener
+{
+    /**
+     * @param ResourceControllerEvent $event
+     */
+    public function preCreate(ResourceControllerEvent $event): void
+    {
+        /** @var AddressInterface $address */
+        $address = $event->getSubject();
+
+        Assert::isInstanceOf($address, AddressInterface::class);
+
+        $this->setAddressAsDefault($address);
+    }
+
+    /**
+     * @param AddressInterface $address
+     */
+    private function setAddressAsDefault(AddressInterface $address): void
+    {
+        if (null !== $address->getId()) {
+            return;
+        }
+
+        /** @var Customer|null $customer */
+        $customer = $address->getCustomer();
+
+        if (null !== $customer && null === $customer->getDefaultAddress()) {
+            $customer->setDefaultAddress($address);
+        }
+    }
+}

@@ -17,7 +17,7 @@ Feature: Marking an address as default
         And I should have 2 addresses in my address book
 
     @ui
-    Scenario: Setting an order as default
+    Scenario: Setting an address as default
         Given I am browsing my address book
         When I set the address of "Lucifer Morningstar" as default
         Then I should be notified that the address has been set as default
