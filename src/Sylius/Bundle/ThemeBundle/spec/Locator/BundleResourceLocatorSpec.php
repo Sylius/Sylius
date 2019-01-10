@@ -102,6 +102,17 @@ final class BundleResourceLocatorSpec extends ObjectBehavior
         $this->locateResource('@Just/Directory/index.html.twig', $theme)->shouldReturn('/theme/path/JustBundle/views/Directory/index.html.twig');
     }
 
+    function it_locates_plugin_resource_using_path_derived_from_twig_namespaces(
+        Filesystem $filesystem,
+        ThemeInterface $theme
+    ): void {
+        $theme->getPath()->willReturn('/theme/path');
+
+        $filesystem->exists('/theme/path/JustPlugin/views/Directory/index.html.twig')->shouldBeCalled()->willReturn(true);
+
+        $this->locateResource('@JustPlugin/Directory/index.html.twig', $theme)->shouldReturn('/theme/path/JustPlugin/views/Directory/index.html.twig');
+    }
+
     function it_throws_an_exception_if_resource_can_not_be_located_using_path_derived_from_twig_namespaces(
         Filesystem $filesystem,
         ThemeInterface $theme
