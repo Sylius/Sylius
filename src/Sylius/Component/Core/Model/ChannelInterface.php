@@ -61,7 +61,7 @@ interface ChannelInterface extends
 
     public function setAccountVerificationRequired(bool $accountVerificationRequired): void;
 
-    public function getShopBillingData(): ?ShopBillingDataInterface;
+    public function getShopBillingData(): ShopBillingDataInterface;
 
-    public function setShopBillingData(?ShopBillingDataInterface $shopBillingData): void;
+    public function setShopBillingData(ShopBillingDataInterface $shopBillingData): void;
 }

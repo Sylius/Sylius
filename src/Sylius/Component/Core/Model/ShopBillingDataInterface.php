@@ -15,8 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 interface ShopBillingDataInterface
 {
-    public function getId(): ?int;
-
     public function getTaxId(): ?string;
 
     public function setTaxId(?string $taxId): void;

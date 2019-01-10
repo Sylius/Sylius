@@ -57,7 +57,7 @@
         <one-to-one field="shopBillingData" target-entity="Sylius\Component\Core\Model\ShopBillingData">
             <join-column name="shop_billing_data_id" on-delete="CASCADE"/>
             <cascade>
-                <cascade-persist />
+                <cascade-all />
             </cascade>
         </one-to-one>
     </mapped-superclass>
