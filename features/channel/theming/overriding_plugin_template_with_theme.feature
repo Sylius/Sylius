@@ -7,7 +7,7 @@ Feature: Overriding plugin template with a theme
     Background:
         Given the store operates on a single channel in "United States"
         And the store has "johnny/cash" theme
-        And this theme changes plugin main template's content to "I Walk the Line"
+        And this theme changes plugin main template's content to "Ring of Fire"
 
     @ui
     Scenario: Displaying default plugin main template
@@ -16,7 +16,7 @@ Feature: Overriding plugin template with a theme
         Then I should see a plugin's main page with content "I Walk the Line"
 
     @ui
-    Scenario: Displaying themed shop homepage
+    Scenario: Displaying themed plugin main template
         Given channel "United States" uses "johnny/cash" theme
         When I visit plugin's main page
         Then I should see a plugin's main page with content "Ring of Fire"
