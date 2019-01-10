@@ -29,19 +29,19 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      */
     public function unsetTheme(): void;
 
-    public function isCodeDisabled(): bool;
-
     public function chooseLocale(string $language): void;
 
-    public function isLocaleChosen(string $language): bool;
-
     public function chooseCurrency(string $currencyCode): void;
-
-    public function isCurrencyChosen(string $currencyCode): bool;
 
     public function chooseDefaultTaxZone(string $taxZone): void;
 
     public function chooseTaxCalculationStrategy(string $taxCalculationStrategy): void;
+
+    public function isCodeDisabled(): bool;
+
+    public function isLocaleChosen(string $language): bool;
+
+    public function isCurrencyChosen(string $currencyCode): bool;
 
     public function isDefaultTaxZoneChosen(string $taxZone): bool;
 

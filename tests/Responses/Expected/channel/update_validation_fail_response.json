@@ -26,6 +26,16 @@
             "skippingShippingStepAllowed": {},
             "skippingPaymentStepAllowed": {},
             "accountVerificationRequired": {},
+            "shopBillingData": {
+                "children": {
+                    "taxId": {},
+                    "company": {},
+                    "countryCode": {},
+                    "street": {},
+                    "city": {},
+                    "postcode": {}
+                }
+            },
             "code": {},
             "baseCurrency": {}
         }
