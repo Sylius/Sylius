@@ -69,7 +69,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->clickLocaleTabIfItsNotActive($localeCode);
 
         $attributeOption = $this->getElement('attributes_choice')->find('css', sprintf('option:contains("%s")', $attributeName));
-        $this->selectElementFromAttributesDropdown((int) $attributeOption->getAttribute('value'));
+        $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
 
         $this->getDocument()->pressButton('Add attributes');
         $this->waitForFormElement();
@@ -253,7 +253,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('taxonomy')->click();
     }
 
-    private function selectElementFromAttributesDropdown(int $id): void
+    private function selectElementFromAttributesDropdown(string $id): void
     {
         /** @var Selenium2Driver $driver */
         $driver = $this->getDriver();
