@@ -1,0 +1,3 @@
+security:
+    encoders:
+        sha512: sha512

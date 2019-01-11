@@ -7,8 +7,11 @@ namespace Sylius\Bundle\UserBundle\Tests\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use PHPUnit\Framework\Assert;
 use Sylius\Bundle\UserBundle\DependencyInjection\SyliusUserExtension;
+use Sylius\Bundle\UserBundle\EventListener\UpdateUserEncoderListener;
 use Sylius\Bundle\UserBundle\Factory\UserWithEncoderFactory;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\User\Model\User;
+use Sylius\Component\User\Model\UserInterface;
 
 final class SyliusUserExtensionTest extends AbstractExtensionTestCase
 {
@@ -83,6 +86,42 @@ final class SyliusUserExtensionTest extends AbstractExtensionTestCase
 
         Assert::assertSame(UserWithEncoderFactory::class, $factoryDefinition->getClass());
         Assert::assertSame('evenmorecustomencoder', $factoryDefinition->getArgument(1));
+    }
+
+    /** @test */
+    public function it_creates_a_update_user_encoder_listener_for_each_user_type(): void
+    {
+        $this->load([
+            'encoder' => 'customencoder',
+            'resources' => [
+                'admin' => [
+                    'user' => [
+                        'encoder' => 'evenmorecustomencoder',
+                        'classes' => [
+                            'model' => 'AdminUserClass',
+                            'interface' => 'AdminUserInterface',
+                        ],
+                    ],
+                ],
+                'shop' => [],
+            ],
+        ]);
+
+        $adminUserListenerDefinition = $this->container->getDefinition('sylius.admin_user.listener.update_user_encoder');
+
+        Assert::assertSame(UpdateUserEncoderListener::class, $adminUserListenerDefinition->getClass());
+        Assert::assertSame('evenmorecustomencoder', $adminUserListenerDefinition->getArgument(1));
+        Assert::assertSame('AdminUserClass', $adminUserListenerDefinition->getArgument(2));
+        Assert::assertSame('AdminUserInterface', $adminUserListenerDefinition->getArgument(3));
+        Assert::assertSame('_password', $adminUserListenerDefinition->getArgument(4));
+
+        $shopUserListenerDefinition = $this->container->getDefinition('sylius.shop_user.listener.update_user_encoder');
+
+        Assert::assertSame(UpdateUserEncoderListener::class, $shopUserListenerDefinition->getClass());
+        Assert::assertSame('customencoder', $shopUserListenerDefinition->getArgument(1));
+        Assert::assertSame(User::class, $shopUserListenerDefinition->getArgument(2));
+        Assert::assertSame(UserInterface::class, $shopUserListenerDefinition->getArgument(3));
+        Assert::assertSame('_password', $shopUserListenerDefinition->getArgument(4));
     }
 
     protected function getContainerExtensions(): iterable
