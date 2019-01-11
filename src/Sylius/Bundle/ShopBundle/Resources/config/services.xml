@@ -27,6 +27,7 @@
             <argument type="service" id="sylius.context.channel.composite" />
             <argument type="service" id="sylius.storage.cart_session" />
         </service>
+
         <service id="sylius.context.cart.session_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext">
             <argument type="service" id="sylius.storage.cart_session" />
             <argument type="service" id="sylius.context.channel" />
@@ -38,5 +39,6 @@
             <argument>_sylius.cart</argument>
             <argument type="service" id="sylius.repository.order" />
         </service>
+        <service id="Sylius\Component\Core\Storage\CartStorageInterface" alias="sylius.storage.cart_session" />
     </services>
 </container>

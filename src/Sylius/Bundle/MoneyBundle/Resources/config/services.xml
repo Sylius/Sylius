@@ -20,6 +20,7 @@
         </service>
 
         <service id="sylius.money_formatter" class="Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter" />
+        <service id="Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface" alias="sylius.money_formatter" />
 
         <service id="sylius.templating.helper.format_money" class="Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper" lazy="true">
             <argument type="service" id="sylius.money_formatter" />

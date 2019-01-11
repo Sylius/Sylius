@@ -16,5 +16,6 @@
         <defaults public="true" />
 
         <service id="sylius_fixtures.fixture_registry" class="Sylius\Bundle\FixturesBundle\Fixture\FixtureRegistry" />
+        <service id="Sylius\Bundle\FixturesBundle\Fixture\FixtureRegistryInterface" alias="sylius_fixtures.fixture_registry" />
     </services>
 </container>

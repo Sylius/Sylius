@@ -23,16 +23,23 @@
             <argument type="service" id="sylius.custom_factory.zone.inner" />
             <argument type="service" id="sylius.factory.zone_member" />
         </service>
+        <service id="Sylius\Component\Addressing\Factory\ZoneFactoryInterface" alias="sylius.custom_factory.zone" />
 
         <service id="sylius.province_naming_provider" class="Sylius\Component\Addressing\Provider\ProvinceNamingProvider" lazy="true">
             <argument type="service" id="sylius.repository.province" />
         </service>
+        <service id="Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface" alias="sylius.province_naming_provider" />
+
         <service id="sylius.zone_matcher" class="Sylius\Component\Addressing\Matcher\ZoneMatcher">
             <argument type="service" id="sylius.repository.zone" />
         </service>
+        <service id="Sylius\Component\Addressing\Matcher\ZoneMatcherInterface" alias="sylius.zone_matcher" />
+
         <service id="sylius.converter.country_name" class="Sylius\Component\Addressing\Converter\CountryNameConverter" />
+        <service id="Sylius\Component\Addressing\Converter\CountryNameConverterInterface" alias="sylius.converter.country_name" />
 
         <service id="sylius.address_comparator" class="Sylius\Component\Addressing\Comparator\AddressComparator"/>
+        <service id="Sylius\Component\Addressing\Comparator\AddressComparatorInterface" alias="sylius.address_comparator" />
 
         <service id="sylius.twig.extension.country_name" class="Sylius\Bundle\AddressingBundle\Twig\CountryNameExtension">
             <argument type="string" id="isoCode" />

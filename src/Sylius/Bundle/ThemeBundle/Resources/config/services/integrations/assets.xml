@@ -22,12 +22,14 @@
             <argument type="service" id="sylius.theme.hierarchy_provider" />
             <argument type="service" id="sylius.theme.asset.path_resolver" />
         </service>
+        <service id="Sylius\Bundle\ThemeBundle\Asset\Installer\AssetsInstallerInterface" alias="sylius.theme.asset.assets_installer" />
 
         <service id="sylius.theme.asset.assets_installer.output_aware" class="Sylius\Bundle\ThemeBundle\Asset\Installer\OutputAwareAssetsInstaller" decorates="sylius.theme.asset.assets_installer" decoration-priority="256">
             <argument type="service" id="sylius.theme.asset.assets_installer.output_aware.inner" />
         </service>
 
         <service id="sylius.theme.asset.path_resolver" class="Sylius\Bundle\ThemeBundle\Asset\PathResolver" public="false" />
+        <service id="Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface" alias="sylius.theme.asset.path_resolver" />
 
         <!-- Overridden services -->
         <service id="assets.path_package" class="Sylius\Bundle\ThemeBundle\Asset\Package\PathPackage" abstract="true">

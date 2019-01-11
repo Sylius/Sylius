@@ -21,6 +21,7 @@
         </service>
 
         <service id="sylius.context.channel.fake_channel.code_provider" class="Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelCodeProvider" public="false" />
+        <service id="Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelCodeProviderInterface" alias="sylius.context.channel.fake_channel.code_provider" />
 
         <service id="sylius.context.channel.fake_channel.context" class="Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelContext" public="false">
             <argument type="service" id="sylius.context.channel.fake_channel.code_provider" />

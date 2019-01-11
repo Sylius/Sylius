@@ -35,6 +35,7 @@
         <service id="sylius.context.locale" class="Sylius\Component\Locale\Context\ImmutableLocaleContext">
             <argument>%sylius_locale.locale%</argument>
         </service>
+        <service id="Sylius\Component\Locale\Context\LocaleContextInterface" alias="sylius.context.locale" />
 
         <service id="sylius.context.locale.composite" class="Sylius\Component\Locale\Context\CompositeLocaleContext" decorates="sylius.context.locale" decoration-priority="256" public="false" />
 
@@ -42,8 +43,10 @@
             <argument type="service" id="sylius.repository.locale" />
             <argument>%sylius_locale.locale%</argument>
         </service>
+        <service id="Sylius\Component\Locale\Provider\LocaleProviderInterface" alias="sylius.locale_provider" />
 
         <service id="sylius.locale_converter" class="Sylius\Component\Locale\Converter\LocaleConverter" />
+        <service id="Sylius\Component\Locale\Converter\LocaleConverterInterface" alias="sylius.locale_converter" />
 
         <service id="sylius.listener.request_locale_setter" class="Sylius\Bundle\LocaleBundle\Listener\RequestLocaleSetter">
             <argument type="service" id="sylius.context.locale" />

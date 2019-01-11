@@ -35,6 +35,7 @@
         </service>
 
         <service id="sylius.authentication.success_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler" parent="security.authentication.success_handler" public="false" />
+
         <service id="sylius.authentication.failure_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler" parent="security.authentication.failure_handler" public="false" />
 
         <!-- Controllers -->
@@ -46,18 +47,24 @@
 
         <!-- Utils -->
         <service id="sylius.canonicalizer" class="Sylius\Component\User\Canonicalizer\Canonicalizer" />
+        <service id="Sylius\Component\User\Canonicalizer\CanonicalizerInterface" alias="sylius.canonicalizer" />
+
         <service id="sylius.security.password_encoder" class="Sylius\Bundle\UserBundle\Security\UserPasswordEncoder">
             <argument type="service" id="security.encoder_factory" />
         </service>
+        <service id="Sylius\Bundle\UserBundle\Security\UserPasswordEncoderInterface" alias="sylius.security.password_encoder" />
+
         <service id="sylius.security.password_updater" class="Sylius\Component\User\Security\PasswordUpdater">
             <argument type="service" id="sylius.security.password_encoder" />
         </service>
+        <service id="Sylius\Component\User\Security\PasswordUpdaterInterface" alias="sylius.security.password_updater" />
 
         <service id="sylius.security.user_login" class="Sylius\Bundle\UserBundle\Security\UserLogin">
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.user_checker" />
             <argument type="service" id="event_dispatcher" />
         </service>
+        <service id="Sylius\Bundle\UserBundle\Security\UserLoginInterface" alias="sylius.security.user_login" />
 
         <!-- Listeners -->
         <service id="sylius.listener.password_updater" class="Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener">
@@ -67,6 +74,7 @@
             <tag name="doctrine.event_listener" event="prePersist" lazy="true" />
             <tag name="doctrine.event_listener" event="preUpdate" lazy="true" />
         </service>
+
         <service id="sylius.listener.user_mailer_listener" class="Sylius\Bundle\UserBundle\EventListener\MailerListener">
             <argument type="service" id="sylius.email_sender" />
             <tag name="kernel.event_listener" event="sylius.user.password_reset.request.pin" method="sendResetPasswordPinEmail" />
@@ -78,16 +86,19 @@
         <service id="sylius.form.type.user_login" class="Sylius\Bundle\UserBundle\Form\Type\UserLoginType">
             <tag name="form.type" />
         </service>
+
         <service id="sylius.form.type.user_request_password_reset" class="Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType">
             <argument type="string">Sylius\Bundle\UserBundle\Form\Model\PasswordResetRequest</argument>
             <argument>%sylius.form.type.user_request_password_reset.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+
         <service id="sylius.form.type.user_reset_password" class="Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType">
             <argument type="string">Sylius\Bundle\UserBundle\Form\Model\PasswordReset</argument>
             <argument>%sylius.form.type.user_reset_password.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+
         <service id="sylius.form.type.user_change_password" class="Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType">
             <argument type="string">Sylius\Bundle\UserBundle\Form\Model\ChangePassword</argument>
             <argument>%sylius.form.type.user_change_password.validation_groups%</argument>

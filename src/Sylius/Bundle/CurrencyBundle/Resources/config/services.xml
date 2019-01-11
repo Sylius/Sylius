@@ -24,8 +24,10 @@
         <service id="sylius.currency_converter" class="Sylius\Component\Currency\Converter\CurrencyConverter">
             <argument type="service" id="sylius.repository.exchange_rate" />
         </service>
+        <service id="Sylius\Component\Currency\Converter\CurrencyConverterInterface" alias="sylius.currency_converter" />
 
         <service id="sylius.currency_name_converter" class="Sylius\Component\Currency\Converter\CurrencyNameConverter" />
+        <service id="Sylius\Component\Currency\Converter\CurrencyNameConverterInterface" alias="sylius.currency_name_converter" />
 
         <service id="sylius.templating.helper.currency" class="Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper" lazy="true">
             <tag name="templating.helper" alias="sylius_currency" />
@@ -39,6 +41,7 @@
         <service id="sylius.validator.different_source_target_currency" class="Sylius\Bundle\CurrencyBundle\Validator\Constraints\DifferentSourceTargetCurrencyValidator">
             <tag name="validator.constraint_validator" />
         </service>
+
         <service id="sylius.validator.unique_currency_pair" class="Sylius\Bundle\CurrencyBundle\Validator\Constraints\UniqueCurrencyPairValidator">
             <argument type="service" id="sylius.repository.exchange_rate" />
             <tag name="validator.constraint_validator" />

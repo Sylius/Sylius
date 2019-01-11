@@ -19,5 +19,6 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.customer" />
         </service>
+        <service id="Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface" alias="sylius.dashboard.statistics_provider" />
     </services>
 </container>

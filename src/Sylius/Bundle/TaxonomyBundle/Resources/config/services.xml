@@ -28,7 +28,9 @@
         <service id="sylius.custom_factory.taxon" class="Sylius\Component\Taxonomy\Factory\TaxonFactory" decorates="sylius.factory.taxon" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.taxon.inner" />
         </service>
+        <service id="Sylius\Component\Taxonomy\Factory\TaxonFactoryInterface" alias="sylius.custom_factory.taxon" />
 
         <service id="sylius.generator.taxon_slug" class="Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator" />
+        <service id="Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface" alias="sylius.generator.taxon_slug" />
     </services>
 </container>

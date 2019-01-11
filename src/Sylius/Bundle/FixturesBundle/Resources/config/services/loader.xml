@@ -20,6 +20,7 @@
                 <service class="Sylius\Bundle\FixturesBundle\Loader\FixtureLoader" />
             </argument>
         </service>
+        <service id="Sylius\Bundle\FixturesBundle\Loader\FixtureLoaderInterface" alias="sylius_fixtures.fixture_loader" />
 
         <service id="sylius_fixtures.suite_loader" class="Sylius\Bundle\FixturesBundle\Loader\HookableSuiteLoader">
             <argument type="service">
@@ -28,5 +29,6 @@
                 </service>
             </argument>
         </service>
+        <service id="Sylius\Bundle\FixturesBundle\Loader\SuiteLoaderInterface" alias="sylius_fixtures.suite_loader" />
     </services>
 </container>

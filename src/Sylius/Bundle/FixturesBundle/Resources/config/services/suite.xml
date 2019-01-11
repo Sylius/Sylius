@@ -22,9 +22,11 @@
                 <service class="Symfony\Component\Config\Definition\Processor" />
             </argument>
         </service>
+        <service id="Sylius\Bundle\FixturesBundle\Suite\SuiteFactoryInterface" alias="sylius_fixtures.suite_factory" />
 
         <service id="sylius_fixtures.suite_registry" class="Sylius\Bundle\FixturesBundle\Suite\LazySuiteRegistry">
             <argument type="service" id="sylius_fixtures.suite_factory" />
         </service>
+        <service id="Sylius\Bundle\FixturesBundle\Suite\SuiteRegistryInterface" alias="sylius_fixtures.suite_registry" />
     </services>
 </container>

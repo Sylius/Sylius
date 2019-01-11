@@ -28,6 +28,8 @@
         <defaults public="true" />
 
         <service id="sylius.random_generator" class="Sylius\Component\Resource\Generator\RandomnessGenerator" />
+        <service id="Sylius\Component\Resource\Generator\RandomnessGeneratorInterface" alias="sylius.random_generator" />
+
         <service id="sylius.form.type_extension.form.request_handler"
                  class="Sylius\Bundle\ResourceBundle\Form\Extension\HttpFoundation\HttpFoundationRequestHandler"
                  decorates="form.type_extension.form.request_handler" decoration-priority="256" public="false" />

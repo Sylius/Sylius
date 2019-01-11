@@ -8,6 +8,9 @@
         <defaults public="true" />
 
         <service id="sylius.factory.payum_get_status_action" class="Sylius\Bundle\PayumBundle\Factory\GetStatusFactory" />
+        <service id="Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface" alias="sylius.factory.payum_get_status_action" />
+
         <service id="sylius.factory.payum_resolve_next_route" class="Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactory" />
+        <service id="Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface" alias="sylius.factory.payum_resolve_next_route" />
     </services>
 </container>

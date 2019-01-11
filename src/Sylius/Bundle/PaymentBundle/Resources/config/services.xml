@@ -26,6 +26,7 @@
         <service id="sylius.custom_factory.payment" class="Sylius\Component\Payment\Factory\PaymentFactory" decorates="sylius.factory.payment" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.payment.inner" />
         </service>
+        <service id="Sylius\Component\Payment\Factory\PaymentFactoryInterface" alias="sylius.factory.payment" />
 
         <service id="sylius.registry.payment_methods_resolver" class="Sylius\Component\Registry\PrioritizedServiceRegistry">
             <argument>%sylius.payment_methods_resolver.interface%</argument>
@@ -35,6 +36,7 @@
         <service id="sylius.payment_methods_resolver" class="Sylius\Component\Payment\Resolver\CompositeMethodsResolver">
             <argument type="service" id="sylius.registry.payment_methods_resolver" />
         </service>
+        <service id="Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface" alias="sylius.payment_methods_resolver" />
 
         <service id="sylius.payment_methods_resolver.default" class="Sylius\Component\Payment\Resolver\PaymentMethodsResolver" public="false">
             <argument type="service" id="sylius.repository.payment_method" />

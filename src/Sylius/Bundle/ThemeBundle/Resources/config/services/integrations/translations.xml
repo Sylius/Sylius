@@ -34,6 +34,7 @@
         <service id="sylius.theme.translation.loader_provider" class="Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProvider" public="false">
             <argument type="collection" /> <!-- loaders -->
         </service>
+        <service id="Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProviderInterface" alias="sylius.theme.translation.loader_provider" />
 
         <service id="sylius.theme.translation.resource_provider" class="Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\CompositeTranslatorResourceProvider" public="false">
             <argument type="collection">
@@ -41,6 +42,7 @@
                 <argument type="service" id="sylius.theme.translation.resource_provider.theme_aware" />
             </argument>
         </service>
+        <service id="Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProviderInterface" alias="sylius.theme.translation.resource_provider" />
 
         <service id="sylius.theme.translation.resource_provider.default" class="Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProvider" public="false">
             <argument type="collection" /> <!-- resources filepaths -->
@@ -55,6 +57,7 @@
         <service id="sylius.theme.translation.files_finder" class="Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinder" public="false">
             <argument type="service" id="sylius.theme.finder_factory" />
         </service>
+        <service id="Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface" alias="sylius.theme.translation.files_finder" />
 
         <service id="sylius.theme.translation.ordering_files_finder" class="Sylius\Bundle\ThemeBundle\Translation\Finder\OrderingTranslationFilesFinder" decorates="sylius.theme.translation.files_finder" decoration-priority="256" public="false">
             <argument type="service" id="sylius.theme.translation.ordering_files_finder.inner" />

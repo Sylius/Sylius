@@ -19,5 +19,6 @@
             <argument type="service" id="sylius.custom_factory.payment_method.inner" />
             <argument type="service" id="sylius.factory.gateway_config" />
         </service>
+        <service id="Sylius\Component\Core\Factory\PaymentMethodFactoryInterface" alias="sylius.custom_factory.payment_method" />
     </services>
 </container>

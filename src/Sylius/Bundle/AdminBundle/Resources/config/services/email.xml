@@ -18,5 +18,6 @@
         <service id="sylius.email_manager.shipment" class="Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManager">
             <argument type="service" id="sylius.email_sender" />
         </service>
+        <service id="Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface" alias="sylius.email_manager.shipment" />
     </services>
 </container>
