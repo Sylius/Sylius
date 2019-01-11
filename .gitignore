@@ -1,8 +1,4 @@
-/var/*
-!/var/.gitkeep
-
 /public/assets
-/public/bundles
 /public/css
 /public/js
 /public/media
@@ -15,7 +11,6 @@
 /docs/.doctrees
 
 /composer.lock
-/vendor
 /node_modules
 
 /etc/build/*
@@ -24,11 +19,14 @@
 /behat.yml
 /phpspec.yml
 
-/.env
-/.env.prod
-/.env.staging
-/.env.test
-/.env.test_cached
+###> symfony/framework-bundle ###
+/.env.*.local
+/.env.local
+/.env.local.php
+/public/bundles
+/var/
+/vendor/
+###< symfony/framework-bundle ###
 
 ###> symfony/web-server-bundle ###
 /.web-server-pid
