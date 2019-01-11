@@ -1,0 +1,35 @@
+---------------------------------------------------------------------------
+
+by stefandoorn at 2018-12-09T20:18:32Z
+
+Facing the issue that after the step `When I choose main taxon "Sad"`, each time the element is not visible (e.g. `And I specify its code as "WHISKEY_GENTLEMEN"`). How can I reset that? Also facing this issue while developing a plugin.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-12-18T12:04:52Z
+
+@stefandoorn I've committed some tricky changes to your PR, I hope you don't mind, they should fix the build :)
+
+---------------------------------------------------------------------------
+
+by stefandoorn at 2018-12-18T19:46:19Z
+
+Thanks! 🎉 Should we can also move that AutocompleteHelper to the `UpdateConfigurableProductPage::selectMainTaxon`?
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-01-02T13:16:23Z
+
+Rebased to 1.2 (adding a missing test looks like a bugfix for me) and updated with scalar typehints (as they were introduced by @Zales0123 in the other PR in the meantime). I guess the last comment can be solved by another PR :)
+
+---------------------------------------------------------------------------
+
+by stefandoorn at 2019-01-02T13:58:59Z
+
+Ok :) LGTM.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-01-11T12:40:09Z
+
+Thank you, Stefan! :1st_place_medal:
