@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sylius\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -13,14 +15,9 @@ use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 class Version20161209095131 extends AbstractMigration implements ContainerAwareInterface
 {
-    /**
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     private $container;
 
     public function setContainer(ContainerInterface $container = null)
@@ -28,12 +25,8 @@ class Version20161209095131 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    /**
-     * @param Schema $schema
-     */
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
 
         $zoneRepository = $this->container->get('sylius.repository.zone');
         $entityManager = $this->container->get('doctrine.orm.default_entity_manager');
@@ -46,12 +39,8 @@ class Version20161209095131 extends AbstractMigration implements ContainerAwareI
         $entityManager->flush();
     }
 
-    /**
-     * @param Schema $schema
-     */
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
 
         $zoneRepository = $this->container->get('sylius.repository.zone');
         $entityManager = $this->container->get('doctrine.orm.default_entity_manager');
