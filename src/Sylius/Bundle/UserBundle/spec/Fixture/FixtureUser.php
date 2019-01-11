@@ -15,6 +15,6 @@ namespace Sylius\Bundle\UserBundle\spec\Fixture;
 
 use Sylius\Component\User\Model\User;
 
-final class FixtureUser extends User implements FixtureUserInterface
+class FixtureUser extends User implements FixtureUserInterface
 {
 }
