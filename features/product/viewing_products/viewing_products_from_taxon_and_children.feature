@@ -9,7 +9,7 @@ Feature: Viewing products from taxon children
         And the store operates on a channel named "Poland"
         And the store classifies its products as "T-Shirts"
         And the "T-Shirts" taxon has children taxon "Men" and "Women"
-        And the store has a product "T-Shirt Banana" available in "Poland" channel
+        And the store has a product "T-Shirt Coconut" available in "Poland" channel
         And this product belongs to "T-Shirts"
         And the store has a product "T-Shirt Banana For Men" available in "Poland" channel
         And this product belongs to "T-Shirts"
@@ -30,7 +30,7 @@ Feature: Viewing products from taxon children
     @ui
     Scenario: Viewing products from taxon children
         When I browse products from taxon "T-Shirts"
-        Then I should see the product "T-Shirt Banana"
+        Then I should see the product "T-Shirt Coconut"
         And I should see the product "T-Shirt Banana For Men"
         And I should see the product "T-Shirt Apple"
         And I should see the product "T-Shirt Pear"
