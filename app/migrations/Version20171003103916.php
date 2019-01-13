@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Sylius\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
@@ -14,9 +25,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class Version20171003103916 extends AbstractMigration implements ContainerAwareInterface
 {
-    /**
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     private $container;
 
     /**
@@ -27,9 +36,6 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
@@ -63,9 +69,6 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
         }
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs

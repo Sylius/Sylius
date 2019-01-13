@@ -17,7 +17,9 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\SlugGenerationHelper;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
@@ -32,6 +34,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
     public function nameItIn(string $name, string $localeCode): void
     {
+        $this->clickTabIfItsNotActive('details');
         $this->activateLanguageTab($localeCode);
         $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
 
@@ -89,6 +92,28 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->clickTabIfItsNotActive('attributes');
 
         $this->getElement('attribute_delete_button', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->press();
+    }
+
+    public function checkAttributeErrors($attributeName, $localeCode): void
+    {
+        $this->clickTabIfItsNotActive('attributes');
+        $this->clickLocaleTabIfItsNotActive($localeCode);
+    }
+
+    public function selectMainTaxon(TaxonInterface $taxon): void
+    {
+        $this->openTaxonBookmarks();
+
+        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
+
+        AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
+    }
+
+    public function isMainTaxonChosen(string $taxonName): bool
+    {
+        $this->openTaxonBookmarks();
+
+        return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
     }
 
     public function attachImage(string $path, string $type = null): void
@@ -209,6 +234,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'images' => '#sylius_product_images',
             'language_tab' => '[data-locale="%locale%"] .title',
             'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
+            'main_taxon' => '#sylius_product_mainTaxon',
             'name' => '#sylius_product_translations_%locale%_name',
             'price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[price]"]',
             'original_price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[originalPrice]"]',
@@ -217,8 +243,14 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'shipping_required' => '#sylius_product_variant_shippingRequired',
             'slug' => '#sylius_product_translations_%locale%_slug',
             'tab' => '.menu [data-tab="%name%"]',
+            'taxonomy' => 'a[data-tab="taxonomy"]',
             'toggle_slug_modification_button' => '.toggle-product-slug-modification',
         ]);
+    }
+
+    private function openTaxonBookmarks(): void
+    {
+        $this->getElement('taxonomy')->click();
     }
 
     private function selectElementFromAttributesDropdown(string $id): void

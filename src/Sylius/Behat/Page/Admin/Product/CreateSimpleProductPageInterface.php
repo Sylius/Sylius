@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
@@ -38,10 +39,11 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 
     public function removeAttribute(string $attributeName, string $localeCode): void;
 
-    /**
-     * @param string $type
-     */
-    public function attachImage(string $path, string $type = null): void;
+    public function isMainTaxonChosen(string $taxonName): bool;
+
+    public function selectMainTaxon(TaxonInterface $taxon): void;
+
+    public function attachImage(string $path, ?string $type = null): void;
 
     /**
      * @param string[] $productsNames

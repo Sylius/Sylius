@@ -579,6 +579,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then /^(this product) main taxon should be "([^"]+)"$/
+     * @Then /^main taxon of (product "[^"]+") should be "([^"]+)"$/
      */
     public function thisProductMainTaxonShouldBe(ProductInterface $product, $taxonName)
     {

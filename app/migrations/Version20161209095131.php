@@ -1,15 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Sylius\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\TaxRateInterface;
-use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -18,9 +25,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class Version20161209095131 extends AbstractMigration implements ContainerAwareInterface
 {
-    /**
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     private $container;
 
     public function setContainer(ContainerInterface $container = null)
@@ -28,9 +33,6 @@ class Version20161209095131 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
@@ -46,9 +48,6 @@ class Version20161209095131 extends AbstractMigration implements ContainerAwareI
         $entityManager->flush();
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
