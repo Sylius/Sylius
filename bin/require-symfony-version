@@ -13,7 +13,6 @@ $packages = [
     'symfony/dependency-injection',
     'symfony/doctrine-bridge',
     'symfony/dom-crawler',
-    'symfony/dotenv',
     'symfony/event-dispatcher',
     'symfony/expression-language',
     'symfony/filesystem',

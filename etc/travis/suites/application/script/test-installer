@@ -3,4 +3,4 @@
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.lib.sh"
 
 print_header "Testing (Installer)" "Sylius"
-run_command "bin/console sylius:install --no-interaction --env=test_cached --no-debug -vvv"
+run_command "bin/console sylius:install --no-interaction -vvv"

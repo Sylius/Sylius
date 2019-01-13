@@ -6,6 +6,7 @@ sudo: false
 
 env:
     global:
+        - APP_ENV=test_cached
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
         - SYLIUS_BUILD_DIR=etc/build
 
@@ -71,9 +72,6 @@ cache:
         - $SYLIUS_CACHE_DIR
 
 before_install:
-    - mv .env.test_cached.dist .env.test_cached
-    - set -a && source .env.test_cached && set +a
-
     - etc/travis/run-suite before_install "${SYLIUS_SUITE}"
 
 install:

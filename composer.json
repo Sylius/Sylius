@@ -121,7 +121,7 @@
         "sylius-labs/coding-standard": "^3.0",
         "symfony/browser-kit": "^3.4|^4.1",
         "symfony/debug-bundle": "^3.4|^4.1",
-        "symfony/dotenv": "^3.4|^4.1",
+        "symfony/dotenv": "^4.2",
         "symfony/flex": "^1.1",
         "symfony/intl": "^3.4|^4.1",
         "symfony/web-profiler-bundle": "^3.4|^4.1",
@@ -254,7 +254,7 @@
             "spec\\Sylius\\Bundle\\UiBundle\\": "src/Sylius/Bundle/UiBundle/spec/",
             "spec\\Sylius\\Bundle\\UserBundle\\": "src/Sylius/Bundle/UserBundle/spec/"
         },
-        "classmap": ["app/AppKernel.php", "app/TestAppKernel.php", "src/Kernel.php"]
+        "classmap": ["src/Kernel.php"]
     },
     "scripts": {
         "auto-scripts": {

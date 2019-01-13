@@ -3,4 +3,4 @@
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.lib.sh"
 
 print_header "Validating (Doctrine schema)" "Sylius"
-run_command "bin/console doctrine:schema:validate --env=test_cached --no-debug -vvv"
+run_command "bin/console doctrine:schema:validate -vvv"
