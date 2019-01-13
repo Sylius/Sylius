@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by laurent35240 at 2019-01-08T12:28:10Z
+
+@lchrusciel Is it in the behat scenario that you'd like to have a product with translation?
+
+---------------------------------------------------------------------------
+
+by bartoszpietrzak1994 at 2019-01-08T13:26:26Z
+
+@laurent35240 I think that is what @lchrusciel meant. Maybe we should check if adding the distinct clause does not affect joining the translations table in any way.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-01-09T09:15:00Z
+
+Yup. I prefer to ensure, that we are not adding any regression. However, there should be some tests for that anyway.
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-01-13T14:10:33Z
+
+Thank you, Laurent! :tada:
