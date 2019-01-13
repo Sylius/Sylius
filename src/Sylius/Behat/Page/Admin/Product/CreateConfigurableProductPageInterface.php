@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 
 interface CreateConfigurableProductPageInterface extends BaseCreatePageInterface
 {
@@ -23,8 +24,9 @@ interface CreateConfigurableProductPageInterface extends BaseCreatePageInterface
 
     public function nameItIn(string $name, string $localeCode): void;
 
-    /**
-     * @param string $type
-     */
-    public function attachImage(string $path, string $type = null): void;
+    public function isMainTaxonChosen(string $taxonName): bool;
+
+    public function selectMainTaxon(TaxonInterface $taxon): void;
+
+    public function attachImage(string $path, ?string $type = null): void;
 }
