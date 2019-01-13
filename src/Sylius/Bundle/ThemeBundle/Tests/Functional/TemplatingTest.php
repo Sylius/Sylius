@@ -92,9 +92,6 @@ final class TemplatingTest extends WebTestCase
         $this->assertEquals($contents, trim($crawler->text()));
     }
 
-    /**
-     * @return array
-     */
     public function getPluginTemplatesUsingNamespacedPaths(): array
     {
         return [

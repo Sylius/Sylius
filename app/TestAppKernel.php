@@ -15,6 +15,6 @@
 
 declare(strict_types=1);
 
-@trigger_error('The "TestAppKernel" class located at "app/TestAppKernel.php" is deprecated since Sylius 1.3. Use "Kernel" class located at "src/Kernel.php" instead.', E_USER_DEPRECATED);
+@trigger_error('The "TestAppKernel" class located at "app/TestAppKernel.php" is deprecated since Sylius 1.3. Use "Kernel" class located at "src/Kernel.php" instead.', \E_USER_DEPRECATED);
 
 class_alias(Kernel::class, TestAppKernel::class);
