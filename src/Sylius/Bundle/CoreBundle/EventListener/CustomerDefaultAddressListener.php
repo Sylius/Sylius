@@ -20,9 +20,6 @@ use Webmozart\Assert\Assert;
 
 final class CustomerDefaultAddressListener
 {
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function preCreate(ResourceControllerEvent $event): void
     {
         /** @var AddressInterface $address */
@@ -33,9 +30,6 @@ final class CustomerDefaultAddressListener
         $this->setAddressAsDefault($address);
     }
 
-    /**
-     * @param AddressInterface $address
-     */
     private function setAddressAsDefault(AddressInterface $address): void
     {
         if (null !== $address->getId()) {

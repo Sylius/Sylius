@@ -1,17 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Migrations;
 
-use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\TaxRateInterface;
-use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -27,7 +32,6 @@ class Version20161209095131 extends AbstractMigration implements ContainerAwareI
 
     public function up(Schema $schema): void
     {
-
         $zoneRepository = $this->container->get('sylius.repository.zone');
         $entityManager = $this->container->get('doctrine.orm.default_entity_manager');
 
@@ -41,7 +45,6 @@ class Version20161209095131 extends AbstractMigration implements ContainerAwareI
 
     public function down(Schema $schema): void
     {
-
         $zoneRepository = $this->container->get('sylius.repository.zone');
         $entityManager = $this->container->get('doctrine.orm.default_entity_manager');
 

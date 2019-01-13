@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Tests\Functional;
@@ -57,7 +66,7 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
 
         $this->submitForm('Login', [
             '_username' => 'Oliver@doe.com',
-            '_password' => 'testpassword'
+            '_password' => 'testpassword',
         ]);
 
         Assert::assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -85,7 +94,7 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
 
         $this->submitForm('Login', [
             '_username' => 'user@example.com',
-            '_password' => 'testpassword'
+            '_password' => 'testpassword',
         ]);
 
         Assert::assertSame(200, $this->client->getResponse()->getStatusCode());
