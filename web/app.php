@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Live (production) environment.
  */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $kernel = new AppKernel('prod', false);
 

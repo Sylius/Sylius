@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Staging environment.
  */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $kernel = new AppKernel('staging', false);
 
