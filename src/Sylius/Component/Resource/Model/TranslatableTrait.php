@@ -103,7 +103,7 @@ trait TranslatableTrait
     public function addTranslation(TranslationInterface $translation): void
     {
         if (!$this->hasTranslation($translation)) {
-            $this->translationsCache[$translation->getLocale()] = $translation;
+            $this->translationsCache[(string) $translation->getLocale()] = $translation;
 
             $this->translations->set($translation->getLocale(), $translation);
             $translation->setTranslatable($this);

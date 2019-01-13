@@ -15,13 +15,13 @@ namespace Sylius\Component\Resource\Metadata;
 
 final class Registry implements RegistryInterface
 {
-    /** @var array|MetadataInterface[] */
+    /** @var MetadataInterface[] */
     private $metadata = [];
 
     /**
      * {@inheritdoc}
      */
-    public function getAll(): iterable
+    public function getAll(): array
     {
         return $this->metadata;
     }

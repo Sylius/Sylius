@@ -37,9 +37,9 @@ class ImageUploader implements ImageUploaderInterface
             return;
         }
 
+        /** @var File $file */
         $file = $image->getFile();
 
-        /** @var File $file */
         Assert::isInstanceOf($file, File::class);
 
         if (null !== $image->getPath() && $this->has($image->getPath())) {
@@ -48,6 +48,7 @@ class ImageUploader implements ImageUploaderInterface
 
         do {
             $hash = bin2hex(random_bytes(16));
+            /** @var File $file */
             $path = $this->expandPath($hash . '.' . $file->guessExtension());
         } while ($this->isAdBlockingProne($path) || $this->filesystem->has($path));
 

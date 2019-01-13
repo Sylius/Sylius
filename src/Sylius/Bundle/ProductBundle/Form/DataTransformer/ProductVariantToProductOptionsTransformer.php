@@ -47,7 +47,7 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
 
         return array_combine(
             array_map(function (ProductOptionValueInterface $productOptionValue) {
-                return $productOptionValue->getOptionCode();
+                return (string) $productOptionValue->getOptionCode();
             }, $value->getOptionValues()->toArray()),
             $value->getOptionValues()->toArray()
         );

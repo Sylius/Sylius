@@ -15,6 +15,7 @@ namespace Sylius\Bundle\FixturesBundle\Suite;
 
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
+use Traversable;
 use Zend\Stdlib\SplPriorityQueue;
 
 final class Suite implements SuiteInterface
@@ -56,7 +57,7 @@ final class Suite implements SuiteInterface
     /**
      * {@inheritdoc}
      */
-    public function getFixtures(): iterable
+    public function getFixtures(): Traversable
     {
         $fixtures = clone $this->fixtures;
         foreach ($fixtures as $fixture) {
@@ -67,7 +68,7 @@ final class Suite implements SuiteInterface
     /**
      * {@inheritdoc}
      */
-    public function getListeners(): iterable
+    public function getListeners(): Traversable
     {
         $listeners = clone $this->listeners;
         foreach ($listeners as $listener) {

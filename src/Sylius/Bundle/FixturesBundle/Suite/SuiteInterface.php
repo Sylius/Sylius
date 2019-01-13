@@ -15,20 +15,23 @@ namespace Sylius\Bundle\FixturesBundle\Suite;
 
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
+use Traversable;
 
 interface SuiteInterface
 {
     public function getName(): string;
 
     /**
-     * @return iterable|FixtureInterface[] Fixtures as keys, options as values
+     * @return Traversable Fixtures as keys, options as values
+     * @psalm-return Traversable<FixtureInterface, array>
      */
-    public function getFixtures(): iterable;
+    public function getFixtures(): Traversable;
 
     /**
      * @see \Sylius\Bundle\FixturesBundle\Listener\ListenerInterface
      *
-     * @return iterable|ListenerInterface[] Listeners as keys, options as values
+     * @return Traversable Listeners as keys, options as values
+     * @psalm-return Traversable<ListenerInterface, array>
      */
-    public function getListeners(): iterable;
+    public function getListeners(): Traversable;
 }

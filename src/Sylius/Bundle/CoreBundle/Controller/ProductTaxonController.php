@@ -37,7 +37,7 @@ class ProductTaxonController extends ResourceController
         }
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && null !== $productTaxons) {
-            /** @var ProductTaxonInterface $productTaxon */
+            /** @var array $productTaxon */
             foreach ($productTaxons as $productTaxon) {
                 if (!is_numeric($productTaxon['position'])) {
                     throw new HttpException(
