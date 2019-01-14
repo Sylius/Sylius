@@ -12,6 +12,7 @@ fidry_alice_data_fixtures:
 
 framework:
     test: ~
+    router: { resource: "%kernel.project_dir%/app/config/routing_test.yml" }
     session:
         storage_id: session.storage.mock_file
 

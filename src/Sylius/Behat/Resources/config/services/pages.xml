@@ -15,6 +15,7 @@
     <imports>
         <import resource="pages/admin.xml" />
         <import resource="pages/shop.xml" />
+        <import resource="pages/test_plugin.xml" />
     </imports>
 
     <parameters>

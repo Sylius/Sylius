@@ -90,7 +90,20 @@ final class ThemeContext implements Context
      */
     public function themeChangesHomepageTemplateContents(ThemeInterface $theme, $contents)
     {
-        $file = rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig';
+        $this->changeTemplateContents('/SyliusShopBundle/views/Homepage/index.html.twig', $theme, $contents);
+    }
+
+    /**
+     * @Given /^(this theme) changes plugin main template's content to "([^"]+)"$/
+     */
+    public function themeChangesPluginMainTemplateContent(ThemeInterface $theme, string $content): void
+    {
+        $this->changeTemplateContents('/SyliusTestPlugin/views/main.html.twig', $theme, $content);
+    }
+
+    private function changeTemplateContents(string $templatePath, ThemeInterface $theme, string $contents): void
+    {
+        $file = rtrim($theme->getPath(), '/') . $templatePath;
         $dir = dirname($file);
 
         if (!file_exists($dir)) {

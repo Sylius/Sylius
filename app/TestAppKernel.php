@@ -17,6 +17,14 @@ use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 
 class TestAppKernel extends AppKernel
 {
+    public function registerBundles(): array
+    {
+        return array_merge(
+            parent::registerBundles(),
+            [new \Sylius\Behat\Application\SyliusTestPlugin\SyliusTestPlugin()]
+        );
+    }
+
     protected function getContainerBaseClass(): string
     {
         return MockerContainer::class;
