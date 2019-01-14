@@ -16,24 +16,27 @@
         <defaults public="true" />
 
         <service id="sylius.factory.email" class="Sylius\Component\Mailer\Factory\EmailFactory" />
+        <service id="Sylius\Component\Mailer\Factory\EmailFactoryInterface" alias="sylius.factory.email" />
 
         <service id="sylius.email_provider" class="Sylius\Component\Mailer\Provider\EmailProvider">
             <argument type="service" id="sylius.factory.email" />
             <argument>%sylius.mailer.emails%</argument>
         </service>
+        <service id="Sylius\Component\Mailer\Provider\EmailProviderInterface" alias="sylius.email_provider" />
 
-        <service id="Sylius\Component\Mailer\Sender\SenderInterface" alias="sylius.email_sender" />
         <service id="sylius.email_sender" class="Sylius\Component\Mailer\Sender\Sender">
             <argument type="service" id="sylius.email_renderer.adapter" />
             <argument type="service" id="sylius.email_sender.adapter" />
             <argument type="service" id="sylius.email_provider" />
             <argument type="service" id="sylius.mailer.default_settings_provider" />
         </service>
+        <service id="Sylius\Component\Mailer\Sender\SenderInterface" alias="sylius.email_sender" />
 
         <service id="sylius.mailer.default_settings_provider" class="Sylius\Component\Mailer\Provider\DefaultSettingsProvider">
             <argument>%sylius.mailer.sender_name%</argument>
             <argument>%sylius.mailer.sender_address%</argument>
         </service>
+        <service id="Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface" alias="sylius.mailer.default_settings_provider" />
 
         <service id="sylius.email_renderer.adapter.abstract" class="Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter" abstract="true">
             <call method="setEventDispatcher">

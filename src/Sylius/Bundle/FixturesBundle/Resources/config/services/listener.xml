@@ -16,6 +16,7 @@
         <defaults public="true" />
 
         <service id="sylius_fixtures.listener_registry" class="Sylius\Bundle\FixturesBundle\Listener\ListenerRegistry" public="false" />
+        <service id="Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface" alias="sylius_fixtures.listener_registry" />
 
         <service id="sylius_fixtures.listener.logger" class="Sylius\Bundle\FixturesBundle\Listener\LoggerListener" public="false">
             <argument type="service" id="sylius_fixtures.logger" />

@@ -18,9 +18,12 @@
         <service id="sylius.custom_factory.promotion_action" class="Sylius\Component\Core\Factory\PromotionActionFactory" decorates="sylius.factory.promotion_action" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.promotion_action.inner" />
         </service>
+        <service id="Sylius\Component\Core\Factory\PromotionActionFactoryInterface" alias="sylius.custom_factory.promotion_action" />
+
         <service id="sylius.custom_factory.promotion_rule" class="Sylius\Component\Core\Factory\PromotionRuleFactory" decorates="sylius.factory.promotion_rule" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.promotion_rule.inner" />
         </service>
+        <service id="Sylius\Component\Core\Factory\PromotionRuleFactoryInterface" alias="sylius.custom_factory.promotion_rule" />
 
         <service id="sylius.active_promotions_provider" class="Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider">
             <argument type="service" id="sylius.repository.promotion" />
@@ -102,9 +105,11 @@
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.integer_distributor" />
         </service>
+        <service id="Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface" alias="sylius.promotion.units_promotion_adjustments_applicator" />
 
         <service id="sylius.promotion_usage_modifier" class="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier">
             <argument type="service" id="sylius.manager.promotion" />
         </service>
+        <service id="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface" alias="sylius.promotion_usage_modifier" />
     </services>
 </container>

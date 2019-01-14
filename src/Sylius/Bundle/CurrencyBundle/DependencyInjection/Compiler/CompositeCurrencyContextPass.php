@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CurrencyBundle\DependencyInjection\Compiler;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\PrioritizedCompositeServicePass;
+use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class CompositeCurrencyContextPass extends PrioritizedCompositeServicePass
 {
@@ -26,4 +28,12 @@ final class CompositeCurrencyContextPass extends PrioritizedCompositeServicePass
             'addContext'
         );
     }
+
+    public function process(ContainerBuilder $container): void
+    {
+        parent::process($container);
+
+        $container->setAlias(CurrencyContextInterface::class, 'sylius.context.currency');
+    }
+
 }

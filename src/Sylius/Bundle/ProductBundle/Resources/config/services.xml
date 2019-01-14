@@ -28,10 +28,13 @@
         <service id="sylius.custom_factory.product_variant" class="Sylius\Component\Product\Factory\ProductVariantFactory" decorates="sylius.factory.product_variant" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.product_variant.inner" />
         </service>
+        <service id="Sylius\Component\Product\Factory\ProductVariantFactoryInterface" alias="sylius.factory.product_variant" />
+
         <service id="sylius.custom_factory.product" class="Sylius\Component\Product\Factory\ProductFactory" decorates="sylius.factory.product" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.product.inner" />
             <argument type="service" id="sylius.factory.product_variant" />
         </service>
+        <service id="Sylius\Component\Product\Factory\ProductFactoryInterface" alias="sylius.factory.product" />
 
         <service id="sylius.validator.product_variant_combination" class="Sylius\Bundle\ProductBundle\Validator\ProductVariantCombinationValidator">
             <argument type="service" id="sylius.checker.product_variants_parity" />
@@ -46,8 +49,13 @@
             <argument type="service" id="sylius.factory.product_variant" />
             <argument type="service" id="sylius.checker.product_variants_parity" />
         </service>
+        <service id="Sylius\Component\Product\Generator\ProductVariantGeneratorInterface" alias="sylius.generator.product_variant" />
+
         <service id="sylius.checker.product_variants_parity" class="Sylius\Component\Product\Checker\ProductVariantsParityChecker" />
+        <service id="Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface" alias="sylius.checker.product_variants_parity" />
+
         <service id="sylius.generator.slug" class="Sylius\Component\Product\Generator\SlugGenerator" />
+        <service id="Sylius\Component\Product\Generator\SlugGeneratorInterface" alias="sylius.generator.slug" />
 
         <service id="sylius.product_variant_resolver.default" class="Sylius\Component\Product\Resolver\DefaultProductVariantResolver">
             <tag name="sylius.product_variant_resolver.default" type="default" />

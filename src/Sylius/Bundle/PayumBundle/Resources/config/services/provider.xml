@@ -10,5 +10,6 @@
         <service id="sylius.payment_description_provider" class="Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProvider">
             <argument type="service" id="translator" />
         </service>
+        <service id="Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProviderInterface" alias="sylius.payment_description_provider" />
     </services>
 </container>

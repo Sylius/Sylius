@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ThemeBundle\DependencyInjection;
 
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationSourceFactoryInterface;
+use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -54,6 +55,7 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
         $this->resolveConfigurationSources($container, $config);
 
         $container->setAlias('sylius.context.theme', $config['context']);
+        $container->setAlias(ThemeContextInterface::class, 'sylius.context.theme');
     }
 
     /**

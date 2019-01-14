@@ -20,6 +20,7 @@
             <argument type="string">%sylius_shop.firewall_context_name%</argument>
             <argument type="service" id="event_dispatcher" />
         </service>
+        <service id="Sylius\Bundle\CoreBundle\Security\UserImpersonatorInterface" alias="sylius.security.shop_user_impersonator" />
 
         <service id="sylius.controller.impersonate_user" class="Sylius\Bundle\AdminBundle\Controller\ImpersonateUserController">
             <argument type="service" id="sylius.security.shop_user_impersonator" />

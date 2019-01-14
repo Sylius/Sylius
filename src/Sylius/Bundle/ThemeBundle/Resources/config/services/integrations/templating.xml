@@ -19,6 +19,7 @@
             <argument type="service" id="sylius.theme.locator.application_resource" />
             <argument type="service" id="sylius.theme.locator.bundle_resource" />
         </service>
+        <service id="Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface" alias="sylius.theme.locator.resource" />
 
         <service id="sylius.theme.locator.application_resource" class="Sylius\Bundle\ThemeBundle\Locator\ApplicationResourceLocator">
             <argument type="service" id="filesystem" />
@@ -34,6 +35,7 @@
         <service id="sylius.theme.templating.locator" class="Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator" public="false">
             <argument type="service" id="sylius.theme.locator.resource" />
         </service>
+        <service id="Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocatorInterface" alias="sylius.theme.templating.locator" />
 
         <service id="sylius.theme.templating.locator.cached" class="Sylius\Bundle\ThemeBundle\Templating\Locator\CachedTemplateLocator" decorates="sylius.theme.templating.locator" decoration-priority="256" public="false">
             <argument type="service" id="sylius.theme.templating.locator.cached.inner" />
