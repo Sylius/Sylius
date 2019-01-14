@@ -22,15 +22,14 @@ interface SuiteInterface
     public function getName(): string;
 
     /**
-     * @return Traversable Fixtures as keys, options as values
-     * @psalm-return Traversable<FixtureInterface, array>
+     * @return Traversable <FixtureInterface, array> Fixtures as keys, options as values
      */
-    public function getFixtures(): Traversable;
+    public function getFixtures(): iterable;
 
     /**
      * @see \Sylius\Bundle\FixturesBundle\Listener\ListenerInterface
      *
      * @return Traversable <ListenerInterface, array> Listeners as keys, options as values
      */
-    public function getListeners(): Traversable;
+    public function getListeners(): iterable;
 }

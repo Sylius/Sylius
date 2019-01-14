@@ -57,7 +57,7 @@ final class Suite implements SuiteInterface
     /**
      * {@inheritdoc}
      */
-    public function getFixtures(): Traversable
+    public function getFixtures(): iterable
     {
         $fixtures = clone $this->fixtures;
         foreach ($fixtures as $fixture) {
@@ -68,7 +68,7 @@ final class Suite implements SuiteInterface
     /**
      * {@inheritdoc}
      */
-    public function getListeners(): Traversable
+    public function getListeners(): iterable
     {
         $listeners = clone $this->listeners;
         foreach ($listeners as $listener) {
