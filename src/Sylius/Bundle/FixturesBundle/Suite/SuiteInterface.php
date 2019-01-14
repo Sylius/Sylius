@@ -30,8 +30,7 @@ interface SuiteInterface
     /**
      * @see \Sylius\Bundle\FixturesBundle\Listener\ListenerInterface
      *
-     * @return Traversable Listeners as keys, options as values
-     * @psalm-return Traversable<ListenerInterface, array>
+     * @return Traversable <ListenerInterface, array> Listeners as keys, options as values
      */
     public function getListeners(): Traversable;
 }
