@@ -19,9 +19,9 @@ namespace Sylius\Component\Resource\Metadata;
 interface RegistryInterface
 {
     /**
-     * @return MetadataInterface[]
+     * @return iterable <MetadataInterface>
      */
-    public function getAll(): array;
+    public function getAll(): iterable;
 
     /**
      * @throws \InvalidArgumentException

@@ -21,7 +21,7 @@ final class Registry implements RegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function getAll(): array
+    public function getAll(): iterable
     {
         return $this->metadata;
     }
