@@ -28,12 +28,17 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /** @var AssociationHydrator */
     private $associationHydrator;
 
+    /** @var EntityManager */
+    private $getDatabasePlatformName;
+
     /**
      * {@inheritdoc}
      */
     public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
     {
         parent::__construct($entityManager, $class);
+
+        $this->getDatabasePlatformName = $entityManager->getConnection()->getDatabasePlatform()->getName();
 
         $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
@@ -44,11 +49,16 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     public function createListQueryBuilder(string $locale, $taxonId = null): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
-            ->forceIndex('UNIQ_677B9B7477153098')
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->setParameter('locale', $locale)
         ;
+
+        if (null === $taxonId && $this->getDatabasePlatformName === 'mysql') {
+            $queryBuilder
+                ->forceIndex('UNIQ_677B9B7477153098')
+            ;
+        }
 
         if (null !== $taxonId) {
             $queryBuilder
