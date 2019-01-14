@@ -105,7 +105,7 @@ This type filters by a chosen entity.
                             class: "%app.model.customer%"
 
 Money
-_____
+-----
 
 This filter checks if an amount is in range and in a specified currency
 
