@@ -240,3 +240,24 @@ div[class^='highlight'] {
   background: none !important;
 }
 
+/* Outdated */
+.outdated {
+  padding: 30px;
+  border: 2px dashed #f19e95;
+  background: #fdf2f1;
+  border-radius: 6px;
+  opacity: 0.7;
+}
+
+.outdated::before {
+  content: 'OUTDATED';
+  position: relative;
+  bottom: 40px;
+  right: 2px;
+  background: #f19e95;
+  color: #fdf2f1;
+  padding: 4px 10px;
+  border-radius: 60px;
+  font-size: 11px;
+  letter-spacing: 2px;
+}

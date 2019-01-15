@@ -1,5 +1,12 @@
-How are rules checked ?
-=======================
+.. rst-class:: outdated
+
+How are rules checked?
+======================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Everything related to this subject is located in ``Sylius\Component\Promotion\Checker``.
 

@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 The ShippingSubjectInterface
 ============================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 The find available shipping methods or calculate shipping cost you need to use object implementing ``ShippingSubjectInterface``.
 

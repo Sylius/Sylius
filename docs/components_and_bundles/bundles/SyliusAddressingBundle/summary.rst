@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Summary
 =======
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Configuration Reference
 -----------------------
@@ -50,14 +57,6 @@ Configuration Reference
                     repository: ~
                     factory: Sylius\Component\Resource\Factory\Factory
                     form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType
-
-Tests
------
-
-.. code-block:: bash
-
-    $ composer install
-    $ vendor/bin/phpspec run -fpretty --verbose
 
 Bug tracking
 ------------
