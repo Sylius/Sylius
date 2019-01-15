@@ -1,7 +1,12 @@
+.. rst-class:: outdated
+
 SyliusProductBundle
 ===================
 
-The Sylius product catalog is made available as set of 2 standalone bundles. This component contains the most basic product model with properties (attributes) support.
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 .. toctree::
    :maxdepth: 1

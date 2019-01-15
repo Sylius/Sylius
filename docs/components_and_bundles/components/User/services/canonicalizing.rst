@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Canonicalization
 ================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 In order to be able to query or sort by some string, we should normalize it.
 The most common use case for that is canonical email or username. We can
