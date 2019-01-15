@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Models
 ======
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Taxonomy is a list constructed from individual Taxons. Taxonomy is a special case of Taxon itself (it has no parent).
 All taxons can have many child taxons, you can define as many of them as you need.
