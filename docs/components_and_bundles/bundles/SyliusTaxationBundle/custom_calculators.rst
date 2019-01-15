@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Using custom tax calculators
 ============================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Every **TaxRate** model holds a *calculator* variable with the name of the tax calculation service, used to compute the tax amount.
 While the default calculator should fit for most common use cases, you're free to define your own implementation.
