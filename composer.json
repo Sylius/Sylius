@@ -254,7 +254,7 @@
             "spec\\Sylius\\Bundle\\UiBundle\\": "src/Sylius/Bundle/UiBundle/spec/",
             "spec\\Sylius\\Bundle\\UserBundle\\": "src/Sylius/Bundle/UserBundle/spec/"
         },
-        "classmap": ["app/AppKernel.php", "src/Kernel.php"]
+        "classmap": ["app/AppKernel.php", "app/TestAppKernel.php", "src/Kernel.php"]
     },
     "scripts": {
         "auto-scripts": {
