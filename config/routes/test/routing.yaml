@@ -1,9 +1,3 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-_main:
-    resource: routing.yml
-
 sylius_test_plugin_main:
     path: /test/main
     controller: FrameworkBundle:Template:template
