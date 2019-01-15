@@ -1,9 +1,12 @@
+.. rst-class:: outdated
+
 Summary
 =======
 
-.. note::
+.. danger::
 
-    To be written.
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Configuration reference
 -----------------------
@@ -48,15 +51,6 @@ Configuration reference
         expiration:
             cart: '2 days'
             order: '5 days'
-
-
-`phpspec <http://phpspec.net>`_ examples
------------------------------------------
-
-.. code-block:: bash
-
-    $ composer install
-    $ bin/phpspec run -fpretty --verbose
 
 Bug tracking
 ------------

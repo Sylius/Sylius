@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 The Order, OrderItem and OrderItemUnit
 ======================================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Here is a quick reference of what the default models can do for you.
 
