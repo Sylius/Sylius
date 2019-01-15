@@ -1,5 +1,12 @@
-How promotions are applied ?
-============================
+.. rst-class:: outdated
+
+How promotions are applied?
+===========================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 By using the :doc:`promotion eligibility checker </components_and_bundles/bundles/SyliusPromotionBundle/rule_checker>` and the :doc:`promotion applicator checker </components_and_bundles/bundles/SyliusPromotionBundle/action_applicator>` services, the promotion processor applies all the possible promotions on a subject.
 
