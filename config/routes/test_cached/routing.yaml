@@ -1,0 +1,5 @@
+sylius_test_plugin_main:
+    path: /test/main
+    controller: FrameworkBundle:Template:template
+    defaults:
+        template: "@SyliusTestPlugin/main.html.twig"

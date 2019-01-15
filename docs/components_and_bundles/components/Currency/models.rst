@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Models
 ======
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 .. _component_currency_model_currency:
 
@@ -21,6 +28,7 @@ Every currency is represented by a **Currency** model which by default has the f
 +--------------+-------------------------------------------+
 
 .. note::
+
    This model implements :ref:`component_currency_model_currency-interface`.
 
    For more detailed information go to `Sylius API Currency`_.

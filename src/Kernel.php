@@ -58,6 +58,10 @@ class Kernel extends BaseKernel
                 yield new $class();
             }
         }
+
+        if (in_array($this->getEnvironment(), ['test', 'test_cached'])) {
+            yield new \Sylius\Behat\Application\SyliusTestPlugin\SyliusTestPlugin();
+        }
     }
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
