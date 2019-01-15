@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Basic Usage
 ===========
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 In order to benefit from the component's features at first you need to create a basic class that will implement
 the :ref:`component_promotion_model_promotion-subject-interface`. Let's assume that you would like to
