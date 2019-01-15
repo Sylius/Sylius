@@ -285,6 +285,7 @@
             <argument type="service" id="__symfony__.sylius.repository.channel"/>
             <argument type="service" id="sylius.behat.page.admin.channel.create" />
             <argument type="service" id="sylius.behat.page.shop.home" />
+            <argument type="service" id="sylius.behat.page.test_plugin.main" />
             <tag name="fob.context_service" />
         </service>
 
