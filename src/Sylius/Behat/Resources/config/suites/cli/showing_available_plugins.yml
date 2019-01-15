@@ -4,8 +4,9 @@
 default:
     suites:
         cli_showing_available_plugins:
-            contexts_services:
+            contexts:
                 - Sylius\Behat\Context\Cli\ShowingAvailablePluginsContext
+
 
             filters:
                 tags: "@showing_available_plugins && @cli"

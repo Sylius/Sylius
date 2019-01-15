@@ -4,7 +4,7 @@
 default:
     suites:
         ui_applying_promotion_coupon:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.address
@@ -27,5 +27,6 @@ default:
                 - sylius.behat.context.setup.taxonomy
 
                 - sylius.behat.context.ui.shop.cart
+
             filters:
                 tags: "@applying_promotion_coupon && @ui"

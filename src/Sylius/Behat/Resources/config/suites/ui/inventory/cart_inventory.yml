@@ -4,7 +4,7 @@
 default:
     suites:
         ui_cart_inventory:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.setup.channel
@@ -16,6 +16,7 @@ default:
 
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.product
+
 
             filters:
                 tags: "@cart_inventory && @ui"

@@ -33,11 +33,11 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function __construct(
         Session $session,
-        array $parameters,
+        $minkParameters,
         RouterInterface $router,
         AddressFactoryInterface $addressFactory
     ) {
-        parent::__construct($session, $parameters, $router);
+        parent::__construct($session, $minkParameters, $router);
 
         $this->addressFactory = $addressFactory;
     }

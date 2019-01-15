@@ -16,19 +16,16 @@
         <defaults public="true" />
 
         <service id="sylius.behat.context.hook.doctrine_orm" class="Sylius\Behat\Context\Hook\DoctrineORMContext">
-            <argument type="service" id="__symfony_shared__.doctrine.orm.entity_manager" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.behat.context.hook.test_theme" class="Sylius\Behat\Context\Hook\TestThemeContext">
-            <argument type="service" id="__symfony_shared__.sylius.theme.test_theme_configuration_manager" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.theme.test_theme_configuration_manager" />
         </service>
 
         <service id="sylius.behat.context.hook.email_spool" class="Sylius\Behat\Context\Hook\EmailSpoolContext">
-            <argument type="service" id="__symfony__.sylius.behat.email_checker"/>
-            <argument type="service" id="__symfony__.filesystem" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.behat.email_checker"/>
+            <argument type="service" id="filesystem" />
         </service>
     </services>
 </container>

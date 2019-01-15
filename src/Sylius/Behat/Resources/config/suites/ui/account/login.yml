@@ -4,7 +4,7 @@
 default:
     suites:
         ui_customer_login:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.email_spool
 
@@ -15,5 +15,6 @@ default:
 
                 - sylius.behat.context.ui.email
                 - sylius.behat.context.ui.shop.login
+
             filters:
                 tags: "@customer_login && @ui"

@@ -4,7 +4,7 @@
 default:
     suites:
         ui_applying_shipping_fee:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.channel
@@ -30,5 +30,6 @@ default:
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.checkout
                 - sylius.behat.context.ui.shop.checkout.payment
+
             filters:
                 tags: "@applying_shipping_fee && @ui"

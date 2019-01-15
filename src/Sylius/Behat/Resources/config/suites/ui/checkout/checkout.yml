@@ -4,7 +4,7 @@
 default:
     suites:
         ui_checkout:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.email_spool
 
@@ -60,5 +60,6 @@ default:
                 - sylius.behat.context.ui.shop.currency
                 - sylius.behat.context.ui.shop.homepage
                 - sylius.behat.context.ui.shop.locale
+
             filters:
                 tags: "@checkout && @ui"

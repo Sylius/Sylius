@@ -4,7 +4,7 @@
 default:
     suites:
         ui_dashboard:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.setup.channel
@@ -27,5 +27,6 @@ default:
 
                 - sylius.behat.context.ui.admin.dashboard
                 - sylius.behat.context.ui.admin.notification
+
             filters:
                 tags: "@admin_dashboard && @ui"

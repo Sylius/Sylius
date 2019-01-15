@@ -4,7 +4,7 @@
 default:
     suites:
         ui_managing_users:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.customer
@@ -19,5 +19,6 @@ default:
                 - sylius.behat.context.ui.customer
                 - sylius.behat.context.ui.shop.login
                 - sylius.behat.context.ui.user
+
             filters:
                 tags: "@managing_users && @ui"

@@ -4,7 +4,7 @@
 default:
     suites:
         ui_homepage:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.lexical
@@ -16,5 +16,6 @@ default:
                 - sylius.behat.context.setup.shop_security
 
                 - sylius.behat.context.ui.shop.homepage
+
             filters:
                 tags: "@homepage && @ui"
