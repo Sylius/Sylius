@@ -1,5 +1,42 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.14 (2019-01-17)
+
+#### TL;DR
+
+- Added support for overriding templates from plugins ([#10082](https://github.com/Sylius/Sylius/issues/10082))
+
+#### Details
+
+- [#9988](https://github.com/Sylius/Sylius/issues/9988) Fix when trying to delete shop user having same ID than logged … ([@laurent35240](https://github.com/laurent35240))
+- [#10002](https://github.com/Sylius/Sylius/issues/10002) Avoid deprecated notice when using symfony/config > 4.2 ([@odolbeau](https://github.com/odolbeau))
+- [#10021](https://github.com/Sylius/Sylius/issues/10021) [Behat] Test for assigning main taxon on new product ([@stefandoorn](https://github.com/stefandoorn), [@Zales0123](https://github.com/Zales0123), [@pamil](https://github.com/pamil))
+- [#10026](https://github.com/Sylius/Sylius/issues/10026) External command informing about GUS existence ([@bartoszpietrzak1994](https://github.com/bartoszpietrzak1994))
+- [#10039](https://github.com/Sylius/Sylius/issues/10039) Removed unused use statement ([@stefandoorn](https://github.com/stefandoorn))
+- [#10040](https://github.com/Sylius/Sylius/issues/10040) [Fixtures] StreetAddress instead of StreetName ([@stefandoorn](https://github.com/stefandoorn))
+- [#10043](https://github.com/Sylius/Sylius/issues/10043) Behat JS scenarios war vol.1 ([@Zales0123](https://github.com/Zales0123))
+- [#10044](https://github.com/Sylius/Sylius/issues/10044) [Docs] Fix docs with page object extension usage ([@loic425](https://github.com/loic425))
+- [#10045](https://github.com/Sylius/Sylius/issues/10045) Add scalar types in Behat/Page/Admin directory ([@Zales0123](https://github.com/Zales0123))
+- [#10053](https://github.com/Sylius/Sylius/issues/10053) Fixed sorting path while sorting by position ([@filipcro](https://github.com/filipcro))
+- [#10059](https://github.com/Sylius/Sylius/issues/10059) Cover specs with PHPStan ([@pamil](https://github.com/pamil))
+- [#10061](https://github.com/Sylius/Sylius/issues/10061) GUS existence mentioned in Sylius installation guide ([@bartoszpietrzak1994](https://github.com/bartoszpietrzak1994))
+- [#10063](https://github.com/Sylius/Sylius/issues/10063) Do not require clearing cache when changing ResourceBundle drivers or metadata classes ([@pamil](https://github.com/pamil))
+- [#10065](https://github.com/Sylius/Sylius/issues/10065) Remove unused Behat method ([@Zales0123](https://github.com/Zales0123))
+- [#10070](https://github.com/Sylius/Sylius/issues/10070) #9699 Fix for viewing products when they belong to a taxon and to one… ([@laurent35240](https://github.com/laurent35240))
+- [#10072](https://github.com/Sylius/Sylius/issues/10072) It's 2019! ([@bartoszpietrzak1994](https://github.com/bartoszpietrzak1994))
+- [#10076](https://github.com/Sylius/Sylius/issues/10076) [Docs] Remove vagrant references ([@lchrusciel](https://github.com/lchrusciel))
+- [#10077](https://github.com/Sylius/Sylius/issues/10077) Fix select attributes according to recent Symfony form changes ([@Zales0123](https://github.com/Zales0123))
+- [#10081](https://github.com/Sylius/Sylius/issues/10081) [CoreBundle] Fix Type in Construct for ChannelDeletionListener ([@Donjohn](https://github.com/Donjohn))
+- [#10082](https://github.com/Sylius/Sylius/issues/10082) [Theme] Allow overriding templates from plugins (1.2.*) ([@Zales0123](https://github.com/Zales0123), [@pamil](https://github.com/pamil))
+- [#10086](https://github.com/Sylius/Sylius/issues/10086) Remove container cleanup in test environment (1.2) ([@Zales0123](https://github.com/Zales0123))
+- [#10088](https://github.com/Sylius/Sylius/issues/10088) Fix GridBundle build ([@Zales0123](https://github.com/Zales0123))
+- [#10093](https://github.com/Sylius/Sylius/issues/10093) Typo ([@OskarStark](https://github.com/OskarStark))
+- [#10094](https://github.com/Sylius/Sylius/issues/10094) Overriding plugin templates in themes tests ([@Zales0123](https://github.com/Zales0123))
+- [#10095](https://github.com/Sylius/Sylius/issues/10095) Fix build failing due to newest twig version ([@Zales0123](https://github.com/Zales0123))
+- [#10096](https://github.com/Sylius/Sylius/issues/10096) fix link ([@OskarStark](https://github.com/OskarStark))
+- [#10097](https://github.com/Sylius/Sylius/issues/10097) less noise ([@OskarStark](https://github.com/OskarStark))
+- [#10100](https://github.com/Sylius/Sylius/issues/10100) [Documentation] Visually mark most of the component&bundle docs outdated ([@kulczy](https://github.com/kulczy), [@CoderMaggie](https://github.com/CoderMaggie))
+
 ## v1.2.13 (2018-12-17)
 
 #### TL;DR
