@@ -4,7 +4,7 @@
 default:
     suites:
         ui_shopping_cart:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.channel
@@ -34,5 +34,6 @@ default:
                 - sylius.behat.context.ui.shop.product
                 - sylius.behat.context.ui.shop.registration
                 - sylius.behat.context.ui.user
+
             filters:
                 tags: "@shopping_cart && @ui"

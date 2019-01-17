@@ -4,10 +4,11 @@
 default:
     suites:
         cli_installer:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.cli.installer
+
 
             filters:
                 tags: "@installer && @cli"

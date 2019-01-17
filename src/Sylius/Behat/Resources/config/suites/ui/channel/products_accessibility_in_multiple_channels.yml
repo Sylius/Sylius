@@ -4,7 +4,7 @@
 default:
     suites:
         ui_products_accessibility_in_multiple_channels:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.shared_storage
@@ -17,6 +17,7 @@ default:
 
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.shop.product
+
 
             filters:
                 tags: "@products_accessibility_in_multiple_channels && @ui"

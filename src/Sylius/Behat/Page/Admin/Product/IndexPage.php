@@ -26,13 +26,13 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
 
     public function __construct(
         Session $session,
-        array $parameters,
+        $minkParameters,
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
         string $routeName,
         ImageExistenceCheckerInterface $imageExistenceChecker
     ) {
-        parent::__construct($session, $parameters, $router, $tableAccessor, $routeName);
+        parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
 
         $this->imageExistenceChecker = $imageExistenceChecker;
     }

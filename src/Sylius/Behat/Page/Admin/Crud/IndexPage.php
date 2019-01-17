@@ -31,12 +31,12 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function __construct(
         Session $session,
-        array $parameters,
+        $minkParameters,
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
         string $routeName
     ) {
-        parent::__construct($session, $parameters, $router);
+        parent::__construct($session, $minkParameters, $router);
 
         $this->tableAccessor = $tableAccessor;
         $this->routeName = $routeName;

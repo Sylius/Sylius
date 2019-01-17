@@ -16,14 +16,12 @@
         <defaults public="true" />
 
         <service id="sylius.behat.context.api.admin.managing_taxons" class="Sylius\Behat\Context\Api\Admin\ManagingTaxonsContext">
-            <argument type="service" id="__symfony__.test.client" />
-            <argument type="service" id="__symfony__.session" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="test.client" />
+            <argument type="service" id="session" />
         </service>
         <service id="sylius.behat.context.api.admin.managing_product_variants" class="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsContext">
-            <argument type="service" id="__symfony__.test.client" />
-            <argument type="service" id="__symfony__.session" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="test.client" />
+            <argument type="service" id="session" />
         </service>
     </services>
 </container>

@@ -4,7 +4,7 @@
 default:
     suites:
         ui_managing_orders:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.email_spool
 
@@ -53,5 +53,6 @@ default:
                 - sylius.behat.context.ui.shop.checkout.addressing
                 - sylius.behat.context.ui.shop.checkout.complete
                 - sylius.behat.context.ui.shop.currency
+
             filters:
                 tags: "@managing_orders && @ui"

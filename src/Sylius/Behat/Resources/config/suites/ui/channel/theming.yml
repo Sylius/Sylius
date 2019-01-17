@@ -4,7 +4,7 @@
 default:
     suites:
         ui_theming:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.test_theme
 
@@ -18,6 +18,7 @@ default:
 
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.theme
+
 
             filters:
                 tags: "@theming && @ui"

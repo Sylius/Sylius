@@ -16,261 +16,234 @@
         <defaults public="true" />
 
         <service id="sylius.behat.context.setup.address" class="Sylius\Behat\Context\Setup\AddressContext">
-            <argument type="service" id="__symfony__.sylius.repository.address" />
-            <argument type="service" id="__symfony__.sylius.manager.customer" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.address" />
+            <argument type="service" id="sylius.manager.customer" />
         </service>
 
         <service id="sylius.behat.context.setup.admin_user" class="Sylius\Behat\Context\Setup\AdminUserContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.fixture.example_factory.admin_user" />
-            <argument type="service" id="__symfony__.sylius.repository.admin_user" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.fixture.example_factory.admin_user" />
+            <argument type="service" id="sylius.repository.admin_user" />
         </service>
 
         <service id="sylius.behat.context.setup.channel" class="Sylius\Behat\Context\Setup\ChannelContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.behat.factory.default_united_states_channel" />
-            <argument type="service" id="__symfony__.sylius.behat.factory.default_channel" />
-            <argument type="service" id="__symfony__.sylius.repository.channel" />
-            <argument type="service" id="__symfony__.sylius.manager.channel" />
-            <argument>%__behat__.mink.parameters%</argument>
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.behat.factory.default_united_states_channel" />
+            <argument type="service" id="sylius.behat.factory.default_channel" />
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.manager.channel" />
+            <argument type="service" id="behat.mink.parameters" />
         </service>
 
         <service id="sylius.behat.context.setup.currency" class="Sylius\Behat\Context\Setup\CurrencyContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.currency" />
-            <argument type="service" id="__symfony__.sylius.factory.currency" />
-            <argument type="service" id="__symfony__.sylius.manager.channel" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.currency" />
+            <argument type="service" id="sylius.factory.currency" />
+            <argument type="service" id="sylius.manager.channel" />
         </service>
 
         <service id="sylius.behat.context.setup.customer" class="Sylius\Behat\Context\Setup\CustomerContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.customer" />
-            <argument type="service" id="__symfony__.sylius.manager.customer" />
-            <argument type="service" id="__symfony__.sylius.factory.customer" />
-            <argument type="service" id="__symfony__.sylius.factory.shop_user" />
-            <argument type="service" id="__symfony__.sylius.factory.address" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.manager.customer" />
+            <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.factory.shop_user" />
+            <argument type="service" id="sylius.factory.address" />
         </service>
 
         <service id="sylius.behat.context.setup.customer_group" class="Sylius\Behat\Context\Setup\CustomerGroupContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.customer_group" />
-            <argument type="service" id="__symfony__.sylius.factory.customer_group" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.customer_group" />
+            <argument type="service" id="sylius.factory.customer_group" />
         </service>
 
         <service id="sylius.behat.context.setup.exchange_rate" class="Sylius\Behat\Context\Setup\ExchangeRateContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.factory.exchange_rate" />
-            <argument type="service" id="__symfony__.sylius.repository.exchange_rate" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.factory.exchange_rate" />
+            <argument type="service" id="sylius.repository.exchange_rate" />
         </service>
 
         <service id="sylius.behat.context.setup.geographical" class="Sylius\Behat\Context\Setup\GeographicalContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.factory.country" />
-            <argument type="service" id="__symfony__.sylius.factory.province" />
-            <argument type="service" id="__symfony__.sylius.repository.country" />
-            <argument type="service" id="__symfony__.sylius.converter.country_name" />
-            <argument type="service" id="__symfony__.sylius.manager.province" />
-            <argument type="service" id="__symfony__.sylius.repository.province" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.factory.country" />
+            <argument type="service" id="sylius.factory.province" />
+            <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="sylius.converter.country_name" />
+            <argument type="service" id="sylius.manager.province" />
+            <argument type="service" id="sylius.repository.province" />
         </service>
 
         <service id="sylius.behat.context.setup.locale" class="Sylius\Behat\Context\Setup\LocaleContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.locale_converter" />
-            <argument type="service" id="__symfony__.sylius.factory.locale" />
-            <argument type="service" id="__symfony__.sylius.repository.locale" />
-            <argument type="service" id="__symfony__.sylius.manager.locale" />
-            <argument type="service" id="__symfony__.sylius.manager.channel" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.locale_converter" />
+            <argument type="service" id="sylius.factory.locale" />
+            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.manager.locale" />
+            <argument type="service" id="sylius.manager.channel" />
         </service>
 
         <service id="sylius.behat.context.setup.order" class="Sylius\Behat\Context\Setup\OrderContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.order" />
-            <argument type="service" id="__symfony__.sylius.factory.order" />
-            <argument type="service" id="__symfony__.sylius.factory.order_item" />
-            <argument type="service" id="__symfony__.sylius.order_item_quantity_modifier" />
-            <argument type="service" id="__symfony__.sylius.factory.customer" />
-            <argument type="service" id="__symfony__.sylius.repository.customer" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <argument type="service" id="__symfony__.sm.factory" />
-            <argument type="service" id="__symfony__.sylius.product_variant_resolver.default" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.factory.order" />
+            <argument type="service" id="sylius.factory.order_item" />
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius.product_variant_resolver.default" />
         </service>
 
         <service id="sylius.behat.context.setup.payment" class="Sylius\Behat\Context\Setup\PaymentContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.payment_method" />
-            <argument type="service" id="__symfony__.sylius.fixture.example_factory.payment_method" />
-            <argument type="service" id="__symfony__.sylius.factory.payment_method_translation" />
-            <argument type="service" id="__symfony__.sylius.manager.payment_method" />
+            <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.fixture.example_factory.payment_method" />
+            <argument type="service" id="sylius.factory.payment_method_translation" />
+            <argument type="service" id="sylius.manager.payment_method" />
             <argument type="collection">
                 <argument key="offline">Offline</argument>
                 <argument key="paypal_express_checkout">Paypal Express Checkout</argument>
                 <argument key="stripe_checkout">Stripe Checkout</argument>
             </argument>
-            <tag name="fob.context_service" />
         </service>
 
         <service id="sylius.behat.context.setup.product" class="Sylius\Behat\Context\Setup\ProductContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.product" />
-            <argument type="service" id="__symfony__.sylius.factory.product" />
-            <argument type="service" id="__symfony__.sylius.factory.product_translation" />
-            <argument type="service" id="__symfony__.sylius.factory.product_variant" />
-            <argument type="service" id="__symfony__.sylius.factory.product_variant_translation" />
-            <argument type="service" id="__symfony__.sylius.factory.channel_pricing" />
-            <argument type="service" id="__symfony__.sylius.factory.product_option" />
-            <argument type="service" id="__symfony__.sylius.factory.product_option_value" />
-            <argument type="service" id="__symfony__.sylius.factory.product_image" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <argument type="service" id="__symfony__.sylius.generator.product_variant" />
-            <argument type="service" id="__symfony__.sylius.product_variant_resolver.default" />
-            <argument type="service" id="__symfony__.sylius.image_uploader" />
-            <argument type="service" id="__symfony__.sylius.generator.slug" />
-            <argument>%__behat__.mink.parameters%</argument>
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.factory.product" />
+            <argument type="service" id="sylius.factory.product_translation" />
+            <argument type="service" id="sylius.factory.product_variant" />
+            <argument type="service" id="sylius.factory.product_variant_translation" />
+            <argument type="service" id="sylius.factory.channel_pricing" />
+            <argument type="service" id="sylius.factory.product_option" />
+            <argument type="service" id="sylius.factory.product_option_value" />
+            <argument type="service" id="sylius.factory.product_image" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.generator.product_variant" />
+            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.generator.slug" />
+            <argument type="service" id="behat.mink.parameters" />
         </service>
 
         <service id="sylius.behat.context.setup.product_association" class="Sylius\Behat\Context\Setup\ProductAssociationContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.factory.product_association_type" />
-            <argument type="service" id="__symfony__.sylius.factory.product_association_type_translation" />
-            <argument type="service" id="__symfony__.sylius.factory.product_association" />
-            <argument type="service" id="__symfony__.sylius.repository.product_association_type" />
-            <argument type="service" id="__symfony__.sylius.repository.product_association" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.factory.product_association_type" />
+            <argument type="service" id="sylius.factory.product_association_type_translation" />
+            <argument type="service" id="sylius.factory.product_association" />
+            <argument type="service" id="sylius.repository.product_association_type" />
+            <argument type="service" id="sylius.repository.product_association" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.behat.context.setup.product_attribute" class="Sylius\Behat\Context\Setup\ProductAttributeContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.product_attribute" />
-            <argument type="service" id="__symfony__.sylius.factory.product_attribute" />
-            <argument type="service" id="__symfony__.sylius.factory.product_attribute_value" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.product_attribute" />
+            <argument type="service" id="sylius.factory.product_attribute" />
+            <argument type="service" id="sylius.factory.product_attribute_value" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.behat.context.setup.product_option" class="Sylius\Behat\Context\Setup\ProductOptionContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.product_option" />
-            <argument type="service" id="__symfony__.sylius.factory.product_option" />
-            <argument type="service" id="__symfony__.sylius.factory.product_option_value" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.product_option" />
+            <argument type="service" id="sylius.factory.product_option" />
+            <argument type="service" id="sylius.factory.product_option_value" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.behat.context.setup.product_review" class="Sylius\Behat\Context\Setup\ProductReviewContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.factory.product_review" />
-            <argument type="service" id="__symfony__.sylius.repository.product_review" />
-            <argument type="service" id="__symfony__.sm.factory" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.factory.product_review" />
+            <argument type="service" id="sylius.repository.product_review" />
+            <argument type="service" id="sm.factory" />
         </service>
 
         <service id="sylius.behat.context.setup.product_taxon" class="Sylius\Behat\Context\Setup\ProductTaxonContext">
-            <argument type="service" id="__symfony__.sylius.factory.product_taxon" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.factory.product_taxon" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.behat.context.setup.promotion" class="Sylius\Behat\Context\Setup\PromotionContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.factory.promotion_action" />
-            <argument type="service" id="__symfony__.sylius.factory.promotion_coupon" />
-            <argument type="service" id="__symfony__.sylius.factory.promotion_rule" />
-            <argument type="service" id="__symfony__.sylius.test.factory.promotion" />
-            <argument type="service" id="__symfony__.sylius.repository.promotion" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.factory.promotion_action" />
+            <argument type="service" id="sylius.factory.promotion_coupon" />
+            <argument type="service" id="sylius.factory.promotion_rule" />
+            <argument type="service" id="sylius.test.factory.promotion" />
+            <argument type="service" id="sylius.repository.promotion" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.behat.context.setup.admin_security" class="Sylius\Behat\Context\Setup\AdminSecurityContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.admin_security" />
-            <argument type="service" id="__symfony__.sylius.fixture.example_factory.admin_user" />
-            <argument type="service" id="__symfony__.sylius.repository.admin_user" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.fixture.example_factory.admin_user" />
+            <argument type="service" id="sylius.repository.admin_user" />
         </service>
 
         <service id="sylius.behat.context.setup.shop_security" class="Sylius\Behat\Context\Setup\ShopSecurityContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.shop_security" />
-            <argument type="service" id="__symfony__.sylius.fixture.example_factory.shop_user" />
-            <argument type="service" id="__symfony__.sylius.repository.shop_user" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.fixture.example_factory.shop_user" />
+            <argument type="service" id="sylius.repository.shop_user" />
         </service>
 
         <service id="sylius.behat.context.setup.shipping" class="Sylius\Behat\Context\Setup\ShippingContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.shipping_method" />
-            <argument type="service" id="__symfony__.sylius.repository.zone" />
-            <argument type="service" id="__symfony__.sylius.fixture.example_factory.shipping_method" />
-            <argument type="service" id="__symfony__.sylius.factory.shipping_method_translation" />
-            <argument type="service" id="__symfony__.sylius.manager.shipping_method" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="sylius.repository.zone" />
+            <argument type="service" id="sylius.fixture.example_factory.shipping_method" />
+            <argument type="service" id="sylius.factory.shipping_method_translation" />
+            <argument type="service" id="sylius.manager.shipping_method" />
         </service>
 
         <service id="sylius.behat.context.setup.shipping_category" class="Sylius\Behat\Context\Setup\ShippingCategoryContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.factory.shipping_category" />
-            <argument type="service" id="__symfony__.sylius.repository.shipping_category" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.factory.shipping_category" />
+            <argument type="service" id="sylius.repository.shipping_category" />
         </service>
 
         <service id="sylius.behat.context.setup.taxation" class="Sylius\Behat\Context\Setup\TaxationContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.factory.tax_rate" />
-            <argument type="service" id="__symfony__.sylius.factory.tax_category" />
-            <argument type="service" id="__symfony__.sylius.repository.tax_rate" />
-            <argument type="service" id="__symfony__.sylius.repository.tax_category" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.factory.tax_rate" />
+            <argument type="service" id="sylius.factory.tax_category" />
+            <argument type="service" id="sylius.repository.tax_rate" />
+            <argument type="service" id="sylius.repository.tax_category" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.behat.context.setup.taxonomy" class="Sylius\Behat\Context\Setup\TaxonomyContext">
-            <argument type="service" id="__symfony__.sylius.repository.taxon" />
-            <argument type="service" id="__symfony__.sylius.factory.taxon" />
-            <argument type="service" id="__symfony__.sylius.factory.taxon_translation" />
-            <argument type="service" id="__symfony__.sylius.factory.taxon_image" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <argument type="service" id="__symfony__.sylius.image_uploader" />
-            <argument type="service" id="__symfony__.sylius.generator.taxon_slug" />
-            <argument>%__behat__.mink.parameters%</argument>
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.factory.taxon" />
+            <argument type="service" id="sylius.factory.taxon_translation" />
+            <argument type="service" id="sylius.factory.taxon_image" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.generator.taxon_slug" />
+            <argument type="service" id="behat.mink.parameters" />
         </service>
 
         <service id="sylius.behat.context.setup.theme" class="Sylius\Behat\Context\Setup\ThemeContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.theme" />
-            <argument type="service" id="__symfony__.sylius.manager.channel" />
-            <argument type="service" id="__symfony__.sylius.theme.test_theme_configuration_manager" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.theme" />
+            <argument type="service" id="sylius.manager.channel" />
+            <argument type="service" id="sylius.theme.test_theme_configuration_manager" />
         </service>
 
         <service id="sylius.behat.context.setup.user" class="Sylius\Behat\Context\Setup\UserContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.shop_user" />
-            <argument type="service" id="__symfony__.sylius.fixture.example_factory.shop_user" />
-            <argument type="service" id="__symfony__.sylius.manager.shop_user" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="sylius.fixture.example_factory.shop_user" />
+            <argument type="service" id="sylius.manager.shop_user" />
         </service>
 
         <service id="sylius.behat.context.setup.zone" class="Sylius\Behat\Context\Setup\ZoneContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.repository.zone" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <argument type="service" id="__symfony__.sylius.factory.zone" />
-            <argument type="service" id="__symfony__.sylius.factory.zone_member" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="sylius.repository.zone" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.factory.zone" />
+            <argument type="service" id="sylius.factory.zone_member" />
         </service>
     </services>
 </container>

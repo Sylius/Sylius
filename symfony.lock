@@ -131,9 +131,6 @@
     "friends-of-behat/page-object-extension": {
         "version": "0.1"
     },
-    "friends-of-behat/service-container-extension": {
-        "version": "v1.0.1"
-    },
     "friends-of-behat/symfony-extension": {
         "version": "v1.2.2"
     },
