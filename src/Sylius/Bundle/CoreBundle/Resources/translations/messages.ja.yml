@@ -19,6 +19,12 @@ sylius:
         group:
             name: ゾーン名
         channel:
+            billing_data:
+                city: 市町村
+                company: 会社名
+                country: 国
+                postcode: 郵便番号
+                street: それ以降の住所
             currencies: 通貨
             hostname: ホスト名
             payment_methods: sylius.breadcrumb.payment_method.index

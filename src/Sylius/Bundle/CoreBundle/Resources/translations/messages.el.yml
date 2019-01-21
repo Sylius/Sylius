@@ -25,6 +25,12 @@ sylius:
             name: Ονομασία
             roles: Ρόλοι
         channel:
+            billing_data:
+                city: Πόλη
+                company: Εταιρεία
+                country: Χώρα
+                postcode: Ταχ. Κώδικας
+                street: Οδός
             contact_email: Email επικοινωνίας
             currencies: Νομίσματα
             currency_base: Βασικό νόμισμα

@@ -25,6 +25,12 @@ sylius:
             name: Naziv regije
             roles: Role (korisnička prava)
         channel:
+            billing_data:
+                city: Grad
+                company: Tvrtka
+                country: Država
+                postcode: Poštanski broj
+                street: Ulica
             contact_email: Kontaktna email adresa
             currencies: Valute
             currency_base: Osnovna valuta

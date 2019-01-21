@@ -5,6 +5,12 @@ sylius:
     form:
         group:
             name: Nama
+        channel:
+            billing_data:
+                city: Bandar
+                company: Syarikat
+                country: Negara
+                postcode: Poskod
         image:
             type: Jenis
         locale:

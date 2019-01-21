@@ -25,6 +25,12 @@ sylius:
             name: Nama
             roles: Peran
         channel:
+            billing_data:
+                city: Kota
+                company: Perusahaan
+                country: Negara
+                postcode: Kode pos
+                street: Alamat
             contact_email: Kontak email
             currencies: Mata Uang
             currency_base: Mata uang utama

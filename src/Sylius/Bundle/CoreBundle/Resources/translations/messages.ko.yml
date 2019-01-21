@@ -6,6 +6,12 @@ sylius:
         group:
             name: 이름
             roles: 역할
+        channel:
+            billing_data:
+                city: 도시
+                company: 회사명
+                country: 국가
+                postcode: 우편번호
         image:
             type: 타입
         locale:

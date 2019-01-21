@@ -25,6 +25,12 @@ sylius:
             name: Назва
             roles: Ролі
         channel:
+            billing_data:
+                city: Місто
+                company: Компанія
+                country: Країна
+                postcode: Поштовий індекс
+                street: Вулиця
             contact_email: Контактна електронна пошта
             currencies: Валюти
             currency_base: Основна валюта

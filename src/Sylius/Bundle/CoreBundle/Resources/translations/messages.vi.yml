@@ -14,6 +14,12 @@ sylius:
             name: Tên
             roles: Vai trò
         channel:
+            billing_data:
+                city: Thành phố
+                company: Công ty
+                country: Quốc gia
+                postcode: Mã bưu chính
+                street: Đường Phố
             locales: Miền địa phương
             payment_methods: Phương thức thanh toán
             shipping_methods: Phương thức vận chuyển

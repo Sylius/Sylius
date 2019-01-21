@@ -23,6 +23,12 @@ sylius:
             name: 名稱
             roles: 角色
         channel:
+            billing_data:
+                city: 城市
+                company: 公司
+                country: 國家
+                postcode: 郵編
+                street: 街道
             contact_email: 聯繫郵箱
             currencies: 貨幣
             currency_base: 基準幣別

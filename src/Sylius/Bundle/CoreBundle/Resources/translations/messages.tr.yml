@@ -25,6 +25,12 @@ sylius:
             name: Ad
             roles: Roller
         channel:
+            billing_data:
+                city: Şehir
+                company: Şirket
+                country: Ülke
+                postcode: Posta kodu
+                street: Sokak
             contact_email: İletişim e-maili
             currencies: Para birimi
             currency_base: Ana Para Birimi

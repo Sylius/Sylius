@@ -25,6 +25,12 @@ sylius:
             name: Nom
             roles: Rôles
         channel:
+            billing_data:
+                city: Ville
+                company: Société
+                country: Pays
+                postcode: Code postal
+                street: Adresse
             contact_email: Email de contact
             currencies: Devises
             currency_base: Devise de référence
