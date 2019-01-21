@@ -30,4 +30,3 @@ sylius:
             description: Leírás
             enabled: Engedélyezve?
             instructions: Utasítások
-            name: Név
