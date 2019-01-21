@@ -434,6 +434,7 @@ sylius:
         refunded: 'Povrnjena kupnina'
         register: 'Registracija'
         register_button: 'Registracija'
+        register_in_the_store: 'Registracija uporabniškega računa'
         registration_create_an_account_in_store: 'Registracija <small>Ustvarite račun v trgovini</small>'
         registration_date: 'Datum registracije'
         release_inventory: 'Sprostitev inventarja'

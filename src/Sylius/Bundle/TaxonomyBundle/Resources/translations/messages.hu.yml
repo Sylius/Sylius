@@ -5,7 +5,6 @@ sylius:
     form:
         taxon:
             description: Leírás
-            name: Név
             parent: Szülő
         taxonomy:
             name: Név
