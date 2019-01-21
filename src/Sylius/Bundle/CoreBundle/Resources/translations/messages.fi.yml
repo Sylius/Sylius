@@ -18,6 +18,12 @@ sylius:
             name: Nimi
             roles: Roolit
         channel:
+            billing_data:
+                city: Kaupunki
+                company: Yritys
+                country: Maa
+                postcode: Postinumero
+                street: Katuosoite
             currencies: Valuutat
             currency_base: Perusvaluutta
             locales: Alueet

@@ -20,6 +20,12 @@ sylius:
             name: Ime
             roles: Uloge
         channel:
+            billing_data:
+                city: Grad
+                company: Kompanija
+                country: Zemlja
+                postcode: Poštanski broj
+                street: Ulica
             currencies: Valute
             currency_base: Osnovna valuta
             hostname: Hostname

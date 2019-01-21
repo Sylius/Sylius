@@ -25,6 +25,12 @@ sylius:
             name: Emri
             roles: Funksionet
         channel:
+            billing_data:
+                city: Qyteti
+                company: Kompania
+                country: Shteti
+                postcode: Kodi postar
+                street: Rruga
             currencies: Monedhat
             currency_base: Valuta baze
             hostname: Emri i hostit

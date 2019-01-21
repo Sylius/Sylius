@@ -25,6 +25,12 @@ sylius:
             name: Név
             roles: Szerepek
         channel:
+            billing_data:
+                city: Település
+                company: Cég
+                country: Ország
+                postcode: Irányítószám
+                street: Utca
             currencies: Pénznemek
             currency_base: Alapértelmezett pénznem
             hostname: Hoszt neve

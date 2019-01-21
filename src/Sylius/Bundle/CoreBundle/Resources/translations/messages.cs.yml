@@ -25,6 +25,12 @@ sylius:
             name: Jméno
             roles: Role
         channel:
+            billing_data:
+                city: Město
+                company: Firma
+                country: Země
+                postcode: PSČ
+                street: Ulice
             contact_email: Kontaktní e-mail
             currencies: Měny
             currency_base: Základní měna

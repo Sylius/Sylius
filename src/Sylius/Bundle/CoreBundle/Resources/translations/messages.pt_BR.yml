@@ -25,6 +25,12 @@ sylius:
             name: Nome
             roles: Papéis
         channel:
+            billing_data:
+                city: Cidade
+                company: Empresa
+                country: País
+                postcode: CEP
+                street: Rua
             contact_email: Email de contato
             currencies: Moedas
             currency_base: Moeda base

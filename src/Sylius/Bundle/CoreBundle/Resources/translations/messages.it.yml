@@ -25,6 +25,12 @@ sylius:
             name: "Nome\n"
             roles: Regole
         channel:
+            billing_data:
+                city: Città
+                company: Azienda
+                country: Paese
+                postcode: CAP
+                street: Indirizzo
             contact_email: Email di contatto
             currencies: Valute
             currency_base: Valuta base

@@ -25,6 +25,12 @@ sylius:
             name: Nimi
             roles: Rollid
         channel:
+            billing_data:
+                city: Linn
+                company: Ettevõtte
+                country: Riik
+                postcode: Pistiindeks
+                street: Tänav
             currencies: Valuutad
             currency_base: Baasvaluuta
             locale_default: Vaikimisi keel

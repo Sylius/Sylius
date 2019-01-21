@@ -25,6 +25,12 @@ sylius:
             name: Navn
             roles: Roller
         channel:
+            billing_data:
+                city: Poststed
+                company: Firma
+                country: Land
+                postcode: Postnummer
+                street: Gate
             contact_email: Kontakt e-post
             currencies: Valutaer
             currency_base: Standardvaluta

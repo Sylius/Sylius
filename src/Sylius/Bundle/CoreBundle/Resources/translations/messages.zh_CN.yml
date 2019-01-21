@@ -25,6 +25,12 @@ sylius:
             name: 名称
             roles: 角色
         channel:
+            billing_data:
+                city: 城市
+                company: 公司
+                country: test
+                postcode: 邮编
+                street: 街道
             contact_email: 联系邮件
             currencies: 货币
             currency_base: 基础货币

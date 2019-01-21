@@ -8,6 +8,13 @@ sylius:
             title: Наслов
         group:
             name: Име
+        channel:
+            billing_data:
+                city: Град
+                company: Компанија
+                country: Држава
+                postcode: Поштенски Број
+                street: Улица
         image:
             type: Вид
         locale:

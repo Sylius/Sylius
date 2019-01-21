@@ -19,6 +19,12 @@ sylius:
             name: שם
             roles: תפקידים
         channel:
+            billing_data:
+                city: עיר
+                company: חברה
+                country: מדינה
+                postcode: מיקוד
+                street: רחוב
             currencies: מטבעות
             currency_base: מטבע בסיס
         image:

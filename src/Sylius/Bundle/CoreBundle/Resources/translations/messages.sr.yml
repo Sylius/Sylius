@@ -13,6 +13,12 @@ sylius:
         group:
             name: Име
         channel:
+            billing_data:
+                city: Град
+                company: Предузеће
+                country: Земља
+                postcode: Поштански број
+                street: Улица
             locales: Локални
             payment_methods: Метод плаћања
             shipping_methods: Начини доставе

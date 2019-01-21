@@ -25,6 +25,12 @@ sylius:
             name: ชื่อภาษา
             roles: Roles
         channel:
+            billing_data:
+                city: เขต/อำเภอ
+                company: บริษัท
+                country: ประเทศ
+                postcode: รหัสไปรษณีย์
+                street: ที่อยู่
             contact_email: ติดต่ออีเมล์
             currencies: สกุลเงิน
             currency_base: ฐานสกุลเงิน

@@ -25,6 +25,12 @@ sylius:
             name: Ime
             roles: Vloge
         channel:
+            billing_data:
+                city: Mesto
+                company: Podjetje
+                country: Država
+                postcode: Poštna številka
+                street: Ulica
             currencies: Valute
             hostname: Ime gostitelja
             locale_default: Privzeto območje

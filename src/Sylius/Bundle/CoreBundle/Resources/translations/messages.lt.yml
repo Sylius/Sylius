@@ -25,6 +25,12 @@ sylius:
             name: Pavadinimas
             roles: Rolės
         channel:
+            billing_data:
+                city: Miestas
+                company: įmonė
+                country: Šalis
+                postcode: Pašto kodas
+                street: Gatvė
             contact_email: Kontaktinis el. pašto adresas
             currencies: Valiutos
             currency_base: Bazinė valiuta

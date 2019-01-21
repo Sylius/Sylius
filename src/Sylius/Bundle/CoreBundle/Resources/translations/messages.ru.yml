@@ -25,6 +25,12 @@ sylius:
             name: Округ
             roles: Роли
         channel:
+            billing_data:
+                city: Город
+                company: Компания
+                country: Страна
+                postcode: Индекс
+                street: Улица
             contact_email: Контактный email
             currencies: Валюты
             currency_base: Базовая валюта

@@ -25,6 +25,12 @@ sylius:
             name: الاسم
             roles: الأدوار
         channel:
+            billing_data:
+                city: المدينة
+                company: الشركة
+                country: البلد
+                postcode: الرقم البريدي
+                street: الشارع
             contact_email: البريد الإلكتروني لجهة الإتصال
             currencies: العملات
             currency_base: العملة الأساسية

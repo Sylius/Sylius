@@ -25,6 +25,12 @@ sylius:
             name: نام
             roles: نقش ها
         channel:
+            billing_data:
+                city: شهر
+                company: شرکت
+                country: کشور
+                postcode: کد پستی
+                street: خیابان
             contact_email: ایمیل مخاطب
             currencies: واحدهای پول
             currency_base: ارز پایه

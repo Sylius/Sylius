@@ -25,6 +25,12 @@ sylius:
             name: Nume produs
             roles: Roluri
         channel:
+            billing_data:
+                city: Oraș
+                company: Firmă
+                country: Țară
+                postcode: Cod poștal
+                street: Adresă
             contact_email: E-mail de contact
             currencies: Monede
             currency_base: Monedă de bază

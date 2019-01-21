@@ -5,6 +5,13 @@ sylius:
     form:
         group:
             name: Naam
+        channel:
+            billing_data:
+                city: Stad
+                company: Maatskappy
+                country: Land
+                postcode: Poskode
+                street: Straat
         image:
             type: Tipe
         product_filter:
