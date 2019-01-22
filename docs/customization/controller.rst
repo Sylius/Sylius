@@ -99,7 +99,7 @@ getting a list of recommended products from your external api.
         }
     }
 
-**2.** In order to use your controller and its actions you need to configure it in the ``config/_sylius.yaml``.
+**2.** In order to use your controller and its actions you need to configure it in the ``config/packages/_sylius.yaml``.
 
 .. code-block:: yaml
 
