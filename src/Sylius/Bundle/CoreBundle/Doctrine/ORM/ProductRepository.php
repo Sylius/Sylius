@@ -72,6 +72,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         $queryBuilder = $this->createQueryBuilder('o')
             ->distinct()
             ->addSelect('translation')
+            ->addSelect('productTaxon')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->innerJoin('o.productTaxons', 'productTaxon')
             ->andWhere('productTaxon.taxon = :taxon')
