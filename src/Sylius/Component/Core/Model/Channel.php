@@ -283,7 +283,7 @@ class Channel extends BaseChannel implements ChannelInterface
         $this->accountVerificationRequired = $accountVerificationRequired;
     }
 
-    public function getShopBillingData(): ShopBillingDataInterface
+    public function getShopBillingData(): ?ShopBillingDataInterface
     {
         return $this->shopBillingData;
     }
