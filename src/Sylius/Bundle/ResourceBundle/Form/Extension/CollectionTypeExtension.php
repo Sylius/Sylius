@@ -48,4 +48,12 @@ final class CollectionTypeExtension extends AbstractTypeExtension
     {
         return CollectionType::class;
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public static function getExtendedTypes()
+    {
+        return [CollectionType::class];
+    }
 }
