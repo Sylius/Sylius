@@ -64,7 +64,6 @@ class Channel extends BaseChannel implements ChannelInterface
 
         $this->currencies = new ArrayCollection();
         $this->locales = new ArrayCollection();
-        $this->shopBillingData = new ShopBillingData();
     }
 
     /**
