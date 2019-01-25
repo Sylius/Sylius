@@ -13,9 +13,9 @@ Here you will find all configuration options of ``sylius_grid``.
                     options:
                         class: "%app.model.user%"
                         repository:
-                        method: myCustomMethod
-                        arguments:
-                            id: resource.id
+                            method: myCustomMethod
+                            arguments:
+                                id: resource.id
                 sorting:
                     name: asc
                 limits: [10, 25, 50, 100]
