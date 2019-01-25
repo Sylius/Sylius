@@ -109,6 +109,7 @@
         "matthiasnoback/symfony-config-test": "^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
         "mikey179/vfsStream": "^1.6",
+        "pamil/phpspec-skip-example-extension": "^4.0",
         "pamil/prophecy-common": "^0.1",
         "phpspec/phpspec": "^5.0",
         "phpstan/phpstan-doctrine": "^0.10",
