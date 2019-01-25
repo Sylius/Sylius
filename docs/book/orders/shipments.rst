@@ -56,7 +56,7 @@ At the end add it to the system using a repository.
 
     $shippingMethod->setCode('DHL');
     $shippingMethod->setCalculator(DefaultCalculators::FLAT_RATE);
-    $shippingMethod->setConfiguration(['amount' => 50]);
+    $shippingMethod->setConfiguration(['channel_code' => ['amount' => 50]]);
 
     $zone = $this->container->get('sylius.repository.zone')->findOneByCode('US');
     $shippingMethod->setZone($zone);
@@ -67,6 +67,7 @@ In order to have your shipping method available in checkout add it to a desired 
 
 .. code-block:: php
 
+    $channel = $this->container->get('sylius.repository.channel')->findOneByCode('channel_code');
     $channel->addShippingMethod($shippingMethod);
 
 Shipping Zones
