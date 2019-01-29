@@ -1,9 +1,9 @@
 # UPGRADE FROM `v1.3.X` TO `v1.4.0`
 
 
-First step is upgrading Sylius with composer
+The first step is upgrading Sylius with Composer
 
-- `composer require sylius/sylius:~1.4.0 --no-update`
+- `composer require sylius/sylius:~1.4.0`
 
 ### Doctrine migrations
 
@@ -15,9 +15,8 @@ First step is upgrading Sylius with composer
 
 * `composer require symfony/dotenv:^4.2 --dev --no-update`
 * Follow [Symfony dotenv update guide](https://symfony.com/doc/current/configuration/dot-env-changes.html) to incorporate required changes in `.env` files structure. Optionally, you can take a look at [corresponding PR](https://github.com/Sylius/Sylius-Standard/pull/323) introducing these changes in **Sylius-Standard**
-* If you're using our Travis CI configuration, follow [this changes](https://github.com/Sylius/Sylius-Standard/pull/323/files#diff-354f30a63fb0907d4ad57269548329e3) introduced in `.travis.yml` file
 
-At the end, update libraries with `composer update` and run apply migrations with `bin/console doctrine:migrations:migrate`.
+At the apply migrations with `bin/console doctrine:migrations:migrate`.
 
 Don't forget to clear the cache (`bin/console cache:clear`) to be 100% everything is loaded properly.
 
@@ -25,16 +24,25 @@ Don't forget to clear the cache (`bin/console cache:clear`) to be 100% everythin
 
 ### Behat
 
-If you're using Behat and want to be up-to-date with our configuration
+If you're using Behat and want to be up-to-date with our configuration, introduce following changes (you can also take a look at [SymfonyExtension UPGRADE file](https://github.com/FriendsOfBehat/SymfonyExtension/blob/master/UPGRADE-2.0.md))
+for more details:
 
-* Update required extensions with `composer require friends-of-behat/symfony-extension:^2.0 friends-of-behat/page-object-extension:^0.3 --dev --no-update`
-* Remove extensions that are not needed yet with `composer remove friends-of-behat/context-service-extension friends-of-behat/cross-container-extension friends-of-behat/service-container-extension --dev --no-update`
-* Run `composer update`
+* Update required extensions with `composer require friends-of-behat/symfony-extension:^2.0 friends-of-behat/page-object-extension:^0.3 --dev`
+* Remove extensions that are not needed with `composer remove friends-of-behat/context-service-extension friends-of-behat/cross-container-extension friends-of-behat/service-container-extension --dev`
 * Update your `behat.yml` - look at the diff [here](https://github.com/Sylius/Sylius-Standard/pull/322/files#diff-7bde54db60a6e933518d8b61b929edce)
 * Add `FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle::class => ['test' => true, 'test_cached' => true],` to your `bundles.php`
-* If you're using out Travis CI configuration, follow [this changes](https://github.com/Sylius/Sylius-Standard/pull/322/files#diff-354f30a63fb0907d4ad57269548329e3) introduced in `.travis.yml` file
-* create `config/services.yaml` file, in which you should import Sylius Behat services with `- { resource: "../vendor/sylius/sylius/src/Sylius/Behat/Resources/config/services.xml" }` and your own Behat services file as well
-* clear the cache with `APP_ENV=test bin/console cache:clear`
+* If you use our Travis CI configuration, follow [these changes](https://github.com/Sylius/Sylius-Standard/pull/322/files#diff-354f30a63fb0907d4ad57269548329e3) introduced in `.travis.yml` file
+* Create `config/services_test.yaml` file with the following code and add these your own Behat services as well:
+    ```yaml
+    imports:
+        - { resource: "../vendor/sylius/sylius/src/Sylius/Behat/Resources/config/services.xml" }
+    ```
+* If you use our Travis CI configuration, create also `config/services_test_cached.yaml` and import the `config/services_test.yaml` file:
+    ```yaml
+    imports:
+        - { resource: "services_test.yaml" }
+    ```
+* If you use our Travis CI configuration, follow [theses changes](https://github.com/Sylius/Sylius-Standard/pull/323/files#diff-354f30a63fb0907d4ad57269548329e3) introduced in `.travis.yml` file
 
 ---
 
