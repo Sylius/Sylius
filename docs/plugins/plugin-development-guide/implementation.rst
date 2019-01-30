@@ -94,7 +94,7 @@ PHPSpec, PHPUnit, or any other unit testing tool):
 
     use Sylius\Component\Core\Model\ProductVariantInterface as BaseProductVariantInterface;
 
-    interface ProductVariant extends BaseProductVariantInterface
+    interface ProductVariantInterface extends BaseProductVariantInterface
     {
         public function setAvailableOnDemand(bool $availableOnDemand): void;
 
