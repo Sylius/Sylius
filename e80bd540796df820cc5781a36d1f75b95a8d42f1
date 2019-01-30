@@ -1,0 +1,24 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-01-24T10:21:01Z
+
+Should we also mention changes in `security.yaml` regarding encoders? https://github.com/Sylius/Sylius-Standard/pull/307/files#diff-985d14deddf2a290f44196618feab0f2L13 cc @pamil
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-01-30T10:17:16Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "upgrade-guide"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-01-30T10:18:45Z
+
+Thanks, Mateusz! :1st_place_medal:
