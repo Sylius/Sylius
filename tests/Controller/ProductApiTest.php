@@ -156,6 +156,35 @@ EOT;
     /**
      * @test
      */
+    public function it_does_not_allow_to_create_product_with_too_long_translations()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+
+        $longString = str_repeat('s', 256);
+
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "translations": {
+                "en_US": {
+                    "name": "{$longString}",
+                    "slug": "{$longString}"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_long_translations_validation_fail_response', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
     public function it_does_not_allow_to_create_product_without_required_fields()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
