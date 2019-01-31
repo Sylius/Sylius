@@ -23,9 +23,6 @@ Feature: Viewing products from taxon children
         And the store has a product "T-Shirt Watermelon" available in "Poland" channel
         And this product belongs to "T-Shirts"
         And this product belongs to "Men"
-        And the store has a product "T-Shirt Lemon" available in "Poland" channel
-        And this product belongs to "T-Shirts"
-        And this product belongs to "Men"
 
     @ui
     Scenario: Viewing products from taxon children
@@ -35,4 +32,3 @@ Feature: Viewing products from taxon children
         And I should see the product "T-Shirt Apple"
         And I should see the product "T-Shirt Pear"
         And I should see the product "T-Shirt Watermelon"
-        And I should see the product "T-Shirt Lemon"
