@@ -34,7 +34,11 @@ final class OrderApiTest extends CheckoutApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/orders.yml');
-        $this->client->request('GET', '/api/v1/orders/', [], [], static::$authorizedHeaderWithAccept);
+
+        $this->prepareOrder();
+
+        $this->client->request('GET', $this->getOrderUrl(''), [], [], static::$authorizedHeaderWithAccept);
+
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'order/order_index_response', Response::HTTP_OK);
     }
@@ -399,6 +403,8 @@ EOT;
     }
 
     /**
+     * @param int $orderId
+     *
      * @return string
      */
     private function getOrderUrl($orderId)
