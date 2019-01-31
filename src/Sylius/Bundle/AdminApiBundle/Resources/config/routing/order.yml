@@ -11,7 +11,7 @@ sylius_admin_api_order:
     type: sylius.resource_api
 
 sylius_admin_api_order_cancel:
-    path: /orders/{id}/cancel
+    path: /{id}/cancel
     methods: [PUT]
     defaults:
         _controller: sylius.controller.order:applyStateMachineTransitionAction
@@ -24,7 +24,7 @@ sylius_admin_api_order_cancel:
             return_content: false
 
 sylius_admin_api_order_shipment_ship:
-    path: /orders/{orderId}/shipments/{id}/ship
+    path: /{orderId}/shipments/{id}/ship
     methods: [PUT]
     defaults:
         _controller: sylius.controller.shipment:updateAction
@@ -42,7 +42,7 @@ sylius_admin_api_order_shipment_ship:
             form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
 
 sylius_admin_api_order_payment_complete:
-    path: /orders/{orderId}/payments/{id}/complete
+    path: /{orderId}/payments/{id}/complete
     methods: [PUT]
     defaults:
         _controller: sylius.controller.payment:applyStateMachineTransitionAction
