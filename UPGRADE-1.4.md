@@ -1,6 +1,5 @@
 # UPGRADE FROM `v1.3.X` TO `v1.4.0`
 
-
 The first step is upgrading Sylius with Composer
 
 - `composer require sylius/sylius:~1.4.0`
@@ -31,7 +30,6 @@ for more details:
 * Remove extensions that are not needed with `composer remove friends-of-behat/context-service-extension friends-of-behat/cross-container-extension friends-of-behat/service-container-extension --dev`
 * Update your `behat.yml` - look at the diff [here](https://github.com/Sylius/Sylius-Standard/pull/322/files#diff-7bde54db60a6e933518d8b61b929edce)
 * Add `FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle::class => ['test' => true, 'test_cached' => true],` to your `bundles.php`
-* If you use our Travis CI configuration, follow [these changes](https://github.com/Sylius/Sylius-Standard/pull/322/files#diff-354f30a63fb0907d4ad57269548329e3) introduced in `.travis.yml` file
 * Create `config/services_test.yaml` file with the following code and add these your own Behat services as well:
     ```yaml
     imports:
@@ -42,8 +40,39 @@ for more details:
     imports:
         - { resource: "services_test.yaml" }
     ```
-* If you use our Travis CI configuration, follow [theses changes](https://github.com/Sylius/Sylius-Standard/pull/323/files#diff-354f30a63fb0907d4ad57269548329e3) introduced in `.travis.yml` file
+* Remove all `__symfony__` prefixes in your Behat services
+* Remove all `<tag name="fob.context_service" />` tags from your Behat services
+* Make your Behat services public by default with `<defaults public="true" />`
+* Change `contexts_services` in your suite definitions to `contexts`
+* If you use our Travis CI configuration, follow [these](https://github.com/Sylius/Sylius-Standard/pull/322/files#diff-354f30a63fb0907d4ad57269548329e3)
+and [these](https://github.com/Sylius/Sylius-Standard/pull/323/files#diff-354f30a63fb0907d4ad57269548329e3) changes introduced in `.travis.yml` file
 
+---
+---
+
+# UPGRADE FROM `v1.2.X` TO `v1.4.0`
+
+Firstly, check out the [Sylius 1.3 upgrade guide](https://github.com/Sylius/Sylius/blob/master/UPGRADE-1.3.md) to update Sylius version step by step.
+To upgrade to Sylius 1.4 follow instructions from [the previous section](https://github.com/Sylius/Sylius/blob/master/UPGRADE-1.4.md#upgrade-from-v13x-to-v140) with following changes:
+
+### Doctrine migrations
+
+* Change namespaces of copied migrations to `Sylius\Migrations`
+
+### Dotenv
+
+* These changes are not required, but can be done as well, if you've changed application directory structure in `1.2.x` to `1.3` update
+
+### Behat
+
+* Add `\FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle()` to your bundles lists in `AppKernel.php` (preferably only in `test` environment)
+* Import Sylius Behat services in `app/config/config_test.yml` and your own Behat services as well:
+    ```yaml
+    imports:
+        - { resource: "../../vendor/sylius/sylius/src/Sylius/Behat/Resources/config/services.xml" }
+    ```
+
+---
 ---
 
 ### Deprecations
