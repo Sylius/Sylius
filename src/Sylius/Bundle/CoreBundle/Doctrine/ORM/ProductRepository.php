@@ -70,7 +70,6 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         array $sorting = []
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('o')
-            ->distinct()
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->innerJoin('o.productTaxons', 'productTaxon')
