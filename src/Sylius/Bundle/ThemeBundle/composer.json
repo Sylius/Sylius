@@ -42,7 +42,7 @@
         "matthiasnoback/symfony-config-test": "^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
         "mikey179/vfsStream": "^1.6",
-        "phpspec/phpspec": "^4.0",
+        "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^6.5",
         "sylius/registry": "^1.1",
         "symfony/browser-kit": "^3.4|^4.1.1",
