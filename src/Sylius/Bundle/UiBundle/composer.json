@@ -30,7 +30,7 @@
         "symfony/templating": "^3.4|^4.1.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.0",
+        "phpspec/phpspec": "^5.0",
         "symfony/dependency-injection": "^3.4|^4.1.1",
         "symfony/form": "^3.4|^4.1.1",
         "twig/twig": "^2.0"
