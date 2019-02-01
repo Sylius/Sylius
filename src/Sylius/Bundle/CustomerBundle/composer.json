@@ -42,7 +42,7 @@
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.0",
+        "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^6.5",
         "symfony/dependency-injection": "^3.4|^4.1.1",
         "symfony/form": "^3.4|^4.1.1",

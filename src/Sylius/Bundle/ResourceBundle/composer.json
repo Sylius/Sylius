@@ -42,14 +42,14 @@
         "winzou/state-machine-bundle": "^0.3"
     },
     "require-dev": {
-        "akeneo/phpspec-skip-example-extension": "^3.0",
+        "akeneo/phpspec-skip-example-extension": "^4.0",
         "doctrine/mongodb-odm": "^1.0",
         "doctrine/orm": "^2.5",
         "doctrine/phpcr-odm": "^1.4",
         "jackalope/jackalope-doctrine-dbal": "^1.2",
         "lakion/api-test-case": "^3.1.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
-        "phpspec/phpspec": "^4.0",
+        "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^6.5",
         "sylius/grid-bundle": "^1.2",
         "sylius/locale": "^1.2",
