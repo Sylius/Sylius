@@ -32,7 +32,7 @@
     "require-dev": {
         "doctrine/orm": "^2.5",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
-        "phpspec/phpspec": "^4.0",
+        "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^6.5",
         "symfony/form": "^3.4|^4.1.1",
         "symfony/validator": "^3.4|^4.1.1",
