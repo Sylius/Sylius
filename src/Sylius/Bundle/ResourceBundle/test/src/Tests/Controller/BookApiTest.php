@@ -161,7 +161,7 @@ EOT;
     {
         $this->loadFixturesFromFile('more_books.yml');
 
-        $this->client->request('GET', '/books/sortable/', ['sorting' => ['name' => 'DESC']]);
+        $this->client->request('GET', '/sortable-books/', ['sorting' => ['name' => 'DESC']]);
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_OK);
@@ -174,7 +174,7 @@ EOT;
     {
         $this->loadFixturesFromFile('more_books.yml');
 
-        $this->client->request('GET', '/books/filterable/', ['criteria' => ['name' => 'John']]);
+        $this->client->request('GET', '/filterable-books/', ['criteria' => ['name' => 'John']]);
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_OK);
@@ -187,7 +187,7 @@ EOT;
     {
         $this->loadFixturesFromFile('more_books.yml');
 
-        $this->client->request('GET', '/books/sortable/', ['sorting' => ['id' => 'DESC']]);
+        $this->client->request('GET', '/sortable-books/', ['sorting' => ['id' => 'DESC']]);
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_OK);
@@ -200,7 +200,7 @@ EOT;
     {
         $this->loadFixturesFromFile('more_books.yml');
 
-        $this->client->request('GET', '/books/filterable/', ['criteria' => ['author' => 'J.R.R. Tolkien']]);
+        $this->client->request('GET', '/filterable-books/', ['criteria' => ['author' => 'J.R.R. Tolkien']]);
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_OK);
