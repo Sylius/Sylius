@@ -26,8 +26,6 @@ sylius:
         attribute_type_configuration:
             datetime:
                 format: Formát
-            date:
-                format: Formát
             select:
                 multiple: Více
                 values: Hodnoty

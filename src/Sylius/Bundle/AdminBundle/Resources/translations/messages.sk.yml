@@ -19,7 +19,6 @@ sylius:
                     countries: Krajiny
                     currencies: Meny
                     exchange_rates: Výmenné kurzy
-                    header: Konfigurácia
                     locales: Jazyky
                     payment_methods: Spôsoby platby
                     shipping_categories: Kategórie doručenia
