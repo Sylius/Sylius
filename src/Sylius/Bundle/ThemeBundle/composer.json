@@ -41,7 +41,7 @@
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.0",
         "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-        "mikey179/vfsStream": "^1.6",
+        "mikey179/vfsstream": "^1.6",
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
         "sylius/registry": "^1.1",
