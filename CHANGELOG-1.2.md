@@ -1,5 +1,19 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.15 (2019-02-03)
+
+## TL;DR
+
+- This is the last bugfix release of the `1.2` branch
+
+#### Details
+
+- [#10118](https://github.com/Sylius/Sylius/issues/10118) [Product Review] fixed review validation when edited by admin ([@kboduch](https://github.com/kboduch))
+- [#10119](https://github.com/Sylius/Sylius/issues/10119) Using channel code in shipping method configuration ([@nedac-sorbo](https://github.com/nedac-sorbo))
+- [#10128](https://github.com/Sylius/Sylius/issues/10128) Syntax error in documentation ([@hatem20](https://github.com/hatem20))
+- [#10132](https://github.com/Sylius/Sylius/issues/10132) Add missing Length constraint on product translation slug ([@venyii](https://github.com/venyii))
+- [#10136](https://github.com/Sylius/Sylius/issues/10136) [HotFix] 500 on taxons list error fix (, [@Zales0123](https://github.com/Zales0123))
+
 ## v1.2.14 (2019-01-17)
 
 #### TL;DR
