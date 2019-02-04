@@ -19,7 +19,6 @@ sylius:
                     countries: Země
                     currencies: Měny
                     exchange_rates: Směnný kurz
-                    header: Konfigurace
                     locales: Lokalizace
                     payment_methods: Způsoby plateb
                     shipping_categories: Přepravní kategorie
