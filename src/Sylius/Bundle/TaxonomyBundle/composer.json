@@ -33,6 +33,9 @@
         "phpunit/phpunit": "^6.5",
         "symfony/dependency-injection": "^3.4|^4.1.1"
     },
+    "conflict": {
+        "symfony/dependency-injection": "3.4.22"
+    },
     "config": {
         "bin-dir": "bin"
     },
