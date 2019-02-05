@@ -8,7 +8,6 @@ sylius:
             not_blank: Prosím zadajte meno držiteľa karty.
         expiry_month:
             max_range: Mesiac expirácie karty musí byť medzi {{ min }} a {{ max }}.
-            min_range: Mesiac expirácie karty musí byť medzi {{ min }} a {{ max }}.
             not_blank: Prosím vyberte mesiac expirácie.
         number:
             not_blank: Prosím zadajte číslo karty.
