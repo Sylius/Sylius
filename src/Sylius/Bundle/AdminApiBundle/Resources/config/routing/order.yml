@@ -4,6 +4,7 @@
 sylius_admin_api_order:
     resource: |
         alias: sylius.order
+        path: ''
         section: admin_api
         only: [show, index]
         grid: sylius_admin_order
