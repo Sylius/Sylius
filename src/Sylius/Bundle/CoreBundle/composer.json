@@ -55,10 +55,10 @@
     },
     "require-dev": {
         "hwi/oauth-bundle": "^0.6",
-        "matthiasnoback/symfony-config-test": "^3.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^2.0",
+        "matthiasnoback/symfony-config-test": "^4.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^3.0",
         "phpspec/phpspec": "^5.0",
-        "phpunit/phpunit": "^6.5",
+        "phpunit/phpunit": "^7.0",
         "symfony/dependency-injection": "^3.4|^4.1.1"
     },
     "conflict": {

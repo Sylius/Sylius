@@ -45,7 +45,7 @@
         "hwi/oauth-bundle": "^0.6",
         "php-http/guzzle6-adapter": "^1.1",
         "phpspec/phpspec": "^5.0",
-        "phpunit/phpunit": "^6.5",
+        "phpunit/phpunit": "^7.0",
         "symfony/dependency-injection": "^3.4|^4.1.1",
         "symfony/security-bundle": "^3.4|^4.1.1",
         "symfony/swiftmailer-bundle": "^3.1"
