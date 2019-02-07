@@ -1,27 +1,30 @@
 Sylius\Component\Core\Model\Order:
     order_001:
-        channel: "@channel_web"
+        channel: "@channel"
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
         state: completed
+        checkoutState: completed
     order_002:
-        channel: "@channel_web"
+        channel: "@channel"
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
         state: cart
+        checkoutState: cart
     order_003:
-        channel: "@channel_web"
+        channel: "@channel"
         currencyCode: USD
         localeCode: en_US
         customer: "@customer_oliver"
         state: new
+        checkoutState: new
 
 Sylius\Component\Core\Model\Channel:
-    channel_web:
-        code: "WEB"
-        name: "Web Channel"
+    channel:
+        code: "CHANNEL"
+        name: "Channel"
         hostname: "localhost"
         description: "Lorem ipsum"
         baseCurrency: "@currency"
@@ -29,6 +32,7 @@ Sylius\Component\Core\Model\Channel:
         color: "black"
         enabled: true
         taxCalculationStrategy: "order_items_based"
+        currencies: ["@currency"]
 
 Sylius\Component\Currency\Model\Currency:
     currency:
@@ -40,8 +44,8 @@ Sylius\Component\Locale\Model\Locale:
 
 Sylius\Component\Core\Model\Customer:
     customer_oliver:
-        firstName: Oliver
-        lastName: Queen
-        email: oliver.queen@star-city.com
-        emailCanonical: oliver.queen@star-city.com
+        firstName: "Oliver"
+        lastName: "Queen"
+        email: "oliver.queen@star-city.com"
+        emailCanonical: "oliver.queen@star-city.com"
         birthday: <(new \DateTime())>

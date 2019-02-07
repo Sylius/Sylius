@@ -36,7 +36,7 @@
                 },
                 "channel": {
                     "id": @integer@,
-                    "code": "WEB",
+                    "code": "CHANNEL",
                     "_links": {
                         "self": {
                             "href": "@string@"
@@ -67,7 +67,7 @@
                 },
                 "channel": {
                     "id": @integer@,
-                    "code": "WEB",
+                    "code": "CHANNEL",
                     "_links": {
                         "self": {
                             "href": "@string@"
