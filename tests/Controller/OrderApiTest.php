@@ -35,8 +35,6 @@ final class OrderApiTest extends CheckoutApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/orders.yml');
 
-        $this->prepareOrder();
-
         $this->client->request('GET', $this->getOrderUrl(''), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
