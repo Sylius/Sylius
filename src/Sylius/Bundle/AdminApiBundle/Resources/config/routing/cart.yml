@@ -1,15 +1,16 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_admin_api_carts:
-    resource: |
-        alias: sylius.order
-        path: ''
-        only: [index]
-        grid: sylius_admin_api_cart
-        section: admin_api
-        serialization_version: $version
-    type: sylius.resource_api
+sylius_admin_api_cart_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            serialization_version: $version
+            repository:
+                method: createCartQueryBuilder
+            serialization_groups: [Default, DetailedCart]
 
 sylius_admin_api_cart_create:
     path: /
