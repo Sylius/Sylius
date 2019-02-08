@@ -7,10 +7,10 @@ sylius_admin_api_cart_index:
     defaults:
         _controller: sylius.controller.order:indexAction
         _sylius:
+            grid: sylius_admin_api_cart
+            section: admin_api
+            serialization_groups: [Default]
             serialization_version: $version
-            repository:
-                method: createCartQueryBuilder
-            serialization_groups: [Default, DetailedCart]
 
 sylius_admin_api_cart_create:
     path: /
