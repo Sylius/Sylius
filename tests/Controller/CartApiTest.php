@@ -67,7 +67,7 @@ final class CartApiTest extends JsonApiTestCase
         /** @var OrderInterface $cart */
         $cart = $cartData['order_001'];
 
-        $this->client->request('GET', $this->getCartApiUrl($cart->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartApiUrl((string) $cart->getId()), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/show_response', Response::HTTP_OK);
@@ -84,7 +84,7 @@ final class CartApiTest extends JsonApiTestCase
         /** @var OrderInterface $cart */
         $cart = $orderData['order_001'];
 
-        $this->client->request('GET', $this->getCartApiUrl($cart->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartApiUrl((string) $cart->getId()), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -187,7 +187,7 @@ EOT;
         /** @var OrderInterface $cart */
         $cart = $carts['order_001'];
 
-        $this->client->request('DELETE', $this->getCartApiUrl($cart->getId()));
+        $this->client->request('DELETE', $this->getCartApiUrl((string) $cart->getId()));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -200,7 +200,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('DELETE', $this->getCartApiUrl(-1), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', $this->getCartApiUrl('-1'), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -217,12 +217,12 @@ EOT;
         /** @var OrderInterface $cart */
         $cart = $carts['order_001'];
 
-        $this->client->request('DELETE', $this->getCartApiUrl($cart->getId()), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', $this->getCartApiUrl((string) $cart->getId()), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', $this->getCartApiUrl($cart->getId()), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', $this->getCartApiUrl((string) $cart->getId()), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -239,7 +239,7 @@ EOT;
         /** @var OrderItemInterface $order */
         $order = $orders['order_001'];
 
-        $this->client->request('DELETE', $this->getCartApiUrl($order->getId()), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', $this->getCartApiUrl((string) $order->getId()), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -454,7 +454,7 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', $this->getCartApiUrl($cart->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartApiUrl((string) $cart->getId()), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/increase_quantity_response', Response::HTTP_OK);
@@ -551,18 +551,13 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', $this->getCartApiUrl($cart->getId()), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartApiUrl((string) $cart->getId()), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/recalculated_items_total_response', Response::HTTP_OK);
     }
 
-    /**
-     * @param string $urlFragment
-     *
-     * @return string
-     */
-    private function getCartApiUrl($urlFragment = '')
+    private function getCartApiUrl(string $urlFragment = ''): string
     {
         return '/api/v1/carts/' . $urlFragment;
     }
@@ -572,7 +567,7 @@ EOT;
      */
     private function getCartItemListUrl(OrderInterface $cart)
     {
-        return sprintf($this->getCartApiUrl('%s/items/'), $cart->getId());
+        return sprintf($this->getCartApiUrl('%s/items/'), (string) $cart->getId());
     }
 
     /**
