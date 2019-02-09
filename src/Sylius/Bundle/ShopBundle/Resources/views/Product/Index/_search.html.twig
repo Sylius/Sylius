@@ -1,12 +1,12 @@
 <div class="ui segment">
     <form method="get" action="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="ui loadable form">
-        <div class="ui stackable grid">
-            <div class="eleven wide column">
+        <div class="ui stackable grid" id="searchbar">
+            <div class="column" id="searchbarTextField">
                 {% for filter in products.definition.enabledFilters %}
                     {{ sylius_grid_render_filter(products, filter) }}
                 {% endfor %}
             </div>
-            <div class="three wide column">
+            <div class="right aligned column" id="searchbarButtons">
                 <div class="ui buttons">
                     <button type="submit" class="ui primary icon labeled button"><i class="search icon"></i> {{ 'sylius.ui.search'|trans }}</button>
                     <a href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="ui negative icon labeled button">

@@ -31,3 +31,15 @@ body {
 .ui.unmargined.segments {
   margin: 0;
 }
+
+#searchbar {
+    display: flex;
+}
+
+#searchbarTextField {
+    flex-grow: 100;
+}
+
+#searchbarButtons {
+    width: fit-content;
+}
