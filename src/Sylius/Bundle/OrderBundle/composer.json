@@ -31,9 +31,9 @@
     },
     "require-dev": {
         "doctrine/orm": "^2.5",
-        "matthiasnoback/symfony-dependency-injection-test": "^2.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^3.0",
         "phpspec/phpspec": "^5.0",
-        "phpunit/phpunit": "^6.5",
+        "phpunit/phpunit": "^7.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "symfony/browser-kit": "^3.4|^4.1.1",
         "symfony/dependency-injection": "^3.4|^4.1.1",
