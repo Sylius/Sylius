@@ -30,6 +30,14 @@ sylius_fixtures:
                                 name: "Publication date"
                                 code: "PUBLICATION_DATE"
                                 type: "date"
+                            book_adults_only:
+                                name: "18+"
+                                code: "ADULTS_ONLY"
+                                type: "checkbox"
+                            book_pages_number:
+                                name: "Number of pages"
+                                code: "PAGES_NUMBER"
+                                type: "integer"
                 product:
                     options:
                         custom:
@@ -44,4 +52,6 @@ sylius_fixtures:
                                 product_attributes:
                                     AUTHOR: "J.R.R Tolkien"
                                     PUBLICATION_DATE: 19-07-1954
+                                    ADULTS_ONLY: false
+                                    PAGES_NUMBER: 448
                                 shipping_required: true
