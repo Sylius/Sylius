@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 use Sylius\Component\Attribute\AttributeType\DateAttributeType;
 use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
@@ -346,10 +347,18 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $productAttributeValue = $this->productAttributeValueFactory->createNew();
         $productAttributeValue->setAttribute($productAttribute);
 
-        if (in_array($productAttribute->getType(), [DateAttributeType::TYPE, DatetimeAttributeType::TYPE], true)) {
-            $productAttributeValue->setValue(new \DateTime($value));
-        } else {
-            $productAttributeValue->setValue($value ?: $this->getRandomValueForProductAttribute($productAttribute));
+        switch ($productAttribute->getType()) {
+            case DateAttributeType::TYPE:
+                $productAttributeValue->setValue(new \DateTime($value));
+                break;
+            case DatetimeAttributeType::TYPE:
+                $productAttributeValue->setValue(new \DateTime($value));
+                break;
+            case CheckboxAttributeType::TYPE:
+                $productAttributeValue->setValue($value);
+                break;
+            default:
+                $productAttributeValue->setValue($value ?: $this->getRandomValueForProductAttribute($productAttribute));
         }
 
         $productAttributeValue->setLocaleCode($localeCode);

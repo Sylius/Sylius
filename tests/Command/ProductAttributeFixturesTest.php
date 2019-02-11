@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
-final class SyliusFixturesTest extends KernelTestCase
+final class ProductAttributeFixturesTest extends KernelTestCase
 {
     /** @test */
     public function fixtures_are_loaded_properly(): void
@@ -26,7 +26,13 @@ final class SyliusFixturesTest extends KernelTestCase
         $product = $productRepository->findOneByCode('LOTR1');
         $this->assertNotNull($product);
 
-        $publicationDateAttribute = $product->getAttributeByCodeAndLocale('PUBLICATION_DATE', 'en_US');
-        $this->assertEquals(new \DateTime('19-07-1954'), $publicationDateAttribute->getValue());
+        $publicationDate = $product->getAttributeByCodeAndLocale('PUBLICATION_DATE', 'en_US');
+        $this->assertEquals(new \DateTime('19-07-1954'), $publicationDate->getValue());
+
+        $adultsOnly = $product->getAttributeByCodeAndLocale('ADULTS_ONLY', 'en_US');
+        $this->assertEquals(false, $adultsOnly->getValue());
+
+        $pagesNumber = $product->getAttributeByCodeAndLocale('PAGES_NUMBER', 'en_US');
+        $this->assertEquals(448, $pagesNumber->getValue());
     }
 }
