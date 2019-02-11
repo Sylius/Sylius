@@ -26,16 +26,15 @@ final class ProductAttributeFixturesTest extends KernelTestCase
         $product = $productRepository->findOneByCode('LOTR1');
         $this->assertNotNull($product);
 
-        $publicationDate = $product->getAttributeByCodeAndLocale('PUBLICATION_DATE', 'en_US');
-        $this->assertEquals(new \DateTime('19-07-1954'), $publicationDate->getValue());
+        $this->assertValueOfAttributeWithCode($product, 'PUBLICATION_DATE', new \DateTime('19-07-1954'));
+        $this->assertValueOfAttributeWithCode($product, 'ADULTS_ONLY', false);
+        $this->assertValueOfAttributeWithCode($product, 'PAGES_NUMBER', 448);
+        $this->assertValueOfAttributeWithCode($product, 'COVER_TYPE', ['SOFT']);
+    }
 
-        $adultsOnly = $product->getAttributeByCodeAndLocale('ADULTS_ONLY', 'en_US');
-        $this->assertEquals(false, $adultsOnly->getValue());
-
-        $pagesNumber = $product->getAttributeByCodeAndLocale('PAGES_NUMBER', 'en_US');
-        $this->assertEquals(448, $pagesNumber->getValue());
-
-        $coverType = $product->getAttributeByCodeAndLocale('COVER_TYPE', 'en_US');
-        $this->assertEquals(['SOFT'], $coverType->getValue());
+    private function assertValueOfAttributeWithCode(ProductInterface $product, string $code, $value): void
+    {
+        $publicationDate = $product->getAttributeByCodeAndLocale($code, 'en_US');
+        $this->assertEquals($value, $publicationDate->getValue());
     }
 }
