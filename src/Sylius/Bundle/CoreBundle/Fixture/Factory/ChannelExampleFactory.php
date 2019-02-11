@@ -146,6 +146,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setNormalizer('currencies', LazyOption::findBy($this->currencyRepository, 'code'))
             ->setDefault('theme_name', null)
             ->setDefault('contact_email', null)
+            ->setDefault('shop_billing_data', null)
         ;
     }
 }
