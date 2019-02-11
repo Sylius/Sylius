@@ -1,0 +1,34 @@
+---------------------------------------------------------------------------
+
+by 4c0n at 2019-02-10T10:56:32Z
+
+In french it is even more noticable, so here are 2 screenshots to illustrate:
+Before and after:
+![screenshot from 2019-02-10 11-51-25](https://user-images.githubusercontent.com/2325383/52532819-e1b32080-2d2a-11e9-84d5-3b169ecd92dc.png)
+![screenshot from 2019-02-10 11-54-17](https://user-images.githubusercontent.com/2325383/52532820-e546a780-2d2a-11e9-9e9b-98223c5e528d.png)
+
+---------------------------------------------------------------------------
+
+by kulczy at 2019-02-11T09:09:25Z
+
+@4c0n thanks for that! Just a small tip,`.ui.grid` has already flex and for styling, let's try to use classes instead of id's
+
+---------------------------------------------------------------------------
+
+by 4c0n at 2019-02-11T09:40:30Z
+
+@Zales0123 Thanks!
+@kulczy You're welcome. I'll try to remove the `display: flex` rule on that id.
+Regarding the use of id's instead of classes. This is purposely done (and a commonly accepted way) to override framework CSS, as to solely apply it to these elements (specificity rules). I guess the other option would be to use `!important` on less specific CSS selector combinations, but that seems to be a worse solution. If you have another suggestion, please advise. Adding more classes would take away from Semantic UI, but might be possible if `!important` isn't used (or by using it, which I'd like to prevent at all costs, because of it being a bad practice).
+
+---------------------------------------------------------------------------
+
+by kulczy at 2019-02-11T10:02:20Z
+
+@4c0n I think the best option would be to extend semantic to handle auto-width columns, we'll probably do it in the future. And for now, your arguments sound good to me 👍
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-02-11T10:30:01Z
+
+Thank you, Youri! :1st_place_medal:
