@@ -38,6 +38,16 @@ sylius_fixtures:
                                 name: "Number of pages"
                                 code: "PAGES_NUMBER"
                                 type: "integer"
+                            book_cover_type:
+                                name: "Cover type"
+                                code: "COVER_TYPE"
+                                type: "select"
+                                configuration:
+                                    choices:
+                                        SOFT:
+                                            en_US: "Soft"
+                                        HARD:
+                                            en_US: "Hard"
                 product:
                     options:
                         custom:
@@ -54,4 +64,6 @@ sylius_fixtures:
                                     PUBLICATION_DATE: 19-07-1954
                                     ADULTS_ONLY: false
                                     PAGES_NUMBER: 448
+                                    COVER_TYPE:
+                                        - "SOFT"
                                 shipping_required: true
