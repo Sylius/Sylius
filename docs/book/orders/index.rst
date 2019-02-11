@@ -19,5 +19,6 @@ with a few additional ones, like promotions, payments, shipments or checkout in 
     shipments
     payments
     checkout
+    cart-flow
 
 .. include:: /book/orders/map.rst.inc

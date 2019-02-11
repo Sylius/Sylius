@@ -6,3 +6,4 @@
 * :doc:`/book/orders/payments`
 * :doc:`/book/orders/shipments`
 * :doc:`/book/orders/checkout`
+* :doc:`/book/orders/cart-flow`
