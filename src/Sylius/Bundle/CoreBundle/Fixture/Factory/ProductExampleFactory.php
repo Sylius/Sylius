@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Attribute\AttributeType\DateAttributeType;
+use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -191,25 +193,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('product_attributes', [])
             ->setAllowedTypes('product_attributes', 'array')
             ->setNormalizer('product_attributes', function (Options $options, array $productAttributes): array {
-                $productAttributesValues = [];
-                foreach ($productAttributes as $code => $value) {
-                    foreach ($this->getLocales() as $localeCode) {
-                        /** @var ProductAttributeInterface $productAttribute */
-                        $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $code]);
-
-                        Assert::notNull($productAttribute);
-
-                        /** @var ProductAttributeValueInterface $productAttributeValue */
-                        $productAttributeValue = $this->productAttributeValueFactory->createNew();
-                        $productAttributeValue->setAttribute($productAttribute);
-                        $productAttributeValue->setValue($value ?: $this->getRandomValueForProductAttribute($productAttribute));
-                        $productAttributeValue->setLocaleCode($localeCode);
-
-                        $productAttributesValues[] = $productAttributeValue;
-                    }
-                }
-
-                return $productAttributesValues;
+                return $this->setAttributeValues($productAttributes);
             })
 
             ->setDefault('product_options', [])
@@ -337,6 +321,40 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         foreach ($locales as $locale) {
             yield $locale->getCode();
         }
+    }
+
+    private function setAttributeValues(array $productAttributes): array
+    {
+        $productAttributesValues = [];
+        foreach ($productAttributes as $code => $value) {
+            foreach ($this->getLocales() as $localeCode) {
+                $productAttributesValues[] = $this->configureProductAttributeValue($code, $localeCode, $value);
+            }
+        }
+
+        return $productAttributesValues;
+    }
+
+    private function configureProductAttributeValue(string $code, string $localeCode, $value): ProductAttributeValueInterface
+    {
+        /** @var ProductAttributeInterface $productAttribute */
+        $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $code]);
+
+        Assert::notNull($productAttribute);
+
+        /** @var ProductAttributeValueInterface $productAttributeValue */
+        $productAttributeValue = $this->productAttributeValueFactory->createNew();
+        $productAttributeValue->setAttribute($productAttribute);
+
+        if (in_array($productAttribute->getType(), [DateAttributeType::TYPE, DatetimeAttributeType::TYPE], true)) {
+            $productAttributeValue->setValue(new \DateTime($value));
+        } else {
+            $productAttributeValue->setValue($value ?: $this->getRandomValueForProductAttribute($productAttribute));
+        }
+
+        $productAttributeValue->setLocaleCode($localeCode);
+
+        return $productAttributeValue;
     }
 
     /**
