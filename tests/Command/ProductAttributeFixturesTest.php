@@ -34,5 +34,8 @@ final class ProductAttributeFixturesTest extends KernelTestCase
 
         $pagesNumber = $product->getAttributeByCodeAndLocale('PAGES_NUMBER', 'en_US');
         $this->assertEquals(448, $pagesNumber->getValue());
+
+        $coverType = $product->getAttributeByCodeAndLocale('COVER_TYPE', 'en_US');
+        $this->assertEquals(['SOFT'], $coverType->getValue());
     }
 }
