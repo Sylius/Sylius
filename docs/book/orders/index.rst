@@ -12,6 +12,7 @@ with a few additional ones, like promotions, payments, shipments or checkout in 
     :hidden:
 
     orders
+    cart-flow
     taxation
     adjustments
     promotions
@@ -19,6 +20,5 @@ with a few additional ones, like promotions, payments, shipments or checkout in 
     shipments
     payments
     checkout
-    cart-flow
 
 .. include:: /book/orders/map.rst.inc

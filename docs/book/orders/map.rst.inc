@@ -1,4 +1,5 @@
 * :doc:`/book/orders/orders`
+* :doc:`/book/orders/cart-flow`
 * :doc:`/book/orders/taxation`
 * :doc:`/book/orders/adjustments`
 * :doc:`/book/orders/promotions`
@@ -6,4 +7,3 @@
 * :doc:`/book/orders/payments`
 * :doc:`/book/orders/shipments`
 * :doc:`/book/orders/checkout`
-* :doc:`/book/orders/cart-flow`
