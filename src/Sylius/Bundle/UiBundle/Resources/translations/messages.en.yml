@@ -246,6 +246,7 @@ sylius:
         display: 'Display'
         edit: 'Edit'
         edit_admin_user: 'Edit administrator'
+        edit_addresses: 'Edit addresses'
         edit_association_type: 'Edit Association type'
         edit_channel: 'Edit channel'
         edit_country: 'Edit country'
