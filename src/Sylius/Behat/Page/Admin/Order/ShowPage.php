@@ -51,6 +51,17 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->hasAddress($shippingAddressText, $customerName, $street, $postcode, $city, $countryName);
     }
 
+    public function hasShippingAddressVisible(): bool
+    {
+        try {
+            $this->getElement('shipping_address');
+        } catch (ElementNotFoundException $exception) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function hasBillingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool
     {
         $billingAddressText = $this->getElement('billing_address')->getText();
