@@ -741,6 +741,19 @@ final class ProductContext implements Context
         $this->objectManager->flush();
     }
 
+    /**
+     * @Given /^(this product) does not require shipping$/
+     */
+    public function thisProductDoesNotRequireShipping(ProductInterface $product): void
+    {
+        /** @var ProductVariantInterface $variant */
+        foreach ($product->getVariants() as $variant) {
+            $variant->setShippingRequired(false);
+        }
+
+        $this->objectManager->flush();
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
