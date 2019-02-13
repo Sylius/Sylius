@@ -7,29 +7,26 @@ code & documentation hosted on the main ``Sylius/Sylius`` `Git repository`_).
 Sylius manages its releases through a *time-based model* and follows the
 `Semantic Versioning`_ strategy:
 
-* A new Sylius minor version (e.g. 1.1, 1.2, etc.) comes out every *four months*
-* A new Sylius patch version (e.g. 1.0.1, 1.0.2, etc.) comes out every *two weeks*
+* A new Sylius minor version (e.g. 1.1, 1.2, etc.) comes out *at least every four months*.
+* A new Sylius patch version (e.g. 1.0.1, 1.0.2, etc.) comes out *at least every three weeks*.
 
 Development
 -----------
 
-The full development period for any minor version lasts four months and
-is divided into two phases:
+The full development period for any minor version is divided into two phases:
 
-* **Development**: *Three months* to add new features and to enhance existing
-  ones;
+* **Development**: *First 5/6 of the time intended for the release* to add new features and to enhance existing ones.
 
-* **Stabilization**: *One month* to fix bugs, prepare the release, and wait
-  for the whole Sylius ecosystem (third-party libraries, plugins, and
-  projects using Sylius) to catch up.
+* **Stabilization**: *Last 1/6 of the time intended for the release* to fix bugs, prepare the release, and wait
+  for the whole Sylius ecosystem (third-party libraries, plugins, and projects using Sylius) to catch up.
 
-During the development period, any new feature can be reverted if it won't be
-finished in time or if it won't be stable enough to be included in the coming release.
+During both periods, any new feature can be reverted if it won't be
+finished in time or won't be stable enough to be included in the coming release.
 
 Maintenance
 -----------
 
-Each Sylius version is maintained for a fixed period of time.
+Each minor Sylius version is maintained for a fixed period of time after its release.
 This maintenance is divided into:
 
 * *Bug fixes and security fixes*: During this period, being *eight months* long,
@@ -39,6 +36,35 @@ This maintenance is divided into:
 * *Security fixes only*: During this period, being *sixteen months* long,
   only security related issues can be fixed. The end of this period is referenced
   as being the *end of life* of a release.
+
+Past Releases
+-------------
+
++---------+--------------------+--------------------+--------------------+-----------------------+
+| Version | Release date       | End of maintenance | End of life        | Status                |
++=========+====================+====================+====================+=======================+
+| 1.0     | Sep 13, 2017       | May 13, 2018       | Jan 13, 2019       | Not supported         |
++---------+--------------------+--------------------+--------------------+-----------------------+
+| 1.1     | Feb 12, 2018       | Oct 12, 2018       | Jun 12, 2019       | Security support only |
++---------+--------------------+--------------------+--------------------+-----------------------+
+| 1.2     | Jun 13, 2018       | Feb 13, 2019       | Oct 13, 2019       | Security support only |
++---------+--------------------+--------------------+--------------------+-----------------------+
+| 1.3     | Oct 1, 2018        | Jun 1, 2019        | Feb 1, 2020        | Fully supported       |
++---------+--------------------+--------------------+--------------------+-----------------------+
+| 1.4     | Feb 4, 2019        | Oct 4, 2019        | Jun 4, 2020        | Fully supported       |
++---------+--------------------+--------------------+--------------------+-----------------------+
+
+Future Releases
+---------------
+
++---------+----------------------+------------------------+--------------------+
+| Version | Development starts   | Stabilization starts   | Release date       |
++=========+======================+========================+====================+
+| 1.5     | Early Feb 2019       | Mid Apr 2019           | Late Apr 2019      |
++---------+----------------------+------------------------+--------------------+
+| 1.6     | Early May 2019       | Mid Aug 2019           | Late Aug 2019      |
++---------+----------------------+------------------------+--------------------+
+
 
 Backward Compatibility
 ----------------------
