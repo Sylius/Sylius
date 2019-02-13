@@ -20,6 +20,31 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
+    public function it_denies_getting_orders_for_non_authenticated_user()
+    {
+        $this->client->request('GET', '/api/v1/orders/');
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_get_orders_list_without_cart_state()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/orders.yml');
+
+        $this->client->request('GET', $this->getOrderUrl(), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'order/order_index_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
     public function it_denies_getting_an_order_for_non_authenticated_user()
     {
         $this->client->request('GET', $this->getOrderUrl(-1));
@@ -376,12 +401,9 @@ EOT;
         $this->assertResponse($response, 'order/order_fulfilled_show_response', Response::HTTP_OK);
     }
 
-    /**
-     * @return string
-     */
-    private function getOrderUrl($orderId)
+    private function getOrderUrl(?int $orderId = null): string
     {
-        return '/api/v1/orders/' . $orderId;
+        return '/api/v1/orders/' . (string) $orderId;
     }
 
     /**

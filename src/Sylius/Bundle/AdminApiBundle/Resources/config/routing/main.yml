@@ -41,6 +41,7 @@ sylius_api_locale:
 
 sylius_api_order:
     resource: "@SyliusAdminApiBundle/Resources/config/routing/order.yml"
+    prefix: /orders
 
 sylius_api_payment_method:
     resource: "@SyliusAdminApiBundle/Resources/config/routing/payment_method.yml"
