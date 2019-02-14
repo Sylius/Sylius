@@ -22,6 +22,8 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function hasShippingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool;
 
+    public function hasShippingAddressVisible(): bool;
+
     public function hasBillingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool;
 
     public function hasShipment(string $shippingMethodName): bool;

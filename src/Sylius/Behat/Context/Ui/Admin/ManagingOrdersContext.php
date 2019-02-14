@@ -248,6 +248,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then it should have no shipping address set
+     */
+    public function itShouldHaveNoShippingAddressSet(): void
+    {
+        Assert::false($this->showPage->hasShippingAddressVisible());
+    }
+
+    /**
      * @Then it should be shipped via the :shippingMethodName shipping method
      */
     public function itShouldBeShippedViaShippingMethod($shippingMethodName)
