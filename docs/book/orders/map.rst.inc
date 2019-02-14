@@ -1,4 +1,5 @@
 * :doc:`/book/orders/orders`
+* :doc:`/book/orders/cart-flow`
 * :doc:`/book/orders/taxation`
 * :doc:`/book/orders/adjustments`
 * :doc:`/book/orders/promotions`
