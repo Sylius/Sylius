@@ -37,5 +37,4 @@ final class RegisterCartContextsPass extends PrioritizedCompositeServicePass
 
         $container->setAlias(CartContextInterface::class, 'sylius.context.cart');
     }
-
 }

@@ -37,5 +37,4 @@ final class RegisterProcessorsPass extends PrioritizedCompositeServicePass
 
         $container->setAlias(OrderProcessorInterface::class, 'sylius.order_processing.order_processor');
     }
-
 }

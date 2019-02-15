@@ -35,5 +35,4 @@ final class CompositeCurrencyContextPass extends PrioritizedCompositeServicePass
 
         $container->setAlias(CurrencyContextInterface::class, 'sylius.context.currency');
     }
-
 }
