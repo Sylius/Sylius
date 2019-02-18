@@ -2,7 +2,7 @@ sylius_shop:
     resource: "@SyliusShopBundle/Resources/config/routing.yml"
     prefix: /{_locale}
     requirements:
-        _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
 
 sylius_shop_payum:
     resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
