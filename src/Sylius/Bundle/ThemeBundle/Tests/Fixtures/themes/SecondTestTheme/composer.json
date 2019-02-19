@@ -1,8 +1,0 @@
-{
-    "name": "sylius/second-test-theme",
-    "extra": {
-        "sylius-theme": {
-            "title": "Sylius Second Theme"
-        }
-    }
-}

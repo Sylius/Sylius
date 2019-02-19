@@ -1,7 +1,0 @@
-test:
-  app_bundle: 'app/Resources/BUNDLE_NAME/translations'
-  app: 'app/Resources/BUNDLE_NAME/translations'
-  theme_bundle: 'app/Resources/BUNDLE_NAME/translations'
-  theme: 'app/Resources/BUNDLE_NAME/translations'
-  parent_theme_bundle: 'app/Resources/BUNDLE_NAME/translations'
-  parent_theme: 'app/Resources/BUNDLE_NAME/translations'
