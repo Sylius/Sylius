@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by stefandoorn at 2019-02-18T16:01:38Z
+
+Probably good to add a link to the new repository/packagist in UPGRADE e.g.?
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-02-18T16:07:16Z
+
+@stefandoorn there's no end-user action required, so I guess `CHANGELOG-1.3.md` with `TL;DR` (also included in release notes) should be enough, what do you think?
+
+---------------------------------------------------------------------------
+
+by stefandoorn at 2019-02-18T16:08:20Z
+
+Ah, true. Was thinking about plugins etc., but they rely on Sylius also and therefore no issue.
