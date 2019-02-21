@@ -50,6 +50,7 @@ Payments
     payments/paypal
     payments/stripe
     payments/encrypting-gateway-config
+    payments/authorize
 
 .. include:: /cookbook/payments/map.rst.inc
 
