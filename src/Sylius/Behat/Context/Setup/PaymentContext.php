@@ -167,7 +167,7 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Then The :latestOrder has an authorized payment
+     * @Then The latest order has an authorized payment
      */
     public function theLatestOrderHasAuthorizedPayment(OrderInterface $order)
     {
