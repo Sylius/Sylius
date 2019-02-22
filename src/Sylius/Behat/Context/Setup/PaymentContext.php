@@ -167,13 +167,13 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Then /^the (latest order) should have an authorized payment$/
+     * @Then /^the (latest order) should have a payment with state "([^"]+)"$/
      */
-    public function theLatestOrderHasAuthorizedPayment(OrderInterface $order)
+    public function theLatestOrderHasAuthorizedPayment(OrderInterface $order, string $state)
     {
         $payment = $order->getLastPayment();
 
-        Assert::eq($payment->getState(), PaymentInterface::STATE_AUTHORIZED);
+        Assert::eq($payment->getState(), $state);
     }
 
     /**

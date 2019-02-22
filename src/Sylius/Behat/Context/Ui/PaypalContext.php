@@ -57,6 +57,16 @@ final class PaypalContext implements Context
     }
 
     /**
+     * @When I sign in to PayPal and authorize successfully
+     */
+    public function iSignInToPaypalAndAuthorizeSuccessfully()
+    {
+        $this->paypalApiMocker->performActionInApiSuccessfulScope(function () {
+            $this->paypalExpressCheckoutPage->authorize();
+        });
+    }
+
+    /**
      * @When I sign in to PayPal and pay successfully
      */
     public function iSignInToPaypalAndPaySuccessfully()
