@@ -25,4 +25,4 @@ Feature: Paying offline during checkout
         And the payment method "Offline" requires authorization before capturing
         When I proceed selecting "Offline" payment method
         And I confirm my order
-        Then The latest order has an authorized payment
+        Then the latest order should have an authorized payment
