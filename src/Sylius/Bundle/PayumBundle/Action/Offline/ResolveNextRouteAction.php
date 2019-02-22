@@ -15,7 +15,6 @@ namespace Sylius\Bundle\PayumBundle\Action\Offline;
 
 use Payum\Core\Action\ActionInterface;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
-use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
 final class ResolveNextRouteAction implements ActionInterface
@@ -27,20 +26,6 @@ final class ResolveNextRouteAction implements ActionInterface
      */
     public function execute($request): void
     {
-        /** @var PaymentInterface $payment */
-        $payment = $request->getFirstModel();
-
-        /** @var PaymentMethodInterface $paymentMethod */
-        $paymentMethod = $payment->getMethod();
-
-        $gatewayConfig = $paymentMethod->getGatewayConfig()->getConfig();
-
-        if (isset($gatewayConfig['use_authorize']) && $gatewayConfig['use_authorize'] == 1) {
-            $request->setRouteName('sylius_shop_order_show');
-            $request->setRouteParameters(['tokenValue' => $payment->getOrder()->getTokenValue()]);
-            return;
-        }
-
         $request->setRouteName('sylius_shop_order_thank_you');
     }
 
