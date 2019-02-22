@@ -48,7 +48,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Transform latest order
+     * @Transform /^latest order$/
      */
     public function getLatestOrder()
     {
