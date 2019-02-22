@@ -48,6 +48,18 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Transform :latestOrder
+     */
+    public function getLatestOrder()
+    {
+        $orders = $this->orderRepository->findLatest(1);
+
+        Assert::notNull($orders[0],'No order have been made');
+
+        return $orders[0];
+    }
+
+    /**
      * @Transform /^this order made by "([^"]+)"$/
      * @Transform /^order placed by "([^"]+)"$/
      * @Transform /^the order of "([^"]+)"$/

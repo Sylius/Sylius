@@ -18,10 +18,13 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 final class PaymentContext implements Context
 {
@@ -149,6 +152,28 @@ final class PaymentContext implements Context
     public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName)
     {
         $this->createPaymentMethod($paymentMethodName, 'PM_' . $paymentMethodName, 'Offline', 'Payment method', false);
+    }
+
+    /**
+     * @Given the payment method :paymentMethod requires authorization before capturing
+     */
+    public function thePaymentMethodRequiresAuthorizationBeforeCapturing(PaymentMethodInterface $paymentMethod)
+    {
+        $config = $paymentMethod->getGatewayConfig();
+        $config->setConfig(array_merge($config->getConfig(), ['use_authorize' => 1]));
+        $paymentMethod->setGatewayConfig($config);
+
+        $this->paymentMethodManager->flush();
+    }
+
+    /**
+     * @Then The :latestOrder has an authorized payment
+     */
+    public function theLatestOrderHasAuthorizedPayment(OrderInterface $order)
+    {
+        $payment = $order->getLastPayment();
+
+        Assert::eq($payment->getState(), PaymentInterface::STATE_AUTHORIZED);
     }
 
     /**
