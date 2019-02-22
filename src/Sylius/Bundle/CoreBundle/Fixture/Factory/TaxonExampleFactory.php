@@ -97,7 +97,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         }
 
         foreach ($options['children'] as $childOptions) {
-            $this->create($childOptions, $taxon);
+            $this->createTaxon($childOptions, $taxon);
         }
 
         return $taxon;
