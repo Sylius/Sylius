@@ -16,6 +16,7 @@ namespace Sylius\Tests\Functional;
 use Doctrine\Common\Persistence\ObjectManager;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
+use HWI\Bundle\OAuthBundle\Tests\Fixtures\CustomUserResponse;
 use PHPUnit\Framework\Assert;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -100,6 +101,17 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
         Assert::assertSame(200, $this->client->getResponse()->getStatusCode());
         Assert::assertSame('/admin/', parse_url($this->client->getCrawler()->getUri(), \PHP_URL_PATH));
         Assert::assertSame('argon2i', $adminUserRepository->findOneByEmail('user@example.com')->getEncoderName());
+    }
+
+    /** @test */
+    public function oauth_user_factory_is_not_overridden(): void
+    {
+        $oAuthUserProvider = $this->client->getContainer()->get('sylius.test.oauth.user_provider');
+        $shopUserRepository = $this->client->getContainer()->get('sylius.repository.shop_user');
+        $shopUser = $shopUserRepository->findOneByEmail('Oliver@doe.com');
+
+        $response = new CustomUserResponse();
+        $oAuthUserProvider->connect($shopUser, $response);
     }
 
     private function submitForm(string $button, array $fieldValues = []): void
