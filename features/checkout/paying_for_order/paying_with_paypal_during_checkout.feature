@@ -13,6 +13,17 @@ Feature: Paying with paypal during checkout
         And I am logged in as "john@example.com"
 
     @ui
+    Scenario: Successfully authorize payment
+        Given I added product "PHP T-Shirt" to the cart
+        And I have proceeded selecting "PayPal" payment method
+        And the payment method "PayPal" requires authorization before capturing
+        When I confirm my order with paypal payment
+        And I sign in to PayPal and authorize successfully
+        Then I should be notified that my payment has been completed
+        And I should see the thank you page
+        And the latest order should have a payment with state "completed"
+
+    @ui
     Scenario: Successful payment
         Given I added product "PHP T-Shirt" to the cart
         And I have proceeded selecting "PayPal" payment method

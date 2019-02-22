@@ -17,12 +17,3 @@ Feature: Paying offline during checkout
         When I proceed selecting "Offline" payment method
         And I confirm my order
         Then I should see the thank you page
-
-    @ui
-    Scenario: Successfully placing an order with authorize
-        Given I am a logged in customer
-        And I have product "PHP T-Shirt" in the cart
-        And the payment method "Offline" requires authorization before capturing
-        When I proceed selecting "Offline" payment method
-        And I confirm my order
-        Then the latest order should have an authorized payment
