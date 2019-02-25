@@ -17,6 +17,7 @@ sylius_user:
                     form: Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType
         oauth:
             user:
+                encoder: false
                 classes:
                     model: Sylius\Component\User\Model\UserOAuth
                     interface: Sylius\Component\User\Model\UserOAuthInterface

@@ -89,7 +89,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         foreach ($resources as $userType => $config) {
             $encoder = $config['user']['encoder'] ?? $globalEncoder;
 
-            if (null === $encoder) {
+            if (null === $encoder || false === $encoder) {
                 continue;
             }
 
