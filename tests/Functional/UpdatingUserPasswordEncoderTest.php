@@ -16,7 +16,8 @@ namespace Sylius\Tests\Functional;
 use Doctrine\Common\Persistence\ObjectManager;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
-use HWI\Bundle\OAuthBundle\Tests\Fixtures\CustomUserResponse;
+use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\AbstractResourceOwner;
+use HWI\Bundle\OAuthBundle\OAuth\Response\AbstractUserResponse;
 use PHPUnit\Framework\Assert;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -109,9 +110,28 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
         $oAuthUserProvider = $this->client->getContainer()->get('sylius.test.oauth.user_provider');
         $shopUserRepository = $this->client->getContainer()->get('sylius.repository.shop_user');
         $shopUser = $shopUserRepository->findOneByEmail('Oliver@doe.com');
+        $initialOAuthAccounts = $shopUser->getOAuthAccounts()->count();
 
-        $response = new CustomUserResponse();
-        $oAuthUserProvider->connect($shopUser, $response);
+        $resourceOwnerMock = $this->createConfiguredMock(
+            AbstractResourceOwner::class,
+            [
+                'getName' => 'resourceProviderName',
+            ]
+        );
+
+        $responseMock = $this->createConfiguredMock(
+            AbstractUserResponse::class,
+            [
+                'getUsername' => 'someUserName',
+                'getResourceOwner' => $resourceOwnerMock,
+                'getAccessToken' => 'LongAccessToken',
+                'getRefreshToken' => 'LongRefreshToken',
+            ]
+        );
+
+        $oAuthUserProvider->connect($shopUser, $responseMock);
+
+        Assert::assertSame($initialOAuthAccounts + 1, $shopUser->getOAuthAccounts()->count());
     }
 
     private function submitForm(string $button, array $fieldValues = []): void
