@@ -71,6 +71,10 @@ final class OptionsParser implements OptionsParserInterface
             return $this->parseOptionResourceField(substr($parameter, 9), $data);
         }
 
+        if (0 === strpos($parameter, 'resource[')) {
+            return $this->parseOptionResourceField(substr($parameter, 8), $data);
+        }
+
         return $parameter;
     }
 
