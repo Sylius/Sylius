@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
+use Sylius\Component\Customer\Model\CustomerInterface as CustotmerComponent;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -67,6 +68,9 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
         $customer->setFirstName($options['first_name']);
         $customer->setLastName($options['last_name']);
         $customer->setGroup($options['customer_group']);
+        $customer->setGender($options['gender']);
+        $customer->setPhoneNumber($options['phone_number']);
+        $customer->setBirthday($options['birthday']);
 
         /** @var ShopUserInterface $user */
         $user = $this->userFactory->createNew();
@@ -99,6 +103,24 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
             ->setDefault('customer_group', LazyOption::randomOneOrNull($this->customerGroupRepository, 100))
             ->setAllowedTypes('customer_group', ['null', 'string', CustomerGroupInterface::class])
             ->setNormalizer('customer_group', LazyOption::findOneBy($this->customerGroupRepository, 'code'))
+            ->setDefault('gender', CustotmerComponent::UNKNOWN_GENDER)
+            ->setAllowedValues(
+                'gender',
+                [CustotmerComponent::UNKNOWN_GENDER, CustotmerComponent::MALE_GENDER, CustotmerComponent::FEMALE_GENDER]
+            )
+            ->setDefault('phone_number', function (Options $options): string {
+                return $this->faker->phoneNumber;
+            })
+            ->setDefault('birthday', function (Options $options): string {
+                return $this->faker->dateTimeThisCentury();
+            })
+            ->setAllowedTypes('birthday', ['null', 'string', \DateTime::class])
+            ->setNormalizer('birthday', function (Options $options, $value) {
+                if (is_string($value)) {
+                    return \DateTime::createFromFormat('Y-m-d H:i:s', $value);
+                }
+                return $value;
+            })
         ;
     }
 }
