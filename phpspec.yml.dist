@@ -13,7 +13,6 @@ suites:
     Payment: { namespace: Sylius\Component\Payment, psr4_prefix: Sylius\Component\Payment, spec_path: src/Sylius/Component/Payment, src_path: src/Sylius/Component/Payment }
     Product: { namespace: Sylius\Component\Product, psr4_prefix: Sylius\Component\Product, spec_path: src/Sylius/Component/Product, src_path: src/Sylius/Component/Product }
     Promotion: { namespace: Sylius\Component\Promotion, psr4_prefix: Sylius\Component\Promotion, spec_path: src/Sylius/Component/Promotion, src_path: src/Sylius/Component/Promotion }
-    Registry: { namespace: Sylius\Component\Registry, psr4_prefix: Sylius\Component\Registry, spec_path: src/Sylius/Component/Registry, src_path: src/Sylius/Component/Registry }
     Resource: { namespace: Sylius\Component\Resource, psr4_prefix: Sylius\Component\Resource, spec_path: src/Sylius/Component/Resource, src_path: src/Sylius/Component/Resource }
     Review: { namespace: Sylius\Component\Review, psr4_prefix: Sylius\Component\Review, spec_path: src/Sylius/Component/Review, src_path: src/Sylius/Component/Review }
     Shipping: { namespace: Sylius\Component\Shipping, psr4_prefix: Sylius\Component\Shipping, spec_path: src/Sylius/Component/Shipping, src_path: src/Sylius/Component/Shipping }
