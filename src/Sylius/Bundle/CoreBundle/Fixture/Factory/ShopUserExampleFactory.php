@@ -111,7 +111,7 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
             ->setDefault('phone_number', function (Options $options): string {
                 return $this->faker->phoneNumber;
             })
-            ->setDefault('birthday', function (Options $options): string {
+            ->setDefault('birthday', function (Options $options): \DateTime {
                 return $this->faker->dateTimeThisCentury();
             })
             ->setAllowedTypes('birthday', ['null', 'string', \DateTime::class])
