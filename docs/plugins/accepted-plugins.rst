@@ -1,7 +1,17 @@
 Plugins Accepted by Sylius
 ==========================
 
+As the Sylius eCommerce framework is an open source project it has an awesome community of users and developers.
+Therefore our ecosystem flourishes with plugins created outside of our organization. These plugins can become officially
+accepted by us, when they meet certain requirements. Then, when accepted, they will land on the `official list of plugins
+on our website <https://sylius.com/plugins/>`_.
 
+When a plugin is accepted by Sylius, you can recognize it also by this badge below in its readme file:
+
+.. image:: ../_images/approved_plugin.png
+    :scale: 50%
+
+|
 
 How to have a Plugin accepted by Sylius?
 ----------------------------------------
