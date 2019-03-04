@@ -409,6 +409,14 @@ final class CartContext implements Context
         Assert::same($this->summaryPage->getCartTotal(), $total);
     }
 
+    /**
+     * @Then /^(\d)(st|nd|rd|th) item in my cart should have "([^"]+)" image displayed$/
+     */
+    public function itemShouldHaveImageDisplayed(int $itemNumber, string $image): void
+    {
+        Assert::contains($this->summaryPage->getItemImage($itemNumber), $image);
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
