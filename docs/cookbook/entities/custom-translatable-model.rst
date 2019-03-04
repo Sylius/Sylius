@@ -220,23 +220,7 @@ As a result you should get such a ``Supplier`` class:
         }
     }
 
-4. Update the database using migrations
----------------------------------------
-
-Assuming that your database was up-to-date before adding the new entity, run:
-
-.. code-block:: bash
-
-    $ php bin/console doctrine:migrations:diff
-
-This will generate a new migration file which adds the Supplier entity to your database.
-Then update the database using the generated migration:
-
-.. code-block:: bash
-
-    $ php bin/console doctrine:migrations:migrate
-
-5. Register your entity together with translation as a Sylius resource
+4. Register your entity together with translation as a Sylius resource
 ----------------------------------------------------------------------
 
 If you don't have it yet create a file ``config/resources.yml``, import it in the ``config/services.yaml``.
@@ -272,6 +256,22 @@ The output should be:
 
 .. image:: ../../_images/container_debug_supplier_translation.png
     :align: center
+
+5. Update the database using migrations
+---------------------------------------
+
+Assuming that your database was up-to-date before adding the new entity, run:
+
+.. code-block:: bash
+
+    $ php bin/console doctrine:migrations:diff
+
+This will generate a new migration file which adds the Supplier entity to your database.
+Then update the database using the generated migration:
+
+.. code-block:: bash
+
+    $ php bin/console doctrine:migrations:migrate
 
 6. Prepare new forms for your entity, that will be aware of its translation
 ---------------------------------------------------------------------------

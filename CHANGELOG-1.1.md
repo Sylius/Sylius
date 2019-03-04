@@ -1,6 +1,19 @@
 # CHANGELOG FOR `1.1.X`
 
-## v1.1.16 (2016-11-28)
+## v1.1.17 (2019-03-04)
+
+#### TL;DR
+
+- Fixed the build and extracted some packages from Sylius core.
+
+#### Details
+
+- [#10141](https://github.com/Sylius/Sylius/issues/10141) [1.1] Fix select attributes according to recent Symfony form changes ([@Zales0123](https://github.com/Zales0123))
+- [#10182](https://github.com/Sylius/Sylius/issues/10182) Extract FixturesBundle ([@pamil](https://github.com/pamil))
+- [#10184](https://github.com/Sylius/Sylius/issues/10184) Extract ThemeBundle ([@pamil](https://github.com/pamil))
+- [#10188](https://github.com/Sylius/Sylius/issues/10188) Extract Registry component ([@pamil](https://github.com/pamil))
+
+## v1.1.16 (2018-11-28)
 
 #### TL;DR
 

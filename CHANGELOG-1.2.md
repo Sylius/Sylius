@@ -1,5 +1,17 @@
 # CHANGELOG FOR `1.2.X`
 
+## v1.2.16 (2019-03-04)
+
+#### TL;DR
+
+- Fixed the build and extracted some packages from Sylius core
+
+#### Details
+
+- [#10182](https://github.com/Sylius/Sylius/issues/10182) Extract FixturesBundle ([@pamil](https://github.com/pamil))
+- [#10184](https://github.com/Sylius/Sylius/issues/10184) Extract ThemeBundle ([@pamil](https://github.com/pamil))
+- [#10188](https://github.com/Sylius/Sylius/issues/10188) Extract Registry component ([@pamil](https://github.com/pamil))
+
 ## v1.2.15 (2019-02-03)
 
 ## TL;DR
