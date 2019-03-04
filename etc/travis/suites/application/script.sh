@@ -18,6 +18,7 @@ commands=(
     test-behat-without-javascript
     test-behat-with-javascript
     test-behat-with-cli
+    test-prod-requirements
 )
 
 for command in ${commands[@]}; do
