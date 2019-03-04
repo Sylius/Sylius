@@ -64,6 +64,8 @@ interface SummaryPageInterface extends PageInterface
      */
     public function getItemUnitPrice($productName);
 
+    public function getItemImage(int $itemNumber): string;
+
     /**
      * @param string $productName
      *
