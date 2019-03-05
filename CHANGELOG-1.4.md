@@ -1,5 +1,29 @@
 # CHANGELOG FOR `1.4.X`
 
+## v1.4.1 (2019-03-05)
+
+#### TL;DR
+
+- Extracted some packages from Sylius core ([#10182](https://github.com/Sylius/Sylius/issues/10182), [#10184](https://github.com/Sylius/Sylius/issues/10184), [#10188](https://github.com/Sylius/Sylius/issues/10188))
+
+#### Details
+
+- [#10126](https://github.com/Sylius/Sylius/issues/10126) [Docs] Change base dir for override config resources ([@oallain](https://github.com/oallain))
+- [#10147](https://github.com/Sylius/Sylius/issues/10147) Remove flush() call, its done in the remover itself ([@stefandoorn](https://github.com/stefandoorn))
+- [#10156](https://github.com/Sylius/Sylius/issues/10156) Fix recent Composer deprecations ([@pamil](https://github.com/pamil))
+- [#10157](https://github.com/Sylius/Sylius/issues/10157) Update to PHPUnit ^7.0 ([@pamil](https://github.com/pamil))
+- [#10162](https://github.com/Sylius/Sylius/issues/10162) Change branches in Sylius PR template to supported ones ([@Zales0123](https://github.com/Zales0123))
+- [#10164](https://github.com/Sylius/Sylius/issues/10164) Scaling text input field to keep enough room for the buttons ([@4c0n](https://github.com/4c0n))
+- [#10167](https://github.com/Sylius/Sylius/issues/10167) Cart flow documented ([@bartoszpietrzak1994](https://github.com/bartoszpietrzak1994))
+- [#10169](https://github.com/Sylius/Sylius/issues/10169) Don't fail on billing or shipping address not set ver.2 ([@DmitriyTrt](https://github.com/DmitriyTrt), [@Zales0123](https://github.com/Zales0123))
+- [#10171](https://github.com/Sylius/Sylius/issues/10171) Improve release process docs ([@pamil](https://github.com/pamil))
+- [#10175](https://github.com/Sylius/Sylius/issues/10175) [Docs] Reverse parts in Custom Translatable Model ([@xElysioN](https://github.com/xElysioN))
+- [#10182](https://github.com/Sylius/Sylius/issues/10182) Extract FixturesBundle ([@pamil](https://github.com/pamil))
+- [#10184](https://github.com/Sylius/Sylius/issues/10184) Extract ThemeBundle ([@pamil](https://github.com/pamil))
+- [#10185](https://github.com/Sylius/Sylius/issues/10185) Add Sylius demo link ([@kulczy](https://github.com/kulczy))
+- [#10186](https://github.com/Sylius/Sylius/issues/10186) Improve shop billing data edit scenario ([@Zales0123](https://github.com/Zales0123))
+- [#10188](https://github.com/Sylius/Sylius/issues/10188) Extract Registry component ([@pamil](https://github.com/pamil))
+
 ## v1.4.0 (2019-02-04)
 
 #### TL;DR
