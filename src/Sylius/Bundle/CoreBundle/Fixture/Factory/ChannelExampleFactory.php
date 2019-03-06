@@ -18,6 +18,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ShopBillingData;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -92,6 +93,18 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             $channel->addCurrency($currency);
         }
 
+        if (isset($options['shop_billing_data']) && null !== $options['shop_billing_data']) {
+            $shopBillingData = new ShopBillingData();
+            $shopBillingData->setCompany($options['shop_billing_data']['company'] ?? null);
+            $shopBillingData->setTaxId($options['shop_billing_data']['tax_id'] ?? null);
+            $shopBillingData->setCountryCode($options['shop_billing_data']['country_code'] ?? null);
+            $shopBillingData->setStreet($options['shop_billing_data']['street'] ?? null);
+            $shopBillingData->setCity($options['shop_billing_data']['city'] ?? null);
+            $shopBillingData->setPostcode($options['shop_billing_data']['postcode'] ?? null);
+
+            $channel->setShopBillingData($shopBillingData);
+        }
+
         return $channel;
     }
 
@@ -146,6 +159,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setNormalizer('currencies', LazyOption::findBy($this->currencyRepository, 'code'))
             ->setDefault('theme_name', null)
             ->setDefault('contact_email', null)
+            ->setDefault('shop_billing_data', null)
         ;
     }
 }
