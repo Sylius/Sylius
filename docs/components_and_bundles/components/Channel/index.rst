@@ -14,7 +14,6 @@ Sale channels management implementation in PHP.
    :maxdepth: 2
 
    installation
-   basic_usage
    models
    interfaces
 
