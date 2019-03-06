@@ -114,7 +114,7 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
             ->setDefault('birthday', function (Options $options): \DateTime {
                 return $this->faker->dateTimeThisCentury();
             })
-            ->setAllowedTypes('birthday', ['null', 'string', \DateTime::class])
+            ->setAllowedTypes('birthday', ['null', 'string', \DateTimeInterface::class])
             ->setNormalizer('birthday', function (Options $options, $value) {
                 if (is_string($value)) {
                     return \DateTime::createFromFormat('Y-m-d H:i:s', $value);
