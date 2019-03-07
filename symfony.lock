@@ -119,12 +119,6 @@
     "egulias/email-validator": {
         "version": "2.1.5"
     },
-    "friends-of-behat/context-service-extension": {
-        "version": "v1.2.0"
-    },
-    "friends-of-behat/cross-container-extension": {
-        "version": "v1.1.0"
-    },
     "friends-of-behat/page-object-extension": {
         "version": "0.1"
     },
@@ -184,6 +178,12 @@
             "version": "0.6",
             "ref": "20cacc9b2da49d96ea55c8a8dd31324c5be88bc9"
         }
+    },
+    "illuminate/contracts": {
+        "version": "v5.8.3"
+    },
+    "illuminate/support": {
+        "version": "v5.8.3"
     },
     "imagine/imagine": {
         "version": "v0.7.1"
@@ -293,6 +293,9 @@
             "ref": "5ef2976310e8f9621c1a722a73bfbe115c1559a3"
         }
     },
+    "nesbot/carbon": {
+        "version": "2.14.2"
+    },
     "nette/finder": {
         "version": "v2.4.2"
     },
@@ -392,9 +395,6 @@
     "phpstan/phpstan-shim": {
         "version": "0.10.3"
     },
-    "phpstan/phpstan-symfony": {
-        "version": "0.10.1"
-    },
     "phpstan/phpstan-webmozart-assert": {
         "version": "0.10"
     },
@@ -421,9 +421,6 @@
             "version": "4.7",
             "ref": "c276fa48d4713de91eb410289b3b1834acb7e403"
         }
-    },
-    "phpunit/phpunit-mock-objects": {
-        "version": "5.0.10"
     },
     "polishsymfonycommunity/symfony-mocker-container": {
         "version": "v1.0.2"
@@ -538,6 +535,15 @@
     },
     "sylius-labs/sensio-distribution-bundle": {
         "version": "v6.0.1"
+    },
+    "sylius/fixtures-bundle": {
+        "version": "v1.4.1"
+    },
+    "sylius/registry": {
+        "version": "v1.4.0"
+    },
+    "sylius/theme-bundle": {
+        "version": "v1.4.2"
     },
     "symfony/asset": {
         "version": "v4.1.3"
@@ -780,9 +786,6 @@
         "version": "v4.6.1"
     },
     "symplify/package-builder": {
-        "version": "v4.6.1"
-    },
-    "symplify/token-runner": {
         "version": "v4.6.1"
     },
     "theofidry/alice-data-fixtures": {
