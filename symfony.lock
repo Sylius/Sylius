@@ -1,4 +1,7 @@
 {
+    "akeneo/phpspec-skip-example-extension": {
+        "version": "v4.0.0"
+    },
     "behat/behat": {
         "version": "v3.5.0"
     },
@@ -188,6 +191,12 @@
             "ref": "20cacc9b2da49d96ea55c8a8dd31324c5be88bc9"
         }
     },
+    "illuminate/contracts": {
+        "version": "v5.8.3"
+    },
+    "illuminate/support": {
+        "version": "v5.8.3"
+    },
     "imagine/imagine": {
         "version": "v0.7.1"
     },
@@ -238,6 +247,9 @@
     },
     "lakion/mink-debug-extension": {
         "version": "v1.2.3"
+    },
+    "lchrusciel/api-test-case": {
+        "version": "v3.1.4"
     },
     "league/uri": {
         "version": "5.3.0"
@@ -295,6 +307,9 @@
             "version": "3.2",
             "ref": "5ef2976310e8f9621c1a722a73bfbe115c1559a3"
         }
+    },
+    "nesbot/carbon": {
+        "version": "2.14.2"
     },
     "nette/finder": {
         "version": "v2.4.2"
@@ -446,6 +461,9 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "ralouphie/getallheaders": {
+        "version": "2.0.5"
+    },
     "ramsey/uuid": {
         "version": "3.8.0"
     },
@@ -491,6 +509,9 @@
             "ref": "421933bf8f0e75546ac8e00cb3eb12904fa2ac1a"
         }
     },
+    "slam/php-cs-fixer-extensions": {
+        "version": "v1.18.0"
+    },
     "slevomat/coding-standard": {
         "version": "4.6.3"
     },
@@ -511,6 +532,9 @@
     },
     "sonata-project/datagrid-bundle": {
         "version": "2.3.1"
+    },
+    "sonata-project/doctrine-extensions": {
+        "version": "1.1.5"
     },
     "sonata-project/intl-bundle": {
         "version": "2.5.0"
@@ -542,6 +566,15 @@
     "sylius-labs/sensio-distribution-bundle": {
         "version": "v6.0.1"
     },
+    "sylius/fixtures-bundle": {
+        "version": "v1.3.9"
+    },
+    "sylius/registry": {
+        "version": "v1.3.8"
+    },
+    "sylius/theme-bundle": {
+        "version": "v1.3.10"
+    },
     "symfony/asset": {
         "version": "v4.1.3"
     },
@@ -565,6 +598,9 @@
             "version": "3.3",
             "ref": "e3868d2f4a5104f19f844fe551099a00c6562527"
         }
+    },
+    "symfony/contracts": {
+        "version": "v1.0.2"
     },
     "symfony/css-selector": {
         "version": "v4.1.3"
@@ -668,6 +704,9 @@
     "symfony/polyfill-php70": {
         "version": "v1.9.0"
     },
+    "symfony/polyfill-php72": {
+        "version": "v1.10.0"
+    },
     "symfony/process": {
         "version": "v4.1.3"
     },
@@ -748,6 +787,9 @@
     },
     "symfony/var-dumper": {
         "version": "v4.1.3"
+    },
+    "symfony/var-exporter": {
+        "version": "v4.2.4"
     },
     "symfony/web-profiler-bundle": {
         "version": "3.3",
