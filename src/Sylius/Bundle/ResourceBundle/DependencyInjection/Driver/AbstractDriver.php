@@ -94,6 +94,8 @@ abstract class AbstractDriver implements DriverInterface
         $factoryClass = $metadata->getClass('factory');
         $modelClass = $metadata->getClass('model');
 
+        $container->setAlias($factoryClass, $metadata->getServiceId('factory'));
+
         $definition = new Definition($factoryClass);
         $definition->setPublic(true);
 

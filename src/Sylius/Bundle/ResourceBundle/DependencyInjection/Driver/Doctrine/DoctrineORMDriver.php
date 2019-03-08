@@ -46,6 +46,7 @@ final class DoctrineORMDriver extends AbstractDoctrineDriver
 
         if ($metadata->hasClass('repository')) {
             $repositoryClass = $metadata->getClass('repository');
+            $container->setAlias($repositoryClass, $metadata->getServiceId('repository'));
         }
 
         $definition = new Definition($repositoryClass);
