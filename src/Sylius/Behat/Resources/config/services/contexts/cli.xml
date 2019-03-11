@@ -21,6 +21,8 @@
 
         <service id="sylius.behat.context.cli.installer" class="Sylius\Behat\Context\Cli\InstallerContext">
             <argument type="service" id="kernel" />
+            <argument type="service" id="__symfony__.Sylius\Bundle\CoreBundle\Command\SetupCommand" />
+            <argument type="service" id="__symfony__.Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand" />
         </service>
     </services>
 </container>

@@ -33,7 +33,10 @@ final class InstallerContext implements Context
     private $tester;
 
     /** @var SetupCommand */
-    private $command;
+    private $setupCommand;
+
+    /** @var InstallSampleDataCommand */
+    private $installSampleDataCommand;
 
     /** @var array */
     private $inputChoices = [
@@ -44,9 +47,19 @@ final class InstallerContext implements Context
         'confirmation' => 'pswd',
     ];
 
-    public function __construct(KernelInterface $kernel)
-    {
+    /**
+     * @param KernelInterface $kernel
+     * @param SetupCommand    $setupCommand
+     * @param InstallSampleDataCommand    $setupCommand
+     */
+    public function __construct(
+        KernelInterface $kernel,
+        SetupCommand $setupCommand,
+        InstallSampleDataCommand $installSampleDataCommand
+    ) {
         $this->kernel = $kernel;
+        $this->setupCommand = $setupCommand;
+        $this->installSampleDataCommand = $installSampleDataCommand;
     }
 
     /**
@@ -55,10 +68,10 @@ final class InstallerContext implements Context
     public function iRunSyliusCommandLineInstaller(): void
     {
         $this->application = new Application($this->kernel);
-        $this->application->add(new SetupCommand());
+        $this->application->add($this->setupCommand);
 
-        $this->command = $this->application->find('sylius:install:setup');
-        $this->tester = new CommandTester($this->command);
+        $this->setupCommand = $this->application->find('sylius:install:setup');
+        $this->tester = new CommandTester($this->setupCommand);
 
         $this->iExecuteCommandWithInputChoices('sylius:install:setup');
     }
@@ -69,9 +82,9 @@ final class InstallerContext implements Context
     public function iRunSyliusInstallSampleDataCommand(): void
     {
         $this->application = new Application($this->kernel);
-        $this->application->add(new InstallSampleDataCommand());
-        $this->command = $this->application->find('sylius:install:sample-data');
-        $this->tester = new CommandTester($this->command);
+        $this->application->add($this->installSampleDataCommand);
+        $this->setupCommand = $this->application->find('sylius:install:sample-data');
+        $this->tester = new CommandTester($this->setupCommand);
     }
 
     /**
