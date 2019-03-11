@@ -15,6 +15,8 @@ namespace Sylius\Bundle\ResourceBundle\Tests\DependencyInjection;
 
 use AppBundle\Entity\Book;
 use AppBundle\Entity\BookTranslation;
+use AppBundle\Entity\ComicBook;
+use AppBundle\Factory\BookFactory;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
 
@@ -80,6 +82,38 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
          ]);
 
         $this->assertContainerBuilderHasAlias('sylius.translation_locale_provider', 'test.custom_locale_provider');
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_break_when_aliasing_two_resources_use_same_factory_class()
+    {
+        // TODO: Move Resource-Grid integration to a dedicated compiler pass
+        $this->setParameter('kernel.bundles', []);
+
+        $this->load([
+            'resources' => [
+                'app.book' => [
+                    'classes' => [
+                        'model' => Book::class,
+                        'factory' => BookFactory::class,
+                    ],
+                ],
+                'app.comic_book' => [
+                    'classes' => [
+                        'model' => ComicBook::class,
+                        'factory' => BookFactory::class,
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasService('app.factory.book');
+        $this->assertContainerBuilderHasService('app.factory.comic_book');
+
+        $this->assertContainerBuilderHasAlias(BookFactory::class, 'app.factory.comic_book');
+
     }
 
     /**
