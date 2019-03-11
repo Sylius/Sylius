@@ -13,13 +13,36 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
+use Sylius\Bundle\CoreBundle\Command\Helper\EnsureDirectoryExistsAndIsWritable;
+use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
+use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Process\Exception\RuntimeException;
 
-final class InstallCommand extends AbstractInstallCommand
+final class InstallCommand extends Command
 {
+    use EnsureDirectoryExistsAndIsWritable {
+        __construct as private initializeEnsureDirectoryExistsAndIsWritable;
+    }
+
+    /**
+     * @var CommandDirectoryChecker
+     */
+    private $commandDirectoryChecker;
+
+    /**
+     * @var string
+     */
+    private $cacheDir;
+
+    /**
+     * @var CommandExecutor
+     */
+    private $commandExecutor;
+
     /** @var array */
     private $commands = [
         [
@@ -41,6 +64,18 @@ final class InstallCommand extends AbstractInstallCommand
     ];
 
     /**
+     * @param CommandDirectoryChecker $commandDirectoryChecker
+     * @param string                  $cacheDir
+     */
+    public function __construct(CommandDirectoryChecker $commandDirectoryChecker, string $cacheDir)
+    {
+        $this->commandDirectoryChecker = $commandDirectoryChecker;
+        $this->cacheDir = $cacheDir;
+
+        parent::__construct();
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function configure(): void
@@ -58,13 +93,23 @@ EOT
     /**
      * {@inheritdoc}
      */
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        $this->commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
+
+        $this->initializeEnsureDirectoryExistsAndIsWritable($this->commandDirectoryChecker, $this->getName());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln('<info>Installing Sylius...</info>');
         $outputStyle->writeln($this->getSyliusLogo());
 
-        $this->ensureDirectoryExistsAndIsWritable($this->getContainer()->getParameter('kernel.cache_dir'), $output);
+        $this->ensureDirectoryExistsAndIsWritable($this->cacheDir, $output);
 
         $errored = false;
         foreach ($this->commands as $step => $command) {

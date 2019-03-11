@@ -13,14 +13,63 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\CoreBundle\Command\Helper\EnsureDirectoryExistsAndIsWritable;
+use Sylius\Bundle\CoreBundle\Command\Helper\RunCommands;
+use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
+use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class InstallSampleDataCommand extends AbstractInstallCommand
+final class InstallSampleDataCommand extends Command
 {
+    use EnsureDirectoryExistsAndIsWritable {
+        EnsureDirectoryExistsAndIsWritable::__construct as private initializeEnsureDirectoryExistsAndIsWritable;
+    }
+    use RunCommands {
+        RunCommands::__construct as private initializeRunCommands;
+    }
+
+    /**
+     * @var CommandDirectoryChecker
+     */
+    private $commandDirectoryChecker;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * @var string
+     */
+    private $publicDir;
+
+    /**
+     * @var string
+     */
+    private $environment;
+
+    /**
+     * @param CommandDirectoryChecker $commandDirectoryChecker
+     * @param EntityManagerInterface  $entityManager
+     * @param string                  $publicDir
+     * @param string                  $environment
+     */
+    public function __construct(CommandDirectoryChecker $commandDirectoryChecker, EntityManagerInterface $entityManager, string $publicDir, string $environment)
+    {
+        $this->commandDirectoryChecker = $commandDirectoryChecker;
+        $this->entityManager = $entityManager;
+        $this->publicDir = $publicDir;
+        $this->environment = $environment;
+
+        parent::__construct();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -39,6 +88,17 @@ EOT
     /**
      * {@inheritdoc}
      */
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        $commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
+
+        $this->initializeEnsureDirectoryExistsAndIsWritable($this->commandDirectoryChecker, $this->getName());
+        $this->initializeRunCommands($commandExecutor, $this->entityManager);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         /** @var QuestionHelper $questionHelper */
@@ -48,7 +108,7 @@ EOT
         $outputStyle->newLine();
         $outputStyle->writeln(sprintf(
             'Loading sample data for environment <info>%s</info>.',
-            $this->getEnvironment()
+            $this->environment
         ));
         $outputStyle->writeln('<error>Warning! This action will erase your database.</error>');
 
@@ -59,10 +119,8 @@ EOT
         }
 
         try {
-            $publicDir = $this->getContainer()->getParameter('sylius_core.public_dir');
-
-            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/media/', $output);
-            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/media/image/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/media/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/media/image/', $output);
         } catch (\RuntimeException $exception) {
             $outputStyle->writeln($exception->getMessage());
 

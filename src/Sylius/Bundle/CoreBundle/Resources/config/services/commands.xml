@@ -13,7 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="true" />
+        <defaults public="true" autowire="true" />
 
         <service id="Sylius\Bundle\CoreBundle\Command\CancelUnpaidOrdersCommand">
             <tag name="console.command" />
@@ -24,22 +24,30 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Command\InstallAssetsCommand">
+            <argument key="$publicDir">%sylius_core.public_dir%</argument>
+            <argument key="$environment">%kernel.environment%</argument>
             <tag name="console.command" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Command\InstallCommand">
+            <argument key="$cacheDir">%kernel.cache_dir%</argument>
             <tag name="console.command" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Command\InstallDatabaseCommand">
+            <argument key="$environment">%kernel.environment%</argument>
             <tag name="console.command" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand">
+            <argument key="$publicDir">%sylius_core.public_dir%</argument>
+            <argument key="$environment">%kernel.environment%</argument>
             <tag name="console.command" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Command\SetupCommand">
+            <argument key="$adminUserFactory" type="service" id="sylius.factory.admin_user" />
+            <argument key="$adminUserRepository" type="service" id="sylius.repository.admin_user" />
             <tag name="console.command" />
         </service>
 

@@ -13,7 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
+use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetupInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetupInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetupInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,10 +29,75 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Webmozart\Assert\Assert;
 
 final class SetupCommand extends AbstractInstallCommand
 {
+    /**
+     * @var ObjectManager
+     */
+    private $adminUserManager;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $adminUserFactory;
+
+    /**
+     * @var UserRepositoryInterface
+     */
+    private $adminUserRepository;
+
+    /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
+     * @var CurrencySetupInterface
+     */
+    private $currencySetup;
+
+    /**
+     * @var LocaleSetupInterface
+     */
+    private $localeSetup;
+
+    /**
+     * @var ChannelSetupInterface
+     */
+    private $channelSetup;
+
+    /**
+     * @param ObjectManager           $adminUserManager
+     * @param FactoryInterface        $adminUserFactory
+     * @param UserRepositoryInterface $adminUserRepository
+     * @param ValidatorInterface      $validator
+     * @param CurrencySetupInterface  $currencySetup
+     * @param LocaleSetupInterface    $localeSetup
+     * @param ChannelSetupInterface   $channelSetup
+     */
+    public function __construct(
+        ObjectManager $adminUserManager,
+        FactoryInterface $adminUserFactory,
+        RepositoryInterface $adminUserRepository,
+        ValidatorInterface $validator,
+        CurrencySetupInterface $currencySetup,
+        LocaleSetupInterface $localeSetup,
+        ChannelSetupInterface $channelSetup
+    ) {
+        $this->adminUserManager = $adminUserManager;
+        $this->adminUserFactory = $adminUserFactory;
+        $this->adminUserRepository = $adminUserRepository;
+        $this->validator = $validator;
+        $this->currencySetup = $currencySetup;
+        $this->localeSetup = $localeSetup;
+        $this->channelSetup = $channelSetup;
+
+        parent::__construct();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -47,9 +118,9 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $currency = $this->getContainer()->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
-        $locale = $this->getContainer()->get('sylius.setup.locale')->setup($input, $output);
-        $this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
+        $currency = $this->currencySetup->setup($input, $output, $this->getHelper('question'));
+        $locale = $this->localeSetup->setup($input, $output);
+        $this->channelSetup->setup($locale, $currency);
         $this->setupAdministratorUser($input, $output, $locale->getCode());
     }
 
@@ -58,11 +129,8 @@ EOT
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln('Create your administrator account.');
 
-        $userManager = $this->getContainer()->get('sylius.manager.admin_user');
-        $userFactory = $this->getContainer()->get('sylius.factory.admin_user');
-
         try {
-            $user = $this->configureNewUser($userFactory->createNew(), $input, $output);
+            $user = $this->configureNewUser($this->adminUserFactory->createNew(), $input, $output);
         } catch (\InvalidArgumentException $exception) {
             return;
         }
@@ -70,8 +138,8 @@ EOT
         $user->setEnabled(true);
         $user->setLocaleCode($localeCode);
 
-        $userManager->persist($user);
-        $userManager->flush();
+        $this->adminUserManager->persist($user);
+        $this->adminUserManager->flush();
 
         $outputStyle->writeln('<info>Administrator account successfully registered.</info>');
         $outputStyle->newLine();
@@ -82,11 +150,8 @@ EOT
         InputInterface $input,
         OutputInterface $output
     ): AdminUserInterface {
-        /** @var UserRepositoryInterface $userRepository */
-        $userRepository = $this->getAdminUserRepository();
-
         if ($input->getOption('no-interaction')) {
-            Assert::null($userRepository->findOneByEmail('sylius@example.com'));
+            Assert::null($this->adminUserRepository->findOneByEmail('sylius@example.com'));
 
             $user->setEmail('sylius@example.com');
             $user->setUsername('sylius');
@@ -108,7 +173,7 @@ EOT
         return (new Question('E-mail: '))
             ->setValidator(function ($value) {
                 /** @var ConstraintViolationListInterface $errors */
-                $errors = $this->getContainer()->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
+                $errors = $this->validator->validate((string) $value, [new Email(), new NotBlank()]);
                 foreach ($errors as $error) {
                     throw new \DomainException($error->getMessage());
                 }
@@ -123,13 +188,11 @@ EOT
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
-        /** @var UserRepositoryInterface $userRepository */
-        $userRepository = $this->getAdminUserRepository();
 
         do {
             $question = $this->createEmailQuestion();
             $email = $questionHelper->ask($input, $output, $question);
-            $exists = null !== $userRepository->findOneByEmail($email);
+            $exists = null !== $this->adminUserRepository->findOneByEmail($email);
 
             if ($exists) {
                 $output->writeln('<error>E-Mail is already in use!</error>');
@@ -143,13 +206,11 @@ EOT
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
-        /** @var UserRepositoryInterface $userRepository */
-        $userRepository = $this->getAdminUserRepository();
 
         do {
             $question = new Question('Username (press enter to use email): ', $email);
             $username = $questionHelper->ask($input, $output, $question);
-            $exists = null !== $userRepository->findOneBy(['username' => $username]);
+            $exists = null !== $this->adminUserRepository->findOneBy(['username' => $username]);
 
             if ($exists) {
                 $output->writeln('<error>Username is already in use!</error>');
@@ -184,7 +245,7 @@ EOT
     {
         return function ($value) {
             /** @var ConstraintViolationListInterface $errors */
-            $errors = $this->getContainer()->get('validator')->validate($value, [new NotBlank()]);
+            $errors = $this->validator->validate($value, [new NotBlank()]);
             foreach ($errors as $error) {
                 throw new \DomainException($error->getMessage());
             }
@@ -201,10 +262,5 @@ EOT
             ->setHidden(true)
             ->setHiddenFallback(false)
         ;
-    }
-
-    private function getAdminUserRepository(): UserRepositoryInterface
-    {
-        return $this->getContainer()->get('sylius.repository.admin_user');
     }
 }
