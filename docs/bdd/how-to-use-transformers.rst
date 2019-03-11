@@ -16,7 +16,7 @@ Example is always the best way to clarify, so let's look at this:
      * @Transform /^shipping method "([^"]+)"$/
      * @Transform :shippingMethod
      */
-    public function getShippingMethodByName($shippingMethodName)
+    public function getShippingMethodByName(string $shippingMethodName): ShippingMethodInterface
     {
         $shippingMethod = $this->shippingMethodRepository->findOneByName($shippingMethodName);
 
@@ -47,7 +47,7 @@ But how to use it? It is as simple as that:
     public function shippingMethodBelongsToTaxCategory(
         ShippingMethodInterface $shippingMethod,
         TaxCategoryInterface $taxCategory
-    ) {
+    ): void {
         // some logic here
     }
 
@@ -60,7 +60,7 @@ used in the same step definition. Is it all? No! The following example will also
      * @When I delete shipping method :shippingMethod
      * @When I try to delete shipping method :shippingMethod
      */
-    public function iDeleteShippingMethod(ShippingMethodInterface $shippingMethod)
+    public function iDeleteShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         // some logic here
     }

@@ -11,14 +11,17 @@ Sylius behaviours are fully covered with Behat scenarios. There are more than 12
 to understand some aspects of Sylius better, or are wondering how to configure something, we strongly recommend
 reading them. They can be found in the ``features/`` directory of the Sylius/Sylius repository.
 
+We use `FriendsOfBehat/SymfonyExtension`_ to integrate Behat with Symfony.
+
 .. toctree::
     :hidden:
 
     basic-usage
-    introduction-to-containers
     how-to-add-new-context
     how-to-add-new-page
     how-to-define-new-suite
     how-to-use-transformers
 
 .. include:: /bdd/map.rst.inc
+
+.. _FriendsOfBehat/SymfonyExtension: https://github.com/FriendsOfBehat/SymfonyExtension
