@@ -32,11 +32,12 @@ final class ShowingAvailablePluginsContext implements Context
     private $tester;
 
     /** @var SetupCommand */
-    private $command;
+    private $setupCommand;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(KernelInterface $kernel, SetupCommand $setupCommand)
     {
         $this->kernel = $kernel;
+        $this->setupCommand = $setupCommand;
     }
 
     /**
@@ -45,10 +46,10 @@ final class ShowingAvailablePluginsContext implements Context
     public function runShowAvailablePluginsCommand(): void
     {
         $this->application = new Application($this->kernel);
-        $this->application->add(new SetupCommand());
+        $this->application->add($this->setupCommand);
 
-        $this->command = $this->application->find('sylius:show-available-plugins');
-        $this->tester = new CommandTester($this->command);
+        $this->setupCommand = $this->application->find('sylius:show-available-plugins');
+        $this->tester = new CommandTester($this->setupCommand);
 
         $this->tester->execute(['command' => 'sylius:show-available-plugins']);
     }
