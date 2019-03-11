@@ -13,12 +13,46 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CancelUnpaidOrdersCommand extends ContainerAwareCommand
+class CancelUnpaidOrdersCommand extends Command
 {
+    /**
+     * @var string
+     */
+    private $orderExpirationPeriod;
+
+    /**
+     * @var UnpaidOrdersStateUpdaterInterface
+     */
+    private $unpaidOrdersStateUpdater;
+
+    /**
+     * @var ObjectManager
+     */
+    private $orderManager;
+
+    /**
+     * @param string                            $orderExpirationPeriod
+     * @param UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
+     * @param ObjectManager                     $orderManager
+     */
+    public function __construct(
+        string $orderExpirationPeriod,
+        UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater,
+        ObjectManager $orderManager
+    ) {
+        $this->orderExpirationPeriod = $orderExpirationPeriod;
+        $this->unpaidOrdersStateUpdater = $unpaidOrdersStateUpdater;
+        $this->orderManager = $orderManager;
+
+        parent::__construct();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -36,16 +70,13 @@ class CancelUnpaidOrdersCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $expirationTime = $this->getContainer()->getParameter('sylius_order.order_expiration_period');
-
         $output->writeln(sprintf(
             'Command will cancel orders that have been unpaid for <info>%s</info>.',
-            $expirationTime
+            $this->orderExpirationPeriod
         ));
 
-        $unpaidCartsStateUpdater = $this->getContainer()->get('sylius.unpaid_orders_state_updater');
-        $unpaidCartsStateUpdater->cancel();
+        $this->unpaidOrdersStateUpdater->cancel();
 
-        $this->getContainer()->get('sylius.manager.order')->flush();
+        $this->orderManager->flush();
     }
 }
