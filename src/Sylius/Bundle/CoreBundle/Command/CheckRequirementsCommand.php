@@ -17,10 +17,11 @@ use RuntimeException;
 use Sylius\Bundle\CoreBundle\Installer\Checker\RequirementsCheckerInterface;
 use Sylius\Bundle\CoreBundle\Installer\Checker\SyliusRequirementsChecker;
 use Sylius\Bundle\CoreBundle\Installer\Requirement\Requirement;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class CheckRequirementsCommand extends AbstractInstallCommand
+final class CheckRequirementsCommand extends Command
 {
     /**
      * @var RequirementsCheckerInterface
