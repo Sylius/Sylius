@@ -13,7 +13,9 @@ Why (benefit, business value), who (actor using the feature) and what (the featu
 It should also include scenarios, which serve as examples of how things supposed to work.
 Let's have a look at the ``features/addressing/managing_countries/adding_country.feature`` file.
 
-Scenario::
+.. code-block:: gherkin
+
+    # features/addressing/managing_countries/adding_country.feature
 
     @managing_countries
     Feature: Adding a new country
@@ -44,41 +46,47 @@ filling fields on forms and similar, but also we want to check this action regar
 Choosing a correct suite
 ------------------------
 
-After we are done with a feature file, we have to create a new suite for it. At the beginning we have decided that it will be a frontend/user interface feature, that is why we are placing it in "etc/behat/suites/ui/addressing/managing_countries.yml".
+After we are done with a feature file, we have to create a new suite for it.
+At the beginning we have decided that it will be a frontend/user interface feature:
 
 .. code-block:: yaml
+
+    # src/Sylius/Behat/Resources/config/suites/ui/addressing/managing_countries.yml
 
     default:
         suites:
             ui_managing_countries:
-                contexts_services:
-                    - sylius.behat.context.hook.doctrine_orm
+                contexts:
                     # This service is responsible for clearing database before each scenario,
                     # so that only data from the current and its background is available.
+                    - sylius.behat.context.hook.doctrine_orm
 
-                    - sylius.behat.context.transform.country
-                    - sylius.behat.context.transform.shared_storage
                     # The transformer contexts services are responsible for all the transformations of data in steps:
                     # For instance "And the country "France" should appear in the store" transforms "(the country "France")" to a proper Country object, which is from now on available in the scope of the step.
+                    - sylius.behat.context.transform.country
+                    - sylius.behat.context.transform.shared_storage
 
-                    - sylius.behat.context.setup.geographical
-                    - sylius.behat.context.setup.security
                     # The setup contexts here are preparing the background, adding available countries and users or administrators.
                     # These contexts have steps like "I am logged in as an administrator" already implemented.
+                    - sylius.behat.context.setup.geographical
+                    - sylius.behat.context.setup.security
 
                     # Lights, Camera, Action!
+                    # Those contexts are essential here we are placing all action steps like "When I choose "France" and I add it Then I should ne notified that...".
                     - sylius.behat.context.ui.admin.managing_countries
                     - sylius.behat.context.ui.admin.notification
-                    # Those contexts are essential here we are placing all action steps like "When I choose "France" and I add it Then I should ne notified that...".
+
                 filters:
                     tags: "@managing_countries && @ui"
 
 A very important thing that is done here is the configuration of tags, from now on Behat will be searching for all your features tagged with ``@managing_countries`` and your scenarios tagged with ``@ui``.
-Second thing is ``contexts_services:`` in this section we will be placing all our services with step implementation.
+Second thing is ``contexts`` in this section we will be placing all our services with step implementation.
 
-We have mentioned with the generic steps we can easily switch our testing context to @domain. Have a look how it looks:
+We have mentioned with the generic steps we can easily switch our testing context to ``@domain``. Have a look how it looks:
 
 .. code-block:: yaml
+
+    # src/Sylius/Behat/Resources/config/suites/domain/addressing/managing_countries.yml
 
     default:
         suites:
@@ -92,12 +100,13 @@ We have mentioned with the generic steps we can easily switch our testing contex
                     - sylius.behat.context.setup.geographical
                     - sylius.behat.context.setup.security
 
-                    - sylius.behat.context.domain.admin.managing_countries # Domain step implementation.
+                    # Domain step implementation.
+                    - sylius.behat.context.domain.admin.managing_countries
+
                 filters:
                     tags: "@managing_countries && @domain"
 
 We are almost finished with the suite configuration.
-Now we need to register our first Behat context as a service, but beforehand we need
 
 Registering Pages
 -----------------
@@ -105,21 +114,19 @@ Registering Pages
 The page object approach allows us to hide all the detailed interaction with ui (html, javascript, css) inside.
 
 We have three kinds of pages:
-    - Page - First layer of our pages it knows how to interact with DOM objects. It has a method ``->getUrl(array $urlParameters)`` where you can define a raw url to open it.
-    - SymfonyPage - This page extends the Page. It has a router injected so that the ``->getUrl()`` method generates a url from the route name which it gets from the ``->getRouteName()`` method.
+    - Page - First layer of our pages it knows how to interact with DOM objects. It has a method ``getUrl(array $urlParameters)`` where you can define a raw url to open it.
+    - SymfonyPage - This page extends the Page. It has a router injected so that the ``getUrl()`` method generates a url from the route name which it gets from the ``getRouteName()`` method.
     - Base Crud Pages (IndexPage, CreatePage, UpdatePage) - These pages extend SymfonyPage and they are specific to the Sylius resources. They have a resource name injected and therefore they know about the route name.
 
 There are two ways to manipulate UI - by using ``->getDocument()`` or ``->getElement('your_element')``.
 First method will return a ``DocumentElement`` which represents an html structure of the currently opened page,
 second one is a bit more tricky because it uses the ``->getDefinedElements()`` method and it will return a ``NodeElement`` which represents only the restricted html structure.
 
-Usage example of ``->getElement('your_element')`` and ``->getDefinedElements`` methods.
+Usage example of ``getElement('your_element')`` and ``getDefinedElements()`` methods.
 
 .. code-block:: php
 
-    <?php
-
-    class CreatePage extends SymfonyPage implements CreatePageInterface
+    final class CreatePage extends SymfonyPage implements CreatePageInterface
     {
         // This method returns a simple associative array, where the key is the name of your element and the value is its locator.
         protected function getDefinedElements(): array
@@ -130,16 +137,16 @@ Usage example of ``->getElement('your_element')`` and ``->getDefinedElements`` m
         }
 
         // By default it will assume that your locator is css.
-        // Example with xpath.
         protected function getDefinedElements(): array
         {
             return array_merge(parent::getDefinedElements(), [
-                'provinces' => ['xpath' => '//*[contains(@class, "provinces")]'] // Now your value is an array where key is your locator type.
+                'provinces_css' => '.provinces',
+                'provinces_xpath' => ['xpath' => '//*[contains(@class, "provinces")]'], // Now your value is an array where key is your locator type.
             ]);
         }
 
         // Like that you can easily manipulate your page elements.
-        public function addProvince(ProvinceInterface $province)
+        public function addProvince(ProvinceInterface $province): void
         {
             $provinceSelectBox = $this->getElement('provinces');
 
@@ -147,32 +154,29 @@ Usage example of ``->getElement('your_element')`` and ``->getDefinedElements`` m
         }
     }
 
-Let's get back to our main example and analyze our scenario.
-We have steps like
-"When I choose "France"
-And I add it
-Then I should be notified that it has been successfully created
-And the country "France" should appear in the store".
+Let's get back to our main example and analyze our scenario. We have steps like:
+
+.. code-block:: gherkin
+
+    When I choose "France"
+    And I add it
+    Then I should be notified that it has been successfully created
+    And the country "France" should appear in the store
 
 .. code-block:: php
-
-    <?php
 
     namespace Sylius\Behat\Page\Admin\Country;
 
     use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
-    class CreatePage extends BaseCreatePage implements CreatePageInterface
+    final class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
-        /**
-         * @param string $name
-         */
-        public function chooseName($name)
+        public function chooseName(string $name): void
         {
             $this->getDocument()->selectFieldOption('Name', $name);
         }
 
-        public function create()
+        public function create(): void
         {
             $this->getDocument()->pressButton('Create');
         }
@@ -180,38 +184,30 @@ And the country "France" should appear in the store".
 
 .. code-block:: php
 
-    <? php
-
     namespace Sylius\Behat\Page\Admin\Country;
 
     use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
-    class IndexPage extends BaseIndexPage implements IndexPageInterface
+    final class IndexPage extends BaseIndexPage implements IndexPageInterface
     {
-        /**
-         * @return bool
-         */
-        public function isSingleResourceOnPage(array $parameters)
+        public function isSingleResourceOnPage(array $parameters): bool
         {
             try {
-                $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);
                 // Table accessor is a helper service which is responsible for all html table operations.
+                $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);
 
                 return 1 === count($rows);
-            } catch (ElementNotFoundException $exception) { // Table accessor throws this exception when cannot find table element on page.
+            } catch (ElementNotFoundException $exception) {
+                // Table accessor throws this exception when cannot find table element on page.
                 return false;
             }
         }
     }
 
-.. warning::
-
-    There is one small gap in this concept - PageObjects is not a concrete instance of the currently opened page, they only mimic its behaviour (dummy pages).
-    This gap will be more understandable on the below code example.
+There is one small gap in this concept - PageObjects is not a concrete instance of the currently opened page, they only mimic its behaviour (dummy pages).
+This gap will be more understandable on the below code example.
 
 .. code-block:: php
-
-    <?php
 
     // Of course this is only to illustrate this gap.
 
@@ -282,7 +278,7 @@ Registering contexts
 
 As it was shown in the previous section we have registered a lot of contexts, so we will show you only some of the steps implementation.
 
-Scenario::
+.. code-block:: gherkin
 
     Given I want to add a new country
     And I choose "United States"
@@ -297,32 +293,19 @@ Ui contexts
 
 .. code-block:: php
 
-    <?php
-
-    namespace Sylius\Behat\Context\Ui\Admin
+    namespace Sylius\Behat\Context\Ui\Admin;
 
     final class ManagingCountriesContext implements Context
     {
-        /**
-         * @var IndexPageInterface
-         */
+        /** @var IndexPageInterface */
         private $indexPage;
 
-        /**
-         * @var CreatePageInterface
-         */
+        /** @var CreatePageInterface */
         private $createPage;
 
-        /**
-         * @var UpdatePageInterface
-         */
+        /** @var UpdatePageInterface */
         private $updatePage;
 
-        /**
-         * @param IndexPageInterface $indexPage
-         * @param CreatePageInterface $createPage
-         * @param UpdatePageInterface $updatePage
-         */
         public function __construct(
             IndexPageInterface $indexPage,
             CreatePageInterface $createPage,
@@ -336,7 +319,7 @@ Ui contexts
         /**
          * @Given I want to add a new country
          */
-        public function iWantToAddNewCountry()
+        public function iWantToAddNewCountry(): void
         {
             $this->createPage->open(); // This method will send request.
         }
@@ -344,7 +327,7 @@ Ui contexts
         /**
          * @When I choose :countryName
          */
-        public function iChoose($countryName)
+        public function iChoose(string $countryName): void
         {
             $this->createPage->chooseName($countryName);
             // Great benefit of using page objects is that we hide html manipulation behind a interfaces so we can inject different CreatePage which implements CreatePageInterface
@@ -354,7 +337,7 @@ Ui contexts
         /**
          * @When I add it
          */
-        public function iAddIt()
+        public function iAddIt(): void
         {
             $this->createPage->create();
         }
@@ -362,7 +345,7 @@ Ui contexts
         /**
          * @Then /^the (country "([^"]+)") should appear in the store$/
          */
-        public function countryShouldAppearInTheStore(CountryInterface $country) // This step use Country transformer to get Country object.
+        public function countryShouldAppearInTheStore(CountryInterface $country): void // This step use Country transformer to get Country object.
         {
             $this->indexPage->open();
 
@@ -376,21 +359,17 @@ Ui contexts
 
 .. code-block:: php
 
-    <?php
-
     namespace Sylius\Behat\Context\Ui\Admin
 
     final class NotificationContext implements Context
     {
         /**
+         * This is a helper service which give access to proper notification elements.
+         *
          * @var NotificationCheckerInterface
          */
         private $notificationChecker;
-        // This is a helper service which give access to proper notification elements.
 
-        /**
-         * @param NotificationCheckerInterface $notificationChecker
-         */
         public function __construct(NotificationCheckerInterface $notificationChecker)
         {
             $this->notificationChecker = $notificationChecker;
@@ -399,7 +378,7 @@ Ui contexts
         /**
          * @Then I should be notified that it has been successfully created
          */
-        public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
+        public function iShouldBeNotifiedItHasBeenSuccessfullyCreated(): void
         {
             $this->notificationChecker->checkNotification('has been successfully created.', NotificationType::success());
         }
@@ -410,26 +389,16 @@ Transformer contexts
 
 .. code-block:: php
 
-    <?php
-
     namespace Sylius\Behat\Context\Transform;
 
     final class CountryContext implements Context
     {
-        /**
-         * @var CountryNameConverterInterface
-         */
+        /** @var CountryNameConverterInterface */
         private $countryNameConverter;
 
-        /**
-         * @var RepositoryInterface
-         */
+        /** @var RepositoryInterface */
         private $countryRepository;
 
-        /**
-         * @param CountryNameConverterInterface $countryNameConverter
-         * @param RepositoryInterface $countryRepository
-         */
         public function __construct(
             CountryNameConverterInterface $countryNameConverter,
             RepositoryInterface $countryRepository
@@ -442,7 +411,7 @@ Transformer contexts
          * @Transform /^country "([^"]+)"$/
          * @Transform /^"([^"]+)" country$/
          */
-        public function getCountryByName($countryName) // Thanks to this method we got in our ManagingCountries an Country object.
+        public function getCountryByName(string $countryName): CountryInterface // Thanks to this method we got in our ManagingCountries an Country object.
         {
             $countryCode = $this->countryNameConverter->convertToCode($countryName);
             $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
@@ -459,22 +428,15 @@ Transformer contexts
 
 .. code-block:: php
 
-    <?php
-
     namespace Sylius\Behat\Context\Ui\Admin;
 
     use Sylius\Behat\Page\Admin\Country\UpdatePageInterface;
 
     final class ManagingCountriesContext implements Context
     {
-        /**
-         * @var UpdatePageInterface
-         */
+        /** @var UpdatePageInterface */
         private $updatePage;
 
-        /**
-         * @param UpdatePageInterface $updatePage
-         */
         public function __construct(UpdatePageInterface $updatePage)
         {
             $this->updatePage = $updatePage;
@@ -483,7 +445,7 @@ Transformer contexts
         /**
          * @Given /^I want to create a new province in (country "[^"]+")$/
          */
-        public function iWantToCreateANewProvinceInCountry(CountryInterface $country)
+        public function iWantToCreateANewProvinceInCountry(CountryInterface $country): void
         {
             $this->updatePage->open(['id' => $country->getId()]);
 
@@ -493,20 +455,13 @@ Transformer contexts
 
 .. code-block:: php
 
-    <?php
-
     namespace Sylius\Behat\Context\Transform;
 
     final class ShippingMethodContext implements Context
     {
-        /**
-         * @var ShippingMethodRepositoryInterface
-         */
+        /** @var ShippingMethodRepositoryInterface */
         private $shippingMethodRepository;
 
-        /**
-         * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-         */
         public function __construct(ShippingMethodRepositoryInterface $shippingMethodRepository)
         {
             $this->shippingMethodRepository = $shippingMethodRepository;
@@ -515,7 +470,7 @@ Transformer contexts
         /**
          * @Transform :shippingMethod
          */
-        public function getShippingMethodByName($shippingMethodName)
+        public function getShippingMethodByName(string $shippingMethodName): void
         {
             $shippingMethod = $this->shippingMethodRepository->findOneByName($shippingMethodName);
             if (null === $shippingMethod) {
@@ -528,22 +483,15 @@ Transformer contexts
 
 .. code-block:: php
 
-    <?php
-
     namespace Sylius\Behat\Context\Ui\Admin;
 
     use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
 
     final class ShippingMethodContext implements Context
     {
-        /**
-         * @var UpdatePageInterface
-         */
+        /** @var UpdatePageInterface */
         private $updatePage;
 
-        /**
-         * @param UpdatePageInterface $updatePage
-         */
         public function __construct(UpdatePageInterface $updatePage)
         {
             $this->updatePage = $updatePage;
@@ -552,7 +500,7 @@ Transformer contexts
         /**
          * @Given I want to modify a shipping method :shippingMethod
          */
-        public function iWantToModifyAShippingMethod(ShippingMethodInterface $shippingMethod)
+        public function iWantToModifyAShippingMethod(ShippingMethodInterface $shippingMethod): void
         {
             $this->updatePage->open(['id' => $shippingMethod->getId()]);
         }
@@ -568,7 +516,7 @@ Setup contexts
 For setup context we need different scenario with more background steps and all preparing scene steps.
 Editing scenario will be great for this example:
 
-Scenario::
+.. code-block:: gherkin
 
     Given the store has disabled country "France"
     And I want to edit this country
@@ -579,38 +527,22 @@ Scenario::
 
 .. code-block:: php
 
-    <?php
-
     namespace Sylius\Behat\Context\Setup;
 
     final class GeographicalContext implements Context
     {
-        /**
-         * @var SharedStorageInterface
-         */
+        /** @var SharedStorageInterface */
         private $sharedStorage;
 
-        /**
-         * @var FactoryInterface
-         */
+        /** @var FactoryInterface */
         private $countryFactory;
 
-        /**
-         * @var RepositoryInterface
-         */
+        /** @var RepositoryInterface */
         private $countryRepository;
 
-        /**
-         * @var CountryNameConverterInterface
-         */
+        /** @var CountryNameConverterInterface */
         private $countryNameConverter;
 
-        /**
-         * @param SharedStorageInterface $sharedStorage
-         * @param FactoryInterface $countryFactory
-         * @param RepositoryInterface $countryRepository
-         * @param CountryNameConverterInterface $countryNameConverter
-         */
         public function __construct(
             SharedStorageInterface $sharedStorage,
             FactoryInterface $countryFactory,
@@ -626,7 +558,7 @@ Scenario::
         /**
          * @Given /^the store has disabled country "([^"]*)"$/
          */
-        public function theStoreHasDisabledCountry($countryName) // This method save country in data base.
+        public function theStoreHasDisabledCountry(string $countryName): void // This method save country in data base.
         {
             $country = $this->createCountryNamed(trim($countryName));
             $country->disable();
@@ -638,12 +570,7 @@ Scenario::
             $this->countryRepository->add($country);
         }
 
-        /**
-         * @param string $name
-         *
-         * @return CountryInterface
-         */
-        private function createCountryNamed($name)
+        private function createCountryNamed(string $name): CountryInterface
         {
             /** @var CountryInterface $country */
             $country = $this->countryFactory->createNew();
