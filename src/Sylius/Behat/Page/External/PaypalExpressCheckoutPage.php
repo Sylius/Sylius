@@ -110,6 +110,6 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
             }
         }
 
-        throw new \RuntimeException("Cannot find $name token, check if you are after proper checkout steps");
+        throw new \RuntimeException(sprintf('Cannot find "%s" token, check if you are after proper checkout steps', $name));
     }
 }
