@@ -18,14 +18,14 @@
         <div class="content active">
             <form method="get" action="{{ path }}" class="ui loadable form">
                 <div class="two fields">
-                {% for filter in definition.enabledFilters|sort_by('position') if filter.enabled %}
+                    {% for filter in definition.enabledFilters|sort_by('position') if filter.enabled %}
                     {{ sylius_grid_render_filter(grid, filter) }}
 
                     {% if loop.index0 % 2 %}
-                        </div>
-                        <div class="two fields">
+                </div>
+                <div class="two fields">
                     {% endif %}
-                {% endfor %}
+                    {% endfor %}
                 </div>
                 {{ buttons.filter() }}
                 {{ buttons.resetFilters(path) }}
@@ -49,35 +49,37 @@
     </div>
 {% endif %}
 
-<div class="ui segment overflow-x-auto">
+<div class="ui segment sylius-grid-wrapper">
     {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
-    <div class="ui two column fluid stackable grid">
-        <div class="fourteen wide column">
-            {{ pagination.simple(data) }}
-        </div>
-        <div class="two wide column">
-            <div class="ui fluid one item menu sylius-paginate">
-                {{ pagination.perPage(data, definition.limits) }}
+        <div class="sylius-grid-nav">
+            <div class="sylius-grid-nav__pagination">
+                {{ pagination.simple(data) }}
+            </div>
+            <div class="sylius-grid-nav__perpage">
+                <div class="ui fluid one menu sylius-paginate">
+                    {{ pagination.perPage(data, definition.limits) }}
+                </div>
             </div>
         </div>
-    </div>
     {% else %}
         {{ pagination.simple(data) }}
     {% endif %}
 
     {% if data|length > 0 %}
-        <table class="ui sortable stackable celled table">
-            <thead>
-            <tr>
-                {{ table.headers(grid, definition, app.request.attributes) }}
-            </tr>
-            </thead>
-            <tbody>
-            {% for row in data %}
-                {{ table.row(grid, definition, row) }}
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="sylius-grid-table-wrapper">
+            <table class="ui sortable stackable celled table">
+                <thead>
+                <tr>
+                    {{ table.headers(grid, definition, app.request.attributes) }}
+                </tr>
+                </thead>
+                <tbody>
+                {% for row in data %}
+                    {{ table.row(grid, definition, row) }}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else %}
         {{ messages.info('sylius.ui.no_results_to_display') }}
     {% endif %}
