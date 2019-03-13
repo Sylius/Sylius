@@ -73,6 +73,8 @@ Promotions
 
     promotions/custom-promotion-rule
     promotions/custom-promotion-action
+    promotions/remove-promotion-rule
+    promotions/remove-promotion-action
 
 .. include:: /cookbook/promotions/map.rst.inc
 
