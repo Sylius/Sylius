@@ -51,13 +51,14 @@ Active Core Team Members
 
 * **Documentation Lead**:
 
-  * **Magdalena Banasiak** (`CoderMaggie`_)
+  * **Magdalena Sadowska** (`CoderMaggie`_)
 
 * **Core Developers**:
 
   * **Łukasz Chruściel** (`lchrusciel`_)
   * **Mateusz Zalewski** (`Zales0123`_)
   * **Grzegorz Sadowski** (`GSadee`_)
+  * **Bartosz Pietrzak** (`bartoszpietrzak1994`_)
 
 Core Membership Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,3 +90,4 @@ The rules described in this document may be amended at anytime by the **Project 
 .. _`lchrusciel`: https://github.com/lchrusciel/
 .. _`Zales0123`: https://github.com/Zales0123/
 .. _`GSadee`: https://github.com/GSadee/
+.. _`bartoszpietrzak1994`: https://github.com/bartoszpietrzak1994/
