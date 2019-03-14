@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use function GuzzleHttp\Psr7\str;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
@@ -422,5 +423,13 @@ final class AccountContext implements Context
     public function iWantToLogIn()
     {
         $this->loginPage->tryToOpen();
+    }
+
+    /**
+     * @Then I should see :paymentStatus payment status
+     */
+    public function shouldSeePaymentStatus(string $paymentStatus): void
+    {
+        Assert::same($this->orderShowPage->getPaymentStatus(), $paymentStatus);
     }
 }
