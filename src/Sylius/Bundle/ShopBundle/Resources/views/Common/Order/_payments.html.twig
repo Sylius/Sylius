@@ -8,6 +8,7 @@
             {{ payment.method }}
         </div>
         <p>{{ money.format(payment.amount, payment.currencyCode) }}</p>
+        <p id="payment-status">{{('sylius.ui.' ~payment.state)|trans }}</p>
     </div>
 </div>
 {% endfor %}
