@@ -4,6 +4,7 @@
         <div class="content">
             <div class="header" id="sylius-shipping-method">
                 {{ shipment.method }}
+                <p id="shipping_status">{{ ('sylius.ui.' ~ shipment.state)|trans }}</p>
             </div>
         </div>
     </div>

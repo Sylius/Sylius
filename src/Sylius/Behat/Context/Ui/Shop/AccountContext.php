@@ -439,4 +439,12 @@ final class AccountContext implements Context
     {
         Assert::same($this->orderShowPage->getOrderPaymentStatus(), $orderPaymentState);
     }
+
+    /**
+     * @Then The order's shipment status should be :shippingStatus
+     */
+    public function theOrderSShipmentStatusShouldBe(string $shippingStatus): void
+    {
+        Assert::same($this->orderShowPage->getShippingStatus(), $shippingStatus);
+    }
 }
