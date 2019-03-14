@@ -72,7 +72,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         $response->headers = $responseHeaderBag;
         $responseHeaderBag
             ->setCookie(Argument::that(function (Cookie $cookie) {
-                return $cookie->getName() === '_channel_code' && $cookie->getValue() == 'fake_channel_code';
+                return $cookie->getName() === '_channel_code' && $cookie->getValue() === 'fake_channel_code';
             }))
             ->shouldBeCalled()
         ;
