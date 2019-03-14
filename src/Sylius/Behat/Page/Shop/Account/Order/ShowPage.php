@@ -64,6 +64,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
+     * @return string
+     */
+    public function getShippingStatus()
+    {
+        $shippingStatus = $this->getElement('shipping_status')->getText();
+
+        return $shippingStatus;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function hasBillingAddress($customerName, $street, $postcode, $city, $countryName)
@@ -191,6 +201,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'product_price' => '#sylius-order td:nth-child(2)',
             'subtotal' => '#subtotal',
             'total' => '#total',
+            'shipping_status' => '#shipping_status'
         ]);
     }
 

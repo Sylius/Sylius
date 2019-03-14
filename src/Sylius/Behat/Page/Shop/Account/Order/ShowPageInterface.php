@@ -55,6 +55,11 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function getSubtotal();
 
     /**
+     * @return string
+     */
+    public function getShippingStatus();
+
+    /**
      * @return int
      */
     public function countItems();
