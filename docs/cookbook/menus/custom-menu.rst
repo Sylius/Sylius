@@ -136,7 +136,7 @@ Here is a simple example of how to use your menu in Twig :
 
 .. code-block:: jinja
 
-    {% set menu = knp_menu_get('sylius.admin.coupon.show', [], {'coavoir%}
+    {% set menu = knp_menu_get('sylius.admin.coupon.show', [], {'coupon': coupon}) %}
     {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
 
 
