@@ -26,6 +26,8 @@ import './sylius-product-images-preview';
 import './sylius-product-slug';
 import './sylius-taxon-slug';
 
+import SyliusTaxonomyTree from './sylius-taxon-tree';
+
 $(document).ready(() => {
   $('#sylius_product_variant_pricingCalculator').handlePrototypes({
     prototypePrefix: 'sylius_product_variant_pricingCalculator',
@@ -97,6 +99,8 @@ $(document).ready(() => {
       $(event.target).find('.accordion').accordion();
     }
   });
+
+  const taxonomyTree = new SyliusTaxonomyTree();
 });
 
 window.$ = $;

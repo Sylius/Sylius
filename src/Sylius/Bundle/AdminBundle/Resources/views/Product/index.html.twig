@@ -18,14 +18,14 @@
     {{ sonata_block_render_event('sylius.admin.product.index.after_header', {'resources': resources}) }}
 
     <div class="ui two column stackable grid">
-        <div class="three wide column">
+        <div class="sixteen wide mobile sixteen wide tablet three wide computer column">
             {{ sonata_block_render_event('sylius.admin.product.index.before_taxon_tree', {'resources': resources}) }}
 
             {{ render(path('sylius_admin_partial_taxon_tree', {'template': '@SyliusAdmin/Taxon/_treeWithoutButtons.html.twig'})) }}
 
             {{ sonata_block_render_event('sylius.admin.product.index.after_taxon_tree', {'resources': resources}) }}
         </div>
-        <div class="thirteen wide column sylius-product-index">
+        <div class="sixteen wide mobile sixteen wide tablet thirteen wide computer column sylius-product-index">
             {{ sonata_block_render_event('sylius.admin.product.index.before_filters', {'resources': resources}) }}
 
             {% include '@SyliusAdmin/Crud/Index/_content.html.twig' %}

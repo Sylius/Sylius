@@ -832,6 +832,7 @@ sylius:
         this_product_has_no_attributes_defined: 'This product has no attributes defined'
         title: 'Title'
         to: 'To'
+        toggle_all: 'Toggle all'
         toggle_sidebar: 'Toggle sidebar'
         topic: 'Topic'
         total: 'Total'
