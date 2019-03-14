@@ -18,10 +18,11 @@ Feature: Viewing details of an order
 
     @ui
     Scenario: Seeing shipment status before shipping
-        And I view the summary of the order "#00000666"
-        And I should see "Ready" as order's shipment status
+        When I view the summary of the order "#00000666"
+        Then I should see "Ready" as order's shipment status
 
     @ui
     Scenario: Seeing shipment status after shipping
-        And I view the summary of the order "#00000666"
-        And I should see "Shipped" as order's shipment status
+        Given this order has already been shipped
+        When I view the summary of the order "#00000666"
+        Then I should see "Shipped" as order's shipment status
