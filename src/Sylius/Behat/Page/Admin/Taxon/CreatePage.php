@@ -18,6 +18,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -47,9 +48,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function deleteTaxonOnPageByName(string $name): void
     {
         $leaves = $this->getLeaves();
+        /** @var NodeElement $leaf */
         foreach ($leaves as $leaf) {
-            if ($leaf->getText() === $name) {
-                $leaf->getParent()->find('css', '.ui.red.button')->press();
+            if ($leaf->find('css', '.sylius-tree__title')->getText() === $name) {
+                $leaf->find('css', '.sylius-tree__action__trigger')->click();
+                JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
+                $leaf->find('css', '.sylius-tree__action button')->press();
+                $this->getElement('confirmation_button')->click();
 
                 return;
             }
@@ -99,22 +104,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function getLeaves(TaxonInterface $parentTaxon = null): array
     {
-        $tree = $this->getElement('tree');
-        Assert::notNull($tree);
-        /** @var NodeElement[] $leaves */
-        $leaves = $tree->findAll('css', '.item > .content > .header > a');
-
-        if (null === $parentTaxon) {
-            return $leaves;
-        }
-
-        foreach ($leaves as $leaf) {
-            if ($leaf->getText() === $parentTaxon->getName()) {
-                return $leaf->findAll('css', '.item > .content > .header');
-            }
-        }
-
-        return [];
+        return $this->getDocument()->findAll('css', '.sylius-tree__item');
     }
 
     public function activateLanguageTab(string $locale): void
@@ -142,12 +132,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_taxon_code',
+            'confirmation_button' => '#confirmation-button',
             'description' => '#sylius_taxon_translations_en_US_description',
             'images' => '#sylius_taxon_images',
             'language_tab' => '[data-locale="%locale%"] .title',
             'name' => '#sylius_taxon_translations_%language%_name',
             'slug' => '#sylius_taxon_translations_%language%_slug',
-            'tree' => '.ui.list',
+            'tree' => '.sylius-tree',
         ]);
     }
 
