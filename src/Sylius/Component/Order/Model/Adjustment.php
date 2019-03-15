@@ -67,19 +67,7 @@ class Adjustment implements AdjustmentInterface
      */
     public function getAdjustable(): ?AdjustableInterface
     {
-        if (null !== $this->order) {
-            return $this->order;
-        }
-
-        if (null !== $this->orderItem) {
-            return $this->orderItem;
-        }
-
-        if (null !== $this->orderItemUnit) {
-            return $this->orderItemUnit;
-        }
-
-        return null;
+        return $this->order ?? $this->orderItem ?? $this->orderItemUnit;
     }
 
     /**

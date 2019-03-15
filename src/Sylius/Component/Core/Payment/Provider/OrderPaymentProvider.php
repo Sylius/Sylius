@@ -76,22 +76,15 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
         if (null !== $lastCancelledPayment) {
             return $lastCancelledPayment;
         }
-
-        $lastFailedPayment = $order->getLastPayment(PaymentInterface::STATE_FAILED);
-        if (null !== $lastFailedPayment) {
-            return $lastFailedPayment;
-        }
-
-        return null;
+        return $order->getLastPayment(PaymentInterface::STATE_FAILED);
     }
 
     private function getDefaultPaymentMethod(PaymentInterface $payment, OrderInterface $order): ?PaymentMethodInterface
     {
         try {
             $payment->setOrder($order);
-            $paymentMethod = $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($payment);
 
-            return $paymentMethod;
+            return $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($payment);
         } catch (UnresolvedDefaultPaymentMethodException $exception) {
             return null;
         }
