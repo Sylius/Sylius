@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
-use function GuzzleHttp\Psr7\str;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
@@ -426,7 +425,7 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then I should see :paymentStatus payment status
+     * @Then I should see its payment status as :paymentStatus
      */
     public function shouldSeePaymentStatus(string $paymentStatus): void
     {
