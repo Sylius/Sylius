@@ -1,0 +1,72 @@
+---------------------------------------------------------------------------
+
+by mamazu at 2018-11-21T08:18:33Z
+
+Looks good to me.
+
+---------------------------------------------------------------------------
+
+by TomasVotruba at 2018-12-13T21:17:34Z
+
+@pamil Thank you for your patience. I had pretty busy months working on Rector fulltime lately, finally found some time to address your comments.
+
+I find these 2 points - https://github.com/rectorphp/rector/issues/424#issuecomment-447122540 - genious. I'll definitely integrate them to Rector.
+
+Let me know if there is something more you need me to do :+1:
+
+---------------------------------------------------------------------------
+
+by stale[bot] at 2019-03-13T21:41:38Z
+
+This issue has been automatically marked as stale because it has not had any recent activity. It will be closed in a week if no further activity occurs. Thank you for your contributions.
+
+---------------------------------------------------------------------------
+
+by TomasVotruba at 2019-03-13T22:10:47Z
+
+Closing for no response
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-03-14T08:36:14Z
+
+Hello @TomasVotruba, sorry for such a long response time, we realize that sometime we can loose some valuable PRs in the workload we have. I would say it's still a good change and I would vote to merge. Let me only ping @pamil and @lchrusciel for the quick opinion... It only needs a quick rebase, as far as I see. I'm also reopening it, if you don't mind :)
+
+---------------------------------------------------------------------------
+
+by TomasVotruba at 2019-03-14T09:22:53Z
+
+Hi, thanks for reaching out.
+I don't have time for this PR, but sure, go for it! :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-03-15T08:25:04Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. Reset before you pull, else commits
+may become messed-up.
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute git fetch origin && git reset "authorize-payment" to update your local branch.
+
+Feel free to ask for assistance when you get stuck 👍
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-03-15T08:30:36Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "rector-cleanup"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-03-15T10:54:25Z
+
+Thank you, Tomáš! :tada:
