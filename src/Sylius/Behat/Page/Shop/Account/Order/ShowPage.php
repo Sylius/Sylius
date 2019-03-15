@@ -111,6 +111,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $paymentsPrice->getText();
     }
 
+    public function getPaymentStatus(): string
+    {
+        return $this->getElement('payment_status')->getText();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -176,10 +181,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'number' => '#number',
             'order_items' => '#sylius-order',
             'payments' => '#sylius-payments',
+            'payment_status' => '#payment-status',
             'product_price' => '#sylius-order td:nth-child(2)',
             'subtotal' => '#subtotal',
             'total' => '#total',
-            'paymentStatus' => '#payment-status'
         ]);
     }
 
@@ -201,10 +206,5 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             (stripos($elementText, $city . ', ' . $postcode) !== false) &&
             (stripos($elementText, $countryName) !== false)
         ;
-    }
-
-    public function getPaymentStatus(): string
-    {
-        return $this->getElement('paymentStatus')->getText();
     }
 }

@@ -1,6 +1,6 @@
 @customer_account
-Feature: Viewing payment's status on my account panel
-    In order to know what status does the order have
+Feature: Viewing payment status on the order show page
+    In order to know whether an order has already been paid, or not
     As a Customer
     I want to see payment's status of my order
 
@@ -18,12 +18,12 @@ Feature: Viewing payment's status on my account panel
         And I chose "DHL" shipping method with "Cash on Delivery" payment
 
     @ui
-    Scenario: Seeing payment's status before payment
+    Scenario: Seeing payment status before it's paid
         When I view the summary of the order "#00000666"
-        Then I should see "New" payment status
+        Then I should see its payment status as "New"
 
     @ui
-    Scenario: Seeing payment's status after payment
+    Scenario: Seeing payment status after it's paid
         Given the order "#00000666" is already paid
         When I view the summary of the order "#00000666"
-        And I should see "Completed" payment status
+        And I should see its payment status as "Completed"

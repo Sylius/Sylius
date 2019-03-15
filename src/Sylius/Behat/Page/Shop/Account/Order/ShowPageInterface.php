@@ -66,7 +66,6 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function getPaymentStatus(): string;
 
-
     public function isProductInTheList(string $productName): bool;
 
     /**
