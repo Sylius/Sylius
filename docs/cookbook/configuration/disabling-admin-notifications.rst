@@ -9,7 +9,7 @@ This guide will instruct you how to disable this check & notification.
 How to disable notifications?
 -----------------------------
 
-Add the following configuration to ``app/config/config.yml``.
+Add the following configuration to ``app/config/packages/_sylius.yaml``.
 
 .. code-block:: yaml
 
