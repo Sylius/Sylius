@@ -87,11 +87,6 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
         if (null === $province) {
             return false;
         }
-
-        if ($country->hasProvince($province)) {
-            return true;
-        }
-
-        return false;
+        return $country->hasProvince($province);
     }
 }

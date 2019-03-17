@@ -45,6 +45,12 @@ E-Commerce Components for PHP
 If you use a different framework than Symfony, you are welcome to use Sylius components, which will make it much easier to implement a webshop with any PHP application and project.
 They provide you with default models, services and logic for all aspects of e-commerce, completely separated and ready to use.
 
+Roadmap
+-------
+
+Are you wondering about Sylius plans for the next releases? If so then you should follow our `Roadmap <https://sylius.com/roadmap>`_ on Github.
+There you can contribute by conversation and votes on the most desired features and improvements.
+
 Final Thoughts
 --------------
 

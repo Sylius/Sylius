@@ -22,13 +22,13 @@
         <service id="sylius.event_subscriber.odm_mapped_super_class" class="Sylius\Bundle\ResourceBundle\EventListener\ODMMappedSuperClassSubscriber">
             <argument type="service" id="sylius.resource_registry" />
             <tag name="doctrine_mongodb.odm.event_subscriber" priority="8192" />
-            <deprecated>The "sylius.event_subscriber.odm_mapped_super_class" service is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.</deprecated>
+            <deprecated>The "%service_id%" service is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.</deprecated>
         </service>
 
         <service id="sylius.event_subscriber.odm_repository_class" class="Sylius\Bundle\ResourceBundle\EventListener\ODMRepositoryClassSubscriber">
             <argument type="service" id="sylius.resource_registry" />
             <tag name="doctrine_mongodb.odm.event_subscriber" priority="8192" />
-            <deprecated>The "sylius.event_subscriber.odm_repository_class" service is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.</deprecated>
+            <deprecated>The "%service_id%" service is deprecated since Sylius 1.3. Doctrine MongoDB and PHPCR support will no longer be supported in Sylius 2.0.</deprecated>
         </service>
     </services>
 </container>
