@@ -503,26 +503,9 @@ final class ProductContext implements Context
      * @Given /^(this product) has option "([^"]+)" with values "([^"]+)" and "([^"]+)"$/
      * @Given /^(this product) has option "([^"]+)" with values "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
-    public function thisProductHasOptionWithValues(ProductInterface $product, $optionName, ...$values)
+    public function thisProductHasOptionWithValues(ProductInterface $product, $optionName, ...$values): void
     {
-        /** @var ProductOptionInterface $option */
-        $option = $this->productOptionFactory->createNew();
-
-        $option->setName($optionName);
-        $option->setCode(StringInflector::nameToUppercaseCode($optionName));
-
-        $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
-
-        foreach ($values as $key => $value) {
-            $optionValue = $this->addProductOption($option, $value, StringInflector::nameToUppercaseCode($value));
-            $this->sharedStorage->set(sprintf('%s_option_%s_value', $value, strtolower($optionName)), $optionValue);
-        }
-
-        $product->addOption($option);
-        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
-
-        $this->objectManager->persist($option);
-        $this->objectManager->flush();
+        $this->addOptionAndVariantIfExist($product, $optionName, $values);
     }
 
     /**
@@ -530,19 +513,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasOptionWithoutValues(ProductInterface $product, string $optionName): void
     {
-        /** @var ProductOptionInterface $option */
-        $option = $this->productOptionFactory->createNew();
-
-        $option->setName($optionName);
-        $option->setCode(StringInflector::nameToUppercaseCode($optionName));
-
-        $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
-
-        $product->addOption($option);
-        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
-
-        $this->objectManager->persist($option);
-        $this->objectManager->flush();
+        $this->addOptionAndVariantIfExist($product, $optionName, []);
     }
 
     /**
@@ -944,5 +915,25 @@ final class ProductContext implements Context
         return $channelPricing;
     }
 
+    private function addOptionAndVariantIfExist(ProductInterface $product, string $optionName, array $values): void
+    {
+        /** @var ProductOptionInterface $option */
+        $option = $this->productOptionFactory->createNew();
 
+        $option->setName($optionName);
+        $option->setCode(StringInflector::nameToUppercaseCode($optionName));
+
+        $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
+
+        foreach ($values as $key => $value) {
+            $optionValue = $this->addProductOption($option, $value, StringInflector::nameToUppercaseCode($value));
+            $this->sharedStorage->set(sprintf('%s_option_%s_value', $value, strtolower($optionName)), $optionValue);
+        }
+
+        $product->addOption($option);
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
+
+        $this->objectManager->persist($option);
+        $this->objectManager->flush();
+    }
 }

@@ -74,8 +74,6 @@ final class BrowsingProductVariantsContext implements Context
 
     /**
      * @Then the :product product should have no variants
-     * @Given (this product) should have no variants
-
      */
     public function theProductShouldHaveNoVariants(ProductInterface $product)
     {

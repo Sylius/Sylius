@@ -18,6 +18,7 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Webmozart\Assert\Assert;
 
 final class GenerateProductVariantsSubscriber implements EventSubscriberInterface
@@ -25,9 +26,13 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
     /** @var ProductVariantGeneratorInterface */
     private $generator;
 
-    public function __construct(ProductVariantGeneratorInterface $generator)
+    /** @var Session */
+    private $session;
+
+    public function __construct(ProductVariantGeneratorInterface $generator, Session $session)
     {
         $this->generator = $generator;
+        $this->session = $session;
     }
 
     /**
@@ -47,6 +52,10 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
 
         Assert::isInstanceOf($product, ProductInterface::class);
 
-        $this->generator->generate($product);
+        try{
+            $this->generator->generate($product);
+        } catch (\InvalidArgumentException $exception) {
+            $this->session->getFlashBag()->add('error', $exception->getMessage());
+        }
     }
 }

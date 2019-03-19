@@ -56,6 +56,10 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
             }
         }
 
+        if (empty($optionSet)) {
+            throw new \InvalidArgumentException('Cannot generate variants for a product without options values');
+        }
+
         $permutations = $this->setBuilder->build($optionSet);
 
         foreach ($permutations as $permutation) {

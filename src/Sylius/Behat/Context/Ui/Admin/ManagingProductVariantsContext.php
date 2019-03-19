@@ -383,10 +383,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenImpossibleGenerate(): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessageForForm(), 'Variant without options can not exist');
+        $this->notificationChecker->checkNotification('Cannot generate variants for a product without options values', NotificationType::failure());
     }
 
     /**
