@@ -526,6 +526,26 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) has option "([^"]+)" without values$/
+     */
+    public function thisProductHasOptionWithoutValues(ProductInterface $product, string $optionName): void
+    {
+        /** @var ProductOptionInterface $option */
+        $option = $this->productOptionFactory->createNew();
+
+        $option->setName($optionName);
+        $option->setCode(StringInflector::nameToUppercaseCode($optionName));
+
+        $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
+
+        $product->addOption($option);
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
+
+        $this->objectManager->persist($option);
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^there (?:is|are) (\d+) unit(?:|s) of (product "([^"]+)") available in the inventory$/
      */
     public function thereIsQuantityOfProducts($quantity, ProductInterface $product)
@@ -923,4 +943,6 @@ final class ProductContext implements Context
 
         return $channelPricing;
     }
+
+
 }
