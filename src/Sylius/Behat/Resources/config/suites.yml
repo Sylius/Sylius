@@ -62,6 +62,7 @@ imports:
     - suites/ui/promotion/managing_promotions.yml
     - suites/ui/promotion/receiving_discount.yml
     - suites/ui/shipping/applying_shipping_fee.yml
+    - suites/ui/shipping/managing_shipments.yml
     - suites/ui/shipping/managing_shipping_categories.yml
     - suites/ui/shipping/managing_shipping_methods.yml
     - suites/ui/taxation/applying_taxes.yml
