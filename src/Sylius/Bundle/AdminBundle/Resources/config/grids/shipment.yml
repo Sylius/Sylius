@@ -1,0 +1,18 @@
+sylius_grid:
+    grids:
+        sylius_admin_shipment:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.shipment.class%"
+            fields:
+                id:
+                    type: string
+                    label: sylius.ui.id
+                state:
+                    type: string
+                    label: sylius.ui.shipping_state
+                order_number:
+                    type: string
+                    label: sylius.ui.order
+                    path: order.number
