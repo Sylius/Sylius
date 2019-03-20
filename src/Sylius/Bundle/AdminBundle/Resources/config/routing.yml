@@ -101,3 +101,6 @@ sylius_admin_tax_rate:
 
 sylius_admin_zone:
     resource: "@SyliusAdminBundle/Resources/config/routing/zone.yml"
+
+sylius_admin_shipment:
+    resource: "@SyliusAdminBundle/Resources/config/routing/shipment.yml"

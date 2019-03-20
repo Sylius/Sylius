@@ -1,0 +1,14 @@
+sylius_admin_shipment:
+    resource: |
+        alias: sylius.shipment
+        section: admin
+        templates: "@SyliusAdmin\\Crud"
+        only: ['index']
+        grid: sylius_admin_shipment
+        permission: true
+        vars:
+            all:
+                subheader: sylius.ui.process_your_orders
+            index:
+                icon: cart
+    type: sylius.resource
