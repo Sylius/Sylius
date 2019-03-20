@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 
 final class CustomerSpec extends ObjectBehavior
 {
@@ -63,5 +64,16 @@ final class CustomerSpec extends ObjectBehavior
     {
         $this->setDefaultAddress($address);
         $this->hasAddress($address)->shouldReturn(true);
+    }
+
+    function it_has_no_user_by_default(): void
+    {
+        $this->getUser()->shouldReturn(null);
+    }
+
+    function its_user_is_mutable(ShopUserInterface $user): void
+    {
+        $this->setUser($user);
+        $this->getUser()->shouldReturn($user);
     }
 }
