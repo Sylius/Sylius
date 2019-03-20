@@ -41,4 +41,12 @@ final class ManagingShipmentsContext implements Context
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['order_number' => $orderNumber, 'state' =>$shippingState]));
     }
+
+    /**
+     * @Then I should see two shipments in the list
+     */
+    public function ShouldSeeTwoShipmentsInList(): void
+    {
+        Assert::eq(2, $this->indexPage->countItems());
+    }
 }

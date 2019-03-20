@@ -8,7 +8,7 @@ sylius_admin_shipment:
         permission: true
         vars:
             all:
-                subheader: sylius.ui.process_your_orders
+                subheader: sylius.ui.manage_shipments
             index:
-                icon: cart
+                icon: truck
     type: sylius.resource
