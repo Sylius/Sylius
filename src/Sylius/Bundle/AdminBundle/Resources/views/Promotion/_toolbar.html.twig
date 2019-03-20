@@ -1,0 +1,3 @@
+{% set menu = knp_menu_get('sylius.admin.coupon.manage', [], {'promotion': promotion}) %}
+    {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
+
