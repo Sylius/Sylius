@@ -6,6 +6,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
 {
@@ -28,16 +29,16 @@ final class ManagingShipmentsContext implements Context
     /**
      * @Then I should see single shipment in the list
      */
-    public function iShouldSeeTwoShipmentsInTheList()
+    public function iShouldSeeSingleShipmentInList(): void
     {
-        throw new PendingException();
+        Assert::eq(1, $this->indexPage->countItems());
     }
 
     /**
      * @Then the shipment of the :orderNumber order should be :shippingState
      */
-    public function theShipmentOfTheOrderShouldBe($arg1, $arg2)
+    public function ShipmentOfOrderShouldBe(string $orderNumber, string $shippingState): void
     {
-        throw new PendingException();
+        Assert::true($this->indexPage->isSingleResourceOnPage(['order_number' => $orderNumber, 'state' =>$shippingState]));
     }
 }
