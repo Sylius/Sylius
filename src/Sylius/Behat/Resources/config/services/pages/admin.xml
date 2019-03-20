@@ -34,6 +34,7 @@
         <import resource="admin/product_variant.xml" />
         <import resource="admin/promotion.xml" />
         <import resource="admin/promotion_coupon.xml" />
+        <import resource="admin/shipment.xml" />
         <import resource="admin/shipping_category.xml" />
         <import resource="admin/shipping_method.xml" />
         <import resource="admin/tax_category.xml" />
