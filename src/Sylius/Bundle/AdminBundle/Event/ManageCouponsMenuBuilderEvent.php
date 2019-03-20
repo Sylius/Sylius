@@ -6,25 +6,25 @@ namespace Sylius\Bundle\AdminBundle\Event;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Stripe\Coupon;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
+use Sylius\Component\Core\Model\PromotionInterface;
 
 final class ManageCouponsMenuBuilderEvent extends MenuBuilderEvent
 {
-    /** @var Coupon */
-    private $coupon;
+    /** @var PromotionInterface */
+    private $promotion;
 
     public function __construct(
         FactoryInterface $factory,
         ItemInterface $menu,
-        Coupon $coupon
+        PromotionInterface $promotion
     ) {
         parent::__construct($factory, $menu);
-        $this->coupon = $coupon;
+        $this->promotion = $promotion;
     }
 
-    public function getCoupon(): Coupon
+    public function getCoupon(): PromotionInterface
     {
-        return $this->coupon;
+        return $this->promotion;
     }
 }

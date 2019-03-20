@@ -7,11 +7,12 @@ namespace Sylius\Bundle\AdminBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\AdminBundle\Event\ManageCouponsMenuBuilderEvent;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class ManageCouponsMenuBuilder
 {
-    public const EVENT_NAME = 'sylius.menu.admin.coupon.show';
+    public const EVENT_NAME = 'sylius.menu.admin.promotion.show';
 
     /** @var FactoryInterface */
     private $factory;
@@ -30,30 +31,29 @@ final class ManageCouponsMenuBuilder
     public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
-        if (!isset($options['coupon'])) {
+        if (!isset($options['promotion'])) {
             return $menu;
         }
-        $coupon = $options['coupon'];
-        $this->addChildren($menu, $coupon);
+        $promotion = $options['promotion'];
+        $this->addChildren($menu, $promotion);
         $this->eventDispatcher->dispatch(
             self::EVENT_NAME,
-            new ManageCouponsMenuBuilderEvent($this->factory, $menu, $coupon)
+            new ManageCouponsMenuBuilderEvent($this->factory, $menu, $promotion)
         );
         return $menu;
     }
 
-    private function addChildren(ItemInterface $menu, Coupon $coupon): void
+    private function addChildren(ItemInterface $menu, PromotionInterface $promotions): void
     {
         $menu
-            ->addChild('coupon_validate', [
-                'route' => 'app_coupon_validate',
-                'routeParameters' => ['id' => $coupon->getId()],
+            ->addChild('promotion_validate', [
+                'route' => 'sylius_admin_promotion_coupon_index',
+                'routeParameters' => ['promotionId' => $promotions->getId()],
             ])
             ->setAttribute('type', 'link')
-            ->setLabel('sylius.coupon.enabled')
+            ->setLabel('sylius.promotion.enabled')
             ->setLabelAttribute('icon', 'check')
             ->setLabelAttribute('color', 'green')
         ;
-        $menu->addChild('coupon_cancel', [ /* ... */ ]);
     }
 }
