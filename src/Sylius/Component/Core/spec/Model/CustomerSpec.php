@@ -18,6 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 final class CustomerSpec extends ObjectBehavior
 {
@@ -73,7 +74,23 @@ final class CustomerSpec extends ObjectBehavior
 
     function its_user_is_mutable(ShopUserInterface $user): void
     {
+        $user->setCustomer($this)->shouldBeCalled();
+
         $this->setUser($user);
         $this->getUser()->shouldReturn($user);
+    }
+
+    function it_throws_an_invalid_argument_exception_when_user_is_not_a_shop_user_type(UserInterface $user)
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setUser', [$user]);
+    }
+
+    function it_resets_customer_of_previous_user(ShopUserInterface $previousUser, ShopUserInterface $user)
+    {
+        $this->setUser($previousUser);
+
+        $previousUser->setCustomer(null)->shouldBeCalled();
+
+        $this->setUser($user);
     }
 }
