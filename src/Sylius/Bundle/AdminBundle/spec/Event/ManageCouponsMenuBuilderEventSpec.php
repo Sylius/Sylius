@@ -17,7 +17,7 @@ final class ManageCouponsMenuBuilderEventSpec extends ObjectBehavior
         $this->beConstructedWith($factory, $menu, $promotion);
     }
 
-    function it_is_a_menu_builder_event(): void
+    function it_is_a_manage_menu_builder_event(): void
     {
         $this->shouldHaveType(ManageCouponsMenuBuilderEvent::class);
     }
