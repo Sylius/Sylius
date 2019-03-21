@@ -80,12 +80,12 @@ final class CustomerSpec extends ObjectBehavior
         $this->getUser()->shouldReturn($user);
     }
 
-    function it_throws_an_invalid_argument_exception_when_user_is_not_a_shop_user_type(UserInterface $user)
+    function it_throws_an_invalid_argument_exception_when_user_is_not_a_shop_user_type(UserInterface $user): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('setUser', [$user]);
     }
 
-    function it_resets_customer_of_previous_user(ShopUserInterface $previousUser, ShopUserInterface $user)
+    function it_resets_customer_of_previous_user(ShopUserInterface $previousUser, ShopUserInterface $user): void
     {
         $this->setUser($previousUser);
 
@@ -94,7 +94,7 @@ final class CustomerSpec extends ObjectBehavior
         $this->setUser($user);
     }
 
-    function it_does_not_replace_user_if_it_is_already_set(ShopUserInterface $user)
+    function it_does_not_replace_user_if_it_is_already_set(ShopUserInterface $user): void
     {
         $user->setCustomer($this)->shouldBeCalledOnce();
 
