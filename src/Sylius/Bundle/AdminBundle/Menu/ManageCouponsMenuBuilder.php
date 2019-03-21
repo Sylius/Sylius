@@ -51,9 +51,9 @@ final class ManageCouponsMenuBuilder
                 'routeParameters' => ['promotionId' => $promotions->getId()],
             ])
             ->setAttribute('type', 'link')
-            ->setLabel('sylius.promotion.enabled')
+            ->setLabel('sylius.ui.manage_coupons')
             ->setLabelAttribute('icon', 'check')
-            ->setLabelAttribute('color', 'green')
+            ->setLabelAttribute('color', 'gray')
         ;
     }
 }
