@@ -22,14 +22,8 @@ Feature: Browsing shipments
         And I am logged in as an administrator
 
     @ui
-    Scenario: Browsing shipments and their states
-        When I browse shipments
-        Then I should see single shipment in the list
-        And the shipment of the "#00000001" order should be "shipped"
-
-    @ui
-    Scenario: Browsing shipments and their states
+    Scenario: Browsing shipments and their states in one channel
         When I browse shipments
         Then I should see two shipments in the list
-        And the shipment of the "#00000001" order should be "shipped"
-        And the shipment of the "#00000002" order should be "ready"
+        And the shipment of the "#00000001" order should be "Shipped" for "donald@duck.com"
+        And the shipment of the "#00000002" order should be "Ready" for "iron@man.com"
