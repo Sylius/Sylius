@@ -6,6 +6,8 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Component\Core\Model\Channel;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
@@ -27,26 +29,40 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @Then I should see single shipment in the list
+     * @Then the shipment of the :orderNumber order should be :shippingState for :customer
+     * @Then the shipment of the :orderNumber order should be :shippingState for :customer in :channel channel
      */
-    public function iShouldSeeSingleShipmentInList(): void
-    {
-        Assert::eq(1, $this->indexPage->countItems());
-    }
+    public function ShipmentOfOrderShouldBe(
+        string $orderNumber,
+        string $shippingState,
+        CustomerInterface $customer,
+        Channel $channel = null
+    ): void{
 
-    /**
-     * @Then the shipment of the :orderNumber order should be :shippingState
-     */
-    public function ShipmentOfOrderShouldBe(string $orderNumber, string $shippingState): void
-    {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['order_number' => $orderNumber, 'state' =>$shippingState]));
+        $parameters =
+            [
+                'number' => $orderNumber,
+                'state' => $shippingState,
+                'customer' => $customer->getEmail()
+            ];
+
+        if($channel !== null){
+            $parameters =  ['channel' => $channel->getCode()];
+        }
+
+        Assert::true($this->indexPage->isSingleResourceOnPage($parameters));
     }
 
     /**
      * @Then I should see two shipments in the list
      */
-    public function ShouldSeeTwoShipmentsInList(): void
+    public function ShouldSeeAllShipmentsInList(): void
     {
-        Assert::eq(2, $this->indexPage->countItems());
+        $this->checkAndCompareQuantityOfItemsOnPage(2);
+    }
+
+    private function checkAndCompareQuantityOfItemsOnPage(int $expectedValue): void
+    {
+        Assert::same($expectedValue, $this->indexPage->countItems());
     }
 }
