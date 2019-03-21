@@ -474,6 +474,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Given /^I should not be able to generate any variants$/
+     */
+    public function iShouldNotBeAbleToGenerateAnyVariantsToThisProduct()
+    {
+        Assert::false($this->generatePage->isPossibleToGenerate());
+    }
+
+    /**
      * @When I set its shipping category as :shippingCategoryName
      */
     public function iSetItsShippingCategoryAs($shippingCategoryName)

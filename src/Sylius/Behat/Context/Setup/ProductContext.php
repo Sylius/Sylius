@@ -509,9 +509,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) has option "([^"]+)" without values$/
+     * @Given /^(this product) has an option "([^"]*)" without any values$/
      */
-    public function thisProductHasOptionWithoutValues(ProductInterface $product, string $optionName): void
+    public function thisProductHasAnOptionWithoutAnyValues(ProductInterface $product, string $optionName): void
     {
         $this->addOptionAndVariantIfExist($product, $optionName, []);
     }
