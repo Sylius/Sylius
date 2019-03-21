@@ -17,6 +17,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 final class CustomerSpec extends ObjectBehavior
 {
@@ -63,5 +65,40 @@ final class CustomerSpec extends ObjectBehavior
     {
         $this->setDefaultAddress($address);
         $this->hasAddress($address)->shouldReturn(true);
+    }
+
+    function it_has_no_user_by_default(): void
+    {
+        $this->getUser()->shouldReturn(null);
+    }
+
+    function its_user_is_mutable(ShopUserInterface $user): void
+    {
+        $user->setCustomer($this)->shouldBeCalled();
+
+        $this->setUser($user);
+        $this->getUser()->shouldReturn($user);
+    }
+
+    function it_throws_an_invalid_argument_exception_when_user_is_not_a_shop_user_type(UserInterface $user): void
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setUser', [$user]);
+    }
+
+    function it_resets_customer_of_previous_user(ShopUserInterface $previousUser, ShopUserInterface $user): void
+    {
+        $this->setUser($previousUser);
+
+        $previousUser->setCustomer(null)->shouldBeCalled();
+
+        $this->setUser($user);
+    }
+
+    function it_does_not_replace_user_if_it_is_already_set(ShopUserInterface $user): void
+    {
+        $user->setCustomer($this)->shouldBeCalledOnce();
+
+        $this->setUser($user);
+        $this->setUser($user);
     }
 }
