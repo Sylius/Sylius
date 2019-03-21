@@ -9,10 +9,28 @@ sylius_grid:
                 id:
                     type: string
                     label: sylius.ui.id
+                number:
+                    type: twig
+                    label: sylius.ui.number
+                    path: order
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+                channel:
+                    type: twig
+                    label: sylius.ui.channel
+                    path: order.channel
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+                customer:
+                    type: twig
+                    label: sylius.ui.customer
+                    path: order.customer
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
                 state:
-                    type: string
-                    label: sylius.ui.shipping_state
-                order_number:
-                    type: string
-                    label: sylius.ui.order
-                    path: order.number
+                    type: twig
+                    label: sylius.ui.state
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "@SyliusAdmin/Order/Label/ShippingState"
