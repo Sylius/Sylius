@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Process\Exception\RuntimeException;
@@ -52,6 +53,7 @@ final class InstallCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command installs Sylius.
 EOT
             )
+            ->addOption('fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null)
         ;
     }
 
@@ -60,6 +62,8 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
+        $suite = $input->getOption('fixture-suite');
+
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln('<info>Installing Sylius...</info>');
         $outputStyle->writeln($this->getSyliusLogo());
@@ -76,7 +80,13 @@ EOT
                     count($this->commands),
                     $command['message']
                 ));
-                $this->commandExecutor->runCommand('sylius:install:' . $command['command'], [], $output);
+
+                $parameters = [];
+                if ('database' === $command['command'] && null !== $suite) {
+                    $parameters['--fixture-suite'] = $suite;
+                }
+
+                $this->commandExecutor->runCommand('sylius:install:' . $command['command'], $parameters, $output);
             } catch (RuntimeException $exception) {
                 $errored = true;
             }
