@@ -92,6 +92,19 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             && $this->getElement('ends_at_time')->getValue() === date('H:i', $timestamp);
     }
 
+
+    public function isCouponManagementAvailable(): bool
+    {
+        $element = $this->getDocument()->find('css', 'a:contains("Manage coupons")');
+
+        return null !== $element;
+    }
+
+    public function manageCoupons(): void
+    {
+        $this->getDocument()->clickLink('Manage coupons');
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');

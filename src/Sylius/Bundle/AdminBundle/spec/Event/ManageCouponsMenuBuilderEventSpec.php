@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\spec\Event;
+namespace spec\Sylius\Bundle\AdminBundle\Event;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AdminBundle\Event\ManageCouponsMenuBuilderEvent;
+use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\PromotionInterface;
 
 final class ManageCouponsMenuBuilderEventSpec extends ObjectBehavior
@@ -19,6 +19,11 @@ final class ManageCouponsMenuBuilderEventSpec extends ObjectBehavior
 
     function it_is_a_manage_menu_builder_event(): void
     {
-        $this->shouldHaveType(ManageCouponsMenuBuilderEvent::class);
+        $this->shouldHaveType(MenuBuilderEvent::class);
+    }
+
+    function it_has_a_promotion(PromotionInterface $promotion): void
+    {
+        $this->getPromotion()->shouldReturn($promotion);
     }
 }

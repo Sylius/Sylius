@@ -12,7 +12,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class ManageCouponsMenuBuilder
 {
-    public const EVENT_NAME = 'sylius.menu.admin.promotion.show';
+    public const EVENT_NAME = 'sylius.menu.admin.promotion.manage';
 
     /** @var FactoryInterface */
     private $factory;
@@ -20,10 +20,8 @@ final class ManageCouponsMenuBuilder
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    public function __construct(
-        FactoryInterface $factory,
-        EventDispatcherInterface $eventDispatcher
-    ) {
+    public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
+    {
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -34,25 +32,28 @@ final class ManageCouponsMenuBuilder
         if (!isset($options['promotion'])) {
             return $menu;
         }
+
         $promotion = $options['promotion'];
+
         $this->addChildren($menu, $promotion);
         $this->eventDispatcher->dispatch(
             self::EVENT_NAME,
             new ManageCouponsMenuBuilderEvent($this->factory, $menu, $promotion)
         );
+
         return $menu;
     }
 
     private function addChildren(ItemInterface $menu, PromotionInterface $promotions): void
     {
         $menu
-            ->addChild('promotion_validate', [
+            ->addChild('manage_coupons', [
                 'route' => 'sylius_admin_promotion_coupon_index',
                 'routeParameters' => ['promotionId' => $promotions->getId()],
             ])
             ->setAttribute('type', 'link')
             ->setLabel('sylius.ui.manage_coupons')
-            ->setLabelAttribute('icon', 'check')
+            ->setLabelAttribute('icon', 'ticket')
             ->setLabelAttribute('color', 'gray')
         ;
     }

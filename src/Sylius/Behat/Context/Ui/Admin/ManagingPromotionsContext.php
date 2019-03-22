@@ -17,7 +17,9 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Promotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Promotion\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as IndexPageCouponInterface;
 use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
+use Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -31,6 +33,9 @@ final class ManagingPromotionsContext implements Context
 
     /** @var IndexPageInterface */
     private $indexPage;
+
+    /** @var IndexPageCouponInterface */
+    private $indexCouponPage;
 
     /** @var CreatePageInterface */
     private $createPage;
@@ -47,6 +52,7 @@ final class ManagingPromotionsContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
+        IndexPageCouponInterface $indexCouponPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver,
@@ -54,6 +60,7 @@ final class ManagingPromotionsContext implements Context
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
+        $this->indexCouponPage = $indexCouponPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
@@ -61,9 +68,10 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I create a new promotion
      * @When I want to create a new promotion
      */
-    public function iWantToCreateANewPromotion()
+    public function iWantToCreateANewPromotion(): void
     {
         $this->createPage->open();
     }
@@ -409,8 +417,9 @@ final class ManagingPromotionsContext implements Context
      * @Given I want to modify a :promotion promotion
      * @Given /^I want to modify (this promotion)$/
      * @Then I should be able to modify a :promotion promotion
+     * @When I modify a :promotion promotion
      */
-    public function iWantToModifyAPromotion(PromotionInterface $promotion)
+    public function iWantToModifyAPromotion(PromotionInterface $promotion): void
     {
         $this->updatePage->open(['id' => $promotion->getId()]);
     }
@@ -615,6 +624,30 @@ final class ManagingPromotionsContext implements Context
         $this->iWantToModifyAPromotion($promotion);
 
         Assert::same($this->updatePage->getPriority(), $priority);
+    }
+
+    /**
+     * @When I want to manage this promotion coupons
+     */
+    public function iWantToManageThisPromotionSCoupons(): void
+    {
+        $this->updatePage->manageCoupons();
+    }
+
+    /**
+     * @Then I should not be able to access coupons management page
+     */
+    public function iShouldNotBeAbleToAccessCouponsManagementPage(): void
+    {
+        Assert::false($this->updatePage->isCouponManagementAvailable());
+    }
+
+    /**
+     * @Then /^I should be on (this promotion)'s coupons management page$/
+     */
+    public function iShouldBeOnThisPromotionSCouponsManagementPage(PromotionInterface $promotion): void
+    {
+        Assert::true($this->indexCouponPage->isOpen(['promotionId' => $promotion->getId()]));
     }
 
     /**
