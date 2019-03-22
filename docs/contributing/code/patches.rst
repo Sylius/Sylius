@@ -131,10 +131,9 @@ Work on your Patch
 Work on the code as much as you want and commit as much as you want; but keep
 in mind the following:
 
-* Practice :doc:`BDD <bdd>`, which is the development methodology we use at Sylius;
+* Practice :doc:`BDD </bdd/index>`, which is the development methodology we use at Sylius;
 
-* Read about the Sylius :doc:`conventions <conventions>` and follow the
-  coding :doc:`standards <standards>` (use ``git diff --check`` to check for
+* Follow :doc:`coding standards <standards>` (use ``git diff --check`` to check for
   trailing spaces -- also read the tip below);
 
 * Do atomic and logically separate commits (use the power of ``git rebase`` to

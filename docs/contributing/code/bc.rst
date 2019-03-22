@@ -59,12 +59,40 @@ All the new routes will start with ``sylius_`` prefix in order to avoid conflict
 Services
 ~~~~~~~~
 
-Services names cannot change, but new services might be added with ``sylius.`` prefix.
+Services names cannot change, but new services might be added with ``sylius.`` or ``Sylius\\`` prefix.
 
 Templates
 ~~~~~~~~~
 
 Neither template events, block or templates themselves cannot be deleted or renamed.
+
+Deprecations
+------------
+
+Before we remove or replace code covered by this backwards compatiblity promise, it is
+first deprecated in the next minor release before being removed in the next major release.
+
+A code is marked as deprecated by adding a ``@deprecated`` PHPDoc to
+relevant classes, methods, properties:
+
+.. code-block:: php
+
+    /**
+     * @deprecated Deprecated since version 1.X. Use XXX instead.
+     */
+
+The deprecation message should indicate the version in which the class/method was
+deprecated and how the feature was replaced (whenever possible).
+
+A PHP ``\E_USER_DEPRECATED`` error must also be triggered to help people with
+the migration:
+
+.. code-block:: php
+
+    @trigger_error(
+        'XXX() is deprecated since version 2.X and will be removed in 2.Y. Use XXX instead.',
+        \E_USER_DEPRECATED
+    );
 
 .. _Semantic Versioning: http://semver.org/
 .. _Symfony's Backward Compatibility Promise: https://symfony.com/doc/current/contributing/code/bc.html
