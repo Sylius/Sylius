@@ -183,7 +183,7 @@
         "symfony/dom-crawler": "4.1.8",
         "symfony/routing": "4.1.8",
         "symfony/symfony": "3.4.7 || 4.0.7 || 4.1.8 || 4.2.2",
-        "twig/twig": "2.6.1"
+        "twig/twig": "2.6.1 | 2.7.3"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
