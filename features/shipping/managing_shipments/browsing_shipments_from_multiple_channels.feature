@@ -30,6 +30,6 @@ Feature: Browsing shipments from multiple channels
     @ui
     Scenario: Browsing shipments and their states from multiple channels
         When I browse shipments
-        And I should see two shipments in the list
-        Then the shipment of the "#00000001" order should be "shipped" for "donald@duck.com" in "united states" channel
-        And the shipment of the "#00000003" order should be "ready" for "iron@man.com" in "canada" channel
+        And I should see 2 shipments in the list
+        Then the shipment of the "#00000001" order should be "Shipped" for "donald@duck.com" in "United States" channel
+        And the shipment of the "#00000003" order should be "Ready" for "iron@man.com" in "Canada" channel

@@ -148,7 +148,7 @@ final class MainMenuBuilder
 
         $sales
             ->addChild('shipemnts', ['route' => 'sylius_admin_shipment_index'])
-            ->setLabel('sylius.ui.shipment')
+            ->setLabel('sylius.ui.shipments')
             ->setLabelAttribute('icon', 'truck')
         ;
     }
