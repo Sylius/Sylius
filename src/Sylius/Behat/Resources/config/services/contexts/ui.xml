@@ -178,6 +178,7 @@
         <service id="sylius.behat.context.ui.admin.managing_promotions" class="Sylius\Behat\Context\Ui\Admin\ManagingPromotionsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.promotion.index" />
+            <argument type="service" id="sylius.behat.page.admin.promotion_coupon.index"/>
             <argument type="service" id="sylius.behat.page.admin.promotion.create" />
             <argument type="service" id="sylius.behat.page.admin.promotion.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />

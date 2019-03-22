@@ -20,10 +20,11 @@ final class ManageCouponsMenuBuilderEvent extends MenuBuilderEvent
         PromotionInterface $promotion
     ) {
         parent::__construct($factory, $menu);
+
         $this->promotion = $promotion;
     }
 
-    public function getCoupon(): PromotionInterface
+    public function getPromotion(): PromotionInterface
     {
         return $this->promotion;
     }
