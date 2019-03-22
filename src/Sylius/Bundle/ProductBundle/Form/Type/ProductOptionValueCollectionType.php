@@ -81,7 +81,7 @@ final class ProductOptionValueCollectionType extends AbstractType
     {
         Assert::true(
             isset($options['options']) && is_iterable($options['options']),
-            'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Variation\Model\OptionInterface" must be passed to collection'
+            'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Product\Model\ProductOptionInterface" must be passed to collection'
         );
     }
 }
