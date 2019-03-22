@@ -22,6 +22,29 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getElement('filter_state')->selectOption($shipmentState);
     }
 
+    public function shipShipmentWithSpecificOrderNumber(string $orderNumber): void
+    {
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
+
+        $row = $tableAccessor->getRowWithFields($table, ['number' => $orderNumber]);
+
+        $row = $tableAccessor->getRowWithFields($table, ['number' =>$orderNumber]);
+
+        $field = $tableAccessor->getFieldFromRow($table, $row, 'actions');
+        $field->pressButton('Ship');
+    }
+    
+    public function getRowWithSpecificOrderNumber(string $orderNumber): string
+    {
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
+        $row = $tableAccessor->getRowWithFields($table, ['number' =>$orderNumber]);
+        $field = $tableAccessor->getFieldFromRow($table, $row, 'state');
+
+        return $field->getText();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
