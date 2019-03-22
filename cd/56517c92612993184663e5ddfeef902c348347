@@ -1,0 +1,26 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-03-22T10:16:08Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-17"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-03-22T10:17:18Z
+
+I'm afraid 1.3 is the lowest branch we can merge this fix, due to our maintenance policy.
+
+Thanks Dimitri for the contribution!
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-03-22T11:44:32Z
+
+Thank you, Dmitri! :1st_place_medal:
