@@ -100,4 +100,21 @@ final class ManagingShipmentsContext implements Context
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
     }
+
+    /**
+     * @Then I ship shipment order :orderNumber
+     */
+    public function iShipShipmentOrder(string $orderNumber): void
+    {
+        $this->indexPage->shipShipmentWithSpecificOrderNumber($orderNumber);
+    }
+
+    /**
+     * @Given I should see order :orderNumber as :shippingState
+     */
+    public function iShouldSeeOrderAs(string $orderNumber, string $shippingState): void
+    {
+        $order = $this->indexPage->getRowWithSpecificOrderNumber($orderNumber);
+        Assert::same($shippingState, $order);
+    }
 }

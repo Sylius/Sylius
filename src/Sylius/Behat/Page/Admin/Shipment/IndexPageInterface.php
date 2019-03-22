@@ -18,4 +18,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 interface IndexPageInterface extends BaseIndexPageInterface
 {
     public function chooseStateToFilter(string $shipmentState): void;
+
+    public function shipShipmentWithSpecificOrderNumber(string $orderNumber): void;
+    public function getRowWithSpecificOrderNumber(string $orderNumber): string ;
 }
