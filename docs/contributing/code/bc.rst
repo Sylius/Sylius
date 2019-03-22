@@ -81,7 +81,7 @@ relevant classes, methods, properties:
      * @deprecated Deprecated since version 1.X. Use XXX instead.
      */
 
-The deprecation message should indicate the version when the class/method was
+The deprecation message should indicate the version in which the class/method was
 deprecated and how the feature was replaced (whenever possible).
 
 A PHP ``\E_USER_DEPRECATED`` error must also be triggered to help people with
