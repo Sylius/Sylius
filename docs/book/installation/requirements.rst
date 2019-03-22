@@ -29,7 +29,7 @@ PHP required modules and configuration
 **PHP version**:
 
 +---------------+-----------------------+
-| PHP           | ^7.1                  |
+| PHP           | ^7.2                  |
 +---------------+-----------------------+
 
 **PHP extensions**:
@@ -62,21 +62,21 @@ Database
 By default, the database connection is pre-configured to work with a following MySQL configuration:
 
 +---------------+-----------------------+
-| MySQL         | 5.x                   |
+| MySQL         | 5.7+, 8.0+            |
 +---------------+-----------------------+
 
 .. note::
 
-    Of course you may use any other RDBMS for instance PostgreSQL.
+    You might also use any other RDBMS (like PostgreSQL), but our database migrations support MySQL only.
 
 Access rights
 -------------
 
 Most of the application folders and files require only read access, but a few folders need also the write access for the Apache/Nginx user:
 
-* var/cache
-* var/log
-* public/media
+* ``var/cache``
+* ``var/log``
+* ``public/media``
 
 You can read how to set these permissions in the `Symfony - setting up permissions <http://symfony.com/doc/current/setup/file_permissions.html>`_ section.
 
