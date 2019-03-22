@@ -23,7 +23,7 @@ final class ManagingShipmentsContext implements Context
     /**
      * @When I browse shipments
      */
-    public function BrowseShipments(): void
+    public function iBrowseShipments(): void
     {
         $this->indexPage->open();
     }
@@ -32,37 +32,30 @@ final class ManagingShipmentsContext implements Context
      * @Then the shipment of the :orderNumber order should be :shippingState for :customer
      * @Then the shipment of the :orderNumber order should be :shippingState for :customer in :channel channel
      */
-    public function ShipmentOfOrderShouldBe(
+    public function shipmentOfOrderShouldBe(
         string $orderNumber,
         string $shippingState,
         CustomerInterface $customer,
         Channel $channel = null
-    ): void{
+    ): void {
+        $parameters = [
+            'number' => $orderNumber,
+            'state' => $shippingState,
+            'customer' => $customer->getEmail(),
+        ];
 
-        $parameters =
-            [
-                'number' => $orderNumber,
-                'state' => $shippingState,
-                'customer' => $customer->getEmail()
-            ];
-
-        if($channel !== null){
-            $parameters =  ['channel' => $channel->getCode()];
+        if ($channel !== null) {
+            $parameters = ['channel' => $channel->getCode()];
         }
 
         Assert::true($this->indexPage->isSingleResourceOnPage($parameters));
     }
 
     /**
-     * @Then I should see two shipments in the list
+     * @Then I should see :count shipments in the list
      */
-    public function ShouldSeeAllShipmentsInList(): void
+    public function iShouldSeeCountShipmentsInList(int $count): void
     {
-        $this->checkAndCompareQuantityOfItemsOnPage(2);
-    }
-
-    private function checkAndCompareQuantityOfItemsOnPage(int $expectedValue): void
-    {
-        Assert::same($expectedValue, $this->indexPage->countItems());
+        Assert::same($count, $this->indexPage->countItems());
     }
 }
