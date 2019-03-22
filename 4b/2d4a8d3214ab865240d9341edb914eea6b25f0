@@ -1,0 +1,33 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-03-21T08:23:26Z
+
+I'm not sure is it a BC break or not... What if somebody overwrites one of these files in their application? I suppose it would fail 😕 cc @pamil
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2019-03-21T09:26:26Z
+
+@Zales0123 Those are config files and cannot override them like templates. 😄
+But it will break the imports.
+Technically it's a BC break, but it's very unlikely someone will import those 2 files separately, usually the `@SyliusAdminApiBundle/Resources/config/app/config.yml` is imported.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-03-21T09:35:07Z
+
+@vvasiloi indeed, my imagination got out of control xD To prevent this not-so-likely-but-possible BC breaks, we could leave `@SyliusAdminApiBundle/Resources/config/grids/payments.yml` and `@SyliusAdminApiBundle/Resources/config/grids/shipments.yml` and import the correct files in them 💃 We should also type some comment in them, something like `This file has been replaced by <new file name> and will be removed in Sylius 2.0`.
+
+I don't know, maybe it's too protective for such a simple case, but if we can avoid potential BC breaks with a little amount of work, I would do that ⚔️ still cc @pamil
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-03-22T10:24:58Z
+
+If it were files referenced in Sylius-Standard or PluginSkeleton, I'd go with the deprecation path, similar to what we've done for the config files in `app/`. Since they're not, I think we can safely merge it.
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-03-22T10:34:50Z
+
+Thanks, Adam! :tada:
