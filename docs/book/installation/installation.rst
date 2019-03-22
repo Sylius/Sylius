@@ -22,7 +22,7 @@ and have `Composer`_ installed.
 Initiating A New Sylius Project
 -------------------------------
 
-Create your new project by running:
+To begin creating your new project, run this command:
 
 .. code-block:: bash
 
@@ -32,7 +32,7 @@ Create your new project by running:
 
     Make sure to use PHP ^7.2. Using an older PHP version will result in installing an older version of Sylius.
 
-This will create a new Symfony project in the ``acme`` directory. Move to the project directory next:
+This will create a new Symfony project in the ``acme`` directory. Next, move to the project directory:
 
 .. code-block:: bash
 
@@ -51,7 +51,7 @@ After everything is in place, run the following command to install Sylius:
 
 .. code-block:: bash
 
-    $ bin/console sylius:install
+    $ php bin/console sylius:install
 
 .. warning::
 
@@ -65,7 +65,7 @@ Installing assets
 
 In order to see a fully functional frontend you will need to install its assets.
 
-**Sylius** uses `Gulp`_ to build fronted assets using `Yarn`_ as a JavaScript package manager.
+**Sylius** uses `Gulp`_ to build frontend assets using `Yarn`_ as a JavaScript package manager.
 
 Having Yarn installed, go to your project directory to install the dependencies:
 
@@ -89,7 +89,7 @@ command and then accessing ``http://127.0.0.1:8000`` in your web browser to see 
 
     The localhost's 8000 port may be already occupied by some other process.
     If that happens, please try using a different port - ``php bin/console server:start 127.0.0.1:8081``.
-    Want to know more about using a built-in server, see `here <http://symfony.com/doc/current/cookbook/web_server/built_in.html>`_.
+    Get to know more about using a built-in server `here <http://symfony.com/doc/current/cookbook/web_server/built_in.html>`_.
 
 You can log to the administrator panel located at ``/admin`` with the credentials you have provided during the installation process.
 

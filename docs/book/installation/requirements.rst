@@ -67,7 +67,7 @@ By default, the database connection is pre-configured to work with a following M
 
 .. note::
 
-    You might also use any other RDBMS (like PostgreSQL), but our database mirations support MySQL only.
+    You might also use any other RDBMS (like PostgreSQL), but our database migrations support MySQL only.
 
 Access rights
 -------------
