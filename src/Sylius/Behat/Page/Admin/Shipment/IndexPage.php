@@ -34,7 +34,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $field = $tableAccessor->getFieldFromRow($table, $row, 'actions');
         $field->pressButton('Ship');
     }
-    
+
     public function getRowWithSpecificOrderNumber(string $orderNumber): string
     {
         $tableAccessor = $this->getTableAccessor();
