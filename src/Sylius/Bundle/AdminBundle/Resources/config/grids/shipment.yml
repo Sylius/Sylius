@@ -42,3 +42,17 @@ sylius_grid:
                         choices:
                             sylius.ui.ready: Ready
                             sylius.ui.shipped: Shipped
+            actions:
+                item:
+                    ship:
+                        type: apply_transition
+                        label: sylius.ui.ship
+                        icon: ship
+                        options:
+                            link:
+                                route: sylius_admin_shipment_ship
+                                parameters:
+                                    id: resource.id
+                            class: green
+                            transition: ship
+                            graph: sylius_shipment

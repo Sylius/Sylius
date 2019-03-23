@@ -12,3 +12,16 @@ sylius_admin_shipment:
             index:
                 icon: truck
     type: sylius.resource
+
+sylius_admin_shipment_ship:
+    path: /shipments/{id}/ship
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.shipment:applyStateMachineTransitionAction
+        _sylius:
+            permission: true
+            state_machine:
+                graph: sylius_shipment
+                transition: ship
+            redirect: referer
+            flash: sylius.shipment.ship
