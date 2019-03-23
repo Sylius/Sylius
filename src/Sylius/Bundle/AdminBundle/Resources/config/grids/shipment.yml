@@ -47,12 +47,12 @@ sylius_grid:
                     ship:
                         type: apply_transition
                         label: sylius.ui.ship
-                        icon: ship
+                        icon: plane
                         options:
                             link:
                                 route: sylius_admin_shipment_ship
                                 parameters:
                                     id: resource.id
-                            class: green
+                            class: teal
                             transition: ship
                             graph: sylius_shipment

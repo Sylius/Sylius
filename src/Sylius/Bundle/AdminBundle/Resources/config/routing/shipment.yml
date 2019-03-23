@@ -24,4 +24,4 @@ sylius_admin_shipment_ship:
                 graph: sylius_shipment
                 transition: ship
             redirect: referer
-            flash: sylius.shipment.ship
+            flash: sylius.shipment.shipped

@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Shipment\IndexPageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
@@ -24,9 +26,13 @@ final class ManagingShipmentsContext implements Context
     /** @var IndexPageInterface */
     private $indexPage;
 
-    public function __construct(IndexPageInterface $indexPage)
+    /** @var NotificationCheckerInterface */
+    private $notificationChecker;
+
+    public function __construct(IndexPageInterface $indexPage, NotificationCheckerInterface $notificationChecker)
     {
         $this->indexPage = $indexPage;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -102,19 +108,26 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @Then I ship shipment order :orderNumber
+     * @When I ship the shipment of order :orderNumber
      */
-    public function iShipShipmentOrder(string $orderNumber): void
+    public function iShipShipmentOfOrder(string $orderNumber): void
     {
-        $this->indexPage->shipShipmentWithSpecificOrderNumber($orderNumber);
+        $this->indexPage->shipShipmentOfOrderWithNumber($orderNumber);
     }
 
     /**
-     * @Given I should see order :orderNumber as :shippingState
+     * @Then I should see the shipment of order :orderNumber as :shippingState
      */
-    public function iShouldSeeOrderAs(string $orderNumber, string $shippingState): void
+    public function iShouldSeeTheShipmentOfOrderAs(string $orderNumber, string $shippingState): void
     {
-        $order = $this->indexPage->getRowWithSpecificOrderNumber($orderNumber);
-        Assert::same($shippingState, $order);
+        Assert::same($shippingState, $this->indexPage->getShipmentStatusByOrderNumber($orderNumber));
+    }
+
+    /**
+     * @Then I should be notified that the shipment has been successfully shipped
+     */
+    public function iShouldBeNotifiedThatTheShipmentHasBeenSuccessfullyShipped(): void
+    {
+        $this->notificationChecker->checkNotification('Shipment has been successfully shipped.', NotificationType::success());
     }
 }
