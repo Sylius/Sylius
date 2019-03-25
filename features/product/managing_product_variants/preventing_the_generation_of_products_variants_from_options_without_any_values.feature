@@ -1,6 +1,6 @@
 @managing_product_variants
-Feature:Preventing the generation of product variants from options without any values
-    In order to not be able to generate variants without any options values available
+Feature: Preventing the generation of product variants from options without any values
+    In order to prevented from invalid variant generation
     As an Administrator
     I want to not be able to generate variants without any option values
 
@@ -11,7 +11,7 @@ Feature:Preventing the generation of product variants from options without any v
         And I am logged in as an administrator
 
     @ui
-    Scenario: Generating a product variant for product without options values
+    Scenario: Trying to generate a product variant for a product without options values
         When I want to generate new variants for this product
-        Then I should be notified that it has been impossible generate
+        Then It has been impossible to generate
         And I should not be able to generate any variants

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Resource\Exception\VariantWithNoOptionsValuesException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -54,7 +55,7 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
 
         try{
             $this->generator->generate($product);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (VariantWithNoOptionsValuesException $exception) {
             $this->session->getFlashBag()->add('error', $exception->getMessage());
         }
     }

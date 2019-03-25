@@ -17,6 +17,7 @@ use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
 use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Resource\Exception\VariantWithNoOptionsValuesException;
 use Webmozart\Assert\Assert;
 
 final class ProductVariantGenerator implements ProductVariantGeneratorInterface
@@ -57,7 +58,7 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
         }
 
         if (empty($optionSet)) {
-            throw new \InvalidArgumentException('Cannot generate variants for a product without options values');
+            throw new VariantWithNoOptionsValuesException();
         }
 
         $permutations = $this->setBuilder->build($optionSet);

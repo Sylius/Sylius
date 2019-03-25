@@ -29,5 +29,5 @@ interface GeneratePageInterface extends SymfonyPageInterface
 
     public function getPricesValidationMessage(int $position): string;
 
-    public function isPossibleToGenerate(): bool;
+    public function isGenerationPossible(): bool;
 }

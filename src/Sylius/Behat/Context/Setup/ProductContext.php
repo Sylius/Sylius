@@ -505,7 +505,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasOptionWithValues(ProductInterface $product, $optionName, ...$values): void
     {
-        $this->addOptionAndVariantIfExist($product, $optionName, $values);
+        $this->addOptionToProduct($product, $optionName, $values);
     }
 
     /**
@@ -513,7 +513,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasAnOptionWithoutAnyValues(ProductInterface $product, string $optionName): void
     {
-        $this->addOptionAndVariantIfExist($product, $optionName, []);
+        $this->addOptionToProduct($product, $optionName, []);
     }
 
     /**
@@ -915,7 +915,7 @@ final class ProductContext implements Context
         return $channelPricing;
     }
 
-    private function addOptionAndVariantIfExist(ProductInterface $product, string $optionName, array $values): void
+    private function addOptionToProduct(ProductInterface $product, string $optionName, array $values): void
     {
         /** @var ProductOptionInterface $option */
         $option = $this->productOptionFactory->createNew();

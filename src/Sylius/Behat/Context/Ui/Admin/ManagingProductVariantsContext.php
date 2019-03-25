@@ -379,9 +379,9 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been impossible generate
+     * @Then It has been impossible to generate
      */
-    public function iShouldBeNotifiedThatItHasBeenImpossibleGenerate(): void
+    public function itHasBeenImpossibleToGenerate(): void
     {
         $this->notificationChecker->checkNotification('Cannot generate variants for a product without options values', NotificationType::failure());
     }
@@ -474,11 +474,11 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Given /^I should not be able to generate any variants$/
+     * @Then /^I should not be able to generate any variants$/
      */
     public function iShouldNotBeAbleToGenerateAnyVariantsToThisProduct()
     {
-        Assert::false($this->generatePage->isPossibleToGenerate());
+        Assert::false($this->generatePage->isGenerationPossible());
     }
 
     /**
