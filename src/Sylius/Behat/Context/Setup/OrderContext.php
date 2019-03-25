@@ -102,10 +102,11 @@ final class OrderContext implements Context
      * @Given /^there is (?:a|another) (customer "[^"]+") that placed (an order "[^"]+")$/
      * @Given a customer :customer placed an order :orderNumber
      * @Given the customer :customer has already placed an order :orderNumber
+     * @Given there is a customer :customer that placed an order :orderNumber in channel :channel
      */
-    public function thereIsCustomerThatPlacedOrder(CustomerInterface $customer, $orderNumber = null)
+    public function thereIsCustomerThatPlacedOrder(CustomerInterface $customer, $orderNumber = null, $channel = null)
     {
-        $order = $this->createOrder($customer, $orderNumber);
+        $order = $this->createOrder($customer, $orderNumber, $channel);
 
         $this->sharedStorage->set('order', $order);
 
