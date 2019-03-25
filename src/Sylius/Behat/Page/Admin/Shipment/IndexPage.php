@@ -49,7 +49,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $table = $this->getElement('table');
         $row = $tableAccessor->getRowWithFields($table, ['number' =>$orderNumber]);
         $field = $tableAccessor->getFieldFromRow($table, $row, 'actions');
-        $field->pressButton('details');
+        $field->clickLink('Details');
     }
 
     protected function getDefinedElements(): array
