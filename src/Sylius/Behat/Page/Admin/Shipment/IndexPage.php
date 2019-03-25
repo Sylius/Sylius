@@ -43,6 +43,15 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return $field = $tableAccessor->getFieldFromRow($table, $row, $fieldName);
     }
 
+    public function showOrderPageRelatedWithShipment(string $orderNumber): void
+    {
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
+        $row = $tableAccessor->getRowWithFields($table, ['number' =>$orderNumber]);
+        $field = $tableAccessor->getFieldFromRow($table, $row, 'actions');
+        $field->pressButton('details');
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

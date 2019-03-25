@@ -22,4 +22,6 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function shipShipmentOfOrderWithNumber(string $orderNumber): void;
 
     public function getShipmentStatusByOrderNumber(string $orderNumber): string;
+    
+    public function showOrderPageRelatedWithShipment(string $orderNumber): void;
 }

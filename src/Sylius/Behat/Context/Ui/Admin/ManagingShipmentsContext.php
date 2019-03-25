@@ -20,6 +20,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
+use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 
 final class ManagingShipmentsContext implements Context
 {
@@ -29,10 +30,14 @@ final class ManagingShipmentsContext implements Context
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    public function __construct(IndexPageInterface $indexPage, NotificationCheckerInterface $notificationChecker)
+    /** @var ShowPageInterface */
+    private $orderShowPage;
+
+    public function __construct(IndexPageInterface $indexPage, NotificationCheckerInterface $notificationChecker, ShowPageInterface $orderShowPage)
     {
         $this->indexPage = $indexPage;
         $this->notificationChecker = $notificationChecker;
+        $this->orderShowPage = $orderShowPage;
     }
 
     /**
@@ -129,5 +134,21 @@ final class ManagingShipmentsContext implements Context
     public function iShouldBeNotifiedThatTheShipmentHasBeenSuccessfullyShipped(): void
     {
         $this->notificationChecker->checkNotification('Shipment has been successfully shipped.', NotificationType::success());
+    }
+
+    /**
+     * @Given I display details of the order number :orderNumber
+     */
+    public function iDisplayDetailsOfTheOrderNumber(string $orderNumber): void
+    {
+        $this->indexPage->showOrderPageRelatedWithShipment($orderNumber);
+    }
+
+    /**
+     * @Then I should see order page with details of order :order
+     */
+    public function iShouldSeeOrderPageWithDetailsOfOrder(string $order): void
+    {
+        Assert::true($this->orderShowPage->isOpen(['id' => $order->getId()]));
     }
 }
