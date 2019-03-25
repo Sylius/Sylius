@@ -23,6 +23,11 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getElement('filter_state')->selectOption($shipmentState);
     }
 
+    public function chooseChannelFilter(string $channelName): void
+    {
+        $this->getElement('filter_channel')->selectOption($channelName);
+    }
+
     public function isShipmentWithOrderNumberInPosition(string $orderNumber, int $position): bool
     {
         $result = $this->getElement('shipment_in_given_position', [
