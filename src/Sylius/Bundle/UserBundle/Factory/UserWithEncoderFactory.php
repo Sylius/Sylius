@@ -15,6 +15,7 @@ namespace Sylius\Bundle\UserBundle\Factory;
 
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Webmozart\Assert\Assert;
 
 final class UserWithEncoderFactory implements FactoryInterface
 {
@@ -34,6 +35,7 @@ final class UserWithEncoderFactory implements FactoryInterface
     {
         /** @var UserInterface $user */
         $user = $this->decoratedUserFactory->createNew();
+        Assert::isInstanceOf($user, UserInterface::class);
 
         $user->setEncoderName($this->encoderName);
 
