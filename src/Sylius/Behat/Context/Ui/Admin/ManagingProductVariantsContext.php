@@ -379,14 +379,6 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then It has been impossible to generate
-     */
-    public function itHasBeenImpossibleToGenerate(): void
-    {
-        $this->notificationChecker->checkNotification('Cannot generate variants for a product without options values', NotificationType::failure());
-    }
-
-    /**
      * @When I save my changes
      * @When I try to save my changes
      */
@@ -413,14 +405,6 @@ final class ManagingProductVariantsContext implements Context
         $this->iWantToModifyAProduct($productVariant);
 
         Assert::true($this->updatePage->isTracked());
-    }
-
-    /**
-     * @When /^I want to generate new variants for (this product)$/
-     */
-    public function iWantToGenerateNewVariantsForThisProduct(ProductInterface $product)
-    {
-        $this->generatePage->open(['productId' => $product->getId()]);
     }
 
     /**
@@ -474,9 +458,9 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then /^I should not be able to generate any variants$/
+     * @Then I should not be able to generate any variants
      */
-    public function iShouldNotBeAbleToGenerateAnyVariantsToThisProduct()
+    public function iShouldNotBeAbleToGenerateAnyVariants(): void
     {
         Assert::false($this->generatePage->isGenerationPossible());
     }
@@ -524,6 +508,23 @@ final class ManagingProductVariantsContext implements Context
             $this->updatePage->getValidationMessage('on_hand'),
             'On hand must be greater than the number of on hold units'
         );
+    }
+
+    /**
+     * @Then I should be notified that variants cannot be generated from options without any values
+     */
+    public function iShouldBeNotifiedThatVariantsCannotBeGeneratedFromOptionsWithoutAnyValues(): void
+    {
+        $this->notificationChecker->checkNotification('Cannot generate variants for a product without options values', NotificationType::failure());
+    }
+
+    /**
+     * @When /^I want to generate new variants for (this product)$/
+     * @When /^I try to generate new variants for (this product)$/
+     */
+    public function iTryToGenerateNewVariantsForThisProduct(ProductInterface $product): void
+    {
+        $this->generatePage->open(['productId' => $product->getId()]);
     }
 
     /**

@@ -53,7 +53,7 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
 
         Assert::isInstanceOf($product, ProductInterface::class);
 
-        try{
+        try {
             $this->generator->generate($product);
         } catch (VariantWithNoOptionsValuesException $exception) {
             $this->session->getFlashBag()->add('error', $exception->getMessage());
