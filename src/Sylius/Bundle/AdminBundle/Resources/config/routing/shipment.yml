@@ -25,3 +25,13 @@ sylius_admin_shipment_ship:
                 transition: ship
             redirect: referer
             flash: sylius.shipment.shipped
+
+sylius_admin_order_show:
+    path: /orders/{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/Order/show.html.twig"

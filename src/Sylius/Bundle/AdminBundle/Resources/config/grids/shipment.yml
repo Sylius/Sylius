@@ -56,3 +56,5 @@ sylius_grid:
                             class: teal
                             transition: ship
                             graph: sylius_shipment
+                    details:
+                        type: show
