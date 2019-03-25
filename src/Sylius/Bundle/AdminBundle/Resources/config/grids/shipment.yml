@@ -57,4 +57,11 @@ sylius_grid:
                             transition: ship
                             graph: sylius_shipment
                     details:
-                        type: show
+                        type: default
+                        label: sylius.ui.details
+                        icon: columns
+                        options:
+                            link:
+                                route: sylius_admin_order_show
+                                parameters:
+                                    id: resource.order.id
