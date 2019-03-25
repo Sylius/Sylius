@@ -19,6 +19,7 @@ use Sylius\Behat\Page\Admin\Shipment\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 
@@ -147,7 +148,7 @@ final class ManagingShipmentsContext implements Context
     /**
      * @Then I should see order page with details of order :order
      */
-    public function iShouldSeeOrderPageWithDetailsOfOrder(string $order): void
+    public function iShouldSeeOrderPageWithDetailsOfOrder(OrderInterface $order): void
     {
         Assert::true($this->orderShowPage->isOpen(['id' => $order->getId()]));
     }

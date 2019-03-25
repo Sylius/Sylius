@@ -31,5 +31,5 @@ Feature: Access shipment's order from the shipments index
     Scenario: Show order page related with shipment directly from shipments page
         When I browse shipments
         And I display details of the order number "#00000003"
-        Then I should see order page with details of order "#00000003"
+        Then I should see order page with details of order "00000003"
 
