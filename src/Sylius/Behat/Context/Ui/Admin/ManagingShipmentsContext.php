@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Shipment\IndexPageInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
@@ -57,5 +57,13 @@ final class ManagingShipmentsContext implements Context
     public function iShouldSeeCountShipmentsInList(int $count): void
     {
         Assert::same($count, $this->indexPage->countItems());
+    }
+
+    /**
+     * @Given /^I choose "([^"]*)" as a channel filter$/
+     */
+    public function iChooseAsAChannelFilter(string $channelName): void
+    {
+        $this->indexPage->chooseChannelFilter($channelName);
     }
 }
