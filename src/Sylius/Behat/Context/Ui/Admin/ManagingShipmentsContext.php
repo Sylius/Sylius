@@ -66,4 +66,12 @@ final class ManagingShipmentsContext implements Context
     {
         $this->indexPage->chooseChannelFilter($channelName);
     }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter()
+    {
+        $this->indexPage->filter();
+    }
 }
