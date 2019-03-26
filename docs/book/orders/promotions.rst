@@ -132,7 +132,7 @@ How to create an PromotionAction programmatically?
 In order to create a new PromotionAction we can use the dedicated `PromotionActionFactory <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/Factory/PromotionActionFactory.php>`_.
 
 It has special methods for creating all types of actions available by default.
-In the example below you can how to create a simple Fixed Discount action, that reduces the total of an order by 10$.
+In the example below you can see how to create a simple Fixed Discount action, that reduces the total of an order by 10$.
 
 .. code-block:: php
 
