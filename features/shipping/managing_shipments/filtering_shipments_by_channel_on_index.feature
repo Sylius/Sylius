@@ -1,4 +1,4 @@
-@managing_orders
+@managing_shipments
 Feature: Filtering shipments by channel on index
     In order to filter shipments by specyfic channel on index
     As an Administrator
