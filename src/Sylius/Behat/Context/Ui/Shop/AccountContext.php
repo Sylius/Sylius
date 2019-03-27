@@ -431,4 +431,12 @@ final class AccountContext implements Context
     {
         Assert::same($this->orderShowPage->getPaymentStatus(), $paymentStatus);
     }
+
+    /**
+     * @Then I should see its order's payment status as :orderPaymentState
+     */
+    public function iShouldSeeItsOrderSPaymentStatusAs(string $orderPaymentState): void
+    {
+        Assert::same($this->orderShowPage->getOrderPaymentStatus(), $orderPaymentState);
+    }
 }

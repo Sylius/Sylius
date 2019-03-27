@@ -27,3 +27,14 @@ Feature: Viewing payment status on the order show page
         Given the order "#00000666" is already paid
         When I view the summary of the order "#00000666"
         And I should see its payment status as "Completed"
+
+    @ui
+    Scenario: Seeing order's payment status before paying all payments
+        When I view the summary of the order "#00000666"
+        Then I should see its order's payment status as "Awaiting payment"
+
+    @ui
+    Scenario: Seeing order's payment status after paying all payments
+        Given the order "#00000666" is already paid
+        When I view the summary of the order "#00000666"
+        And I should see its order's payment status as "Paid"
