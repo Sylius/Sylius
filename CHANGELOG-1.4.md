@@ -1,5 +1,11 @@
 # CHANGELOG FOR `1.4.X`
 
+## v1.4.2 (2019-)
+
+#### Details
+
+- [#10116](https://github.com/Sylius/Sylius/issues/10116) Allow nullable shop billing data ([@Zales0123](https://github.com/Zales0123), [@pamil](https://github.com/pamil))
+
 ## v1.4.1 (2019-03-05)
 
 #### TL;DR
