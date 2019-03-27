@@ -34,6 +34,14 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     /**
      * {@inheritdoc}
      */
+    public function authorize()
+    {
+        $this->getDriver()->visit($this->findAuthorizeToken()->getTargetUrl() . '?token=EC-2d9EV13959UR209410U&PayerID=UX8WBNYWGBVMG');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function pay()
     {
         $this->getDriver()->visit($this->findCaptureToken()->getTargetUrl() . '?token=EC-2d9EV13959UR209410U&PayerID=UX8WBNYWGBVMG');
@@ -71,16 +79,36 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
      *
      * @throws \RuntimeException
      */
+    private function findAuthorizeToken()
+    {
+        return $this->findToken('authorize');
+    }
+
+    /**
+     * @return TokenInterface
+     *
+     * @throws \RuntimeException
+     */
     private function findCaptureToken()
+    {
+        return $this->findToken('capture');
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return TokenInterface
+     */
+    private function findToken($name)
     {
         $tokens = $this->securityTokenRepository->findAll();
 
         foreach ($tokens as $token) {
-            if (strpos($token->getTargetUrl(), 'capture')) {
+            if (strpos($token->getTargetUrl(), $name)) {
                 return $token;
             }
         }
 
-        throw new \RuntimeException('Cannot find capture token, check if you are after proper checkout steps');
+        throw new \RuntimeException(sprintf('Cannot find "%s" token, check if you are after proper checkout steps', $name));
     }
 }

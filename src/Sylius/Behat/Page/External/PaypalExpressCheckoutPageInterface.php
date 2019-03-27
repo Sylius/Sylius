@@ -23,6 +23,12 @@ interface PaypalExpressCheckoutPageInterface extends PageInterface
      * @throws UnsupportedDriverActionException
      * @throws DriverException
      */
+    public function authorize();
+    
+    /**
+     * @throws UnsupportedDriverActionException
+     * @throws DriverException
+     */
     public function pay();
 
     /**
