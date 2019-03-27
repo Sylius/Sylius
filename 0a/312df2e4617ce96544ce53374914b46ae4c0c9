@@ -1,0 +1,128 @@
+---------------------------------------------------------------------------
+
+by JaisDK at 2019-01-05T14:17:58Z
+
+https://github.com/Sylius/Sylius/pull/9701
+
+Bumped to 1.2
+
+---------------------------------------------------------------------------
+
+by JaisDK at 2019-01-25T15:15:21Z
+
+@Zales0123 What more is needed for this to be merged?
+
+---------------------------------------------------------------------------
+
+by JaisDK at 2019-02-08T14:19:24Z
+
+@Zales0123 Are we still waiting for @pamil for this one?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-02-15T14:25:45Z
+
+Did you used this code on your app? Is it usefull? Did you had to customize place, where this logic is called?
+
+At the moment, with not properly resolved authorize action I'm not sure about this change. The main problem is that it is happening instead of capture, after an order is placed. We are not able to anyhow test this behaviour with behat...
+
+@JaisDK I would love to help you, but without better investigation and deep rethinging of this, I will not agree on merging it. It will become the code, that we have to maintain.
+
+---------------------------------------------------------------------------
+
+by JaisDK at 2019-02-15T14:46:04Z
+
+Hi @lchrusciel,
+Yes we are using it and finding it quite useful since it is illegal to capture a payment before the shipment has been sent. I did not have to customize anything else that what you see in this PR since most of the authorize functionality is already in Sylius, as I've tried to explain earlier.
+To use authorize instead of capture you just have to include a 'use_authorize' in your gateway options. I am doing this with a hidden field in the GatewayConfig form, see https://github.com/Setono/SyliusQuickpayPlugin/blob/master/src/Form/Type/QuickPayGatewayConfigurationType.php#L75
+
+All this PR does is fix/finish existing functionality in Sylius.
+
+---------------------------------------------------------------------------
+
+by JaisDK at 2019-02-22T10:28:46Z
+
+Thanks :)
+
+---------------------------------------------------------------------------
+
+by JaisDK at 2019-02-22T19:37:51Z
+
+@lchrusciel I got it working using paypal instead of offline. While the payment state is not authorized in the end, the test will still go through the authorize code and will fail without the changes in this PR.
+
+---------------------------------------------------------------------------
+
+by JaisDK at 2019-02-26T12:13:44Z
+
+@lchrusciel have you had a chance to look at this?
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2019-03-11T11:34:31Z
+
+Hi @lchrusciel. Can this be merged? :)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-03-11T14:29:51Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "authorize-payment"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2019-03-12T07:08:59Z
+
+Hi @lchrusciel
+
+Jais says that he doesn't have anymore changes :)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-03-15T08:18:33Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "authorize-payment"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-03-15T08:19:43Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "authorize-payment"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-03-15T08:20:10Z
+
+Sorry, for messing with commits. I did it by accident.
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2019-03-27T08:47:27Z
+
+Can this be merged? CC @pamil @lchrusciel
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-03-27T15:26:40Z
+
+Thanks, Jais! :tada:
