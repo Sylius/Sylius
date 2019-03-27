@@ -29,11 +29,13 @@ final class EntityFilter implements FilterInterface
         $fields = $options['fields'] ?? [$name];
 
         $expressionBuilder = $dataSource->getExpressionBuilder();
+        $expressionBuilder->
 
         $expressions = [];
         foreach ($fields as $field) {
             $expressions[] = $expressionBuilder->equals($field, $data);
             //$exp2[] = $expressionBuilder->in('o.channel',$expressions);
+            //var_dump($name);
             //var_dump($data);
             //var_dump($exp2);
             //var_dump($field);
