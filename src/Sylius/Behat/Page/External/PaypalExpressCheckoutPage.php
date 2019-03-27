@@ -98,7 +98,6 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
      * @param string $name
      *
      * @return TokenInterface
-     *
      */
     private function findToken($name)
     {
