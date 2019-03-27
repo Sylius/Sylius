@@ -1,0 +1,18 @@
+{%
+    set viewOptions = {
+        authorized: { icon: "check", color: "orange" } ,
+        cancelled: { icon: "ban", color: "yellow" } ,
+        completed: { icon: "adjust", color: "green" } ,
+        failed: { icon: "ban", color: "red" } ,
+        new: { icon: "clock", color: "olive" } ,
+        processing: { icon: "check", color: "violet" } ,
+        refunded: { icon: "reply all", color: "purple" } ,
+    }
+%}
+
+{% set value = 'sylius.ui.' ~ state %}
+
+<span class="ui {{ viewOptions[state]['color'] }} label">
+    <i class="{{ viewOptions[state]['icon'] }} icon"></i>
+    {{ value|trans }}
+</span>
