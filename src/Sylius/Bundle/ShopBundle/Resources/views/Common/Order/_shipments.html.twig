@@ -1,11 +1,19 @@
+{% set state = order.shippingState %}
+{% if state != 'cart' %}
+    {% include "@SyliusShop/Common/Order/Label/ShipmentState/orderShipmentState.html.twig" %}
+{% endif %}
 {% for shipment in order.shipments %}
-    <div class="ui large icon message">
+    {% set state = shipment.state %}
+    {% set value = 'sylius.ui.' ~ state %}
+    <div class="ui small icon message">
         <i class="truck icon"></i>
         <div class="content">
             <div class="header" id="sylius-shipping-method">
                 {{ shipment.method }}
-                <p id="shipping_status">{{ ('sylius.ui.' ~ shipment.state)|trans }}</p>
             </div>
+            {% if state != 'cart' %}
+            <p id="shipment-status">{% include "@SyliusShop/Common/Order/Label/ShipmentState/singleShipmentState.html.twig" with { 'state': state } %}</p>
+            {% endif %}
         </div>
     </div>
 {% endfor %}
