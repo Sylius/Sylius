@@ -26,7 +26,6 @@ final class EntityFilter implements FilterInterface
         if (empty($data)) {
             return;
         }
-
         $fields = $options['fields'] ?? [$name];
 
         $expressionBuilder = $dataSource->getExpressionBuilder();
@@ -34,8 +33,16 @@ final class EntityFilter implements FilterInterface
         $expressions = [];
         foreach ($fields as $field) {
             $expressions[] = $expressionBuilder->equals($field, $data);
+            //$exp2[] = $expressionBuilder->in('o.channel',$expressions);
+            //var_dump($data);
+            //var_dump($exp2);
+            //var_dump($field);
         }
+        //var_dump($data);
+        //var_dump($expressions);
 
         $dataSource->restrict($expressionBuilder->orX(...$expressions));
+
+        //exit;
     }
 }

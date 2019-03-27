@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Shipment\IndexPageInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -15,9 +16,13 @@ final class ManagingShipmentsContext implements Context
     /** @var IndexPageInterface */
     private $indexPage;
 
-    public function __construct(IndexPageInterface $indexPage)
+    /** @var ShowPageInterface */
+    private $showPage;
+
+    public function __construct(IndexPageInterface $indexPage, ShowPageInterface $showPage)
     {
         $this->indexPage = $indexPage;
+        $this->showPage = $showPage;
     }
 
     /**
@@ -70,8 +75,32 @@ final class ManagingShipmentsContext implements Context
     /**
      * @When I filter
      */
-    public function iFilter()
+    public function iFilter(): void
     {
         $this->indexPage->filter();
+    }
+
+    /**
+     * @Then I should see :amount orders in the list
+     */
+    public function itShouldHaveAmountOfItems($amount): void
+    {
+        Assert::same($this->showPage->countItems(), (int) $amount);
+    }
+
+    /**
+     * @Then I should see an order with :orderNumber number
+     */
+    public function iShouldSeeOrderWithNumber($orderNumber): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
+    }
+
+    /**
+     * @Then I should not see an order with :orderNumber number
+     */
+    public function iShouldNotSeeOrderWithNumber($orderNumber): void
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
     }
 }

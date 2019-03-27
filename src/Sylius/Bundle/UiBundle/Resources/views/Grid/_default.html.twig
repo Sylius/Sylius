@@ -18,6 +18,7 @@
         <div class="content active">
             <form method="get" action="{{ path }}" class="ui loadable form">
                 <div class="two fields">
+                    {{ dump() }}
                     {% for filter in definition.enabledFilters|sort_by('position') if filter.enabled %}
                     {{ sylius_grid_render_filter(grid, filter) }}
 
