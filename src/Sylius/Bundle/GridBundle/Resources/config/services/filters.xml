@@ -53,5 +53,11 @@
         <service id="sylius.form.type.grid_filter.exists" class="Sylius\Bundle\GridBundle\Form\Type\Filter\ExistsFilterType">
             <tag name="form.type" />
         </service>
+        <service id="sylius.grid_filter.select" class="Sylius\Component\Grid\Filter\SelectFilter">
+            <tag name="sylius.grid_filter" type="select" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\SelectFilterType" />
+        </service>
+        <service id="sylius.form.type.grid_filter.select" class="Sylius\Bundle\GridBundle\Form\Type\Filter\SelectFilterType">
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
