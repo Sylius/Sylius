@@ -34,3 +34,11 @@ sylius_grid:
                         template: "@SyliusUi/Grid/Field/state.html.twig"
                         vars:
                             labels: "@SyliusAdmin/Order/Label/ShippingState"
+            filters:
+                state:
+                    type: select
+                    label: sylius.ui.state
+                    form_options:
+                        choices:
+                            sylius.ui.ready: Ready
+                            sylius.ui.shipped: Shipped
