@@ -111,6 +111,8 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
              ;
 
             $queryBuilder
+                ->addSelect('variant')
+                ->addSelect('channelPricing')
                 ->innerJoin('o.variants', 'variant')
                 ->innerJoin('variant.channelPricings', 'channelPricing')
                 ->andWhere('channelPricing.channelCode = :channelCode')
