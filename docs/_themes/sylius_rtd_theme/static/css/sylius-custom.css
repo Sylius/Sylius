@@ -261,3 +261,24 @@ div[class^='highlight'] {
   font-size: 11px;
   letter-spacing: 2px;
 }
+
+
+/* Plugin feature */
+.plugin-feature {
+  padding: 30px;
+  border: 1px dashed #1abb9c;
+  border-radius: 6px;
+}
+
+.plugin-feature::before {
+  content: 'PLUGIN FEATURE';
+  position: relative;
+  bottom: 42px;
+  right: 2px;
+  background: #1abb9c;
+  color: #fdf2f1;
+  padding: 4px 10px;
+  border-radius: 60px;
+  font-size: 11px;
+  letter-spacing: 2px;
+}

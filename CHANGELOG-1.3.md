@@ -1,5 +1,11 @@
 # CHANGELOG FOR `1.3.X`
 
+## v1.3.10 (2019-)
+
+#### Details
+
+- [#10278](https://github.com/Sylius/Sylius/pull/10278) Travis with mySQL 5.7 + product sorting fix ([@Zales0123](https://github.com/Zales0123), [@laSyntez](https://github.com/laSyntez))
+
 ## v1.3.9 (2019-03-05)
 
 - Extracted some packages from Sylius core ([#10182](https://github.com/Sylius/Sylius/issues/10182), [#10184](https://github.com/Sylius/Sylius/issues/10184), [#10188](https://github.com/Sylius/Sylius/issues/10188))

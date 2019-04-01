@@ -408,14 +408,6 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I want to generate new variants for (this product)$/
-     */
-    public function iWantToGenerateNewVariantsForThisProduct(ProductInterface $product)
-    {
-        $this->generatePage->open(['productId' => $product->getId()]);
-    }
-
-    /**
      * @When I generate it
      * @When I try to generate it
      */
@@ -466,6 +458,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then I should not be able to generate any variants
+     */
+    public function iShouldNotBeAbleToGenerateAnyVariants(): void
+    {
+        Assert::false($this->generatePage->isGenerationPossible());
+    }
+
+    /**
      * @When I set its shipping category as :shippingCategoryName
      */
     public function iSetItsShippingCategoryAs($shippingCategoryName)
@@ -508,6 +508,23 @@ final class ManagingProductVariantsContext implements Context
             $this->updatePage->getValidationMessage('on_hand'),
             'On hand must be greater than the number of on hold units'
         );
+    }
+
+    /**
+     * @Then I should be notified that variants cannot be generated from options without any values
+     */
+    public function iShouldBeNotifiedThatVariantsCannotBeGeneratedFromOptionsWithoutAnyValues(): void
+    {
+        $this->notificationChecker->checkNotification('Cannot generate variants for a product without options values', NotificationType::failure());
+    }
+
+    /**
+     * @When /^I want to generate new variants for (this product)$/
+     * @When /^I try to generate new variants for (this product)$/
+     */
+    public function iTryToGenerateNewVariantsForThisProduct(ProductInterface $product): void
+    {
+        $this->generatePage->open(['productId' => $product->getId()]);
     }
 
     /**

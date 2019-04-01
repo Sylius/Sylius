@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    product_variant:
+        cannot_generate_variants: 'Cannot generate variants for a product without options values.'

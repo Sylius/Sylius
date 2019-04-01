@@ -511,26 +511,17 @@ final class ProductContext implements Context
      * @Given /^(this product) has option "([^"]+)" with values "([^"]+)" and "([^"]+)"$/
      * @Given /^(this product) has option "([^"]+)" with values "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
-    public function thisProductHasOptionWithValues(ProductInterface $product, $optionName, ...$values)
+    public function thisProductHasOptionWithValues(ProductInterface $product, $optionName, ...$values): void
     {
-        /** @var ProductOptionInterface $option */
-        $option = $this->productOptionFactory->createNew();
+        $this->addOptionToProduct($product, $optionName, $values);
+    }
 
-        $option->setName($optionName);
-        $option->setCode(StringInflector::nameToUppercaseCode($optionName));
-
-        $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
-
-        foreach ($values as $key => $value) {
-            $optionValue = $this->addProductOption($option, $value, StringInflector::nameToUppercaseCode($value));
-            $this->sharedStorage->set(sprintf('%s_option_%s_value', $value, strtolower($optionName)), $optionValue);
-        }
-
-        $product->addOption($option);
-        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
-
-        $this->objectManager->persist($option);
-        $this->objectManager->flush();
+    /**
+     * @Given /^(this product) has an option "([^"]*)" without any values$/
+     */
+    public function thisProductHasAnOptionWithoutAnyValues(ProductInterface $product, string $optionName): void
+    {
+        $this->addOptionToProduct($product, $optionName, []);
     }
 
     /**
@@ -930,5 +921,27 @@ final class ProductContext implements Context
         $channelPricing->setChannelCode($channel->getCode());
 
         return $channelPricing;
+    }
+
+    private function addOptionToProduct(ProductInterface $product, string $optionName, array $values): void
+    {
+        /** @var ProductOptionInterface $option */
+        $option = $this->productOptionFactory->createNew();
+
+        $option->setName($optionName);
+        $option->setCode(StringInflector::nameToUppercaseCode($optionName));
+
+        $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
+
+        foreach ($values as $key => $value) {
+            $optionValue = $this->addProductOption($option, $value, StringInflector::nameToUppercaseCode($value));
+            $this->sharedStorage->set(sprintf('%s_option_%s_value', $value, strtolower($optionName)), $optionValue);
+        }
+
+        $product->addOption($option);
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
+
+        $this->objectManager->persist($option);
+        $this->objectManager->flush();
     }
 }
