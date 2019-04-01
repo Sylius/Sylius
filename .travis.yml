@@ -80,7 +80,7 @@ matrix:
                 apt:
                     packages:
                         - parallel
-        -   
+        -
             php: 7.2
             env:
                 - SYLIUS_SUITE="packages"
