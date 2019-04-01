@@ -38,7 +38,7 @@ This will create a new Symfony project in the ``acme`` directory. Next, move to 
 
     $ cd acme
 
-Sylius uses enviornment variables to configurethe connection with database and mailer services.
+Sylius uses environment variables to configure the connection with database and mailer services.
 You can look up the default values in ``.env`` file and customise them by creating ``.env.local`` with variables you want to override.
 For example, if you want to change your database name from the default ``sylius_%kernel.environment`` to ``my_custom_sylius_database``,
 the contents of that new file should look like the following snippet:

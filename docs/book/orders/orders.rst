@@ -124,7 +124,7 @@ Shipments of an Order
 ---------------------
 
 An **Order** in Sylius holds a collection of Shipments on it. Each shipment in that collection has its own shipping method and has its own state machine.
-This lets you to divide an order into several different shipments that have own shipping states (like sending physical objects via DHL and sending a link to downloadable files via e-mail).
+This lets you divide an order into several different shipments that have own shipping states (like sending physical objects via DHL and sending a link to downloadable files via e-mail).
 
 .. tip::
 

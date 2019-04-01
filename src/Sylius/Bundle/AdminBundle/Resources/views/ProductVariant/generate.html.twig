@@ -24,11 +24,10 @@
     {% include '@SyliusAdmin/ProductVariant/Generate/_form.html.twig' %}
     <div class="ui basic segment">
         <div class="ui buttons">
-            <button class="ui labeled icon primary button" type="submit"><i class="random icon"></i>{{- 'sylius.ui.generate'|trans -}}</button>
+            <button class="ui labeled icon primary button" type="submit" {% if form.variants.children is empty %}disabled{% endif %}><i class="random icon"></i>{{- 'sylius.ui.generate'|trans -}}</button>
             {% include '@SyliusUi/Form/Buttons/_cancel.html.twig' with {'path': path(configuration.getRouteName('index'), {'productId': product.id})} %}
         </div>
     </div>
-
     {{ sonata_block_render_event('sylius.admin.product_variant.generate.form', {'resource': resource}) }}
 </div>
 {{ form_row(form._token) }}
