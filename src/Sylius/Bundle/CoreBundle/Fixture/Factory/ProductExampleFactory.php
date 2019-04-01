@@ -165,6 +165,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             })
             ->setAllowedTypes('enabled', 'bool')
 
+            ->setDefault('slug', function (Options $options): string {
+                return $this->slugGenerator->generate($options['name']);
+            })
+
             ->setDefault('short_description', function (Options $options): string {
                 return $this->faker->paragraph;
             })
@@ -230,7 +234,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             $product->setFallbackLocale($localeCode);
 
             $product->setName($options['name']);
-            $product->setSlug($this->slugGenerator->generate($options['name']));
+            $product->setSlug($options['slug']);
             $product->setShortDescription($options['short_description']);
             $product->setDescription($options['description']);
         }
