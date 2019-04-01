@@ -1,10 +1,39 @@
 # CHANGELOG FOR `1.4.X`
 
-## v1.4.2 (2019-)
+## v1.4.2 (2019-04-01)
 
 #### Details
 
+- [#9902](https://github.com/Sylius/Sylius/issues/9902) [cs] remove unnecesary variables and if conditions ([@TomasVotruba](https://github.com/TomasVotruba), [@lchrusciel](https://github.com/lchrusciel))
 - [#10116](https://github.com/Sylius/Sylius/issues/10116) Allow nullable shop billing data ([@Zales0123](https://github.com/Zales0123), [@pamil](https://github.com/pamil))
+- [#10197](https://github.com/Sylius/Sylius/issues/10197) [CoreBundle] oauth user provider fix ([@kboduch](https://github.com/kboduch))
+- [#10205](https://github.com/Sylius/Sylius/issues/10205) [Docs] Remove misleading channel context docs ([@Zales0123](https://github.com/Zales0123))
+- [#10211](https://github.com/Sylius/Sylius/issues/10211) [Docs] Plugins section update ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#10213](https://github.com/Sylius/Sylius/issues/10213) Fix product form submit ([@kulczy](https://github.com/kulczy))
+- [#10214](https://github.com/Sylius/Sylius/issues/10214) Add behat/transliterator library ([@mkalkowski83](https://github.com/mkalkowski83))
+- [#10215](https://github.com/Sylius/Sylius/issues/10215) Fix Sylius Grid on smaller screens ([@kulczy](https://github.com/kulczy))
+- [#10220](https://github.com/Sylius/Sylius/issues/10220) [Docs] Refresh the BDD guide ([@pamil](https://github.com/pamil))
+- [#10221](https://github.com/Sylius/Sylius/issues/10221) [Docs] Refresh "Installation" section of the book ([@pamil](https://github.com/pamil))
+- [#10222](https://github.com/Sylius/Sylius/issues/10222) [Docs] Refresh "Contributing code" section ([@pamil](https://github.com/pamil), [@CoderMaggie](https://github.com/CoderMaggie))
+- [#10230](https://github.com/Sylius/Sylius/issues/10230) [Docs] Roadmap Link ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#10231](https://github.com/Sylius/Sylius/issues/10231) [Docs] Core Team ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#10232](https://github.com/Sylius/Sylius/issues/10232) Make PR template great again ([@Zales0123](https://github.com/Zales0123))
+- [#10237](https://github.com/Sylius/Sylius/issues/10237) Fixing incorrect location in documentation for turning off admin norifications ([@officialbalazs](https://github.com/officialbalazs))
+- [#10239](https://github.com/Sylius/Sylius/issues/10239) [Resource] [Grid] deprecation warning fixed for deprecated Resource drivers ([@doctorx32](https://github.com/doctorx32))
+- [#10242](https://github.com/Sylius/Sylius/issues/10242) Fix variant without options values generation ([@Tomanhez](https://github.com/Tomanhez))
+- [#10243](https://github.com/Sylius/Sylius/issues/10243) Taxonomy tree modified - 'go level up' moved to the end of tree ([@AdamKasp](https://github.com/AdamKasp))
+- [#10246](https://github.com/Sylius/Sylius/issues/10246) [Phpspec] Add missing specs on customer core model ([@loic425](https://github.com/loic425))
+- [#10247](https://github.com/Sylius/Sylius/issues/10247) Non consistent file names ([@AdamKasp](https://github.com/AdamKasp))
+- [#10254](https://github.com/Sylius/Sylius/issues/10254) Fix assertion's message for ProductOptionValueCollectionType ([@diimpp](https://github.com/diimpp))
+- [#10255](https://github.com/Sylius/Sylius/issues/10255) [HotFix] Conflict with Twig 2.7.3 that breaks themes bundle ([@Zales0123](https://github.com/Zales0123))
+- [#10256](https://github.com/Sylius/Sylius/issues/10256) Revert "[HotFix] Conflict with Twig 2.7.3 that breaks themes bundle" ([@pamil](https://github.com/pamil))
+- [#10259](https://github.com/Sylius/Sylius/issues/10259) [BuildFix] Ignore psalm annotations ([@Zales0123](https://github.com/Zales0123))
+- [#10263](https://github.com/Sylius/Sylius/issues/10263) Fix a grammar mistake ([@romankosiuh](https://github.com/romankosiuh))
+- [#10264](https://github.com/Sylius/Sylius/issues/10264) Added a missing word ([@romankosiuh](https://github.com/romankosiuh))
+- [#10265](https://github.com/Sylius/Sylius/issues/10265) Add plugin-feature docs style ([@kulczy](https://github.com/kulczy))
+- [#10270](https://github.com/Sylius/Sylius/issues/10270) Update installation.rst ([@GCalmels](https://github.com/GCalmels))
+- [#10278](https://github.com/Sylius/Sylius/issues/10278) Travis with mySQL 5.7 + product sorting fix ([@Zales0123](https://github.com/Zales0123), [@laSyntez](https://github.com/laSyntez))
+- [#10280](https://github.com/Sylius/Sylius/issues/10280) [Travis] Update mysql version to speed up builds ([@Zales0123](https://github.com/Zales0123))
 
 ## v1.4.1 (2019-03-05)
 
