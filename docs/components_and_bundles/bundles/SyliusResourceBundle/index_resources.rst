@@ -35,6 +35,7 @@ Just like for the **showAction**, you can override the default template and crit
         defaults:
             _controller: app.controller.book:indexAction
             _sylius:
+                filterable: true
                 criteria:
                     enabled: false
                 template: Book/disabled.html.twig
