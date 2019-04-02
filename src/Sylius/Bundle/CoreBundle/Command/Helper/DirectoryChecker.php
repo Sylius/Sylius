@@ -8,7 +8,7 @@ namespace Sylius\Bundle\CoreBundle\Command\Helper;
 use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class DirectoryChecker
+final class DirectoryChecker
 {
     /**
      * @var CommandDirectoryChecker

@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Command\Helper;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ProgressBarCreator
+final class ProgressBarCreator
 {
     public function create(OutputInterface $output, int $length = 10): ProgressBar
     {

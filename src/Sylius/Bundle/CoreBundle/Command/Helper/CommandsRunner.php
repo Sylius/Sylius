@@ -20,7 +20,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CommandsRunner
+final class CommandsRunner
 {
     /**
      * @var EntityManagerInterface
