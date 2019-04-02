@@ -68,14 +68,6 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function initialize(InputInterface $input, OutputInterface $output)
-    {
-        $this->commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $outputStyle = new SymfonyStyle($input, $output);
@@ -92,6 +84,7 @@ EOT
         $this->commandsRunner->run($commands, $input, $output, $this->getApplication());
         $outputStyle->newLine();
 
-        $this->commandExecutor->runCommand('sylius:install:sample-data', [], $output);
+        $commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
+        $commandExecutor->runCommand('sylius:install:sample-data', [], $output);
     }
 }
