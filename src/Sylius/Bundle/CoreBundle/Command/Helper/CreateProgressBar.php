@@ -18,13 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 trait CreateProgressBar
 {
-    /**
-     * @param OutputInterface $output
-     * @param int             $length
-     *
-     * @return ProgressBar
-     */
-    private function createProgressBar(OutputInterface $output, $length = 10)
+    private function createProgressBar(OutputInterface $output, int $length = 10): ProgressBar
     {
         $progress = new ProgressBar($output);
         $progress->setBarCharacter('<info>░</info>');

@@ -36,11 +36,6 @@ class CancelUnpaidOrdersCommand extends Command
      */
     private $orderManager;
 
-    /**
-     * @param string                            $orderExpirationPeriod
-     * @param UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
-     * @param ObjectManager                     $orderManager
-     */
     public function __construct(
         string $orderExpirationPeriod,
         UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater,

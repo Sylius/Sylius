@@ -70,15 +70,6 @@ final class SetupCommand extends Command
      */
     private $channelSetup;
 
-    /**
-     * @param ObjectManager           $adminUserManager
-     * @param FactoryInterface        $adminUserFactory
-     * @param UserRepositoryInterface $adminUserRepository
-     * @param ValidatorInterface      $validator
-     * @param CurrencySetupInterface  $currencySetup
-     * @param LocaleSetupInterface    $localeSetup
-     * @param ChannelSetupInterface   $channelSetup
-     */
     public function __construct(
         ObjectManager $adminUserManager,
         FactoryInterface $adminUserFactory,

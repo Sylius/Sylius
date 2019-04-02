@@ -63,10 +63,6 @@ final class InstallCommand extends Command
         ],
     ];
 
-    /**
-     * @param CommandDirectoryChecker $commandDirectoryChecker
-     * @param string                  $cacheDir
-     */
     public function __construct(CommandDirectoryChecker $commandDirectoryChecker, string $cacheDir)
     {
         $this->commandDirectoryChecker = $commandDirectoryChecker;

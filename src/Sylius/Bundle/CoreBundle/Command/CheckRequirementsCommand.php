@@ -28,9 +28,6 @@ final class CheckRequirementsCommand extends Command
      */
     private $requirementsChecker;
 
-    /**
-     * @param RequirementsCheckerInterface $requirementsChecker
-     */
     public function __construct(RequirementsCheckerInterface $requirementsChecker)
     {
         $this->requirementsChecker = $requirementsChecker;

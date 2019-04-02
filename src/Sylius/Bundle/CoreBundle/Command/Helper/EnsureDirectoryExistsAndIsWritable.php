@@ -28,21 +28,13 @@ trait EnsureDirectoryExistsAndIsWritable
      */
     private $commandName;
 
-    /**
-     * @param CommandDirectoryChecker $commandDirectoryChecker
-     * @param string                  $commandName
-     */
     public function __construct(CommandDirectoryChecker $commandDirectoryChecker, string $commandName)
     {
         $this->commandDirectoryChecker = $commandDirectoryChecker;
         $this->commandName = $commandName;
     }
 
-    /**
-     * @param string          $directory
-     * @param OutputInterface $output
-     */
-    private function ensureDirectoryExistsAndIsWritable($directory, OutputInterface $output)
+    private function ensureDirectoryExistsAndIsWritable(string $directory, OutputInterface $output): void
     {
         $checker = $this->commandDirectoryChecker;
         $checker->setCommandName($this->commandName);

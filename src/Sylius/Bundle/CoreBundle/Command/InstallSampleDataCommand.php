@@ -54,12 +54,6 @@ final class InstallSampleDataCommand extends Command
      */
     private $environment;
 
-    /**
-     * @param CommandDirectoryChecker $commandDirectoryChecker
-     * @param EntityManagerInterface  $entityManager
-     * @param string                  $publicDir
-     * @param string                  $environment
-     */
     public function __construct(CommandDirectoryChecker $commandDirectoryChecker, EntityManagerInterface $entityManager, string $publicDir, string $environment)
     {
         $this->commandDirectoryChecker = $commandDirectoryChecker;

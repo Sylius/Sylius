@@ -18,11 +18,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 trait RenderTable
 {
-    /**
-     * @param array           $headers
-     * @param array           $rows
-     * @param OutputInterface $output
-     */
     private function renderTable(array $headers, array $rows, OutputInterface $output)
     {
         $table = new Table($output);

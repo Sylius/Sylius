@@ -32,10 +32,6 @@ trait RunCommands
      */
     private $entityManager;
 
-    /**
-     * @param CommandExecutor        $commandExecutor
-     * @param EntityManagerInterface $entityManager
-     */
     public function __construct(CommandExecutor $commandExecutor, EntityManagerInterface $entityManager)
     {
         $this->commandExecutor = $commandExecutor;
@@ -43,10 +39,6 @@ trait RunCommands
     }
 
     /**
-     * @param array           $commands
-     * @param OutputInterface $output
-     * @param bool            $displayProgress
-     *
      * @throws \Exception
      */
     private function runCommands(array $commands, OutputInterface $output, bool $displayProgress = true): void

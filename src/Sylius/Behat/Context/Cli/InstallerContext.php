@@ -47,11 +47,6 @@ final class InstallerContext implements Context
         'confirmation' => 'pswd',
     ];
 
-    /**
-     * @param KernelInterface $kernel
-     * @param SetupCommand    $setupCommand
-     * @param InstallSampleDataCommand    $setupCommand
-     */
     public function __construct(
         KernelInterface $kernel,
         SetupCommand $setupCommand,

@@ -43,11 +43,6 @@ final class InstallDatabaseCommand extends Command
      */
     private $environment;
 
-    /**
-     * @param DatabaseSetupCommandsProviderInterface $databaseSetupCommandsProvider
-     * @param EntityManagerInterface                 $entityManager
-     * @param string                                 $environment
-     */
     public function __construct(
         DatabaseSetupCommandsProviderInterface $databaseSetupCommandsProvider,
         EntityManagerInterface $entityManager,
