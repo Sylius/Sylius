@@ -13,33 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Command\Helper\EnsureDirectoryExistsAndIsWritable;
-use Sylius\Bundle\CoreBundle\Command\Helper\RunCommands;
+use Sylius\Bundle\CoreBundle\Command\Helper\CommandsRunner;
+use Sylius\Bundle\CoreBundle\Command\Helper\DirectoryChecker;
 use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
-use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 final class InstallAssetsCommand extends Command
 {
-    use EnsureDirectoryExistsAndIsWritable {
-        EnsureDirectoryExistsAndIsWritable::__construct as private initializeEnsureDirectoryExistsAndIsWritable;
-    }
-    use RunCommands {
-        RunCommands::__construct as private initializeRunCommands;
-    }
+    /**
+     * @var DirectoryChecker
+     */
+    private $directoryChecker;
 
     /**
-     * @var CommandDirectoryChecker
+     * @var CommandsRunner
      */
-    private $commandDirectoryChecker;
-
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
+    private $commandsRunner;
 
     /**
      * @var string
@@ -51,20 +42,14 @@ final class InstallAssetsCommand extends Command
      */
     private $environment;
 
-    /**
-     * @param CommandDirectoryChecker $commandDirectoryChecker
-     * @param EntityManagerInterface  $entityManager
-     * @param string                  $publicDir
-     * @param string                  $environment
-     */
     public function __construct(
-        CommandDirectoryChecker $commandDirectoryChecker,
-        EntityManagerInterface $entityManager,
+        DirectoryChecker $directoryChecker,
+        CommandsRunner $commandsRunner,
         string $publicDir,
         string $environment
     ) {
-        $this->commandDirectoryChecker = $commandDirectoryChecker;
-        $this->entityManager = $entityManager;
+        $this->directoryChecker = $directoryChecker;
+        $this->commandsRunner = $commandsRunner;
         $this->publicDir = $publicDir;
         $this->environment = $environment;
 
@@ -89,17 +74,6 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function initialize(InputInterface $input, OutputInterface $output)
-    {
-        $commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
-
-        $this->initializeEnsureDirectoryExistsAndIsWritable($this->commandDirectoryChecker, $this->getName());
-        $this->initializeRunCommands($commandExecutor, $this->entityManager);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $output->writeln(sprintf(
@@ -108,8 +82,8 @@ EOT
         ));
 
         try {
-            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/assets/', $output);
-            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/bundles/', $output);
+            $this->directoryChecker->ensureDirectoryExistsAndIsWritable($this->publicDir . '/assets/', $output, $this->getName());
+            $this->directoryChecker->ensureDirectoryExistsAndIsWritable($this->publicDir . '/bundles/', $output, $this->getName());
         } catch (\RuntimeException $exception) {
             $output->writeln($exception->getMessage());
 
@@ -120,7 +94,7 @@ EOT
             'assets:install' => ['target' => $this->publicDir],
         ];
 
-        $this->runCommands($commands, $output);
+        $this->commandsRunner->run($commands, $input, $output, $this->getApplication());
 
         return null;
     }

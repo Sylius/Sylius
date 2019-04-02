@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Command\Helper\RunCommands;
+use Sylius\Bundle\CoreBundle\Command\Helper\CommandsRunner;
 use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
 use Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProviderInterface;
 use Symfony\Component\Console\Command\Command;
@@ -24,19 +23,15 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallDatabaseCommand extends Command
 {
-    use RunCommands {
-        __construct as private initializeRunCommands;
-    }
-
     /**
      * @var DatabaseSetupCommandsProviderInterface
      */
     private $databaseSetupCommandsProvider;
 
     /**
-     * @var EntityManagerInterface
+     * @var CommandsRunner
      */
-    private $entityManager;
+    private $commandsRunner;
 
     /**
      * @var string
@@ -45,11 +40,11 @@ final class InstallDatabaseCommand extends Command
 
     public function __construct(
         DatabaseSetupCommandsProviderInterface $databaseSetupCommandsProvider,
-        EntityManagerInterface $entityManager,
+        CommandsRunner $commandsRunner,
         string $environment
     ) {
         $this->databaseSetupCommandsProvider = $databaseSetupCommandsProvider;
-        $this->entityManager = $entityManager;
+        $this->commandsRunner = $commandsRunner;
         $this->environment = $environment;
 
         parent::__construct();
@@ -75,8 +70,7 @@ EOT
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
-        $this->initializeRunCommands($commandExecutor, $this->entityManager);
+        $this->commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
     }
 
     /**
@@ -95,7 +89,7 @@ EOT
             ->getCommands($input, $output, $this->getHelper('question'))
         ;
 
-        $this->runCommands($commands, $output);
+        $this->commandsRunner->run($commands, $input, $output, $this->getApplication());
         $outputStyle->newLine();
 
         $this->commandExecutor->runCommand('sylius:install:sample-data', [], $output);

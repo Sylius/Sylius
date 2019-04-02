@@ -16,9 +16,9 @@ namespace Sylius\Bundle\CoreBundle\Command\Helper;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 
-trait CreateProgressBar
+class ProgressBarCreator
 {
-    private function createProgressBar(OutputInterface $output, int $length = 10): ProgressBar
+    public function create(OutputInterface $output, int $length = 10): ProgressBar
     {
         $progress = new ProgressBar($output);
         $progress->setBarCharacter('<info>░</info>');

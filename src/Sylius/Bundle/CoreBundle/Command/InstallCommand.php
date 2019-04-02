@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
-use Sylius\Bundle\CoreBundle\Command\Helper\EnsureDirectoryExistsAndIsWritable;
-use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
+use Sylius\Bundle\CoreBundle\Command\Helper\DirectoryChecker;
 use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,14 +23,10 @@ use Symfony\Component\Process\Exception\RuntimeException;
 
 final class InstallCommand extends Command
 {
-    use EnsureDirectoryExistsAndIsWritable {
-        __construct as private initializeEnsureDirectoryExistsAndIsWritable;
-    }
-
     /**
-     * @var CommandDirectoryChecker
+     * @var DirectoryChecker
      */
-    private $commandDirectoryChecker;
+    private $directoryChecker;
 
     /**
      * @var string
@@ -63,9 +58,9 @@ final class InstallCommand extends Command
         ],
     ];
 
-    public function __construct(CommandDirectoryChecker $commandDirectoryChecker, string $cacheDir)
+    public function __construct(DirectoryChecker $directoryChecker, string $cacheDir)
     {
-        $this->commandDirectoryChecker = $commandDirectoryChecker;
+        $this->directoryChecker = $directoryChecker;
         $this->cacheDir = $cacheDir;
 
         parent::__construct();
@@ -92,8 +87,6 @@ EOT
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
-
-        $this->initializeEnsureDirectoryExistsAndIsWritable($this->commandDirectoryChecker, $this->getName());
     }
 
     /**
@@ -105,7 +98,7 @@ EOT
         $outputStyle->writeln('<info>Installing Sylius...</info>');
         $outputStyle->writeln($this->getSyliusLogo());
 
-        $this->ensureDirectoryExistsAndIsWritable($this->cacheDir, $output);
+        $this->directoryChecker->ensureDirectoryExistsAndIsWritable($this->cacheDir, $output, $this->getName());
 
         $errored = false;
         foreach ($this->commands as $step => $command) {

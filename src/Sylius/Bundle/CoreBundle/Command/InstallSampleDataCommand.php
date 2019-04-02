@@ -13,11 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Command\Helper\EnsureDirectoryExistsAndIsWritable;
-use Sylius\Bundle\CoreBundle\Command\Helper\RunCommands;
-use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
-use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
+use Sylius\Bundle\CoreBundle\Command\Helper\CommandsRunner;
+use Sylius\Bundle\CoreBundle\Command\Helper\DirectoryChecker;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -27,22 +24,15 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallSampleDataCommand extends Command
 {
-    use EnsureDirectoryExistsAndIsWritable {
-        EnsureDirectoryExistsAndIsWritable::__construct as private initializeEnsureDirectoryExistsAndIsWritable;
-    }
-    use RunCommands {
-        RunCommands::__construct as private initializeRunCommands;
-    }
+    /**
+     * @var DirectoryChecker
+     */
+    private $directoryChecker;
 
     /**
-     * @var CommandDirectoryChecker
+     * @var CommandsRunner
      */
-    private $commandDirectoryChecker;
-
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
+    private $commandsRunner;
 
     /**
      * @var string
@@ -54,10 +44,14 @@ final class InstallSampleDataCommand extends Command
      */
     private $environment;
 
-    public function __construct(CommandDirectoryChecker $commandDirectoryChecker, EntityManagerInterface $entityManager, string $publicDir, string $environment)
-    {
-        $this->commandDirectoryChecker = $commandDirectoryChecker;
-        $this->entityManager = $entityManager;
+    public function __construct(
+        DirectoryChecker $directoryChecker,
+        CommandsRunner $commandsRunner,
+        string $publicDir,
+        string $environment
+    ) {
+        $this->directoryChecker = $directoryChecker;
+        $this->commandsRunner = $commandsRunner;
         $this->publicDir = $publicDir;
         $this->environment = $environment;
 
@@ -77,17 +71,6 @@ The <info>%command.name%</info> command loads the sample data for Sylius.
 EOT
             )
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function initialize(InputInterface $input, OutputInterface $output)
-    {
-        $commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
-
-        $this->initializeEnsureDirectoryExistsAndIsWritable($this->commandDirectoryChecker, $this->getName());
-        $this->initializeRunCommands($commandExecutor, $this->entityManager);
     }
 
     /**
@@ -113,8 +96,8 @@ EOT
         }
 
         try {
-            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/media/', $output);
-            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/media/image/', $output);
+            $this->directoryChecker->ensureDirectoryExistsAndIsWritable($this->publicDir . '/media/', $output, $this->getName());
+            $this->directoryChecker->ensureDirectoryExistsAndIsWritable($this->publicDir . '/media/image/', $output, $this->getName());
         } catch (\RuntimeException $exception) {
             $outputStyle->writeln($exception->getMessage());
 
@@ -125,7 +108,7 @@ EOT
             'sylius:fixtures:load' => ['--no-interaction' => true],
         ];
 
-        $this->runCommands($commands, $output);
+        $this->commandsRunner->run($commands, $input, $output, $this->getApplication());
         $outputStyle->newLine(2);
 
         return null;
