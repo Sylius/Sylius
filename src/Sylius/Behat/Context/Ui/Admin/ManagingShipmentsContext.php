@@ -1,11 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Shipment\IndexPageInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
@@ -52,10 +61,43 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @Then I should see :count shipments in the list
+     * @When I choose :shipmentState as a shipment state
      */
-    public function iShouldSeeCountShipmentsInList(int $count): void
+    public function iChooseShipmentState(string $shipmentState): void
+    {
+        $this->indexPage->chooseStateToFilter($shipmentState);
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->indexPage->filter();
+    }
+
+    /**
+     * @Then I should see :count shipment(s) in the list
+     * @Then I should see a single shipment in the list
+     */
+    public function iShouldSeeCountShipmentsInList(int $count = 1): void
     {
         Assert::same($count, $this->indexPage->countItems());
+    }
+
+    /**
+     * @Then I should see a shipment of order :orderNumber
+     */
+    public function iShouldSeeShipmentWithOrderNumber(string $orderNumber): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
+    }
+
+    /**
+     * @Then I should not see a shipment of order :orderNumber
+     */
+    public function iShouldNotSeeShipmentWithOrderNumber(string $orderNumber): void
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
     }
 }
