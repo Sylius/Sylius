@@ -28,6 +28,9 @@ final class UserImpersonator implements UserImpersonatorInterface
     /** @var string */
     private $sessionTokenParameter;
 
+    /** @var string */
+    private $firewallContextName;
+
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
@@ -35,6 +38,7 @@ final class UserImpersonator implements UserImpersonatorInterface
     {
         $this->session = $session;
         $this->sessionTokenParameter = sprintf('_security_%s', $firewallContextName);
+        $this->firewallContextName = $firewallContextName;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -43,8 +47,7 @@ final class UserImpersonator implements UserImpersonatorInterface
      */
     public function impersonate(UserInterface $user): void
     {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), $this->sessionTokenParameter, $user->getRoles());
-
+        $token = new UsernamePasswordToken($user, $user->getPassword(), $this->firewallContextName, $user->getRoles());
         $this->session->set($this->sessionTokenParameter, serialize($token));
         $this->session->save();
 
