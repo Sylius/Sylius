@@ -41,11 +41,6 @@ As a result you will get the ``Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepo
 
     class ProductRepository extends BaseProductRepository
     {
-        /**
-         * @param int $limit
-         *
-         * @return array
-         */
         public function findByOnHand(int $limit = 8): array
         {
             return $this->createQueryBuilder('o')
@@ -67,29 +62,54 @@ As we are selecting Products we need to have a join to translations, because the
 We are sorting the results by the count of how many products are still available on hand, which is saved on the ``onHand`` field on the specific ``variant`` of each product.
 Then we are limiting the query to 8 by default, to get only 8 products that are low in stock.
 
-**2.** In order to use your repository you need to configure it in the ``config/_sylius.yaml``.
+**2.** In order to use your repository you need to configure it in the ``config/packages/_sylius.yaml``.
+As You see in ``_Sylius.yaml`` You already have basic configuration, now You just need add Yours repository and override resourceRepository
 
 .. code-block:: yaml
 
     sylius_product:
-        resources:
-            product:
+    resources:
+        product:
+            classes:
+                model: App\Entity\Product\Product
+                repository: App\Repository\ProductRepository # you need add yours repository to config file
+            translation:
                 classes:
-                    repository: App\Repository\ProductRepository
+                    model: App\Entity\Product\ProductTranslation
 
 **3.** After configuring the ``sylius.repository.product`` service has your ``findByOnHand()`` method available.
-You can form now on use your method in any **Controller**.
+You can form now on use your method in any **Controller**, or files which use ``sylius.repository.product``.
+For example you can configure new ``route``
+
+.. code-block:: yaml
+
+    app_admin_custom_product_index:
+    path: /admin/custom-products/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: '@SyliusShop/Product/_horizontalList.html.twig'
+            repository:
+                method: findAllByOnHand
+                arguments: [2]
+            criteria: false
+        paginate: false
+        limit: 100
+
+And use it in override mainpage:
 
 .. code-block:: php
 
-    <?php
+{% extends '@SyliusShop/layout.html.twig' %}
 
-    public function lowInStockAction()
-    {
-        $productRepository = $this->container->get('sylius.repository.product');
+{% block content %}
+    <h2 class="ui horizontal section divider header">
+        Clearance sale
+    </h2>
+    {{ render(url('app_admin_custom_product_index')) }}
+{% endblock %}
 
-        $lowInStock = $productRepository->findByOnHand();
-    }
 
 What happens while overriding Repositories?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
