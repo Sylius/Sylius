@@ -111,6 +111,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $paymentsPrice->getText();
     }
 
+    public function getPaymentStatus(): string
+    {
+        return $this->getElement('payment_status')->getText();
+    }
+
+    public function getOrderPaymentStatus(): string
+    {
+        return $this->getElement('order_payment_status')->getText();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -175,6 +185,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'shipping_address' => '#sylius-shipping-address',
             'number' => '#number',
             'order_items' => '#sylius-order',
+            'order_payment_status' => '#order-payment-status',
+            'payment_status' => '#payment-status',
             'payments' => '#sylius-payments',
             'product_price' => '#sylius-order td:nth-child(2)',
             'subtotal' => '#subtotal',
