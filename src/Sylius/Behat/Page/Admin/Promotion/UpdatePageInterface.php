@@ -42,4 +42,8 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function hasStartsAt(\DateTimeInterface $dateTime): bool;
 
     public function hasEndsAt(\DateTimeInterface $dateTime): bool;
+
+    public function isCouponManagementAvailable(): bool;
+
+    public function manageCoupons(): void;
 }

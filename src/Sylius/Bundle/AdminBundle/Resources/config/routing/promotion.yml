@@ -17,4 +17,5 @@ sylius_admin_promotion:
             update:
                 templates:
                     form: "@SyliusAdmin/Promotion/_form.html.twig"
+                    toolbar: "@SyliusAdmin/Promotion/_toolbar.html.twig"
     type: sylius.resource

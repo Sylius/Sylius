@@ -605,8 +605,9 @@ final class PromotionContext implements Context
 
     /**
      * @Given /^(it) is coupon based promotion$/
+     * @Given /^(it) is a coupon based promotion$/
      */
-    public function itIsCouponBasedPromotion(PromotionInterface $promotion)
+    public function itIsCouponBasedPromotion(PromotionInterface $promotion): void
     {
         $promotion->setCouponBased(true);
 
