@@ -1,0 +1,79 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-04-04T14:00:55Z
+
+something went wrong with the number of my comments, sorry :D
+
+PS. 1.3 should be targeted I suppose
+
+---------------------------------------------------------------------------
+
+by semin-lev at 2019-04-04T14:22:27Z
+
+> Shouldn't the same change be applied to https://github.com/Sylius/Sylius/blob/master/src/Sylius/Behat/Service/SecurityService.php#L41?
+
+No, this works. A session key should be with the prefix.
+
+> Also, can we change the configuration to see if it really works? There should be a feature for user impersonification.
+
+You can just set
+```
+security:
+    always_authenticate_before_granting: true
+```
+
+in config/packages/security.yaml file and try to impersonate any customer from the admin panel. Without this patch you get infinity redirect to /login, because security layer wants to re-authenticate token but can't find a provider and redirects the request to login page, but login page not showing to a user with existed token.. and everything goes for the second lap.
+
+---------------------------------------------------------------------------
+
+by semin-lev at 2019-04-04T14:33:00Z
+
+> PS. 1.3 should be targeted I suppose
+
+sorry for my wrong formed PR, unfortunately I don't work with github and open source often. Should I create the new one with correct target branch?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-04-05T08:36:01Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-1"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by semin-lev at 2019-04-05T08:39:00Z
+
+> The base of this pull-request was changed, you need fetch and reset your local branch
+> if you want to add new commits to this pull request. **Reset before you pull, else commits may become messed-up.**
+>
+> Unless you added new commits (to this branch) locally that you did not push yet,
+> execute `git fetch origin && git reset "patch-1"` to update your local branch.
+>
+> Feel free to ask for assistance when you get stuck 👍
+
+Got it. Thank you for your assistance!
+
+---------------------------------------------------------------------------
+
+by semin-lev at 2019-04-05T11:58:22Z
+
+> I'm wondering, can we have any test for such a behavior? cc @semin-lev @lchrusciel
+
+I'm not a good with Behat and BDD, but I'm think yes. Test user should be logged in to admin panel, next, impersonate any customer and go to the shop area. And of course
+```
+security:
+    always_authenticate_before_granting: true
+```
+must be set to true
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-04-05T12:07:03Z
+
+Thank you, Lev! :1st_place_medal:
