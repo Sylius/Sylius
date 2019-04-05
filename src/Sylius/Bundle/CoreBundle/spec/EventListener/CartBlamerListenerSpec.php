@@ -69,6 +69,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         $cartContext->getCart()->willReturn($cart);
         $userEvent->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
+        $cart->getCustomer()->willReturn(null);
         $cart->setCustomer($customer)->shouldBeCalled();
         $cartManager->persist($cart)->shouldBeCalled();
         $cartManager->flush()->shouldBeCalled();
@@ -88,6 +89,7 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
+        $cart->getCustomer()->willReturn(null);
         $cart->setCustomer($customer)->shouldBeCalled();
         $cartManager->persist($cart)->shouldBeCalled();
         $cartManager->flush()->shouldBeCalled();
@@ -126,6 +128,39 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
         $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn($user);
+        $this->onInteractiveLogin($interactiveLoginEvent);
+    }
+
+    function it_does_nothing_if_there_is_customer_already_assigned_to_cart_on_implicit_login(
+        CartContextInterface $cartContext,
+        UserEvent $userEvent,
+        OrderInterface $cart,
+        CustomerInterface $customer,
+        ShopUserInterface $user
+    ): void {
+        $userEvent->getUser()->willReturn($user);
+        $cartContext->getCart()->willReturn($cart);
+        $cart->getCustomer()->willReturn($customer);
+
+        $cart->setCustomer(Argument::any())->shouldNotBeCalled();
+        $this->onImplicitLogin($userEvent);
+    }
+
+    function it_does_nothing_if_there_is_customer_already_assigned_to_cart_on_interactive_login(
+        CartContextInterface $cartContext,
+        InteractiveLoginEvent $interactiveLoginEvent,
+        OrderInterface $cart,
+        CustomerInterface $customer,
+        TokenInterface $token,
+        ShopUserInterface $user
+    ): void {
+        $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
+        $token->getUser()->willReturn($user);
+        $cartContext->getCart()->willReturn($cart);
+        $cart->getCustomer()->willReturn($customer);
+
+        $cart->setCustomer(Argument::any())->shouldNotBeCalled();
+
         $this->onInteractiveLogin($interactiveLoginEvent);
     }
 }

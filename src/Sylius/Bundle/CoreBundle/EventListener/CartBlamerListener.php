@@ -59,7 +59,7 @@ final class CartBlamerListener
     private function blame(ShopUserInterface $user): void
     {
         $cart = $this->getCart();
-        if (null === $cart) {
+        if (null === $cart || null !== $cart->getCustomer()) {
             return;
         }
 
