@@ -44,6 +44,8 @@ interface ShowPageInterface extends SymfonyPageInterface
      */
     public function hasBillingAddress($customerName, $street, $postcode, $city, $countryName);
 
+    public function getOrderShipmentStatus(): string;
+
     /**
      * @return string
      */
@@ -53,6 +55,8 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getSubtotal();
+
+    public function getShipmentStatus(): string;
 
     /**
      * @return int

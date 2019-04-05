@@ -63,6 +63,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->hasAddress($shippingAddressText, $customerName, $street, $postcode, $city, $countryName);
     }
 
+    public function getOrderShipmentStatus(): string
+    {
+        return $this->getElement('order_shipment_status')->getText();
+    }
+
+    public function getShipmentStatus(): string
+    {
+        return $this->getElement('shipment_status')->getText();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -186,9 +196,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'number' => '#number',
             'order_items' => '#sylius-order',
             'order_payment_status' => '#order-payment-status',
+            'order_shipment_status' => '#order-shipment-status',
             'payment_status' => '#payment-status',
             'payments' => '#sylius-payments',
             'product_price' => '#sylius-order td:nth-child(2)',
+            'shipment_status' => '#shipment-status',
             'subtotal' => '#subtotal',
             'total' => '#total',
         ]);
