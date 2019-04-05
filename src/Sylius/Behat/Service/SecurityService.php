@@ -31,6 +31,9 @@ final class SecurityService implements SecurityServiceInterface
     /** @var string */
     private $sessionTokenVariable;
 
+    /** @var string */
+    private $firewallContextName;
+
     /**
      * @param string $firewallContextName
      */
@@ -39,6 +42,7 @@ final class SecurityService implements SecurityServiceInterface
         $this->session = $session;
         $this->cookieSetter = $cookieSetter;
         $this->sessionTokenVariable = sprintf('_security_%s', $firewallContextName);
+        $this->firewallContextName = $firewallContextName;
     }
 
     /**
@@ -46,7 +50,7 @@ final class SecurityService implements SecurityServiceInterface
      */
     public function logIn(UserInterface $user)
     {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), 'randomstringbutnotnull', $user->getRoles());
+        $token = new UsernamePasswordToken($user, $user->getPassword(), $this->firewallContextName, $user->getRoles());
         $this->setToken($token);
     }
 
