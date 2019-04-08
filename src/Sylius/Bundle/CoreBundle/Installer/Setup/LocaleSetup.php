@@ -45,19 +45,19 @@ final class LocaleSetup implements LocaleSetupInterface
      */
     public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): LocaleInterface
     {
-        $name = $this->getLanguageCodeFromUser($input, $output, $questionHelper);
+        $code = $this->getLanguageCodeFromUser($input, $output, $questionHelper);
 
-        $output->writeln(sprintf('Adding <info>%s</info> locale.', $name));
+        $output->writeln(sprintf('Adding <info>%s</info> locale.', $code));
 
         /** @var LocaleInterface $existingLocale */
-        $existingLocale = $this->localeRepository->findOneBy(['code' => $name]);
+        $existingLocale = $this->localeRepository->findOneBy(['code' => $code]);
         if (null !== $existingLocale) {
             return $existingLocale;
         }
 
         /** @var LocaleInterface $locale */
         $locale = $this->localeFactory->createNew();
-        $locale->setCode($name);
+        $locale->setCode($code);
 
         $this->localeRepository->add($locale);
 
@@ -92,6 +92,13 @@ final class LocaleSetup implements LocaleSetupInterface
 
     private function getLanguageName(string $code): ?string
     {
-        return Intl::getLanguageBundle()->getLanguageName($code);
+        $language = $code;
+        $region = null;
+
+        if (count(explode('_', $code, 2)) === 2) {
+            [$language, $region] = explode('_', $code, 2);
+        }
+
+        return Intl::getLanguageBundle()->getLanguageName($language, $region);
     }
 }
