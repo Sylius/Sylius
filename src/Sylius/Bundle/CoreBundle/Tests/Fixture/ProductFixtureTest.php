@@ -59,6 +59,15 @@ final class ProductFixtureTest extends TestCase
     /**
      * @test
      */
+    public function product_slug_is_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['slug' => 'the-slug']]]], 'custom.*.slug');
+        $this->assertConfigurationIsValid([['custom' => [['slug' => '']]]], 'custom.*.slug');
+    }
+
+    /**
+     * @test
+     */
     public function product_description_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['description' => 'Foo bar baz']]]], 'custom.*.description');
