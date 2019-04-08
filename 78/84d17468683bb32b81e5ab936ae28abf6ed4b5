@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-02-22T09:36:09Z
+
+It looks good, but I would add a scenario with extended locale in [this file](https://github.com/Sylius/Sylius/blob/master/features/locale/browsing_shop_in_different_than_default_locale.feature), to prevent us from possible issues. Would you be able to do it @superbull? Thanks! 🚀
+
+---------------------------------------------------------------------------
+
+by superbull at 2019-02-25T03:30:28Z
+
+OK, I can do it.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-04-05T10:58:26Z
+
+ping @superbull, any update on this one? :)
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-04-08T07:57:34Z
+
+Thank you, Deng! :1st_place_medal:
