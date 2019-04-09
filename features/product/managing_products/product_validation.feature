@@ -143,6 +143,15 @@ Feature: Products validation
         Then I should be notified that slug has to be unique
         And product with code "7-WONDERS-BABEL" should not be added
 
+    @ui
+    Scenario: Trying to remove price from an existing simple product while disabling channel
+        Given the store has a "Dice Brewing" product
+        And I want to modify this product
+        When I remove its price from channel "Web"
+        And I disable it in channel "Web"
+        And I try to save my changes
+        Then I should be notified that price cannot be blank
+
     @ui @javascript
     Scenario: Trying to add a new product with a text attribute without specifying its value in default locale
         When I want to create a new simple product

@@ -372,6 +372,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'taxonomy' => 'a[data-tab="taxonomy"]',
             'tracked' => '#sylius_product_variant_tracked',
             'toggle_slug_modification_button' => '[data-locale="%locale%"] .toggle-product-slug-modification',
+            'channel_pricing' => '#sylius_product_variant_channelPricings',
+            'channel_checkbox' => '.checkbox:contains("%channelName%") input',
         ]);
     }
 
@@ -460,5 +462,17 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         }
 
         $this->imageUrls[$type] = $imageUrl;
+    }
+
+    public function checkChannel(string $channelName): void
+    {
+        $this->getElement('channel_checkbox', ['%channelName%' => $channelName])->check();
+    }
+
+    public function getChannelPricingValidationError(): string
+    {
+        $validationError = $this->getElement('channel_pricing')->find('css', '.sylius-validation-error');
+
+        return $validationError->getText();
     }
 }

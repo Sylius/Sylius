@@ -977,4 +977,31 @@ final class ManagingProductsContext implements Context
             $this->updateConfigurableProductPage,
         ]);
     }
+
+    /**
+     * @When I remove its price from channel :channel
+     */
+    public function iRemoveItsPriceFromChannel(ChannelInterface $channel)
+    {
+        $this->updateSimpleProductPage->specifyPrice($channel->getName(), '');
+    }
+
+    /**
+     * @When I disable it in channel :channel
+     */
+    public function iDisableItInChannel(ChannelInterface $channel)
+    {
+        $this->updateSimpleProductPage->checkChannel($channel->getName());
+    }
+
+    /**
+     * @Then /^I should be notified that price cannot be blank$/
+     */
+    public function iShouldBeNotifiedThatPriceCannotBeBlank()
+    {
+        Assert::same(
+            $this->updateSimpleProductPage->getChannelPricingValidationError(),
+            sprintf('Please enter the price.')
+        );
+    }
 }
