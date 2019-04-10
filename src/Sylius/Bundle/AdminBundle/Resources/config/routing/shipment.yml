@@ -25,4 +25,3 @@ sylius_admin_shipment_ship:
                 transition: ship
             redirect: referer
             flash: sylius.shipment.shipped
-

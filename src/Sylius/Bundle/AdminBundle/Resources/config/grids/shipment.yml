@@ -58,8 +58,8 @@ sylius_grid:
                             graph: sylius_shipment
                     details:
                         type: default
-                        label: sylius.ui.details
-                        icon: columns
+                        label: sylius.ui.show_order_details
+                        icon: eye
                         options:
                             link:
                                 route: sylius_admin_order_show

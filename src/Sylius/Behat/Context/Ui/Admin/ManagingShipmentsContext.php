@@ -15,30 +15,30 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Shipment\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
-use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 
 final class ManagingShipmentsContext implements Context
 {
     /** @var IndexPageInterface */
     private $indexPage;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
-
     /** @var ShowPageInterface */
     private $orderShowPage;
 
-    public function __construct(IndexPageInterface $indexPage, NotificationCheckerInterface $notificationChecker, ShowPageInterface $orderShowPage)
+    /** @var NotificationCheckerInterface */
+    private $notificationChecker;
+
+    public function __construct(IndexPageInterface $indexPage, ShowPageInterface $orderShowPage, NotificationCheckerInterface $notificationChecker)
     {
         $this->indexPage = $indexPage;
-        $this->notificationChecker = $notificationChecker;
         $this->orderShowPage = $orderShowPage;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -138,11 +138,11 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @Given I display details of the order number :orderNumber
+     * @When I move to the details of first shipment's order
      */
-    public function iDisplayDetailsOfTheOrderNumber(string $orderNumber): void
+    public function iMoveToDetailsOfFirstShipment(): void
     {
-        $this->indexPage->showOrderPageRelatedWithShipment($orderNumber);
+        $this->indexPage->showOrderPageForNthShipment(1);
     }
 
     /**
