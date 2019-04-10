@@ -8,14 +8,14 @@ In Sylius emails are configured the Symfony way, so you can get inspired by the 
 
 Basically to start sending emails via a mailing service you will need to:
 
-**1. Create an account on a mailing service.**
-**2. In the your `.env` file **modify variable** ``MAILER_URL``
+1. **Create an account on a mailing service.**
+2. **In the your** `.env` file **modify variable** ``MAILER_URL``
 
 .. code-block:: text
 
     MAILER_URL=gmail://username:password@localhost
 
-**3. **Remember not to have the** `disable_delivery: true` **parameter in the** `app/config/config_prod.yml` for your production environment.
+3. **Remember not to have the** `disable_delivery: true` **parameter in the** `app/config/config_prod.yml` for your production environment.
 
 Emails delivery is disable for `test`, `dev` and `stage` environments by default. The `prod` environment has delivery turned
 on by default, so there is nothing to worry about if you did not change anything about it.
