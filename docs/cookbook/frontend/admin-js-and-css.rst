@@ -32,7 +32,7 @@ As an example we will use a popup window script, it is easy for manual testing.
 
 .. code-block:: yaml
 
-    # src/Resources/config/services.yml
+    # config/services.yaml
     services:
         app.block_event_listener.admin.layout.javascripts:
             class: Sylius\Bundle\UiBundle\Block\BlockEventListener
@@ -78,7 +78,7 @@ As an example we will change the sidebar menu background color, what is clearly 
 
 .. code-block:: yaml
 
-    # src/Resources/config/services.yml
+    # config/services.yaml
     services:
         app.block_event_listener.admin.layout.stylesheets:
             class: Sylius\Bundle\UiBundle\Block\BlockEventListener
