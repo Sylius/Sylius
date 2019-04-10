@@ -43,13 +43,9 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return $field = $tableAccessor->getFieldFromRow($table, $row, $fieldName);
     }
 
-    public function showOrderPageRelatedWithShipment(string $orderNumber): void
+    public function showOrderPageForNthShipment(int $shipmentNumber): void
     {
-        $tableAccessor = $this->getTableAccessor();
-        $table = $this->getElement('table');
-        $row = $tableAccessor->getRowWithFields($table, ['number' =>$orderNumber]);
-        $field = $tableAccessor->getFieldFromRow($table, $row, 'actions');
-        $field->clickLink('Details');
+        $this->getActionsForRow($shipmentNumber)->clickLink('Show order details');
     }
 
     protected function getDefinedElements(): array
@@ -57,5 +53,15 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return array_merge(parent::getDefinedElements(), [
             'filter_state' => '#criteria_state',
         ]);
+    }
+
+    private function getActionsForRow(int $shipmentNumber): NodeElement
+    {
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
+
+        $row = $tableAccessor->getRowsWithFields($table, [])[$shipmentNumber];
+
+        return $field = $tableAccessor->getFieldFromRow($table, $row, 'actions');
     }
 }
