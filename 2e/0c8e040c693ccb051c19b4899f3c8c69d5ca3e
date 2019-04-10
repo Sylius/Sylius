@@ -1,0 +1,33 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-04-09T08:43:28Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-1"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by theyoux at 2019-04-09T18:57:39Z
+
+Sure, here are the pics from github preview + what's on the sylius docs
+
+**Github preview before**
+![Sélection_055](https://user-images.githubusercontent.com/8554698/55827124-c8033f00-5b09-11e9-9554-72988f82ee5f.png)
+
+**Sylius docs now**
+![Sélection_057](https://user-images.githubusercontent.com/8554698/55827123-c76aa880-5b09-11e9-8b1b-6212a7890258.png)
+
+**Github preview with the fix**
+![Sélection_054](https://user-images.githubusercontent.com/8554698/55827126-c8033f00-5b09-11e9-975e-04162a64f6de.png)
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-04-10T06:28:19Z
+
+Thanks, Loïc! :tada:
