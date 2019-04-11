@@ -38,6 +38,7 @@ final class InstallerContext implements Context
     /** @var array */
     private $inputChoices = [
         'currency' => 'USD',
+        'locale' => 'en_US',
         'e-mail' => 'test@email.com',
         'username' => 'test',
         'password' => 'pswd',
