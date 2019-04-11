@@ -1,0 +1,41 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-04-01T14:46:26Z
+
+I tried to check it out before the merge and I realized some strange bug - I believe it's related to the `LanguageBundle`, not proposed changes. The thing is, a translator does not accept compound locales codes (like `pl_PL`, `de_DE`, `jp_JP`), it works only with few of them (as `en_US`) 😕
+
+<img width="340" alt="Zrzut ekranu 2019-04-1 o 16 37 42" src="https://user-images.githubusercontent.com/6212718/55336593-74f01300-549d-11e9-9ebb-4e583f4ffc0f.png">
+
+@oallain can you check it out? We should not allow such behaviour, especially as I think these two-parts codes are *the right ones* 🚀 Thank you in advance!
+
+---------------------------------------------------------------------------
+
+by oallain at 2019-04-02T21:02:53Z
+
+Hello,
+
+Yes, i'll loke that :eyes:
+
+---------------------------------------------------------------------------
+
+by oallain at 2019-04-05T00:07:37Z
+
+Hi @Zales0123,
+
+I missed that, `Intl::getLanguageBundle()->getLanguageName($language, $region)` has 2 arguments, it was the cause of the malfunction.
+
+I have now fixed the problem. :smile:
+
+Regards
+
+---------------------------------------------------------------------------
+
+by oallain at 2019-04-08T13:04:39Z
+
+@Zales0123, i think it's now better :smile:
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-04-11T07:01:12Z
+
+Thanks, @oallain! :tada:
