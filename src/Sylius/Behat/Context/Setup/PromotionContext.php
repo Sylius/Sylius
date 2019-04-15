@@ -242,10 +242,21 @@ final class PromotionContext implements Context
 
     /**
      * @Given /^(this coupon) can be used (\d+) times?$/
+     * @Given /^(this coupon) can be used once$/
      */
-    public function thisCouponCanBeUsedNTimes(PromotionCouponInterface $coupon, $usageLimit)
+    public function thisCouponCanBeUsedNTimes(PromotionCouponInterface $coupon, int $usageLimit = 1): void
     {
-        $coupon->setUsageLimit((int) $usageLimit);
+        $coupon->setUsageLimit($usageLimit);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this coupon) can be used once per customer$/
+     */
+    public function thisCouponCanBeUsedOncePerCustomer(PromotionCouponInterface $coupon): void
+    {
+        $coupon->setPerCustomerUsageLimit(1);
 
         $this->objectManager->flush();
     }
@@ -253,7 +264,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(this coupon) can be used twice per customer$/
      */
-    public function thisCouponCanBeUsedTwicePerCustomer(PromotionCouponInterface $coupon)
+    public function thisCouponCanBeUsedTwicePerCustomer(PromotionCouponInterface $coupon): void
     {
         $coupon->setPerCustomerUsageLimit(2);
 
