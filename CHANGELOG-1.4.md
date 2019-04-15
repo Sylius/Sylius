@@ -1,5 +1,18 @@
 # CHANGELOG FOR `1.4.X`
 
+## v1.4.3 (2019-04-15)
+
+#### Details
+
+- [#10178](https://github.com/Sylius/Sylius/issues/10178) Wrong regular expression for locale ([@superbull](https://github.com/superbull))
+- [#10276](https://github.com/Sylius/Sylius/issues/10276) Upgrade flex to use composer dump-env ([@loic425](https://github.com/loic425))
+- [#10279](https://github.com/Sylius/Sylius/issues/10279) [Documentation][ResourceBundle] 7.1. Overriding the Template and Criteria invalid config ([@kboduch](https://github.com/kboduch))
+- [#10283](https://github.com/Sylius/Sylius/issues/10283) [UserBundle] Fix user comparaison on user delete listener ([@loic425](https://github.com/loic425))
+- [#10289](https://github.com/Sylius/Sylius/issues/10289) Fix re-authenticating for impersonated users ([@semin-lev](https://github.com/semin-lev), [@lchrusciel](https://github.com/lchrusciel))
+- [#10294](https://github.com/Sylius/Sylius/issues/10294) [Docs] Fix presentation of "How to configure mailer" cookbook ([@theyoux](https://github.com/theyoux))
+- [#10298](https://github.com/Sylius/Sylius/issues/10298) [DOC][Installation] Fix minor typo ([@MatthieuCutin](https://github.com/MatthieuCutin))
+- [#10301](https://github.com/Sylius/Sylius/issues/10301) Adopt Symfony 4 directory structure in docs ([@pamil](https://github.com/pamil))
+
 ## v1.4.2 (2019-04-01)
 
 #### Details
