@@ -82,11 +82,11 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
 
     private function createNewOrderShipment(OrderInterface $order): void
     {
-        try {
-            /** @var ShipmentInterface $shipment */
-            $shipment = $this->shipmentFactory->createNew();
-            $shipment->setOrder($order);
+        /** @var ShipmentInterface $shipment */
+        $shipment = $this->shipmentFactory->createNew();
+        $shipment->setOrder($order);
 
+        try {
             $this->processShipmentUnits($order, $shipment);
 
             $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));

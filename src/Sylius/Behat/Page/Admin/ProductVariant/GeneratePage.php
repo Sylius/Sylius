@@ -85,7 +85,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
 
     public function isGenerationPossible(): bool
     {
-        $generateButton = $this->getDocument()->find('css','button:contains("Generate")');
+        $generateButton = $this->getDocument()->find('css', 'button:contains("Generate")');
 
         return !$generateButton->hasAttribute('disabled');
     }
