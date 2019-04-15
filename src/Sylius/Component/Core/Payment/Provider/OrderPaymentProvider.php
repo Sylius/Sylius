@@ -76,6 +76,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
         if (null !== $lastCancelledPayment) {
             return $lastCancelledPayment;
         }
+
         return $order->getLastPayment(PaymentInterface::STATE_FAILED);
     }
 

@@ -1,5 +1,16 @@
 # CHANGELOG FOR `1.3.X`
 
+## v1.3.11 (2019-04-15)
+
+#### Details
+
+- [#10178](https://github.com/Sylius/Sylius/issues/10178) Wrong regular expression for locale ([@superbull](https://github.com/superbull))
+- [#10279](https://github.com/Sylius/Sylius/issues/10279) [Documentation] [ResourceBundle] 7.1. Overriding the Template and Criteria invalid config ([@kboduch](https://github.com/kboduch))
+- [#10283](https://github.com/Sylius/Sylius/issues/10283) [UserBundle] Fix user comparaison on user delete listener ([@loic425](https://github.com/loic425))
+- [#10289](https://github.com/Sylius/Sylius/issues/10289) Fix re-authenticating for impersonated users ([@semin-lev](https://github.com/semin-lev), [@lchrusciel](https://github.com/lchrusciel))
+- [#10294](https://github.com/Sylius/Sylius/issues/10294) [Docs] Fix presentation of "How to configure mailer" cookbook ([@theyoux](https://github.com/theyoux))
+- [#10298](https://github.com/Sylius/Sylius/issues/10298) [DOC] [Installation] Fix minor typo ([@MatthieuCutin](https://github.com/MatthieuCutin))
+
 ## v1.3.10 (2019-04-01)
 
 #### Details
@@ -33,6 +44,8 @@
 - [#10280](https://github.com/Sylius/Sylius/issues/10280) [Travis] Update mysql version to speed up builds ([@Zales0123](https://github.com/Zales0123))
 
 ## v1.3.9 (2019-03-05)
+
+#### TL;DR
 
 - Extracted some packages from Sylius core ([#10182](https://github.com/Sylius/Sylius/issues/10182), [#10184](https://github.com/Sylius/Sylius/issues/10184), [#10188](https://github.com/Sylius/Sylius/issues/10188))
 
