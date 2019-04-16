@@ -230,6 +230,16 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^(this coupon) is set as non reusable after cancelling the order in which it has been used$/
+     */
+    public function thisIsSetAsNonReusableAfterCancellingTheOrderInWhichItHasBeenUsed(PromotionCouponInterface $coupon): void
+    {
+        $coupon->setReusableFromCancelledOrders(false);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this coupon) has already reached its usage limit$/
      */
     public function thisCouponHasReachedItsUsageLimit(PromotionCouponInterface $coupon)

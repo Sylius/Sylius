@@ -33,4 +33,15 @@ final class PromotionCouponSpec extends ObjectBehavior
         $this->setPerCustomerUsageLimit(10);
         $this->getPerCustomerUsageLimit()->shouldReturn(10);
     }
+
+    public function its_reusable_from_cancelled_orders_flag_is_true_by_default()
+    {
+        $this->isReusableFromCancelledOrders()->shouldReturn(true);
+    }
+
+    public function its_reusable_from_cancelled_orders_flag_is_mutable()
+    {
+        $this->setReusableFromCancelledOrders(false);
+        $this->isReusableFromCancelledOrders()->shouldReturn(false);
+    }
 }
