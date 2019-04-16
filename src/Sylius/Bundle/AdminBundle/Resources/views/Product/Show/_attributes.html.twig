@@ -1,0 +1,22 @@
+<div id="attributes">
+    <h4 class="ui top attached inverted black header">{{ 'sylius.ui.attributes'|trans }}</h4>
+    <div class="ui attached segment">
+        <div class="ui styled fluid accordion">
+            <div data-locale="en_US">
+                <table class="ui definition table">
+                    <tbody>
+                    {% for attribute in product.attributes %}
+                        <tr>
+                            <td class="five wide">{{ attribute.name }}</td>
+                            <td>
+                                {% include [('@SyliusAdmin/Product/Show/Types/'~attribute.type~'.html.twig'), '@SyliusAttribute/Types/default.html.twig'] with {'attribute': attribute, 'locale': configuration.request.locale, 'fallbackLocale': configuration.request.defaultLocale} %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

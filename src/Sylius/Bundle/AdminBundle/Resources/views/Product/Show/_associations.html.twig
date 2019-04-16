@@ -1,0 +1,22 @@
+<div id="associations">
+    <h4 class="ui top attached inverted black header">{{ 'sylius.ui.associations'|trans }}</h4>
+    <div class="ui attached segment">
+        <table class="ui definition table">
+            <tbody>
+            <tr>
+                {% for association in product.getAssociations %}
+                    <td class="five wide">{{ association.getType.getName }}</td>
+                    <td>
+                        <ul class="ui bulleted list">
+                            {% for associatedProduct in association.getAssociatedProducts %}
+                                <li>{{ associatedProduct.getName }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

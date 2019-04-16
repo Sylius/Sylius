@@ -766,9 +766,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given product :product has height :height , width :width , depth :depth , weight :weight
+     * @Given product :product has height :height, width :width, depth :depth, weight :weight
      */
-    public function productHasHeightWidthDepthWeight(ProductInterface $product ,float $height, float $width, float $depth, float $weight): void
+    public function productHasHeightWidthDepthWeight(ProductInterface $product, float $height, float $width, float $depth, float $weight): void
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
@@ -827,6 +827,7 @@ final class ProductContext implements Context
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
+
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $productVariant->getChannelPricings()->first();
         $channelPricing->setOriginalPrice($this->getPriceFromString($orginalPrice));

@@ -54,7 +54,7 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
-        $row = $tableAccessor->getRowWithFields($table, ['name' =>$productName]);
+        $row = $tableAccessor->getRowWithFields($table, ['name' => $productName]);
         $field = $tableAccessor->getFieldFromRow($table, $row, 'actions');
         $field->clickLink('Details');
     }
