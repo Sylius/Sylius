@@ -46,7 +46,7 @@ Feature: Applying promotion coupon with per customer usage limit
         And there should be no discount
 
     @ui
-    Scenario: Cancelled orders are not affecting per customer usage limit by default
+    Scenario: Cancelled orders do not affect per customer usage limit by default
         Given this coupon can be used once per customer
         And I placed an order "#00000022"
         And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
@@ -58,7 +58,7 @@ Feature: Applying promotion coupon with per customer usage limit
         And my discount should be "-$10.00"
 
     @ui
-    Scenario: Cancelled orders are affecting per customer usage limit
+    Scenario: Cancelled orders affect per customer usage limit
         Given this coupon is set as non reusable after cancelling the order in which it has been used
         And this coupon can be used once per customer
         And I placed an order "#00000022"

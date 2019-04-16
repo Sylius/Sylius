@@ -48,14 +48,10 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
             return;
         }
 
-        if (OrderInterface::STATE_CANCELLED !== $order->getState()) {
-            $promotionCoupon->decrementUsed();
-
+        if (OrderInterface::STATE_CANCELLED === $order->getState() && !$promotionCoupon->isReusableFromCancelledOrders()) {
             return;
         }
 
-        if ($promotionCoupon->isReusableFromCancelledOrders()) {
-            $promotionCoupon->decrementUsed();
-        }
+        $promotionCoupon->decrementUsed();
     }
 }
