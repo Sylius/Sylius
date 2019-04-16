@@ -120,6 +120,19 @@
             </argument>
         </service>
 
+        <service id="sylius.behat.context.ui.admin.product_showpage" class="Sylius\Behat\Context\Ui\Admin\ProductShowpageContext">
+            <argument type="service" id="sylius.behat.page.admin.product.index" />
+            <argument type="service" id="sylius.behat.page.admin.product.show_page" />
+            <argument type="service" id="sylius.behat.element.product.ShowPage.associations" />
+            <argument type="service" id="sylius.behat.element.product.ShowPage.attributes" />
+            <argument type="service" id="sylius.behat.element.product.ShowPage.details" />
+            <argument type="service" id="sylius.behat.element.product.ShowPage.media" />
+            <argument type="service" id="sylius.behat.element.product.ShowPage.more_details" />
+            <argument type="service" id="sylius.behat.element.product.ShowPage.pricing" />
+            <argument type="service" id="sylius.behat.element.product.ShowPage.shipping" />
+            <argument type="service" id="sylius.behat.element.product.ShowPage.taxonomy" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.managing_products" class="Sylius\Behat\Context\Ui\Admin\ManagingProductsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.product.create_simple" />

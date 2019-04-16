@@ -20,4 +20,6 @@ interface IndexPageInterface extends CrudIndexPageInterface
     public function filterByTaxon(string $taxonName): void;
 
     public function hasProductAccessibleImage(string $productCode): bool;
+
+    public function showProductPage(string $productName): void;
 }

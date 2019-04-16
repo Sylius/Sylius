@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.behat.element.product.ShowPage.associations" class="Sylius\Behat\Element\Product\ShowPage\AssociationsElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.ShowPage.attributes" class="Sylius\Behat\Element\Product\ShowPage\AttributesElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.ShowPage.details" class="Sylius\Behat\Element\Product\ShowPage\DetailsElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.ShowPage.media" class="Sylius\Behat\Element\Product\ShowPage\MediaElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.ShowPage.more_details" class="Sylius\Behat\Element\Product\ShowPage\MoreDetailsElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.ShowPage.pricing" class="Sylius\Behat\Element\Product\ShowPage\PricingElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.ShowPage.shipping" class="Sylius\Behat\Element\Product\ShowPage\ShippingElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.ShowPage.taxonomy" class="Sylius\Behat\Element\Product\ShowPage\TaxonomyElement" parent="sylius.behat.element" public="false" />
+    </services>
+</container>
