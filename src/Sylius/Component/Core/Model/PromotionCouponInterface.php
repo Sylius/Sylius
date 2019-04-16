@@ -20,4 +20,8 @@ interface PromotionCouponInterface extends BasePromotionCouponInterface
     public function getPerCustomerUsageLimit(): ?int;
 
     public function setPerCustomerUsageLimit(?int $perCustomerUsageLimit): void;
+
+    public function isReusableFromCancelledOrders(): bool;
+
+    public function setReusableFromCancelledOrders(bool $reusableFromCancelledOrders): void;
 }

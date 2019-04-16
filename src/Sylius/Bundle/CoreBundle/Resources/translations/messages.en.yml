@@ -18,6 +18,7 @@ sylius:
                 product: Product
         promotion_coupon:
             per_customer_usage_limit: Per-Customer Usage Limit
+            reusable_from_cancelled_orders: Reusable from cancelled orders
         group:
             name: Name
             roles: Roles
