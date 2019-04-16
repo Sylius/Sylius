@@ -65,6 +65,9 @@ sylius_grid:
                                     icon: plus
                                     route: sylius_admin_product_create
                 item:
+                    details:
+                        label: sylius.ui.details
+                        type: show
                     update:
                         type: update
                     delete:
