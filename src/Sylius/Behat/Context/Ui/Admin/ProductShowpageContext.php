@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
@@ -16,7 +25,6 @@ use Sylius\Behat\Element\Product\ShowPage\TaxonomyElementIterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductShowpageContext implements Context
@@ -76,8 +84,8 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given /^I try to access (this product)'s product page$/
-     * @Given I access :product product page
+     * @When /^I try to access (this product)'s product page$/
+     * @When I access :product product page
      */
     public function iAccessToProductPage(ProductInterface $product): void
     {
@@ -125,7 +133,7 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given I should see original price :price for channel :channelName
+     * @Then I should see original price :price for channel :channelName
      */
     public function iShouldSeeOrginalPriceForChannel(string $orginalPrice, string $channelName): void
     {
@@ -142,7 +150,7 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given I should see product's channels :channel
+     * @Then I should see product's channels :channel
      */
     public function iShouldSeeProductSChannels(string $channel): void
     {
@@ -150,7 +158,7 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given I should see current stock of this product :currentStock
+     * @Then I should see current stock of this product :currentStock
      */
     public function iShouldSeeCurrentStockOfThisProduct(int $currentStock): void
     {
@@ -158,9 +166,9 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given I should see product's tax category :taxCategory
+     * @Then I should see product's tax category :taxCategory
      */
-    public function iShouldSeeProductSTaxCategory(string $taxCategory):void
+    public function iShouldSeeProductSTaxCategory(string $taxCategory): void
     {
         Assert::same($this->detailsElement->getProductTaxCategory(), $taxCategory);
     }
@@ -168,13 +176,13 @@ final class ProductShowpageContext implements Context
     /**
      * @Then I should see main taxon is :mainTaxonName
      */
-    public function iShouldSeeMainTaxonIs(string $mainTaxonName):void
+    public function iShouldSeeMainTaxonIs(string $mainTaxonName): void
     {
         Assert::same($this->taxonomyElement->getProductMainTaxon(), $mainTaxonName);
     }
 
     /**
-     * @Given I should see product taxon is :productTaxon
+     * @Then I should see product taxon is :productTaxon
      */
     public function iShouldSeeProductTaxon(string $productTaxon): void
     {
@@ -190,7 +198,7 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given I should see product's width is :width
+     * @Then I should see product's width is :width
      */
     public function iShouldSeeProductSWidthIs(float $width): void
     {
@@ -198,7 +206,7 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given I should see product's height is :height
+     * @Then I should see product's height is :height
      */
     public function iShouldSeeProductSHeightIs(float $height): void
     {
@@ -206,7 +214,7 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given I should see product's depth is :depth
+     * @Then I should see product's depth is :depth
      */
     public function iShouldSeeProductSDepthIs(float $depth): void
     {
@@ -214,7 +222,7 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given I should see product's weight is :weight
+     * @Then I should see product's weight is :weight
      */
     public function iShouldSeeProductSWeightIs(float $weight): void
     {
@@ -238,14 +246,14 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given I should see product slug is :slug
+     * @Then I should see product slug is :slug
      */
     public function iShouldSeeProductSlugIs(string $slug): void
     {
      Assert::same($this->moreDetailsElement->getProductSlug(), $slug);
     }
     /**
-     * @Given I should see product's description is :description
+     * @Then I should see product's description is :description
      */
     public function iShouldSeeProductSDescriptionIs(string $description): void
     {
@@ -253,7 +261,7 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given I should see product's meta keywords is :metaKeywords
+     * @Then I should see product's meta keywords is :metaKeywords
      */
     public function iShouldSeeProductSMetaKeywordsIs(string $metaKeywords): void
     {
@@ -261,7 +269,7 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given I should see product's short description is :shortDescription
+     * @Then I should see product's short description is :shortDescription
      */
     public function iShouldSeeProductSShortDescriptionIs(string $shortDescription): void
     {

@@ -15,7 +15,7 @@ Feature: Accessing the simple product show page from product index
         And the "Iron shield" product has an image "mugs.jpg" with "main" type
         And product "Iron shield" have the code equals "123456789"
         And it belongs to "No tax" tax category
-        And product "Iron shield" has height "10.0" , width "15.0" , depth "20.0" , weight "25.0"
+        And product "Iron shield" has height "10.0", width "15.0", depth "20.0", weight "25.0"
         And the product "Iron shield" has the slug "iron-shield"
         And product "Iron shield" has a main taxon "Equipment"
         And this product belongs to "Shield"
