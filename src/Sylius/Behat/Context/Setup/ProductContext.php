@@ -755,6 +755,83 @@ final class ProductContext implements Context
         $this->objectManager->flush();
     }
 
+    /**
+     * @Given product :product have the code equals :code
+     */
+    public function productHaveTheCodeEquals(ProductInterface $product, string $code): void
+    {
+        $product->setCode($code);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given product :product has height :height , width :width , depth :depth , weight :weight
+     */
+    public function productHasHeightWidthDepthWeight(ProductInterface $product ,float $height, float $width, float $depth, float $weight): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setWidth($width);
+        $productVariant->setHeight($height);
+        $productVariant->setDepth($depth);
+        $productVariant->setWeight($weight);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the product :product has the slug :slug
+     */
+    public function theSlugOfProductShouldBe(ProductInterface $product, string $slug): void
+    {
+        $product->setSlug($slug);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the description of product :product should be :description
+     */
+    public function theDescriptionOfProductShouldBe(ProductInterface $product, string $description): void
+    {
+        $product->setDescription($description);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the meta keywords of product :product should be :metaKeywords
+     */
+    public function theMetaKeywordsOfProductShouldBe(ProductInterface $product, string $metaKeywords): void
+    {
+        $product->getTranslation()->setMetaKeywords($metaKeywords);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the short description of product :product should be :shortDescription
+     */
+    public function theShortDescriptionOfProductShouldBe(ProductInterface $product, string $shortDescription): void
+    {
+        $product->getTranslation()->setShortDescription($shortDescription);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the product :product has orginal price :orginalPrice
+     */
+    public function theProductHasOrginalPrice(ProductInterface $product, string $orginalPrice): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $productVariant->getChannelPricings()->first();
+        $channelPricing->setOriginalPrice($this->getPriceFromString($orginalPrice));
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);

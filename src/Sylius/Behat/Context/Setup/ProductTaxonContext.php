@@ -51,6 +51,17 @@ final class ProductTaxonContext implements Context
     }
 
     /**
+     * @Given product :product has a main taxon :taxon
+     */
+    public function itHasMainTaxon(ProductInterface $product, TaxonInterface $taxon): void
+    {
+        $product->setMainTaxon($taxon);
+
+        $this->objectManager->persist($product);
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param int|null $position
      *
      * @return ProductTaxonInterface
