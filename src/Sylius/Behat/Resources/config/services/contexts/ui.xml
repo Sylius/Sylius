@@ -129,9 +129,10 @@
             <argument type="service" id="sylius.behat.page.admin.product.update_configurable" />
             <argument type="service" id="sylius.behat.page.admin.product_review.index" />
             <argument type="service" id="sylius.behat.page.admin.product.index_per_taxon" />
+            <argument type="service" id="sylius.behat.page.admin.product_variant.create" />
+            <argument type="service" id="sylius.behat.page.admin.product_variant.generate" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <argument type="service" id="liip_imagine.cache.manager" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_product_association_types" class="Sylius\Behat\Context\Ui\Admin\ManagingProductAssociationTypesContext">

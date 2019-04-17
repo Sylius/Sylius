@@ -3,7 +3,7 @@ sylius_admin_product:
         alias: sylius.product
         section: admin
         templates: "@SyliusAdmin\\Crud"
-        except: ['show', 'index']
+        except: ['show', 'index', 'update']
         redirect: update
         grid: sylius_admin_product
         permission: true
@@ -29,6 +29,23 @@ sylius_admin_product_index:
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 icon: cube
+
+sylius_admin_product_update:
+    path: /products/{id}/edit
+    methods: [GET, PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product:updateAction
+        _sylius:
+            section: admin
+            permission: true
+            redirect: referer
+            template: "@SyliusAdmin/Crud/update.html.twig"
+            vars:
+                subheader: sylius.ui.manage_your_product_catalog
+                icon: cube
+                templates:
+                    form: "@SyliusAdmin/Product/_form.html.twig"
+                    toolbar: "@SyliusAdmin/Product/Update/_toolbar.html.twig"
 
 sylius_admin_product_per_taxon_index:
     path: /products/taxon/{taxonId}
