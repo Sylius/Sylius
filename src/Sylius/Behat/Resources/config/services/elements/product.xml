@@ -26,5 +26,7 @@
         <service id="sylius.behat.element.product.ShowPage.pricing" class="Sylius\Behat\Element\Product\ShowPage\PricingElement" parent="sylius.behat.element" public="false" />
         <service id="sylius.behat.element.product.ShowPage.shipping" class="Sylius\Behat\Element\Product\ShowPage\ShippingElement" parent="sylius.behat.element" public="false" />
         <service id="sylius.behat.element.product.ShowPage.taxonomy" class="Sylius\Behat\Element\Product\ShowPage\TaxonomyElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.ShowPage.options" class="Sylius\Behat\Element\Product\ShowPage\OptionsElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.ShowPage.variants" class="Sylius\Behat\Element\Product\ShowPage\VariantsElement" parent="sylius.behat.element" public="false" />
     </services>
 </container>

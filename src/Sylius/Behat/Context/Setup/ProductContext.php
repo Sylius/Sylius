@@ -31,6 +31,7 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
+use Sylius\Component\Product\Model\ProductOption;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
@@ -833,6 +834,38 @@ final class ProductContext implements Context
         $channelPricing->setOriginalPrice($this->getPriceFromString($orginalPrice));
     }
 
+    /**
+     * @Given product :product has option :productOption named :optionValue with code :optionCode
+     */
+    public function productHasOption(
+        ProductInterface $product,
+        ProductOption $productOption,
+        string $optionValue,
+        string $optionCode
+    ): void {
+        /** @var ProductOptionValueInterface $productOptionValue */
+        $productOptionValue = $this->productOptionValueFactory->createNew();
+        $productOptionValue->setCode($optionCode);
+        $productOptionValue->setOption($productOption);
+        $productOptionValue->setValue($optionValue);
+        $productOption->addValue($productOptionValue);
+        $product->addOption($productOption);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given product :product has :productVariantName variant with code :code, price :price, current stock :currentStock
+     */
+    public function theProductHasVariant(ProductInterface $product, string $productVariantName, string $code, string $price, int $currentStock): void
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+
+        $priceValue = $this->getPriceFromString($price);
+        $this->createProductVariant($product, $productVariantName, $priceValue, $code, $channel, null, true, $currentStock);
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
@@ -934,7 +967,8 @@ final class ProductContext implements Context
         $code,
         ChannelInterface $channel = null,
         $position = null,
-        $shippingRequired = true
+        $shippingRequired = true,
+        int $curentStock = 0
     ) {
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
 
@@ -944,6 +978,7 @@ final class ProductContext implements Context
         $variant->setName($productVariantName);
         $variant->setCode($code);
         $variant->setProduct($product);
+        $variant->setOnHand($curentStock);
         $variant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
         $variant->setPosition((null === $position) ? null : (int) $position);
         $variant->setShippingRequired($shippingRequired);

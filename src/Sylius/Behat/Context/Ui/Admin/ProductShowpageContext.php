@@ -19,9 +19,11 @@ use Sylius\Behat\Element\Product\ShowPage\AttributesElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\DetailsElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\MediaElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\MoreDetailsElementInterface;
+use Sylius\Behat\Element\Product\ShowPage\OptionsElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\PricingElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\ShippingElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\TaxonomyElementIterface;
+use Sylius\Behat\Element\Product\ShowPage\VariantsElementInterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -59,6 +61,12 @@ final class ProductShowpageContext implements Context
     /** @var TaxonomyElementIterface */
     private $taxonomyElement;
 
+    /** @var OptionsElementInterface */
+    private $optionsElement;
+
+    /** @var VariantsElementInterface */
+     private $variantsElement;
+
     public function __construct(
         IndexPageInterface $indexPage,
         ShowPageInterface $productShowPage,
@@ -69,7 +77,9 @@ final class ProductShowpageContext implements Context
         MoreDetailsElementInterface $moreDetailsElement,
         PricingElementInterface $pricingElement,
         ShippingElementInterface $shippingElement,
-        TaxonomyElementIterface $taxonomyElement
+        TaxonomyElementIterface $taxonomyElement,
+        OptionsElementInterface $optionsElement,
+        VariantsElementInterface $variantsElement
     ) {
         $this->indexPage = $indexPage;
         $this->productShowPage = $productShowPage;
@@ -81,6 +91,8 @@ final class ProductShowpageContext implements Context
         $this->pricingElement = $pricingElement;
         $this->shippingElement = $shippingElement;
         $this->taxonomyElement = $taxonomyElement;
+        $this->optionsElement = $optionsElement;
+        $this->variantsElement = $variantsElement;
     }
 
     /**
@@ -114,6 +126,14 @@ final class ProductShowpageContext implements Context
     public function iShouldSeeProductShowPageWithoutVariants(): void
     {
         Assert::true($this->productShowPage->itIsSimpleProductPage());
+    }
+
+    /**
+     * @Then I should see product show page with variants
+     */
+    public function iShouldSeeProductShowPageWithVariants(): void
+    {
+        Assert::false($this->productShowPage->itIsSimpleProductPage());
     }
 
     /**
@@ -204,7 +224,6 @@ final class ProductShowpageContext implements Context
     {
         Assert::same($this->shippingElement->getProductWidth(), $width);
     }
-
     /**
      * @Then I should see product's height is :height
      */
@@ -290,5 +309,30 @@ final class ProductShowpageContext implements Context
     public function iShouldSeeProductAssociationWith(string $association, string $productName): void
     {
         Assert::true($this->associationsElement->isProductAssociated($association, $productName));
+    }
+
+    /**
+     * @Then I should see option :optionName
+     */
+    public function iShouldSeeOption(string $optionName): void
+    {
+        Assert::true($this->optionsElement->isOptionDefined($optionName));
+    }
+
+    /**
+     * @Then I should see :count variants
+     */
+    public function iShouldSeeVariants(int $count): void
+    {
+        Assert::same($this->variantsElement->countVariantsOnPage(), $count);
+    }
+
+    /**
+     * @Given I should see :variantName variant with code :code, priced :price and current stock :currentStock
+     *
+     */
+    public function iShouldSeeVariantWithCodePriceAndCurrentStock(string $variantName, string $code, string $price, int $currentStock): void
+    {
+        Assert::true($this->variantsElement->hasProductVariantWithCodePriceAndCurrentlyStock($variantName, $code, $price, $currentStock));
     }
 }
