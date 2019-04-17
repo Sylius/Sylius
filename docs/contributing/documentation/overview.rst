@@ -33,18 +33,17 @@ Add also the main repository as the ``upstream`` remote.
     $ git remote add upstream git@github.com:Sylius/Sylius.git
 
 
-
 Choose the right Base Branch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Before starting to work on a patch, you must determine on which branch you need to work. It will be:
 
-* ``1.0`` or ``1.1``, if you are fixing or adding docs for features that exist in one of those versions,
-* ``master``, if you are documenting a new feature, that was not in ``1.0`` nor in ``1.1``
+* ``1.3`` or ``1.4``, if you are fixing or adding docs for features that exist in one of those versions,
+* ``master``, if you are documenting a new feature, that was not in ``1.3`` nor in ``1.4``
 
 .. note::
 
-    All bug fixes merged into the ``1.0`` and ``1.1`` maintenance branches are also merged into ``master`` on a regular basis.
+    All bug fixes merged into the ``1.3`` and ``1.4`` maintenance branches are also merged into ``master`` on a regular basis.
 
 Create a dedicated branch for your changes (for organization):
 
@@ -62,24 +61,27 @@ Your pull request will be reviewed, you will be asked to apply fixes if necessar
 Testing Documentation
 ~~~~~~~~~~~~~~~~~~~~~
 
-To test the documentation before a commit:
+To test the documentation before a commit you need to install Sphinx.
 
-* Install `pip`_, the Python package manager,
+.. tip::
 
-* Download the documentation requirements,
+    Official Sphinx installation guide : `www.sphinx-doc.org <https://www.sphinx-doc.org/en/master/usage/installation.html>`_
 
-.. code-block:: bash
+There are two ways to install Sphinx: via `Homebrew <https://brew.sh/>`_ or via `Pip`_.
 
-    $ pip install -r docs/requirements.txt
-    # This makes sure that the version of Sphinx you'll get is >=1.4.2!
-
-* Install `Sphinx`_,
+• Sphinx installation via Homebrew
 
 .. code-block:: bash
 
-    $ pip install Sphinx
+    $ brew install sphinx-doc
 
-* In the ``docs`` directory run ``sphinx-build -b html . build`` and view the generated HTML files in the ``build`` directory.
+• Sphinx installation via Pip
+
+.. code-block:: bash
+
+    $ pip install -U sphinx
+
+Then in the ``docs`` directory run ``sphinx-build -b html . build`` and view the generated HTML files in the ``build`` directory. You can open them in your browser and check how they look!
 
 Creating a Pull Request
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -126,8 +128,8 @@ tag and a short description:
 
 .. code-block:: text
 
-    .. versionadded:: 1.1
-        The ``getProductDiscount`` method was introduced in Sylius 1.1.
+    .. versionadded:: 1.3
+        The ``getProductDiscount`` method was introduced in Sylius 1.3.
 
 Standards
 ---------
