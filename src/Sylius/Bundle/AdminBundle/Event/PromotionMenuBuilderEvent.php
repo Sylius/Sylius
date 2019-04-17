@@ -9,7 +9,7 @@ use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\PromotionInterface;
 
-final class ManageCouponsMenuBuilderEvent extends MenuBuilderEvent
+final class PromotionMenuBuilderEvent extends MenuBuilderEvent
 {
     /** @var PromotionInterface */
     private $promotion;
