@@ -15,10 +15,12 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Shipment\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
@@ -26,12 +28,16 @@ final class ManagingShipmentsContext implements Context
     /** @var IndexPageInterface */
     private $indexPage;
 
+    /** @var ShowPageInterface */
+    private $orderShowPage;
+
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    public function __construct(IndexPageInterface $indexPage, NotificationCheckerInterface $notificationChecker)
+    public function __construct(IndexPageInterface $indexPage, ShowPageInterface $orderShowPage, NotificationCheckerInterface $notificationChecker)
     {
         $this->indexPage = $indexPage;
+        $this->orderShowPage = $orderShowPage;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -129,5 +135,21 @@ final class ManagingShipmentsContext implements Context
     public function iShouldBeNotifiedThatTheShipmentHasBeenSuccessfullyShipped(): void
     {
         $this->notificationChecker->checkNotification('Shipment has been successfully shipped.', NotificationType::success());
+    }
+
+    /**
+     * @When I move to the details of first shipment's order
+     */
+    public function iMoveToDetailsOfFirstShipment(): void
+    {
+        $this->indexPage->showOrderPageForNthShipment(1);
+    }
+
+    /**
+     * @Then I should see order page with details of order :order
+     */
+    public function iShouldSeeOrderPageWithDetailsOfOrder(OrderInterface $order): void
+    {
+        Assert::true($this->orderShowPage->isOpen(['id' => $order->getId()]));
     }
 }
