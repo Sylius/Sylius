@@ -47,6 +47,12 @@
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.product_form" />
         </service>
 
+        <service id="sylius.admin.menu_builder.product.update" class="Sylius\Bundle\AdminBundle\Menu\ProductUpdateMenuBuilder">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.product.update" />
+        </service>
+
         <service id="sylius.admin.menu_builder.product_variant_form" class="Sylius\Bundle\AdminBundle\Menu\ProductVariantFormMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />

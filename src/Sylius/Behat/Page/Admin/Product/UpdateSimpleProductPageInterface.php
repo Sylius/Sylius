@@ -94,4 +94,10 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function getOriginalPriceForChannel(string $channelName): string;
 
     public function isShippingRequired(): bool;
+
+    public function goToVariantsList(): void;
+
+    public function goToVariantCreation(): void;
+
+    public function goToVariantGeneration(): void;
 }
