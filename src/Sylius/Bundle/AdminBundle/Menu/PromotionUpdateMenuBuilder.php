@@ -6,13 +6,13 @@ namespace Sylius\Bundle\AdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\AdminBundle\Event\ManageCouponsMenuBuilderEvent;
+use Sylius\Bundle\AdminBundle\Event\PromotionMenuBuilderEvent;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-final class ManageCouponsMenuBuilder
+final class PromotionUpdateMenuBuilder
 {
-    public const EVENT_NAME = 'sylius.menu.admin.promotion.manage';
+    public const EVENT_NAME = 'sylius.menu.admin.promotion.update';
 
     /** @var FactoryInterface */
     private $factory;
@@ -38,7 +38,7 @@ final class ManageCouponsMenuBuilder
         $this->addChildren($menu, $promotion);
         $this->eventDispatcher->dispatch(
             self::EVENT_NAME,
-            new ManageCouponsMenuBuilderEvent($this->factory, $menu, $promotion)
+            new PromotionMenuBuilderEvent($this->factory, $menu, $promotion)
         );
 
         return $menu;

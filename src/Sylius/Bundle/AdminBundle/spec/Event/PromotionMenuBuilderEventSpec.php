@@ -10,7 +10,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\PromotionInterface;
 
-final class ManageCouponsMenuBuilderEventSpec extends ObjectBehavior
+final class PromotionMenuBuilderEventSpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory, ItemInterface $menu, PromotionInterface $promotion): void
     {
