@@ -748,6 +748,7 @@ sylius:
         show_order_details: 'Show order details'
         show_orders: 'Show orders'
         show_product: 'Show product'
+        show_product_in_shop_page: 'Show product in shop page'
         sign_in: 'Sign in'
         sign_in_here: 'Sign in here'
         sign_in_to_the_store_or_create_new_account: 'Sign in to the store <small>or create new account</small>'
