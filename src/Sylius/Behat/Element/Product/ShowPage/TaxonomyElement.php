@@ -23,7 +23,7 @@ final class TaxonomyElement extends Element implements TaxonomyElementIterface
         return $this->getElement('main_taxon')->getText();
     }
 
-    public function productHasTaxon(string $taxonName): bool
+    public function hasProductTaxon(string $taxonName): bool
     {
         $taxons = $this->getElement("product_taxon");
 

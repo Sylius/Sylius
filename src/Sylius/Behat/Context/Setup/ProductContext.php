@@ -461,6 +461,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^([^"]+) belongs to ("[^"]+" tax category)$/
+     * @Given the product :product belongs to :taxCategory tax category
      */
     public function productBelongsToTaxCategory(ProductInterface $product, TaxCategoryInterface $taxCategory)
     {
@@ -757,9 +758,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given product :product have the code equals :code
+     * @Given product's :product code is :code
      */
-    public function productHaveTheCodeEquals(ProductInterface $product, string $code): void
+    public function productCodeIs(ProductInterface $product, string $code): void
     {
         $product->setCode($code);
 
@@ -767,9 +768,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given product :product has height :height, width :width, depth :depth, weight :weight
+     * @Given the product :product has height :height, width :width, depth :depth, weight :weight
      */
-    public function productHasHeightWidthDepthWeight(ProductInterface $product, float $height, float $width, float $depth, float $weight): void
+    public function productHasDimensions(ProductInterface $product, float $height, float $width, float $depth, float $weight): void
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
@@ -784,7 +785,7 @@ final class ProductContext implements Context
     /**
      * @Given the product :product has the slug :slug
      */
-    public function theSlugOfProductShouldBe(ProductInterface $product, string $slug): void
+    public function productHasSlug(ProductInterface $product, string $slug): void
     {
         $product->setSlug($slug);
 
@@ -792,9 +793,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given the description of product :product should be :description
+     * @Given the description of product :product is :description
      */
-    public function theDescriptionOfProductShouldBe(ProductInterface $product, string $description): void
+    public function descriptionOfProductIs(ProductInterface $product, string $description): void
     {
         $product->setDescription($description);
 
@@ -802,9 +803,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given the meta keywords of product :product should be :metaKeywords
+     * @Given the meta keywords of product :product is :metaKeywords
      */
-    public function theMetaKeywordsOfProductShouldBe(ProductInterface $product, string $metaKeywords): void
+    public function metaKeywordsOfProductIs(ProductInterface $product, string $metaKeywords): void
     {
         $product->getTranslation()->setMetaKeywords($metaKeywords);
 
@@ -812,9 +813,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given the short description of product :product should be :shortDescription
+     * @Given the short description of product :product is :shortDescription
      */
-    public function theShortDescriptionOfProductShouldBe(ProductInterface $product, string $shortDescription): void
+    public function shortDescriptionOfProductIs(ProductInterface $product, string $shortDescription): void
     {
         $product->getTranslation()->setShortDescription($shortDescription);
 
@@ -822,20 +823,22 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given the product :product has orginal price :orginalPrice
+     * @Given the product :product has original price :originalPrice
      */
-    public function theProductHasOrginalPrice(ProductInterface $product, string $orginalPrice): void
+    public function theProductHasOriginalPrice(ProductInterface $product, string $originalPrice): void
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
 
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $productVariant->getChannelPricings()->first();
-        $channelPricing->setOriginalPrice($this->getPriceFromString($orginalPrice));
+        $channelPricing->setOriginalPrice($this->getPriceFromString($originalPrice));
+
+        $this->objectManager->flush();
     }
 
     /**
-     * @Given product :product has option :productOption named :optionValue with code :optionCode
+     * @Given the product :product has option :productOption named :optionValue with code :optionCode
      */
     public function productHasOption(
         ProductInterface $product,
@@ -855,15 +858,15 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given product :product has :productVariantName variant with code :code, price :price, current stock :currentStock
+     * @Given the product :product has :productVariantName variant with code :code, price :price, current stock :currentStock
      */
-    public function theProductHasVariant(ProductInterface $product, string $productVariantName, string $code, string $price, int $currentStock): void
+    public function productHasVariant(ProductInterface $product, string $productVariantName, string $code, string $price, int $currentStock): void
     {
         /** @var ChannelInterface $channel */
         $channel = $this->sharedStorage->get('channel');
 
         $priceValue = $this->getPriceFromString($price);
-        $this->createProductVariant($product, $productVariantName, $priceValue, $code, $channel, null, true, $currentStock);
+        $this->createProductVariant($product, $productVariantName, $priceValue, $code, $channel, null, true,  $currentStock);
     }
 
     private function getPriceFromString(string $price): int
@@ -968,7 +971,7 @@ final class ProductContext implements Context
         ChannelInterface $channel = null,
         $position = null,
         $shippingRequired = true,
-        int $curentStock = 0
+        int $currentStock = 0
     ) {
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
 
@@ -978,7 +981,7 @@ final class ProductContext implements Context
         $variant->setName($productVariantName);
         $variant->setCode($code);
         $variant->setProduct($product);
-        $variant->setOnHand($curentStock);
+        $variant->setOnHand($currentStock);
         $variant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
         $variant->setPosition((null === $position) ? null : (int) $position);
         $variant->setShippingRequired($shippingRequired);

@@ -18,7 +18,7 @@ final class VariantPriceExtension extends AbstractExtension
         $this->variantPriceHelper = $variantPriceHelper;
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('sylius_variant_price', [$this->variantPriceHelper, 'getPriceWithCurrency']),

@@ -13,10 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-
 interface TaxonomyElementIterface
 {
     public function getProductMainTaxon(): string;
 
-    public function productHasTaxon(string $taxonName): bool;
+    public function hasProductTaxon(string $taxonName): bool;
 }

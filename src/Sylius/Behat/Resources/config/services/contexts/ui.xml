@@ -120,19 +120,19 @@
             </argument>
         </service>
 
-        <service id="sylius.behat.context.ui.admin.product_showpage" class="Sylius\Behat\Context\Ui\Admin\ProductShowpageContext">
+        <service id="sylius.behat.context.ui.admin.product_showpage" class="Sylius\Behat\Context\Ui\Admin\ProductShowPageContext">
             <argument type="service" id="sylius.behat.page.admin.product.index" />
             <argument type="service" id="sylius.behat.page.admin.product.show_page" />
-            <argument type="service" id="sylius.behat.element.product.ShowPage.associations" />
-            <argument type="service" id="sylius.behat.element.product.ShowPage.attributes" />
-            <argument type="service" id="sylius.behat.element.product.ShowPage.details" />
-            <argument type="service" id="sylius.behat.element.product.ShowPage.media" />
-            <argument type="service" id="sylius.behat.element.product.ShowPage.more_details" />
-            <argument type="service" id="sylius.behat.element.product.ShowPage.pricing" />
-            <argument type="service" id="sylius.behat.element.product.ShowPage.shipping" />
-            <argument type="service" id="sylius.behat.element.product.ShowPage.taxonomy" />
-            <argument type="service" id="sylius.behat.element.product.ShowPage.options" />
-            <argument type="service" id="sylius.behat.element.product.ShowPage.variants" />
+            <argument type="service" id="sylius.behat.element.product.show.associations" />
+            <argument type="service" id="sylius.behat.element.product.show.attributes" />
+            <argument type="service" id="sylius.behat.element.product.show.details" />
+            <argument type="service" id="sylius.behat.element.product.show.media" />
+            <argument type="service" id="sylius.behat.element.product.show.more_details" />
+            <argument type="service" id="sylius.behat.element.product.show.pricing" />
+            <argument type="service" id="sylius.behat.element.product.show.shipping" />
+            <argument type="service" id="sylius.behat.element.product.show.taxonomy" />
+            <argument type="service" id="sylius.behat.element.product.show.options" />
+            <argument type="service" id="sylius.behat.element.product.show.variants" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_products" class="Sylius\Behat\Context\Ui\Admin\ManagingProductsContext">

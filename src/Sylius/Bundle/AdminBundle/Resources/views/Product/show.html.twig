@@ -6,16 +6,12 @@
 {% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
-    <link rel="stylesheet" href="https://demo.sylius.com/assets/admin/css/style.css" />
 {% endblock %}
 
 {% block content %}
     {% if product.variants|length == 1 %}
-        {% include "@SyliusAdmin/Product/Show/_singleProduct.html.twig" %}
+        {% include "@SyliusAdmin/Product/Show/_simpleProduct.html.twig" %}
     {% else %}
-        {% include "@SyliusAdmin/Product/Show/_multiVariantsProduct.html.twig" %}
+        {% include "@SyliusAdmin/Product/Show/_configurableProduct.html.twig" %}
     {% endif %}
-{% endblock %}
-{% block javascripts %}
-    <script src="https://demo.sylius.com/assets/admin/js/app.js"></script>
 {% endblock %}

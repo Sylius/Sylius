@@ -18,15 +18,15 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.behat.element.product.ShowPage.associations" class="Sylius\Behat\Element\Product\ShowPage\AssociationsElement" parent="sylius.behat.element" public="false" />
-        <service id="sylius.behat.element.product.ShowPage.attributes" class="Sylius\Behat\Element\Product\ShowPage\AttributesElement" parent="sylius.behat.element" public="false" />
-        <service id="sylius.behat.element.product.ShowPage.details" class="Sylius\Behat\Element\Product\ShowPage\DetailsElement" parent="sylius.behat.element" public="false" />
-        <service id="sylius.behat.element.product.ShowPage.media" class="Sylius\Behat\Element\Product\ShowPage\MediaElement" parent="sylius.behat.element" public="false" />
-        <service id="sylius.behat.element.product.ShowPage.more_details" class="Sylius\Behat\Element\Product\ShowPage\MoreDetailsElement" parent="sylius.behat.element" public="false" />
-        <service id="sylius.behat.element.product.ShowPage.pricing" class="Sylius\Behat\Element\Product\ShowPage\PricingElement" parent="sylius.behat.element" public="false" />
-        <service id="sylius.behat.element.product.ShowPage.shipping" class="Sylius\Behat\Element\Product\ShowPage\ShippingElement" parent="sylius.behat.element" public="false" />
-        <service id="sylius.behat.element.product.ShowPage.taxonomy" class="Sylius\Behat\Element\Product\ShowPage\TaxonomyElement" parent="sylius.behat.element" public="false" />
-        <service id="sylius.behat.element.product.ShowPage.options" class="Sylius\Behat\Element\Product\ShowPage\OptionsElement" parent="sylius.behat.element" public="false" />
-        <service id="sylius.behat.element.product.ShowPage.variants" class="Sylius\Behat\Element\Product\ShowPage\VariantsElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.show.associations" class="Sylius\Behat\Element\Product\ShowPage\AssociationsElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.show.attributes" class="Sylius\Behat\Element\Product\ShowPage\AttributesElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.show.details" class="Sylius\Behat\Element\Product\ShowPage\DetailsElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.show.media" class="Sylius\Behat\Element\Product\ShowPage\MediaElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.show.more_details" class="Sylius\Behat\Element\Product\ShowPage\MoreDetailsElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.show.pricing" class="Sylius\Behat\Element\Product\ShowPage\PricingElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.show.shipping" class="Sylius\Behat\Element\Product\ShowPage\ShippingElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.show.taxonomy" class="Sylius\Behat\Element\Product\ShowPage\TaxonomyElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.show.options" class="Sylius\Behat\Element\Product\ShowPage\OptionsElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.show.variants" class="Sylius\Behat\Element\Product\ShowPage\VariantsElement" parent="sylius.behat.element" public="false" />
     </services>
 </container>

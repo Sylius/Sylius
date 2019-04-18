@@ -17,5 +17,5 @@ interface PricingElementInterface
 {
     public function getPriceForChannel(string $channelName): string;
 
-    public function getOrginalPriceForChannel(string $channelName): string;
+    public function getOriginalPriceForChannel(string $channelName): string;
 }

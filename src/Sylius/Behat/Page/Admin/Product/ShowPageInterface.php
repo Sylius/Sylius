@@ -10,5 +10,5 @@ interface ShowPageInterface extends SymfonyPageInterface
 {
     public function getName(): string;
 
-    public function itIsSimpleProductPage(): bool;
+    public function isSimpleProductPage(): bool;
 }

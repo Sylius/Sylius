@@ -17,13 +17,13 @@ interface MoreDetailsElementInterface
 {
     public function getName(): string;
 
-    public function getProductDescription(): string;
+    public function getDescription(): string;
 
     public function getProductMetaKeywords(): string;
 
-    public function getProductShortDescription(): string;
+    public function getShortDescription(): string;
 
-    public function getProductMetaDescription(): string;
+    public function getMetaDescription(): string;
 
-    public function getProductSlug(): string;
+    public function getSlug(): string;
 }

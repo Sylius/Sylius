@@ -17,15 +17,20 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 final class AttributesElement extends Element implements AttributesElementInterface
 {
-    public function getProductAttribute(string $attribute): string
+    public function hasAttributeInLocale(string $attribute, string $locale, string $value):bool
     {
-        return $this->getElement('attribute_value', ['%attribute%' => $attribute])->getText();
+        $values = $this->getDocument()->find('css', sprintf('#attributes .tab.segment[data-tab="%s"]', $locale));
+
+        $attributeValue = $values->find('css', sprintf('tr:contains("%s") td:nth-child(2)', $attribute))->getText();
+
+        return $attributeValue === $value;
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'attribute_value' => '#attributes tr:contains("%attribute%") td:nth-child(2)',
+            'attribute_value_in_locale' => '.attributes:contains("%locale%") ~ table tr:contains("%attribute%") td:nth-child(2)',
+            'attributes_in_locale' => '#attributes :contains("%locale%")',
         ]);
     }
 }

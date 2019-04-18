@@ -45,11 +45,11 @@ final class ShippingElement extends Element implements ShippingElementInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'shipping_category' => '#shipping tr:contains("Shipping category") td:nth-child(2)',
-            'product_height' => '#shipping tr:contains("Height") td:nth-child(2)',
             'product_depth' => '#shipping tr:contains("Depth") td:nth-child(2)',
+            'product_height' => '#shipping tr:contains("Height") td:nth-child(2)',
             'product_weight' => '#shipping tr:contains("Weight") td:nth-child(2)',
             'product_width' => '#shipping tr:contains("Width") td:nth-child(2)',
+            'shipping_category' => '#shipping tr:contains("Shipping category") td:nth-child(2)',
         ]);
     }
 }
