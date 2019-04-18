@@ -43,7 +43,7 @@ final class VariantsElement extends Element implements VariantsElementInterface
                 return true;
             }
         }
-        
+
         return false;
     }
 }

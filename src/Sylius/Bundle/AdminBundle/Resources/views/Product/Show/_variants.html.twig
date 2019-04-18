@@ -1,0 +1,142 @@
+{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
+<div id="variants">
+    <h4 class="ui top attached inverted black header">{{ 'sylius.ui.list_variants'|trans }}</h4>
+    <div class="ui attached segment">
+        <div class="ui four column grid" >
+            <div class="row" >
+                <div class="one wide column"></div>
+                <div class="four wide column">
+                    <span class="ui header" >{{ 'sylius.ui.name'|trans }}</span>
+                </div>
+                <div class="four wide column">
+                    <span class="ui header" >{{ 'sylius.ui.options'|trans }}</span>
+                </div>
+                <div class="seven wide column">
+                    <span class="ui header" >{{ 'sylius.ui.number'|trans }}</span>
+                </div>
+            </div>
+        </div>
+        {% for variant in product.variants %}
+            <div class="ui styled fluid accordion variant" >
+                <div class="title active ">
+                    <div class="ui four column grid" >
+                        <div class="row">
+                            <div class=" one wide column">
+                                <i class="dropdown icon"></i>
+                            </div>
+                            <div class="four wide column">
+                                <span class="ui small header variant-name">{{ variant.product.name }}</span><br>
+                            </div>
+                            <div class="four wide column">
+                                {% for optionValue in variant.optionValues %}
+                                    <div class="ui label">
+                                        {{ optionValue.option.name }}<span class="detail"> {{ optionValue.value }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="seven wide column">
+                              <span class="variant-code">{{ variant.code }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui content inactive">
+                    <div class="ui column grid">
+                        <div class="four wide column">
+                            <div class="ui small header">
+                                {{ 'sylius.ui.image'|trans }}
+                            </div>
+                            {% if variant.images.first() == true %}
+                                {% set image = variant.images.first() %}
+                                {% set path = image.path is not null ? image.path|imagine_filter('sylius_shop_product_small_thumbnail') : '//placehold.it/100x100' %}
+                                <div class="ui image">
+                                    <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}" data-lightbox="sylius-product-image">
+                                        <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" />
+                                    </a>
+                                </div>
+                            {% else %}
+                                <div class="ui image">
+                                    <img src="https://via.placeholder.com/100x100.png" alt="{{ product.name }}" />
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="four wide column">
+                            <div class="ui small header">
+                                {{ 'sylius.ui.shipping'|trans }}
+                            </div>
+                            <table class="ui definition table">
+                                <tbody>
+                                <tr>
+                                    <td class="five wide">{{ 'sylius.ui.shipping_category'|trans }}</td>
+                                    <td>{{ product.variants.first().shippingCategory }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="five wide">{{ 'sylius.ui.width'|trans }}</td>
+                                    <td>{{ variant.width }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="five wide">{{ 'sylius.ui.height'|trans }}</td>
+                                    <td>{{ variant.height }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="five wide">{{ 'sylius.ui.depth'|trans }}</td>
+                                    <td>{{ variant.depth }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="five wide">{{ 'sylius.ui.weight'|trans }}</td>
+                                    <td>{{ variant.weight }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="four wide column pricing">
+                            <div class="ui small header">
+                                {{ 'sylius.ui.pricing'|trans }}
+                            </div>
+                            <table class="ui definition table">
+                                <thead>
+                                <th>{{ 'sylius.ui.channels'|trans }}</th>
+                                <th>{{ 'sylius.ui.price'|trans }}</th>
+                                <th>{{ 'sylius.ui.original_price'|trans }}</th>
+                                </thead>
+                                <tbody>
+                                {% for channelPricing in variant.channelPricings %}
+                                    <tr>
+                                        <td class="five wide">{{ channelPricing.channelCode }}</td>
+                                        <td>{{ channelPricing.price|sylius_variant_price(channelPricing.channelCode) }}</td>
+                                        {% if channelPricing.originalPrice != null %}
+                                            <td>{{ channelPricing.orginalPrice|sylius_variant_price(channelPricing.channelCode) }}</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="four wide column">
+                            <div class="row" style="padding: 1rem">
+                                {% if variant.tracked %}
+                                    <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.tracked'|trans }}</span>
+                                {% else %}
+                                    <span class="ui red label"><i class="remove icon"></i>{{ 'sylius.ui.not_tracked'|trans }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="row" style="padding: 1rem">
+                                {% if variant.shippingRequired %}
+                                    <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.shipping_required'|trans }}</span>
+                                {% else %}
+                                    <span class="ui orange label"><i class="remove icon"></i>{{ 'sylius.ui.shipping_not_required'|trans }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="row" style="padding: 1rem">
+                                <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.tax_category'|trans }}: {{ variant.taxCategory }}</span>
+                            </div>
+                            <div class="row" style="padding: 1rem">
+                                <span class="ui teal label current-stock-label"><i class="checkmark icon"></i>{{ 'sylius.ui.current_stock'|trans }}:<span class="current-stock">{{ variant.onHand - variant.onHold }}</span> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
