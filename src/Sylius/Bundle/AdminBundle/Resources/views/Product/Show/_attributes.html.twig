@@ -2,21 +2,29 @@
     <h4 class="ui top attached inverted black header">{{ 'sylius.ui.attributes'|trans }}</h4>
     <div class="ui attached segment">
         <div class="ui styled fluid accordion">
-            <div data-locale="en_US">
-                <table class="ui definition table">
-                    <tbody>
-                    {% for attribute in product.attributes %}
-                        <tr>
-                            <td class="five wide">{{ attribute.name }}</td>
-                            <td>
-                                {% include [('@SyliusAdmin/Product/Show/Types/'~attribute.type~'.html.twig'), '@SyliusAttribute/Types/default.html.twig'] with {'attribute': attribute, 'locale': configuration.request.locale, 'fallbackLocale': configuration.request.defaultLocale} %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+            <div class="ui top attached tabular menu">
+                {% for locale in sylius_available_locales() %}
+                   <a class="item{% if loop.first %} active{% endif %}" data-tab="{{ locale|sylius_locale_name }}">{{ locale|sylius_locale_name }}</a>
+                {% endfor %}
             </div>
+            {% for locale in sylius_available_locales() %}
+                <div class="ui bottom attached tab segment{% if loop.first %} active{% endif %}" data-tab="{{ locale|sylius_locale_name }}">
+                    <table class="ui definition table">
+                        <tbody>
+                        {% for attribute in product.attributes %}
+                            {% if attribute.localeCode == locale %}
+                                <tr>
+                                    <td class="five wide">{{ attribute.name }}</td>
+                                    <td>
+                                        {% include [('@SyliusAdmin/Product/Show/Types/'~attribute.type~'.html.twig'), '@SyliusAttribute/Types/default.html.twig'] with {'attribute': attribute, 'locale': configuration.request.locale, 'fallbackLocale': configuration.request.defaultLocale} %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>
-

@@ -51,8 +51,8 @@ final class DetailsElement extends Element implements DetailsElementInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'channels' => '#details tr:contains("Channels") td:nth-child(2)',
-            'product_code' => '#details tr:contains("Code") td:nth-child(2)',
             'current_stock' => '#details tr:contains("Current stock") td:nth-child(2)',
+            'product_code' => '#details tr:contains("Code") td:nth-child(2)',
             'tax_category' => '#details tr:contains("Tax category") td:nth-child(2)',
         ]);
     }

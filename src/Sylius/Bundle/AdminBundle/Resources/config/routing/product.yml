@@ -3,7 +3,7 @@ sylius_admin_product:
         alias: sylius.product
         section: admin
         templates: "@SyliusAdmin\\Crud"
-        except: ['index']
+        except: ['index', 'update']
         redirect: update
         grid: sylius_admin_product
         permission: true
@@ -98,7 +98,7 @@ sylius_admin_product_create_simple:
                     name: sylius_admin_product_create_simple
 
 sylius_admin_product_show:
-    path: /product/{id}
+    path: /products/{id}
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:showAction

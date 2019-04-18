@@ -29,7 +29,7 @@ use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductShowpageContext implements Context
+final class ProductShowPageContext implements Context
 {
     /** @var IndexPageInterface */
     private $indexPage;
@@ -65,7 +65,7 @@ final class ProductShowpageContext implements Context
     private $optionsElement;
 
     /** @var VariantsElementInterface */
-     private $variantsElement;
+    private $variantsElement;
 
     public function __construct(
         IndexPageInterface $indexPage,
@@ -96,26 +96,25 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @When /^I try to access (this product)'s product page$/
-     * @When I access :product product page
+     * @Given I am browsing products
      */
-    public function iAccessToProductPage(ProductInterface $product): void
-    {
-        $this->indexPage->showProductPage($product->getName());
-    }
-
-    /**
-     * @When I browse products
-     */
-    public function iWantToBrowseProducts(): void
+    public function iAmBrowsingProducts(): void
     {
         $this->indexPage->open();
     }
 
     /**
+     * @When I access :product product page
+     */
+    public function iAccessProductPage(ProductInterface $product): void
+    {
+        $this->indexPage->showProductPage($product->getName());
+    }
+
+    /**
      * @Then I should see this product's product page
      */
-    public function iShouldSeeSProductPage(ProductInterface $product): void
+    public function iShouldSeeThisProductPage(ProductInterface $product): void
     {
         Assert::true($this->productShowPage->isOpen(['id' => $product->getId()]));
     }
@@ -123,9 +122,9 @@ final class ProductShowpageContext implements Context
     /**
      * @Then I should see product show page without variants
      */
-    public function iShouldSeeProductShowPageWithoutVariants(): void
+    public function isSimpleProduct(): void
     {
-        Assert::true($this->productShowPage->itIsSimpleProductPage());
+        Assert::true($this->productShowPage->isSimpleProductPage());
     }
 
     /**
@@ -133,7 +132,7 @@ final class ProductShowpageContext implements Context
      */
     public function iShouldSeeProductShowPageWithVariants(): void
     {
-        Assert::false($this->productShowPage->itIsSimpleProductPage());
+        Assert::false($this->productShowPage->isSimpleProductPage());
     }
 
     /**
@@ -157,38 +156,37 @@ final class ProductShowpageContext implements Context
      */
     public function iShouldSeeOrginalPriceForChannel(string $orginalPrice, string $channelName): void
     {
-        Assert::same($this->pricingElement->getOrginalPriceForChannel($channelName), $orginalPrice);
-
+        Assert::same($this->pricingElement->getOriginalPriceForChannel($channelName), $orginalPrice);
     }
 
     /**
-     * @Then I should see product's code :code
+     * @Then I should see product's code is :code
      */
-    public function iShouldSeeProductSCode(string $code): void
+    public function iShouldSeeProductCodeIs(string $code): void
     {
         Assert::same($this->detailsElement->getProductCode(), $code);
     }
 
     /**
-     * @Then I should see product's channels :channel
+     * @Then I should see the product is enabled for channel :channel
      */
-    public function iShouldSeeProductSChannels(string $channel): void
+    public function iShouldSeeProductIsEnabledForChannels(string $channel): void
     {
         Assert::true($this->detailsElement->hasChannel($channel));
     }
 
     /**
-     * @Then I should see current stock of this product :currentStock
+     * @Then I should see :currentStock as a current stock of this product
      */
-    public function iShouldSeeCurrentStockOfThisProduct(int $currentStock): void
+    public function iShouldSeeAsACurrentStockOfThisProduct(int $currentStock): void
     {
         Assert::same($this->detailsElement->getProductCurrentStock(), $currentStock);
     }
 
     /**
-     * @Then I should see product's tax category :taxCategory
+     * @Then I should see product's tax category is :taxCategory
      */
-    public function iShouldSeeProductSTaxCategory(string $taxCategory): void
+    public function iShouldSeeProductTaxCategoryIs(string $taxCategory): void
     {
         Assert::same($this->detailsElement->getProductTaxCategory(), $taxCategory);
     }
@@ -202,17 +200,17 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Then I should see product taxon is :productTaxon
+     * @Then I should see product taxon is :taxonName
      */
-    public function iShouldSeeProductTaxon(string $productTaxon): void
+    public function iShouldSeeProductTaxonIs(string $taxonName): void
     {
-        Assert::true($this->taxonomyElement->productHasTaxon($productTaxon));
+        Assert::true($this->taxonomyElement->hasProductTaxon($taxonName));
     }
 
     /**
-     * @Then I should see product's shipping category :shippingCategory
+     * @Then I should see product's shipping category is :shippingCategory
      */
-    public function iShouldSeeProductSShippingCategory(string $shippingCategory): void
+    public function iShouldSeeProductShippingCategoryIs(string $shippingCategory): void
     {
         Assert::same($this->shippingElement->getProductShippingCategory(), $shippingCategory);
     }
@@ -220,14 +218,14 @@ final class ProductShowpageContext implements Context
     /**
      * @Then I should see product's width is :width
      */
-    public function iShouldSeeProductSWidthIs(float $width): void
+    public function iShouldSeeProductWidthIs(float $width): void
     {
         Assert::same($this->shippingElement->getProductWidth(), $width);
     }
     /**
      * @Then I should see product's height is :height
      */
-    public function iShouldSeeProductSHeightIs(float $height): void
+    public function iShouldSeeProductHeightIs(float $height): void
     {
         Assert::same($this->shippingElement->getProductHeight(), $height);
     }
@@ -235,7 +233,7 @@ final class ProductShowpageContext implements Context
     /**
      * @Then I should see product's depth is :depth
      */
-    public function iShouldSeeProductSDepthIs(float $depth): void
+    public function iShouldSeeProductDepthIs(float $depth): void
     {
         Assert::same($this->shippingElement->getProductDepth(), $depth);
     }
@@ -243,15 +241,15 @@ final class ProductShowpageContext implements Context
     /**
      * @Then I should see product's weight is :weight
      */
-    public function iShouldSeeProductSWeightIs(float $weight): void
+    public function iShouldSeeProductWeightIs(float $weight): void
     {
         Assert::same($this->shippingElement->getProductWeight(), $weight);
     }
 
     /**
-     * @Then I should see image
+     * @Then I should see an image related to this product
      */
-    public function iShouldSeeImageWithPath(): void
+    public function iShouldSeeImageRelatedToThisProduct(): void
     {
         Assert::true($this->mediaElement->isImageDisplayed());
     }
@@ -269,20 +267,21 @@ final class ProductShowpageContext implements Context
      */
     public function iShouldSeeProductSlugIs(string $slug): void
     {
-     Assert::same($this->moreDetailsElement->getProductSlug(), $slug);
+     Assert::same($this->moreDetailsElement->getSlug(), $slug);
     }
+
     /**
      * @Then I should see product's description is :description
      */
     public function iShouldSeeProductSDescriptionIs(string $description): void
     {
-        Assert::same($this->moreDetailsElement->getProductDescription(), $description);
+        Assert::same($this->moreDetailsElement->getDescription(), $description);
     }
 
     /**
-     * @Then I should see product's meta keywords is :metaKeywords
+     * @Then I should see product's meta keyword(s) is/are :metaKeywords
      */
-    public function iShouldSeeProductSMetaKeywordsIs(string $metaKeywords): void
+    public function iShouldSeeProductMetaKeywordsAre(string $metaKeywords): void
     {
         Assert::same($this->moreDetailsElement->getProductMetaKeywords(), $metaKeywords);
     }
@@ -290,17 +289,9 @@ final class ProductShowpageContext implements Context
     /**
      * @Then I should see product's short description is :shortDescription
      */
-    public function iShouldSeeProductSShortDescriptionIs(string $shortDescription): void
+    public function iShouldSeeProductShortDescriptionIs(string $shortDescription): void
     {
-        Assert::same($this->moreDetailsElement->getProductShortDescription(), $shortDescription);
-    }
-
-    /**
-     * @Then I should see :attribute is :value
-     */
-    public function iShouldSeeIs(string $attribute, string $value): void
-    {
-        Assert::same($this->attributesElement->getProductAttribute($attribute), $value);
+        Assert::same($this->moreDetailsElement->getShortDescription(), $shortDescription);
     }
 
     /**
@@ -328,11 +319,18 @@ final class ProductShowpageContext implements Context
     }
 
     /**
-     * @Given I should see :variantName variant with code :code, priced :price and current stock :currentStock
-     *
+     * @Then I should see :variantName variant with code :code, priced :price and current stock :currentStock
      */
-    public function iShouldSeeVariantWithCodePriceAndCurrentStock(string $variantName, string $code, string $price, int $currentStock): void
+    public function iShouldSeeVariantWithCodePriceAndCurrentStock(string $variantName, string $code, string $price, string $currentStock): void
     {
-        Assert::true($this->variantsElement->hasProductVariantWithCodePriceAndCurrentlyStock($variantName, $code, $price, $currentStock));
+        Assert::true($this->variantsElement->hasProductVariantWithCodePriceAndCurrentStock($variantName, $code, $price, $currentStock));
+    }
+
+    /**
+     * @Then I should see attribute :attribute with value :value in :locale locale
+     */
+    public function iShouldSeeAttributeWithValueInLocale(string $attribute, string $value, string $locale): void
+    {
+        Assert::true($this->attributesElement->hasAttributeInLocale($attribute, $locale, $value));
     }
 }

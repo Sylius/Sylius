@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\AdminBundle\Templating\Helper;
@@ -11,7 +20,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-class VariantPriceHelperSpec extends ObjectBehavior
+final class VariantPriceHelperSpec extends ObjectBehavior
 {
     function let(
         ChannelRepositoryInterface $channelRepository,
@@ -25,7 +34,7 @@ class VariantPriceHelperSpec extends ObjectBehavior
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_provides_product_price_with_main_currency_for_chosen_channel(
+    function it_provides_product_price_with_base_currency_for_chosen_channel(
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel,
         CurrencyInterface $currency,

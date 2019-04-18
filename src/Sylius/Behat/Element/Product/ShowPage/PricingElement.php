@@ -27,7 +27,7 @@ final class PricingElement extends Element implements PricingElementInterface
         return $priceForChannel->getText();
     }
 
-    public function getOrginalPriceForChannel(string $channelName): string
+    public function getOriginalPriceForChannel(string $channelName): string
     {
         /** @var NodeElement $priceForChannel */
         $channelPriceRow = $this->getDocument()->find('css', sprintf('#pricing tr:contains("%s")', $channelName));

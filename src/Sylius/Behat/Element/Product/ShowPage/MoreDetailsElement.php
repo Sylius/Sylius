@@ -14,11 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Product\ShowPage;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
-use function GuzzleHttp\Psr7\str;
 
 final class MoreDetailsElement extends Element implements MoreDetailsElementInterface
 {
-    public function getProductDescription(): string
+    public function getDescription(): string
     {
         return $this->getElement('description')->getText();
     }
@@ -28,17 +27,17 @@ final class MoreDetailsElement extends Element implements MoreDetailsElementInte
         return $this->getElement('meta_keywords')->getText();
     }
 
-    public function getProductShortDescription(): string
+    public function getShortDescription(): string
     {
         return $this->getElement('short_description')->getText();
     }
 
-    public function getProductMetaDescription(): string
+    public function getMetaDescription(): string
     {
         return $this->getElement('meta_description')->getText();
     }
 
-    public function getProductSlug(): string
+    public function getSlug(): string
     {
         return $this->getElement('slug')->getText();
     }
@@ -52,11 +51,11 @@ final class MoreDetailsElement extends Element implements MoreDetailsElementInte
     {
         return array_merge(parent::getDefinedElements(), [
             'description' => '#more-details tr:contains("Description") td:nth-child(2)',
-            'meta_keywords' => '#more-details tr:contains("Meta keywords") td:nth-child(2)',
-            'short_description' => '#more-details tr:contains("Short description") td:nth-child(2)',
             'meta_description' => '#more-details tr:contains("Meta description") td:nth-child(2)',
-            'slug' => '#more-details tr:contains("Slug") td:nth-child(2)',
+            'meta_keywords' => '#more-details tr:contains("Meta keywords") td:nth-child(2)',
             'name' => '#more-details tr:contains("Name") td:nth-child(2)',
+            'short_description' => '#more-details tr:contains("Short description") td:nth-child(2)',
+            'slug' => '#more-details tr:contains("Slug") td:nth-child(2)',
         ]);
     }
 }

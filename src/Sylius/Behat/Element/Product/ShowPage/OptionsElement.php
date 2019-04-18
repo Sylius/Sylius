@@ -17,7 +17,6 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 final class OptionsElement extends Element implements OptionsElementInterface
 {
-
     public function isOptionDefined(string $optionName): bool
     {
         $options = $this->getElement('options');

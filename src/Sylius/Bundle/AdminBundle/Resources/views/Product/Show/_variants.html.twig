@@ -12,7 +12,7 @@
                     <span class="ui header" >{{ 'sylius.ui.options'|trans }}</span>
                 </div>
                 <div class="seven wide column">
-                    <span class="ui header" >{{ 'sylius.ui.number'|trans }}</span>
+                    <span class="ui header" >{{ 'sylius.ui.code'|trans }}</span>
                 </div>
             </div>
         </div>
@@ -46,29 +46,24 @@
                             <div class="ui small header">
                                 {{ 'sylius.ui.image'|trans }}
                             </div>
-                            {% if variant.images.first() == true %}
-                                {% set image = variant.images.first() %}
-                                {% set path = image.path is not null ? image.path|imagine_filter('sylius_shop_product_small_thumbnail') : '//placehold.it/100x100' %}
-                                <div class="ui image">
-                                    <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}" data-lightbox="sylius-product-image">
-                                        <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" />
-                                    </a>
-                                </div>
+                            {% if variant.hasImages %}
+                                {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': variant, 'filter': 'sylius_shop_product_large_thumbnail'} %}
                             {% else %}
-                                <div class="ui image">
-                                    <img src="https://via.placeholder.com/100x100.png" alt="{{ product.name }}" />
-                                </div>
+                                {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product, 'filter': 'sylius_shop_product_large_thumbnail'} %}
                             {% endif %}
                         </div>
                         <div class="four wide column">
                             <div class="ui small header">
                                 {{ 'sylius.ui.shipping'|trans }}
                             </div>
+                            {% if variant.shippingCategory is same as(null) and variant.width is same as(null) and variant.height is same as(null) and variant.depth is same as(null) and variant.weight is same as(null) %}
+                                <span class="ui teal label"><i class="remove icon"></i>{{ 'sylius.ui.no_shipping_data'|trans }}</span>
+                            {% else %}
                             <table class="ui definition table">
                                 <tbody>
                                 <tr>
                                     <td class="five wide">{{ 'sylius.ui.shipping_category'|trans }}</td>
-                                    <td>{{ product.variants.first().shippingCategory }}</td>
+                                    <td>{{ variant.shippingCategory }}</td>
                                 </tr>
                                 <tr>
                                     <td class="five wide">{{ 'sylius.ui.width'|trans }}</td>
@@ -88,6 +83,7 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            {% endif %}
                         </div>
                         <div class="four wide column pricing">
                             <div class="ui small header">
