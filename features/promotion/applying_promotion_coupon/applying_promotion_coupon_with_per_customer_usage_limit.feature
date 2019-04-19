@@ -1,7 +1,7 @@
 @applying_promotion_coupon
 Feature: Applying promotion coupon with per customer usage limit
     In order to pay proper amount after using the promotion coupon
-    As a Visitor
+    As a Customer
     I want to have promotion coupon's discounts applied to my cart only if the given promotion coupon is valid
 
     Background:
@@ -35,11 +35,9 @@ Feature: Applying promotion coupon with per customer usage limit
 
     @ui
     Scenario: Receiving no discount from valid coupon that has reached its per customer usage limit
-        Given I placed an order "#00000022"
+        Given this coupon can be used once per customer
+        And I placed an order "#00000022"
         And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
-        And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
-        And I placed an order "#00000023"
-        And I bought a single "PHP Socks" using "SANTA2016" coupon
         And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
@@ -48,15 +46,27 @@ Feature: Applying promotion coupon with per customer usage limit
         And there should be no discount
 
     @ui
-    Scenario: Cancelled orders should not influence per customer usage limit
-        Given I placed an order "#00000022"
+    Scenario: Cancelled orders do not affect per customer usage limit by default
+        Given this coupon can be used once per customer
+        And I placed an order "#00000022"
         And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
-        And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
-        And I placed an order "#00000023"
-        And I bought a single "PHP Socks" using "SANTA2016" coupon
         And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         But I cancelled this order
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
+
+    @ui
+    Scenario: Cancelled orders affect per customer usage limit
+        Given this coupon is set as non reusable after cancelling the order in which it has been used
+        And this coupon can be used once per customer
+        And I placed an order "#00000022"
+        And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
+        And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
+        But I cancelled this order
+        When I add product "PHP T-Shirt" to the cart
+        And I use coupon with code "SANTA2016"
+        Then I should be notified that the coupon is invalid
+        And my cart total should be "$100.00"
+        And there should be no discount
