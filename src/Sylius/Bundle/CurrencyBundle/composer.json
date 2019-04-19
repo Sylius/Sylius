@@ -25,6 +25,7 @@
         "sylius/currency": "^1.2",
         "sylius/resource-bundle": "^1.2",
         "symfony/framework-bundle": "^3.4|^4.1.1",
+        "symfony/intl": "^3.4|^4.1.1",
         "symfony/templating": "^3.4|^4.1.1"
     },
     "require-dev": {
