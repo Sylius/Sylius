@@ -89,4 +89,26 @@ final class OptionsParserSpec extends ObjectBehavior
             ->shouldReturn(['id' => 21])
         ;
     }
+
+    function it_parses_options_with_array(
+        PropertyAccessorInterface $propertyAccessor,
+        Request $request,
+        ResourceInterface $data
+    ): void {
+        $arrayData = [
+            0 => $data,
+            'name' => 'An awesome name',
+        ];
+        $propertyAccessor->getValue($arrayData, '[0].id')->willReturn(21);
+        $propertyAccessor->getValue($arrayData, 'name')->willReturn('An awesome name');
+
+        $this
+            ->parseOptions(['name' => 'resource.name'], $request, $arrayData)
+            ->shouldReturn(['name' => 'An awesome name'])
+        ;
+        $this
+            ->parseOptions(['id' => 'resource[0].id'], $request, $arrayData)
+            ->shouldReturn(['id' => 21])
+        ;
+    }
 }
