@@ -44,6 +44,7 @@
         "symfony/dependency-injection": "^3.4|^4.1.1",
         "symfony/proxy-manager-bridge": "^3.4|^4.1.1",
         "symfony/security-csrf": "^3.4|^4.1.1",
+        "symfony/translation": "^3.4|^4.1.1",
         "symfony/twig-bundle": "^3.4|^4.1.1",
         "symfony/validator": "^3.4|^4.1.1",
         "twig/twig": "^2.0"
