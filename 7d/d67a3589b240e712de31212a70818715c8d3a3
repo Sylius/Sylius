@@ -1,0 +1,38 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-04-03T09:26:16Z
+
+ping @Roshyo :)
+
+---------------------------------------------------------------------------
+
+by Roshyo at 2019-04-03T11:22:04Z
+
+Oh yeah indeed. I totally forgot this.
+
+What sort of tests should I add ?
+I'm afraid Behat will be hard to cover this. It would require creating a whole new grid, with a whole new page and a custom queryBuilder.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-04-04T07:07:14Z
+
+Some unit test in `OptionsParserSpec` at least, we can optionally think about something more sophisticated later :)
+
+---------------------------------------------------------------------------
+
+by Roshyo at 2019-04-07T12:55:15Z
+
+Here we are.
+
+---------------------------------------------------------------------------
+
+by Roshyo at 2019-04-15T13:06:38Z
+
+ping @pamil @Zales0123
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-04-19T12:15:26Z
+
+Thanks, Stephane! :tada:
