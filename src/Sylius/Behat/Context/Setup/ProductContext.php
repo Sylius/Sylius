@@ -22,6 +22,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -697,18 +698,19 @@ final class ProductContext implements Context
      */
     public function thisProductHasAnImageWithType(ProductInterface $product, $imagePath, $imageType)
     {
-        $filesPath = $this->getParameter('files_path');
+        $this->createProductImage($product, $imagePath, $imageType);
+    }
 
-        /** @var ImageInterface $productImage */
-        $productImage = $this->productImageFactory->createNew();
-        $productImage->setFile(new UploadedFile($filesPath . $imagePath, basename($imagePath)));
-        $productImage->setType($imageType);
-        $this->imageUploader->upload($productImage);
-
-        $product->addImage($productImage);
-
-        $this->objectManager->persist($product);
-        $this->objectManager->flush();
+    /**
+     * @Given /^(this product) has an image "([^"]+)" with "([^"]+)" type for ("[^"]+" variant)$/
+     */
+    public function thisProductHasAnImageWithTypeForVariant(
+        ProductInterface $product,
+        string $imagePath,
+        string $imageType,
+        ProductVariantInterface $variant
+    ): void {
+        $this->createProductImage($product, $imagePath, $imageType, $variant);
     }
 
     /**
@@ -942,6 +944,31 @@ final class ProductContext implements Context
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->objectManager->persist($option);
+        $this->objectManager->flush();
+    }
+
+    private function createProductImage(
+        ProductInterface $product,
+        string $imagePath,
+        string $imageType,
+        ?ProductVariantInterface $variant = null
+    ): void {
+        $filesPath = $this->getParameter('files_path');
+
+        /** @var ProductImageInterface $productImage */
+        $productImage = $this->productImageFactory->createNew();
+        $productImage->setFile(new UploadedFile($filesPath . $imagePath, basename($imagePath)));
+        $productImage->setType($imageType);
+
+        if (null !== $variant) {
+            $productImage->addProductVariant($variant);
+        }
+
+        $this->imageUploader->upload($productImage);
+
+        $product->addImage($productImage);
+
+        $this->objectManager->persist($product);
         $this->objectManager->flush();
     }
 }

@@ -107,6 +107,13 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $this->getPriceFromString(trim($unitPrice->getText()));
     }
 
+    public function getItemImage(int $itemNumber): string
+    {
+        $itemImage = $this->getElement('item_image', ['%number%' => $itemNumber]);
+
+        return $itemImage->getAttribute('src');
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -276,12 +283,13 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'apply_coupon_button' => 'button:contains("Apply coupon")',
+            'base_grand_total' => '#sylius-cart-base-grand-total',
             'cart_items' => '#sylius-cart-items',
             'cart_total' => '#sylius-cart-total',
             'clear_button' => '#sylius-cart-clear',
             'coupon_field' => '#sylius_cart_promotionCoupon',
             'grand_total' => '#sylius-cart-grand-total',
-            'base_grand_total' => '#sylius-cart-base-grand-total',
+            'item_image' => '#sylius-cart-items tbody tr:nth-child(%number%) img',
             'product_discounted_total' => '#sylius-cart-items tr:contains("%name%") .sylius-discounted-total',
             'product_row' => '#sylius-cart-items tbody tr:contains("%name%")',
             'product_total' => '#sylius-cart-items tr:contains("%name%") .sylius-total',
