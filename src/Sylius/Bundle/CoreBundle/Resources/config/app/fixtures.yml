@@ -9,7 +9,11 @@ sylius_fixtures:
                 logger: ~
 
             fixtures:
-                locale: ~
+                locale:
+                    options:
+                        locales:
+                            - "%locale%"
+
                 currency:
                     options:
                         currencies: ['USD']
