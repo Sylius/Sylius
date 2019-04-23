@@ -9,10 +9,10 @@ imports:
 sylius_grid:
     templates:
         action:
-            show: "@SyliusUi/Grid/Action/show.html.twig"
-            pay: "@SyliusShop/Account/Order/Grid/Action/pay.html.twig"
+            shop_show: "@SyliusShop/Grid/Action/show.html.twig"
+            shop_pay: "@SyliusShop/Account/Order/Grid/Action/pay.html.twig"
         filter:
-            string: "@SyliusUi/Grid/Filter/string.html.twig"
+            shop_string: "@SyliusShop/Grid/Filter/string.html.twig"
 
 sylius_shop:
     checkout_resolver:
