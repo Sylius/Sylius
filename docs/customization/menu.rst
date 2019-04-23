@@ -5,7 +5,7 @@ Adding new positions in your menu is done **via events**.
 
 You have got the ``Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent`` with ``FactoryInterface`` and ``ItemInterface`` of `KnpMenu`_, this lets you manipulate the whole menu.
 
-You've got six events that you should be subscribing to:
+You've got eight events that you should be subscribing to:
 
 .. code-block:: php
 
@@ -14,7 +14,9 @@ You've got six events that you should be subscribing to:
     sylius.menu.admin.customer.show # For the buttons menu on top of the show page of the Customer (/admin/customers/{id})
     sylius.menu.admin.order.show # For the buttons menu on top of the show page of the Order (/admin/orders/{id})
     sylius.menu.admin.product.form # For the tabular menu on the left hand side of the new/edit pages of the Product (/admin/products/new & /admin/products/{id}/edit)
+    sylius.menu.admin.product.update # For the buttons menu on top of the update page of the Product (/admin/products/{id}/edit)
     sylius.menu.admin.product_variant.form # For the tabular menu on the left hand side of the new/edit pages of the ProductVariant (/admin/products/{productId}/variants/new & /admin/products/{productId}/variants/{id}/edit)
+    sylius.menu.admin.promotion.update # For the buttons menu on top of the update page of the Promotion (/admin/promotions/{id}/edit)
 
 How to customize Admin Menu?
 ----------------------------

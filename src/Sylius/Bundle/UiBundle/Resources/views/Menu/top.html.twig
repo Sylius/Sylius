@@ -27,6 +27,8 @@
         {{ buttons.delete(item.uri, item.label|trans, true, item.attribute('resource_id')) }}
     {% elseif 'transition' == item.attribute('type') %}
         {{ block('transition') }}
+    {% elseif 'links' == item.attribute('type') %}
+        {{ block('links') }}
     {% else %}
         {{ block('link') }}
     {% endif %}
@@ -39,6 +41,26 @@
         {{ block('icon') }}
         {{ item.label|trans }}
     </a>
+{% endblock %}
+
+{% block links %}
+    {% set color = item.labelAttribute('color') %}
+    {% set icon = item.labelAttribute('icon') %}
+
+    <div class="ui{% if icon %} labeled icon{% endif %} floating dropdown {% if color %}{{ color }} {% endif %}link button">
+        {% if icon %}<i class="{{ icon }} icon"></i>{% endif %}
+        <span class="text">{{ item.label|trans }}</span>
+        <div class="menu">
+            {% for child in item.children %}
+                {% set icon = child.labelAttribute('icon') %}
+
+                <a href="{{ child.uri }}" class="item">
+                    {% if icon %}<i class="icon {{ icon }}"></i> {% endif %}
+                    {{ child.label|trans }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block transition %}
