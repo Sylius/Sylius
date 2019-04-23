@@ -111,7 +111,7 @@ This is how this file should look like for Sylius (tuned version of the default 
             php bin/console --env=prod --no-debug --ansi cache:warmup
             php bin/console --env=prod --no-debug --ansi assets:install
             # Next command is only needed if you are using themes
-            php bin/console --env=prod --no-debug --ansi sylius:theme:assets:install  
+            php bin/console --env=prod --no-debug --ansi sylius:theme:assets:install
             yarn install
             GULP_ENV=prod yarn build
         deploy: |
@@ -180,8 +180,6 @@ In the ``app/config/parameters_platform.php`` file, put the following code:
     foreach ($relationships['redis'] as $endpoint) {
         $container->setParameter('redis_dsn', 'redis://'.$endpoint['host'].':'.$endpoint['port']);
     }
-
-    $container->setParameter('sylius.cache', array('type' => 'array'));
 
     ini_set('session.save_path', '/tmp/sessions');
 
