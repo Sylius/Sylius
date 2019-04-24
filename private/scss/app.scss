@@ -1,0 +1,7 @@
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+
+.remove-this-class {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
