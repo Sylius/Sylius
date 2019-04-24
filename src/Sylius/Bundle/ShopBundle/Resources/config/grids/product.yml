@@ -34,7 +34,7 @@ sylius_grid:
                     sortable: channelPricing.price
             filters:
                 search:
-                    type: string
+                    type: shop_string
                     label: false
                     options:
                         fields: [translation.name]
