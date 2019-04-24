@@ -2,7 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 parameters:
-    sylius.cache:
-        type: file_system
     sylius.uploader.filesystem: sylius_image
     sylius_core.public_dir: "%kernel.project_dir%/web"
