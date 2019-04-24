@@ -2,6 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 imports:
+    - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
+
     - { resource: "@SyliusShopBundle/Resources/config/app/sylius/sylius_mailer.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/grids/account/order.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/grids/product.yml" }
