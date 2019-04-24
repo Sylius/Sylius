@@ -33,10 +33,6 @@ doctrine:
             default:
                 auto_mapping: true
 
-doctrine_cache:
-    providers:
-        sylius_rbac: "%sylius.cache%"
-
 knp_gaufrette:
     adapters:
         sylius_image:
