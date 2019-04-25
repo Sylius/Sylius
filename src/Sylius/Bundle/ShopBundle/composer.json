@@ -32,7 +32,8 @@
         "sylius/core-bundle": "^1.2",
         "sylius/ui-bundle": "^1.2",
         "symfony/framework-bundle": "^3.4|^4.1.1",
-        "symfony/security-bundle": "^3.4|^4.1.1"
+        "symfony/security-bundle": "^3.4|^4.1.1",
+        "twig/twig": "^2.6"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.0",
