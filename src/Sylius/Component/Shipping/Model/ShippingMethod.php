@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ArchivableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
@@ -48,11 +50,15 @@ class ShippingMethod implements ShippingMethodInterface
     /** @var array */
     protected $configuration = [];
 
+    /** @var Collection|ShippingMethodRuleInterface[] */
+    protected $rules;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
 
         $this->createdAt = new \DateTime();
+        $this->rules = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -194,6 +200,50 @@ class ShippingMethod implements ShippingMethodInterface
     public function setConfiguration(array $configuration): void
     {
         $this->configuration = $configuration;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRules(): Collection
+    {
+        return $this->rules;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasRules(): bool
+    {
+        return !$this->rules->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasRule(ShippingMethodRuleInterface $rule): bool
+    {
+        return $this->rules->contains($rule);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addRule(ShippingMethodRuleInterface $rule): void
+    {
+        if (!$this->hasRule($rule)) {
+            $rule->setShippingMethod($this);
+            $this->rules->add($rule);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeRule(ShippingMethodRuleInterface $rule): void
+    {
+        $rule->setShippingMethod(null);
+        $this->rules->removeElement($rule);
     }
 
     /**

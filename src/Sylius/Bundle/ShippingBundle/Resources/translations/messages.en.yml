@@ -29,6 +29,7 @@ sylius:
             description: Description
             name: Name
         shipping_method:
+            add_rule: Add rule
             calculator: Calculator
             category: Category
             category_requirement: Category requirement
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: None of the units have to match the method category
             name: Name
             position: Position
+            rules: Rules
             tax_category: Tax category
             translations: Translations
+        shipping_method_rule:
+            type: Type
+            total_weight_less_than: Total weight less than
+            total_weight_less_than_configuration: 
+                weight: Weight

@@ -13,15 +13,43 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping\Checker;
 
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Shipping\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodRuleInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {
+    /** @var ServiceRegistryInterface|null */
+    private $ruleRegistry;
+
+    /**
+     * The rule registry is default null because of backwards compatibility
+     * In v2 it will be mandatory
+     */
+    public function __construct(ServiceRegistryInterface $ruleRegistry = null)
+    {
+        $this->ruleRegistry = $ruleRegistry;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool
+    {
+        if (!$this->areCategoriesEligible($subject, $method)) {
+            return false;
+        }
+
+        if (!$this->areRulesEligible($subject, $method)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function areCategoriesEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool
     {
         if (!$category = $method->getCategory()) {
             return true;
@@ -45,5 +73,32 @@ final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilit
         }
 
         return false;
+    }
+
+    private function areRulesEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool
+    {
+        if (null === $this->ruleRegistry) {
+            return true;
+        }
+
+        if (!$method->hasRules()) {
+            return true;
+        }
+
+        foreach ($method->getRules() as $rule) {
+            if (!$this->isEligibleToRule($subject, $rule)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function isEligibleToRule(ShippingSubjectInterface $subject, ShippingMethodRuleInterface $rule): bool
+    {
+        /** @var RuleCheckerInterface $checker */
+        $checker = $this->ruleRegistry->get($rule->getType());
+
+        return $checker->isEligible($subject, $rule->getConfiguration());
     }
 }

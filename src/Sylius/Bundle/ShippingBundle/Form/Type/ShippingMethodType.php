@@ -90,6 +90,10 @@ final class ShippingMethodType extends AbstractResourceType
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.locale.enabled',
             ])
+            ->add('rules', ShippingMethodRuleCollectionType::class, [
+                'label' => 'sylius.form.shipping_method.rules',
+                'button_add_label' => 'sylius.form.shipping_method.add_rule',
+            ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $method = $event->getData();
 
