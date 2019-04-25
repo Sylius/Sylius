@@ -11,6 +11,7 @@ imports:
 sylius_grid:
     templates:
         action:
+            pay: "@SyliusShop/Account/Order/Grid/Action/_pay_deprecated.html.twig"
             shop_show: "@SyliusShop/Grid/Action/show.html.twig"
             shop_pay: "@SyliusShop/Account/Order/Grid/Action/pay.html.twig"
         filter:

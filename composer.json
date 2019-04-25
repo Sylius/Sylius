@@ -89,7 +89,7 @@
         "symfony/validator": "^3.4|^4.1",
         "symfony/yaml": "^3.4|^4.1",
         "twig/extensions": "^1.4",
-        "twig/twig": "^2.0",
+        "twig/twig": "^2.6",
         "webmozart/assert": "^1.1",
         "white-october/pagerfanta-bundle": "^1.0.8",
         "willdurand/hateoas": "^2.12",
