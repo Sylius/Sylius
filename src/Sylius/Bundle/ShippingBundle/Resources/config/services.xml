@@ -25,11 +25,6 @@
 
         <service id="sylius.shipping_eligibility_checker" class="Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker" />
 
-        <service id="sylius.registry.shipping_rule_checker" class="Sylius\Component\Registry\ServiceRegistry" >
-            <argument>Sylius\Component\Shipping\Checker\RuleCheckerInterface</argument>
-            <argument>shipping rule checker</argument>
-        </service>
-
         <service id="sylius.registry.shipping_methods_resolver" class="Sylius\Component\Registry\PrioritizedServiceRegistry">
             <argument>%sylius.shipping_methods_resolver.interface%</argument>
             <argument>Shipping methods resolver</argument>
