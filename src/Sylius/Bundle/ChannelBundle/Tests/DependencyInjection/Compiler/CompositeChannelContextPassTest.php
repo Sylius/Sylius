@@ -40,7 +40,7 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.context.channel',
             'addContext',
-            [new Reference('sylius.context.channel.tagged_one')]
+            [new Reference('sylius.context.channel.tagged_one'), 0]
         );
     }
 
@@ -82,7 +82,7 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
             'sylius.context.channel',
             'addContext',
-            [new Reference('sylius.context.channel.tagged_one')]
+            [new Reference('sylius.context.channel.tagged_one'), 0]
         );
     }
 
@@ -103,7 +103,7 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.context.channel.composite',
             'addContext',
-            [new Reference('sylius.context.channel.tagged_one')]
+            [new Reference('sylius.context.channel.tagged_one'), 0]
         );
     }
 
