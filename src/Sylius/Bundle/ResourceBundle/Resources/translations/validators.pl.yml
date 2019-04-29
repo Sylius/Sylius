@@ -1,7 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    resource:
-        not_enabled: "Podany zasób jest wyłączony"
-        not_disabled: "Podany zasób jest włączony"
