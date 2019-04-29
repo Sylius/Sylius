@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by pamil at 2019-04-29T09:14:10Z
+
+We support the `1.1` branch with security fixes only, but since I'm in the process of extracting technical bundles to their standalone repositories which involves this branch, I can make an exception with this PR and merge it.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-04-29T09:34:11Z
+
+Thanks, tchap! :tada:
