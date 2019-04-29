@@ -1,7 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    resource:
-        not_enabled: "La data risorsa è disattivata"
-        not_disabled: "La data risorsa è abilitata"

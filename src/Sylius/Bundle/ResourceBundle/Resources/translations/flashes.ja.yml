@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    resource:
-        create: '%resource%の登録が完了しました。'
-        update: '%resource%の更新が完了しました。'
-        delete: '%resource%の削除が完了しました。'
