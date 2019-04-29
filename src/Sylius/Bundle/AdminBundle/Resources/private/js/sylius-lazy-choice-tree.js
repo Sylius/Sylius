@@ -155,13 +155,13 @@
                 checkboxElement.checkbox({
                     onChecked: function() {
                         var value = checkboxElement.data('value');
-                        var checkedValues = $input.val().split(",").filter(x => x);
+                        var checkedValues = $input.val().split(",").filter(function(x) { return x; });
                         checkedValues.push(value);
                         $input.val(checkedValues.join());
                     },
                     onUnchecked: function() {
                         var value = checkboxElement.data('value');
-                        var checkedValues = $input.val().split(",").filter(x => x);
+                        var checkedValues = $input.val().split(",").filter(function(x) { return x; });
                         var i = checkedValues.indexOf(value);
                         if(i != -1) {
                             checkedValues.splice(i, 1);
