@@ -31,10 +31,6 @@ final class ShippingMethodRulesEligibilityChecker implements ShippingMethodEligi
 
     public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $shippingMethod): bool
     {
-        if (null === $this->ruleRegistry) {
-            return true;
-        }
-
         if (!$shippingMethod->hasRules()) {
             return true;
         }
