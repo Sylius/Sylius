@@ -13,15 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler;
 
+use InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 final class RegisterShippingMethodsResolversPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('sylius.registry.shipping_methods_resolver')) {
@@ -32,8 +30,8 @@ final class RegisterShippingMethodsResolversPass implements CompilerPassInterfac
         $resolvers = [];
 
         foreach ($container->findTaggedServiceIds('sylius.shipping_method_resolver') as $id => $attributes) {
-            if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged shipping methods resolvers need to have `type` and `label` attributes.');
+            if (!isset($attributes[0]['type'], $attributes[0]['label'])) {
+                throw new InvalidArgumentException('Tagged shipping methods resolvers need to have `type` and `label` attributes.');
             }
 
             $priority = (int) ($attributes[0]['priority'] ?? 0);

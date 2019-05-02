@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
+use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;

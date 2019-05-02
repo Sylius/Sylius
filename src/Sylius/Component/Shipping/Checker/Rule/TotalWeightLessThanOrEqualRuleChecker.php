@@ -15,14 +15,10 @@ namespace Sylius\Component\Shipping\Checker\Rule;
 
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-// todo should the name be TotalWeightLessThanOrEqualRuleChecker?
-final class TotalWeightLessThanRuleChecker implements RuleCheckerInterface
+final class TotalWeightLessThanOrEqualRuleChecker implements RuleCheckerInterface
 {
-    public const TYPE = 'total_weight_less_than';
+    public const TYPE = 'total_weight_less_than_or_equal';
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEligible(ShippingSubjectInterface $subject, array $configuration): bool
     {
         // todo $subject->getShippingWeight() probably does not return total weight. Figure this out

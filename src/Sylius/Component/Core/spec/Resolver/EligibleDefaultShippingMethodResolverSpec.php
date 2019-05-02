@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Resolver;
 
+use InvalidArgumentException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -22,7 +23,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
-use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
+use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
@@ -132,6 +133,6 @@ final class EligibleDefaultShippingMethodResolverSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_passed_shipment_is_not_core_shipment_object(BaseShipmentInterface $shipment): void
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('getDefaultShippingMethod', [$shipment]);
+        $this->shouldThrow(InvalidArgumentException::class)->during('getDefaultShippingMethod', [$shipment]);
     }
 }

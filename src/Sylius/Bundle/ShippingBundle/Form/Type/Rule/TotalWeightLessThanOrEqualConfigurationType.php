@@ -19,16 +19,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
-final class TotalWeightLessThanConfigurationType extends AbstractType
+final class TotalWeightLessThanOrEqualConfigurationType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('weight', NumberType::class, [
-                'label' => 'sylius.form.shipping_method_rule.total_weight_less_than_configuration.weight',
+                'label' => 'sylius.form.shipping_method_rule.total_weight_less_than_or_equal_configuration.weight',
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
                     new Type(['type' => 'numeric', 'groups' => ['sylius']]),
@@ -37,11 +34,8 @@ final class TotalWeightLessThanConfigurationType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
-        return 'sylius_promotion_rule_cart_quantity_configuration';
+        return 'sylius_shipping_method_rule_total_weight_less_than_or_equal_configuration';
     }
 }

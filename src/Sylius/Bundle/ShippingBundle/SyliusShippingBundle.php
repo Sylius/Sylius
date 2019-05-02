@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ShippingBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\CompositeShippingMethodEligibilityCheckerPass;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterShippingMethodsResolversPass;
@@ -39,6 +40,7 @@ final class SyliusShippingBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
+        $container->addCompilerPass(new CompositeShippingMethodEligibilityCheckerPass());
         $container->addCompilerPass(new RegisterCalculatorsPass());
         $container->addCompilerPass(new RegisterRuleCheckersPass());
         $container->addCompilerPass(new RegisterShippingMethodsResolversPass());

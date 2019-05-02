@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
-use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
+use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Webmozart\Assert\Assert;
