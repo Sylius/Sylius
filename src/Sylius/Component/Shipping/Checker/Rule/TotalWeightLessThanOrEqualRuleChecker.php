@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping\Checker\Rule;
 
-use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Webmozart\Assert\Assert;
 
 final class TotalWeightLessThanOrEqualRuleChecker implements RuleCheckerInterface
 {
@@ -23,20 +21,6 @@ final class TotalWeightLessThanOrEqualRuleChecker implements RuleCheckerInterfac
 
     public function isEligible(ShippingSubjectInterface $subject, array $configuration): bool
     {
-        /** @var ShipmentInterface $subject */
-        Assert::isInstanceOf($subject, ShipmentInterface::class);
-
-        $order = $subject->getOrder();
-        if (null === $order) {
-            // if the order is null the weight is less than anything
-            return true;
-        }
-
-        $totalWeight = 0;
-        foreach ($order->getShipments() as $shipment) {
-            $totalWeight += $shipment->getShippingWeight();
-        }
-
-        return $totalWeight <= $configuration['weight'];
+        return $subject->getShippingWeight() <= $configuration['weight'];
     }
 }
