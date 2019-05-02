@@ -6,15 +6,20 @@ The default validation group for all resources is ``sylius``, but you can config
 How to customize validation?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. tip::
+
+    You can browse the full implementation of these examples on `this GitHub Pull Request.
+    <https://github.com/Sylius/Customizations/pull/15>`_
+
 Let's take the example of changing the length of ``name`` for the ``Product`` entity - watch out the field ``name`` is hold on the ``ProductTranslation`` model.
 
 In the ``sylius`` validation group the minimum length is equal to 2.
 What if you'd want to have at least 10 characters?
 
-**1.** Create the ``src/Resources/config/validation.yml``.
+**1.** Create the ``config/validator/validation.yaml``.
 
 In this file you need to overwrite the whole validation of your field that you are willing to modify.
-Take this configuration from the ``Sylius/Bundle/ProductBundle/Resources/config/validation/ProductTranslation.xml`` - you can choose format ``xml`` or ``yaml``.
+Take this configuration from the ``src/Sylius/Bundle/ProductBundle/Resources/config/validation/ProductTranslation.xml`` - you can choose format ``xml`` or ``yaml``.
 
 Give it a new, custom validation group - ``[app_product]``.
 
