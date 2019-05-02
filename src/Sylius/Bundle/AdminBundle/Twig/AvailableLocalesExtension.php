@@ -13,24 +13,29 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig;
 
-use Sylius\Bundle\AdminBundle\Templating\Helper\AvailableLocaleHelper;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class AvailableLocalesExtension extends AbstractExtension
 {
-    /** @var AvailableLocaleHelper */
-    private $localesProvider;
+    /** @var TranslationLocaleProviderInterface */
+    private $localeProvider;
 
-    public function __construct(AvailableLocaleHelper $localesProvider)
+    public function __construct(TranslationLocaleProviderInterface $localeProvider)
     {
-        $this->localesProvider = $localesProvider;
+        $this->localeProvider = $localeProvider;
     }
 
     public function getFunctions()
     {
         return [
-            new TwigFunction('sylius_available_locales',[$this->localesProvider, 'getDefinedLocaleCodes']),
+            new TwigFunction('sylius_available_locales',[$this, 'getDefinedLocaleCodes']),
         ];
+    }
+
+    public function getDefinedLocaleCodes(): array
+    {
+        return $this->localeProvider->getDefinedLocalesCodes();
     }
 }

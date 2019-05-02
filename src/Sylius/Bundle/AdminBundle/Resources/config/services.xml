@@ -18,7 +18,6 @@
         <import resource="services/listener.xml" />
         <import resource="services/menu.xml" />
         <import resource="services/form.xml" />
-        <import resource="services/templating.xml" />
     </imports>
 
     <services>
@@ -39,11 +38,12 @@
             <tag name="twig.extension" />
         </service>
         <service id="sylius.twig.extension.variant_price" class="Sylius\Bundle\AdminBundle\Twig\VariantPriceExtension">
-            <argument type="service" id="sylius.templating.helper.variant_price_helper" />
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.money_formatter" />
             <tag name="twig.extension" />
         </service>
         <service id="sylius.twig.extension.avaiable_locales" class="Sylius\Bundle\AdminBundle\Twig\AvailableLocalesExtension">
-            <argument type="service" id="sylius.templating.helper.available_locales_helper"/>
+            <argument type="service" id="sylius.translation_locale_provider.admin"/>
             <tag name="twig.extension" />
         </service>
 
