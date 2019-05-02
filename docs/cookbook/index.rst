@@ -77,6 +77,16 @@ Promotions
 
 .. include:: /cookbook/promotions/map.rst.inc
 
+Shipping methods
+----------------
+
+.. toctree::
+    :hidden:
+
+    shipping-methods/custom-shipping-method-rule
+
+.. include:: /cookbook/shipping-methods/map.rst.inc
+
 Images
 ------
 
