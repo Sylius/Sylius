@@ -30,14 +30,16 @@ final class RegisterRuleCheckersPass implements CompilerPassInterface
         $ruleCheckerFormTypeRegistry = $container->getDefinition('sylius.form_registry.shipping_method_rule_checker');
 
         $ruleCheckerTypeToLabelMap = [];
-        foreach ($container->findTaggedServiceIds('sylius.shipping_method_rule_checker') as $id => $attributes) {
-            if (!isset($attributes[0]['type'], $attributes[0]['label'], $attributes[0]['form_type'])) {
-                throw new InvalidArgumentException('Tagged shipping method rule checker `' . $id . '` needs to have `type`, `form_type` and `label` attributes.');
-            }
+        foreach ($container->findTaggedServiceIds('sylius.shipping_method_rule_checker') as $id => $tagged) {
+            foreach ($tagged as $attributes) {
+                if (!isset($attributes['type'], $attributes['label'], $attributes['form_type'])) {
+                    throw new InvalidArgumentException('Tagged shipping method rule checker `' . $id . '` needs to have `type`, `form_type` and `label` attributes.');
+                }
 
-            $ruleCheckerTypeToLabelMap[$attributes[0]['type']] = $attributes[0]['label'];
-            $ruleCheckerRegistry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
-            $ruleCheckerFormTypeRegistry->addMethodCall('add', [$attributes[0]['type'], 'default', $attributes[0]['form_type']]);
+                $ruleCheckerTypeToLabelMap[$attributes['type']] = $attributes['label'];
+                $ruleCheckerRegistry->addMethodCall('register', [$attributes['type'], new Reference($id)]);
+                $ruleCheckerFormTypeRegistry->addMethodCall('add', [$attributes['type'], 'default', $attributes['form_type']]);
+            }
         }
 
         $container->setParameter('sylius.shipping_method_rules', $ruleCheckerTypeToLabelMap);
