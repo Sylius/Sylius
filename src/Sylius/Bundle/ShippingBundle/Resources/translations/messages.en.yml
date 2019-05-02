@@ -47,6 +47,6 @@ sylius:
             translations: Translations
         shipping_method_rule:
             type: Type
+            total_weight_greater_than_or_equal: Total weight greater than or equal
             total_weight_less_than_or_equal: Total weight less than or equal
-            total_weight_less_than_or_equal_configuration: 
-                weight: Weight
+            weight: Weight

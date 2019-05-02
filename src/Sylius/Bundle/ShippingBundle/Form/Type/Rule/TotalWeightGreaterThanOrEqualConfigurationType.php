@@ -17,7 +17,7 @@ use Sylius\Bundle\ShippingBundle\Form\EventSubscriber\AddWeightFormSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class TotalWeightLessThanOrEqualConfigurationType extends AbstractType
+final class TotalWeightGreaterThanOrEqualConfigurationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -26,6 +26,6 @@ final class TotalWeightLessThanOrEqualConfigurationType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'sylius_shipping_method_rule_total_weight_less_than_or_equal_configuration';
+        return 'sylius_shipping_method_rule_total_weight_greater_than_or_equal_configuration';
     }
 }
