@@ -43,11 +43,11 @@ final class GenerateCouponsCommand extends Command
     {
         $this
             ->setName('sylius:promotion:generate-coupons')
-            ->setDescription('Generates coupons for a given promotion');
-        $this->addArgument('promotionCode', InputArgument::REQUIRED, 'Code of the promotion');
-        $this->addArgument('count', InputArgument::REQUIRED, 'Amount of coupons to generate');
-				$this->addOption('length', 'len', InputOption::VALUE_OPTIONAL, 'Length of the coupon code (default 10)', '10')
-				;
+            ->setDescription('Generates coupons for a given promotion')
+            ->addArgument('promotionCode', InputArgument::REQUIRED, 'Code of the promotion')
+            ->addArgument('count', InputArgument::REQUIRED, 'Amount of coupons to generate')
+            ->addOption('length', 'len', InputOption::VALUE_OPTIONAL, 'Length of the coupon code (default 10)', '10')
+        ;
     }
 
     /**  {@inheritdoc} */
@@ -71,9 +71,9 @@ final class GenerateCouponsCommand extends Command
         }
 
         $instruction = $this->getGeneratorInstructions(
-					(int) $input->getArgument('count'),
-					(int) $input->getArgument('length')
-			);
+            (int) $input->getArgument('count'),
+            (int) $input->getArgument('length')
+        );
         // Generates the promotions
         $this->couponGenerator->generate($promotion, $instruction);
     }

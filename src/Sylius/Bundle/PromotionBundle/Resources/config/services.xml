@@ -15,6 +15,7 @@
     <imports>
         <import resource="services/eligibility_checkers.xml" />
         <import resource="services/forms.xml" />
+        <import resource="services/command.xml" />
     </imports>
 
     <services>

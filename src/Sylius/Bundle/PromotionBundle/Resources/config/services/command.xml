@@ -1,0 +1,11 @@
+<container xmlns="http://symfony.com/schema/dic/services">
+    <services>
+        <defaults public="true" />
+
+        <service class="Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand"
+                 id="sylius_bundle_promotion.command.generate_coupons_command">
+            <argument type="service" id="sylius.repository.promotion" />
+            <argument type="service" id="sylius.promotion_coupon_generator" />
+        </service>
+    </services>
+</container>
