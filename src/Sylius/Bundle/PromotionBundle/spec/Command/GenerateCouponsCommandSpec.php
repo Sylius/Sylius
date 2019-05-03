@@ -17,19 +17,19 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class GenerateCouponsCommandSpec extends ObjectBehavior
 {
-    public function let(
+    function let(
         PromotionRepository $promotionRepository,
         PromotionCouponGeneratorInterface $couponGenerator
     ): void {
         $this->beConstructedWith($promotionRepository, $couponGenerator);
     }
 
-    public function it_initializes(): void
+    function it_initializes(): void
     {
         $this->shouldImplement(GenerateCouponsCommand::class);
     }
 
-    public function it_throws_an_error_if_the_promotion_does_not_exist(
+    function it_throws_an_error_if_the_promotion_does_not_exist(
         InputInterface $input,
         OutputInterface $output,
         PromotionRepository $promotionRepository,
@@ -44,7 +44,7 @@ final class GenerateCouponsCommandSpec extends ObjectBehavior
         $this->execute($input, $output);
     }
 
-    public function it_throws_an_error_if_the_promotion_is_not_coupon_based(
+    function it_throws_an_error_if_the_promotion_is_not_coupon_based(
         InputInterface $input,
         OutputInterface $output,
         PromotionRepository $promotionRepository,
@@ -61,7 +61,7 @@ final class GenerateCouponsCommandSpec extends ObjectBehavior
         $this->execute($input, $output);
     }
 
-    public function it_creates_a_coupon_generator_instruction(
+    function it_creates_a_coupon_generator_instruction(
         InputInterface $input,
         OutputInterface $output,
         PromotionRepository $promotionRepository,
