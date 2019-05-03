@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\PromotionBundle\Command;
 
-use Brille24\Core\Command\GenerateCouponsCommand;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository;
+use Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
