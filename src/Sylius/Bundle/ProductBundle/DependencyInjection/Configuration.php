@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
-use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationTypeRepository;
-use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationTypeTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationTypeType;
@@ -135,7 +133,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(ProductVariant::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ProductVariantInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->defaultValue(ProductVariantRepository::class)->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                         ->scalarNode('form')->defaultValue(ProductVariantType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -257,7 +255,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(ProductAssociationTypeModelInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->defaultValue(ProductAssociationTypeRepository::class)->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(ProductAssociationTypeType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
