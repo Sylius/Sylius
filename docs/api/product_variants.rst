@@ -319,6 +319,7 @@ Exemplary Response
                     "href": "\/api\/v1\/shipping-categories\/default"
                 }
             }
+        },
         "channelPricings": {
             "US_WEB": {
                 "channelCode": "US_WEB",
