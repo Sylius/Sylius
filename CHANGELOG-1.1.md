@@ -1,5 +1,19 @@
 # CHANGELOG FOR `1.1.X`
 
+## v1.1.18 (2019-05-07)
+
+#### TL;DR
+
+- Fixed the build and extracted some packages from Sylius core.
+
+#### Details
+
+- [#10259](https://github.com/Sylius/Sylius/issues/10259) [BuildFix] Ignore psalm annotations ([@Zales0123](https://github.com/Zales0123))
+- [#10325](https://github.com/Sylius/Sylius/issues/10325) Extract Mailer component & bundle ([@pamil](https://github.com/pamil))
+- [#10326](https://github.com/Sylius/Sylius/issues/10326) [WIP] Extract Grid component & bundle ([@pamil](https://github.com/pamil))
+- [#10327](https://github.com/Sylius/Sylius/issues/10327) [WIP] Extract Resource component & bundle ([@pamil](https://github.com/pamil))
+- [#10340](https://github.com/Sylius/Sylius/issues/10340) Fix #9646 by removing lambdas in JS file ([@tchapi](https://github.com/tchapi))
+
 ## v1.1.17 (2019-03-04)
 
 #### TL;DR

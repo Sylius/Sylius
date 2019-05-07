@@ -1,5 +1,35 @@
 # CHANGELOG FOR `1.3.X`
 
+## v1.3.12 (2019-05-07)
+
+#### TL;DR
+
+- Extracted packages from the core ([#10325](https://github.com/Sylius/Sylius/issues/10325), [#10326](https://github.com/Sylius/Sylius/issues/10326), [#10327](https://github.com/Sylius/Sylius/issues/10327))
+
+#### Details
+
+- [#10304](https://github.com/Sylius/Sylius/issues/10304) [Docs] Update contributing guide ([@Tomanhez](https://github.com/Tomanhez))
+- [#10308](https://github.com/Sylius/Sylius/issues/10308) Fix base locale ([@igormukhingmailcom](https://github.com/igormukhingmailcom))
+- [#10309](https://github.com/Sylius/Sylius/issues/10309) Do not depend on transient dependencies for "symfony/intl" package ([@pamil](https://github.com/pamil))
+- [#10320](https://github.com/Sylius/Sylius/issues/10320) fix OrderBundle depends on Core component #10319 ()
+- [#10324](https://github.com/Sylius/Sylius/issues/10324) Add a workaround for GridBundle & Symfony 4.2.7 to make tests passing ([@pamil](https://github.com/pamil))
+- [#10325](https://github.com/Sylius/Sylius/issues/10325) Extract Mailer component & bundle ([@pamil](https://github.com/pamil))
+- [#10326](https://github.com/Sylius/Sylius/issues/10326) [WIP] Extract Grid component & bundle ([@pamil](https://github.com/pamil))
+- [#10327](https://github.com/Sylius/Sylius/issues/10327) [WIP] Extract Resource component & bundle ([@pamil](https://github.com/pamil))
+- [#10328](https://github.com/Sylius/Sylius/issues/10328) Remove dead configuration related to pre-stable Sylius RBAC ([@pamil](https://github.com/pamil))
+- [#10331](https://github.com/Sylius/Sylius/issues/10331) [Shop] Update grid action and filter keys to decouple shop from admin ([@GSadee](https://github.com/GSadee))
+- [#10335](https://github.com/Sylius/Sylius/issues/10335) Bring back "pay" grid action for backwards compatibility ([@pamil](https://github.com/pamil))
+- [#10338](https://github.com/Sylius/Sylius/issues/10338) Removing unused service ([@loevgaard](https://github.com/loevgaard))
+- [#10340](https://github.com/Sylius/Sylius/issues/10340) Fix #9646 by removing lambdas in JS file ([@tchapi](https://github.com/tchapi))
+- [#10341](https://github.com/Sylius/Sylius/issues/10341) Revert "Fix base locale" ([@pamil](https://github.com/pamil))
+- [#10350](https://github.com/Sylius/Sylius/issues/10350) fix default repository for variant and association type resources ([@loic425](https://github.com/loic425))
+- [#10352](https://github.com/Sylius/Sylius/issues/10352) Update documentation products.rst ([@tom-schmitz](https://github.com/tom-schmitz))
+- [#10356](https://github.com/Sylius/Sylius/issues/10356) Quick fix product variants api invalid json ([@shql](https://github.com/shql))
+- [#10357](https://github.com/Sylius/Sylius/issues/10357) Fix wrong use statement in example ([@teohhanhui](https://github.com/teohhanhui))
+- [#10358](https://github.com/Sylius/Sylius/issues/10358) [Maintenance] Upgrade minimal jquery version ([@lchrusciel](https://github.com/lchrusciel))
+- [#10360](https://github.com/Sylius/Sylius/issues/10360) Revert "fix default repository for variant and association type resources" ([@lchrusciel](https://github.com/lchrusciel))
+- [#10362](https://github.com/Sylius/Sylius/issues/10362) Update release process with dates for 1.5 - 1.7 releases ([@pamil](https://github.com/pamil))
+
 ## v1.3.11 (2019-04-15)
 
 #### Details
