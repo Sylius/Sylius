@@ -1,8 +1,8 @@
 @managing_product_variants
-Feature: Checking option values while edit product variant
+Feature: Seeing correct option values while editing product variant
     In order to edit product variant
     As an Administrator
-    I want to check option values when edit product variant
+    I want to see option values when editing product variant
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -13,10 +13,14 @@ Feature: Checking option values while edit product variant
         And I am logged in as an administrator
 
     @ui
-    Scenario: Checking option values while edit product variant in store
+    Scenario: Seeing default option values while editing product variant in store
         When I want to modify the "Wyborowa Vodka Exquisite" product variant
         And I should see the "Type" option as "Clear"
         And I should see the "Taste" option as "Orange"
+
+    @ui
+    Scenario: Seeing changed option values while editing product variant in store
+        When I want to modify the "Wyborowa Vodka Exquisite" product variant
         And I change its "Taste" option to "Melon"
         And I change its "Type" option to "Color"
         And I save my changes

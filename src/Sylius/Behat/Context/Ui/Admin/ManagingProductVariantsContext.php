@@ -102,11 +102,11 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Given I change its :optionName option to :optionValue
+     * @When I change its :optionName option to :optionValue
      */
-    public function iChangeItsOptionTo($optionName, $optionValue): void
+    public function iChangeItsOptionTo(string $optionName, string $optionValue): void
     {
-        $this->updatePage->selectOption($optionName, $optionValue);
+        $this->updatePage->selectOption(strtoupper($optionName), $optionValue);
     }
 
     /**
@@ -527,11 +527,11 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then I should see the :optionName option as :value
+     * @Then I should see the :optionName option as :valueName
      */
-    public function iShouldSeeTheOptionAs(string $optionName,string $value): void
+    public function iShouldSeeTheOptionAs(string $optionName, string $valueName): void
     {
-        Assert::true($this->updatePage->isSelectedOptionValueOnPage($optionName,$value));
+        Assert::true($this->updatePage->isSelectedOptionValueOnPage($optionName,$valueName));
     }
 
     /**

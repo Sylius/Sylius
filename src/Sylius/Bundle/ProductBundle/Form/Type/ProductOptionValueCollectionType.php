@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Symfony\Component\Form\AbstractType;
@@ -87,19 +88,14 @@ final class ProductOptionValueCollectionType extends AbstractType
         );
     }
 
-    /**
-     * @param ProductOptionInterface $option
-     * @param ProductOptionValueInterface[] $data
-     * @return ProductOptionValueInterface|null
-     */
-    private function getDefaultDataOption(ProductOptionInterface $option, $data) : ?ProductOptionValueInterface
+    private function getDefaultDataOption(ProductOptionInterface $option, Collection $data): ?ProductOptionValueInterface
     {
-        foreach ($data as $defaultOption){
-            if($defaultOption->getOption()->getCode() === $option->getCode()){
+        foreach ($data as $defaultOption) {
+            if ($defaultOption->getOption()->getCode() === $option->getCode()) {
                 return $defaultOption;
             }
         }
-        return null;
 
+        return null;
     }
 }
