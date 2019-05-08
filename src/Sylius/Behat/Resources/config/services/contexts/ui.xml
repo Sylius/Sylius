@@ -274,6 +274,11 @@
             <tag name="fob.context_service" />
         </service>
 
+        <service id="sylius.behat.context.ui.admin.removing_taxons" class="Sylius\Behat\Context\Ui\Admin\RemovingTaxonContext">
+            <argument type="service" id="sylius.behat.page.admin.taxon.create" />
+            <tag name="fob.context_service" />
+        </service>
+
         <service id="sylius.behat.context.ui.channel" class="Sylius\Behat\Context\Ui\ChannelContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.channel_context_setter" />

@@ -618,6 +618,27 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Then the :promotion promotion should have :ruleName rule configured
+     */
+    public function thePromotionShouldHaveRuleConfigured(PromotionInterface $promotion, string $ruleName): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::true($this->updatePage->hasRule($ruleName));
+    }
+
+    /**
+     * @Then the :promotion promotion should not have any rule configured
+     */
+    public function thePromotionShouldNotHaveAnyRuleConfigured(PromotionInterface $promotion): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::false($this->updatePage->hasAnyRule());
+    }
+
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */
