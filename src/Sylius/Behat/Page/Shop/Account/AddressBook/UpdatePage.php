@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Service\JQueryHelper;
 
 class UpdatePage extends SymfonyPage implements UpdatePageInterface
 {
@@ -81,12 +82,18 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
      */
     public function selectCountry($name)
     {
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
+
         $country = $this->getElement('country');
         $country->selectOption($name);
+
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
     public function saveChanges()
     {
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
+
         $this->getElement('save_button')->press();
     }
 

@@ -27,6 +27,8 @@ $.fn.extend({
       const provinceSelectFieldId = select.attr('id').replace('country', 'province');
       const provinceInputFieldId = select.attr('id').replace('countryCode', 'provinceName');
 
+      const form = select.parents('form');
+
       if (select.val() === '' || select.val() == undefined) {
         provinceContainer.fadeOut('slow', () => {
           provinceContainer.html('');
@@ -36,6 +38,7 @@ $.fn.extend({
       }
 
       provinceContainer.attr('data-loading', true);
+      form.addClass('loading');
 
       $.get(provinceContainer.attr('data-url'), { countryCode: select.val() }, (response) => {
         if (!response.content) {
@@ -43,6 +46,7 @@ $.fn.extend({
             provinceContainer.html('');
 
             provinceContainer.removeAttr('data-loading');
+            form.removeClass('loading');
           });
         } else if (response.content.indexOf('select') !== -1) {
           provinceContainer.fadeOut('slow', () => {
@@ -60,7 +64,9 @@ $.fn.extend({
 
             provinceContainer.removeAttr('data-loading');
 
-            provinceContainer.fadeIn();
+            provinceContainer.fadeIn('fast', () => {
+              form.removeClass('loading');
+            });
           });
         } else {
           provinceContainer.fadeOut('slow', () => {
@@ -74,7 +80,9 @@ $.fn.extend({
 
             provinceContainer.removeAttr('data-loading');
 
-            provinceContainer.fadeIn();
+            provinceContainer.fadeIn('fast', () => {
+              form.removeClass('loading');
+            });
           });
         }
       });
