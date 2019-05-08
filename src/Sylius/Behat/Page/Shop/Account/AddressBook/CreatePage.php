@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Core\Model\AddressInterface;
 
 class CreatePage extends SymfonyPage implements CreatePageInterface
@@ -37,6 +38,8 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         $this->getElement('country')->selectOption($address->getCountryCode());
         $this->getElement('city')->setValue($address->getCity());
         $this->getElement('postcode')->setValue($address->getPostcode());
+
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
     /**
@@ -46,9 +49,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     {
         $this->getElement('country')->selectOption($name);
 
-        $this->getDocument()->waitFor(5, function () {
-            return false;
-        });
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
     /**
