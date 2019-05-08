@@ -40,4 +40,8 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function specifyCurrentStock(int $amount): void;
 
     public function isShippingRequired(): bool;
+
+    public function selectOption(string $optionName,string $optionValue): void;
+
+    public function isSelectedOptionValueOnPage(string $optionName, string $value): bool;
 }
