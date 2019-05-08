@@ -30,6 +30,11 @@ Methods of templates customizing
     The third method is **using Sylius themes**. Creating a Sylius theme requires a few more steps than basic template overriding,
     but allows you to have a different design on multiple channels of the same Sylius instance. :doc:`Learn more about themes here </book/themes/themes>`.
 
+.. tip::
+
+    You can browse the full implementation of these examples on `this GitHub Pull Request.
+    <https://github.com/Sylius/Customizations/pull/16>`_
+
 
 How to customize templates by overriding?
 -----------------------------------------
@@ -184,16 +189,9 @@ For the space below the header it will be ``sylius.shop.layout.after_header``.
         app.block_event_listener.homepage.layout.after_header:
             class: Sylius\Bundle\UiBundle\Block\BlockEventListener
             arguments:
-                - '@@App/block.html.twig'
+                - 'block.html.twig'
             tags:
                 - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.after_header, method: onBlockEvent }
-
-.. tip::
-
-    While configuring it in ``yaml`` remember about having two ``@`` for the argument reference to your template,
-    just like above ``'@@App/block.html.twig'``, what escapes the second ``@`` and lets it not to be interpreted as a service.
-
-    In ``xml`` the double ``@`` is not required: it would be just ``<argument>@App/block.html.twig</argument>``
 
 That's it. Your new block should appear in the view.
 
