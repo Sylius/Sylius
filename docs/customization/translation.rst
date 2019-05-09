@@ -20,6 +20,11 @@ There are many other places where you can customize the text content of pages.
 How to customize a translation?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. tip::
+
+    You can browse the full implementation of these examples on `this GitHub Pull Request.
+    <https://github.com/Sylius/Customizations/pull/17>`_
+
 In order to customize a translation in your project:
 
 **1.** If you don't have it yet, create ``translations/messages.en.yaml`` for English translations.
@@ -40,6 +45,16 @@ override its translation key which is ``sylius.form.customer.email``.
         form:
             customer:
                 email: Username
+
+Before
+
+.. image:: ../_images/before_customizing_translation.png
+    :align: center
+
+After
+
+.. image:: ../_images/after_customizing_translation.png
+    :align: center
 
 .. tip::
 
