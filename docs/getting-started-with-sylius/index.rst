@@ -19,3 +19,8 @@ to the first results ("I can sell some stuff online!").
     summary
 
 .. include:: /getting-started-with-sylius/map.rst.inc
+
+.. warning::
+
+    Be aware, that this guide is written for developers! To understand every chapter correctly, you need to have at least the most basic knowledge
+    about object-oriented programming and PHP language. `Symfony <https://symfony.com/doc/current/index.html>`_ experience would also be welcomed.
