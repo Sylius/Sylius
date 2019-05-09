@@ -21,6 +21,11 @@ and many, many more.
 How to customize a Factory?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. tip::
+
+    You can browse the full implementation of this example on `this GitHub Pull Request.
+    <https://github.com/Sylius/Customizations/pull/12>`_
+
 Let's assume that you would want to have a possibility to create disabled products.
 
 **1.** Create your own factory class in the ``App\Factory`` namespace.
@@ -39,45 +44,33 @@ Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``
 
     <?php
 
+    declare(strict_types=1);
+
     namespace App\Factory;
 
     use Sylius\Component\Product\Model\ProductInterface;
     use Sylius\Component\Product\Factory\ProductFactoryInterface;
 
-    class ProductFactory implements ProductFactoryInterface
+    final class ProductFactory implements ProductFactoryInterface
     {
-        /**
-         * @var ProductFactoryInterface
-         */
+        /** @var ProductFactoryInterface  */
         private $decoratedFactory;
 
-        /**
-         * @param ProductFactoryInterface $factory
-         */
         public function __construct(ProductFactoryInterface $factory)
         {
             $this->decoratedFactory = $factory;
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function createNew(): ProductInterface
         {
             return $this->decoratedFactory->createNew();
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function createWithVariant(): ProductInterface
         {
             return $this->decoratedFactory->createWithVariant();
         }
 
-        /**
-         * @return ProductInterface
-         */
         public function createDisabled(): ProductInterface
         {
             /** @var ProductInterface $product */
