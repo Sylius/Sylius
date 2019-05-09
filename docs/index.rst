@@ -23,6 +23,18 @@ Sylius Documentation
 
    For tips on using only some bundles of Sylius head to Bundles and Components docs.
 
+Getting Started with Sylius
+---------------------------
+
+Getting Started with Sylius
+
+.. toctree::
+   :hidden:
+
+   getting-started-with-sylius/index
+
+.. include:: /getting-started-with-sylius/map.rst.inc
+
 The Book
 --------
 
