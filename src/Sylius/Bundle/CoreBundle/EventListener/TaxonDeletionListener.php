@@ -55,14 +55,7 @@ final class TaxonDeletionListener
         foreach ($promotionRules as $promotionRule) {
             $configuration = $promotionRule->getConfiguration();
             if (in_array($taxonCode, $configuration['taxons'])) {
-                $taxons = array_filter(
-                    $configuration['taxons'],
-                    function (string $code) use ($taxonCode) {
-                        return $taxonCode !== $code;
-                    }
-                );
-
-                $configuration['taxons'] = array_values($taxons);
+                $configuration['taxons'] = array_values(array_diff($configuration['taxons'], [$taxonCode]));
                 $promotionRule->setConfiguration($configuration);
             }
         }
