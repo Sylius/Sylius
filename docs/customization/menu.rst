@@ -23,6 +23,11 @@ How to customize Admin Menu?
 
 .. tip::
 
+    You can browse the full implementation of these examples on `this GitHub Pull Request.
+    <https://github.com/Sylius/Customizations/pull/14>`_
+
+.. tip::
+
     Admin Panel menu is the one in the left expandable sidebar on the ``/admin/`` url.
 
 **1.** In order to add items to the Admin menu in **Sylius** you have to create a ``App\Menu\AdminMenuListener`` class.
@@ -39,9 +44,6 @@ In the example below we are adding a one new item and sub-item to the Admin pane
 
     final class AdminMenuListener
     {
-        /**
-         * @param MenuBuilderEvent $event
-         */
         public function addAdminMenuItems(MenuBuilderEvent $event): void
         {
             $menu = $event->getMenu();
@@ -98,9 +100,6 @@ In the example below we are adding a one new item to **the menu in the My Accoun
 
     final class AccountMenuListener
     {
-        /**
-         * @param MenuBuilderEvent $event
-         */
         public function addAccountMenuItems(MenuBuilderEvent $event): void
         {
             $menu = $event->getMenu();
@@ -167,9 +166,6 @@ type is default to make the example easily customizable.
 
     final class AdminCustomerShowMenuListener
     {
-        /**
-         * @param CustomerShowMenuBuilderEvent $event
-         */
         public function addAdminCustomerShowMenuItems(CustomerShowMenuBuilderEvent $event): void
         {
             $menu = $event->getMenu();
@@ -202,6 +198,11 @@ listener to the ``sylius.menu.admin.customer.show`` event in the ``config/servic
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.admin.customer.show, method: addAdminCustomerShowMenuItems }
 
+After these two steps your admin panel customer menu should look like that, the new item appears at right corner:
+
+.. image:: ../_images/admin_panel_customer_menu.png
+    :align: center
+
 How to customize Admin Order Show Menu?
 ---------------------------------------
 
@@ -222,12 +223,8 @@ How to customize Admin Order Show Menu?
 
     The ``delete`` button must have also the ``resource_id`` attribute set (for csrf token purposes).
 
-In the example below, we are adding one new button to the Admin Order Show Menu. It is a ``transition`` type button,
-that will let the admin fulfill the order.
-
-.. warning::
-
-    There is no ``sylius_admin_order_fulfill`` route in Sylius. Create this route if you need it.
+In the example below, we are adding one new button to the Admin Order Show Menu. It is a ``link`` type button,
+that will let the admin ship the order.
 
 .. code-block:: php
 
@@ -240,23 +237,19 @@ that will let the admin fulfill the order.
 
     final class AdminOrderShowMenuListener
     {
-        /**
-         * @param OrderShowMenuBuilderEvent $event
-         */
         public function addAdminOrderShowMenuItems(OrderShowMenuBuilderEvent $event): void
         {
             $menu = $event->getMenu();
             $order = $event->getOrder();
-            $stateMachine = $event->getStateMachine();
 
-            if ($stateMachine->can(OrderTransitions::TRANSITION_FULFILL)) {
+            if (null !== $order->getId()) {
                 $menu
-                    ->addChild('fulfill', [
-                        'route' => 'sylius_admin_order_fulfill',
+                    ->addChild('ship', [
+                        'route' => 'sylius_admin_order_shipment_ship',
                         'routeParameters' => ['id' => $order->getId()]
                     ])
                     ->setAttribute('type', 'transition')
-                    ->setLabel('Fulfill')
+                    ->setLabel('Ship')
                     ->setLabelAttribute('icon', 'checkmark')
                     ->setLabelAttribute('color', 'green')
                 ;
@@ -275,6 +268,11 @@ listener to the ``sylius.menu.admin.order.show`` event in the ``config/services.
             class: App\Menu\AdminOrderShowMenuListener
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.admin.order.show, method: addAdminOrderShowMenuItems }
+
+After these two steps your admin panel order menu should look like that (the new item appears at right corner):
+
+.. image:: ../_images/admin_panel_order_menu.png
+    :align: center
 
 How to customize Admin Product Form Menu?
 -----------------------------------------
@@ -307,9 +305,6 @@ as ``templates\Admin\Product\Tab\_manufacturer.html.twig``, we will use it in th
 
     final class AdminProductFormMenuListener
     {
-        /**
-         * @param ProductMenuBuilderEvent $event
-         */
         public function addItems(ProductMenuBuilderEvent $event): void
         {
             $menu = $event->getMenu();
@@ -333,6 +328,11 @@ listener to the ``sylius.menu.admin.product.form`` event in the ``config/service
             class: App\Menu\AdminProductFormMenuListener
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.admin.product.form, method: addItems }
+
+After these two steps your admin panel product form menu should look like that (the new item appears at the bottom):
+
+.. image:: ../_images/admin_panel_product_menu.png
+    :align: center
 
 How to customize Admin Product Variant Form Menu?
 -------------------------------------------------
@@ -364,9 +364,6 @@ Provided you have created a new template with the required form fields and saved
 
     final class AdminProductVariantFormMenuListener
     {
-        /**
-         * @param ProductVariantMenuBuilderEvent $event
-         */
         public function addItems(ProductVariantMenuBuilderEvent $event): void
         {
             $menu = $event->getMenu();
@@ -390,6 +387,11 @@ listener to the ``sylius.menu.admin.product_variant.form`` event in the ``config
             class: App\Menu\AdminProductVariantFormMenuListener
             tags:
                 - { name: kernel.event_listener, event: sylius.menu.admin.product_variant.form, method: addItems }
+
+After these two steps your admin panel variant menu should look like that (the new item appears at the bottom):
+
+.. image:: ../_images/admin_panel_variant_menu.png
+    :align: center
 
 .. include:: /customization/plugins.rst.inc
 
