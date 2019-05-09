@@ -16,6 +16,11 @@ and many other places where you can customize the text content of the default fl
 How to customize a flash message?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. tip::
+
+    You can browse the full implementation of these examples on `this GitHub Pull Request.
+    <https://github.com/Sylius/Customizations/pull/18>`_
+
 In order to customize a resource flash in your project:
 
 **1.** Create the ``translations\flashes.en.yml`` for english contents of your flashes.
@@ -35,5 +40,15 @@ the ``sylius.taxon.update`` key:
     sylius:
         taxon:
             update: This category has been successfully edited.
+
+Before
+
+.. image:: ../_images/flash_before_customization.png
+    :align: center
+
+After
+
+.. image:: ../_images/flash_after_customization.png
+    :align: center
 
 .. include:: /customization/plugins.rst.inc
