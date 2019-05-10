@@ -276,6 +276,7 @@
 
         <service id="sylius.behat.context.ui.admin.removing_taxons" class="Sylius\Behat\Context\Ui\Admin\RemovingTaxonContext">
             <argument type="service" id="sylius.behat.page.admin.taxon.create" />
+            <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="fob.context_service" />
         </service>
 

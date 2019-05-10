@@ -13,12 +13,14 @@ Feature: Accessing an edit page of a promotion with a rule that contains a remov
     Scenario: Accessing an edit page of a promotion with a rule that contains a removed taxon
         Given there is a promotion "Christmas sale" with "Has at least one from taxons" rule configured with "T-Shirts" and "Mugs"
         When I remove taxon named "Mugs"
-        Then I should be able to modify a "Christmas sale" promotion
+        Then I should be notified that "Christmas sale" promotion has been updated
+        And I should be able to modify a "Christmas sale" promotion
         And the "Christmas sale" promotion should have "Has at least one from taxons" rule configured
 
     @ui
     Scenario: Accessing an edit page of a promotion with a rule that contains a removed taxon
         Given there is a promotion "Christmas sale" with "Total price of items from taxon" rule configured with "Mugs" taxon and $100 amount for "United States" channel
         When I remove taxon named "Mugs"
-        Then I should be able to modify a "Christmas sale" promotion
+        Then I should be notified that "Christmas sale" promotion has been updated
+        And I should be able to modify a "Christmas sale" promotion
         And the "Christmas sale" promotion should not have any rule configured

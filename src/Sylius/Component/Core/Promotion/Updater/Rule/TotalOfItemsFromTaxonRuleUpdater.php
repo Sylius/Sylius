@@ -22,9 +22,9 @@ final class TotalOfItemsFromTaxonRuleUpdater implements TaxonAwareRuleUpdaterInt
     /** @var RepositoryInterface */
     private $promotionRuleRepository;
 
-    public function __construct(RepositoryInterface $ruleUpdater)
+    public function __construct(RepositoryInterface $promotionRuleRepository)
     {
-        $this->promotionRuleRepository = $ruleUpdater;
+        $this->promotionRuleRepository = $promotionRuleRepository;
     }
 
     public function updateAfterDeletingTaxon(string $taxonCode): array

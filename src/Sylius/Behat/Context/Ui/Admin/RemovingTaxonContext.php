@@ -14,16 +14,23 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 
 final class RemovingTaxonContext implements Context
 {
     /** @var CreatePageInterface */
     private $createPage;
 
-    public function __construct(CreatePageInterface $createPage)
+    /** @var NotificationCheckerInterface */
+    private $notificationChecker;
+
+    public function __construct(CreatePageInterface $createPage, NotificationCheckerInterface $notificationChecker)
     {
         $this->createPage = $createPage;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -34,5 +41,16 @@ final class RemovingTaxonContext implements Context
     {
         $this->createPage->open();
         $this->createPage->deleteTaxonOnPageByName($name);
+    }
+
+    /**
+     * @Then I should be notified that :promotion promotion has been updated
+     */
+    public function iShouldBeNotifiedThatPromotionHasBeenUpdated(PromotionInterface $promotion): void
+    {
+        $this->notificationChecker->checkNotification(
+            sprintf('Some rules of the promotions with codes %s have been updated.', $promotion->getCode()),
+            NotificationType::info()
+        );
     }
 }
