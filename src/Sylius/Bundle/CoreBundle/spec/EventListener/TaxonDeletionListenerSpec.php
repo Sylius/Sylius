@@ -23,17 +23,17 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 final class TaxonDeletionListenerSpec extends ObjectBehavior
 {
     function let(
+        SessionInterface $session,
         TaxonAwareRuleUpdaterInterface $hasTaxonRuleUpdater,
-        TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater,
-        SessionInterface $session
+        TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater
     ): void {
-        $this->beConstructedWith($hasTaxonRuleUpdater, $totalOfItemsFromTaxonRuleUpdater, $session);
+        $this->beConstructedWith($session, $hasTaxonRuleUpdater, $totalOfItemsFromTaxonRuleUpdater);
     }
 
     function it_adds_flash_that_promotions_have_been_updated(
+        SessionInterface $session,
         TaxonAwareRuleUpdaterInterface $hasTaxonRuleUpdater,
         TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater,
-        SessionInterface $session,
         FlashBagInterface $flashes,
         GenericEvent $event,
         TaxonInterface $taxon
@@ -57,9 +57,9 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_no_promotion_has_been_updated(
+        SessionInterface $session,
         TaxonAwareRuleUpdaterInterface $hasTaxonRuleUpdater,
         TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater,
-        SessionInterface $session,
         GenericEvent $event,
         TaxonInterface $taxon
     ): void {

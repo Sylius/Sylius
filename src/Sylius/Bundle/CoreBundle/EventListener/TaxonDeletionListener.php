@@ -22,23 +22,19 @@ use Webmozart\Assert\Assert;
 
 final class TaxonDeletionListener
 {
-    /** @var TaxonAwareRuleUpdaterInterface */
-    private $hasTaxonRuleUpdater;
-
-    /** @var TaxonAwareRuleUpdaterInterface */
-    private $totalOfItemsFromTaxonRuleUpdater;
-
     /** @var SessionInterface */
     private $session;
 
+    /** @var TaxonAwareRuleUpdaterInterface[] */
+    private $ruleUpdaters;
+
     public function __construct(
-        TaxonAwareRuleUpdaterInterface $hasTaxonRuleUpdater,
-        TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater,
-        SessionInterface $session
+        SessionInterface $session,
+        TaxonAwareRuleUpdaterInterface ...$ruleUpdaters
+
     ) {
-        $this->hasTaxonRuleUpdater = $hasTaxonRuleUpdater;
-        $this->totalOfItemsFromTaxonRuleUpdater = $totalOfItemsFromTaxonRuleUpdater;
         $this->session = $session;
+        $this->ruleUpdaters = $ruleUpdaters;
     }
 
     public function removeTaxonFromPromotionRules(GenericEvent $event): void
@@ -46,16 +42,17 @@ final class TaxonDeletionListener
         $taxon = $event->getSubject();
         Assert::isInstanceOf($taxon, TaxonInterface::class);
 
-        $firstUpdatedPromotionCodes = $this->hasTaxonRuleUpdater->updateAfterDeletingTaxon($taxon->getCode());
-        $secondUpdatedPromotionCodes = $this->totalOfItemsFromTaxonRuleUpdater->updateAfterDeletingTaxon($taxon->getCode());
-        $updatedPromotionCodes = array_unique(array_merge($firstUpdatedPromotionCodes, $secondUpdatedPromotionCodes));
+        $updatedPromotionCodes = [];
+        foreach ($this->ruleUpdaters as $ruleUpdater) {
+            $updatedPromotionCodes = array_merge($updatedPromotionCodes, $ruleUpdater->updateAfterDeletingTaxon($taxon->getCode()));
+        }
 
         if (!empty($updatedPromotionCodes)) {
             /** @var FlashBagInterface $flashes */
             $flashes = $this->session->getBag('flashes');
             $flashes->add('info', [
                 'message' => 'sylius.promotion.update_rules',
-                'parameters' => ['%codes%' => implode(', ', $updatedPromotionCodes)],
+                'parameters' => ['%codes%' => implode(', ', array_unique($updatedPromotionCodes))],
             ]);
         }
     }
