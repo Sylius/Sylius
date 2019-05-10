@@ -10,8 +10,7 @@ to the first results ("I can sell some stuff online!").
 
     installation
     basic-configuration
-    shipping-method
-    payment-method
+    shipping-and-payment
     first-product
     customizations
     plugin-installation

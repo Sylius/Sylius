@@ -1,7 +1,6 @@
 * :doc:`/getting-started-with-sylius/installation`
 * :doc:`/getting-started-with-sylius/basic-configuration`
-* :doc:`/getting-started-with-sylius/shipping-method`
-* :doc:`/getting-started-with-sylius/payment-method`
+* :doc:`/getting-started-with-sylius/shipping-and-payment`
 * :doc:`/getting-started-with-sylius/first-product`
 * :doc:`/getting-started-with-sylius/customizations`
 * :doc:`/getting-started-with-sylius/plugin-installation`
