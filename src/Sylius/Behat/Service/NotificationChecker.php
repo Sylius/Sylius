@@ -35,12 +35,21 @@ final class NotificationChecker implements NotificationCheckerInterface
         foreach ($this->notificationAccessor->getMessageElements() as $messageElement) {
             if (
                 false !== strpos($messageElement->getText(), $message) &&
-                $messageElement->hasClass($type->__toString() === 'success' ? 'positive' : 'negative')
+                $messageElement->hasClass($this->resolveClass($type))
             ) {
                 return;
             }
         }
 
         throw new NotificationExpectationMismatchException($type, $message);
+    }
+
+    private function resolveClass(NotificationType $type): string
+    {
+        if ($type->__toString() === 'info') {
+            return 'info';
+        }
+
+        return $type->__toString() === 'success' ? 'positive' : 'negative';
     }
 }
