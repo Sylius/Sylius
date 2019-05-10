@@ -37,10 +37,9 @@
             <argument>%sylius.admin.shop_enabled%</argument>
             <tag name="twig.extension" />
         </service>
-        <service id="sylius.twig.extension.variant_price" class="Sylius\Bundle\AdminBundle\Twig\VariantPriceExtension">
-            <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="sylius.money_formatter" />
-            <tag name="twig.extension" />
+        <service id="sylius.twig.extension.channels_currencies" class="Sylius\Bundle\AdminBundle\Twig\ChannelsCurrenciesExtension">
+            <argument type="service" id="sylius.repository.channel"/>
+            <tag name="twig.extension"/>
         </service>
         <service id="sylius.http_client" class="GuzzleHttp\Client" public="false" />
         <service id="sylius.http_message_factory" class="Http\Message\MessageFactory\GuzzleMessageFactory" public="false" />
