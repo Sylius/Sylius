@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -32,8 +33,11 @@ final class HasTaxonRuleUpdaterSpec extends ObjectBehavior
         EntityManagerInterface $manager,
         PromotionRuleInterface $firstPromotionRule,
         PromotionRuleInterface $secondPromotionRule,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        TaxonInterface $taxon
     ): void {
+        $taxon->getCode()->willReturn('toys');
+
         $promotionRuleRepository
             ->findBy(['type' => 'has_taxon'])
             ->willReturn([$firstPromotionRule, $secondPromotionRule])
@@ -49,6 +53,6 @@ final class HasTaxonRuleUpdaterSpec extends ObjectBehavior
 
         $manager->flush()->shouldBeCalled();
 
-        $this->updateAfterDeletingTaxon('toys')->shouldReturn(['christmas']);
+        $this->updateAfterDeletingTaxon($taxon)->shouldReturn(['christmas']);
     }
 }

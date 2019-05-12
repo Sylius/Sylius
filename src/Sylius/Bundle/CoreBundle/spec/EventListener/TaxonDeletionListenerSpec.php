@@ -39,10 +39,9 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         TaxonInterface $taxon
     ): void {
         $event->getSubject()->willReturn($taxon);
-        $taxon->getCode()->willReturn('toys');
 
-        $hasTaxonRuleUpdater->updateAfterDeletingTaxon('toys')->willReturn(['christmas', 'holiday']);
-        $totalOfItemsFromTaxonRuleUpdater->updateAfterDeletingTaxon('toys')->willReturn(['christmas']);
+        $hasTaxonRuleUpdater->updateAfterDeletingTaxon($taxon)->willReturn(['christmas', 'holiday']);
+        $totalOfItemsFromTaxonRuleUpdater->updateAfterDeletingTaxon($taxon)->willReturn(['christmas']);
 
         $session->getBag('flashes')->willReturn($flashes);
         $flashes
@@ -64,10 +63,9 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         TaxonInterface $taxon
     ): void {
         $event->getSubject()->willReturn($taxon);
-        $taxon->getCode()->willReturn('toys');
 
-        $hasTaxonRuleUpdater->updateAfterDeletingTaxon('toys')->willReturn([]);
-        $totalOfItemsFromTaxonRuleUpdater->updateAfterDeletingTaxon('toys')->willReturn([]);
+        $hasTaxonRuleUpdater->updateAfterDeletingTaxon($taxon)->willReturn([]);
+        $totalOfItemsFromTaxonRuleUpdater->updateAfterDeletingTaxon($taxon)->willReturn([]);
 
         $session->getBag('flashes')->shouldNotBeCalled();
 

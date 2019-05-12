@@ -15,6 +15,7 @@ namespace spec\Sylius\Component\Core\Promotion\Updater\Rule;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -29,8 +30,11 @@ final class TotalOfItemsFromTaxonRuleUpdaterSpec extends ObjectBehavior
         RepositoryInterface $promotionRuleRepository,
         PromotionRuleInterface $firstPromotionRule,
         PromotionRuleInterface $secondPromotionRule,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        TaxonInterface $taxon
     ): void {
+        $taxon->getCode()->willReturn('toys');
+
         $promotionRuleRepository
             ->findBy(['type' => 'total_of_items_from_taxon'])
             ->willReturn([$firstPromotionRule, $secondPromotionRule])
@@ -44,6 +48,6 @@ final class TotalOfItemsFromTaxonRuleUpdaterSpec extends ObjectBehavior
         $promotionRuleRepository->remove($firstPromotionRule)->shouldNotBeCalled();
         $promotionRuleRepository->remove($secondPromotionRule)->shouldBeCalled();
 
-        $this->updateAfterDeletingTaxon('toys')->shouldReturn(['christmas']);
+        $this->updateAfterDeletingTaxon($taxon)->shouldReturn(['christmas']);
     }
 }

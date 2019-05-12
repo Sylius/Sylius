@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Updater\Rule;
 
+use Sylius\Component\Core\Model\TaxonInterface;
+
 interface TaxonAwareRuleUpdaterInterface
 {
-    public function updateAfterDeletingTaxon(string $taxonCode): array;
+    public function updateAfterDeletingTaxon(TaxonInterface $taxon): array;
 }

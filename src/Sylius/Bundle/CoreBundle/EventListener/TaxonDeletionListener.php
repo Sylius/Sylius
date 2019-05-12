@@ -31,7 +31,6 @@ final class TaxonDeletionListener
     public function __construct(
         SessionInterface $session,
         TaxonAwareRuleUpdaterInterface ...$ruleUpdaters
-
     ) {
         $this->session = $session;
         $this->ruleUpdaters = $ruleUpdaters;
@@ -44,7 +43,7 @@ final class TaxonDeletionListener
 
         $updatedPromotionCodes = [];
         foreach ($this->ruleUpdaters as $ruleUpdater) {
-            $updatedPromotionCodes = array_merge($updatedPromotionCodes, $ruleUpdater->updateAfterDeletingTaxon($taxon->getCode()));
+            $updatedPromotionCodes = array_merge($updatedPromotionCodes, $ruleUpdater->updateAfterDeletingTaxon($taxon));
         }
 
         if (!empty($updatedPromotionCodes)) {

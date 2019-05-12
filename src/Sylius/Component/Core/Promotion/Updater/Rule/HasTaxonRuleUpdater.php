@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Promotion\Updater\Rule;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -32,7 +33,7 @@ final class HasTaxonRuleUpdater implements TaxonAwareRuleUpdaterInterface
         $this->manager = $manager;
     }
 
-    public function updateAfterDeletingTaxon(string $taxonCode): array
+    public function updateAfterDeletingTaxon(TaxonInterface $taxon): array
     {
         $updatedPromotionCodes = [];
         $promotionRules = $this->promotionRuleRepository->findBy(['type' => HasTaxonRuleChecker::TYPE]);
@@ -40,8 +41,8 @@ final class HasTaxonRuleUpdater implements TaxonAwareRuleUpdaterInterface
         /** @var PromotionRuleInterface $promotionRule */
         foreach ($promotionRules as $promotionRule) {
             $configuration = $promotionRule->getConfiguration();
-            if (in_array($taxonCode, $configuration['taxons'])) {
-                $configuration['taxons'] = array_values(array_diff($configuration['taxons'], [$taxonCode]));
+            if (in_array($taxon->getCode(), $configuration['taxons'])) {
+                $configuration['taxons'] = array_values(array_diff($configuration['taxons'], [$taxon->getCode()]));
                 $promotionRule->setConfiguration($configuration);
 
                 $updatedPromotionCodes[] = $promotionRule->getPromotion()->getCode();
