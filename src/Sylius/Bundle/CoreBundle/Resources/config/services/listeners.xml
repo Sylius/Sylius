@@ -90,5 +90,12 @@
         <service id="sylius.listener.customer_default_address" class="Sylius\Bundle\CoreBundle\EventListener\CustomerDefaultAddressListener">
             <tag name="kernel.event_listener" event="sylius.address.pre_create" method="preCreate" />
         </service>
+
+        <service id="sylius.listener.taxon_deletion" class="Sylius\Bundle\CoreBundle\EventListener\TaxonDeletionListener">
+            <argument type="service" id="session" />
+            <argument type="service" id="sylius.promotion_rule_updater.total_of_items_from_taxon" />
+            <argument type="service" id="sylius.promotion_rule_updater.has_taxon" />
+            <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
+        </service>
     </services>
 </container>
