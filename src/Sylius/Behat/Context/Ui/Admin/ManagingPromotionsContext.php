@@ -654,7 +654,6 @@ final class ManagingPromotionsContext implements Context
 
     /**
      * @Then I should be able to modify a :promotion promotion
-     * @Then I should be able to modify a :promotion promotion
      */
     public function iShouldBeAbleToModifyAPromotion(PromotionInterface $promotion): void
     {
