@@ -16,6 +16,7 @@ namespace Sylius\Behat\Service;
 use Sylius\Behat\Exception\NotificationExpectationMismatchException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
+use Webmozart\Assert\Assert;
 
 final class NotificationChecker implements NotificationCheckerInterface
 {
@@ -35,12 +36,25 @@ final class NotificationChecker implements NotificationCheckerInterface
         foreach ($this->notificationAccessor->getMessageElements() as $messageElement) {
             if (
                 false !== strpos($messageElement->getText(), $message) &&
-                $messageElement->hasClass($type->__toString() === 'success' ? 'positive' : 'negative')
+                $messageElement->hasClass($this->resolveClass($type))
             ) {
                 return;
             }
         }
 
         throw new NotificationExpectationMismatchException($type, $message);
+    }
+
+    private function resolveClass(NotificationType $type): string
+    {
+        $typeClassMap = [
+            'failure' => 'negative',
+            'info' => 'info',
+            'success' => 'positive',
+        ];
+
+        Assert::keyExists($typeClassMap, $type->__toString());
+
+        return $typeClassMap[$type->__toString()];
     }
 }
