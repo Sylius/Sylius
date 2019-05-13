@@ -1,0 +1,30 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-05-13T11:29:58Z
+
+![giphy](https://user-images.githubusercontent.com/6213903/57618237-28f7ba00-7583-11e9-8827-0a9886f8e720.gif)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-05-13T11:42:49Z
+
+The problem exists on 1.5 as well https://travis-ci.org/Sylius/Sylius/jobs/531708595
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-05-13T11:42:59Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "fix-duplicate-step-definition"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-05-13T13:16:00Z
+
+Thanks, Mateusz! :1st_place_medal:
