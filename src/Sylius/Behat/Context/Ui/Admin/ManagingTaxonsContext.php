@@ -157,15 +157,6 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I delete taxon named :name
-     */
-    public function iDeleteTaxonNamed($name)
-    {
-        $this->createPage->open();
-        $this->createPage->deleteTaxonOnPageByName($name);
-    }
-
-    /**
      * @When I add it
      * @When I try to add it
      */

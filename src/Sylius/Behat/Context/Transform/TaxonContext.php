@@ -64,12 +64,13 @@ final class TaxonContext implements Context
 
     /**
      * @Transform /^classified as "([^"]+)" or "([^"]+)"$/
+     * @Transform /^configured with "([^"]+)" and "([^"]+)"$/
      */
-    public function getTaxonsByNames($firstTaxon, $secondTaxon)
+    public function getTaxonsByNames(string $firstTaxonName, string $secondTaxonName): array
     {
         return [
-            $this->getTaxonByName($firstTaxon),
-            $this->getTaxonByName($secondTaxon),
+            $this->getTaxonByName($firstTaxonName),
+            $this->getTaxonByName($secondTaxonName),
         ];
     }
 }
