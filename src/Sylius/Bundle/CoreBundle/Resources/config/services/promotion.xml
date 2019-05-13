@@ -110,6 +110,16 @@
         <service id="sylius.promotion_usage_modifier" class="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier">
             <argument type="service" id="sylius.manager.promotion" />
         </service>
+
         <service id="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface" alias="sylius.promotion_usage_modifier" />
+
+        <service id="sylius.promotion_rule_updater.has_taxon" class="Sylius\Component\Core\Promotion\Updater\Rule\HasTaxonRuleUpdater">
+            <argument type="service" id="sylius.repository.promotion_rule" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="sylius.promotion_rule_updater.total_of_items_from_taxon" class="Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater">
+            <argument type="service" id="sylius.repository.promotion_rule" />
+        </service>
     </services>
 </container>

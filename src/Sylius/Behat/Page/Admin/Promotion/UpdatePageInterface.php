@@ -46,4 +46,8 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isCouponManagementAvailable(): bool;
 
     public function manageCoupons(): void;
+
+    public function hasAnyRule(): bool;
+
+    public function hasRule(string $name): bool;
 }

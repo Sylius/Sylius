@@ -221,10 +221,13 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+" channel)$/
+     * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+") channel$/
      */
-    public function iAddTheActionConfiguredWithAPercentageValueForChannel($actionType, $percentage = null, $channelName)
-    {
+    public function iAddTheActionConfiguredWithAPercentageValueForChannel(
+        string $actionType,
+        string $percentage = null,
+        string $channelName
+    ): void {
         $this->createPage->addAction($actionType);
         $this->createPage->fillActionOptionForChannel($channelName, 'Percentage', $percentage);
     }
@@ -416,7 +419,6 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Given I want to modify a :promotion promotion
      * @Given /^I want to modify (this promotion)$/
-     * @Then I should be able to modify a :promotion promotion
      * @When I modify a :promotion promotion
      */
     public function iWantToModifyAPromotion(PromotionInterface $promotion): void
@@ -648,6 +650,37 @@ final class ManagingPromotionsContext implements Context
     public function iShouldBeOnThisPromotionSCouponsManagementPage(PromotionInterface $promotion): void
     {
         Assert::true($this->indexCouponPage->isOpen(['promotionId' => $promotion->getId()]));
+    }
+
+    /**
+     * @Then I should be able to modify a :promotion promotion
+     * @Then I should be able to modify a :promotion promotion
+     */
+    public function iShouldBeAbleToModifyAPromotion(PromotionInterface $promotion): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @Then the :promotion promotion should have :ruleName rule configured
+     */
+    public function thePromotionShouldHaveRuleConfigured(PromotionInterface $promotion, string $ruleName): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+        $this->updatePage->saveChanges();
+
+        Assert::true($this->updatePage->hasRule($ruleName));
+    }
+
+    /**
+     * @Then the :promotion promotion should not have any rule configured
+     */
+    public function thePromotionShouldNotHaveAnyRuleConfigured(PromotionInterface $promotion): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::false($this->updatePage->hasAnyRule());
     }
 
     /**

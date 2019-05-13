@@ -73,21 +73,40 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given there is (also) a promotion :promotionName
-     * @Given there is a promotion :promotionName identified by :promotionCode code
+     * @Given there is (also) a promotion :name
+     * @Given there is a promotion :name identified by :code code
      */
-    public function thereIsPromotion(string $promotionName, ?string $promotionCode = null): void
+    public function thereIsPromotion(string $name, ?string $code = null): void
     {
-        $promotion = $this->testPromotionFactory
-            ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
-        ;
+        $this->createPromotion($name, $code);
+    }
 
-        if (null !== $promotionCode) {
-            $promotion->setCode($promotionCode);
-        }
+    /**
+     * @Given /^there is a promotion "([^"]+)" with "Has at least one from taxons" rule (configured with "[^"]+" and "[^"]+")$/
+     */
+    public function thereIsAPromotionWithHasAtLeastOneFromTaxonsRuleConfiguredWith(string $name, array $taxons): void
+    {
+        $promotion = $this->createPromotion($name);
+        $rule = $this->ruleFactory->createHasTaxon([$taxons[0]->getCode(), $taxons[1]->getCode()]);
+        $promotion->addRule($rule);
 
-        $this->promotionRepository->add($promotion);
-        $this->sharedStorage->set('promotion', $promotion);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^there is a promotion "([^"]+)" with "Total price of items from taxon" rule configured with ("[^"]+" taxon) and (?:€|£|\$)([^"]+) amount for ("[^"]+" channel)$/
+     */
+    public function thereIsAPromotionWithTotalPriceOfItemsFromTaxonRuleConfiguredWithTaxonAndAmountForChannel(
+        string $name,
+        TaxonInterface $taxon,
+        int $amount,
+        ChannelInterface $channel
+    ): void {
+        $promotion = $this->createPromotion($name);
+        $rule = $this->ruleFactory->createItemsFromTaxonTotal($channel->getCode(), $taxon->getCode(), $amount);
+        $promotion->addRule($rule);
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -750,6 +769,20 @@ final class PromotionContext implements Context
         }
 
         return $configuration;
+    }
+
+    private function createPromotion(string $name, ?string $code = null): PromotionInterface
+    {
+        $promotion = $this->testPromotionFactory->createForChannel($name, $this->sharedStorage->get('channel'));
+
+        if (null !== $code) {
+            $promotion->setCode($code);
+        }
+
+        $this->promotionRepository->add($promotion);
+        $this->sharedStorage->set('promotion', $promotion);
+
+        return $promotion;
     }
 
     /**
