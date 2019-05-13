@@ -1,6 +1,6 @@
 @managing_shipments
-Feature: Filtering shipments by channel on index
-    In order to filter shipments by specyfic channel on index
+Feature: Filtering shipments by channel
+    In order to filter shipments by a specific channel
     As an Administrator
     I want to be able to filter shipments on the list
 
@@ -32,6 +32,6 @@ Feature: Filtering shipments by channel on index
         When I browse shipments
         And I choose "United States" as a channel filter
         And I filter
-        Then I should see 1 orders in the list
-        And I should see an order with "#00000001" number
-        But I should not see an order with "#00000003" number
+        Then I should see a single shipment in the list
+        And I should see a shipment of order "#00000001"
+        But I should not see a shipment of order "#00000003"
