@@ -31,14 +31,14 @@ Run your application on a built-in server:
      * Sample user: api@example.com
      * Sample password: sylius-api
      * Sample random client: demo_client
-     * Sample client secret: demo_client
+     * Sample client secret: secret_demo_client
      * Sample access token: SampleToken
 
 To obtain authorization token for the default user run:
 
 .. code-block:: bash
 
-    $ curl http://localhost:8000/api/oauth/v2/token -d "client_id"=XYZ -d "client_secret"=ABC -d "grant_type"=password -d "username"=api@example.com -d "password"=sylius-api
+    $ curl http://localhost/api/oauth/v2/token -d "client_id"=demo_client -d "client_secret"=secret_demo_client -d "grant_type"=password -d "username"=api@example.com -d "password"=sylius-api
 
 This will give you such a response:
 
@@ -46,14 +46,22 @@ This will give you such a response:
 
     {"access_token":"DEF","expires_in":3600,"token_type":"bearer","scope":null,"refresh_token":"GHI"}
 
-Creating a new resource instance via API
-----------------------------------------
-
-Use the ``access_token`` in the request that will create a new Supplier (:doc:`that we were creating in another cookbook</cookbook/entities/custom-model>`).
+Using the Access Token
+----------------------
+Use the ``access_token`` in the request to authorize yourself.
 
 .. code-block:: bash
 
-    $ curl -i -X POST -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"name": "Example", "description": "Lorem ipsum", "enabled": true}' http://localhost:8000/api/suppliers/
+    $ curl -i -X GET -H "Content-Type: application/json" -H "Authorization: Bearer DEF" http://localhost/api/v1/orders/
+
+Creating a new resource instance via API
+----------------------------------------
+
+In order to execute this request that will create a new Supplier (:doc:`you have to create the entity first described in cookbook</cookbook/entities/custom-model>`).
+
+.. code-block:: bash
+
+    $ curl -i -X POST -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"name": "Example", "description": "Lorem ipsum", "enabled": true}' http://localhost/api/v1/suppliers/
 
 .. tip::
 
@@ -69,7 +77,7 @@ Assuming that you have created a supplier in the previous step, it will have id 
 
 .. code-block:: bash
 
-    $ curl -i -H "Authorization: Bearer DEF" http://localhost:8000/api/suppliers/{id}
+    $ curl -i -H "Authorization: Bearer DEF" http://localhost/api/v1/suppliers/{id}
 
 Viewing an index of resource via API
 ------------------------------------
@@ -78,7 +86,7 @@ If you would like to see a list of all instances of your resource use such a com
 
 .. code-block:: bash
 
-    $ curl -i -H "Authorization: Bearer DEF" http://localhost:8000/api/suppliers/
+    $ curl -i -H "Authorization: Bearer DEF" http://localhost/api/v1/suppliers/
 
 Updating a single resource instance via API
 -------------------------------------------
@@ -87,7 +95,7 @@ If you would like to modify the whole existing resource use such a command (with
 
 .. code-block:: bash
 
-    $ curl -i -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"name": "Modified Name", "description": "Modified description", "enabled": false}' http://localhost:8000/api/suppliers/1
+    $ curl -i -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"name": "Modified Name", "description": "Modified description", "enabled": false}' http://localhost/api/v1/suppliers/1
 
 Partially updating a single resource instance via API
 -----------------------------------------------------
@@ -96,7 +104,7 @@ If you would like to update just one field of a resource use the PATCH method wi
 
 .. code-block:: bash
 
-    $ curl -i -X PATCH -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"enabled": true}' http://localhost:8000/api/suppliers/1
+    $ curl -i -X PATCH -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"enabled": true}' http://localhost/api/v1/suppliers/1
 
 Deleting a single resource instance via API
 -------------------------------------------
@@ -105,7 +113,7 @@ To delete a resource instance you need to call such a command (with an authoriza
 
 .. code-block:: bash
 
-    $ curl -i -X DELETE -H "Authorization: Bearer DEF" http://localhost:8000/artists/1
+    $ curl -i -X DELETE -H "Authorization: Bearer DEF" http://localhost/api/v1/artists/1
 
 Learn more
 ----------
