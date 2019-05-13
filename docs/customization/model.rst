@@ -102,7 +102,6 @@ You can check if the configuration in ``config/_sylius.yaml`` is correct by runn
 
     $ php bin/console debug:container --parameter=sylius.model.country.class
 
-
 If all is well the output should look like:
 
 .. code-block:: bash
@@ -112,7 +111,6 @@ If all is well the output should look like:
     ---------------------------- -------------------------------------------
      sylius.model.country.class   App\Entity\Country
     ---------------------------- -------------------------------------------
-
 
 In some cases however, you will see an error:
 
