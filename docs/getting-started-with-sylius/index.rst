@@ -12,7 +12,8 @@ to the first results ("I can sell some stuff online!").
     basic-configuration
     shipping-and-payment
     first-product
-    customizations
+    shop-customizations
+    custom-business-logic
     plugin-installation
     deployment
     summary
