@@ -62,7 +62,7 @@ final class SyliusProductBundleTest extends WebTestCase
 
         foreach ($repositories as $id => $class) {
             $service = $container->get($id, ContainerInterface::NULL_ON_INVALID_REFERENCE);
-            Assert::assertEquals(get_class($service), $repositories[$id]);
+            Assert::assertEquals(get_class($service), $class);
         }
     }
 }
