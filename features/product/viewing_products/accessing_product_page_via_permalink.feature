@@ -8,7 +8,7 @@ Feature: Viewing a product details using permalink
         Given the store operates on a single channel in "United States"
 
     @ui
-    Scenario: Access to detailed product page using permalink
+    Scenario: Accessing a detailed product page using permalink
         Given the store has a product "T-shirt banana"
         When I open page "en_US/products/t-shirt-banana"
         Then I should be on "T-shirt banana" product detailed page

@@ -1,5 +1,5 @@
 @managing_shipments
-Feature: Access shipment's order from the shipments index
+Feature: Accessing shipment's order from the shipments index
     In order to make shipments and orders management more fluent
     As an Administrator
     I want to be able to access order's page from shipments index
