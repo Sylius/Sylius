@@ -1,8 +1,8 @@
 @managing_shipments
-Feature: Filtering shipments by channel
-    In order to filter shipments by a specific channel
+Feature: Filtering shipments by a channel
+    In order to browse only relevant shipments
     As an Administrator
-    I want to be able to filter shipments on the list
+    I want to be able to filter shipments from a specific channel on the list
 
     Background:
         Given the store operates on a single channel in "United States"
