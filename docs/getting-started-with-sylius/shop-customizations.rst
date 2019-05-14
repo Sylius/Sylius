@@ -13,7 +13,7 @@ Logo
 You can start with the shop panel. The default templates are elegant and straightforward, but for sure you would like
 to make them unique for your online store. Maybe some colors should be different? Or even the whole product page does
 not look like you want? Fortunately, twig templates are easy to override or customize (take a look at
-:doc:`Customizing Templates cookbook </book/orders/checkout>` for more info).
+:doc:`Customizing Templates chapter</customization/template>` for more info).
 
 In the beginning, try a very simple, but also one of the most crucial change - displaying your shop logo instead of the Sylius' one.
 
