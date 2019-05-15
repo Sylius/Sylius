@@ -62,7 +62,7 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'taxon_filter' => '.item a:contains("%taxon%")',
+            'taxon_filter' => '.sylius-tree__item a:contains("%taxon%")',
         ]);
     }
 }
