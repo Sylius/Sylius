@@ -102,6 +102,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I change its :optionName option to :optionValue
+     */
+    public function iChangeItsOptionTo(string $optionName, string $optionValue): void
+    {
+        $this->updatePage->selectOption(strtoupper($optionName), $optionValue);
+    }
+
+    /**
      * @When I disable its inventory tracking
      */
     public function iDisableItsTracking()
@@ -516,6 +524,14 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatVariantsCannotBeGeneratedFromOptionsWithoutAnyValues(): void
     {
         $this->notificationChecker->checkNotification('Cannot generate variants for a product without options values', NotificationType::failure());
+    }
+
+    /**
+     * @Then I should see the :optionName option as :valueName
+     */
+    public function iShouldSeeTheOptionAs(string $optionName, string $valueName): void
+    {
+        Assert::true($this->updatePage->isSelectedOptionValueOnPage($optionName,$valueName));
     }
 
     /**
