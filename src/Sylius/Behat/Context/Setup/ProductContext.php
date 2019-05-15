@@ -1050,7 +1050,7 @@ final class ProductContext implements Context
 
         $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
 
-        foreach ($values as $key => $value) {
+        foreach ($values as $value) {
             $optionValue = $this->addProductOption($option, $value, StringInflector::nameToUppercaseCode($value));
             $this->sharedStorage->set(sprintf('%s_option_%s_value', $value, strtolower($optionName)), $optionValue);
         }

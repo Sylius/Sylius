@@ -112,8 +112,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     private function getSelectedZoneMembers(): array
     {
         $zoneMembers = $this->getElement('zone_members');
-        $selectedZoneMembers = $zoneMembers->findAll('css', 'option[selected="selected"]');
 
-        return $selectedZoneMembers;
+        return $zoneMembers->findAll('css', 'option[selected="selected"]');
     }
 }
