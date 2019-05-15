@@ -12,9 +12,7 @@ final class MediaElement extends Element implements MediaElementInterface
     public function isImageDisplayed(): bool
     {
         $imageElement = $this->getDocument()->find('css', '#media a img');
-
         if ($imageElement === null) {
-
             return false;
         }
         $imageUrl = $imageElement->getAttribute('src');
