@@ -1,0 +1,20 @@
+<div id="header" class="ui stackable two column grid">
+    <div class="column">
+        <h1 class="ui header">
+            <i class="circular cube icon"></i>
+            <div class="content">
+                <span>{{ product.name }}</span>
+                <div class="sub header">{{ 'sylius.ui.show_product'|trans }}</div>
+            </div>
+        </h1>
+        {% include "@SyliusAdmin/Product/Show/_breadcrumb.html.twig" %}
+    </div>
+    <div class="middle aligned column">
+        <div class="ui right floated buttons">
+            <a class="ui labeled icon button {% if not product.enabled %} disabled {% endif %}" href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}">
+                <i class="angle right icon"></i>
+                {{ 'sylius.ui.show_product_in_shop_page'|trans }}
+            </a>
+        </div>
+    </div>
+</div>

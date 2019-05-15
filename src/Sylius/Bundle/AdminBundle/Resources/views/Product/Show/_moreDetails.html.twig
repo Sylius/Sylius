@@ -1,0 +1,40 @@
+<div id="more-details" class="ui styled fluid accordion">
+    <div>
+        {% for translation in product.translations %}
+            <div class="title active">
+                <i class="dropdown icon"></i>
+                {{ translation.locale|sylius_locale_name }}
+            </div>
+            <div class="ui content active">
+                <table class="ui definition table">
+                    <tbody>
+                    <tr>
+                        <td class="five wide">{{ 'sylius.ui.name'|trans }}</td>
+                        <td>{{ translation.name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="five wide">{{ 'sylius.ui.slug'|trans }}</td>
+                        <td>{{ translation.slug }}</td>
+                    </tr>
+                    <tr>
+                        <td class="five wide">{{ 'sylius.ui.description'|trans }}</td>
+                        <td>{{ translation.description }}</td>
+                    </tr>
+                    <tr>
+                        <td class="five wide">{{ 'sylius.ui.meta_keywords'|trans }}</td>
+                        <td>{{ translation.metaKeywords }}</td>
+                    </tr>
+                    <tr>
+                        <td class="five wide">{{ 'sylius.ui.meta_description'|trans }}</td>
+                        <td>{{ translation.metaDescription }}</td>
+                    </tr>
+                    <tr>
+                        <td class="five wide">{{ 'sylius.ui.short_description'|trans }}</td>
+                        <td>{{ translation.shortDescription }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+</div>

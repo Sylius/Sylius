@@ -31,6 +31,7 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
+use Sylius\Component\Product\Model\ProductOption;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
@@ -460,6 +461,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^([^"]+) belongs to ("[^"]+" tax category)$/
+     * @Given the product :product belongs to :taxCategory tax category
      */
     public function productBelongsToTaxCategory(ProductInterface $product, TaxCategoryInterface $taxCategory)
     {
@@ -755,6 +757,118 @@ final class ProductContext implements Context
         $this->objectManager->flush();
     }
 
+    /**
+     * @Given product's :product code is :code
+     */
+    public function productCodeIs(ProductInterface $product, string $code): void
+    {
+        $product->setCode($code);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the product :product has height :height, width :width, depth :depth, weight :weight
+     */
+    public function productHasDimensions(ProductInterface $product, float $height, float $width, float $depth, float $weight): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setWidth($width);
+        $productVariant->setHeight($height);
+        $productVariant->setDepth($depth);
+        $productVariant->setWeight($weight);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the product :product has the slug :slug
+     */
+    public function productHasSlug(ProductInterface $product, string $slug): void
+    {
+        $product->setSlug($slug);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the description of product :product is :description
+     */
+    public function descriptionOfProductIs(ProductInterface $product, string $description): void
+    {
+        $product->setDescription($description);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the meta keywords of product :product is :metaKeywords
+     */
+    public function metaKeywordsOfProductIs(ProductInterface $product, string $metaKeywords): void
+    {
+        $product->getTranslation()->setMetaKeywords($metaKeywords);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the short description of product :product is :shortDescription
+     */
+    public function shortDescriptionOfProductIs(ProductInterface $product, string $shortDescription): void
+    {
+        $product->getTranslation()->setShortDescription($shortDescription);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the product :product has original price :originalPrice
+     */
+    public function theProductHasOriginalPrice(ProductInterface $product, string $originalPrice): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $productVariant->getChannelPricings()->first();
+        $channelPricing->setOriginalPrice($this->getPriceFromString($originalPrice));
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the product :product has option :productOption named :optionValue with code :optionCode
+     */
+    public function productHasOption(
+        ProductInterface $product,
+        ProductOption $productOption,
+        string $optionValue,
+        string $optionCode
+    ): void {
+        /** @var ProductOptionValueInterface $productOptionValue */
+        $productOptionValue = $this->productOptionValueFactory->createNew();
+        $productOptionValue->setCode($optionCode);
+        $productOptionValue->setOption($productOption);
+        $productOptionValue->setValue($optionValue);
+        $productOption->addValue($productOptionValue);
+        $product->addOption($productOption);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the product :product has :productVariantName variant with code :code, price :price, current stock :currentStock
+     */
+    public function productHasVariant(ProductInterface $product, string $productVariantName, string $code, string $price, int $currentStock): void
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+
+        $priceValue = $this->getPriceFromString($price);
+        $this->createProductVariant($product, $productVariantName, $priceValue, $code, $channel, null, true,  $currentStock);
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
@@ -856,7 +970,8 @@ final class ProductContext implements Context
         $code,
         ChannelInterface $channel = null,
         $position = null,
-        $shippingRequired = true
+        $shippingRequired = true,
+        int $currentStock = 0
     ) {
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
 
@@ -866,6 +981,7 @@ final class ProductContext implements Context
         $variant->setName($productVariantName);
         $variant->setCode($code);
         $variant->setProduct($product);
+        $variant->setOnHand($currentStock);
         $variant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
         $variant->setPosition((null === $position) ? null : (int) $position);
         $variant->setShippingRequired($shippingRequired);
