@@ -122,7 +122,7 @@ final class ProductShowPageContext implements Context
     /**
      * @Then I should see product show page without variants
      */
-    public function isSimpleProduct(): void
+    public function iShouldSeeProductShowPageWithoutVariants(): void
     {
         Assert::true($this->productShowPage->isSimpleProductPage());
     }
