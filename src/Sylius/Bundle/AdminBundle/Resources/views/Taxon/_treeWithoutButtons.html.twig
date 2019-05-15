@@ -3,36 +3,40 @@
 {% macro render(taxons) %}
     {% import _self as tree %}
 
-    {% for taxon in taxons %}
-        <div class="item">
-            <i class="folder icon"></i>
-            <div class="content">
-                <div class="header">
-                    <a href="{{ path('sylius_admin_product_per_taxon_index', {'taxonId': taxon.id}) }}">
-                        {{ taxon.name }}
-                    </a>
+    <ul>
+        {% for taxon in taxons %}
+            <li data-id="{{ taxon.id }}" {% if taxon.children is not empty %}data-sylius-js-tree-parent="{{ taxon.id }}"{% endif %}>
+                <div class="sylius-tree__item">
+                    <div class="sylius-tree__icon" {% if taxon.children is not empty %}data-sylius-js-tree-trigger="{{ taxon.id }}"{% endif %}>
+                        <i class="{{ taxon.children is not empty ? 'caret down' : 'angle left' }} icon"></i>
+                    </div>
+                    <div class="sylius-tree__title">
+                        <a href="{{ path('sylius_admin_product_per_taxon_index', {'taxonId': taxon.id}) }}">
+                            {{ taxon.name }}
+                        </a>
+                    </div>
                 </div>
-                <div class="list">
-                    {{ tree.render(taxon.children) }}
-                </div>
-            </div>
-        </div>
-    {% endfor %}
+                {{ tree.render(taxon.children) }}
+            </li>
+        {% endfor %}
+    </ul>
 {% endmacro %}
 
-<div class="ui large fluid vertical buttons">
-    <a href="{{ path('sylius_admin_product_index') }}" class="ui primary labeled icon button">
+<div class="ui vertical fluid labeled icon buttons">
+    <a href="{{ path('sylius_admin_product_index') }}" class="ui primary button">
         <i class="search icon"></i>
         {{ 'sylius.ui.browse_all_products'|trans }}
     </a>
-    <a href="{{ path('sylius_admin_taxon_create') }}" class="ui labeled icon button">
+
+    <a href="{{ path('sylius_admin_taxon_create') }}" class="ui button">
         <i class="sitemap icon"></i>
         {{ 'sylius.ui.manage_taxons'|trans }}
     </a>
 </div>
 
-<div class="ui segment">
-    <div class="ui list">
-        {{ tree.render(taxons) }}
-    </div>
+<div class="ui segment sylius-tree hidden" data-sylius-js-tree>
+    <a href="#" class="sylius-tree__toggle-all" data-sylius-js-tree-trigger>
+        <i class="icon">&bull;</i>{{ 'sylius.ui.toggle_all'|trans }}
+    </a>
+    {{ tree.render(taxons) }}
 </div>

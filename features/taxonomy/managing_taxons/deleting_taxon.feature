@@ -7,13 +7,13 @@ Feature: Deleting a taxon
     Background:
         Given I am logged in as an administrator
 
-    @ui
+    @ui @javascript
     Scenario: Deleted taxon should disappear from the registry
         Given the store classifies its products as "T-Shirts"
         When I delete taxon named "T-Shirts"
         Then the taxon named "T-Shirts" should no longer exist in the registry
 
-    @ui
+    @ui @javascript
     Scenario: Deleting a taxon with a child does not delete any other taxons
         Given the store classifies its products as "Main catalog"
         And the "Main catalog" taxon has children taxon "Shoes" and "Shovels"
