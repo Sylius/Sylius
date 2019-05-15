@@ -47,7 +47,7 @@ final class SyliusProductBundleTest extends WebTestCase
     /**
      * @test
      */
-    public function its_initializes_default_doctrine_repositories(): void
+    public function it_initializes_default_doctrine_repositories(): void
     {
         /** @var ContainerBuilder $container */
         $container = self::createClient()->getContainer();
