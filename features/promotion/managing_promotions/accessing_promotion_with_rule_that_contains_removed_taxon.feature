@@ -9,7 +9,7 @@ Feature: Accessing an edit page of a promotion with a rule that contains a remov
         And the store classifies its products as "T-Shirts" and "Mugs"
         And I am logged in as an administrator
 
-    @ui
+    @ui @javascript
     Scenario: Accessing an edit page of a promotion with a rule that contains a removed taxon
         Given there is a promotion "Christmas sale" with "Has at least one from taxons" rule configured with "T-Shirts" and "Mugs"
         When I remove taxon named "Mugs"
@@ -17,7 +17,7 @@ Feature: Accessing an edit page of a promotion with a rule that contains a remov
         And I should be able to modify a "Christmas sale" promotion
         And the "Christmas sale" promotion should have "Has at least one from taxons" rule configured
 
-    @ui
+    @ui @javascript
     Scenario: Accessing an edit page of a promotion with a rule that contains a removed taxon
         Given there is a promotion "Christmas sale" with "Total price of items from taxon" rule configured with "Mugs" taxon and $100 amount for "United States" channel
         When I remove taxon named "Mugs"
