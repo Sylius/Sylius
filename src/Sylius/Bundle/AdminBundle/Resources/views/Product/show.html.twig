@@ -1,6 +1,6 @@
 {% extends '@SyliusAdmin/layout.html.twig' %}
 
-{% block title %}Show product | {{ product.name }}{% endblock %}
+{% block title %}{{ 'sylius.ui.show_product'|trans }} | {{ product.name }}{% endblock %}
 
 {% block content %}
     {% if product.variants|length == 1 %}
