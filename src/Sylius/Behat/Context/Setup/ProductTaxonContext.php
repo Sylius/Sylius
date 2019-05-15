@@ -58,7 +58,6 @@ final class ProductTaxonContext implements Context
     {
         $product->setMainTaxon($taxon);
         $this->objectManager->flush();
-
     }
 
     /**
