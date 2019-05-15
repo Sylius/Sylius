@@ -43,10 +43,13 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
 
     public function savePositions(): void
     {
-        $this->getElement('save_configuration_button')->press();
+        $saveConfigurationButton = $this->getElement('save_configuration_button');
 
-        $this->getDocument()->waitFor(5, function () {
-            return null === $this->getElement('save_configuration_button')->find('css', '.loading');
+        $saveConfigurationButton->focus();
+        $saveConfigurationButton->press();
+
+        $this->getDocument()->waitFor(5, function () use ($saveConfigurationButton) {
+            return null === $saveConfigurationButton->find('css', '.loading');
         });
     }
 
