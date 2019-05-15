@@ -1,12 +1,6 @@
 {% extends '@SyliusAdmin/layout.html.twig' %}
 
 {% block title %}Show product | {{ product.name }}{% endblock %}
-{% block metatags %}
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-{% endblock %}
-{% block stylesheets %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
-{% endblock %}
 
 {% block content %}
     {% if product.variants|length == 1 %}
