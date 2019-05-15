@@ -84,7 +84,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $itemTotalElement = $this->getElement('product_total', ['%name%' => $productName]);
 
-        return  $itemTotalElement->getText();
+        return $itemTotalElement->getText();
     }
 
     /**

@@ -238,6 +238,7 @@ final class ShippingContext implements Context
         $secondFee,
         ChannelInterface $secondChannel
     ) {
+        $configuration = [];
         $configuration[$firstChannel->getCode()] = ['amount' => $firstFee];
         $configuration[$secondChannel->getCode()] = ['amount' => $secondFee];
 
@@ -482,7 +483,7 @@ final class ShippingContext implements Context
     private function getShippingZone()
     {
         if ($this->sharedStorage->has('shipping_zone')) {
-            return  $this->sharedStorage->get('shipping_zone');
+            return $this->sharedStorage->get('shipping_zone');
         }
 
         return $this->sharedStorage->get('zone');

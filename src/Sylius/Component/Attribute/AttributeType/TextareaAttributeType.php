@@ -35,7 +35,7 @@ final class TextareaAttributeType implements AttributeTypeInterface
      */
     public function getType(): string
     {
-        return static::TYPE;
+        return self::TYPE;
     }
 
     /**
