@@ -53,33 +53,41 @@ final class GenerateCouponsCommand extends Command
         ;
     }
 
-    public function execute(InputInterface $input, OutputInterface $output): void
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var string $promotionCode */
         $promotionCode = $input->getArgument('promotion-code');
 
         /** @var PromotionInterface|null $promotion */
         $promotion = $this->promotionRepository->findOneBy(['code' => $promotionCode]);
+
         if ($promotion === null) {
             $output->writeln('<error>No promotion found with this code</error>');
 
-            return;
+            return 1;
         }
 
         if (!$promotion->isCouponBased()) {
             $output->writeln('<error>This promotion is not coupon based</error>');
 
-            return;
+            return 1;
         }
 
         $instruction = $this->getGeneratorInstructions(
             (int) $input->getArgument('count'),
-            (int) $input->getArgument('length')
+            (int) $input->getOption('length')
         );
 
-        $this->couponGenerator->generate($promotion, $instruction);
+        try {
+            $this->couponGenerator->generate($promotion, $instruction);
+        } catch (\Exception $exception) {
+            $output->writeln('<error>'.$exception->getMessage().'</error>');
+
+            return 1;
+        }
 
         $output->writeln('<info>Coupons have been generated</info>');
+        return 0;
     }
 
     public function getGeneratorInstructions(int $count, int $codeLength): PromotionCouponGeneratorInstructionInterface
