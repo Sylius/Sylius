@@ -33,7 +33,7 @@ It will create a ``MyFirstShop`` directory with a brand new Sylius application i
     Beware! The next step includes the database setup. It will set your database credentials
     (username, password, and database name) in the file with environment variables (``.env`` is the most basic one).
 
-To launch a Sylius application, inidial data has to be set up: an administrator account and base locale.
+To launch a Sylius application initial data has to be set up: an administrator account and base locale.
 Run the Sylius installation command to do that.
 
 .. code-block:: bash

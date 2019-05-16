@@ -26,7 +26,7 @@ taxons etc. have to be created with at an english name at least.
 Currency
 --------
 
-Each channel can use multiple **Currencies**, with ratio between them configured by **Exchange rates**.
+Each channel operates only on one **Base Currency**, but prices can be shown in multiple **Currencies**, with a ratio between them configured by **Exchange rates**.
 For now, the only available currency should be **USD**, which was also created by the ``sylius:install`` command.
 
 .. image:: /_images/getting-started-with-sylius/currency.png

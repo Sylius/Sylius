@@ -1,10 +1,10 @@
 Plugin installation
 ===================
 
-Sylius is easy to customize to your business needs, but not all of the customizations you have to do on your own! Sylius
-supports creating plugins, that are the best way to extend its functionality and share these new features with the Community.
-You can already benefit from some plugins developed by us (Sylius Core team) or the Community. All of the plugins officially
-approved are listed on `our website <https://sylius.com/plugins/>`_, but even more of them can be seen in the Sylius ecosystem.
+Sylius is easy to customize to your business needs, but not all of the customizations you have to do on your own!
+Sylius supports creating plugins, that are the best way to extend its functionality and share these new features with the Community.
+You can already benefit from some plugins developed by us (Sylius Core team) or the Community.
+All of the plugins officially approved are listed on `our website <https://sylius.com/plugins/>`_, but even more of them can be seen in the Sylius ecosystem.
 
 To give you a quick overview of how easy-to-use and powerful plugins can be, let’s install the **SyliusCmsPlugin** (developed
 by **BitBag**), one of the most popular extensions to Sylius.
