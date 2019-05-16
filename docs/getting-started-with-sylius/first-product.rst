@@ -24,8 +24,7 @@ the checkout or not? Take a while to explore these options later, right now let'
 Summary
 -------
 
-Great, the first stage is done! The whole checkout process is described in :doc:`this part of the documentation </book/orders/checkout>`,
-it's quite natural and logical, so it should not be a problem to understand it.
+Great, the first stage is done! The whole checkout process is described in :doc:`this part of the documentation </book/orders/checkout>`.
 
 .. image:: /_images/getting-started-with-sylius/checkout-summary.png
 

@@ -69,7 +69,7 @@ in the calculator service, and a proper service registration in the ``services.y
 
     final class ParcelShippingCalculatorType extends AbstractType
     {
-        public function buildForm(FormBuilderInterface $builder, array $options)
+        public function buildForm(FormBuilderInterface $builder, array $options): void
         {
             $builder
                 ->add('size', NumberType::class)
