@@ -5,7 +5,6 @@
         <service id="Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand">
             <argument type="service" id="sylius.repository.promotion" />
             <argument type="service" id="sylius.promotion_coupon_generator" />
-
             <tag name="console.command" command="sylius:promotion:generate-coupons"/>
         </service>
     </services>
