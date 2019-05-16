@@ -100,7 +100,7 @@ You will need to add these few lines to the ``config/packages/_sylius.yaml``:
                         args: ["object"]
 
 .. tip::
-    If you want see implementation of ``ConfirmationMailer`` check it on `this GitHub Pull Request.
+    If you want to see the implementation of ``ConfirmationMailer`` check it on `this GitHub Pull Request.
     <https://github.com/Sylius/Customizations/pull/20>`_
 
 After that your new callback will be available alongside other callbacks that already were defined in that state machine and will be called on the desired transition.
