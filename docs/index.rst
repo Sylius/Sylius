@@ -26,7 +26,8 @@ Sylius Documentation
 Getting Started with Sylius
 ---------------------------
 
-Getting Started with Sylius
+The essential guide for the Sylius newcomers that want to know it's most important features, quickly see the power of customization
+and run their first Sylius shop within a few hours.
 
 .. toctree::
    :hidden:
