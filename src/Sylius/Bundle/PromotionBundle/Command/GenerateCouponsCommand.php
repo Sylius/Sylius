@@ -82,14 +82,6 @@ final class GenerateCouponsCommand extends Command
         $output->writeln('<info>Coupons have been generated</info>');
     }
 
-    /**
-     * Creates a instruction object for the coupon generator
-     *
-     * @param int $count   How many coupons should be generated
-     * @param int $codeLength
-     *
-     * @return PromotionCouponGeneratorInstructionInterface
-     */
     public function getGeneratorInstructions(int $count, int $codeLength): PromotionCouponGeneratorInstructionInterface
     {
         $instruction = new PromotionCouponGeneratorInstruction();
