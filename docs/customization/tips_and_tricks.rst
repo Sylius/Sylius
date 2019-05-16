@@ -56,7 +56,7 @@ The output of that command should look similar to:
             shop:
                 user:
                     classes:
-                        model: App\Entity\ShopUser
+                        model: Sylius\Component\Core\Model\ShopUser
                         repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
                         form: Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType
                         interface: Sylius\Component\User\Model\UserInterface
