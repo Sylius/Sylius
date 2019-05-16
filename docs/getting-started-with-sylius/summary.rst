@@ -1,7 +1,7 @@
 Summary
 =======
 
-We hope you've enjoyed your first journey with Sylius! Basing on the already gathered knowledge you have now plenty of
+We hope you've enjoyed your first journey with Sylius. Basing on the already gathered knowledge you have now plenty of
 possibilities to use Sylius, customize it and add new functionalities with your own or Community's code.
 
 There are a few tips at the end of this tutorial:
