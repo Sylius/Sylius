@@ -1,10 +1,10 @@
 Shop Customizations
 ===================
 
-What makes Sylius unique from other e-commerce systems is not only its high developer community or clean code base. The developer
+What makes Sylius unique from other e-commerce systems is not only its highly developed community or clean code base. The developer
 experience has always been a great advantage of this platform - and it includes easiness of customization and great extendability.
 
-Let's get the benefit from these features and make some simple customization, to make your store even much suitable for your
+Let's get the benefit from these features and make some simple customization, to make your store even more suitable for your
 business needs.
 
 Logo
@@ -15,7 +15,7 @@ to make them unique for your online store. Maybe some colors should be different
 not look like you want? Fortunately, twig templates are easy to override or customize (take a look at
 :doc:`Customizing Templates chapter</customization/template>` for more info).
 
-In the beginning, try a very simple, but also one of the most crucial change - displaying your shop logo instead of the Sylius' one.
+In the beginning, try a very simple, but also one of the most crucial changes - displaying your shop logo in place of the Sylius logo.
 
 Default logo in shop panel:
 
@@ -25,14 +25,14 @@ The first step is to detect which template is responsible for displaying the log
 to customize a logo image.
 
 It's placed in **SyliusShopBundle**, at ``Resources/views/_header.html.twig.path``, so to override it,
-you should create a ``templates/bundles/SyliusShopBundle/_header.html.twig`` file and copy the original file content. Next, replace the
-``img`` element source with a link to the logo or properly imported asset image (take a look at
+you should create the ``templates/bundles/SyliusShopBundle/_header.html.twig`` file and copy the original file content.
+Next, replace the ``img`` element source with a link to the logo or properly imported asset image (take a look at
 `Symfony assets documentation <https://symfony.com/doc/current/best_practices/web-assets.html>`_ for more info).
 
 .. hint::
 
-    Psst! To speed up your learning path you can just put a logo file into the ``public/assets/`` directory. Just remember,
-    it should not be committed into the repository or throw on the server, it's just for the testing reasons!
+    *Psst!* To speed up your learning path you can just put a logo file into the ``public/assets/`` directory. Just remember,
+    it should not be committed into the repository or put on the server, it's just for the testing reasons!
 
 At the end of customization, the overridden file would look similar to this:
 
