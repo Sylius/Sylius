@@ -15,12 +15,12 @@ bought products and some configuration done by Administrator. By default Sylius 
 ordered products in parcels and you need to charge a customer for each of them.
 
 You should start with the implementation of your custom shipping calculator service. Remember, that it must implement the
-``CalculatorInterface`` from **Shipping Component**. Let's name it ``ParcelCalculator`` and place in ``src/ShippingCalculator``
+``CalculatorInterface`` from **Shipping Component**. Let's name it ``ParcelCalculator`` and place it in ``src/ShippingCalculator``
 directory.
 
 .. code-block:: php
 
-    # src/ShippingCalculator/
+    # src/ShippingCalculator/ParcelCalculator.php
 
     <?php
 
@@ -49,12 +49,12 @@ directory.
         }
     }
 
-Two more things are needed to make it work. A form type, that would be used to pass some data to ``$configuration`` array
-in the calculator service, and a proper service registration in ``services.yaml`` file.
+Two more things are needed to make it work. A form type, that would be used to pass some data to the ``$configuration`` array
+in the calculator service, and a proper service registration in the ``services.yaml`` file.
 
 .. code-block:: php
 
-    # src/Form/Type/
+    # src/Form/Type/ParcelShippingCalculatorType.php
 
     <?php
 
@@ -82,7 +82,7 @@ in the calculator service, and a proper service registration in ``services.yaml`
 
 .. attention::
 
-    The currency needed for ``MoneyType`` in the proposed implementation is hardcoded just for testing reasons. In a real application,
+    The currency needed for ``MoneyType`` in the proposed implementation hardcoded just for testing reasons. In a real application,
     you should get the proper currency code from the repository, context or some configuration file.
 
 .. code-block:: yaml
@@ -102,7 +102,7 @@ in the calculator service, and a proper service registration in ``services.yaml`
                         form_type: App\Form\Type\ParcelShippingCalculatorType
                     }
 
-That's it! You should now be able to select your shipping calculator during the creation or edition of shipping method.
+That's it! You should now be able to select your shipping calculator during the creation or edition of a shipping method.
 
 .. image:: /_images/getting-started-with-sylius/shipping-calculator.png
     :scale: 55%
@@ -130,7 +130,7 @@ For 4 products:
 |
 
 Amazing job! You've just provided your own logic into a Sylius-based system. Therefore, your store can provide a unique
-experience for your Customers. Basing on this knowledge, your ready to customize your shop even more and make it as suitable
+experience for your Customers. Basing on this knowledge, you're ready to customize your shop even more and make it as suitable
 to your business needs as possible.
 
 Learn more
