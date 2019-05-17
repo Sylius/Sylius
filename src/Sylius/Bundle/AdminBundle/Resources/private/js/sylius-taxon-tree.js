@@ -8,6 +8,7 @@ class SyliusTaxonomyTree {
     };
 
     this.tree = document.querySelector(`[${this.attr.tree}]`);
+    if (!this.tree) return;
     this.hiddenItems = this.getMapFromStorage();
     this.renderMap();
     this.tree.classList.remove('hidden');
