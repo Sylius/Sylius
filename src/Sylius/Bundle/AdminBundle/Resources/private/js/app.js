@@ -19,7 +19,6 @@ import 'sylius/ui/sylius-prototype-handler';
 
 import './sylius-compound-form-errors';
 import './sylius-lazy-choice-tree';
-import './sylius-move-product';
 import './sylius-move-product-variant';
 import './sylius-move-taxon';
 import './sylius-notification';
@@ -49,7 +48,6 @@ $(document).ready(() => {
     window.location = $(event.currentTarget).find('a').attr('href');
   });
 
-  $('.sylius-update-product-taxons').moveProduct($('.sylius-product-taxon-position'));
   $('.sylius-update-product-variants').moveProductVariant($('.sylius-product-variant-position'));
   $('.sylius-taxon-move-up').taxonMoveUp();
   $('.sylius-taxon-move-down').taxonMoveDown();

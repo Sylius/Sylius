@@ -16,9 +16,9 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Resource\ResourceActions;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ProductTaxonController extends ResourceController
@@ -37,23 +37,25 @@ class ProductTaxonController extends ResourceController
         }
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && null !== $productTaxons) {
+            /** @var Session $session */
+            $session = $request->getSession();
+
             /** @var ProductTaxonInterface $productTaxon */
-            foreach ($productTaxons as $productTaxon) {
-                if (!is_numeric($productTaxon['position'])) {
-                    throw new HttpException(
-                        Response::HTTP_BAD_REQUEST,
-                        sprintf('The productTaxon position "%s" is invalid.', $productTaxon['position'])
-                    );
+            foreach ($productTaxons as $id => $position) {
+                if (!is_numeric($position)) {
+                    $session->getFlashBag()->add('error', sprintf('The position "%s" is invalid.', $position));
+
+                    return $this->redirectHandler->redirectToReferer($configuration);
                 }
 
                 /** @var ProductTaxonInterface $productTaxonFromBase */
-                $productTaxonFromBase = $this->repository->findOneBy(['id' => $productTaxon['id']]);
-                $productTaxonFromBase->setPosition((int) $productTaxon['position']);
-
-                $this->manager->flush();
+                $productTaxonFromBase = $this->repository->findOneBy(['id' => $id]);
+                $productTaxonFromBase->setPosition((int) $position);
             }
+
+            $this->manager->flush();
         }
 
-        return new JsonResponse();
+        return $this->redirectHandler->redirectToReferer($configuration);
     }
 }
