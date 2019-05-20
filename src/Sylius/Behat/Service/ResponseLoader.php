@@ -66,7 +66,7 @@ class ResponseLoader implements ResponseLoaderInterface
     {
         $calledClass = get_called_class();
 
-        return dirname((new \ReflectionClass($calledClass))->getFileName());
+        return \dirname((new \ReflectionClass($calledClass))->getFileName());
     }
 
     /**

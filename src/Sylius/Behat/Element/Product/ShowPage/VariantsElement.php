@@ -23,7 +23,7 @@ final class VariantsElement extends Element implements VariantsElementInterface
         /** @var NodeElement $variants|array */
         $variants = $this->getDocument()->findAll('css', '#variants .variant');
 
-        return count($variants);
+        return \count($variants);
     }
 
     public function hasProductVariantWithCodePriceAndCurrentStock(string $name, string $code, string $price, string $currentStock): bool
