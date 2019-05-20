@@ -32,7 +32,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         return true;
     }
 
-    public function setPositionOfProduct(string $productName, int $position): void
+    public function setPositionOfProduct(string $productName, string $position): void
     {
         /** @var NodeElement $productsRow */
         $productsRow = $this->getElement('table')->find('css', sprintf('tbody > tr:contains("%s")', $productName));
@@ -44,8 +44,6 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
     public function savePositions(): void
     {
         $saveConfigurationButton = $this->getElement('save_configuration_button');
-
-        $saveConfigurationButton->focus();
         $saveConfigurationButton->press();
 
         $this->getDocument()->waitFor(5, function () use ($saveConfigurationButton) {
