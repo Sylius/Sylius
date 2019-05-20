@@ -1,0 +1,46 @@
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2019-05-13T08:26:28Z
+
+Hi, guys.
+Any chance this PR will be merged?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-05-13T09:51:28Z
+
+Hello Igor,
+
+this PR was red due to the problem with the side library. I have restarted a build.
+
+---------------------------------------------------------------------------
+
+by bartoszpietrzak1994 at 2019-05-15T07:29:02Z
+
+Could you document the behavior that you want to add in this PR? It would be great if our docs informed the users about the `load_default_locale` flag.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-05-15T08:40:40Z
+
+Good idea, but I don't know where should it be placed. We don't have any option documented around fixtures configuration.
+
+Thus, we can open an issue about missing documentation after merging this PR
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-05-15T09:15:20Z
+
+I'm a little bit afraid it can be written and forgotten :( Maybe we can add a quick note in [this chapter](https://docs.sylius.com/en/1.4/book/architecture/fixtures.html#what-data-is-loaded-by-fixtures-in-sylius) of documentation? Just to not forget it and **then** open an issue about missing documentation 😄
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-05-16T11:37:21Z
+
+I'm voting for merging this feature and let's focus on documentation form in separate PR (#10393)
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-05-20T07:17:33Z
+
+Thank you, Łukasz! :1st_place_medal:
