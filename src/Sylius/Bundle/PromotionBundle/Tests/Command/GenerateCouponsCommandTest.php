@@ -1,8 +1,17 @@
 <?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Tests\Command;
-
 
 use InvalidArgumentException;
 use Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand;
@@ -52,12 +61,13 @@ class GenerateCouponsCommandTest extends KernelTestCase
         $this->promotionRepository
             ->method('findOneBy')
             ->with($this->equalTo(['code' => 'UNKNOWN_PROMOTION']))
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $this->commandTester->execute([
-            'command'  => $this->command->getName(),
+            'command' => $this->command->getName(),
             'promotion-code' => 'UNKNOWN_PROMOTION',
-            'count' => 10
+            'count' => 10,
         ]);
 
         // the output of the command in the console
@@ -65,7 +75,6 @@ class GenerateCouponsCommandTest extends KernelTestCase
         $this->assertNotEquals($this->commandTester->getStatusCode(), 0);
         $this->assertContains('No promotion found with this code', $output);
     }
-
 
     /**
      * @test
@@ -77,14 +86,14 @@ class GenerateCouponsCommandTest extends KernelTestCase
 
         $this->promotionRepository->method('findOneBy')
             ->with($this->equalTo(['code' => 'INVALID_PROMOTION']))
-            ->willReturn($promotion);
+            ->willReturn($promotion)
+        ;
 
         $this->commandTester->execute([
-            'command'  => $this->command->getName(),
+            'command' => $this->command->getName(),
             'promotion-code' => 'INVALID_PROMOTION',
-            'count' => 10
+            'count' => 10,
         ]);
-
 
         // the output of the command in the console
         $output = $this->commandTester->getDisplay();
@@ -119,9 +128,9 @@ class GenerateCouponsCommandTest extends KernelTestCase
         ;
 
         $this->commandTester->execute([
-            'command'  => $this->command->getName(),
+            'command' => $this->command->getName(),
             'promotion-code' => 'VALID_PROMOTION',
-            'count' => 10
+            'count' => 10,
         ]);
 
         // the output of the command in the console
@@ -157,9 +166,9 @@ class GenerateCouponsCommandTest extends KernelTestCase
         ;
 
         $this->commandTester->execute([
-            'command'  => $this->command->getName(),
+            'command' => $this->command->getName(),
             'promotion-code' => 'VALID_PROMOTION',
-            'count' => 5
+            'count' => 5,
         ]);
 
         // the output of the command in the console
@@ -167,6 +176,7 @@ class GenerateCouponsCommandTest extends KernelTestCase
         $this->assertEquals($this->commandTester->getStatusCode(), 0);
         $this->assertContains('Coupons have been generated', $output);
     }
+
     /**
      * @test
      */
@@ -195,10 +205,10 @@ class GenerateCouponsCommandTest extends KernelTestCase
 
         $this->commandTester->execute(
             [
-                'command'  => $this->command->getName(),
+                'command' => $this->command->getName(),
                 'promotion-code' => 'VALID_PROMOTION',
                 'count' => 10,
-                '--length' => 7
+                '--length' => 7,
             ]
         );
 
