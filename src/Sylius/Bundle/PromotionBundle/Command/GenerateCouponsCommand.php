@@ -81,12 +81,13 @@ final class GenerateCouponsCommand extends Command
         try {
             $this->couponGenerator->generate($promotion, $instruction);
         } catch (\Exception $exception) {
-            $output->writeln('<error>'.$exception->getMessage().'</error>');
+            $output->writeln('<error>' . $exception->getMessage() . '</error>');
 
             return 1;
         }
 
         $output->writeln('<info>Coupons have been generated</info>');
+
         return 0;
     }
 
