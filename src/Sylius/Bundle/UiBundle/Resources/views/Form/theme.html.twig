@@ -126,13 +126,13 @@
 {% endmacro %}
 
 {% block sylius_province_widget %}
-<div class="ui compact segment">
-    <div class="inline fields">
-        {{ form_row(form.code) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.abbreviation) }}
+    <div class="ui compact segment">
+        <div class="inline fields">
+            {{ form_row(form.code) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.abbreviation) }}
+        </div>
     </div>
-</div>
 {% endblock %}
 
 {% block sylius_zone_member_widget %}
@@ -166,15 +166,15 @@
 {% block sylius_product_option_value_widget %}
     <div class="ui segment">
         {{ form_row(form.code) }}
-            <div class="five fields">
+        <div class="five fields">
             {% for locale, translationForm in form.translations %}
-                {{ form_row(translationForm.value, {'label': locale|sylius_locale_name}) }}
-                {% if 0 == loop.index % 5 %}
-                </div>
-                <div class="five fields">
-                {% endif %}
+            {{ form_row(translationForm.value, {'label': locale|sylius_locale_name}) }}
+            {% if 0 == loop.index % 5 %}
+        </div>
+        <div class="five fields">
+            {% endif %}
             {% endfor %}
-            </div>
+        </div>
     </div>
 {% endblock %}
 
@@ -228,4 +228,20 @@
         <h4 class="ui dividing header">{{ 'sylius.ui.pricing'|trans }}</h4>
         {{ form_row(form.channelPricings, {'label': false}) }}
     </div>
+{% endblock %}
+
+{% block sylius_image_widget %}
+    {% spaceless %}
+        {{ form_row(form.type) }}
+        <label for="{{ form.file.vars.id }}" class="ui icon labeled button"><i class="cloud upload icon"></i> {{ 'sylius.ui.choose_file'|trans }}</label>
+        {% if form.vars.value.path|default(null) is not null %}
+            <img class="ui small bordered image" src="{{ form.vars.value.path|imagine_filter('sylius_small') }}" alt="{{ form.vars.value.type }}" />
+        {% endif %}
+        <div class="ui hidden element">
+            {{ form_widget(form.file) }}
+        </div>
+        <div class="ui element">
+            {{- form_errors(form.file) -}}
+        </div>
+    {% endspaceless %}
 {% endblock %}
