@@ -1,0 +1,5 @@
+sylius_admin_product_taxons_update_position:
+    path: /update
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.product_taxon:updateProductTaxonsPositionsAction

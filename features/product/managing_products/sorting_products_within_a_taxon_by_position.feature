@@ -50,7 +50,7 @@ Feature: Sorting listed products from a taxon by position
 
     @ui
     Scenario: Being unable to use a non-numeric string as a product position
-        When I am browsing products from "Soft Toys" taxon
-        And I set the position of "Young pug" to "test"
+        Given I am browsing products from "Soft Toys" taxon
+        When I set the position of "Young pug" to "test"
         And I save my new configuration
         Then I should be notified that the position "test" is invalid
