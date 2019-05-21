@@ -66,6 +66,10 @@ sylius_admin_product_option:
 sylius_admin_product_review:
     resource: "@SyliusAdminBundle/Resources/config/routing/product_review.yml"
 
+sylius_admin_product_taxon:
+    resource: "@SyliusAdminBundle/Resources/config/routing/product_taxon.yml"
+    prefix: /product-taxons
+
 sylius_admin_product_variant:
     resource: "@SyliusAdminBundle/Resources/config/routing/product_variant.yml"
     prefix: /products/{productId}/variants/
