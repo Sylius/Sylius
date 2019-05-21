@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class ImpersonateUserController
@@ -33,6 +34,9 @@ final class ImpersonateUserController
     /** @var UserProviderInterface */
     private $userProvider;
 
+    /** @var RouterInterface */
+    private $router;
+
     /** @var string */
     private $authorizationRole;
 
@@ -40,11 +44,13 @@ final class ImpersonateUserController
         UserImpersonatorInterface $impersonator,
         AuthorizationCheckerInterface $authorizationChecker,
         UserProviderInterface $userProvider,
+        RouterInterface $router,
         string $authorizationRole
     ) {
         $this->impersonator = $impersonator;
         $this->authorizationChecker = $authorizationChecker;
         $this->userProvider = $userProvider;
+        $this->router = $router;
         $this->authorizationRole = $authorizationRole;
     }
 
