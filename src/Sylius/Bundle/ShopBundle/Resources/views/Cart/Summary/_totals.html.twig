@@ -32,20 +32,18 @@
         {% endif %}
         <tr>
             <td>{{ 'sylius.ui.shipping_estimated_cost'|trans }}:</td>
-            <td id="sylius-cart-shipping-total" class="right aligned">
+            <td class="right aligned">
                 {% if cart.getAdjustmentsTotal('shipping') > cart.shippingTotal %}
                     <span class="old-price">{{ money.convertAndFormat(cart.getAdjustmentsTotal('shipping')) }}</span>
                 {% endif %}
-                {{ money.convertAndFormat(cart.shippingTotal) }}
+                <span id="sylius-cart-shipping-total">{{ money.convertAndFormat(cart.shippingTotal) }}</span>
             </td>
         </tr>
-        <tr>
+        <tr {% if taxIncluded %}class="tax-disabled"{% endif %}>
             <td>{{ 'sylius.ui.taxes_total'|trans }}:</td>
-            <td id="sylius-cart-tax-total" class="right aligned">
-                {{ money.convertAndFormat(cart.taxTotal) }}
-                {% if taxIncluded %}
-                    <br><small>({{ 'sylius.ui.included_in_price'|trans }})</small>
-                {% endif %}
+            <td class="right aligned">
+                <span id="sylius-cart-tax-total">{{ money.convertAndFormat(cart.taxTotal) }}</span>
+                {% if taxIncluded %}<br><small>({{ 'sylius.ui.included_in_price'|trans }})</small>{% endif %}
             </td>
         </tr>
         <tr class="ui large header">
