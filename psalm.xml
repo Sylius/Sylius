@@ -198,7 +198,11 @@
         <InaccessibleProperty errorLevel="info" />
 
         <!-- Custom -->
+
         <MismatchingDocblockReturnType errorLevel="info" />
+        <!-- remove after guzzlehttp-release -->
+        <!-- see https://github.com/guzzle/guzzle/pull/2273 -->
+        <InvalidCatch errorLevel="info" />
 
     </issueHandlers>
 </psalm>
