@@ -1,5 +1,18 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
+{% set itemsSubtotal = 0 %}
+{% set taxIncluded = true %}
+
+{% for item in cart.items %}
+    {% set itemsSubtotal = itemsSubtotal + item.subtotal %}
+{% endfor %}
+
+{% for tax in cart.getAdjustmentsRecursively("tax") %}
+    {% if not tax.isNeutral %}
+        {% set taxIncluded = false %}
+    {% endif %}
+{% endfor %}
+
 <div class="ui segment">
     <h2 class="ui dividing header">{{ 'sylius.ui.summary'|trans }}</h2>
 
@@ -8,12 +21,8 @@
     <table class="ui very basic table">
         <tbody>
         <tr>
-            <td>{{ 'sylius.ui.tax'|trans }}:</td>
-            <td id="sylius-cart-tax-total" class="right aligned">{{ money.convertAndFormat(cart.taxTotal) }}</td>
-        </tr>
-        <tr>
-            <td>{{ 'sylius.ui.shipping'|trans }}:</td>
-            <td id="sylius-cart-shipping-total" class="right aligned">{{ money.convertAndFormat(cart.shippingTotal) }}</td>
+            <td>{{ 'sylius.ui.items_total'|trans }}:</td>
+            <td class="right aligned">{{ money.convertAndFormat(itemsSubtotal) }}</td>
         </tr>
         {% if cart.orderPromotionTotal %}
         <tr>
@@ -21,6 +30,24 @@
             <td id="sylius-cart-promotion-total" class="right aligned">{{ money.convertAndFormat(cart.orderPromotionTotal) }}</td>
         </tr>
         {% endif %}
+        <tr>
+            <td>{{ 'sylius.ui.shipping_estimated_cost'|trans }}:</td>
+            <td id="sylius-cart-shipping-total" class="right aligned">
+                {% if cart.getAdjustmentsTotal('shipping') > cart.shippingTotal %}
+                    <span class="old-price">{{ money.convertAndFormat(cart.getAdjustmentsTotal('shipping')) }}</span>
+                {% endif %}
+                {{ money.convertAndFormat(cart.shippingTotal) }}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ 'sylius.ui.taxes_total'|trans }}:</td>
+            <td id="sylius-cart-tax-total" class="right aligned">
+                {{ money.convertAndFormat(cart.taxTotal) }}
+                {% if taxIncluded %}
+                    <br><small>({{ 'sylius.ui.included_in_price'|trans }})</small>
+                {% endif %}
+            </td>
+        </tr>
         <tr class="ui large header">
             <td>{{ 'sylius.ui.order_total'|trans }}:</td>
             <td id="sylius-cart-grand-total" class="right aligned">{{ money.convertAndFormat(cart.total) }}</td>

@@ -9,7 +9,9 @@
     </td>
     <td class="right aligned">
         {% if item.unitPrice != item.discountedUnitPrice %}
-            <span class="sylius-regular-unit-price">{{ money.convertAndFormat(item.unitPrice) }}</span>
+            <span class="sylius-regular-unit-price">
+                <span class="old-price">{{ money.convertAndFormat(item.unitPrice) }}</span>
+            </span>
         {% endif %}
         <span class="sylius-unit-price">{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
     </td>
