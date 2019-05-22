@@ -1,4 +1,10 @@
 {
+    "amphp/amp": {
+        "version": "v2.1.2"
+    },
+    "amphp/byte-stream": {
+        "version": "v1.6.0"
+    },
     "behat/behat": {
         "version": "v3.5.0"
     },
@@ -118,6 +124,12 @@
     },
     "egulias/email-validator": {
         "version": "2.1.5"
+    },
+    "felixfbecker/advanced-json-rpc": {
+        "version": "v3.0.3"
+    },
+    "felixfbecker/language-server-protocol": {
+        "version": "v1.4.0"
     },
     "friends-of-behat/page-object-extension": {
         "version": "0.1"
@@ -295,6 +307,9 @@
     },
     "nesbot/carbon": {
         "version": "2.14.2"
+    },
+    "netresearch/jsonmapper": {
+        "version": "v1.4.0"
     },
     "nette/finder": {
         "version": "v2.4.2"
@@ -812,8 +827,17 @@
     "twig/twig": {
         "version": "v2.5.0"
     },
+    "vimeo/psalm": {
+        "version": "3.4.2"
+    },
     "webmozart/assert": {
         "version": "1.3.0"
+    },
+    "webmozart/glob": {
+        "version": "4.1.0"
+    },
+    "webmozart/path-util": {
+        "version": "2.3.0"
     },
     "white-october/pagerfanta-bundle": {
         "version": "v1.2.1"

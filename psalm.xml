@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<psalm
+    totallyTyped="false"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <directory name="src/Sylius/Behat" />
+
+            <directory name="src/Sylius/Bundle/AddressingBundle/spec" />
+            <directory name="src/Sylius/Bundle/AddressingBundle/test" />
+            <directory name="src/Sylius/Bundle/AdminApiBundle/spec" />
+            <directory name="src/Sylius/Bundle/AdminBundle/spec" />
+            <directory name="src/Sylius/Bundle/AttributeBundle/spec" />
+            <directory name="src/Sylius/Bundle/AttributeBundle/test" />
+            <directory name="src/Sylius/Bundle/ChannelBundle/spec" />
+            <directory name="src/Sylius/Bundle/ChannelBundle/test" />
+            <directory name="src/Sylius/Bundle/CoreBundle/spec" />
+            <directory name="src/Sylius/Bundle/CurrencyBundle/spec" />
+            <directory name="src/Sylius/Bundle/CurrencyBundle/test" />
+            <directory name="src/Sylius/Bundle/CustomerBundle/test" />
+            <directory name="src/Sylius/Bundle/InventoryBundle/spec" />
+            <directory name="src/Sylius/Bundle/InventoryBundle/test" />
+            <directory name="src/Sylius/Bundle/LocaleBundle/spec" />
+            <directory name="src/Sylius/Bundle/LocaleBundle/test" />
+            <directory name="src/Sylius/Bundle/MoneyBundle/spec" />
+            <directory name="src/Sylius/Bundle/MoneyBundle/test" />
+            <directory name="src/Sylius/Bundle/OrderBundle/spec" />
+            <directory name="src/Sylius/Bundle/OrderBundle/test" />
+            <directory name="src/Sylius/Bundle/PaymentBundle/test" />
+            <directory name="src/Sylius/Bundle/PayumBundle/spec" />
+            <directory name="src/Sylius/Bundle/ProductBundle/spec" />
+            <directory name="src/Sylius/Bundle/ProductBundle/test" />
+            <directory name="src/Sylius/Bundle/PromotionBundle/spec" />
+            <directory name="src/Sylius/Bundle/PromotionBundle/test" />
+            <directory name="src/Sylius/Bundle/ReviewBundle/spec" />
+            <directory name="src/Sylius/Bundle/ShippingBundle/test" />
+            <directory name="src/Sylius/Bundle/ShopBundle/spec" />
+            <directory name="src/Sylius/Bundle/TaxationBundle/spec" />
+            <directory name="src/Sylius/Bundle/TaxationBundle/test" />
+            <directory name="src/Sylius/Bundle/TaxonomyBundle/Tests" />
+            <directory name="src/Sylius/Bundle/UiBundle/spec" />
+            <directory name="src/Sylius/Bundle/UserBundle/spec" />
+            <directory name="src/Sylius/Bundle/UserBundle/Tests" />
+
+            <directory name="src/Sylius/Component/Addressing/spec" />
+            <directory name="src/Sylius/Component/Attribute/spec" />
+            <directory name="src/Sylius/Component/Channel/spec" />
+            <directory name="src/Sylius/Component/Core/spec" />
+            <directory name="src/Sylius/Component/Currency/spec" />
+            <directory name="src/Sylius/Component/Inventory/spec" />
+            <directory name="src/Sylius/Component/Locale/spec" />
+            <directory name="src/Sylius/Component/Order/spec" />
+            <directory name="src/Sylius/Component/Payment/spec" />
+            <directory name="src/Sylius/Component/Product/spec" />
+            <directory name="src/Sylius/Component/Promotion/spec" />
+            <directory name="src/Sylius/Component/Review/spec" />
+            <directory name="src/Sylius/Component/Shipping/spec" />
+            <directory name="src/Sylius/Component/Taxation/spec" />
+            <directory name="src/Sylius/Component/Taxonomy/spec" />
+            <directory name="src/Sylius/Component/User/spec" />
+
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <LessSpecificReturnType errorLevel="info" />
+
+        <!-- level 3 issues - slightly lazy code writing, but provably low false-negatives -->
+
+        <DeprecatedMethod errorLevel="info" />
+        <DeprecatedProperty errorLevel="info" />
+        <DeprecatedClass errorLevel="info" />
+        <DeprecatedConstant errorLevel="info" />
+        <DeprecatedInterface errorLevel="info" />
+        <DeprecatedTrait errorLevel="info" />
+
+        <InternalMethod errorLevel="info" />
+        <InternalProperty errorLevel="info" />
+        <InternalClass errorLevel="info" />
+
+        <MissingClosureReturnType errorLevel="info" />
+        <MissingReturnType errorLevel="info" />
+        <MissingPropertyType errorLevel="info" />
+        <InvalidDocblock errorLevel="info" />
+        <MisplacedRequiredParam errorLevel="info" />
+
+        <PropertyNotSetInConstructor errorLevel="info" />
+        <MissingConstructor errorLevel="info" />
+        <MissingClosureParamType errorLevel="info" />
+        <MissingParamType errorLevel="info" />
+
+        <RedundantCondition errorLevel="info" />
+
+        <DocblockTypeContradiction errorLevel="info" />
+        <RedundantConditionGivenDocblockType errorLevel="info" />
+
+        <UnresolvableInclude errorLevel="info" />
+
+        <RawObjectIteration errorLevel="info" />
+
+        <InvalidStringClass errorLevel="info" />
+
+        <!-- level 4 issues - points to possible deficiencies in logic, higher false-positives -->
+
+        <MoreSpecificReturnType errorLevel="info" />
+        <LessSpecificReturnStatement errorLevel="info" />
+        <TypeCoercion errorLevel="info" />
+
+        <PossiblyFalseArgument errorLevel="info" />
+        <PossiblyFalseIterator errorLevel="info" />
+        <PossiblyFalseOperand errorLevel="info" />
+        <PossiblyFalsePropertyAssignmentValue errorLevel="info" />
+        <PossiblyFalseReference errorLevel="info" />
+        <PossiblyInvalidArgument errorLevel="info" />
+        <PossiblyInvalidArrayAccess errorLevel="info" />
+        <PossiblyInvalidArrayAssignment errorLevel="info" />
+        <PossiblyInvalidArrayOffset errorLevel="info" />
+        <PossiblyInvalidCast errorLevel="info" />
+        <PossiblyInvalidFunctionCall errorLevel="info" />
+        <PossiblyInvalidIterator errorLevel="info" />
+        <PossiblyInvalidMethodCall errorLevel="info" />
+        <PossiblyInvalidOperand errorLevel="info" />
+        <PossiblyInvalidPropertyAssignment errorLevel="info" />
+        <PossiblyInvalidPropertyAssignmentValue errorLevel="info" />
+        <PossiblyInvalidPropertyFetch errorLevel="info" />
+        <PossiblyNullArgument errorLevel="info" />
+        <PossiblyNullArrayAccess errorLevel="info" />
+        <PossiblyNullArrayAssignment errorLevel="info" />
+        <PossiblyNullArrayOffset errorLevel="info" />
+        <PossiblyNullFunctionCall errorLevel="info" />
+        <PossiblyNullIterator errorLevel="info" />
+        <PossiblyNullOperand errorLevel="info" />
+        <PossiblyNullPropertyAssignment errorLevel="info" />
+        <PossiblyNullPropertyAssignmentValue errorLevel="info" />
+        <PossiblyNullPropertyFetch errorLevel="info" />
+        <PossiblyNullReference errorLevel="info" />
+        <PossiblyUndefinedGlobalVariable errorLevel="info" />
+        <PossiblyUndefinedVariable errorLevel="info" />
+        <PossiblyUndefinedArrayOffset errorLevel="info" />
+        <PossiblyUndefinedMethod errorLevel="info" />
+
+        <!-- level 5 issues - should be avoided at mosts costs... -->
+
+        <ForbiddenCode errorLevel="info" />
+        <ImplicitToStringCast errorLevel="info" />
+        <InvalidScalarArgument errorLevel="info" />
+        <InvalidToString errorLevel="info" />
+        <InvalidOperand errorLevel="info" />
+        <NoInterfaceProperties errorLevel="info" />
+        <TooManyArguments errorLevel="info" />
+        <TypeDoesNotContainType errorLevel="info" />
+        <TypeDoesNotContainNull errorLevel="info" />
+        <MissingDocblockType errorLevel="info" />
+        <ImplementedReturnTypeMismatch errorLevel="info" />
+        <ImplementedParamTypeMismatch errorLevel="info" />
+
+        <!-- level 6 issues - really bad things -->
+
+        <InvalidNullableReturnType errorLevel="info" />
+        <NullableReturnStatement errorLevel="info" />
+        <InvalidFalsableReturnType errorLevel="info" />
+        <FalsableReturnStatement errorLevel="info" />
+
+        <MoreSpecificImplementedParamType errorLevel="info" />
+        <LessSpecificImplementedReturnType errorLevel="info" />
+
+        <InvalidReturnStatement errorLevel="info" />
+        <InvalidReturnType errorLevel="info" />
+        <UndefinedThisPropertyAssignment errorLevel="info" />
+        <UndefinedInterfaceMethod errorLevel="info" />
+
+        <!-- level 7 issues - even worse -->
+
+        <UndefinedThisPropertyAssignment errorLevel="info" />
+        <UndefinedPropertyAssignment errorLevel="info" />
+        <UndefinedThisPropertyFetch errorLevel="info" />
+        <UndefinedPropertyFetch errorLevel="info" />
+
+        <InvalidReturnStatement errorLevel="info" />
+        <InvalidReturnType errorLevel="info" />
+        <InvalidArgument errorLevel="info" />
+        <InvalidPropertyAssignmentValue errorLevel="info" />
+        <InvalidArrayOffset errorLevel="info" />
+        <InvalidArrayAssignment errorLevel="info" />
+        <InvalidArrayAccess errorLevel="info" />
+        <InvalidClone errorLevel="info" />
+
+        <!-- level 8 issues - some fatal errors in PHP -->
+
+        <ReservedWord errorLevel="info" />
+        <MethodSignatureMismatch errorLevel="info" />
+        <OverriddenMethodAccess errorLevel="info" />
+        <InaccessibleProperty errorLevel="info" />
+
+        <!-- Custom -->
+        <MismatchingDocblockReturnType errorLevel="info" />
+
+    </issueHandlers>
+</psalm>
