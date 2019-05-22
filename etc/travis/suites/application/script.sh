@@ -11,6 +11,7 @@ commands=(
     validate-yaml-files
     validate-yarn-packages
     test-phpstan
+    test-psalm
     test-phpspec
     test-phpunit
     test-installer
