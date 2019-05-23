@@ -15,20 +15,27 @@
     <td class="right aligned unit-price">
         {{ money.format(item.unitPrice, order.currencyCode) }}
     </td>
+    <td class="right aligned unit-discount">
+        -{{ money.format(item.unitPrice - item.discountedUnitPrice, order.currencyCode) }}
+    </td>
+    <td class="right aligned unit-order-discount">
+        $99.99
+    </td>
     <td class="right aligned discounted-unit-price">
-        {{ money.format(item.discountedUnitPrice, order.currencyCode) }}
+        $99.99
     </td>
     <td class="right aligned quantity">
         {{ item.quantity }}
     </td>
     <td class="right aligned subtotal">
-        {{ money.format(item.subtotal, order.currencyCode) }}
-    </td>
-    <td class="right aligned discount">
-        {{ money.format(item.getAdjustmentsTotalRecursively(orderPromotionAdjustment), order.currencyCode) }}
+        $99.99
     </td>
     <td class="right aligned tax">
-        {{ money.format(item.taxTotal, order.currencyCode) }}
+        <div class="tax-excluded">$99.99</div>
+        <div class="tax-disabled">
+            <div class="tax-included">$99.99</div>
+            <small>({{ 'sylius.ui.included_in_price'|trans }})</small>
+        </div>
     </td>
     <td class="right aligned total">
         {{ money.format(item.total, order.currencyCode) }}
