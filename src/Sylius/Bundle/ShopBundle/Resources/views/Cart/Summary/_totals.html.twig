@@ -1,17 +1,8 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
-{% set itemsSubtotal = 0 %}
-{% set taxIncluded = true %}
-
-{% for item in cart.items %}
-    {% set itemsSubtotal = itemsSubtotal + item.subtotal %}
-{% endfor %}
-
-{% for tax in cart.getAdjustmentsRecursively("tax") %}
-    {% if not tax.isNeutral %}
-        {% set taxIncluded = false %}
-    {% endif %}
-{% endfor %}
+{% set itemsSubtotal = sylius_subtotal(cart.items) %}
+{% set taxIncluded = sylius_tax(cart.getAdjustmentsRecursively("tax"), true) %}
+{% set taxExcluded = sylius_tax(cart.getAdjustmentsRecursively("tax")) %}
 
 <div class="ui segment">
     <h2 class="ui dividing header">{{ 'sylius.ui.summary'|trans }}</h2>
@@ -39,11 +30,18 @@
                 <span id="sylius-cart-shipping-total">{{ money.convertAndFormat(cart.shippingTotal) }}</span>
             </td>
         </tr>
-        <tr {% if taxIncluded %}class="tax-disabled"{% endif %}>
+        <tr {% if taxIncluded and not taxExcluded %}class="tax-disabled"{% endif %}>
             <td>{{ 'sylius.ui.taxes_total'|trans }}:</td>
             <td class="right aligned">
-                <span id="sylius-cart-tax-total">{{ money.convertAndFormat(cart.taxTotal) }}</span>
-                {% if taxIncluded %}<br><small>({{ 'sylius.ui.included_in_price'|trans }})</small>{% endif %}
+                {% if taxExcluded %}
+                    <div id="sylius-cart-tax-excluded">{{ money.convertAndFormat(taxExcluded) }}</div>
+                {% endif %}
+                {% if taxIncluded %}
+                    <div class="tax-disabled">
+                        <small>({{ 'sylius.ui.included_in_price'|trans }})</small>
+                        <span id="sylius-cart-tax-included">{{ money.convertAndFormat(taxIncluded) }}</span>
+                    </div>
+                {% endif %}
             </td>
         </tr>
         <tr class="ui large header">
