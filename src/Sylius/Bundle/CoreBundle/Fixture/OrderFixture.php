@@ -21,6 +21,7 @@ use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementChecker
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
@@ -120,6 +121,8 @@ class OrderFixture extends AbstractFixture
         $customers = $this->customerRepository->findAll();
         $countries = $this->countryRepository->findAll();
 
+        $randomDates = $this->generateDates($options['amount']);
+
         for ($i = 0; $i < $options['amount']; ++$i) {
             $channel = $this->faker->randomElement($channels);
             $customer = $this->faker->randomElement($customers);
@@ -141,6 +144,7 @@ class OrderFixture extends AbstractFixture
             $this->selectShipping($order);
             $this->selectPayment($order);
             $this->completeCheckout($order);
+            $this->setOrderCompletedDate($order, $randomDates[$i]);
 
             $this->orderManager->persist($order);
 
@@ -253,5 +257,25 @@ class OrderFixture extends AbstractFixture
     private function applyCheckoutStateTransition(OrderInterface $order, string $transition): void
     {
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
+    }
+
+    private function setOrderCompletedDate(OrderInterface $order, \DateTimeInterface $date): void
+    {
+        if ($order->getCheckoutState() === OrderCheckoutStates::STATE_COMPLETED) {
+            $order->setCheckoutCompletedAt($date);
+        }
+    }
+
+    private function generateDates(int $amount): array
+    {
+        $dates = [];
+
+        for ($i = 0; $i < $amount; $i++) {
+            /** @var \DateTimeInterface|array $dates */
+            $dates[] = $this->faker->dateTimeBetween('-1 years', 'now');
+        }
+        sort($dates);
+
+        return $dates;
     }
 }
