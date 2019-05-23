@@ -124,7 +124,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::same($this->summaryPage->getTaxTotal(), $taxTotal);
+        Assert::same($this->summaryPage->getExcludedTaxTotal(), $taxTotal);
     }
 
     /**
