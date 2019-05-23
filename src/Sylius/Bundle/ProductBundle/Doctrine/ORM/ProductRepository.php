@@ -43,6 +43,7 @@ class ProductRepository extends EntityRepository implements ProductRepositoryInt
             ->andWhere('translation.name LIKE :name')
             ->setParameter('name', '%' . $phrase . '%')
             ->setParameter('locale', $locale)
+            ->setMaxResults(25)
             ->getQuery()
             ->getResult()
         ;
