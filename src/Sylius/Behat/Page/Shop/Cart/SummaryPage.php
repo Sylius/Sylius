@@ -47,14 +47,14 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $totalElement->getText();
     }
 
-    public function getIncludedTaxTotal()
+    public function getIncludedTaxTotal(): string
     {
         $includedTaxTotalElement = $this->getElement('tax_included');
 
         return $includedTaxTotalElement->getText();
     }
 
-    public function getExcludedTaxTotal()
+    public function getExcludedTaxTotal(): string
     {
         $excludedTaxTotalElement = $this->getElement('tax_excluded');
 

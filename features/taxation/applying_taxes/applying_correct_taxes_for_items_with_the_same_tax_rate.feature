@@ -38,7 +38,7 @@ Feature: Apply correct taxes for items with the same tax rate
         And I have 2 products "Symfony Hat" in the cart
         When I remove product "PHP T-Shirt" from the cart
         Then my cart total should be "$73.80"
-        And my cart taxes should be "$13.80"
+        And my included in price taxes should be "$13.80"
 
     @ui
     Scenario: Proper taxes after changing item quantity
