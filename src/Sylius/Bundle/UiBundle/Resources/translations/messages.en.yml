@@ -397,6 +397,7 @@ sylius:
         it_seems_you_have_an_account_already: 'It seems you have an account already'
         item.choice: "{0} |{1}, 1 item|]1,Inf], %count% items"
         item: 'Item'
+        item_discount: 'Item discount'
         items: 'Items'
         items_total: 'Items total'
         jump_to_page: 'Jump to page'
@@ -574,6 +575,7 @@ sylius:
         order_comments: 'Order comments'
         order_confirmation_name: 'Order confirmation'
         order_details: 'Details of your order'
+        order_discount: 'Order discount'
         order_history: 'Order history'
         order_item_product: 'Item'
         order_state: 'Order state'
@@ -733,6 +735,7 @@ sylius:
         shipping_category: 'Shipping category'
         shipping_charges: 'Shipping charges'
         shipping_estimated_cost: 'Estimated shipping cost'
+        shipping_discount: 'Shipping discount'
         shipping_method: 'Shipping method'
         shipping_method_details: 'Shipping method details'
         shipping_methods: 'Shipping methods'
