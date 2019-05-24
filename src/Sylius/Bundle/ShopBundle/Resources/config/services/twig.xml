@@ -15,11 +15,11 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.twig.extension.taxes" class="Sylius\Bundle\ShopBundle\Twig\TaxesExtension" public="false">
+        <service id="sylius.twig.extension.taxes" class="Sylius\Bundle\ShopBundle\Twig\OrderTaxesTotalExtension" public="false">
             <tag name="twig.extension" />
         </service>
 
-        <service id="sylius.twig.extension.subtotal" class="Sylius\Bundle\ShopBundle\Twig\SubtotalExtension" public="false">
+        <service id="sylius.twig.extension.subtotal" class="Sylius\Bundle\ShopBundle\Twig\OrderItemsSubtotalExtension" public="false">
             <tag name="twig.extension" />
         </service>
     </services>
