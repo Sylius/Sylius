@@ -297,8 +297,8 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         foreach ($options['images'] as $image) {
             if (!array_key_exists('path', $image)) {
                 @trigger_error(
-                    'It is deprecated since Sylius 1.3 to pass indexed array as an image definition.
-                    Please use associative array with "path" and "type" keys instead.',
+                    'It is deprecated since Sylius 1.3 to pass indexed array as an image definition. ' .
+                    'Please use associative array with "path" and "type" keys instead.',
                     \E_USER_DEPRECATED
                 );
 
