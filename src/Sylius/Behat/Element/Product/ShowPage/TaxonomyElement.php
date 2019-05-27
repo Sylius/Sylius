@@ -25,7 +25,7 @@ final class TaxonomyElement extends Element implements TaxonomyElementIterface
 
     public function hasProductTaxon(string $taxonName): bool
     {
-        $taxons = $this->getElement("product_taxon");
+        $taxons = $this->getElement('product_taxon');
 
         /** @var NodeElement $taxon */
         foreach ($taxons->findAll('css', 'li') as $taxon) {

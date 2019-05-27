@@ -222,6 +222,7 @@ final class ProductShowPageContext implements Context
     {
         Assert::same($this->shippingElement->getProductWidth(), $width);
     }
+
     /**
      * @Then I should see product's height is :height
      */
@@ -267,7 +268,7 @@ final class ProductShowPageContext implements Context
      */
     public function iShouldSeeProductSlugIs(string $slug): void
     {
-     Assert::same($this->moreDetailsElement->getSlug(), $slug);
+        Assert::same($this->moreDetailsElement->getSlug(), $slug);
     }
 
     /**

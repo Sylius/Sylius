@@ -865,7 +865,7 @@ final class ProductContext implements Context
         $channel = $this->sharedStorage->get('channel');
 
         $priceValue = $this->getPriceFromString($price);
-        $this->createProductVariant($product, $productVariantName, $priceValue, $code, $channel, null, true,  $currentStock);
+        $this->createProductVariant($product, $productVariantName, $priceValue, $code, $channel, null, true, $currentStock);
     }
 
     private function getPriceFromString(string $price): int

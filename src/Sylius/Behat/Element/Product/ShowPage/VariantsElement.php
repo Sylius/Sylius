@@ -21,15 +21,15 @@ final class VariantsElement extends Element implements VariantsElementInterface
     public function countVariantsOnPage(): int
     {
         /** @var NodeElement $variants|array */
-       $variants = $this->getDocument()->findAll('css', '#variants .variant');
+        $variants = $this->getDocument()->findAll('css', '#variants .variant');
 
-       return count($variants);
+        return count($variants);
     }
 
     public function hasProductVariantWithCodePriceAndCurrentStock(string $name, string $code, string $price, string $currentStock): bool
     {
         /** @var NodeElement $variantRow */
-        $variantRows =  $this->getDocument()->findAll('css', '#variants .variant');
+        $variantRows = $this->getDocument()->findAll('css', '#variants .variant');
 
         /** @var NodeElement $variant */
         foreach ($variantRows as $variant) {
@@ -46,10 +46,10 @@ final class VariantsElement extends Element implements VariantsElementInterface
     private function hasProductWithGivenNameCodePriceAndCurrentStock(NodeElement $variant, string $name, string $code, string $price, string $currentStock): bool
     {
         if (
-            $variant->find('css','.title span.variant-name')->getText() === $name &&
+            $variant->find('css', '.title span.variant-name')->getText() === $name &&
             $variant->find('css', '.title span.variant-code')->getText() === $code &&
             $variant->find('css', '.content .pricing tr:contains("WEB-US") td:nth-child(2)')->getText() === $price &&
-            $variant->find('css', '.content span.current-stock-label span.current-stock')->getText() ===  $currentStock
+            $variant->find('css', '.content span.current-stock-label span.current-stock')->getText() === $currentStock
         ) {
             return true;
         }
