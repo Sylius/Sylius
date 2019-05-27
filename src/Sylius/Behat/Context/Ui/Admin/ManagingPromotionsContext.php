@@ -15,11 +15,10 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as IndexPageCouponInterface;
 use Sylius\Behat\Page\Admin\Promotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Promotion\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as IndexPageCouponInterface;
 use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
-use Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
