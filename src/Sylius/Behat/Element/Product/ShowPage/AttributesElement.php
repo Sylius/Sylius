@@ -17,7 +17,7 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 final class AttributesElement extends Element implements AttributesElementInterface
 {
-    public function hasAttributeInLocale(string $attribute, string $locale, string $value):bool
+    public function hasAttributeInLocale(string $attribute, string $locale, string $value): bool
     {
         $values = $this->getDocument()->find('css', sprintf('#attributes .tab.segment[data-tab="%s"]', $locale));
 

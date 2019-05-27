@@ -19,7 +19,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     public function isSimpleProductPage(): bool
     {
-       return !$this->hasElement('variants');
+        return !$this->hasElement('variants');
     }
 
     public function getName(): string

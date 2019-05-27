@@ -28,7 +28,7 @@ final class ChannelsCurrenciesExtension extends AbstractExtension
         $this->channelRepository = $channelRepository;
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('sylius_channels_currencies', [$this, 'getAllCurrencies']),
@@ -37,8 +37,7 @@ final class ChannelsCurrenciesExtension extends AbstractExtension
 
     public function getAllCurrencies(): array
     {
-        /** @var array */
-         $currencies = [];
+        $currencies = [];
 
         /** @var ChannelInterface $channel */
         foreach ($this->channelRepository->findAll() as $channel) {
