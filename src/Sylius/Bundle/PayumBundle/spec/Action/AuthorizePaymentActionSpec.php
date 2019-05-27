@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -44,8 +45,7 @@ final class AuthorizePaymentActionSpec extends ObjectBehavior
         Authorize $authorize,
         PaymentInterface $payment,
         OrderInterface $order
-    ): void
-    {
+    ): void {
         $this->setGateway($gateway);
         $payment->getOrder()->willReturn($order);
         $payment->getDetails()->willReturn([]);
