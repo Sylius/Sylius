@@ -531,7 +531,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iShouldSeeTheOptionAs(string $optionName, string $valueName): void
     {
-        Assert::true($this->updatePage->isSelectedOptionValueOnPage($optionName,$valueName));
+        Assert::true($this->updatePage->isSelectedOptionValueOnPage($optionName, $valueName));
     }
 
     /**

@@ -51,7 +51,6 @@ final class ShowAvailablePluginsCommand extends Command
     {
         $this->plugins = new ArrayCollection();
 
-        /** @var PluginInfo[] */
         $this->plugins->add(new PluginInfo('<info>Admin Order Creation</info>', 'Creating (and copying) orders in the administration panel.', 'https://github.com/Sylius/AdminOrderCreationPlugin'));
         $this->plugins->add(new PluginInfo('<info>Customer Order Cancellation</info>', 'Allows customers to quickly cancel their unpaid and unshipped orders.', 'https://github.com/Sylius/CustomerOrderCancellationPlugin'));
         $this->plugins->add(new PluginInfo('<info>Customer Reorder</info>', 'Convenient reordering for the customers from the `My account` section.', 'https://github.com/Sylius/CustomerReorderPlugin'));
