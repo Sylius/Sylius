@@ -54,7 +54,7 @@ final class OrderContext implements Context
     {
         $orders = $this->orderRepository->findLatest(1);
 
-        Assert::notEmpty($orders,'No order have been made');
+        Assert::notEmpty($orders, 'No order have been made');
 
         return $orders[0];
     }
