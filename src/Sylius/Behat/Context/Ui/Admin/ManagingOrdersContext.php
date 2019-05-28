@@ -836,4 +836,52 @@ final class ManagingOrdersContext implements Context
         $element = sprintf('%s_%s', $type, str_replace(' ', '_', $element));
         Assert::true($this->updatePage->checkValidationMessageFor($element, $expectedMessage));
     }
+
+    /**
+     * @Then the product's :productName unit price should be :price
+     */
+    public function theProductsUnitPriceShouldBe(string $productName, string $price): void
+    {
+        Assert::same($this->showPage->getItemUnitPrice($productName), $price);
+    }
+
+    /**
+     * @Then the product's :productName item discount should be :price
+     */
+    public function theProductSItemDiscountShouldBe(string $productName, string $price): void
+    {
+        Assert::same($this->showPage->getItemDiscount($productName), $price);
+    }
+
+    /**
+     * @Then the product's :productName order discount should be :price
+     */
+    public function theProductSOrderDiscountShouldBe(string $productName, string $price): void
+    {
+        Assert::same($this->showPage->getItemOrderDiscount($productName), $price);
+    }
+
+    /**
+     * @Then the product's :productName quantity should be :quantity
+     */
+    public function theProductSQuantityShouldBe(string $productName, string $quantity): void
+    {
+        Assert::same($this->showPage->getItemQuantity($productName), $quantity);
+    }
+
+    /**
+     * @Then the product's :productName subtotal should be :subTotal
+     */
+    public function theProductSSubtotalShouldBe(string $productName, string $subTotal): void
+    {
+        Assert::same($this->showPage->getItemSubtotal($productName), $subTotal);
+    }
+
+    /**
+     * @Then the product's :productName discounted unit price should be :price
+     */
+    public function theProductSDiscountedUnitPriceShouldBe(string $productName, string $price): void
+    {
+        Assert::same($this->showPage->getItemDiscountedUnitPrice($productName), $price);
+    }
 }
