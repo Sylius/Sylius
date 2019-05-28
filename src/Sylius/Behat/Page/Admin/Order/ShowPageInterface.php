@@ -109,4 +109,6 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function hasRefundButton(): bool;
 
     public function getShippingPromotionData(): string;
+
+    public function getItemOrderDiscount(string $itemName): string;
 }

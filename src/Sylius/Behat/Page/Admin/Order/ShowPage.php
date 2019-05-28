@@ -209,7 +209,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getItemDiscountedUnitPrice(string $itemName): string
     {
-        return $this->getItemProperty($itemName, 'discounted-unit-price');
+        return $this->getRowWithItem($itemName)->find('css', '.discounted-unit-price')->getText();
+    }
+
+    public function getItemOrderDiscount(string $itemName): string
+    {
+        return $this->getRowWithItem($itemName)->find('css', '.unit-order-discount')->getText();
     }
 
     public function getItemQuantity(string $itemName): string
@@ -224,7 +229,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getItemDiscount(string $itemName): string
     {
-        return $this->getItemProperty($itemName, 'discount');
+        return $this->getItemProperty($itemName, 'unit-discount');
     }
 
     public function getItemTax(string $itemName): string
@@ -392,6 +397,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         );
 
         return $rows[0]->find('css', '.' . $property)->getText();
+    }
+
+    private function getRowWithItem(string $itemName): ?NodeElement
+    {
+        return $this->tableAccessor->getRowWithFields($this->getElement('table'), ['item' => $itemName]);
     }
 
     private function getLastOrderPaymentElement(OrderInterface $order): ?NodeElement
