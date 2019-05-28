@@ -54,4 +54,9 @@ Give it a new, custom validation group - ``[app_product]``.
 Done. Now in all forms where the Product ``name`` is being used, your new validation group will be applied,
 not letting users add products with name shorter than 10 characters.
 
+.. tip::
+
+    When you would like to use group sequence validation, `like so <https://symfony.com/doc/current/validation/sequence_provider.html>`_.
+    Be sure to use ``[Default]`` as validation group. Otherwise your ``getGroupSequence()`` method will not be called.
+
 .. include:: /customization/plugins.rst.inc
