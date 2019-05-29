@@ -204,7 +204,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getItemUnitPrice(string $itemName): string
     {
-        return $this->getItemProperty($itemName, 'unit-price');
+        return $this->getRowWithItem($itemName)->find('css', '.unit-price')->getText();
     }
 
     public function getItemDiscountedUnitPrice(string $itemName): string

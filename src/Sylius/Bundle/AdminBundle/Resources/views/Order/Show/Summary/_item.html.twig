@@ -12,8 +12,6 @@
 <tr>
     <td class="single line">
         {% include '@SyliusAdmin/Product/_info.html.twig' %}
-        {{ dump(item.getAdjustmentsRecursively(unitPromotionAdjustment).toArray) }}
-        {{ dump(subtotal) }}
     </td>
     <td class="right aligned unit-price">
         {{ money.format(item.unitPrice, order.currencyCode) }}
