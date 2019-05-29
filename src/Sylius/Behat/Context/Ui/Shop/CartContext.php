@@ -138,6 +138,16 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then there should be no taxes charged
+     */
+    public function thereShouldBeNoTaxesCharged(): void
+    {
+        $this->summaryPage->open();
+
+        Assert::false($this->summaryPage->areTaxesCharged());
+    }
+
+    /**
      * @Then my cart shipping total should be :shippingTotal
      * @Then my cart shipping should be for free
      */

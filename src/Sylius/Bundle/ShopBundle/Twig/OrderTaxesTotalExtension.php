@@ -19,9 +19,6 @@ use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 
 class OrderTaxesTotalExtension extends \Twig_Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions(): array
     {
         return [
