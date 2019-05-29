@@ -41,6 +41,9 @@
             <argument type="service" id="sylius.repository.channel"/>
             <tag name="twig.extension"/>
         </service>
+        <service id="Sylius\Bundle\AdminBundle\Twig\OrderUnitTaxesExtension">
+            <tag name="twig.extension"/>
+        </service>
         <service id="sylius.http_client" class="GuzzleHttp\Client" public="false" />
         <service id="sylius.http_message_factory" class="Http\Message\MessageFactory\GuzzleMessageFactory" public="false" />
     </services>
