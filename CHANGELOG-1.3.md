@@ -1,5 +1,31 @@
 # CHANGELOG FOR `1.3.X`
 
+## v1.3.13 (2019-05-29)
+
+#### Details
+
+- [#10228](https://github.com/Sylius/Sylius/issues/10228) Improve taxon UI ([@kulczy](https://github.com/kulczy), [@Zales0123](https://github.com/Zales0123))
+- [#10290](https://github.com/Sylius/Sylius/issues/10290) [Docs] Update "Customizing Repositories" ([@AdamKasp](https://github.com/AdamKasp))
+- [#10299](https://github.com/Sylius/Sylius/issues/10299) [Docs] Update "Customizing Models" ([@Tomanhez](https://github.com/Tomanhez))
+- [#10314](https://github.com/Sylius/Sylius/issues/10314) [Docs] Update "Customizing Forms" ([@Tomanhez](https://github.com/Tomanhez))
+- [#10315](https://github.com/Sylius/Sylius/issues/10315) [Docs] Update "Customizing Factories" ([@Tomanhez](https://github.com/Tomanhez))
+- [#10330](https://github.com/Sylius/Sylius/issues/10330) [Docs] Update "Customizing Controllers" ([@Tomanhez](https://github.com/Tomanhez))
+- [#10344](https://github.com/Sylius/Sylius/issues/10344) [Docs] Update "Customizing Templates" ([@Tomanhez](https://github.com/Tomanhez))
+- [#10348](https://github.com/Sylius/Sylius/issues/10348) [Docs] Update "customizing menus" ([@AdamKasp](https://github.com/AdamKasp))
+- [#10349](https://github.com/Sylius/Sylius/issues/10349) [Docs] Update "Customizing Validation" ([@AdamKasp](https://github.com/AdamKasp))
+- [#10351](https://github.com/Sylius/Sylius/issues/10351) [Docs] Update "Customizing translations" ([@AdamKasp](https://github.com/AdamKasp))
+- [#10353](https://github.com/Sylius/Sylius/issues/10353) [Docs] Update "Customization flashes " ([@AdamKasp](https://github.com/AdamKasp))
+- [#10359](https://github.com/Sylius/Sylius/issues/10359) [Docs] Update "Customizing Grids" ([@Tomanhez](https://github.com/Tomanhez))
+- [#10363](https://github.com/Sylius/Sylius/issues/10363) [Behat][Shop] Wait for province form loading ([@Zales0123](https://github.com/Zales0123))
+- [#10364](https://github.com/Sylius/Sylius/issues/10364) As an Administrator, I want always to have proper option values selected while editing a product variant ([@Tomanhez](https://github.com/Tomanhez), [@monro93](https://github.com/monro93))
+- [#10365](https://github.com/Sylius/Sylius/issues/10365) [Admin][Promotion] Fix removing taxon used in promotion rule ([@GSadee](https://github.com/GSadee))
+- [#10372](https://github.com/Sylius/Sylius/issues/10372) Image display in edit form ([@AdamKasp](https://github.com/AdamKasp))
+- [#10375](https://github.com/Sylius/Sylius/issues/10375) [Docs] Update "Customizing State Machine" ([@AdamKasp](https://github.com/AdamKasp))
+- [#10386](https://github.com/Sylius/Sylius/issues/10386) [Build Fix][Behat] Change scenarios to @javascript due to taxon tree changes ([@Zales0123](https://github.com/Zales0123))
+- [#10394](https://github.com/Sylius/Sylius/issues/10394) Fix error caused by the taxon tree ([@kulczy](https://github.com/kulczy))
+- [#10407](https://github.com/Sylius/Sylius/issues/10407) Bump the Sylius release versions in docs ([@teohhanhui](https://github.com/teohhanhui))
+- [#10414](https://github.com/Sylius/Sylius/issues/10414) Use HTTPS links when possible ([@javiereguiluz](https://github.com/javiereguiluz))
+
 ## v1.3.12 (2019-05-07)
 
 #### TL;DR
