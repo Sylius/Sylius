@@ -1,34 +1,37 @@
 {% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
 
 {% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
-{% set itemPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT') %}
+{% set unitPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT') %}
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
 
 {% set variant = item.variant %}
 {% set product = variant.product %}
+{% set subtotal = item.quantity * (item.unitPrice + item.units.first.adjustmentsTotal(unitPromotionAdjustment) + item.units.first.adjustmentsTotal(orderPromotionAdjustment)) %}
 
 <tr>
     <td class="single line">
         {% include '@SyliusAdmin/Product/_info.html.twig' %}
+        {{ dump(item.getAdjustmentsRecursively(unitPromotionAdjustment).toArray) }}
+        {{ dump(subtotal) }}
     </td>
     <td class="right aligned unit-price">
         {{ money.format(item.unitPrice, order.currencyCode) }}
     </td>
     <td class="right aligned unit-discount">
-        -{{ money.format(item.unitPrice - item.discountedUnitPrice, order.currencyCode) }}
+        {{ money.format(item.units.first.adjustmentsTotal(unitPromotionAdjustment), order.currencyCode) }}
     </td>
     <td class="right aligned unit-order-discount">
-        $99.99
+        <span style="font-style: italic;">{{ money.format(item.units.first.adjustmentsTotal(orderPromotionAdjustment), order.currencyCode) }}</span>
     </td>
     <td class="right aligned discounted-unit-price">
-        $99.99
+        {{ money.format(item.getFullDiscountedUnitPrice(), order.currencyCode) }}
     </td>
     <td class="right aligned quantity">
         {{ item.quantity }}
     </td>
     <td class="right aligned subtotal">
-        $99.99
+      {{ money.format(subtotal, order.currencyCode) }}
     </td>
     <td class="right aligned tax">
         <div class="tax-excluded">$99.99</div>

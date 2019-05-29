@@ -125,6 +125,19 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         ;
     }
 
+    public function getFullDiscountedUnitPrice(): int
+    {
+        if ($this->units->isEmpty()) {
+            return $this->unitPrice;
+        }
+
+        return
+            $this->unitPrice +
+            $this->units->first()->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) +
+            $this->units->first()->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
+            ;
+    }
+
     /**
      * {@inheritdoc}
      */
