@@ -9,6 +9,9 @@
 {% set product = variant.product %}
 {% set subtotal = item.quantity * (item.unitPrice + item.units.first.adjustmentsTotal(unitPromotionAdjustment) + item.units.first.adjustmentsTotal(orderPromotionAdjustment)) %}
 
+{% set taxIncluded = sylius_admin_order_unit_tax_included(item) %}
+{% set taxExluded = sylius_admin_order_unit_tax_excluded(item) %}
+
 <tr>
     <td class="single line">
         {% include '@SyliusAdmin/Product/_info.html.twig' %}
@@ -32,9 +35,10 @@
       {{ money.format(subtotal, order.currencyCode) }}
     </td>
     <td class="right aligned tax">
-        <div class="tax-excluded">$99.99</div>
+        <div class="tax-excluded">{{ taxExluded }}</div>
         <div class="tax-disabled">
-            <div class="tax-included">$99.99</div>
+            <div class="tax-included"> {{ money.format(taxIncluded, order.currencyCode) }}
+            </div>
             <small>({{ 'sylius.ui.included_in_price'|trans }})</small>
         </div>
     </td>
