@@ -1,5 +1,5 @@
 <h1 align="center">
-    <a href="http://sylius.com" target="_blank">
+    <a href="https://sylius.com" target="_blank">
         <img src="https://demo.sylius.com/assets/shop/img/logo.png" />
     </a>
 </h1>
@@ -16,12 +16,12 @@ Enjoy being an eCommerce Developer again!
 Installation
 ------------
 
-[Install Sylius](http://docs.sylius.com/en/latest/book/installation/installation.html) with Composer (see [requirements details](http://docs.sylius.com/en/latest/book/installation/requirements.html)).
+[Install Sylius](https://docs.sylius.com/en/latest/book/installation/installation.html) with Composer (see [requirements details](https://docs.sylius.com/en/latest/book/installation/requirements.html)).
 
 Documentation
 -------------
  
-Documentation is available at [docs.sylius.com](http://docs.sylius.com).
+Documentation is available at [docs.sylius.com](https://docs.sylius.com).
 
 Roadmap
 -------
@@ -32,7 +32,7 @@ You can also see all roadmap related issues by filtering [those labeled with "Ro
 Community
 ---------
 
-[Get Sylius support](http://docs.sylius.com/en/latest/support/index.html) on [Slack](https://sylius.com/slack), [Forum](https://forum.sylius.com/) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
+[Get Sylius support](https://docs.sylius.com/en/latest/support/index.html) on [Slack](https://sylius.com/slack), [Forum](https://forum.sylius.com/) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
 
 Stay updated by following our [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
 
@@ -60,7 +60,7 @@ You can find other plugins on [our ecosystem website](https://sylius.com/plugins
 Contributing
 ------------
 
-Would like to help us and build the most developer-friendly eCommerce platform? Start from reading our [Contributing Guide](http://docs.sylius.com/en/latest/contributing/index.html)!
+Would like to help us and build the most developer-friendly eCommerce platform? Start from reading our [Contributing Guide](https://docs.sylius.com/en/latest/contributing/index.html)!
 
 Security issues
 ---------------
@@ -76,5 +76,5 @@ Sylius is completely free and released under the [MIT License](https://github.co
 Authors
 -------
 
-Sylius was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
+Sylius was originally created by [Paweł Jędrzejewski](https://pjedrzejewski.com).
 See the list of [contributors from our awesome community](https://github.com/Sylius/Sylius/contributors).
