@@ -33,6 +33,9 @@
         <tr {% if taxIncluded and not taxExcluded %}class="tax-disabled"{% endif %}>
             <td>{{ 'sylius.ui.taxes_total'|trans }}:</td>
             <td class="right aligned">
+                {% if not taxIncluded and not taxExcluded %}
+                    <div id="sylius-cart-tax-none">{{ money.convertAndFormat(0) }}</div>
+                {% endif %}
                 {% if taxExcluded %}
                     <div id="sylius-cart-tax-excluded">{{ money.convertAndFormat(taxExcluded) }}</div>
                 {% endif %}

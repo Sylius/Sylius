@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 
 class OrderItemsSubtotalExtension extends \Twig_Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions(): array
     {
         return [

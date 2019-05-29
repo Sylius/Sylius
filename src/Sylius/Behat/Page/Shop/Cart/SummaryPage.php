@@ -61,6 +61,17 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $excludedTaxTotalElement->getText();
     }
 
+    public function areTaxesCharged(): bool
+    {
+        try {
+            $this->getElement('no_taxes');
+        } catch (ElementNotFoundException $exception) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -294,6 +305,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'coupon_field' => '#sylius_cart_promotionCoupon',
             'grand_total' => '#sylius-cart-grand-total',
             'item_image' => '#sylius-cart-items tbody tr:nth-child(%number%) img',
+            'no_taxes' => '#sylius-cart-tax-none',
             'product_discounted_total' => '#sylius-cart-items tr:contains("%name%") .sylius-discounted-total',
             'product_row' => '#sylius-cart-items tbody tr:contains("%name%")',
             'product_total' => '#sylius-cart-items tr:contains("%name%") .sylius-total',

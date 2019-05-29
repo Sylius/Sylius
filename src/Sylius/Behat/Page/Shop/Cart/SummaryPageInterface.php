@@ -31,12 +31,17 @@ interface SummaryPageInterface extends PageInterface
     /**
      * @return string
      */
-    public function getIncludedTaxTotal();
+    public function getIncludedTaxTotal(): string;
 
     /**
      * @return string
      */
-    public function getExcludedTaxTotal();
+    public function getExcludedTaxTotal(): string;
+
+    /**
+     * @return bool
+     */
+    public function areTaxesCharged(): bool;
 
     /**
      * @return string
