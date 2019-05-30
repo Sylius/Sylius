@@ -49,6 +49,10 @@ final class LocaleSetup implements LocaleSetupInterface
 
         $output->writeln(sprintf('Adding <info>%s</info> locale.', $code));
 
+        if ($this->locale !== $code) {
+            $output->writeln('<info>You may also need to add this locale into config/services.yaml configuration.</info>');
+        }
+
         /** @var LocaleInterface $existingLocale */
         $existingLocale = $this->localeRepository->findOneBy(['code' => $code]);
         if (null !== $existingLocale) {
