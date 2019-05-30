@@ -159,7 +159,7 @@ final class PaymentContext implements Context
     public function thePaymentMethodRequiresAuthorizationBeforeCapturing(PaymentMethodInterface $paymentMethod)
     {
         $config = $paymentMethod->getGatewayConfig();
-        $config->setConfig(array_merge($config->getConfig(), ['use_authorize' => 1]));
+        $config->setConfig(array_merge($config->getConfig(), ['use_authorize' => true]));
         $paymentMethod->setGatewayConfig($config);
 
         $this->paymentMethodManager->flush();

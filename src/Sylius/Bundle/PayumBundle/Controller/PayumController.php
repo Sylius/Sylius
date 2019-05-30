@@ -155,7 +155,7 @@ final class PayumController
         /** @var GatewayConfigInterface $gatewayConfig */
         $gatewayConfig = $paymentMethod->getGatewayConfig();
 
-        if (isset($gatewayConfig->getConfig()['use_authorize']) && $gatewayConfig->getConfig()['use_authorize'] == true) {
+        if (isset($gatewayConfig->getConfig()['use_authorize']) && $gatewayConfig->getConfig()['use_authorize'] === true) {
             $token = $this->getTokenFactory()->createAuthorizeToken(
                 $gatewayConfig->getGatewayName(),
                 $payment,

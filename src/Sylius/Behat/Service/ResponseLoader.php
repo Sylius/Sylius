@@ -65,9 +65,8 @@ class ResponseLoader implements ResponseLoaderInterface
     private function getCalledClassFolder()
     {
         $calledClass = get_called_class();
-        $calledClassFolder = dirname((new \ReflectionClass($calledClass))->getFileName());
 
-        return $calledClassFolder;
+        return \dirname((new \ReflectionClass($calledClass))->getFileName());
     }
 
     /**

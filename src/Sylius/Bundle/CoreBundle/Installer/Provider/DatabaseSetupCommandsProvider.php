@@ -44,7 +44,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
             ];
         }
 
-        return array_merge($this->getRequiredCommands($input, $output, $questionHelper), [
+        return array_merge($this->setupDatabase($input, $output, $questionHelper), [
             'doctrine:migrations:version' => [
                 '--add' => true,
                 '--all' => true,
@@ -76,15 +76,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
             throw $exception;
         }
-    }
-
-    private function getRequiredCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
-    {
-        if ($input->getOption('no-interaction')) {
-            $commands['doctrine:migrations:migrate'] = ['--no-interaction' => true];
-        }
-
-        return $this->setupDatabase($input, $output, $questionHelper);
     }
 
     private function setupDatabase(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array

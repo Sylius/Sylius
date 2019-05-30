@@ -49,7 +49,7 @@ class OrderItemQuantityDataMapper implements DataMapperInterface
     public function mapFormsToData($forms, &$data): void
     {
         $formsOtherThanQuantity = [];
-        foreach ($forms as $key => $form) {
+        foreach ($forms as $form) {
             if ('quantity' === $form->getName()) {
                 $targetQuantity = $form->getData();
                 $this->orderItemQuantityModifier->modify($data, (int) $targetQuantity);
