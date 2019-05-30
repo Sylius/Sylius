@@ -1,20 +1,42 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
+{% set itemsSubtotal = sylius_order_items_subtotal(order) %}
+{% set taxIncluded = sylius_order_tax_included(order) %}
+{% set taxExcluded = sylius_order_tax_excluded(order) %}
+
 <tr>
     <th colspan="4" class="right aligned" id="subtotal">
-        {{ 'sylius.ui.subtotal'|trans }}: {{ money.format(order.itemsTotal, order.currencyCode) }}
+        {{ 'sylius.ui.items_total'|trans }}: {{ money.convertAndFormat(itemsSubtotal) }}
     </th>
 </tr>
-<tr>
-    {% include '@SyliusShop/Common/Order/Table/_shipping.html.twig' with {'order': order} %}
-</tr>
-<tr>
+<tr {% if taxIncluded and not taxExcluded %}class="tax-disabled"{% endif %}>
     <td colspan="4" class="right aligned" id="tax-total">
-        {{ 'sylius.ui.tax_total'|trans }}: {{ money.format(order.taxTotal, order.currencyCode) }}
+        <div style="display: flex; justify-content: flex-end">
+            <div>{{ 'sylius.ui.taxes_total'|trans }}:&nbsp;</div>
+            <div>
+            {% if not taxIncluded and not taxExcluded %}
+                <div id="sylius-cart-tax-none">{{ money.convertAndFormat(0) }}</div>
+            {% endif %}
+            {% if taxExcluded %}
+                <div id="sylius-cart-tax-excluded">{{ money.convertAndFormat(taxExcluded) }}</div>
+            {% endif %}
+            {% if taxIncluded %}
+                <div class="tax-disabled">
+                    <small>({{ 'sylius.ui.included_in_price'|trans }})</small>
+                    <span id="sylius-cart-tax-included">{{ money.convertAndFormat(taxIncluded) }}</span>
+                </div>
+            {% endif %}
+            </div>
+        </div>
     </td>
 </tr>
 <tr>
-    {% include '@SyliusShop/Common/Order/Table/_promotion.html.twig' with {'order': order} %}
+    <td colspan="4" id="promotion-total" class="right aligned">
+        {{ 'sylius.ui.discount'|trans }}: {{ money.format(order.orderPromotionTotal, order.currencyCode) }}
+    </td>
+</tr>
+<tr>
+    {% include '@SyliusShop/Common/Order/Table/_shipping.html.twig' with {'order': order} %}
 </tr>
 <tr>
     <td colspan="4" class="right aligned" style="font-size: 1.5em;" id="total">
