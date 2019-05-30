@@ -1,0 +1,53 @@
+---------------------------------------------------------------------------
+
+by mamazu at 2019-05-13T17:35:59Z
+
+I am trying to write a behat test but I am not sure how to mock the dependencies properly. The other commands use the container aware command as their base class which is deprecated. Should the `GenerateCouponCommand` also use this and if not how do I instantiate it.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-05-14T07:30:57Z
+
+What about some functional test with PHPunit, where we will generate some commands and assert if they are available in the database?
+
+---------------------------------------------------------------------------
+
+by mamazu at 2019-05-15T08:13:48Z
+
+I will try to get to it this evening.
+
+---------------------------------------------------------------------------
+
+by mamazu at 2019-05-15T12:07:40Z
+
+Is there any kind of reference for a command that is tested with phpunit?
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-05-15T12:32:18Z
+
+https://symfony.com/doc/current/console.html#testing-commands this can be useful, for the start
+
+---------------------------------------------------------------------------
+
+by mamazu at 2019-05-20T15:52:31Z
+
+Done. :D
+
+---------------------------------------------------------------------------
+
+by mamazu at 2019-05-21T09:08:29Z
+
+Yeah, right forgot that. :+1:
+
+---------------------------------------------------------------------------
+
+by mamazu at 2019-05-27T11:24:39Z
+
+@Zales0123 What do you think?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-05-30T09:13:43Z
+
+Thanks, @mamazu! :1st_place_medal:
