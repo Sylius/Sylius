@@ -1,0 +1,42 @@
+---------------------------------------------------------------------------
+
+by CoderMaggie at 2019-05-22T11:33:06Z
+
+Could we make the "Taxes total" line grey when included in the price?
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2019-05-22T11:40:47Z
+
+@kulczy & @CoderMaggie, as far as I know, the order can have both included and excluded taxes.
+It's probably not something common, but it's technically possible.
+Considering that, I think it's better to display the total of both types, then separately the subtotal for included and excluded. Or just the subtotal of included.
+
+---------------------------------------------------------------------------
+
+by kulczy at 2019-05-22T12:16:12Z
+
+<img width="357" alt="Zrzut ekranu 2019-05-22 o 14 15 31" src="https://user-images.githubusercontent.com/15385420/58173630-22acc080-7c9c-11e9-8c1b-2186206a207b.png">
+
+---------------------------------------------------------------------------
+
+by kulczy at 2019-05-23T09:11:06Z
+
+<img width="688" alt="Zrzut ekranu 2019-05-23 o 11 04 26 kopia" src="https://user-images.githubusercontent.com/15385420/58240519-70cccd00-7d4b-11e9-81b8-845694b0d99c.png">
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2019-05-23T10:31:59Z
+
+Since the Twig extensions in this PR will esentially introduce new public API, I would make these functions more strict in terms of I/O and their names more explicit.
+
+Order tax: https://gist.github.com/vvasiloi/94afdcb3f082900db448c0fcba0fa591
+Order items subtotal: https://gist.github.com/vvasiloi/474e5c5aaf201b2d8bf54605d479ba1d
+
+P.S. Didn't test these.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2019-05-31T12:00:45Z
+
+Thank you, Szymon! :1st_place_medal:
