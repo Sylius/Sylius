@@ -18,6 +18,8 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter;
+use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -26,15 +28,20 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /** @var TableAccessorInterface */
     private $tableAccessor;
 
+    /** @var MoneyFormatterInterface  */
+    private $moneyFormatter;
+
     public function __construct(
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        TableAccessorInterface $tableAccessor
+        TableAccessorInterface $tableAccessor,
+        MoneyFormatterInterface $moneyFormatter
     ) {
         parent::__construct($session, $minkParameters, $router);
 
         $this->tableAccessor = $tableAccessor;
+        $this->moneyFormatter = $moneyFormatter;
     }
 
     public function hasCustomer(string $customerName): bool
@@ -145,14 +152,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $itemsTotalElement = $this->getElement('items_total');
 
-        return trim(str_replace('Subtotal:', '', $itemsTotalElement->getText()));
+        return trim(str_replace('Items total:', '', $itemsTotalElement->getText()));
     }
 
     public function getTotal(): string
     {
         $totalElement = $this->getElement('total');
 
-        return trim(str_replace('Total:', '', $totalElement->getText()));
+        return trim(str_replace('Order total:', '', $totalElement->getText()));
     }
 
     public function getShippingTotal(): string
@@ -171,16 +178,30 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasShippingCharge(string $shippingCharge): bool
     {
-        $shippingChargesText = $this->getElement('shipping_charges')->getText();
+        $shippingChargesText = sprintf(
+            '%s %s',
+            substr($this->getElement('shipping_adjustment_name')->getText(), 0, -1),
+            $this->getElement('shipping_charges')->getText()
+        );
 
         return stripos($shippingChargesText, $shippingCharge) !== false;
     }
 
-    public function getPromotionTotal(): string
+    public function getOrderPromotionTotal(): string
     {
-        $promotionTotalElement = $this->getElement('promotion_total');
+        /** @var NodeElement[] $rows */
+        $rows = $this->getElement('table')->findAll('css', 'tbody tr');
 
-        return trim(str_replace('Promotion total:', '', $promotionTotalElement->getText()));
+        $orderPromotionTotal = 0;
+
+        foreach ($rows as $row) {
+            $unitOrderPromotion =  $row->find('css', 'td:nth-child(4)')->getText();
+            $quantity = $row->find('css', 'td:nth-child(6)')->getText();
+            $itemOrderPromotion = (float) trim(str_replace('-$', '', $unitOrderPromotion)) * $quantity;
+            $orderPromotionTotal += (int) ($itemOrderPromotion * 100);
+        }
+
+        return $this->getFormattedMoney($orderPromotionTotal > 0 ? -1 * $orderPromotionTotal: $orderPromotionTotal);
     }
 
     public function hasPromotionDiscount(string $promotionDiscount): bool
@@ -234,7 +255,13 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getItemTax(string $itemName): string
     {
-        return $this->getItemProperty($itemName, 'tax');
+        return $this->getRowWithItem($itemName)->find('css', '.tax-excluded')->getText();
+    }
+
+    public function getItemTaxIncludedInPrice(string $itemName): string
+    {
+        return $this->getRowWithItem($itemName)->find('css', '.tax-included')->getText();
+
     }
 
     public function getItemTotal(string $itemName): string
@@ -361,11 +388,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'order_state' => '#sylius-order-state',
             'payments' => '#sylius-payments',
             'promotion_discounts' => '#promotion-discounts',
-            'promotion_shipping_discounts' => '#promotion-shipping-discounts',
+            'promotion_shipping_discounts' => '#shipping-discount-value',
             'promotion_total' => '#promotion-total',
             'shipments' => '#sylius-shipments',
             'shipping_address' => '#shipping-address',
-            'shipping_charges' => '#shipping-charges',
+            'shipping_adjustment_name' => '#shipping-adjustment-label',
+            'shipping_charges' => '#shipping-base-value',
             'shipping_total' => '#shipping-total',
             'table' => '.table',
             'tax_total' => '#tax-total',
@@ -422,5 +450,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $shipmentStateElement = end($shipmentStateElements);
 
         return $shipmentStateElement->getParent()->getParent();
+    }
+
+    private function getFormattedMoney(int $orderPromotionTotal): string
+    {
+        return $this->moneyFormatter->format($orderPromotionTotal, $this->getDocument()->find('css', '#sylius-order-currency')->getText());
     }
 }

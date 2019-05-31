@@ -366,7 +366,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersPromotionTotalShouldBe($promotionTotal)
     {
-        Assert::eq($this->showPage->getPromotionTotal(), $promotionTotal);
+        Assert::same($this->showPage->getOrderPromotionTotal(), $promotionTotal);
     }
 
     /**
@@ -431,6 +431,14 @@ final class ManagingOrdersContext implements Context
     public function itemTaxShouldBe($itemName, $tax)
     {
         Assert::eq($this->showPage->getItemTax($itemName), $tax);
+    }
+
+    /**
+     * @Then /^(its) tax included in price should be ([^"]+)$/
+     */
+    public function itsTaxIncludedInPriceShouldBe(string $itemName, string $tax): void
+    {
+        Assert::same($this->showPage->getItemTaxIncludedInPrice($itemName), $tax);
     }
 
     /**
@@ -825,7 +833,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the product's :productName unit price should be :price
+     * @Then the :productName product's unit price should be :price
      */
     public function productUnitPriceShouldBe(string $productName, string $price): void
     {
@@ -833,7 +841,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the product's :productName item discount should be :price
+     * @Then the :productName product's item discount should be :price
      */
     public function productItemDiscountShouldBe(string $productName, string $price): void
     {
@@ -841,7 +849,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the product's :productName order discount should be :price
+     * @Then the :productName product's order discount should be :price
      */
     public function productOrderDiscountShouldBe(string $productName, string $price): void
     {
@@ -849,7 +857,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the product's :productName quantity should be :quantity
+     * @Then the :productName product's quantity should be :quantity
      */
     public function productQuantityShouldBe(string $productName, string $quantity): void
     {
@@ -857,7 +865,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the product's :productName subtotal should be :subTotal
+     * @Then the :productName product's subtotal should be :subTotal
      */
     public function productSubtotalShouldBe(string $productName, string $subTotal): void
     {
@@ -865,7 +873,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the product's :productName discounted unit price should be :price
+     * @Then the :productName product's discounted unit price should be :price
      */
     public function productDiscountedUnitPriceShouldBe(string $productName, string $price): void
     {

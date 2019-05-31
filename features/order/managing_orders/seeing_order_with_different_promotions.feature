@@ -1,6 +1,6 @@
 @managing_orders
 Feature: Seeing order with different promotions
-    In order to be aware of the amount of product promotions in a order
+    In order to be aware of the amount of product promotions in an order
     As an Administrator
     I want to see an item price with all promotion discounts
 
@@ -23,15 +23,15 @@ Feature: Seeing order with different promotions
         And the customer bought a single "Symfony Mug"
         And the customer chose "Free" shipping method to "United States" with "offline" payment
         When I view the summary of the order "#00000666"
-        Then the product's "PHP T-Shirt" unit price should be "$60.00"
-        And the product's "PHP T-Shirt" item discount should be "-$20.00"
-        And the product's "PHP T-Shirt" order discount should be "-$3.34"
-        And the product's "PHP T-Shirt" discounted unit price should be "$36.66"
-        And the product's "PHP T-Shirt" quantity should be 2
-        And the product's "PHP T-Shirt" subtotal should be "$73.32"
-        And the product's "Symfony Mug" unit price should be "$40.00"
-        And the product's "Symfony Mug" item discount should be "$0.00"
-        And the product's "Symfony Mug" order discount should be "-$3.33"
-        And the product's "Symfony Mug" discounted unit price should be "$36.67"
-        And the product's "Symfony Mug" quantity should be 1
-        And the product's "Symfony Mug" subtotal should be "$36.67"
+        Then the "PHP T-Shirt" product's unit price should be "$60.00"
+        And the "PHP T-Shirt" product's item discount should be "-$20.00"
+        And the "PHP T-Shirt" product's order discount should be "-$3.34"
+        And the "PHP T-Shirt" product's discounted unit price should be "$36.66"
+        And the "PHP T-Shirt" product's quantity should be 2
+        And the "PHP T-Shirt" product's subtotal should be "$73.32"
+        And the "Symfony Mug" product's unit price should be "$40.00"
+        And the "Symfony Mug" product's item discount should be "$0.00"
+        And the "Symfony Mug" product's order discount should be "-$3.33"
+        And the "Symfony Mug" product's discounted unit price should be "$36.67"
+        And the "Symfony Mug" product's quantity should be 1
+        And the "Symfony Mug" product's subtotal should be "$36.67"
