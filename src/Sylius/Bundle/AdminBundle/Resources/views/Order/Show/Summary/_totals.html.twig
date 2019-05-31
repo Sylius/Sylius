@@ -13,11 +13,11 @@
     <th colspan="7"></th>
     <th colspan="1" id="tax-total" class="right aligned">
         <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>:
-        {{ money.format(order.taxTotal ,order.currencyCode) }}
+        {{ money.format(order.taxTotal, order.currencyCode) }}
     </th>
     <th colspan="1" id="items-total" class="right aligned">
         <strong>{{ 'sylius.ui.items_total'|trans }}</strong>:
-        {{ money.format(order.itemsTotal ,order.currencyCode) }}
+        {{ money.format(order.itemsTotal, order.currencyCode) }}
     </th>
 </tr>
 <tr>
@@ -27,9 +27,9 @@
                 <div class="item"><strong>{{ 'sylius.ui.shipping'|trans }}:</strong></div>
                 {% for adjustment in order.adjustments(shippingAdjustment) %}
                     <div class="item">
-                        <div class="right floated">{{ money.format(adjustment.amount, order.currencyCode) }}</div>
+                        <div id="shipping-base-value" class="right floated">{{ money.format(adjustment.amount, order.currencyCode) }}</div>
                         <div class="content">
-                            <div class="description">
+                            <div id="shipping-adjustment-label" class="description">
                                 <strong>{{ adjustment.label }}</strong>:
                             </div>
                         </div>
@@ -46,7 +46,7 @@
             <div class="item"><strong>{{ 'sylius.ui.shipping_discount'|trans }}:</strong></div>
             {% for label, amount in orderShippingPromotions %}
                 <div class="item">
-                    <div class="right floated">
+                    <div id="shipping-discount-value" class="right floated">
                         {{ money.format(amount, order.currencyCode) }}
                     </div>
                 </div>

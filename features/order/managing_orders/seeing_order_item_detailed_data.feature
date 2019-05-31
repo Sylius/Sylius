@@ -29,9 +29,8 @@ Feature: Seeing order item detailed data
         When I check "Iron Man T-Shirt" data
         Then its code should be "IRON_MAN_T_SHIRT"
         And its unit price should be $49.00
-        And its discounted unit price should be $47.00
+        And its discounted unit price should be $44.00
         And its quantity should be 4
-        And its subtotal should be $188.00
-        And its discount should be -$12.00
+        And its subtotal should be $176.00
         And its tax should be $17.60
         And its total should be $193.60

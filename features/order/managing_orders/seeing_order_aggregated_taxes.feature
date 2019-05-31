@@ -27,7 +27,6 @@ Feature: Seeing aggregated taxes of an order
         When I view the summary of the order "#00000001"
         Then there should be a shipping charge "DHL $10.00"
         And the order's shipping total should be "$12.30"
-        And the order should have tax "VAT (23%) $25.30"
         And the order's tax total should be "$25.30"
         And the order's total should be "$135.30"
 
@@ -39,7 +38,5 @@ Feature: Seeing aggregated taxes of an order
         When I view the summary of the order "#00000001"
         Then there should be a shipping charge "DHL $10.00"
         And the order's shipping total should be "$12.30"
-        And the order should have tax "VAT (23%) $25.30"
-        And the order should have tax "Low VAT (10%) $20.00"
         And the order's tax total should be "$45.30"
         And the order's total should be "$355.30"

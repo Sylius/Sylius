@@ -33,16 +33,18 @@ final class OrderUnitTaxesExtension extends AbstractExtension
     {
         return $this->getAmount($orderItemUnit, true);
     }
+
     public function getExcludedTax(OrderItemInterface $orderItemUnit): int
     {
         return $this->getAmount($orderItemUnit, false);
     }
-    private function getAmount(OrderItemInterface $orderItem, bool $isNeutral): int
+
+    private function getAmount(OrderItemInterface $orderItem, bool $neutral): int
     {
         $total = array_reduce(
             $orderItem->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->toArray(),
-            static function (int $total, BaseAdjustmentInterface $adjustment) use ($isNeutral) {
-                return $isNeutral === $adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total;
+            static function (int $total, BaseAdjustmentInterface $adjustment) use ($neutral) {
+                return $neutral === $adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total;
             },
             0
         );

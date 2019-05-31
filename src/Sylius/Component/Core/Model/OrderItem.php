@@ -135,7 +135,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
             $this->unitPrice +
             $this->units->first()->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) +
             $this->units->first()->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-            ;
+        ;
     }
 
     /**
