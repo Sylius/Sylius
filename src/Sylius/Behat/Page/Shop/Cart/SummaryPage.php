@@ -47,14 +47,29 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $totalElement->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxTotal()
+    public function getIncludedTaxTotal(): string
     {
-        $taxTotalElement = $this->getElement('tax_total');
+        $includedTaxTotalElement = $this->getElement('tax_included');
 
-        return $taxTotalElement->getText();
+        return $includedTaxTotalElement->getText();
+    }
+
+    public function getExcludedTaxTotal(): string
+    {
+        $excludedTaxTotalElement = $this->getElement('tax_excluded');
+
+        return $excludedTaxTotalElement->getText();
+    }
+
+    public function areTaxesCharged(): bool
+    {
+        try {
+            $this->getElement('no_taxes');
+        } catch (ElementNotFoundException $exception) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -290,6 +305,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'coupon_field' => '#sylius_cart_promotionCoupon',
             'grand_total' => '#sylius-cart-grand-total',
             'item_image' => '#sylius-cart-items tbody tr:nth-child(%number%) img',
+            'no_taxes' => '#sylius-cart-tax-none',
             'product_discounted_total' => '#sylius-cart-items tr:contains("%name%") .sylius-discounted-total',
             'product_row' => '#sylius-cart-items tbody tr:contains("%name%")',
             'product_total' => '#sylius-cart-items tr:contains("%name%") .sylius-total',
@@ -299,7 +315,8 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'promotion_total' => '#sylius-cart-promotion-total',
             'save_button' => '#sylius-save',
             'shipping_total' => '#sylius-cart-shipping-total',
-            'tax_total' => '#sylius-cart-tax-total',
+            'tax_excluded' => '#sylius-cart-tax-excluded',
+            'tax_included' => '#sylius-cart-tax-included',
             'update_button' => '#sylius-cart-update',
             'validation_errors' => '.sylius-validation-error',
         ]);
