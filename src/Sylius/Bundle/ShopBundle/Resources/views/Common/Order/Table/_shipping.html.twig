@@ -16,5 +16,5 @@
 {% endif %}
 <td colspan="{% if not orderShippingPromotions is empty %}2{% else %}4{% endif %}" class="right aligned" id="shipping-total">
     {{ 'sylius.ui.shipping_total'|trans }}:
-    {{ money.format(order.shippingTotal, order.currencyCode) }}
+    {{ money.convertAndFormat(order.shippingTotal) }}
 </td>
