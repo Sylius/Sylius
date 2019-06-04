@@ -21,6 +21,6 @@ Feature: Ability to confirm an order with a promotion on shipping
     And I proceed with "DHL" shipping method and "Offline" payment
     Then I should be on the checkout summary step
     And "Holiday promotion" should be applied to my order shipping
-    And this promotion should give "-$5.00" discount
+    And this promotion should give "-$5.00" discount on shipping
     And I confirm my order
     Then I should see the thank you page
