@@ -86,12 +86,7 @@ interface CompletePageInterface extends SymfonyPageInterface
      */
     public function hasPromotion($promotionName);
 
-    /**
-     * @param string $promotionName
-     *
-     * @return bool
-     */
-    public function hasShippingPromotion($promotionName);
+    public function hasShippingPromotion(string $promotionName): bool;
 
     /**
      * @param string $taxTotal
@@ -171,4 +166,8 @@ interface CompletePageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getValidationErrors();
+
+    public function hasShippingPromotionWithDiscount(string $promotionName, string $discount): bool;
+
+    public function hasOrderPromotion(string $promotionName): bool;
 }

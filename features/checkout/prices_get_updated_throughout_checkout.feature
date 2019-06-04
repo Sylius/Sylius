@@ -59,8 +59,8 @@ Feature: Prices get updated when exchange rate changes during the whole checkout
         And I select "Offline" payment method
         When the exchange rate of "US Dollar" to "British Pound" is 2.0
         And I complete the payment step
-        Then the "The Pug Mug" product should have unit price "$10.00"
-        And my order shipping should be "$5.00"
+        Then the "The Pug Mug" product should have unit price "£20.00"
+        And my order shipping should be "£10.00"
 
     @ui
     Scenario: Prices get updated on re-selecting payment method step
