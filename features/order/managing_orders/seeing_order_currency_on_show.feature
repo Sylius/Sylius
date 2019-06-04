@@ -31,10 +31,10 @@ Feature: Seeing the currency an order has been placed in on it's details page
         And the customer chose "DHL" shipping method with "Cash on Delivery" payment
         When I view the summary of the order "#00000666"
         And I check "Angel T-Shirt" data
-        Then its discounted unit price should be $10.00
+        Then its discounted unit price should be $5.00
         And its unit price should be $20.00
-        And its subtotal should be $10.00
-        And its discount should be -$5.00
+        And its subtotal should be $5.00
+        And its discount should be -$10.00
         And its tax should be $0.50
         And its total should be $5.50
         And the order's items total should be "$5.50"

@@ -21,6 +21,6 @@ Feature: Seeing included in price taxes of order items
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
         When I view the summary of the order "#00000666"
         And I check "Winchester M1866" data
-        Then its tax should be $40.00
+        Then its tax included in price should be $40.00
         And the order's tax total should be "$40.00"
         And the order's total should be "$440.00"

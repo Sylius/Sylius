@@ -36,4 +36,6 @@ interface OrderItemInterface extends BaseOrderItemInterface
     public function getDiscountedUnitPrice(): int;
 
     public function getSubtotal(): int;
+
+    public function getFullDiscountedUnitPrice(): int;
 }

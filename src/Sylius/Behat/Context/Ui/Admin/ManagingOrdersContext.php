@@ -366,7 +366,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersPromotionTotalShouldBe($promotionTotal)
     {
-        Assert::eq($this->showPage->getPromotionTotal(), $promotionTotal);
+        Assert::same($this->showPage->getOrderPromotionTotal(), $promotionTotal);
     }
 
     /**
@@ -431,6 +431,14 @@ final class ManagingOrdersContext implements Context
     public function itemTaxShouldBe($itemName, $tax)
     {
         Assert::eq($this->showPage->getItemTax($itemName), $tax);
+    }
+
+    /**
+     * @Then /^(its) tax included in price should be ([^"]+)$/
+     */
+    public function itsTaxIncludedInPriceShouldBe(string $itemName, string $tax): void
+    {
+        Assert::same($this->showPage->getItemTaxIncludedInPrice($itemName), $tax);
     }
 
     /**
@@ -822,6 +830,54 @@ final class ManagingOrdersContext implements Context
     public function iShouldNotSeeInformationAboutShipments()
     {
         Assert::same($this->showPage->getShipmentsCount(), 0);
+    }
+
+    /**
+     * @Then the :productName product's unit price should be :price
+     */
+    public function productUnitPriceShouldBe(string $productName, string $price): void
+    {
+        Assert::same($this->showPage->getItemUnitPrice($productName), $price);
+    }
+
+    /**
+     * @Then the :productName product's item discount should be :price
+     */
+    public function productItemDiscountShouldBe(string $productName, string $price): void
+    {
+        Assert::same($this->showPage->getItemDiscount($productName), $price);
+    }
+
+    /**
+     * @Then the :productName product's order discount should be :price
+     */
+    public function productOrderDiscountShouldBe(string $productName, string $price): void
+    {
+        Assert::same($this->showPage->getItemOrderDiscount($productName), $price);
+    }
+
+    /**
+     * @Then the :productName product's quantity should be :quantity
+     */
+    public function productQuantityShouldBe(string $productName, string $quantity): void
+    {
+        Assert::same($this->showPage->getItemQuantity($productName), $quantity);
+    }
+
+    /**
+     * @Then the :productName product's subtotal should be :subTotal
+     */
+    public function productSubtotalShouldBe(string $productName, string $subTotal): void
+    {
+        Assert::same($this->showPage->getItemSubtotal($productName), $subTotal);
+    }
+
+    /**
+     * @Then the :productName product's discounted unit price should be :price
+     */
+    public function productDiscountedUnitPriceShouldBe(string $productName, string $price): void
+    {
+        Assert::same($this->showPage->getItemDiscountedUnitPrice($productName), $price);
     }
 
     /**
