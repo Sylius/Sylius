@@ -32,7 +32,7 @@
 </tr>
 <tr>
     <td colspan="4" id="promotion-total" class="right aligned">
-        {{ 'sylius.ui.discount'|trans }}: {{ money.format(order.orderPromotionTotal, order.currencyCode) }}
+        {{ 'sylius.ui.discount'|trans }}: {{ money.convertAndFormat(order.orderPromotionTotal) }}
     </td>
 </tr>
 <tr>
@@ -40,7 +40,7 @@
 </tr>
 <tr>
     <td colspan="4" class="right aligned" style="font-size: 1.5em;" id="total">
-        {{ 'sylius.ui.total'|trans }}: {{ money.format(order.total, order.currencyCode) }}
+        {{ 'sylius.ui.total'|trans }}: {{ money.convertAndFormat(order.total) }}
     </td>
 </tr>
 {% if order.currencyCode is not same as(sylius.currencyCode) %}

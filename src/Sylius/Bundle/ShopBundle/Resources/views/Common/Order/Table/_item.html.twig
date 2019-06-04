@@ -6,10 +6,10 @@
     </td>
     <td>
         {% if item.unitPrice != item.discountedUnitPrice %}
-            <span class="old-price">{{ money.format(item.unitPrice, order.currencyCode) }}</span>
+            <span class="old-price">{{ money.convertAndFormat(item.unitPrice) }}</span>
         {% endif %}
-        <span class="sylius-unit-price">{{ money.format(item.discountedUnitPrice, order.currencyCode) }}</span>
+        <span class="sylius-unit-price">{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
     </td>
     <td class="center aligned">{{ item.quantity }}</td>
-    <td class="right aligned">{{ money.format(item.subtotal, order.currencyCode) }}</td>
+    <td class="right aligned">{{ money.convertAndFormat(item.subtotal) }}</td>
 </tr>
