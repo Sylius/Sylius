@@ -23,6 +23,8 @@ import './sylius-variant-images';
 import './sylius-variants-prices';
 
 $(document).ready(() => {
+  $('.popup-js').popup();
+
   $('.cart.button')
     .popup({
       popup: $('.cart.popup'),
