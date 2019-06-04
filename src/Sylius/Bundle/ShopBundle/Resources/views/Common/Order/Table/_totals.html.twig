@@ -4,6 +4,9 @@
 {% set taxIncluded = sylius_order_tax_included(order) %}
 {% set taxExcluded = sylius_order_tax_excluded(order) %}
 
+{% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+{% set orderPromotions = sylius_aggregate_adjustments(order.adjustmentsRecursively(orderPromotionAdjustment)) %}
+
 <tr>
     <th colspan="4" class="right aligned" id="subtotal">
         {{ 'sylius.ui.items_total'|trans }}: {{ money.convertAndFormat(itemsSubtotal) }}
@@ -32,7 +35,12 @@
 </tr>
 <tr>
     <td colspan="4" id="promotion-total" class="right aligned">
-        {{ 'sylius.ui.discount'|trans }}: {{ money.convertAndFormat(order.orderPromotionTotal) }}
+        {{ 'sylius.ui.discount'|trans }}: {{ money.convertAndFormat(order.orderPromotionTotal)  }}
+         {% if order.orderPromotionTotal != 0 %}
+        <i id="order-promotions-details" class="question circle icon popup-js"
+           data-html="{% for key, value in orderPromotions %}<div>{{ key }}: {{ money.format(value, order.currencyCode) }}</div>{% endfor %}">
+        </i>
+        {% endif %}
     </td>
 </tr>
 <tr>

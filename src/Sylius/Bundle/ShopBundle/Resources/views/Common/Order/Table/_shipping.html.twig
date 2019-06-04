@@ -7,11 +7,13 @@
 {% if not orderShippingPromotions is empty %}
     <td colspan="2" id="promotion-shipping-discounts">
         <div><strong>{{ 'sylius.ui.shipping'|trans }}:</strong></div>
-
-        {% for label, amount in orderShippingPromotions %}
-            <span class="old-price">{{ money.convertAndFormat(order.getAdjustmentsTotal(shippingAdjustment)) }}</span>
-            {{ money.format(order.getAdjustmentsTotal(shippingAdjustment) + amount, order.currencyCode) }}
-        {% endfor %}
+        <span class="old-price">{{ money.convertAndFormat(order.getAdjustmentsTotal(shippingAdjustment)) }}</span>
+        <span>
+            {{ money.format(order.getAdjustmentsTotal(shippingAdjustment) + order.getAdjustmentsTotal(orderShippingPromotionAdjustment), order.currencyCode) }}
+            <i id="shipping-promotion-details" class="question circle icon popup-js"
+               data-html="{% for label, amount in orderShippingPromotions %}<div>{{ label }}: {{ money.format(amount, order.currencyCode) }}</div>{% endfor %}"
+            ></i>
+        </span>
     </td>
 {% endif %}
 <td colspan="{% if not orderShippingPromotions is empty %}2{% else %}4{% endif %}" class="right aligned" id="shipping-total">
