@@ -1,5 +1,6 @@
 <div class="ui floated simple dropdown item">
-    {{ app.user.firstName|default(app.user.email) }}
+    <img style="margin-right: 10px;" class="ui avatar image" src="http://placehold.it/50x50">
+    <span>{{ app.user.firstName|default(app.user.email) }}</span>
     <i class="dropdown icon"></i>
     <div class="menu">
         <a href="{{ path('sylius_admin_admin_user_update', {'id': app.user.id}) }}" class="item">
