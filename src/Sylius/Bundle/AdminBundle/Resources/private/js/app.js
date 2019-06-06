@@ -64,9 +64,11 @@ $(document).ready(() => {
       $('select[name^="sylius_promotion[actions]"][name$="[type]"]').last().change();
     }, 50);
   });
-  $('#rules a[data-form-collection="add"]').on('click', () => {
+  $('#rules a[data-form-collection="add"]').on('click', (event) => {
+    const name = $(event.target).closest('form').attr('name');
+
     setTimeout(() => {
-      $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
+      $(`select[name^="${name}[rules]"][name$="[type]"]`).last().change();
     }, 50);
   });
 

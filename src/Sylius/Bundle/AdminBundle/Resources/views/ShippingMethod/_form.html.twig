@@ -33,6 +33,11 @@
                     {% endfor %}
                 {% endif %}
             </div>
+
+            <h4 class="ui dividing header">{{ 'sylius.ui.rules'|trans }}</h4>
+            <div id="rules">
+                {% include '@SyliusAdmin/ShippingMethod/_rules.html.twig' %}
+            </div>
         </div>
     </div>
     <div class="column">

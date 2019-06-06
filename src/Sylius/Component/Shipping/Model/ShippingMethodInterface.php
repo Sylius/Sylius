@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ArchivableInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -76,6 +77,21 @@ interface ShippingMethodInterface extends
     public function getConfiguration(): array;
 
     public function setConfiguration(array $configuration): void;
+
+    /**
+     * @return Collection|ShippingMethodRuleInterface[]
+     *
+     * @psalm-return Collection<array-key, ShippingMethodRuleInterface>
+     */
+    public function getRules(): Collection;
+
+    public function hasRules(): bool;
+
+    public function hasRule(ShippingMethodRuleInterface $rule): bool;
+
+    public function addRule(ShippingMethodRuleInterface $rule): void;
+
+    public function removeRule(ShippingMethodRuleInterface $rule): void;
 
     /**
      * @return ShippingMethodTranslationInterface

@@ -703,6 +703,18 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product)'s weight is (\d+(?:\.\d+)?)$/
+     */
+    public function theProductChangedItsWeightTo(ProductInterface $product, float $weight): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setWeight($weight);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this product)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
      * @Given /^the ("[^"]+" product)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
      * @Given /^(it)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/

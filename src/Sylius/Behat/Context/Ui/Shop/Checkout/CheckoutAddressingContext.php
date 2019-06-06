@@ -181,6 +181,7 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @When I specified the billing address
      * @When /^I specified the billing (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      */
     public function iSpecifiedTheBillingAddress(AddressInterface $address = null)

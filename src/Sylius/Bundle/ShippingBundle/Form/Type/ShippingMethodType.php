@@ -28,6 +28,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingMethodType extends AbstractResourceType
 {
@@ -87,6 +88,11 @@ final class ShippingMethodType extends AbstractResourceType
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.locale.enabled',
             ])
+            ->add('rules', ShippingMethodRuleCollectionType::class, [
+                'label' => 'sylius.form.shipping_method.rules',
+                'button_add_label' => 'sylius.form.shipping_method.add_rule',
+                'required' => false,
+            ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $method = $event->getData();
 
@@ -129,6 +135,8 @@ final class ShippingMethodType extends AbstractResourceType
      */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
+        $view->vars['rules_help'] = $options['rules_help'] ?? '';
+
         $view->vars['prototypes'] = [];
         foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
             foreach ($prototypes as $type => $prototype) {
@@ -137,6 +145,16 @@ final class ShippingMethodType extends AbstractResourceType
         }
     }
 
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefault('rules_help', 'sylius.form.shipping_method.rules_help');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix(): string
     {
         return 'sylius_shipping_method';
