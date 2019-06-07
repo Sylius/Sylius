@@ -18,7 +18,7 @@
     </div>
     <div class="thirteen wide column">
         {{ form_errors(form) }}
-        <div class="ui segment">
+        <div>
             {% for item in item.children %}
                 {% include item.attribute('template') with {'form': form, 'product': options.product} %}
             {% endfor %}
