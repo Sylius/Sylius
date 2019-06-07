@@ -49,7 +49,8 @@
     </div>
 {% endif %}
 
-<div class="ui segment sylius-grid-wrapper">
+<div class="ui hidden divider"></div>
+<div class="sylius-grid-wrapper">
     {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
         <div class="sylius-grid-nav">
             <div class="sylius-grid-nav__pagination">
@@ -66,8 +67,8 @@
     {% endif %}
 
     {% if data|length > 0 %}
-        <div class="sylius-grid-table-wrapper">
-            <table class="ui sortable stackable celled table">
+        <div class="ui segment spaceless sylius-grid-table-wrapper">
+            <table class="ui sortable stackable very basic celled table">
                 <thead>
                 <tr>
                     {{ table.headers(grid, definition, app.request.attributes) }}
