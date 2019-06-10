@@ -38,7 +38,7 @@
         {{ 'sylius.ui.discount'|trans }}: {{ money.convertAndFormat(order.orderPromotionTotal)  }}
         {% if order.orderPromotionTotal != 0 %}
             <i id="order-promotions-details" class="question circle icon popup-js"
-                data-html="{% for key, value in orderPromotions %}<div>{{ key }}: {{ money.format(value, order.currencyCode) }}</div>{% endfor %}">
+                data-html="{% for key, value in orderPromotions %}<div>{{ key }}: {{ money.convertAndFormat(value) }}</div>{% endfor %}">
             </i>
         {% endif %}
     </td>

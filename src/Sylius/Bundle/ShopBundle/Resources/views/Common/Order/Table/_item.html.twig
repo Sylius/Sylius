@@ -13,7 +13,7 @@
         <span class="sylius-unit-price">{{ money.convertAndFormat(item.discountedUnitPrice) }}
             {% if item.unitPrice != item.discountedUnitPrice %}
             <i id="item-promotion-details" class="question circle icon unit-promotions popup-js"
-               data-html="{% for promotion in unitPromotions %}<div>{{ promotion.label }}: {{ money.format(promotion.amount, order.currencyCode) }}</div>{% endfor %}">
+               data-html="{% for promotion in unitPromotions %}<div>{{ promotion.label }}: {{ money.convertAndFormat(promotion.amount) }}</div>{% endfor %}">
             </i>
             {% endif %}
         </span>
