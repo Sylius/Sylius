@@ -9,9 +9,9 @@
         <div><strong>{{ 'sylius.ui.shipping'|trans }}:</strong></div>
         <span class="old-price">{{ money.convertAndFormat(order.getAdjustmentsTotal(shippingAdjustment)) }}</span>
         <span>
-            {{ money.format(order.getAdjustmentsTotal(shippingAdjustment) + order.getAdjustmentsTotal(orderShippingPromotionAdjustment), order.currencyCode) }}
+            {{ money.convertAndFormat(order.getAdjustmentsTotal(shippingAdjustment) + order.getAdjustmentsTotal(orderShippingPromotionAdjustment)) }}
             <i id="shipping-promotion-details" class="question circle icon popup-js"
-               data-html="{% for label, amount in orderShippingPromotions %}<div>{{ label }}: {{ money.format(amount, order.currencyCode) }}</div>{% endfor %}"
+               data-html="{% for label, amount in orderShippingPromotions %}<div>{{ label }}: {{ money.convertAndFormat(amount) }}</div>{% endfor %}"
             ></i>
         </span>
     </td>
