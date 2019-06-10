@@ -26,6 +26,9 @@ class AdminUser extends User implements AdminUserInterface
     /** @var string */
     protected $localeCode;
 
+    /** @var ImageInterface */
+    protected $avatar;
+
     public function __construct()
     {
         parent::__construct();
@@ -79,5 +82,16 @@ class AdminUser extends User implements AdminUserInterface
     public function setLocaleCode(?string $code): void
     {
         $this->localeCode = $code;
+    }
+
+    public function getAvatar(): ?ImageInterface
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?ImageInterface $avatar): void
+    {
+        $avatar->setOwner($this);
+        $this->avatar = $avatar;
     }
 }

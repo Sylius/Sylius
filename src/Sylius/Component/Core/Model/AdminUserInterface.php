@@ -30,4 +30,8 @@ interface AdminUserInterface extends BaseUserInterface
     public function getLocaleCode(): ?string;
 
     public function setLocaleCode(?string $code): void;
+
+    public function getAvatar(): ?ImageInterface;
+
+    public function setAvatar(?ImageInterface $avatar);
 }
