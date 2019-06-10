@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\User\Model\User;
 
-class AdminUser extends User implements AdminUserInterface
+class AdminUser extends User implements AdminUserInterface, AvatarAwareInterface
 {
     /** @var string */
     protected $firstName;
@@ -93,5 +93,25 @@ class AdminUser extends User implements AdminUserInterface
     {
         $avatar->setOwner($this);
         $this->avatar = $avatar;
+    }
+
+    public function addAvatar(ImageInterface $avatar): void
+    {
+        $avatar->setOwner($this);
+        $this->setAvatar($avatar);
+    }
+
+    public function removeAvatar(ImageInterface $avatar): void
+    {
+        $avatar->setOwner(null);
+        $this->avatar = null;
+    }
+
+    public function getAvatarImage(): AvatarImageInterface
+    {
+        /** @var AvatarAwareInterface $avatar */
+        $avatar = $this->getAvatar();
+
+        return $avatar;
     }
 }
