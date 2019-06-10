@@ -142,6 +142,10 @@
             <argument>%sylius.model.taxon_image.class%</argument>
             <tag name="form.type" />
         </service>
+        <service id="sylius.form.type.avatar_image" class="Sylius\Bundle\CoreBundle\Form\Type\User\AvatarImageType">
+            <argument>%sylius.model.avatar_image.class%</argument>
+            <tag name="form.type" />
+        </service>
 
         <service id="sylius.form.type.tax_calculation_strategy_choice" class="Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType">
             <argument>%sylius.tax_calculation_strategies%</argument>

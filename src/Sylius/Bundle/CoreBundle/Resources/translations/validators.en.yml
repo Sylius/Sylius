@@ -1,4 +1,8 @@
 sylius:
+    avatar_image:
+        file:
+            max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
+            upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Please enter channel base currency.

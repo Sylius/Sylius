@@ -26,6 +26,7 @@ sylius:
         add_association: 'Add association'
         add_attribute: 'Add attribute'
         add_attributes: 'Add attributes'
+        add_avatar: 'Add avatar'
         add_channel: 'Add channel'
         add_choice: 'Add choice'
         add_coupon: 'Add coupon'
