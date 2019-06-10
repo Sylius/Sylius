@@ -172,9 +172,12 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingPromotion($promotionName)
+    public function hasShippingPromotion(string $promotionName): bool
     {
-        return false !== stripos($this->getElement('promotion_shipping_discounts')->getText(), $promotionName);
+        /** @var NodeElement $shippingPromotions */
+        $shippingPromotions = $this->getElement('promotions_shipping_details');
+
+        return false !== strpos($shippingPromotions->getAttribute('data-html'), $promotionName);
     }
 
     /**
@@ -307,6 +310,24 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         parent::tryToOpen($urlParameters);
     }
 
+    public function hasShippingPromotionWithDiscount(string $promotionName, string $discount): bool
+    {
+        $promotionWithDiscount = sprintf('%s: %s', $promotionName, $discount);
+
+        /** @var NodeElement $shippingPromotions */
+        $shippingPromotions = $this->getElement('promotions_shipping_details');
+
+        return false !== strpos($shippingPromotions->getAttribute('data-html'), $promotionWithDiscount);
+    }
+
+    public function hasOrderPromotion(string $promotionName): bool
+    {
+        /** @var NodeElement $shippingPromotions */
+        $shippingPromotions = $this->getElement('order_promotions_details');
+
+        return false !== strpos($shippingPromotions->getAttribute('data-html'), $promotionName);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -321,11 +342,13 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'extra_notes' => '#sylius_checkout_complete_notes',
             'items_table' => '#sylius-order',
             'locale' => '#sylius-order-locale-name',
+            'order_promotions_details' => '#order-promotions-details',
             'order_total' => 'td:contains("Total")',
             'payment_method' => '#sylius-payment-method',
             'payment_step_label' => '.steps a:contains("Payment")',
             'product_row' => 'tbody tr:contains("%name%")',
             'promotion_discounts' => '#promotion-discounts',
+            'promotions_shipping_details' => '#shipping-promotion-details',
             'promotion_shipping_discounts' => '#promotion-shipping-discounts',
             'promotion_total' => '#promotion-total',
             'shipping_address' => '#sylius-shipping-address',
