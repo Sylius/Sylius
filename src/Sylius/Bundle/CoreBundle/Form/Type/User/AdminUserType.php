@@ -40,6 +40,10 @@ final class AdminUserType extends UserType
                 'label' => 'sylius.ui.locale',
                 'placeholder' => null,
             ])
+            ->add('avatar', AvatarImageType::class, [
+                'label' => 'sylius.ui.add_avatar',
+                'required' => false,
+            ])
         ;
     }
 
