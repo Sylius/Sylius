@@ -9,6 +9,7 @@
 
 import 'semantic-ui-css/components/accordion';
 import $ from 'jquery';
+import 'jquery.dirtyforms/jquery.dirtyforms';
 
 import 'sylius/ui/app';
 import 'sylius/ui/sylius-auto-complete';
@@ -27,6 +28,7 @@ import './sylius-product-slug';
 import './sylius-taxon-slug';
 
 import SyliusTaxonomyTree from './sylius-taxon-tree';
+import formsList from './sylius-forms-list';
 
 $(document).ready(() => {
   $('#sylius_product_variant_pricingCalculator').handlePrototypes({
@@ -101,6 +103,8 @@ $(document).ready(() => {
   });
 
   const taxonomyTree = new SyliusTaxonomyTree();
+
+  $(`${formsList}, .check-unsaved`).dirtyForms();
 });
 
 window.$ = $;
