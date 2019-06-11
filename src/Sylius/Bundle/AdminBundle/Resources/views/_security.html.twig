@@ -1,5 +1,5 @@
 <div class="ui floated simple dropdown item">
-    <img style="margin-right: 10px;" class="ui avatar image" src="http://placehold.it/50x50">
+    {% include '@SyliusAdmin/AdminUser/_avatarImage.html.twig' %}
     <span>{{ app.user.firstName|default(app.user.email) }}</span>
     <i class="dropdown icon"></i>
     <div class="menu">
