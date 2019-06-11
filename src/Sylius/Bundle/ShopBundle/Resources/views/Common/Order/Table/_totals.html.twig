@@ -14,7 +14,7 @@
 </tr>
 <tr{% if taxIncluded and not taxExcluded %}class="tax-disabled"{% endif %}>
     <td colspan="4" class="right aligned" id="tax-total">
-        <div style="display: flex; justify-content: flex-end">
+        <div style="display: flex; justify-content: flex-end; align-items: center">
             <div>{{ 'sylius.ui.taxes_total'|trans }}:&nbsp;</div>
             <div>
             {% if not taxIncluded and not taxExcluded %}
