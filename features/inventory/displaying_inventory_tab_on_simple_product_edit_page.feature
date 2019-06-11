@@ -1,5 +1,5 @@
 @inventory_on_product_page
-Feature: Showing inventory tab on simple product edit page
+Feature: Displaying inventory tab on simple product edit page
     In order to manage product inventory
     As an Administrator
     I want to see inventory tab only on simple product edit page
@@ -12,10 +12,10 @@ Feature: Showing inventory tab on simple product edit page
 
     @ui
     Scenario: Seeing inventory on simple product edit page
-        Given I want to modify the "PHP Mug" product
+        When I want to modify the "PHP Mug" product
         Then I should see inventory of this product
 
     @ui
-    Scenario: not seeing inventory on configurable product edit page
-        Given I want to modify the "PHP T-shirt" product
+    Scenario: Not seeing inventory on configurable product edit page
+        When I want to modify the "PHP T-shirt" product
         Then I should not see inventory of this product

@@ -54,4 +54,6 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
     public function goToVariantCreation(): void;
 
     public function goToVariantGeneration(): void;
+
+    public function hasInventoryTab(): bool;
 }
