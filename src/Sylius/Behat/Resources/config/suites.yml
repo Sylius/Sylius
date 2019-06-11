@@ -41,6 +41,7 @@ imports:
     - suites/ui/inventory/cart_inventory.yml
     - suites/ui/inventory/checkout_inventory.yml
     - suites/ui/inventory/managing_inventory.yml
+    - suites/ui/inventory/showing_inventory_on_edit_product_page.yml
     - suites/ui/locale/locales.yml
     - suites/ui/locale/managing_locales.yml
     - suites/ui/order/managing_orders.yml

@@ -988,6 +988,22 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should see inventory of this product
+     */
+    public function iShouldSeeInventoryOf(): void
+    {
+        Assert::true($this->updateSimpleProductPage->hasInventoryTab());
+    }
+
+    /**
+     * @Then I should not see inventory of this product
+     */
+    public function iShouldNotSeeInventoryOf(): void
+    {
+        Assert::false($this->updateSimpleProductPage->hasInventoryTab());
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */
