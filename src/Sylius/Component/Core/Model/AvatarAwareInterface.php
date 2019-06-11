@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 interface AvatarAwareInterface
 {
-    public function getAvatarImage(): AvatarImageInterface;
+    public function getAvatarImage(): ?AvatarImageInterface;
 
     public function addAvatar(ImageInterface $avatar): void;
 

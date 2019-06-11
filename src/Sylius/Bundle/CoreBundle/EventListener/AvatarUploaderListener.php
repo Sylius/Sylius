@@ -33,7 +33,9 @@ final class AvatarUploaderListener
         $subject = $event->getSubject();
         Assert::isInstanceOf($subject, AvatarAwareInterface::class);
 
-        $this->uploader->upload($subject->getAvatarImage());
+        if (null !== $subject->getAvatarImage()) {
+            $this->uploader->upload($subject->getAvatarImage());
+        }
     }
 
 }

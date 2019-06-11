@@ -107,7 +107,7 @@ class AdminUser extends User implements AdminUserInterface, AvatarAwareInterface
         $this->avatar = null;
     }
 
-    public function getAvatarImage(): AvatarImageInterface
+    public function getAvatarImage(): ?AvatarImageInterface
     {
         /** @var AvatarAwareInterface $avatar */
         $avatar = $this->getAvatar();
